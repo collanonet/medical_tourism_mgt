@@ -1,0 +1,1 @@
+enum Server { dev, production}

@@ -1,0 +1,8 @@
+name: medical_tourism_mgt
+
+packages:
+  - modules/*
+
+scripts:
+  analyze:
+    exec: dart analyze .
