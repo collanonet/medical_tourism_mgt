@@ -491,6 +491,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_disk_lru_cache:
+    dependency: transitive
+    description:
+      name: flutter_disk_lru_cache
+      sha256: eee3f99c787d42ac27577ee7e07c7ed975d51510cc662d6e82dd0614632906e2
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   flutter_launcher_icons:
     dependency: "direct dev"
     description:
