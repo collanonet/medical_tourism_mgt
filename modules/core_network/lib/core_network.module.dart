@@ -9,13 +9,17 @@ import 'dart:async' as _i2;
 
 import 'package:injectable/injectable.dart' as _i1;
 
+import 'core_network.dart' as _i4;
 import 'src/api_service.dart' as _i3;
-import 'src/rest_client.dart' as _i4;
+import 'src/sockets/web_socket_client.dart' as _i6;
+import 'src/sockets/web_socket_manager.dart' as _i5;
 
 class CoreNetworkPackageModule extends _i1.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i2.FutureOr<void> init(_i1.GetItHelper gh) {
     gh.singleton<_i3.ApiService>(_i3.ApiService(gh<_i4.RestClient>()));
+    gh.singleton<_i5.WebSocketManager>(
+        _i5.WebSocketManager(webSocketClient: gh<_i6.WebSocketClient>()));
   }
 }

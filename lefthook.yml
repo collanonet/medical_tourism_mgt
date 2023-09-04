@@ -1,0 +1,20 @@
+pre-push:
+  parallel: true
+  commands:
+    tests:
+      run: fvm flutter test
+    linter:
+      run: fvm flutter analyze
+
+pre-commit:
+  commands:
+    pretty:
+      glob: "*.dart"
+      run: lefthook run fixer {staged_files} && git add {staged_files}
+
+fixer:
+  commands:
+    dart-fix-import:
+      run: fvm flutter pub run import_sorter:main
+    dart-fixer:
+      run: dart fix --apply

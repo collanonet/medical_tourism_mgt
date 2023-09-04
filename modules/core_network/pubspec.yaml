@@ -13,9 +13,6 @@ dependencies:
     sdk: flutter
   # modules
   core_utils: 0.0.1-alpha.1
-  core_ui: 0.0.1-alpha.1
-  core_l10n: 0.0.1-alpha.1
-  core_storage: 0.0.1-alpha.1
   # packages
   dio: ^5.2.1+1
   equatable: ^2.0.5
@@ -25,6 +22,7 @@ dependencies:
   retrofit: ^4.0.1
   stomp_dart_client: ^0.4.4
   synchronized: ^3.1.0
+  flutter_native_splash: ^2.3.2
 
 dev_dependencies:
   flutter_test:
