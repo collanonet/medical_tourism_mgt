@@ -4,18 +4,18 @@ import 'package:injectable/injectable.dart';
 
 import '../entities/index.dart';
 import '../exceptions/expired_token_exception.dart';
-import '../providers/authz_provider.dart';
-import 'authz_repository.dart';
+import '../providers/auth_provider.dart';
+import 'auth_repository.dart';
 
-@Injectable(as: AuthzRepository)
-class AuthzRepositoryImpl extends AuthzRepository {
-  AuthzRepositoryImpl({
+@Injectable(as: AuthRepository)
+class AuthRepositoryImpl extends AuthRepository {
+  AuthRepositoryImpl({
     @Named('localAuthz') required this.local,
     @Named('remoteAuthz') required this.remote,
   });
 
-  final AuthzProvider local;
-  final AuthzProvider remote;
+  final AuthProvider local;
+  final AuthProvider remote;
 
   @override
   Future<String?> getAccessToken() {
@@ -50,13 +50,9 @@ class AuthzRepositoryImpl extends AuthzRepository {
   }
 
   @override
-  Future<AuthData> signIn(String phoneNumber, String pin) async {
+  Future<AuthData> signIn(String username, String password) async {
     final currentDeviceId = await local.getDeviceId() ?? '';
-    final response = await remote.login(
-      phoneNumber.replaceAll(RegExp(r'\s+'), ''),
-      pin,
-      currentDeviceId,
-    );
+    final response = await remote.login(username, password);
     var trusted = response.isTrustedDevice;
     var deviceId = response.deviceId;
     if (deviceId != null) {
@@ -74,132 +70,10 @@ class AuthzRepositoryImpl extends AuthzRepository {
   }
 
   @override
-  Future<AuthData> confirmLogin(String referenceData, String code) async {
-    final response = await remote.confirmLogin(referenceData, code);
-    var deviceId = response.deviceId;
-    if (deviceId != null) {
-      local.setDeviceId(deviceId);
-    }
-    await local.handleAuthResponse(AuthResponse(
-      credentials: Credentials(
-        refreshToken: response.refreshToken,
-        accessToken: response.accessToken,
-      ),
-      role: PermissionRole.user,
-    ));
-    return response;
-  }
-
-  @override
   Future<void> signOut() {
     return local.clearStore();
   }
 
   @override
-  Future<VerifyOtpResponse> verifyOtp(String referenceData, String code) {
-    return remote.verifyOtp(referenceData, code);
-  }
-
-  @override
-  Future<String> startRegister(String phoneNumber, String? referralCode) {
-    return remote.startRegister(
-        phoneNumber.replaceAll(RegExp(r'\s+'), ''), referralCode);
-  }
-
-  @override
-  Future<String> invitationRegister(String fullName, String phoneNumber,
-      String inviteCode, String? nationalId) {
-    return remote.invitationRegister(
-      fullName,
-      phoneNumber.replaceAll(RegExp(r'\s+'), ''),
-      inviteCode,
-      nationalId,
-    );
-  }
-
-  @override
-  Future<String> resendOtp(String referenceData) {
-    return remote.resendOtp(referenceData);
-  }
-
-  @override
-  Future<bool> verifyPin(String pin) async {
-    return remote.verifyPin(pin);
-  }
-
-  @override
   Future<bool> isFreshInstall() => local.isFreshInstall();
-
-  @override
-  Future<BankAccount> verifyAccount(
-      String referenceData, String accountNumber) {
-    return remote.verifyAccount(referenceData, accountNumber);
-  }
-
-  @override
-  Future<RegisterConfirmResponse> finishRegister(
-      String referenceData, String code, String pin) async {
-    final response = await remote.finishRegister(referenceData, code, pin);
-    local.setReferenceData(response.referenceData);
-    return response;
-  }
-
-  @override
-  Future<AuthData> finishInvitationRegister(
-      String referenceData, String code, String pin) async {
-    final resp =
-        await remote.finishInvitationRegister(referenceData, code, pin);
-    await local.handleAuthResponse(
-      AuthResponse(
-        credentials: Credentials(
-          refreshToken: resp.refreshToken,
-          accessToken: resp.accessToken,
-        ),
-        role: PermissionRole.user,
-      ),
-    );
-    return resp;
-  }
-
-  @override
-  Future<AuthData> onboardBusiness(
-    String referenceData,
-      OnboardBusinessRequest onboardBusinessRequest,
-  ) async {
-    final resp =
-        await remote.onboardBusiness(referenceData, onboardBusinessRequest);
-    await local.handleAuthResponse(
-      AuthResponse(
-        credentials: Credentials(
-          refreshToken: resp.refreshToken,
-          accessToken: resp.accessToken,
-        ),
-        role: PermissionRole.user,
-      ),
-    );
-    return resp;
-  }
-
-  @override
-  Future<bool> changePin(String oldPin, String newPin) {
-    return remote.changePin(oldPin, newPin);
-  }
-
-  @override
-  Future<AuthData> onboardBusinessLegacy(
-    String referenceData,
-    List<LegacyBusiness> business,
-  ) async {
-    final resp = await remote.onboardLegacyBusiness(referenceData, business);
-    await local.handleAuthResponse(
-      AuthResponse(
-        credentials: Credentials(
-          refreshToken: resp.refreshToken,
-          accessToken: resp.accessToken,
-        ),
-        role: PermissionRole.user,
-      ),
-    );
-    return resp;
-  }
 }

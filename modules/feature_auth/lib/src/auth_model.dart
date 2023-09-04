@@ -1,7 +1,6 @@
+import 'package:data_auth/data_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
-
-import '../data_auth.dart';
 
 @injectable
 class AuthModel extends ChangeNotifier {

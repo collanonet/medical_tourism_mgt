@@ -30,9 +30,7 @@ class AccountProfile extends StatelessWidget {
   final Widget? icon;
 
   String getImageAsset() {
-    if (isUser) return Images.icUser;
-    if (isStore) return Images.store;
-    return Images.briefcase;
+    return Images.icUser;
   }
 
   Widget getStackIcon(BuildContext context) {

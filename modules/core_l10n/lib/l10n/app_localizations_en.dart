@@ -6,4 +6,13 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get pageTitleLogin => 'Log In';
+
+  @override
+  String get errorUnknown => 'Something went wrong';
+
+  @override
+  String get errorTimeout => 'Timeout';
+
+  @override
+  String get errorConnection => 'Connection issue';
 }

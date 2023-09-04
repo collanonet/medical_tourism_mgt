@@ -1,14 +1,11 @@
-// You have generated a new plugin project without specifying the `--platforms`
-// flag. A plugin project with no platform support was generated. To add a
-// platform, run `flutter create -t plugin --platforms <platforms> .` under the
-// same directory. You can also find a detailed instruction on how to add
-// platforms in the `pubspec.yaml` at
-// https://flutter.dev/docs/development/packages-and-plugins/developing-packages#plugin-platforms.
 
-import 'feature_medical_visa_platform_interface.dart';
+library micro;
 
-class FeatureMedicalVisa {
-  Future<String?> getPlatformVersion() {
-    return FeatureMedicalVisaPlatform.instance.getPlatformVersion();
-  }
-}
+import 'package:auto_route/annotations.dart';
+import 'package:injectable/injectable.dart';
+
+@InjectableInit.microPackage(
+  preferRelativeImports: true,
+)
+initFeatureMedicalVisaPackage() {}
+

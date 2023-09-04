@@ -1,14 +1,19 @@
-// You have generated a new plugin project without specifying the `--platforms`
-// flag. A plugin project with no platform support was generated. To add a
-// platform, run `flutter create -t plugin --platforms <platforms> .` under the
-// same directory. You can also find a detailed instruction on how to add
-// platforms in the `pubspec.yaml` at
-// https://flutter.dev/docs/development/packages-and-plugins/developing-packages#plugin-platforms.
+library micro;
 
-import 'feature_auth_platform_interface.dart';
+import 'package:auto_route/annotations.dart';
+import 'package:injectable/injectable.dart';
 
-class FeatureAuth {
-  Future<String?> getPlatformVersion() {
-    return FeatureAuthPlatform.instance.getPlatformVersion();
-  }
-}
+import 'feature_auth.gm.dart';
+
+export 'package:data_auth/data_auth.dart';
+
+export './feature_auth.gm.dart';
+export 'src/auth_model.dart';
+
+@InjectableInit.microPackage(
+  preferRelativeImports: true,
+)
+initFeatureAuthzPackage() {}
+
+@AutoRouterConfig.module()
+class FeatureAuthRouterModule extends $FeatureAuthRouterModule {}

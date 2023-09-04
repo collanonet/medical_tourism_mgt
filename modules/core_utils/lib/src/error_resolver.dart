@@ -17,7 +17,6 @@ class DefaultErrorResolver implements ErrorResolver {
     if (exception != null) logger.e(exception);
 
     if (exception is DioException) {
-      final bool isSocketException = exception.error is SocketException;
       switch (exception.type) {
         case DioExceptionType.connectionTimeout:
         case DioExceptionType.receiveTimeout:
@@ -28,9 +27,6 @@ class DefaultErrorResolver implements ErrorResolver {
         case DioExceptionType.badCertificate:
         case DioExceptionType.cancel:
         case DioExceptionType.unknown:
-          if (isSocketException) {
-            return context.l10n.errorConnection;
-          }
           return context.l10n.errorUnknown;
         default:
           break;

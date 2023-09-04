@@ -96,6 +96,24 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Log In'**
   String get pageTitleLogin;
+
+  /// No description provided for @errorUnknown.
+  ///
+  /// In en, this message translates to:
+  /// **'Something went wrong'**
+  String get errorUnknown;
+
+  /// No description provided for @errorTimeout.
+  ///
+  /// In en, this message translates to:
+  /// **'Timeout'**
+  String get errorTimeout;
+
+  /// No description provided for @errorConnection.
+  ///
+  /// In en, this message translates to:
+  /// **'Connection issue'**
+  String get errorConnection;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

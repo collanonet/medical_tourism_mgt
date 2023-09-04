@@ -1,3 +1,6 @@
 {
-    "pageTitleLogin": "Log In"
+    "pageTitleLogin": "Log In",
+    "errorUnknown": "Something went wrong",
+    "errorTimeout": "Timeout",
+    "errorConnection": "Connection issue"
 }

@@ -5,12 +5,12 @@ import 'package:injectable/injectable.dart';
 
 import '../entities/index.dart';
 import '../utils/permission_roles.dart';
-import 'authz_provider.dart';
+import 'auth_provider.dart';
 
 @Named('localAuthz')
-@Injectable(as: AuthzProvider)
-class AuthzLocalProvider extends AuthzProvider {
-  AuthzLocalProvider({
+@Injectable(as: AuthProvider)
+class AuthLocalProvider extends AuthProvider {
+  AuthLocalProvider({
     @Named('authzStorage') required this.storage,
   });
 
@@ -82,12 +82,7 @@ class AuthzLocalProvider extends AuthzProvider {
   }
 
   @override
-  Future<AuthData> login(String phoneNumber, String pin, String deviceId) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<AuthData> confirmLogin(String referenceData, String code) {
+  Future<AuthData> login(String username, String password) {
     throw UnimplementedError();
   }
 
@@ -101,76 +96,15 @@ class AuthzLocalProvider extends AuthzProvider {
   }
 
   @override
-  Future<VerifyOtpResponse> verifyOtp(String referenceData, String code) {
+  Future<bool> isFreshInstall() {
+    // TODO: implement isFreshInstall
     throw UnimplementedError();
   }
 
   @override
-  Future<bool> verifyPin(String pin) {
+  Future<void> updateFreshInstall() {
+    // TODO: implement updateFreshInstall
     throw UnimplementedError();
   }
 
-  @override
-  Future<String> startRegister(String phoneNumber, String? referralCode) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<String> invitationRegister(
-    String fullName,
-    String phoneNumber,
-    String inviteCode,
-    String? nationalId,
-  ) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<bool> isFreshInstall() async {
-    var value = await storage.read(_freshInstall) ?? '1';
-    return value == '1';
-  }
-
-  @override
-  Future<void> updateFreshInstall() => storage.write(_freshInstall, '0');
-
-  @override
-  Future<String> resendOtp(String referenceData) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<BankAccount> verifyAccount(
-      String referenceData, String accountNumber) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<RegisterConfirmResponse> finishRegister(
-      String referenceData, String code, String pin) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<AuthData> finishInvitationRegister(
-      String referenceData, String code, String pin) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<AuthData> onboardLegacyBusiness(
-      String referenceData, List<LegacyBusiness> businessLegacy) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<AuthData> onboardBusiness(
-      String referenceData, OnboardBusinessRequest onboardBusinessRequest) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<bool> changePin(String oldPin, String newPin) {
-    throw UnimplementedError();
-  }
 }

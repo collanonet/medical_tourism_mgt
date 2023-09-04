@@ -1,0 +1,71 @@
+import 'package:feature_auth/feature_auth.dart';
+import 'package:flutter/material.dart';
+
+import 'package:bot_toast/bot_toast.dart';
+import 'package:core_l10n/l10n.dart';
+import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/theme.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
+
+import '../routes/app_router.dart';
+import 'app_model.dart';
+
+class RootApp extends StatefulWidget {
+  const RootApp({super.key});
+
+  @override
+  State<RootApp> createState() => _RootAppState();
+}
+
+class _RootAppState extends State<RootApp> {
+  @override
+  void initState() {
+    super.initState();
+    final app = context.read<AppModel>();
+    app
+      ..addListener(() {
+        if (!app.ready) return;
+        FlutterNativeSplash.remove();
+      })
+      ..initialize();
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AppTheme(
+      themeData: AppThemeData.light(),
+      child: MultiProvider(
+        providers: [
+          ChangeNotifierProvider.value(
+            value: context.read<AppModel>().auth,
+          ),
+          ChangeNotifierProvider.value(
+            value: context.read<AppModel>().l10n,
+          ),
+        ],
+        child: Consumer2<AuthModel, L10nModel>(
+          builder: (context, authz, l10n, child) {
+            return MaterialApp.router(
+              title: 'KBPrasac Merchant',
+              theme: context.appTheme.build(context),
+              locale: l10n.locale,
+              builder: BotToastInit(),
+              localizationsDelegates: AppLocalizations.localizationsDelegates,
+              supportedLocales: AppLocalizations.supportedLocales,
+              routerConfig: GetIt.I<AppRouter>().config(
+                reevaluateListenable: authz,
+              ),
+            );
+          },
+        ),
+      ),
+    );
+  }
+}

@@ -1,8 +1,65 @@
 name: medical_tourism_mgt
 
+sdkPath: .fvm/flutter_sdk
+ide:
+  intellij: true
+
+command:
+  bootstrap:
+    runPubGetInParallel: false
+
 packages:
-  - modules/*
+  - .
+  - modules/**
 
 scripts:
-  analyze:
-    exec: dart analyze .
+  setup:
+    description: "Install necessary plug-ins and bootstrap the workspace"
+    run: |
+      dart pub global activate fvm && \
+      fvm install $FLUTTER_VERSION && \
+      fvm use $FLUTTER_VERSION && \
+      dart pub global activate spider && \
+      brew install lefthook && \
+      lefthook install && \
+      melos bootstrap
+    env:
+      FLUTTER_VERSION: 3.13.2
+  pub:get:
+    description: "Sync pub for all modules"
+    run: melos exec -- \ fvm flutter pub get
+  pod:install:
+    description: "Run pod install for iOS"
+    run: |
+      cd ios && \
+      pod install --repo-update
+  pod:update:
+    description: "Run pod update for iOS"
+    run: |
+      cd ios && \
+      pod update
+  build_runner:
+    description: "Generate *.g.dart files on modules which depends on build_runner"
+    run: melos exec --depends-on="build_runner" fvm dart run build_runner build --delete-conflicting-outputs
+  fixer:
+    description: "Autofix dart files with import_sorter"
+    run: melos exec "lefthook run fixer"
+  gen-l10n:
+    description: "Generate localized strings"
+    run: melos exec --scope="core_l10n" -- \ fvm flutter gen-l10n
+  gen-assets:
+    description: "Generate assets of images and icons"
+    run: |
+      melos exec --scope="core_ui" -- \ spider build && \
+      melos exec --scope="core_ui" -- \ fvm flutter pub run icon_font_generator --from=assets/icons --package=core_ui --class-name=UiIcons --out-font=assets/fonts/UiIcons.ttf --out-flutter=lib/src/resources/ui_icons.dart --normalize
+  gen-appicon:
+    description: "Generate app icon for android and ios"
+    run: |
+      melos exec -c 6 --fail-fast -- \ fvm flutter pub run flutter_launcher_icons -f flutter_launcher_icons*
+    packageFilters:
+      scope: "medical_tourism_mgt"
+  widgetbook:
+    run: |
+      cd modules/core_ui && \
+      fvm flutter run -d chrome lib/widgetbook/widgetbook.dart
+
