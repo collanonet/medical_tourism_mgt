@@ -41,7 +41,7 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
       }
 
       _authListener = listener;
-      // _authz = GetIt.I<AppModel>().authz..addListener(listener);
+      _auth = GetIt.I<AppModel>().auth..addListener(listener);
     }
   }
 

@@ -26,20 +26,4 @@ abstract class AppModule {
 
   @Named('defaultLocale')
   Locale get defaultLocale => const Locale('en');
-
-  @Named('allowedHosts')
-  List<String> get allowedHosts => ['www.prasac.com.kh'];
-
-  @Named('merchantAgreement')
-  Uri get merchantAgreement {
-    return Uri.parse('https://www.prasac.com.kh/en/terms-and-conditions/');
-  }
-
-  @Named('termsAndConditions')
-  Uri get termsAndConditions {
-    return Uri.parse('https://www.prasac.com.kh/en/terms-and-conditions/');
-  }
-
-  @Named('khqrTTL')
-  Duration get khqrTTL => const Duration(minutes: 1);
 }

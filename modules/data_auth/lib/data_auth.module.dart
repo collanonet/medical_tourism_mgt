@@ -23,7 +23,7 @@ class DataAuthPackageModule extends _i1.MicroPackageModule {
   _i2.FutureOr<void> init(_i1.GetItHelper gh) {
     gh.factory<_i3.AuthProvider>(
       () => _i4.AuthLocalProvider(
-          storage: gh<_i5.Storage>(instanceName: 'authzStorage')),
+          storage: gh<_i5.Storage>(instanceName: 'authStorage')),
       instanceName: 'localAuthz',
     );
     gh.factory<_i3.AuthProvider>(

@@ -1,14 +1,15 @@
+import 'package:core_utils/core_utils.dart';
 import 'package:data_auth/data_auth.dart';
 import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
 class AuthModel extends ChangeNotifier {
-  // AuthModel({
-  //   // required this.authzRepository,
-  // });
+  AuthModel({
+    required this.authRepository,
+  });
 
-  // final AuthzRepository authzRepository;
+  final AuthRepository authRepository;
 
   PermissionRole _userRole = PermissionRole.guest;
 
@@ -23,10 +24,11 @@ class AuthModel extends ChangeNotifier {
   String get deviceId => _deviceId;
 
   Future<void> initialize() async {
+    logger.d('auth initialize 5');
     try {
-      // _isFreshInstall = await authzRepository.isFreshInstall();
-      // _userRole = await authzRepository.getPermissionRole();
-      // _deviceId = await authzRepository.getDeviceId() ?? '';
+      _isFreshInstall = await authRepository.isFreshInstall();
+      _userRole = await authRepository.getPermissionRole();
+      _deviceId = await authRepository.getDeviceId() ?? '';
     } catch (e) {
       _userRole = PermissionRole.guest;
     } finally {

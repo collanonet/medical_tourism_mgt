@@ -13,10 +13,8 @@ class RoleGuard extends Guard {
   @override
   Future<bool> resolve(String policy) async {
     final allowedRoles = policies[policy] ?? const [];
-    // final userRole = await GetIt.I<AuthzRepository>().getPermissionRole();
-    //
-    // return allowedRoles.contains(userRole);
+    final userRole = await GetIt.I<AuthRepository>().getPermissionRole();
 
-    return false;
+    return allowedRoles.contains(userRole);
   }
 }

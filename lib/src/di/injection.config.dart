@@ -84,14 +84,6 @@ extension GetItInjectableX on _i1.GetIt {
           l10n: gh<_i16.L10nModel>(),
         ));
     gh.singleton<_i17.CacheOptions>(restModule.cacheOptions);
-    gh.factory<Duration>(
-      () => appModule.khqrTTL,
-      instanceName: 'khqrTTL',
-    );
-    gh.factory<List<String>>(
-      () => appModule.allowedHosts,
-      instanceName: 'allowedHosts',
-    );
     gh.factory<_i18.Locale>(
       () => appModule.defaultLocale,
       instanceName: 'defaultLocale',
@@ -120,14 +112,6 @@ extension GetItInjectableX on _i1.GetIt {
       () => restModule.prodBaseUrl,
       instanceName: 'baseUrl',
       registerFor: {_production},
-    );
-    gh.factory<Uri>(
-      () => appModule.merchantAgreement,
-      instanceName: 'merchantAgreement',
-    );
-    gh.factory<Uri>(
-      () => appModule.termsAndConditions,
-      instanceName: 'termsAndConditions',
     );
     gh.singleton<_i21.AppRouter>(appModule.appRouter(gh<_i19.RoleGuard>()));
     gh.singleton<_i22.RestClient>(restModule.restClient(

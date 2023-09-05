@@ -8,7 +8,6 @@ import 'package:injectable/injectable.dart';
 @injectable
 class L10nModel extends ChangeNotifier {
   static const _languageCodeStorageKey = 'language_code';
-  static const _countryCodeStorageKey = 'country_code';
 
   L10nModel({
     @Named('defaultLocale') required this.defaultLocale,
@@ -25,7 +24,6 @@ class L10nModel extends ChangeNotifier {
     try {
       _locale = await Future.wait([
         storage.read(_languageCodeStorageKey),
-        storage.read(_countryCodeStorageKey),
       ]).then((values) {
         return values[0] != null ? Locale(values[0], values[1]) : null;
       });
@@ -42,7 +40,6 @@ class L10nModel extends ChangeNotifier {
 
     return Future.wait([
       storage.write(_languageCodeStorageKey, locale.languageCode),
-      storage.write(_countryCodeStorageKey, locale.countryCode)
     ]);
   }
 }

@@ -1,3 +1,4 @@
+import 'package:core_utils/core_utils.dart';
 import 'package:feature_auth/feature_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -23,18 +24,17 @@ class _RootAppState extends State<RootApp> {
   @override
   void initState() {
     super.initState();
+    logger.d("here now 1");
     final app = context.read<AppModel>();
     app
       ..addListener(() {
+        logger.d("here now 2");
         if (!app.ready) return;
         FlutterNativeSplash.remove();
+        logger.d("close splash screen");
+
       })
       ..initialize();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
   }
 
   @override
@@ -51,16 +51,16 @@ class _RootAppState extends State<RootApp> {
           ),
         ],
         child: Consumer2<AuthModel, L10nModel>(
-          builder: (context, authz, l10n, child) {
+          builder: (context, auth, l10n, child) {
             return MaterialApp.router(
-              title: 'KBPrasac Merchant',
+              title: 'Medical Tourism',
               theme: context.appTheme.build(context),
               locale: l10n.locale,
               builder: BotToastInit(),
               localizationsDelegates: AppLocalizations.localizationsDelegates,
               supportedLocales: AppLocalizations.supportedLocales,
               routerConfig: GetIt.I<AppRouter>().config(
-                reevaluateListenable: authz,
+                reevaluateListenable: auth,
               ),
             );
           },

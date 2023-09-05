@@ -11,7 +11,7 @@ import 'auth_provider.dart';
 @Injectable(as: AuthProvider)
 class AuthLocalProvider extends AuthProvider {
   AuthLocalProvider({
-    @Named('authzStorage') required this.storage,
+    @Named('authStorage') required this.storage,
   });
 
   final Storage storage;
