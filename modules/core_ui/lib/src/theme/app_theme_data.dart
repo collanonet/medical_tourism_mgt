@@ -1,8 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:reactive_pinput/reactive_pinput.dart';
 import '../extensions/context_exts.dart';
 import '../utils/generate_material_color.dart';
+
 class AppThemeData {
   const AppThemeData({
     required this.primaryBackgroundColor,
@@ -10,27 +12,14 @@ class AppThemeData {
     required this.primaryColor,
     required this.typography,
     this.iconColor = Colors.black,
-    required this.secondaryColor,
-    required this.primaryContainerColor,
     required this.errorColor,
-    required this.disabledColor,
     required this.dividerColor,
-    required this.borderColor,
     required this.primaryTextColor,
-    required this.secondaryTextColor,
-    required this.darkGreyIconColor,
-    required this.greyTextColor,
     required this.successColor,
-    required this.greyCircleColor,
-    required this.darkGreyCircleColor,
-    required this.greyContainerColor,
-    required this.disableButtonColor,
     required this.boxShadow,
     this.spacing = const Spacing(),
-    this.appBodyTheme = const AppBodyTheme(),
     this.brightness = Brightness.light,
     this.iconSize = const IconSize(),
-    required this.pinPutTheme,
     required this.listTileTheme,
   });
   final Color primaryBackgroundColor;
@@ -40,34 +29,21 @@ class AppThemeData {
   final Spacing spacing;
   final IconSize iconSize;
   final Typography typography;
-  final Color secondaryColor;
-  final Color primaryContainerColor;
   final Color errorColor;
-  final Color disabledColor;
   final Color dividerColor;
-  final Color borderColor;
   final Color primaryTextColor;
-  final Color secondaryTextColor;
-  final Color darkGreyIconColor;
-  final Color greyTextColor;
   final Color successColor;
-  final Color greyCircleColor;
-  final Color darkGreyCircleColor;
-  final Color disableButtonColor;
   final BoxShadow boxShadow;
   final Brightness brightness;
-  final Color greyContainerColor;
-  final AppBodyTheme appBodyTheme;
-  final PinPutTheme pinPutTheme;
   final ListTileTheme listTileTheme;
   factory AppThemeData.light() {
     const spacing = Spacing();
     const primaryTextColor = Colors.black;
     const secondaryTextColor = Color(0xFF8E8E8E);
     return AppThemeData(
-      primaryBackgroundColor: const Color(0xFFF7F7F7),
+      primaryBackgroundColor: CupertinoColors.systemBackground,
       secondaryBackgroundColor: Colors.white,
-      primaryColor: const Color(0xFFF8B500),
+      primaryColor: const Color(0xFF1CC9A6),
       iconColor: Colors.black,
       brightness: Brightness.light,
       typography: const Typography(
@@ -75,28 +51,13 @@ class AppThemeData {
         bodyTextColor: primaryTextColor,
         successTextColor: Color(0xff1BC200),
       ),
-      disableButtonColor: const Color(0xffBEBEBE),
       spacing: spacing,
-      secondaryColor: const Color(0xFFFCE9B7),
-      primaryContainerColor: Colors.white,
       errorColor: const Color(0xffB42C2C),
-      disabledColor: const Color(0xff8E8E8E),
       dividerColor: const Color(0xffE3E3E3),
-      borderColor: const Color(0xFFE3E3E3),
       successColor: const Color(0xff1BC200),
-      darkGreyIconColor: const Color(0xff4C5157),
-      greyTextColor: const Color(0xff5B5B5B),
-      greyCircleColor: const Color(0xff7D7366),
-      darkGreyCircleColor: const Color(0xff534F42),
-      greyContainerColor: const Color(0xffEBEBEB),
       primaryTextColor: Colors.black,
-      secondaryTextColor: const Color(0xFF8A8A8E),
       boxShadow: const BoxShadow(
         color: Color.fromRGBO(0, 0, 0, 0.1),
-      ),
-      pinPutTheme: PinPutTheme(
-        dotColor: const Color(0xFFB5B6B6),
-        focusDotColor: const Color(0xFFF8B500),
       ),
       listTileTheme: ListTileTheme(
         threeLineCard: ListTileThemeData(
@@ -131,7 +92,6 @@ class AppThemeData {
       primaryColor: primaryColor,
       scaffoldBackgroundColor: primaryBackgroundColor,
       primarySwatch: generateMaterialColor(primaryColor),
-      disabledColor: disabledColor,
       dividerColor: dividerColor,
       textTheme: typography.build(context),
       bottomSheetTheme: BottomSheetThemeData(
@@ -161,18 +121,16 @@ class AppThemeData {
       iconTheme: IconThemeData(color: iconColor),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          backgroundColor: primaryColor,
-          shadowColor: const Color.fromRGBO(230, 172, 13, 0.2),
-          padding: EdgeInsets.symmetric(
-            vertical: spacing.buttonVertical,
-            horizontal: spacing.buttonHorizontal,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(spacing.borderRadiusMedium),
-          ),
-          disabledBackgroundColor: disableButtonColor,
-            disabledForegroundColor: Colors.black
-        ),
+            backgroundColor: primaryColor,
+            shadowColor: const Color.fromRGBO(230, 172, 13, 0.2),
+            padding: EdgeInsets.symmetric(
+              vertical: spacing.buttonVertical,
+              horizontal: spacing.buttonHorizontal,
+            ),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(spacing.borderRadiusMedium),
+            ),
+            disabledForegroundColor: Colors.black),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         elevation: 1,
@@ -234,13 +192,12 @@ class AppThemeData {
         primarySwatch: generateMaterialColor(primaryColor),
         brightness: brightness,
       ).copyWith(
-        primaryContainer: primaryContainerColor,
-        secondary: secondaryColor,
         error: errorColor,
       ),
     );
   }
 }
+
 class Spacing {
   const Spacing({
     this.gutter = 16.0,
@@ -267,6 +224,7 @@ class Spacing {
   final double inputHorizontal;
   final double inputVertical;
 }
+
 class IconSize {
   const IconSize({
     this.iconSizeExtraSmall = 9.0,
@@ -281,6 +239,7 @@ class IconSize {
   final double iconSizeLarge;
   final double iconSizeExtraLarge;
 }
+
 class Typography {
   const Typography({
     required this.titleTextColor,
@@ -314,42 +273,7 @@ class Typography {
     );
   }
 }
-class AppBodyTheme {
-  const AppBodyTheme({
-    this.primaryCurvedColor = const Color(0xFF7D7366),
-    this.secondaryCurvedColor = const Color(0xFFE3E3E3),
-  });
-  final Color primaryCurvedColor;
-  final Color secondaryCurvedColor;
-}
-class PinPutTheme {
-  PinPutTheme._({
-    required this.pinTheme,
-    required this.focusPinTheme,
-  });
-  factory PinPutTheme({
-    double dotSize = 10.0,
-    double focusDotSize = 14.0,
-    Color dotColor = Colors.grey,
-    Color focusDotColor = Colors.black,
-  }) {
-    const decoration = BoxDecoration(shape: BoxShape.circle);
-    return PinPutTheme._(
-      pinTheme: PinTheme(
-        width: dotSize,
-        height: dotSize,
-        decoration: decoration.copyWith(color: dotColor),
-      ),
-      focusPinTheme: PinTheme(
-        width: focusDotSize,
-        height: focusDotSize,
-        decoration: decoration.copyWith(color: focusDotColor),
-      ),
-    );
-  }
-  final PinTheme pinTheme;
-  final PinTheme focusPinTheme;
-}
+
 class ListTileTheme {
   const ListTileTheme({
     required this.threeLineCard,

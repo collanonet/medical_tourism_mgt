@@ -87,7 +87,7 @@ dependencies:
   stomp_dart_client: ^0.4.4
   synchronized: ^3.1.0
   shared_preferences: ^2.2.1
-  flutter_native_splash: ^2.3.1
+  bot_toast: ^4.0.4
 
 dev_dependencies:
   flutter_test:
@@ -106,13 +106,14 @@ dev_dependencies:
   injectable_generator: ^2.4.0
   import_sorter: ^4.6.0
   flutter_launcher_icons: ^0.13.1
+  flutter_native_splash: ^2.3.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
 flutter:
-
+  generate: false
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

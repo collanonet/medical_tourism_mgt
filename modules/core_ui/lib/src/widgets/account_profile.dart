@@ -14,8 +14,6 @@ class AccountProfile extends StatelessWidget {
     this.profileUrl = '',
     this.onTap,
     this.radius = 38,
-    this.isUser = false,
-    this.isStore = false,
     this.backgroundColor,
     this.icon,
   });
@@ -23,9 +21,7 @@ class AccountProfile extends StatelessWidget {
   final String profileUrl;
   final File? profileFile;
   final void Function()? onTap;
-  final bool isUser;
   final double radius;
-  final bool isStore;
   final Color? backgroundColor;
   final Widget? icon;
 

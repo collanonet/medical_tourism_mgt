@@ -11,7 +11,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_disk_lru_cache: ^1.0.1
   injectable: ^2.3.0
   shared_preferences: ^2.2.0
 

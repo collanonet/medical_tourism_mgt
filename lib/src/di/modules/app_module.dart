@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:feature_auth/feature_auth.dart';
-import 'package:feature_auth/feature_auth.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../routes/app_router.dart';
@@ -18,6 +17,9 @@ abstract class AppModule {
   RoleGuard get roleGuard {
     return RoleGuard(
       policies: {
+        LoginRoute.name: [
+          PermissionRole.guest,
+        ]
       },
     );
   }

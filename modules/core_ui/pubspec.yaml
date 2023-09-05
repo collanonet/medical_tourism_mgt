@@ -15,7 +15,6 @@ dependencies:
   reactive_forms: ^14.3.0
   mask_text_input_formatter: ^2.4.0
   webview_flutter: ^4.2.2
-  google_maps_flutter: ^2.4.0
   auto_route: ^7.7.0
   google_fonts: ^5.1.0
   material_design_icons_flutter: ^7.0.7296

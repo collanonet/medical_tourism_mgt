@@ -13,14 +13,14 @@ part 'app_router.gr.dart';
 
 @AutoRouterConfig(
   modules: [
-    // FeatureAuthzRouterModule,
+    FeatureAuthRouterModule,
   ],
 )
 class AppRouter extends _$AppRouter implements AutoRouteGuard {
   AppRouter({required this.roleGuard});
 
   final RoleGuard roleGuard;
-  AuthModel? _authz;
+  AuthModel? _auth;
   void Function()? _authListener;
 
   @override
@@ -28,7 +28,7 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
     if (await roleGuard.resolve(resolver.route.name)) {
       resolver.next(true);
     } else {
-      // resolver.redirect(const OnboardRoute());
+      resolver.redirect(const LoginRoute());
 
       listener() async {
         final resolved = await roleGuard.resolve(resolver.route.name);
@@ -53,7 +53,7 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
 
   void unsubscribeAuthListener() {
     if (_authListener != null) {
-      _authz?.removeListener(_authListener!);
+      _auth?.removeListener(_authListener!);
       _authListener = null;
     }
   }
@@ -61,9 +61,7 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
   @override
   List<AutoRoute> get routes {
     return [
-      // AutoRoute(page: HomeRoute.page, initial: true, path: '/'),
-      // AutoRoute(page: OnboardRoute.page),
-
+      AutoRoute(page: LoginRoute.page,initial: true, path: '/'),
       RedirectRoute(path: '*', redirectTo: '/')
     ];
   }
