@@ -3,3 +3,15 @@ flutter_launcher_icons:
   ios: true
   remove_alpha_ios: true
   image_path: "res/app_icon.png"
+  web:
+    generate: true
+    image_path: "res/app_icon.png"
+    background_color: "#ffffff"
+    theme_color: "#1CC9A6"
+  windows:
+    generate: true
+    image_path: "res/app_icon.png"
+    icon_size: 48 # min:48, max:256, default: 48
+  macos:
+    generate: true
+    image_path: "res/app_icon.png"

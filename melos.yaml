@@ -22,7 +22,9 @@ scripts:
       dart pub global activate spider && \
       brew install lefthook && \
       lefthook install && \
-      melos bootstrap
+      melos bootstrap && \
+      fvm flutter pub run flutter_launcher_icons -f flutter_launcher_icons.yaml && \
+      fvm dart run flutter_native_splash:create --path=flutter_native_splash.yaml
     env:
       FLUTTER_VERSION: 3.13.2
   pub:get:
