@@ -1,5 +1,4 @@
 import 'package:core_network/core_network.dart';
-import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 
 import '../entities/index.dart';
@@ -11,7 +10,7 @@ import 'auth_repository.dart';
 class AuthRepositoryImpl extends AuthRepository {
   AuthRepositoryImpl({
     @Named('localAuthz') required this.local,
-    @Named('remoteAuthz') required this.remote,
+    @Named('remoteAuth') required this.remote,
   });
 
   final AuthProvider local;
@@ -51,7 +50,7 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Future<AuthData> signIn(String username, String password) async {
-    final currentDeviceId = await local.getDeviceId() ?? '';
+    // final currentDeviceId = await local.getDeviceId() ?? '';
     final response = await remote.login(username, password);
     var trusted = response.isTrustedDevice;
     var deviceId = response.deviceId;

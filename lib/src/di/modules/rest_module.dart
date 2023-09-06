@@ -54,13 +54,6 @@ abstract class RestModule {
 }
 
 class MerchantInterceptor extends Interceptor {
-  @override
-  void onRequest(
-    RequestOptions options,
-    RequestInterceptorHandler handler,
-  ) async {
-    super.onRequest(options, handler);
-  }
 }
 
 class TokenInterceptor extends Interceptor {

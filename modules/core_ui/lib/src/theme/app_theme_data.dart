@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:reactive_pinput/reactive_pinput.dart';
 import '../extensions/context_exts.dart';
 import '../utils/generate_material_color.dart';
 

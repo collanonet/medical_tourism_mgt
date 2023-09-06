@@ -3,7 +3,6 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 
 import '../core_network.dart';
-import '../entities.dart';
 
 part 'api_service.g.dart';
 

@@ -1,11 +1,10 @@
 import 'package:core_network/core_network.dart';
-import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../data_auth.dart';
 import 'auth_provider.dart';
 
-@Named('remoteAuthz')
+@Named('remoteAuth')
 @Injectable(as: AuthProvider)
 class AuthRemoteProvider extends AuthProvider {
   AuthRemoteProvider({required this.apiService});
@@ -72,8 +71,8 @@ class AuthRemoteProvider extends AuthProvider {
         )
         .then(
           (value) => AuthData(
-            accessToken: value.accessToken ?? '',
-            refreshToken: value.refreshToken ?? '',
+            accessToken: value.accessToken,
+            refreshToken: value.refreshToken,
             expireIn: value.expireIn,
             isTrustedDevice: value.isTrustedDevice,
             referenceData: value.referenceData,

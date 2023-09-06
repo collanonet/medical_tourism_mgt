@@ -1,8 +1,8 @@
-import 'package:feature_auth/feature_auth.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:core_l10n/l10n.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:feature_auth/feature_auth.dart';
 import 'package:injectable/injectable.dart';
 
 @lazySingleton

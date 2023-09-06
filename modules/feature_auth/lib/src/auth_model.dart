@@ -38,7 +38,7 @@ class AuthModel extends ChangeNotifier {
 
   Future<void> syncAuthState() async {
     try {
-      // _userRole = await authzRepository.getPermissionRole();
+      _userRole = await authRepository.getPermissionRole();
     } catch (e) {
       _userRole = PermissionRole.guest;
     } finally {
@@ -53,7 +53,7 @@ class AuthModel extends ChangeNotifier {
 
   void signOut() async {
     try {
-      // await authzRepository.signOut();
+      await authRepository.signOut();
     } catch (e) {
       // no op
     } finally {

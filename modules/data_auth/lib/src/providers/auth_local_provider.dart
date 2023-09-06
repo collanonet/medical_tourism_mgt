@@ -1,5 +1,4 @@
 import 'package:core_network/core_network.dart';
-import 'package:core_network/entities.dart';
 import 'package:core_storage/core_storage.dart';
 import 'package:injectable/injectable.dart';
 
@@ -20,7 +19,7 @@ class AuthLocalProvider extends AuthProvider {
   final _refreshTokenStorageKey = 'refresh_token';
   final _permissionRoleStorageKey = 'permission_role';
   final _referenceData = 'reference_data';
-  final _freshInstall = 'fresh_install';
+  // final _freshInstall = 'fresh_install';
   final _hasLegacy = 'has_legacy';
   final _deviceId = 'device_id';
 

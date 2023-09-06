@@ -1,12 +1,8 @@
-import 'package:feature_auth/feature_auth.dart';
-import 'package:flutter/material.dart';
-
 import 'package:auto_route/auto_route.dart';
-
+import 'package:feature_auth/feature_auth.dart';
 import 'package:get_it/get_it.dart';
 
 import '../app/app_model.dart';
-
 import 'guards.dart';
 
 part 'app_router.gr.dart';

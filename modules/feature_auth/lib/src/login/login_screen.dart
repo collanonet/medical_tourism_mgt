@@ -9,7 +9,7 @@ class LoginScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: context.appTheme.primaryColor,
-      body: AppBody(
+      body: const AppBody(
         child: Column(
           children: [
 
