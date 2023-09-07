@@ -1,7 +1,6 @@
 import 'package:flutter/foundation.dart';
 
 import 'package:core_network/core_network.dart';
-import 'package:core_utils/core_utils.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:feature_auth/feature_auth.dart';
@@ -77,7 +76,6 @@ class TokenInterceptor extends Interceptor {
   void onError(DioException err, ErrorInterceptorHandler handler) async {
     if ((err.response?.statusCode ?? 0) == 401) {
       final requestOptions = err.requestOptions;
-      logger.d('refreshing token');
 
       try {
         final credentials = await GetIt.I<AuthRepository>().refreshToken();

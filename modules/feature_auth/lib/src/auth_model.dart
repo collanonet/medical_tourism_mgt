@@ -1,3 +1,5 @@
+
+import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_auth/data_auth.dart';
 import 'package:flutter/widgets.dart';
@@ -49,6 +51,23 @@ class AuthModel extends ChangeNotifier {
   set userRole(PermissionRole role) {
     _userRole = role;
     notifyListeners();
+  }
+
+  AsyncData<AuthData> _loginData = const AsyncData<AuthData>();
+  AsyncData<AuthData> get loginData => _loginData;
+
+  Future<void> singIn(String username, String password) async {
+    _loginData = const AsyncData(loading: true);
+    notifyListeners();
+
+    try {
+      var result = await authRepository.signIn(username, password);
+      _loginData = AsyncData(data: result);
+    } catch (error) {
+      _loginData = AsyncData(error: error);
+    } finally {
+      notifyListeners();
+    }
   }
 
   void signOut() async {

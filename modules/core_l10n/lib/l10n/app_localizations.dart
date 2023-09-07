@@ -91,29 +91,71 @@ abstract class AppLocalizations {
     Locale('en')
   ];
 
-  /// No description provided for @pageTitleLogin.
+  /// No description provided for @titleAppJP.
   ///
   /// In en, this message translates to:
-  /// **'Log In'**
-  String get pageTitleLogin;
+  /// **'センター本部専用'**
+  String get titleAppJP;
 
   /// No description provided for @errorUnknown.
   ///
   /// In en, this message translates to:
-  /// **'Something went wrong'**
+  /// **'何かが間違っていた。'**
   String get errorUnknown;
 
   /// No description provided for @errorTimeout.
   ///
   /// In en, this message translates to:
-  /// **'Timeout'**
+  /// **'時間切れ'**
   String get errorTimeout;
 
   /// No description provided for @errorConnection.
   ///
   /// In en, this message translates to:
-  /// **'Connection issue'**
+  /// **'接続の問題'**
   String get errorConnection;
+
+  /// No description provided for @labelId.
+  ///
+  /// In en, this message translates to:
+  /// **'ID'**
+  String get labelId;
+
+  /// No description provided for @labelPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'パスワード'**
+  String get labelPassword;
+
+  /// No description provided for @labelPleaseEnterYourInformation.
+  ///
+  /// In en, this message translates to:
+  /// **'入力してください'**
+  String get labelPleaseEnterYourInformation;
+
+  /// No description provided for @labelForgotPassword.
+  ///
+  /// In en, this message translates to:
+  /// **'パスワードをお忘れの方はこちら＞'**
+  String get labelForgotPassword;
+
+  /// No description provided for @mgsFieldRequired.
+  ///
+  /// In en, this message translates to:
+  /// **'フィールドは必須'**
+  String get mgsFieldRequired;
+
+  /// No description provided for @actionLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'ログイン'**
+  String get actionLogin;
+
+  /// No description provided for @mgsRequireInputLogin.
+  ///
+  /// In en, this message translates to:
+  /// **'アカウントを入力してください'**
+  String get mgsRequireInputLogin;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

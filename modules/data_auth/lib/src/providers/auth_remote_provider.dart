@@ -74,9 +74,6 @@ class AuthRemoteProvider extends AuthProvider {
             accessToken: value.accessToken,
             refreshToken: value.refreshToken,
             expireIn: value.expireIn,
-            isTrustedDevice: value.isTrustedDevice,
-            referenceData: value.referenceData,
-            deviceId: value.deviceId,
           ),
         );
   }

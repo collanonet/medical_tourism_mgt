@@ -1,6 +1,13 @@
 {
-    "pageTitleLogin": "Log In",
-    "errorUnknown": "Something went wrong",
-    "errorTimeout": "Timeout",
-    "errorConnection": "Connection issue"
+    "titleAppJP": "センター本部専用",
+    "errorUnknown": "何かが間違っていた。",
+    "errorTimeout": "時間切れ",
+    "errorConnection": "接続の問題",
+    "labelId": "ID",
+    "labelPassword": "パスワード",
+    "labelPleaseEnterYourInformation": "入力してください",
+    "labelForgotPassword": "パスワードをお忘れの方はこちら＞",
+    "mgsFieldRequired": "フィールドは必須",
+    "actionLogin": "ログイン",
+    "mgsRequireInputLogin": "アカウントを入力してください"
 }

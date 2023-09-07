@@ -6,7 +6,7 @@ import '../entities/index.dart';
 import '../utils/permission_roles.dart';
 import 'auth_provider.dart';
 
-@Named('localAuthz')
+@Named('localAuth')
 @Injectable(as: AuthProvider)
 class AuthLocalProvider extends AuthProvider {
   AuthLocalProvider({

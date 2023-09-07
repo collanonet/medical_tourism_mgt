@@ -57,7 +57,7 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
   @override
   List<AutoRoute> get routes {
     return [
-      AutoRoute(page: LoginRoute.page,initial: true, path: '/'),
+      AutoRoute(page: LoginRoute.page, initial: true, path: '/'),
       RedirectRoute(path: '*', redirectTo: '/')
     ];
   }

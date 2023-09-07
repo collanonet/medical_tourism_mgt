@@ -42,7 +42,7 @@ class AppThemeData {
     return AppThemeData(
       primaryBackgroundColor: CupertinoColors.systemBackground,
       secondaryBackgroundColor: Colors.white,
-      primaryColor: const Color(0xFF1CC9A6),
+      primaryColor: const Color(0xFF00C6C6),
       iconColor: Colors.black,
       brightness: Brightness.light,
       typography: const Typography(
@@ -88,6 +88,7 @@ class AppThemeData {
   }
   ThemeData build(BuildContext context) {
     return ThemeData(
+      useMaterial3: true,
       primaryColor: primaryColor,
       scaffoldBackgroundColor: primaryBackgroundColor,
       primarySwatch: generateMaterialColor(primaryColor),
@@ -136,11 +137,12 @@ class AppThemeData {
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          backgroundColor: Colors.white,
-          padding: EdgeInsets.symmetric(vertical: spacing.buttonVertical),
+          backgroundColor: primaryColor,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
+          foregroundColor: Colors.white,
+          enableFeedback: true,
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(

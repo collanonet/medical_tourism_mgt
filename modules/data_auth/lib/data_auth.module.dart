@@ -24,14 +24,14 @@ class DataAuthPackageModule extends _i1.MicroPackageModule {
     gh.factory<_i3.AuthProvider>(
       () => _i4.AuthLocalProvider(
           storage: gh<_i5.Storage>(instanceName: 'authStorage')),
-      instanceName: 'localAuthz',
+      instanceName: 'localAuth',
     );
     gh.factory<_i3.AuthProvider>(
       () => _i6.AuthRemoteProvider(apiService: gh<_i7.ApiService>()),
       instanceName: 'remoteAuth',
     );
     gh.factory<_i8.AuthRepository>(() => _i9.AuthRepositoryImpl(
-          local: gh<_i3.AuthProvider>(instanceName: 'localAuthz'),
+          local: gh<_i3.AuthProvider>(instanceName: 'localAuth'),
           remote: gh<_i3.AuthProvider>(instanceName: 'remoteAuth'),
         ));
   }

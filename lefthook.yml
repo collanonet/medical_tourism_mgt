@@ -6,11 +6,12 @@ pre-push:
     linter:
       run: fvm flutter analyze
 
-pre-commit:
-  commands:
-    pretty:
-      glob: "*.dart"
-      run: lefthook run fixer {staged_files} && git add {staged_files}
+#pre-commit:
+#  commands:
+#    pretty:
+#      glob: "*.dart"
+#      run: lefthook run fixer . && git add .
+
 
 fixer:
   commands:

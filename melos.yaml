@@ -65,3 +65,40 @@ scripts:
       cd modules/core_ui && \
       fvm flutter run -d chrome lib/widgetbook/widgetbook.dart
 
+  setup_win:
+    description: "Install necessary plug-ins and bootstrap the workspace"
+    run: |
+      dart pub global activate fvm && ^
+      fvm install %FLUTTER_VERSION% && ^
+      fvm use %FLUTTER_VERSION% && ^
+      dart pub global activate spider && ^
+      lefthook install && ^
+      melos bootstrap && ^
+      fvm flutter pub run flutter_launcher_icons -f flutter_launcher_icons.yaml && ^
+      fvm dart run flutter_native_splash:create --path=flutter_native_splash.yaml
+    env:
+      FLUTTER_VERSION: 3.13.2
+  build_runner_win:
+    description: "Generate *.g.dart files on modules which depends on build_runner"
+    run: melos exec --depends-on="build_runner" fvm dart run build_runner build --delete-conflicting-outputs
+  fixer_win:
+    description: "Autofix dart files with import_sorter"
+    run: melos exec "lefthook run fixer"
+  gen_l10n_win:
+    description: "Generate localized strings"
+    run: melos exec --scope="core_l10n" -- fvm flutter gen-l10n
+  gen_assets_win:
+    description: "Generate assets of images and icons"
+    run: |
+      melos exec --scope="core_ui" -- spider build && ^
+      melos exec --scope="core_ui" -- fvm flutter pub run icon_font_generator --from=assets/icons --package=core_ui --class-name=UiIcons --out-font=assets/fonts/UiIcons.ttf --out-flutter=lib/src/resources/ui_icons.dart --normalize
+  gen_appicon_win:
+    description: "Generate app icon for android and ios"
+    run: |
+      melos exec -c 6 --fail-fast -- fvm flutter pub run flutter_launcher_icons -f flutter_launcher_icons*
+    packageFilters:
+      scope: "medical_tourism_mgt"
+  widgetbook_win:
+    run: |
+      cd modules/core_ui && ^
+      fvm flutter run -d chrome lib/widgetbook/widgetbook.dart

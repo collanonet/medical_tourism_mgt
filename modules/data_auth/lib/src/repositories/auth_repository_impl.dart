@@ -9,7 +9,7 @@ import 'auth_repository.dart';
 @Injectable(as: AuthRepository)
 class AuthRepositoryImpl extends AuthRepository {
   AuthRepositoryImpl({
-    @Named('localAuthz') required this.local,
+    @Named('localAuth') required this.local,
     @Named('remoteAuth') required this.remote,
   });
 
@@ -50,19 +50,14 @@ class AuthRepositoryImpl extends AuthRepository {
 
   @override
   Future<AuthData> signIn(String username, String password) async {
-    // final currentDeviceId = await local.getDeviceId() ?? '';
     final response = await remote.login(username, password);
-    var trusted = response.isTrustedDevice;
-    var deviceId = response.deviceId;
-    if (deviceId != null) {
-      local.setDeviceId(deviceId);
-    }
+
     await local.handleAuthResponse(AuthResponse(
       credentials: Credentials(
         refreshToken: response.refreshToken,
         accessToken: response.accessToken,
       ),
-      role: trusted ? PermissionRole.user : PermissionRole.guest,
+      role: PermissionRole.user,
     ));
     await local.updateFreshInstall();
     return response;

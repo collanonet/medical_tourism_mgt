@@ -27,12 +27,10 @@ class AppModel extends ChangeNotifier {
         // biz.clear();
       }
     });
-    logger.d("here now 3");
     await Future.wait([
       auth.initialize(),
       l10n.initialize(),
     ]);
-    logger.d("here now 4");
     _ready = const AsyncData(data: true);
 
     notifyListeners();
