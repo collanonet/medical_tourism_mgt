@@ -1,16 +1,8 @@
-pre-push:
-  parallel: true
+pre-commit:
   commands:
-    tests:
-      run: fvm flutter test
-    linter:
-      run: fvm flutter analyze
-
-#pre-commit:
-#  commands:
-#    pretty:
-#      glob: "*.dart"
-#      run: lefthook run fixer . && git add .
+    pretty:
+      glob: "*.dart"
+      run: lefthook run fixer . && git add .
 
 
 fixer:
