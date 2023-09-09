@@ -16,5 +16,15 @@ abstract class _$AppRouter extends RootStackRouter {
   @override
   final Map<String, PageFactory> pagesMap = {
     ...FeatureAuthRouterModule().pagesMap,
+    ...FeatureAgentPackageModule().pagesMap,
+    ...FeatureHelpAndDocPackageModule().pagesMap,
+    ...FeatureHospitalPackageModule().pagesMap,
+    ...FeatureInvoicePackageModule().pagesMap,
+    ...FeatureMedicalVisaPackageModule().pagesMap,
+    ...FeaturePatientPackageModule().pagesMap,
+    ...FeaturePrePatientPackageModule().pagesMap,
+    ...FeatureQuotationPackageModule().pagesMap,
+    ...FeatureReportPackageModule().pagesMap,
+    ...FeatureSalePackageModule().pagesMap,
   };
 }

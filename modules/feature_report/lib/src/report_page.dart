@@ -1,0 +1,22 @@
+import 'package:auto_route/annotations.dart';
+import 'package:base_view/base_view.dart';
+import 'package:flutter/material.dart';
+
+import 'report_screen.dart';
+
+@RoutePage()
+class ReportPage extends StatefulWidget {
+  const ReportPage({super.key});
+
+  @override
+  State<ReportPage> createState() => _ReportPageState();
+}
+
+class _ReportPageState extends State<ReportPage> {
+  @override
+  Widget build(BuildContext context) {
+    return const SideBarMenu(
+      page: ReportScreen(),
+    );
+  }
+}

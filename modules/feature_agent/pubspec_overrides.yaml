@@ -1,5 +1,8 @@
+# melos_managed_dependency_overrides: data_agent,data_help_and_doc,data_hospital,data_invoice,data_medical_visa,data_patient,data_pre_patient,data_quotation,data_report,data_sale,feature_help_and_doc,feature_hospital,feature_invoice,feature_medical_visa,feature_patient,feature_pre_patient,feature_quotation,feature_report,feature_sale
 # melos_managed_dependency_overrides: data_biz,core_network,core_ui,core_storage,core_utils,core_l10n
 dependency_overrides:
+  base_view:
+    path: ../base_view
   core_l10n:
     path: ../core_l10n
   core_network:
@@ -10,7 +13,45 @@ dependency_overrides:
     path: ../core_ui
   core_utils:
     path: ../core_utils
+  data_agent:
+    path: ..\\data_agent
   data_auth:
     path: ../data_auth
+  data_help_and_doc:
+    path: ..\\data_help_and_doc
+  data_hospital:
+    path: ..\\data_hospital
+  data_invoice:
+    path: ..\\data_invoice
+  data_medical_visa:
+    path: ..\\data_medical_visa
+  data_patient:
+    path: ..\\data_patient
+  data_pre_patient:
+    path: ..\\data_pre_patient
+  data_quotation:
+    path: ..\\data_quotation
+  data_report:
+    path: ..\\data_report
+  data_sale:
+    path: ..\\data_sale
   feature_auth:
     path: ../feature_auth
+  feature_help_and_doc:
+    path: ..\\feature_help_and_doc
+  feature_hospital:
+    path: ..\\feature_hospital
+  feature_invoice:
+    path: ..\\feature_invoice
+  feature_medical_visa:
+    path: ..\\feature_medical_visa
+  feature_patient:
+    path: ..\\feature_patient
+  feature_pre_patient:
+    path: ..\\feature_pre_patient
+  feature_quotation:
+    path: ..\\feature_quotation
+  feature_report:
+    path: ..\\feature_report
+  feature_sale:
+    path: ..\\feature_sale

@@ -1,4 +1,4 @@
-name: feature_quotation
+name: base_view
 description: A new Flutter plugin project.
 version: 0.0.1-alpha.1
 publish_to: "none"
@@ -10,25 +10,44 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  base_view: 0.0.1-alpha.1
+  # Modules Util
   core_l10n: 0.0.1-alpha.1
+  core_network: 0.0.1-alpha.1
+  core_storage: 0.0.1-alpha.1
   core_ui: 0.0.1-alpha.1
   core_utils: 0.0.1-alpha.1
-  core_network: 0.0.1-alpha.1
-  feature_auth: 0.0.1-alpha.1
+
+  # Modules Data
   data_auth: 0.0.1-alpha.1
-  provider: ^6.0.5
-  get_it: ^7.6.0
-  injectable: ^2.3.0
-  auto_route: ^7.7.0
+  data_agent: 0.0.1-alpha.1
+  data_help_and_doc: 0.0.1-alpha.1
+  data_hospital: 0.0.1-alpha.1
+  data_invoice: 0.0.1-alpha.1
+  data_medical_visa: 0.0.1-alpha.1
+  data_patient: 0.0.1-alpha.1
+  data_pre_patient: 0.0.1-alpha.1
+  data_quotation: 0.0.1-alpha.1
+  data_sale: 0.0.1-alpha.1
+  data_report: 0.0.1-alpha.1
+
+  # Modules Feature
+  feature_agent: 0.0.1-alpha.1
+  feature_auth: 0.0.1-alpha.1
+  feature_help_and_doc: 0.0.1-alpha.1
+  feature_hospital: 0.0.1-alpha.1
+  feature_invoice: 0.0.1-alpha.1
+  feature_medical_visa: 0.0.1-alpha.1
+  feature_patient: 0.0.1-alpha.1
+  feature_pre_patient: 0.0.1-alpha.1
+  feature_quotation: 0.0.1-alpha.1
+  feature_report: 0.0.1-alpha.1
+  feature_sale: 0.0.1-alpha.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
-  injectable_generator: ^2.4.0
   build_runner: ^2.4.6
-  auto_route_generator: ^7.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

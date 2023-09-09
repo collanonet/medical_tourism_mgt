@@ -10,6 +10,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  base_view: 0.0.1-alpha.1
   core_l10n: 0.0.1-alpha.1
   core_ui: 0.0.1-alpha.1
   core_utils: 0.0.1-alpha.1
