@@ -1,8 +1,6 @@
 name: core_storage
 description: A new Flutter plugin project.
 version: 0.0.1-alpha.1
-publish_to: "none"
-
 
 environment:
   sdk: '>=3.1.0 <4.0.0'

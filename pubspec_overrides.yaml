@@ -16,8 +16,6 @@ dependency_overrides:
     path: modules/data_auth
   data_agent:
     path: modules/data_agent
-  data_help_and_doc:
-    path: modules/data_help_and_doc
   data_hospital:
     path: modules/data_hospital
   data_invoice:
@@ -26,20 +24,20 @@ dependency_overrides:
     path: modules/data_medical_visa
   data_patient:
     path: modules/data_patient
-  data_pre_patient:
-    path: modules/data_pre_patient
   data_quotation:
     path: modules/data_quotation
   data_sale:
     path: modules/data_sale
   data_report:
     path: modules/data_report
+  data_process_chart:
+    path: modules/data_process_chart
+  data_web_appointment:
+    path: modules/data_web_appointment
   feature_agent:
     path: modules/feature_agent
   feature_auth:
     path: modules/feature_auth
-  feature_help_and_doc:
-    path: modules/feature_help_and_doc
   feature_hospital:
     path: modules/feature_hospital
   feature_invoice:
@@ -48,11 +46,14 @@ dependency_overrides:
     path: modules/feature_medical_visa
   feature_patient:
     path: modules/feature_patient
-  feature_pre_patient:
-    path: modules/feature_pre_patient
   feature_quotation:
     path: modules/feature_quotation
   feature_report:
     path: modules/feature_report
   feature_sale:
     path: modules/feature_sale
+  feature_process_chart:
+    path: modules/feature_process_chart
+  feature_web_appointment:
+    path: modules/feature_web_appointment
+

@@ -49,25 +49,25 @@ dependencies:
   # Modules Data
   data_auth: 0.0.1-alpha.1
   data_agent: 0.0.1-alpha.1
-  data_help_and_doc: 0.0.1-alpha.1
   data_hospital: 0.0.1-alpha.1
   data_invoice: 0.0.1-alpha.1
   data_medical_visa: 0.0.1-alpha.1
   data_patient: 0.0.1-alpha.1
-  data_pre_patient: 0.0.1-alpha.1
   data_quotation: 0.0.1-alpha.1
   data_sale: 0.0.1-alpha.1
   data_report: 0.0.1-alpha.1
+  data_process_chart: 0.0.1-alpha.1
+  data_web_appointment: 0.0.1-alpha.1
 
   # Modules Feature
+  feature_process_chart: 0.0.1-alpha.1
+  feature_web_appointment: 0.0.1-alpha.1
   feature_agent: 0.0.1-alpha.1
   feature_auth: 0.0.1-alpha.1
-  feature_help_and_doc: 0.0.1-alpha.1
   feature_hospital: 0.0.1-alpha.1
   feature_invoice: 0.0.1-alpha.1
   feature_medical_visa: 0.0.1-alpha.1
   feature_patient: 0.0.1-alpha.1
-  feature_pre_patient: 0.0.1-alpha.1
   feature_quotation: 0.0.1-alpha.1
   feature_report: 0.0.1-alpha.1
   feature_sale: 0.0.1-alpha.1

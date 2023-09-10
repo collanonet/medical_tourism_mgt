@@ -28,7 +28,6 @@ class _RootAppState extends State<RootApp> {
       ..addListener(() {
         if (!app.ready) return;
         FlutterNativeSplash.remove();
-
       })
       ..initialize();
   }

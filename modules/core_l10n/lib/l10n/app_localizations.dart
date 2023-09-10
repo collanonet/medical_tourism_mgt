@@ -156,6 +156,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'アカウントを入力してください'**
   String get mgsRequireInputLogin;
+
+  /// No description provided for @labelPatient.
+  ///
+  /// In en, this message translates to:
+  /// **'患者'**
+  String get labelPatient;
+
+  /// No description provided for @labelMedicalVisaManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'医療ビザ管理'**
+  String get labelMedicalVisaManagement;
+
+  /// No description provided for @labelWebAppointment.
+  ///
+  /// In en, this message translates to:
+  /// **'Web予約'**
+  String get labelWebAppointment;
+
+  /// No description provided for @labelProcessChart.
+  ///
+  /// In en, this message translates to:
+  /// **'工程表'**
+  String get labelProcessChart;
+
+  /// No description provided for @labelHospitals.
+  ///
+  /// In en, this message translates to:
+  /// **'病院'**
+  String get labelHospitals;
+
+  /// No description provided for @labelAgents.
+  ///
+  /// In en, this message translates to:
+  /// **'エージェント'**
+  String get labelAgents;
+
+  /// No description provided for @labelQuotations.
+  ///
+  /// In en, this message translates to:
+  /// **'見積書'**
+  String get labelQuotations;
+
+  /// No description provided for @labelInvoice.
+  ///
+  /// In en, this message translates to:
+  /// **'請求書'**
+  String get labelInvoice;
+
+  /// No description provided for @labelSalesManagement.
+  ///
+  /// In en, this message translates to:
+  /// **'売上管理'**
+  String get labelSalesManagement;
+
+  /// No description provided for @labelReport.
+  ///
+  /// In en, this message translates to:
+  /// **'マスタ'**
+  String get labelReport;
+
+  /// No description provided for @labelHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'ヘルプ'**
+  String get labelHelp;
+
+  /// No description provided for @labelCenterHeadquarters.
+  ///
+  /// In en, this message translates to:
+  /// **'センター本部専用'**
+  String get labelCenterHeadquarters;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

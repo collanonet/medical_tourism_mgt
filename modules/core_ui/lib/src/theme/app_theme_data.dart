@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../extensions/context_exts.dart';
@@ -40,7 +40,7 @@ class AppThemeData {
     const primaryTextColor = Colors.black;
     const secondaryTextColor = Color(0xFF8E8E8E);
     return AppThemeData(
-      primaryBackgroundColor: CupertinoColors.systemBackground,
+      primaryBackgroundColor: const Color(0xffF0F3F5),
       secondaryBackgroundColor: Colors.white,
       primaryColor: const Color(0xFF00C6C6),
       iconColor: Colors.black,
@@ -194,6 +194,12 @@ class AppThemeData {
         brightness: brightness,
       ).copyWith(
         error: errorColor,
+      ),
+      pageTransitionsTheme: const PageTransitionsTheme(
+        builders: {
+          TargetPlatform.iOS: NoShadowCupertinoPageTransitionsBuilder(),
+          TargetPlatform.android: NoShadowCupertinoPageTransitionsBuilder(),
+        },
       ),
     );
   }

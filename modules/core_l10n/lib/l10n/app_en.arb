@@ -9,5 +9,31 @@
     "labelForgotPassword": "パスワードをお忘れの方はこちら＞",
     "mgsFieldRequired": "フィールドは必須",
     "actionLogin": "ログイン",
-    "mgsRequireInputLogin": "アカウントを入力してください"
+    "mgsRequireInputLogin": "アカウントを入力してください",
+    "labelPatient": "患者",
+    "labelMedicalVisaManagement": "医療ビザ管理",
+    "labelWebAppointment": "Web予約",
+    "labelProcessChart": "工程表",
+    "labelHospitals": "病院",
+    "labelAgents": "エージェント",
+    "labelQuotations": "見積書",
+    "labelInvoice": "請求書",
+    "labelSalesManagement": "売上管理",
+    "labelReport": "マスタ",
+    "labelHelp": "ヘルプ",
+    "labelCenterHeadquarters": "センター本部専用"
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

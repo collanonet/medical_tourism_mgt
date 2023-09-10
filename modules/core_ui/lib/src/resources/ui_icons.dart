@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 // GENERATED CODE - DO NOT MODIFY BY HAND
 // ignore_for_file: non_constant_identifier_names
 // ignore_for_file: constant_identifier_names
-@immutable
 class _UiIconsData extends IconData {
   const _UiIconsData(int codePoint, this.name)
       : super(
@@ -15,7 +14,6 @@ class _UiIconsData extends IconData {
   final String name;
 }
 
-@immutable
 class UiIcons {
   const UiIcons._();
 

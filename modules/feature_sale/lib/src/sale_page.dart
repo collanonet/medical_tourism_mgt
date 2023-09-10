@@ -1,10 +1,11 @@
 import 'package:auto_route/annotations.dart';
 import 'package:base_view/base_view.dart';
+import 'package:core_utils/routes.dart';
 import 'package:flutter/material.dart';
 
 import 'sale_screen.dart';
 
-@RoutePage()
+@RoutePage(name: Routes.salesRoute)
 class SalePage extends StatefulWidget {
   const SalePage({super.key});
 
@@ -15,6 +16,9 @@ class SalePage extends StatefulWidget {
 class _SalePageState extends State<SalePage> {
   @override
   Widget build(BuildContext context) {
-    return const SideBarMenu(page: SaleScreen());
+    return const SideBarMenu(
+      selectedIndex: 8,
+      page: SaleScreen(),
+    );
   }
 }

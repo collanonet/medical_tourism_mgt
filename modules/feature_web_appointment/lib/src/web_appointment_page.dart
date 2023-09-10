@@ -1,0 +1,24 @@
+import 'package:auto_route/annotations.dart';
+import 'package:base_view/base_view.dart';
+import 'package:core_utils/routes.dart';
+import 'package:flutter/material.dart';
+
+import 'web_appointment_screen.dart';
+
+@RoutePage(name: Routes.webAppointmentsRoute)
+class WebAppointmentPage extends StatefulWidget {
+  const WebAppointmentPage({super.key});
+
+  @override
+  State<WebAppointmentPage> createState() => _WebAppointmentPageState();
+}
+
+class _WebAppointmentPageState extends State<WebAppointmentPage> {
+  @override
+  Widget build(BuildContext context) {
+    return const SideBarMenu(
+      selectedIndex: 2,
+      page: WebAppointmentScreen(),
+    );
+  }
+}

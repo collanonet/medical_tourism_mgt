@@ -1,15 +1,15 @@
 import 'package:auto_route/auto_route.dart';
-import 'package:feature_agent/feature_agent.module.dart';
+import 'package:feature_agent/feature_agent.dart';
 import 'package:feature_auth/feature_auth.dart';
-import 'package:feature_help_and_doc/feature_help_and_doc.module.dart';
-import 'package:feature_hospital/feature_hospital.module.dart';
-import 'package:feature_invoice/feature_invoice.module.dart';
-import 'package:feature_medical_visa/feature_medical_visa.module.dart';
-import 'package:feature_patient/feature_patient.module.dart';
-import 'package:feature_pre_patient/feature_pre_patient.module.dart';
-import 'package:feature_quotation/feature_quotation.module.dart';
-import 'package:feature_report/feature_report.module.dart';
-import 'package:feature_sale/feature_sale.module.dart';
+import 'package:feature_hospital/feature_hospital.dart';
+import 'package:feature_invoice/feature_invoice.dart';
+import 'package:feature_medical_visa/feature_medical_visa.dart';
+import 'package:feature_patient/feature_patient.dart';
+import 'package:feature_process_chart/feature_process_chart.dart';
+import 'package:feature_quotation/feature_quotation.dart';
+import 'package:feature_report/feature_report.dart';
+import 'package:feature_sale/feature_sale.dart';
+import 'package:feature_web_appointment/feature_web_appointment.dart';
 import 'package:get_it/get_it.dart';
 
 import '../app/app_model.dart';
@@ -20,16 +20,16 @@ part 'app_router.gr.dart';
 @AutoRouterConfig(
   modules: [
     FeatureAuthRouterModule,
-    FeatureAgentPackageModule,
-    FeatureHelpAndDocPackageModule,
-    FeatureHospitalPackageModule,
-    FeatureInvoicePackageModule,
-    FeatureMedicalVisaPackageModule,
-    FeaturePatientPackageModule,
-    FeaturePrePatientPackageModule,
-    FeatureQuotationPackageModule,
-    FeatureReportPackageModule,
-    FeatureSalePackageModule,
+    FeatureAgentRouterModule,
+    FeatureHospitalRouterModule,
+    FeatureInvoiceRouterModule,
+    FeatureMedicalVisaRouterModule,
+    FeaturePatientRouterModule,
+    FeatureQuotationRouterModule,
+    FeatureReportRouterModule,
+    FeatureSaleRouterModule,
+    FeatureProcessChartRouterModule,
+    FeatureWebAppointmentRouterModule,
   ],
 )
 class AppRouter extends _$AppRouter implements AutoRouteGuard {
@@ -77,7 +77,17 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
   @override
   List<AutoRoute> get routes {
     return [
-      AutoRoute(page: LoginRoute.page, initial: true, path: '/'),
+      AutoRoute(page: LoginRoute.page),
+      AutoRoute(page: AgentsRoute.page),
+      AutoRoute(page: HospitalsRoute.page),
+      AutoRoute(page: InvoicesRoute.page),
+      AutoRoute(page: MedicalVisasRoute.page),
+      AutoRoute(page: PatientsRoute.page, initial: true, path: '/'),
+      AutoRoute(page: QuotationsRoute.page),
+      AutoRoute(page: ReportsRoute.page),
+      AutoRoute(page: SalesRoute.page),
+      AutoRoute(page: ProcessChartsRoute.page),
+      AutoRoute(page: WebAppointmentsRoute.page),
       RedirectRoute(path: '*', redirectTo: '/')
     ];
   }
