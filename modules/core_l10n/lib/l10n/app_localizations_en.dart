@@ -72,4 +72,40 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get labelCenterHeadquarters => 'センター本部専用';
+
+  @override
+  String get labelPatientSearch => '患者検索';
+
+  @override
+  String get labelPatientName => '患者氏名';
+
+  @override
+  String get labelAgentCompanyName => 'エージェント会社名';
+
+  @override
+  String get labelHospitalName => '病院名';
+
+  @override
+  String get labelClassification => '種別';
+
+  @override
+  String get labelSalesRepresentative => '営業担当者';
+
+  @override
+  String get labelEntryDateFrom => '入国日（自）';
+
+  @override
+  String get labelEntryDateTo => '入国日（至）';
+
+  @override
+  String get labelExaminationDateFrom => '受診日（自）';
+
+  @override
+  String get labelExaminationDateTo => '受診日（至）';
+
+  @override
+  String get labelReturnDateFrom => '帰国日（自）';
+
+  @override
+  String get labelReturnDateTo => '帰国日（至）';
 }

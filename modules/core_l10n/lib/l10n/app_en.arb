@@ -21,19 +21,19 @@
     "labelSalesManagement": "売上管理",
     "labelReport": "マスタ",
     "labelHelp": "ヘルプ",
-    "labelCenterHeadquarters": "センター本部専用"
+    "labelCenterHeadquarters": "センター本部専用",
+    "labelPatientSearch": "患者検索",
+    "labelPatientName": "患者氏名",
+    "labelAgentCompanyName": "エージェント会社名",
+    "labelHospitalName": "病院名",
+    "labelClassification": "種別",
+    "labelSalesRepresentative": "営業担当者",
+    "labelEntryDateFrom": "入国日（自）",
+    "labelEntryDateTo": "入国日（至）",
+    "labelExaminationDateFrom": "受診日（自）",
+    "labelExaminationDateTo": "受診日（至）",
+    "labelReturnDateFrom": "帰国日（自）",
+    "labelReturnDateTo": "帰国日（至）",
+    "actionClear": "クリア",
+    "actionSearch": "検索"
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

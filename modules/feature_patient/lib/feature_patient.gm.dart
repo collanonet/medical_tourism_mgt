@@ -9,7 +9,7 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i2;
-import 'package:feature_patient/src/patient_page.dart' as _i1;
+import 'package:feature_patient/src/patient/patient_page.dart' as _i1;
 
 abstract class $FeaturePatientRouterModule extends _i2.AutoRouterModule {
   @override

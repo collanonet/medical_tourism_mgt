@@ -228,6 +228,78 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'センター本部専用'**
   String get labelCenterHeadquarters;
+
+  /// No description provided for @labelPatientSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'患者検索'**
+  String get labelPatientSearch;
+
+  /// No description provided for @labelPatientName.
+  ///
+  /// In en, this message translates to:
+  /// **'患者氏名'**
+  String get labelPatientName;
+
+  /// No description provided for @labelAgentCompanyName.
+  ///
+  /// In en, this message translates to:
+  /// **'エージェント会社名'**
+  String get labelAgentCompanyName;
+
+  /// No description provided for @labelHospitalName.
+  ///
+  /// In en, this message translates to:
+  /// **'病院名'**
+  String get labelHospitalName;
+
+  /// No description provided for @labelClassification.
+  ///
+  /// In en, this message translates to:
+  /// **'種別'**
+  String get labelClassification;
+
+  /// No description provided for @labelSalesRepresentative.
+  ///
+  /// In en, this message translates to:
+  /// **'営業担当者'**
+  String get labelSalesRepresentative;
+
+  /// No description provided for @labelEntryDateFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'入国日（自）'**
+  String get labelEntryDateFrom;
+
+  /// No description provided for @labelEntryDateTo.
+  ///
+  /// In en, this message translates to:
+  /// **'入国日（至）'**
+  String get labelEntryDateTo;
+
+  /// No description provided for @labelExaminationDateFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'受診日（自）'**
+  String get labelExaminationDateFrom;
+
+  /// No description provided for @labelExaminationDateTo.
+  ///
+  /// In en, this message translates to:
+  /// **'受診日（至）'**
+  String get labelExaminationDateTo;
+
+  /// No description provided for @labelReturnDateFrom.
+  ///
+  /// In en, this message translates to:
+  /// **'帰国日（自）'**
+  String get labelReturnDateFrom;
+
+  /// No description provided for @labelReturnDateTo.
+  ///
+  /// In en, this message translates to:
+  /// **'帰国日（至）'**
+  String get labelReturnDateTo;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

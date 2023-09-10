@@ -198,7 +198,7 @@ class AppThemeData {
       pageTransitionsTheme: const PageTransitionsTheme(
         builders: {
           TargetPlatform.iOS: NoShadowCupertinoPageTransitionsBuilder(),
-          TargetPlatform.android: NoShadowCupertinoPageTransitionsBuilder(),
+          TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
         },
       ),
     );

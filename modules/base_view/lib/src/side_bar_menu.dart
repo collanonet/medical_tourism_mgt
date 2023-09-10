@@ -8,7 +8,7 @@ import 'package:core_ui/core_ui.dart';
 class SideBarMenu extends StatefulWidget {
   const SideBarMenu({
     super.key,
-    this.selectedIndex = 0,
+    required this.selectedIndex,
     required this.page,
   });
 
@@ -130,9 +130,7 @@ class _SideBarMenuState extends State<SideBarMenu> {
                                       ),
                                     ),
                                     selected: widget.selectedIndex == index,
-                                    onTap: widget.selectedIndex == index
-                                        ? null
-                                        : () => context.replaceRoute(
+                                    onTap: () => context.replaceRoute(
                                               PageRouteInfo(menus[index].route),
                                             ),
                                     hoverColor: Colors.transparent,

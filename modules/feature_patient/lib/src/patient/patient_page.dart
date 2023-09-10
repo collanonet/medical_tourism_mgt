@@ -1,8 +1,12 @@
 import 'package:auto_route/annotations.dart';
 import 'package:base_view/base_view.dart';
 import 'package:core_utils/routes.dart';
-import 'package:feature_patient/src/patient_screen.dart';
+import 'package:feature_patient/src/patient_model.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
+
+import 'patient_screen.dart';
 
 @RoutePage(name: Routes.patientsRoute)
 class PatientPage extends StatefulWidget {
@@ -15,9 +19,12 @@ class PatientPage extends StatefulWidget {
 class _PatientPageState extends State<PatientPage> {
   @override
   Widget build(BuildContext context) {
-    return const SideBarMenu(
-      selectedIndex: 0,
-      page: PatientScreen(),
+    return ChangeNotifierProvider(
+      create: (context) => GetIt.I<PatientModel>(),
+      child: const SideBarMenu(
+        selectedIndex: 0,
+        page: PatientScreen(),
+      ),
     );
   }
 }
