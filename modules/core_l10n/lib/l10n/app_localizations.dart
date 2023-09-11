@@ -300,6 +300,108 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'帰国日（至）'**
   String get labelReturnDateTo;
+
+  /// No description provided for @actionClear.
+  ///
+  /// In en, this message translates to:
+  /// **'クリア'**
+  String get actionClear;
+
+  /// No description provided for @actionSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'検索'**
+  String get actionSearch;
+
+  /// No description provided for @actionListOfPreMembers.
+  ///
+  /// In en, this message translates to:
+  /// **'プレ会員一覧'**
+  String get actionListOfPreMembers;
+
+  /// No description provided for @actionNewRegistration.
+  ///
+  /// In en, this message translates to:
+  /// **'新規登録'**
+  String get actionNewRegistration;
+
+  /// No description provided for @labelOrdersOnly.
+  ///
+  /// In en, this message translates to:
+  /// **'受注のみ'**
+  String get labelOrdersOnly;
+
+  /// No description provided for @labelAll.
+  ///
+  /// In en, this message translates to:
+  /// **'すべて'**
+  String get labelAll;
+
+  /// No description provided for @labelCXL.
+  ///
+  /// In en, this message translates to:
+  /// **'CXL'**
+  String get labelCXL;
+
+  /// No description provided for @labelAgentName.
+  ///
+  /// In en, this message translates to:
+  /// **'エージェント名'**
+  String get labelAgentName;
+
+  /// No description provided for @labelAgent.
+  ///
+  /// In en, this message translates to:
+  /// **'エージェント'**
+  String get labelAgent;
+
+  /// No description provided for @labelDateOfBirth.
+  ///
+  /// In en, this message translates to:
+  /// **'生年月日'**
+  String get labelDateOfBirth;
+
+  /// No description provided for @labelGender.
+  ///
+  /// In en, this message translates to:
+  /// **'性別'**
+  String get labelGender;
+
+  /// No description provided for @labelNationality.
+  ///
+  /// In en, this message translates to:
+  /// **'国籍'**
+  String get labelNationality;
+
+  /// No description provided for @labelNameOfaDisease.
+  ///
+  /// In en, this message translates to:
+  /// **'病名'**
+  String get labelNameOfaDisease;
+
+  /// No description provided for @labelWeChatPrePatientSearch.
+  ///
+  /// In en, this message translates to:
+  /// **'WeChatプレ患者検索'**
+  String get labelWeChatPrePatientSearch;
+
+  /// No description provided for @actionGoToRegister.
+  ///
+  /// In en, this message translates to:
+  /// **'本登録へ'**
+  String get actionGoToRegister;
+
+  /// No description provided for @actionDelete.
+  ///
+  /// In en, this message translates to:
+  /// **'削除する'**
+  String get actionDelete;
+
+  /// No description provided for @actionDeleted.
+  ///
+  /// In en, this message translates to:
+  /// **'削除済み'**
+  String get actionDeleted;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

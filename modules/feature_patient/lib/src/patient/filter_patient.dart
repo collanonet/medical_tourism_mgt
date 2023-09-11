@@ -1,5 +1,7 @@
 import 'package:core_l10n/l10n.dart';
+import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -12,10 +14,11 @@ class PatientFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<PatientModel>(builder: (context, model, child) {
-      return ReactiveFormConfig(
-        validationMessages: validationMessagesLogin(context),
-        child: ReactiveFormBuilder(
+    return Consumer<PatientModel>(
+      builder: (context, model, child) {
+        return ReactiveFormConfig(
+          validationMessages: validationMessagesFilterPatient(context),
+          child: ReactiveFormBuilder(
             form: () => formFilterPatient(),
             builder: (context, formGroup, child) {
               return Container(
@@ -28,10 +31,15 @@ class PatientFilter extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(context.l10n.labelPatientSearch),
+                    Text(
+                      context.l10n.labelPatientSearch,
+                      style: context.textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 16),
                     Row(
                       children: [
                         Expanded(
+                          flex: 4,
                           child: ReactiveTextFormField(
                             formControlName: 'patient_name',
                             decoration: InputDecoration(
@@ -41,33 +49,263 @@ class PatientFilter extends StatelessWidget {
                             ),
                           ),
                         ),
+                        const SizedBox(width: 16),
                         Expanded(
+                          flex: 4,
                           child: ReactiveTextFormField(
-                            formControlName: 'patient_name',
+                            formControlName: 'agent_company_name',
                             decoration: InputDecoration(
                               label: Text(
-                                context.l10n.labelPatientName,
+                                context.l10n.labelAgentCompanyName,
                               ),
                             ),
                           ),
                         ),
+                        const SizedBox(width: 16),
                         Expanded(
+                          flex: 4,
                           child: ReactiveTextFormField(
-                            formControlName: 'patient_name',
+                            formControlName: 'hospital_name',
                             decoration: InputDecoration(
                               label: Text(
-                                context.l10n.labelPatientName,
+                                context.l10n.labelHospitalName,
                               ),
                             ),
                           ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 4,
+                          child: ReactiveTextFormField(
+                            formControlName: 'classification',
+                            decoration: InputDecoration(
+                              label: Text(
+                                context.l10n.labelClassification,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          flex: 4,
+                          child: ReactiveTextFormField(
+                            formControlName: 'sales_representative',
+                            decoration: InputDecoration(
+                              label: Text(
+                                context.l10n.labelSalesRepresentative,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        const Spacer(flex: 4)
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 4,
+                          child: ReactiveDatePicker(
+                            formControlName: 'entry_date_from',
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(3000),
+                            builder: (BuildContext context,
+                                ReactiveDatePickerDelegate<dynamic> picker,
+                                Widget? child) {
+                              return ReactiveTextFormField(
+                                formControlName: 'entry_date_from',
+                                readOnly: true,
+                                onTap: (value) => picker.showPicker(),
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    context.l10n.labelEntryDateFrom,
+                                  ),
+                                  suffixIcon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 4),
+                          child: Text('〜'),
+                        ),
+                        Expanded(
+                          flex: 4,
+                          child: ReactiveDatePicker(
+                            formControlName: 'entry_date_to',
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(3000),
+                            builder: (BuildContext context,
+                                ReactiveDatePickerDelegate<dynamic> picker,
+                                Widget? child) {
+                              return ReactiveTextFormField(
+                                formControlName: 'entry_date_to',
+                                readOnly: true,
+                                onTap: (value) => picker.showPicker(),
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    context.l10n.labelEntryDateTo,
+                                  ),
+                                  suffixIcon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          flex: 4,
+                          child: ReactiveDatePicker(
+                            formControlName: 'examination_date_from',
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(3000),
+                            builder: (BuildContext context,
+                                ReactiveDatePickerDelegate<dynamic> picker,
+                                Widget? child) {
+                              return ReactiveTextFormField(
+                                formControlName: 'examination_date_from',
+                                readOnly: true,
+                                onTap: (value) => picker.showPicker(),
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    context.l10n.labelExaminationDateFrom,
+                                  ),
+                                  suffixIcon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 4),
+                          child: Text('〜'),
+                        ),
+                        Expanded(
+                          flex: 4,
+                          child: ReactiveDatePicker(
+                            formControlName: 'examination_date_to',
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(3000),
+                            builder: (BuildContext context,
+                                ReactiveDatePickerDelegate<dynamic> picker,
+                                Widget? child) {
+                              return ReactiveTextFormField(
+                                formControlName: 'examination_date_to',
+                                readOnly: true,
+                                onTap: (value) => picker.showPicker(),
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    context.l10n.labelExaminationDateTo,
+                                  ),
+                                  suffixIcon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          flex: 4,
+                          child: ReactiveDatePicker(
+                            formControlName: 'return_date_from',
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(3000),
+                            builder: (BuildContext context,
+                                ReactiveDatePickerDelegate<dynamic> picker,
+                                Widget? child) {
+                              return ReactiveTextFormField(
+                                formControlName: 'return_date_from',
+                                readOnly: true,
+                                onTap: (value) => picker.showPicker(),
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    context.l10n.labelReturnDateFrom,
+                                  ),
+                                  suffixIcon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.symmetric(horizontal: 4),
+                          child: Text('〜'),
+                        ),
+                        Expanded(
+                          flex: 4,
+                          child: ReactiveDatePicker(
+                            formControlName: 'return_date_to',
+                            firstDate: DateTime(2000),
+                            lastDate: DateTime(3000),
+                            builder: (BuildContext context,
+                                ReactiveDatePickerDelegate<dynamic> picker,
+                                Widget? child) {
+                              return ReactiveTextFormField(
+                                formControlName: 'return_date_to',
+                                readOnly: true,
+                                onTap: (value) => picker.showPicker(),
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    context.l10n.labelReturnDateTo,
+                                  ),
+                                  suffixIcon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        OutlinedButton(
+                          onPressed: () {
+                            formGroup.reset();
+                          },
+                          child: Text(
+                            context.l10n.actionClear,
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        FilledButton(
+                          onPressed: () {},
+                          child: Text(context.l10n.actionSearch),
                         ),
                       ],
                     )
                   ],
                 ),
               );
-            }),
-      );
-    });
+            },
+          ),
+        );
+      },
+    );
   }
 }

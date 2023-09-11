@@ -40,7 +40,7 @@ FormGroup formFilterPatient() => FormGroup(
       },
     );
 
-Map<String, String Function(Object)> validationMessagesLogin(
+Map<String, String Function(Object)> validationMessagesFilterPatient(
   BuildContext context,
 ) =>
     {

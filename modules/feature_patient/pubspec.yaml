@@ -22,6 +22,7 @@ dependencies:
   injectable: ^2.3.0
   auto_route: ^7.7.0
   reactive_forms: ^14.3.0
+  data_table_2: ^2.5.8
 
 dev_dependencies:
   flutter_test:

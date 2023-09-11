@@ -81,7 +81,7 @@ class _SideBarMenuState extends State<SideBarMenu> {
                 ),
               ),
               Container(
-                width: 230,
+                width: 216,
                 margin: const EdgeInsets.fromLTRB(16, 16, 0, 16),
                 decoration: BoxDecoration(
                   color: Colors.transparent,
@@ -131,8 +131,8 @@ class _SideBarMenuState extends State<SideBarMenu> {
                                     ),
                                     selected: widget.selectedIndex == index,
                                     onTap: () => context.replaceRoute(
-                                              PageRouteInfo(menus[index].route),
-                                            ),
+                                      PageRouteInfo(menus[index].route),
+                                    ),
                                     hoverColor: Colors.transparent,
                                     tileColor: Colors.transparent,
                                     focusColor: Colors.transparent,
@@ -210,9 +210,9 @@ class ArrowBackgroundPainter extends CustomPainter {
 
     final path = Path()
       ..moveTo(0, 0)
-      ..lineTo(size.width - 30, 0)
+      ..lineTo(size.width - 16, 0)
       ..lineTo(size.width, size.height / 2)
-      ..lineTo(size.width - 30, size.height)
+      ..lineTo(size.width - 16, size.height)
       ..lineTo(0, size.height)
       ..close();
 

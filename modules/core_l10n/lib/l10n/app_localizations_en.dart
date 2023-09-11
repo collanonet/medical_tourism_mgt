@@ -108,4 +108,55 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get labelReturnDateTo => '帰国日（至）';
+
+  @override
+  String get actionClear => 'クリア';
+
+  @override
+  String get actionSearch => '検索';
+
+  @override
+  String get actionListOfPreMembers => 'プレ会員一覧';
+
+  @override
+  String get actionNewRegistration => '新規登録';
+
+  @override
+  String get labelOrdersOnly => '受注のみ';
+
+  @override
+  String get labelAll => 'すべて';
+
+  @override
+  String get labelCXL => 'CXL';
+
+  @override
+  String get labelAgentName => 'エージェント名';
+
+  @override
+  String get labelAgent => 'エージェント';
+
+  @override
+  String get labelDateOfBirth => '生年月日';
+
+  @override
+  String get labelGender => '性別';
+
+  @override
+  String get labelNationality => '国籍';
+
+  @override
+  String get labelNameOfaDisease => '病名';
+
+  @override
+  String get labelWeChatPrePatientSearch => 'WeChatプレ患者検索';
+
+  @override
+  String get actionGoToRegister => '本登録へ';
+
+  @override
+  String get actionDelete => '削除する';
+
+  @override
+  String get actionDeleted => '削除済み';
 }

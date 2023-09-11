@@ -35,5 +35,20 @@
     "labelReturnDateFrom": "帰国日（自）",
     "labelReturnDateTo": "帰国日（至）",
     "actionClear": "クリア",
-    "actionSearch": "検索"
+    "actionSearch": "検索",
+    "actionListOfPreMembers": "プレ会員一覧",
+    "actionNewRegistration": "新規登録",
+    "labelOrdersOnly": "受注のみ",
+    "labelAll": "すべて",
+    "labelCXL": "CXL",
+    "labelAgentName": "エージェント名",
+    "labelAgent": "エージェント",
+    "labelDateOfBirth": "生年月日",
+    "labelGender": "性別",
+    "labelNationality": "国籍",
+    "labelNameOfaDisease": "病名",
+    "labelWeChatPrePatientSearch": "WeChatプレ患者検索",
+    "actionGoToRegister": "本登録へ",
+    "actionDelete": "削除する",
+    "actionDeleted": "削除済み"
 }

@@ -123,13 +123,6 @@ class AppThemeData {
         style: ElevatedButton.styleFrom(
             backgroundColor: primaryColor,
             shadowColor: const Color.fromRGBO(230, 172, 13, 0.2),
-            padding: EdgeInsets.symmetric(
-              vertical: spacing.buttonVertical,
-              horizontal: spacing.buttonHorizontal,
-            ),
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(spacing.borderRadiusMedium),
-            ),
             disabledForegroundColor: Colors.black),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -138,33 +131,20 @@ class AppThemeData {
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
           backgroundColor: primaryColor,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
-          ),
           foregroundColor: Colors.white,
           enableFeedback: true,
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: spacing.buttonVertical),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
-          ),
           side: BorderSide(width: 2, color: primaryColor),
-          foregroundColor: typography.bodyTextColor,
+          foregroundColor: primaryColor,
+
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           iconColor: primaryColor,
-          padding: EdgeInsets.symmetric(
-            vertical: spacing.buttonVertical,
-            horizontal: spacing.buttonHorizontal,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
-          ),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(

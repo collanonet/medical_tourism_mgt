@@ -36,6 +36,8 @@ abstract class AppModule {
         InvoicesRoute.name: [PermissionRole.guest],
         // MedicalVisasRoute.name: [PermissionRole.user],
         MedicalVisasRoute.name: [PermissionRole.guest],
+        // PrePatientRoute.name: [PermissionRole.user],
+        PrePatientRoute.name: [PermissionRole.guest],
         PatientsRoute.name: [PermissionRole.guest],
         // PatientsRoute.name: [PermissionRole.user],
         // QuotationsRoute.name: [PermissionRole.user],
