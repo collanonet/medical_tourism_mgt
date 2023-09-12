@@ -24,7 +24,7 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
         Expanded(
           child: Container(
             margin: const EdgeInsets.only(top: 16),
-            padding: const EdgeInsets.fromLTRB(16,0,16,16),
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.circular(16),

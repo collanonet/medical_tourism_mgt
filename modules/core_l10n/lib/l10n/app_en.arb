@@ -50,5 +50,14 @@
     "labelWeChatPrePatientSearch": "WeChatプレ患者検索",
     "actionGoToRegister": "本登録へ",
     "actionDelete": "削除する",
-    "actionDeleted": "削除済み"
+    "actionDeleted": "削除済み",
+    "labelProgress": "進捗",
+    "labelCaseNumber": "案件番号",
+    "labelEntryDate": "入国日",
+    "labelExaminationDate": "診療日",
+    "labelReturnDate": "帰国日",
+    "labelSale": "営業",
+    "labelStaffName": "業務",
+    "labelAdmittedToHospital": "受入病院",
+    "labelNumberOfGroupMembers": "グループ人数"
 }

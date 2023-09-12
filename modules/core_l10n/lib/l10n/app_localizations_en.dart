@@ -159,4 +159,31 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get actionDeleted => '削除済み';
+
+  @override
+  String get labelProgress => '進捗';
+
+  @override
+  String get labelCaseNumber => '案件番号';
+
+  @override
+  String get labelEntryDate => '入国日';
+
+  @override
+  String get labelExaminationDate => '診療日';
+
+  @override
+  String get labelReturnDate => '帰国日';
+
+  @override
+  String get labelSale => '営業';
+
+  @override
+  String get labelStaffName => '業務';
+
+  @override
+  String get labelAdmittedToHospital => '受入病院';
+
+  @override
+  String get labelNumberOfGroupMembers => 'グループ人数';
 }

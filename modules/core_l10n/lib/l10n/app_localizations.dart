@@ -402,6 +402,60 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'削除済み'**
   String get actionDeleted;
+
+  /// No description provided for @labelProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'進捗'**
+  String get labelProgress;
+
+  /// No description provided for @labelCaseNumber.
+  ///
+  /// In en, this message translates to:
+  /// **'案件番号'**
+  String get labelCaseNumber;
+
+  /// No description provided for @labelEntryDate.
+  ///
+  /// In en, this message translates to:
+  /// **'入国日'**
+  String get labelEntryDate;
+
+  /// No description provided for @labelExaminationDate.
+  ///
+  /// In en, this message translates to:
+  /// **'診療日'**
+  String get labelExaminationDate;
+
+  /// No description provided for @labelReturnDate.
+  ///
+  /// In en, this message translates to:
+  /// **'帰国日'**
+  String get labelReturnDate;
+
+  /// No description provided for @labelSale.
+  ///
+  /// In en, this message translates to:
+  /// **'営業'**
+  String get labelSale;
+
+  /// No description provided for @labelStaffName.
+  ///
+  /// In en, this message translates to:
+  /// **'業務'**
+  String get labelStaffName;
+
+  /// No description provided for @labelAdmittedToHospital.
+  ///
+  /// In en, this message translates to:
+  /// **'受入病院'**
+  String get labelAdmittedToHospital;
+
+  /// No description provided for @labelNumberOfGroupMembers.
+  ///
+  /// In en, this message translates to:
+  /// **'グループ人数'**
+  String get labelNumberOfGroupMembers;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
