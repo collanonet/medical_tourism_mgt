@@ -77,19 +77,19 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
   @override
   List<AutoRoute> get routes {
     return [
-      AutoRoute(page: LoginRoute.page),
-      AutoRoute(page: AgentsRoute.page),
-      AutoRoute(page: HospitalsRoute.page),
-      AutoRoute(page: InvoicesRoute.page),
-      AutoRoute(page: MedicalVisasRoute.page),
-      AutoRoute(page: PatientsRoute.page, initial: true, path: '/'),
-      AutoRoute(page: PrePatientRoute.page),
-      AutoRoute(page: QuotationsRoute.page),
-      AutoRoute(page: ReportsRoute.page),
-      AutoRoute(page: SalesRoute.page),
-      AutoRoute(page: ProcessChartsRoute.page),
-      AutoRoute(page: WebAppointmentsRoute.page),
-      RedirectRoute(path: '*', redirectTo: '/')
+      AutoRoute(page: LoginRoute.page, path: '/login'),
+      AutoRoute(page: AgentsRoute.page, path: '/agents'),
+      AutoRoute(page: HospitalsRoute.page, path: '/hospitals'),
+      AutoRoute(page: InvoicesRoute.page, path: '/invoices'),
+      AutoRoute(page: MedicalVisasRoute.page, path: '/medical-visa'),
+      AutoRoute(page: PatientsRoute.page, initial: true, path: '/patients'),
+      AutoRoute(page: PrePatientRoute.page, path: '/pre-patients'),
+      AutoRoute(page: QuotationsRoute.page, path: '/quotations'),
+      AutoRoute(page: ReportsRoute.page, path: '/reports'),
+      AutoRoute(page: SalesRoute.page, path: '/sales'),
+      AutoRoute(page: ProcessChartsRoute.page, path: '/precess-charts'),
+      AutoRoute(page: WebAppointmentsRoute.page, path: '/web-appointments'),
+      RedirectRoute(path: '*', redirectTo: '/patients')
     ];
   }
 }
