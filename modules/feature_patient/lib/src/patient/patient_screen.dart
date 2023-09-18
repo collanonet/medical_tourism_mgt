@@ -104,7 +104,6 @@ class _PatientScreenState extends State<PatientScreen> {
         ),
         Expanded(
           child: Container(
-            margin: const EdgeInsets.only(top: 16),
             padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
             decoration: BoxDecoration(
               color: Colors.white,
@@ -193,19 +192,22 @@ class _PatientScreenState extends State<PatientScreen> {
                       index % 2 != 0 ? Colors.white : const Color(0xffEDF8F8)),
                   cells: [
                     DataCell(
-                      Container(
-                        height: 60,
-                        width: 60,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(4),
-                          color: Colors.grey.shade400,
-                        ),
-                        child: const Icon(
-                          Icons.person,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
+                        Container(
+                          height: 60,
+                          width: 60,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(4),
+                            color: Colors.grey.shade400,
+                          ),
+                          child: const Icon(
+                            Icons.person,
+                            color: Colors.white,
+                          ),
+                        ), onTap: () {
+                      context.pushRoute(
+                        const DetailPatientRoute(),
+                      );
+                    }),
                     DataCell(
                       Column(
                         mainAxisSize: MainAxisSize.min,

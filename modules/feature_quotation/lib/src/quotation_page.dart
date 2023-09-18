@@ -15,7 +15,7 @@ class QuotationPage extends StatefulWidget {
 class _QuotationPageState extends State<QuotationPage> {
   @override
   Widget build(BuildContext context) {
-    return const SideBarMenu(
+    return const LayoutView(
       selectedIndex: 6,
       page: QuotationScreen(),
     );

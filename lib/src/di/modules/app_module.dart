@@ -39,6 +39,8 @@ abstract class AppModule {
         // PrePatientRoute.name: [PermissionRole.user],
         PrePatientRoute.name: [PermissionRole.guest],
         PatientsRoute.name: [PermissionRole.guest],
+        DetailPatientRoute.name: [PermissionRole.guest],
+        // DetailPatientRoute.name: [PermissionRole.user],
         // PatientsRoute.name: [PermissionRole.user],
         // QuotationsRoute.name: [PermissionRole.user],
         QuotationsRoute.name: [PermissionRole.guest],

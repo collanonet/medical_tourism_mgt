@@ -3,3 +3,4 @@ export 'src/widgets/app_body.dart';
 export 'src/widgets/reactive_text_form_field.dart';
 export 'src/widgets/column_separated.dart';
 export 'src/widgets/snack_bar_info.dart';
+export 'src/widgets/tab_bar_widget.dart';

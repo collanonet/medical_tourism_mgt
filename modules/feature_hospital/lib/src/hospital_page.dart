@@ -15,7 +15,7 @@ class HospitalPage extends StatefulWidget {
 class _HospitalPageState extends State<HospitalPage> {
   @override
   Widget build(BuildContext context) {
-    return const SideBarMenu(
+    return const LayoutView(
       selectedIndex: 4,
       page: HospitalScreen(),
     );

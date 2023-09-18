@@ -21,7 +21,7 @@ class _PatientPageState extends State<PatientPage> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => GetIt.I<PatientModel>(),
-      child: const SideBarMenu(
+      child: const LayoutView(
         selectedIndex: 0,
         page: PatientScreen(),
       ),
