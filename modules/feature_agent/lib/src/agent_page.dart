@@ -11,7 +11,7 @@ class AgentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const SideBarMenu(
+    return const LayoutView(
       selectedIndex: 5,
       page: AgentScreen(),
     );

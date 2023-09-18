@@ -5,21 +5,14 @@ import 'package:core_utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:core_ui/core_ui.dart';
 
-class SideBarMenu extends StatefulWidget {
+class SideBarMenu extends StatelessWidget {
   const SideBarMenu({
     super.key,
     required this.selectedIndex,
-    required this.page,
   });
 
   final int selectedIndex;
-  final Widget page;
 
-  @override
-  State<SideBarMenu> createState() => _SideBarMenuState();
-}
-
-class _SideBarMenuState extends State<SideBarMenu> {
   @override
   Widget build(BuildContext context) {
     List<Menu> menus = [
@@ -65,124 +58,108 @@ class _SideBarMenuState extends State<SideBarMenu> {
       ),
     ];
 
-    return Scaffold(
-      backgroundColor: context.appTheme.primaryBackgroundColor,
-      body: Row(
-        children: [
-          // Sidebar
-          Stack(
+    return Stack(
+      children: [
+        Container(
+          width: 200,
+          margin: const EdgeInsets.fromLTRB(16, 16, 0, 16),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(16),
+          ),
+        ),
+        Container(
+          width: 216,
+          margin: const EdgeInsets.fromLTRB(16, 16, 0, 16),
+          decoration: BoxDecoration(
+            color: Colors.transparent,
+            borderRadius: BorderRadius.circular(16),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                width: 200,
-                margin: const EdgeInsets.fromLTRB(16, 16, 0, 16),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-              ),
-              Container(
-                width: 216,
-                margin: const EdgeInsets.fromLTRB(16, 16, 0, 16),
-                decoration: BoxDecoration(
-                  color: Colors.transparent,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Align(
-                              alignment: Alignment.centerLeft,
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 16,
-                                  vertical: 32,
-                                ),
-                                child: Image.asset(
-                                  Images.logoMadical,
-                                  package: 'core_ui',
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Align(
+                        alignment: Alignment.centerLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 32,
+                          ),
+                          child: Image.asset(
+                            Images.logoMadical,
+                            package: 'core_ui',
+                          ),
+                        ),
+                      ),
+                      ListView.builder(
+                        itemCount: menus.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return CustomPaint(
+                            painter: selectedIndex == index
+                                ? ArrowBackgroundPainter()
+                                : null,
+                            child: ListTile(
+                              dense: true,
+                              title: Text(
+                                menus[index].title,
+                                style: context.textTheme.titleMedium?.copyWith(
+                                  color: selectedIndex == index
+                                      ? Colors.white
+                                      : context.appTheme.primaryColor,
                                 ),
                               ),
+                              selected: selectedIndex == index,
+                              onTap: () => context.replaceRoute(
+                                PageRouteInfo(menus[index].route),
+                              ),
+                              hoverColor: Colors.transparent,
+                              tileColor: Colors.transparent,
+                              focusColor: Colors.transparent,
+                              splashColor: Colors.transparent,
+                              enableFeedback: false,
                             ),
-                            ListView.builder(
-                              itemCount: menus.length,
-                              shrinkWrap: true,
-                              physics: const NeverScrollableScrollPhysics(),
-                              itemBuilder: (context, index) {
-                                return CustomPaint(
-                                  painter: widget.selectedIndex == index
-                                      ? ArrowBackgroundPainter()
-                                      : null,
-                                  child: ListTile(
-                                    dense: true,
-                                    title: Text(
-                                      menus[index].title,
-                                      style: context.textTheme.titleMedium
-                                          ?.copyWith(
-                                        color: widget.selectedIndex == index
-                                            ? Colors.white
-                                            : context.appTheme.primaryColor,
-                                      ),
-                                    ),
-                                    selected: widget.selectedIndex == index,
-                                    onTap: () => context.replaceRoute(
-                                      PageRouteInfo(menus[index].route),
-                                    ),
-                                    hoverColor: Colors.transparent,
-                                    tileColor: Colors.transparent,
-                                    focusColor: Colors.transparent,
-                                    splashColor: Colors.transparent,
-                                    enableFeedback: false,
-                                  ),
-                                );
-                              },
-                            ),
-                          ],
-                        ),
+                          );
+                        },
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: TextButton(
-                        onPressed: () {},
-                        style: const ButtonStyle(
-                          padding: MaterialStatePropertyAll(EdgeInsets.zero),
-                        ),
-                        child: Text(
-                          context.l10n.labelHelp,
-                          style: const TextStyle(color: Colors.black),
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(16.0, 2, 16, 16),
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        child: Text(
-                          context.l10n.labelCenterHeadquarters,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
+                child: TextButton(
+                  onPressed: () {},
+                  style: const ButtonStyle(
+                    padding: MaterialStatePropertyAll(EdgeInsets.zero),
+                  ),
+                  child: Text(
+                    context.l10n.labelHelp,
+                    style: const TextStyle(color: Colors.black),
+                  ),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 2, 16, 16),
+                child: ElevatedButton(
+                  onPressed: () {},
+                  child: Text(
+                    context.l10n.labelCenterHeadquarters,
+                    style: const TextStyle(color: Colors.white),
+                  ),
                 ),
               ),
             ],
           ),
-          // Main content
-          Expanded(
-            child: Container(
-              padding: const EdgeInsets.all(16),
-              child: widget.page,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

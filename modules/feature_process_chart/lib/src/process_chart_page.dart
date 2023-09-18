@@ -16,7 +16,7 @@ class ProcessChartPage extends StatefulWidget {
 class _ProcessChartPageState extends State<ProcessChartPage> {
   @override
   Widget build(BuildContext context) {
-    return const SideBarMenu(
+    return const LayoutView(
       selectedIndex: 3,
       page: ProcessChartScreen(),
     );

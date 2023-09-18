@@ -20,7 +20,7 @@ class _PrePatientPageState extends State<PrePatientPage> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => GetIt.I<PatientModel>(),
-      child: const SideBarMenu(
+      child: const LayoutView(
         selectedIndex: 0,
         page: PrePatientScreen(),
       ),
