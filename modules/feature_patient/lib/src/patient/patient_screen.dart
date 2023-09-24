@@ -110,8 +110,8 @@ class _PatientScreenState extends State<PatientScreen> {
               borderRadius: BorderRadius.circular(16),
             ),
             child: DataTable2(
-              columnSpacing: 4,
-              horizontalMargin: 16,
+              columnSpacing: 2,
+              horizontalMargin: 8,
               minWidth: 450,
               dataRowHeight: 70,
               isVerticalScrollBarVisible: true,
@@ -129,11 +129,11 @@ class _PatientScreenState extends State<PatientScreen> {
                   label: SizedBox(),
                 ),
                 DataColumn2(
-                  fixedWidth: 150,
+                  fixedWidth: 100,
                   label: Text(context.l10n.labelPatient),
                 ),
                 DataColumn2(
-                  fixedWidth: 150,
+                  fixedWidth: 100,
                   label: Text(context.l10n.labelAgent),
                 ),
                 DataColumn2(
@@ -145,7 +145,7 @@ class _PatientScreenState extends State<PatientScreen> {
                   label: Text(context.l10n.labelCaseNumber),
                 ),
                 DataColumn2(
-                  fixedWidth: 150,
+                  fixedWidth: 100,
                   label: Text(context.l10n.labelClassification),
                 ),
                 DataColumn2(
@@ -177,7 +177,7 @@ class _PatientScreenState extends State<PatientScreen> {
                   label: Text(context.l10n.labelStaffName),
                 ),
                 DataColumn2(
-                  fixedWidth: 150,
+                  fixedWidth: 100,
                   label: Text(context.l10n.labelAdmittedToHospital),
                 ),
                 DataColumn2(

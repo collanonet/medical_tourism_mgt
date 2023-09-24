@@ -13,7 +13,7 @@ class DetailPatientScreen extends StatefulWidget {
 class _DetailPatientScreenState extends State<DetailPatientScreen> {
   List<String> menu = [
     "基本情報",
-    "基本情報",
+    "進捗一覧",
     "海外診療データ",
     "診療サマリー",
     "医療ビザ",
