@@ -37,7 +37,7 @@ abstract class RestModule {
   Uri get devBaseUrl {
     return Uri(
       scheme: 'https',
-      host: 'api-prasac.jaksmok.com',
+      host: 'medical-tourism-api-dev-collabonet.pixelplatforms.com',
     );
   }
 
@@ -52,8 +52,7 @@ abstract class RestModule {
   Uri get prodBaseUrl => Uri();
 }
 
-class MerchantInterceptor extends Interceptor {
-}
+class MerchantInterceptor extends Interceptor {}
 
 class TokenInterceptor extends Interceptor {
   @override
@@ -64,11 +63,23 @@ class TokenInterceptor extends Interceptor {
     final token = await GetIt.I<AuthRepository>().getAccessToken();
     if (token != null) {
       super.onRequest(
-        options..headers.addAll({'Authorization': 'Bearer $token'}),
+        options
+          ..headers.addAll({
+            'Authorization': 'Bearer $token',
+            'Content-Type': 'application/json',
+            'Accept': '*/*',
+          }),
         handler,
       );
     } else {
-      super.onRequest(options, handler);
+      super.onRequest(
+        options
+          ..headers.addAll({
+            'Content-Type': 'application/json',
+            'Accept': '*/*',
+          }),
+        handler,
+      );
     }
   }
 
@@ -89,7 +100,11 @@ class TokenInterceptor extends Interceptor {
         final response = await client.dio.fetch(
           requestOptions
             ..headers.addAll(
-              {'Authorization': 'Bearer ${credentials.accessToken}'},
+              {
+                'Authorization': 'Bearer ${credentials.accessToken}',
+                'Content-Type': 'application/json',
+                'Accept': '*/*',
+              },
             ),
         );
         handler.resolve(response);

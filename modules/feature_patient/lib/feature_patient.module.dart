@@ -7,7 +7,7 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i2;
 
-import 'package:data_auth/data_auth.dart' as _i4;
+import 'package:data_patient/data_patient.dart' as _i4;
 import 'package:injectable/injectable.dart' as _i1;
 
 import 'src/patient_model.dart' as _i3;
@@ -17,6 +17,6 @@ class FeaturePatientPackageModule extends _i1.MicroPackageModule {
   @override
   _i2.FutureOr<void> init(_i1.GetItHelper gh) {
     gh.factory<_i3.PatientModel>(
-        () => _i3.PatientModel(authRepository: gh<_i4.AuthRepository>()));
+        () => _i3.PatientModel(patientRepository: gh<_i4.PatientRepository>()));
   }
 }

@@ -15,7 +15,7 @@
 
 ## Debuging
 
-`fvm flutter run -d chrome`
+`fvm flutter run -d chrome --web-port 5555`
 
 ## Deployment
 

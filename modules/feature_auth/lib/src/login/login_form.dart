@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup formLogin() => FormGroup({
-      'username': FormControl<String>(
+      'email': FormControl<String>(
         value: '',
         validators: [Validators.required],
       ),

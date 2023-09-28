@@ -91,6 +91,7 @@ dependencies:
   bot_toast: ^4.0.4
   flutter_native_splash: ^2.3.2
   data_table_2: ^2.5.8
+  url_strategy: ^0.2.0
 
 dev_dependencies:
   flutter_test:

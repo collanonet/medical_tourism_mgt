@@ -40,7 +40,7 @@ class PrePatientFilter extends StatelessWidget {
                         Expanded(
                           flex: 4,
                           child: ReactiveTextFormField(
-                            formControlName: 'agent_name',
+                            formControlName: 'agents',
                             decoration: InputDecoration(
                               label: Text(
                                 context.l10n.labelAgentName,
@@ -52,7 +52,7 @@ class PrePatientFilter extends StatelessWidget {
                         Expanded(
                           flex: 4,
                           child: ReactiveTextFormField(
-                            formControlName: 'patient_name',
+                            formControlName: 'patient',
                             decoration: InputDecoration(
                               label: Text(
                                 context.l10n.labelPatientName,
@@ -69,7 +69,12 @@ class PrePatientFilter extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         FilledButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            model.prePatients(
+                              agents: formGroup.control('agents').value,
+                              patient: formGroup.control('patient').value,
+                            );
+                          },
                           child: Text(context.l10n.actionSearch),
                         ),
                       ],

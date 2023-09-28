@@ -36,7 +36,7 @@ class AppModel extends ChangeNotifier {
     notifyListeners();
   }
 
-  void signOut() {
-    auth.signOut();
+  void logOut() {
+    auth.logOut();
   }
 }

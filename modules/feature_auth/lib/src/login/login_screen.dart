@@ -24,6 +24,10 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: context.appTheme.primaryColor,
       body: Consumer<AuthModel>(
         builder: (context, model, child) {
+          if(model.loginData.data != null){
+            model.syncAuthState();
+            logger.d('auth here');
+          }
           return ReactiveFormConfig(
               validationMessages: validationMessagesLogin(context),
               child: ReactiveFormBuilder(
@@ -59,7 +63,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                 color: context.appTheme.primaryColor),
                           ),
                           ReactiveTextFormField(
-                            formControlName: 'username',
+                            formControlName: 'email',
                             decoration: InputDecoration(
                               label: Text(
                                 context.l10n.labelId,
@@ -95,17 +99,24 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                           FilledButton(
-                            onPressed: () {
-                              if (formGroup.valid) {
-                                logger.d(formGroup.value);
-                              } else {
-                                snackBarWidget(
-                                  context: context,
-                                  mgs: context.l10n.mgsRequireInputLogin,
-                                );
-                              }
-                            },
-                            child: Text(context.l10n.actionLogin),
+                            onPressed: model.loginData.loading
+                                ? null
+                                : () {
+                                    if (formGroup.valid) {
+                                      model.logIn(
+                                        formGroup.control('email').value,
+                                        formGroup.control('password').value,
+                                      );
+                                    } else {
+                                      snackBarWidget(
+                                        context: context,
+                                        mgs: context.l10n.mgsRequireInputLogin,
+                                      );
+                                    }
+                                  },
+                            child: model.loginData.loading
+                                ? const CircularProgressIndicator()
+                                : Text(context.l10n.actionLogin),
                           ),
                         ],
                       ),

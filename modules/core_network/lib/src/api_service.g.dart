@@ -20,14 +20,14 @@ class _ApiService implements ApiService {
 
   @override
   Future<AuthData> login(
-    String username,
+    String email,
     String password,
   ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
-      'username': username,
+      'email': email,
       'password': password,
     };
     final _result =
@@ -38,7 +38,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/api/login',
+              '/auth/login',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -48,6 +48,101 @@ class _ApiService implements ApiService {
               baseUrl,
             ))));
     final value = AuthData.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<AuthData> refreshToken(String refreshToken) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'refresh-token': refreshToken};
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<AuthData>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/auth/refresh-token',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = AuthData.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<AuthData> logOut() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<AuthData>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/auth/logout',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = AuthData.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<Paginated<PrePatient>> prePatients({
+    int? page,
+    int? limit,
+    String? agents,
+    String? patient,
+  }) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'limit': limit,
+      r'agents': agents,
+      r'patient': patient,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<Paginated<PrePatient>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/pre-patients',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Paginated<PrePatient>.fromJson(
+      _result.data!,
+      (json) => PrePatient.fromJson(json as Map<String, dynamic>),
+    );
     return value;
   }
 

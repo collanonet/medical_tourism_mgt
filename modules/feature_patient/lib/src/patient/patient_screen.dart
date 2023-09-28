@@ -149,15 +149,12 @@ class _PatientScreenState extends State<PatientScreen> {
                   label: Text(context.l10n.labelClassification),
                 ),
                 DataColumn2(
-                  fixedWidth: 100,
                   label: Text(context.l10n.labelEntryDate),
                 ),
                 DataColumn2(
-                  fixedWidth: 100,
                   label: Text(context.l10n.labelExaminationDate),
                 ),
                 DataColumn2(
-                  fixedWidth: 100,
                   label: Text(context.l10n.labelReturnDate),
                 ),
                 DataColumn2(
@@ -181,7 +178,6 @@ class _PatientScreenState extends State<PatientScreen> {
                   label: Text(context.l10n.labelAdmittedToHospital),
                 ),
                 DataColumn2(
-                  fixedWidth: 20,
                   label: Text(context.l10n.labelNumberOfGroupMembers),
                 ),
               ],

@@ -84,6 +84,9 @@ scripts:
   fixer_win:
     description: "Autofix dart files with import_sorter"
     run: melos exec "lefthook run fixer"
+  gen_api_win:
+    description: "Generate api files"
+    run: melos exec --scope="core_network" -- fvm dart run build_runner build --delete-conflicting-outputs
   gen_l10n_win:
     description: "Generate localized strings"
     run: melos exec --scope="core_l10n" -- fvm flutter gen-l10n

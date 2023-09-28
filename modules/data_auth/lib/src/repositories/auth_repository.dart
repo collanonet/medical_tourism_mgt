@@ -5,17 +5,13 @@ import '../entities/index.dart';
 abstract class AuthRepository {
   Future<String?> getAccessToken();
 
-  Future<String?> getDeviceId();
-
   Future<String?> getReferenceData();
 
   Future<Credentials> refreshToken();
 
   Future<PermissionRole> getPermissionRole();
 
-  Future<AuthData> signIn(String username, String password);
+  Future<AuthData> login(String email, String password);
 
-  Future<void> signOut();
-
-  Future<bool> isFreshInstall();
+  Future<void> logOut();
 }
