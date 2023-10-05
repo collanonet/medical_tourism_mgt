@@ -22,6 +22,7 @@ dependencies:
   reactive_forms: ^14.3.0
   bot_toast: ^4.0.4
   flutter_svg: ^2.0.7
+  skeletonizer: ^0.8.0
 
 dev_dependencies:
   flutter_test:

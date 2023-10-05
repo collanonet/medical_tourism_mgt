@@ -6,11 +6,11 @@ part 'user.g.dart';
 class User {
   @JsonKey(name: '_id')
   final String id;
-  final String fullName;
-  final String email;
-  final String idNumber;
-  final String profileImage;
-  final String phoneNumber;
+   String fullName;
+   String email;
+   String idNumber;
+   String profileImage;
+   String phoneNumber;
   final DateTime createdAt;
   final DateTime updatedAt;
 

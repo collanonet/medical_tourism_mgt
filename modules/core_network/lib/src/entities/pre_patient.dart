@@ -6,13 +6,14 @@ part 'pre_patient.g.dart';
 class PrePatient {
   @JsonKey(name: '_id')
   final String id;
-  final String agents;
-  final String patient;
-  final DateTime dateOfBirth;
-  final String gender;
-  final String nationality;
-  final String classification;
-  final String nameOfDisease;
+   String agents;
+   String patient;
+   DateTime dateOfBirth;
+   String gender;
+   String nationality;
+   String classification;
+   String nameOfDisease;
+  bool isDeleted;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -25,6 +26,7 @@ class PrePatient {
     required this.nationality,
     required this.classification,
     required this.nameOfDisease,
+    required this.isDeleted,
     required this.createdAt,
     required this.updatedAt,
   });
