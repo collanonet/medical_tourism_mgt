@@ -41,6 +41,30 @@ class PrePatientModel with ChangeNotifier {
     });
   }
 
+  AsyncData<Patient> _postPatientData = const AsyncData();
+  AsyncData<Patient> get postPatientData => _postPatientData;
+  String _prePatientId = '';
+  String get prePatientId => _prePatientId;
+
+  Future<void> postPatient(
+    PatientRequest patient,
+  ) {
+    _prePatientId = patient.prePatient ?? '';
+    _postPatientData = const AsyncData(loading: true);
+    notifyListeners();
+
+    return patientRepository.postPatient(patient).then((value) {
+      _postPatientData = AsyncData(data: value);
+      _prePatientId = '';
+      _prePatientData.data?.items.removeWhere((element) => element.id == patient.prePatient);
+    }).catchError((error) {
+      logger.d(error);
+      _postPatientData = AsyncData(error: error);
+    }).whenComplete(() {
+      notifyListeners();
+    });
+  }
+
   AsyncData<PrePatient> _postPrePatientData = const AsyncData();
   AsyncData<PrePatient> get postPrePatientData => _postPrePatientData;
 
@@ -79,24 +103,24 @@ class PrePatientModel with ChangeNotifier {
     });
   }
 
-  AsyncData<bool> _deletePrePatientData = const AsyncData();
-  AsyncData<bool>  get deletePrePatientData => _deletePrePatientData;
-
+  AsyncData<String> _deletePrePatientData = const AsyncData();
+  AsyncData<String> get deletePrePatientData => _deletePrePatientData;
 
   Future<void> deletePrePatient(
     String id,
   ) {
-    _deletePrePatientData = const AsyncData(loading: true);
+    _deletePrePatientData = AsyncData(loading: true, data: id);
     notifyListeners();
 
     return patientRepository.deletePrePatient(id).then((value) {
-      int? index = _prePatientData.data?.items.indexWhere((element) => element.id == id);
+      int? index =
+          _prePatientData.data?.items.indexWhere((element) => element.id == id);
 
-      if(index != null && index >= 0) {
+      if (index != null && index >= 0) {
         _prePatientData.data?.items[index].isDeleted = true;
       }
 
-      _deletePrePatientData = const AsyncData(data: true);
+      _deletePrePatientData = const AsyncData(data: 'success');
     }).catchError((error) {
       logger.d(error);
       _deletePrePatientData = AsyncData(error: error);

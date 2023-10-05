@@ -33,7 +33,7 @@ class PatientModel with ChangeNotifier {
   AsyncData<Patient>  get postPatientData => _postPatientData;
 
   Future<void> postPatient(
-    Patient patient,
+      PatientRequest patient,
   ) {
     _postPatientData = const AsyncData(loading: true);
     notifyListeners();

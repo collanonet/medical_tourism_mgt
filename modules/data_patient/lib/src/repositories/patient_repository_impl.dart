@@ -62,7 +62,7 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<Patient> postPatient(
-    Patient patient,
+      PatientRequest patient,
   ) {
     return remote.postPatient(patient);
   }

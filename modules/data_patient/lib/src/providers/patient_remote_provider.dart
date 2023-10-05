@@ -40,7 +40,7 @@ class PatientRemoteProvider {
   Future<Paginated<Patient>> patients() async => await apiService.patients();
 
   Future<Patient> postPatient(
-    Patient patient,
+      PatientRequest patient,
   ) async =>
       await apiService.postPatient(patient);
 

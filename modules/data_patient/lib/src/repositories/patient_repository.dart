@@ -27,7 +27,7 @@ abstract class PatientRepository {
   Future<Paginated<Patient>> patients();
 
   Future<Patient> postPatient(
-    Patient patient,
+      PatientRequest patient,
   );
 
   Future<Patient> putPatient(

@@ -456,6 +456,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'グループ人数'**
   String get labelNumberOfGroupMembers;
+
+  /// No description provided for @labelLogout.
+  ///
+  /// In en, this message translates to:
+  /// **'ログアウト'**
+  String get labelLogout;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {

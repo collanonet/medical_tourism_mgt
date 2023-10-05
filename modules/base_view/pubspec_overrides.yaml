@@ -10,3 +10,7 @@ dependency_overrides:
     path: ../core_ui
   core_utils:
     path: ../core_utils
+  data_auth:
+    path: ../data_auth
+  feature_auth:
+    path: ../feature_auth

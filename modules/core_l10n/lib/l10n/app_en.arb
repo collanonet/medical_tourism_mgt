@@ -59,5 +59,6 @@
     "labelSale": "営業",
     "labelStaffName": "業務",
     "labelAdmittedToHospital": "受入病院",
-    "labelNumberOfGroupMembers": "グループ人数"
+    "labelNumberOfGroupMembers": "グループ人数",
+    "labelLogout": "ログアウト"
 }

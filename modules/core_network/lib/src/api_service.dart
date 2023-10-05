@@ -4,6 +4,7 @@ import 'package:retrofit/retrofit.dart';
 
 import '../core_network.dart';
 import 'apis.dart';
+import 'entities/request/patient_request.dart';
 
 part 'api_service.g.dart';
 
@@ -49,9 +50,9 @@ abstract class ApiService {
     @Body() PrePatient prePatient,
   );
 
-  @DELETE(Apis.DELETE_PRE_PATIENT)
+  @DELETE('${Apis.DELETE_PRE_PATIENT}/{id}')
   Future<void> deletePrePatient(
-    @Path() String id,
+    @Path('id') String id,
   );
 
   //GET_PATIENTS
@@ -61,7 +62,7 @@ abstract class ApiService {
 
   @POST(Apis.POST_PATIENTS)
   Future<Patient> postPatient(
-    @Body() Patient patient,
+    @Body() PatientRequest patient,
   );
 
   @PUT(Apis.PUT_PATIENTS)
@@ -69,16 +70,16 @@ abstract class ApiService {
     @Body() Patient patient,
   );
 
-  @DELETE(Apis.DELETE_PATIENT)
+  @DELETE('${Apis.DELETE_PATIENT}/{id}')
   Future<void> deletePatient(
-    @Path() String id,
+    @Path('id') String id,
   );
 
   //GET_PATIENT_NAMES
 
-  @GET(Apis.GET_PATIENT_NAMES)
+  @GET('${Apis.GET_PATIENT_NAMES}/{patientId}')
   Future<List<PatientName>> patientNames(
-    @Path() String patientId,
+    @Path('patientId') String patientId,
   );
 
   @POST(Apis.POST_PATIENT_NAMES)
@@ -91,16 +92,16 @@ abstract class ApiService {
     @Body() PatientName patientName,
   );
 
-  @DELETE(Apis.DELETE_PATIENT_NAMES)
+  @DELETE('${Apis.DELETE_PATIENT_NAMES}/{id}')
   Future<void> deletePatientName(
-    @Path() String id,
+    @Path('id') String id,
   );
 
   //GET_PATIENT_NATIONALITIES
 
-  @GET(Apis.GET_PATIENT_NATIONALITIES)
+  @GET('${Apis.GET_PATIENT_NATIONALITIES}/{patientId}')
   Future<List<PatientNationality>> patientNationalities(
-    @Path() String patientId,
+    @Path('patientId') String patientId,
   );
 
   @POST(Apis.POST_PATIENT_NATIONALITIES)
@@ -113,16 +114,16 @@ abstract class ApiService {
     @Body() PatientNationality patientNationality,
   );
 
-  @DELETE(Apis.DELETE_PATIENT_NATIONALITIES)
+  @DELETE('${Apis.DELETE_PATIENT_NATIONALITIES}/{id}')
   Future<void> deletePatientNationality(
-    @Path() String id,
+    @Path('id') String id,
   );
 
   //GET_PATIENT_PASSPORTS
 
-  @GET(Apis.GET_PATIENT_PASSPORTS)
+  @GET('${Apis.GET_PATIENT_PASSPORTS}/{patientId}')
   Future<List<PatientPassport>> patientPassports(
-    @Path() String patientId,
+    @Path('patientId') String patientId,
   );
 
   @POST(Apis.POST_PATIENT_PASSPORTS)
@@ -135,9 +136,9 @@ abstract class ApiService {
     @Body() PatientPassport patientPassport,
   );
 
-  @DELETE(Apis.DELETE_PATIENT_PASSPORTS)
+  @DELETE('${Apis.DELETE_PATIENT_PASSPORTS}/{id}')
   Future<void> deletePatientPassport(
-    @Path() @Path('id') String id,
+    @Path('id') String id,
   );
 
   //GET_MEDICAL_RECORDS
@@ -159,16 +160,16 @@ abstract class ApiService {
     @Body() MedicalRecord medicalRecord,
   );
 
-  @DELETE(Apis.DELETE_MEDICAL_RECORDS)
+  @DELETE('${Apis.DELETE_MEDICAL_RECORDS}/{id}')
   Future<void> deleteMedicalRecord(
-    @Path() String id,
+    @Path('id') String id,
   );
 
   //GET_MEDICAL_RECORD_AGENTS
 
-  @GET(Apis.GET_MEDICAL_RECORD_AGENTS)
+  @GET('${Apis.GET_MEDICAL_RECORD_AGENTS}/{medicalRecordId}')
   Future<List<MedicalRecordAgent>> medicalRecordAgents(
-    @Path() String medicalRecordId,
+    @Path('medicalRecordId') String medicalRecordId,
   );
 
   @POST(Apis.POST_MEDICAL_RECORD_AGENTS)
@@ -181,16 +182,16 @@ abstract class ApiService {
     @Body() MedicalRecordAgent medicalRecordAgent,
   );
 
-  @DELETE(Apis.DELETE_MEDICAL_RECORD_AGENTS)
+  @DELETE('${Apis.DELETE_MEDICAL_RECORD_AGENTS}/{id}')
   Future<void> deleteMedicalRecordAgent(
-    @Path() String id,
+    @Path('id') String id,
   );
 
   // GET_MEDICAL_RECORD_BUDGETS
 
-  @GET(Apis.GET_MEDICAL_RECORD_BUDGETS)
+  @GET('${Apis.GET_MEDICAL_RECORD_BUDGETS}/{medicalRecordId}')
   Future<List<MedicalRecordBudget>> medicalRecordBudgets(
-    @Path() String medicalRecordId,
+    @Path('medicalRecordId') String medicalRecordId,
   );
 
   @POST(Apis.POST_MEDICAL_RECORD_BUDGETS)
@@ -203,16 +204,16 @@ abstract class ApiService {
     @Body() MedicalRecordBudget medicalRecordBudget,
   );
 
-  @DELETE(Apis.DELETE_MEDICAL_RECORD_BUDGETS)
+  @DELETE('${Apis.DELETE_MEDICAL_RECORD_BUDGETS}/{id}')
   Future<void> deleteMedicalRecordBudget(
-    @Path() String id,
+    @Path('id') String id,
   );
 
   //GET_MEDICAL_RECORD_COMPANIONS
 
-  @GET(Apis.GET_MEDICAL_RECORD_COMPANIONS)
+  @GET('${Apis.GET_MEDICAL_RECORD_COMPANIONS}/{medicalRecordId}')
   Future<List<MedicalRecordCompanion>> medicalRecordCompanions(
-    @Path() String medicalRecordId,
+    @Path('medicalRecordId') String medicalRecordId,
   );
 
   @POST(Apis.POST_MEDICAL_RECORD_COMPANIONS)
@@ -225,16 +226,16 @@ abstract class ApiService {
     @Body() MedicalRecordCompanion medicalRecordCompanion,
   );
 
-  @DELETE(Apis.DELETE_MEDICAL_RECORD_COMPANIONS)
+  @DELETE('${Apis.DELETE_MEDICAL_RECORD_COMPANIONS}/{id}')
   Future<void> deleteMedicalRecordCompanion(
-    @Path() String id,
+    @Path('id') String id,
   );
 
   //GET_MEDICAL_RECORD_HOSPITALS
 
-  @GET(Apis.GET_MEDICAL_RECORD_HOSPITALS)
+  @GET('${Apis.GET_MEDICAL_RECORD_HOSPITALS}/{medicalRecordId}')
   Future<List<MedicalRecordHospital>> medicalRecordHospitals(
-    @Path() String medicalRecordId,
+    @Path('medicalRecordId') String medicalRecordId,
   );
 
   @POST(Apis.POST_MEDICAL_RECORD_HOSPITALS)
@@ -247,16 +248,16 @@ abstract class ApiService {
     @Body() MedicalRecordHospital medicalRecordHospital,
   );
 
-  @DELETE(Apis.DELETE_MEDICAL_RECORD_HOSPITALS)
+  @DELETE('${Apis.DELETE_MEDICAL_RECORD_HOSPITALS}/{id}')
   Future<void> deleteMedicalRecordHospital(
-    @Path() String id,
+    @Path('id') String id,
   );
 
   //GET_MEDICAL_RECORD_INTERPRETERS
 
-  @GET(Apis.GET_MEDICAL_RECORD_INTERPRETERS)
+  @GET('${Apis.GET_MEDICAL_RECORD_INTERPRETERS}/{medicalRecordId}')
   Future<List<MedicalRecordInterpreter>> medicalRecordInterpreters(
-    @Path() String medicalRecordId,
+    @Path('medicalRecordId') String medicalRecordId,
   );
 
   @POST(Apis.POST_MEDICAL_RECORD_INTERPRETERS)
@@ -269,16 +270,16 @@ abstract class ApiService {
     @Body() MedicalRecordInterpreter medicalRecordInterpreter,
   );
 
-  @DELETE(Apis.DELETE_MEDICAL_RECORD_INTERPRETERS)
+  @DELETE('${Apis.DELETE_MEDICAL_RECORD_INTERPRETERS}/{id}')
   Future<void> deleteMedicalRecordInterpreter(
-    @Path() String id,
+    @Path('id') String id,
   );
 
   //GET_MEDICAL_RECORDS_PROGRESS
 
-  @GET(Apis.GET_MEDICAL_RECORDS_PROGRESS)
+  @GET('${Apis.GET_MEDICAL_RECORDS_PROGRESS}/{medicalRecordId}')
   Future<List<MedicalRecordProgress>> medicalRecordsProgress(
-    @Path() String medicalRecordId,
+    @Path('medicalRecordId') String medicalRecordId,
   );
 
   @POST(Apis.POST_MEDICAL_RECORDS_PROGRESS)
@@ -291,16 +292,16 @@ abstract class ApiService {
     @Body() MedicalRecordProgress medicalRecordProgress,
   );
 
-  @DELETE(Apis.DELETE_MEDICAL_RECORDS_PROGRESS)
+  @DELETE('${Apis.DELETE_MEDICAL_RECORDS_PROGRESS}/{id}')
   Future<void> deleteMedicalRecordProgress(
-    @Path() String id,
+    @Path('id') String id,
   );
 
   //GET_MEDICAL_RECORDS_OVERSEAS
 
-  @GET(Apis.GET_MEDICAL_RECORDS_OVERSEAS)
+  @GET('${Apis.GET_MEDICAL_RECORDS_OVERSEAS}/{medicalRecordId}')
   Future<List<MedicalRecordOversea>> medicalRecordsOverseas(
-    @Path() String medicalRecordId,
+    @Path('medicalRecordId') String medicalRecordId,
   );
 
   @POST(Apis.POST_MEDICAL_RECORDS_OVERSEAS)
@@ -313,16 +314,16 @@ abstract class ApiService {
     @Body() MedicalRecordOversea medicalRecordOversea,
   );
 
-  @DELETE(Apis.DELETE_MEDICAL_RECORDS_OVERSEAS)
+  @DELETE('${Apis.DELETE_MEDICAL_RECORDS_OVERSEAS}/{id}')
   Future<void> deleteMedicalRecordOversea(
-    @Path() String id,
+    @Path('id') String id,
   );
 
   //GET_MEDICAL_RECORDS_OVERSEAS_DATA
 
-  @GET(Apis.GET_MEDICAL_RECORDS_OVERSEAS_DATA)
+  @GET('${Apis.GET_MEDICAL_RECORDS_OVERSEAS_DATA}/{medicalRecordOverseaId}')
   Future<List<MedicalRecordOverseaData>> medicalRecordsOverseaData(
-    @Path() String medicalRecordOverseaId,
+    @Path('medicalRecordOverseaId') String medicalRecordOverseaId,
   );
 
   @POST(Apis.POST_MEDICAL_RECORDS_OVERSEAS_DATA)
@@ -335,10 +336,9 @@ abstract class ApiService {
     @Body() MedicalRecordOverseaData medicalRecordOverseaData,
   );
 
-  @DELETE(Apis.DELETE_MEDICAL_RECORDS_OVERSEAS_DATA)
+  @DELETE('${Apis.DELETE_MEDICAL_RECORDS_OVERSEAS_DATA}/{id}')
   Future<void> deleteMedicalRecordOverseaData(
-    @Path() String id,
+    @Path('id') String id,
   );
 
-//
 }

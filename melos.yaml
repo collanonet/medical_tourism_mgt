@@ -109,3 +109,6 @@ scripts:
     run: |
       cd modules/core_ui && ^
       fvm flutter run -d chrome lib/widgetbook/widgetbook.dart
+  hosting_web_dev:
+    description: "hosting_web_dev"
+    run: fvm flutter build web --release && firebase deploy --only hosting

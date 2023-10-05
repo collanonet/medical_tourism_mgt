@@ -1,7 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:base_view/base_view.dart';
 import 'package:core_utils/routes.dart';
-import 'package:feature_patient/src/patient/patient_model.dart';
+import 'patient_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';

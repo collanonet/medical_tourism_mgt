@@ -2,8 +2,10 @@ import 'package:auto_route/auto_route.dart';
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_utils/routes.dart';
+import 'package:feature_auth/feature_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:provider/provider.dart';
 
 class SideBarMenu extends StatelessWidget {
   const SideBarMenu({
@@ -152,6 +154,31 @@ class SideBarMenu extends StatelessWidget {
                   onPressed: () {},
                   child: Text(
                     context.l10n.labelCenterHeadquarters,
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+              ),
+              Divider(
+                endIndent: 20,
+                indent: 4,
+                thickness: 1,
+                color: Colors.grey.shade300,
+              ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 2, 16, 16),
+                child: ElevatedButton.icon(
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(Colors.red),
+                  ),
+                  onPressed: () {
+                    context.read<AuthModel>().logOut();
+                  },
+                  icon: const Icon(
+                    Icons.logout,
+                    color: Colors.white,
+                  ),
+                  label: Text(
+                    context.l10n.labelLogout,
                     style: const TextStyle(color: Colors.white),
                   ),
                 ),

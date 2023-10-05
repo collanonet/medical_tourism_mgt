@@ -10,7 +10,7 @@ class Patient {
    int age;
    String gender;
    String familyName;
-   String middleName;
+   String? middleName;
    String firstName;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -21,7 +21,7 @@ class Patient {
     required this.age,
     required this.gender,
     required this.familyName,
-    required this.middleName,
+    this.middleName,
     required this.firstName,
     required this.createdAt,
     required this.updatedAt,
