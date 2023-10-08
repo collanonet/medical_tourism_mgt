@@ -69,7 +69,7 @@ class PrePatientModel with ChangeNotifier {
   AsyncData<PrePatient> get postPrePatientData => _postPrePatientData;
 
   Future<void> postPrePatient(
-    PrePatient prePatient,
+    PrePatientRequest prePatient,
   ) {
     _postPrePatientData = const AsyncData(loading: true);
     notifyListeners();
@@ -89,11 +89,12 @@ class PrePatientModel with ChangeNotifier {
 
   Future<void> putPrePatient(
     PrePatient prePatient,
+      PrePatientRequest patientRequest
   ) {
     _putPrePatientData = const AsyncData(loading: true);
     notifyListeners();
 
-    return patientRepository.putPrePatient(prePatient).then((value) {
+    return patientRepository.putPrePatient(prePatient.id,patientRequest).then((value) {
       _putPrePatientData = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);

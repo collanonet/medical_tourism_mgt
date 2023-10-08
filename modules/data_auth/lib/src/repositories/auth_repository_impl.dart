@@ -22,6 +22,12 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
+  Future<bool> isLoggedIn() async {
+    final token = await local.getAccessToken();
+    return token != null;
+  }
+
+  @override
   Future<String?> getReferenceData() {
     return local.getReferenceData();
   }

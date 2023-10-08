@@ -30,10 +30,10 @@ class PatientModel with ChangeNotifier {
   }
 
   AsyncData<Patient> _postPatientData = const AsyncData();
-  AsyncData<Patient>  get postPatientData => _postPatientData;
+  AsyncData<Patient> get postPatientData => _postPatientData;
 
   Future<void> postPatient(
-      PatientRequest patient,
+    PatientRequest patient,
   ) {
     _postPatientData = const AsyncData(loading: true);
     notifyListeners();
@@ -49,15 +49,18 @@ class PatientModel with ChangeNotifier {
   }
 
   AsyncData<Patient> _putPatientData = const AsyncData();
-  AsyncData<Patient>  get putPatientData => _putPatientData;
+  AsyncData<Patient> get putPatientData => _putPatientData;
 
   Future<void> putPatient(
     Patient patient,
+    PatientRequest patientRequest,
   ) {
     _putPatientData = const AsyncData(loading: true);
     notifyListeners();
 
-    return patientRepository.putPatient(patient).then((value) {
+    return patientRepository
+        .putPatient(patient.id, patientRequest)
+        .then((value) {
       _putPatientData = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);
@@ -68,7 +71,7 @@ class PatientModel with ChangeNotifier {
   }
 
   AsyncData<bool> _deletePatientData = const AsyncData();
-  AsyncData<bool>  get deletePatientData => _deletePatientData;
+  AsyncData<bool> get deletePatientData => _deletePatientData;
 
   Future<void> deletePatient(
     String id,
@@ -86,5 +89,4 @@ class PatientModel with ChangeNotifier {
       notifyListeners();
     });
   }
-
 }

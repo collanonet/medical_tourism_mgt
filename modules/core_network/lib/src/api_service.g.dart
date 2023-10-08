@@ -147,7 +147,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<PrePatient> postPrePatient(PrePatient prePatient) async {
+  Future<PrePatient> postPrePatient(PrePatientRequest prePatient) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -175,7 +175,10 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<PrePatient> putPrePatient(PrePatient prePatient) async {
+  Future<PrePatient> putPrePatient(
+    String id,
+    PrePatientRequest prePatient,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -189,7 +192,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/pre-patients',
+              '/pre-patients/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -285,7 +288,10 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<Patient> putPatient(Patient patient) async {
+  Future<Patient> putPatient(
+    String id,
+    PatientRequest patient,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -366,7 +372,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<PatientName> postPatientName(PatientName patientName) async {
+  Future<PatientName> postPatientName(PatientNameRequest patientName) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -394,7 +400,10 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<PatientName> putPatientName(PatientName patientName) async {
+  Future<PatientName> putPatientName(
+    String id,
+    PatientNameRequest patientName,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -478,7 +487,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<PatientNationality> postPatientNationality(
-      PatientNationality patientNationality) async {
+      PatientNationalityRequest patientNationality) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -507,7 +516,9 @@ class _ApiService implements ApiService {
 
   @override
   Future<PatientNationality> putPatientNationality(
-      PatientNationality patientNationality) async {
+    String id,
+    PatientNationalityRequest patientNationality,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -589,7 +600,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<PatientPassport> postPatientPassport(
-      PatientPassport patientPassport) async {
+      PatientPassportRequest patientPassport) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -618,7 +629,9 @@ class _ApiService implements ApiService {
 
   @override
   Future<PatientPassport> putPatientPassport(
-      PatientPassport patientPassport) async {
+    String id,
+    PatientPassportRequest patientPassport,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -708,7 +721,8 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<MedicalRecord> postMedicalRecord(MedicalRecord medicalRecord) async {
+  Future<MedicalRecord> postMedicalRecord(
+      MedicalRecordRequest medicalRecord) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -736,7 +750,10 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<MedicalRecord> putMedicalRecord(MedicalRecord medicalRecord) async {
+  Future<MedicalRecord> putMedicalRecord(
+    String id,
+    MedicalRecordRequest medicalRecord,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -820,7 +837,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<MedicalRecordAgent> postMedicalRecordAgent(
-      MedicalRecordAgent medicalRecordAgent) async {
+      MedicalRecordAgentRequest medicalRecordAgent) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -849,7 +866,9 @@ class _ApiService implements ApiService {
 
   @override
   Future<MedicalRecordAgent> putMedicalRecordAgent(
-      MedicalRecordAgent medicalRecordAgent) async {
+    String id,
+    MedicalRecordAgentRequest medicalRecordAgent,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -933,7 +952,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<MedicalRecordBudget> postMedicalRecordBudget(
-      MedicalRecordBudget medicalRecordBudget) async {
+      MedicalRecordBudgetRequest medicalRecordBudget) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -962,7 +981,9 @@ class _ApiService implements ApiService {
 
   @override
   Future<MedicalRecordBudget> putMedicalRecordBudget(
-      MedicalRecordBudget medicalRecordBudget) async {
+    String id,
+    MedicalRecordBudgetRequest medicalRecordBudget,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1046,7 +1067,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<MedicalRecordCompanion> postMedicalRecordCompanion(
-      MedicalRecordCompanion medicalRecordCompanion) async {
+      MedicalRecordCompanionRequest medicalRecordCompanion) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1075,7 +1096,9 @@ class _ApiService implements ApiService {
 
   @override
   Future<MedicalRecordCompanion> putMedicalRecordCompanion(
-      MedicalRecordCompanion medicalRecordCompanion) async {
+    String id,
+    MedicalRecordCompanionRequest medicalRecordCompanion,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1159,7 +1182,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<MedicalRecordHospital> postMedicalRecordHospital(
-      MedicalRecordHospital medicalRecordHospital) async {
+      MedicalRecordHospitalRequest medicalRecordHospital) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1188,7 +1211,9 @@ class _ApiService implements ApiService {
 
   @override
   Future<MedicalRecordHospital> putMedicalRecordHospital(
-      MedicalRecordHospital medicalRecordHospital) async {
+    String id,
+    MedicalRecordHospitalRequest medicalRecordHospital,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1272,7 +1297,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<MedicalRecordInterpreter> postMedicalRecordInterpreter(
-      MedicalRecordInterpreter medicalRecordInterpreter) async {
+      MedicalRecordInterpreterRequest medicalRecordInterpreter) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1301,7 +1326,9 @@ class _ApiService implements ApiService {
 
   @override
   Future<MedicalRecordInterpreter> putMedicalRecordInterpreter(
-      MedicalRecordInterpreter medicalRecordInterpreter) async {
+    String id,
+    MedicalRecordInterpreterRequest medicalRecordInterpreter,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1385,7 +1412,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<MedicalRecordProgress> postMedicalRecordProgress(
-      MedicalRecordProgress medicalRecordProgress) async {
+      MedicalRecordProgressRequest medicalRecordProgress) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1414,7 +1441,9 @@ class _ApiService implements ApiService {
 
   @override
   Future<MedicalRecordProgress> putMedicalRecordProgress(
-      MedicalRecordProgress medicalRecordProgress) async {
+    String id,
+    MedicalRecordProgressRequest medicalRecordProgress,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1498,7 +1527,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<MedicalRecordOversea> postMedicalRecordOversea(
-      MedicalRecordOversea medicalRecordOversea) async {
+      MedicalRecordOverseaRequest medicalRecordOversea) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1527,7 +1556,9 @@ class _ApiService implements ApiService {
 
   @override
   Future<MedicalRecordOversea> putMedicalRecordOversea(
-      MedicalRecordOversea medicalRecordOversea) async {
+    String id,
+    MedicalRecordOverseaRequest medicalRecordOversea,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1611,7 +1642,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<MedicalRecordOverseaData> postMedicalRecordOverseaData(
-      MedicalRecordOverseaData medicalRecordOverseaData) async {
+      MedicalRecordOverseaDataRequest medicalRecordOverseaData) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -1640,7 +1671,9 @@ class _ApiService implements ApiService {
 
   @override
   Future<MedicalRecordOverseaData> putMedicalRecordOverseaData(
-      MedicalRecordOverseaData medicalRecordOverseaData) async {
+    String id,
+    MedicalRecordOverseaDataRequest medicalRecordOverseaData,
+  ) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};

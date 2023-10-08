@@ -21,12 +21,6 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
   ScrollController? horizontalScrollController = ScrollController();
 
   @override
-  void initState() {
-    context.read<PrePatientModel>().prePatients();
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Consumer<PrePatientModel>(builder: (context, model, _) {
       return Column(
@@ -173,8 +167,8 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                                       children: [
                                         FilledButton(
                                           onPressed: model.deletePrePatientData
-                                              .loading &&
-                                              model.prePatientId == item.id
+                                                      .loading &&
+                                                  model.prePatientId == item.id
                                               ? null
                                               : () {
                                                   model.postPatient(

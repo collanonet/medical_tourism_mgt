@@ -4,21 +4,21 @@ part 'patient_request.g.dart';
 
 @JsonSerializable()
 class PatientRequest {
-   DateTime dateOfBirth;
-   int age;
-   String gender;
-   String familyName;
-   String? middleName;
-   String firstName;
-   String? prePatient;
+  DateTime? dateOfBirth;
+  int? age;
+  String? gender;
+  String? familyName;
+  String? middleName;
+  String? firstName;
+  String? prePatient;
 
   PatientRequest({
-    required this.dateOfBirth,
-    required this.age,
-    required this.gender,
-    required this.familyName,
+    this.dateOfBirth,
+    this.age,
+    this.gender,
+    this.familyName,
     this.middleName,
-    required this.firstName,
+    this.firstName,
     this.prePatient,
   });
 

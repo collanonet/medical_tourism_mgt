@@ -9,18 +9,24 @@
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'package:auto_route/auto_route.dart' as _i4;
+import 'package:core_network/entities.dart' as _i6;
 import 'package:feature_patient/src/detail_patient/detail_patient_page.dart'
     as _i1;
 import 'package:feature_patient/src/patient/patient_page.dart' as _i2;
 import 'package:feature_patient/src/pre_patient/pre_patient_page.dart' as _i3;
+import 'package:flutter/material.dart' as _i5;
 
 abstract class $FeaturePatientRouterModule extends _i4.AutoRouterModule {
   @override
   final Map<String, _i4.PageFactory> pagesMap = {
     DetailPatientRoute.name: (routeData) {
+      final args = routeData.argsAs<DetailPatientRouteArgs>();
       return _i4.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.DetailPatientPage(),
+        child: _i1.DetailPatientPage(
+          key: args.key,
+          patient: args.patient,
+        ),
       );
     },
     PatientsRoute.name: (routeData) {
@@ -40,16 +46,40 @@ abstract class $FeaturePatientRouterModule extends _i4.AutoRouterModule {
 
 /// generated route for
 /// [_i1.DetailPatientPage]
-class DetailPatientRoute extends _i4.PageRouteInfo<void> {
-  const DetailPatientRoute({List<_i4.PageRouteInfo>? children})
-      : super(
+class DetailPatientRoute extends _i4.PageRouteInfo<DetailPatientRouteArgs> {
+  DetailPatientRoute({
+    _i5.Key? key,
+    required _i6.Patient patient,
+    List<_i4.PageRouteInfo>? children,
+  }) : super(
           DetailPatientRoute.name,
+          args: DetailPatientRouteArgs(
+            key: key,
+            patient: patient,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'DetailPatientRoute';
 
-  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
+  static const _i4.PageInfo<DetailPatientRouteArgs> page =
+      _i4.PageInfo<DetailPatientRouteArgs>(name);
+}
+
+class DetailPatientRouteArgs {
+  const DetailPatientRouteArgs({
+    this.key,
+    required this.patient,
+  });
+
+  final _i5.Key? key;
+
+  final _i6.Patient patient;
+
+  @override
+  String toString() {
+    return 'DetailPatientRouteArgs{key: $key, patient: $patient}';
+  }
 }
 
 /// generated route for

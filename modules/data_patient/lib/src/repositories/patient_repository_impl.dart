@@ -34,16 +34,17 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<PrePatient> postPrePatient(
-    PrePatient prePatient,
+    PrePatientRequest prePatient,
   ) {
     return remote.postPrePatient(prePatient);
   }
 
   @override
   Future<PrePatient> putPrePatient(
-    PrePatient prePatient,
+      String id,
+    PrePatientRequest prePatient,
   ) {
-    return remote.putPrePatient(prePatient);
+    return remote.putPrePatient(id,prePatient);
   }
 
   @override
@@ -69,9 +70,10 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<Patient> putPatient(
-    Patient patient,
+      String id,
+    PatientRequest patient,
   ) {
-    return remote.putPatient(patient);
+    return remote.putPatient(id,patient);
   }
 
   @override
@@ -92,16 +94,17 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<PatientName> postPatientName(
-    PatientName patientName,
+    PatientNameRequest patientName,
   ) {
     return remote.postPatientName(patientName);
   }
 
   @override
   Future<PatientName> putPatientName(
-    PatientName patientName,
+      String id,
+    PatientNameRequest patientName,
   ) {
-    return remote.putPatientName(patientName);
+    return remote.putPatientName(id,patientName);
   }
 
   @override
@@ -121,16 +124,17 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<PatientNationality> postPatientNationality(
-    PatientNationality patientNationality,
+    PatientNationalityRequest patientNationality,
   ) {
     return remote.postPatientNationality(patientNationality);
   }
 
   @override
   Future<PatientNationality> putPatientNationality(
-    PatientNationality patientNationality,
+      String id,
+    PatientNationalityRequest patientNationality,
   ) {
-    return remote.putPatientNationality(patientNationality);
+    return remote.putPatientNationality(id,patientNationality);
   }
 
   @override
@@ -151,16 +155,17 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<PatientPassport> postPatientPassport(
-    PatientPassport patientPassport,
+    PatientPassportRequest patientPassport,
   ) {
     return remote.postPatientPassport(patientPassport);
   }
 
   @override
   Future<PatientPassport> putPatientPassport(
-    PatientPassport patientPassport,
+      String id,
+    PatientPassportRequest patientPassport,
   ) {
-    return remote.putPatientPassport(patientPassport);
+    return remote.putPatientPassport(id,patientPassport);
   }
 
   @override
@@ -187,16 +192,17 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<MedicalRecord> postMedicalRecord(
-    MedicalRecord medicalRecord,
+    MedicalRecordRequest medicalRecord,
   ) {
     return remote.postMedicalRecord(medicalRecord);
   }
 
   @override
   Future<MedicalRecord> putMedicalRecord(
-    MedicalRecord medicalRecord,
+      String id,
+    MedicalRecordRequest medicalRecord,
   ) {
-    return remote.putMedicalRecord(medicalRecord);
+    return remote.putMedicalRecord(id,medicalRecord);
   }
 
   @override
@@ -217,16 +223,17 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<MedicalRecordAgent> postMedicalRecordAgent(
-    MedicalRecordAgent medicalRecordAgent,
+    MedicalRecordAgentRequest medicalRecordAgent,
   ) {
     return remote.postMedicalRecordAgent(medicalRecordAgent);
   }
 
   @override
   Future<MedicalRecordAgent> putMedicalRecordAgent(
-    MedicalRecordAgent medicalRecordAgent,
+      String id,
+    MedicalRecordAgentRequest medicalRecordAgent,
   ) {
-    return remote.putMedicalRecordAgent(medicalRecordAgent);
+    return remote.putMedicalRecordAgent(id,medicalRecordAgent);
   }
 
   @override
@@ -247,16 +254,17 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<MedicalRecordBudget> postMedicalRecordBudget(
-    MedicalRecordBudget medicalRecordBudget,
+    MedicalRecordBudgetRequest medicalRecordBudget,
   ) {
     return remote.postMedicalRecordBudget(medicalRecordBudget);
   }
 
   @override
   Future<MedicalRecordBudget> putMedicalRecordBudget(
-    MedicalRecordBudget medicalRecordBudget,
+      String id,
+    MedicalRecordBudgetRequest medicalRecordBudget,
   ) {
-    return remote.putMedicalRecordBudget(medicalRecordBudget);
+    return remote.putMedicalRecordBudget(id,medicalRecordBudget);
   }
 
   @override
@@ -277,16 +285,17 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<MedicalRecordCompanion> postMedicalRecordCompanion(
-    MedicalRecordCompanion medicalRecordCompanion,
+    MedicalRecordCompanionRequest medicalRecordCompanion,
   ) {
     return remote.postMedicalRecordCompanion(medicalRecordCompanion);
   }
 
   @override
   Future<MedicalRecordCompanion> putMedicalRecordCompanion(
-    MedicalRecordCompanion medicalRecordCompanion,
+      String id,
+    MedicalRecordCompanionRequest medicalRecordCompanion,
   ) {
-    return remote.putMedicalRecordCompanion(medicalRecordCompanion);
+    return remote.putMedicalRecordCompanion(id,medicalRecordCompanion);
   }
 
   @override
@@ -307,16 +316,17 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<MedicalRecordHospital> postMedicalRecordHospital(
-    MedicalRecordHospital medicalRecordHospital,
+    MedicalRecordHospitalRequest medicalRecordHospital,
   ) {
     return remote.postMedicalRecordHospital(medicalRecordHospital);
   }
 
   @override
   Future<MedicalRecordHospital> putMedicalRecordHospital(
-    MedicalRecordHospital medicalRecordHospital,
+      String id,
+    MedicalRecordHospitalRequest medicalRecordHospital,
   ) {
-    return remote.putMedicalRecordHospital(medicalRecordHospital);
+    return remote.putMedicalRecordHospital(id,medicalRecordHospital);
   }
 
   @override
@@ -337,16 +347,17 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<MedicalRecordInterpreter> postMedicalRecordInterpreter(
-    MedicalRecordInterpreter medicalRecordInterpreter,
+    MedicalRecordInterpreterRequest medicalRecordInterpreter,
   ) {
     return remote.postMedicalRecordInterpreter(medicalRecordInterpreter);
   }
 
   @override
   Future<MedicalRecordInterpreter> putMedicalRecordInterpreter(
-    MedicalRecordInterpreter medicalRecordInterpreter,
+      String id,
+    MedicalRecordInterpreterRequest medicalRecordInterpreter,
   ) {
-    return remote.putMedicalRecordInterpreter(medicalRecordInterpreter);
+    return remote.putMedicalRecordInterpreter(id,medicalRecordInterpreter);
   }
 
   @override
@@ -367,16 +378,17 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<MedicalRecordProgress> postMedicalRecordProgress(
-    MedicalRecordProgress medicalRecordProgress,
+    MedicalRecordProgressRequest medicalRecordProgress,
   ) {
     return remote.postMedicalRecordProgress(medicalRecordProgress);
   }
 
   @override
   Future<MedicalRecordProgress> putMedicalRecordProgress(
-    MedicalRecordProgress medicalRecordProgress,
+      String id,
+    MedicalRecordProgressRequest medicalRecordProgress,
   ) {
-    return remote.putMedicalRecordProgress(medicalRecordProgress);
+    return remote.putMedicalRecordProgress(id,medicalRecordProgress);
   }
 
   @override
@@ -397,16 +409,17 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<MedicalRecordOversea> postMedicalRecordOversea(
-    MedicalRecordOversea medicalRecordOversea,
+    MedicalRecordOverseaRequest medicalRecordOversea,
   ) {
     return remote.postMedicalRecordOversea(medicalRecordOversea);
   }
 
   @override
   Future<MedicalRecordOversea> putMedicalRecordOversea(
-    MedicalRecordOversea medicalRecordOversea,
+      String id,
+    MedicalRecordOverseaRequest medicalRecordOversea,
   ) {
-    return remote.putMedicalRecordOversea(medicalRecordOversea);
+    return remote.putMedicalRecordOversea(id,medicalRecordOversea);
   }
 
   @override
@@ -427,16 +440,17 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<MedicalRecordOverseaData> postMedicalRecordOverseaData(
-    MedicalRecordOverseaData medicalRecordOverseaData,
+    MedicalRecordOverseaDataRequest medicalRecordOverseaData,
   ) {
     return remote.postMedicalRecordOverseaData(medicalRecordOverseaData);
   }
 
   @override
   Future<MedicalRecordOverseaData> putMedicalRecordOverseaData(
-    MedicalRecordOverseaData medicalRecordOverseaData,
+      String id,
+    MedicalRecordOverseaDataRequest medicalRecordOverseaData,
   ) {
-    return remote.putMedicalRecordOverseaData(medicalRecordOverseaData);
+    return remote.putMedicalRecordOverseaData(id,medicalRecordOverseaData);
   }
 
   @override

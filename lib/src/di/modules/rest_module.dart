@@ -1,3 +1,4 @@
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:core_network/core_network.dart';
@@ -7,6 +8,7 @@ import 'package:feature_auth/feature_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 
+import '../../app/app_model.dart';
 import '../injection.dart';
 
 @module
@@ -17,9 +19,9 @@ abstract class RestModule {
     CacheOptions cacheOptions,
   ) {
     return RestClient(baseUrl.toString())
-      ..addIntercepter(DioCacheInterceptor(options: cacheOptions))
       ..addIntercepter(MerchantInterceptor())
       ..addIntercepter(TokenInterceptor())
+      ..addIntercepter(ErrorInterceptor())
       ..setDebug(kDebugMode)
       ..timeout(kReleaseMode
           ? const Duration(minutes: 3)
@@ -55,38 +57,37 @@ abstract class RestModule {
 class MerchantInterceptor extends Interceptor {}
 
 class TokenInterceptor extends Interceptor {
+
   @override
   void onRequest(
-    RequestOptions options,
-    RequestInterceptorHandler handler,
-  ) async {
+      RequestOptions options,
+      RequestInterceptorHandler handler,
+      ) async {
     final token = await GetIt.I<AuthRepository>().getAccessToken();
     if (token != null) {
       super.onRequest(
-        options
-          ..headers.addAll({
-            'Authorization': 'Bearer $token',
-            'Content-Type': 'application/json',
-            'Accept': '*/*',
-          }),
+        options..headers.addAll({'Authorization': 'Bearer $token'}),
         handler,
       );
     } else {
-      super.onRequest(
-        options
-          ..headers.addAll({
-            'Content-Type': 'application/json',
-            'Accept': '*/*',
-          }),
-        handler,
-      );
+      super.onRequest(options, handler);
     }
   }
+}
 
+class ErrorInterceptor extends Interceptor {
   @override
   void onError(DioException err, ErrorInterceptorHandler handler) async {
-    if ((err.response?.statusCode ?? 0) == 401) {
+    final code = err.response?.statusCode ?? 0;
+    // Forbidden
+    if (code == 403) {
+      GetIt.I<AppModel>().logOut();
+      return;
+    }
+    // Token Expired
+    else if (code == 401) {
       final requestOptions = err.requestOptions;
+      logger.d('refreshing token');
 
       try {
         final credentials = await GetIt.I<AuthRepository>().refreshToken();
@@ -100,19 +101,21 @@ class TokenInterceptor extends Interceptor {
         final response = await client.dio.fetch(
           requestOptions
             ..headers.addAll(
-              {
-                'Authorization': 'Bearer ${credentials.accessToken}',
-                'Content-Type': 'application/json',
-                'Accept': '*/*',
-              },
+              {'Authorization': 'Bearer ${credentials.accessToken}'},
             ),
         );
         handler.resolve(response);
+        return;
       } catch (e) {
-        super.onError(err, handler);
+        if (e is DioException) {
+          final code = err.response?.statusCode ?? 0;
+          final isLoggedIn = await GetIt.I<AuthRepository>().isLoggedIn();
+          if (isLoggedIn && (code == 401 || code == 403)) {
+            GetIt.I<AppModel>().logOut();
+          }
+        }
       }
-    } else {
-      super.onError(err, handler);
     }
+    super.onError(err, handler);
   }
 }

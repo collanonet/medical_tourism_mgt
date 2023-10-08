@@ -11,11 +11,12 @@ abstract class PatientRepository {
   });
 
   Future<PrePatient> postPrePatient(
-    PrePatient prePatient,
+    PrePatientRequest prePatient,
   );
 
   Future<PrePatient> putPrePatient(
-    PrePatient prePatient,
+      String id,
+    PrePatientRequest prePatient,
   );
 
   Future<void> deletePrePatient(
@@ -31,7 +32,8 @@ abstract class PatientRepository {
   );
 
   Future<Patient> putPatient(
-    Patient patient,
+      String id,
+    PatientRequest patient,
   );
 
   Future<void> deletePatient(
@@ -45,11 +47,12 @@ abstract class PatientRepository {
   );
 
   Future<PatientName> postPatientName(
-    PatientName patientName,
+    PatientNameRequest patientName,
   );
 
   Future<PatientName> putPatientName(
-    PatientName patientName,
+      String id,
+    PatientNameRequest patientName,
   );
 
   Future<void> deletePatientName(
@@ -62,11 +65,12 @@ abstract class PatientRepository {
   );
 
   Future<PatientNationality> postPatientNationality(
-    PatientNationality patientNationality,
+    PatientNationalityRequest patientNationality,
   );
 
   Future<PatientNationality> putPatientNationality(
-    PatientNationality patientNationality,
+      String id,
+    PatientNationalityRequest patientNationality,
   );
 
   Future<void> deletePatientNationality(
@@ -79,11 +83,12 @@ abstract class PatientRepository {
   );
 
   Future<PatientPassport> postPatientPassport(
-    PatientPassport patientPassport,
+    PatientPassportRequest patientPassport,
   );
 
   Future<PatientPassport> putPatientPassport(
-    PatientPassport patientPassport,
+      String id,
+    PatientPassportRequest patientPassport,
   );
 
   Future<void> deletePatientPassport(
@@ -99,11 +104,12 @@ abstract class PatientRepository {
   });
 
   Future<MedicalRecord> postMedicalRecord(
-    MedicalRecord medicalRecord,
+    MedicalRecordRequest medicalRecord,
   );
 
   Future<MedicalRecord> putMedicalRecord(
-    MedicalRecord medicalRecord,
+      String id,
+    MedicalRecordRequest medicalRecord,
   );
 
   Future<void> deleteMedicalRecord(
@@ -117,11 +123,12 @@ abstract class PatientRepository {
   );
 
   Future<MedicalRecordAgent> postMedicalRecordAgent(
-    MedicalRecordAgent medicalRecordAgent,
+    MedicalRecordAgentRequest medicalRecordAgent,
   );
 
   Future<MedicalRecordAgent> putMedicalRecordAgent(
-    MedicalRecordAgent medicalRecordAgent,
+      String id,
+    MedicalRecordAgentRequest medicalRecordAgent,
   );
 
   Future<void> deleteMedicalRecordAgent(
@@ -135,11 +142,12 @@ abstract class PatientRepository {
   );
 
   Future<MedicalRecordBudget> postMedicalRecordBudget(
-    MedicalRecordBudget medicalRecordBudget,
+    MedicalRecordBudgetRequest medicalRecordBudget,
   );
 
   Future<MedicalRecordBudget> putMedicalRecordBudget(
-    MedicalRecordBudget medicalRecordBudget,
+      String id,
+    MedicalRecordBudgetRequest medicalRecordBudget,
   );
 
   Future<void> deleteMedicalRecordBudget(
@@ -153,11 +161,12 @@ abstract class PatientRepository {
   );
 
   Future<MedicalRecordCompanion> postMedicalRecordCompanion(
-    MedicalRecordCompanion medicalRecordCompanion,
+    MedicalRecordCompanionRequest medicalRecordCompanion,
   );
 
   Future<MedicalRecordCompanion> putMedicalRecordCompanion(
-    MedicalRecordCompanion medicalRecordCompanion,
+      String id,
+    MedicalRecordCompanionRequest medicalRecordCompanion,
   );
 
   Future<void> deleteMedicalRecordCompanion(
@@ -170,11 +179,12 @@ abstract class PatientRepository {
   );
 
   Future<MedicalRecordHospital> postMedicalRecordHospital(
-    MedicalRecordHospital medicalRecordHospital,
+    MedicalRecordHospitalRequest medicalRecordHospital,
   );
 
   Future<MedicalRecordHospital> putMedicalRecordHospital(
-    MedicalRecordHospital medicalRecordHospital,
+      String id,
+    MedicalRecordHospitalRequest medicalRecordHospital,
   );
 
   Future<void> deleteMedicalRecordHospital(
@@ -187,11 +197,12 @@ abstract class PatientRepository {
   );
 
   Future<MedicalRecordInterpreter> postMedicalRecordInterpreter(
-    MedicalRecordInterpreter medicalRecordInterpreter,
+    MedicalRecordInterpreterRequest medicalRecordInterpreter,
   );
 
   Future<MedicalRecordInterpreter> putMedicalRecordInterpreter(
-    MedicalRecordInterpreter medicalRecordInterpreter,
+      String id,
+    MedicalRecordInterpreterRequest medicalRecordInterpreter,
   );
 
   Future<void> deleteMedicalRecordInterpreter(
@@ -204,11 +215,12 @@ abstract class PatientRepository {
   );
 
   Future<MedicalRecordProgress> postMedicalRecordProgress(
-    MedicalRecordProgress medicalRecordProgress,
+    MedicalRecordProgressRequest medicalRecordProgress,
   );
 
   Future<MedicalRecordProgress> putMedicalRecordProgress(
-    MedicalRecordProgress medicalRecordProgress,
+      String id,
+    MedicalRecordProgressRequest medicalRecordProgress,
   );
 
   Future<void> deleteMedicalRecordProgress(
@@ -221,11 +233,12 @@ abstract class PatientRepository {
   );
 
   Future<MedicalRecordOversea> postMedicalRecordOversea(
-    MedicalRecordOversea medicalRecordOversea,
+    MedicalRecordOverseaRequest medicalRecordOversea,
   );
 
   Future<MedicalRecordOversea> putMedicalRecordOversea(
-    MedicalRecordOversea medicalRecordOversea,
+      String id,
+    MedicalRecordOverseaRequest medicalRecordOversea,
   );
 
   Future<void> deleteMedicalRecordOversea(
@@ -238,11 +251,12 @@ abstract class PatientRepository {
   );
 
   Future<MedicalRecordOverseaData> postMedicalRecordOverseaData(
-    MedicalRecordOverseaData medicalRecordOverseaData,
+    MedicalRecordOverseaDataRequest medicalRecordOverseaData,
   );
 
   Future<MedicalRecordOverseaData> putMedicalRecordOverseaData(
-    MedicalRecordOverseaData medicalRecordOverseaData,
+      String id,
+    MedicalRecordOverseaDataRequest medicalRecordOverseaData,
   );
 
   Future<void> deleteMedicalRecordOverseaData(

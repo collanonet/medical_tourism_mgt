@@ -112,3 +112,9 @@ scripts:
   hosting_web_dev:
     description: "hosting_web_dev"
     run: fvm flutter build web --release && firebase deploy --only hosting
+  patient_feat:
+    description: "Generate localized strings"
+    run: melos exec --scope="feature_patient" -- fvm dart run build_runner build --delete-conflicting-outputs
+  data_patient:
+    description: "Generate localized strings"
+    run: melos exec --scope="data_patient" -- fvm dart run build_runner build --delete-conflicting-outputs

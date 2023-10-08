@@ -23,14 +23,15 @@ class PatientRemoteProvider {
       );
 
   Future<PrePatient> postPrePatient(
-    PrePatient prePatient,
+    PrePatientRequest prePatient,
   ) async =>
       await apiService.postPrePatient(prePatient);
 
   Future<PrePatient> putPrePatient(
-    PrePatient prePatient,
+      String id,
+    PrePatientRequest prePatient,
   ) async =>
-      await apiService.putPrePatient(prePatient);
+      await apiService.putPrePatient(id,prePatient);
 
   Future<void> deletePrePatient(
     String id,
@@ -45,9 +46,10 @@ class PatientRemoteProvider {
       await apiService.postPatient(patient);
 
   Future<Patient> putPatient(
-    Patient patient,
+      String id,
+    PatientRequest patient,
   ) async =>
-      await apiService.putPatient(patient);
+      await apiService.putPatient(id,patient);
 
   Future<void> deletePatient(
     String id,
@@ -60,14 +62,15 @@ class PatientRemoteProvider {
       await apiService.patientNames(patientId);
 
   Future<PatientName> postPatientName(
-    PatientName patientName,
+    PatientNameRequest patientName,
   ) async =>
       await apiService.postPatientName(patientName);
 
   Future<PatientName> putPatientName(
-    PatientName patientName,
+      String id,
+    PatientNameRequest patientName,
   ) async =>
-      await apiService.putPatientName(patientName);
+      await apiService.putPatientName(id,patientName);
 
   Future<void> deletePatientName(
     String id,
@@ -80,14 +83,15 @@ class PatientRemoteProvider {
       await apiService.patientNationalities(patientId);
 
   Future<PatientNationality> postPatientNationality(
-    PatientNationality patientNationality,
+    PatientNationalityRequest patientNationality,
   ) async =>
       await apiService.postPatientNationality(patientNationality);
 
   Future<PatientNationality> putPatientNationality(
-    PatientNationality patientNationality,
+      String id,
+    PatientNationalityRequest patientNationality,
   ) async =>
-      await apiService.putPatientNationality(patientNationality);
+      await apiService.putPatientNationality(id,patientNationality);
 
   Future<void> deletePatientNationality(
     String id,
@@ -100,14 +104,15 @@ class PatientRemoteProvider {
       await apiService.patientPassports(patientId);
 
   Future<PatientPassport> postPatientPassport(
-    PatientPassport patientPassport,
+    PatientPassportRequest patientPassport,
   ) async =>
       await apiService.postPatientPassport(patientPassport);
 
   Future<PatientPassport> putPatientPassport(
-    PatientPassport patientPassport,
+      String id,
+    PatientPassportRequest patientPassport,
   ) async =>
-      await apiService.putPatientPassport(patientPassport);
+      await apiService.putPatientPassport(id,patientPassport);
 
   Future<void> deletePatientPassport(
     String id,
@@ -126,14 +131,15 @@ class PatientRemoteProvider {
       );
 
   Future<MedicalRecord> postMedicalRecord(
-    MedicalRecord medicalRecord,
+    MedicalRecordRequest medicalRecord,
   ) async =>
       await apiService.postMedicalRecord(medicalRecord);
 
   Future<MedicalRecord> putMedicalRecord(
-    MedicalRecord medicalRecord,
+      String id,
+    MedicalRecordRequest medicalRecord,
   ) async =>
-      await apiService.putMedicalRecord(medicalRecord);
+      await apiService.putMedicalRecord(id,medicalRecord);
 
   Future<void> deleteMedicalRecord(
     String id,
@@ -146,14 +152,15 @@ class PatientRemoteProvider {
       await apiService.medicalRecordBudgets(medicalRecordId);
 
   Future<MedicalRecordBudget> postMedicalRecordBudget(
-    MedicalRecordBudget medicalRecordBudget,
+    MedicalRecordBudgetRequest medicalRecordBudget,
   ) async =>
       await apiService.postMedicalRecordBudget(medicalRecordBudget);
 
   Future<MedicalRecordBudget> putMedicalRecordBudget(
-    MedicalRecordBudget medicalRecordBudget,
+      String id,
+    MedicalRecordBudgetRequest medicalRecordBudget,
   ) async =>
-      await apiService.putMedicalRecordBudget(medicalRecordBudget);
+      await apiService.putMedicalRecordBudget(id,medicalRecordBudget);
 
   Future<void> deleteMedicalRecordBudget(
     String id,
@@ -166,14 +173,15 @@ class PatientRemoteProvider {
       await apiService.medicalRecordAgents(medicalRecordId);
 
   Future<MedicalRecordAgent> postMedicalRecordAgent(
-    MedicalRecordAgent medicalRecordAgent,
+    MedicalRecordAgentRequest medicalRecordAgent,
   ) async =>
       await apiService.postMedicalRecordAgent(medicalRecordAgent);
 
   Future<MedicalRecordAgent> putMedicalRecordAgent(
-    MedicalRecordAgent medicalRecordAgent,
+      String id,
+    MedicalRecordAgentRequest medicalRecordAgent,
   ) async =>
-      await apiService.putMedicalRecordAgent(medicalRecordAgent);
+      await apiService.putMedicalRecordAgent(id,medicalRecordAgent);
 
   Future<void> deleteMedicalRecordAgent(
     String id,
@@ -187,14 +195,15 @@ class PatientRemoteProvider {
       await apiService.medicalRecordCompanions(medicalRecordId);
 
   Future<MedicalRecordCompanion> postMedicalRecordCompanion(
-    MedicalRecordCompanion medicalRecordCompanion,
+    MedicalRecordCompanionRequest medicalRecordCompanion,
   ) async =>
       await apiService.postMedicalRecordCompanion(medicalRecordCompanion);
 
   Future<MedicalRecordCompanion> putMedicalRecordCompanion(
-    MedicalRecordCompanion medicalRecordCompanion,
+      String id,
+    MedicalRecordCompanionRequest medicalRecordCompanion,
   ) async =>
-      await apiService.putMedicalRecordCompanion(medicalRecordCompanion);
+      await apiService.putMedicalRecordCompanion(id,medicalRecordCompanion);
 
   Future<void> deleteMedicalRecordCompanion(
     String id,
@@ -208,14 +217,15 @@ class PatientRemoteProvider {
       await apiService.medicalRecordHospitals(medicalRecordId);
 
   Future<MedicalRecordHospital> postMedicalRecordHospital(
-    MedicalRecordHospital medicalRecordHospital,
+    MedicalRecordHospitalRequest medicalRecordHospital,
   ) async =>
       await apiService.postMedicalRecordHospital(medicalRecordHospital);
 
   Future<MedicalRecordHospital> putMedicalRecordHospital(
-    MedicalRecordHospital medicalRecordHospital,
+      String id,
+    MedicalRecordHospitalRequest medicalRecordHospital,
   ) async =>
-      await apiService.putMedicalRecordHospital(medicalRecordHospital);
+      await apiService.putMedicalRecordHospital(id,medicalRecordHospital);
 
   Future<void> deleteMedicalRecordHospital(
     String id,
@@ -229,14 +239,15 @@ class PatientRemoteProvider {
       await apiService.medicalRecordInterpreters(medicalRecordId);
 
   Future<MedicalRecordInterpreter> postMedicalRecordInterpreter(
-    MedicalRecordInterpreter medicalRecordInterpreter,
+    MedicalRecordInterpreterRequest medicalRecordInterpreter,
   ) async =>
       await apiService.postMedicalRecordInterpreter(medicalRecordInterpreter);
 
   Future<MedicalRecordInterpreter> putMedicalRecordInterpreter(
-    MedicalRecordInterpreter medicalRecordInterpreter,
+      String id,
+    MedicalRecordInterpreterRequest medicalRecordInterpreter,
   ) async =>
-      await apiService.putMedicalRecordInterpreter(medicalRecordInterpreter);
+      await apiService.putMedicalRecordInterpreter(id,medicalRecordInterpreter);
 
   Future<void> deleteMedicalRecordInterpreter(
     String id,
@@ -250,14 +261,15 @@ class PatientRemoteProvider {
       await apiService.medicalRecordsProgress(medicalRecordId);
 
   Future<MedicalRecordProgress> postMedicalRecordProgress(
-    MedicalRecordProgress medicalRecordProgress,
+    MedicalRecordProgressRequest medicalRecordProgress,
   ) async =>
       await apiService.postMedicalRecordProgress(medicalRecordProgress);
 
   Future<MedicalRecordProgress> putMedicalRecordProgress(
-    MedicalRecordProgress medicalRecordProgress,
+      String id,
+    MedicalRecordProgressRequest medicalRecordProgress,
   ) async =>
-      await apiService.putMedicalRecordProgress(medicalRecordProgress);
+      await apiService.putMedicalRecordProgress(id,medicalRecordProgress);
 
   Future<void> deleteMedicalRecordProgress(
     String id,
@@ -271,14 +283,15 @@ class PatientRemoteProvider {
       await apiService.medicalRecordsOverseas(medicalRecordId);
 
   Future<MedicalRecordOversea> postMedicalRecordOversea(
-    MedicalRecordOversea medicalRecordOversea,
+    MedicalRecordOverseaRequest medicalRecordOversea,
   ) async =>
       await apiService.postMedicalRecordOversea(medicalRecordOversea);
 
   Future<MedicalRecordOversea> putMedicalRecordOversea(
-    MedicalRecordOversea medicalRecordOversea,
+      String id,
+    MedicalRecordOverseaRequest medicalRecordOversea,
   ) async =>
-      await apiService.putMedicalRecordOversea(medicalRecordOversea);
+      await apiService.putMedicalRecordOversea(id,medicalRecordOversea);
 
   Future<void> deleteMedicalRecordOversea(
     String id,
@@ -292,14 +305,15 @@ class PatientRemoteProvider {
       await apiService.medicalRecordsOverseaData(medicalRecordOverseaId);
 
   Future<MedicalRecordOverseaData> postMedicalRecordOverseaData(
-    MedicalRecordOverseaData medicalRecordOverseaData,
+    MedicalRecordOverseaDataRequest medicalRecordOverseaData,
   ) async =>
       await apiService.postMedicalRecordOverseaData(medicalRecordOverseaData);
 
   Future<MedicalRecordOverseaData> putMedicalRecordOverseaData(
-    MedicalRecordOverseaData medicalRecordOverseaData,
+      String id,
+    MedicalRecordOverseaDataRequest medicalRecordOverseaData,
   ) async =>
-      await apiService.putMedicalRecordOverseaData(medicalRecordOverseaData);
+      await apiService.putMedicalRecordOverseaData(id,medicalRecordOverseaData);
 
   Future<void> deleteMedicalRecordOverseaData(
     String id,

@@ -7,6 +7,8 @@ abstract class AuthRepository {
 
   Future<String?> getReferenceData();
 
+  Future<bool> isLoggedIn();
+
   Future<Credentials> refreshToken();
 
   Future<PermissionRole> getPermissionRole();

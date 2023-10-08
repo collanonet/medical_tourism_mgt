@@ -19,7 +19,7 @@ class _PrePatientPageState extends State<PrePatientPage> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => GetIt.I<PrePatientModel>(),
+      create: (context) => GetIt.I<PrePatientModel>()..prePatients(),
       child: const LayoutView(
         selectedIndex: 0,
         page: PrePatientScreen(),

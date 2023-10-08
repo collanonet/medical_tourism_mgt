@@ -20,7 +20,7 @@ class _PatientPageState extends State<PatientPage> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => GetIt.I<PatientModel>(),
+      create: (context) => GetIt.I<PatientModel>()..patients(),
       child: const LayoutView(
         selectedIndex: 0,
         page: PatientScreen(),

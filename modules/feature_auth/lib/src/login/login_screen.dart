@@ -24,10 +24,6 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: context.appTheme.primaryColor,
       body: Consumer<AuthModel>(
         builder: (context, model, child) {
-          if(model.loginData.data != null){
-            model.syncAuthState();
-            logger.d('auth here');
-          }
           return ReactiveFormConfig(
               validationMessages: validationMessagesLogin(context),
               child: ReactiveFormBuilder(
