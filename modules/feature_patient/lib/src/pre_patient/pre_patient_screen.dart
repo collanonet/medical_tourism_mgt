@@ -1,7 +1,9 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:core_l10n/l10n.dart';
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:data_table_2/data_table_2.dart';
+import '../../feature_patient.gm.dart';
 import 'pre_patient_model.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,6 +25,14 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<PrePatientModel>(builder: (context, model, _) {
+      if(model.postPatientData.data != null){
+        context.pushRoute(
+          DetailPatientRoute(
+            patient: model.postPatientData.data,
+            id: model.postPatientData.data!.id,
+          ),
+        );
+      }
       return Column(
         children: [
           const PrePatientFilter(),
