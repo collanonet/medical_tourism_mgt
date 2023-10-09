@@ -9,15 +9,15 @@ import 'estimate_screen.dart';
 class EstimatePage extends StatelessWidget {
   const EstimatePage({
     super.key,
-    required this.patient,
+    this.patient,
   });
-  final Patient patient;
+  final Patient? patient;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) =>
-      GetIt.I<EstimateModel>()..initialData(patient),
+      GetIt.I<EstimateModel>()..initialData(patient: patient ),
       child: const EstimateScreen(),
     );
   }

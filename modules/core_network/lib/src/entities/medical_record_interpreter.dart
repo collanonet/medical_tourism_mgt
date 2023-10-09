@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 part 'medical_record_interpreter.g.dart';
 
@@ -6,9 +7,9 @@ part 'medical_record_interpreter.g.dart';
 class MedicalRecordInterpreter {
   @JsonKey(name: '_id')
   final String id;
-   bool requiredOrUnnecessary;
-   String interpreter;
-   String medicalRecord;
+  bool requiredOrUnnecessary;
+  String interpreter;
+  String medicalRecord;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -26,4 +27,21 @@ class MedicalRecordInterpreter {
   }
 
   Map<String, dynamic> toJson() => _$MedicalRecordInterpreterToJson(this);
+
+  static FormGroup buildFormGroup(
+      MedicalRecordInterpreter? medicalRecordInterpreter) {
+    return FormGroup({
+      'id': FormControl<String>(value: medicalRecordInterpreter?.id),
+      'requiredOrUnnecessary': FormControl<bool>(
+          value: medicalRecordInterpreter?.requiredOrUnnecessary),
+      'interpreter':
+          FormControl<String>(value: medicalRecordInterpreter?.interpreter),
+      'medicalRecord':
+          FormControl<String>(value: medicalRecordInterpreter?.medicalRecord),
+      'createdAt':
+          FormControl<DateTime>(value: medicalRecordInterpreter?.createdAt),
+      'updatedAt':
+          FormControl<DateTime>(value: medicalRecordInterpreter?.updatedAt),
+    });
+  }
 }

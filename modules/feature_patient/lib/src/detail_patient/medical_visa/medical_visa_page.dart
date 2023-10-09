@@ -9,15 +9,15 @@ import 'medical_visa_screen.dart';
 class MedicalVisaPage extends StatelessWidget {
   const MedicalVisaPage({
     super.key,
-    required this.patient,
+    this.patient,
   });
-  final Patient patient;
+  final Patient? patient;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) =>
-      GetIt.I<MedicalVisaModel>()..initialData(patient),
+      GetIt.I<MedicalVisaModel>()..initialData(patient: patient ),
       child: const MedicalVisaScreen(),
     );
   }

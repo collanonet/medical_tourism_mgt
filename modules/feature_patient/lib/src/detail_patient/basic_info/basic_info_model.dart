@@ -14,13 +14,15 @@ class BasicInformationModel with ChangeNotifier {
 
   late Patient _patient;
   Patient get patient => _patient;
-  Future<void> initialData(Patient patient) async {
-    _patient = patient;
-    notifyListeners();
-    await getPatientNames(patient.id);
-    await getPatientNationalities(patient.id);
-    await getPatientPassports(patient.id);
-    await getMedicalRecords(patient.id);
+  Future<void> initialData({Patient? patient, String? id}) async {
+    if (patient != null) {
+      _patient = patient;
+      notifyListeners();
+      await getPatientNames(patient.id);
+      await getPatientNationalities(patient.id);
+      await getPatientPassports(patient.id);
+      await getMedicalRecords(patient.id);
+    }
   }
 
   //GET_PATIENT_NAMES
@@ -221,27 +223,27 @@ class BasicInformationModel with ChangeNotifier {
   }
 
 //GET_MEDICAL_RECORDS
-  AsyncData<List<MedicalRecord>> _medicalRecords = const AsyncData();
-  AsyncData<List<MedicalRecord>> get medicalRecords => _medicalRecords;
+  AsyncData<MedicalRecord> _medicalRecord = const AsyncData();
+  AsyncData<MedicalRecord> get medicalRecord => _medicalRecord;
 
   Future<void> getMedicalRecords(String patientId) async {
-    _medicalRecords = const AsyncData(loading: true);
+    _medicalRecord = const AsyncData(loading: true);
     notifyListeners();
 
     await patientRepository.medicalRecords(patient: patientId).then((value) {
-      _medicalRecords = AsyncData(data: value);
+      _medicalRecord = AsyncData(data: value.first);
     }).catchError((error) {
       logger.d(error);
-      _medicalRecords = AsyncData(error: error);
+      _medicalRecord = AsyncData(error: error);
     }).whenComplete(() {
       notifyListeners();
     });
-    if (_medicalRecords.data != null && _medicalRecords.data!.isNotEmpty) {
-      await getMedicalRecordAgents(_medicalRecords.data![0].id);
-      await getMedicalRecordBudgets(_medicalRecords.data![0].id);
-      await getMedicalRecordCompanions(_medicalRecords.data![0].id);
-      await getMedicalRecordHospitals(_medicalRecords.data![0].id);
-      await getMedicalRecordInterpreters(_medicalRecords.data![0].id);
+    if (_medicalRecord.data != null) {
+      await getMedicalRecordAgents(_medicalRecord.data!.id);
+      await getMedicalRecordBudgets(_medicalRecord.data!.id);
+      await getMedicalRecordCompanions(_medicalRecord.data!.id);
+      await getMedicalRecordHospitals(_medicalRecord.data!.id);
+      await getMedicalRecordInterpreters(_medicalRecord.data!.id);
     }
   }
 
@@ -249,16 +251,16 @@ class BasicInformationModel with ChangeNotifier {
   Future<void> postMedicalRecords(
     MedicalRecordRequest medicalRecordRequest,
   ) async {
-    _medicalRecords = const AsyncData(loading: true);
+    _medicalRecord = const AsyncData(loading: true);
     notifyListeners();
 
     await patientRepository
         .postMedicalRecord(medicalRecordRequest)
         .then((value) {
-      _medicalRecords.data?.add(value);
+      _medicalRecord = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);
-      _medicalRecords = AsyncData(error: error);
+      _medicalRecord = AsyncData(error: error);
     }).whenComplete(() {
       notifyListeners();
     });
@@ -269,25 +271,16 @@ class BasicInformationModel with ChangeNotifier {
     String id,
     MedicalRecordRequest medicalRecordRequest,
   ) async {
-    _medicalRecords = const AsyncData(loading: true);
+    _medicalRecord = const AsyncData(loading: true);
     notifyListeners();
 
     await patientRepository
         .putMedicalRecord(id, medicalRecordRequest)
         .then((value) {
-      // Find from list and update or add
-      final index = _medicalRecords.data?.indexWhere(
-            (element) => element.id == id,
-          ) ??
-          -1;
-      if (index >= 0) {
-        _medicalRecords.data?[index] = value;
-      } else {
-        _medicalRecords.data?.add(value);
-      }
+      _medicalRecord = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);
-      _medicalRecords = AsyncData(error: error);
+      _medicalRecord = AsyncData(error: error);
     }).whenComplete(() {
       notifyListeners();
     });

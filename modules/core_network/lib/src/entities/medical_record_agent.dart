@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 part 'medical_record_agent.g.dart';
 
@@ -6,10 +7,10 @@ part 'medical_record_agent.g.dart';
 class MedicalRecordAgent {
   @JsonKey(name: '_id')
   final String id;
-   String company;
-   String nameInKanji;
-   String nameInKana;
-   String medicalRecord;
+  String company;
+  String nameInKanji;
+  String nameInKana;
+  String medicalRecord;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -28,4 +29,18 @@ class MedicalRecordAgent {
   }
 
   Map<String, dynamic> toJson() => _$MedicalRecordAgentToJson(this);
+
+  static FormGroup buildFormGroup(MedicalRecordAgent? medicalRecordAgent) {
+    return FormGroup({
+      'id': FormControl<String>(value: medicalRecordAgent?.id),
+      'company': FormControl<String>(value: medicalRecordAgent?.company),
+      'nameInKanji':
+          FormControl<String>(value: medicalRecordAgent?.nameInKanji),
+      'nameInKana': FormControl<String>(value: medicalRecordAgent?.nameInKana),
+      'medicalRecord':
+          FormControl<String>(value: medicalRecordAgent?.medicalRecord),
+      'createdAt': FormControl<DateTime>(value: medicalRecordAgent?.createdAt),
+      'updatedAt': FormControl<DateTime>(value: medicalRecordAgent?.updatedAt),
+    });
+  }
 }

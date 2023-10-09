@@ -9,15 +9,15 @@ import 'medical_summary_screen.dart';
 class MedicalSummaryPage extends StatelessWidget {
   const MedicalSummaryPage({
     super.key,
-    required this.patient,
+    this.patient,
   });
-  final Patient patient;
+  final Patient? patient;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) =>
-      GetIt.I<MedicalSummaryModel>()..initialData(patient),
+      GetIt.I<MedicalSummaryModel>()..initialData(patient: patient ),
       child: const MedicalSummaryScreen(),
     );
   }

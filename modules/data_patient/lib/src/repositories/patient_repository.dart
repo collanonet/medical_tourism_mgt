@@ -15,7 +15,7 @@ abstract class PatientRepository {
   );
 
   Future<PrePatient> putPrePatient(
-      String id,
+    String id,
     PrePatientRequest prePatient,
   );
 
@@ -27,12 +27,16 @@ abstract class PatientRepository {
 
   Future<Paginated<Patient>> patients();
 
+  Future<Patient> patient(
+    String id,
+  );
+
   Future<Patient> postPatient(
-      PatientRequest patient,
+    PatientRequest patient,
   );
 
   Future<Patient> putPatient(
-      String id,
+    String id,
     PatientRequest patient,
   );
 
@@ -51,7 +55,7 @@ abstract class PatientRepository {
   );
 
   Future<PatientName> putPatientName(
-      String id,
+    String id,
     PatientNameRequest patientName,
   );
 
@@ -69,7 +73,7 @@ abstract class PatientRepository {
   );
 
   Future<PatientNationality> putPatientNationality(
-      String id,
+    String id,
     PatientNationalityRequest patientNationality,
   );
 
@@ -87,7 +91,7 @@ abstract class PatientRepository {
   );
 
   Future<PatientPassport> putPatientPassport(
-      String id,
+    String id,
     PatientPassportRequest patientPassport,
   );
 
@@ -108,7 +112,7 @@ abstract class PatientRepository {
   );
 
   Future<MedicalRecord> putMedicalRecord(
-      String id,
+    String id,
     MedicalRecordRequest medicalRecord,
   );
 
@@ -127,7 +131,7 @@ abstract class PatientRepository {
   );
 
   Future<MedicalRecordAgent> putMedicalRecordAgent(
-      String id,
+    String id,
     MedicalRecordAgentRequest medicalRecordAgent,
   );
 
@@ -146,7 +150,7 @@ abstract class PatientRepository {
   );
 
   Future<MedicalRecordBudget> putMedicalRecordBudget(
-      String id,
+    String id,
     MedicalRecordBudgetRequest medicalRecordBudget,
   );
 
@@ -165,7 +169,7 @@ abstract class PatientRepository {
   );
 
   Future<MedicalRecordCompanion> putMedicalRecordCompanion(
-      String id,
+    String id,
     MedicalRecordCompanionRequest medicalRecordCompanion,
   );
 
@@ -183,7 +187,7 @@ abstract class PatientRepository {
   );
 
   Future<MedicalRecordHospital> putMedicalRecordHospital(
-      String id,
+    String id,
     MedicalRecordHospitalRequest medicalRecordHospital,
   );
 
@@ -201,7 +205,7 @@ abstract class PatientRepository {
   );
 
   Future<MedicalRecordInterpreter> putMedicalRecordInterpreter(
-      String id,
+    String id,
     MedicalRecordInterpreterRequest medicalRecordInterpreter,
   );
 
@@ -219,7 +223,7 @@ abstract class PatientRepository {
   );
 
   Future<MedicalRecordProgress> putMedicalRecordProgress(
-      String id,
+    String id,
     MedicalRecordProgressRequest medicalRecordProgress,
   );
 
@@ -237,7 +241,7 @@ abstract class PatientRepository {
   );
 
   Future<MedicalRecordOversea> putMedicalRecordOversea(
-      String id,
+    String id,
     MedicalRecordOverseaRequest medicalRecordOversea,
   );
 
@@ -255,7 +259,7 @@ abstract class PatientRepository {
   );
 
   Future<MedicalRecordOverseaData> putMedicalRecordOverseaData(
-      String id,
+    String id,
     MedicalRecordOverseaDataRequest medicalRecordOverseaData,
   );
 

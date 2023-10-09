@@ -9,15 +9,15 @@ import 'domestic_medical_data_screen.dart';
 class DomesticMedicalDataPage extends StatelessWidget {
   const DomesticMedicalDataPage({
     super.key,
-    required this.patient,
+    this.patient,
   });
-  final Patient patient;
+  final Patient? patient;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) =>
-      GetIt.I<DomesticMedicalDataModel>()..initialData(patient),
+      GetIt.I<DomesticMedicalDataModel>()..initialData(patient: patient),
       child: const BDomesticMedicalDataScreen(),
     );
   }

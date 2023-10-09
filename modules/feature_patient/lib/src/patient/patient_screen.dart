@@ -111,191 +111,205 @@ class _PatientScreenState extends State<PatientScreen> {
               ),
             ),
             Expanded(
-              child: Skeletonizer(
-                enabled: model.patientData.loading,
-                child: DynamicTable(
-                  data: TableData(
-                    columns: [
-                      HeaderTableData(
-                        titleHeader: SizedBox(),
-                      ),
-                      HeaderTableData(
-                        titleHeader: Text(context.l10n.labelPatient),
-                      ),
-                      HeaderTableData(
-                        titleHeader: Text(context.l10n.labelAgent),
-                      ),
-                      HeaderTableData(
-                        titleHeader: Text(context.l10n.labelProgress),
-                      ),
-                      HeaderTableData(
-                        titleHeader: Text(context.l10n.labelCaseNumber),
-                      ),
-                      HeaderTableData(
-                        titleHeader: Text(context.l10n.labelClassification),
-                      ),
-                      HeaderTableData(
-                        titleHeader: Text(context.l10n.labelEntryDate),
-                      ),
-                      HeaderTableData(
-                        titleHeader: Text(context.l10n.labelExaminationDate),
-                      ),
-                      HeaderTableData(
-                        titleHeader: Text(context.l10n.labelReturnDate),
-                      ),
-                      HeaderTableData(
-                        titleHeader: Text(context.l10n.labelNationality),
-                      ),
-                      HeaderTableData(
-                        titleHeader: Text(context.l10n.labelNameOfaDisease),
-                      ),
-                      HeaderTableData(
-                        titleHeader: Text(context.l10n.labelSale),
-                      ),
-                      HeaderTableData(
-                        titleHeader: Text(context.l10n.labelStaffName),
-                      ),
-                      HeaderTableData(
-                        titleHeader: Text(context.l10n.labelAdmittedToHospital),
-                      ),
-                      HeaderTableData(
-                        titleHeader:
-                            Text(context.l10n.labelNumberOfGroupMembers),
-                      ),
-                    ],
-                    rows:  (model.patientData.data?.items.length ?? 0) == 0 ? [] : List<RowTableData>.generate(
-                      model.patientData.data?.items.length ?? 0,
-                      (index) {
-                        var item = model.patientData.data?.items[index];
-                        return RowTableData(
-                          onTap: () {
-                            context.pushRoute(DetailPatientRoute(patient: item));
-                          },
-                          cell: [
-                            Row(
-                              children: [
-                                Container(
-                                  height: 60,
-                                  width: 60,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(4),
-                                    color: Colors.grey.shade300,
+              child: DynamicTable(
+                data: TableData(
+                  columns: [
+                    HeaderTableData(
+                      titleHeader: SizedBox(),
+                    ),
+                    HeaderTableData(
+                      titleHeader: Text(context.l10n.labelPatient),
+                    ),
+                    HeaderTableData(
+                      titleHeader: Text(context.l10n.labelAgent),
+                    ),
+                    HeaderTableData(
+                      titleHeader: Text(context.l10n.labelProgress),
+                    ),
+                    HeaderTableData(
+                      titleHeader: Text(context.l10n.labelCaseNumber),
+                    ),
+                    HeaderTableData(
+                      titleHeader: Text(context.l10n.labelClassification),
+                    ),
+                    HeaderTableData(
+                      titleHeader: Text(context.l10n.labelEntryDate),
+                    ),
+                    HeaderTableData(
+                      titleHeader: Text(context.l10n.labelExaminationDate),
+                    ),
+                    HeaderTableData(
+                      titleHeader: Text(context.l10n.labelReturnDate),
+                    ),
+                    HeaderTableData(
+                      titleHeader: Text(context.l10n.labelNationality),
+                    ),
+                    HeaderTableData(
+                      titleHeader: Text(context.l10n.labelNameOfaDisease),
+                    ),
+                    HeaderTableData(
+                      titleHeader: Text(context.l10n.labelSale),
+                    ),
+                    HeaderTableData(
+                      titleHeader: Text(context.l10n.labelStaffName),
+                    ),
+                    HeaderTableData(
+                      titleHeader: Text(context.l10n.labelAdmittedToHospital),
+                    ),
+                    HeaderTableData(
+                      titleHeader:
+                          Text(context.l10n.labelNumberOfGroupMembers),
+                    ),
+                  ],
+                  rows: (model.patientData.data?.items.length ?? 0) == 0
+                      ? []
+                      : List<RowTableData>.generate(
+                          model.patientData.data?.items.length ?? 0,
+                          (index) {
+                            var item = model.patientData.data?.items[index];
+                            return RowTableData(
+                              onTap: () {
+                                context.pushRoute(
+                                  DetailPatientRoute(
+                                    patient: item,
+                                    id: item.id,
                                   ),
-                                  child: const Icon(
-                                    Icons.person,
-                                    color: Colors.white,
-                                    size: 50,
-                                  ),
+                                );
+                              },
+                              cell: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      height: 60,
+                                      width: 60,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(4),
+                                        color: Colors.grey.shade300,
+                                      ),
+                                      child: const Icon(
+                                        Icons.person,
+                                        color: Colors.white,
+                                        size: 50,
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              ],
-                            ),
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '${item?.firstName} ${item!.familyName}',
+                                      style: TextStyle(
+                                        color: context.appTheme.primaryColor,
+                                      ),
+                                    ),
+                                    const Text('--'),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'WANG MUCHEN',
+                                      style: TextStyle(
+                                        color: Colors.blueGrey,
+                                      ),
+                                    ),
+                                    Text('王　沐宸'),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8, vertical: 4),
+                                      decoration: BoxDecoration(
+                                          color: Colors.greenAccent,
+                                          borderRadius:
+                                              BorderRadius.circular(4)),
+                                      child: const Text(
+                                        '受注',
+                                        style: TextStyle(color: Colors.white),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                                 Text(
-                                  '${item?.firstName} ${item!.familyName}',
+                                  '001-C-20-1',
+                                ),
+                                Column(
+                                  children: [
+                                    Wrap(
+                                      children: [
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8, vertical: 4),
+                                          decoration: BoxDecoration(
+                                              color: Colors.blue,
+                                              borderRadius:
+                                                  BorderRadius.circular(4)),
+                                          child: const Text(
+                                            '治療',
+                                            style: TextStyle(color: Colors.white),
+                                          ),
+                                        ),
+                                        const SizedBox(width: 4),
+                                        Container(
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 8, vertical: 4),
+                                          decoration: BoxDecoration(
+                                              color: Colors.purple,
+                                              borderRadius:
+                                                  BorderRadius.circular(4)),
+                                          child: const Text(
+                                            '再生',
+                                            style: TextStyle(color: Colors.white),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  '2020/04/22',
+                                ),
+                                Text(
+                                  '2020/04/22',
+                                ),
+                                Text(
+                                  '2020/04/22',
+                                ),
+                                Text(
+                                  '中国',
+                                ),
+                                Text(
+                                  '検診',
+                                ),
+                                Text(
+                                  'ガー',
+                                ),
+                                Text(
+                                  'ガー',
+                                ),
+                                Text(
+                                  'りんくうメディカルクリニック',
                                   style: TextStyle(
                                     color: context.appTheme.primaryColor,
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
-                                const Text('--'),
-                              ],
-                            ),
-                            Column(
-                              mainAxisSize: MainAxisSize.min,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
                                 Text(
-                                  'WANG MUCHEN',
-                                  style: TextStyle(
-                                    color: Colors.blueGrey,
-                                  ),
-                                ),
-                                Text('王　沐宸'),
-                              ],
-                            ),
-                            Row(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  decoration: BoxDecoration(
-                                      color: Colors.greenAccent,
-                                      borderRadius: BorderRadius.circular(4)),
-                                  child: const Text(
-                                    '受注',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
+                                  '7',
                                 ),
                               ],
-                            ),
-                            Text(
-                              '001-C-20-1',
-                            ),
-                            Wrap(
-                              children: [
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  decoration: BoxDecoration(
-                                      color: Colors.blue,
-                                      borderRadius: BorderRadius.circular(4)),
-                                  child: const Text(
-                                    '治療',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                ),
-                                const SizedBox(width: 4),
-                                Container(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 8, vertical: 4),
-                                  decoration: BoxDecoration(
-                                      color: Colors.purple,
-                                      borderRadius: BorderRadius.circular(4)),
-                                  child: const Text(
-                                    '再生',
-                                    style: TextStyle(color: Colors.white),
-                                  ),
-                                )
-                              ],
-                            ),
-                            Text(
-                              '2020/04/22',
-                            ),
-                            Text(
-                              '2020/04/22',
-                            ),
-                            Text(
-                              '2020/04/22',
-                            ),
-                            Text(
-                              '中国',
-                            ),
-                            Text(
-                              '検診',
-                            ),
-                            Text(
-                              'ガー',
-                            ),
-                            Text(
-                              'ガー',
-                            ),
-                            Text(
-                              'りんくうメディカルクリニック',
-                              style: TextStyle(
-                                color: context.appTheme.primaryColor,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            Text(
-                              '7',
-                            ),
-                          ],
-                        );
-                      },
-                    ),
-                  ),
+                            );
+                          },
+                        ),
                 ),
               ),
             ),

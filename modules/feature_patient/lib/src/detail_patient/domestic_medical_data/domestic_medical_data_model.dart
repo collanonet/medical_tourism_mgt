@@ -15,8 +15,7 @@ class DomesticMedicalDataModel with ChangeNotifier {
 
   Patient get patient => _patient;
 
-  Future<void> initialData(Patient patient) async {
-    _patient = patient;
+  Future<void> initialData({Patient? patient, String? id}) async {
     notifyListeners();
   }
 }

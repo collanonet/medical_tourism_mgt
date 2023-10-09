@@ -9,15 +9,15 @@ import 'overseas_medical_data_screen.dart';
 class OverseasMedicalDataPage extends StatelessWidget {
   const OverseasMedicalDataPage({
     super.key,
-    required this.patient,
+    this.patient,
   });
-  final Patient patient;
+  final Patient? patient;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) =>
-      GetIt.I<OverseasMedicalDataModel>()..initialData(patient),
+      GetIt.I<OverseasMedicalDataModel>()..initialData(patient: patient ),
       child: const OverseasMedicalDataScreen(),
     );
   }

@@ -22,6 +22,7 @@ class ReactiveTextFormField extends StatelessWidget {
     this.onEditingComplete,
     this.onChanged,
     this.obscureText = false,
+    this.maxLines = 1,
   });
 
   final String? formControlName;
@@ -39,6 +40,8 @@ class ReactiveTextFormField extends StatelessWidget {
   final Function(FormControl<String>)? onEditingComplete;
   final Function(FormControl<String>)? onChanged;
   final bool obscureText;
+  final int? maxLines;
+
   @override
   Widget build(BuildContext context) {
     final InputBorder errorBorder = OutlineInputBorder(
@@ -80,7 +83,8 @@ class ReactiveTextFormField extends StatelessWidget {
       readOnly: readOnly,
       maxLength: maxLength,
       decoration: decoration.copyWith(
-        fillColor: CupertinoColors.systemGroupedBackground,
+        fillColor: Colors.white,
+        // fillColor: CupertinoColors.systemGroupedBackground,
         filled: true,
         border: border,
         enabledBorder: border,
@@ -93,6 +97,7 @@ class ReactiveTextFormField extends StatelessWidget {
       keyboardType: keyboardType ?? TextInputType.text,
       inputFormatters: inputFormatters ?? [],
       onSubmitted: onSubmitted,
+      maxLines: maxLines,
     );
   }
 }

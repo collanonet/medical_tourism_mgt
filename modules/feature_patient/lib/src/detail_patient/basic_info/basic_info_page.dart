@@ -9,15 +9,15 @@ import 'basic_info_screen.dart';
 class BasicInformationPage extends StatelessWidget {
   const BasicInformationPage({
     super.key,
-    required this.patient,
+     this.patient,
   });
-  final Patient patient;
+  final Patient? patient;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) =>
-          GetIt.I<BasicInformationModel>()..initialData(patient),
+          GetIt.I<BasicInformationModel>()..initialData(patient: patient),
       child: const BasicInformationScreen(),
     );
   }

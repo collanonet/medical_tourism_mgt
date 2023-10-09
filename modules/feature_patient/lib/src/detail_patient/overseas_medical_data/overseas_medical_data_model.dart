@@ -14,8 +14,7 @@ class OverseasMedicalDataModel with ChangeNotifier {
 
   late Patient _patient;
   Patient get patient => _patient;
-  Future<void> initialData(Patient patient) async {
-    _patient = patient;
+  Future<void> initialData({Patient? patient, String? id}) async {
     notifyListeners();
   }
 

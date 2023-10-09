@@ -20,11 +20,14 @@ abstract class $FeaturePatientRouterModule extends _i4.AutoRouterModule {
   @override
   final Map<String, _i4.PageFactory> pagesMap = {
     DetailPatientRoute.name: (routeData) {
-      final args = routeData.argsAs<DetailPatientRouteArgs>();
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<DetailPatientRouteArgs>(
+          orElse: () => DetailPatientRouteArgs(id: pathParams.optString('id')));
       return _i4.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i1.DetailPatientPage(
           key: args.key,
+          id: args.id,
           patient: args.patient,
         ),
       );
@@ -49,14 +52,17 @@ abstract class $FeaturePatientRouterModule extends _i4.AutoRouterModule {
 class DetailPatientRoute extends _i4.PageRouteInfo<DetailPatientRouteArgs> {
   DetailPatientRoute({
     _i5.Key? key,
-    required _i6.Patient patient,
+    String? id,
+    _i6.Patient? patient,
     List<_i4.PageRouteInfo>? children,
   }) : super(
           DetailPatientRoute.name,
           args: DetailPatientRouteArgs(
             key: key,
+            id: id,
             patient: patient,
           ),
+          rawPathParams: {'id': id},
           initialChildren: children,
         );
 
@@ -69,16 +75,19 @@ class DetailPatientRoute extends _i4.PageRouteInfo<DetailPatientRouteArgs> {
 class DetailPatientRouteArgs {
   const DetailPatientRouteArgs({
     this.key,
-    required this.patient,
+    this.id,
+    this.patient,
   });
 
   final _i5.Key? key;
 
-  final _i6.Patient patient;
+  final String? id;
+
+  final _i6.Patient? patient;
 
   @override
   String toString() {
-    return 'DetailPatientRouteArgs{key: $key, patient: $patient}';
+    return 'DetailPatientRouteArgs{key: $key, id: $id, patient: $patient}';
   }
 }
 

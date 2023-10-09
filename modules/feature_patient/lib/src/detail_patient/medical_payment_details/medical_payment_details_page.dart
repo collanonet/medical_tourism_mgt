@@ -9,15 +9,15 @@ import 'medical_payment_details_screen.dart';
 class MedicalPaymentDetailsPage extends StatelessWidget {
   const MedicalPaymentDetailsPage({
     super.key,
-    required this.patient,
+    this.patient,
   });
-  final Patient patient;
+  final Patient? patient;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) =>
-      GetIt.I<MedicalPaymentDetailModel>()..initialData(patient),
+      GetIt.I<MedicalPaymentDetailModel>()..initialData(patient: patient ),
       child: const MedicalPaymentDetailScreen(),
     );
   }

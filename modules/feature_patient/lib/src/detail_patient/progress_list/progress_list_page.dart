@@ -8,14 +8,14 @@ import 'progress_list_screen.dart';
 class ProgressListPage extends StatelessWidget {
   const ProgressListPage({
     super.key,
-    required this.patient,
+    this.patient,
   });
-  final Patient patient;
+  final Patient? patient;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => GetIt.I<ProgressListModel>()..initialData(patient),
+      create: (context) => GetIt.I<ProgressListModel>()..initialData(patient: patient ),
       child: const ProgressListScreen(),
     );
   }

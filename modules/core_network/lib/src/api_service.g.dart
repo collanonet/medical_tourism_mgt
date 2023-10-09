@@ -260,6 +260,33 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<Patient> patient(String id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Patient>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/patients/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Patient.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<Patient> postPatient(PatientRequest patient) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -305,7 +332,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/patients',
+              '/patients/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -417,7 +444,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/patients-names',
+              '/patients-names/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -532,7 +559,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/patients-nationalities',
+              '/patients-nationalities/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -645,7 +672,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/patients-passports',
+              '/patients-passports/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -767,7 +794,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-records',
+              '/medical-records/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -882,7 +909,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-record-agents',
+              '/medical-record-agents/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -997,7 +1024,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-record-budgets',
+              '/medical-record-budgets/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -1112,7 +1139,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-record-companions',
+              '/medical-record-companions/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -1227,7 +1254,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-record-hospitals',
+              '/medical-record-hospitals/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -1342,7 +1369,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-record-interpreters',
+              '/medical-record-interpreters/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -1457,7 +1484,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-records-progress',
+              '/medical-records-progress/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -1572,7 +1599,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-records-overseas',
+              '/medical-records-overseas/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -1687,7 +1714,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-records-overseas-data',
+              '/medical-records-overseas-data/${id}',
               queryParameters: queryParameters,
               data: _data,
             )

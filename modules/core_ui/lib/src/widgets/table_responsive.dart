@@ -97,7 +97,6 @@ class _DynamicTableState extends State<DynamicTable> {
     }
 
     return Column(
-      mainAxisSize: MainAxisSize.min,
       children: [
         Container(
           decoration: widget.headerDecoration ??
@@ -107,6 +106,10 @@ class _DynamicTableState extends State<DynamicTable> {
                   top: Radius.circular(8.0),
                 ),
               ),
+          padding: const EdgeInsets.symmetric(
+            vertical: 8.0,
+            horizontal: 4.0,
+          ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.start,
@@ -125,48 +128,47 @@ class _DynamicTableState extends State<DynamicTable> {
         ),
         widget.data.rows.isEmpty
             ? const SizedBox()
-            : Visibility(
-                visible: widget.data.rows.isNotEmpty,
-                child: Expanded(
-                  child: ListView.builder(
-                    controller: _scrollController,
-                    itemCount: rowsToShow.length,
-                    itemBuilder: (context, index) {
-                      Decoration? rowDecoration;
-                      if (widget.data.rows.isNotEmpty) {
-                        final rowIndex = startIndex + index;
-                        final rowColor = rowIndex.isOdd
-                            ? widget.oddRowColor ?? Colors.white
-                            : widget.evenRowColor ?? const Color(0xffEDF8F8);
-                        rowDecoration = widget.rowDecoration ??
-                            BoxDecoration(color: rowColor);
-                      }
+            : Expanded(
+                child: ListView.builder(
+                  controller: _scrollController,
+                  itemCount: rowsToShow.length,
+                  itemBuilder: (context, index) {
+                    Decoration? rowDecoration;
+                    if (widget.data.rows.isNotEmpty) {
+                      final rowIndex = startIndex + index;
+                      final rowColor = rowIndex.isOdd
+                          ? widget.oddRowColor ?? Colors.white
+                          : widget.evenRowColor ?? const Color(0xffEDF8F8);
+                      rowDecoration = widget.rowDecoration ??
+                          BoxDecoration(color: rowColor);
+                    }
 
-                      return InkWell(
-                        onTap: rowsToShow[index].onTap,
-                        hoverColor: Colors.grey,
-                        child: Container(
-                          decoration: rowDecoration,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: rowsToShow[index]
-                                .cell
-                                .mapIndexed(
-                                  (cellIndex, cell) => Expanded(
-                                    flex: widget.data.columns[cellIndex].flex,
-                                    child: Padding(
-                                      padding: const EdgeInsets.all(4.0),
-                                      child: cell,
-                                    ),
-                                  ),
-                                )
-                                .toList(),
-                          ),
+                    return InkWell(
+                      onTap: rowsToShow[index].onTap,
+                      hoverColor: Colors.grey,
+                      child: Container(
+                        decoration: rowDecoration,
+                        width: MediaQuery.of(context).size.width,
+                        padding: const EdgeInsets.symmetric(
+                          vertical: 8.0,
+                          horizontal: 4.0,
                         ),
-                      );
-                    },
-                  ),
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: rowsToShow[index]
+                              .cell
+                              .mapIndexed(
+                                (cellIndex, cell) => Expanded(
+                                  flex: widget.data.columns[cellIndex].flex,
+                                  child: cell,
+                                ),
+                              )
+                              .toList(),
+                        ),
+                      ),
+                    );
+                  },
                 ),
               ),
         if (widget.data.rows.isNotEmpty && widget.rowsPerPage != null)
@@ -178,24 +180,21 @@ class _DynamicTableState extends State<DynamicTable> {
                     bottom: Radius.circular(8.0),
                   ),
                 ),
-            child: Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  IconButton(
-                    onPressed: _currentPage > 0 ? _loadPreviousPage : null,
-                    icon: const Icon(Icons.arrow_left),
-                  ),
-                  Text('Page ${_currentPage + 1}'),
-                  IconButton(
-                    onPressed: endIndex < widget.data.rows.length
-                        ? _loadNextPage
-                        : null,
-                    icon: const Icon(Icons.arrow_right),
-                  ),
-                ],
-              ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                IconButton(
+                  onPressed: _currentPage > 0 ? _loadPreviousPage : null,
+                  icon: const Icon(Icons.arrow_left),
+                ),
+                Text('Page ${_currentPage + 1}'),
+                IconButton(
+                  onPressed:
+                      endIndex < widget.data.rows.length ? _loadNextPage : null,
+                  icon: const Icon(Icons.arrow_right),
+                ),
+              ],
             ),
           ),
       ],

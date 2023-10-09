@@ -1,7 +1,7 @@
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:feature_patient/src/detail_patient/statement/statement_page.dart';
+import 'statement/statement_page.dart';
 import '../widgets/header_detail_patient.dart';
 import 'package:flutter/material.dart';
 
@@ -17,9 +17,9 @@ import 'progress_list/progress_list_page.dart';
 class DetailPatientScreen extends StatefulWidget {
   const DetailPatientScreen({
     super.key,
-    required this.patient,
+    this.patient,
   });
-  final Patient patient;
+  final Patient? patient;
   @override
   State<DetailPatientScreen> createState() => _DetailPatientScreenState();
 }
@@ -98,7 +98,17 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
         ValueListenableBuilder<int>(
           valueListenable: _selectedIndex,
           builder: (BuildContext context, int index, Widget? child) {
-            return pages[index];
+            return Expanded(
+              child: Container(
+                padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(
+                      context.appTheme.spacing.borderRadiusMedium),
+                  color: Colors.white,
+                ),
+                child: pages[index],
+              ),
+            );
           },
         )
       ],

@@ -4,30 +4,36 @@ part 'medical_record_request.g.dart';
 
 @JsonSerializable()
 class MedicalRecordRequest {
-   DateTime? arrivalDate;
-   DateTime? examinationDate;
-   DateTime? departureDate;
-   String? caseNumber;
-   DateTime? receptionDate;
-   String? type;
-   String? progress;
-   DateTime? advancePaymentDate;
-   String? paymentMethod;
-   String? memo;
-   String? patient;
+  DateTime? dateOfBirth;
+  int? age;
+  String? gender;
+  String? arrivalDate;
+  String? examinationDate;
+  String? departureDate;
+  String? caseNumber;
+  String? receptionDate;
+  String? type;
+  String? progress;
+  String? advancePaymentDate;
+  String? paymentMethod;
+  String? memo;
+  String? patient;
 
   MedicalRecordRequest({
-     this.arrivalDate,
-     this.examinationDate,
-     this.departureDate,
-     this.caseNumber,
-     this.receptionDate,
-     this.type,
-     this.progress,
-     this.advancePaymentDate,
-     this.paymentMethod,
+    this.dateOfBirth,
+    this.age,
+    this.gender,
+    this.arrivalDate,
+    this.examinationDate,
+    this.departureDate,
+    this.caseNumber,
+    this.receptionDate,
+    this.type,
+    this.progress,
+    this.advancePaymentDate,
+    this.paymentMethod,
     this.memo,
-     this.patient,
+    this.patient,
   });
 
   factory MedicalRecordRequest.fromJson(Map<String, dynamic> json) {

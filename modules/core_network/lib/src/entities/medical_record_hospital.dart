@@ -1,4 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 part 'medical_record_hospital.g.dart';
 
@@ -26,4 +27,18 @@ class MedicalRecordHospital {
   }
 
   Map<String, dynamic> toJson() => _$MedicalRecordHospitalToJson(this);
+
+  static FormGroup buildFormGroup(MedicalRecordHospital? medicalRecordHospital) {
+    return FormGroup({
+      'id': FormControl<String>(value: medicalRecordHospital?.id),
+      'hospitalName':
+      FormControl<String>(value: medicalRecordHospital?.hospitalName),
+      'medicalCardNumber': FormControl<String>(
+          value: medicalRecordHospital?.medicalCardNumber),
+      'medicalRecord':
+      FormControl<String>(value: medicalRecordHospital?.medicalRecord),
+      'createdAt': FormControl<DateTime>(value: medicalRecordHospital?.createdAt),
+      'updatedAt': FormControl<DateTime>(value: medicalRecordHospital?.updatedAt),
+    });
+  }
 }

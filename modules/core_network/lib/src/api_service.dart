@@ -47,7 +47,7 @@ abstract class ApiService {
 
   @PUT('${Apis.PUT_PRE_PATIENTS}/{id}')
   Future<PrePatient> putPrePatient(
-      @Path('id') String id,
+    @Path('id') String id,
     @Body() PrePatientRequest prePatient,
   );
 
@@ -61,14 +61,19 @@ abstract class ApiService {
   @GET(Apis.GET_PATIENTS)
   Future<Paginated<Patient>> patients();
 
+  @GET('${Apis.GET_PATIENT}/{id}')
+  Future<Patient> patient(
+    @Path('id') String id,
+  );
+
   @POST(Apis.POST_PATIENTS)
   Future<Patient> postPatient(
     @Body() PatientRequest patient,
   );
 
-  @PUT(Apis.PUT_PATIENTS)
+  @PUT('${Apis.PUT_PATIENTS}/{id}')
   Future<Patient> putPatient(
-      @Path('id') String id,
+    @Path('id') String id,
     @Body() PatientRequest patient,
   );
 
@@ -89,9 +94,9 @@ abstract class ApiService {
     @Body() PatientNameRequest patientName,
   );
 
-  @PUT(Apis.PUT_PATIENT_NAMES)
+  @PUT('${Apis.PUT_PATIENT_NAMES}/{id}')
   Future<PatientName> putPatientName(
-      @Path('id') String id,
+    @Path('id') String id,
     @Body() PatientNameRequest patientName,
   );
 
@@ -112,9 +117,9 @@ abstract class ApiService {
     @Body() PatientNationalityRequest patientNationality,
   );
 
-  @PUT(Apis.PUT_PATIENT_NATIONALITIES)
+  @PUT('${Apis.PUT_PATIENT_NATIONALITIES}/{id}')
   Future<PatientNationality> putPatientNationality(
-      @Path('id') String id,
+    @Path('id') String id,
     @Body() PatientNationalityRequest patientNationality,
   );
 
@@ -135,9 +140,9 @@ abstract class ApiService {
     @Body() PatientPassportRequest patientPassport,
   );
 
-  @PUT(Apis.PUT_PATIENT_PASSPORTS)
+  @PUT('${Apis.PUT_PATIENT_PASSPORTS}/{id}')
   Future<PatientPassport> putPatientPassport(
-      @Path('id') String id,
+    @Path('id') String id,
     @Body() PatientPassportRequest patientPassport,
   );
 
@@ -160,9 +165,9 @@ abstract class ApiService {
     @Body() MedicalRecordRequest medicalRecord,
   );
 
-  @PUT(Apis.PUT_MEDICAL_RECORDS)
+  @PUT('${Apis.PUT_MEDICAL_RECORDS}/{id}')
   Future<MedicalRecord> putMedicalRecord(
-      @Path('id') String id,
+    @Path('id') String id,
     @Body() MedicalRecordRequest medicalRecord,
   );
 
@@ -183,9 +188,9 @@ abstract class ApiService {
     @Body() MedicalRecordAgentRequest medicalRecordAgent,
   );
 
-  @PUT(Apis.PUT_MEDICAL_RECORD_AGENTS)
+  @PUT('${Apis.PUT_MEDICAL_RECORD_AGENTS}/{id}')
   Future<MedicalRecordAgent> putMedicalRecordAgent(
-      @Path('id') String id,
+    @Path('id') String id,
     @Body() MedicalRecordAgentRequest medicalRecordAgent,
   );
 
@@ -206,9 +211,9 @@ abstract class ApiService {
     @Body() MedicalRecordBudgetRequest medicalRecordBudget,
   );
 
-  @PUT(Apis.PUT_MEDICAL_RECORD_BUDGETS)
+  @PUT('${Apis.PUT_MEDICAL_RECORD_BUDGETS}/{id}')
   Future<MedicalRecordBudget> putMedicalRecordBudget(
-      @Path('id') String id,
+    @Path('id') String id,
     @Body() MedicalRecordBudgetRequest medicalRecordBudget,
   );
 
@@ -229,9 +234,9 @@ abstract class ApiService {
     @Body() MedicalRecordCompanionRequest medicalRecordCompanion,
   );
 
-  @PUT(Apis.PUT_MEDICAL_RECORD_COMPANIONS)
+  @PUT('${Apis.PUT_MEDICAL_RECORD_COMPANIONS}/{id}')
   Future<MedicalRecordCompanion> putMedicalRecordCompanion(
-      @Path('id') String id,
+    @Path('id') String id,
     @Body() MedicalRecordCompanionRequest medicalRecordCompanion,
   );
 
@@ -252,9 +257,9 @@ abstract class ApiService {
     @Body() MedicalRecordHospitalRequest medicalRecordHospital,
   );
 
-  @PUT(Apis.PUT_MEDICAL_RECORD_HOSPITALS)
+  @PUT('${Apis.PUT_MEDICAL_RECORD_HOSPITALS}/{id}')
   Future<MedicalRecordHospital> putMedicalRecordHospital(
-      @Path('id') String id,
+    @Path('id') String id,
     @Body() MedicalRecordHospitalRequest medicalRecordHospital,
   );
 
@@ -275,9 +280,9 @@ abstract class ApiService {
     @Body() MedicalRecordInterpreterRequest medicalRecordInterpreter,
   );
 
-  @PUT(Apis.PUT_MEDICAL_RECORD_INTERPRETERS)
+  @PUT('${Apis.PUT_MEDICAL_RECORD_INTERPRETERS}/{id}')
   Future<MedicalRecordInterpreter> putMedicalRecordInterpreter(
-      @Path('id') String id,
+    @Path('id') String id,
     @Body() MedicalRecordInterpreterRequest medicalRecordInterpreter,
   );
 
@@ -298,9 +303,9 @@ abstract class ApiService {
     @Body() MedicalRecordProgressRequest medicalRecordProgress,
   );
 
-  @PUT(Apis.PUT_MEDICAL_RECORDS_PROGRESS)
+  @PUT('${Apis.PUT_MEDICAL_RECORDS_PROGRESS}/{id}')
   Future<MedicalRecordProgress> putMedicalRecordProgress(
-      @Path('id') String id,
+    @Path('id') String id,
     @Body() MedicalRecordProgressRequest medicalRecordProgress,
   );
 
@@ -321,9 +326,9 @@ abstract class ApiService {
     @Body() MedicalRecordOverseaRequest medicalRecordOversea,
   );
 
-  @PUT(Apis.PUT_MEDICAL_RECORDS_OVERSEAS)
+  @PUT('${Apis.PUT_MEDICAL_RECORDS_OVERSEAS}/{id}')
   Future<MedicalRecordOversea> putMedicalRecordOversea(
-      @Path('id') String id,
+    @Path('id') String id,
     @Body() MedicalRecordOverseaRequest medicalRecordOversea,
   );
 
@@ -334,7 +339,7 @@ abstract class ApiService {
 
   //GET_MEDICAL_RECORDS_OVERSEAS_DATA
 
-  @GET('${Apis.GET_MEDICAL_RECORDS_OVERSEAS_DATA}/{medicalRecordOverseaId}')
+  @GET('${Apis.GET_MEDICAL_RECORDS_OVERSEAS_DATAS}/{medicalRecordOverseaId}')
   Future<List<MedicalRecordOverseaData>> medicalRecordsOverseaData(
     @Path('medicalRecordOverseaId') String medicalRecordOverseaId,
   );
@@ -344,9 +349,9 @@ abstract class ApiService {
     @Body() MedicalRecordOverseaDataRequest medicalRecordOverseaData,
   );
 
-  @PUT(Apis.PUT_MEDICAL_RECORDS_OVERSEAS_DATA)
+  @PUT('${Apis.PUT_MEDICAL_RECORDS_OVERSEAS_DATA}/{id}')
   Future<MedicalRecordOverseaData> putMedicalRecordOverseaData(
-      @Path('id') String id,
+    @Path('id') String id,
     @Body() MedicalRecordOverseaDataRequest medicalRecordOverseaData,
   );
 
@@ -354,7 +359,6 @@ abstract class ApiService {
   Future<void> deleteMedicalRecordOverseaData(
     @Path('id') String id,
   );
-
 }
 
 extension ApiServiceExts on ApiService {

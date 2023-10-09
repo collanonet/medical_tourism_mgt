@@ -101,7 +101,7 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                                         color: context.appTheme.primaryColor,
                                       ),
                                     ),
-                                    Text(item.agents),
+                                    Text('${item.agents}'),
                                   ],
                                 ),
                               ),
@@ -116,13 +116,13 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                                         color: Colors.blueGrey,
                                       ),
                                     ),
-                                    Text(item.patient),
+                                    Text('${item.patient}'),
                                   ],
                                 ),
                               ),
                               DataCell(Text(item.dateOfBirth.toString())),
-                              DataCell(Text(item.gender)),
-                              DataCell(Text(item.nationality)),
+                              DataCell(Text('${item.gender}')),
+                              DataCell(Text('${item.nationality}')),
                               DataCell(Row(
                                 children: [
                                   Container(
@@ -132,7 +132,7 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                                         color: Colors.blue,
                                         borderRadius: BorderRadius.circular(4)),
                                     child: Text(
-                                      item.classification,
+                                      '${item.classification}',
                                       style:
                                           const TextStyle(color: Colors.white),
                                     ),
@@ -151,7 +151,7 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                                   )
                                 ],
                               )),
-                              DataCell(Text(item.nameOfDisease)),
+                              DataCell(Text('${item.nameOfDisease}')),
                               DataCell(item.isDeleted
                                   ? FilledButton(
                                       style: ButtonStyle(

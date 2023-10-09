@@ -9,15 +9,15 @@ import 'statement_screen.dart';
 class StatementPage extends StatelessWidget {
   const StatementPage({
     super.key,
-    required this.patient,
+    this.patient,
   });
-  final Patient patient;
+  final Patient? patient;
 
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) =>
-      GetIt.I<StatementModel>()..initialData(patient),
+      GetIt.I<StatementModel>()..initialData(patient: patient ),
       child: const StatementScreen(),
     );
   }
