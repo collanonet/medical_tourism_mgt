@@ -100,6 +100,13 @@ class PatientRepositoryIml extends PatientRepository {
   }
 
   @override
+  Future<List<PatientName>> patientNamesByPatient(
+    String patientId,
+  ) {
+    return remote.patientNamesByPatient(patientId);
+  }
+
+  @override
   Future<PatientName> postPatientName(
     PatientNameRequest patientName,
   ) {
@@ -127,6 +134,13 @@ class PatientRepositoryIml extends PatientRepository {
     String patientId,
   ) {
     return remote.patientNationalities(patientId);
+  }
+
+  @override
+  Future<List<PatientNationality>> patientNationalitiesByPatient(
+    String id,
+  ) {
+    return remote.patientNationalitiesByPatient(id);
   }
 
   @override
@@ -158,6 +172,13 @@ class PatientRepositoryIml extends PatientRepository {
     String patientId,
   ) {
     return remote.patientPassports(patientId);
+  }
+
+  @override
+  Future<List<PatientPassport>> patientPassportsByPatient(
+    String patientId,
+  ) {
+    return remote.patientPassportsByPatient(patientId);
   }
 
   @override
@@ -198,6 +219,13 @@ class PatientRepositoryIml extends PatientRepository {
   }
 
   @override
+  Future<List<MedicalRecord>> medicalRecordsByPatient(
+    String patientId,
+  ) {
+    return remote.medicalRecordsByPatient(patientId);
+  }
+
+  @override
   Future<MedicalRecord> postMedicalRecord(
     MedicalRecordRequest medicalRecord,
   ) {
@@ -226,6 +254,13 @@ class PatientRepositoryIml extends PatientRepository {
     String medicalRecordId,
   ) {
     return remote.medicalRecordAgents(medicalRecordId);
+  }
+
+  @override
+  Future<List<MedicalRecordAgent>> medicalRecordAgentsByMedicalRecord(
+    String medicalRecordId,
+  ) {
+    return remote.medicalRecordAgentsByMedicalRecord(medicalRecordId);
   }
 
   @override
@@ -260,6 +295,13 @@ class PatientRepositoryIml extends PatientRepository {
   }
 
   @override
+  Future<List<MedicalRecordBudget>> medicalRecordBudgetsByMedicalRecord(
+    String medicalRecordId,
+  ) {
+    return remote.medicalRecordBudgetsByMedicalRecord(medicalRecordId);
+  }
+
+  @override
   Future<MedicalRecordBudget> postMedicalRecordBudget(
     MedicalRecordBudgetRequest medicalRecordBudget,
   ) {
@@ -288,6 +330,13 @@ class PatientRepositoryIml extends PatientRepository {
     String medicalRecordId,
   ) {
     return remote.medicalRecordCompanions(medicalRecordId);
+  }
+
+  @override
+  Future<List<MedicalRecordCompanion>> medicalRecordCompanionsByMedicalRecord(
+    String medicalRecordId,
+  ) {
+    return remote.medicalRecordCompanionsByMedicalRecord(medicalRecordId);
   }
 
   @override
@@ -322,6 +371,13 @@ class PatientRepositoryIml extends PatientRepository {
   }
 
   @override
+  Future<List<MedicalRecordHospital>> medicalRecordHospitalsByMedicalRecord(
+    String medicalRecordId,
+  ) {
+    return remote.medicalRecordHospitalsByMedicalRecord(medicalRecordId);
+  }
+
+  @override
   Future<MedicalRecordHospital> postMedicalRecordHospital(
     MedicalRecordHospitalRequest medicalRecordHospital,
   ) {
@@ -350,6 +406,14 @@ class PatientRepositoryIml extends PatientRepository {
     String medicalRecordId,
   ) {
     return remote.medicalRecordInterpreters(medicalRecordId);
+  }
+
+  @override
+  Future<List<MedicalRecordInterpreter>>
+      medicalRecordInterpretersByMedicalRecord(
+    String medicalRecordId,
+  ) {
+    return remote.medicalRecordInterpretersByMedicalRecord(medicalRecordId);
   }
 
   @override
@@ -384,6 +448,13 @@ class PatientRepositoryIml extends PatientRepository {
   }
 
   @override
+  Future<List<MedicalRecordProgress>> medicalRecordsProgressByMedicalRecord(
+    String medicalRecordId,
+  ) {
+    return remote.medicalRecordsProgressByMedicalRecord(medicalRecordId);
+  }
+
+  @override
   Future<MedicalRecordProgress> postMedicalRecordProgress(
     MedicalRecordProgressRequest medicalRecordProgress,
   ) {
@@ -415,6 +486,13 @@ class PatientRepositoryIml extends PatientRepository {
   }
 
   @override
+  Future<List<MedicalRecordOversea>> medicalRecordsOverseasByMedicalRecord(
+    String medicalRecordId,
+  ) {
+    return remote.medicalRecordsOverseasByMedicalRecord(medicalRecordId);
+  }
+
+  @override
   Future<MedicalRecordOversea> postMedicalRecordOversea(
     MedicalRecordOverseaRequest medicalRecordOversea,
   ) {
@@ -443,6 +521,15 @@ class PatientRepositoryIml extends PatientRepository {
     String medicalRecordOverseaId,
   ) {
     return remote.medicalRecordsOverseaData(medicalRecordOverseaId);
+  }
+
+  @override
+  Future<List<MedicalRecordOverseaData>>
+      medicalRecordsOverseaDataByMedicalRecordOversea(
+    String medicalRecordOverseaId,
+  ) {
+    return remote.medicalRecordsOverseaDataByMedicalRecordOversea(
+        medicalRecordOverseaId);
   }
 
   @override

@@ -7,14 +7,14 @@ part 'medical_record_oversea_data.g.dart';
 class MedicalRecordOverseaData {
   @JsonKey(name: '_id')
   final String id;
-  String medicalRecord;
+  String medicalRecordOverseas;
   String note;
   final DateTime createdAt;
   final DateTime updatedAt;
 
   MedicalRecordOverseaData({
     required this.id,
-    required this.medicalRecord,
+    required this.medicalRecordOverseas,
     required this.note,
     required this.createdAt,
     required this.updatedAt,
@@ -30,8 +30,8 @@ class MedicalRecordOverseaData {
       MedicalRecordOverseaData? medicalRecordOverseaData) {
     return FormGroup({
       'id': FormControl<String>(value: medicalRecordOverseaData?.id),
-      'medicalRecord':
-          FormControl<String>(value: medicalRecordOverseaData?.medicalRecord),
+      'medicalRecordOverseas': FormControl<String>(
+          value: medicalRecordOverseaData?.medicalRecordOverseas),
       'note': FormControl<String>(value: medicalRecordOverseaData?.note),
       'createdAt':
           FormControl<DateTime>(value: medicalRecordOverseaData?.createdAt),

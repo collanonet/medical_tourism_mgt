@@ -37,8 +37,6 @@ class MedicalRecordHospital {
           value: medicalRecordHospital?.medicalCardNumber),
       'medicalRecord':
       FormControl<String>(value: medicalRecordHospital?.medicalRecord),
-      'createdAt': FormControl<DateTime>(value: medicalRecordHospital?.createdAt),
-      'updatedAt': FormControl<DateTime>(value: medicalRecordHospital?.updatedAt),
     });
   }
 }

@@ -14,14 +14,24 @@ MedicalRecordRequest _$MedicalRecordRequestFromJson(
           : DateTime.parse(json['dateOfBirth'] as String),
       age: json['age'] as int?,
       gender: json['gender'] as String?,
-      arrivalDate: json['arrivalDate'] as String?,
-      examinationDate: json['examinationDate'] as String?,
-      departureDate: json['departureDate'] as String?,
+      arrivalDate: json['arrivalDate'] == null
+          ? null
+          : DateTime.parse(json['arrivalDate'] as String),
+      examinationDate: json['examinationDate'] == null
+          ? null
+          : DateTime.parse(json['examinationDate'] as String),
+      departureDate: json['departureDate'] == null
+          ? null
+          : DateTime.parse(json['departureDate'] as String),
       caseNumber: json['caseNumber'] as String?,
-      receptionDate: json['receptionDate'] as String?,
+      receptionDate: json['receptionDate'] == null
+          ? null
+          : DateTime.parse(json['receptionDate'] as String),
       type: json['type'] as String?,
       progress: json['progress'] as String?,
-      advancePaymentDate: json['advancePaymentDate'] as String?,
+      advancePaymentDate: json['advancePaymentDate'] == null
+          ? null
+          : DateTime.parse(json['advancePaymentDate'] as String),
       paymentMethod: json['paymentMethod'] as String?,
       memo: json['memo'] as String?,
       patient: json['patient'] as String?,
@@ -33,14 +43,14 @@ Map<String, dynamic> _$MedicalRecordRequestToJson(
       'dateOfBirth': instance.dateOfBirth?.toIso8601String(),
       'age': instance.age,
       'gender': instance.gender,
-      'arrivalDate': instance.arrivalDate,
-      'examinationDate': instance.examinationDate,
-      'departureDate': instance.departureDate,
+      'arrivalDate': instance.arrivalDate?.toIso8601String(),
+      'examinationDate': instance.examinationDate?.toIso8601String(),
+      'departureDate': instance.departureDate?.toIso8601String(),
       'caseNumber': instance.caseNumber,
-      'receptionDate': instance.receptionDate,
+      'receptionDate': instance.receptionDate?.toIso8601String(),
       'type': instance.type,
       'progress': instance.progress,
-      'advancePaymentDate': instance.advancePaymentDate,
+      'advancePaymentDate': instance.advancePaymentDate?.toIso8601String(),
       'paymentMethod': instance.paymentMethod,
       'memo': instance.memo,
       'patient': instance.patient,

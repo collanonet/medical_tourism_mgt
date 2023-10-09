@@ -3,6 +3,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:data_patient/data_patient.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
 class BasicInformationModel with ChangeNotifier {
@@ -33,7 +34,7 @@ class BasicInformationModel with ChangeNotifier {
     _patientNames = const AsyncData(loading: true);
     notifyListeners();
 
-    await patientRepository.patientNames(patientId).then((value) {
+    await patientRepository.patientNamesByPatient(patientId).then((value) {
       _patientNames = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);
@@ -98,7 +99,9 @@ class BasicInformationModel with ChangeNotifier {
     _patientNationalities = const AsyncData(loading: true);
     notifyListeners();
 
-    await patientRepository.patientNationalities(patientId).then((value) {
+    await patientRepository
+        .patientNationalitiesByPatient(patientId)
+        .then((value) {
       _patientNationalities = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);
@@ -164,7 +167,7 @@ class BasicInformationModel with ChangeNotifier {
     _patientPassports = const AsyncData(loading: true);
     notifyListeners();
 
-    await patientRepository.patientPassports(patientId).then((value) {
+    await patientRepository.patientPassportsByPatient(patientId).then((value) {
       _patientPassports = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);
@@ -230,7 +233,7 @@ class BasicInformationModel with ChangeNotifier {
     _medicalRecord = const AsyncData(loading: true);
     notifyListeners();
 
-    await patientRepository.medicalRecords(patient: patientId).then((value) {
+    await patientRepository.medicalRecordsByPatient(patientId).then((value) {
       _medicalRecord = AsyncData(data: value.first);
     }).catchError((error) {
       logger.d(error);
@@ -244,6 +247,33 @@ class BasicInformationModel with ChangeNotifier {
       await getMedicalRecordCompanions(_medicalRecord.data!.id);
       await getMedicalRecordHospitals(_medicalRecord.data!.id);
       await getMedicalRecordInterpreters(_medicalRecord.data!.id);
+    }
+  }
+
+  Future<void> createUpdateMedicalRecords(FormGroup form) async {
+    MedicalRecordRequest request = MedicalRecordRequest(
+      dateOfBirth: form.control('dateOfBirth').value,
+      age: int.tryParse(form.control('age').value),
+      gender: form.control('gender').value,
+      arrivalDate: form.control('arrivalDate').value,
+      examinationDate: form.control('examinationDate').value,
+      departureDate: form.control('departureDate').value,
+      caseNumber: form.control('caseNumber').value,
+      receptionDate: form.control('receptionDate').value,
+      type: form.control('type').value,
+      progress: form.control('progress').value,
+      advancePaymentDate: form.control('advancePaymentDate').value,
+      paymentMethod: form.control('paymentMethod').value,
+      memo: form.control('memo').value,
+      patient: form.control('patient').value,
+    );
+    logger.d(request);
+    request.age = request.ageCal;
+    logger.d(request.ageCal);
+    if (medicalRecord.data != null) {
+      await updateMedicalRecords(medicalRecord.data!.id, request);
+    } else {
+      await postMedicalRecords(request);
     }
   }
 
@@ -295,7 +325,9 @@ class BasicInformationModel with ChangeNotifier {
     _medicalRecordAgents = const AsyncData(loading: true);
     notifyListeners();
 
-    await patientRepository.medicalRecordAgents(medicalRecordId).then((value) {
+    await patientRepository
+        .medicalRecordAgentsByMedicalRecord(medicalRecordId)
+        .then((value) {
       _medicalRecordAgents = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);
@@ -363,7 +395,9 @@ class BasicInformationModel with ChangeNotifier {
     _medicalRecordBudgets = const AsyncData(loading: true);
     notifyListeners();
 
-    await patientRepository.medicalRecordBudgets(medicalRecordId).then((value) {
+    await patientRepository
+        .medicalRecordBudgetsByMedicalRecord(medicalRecordId)
+        .then((value) {
       _medicalRecordBudgets = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);
@@ -432,7 +466,7 @@ class BasicInformationModel with ChangeNotifier {
     notifyListeners();
 
     await patientRepository
-        .medicalRecordCompanions(medicalRecordId)
+        .medicalRecordCompanionsByMedicalRecord(medicalRecordId)
         .then((value) {
       _medicalRecordCompanions = AsyncData(data: value);
     }).catchError((error) {
@@ -502,7 +536,7 @@ class BasicInformationModel with ChangeNotifier {
     notifyListeners();
 
     await patientRepository
-        .medicalRecordHospitals(medicalRecordId)
+        .medicalRecordHospitalsByMedicalRecord(medicalRecordId)
         .then((value) {
       _medicalRecordHospitals = AsyncData(data: value);
     }).catchError((error) {
@@ -511,6 +545,23 @@ class BasicInformationModel with ChangeNotifier {
     }).whenComplete(() {
       notifyListeners();
     });
+  }
+
+  void createUpdateMedicalRecordHospital({
+    required FormGroup formGroup,
+    String? id,
+  }) async {
+    MedicalRecordHospitalRequest request = MedicalRecordHospitalRequest(
+      medicalRecord: _medicalRecord.data!.id,
+      medicalCardNumber: formGroup.control('medicalCardNumber').value,
+      hospitalName: formGroup.control('hospitalName').value,
+    );
+    logger.d(request);
+    if (id != null) {
+      await updateMedicalRecordHospitals(id, request);
+    } else {
+      await postMedicalRecordHospitals(request);
+    }
   }
 
   // post MEDICAL_RECORD_HOSPITALS
@@ -523,7 +574,11 @@ class BasicInformationModel with ChangeNotifier {
     await patientRepository
         .postMedicalRecordHospital(medicalRecordHospitalRequest)
         .then((value) {
-      _medicalRecordHospitals.data?.add(value);
+      if (_medicalRecordHospitals.data == null) {
+        _medicalRecordHospitals = AsyncData(data: [value]);
+      } else {
+        _medicalRecordHospitals.data?.add(value);
+      }
     }).catchError((error) {
       logger.d(error);
       _medicalRecordHospitals = AsyncData(error: error);
@@ -551,7 +606,7 @@ class BasicInformationModel with ChangeNotifier {
       if (index >= 0) {
         _medicalRecordHospitals.data?[index] = value;
       } else {
-        _medicalRecordHospitals.data?.add(value);
+        _medicalRecordHospitals = AsyncData(data: [value]);
       }
     }).catchError((error) {
       logger.d(error);
@@ -572,7 +627,7 @@ class BasicInformationModel with ChangeNotifier {
     notifyListeners();
 
     await patientRepository
-        .medicalRecordInterpreters(medicalRecordId)
+        .medicalRecordInterpretersByMedicalRecord(medicalRecordId)
         .then((value) {
       _medicalRecordInterpreters = AsyncData(data: value);
     }).catchError((error) {

@@ -1,6 +1,7 @@
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'billing/billing_page.dart';
 import 'statement/statement_page.dart';
 import '../widgets/header_detail_patient.dart';
 import 'package:flutter/material.dart';
@@ -26,15 +27,16 @@ class DetailPatientScreen extends StatefulWidget {
 
 class _DetailPatientScreenState extends State<DetailPatientScreen> {
   List<String> menu = [
-    "基本情報", //basicInfo
-    "進捗一覧", // progressList
-    "海外診療データ", //overseasMedicalData
-    "診療サマリー", //medicalSummary
-    "医療ビザ", //medicalVisa
-    "国内診療データ", //domesticMedicalData
-    "見積書", //estimate
-    "精算書", //statement
-    "診療報酬明細", //medicalPaymentDetails
+    "基本情報", // basic information
+    "進捗一覧", // progress list
+    "海外診療データ", // overseas medical data
+    "診療サマリー", //  medical summary
+    "医療ビザ", //  medical visa
+    "国内診療データ", // domestic medical data
+    "見積書", // estimate
+    "精算書", // statement
+    "請求書", // billing
+    "診療報酬明細", // medical payment details
   ];
 
   late List<Widget> pages;
@@ -65,6 +67,9 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
         patient: widget.patient,
       ),
       StatementPage(
+        patient: widget.patient,
+      ),
+      BillingPage(
         patient: widget.patient,
       ),
       MedicalPaymentDetailsPage(

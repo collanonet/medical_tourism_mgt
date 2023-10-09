@@ -4,8 +4,8 @@ import 'package:flutter/services.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import '../../core_ui.dart';
 
-class ReactiveTextFormField<T> extends StatelessWidget {
-  const ReactiveTextFormField({
+class ReactiveDropdownFormField extends StatelessWidget {
+  const ReactiveDropdownFormField({
     super.key,
     this.formControl,
     this.formControlName,
@@ -16,33 +16,21 @@ class ReactiveTextFormField<T> extends StatelessWidget {
     this.onTap,
     this.readOnly = false,
     this.radiusBorder,
-    this.keyboardType,
-    this.inputFormatters,
-    this.maxLength,
-    this.onEditingComplete,
     this.onChanged,
-    this.obscureText = false,
-    this.maxLines = 1,
-    this.valueAccessor,
+    this.items,
   });
 
   final String? formControlName;
-  final FormControl<T>? formControl;
+  final FormControl<String>? formControl;
   final bool autofocus;
   final InputDecoration decoration;
-  final ReactiveFormFieldCallback<T>? onSubmitted;
+  final ReactiveFormFieldCallback<String>? onSubmitted;
   final Map<String, String Function(Object)>? validationMessages;
-  final Function(FormControl<T>)? onTap;
+  final Function(FormControl<String>)? onTap;
   final bool readOnly;
   final double? radiusBorder;
-  final TextInputType? keyboardType;
-  final List<TextInputFormatter>? inputFormatters;
-  final int? maxLength;
-  final Function(FormControl<T>)? onEditingComplete;
-  final Function(FormControl<T>)? onChanged;
-  final bool obscureText;
-  final int? maxLines;
-  final ControlValueAccessor<T, String>? valueAccessor;
+  final Function(FormControl<String>)? onChanged;
+  final List<DropdownMenuItem<String>>? items;
 
   @override
   Widget build(BuildContext context) {
@@ -75,15 +63,13 @@ class ReactiveTextFormField<T> extends StatelessWidget {
       ),
     );
 
-    return ReactiveTextField<T>(
+    return ReactiveDropdownField<String>(
       formControlName: formControlName,
       formControl: formControl,
       autofocus: autofocus,
       validationMessages: validationMessages,
       onTap: onTap,
-      obscureText: obscureText,
       readOnly: readOnly,
-      maxLength: maxLength,
       decoration: decoration.copyWith(
         fillColor: Colors.white,
         // fillColor: CupertinoColors.systemGroupedBackground,
@@ -94,13 +80,8 @@ class ReactiveTextFormField<T> extends StatelessWidget {
         focusedErrorBorder: errorBorder,
         focusedBorder: focusedBorder,
       ),
-      valueAccessor: valueAccessor,
-      onEditingComplete: onEditingComplete,
       onChanged: onChanged,
-      keyboardType: keyboardType ?? TextInputType.text,
-      inputFormatters: inputFormatters ?? [],
-      onSubmitted: onSubmitted,
-      maxLines: maxLines,
+      items: items ?? [],
     );
   }
 }

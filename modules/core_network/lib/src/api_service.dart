@@ -89,6 +89,11 @@ abstract class ApiService {
     @Path('patientId') String patientId,
   );
 
+  @GET('${Apis.GET_PATIENT_NAMES_BY_PATIENT}/{patientId}')
+  Future<List<PatientName>> patientNamesByPatient(
+    @Path('patientId') String patientId,
+  );
+
   @POST(Apis.POST_PATIENT_NAMES)
   Future<PatientName> postPatientName(
     @Body() PatientNameRequest patientName,
@@ -112,6 +117,11 @@ abstract class ApiService {
     @Path('patientId') String patientId,
   );
 
+  @GET('${Apis.GET_PATIENT_NATIONALITIES_BY_PATIENT}/{patientId}')
+  Future<List<PatientNationality>> patientNationalitiesByPatient(
+    @Path('patientId') String patientId,
+  );
+
   @POST(Apis.POST_PATIENT_NATIONALITIES)
   Future<PatientNationality> postPatientNationality(
     @Body() PatientNationalityRequest patientNationality,
@@ -132,6 +142,11 @@ abstract class ApiService {
 
   @GET('${Apis.GET_PATIENT_PASSPORTS}/{patientId}')
   Future<List<PatientPassport>> patientPassports(
+    @Path('patientId') String patientId,
+  );
+
+  @GET('${Apis.GET_PATIENT_PASSPORTS_BY_PATIENT}/{patientId}')
+  Future<List<PatientPassport>> patientPassportsByPatient(
     @Path('patientId') String patientId,
   );
 
@@ -160,6 +175,11 @@ abstract class ApiService {
     @Query('patient') String? patient,
   });
 
+  @GET('${Apis.GET_MEDICAL_RECORDS_BY_PATIENT}/{patientId}')
+  Future<List<MedicalRecord>> medicalRecordsByPatient(
+    @Path('patientId') String patientId,
+  );
+
   @POST(Apis.POST_MEDICAL_RECORDS)
   Future<MedicalRecord> postMedicalRecord(
     @Body() MedicalRecordRequest medicalRecord,
@@ -180,6 +200,11 @@ abstract class ApiService {
 
   @GET('${Apis.GET_MEDICAL_RECORD_AGENTS}/{medicalRecordId}')
   Future<List<MedicalRecordAgent>> medicalRecordAgents(
+    @Path('medicalRecordId') String medicalRecordId,
+  );
+
+  @GET('${Apis.GET_MEDICAL_RECORD_AGENTS_BY_MEDICAL_RECORD}/{medicalRecordId}')
+  Future<List<MedicalRecordAgent>> medicalRecordAgentsByMedicalRecord(
     @Path('medicalRecordId') String medicalRecordId,
   );
 
@@ -206,6 +231,11 @@ abstract class ApiService {
     @Path('medicalRecordId') String medicalRecordId,
   );
 
+  @GET('${Apis.GET_MEDICAL_RECORD_BUDGETS_BY_MEDICAL_RECORD}/{medicalRecordId}')
+  Future<List<MedicalRecordBudget>> medicalRecordBudgetsByMedicalRecord(
+    @Path('medicalRecordId') String medicalRecordId,
+  );
+
   @POST(Apis.POST_MEDICAL_RECORD_BUDGETS)
   Future<MedicalRecordBudget> postMedicalRecordBudget(
     @Body() MedicalRecordBudgetRequest medicalRecordBudget,
@@ -226,6 +256,12 @@ abstract class ApiService {
 
   @GET('${Apis.GET_MEDICAL_RECORD_COMPANIONS}/{medicalRecordId}')
   Future<List<MedicalRecordCompanion>> medicalRecordCompanions(
+    @Path('medicalRecordId') String medicalRecordId,
+  );
+
+  @GET(
+      '${Apis.GET_MEDICAL_RECORD_COMPANIONS_BY_MEDICAL_RECORD}/{medicalRecordId}')
+  Future<List<MedicalRecordCompanion>> medicalRecordCompanionsByMedicalRecord(
     @Path('medicalRecordId') String medicalRecordId,
   );
 
@@ -252,6 +288,12 @@ abstract class ApiService {
     @Path('medicalRecordId') String medicalRecordId,
   );
 
+  @GET(
+      '${Apis.GET_MEDICAL_RECORD_HOSPITALS_BY_MEDICAL_RECORD}/{medicalRecordId}')
+  Future<List<MedicalRecordHospital>> medicalRecordHospitalsByMedicalRecord(
+    @Path('medicalRecordId') String medicalRecordId,
+  );
+
   @POST(Apis.POST_MEDICAL_RECORD_HOSPITALS)
   Future<MedicalRecordHospital> postMedicalRecordHospital(
     @Body() MedicalRecordHospitalRequest medicalRecordHospital,
@@ -272,6 +314,13 @@ abstract class ApiService {
 
   @GET('${Apis.GET_MEDICAL_RECORD_INTERPRETERS}/{medicalRecordId}')
   Future<List<MedicalRecordInterpreter>> medicalRecordInterpreters(
+    @Path('medicalRecordId') String medicalRecordId,
+  );
+
+  @GET(
+      '${Apis.GET_MEDICAL_RECORD_INTERPRETERS_BY_MEDICAL_RECORD}/{medicalRecordId}')
+  Future<List<MedicalRecordInterpreter>>
+      medicalRecordInterpretersByMedicalRecord(
     @Path('medicalRecordId') String medicalRecordId,
   );
 
@@ -298,6 +347,12 @@ abstract class ApiService {
     @Path('medicalRecordId') String medicalRecordId,
   );
 
+  @GET(
+      '${Apis.GET_MEDICAL_RECORDS_PROGRESS_BY_MEDICAL_RECORD}/{medicalRecordId}')
+  Future<List<MedicalRecordProgress>> medicalRecordsProgressByMedicalRecord(
+    @Path('medicalRecordId') String medicalRecordId,
+  );
+
   @POST(Apis.POST_MEDICAL_RECORDS_PROGRESS)
   Future<MedicalRecordProgress> postMedicalRecordProgress(
     @Body() MedicalRecordProgressRequest medicalRecordProgress,
@@ -321,6 +376,12 @@ abstract class ApiService {
     @Path('medicalRecordId') String medicalRecordId,
   );
 
+  @GET(
+      '${Apis.GET_MEDICAL_RECORDS_OVERSEAS_BY_MEDICAL_RECORD}/{medicalRecordId}')
+  Future<List<MedicalRecordOversea>> medicalRecordsOverseasByMedicalRecord(
+    @Path('medicalRecordId') String medicalRecordId,
+  );
+
   @POST(Apis.POST_MEDICAL_RECORDS_OVERSEAS)
   Future<MedicalRecordOversea> postMedicalRecordOversea(
     @Body() MedicalRecordOverseaRequest medicalRecordOversea,
@@ -341,6 +402,13 @@ abstract class ApiService {
 
   @GET('${Apis.GET_MEDICAL_RECORDS_OVERSEAS_DATAS}/{medicalRecordOverseaId}')
   Future<List<MedicalRecordOverseaData>> medicalRecordsOverseaData(
+    @Path('medicalRecordOverseaId') String medicalRecordOverseaId,
+  );
+
+  @GET(
+      '${Apis.GET_MEDICAL_RECORDS_OVERSEAS_DATA_BY_RECORDS_OVERSEAS}/{medicalRecordOverseaId}')
+  Future<List<MedicalRecordOverseaData>>
+      medicalRecordsOverseaDataByRecordsOversea(
     @Path('medicalRecordOverseaId') String medicalRecordOverseaId,
   );
 

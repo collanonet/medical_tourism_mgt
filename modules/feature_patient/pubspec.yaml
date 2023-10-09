@@ -23,6 +23,7 @@ dependencies:
   reactive_forms: ^14.3.0
   data_table_2: ^2.5.8
   skeletonizer: ^0.8.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

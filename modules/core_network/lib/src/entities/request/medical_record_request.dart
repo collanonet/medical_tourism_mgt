@@ -7,14 +7,14 @@ class MedicalRecordRequest {
   DateTime? dateOfBirth;
   int? age;
   String? gender;
-  String? arrivalDate;
-  String? examinationDate;
-  String? departureDate;
+  DateTime? arrivalDate;
+  DateTime? examinationDate;
+  DateTime? departureDate;
   String? caseNumber;
-  String? receptionDate;
+  DateTime? receptionDate;
   String? type;
   String? progress;
-  String? advancePaymentDate;
+  DateTime? advancePaymentDate;
   String? paymentMethod;
   String? memo;
   String? patient;
@@ -41,4 +41,17 @@ class MedicalRecordRequest {
   }
 
   Map<String, dynamic> toJson() => _$MedicalRecordRequestToJson(this);
+
+  int? get ageCal {
+    if (dateOfBirth != null) {
+      final now = DateTime.now();
+      final age = now.year - dateOfBirth!.year;
+      if (now.month < dateOfBirth!.month ||
+          (now.month == dateOfBirth!.month && now.day < dateOfBirth!.day)) {
+        return age - 1;
+      }
+      return age;
+    }
+    return null;
+  }
 }

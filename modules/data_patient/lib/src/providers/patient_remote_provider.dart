@@ -66,6 +66,11 @@ class PatientRemoteProvider {
   ) async =>
       await apiService.patientNames(patientId);
 
+  Future<List<PatientName>> patientNamesByPatient(
+    String patientId,
+  ) async =>
+      await apiService.patientNamesByPatient(patientId);
+
   Future<PatientName> postPatientName(
     PatientNameRequest patientName,
   ) async =>
@@ -87,6 +92,11 @@ class PatientRemoteProvider {
   ) async =>
       await apiService.patientNationalities(patientId);
 
+  Future<List<PatientNationality>> patientNationalitiesByPatient(
+    String patientId,
+  ) async =>
+      await apiService.patientNationalitiesByPatient(patientId);
+
   Future<PatientNationality> postPatientNationality(
     PatientNationalityRequest patientNationality,
   ) async =>
@@ -107,6 +117,11 @@ class PatientRemoteProvider {
     String patientId,
   ) async =>
       await apiService.patientPassports(patientId);
+
+  Future<List<PatientPassport>> patientPassportsByPatient(
+    String patientId,
+  ) async =>
+      await apiService.patientPassportsByPatient(patientId);
 
   Future<PatientPassport> postPatientPassport(
     PatientPassportRequest patientPassport,
@@ -135,6 +150,11 @@ class PatientRemoteProvider {
         patient: patient,
       );
 
+  Future<List<MedicalRecord>> medicalRecordsByPatient(
+    String patientId,
+  ) async =>
+      await apiService.medicalRecordsByPatient(patientId);
+
   Future<MedicalRecord> postMedicalRecord(
     MedicalRecordRequest medicalRecord,
   ) async =>
@@ -156,6 +176,11 @@ class PatientRemoteProvider {
   ) async =>
       await apiService.medicalRecordBudgets(medicalRecordId);
 
+  Future<List<MedicalRecordBudget>> medicalRecordBudgetsByMedicalRecord(
+    String medicalRecordId,
+  ) async =>
+      await apiService.medicalRecordBudgetsByMedicalRecord(medicalRecordId);
+
   Future<MedicalRecordBudget> postMedicalRecordBudget(
     MedicalRecordBudgetRequest medicalRecordBudget,
   ) async =>
@@ -176,6 +201,11 @@ class PatientRemoteProvider {
     String medicalRecordId,
   ) async =>
       await apiService.medicalRecordAgents(medicalRecordId);
+
+  Future<List<MedicalRecordAgent>> medicalRecordAgentsByMedicalRecord(
+    String medicalRecordId,
+  ) async =>
+      await apiService.medicalRecordAgentsByMedicalRecord(medicalRecordId);
 
   Future<MedicalRecordAgent> postMedicalRecordAgent(
     MedicalRecordAgentRequest medicalRecordAgent,
@@ -199,6 +229,11 @@ class PatientRemoteProvider {
   ) async =>
       await apiService.medicalRecordCompanions(medicalRecordId);
 
+  Future<List<MedicalRecordCompanion>> medicalRecordCompanionsByMedicalRecord(
+    String medicalRecordId,
+  ) async =>
+      await apiService.medicalRecordCompanionsByMedicalRecord(medicalRecordId);
+
   Future<MedicalRecordCompanion> postMedicalRecordCompanion(
     MedicalRecordCompanionRequest medicalRecordCompanion,
   ) async =>
@@ -221,6 +256,11 @@ class PatientRemoteProvider {
   ) async =>
       await apiService.medicalRecordHospitals(medicalRecordId);
 
+  Future<List<MedicalRecordHospital>> medicalRecordHospitalsByMedicalRecord(
+    String medicalRecordId,
+  ) async =>
+      await apiService.medicalRecordHospitalsByMedicalRecord(medicalRecordId);
+
   Future<MedicalRecordHospital> postMedicalRecordHospital(
     MedicalRecordHospitalRequest medicalRecordHospital,
   ) async =>
@@ -242,6 +282,13 @@ class PatientRemoteProvider {
     String medicalRecordId,
   ) async =>
       await apiService.medicalRecordInterpreters(medicalRecordId);
+
+  Future<List<MedicalRecordInterpreter>>
+      medicalRecordInterpretersByMedicalRecord(
+    String medicalRecordId,
+  ) async =>
+          await apiService
+              .medicalRecordInterpretersByMedicalRecord(medicalRecordId);
 
   Future<MedicalRecordInterpreter> postMedicalRecordInterpreter(
     MedicalRecordInterpreterRequest medicalRecordInterpreter,
@@ -266,6 +313,11 @@ class PatientRemoteProvider {
   ) async =>
       await apiService.medicalRecordsProgress(medicalRecordId);
 
+  Future<List<MedicalRecordProgress>> medicalRecordsProgressByMedicalRecord(
+    String medicalRecordId,
+  ) async =>
+      await apiService.medicalRecordsProgressByMedicalRecord(medicalRecordId);
+
   Future<MedicalRecordProgress> postMedicalRecordProgress(
     MedicalRecordProgressRequest medicalRecordProgress,
   ) async =>
@@ -288,6 +340,11 @@ class PatientRemoteProvider {
   ) async =>
       await apiService.medicalRecordsOverseas(medicalRecordId);
 
+  Future<List<MedicalRecordOversea>> medicalRecordsOverseasByMedicalRecord(
+    String medicalRecordId,
+  ) async =>
+      await apiService.medicalRecordsOverseasByMedicalRecord(medicalRecordId);
+
   Future<MedicalRecordOversea> postMedicalRecordOversea(
     MedicalRecordOverseaRequest medicalRecordOversea,
   ) async =>
@@ -309,6 +366,13 @@ class PatientRemoteProvider {
     String medicalRecordOverseaId,
   ) async =>
       await apiService.medicalRecordsOverseaData(medicalRecordOverseaId);
+
+  Future<List<MedicalRecordOverseaData>>
+      medicalRecordsOverseaDataByMedicalRecordOversea(
+    String medicalRecordOverseaId,
+  ) async =>
+          await apiService.medicalRecordsOverseaDataByRecordsOversea(
+              medicalRecordOverseaId);
 
   Future<MedicalRecordOverseaData> postMedicalRecordOverseaData(
     MedicalRecordOverseaDataRequest medicalRecordOverseaData,

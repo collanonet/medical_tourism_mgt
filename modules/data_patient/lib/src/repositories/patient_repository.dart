@@ -50,6 +50,10 @@ abstract class PatientRepository {
     String patientId,
   );
 
+  Future<List<PatientName>> patientNamesByPatient(
+    String patientId,
+  );
+
   Future<PatientName> postPatientName(
     PatientNameRequest patientName,
   );
@@ -68,6 +72,10 @@ abstract class PatientRepository {
     String patientId,
   );
 
+  Future<List<PatientNationality>> patientNationalitiesByPatient(
+    String id,
+  );
+
   Future<PatientNationality> postPatientNationality(
     PatientNationalityRequest patientNationality,
   );
@@ -83,6 +91,10 @@ abstract class PatientRepository {
 
   //GET_PATIENT_PASSPORTS
   Future<List<PatientPassport>> patientPassports(
+    String patientId,
+  );
+
+  Future<List<PatientPassport>> patientPassportsByPatient(
     String patientId,
   );
 
@@ -107,6 +119,10 @@ abstract class PatientRepository {
     String? patient,
   });
 
+  Future<List<MedicalRecord>> medicalRecordsByPatient(
+    String patientId,
+  );
+
   Future<MedicalRecord> postMedicalRecord(
     MedicalRecordRequest medicalRecord,
   );
@@ -123,6 +139,10 @@ abstract class PatientRepository {
   //GET_MEDICAL_RECORD_AGENTS
 
   Future<List<MedicalRecordAgent>> medicalRecordAgents(
+    String medicalRecordId,
+  );
+
+  Future<List<MedicalRecordAgent>> medicalRecordAgentsByMedicalRecord(
     String medicalRecordId,
   );
 
@@ -145,6 +165,10 @@ abstract class PatientRepository {
     String medicalRecordId,
   );
 
+  Future<List<MedicalRecordBudget>> medicalRecordBudgetsByMedicalRecord(
+    String medicalRecordId,
+  );
+
   Future<MedicalRecordBudget> postMedicalRecordBudget(
     MedicalRecordBudgetRequest medicalRecordBudget,
   );
@@ -161,6 +185,10 @@ abstract class PatientRepository {
 //GET_MEDICAL_RECORD_COMPANIONS
 
   Future<List<MedicalRecordCompanion>> medicalRecordCompanions(
+    String medicalRecordId,
+  );
+
+  Future<List<MedicalRecordCompanion>> medicalRecordCompanionsByMedicalRecord(
     String medicalRecordId,
   );
 
@@ -182,6 +210,10 @@ abstract class PatientRepository {
     String medicalRecordId,
   );
 
+  Future<List<MedicalRecordHospital>> medicalRecordHospitalsByMedicalRecord(
+    String medicalRecordId,
+  );
+
   Future<MedicalRecordHospital> postMedicalRecordHospital(
     MedicalRecordHospitalRequest medicalRecordHospital,
   );
@@ -197,6 +229,11 @@ abstract class PatientRepository {
 
 //GET_MEDICAL_RECORD_INTERPRETERS
   Future<List<MedicalRecordInterpreter>> medicalRecordInterpreters(
+    String medicalRecordId,
+  );
+
+  Future<List<MedicalRecordInterpreter>>
+      medicalRecordInterpretersByMedicalRecord(
     String medicalRecordId,
   );
 
@@ -218,6 +255,10 @@ abstract class PatientRepository {
     String medicalRecordId,
   );
 
+  Future<List<MedicalRecordProgress>> medicalRecordsProgressByMedicalRecord(
+    String medicalRecordId,
+  );
+
   Future<MedicalRecordProgress> postMedicalRecordProgress(
     MedicalRecordProgressRequest medicalRecordProgress,
   );
@@ -236,6 +277,10 @@ abstract class PatientRepository {
     String medicalRecordId,
   );
 
+  Future<List<MedicalRecordOversea>> medicalRecordsOverseasByMedicalRecord(
+    String medicalRecordId,
+  );
+
   Future<MedicalRecordOversea> postMedicalRecordOversea(
     MedicalRecordOverseaRequest medicalRecordOversea,
   );
@@ -251,6 +296,11 @@ abstract class PatientRepository {
 
 //GET_MEDICAL_RECORDS_OVERSEAS_DATA
   Future<List<MedicalRecordOverseaData>> medicalRecordsOverseasData(
+    String medicalRecordOverseaId,
+  );
+
+  Future<List<MedicalRecordOverseaData>>
+      medicalRecordsOverseaDataByMedicalRecordOversea(
     String medicalRecordOverseaId,
   );
 
