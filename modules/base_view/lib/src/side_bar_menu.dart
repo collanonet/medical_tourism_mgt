@@ -171,7 +171,30 @@ class SideBarMenu extends StatelessWidget {
                     backgroundColor: MaterialStateProperty.all(Colors.red),
                   ),
                   onPressed: () {
-                    context.read<AuthModel>().logOut();
+                    showDialog(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return AlertDialog(
+                          title: Text('Logout'),
+                          content: Text('Are you sure you want to log out?'),
+                          actions: [
+                            TextButton(
+                              onPressed: () {
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('Cancel'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                context.read<AuthModel>().logOut();
+                                Navigator.of(context).pop();
+                              },
+                              child: Text('Logout'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
                   },
                   icon: const Icon(
                     Icons.logout,

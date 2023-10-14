@@ -122,6 +122,7 @@ class AppThemeData {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
             backgroundColor: primaryColor,
+            foregroundColor: Colors.white,
             shadowColor: const Color.fromRGBO(230, 172, 13, 0.2),
             disabledForegroundColor: Colors.black),
       ),
@@ -135,11 +136,11 @@ class AppThemeData {
           enableFeedback: true,
         ),
       ),
+
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           side: BorderSide(width: 2, color: primaryColor),
           foregroundColor: primaryColor,
-
         ),
       ),
       textButtonTheme: TextButtonThemeData(
@@ -180,6 +181,14 @@ class AppThemeData {
           TargetPlatform.iOS: NoShadowCupertinoPageTransitionsBuilder(),
           TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
         },
+      ),
+      dialogTheme: DialogTheme(
+        backgroundColor: primaryBackgroundColor,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(
+            spacing.borderRadiusMedium,
+          ),
+        ),
       ),
     );
   }

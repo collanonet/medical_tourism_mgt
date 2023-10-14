@@ -59,7 +59,6 @@ class _MedicalRecordInputState extends State<MedicalRecordInput> {
             child: ReactiveFormBuilder(
               form: () => basicInfoForm(
                 medicalRecord: model.medicalRecord.data,
-                medicalRecordHospital: model.medicalRecordHospitals.data?.first,
                 patientId: model.patient.id,
               ),
               builder: (context, formGroup, child) {
@@ -459,148 +458,147 @@ class _MedicalRecordInputState extends State<MedicalRecordInput> {
                                 //             .isEmpty
                                 //     ?
                                 Row(
+                                  children: [
+                                    Expanded(
+                                      child: ReactiveTextFormField(
+                                        formControlName: 'hospitalName',
+                                        decoration: InputDecoration(
+                                            label: Text(
+                                              '病院名', //   TODO: l10n 対応 (病院名) (hospitalName)
+                                            ),
+                                            suffixIcon: Icon(
+                                              Icons.search,
+                                              color: Colors.grey,
+                                            )),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    Expanded(
+                                      child: ReactiveTextFormField(
+                                        formControlName: 'medicalCardNumber',
+                                        decoration: InputDecoration(
+                                          label: Text(
+                                            '診察券番号', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    Expanded(
+                                      child: Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
-                                          Expanded(
-                                            child: ReactiveTextFormField(
-                                              formControlName: 'hospitalName',
-                                              decoration: InputDecoration(
-                                                  label: Text(
-                                                    '病院名', //   TODO: l10n 対応 (病院名) (hospitalName)
-                                                  ),
-                                                  suffixIcon: Icon(
-                                                    Icons.search,
-                                                    color: Colors.grey,
-                                                  )),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
-                                          Expanded(
-                                            child: ReactiveTextFormField(
-                                              formControlName:
-                                                  'medicalCardNumber',
-                                              decoration: InputDecoration(
-                                                label: Text(
-                                                  '診察券番号', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
-                                          Expanded(
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.min,
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.start,
-                                              children: [
-                                                // ReactiveFormConsumer(builder:
-                                                //     (context, form, _) {
-                                                //   return ElevatedButton(
-                                                //     onPressed: form.valid
-                                                //         ? () {
-                                                //             model
-                                                //                 .createUpdateMedicalRecordHospital(
-                                                //                     formGroup:
-                                                //                         form);
-                                                //           }
-                                                //         : null,
-                                                //     child: Text(
-                                                //       '保存する', // TODO: l10n 対応 (保存する) (save)
-                                                //       style: TextStyle(
-                                                //         color: Colors.white,
-                                                //       ),
-                                                //     ),
-                                                //   );
-                                                // }),
-                                              ],
-                                            ),
-                                          ),
+                                          // ReactiveFormConsumer(builder:
+                                          //     (context, form, _) {
+                                          //   return ElevatedButton(
+                                          //     onPressed: form.valid
+                                          //         ? () {
+                                          //             model
+                                          //                 .createUpdateMedicalRecordHospital(
+                                          //                     formGroup:
+                                          //                         form);
+                                          //           }
+                                          //         : null,
+                                          //     child: Text(
+                                          //       '保存する', // TODO: l10n 対応 (保存する) (save)
+                                          //       style: TextStyle(
+                                          //         color: Colors.white,
+                                          //       ),
+                                          //     ),
+                                          //   );
+                                          // }),
                                         ],
                                       ),
-                                    // : ListView.builder(
-                                    //     itemCount: model.medicalRecordHospitals
-                                    //             .data?.length ??
-                                    //         0,
-                                    //     shrinkWrap: true,
-                                    //     physics:
-                                    //         const NeverScrollableScrollPhysics(),
-                                    //     itemBuilder: (context, index) {
-                                    //       return Row(
-                                    //         children: [
-                                    //           Expanded(
-                                    //             child: ReactiveTextFormField(
-                                    //               formControlName:
-                                    //                   'hospitalName',
-                                    //               decoration: InputDecoration(
-                                    //                   label: Text(
-                                    //                     '病院名', //   TODO: l10n 対応 (病院名) (hospitalName)
-                                    //                   ),
-                                    //                   suffixIcon: Icon(
-                                    //                     Icons.search,
-                                    //                     color: Colors.grey,
-                                    //                   )),
-                                    //             ),
-                                    //           ),
-                                    //           SizedBox(
-                                    //             width: context.appTheme.spacing
-                                    //                 .marginMedium,
-                                    //           ),
-                                    //           Expanded(
-                                    //             child: ReactiveTextFormField(
-                                    //               formControlName:
-                                    //                   'medicalCardNumber',
-                                    //               decoration: InputDecoration(
-                                    //                 label: Text(
-                                    //                   '診察券番号', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
-                                    //                 ),
-                                    //               ),
-                                    //             ),
-                                    //           ),
-                                    //           SizedBox(
-                                    //             width: context.appTheme.spacing
-                                    //                 .marginMedium,
-                                    //           ),
-                                    //           Expanded(
-                                    //             child: Row(
-                                    //               mainAxisSize:
-                                    //                   MainAxisSize.min,
-                                    //               crossAxisAlignment:
-                                    //                   CrossAxisAlignment.start,
-                                    //               mainAxisAlignment:
-                                    //                   MainAxisAlignment.start,
-                                    //               children: [
-                                    //                 ReactiveFormConsumer(
-                                    //                     builder:
-                                    //                         (context, form, _) {
-                                    //                   return ElevatedButton(
-                                    //                     onPressed: form.valid
-                                    //                         ? () {
-                                    //                             model.createUpdateMedicalRecordHospital(
-                                    //                                 formGroup:
-                                    //                                     form);
-                                    //                           }
-                                    //                         : null,
-                                    //                     child: Text(
-                                    //                       '保存する', // TODO: l10n 対応 (保存する) (save)
-                                    //                       style: TextStyle(
-                                    //                         color: Colors.white,
-                                    //                       ),
-                                    //                     ),
-                                    //                   );
-                                    //                 }),
-                                    //               ],
-                                    //             ),
-                                    //           ),
-                                    //         ],
-                                    //       );
-                                    //     }),
+                                    ),
+                                  ],
+                                ),
+                                // : ListView.builder(
+                                //     itemCount: model.medicalRecordHospitals
+                                //             .data?.length ??
+                                //         0,
+                                //     shrinkWrap: true,
+                                //     physics:
+                                //         const NeverScrollableScrollPhysics(),
+                                //     itemBuilder: (context, index) {
+                                //       return Row(
+                                //         children: [
+                                //           Expanded(
+                                //             child: ReactiveTextFormField(
+                                //               formControlName:
+                                //                   'hospitalName',
+                                //               decoration: InputDecoration(
+                                //                   label: Text(
+                                //                     '病院名', //   TODO: l10n 対応 (病院名) (hospitalName)
+                                //                   ),
+                                //                   suffixIcon: Icon(
+                                //                     Icons.search,
+                                //                     color: Colors.grey,
+                                //                   )),
+                                //             ),
+                                //           ),
+                                //           SizedBox(
+                                //             width: context.appTheme.spacing
+                                //                 .marginMedium,
+                                //           ),
+                                //           Expanded(
+                                //             child: ReactiveTextFormField(
+                                //               formControlName:
+                                //                   'medicalCardNumber',
+                                //               decoration: InputDecoration(
+                                //                 label: Text(
+                                //                   '診察券番号', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
+                                //                 ),
+                                //               ),
+                                //             ),
+                                //           ),
+                                //           SizedBox(
+                                //             width: context.appTheme.spacing
+                                //                 .marginMedium,
+                                //           ),
+                                //           Expanded(
+                                //             child: Row(
+                                //               mainAxisSize:
+                                //                   MainAxisSize.min,
+                                //               crossAxisAlignment:
+                                //                   CrossAxisAlignment.start,
+                                //               mainAxisAlignment:
+                                //                   MainAxisAlignment.start,
+                                //               children: [
+                                //                 ReactiveFormConsumer(
+                                //                     builder:
+                                //                         (context, form, _) {
+                                //                   return ElevatedButton(
+                                //                     onPressed: form.valid
+                                //                         ? () {
+                                //                             model.createUpdateMedicalRecordHospital(
+                                //                                 formGroup:
+                                //                                     form);
+                                //                           }
+                                //                         : null,
+                                //                     child: Text(
+                                //                       '保存する', // TODO: l10n 対応 (保存する) (save)
+                                //                       style: TextStyle(
+                                //                         color: Colors.white,
+                                //                       ),
+                                //                     ),
+                                //                   );
+                                //                 }),
+                                //               ],
+                                //             ),
+                                //           ),
+                                //         ],
+                                //       );
+                                //     }),
 
                                 SizedBox(
                                   height: context.appTheme.spacing.marginMedium,
