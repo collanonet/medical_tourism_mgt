@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+import 'basic_info_form.dart';
+
 @injectable
 class BasicInformationModel with ChangeNotifier {
   BasicInformationModel({
@@ -15,14 +17,23 @@ class BasicInformationModel with ChangeNotifier {
 
   late Patient _patient;
   Patient get patient => _patient;
-  Future<void> initialData({Patient? patient, String? id}) async {
+  Future<void> initialData({
+    Patient? patient,
+    String? id,
+    required FormGroup formGroup,
+  }) async {
     if (patient != null) {
-      _patient = patient;
-      notifyListeners();
-      await getPatientNames(patient.id);
-      await getPatientNationalities(patient.id);
-      await getPatientPassports(patient.id);
-      await getMedicalRecords(patient.id);
+      try {
+        _patient = patient;
+        await getPatientNames(patient.id);
+        await getPatientNationalities(patient.id);
+        await getPatientPassports(patient.id);
+        await getMedicalRecords(patientId: patient.id, formGroup: formGroup);
+      } catch (e) {
+        logger.d(e);
+      } finally {
+        notifyListeners();
+      }
     }
   }
 
@@ -229,12 +240,16 @@ class BasicInformationModel with ChangeNotifier {
   AsyncData<MedicalRecord> _medicalRecord = const AsyncData();
   AsyncData<MedicalRecord> get medicalRecord => _medicalRecord;
 
-  Future<void> getMedicalRecords(String patientId) async {
+  Future<void> getMedicalRecords({
+    required String patientId,
+    required FormGroup formGroup,
+  }) async {
     _medicalRecord = const AsyncData(loading: true);
     notifyListeners();
 
     await patientRepository.medicalRecordsByPatient(patientId).then((value) {
       _medicalRecord = AsyncData(data: value.first);
+      insertMedicalRecord(data: value.first, formGroup: formGroup);
     }).catchError((error) {
       logger.d(error);
       _medicalRecord = AsyncData(error: error);
@@ -245,15 +260,38 @@ class BasicInformationModel with ChangeNotifier {
       await getMedicalRecordAgents(_medicalRecord.data!.id);
       await getMedicalRecordBudgets(_medicalRecord.data!.id);
       await getMedicalRecordCompanions(_medicalRecord.data!.id);
-      await getMedicalRecordHospitals(_medicalRecord.data!.id);
+      await getMedicalRecordHospitals(
+        medicalRecordId: _medicalRecord.data!.id,
+        formGroup: formGroup,
+      );
       await getMedicalRecordInterpreters(_medicalRecord.data!.id);
     }
+  }
+
+  void insertMedicalRecord({
+    MedicalRecord? data,
+    required FormGroup formGroup,
+  }) {
+    formGroup.control('id').value = data?.id;
+    formGroup.control('dateOfBirth').value = data?.dateOfBirth;
+    formGroup.control('age').value = data?.age;
+    formGroup.control('gender').value = data?.gender;
+    formGroup.control('arrivalDate').value = data?.arrivalDate;
+    formGroup.control('examinationDate').value = data?.examinationDate;
+    formGroup.control('departureDate').value = data?.departureDate;
+    formGroup.control('caseNumber').value = data?.caseNumber;
+    formGroup.control('receptionDate').value = data?.receptionDate;
+    formGroup.control('type').value = data?.type;
+    formGroup.control('progress').value = data?.progress;
+    formGroup.control('advancePaymentDate').value = data?.advancePaymentDate;
+    formGroup.control('paymentMethod').value = data?.paymentMethod;
+    formGroup.control('memo').value = data?.memo;
   }
 
   Future<void> createUpdateMedicalRecords(FormGroup form) async {
     MedicalRecordRequest request = MedicalRecordRequest(
       dateOfBirth: form.control('dateOfBirth').value,
-      age: int.tryParse(form.control('age').value),
+      age: ageCalculator(form.control('dateOfBirth').value),
       gender: form.control('gender').value,
       arrivalDate: form.control('arrivalDate').value,
       examinationDate: form.control('examinationDate').value,
@@ -267,11 +305,8 @@ class BasicInformationModel with ChangeNotifier {
       memo: form.control('memo').value,
       patient: form.control('patient').value,
     );
-    logger.d(request);
-    request.age = request.ageCal;
-    logger.d(request.ageCal);
-    if (medicalRecord.data != null) {
-      await updateMedicalRecords(medicalRecord.data!.id, request);
+    if (form.control('id').value != null) {
+      await updateMedicalRecords(form.control('id').value, request);
     } else {
       await postMedicalRecords(request);
     }
@@ -531,7 +566,10 @@ class BasicInformationModel with ChangeNotifier {
   AsyncData<List<MedicalRecordHospital>> get medicalRecordHospitals =>
       _medicalRecordHospitals;
 
-  Future<void> getMedicalRecordHospitals(String medicalRecordId) async {
+  Future<void> getMedicalRecordHospitals({
+    required String medicalRecordId,
+    required FormGroup formGroup,
+  }) async {
     _medicalRecordHospitals = const AsyncData(loading: true);
     notifyListeners();
 
@@ -539,12 +577,35 @@ class BasicInformationModel with ChangeNotifier {
         .medicalRecordHospitalsByMedicalRecord(medicalRecordId)
         .then((value) {
       _medicalRecordHospitals = AsyncData(data: value);
+      insertMedicalRecordHospitals(
+        data: value,
+        formArray: formGroup.control('MEDICAL_RECORD_HOSPITALS') as FormArray,
+      );
     }).catchError((error) {
       logger.d(error);
       _medicalRecordHospitals = AsyncData(error: error);
     }).whenComplete(() {
       notifyListeners();
     });
+  }
+
+  void insertMedicalRecordHospitals({
+    required List<MedicalRecordHospital> data,
+    required FormArray formArray,
+  }) {
+    if (data.isNotEmpty) {
+      formArray.clear();
+      for (var element in data) {
+        formArray.add(
+          FormGroup({
+            'id': FormControl<String?>(value: element.id),
+            'hospitalName': FormControl<String>(value: element.hospitalName),
+            'medicalCardNumber':
+                FormControl<String>(value: element.medicalCardNumber),
+          }),
+        );
+      }
+    }
   }
 
   void createUpdateMedicalRecordHospital({

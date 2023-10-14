@@ -42,7 +42,7 @@ class AppThemeData {
     return AppThemeData(
       primaryBackgroundColor: const Color(0xffF0F3F5),
       secondaryBackgroundColor: Colors.white,
-      primaryColor: const Color(0xFF00C6C6),
+      primaryColor: const Color(0xFF4DBBAA),
       iconColor: Colors.black,
       brightness: Brightness.light,
       typography: const Typography(
