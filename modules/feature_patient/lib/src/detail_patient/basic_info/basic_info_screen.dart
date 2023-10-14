@@ -8,9 +8,7 @@ import 'basic_info_section.dart';
 class BasicInformationScreen extends StatelessWidget {
   const BasicInformationScreen({
     super.key,
-    this.patient,
   });
-  final Patient? patient;
   @override
   Widget build(BuildContext context) {
     return Consumer<BasicInformationModel>(
@@ -28,7 +26,7 @@ class BasicInformationScreen extends StatelessWidget {
                       builder: (context, form, _) {
                         return ElevatedButton(
                           onPressed: form.valid
-                              ? () => model.createUpdateMedicalRecords(form)
+                              ? () => model.createUpdateAll(form)
                               : null,
                           child: const Text(
                             '保存する', // TODO: l10n 対応 (保存する) (save)

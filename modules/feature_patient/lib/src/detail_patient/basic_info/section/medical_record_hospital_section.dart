@@ -100,8 +100,8 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                     formArray.add(
                       FormGroup({
                         'id': FormControl<String?>(),
-                        'hospitalName': FormControl<String>(value: ''),
-                        'medicalCardNumber': FormControl<String>(value: ''),
+                        'hospitalName': FormControl<String?>(),
+                        'medicalCardNumber': FormControl<String?>(),
                       }),
                     );
                   },

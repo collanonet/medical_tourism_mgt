@@ -31,8 +31,8 @@ FormGroup basicInfoForm({
         'MEDICAL_RECORD_HOSPITALS': FormArray([
           FormGroup({
             'id': FormControl<String?>(),
-            'hospitalName': FormControl<String>(value: ''),
-            'medicalCardNumber': FormControl<String>(value: ''),
+            'hospitalName': FormControl<String?>(),
+            'medicalCardNumber': FormControl<String?>(),
           }),
         ]),
       },

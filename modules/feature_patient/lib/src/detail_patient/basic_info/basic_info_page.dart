@@ -23,16 +23,14 @@ class BasicInformationPage extends StatelessWidget {
         ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
       },
       child: ReactiveFormBuilder(
-          form: () => basicInfoForm(),
-          builder: (context, formGroup, child) {
+        form: () => basicInfoForm(patientId: patient?.id),
+        builder: (context, formGroup, child) {
           return ChangeNotifierProvider(
-            create: (context) =>
-                GetIt.I<BasicInformationModel>()..initialData(patient: patient, formGroup: formGroup),
-            child: BasicInformationScreen(
-              patient: patient,
-            ),
+            create: (context) => GetIt.I<BasicInformationModel>()
+              ..initialData(patient: patient, formGroup: formGroup),
+            child: const BasicInformationScreen(),
           );
-        }
+        },
       ),
     );
   }

@@ -37,6 +37,26 @@ class BasicInformationModel with ChangeNotifier {
     }
   }
 
+  // Create or Update all
+  Future<void> createUpdateAll(FormGroup form) async {
+    try {
+      // await createUpdatePatient(form);
+      await createUpdateMedicalRecords(form);
+      // await createUpdatePatientNames(form);
+      // await createUpdatePatientNationalities(form);
+      // await createUpdatePatientPassports(form);
+      // await createUpdateMedicalRecordAgents(form);
+      // await createUpdateMedicalRecordBudgets(form);
+      // await createUpdateMedicalRecordCompanions(form);
+      await createUpdateMedicalRecordHospital(formGroup: form);
+      // await createUpdateMedicalRecordInterpreters(form);
+    } catch (error) {
+      logger.d(error);
+    } finally {
+      notifyListeners();
+    }
+  }
+
   //GET_PATIENT_NAMES
   AsyncData<List<PatientName>> _patientNames = const AsyncData();
   AsyncData<List<PatientName>> get patientNames => _patientNames;
@@ -608,21 +628,32 @@ class BasicInformationModel with ChangeNotifier {
     }
   }
 
-  void createUpdateMedicalRecordHospital({
+  Future<void> createUpdateMedicalRecordHospital({
     required FormGroup formGroup,
-    String? id,
   }) async {
-    MedicalRecordHospitalRequest request = MedicalRecordHospitalRequest(
-      medicalRecord: _medicalRecord.data!.id,
-      medicalCardNumber: formGroup.control('medicalCardNumber').value,
-      hospitalName: formGroup.control('hospitalName').value,
+    formGroup.control('MEDICAL_RECORD_HOSPITALS').value.forEach(
+      (element) async {
+        MedicalRecordHospitalRequest request = MedicalRecordHospitalRequest(
+          medicalCardNumber: element['medicalCardNumber'],
+          hospitalName: element['hospitalName'],
+          medicalRecord: _medicalRecord.data?.id,
+        );
+
+        if (element['id'] != null) {
+          if (element['hospitalName'].isEmpty &&
+              element['medicalCardNumber'].isEmpty) {
+            await deleteMedicalRecordHospitals(element['id']);
+          } else {
+            await updateMedicalRecordHospitals(element['id'], request);
+          }
+        } else {
+          if (element['hospitalName'] != null &&
+              element['medicalCardNumber'] != null) {
+            await postMedicalRecordHospitals(request);
+          }
+        }
+      },
     );
-    logger.d(request);
-    if (id != null) {
-      await updateMedicalRecordHospitals(id, request);
-    } else {
-      await postMedicalRecordHospitals(request);
-    }
   }
 
   // post MEDICAL_RECORD_HOSPITALS
@@ -668,6 +699,30 @@ class BasicInformationModel with ChangeNotifier {
         _medicalRecordHospitals.data?[index] = value;
       } else {
         _medicalRecordHospitals = AsyncData(data: [value]);
+      }
+    }).catchError((error) {
+      logger.d(error);
+      _medicalRecordHospitals = AsyncData(error: error);
+    }).whenComplete(() {
+      notifyListeners();
+    });
+  }
+
+  // delete MEDICAL_RECORD_HOSPITALS
+  Future<void> deleteMedicalRecordHospitals(
+    String id,
+  ) async {
+    _medicalRecordHospitals = const AsyncData(loading: true);
+    notifyListeners();
+
+    await patientRepository.deleteMedicalRecordHospital(id).then((value) {
+      // Find from list and update or add
+      final index = _medicalRecordHospitals.data?.indexWhere(
+            (element) => element.id == id,
+          ) ??
+          -1;
+      if (index >= 0) {
+        _medicalRecordHospitals.data?.removeAt(index);
       }
     }).catchError((error) {
       logger.d(error);
