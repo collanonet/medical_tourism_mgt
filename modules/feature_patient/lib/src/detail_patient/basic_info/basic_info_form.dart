@@ -64,9 +64,18 @@ FormGroup basicInfoForm({
             'familyName': FormControl<String?>(),
             'middleName': FormControl<String?>(),
             'firstName': FormControl<String?>(),
-            'nameType':
-                FormControl<String>(value: NameType.japaneseForNonChinese.value),
+            'nameType': FormControl<String>(
+                value: NameType.japaneseForNonChinese.value),
           }),
         ]),
+        'PATIENT_NATIONALITIES': FormGroup({
+          'id': FormControl<String?>(),
+          'nationality': FormControl<String?>(),
+          'nativeLanguage': FormControl<String?>(),
+          'residentialArea': FormControl<String?>(),
+          'currentAddress': FormControl<String?>(),
+          'mobileNumber': FormControl<String?>(),
+          'patient': FormControl<String?>(),
+        }),
       },
     );

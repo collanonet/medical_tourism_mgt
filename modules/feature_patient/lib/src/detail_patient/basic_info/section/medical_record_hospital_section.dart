@@ -40,44 +40,46 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                 builder: (context, formArray, child) {
                   final rows = formArray.controls
                       .map((control) => control as FormGroup)
-                      .map((currentForm) => ReactiveForm(
-                            formGroup: currentForm,
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  child: ReactiveTextFormField(
-                                    formControlName: 'hospitalName',
-                                    decoration: InputDecoration(
-                                      label: Text(
-                                        '病院名', //   TODO: l10n 対応 (病院名) (hospitalName)
-                                      ),
-                                      suffixIcon: Icon(
-                                        Icons.search,
-                                        color: Colors.grey,
-                                      ),
+                      .map(
+                        (currentForm) => ReactiveForm(
+                          formGroup: currentForm,
+                          child: Row(
+                            children: [
+                              const Expanded(
+                                child: ReactiveTextFormField(
+                                  formControlName: 'hospitalName',
+                                  decoration: InputDecoration(
+                                    label: Text(
+                                      '病院名', //   TODO: l10n 対応 (病院名) (hospitalName)
+                                    ),
+                                    suffixIcon: Icon(
+                                      Icons.search,
+                                      color: Colors.grey,
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(
-                                  child: ReactiveTextFormField(
-                                    formControlName: 'medicalCardNumber',
-                                    decoration: InputDecoration(
-                                      label: Text(
-                                        '診察券番号', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
-                                      ),
+                              ),
+                              SizedBox(
+                                width: context.appTheme.spacing.marginMedium,
+                              ),
+                              const Expanded(
+                                child: ReactiveTextFormField(
+                                  formControlName: 'medicalCardNumber',
+                                  decoration: InputDecoration(
+                                    label: Text(
+                                      '診察券番号', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
                                     ),
                                   ),
                                 ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(child: SizedBox())
-                              ],
-                            ),
-                          ));
+                              ),
+                              SizedBox(
+                                width: context.appTheme.spacing.marginMedium,
+                              ),
+                              const Expanded(child: SizedBox())
+                            ],
+                          ),
+                        ),
+                      );
 
                   return ColumnSeparated(
                     separatorBuilder: (BuildContext context, int index) =>

@@ -33,7 +33,8 @@ class BasicInformationModel with ChangeNotifier {
       try {
         _patient = patient;
         await getPatientNames(patientId: patient.id, formGroup: formGroup);
-        await getPatientNationalities(patient.id);
+        await getPatientNationalities(
+            patientId: patient.id, formGroup: formGroup);
         await getPatientPassports(patient.id);
         await getMedicalRecords(patientId: patient.id, formGroup: formGroup);
       } catch (error) {
@@ -290,24 +291,42 @@ class BasicInformationModel with ChangeNotifier {
   }
 
 //GET_PATIENT_NATIONALITIES
-  AsyncData<List<PatientNationality>> _patientNationalities = const AsyncData();
-  AsyncData<List<PatientNationality>> get patientNationalities =>
+  AsyncData<PatientNationality> _patientNationalities = const AsyncData();
+  AsyncData<PatientNationality> get patientNationalities =>
       _patientNationalities;
 
-  Future<void> getPatientNationalities(String patientId) async {
+  Future<void> getPatientNationalities({
+    required String patientId,
+    required FormGroup formGroup,
+  }) async {
     _patientNationalities = const AsyncData(loading: true);
     notifyListeners();
 
     await patientRepository
         .patientNationalitiesByPatient(patientId)
         .then((value) {
-      _patientNationalities = AsyncData(data: value);
+      _patientNationalities = AsyncData(data: value.first);
+      insertPATIENTNATIONALITIES(
+          data: value.first,
+          formGroup: formGroup.control('PATIENT_NATIONALITIES') as FormGroup);
     }).catchError((error) {
       logger.d(error);
-      _patientNationalities = AsyncData(error: error);
     }).whenComplete(() {
       notifyListeners();
     });
+  }
+
+  void insertPATIENTNATIONALITIES({
+    required PatientNationality data,
+    required FormGroup formGroup,
+  }) {
+    formGroup.control('id').value = data.id;
+    formGroup.control('nationality').value = data.nationality;
+    formGroup.control('nativeLanguage').value = data.nativeLanguage;
+    formGroup.control('residentialArea').value = data.residentialArea;
+    formGroup.control('currentAddress').value = data.currentAddress;
+    formGroup.control('mobileNumber').value = data.mobileNumber;
+    formGroup.control('patient').value = data.patient;
   }
 
   // post PATIENT_NATIONALITIES
@@ -317,11 +336,7 @@ class BasicInformationModel with ChangeNotifier {
     await patientRepository
         .postPatientNationality(patientNationalityRequest)
         .then((value) {
-      if (_patientNationalities.data == null) {
-        _patientNationalities = AsyncData(data: [value]);
-      } else {
-        _patientNationalities.data?.add(value);
-      }
+      _patientNationalities = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);
     }).whenComplete(() {
@@ -340,16 +355,7 @@ class BasicInformationModel with ChangeNotifier {
     await patientRepository
         .putPatientNationality(id, patientNationalityRequest)
         .then((value) {
-      // Find from list and update or add
-      final index = _patientNationalities.data?.indexWhere(
-            (element) => element.id == id,
-          ) ??
-          -1;
-      if (index >= 0) {
-        _patientNationalities.data?[index] = value;
-      } else {
-        _patientNationalities.data?.add(value);
-      }
+      _patientNationalities = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);
     }).whenComplete(() {

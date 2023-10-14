@@ -3,6 +3,7 @@ import 'package:core_ui/widgets.dart';
 import 'package:flutter/material.dart';
 import 'section/medical_record_hospital_section.dart';
 import 'section/medical_record_name_section.dart';
+import 'section/medical_record_nationality_section.dart';
 import 'section/medical_record_section.dart';
 
 class BasicInfoSection extends StatelessWidget {
@@ -41,6 +42,8 @@ class BasicInfoSection extends StatelessWidget {
                 ],
               ),
               const MedicalRecordNameSection(),
+
+              MedicalRecordNationalitySection(),
             ],
           ),
         ),

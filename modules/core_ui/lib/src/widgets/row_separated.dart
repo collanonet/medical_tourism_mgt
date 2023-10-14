@@ -1,14 +1,14 @@
 import 'package:core_utils/lists.dart';
 import 'package:flutter/widgets.dart';
 
-class ColumnSeparated extends StatelessWidget {
+class RowSeparated extends StatelessWidget {
   final IndexedWidgetBuilder separatorBuilder;
   final MainAxisAlignment mainAxisAlignment;
   final MainAxisSize mainAxisSize;
   final CrossAxisAlignment crossAxisAlignment;
   final List<Widget> children;
 
-  const ColumnSeparated({
+  const RowSeparated({
     super.key,
     required this.separatorBuilder,
     required this.children,
@@ -19,7 +19,7 @@ class ColumnSeparated extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return Row(
       mainAxisAlignment: mainAxisAlignment,
       mainAxisSize: mainAxisSize,
       crossAxisAlignment: crossAxisAlignment,
