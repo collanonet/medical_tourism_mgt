@@ -16,119 +16,113 @@ class MedicalRecordHospitalSection extends StatelessWidget {
         .control('MEDICAL_RECORD_HOSPITALS') as FormArray;
 
     return Consumer<BasicInformationModel>(
-      builder: (context, model, child) {
-        return Skeletonizer(
-          enabled: model.medicalRecordHospitals.loading,
-          child: Container(
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.vertical(
-                bottom: Radius.circular(
-                  context.appTheme.spacing.borderRadiusMedium,
-                ),
+      builder: (context, model, child) => Skeletonizer(
+        enabled: model.medicalRecordHospitals.loading,
+        child: Container(
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.vertical(
+              bottom: Radius.circular(
+                context.appTheme.spacing.borderRadiusMedium,
               ),
-              color: Color(0xffF8F8D9),
             ),
-            padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text('病院'), // TODO: l10n 対応 (病院) (hospital)
-                SizedBox(
-                  height: context.appTheme.spacing.marginMedium,
-                ),
-                ReactiveFormArray(
-                  formArrayName: 'MEDICAL_RECORD_HOSPITALS',
-                  builder: (context, formArray, child) {
-                    final rows = formArray.controls
-                        .map((control) => control as FormGroup)
-                        .map((currentForm) {
-                      return ReactiveForm(
-                        formGroup: currentForm,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              child: ReactiveTextFormField(
-                                formControlName: 'hospitalName',
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    '病院名', //   TODO: l10n 対応 (病院名) (hospitalName)
-                                  ),
-                                  suffixIcon: Icon(
-                                    Icons.search,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: context.appTheme.spacing.marginMedium,
-                            ),
-                            Expanded(
-                              child: ReactiveTextFormField(
-                                formControlName: 'medicalCardNumber',
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    '診察券番号', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
-                                  ),
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: context.appTheme.spacing.marginMedium,
-                            ),
-                            Expanded(child: SizedBox())
-                          ],
-                        ),
-                      );
-                    });
-
-                    return ColumnSeparated(
-                      separatorBuilder: (BuildContext context, int index) =>
-                          SizedBox(
-                        height: context.appTheme.spacing.marginMedium,
-                      ),
-                      children: rows.toList(),
-                    );
-                  },
-                ),
-
-                SizedBox(
-                  height: context.appTheme.spacing.marginMedium,
-                ),
-                InkWell(
-                  onTap: () {
-                    formArray.add(
-                      FormGroup({
-                        'id': FormControl<String?>(),
-                        'hospitalName': FormControl<String?>(),
-                        'medicalCardNumber': FormControl<String?>(),
-                      }),
-                    );
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.add_circle,
-                        color: context.appTheme.primaryColor,
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginSmall,
-                      ),
-                      Text(
-                        '病院を追加',
-                        style: TextStyle(color: context.appTheme.primaryColor),
-                      ) // TODO: l10n 対応 (病院を追加) (addHospital)
-                    ],
-                  ),
-                )
-              ],
-            ),
+            color: const Color(0xffF8F8D9),
           ),
-        );
-      },
+          padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text('病院'), // TODO: l10n 対応 (病院) (hospital)
+              SizedBox(
+                height: context.appTheme.spacing.marginMedium,
+              ),
+              ReactiveFormArray(
+                formArrayName: 'MEDICAL_RECORD_HOSPITALS',
+                builder: (context, formArray, child) {
+                  final rows = formArray.controls
+                      .map((control) => control as FormGroup)
+                      .map((currentForm) => ReactiveForm(
+                            formGroup: currentForm,
+                            child: Row(
+                              children: [
+                                const Expanded(
+                                  child: ReactiveTextFormField(
+                                    formControlName: 'hospitalName',
+                                    decoration: InputDecoration(
+                                      label: Text(
+                                        '病院名', //   TODO: l10n 対応 (病院名) (hospitalName)
+                                      ),
+                                      suffixIcon: Icon(
+                                        Icons.search,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: context.appTheme.spacing.marginMedium,
+                                ),
+                                const Expanded(
+                                  child: ReactiveTextFormField(
+                                    formControlName: 'medicalCardNumber',
+                                    decoration: InputDecoration(
+                                      label: Text(
+                                        '診察券番号', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(
+                                  width: context.appTheme.spacing.marginMedium,
+                                ),
+                                const Expanded(child: SizedBox())
+                              ],
+                            ),
+                          ));
+
+                  return ColumnSeparated(
+                    separatorBuilder: (BuildContext context, int index) =>
+                        SizedBox(
+                      height: context.appTheme.spacing.marginMedium,
+                    ),
+                    children: rows.toList(),
+                  );
+                },
+              ),
+
+              SizedBox(
+                height: context.appTheme.spacing.marginMedium,
+              ),
+              InkWell(
+                onTap: () => formArray.add(
+                  FormGroup({
+                    'id': FormControl<String?>(),
+                    'hospitalName': FormControl<String?>(),
+                    'medicalCardNumber': FormControl<String?>(),
+                  }),
+                ),
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.add_circle,
+                      color: context.appTheme.primaryColor,
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginSmall,
+                    ),
+                    Text(
+                      '病院を追加',
+                      style: TextStyle(color: context.appTheme.primaryColor),
+                    ) // TODO: l10n 対応 (病院を追加) (addHospital)
+                  ],
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 }

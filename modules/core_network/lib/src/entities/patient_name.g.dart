@@ -9,7 +9,7 @@ part of 'patient_name.dart';
 PatientName _$PatientNameFromJson(Map<String, dynamic> json) => PatientName(
       id: json['_id'] as String,
       familyName: json['familyName'] as String,
-      middleName: json['middleName'] as String,
+      middleName: json['middleName'] as String?,
       firstName: json['firstName'] as String,
       nameType: json['nameType'] as String,
       patient: json['patient'] as String,

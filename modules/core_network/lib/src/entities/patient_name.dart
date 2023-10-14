@@ -8,7 +8,7 @@ class PatientName {
   @JsonKey(name: '_id')
   final String id;
   String familyName;
-  String middleName;
+  String? middleName;
   String firstName;
   String nameType;
   String patient;
@@ -18,7 +18,7 @@ class PatientName {
   PatientName({
     required this.id,
     required this.familyName,
-    required this.middleName,
+    this.middleName,
     required this.firstName,
     required this.nameType,
     required this.patient,

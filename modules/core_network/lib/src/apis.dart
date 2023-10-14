@@ -20,9 +20,9 @@ class Apis {
   static const GET_PATIENT_NAMES = '/patient-names';
   static const GET_PATIENT_NAMES_BY_PATIENT = '/patient-names/patient-id';
   static const GET_PATIENT_NAME = '/patient-names';
-  static const POST_PATIENT_NAMES = '/patients-names';
-  static const PUT_PATIENT_NAMES = '/patients-names';
-  static const DELETE_PATIENT_NAMES = '/patients-names';
+  static const POST_PATIENT_NAMES = '/patient-names';
+  static const PUT_PATIENT_NAMES = '/patient-names';
+  static const DELETE_PATIENT_NAMES = '/patient-names';
 
   static const GET_PATIENT_NATIONALITIES = '/patient-nationalities';
   static const GET_PATIENT_NATIONALITIES_BY_PATIENT =

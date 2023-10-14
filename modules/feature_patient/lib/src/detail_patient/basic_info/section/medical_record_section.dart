@@ -1,4 +1,3 @@
-import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/cupertino.dart';
@@ -107,7 +106,9 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                   child: Row(
                     children: [
                       Column(
+                        mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
                             '年齢', // TODO: l10n 対応 (年齢) (age)
@@ -121,7 +122,9 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                         width: context.appTheme.spacing.marginMedium,
                       ),
                       Column(
+                        mainAxisSize: MainAxisSize.max,
                         crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           const Text(
                             '性別', //

@@ -12,34 +12,34 @@ class BasicInformationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<BasicInformationModel>(
-        builder: (context, model, child) => Column(
-              children: [
-                const Expanded(
-                  child: BasicInfoSection(),
-                ),
-                const SizedBox(height: 16),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ReactiveFormConsumer(
-                      builder: (context, form, _) {
-                        return ElevatedButton(
-                          onPressed: form.valid
-                              ? () => model.createUpdateAll(form)
-                              : null,
-                          child: const Text(
-                            '保存する', // TODO: l10n 対応 (保存する) (save)
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
-                          ),
-                        );
-                      },
-                    )
-                  ],
-                )
-              ],
-            ));
+      builder: (context, model, child) => Column(
+        children: [
+          const Expanded(
+            child: BasicInfoSection(),
+          ),
+          const SizedBox(height: 16),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              ReactiveFormConsumer(
+                builder: (context, form, _) {
+                  return model.loading  ? const CircularProgressIndicator() : ElevatedButton(
+                    onPressed:
+                        form.valid ? () => model.createUpdateAll(form) : null,
+                    child: const Text(
+                      '保存する', // TODO: l10n 対応 (保存する) (save)
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  );
+                },
+              )
+            ],
+          )
+        ],
+      ),
+    );
   }
 }

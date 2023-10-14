@@ -442,7 +442,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/patients-names',
+              '/patient-names',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -473,7 +473,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/patients-names/${id}',
+              '/patient-names/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -499,7 +499,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          '/patients-names/${id}',
+          '/patient-names/${id}',
           queryParameters: queryParameters,
           data: _data,
         )
