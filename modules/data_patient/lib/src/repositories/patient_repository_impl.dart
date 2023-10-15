@@ -285,6 +285,44 @@ class PatientRepositoryIml extends PatientRepository {
     return remote.deleteMedicalRecordAgent(id);
   }
 
+  // GET_MEDICAL_RECORD_REFERRERS
+
+  @override
+  Future<List<MedicalRecordReferrer>> medicalRecordReferrers(
+    String medicalRecordId,
+  ) {
+    return remote.medicalRecordReferrers(medicalRecordId);
+  }
+
+  @override
+  Future<List<MedicalRecordReferrer>> medicalRecordReferrersByMedicalRecord(
+    String medicalRecordId,
+  ) {
+    return remote.medicalRecordReferrersByMedicalRecord(medicalRecordId);
+  }
+
+  @override
+  Future<MedicalRecordReferrer> postMedicalRecordReferrer(
+    MedicalRecordReferrerRequest medicalRecordAgent,
+  ) {
+    return remote.postMedicalRecordReferrer(medicalRecordAgent);
+  }
+
+  @override
+  Future<MedicalRecordReferrer> putMedicalRecordReferrer(
+    String id,
+    MedicalRecordReferrerRequest medicalRecordAgent,
+  ) {
+    return remote.putMedicalRecordReferrer(id, medicalRecordAgent);
+  }
+
+  @override
+  Future<void> deleteMedicalRecordReferrer(
+    String id,
+  ) {
+    return remote.deleteMedicalRecordAgent(id);
+  }
+
   // GET_MEDICAL_RECORD_BUDGETS
 
   @override

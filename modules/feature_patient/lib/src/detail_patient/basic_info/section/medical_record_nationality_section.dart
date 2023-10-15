@@ -101,9 +101,11 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                   const Expanded(
                     child: ReactiveTextFormField(
                       formControlName: 'mobileNumber',
+                      keyboardType: TextInputType.number,
                       decoration: InputDecoration(
+                        prefixText: '+',
                         label: Text(
-                          '携帯番号', // Todo: l10n (国籍)
+                          '携帯番号',
                         ),
                       ),
                     ),

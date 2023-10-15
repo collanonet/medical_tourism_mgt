@@ -9,7 +9,7 @@ part of 'medical_record_interpreter_request.dart';
 MedicalRecordInterpreterRequest _$MedicalRecordInterpreterRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalRecordInterpreterRequest(
-      requiredOrUnnecessary: json['requiredOrUnnecessary'] as bool?,
+      requiredOrUnnnecessary: json['requiredOrUnnnecessary'] as bool?,
       interpreter: json['interpreter'] as String?,
       medicalRecord: json['medicalRecord'] as String?,
     );
@@ -17,7 +17,7 @@ MedicalRecordInterpreterRequest _$MedicalRecordInterpreterRequestFromJson(
 Map<String, dynamic> _$MedicalRecordInterpreterRequestToJson(
         MedicalRecordInterpreterRequest instance) =>
     <String, dynamic>{
-      'requiredOrUnnecessary': instance.requiredOrUnnecessary,
+      'requiredOrUnnnecessary': instance.requiredOrUnnnecessary,
       'interpreter': instance.interpreter,
       'medicalRecord': instance.medicalRecord,
     };

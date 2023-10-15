@@ -224,6 +224,35 @@ abstract class ApiService {
     @Path('id') String id,
   );
 
+  //GET_MEDICAL_RECORD_REFERRERS
+
+  @GET('${Apis.GET_MEDICAL_RECORD_REFERRERS}/{medicalRecordId}')
+  Future<List<MedicalRecordReferrer>> medicalRecordReferrers(
+    @Path('medicalRecordId') String medicalRecordId,
+  );
+
+  @GET(
+      '${Apis.GET_MEDICAL_RECORD_REFERRER_BY_MEDICAL_RECORD}/{medicalRecordId}')
+  Future<List<MedicalRecordReferrer>> medicalRecordReferrersByMedicalRecord(
+    @Path('medicalRecordId') String medicalRecordId,
+  );
+
+  @POST(Apis.POST_MEDICAL_RECORD_REFERRER)
+  Future<MedicalRecordReferrer> postMedicalRecordReferrer(
+    @Body() MedicalRecordReferrerRequest medicalRecordAgent,
+  );
+
+  @PUT('${Apis.PUT_MEDICAL_RECORD_REFERRER}/{id}')
+  Future<MedicalRecordReferrer> putMedicalRecordReferrer(
+    @Path('id') String id,
+    @Body() MedicalRecordReferrerRequest medicalRecordAgent,
+  );
+
+  @DELETE('${Apis.DELETE_MEDICAL_RECORD_REFERRER}/{id}')
+  Future<void> deleteMedicalRecordReferrer(
+    @Path('id') String id,
+  );
+
   // GET_MEDICAL_RECORD_BUDGETS
 
   @GET('${Apis.GET_MEDICAL_RECORD_BUDGETS}/{medicalRecordId}')

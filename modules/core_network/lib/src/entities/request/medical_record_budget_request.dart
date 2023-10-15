@@ -4,7 +4,7 @@ part 'medical_record_budget_request.g.dart';
 
 @JsonSerializable()
 class MedicalRecordBudgetRequest {
-   int? budget;
+   double? budget;
    String? remarks;
    String? medicalRecord;
 

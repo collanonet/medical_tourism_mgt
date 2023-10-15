@@ -588,7 +588,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/patients-nationalities',
+              '/patient-nationalities',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -619,7 +619,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/patients-nationalities/${id}',
+              '/patient-nationalities/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -645,7 +645,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          '/patients-nationalities/${id}',
+          '/patient-nationalities/${id}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -731,7 +731,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/patients-passports',
+              '/patient-passports',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -762,7 +762,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/patients-passports/${id}',
+              '/patient-passports/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -788,7 +788,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          '/patients-passports/${id}',
+          '/patient-passports/${id}',
           queryParameters: queryParameters,
           data: _data,
         )
@@ -1086,6 +1086,152 @@ class _ApiService implements ApiService {
         .compose(
           _dio.options,
           '/medical-record-agents/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+  }
+
+  @override
+  Future<List<MedicalRecordReferrer>> medicalRecordReferrers(
+      String medicalRecordId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<MedicalRecordReferrer>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-referrers/${medicalRecordId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) =>
+            MedicalRecordReferrer.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<List<MedicalRecordReferrer>> medicalRecordReferrersByMedicalRecord(
+      String medicalRecordId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<MedicalRecordReferrer>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-referrers/medical-record-id/${medicalRecordId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) =>
+            MedicalRecordReferrer.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<MedicalRecordReferrer> postMedicalRecordReferrer(
+      MedicalRecordReferrerRequest medicalRecordAgent) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalRecordAgent.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalRecordReferrer>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-referrers',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = MedicalRecordReferrer.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<MedicalRecordReferrer> putMedicalRecordReferrer(
+    String id,
+    MedicalRecordReferrerRequest medicalRecordAgent,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalRecordAgent.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalRecordReferrer>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-referrers/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = MedicalRecordReferrer.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<void> deleteMedicalRecordReferrer(String id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/medical-record-referrers/${id}',
           queryParameters: queryParameters,
           data: _data,
         )

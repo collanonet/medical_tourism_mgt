@@ -28,17 +28,17 @@ class Apis {
   static const GET_PATIENT_NATIONALITIES_BY_PATIENT =
       '/patient-nationalities/patient-id';
   static const GET_PATIENT_NATIONALITY = '/patient-nationalities';
-  static const POST_PATIENT_NATIONALITIES = '/patients-nationalities';
-  static const PUT_PATIENT_NATIONALITIES = '/patients-nationalities';
-  static const DELETE_PATIENT_NATIONALITIES = '/patients-nationalities';
+  static const POST_PATIENT_NATIONALITIES = '/patient-nationalities';
+  static const PUT_PATIENT_NATIONALITIES = '/patient-nationalities';
+  static const DELETE_PATIENT_NATIONALITIES = '/patient-nationalities';
 
   static const GET_PATIENT_PASSPORTS = '/patient-passports';
   static const GET_PATIENT_PASSPORTS_BY_PATIENT =
       '/patient-passports/patient-id';
   static const GET_PATIENT_PASSPORT = '/patient-passports';
-  static const POST_PATIENT_PASSPORTS = '/patients-passports';
-  static const PUT_PATIENT_PASSPORTS = '/patients-passports';
-  static const DELETE_PATIENT_PASSPORTS = '/patients-passports';
+  static const POST_PATIENT_PASSPORTS = '/patient-passports';
+  static const PUT_PATIENT_PASSPORTS = '/patient-passports';
+  static const DELETE_PATIENT_PASSPORTS = '/patient-passports';
 
   static const GET_MEDICAL_RECORDS = '/medical-records';
   static const GET_MEDICAL_RECORDS_BY_PATIENT = '/medical-records/patient-id';
@@ -54,6 +54,15 @@ class Apis {
   static const POST_MEDICAL_RECORD_AGENTS = '/medical-record-agents';
   static const PUT_MEDICAL_RECORD_AGENTS = '/medical-record-agents';
   static const DELETE_MEDICAL_RECORD_AGENTS = '/medical-record-agents';
+
+  static const GET_MEDICAL_RECORD_REFERRERS = '/medical-record-referrers';
+  static const GET_MEDICAL_RECORD_REFERRER_BY_MEDICAL_RECORD =
+      '/medical-record-referrers/medical-record-id';
+  static const GET_MEDICAL_RECORD_REFERRER = '/medical-record-referrers';
+  static const POST_MEDICAL_RECORD_REFERRER = '/medical-record-referrers';
+  static const PUT_MEDICAL_RECORD_REFERRER = '/medical-record-referrers';
+  static const DELETE_MEDICAL_RECORD_REFERRER = '/medical-record-referrers';
+
 
   static const GET_MEDICAL_RECORD_BUDGETS = '/medical-record-budgets';
   static const GET_MEDICAL_RECORD_BUDGETS_BY_MEDICAL_RECORD =

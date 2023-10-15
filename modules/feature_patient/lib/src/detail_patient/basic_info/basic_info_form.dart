@@ -77,5 +77,27 @@ FormGroup basicInfoForm({
           'mobileNumber': FormControl<String?>(),
           'patient': FormControl<String?>(),
         }),
+        'MEDICAL_RECORD_BUDGETS': FormGroup({
+          'id': FormControl<String?>(),
+          'budget': FormControl<String?>(),
+          'remarks': FormControl<String?>(),
+        }),
+        'MEDICAL_RECORD_AGENTS': FormGroup({
+          'id': FormControl<String?>(),
+          'company': FormControl<String?>(),
+          'nameInKanji': FormControl<String?>(),
+          'nameInKana': FormControl<String?>(),
+        }),
+        'MEDICAL_RECORD_Referrers': FormGroup({
+          'id': FormControl<String?>(),
+          'company': FormControl<String?>(),
+          'nameInKanji': FormControl<String?>(),
+          'nameInKana': FormControl<String?>(),
+        }),
+        'MEDICAL_RECORD_Interpreter': FormGroup({
+          'id': FormControl<String?>(),
+          'requiredOrUnnnecessary': FormControl<String>(),
+          'interpreter': FormControl<String>(),
+        }),
       },
     );

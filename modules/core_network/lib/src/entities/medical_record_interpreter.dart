@@ -7,7 +7,7 @@ part 'medical_record_interpreter.g.dart';
 class MedicalRecordInterpreter {
   @JsonKey(name: '_id')
   final String id;
-  bool requiredOrUnnecessary;
+  bool requiredOrUnnnecessary;
   String interpreter;
   String medicalRecord;
   final DateTime createdAt;
@@ -15,7 +15,7 @@ class MedicalRecordInterpreter {
 
   MedicalRecordInterpreter({
     required this.id,
-    required this.requiredOrUnnecessary,
+    required this.requiredOrUnnnecessary,
     required this.interpreter,
     required this.medicalRecord,
     required this.createdAt,
@@ -32,8 +32,8 @@ class MedicalRecordInterpreter {
       MedicalRecordInterpreter? medicalRecordInterpreter) {
     return FormGroup({
       'id': FormControl<String>(value: medicalRecordInterpreter?.id),
-      'requiredOrUnnecessary': FormControl<bool>(
-          value: medicalRecordInterpreter?.requiredOrUnnecessary),
+      'requiredOrUnnnecessary': FormControl<bool>(
+          value: medicalRecordInterpreter?.requiredOrUnnnecessary),
       'interpreter':
           FormControl<String>(value: medicalRecordInterpreter?.interpreter),
       'medicalRecord':

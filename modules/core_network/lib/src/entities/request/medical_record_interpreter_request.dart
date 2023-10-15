@@ -4,12 +4,12 @@ part 'medical_record_interpreter_request.g.dart';
 
 @JsonSerializable()
 class MedicalRecordInterpreterRequest {
-   bool? requiredOrUnnecessary;
+   bool? requiredOrUnnnecessary;
    String? interpreter;
    String? medicalRecord;
 
   MedicalRecordInterpreterRequest({
-     this.requiredOrUnnecessary,
+     this.requiredOrUnnnecessary,
      this.interpreter,
      this.medicalRecord,
   });

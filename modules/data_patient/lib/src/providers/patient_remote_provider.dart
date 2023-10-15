@@ -223,6 +223,34 @@ class PatientRemoteProvider {
   ) async =>
       await apiService.deleteMedicalRecordAgent(id);
 
+
+  Future<List<MedicalRecordReferrer>> medicalRecordReferrers(
+      String medicalRecordId,
+      ) async =>
+      await apiService.medicalRecordReferrers(medicalRecordId);
+
+  Future<List<MedicalRecordReferrer>> medicalRecordReferrersByMedicalRecord(
+      String medicalRecordId,
+      ) async =>
+      await apiService.medicalRecordReferrersByMedicalRecord(medicalRecordId);
+
+  Future<MedicalRecordReferrer> postMedicalRecordReferrer(
+      MedicalRecordReferrerRequest medicalRecordAgent,
+      ) async =>
+      await apiService.postMedicalRecordReferrer(medicalRecordAgent);
+
+  Future<MedicalRecordReferrer> putMedicalRecordReferrer(
+      String id,
+      MedicalRecordReferrerRequest medicalRecordAgent,
+      ) async =>
+      await apiService.putMedicalRecordReferrer(id, medicalRecordAgent);
+
+  Future<void> deleteMedicalRecordReferrer(
+      String id,
+      ) async =>
+      await apiService.deleteMedicalRecordAgent(id);
+
+
   // GET_MEDICAL_RECORD_COMPANIONS
   Future<List<MedicalRecordCompanion>> medicalRecordCompanions(
     String medicalRecordId,

@@ -159,6 +159,29 @@ abstract class PatientRepository {
     String id,
   );
 
+  //GET_MEDICAL_RECORD_REFERRERS
+
+  Future<List<MedicalRecordReferrer>> medicalRecordReferrers(
+      String medicalRecordId,
+      );
+
+  Future<List<MedicalRecordReferrer>> medicalRecordReferrersByMedicalRecord(
+      String medicalRecordId,
+      );
+
+  Future<MedicalRecordReferrer> postMedicalRecordReferrer(
+      MedicalRecordReferrerRequest medicalRecordAgent,
+      );
+
+  Future<MedicalRecordReferrer> putMedicalRecordReferrer(
+      String id,
+      MedicalRecordReferrerRequest medicalRecordAgent,
+      );
+
+  Future<void> deleteMedicalRecordReferrer(
+      String id,
+      );
+
   // GET_MEDICAL_RECORD_BUDGETS
 
   Future<List<MedicalRecordBudget>> medicalRecordBudgets(

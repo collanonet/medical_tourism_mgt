@@ -9,7 +9,7 @@ part of 'medical_record_budget_request.dart';
 MedicalRecordBudgetRequest _$MedicalRecordBudgetRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalRecordBudgetRequest(
-      budget: json['budget'] as int?,
+      budget: (json['budget'] as num?)?.toDouble(),
       remarks: json['remarks'] as String?,
       medicalRecord: json['medicalRecord'] as String?,
     );

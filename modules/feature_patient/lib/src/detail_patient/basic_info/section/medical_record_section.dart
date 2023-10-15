@@ -47,9 +47,6 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
     return Skeletonizer(
       enabled: context.read<BasicInformationModel>().medicalRecord.loading,
       child: Container(
-        margin: EdgeInsets.only(
-          top: context.appTheme.spacing.marginMedium,
-        ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.vertical(
             top: Radius.circular(
