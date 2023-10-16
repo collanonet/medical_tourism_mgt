@@ -65,7 +65,7 @@ class BasicInformationModel with ChangeNotifier {
           form.control('MEDICAL_RECORD_Referrers') as FormGroup);
       await createUpdateMedicalRecordBudgets(
           form.control('MEDICAL_RECORD_BUDGETS') as FormGroup);
-      // await createUpdateMedicalRecordCompanions(form);
+      await createUpdateMedicalRecordCompanions(form);
       await createUpdateMedicalRecordHospital(form);
       await createUpdateMedicalRecordInterpreters(
           form.control('MEDICAL_RECORD_Interpreter') as FormGroup);
@@ -404,7 +404,8 @@ class BasicInformationModel with ChangeNotifier {
     formGroup.control('expirationDate').value = data?.expirationDate;
     formGroup.control('visaType').value = data?.visaType ?? 'medicalGuarantee';
     formGroup.control('visaCategory').value = data?.visaCategory;
-    formGroup.control('underConfirmation').value = data?.underConfirmation ?? false;
+    formGroup.control('underConfirmation').value =
+        data?.underConfirmation ?? false;
   }
 
   // post PATIENT_PASSPORTS
@@ -471,7 +472,10 @@ class BasicInformationModel with ChangeNotifier {
         medicalRecordId: _medicalRecord.data!.id,
         formGroup: formGroup,
       );
-      await getMedicalRecordCompanions(_medicalRecord.data!.id);
+      await getMedicalRecordCompanions(
+        medicalRecordId: _medicalRecord.data!.id,
+        formGroup: formGroup,
+      );
       await getMedicalRecordHospitals(
         medicalRecordId: _medicalRecord.data!.id,
         formGroup: formGroup,
@@ -820,7 +824,10 @@ class BasicInformationModel with ChangeNotifier {
   AsyncData<List<MedicalRecordCompanion>> get medicalRecordCompanions =>
       _medicalRecordCompanions;
 
-  Future<void> getMedicalRecordCompanions(String medicalRecordId) async {
+  Future<void> getMedicalRecordCompanions({
+    required String medicalRecordId,
+    required FormGroup formGroup,
+  }) async {
     _medicalRecordCompanions = const AsyncData(loading: true);
     notifyListeners();
 
@@ -828,12 +835,58 @@ class BasicInformationModel with ChangeNotifier {
         .medicalRecordCompanionsByMedicalRecord(medicalRecordId)
         .then((value) {
       _medicalRecordCompanions = AsyncData(data: value);
+      insertMEDICALRECORDCOMPANIONS(
+        data: value,
+        formArray: formGroup.control('MEDICAL_RECORD_Companion') as FormArray,
+      );
     }).catchError((error) {
       logger.d(error);
       _medicalRecordCompanions = AsyncData(error: error);
     }).whenComplete(() {
       notifyListeners();
     });
+  }
+
+  void insertMEDICALRECORDCOMPANIONS({
+    required List<MedicalRecordCompanion> data,
+    required FormArray formArray,
+  }) {
+    try {
+      logger.d(data.length);
+      if (data.isNotEmpty) {
+        formArray.clear();
+        for (var element in data) {
+          logger.d(element.toJson());
+          formArray.add(
+            FormGroup({
+              'id': FormControl<String?>(value: element.id),
+              'leader': FormControl<bool>(value: element.leader),
+              'remarks': FormControl<String?>(value: element.remarks ?? ''),
+              'nameInRomanized':
+                  FormControl<String?>(value: element.nameInRomanized),
+              'nameInChineseOrKanji':
+                  FormControl<String?>(value: element.nameInChineseOrKanji),
+              'nameInJapaneseKanji':
+                  FormControl<String?>(value: element.nameInJapaneseKanji),
+              'nameInKana': FormControl<String?>(value: element.nameInKana),
+              'nationality': FormControl<String?>(value: element.nationality),
+              'relationship': FormControl<String>(value: element.relationship),
+              'dateOfBirth': FormControl<DateTime>(value: element.dateOfBirth),
+              'age': FormControl<int?>(value: element.age ?? 0),
+              'gender': FormControl<String>(value: 'male'),
+              'passportNumber':
+                  FormControl<String?>(value: element.passportNumber),
+              'issueDate': FormControl<DateTime>(value: element.issueDate),
+              'expirationDate':
+                  FormControl<DateTime>(value: element.expirationDate),
+              'visaType': FormControl<String>(value: element.visaType),
+            }),
+          );
+        }
+      }
+    } catch (e) {
+      logger.d(e);
+    }
   }
 
   // post MEDICAL_RECORD_COMPANIONS
@@ -872,6 +925,27 @@ class BasicInformationModel with ChangeNotifier {
         _medicalRecordCompanions.data?[index] = value;
       } else {
         _medicalRecordCompanions.data?.add(value);
+      }
+    }).catchError((error) {
+      logger.d(error);
+    }).whenComplete(() {
+      notifyListeners();
+    });
+  }
+
+  // delete deleteMedicalRecordCompanions
+
+  Future<void> deleteMedicalRecordCompanions(
+    String id,
+  ) async {
+    await patientRepository.deleteMedicalRecordCompanion(id).then((value) {
+      // Find from list and update or add
+      final index = _medicalRecordCompanions.data?.indexWhere(
+            (element) => element.id == id,
+          ) ??
+          -1;
+      if (index >= 0) {
+        _medicalRecordCompanions.data?.removeAt(index);
       }
     }).catchError((error) {
       logger.d(error);
@@ -1194,5 +1268,56 @@ class BasicInformationModel with ChangeNotifier {
     } else {
       await postPatientPassports(request);
     }
+  }
+
+  Future<void> createUpdateMedicalRecordCompanions(FormGroup form) async {
+    await form
+        .control('MEDICAL_RECORD_Companion')
+        .value
+        .forEach((element) async {
+      MedicalRecordCompanionRequest request = MedicalRecordCompanionRequest(
+        leader: element['leader'],
+        remarks: element['remarks'],
+        nameInRomanized: element['nameInRomanized'],
+        nameInChineseOrKanji: element['nameInChineseOrKanji'],
+        nameInJapaneseKanji: element['nameInJapaneseKanji'],
+        nameInKana: element['nameInKana'],
+        nationality: element['nationality'],
+        relationship: element['relationship'],
+        dateOfBirth: element['dateOfBirth'],
+        age:
+            ageCalculator(DateTime.tryParse(element['dateOfBirth'].toString())),
+        gender: element['gender'],
+        passportNumber: element['passportNumber'],
+        issueDate: element['issueDate'],
+        expirationDate: element['expirationDate'],
+        visaType: element['visaType'],
+        medicalRecord: _medicalRecord.data?.id,
+      );
+
+      if (element['id'] != null) {
+        if (element['nameInRomanized'] != null &&
+            element['nameInRomanized'] != '' &&
+            element['passportNumber'] != null &&
+            element['passportNumber'] != '') {
+          await updateMedicalRecordCompanions(element['id'], request);
+        } else {
+          await deleteMedicalRecordCompanions(element['id']);
+        }
+      } else {
+        if (element['nameInRomanized'] != null &&
+            element['nameInRomanized'] != '' &&
+            element['dateOfBirth'] != null &&
+            element['dateOfBirth'] != '' &&
+            element['passportNumber'] != null &&
+            element['passportNumber'] != '' &&
+            element['issueDate'] != null &&
+            element['issueDate'] != '' &&
+            element['expirationDate'] != null &&
+            element['expirationDate'] != '') {
+          await postMedicalRecordCompanions(request);
+        }
+      }
+    });
   }
 }

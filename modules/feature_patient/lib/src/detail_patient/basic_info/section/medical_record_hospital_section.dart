@@ -28,8 +28,13 @@ class MedicalRecordHospitalSection extends StatelessWidget {
             color: const Color(0xffF8F8D9),
           ),
           padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
-          child: Column(
+          child: ColumnSeparated(
             crossAxisAlignment: CrossAxisAlignment.start,
+            separatorBuilder: (BuildContext context, int index) {
+              return SizedBox(
+                height: context.appTheme.spacing.marginMedium,
+              );
+            },
             children: [
               const Text(
                 '病院',
@@ -37,9 +42,7 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ), // TODO: l10n 対応 (病院) (hospital)
-              SizedBox(
-                height: context.appTheme.spacing.marginMedium,
-              ),
+
               ReactiveFormArray(
                 formArrayName: 'MEDICAL_RECORD_HOSPITALS',
                 builder: (context, formArray, child) {
@@ -96,9 +99,6 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                 },
               ),
 
-              SizedBox(
-                height: context.appTheme.spacing.marginMedium,
-              ),
               InkWell(
                 onTap: () => formArray.add(
                   FormGroup({

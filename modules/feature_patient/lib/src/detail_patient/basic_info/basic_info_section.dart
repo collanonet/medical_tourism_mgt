@@ -3,6 +3,7 @@ import 'package:core_ui/widgets.dart';
 import 'package:feature_patient/src/detail_patient/basic_info/section/medical_record_agent_section.dart';
 import 'package:flutter/material.dart';
 import 'section/medical_record_budget_section.dart';
+import 'section/medical_record_companion_section.dart';
 import 'section/medical_record_hospital_section.dart';
 import 'section/medical_record_interpreter_section.dart';
 import 'section/medical_record_name_section.dart';
@@ -55,9 +56,11 @@ class BasicInfoSection extends StatelessWidget {
               const MedicalRecordNationalitySection(),
               const MedicalRecordBudgetSection(),
               const MedicalRecordPassportSection(),
+              Divider(height: 0,color: context.appTheme.dividerColor,),
               const MedicalRecordAgentSection(),
               const MedicalRecordReferrerSection(),
               const MedicalRecordInterpreterSection(),
+              const MedicalRecordCompanionSection(),
             ],
           ),
         ),

@@ -116,7 +116,7 @@ class _MedicalRecordPassportSectionState
                         readOnly: true,
                         onTap: (value) => picker.showPicker(),
                         valueAccessor: DateTimeValueAccessor(
-                          dateTimeFormat: DateFormat('dd MMM yyyy'),
+                          dateTimeFormat: DateFormat('yyyy/MM/dd'),
                         ),
                         decoration: const InputDecoration(
                           label: Text(
@@ -143,7 +143,7 @@ class _MedicalRecordPassportSectionState
                         formControlName: 'expirationDate',
                         readOnly: true,
                         valueAccessor: DateTimeValueAccessor(
-                          dateTimeFormat: DateFormat('dd MMM yyyy'),
+                          dateTimeFormat: DateFormat('yyyy/MM/dd'),
                         ),
                         onTap: (value) => picker.showPicker(),
                         decoration: const InputDecoration(

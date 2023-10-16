@@ -49,7 +49,12 @@ class MedicalRecordNameSection extends StatelessWidget {
                         SizedBox(
                           height: context.appTheme.spacing.marginMedium,
                         ),
-                        Row(
+                        RowSeparated(
+                          separatorBuilder: (BuildContext context, int index) {
+                            return SizedBox(
+                              width: context.appTheme.spacing.marginMedium,
+                            );
+                          },
                           children: [
                             const Expanded(
                               child: ReactiveTextFormField(
@@ -61,9 +66,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: context.appTheme.spacing.marginMedium,
-                            ),
+
                             const Expanded(
                               child: ReactiveTextFormField(
                                 formControlName: 'middleName',
@@ -74,9 +77,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            SizedBox(
-                              width: context.appTheme.spacing.marginMedium,
-                            ),
+
                             const Expanded(
                               child: ReactiveTextFormField(
                                 formControlName: 'firstName',
@@ -87,6 +88,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                                 ),
                               ),
                             ),
+                            Expanded(flex: 3, child: SizedBox())
                           ],
                         ),
                       ],

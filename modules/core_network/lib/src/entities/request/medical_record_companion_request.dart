@@ -4,28 +4,40 @@ part 'medical_record_companion_request.g.dart';
 
 @JsonSerializable()
 class MedicalRecordCompanionRequest {
-   String? nameInRomanized;
-   String? nameInChineseOrKanji;
-   String? nameInJapaneseKanji;
-   String? nameInKana;
-   String? nationality;
-   String? relationship;
-   DateTime? dateOfBirth;
-   int? age;
-   String? gender;
-   String? medicalRecord;
+  bool? leader;
+  String? remarks;
+  String? nameInRomanized;
+  String? nameInChineseOrKanji;
+  String? nameInJapaneseKanji;
+  String? nameInKana;
+  String? nationality;
+  String? relationship;
+  DateTime? dateOfBirth;
+  int? age;
+  String? gender;
+  String? passportNumber;
+  DateTime? issueDate;
+  DateTime? expirationDate;
+  String? visaType;
+  String? medicalRecord;
 
   MedicalRecordCompanionRequest({
-     this.nameInRomanized,
-     this.nameInChineseOrKanji,
-     this.nameInJapaneseKanji,
-     this.nameInKana,
-     this.nationality,
-     this.relationship,
-     this.dateOfBirth,
-     this.age,
-     this.gender,
-     this.medicalRecord,
+    this.leader,
+    this.remarks,
+    this.nameInRomanized,
+    this.nameInChineseOrKanji,
+    this.nameInJapaneseKanji,
+    this.nameInKana,
+    this.nationality,
+    this.relationship,
+    this.dateOfBirth,
+    this.age,
+    this.gender,
+    this.passportNumber,
+    this.issueDate,
+    this.expirationDate,
+    this.visaType,
+    this.medicalRecord,
   });
 
   factory MedicalRecordCompanionRequest.fromJson(Map<String, dynamic> json) {

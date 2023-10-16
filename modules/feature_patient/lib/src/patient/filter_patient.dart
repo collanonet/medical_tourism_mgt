@@ -123,7 +123,7 @@ class PatientFilter extends StatelessWidget {
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('dd MMM yyyy'),
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
                                 decoration: InputDecoration(
                                   label: Text(
@@ -156,7 +156,7 @@ class PatientFilter extends StatelessWidget {
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('dd MMM yyyy'),
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
                                 decoration: InputDecoration(
                                   label: Text(
@@ -186,7 +186,7 @@ class PatientFilter extends StatelessWidget {
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('dd MMM yyyy'),
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
                                 decoration: InputDecoration(
                                   label: Text(
@@ -219,7 +219,7 @@ class PatientFilter extends StatelessWidget {
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('dd MMM yyyy'),
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
                                 decoration: InputDecoration(
                                   label: Text(
@@ -249,7 +249,7 @@ class PatientFilter extends StatelessWidget {
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('dd MMM yyyy'),
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
                                 decoration: InputDecoration(
                                   label: Text(
@@ -282,7 +282,7 @@ class PatientFilter extends StatelessWidget {
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('dd MMM yyyy'),
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
                                 decoration: InputDecoration(
                                   label: Text(
