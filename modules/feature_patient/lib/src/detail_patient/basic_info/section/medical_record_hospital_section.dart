@@ -31,7 +31,12 @@ class MedicalRecordHospitalSection extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('病院'), // TODO: l10n 対応 (病院) (hospital)
+              const Text(
+                '病院',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ), // TODO: l10n 対応 (病院) (hospital)
               SizedBox(
                 height: context.appTheme.spacing.marginMedium,
               ),

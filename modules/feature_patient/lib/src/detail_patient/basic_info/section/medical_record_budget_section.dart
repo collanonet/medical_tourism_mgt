@@ -14,7 +14,10 @@ class MedicalRecordBudgetSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          '予算', // Todo:
+          '予算',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
         SizedBox(
           height: context.appTheme.spacing.marginMedium,

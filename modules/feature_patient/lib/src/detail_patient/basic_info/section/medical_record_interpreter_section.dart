@@ -14,7 +14,10 @@ class MedicalRecordInterpreterSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          '医療通訳', // Todo:
+          '医療通訳',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
         SizedBox(
           height: context.appTheme.spacing.marginMedium,

@@ -14,7 +14,10 @@ class MedicalRecordAgentSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          'エージェント', // Todo:
+          'エージェント',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
         SizedBox(
           height: context.appTheme.spacing.marginMedium,

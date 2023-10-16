@@ -35,7 +35,7 @@ class BasicInformationModel with ChangeNotifier {
         await getPatientNames(patientId: patient.id, formGroup: formGroup);
         await getPatientNationalities(
             patientId: patient.id, formGroup: formGroup);
-        await getPatientPassports(patient.id);
+        await getPatientPassports(patientId: patient.id, formGroup: formGroup);
         await getMedicalRecords(patientId: patient.id, formGroup: formGroup);
       } catch (error) {
         logger.d(error);
@@ -56,7 +56,8 @@ class BasicInformationModel with ChangeNotifier {
       await createUpdatePatientNames(form);
       await createUpdatePatientNationalities(
           form.control('PATIENT_NATIONALITIES') as FormGroup);
-      // await createUpdatePatientPassports(form);
+      await createUpdatePatientPassports(
+          form.control('PATIENT_PASSPORTS') as FormGroup);
       await createUpdateMedicalRecords(form);
       await createUpdateMedicalRecordAgents(
           form.control('MEDICAL_RECORD_AGENTS') as FormGroup);
@@ -68,10 +69,10 @@ class BasicInformationModel with ChangeNotifier {
       await createUpdateMedicalRecordHospital(form);
       await createUpdateMedicalRecordInterpreters(
           form.control('MEDICAL_RECORD_Interpreter') as FormGroup);
+      _loading = false;
     } catch (error) {
       logger.d(error);
     } finally {
-      _loading = false;
       notifyListeners();
     }
   }
@@ -370,21 +371,40 @@ class BasicInformationModel with ChangeNotifier {
   }
 
 //GET_PATIENT_PASSPORTS
-  AsyncData<List<PatientPassport>> _patientPassports = const AsyncData();
-  AsyncData<List<PatientPassport>> get patientPassports => _patientPassports;
+  AsyncData<PatientPassport> _patientPassport = const AsyncData();
+  AsyncData<PatientPassport> get patientPassport => _patientPassport;
 
-  Future<void> getPatientPassports(String patientId) async {
-    _patientPassports = const AsyncData(loading: true);
+  Future<void> getPatientPassports({
+    required String patientId,
+    required FormGroup formGroup,
+  }) async {
+    _patientPassport = const AsyncData(loading: true);
     notifyListeners();
 
     await patientRepository.patientPassportsByPatient(patientId).then((value) {
-      _patientPassports = AsyncData(data: value);
+      _patientPassport = AsyncData(data: value.first);
+      insertPATIENTPASSPORTS(
+          data: value.first,
+          formGroup: formGroup.control('PATIENT_PASSPORTS') as FormGroup);
     }).catchError((error) {
       logger.d(error);
-      _patientPassports = AsyncData(error: error);
+      _patientPassport = AsyncData(error: error);
     }).whenComplete(() {
       notifyListeners();
     });
+  }
+
+  void insertPATIENTPASSPORTS({
+    PatientPassport? data,
+    required FormGroup formGroup,
+  }) {
+    formGroup.control('id').value = data?.id;
+    formGroup.control('passportNumber').value = data?.passportNumber;
+    formGroup.control('issueDate').value = data?.issueDate;
+    formGroup.control('expirationDate').value = data?.expirationDate;
+    formGroup.control('visaType').value = data?.visaType ?? 'medicalGuarantee';
+    formGroup.control('visaCategory').value = data?.visaCategory;
+    formGroup.control('underConfirmation').value = data?.underConfirmation ?? false;
   }
 
   // post PATIENT_PASSPORTS
@@ -394,11 +414,7 @@ class BasicInformationModel with ChangeNotifier {
     await patientRepository
         .postPatientPassport(patientPassportRequest)
         .then((value) {
-      if (_patientPassports.data == null) {
-        _patientPassports = AsyncData(data: [value]);
-      } else {
-        _patientPassports.data?.add(value);
-      }
+      _patientPassport = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);
     }).whenComplete(() {
@@ -414,16 +430,7 @@ class BasicInformationModel with ChangeNotifier {
     await patientRepository
         .putPatientPassport(id, patientPassportRequest)
         .then((value) {
-      // Find from list and update or add
-      final index = _patientPassports.data?.indexWhere(
-            (element) => element.id == id,
-          ) ??
-          -1;
-      if (index >= 0) {
-        _patientPassports.data?[index] = value;
-      } else {
-        _patientPassports.data?.add(value);
-      }
+      _patientPassport = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);
     }).whenComplete(() {
@@ -1168,6 +1175,24 @@ class BasicInformationModel with ChangeNotifier {
           control.control('id').value, request);
     } else {
       await postMedicalRecordInterpreters(request);
+    }
+  }
+
+  Future<void> createUpdatePatientPassports(FormGroup form) async {
+    PatientPassportRequest request = PatientPassportRequest(
+      passportNumber: form.control('passportNumber').value,
+      issueDate: form.control('issueDate').value,
+      expirationDate: form.control('expirationDate').value,
+      visaType: form.control('visaType').value,
+      visaCategory: form.control('visaCategory').value,
+      underConfirmation: form.control('underConfirmation').value,
+      patient: _patient.id,
+    );
+
+    if (form.control('id').value != null) {
+      await updatePatientPassports(form.control('id').value, request);
+    } else {
+      await postPatientPassports(request);
     }
   }
 }

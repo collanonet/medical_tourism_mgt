@@ -35,7 +35,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
             });
           },
         ),
-        Text(title)
+        Text(title == 'male' ? '男性' : '女性')
       ],
     );
   }
@@ -64,7 +64,12 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
             );
           },
           children: [
-            const Text('本人'), // TODO: l10n 対応 (本人)  (patient)
+            const Text(
+              '本人',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ), // TODO: l10n 対応 (本人)  (patient)
             Row(
               children: [
                 Expanded(
@@ -354,9 +359,10 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                   child: ReactiveDropdownFormField(
                     formControlName: 'paymentMethod',
                     decoration: InputDecoration(
-                        label: Text(
-                      '受取方法', //  TODO: l10n 対応 (受取方法) (receptionMethod)
-                    )),
+                      label: Text(
+                        '受取方法', //  TODO: l10n 対応 (受取方法) (receptionMethod)
+                      ),
+                    ),
                     items: [
                       DropdownMenuItem(
                         value: 'WeChat',

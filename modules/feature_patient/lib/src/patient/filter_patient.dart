@@ -3,6 +3,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -110,17 +111,20 @@ class PatientFilter extends StatelessWidget {
                       children: [
                         Expanded(
                           flex: 4,
-                          child: ReactiveDatePicker(
+                          child: ReactiveDatePicker<DateTime>(
                             formControlName: 'entry_date_from',
                             firstDate: DateTime(2000),
                             lastDate: DateTime(3000),
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
-                              return ReactiveTextFormField(
+                              return ReactiveTextFormField<DateTime>(
                                 formControlName: 'entry_date_from',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('dd MMM yyyy'),
+                                ),
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelEntryDateFrom,
@@ -140,17 +144,20 @@ class PatientFilter extends StatelessWidget {
                         ),
                         Expanded(
                           flex: 4,
-                          child: ReactiveDatePicker(
+                          child: ReactiveDatePicker<DateTime>(
                             formControlName: 'entry_date_to',
                             firstDate: DateTime(2000),
                             lastDate: DateTime(3000),
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
-                              return ReactiveTextFormField(
+                              return ReactiveTextFormField<DateTime>(
                                 formControlName: 'entry_date_to',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('dd MMM yyyy'),
+                                ),
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelEntryDateTo,
@@ -167,17 +174,20 @@ class PatientFilter extends StatelessWidget {
                         const SizedBox(width: 16),
                         Expanded(
                           flex: 4,
-                          child: ReactiveDatePicker(
+                          child: ReactiveDatePicker<DateTime>(
                             formControlName: 'examination_date_from',
                             firstDate: DateTime(2000),
                             lastDate: DateTime(3000),
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
-                              return ReactiveTextFormField(
+                              return ReactiveTextFormField<DateTime>(
                                 formControlName: 'examination_date_from',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('dd MMM yyyy'),
+                                ),
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelExaminationDateFrom,
@@ -197,17 +207,20 @@ class PatientFilter extends StatelessWidget {
                         ),
                         Expanded(
                           flex: 4,
-                          child: ReactiveDatePicker(
+                          child: ReactiveDatePicker<DateTime>(
                             formControlName: 'examination_date_to',
                             firstDate: DateTime(2000),
                             lastDate: DateTime(3000),
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
-                              return ReactiveTextFormField(
+                              return ReactiveTextFormField<DateTime>(
                                 formControlName: 'examination_date_to',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('dd MMM yyyy'),
+                                ),
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelExaminationDateTo,
@@ -224,17 +237,20 @@ class PatientFilter extends StatelessWidget {
                         const SizedBox(width: 16),
                         Expanded(
                           flex: 4,
-                          child: ReactiveDatePicker(
+                          child: ReactiveDatePicker<DateTime>(
                             formControlName: 'return_date_from',
                             firstDate: DateTime(2000),
                             lastDate: DateTime(3000),
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
-                              return ReactiveTextFormField(
+                              return ReactiveTextFormField<DateTime>(
                                 formControlName: 'return_date_from',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('dd MMM yyyy'),
+                                ),
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelReturnDateFrom,
@@ -254,17 +270,20 @@ class PatientFilter extends StatelessWidget {
                         ),
                         Expanded(
                           flex: 4,
-                          child: ReactiveDatePicker(
+                          child: ReactiveDatePicker<DateTime>(
                             formControlName: 'return_date_to',
                             firstDate: DateTime(2000),
                             lastDate: DateTime(3000),
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
-                              return ReactiveTextFormField(
+                              return ReactiveTextFormField<DateTime>(
                                 formControlName: 'return_date_to',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('dd MMM yyyy'),
+                                ),
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelReturnDateTo,

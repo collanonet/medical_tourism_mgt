@@ -27,23 +27,25 @@ class MedicalRecordNameSection extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(currentForm.control('nameType').value ==
-                                    NameType.romanized.value
-                                ? '氏名（ローマ字）'
-                                : currentForm.control('nameType').value ==
-                                        NameType.chineseOrVietnamese.value
-                                    ? '氏名（中国語漢字/ベトナム語表記）'
-                                    : currentForm.control('nameType').value ==
-                                            NameType.japaneseForChinese.value
-                                        ? '氏名（中国語漢字/ベトナム語表記）'
-                                        : currentForm
-                                                    .control('nameType')
-                                                    .value ==
-                                                NameType
-                                                    .japaneseForNonChinese.value
-                                            ? '氏名（中国語漢字/ベトナム語表記）'
-                                            : '氏名（ローマ字）' // Todo: l10n 対応 (氏名（ローマ字）) (nameType)
-                            ),
+                        Text(
+                          currentForm.control('nameType').value ==
+                                  NameType.romanized.value
+                              ? '氏名（ローマ字）'
+                              : currentForm.control('nameType').value ==
+                                      NameType.chineseOrVietnamese.value
+                                  ? '氏名（中国語漢字/ベトナム語表記）'
+                                  : currentForm.control('nameType').value ==
+                                          NameType.japaneseForChinese.value
+                                      ? '氏名（日本語漢字）※中国人のみ'
+                                      : currentForm.control('nameType').value ==
+                                              NameType
+                                                  .japaneseForNonChinese.value
+                                          ? '氏名（日本語漢字）※中国人のみ'
+                                          : '氏名（ローマ字）',
+                          style: const TextStyle(
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
                         SizedBox(
                           height: context.appTheme.spacing.marginMedium,
                         ),

@@ -18,6 +18,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  bool obscureText = true;
+
   @override
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
@@ -70,10 +73,23 @@ class _LoginScreenState extends State<LoginScreen> {
                     builder: (context, form, _) {
                       return ReactiveTextFormField(
                         formControlName: 'password',
-                        obscureText: true,
+                        obscureText: obscureText,
                         decoration: InputDecoration(
                           label: Text(
                             context.l10n.labelPassword,
+                          ),
+                          suffixIcon: IconButton(
+                            color: context.appTheme.primaryColor,
+                            icon: Icon(
+                              obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                obscureText = !obscureText;
+                              });
+                            },
                           ),
                           hintText:
                               context.l10n.labelPleaseEnterYourInformation,

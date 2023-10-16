@@ -7,6 +7,7 @@ import 'section/medical_record_hospital_section.dart';
 import 'section/medical_record_interpreter_section.dart';
 import 'section/medical_record_name_section.dart';
 import 'section/medical_record_nationality_section.dart';
+import 'section/medical_record_passport_section.dart';
 import 'section/medical_record_referrer_section.dart';
 import 'section/medical_record_section.dart';
 
@@ -26,9 +27,14 @@ class BasicInfoSection extends StatelessWidget {
           child: ColumnSeparated(
             crossAxisAlignment: CrossAxisAlignment.start,
             separatorBuilder: (BuildContext context, int index) =>
-                SizedBox(height: context.appTheme.spacing.marginMedium),
+                SizedBox(height: context.appTheme.spacing.formSpacing),
             children: [
-              const Text('メモ'), // TODO: l10n 対応 (memo)
+              const Text(
+                'メモ',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                )
+              ), // TODO: l10n 対応 (memo)
               const ReactiveTextFormField(
                 formControlName: 'memo',
                 maxLines: 3,
@@ -48,7 +54,7 @@ class BasicInfoSection extends StatelessWidget {
               const MedicalRecordNameSection(),
               const MedicalRecordNationalitySection(),
               const MedicalRecordBudgetSection(),
-              // passport here
+              const MedicalRecordPassportSection(),
               const MedicalRecordAgentSection(),
               const MedicalRecordReferrerSection(),
               const MedicalRecordInterpreterSection(),

@@ -14,7 +14,10 @@ class MedicalRecordNationalitySection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          '国籍', // Todo:
+          '国籍',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
         SizedBox(
           height: context.appTheme.spacing.marginMedium,

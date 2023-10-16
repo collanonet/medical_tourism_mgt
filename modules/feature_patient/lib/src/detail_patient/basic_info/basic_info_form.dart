@@ -99,5 +99,14 @@ FormGroup basicInfoForm({
           'requiredOrUnnnecessary': FormControl<String>(),
           'interpreter': FormControl<String>(),
         }),
+        'PATIENT_PASSPORTS': FormGroup({
+          'id': FormControl<String?>(),
+          'passportNumber': FormControl<String?>(),
+          'issueDate': FormControl<DateTime>(),
+          'expirationDate': FormControl<DateTime>(),
+          'visaType': FormControl<String?>(value: 'medicalGuarantee'),
+          'visaCategory': FormControl<String?>(),
+          'underConfirmation': FormControl<bool?>(value: false),
+        }),
       },
     );

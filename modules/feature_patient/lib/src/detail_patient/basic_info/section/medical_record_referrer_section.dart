@@ -14,7 +14,10 @@ class MedicalRecordReferrerSection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          '紹介者', // Todo:
+          '紹介者',
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
         SizedBox(
           height: context.appTheme.spacing.marginMedium,
