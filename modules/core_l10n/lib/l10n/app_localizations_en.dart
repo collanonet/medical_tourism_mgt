@@ -186,4 +186,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get labelNumberOfGroupMembers => 'グループ人数';
+
+  @override
+  String get labelLogout => 'ログアウト';
 }

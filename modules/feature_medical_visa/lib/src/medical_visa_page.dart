@@ -15,7 +15,7 @@ class MedicalVisaPage extends StatefulWidget {
 class _MedicalVisaPageState extends State<MedicalVisaPage> {
   @override
   Widget build(BuildContext context) {
-    return const SideBarMenu(
+    return const LayoutView(
       selectedIndex: 1,
       page: MedicalVisaScreen(),
     );

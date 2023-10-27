@@ -16,7 +16,7 @@ class WebAppointmentPage extends StatefulWidget {
 class _WebAppointmentPageState extends State<WebAppointmentPage> {
   @override
   Widget build(BuildContext context) {
-    return const SideBarMenu(
+    return const LayoutView(
       selectedIndex: 2,
       page: WebAppointmentScreen(),
     );

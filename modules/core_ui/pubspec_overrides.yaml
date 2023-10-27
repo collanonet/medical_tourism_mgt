@@ -1,0 +1,10 @@
+# melos_managed_dependency_overrides: core_network,core_storage,core_ui,core_utils,data_authz
+dependency_overrides:
+  core_utils:
+    path: ../core_utils
+  core_network:
+    path: ../core_network
+  core_l10n:
+    path: ../core_l10n
+  core_storage:
+    path: ../core_storage

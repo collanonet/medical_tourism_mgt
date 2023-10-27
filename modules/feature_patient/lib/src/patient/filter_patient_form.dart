@@ -19,24 +19,12 @@ FormGroup formFilterPatient() => FormGroup(
         'sales_representative': FormControl<String>(
           value: '',
         ),
-        'entry_date_from': FormControl<String>(
-          value: '',
-        ),
-        'entry_date_to': FormControl<String>(
-          value: '',
-        ),
-        'examination_date_from': FormControl<String>(
-          value: '',
-        ),
-        'examination_date_to': FormControl<String>(
-          value: '',
-        ),
-        'return_date_from': FormControl<String>(
-          value: '',
-        ),
-        'return_date_to': FormControl<String>(
-          value: '',
-        ),
+        'entry_date_from': FormControl<DateTime>(),
+        'entry_date_to': FormControl<DateTime>(),
+        'examination_date_from': FormControl<DateTime>(),
+        'examination_date_to': FormControl<DateTime>(),
+        'return_date_from': FormControl<DateTime>(),
+        'return_date_to': FormControl<DateTime>(),
       },
     );
 

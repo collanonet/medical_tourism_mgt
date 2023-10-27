@@ -3,7 +3,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:feature_auth/feature_auth.dart';
+import '../../feature_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -18,103 +18,132 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+
+  bool obscureText = true;
+
   @override
   Widget build(BuildContext context) {
+    final formGroup = ReactiveForm.of(context) as FormGroup;
     return Scaffold(
       backgroundColor: context.appTheme.primaryColor,
       body: Consumer<AuthModel>(
         builder: (context, model, child) {
-          return ReactiveFormConfig(
-              validationMessages: validationMessagesLogin(context),
-              child: ReactiveFormBuilder(
-                form: () => formLogin(),
-                builder: (context, formGroup, child) {
-                  return Center(
-                    child: Container(
-                      width: MediaQuery.of(context).size.width * 0.4,
-                      padding: EdgeInsets.all(
-                          context.appTheme.spacing.marginExtraLarge),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(
-                          context.appTheme.spacing.borderRadiusMedium,
-                        ),
-                        color: context.appTheme.secondaryBackgroundColor,
-                      ),
-                      child: ColumnSeparated(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        separatorBuilder: (BuildContext context, int index) {
-                          return SizedBox(
-                            height: context.appTheme.spacing.marginLarge,
-                          );
-                        },
-                        children: [
-                          Image.asset(
-                            Images.logoTitle,
-                            package: 'core_ui',
-                          ),
-                          Text(
-                            context.l10n.titleAppJP,
-                            style: context.textTheme.headlineLarge?.copyWith(
-                                color: context.appTheme.primaryColor),
-                          ),
-                          ReactiveTextFormField(
-                            formControlName: 'username',
-                            decoration: InputDecoration(
-                              label: Text(
-                                context.l10n.labelId,
-                              ),
-                              hintText:
-                                  context.l10n.labelPleaseEnterYourInformation,
-                            ),
-                            onSubmitted: (value) {
-                              setState(() {});
-                            },
-                          ),
-                          ReactiveTextFormField(
-                            formControlName: 'password',
-                            obscureText: true,
-                            decoration: InputDecoration(
-                              label: Text(
-                                context.l10n.labelPassword,
-                              ),
-                              hintText:
-                                  context.l10n.labelPleaseEnterYourInformation,
-                            ),
-                            onSubmitted: (value) {
-                              setState(() {});
-                            },
-                          ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                              onPressed: () {},
-                              child: Text(
-                                context.l10n.labelForgotPassword,
-                              ),
-                            ),
-                          ),
-                          FilledButton(
-                            onPressed: () {
-                              if (formGroup.valid) {
-                                logger.d(formGroup.value);
-                              } else {
-                                snackBarWidget(
-                                  context: context,
-                                  mgs: context.l10n.mgsRequireInputLogin,
-                                );
-                              }
-                            },
-                            child: Text(context.l10n.actionLogin),
-                          ),
-                        ],
-                      ),
-                    ),
+          return Center(
+            child: Container(
+              width: MediaQuery.of(context).size.width * 0.4,
+              padding:
+                  EdgeInsets.all(context.appTheme.spacing.marginExtraLarge),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(
+                  context.appTheme.spacing.borderRadiusMedium,
+                ),
+                color: context.appTheme.secondaryBackgroundColor,
+              ),
+              child: ColumnSeparated(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    height: context.appTheme.spacing.marginLarge,
                   );
                 },
-              ));
+                children: [
+                  Image.asset(
+                    Images.logoTitle,
+                    package: 'core_ui',
+                  ),
+                  Text(
+                    context.l10n.titleAppJP,
+                    style: context.textTheme.headlineLarge
+                        ?.copyWith(color: context.appTheme.primaryColor),
+                  ),
+                  ReactiveTextFormField(
+                    formControlName: 'email',
+                    decoration: InputDecoration(
+                      label: Text(
+                        context.l10n.labelId,
+                      ),
+                      hintText: context.l10n.labelPleaseEnterYourInformation,
+                    ),
+                    onSubmitted: (value) {
+                      setState(() {});
+                    },
+                  ),
+                  ReactiveFormConsumer(
+                    builder: (context, form, _) {
+                      return ReactiveTextFormField(
+                        formControlName: 'password',
+                        obscureText: obscureText,
+                        decoration: InputDecoration(
+                          label: Text(
+                            context.l10n.labelPassword,
+                          ),
+                          suffixIcon: IconButton(
+                            color: context.appTheme.primaryColor,
+                            icon: Icon(
+                              obscureText
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
+                            ),
+                            onPressed: () {
+                              setState(() {
+                                obscureText = !obscureText;
+                              });
+                            },
+                          ),
+                          hintText:
+                              context.l10n.labelPleaseEnterYourInformation,
+                        ),
+                        onSubmitted: (value) => onSubmit(formGroup, model),
+                      );
+                    },
+                  ),
+                  Align(
+                    alignment: Alignment.centerRight,
+                    child: TextButton(
+                      onPressed: () {},
+                      child: Text(
+                        context.l10n.labelForgotPassword,
+                      ),
+                    ),
+                  ),
+                  ReactiveFormConsumer(
+                    builder: (context, form, _) {
+                      return FilledButton(
+                        onPressed: model.loginData.loading
+                            ? null
+                            : () => onSubmit(formGroup, model),
+                        child: model.loginData.loading
+                            ? const Padding(
+                                padding: EdgeInsets.all(8.0),
+                                child: CircularProgressIndicator(
+                                  color: Colors.white,
+                                ),
+                              )
+                            : Text(context.l10n.actionLogin),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
+          );
         },
       ),
     );
+  }
+
+  void onSubmit(FormGroup formGroup, AuthModel model) {
+    if (formGroup.valid) {
+      model.logIn(
+        formGroup.control('email').value,
+        formGroup.control('password').value,
+      );
+    } else {
+      snackBarWidget(
+        context: context,
+        mgs: context.l10n.mgsRequireInputLogin,
+      );
+    }
   }
 }

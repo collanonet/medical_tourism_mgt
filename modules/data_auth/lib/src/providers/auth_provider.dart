@@ -7,15 +7,9 @@ abstract class AuthProvider {
 
   void setReferenceData(String value);
 
-  void setHasLegacy(bool value);
-
   Future<String?> getAccessToken();
 
   Future<String?> getRefreshToken();
-
-  Future<String?> getDeviceId();
-
-  void setDeviceId(String value);
 
   Future<PermissionRole?> getPermissionRole();
 
@@ -23,12 +17,7 @@ abstract class AuthProvider {
 
   Future<void> handleAuthResponse(AuthResponse response);
 
-  Future<AuthData> login(String username, String password);
+  Future<AuthData> login(String email, String password);
 
   Future<void> clearStore();
-
-  Future<bool> isFreshInstall();
-
-  Future<void> updateFreshInstall();
-
 }

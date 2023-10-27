@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bot_toast/bot_toast.dart';
@@ -49,7 +50,13 @@ class _RootAppState extends State<RootApp> {
           builder: (context, auth, l10n, child) {
             return MaterialApp.router(
               title: 'Medical Tourism',
-              theme: context.appTheme.build(context),
+              theme: context.appTheme.build(context).copyWith(
+                      pageTransitionsTheme:
+                          const PageTransitionsTheme(builders: {
+                    TargetPlatform.fuchsia:
+                        NoShadowCupertinoPageTransitionsBuilder(),
+                    TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+                  })),
               locale: l10n.locale,
               builder: BotToastInit(),
               localizationsDelegates: AppLocalizations.localizationsDelegates,

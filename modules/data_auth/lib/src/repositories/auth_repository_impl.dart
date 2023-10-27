@@ -22,8 +22,9 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<String?> getDeviceId() {
-    return local.getDeviceId();
+  Future<bool> isLoggedIn() async {
+    final token = await local.getAccessToken();
+    return token != null;
   }
 
   @override
@@ -49,25 +50,23 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<AuthData> signIn(String username, String password) async {
-    final response = await remote.login(username, password);
+  Future<AuthData> login(String email, String password) async {
+    final response = await remote.login(email, password);
 
-    await local.handleAuthResponse(AuthResponse(
-      credentials: Credentials(
-        refreshToken: response.refreshToken,
-        accessToken: response.accessToken,
+    await local.handleAuthResponse(
+      AuthResponse(
+        credentials: Credentials(
+          refreshToken: response.refreshToken,
+          accessToken: response.accessToken,
+        ),
+        role: PermissionRole.user,
       ),
-      role: PermissionRole.user,
-    ));
-    await local.updateFreshInstall();
+    );
     return response;
   }
 
   @override
-  Future<void> signOut() {
+  Future<void> logOut() {
     return local.clearStore();
   }
-
-  @override
-  Future<bool> isFreshInstall() => local.isFreshInstall();
 }

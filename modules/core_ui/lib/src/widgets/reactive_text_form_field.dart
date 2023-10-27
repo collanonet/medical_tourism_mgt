@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import '../../core_ui.dart';
 
-class ReactiveTextFormField extends StatelessWidget {
+class ReactiveTextFormField<T> extends StatelessWidget {
   const ReactiveTextFormField({
     super.key,
     this.formControl,
@@ -22,23 +22,28 @@ class ReactiveTextFormField extends StatelessWidget {
     this.onEditingComplete,
     this.onChanged,
     this.obscureText = false,
+    this.maxLines = 1,
+    this.valueAccessor,
   });
 
   final String? formControlName;
-  final FormControl<String>? formControl;
+  final FormControl<T>? formControl;
   final bool autofocus;
   final InputDecoration decoration;
-  final ReactiveFormFieldCallback<String>? onSubmitted;
+  final ReactiveFormFieldCallback<T>? onSubmitted;
   final Map<String, String Function(Object)>? validationMessages;
-  final Function(FormControl<String>)? onTap;
+  final Function(FormControl<T>)? onTap;
   final bool readOnly;
   final double? radiusBorder;
   final TextInputType? keyboardType;
   final List<TextInputFormatter>? inputFormatters;
   final int? maxLength;
-  final Function(FormControl<String>)? onEditingComplete;
-  final Function(FormControl<String>)? onChanged;
+  final Function(FormControl<T>)? onEditingComplete;
+  final Function(FormControl<T>)? onChanged;
   final bool obscureText;
+  final int? maxLines;
+  final ControlValueAccessor<T, String>? valueAccessor;
+
   @override
   Widget build(BuildContext context) {
     final InputBorder errorBorder = OutlineInputBorder(
@@ -70,7 +75,7 @@ class ReactiveTextFormField extends StatelessWidget {
       ),
     );
 
-    return ReactiveTextField<String>(
+    return ReactiveTextField<T>(
       formControlName: formControlName,
       formControl: formControl,
       autofocus: autofocus,
@@ -80,7 +85,8 @@ class ReactiveTextFormField extends StatelessWidget {
       readOnly: readOnly,
       maxLength: maxLength,
       decoration: decoration.copyWith(
-        fillColor: CupertinoColors.systemGroupedBackground,
+        fillColor: Colors.white,
+        // fillColor: CupertinoColors.systemGroupedBackground,
         filled: true,
         border: border,
         enabledBorder: border,
@@ -88,11 +94,13 @@ class ReactiveTextFormField extends StatelessWidget {
         focusedErrorBorder: errorBorder,
         focusedBorder: focusedBorder,
       ),
+      valueAccessor: valueAccessor,
       onEditingComplete: onEditingComplete,
       onChanged: onChanged,
       keyboardType: keyboardType ?? TextInputType.text,
       inputFormatters: inputFormatters ?? [],
       onSubmitted: onSubmitted,
+      maxLines: maxLines,
     );
   }
 }

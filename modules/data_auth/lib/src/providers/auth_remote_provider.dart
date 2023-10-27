@@ -22,21 +22,6 @@ class AuthRemoteProvider extends AuthProvider {
   }
 
   @override
-  void setHasLegacy(bool value) {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<String?> getDeviceId() {
-    throw UnimplementedError();
-  }
-
-  @override
-  void setDeviceId(String value) {
-    throw UnimplementedError();
-  }
-
-  @override
   Future<String?> getAccessToken() {
     throw UnimplementedError();
   }
@@ -63,33 +48,15 @@ class AuthRemoteProvider extends AuthProvider {
   }
 
   @override
-  Future<AuthData> login(String username, String password) {
-    return apiService
-        .login(
-          username,
-          password,
-        )
-        .then(
-          (value) => AuthData(
-            accessToken: value.accessToken,
-            refreshToken: value.refreshToken,
-            expireIn: value.expireIn,
-          ),
-        );
+  Future<AuthData> login(String email, String password) {
+    return apiService.login(
+      email,
+      password,
+    );
   }
 
   @override
   Future<void> clearStore() {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<bool> isFreshInstall() {
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> updateFreshInstall() {
     throw UnimplementedError();
   }
 }

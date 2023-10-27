@@ -17,20 +17,10 @@ class AuthModel extends ChangeNotifier {
 
   PermissionRole get userRole => _userRole;
 
-  bool _isFreshInstall = true;
-
-  String _deviceId = '';
-
-  bool get isFreshInstall => _isFreshInstall;
-
-  String get deviceId => _deviceId;
-
   Future<void> initialize() async {
-    logger.d('auth initialize 5');
+    logger.d('auth initialize');
     try {
-      _isFreshInstall = await authRepository.isFreshInstall();
       _userRole = await authRepository.getPermissionRole();
-      _deviceId = await authRepository.getDeviceId() ?? '';
     } catch (e) {
       _userRole = PermissionRole.guest;
     } finally {
@@ -56,23 +46,25 @@ class AuthModel extends ChangeNotifier {
   AsyncData<AuthData> _loginData = const AsyncData<AuthData>();
   AsyncData<AuthData> get loginData => _loginData;
 
-  Future<void> singIn(String username, String password) async {
+  Future<void> logIn(String email, String password) async {
     _loginData = const AsyncData(loading: true);
     notifyListeners();
 
     try {
-      var result = await authRepository.signIn(username, password);
+      var result = await authRepository.login(email, password);
       _loginData = AsyncData(data: result);
     } catch (error) {
+      logger.d(error);
       _loginData = AsyncData(error: error);
     } finally {
       notifyListeners();
+      syncAuthState();
     }
   }
 
-  void signOut() async {
+  void logOut() async {
     try {
-      await authRepository.signOut();
+      await authRepository.logOut();
     } catch (e) {
       // no op
     } finally {

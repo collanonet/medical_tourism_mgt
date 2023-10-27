@@ -19,9 +19,6 @@ class AuthLocalProvider extends AuthProvider {
   final _refreshTokenStorageKey = 'refresh_token';
   final _permissionRoleStorageKey = 'permission_role';
   final _referenceData = 'reference_data';
-  // final _freshInstall = 'fresh_install';
-  final _hasLegacy = 'has_legacy';
-  final _deviceId = 'device_id';
 
   @override
   Future<String?> getReferenceData() {
@@ -31,21 +28,6 @@ class AuthLocalProvider extends AuthProvider {
   @override
   void setReferenceData(String value) async {
     await storage.write(_referenceData, value);
-  }
-
-  @override
-  void setHasLegacy(bool value) async {
-    await storage.write(_hasLegacy, value ? '1' : '0');
-  }
-
-  @override
-  Future<String?> getDeviceId() {
-    return storage.read(_deviceId);
-  }
-
-  @override
-  void setDeviceId(String value) async {
-    await storage.write(_deviceId, value);
   }
 
   @override
@@ -81,7 +63,7 @@ class AuthLocalProvider extends AuthProvider {
   }
 
   @override
-  Future<AuthData> login(String username, String password) {
+  Future<AuthData> login(String email, String password) {
     throw UnimplementedError();
   }
 
@@ -93,17 +75,4 @@ class AuthLocalProvider extends AuthProvider {
       storage.write(_permissionRoleStorageKey, null),
     ]);
   }
-
-  @override
-  Future<bool> isFreshInstall() {
-    // TODO: implement isFreshInstall
-    throw UnimplementedError();
-  }
-
-  @override
-  Future<void> updateFreshInstall() {
-    // TODO: implement updateFreshInstall
-    throw UnimplementedError();
-  }
-
 }

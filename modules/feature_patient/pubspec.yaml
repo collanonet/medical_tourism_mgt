@@ -14,7 +14,6 @@ dependencies:
   core_ui: 0.0.1-alpha.1
   core_utils: 0.0.1-alpha.1
   core_network: 0.0.1-alpha.1
-  feature_auth: 0.0.1-alpha.1
   data_auth: 0.0.1-alpha.1
   data_patient: 0.0.1-alpha.1
   provider: ^6.0.5
@@ -23,6 +22,8 @@ dependencies:
   auto_route: ^7.7.0
   reactive_forms: ^14.3.0
   data_table_2: ^2.5.8
+  skeletonizer: ^0.8.0
+  intl: ^0.18.1
 
 dev_dependencies:
   flutter_test:

@@ -27,6 +27,9 @@ scripts:
       fvm dart run flutter_native_splash:create --path=flutter_native_splash.yaml
     env:
       FLUTTER_VERSION: 3.13.2
+  run_debug:
+    description: "run_debug"
+    run: fvm flutter run -d chrome --web-port 5555
   pub:get:
     description: "Sync pub for all modules"
     run: melos exec -- \ fvm flutter pub get
@@ -65,6 +68,7 @@ scripts:
       cd modules/core_ui && \
       fvm flutter run -d chrome lib/widgetbook/widgetbook.dart
 
+
   setup_win:
     description: "Install necessary plug-ins and bootstrap the workspace"
     run: |
@@ -84,6 +88,9 @@ scripts:
   fixer_win:
     description: "Autofix dart files with import_sorter"
     run: melos exec "lefthook run fixer"
+  gen_api_win:
+    description: "Generate api files"
+    run: melos exec --scope="core_network" -- fvm dart run build_runner build --delete-conflicting-outputs
   gen_l10n_win:
     description: "Generate localized strings"
     run: melos exec --scope="core_l10n" -- fvm flutter gen-l10n
@@ -102,3 +109,12 @@ scripts:
     run: |
       cd modules/core_ui && ^
       fvm flutter run -d chrome lib/widgetbook/widgetbook.dart
+  hosting_web_dev:
+    description: "hosting_web_dev"
+    run: fvm flutter build web --release && firebase deploy --only hosting
+  patient_feat:
+    description: "Generate localized strings"
+    run: melos exec --scope="feature_patient" -- fvm dart run build_runner build --delete-conflicting-outputs
+  data_patient:
+    description: "Generate localized strings"
+    run: melos exec --scope="data_patient" -- fvm dart run build_runner build --delete-conflicting-outputs

@@ -1,17 +1,19 @@
 import 'package:json_annotation/json_annotation.dart';
 
+import 'user.dart';
+
 part 'auth_data.g.dart';
 
 @JsonSerializable()
 class AuthData {
-  String accessToken;
-  String refreshToken;
-  int expireIn;
+  final User user;
+  final String accessToken;
+  final String refreshToken;
 
   AuthData({
+    required this.user,
     required this.accessToken,
     required this.refreshToken,
-    required this.expireIn,
   });
 
   factory AuthData.fromJson(Map<String, dynamic> json) {

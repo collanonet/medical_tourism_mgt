@@ -16,7 +16,7 @@ class SalePage extends StatefulWidget {
 class _SalePageState extends State<SalePage> {
   @override
   Widget build(BuildContext context) {
-    return const SideBarMenu(
+    return const LayoutView(
       selectedIndex: 8,
       page: SaleScreen(),
     );

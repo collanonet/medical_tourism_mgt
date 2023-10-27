@@ -1,3 +1,4 @@
+import 'package:core_utils/lists.dart';
 import 'package:flutter/widgets.dart';
 
 class ColumnSeparated extends StatelessWidget {
@@ -23,16 +24,10 @@ class ColumnSeparated extends StatelessWidget {
       mainAxisSize: mainAxisSize,
       crossAxisAlignment: crossAxisAlignment,
       children: [
-        ...List.generate(
-          (children.length * 2) - 1,
-          (index) {
-            final itemIndex = index ~/ 2;
-            if (index.isEven) {
-              return children[itemIndex];
-            } else {
-              return separatorBuilder(context, itemIndex);
-            }
-          },
+        ...Lists.separated(
+          children.length,
+          (index) => children[index],
+          (index) => separatorBuilder(context, index),
         ),
       ],
     );
