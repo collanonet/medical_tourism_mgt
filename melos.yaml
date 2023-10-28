@@ -26,7 +26,7 @@ scripts:
       fvm flutter pub run flutter_launcher_icons -f flutter_launcher_icons.yaml && \
       fvm dart run flutter_native_splash:create --path=flutter_native_splash.yaml
     env:
-      FLUTTER_VERSION: 3.13.2
+      FLUTTER_VERSION: 3.13.9
   run_debug:
     description: "run_debug"
     run: fvm flutter run -d chrome --web-port 5555
@@ -81,7 +81,7 @@ scripts:
       fvm flutter pub run flutter_launcher_icons -f flutter_launcher_icons.yaml && ^
       fvm dart run flutter_native_splash:create --path=flutter_native_splash.yaml
     env:
-      FLUTTER_VERSION: 3.13.2
+      FLUTTER_VERSION: 3.13.9
   build_runner_win:
     description: "Generate *.g.dart files on modules which depends on build_runner"
     run: melos exec --depends-on="build_runner" fvm dart run build_runner build --delete-conflicting-outputs
@@ -99,7 +99,7 @@ scripts:
     run: |
       melos exec --scope="core_ui" -- spider build && ^
       melos exec --scope="core_ui" -- fvm flutter pub run icon_font_generator --from=assets/icons --package=core_ui --class-name=UiIcons --out-font=assets/fonts/UiIcons.ttf --out-flutter=lib/src/resources/ui_icons.dart --normalize
-  gen_appicon_win:
+  gen_appicon_win: 
     description: "Generate app icon for android and ios"
     run: |
       melos exec -c 6 --fail-fast -- fvm flutter pub run flutter_launcher_icons -f flutter_launcher_icons*
