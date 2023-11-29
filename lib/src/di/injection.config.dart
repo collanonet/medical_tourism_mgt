@@ -16,17 +16,17 @@ import 'package:core_l10n/l10n.dart' as _i16;
 import 'package:core_network/core_network.dart' as _i22;
 import 'package:core_network/core_network.module.dart' as _i24;
 import 'package:core_storage/core_storage.dart' as _i20;
-import 'package:core_storage/core_storage.module.dart' as _i3;
+import 'package:core_storage/core_storage.module.dart' as _i6;
 import 'package:data_auth/data_auth.module.dart' as _i4;
-import 'package:data_hospital/data_hospital.module.dart' as _i5;
-import 'package:data_invoice/data_invoice.module.dart' as _i6;
-import 'package:data_medical_visa/data_medical_visa.module.dart' as _i7;
-import 'package:data_patient/data_patient.module.dart' as _i8;
-import 'package:data_process_chart/data_process_chart.module.dart' as _i9;
-import 'package:data_quotation/data_quotation.module.dart' as _i10;
-import 'package:data_report/data_report.module.dart' as _i11;
-import 'package:data_sale/data_sale.module.dart' as _i12;
-import 'package:data_web_appointment/data_web_appointment.module.dart' as _i13;
+import 'package:data_hospital/data_hospital.module.dart' as _i7;
+import 'package:data_invoice/data_invoice.module.dart' as _i13;
+import 'package:data_medical_visa/data_medical_visa.module.dart' as _i8;
+import 'package:data_patient/data_patient.module.dart' as _i9;
+import 'package:data_process_chart/data_process_chart.module.dart' as _i3;
+import 'package:data_quotation/data_quotation.module.dart' as _i11;
+import 'package:data_report/data_report.module.dart' as _i10;
+import 'package:data_sale/data_sale.module.dart' as _i5;
+import 'package:data_web_appointment/data_web_appointment.module.dart' as _i12;
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart' as _i17;
 import 'package:feature_agent/feature_agent.module.dart' as _i26;
 import 'package:feature_auth/feature_auth.dart' as _i15;
@@ -52,8 +52,8 @@ import 'modules/app_module.dart' as _i37;
 import 'modules/rest_module.dart' as _i36;
 import 'modules/storage_module.dart' as _i38;
 
+const String _local = 'local';
 const String _dev = 'dev';
-const String _staging = 'staging';
 const String _production = 'production';
 
 extension GetItInjectableX on _i1.GetIt {
@@ -67,17 +67,17 @@ extension GetItInjectableX on _i1.GetIt {
       environment,
       environmentFilter,
     );
-    await _i3.CoreStoragePackageModule().init(gh);
+    await _i3.DataProcessChartPackageModule().init(gh);
     await _i4.DataAuthPackageModule().init(gh);
-    await _i5.DataHospitalPackageModule().init(gh);
-    await _i6.DataInvoicePackageModule().init(gh);
-    await _i7.DataMedicalVisaPackageModule().init(gh);
-    await _i8.DataPatientPackageModule().init(gh);
-    await _i9.DataProcessChartPackageModule().init(gh);
-    await _i10.DataQuotationPackageModule().init(gh);
-    await _i11.DataReportPackageModule().init(gh);
-    await _i12.DataSalePackageModule().init(gh);
-    await _i13.DataWebAppointmentPackageModule().init(gh);
+    await _i5.DataSalePackageModule().init(gh);
+    await _i6.CoreStoragePackageModule().init(gh);
+    await _i7.DataHospitalPackageModule().init(gh);
+    await _i8.DataMedicalVisaPackageModule().init(gh);
+    await _i9.DataPatientPackageModule().init(gh);
+    await _i10.DataReportPackageModule().init(gh);
+    await _i11.DataQuotationPackageModule().init(gh);
+    await _i12.DataWebAppointmentPackageModule().init(gh);
+    await _i13.DataInvoicePackageModule().init(gh);
     final restModule = _$RestModule();
     final appModule = _$AppModule();
     final storageModule = _$StorageModule();
@@ -101,14 +101,14 @@ extension GetItInjectableX on _i1.GetIt {
     );
     gh.factory<String>(() => storageModule.storagePrefixKey);
     gh.factory<Uri>(
+      () => restModule.localBaseUrl,
+      instanceName: 'baseUrl',
+      registerFor: {_local},
+    );
+    gh.factory<Uri>(
       () => restModule.devBaseUrl,
       instanceName: 'baseUrl',
       registerFor: {_dev},
-    );
-    gh.factory<Uri>(
-      () => restModule.stagingBaseUrl,
-      instanceName: 'baseUrl',
-      registerFor: {_staging},
     );
     gh.factory<Uri>(
       () => restModule.prodBaseUrl,
