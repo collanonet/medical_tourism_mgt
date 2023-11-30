@@ -60,5 +60,6 @@
     "labelStaffName": "業務",
     "labelAdmittedToHospital": "受入病院",
     "labelNumberOfGroupMembers": "グループ人数",
-    "labelLogout": "ログアウト"
+    "labelLogout": "ログアウト",
+    "changeLanguage": "Please select a language"
 }

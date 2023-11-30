@@ -111,7 +111,7 @@ scripts:
       fvm flutter run -d chrome lib/widgetbook/widgetbook.dart
   hosting_web_dev:
     description: "hosting_web_dev"
-    run: fvm flutter build web --release && firebase deploy --only hosting
+    run: fvm flutter build web --release -t lib/main_dev.dart && firebase deploy --only hosting
   patient_feat:
     description: "Generate localized strings"
     run: melos exec --scope="feature_patient" -- fvm dart run build_runner build --delete-conflicting-outputs

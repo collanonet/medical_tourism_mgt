@@ -462,6 +462,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'ログアウト'**
   String get labelLogout;
+
+  /// No description provided for @changeLanguage.
+  ///
+  /// In en, this message translates to:
+  /// **'Please select a language'**
+  String get changeLanguage;
 }
 
 class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> {
