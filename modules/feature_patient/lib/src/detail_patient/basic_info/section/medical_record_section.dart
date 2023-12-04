@@ -103,45 +103,90 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
+                Row(
+                  children: [
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          '年齢', // TODO: l10n 対応 (年齢) (age)
+                        ),
+                        Text(
+                          '${int.tryParse(formGroup.control('age').value.toString()) ?? 0}歳', // TODO: l10n 対応 (歳) (age)
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Column(
+                      mainAxisSize: MainAxisSize.max,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          '性別', //
+                        ),
+                        Row(
+                          children: <Widget>[
+                            addRadioButton(0, 'Male', formGroup),
+                            addRadioButton(1, 'Female', formGroup),
+                          ],
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                SizedBox(
+                  width: context.appTheme.spacing.marginMedium,
+                ),
                 Expanded(
-                  flex: 2,
-                  child: Row(
-                    children: [
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            '年齢', // TODO: l10n 対応 (年齢) (age)
-                          ),
-                          Text(
-                            '${int.tryParse(formGroup.control('age').value.toString()) ?? 0}歳', // TODO: l10n 対応 (歳) (age)
-                          ),
-                        ],
+                  child: ReactiveTextFormField(
+                    formControlName: 'height',
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      label: Text(
+                        '身長',
                       ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Column(
-                        mainAxisSize: MainAxisSize.max,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const Text(
-                            '性別', //
-                          ),
-                          Row(
-                            children: <Widget>[
-                              addRadioButton(0, 'Male', formGroup),
-                              addRadioButton(1, 'Female', formGroup),
-                            ],
-                          ),
-                        ],
-                      )
-                    ],
+                    ),
                   ),
                 ),
+                Text(
+                  'cm',
+                ),
+                SizedBox(
+                  width: context.appTheme.spacing.marginMedium,
+                ),
+                Expanded(
+                  child: ReactiveTextFormField(
+                    formControlName: 'weight',
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      label: Text(
+                        '体重',
+                      ),
+                    ),
+                  ),
+                ),
+                Text(
+                  'kg',
+                ),
+                SizedBox(
+                  width: context.appTheme.spacing.marginMedium,
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'パスポートを表示する',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
             Row(

@@ -30,16 +30,20 @@ class BasicInfoSection extends StatelessWidget {
             separatorBuilder: (BuildContext context, int index) =>
                 SizedBox(height: context.appTheme.spacing.formSpacing),
             children: [
-              const Text(
-                'メモ',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                )
+              const Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('メモ（エージェント/病院には共有されません）',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      )),
+                  ReactiveTextFormField(
+                    formControlName: 'memo',
+                    maxLines: 3,
+                  ),
+                ],
               ), // TODO: l10n 対応 (memo)
-              const ReactiveTextFormField(
-                formControlName: 'memo',
-                maxLines: 3,
-              ),
+
               Column(
                 children: [
                   const MedicalRecordSection(),
@@ -56,7 +60,10 @@ class BasicInfoSection extends StatelessWidget {
               const MedicalRecordNationalitySection(),
               const MedicalRecordBudgetSection(),
               const MedicalRecordPassportSection(),
-              Divider(height: 0,color: context.appTheme.dividerColor,),
+              Divider(
+                height: 0,
+                color: context.appTheme.dividerColor,
+              ),
               const MedicalRecordAgentSection(),
               const MedicalRecordReferrerSection(),
               const MedicalRecordInterpreterSection(),

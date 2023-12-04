@@ -112,9 +112,74 @@ scripts:
   hosting_web_dev:
     description: "hosting_web_dev"
     run: fvm flutter build web --release -t lib/main_dev.dart && firebase deploy --only hosting
-  patient_feat:
-    description: "Generate localized strings"
-    run: melos exec --scope="feature_patient" -- fvm dart run build_runner build --delete-conflicting-outputs
+
+
+  core_network:
+    description: "Generate core_network"
+    run: melos exec --scope="core_network" -- fvm dart run build_runner build --delete-conflicting-outputs
+  data_agent:
+    description: "Generate data_agent"
+    run: melos exec --scope="data_agent" -- fvm dart run build_runner build --delete-conflicting-outputs
+  data_auth:
+    description: "Generate data_auth"
+    run: melos exec --scope="data_auth" -- fvm dart run build_runner build --delete-conflicting-outputs
+  data_hospital:
+    description: "Generate data_hospital"
+    run: melos exec --scope="data_hospital" -- fvm dart run build_runner build --delete-conflicting-outputs
+  data_invoice:
+    description: "Generate data_invoice"
+    run: melos exec --scope="data_invoice" -- fvm dart run build_runner build --delete-conflicting-outputs
+  data_medical_visa:
+    description: "Generate data_medical_visa"
+    run: melos exec --scope="data_medical_visa" -- fvm dart run build_runner build --delete-conflicting-outputs
   data_patient:
-    description: "Generate localized strings"
+    description: "Generate data_patient"
     run: melos exec --scope="data_patient" -- fvm dart run build_runner build --delete-conflicting-outputs
+  data_process_chart:
+    description: "Generate data_process_chart"
+    run: melos exec --scope="data_process_chart" -- fvm dart run build_runner build --delete-conflicting-outputs
+  data_quotation:
+    description: "Generate data_quotation"
+    run: melos exec --scope="data_quotation" -- fvm dart run build_runner build --delete-conflicting-outputs
+  data_report:
+    description: "Generate data_report"
+    run: melos exec --scope="data_report" -- fvm dart run build_runner build --delete-conflicting-outputs
+  data_sale:
+    description: "Generate data_sale"
+    run: melos exec --scope="data_sale" -- fvm dart run build_runner build --delete-conflicting-outputs
+  data_web_appointment:
+    description: "Generate data_web_appointment"
+    run: melos exec --scope="data_web_appointment" -- fvm dart run build_runner build --delete-conflicting-outputs
+  feature_agent:
+    description: "Generate feature_agent"
+    run: melos exec --scope="feature_agent" -- fvm dart run build_runner build --delete-conflicting-outputs
+  feature_auth:
+    description: "Generate feature_auth"
+    run: melos exec --scope="feature_auth" -- fvm dart run build_runner build --delete-conflicting-outputs
+  feature_hospital:
+    description: "Generate feature_hospital"
+    run: melos exec --scope="feature_hospital" -- fvm dart run build_runner build --delete-conflicting-outputs
+  feature_invoice:
+    description: "Generate feature_invoice"
+    run: melos exec --scope="feature_invoice" -- fvm dart run build_runner build --delete-conflicting-outputs
+  feature_medical_visa:
+    description: "Generate feature_medical_visa"
+    run: melos exec --scope="feature_medical_visa" -- fvm dart run build_runner build --delete-conflicting-outputs
+  feature_patient:
+    description: "Generate feature_patient"
+    run: melos exec --scope="feature_patient" -- fvm dart run build_runner build --delete-conflicting-outputs
+  feature_process_chart:
+    description: "Generate feature_process_chart"
+    run: melos exec --scope="feature_process_chart" -- fvm dart run build_runner build --delete-conflicting-outputs
+  feature_quotation:
+    description: "Generate feature_quotation"
+    run: melos exec --scope="feature_quotation" -- fvm dart run build_runner build --delete-conflicting-outputs
+  feature_report:
+    description: "Generate feature_report"
+    run: melos exec --scope="feature_report" -- fvm dart run build_runner build --delete-conflicting-outputs
+  feature_sale:
+    description: "Generate feature_sale"
+    run: melos exec --scope="feature_sale" -- fvm dart run build_runner build --delete-conflicting-outputs
+  feature_web_appointment:
+    description: "Generate feature_web_appointment"
+    run: melos exec --scope="feature_web_appointment" -- fvm dart run build_runner build --delete-conflicting-outputs

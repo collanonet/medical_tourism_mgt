@@ -37,13 +37,17 @@ MedicalRecord _$MedicalRecordFromJson(Map<String, dynamic> json) =>
       patient: json['patient'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
-    );
+    )
+      ..height = json['height'] as int?
+      ..weight = json['weight'] as int?;
 
 Map<String, dynamic> _$MedicalRecordToJson(MedicalRecord instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'dateOfBirth': instance.dateOfBirth?.toIso8601String(),
       'age': instance.age,
+      'height': instance.height,
+      'weight': instance.weight,
       'gender': instance.gender,
       'arrivalDate': instance.arrivalDate?.toIso8601String(),
       'examinationDate': instance.examinationDate?.toIso8601String(),

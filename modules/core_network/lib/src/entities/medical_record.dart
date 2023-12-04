@@ -9,6 +9,8 @@ class MedicalRecord {
   final String id;
   DateTime? dateOfBirth;
   int? age;
+  int? height;
+  int? weight;
   String? gender;
   DateTime? arrivalDate;
   DateTime? examinationDate;
