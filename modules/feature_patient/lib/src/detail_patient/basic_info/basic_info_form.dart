@@ -15,7 +15,7 @@ FormGroup basicInfoForm({
       // 体重 to en weight
         'weight': FormControl<int?>(value: medicalRecord?.weight),
         'gender': FormControl<String>(value: medicalRecord?.gender ?? 'male'),
-        'arrivalDate': FormControl<DateTime>(value: medicalRecord?.arrivalDate),
+        'arrivalDate': FormControl<DateTime>(value: medicalRecord?.arrivalDate, validators: [Validators.required]),
         'examinationDate':
             FormControl<DateTime>(value: medicalRecord?.examinationDate),
         'departureDate':

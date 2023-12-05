@@ -1,5 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -87,6 +88,18 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                         valueAccessor: DateTimeValueAccessor(
                           dateTimeFormat: DateFormat('yyyy/MM/dd'),
                         ),
+                        onChanged: (value) {
+                          logger.d(value);
+                          formGroup.control('age').value =
+                              DateTime.now().year - value.value!.year;
+                          setState(() {});
+                        },
+                        onSubmitted: (value) {
+                          logger.d(value);
+                          formGroup.control('age').value =
+                              DateTime.now().year - value.value!.year;
+                          setState(() {});
+                        },
                         decoration: const InputDecoration(
                           label: Text(
                             '生年月日', // TODO: l10n 対応 (生年月日) (dateOfBirth)
@@ -103,46 +116,57 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
-                Row(
-                  children: [
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          '年齢', // TODO: l10n 対応 (年齢) (age)
-                        ),
-                        Text(
-                          '${int.tryParse(formGroup.control('age').value.toString()) ?? 0}歳', // TODO: l10n 対応 (歳) (age)
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: context.appTheme.spacing.marginMedium,
-                    ),
-                    Column(
-                      mainAxisSize: MainAxisSize.max,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          '性別', //
-                        ),
-                        Row(
-                          children: <Widget>[
-                            addRadioButton(0, 'Male', formGroup),
-                            addRadioButton(1, 'Female', formGroup),
-                          ],
-                        ),
-                      ],
-                    )
-                  ],
+                Expanded(
+                  child: Row(
+                    children: [
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            '年齢', // TODO: l10n 対応 (年齢) (age)
+                          ),
+                          SizedBox(
+                            height: context.appTheme.spacing.marginSmall,
+                          ),
+                          ReactiveValueListenableBuilder<DateTime>(
+                              formControlName: 'dateOfBirth',
+                              builder: (context, value, child) {
+                                formGroup.control('age').value =
+                                    DateTime.now().year - value.value!.year;
+                                return Text(
+                                  '${int.tryParse(formGroup.control('age').value.toString()) ?? 0}歳', // TODO: l10n 対応 (歳) (age)
+                                );
+                              }),
+                        ],
+                      ),
+                      SizedBox(
+                        width: context.appTheme.spacing.marginMedium,
+                      ),
+                      Column(
+                        mainAxisSize: MainAxisSize.max,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          const Text(
+                            '性別', //
+                          ),
+                          Row(
+                            children: <Widget>[
+                              addRadioButton(0, 'Male', formGroup),
+                              addRadioButton(1, 'Female', formGroup),
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
                 ),
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
-                Expanded(
+                const Expanded(
                   child: ReactiveTextFormField(
                     formControlName: 'height',
                     keyboardType: TextInputType.number,
@@ -150,16 +174,14 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                       label: Text(
                         '身長',
                       ),
+                      suffixText: 'cm',
                     ),
                   ),
-                ),
-                Text(
-                  'cm',
                 ),
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
-                Expanded(
+                const Expanded(
                   child: ReactiveTextFormField(
                     formControlName: 'weight',
                     keyboardType: TextInputType.number,
@@ -167,11 +189,9 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                       label: Text(
                         '体重',
                       ),
+                      suffixText: 'kg',
                     ),
                   ),
-                ),
-                Text(
-                  'kg',
                 ),
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
@@ -330,7 +350,14 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                   width: context.appTheme.spacing.marginMedium,
                 ),
                 const Expanded(
-                  child: SizedBox(),
+                  child: ReactiveTextFormField(
+                    formControlName: 'progress',
+                    decoration: InputDecoration(
+                      label: Text(
+                        '進捗', //  TODO: l10n 対応 (進捗) (progress)
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
@@ -350,14 +377,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                   width: context.appTheme.spacing.marginMedium,
                 ),
                 const Expanded(
-                  child: ReactiveTextFormField(
-                    formControlName: 'progress',
-                    decoration: InputDecoration(
-                      label: Text(
-                        '進捗', //  TODO: l10n 対応 (進捗) (progress)
-                      ),
-                    ),
-                  ),
+                  child: SizedBox(),
                 ),
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
@@ -366,6 +386,27 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                   child: SizedBox(),
                 ),
               ],
+            ),
+            InkWell(
+              onTap: () {},
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add_circle,
+                    color: context.appTheme.primaryColor,
+                  ),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginSmall,
+                  ),
+                  Text(
+                    '病院を追加',
+                    style: TextStyle(color: context.appTheme.primaryColor),
+                  )
+                ],
+              ),
             ),
             Row(
               children: [
