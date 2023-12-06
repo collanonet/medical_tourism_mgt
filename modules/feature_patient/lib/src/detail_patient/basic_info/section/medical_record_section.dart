@@ -133,8 +133,10 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                           ReactiveValueListenableBuilder<DateTime>(
                               formControlName: 'dateOfBirth',
                               builder: (context, value, child) {
-                                formGroup.control('age').value =
-                                    DateTime.now().year - value.value!.year;
+                                if (value.value != null) {
+                                  formGroup.control('age').value =
+                                      DateTime.now().year - value.value!.year;
+                                }
                                 return Text(
                                   '${int.tryParse(formGroup.control('age').value.toString()) ?? 0}歳', // TODO: l10n 対応 (歳) (age)
                                 );
