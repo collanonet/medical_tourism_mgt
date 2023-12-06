@@ -2,6 +2,7 @@ import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'billing/billing_page.dart';
+import 'patient_response_data/patient_response_page.dart';
 import 'statement/statement_page.dart';
 import '../widgets/header_detail_patient.dart';
 import 'package:flutter/material.dart';
@@ -29,7 +30,7 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
   List<String> menu = [
     '基本情報', // basic information
     '進捗一覧', // progress list
-    '患者回答データ', // overseas medical data
+    '患者回答データ', // Patient Response Data
     '海外診療データ', // medical summary
     '診療サマリー', // medical visa
     'ご提案', // domestic medical data
@@ -51,6 +52,9 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
         patient: widget.patient,
       ),
       ProgressListPage(
+        patient: widget.patient,
+      ),
+      PatientResponsePage(
         patient: widget.patient,
       ),
       OverseasMedicalDataPage(
@@ -77,6 +81,7 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
       MedicalPaymentDetailsPage(
         patient: widget.patient,
       ),
+      Text('診療報酬明細'),
     ];
   }
 

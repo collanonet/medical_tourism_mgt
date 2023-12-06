@@ -12,7 +12,7 @@ class ProgressListTable extends StatefulWidget {
 }
 
 class _ProgressListTableState extends State<ProgressListTable> {
-  ValueNotifier<int?> _selectedIndex = ValueNotifier(null);
+  final ValueNotifier<int?> _selectedIndex = ValueNotifier(null);
 
   @override
   Widget build(BuildContext context) {

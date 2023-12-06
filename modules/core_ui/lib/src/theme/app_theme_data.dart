@@ -102,6 +102,7 @@ class AppThemeData {
         ),
         backgroundColor: primaryBackgroundColor,
       ),
+
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
         elevation: 1,
