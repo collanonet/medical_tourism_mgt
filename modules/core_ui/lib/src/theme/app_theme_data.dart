@@ -102,7 +102,6 @@ class AppThemeData {
         ),
         backgroundColor: primaryBackgroundColor,
       ),
-
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
         elevation: 1,
@@ -137,7 +136,6 @@ class AppThemeData {
           enableFeedback: true,
         ),
       ),
-
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
           side: BorderSide(width: 2, color: primaryColor),

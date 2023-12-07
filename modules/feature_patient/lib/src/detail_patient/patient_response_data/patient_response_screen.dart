@@ -483,6 +483,464 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
           ),
+          Text(
+            '服薬中の薬名、有効成分含有量、服用方法、服用量など',
+            style: context.textTheme.titleLarge,
+          ),
+          Text(
+            '薬名',
+            style: context.textTheme.bodySmall,
+          ),
+          TextFormField(
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                isDense: true,
+                hintText: 'メルカゾール'),
+          ),
+          Text(
+            '薬名',
+            style: context.textTheme.bodySmall,
+          ),
+          TextFormField(
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                isDense: true,
+                hintText: 'メルカゾール'),
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          InkWell(
+            onTap: () {},
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Icon(
+                  Icons.add_circle,
+                  color: context.appTheme.primaryColor,
+                ),
+                SizedBox(
+                  width: context.appTheme.spacing.marginSmall,
+                ),
+                Text(
+                  '薬名を追加',
+                  style: TextStyle(color: context.appTheme.primaryColor),
+                ) // TODO: l10n 対応 (病院を追加) (addHospital)
+              ],
+            ),
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Text('既往歴', style: context.textTheme.titleMedium),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Text('今までの健康状態、病気及び治療内容', style: context.textTheme.bodySmall),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Row(
+            children: [
+              AnimatedToggleSwitch<String>.size(
+                textDirection: TextDirection.rtl,
+                current: 'あり',
+                values: const ['あり', 'なし'],
+                indicatorSize: const Size.fromWidth(100),
+                borderWidth: 4.0,
+                iconAnimationType: AnimationType.onHover,
+                style: ToggleStyle(
+                  borderColor: Colors.transparent,
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      spreadRadius: 1,
+                      blurRadius: 2,
+                      offset: Offset(0, 1.5),
+                    ),
+                  ],
+                ),
+                styleBuilder: (i) => ToggleStyle(
+                  indicatorColor: context.appTheme.primaryColor,
+                  backgroundColor: Colors.white,
+                ),
+                onChanged: (i) => setState(() {}),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Text('詳細'),
+          TextFormField(
+            minLines: 3,
+            maxLines: 3,
+            enabled: false,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(), isDense: true, hintText: '詳細を入力'),
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Text('家族歴'),
+          Text('詳細'),
+          TextFormField(
+            minLines: 3,
+            maxLines: 3,
+            enabled: false,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                isDense: true,
+                hintText: '例）父が脳梗塞で70歳で他界'),
+          ),
+          Text('薬物アレルギー', style: context.textTheme.titleMedium),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Text('今までの健康状態、病気及び治療内容', style: context.textTheme.bodySmall),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Row(
+            children: [
+              AnimatedToggleSwitch<String>.size(
+                textDirection: TextDirection.rtl,
+                current: 'あり',
+                values: const ['あり', 'なし'],
+                indicatorSize: const Size.fromWidth(100),
+                borderWidth: 4.0,
+                iconAnimationType: AnimationType.onHover,
+                style: ToggleStyle(
+                  borderColor: Colors.transparent,
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      spreadRadius: 1,
+                      blurRadius: 2,
+                      offset: Offset(0, 1.5),
+                    ),
+                  ],
+                ),
+                styleBuilder: (i) => ToggleStyle(
+                  indicatorColor: context.appTheme.primaryColor,
+                  backgroundColor: Colors.white,
+                ),
+                onChanged: (i) => setState(() {}),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Text('詳細'),
+          TextFormField(
+            minLines: 3,
+            maxLines: 3,
+            enabled: false,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(), isDense: true, hintText: '詳細を入力'),
+          ),
+          Text('治療費について', style: context.textTheme.titleMedium),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Text('予算（自国の通貨でご入力ください）'),
+          TextFormField(
+            minLines: 3,
+            maxLines: 3,
+            enabled: false,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                isDense: true,
+                hintText: '例）30,0000元'),
+          ),
+          Text('希望医療機関', style: context.textTheme.titleMedium),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Text('希望する医療機関はありますか', style: context.textTheme.bodySmall),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Row(
+            children: [
+              AnimatedToggleSwitch<String>.size(
+                textDirection: TextDirection.rtl,
+                current: 'あり',
+                values: const ['あり', 'なし'],
+                indicatorSize: const Size.fromWidth(100),
+                borderWidth: 4.0,
+                iconAnimationType: AnimationType.onHover,
+                style: ToggleStyle(
+                  borderColor: Colors.transparent,
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      spreadRadius: 1,
+                      blurRadius: 2,
+                      offset: Offset(0, 1.5),
+                    ),
+                  ],
+                ),
+                styleBuilder: (i) => ToggleStyle(
+                  indicatorColor: context.appTheme.primaryColor,
+                  backgroundColor: Colors.white,
+                ),
+                onChanged: (i) => setState(() {}),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Text('希望するエリア・医療機関名'),
+          TextFormField(
+            minLines: 3,
+            maxLines: 3,
+            enabled: false,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                isDense: true,
+                hintText: '例）大阪近郊の病院を希望します。りんくうクリニックを希望します。'),
+          ),
+          Text('理由'),
+          TextFormField(
+            minLines: 3,
+            maxLines: 3,
+            enabled: false,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                isDense: true,
+                hintText: '例）りんくうクリニックは、〇〇の治療で有名で、関空から近いため希望します。'),
+          ),
+          Text(
+            '受診希望日',
+            style: context.textTheme.bodySmall,
+          ),
+          TextFormField(
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                isDense: true,
+                hintText: '2024/03/05（自由テキスト入力可）'),
+          ),
+          Text('日本滞在予定期間'),
+          TextFormField(
+            minLines: 3,
+            maxLines: 3,
+            enabled: false,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                isDense: true,
+                hintText: '''例）2024/03/05〜2024/03/10まで
+                治療期間に合わせて滞在可能。
+                3/13までには必ず帰国したいです。'''),
+          ),
+          Text('現在の体調状況', style: context.textTheme.titleMedium),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Text('歩行', style: context.textTheme.bodySmall),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Row(
+            children: [
+              AnimatedToggleSwitch<String>.size(
+                textDirection: TextDirection.rtl,
+                current: '独立',
+                values: const ['独立', '要支援'],
+                indicatorSize: const Size.fromWidth(100),
+                borderWidth: 4.0,
+                iconAnimationType: AnimationType.onHover,
+                style: ToggleStyle(
+                  borderColor: Colors.transparent,
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      spreadRadius: 1,
+                      blurRadius: 2,
+                      offset: Offset(0, 1.5),
+                    ),
+                  ],
+                ),
+                styleBuilder: (i) => ToggleStyle(
+                  indicatorColor: context.appTheme.primaryColor,
+                  backgroundColor: Colors.white,
+                ),
+                onChanged: (i) => setState(() {}),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Text('詳細'),
+          TextFormField(
+            minLines: 3,
+            maxLines: 3,
+            enabled: false,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(), isDense: true, hintText: '詳細を入力'),
+          ),
+          Text('座り', style: context.textTheme.bodySmall),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Row(
+            children: [
+              AnimatedToggleSwitch<String>.size(
+                textDirection: TextDirection.rtl,
+                current: '独立',
+                values: const ['独立', '要支援'],
+                indicatorSize: const Size.fromWidth(100),
+                borderWidth: 4.0,
+                iconAnimationType: AnimationType.onHover,
+                style: ToggleStyle(
+                  borderColor: Colors.transparent,
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      spreadRadius: 1,
+                      blurRadius: 2,
+                      offset: Offset(0, 1.5),
+                    ),
+                  ],
+                ),
+                styleBuilder: (i) => ToggleStyle(
+                  indicatorColor: context.appTheme.primaryColor,
+                  backgroundColor: Colors.white,
+                ),
+                onChanged: (i) => setState(() {}),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Text('詳細'),
+          TextFormField(
+            minLines: 3,
+            maxLines: 3,
+            enabled: false,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(), isDense: true, hintText: '詳細を入力'),
+          ),
+          Text('食事', style: context.textTheme.bodySmall),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Row(
+            children: [
+              AnimatedToggleSwitch<String>.size(
+                textDirection: TextDirection.rtl,
+                current: '独立',
+                values: const ['独立', '要支援'],
+                indicatorSize: const Size.fromWidth(100),
+                borderWidth: 4.0,
+                iconAnimationType: AnimationType.onHover,
+                style: ToggleStyle(
+                  borderColor: Colors.transparent,
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      spreadRadius: 1,
+                      blurRadius: 2,
+                      offset: Offset(0, 1.5),
+                    ),
+                  ],
+                ),
+                styleBuilder: (i) => ToggleStyle(
+                  indicatorColor: context.appTheme.primaryColor,
+                  backgroundColor: Colors.white,
+                ),
+                onChanged: (i) => setState(() {}),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Text('詳細'),
+          TextFormField(
+            minLines: 3,
+            maxLines: 3,
+            enabled: false,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(), isDense: true, hintText: '詳細を入力'),
+          ),
+          Text('排泄', style: context.textTheme.bodySmall),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Row(
+            children: [
+              AnimatedToggleSwitch<String>.size(
+                textDirection: TextDirection.rtl,
+                current: '独立',
+                values: const ['独立', '要支援'],
+                indicatorSize: const Size.fromWidth(100),
+                borderWidth: 4.0,
+                iconAnimationType: AnimationType.onHover,
+                style: ToggleStyle(
+                  borderColor: Colors.transparent,
+                  borderRadius: BorderRadius.circular(10.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black26,
+                      spreadRadius: 1,
+                      blurRadius: 2,
+                      offset: Offset(0, 1.5),
+                    ),
+                  ],
+                ),
+                styleBuilder: (i) => ToggleStyle(
+                  indicatorColor: context.appTheme.primaryColor,
+                  backgroundColor: Colors.white,
+                ),
+                onChanged: (i) => setState(() {}),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Text('詳細'),
+          TextFormField(
+            minLines: 3,
+            maxLines: 3,
+            enabled: false,
+            decoration: InputDecoration(
+                border: OutlineInputBorder(), isDense: true, hintText: '詳細を入力'),
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginExtraLarge,
+          ),
+          Text('女性の方のみご入力ください', style: context.textTheme.titleLarge),
+          Text('妊娠について', style: context.textTheme.titleLarge),
+          Row(
+            children: [
+              Checkbox(value: true, onChanged: (value) {}),
+              Text('妊娠していない')
+            ],
+          ),
+          Row(
+            children: [
+              Checkbox(value: false, onChanged: (value) {}),
+              Text('妊娠している可能性がある')
+            ],
+          ),
+          Row(
+            children: [
+              Checkbox(value: false, onChanged: (value) {}),
+              Text('妊娠している')
+            ],
+          )
         ],
       ),
     );
