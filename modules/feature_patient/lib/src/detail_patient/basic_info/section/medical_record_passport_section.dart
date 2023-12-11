@@ -93,8 +93,8 @@ class _MedicalRecordPassportSectionState
                 );
               },
               children: [
-                const Expanded(
-                  child: ReactiveTextFormField(
+                 Expanded(
+                  child: ReactiveTextField(
                     formControlName: 'passportNumber',
                     decoration: InputDecoration(
                       label: Text(
@@ -111,7 +111,7 @@ class _MedicalRecordPassportSectionState
                     builder: (BuildContext context,
                         ReactiveDatePickerDelegate<dynamic> picker,
                         Widget? child) {
-                      return ReactiveTextFormField<DateTime>(
+                      return ReactiveTextField<DateTime>(
                         formControlName: 'issueDate',
                         readOnly: true,
                         onTap: (value) => picker.showPicker(),
@@ -139,7 +139,7 @@ class _MedicalRecordPassportSectionState
                     builder: (BuildContext context,
                         ReactiveDatePickerDelegate<dynamic> picker,
                         Widget? child) {
-                      return ReactiveTextFormField<DateTime>(
+                      return ReactiveTextField<DateTime>(
                         formControlName: 'expirationDate',
                         readOnly: true,
                         valueAccessor: DateTimeValueAccessor(
@@ -186,8 +186,8 @@ class _MedicalRecordPassportSectionState
                     ],
                   ),
                 ),
-                const Expanded(
-                  child: ReactiveTextFormField(
+                 Expanded(
+                  child: ReactiveTextField(
                     formControlName: 'visaCategory',
                     decoration: InputDecoration(
                       label: Text(

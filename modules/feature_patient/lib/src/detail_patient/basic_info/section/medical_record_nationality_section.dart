@@ -36,9 +36,9 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                     width: context.appTheme.spacing.marginMedium,
                   );
                 },
-                children: const [
+                children:  [
                   Expanded(
-                    child: ReactiveTextFormField(
+                    child: ReactiveTextField(
                       formControlName: 'nationality',
                       decoration: InputDecoration(
                         label: Text(
@@ -52,7 +52,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: ReactiveTextFormField(
+                    child: ReactiveTextField(
                       formControlName: 'nativeLanguage',
                       decoration: InputDecoration(
                         label: Text(
@@ -71,8 +71,8 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                   );
                 },
                 children: [
-                  const Expanded(
-                    child: ReactiveTextFormField(
+                   Expanded(
+                    child: ReactiveTextField(
                       formControlName: 'residentialArea',
                       decoration: InputDecoration(
                         label: Text(
@@ -81,9 +81,9 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                       ),
                     ),
                   ),
-                  const Expanded(
+                   Expanded(
                     flex: 2,
-                    child: ReactiveTextFormField(
+                    child: ReactiveTextField(
                       formControlName: 'currentAddress',
                       decoration: InputDecoration(
                         label: Text(
@@ -101,8 +101,8 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                   );
                 },
                 children: [
-                  const Expanded(
-                    child: ReactiveTextFormField(
+                   Expanded(
+                    child: ReactiveTextField(
                       formControlName: 'mobileNumber',
                       keyboardType: TextInputType.number,
                       decoration: InputDecoration(

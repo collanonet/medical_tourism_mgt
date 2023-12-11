@@ -66,7 +66,7 @@ class CreateMedicalOverseaDataWithUrlScreen extends StatelessWidget {
                 lastDate: DateTime(3000),
                 builder: (BuildContext context,
                     ReactiveDatePickerDelegate<dynamic> picker, Widget? child) {
-                  return ReactiveTextFormField<DateTime>(
+                  return ReactiveTextField<DateTime>(
                     formControlName: 'entry_date_from',
                     readOnly: true,
                     onTap: (value) => picker.showPicker(),

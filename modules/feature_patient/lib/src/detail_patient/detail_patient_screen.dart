@@ -93,16 +93,22 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
       children: [
         const HeaderDetailPatient(),
         Padding(
-          padding: EdgeInsets.only(top: context.appTheme.spacing.marginMedium),
+          padding: EdgeInsets.only(
+              top: context.appTheme.spacing.marginMedium,
+              left: context.appTheme.spacing.marginMedium),
           child: ValueListenableBuilder<int>(
             valueListenable: _selectedIndex,
             builder: (BuildContext context, int value, Widget? child) {
-              return TabBarWidget(
-                selectedIndex: value,
-                menu: menu,
-                onPressed: (index) {
-                  _selectedIndex.value = index;
-                },
+              return Row(
+                children: [
+                  TabBarWidget(
+                    selectedIndex: value,
+                    menu: menu,
+                    onPressed: (index) {
+                      _selectedIndex.value = index;
+                    },
+                  ),
+                ],
               );
             },
           ),

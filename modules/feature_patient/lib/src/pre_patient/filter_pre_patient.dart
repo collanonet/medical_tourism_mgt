@@ -40,7 +40,7 @@ class PrePatientFilter extends StatelessWidget {
                       children: [
                         Expanded(
                           flex: 4,
-                          child: ReactiveTextFormField(
+                          child: ReactiveTextField(
                             formControlName: 'agents',
                             decoration: InputDecoration(
                               label: Text(
@@ -52,7 +52,7 @@ class PrePatientFilter extends StatelessWidget {
                         const SizedBox(width: 16),
                         Expanded(
                           flex: 4,
-                          child: ReactiveTextFormField(
+                          child: ReactiveTextField(
                             formControlName: 'patient',
                             decoration: InputDecoration(
                               label: Text(

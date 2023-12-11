@@ -53,8 +53,8 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                           formGroup: currentForm,
                           child: Row(
                             children: [
-                              const Expanded(
-                                child: ReactiveTextFormField(
+                               Expanded(
+                                child: ReactiveTextField(
                                   formControlName: 'hospitalName',
                                   decoration: InputDecoration(
                                     label: Text(
@@ -70,8 +70,8 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const Expanded(
-                                child: ReactiveTextFormField(
+                               Expanded(
+                                child: ReactiveTextField(
                                   formControlName: 'medicalCardNumber',
                                   decoration: InputDecoration(
                                     label: Text(

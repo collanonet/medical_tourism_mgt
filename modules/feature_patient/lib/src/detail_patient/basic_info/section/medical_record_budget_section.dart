@@ -31,8 +31,8 @@ class MedicalRecordBudgetSection extends StatelessWidget {
               );
             },
             children: [
-              const Expanded(
-                child: ReactiveTextFormField(
+               Expanded(
+                child: ReactiveTextField(
                   formControlName: 'budget',
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
@@ -43,9 +43,9 @@ class MedicalRecordBudgetSection extends StatelessWidget {
                   ),
                 ),
               ),
-              const Expanded(
+               Expanded(
                 flex: 2,
-                child: ReactiveTextFormField(
+                child: ReactiveTextField(
                   formControlName: 'remarks',
                   decoration: InputDecoration(
                     label: Text(

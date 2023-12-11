@@ -81,7 +81,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     builder: (BuildContext context,
                         ReactiveDatePickerDelegate<dynamic> picker,
                         Widget? child) {
-                      return ReactiveTextFormField<DateTime>(
+                      return ReactiveTextField<DateTime>(
                         formControlName: 'dateOfBirth',
                         readOnly: true,
                         onTap: (value) => picker.showPicker(),
@@ -168,8 +168,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
-                const Expanded(
-                  child: ReactiveTextFormField(
+                 Expanded(
+                  child: ReactiveTextField(
                     formControlName: 'height',
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -183,8 +183,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
-                const Expanded(
-                  child: ReactiveTextFormField(
+                 Expanded(
+                  child: ReactiveTextField(
                     formControlName: 'weight',
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
@@ -221,7 +221,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     builder: (BuildContext context,
                         ReactiveDatePickerDelegate<dynamic> picker,
                         Widget? child) {
-                      return ReactiveTextFormField<DateTime>(
+                      return ReactiveTextField<DateTime>(
                         formControlName: 'arrivalDate',
                         readOnly: true,
                         onTap: (value) => picker.showPicker(),
@@ -252,7 +252,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     builder: (BuildContext context,
                         ReactiveDatePickerDelegate<dynamic> picker,
                         Widget? child) {
-                      return ReactiveTextFormField<DateTime>(
+                      return ReactiveTextField<DateTime>(
                         formControlName: 'examinationDate',
                         readOnly: true,
                         valueAccessor: DateTimeValueAccessor(
@@ -283,7 +283,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     builder: (BuildContext context,
                         ReactiveDatePickerDelegate<dynamic> picker,
                         Widget? child) {
-                      return ReactiveTextFormField(
+                      return ReactiveTextField(
                         formControlName: 'departureDate',
                         readOnly: true,
                         valueAccessor: DateTimeValueAccessor(
@@ -307,8 +307,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
             ),
             Row(
               children: [
-                const Expanded(
-                  child: ReactiveTextFormField(
+                 Expanded(
+                  child: ReactiveTextField(
                     formControlName: 'caseNumber',
                     decoration: InputDecoration(
                       label: Text(
@@ -328,7 +328,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     builder: (BuildContext context,
                         ReactiveDatePickerDelegate<dynamic> picker,
                         Widget? child) {
-                      return ReactiveTextFormField<DateTime>(
+                      return ReactiveTextField<DateTime>(
                         formControlName: 'receptionDate',
                         readOnly: true,
                         valueAccessor: DateTimeValueAccessor(
@@ -351,8 +351,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
-                const Expanded(
-                  child: ReactiveTextFormField(
+                 Expanded(
+                  child: ReactiveTextField(
                     formControlName: 'progress',
                     decoration: InputDecoration(
                       label: Text(
@@ -365,8 +365,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
             ),
             Row(
               children: [
-                const Expanded(
-                  child: ReactiveTextFormField(
+                 Expanded(
+                  child: ReactiveTextField(
                     formControlName: 'type',
                     decoration: InputDecoration(
                       label: Text(
@@ -420,7 +420,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     builder: (BuildContext context,
                         ReactiveDatePickerDelegate<dynamic> picker,
                         Widget? child) {
-                      return ReactiveTextFormField<DateTime>(
+                      return ReactiveTextField<DateTime>(
                         formControlName: 'advancePaymentDate',
                         readOnly: true,
                         valueAccessor: DateTimeValueAccessor(

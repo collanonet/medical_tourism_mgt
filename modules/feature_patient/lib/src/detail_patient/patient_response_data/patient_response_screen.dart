@@ -289,9 +289,8 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
               ),
               SizedBox(
                 width: 150,
-                child: TextFormField(
-                    decoration: InputDecoration(
-                        border: OutlineInputBorder(), isDense: true)),
+                child:
+                    TextFormField(decoration: InputDecoration(isDense: true)),
               ),
             ],
           ),
@@ -419,7 +418,6 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
             maxLines: 3,
             enabled: false,
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
               isDense: true,
               hintText: '''例）PET-CT 　2023年10月撮影
 例）CT 　2023年10月撮影
@@ -433,7 +431,6 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
           TextFormField(
             enabled: false,
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
               isDense: true,
               hintText: '胃がん',
             ),
@@ -447,7 +444,6 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
             maxLines: 3,
             enabled: false,
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
               isDense: true,
               hintText:
                   '''例如（記入例）：2001年心肌梗塞、当时在ｘｘ医院做了扩张血管的手，后来好转后在家疗养、○月○日开始有胸闷气促。''',
@@ -462,7 +458,6 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
             maxLines: 3,
             enabled: false,
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
               isDense: true,
               hintText: '''例）会社の健康診断で要検査となり、CTを取ったら病気が発覚しました。''',
             ),
@@ -476,7 +471,6 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
             maxLines: 3,
             enabled: false,
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
               isDense: true,
             ),
           ),
@@ -492,20 +486,14 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
             style: context.textTheme.bodySmall,
           ),
           TextFormField(
-            decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                isDense: true,
-                hintText: 'メルカゾール'),
+            decoration: InputDecoration(isDense: true, hintText: 'メルカゾール'),
           ),
           Text(
             '薬名',
             style: context.textTheme.bodySmall,
           ),
           TextFormField(
-            decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                isDense: true,
-                hintText: 'メルカゾール'),
+            decoration: InputDecoration(isDense: true, hintText: 'メルカゾール'),
           ),
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
@@ -577,8 +565,7 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
             minLines: 3,
             maxLines: 3,
             enabled: false,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), isDense: true, hintText: '詳細を入力'),
+            decoration: InputDecoration(isDense: true, hintText: '詳細を入力'),
           ),
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
@@ -589,10 +576,8 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
             minLines: 3,
             maxLines: 3,
             enabled: false,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                isDense: true,
-                hintText: '例）父が脳梗塞で70歳で他界'),
+            decoration:
+                InputDecoration(isDense: true, hintText: '例）父が脳梗塞で70歳で他界'),
           ),
           Text('薬物アレルギー', style: context.textTheme.titleMedium),
           SizedBox(
@@ -639,8 +624,7 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
             minLines: 3,
             maxLines: 3,
             enabled: false,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), isDense: true, hintText: '詳細を入力'),
+            decoration: InputDecoration(isDense: true, hintText: '詳細を入力'),
           ),
           Text('治療費について', style: context.textTheme.titleMedium),
           SizedBox(
@@ -651,10 +635,7 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
             minLines: 3,
             maxLines: 3,
             enabled: false,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                isDense: true,
-                hintText: '例）30,0000元'),
+            decoration: InputDecoration(isDense: true, hintText: '例）30,0000元'),
           ),
           Text('希望医療機関', style: context.textTheme.titleMedium),
           SizedBox(
@@ -702,9 +683,7 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
             maxLines: 3,
             enabled: false,
             decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                isDense: true,
-                hintText: '例）大阪近郊の病院を希望します。りんくうクリニックを希望します。'),
+                isDense: true, hintText: '例）大阪近郊の病院を希望します。りんくうクリニックを希望します。'),
           ),
           Text('理由'),
           TextFormField(
@@ -712,7 +691,6 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
             maxLines: 3,
             enabled: false,
             decoration: InputDecoration(
-                border: OutlineInputBorder(),
                 isDense: true,
                 hintText: '例）りんくうクリニックは、〇〇の治療で有名で、関空から近いため希望します。'),
           ),
@@ -722,9 +700,7 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
           ),
           TextFormField(
             decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                isDense: true,
-                hintText: '2024/03/05（自由テキスト入力可）'),
+                isDense: true, hintText: '2024/03/05（自由テキスト入力可）'),
           ),
           Text('日本滞在予定期間'),
           TextFormField(
@@ -732,9 +708,7 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
             maxLines: 3,
             enabled: false,
             decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                isDense: true,
-                hintText: '''例）2024/03/05〜2024/03/10まで
+                isDense: true, hintText: '''例）2024/03/05〜2024/03/10まで
                 治療期間に合わせて滞在可能。
                 3/13までには必ず帰国したいです。'''),
           ),
@@ -783,8 +757,7 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
             minLines: 3,
             maxLines: 3,
             enabled: false,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), isDense: true, hintText: '詳細を入力'),
+            decoration: InputDecoration(isDense: true, hintText: '詳細を入力'),
           ),
           Text('座り', style: context.textTheme.bodySmall),
           SizedBox(
@@ -827,8 +800,7 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
             minLines: 3,
             maxLines: 3,
             enabled: false,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), isDense: true, hintText: '詳細を入力'),
+            decoration: InputDecoration(isDense: true, hintText: '詳細を入力'),
           ),
           Text('食事', style: context.textTheme.bodySmall),
           SizedBox(
@@ -871,8 +843,7 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
             minLines: 3,
             maxLines: 3,
             enabled: false,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), isDense: true, hintText: '詳細を入力'),
+            decoration: InputDecoration(isDense: true, hintText: '詳細を入力'),
           ),
           Text('排泄', style: context.textTheme.bodySmall),
           SizedBox(
@@ -915,8 +886,7 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
             minLines: 3,
             maxLines: 3,
             enabled: false,
-            decoration: InputDecoration(
-                border: OutlineInputBorder(), isDense: true, hintText: '詳細を入力'),
+            decoration: InputDecoration(isDense: true, hintText: '詳細を入力'),
           ),
           SizedBox(
             height: context.appTheme.spacing.marginExtraLarge,

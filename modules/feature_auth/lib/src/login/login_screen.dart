@@ -56,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: context.textTheme.headlineLarge
                         ?.copyWith(color: context.appTheme.primaryColor),
                   ),
-                  ReactiveTextFormField(
+                  ReactiveTextField(
                     formControlName: 'email',
                     decoration: InputDecoration(
                       label: Text(
@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   ReactiveFormConsumer(
                     builder: (context, form, _) {
-                      return ReactiveTextFormField(
+                      return ReactiveTextField(
                         formControlName: 'password',
                         obscureText: obscureText,
                         decoration: InputDecoration(

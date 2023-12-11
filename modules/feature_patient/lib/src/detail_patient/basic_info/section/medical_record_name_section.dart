@@ -41,9 +41,9 @@ class MedicalRecordNameSection extends StatelessWidget {
                     width: context.appTheme.spacing.marginMedium,
                   );
                 },
-                children: const [
+                children:  [
                   Expanded(
-                    child: ReactiveTextFormField(
+                    child: ReactiveTextField(
                       formControlName: 'familyNameRomanized',
                       decoration: InputDecoration(
                         label: Text(
@@ -53,7 +53,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: ReactiveTextFormField(
+                    child: ReactiveTextField(
                       formControlName: 'middleNameRomanized',
                       decoration: InputDecoration(
                         label: Text(
@@ -63,7 +63,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: ReactiveTextFormField(
+                    child: ReactiveTextField(
                       formControlName: 'firstNameRomanized',
                       decoration: InputDecoration(
                         label: Text(
@@ -87,9 +87,9 @@ class MedicalRecordNameSection extends StatelessWidget {
                     width: context.appTheme.spacing.marginMedium,
                   );
                 },
-                children: const [
+                children:  [
                   Expanded(
-                    child: ReactiveTextFormField(
+                    child: ReactiveTextField(
                       formControlName: 'familyNameChineseOrVietnamese',
                       decoration: InputDecoration(
                         label: Text(
@@ -99,7 +99,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: ReactiveTextFormField(
+                    child: ReactiveTextField(
                       formControlName: 'middleNameChineseOrVietnamese',
                       decoration: InputDecoration(
                         label: Text(
@@ -109,7 +109,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: ReactiveTextFormField(
+                    child: ReactiveTextField(
                       formControlName: 'firstNameChineseOrVietnamese',
                       decoration: InputDecoration(
                         label: Text(
@@ -133,9 +133,9 @@ class MedicalRecordNameSection extends StatelessWidget {
                     width: context.appTheme.spacing.marginMedium,
                   );
                 },
-                children: const [
+                children:  [
                   Expanded(
-                    child: ReactiveTextFormField(
+                    child: ReactiveTextField(
                       formControlName: 'familyNameJapaneseForChinese',
                       decoration: InputDecoration(
                         label: Text(
@@ -145,7 +145,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: ReactiveTextFormField(
+                    child: ReactiveTextField(
                       formControlName: 'middleNameJapaneseForChinese',
                       decoration: InputDecoration(
                         label: Text(
@@ -155,7 +155,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: ReactiveTextFormField(
+                    child: ReactiveTextField(
                       formControlName: 'firstNameJapaneseForChinese',
                       decoration: InputDecoration(
                         label: Text(
@@ -179,9 +179,9 @@ class MedicalRecordNameSection extends StatelessWidget {
                     width: context.appTheme.spacing.marginMedium,
                   );
                 },
-                children: const [
+                children:  [
                   Expanded(
-                    child: ReactiveTextFormField(
+                    child: ReactiveTextField(
                       formControlName: 'familyNameJapaneseForNonChinese',
                       decoration: InputDecoration(
                         label: Text(
@@ -191,7 +191,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: ReactiveTextFormField(
+                    child: ReactiveTextField(
                       formControlName: 'middleNameJapaneseForNonChinese',
                       decoration: InputDecoration(
                         label: Text(
@@ -201,7 +201,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
-                    child: ReactiveTextFormField(
+                    child: ReactiveTextField(
                       formControlName: 'firstNameJapaneseForNonChinese',
                       decoration: InputDecoration(
                         label: Text(

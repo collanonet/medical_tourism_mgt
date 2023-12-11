@@ -33,7 +33,7 @@ class SummaryMedicalOverseaDataScreen extends StatelessWidget {
           maxLines: 10,
           enabled: false,
           decoration: InputDecoration(
-              border: OutlineInputBorder(), isDense: true, hintText: '''
+               isDense: true, hintText: '''
 北京協和病院　画像データ（DICOM）　PET-CT 　2023/06/30
 中華人民解放軍総病院　病状資料　入退院記録 　2023/06/30
 四川大学華西病院　病状資料　PET-CT 　2023/06/30

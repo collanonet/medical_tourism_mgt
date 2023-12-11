@@ -128,13 +128,8 @@ class _ProgressListTableState extends State<ProgressListTable> {
                         decoration: InputDecoration(
                             hintText: '2021/01/01',
                             hintStyle: Theme.of(context).textTheme.bodySmall,
-                            border: InputBorder.none,
                             enabled: false,
                             isDense: true,
-                            disabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(
-                                  color: context.appTheme.dividerColor),
-                            ),
                             suffixIcon: const Icon(
                               CupertinoIcons.calendar,
                               color: Colors.grey,
@@ -149,13 +144,8 @@ class _ProgressListTableState extends State<ProgressListTable> {
                         decoration: InputDecoration(
                           hintText: '9月21日にWeb検診予約をしています',
                           hintStyle: Theme.of(context).textTheme.bodyLarge,
-                          border: InputBorder.none,
                           enabled: false,
                           isDense: true,
-                          disabledBorder: OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: context.appTheme.dividerColor),
-                          ),
                         ),
                       )),
                 ],

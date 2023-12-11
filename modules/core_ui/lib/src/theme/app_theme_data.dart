@@ -1,6 +1,7 @@
-import 'package:auto_route/auto_route.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:reactive_pinput/reactive_pinput.dart';
+
 import '../extensions/context_exts.dart';
 import '../utils/generate_material_color.dart';
 
@@ -10,17 +11,37 @@ class AppThemeData {
     required this.secondaryBackgroundColor,
     required this.primaryColor,
     required this.typography,
+    this.colors = const AppColors(),
     this.iconColor = Colors.black,
+    required this.secondaryColor,
+    required this.primaryContainerColor,
     required this.errorColor,
+    required this.dangerousColor,
+    required this.disabledColor,
     required this.dividerColor,
+    required this.borderColor,
     required this.primaryTextColor,
+    required this.secondaryTextColor,
+    required this.darkGreyIconColor,
+    required this.greyTextColor,
     required this.successColor,
+    required this.greyCircleColor,
+    required this.darkGreyCircleColor,
+    required this.greyContainerColor,
+    required this.disableButtonColor,
+    required this.tileColor,
+    required this.unselectedColor,
     required this.boxShadow,
     this.spacing = const Spacing(),
+    this.appBodyTheme = const AppBodyTheme(),
     this.brightness = Brightness.light,
     this.iconSize = const IconSize(),
+    required this.pinPutTheme,
+    required this.segmentedTheme,
     required this.listTileTheme,
   });
+
+  final AppColors colors;
   final Color primaryBackgroundColor;
   final Color secondaryBackgroundColor;
   final Color primaryColor;
@@ -28,13 +49,31 @@ class AppThemeData {
   final Spacing spacing;
   final IconSize iconSize;
   final Typography typography;
+  final Color secondaryColor;
+  final Color primaryContainerColor;
   final Color errorColor;
+  final Color dangerousColor;
+  final Color disabledColor;
   final Color dividerColor;
+  final Color borderColor;
   final Color primaryTextColor;
+  final Color secondaryTextColor;
+  final Color darkGreyIconColor;
+  final Color greyTextColor;
   final Color successColor;
+  final Color greyCircleColor;
+  final Color darkGreyCircleColor;
+  final Color disableButtonColor;
+  final Color tileColor;
+  final Color unselectedColor;
   final BoxShadow boxShadow;
   final Brightness brightness;
+  final Color greyContainerColor;
+  final AppBodyTheme appBodyTheme;
+  final SegmentedTheme segmentedTheme;
+  final PinPutTheme pinPutTheme;
   final ListTileTheme listTileTheme;
+
   factory AppThemeData.light() {
     const spacing = Spacing();
     const primaryTextColor = Colors.black;
@@ -50,13 +89,46 @@ class AppThemeData {
         bodyTextColor: primaryTextColor,
         successTextColor: Color(0xff1BC200),
       ),
+      unselectedColor: const Color(0xFF7D7366),
+      disableButtonColor: const Color(0xffBEBEBE),
       spacing: spacing,
+      secondaryColor: const Color(0xFFFCE9B7),
+      primaryContainerColor: Colors.white,
+      dangerousColor: const Color(0xFFB42C2C),
       errorColor: const Color(0xffB42C2C),
+      disabledColor: const Color(0xff8E8E8E),
       dividerColor: const Color(0xffE3E3E3),
+      borderColor: const Color(0xFFE3E3E3),
       successColor: const Color(0xff1BC200),
+      darkGreyIconColor: const Color(0xff4C5157),
+      greyTextColor: const Color(0xff5B5B5B),
+      greyCircleColor: const Color(0xff7D7366),
+      darkGreyCircleColor: const Color(0xff534F42),
+      greyContainerColor: const Color(0xffEBEBEB),
       primaryTextColor: Colors.black,
+      secondaryTextColor: const Color(0xFF8A8A8E),
+      tileColor: const Color(0xFFF7F7F7),
       boxShadow: const BoxShadow(
         color: Color.fromRGBO(0, 0, 0, 0.1),
+      ),
+      segmentedTheme: const SegmentedTheme(
+        selectedBackgroundColor: Colors.white,
+        unselectedBackgroundColor: Color(0x36BEBEBE),
+        selectedTextColor: const Color(0xFF4DBBAA),
+        unselectedTextColor: Color(0xFF8E8E8E),
+        minimumSize: Size.fromHeight(32.0),
+        textStyle: TextStyle(
+          fontWeight: FontWeight.w500,
+          fontFamily: 'KB PRASAC',
+          fontSize: 15.0,
+        ),
+      ),
+      pinPutTheme: PinPutTheme(
+        dotPinPut: PinPutThemeData.dot(
+          dotColor: const Color(0xFFB5B6B6),
+          focusDotColor: const Color(0xFF4DBBAA),
+        ),
+        boxPinPut: PinPutThemeData.box(),
       ),
       listTileTheme: ListTileTheme(
         threeLineCard: ListTileThemeData(
@@ -73,40 +145,53 @@ class AppThemeData {
             ),
           ),
           titleAlignment: ListTileTitleAlignment.bottom,
-          titleTextStyle: GoogleFonts.inter(
+          titleTextStyle: const TextStyle(
+            fontFamily: 'KB PRASAC',
             fontSize: 15.0,
             fontWeight: FontWeight.w500,
             color: primaryTextColor,
           ),
-          subtitleTextStyle: GoogleFonts.inter(
-            fontSize: 13.0,
+          subtitleTextStyle: const TextStyle(
             color: secondaryTextColor,
+            fontFamily: 'KB PRASAC',
+            fontSize: 13.0,
           ),
         ),
       ),
     );
   }
+
   ThemeData build(BuildContext context) {
     return ThemeData(
-      useMaterial3: true,
+      fontFamily: 'KB PRASAC',
       primaryColor: primaryColor,
       scaffoldBackgroundColor: primaryBackgroundColor,
       primarySwatch: generateMaterialColor(primaryColor),
+      disabledColor: disabledColor,
       dividerColor: dividerColor,
       textTheme: typography.build(context),
       bottomSheetTheme: BottomSheetThemeData(
+        clipBehavior: Clip.hardEdge,
+        showDragHandle: true,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.vertical(
-            top: Radius.circular(context.appTheme.spacing.gutter),
+            top: Radius.circular(spacing.gutter),
           ),
+        ),
+        backgroundColor: primaryBackgroundColor,
+      ),
+      dialogTheme: DialogTheme(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(spacing.borderRadiusMedium),
         ),
         backgroundColor: primaryBackgroundColor,
       ),
       appBarTheme: AppBarTheme(
         backgroundColor: Colors.white,
         elevation: 1,
+        centerTitle: true,
         titleTextStyle: TextStyle(
-          fontSize: 15.0,
+          fontSize: 16.0,
           color: primaryTextColor,
           fontWeight: FontWeight.w500,
         ),
@@ -121,97 +206,189 @@ class AppThemeData {
       iconTheme: IconThemeData(color: iconColor),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-            backgroundColor: primaryColor,
-            foregroundColor: Colors.white,
-            shadowColor: const Color.fromRGBO(230, 172, 13, 0.2),
-            disabledForegroundColor: Colors.black),
+          backgroundColor: primaryColor,
+          shadowColor: const Color.fromRGBO(230, 172, 13, 0.2),
+          padding: EdgeInsets.symmetric(
+            vertical: spacing.buttonVertical,
+            horizontal: spacing.buttonHorizontal,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(spacing.borderRadiusMedium),
+          ),
+          disabledBackgroundColor: disableButtonColor,
+          disabledForegroundColor: Colors.black,
+        ),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         elevation: 1,
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          backgroundColor: primaryColor,
-          foregroundColor: Colors.white,
-          enableFeedback: true,
+          backgroundColor: Colors.white,
+          padding: EdgeInsets.symmetric(vertical: spacing.buttonVertical),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
+          padding: EdgeInsets.symmetric(vertical: spacing.buttonVertical),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
           side: BorderSide(width: 2, color: primaryColor),
-          foregroundColor: primaryColor,
+          foregroundColor: typography.bodyTextColor,
         ),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           iconColor: primaryColor,
+          padding: EdgeInsets.symmetric(
+            vertical: spacing.buttonVertical,
+            horizontal: spacing.buttonHorizontal,
+          ),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
+        hintStyle: const TextStyle(
+          fontSize: 15.0,
+          color: Color(0xFF5B5B5B),
+        ),
+        iconColor: primaryTextColor,
+        suffixIconColor: primaryTextColor,
         contentPadding: EdgeInsets.symmetric(
           horizontal: spacing.inputHorizontal,
           vertical: spacing.inputVertical,
         ),
         border: OutlineInputBorder(
-          borderSide: BorderSide(color: primaryColor),
+          borderRadius: BorderRadius.circular(12.0),
+          borderSide: BorderSide(color: borderColor),
         ),
-        enabledBorder: OutlineInputBorder(
-          borderSide: BorderSide(color: primaryColor),
+        disabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12.0),
+          borderSide: BorderSide(color: disabledColor),
         ),
+        fillColor: Colors.white,
+        filled: true,
       ),
       listTileTheme: ListTileThemeData(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(spacing.borderRadiusMedium),
+        ),
+        contentPadding: EdgeInsets.symmetric(
+          vertical: spacing.marginExtraSmall,
+          horizontal: spacing.marginSmall,
+        ),
         titleTextStyle: context.textTheme.bodyMedium?.copyWith(
           fontWeight: FontWeight.w500,
         ),
         subtitleTextStyle: context.textTheme.bodySmall,
       ),
+      expansionTileTheme: ExpansionTileThemeData(
+        backgroundColor: primaryBackgroundColor,
+        collapsedBackgroundColor: primaryBackgroundColor,
+        expandedAlignment: Alignment.topLeft,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(spacing.borderRadiusMedium),
+          ),
+        ),
+        collapsedShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(
+            Radius.circular(spacing.borderRadiusMedium),
+          ),
+        ),
+        iconColor: Colors.black,
+        collapsedIconColor: Colors.black,
+        textColor: primaryTextColor,
+        collapsedTextColor: primaryTextColor,
+        tilePadding: EdgeInsets.symmetric(
+          horizontal: spacing.marginMedium,
+        ),
+        childrenPadding: EdgeInsets.symmetric(
+          horizontal: spacing.marginMedium,
+        ),
+      ),
       checkboxTheme: CheckboxThemeData(
+        overlayColor: MaterialStatePropertyAll(primaryColor),
         fillColor: MaterialStatePropertyAll(primaryColor),
         shape: const CircleBorder(),
+      ),
+      radioTheme: RadioThemeData(
+        fillColor: MaterialStateProperty.resolveWith(
+          (states) {
+            return states.contains(MaterialState.selected)
+                ? primaryColor
+                : unselectedColor;
+          },
+        ),
       ),
       colorScheme: ColorScheme.fromSwatch(
         primarySwatch: generateMaterialColor(primaryColor),
         brightness: brightness,
       ).copyWith(
+        primaryContainer: primaryContainerColor,
+        secondary: secondaryColor,
         error: errorColor,
       ),
-      pageTransitionsTheme: const PageTransitionsTheme(
-        builders: {
-          TargetPlatform.iOS: NoShadowCupertinoPageTransitionsBuilder(),
-          TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
-        },
+      cupertinoOverrideTheme: const CupertinoThemeData(
+        applyThemeToAll: true,
       ),
-      dialogTheme: DialogTheme(
-        backgroundColor: primaryBackgroundColor,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(
-            spacing.borderRadiusMedium,
-          ),
+      chipTheme: ChipThemeData(
+        selectedColor: secondaryColor,
+        secondarySelectedColor: secondaryColor,
+        disabledColor: disableButtonColor,
+        secondaryLabelStyle: context.textTheme.labelMedium?.copyWith(
+          color: primaryColor,
+        ),
+        labelStyle: context.textTheme.labelMedium?.copyWith(
+          color: greyTextColor,
+          fontWeight: FontWeight.w500,
         ),
       ),
     );
   }
 }
 
+class AppColors {
+  const AppColors({
+    this.brown = const Color(0xFF7D7366),
+    this.yellow = const Color(0xFFF8B500),
+    this.lightGrey = const Color(0xFFF7F7F7),
+  });
+
+  final Color brown;
+  final Color yellow;
+  final Color lightGrey;
+}
+
 class Spacing {
   const Spacing({
     this.gutter = 16.0,
+    this.marginExtraSmall = 4.0,
     this.marginSmall = 8.0,
     this.marginMedium = 16.0,
     this.marginLarge = 24.0,
+    this.margin2ExtraLarge = 48.0,
     this.marginExtraLarge = 32.0,
     this.borderRadiusMedium = 12.0,
     this.formSpacing = 24.0,
     this.buttonHorizontal = 24.0,
     this.buttonVertical = 16.0,
-    this.inputHorizontal = 12.0,
-    this.inputVertical = 12.0,
+    this.inputHorizontal = 16.0,
+    this.inputVertical = 16.0,
   });
   final double gutter;
+  final double marginExtraSmall;
   final double marginSmall;
   final double marginMedium;
   final double formSpacing;
   final double marginLarge;
+  final double margin2ExtraLarge;
   final double marginExtraLarge;
   final double borderRadiusMedium;
   final double buttonHorizontal;
@@ -223,12 +400,14 @@ class Spacing {
 class IconSize {
   const IconSize({
     this.iconSizeExtraSmall = 9.0,
+    this.iconBottomNavSize = 22.0,
     this.iconSizeSmall = 24.0,
     this.iconSizeMedium = 32.0,
     this.iconSizeLarge = 40.0,
     this.iconSizeExtraLarge = 48.0,
   });
   final double iconSizeExtraSmall;
+  final double iconBottomNavSize;
   final double iconSizeSmall;
   final double iconSizeMedium;
   final double iconSizeLarge;
@@ -244,29 +423,141 @@ class Typography {
   final Color titleTextColor;
   final Color bodyTextColor;
   final Color successTextColor;
+
   TextTheme build(BuildContext context) {
-    final baseTheme = context.textTheme.apply(
-      bodyColor: bodyTextColor,
-      displayColor: titleTextColor,
-    );
-    return GoogleFonts.interTextTheme(
-      baseTheme.copyWith(
-        titleLarge: const TextStyle(fontWeight: FontWeight.w600),
-        bodyMedium: const TextStyle(fontSize: 15.0),
-        bodySmall: const TextStyle(fontSize: 13.0, color: Color(0xFF8E8E8E)),
-        labelSmall: TextStyle(
-          fontSize: 15.0,
-          fontWeight: FontWeight.w500,
-          color: bodyTextColor,
-        ),
-        headlineSmall: TextStyle(
-          color: successTextColor,
-          fontWeight: FontWeight.bold,
-          fontSize: 26.0,
-        ),
+    return TextTheme(
+      titleLarge: const TextStyle(
+        fontWeight: FontWeight.w600,
+        package: 'core_ui',
+      ),
+      titleMedium: const TextStyle(
+        fontWeight: FontWeight.w500,
+        package: 'core_ui',
+      ),
+      bodyLarge: const TextStyle(
+        fontSize: 17.0,
+        package: 'core_ui',
+      ),
+      bodyMedium: const TextStyle(
+        fontSize: 15.0,
+        package: 'core_ui',
+      ),
+      bodySmall: const TextStyle(
+        fontSize: 13.0,
+        color: Color(0xFF8E8E8E),
+        package: 'core_ui',
+      ),
+      labelMedium: const TextStyle(
+        package: 'core_ui',
+      ),
+      labelSmall: TextStyle(
+        color: bodyTextColor,
+        fontSize: 12.0,
+        fontWeight: FontWeight.w500,
+        package: 'core_ui',
+      ),
+      headlineSmall: TextStyle(
+        color: successTextColor,
+        fontWeight: FontWeight.bold,
+        fontSize: 26.0,
+        package: 'core_ui',
+      ),
+    )..apply(
+        bodyColor: bodyTextColor,
+        displayColor: titleTextColor,
+      );
+  }
+}
+
+class AppBodyTheme {
+  const AppBodyTheme({
+    this.primaryCurvedColor = const Color(0xFF7D7366),
+    this.secondaryCurvedColor = const Color(0xFFE3E3E3),
+  });
+  final Color primaryCurvedColor;
+  final Color secondaryCurvedColor;
+}
+
+class SegmentedTheme {
+  const SegmentedTheme({
+    required this.selectedBackgroundColor,
+    required this.unselectedBackgroundColor,
+    required this.selectedTextColor,
+    required this.unselectedTextColor,
+    required this.minimumSize,
+    required this.textStyle,
+  });
+  final Color selectedBackgroundColor;
+  final Color unselectedBackgroundColor;
+  final Color selectedTextColor;
+  final Color unselectedTextColor;
+  final Size minimumSize;
+  final TextStyle textStyle;
+}
+
+class PinPutTheme {
+  const PinPutTheme({
+    required this.dotPinPut,
+    required this.boxPinPut,
+  });
+
+  final PinPutThemeData dotPinPut;
+  final PinPutThemeData boxPinPut;
+}
+
+class PinPutThemeData {
+  PinPutThemeData._({
+    required this.pinTheme,
+    required this.focusPinTheme,
+  });
+  factory PinPutThemeData.dot({
+    double dotSize = 10.0,
+    double focusDotSize = 14.0,
+    Color dotColor = Colors.grey,
+    Color focusDotColor = Colors.black,
+  }) {
+    const decoration = BoxDecoration(shape: BoxShape.circle);
+    return PinPutThemeData._(
+      pinTheme: PinTheme(
+        width: dotSize,
+        height: dotSize,
+        margin: const EdgeInsets.symmetric(horizontal: 4),
+        decoration: decoration.copyWith(color: dotColor),
+      ),
+      focusPinTheme: PinTheme(
+        width: focusDotSize,
+        height: focusDotSize,
+        margin: const EdgeInsets.symmetric(horizontal: 4),
+        decoration: decoration.copyWith(color: focusDotColor),
       ),
     );
   }
+  factory PinPutThemeData.box({
+    double size = 48.0,
+    double fontSize = 32.0,
+    Color borderColor = Colors.black26,
+  }) {
+    final decoration = BoxDecoration(
+      borderRadius: const BorderRadius.all(Radius.circular(12)),
+      border: Border.all(color: borderColor),
+    );
+    return PinPutThemeData._(
+      pinTheme: PinTheme(
+        width: size,
+        height: size,
+        decoration: decoration,
+        textStyle: TextStyle(fontSize: fontSize),
+      ),
+      focusPinTheme: PinTheme(
+        width: size,
+        height: size,
+        decoration: decoration,
+        textStyle: TextStyle(fontSize: fontSize),
+      ),
+    );
+  }
+  final PinTheme pinTheme;
+  final PinTheme focusPinTheme;
 }
 
 class ListTileTheme {
