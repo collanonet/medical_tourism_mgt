@@ -1,0 +1,24 @@
+import 'package:auto_route/annotations.dart';
+import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+
+import 'login_form.dart';
+import 'login_screen.dart';
+
+@RoutePage()
+class LoginPage extends StatelessWidget {
+  const LoginPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ReactiveFormConfig(
+      validationMessages: validationMessagesLogin(context),
+      child: ReactiveFormBuilder(
+          form: () => formLogin(),
+          builder: (context, formGroup, child) {
+          return const LoginScreen();
+        }
+      ),
+    );
+  }
+}

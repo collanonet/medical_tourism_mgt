@@ -1,0 +1,11 @@
+library micro;
+
+export 'src/api_service.dart';
+export 'src/rest_client.dart';
+export 'src/entities/entities.dart';
+import 'package:injectable/injectable.dart';
+
+@InjectableInit.microPackage(
+  preferRelativeImports: true,
+)
+initMicroPackage() {}

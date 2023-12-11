@@ -1,0 +1,21 @@
+# melos_managed_dependency_overrides: core_network,core_storage,core_ui,core_utils,data_authz,feature_authz,feature_onboard,feature_biz,core_l10n,data_payments
+dependency_overrides:
+  base_view:
+    path: ../base_view
+  core_l10n:
+    path: ../core_l10n
+  core_network:
+    path: ../core_network
+  core_storage:
+    path: ../core_storage
+  core_ui:
+    path: ../core_ui
+  core_utils:
+    path: ../core_utils
+  data_auth:
+    path: ../data_auth
+  data_quotation:
+    path: ../data_quotation
+  feature_auth:
+    path: ../feature_auth
+
