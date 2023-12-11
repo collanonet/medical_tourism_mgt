@@ -31,8 +31,8 @@ class MedicalRecordAgentSection extends StatelessWidget {
               );
             },
             children: [
-              const Expanded(
-                child: ReactiveTextFormField(
+               Expanded(
+                child: ReactiveTextField(
                   formControlName: 'company',
                   decoration: InputDecoration(
                     label: Text(
@@ -41,8 +41,8 @@ class MedicalRecordAgentSection extends StatelessWidget {
                   ),
                 ),
               ),
-              const Expanded(
-                child: ReactiveTextFormField(
+               Expanded(
+                child: ReactiveTextField(
                   formControlName: 'nameInKanji',
                   decoration: InputDecoration(
                     label: Text(
@@ -51,8 +51,8 @@ class MedicalRecordAgentSection extends StatelessWidget {
                   ),
                 ),
               ),
-              const Expanded(
-                child: ReactiveTextFormField(
+               Expanded(
+                child: ReactiveTextField(
                   formControlName: 'nameInKana',
                   decoration: InputDecoration(
                     label: Text(

@@ -34,6 +34,16 @@ abstract class RestModule {
     return CacheOptions(store: MemCacheStore());
   }
 
+  @local
+  @Named('baseUrl')
+  Uri get localBaseUrl {
+    return Uri(
+      scheme: 'http',
+      host: 'localhost',
+      port: 3001,
+    );
+  }
+
   @dev
   @Named('baseUrl')
   Uri get devBaseUrl {
@@ -41,12 +51,6 @@ abstract class RestModule {
       scheme: 'https',
       host: 'medical-tourism-api-dev-collabonet.pixelplatforms.com',
     );
-  }
-
-  @staging
-  @Named('baseUrl')
-  Uri get stagingBaseUrl {
-    return Uri();
   }
 
   @production

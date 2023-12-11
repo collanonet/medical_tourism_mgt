@@ -1,5 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -80,13 +81,25 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     builder: (BuildContext context,
                         ReactiveDatePickerDelegate<dynamic> picker,
                         Widget? child) {
-                      return ReactiveTextFormField<DateTime>(
+                      return ReactiveTextField<DateTime>(
                         formControlName: 'dateOfBirth',
                         readOnly: true,
                         onTap: (value) => picker.showPicker(),
                         valueAccessor: DateTimeValueAccessor(
                           dateTimeFormat: DateFormat('yyyy/MM/dd'),
                         ),
+                        onChanged: (value) {
+                          logger.d(value);
+                          formGroup.control('age').value =
+                              DateTime.now().year - value.value!.year;
+                          setState(() {});
+                        },
+                        onSubmitted: (value) {
+                          logger.d(value);
+                          formGroup.control('age').value =
+                              DateTime.now().year - value.value!.year;
+                          setState(() {});
+                        },
                         decoration: const InputDecoration(
                           label: Text(
                             '生年月日', // TODO: l10n 対応 (生年月日) (dateOfBirth)
@@ -104,7 +117,6 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                   width: context.appTheme.spacing.marginMedium,
                 ),
                 Expanded(
-                  flex: 2,
                   child: Row(
                     children: [
                       Column(
@@ -115,9 +127,20 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                           const Text(
                             '年齢', // TODO: l10n 対応 (年齢) (age)
                           ),
-                          Text(
-                            '${int.tryParse(formGroup.control('age').value.toString()) ?? 0}歳', // TODO: l10n 対応 (歳) (age)
+                          SizedBox(
+                            height: context.appTheme.spacing.marginSmall,
                           ),
+                          ReactiveValueListenableBuilder<DateTime>(
+                              formControlName: 'dateOfBirth',
+                              builder: (context, value, child) {
+                                if (value.value != null) {
+                                  formGroup.control('age').value =
+                                      DateTime.now().year - value.value!.year;
+                                }
+                                return Text(
+                                  '${int.tryParse(formGroup.control('age').value.toString()) ?? 0}歳', // TODO: l10n 対応 (歳) (age)
+                                );
+                              }),
                         ],
                       ),
                       SizedBox(
@@ -142,6 +165,50 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     ],
                   ),
                 ),
+                SizedBox(
+                  width: context.appTheme.spacing.marginMedium,
+                ),
+                 Expanded(
+                  child: ReactiveTextField(
+                    formControlName: 'height',
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      label: Text(
+                        '身長',
+                      ),
+                      suffixText: 'cm',
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: context.appTheme.spacing.marginMedium,
+                ),
+                 Expanded(
+                  child: ReactiveTextField(
+                    formControlName: 'weight',
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(
+                      label: Text(
+                        '体重',
+                      ),
+                      suffixText: 'kg',
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  width: context.appTheme.spacing.marginMedium,
+                ),
+                Expanded(
+                  child: ElevatedButton(
+                    onPressed: () {},
+                    child: const Text(
+                      'パスポートを表示する',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                )
               ],
             ),
             Row(
@@ -154,7 +221,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     builder: (BuildContext context,
                         ReactiveDatePickerDelegate<dynamic> picker,
                         Widget? child) {
-                      return ReactiveTextFormField<DateTime>(
+                      return ReactiveTextField<DateTime>(
                         formControlName: 'arrivalDate',
                         readOnly: true,
                         onTap: (value) => picker.showPicker(),
@@ -185,7 +252,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     builder: (BuildContext context,
                         ReactiveDatePickerDelegate<dynamic> picker,
                         Widget? child) {
-                      return ReactiveTextFormField<DateTime>(
+                      return ReactiveTextField<DateTime>(
                         formControlName: 'examinationDate',
                         readOnly: true,
                         valueAccessor: DateTimeValueAccessor(
@@ -216,7 +283,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     builder: (BuildContext context,
                         ReactiveDatePickerDelegate<dynamic> picker,
                         Widget? child) {
-                      return ReactiveTextFormField(
+                      return ReactiveTextField(
                         formControlName: 'departureDate',
                         readOnly: true,
                         valueAccessor: DateTimeValueAccessor(
@@ -240,8 +307,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
             ),
             Row(
               children: [
-                const Expanded(
-                  child: ReactiveTextFormField(
+                 Expanded(
+                  child: ReactiveTextField(
                     formControlName: 'caseNumber',
                     decoration: InputDecoration(
                       label: Text(
@@ -261,7 +328,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     builder: (BuildContext context,
                         ReactiveDatePickerDelegate<dynamic> picker,
                         Widget? child) {
-                      return ReactiveTextFormField<DateTime>(
+                      return ReactiveTextField<DateTime>(
                         formControlName: 'receptionDate',
                         readOnly: true,
                         valueAccessor: DateTimeValueAccessor(
@@ -284,15 +351,22 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
-                const Expanded(
-                  child: SizedBox(),
+                 Expanded(
+                  child: ReactiveTextField(
+                    formControlName: 'progress',
+                    decoration: InputDecoration(
+                      label: Text(
+                        '進捗', //  TODO: l10n 対応 (進捗) (progress)
+                      ),
+                    ),
+                  ),
                 ),
               ],
             ),
             Row(
               children: [
-                const Expanded(
-                  child: ReactiveTextFormField(
+                 Expanded(
+                  child: ReactiveTextField(
                     formControlName: 'type',
                     decoration: InputDecoration(
                       label: Text(
@@ -305,14 +379,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                   width: context.appTheme.spacing.marginMedium,
                 ),
                 const Expanded(
-                  child: ReactiveTextFormField(
-                    formControlName: 'progress',
-                    decoration: InputDecoration(
-                      label: Text(
-                        '進捗', //  TODO: l10n 対応 (進捗) (progress)
-                      ),
-                    ),
-                  ),
+                  child: SizedBox(),
                 ),
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
@@ -321,6 +388,27 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                   child: SizedBox(),
                 ),
               ],
+            ),
+            InkWell(
+              onTap: () {},
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add_circle,
+                    color: context.appTheme.primaryColor,
+                  ),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginSmall,
+                  ),
+                  Text(
+                    '病院を追加',
+                    style: TextStyle(color: context.appTheme.primaryColor),
+                  )
+                ],
+              ),
             ),
             Row(
               children: [
@@ -332,7 +420,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     builder: (BuildContext context,
                         ReactiveDatePickerDelegate<dynamic> picker,
                         Widget? child) {
-                      return ReactiveTextFormField<DateTime>(
+                      return ReactiveTextField<DateTime>(
                         formControlName: 'advancePaymentDate',
                         readOnly: true,
                         valueAccessor: DateTimeValueAccessor(

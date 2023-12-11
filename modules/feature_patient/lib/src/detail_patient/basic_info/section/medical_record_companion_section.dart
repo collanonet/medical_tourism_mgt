@@ -126,7 +126,7 @@ class _MedicalRecordCompanionSectionState
                                     ],
                                   ),
                                   Expanded(
-                                    child: ReactiveTextFormField(
+                                    child: ReactiveTextField(
                                       formControlName: 'remarks',
                                       decoration: InputDecoration(
                                         label: Text(
@@ -145,9 +145,9 @@ class _MedicalRecordCompanionSectionState
                                         context.appTheme.spacing.marginMedium,
                                   );
                                 },
-                                children: const [
+                                children:  [
                                   Expanded(
-                                    child: ReactiveTextFormField(
+                                    child: ReactiveTextField(
                                       formControlName: 'nameInRomanized',
                                       decoration: InputDecoration(
                                         label: Text(
@@ -157,7 +157,7 @@ class _MedicalRecordCompanionSectionState
                                     ),
                                   ),
                                   Expanded(
-                                    child: ReactiveTextFormField(
+                                    child: ReactiveTextField(
                                       formControlName: 'nameInChineseOrKanji',
                                       decoration: InputDecoration(
                                         label: Text(
@@ -167,7 +167,7 @@ class _MedicalRecordCompanionSectionState
                                     ),
                                   ),
                                   Expanded(
-                                    child: ReactiveTextFormField(
+                                    child: ReactiveTextField(
                                       formControlName: 'nameInJapaneseKanji',
                                       decoration: InputDecoration(
                                         label: Text(
@@ -186,9 +186,9 @@ class _MedicalRecordCompanionSectionState
                                         context.appTheme.spacing.marginMedium,
                                   );
                                 },
-                                children: const [
+                                children:  [
                                   Expanded(
-                                    child: ReactiveTextFormField(
+                                    child: ReactiveTextField(
                                       formControlName: 'nameInKana',
                                       decoration: InputDecoration(
                                         label: Text(
@@ -198,7 +198,7 @@ class _MedicalRecordCompanionSectionState
                                     ),
                                   ),
                                   Expanded(
-                                    child: ReactiveTextFormField(
+                                    child: ReactiveTextField(
                                       formControlName: 'nationality',
                                       decoration: InputDecoration(
                                         label: Text(
@@ -276,7 +276,7 @@ class _MedicalRecordCompanionSectionState
                                           ReactiveDatePickerDelegate<dynamic>
                                               picker,
                                           Widget? child) {
-                                        return ReactiveTextFormField<DateTime>(
+                                        return ReactiveTextField<DateTime>(
                                           formControlName: 'dateOfBirth',
                                           readOnly: true,
                                           onTap: (value) => picker.showPicker(),
@@ -362,8 +362,8 @@ class _MedicalRecordCompanionSectionState
                                   );
                                 },
                                 children: [
-                                  const Expanded(
-                                    child: ReactiveTextFormField(
+                                   Expanded(
+                                    child: ReactiveTextField(
                                       formControlName: 'passportNumber',
                                       decoration: InputDecoration(
                                         label: Text(
@@ -381,7 +381,7 @@ class _MedicalRecordCompanionSectionState
                                           ReactiveDatePickerDelegate<dynamic>
                                               picker,
                                           Widget? child) {
-                                        return ReactiveTextFormField<DateTime>(
+                                        return ReactiveTextField<DateTime>(
                                           formControlName: 'issueDate',
                                           readOnly: true,
                                           onTap: (value) => picker.showPicker(),
@@ -411,7 +411,7 @@ class _MedicalRecordCompanionSectionState
                                           ReactiveDatePickerDelegate<dynamic>
                                               picker,
                                           Widget? child) {
-                                        return ReactiveTextFormField<DateTime>(
+                                        return ReactiveTextField<DateTime>(
                                           formControlName: 'expirationDate',
                                           readOnly: true,
                                           valueAccessor: DateTimeValueAccessor(

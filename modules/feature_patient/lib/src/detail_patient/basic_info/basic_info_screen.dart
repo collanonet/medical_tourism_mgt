@@ -13,6 +13,7 @@ class BasicInformationScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<BasicInformationModel>(
       builder: (context, model, child) => Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const Expanded(
             child: BasicInfoSection(),

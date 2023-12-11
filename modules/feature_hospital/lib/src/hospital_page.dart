@@ -3,6 +3,10 @@ import 'package:base_view/base_view.dart';
 import 'package:core_utils/routes.dart';
 import 'package:feature_hospital/src/hospital_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
+
+import 'hospital_model.dart';
 
 @RoutePage(name: Routes.hospitalsRoute)
 class HospitalPage extends StatefulWidget {
@@ -15,9 +19,12 @@ class HospitalPage extends StatefulWidget {
 class _HospitalPageState extends State<HospitalPage> {
   @override
   Widget build(BuildContext context) {
-    return const LayoutView(
-      selectedIndex: 4,
-      page: HospitalScreen(),
+    return ChangeNotifierProvider(
+      create: (context) => GetIt.I<HospitalModel>(),
+      child: const LayoutView(
+        selectedIndex: 4,
+        page: HospitalScreen(),
+      ),
     );
   }
 }

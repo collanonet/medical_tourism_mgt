@@ -3,6 +3,10 @@ import 'package:base_view/base_view.dart';
 import 'package:core_utils/routes.dart';
 import 'package:feature_medical_visa/src/medical_visa_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
+
+import 'medical_visa_model.dart';
 
 @RoutePage(name: Routes.medicalVisasRoute)
 class MedicalVisaPage extends StatefulWidget {
@@ -15,9 +19,12 @@ class MedicalVisaPage extends StatefulWidget {
 class _MedicalVisaPageState extends State<MedicalVisaPage> {
   @override
   Widget build(BuildContext context) {
-    return const LayoutView(
-      selectedIndex: 1,
-      page: MedicalVisaScreen(),
+    return ChangeNotifierProvider(
+      create: (context) => GetIt.I<MedicalVisaModel>(),
+      child: const LayoutView(
+        selectedIndex: 1,
+        page: MedicalVisaScreen(),
+      ),
     );
   }
 }

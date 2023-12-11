@@ -16,18 +16,56 @@ class TabBarWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Wrap(
       alignment: WrapAlignment.spaceBetween,
-      runSpacing: context.appTheme.spacing.marginMedium,
-      spacing: context.appTheme.spacing.marginMedium,
+      runSpacing: context.appTheme.spacing.marginSmall,
+      spacing: context.appTheme.spacing.marginSmall,
       crossAxisAlignment: WrapCrossAlignment.start,
       children: List.generate(
         menu.length,
         (index) => index == selectedIndex
-            ? FilledButton(
+            ? ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  backgroundColor: context.appTheme.primaryColor,
+                  textStyle: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                  side: BorderSide(
+                      color: context.appTheme.primaryColor, width: 2),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(
+                        context.appTheme.spacing.borderRadiusMedium,
+                      ),
+                      topRight: Radius.circular(
+                        context.appTheme.spacing.borderRadiusMedium,
+                      ),
+                    ),
+                  ),
+                ),
                 onPressed: () {
                   onPressed?.call(index);
                 },
                 child: Text(menu[index]))
-            : OutlinedButton(
+            : ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: context.appTheme.primaryColor,
+                  backgroundColor: Colors.white,
+                  textStyle: TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                  side: BorderSide(
+                      color: context.appTheme.primaryColor, width: 2),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(
+                        context.appTheme.spacing.borderRadiusMedium,
+                      ),
+                      topRight: Radius.circular(
+                        context.appTheme.spacing.borderRadiusMedium,
+                      ),
+                    ),
+                  ),
+                ),
                 onPressed: () {
                   onPressed?.call(index);
                 },

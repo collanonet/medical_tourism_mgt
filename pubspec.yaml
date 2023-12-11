@@ -93,6 +93,7 @@ dependencies:
   data_table_2: ^2.5.8
   url_strategy: ^0.2.0
   skeletonizer: ^0.8.0
+  animated_toggle_switch: ^0.8.0
 
 dev_dependencies:
   flutter_test:

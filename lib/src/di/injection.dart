@@ -17,7 +17,7 @@ import 'package:injectable/injectable.dart';
 import '../config/server.dart';
 import 'injection.config.dart';
 
-const staging = Environment('staging');
+const local = Environment('local');
 const production = Environment('production');
 
 @InjectableInit(

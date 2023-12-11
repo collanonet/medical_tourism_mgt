@@ -89,11 +89,15 @@ class BasicInformationModel with ChangeNotifier {
     notifyListeners();
 
     await patientRepository.patientNamesByPatient(patientId).then((value) {
-      _patientNames = AsyncData(data: value);
-      insertPatientName(
-        data: value,
-        formArray: formGroup.control('PATIENT_NAMES') as FormArray,
-      );
+      if (value.isNotEmpty) {
+        _patientNames = AsyncData(data: value);
+        insertPatientName(
+          data: value,
+          formArray: formGroup.control('PATIENT_NAMES') as FormArray,
+        );
+      } else {
+        _patientNames = const AsyncData();
+      }
     }).catchError((error) {
       logger.d(error);
     }).whenComplete(() {
@@ -312,10 +316,12 @@ class BasicInformationModel with ChangeNotifier {
     await patientRepository
         .patientNationalitiesByPatient(patientId)
         .then((value) {
-      _patientNationalities = AsyncData(data: value.first);
-      insertPATIENTNATIONALITIES(
-          data: value.first,
-          formGroup: formGroup.control('PATIENT_NATIONALITIES') as FormGroup);
+      if (value.isNotEmpty) {
+        _patientNationalities = AsyncData(data: value.first);
+        insertPATIENTNATIONALITIES(
+            data: value.first,
+            formGroup: formGroup.control('PATIENT_NATIONALITIES') as FormGroup);
+      }
     }).catchError((error) {
       logger.d(error);
     }).whenComplete(() {
@@ -382,10 +388,14 @@ class BasicInformationModel with ChangeNotifier {
     notifyListeners();
 
     await patientRepository.patientPassportsByPatient(patientId).then((value) {
-      _patientPassport = AsyncData(data: value.first);
-      insertPATIENTPASSPORTS(
-          data: value.first,
-          formGroup: formGroup.control('PATIENT_PASSPORTS') as FormGroup);
+      if (value.isNotEmpty) {
+        _patientPassport = AsyncData(data: value.first);
+        insertPATIENTPASSPORTS(
+            data: value.first,
+            formGroup: formGroup.control('PATIENT_PASSPORTS') as FormGroup);
+      } else {
+        _patientPassport = const AsyncData();
+      }
     }).catchError((error) {
       logger.d(error);
       _patientPassport = AsyncData(error: error);
@@ -451,8 +461,12 @@ class BasicInformationModel with ChangeNotifier {
     notifyListeners();
 
     await patientRepository.medicalRecordsByPatient(patientId).then((value) {
-      _medicalRecord = AsyncData(data: value.first);
-      insertMedicalRecord(data: value.first, formGroup: formGroup);
+      if (value.isNotEmpty) {
+        _medicalRecord = AsyncData(data: value.first);
+        insertMedicalRecord(data: value.first, formGroup: formGroup);
+      } else {
+        _medicalRecord = const AsyncData();
+      }
     }).catchError((error) {
       logger.d(error);
       _medicalRecord = AsyncData(error: error);

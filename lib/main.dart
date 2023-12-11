@@ -10,10 +10,6 @@ import 'src/app/app_model.dart';
 import 'src/config/server.dart';
 import 'src/di/injection.dart';
 
-void main() {
-  init(Server.dev);
-}
-
 Future<void> init(Server server) async {
   WidgetsBinding widgetsBinding = WidgetsFlutterBinding.ensureInitialized();
   setPathUrlStrategy();

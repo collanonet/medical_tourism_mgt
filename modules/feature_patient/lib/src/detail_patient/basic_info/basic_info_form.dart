@@ -10,8 +10,12 @@ FormGroup basicInfoForm({
         'id': FormControl<String?>(value: medicalRecord?.id),
         'dateOfBirth': FormControl<DateTime>(value: medicalRecord?.dateOfBirth),
         'age': FormControl<int?>(value: medicalRecord?.age),
+      // 身長 to en height
+        'height': FormControl<int?>(value: medicalRecord?.height),
+      // 体重 to en weight
+        'weight': FormControl<int?>(value: medicalRecord?.weight),
         'gender': FormControl<String>(value: medicalRecord?.gender ?? 'male'),
-        'arrivalDate': FormControl<DateTime>(value: medicalRecord?.arrivalDate),
+        'arrivalDate': FormControl<DateTime>(value: medicalRecord?.arrivalDate, validators: [Validators.required]),
         'examinationDate':
             FormControl<DateTime>(value: medicalRecord?.examinationDate),
         'departureDate':
@@ -35,39 +39,21 @@ FormGroup basicInfoForm({
             'medicalCardNumber': FormControl<String?>(),
           }),
         ]),
-        'PATIENT_NAMES': FormArray([
-          FormGroup({
-            'id': FormControl<String?>(),
-            'familyName': FormControl<String?>(),
-            'middleName': FormControl<String?>(),
-            'firstName': FormControl<String?>(),
-            'nameType': FormControl<String>(value: NameType.romanized.value),
-          }),
-          FormGroup({
-            'id': FormControl<String?>(),
-            'familyName': FormControl<String?>(),
-            'middleName': FormControl<String?>(),
-            'firstName': FormControl<String?>(),
-            'nameType':
-                FormControl<String>(value: NameType.chineseOrVietnamese.value),
-          }),
-          FormGroup({
-            'id': FormControl<String?>(),
-            'familyName': FormControl<String?>(),
-            'middleName': FormControl<String?>(),
-            'firstName': FormControl<String?>(),
-            'nameType':
-                FormControl<String>(value: NameType.japaneseForChinese.value),
-          }),
-          FormGroup({
-            'id': FormControl<String?>(),
-            'familyName': FormControl<String?>(),
-            'middleName': FormControl<String?>(),
-            'firstName': FormControl<String?>(),
-            'nameType': FormControl<String>(
-                value: NameType.japaneseForNonChinese.value),
-          }),
-        ]),
+        'PATIENT_NAMES': FormGroup({
+          'id': FormControl<String?>(),
+          'familyNameRomanized': FormControl<String?>(),
+          'middleNameRomanized': FormControl<String?>(),
+          'firstNameRomanized': FormControl<String?>(),
+          'familyNameChineseOrVietnamese': FormControl<String?>(),
+          'middleNameChineseOrVietnamese': FormControl<String?>(),
+          'firstNameChineseOrVietnamese': FormControl<String?>(),
+          'familyNameJapaneseForChinese': FormControl<String?>(),
+          'middleNameJapaneseForChinese': FormControl<String?>(),
+          'firstNameJapaneseForChinese': FormControl<String?>(),
+          'familyNameJapaneseForNonChinese': FormControl<String?>(),
+          'middleNameJapaneseForNonChinese': FormControl<String?>(),
+          'firstNameJapaneseForNonChinese': FormControl<String?>(),
+        }),
         'PATIENT_NATIONALITIES': FormGroup({
           'id': FormControl<String?>(),
           'nationality': FormControl<String?>(),

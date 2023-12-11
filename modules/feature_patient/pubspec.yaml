@@ -24,6 +24,7 @@ dependencies:
   data_table_2: ^2.5.8
   skeletonizer: ^0.8.0
   intl: ^0.18.1
+  animated_toggle_switch: ^0.8.0
 
 dev_dependencies:
   flutter_test:

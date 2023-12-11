@@ -41,7 +41,7 @@ class PatientFilter extends StatelessWidget {
                       children: [
                         Expanded(
                           flex: 4,
-                          child: ReactiveTextFormField(
+                          child: ReactiveTextField(
                             formControlName: 'patient_name',
                             decoration: InputDecoration(
                               label: Text(
@@ -53,7 +53,7 @@ class PatientFilter extends StatelessWidget {
                         const SizedBox(width: 16),
                         Expanded(
                           flex: 4,
-                          child: ReactiveTextFormField(
+                          child: ReactiveTextField(
                             formControlName: 'agent_company_name',
                             decoration: InputDecoration(
                               label: Text(
@@ -65,7 +65,7 @@ class PatientFilter extends StatelessWidget {
                         const SizedBox(width: 16),
                         Expanded(
                           flex: 4,
-                          child: ReactiveTextFormField(
+                          child: ReactiveTextField(
                             formControlName: 'hospital_name',
                             decoration: InputDecoration(
                               label: Text(
@@ -81,7 +81,7 @@ class PatientFilter extends StatelessWidget {
                       children: [
                         Expanded(
                           flex: 4,
-                          child: ReactiveTextFormField(
+                          child: ReactiveTextField(
                             formControlName: 'classification',
                             decoration: InputDecoration(
                               label: Text(
@@ -93,7 +93,7 @@ class PatientFilter extends StatelessWidget {
                         const SizedBox(width: 16),
                         Expanded(
                           flex: 4,
-                          child: ReactiveTextFormField(
+                          child: ReactiveTextField(
                             formControlName: 'sales_representative',
                             decoration: InputDecoration(
                               label: Text(
@@ -118,7 +118,7 @@ class PatientFilter extends StatelessWidget {
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
-                              return ReactiveTextFormField<DateTime>(
+                              return ReactiveTextField<DateTime>(
                                 formControlName: 'entry_date_from',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
@@ -151,7 +151,7 @@ class PatientFilter extends StatelessWidget {
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
-                              return ReactiveTextFormField<DateTime>(
+                              return ReactiveTextField<DateTime>(
                                 formControlName: 'entry_date_to',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
@@ -181,7 +181,7 @@ class PatientFilter extends StatelessWidget {
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
-                              return ReactiveTextFormField<DateTime>(
+                              return ReactiveTextField<DateTime>(
                                 formControlName: 'examination_date_from',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
@@ -214,7 +214,7 @@ class PatientFilter extends StatelessWidget {
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
-                              return ReactiveTextFormField<DateTime>(
+                              return ReactiveTextField<DateTime>(
                                 formControlName: 'examination_date_to',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
@@ -244,7 +244,7 @@ class PatientFilter extends StatelessWidget {
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
-                              return ReactiveTextFormField<DateTime>(
+                              return ReactiveTextField<DateTime>(
                                 formControlName: 'return_date_from',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
@@ -277,7 +277,7 @@ class PatientFilter extends StatelessWidget {
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
-                              return ReactiveTextFormField<DateTime>(
+                              return ReactiveTextField<DateTime>(
                                 formControlName: 'return_date_to',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),

@@ -189,4 +189,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get labelLogout => 'ログアウト';
+
+  @override
+  String get changeLanguage => 'Please select a language';
 }

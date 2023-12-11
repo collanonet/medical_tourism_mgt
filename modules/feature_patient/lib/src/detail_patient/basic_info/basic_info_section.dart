@@ -2,6 +2,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:feature_patient/src/detail_patient/basic_info/section/medical_record_agent_section.dart';
 import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 import 'section/medical_record_budget_section.dart';
 import 'section/medical_record_companion_section.dart';
 import 'section/medical_record_hospital_section.dart';
@@ -30,16 +31,20 @@ class BasicInfoSection extends StatelessWidget {
             separatorBuilder: (BuildContext context, int index) =>
                 SizedBox(height: context.appTheme.spacing.formSpacing),
             children: [
-              const Text(
-                'メモ',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                )
+               Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text('メモ（エージェント/病院には共有されません）',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      )),
+                  ReactiveTextField(
+                    formControlName: 'memo',
+                    maxLines: 3,
+                  ),
+                ],
               ), // TODO: l10n 対応 (memo)
-              const ReactiveTextFormField(
-                formControlName: 'memo',
-                maxLines: 3,
-              ),
+
               Column(
                 children: [
                   const MedicalRecordSection(),
@@ -56,7 +61,10 @@ class BasicInfoSection extends StatelessWidget {
               const MedicalRecordNationalitySection(),
               const MedicalRecordBudgetSection(),
               const MedicalRecordPassportSection(),
-              Divider(height: 0,color: context.appTheme.dividerColor,),
+              Divider(
+                height: 0,
+                color: context.appTheme.dividerColor,
+              ),
               const MedicalRecordAgentSection(),
               const MedicalRecordReferrerSection(),
               const MedicalRecordInterpreterSection(),

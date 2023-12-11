@@ -2,6 +2,7 @@ import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'billing/billing_page.dart';
+import 'patient_response_data/patient_response_page.dart';
 import 'statement/statement_page.dart';
 import '../widgets/header_detail_patient.dart';
 import 'package:flutter/material.dart';
@@ -27,16 +28,18 @@ class DetailPatientScreen extends StatefulWidget {
 
 class _DetailPatientScreenState extends State<DetailPatientScreen> {
   List<String> menu = [
-    "基本情報", // basic information
-    "進捗一覧", // progress list
-    "海外診療データ", // overseas medical data
-    "診療サマリー", //  medical summary
-    "医療ビザ", //  medical visa
-    "国内診療データ", // domestic medical data
-    "見積書", // estimate
-    "精算書", // statement
-    "請求書", // billing
-    "診療報酬明細", // medical payment details
+    '基本情報', // basic information
+    '進捗一覧', // progress list
+    '患者回答データ', // Patient Response Data
+    '海外診療データ', // medical summary
+    '診療サマリー', // medical visa
+    'ご提案', // domestic medical data
+    '医療ビザ', // estimate
+    '国内診療データ', // statement
+    '見積書', // billing
+    '請求書', // medical payment details
+    '精算履歴', // medical payment details
+    '診療報酬明細', // medical payment details
   ];
 
   late List<Widget> pages;
@@ -49,6 +52,9 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
         patient: widget.patient,
       ),
       ProgressListPage(
+        patient: widget.patient,
+      ),
+      PatientResponsePage(
         patient: widget.patient,
       ),
       OverseasMedicalDataPage(
@@ -75,6 +81,7 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
       MedicalPaymentDetailsPage(
         patient: widget.patient,
       ),
+      Text('診療報酬明細'),
     ];
   }
 
@@ -86,16 +93,22 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
       children: [
         const HeaderDetailPatient(),
         Padding(
-          padding: EdgeInsets.only(top: context.appTheme.spacing.marginMedium),
+          padding: EdgeInsets.only(
+              top: context.appTheme.spacing.marginMedium,
+              left: context.appTheme.spacing.marginMedium),
           child: ValueListenableBuilder<int>(
             valueListenable: _selectedIndex,
             builder: (BuildContext context, int value, Widget? child) {
-              return TabBarWidget(
-                selectedIndex: value,
-                menu: menu,
-                onPressed: (index) {
-                  _selectedIndex.value = index;
-                },
+              return Row(
+                children: [
+                  TabBarWidget(
+                    selectedIndex: value,
+                    menu: menu,
+                    onPressed: (index) {
+                      _selectedIndex.value = index;
+                    },
+                  ),
+                ],
               );
             },
           ),

@@ -13,96 +13,208 @@ class MedicalRecordNameSection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formGroup = (ReactiveForm.of(context) as FormGroup)
+        .control('PATIENT_NAMES') as FormGroup;
+
     return Consumer<BasicInformationModel>(
       builder: (context, model, child) => Skeletonizer(
         enabled: model.patientNames.loading,
-        child: ReactiveFormArray(
-          formArrayName: 'PATIENT_NAMES',
-          builder: (context, formArray, child) {
-            final rows = formArray.controls
-                .map((control) => control as FormGroup)
-                .map(
-                  (currentForm) => ReactiveForm(
-                    formGroup: currentForm,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          currentForm.control('nameType').value ==
-                                  NameType.romanized.value
-                              ? '氏名（ローマ字）'
-                              : currentForm.control('nameType').value ==
-                                      NameType.chineseOrVietnamese.value
-                                  ? '氏名（中国語漢字/ベトナム語表記）'
-                                  : currentForm.control('nameType').value ==
-                                          NameType.japaneseForChinese.value
-                                      ? '氏名（日本語漢字）※中国人のみ'
-                                      : currentForm.control('nameType').value ==
-                                              NameType
-                                                  .japaneseForNonChinese.value
-                                          ? '氏名（日本語漢字）※中国人のみ'
-                                          : '氏名（ローマ字）',
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                          ),
+        child: ReactiveForm(
+          formGroup: formGroup,
+          child: ColumnSeparated(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            separatorBuilder: (BuildContext context, int index) {
+              return SizedBox(
+                height: context.appTheme.spacing.marginMedium,
+              );
+            },
+            children: [
+              const Text(
+                '氏名（ローマ字）',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              RowSeparated(
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    width: context.appTheme.spacing.marginMedium,
+                  );
+                },
+                children:  [
+                  Expanded(
+                    child: ReactiveTextField(
+                      formControlName: 'familyNameRomanized',
+                      decoration: InputDecoration(
+                        label: Text(
+                          'ファミリーネーム', // Todo: l10n 対応 (ファミリーネーム) (familyName)
                         ),
-                        SizedBox(
-                          height: context.appTheme.spacing.marginMedium,
-                        ),
-                        RowSeparated(
-                          separatorBuilder: (BuildContext context, int index) {
-                            return SizedBox(
-                              width: context.appTheme.spacing.marginMedium,
-                            );
-                          },
-                          children: [
-                            const Expanded(
-                              child: ReactiveTextFormField(
-                                formControlName: 'familyName',
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    'ファミリーネーム', // Todo: l10n 対応 (ファミリーネーム) (familyName)
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            const Expanded(
-                              child: ReactiveTextFormField(
-                                formControlName: 'middleName',
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    'ミドルネーム', // Todo: l10n 対応 (ミドルネーム) (middleName)
-                                  ),
-                                ),
-                              ),
-                            ),
-
-                            const Expanded(
-                              child: ReactiveTextFormField(
-                                formControlName: 'firstName',
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    'ファーストネーム', // Todo: l10n 対応 (ファーストネーム) (firstName)
-                                  ),
-                                ),
-                              ),
-                            ),
-                            Expanded(flex: 3, child: SizedBox())
-                          ],
-                        ),
-                      ],
+                      ),
                     ),
                   ),
-                );
-
-            return ColumnSeparated(
-              separatorBuilder: (BuildContext context, int index) => SizedBox(
-                height: context.appTheme.spacing.marginMedium,
+                  Expanded(
+                    child: ReactiveTextField(
+                      formControlName: 'middleNameRomanized',
+                      decoration: InputDecoration(
+                        label: Text(
+                          'ミドルネーム', // Todo: l10n 対応 (ミドルネーム) (middleName)
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ReactiveTextField(
+                      formControlName: 'firstNameRomanized',
+                      decoration: InputDecoration(
+                        label: Text(
+                          'ファーストネーム', // Todo: l10n 対応 (ファーストネーム) (firstName)
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(flex: 3, child: SizedBox())
+                ],
               ),
-              children: rows.toList(),
-            );
-          },
+              const Text(
+                '氏名（中国語漢字/ベトナム語表記）',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              RowSeparated(
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    width: context.appTheme.spacing.marginMedium,
+                  );
+                },
+                children:  [
+                  Expanded(
+                    child: ReactiveTextField(
+                      formControlName: 'familyNameChineseOrVietnamese',
+                      decoration: InputDecoration(
+                        label: Text(
+                          'ファミリーネーム', // Todo: l10n 対応 (ファミリーネーム) (familyName)
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ReactiveTextField(
+                      formControlName: 'middleNameChineseOrVietnamese',
+                      decoration: InputDecoration(
+                        label: Text(
+                          'ミドルネーム', // Todo: l10n 対応 (ミドルネーム) (middleName)
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ReactiveTextField(
+                      formControlName: 'firstNameChineseOrVietnamese',
+                      decoration: InputDecoration(
+                        label: Text(
+                          'ファーストネーム', // Todo: l10n 対応 (ファーストネーム) (firstName)
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(flex: 3, child: SizedBox())
+                ],
+              ),
+              const Text(
+                '氏名（日本語漢字）※中国人のみ',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              RowSeparated(
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    width: context.appTheme.spacing.marginMedium,
+                  );
+                },
+                children:  [
+                  Expanded(
+                    child: ReactiveTextField(
+                      formControlName: 'familyNameJapaneseForChinese',
+                      decoration: InputDecoration(
+                        label: Text(
+                          'ファミリーネーム', // Todo: l10n 対応 (ファミリーネーム) (familyName)
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ReactiveTextField(
+                      formControlName: 'middleNameJapaneseForChinese',
+                      decoration: InputDecoration(
+                        label: Text(
+                          'ミドルネーム', // Todo: l10n 対応 (ミドルネーム) (middleName)
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ReactiveTextField(
+                      formControlName: 'firstNameJapaneseForChinese',
+                      decoration: InputDecoration(
+                        label: Text(
+                          'ファーストネーム', // Todo: l10n 対応 (ファーストネーム) (firstName)
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(flex: 3, child: SizedBox())
+                ],
+              ),
+              const Text(
+                '氏名（カナ）',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              RowSeparated(
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    width: context.appTheme.spacing.marginMedium,
+                  );
+                },
+                children:  [
+                  Expanded(
+                    child: ReactiveTextField(
+                      formControlName: 'familyNameJapaneseForNonChinese',
+                      decoration: InputDecoration(
+                        label: Text(
+                          'ファミリーネーム', // Todo: l10n 対応 (ファミリーネーム) (familyName)
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ReactiveTextField(
+                      formControlName: 'middleNameJapaneseForNonChinese',
+                      decoration: InputDecoration(
+                        label: Text(
+                          'ミドルネーム', // Todo: l10n 対応 (ミドルネーム) (middleName)
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: ReactiveTextField(
+                      formControlName: 'firstNameJapaneseForNonChinese',
+                      decoration: InputDecoration(
+                        label: Text(
+                          'ファーストネーム', // Todo: l10n 対応 (ファーストネーム) (firstName)
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(flex: 3, child: SizedBox())
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );
