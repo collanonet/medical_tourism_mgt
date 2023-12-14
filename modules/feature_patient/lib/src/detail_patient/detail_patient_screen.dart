@@ -32,10 +32,10 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
     '基本情報', // basic information
     '進捗一覧', // progress list
     '患者回答データ', // Patient Response Data
-    '海外診療データ', // medical summary
-    '診療サマリー', // medical visa
-    'ご提案', // domestic medical data
-    '医療ビザ', // estimate
+    '海外診療データ', // Overseas medical data
+    '診療サマリー', // Medical summary
+    'ご提案', // proposal
+    '医療ビザ', // medical visa
     '国内診療データ', // statement
     '見積書', // billing
     '請求書', // medical payment details

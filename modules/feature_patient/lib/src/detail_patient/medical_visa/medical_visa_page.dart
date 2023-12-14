@@ -1,8 +1,11 @@
+import 'package:core_l10n/l10n.dart';
 import 'package:core_network/core_network.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
+import 'medical_visa_form.dart';
 import 'medical_visa_model.dart';
 import 'medical_visa_screen.dart';
 
@@ -17,8 +20,17 @@ class MedicalVisaPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) =>
-      GetIt.I<MedicalVisaModel>()..initialData(patient: patient ),
-      child: const MedicalVisaScreen(),
+          GetIt.I<MedicalVisaModel>()..initialData(patient: patient),
+      child: ReactiveFormConfig(
+        validationMessages: <String, ValidationMessageFunction>{
+          ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
+        },
+        child: ReactiveFormBuilder(
+            form: () => medicalVisaForm(),
+            builder: (context, formGroup, child) {
+              return const MedicalVisaScreen();
+            }),
+      ),
     );
   }
 }
