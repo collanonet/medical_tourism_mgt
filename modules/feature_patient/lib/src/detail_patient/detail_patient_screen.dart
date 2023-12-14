@@ -3,6 +3,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'billing/billing_page.dart';
 import 'patient_response_data/patient_response_page.dart';
+import 'proposal/proposal_page.dart';
 import 'statement/statement_page.dart';
 import '../widgets/header_detail_patient.dart';
 import 'package:flutter/material.dart';
@@ -63,6 +64,9 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
       MedicalSummaryPage(
         patient: widget.patient,
       ),
+      ProposalPage(
+        patient: widget.patient,
+      ),
       MedicalVisaPage(
         patient: widget.patient,
       ),
@@ -81,7 +85,6 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
       MedicalPaymentDetailsPage(
         patient: widget.patient,
       ),
-      Text('診療報酬明細'),
     ];
   }
 

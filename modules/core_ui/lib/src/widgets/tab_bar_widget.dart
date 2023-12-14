@@ -26,7 +26,7 @@ class TabBarWidget extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                   foregroundColor: Colors.white,
                   backgroundColor: context.appTheme.primaryColor,
-                  textStyle: TextStyle(
+                  textStyle: const TextStyle(
                     fontWeight: FontWeight.bold,
                   ),
                   side: BorderSide(
