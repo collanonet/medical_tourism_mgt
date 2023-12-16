@@ -93,6 +93,7 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const HeaderDetailPatient(),
         Padding(
