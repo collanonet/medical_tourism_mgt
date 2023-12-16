@@ -1,4 +1,5 @@
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,15 @@ class MedicalVisaScreen extends StatefulWidget {
 }
 
 class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
+  List<String> menu = const [
+    '短期滞在の期間の延長', // Extension of short-term stay period
+    '特定活動の期間の延長', // Extension of period of specific activities
+    '短期滞在　医療ビザ→特定活動', // Short-term stay medical visa → Specific activities
+    '海外での特定活動ビザ変更', // Change of specific activity visa overseas
+  ];
+
+  final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
+
   @override
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
@@ -764,6 +774,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
           ReactiveForm(
             formGroup: formGroup.control('addition') as FormGroup,
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
                   padding:
@@ -1237,7 +1248,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
           ),
-          Text('ビザ取得後に必要なもの'),
+          Text('ビザ取得後に必要なもの', style: context.textTheme.titleMedium,),
           ReactiveForm(
             formGroup: formGroup.control('required_in_japan') as FormGroup,
             child: Column(
@@ -1676,12 +1687,14 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                   context.appTheme.spacing.borderRadiusMedium),
             ),
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ReactiveForm(
                   formGroup: formGroup.control('companion_other') as FormGroup,
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('同行者'),
+                      Text('同行者', style: context.textTheme.titleMedium,),
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),
@@ -1768,10 +1781,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                         Checkbox(
                                             value: false,
                                             onChanged: (value) {}),
-                                        SizedBox(
-                                          width: context
-                                              .appTheme.spacing.marginMedium,
-                                        ),
                                         Text('男性'),
                                         Checkbox(
                                             value: false,
@@ -2194,34 +2203,227 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 ),
                               ],
                             ),
-                            SizedBox(
-                              height: context.appTheme.spacing.marginMedium,
-                            ),
-                            Row(
-                              children: [
-                                Expanded(
-                                  child: ReactiveTextField(
-                                    formControlName: 'remarks',
-                                    decoration: InputDecoration(
-                                      label: Text(
-                                        '出発地',
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                Expanded(
-                                  child: SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                ),
-                              ],
-                            ),
                           ],
                         ),
+                      ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add_circle,
+                            color: context.appTheme.primaryColor,
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginSmall,
+                          ),
+                          Text(
+                            '上記セットを追加',
+                            style:
+                                TextStyle(color: context.appTheme.primaryColor),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(
+                            child: ReactiveTextField(
+                              formControlName: 'remarks',
+                              decoration: InputDecoration(
+                                label: Text(
+                                  '備考',
+                                ),
+                              ),
+                            ),
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          Expanded(
+                            child: SizedBox(
+                              width: context.appTheme.spacing.marginMedium,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+                ReactiveForm(
+                  formGroup: formGroup.control('withdrawal_of_visa_other')
+                      as FormGroup,
+                  child: Row(
+                    children: [
+                      Checkbox(value: true, onChanged: (value) {}),
+                      Text('ビザの取り下げ'),
+                      SizedBox(
+                        width: context.appTheme.spacing.marginMedium,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text('理由'),
+                          Row(
+                            children: [
+                              Checkbox(value: false, onChanged: (value) {}),
+                              Text('患者死亡'),
+                              Checkbox(value: false, onChanged: (value) {}),
+                              Text('その他'),
+                            ],
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        width: context.appTheme.spacing.marginMedium,
+                      ),
+                      Expanded(
+                        child: ReactiveTextField(
+                          formControlName: 'remarks',
+                          decoration: InputDecoration(
+                            label: Text('備考'),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+                Text(
+                  'ビザ取得後に必要なもの',
+                  style: context.textTheme.titleMedium,
+                ),
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+                ReactiveForm(
+                  formGroup:
+                      formGroup.control('required_in_japan') as FormGroup,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(child: Text('ビザのページ')),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          Expanded(
+                            child: ReactiveDatePicker<DateTime>(
+                              formControlName: 'visa_page_file_upload_date',
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime.now(),
+                              builder: (BuildContext context,
+                                  ReactiveDatePickerDelegate<dynamic> picker,
+                                  Widget? child) {
+                                return ReactiveTextField<DateTime>(
+                                  formControlName: 'visa_page_file_upload_date',
+                                  readOnly: true,
+                                  onTap: (value) => picker.showPicker(),
+                                  valueAccessor: DateTimeValueAccessor(
+                                    dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                  ),
+                                  onChanged: (value) {
+                                    logger.d(value);
+                                  },
+                                  onSubmitted: (value) {
+                                    logger.d(value);
+                                  },
+                                  decoration: const InputDecoration(
+                                    suffixIcon: Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: SizedBox(
+                              width: context.appTheme.spacing.marginMedium,
+                            ),
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          ElevatedButton(
+                              onPressed: () {}, child: Text('ファイル選択'))
+                        ],
+                      ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(child: Text('上陸許可証')),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          Expanded(
+                            child: ReactiveDatePicker<DateTime>(
+                              formControlName:
+                                  'landing_permit_file_upload_date',
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime.now(),
+                              builder: (BuildContext context,
+                                  ReactiveDatePickerDelegate<dynamic> picker,
+                                  Widget? child) {
+                                return ReactiveTextField<DateTime>(
+                                  formControlName:
+                                      'landing_permit_file_upload_date',
+                                  readOnly: true,
+                                  onTap: (value) => picker.showPicker(),
+                                  valueAccessor: DateTimeValueAccessor(
+                                    dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                  ),
+                                  onChanged: (value) {
+                                    logger.d(value);
+                                  },
+                                  onSubmitted: (value) {
+                                    logger.d(value);
+                                  },
+                                  decoration: const InputDecoration(
+                                    suffixIcon: Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: SizedBox(
+                              width: context.appTheme.spacing.marginMedium,
+                            ),
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          ElevatedButton(
+                              onPressed: () {}, child: Text('ファイル選択'))
+                        ],
                       ),
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
@@ -2245,8 +2447,1096 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           )
                         ],
                       ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(child: Text('来日時の飛行機チケット')),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          Expanded(
+                            child: ReactiveDatePicker<DateTime>(
+                              formControlName:
+                                  'airline_ticke_arrival_japan_file_upload_date',
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime.now(),
+                              builder: (BuildContext context,
+                                  ReactiveDatePickerDelegate<dynamic> picker,
+                                  Widget? child) {
+                                return ReactiveTextField<DateTime>(
+                                  formControlName:
+                                      'airline_ticke_arrival_japan_file_upload_date',
+                                  readOnly: true,
+                                  onTap: (value) => picker.showPicker(),
+                                  valueAccessor: DateTimeValueAccessor(
+                                    dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                  ),
+                                  onChanged: (value) {
+                                    logger.d(value);
+                                  },
+                                  onSubmitted: (value) {
+                                    logger.d(value);
+                                  },
+                                  decoration: const InputDecoration(
+                                    suffixIcon: Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: SizedBox(
+                              width: context.appTheme.spacing.marginMedium,
+                            ),
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          ElevatedButton(
+                              onPressed: () {}, child: Text('ファイル選択'))
+                        ],
+                      ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add_circle,
+                            color: context.appTheme.primaryColor,
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginSmall,
+                          ),
+                          Text(
+                            '追加',
+                            style:
+                                TextStyle(color: context.appTheme.primaryColor),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(child: Text('帰国時の飛行機チケット')),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          Expanded(
+                            child: ReactiveDatePicker<DateTime>(
+                              formControlName:
+                                  'airline_ticket_return_japan_file_upload_date',
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime.now(),
+                              builder: (BuildContext context,
+                                  ReactiveDatePickerDelegate<dynamic> picker,
+                                  Widget? child) {
+                                return ReactiveTextField<DateTime>(
+                                  formControlName:
+                                      'airline_ticket_return_japan_file_upload_date',
+                                  readOnly: true,
+                                  onTap: (value) => picker.showPicker(),
+                                  valueAccessor: DateTimeValueAccessor(
+                                    dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                  ),
+                                  onChanged: (value) {
+                                    logger.d(value);
+                                  },
+                                  onSubmitted: (value) {
+                                    logger.d(value);
+                                  },
+                                  decoration: const InputDecoration(
+                                    suffixIcon: Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: SizedBox(
+                              width: context.appTheme.spacing.marginMedium,
+                            ),
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          ElevatedButton(
+                              onPressed: () {}, child: Text('ファイル選択'))
+                        ],
+                      ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add_circle,
+                            color: context.appTheme.primaryColor,
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginSmall,
+                          ),
+                          Text(
+                            '追加',
+                            style:
+                                TextStyle(color: context.appTheme.primaryColor),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(child: Text('帰国時のボーディングパス')),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          Expanded(
+                            child: ReactiveDatePicker<DateTime>(
+                              formControlName:
+                                  'boarding_pass_returning_file_upload_date',
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime.now(),
+                              builder: (BuildContext context,
+                                  ReactiveDatePickerDelegate<dynamic> picker,
+                                  Widget? child) {
+                                return ReactiveTextField<DateTime>(
+                                  formControlName:
+                                      'boarding_pass_returning_file_upload_date',
+                                  readOnly: true,
+                                  onTap: (value) => picker.showPicker(),
+                                  valueAccessor: DateTimeValueAccessor(
+                                    dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                  ),
+                                  onChanged: (value) {
+                                    logger.d(value);
+                                  },
+                                  onSubmitted: (value) {
+                                    logger.d(value);
+                                  },
+                                  decoration: const InputDecoration(
+                                    suffixIcon: Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: SizedBox(
+                              width: context.appTheme.spacing.marginMedium,
+                            ),
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          ElevatedButton(
+                              onPressed: () {}, child: Text('ファイル選択'))
+                        ],
+                      ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      ),
+                      Row(
+                        mainAxisSize: MainAxisSize.min,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add_circle,
+                            color: context.appTheme.primaryColor,
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginSmall,
+                          ),
+                          Text(
+                            '追加',
+                            style:
+                                TextStyle(color: context.appTheme.primaryColor),
+                          )
+                        ],
+                      ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      ),
+                      Row(
+                        children: [
+                          Expanded(child: Text('在留資格認定証明書')),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          Expanded(
+                            child: ReactiveDatePicker<DateTime>(
+                              formControlName:
+                                  'certificate_eligibility_file_upload_date',
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime.now(),
+                              builder: (BuildContext context,
+                                  ReactiveDatePickerDelegate<dynamic> picker,
+                                  Widget? child) {
+                                return ReactiveTextField<DateTime>(
+                                  formControlName:
+                                      'certificate_eligibility_file_upload_date',
+                                  readOnly: true,
+                                  onTap: (value) => picker.showPicker(),
+                                  valueAccessor: DateTimeValueAccessor(
+                                    dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                  ),
+                                  onChanged: (value) {
+                                    logger.d(value);
+                                  },
+                                  onSubmitted: (value) {
+                                    logger.d(value);
+                                  },
+                                  decoration: const InputDecoration(
+                                    suffixIcon: Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          Expanded(
+                            flex: 2,
+                            child: SizedBox(
+                              width: context.appTheme.spacing.marginMedium,
+                            ),
+                          ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          ElevatedButton(
+                              onPressed: () {}, child: Text('ファイル選択'))
+                        ],
+                      ),
                     ],
                   ),
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Padding(
+            padding:
+                EdgeInsets.only(top: context.appTheme.spacing.marginMedium),
+            child: ValueListenableBuilder<int>(
+              valueListenable: _selectedIndex,
+              builder: (BuildContext context, int value, Widget? child) {
+                return Row(
+                  children: [
+                    TabBarWidget(
+                      selectedIndex: value,
+                      menu: menu,
+                      onPressed: (index) {
+                        _selectedIndex.value = index;
+                      },
+                    ),
+                  ],
+                );
+              },
+            ),
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Row(children: [
+            Expanded(
+              child: Text('書類'),
+            ),
+            SizedBox(
+              width: context.appTheme.spacing.marginMedium,
+            ),
+            Expanded(
+              child: Text('発行日'),
+            ),
+            SizedBox(
+              width: context.appTheme.spacing.marginMedium,
+            ),
+            Expanded(
+              child: SizedBox(
+                width: context.appTheme.spacing.marginMedium,
+              ),
+            ),
+          ]),
+          Divider(),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Text(
+            '日本で必要',
+            style: context.textTheme.titleMedium,
+          ),
+          ReactiveForm(
+            formGroup: formGroup.control('required_in_japan') as FormGroup,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(child: Text('パスポート')),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      child: ReactiveDatePicker<DateTime>(
+                        formControlName: 'passport_file_upload_date',
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                        builder: (BuildContext context,
+                            ReactiveDatePickerDelegate<dynamic> picker,
+                            Widget? child) {
+                          return ReactiveTextField<DateTime>(
+                            formControlName: 'passport_file_upload_date',
+                            readOnly: true,
+                            onTap: (value) => picker.showPicker(),
+                            valueAccessor: DateTimeValueAccessor(
+                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                            ),
+                            onChanged: (value) {
+                              logger.d(value);
+                            },
+                            onSubmitted: (value) {
+                              logger.d(value);
+                            },
+                            decoration: const InputDecoration(
+                              suffixIcon: Icon(
+                                CupertinoIcons.calendar,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: SizedBox(
+                        width: context.appTheme.spacing.marginMedium,
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
+                  ],
+                ),
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+                Row(
+                  children: [
+                    Expanded(child: Text('身元保証書')),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      child: ReactiveDatePicker<DateTime>(
+                        formControlName: 'personal_reference_file_upload_date',
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                        builder: (BuildContext context,
+                            ReactiveDatePickerDelegate<dynamic> picker,
+                            Widget? child) {
+                          return ReactiveTextField<DateTime>(
+                            formControlName:
+                                'personal_reference_file_upload_date',
+                            readOnly: true,
+                            onTap: (value) => picker.showPicker(),
+                            valueAccessor: DateTimeValueAccessor(
+                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                            ),
+                            onChanged: (value) {
+                              logger.d(value);
+                            },
+                            onSubmitted: (value) {
+                              logger.d(value);
+                            },
+                            decoration: const InputDecoration(
+                              suffixIcon: Icon(
+                                CupertinoIcons.calendar,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Checkbox(value: true, onChanged: (value) {}),
+                          Text('原本送付'),
+                          Text('（'),
+                          Checkbox(value: false, onChanged: (value) {}),
+                          Text('EMS'),
+                          Checkbox(value: true, onChanged: (value) {}),
+                          Text('Fedex'),
+                          Checkbox(value: false, onChanged: (value) {}),
+                          Text('その他'),
+                          Text('）'),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          Checkbox(value: true, onChanged: (value) {}),
+                          Text('PDF送付'),
+                        ],
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
+                  ],
+                ),
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+                Row(
+                  children: [
+                    Expanded(child: Text('治療予定表')),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      child: ReactiveDatePicker<DateTime>(
+                        formControlName: 'treatment_schedule_file_upload_date',
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                        builder: (BuildContext context,
+                            ReactiveDatePickerDelegate<dynamic> picker,
+                            Widget? child) {
+                          return ReactiveTextField<DateTime>(
+                            formControlName:
+                                'treatment_schedule_file_upload_date',
+                            readOnly: true,
+                            onTap: (value) => picker.showPicker(),
+                            valueAccessor: DateTimeValueAccessor(
+                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                            ),
+                            onChanged: (value) {
+                              logger.d(value);
+                            },
+                            onSubmitted: (value) {
+                              logger.d(value);
+                            },
+                            decoration: const InputDecoration(
+                              suffixIcon: Icon(
+                                CupertinoIcons.calendar,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: SizedBox(
+                        width: context.appTheme.spacing.marginMedium,
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
+                  ],
+                ),
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+                Row(
+                  children: [
+                    Expanded(child: Text('理由書')),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      child: ReactiveDatePicker<DateTime>(
+                        formControlName: 'statement_reasons_file_upload_date',
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                        builder: (BuildContext context,
+                            ReactiveDatePickerDelegate<dynamic> picker,
+                            Widget? child) {
+                          return ReactiveTextField<DateTime>(
+                            formControlName:
+                                'statement_reasons_file_upload_date',
+                            readOnly: true,
+                            onTap: (value) => picker.showPicker(),
+                            valueAccessor: DateTimeValueAccessor(
+                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                            ),
+                            onChanged: (value) {
+                              logger.d(value);
+                            },
+                            onSubmitted: (value) {
+                              logger.d(value);
+                            },
+                            decoration: const InputDecoration(
+                              suffixIcon: Icon(
+                                CupertinoIcons.calendar,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: SizedBox(
+                        width: context.appTheme.spacing.marginMedium,
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
+                  ],
+                ),
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+                Row(
+                  children: [
+                    Expanded(child: Text('同行者リスト')),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      child: ReactiveDatePicker<DateTime>(
+                        formControlName:
+                            'accompanying_persons_list_file_upload_date',
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                        builder: (BuildContext context,
+                            ReactiveDatePickerDelegate<dynamic> picker,
+                            Widget? child) {
+                          return ReactiveTextField<DateTime>(
+                            formControlName:
+                                'accompanying_persons_list_file_upload_date',
+                            readOnly: true,
+                            onTap: (value) => picker.showPicker(),
+                            valueAccessor: DateTimeValueAccessor(
+                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                            ),
+                            onChanged: (value) {
+                              logger.d(value);
+                            },
+                            onSubmitted: (value) {
+                              logger.d(value);
+                            },
+                            decoration: const InputDecoration(
+                              suffixIcon: Icon(
+                                CupertinoIcons.calendar,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: SizedBox(
+                        width: context.appTheme.spacing.marginMedium,
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
+                  ],
+                ),
+              ],
+            ),
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Text(
+            'ビザ取得後に必要なもの',
+            style: context.textTheme.titleMedium,
+          ),
+          ReactiveForm(
+            formGroup: formGroup.control('required_in_japan') as FormGroup,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Row(
+                  children: [
+                    Expanded(child: Text('ビザのページ')),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      child: ReactiveDatePicker<DateTime>(
+                        formControlName: 'visa_page_file_upload_date',
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                        builder: (BuildContext context,
+                            ReactiveDatePickerDelegate<dynamic> picker,
+                            Widget? child) {
+                          return ReactiveTextField<DateTime>(
+                            formControlName: 'visa_page_file_upload_date',
+                            readOnly: true,
+                            onTap: (value) => picker.showPicker(),
+                            valueAccessor: DateTimeValueAccessor(
+                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                            ),
+                            onChanged: (value) {
+                              logger.d(value);
+                            },
+                            onSubmitted: (value) {
+                              logger.d(value);
+                            },
+                            decoration: const InputDecoration(
+                              suffixIcon: Icon(
+                                CupertinoIcons.calendar,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: SizedBox(
+                        width: context.appTheme.spacing.marginMedium,
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
+                  ],
+                ),
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+                Row(
+                  children: [
+                    Expanded(child: Text('上陸許可証')),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      child: ReactiveDatePicker<DateTime>(
+                        formControlName: 'landing_permit_file_upload_date',
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                        builder: (BuildContext context,
+                            ReactiveDatePickerDelegate<dynamic> picker,
+                            Widget? child) {
+                          return ReactiveTextField<DateTime>(
+                            formControlName: 'landing_permit_file_upload_date',
+                            readOnly: true,
+                            onTap: (value) => picker.showPicker(),
+                            valueAccessor: DateTimeValueAccessor(
+                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                            ),
+                            onChanged: (value) {
+                              logger.d(value);
+                            },
+                            onSubmitted: (value) {
+                              logger.d(value);
+                            },
+                            decoration: const InputDecoration(
+                              suffixIcon: Icon(
+                                CupertinoIcons.calendar,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: SizedBox(
+                        width: context.appTheme.spacing.marginMedium,
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
+                  ],
+                ),
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.add_circle,
+                      color: context.appTheme.primaryColor,
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginSmall,
+                    ),
+                    Text(
+                      '追加',
+                      style: TextStyle(color: context.appTheme.primaryColor),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+                Row(
+                  children: [
+                    Expanded(child: Text('来日時の飛行機チケット')),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      child: ReactiveDatePicker<DateTime>(
+                        formControlName:
+                            'airline_ticke_arrival_japan_file_upload_date',
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                        builder: (BuildContext context,
+                            ReactiveDatePickerDelegate<dynamic> picker,
+                            Widget? child) {
+                          return ReactiveTextField<DateTime>(
+                            formControlName:
+                                'airline_ticke_arrival_japan_file_upload_date',
+                            readOnly: true,
+                            onTap: (value) => picker.showPicker(),
+                            valueAccessor: DateTimeValueAccessor(
+                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                            ),
+                            onChanged: (value) {
+                              logger.d(value);
+                            },
+                            onSubmitted: (value) {
+                              logger.d(value);
+                            },
+                            decoration: const InputDecoration(
+                              suffixIcon: Icon(
+                                CupertinoIcons.calendar,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: SizedBox(
+                        width: context.appTheme.spacing.marginMedium,
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
+                  ],
+                ),
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.add_circle,
+                      color: context.appTheme.primaryColor,
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginSmall,
+                    ),
+                    Text(
+                      '追加',
+                      style: TextStyle(color: context.appTheme.primaryColor),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+                Row(
+                  children: [
+                    Expanded(child: Text('帰国時の飛行機チケット')),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      child: ReactiveDatePicker<DateTime>(
+                        formControlName:
+                            'airline_ticket_return_japan_file_upload_date',
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                        builder: (BuildContext context,
+                            ReactiveDatePickerDelegate<dynamic> picker,
+                            Widget? child) {
+                          return ReactiveTextField<DateTime>(
+                            formControlName:
+                                'airline_ticket_return_japan_file_upload_date',
+                            readOnly: true,
+                            onTap: (value) => picker.showPicker(),
+                            valueAccessor: DateTimeValueAccessor(
+                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                            ),
+                            onChanged: (value) {
+                              logger.d(value);
+                            },
+                            onSubmitted: (value) {
+                              logger.d(value);
+                            },
+                            decoration: const InputDecoration(
+                              suffixIcon: Icon(
+                                CupertinoIcons.calendar,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: SizedBox(
+                        width: context.appTheme.spacing.marginMedium,
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
+                  ],
+                ),
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.add_circle,
+                      color: context.appTheme.primaryColor,
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginSmall,
+                    ),
+                    Text(
+                      '追加',
+                      style: TextStyle(color: context.appTheme.primaryColor),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+                Row(
+                  children: [
+                    Expanded(child: Text('帰国時のボーディングパス')),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      child: ReactiveDatePicker<DateTime>(
+                        formControlName:
+                            'boarding_pass_returning_file_upload_date',
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                        builder: (BuildContext context,
+                            ReactiveDatePickerDelegate<dynamic> picker,
+                            Widget? child) {
+                          return ReactiveTextField<DateTime>(
+                            formControlName:
+                                'boarding_pass_returning_file_upload_date',
+                            readOnly: true,
+                            onTap: (value) => picker.showPicker(),
+                            valueAccessor: DateTimeValueAccessor(
+                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                            ),
+                            onChanged: (value) {
+                              logger.d(value);
+                            },
+                            onSubmitted: (value) {
+                              logger.d(value);
+                            },
+                            decoration: const InputDecoration(
+                              suffixIcon: Icon(
+                                CupertinoIcons.calendar,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: SizedBox(
+                        width: context.appTheme.spacing.marginMedium,
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
+                  ],
+                ),
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.add_circle,
+                      color: context.appTheme.primaryColor,
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginSmall,
+                    ),
+                    Text(
+                      '追加',
+                      style: TextStyle(color: context.appTheme.primaryColor),
+                    )
+                  ],
+                ),
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+                Row(
+                  children: [
+                    Expanded(child: Text('在留資格認定証明書')),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      child: ReactiveDatePicker<DateTime>(
+                        formControlName:
+                            'certificate_eligibility_file_upload_date',
+                        firstDate: DateTime(1900),
+                        lastDate: DateTime.now(),
+                        builder: (BuildContext context,
+                            ReactiveDatePickerDelegate<dynamic> picker,
+                            Widget? child) {
+                          return ReactiveTextField<DateTime>(
+                            formControlName:
+                                'certificate_eligibility_file_upload_date',
+                            readOnly: true,
+                            onTap: (value) => picker.showPicker(),
+                            valueAccessor: DateTimeValueAccessor(
+                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                            ),
+                            onChanged: (value) {
+                              logger.d(value);
+                            },
+                            onSubmitted: (value) {
+                              logger.d(value);
+                            },
+                            decoration: const InputDecoration(
+                              suffixIcon: Icon(
+                                CupertinoIcons.calendar,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: SizedBox(
+                        width: context.appTheme.spacing.marginMedium,
+                      ),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
+                  ],
                 ),
               ],
             ),
