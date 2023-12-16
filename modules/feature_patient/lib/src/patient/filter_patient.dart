@@ -312,7 +312,7 @@ class PatientFilter extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 16),
-                        FilledButton(
+                        ElevatedButton(
                           onPressed: () {},
                           child: Text(context.l10n.actionSearch),
                         ),

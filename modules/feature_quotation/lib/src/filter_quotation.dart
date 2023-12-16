@@ -336,7 +336,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
                           ),
                         ),
                         const SizedBox(width: 16),
-                        FilledButton(
+                        ElevatedButton(
                           onPressed: () {},
                           child: Text(context.l10n.actionSearch),
                         ),

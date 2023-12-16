@@ -109,7 +109,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   const ChangeLanguageWidget(),
                   ReactiveFormConsumer(
                     builder: (context, form, _) {
-                      return FilledButton(
+                      return ElevatedButton(
                         onPressed: model.loginData.loading
                             ? null
                             : () => onSubmit(formGroup, model),

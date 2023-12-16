@@ -206,6 +206,7 @@ class AppThemeData {
       iconTheme: IconThemeData(color: iconColor),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white,
           backgroundColor: primaryColor,
           shadowColor: const Color.fromRGBO(230, 172, 13, 0.2),
           padding: EdgeInsets.symmetric(
@@ -224,8 +225,12 @@ class AppThemeData {
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          backgroundColor: Colors.white,
-          padding: EdgeInsets.symmetric(vertical: spacing.buttonVertical),
+          foregroundColor: Colors.white,
+          backgroundColor: primaryColor,
+          padding: EdgeInsets.symmetric(
+            vertical: spacing.buttonVertical,
+            horizontal: spacing.buttonHorizontal,
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
@@ -233,12 +238,16 @@ class AppThemeData {
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: spacing.buttonVertical),
+          padding: EdgeInsets.symmetric(
+            vertical: spacing.buttonVertical,
+            horizontal: spacing.buttonHorizontal,
+          ),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.0),
           ),
           side: BorderSide(width: 2, color: primaryColor),
-          foregroundColor: typography.bodyTextColor,
+          foregroundColor: primaryColor,
+          backgroundColor: Colors.white,
         ),
       ),
       textButtonTheme: TextButtonThemeData(

@@ -69,7 +69,7 @@ FormGroup medicalVisaForm() => FormGroup({
 
         'accompanying_persons_list_file_upload_date': FormControl<DateTime>(),
         'accompanying_persons_list_file_upload': FormControl<String>(),
-        // ビザ取得後の必要なもの required after visa acquisition
+        // ビザ取得後に必要なもの required after obtaining a visa
         'visa_page_file_upload_date': FormControl<DateTime>(),
         'visa_page_file_upload': FormControl<String>(),
 
@@ -103,4 +103,54 @@ FormGroup medicalVisaForm() => FormGroup({
         'others_file_upload_date': FormControl<DateTime>(),
         'others_file_upload': FormControl<String>(),
       }),
+      'addition': FormGroup({
+        'date_landing_permit': FormControl<DateTime>(),
+        'date_visa_expiration': FormControl<DateTime>(),
+        'date_entry_into_japan': FormControl<DateTime>(),
+        'date_entry_from_japan': FormControl<DateTime>(),
+        'departure_entry': FormControl<String>(),
+        'arrival_entry': FormControl<String>(),
+        'flight_number_entry': FormControl<String>(),
+        'departure_time_entry': FormControl<String>(),
+        'arrival_time_entry': FormControl<String>(),
+        'departure_departure': FormControl<String>(),
+        'arrival_departure': FormControl<String>(),
+        'flight_number_departure': FormControl<String>(),
+        'departure_time_departure': FormControl<String>(),
+        'arrival_time_departure': FormControl<String>(),
+        'flight_seat_numbe_departurer': FormControl<String>(),
+        'remarks': FormControl<String>(),
+      }),
+      // Withdrawal of visa
+      'withdrawal_of_visa': FormGroup({
+        'subject_to_visa_withdrawal': FormControl<bool>(),
+        'death_or_occurrence_event_date': FormControl<DateTime>(),
+        'remarks': FormControl<String>(),
+      }),
+
+  // 同行者
+  'companion_other': FormGroup({
+    'name_romaji': FormControl<String>(),
+    'date_birth': FormControl<DateTime>(),
+    'sex': FormControl<bool>(),
+    'address_area': FormControl<String>(),
+    'number_passport': FormControl<String>(),
+
+    'date_landing_permit': FormControl<DateTime>(),
+    'date_visa_expiration': FormControl<DateTime>(),
+    'date_entry_into_japan': FormControl<DateTime>(),
+    'date_entry_from_japan': FormControl<DateTime>(),
+    'departure_entry': FormControl<String>(),
+    'arrival_entry': FormControl<String>(),
+    'flight_number_entry': FormControl<String>(),
+    'departure_time_entry': FormControl<String>(),
+    'arrival_time_entry': FormControl<String>(),
+    'departure_departure': FormControl<String>(),
+    'arrival_departure': FormControl<String>(),
+    'flight_number_departure': FormControl<String>(),
+    'departure_time_departure': FormControl<String>(),
+    'arrival_time_departure': FormControl<String>(),
+    'flight_seat_numbe_departurer': FormControl<String>(),
+    'remarks': FormControl<String>(),
+  }),
     });

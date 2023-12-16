@@ -102,7 +102,7 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
           child: ValueListenableBuilder<int>(
             valueListenable: _selectedIndex,
             builder: (BuildContext context, int value, Widget? child) {
-              return Row(
+              return Wrap(
                 children: [
                   TabBarWidget(
                     selectedIndex: value,

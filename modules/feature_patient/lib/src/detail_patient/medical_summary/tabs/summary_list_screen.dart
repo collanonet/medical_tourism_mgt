@@ -116,22 +116,10 @@ class SummaryListScreen extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                foregroundColor: context.appTheme.primaryColor,
-                backgroundColor: Colors.white,
-                textStyle: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: context.appTheme.primaryColor),
-                side:
-                    BorderSide(color: context.appTheme.primaryColor, width: 2),
-              ),
+            OutlinedButton(
               onPressed: () {},
               child: const Text(
                 '削除する',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
               ),
             ),
             SizedBox(

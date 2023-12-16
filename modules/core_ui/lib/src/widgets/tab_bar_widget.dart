@@ -15,7 +15,7 @@ class TabBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Wrap(
-      alignment: WrapAlignment.spaceBetween,
+      alignment: WrapAlignment.start,
       runSpacing: context.appTheme.spacing.marginSmall,
       spacing: context.appTheme.spacing.marginSmall,
       crossAxisAlignment: WrapCrossAlignment.start,
