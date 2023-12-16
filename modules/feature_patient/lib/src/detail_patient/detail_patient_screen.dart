@@ -37,10 +37,10 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
     'ご提案', // proposal
     '医療ビザ', // medical visa
     '国内診療データ', // statement
-    '見積書', // billing
-    '請求書', // medical payment details
-    '精算履歴', // medical payment details
-    '診療報酬明細', // medical payment details
+    '見積書', // estimate
+    '請求書', // Statement
+    '精算履歴', // billing
+    '診療報酬明細', // billing details
   ];
 
   late List<Widget> pages;
