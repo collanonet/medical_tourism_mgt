@@ -20,7 +20,7 @@ class _MedicalVisaPageState extends State<MedicalVisaPage> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => GetIt.I<MedicalVisaModel>(),
+      create: (context) => GetIt.I<MedicalVisaModel>()..patients(),
       child: const LayoutView(
         selectedIndex: 1,
         page: MedicalVisaScreen(),
