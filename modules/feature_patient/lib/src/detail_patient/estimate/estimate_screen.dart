@@ -109,10 +109,30 @@ class _EstimateScreenState extends State<EstimateScreen> {
                       style: context.textTheme.bodySmall,
                     )),
                     Expanded(
-                        child: Text(
-                      '見積書',
-                      style: context.textTheme.bodySmall,
-                    )),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal:
+                                context.appTheme.spacing.marginExtraSmall,
+                                vertical: context.appTheme.spacing.marginExtraSmall,
+                              ),
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: Colors.red,
+                                ),
+                                borderRadius: BorderRadius.circular(
+                                    context.appTheme.spacing.borderRadiusMedium),
+                              ),
+                              child: Text(
+                                '見積書',
+                                style: context.textTheme.bodySmall?.copyWith(
+                                  color: Colors.red,
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
                     Expanded(
                         child: Text(
                       '大瀚人力资源集团',

@@ -45,14 +45,17 @@ class _BillingScreenState extends State<BillingScreen> {
                     ),
                     child: Row(
                       children: [
-                        Text(
-                          '預かり金（治療費）',
-                          style: context.textTheme.titleMedium,
+                        Expanded(
+                          child: Text(
+                            '預かり金（治療費）',
+                            style: context.textTheme.titleMedium,
+                          ),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
-                        Expanded(child: Text('日本円（税込）')),
+                        Expanded(
+                            flex: 2,child: Text('日本円（税込）')),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
@@ -84,14 +87,17 @@ class _BillingScreenState extends State<BillingScreen> {
                     ),
                     child: Row(
                       children: [
-                        Text(
-                          '精算金（診療報酬明細書）',
-                          style: context.textTheme.titleMedium,
+                        Expanded(
+                          child: Text(
+                            '精算金（診療報酬明細書）',
+                            style: context.textTheme.titleMedium,
+                          ),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
-                        Expanded(child: Text('日本円（税込）')),
+                        Expanded(
+                            flex: 2,child: Text('日本円（税込）')),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
@@ -123,14 +129,18 @@ class _BillingScreenState extends State<BillingScreen> {
                     ),
                     child: Row(
                       children: [
-                        Text(
-                          '残金',
-                          style: context.textTheme.titleMedium,
+                        Expanded(
+                          child: Text(
+                            '残金',
+                            style: context.textTheme.titleMedium,
+                          ),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
-                        Expanded(child: Text('日本円（税込）')),
+                        Expanded(
+                            flex: 2,
+                            child: Text('日本円（税込）')),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
