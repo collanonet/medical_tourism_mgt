@@ -2,29 +2,25 @@ import 'package:core_l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup formFilterPatient() => FormGroup(
+FormGroup formFilterMedicalVisa() => FormGroup(
       {
         'patient_name': FormControl<String>(
           value: '',
         ),
-        'agent_company_name': FormControl<String>(
+        'visa': FormControl<String>(
           value: '',
         ),
-        'hospital_name': FormControl<String>(
+        'report': FormControl<String>(
           value: '',
         ),
-        'classification': FormControl<String>(
+        'subjects_withdrawal': FormControl<String>(
           value: '',
         ),
-        'sales_representative': FormControl<String>(
+        'refinement_date': FormControl<String>(
           value: '',
         ),
-        'entry_date_from': FormControl<DateTime>(),
-        'entry_date_to': FormControl<DateTime>(),
-        'examination_date_from': FormControl<DateTime>(),
-        'examination_date_to': FormControl<DateTime>(),
-        'return_date_from': FormControl<DateTime>(),
-        'return_date_to': FormControl<DateTime>(),
+        'period_from': FormControl<DateTime>(),
+        'period_to': FormControl<DateTime>(),
       },
     );
 
