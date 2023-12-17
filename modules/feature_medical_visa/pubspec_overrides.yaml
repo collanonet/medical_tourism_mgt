@@ -18,4 +18,8 @@ dependency_overrides:
     path: ../data_medical_visa
   feature_auth:
     path: ../feature_auth
+  data_patient:
+    path: ../data_patient
+  feature_patient:
+    path: ../feature_patient
 

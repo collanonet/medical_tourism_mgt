@@ -26,7 +26,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
         return ReactiveFormConfig(
           validationMessages: validationMessagesFilterPatient(context),
           child: ReactiveFormBuilder(
-            form: () => formFilterPatient(),
+            form: () => formFilterHospital(),
             builder: (context, formGroup, child) {
               return Container(
                 decoration: BoxDecoration(
@@ -46,42 +46,58 @@ class _HospitalFilterState extends State<HospitalFilter> {
                     Row(
                       children: [
                         Expanded(
-                          flex: 4,
-                          child: ReactiveTextField(
-                            formControlName: 'patient_name',
-                            decoration: InputDecoration(
-                              label: Text(
-                                context.l10n.labelPatientName,
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          flex: 4,
-                          child: ReactiveTextField(
-                            formControlName: 'agent_company_name',
-                            decoration: InputDecoration(
-                              label: Text(
-                                '査証',
-                              ),
-                            ),
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          flex: 4,
                           child: ReactiveTextField(
                             formControlName: 'hospital_name',
                             decoration: InputDecoration(
                               label: Text(
-                                '報告書',
+                                '病院名',
                               ),
                             ),
                           ),
                         ),
                         const SizedBox(width: 16),
-                        // 1 checkbok and text widget
+                        Expanded(
+                          child: ReactiveTextField(
+                            formControlName: 'type',
+                            decoration: InputDecoration(
+                              label: Text(
+                                '種別',
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: ReactiveTextField(
+                            formControlName: 'keyword',
+                            decoration: InputDecoration(
+                              label: Text(
+                                'エリア',
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: ReactiveTextField(
+                            formControlName: 'r_have',
+                            decoration: InputDecoration(
+                              label: Text(
+                                'Rあり',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16),
+                    Text(
+                      '病院種別',
+                    ),
+                    const SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
                         Checkbox(
                             activeColor: Theme.of(context).primaryColor,
                             checkColor: Colors.white,
@@ -97,251 +113,68 @@ class _HospitalFilterState extends State<HospitalFilter> {
                                 _check = value!;
                               });
                             }),
-                        Text('取下対象者')
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 4,
-                          child: ReactiveTextField(
-                            formControlName: 'classification',
-                            decoration: InputDecoration(
-                              label: Text(
-                                context.l10n.labelClassification,
+                        Text('取下対象者'),
+                        SizedBox(
+                          width: context.appTheme.spacing.marginMedium,
+                        ),
+                        Checkbox(
+                            activeColor: Theme.of(context).primaryColor,
+                            checkColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              side: BorderSide(
+                                color: Colors.grey,
                               ),
                             ),
-                          ),
+                            value: _check,
+                            onChanged: (value) {
+                              setState(() {
+                                _check = value!;
+                              });
+                            }),
+                        Text('国公立病院'),
+                        SizedBox(
+                          width: context.appTheme.spacing.marginMedium,
                         ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          flex: 4,
-                          child: ReactiveTextField(
-                            formControlName: 'sales_representative',
-                            decoration: InputDecoration(
-                              label: Text(
-                                context.l10n.labelSalesRepresentative,
+                        Checkbox(
+                            activeColor: Theme.of(context).primaryColor,
+                            checkColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              side: BorderSide(
+                                color: Colors.grey,
                               ),
                             ),
-                          ),
+                            value: _check,
+                            onChanged: (value) {
+                              setState(() {
+                                _check = value!;
+                              });
+                            }),
+                        Text('私立病院'),
+                        SizedBox(
+                          width: context.appTheme.spacing.marginMedium,
                         ),
-                        const SizedBox(width: 16),
-                        const Spacer(flex: 4)
+                        Checkbox(
+                            activeColor: Theme.of(context).primaryColor,
+                            checkColor: Colors.white,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              side: BorderSide(
+                                color: Colors.grey,
+                              ),
+                            ),
+                            value: _check,
+                            onChanged: (value) {
+                              setState(() {
+                                _check = value!;
+                              });
+                            }),
+                        Text('クリニック'),
+                        Spacer(),
+                        ElevatedButton(onPressed: () {}, child: Text('検索')),
                       ],
                     ),
-                    const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 4,
-                          child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'entry_date_from',
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(3000),
-                            builder: (BuildContext context,
-                                ReactiveDatePickerDelegate<dynamic> picker,
-                                Widget? child) {
-                              return ReactiveTextField<DateTime>(
-                                formControlName: 'entry_date_from',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    context.l10n.labelEntryDateFrom,
-                                  ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 4),
-                          child: Text('〜'),
-                        ),
-                        Expanded(
-                          flex: 4,
-                          child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'entry_date_to',
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(3000),
-                            builder: (BuildContext context,
-                                ReactiveDatePickerDelegate<dynamic> picker,
-                                Widget? child) {
-                              return ReactiveTextField<DateTime>(
-                                formControlName: 'entry_date_to',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    context.l10n.labelEntryDateTo,
-                                  ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          flex: 4,
-                          child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'examination_date_from',
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(3000),
-                            builder: (BuildContext context,
-                                ReactiveDatePickerDelegate<dynamic> picker,
-                                Widget? child) {
-                              return ReactiveTextField<DateTime>(
-                                formControlName: 'examination_date_from',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    context.l10n.labelExaminationDateFrom,
-                                  ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 4),
-                          child: Text('〜'),
-                        ),
-                        Expanded(
-                          flex: 4,
-                          child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'examination_date_to',
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(3000),
-                            builder: (BuildContext context,
-                                ReactiveDatePickerDelegate<dynamic> picker,
-                                Widget? child) {
-                              return ReactiveTextField<DateTime>(
-                                formControlName: 'examination_date_to',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    context.l10n.labelExaminationDateTo,
-                                  ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        Expanded(
-                          flex: 4,
-                          child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'return_date_from',
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(3000),
-                            builder: (BuildContext context,
-                                ReactiveDatePickerDelegate<dynamic> picker,
-                                Widget? child) {
-                              return ReactiveTextField<DateTime>(
-                                formControlName: 'return_date_from',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    context.l10n.labelReturnDateFrom,
-                                  ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 4),
-                          child: Text('〜'),
-                        ),
-                        Expanded(
-                          flex: 4,
-                          child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'return_date_to',
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(3000),
-                            builder: (BuildContext context,
-                                ReactiveDatePickerDelegate<dynamic> picker,
-                                Widget? child) {
-                              return ReactiveTextField<DateTime>(
-                                formControlName: 'return_date_to',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    context.l10n.labelReturnDateTo,
-                                  ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              );
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 16),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        OutlinedButton(
-                          onPressed: () {
-                            formGroup.reset();
-                          },
-                          child: Text(
-                            context.l10n.actionClear,
-                          ),
-                        ),
-                        const SizedBox(width: 16),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: Text(context.l10n.actionSearch),
-                        ),
-                      ],
-                    )
                   ],
                 ),
               );

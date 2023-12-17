@@ -2,7 +2,6 @@ import 'package:auto_route/auto_route.dart';
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:data_table_2/data_table_2.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../../feature_patient.dart';
