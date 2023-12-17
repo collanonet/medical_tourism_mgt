@@ -109,6 +109,10 @@ class SideBarMenu extends StatelessWidget {
                                 ? ArrowBackgroundPainter()
                                 : null,
                             child: ListTile(
+                              contentPadding: const EdgeInsets.symmetric(
+                                horizontal: 16,
+                                vertical: 0,
+                              ),
                               dense: true,
                               title: Text(
                                 menus[index].title,

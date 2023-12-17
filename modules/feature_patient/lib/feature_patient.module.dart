@@ -26,16 +26,17 @@ import 'src/detail_patient/medical_summary/tabs/normal_summary_model.dart'
 import 'src/detail_patient/medical_summary/tabs/pick_medical_data_file_model.dart'
     as _i17;
 import 'src/detail_patient/medical_summary/tabs/short_summary_model.dart'
-    as _i20;
+    as _i21;
 import 'src/detail_patient/medical_summary/tabs/summary_list_model.dart'
-    as _i22;
+    as _i23;
 import 'src/detail_patient/medical_visa/medical_visa_model.dart' as _i12;
 import 'src/detail_patient/overseas_medical_data/overseas_medical_data_model.dart'
     as _i14;
 import 'src/detail_patient/patient_response_data/patient_response_model.dart'
     as _i16;
 import 'src/detail_patient/progress_list/progress_list_model.dart' as _i19;
-import 'src/detail_patient/statement/statement_model.dart' as _i21;
+import 'src/detail_patient/proposal/proposal_model.dart' as _i20;
+import 'src/detail_patient/statement/statement_model.dart' as _i22;
 import 'src/patient/patient_model.dart' as _i15;
 import 'src/pre_patient/pre_patient_model.dart' as _i18;
 
@@ -78,11 +79,13 @@ class FeaturePatientPackageModule extends _i1.MicroPackageModule {
         _i18.PrePatientModel(patientRepository: gh<_i4.PatientRepository>()));
     gh.factory<_i19.ProgressListModel>(() =>
         _i19.ProgressListModel(patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i20.ShortSummaryModel>(() =>
-        _i20.ShortSummaryModel(patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i21.StatementModel>(() =>
-        _i21.StatementModel(patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i22.SummaryListModel>(() =>
-        _i22.SummaryListModel(patientRepository: gh<_i4.PatientRepository>()));
+    gh.factory<_i20.ProposalModel>(() =>
+        _i20.ProposalModel(patientRepository: gh<_i4.PatientRepository>()));
+    gh.factory<_i21.ShortSummaryModel>(() =>
+        _i21.ShortSummaryModel(patientRepository: gh<_i4.PatientRepository>()));
+    gh.factory<_i22.StatementModel>(() =>
+        _i22.StatementModel(patientRepository: gh<_i4.PatientRepository>()));
+    gh.factory<_i23.SummaryListModel>(() =>
+        _i23.SummaryListModel(patientRepository: gh<_i4.PatientRepository>()));
   }
 }

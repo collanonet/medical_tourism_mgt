@@ -17,8 +17,8 @@ class DomesticMedicalDataPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) =>
-      GetIt.I<DomesticMedicalDataModel>()..initialData(patient: patient),
-      child: const BDomesticMedicalDataScreen(),
+          GetIt.I<DomesticMedicalDataModel>()..initialData(patient: patient),
+      child: const DomesticMedicalDataScreen(),
     );
   }
 }

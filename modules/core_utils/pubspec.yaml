@@ -15,16 +15,16 @@ dependencies:
   core_ui: 0.0.1-alpha.1
   # packages
   equatable: ^2.0.5
-  logger: ^1.4.0
+  logger: ^2.0.2+1
   url_launcher: ^6.1.12
-  file_picker: ^5.3.2
+  file_picker: ^6.1.1
   get_it: ^7.6.0
   image_picker: ^1.0.1
   image_cropper: ^5.0.0
   intl: ^0.18.0
   path_provider: ^2.0.15
   image_gallery_saver: ^2.0.3
-  geolocator: ^9.0.2
+  geolocator: ^10.1.0
   dio: ^5.1.0
   retrofit: ^4.0.1
   mask_text_input_formatter: ^2.4.0
@@ -33,7 +33,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
   mockito: ^5.0.16
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

@@ -33,6 +33,9 @@ scripts:
   pub:get:
     description: "Sync pub for all modules"
     run: melos exec -- \ fvm flutter pub get
+  pub:upgrade:
+    description: "Upgrade pub for all modules"
+    run: melos exec -- \ fvm flutter pub upgrade --major-versions
   pod:install:
     description: "Run pod install for iOS"
     run: |
