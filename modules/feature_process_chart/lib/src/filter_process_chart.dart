@@ -336,7 +336,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                           ),
                         ),
                         const SizedBox(width: 16),
-                        FilledButton(
+                        ElevatedButton(
                           onPressed: () {},
                           child: Text(context.l10n.actionSearch),
                         ),

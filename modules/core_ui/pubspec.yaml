@@ -20,7 +20,7 @@ dependencies:
   mask_text_input_formatter: ^2.4.0
   webview_flutter: ^4.2.2
   auto_route: ^7.7.0
-  google_fonts: ^5.1.0
+  google_fonts: ^6.1.0
   material_design_icons_flutter: ^7.0.7296
   widgetbook: ^3.1.0
   widgetbook_annotation: ^3.0.0
@@ -36,10 +36,10 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
   widgetbook_generator: ^3.0.0
   build_runner: ^2.4.6
-  icon_font_generator: ^3.2.0
+  icon_font_generator: ^4.0.0
 
 flutter:
 

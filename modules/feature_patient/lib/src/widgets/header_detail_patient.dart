@@ -71,7 +71,7 @@ class HeaderDetailPatient extends StatelessWidget {
                     SizedBox(
                       width: context.appTheme.spacing.marginSmall,
                     ),
-                    FilledButton.tonal(
+                    ElevatedButton(
                       onPressed: () {},
                       child: const Text('治療'),
                     ),
@@ -82,7 +82,7 @@ class HeaderDetailPatient extends StatelessWidget {
                     SizedBox(
                       width: context.appTheme.spacing.marginSmall,
                     ),
-                    FilledButton.tonal(
+                    ElevatedButton(
                       onPressed: () {},
                       child: const Text('医療ビザ'),
                     ),
@@ -93,7 +93,7 @@ class HeaderDetailPatient extends StatelessWidget {
                     SizedBox(
                       width: context.appTheme.spacing.marginSmall,
                     ),
-                    FilledButton.tonal(
+                    ElevatedButton(
                       onPressed: () {},
                       child: const Text('受注'),
                     ),

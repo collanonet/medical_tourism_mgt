@@ -1,15 +1,293 @@
+import 'package:core_l10n/l10n.dart';
+import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
-class BDomesticMedicalDataScreen extends StatefulWidget {
-  const BDomesticMedicalDataScreen({super.key});
+import '../overseas_medical_data/popup/detail_medical_oversea_data/detail_medical_oversea_data_screen.dart';
+import '../overseas_medical_data/popup/summary_medical_oversea_data_screen.dart';
+import 'create_domestic_medical_data_form.dart';
+import 'create_domestic_medical_data_screen.dart';
+
+class DomesticMedicalDataScreen extends StatefulWidget {
+  const DomesticMedicalDataScreen({super.key});
 
   @override
-  State<BDomesticMedicalDataScreen> createState() => _BDomesticMedicalDataScreenState();
+  State<DomesticMedicalDataScreen> createState() =>
+      _DomesticMedicalDataScreenState();
 }
 
-class _BDomesticMedicalDataScreenState extends State<BDomesticMedicalDataScreen> {
+class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          InkWell(
+            onTap: () {
+              showCreateWithFileDialog(context);
+            },
+            child: Container(
+              padding: EdgeInsets.all(
+                context.appTheme.spacing.marginExtraLarge,
+              ),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.all(Radius.circular(
+                  context.appTheme.spacing.borderRadiusMedium,
+                )),
+                border: Border.all(
+                  color: context.appTheme.primaryColor,
+                ),
+              ),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.copy_all_rounded,
+                    size: 50,
+                    color: context.appTheme.primaryColor,
+                  ),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginMedium,
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        '診療データをここにドラッグ＆ドロップ',
+                        style: context.textTheme.titleLarge?.copyWith(
+                          color: context.appTheme.primaryColor,
+                        ),
+                      ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          showCreateWithFileDialog(context);
+                        },
+                        child: const Text(
+                          'またはファイルを選択する',
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                        ),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Row(
+            children: [
+              Checkbox(
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4),
+                  side: BorderSide(color: Colors.grey),
+                ),
+                checkColor: Colors.white,
+                value: false,
+                onChanged: (value) {},
+              ),
+              Expanded(
+                  flex: 2,
+                  child: Text(
+                    '病院名',
+                    style: context.textTheme.bodySmall,
+                  )),
+              Expanded(
+                  child: Text(
+                'カテゴリ',
+                style: context.textTheme.bodySmall,
+              )),
+              Expanded(
+                  child: Text(
+                '書類名',
+                style: context.textTheme.bodySmall,
+              )),
+              Expanded(
+                  child: Text(
+                '発行日',
+                style: context.textTheme.bodySmall,
+              )),
+              Expanded(
+                  child: Text(
+                '共有URL発行',
+                style: context.textTheme.bodySmall,
+              )),
+              Expanded(
+                  child: Text(
+                '患者へ開示',
+                style: context.textTheme.bodySmall,
+              )),
+              Expanded(
+                  child: Text(
+                '他病院へ開示',
+                style: context.textTheme.bodySmall,
+              )),
+            ],
+          ),
+          Divider(),
+          ListView.separated(
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              itemBuilder: (BuildContext context, int index) => InkWell(
+                    onTap: () {},
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 4),
+                      child: Row(
+                        children: [
+                          Checkbox(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              side: BorderSide(color: Colors.grey),
+                            ),
+                            checkColor: Colors.white,
+                            value: false,
+                            onChanged: (value) {},
+                          ),
+                          Expanded(
+                              flex: 2,
+                              child: Row(
+                                children: [
+                                  Flexible(child: Text('りんくうメディカルクリニック')),
+                                ],
+                              )),
+                          const Expanded(child: Text('検査結果報告書')),
+                          Expanded(
+                              child: Text(
+                            'MRI ',
+                            style: context.textTheme.bodySmall?.copyWith(
+                                color: context.appTheme.primaryColor),
+                          )),
+                          Expanded(child: Text('2023/06/30')),
+                          Expanded(
+                              child: Icon(
+                            Icons.qr_code_scanner,
+                            color: context.appTheme.primaryColor,
+                          )),
+                          Expanded(child: Text('○')),
+                          Expanded(child: Text('×')),
+                        ],
+                      ),
+                    ),
+                  ),
+              separatorBuilder: (BuildContext context, int index) {
+                return Divider(
+                  thickness: 0.5,
+                );
+              },
+              itemCount: 10),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              OutlinedButton(
+                onPressed: () {},
+                child: const Text(
+                  '削除する',
+                ),
+              ),
+              SizedBox(
+                width: context.appTheme.spacing.marginMedium,
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text(
+                  '共有する',
+                ),
+              ),
+              SizedBox(
+                width: context.appTheme.spacing.marginMedium,
+              ),
+              ElevatedButton(
+                onPressed: () {
+                  showDetailMedicalOverseaDialog(context);
+                },
+                child: const Text(
+                  '閲覧する',
+                ),
+              ),
+              SizedBox(
+                width: context.appTheme.spacing.marginMedium,
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text(
+                  '印刷する',
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  void showCreateWithFileDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: ReactiveFormConfig(
+          validationMessages: <String, ValidationMessageFunction>{
+            ValidationMessage.required: (error) =>
+                context.l10n.mgsFieldRequired,
+          },
+          child: ReactiveFormBuilder(
+            form: () => createDomesticMedicalDataForm(),
+            builder: (context, formGroup, child) {
+              return const CreateDomesticMedicalDataScreen();
+            },
+          ),
+        ),
+        actions: [
+          OutlinedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('キャンセル'), // TODO: l10n 対応 (保存する) (save)
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('保存する'), // TODO: l10n 対応 (キャンセル) (cancel)
+          ),
+        ],
+      ),
+    );
+  }
+
+  void showDetailMedicalOverseaDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+          content: const DetailMedicalOverseaDataScreen(),
+          actions: [
+            OutlinedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('　閉じる　'), // TODO: l10n 対応 (閉じる) (close)
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('　共有する　'), // TODO: l10n 対応 (閉じる) (close)
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('　印刷する　'), // TODO: l10n 対応 (閉じる) (close)
+            ),
+          ]),
+    );
   }
 }

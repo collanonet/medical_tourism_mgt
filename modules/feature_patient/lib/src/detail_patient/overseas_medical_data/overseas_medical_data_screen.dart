@@ -394,19 +394,19 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
       builder: (context) => AlertDialog(
           content: const DetailMedicalOverseaDataScreen(),
           actions: [
-            TextButton(
+            OutlinedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
               child: Text('　閉じる　'), // TODO: l10n 対応 (閉じる) (close)
             ),
-            TextButton(
+            ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
               child: Text('　共有する　'), // TODO: l10n 対応 (閉じる) (close)
             ),
-            TextButton(
+            ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },

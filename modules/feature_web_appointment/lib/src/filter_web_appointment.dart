@@ -336,7 +336,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                           ),
                         ),
                         const SizedBox(width: 16),
-                        FilledButton(
+                        ElevatedButton(
                           onPressed: () {},
                           child: Text(context.l10n.actionSearch),
                         ),

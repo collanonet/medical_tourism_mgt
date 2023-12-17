@@ -3,6 +3,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'billing/billing_page.dart';
 import 'patient_response_data/patient_response_page.dart';
+import 'proposal/proposal_page.dart';
 import 'statement/statement_page.dart';
 import '../widgets/header_detail_patient.dart';
 import 'package:flutter/material.dart';
@@ -31,15 +32,15 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
     '基本情報', // basic information
     '進捗一覧', // progress list
     '患者回答データ', // Patient Response Data
-    '海外診療データ', // medical summary
-    '診療サマリー', // medical visa
-    'ご提案', // domestic medical data
-    '医療ビザ', // estimate
+    '海外診療データ', // Overseas medical data
+    '診療サマリー', // Medical summary
+    'ご提案', // proposal
+    '医療ビザ', // medical visa
     '国内診療データ', // statement
-    '見積書', // billing
-    '請求書', // medical payment details
-    '精算履歴', // medical payment details
-    '診療報酬明細', // medical payment details
+    '見積書', // estimate
+    '請求書', // Statement
+    '精算履歴', // billing
+    '診療報酬明細', // billing details
   ];
 
   late List<Widget> pages;
@@ -63,6 +64,9 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
       MedicalSummaryPage(
         patient: widget.patient,
       ),
+      ProposalPage(
+        patient: widget.patient,
+      ),
       MedicalVisaPage(
         patient: widget.patient,
       ),
@@ -81,7 +85,6 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
       MedicalPaymentDetailsPage(
         patient: widget.patient,
       ),
-      Text('診療報酬明細'),
     ];
   }
 
@@ -90,6 +93,7 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const HeaderDetailPatient(),
         Padding(
@@ -99,7 +103,7 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
           child: ValueListenableBuilder<int>(
             valueListenable: _selectedIndex,
             builder: (BuildContext context, int value, Widget? child) {
-              return Row(
+              return Wrap(
                 children: [
                   TabBarWidget(
                     selectedIndex: value,

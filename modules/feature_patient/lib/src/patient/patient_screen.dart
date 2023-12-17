@@ -35,7 +35,23 @@ class _PatientScreenState extends State<PatientScreen> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  FilledButton(
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: context.appTheme.primaryColor,
+                      textStyle: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                      side: BorderSide(
+                          color: context.appTheme.primaryColor, width: 2),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(
+                            context.appTheme.spacing.borderRadiusMedium,
+                          ),
+                        ),
+                      ),
+                    ),
                     onPressed: () {
                       context.pushRoute(const PrePatientRoute());
                     },
@@ -103,7 +119,23 @@ class _PatientScreenState extends State<PatientScreen> {
                     },
                   ),
                   const SizedBox(width: 16),
-                  FilledButton(
+                  ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      foregroundColor: Colors.white,
+                      backgroundColor: context.appTheme.primaryColor,
+                      textStyle: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                      ),
+                      side: BorderSide(
+                          color: context.appTheme.primaryColor, width: 2),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(
+                            context.appTheme.spacing.borderRadiusMedium,
+                          ),
+                        ),
+                      ),
+                    ),
                     onPressed: () {},
                     child: Text(context.l10n.actionNewRegistration),
                   ),

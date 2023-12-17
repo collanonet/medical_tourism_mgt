@@ -25,7 +25,7 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<PrePatientModel>(builder: (context, model, _) {
-      if(model.postPatientData.data != null){
+      if (model.postPatientData.data != null) {
         context.pushRoute(
           DetailPatientRoute(
             patient: model.postPatientData.data,
@@ -163,7 +163,7 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                               )),
                               DataCell(Text('${item.nameOfDisease}')),
                               DataCell(item.isDeleted
-                                  ? FilledButton(
+                                  ? ElevatedButton(
                                       style: ButtonStyle(
                                         backgroundColor:
                                             MaterialStateProperty.all(
@@ -175,7 +175,7 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                                     )
                                   : Row(
                                       children: [
-                                        FilledButton(
+                                        ElevatedButton(
                                           onPressed: model.deletePrePatientData
                                                       .loading &&
                                                   model.prePatientId == item.id
@@ -298,7 +298,7 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                       //               )),
                       //               DataCell(Text(e.nameOfDisease)),
                       //               DataCell(e.isDeleted
-                      //                   ? FilledButton(
+                      //                   ? ElevatedButton(
                       //                       style: ButtonStyle(
                       //                         backgroundColor:
                       //                             MaterialStateProperty.all(
@@ -310,7 +310,7 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                       //                     )
                       //                   : Row(
                       //                       children: [
-                      //                         FilledButton(
+                      //                         ElevatedButton(
                       //                           onPressed: () {},
                       //                           child: Text(context
                       //                               .l10n.actionGoToRegister),

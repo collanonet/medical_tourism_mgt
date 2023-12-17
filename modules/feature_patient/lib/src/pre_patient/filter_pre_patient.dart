@@ -69,7 +69,7 @@ class PrePatientFilter extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
-                        FilledButton(
+                        ElevatedButton(
                           onPressed: () {
                             model.prePatients(
                               agents: formGroup.control('agents').value,
