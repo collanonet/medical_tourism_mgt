@@ -1,6 +1,8 @@
+import 'package:core_utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../feature_medical_visa.gm.dart';
 import 'filter_medical_visa.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:core_l10n/l10n.dart';
@@ -137,7 +139,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             var item = model.patientData.data?.items[index];
                             return RowTableData(
                               onTap: () {
-                                // Todo view detail
+                                context.router.push(const MedicalVisaDetailRoute());
                               },
                               cell: [
                                 Checkbox(

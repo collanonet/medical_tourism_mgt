@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../overseas_medical_data/popup/detail_medical_oversea_data/detail_medical_oversea_data_screen.dart';
-import '../overseas_medical_data/popup/summary_medical_oversea_data_screen.dart';
 import 'create_domestic_medical_data_form.dart';
 import 'create_domestic_medical_data_screen.dart';
 
