@@ -20,7 +20,7 @@ class _WebAppointmentPageState extends State<WebAppointmentPage> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => GetIt.I<WebAppointmentModel>(),
+      create: (context) => GetIt.I<WebAppointmentModel>()..patients(),
       child: const LayoutView(
         selectedIndex: 2,
         page: WebAppointmentScreen(),
