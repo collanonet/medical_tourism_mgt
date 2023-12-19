@@ -81,7 +81,7 @@ class AppThemeData {
     return AppThemeData(
       primaryBackgroundColor: const Color(0xffF0F3F5),
       secondaryBackgroundColor: Colors.white,
-      primaryColor: const Color(0xFF4DBBAA),
+      primaryColor: const Color(0xFF00C6C6),
       iconColor: Colors.black,
       brightness: Brightness.light,
       typography: const Typography(
@@ -114,7 +114,7 @@ class AppThemeData {
       segmentedTheme: const SegmentedTheme(
         selectedBackgroundColor: Colors.white,
         unselectedBackgroundColor: Color(0x36BEBEBE),
-        selectedTextColor: const Color(0xFF4DBBAA),
+        selectedTextColor: const Color(0xFF00C6C6),
         unselectedTextColor: Color(0xFF8E8E8E),
         minimumSize: Size.fromHeight(32.0),
         textStyle: TextStyle(
