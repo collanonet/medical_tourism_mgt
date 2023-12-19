@@ -18,3 +18,7 @@ dependency_overrides:
     path: ../data_web_appointment
   feature_auth:
     path: ../feature_auth
+  data_patient:
+    path: ../data_patient
+  feature_patient:
+    path: ../feature_patient
