@@ -194,5 +194,52 @@ class AppLocalizationsZh extends AppLocalizations {
   String get labelLogout => 'ログアウト';
 
   @override
-  String get changeLanguage => 'Please select a language';
+  String get changeLanguage => '请选择语言';
+}
+
+/// The translations for Chinese, as used in Taiwan (`zh_TW`).
+class AppLocalizationsZhTw extends AppLocalizationsZh {
+  AppLocalizationsZhTw(): super('zh_TW');
+
+  @override
+  String get labelPatient => '病人';
+
+  @override
+  String get labelChat => '聊天';
+
+  @override
+  String get labelMedicalVisaManagement => '醫療簽證';
+
+  @override
+  String get labelWebAppointment => '網上預訂';
+
+  @override
+  String get labelProcessChart => '流程圖';
+
+  @override
+  String get labelHospitals => '醫院';
+
+  @override
+  String get labelAgents => '代理人';
+
+  @override
+  String get labelQuotations => '語錄';
+
+  @override
+  String get labelInvoice => '發票';
+
+  @override
+  String get labelSalesManagement => '銷售量';
+
+  @override
+  String get labelReport => '報告';
+
+  @override
+  String get labelHelp => '幫助';
+
+  @override
+  String get labelCenterHeadquarters => '中心總部';
+
+  @override
+  String get changeLanguage => '請選擇語言';
 }

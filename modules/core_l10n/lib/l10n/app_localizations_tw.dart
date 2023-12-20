@@ -194,5 +194,5 @@ class AppLocalizationsTw extends AppLocalizations {
   String get labelLogout => 'ログアウト';
 
   @override
-  String get changeLanguage => 'Please select a language';
+  String get changeLanguage => '請選擇語言';
 }

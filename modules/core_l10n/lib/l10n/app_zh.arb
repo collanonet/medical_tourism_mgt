@@ -11,5 +11,6 @@
   "labelSalesManagement": "销售量",
   "labelReport": "报告",
   "labelHelp": "帮助",
-  "labelCenterHeadquarters": "中心总部"
+  "labelCenterHeadquarters": "中心总部",
+  "changeLanguage": "请选择语言"
 }

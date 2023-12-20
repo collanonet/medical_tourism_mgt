@@ -11,5 +11,6 @@
     "labelSalesManagement": "Sales",
     "labelReport": "Report",
     "labelHelp": "Help",
-    "labelCenterHeadquarters": "Center Headquarters"
+    "labelCenterHeadquarters": "Center Headquarters",
+    "changeLanguage": "Please select a language"
 }

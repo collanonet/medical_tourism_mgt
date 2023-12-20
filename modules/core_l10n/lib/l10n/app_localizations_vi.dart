@@ -194,5 +194,5 @@ class AppLocalizationsVi extends AppLocalizations {
   String get labelLogout => 'ログアウト';
 
   @override
-  String get changeLanguage => 'Please select a language';
+  String get changeLanguage => 'Vui lòng chọn một ngôn ngữ';
 }

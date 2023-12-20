@@ -23,6 +23,10 @@ class SideBarMenu extends StatelessWidget {
         route: Routes.patientsRoute,
       ),
       Menu(
+        title: context.l10n.labelChat,
+        route: Routes.chatRoute,
+      ),
+      Menu(
         title: context.l10n.labelMedicalVisaManagement,
         route: Routes.medicalVisasRoute,
       ),
