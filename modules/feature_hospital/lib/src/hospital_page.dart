@@ -1,7 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:base_view/base_view.dart';
 import 'package:core_utils/routes.dart';
-import 'package:feature_hospital/src/hospital_screen.dart';
+import 'hospital_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +22,7 @@ class _HospitalPageState extends State<HospitalPage> {
     return ChangeNotifierProvider(
       create: (context) => GetIt.I<HospitalModel>(),
       child: const LayoutView(
-        selectedIndex: 4,
+        selectedIndex: 5,
         page: HospitalScreen(),
       ),
     );

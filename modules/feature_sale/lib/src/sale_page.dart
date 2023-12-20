@@ -17,7 +17,7 @@ class _SalePageState extends State<SalePage> {
   @override
   Widget build(BuildContext context) {
     return const LayoutView(
-      selectedIndex: 8,
+      selectedIndex: 9,
       page: SaleScreen(),
     );
   }

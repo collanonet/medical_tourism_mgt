@@ -34,6 +34,10 @@ dependency_overrides:
     path: modules/data_process_chart
   data_web_appointment:
     path: modules/data_web_appointment
+  data_chats:
+    path: modules/data_chats
+  feature_chats:
+    path: modules/feature_chats
   feature_agent:
     path: modules/feature_agent
   feature_auth:

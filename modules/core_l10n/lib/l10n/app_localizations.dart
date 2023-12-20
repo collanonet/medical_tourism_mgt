@@ -6,6 +6,10 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart' as intl;
 
 import 'app_localizations_en.dart';
+import 'app_localizations_ja.dart';
+import 'app_localizations_tw.dart';
+import 'app_localizations_vi.dart';
+import 'app_localizations_zh.dart';
 
 /// Callers can lookup localized strings with an instance of AppLocalizations
 /// returned by `AppLocalizations.of(context)`.
@@ -88,384 +92,394 @@ abstract class AppLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
-    Locale('en')
+    Locale('en'),
+    Locale('ja'),
+    Locale('tw'),
+    Locale('vi'),
+    Locale('zh')
   ];
 
   /// No description provided for @titleAppJP.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'センター本部専用'**
   String get titleAppJP;
 
   /// No description provided for @errorUnknown.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'何かが間違っていた。'**
   String get errorUnknown;
 
   /// No description provided for @errorTimeout.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'時間切れ'**
   String get errorTimeout;
 
   /// No description provided for @errorConnection.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'接続の問題'**
   String get errorConnection;
 
   /// No description provided for @labelId.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'ID'**
   String get labelId;
 
   /// No description provided for @labelPassword.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'パスワード'**
   String get labelPassword;
 
   /// No description provided for @labelPleaseEnterYourInformation.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'入力してください'**
   String get labelPleaseEnterYourInformation;
 
   /// No description provided for @labelForgotPassword.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'パスワードをお忘れの方はこちら＞'**
   String get labelForgotPassword;
 
   /// No description provided for @mgsFieldRequired.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'フィールドは必須'**
   String get mgsFieldRequired;
 
   /// No description provided for @actionLogin.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'ログイン'**
   String get actionLogin;
 
   /// No description provided for @mgsRequireInputLogin.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'アカウントを入力してください'**
   String get mgsRequireInputLogin;
 
   /// No description provided for @labelPatient.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'患者'**
   String get labelPatient;
 
+  /// No description provided for @labelChat.
+  ///
+  /// In ja, this message translates to:
+  /// **'チャット'**
+  String get labelChat;
+
   /// No description provided for @labelMedicalVisaManagement.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'医療ビザ管理'**
   String get labelMedicalVisaManagement;
 
   /// No description provided for @labelWebAppointment.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'Web予約'**
   String get labelWebAppointment;
 
   /// No description provided for @labelProcessChart.
   ///
-  /// In en, this message translates to:
-  /// **'工程表'**
+  /// In ja, this message translates to:
+  /// **'行程表'**
   String get labelProcessChart;
 
   /// No description provided for @labelHospitals.
   ///
-  /// In en, this message translates to:
-  /// **'病院'**
+  /// In ja, this message translates to:
+  /// **'医療機関'**
   String get labelHospitals;
 
   /// No description provided for @labelAgents.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'エージェント'**
   String get labelAgents;
 
   /// No description provided for @labelQuotations.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'見積書'**
   String get labelQuotations;
 
   /// No description provided for @labelInvoice.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'請求書'**
   String get labelInvoice;
 
   /// No description provided for @labelSalesManagement.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'売上管理'**
   String get labelSalesManagement;
 
   /// No description provided for @labelReport.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'マスタ'**
   String get labelReport;
 
   /// No description provided for @labelHelp.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'ヘルプ'**
   String get labelHelp;
 
   /// No description provided for @labelCenterHeadquarters.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'センター本部専用'**
   String get labelCenterHeadquarters;
 
   /// No description provided for @labelPatientSearch.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'患者検索'**
   String get labelPatientSearch;
 
   /// No description provided for @labelPatientName.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'患者氏名'**
   String get labelPatientName;
 
   /// No description provided for @labelAgentCompanyName.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'エージェント会社名'**
   String get labelAgentCompanyName;
 
   /// No description provided for @labelHospitalName.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'病院名'**
   String get labelHospitalName;
 
   /// No description provided for @labelClassification.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'種別'**
   String get labelClassification;
 
   /// No description provided for @labelSalesRepresentative.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'営業担当者'**
   String get labelSalesRepresentative;
 
   /// No description provided for @labelEntryDateFrom.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'入国日（自）'**
   String get labelEntryDateFrom;
 
   /// No description provided for @labelEntryDateTo.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'入国日（至）'**
   String get labelEntryDateTo;
 
   /// No description provided for @labelExaminationDateFrom.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'受診日（自）'**
   String get labelExaminationDateFrom;
 
   /// No description provided for @labelExaminationDateTo.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'受診日（至）'**
   String get labelExaminationDateTo;
 
   /// No description provided for @labelReturnDateFrom.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'帰国日（自）'**
   String get labelReturnDateFrom;
 
   /// No description provided for @labelReturnDateTo.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'帰国日（至）'**
   String get labelReturnDateTo;
 
   /// No description provided for @actionClear.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'クリア'**
   String get actionClear;
 
   /// No description provided for @actionSearch.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'検索'**
   String get actionSearch;
 
   /// No description provided for @actionListOfPreMembers.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'プレ会員一覧'**
   String get actionListOfPreMembers;
 
   /// No description provided for @actionNewRegistration.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'新規登録'**
   String get actionNewRegistration;
 
   /// No description provided for @labelOrdersOnly.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'受注のみ'**
   String get labelOrdersOnly;
 
   /// No description provided for @labelAll.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'すべて'**
   String get labelAll;
 
   /// No description provided for @labelCXL.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'CXL'**
   String get labelCXL;
 
   /// No description provided for @labelAgentName.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'エージェント名'**
   String get labelAgentName;
 
   /// No description provided for @labelAgent.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'エージェント'**
   String get labelAgent;
 
   /// No description provided for @labelDateOfBirth.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'生年月日'**
   String get labelDateOfBirth;
 
   /// No description provided for @labelGender.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'性別'**
   String get labelGender;
 
   /// No description provided for @labelNationality.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'国籍'**
   String get labelNationality;
 
   /// No description provided for @labelNameOfaDisease.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'病名'**
   String get labelNameOfaDisease;
 
   /// No description provided for @labelWeChatPrePatientSearch.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'WeChatプレ患者検索'**
   String get labelWeChatPrePatientSearch;
 
   /// No description provided for @actionGoToRegister.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'本登録へ'**
   String get actionGoToRegister;
 
   /// No description provided for @actionDelete.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'削除する'**
   String get actionDelete;
 
   /// No description provided for @actionDeleted.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'削除済み'**
   String get actionDeleted;
 
   /// No description provided for @labelProgress.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'進捗'**
   String get labelProgress;
 
   /// No description provided for @labelCaseNumber.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'案件番号'**
   String get labelCaseNumber;
 
   /// No description provided for @labelEntryDate.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'入国日'**
   String get labelEntryDate;
 
   /// No description provided for @labelExaminationDate.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'診療日'**
   String get labelExaminationDate;
 
   /// No description provided for @labelReturnDate.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'帰国日'**
   String get labelReturnDate;
 
   /// No description provided for @labelSale.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'営業'**
   String get labelSale;
 
   /// No description provided for @labelStaffName.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'業務'**
   String get labelStaffName;
 
   /// No description provided for @labelAdmittedToHospital.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'受入病院'**
   String get labelAdmittedToHospital;
 
   /// No description provided for @labelNumberOfGroupMembers.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'グループ人数'**
   String get labelNumberOfGroupMembers;
 
   /// No description provided for @labelLogout.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'ログアウト'**
   String get labelLogout;
 
   /// No description provided for @changeLanguage.
   ///
-  /// In en, this message translates to:
+  /// In ja, this message translates to:
   /// **'Please select a language'**
   String get changeLanguage;
 }
@@ -479,7 +493,7 @@ class _AppLocalizationsDelegate extends LocalizationsDelegate<AppLocalizations> 
   }
 
   @override
-  bool isSupported(Locale locale) => <String>['en'].contains(locale.languageCode);
+  bool isSupported(Locale locale) => <String>['en', 'ja', 'tw', 'vi', 'zh'].contains(locale.languageCode);
 
   @override
   bool shouldReload(_AppLocalizationsDelegate old) => false;
@@ -491,6 +505,10 @@ AppLocalizations lookupAppLocalizations(Locale locale) {
   // Lookup logic when only language code is specified.
   switch (locale.languageCode) {
     case 'en': return AppLocalizationsEn();
+    case 'ja': return AppLocalizationsJa();
+    case 'tw': return AppLocalizationsTw();
+    case 'vi': return AppLocalizationsVi();
+    case 'zh': return AppLocalizationsZh();
   }
 
   throw FlutterError(

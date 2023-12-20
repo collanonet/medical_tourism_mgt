@@ -153,9 +153,15 @@ scripts:
   data_web_appointment:
     description: "Generate data_web_appointment"
     run: melos exec --scope="data_web_appointment" -- fvm dart run build_runner build --delete-conflicting-outputs
+  data_chats:
+    description: "Generate data_chats"
+    run: melos exec --scope="data_chats" -- fvm dart run build_runner build --delete-conflicting-outputs
   feature_agent:
     description: "Generate feature_agent"
     run: melos exec --scope="feature_agent" -- fvm dart run build_runner build --delete-conflicting-outputs
+  feature_chats:
+    description: "Generate feature_chats"
+    run: melos exec --scope="feature_chats" -- fvm dart run build_runner build --delete-conflicting-outputs
   feature_auth:
     description: "Generate feature_auth"
     run: melos exec --scope="feature_auth" -- fvm dart run build_runner build --delete-conflicting-outputs

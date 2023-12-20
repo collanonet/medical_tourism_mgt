@@ -38,40 +38,43 @@ class AppLocalizationsEn extends AppLocalizations {
   String get mgsRequireInputLogin => 'アカウントを入力してください';
 
   @override
-  String get labelPatient => '患者';
+  String get labelPatient => 'Patient';
 
   @override
-  String get labelMedicalVisaManagement => '医療ビザ管理';
+  String get labelChat => 'Chat';
 
   @override
-  String get labelWebAppointment => 'Web予約';
+  String get labelMedicalVisaManagement => 'Medical Visa';
 
   @override
-  String get labelProcessChart => '工程表';
+  String get labelWebAppointment => 'Web Reservation';
 
   @override
-  String get labelHospitals => '病院';
+  String get labelProcessChart => 'Process Chart';
 
   @override
-  String get labelAgents => 'エージェント';
+  String get labelHospitals => 'Hospitals';
 
   @override
-  String get labelQuotations => '見積書';
+  String get labelAgents => 'Agent';
 
   @override
-  String get labelInvoice => '請求書';
+  String get labelQuotations => 'Quotations';
 
   @override
-  String get labelSalesManagement => '売上管理';
+  String get labelInvoice => 'Invoice';
 
   @override
-  String get labelReport => 'マスタ';
+  String get labelSalesManagement => 'Sales';
 
   @override
-  String get labelHelp => 'ヘルプ';
+  String get labelReport => 'Report';
 
   @override
-  String get labelCenterHeadquarters => 'センター本部専用';
+  String get labelHelp => 'Help';
+
+  @override
+  String get labelCenterHeadquarters => 'Center Headquarters';
 
   @override
   String get labelPatientSearch => '患者検索';

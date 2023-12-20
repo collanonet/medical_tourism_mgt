@@ -1,6 +1,7 @@
 class Routes {
   static const processChartsRoute = 'ProcessChartsRoute';
   static const webAppointmentsRoute = 'WebAppointmentsRoute';
+  static const chatRoute = 'ChatRoute';
   static const agentsRoute = 'AgentsRoute';
   static const hospitalsRoute = 'HospitalsRoute';
   static const invoicesRoute = 'InvoicesRoute';

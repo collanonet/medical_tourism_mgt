@@ -1,0 +1,15 @@
+{
+  "labelPatient": "病人",
+  "labelChat": "聊天",
+  "labelMedicalVisaManagement": "医疗签证",
+  "labelWebAppointment": "网上预订",
+  "labelProcessChart": "流程图",
+  "labelHospitals": "医院",
+  "labelAgents": "代理人",
+  "labelQuotations": "语录",
+  "labelInvoice": "发票",
+  "labelSalesManagement": "销售量",
+  "labelReport": "报告",
+  "labelHelp": "帮助",
+  "labelCenterHeadquarters": "中心总部"
+}

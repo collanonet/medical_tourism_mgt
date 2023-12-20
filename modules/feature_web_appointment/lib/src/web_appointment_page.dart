@@ -22,7 +22,7 @@ class _WebAppointmentPageState extends State<WebAppointmentPage> {
     return ChangeNotifierProvider(
       create: (context) => GetIt.I<WebAppointmentModel>()..patients(),
       child: const LayoutView(
-        selectedIndex: 2,
+        selectedIndex: 3,
         page: WebAppointmentScreen(),
       ),
     );

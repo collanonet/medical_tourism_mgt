@@ -8,6 +8,7 @@
 // AppGenerator
 // **************************************************************************
 
-import 'package:widgetbook/widgetbook.dart';
+// ignore_for_file: no_leading_underscores_for_library_prefixes
+import 'package:widgetbook/widgetbook.dart' as _i1;
 
-final directories = <WidgetbookNode>[];
+final directories = <_i1.WidgetbookNode>[];

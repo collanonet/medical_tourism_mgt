@@ -22,7 +22,7 @@ class _MedicalVisaPageState extends State<MedicalVisaPage> {
     return ChangeNotifierProvider(
       create: (context) => GetIt.I<MedicalVisaModel>()..patients(),
       child: const LayoutView(
-        selectedIndex: 1,
+        selectedIndex: 2,
         page: MedicalVisaScreen(),
       ),
     );

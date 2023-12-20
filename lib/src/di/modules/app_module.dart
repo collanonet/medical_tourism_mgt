@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:feature_agent/feature_agent.gm.dart';
 import 'package:feature_auth/feature_auth.dart';
+import 'package:feature_chats/feature_chats.gm.dart';
 import 'package:feature_hospital/feature_hospital.gm.dart';
 import 'package:feature_invoice/feature_invoice.gm.dart';
 import 'package:feature_medical_visa/feature_medical_visa.gm.dart';
@@ -29,6 +30,7 @@ abstract class AppModule {
       policies: {
         LoginRoute.name: [PermissionRole.guest],
         AgentsRoute.name: [PermissionRole.user],
+        ChatRoute.name: [PermissionRole.user],
         HospitalsRoute.name: [PermissionRole.user],
         InvoicesRoute.name: [PermissionRole.user],
         MedicalVisasRoute.name: [PermissionRole.user],

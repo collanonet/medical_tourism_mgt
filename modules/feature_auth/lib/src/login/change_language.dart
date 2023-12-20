@@ -38,12 +38,12 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
                 // 日本語
                 TextButton(
                   onPressed: () {
-                    model.setLocale(const Locale('ja'));
+                    model.setLocale(const Locale('ja', 'JP'));
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      model.locale == const Locale('ja')
+                      model.locale == const Locale('ja', 'JP')
                           ? const Icon(Icons.check_circle_rounded)
                           : const Icon(Icons.circle_outlined),
                       Text('日本語'),
@@ -53,12 +53,12 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
                 //简体中文
                 TextButton(
                   onPressed: () {
-                    model.setLocale(const Locale('zh'));
+                    model.setLocale(const Locale('zh', 'CN'));
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      model.locale == const Locale('zh')
+                      model.locale == const Locale('zh', 'CN')
                           ? const Icon(Icons.check_circle_rounded)
                           : const Icon(Icons.circle_outlined),
                       Text('简体中文'),
@@ -69,12 +69,12 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
                 //繁体中文
                 TextButton(
                   onPressed: () {
-                    model.setLocale(const Locale('zh_HK'));
+                    model.setLocale(const Locale('zh', 'TW'));
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      model.locale == const Locale('zh_HK')
+                      model.locale == const Locale('zh', 'TW')
                           ? const Icon(Icons.check_circle_rounded)
                           : const Icon(Icons.circle_outlined),
                       Text('繁体中文'),
@@ -85,12 +85,12 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
                 //Tiếng Việt
                 TextButton(
                   onPressed: () {
-                    model.setLocale(const Locale('vi'));
+                    model.setLocale(const Locale('vi', 'VN'));
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      model.locale == const Locale('vi')
+                      model.locale == const Locale('vi', 'VN')
                           ? const Icon(Icons.check_circle_rounded)
                           : const Icon(Icons.circle_outlined),
                       Text('Tiếng Việt'),
@@ -100,12 +100,12 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
 
                 TextButton(
                   onPressed: () {
-                    model.setLocale(const Locale('en'));
+                    model.setLocale(const Locale('en', 'US'));
                   },
                   child: Row(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      model.locale == const Locale('en')
+                      model.locale == const Locale('en', 'US')
                           ? const Icon(Icons.check_circle_rounded)
                           : const Icon(Icons.circle_outlined),
                       Text('English'),

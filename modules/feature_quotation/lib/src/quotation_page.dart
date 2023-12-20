@@ -1,7 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:base_view/base_view.dart';
 import 'package:core_utils/routes.dart';
-import 'package:feature_quotation/src/quotation_screen.dart';
+import 'quotation_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +22,7 @@ class _QuotationPageState extends State<QuotationPage> {
     return ChangeNotifierProvider(
       create: (context) => GetIt.I<QuotationModel>(),
       child: const LayoutView(
-        selectedIndex: 6,
+        selectedIndex: 7,
         page: QuotationScreen(),
       ),
     );

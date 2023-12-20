@@ -1,6 +1,7 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:feature_agent/feature_agent.dart';
 import 'package:feature_auth/feature_auth.dart';
+import 'package:feature_chats/feature_chats.dart';
 import 'package:feature_hospital/feature_hospital.dart';
 import 'package:feature_invoice/feature_invoice.dart';
 import 'package:feature_medical_visa/feature_medical_visa.dart';
@@ -20,6 +21,7 @@ part 'app_router.gr.dart';
 @AutoRouterConfig(
   modules: [
     FeatureAuthRouterModule,
+    FeatureChatsRouterModule,
     FeatureAgentRouterModule,
     FeatureHospitalRouterModule,
     FeatureInvoiceRouterModule,

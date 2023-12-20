@@ -58,8 +58,10 @@ dependencies:
   data_report: 0.0.1-alpha.1
   data_process_chart: 0.0.1-alpha.1
   data_web_appointment: 0.0.1-alpha.1
+  data_chats: 0.0.1-alpha.1
 
   # Modules Feature
+  feature_chats: 0.0.1-alpha.1
   feature_process_chart: 0.0.1-alpha.1
   feature_web_appointment: 0.0.1-alpha.1
   feature_agent: 0.0.1-alpha.1

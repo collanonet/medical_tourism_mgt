@@ -16,7 +16,7 @@ class _InvoicePageState extends State<InvoicePage> {
   @override
   Widget build(BuildContext context) {
     return const LayoutView(
-      selectedIndex: 7,
+      selectedIndex: 8,
       page: InvoiceScreen(),
     );
   }
