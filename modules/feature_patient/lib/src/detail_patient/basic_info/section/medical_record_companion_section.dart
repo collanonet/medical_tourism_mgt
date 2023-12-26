@@ -1,4 +1,5 @@
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -108,7 +109,6 @@ class _MedicalRecordCompanionSectionState
                                             side: BorderSide(
                                               color: Colors.grey,
                                             ),
-
                                           ),
                                           value: currentForm
                                               .control('leader')
@@ -137,6 +137,12 @@ class _MedicalRecordCompanionSectionState
                                   ),
                                 ],
                               ),
+                              const Text(
+                                '氏名（ローマ字）',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               RowSeparated(
                                 separatorBuilder:
                                     (BuildContext context, int index) {
@@ -145,37 +151,191 @@ class _MedicalRecordCompanionSectionState
                                         context.appTheme.spacing.marginMedium,
                                   );
                                 },
-                                children:  [
+                                children: [
                                   Expanded(
                                     child: ReactiveTextField(
-                                      formControlName: 'nameInRomanized',
+                                      formControlName: 'familyNameRomanized',
                                       decoration: InputDecoration(
                                         label: Text(
-                                          '氏名（ローマ字）', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
+                                          'ファミリーネーム', // Todo: l10n 対応 (ファミリーネーム) (familyName)
                                         ),
                                       ),
                                     ),
                                   ),
                                   Expanded(
                                     child: ReactiveTextField(
-                                      formControlName: 'nameInChineseOrKanji',
+                                      formControlName: 'middleNameRomanized',
                                       decoration: InputDecoration(
                                         label: Text(
-                                          '氏名（中国語漢字）', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
+                                          'ミドルネーム', // Todo: l10n 対応 (ミドルネーム) (middleName)
                                         ),
                                       ),
                                     ),
                                   ),
                                   Expanded(
                                     child: ReactiveTextField(
-                                      formControlName: 'nameInJapaneseKanji',
+                                      formControlName: 'firstNameRomanized',
                                       decoration: InputDecoration(
                                         label: Text(
-                                          '氏名（日本語漢字）', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
+                                          'ファーストネーム', // Todo: l10n 対応 (ファーストネーム) (firstName)
                                         ),
                                       ),
                                     ),
                                   ),
+                                  Expanded(flex: 3, child: SizedBox())
+                                ],
+                              ),
+                              const Text(
+                                '氏名（中国語漢字/ベトナム語表記）',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              RowSeparated(
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  );
+                                },
+                                children: [
+                                  Expanded(
+                                    child: ReactiveTextField(
+                                      formControlName:
+                                          'familyNameChineseOrVietnamese',
+                                      decoration: InputDecoration(
+                                        label: Text(
+                                          'ファミリーネーム', // Todo: l10n 対応 (ファミリーネーム) (familyName)
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: ReactiveTextField(
+                                      formControlName:
+                                          'middleNameChineseOrVietnamese',
+                                      decoration: InputDecoration(
+                                        label: Text(
+                                          'ミドルネーム', // Todo: l10n 対応 (ミドルネーム) (middleName)
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: ReactiveTextField(
+                                      formControlName:
+                                          'firstNameChineseOrVietnamese',
+                                      decoration: InputDecoration(
+                                        label: Text(
+                                          'ファーストネーム', // Todo: l10n 対応 (ファーストネーム) (firstName)
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(flex: 3, child: SizedBox())
+                                ],
+                              ),
+                              const Text(
+                                '氏名（日本語漢字）※中国人のみ',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              RowSeparated(
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  );
+                                },
+                                children: [
+                                  Expanded(
+                                    child: ReactiveTextField(
+                                      formControlName:
+                                          'familyNameJapaneseForChinese',
+                                      decoration: InputDecoration(
+                                        label: Text(
+                                          'ファミリーネーム', // Todo: l10n 対応 (ファミリーネーム) (familyName)
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: ReactiveTextField(
+                                      formControlName:
+                                          'middleNameJapaneseForChinese',
+                                      decoration: InputDecoration(
+                                        label: Text(
+                                          'ミドルネーム', // Todo: l10n 対応 (ミドルネーム) (middleName)
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: ReactiveTextField(
+                                      formControlName:
+                                          'firstNameJapaneseForChinese',
+                                      decoration: InputDecoration(
+                                        label: Text(
+                                          'ファーストネーム', // Todo: l10n 対応 (ファーストネーム) (firstName)
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(flex: 3, child: SizedBox())
+                                ],
+                              ),
+                              const Text(
+                                '氏名（カナ）',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              RowSeparated(
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  );
+                                },
+                                children: [
+                                  Expanded(
+                                    child: ReactiveTextField(
+                                      formControlName:
+                                          'familyNameJapaneseForNonChinese',
+                                      decoration: InputDecoration(
+                                        label: Text(
+                                          'ファミリーネーム', // Todo: l10n 対応 (ファミリーネーム) (familyName)
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: ReactiveTextField(
+                                      formControlName:
+                                          'middleNameJapaneseForNonChinese',
+                                      decoration: InputDecoration(
+                                        label: Text(
+                                          'ミドルネーム', // Todo: l10n 対応 (ミドルネーム) (middleName)
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: ReactiveTextField(
+                                      formControlName:
+                                          'firstNameJapaneseForNonChinese',
+                                      decoration: InputDecoration(
+                                        label: Text(
+                                          'ファーストネーム', // Todo: l10n 対応 (ファーストネーム) (firstName)
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(flex: 3, child: SizedBox())
                                 ],
                               ),
                               RowSeparated(
@@ -186,17 +346,7 @@ class _MedicalRecordCompanionSectionState
                                         context.appTheme.spacing.marginMedium,
                                   );
                                 },
-                                children:  [
-                                  Expanded(
-                                    child: ReactiveTextField(
-                                      formControlName: 'nameInKana',
-                                      decoration: InputDecoration(
-                                        label: Text(
-                                          '氏名（カナ）', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                children: [
                                   Expanded(
                                     child: ReactiveTextField(
                                       formControlName: 'nationality',
@@ -261,6 +411,12 @@ class _MedicalRecordCompanionSectionState
                                           child: Text('その他'),
                                         ),
                                       ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
                                     ),
                                   ),
                                 ],
@@ -349,6 +505,160 @@ class _MedicalRecordCompanionSectionState
                                   ),
                                 ],
                               ),
+                              Text('連絡先'),
+                              RowSeparated(
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  );
+                                },
+                                children: [
+                                  Expanded(
+                                    child: ReactiveTextField(
+                                      formControlName: 'mobileNumber',
+                                      keyboardType: TextInputType.number,
+                                      decoration: InputDecoration(
+                                        prefixText: '+',
+                                        label: Text(
+                                          '携帯番号',
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: ReactiveTextField(
+                                      formControlName: 'email',
+                                      keyboardType: TextInputType.number,
+                                      decoration: InputDecoration(
+                                        label: Text(
+                                          'Email',
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    child: SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              RowSeparated(
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  );
+                                },
+                                children: [
+                                  Expanded(
+                                    child: ReactiveTextField(
+                                      formControlName: 'chat_tool_link',
+                                      keyboardType: TextInputType.number,
+                                      decoration: InputDecoration(
+                                        label: Text(
+                                          'チャットツールリンク',
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                  Expanded(
+                                    flex: 2,
+                                    child: SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              InkWell(
+                                onTap: () {},
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.add_circle,
+                                      color: context.appTheme.primaryColor,
+                                    ),
+                                    SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginSmall,
+                                    ),
+                                    Text(
+                                      'チャットツールリンクを追加',
+                                      style: TextStyle(
+                                          color: context.appTheme.primaryColor),
+                                    )
+                                  ],
+                                ),
+                              ),
+                              RowSeparated(
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  );
+                                },
+                                children: [
+                                  Container(
+                                    width: 250,
+                                    height: 250,
+                                    padding: EdgeInsets.all(
+                                        context.appTheme.spacing.marginMedium),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: context.appTheme.primaryColor),
+                                      borderRadius: BorderRadius.circular(
+                                          context.appTheme.spacing
+                                              .borderRadiusMedium),
+                                    ),
+                                    child: Image.asset(
+                                      Images.sampleQr,
+                                      package: 'core_ui',
+                                    ),
+                                  ),
+                                  Container(
+                                    width: 250,
+                                    height: 250,
+                                    padding: EdgeInsets.all(
+                                        context.appTheme.spacing.marginMedium),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                          color: context.appTheme.primaryColor),
+                                      borderRadius: BorderRadius.circular(
+                                          context.appTheme.spacing
+                                              .borderRadiusMedium),
+                                    ),
+                                    child: ColumnSeparated(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      separatorBuilder:
+                                          (BuildContext context, int index) {
+                                        return SizedBox(
+                                          height: context
+                                              .appTheme.spacing.marginMedium,
+                                        );
+                                      },
+                                      children: [
+                                        Icon(Icons.copy_all_rounded),
+                                        Text('QRコードをここにドラッグ＆ドロップ'),
+                                        ElevatedButton(
+                                            onPressed: () {},
+                                            child: Text('またはファイルを選択する'))
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
                               Text('パスポート', // TODO: l10n 対応 (パスポート) (passport)
                                   style: const TextStyle(
                                     fontWeight: FontWeight.bold,
@@ -362,7 +672,7 @@ class _MedicalRecordCompanionSectionState
                                   );
                                 },
                                 children: [
-                                   Expanded(
+                                  Expanded(
                                     child: ReactiveTextField(
                                       formControlName: 'passportNumber',
                                       decoration: InputDecoration(

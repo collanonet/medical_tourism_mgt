@@ -13,6 +13,24 @@ class MedicalRecordAgentSection extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        Row(
+          children: [
+            Text(
+              'エージェント/紹介者',
+              style: context.textTheme.titleLarge,
+            ),
+            SizedBox(
+              width: context.appTheme.spacing.marginMedium,
+            ),
+            Text(
+              '病院へは共有されません/紹介者',
+              style: context.textTheme.bodySmall,
+            ),
+          ],
+        ),
+        SizedBox(
+          height: context.appTheme.spacing.marginMedium,
+        ),
         const Text(
           'エージェント',
           style: TextStyle(
@@ -31,7 +49,7 @@ class MedicalRecordAgentSection extends StatelessWidget {
               );
             },
             children: [
-               Expanded(
+              Expanded(
                 child: ReactiveTextField(
                   formControlName: 'company',
                   decoration: InputDecoration(
@@ -41,7 +59,7 @@ class MedicalRecordAgentSection extends StatelessWidget {
                   ),
                 ),
               ),
-               Expanded(
+              Expanded(
                 child: ReactiveTextField(
                   formControlName: 'nameInKanji',
                   decoration: InputDecoration(
@@ -51,7 +69,7 @@ class MedicalRecordAgentSection extends StatelessWidget {
                   ),
                 ),
               ),
-               Expanded(
+              Expanded(
                 child: ReactiveTextField(
                   formControlName: 'nameInKana',
                   decoration: InputDecoration(

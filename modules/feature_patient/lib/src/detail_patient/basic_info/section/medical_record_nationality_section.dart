@@ -1,4 +1,5 @@
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -14,7 +15,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Text(
-          '国籍',
+          '国籍と連絡先',
           style: TextStyle(
             fontWeight: FontWeight.bold,
           ),
@@ -36,7 +37,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                     width: context.appTheme.spacing.marginMedium,
                   );
                 },
-                children:  [
+                children: [
                   Expanded(
                     child: ReactiveTextField(
                       formControlName: 'nationality',
@@ -71,7 +72,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                   );
                 },
                 children: [
-                   Expanded(
+                  Expanded(
                     child: ReactiveTextField(
                       formControlName: 'residentialArea',
                       decoration: InputDecoration(
@@ -81,7 +82,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                       ),
                     ),
                   ),
-                   Expanded(
+                  Expanded(
                     flex: 2,
                     child: ReactiveTextField(
                       formControlName: 'currentAddress',
@@ -101,7 +102,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                   );
                 },
                 children: [
-                   Expanded(
+                  Expanded(
                     child: ReactiveTextField(
                       formControlName: 'mobileNumber',
                       keyboardType: TextInputType.number,
@@ -114,6 +115,42 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                     ),
                   ),
                   Expanded(
+                    child: ReactiveTextField(
+                      formControlName: 'email',
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        label: Text(
+                          'Email',
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                  ),
+                ],
+              ),
+              RowSeparated(
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    width: context.appTheme.spacing.marginMedium,
+                  );
+                },
+                children: [
+                  Expanded(
+                    child: ReactiveTextField(
+                      formControlName: 'chat_tool_link',
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        label: Text(
+                          'チャットツールリンク',
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
                     flex: 2,
                     child: SizedBox(
                       width: context.appTheme.spacing.marginMedium,
@@ -121,6 +158,77 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                   ),
                 ],
               ),
+              InkWell(
+                onTap: () {},
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.add_circle,
+                      color: context.appTheme.primaryColor,
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginSmall,
+                    ),
+                    Text(
+                      'チャットツールリンクを追加',
+                      style: TextStyle(color: context.appTheme.primaryColor),
+                    )
+                  ],
+                ),
+              ),
+              RowSeparated(
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    width: context.appTheme.spacing.marginMedium,
+                  );
+                },
+                children: [
+                  Container(
+                    width: 250,
+                    height: 250,
+                    padding:
+                        EdgeInsets.all(context.appTheme.spacing.marginMedium),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: context.appTheme.primaryColor),
+                      borderRadius: BorderRadius.circular(
+                          context.appTheme.spacing.borderRadiusMedium),
+                    ),
+                    child: Image.asset(
+                      Images.sampleQr,
+                      package: 'core_ui',
+                    ),
+                  ),
+                  Container(
+                    width: 250,
+                    height: 250,
+                    padding:
+                        EdgeInsets.all(context.appTheme.spacing.marginMedium),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: context.appTheme.primaryColor),
+                      borderRadius: BorderRadius.circular(
+                          context.appTheme.spacing.borderRadiusMedium),
+                    ),
+                    child: ColumnSeparated(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                          height: context.appTheme.spacing.marginMedium,
+                        );
+                      },
+                      children: [
+                        Icon(Icons.copy_all_rounded),
+                        Text('QRコードをここにドラッグ＆ドロップ'),
+                        ElevatedButton(
+                            onPressed: () {}, child: Text('またはファイルを選択する'))
+                      ],
+                    ),
+                  ),
+                ],
+              )
             ],
           ),
         )

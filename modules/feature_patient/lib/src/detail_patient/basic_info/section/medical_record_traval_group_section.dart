@@ -26,25 +26,70 @@ class MedicalRecordTravelGroupSection extends StatelessWidget {
                     .map((control) => control as FormGroup)
                     .map(
                       (currentForm) => ReactiveForm(
-                    formGroup: currentForm,
-                    child: Row(
-                      children: [
-                
-                        const Expanded(child: SizedBox())
-                      ],
-                    ),
-                  ),
-                );
+                        formGroup: currentForm,
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: ReactiveTextField(
+                                formControlName: 'name',
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    '病院名', //   TODO: l10n 対応 (病院名) (hospitalName)
+                                  ),
+                                  suffixIcon: Icon(
+                                    Icons.search,
+                                    color: Colors.grey,
+                                  ),
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: context.appTheme.spacing.marginMedium,
+                            ),
+                            const Expanded(child: SizedBox())
+                          ],
+                        ),
+                      ),
+                    );
 
                 return ColumnSeparated(
                   separatorBuilder: (BuildContext context, int index) =>
                       SizedBox(
-                        height: context.appTheme.spacing.marginMedium,
-                      ),
+                    height: context.appTheme.spacing.marginMedium,
+                  ),
                   children: rows.toList(),
                 );
               },
             ),
+            SizedBox(
+              height: context.appTheme.spacing.marginMedium,
+            ),
+            InkWell(
+              onTap: () => formArray.add(
+                FormGroup({
+                  'id': FormControl<String?>(),
+                  'name': FormControl<String?>(),
+                }),
+              ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add_circle,
+                    color: context.appTheme.primaryColor,
+                  ),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginSmall,
+                  ),
+                  Text(
+                    '患者を追加',
+                    style: TextStyle(color: context.appTheme.primaryColor),
+                  )
+                ],
+              ),
+            )
           ],
         );
       },

@@ -13,6 +13,8 @@ import 'section/medical_record_nationality_section.dart';
 import 'section/medical_record_passport_section.dart';
 import 'section/medical_record_referrer_section.dart';
 import 'section/medical_record_section.dart';
+import 'section/medical_record_traval_group_section.dart';
+import 'section/medical_record_user_account_section.dart';
 
 class BasicInfoSection extends StatelessWidget {
   const BasicInfoSection({super.key});
@@ -83,8 +85,8 @@ class BasicInfoSection extends StatelessWidget {
                       style: ToggleStyle(
                         borderColor: Colors.transparent,
                         borderRadius: BorderRadius.circular(10.0),
-                        backgroundColor: Colors.grey[300],
-                        indicatorColor: Colors.grey[400],
+                        backgroundColor: Colors.white,
+                        indicatorColor: Colors.white,
                         boxShadow: [
                           BoxShadow(
                             color: Colors.black26,
@@ -96,12 +98,13 @@ class BasicInfoSection extends StatelessWidget {
                       ),
                       styleBuilder: (i) => ToggleStyle(
                             indicatorColor: context.appTheme.primaryColor,
-                            backgroundColor: Colors.grey[300],
+                            backgroundColor: Colors.white,
                           ),
                       onChanged: (i) {}),
                 ],
               ),
-
+              const MedicalRecordTravelGroupSection(),
+              const MedicalRecordUserAccountSection(),
               const MedicalRecordNameSection(),
               const MedicalRecordNationalitySection(),
               const MedicalRecordBudgetSection(),
