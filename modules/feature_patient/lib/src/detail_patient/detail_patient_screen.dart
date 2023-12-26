@@ -16,6 +16,7 @@ import 'medical_summary/medical_summary_page.dart';
 import 'medical_visa/medical_visa_page.dart';
 import 'overseas_medical_data/overseas_medical_data_page.dart';
 import 'progress_list/progress_list_page.dart';
+import 'web_reservation/detail_patient_web_reservation_page.dart';
 
 class DetailPatientScreen extends StatefulWidget {
   const DetailPatientScreen({
@@ -30,6 +31,7 @@ class DetailPatientScreen extends StatefulWidget {
 class _DetailPatientScreenState extends State<DetailPatientScreen> {
   List<String> menu = [
     '基本情報', // basic information
+    'Web予約', // Web reservation
     '進捗一覧', // progress list
     '患者回答データ', // Patient Response Data
     '海外診療データ', // Overseas medical data
@@ -50,6 +52,9 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
     super.initState();
     pages = [
       BasicInformationPage(
+        patient: widget.patient,
+      ),
+      DetailPatientWebReservationPage(
         patient: widget.patient,
       ),
       ProgressListPage(

@@ -53,6 +53,11 @@ class _MedicalSummaryScreenState extends State<MedicalSummaryScreen> {
             },
           ),
         ),
+        Divider(
+          color: context.appTheme.primaryColor,
+          thickness: 2,
+          height: 0,
+        ),
         ValueListenableBuilder<int>(
           valueListenable: _selectedIndex,
           builder: (BuildContext context, int index, Widget? child) {
