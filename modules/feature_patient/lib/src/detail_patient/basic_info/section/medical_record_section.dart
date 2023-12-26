@@ -168,7 +168,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
-                 Expanded(
+                Expanded(
                   child: ReactiveTextField(
                     formControlName: 'height',
                     keyboardType: TextInputType.number,
@@ -183,7 +183,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
-                 Expanded(
+                Expanded(
                   child: ReactiveTextField(
                     formControlName: 'weight',
                     keyboardType: TextInputType.number,
@@ -307,7 +307,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
             ),
             Row(
               children: [
-                 Expanded(
+                Expanded(
                   child: ReactiveTextField(
                     formControlName: 'caseNumber',
                     decoration: InputDecoration(
@@ -351,7 +351,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
-                 Expanded(
+                Expanded(
                   child: ReactiveTextField(
                     formControlName: 'progress',
                     decoration: InputDecoration(
@@ -365,7 +365,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
             ),
             Row(
               children: [
-                 Expanded(
+                Expanded(
                   child: ReactiveTextField(
                     formControlName: 'type',
                     decoration: InputDecoration(

@@ -10,12 +10,14 @@ FormGroup basicInfoForm({
         'id': FormControl<String?>(value: medicalRecord?.id),
         'dateOfBirth': FormControl<DateTime>(value: medicalRecord?.dateOfBirth),
         'age': FormControl<int?>(value: medicalRecord?.age),
-      // 身長 to en height
+        // 身長 to en height
         'height': FormControl<int?>(value: medicalRecord?.height),
-      // 体重 to en weight
+        // 体重 to en weight
         'weight': FormControl<int?>(value: medicalRecord?.weight),
         'gender': FormControl<String>(value: medicalRecord?.gender ?? 'male'),
-        'arrivalDate': FormControl<DateTime>(value: medicalRecord?.arrivalDate, validators: [Validators.required]),
+        'arrivalDate': FormControl<DateTime>(
+            value: medicalRecord?.arrivalDate,
+            validators: [Validators.required]),
         'examinationDate':
             FormControl<DateTime>(value: medicalRecord?.examinationDate),
         'departureDate':
@@ -38,6 +40,12 @@ FormGroup basicInfoForm({
             'hospitalName': FormControl<String?>(),
             'medicalCardNumber': FormControl<String?>(),
           }),
+        ]),
+        'Travel_group': FormArray([
+          FormGroup({
+            'id': FormControl<String?>(),
+            'name': FormControl<String?>(),
+          })
         ]),
         'PATIENT_NAMES': FormGroup({
           'id': FormControl<String?>(),
