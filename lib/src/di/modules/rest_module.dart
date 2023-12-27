@@ -61,12 +61,11 @@ abstract class RestModule {
 class MerchantInterceptor extends Interceptor {}
 
 class TokenInterceptor extends Interceptor {
-
   @override
   void onRequest(
-      RequestOptions options,
-      RequestInterceptorHandler handler,
-      ) async {
+    RequestOptions options,
+    RequestInterceptorHandler handler,
+  ) async {
     final token = await GetIt.I<AuthRepository>().getAccessToken();
     if (token != null) {
       super.onRequest(
