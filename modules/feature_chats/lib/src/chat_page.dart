@@ -20,7 +20,7 @@ class _ChatPageState extends State<ChatPage> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => GetIt.I<ChatModel>(),
+      create: (context) => GetIt.I<ChatModel>()..patients(),
       child: const LayoutView(
         selectedIndex: 1,
         page: ChatScreen(),

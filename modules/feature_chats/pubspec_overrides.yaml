@@ -16,5 +16,7 @@ dependency_overrides:
     path: ../data_auth
   data_hospital:
     path: ../data_hospital
+  data_patient:
+    path: ../data_patient
   feature_auth:
     path: ../feature_auth
