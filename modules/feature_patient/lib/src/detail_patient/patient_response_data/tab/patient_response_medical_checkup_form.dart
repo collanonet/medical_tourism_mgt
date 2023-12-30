@@ -19,8 +19,10 @@ FormGroup medicalCheckupForm() => FormGroup({
       'currently_diabetes': FormControl<String>(), // 現在糖尿病
       'diabetes_medication': FormControl<String>(), // 糖尿病服薬
       'fasting_blood_sugar': FormControl<String>(), // 空腹時血糖
+      'fasting_blood_sugar_mmol': FormControl<String>(),
       'implant': FormControl<String>(), // インプラント
-      'implant_date': FormControl<DateTime>(), // インプラントをした時期
+      'implant_date_year': FormControl<DateTime>(), // インプラントをした時期
+      'implant_date_day': FormControl<DateTime>(), // インプラントをした時期
       'Body_metal_tattoo': FormControl<String>(), // 体内金属/刺青（tatooo）
       'MRI_after_having_metal': FormControl<String>(), // 体内金属後に/刺青後にMRI受診したことが
       'Part_material': FormControl<String>(), // 部位とその材質
