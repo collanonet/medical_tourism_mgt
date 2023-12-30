@@ -6,12 +6,15 @@ FormGroup detailPatientWebReservationForm() => FormGroup({
         disabled: true,
       ), // 第１希望
       '2nd_choice': FormControl<DateTime>(
-        disabled: true,), // 第２希望
+        disabled: true,
+      ), // 第２希望
       '3rd_choice': FormControl<DateTime>(
-        disabled: true,), // 第３希望
+        disabled: true,
+      ), // 第３希望
       'No_desired_date': FormControl<bool>(), // 希望日なし
       'remarks': FormControl<String>(
-        disabled: true,), // 備考
+        disabled: true,
+      ), // 備考
       'Medical_institution_name': FormControl<String>(), // 医療機関名
       'Doctor_name': FormControl<String>(), // 医師名
       'shift_1': FormControl<String>(value: '10時〜12時'), //
