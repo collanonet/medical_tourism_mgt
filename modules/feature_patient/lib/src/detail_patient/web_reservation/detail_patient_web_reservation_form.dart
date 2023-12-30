@@ -2,11 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup detailPatientWebReservationForm() => FormGroup({
-      '1st_choice': FormControl<DateTime>(), // 第１希望
-      '2nd_choice': FormControl<DateTime>(), // 第２希望
-      '3rd_choice': FormControl<DateTime>(), // 第３希望
+      '1st_choice': FormControl<DateTime>(
+        disabled: true,
+      ), // 第１希望
+      '2nd_choice': FormControl<DateTime>(
+        disabled: true,), // 第２希望
+      '3rd_choice': FormControl<DateTime>(
+        disabled: true,), // 第３希望
       'No_desired_date': FormControl<bool>(), // 希望日なし
-      'remarks': FormControl<String>(), // 備考
+      'remarks': FormControl<String>(
+        disabled: true,), // 備考
       'Medical_institution_name': FormControl<String>(), // 医療機関名
       'Doctor_name': FormControl<String>(), // 医師名
       'shift_1': FormControl<String>(value: '10時〜12時'), //

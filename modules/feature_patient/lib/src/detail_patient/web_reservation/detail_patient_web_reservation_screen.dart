@@ -140,7 +140,7 @@ class _DetailPatientWebReservationScreenState
                     ),
                   ),
                   value: true,
-                  onChanged: (value) {}),
+                  onChanged: null),
               SizedBox(
                 width: context.appTheme.spacing.marginMedium,
               ),
