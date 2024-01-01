@@ -1,9 +1,11 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import '../feature_web_appointment.gm.dart';
 import 'filter_web_appointment.dart';
 import 'web_appointment_model.dart';
 
@@ -50,7 +52,10 @@ class WebAppointmentScreen extends StatelessWidget {
                           (index) {
                             var item = model.patientData.data?.items[index];
                             return RowTableData(
-                              onTap: () {},
+                              onTap: () {
+                                context.router
+                                    .push(WebAppointmentDetailRoute());
+                              },
                               cell: [
                                 Text('りんくうメディカルクリニック'),
                                 Row(

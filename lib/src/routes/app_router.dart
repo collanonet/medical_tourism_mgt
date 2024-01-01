@@ -95,6 +95,9 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
       AutoRoute(page: SalesRoute.page, path: '/sales'),
       AutoRoute(page: ProcessChartsRoute.page, path: '/precess-charts'),
       AutoRoute(page: WebAppointmentsRoute.page, path: '/web-appointments'),
+      AutoRoute(
+          page: WebAppointmentDetailRoute.page,
+          path: '/web-appointment-detail'),
       RedirectRoute(path: '*', redirectTo: '/patients')
     ];
   }

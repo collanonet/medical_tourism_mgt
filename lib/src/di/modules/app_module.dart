@@ -43,6 +43,7 @@ abstract class AppModule {
         ProcessChartsRoute.name: [PermissionRole.user],
         WebAppointmentsRoute.name: [PermissionRole.user],
         MedicalVisaDetailRoute.name: [PermissionRole.user],
+        WebAppointmentDetailRoute.name: [PermissionRole.user],
       },
     );
   }
