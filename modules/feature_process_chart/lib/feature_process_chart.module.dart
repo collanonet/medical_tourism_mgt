@@ -8,12 +8,25 @@ import 'dart:async' as _i2;
 
 import 'package:injectable/injectable.dart' as _i1;
 
-import 'src/process_chart_model.dart' as _i3;
+import 'src/detail/detail_process_chart_model.dart' as _i3;
+import 'src/detail/tab/facility_model.dart' as _i4;
+import 'src/detail/tab/hotel_registration_model.dart' as _i5;
+import 'src/detail/tab/hotel_search_model.dart' as _i6;
+import 'src/detail/tab/itinerary_model.dart' as _i7;
+import 'src/detail/tab/related_parties_model.dart' as _i9;
+import 'src/process_chart_model.dart' as _i8;
 
 class FeatureProcessChartPackageModule extends _i1.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i2.FutureOr<void> init(_i1.GetItHelper gh) {
-    gh.factory<_i3.ProcessChartModel>(() => _i3.ProcessChartModel());
+    gh.factory<_i3.DetailProcessChartModel>(
+        () => _i3.DetailProcessChartModel());
+    gh.factory<_i4.FacilityModel>(() => _i4.FacilityModel());
+    gh.factory<_i5.HotelRegistrationModel>(() => _i5.HotelRegistrationModel());
+    gh.factory<_i6.HotelSearchModel>(() => _i6.HotelSearchModel());
+    gh.factory<_i7.ItineraryModel>(() => _i7.ItineraryModel());
+    gh.factory<_i8.ProcessChartModel>(() => _i8.ProcessChartModel());
+    gh.factory<_i9.RelatedPartiesModel>(() => _i9.RelatedPartiesModel());
   }
 }
