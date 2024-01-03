@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup detailPatientWebReservationForm() => FormGroup({
+FormGroup formWebAppointment() => FormGroup({
+      'patient_name': FormControl<String>(), // 患者名
       '1st_choice': FormControl<DateTime>(
         disabled: true,
       ), // 第１希望
@@ -12,8 +13,12 @@ FormGroup detailPatientWebReservationForm() => FormGroup({
         disabled: true,
       ), // 第３希望
       'No_desired_date': FormControl<bool>(), // 希望日なし
+
       'remarks': FormControl<String>(
         disabled: true,
+        value: '''例）2024/03/05〜2024/03/10まで
+治療期間に合わせて滞在可能。
+3/13までには必ず帰国したいです。''',
       ), // 備考
       'Medical_institution_name': FormControl<String>(), // 医療機関名
       'Doctor_name': FormControl<String>(), // 医師名

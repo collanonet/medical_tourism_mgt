@@ -16,7 +16,7 @@ class MedicalVisaDetailPage extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => GetIt.I<MedicalVisaDetailModel>(),
       child: const LayoutView(
-        selectedIndex: 1,
+        selectedIndex: 2,
         page: MedicalVisaDetailScreen(),
       ),
     );
