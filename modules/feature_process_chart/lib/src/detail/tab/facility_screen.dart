@@ -49,9 +49,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                   decoration: InputDecoration(
                                     label: Text(
                                       '手配担当',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
+
                                     ),
                                   ),
                                 ),
@@ -74,9 +72,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                   decoration: InputDecoration(
                                     label: Text(
                                       '施設名',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
+
                                     ),
                                   ),
                                 ),
@@ -91,9 +87,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                   decoration: InputDecoration(
                                     label: Text(
                                       '所在地',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
+
                                     ),
                                   ),
                                 ),
@@ -108,9 +102,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                   decoration: InputDecoration(
                                     label: Text(
                                       '担当者名',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
+
                                     ),
                                   ),
                                 ),
@@ -124,9 +116,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                   decoration: InputDecoration(
                                     label: Text(
                                       '電話番号',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
+
                                     ),
                                   ),
                                 ),
@@ -150,9 +140,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                   decoration: InputDecoration(
                                     label: Text(
                                       '備考',
-                                      style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                      ),
+
                                     ),
                                   ),
                                 ),
@@ -265,9 +253,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                           decoration: InputDecoration(
                                             label: Text(
                                               '備考',
-                                              style: TextStyle(
-                                                fontWeight: FontWeight.bold,
-                                              ),
+
                                             ),
                                           ),
                                         ),
@@ -363,9 +349,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                         decoration: InputDecoration(
                           label: Text(
                             '手配担当',
-                            style: TextStyle(
-                              fontWeight: FontWeight.bold,
-                            ),
+
                           ),
                         ),
                       ),
@@ -404,9 +388,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                         decoration: InputDecoration(
                                           label: Text(
                                             '施設名',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
+
                                           ),
                                         ),
                                       ),
@@ -422,9 +404,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                         decoration: InputDecoration(
                                           label: Text(
                                             '所在地',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
+
                                           ),
                                         ),
                                       ),
@@ -440,9 +420,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                         decoration: InputDecoration(
                                           label: Text(
                                             '担当者名',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
+
                                           ),
                                         ),
                                       ),
@@ -457,9 +435,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                         decoration: InputDecoration(
                                           label: Text(
                                             '電話番号',
-                                            style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                            ),
+
                                           ),
                                         ),
                                       ),
