@@ -41,6 +41,7 @@ abstract class AppModule {
         ReportsRoute.name: [PermissionRole.user],
         SalesRoute.name: [PermissionRole.user],
         ProcessChartsRoute.name: [PermissionRole.user],
+        ItinerarySimplifiedRoute.name: [PermissionRole.user],
         DetailProcessChartRoute.name: [PermissionRole.user],
         WebAppointmentsRoute.name: [PermissionRole.user],
         MedicalVisaDetailRoute.name: [PermissionRole.user],
