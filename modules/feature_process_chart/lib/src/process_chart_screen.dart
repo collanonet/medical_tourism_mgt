@@ -20,11 +20,19 @@ class ProcessChartScreen extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            ElevatedButton(onPressed: () {}, child: Text('簡易版行程表を新規作成')),
+            ElevatedButton(
+                onPressed: () {
+                  context.router.push(const ItinerarySimplifiedRoute());
+                },
+                child: Text('簡易版行程表を新規作成')),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            ElevatedButton(onPressed: () {}, child: Text('ツアー行程表を新規作成')),
+            ElevatedButton(
+                onPressed: () {
+                  context.router.push(const DetailProcessChartRoute());
+                },
+                child: Text('ツアー行程表を新規作成')),
           ],
         ),
         SizedBox(

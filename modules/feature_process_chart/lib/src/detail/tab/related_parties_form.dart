@@ -1,9 +1,60 @@
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup relatedPartiesForm() => FormGroup(
-  {
-    'patient_name': FormControl<String>(
-      value: '',
-    ),
-  },
-);
+      {
+        //ガイドまたは通訳者
+        'guide_or_interpreter': FormArray([
+          FormGroup({
+            'Person_in_charge_of_arrangements':
+                FormControl<String>(value: ''), // 手配担当
+            'Date_from': FormControl<String>(value: ''), // 年月日（自）
+            'Date_to': FormControl<String>(value: ''), // 年月日（至）
+            'Guide_name_Kanji': FormControl<String>(value: ''), // ガイド名（漢字）
+            'Guide_name_kana': FormControl<String>(value: ''), // ガイド名（カナ）
+            'telephone_number_1': FormControl<String>(value: ''), // 電話番号
+            'qualification': FormControl<String>(value: ''), // 資格
+            'report': FormControl<String>(value: ''), // 報告書
+            'Accommodation_possible': FormControl<String>(value: ''), // 同宿可否
+            'Name_of_facility': FormControl<String>(value: ''), // 施設名
+            'location': FormControl<String>(value: ''), // 所在地
+            'telephone_number_2': FormControl<String>(value: ''), // 電話番号
+          })
+        ]),
+        //バス会社
+        'bus_company': FormGroup({
+          'Person_in_charge_of_arrangements':
+              FormControl<String>(value: ''), // 手配担当
+          'Bus_company_name': FormControl<String>(value: ''), // バス会社名
+          'manager': FormControl<String>(value: ''), // 担当者
+        }),
+        //ドライバー
+        'driver': FormArray([
+          FormGroup({
+            'Date_from': FormControl<String>(value: ''), // 年月日（自）
+            'Date_to': FormControl<String>(value: ''), // 年月日（至）
+            'car_number': FormControl<String>(value: ''), // 車番
+            'Car_model': FormControl<String>(value: ''), // 車種
+            'Driver_name_Kanji': FormControl<String>(value: ''), // ドライバー名（漢字）
+            'Driver_name_kana': FormControl<String>(value: ''), // ドライバー名（カナ）
+            'telephone_number_1': FormControl<String>(value: ''), // 電話番号
+            'supported_language': FormControl<String>(value: ''), // 対応言語
+            'Accommodation_possible': FormControl<String>(value: ''), // 同宿可否
+            'Hotel_arrangement': FormControl<String>(value: ''), // ホテル手配
+            'Name_of_facility': FormControl<String>(value: ''), // 施設名
+            'location': FormControl<String>(value: ''), // 所在地
+            'telephone_number_2': FormControl<String>(value: ''), // 電話番号
+          })
+        ]),
+        //緊急連絡先
+        'emergency_contact': FormArray([
+          FormGroup({
+            'Date_from': FormControl<String>(value: ''), // 年月日（自）
+            'Date_to': FormControl<String>(value: ''), // 年月日（至）
+            'Person_in_charge_Kanji':
+                FormControl<String>(value: ''), // 担当者名（漢字）
+            'Person_in_charge_kana': FormControl<String>(value: ''), // 担当者名（カナ）
+            'telephone_number': FormControl<String>(value: ''), // 電話番号
+          })
+        ])
+      },
+    );
