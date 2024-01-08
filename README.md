@@ -61,8 +61,12 @@ flowchart TD
 
 ```
 
-####Base View
-for menu layout
+Base View: for menu layout
+Core l10n: for translate
+Core Network: for api server and model data request/response
+Core Storage: for store some cache data (if need)
+Core UI: for create widget able to use every feature modules
+Core Utils: for create function able to use every feature modules
 
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++
