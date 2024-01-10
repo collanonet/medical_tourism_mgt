@@ -19,6 +19,8 @@
 
 ## Deployment Process
 
+Todo create module by run this command: flutter create --template=package name_package
+
 ```mermaid
 flowchart TD
    A(App) --> MAPP(Lib)
