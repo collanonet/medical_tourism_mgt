@@ -789,7 +789,9 @@ class _EstimateScreenState extends State<EstimateScreen> {
                           Text(
                             '行を追加',
                             style:
-                                TextStyle(color: context.appTheme.primaryColor),
+                                TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',color: context.appTheme.primaryColor),
                           )
                         ],
                       ),
@@ -1243,7 +1245,9 @@ class _EstimateScreenState extends State<EstimateScreen> {
                           Text(
                             '行を追加',
                             style:
-                                TextStyle(color: context.appTheme.primaryColor),
+                                TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',color: context.appTheme.primaryColor),
                           )
                         ],
                       ),

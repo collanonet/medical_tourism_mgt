@@ -41,6 +41,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     backgroundColor: context.appTheme.primaryColor,
                     textStyle: const TextStyle(
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'NotoSansJP',
+                      package: 'core_ui',
                     ),
                     side: BorderSide(
                         color: context.appTheme.primaryColor, width: 2),
@@ -177,6 +179,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                     Text(
                                       '${item?.firstName} ${item!.familyName}',
                                       style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                                         color: context.appTheme.primaryColor,
                                       ),
                                     ),
@@ -194,7 +198,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                               BorderRadius.circular(4)),
                                       child: const Text(
                                         '帰国済',
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',color: Colors.white),
                                       ),
                                     ),
                                   ],
@@ -210,7 +216,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                               BorderRadius.circular(4)),
                                       child: const Text(
                                         '報告済',
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',color: Colors.white),
                                       ),
                                     ),
                                   ],
@@ -253,7 +261,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                               BorderRadius.circular(4)),
                                       child: const Text(
                                         '取下げ',
-                                        style: TextStyle(color: Colors.white),
+                                        style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',color: Colors.white),
                                       ),
                                     ),
                                   ],

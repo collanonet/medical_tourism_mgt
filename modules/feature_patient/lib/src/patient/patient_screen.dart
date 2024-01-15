@@ -40,6 +40,8 @@ class _PatientScreenState extends State<PatientScreen> {
                       backgroundColor: context.appTheme.primaryColor,
                       textStyle: const TextStyle(
                         fontWeight: FontWeight.bold,
+                        fontFamily: 'NotoSansJP',
+                        package: 'core_ui',
                       ),
                       side: BorderSide(
                           color: context.appTheme.primaryColor, width: 2),
@@ -82,6 +84,8 @@ class _PatientScreenState extends State<PatientScreen> {
                             color: filterText == context.l10n.labelOrdersOnly
                                 ? Colors.white
                                 : context.appTheme.primaryColor,
+                            fontFamily: 'NotoSansJP',
+                            package: 'core_ui',
                           ),
                         ),
                         tooltip: context.l10n.labelOrdersOnly,
@@ -94,6 +98,8 @@ class _PatientScreenState extends State<PatientScreen> {
                             color: filterText == context.l10n.labelCXL
                                 ? Colors.white
                                 : context.appTheme.primaryColor,
+                            fontFamily: 'NotoSansJP',
+                            package: 'core_ui',
                           ),
                         ),
                         tooltip: context.l10n.labelCXL,
@@ -106,6 +112,8 @@ class _PatientScreenState extends State<PatientScreen> {
                               color: filterText == context.l10n.labelAll
                                   ? Colors.white
                                   : context.appTheme.primaryColor,
+                              fontFamily: 'NotoSansJP',
+                              package: 'core_ui',
                             ),
                           ),
                           tooltip: context.l10n.labelAll),
@@ -124,6 +132,8 @@ class _PatientScreenState extends State<PatientScreen> {
                       backgroundColor: context.appTheme.primaryColor,
                       textStyle: const TextStyle(
                         fontWeight: FontWeight.bold,
+                        fontFamily: 'NotoSansJP',
+                        package: 'core_ui',
                       ),
                       side: BorderSide(
                           color: context.appTheme.primaryColor, width: 2),
@@ -237,6 +247,8 @@ class _PatientScreenState extends State<PatientScreen> {
                                         '${item?.firstName} ${item!.familyName}',
                                         style: TextStyle(
                                           color: context.appTheme.primaryColor,
+                                          fontFamily: 'NotoSansJP',
+                                          package: 'core_ui',
                                         ),
                                       ),
                                       const Text('--'),
@@ -251,6 +263,8 @@ class _PatientScreenState extends State<PatientScreen> {
                                         'WANG MUCHEN',
                                         style: TextStyle(
                                           color: Colors.blueGrey,
+                                          fontFamily: 'NotoSansJP',
+                                          package: 'core_ui',
                                         ),
                                       ),
                                       Text('王　沐宸'),
@@ -267,7 +281,10 @@ class _PatientScreenState extends State<PatientScreen> {
                                                 BorderRadius.circular(4)),
                                         child: const Text(
                                           '受注',
-                                          style: TextStyle(color: Colors.white),
+                                          style: TextStyle(color: Colors.white,
+
+                                            fontFamily: 'NotoSansJP',
+                                            package: 'core_ui',),
                                         ),
                                       ),
                                     ],
@@ -289,7 +306,9 @@ class _PatientScreenState extends State<PatientScreen> {
                                             child: const Text(
                                               '治療',
                                               style: TextStyle(
-                                                  color: Colors.white),
+                                                  color: Colors.white,
+                                                fontFamily: 'NotoSansJP',
+                                                package: 'core_ui',),
                                             ),
                                           ),
                                           const SizedBox(width: 4),
@@ -303,7 +322,9 @@ class _PatientScreenState extends State<PatientScreen> {
                                             child: const Text(
                                               '再生',
                                               style: TextStyle(
-                                                  color: Colors.white),
+                                                  color: Colors.white,
+                                                fontFamily: 'NotoSansJP',
+                                                package: 'core_ui',),
                                             ),
                                           )
                                         ],
@@ -336,6 +357,8 @@ class _PatientScreenState extends State<PatientScreen> {
                                     style: TextStyle(
                                       color: context.appTheme.primaryColor,
                                       fontWeight: FontWeight.bold,
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
                                     ),
                                   ),
                                   Text(

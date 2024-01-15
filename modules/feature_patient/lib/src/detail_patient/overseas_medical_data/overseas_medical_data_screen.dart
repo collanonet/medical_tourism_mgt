@@ -70,6 +70,8 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                         child: const Text(
                           'またはファイルを選択する',
                           style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                             color: Colors.white,
                           ),
                         ),
@@ -93,6 +95,8 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                 child: const Text(
                   '外部URLを追加',
                   style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                     color: Colors.white,
                   ),
                 ),

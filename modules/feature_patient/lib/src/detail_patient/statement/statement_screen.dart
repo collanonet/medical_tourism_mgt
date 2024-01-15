@@ -896,7 +896,9 @@ class _StatementScreenState extends State<StatementScreen> {
                           Text(
                             '行を追加',
                             style:
-                                TextStyle(color: context.appTheme.primaryColor),
+                                TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',color: context.appTheme.primaryColor),
                           )
                         ],
                       ),
@@ -1350,7 +1352,9 @@ class _StatementScreenState extends State<StatementScreen> {
                           Text(
                             '行を追加',
                             style:
-                                TextStyle(color: context.appTheme.primaryColor),
+                                TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',color: context.appTheme.primaryColor),
                           )
                         ],
                       ),

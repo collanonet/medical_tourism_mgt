@@ -108,7 +108,9 @@ class _ProgressListTableState extends State<ProgressListTable> {
                     child: Center(
                       child: Text(
                         '当社',
-                        style: TextStyle(color: context.appTheme.primaryColor),
+                        style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',color: context.appTheme.primaryColor),
                       ),
                     ),
                   ),

@@ -289,7 +289,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
               ),
               Text(
                 '本人のビザを追加',
-                style: TextStyle(color: context.appTheme.primaryColor),
+                style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',color: context.appTheme.primaryColor),
               )
             ],
           ),
@@ -415,7 +417,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
               ),
               Text(
                 '本人のビザを追加',
-                style: TextStyle(color: context.appTheme.primaryColor),
+                style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',color: context.appTheme.primaryColor),
               )
             ],
           ),
@@ -571,7 +575,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     ),
                     Text(
                       '身元保証書を追加',
-                      style: TextStyle(color: context.appTheme.primaryColor),
+                      style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',color: context.appTheme.primaryColor),
                     )
                   ],
                 ),
@@ -648,7 +654,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     ),
                     Text(
                       '治療予定表を追加',
-                      style: TextStyle(color: context.appTheme.primaryColor),
+                      style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',color: context.appTheme.primaryColor),
                     )
                   ],
                 ),

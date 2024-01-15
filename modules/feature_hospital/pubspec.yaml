@@ -18,7 +18,7 @@ dependencies:
   data_auth: 0.0.1-alpha.1
   data_hospital: 0.0.1-alpha.1
   provider: ^6.0.5
-  get_it: ^7.6.0
+  get_it: ^7.6.6
   injectable: ^2.3.0
   auto_route: ^7.7.0
   reactive_forms: ^14.3.0
@@ -29,7 +29,7 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^3.0.1
   injectable_generator: ^2.4.0
-  build_runner: ^2.4.6
+  build_runner: ^2.4.8
   auto_route_generator: ^7.2.0
 
 # For information on the generic Dart part of this file, see the

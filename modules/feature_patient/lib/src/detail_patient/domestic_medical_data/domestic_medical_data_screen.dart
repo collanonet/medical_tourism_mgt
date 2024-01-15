@@ -67,6 +67,8 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                         child: const Text(
                           'またはファイルを選択する',
                           style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                             color: Colors.white,
                           ),
                         ),

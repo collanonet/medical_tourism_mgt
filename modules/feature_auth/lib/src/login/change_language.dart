@@ -30,6 +30,8 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
                 context.l10n.changeLanguage,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
+                  fontFamily: 'NotoSansJP',
+                  package: 'core_ui',
                 ),
               ),
             ),

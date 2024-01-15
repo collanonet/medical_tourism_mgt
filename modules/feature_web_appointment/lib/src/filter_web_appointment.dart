@@ -50,6 +50,10 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                             decoration: InputDecoration(
                               label: Text(
                                 '病院名',
+                                style: TextStyle(
+                                  fontFamily: 'NotoSansJP',
+                                  package: 'core_ui',
+                                ),
                               ),
                             ),
                           ),
@@ -61,6 +65,10 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                             decoration: InputDecoration(
                               label: Text(
                                 '医師名',
+                                style: TextStyle(
+                                  fontFamily: 'NotoSansJP',
+                                  package: 'core_ui',
+                                ),
                               ),
                             ),
                           ),
@@ -102,6 +110,10 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                 decoration: InputDecoration(
                                   label: Text(
                                     '予約日（自）',
+                                    style: TextStyle(
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
+                                    ),
                                   ),
                                   suffixIcon: const Icon(
                                     CupertinoIcons.calendar,
@@ -114,7 +126,11 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 4),
-                          child: Text('〜'),
+                          child: Text('〜',
+                            style: TextStyle(
+                              fontFamily: 'NotoSansJP',
+                              package: 'core_ui',
+                            ),),
                         ),
                         Expanded(
                           flex: 4,
@@ -135,6 +151,10 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                 decoration: InputDecoration(
                                   label: Text(
                                     '予約日（至）',
+                                    style: TextStyle(
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
+                                    ),
                                   ),
                                   suffixIcon: const Icon(
                                     CupertinoIcons.calendar,
@@ -164,6 +184,10 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                           children: [
                             Text(
                               '予約状態',
+                              style: TextStyle(
+                                fontFamily: 'NotoSansJP',
+                                package: 'core_ui',
+                              ),
                             ),
                             Row(
                               children: [
@@ -178,7 +202,11 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                     ),
                                     value: true,
                                     onChanged: (value) {}),
-                                Text('問合せ中'),
+                                Text('問合せ中',
+                                  style: TextStyle(
+                                    fontFamily: 'NotoSansJP',
+                                    package: 'core_ui',
+                                  ),),
                                 Checkbox(
                                     activeColor: Theme.of(context).primaryColor,
                                     checkColor: Colors.white,
@@ -190,7 +218,11 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                     ),
                                     value: true,
                                     onChanged: (value) {}),
-                                Text('予約確定'),
+                                Text('予約確定',
+                                  style: TextStyle(
+                                    fontFamily: 'NotoSansJP',
+                                    package: 'core_ui',
+                                  ),),
                               ],
                             )
                           ],
@@ -198,7 +230,11 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                         SizedBox(width: context.appTheme.spacing.marginMedium),
                         ElevatedButton(
                           onPressed: () {},
-                          child: Text('検索'),
+                          child: Text('検索',
+                            style: TextStyle(
+                              fontFamily: 'NotoSansJP',
+                              package: 'core_ui',
+                            ),),
                         ),
                       ],
                     ),

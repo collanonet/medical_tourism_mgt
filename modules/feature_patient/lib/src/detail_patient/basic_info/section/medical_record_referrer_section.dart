@@ -16,6 +16,8 @@ class MedicalRecordReferrerSection extends StatelessWidget {
         const Text(
           '紹介者',
           style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
             fontWeight: FontWeight.bold,
           ),
         ),

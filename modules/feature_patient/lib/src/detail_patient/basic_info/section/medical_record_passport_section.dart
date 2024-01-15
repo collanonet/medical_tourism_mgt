@@ -83,6 +83,8 @@ class _MedicalRecordPassportSectionState
             const Text(
               'パスポート',
               style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                 fontWeight: FontWeight.bold,
               ),
             ),

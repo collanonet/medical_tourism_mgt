@@ -51,6 +51,8 @@ class AutoTranslateScreen extends StatelessWidget {
                       child: const Text(
                         'またはファイルを選択する',
                         style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                           color: Colors.white,
                         ),
                       ),

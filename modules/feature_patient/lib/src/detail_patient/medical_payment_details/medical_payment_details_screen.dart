@@ -58,6 +58,8 @@ class _MedicalPaymentDetailScreenState
                         child: const Text(
                           'またはファイルを選択する',
                           style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                             color: Colors.white,
                           ),
                         ),
@@ -79,6 +81,8 @@ class _MedicalPaymentDetailScreenState
                 child: const Text(
                   '外部URLを追加',
                   style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                     color: Colors.white,
                   ),
                 ),
@@ -162,6 +166,8 @@ class _MedicalPaymentDetailScreenState
                 child: const Text(
                   '削除する',
                   style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                     color: Colors.white,
                   ),
                 ),

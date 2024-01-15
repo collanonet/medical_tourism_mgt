@@ -441,6 +441,8 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                     child: const Text(
                       '書類を選択する',
                       style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                         color: Colors.white,
                       ),
                     ),
