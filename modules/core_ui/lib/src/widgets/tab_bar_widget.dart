@@ -22,7 +22,13 @@ class TabBarWidget extends StatelessWidget {
       children: List.generate(
         menu.length,
         (index) => Badge(
-          label: const Text('1'),
+          label: const Text(
+            '1',
+            style: TextStyle(
+              fontFamily: 'NotoSansJP',
+              package: 'core_ui',
+            ),
+          ),
           isLabelVisible: index == 5,
           child: index == selectedIndex
               ? ElevatedButton(
@@ -31,6 +37,8 @@ class TabBarWidget extends StatelessWidget {
                     backgroundColor: context.appTheme.primaryColor,
                     textStyle: const TextStyle(
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'NotoSansJP',
+                      package: 'core_ui',
                     ),
                     side: BorderSide(
                         color: context.appTheme.primaryColor, width: 2),
@@ -48,13 +56,20 @@ class TabBarWidget extends StatelessWidget {
                   onPressed: () {
                     onPressed?.call(index);
                   },
-                  child: Text(menu[index]))
+                  child: Text(menu[index],
+                      style: TextStyle(
+                        fontFamily: 'NotoSansJP',
+                        package: 'core_ui',
+                      )),
+                )
               : ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     foregroundColor: context.appTheme.primaryColor,
                     backgroundColor: Colors.white,
                     textStyle: TextStyle(
                       fontWeight: FontWeight.bold,
+                      fontFamily: 'NotoSansJP',
+                      package: 'core_ui',
                     ),
                     side: BorderSide(
                         color: context.appTheme.primaryColor, width: 2),
@@ -72,7 +87,14 @@ class TabBarWidget extends StatelessWidget {
                   onPressed: () {
                     onPressed?.call(index);
                   },
-                  child: Text(menu[index])),
+                  child: Text(
+                    menu[index],
+                    style: TextStyle(
+                      fontFamily: 'NotoSansJP',
+                      package: 'core_ui',
+                    ),
+                  ),
+                ),
         ),
       ),
     );

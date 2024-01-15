@@ -11,7 +11,11 @@ class QuotationScreen extends StatelessWidget {
       children: [
         QuotationFilter(),
         const Center(
-          child: Text('Quotation Screen'),
+          child: Text('Quotation Screen',
+            style: TextStyle(
+              fontFamily: 'NotoSansJP',
+              package: 'core_ui',
+            ),),
         ),
       ],
     );

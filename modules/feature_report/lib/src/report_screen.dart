@@ -11,7 +11,11 @@ class ReportScreen extends StatelessWidget {
       children: [
         ReportFilter(),
         const Center(
-          child: Text('Report Screen'),
+          child: Text('Report Screen',
+            style: TextStyle(
+              fontFamily: 'NotoSansJP',
+              package: 'core_ui',
+            ),),
         ),
       ],
     );

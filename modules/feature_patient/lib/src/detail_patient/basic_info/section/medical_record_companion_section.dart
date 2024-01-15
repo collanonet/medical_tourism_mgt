@@ -85,6 +85,8 @@ class _MedicalRecordCompanionSectionState
                               const Text(
                                 '同行者',
                                 style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                                   fontWeight: FontWeight.bold,
                                 ),
                               ), // TODO: l10n 対応 (同行者) (companion)
@@ -140,6 +142,8 @@ class _MedicalRecordCompanionSectionState
                               const Text(
                                 '氏名（ローマ字）',
                                 style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -188,6 +192,8 @@ class _MedicalRecordCompanionSectionState
                               const Text(
                                 '氏名（中国語漢字/ベトナム語表記）',
                                 style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -239,6 +245,8 @@ class _MedicalRecordCompanionSectionState
                               const Text(
                                 '氏名（日本語漢字）※中国人のみ',
                                 style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -290,6 +298,8 @@ class _MedicalRecordCompanionSectionState
                               const Text(
                                 '氏名（カナ）',
                                 style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -593,6 +603,8 @@ class _MedicalRecordCompanionSectionState
                                     Text(
                                       'チャットツールリンクを追加',
                                       style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                                           color: context.appTheme.primaryColor),
                                     )
                                   ],
@@ -661,6 +673,8 @@ class _MedicalRecordCompanionSectionState
                               ),
                               Text('パスポート', // TODO: l10n 対応 (パスポート) (passport)
                                   style: const TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                                     fontWeight: FontWeight.bold,
                                   )),
                               RowSeparated(
@@ -830,7 +844,9 @@ class _MedicalRecordCompanionSectionState
               ),
               Text(
                 '同行者を追加',
-                style: TextStyle(color: context.appTheme.primaryColor),
+                style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',color: context.appTheme.primaryColor),
               ) // TODO: l10n 対応 (同行者を追加) (addCompanion)
             ],
           ),

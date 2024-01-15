@@ -122,6 +122,8 @@ class CreateMedicalOverseaDataWithUrlScreen extends StatelessWidget {
                       child: const Text(
                         'ファイルを選択',
                         style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                           color: Colors.white,
                         ),
                       ),

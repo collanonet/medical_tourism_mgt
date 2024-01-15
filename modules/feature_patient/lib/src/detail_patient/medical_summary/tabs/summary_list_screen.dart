@@ -130,6 +130,8 @@ class SummaryListScreen extends StatelessWidget {
               child: const Text(
                 '共有する',
                 style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                   color: Colors.white,
                 ),
               ),
@@ -142,6 +144,8 @@ class SummaryListScreen extends StatelessWidget {
               child: const Text(
                 '閲覧する',
                 style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                   color: Colors.white,
                 ),
               ),
@@ -154,6 +158,8 @@ class SummaryListScreen extends StatelessWidget {
               child: const Text(
                 '印刷する',
                 style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                   color: Colors.white,
                 ),
               ),

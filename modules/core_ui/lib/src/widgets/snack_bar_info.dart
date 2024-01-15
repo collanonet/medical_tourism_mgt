@@ -19,6 +19,10 @@ ScaffoldFeatureController<SnackBar, SnackBarClosedReason> snackBarWidget({
         },
         Text(
           mgs,
+          style: TextStyle(
+            fontFamily: 'NotoSansJP',
+            package: 'core_ui',
+          ),
         ),
       ],
     ),

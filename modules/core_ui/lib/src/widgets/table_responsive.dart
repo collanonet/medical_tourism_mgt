@@ -188,7 +188,11 @@ class _DynamicTableState extends State<DynamicTable> {
                   onPressed: _currentPage > 0 ? _loadPreviousPage : null,
                   icon: const Icon(Icons.arrow_left),
                 ),
-                Text('Page ${_currentPage + 1}'),
+                Text('Page ${_currentPage + 1}',
+                  style: TextStyle(
+                    fontFamily: 'NotoSansJP',
+                    package: 'core_ui',
+                  ),),
                 IconButton(
                   onPressed:
                       endIndex < widget.data.rows.length ? _loadNextPage : null,

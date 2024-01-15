@@ -55,7 +55,10 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                   isHorizontalScrollBarVisible: true,
                   scrollController: scrollController,
                   horizontalScrollController: horizontalScrollController,
-                  headingTextStyle: const TextStyle(color: Colors.grey),
+                  headingTextStyle: const TextStyle(
+                      fontFamily: 'NotoSansJP',
+                      package: 'core_ui',
+                      color: Colors.grey),
                   dividerThickness: 0,
                   empty: const Center(
                     child: Text('Pre-Patient List'),
@@ -108,6 +111,8 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                                     Text(
                                       '大瀚人力资源集团',
                                       style: TextStyle(
+                                        fontFamily: 'NotoSansJP',
+                                        package: 'core_ui',
                                         color: context.appTheme.primaryColor,
                                       ),
                                     ),
@@ -123,6 +128,8 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                                     const Text(
                                       'WANG MUCHEN',
                                       style: TextStyle(
+                                        fontFamily: 'NotoSansJP',
+                                        package: 'core_ui',
                                         color: Colors.blueGrey,
                                       ),
                                     ),
@@ -143,8 +150,10 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                                         borderRadius: BorderRadius.circular(4)),
                                     child: Text(
                                       '${item.classification}',
-                                      style:
-                                          const TextStyle(color: Colors.white),
+                                      style: const TextStyle(
+                                          fontFamily: 'NotoSansJP',
+                                          package: 'core_ui',
+                                          color: Colors.white),
                                     ),
                                   ),
                                   const SizedBox(width: 4),
@@ -156,7 +165,10 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                                         borderRadius: BorderRadius.circular(4)),
                                     child: const Text(
                                       '再生',
-                                      style: TextStyle(color: Colors.white),
+                                      style: TextStyle(
+                                          fontFamily: 'NotoSansJP',
+                                          package: 'core_ui',
+                                          color: Colors.white),
                                     ),
                                   )
                                 ],
@@ -223,124 +235,6 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                             ],
                           );
                         }).toList()
-
-                      // model.prePatientData.data!.items
-                      //         .map(
-                      //           (e) => DataRow(
-                      //             // color: MaterialStatePropertyAll(index % 2 != 0
-                      //             //     ? Colors.white
-                      //             //     : const Color(0xffEDF8F8)),
-                      //             cells: [
-                      //               DataCell(
-                      //                 Column(
-                      //                   mainAxisSize: MainAxisSize.min,
-                      //                   crossAxisAlignment:
-                      //                       CrossAxisAlignment.start,
-                      //                   children: [
-                      //                     Text(
-                      //                       '大瀚人力资源集团',
-                      //                       style: TextStyle(
-                      //                         color: context.appTheme.primaryColor,
-                      //                       ),
-                      //                     ),
-                      //                     Text(e.agents),
-                      //                   ],
-                      //                 ),
-                      //               ),
-                      //               DataCell(
-                      //                 Column(
-                      //                   mainAxisSize: MainAxisSize.min,
-                      //                   crossAxisAlignment:
-                      //                       CrossAxisAlignment.start,
-                      //                   children: [
-                      //                     const Text(
-                      //                       'WANG MUCHEN',
-                      //                       style: TextStyle(
-                      //                         color: Colors.blueGrey,
-                      //                       ),
-                      //                     ),
-                      //                     Text(e.patient),
-                      //                   ],
-                      //                 ),
-                      //               ),
-                      //               DataCell(Text(e.dateOfBirth.toString())),
-                      //               DataCell(Text(e.gender)),
-                      //               DataCell(Text(e.nationality)),
-                      //               DataCell(Row(
-                      //                 children: [
-                      //                   Container(
-                      //                     padding: const EdgeInsets.symmetric(
-                      //                         horizontal: 8, vertical: 4),
-                      //                     decoration: BoxDecoration(
-                      //                         color: Colors.blue,
-                      //                         borderRadius:
-                      //                             BorderRadius.circular(4)),
-                      //                     child: Text(
-                      //                       e.classification,
-                      //                       style: const TextStyle(
-                      //                           color: Colors.white),
-                      //                     ),
-                      //                   ),
-                      //                   const SizedBox(width: 4),
-                      //                   Container(
-                      //                     padding: const EdgeInsets.symmetric(
-                      //                         horizontal: 8, vertical: 4),
-                      //                     decoration: BoxDecoration(
-                      //                         color: Colors.purple,
-                      //                         borderRadius:
-                      //                             BorderRadius.circular(4)),
-                      //                     child: const Text(
-                      //                       '再生',
-                      //                       style: TextStyle(color: Colors.white),
-                      //                     ),
-                      //                   )
-                      //                 ],
-                      //               )),
-                      //               DataCell(Text(e.nameOfDisease)),
-                      //               DataCell(e.isDeleted
-                      //                   ? ElevatedButton(
-                      //                       style: ButtonStyle(
-                      //                         backgroundColor:
-                      //                             MaterialStateProperty.all(
-                      //                           Colors.grey,
-                      //                         ),
-                      //                       ),
-                      //                       onPressed: () {},
-                      //                       child: Text(context.l10n.actionDeleted),
-                      //                     )
-                      //                   : Row(
-                      //                       children: [
-                      //                         ElevatedButton(
-                      //                           onPressed: () {},
-                      //                           child: Text(context
-                      //                               .l10n.actionGoToRegister),
-                      //                         ),
-                      //                         const SizedBox(width: 16),
-                      //                         OutlinedButton(
-                      //                           onPressed: model
-                      //                                   .deletePrePatientData
-                      //                                   .loading
-                      //                               ? null
-                      //                               : () {
-                      //                                   model
-                      //                                       .deletePrePatient(e.id);
-                      //                                 },
-                      //                           child: model.deletePrePatientData
-                      //                                       .loading &&
-                      //                                   model.deletePrePatientData
-                      //                                           .data ==
-                      //                                       e.id
-                      //                               ? const CircularProgressIndicator()
-                      //                               : Text(
-                      //                                   context.l10n.actionDelete,
-                      //                                 ),
-                      //                         ),
-                      //                       ],
-                      //                     )),
-                      //             ],
-                      //           ),
-                      //         )
-                      //         .toList()
                       : [],
                 ),
               ),

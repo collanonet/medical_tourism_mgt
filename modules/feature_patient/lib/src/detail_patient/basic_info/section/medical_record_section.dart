@@ -68,6 +68,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
             const Text(
               '本人',
               style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                 fontWeight: FontWeight.bold,
               ),
             ), // TODO: l10n 対応 (本人)  (patient)
@@ -204,6 +206,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     child: const Text(
                       'パスポートを表示する',
                       style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                         color: Colors.white,
                       ),
                     ),
@@ -405,7 +409,9 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                   ),
                   Text(
                     '病院を追加',
-                    style: TextStyle(color: context.appTheme.primaryColor),
+                    style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',color: context.appTheme.primaryColor),
                   )
                 ],
               ),

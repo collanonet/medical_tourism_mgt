@@ -16,6 +16,8 @@ class MedicalRecordInterpreterSection extends StatelessWidget {
         const Text(
           '医療通訳',
           style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
             fontWeight: FontWeight.bold,
           ),
         ),

@@ -17,6 +17,8 @@ class MedicalRecordNationalitySection extends StatelessWidget {
         const Text(
           '国籍と連絡先',
           style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -174,7 +176,9 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                     ),
                     Text(
                       'チャットツールリンクを追加',
-                      style: TextStyle(color: context.appTheme.primaryColor),
+                      style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',color: context.appTheme.primaryColor),
                     )
                   ],
                 ),
