@@ -39,6 +39,8 @@ class MedicalRecordHospitalSection extends StatelessWidget {
               const Text(
                 '病院',
                 style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                   fontWeight: FontWeight.bold,
                 ),
               ), // TODO: l10n 対応 (病院) (hospital)
@@ -121,7 +123,9 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                     ),
                     Text(
                       '病院を追加',
-                      style: TextStyle(color: context.appTheme.primaryColor),
+                      style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',color: context.appTheme.primaryColor),
                     ) // TODO: l10n 対応 (病院を追加) (addHospital)
                   ],
                 ),

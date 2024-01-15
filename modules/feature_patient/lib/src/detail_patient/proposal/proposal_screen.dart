@@ -119,7 +119,9 @@ class ProposalScreen extends StatelessWidget {
             ),
             Text(
               '病院を追加',
-              style: TextStyle(color: context.appTheme.primaryColor),
+              style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',color: context.appTheme.primaryColor),
             )
           ],
         )

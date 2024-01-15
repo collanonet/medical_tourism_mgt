@@ -119,7 +119,7 @@ class AppThemeData {
         minimumSize: Size.fromHeight(32.0),
         textStyle: TextStyle(
           fontWeight: FontWeight.w500,
-          fontFamily: 'KB PRASAC',
+          fontFamily: 'NotoSansJP',
           fontSize: 15.0,
         ),
       ),
@@ -146,14 +146,14 @@ class AppThemeData {
           ),
           titleAlignment: ListTileTitleAlignment.bottom,
           titleTextStyle: const TextStyle(
-            fontFamily: 'KB PRASAC',
+            fontFamily: 'NotoSansJP',
             fontSize: 15.0,
             fontWeight: FontWeight.w500,
             color: primaryTextColor,
           ),
           subtitleTextStyle: const TextStyle(
             color: secondaryTextColor,
-            fontFamily: 'KB PRASAC',
+            fontFamily: 'NotoSansJP',
             fontSize: 13.0,
           ),
         ),
@@ -163,7 +163,7 @@ class AppThemeData {
 
   ThemeData build(BuildContext context) {
     return ThemeData(
-      fontFamily: 'KB PRASAC',
+      fontFamily: 'NotoSansJP',
       primaryColor: primaryColor,
       scaffoldBackgroundColor: primaryBackgroundColor,
       primarySwatch: generateMaterialColor(primaryColor),
@@ -191,6 +191,8 @@ class AppThemeData {
         elevation: 1,
         centerTitle: true,
         titleTextStyle: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
           fontSize: 16.0,
           color: primaryTextColor,
           fontWeight: FontWeight.w500,
@@ -264,6 +266,8 @@ class AppThemeData {
       ),
       inputDecorationTheme: InputDecorationTheme(
         hintStyle: const TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
           fontSize: 15.0,
           color: Color(0xFF5B5B5B),
         ),
@@ -437,38 +441,46 @@ class Typography {
     return TextTheme(
       titleLarge: const TextStyle(
         fontWeight: FontWeight.w600,
+        fontFamily: 'NotoSansJP',
         package: 'core_ui',
       ),
       titleMedium: const TextStyle(
         fontWeight: FontWeight.w500,
+        fontFamily: 'NotoSansJP',
         package: 'core_ui',
       ),
       bodyLarge: const TextStyle(
         fontSize: 17.0,
+        fontFamily: 'NotoSansJP',
         package: 'core_ui',
       ),
       bodyMedium: const TextStyle(
         fontSize: 15.0,
+        fontFamily: 'NotoSansJP',
         package: 'core_ui',
       ),
       bodySmall: const TextStyle(
         fontSize: 13.0,
         color: Color(0xFF8E8E8E),
+        fontFamily: 'NotoSansJP',
         package: 'core_ui',
       ),
       labelMedium: const TextStyle(
+        fontFamily: 'NotoSansJP',
         package: 'core_ui',
       ),
       labelSmall: TextStyle(
         color: bodyTextColor,
         fontSize: 12.0,
         fontWeight: FontWeight.w500,
+        fontFamily: 'NotoSansJP',
         package: 'core_ui',
       ),
       headlineSmall: TextStyle(
         color: successTextColor,
         fontWeight: FontWeight.bold,
         fontSize: 26.0,
+        fontFamily: 'NotoSansJP',
         package: 'core_ui',
       ),
     )..apply(
@@ -555,13 +567,17 @@ class PinPutThemeData {
         width: size,
         height: size,
         decoration: decoration,
-        textStyle: TextStyle(fontSize: fontSize),
+        textStyle: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',fontSize: fontSize),
       ),
       focusPinTheme: PinTheme(
         width: size,
         height: size,
         decoration: decoration,
-        textStyle: TextStyle(fontSize: fontSize),
+        textStyle: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',fontSize: fontSize),
       ),
     );
   }

@@ -6,7 +6,13 @@ class SaleScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('Sale Screen'),
+      child: Text(
+        'Sale Screen',
+        style: TextStyle(
+          fontFamily: 'NotoSansJP',
+          package: 'core_ui',
+        ),
+      ),
     );
   }
 }

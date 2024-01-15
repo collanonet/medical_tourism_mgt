@@ -16,6 +16,8 @@ class MedicalRecordBudgetSection extends StatelessWidget {
         const Text(
           '予算',
           style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
             fontWeight: FontWeight.bold,
           ),
         ),

@@ -39,6 +39,8 @@ class BasicInfoSection extends StatelessWidget {
                 children: [
                   Text('メモ（エージェント/病院には共有されません）',
                       style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                         fontWeight: FontWeight.bold,
                       )),
                   ReactiveTextField(

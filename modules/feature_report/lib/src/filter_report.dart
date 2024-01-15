@@ -52,6 +52,10 @@ class _ReportFilterState extends State<ReportFilter> {
                             decoration: InputDecoration(
                               label: Text(
                                 context.l10n.labelPatientName,
+                                style: TextStyle(
+                                  fontFamily: 'NotoSansJP',
+                                  package: 'core_ui',
+                                ),
                               ),
                             ),
                           ),
@@ -64,6 +68,10 @@ class _ReportFilterState extends State<ReportFilter> {
                             decoration: InputDecoration(
                               label: Text(
                                 '査証',
+                                style: TextStyle(
+                                  fontFamily: 'NotoSansJP',
+                                  package: 'core_ui',
+                                ),
                               ),
                             ),
                           ),
@@ -76,6 +84,10 @@ class _ReportFilterState extends State<ReportFilter> {
                             decoration: InputDecoration(
                               label: Text(
                                 '報告書',
+                                style: TextStyle(
+                                  fontFamily: 'NotoSansJP',
+                                  package: 'core_ui',
+                                ),
                               ),
                             ),
                           ),
@@ -97,7 +109,11 @@ class _ReportFilterState extends State<ReportFilter> {
                                 _check = value!;
                               });
                             }),
-                        Text('取下対象者')
+                        Text('取下対象者',
+                          style: TextStyle(
+                            fontFamily: 'NotoSansJP',
+                            package: 'core_ui',
+                          ),)
                       ],
                     ),
                     const SizedBox(height: 16),
@@ -110,6 +126,10 @@ class _ReportFilterState extends State<ReportFilter> {
                             decoration: InputDecoration(
                               label: Text(
                                 context.l10n.labelClassification,
+                                style: TextStyle(
+                                  fontFamily: 'NotoSansJP',
+                                  package: 'core_ui',
+                                ),
                               ),
                             ),
                           ),
@@ -122,6 +142,10 @@ class _ReportFilterState extends State<ReportFilter> {
                             decoration: InputDecoration(
                               label: Text(
                                 context.l10n.labelSalesRepresentative,
+                                style: TextStyle(
+                                  fontFamily: 'NotoSansJP',
+                                  package: 'core_ui',
+                                ),
                               ),
                             ),
                           ),
@@ -152,6 +176,10 @@ class _ReportFilterState extends State<ReportFilter> {
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelEntryDateFrom,
+                                    style: TextStyle(
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
+                                    ),
                                   ),
                                   suffixIcon: const Icon(
                                     CupertinoIcons.calendar,
@@ -164,7 +192,11 @@ class _ReportFilterState extends State<ReportFilter> {
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 4),
-                          child: Text('〜'),
+                          child: Text('〜',
+                            style: TextStyle(
+                              fontFamily: 'NotoSansJP',
+                              package: 'core_ui',
+                            ),),
                         ),
                         Expanded(
                           flex: 4,
@@ -185,6 +217,10 @@ class _ReportFilterState extends State<ReportFilter> {
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelEntryDateTo,
+                                    style: TextStyle(
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
+                                    ),
                                   ),
                                   suffixIcon: const Icon(
                                     CupertinoIcons.calendar,
@@ -215,6 +251,10 @@ class _ReportFilterState extends State<ReportFilter> {
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelExaminationDateFrom,
+                                    style: TextStyle(
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
+                                    ),
                                   ),
                                   suffixIcon: const Icon(
                                     CupertinoIcons.calendar,
@@ -227,7 +267,11 @@ class _ReportFilterState extends State<ReportFilter> {
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 4),
-                          child: Text('〜'),
+                          child: Text('〜',
+                            style: TextStyle(
+                              fontFamily: 'NotoSansJP',
+                              package: 'core_ui',
+                            ),),
                         ),
                         Expanded(
                           flex: 4,
@@ -248,6 +292,10 @@ class _ReportFilterState extends State<ReportFilter> {
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelExaminationDateTo,
+                                    style: TextStyle(
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
+                                    ),
                                   ),
                                   suffixIcon: const Icon(
                                     CupertinoIcons.calendar,
@@ -278,6 +326,10 @@ class _ReportFilterState extends State<ReportFilter> {
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelReturnDateFrom,
+                                    style: TextStyle(
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
+                                    ),
                                   ),
                                   suffixIcon: const Icon(
                                     CupertinoIcons.calendar,
@@ -290,7 +342,11 @@ class _ReportFilterState extends State<ReportFilter> {
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 4),
-                          child: Text('〜'),
+                          child: Text('〜',
+                            style: TextStyle(
+                              fontFamily: 'NotoSansJP',
+                              package: 'core_ui',
+                            ),),
                         ),
                         Expanded(
                           flex: 4,
@@ -311,6 +367,10 @@ class _ReportFilterState extends State<ReportFilter> {
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelReturnDateTo,
+                                    style: TextStyle(
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
+                                    ),
                                   ),
                                   suffixIcon: const Icon(
                                     CupertinoIcons.calendar,
@@ -333,12 +393,20 @@ class _ReportFilterState extends State<ReportFilter> {
                           },
                           child: Text(
                             context.l10n.actionClear,
+                            style: TextStyle(
+                              fontFamily: 'NotoSansJP',
+                              package: 'core_ui',
+                            ),
                           ),
                         ),
                         const SizedBox(width: 16),
                         ElevatedButton(
                           onPressed: () {},
-                          child: Text(context.l10n.actionSearch),
+                          child: Text(context.l10n.actionSearch,
+                            style: TextStyle(
+                              fontFamily: 'NotoSansJP',
+                              package: 'core_ui',
+                            ),),
                         ),
                       ],
                     )

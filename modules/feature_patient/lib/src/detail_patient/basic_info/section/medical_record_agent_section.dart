@@ -34,6 +34,8 @@ class MedicalRecordAgentSection extends StatelessWidget {
         const Text(
           'エージェント',
           style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
             fontWeight: FontWeight.bold,
           ),
         ),

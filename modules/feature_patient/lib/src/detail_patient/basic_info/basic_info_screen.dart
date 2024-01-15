@@ -31,6 +31,8 @@ class BasicInformationScreen extends StatelessWidget {
                     child: const Text(
                       '保存する', // TODO: l10n 対応 (保存する) (save)
                       style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                         color: Colors.white,
                       ),
                     ),

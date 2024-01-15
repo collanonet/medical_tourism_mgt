@@ -32,6 +32,8 @@ class MedicalRecordNameSection extends StatelessWidget {
               const Text(
                 '氏名（ローマ字）',
                 style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -78,6 +80,8 @@ class MedicalRecordNameSection extends StatelessWidget {
               const Text(
                 '氏名（中国語漢字/ベトナム語表記）',
                 style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -124,6 +128,8 @@ class MedicalRecordNameSection extends StatelessWidget {
               const Text(
                 '氏名（日本語漢字）※中国人のみ',
                 style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -170,6 +176,8 @@ class MedicalRecordNameSection extends StatelessWidget {
               const Text(
                 '氏名（カナ）',
                 style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                   fontWeight: FontWeight.bold,
                 ),
               ),

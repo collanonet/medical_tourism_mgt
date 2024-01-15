@@ -354,6 +354,8 @@ class _BillingScreenState extends State<BillingScreen> {
                             Text(
                               '本人のビザを追加',
                               style: TextStyle(
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
                                   color: context.appTheme.primaryColor),
                             )
                           ],
