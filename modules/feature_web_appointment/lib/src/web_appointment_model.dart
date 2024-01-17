@@ -19,16 +19,16 @@ class WebAppointmentModel with ChangeNotifier {
   AsyncData<Paginated<Patient>> get patientData => _patientData;
 
   Future<void> patients() {
-  _patientData = const AsyncData(loading: true);
-  notifyListeners();
+    _patientData = const AsyncData(loading: true);
+    notifyListeners();
 
-  return patientRepository.patients().then((value) {
-  _patientData = AsyncData(data: value);
-  }).catchError((error) {
-  logger.d(error);
-  _patientData = AsyncData(error: error);
-  }).whenComplete(() {
-  notifyListeners();
-  });
+    return patientRepository.patients().then((value) {
+      _patientData = AsyncData(data: value);
+    }).catchError((error) {
+      logger.d(error);
+      _patientData = AsyncData(error: error);
+    }).whenComplete(() {
+      notifyListeners();
+    });
   }
 }
