@@ -1,8 +1,11 @@
-import '../entities/permission_role.dart';
+import 'package:core_network/entities.dart';
 
 const _dataMap = {
   PermissionRole.guest: 'ROLE_GUEST',
-  PermissionRole.user: 'ROLE_USER',
+  PermissionRole.admin: 'Admin',
+  PermissionRole.hospital: 'Hospital',
+  PermissionRole.agent: 'Agent',
+  PermissionRole.patient: 'Patient',
 };
 
 String? encodeRole(PermissionRole? role) {
