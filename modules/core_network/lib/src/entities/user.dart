@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:core_network/entities.dart';
+import '../../entities.dart';
 part 'user.g.dart';
 
 @JsonSerializable()
@@ -15,8 +15,7 @@ class User {
   final DateTime updatedAt;
   final PermissionRole role;
 
-  User(
-    this.role, {
+  User({
     required this.id,
     required this.fullName,
     required this.email,
@@ -25,6 +24,7 @@ class User {
     required this.phoneNumber,
     required this.createdAt,
     required this.updatedAt,
+    required this.role,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
