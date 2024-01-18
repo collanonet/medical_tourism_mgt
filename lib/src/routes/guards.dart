@@ -1,3 +1,4 @@
+import 'package:core_network/entities.dart';
 import 'package:data_auth/data_auth.dart';
 import 'package:get_it/get_it.dart';
 

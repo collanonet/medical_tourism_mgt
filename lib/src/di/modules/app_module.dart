@@ -1,5 +1,5 @@
 import 'dart:ui';
-
+import 'package:core_network/entities.dart';
 import 'package:feature_agent/feature_agent.gm.dart';
 import 'package:feature_auth/feature_auth.dart';
 import 'package:feature_chats/feature_chats.gm.dart';
@@ -29,23 +29,23 @@ abstract class AppModule {
     return RoleGuard(
       policies: {
         LoginRoute.name: [PermissionRole.guest],
-        AgentsRoute.name: [PermissionRole.user],
-        ChatRoute.name: [PermissionRole.user],
-        HospitalsRoute.name: [PermissionRole.user],
-        InvoicesRoute.name: [PermissionRole.user],
-        MedicalVisasRoute.name: [PermissionRole.user],
-        PrePatientRoute.name: [PermissionRole.user],
-        DetailPatientRoute.name: [PermissionRole.user],
-        PatientsRoute.name: [PermissionRole.user],
-        QuotationsRoute.name: [PermissionRole.user],
-        ReportsRoute.name: [PermissionRole.user],
-        SalesRoute.name: [PermissionRole.user],
-        ProcessChartsRoute.name: [PermissionRole.user],
-        ItinerarySimplifiedRoute.name: [PermissionRole.user],
-        DetailProcessChartRoute.name: [PermissionRole.user],
-        WebAppointmentsRoute.name: [PermissionRole.user],
-        MedicalVisaDetailRoute.name: [PermissionRole.user],
-        WebAppointmentDetailRoute.name: [PermissionRole.user],
+        AgentsRoute.name: [PermissionRole.admin],
+        ChatRoute.name: [PermissionRole.admin],
+        HospitalsRoute.name: [PermissionRole.admin],
+        InvoicesRoute.name: [PermissionRole.admin],
+        MedicalVisasRoute.name: [PermissionRole.admin],
+        PrePatientRoute.name: [PermissionRole.admin],
+        DetailPatientRoute.name: [PermissionRole.admin],
+        PatientsRoute.name: [PermissionRole.admin],
+        QuotationsRoute.name: [PermissionRole.admin],
+        ReportsRoute.name: [PermissionRole.admin],
+        SalesRoute.name: [PermissionRole.admin],
+        ProcessChartsRoute.name: [PermissionRole.admin],
+        ItinerarySimplifiedRoute.name: [PermissionRole.admin],
+        DetailProcessChartRoute.name: [PermissionRole.admin],
+        WebAppointmentsRoute.name: [PermissionRole.admin],
+        MedicalVisaDetailRoute.name: [PermissionRole.admin],
+        WebAppointmentDetailRoute.name: [PermissionRole.admin],
       },
     );
   }

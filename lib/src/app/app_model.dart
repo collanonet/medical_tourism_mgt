@@ -6,7 +6,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:feature_auth/feature_auth.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
-
+import 'package:core_network/entities.dart';
 @lazySingleton
 class AppModel extends ChangeNotifier {
   AppModel({
@@ -21,14 +21,9 @@ class AppModel extends ChangeNotifier {
   bool get ready => _ready.requiredData;
 
   Future<void> initialize() async {
-    auth.addListener(() {
-      final role = auth.userRole;
-      if (role == PermissionRole.user) {
-        // biz.initialize();
-      } else {
-        // biz.clear();
-      }
-    });
+    // auth.addListener(() {
+    //   final role = auth.userRole;
+    // });
     await Future.wait([
       auth.initialize(),
       l10n.initialize(),

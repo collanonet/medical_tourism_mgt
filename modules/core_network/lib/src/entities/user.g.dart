@@ -15,6 +15,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       phoneNumber: json['phoneNumber'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
+      role: $enumDecode(_$PermissionRoleEnumMap, json['role']),
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
@@ -26,4 +27,13 @@ Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
       'phoneNumber': instance.phoneNumber,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
+      'role': _$PermissionRoleEnumMap[instance.role]!,
     };
+
+const _$PermissionRoleEnumMap = {
+  PermissionRole.guest: 'ROLE_GUEST',
+  PermissionRole.admin: 'Admin',
+  PermissionRole.hospital: 'Hospital',
+  PermissionRole.agent: 'Agent',
+  PermissionRole.patient: 'Patient',
+};

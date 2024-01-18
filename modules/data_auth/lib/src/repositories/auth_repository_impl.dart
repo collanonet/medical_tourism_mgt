@@ -1,6 +1,6 @@
 import 'package:core_network/core_network.dart';
 import 'package:injectable/injectable.dart';
-
+import 'package:core_network/entities.dart';
 import '../entities/index.dart';
 import '../exceptions/expired_token_exception.dart';
 import '../providers/auth_provider.dart';
@@ -59,7 +59,7 @@ class AuthRepositoryImpl extends AuthRepository {
           refreshToken: response.refreshToken,
           accessToken: response.accessToken,
         ),
-        role: PermissionRole.user,
+        role: response.user.role,
       ),
     );
     return response;

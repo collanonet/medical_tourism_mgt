@@ -1,8 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import 'credentials.dart';
-import 'permission_role.dart';
-
+import 'package:core_network/entities.dart';
 part 'auth_response.g.dart';
 
 @JsonSerializable()

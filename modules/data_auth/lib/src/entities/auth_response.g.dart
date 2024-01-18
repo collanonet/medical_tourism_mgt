@@ -20,5 +20,8 @@ Map<String, dynamic> _$AuthResponseToJson(AuthResponse instance) =>
 
 const _$PermissionRoleEnumMap = {
   PermissionRole.guest: 'ROLE_GUEST',
-  PermissionRole.user: 'ROLE_USER',
+  PermissionRole.admin: 'Admin',
+  PermissionRole.hospital: 'Hospital',
+  PermissionRole.agent: 'Agent',
+  PermissionRole.patient: 'Patient',
 };
