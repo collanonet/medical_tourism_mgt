@@ -73,13 +73,12 @@ class AppThemeData {
   final SegmentedTheme segmentedTheme;
   final PinPutTheme pinPutTheme;
   final ListTileTheme listTileTheme;
-
   factory AppThemeData.light() {
     const spacing = Spacing();
     const primaryTextColor = Colors.black;
     const secondaryTextColor = Color(0xFF8E8E8E);
     return AppThemeData(
-      primaryBackgroundColor: const Color(0xffF0F3F5),
+      primaryBackgroundColor: const Color(0xFFF7F7F7),
       secondaryBackgroundColor: Colors.white,
       primaryColor: const Color(0xFF00C6C6),
       iconColor: Colors.black,
@@ -120,6 +119,7 @@ class AppThemeData {
         textStyle: TextStyle(
           fontWeight: FontWeight.w500,
           fontFamily: 'NotoSansJP',
+          package: 'core_ui',
           fontSize: 15.0,
         ),
       ),
@@ -147,6 +147,7 @@ class AppThemeData {
           titleAlignment: ListTileTitleAlignment.bottom,
           titleTextStyle: const TextStyle(
             fontFamily: 'NotoSansJP',
+            package: 'core_ui',
             fontSize: 15.0,
             fontWeight: FontWeight.w500,
             color: primaryTextColor,
@@ -154,22 +155,24 @@ class AppThemeData {
           subtitleTextStyle: const TextStyle(
             color: secondaryTextColor,
             fontFamily: 'NotoSansJP',
+            package: 'core_ui',
             fontSize: 13.0,
           ),
         ),
       ),
     );
   }
-
   ThemeData build(BuildContext context) {
+    final textTheme = typography.build(context);
     return ThemeData(
+      useMaterial3: false,
       fontFamily: 'NotoSansJP',
       primaryColor: primaryColor,
       scaffoldBackgroundColor: primaryBackgroundColor,
       primarySwatch: generateMaterialColor(primaryColor),
       disabledColor: disabledColor,
       dividerColor: dividerColor,
-      textTheme: typography.build(context),
+      textTheme: textTheme,
       bottomSheetTheme: BottomSheetThemeData(
         clipBehavior: Clip.hardEdge,
         showDragHandle: true,
@@ -191,11 +194,11 @@ class AppThemeData {
         elevation: 1,
         centerTitle: true,
         titleTextStyle: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',
           fontSize: 16.0,
           color: primaryTextColor,
           fontWeight: FontWeight.w500,
+          fontFamily: 'NotoSansJP',
+          package: 'core_ui',
         ),
       ),
       cardTheme: CardTheme(
@@ -208,7 +211,6 @@ class AppThemeData {
       iconTheme: IconThemeData(color: iconColor),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
-          foregroundColor: Colors.white,
           backgroundColor: primaryColor,
           shadowColor: const Color.fromRGBO(230, 172, 13, 0.2),
           padding: EdgeInsets.symmetric(
@@ -220,6 +222,7 @@ class AppThemeData {
           ),
           disabledBackgroundColor: disableButtonColor,
           disabledForegroundColor: Colors.black,
+          textStyle: textTheme.labelLarge,
         ),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -227,29 +230,23 @@ class AppThemeData {
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          foregroundColor: Colors.white,
-          backgroundColor: primaryColor,
-          padding: EdgeInsets.symmetric(
-            vertical: spacing.buttonVertical,
-            horizontal: spacing.buttonHorizontal,
-          ),
+          backgroundColor: Colors.white,
+          padding: EdgeInsets.symmetric(vertical: spacing.buttonVertical),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
+          textStyle: textTheme.labelLarge,
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          padding: EdgeInsets.symmetric(
-            vertical: spacing.buttonVertical,
-            horizontal: spacing.buttonHorizontal,
-          ),
+          padding: EdgeInsets.symmetric(vertical: spacing.buttonVertical),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.0),
           ),
           side: BorderSide(width: 2, color: primaryColor),
-          foregroundColor: primaryColor,
-          backgroundColor: Colors.white,
+          foregroundColor: typography.bodyTextColor,
+          textStyle: textTheme.labelLarge,
         ),
       ),
       textButtonTheme: TextButtonThemeData(
@@ -262,14 +259,15 @@ class AppThemeData {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.0),
           ),
+          textStyle: textTheme.labelLarge,
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         hintStyle: const TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',
           fontSize: 15.0,
           color: Color(0xFF5B5B5B),
+          fontFamily: 'NotoSansJP',
+          package: 'core_ui',
         ),
         iconColor: primaryTextColor,
         suffixIconColor: primaryTextColor,
@@ -285,8 +283,6 @@ class AppThemeData {
           borderRadius: BorderRadius.circular(12.0),
           borderSide: BorderSide(color: disabledColor),
         ),
-        fillColor: Colors.white,
-        filled: true,
       ),
       listTileTheme: ListTileThemeData(
         shape: RoundedRectangleBorder(
@@ -465,6 +461,12 @@ class Typography {
         fontFamily: 'NotoSansJP',
         package: 'core_ui',
       ),
+      labelLarge: const TextStyle(
+        fontSize: 15,
+        fontWeight: FontWeight.w500,
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
+      ),
       labelMedium: const TextStyle(
         fontFamily: 'NotoSansJP',
         package: 'core_ui',
@@ -478,9 +480,9 @@ class Typography {
       ),
       headlineSmall: TextStyle(
         color: successTextColor,
+        fontFamily: 'NotoSansJP',
         fontWeight: FontWeight.bold,
         fontSize: 26.0,
-        fontFamily: 'NotoSansJP',
         package: 'core_ui',
       ),
     )..apply(
@@ -568,16 +570,20 @@ class PinPutThemeData {
         height: size,
         decoration: decoration,
         textStyle: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',fontSize: fontSize),
+          fontSize: fontSize,
+          fontFamily: 'NotoSansJP',
+          package: 'core_ui',
+        ),
       ),
       focusPinTheme: PinTheme(
         width: size,
         height: size,
         decoration: decoration,
         textStyle: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',fontSize: fontSize),
+          fontSize: fontSize,
+          fontFamily: 'NotoSansJP',
+          package: 'core_ui',
+        ),
       ),
     );
   }
