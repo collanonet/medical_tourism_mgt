@@ -59,14 +59,24 @@ flutter:
   fonts:
     - family: NotoSansJP
       fonts:
-        - asset: assets/fonts/NotoSansJP_VariableFont_wght.ttf
+        - asset: assets/fonts/NotoSansJPExtraLight.ttf
+          weight: 100
+        - asset: assets/fonts/NotoSansJPLight.ttf
+          weight: 200
+        - asset: assets/fonts/NotoSansJPThin.ttf
+          weight: 300
+        - asset: assets/fonts/NotoSansJPRegular.ttf
           weight: 400
-        - asset: assets/fonts/NotoSansJP_VariableFont_wght.ttf
+        - asset: assets/fonts/NotoSansJPMedium.ttf
           weight: 500
-        - asset: assets/fonts/NotoSansJP_VariableFont_wght.ttf
+        - asset: assets/fonts/NotoSansJPSemiBold.ttf
           weight: 600
-        - asset: assets/fonts/NotoSansJP_VariableFont_wght.ttf
+        - asset: assets/fonts/NotoSansJPBold.ttf
           weight: 700
+        - asset: assets/fonts/NotoSansJPExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/NotoSansJPBlack.ttf
+          weight: 900
     - family: UiIcons
       fonts:
         - asset: assets/fonts/UiIcons.ttf
