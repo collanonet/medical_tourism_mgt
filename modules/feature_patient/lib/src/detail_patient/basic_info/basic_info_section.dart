@@ -37,10 +37,10 @@ class BasicInfoSection extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text('メモ（エージェント/病院には共有されません）',
+                  const Text('メモ（エージェント/病院には共有されません）',
                       style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',
+                        fontFamily: 'NotoSansJP',
+                        package: 'core_ui',
                         fontWeight: FontWeight.bold,
                       )),
                   ReactiveTextField(
@@ -69,7 +69,7 @@ class BasicInfoSection extends StatelessWidget {
 
               Row(
                 children: [
-                  Text('グループリーダーに'),
+                  const Text('グループリーダーに'),
                   SizedBox(
                     width: context.appTheme.spacing.marginMedium,
                   ),

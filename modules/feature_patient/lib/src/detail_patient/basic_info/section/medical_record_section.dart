@@ -68,8 +68,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
             const Text(
               '本人',
               style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',
+                fontFamily: 'NotoSansJP',
+                package: 'core_ui',
                 fontWeight: FontWeight.bold,
               ),
             ), // TODO: l10n 対応 (本人)  (patient)
@@ -106,6 +106,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                           label: Text(
                             '生年月日', // TODO: l10n 対応 (生年月日) (dateOfBirth)
                           ),
+                          fillColor: Colors.white,
+                          filled: true,
                           suffixIcon: Icon(
                             CupertinoIcons.calendar,
                             color: Colors.grey,
@@ -175,6 +177,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     formControlName: 'height',
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
                       label: Text(
                         '身長',
                       ),
@@ -190,6 +194,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     formControlName: 'weight',
                     keyboardType: TextInputType.number,
                     decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
                       label: Text(
                         '体重',
                       ),
@@ -206,8 +212,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     child: const Text(
                       'パスポートを表示する',
                       style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',
+                        fontFamily: 'NotoSansJP',
+                        package: 'core_ui',
                         color: Colors.white,
                       ),
                     ),
@@ -233,6 +239,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                           dateTimeFormat: DateFormat('yyyy/MM/dd'),
                         ),
                         decoration: const InputDecoration(
+                          fillColor: Colors.white,
+                          filled: true,
                           label: Text(
                             '来日日', // TODO: l10n 対応 (来日日) (arrivalDate)
                           ),
@@ -264,6 +272,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                         ),
                         onTap: (value) => picker.showPicker(),
                         decoration: const InputDecoration(
+                          fillColor: Colors.white,
+                          filled: true,
                           label: Text(
                             '受診日', // TODO: l10n 対応 (受診日) (examinationDate)
                           ),
@@ -295,6 +305,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                         ),
                         onTap: (value) => picker.showPicker(),
                         decoration: const InputDecoration(
+                          fillColor: Colors.white,
+                          filled: true,
                           label: Text(
                             '帰国日', // TODO: l10n 対応 (帰国日) (departureDate)
                           ),
@@ -315,6 +327,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                   child: ReactiveTextField(
                     formControlName: 'caseNumber',
                     decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
                       label: Text(
                         '案件番号', // TODO: l10n 対応 (案件番号) (caseNumber)
                       ),
@@ -410,8 +424,9 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                   Text(
                     '病院を追加',
                     style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',color: context.appTheme.primaryColor),
+                        fontFamily: 'NotoSansJP',
+                        package: 'core_ui',
+                        color: context.appTheme.primaryColor),
                   )
                 ],
               ),

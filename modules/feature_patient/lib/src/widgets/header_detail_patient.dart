@@ -41,7 +41,35 @@ class HeaderDetailPatient extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text('${patient?.firstName} ${patient?.familyName ?? ''}'),
+                Row(
+                  children: [
+                    Text('${patient?.firstName} ${patient?.familyName ?? ''}'),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    ),
+                    Icon(
+                      Icons.star,
+                      color: Colors.orange,
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginSmall,
+                    ),
+                    Container(
+                      padding:
+                          EdgeInsets.all(context.appTheme.spacing.marginSmall),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        color: Colors.red,
+                      ),
+                      child: Text(
+                        '出国報告書対象者',
+                        style: context.textTheme.bodySmall?.copyWith(
+                          color: Colors.white,
+                        ),
+                      ),
+                    )
+                  ],
+                ),
                 SizedBox(
                   height: context.appTheme.spacing.marginSmall,
                 ),
@@ -72,6 +100,9 @@ class HeaderDetailPatient extends StatelessWidget {
                       width: context.appTheme.spacing.marginSmall,
                     ),
                     ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xff53A6FF),
+                      ),
                       onPressed: () {},
                       child: const Text('治療'),
                     ),
@@ -83,6 +114,9 @@ class HeaderDetailPatient extends StatelessWidget {
                       width: context.appTheme.spacing.marginSmall,
                     ),
                     ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xffDBE238),
+                      ),
                       onPressed: () {},
                       child: const Text('医療ビザ'),
                     ),
@@ -94,6 +128,9 @@ class HeaderDetailPatient extends StatelessWidget {
                       width: context.appTheme.spacing.marginSmall,
                     ),
                     ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xff00C6C6),
+                      ),
                       onPressed: () {},
                       child: const Text('受注'),
                     ),
@@ -104,14 +141,45 @@ class HeaderDetailPatient extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    OutlinedButton(
-                      onPressed: () {},
-                      child: const Text('進捗'),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: context.appTheme.spacing.marginMedium),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(
+                          color: context.appTheme.primaryColor,
+                        ),
+                      ),
+                      child: Text('GP',
+                          style: context.textTheme.bodySmall?.copyWith(
+                            color: context.appTheme.primaryColor,
+                          )),
                     ),
                     SizedBox(
                       width: context.appTheme.spacing.marginSmall,
                     ),
-                    const Text('進捗'),
+                    const Text('001-C-20'),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginExtraLarge,
+                    ),
+                    Container(
+                      padding: EdgeInsets.symmetric(
+                          horizontal: context.appTheme.spacing.marginMedium),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(4),
+                        border: Border.all(
+                          color: context.appTheme.primaryColor,
+                        ),
+                      ),
+                      child: Text('進捗',
+                          style: context.textTheme.bodySmall?.copyWith(
+                            color: context.appTheme.primaryColor,
+                          )),
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginSmall,
+                    ),
+                    const Text('見積&病院提案'),
                   ],
                 ),
               ],

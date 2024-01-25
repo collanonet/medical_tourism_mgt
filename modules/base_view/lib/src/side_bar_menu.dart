@@ -121,6 +121,7 @@ class SideBarMenu extends StatelessWidget {
                               title: Text(
                                 menus[index].title,
                                 style: context.textTheme.titleMedium?.copyWith(
+                                  fontSize: 16,
                                   color: selectedIndex == index
                                       ? Colors.white
                                       : context.appTheme.primaryColor,

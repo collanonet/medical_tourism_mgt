@@ -42,13 +42,13 @@ class TabBarWidget extends StatelessWidget {
                     ),
                     side: BorderSide(
                         color: context.appTheme.primaryColor, width: 2),
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(
-                          context.appTheme.spacing.borderRadiusMedium,
+                          6,
                         ),
                         topRight: Radius.circular(
-                          context.appTheme.spacing.borderRadiusMedium,
+                          6,
                         ),
                       ),
                     ),
@@ -73,13 +73,13 @@ class TabBarWidget extends StatelessWidget {
                     ),
                     side: BorderSide(
                         color: context.appTheme.primaryColor, width: 2),
-                    shape: RoundedRectangleBorder(
+                    shape: const RoundedRectangleBorder(
                       borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(
-                          context.appTheme.spacing.borderRadiusMedium,
+                          6,
                         ),
                         topRight: Radius.circular(
-                          context.appTheme.spacing.borderRadiusMedium,
+                          6,
                         ),
                       ),
                     ),

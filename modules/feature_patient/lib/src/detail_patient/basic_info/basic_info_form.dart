@@ -31,7 +31,9 @@ FormGroup basicInfoForm({
             FormControl<DateTime>(value: medicalRecord?.advancePaymentDate),
         'paymentMethod':
             FormControl<String>(value: medicalRecord?.paymentMethod),
-        'memo': FormControl<String>(value: medicalRecord?.memo),
+        'memo': FormControl<String>(
+            value: medicalRecord?.memo ??
+                '李さんの紹介で交渉中。相見積もりを行なっているようで、価格の点で納得できない様子。もし、来日することになった場合は、娘さんとの観光もしたいとのこと。'),
         'patient':
             FormControl<String>(value: patientId ?? medicalRecord?.patient),
         'MEDICAL_RECORD_HOSPITALS': FormArray([

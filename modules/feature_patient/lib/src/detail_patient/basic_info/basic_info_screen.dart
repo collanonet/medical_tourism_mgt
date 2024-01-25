@@ -25,18 +25,21 @@ class BasicInformationScreen extends StatelessWidget {
             children: [
               ReactiveFormConsumer(
                 builder: (context, form, _) {
-                  return model.loading  ? const CircularProgressIndicator() : ElevatedButton(
-                    onPressed:
-                        form.valid ? () => model.createUpdateAll(form) : null,
-                    child: const Text(
-                      '保存する', // TODO: l10n 対応 (保存する) (save)
-                      style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',
-                        color: Colors.white,
-                      ),
-                    ),
-                  );
+                  return model.loading
+                      ? const CircularProgressIndicator()
+                      : ElevatedButton(
+                          onPressed: form.valid
+                              ? () => model.createUpdateAll(form)
+                              : null,
+                          child: const Text(
+                            '保存する', // TODO: l10n 対応 (保存する) (save)
+                            style: TextStyle(
+                              fontFamily: 'NotoSansJP',
+                              package: 'core_ui',
+                              color: Colors.white,
+                            ),
+                          ),
+                        );
                 },
               )
             ],

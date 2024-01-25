@@ -113,7 +113,7 @@ class AppThemeData {
       segmentedTheme: const SegmentedTheme(
         selectedBackgroundColor: Colors.white,
         unselectedBackgroundColor: Color(0x36BEBEBE),
-        selectedTextColor: const Color(0xFF00C6C6),
+        selectedTextColor: Color(0xFF00C6C6),
         unselectedTextColor: Color(0xFF8E8E8E),
         minimumSize: Size.fromHeight(32.0),
         textStyle: TextStyle(
@@ -211,6 +211,7 @@ class AppThemeData {
       iconTheme: IconThemeData(color: iconColor),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
+          foregroundColor: Colors.white,
           backgroundColor: primaryColor,
           shadowColor: const Color.fromRGBO(230, 172, 13, 0.2),
           padding: EdgeInsets.symmetric(
@@ -230,7 +231,8 @@ class AppThemeData {
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: FilledButton.styleFrom(
-          backgroundColor: Colors.white,
+          foregroundColor: Colors.white,
+          backgroundColor: primaryColor,
           padding: EdgeInsets.symmetric(vertical: spacing.buttonVertical),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
@@ -240,14 +242,14 @@ class AppThemeData {
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          padding: EdgeInsets.symmetric(vertical: spacing.buttonVertical),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
-          ),
-          side: BorderSide(width: 2, color: primaryColor),
-          foregroundColor: typography.bodyTextColor,
-          textStyle: textTheme.labelLarge,
-        ),
+            foregroundColor: primaryColor,
+            backgroundColor: Colors.white,
+            padding: EdgeInsets.symmetric(vertical: spacing.buttonVertical),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            side: BorderSide(width: 2, color: primaryColor),
+            textStyle: textTheme.labelLarge),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
@@ -263,6 +265,8 @@ class AppThemeData {
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
+        fillColor: Colors.white,
+        filled: true,
         hintStyle: const TextStyle(
           fontSize: 15.0,
           color: Color(0xFF5B5B5B),
@@ -275,13 +279,17 @@ class AppThemeData {
           horizontal: spacing.inputHorizontal,
           vertical: spacing.inputVertical,
         ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6.0),
+          borderSide: BorderSide(color: primaryColor),
+        ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.0),
-          borderSide: BorderSide(color: borderColor),
+          borderRadius: BorderRadius.circular(6.0),
+          borderSide: const BorderSide(color: Color(0xffCDD6DD)),
         ),
         disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.0),
-          borderSide: BorderSide(color: disabledColor),
+          borderRadius: BorderRadius.circular(6.0),
+          borderSide: const BorderSide(color: Color(0xffCDD6DD)),
         ),
       ),
       listTileTheme: ListTileThemeData(
