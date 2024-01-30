@@ -66,10 +66,6 @@ scripts:
       melos exec -c 6 --fail-fast -- \ fvm flutter pub run flutter_launcher_icons -f flutter_launcher_icons*
     packageFilters:
       scope: "medical_tourism_mgt"
-  widgetbook:
-    run: |
-      cd modules/core_ui && \
-      fvm flutter run -d chrome lib/widgetbook/widgetbook.dart
 
 
   setup_win:
@@ -108,10 +104,6 @@ scripts:
       melos exec -c 6 --fail-fast -- fvm flutter pub run flutter_launcher_icons -f flutter_launcher_icons*
     packageFilters:
       scope: "medical_tourism_mgt"
-  widgetbook_win:
-    run: |
-      cd modules/core_ui && ^
-      fvm flutter run -d chrome lib/widgetbook/widgetbook.dart
   hosting_web_dev:
     description: "hosting_web_dev"
     run: fvm flutter build web --release -t lib/main_dev.dart && firebase deploy --only hosting

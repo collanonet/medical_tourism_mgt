@@ -93,7 +93,7 @@ class BasicInformationModel with ChangeNotifier {
         _patientNames = AsyncData(data: value);
         insertPatientName(
           data: value,
-          formArray: formGroup.control('PATIENT_NAMES') as FormArray,
+          formGroup: formGroup.control('PATIENT_NAMES') as FormGroup,
         );
       } else {
         _patientNames = const AsyncData();
@@ -107,111 +107,35 @@ class BasicInformationModel with ChangeNotifier {
 
   void insertPatientName({
     required List<PatientName> data,
-    required FormArray formArray,
+    required FormGroup formGroup,
   }) {
-    formArray.clear();
-    // ramanized
-    int index = data
-        .indexWhere((element) => element.nameType == NameType.romanized.name);
-    if (index != -1) {
-      formArray.add(
-        FormGroup({
-          'id': FormControl<String?>(value: data[index].id),
-          'nameType': FormControl<String?>(value: data[index].nameType),
-          'familyName': FormControl<String?>(value: data[index].familyName),
-          'middleName': FormControl<String?>(value: data[index].middleName),
-          'firstName': FormControl<String?>(value: data[index].firstName),
-        }),
-      );
-    } else {
-      formArray.add(
-        FormGroup({
-          'id': FormControl<String?>(),
-          'nameType': FormControl<String?>(value: NameType.romanized.name),
-          'familyName': FormControl<String?>(),
-          'middleName': FormControl<String?>(),
-          'firstName': FormControl<String?>(),
-        }),
-      );
-    }
+    formGroup.reset();
 
-    // chineseOrVietnamese
-    index = data.indexWhere(
-        (element) => element.nameType == NameType.chineseOrVietnamese.name);
-    if (index != -1) {
-      formArray.add(
-        FormGroup({
-          'id': FormControl<String?>(value: data[index].id),
-          'nameType': FormControl<String?>(value: data[index].nameType),
-          'familyName': FormControl<String?>(value: data[index].familyName),
-          'middleName': FormControl<String?>(value: data[index].middleName),
-          'firstName': FormControl<String?>(value: data[index].firstName),
-        }),
-      );
-    } else {
-      formArray.add(
-        FormGroup({
-          'id': FormControl<String?>(),
-          'nameType':
-              FormControl<String?>(value: NameType.chineseOrVietnamese.name),
-          'familyName': FormControl<String?>(),
-          'middleName': FormControl<String?>(),
-          'firstName': FormControl<String?>(),
-        }),
-      );
-    }
-
-    // japaneseForChinese
-    index = data.indexWhere(
-        (element) => element.nameType == NameType.japaneseForChinese.name);
-    if (index != -1) {
-      formArray.add(
-        FormGroup({
-          'id': FormControl<String?>(value: data[index].id),
-          'nameType': FormControl<String?>(value: data[index].nameType),
-          'familyName': FormControl<String?>(value: data[index].familyName),
-          'middleName': FormControl<String?>(value: data[index].middleName),
-          'firstName': FormControl<String?>(value: data[index].firstName),
-        }),
-      );
-    } else {
-      formArray.add(
-        FormGroup({
-          'id': FormControl<String?>(),
-          'nameType':
-              FormControl<String?>(value: NameType.japaneseForChinese.name),
-          'familyName': FormControl<String?>(),
-          'middleName': FormControl<String?>(),
-          'firstName': FormControl<String?>(),
-        }),
-      );
-    }
-
-    // japaneseForNonChinese
-    index = data.indexWhere(
-        (element) => element.nameType == NameType.japaneseForNonChinese.name);
-    if (index != -1) {
-      formArray.add(
-        FormGroup({
-          'id': FormControl<String?>(value: data[index].id),
-          'nameType': FormControl<String?>(value: data[index].nameType),
-          'familyName': FormControl<String?>(value: data[index].familyName),
-          'middleName': FormControl<String?>(value: data[index].middleName),
-          'firstName': FormControl<String?>(value: data[index].firstName),
-        }),
-      );
-    } else {
-      formArray.add(
-        FormGroup({
-          'id': FormControl<String?>(),
-          'nameType':
-              FormControl<String?>(value: NameType.japaneseForNonChinese.name),
-          'familyName': FormControl<String?>(),
-          'middleName': FormControl<String?>(),
-          'firstName': FormControl<String?>(),
-        }),
-      );
-    }
+    formGroup.control('id').value = data.first.id;
+    formGroup.control('familyNameRomanized').value =
+        data.first.familyNameRomanized;
+    formGroup.control('middleNameRomanized').value =
+        data.first.middleNameRomanized;
+    formGroup.control('firstNameRomanized').value =
+        data.first.firstNameRomanized;
+    formGroup.control('familyNameChineseOrVietnamese').value =
+        data.first.familyNameChineseOrVietnamese;
+    formGroup.control('middleNameChineseOrVietnamese').value =
+        data.first.middleNameChineseOrVietnamese;
+    formGroup.control('firstNameChineseOrVietnamese').value =
+        data.first.firstNameChineseOrVietnamese;
+    formGroup.control('familyNameJapaneseForChinese').value =
+        data.first.familyNameJapaneseForChinese;
+    formGroup.control('middleNameJapaneseForChinese').value =
+        data.first.middleNameJapaneseForChinese;
+    formGroup.control('firstNameJapaneseForChinese').value =
+        data.first.firstNameJapaneseForChinese;
+    formGroup.control('familyNameJapaneseForNonChinese').value =
+        data.first.familyNameJapaneseForNonChinese;
+    formGroup.control('middleNameJapaneseForNonChinese').value =
+        data.first.middleNameJapaneseForNonChinese;
+    formGroup.control('firstNameJapaneseForNonChinese').value =
+        data.first.firstNameJapaneseForNonChinese;
   }
 
   Future<void> createUpdatePatientNames(FormGroup form) async {
@@ -219,24 +143,30 @@ class BasicInformationModel with ChangeNotifier {
       (element) async {
         logger.d(element);
         PatientNameRequest request = PatientNameRequest(
-          familyName: element['familyName'],
-          middleName: element['middleName'],
-          firstName: element['firstName'],
-          nameType: element['nameType'],
+          familyNameRomanized: element['familyNameRomanized'],
+          middleNameRomanized: element['middleNameRomanized'],
+          firstNameRomanized: element['firstNameRomanized'],
+          familyNameChineseOrVietnamese:
+              element['familyNameChineseOrVietnamese'],
+          middleNameChineseOrVietnamese:
+              element['middleNameChineseOrVietnamese'],
+          firstNameChineseOrVietnamese: element['firstNameChineseOrVietnamese'],
+          familyNameJapaneseForChinese: element['familyNameJapaneseForChinese'],
+          middleNameJapaneseForChinese: element['middleNameJapaneseForChinese'],
+          firstNameJapaneseForChinese: element['firstNameJapaneseForChinese'],
+          familyNameJapaneseForNonChinese:
+              element['familyNameJapaneseForNonChinese'],
+          middleNameJapaneseForNonChinese:
+              element['middleNameJapaneseForNonChinese'],
+          firstNameJapaneseForNonChinese:
+              element['firstNameJapaneseForNonChinese'],
           patient: _patient.id,
         );
 
         if (element['id'] != null) {
-          if (element['familyName'].isEmpty && element['firstName'].isEmpty) {
-            await deletePatientNames(
-              id: element['id'],
-              formGroup: form,
-            );
-          } else {
-            await updatePatientNames(element['id'], request);
-          }
+          await updatePatientNames(element['id'], request);
         } else {
-          if (element['familyName'] != null && element['firstName'] != null) {
+          if (element['familyNameRomanized'] != null) {
             await postPatientNames(request);
           }
         }
