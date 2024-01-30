@@ -26,7 +26,7 @@ scripts:
       fvm flutter pub run flutter_launcher_icons -f flutter_launcher_icons.yaml && \
       fvm dart run flutter_native_splash:create --path=flutter_native_splash.yaml
     env:
-      FLUTTER_VERSION: 3.13.9
+      FLUTTER_VERSION: 3.16.9
   run_debug:
     description: "run_debug"
     run: fvm flutter run -d chrome --web-port 5555
@@ -81,10 +81,10 @@ scripts:
       dart pub global activate spider && ^
       lefthook install && ^
       melos bootstrap && ^
-      fvm flutter pub run flutter_launcher_icons -f flutter_launcher_icons.yaml && ^
+      fvm flutter pub run flutter_launcher_icons -f flutter_launcher_icons* && ^
       fvm dart run flutter_native_splash:create --path=flutter_native_splash.yaml
     env:
-      FLUTTER_VERSION: 3.13.9
+      FLUTTER_VERSION: 3.16.9
   build_runner_win:
     description: "Generate *.g.dart files on modules which depends on build_runner"
     run: melos exec --depends-on="build_runner" fvm dart run build_runner build --delete-conflicting-outputs

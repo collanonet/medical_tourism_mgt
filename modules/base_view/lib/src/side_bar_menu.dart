@@ -153,9 +153,11 @@ class SideBarMenu extends StatelessWidget {
                   ),
                   child: Text(
                     context.l10n.labelHelp,
-                    style: const TextStyle(color: Colors.black,
+                    style: const TextStyle(
+                      color: Colors.black,
                       fontFamily: 'NotoSansJP',
-                      package: 'core_ui',),
+                      package: 'core_ui',
+                    ),
                   ),
                 ),
               ),
@@ -165,9 +167,11 @@ class SideBarMenu extends StatelessWidget {
                   onPressed: () {},
                   child: Text(
                     context.l10n.labelCenterHeadquarters,
-                    style: const TextStyle(color: Colors.white,
+                    style: const TextStyle(
+                      color: Colors.white,
                       fontFamily: 'NotoSansJP',
-                      package: 'core_ui',),
+                      package: 'core_ui',
+                    ),
                   ),
                 ),
               ),
@@ -215,9 +219,11 @@ class SideBarMenu extends StatelessWidget {
                   ),
                   label: Text(
                     context.l10n.labelLogout,
-                    style: const TextStyle(color: Colors.white,
+                    style: const TextStyle(
+                      color: Colors.white,
                       fontFamily: 'NotoSansJP',
-                      package: 'core_ui',),
+                      package: 'core_ui',
+                    ),
                   ),
                 ),
               ),
