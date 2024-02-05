@@ -1,41 +1,34 @@
-import 'package:core_network/entities.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup basicInfoForm({
   String? patientId,
-  MedicalRecord? medicalRecord,
 }) =>
     FormGroup(
       {
-        'id': FormControl<String?>(value: medicalRecord?.id),
-        'dateOfBirth': FormControl<DateTime>(value: medicalRecord?.dateOfBirth),
-        'age': FormControl<int?>(value: medicalRecord?.age),
-        // 身長 to en height
-        'height': FormControl<int?>(value: medicalRecord?.height),
-        // 体重 to en weight
-        'weight': FormControl<int?>(value: medicalRecord?.weight),
-        'gender': FormControl<String>(value: medicalRecord?.gender ?? 'male'),
-        'arrivalDate': FormControl<DateTime>(
-            value: medicalRecord?.arrivalDate,
-            validators: [Validators.required]),
-        'examinationDate':
-            FormControl<DateTime>(value: medicalRecord?.examinationDate),
-        'departureDate':
-            FormControl<DateTime>(value: medicalRecord?.departureDate),
-        'caseNumber': FormControl<String>(value: medicalRecord?.caseNumber),
-        'receptionDate':
-            FormControl<DateTime>(value: medicalRecord?.receptionDate),
-        'type': FormControl<String>(value: medicalRecord?.type),
-        'progress': FormControl<String>(value: medicalRecord?.progress),
-        'advancePaymentDate':
-            FormControl<DateTime>(value: medicalRecord?.advancePaymentDate),
-        'paymentMethod':
-            FormControl<String>(value: medicalRecord?.paymentMethod),
-        'memo': FormControl<String>(
-            value: medicalRecord?.memo ??
-                '李さんの紹介で交渉中。相見積もりを行なっているようで、価格の点で納得できない様子。もし、来日することになった場合は、娘さんとの観光もしたいとのこと。'),
-        'patient':
-            FormControl<String>(value: patientId ?? medicalRecord?.patient),
+        'id': FormControl<String?>(),
+        'dateOfBirth': FormControl<DateTime>(), //生年月日
+        'age': FormControl<int?>(), // 年齢
+        'height': FormControl<int?>(), // 身長
+        'weight': FormControl<int?>(), // 体重
+        'gender': FormControl<bool>(), // 性別
+        'isMale': FormControl<bool>(), // 男性
+        'isFemale': FormControl<bool>(), // 女性
+        'arrivalDate': FormControl<DateTime>(validators: [Validators.required]), // 来日日
+        'consultationDate': FormControl<DateTime>(),
+        'returnDate': FormControl<DateTime>(),
+        'proposalNumber': FormControl<String>(),
+        'receptionDate': FormControl<DateTime>(),
+        'type': FormArray([
+          FormGroup({
+            'type': FormControl<String?>(),
+          })
+        ]),
+        'progress': FormControl<String>(),
+        'advancePaymentDate': FormControl<DateTime>(),
+        'receivingMethod': FormControl<String>(),
+        'memo': FormControl<String>(),
+        'patient': FormControl<String>(value: patientId),
+
         'MEDICAL_RECORD_HOSPITALS': FormArray([
           FormGroup({
             'id': FormControl<String?>(),
@@ -51,8 +44,8 @@ FormGroup basicInfoForm({
         ]),
         'Patient_account': FormGroup({
           'id': FormControl<String?>(),
-          'loginId': FormControl<String?>(), // ログインID to en loginId
-          'loginPassword': FormControl<String?>(), // ログインPW to en loginPassword
+          'loginId': FormControl<String?>(),
+          'loginPassword': FormControl<String?>(),
         }),
         'PATIENT_NAMES': FormGroup({
           'id': FormControl<String?>(),
@@ -107,14 +100,14 @@ FormGroup basicInfoForm({
           'passportNumber': FormControl<String?>(),
           'issueDate': FormControl<DateTime>(),
           'expirationDate': FormControl<DateTime>(),
-          'visaType': FormControl<String?>(value: 'medicalGuarantee'),
+          'visaType': FormControl<String?>(),
           'visaCategory': FormControl<String?>(),
-          'underConfirmation': FormControl<bool?>(value: false),
+          'underConfirmation': FormControl<bool?>(),
         }),
         'MEDICAL_RECORD_Companion': FormArray([
           FormGroup({
             'id': FormControl<String?>(),
-            'leader': FormControl<bool>(value: false),
+            'leader': FormControl<bool>(),
             'remarks': FormControl<String?>(),
             'familyNameRomanized': FormControl<String?>(),
             'middleNameRomanized': FormControl<String?>(),
@@ -129,17 +122,17 @@ FormGroup basicInfoForm({
             'middleNameJapaneseForNonChinese': FormControl<String?>(),
             'firstNameJapaneseForNonChinese': FormControl<String?>(),
             'nationality': FormControl<String?>(),
-            'relationship': FormControl<String>(value: '父親'),
+            'relationship': FormControl<String>(),
             'dateOfBirth': FormControl<DateTime>(),
             'age': FormControl<int?>(),
-            'gender': FormControl<String>(value: 'male'),
+            'gender': FormControl<bool>(),
             'mobileNumber': FormControl<String?>(),
             'email': FormControl<String?>(),
             'chat_tool_link': FormControl<String?>(),
             'passportNumber': FormControl<String?>(),
             'issueDate': FormControl<DateTime>(),
             'expirationDate': FormControl<DateTime>(),
-            'visaType': FormControl<String>(value: 'medicalGuarantee'),
+            'visaType': FormControl<String>(),
           }),
         ]),
       },

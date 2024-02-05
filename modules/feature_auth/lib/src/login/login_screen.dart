@@ -139,9 +139,7 @@ class _LoginScreenState extends State<LoginScreen> {
         formGroup.control('password').value,
       );
     } else {
-      snackBarWidget(
-        context: context,
-        mgs: context.l10n.mgsRequireInputLogin,
+      snackBarWidget(message: context.l10n.mgsRequireInputLogin,
       );
     }
   }

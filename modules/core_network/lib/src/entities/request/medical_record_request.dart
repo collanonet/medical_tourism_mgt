@@ -6,34 +6,39 @@ part 'medical_record_request.g.dart';
 class MedicalRecordRequest {
   DateTime? dateOfBirth;
   int? age;
-  String? gender;
+  int? height;
+  int? weight;
+  bool? gender;
   DateTime? arrivalDate;
-  DateTime? examinationDate;
-  DateTime? departureDate;
-  String? caseNumber;
+  DateTime? consultationDate;
+  DateTime? returnDate;
+  String? proposalNumber;
   DateTime? receptionDate;
-  String? type;
+  List<String>? type;
   String? progress;
   DateTime? advancePaymentDate;
-  String? paymentMethod;
+  String? receivingMethod;
+
   String? memo;
-  String? patient;
+  String patient;
 
   MedicalRecordRequest({
     this.dateOfBirth,
     this.age,
+    this.height,
+    this.weight,
     this.gender,
     this.arrivalDate,
-    this.examinationDate,
-    this.departureDate,
-    this.caseNumber,
+    this.consultationDate,
+    this.returnDate,
+    this.proposalNumber,
     this.receptionDate,
     this.type,
     this.progress,
     this.advancePaymentDate,
-    this.paymentMethod,
+    this.receivingMethod,
     this.memo,
-    this.patient,
+    required this.patient,
   });
 
   factory MedicalRecordRequest.fromJson(Map<String, dynamic> json) {

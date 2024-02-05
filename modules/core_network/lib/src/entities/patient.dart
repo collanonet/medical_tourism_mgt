@@ -9,7 +9,7 @@ class Patient {
   final String id;
   DateTime? dateOfBirth;
   int? age;
-  String? gender;
+  bool? gender;
   String? familyName;
   String? middleName;
   String? firstName;
@@ -34,17 +34,4 @@ class Patient {
 
   Map<String, dynamic> toJson() => _$PatientToJson(this);
 
-  static FormGroup buildFormGroup(Patient? patient) {
-    return FormGroup({
-      'id': FormControl<String>(value: patient?.id),
-      'dateOfBirth': FormControl<DateTime>(value: patient?.dateOfBirth),
-      'age': FormControl<int>(value: patient?.age),
-      'gender': FormControl<String>(value: patient?.gender),
-      'familyName': FormControl<String>(value: patient?.familyName),
-      'middleName': FormControl<String>(value: patient?.middleName),
-      'firstName': FormControl<String>(value: patient?.firstName),
-      'createdAt': FormControl<DateTime>(value: patient?.createdAt),
-      'updatedAt': FormControl<DateTime>(value: patient?.updatedAt),
-    });
-  }
 }

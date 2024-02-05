@@ -9,10 +9,23 @@ class AsyncData<T> {
   final dynamic error;
   final bool loading;
 
-  T get requiredData {
+  T get requireData {
     if (data == null) throw Exception('data is required');
     return data!;
   }
 
-  bool get isError => error != null;
+  bool get hasData => data != null;
+  bool get hasError => error != null;
+
+  AsyncData<T> copyWith({
+    T? data,
+    dynamic error,
+    bool? loading = false,
+  }) {
+    return AsyncData<T>(
+      data: data ?? this.data,
+      error: error ?? this.error,
+      loading: loading ?? this.loading,
+    );
+  }
 }

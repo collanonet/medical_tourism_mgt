@@ -1,42 +1,50 @@
+import 'package:bot_toast/bot_toast.dart';
 import 'package:flutter/material.dart';
 
-import '../../theme.dart';
+import '../theme/app_theme_data.dart';
 
-ScaffoldFeatureController<SnackBar, SnackBarClosedReason> snackBarWidget({
-  required BuildContext context,
-  required String mgs,
+snackBarWidget({
+  required String message,
   SnackBarAction? action,
   Color? backgroundColor,
   Widget? prefixIcon,
 }) {
-  SnackBar snackBar = SnackBar(
-    backgroundColor: backgroundColor,
-    content: Row(
-      children: [
-        if (prefixIcon != null) ...{
-          prefixIcon,
-          const SizedBox(width: 8.0),
-        },
-        Text(
-          mgs,
-          style: TextStyle(
-            fontFamily: 'NotoSansJP',
-            package: 'core_ui',
-          ),
+  BotToast.showCustomText(
+    duration: const Duration(seconds: 3),
+    onlyOne: true,
+    animationDuration: const Duration(milliseconds: 500),
+    animationReverseDuration: const Duration(milliseconds: 500),
+    enableKeyboardSafeArea: true,
+    useSafeArea: true,
+    align: Alignment.bottomCenter,
+    toastBuilder: (_) => Container(
+      margin: EdgeInsets.all(AppThemeData.light().spacing.marginMedium),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(
+          AppThemeData.light().spacing.borderRadiusMedium,
         ),
-      ],
-    ),
-    action: action,
-    padding: const EdgeInsets.all(16.0),
-    margin: EdgeInsets.all(AppTheme.of(context).spacing.gutter),
-    behavior: SnackBarBehavior.floating,
-    elevation: 0,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(
-        AppTheme.of(context).spacing.borderRadiusMedium,
+        color: backgroundColor ?? Colors.black,
+      ),
+      padding: EdgeInsets.all(AppThemeData.light().spacing.marginMedium),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          if (prefixIcon != null) ...{
+            prefixIcon,
+            const SizedBox(width: 8.0),
+          },
+          DefaultTextStyle(
+            style: const TextStyle(
+              color: Colors.white,
+              fontFamily: 'KB PRASAC',
+              package: 'core_ui',
+            ),
+            child: Text(message),
+          )
+        ],
       ),
     ),
   );
-
-  return ScaffoldMessenger.of(context).showSnackBar(snackBar);
 }

@@ -7,7 +7,7 @@ class PrePatientRequest {
   String? agents;
   String? patient;
   DateTime? dateOfBirth;
-  String? gender;
+  bool? gender;
   String? nationality;
   String? classification;
   String? nameOfDisease;

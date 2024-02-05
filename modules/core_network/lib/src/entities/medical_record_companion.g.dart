@@ -22,7 +22,7 @@ MedicalRecordCompanion _$MedicalRecordCompanionFromJson(
           ? null
           : DateTime.parse(json['dateOfBirth'] as String),
       age: json['age'] as int?,
-      gender: json['gender'] as String?,
+      gender: json['gender'] as bool?,
       passportNumber: json['passportNumber'] as String?,
       issueDate: json['issueDate'] == null
           ? null

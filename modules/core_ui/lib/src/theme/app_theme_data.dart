@@ -233,7 +233,9 @@ class AppThemeData {
         style: FilledButton.styleFrom(
           foregroundColor: Colors.white,
           backgroundColor: primaryColor,
-          padding: EdgeInsets.symmetric(vertical: spacing.buttonVertical),
+          padding: EdgeInsets.symmetric(
+              vertical: spacing.buttonVertical,
+              horizontal: spacing.buttonHorizontal),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
@@ -244,7 +246,9 @@ class AppThemeData {
         style: OutlinedButton.styleFrom(
             foregroundColor: primaryColor,
             backgroundColor: Colors.white,
-            padding: EdgeInsets.symmetric(vertical: spacing.buttonVertical),
+            padding: EdgeInsets.symmetric(
+                vertical: spacing.buttonVertical,
+                horizontal: spacing.buttonHorizontal),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(12.0),
             ),
@@ -331,9 +335,25 @@ class AppThemeData {
         ),
       ),
       checkboxTheme: CheckboxThemeData(
-        overlayColor: MaterialStatePropertyAll(primaryColor),
-        fillColor: MaterialStatePropertyAll(primaryColor),
-        shape: const CircleBorder(),
+        fillColor: MaterialStateProperty.resolveWith((states) {
+          if (states.contains(MaterialState.selected)) {
+            return context.appTheme.primaryColor;
+          }
+          return Colors.white;
+        }),
+        checkColor: MaterialStateProperty.resolveWith((states) {
+          return Colors.white;
+        }),
+        side: BorderSide(
+          color: context.appTheme.primaryColor,
+        ),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: context.appTheme.primaryColor,
+          ),
+          borderRadius: BorderRadius.circular(4),
+        ),
+
       ),
       radioTheme: RadioThemeData(
         fillColor: MaterialStateProperty.resolveWith(

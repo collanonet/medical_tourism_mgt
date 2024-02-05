@@ -25,7 +25,7 @@ class BasicInformationPage extends StatelessWidget {
       child: ReactiveFormBuilder(
         form: () => basicInfoForm(patientId: patient?.id),
         builder: (context, formGroup, child) {
-          return ChangeNotifierProvider(
+          return Provider(
             create: (context) => GetIt.I<BasicInformationModel>()
               ..initialData(patient: patient, formGroup: formGroup),
             child: const BasicInformationScreen(),

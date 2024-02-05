@@ -13,28 +13,30 @@ MedicalRecordRequest _$MedicalRecordRequestFromJson(
           ? null
           : DateTime.parse(json['dateOfBirth'] as String),
       age: json['age'] as int?,
-      gender: json['gender'] as String?,
+      height: json['height'] as int?,
+      weight: json['weight'] as int?,
+      gender: json['gender'] as bool?,
       arrivalDate: json['arrivalDate'] == null
           ? null
           : DateTime.parse(json['arrivalDate'] as String),
-      examinationDate: json['examinationDate'] == null
+      consultationDate: json['consultationDate'] == null
           ? null
-          : DateTime.parse(json['examinationDate'] as String),
-      departureDate: json['departureDate'] == null
+          : DateTime.parse(json['consultationDate'] as String),
+      returnDate: json['returnDate'] == null
           ? null
-          : DateTime.parse(json['departureDate'] as String),
-      caseNumber: json['caseNumber'] as String?,
+          : DateTime.parse(json['returnDate'] as String),
+      proposalNumber: json['proposalNumber'] as String?,
       receptionDate: json['receptionDate'] == null
           ? null
           : DateTime.parse(json['receptionDate'] as String),
-      type: json['type'] as String?,
+      type: (json['type'] as List<dynamic>?)?.map((e) => e as String).toList(),
       progress: json['progress'] as String?,
       advancePaymentDate: json['advancePaymentDate'] == null
           ? null
           : DateTime.parse(json['advancePaymentDate'] as String),
-      paymentMethod: json['paymentMethod'] as String?,
+      receivingMethod: json['receivingMethod'] as String?,
       memo: json['memo'] as String?,
-      patient: json['patient'] as String?,
+      patient: json['patient'] as String,
     );
 
 Map<String, dynamic> _$MedicalRecordRequestToJson(
@@ -42,16 +44,18 @@ Map<String, dynamic> _$MedicalRecordRequestToJson(
     <String, dynamic>{
       'dateOfBirth': instance.dateOfBirth?.toIso8601String(),
       'age': instance.age,
+      'height': instance.height,
+      'weight': instance.weight,
       'gender': instance.gender,
       'arrivalDate': instance.arrivalDate?.toIso8601String(),
-      'examinationDate': instance.examinationDate?.toIso8601String(),
-      'departureDate': instance.departureDate?.toIso8601String(),
-      'caseNumber': instance.caseNumber,
+      'consultationDate': instance.consultationDate?.toIso8601String(),
+      'returnDate': instance.returnDate?.toIso8601String(),
+      'proposalNumber': instance.proposalNumber,
       'receptionDate': instance.receptionDate?.toIso8601String(),
       'type': instance.type,
       'progress': instance.progress,
       'advancePaymentDate': instance.advancePaymentDate?.toIso8601String(),
-      'paymentMethod': instance.paymentMethod,
+      'receivingMethod': instance.receivingMethod,
       'memo': instance.memo,
       'patient': instance.patient,
     };

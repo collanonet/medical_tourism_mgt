@@ -18,7 +18,7 @@ class AppModel extends ChangeNotifier {
   L10nModel l10n;
 
   AsyncData<bool> _ready = const AsyncData<bool>(data: false, loading: true);
-  bool get ready => _ready.requiredData;
+  bool get ready => _ready.requireData;
 
   Future<void> initialize() async {
     // auth.addListener(() {

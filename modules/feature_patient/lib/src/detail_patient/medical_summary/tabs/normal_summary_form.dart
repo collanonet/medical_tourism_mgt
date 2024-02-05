@@ -30,7 +30,7 @@ FormGroup normalSummaryForm() {
       disabled: true,
     ),
     // 性別
-    'gender': FormControl<String>(
+    'gender': FormControl<bool>(
       disabled: true,
     ),
     'mobile_number_domestic': FormControl<String>(),

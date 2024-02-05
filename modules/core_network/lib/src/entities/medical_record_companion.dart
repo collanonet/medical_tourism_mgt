@@ -17,7 +17,7 @@ class MedicalRecordCompanion {
   String? relationship;
   DateTime? dateOfBirth;
   int? age;
-  String? gender;
+  bool? gender;
   String? passportNumber;
   DateTime? issueDate;
   DateTime? expirationDate;
@@ -53,33 +53,4 @@ class MedicalRecordCompanion {
   }
 
   Map<String, dynamic> toJson() => _$MedicalRecordCompanionToJson(this);
-
-  static FormGroup buildFormGroup(
-      MedicalRecordCompanion? medicalRecordCompanion) {
-    return FormGroup({
-      'id': FormControl<String>(value: medicalRecordCompanion?.id),
-      'nameInRomanized':
-          FormControl<String>(value: medicalRecordCompanion?.nameInRomanized),
-      'nameInChineseOrKanji': FormControl<String>(
-          value: medicalRecordCompanion?.nameInChineseOrKanji),
-      'nameInJapaneseKanji': FormControl<String>(
-          value: medicalRecordCompanion?.nameInJapaneseKanji),
-      'nameInKana':
-          FormControl<String>(value: medicalRecordCompanion?.nameInKana),
-      'nationality':
-          FormControl<String>(value: medicalRecordCompanion?.nationality),
-      'relationship':
-          FormControl<String>(value: medicalRecordCompanion?.relationship),
-      'dateOfBirth':
-          FormControl<DateTime>(value: medicalRecordCompanion?.dateOfBirth),
-      'age': FormControl<int>(value: medicalRecordCompanion?.age),
-      'gender': FormControl<String>(value: medicalRecordCompanion?.gender),
-      'medicalRecord':
-          FormControl<String>(value: medicalRecordCompanion?.medicalRecord),
-      'createdAt':
-          FormControl<DateTime>(value: medicalRecordCompanion?.createdAt),
-      'updatedAt':
-          FormControl<DateTime>(value: medicalRecordCompanion?.updatedAt),
-    });
-  }
 }
