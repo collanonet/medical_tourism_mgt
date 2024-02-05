@@ -29,7 +29,7 @@ class BasicInformationModel {
     if (patient != null) {
       try {
         patientData.value = AsyncData(data: patient);
-        // await getPatientNames(patientId: patient.id, formGroup: formGroup);
+        await getPatientNames(patientId: patient.id, formGroup: formGroup);
         // await getPatientNationalities(
         //     patientId: patient.id, formGroup: formGroup);
         // await getPatientPassports(patientId: patient.id, formGroup: formGroup);
@@ -47,13 +47,14 @@ class BasicInformationModel {
     try {
       loading.value = const AsyncData(loading: true);
       // await createUpdatePatient(form);
-      // await createUpdatePatientNames(form);
+
       // await createUpdatePatientNationalities(
       //     form.control('PATIENT_NATIONALITIES') as FormGroup);
       // await createUpdatePatientPassports(
       //     form.control('PATIENT_PASSPORTS') as FormGroup);
       await createUpdateMedicalRecords(form);
       await createUpdateMedicalRecordHospital(form);
+      await createUpdatePatientNames(form.control('PATIENT_NAMES') as FormGroup);
       // await createUpdateMedicalRecordAgents(
       //     form.control('MEDICAL_RECORD_AGENTS') as FormGroup);
       // await createUpdateMedicalRecordReferrers(
@@ -73,158 +74,131 @@ class BasicInformationModel {
   }
 
   // //GET_PATIENT_NAMES
-  // AsyncData<List<PatientName>> _patientNames = const AsyncData();
-  // AsyncData<List<PatientName>> get patientNames => _patientNames;
-  //
-  // Future<void> getPatientNames({
-  //   required String patientId,
-  //   required FormGroup formGroup,
-  // }) async {
-  //   _patientNames = const AsyncData(loading: true);
-  //   notifyListeners();
-  //
-  //   await patientRepository.patientNamesByPatient(patientId).then((value) {
-  //     if (value.isNotEmpty) {
-  //       _patientNames = AsyncData(data: value);
-  //       insertPatientName(
-  //         data: value,
-  //         formGroup: formGroup.control('PATIENT_NAMES') as FormGroup,
-  //       );
-  //     } else {
-  //       _patientNames = const AsyncData();
-  //     }
-  //   }).catchError((error) {
-  //     logger.d(error);
-  //   }).whenComplete(() {
-  //     notifyListeners();
-  //   });
-  // }
-  //
-  // void insertPatientName({
-  //   required List<PatientName> data,
-  //   required FormGroup formGroup,
-  // }) {
-  //   formGroup.reset();
-  //
-  //   formGroup.control('id').value = data.first.id;
-  //   formGroup.control('familyNameRomanized').value =
-  //       data.first.familyNameRomanized;
-  //   formGroup.control('middleNameRomanized').value =
-  //       data.first.middleNameRomanized;
-  //   formGroup.control('firstNameRomanized').value =
-  //       data.first.firstNameRomanized;
-  //   formGroup.control('familyNameChineseOrVietnamese').value =
-  //       data.first.familyNameChineseOrVietnamese;
-  //   formGroup.control('middleNameChineseOrVietnamese').value =
-  //       data.first.middleNameChineseOrVietnamese;
-  //   formGroup.control('firstNameChineseOrVietnamese').value =
-  //       data.first.firstNameChineseOrVietnamese;
-  //   formGroup.control('familyNameJapaneseForChinese').value =
-  //       data.first.familyNameJapaneseForChinese;
-  //   formGroup.control('middleNameJapaneseForChinese').value =
-  //       data.first.middleNameJapaneseForChinese;
-  //   formGroup.control('firstNameJapaneseForChinese').value =
-  //       data.first.firstNameJapaneseForChinese;
-  //   formGroup.control('familyNameJapaneseForNonChinese').value =
-  //       data.first.familyNameJapaneseForNonChinese;
-  //   formGroup.control('middleNameJapaneseForNonChinese').value =
-  //       data.first.middleNameJapaneseForNonChinese;
-  //   formGroup.control('firstNameJapaneseForNonChinese').value =
-  //       data.first.firstNameJapaneseForNonChinese;
-  // }
-  //
-  // Future<void> createUpdatePatientNames(FormGroup form) async {
-  //   await form.control('PATIENT_NAMES').value.forEach(
-  //     (element) async {
-  //       logger.d(element);
-  //       PatientNameRequest request = PatientNameRequest(
-  //         familyNameRomanized: element['familyNameRomanized'],
-  //         middleNameRomanized: element['middleNameRomanized'],
-  //         firstNameRomanized: element['firstNameRomanized'],
-  //         familyNameChineseOrVietnamese:
-  //             element['familyNameChineseOrVietnamese'],
-  //         middleNameChineseOrVietnamese:
-  //             element['middleNameChineseOrVietnamese'],
-  //         firstNameChineseOrVietnamese: element['firstNameChineseOrVietnamese'],
-  //         familyNameJapaneseForChinese: element['familyNameJapaneseForChinese'],
-  //         middleNameJapaneseForChinese: element['middleNameJapaneseForChinese'],
-  //         firstNameJapaneseForChinese: element['firstNameJapaneseForChinese'],
-  //         familyNameJapaneseForNonChinese:
-  //             element['familyNameJapaneseForNonChinese'],
-  //         middleNameJapaneseForNonChinese:
-  //             element['middleNameJapaneseForNonChinese'],
-  //         firstNameJapaneseForNonChinese:
-  //             element['firstNameJapaneseForNonChinese'],
-  //         patient: _patient.id,
-  //       );
-  //
-  //       if (element['id'] != null) {
-  //         await updatePatientNames(element['id'], request);
-  //       } else {
-  //         if (element['familyNameRomanized'] != null) {
-  //           await postPatientNames(request);
-  //         }
-  //       }
-  //     },
-  //   );
-  // }
-  //
-  // // post PATIENT_NAMES
-  // Future<void> postPatientNames(
-  //   PatientNameRequest patientNameRequest,
-  // ) async {
-  //   await patientRepository.postPatientName(patientNameRequest).then((value) {
-  //     if (_patientNames.data == null) {
-  //       _patientNames = AsyncData(data: [value]);
-  //     } else {
-  //       _patientNames.data?.add(value);
-  //     }
-  //   }).catchError((error) {
-  //     logger.d(error);
-  //   }).whenComplete(() {
-  //     notifyListeners();
-  //   });
-  // }
+  ValueNotifier<AsyncData<PatientName>> patientNames = ValueNotifier(
+    const AsyncData(),
+  );
 
-  // // update PATIENT_NAMES
-  // Future<void> updatePatientNames(
-  //   String id,
-  //   PatientNameRequest patientNameRequest,
-  // ) async {
-  //   await patientRepository
-  //       .putPatientName(id, patientNameRequest)
-  //       .then((value) {
-  //     // Find from list and update or add
-  //     final index = _patientNames.data?.indexWhere(
-  //           (element) => element.id == id,
-  //         ) ??
-  //         -1;
-  //     if (index >= 0) {
-  //       _patientNames.data?[index] = value;
-  //     } else {
-  //       _patientNames.data?.add(value);
-  //     }
-  //   }).catchError((error) {
-  //     logger.d(error);
-  //   }).whenComplete(() {
-  //     notifyListeners();
-  //   });
-  // }
-  //
-  // // delete PATIENT_NAMES
-  // Future<void> deletePatientNames({
-  //   required String id,
-  //   required FormGroup formGroup,
-  // }) async {
-  //   await patientRepository.deletePatientName(id).then((value) async {
-  //     // Find from list and update or add
-  //     await getPatientNames(patientId: _patient.id, formGroup: formGroup);
-  //   }).catchError((error) {
-  //     logger.d(error);
-  //   }).whenComplete(() {
-  //     notifyListeners();
-  //   });
-  // }
+  Future<void> getPatientNames({
+    required String patientId,
+    required FormGroup formGroup,
+  }) async {
+    patientNames.value = const AsyncData(loading: true);
+
+    await patientRepository.patientNamesByPatient(patientId).then((value) {
+      if (value.isNotEmpty) {
+        patientNames.value = AsyncData(data: value.firstOrNull);
+        insertPatientName(
+          data: value,
+          formGroup: formGroup.control('PATIENT_NAMES') as FormGroup,
+        );
+      } else {
+        patientNames.value = const AsyncData();
+      }
+    }).catchError((error) {
+      logger.d(error);
+      patientNames.value = AsyncData(error: error);
+    });
+  }
+
+  void insertPatientName({
+    required List<PatientName> data,
+    required FormGroup formGroup,
+  }) {
+    formGroup.reset();
+
+    formGroup.control('id').value = data.first.id;
+    formGroup.control('familyNameRomanized').value =
+        data.first.familyNameRomanized;
+    formGroup.control('middleNameRomanized').value =
+        data.first.middleNameRomanized;
+    formGroup.control('firstNameRomanized').value =
+        data.first.firstNameRomanized;
+    formGroup.control('familyNameChineseOrVietnamese').value =
+        data.first.familyNameChineseOrVietnamese;
+    formGroup.control('middleNameChineseOrVietnamese').value =
+        data.first.middleNameChineseOrVietnamese;
+    formGroup.control('firstNameChineseOrVietnamese').value =
+        data.first.firstNameChineseOrVietnamese;
+    formGroup.control('familyNameJapaneseForChinese').value =
+        data.first.familyNameJapaneseForChinese;
+    formGroup.control('middleNameJapaneseForChinese').value =
+        data.first.middleNameJapaneseForChinese;
+    formGroup.control('firstNameJapaneseForChinese').value =
+        data.first.firstNameJapaneseForChinese;
+    formGroup.control('familyNameJapaneseForNonChinese').value =
+        data.first.familyNameJapaneseForNonChinese;
+    formGroup.control('middleNameJapaneseForNonChinese').value =
+        data.first.middleNameJapaneseForNonChinese;
+    formGroup.control('firstNameJapaneseForNonChinese').value =
+        data.first.firstNameJapaneseForNonChinese;
+  }
+
+  Future<void> createUpdatePatientNames(FormGroup form) async {
+    try {
+      patientNames.value = const AsyncData(loading: true);
+
+      PatientNameRequest request = PatientNameRequest(
+        familyNameRomanized: form.control('familyNameRomanized').value,
+        middleNameRomanized: form.control('middleNameRomanized').value,
+        firstNameRomanized: form.control('firstNameRomanized').value,
+        familyNameChineseOrVietnamese:
+            form.control('familyNameChineseOrVietnamese').value,
+        middleNameChineseOrVietnamese:
+            form.control('middleNameChineseOrVietnamese').value,
+        firstNameChineseOrVietnamese:
+            form.control('firstNameChineseOrVietnamese').value,
+        familyNameJapaneseForChinese:
+            form.control('familyNameJapaneseForChinese').value,
+        middleNameJapaneseForChinese:
+            form.control('middleNameJapaneseForChinese').value,
+        firstNameJapaneseForChinese:
+            form.control('firstNameJapaneseForChinese').value,
+        familyNameJapaneseForNonChinese:
+            form.control('familyNameJapaneseForNonChinese').value,
+        middleNameJapaneseForNonChinese:
+            form.control('middleNameJapaneseForNonChinese').value,
+        firstNameJapaneseForNonChinese:
+            form.control('firstNameJapaneseForNonChinese').value,
+        patient: patientData.value.requireData.id,
+      );
+
+      if (form.control('id').value != null) {
+        await updatePatientNames(form.control('id').value, request);
+      } else {
+        await postPatientNames(request);
+      }
+    } catch (error) {
+      logger.d(error);
+      patientNames.value = AsyncData(error: error);
+    }
+  }
+
+  // post PATIENT_NAMES
+  Future<void> postPatientNames(
+    PatientNameRequest patientNameRequest,
+  ) async {
+    await patientRepository.postPatientName(patientNameRequest).then((value) {
+      patientNames.value = AsyncData(data: value);
+    }).catchError((error) {
+      logger.d(error);
+      patientNames.value = AsyncData(error: error);
+    });
+  }
+
+  // update PATIENT_NAMES
+  Future<void> updatePatientNames(
+    String id,
+    PatientNameRequest patientNameRequest,
+  ) async {
+    await patientRepository
+        .putPatientName(id, patientNameRequest)
+        .then((value) {
+      patientNames.value = AsyncData(data: value);
+    }).catchError((error) {
+      logger.d(error);
+      patientNames.value = AsyncData(error: error);
+    });
+  }
 
 //GET_PATIENT_NATIONALITIES
 //   AsyncData<PatientNationality> _patientNationalities = const AsyncData();

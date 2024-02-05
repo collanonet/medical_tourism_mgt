@@ -107,7 +107,7 @@ class BasicInfoSection extends StatelessWidget {
               // ),
               // const MedicalRecordTravelGroupSection(),
               // const MedicalRecordUserAccountSection(),
-              // const MedicalRecordNameSection(),
+              const MedicalRecordNameSection(),
               // const MedicalRecordNationalitySection(),
               // const MedicalRecordBudgetSection(),
               // const MedicalRecordPassportSection(),
