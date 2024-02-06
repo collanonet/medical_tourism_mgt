@@ -106,8 +106,9 @@ class BasicInfoSection extends StatelessWidget {
               // const MedicalRecordUserAccountSection(),
               const MedicalRecordNameSection(),
               const MedicalRecordNationalitySection(),
-              // const MedicalRecordBudgetSection(),
-              // const MedicalRecordPassportSection(),
+              Divider(),
+              const MedicalRecordBudgetSection(),
+              const MedicalRecordPassportSection(),
               // Divider(
               //   height: 0,
               //   color: context.appTheme.dividerColor,

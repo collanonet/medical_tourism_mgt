@@ -2,6 +2,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -119,22 +120,29 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                                 formControlName: 'mobileNumber',
                                 keyboardType: TextInputType.number,
                                 decoration: InputDecoration(
-                                  prefixText: '+',
+                                  prefixText: '+ ',
                                   label: Text(
                                     '携帯番号',
                                   ),
                                 ),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                ],
                               ),
                             ),
                             Expanded(
                               child: ReactiveTextField(
                                 formControlName: 'email',
-                                keyboardType: TextInputType.number,
+                                keyboardType: TextInputType.emailAddress,
                                 decoration: InputDecoration(
                                   label: Text(
                                     'Email',
                                   ),
                                 ),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.deny(
+                                      RegExp(r'\s')),
+                                ],
                               ),
                             ),
                             Expanded(
@@ -164,11 +172,16 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                                         Expanded(
                                           child: ReactiveTextField(
                                             formControlName: 'chatToolLink',
+                                            keyboardType: TextInputType.url,
                                             decoration: InputDecoration(
                                               label: Text(
                                                 'チャットツールリンク',
                                               ),
                                             ),
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.deny(
+                                                  RegExp(r'\s')),
+                                            ],
                                           ),
                                         ),
                                         SizedBox(
