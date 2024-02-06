@@ -9,7 +9,7 @@ class PrePatient {
   String? agents;
   String? patient;
   DateTime? dateOfBirth;
-  String? gender;
+  bool gender;
   String? nationality;
   String? classification;
   String? nameOfDisease;
@@ -22,7 +22,7 @@ class PrePatient {
     this.agents,
     this.patient,
     this.dateOfBirth,
-    this.gender,
+    required this.gender,
     this.nationality,
     this.classification,
     this.nameOfDisease,
@@ -36,20 +36,4 @@ class PrePatient {
   }
 
   Map<String, dynamic> toJson() => _$PrePatientToJson(this);
-
-  static FormGroup buildFormGroup(PrePatient? prePatient) {
-    return FormGroup({
-      'id': FormControl<String>(value: prePatient?.id),
-      'agents': FormControl<String>(value: prePatient?.agents),
-      'patient': FormControl<String>(value: prePatient?.patient),
-      'dateOfBirth': FormControl<DateTime>(value: prePatient?.dateOfBirth),
-      'gender': FormControl<String>(value: prePatient?.gender),
-      'nationality': FormControl<String>(value: prePatient?.nationality),
-      'classification': FormControl<String>(value: prePatient?.classification),
-      'nameOfDisease': FormControl<String>(value: prePatient?.nameOfDisease),
-      'isDeleted': FormControl<bool>(value: prePatient?.isDeleted),
-      'createdAt': FormControl<DateTime>(value: prePatient?.createdAt),
-      'updatedAt': FormControl<DateTime>(value: prePatient?.updatedAt),
-    });
-  }
 }

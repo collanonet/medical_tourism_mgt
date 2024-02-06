@@ -11,16 +11,17 @@ class MedicalRecord {
   int? age;
   int? height;
   int? weight;
-  String? gender;
+  bool? gender;
   DateTime? arrivalDate;
-  DateTime? examinationDate;
-  DateTime? departureDate;
-  String? caseNumber;
+  DateTime? consultationDate;
+  DateTime? returnDate;
+  String? proposalNumber;
   DateTime? receptionDate;
-  String? type;
+  List<String>? type;
   String? progress;
   DateTime? advancePaymentDate;
-  String? paymentMethod;
+  String? receivingMethod;
+
   String? memo;
   String patient;
   final DateTime createdAt;
@@ -30,16 +31,18 @@ class MedicalRecord {
     required this.id,
     this.dateOfBirth,
     this.age,
+    this.height,
+    this.weight,
     this.gender,
     this.arrivalDate,
-    this.examinationDate,
-    this.departureDate,
-    this.caseNumber,
+    this.consultationDate,
+    this.returnDate,
+    this.proposalNumber,
     this.receptionDate,
     this.type,
     this.progress,
     this.advancePaymentDate,
-    this.paymentMethod,
+    this.receivingMethod,
     this.memo,
     required this.patient,
     required this.createdAt,
@@ -51,32 +54,4 @@ class MedicalRecord {
   }
 
   Map<String, dynamic> toJson() => _$MedicalRecordToJson(this);
-
-  static FormGroup buildFormGroup({
-    MedicalRecord? medicalRecord,
-    String? patientId,
-  }) {
-    return FormGroup({
-      'id': FormControl<String>(value: medicalRecord?.id),
-      'dateOfBirth': FormControl<DateTime>(value: medicalRecord?.dateOfBirth),
-      'age': FormControl<String>(value: medicalRecord?.age.toString() ?? ''),
-      'gender': FormControl<String>(value: medicalRecord?.gender ?? 'male'),
-      'arrivalDate': FormControl<DateTime>(value: medicalRecord?.arrivalDate),
-      'examinationDate':
-          FormControl<DateTime>(value: medicalRecord?.examinationDate),
-      'departureDate':
-          FormControl<DateTime>(value: medicalRecord?.departureDate),
-      'caseNumber': FormControl<String>(value: medicalRecord?.caseNumber),
-      'receptionDate':
-          FormControl<DateTime>(value: medicalRecord?.receptionDate),
-      'type': FormControl<String>(value: medicalRecord?.type),
-      'progress': FormControl<String>(value: medicalRecord?.progress),
-      'advancePaymentDate':
-          FormControl<DateTime>(value: medicalRecord?.advancePaymentDate),
-      'paymentMethod': FormControl<String>(value: medicalRecord?.paymentMethod),
-      'memo': FormControl<String>(value: medicalRecord?.memo),
-      'patient':
-          FormControl<String>(value: patientId ?? medicalRecord?.patient),
-    });
-  }
 }

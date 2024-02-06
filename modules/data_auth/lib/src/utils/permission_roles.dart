@@ -16,5 +16,9 @@ String? encodeRole(PermissionRole? role) {
 PermissionRole? decodeRole(String? value) {
   if (value == null) return null;
 
-  return _dataMap.entries.firstWhere((element) => element.value == value).key;
+  try {
+    return _dataMap.entries.firstWhere((element) => element.value == value).key;
+  } catch (e) {
+    return null;
+  }
 }

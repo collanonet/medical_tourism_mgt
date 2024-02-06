@@ -6,7 +6,7 @@ part 'patient_request.g.dart';
 class PatientRequest {
   DateTime? dateOfBirth;
   int? age;
-  String? gender;
+  bool? gender;
   String? familyName;
   String? middleName;
   String? firstName;

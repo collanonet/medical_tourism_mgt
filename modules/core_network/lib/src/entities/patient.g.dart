@@ -12,7 +12,7 @@ Patient _$PatientFromJson(Map<String, dynamic> json) => Patient(
           ? null
           : DateTime.parse(json['dateOfBirth'] as String),
       age: json['age'] as int?,
-      gender: json['gender'] as String?,
+      gender: json['gender'] as bool?,
       familyName: json['familyName'] as String?,
       middleName: json['middleName'] as String?,
       firstName: json['firstName'] as String?,

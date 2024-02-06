@@ -12,3 +12,4 @@ export './src/save_widget_to_file.dart';
 export './src/shorter_name.dart';
 export './src/subscription_manager.dart';
 export './src/age_calculator.dart';
+export './src/dates.dart';

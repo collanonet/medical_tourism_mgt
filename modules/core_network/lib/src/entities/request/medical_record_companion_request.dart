@@ -14,7 +14,7 @@ class MedicalRecordCompanionRequest {
   String? relationship;
   DateTime? dateOfBirth;
   int? age;
-  String? gender;
+  bool? gender;
   String? passportNumber;
   DateTime? issueDate;
   DateTime? expirationDate;

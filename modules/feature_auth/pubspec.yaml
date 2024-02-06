@@ -16,13 +16,13 @@ dependencies:
   core_network: 0.0.1-alpha.1
   data_auth: 0.0.1-alpha.1
   provider: ^6.0.5
-  get_it: ^7.6.6
+  get_it: ^7.6.7
   injectable: ^2.3.0
   auto_route: ^7.7.0
   reactive_forms: ^14.3.0
   bot_toast: ^4.0.4
   flutter_svg: ^2.0.7
-  skeletonizer: ^0.9.0
+  skeletonizer: ^1.0.1
 
 dev_dependencies:
   flutter_test:

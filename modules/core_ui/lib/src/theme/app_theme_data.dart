@@ -73,13 +73,12 @@ class AppThemeData {
   final SegmentedTheme segmentedTheme;
   final PinPutTheme pinPutTheme;
   final ListTileTheme listTileTheme;
-
   factory AppThemeData.light() {
     const spacing = Spacing();
     const primaryTextColor = Colors.black;
     const secondaryTextColor = Color(0xFF8E8E8E);
     return AppThemeData(
-      primaryBackgroundColor: const Color(0xffF0F3F5),
+      primaryBackgroundColor: const Color(0xFFF7F7F7),
       secondaryBackgroundColor: Colors.white,
       primaryColor: const Color(0xFF00C6C6),
       iconColor: Colors.black,
@@ -114,12 +113,13 @@ class AppThemeData {
       segmentedTheme: const SegmentedTheme(
         selectedBackgroundColor: Colors.white,
         unselectedBackgroundColor: Color(0x36BEBEBE),
-        selectedTextColor: const Color(0xFF00C6C6),
+        selectedTextColor: Color(0xFF00C6C6),
         unselectedTextColor: Color(0xFF8E8E8E),
         minimumSize: Size.fromHeight(32.0),
         textStyle: TextStyle(
           fontWeight: FontWeight.w500,
           fontFamily: 'NotoSansJP',
+          package: 'core_ui',
           fontSize: 15.0,
         ),
       ),
@@ -147,6 +147,7 @@ class AppThemeData {
           titleAlignment: ListTileTitleAlignment.bottom,
           titleTextStyle: const TextStyle(
             fontFamily: 'NotoSansJP',
+            package: 'core_ui',
             fontSize: 15.0,
             fontWeight: FontWeight.w500,
             color: primaryTextColor,
@@ -154,22 +155,24 @@ class AppThemeData {
           subtitleTextStyle: const TextStyle(
             color: secondaryTextColor,
             fontFamily: 'NotoSansJP',
+            package: 'core_ui',
             fontSize: 13.0,
           ),
         ),
       ),
     );
   }
-
   ThemeData build(BuildContext context) {
+    final textTheme = typography.build(context);
     return ThemeData(
+      useMaterial3: false,
       fontFamily: 'NotoSansJP',
       primaryColor: primaryColor,
       scaffoldBackgroundColor: primaryBackgroundColor,
       primarySwatch: generateMaterialColor(primaryColor),
       disabledColor: disabledColor,
       dividerColor: dividerColor,
-      textTheme: typography.build(context),
+      textTheme: textTheme,
       bottomSheetTheme: BottomSheetThemeData(
         clipBehavior: Clip.hardEdge,
         showDragHandle: true,
@@ -191,11 +194,11 @@ class AppThemeData {
         elevation: 1,
         centerTitle: true,
         titleTextStyle: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',
           fontSize: 16.0,
           color: primaryTextColor,
           fontWeight: FontWeight.w500,
+          fontFamily: 'NotoSansJP',
+          package: 'core_ui',
         ),
       ),
       cardTheme: CardTheme(
@@ -220,6 +223,7 @@ class AppThemeData {
           ),
           disabledBackgroundColor: disableButtonColor,
           disabledForegroundColor: Colors.black,
+          textStyle: textTheme.labelLarge,
         ),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -230,27 +234,26 @@ class AppThemeData {
           foregroundColor: Colors.white,
           backgroundColor: primaryColor,
           padding: EdgeInsets.symmetric(
-            vertical: spacing.buttonVertical,
-            horizontal: spacing.buttonHorizontal,
-          ),
+              vertical: spacing.buttonVertical,
+              horizontal: spacing.buttonHorizontal),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
+          textStyle: textTheme.labelLarge,
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: OutlinedButton.styleFrom(
-          padding: EdgeInsets.symmetric(
-            vertical: spacing.buttonVertical,
-            horizontal: spacing.buttonHorizontal,
-          ),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(12.0),
-          ),
-          side: BorderSide(width: 2, color: primaryColor),
-          foregroundColor: primaryColor,
-          backgroundColor: Colors.white,
-        ),
+            foregroundColor: primaryColor,
+            backgroundColor: Colors.white,
+            padding: EdgeInsets.symmetric(
+                vertical: spacing.buttonVertical,
+                horizontal: spacing.buttonHorizontal),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12.0),
+            ),
+            side: BorderSide(width: 2, color: primaryColor),
+            textStyle: textTheme.labelLarge),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
@@ -262,14 +265,17 @@ class AppThemeData {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12.0),
           ),
+          textStyle: textTheme.labelLarge,
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
+        fillColor: Colors.white,
+        filled: true,
         hintStyle: const TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',
           fontSize: 15.0,
           color: Color(0xFF5B5B5B),
+          fontFamily: 'NotoSansJP',
+          package: 'core_ui',
         ),
         iconColor: primaryTextColor,
         suffixIconColor: primaryTextColor,
@@ -277,16 +283,18 @@ class AppThemeData {
           horizontal: spacing.inputHorizontal,
           vertical: spacing.inputVertical,
         ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6.0),
+          borderSide: BorderSide(color: primaryColor),
+        ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.0),
-          borderSide: BorderSide(color: borderColor),
+          borderRadius: BorderRadius.circular(6.0),
+          borderSide: const BorderSide(color: Color(0xffCDD6DD)),
         ),
         disabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12.0),
-          borderSide: BorderSide(color: disabledColor),
+          borderRadius: BorderRadius.circular(6.0),
+          borderSide: const BorderSide(color: Color(0xffCDD6DD)),
         ),
-        fillColor: Colors.white,
-        filled: true,
       ),
       listTileTheme: ListTileThemeData(
         shape: RoundedRectangleBorder(
@@ -327,9 +335,25 @@ class AppThemeData {
         ),
       ),
       checkboxTheme: CheckboxThemeData(
-        overlayColor: MaterialStatePropertyAll(primaryColor),
-        fillColor: MaterialStatePropertyAll(primaryColor),
-        shape: const CircleBorder(),
+        fillColor: MaterialStateProperty.resolveWith((states) {
+          if (states.contains(MaterialState.selected)) {
+            return context.appTheme.primaryColor;
+          }
+          return Colors.white;
+        }),
+        checkColor: MaterialStateProperty.resolveWith((states) {
+          return Colors.white;
+        }),
+        side: BorderSide(
+          color: context.appTheme.primaryColor,
+        ),
+        shape: RoundedRectangleBorder(
+          side: BorderSide(
+            color: context.appTheme.primaryColor,
+          ),
+          borderRadius: BorderRadius.circular(4),
+        ),
+
       ),
       radioTheme: RadioThemeData(
         fillColor: MaterialStateProperty.resolveWith(
@@ -465,6 +489,12 @@ class Typography {
         fontFamily: 'NotoSansJP',
         package: 'core_ui',
       ),
+      labelLarge: const TextStyle(
+        fontSize: 15,
+        fontWeight: FontWeight.w500,
+        fontFamily: 'NotoSansJP',
+        package: 'core_ui',
+      ),
       labelMedium: const TextStyle(
         fontFamily: 'NotoSansJP',
         package: 'core_ui',
@@ -478,9 +508,9 @@ class Typography {
       ),
       headlineSmall: TextStyle(
         color: successTextColor,
+        fontFamily: 'NotoSansJP',
         fontWeight: FontWeight.bold,
         fontSize: 26.0,
-        fontFamily: 'NotoSansJP',
         package: 'core_ui',
       ),
     )..apply(
@@ -568,16 +598,20 @@ class PinPutThemeData {
         height: size,
         decoration: decoration,
         textStyle: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',fontSize: fontSize),
+          fontSize: fontSize,
+          fontFamily: 'NotoSansJP',
+          package: 'core_ui',
+        ),
       ),
       focusPinTheme: PinTheme(
         width: size,
         height: size,
         decoration: decoration,
         textStyle: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',fontSize: fontSize),
+          fontSize: fontSize,
+          fontFamily: 'NotoSansJP',
+          package: 'core_ui',
+        ),
       ),
     );
   }

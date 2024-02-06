@@ -13,7 +13,7 @@ PrePatientRequest _$PrePatientRequestFromJson(Map<String, dynamic> json) =>
       dateOfBirth: json['dateOfBirth'] == null
           ? null
           : DateTime.parse(json['dateOfBirth'] as String),
-      gender: json['gender'] as String?,
+      gender: json['gender'] as bool?,
       nationality: json['nationality'] as String?,
       classification: json['classification'] as String?,
       nameOfDisease: json['nameOfDisease'] as String?,

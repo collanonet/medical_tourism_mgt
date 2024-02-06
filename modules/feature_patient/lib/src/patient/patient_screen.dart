@@ -155,6 +155,9 @@ class _PatientScreenState extends State<PatientScreen> {
               child: Skeletonizer(
                 enabled: model.patientData.loading,
                 child: DynamicTable(
+                  rowsPerPage: (model.patientData.data?.items.length ?? 0) < 10
+                      ? model.patientData.data?.items.length
+                      : model.patientData.data?.items.length ?? 0,
                   data: TableData(
                     columns: [
                       HeaderTableData(
@@ -212,7 +215,7 @@ class _PatientScreenState extends State<PatientScreen> {
                               var item = model.patientData.data?.items[index];
                               return RowTableData(
                                 onTap: () {
-                                  context.pushRoute(
+                                  context.router.push(
                                     DetailPatientRoute(
                                       patient: item,
                                       id: item.id,
@@ -260,14 +263,14 @@ class _PatientScreenState extends State<PatientScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'WANG MUCHEN',
+                                        '--',
                                         style: TextStyle(
                                           color: Colors.blueGrey,
                                           fontFamily: 'NotoSansJP',
                                           package: 'core_ui',
                                         ),
                                       ),
-                                      Text('王　沐宸'),
+                                      Text('--'),
                                     ],
                                   ),
                                   Row(
@@ -280,17 +283,18 @@ class _PatientScreenState extends State<PatientScreen> {
                                             borderRadius:
                                                 BorderRadius.circular(4)),
                                         child: const Text(
-                                          '受注',
-                                          style: TextStyle(color: Colors.white,
-
+                                          '--',
+                                          style: TextStyle(
+                                            color: Colors.white,
                                             fontFamily: 'NotoSansJP',
-                                            package: 'core_ui',),
+                                            package: 'core_ui',
+                                          ),
                                         ),
                                       ),
                                     ],
                                   ),
                                   Text(
-                                    '001-C-20-1',
+                                    '--',
                                   ),
                                   Column(
                                     children: [
@@ -304,11 +308,12 @@ class _PatientScreenState extends State<PatientScreen> {
                                                 borderRadius:
                                                     BorderRadius.circular(4)),
                                             child: const Text(
-                                              '治療',
+                                              '--',
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                color: Colors.white,
                                                 fontFamily: 'NotoSansJP',
-                                                package: 'core_ui',),
+                                                package: 'core_ui',
+                                              ),
                                             ),
                                           ),
                                           const SizedBox(width: 4),
@@ -320,11 +325,12 @@ class _PatientScreenState extends State<PatientScreen> {
                                                 borderRadius:
                                                     BorderRadius.circular(4)),
                                             child: const Text(
-                                              '再生',
+                                              '--',
                                               style: TextStyle(
-                                                  color: Colors.white,
+                                                color: Colors.white,
                                                 fontFamily: 'NotoSansJP',
-                                                package: 'core_ui',),
+                                                package: 'core_ui',
+                                              ),
                                             ),
                                           )
                                         ],
@@ -332,28 +338,28 @@ class _PatientScreenState extends State<PatientScreen> {
                                     ],
                                   ),
                                   Text(
-                                    '2020/04/22',
+                                    '--',
                                   ),
                                   Text(
-                                    '2020/04/22',
+                                    '--',
                                   ),
                                   Text(
-                                    '2020/04/22',
+                                    '--',
                                   ),
                                   Text(
-                                    '中国',
+                                    '--',
                                   ),
                                   Text(
-                                    '検診',
+                                    '--',
                                   ),
                                   Text(
-                                    'ガー',
+                                    '--',
                                   ),
                                   Text(
-                                    'ガー',
+                                    '--',
                                   ),
                                   Text(
-                                    'りんくうメディカルクリニック',
+                                    '--',
                                     style: TextStyle(
                                       color: context.appTheme.primaryColor,
                                       fontWeight: FontWeight.bold,
@@ -362,7 +368,7 @@ class _PatientScreenState extends State<PatientScreen> {
                                     ),
                                   ),
                                   Text(
-                                    '7',
+                                    '--',
                                   ),
                                 ],
                               );
