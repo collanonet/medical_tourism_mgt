@@ -29,11 +29,10 @@ class BasicInformationModel {
     if (patient != null) {
       try {
         patientData.value = AsyncData(data: patient);
-        await getPatientNames(patientId: patient.id, formGroup: formGroup);
-        await getPatientNationalities(
-            patientId: patient.id, formGroup: formGroup);
-        await getPatientPassports(patientId: patient.id, formGroup: formGroup);
-        await getMedicalRecords(patientId: patient.id, formGroup: formGroup);
+        getPatientNames(patientId: patient.id, formGroup: formGroup);
+        getPatientNationalities(patientId: patient.id, formGroup: formGroup);
+        getPatientPassports(patientId: patient.id, formGroup: formGroup);
+        getMedicalRecords(patientId: patient.id, formGroup: formGroup);
         loading.value = const AsyncData();
       } catch (error) {
         logger.d(error);
@@ -56,10 +55,10 @@ class BasicInformationModel {
       await createUpdateMedicalRecordHospital(form);
       await createUpdatePatientNames(
           form.control('PATIENT_NAMES') as FormGroup);
-      // await createUpdateMedicalRecordAgents(
-      //     form.control('MEDICAL_RECORD_AGENTS') as FormGroup);
-      // await createUpdateMedicalRecordReferrers(
-      //     form.control('MEDICAL_RECORD_Referrers') as FormGroup);
+      await createUpdateMedicalRecordAgents(
+          form.control('MEDICAL_RECORD_AGENTS') as FormGroup);
+      await createUpdateMedicalRecordReferrers(
+          form.control('MEDICAL_RECORD_Referrers') as FormGroup);
       await createUpdateMedicalRecordBudgets(
           form.control('MEDICAL_RECORD_BUDGETS') as FormGroup);
       // await createUpdateMedicalRecordCompanions(form);
@@ -447,30 +446,30 @@ class BasicInformationModel {
       medicalRecord.value = AsyncData(error: error);
     });
     if (medicalRecord.value.data != null) {
-      await getMedicalRecordHospitals(
+      getMedicalRecordHospitals(
         medicalRecordId: medicalRecord.value.requireData.id,
         formGroup: formGroup,
       );
-      await getMedicalRecordBudgets(
+      getMedicalRecordBudgets(
         medicalRecordId: medicalRecord.value.requireData.id,
         formGroup: formGroup,
       );
-      //   await getMedicalRecordAgents(
-      //     medicalRecordId: _medicalRecord.data!.id,
-      //     formGroup: formGroup,
-      //   );
-      //   await getMedicalRecordReferrers(
-      //     medicalRecordId: _medicalRecord.data!.id,
+      getMedicalRecordAgents(
+        medicalRecordId: medicalRecord.value.requireData.id,
+        formGroup: formGroup,
+      );
+      getMedicalRecordReferrers(
+        medicalRecordId: medicalRecord.value.requireData.id,
+        formGroup: formGroup,
+      );
+
+      //    getMedicalRecordCompanions(
+      //     medicalRecordId: medicalRecord.value.requireData.id,
       //     formGroup: formGroup,
       //   );
 
-      //   await getMedicalRecordCompanions(
-      //     medicalRecordId: _medicalRecord.data!.id,
-      //     formGroup: formGroup,
-      //   );
-
-      //   await getMedicalRecordInterpreters(
-      //     medicalRecordId: _medicalRecord.data!.id,
+      //    getMedicalRecordInterpreters(
+      //     medicalRecordId: medicalRecord.value.requireData.id,
       //     formGroup: formGroup,
       //   );
     }
@@ -586,175 +585,165 @@ class BasicInformationModel {
   }
 
 //GET_MEDICAL_RECORD_AGENTS
-//   AsyncData<List<MedicalRecordAgent>> _medicalRecordAgents = const AsyncData();
-//   AsyncData<List<MedicalRecordAgent>> get medicalRecordAgents =>
-//       _medicalRecordAgents;
-//
-//   Future<void> getMedicalRecordAgents({
-//     required String medicalRecordId,
-//     required FormGroup formGroup,
-//   }) async {
-//     _medicalRecordAgents = const AsyncData(loading: true);
-//     notifyListeners();
-//
-//     await patientRepository
-//         .medicalRecordAgentsByMedicalRecord(medicalRecordId)
-//         .then((value) {
-//       _medicalRecordAgents = AsyncData(data: value);
-//       insertMEDICALRECORDAGENTS(
-//         data: value.first,
-//         formGroup: formGroup.control('MEDICAL_RECORD_AGENTS') as FormGroup,
-//       );
-//     }).catchError((error) {
-//       logger.d(error);
-//       _medicalRecordAgents = AsyncData(error: error);
-//     }).whenComplete(() {
-//       notifyListeners();
-//     });
-//   }
-//
-//   void insertMEDICALRECORDAGENTS({
-//     required MedicalRecordAgent data,
-//     required FormGroup formGroup,
-//   }) {
-//     formGroup.control('id').value = data.id;
-//     formGroup.control('company').value = data.company;
-//     formGroup.control('nameInKanji').value = data.nameInKanji;
-//     formGroup.control('nameInKana').value = data.nameInKana;
-//   }
-//
-//   // post MEDICAL_RECORD_AGENTS
-//   Future<void> postMedicalRecordAgents(
-//     MedicalRecordAgentRequest medicalRecordAgentRequest,
-//   ) async {
-//     _medicalRecordAgents = const AsyncData(loading: true);
-//     notifyListeners();
-//
-//     await patientRepository
-//         .postMedicalRecordAgent(medicalRecordAgentRequest)
-//         .then((value) {
-//       if (_medicalRecordAgents.data == null) {
-//         _medicalRecordAgents = AsyncData(data: [value]);
-//       } else {
-//         _medicalRecordAgents.data?.add(value);
-//       }
-//     }).catchError((error) {
-//       logger.d(error);
-//     }).whenComplete(() {
-//       notifyListeners();
-//     });
-//   }
-//
-//   // update MEDICAL_RECORD_AGENTS
-//   Future<void> updateMedicalRecordAgents(
-//     String id,
-//     MedicalRecordAgentRequest medicalRecordAgentRequest,
-//   ) async {
-//     await patientRepository
-//         .putMedicalRecordAgent(id, medicalRecordAgentRequest)
-//         .then((value) {
-//       // Find from list and update or add
-//       final index = _medicalRecordAgents.data?.indexWhere(
-//             (element) => element.id == id,
-//           ) ??
-//           -1;
-//       if (index >= 0) {
-//         _medicalRecordAgents.data?[index] = value;
-//       } else {
-//         _medicalRecordAgents.data?.add(value);
-//       }
-//     }).catchError((error) {
-//       logger.d(error);
-//     }).whenComplete(() {
-//       notifyListeners();
-//     });
-//   }
+  ValueNotifier<AsyncData<MedicalRecordAgent>> medicalRecordAgents =
+      ValueNotifier<AsyncData<MedicalRecordAgent>>(const AsyncData());
+
+  Future<void> getMedicalRecordAgents({
+    required String medicalRecordId,
+    required FormGroup formGroup,
+  }) async {
+    medicalRecordAgents.value = const AsyncData(loading: true);
+
+    await patientRepository
+        .medicalRecordAgentsByMedicalRecord(medicalRecordId)
+        .then((value) {
+      medicalRecordAgents.value = AsyncData(data: value.firstOrNull);
+      insertMEDICALRECORDAGENTS(
+        data: value.firstOrNull,
+        formGroup: formGroup.control('MEDICAL_RECORD_AGENTS') as FormGroup,
+      );
+    }).catchError((error) {
+      logger.d(error);
+      medicalRecordAgents.value = AsyncData(error: error);
+    });
+  }
+
+  void insertMEDICALRECORDAGENTS({
+    MedicalRecordAgent? data,
+    required FormGroup formGroup,
+  }) {
+    formGroup.control('id').value = data?.id;
+    formGroup.control('company').value = data?.company;
+    formGroup.control('nameInKanji').value = data?.nameInKanji;
+    formGroup.control('nameInKana').value = data?.nameInKana;
+  }
+
+  Future<void> createUpdateMedicalRecordAgents(FormGroup form) async {
+    medicalRecordAgents.value = const AsyncData(loading: true);
+    MedicalRecordAgentRequest request = MedicalRecordAgentRequest(
+      company: form.control('company').value,
+      nameInKanji: form.control('nameInKanji').value,
+      nameInKana: form.control('nameInKana').value,
+      medicalRecord: medicalRecord.value.requireData.id,
+    );
+
+    if (form.control('id').value != null) {
+      await updateMedicalRecordAgents(form.control('id').value, request);
+    } else {
+      await postMedicalRecordAgents(request);
+    }
+  }
+
+  // post MEDICAL_RECORD_AGENTS
+  Future<void> postMedicalRecordAgents(
+    MedicalRecordAgentRequest medicalRecordAgentRequest,
+  ) async {
+    await patientRepository
+        .postMedicalRecordAgent(medicalRecordAgentRequest)
+        .then((value) {
+      medicalRecordAgents.value = AsyncData(data: value);
+    }).catchError((error) {
+      logger.d(error);
+      medicalRecordAgents.value = AsyncData(error: error);
+    });
+  }
+
+  // update MEDICAL_RECORD_AGENTS
+  Future<void> updateMedicalRecordAgents(
+    String id,
+    MedicalRecordAgentRequest medicalRecordAgentRequest,
+  ) async {
+    await patientRepository
+        .putMedicalRecordAgent(id, medicalRecordAgentRequest)
+        .then((value) {
+      medicalRecordAgents.value = AsyncData(data: value);
+    }).catchError((error) {
+      logger.d(error);
+      medicalRecordAgents.value = AsyncData(error: error);
+    });
+  }
+
 //
 //   //GET_MEDICAL_RECORD_BUDGETS
-//   AsyncData<List<MedicalRecordReferrer>> _medicalRecordReferrers =
-//       const AsyncData();
-//   AsyncData<List<MedicalRecordReferrer>> get medicalRecordReferrers =>
-//       _medicalRecordReferrers;
-//
-//   Future<void> getMedicalRecordReferrers({
-//     required String medicalRecordId,
-//     required FormGroup formGroup,
-//   }) async {
-//     _medicalRecordReferrers = const AsyncData(loading: true);
-//     notifyListeners();
-//
-//     await patientRepository
-//         .medicalRecordReferrersByMedicalRecord(medicalRecordId)
-//         .then((value) {
-//       _medicalRecordReferrers = AsyncData(data: value);
-//       insertMEDICALRECORDReferrers(
-//         data: value.first,
-//         formGroup: formGroup.control('MEDICAL_RECORD_Referrers') as FormGroup,
-//       );
-//     }).catchError((error) {
-//       logger.d(error);
-//       _medicalRecordReferrers = AsyncData(error: error);
-//     }).whenComplete(() {
-//       notifyListeners();
-//     });
-//   }
-//
-//   void insertMEDICALRECORDReferrers({
-//     required MedicalRecordReferrer data,
-//     required FormGroup formGroup,
-//   }) {
-//     formGroup.control('id').value = data.id;
-//     formGroup.control('company').value = data.company;
-//     formGroup.control('nameInKanji').value = data.nameInKanji;
-//     formGroup.control('nameInKana').value = data.nameInKana;
-//   }
-//
-//   // post MEDICAL_RECORD_Referrers
-//   Future<void> postMedicalRecordReferrers(
-//     MedicalRecordReferrerRequest medicalRecordAgentRequest,
-//   ) async {
-//     _medicalRecordReferrers = const AsyncData(loading: true);
-//     notifyListeners();
-//
-//     await patientRepository
-//         .postMedicalRecordReferrer(medicalRecordAgentRequest)
-//         .then((value) {
-//       if (_medicalRecordReferrers.data == null) {
-//         _medicalRecordReferrers = AsyncData(data: [value]);
-//       } else {
-//         _medicalRecordReferrers.data?.add(value);
-//       }
-//     }).catchError((error) {
-//       logger.d(error);
-//     }).whenComplete(() {
-//       notifyListeners();
-//     });
-//   }
-//
-//   // update MEDICAL_RECORD_Referrers
-//   Future<void> updateMedicalRecordReferrers(
-//     String id,
-//     MedicalRecordReferrerRequest medicalRecordAgentRequest,
-//   ) async {
-//     await patientRepository
-//         .putMedicalRecordReferrer(id, medicalRecordAgentRequest)
-//         .then((value) {
-//       // Find from list and update or add
-//       final index = _medicalRecordReferrers.data?.indexWhere(
-//             (element) => element.id == id,
-//           ) ??
-//           -1;
-//       if (index >= 0) {
-//         _medicalRecordReferrers.data?[index] = value;
-//       } else {
-//         _medicalRecordReferrers.data?.add(value);
-//       }
-//     }).catchError((error) {
-//       logger.d(error);
-//     }).whenComplete(() {
-//       notifyListeners();
-//     });
-//   }
+  ValueNotifier<AsyncData<MedicalRecordReferrer>> medicalRecordReferrers =
+      ValueNotifier(
+    const AsyncData(),
+  );
+
+  Future<void> getMedicalRecordReferrers({
+    required String medicalRecordId,
+    required FormGroup formGroup,
+  }) async {
+    medicalRecordReferrers.value = const AsyncData(loading: true);
+
+    await patientRepository
+        .medicalRecordReferrersByMedicalRecord(medicalRecordId)
+        .then((value) {
+      medicalRecordReferrers.value = AsyncData(data: value.firstOrNull);
+      insertMEDICALRECORDReferrers(
+        data: value.firstOrNull,
+        formGroup: formGroup.control('MEDICAL_RECORD_Referrers') as FormGroup,
+      );
+    }).catchError((error) {
+      logger.d(error);
+      medicalRecordReferrers.value = AsyncData(error: error);
+    });
+  }
+
+  void insertMEDICALRECORDReferrers({
+    MedicalRecordReferrer? data,
+    required FormGroup formGroup,
+  }) {
+    formGroup.control('id').value = data?.id;
+    formGroup.control('company').value = data?.company;
+    formGroup.control('nameInKanji').value = data?.nameInKanji;
+    formGroup.control('nameInKana').value = data?.nameInKana;
+  }
+
+  Future<void> createUpdateMedicalRecordReferrers(FormGroup form) async {
+    medicalRecordReferrers.value = const AsyncData(loading: true);
+    MedicalRecordReferrerRequest request = MedicalRecordReferrerRequest(
+      company: form.control('company').value,
+      nameInKanji: form.control('nameInKanji').value,
+      nameInKana: form.control('nameInKana').value,
+      medicalRecord: medicalRecord.value.requireData.id,
+    );
+
+    if (form.control('id').value != null) {
+      await updateMedicalRecordReferrers(form.control('id').value, request);
+    } else {
+      await postMedicalRecordReferrers(request);
+    }
+  }
+
+  // post MEDICAL_RECORD_Referrers
+  Future<void> postMedicalRecordReferrers(
+    MedicalRecordReferrerRequest medicalRecordAgentRequest,
+  ) async {
+    await patientRepository
+        .postMedicalRecordReferrer(medicalRecordAgentRequest)
+        .then((value) {
+      medicalRecordReferrers.value = AsyncData(data: value);
+    }).catchError((error) {
+      logger.d(error);
+      medicalRecordReferrers.value = AsyncData(error: error);
+    });
+  }
+
+  // update MEDICAL_RECORD_Referrers
+  Future<void> updateMedicalRecordReferrers(
+    String id,
+    MedicalRecordReferrerRequest medicalRecordAgentRequest,
+  ) async {
+    await patientRepository
+        .putMedicalRecordReferrer(id, medicalRecordAgentRequest)
+        .then((value) {
+      medicalRecordReferrers.value = AsyncData(data: value);
+    }).catchError((error) {
+      logger.d(error);
+      medicalRecordReferrers.value = AsyncData(error: error);
+    });
+  }
 
 // GET_MEDICAL_RECORD_BUDGETS
 
@@ -1211,35 +1200,9 @@ class BasicInformationModel {
 //
 
 //
-//   Future<void> createUpdateMedicalRecordAgents(FormGroup form) async {
-//     MedicalRecordAgentRequest request = MedicalRecordAgentRequest(
-//       company: form.control('company').value,
-//       nameInKanji: form.control('nameInKanji').value,
-//       nameInKana: form.control('nameInKana').value,
-//       medicalRecord: _medicalRecord.data?.id,
-//     );
+
 //
-//     if (form.control('id').value != null) {
-//       await updateMedicalRecordAgents(form.control('id').value, request);
-//     } else {
-//       await postMedicalRecordAgents(request);
-//     }
-//   }
-//
-//   Future<void> createUpdateMedicalRecordReferrers(FormGroup form) async {
-//     MedicalRecordReferrerRequest request = MedicalRecordReferrerRequest(
-//       company: form.control('company').value,
-//       nameInKanji: form.control('nameInKanji').value,
-//       nameInKana: form.control('nameInKana').value,
-//       medicalRecord: _medicalRecord.data?.id,
-//     );
-//
-//     if (form.control('id').value != null) {
-//       await updateMedicalRecordReferrers(form.control('id').value, request);
-//     } else {
-//       await postMedicalRecordReferrers(request);
-//     }
-//   }
+
 //
 //   Future<void> createUpdateMedicalRecordInterpreters(FormGroup control) async {
 //     MedicalRecordInterpreterRequest request = MedicalRecordInterpreterRequest(
