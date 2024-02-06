@@ -103,7 +103,7 @@ class BasicInfoSection extends StatelessWidget {
               //   ],
               // ),
               // const MedicalRecordTravelGroupSection(),
-              // const MedicalRecordUserAccountSection(),
+              const MedicalRecordUserAccountSection(),
               const MedicalRecordNameSection(),
               const MedicalRecordNationalitySection(),
               Divider(
@@ -118,7 +118,7 @@ class BasicInfoSection extends StatelessWidget {
               ),
               const MedicalRecordAgentSection(),
               const MedicalRecordReferrerSection(),
-              // const MedicalRecordInterpreterSection(),
+              const MedicalRecordInterpreterSection(),
               // const MedicalRecordCompanionSection(),
             ],
           ),

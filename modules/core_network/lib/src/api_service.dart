@@ -94,6 +94,11 @@ abstract class ApiService {
     @Path('patientId') String patientId,
   );
 
+  @GET('${Apis.GET_PATIENT_USER}/{userId}')
+  Future<User> patientUser(
+    @Path('userId') String userId,
+  );
+
   @POST(Apis.POST_PATIENT_NAMES)
   Future<PatientName> postPatientName(
     @Body() PatientNameRequest patientName,

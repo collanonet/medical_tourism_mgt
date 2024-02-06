@@ -591,4 +591,9 @@ class PatientRepositoryIml extends PatientRepository {
   ) {
     return remote.deleteMedicalRecordOverseaData(id);
   }
+
+  @override
+  Future<User> patientUser(String userId) {
+    return remote.patientUser(userId);
+  }
 }

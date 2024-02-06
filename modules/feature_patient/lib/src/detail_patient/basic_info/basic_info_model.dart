@@ -19,6 +19,9 @@ class BasicInformationModel {
   ValueNotifier<AsyncData> loading =
       ValueNotifier<AsyncData>(const AsyncData());
 
+  ValueNotifier<AsyncData<User>> userAccount =
+      ValueNotifier<AsyncData<User>>(const AsyncData());
+
   Future<void> initialData({
     Patient? patient,
     String? id,
@@ -29,6 +32,7 @@ class BasicInformationModel {
     if (patient != null) {
       try {
         patientData.value = AsyncData(data: patient);
+        getPatientUser(userId: patient.id, formGroup: formGroup);
         getPatientNames(patientId: patient.id, formGroup: formGroup);
         getPatientNationalities(patientId: patient.id, formGroup: formGroup);
         getPatientPassports(patientId: patient.id, formGroup: formGroup);
@@ -71,6 +75,31 @@ class BasicInformationModel {
       logger.d(error);
       loading.value = AsyncData(error: error);
     }
+  }
+
+  // //GET_PATIENT_USER
+
+  Future<void> getPatientUser({
+    required String userId,
+    required FormGroup formGroup,
+  }) async {
+    userAccount.value = const AsyncData(loading: true);
+
+    await patientRepository.patientUser(userId).then((value) {
+      userAccount.value = AsyncData(data: value);
+      logger.d(value.toJson());
+      insertUserAccount(
+        data: value,
+        formGroup: formGroup.control('Patient_account') as FormGroup,
+      );
+    }).catchError((error) {
+      logger.d(error);
+      userAccount.value = AsyncData(error: error);
+    });
+  }
+
+  void insertUserAccount({required User data, required FormGroup formGroup}) {
+    formGroup.control('loginId').value = data.idNumber;
   }
 
   // //GET_PATIENT_NAMES
@@ -199,6 +228,11 @@ class BasicInformationModel {
       patientNames.value = AsyncData(error: error);
     });
   }
+
+  // Get user account
+
+  // ValueNotifier<AsyncData<UserAccount>> userAccount =
+  //     ValueNotifier<AsyncData<UserAccount>>(const AsyncData());
 
 //GET_PATIENT_NATIONALITIES
   ValueNotifier<AsyncData<PatientNationality>> patientNationalities =
@@ -463,15 +497,15 @@ class BasicInformationModel {
         formGroup: formGroup,
       );
 
-      //    getMedicalRecordCompanions(
-      //     medicalRecordId: medicalRecord.value.requireData.id,
-      //     formGroup: formGroup,
-      //   );
+      getMedicalRecordInterpreters(
+        medicalRecordId: medicalRecord.value.requireData.id,
+        formGroup: formGroup,
+      );
 
-      //    getMedicalRecordInterpreters(
-      //     medicalRecordId: medicalRecord.value.requireData.id,
-      //     formGroup: formGroup,
-      //   );
+      // getMedicalRecordCompanions(
+      //   medicalRecordId: medicalRecord.value.requireData.id,
+      //   formGroup: formGroup,
+      // );
     }
   }
 
@@ -1116,109 +1150,86 @@ class BasicInformationModel {
   }
 
 // //GET_MEDICAL_RECORD_INTERPRETERS
-//   AsyncData<List<MedicalRecordInterpreter>> _medicalRecordInterpreters =
-//       const AsyncData();
-//   AsyncData<List<MedicalRecordInterpreter>> get medicalRecordInterpreters =>
-//       _medicalRecordInterpreters;
-//
-//   Future<void> getMedicalRecordInterpreters({
-//     required String medicalRecordId,
-//     required FormGroup formGroup,
-//   }) async {
-//     _medicalRecordInterpreters = const AsyncData(loading: true);
-//     notifyListeners();
-//
-//     await patientRepository
-//         .medicalRecordInterpretersByMedicalRecord(medicalRecordId)
-//         .then((value) {
-//       _medicalRecordInterpreters = AsyncData(data: value);
-//       insertMedicalRecordInterpreters(
-//         data: value.first,
-//         formGroup: formGroup.control('MEDICAL_RECORD_Interpreter') as FormGroup,
-//       );
-//     }).catchError((error) {
-//       logger.d(error);
-//       _medicalRecordInterpreters = AsyncData(error: error);
-//     }).whenComplete(() {
-//       notifyListeners();
-//     });
-//   }
-//
-//   void insertMedicalRecordInterpreters({
-//     required MedicalRecordInterpreter data,
-//     required FormGroup formGroup,
-//   }) {
-//     formGroup.control('id').value = data.id;
-//     formGroup.control('requiredOrUnnnecessary').value =
-//         data.requiredOrUnnnecessary ? '要' : '不要';
-//     formGroup.control('interpreter').value = data.interpreter;
-//   }
-//
-//   // post MEDICAL_RECORD_INTERPRETERS
-//   Future<void> postMedicalRecordInterpreters(
-//     MedicalRecordInterpreterRequest medicalRecordInterpreterRequest,
-//   ) async {
-//     await patientRepository
-//         .postMedicalRecordInterpreter(medicalRecordInterpreterRequest)
-//         .then((value) {
-//       if (_medicalRecordInterpreters.data == null) {
-//         _medicalRecordInterpreters = AsyncData(data: [value]);
-//       } else {
-//         _medicalRecordInterpreters.data?.add(value);
-//       }
-//     }).catchError((error) {
-//       logger.d(error);
-//     }).whenComplete(() {
-//       notifyListeners();
-//     });
-//   }
-//
-//   // update MEDICAL_RECORD_INTERPRETERS
-//   Future<void> updateMedicalRecordInterpreters(
-//     String id,
-//     MedicalRecordInterpreterRequest medicalRecordInterpreterRequest,
-//   ) async {
-//     await patientRepository
-//         .putMedicalRecordInterpreter(id, medicalRecordInterpreterRequest)
-//         .then((value) {
-//       // Find from list and update or add
-//       final index = _medicalRecordInterpreters.data?.indexWhere(
-//             (element) => element.id == id,
-//           ) ??
-//           -1;
-//       if (index >= 0) {
-//         _medicalRecordInterpreters.data?[index] = value;
-//       } else {
-//         _medicalRecordInterpreters.data?.add(value);
-//       }
-//     }).catchError((error) {
-//       logger.d(error);
-//     }).whenComplete(() {
-//       notifyListeners();
-//     });
-//   }
-//
+  ValueNotifier<AsyncData<MedicalRecordInterpreter>> medicalRecordInterpreters =
+      ValueNotifier(
+    const AsyncData(),
+  );
 
-//
+  Future<void> getMedicalRecordInterpreters({
+    required String medicalRecordId,
+    required FormGroup formGroup,
+  }) async {
+    medicalRecordInterpreters.value = const AsyncData(loading: true);
 
-//
+    await patientRepository
+        .medicalRecordInterpretersByMedicalRecord(medicalRecordId)
+        .then((value) {
+      medicalRecordInterpreters.value = AsyncData(data: value.firstOrNull);
+      insertMedicalRecordInterpreters(
+        data: value.firstOrNull,
+        formGroup: formGroup.control('MEDICAL_RECORD_Interpreter') as FormGroup,
+      );
+    }).catchError((error) {
+      logger.d(error);
+      medicalRecordInterpreters.value = AsyncData(error: error);
+    });
+  }
 
-//
-//   Future<void> createUpdateMedicalRecordInterpreters(FormGroup control) async {
-//     MedicalRecordInterpreterRequest request = MedicalRecordInterpreterRequest(
-//       requiredOrUnnnecessary:
-//           control.control('requiredOrUnnnecessary').value == '要' ? true : false,
-//       interpreter: control.control('interpreter').value,
-//       medicalRecord: _medicalRecord.data?.id,
-//     );
-//
-//     if (control.control('id').value != null) {
-//       await updateMedicalRecordInterpreters(
-//           control.control('id').value, request);
-//     } else {
-//       await postMedicalRecordInterpreters(request);
-//     }
-//   }
+  void insertMedicalRecordInterpreters({
+    MedicalRecordInterpreter? data,
+    required FormGroup formGroup,
+  }) {
+    formGroup.control('id').value = data?.id;
+    formGroup.control('requiredOrUnnnecessary').value =
+        data?.requiredOrUnnnecessary == true ? '要' : '不要';
+    formGroup.control('interpreter').value = data?.interpreter;
+  }
+
+  // post MEDICAL_RECORD_INTERPRETERS
+  Future<void> postMedicalRecordInterpreters(
+    MedicalRecordInterpreterRequest medicalRecordInterpreterRequest,
+  ) async {
+    await patientRepository
+        .postMedicalRecordInterpreter(medicalRecordInterpreterRequest)
+        .then((value) {
+      medicalRecordInterpreters.value = AsyncData(data: value);
+    }).catchError((error) {
+      logger.d(error);
+      medicalRecordInterpreters.value = AsyncData(error: error);
+    });
+  }
+
+  // update MEDICAL_RECORD_INTERPRETERS
+  Future<void> updateMedicalRecordInterpreters(
+    String id,
+    MedicalRecordInterpreterRequest medicalRecordInterpreterRequest,
+  ) async {
+    await patientRepository
+        .putMedicalRecordInterpreter(id, medicalRecordInterpreterRequest)
+        .then((value) {
+      medicalRecordInterpreters.value = AsyncData(data: value);
+    }).catchError((error) {
+      logger.d(error);
+      medicalRecordInterpreters.value = AsyncData(error: error);
+    });
+  }
+
+  Future<void> createUpdateMedicalRecordInterpreters(FormGroup control) async {
+    medicalRecordInterpreters.value = const AsyncData(loading: true);
+    MedicalRecordInterpreterRequest request = MedicalRecordInterpreterRequest(
+      requiredOrUnnnecessary:
+          control.control('requiredOrUnnnecessary').value == '要' ? true : false,
+      interpreter: control.control('interpreter').value,
+      medicalRecord: medicalRecord.value.requireData.id,
+    );
+
+    if (control.control('id').value != null) {
+      await updateMedicalRecordInterpreters(
+          control.control('id').value, request);
+    } else {
+      await postMedicalRecordInterpreters(request);
+    }
+  }
 
 //
 //   Future<void> createUpdateMedicalRecordCompanions(FormGroup form) async {

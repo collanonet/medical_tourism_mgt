@@ -13,6 +13,7 @@ class Apis {
 
   static const GET_PATIENTS = '/patients';
   static const GET_PATIENT = '/patients';
+  static const GET_PATIENT_USER = '/patients/user-id';
   static const POST_PATIENTS = '/patients';
   static const PUT_PATIENTS = '/patients';
   static const DELETE_PATIENT = '/patients';

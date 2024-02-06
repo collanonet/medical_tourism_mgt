@@ -13,7 +13,8 @@ FormGroup basicInfoForm({
         'gender': FormControl<bool>(), // 性別
         'isMale': FormControl<bool>(), // 男性
         'isFemale': FormControl<bool>(), // 女性
-        'arrivalDate': FormControl<DateTime>(validators: [Validators.required]), // 来日日
+        'arrivalDate':
+            FormControl<DateTime>(validators: [Validators.required]), // 来日日
         'consultationDate': FormControl<DateTime>(),
         'returnDate': FormControl<DateTime>(),
         'proposalNumber': FormControl<String>(),
@@ -43,9 +44,13 @@ FormGroup basicInfoForm({
           })
         ]),
         'Patient_account': FormGroup({
-          'id': FormControl<String?>(),
-          'loginId': FormControl<String?>(),
-          'loginPassword': FormControl<String?>(),
+          'loginId': FormControl<String?>(
+            disabled: true,
+          ),
+          'loginPassword': FormControl<String?>(
+            value: '********',
+            disabled: true,
+          ),
         }),
         'PATIENT_NAMES': FormGroup({
           'id': FormControl<String?>(),

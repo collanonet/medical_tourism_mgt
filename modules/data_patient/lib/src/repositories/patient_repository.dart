@@ -54,6 +54,10 @@ abstract class PatientRepository {
     String patientId,
   );
 
+  Future<User> patientUser(
+    String userId,
+  );
+
   Future<PatientName> postPatientName(
     PatientNameRequest patientName,
   );

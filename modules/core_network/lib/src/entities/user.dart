@@ -7,10 +7,10 @@ class User {
   @JsonKey(name: '_id')
   final String id;
   String fullName;
-  String email;
+  String? email;
   String idNumber;
-  String profileImage;
-  String phoneNumber;
+  String? profileImage;
+  String? phoneNumber;
   final DateTime createdAt;
   final DateTime updatedAt;
   final PermissionRole role;

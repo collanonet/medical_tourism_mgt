@@ -123,6 +123,11 @@ class PatientRemoteProvider {
   ) async =>
       await apiService.patientPassportsByPatient(patientId);
 
+  Future<User> patientUser(
+    String userId,
+  ) async =>
+      await apiService.patientUser(userId);
+
   Future<PatientPassport> postPatientPassport(
     PatientPassportRequest patientPassport,
   ) async =>
