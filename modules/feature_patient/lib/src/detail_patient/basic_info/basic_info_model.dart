@@ -54,7 +54,8 @@ class BasicInformationModel {
       //     form.control('PATIENT_PASSPORTS') as FormGroup);
       await createUpdateMedicalRecords(form);
       await createUpdateMedicalRecordHospital(form);
-      await createUpdatePatientNames(form.control('PATIENT_NAMES') as FormGroup);
+      await createUpdatePatientNames(
+          form.control('PATIENT_NAMES') as FormGroup);
       // await createUpdateMedicalRecordAgents(
       //     form.control('MEDICAL_RECORD_AGENTS') as FormGroup);
       // await createUpdateMedicalRecordReferrers(
