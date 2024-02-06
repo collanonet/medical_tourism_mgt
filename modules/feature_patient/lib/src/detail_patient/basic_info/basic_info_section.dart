@@ -37,12 +37,9 @@ class BasicInfoSection extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('メモ（エージェント/病院には共有されません）',
-                      style: TextStyle(
-                        fontFamily: 'NotoSansJP',
-                        package: 'core_ui',
-                        fontWeight: FontWeight.bold,
-                      )),
+                  const Text(
+                    'メモ（エージェント/病院には共有されません）',
+                  ),
                   ReactiveTextField(
                     formControlName: 'memo',
                     maxLines: 3,
@@ -62,10 +59,10 @@ class BasicInfoSection extends StatelessWidget {
                   const MedicalRecordHospitalSection(),
                 ],
               ),
-              // Text(
-              //   'グループ', // TODO: l10n 対応 (グループ) (group)
-              //   style: context.textTheme.titleMedium,
-              // ),
+              Text(
+                'グループ', // TODO: l10n 対応 (グループ) (group)
+                style: context.textTheme.titleMedium,
+              ),
 
               // Row(
               //   children: [
@@ -108,7 +105,7 @@ class BasicInfoSection extends StatelessWidget {
               // const MedicalRecordTravelGroupSection(),
               // const MedicalRecordUserAccountSection(),
               const MedicalRecordNameSection(),
-              // const MedicalRecordNationalitySection(),
+              const MedicalRecordNationalitySection(),
               // const MedicalRecordBudgetSection(),
               // const MedicalRecordPassportSection(),
               // Divider(

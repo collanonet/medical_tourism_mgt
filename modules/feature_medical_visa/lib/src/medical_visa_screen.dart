@@ -80,6 +80,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
             child: Skeletonizer(
               enabled: model.patientData.loading,
               child: DynamicTable(
+                rowsPerPage: (model.patientData.data?.items.length ?? 0) < 10
+                    ? model.patientData.data?.items.length
+                    : model.patientData.data?.items.length ?? 0,
                 data: TableData(
                   columns: [
                     HeaderTableData(

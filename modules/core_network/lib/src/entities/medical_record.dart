@@ -27,6 +27,8 @@ class MedicalRecord {
   final DateTime createdAt;
   final DateTime updatedAt;
 
+
+
   MedicalRecord({
     required this.id,
     this.dateOfBirth,

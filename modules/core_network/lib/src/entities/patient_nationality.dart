@@ -7,23 +7,29 @@ part 'patient_nationality.g.dart';
 class PatientNationality {
   @JsonKey(name: '_id')
   final String id;
-  String nationality;
-  String nativeLanguage;
-  String residentialArea;
-  String currentAddress;
-  String mobileNumber;
-  String patient;
+  String? nationality;
+  String? nativeLanguage;
+  String? residentialArea;
+  String? currentAddress;
+  String? mobileNumber;
+  String? email;
+  List<String?>? chatToolLink;
+  List<String?>? chatQr;
+  String? patient;
   final DateTime createdAt;
   final DateTime updatedAt;
 
   PatientNationality({
     required this.id,
-    required this.nationality,
-    required this.nativeLanguage,
-    required this.residentialArea,
-    required this.currentAddress,
-    required this.mobileNumber,
-    required this.patient,
+    this.nationality,
+    this.nativeLanguage,
+    this.residentialArea,
+    this.currentAddress,
+    this.mobileNumber,
+    this.email,
+    this.chatToolLink,
+    this.chatQr,
+    this.patient,
     required this.createdAt,
     required this.updatedAt,
   });

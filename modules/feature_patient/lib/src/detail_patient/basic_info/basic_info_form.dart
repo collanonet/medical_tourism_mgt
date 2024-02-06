@@ -20,7 +20,7 @@ FormGroup basicInfoForm({
         'receptionDate': FormControl<DateTime>(),
         'type': FormArray([
           FormGroup({
-            'type': FormControl<String?>(),
+            'type': FormControl<String>(),
           })
         ]),
         'progress': FormControl<String>(),
@@ -70,7 +70,16 @@ FormGroup basicInfoForm({
           'currentAddress': FormControl<String?>(),
           'mobileNumber': FormControl<String?>(),
           'email': FormControl<String?>(),
-          'chat_tool_link': FormControl<String?>(),
+          'chatToolLink': FormArray([
+            FormGroup({
+              'chatToolLink': FormControl<String>(),
+            })
+          ]),
+          'chatQr': FormArray([
+            FormGroup({
+              'chatQr': FormControl<String>(),
+            })
+          ]),
           'patient': FormControl<String?>(),
         }),
         'MEDICAL_RECORD_BUDGETS': FormGroup({
@@ -128,7 +137,7 @@ FormGroup basicInfoForm({
             'gender': FormControl<bool>(),
             'mobileNumber': FormControl<String?>(),
             'email': FormControl<String?>(),
-            'chat_tool_link': FormControl<String?>(),
+            'chatToolLink': FormControl<String?>(),
             'passportNumber': FormControl<String?>(),
             'issueDate': FormControl<DateTime>(),
             'expirationDate': FormControl<DateTime>(),

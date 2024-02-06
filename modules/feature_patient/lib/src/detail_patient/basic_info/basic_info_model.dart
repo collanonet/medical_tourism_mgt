@@ -30,8 +30,8 @@ class BasicInformationModel {
       try {
         patientData.value = AsyncData(data: patient);
         await getPatientNames(patientId: patient.id, formGroup: formGroup);
-        // await getPatientNationalities(
-        //     patientId: patient.id, formGroup: formGroup);
+        await getPatientNationalities(
+            patientId: patient.id, formGroup: formGroup);
         // await getPatientPassports(patientId: patient.id, formGroup: formGroup);
         await getMedicalRecords(patientId: patient.id, formGroup: formGroup);
         loading.value = const AsyncData();
@@ -48,8 +48,8 @@ class BasicInformationModel {
       loading.value = const AsyncData(loading: true);
       // await createUpdatePatient(form);
 
-      // await createUpdatePatientNationalities(
-      //     form.control('PATIENT_NATIONALITIES') as FormGroup);
+      await createUpdatePatientNationalities(
+          form.control('PATIENT_NATIONALITIES') as FormGroup);
       // await createUpdatePatientPassports(
       //     form.control('PATIENT_PASSPORTS') as FormGroup);
       await createUpdateMedicalRecords(form);
@@ -202,80 +202,146 @@ class BasicInformationModel {
   }
 
 //GET_PATIENT_NATIONALITIES
-//   AsyncData<PatientNationality> _patientNationalities = const AsyncData();
-//   AsyncData<PatientNationality> get patientNationalities =>
-//       _patientNationalities;
-//
-//   Future<void> getPatientNationalities({
-//     required String patientId,
-//     required FormGroup formGroup,
-//   }) async {
-//     _patientNationalities = const AsyncData(loading: true);
-//     notifyListeners();
-//
-//     await patientRepository
-//         .patientNationalitiesByPatient(patientId)
-//         .then((value) {
-//       if (value.isNotEmpty) {
-//         _patientNationalities = AsyncData(data: value.first);
-//         insertPATIENTNATIONALITIES(
-//             data: value.first,
-//             formGroup: formGroup.control('PATIENT_NATIONALITIES') as FormGroup);
-//       }
-//     }).catchError((error) {
-//       logger.d(error);
-//     }).whenComplete(() {
-//       notifyListeners();
-//     });
-//   }
-//
-//   void insertPATIENTNATIONALITIES({
-//     required PatientNationality data,
-//     required FormGroup formGroup,
-//   }) {
-//     formGroup.control('id').value = data.id;
-//     formGroup.control('nationality').value = data.nationality;
-//     formGroup.control('nativeLanguage').value = data.nativeLanguage;
-//     formGroup.control('residentialArea').value = data.residentialArea;
-//     formGroup.control('currentAddress').value = data.currentAddress;
-//     formGroup.control('mobileNumber').value = data.mobileNumber;
-//     formGroup.control('patient').value = data.patient;
-//   }
-//
-//   // post PATIENT_NATIONALITIES
-//   Future<void> postPatientNationalities(
-//     PatientNationalityRequest patientNationalityRequest,
-//   ) async {
-//     await patientRepository
-//         .postPatientNationality(patientNationalityRequest)
-//         .then((value) {
-//       _patientNationalities = AsyncData(data: value);
-//     }).catchError((error) {
-//       logger.d(error);
-//     }).whenComplete(() {
-//       notifyListeners();
-//     });
-//   }
-//
-//   // update PATIENT_NATIONALITIES
-//   Future<void> updatePatientNationalities(
-//     String id,
-//     PatientNationalityRequest patientNationalityRequest,
-//   ) async {
-//     _patientNationalities = const AsyncData(loading: true);
-//     notifyListeners();
-//
-//     await patientRepository
-//         .putPatientNationality(id, patientNationalityRequest)
-//         .then((value) {
-//       _patientNationalities = AsyncData(data: value);
-//     }).catchError((error) {
-//       logger.d(error);
-//     }).whenComplete(() {
-//       notifyListeners();
-//     });
-//   }
-//
+  ValueNotifier<AsyncData<PatientNationality>> patientNationalities =
+      ValueNotifier<AsyncData<PatientNationality>>(const AsyncData());
+
+  Future<void> getPatientNationalities({
+    required String patientId,
+    required FormGroup formGroup,
+  }) async {
+    patientNationalities.value = const AsyncData(loading: true);
+
+    await patientRepository
+        .patientNationalitiesByPatient(patientId)
+        .then((value) {
+      if (value.isNotEmpty) {
+        patientNationalities.value = AsyncData(data: value.first);
+        insertPATIENTNATIONALITIES(
+            data: value.first,
+            formGroup: formGroup.control('PATIENT_NATIONALITIES') as FormGroup);
+      } else {
+        patientNationalities.value = const AsyncData();
+      }
+    }).catchError((error) {
+      logger.d(error);
+      patientNationalities.value = AsyncData(error: error);
+    });
+  }
+
+  void insertPATIENTNATIONALITIES({
+    required PatientNationality data,
+    required FormGroup formGroup,
+  }) {
+    formGroup.control('id').value = data.id;
+    formGroup.control('nationality').value = data.nationality;
+    formGroup.control('nativeLanguage').value = data.nativeLanguage;
+    formGroup.control('residentialArea').value = data.residentialArea;
+    formGroup.control('currentAddress').value = data.currentAddress;
+    formGroup.control('mobileNumber').value = data.mobileNumber;
+    formGroup.control('patient').value = data.patient;
+    formGroup.control('email').value = data.email;
+    final chatToolLink = formGroup.control('chatToolLink') as FormArray;
+    chatToolLink.clear();
+    data.chatToolLink?.forEach((element) {
+      chatToolLink.add(
+        FormGroup({
+          'chatToolLink': FormControl<String>(value: element),
+        }),
+      );
+    });
+    if (data.chatToolLink == null || data.chatToolLink!.isEmpty) {
+      chatToolLink.clear();
+      chatToolLink.add(
+        FormGroup({
+          'chatToolLink': FormControl<String>(),
+        }),
+      );
+    }
+
+    final chatQr = formGroup.control('chatQr') as FormArray;
+    chatQr.clear();
+    data.chatQr?.forEach((element) {
+      chatQr.add(
+        FormGroup({
+          'chatQr': FormControl<String>(value: element),
+        }),
+      );
+    });
+
+    if (data.chatQr == null || data.chatQr!.isEmpty) {
+      chatQr.clear();
+      chatQr.add(
+        FormGroup({
+          'chatQr': FormControl<String>(),
+        }),
+      );
+    }
+  }
+
+  // post PATIENT_NATIONALITIES
+  Future<void> postPatientNationalities(
+    PatientNationalityRequest patientNationalityRequest,
+  ) async {
+    await patientRepository
+        .postPatientNationality(patientNationalityRequest)
+        .then((value) {
+      patientNationalities.value = AsyncData(data: value);
+    }).catchError((error) {
+      logger.d(error);
+      patientNationalities.value = AsyncData(error: error);
+    });
+  }
+
+  Future<void> createUpdatePatientNationalities(FormGroup form) async {
+    PatientNationalityRequest request = PatientNationalityRequest(
+      nationality: form.control('nationality').value,
+      nativeLanguage: form.control('nativeLanguage').value,
+      residentialArea: form.control('residentialArea').value,
+      currentAddress: form.control('currentAddress').value,
+      mobileNumber: form.control('mobileNumber').value,
+      email: form.control('email').value,
+      chatToolLink:
+          (form.control('chatToolLink').value as List<dynamic>).map((e) {
+        if (e['chatToolLink'] != null) {
+          return e['chatToolLink'] as String;
+        } else {
+          return null;
+        }
+      }).toList(),
+      chatQr: (form.control('chatQr').value as List<dynamic>).map((e) {
+        if (e['chatQr'] != null) {
+          return e['chatQr'] as String;
+        } else {
+          return null;
+        }
+      }).toList(),
+      patient: patientData.value.requireData.id,
+    );
+
+    if (form.control('id').value != null) {
+      await updatePatientNationalities(form.control('id').value, request);
+    } else {
+      await postPatientNationalities(request);
+    }
+  }
+
+  // update PATIENT_NATIONALITIES
+  Future<void> updatePatientNationalities(
+    String id,
+    PatientNationalityRequest patientNationalityRequest,
+  ) async {
+    patientNationalities.value = const AsyncData(loading: true);
+
+    await patientRepository
+        .putPatientNationality(id, patientNationalityRequest)
+        .then((value) {
+      patientNationalities.value = AsyncData(data: value);
+    }).catchError((error) {
+      logger.d(error);
+      patientNationalities.value = AsyncData(error: error);
+    });
+  }
+
 // //GET_PATIENT_PASSPORTS
 //   AsyncData<PatientPassport> _patientPassport = const AsyncData();
 //   AsyncData<PatientPassport> get patientPassport => _patientPassport;
@@ -421,7 +487,7 @@ class BasicInformationModel {
     data?.type?.forEach((element) {
       type.add(
         FormGroup({
-          'type': FormControl<String?>(value: element),
+          'type': FormControl<String>(value: element),
         }),
       );
     });
@@ -429,7 +495,7 @@ class BasicInformationModel {
     if (data?.type == null || data?.type?.isEmpty == true) {
       type.add(
         FormGroup({
-          'type': FormControl<String?>(),
+          'type': FormControl<String>(),
         }),
       );
     }
@@ -1136,22 +1202,7 @@ class BasicInformationModel {
 //     });
 //   }
 //
-//   Future<void> createUpdatePatientNationalities(FormGroup form) async {
-//     PatientNationalityRequest request = PatientNationalityRequest(
-//       nationality: form.control('nationality').value,
-//       nativeLanguage: form.control('nativeLanguage').value,
-//       residentialArea: form.control('residentialArea').value,
-//       currentAddress: form.control('currentAddress').value,
-//       mobileNumber: form.control('mobileNumber').value,
-//       patient: _patient.id,
-//     );
-//
-//     if (form.control('id').value != null) {
-//       await updatePatientNationalities(form.control('id').value, request);
-//     } else {
-//       await postPatientNationalities(request);
-//     }
-//   }
+
 //
 //   Future<void> createUpdateMedicalRecordBudgets(FormGroup form) async {
 //     MedicalRecordBudgetRequest request = MedicalRecordBudgetRequest(

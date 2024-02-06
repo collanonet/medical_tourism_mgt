@@ -5,32 +5,60 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class DetailPatientModel with ChangeNotifier {
+class DetailPatientModel {
   DetailPatientModel({
     required this.patientRepository,
   });
 
   final PatientRepository patientRepository;
 
-  AsyncData<Patient> _patient = const AsyncData<Patient>();
-  AsyncData<Patient> get patient => _patient;
+  ValueNotifier<AsyncData<Patient>> patientData =
+      ValueNotifier<AsyncData<Patient>>(const AsyncData());
+
   Future<void> initialData({Patient? patient, String? id}) async {
-    _patient = const AsyncData<Patient>(loading: true);
-    // notifyListeners();
+    patientData.value = const AsyncData<Patient>(loading: true);
 
     try {
       if (patient == null) {
         if (id != null) {
           var result = await patientRepository.patient(id);
-          _patient = AsyncData<Patient>(data: result);
+          patientData.value = AsyncData<Patient>(data: result);
         }
       } else {
-        _patient = AsyncData<Patient>(data: patient);
+        patientData.value = AsyncData<Patient>(data: patient);
       }
+      getPatientNames(patientId: patientData.value.data?.id ?? id ?? '');
     } catch (error) {
-      _patient = AsyncData<Patient>(error: error);
-    } finally {
-      notifyListeners();
+      patientData.value = AsyncData<Patient>(error: error);
+    }
+  }
+
+  ValueNotifier<AsyncData<PatientName>> patientNames = ValueNotifier(
+    const AsyncData(),
+  );
+
+  Future<void> getPatientNames({
+    String? patientId,
+    PatientName? patientName,
+  }) async {
+    patientNames.value = const AsyncData(loading: true);
+
+    if (patientName != null) {
+      patientNames.value = AsyncData(data: patientName);
+      return;
+    } else {
+      await patientRepository
+          .patientNamesByPatient(patientId ?? patientData.value.data?.id ?? '')
+          .then((value) {
+        if (value.isNotEmpty) {
+          patientNames.value = AsyncData(data: value.firstOrNull);
+        } else {
+          patientNames.value = const AsyncData();
+        }
+      }).catchError((error) {
+        logger.d(error);
+        patientNames.value = AsyncData(error: error);
+      });
     }
   }
 }
