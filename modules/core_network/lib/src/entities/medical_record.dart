@@ -17,7 +17,7 @@ class MedicalRecord {
   DateTime? returnDate;
   String? proposalNumber;
   DateTime? receptionDate;
-  List<String>? type;
+  List<String?>? type;
   String? progress;
   DateTime? advancePaymentDate;
   String? receivingMethod;

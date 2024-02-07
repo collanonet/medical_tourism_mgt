@@ -38,7 +38,32 @@ class PatientRemoteProvider {
   ) async =>
       await apiService.deletePrePatient(id);
 
-  Future<Paginated<Patient>> patients() async => await apiService.patients();
+  Future<Paginated<Patient>> patients({
+    String? patient_name,
+    String? companyAGENTS,
+    String? acceptingHospital,
+    List<String?>? type,
+    String? salesStaff,
+    String? dateOfEntryfrom,
+    String? dateOfEntryto,
+    String? medicalDayfrom,
+    String? medicalDayto,
+    String? returnDatefrom,
+    String? returnDateto,
+  }) async =>
+      await apiService.patients(
+        patientName: patient_name,
+        companyAgents: companyAGENTS,
+        acceptingHospital: acceptingHospital,
+        type: type,
+        salesStaff: salesStaff,
+        dateOfEntryfrom: dateOfEntryfrom,
+        dateOfEntryto: dateOfEntryto,
+        medicalDayfrom: medicalDayfrom,
+        medicalDayto: medicalDayto,
+        returnDatefrom: returnDatefrom,
+        returnDateto: returnDateto,
+      );
 
   Future<Patient> patient(
     String id,
@@ -228,33 +253,31 @@ class PatientRemoteProvider {
   ) async =>
       await apiService.deleteMedicalRecordAgent(id);
 
-
   Future<List<MedicalRecordReferrer>> medicalRecordReferrers(
-      String medicalRecordId,
-      ) async =>
+    String medicalRecordId,
+  ) async =>
       await apiService.medicalRecordReferrers(medicalRecordId);
 
   Future<List<MedicalRecordReferrer>> medicalRecordReferrersByMedicalRecord(
-      String medicalRecordId,
-      ) async =>
+    String medicalRecordId,
+  ) async =>
       await apiService.medicalRecordReferrersByMedicalRecord(medicalRecordId);
 
   Future<MedicalRecordReferrer> postMedicalRecordReferrer(
-      MedicalRecordReferrerRequest medicalRecordAgent,
-      ) async =>
+    MedicalRecordReferrerRequest medicalRecordAgent,
+  ) async =>
       await apiService.postMedicalRecordReferrer(medicalRecordAgent);
 
   Future<MedicalRecordReferrer> putMedicalRecordReferrer(
-      String id,
-      MedicalRecordReferrerRequest medicalRecordAgent,
-      ) async =>
+    String id,
+    MedicalRecordReferrerRequest medicalRecordAgent,
+  ) async =>
       await apiService.putMedicalRecordReferrer(id, medicalRecordAgent);
 
   Future<void> deleteMedicalRecordReferrer(
-      String id,
-      ) async =>
+    String id,
+  ) async =>
       await apiService.deleteMedicalRecordAgent(id);
-
 
   // GET_MEDICAL_RECORD_COMPANIONS
   Future<List<MedicalRecordCompanion>> medicalRecordCompanions(

@@ -48,31 +48,31 @@ class HeaderDetailPatient extends StatelessWidget {
                       Row(
                         children: [
                           Text(
-                              '${value.data?.firstNameRomanized} ${value.data?.middleNameRomanized} ${value.data?.familyNameRomanized}'),
-                          SizedBox(
-                            width: context.appTheme.spacing.marginMedium,
-                          ),
-                          Icon(
-                            Icons.star,
-                            color: Colors.orange,
-                          ),
-                          SizedBox(
-                            width: context.appTheme.spacing.marginSmall,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(
-                                context.appTheme.spacing.marginSmall),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(4),
-                              color: Colors.red,
-                            ),
-                            child: Text(
-                              '出国報告書対象者',
-                              style: context.textTheme.bodySmall?.copyWith(
-                                color: Colors.white,
-                              ),
-                            ),
-                          )
+                              '${value.data?.firstNameRomanized ?? '--'} ${value.data?.middleNameRomanized ?? '--'} ${value.data?.familyNameRomanized ?? '--'}'),
+                          // SizedBox(
+                          //   width: context.appTheme.spacing.marginMedium,
+                          // ),
+                          // Icon(
+                          //   Icons.star,
+                          //   color: Colors.orange,
+                          // ),
+                          // SizedBox(
+                          //   width: context.appTheme.spacing.marginSmall,
+                          // ),
+                          // Container(
+                          //   padding: EdgeInsets.all(
+                          //       context.appTheme.spacing.marginSmall),
+                          //   decoration: BoxDecoration(
+                          //     borderRadius: BorderRadius.circular(4),
+                          //     color: Colors.red,
+                          //   ),
+                          //   child: Text(
+                          //     '出国報告書対象者',
+                          //     style: context.textTheme.bodySmall?.copyWith(
+                          //       color: Colors.white,
+                          //     ),
+                          //   ),
+                          // )
                         ],
                       ),
                       SizedBox(
@@ -81,15 +81,15 @@ class HeaderDetailPatient extends StatelessWidget {
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                           Text('${value.data?.firstNameChineseOrVietnamese} ${value.data?.middleNameChineseOrVietnamese} ${value.data?.familyNameChineseOrVietnamese}'),
+                           Text('${value.data?.firstNameChineseOrVietnamese ?? '--'} ${value.data?.middleNameChineseOrVietnamese ?? '--'} ${value.data?.familyNameChineseOrVietnamese ?? '--'}'),
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
-                          Text('${value.data?.firstNameJapaneseForChinese} ${value.data?.middleNameJapaneseForChinese} ${value.data?.familyNameJapaneseForChinese}'),
+                          Text('${value.data?.firstNameJapaneseForChinese ?? '--'} ${value.data?.middleNameJapaneseForChinese ?? '--'} ${value.data?.familyNameJapaneseForChinese ?? '--'}'),
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
-                          Text('${value.data?.firstNameJapaneseForNonChinese} ${value.data?.middleNameJapaneseForNonChinese} ${value.data?.familyNameJapaneseForNonChinese}'),
+                          Text('${value.data?.firstNameJapaneseForNonChinese ?? '--'} ${value.data?.middleNameJapaneseForNonChinese ?? '--'} ${value.data?.familyNameJapaneseForNonChinese ?? '--'}'),
 
                         ],
                       ),

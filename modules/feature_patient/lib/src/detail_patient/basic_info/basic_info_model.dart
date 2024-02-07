@@ -42,38 +42,68 @@ class BasicInformationModel {
         logger.d(error);
         loading.value = AsyncData(error: error);
       }
+    } else {
+      loading.value = const AsyncData();
     }
   }
 
   // Create or Update all
   void createUpdateAll(FormGroup form) async {
-    try {
-      loading.value = const AsyncData(loading: true);
-      // await createUpdatePatient(form);
+    loading.value = const AsyncData(loading: true);
 
-      await createUpdatePatientNationalities(
-          form.control('PATIENT_NATIONALITIES') as FormGroup);
-      await createUpdatePatientPassports(
-          form.control('PATIENT_PASSPORTS') as FormGroup);
-      await createUpdateMedicalRecords(form);
-      await createUpdateMedicalRecordHospital(form);
-      await createUpdatePatientNames(
-          form.control('PATIENT_NAMES') as FormGroup);
-      await createUpdateMedicalRecordAgents(
-          form.control('MEDICAL_RECORD_AGENTS') as FormGroup);
-      await createUpdateMedicalRecordReferrers(
-          form.control('MEDICAL_RECORD_Referrers') as FormGroup);
-      await createUpdateMedicalRecordBudgets(
-          form.control('MEDICAL_RECORD_BUDGETS') as FormGroup);
-      // await createUpdateMedicalRecordCompanions(form);
+    if (!patientData.value.hasData) {
+      try {
+        patientData.value = const AsyncData(loading: true);
+        final patientNameForm = form.control('PATIENT_NAMES') as FormGroup;
+        var result = await patientRepository.postPatient(PatientRequest(
+          dateOfBirth: form.control('dateOfBirth').value,
+          age: form.control('age').value,
+          gender: form.control('gender').value,
+          familyName: patientNameForm.control('familyNameRomanized').value,
+          middleName: patientNameForm.control('middleNameRomanized').value,
+          firstName: patientNameForm.control('firstNameRomanized').value,
+        ));
+        patientData.value = AsyncData(data: result);
+      } catch (error) {
+        logger.d(error);
+        loading.value = AsyncData(error: error);
+      }
+    }
+    if (patientData.value.hasData) {
+      try {
+        await createUpdatePatientNames(
+            form.control('PATIENT_NAMES') as FormGroup);
+        await createUpdatePatientNationalities(
+            form.control('PATIENT_NATIONALITIES') as FormGroup);
+        await createUpdatePatientPassports(
+            form.control('PATIENT_PASSPORTS') as FormGroup);
+        await createUpdateMedicalRecords(form);
 
-      // await createUpdateMedicalRecordInterpreters(
-      //     form.control('MEDICAL_RECORD_Interpreter') as FormGroup);
-      logger.d('createUpdateAll');
-      loading.value = const AsyncData(data: true);
-    } catch (error) {
-      logger.d(error);
-      loading.value = AsyncData(error: error);
+        if (medicalRecord.value.hasData) {
+          await createUpdateMedicalRecordHospital(form);
+
+          await createUpdateMedicalRecordAgents(
+              form.control('MEDICAL_RECORD_AGENTS') as FormGroup);
+
+          await createUpdateMedicalRecordReferrers(
+              form.control('MEDICAL_RECORD_Referrers') as FormGroup);
+
+          await createUpdateMedicalRecordBudgets(
+              form.control('MEDICAL_RECORD_BUDGETS') as FormGroup);
+
+          // await createUpdateMedicalRecordCompanions(form);
+          // await createUpdateMedicalRecordInterpreters(
+          //     form.control('MEDICAL_RECORD_Interpreter') as FormGroup);
+
+          logger.d('createUpdateAll');
+          loading.value = const AsyncData(data: true);
+        } else {
+          medicalRecord.value = AsyncData(error: '黄色のボックスに患者様の個人情報をご入力ください');
+        }
+      } catch (error) {
+        logger.d(error);
+        loading.value = AsyncData(error: error);
+      }
     }
   }
 
@@ -168,33 +198,33 @@ class BasicInformationModel {
 
       PatientNameRequest request = PatientNameRequest(
         familyNameRomanized: form.control('familyNameRomanized').value,
-        middleNameRomanized: form.control('middleNameRomanized').value,
+        middleNameRomanized: form.control('middleNameRomanized').value ?? '',
         firstNameRomanized: form.control('firstNameRomanized').value,
         familyNameChineseOrVietnamese:
-            form.control('familyNameChineseOrVietnamese').value,
+            form.control('familyNameChineseOrVietnamese').value ?? '',
         middleNameChineseOrVietnamese:
-            form.control('middleNameChineseOrVietnamese').value,
+            form.control('middleNameChineseOrVietnamese').value ?? '',
         firstNameChineseOrVietnamese:
-            form.control('firstNameChineseOrVietnamese').value,
+            form.control('firstNameChineseOrVietnamese').value ?? '',
         familyNameJapaneseForChinese:
-            form.control('familyNameJapaneseForChinese').value,
+            form.control('familyNameJapaneseForChinese').value ?? '',
         middleNameJapaneseForChinese:
-            form.control('middleNameJapaneseForChinese').value,
+            form.control('middleNameJapaneseForChinese').value ?? '',
         firstNameJapaneseForChinese:
-            form.control('firstNameJapaneseForChinese').value,
+            form.control('firstNameJapaneseForChinese').value ?? '',
         familyNameJapaneseForNonChinese:
-            form.control('familyNameJapaneseForNonChinese').value,
+            form.control('familyNameJapaneseForNonChinese').value ?? '',
         middleNameJapaneseForNonChinese:
-            form.control('middleNameJapaneseForNonChinese').value,
+            form.control('middleNameJapaneseForNonChinese').value ?? '',
         firstNameJapaneseForNonChinese:
-            form.control('firstNameJapaneseForNonChinese').value,
+            form.control('firstNameJapaneseForNonChinese').value ?? '',
         patient: patientData.value.requireData.id,
       );
 
       if (form.control('id').value != null) {
-        await updatePatientNames(form.control('id').value, request);
+        await updatePatientNames(form, form.control('id').value, request);
       } else {
-        await postPatientNames(request);
+        await postPatientNames(form, request);
       }
     } catch (error) {
       logger.d(error);
@@ -204,10 +234,12 @@ class BasicInformationModel {
 
   // post PATIENT_NAMES
   Future<void> postPatientNames(
+    FormGroup form,
     PatientNameRequest patientNameRequest,
   ) async {
     await patientRepository.postPatientName(patientNameRequest).then((value) {
       patientNames.value = AsyncData(data: value);
+      insertPatientName(data: [value], formGroup: form);
     }).catchError((error) {
       logger.d(error);
       patientNames.value = AsyncData(error: error);
@@ -216,6 +248,7 @@ class BasicInformationModel {
 
   // update PATIENT_NAMES
   Future<void> updatePatientNames(
+    FormGroup form,
     String id,
     PatientNameRequest patientNameRequest,
   ) async {
@@ -223,6 +256,7 @@ class BasicInformationModel {
         .putPatientName(id, patientNameRequest)
         .then((value) {
       patientNames.value = AsyncData(data: value);
+      insertPatientName(data: [value], formGroup: form);
     }).catchError((error) {
       logger.d(error);
       patientNames.value = AsyncData(error: error);
@@ -278,7 +312,7 @@ class BasicInformationModel {
     data.chatToolLink?.forEach((element) {
       chatToolLink.add(
         FormGroup({
-          'chatToolLink': FormControl<String>(value: element),
+          'chatToolLink': FormControl<String>(value: element ?? ''),
         }),
       );
     });
@@ -296,7 +330,7 @@ class BasicInformationModel {
     data.chatQr?.forEach((element) {
       chatQr.add(
         FormGroup({
-          'chatQr': FormControl<String>(value: element),
+          'chatQr': FormControl<String>(value: element ?? ''),
         }),
       );
     });
@@ -313,6 +347,7 @@ class BasicInformationModel {
 
   // post PATIENT_NATIONALITIES
   Future<void> postPatientNationalities(
+    FormGroup form,
     PatientNationalityRequest patientNationalityRequest,
   ) async {
     await patientRepository
@@ -327,40 +362,56 @@ class BasicInformationModel {
 
   Future<void> createUpdatePatientNationalities(FormGroup form) async {
     patientNationalities.value = const AsyncData(loading: true);
+
+    List<String?> chatToolLink = [];
+    if (form.control('chatToolLink').value != null) {
+      for (var i = 0;
+          i < (form.control('chatToolLink').value as List<dynamic>).length;
+          i++) {
+        if ((form.control('chatToolLink').value as List<dynamic>)[i]
+                ['chatToolLink'] !=
+            null) {
+          chatToolLink.add((form.control('chatToolLink').value
+              as List<dynamic>)[i]['chatToolLink']);
+        }
+      }
+    }
+
+    List<String?> chatQr = [];
+    if (form.control('chatQr').value != null) {
+      for (var i = 0;
+          i < (form.control('chatQr').value as List<dynamic>).length;
+          i++) {
+        if ((form.control('chatQr').value as List<dynamic>)[i]['chatQr'] !=
+            null) {
+          chatQr.add(
+              (form.control('chatQr').value as List<dynamic>)[i]['chatQr']);
+        }
+      }
+    }
+
     PatientNationalityRequest request = PatientNationalityRequest(
-      nationality: form.control('nationality').value,
-      nativeLanguage: form.control('nativeLanguage').value,
-      residentialArea: form.control('residentialArea').value,
-      currentAddress: form.control('currentAddress').value,
+      nationality: form.control('nationality').value ?? '',
+      nativeLanguage: form.control('nativeLanguage').value ?? '',
+      residentialArea: form.control('residentialArea').value ?? '',
+      currentAddress: form.control('currentAddress').value ?? '',
       mobileNumber: form.control('mobileNumber').value,
       email: form.control('email').value,
-      chatToolLink:
-          (form.control('chatToolLink').value as List<dynamic>).map((e) {
-        if (e['chatToolLink'] != null) {
-          return e['chatToolLink'] as String;
-        } else {
-          return null;
-        }
-      }).toList(),
-      chatQr: (form.control('chatQr').value as List<dynamic>).map((e) {
-        if (e['chatQr'] != null) {
-          return e['chatQr'] as String;
-        } else {
-          return null;
-        }
-      }).toList(),
+      chatToolLink: chatToolLink.isEmpty ? null : chatToolLink,
+      chatQr: chatQr.isEmpty ? null : chatQr,
       patient: patientData.value.requireData.id,
     );
 
     if (form.control('id').value != null) {
-      await updatePatientNationalities(form.control('id').value, request);
+      await updatePatientNationalities(form, form.control('id').value, request);
     } else {
-      await postPatientNationalities(request);
+      await postPatientNationalities(form, request);
     }
   }
 
   // update PATIENT_NATIONALITIES
   Future<void> updatePatientNationalities(
+    FormGroup form,
     String id,
     PatientNationalityRequest patientNationalityRequest,
   ) async {
@@ -401,11 +452,11 @@ class BasicInformationModel {
     required FormGroup formGroup,
   }) {
     formGroup.control('id').value = data?.id;
-    formGroup.control('passportNumber').value = data?.passportNumber;
+    formGroup.control('passportNumber').value = data?.passportNumber ?? '';
     formGroup.control('issueDate').value = data?.issueDate;
     formGroup.control('expirationDate').value = data?.expirationDate;
     formGroup.control('visaType').value = data?.visaType ?? 'medicalGuarantee';
-    formGroup.control('visaCategory').value = data?.visaCategory;
+    formGroup.control('visaCategory').value = data?.visaCategory ?? '';
     formGroup.control('underConfirmation').value =
         data?.underConfirmation ?? false;
   }
@@ -413,7 +464,7 @@ class BasicInformationModel {
   Future<void> createUpdatePatientPassports(FormGroup form) async {
     patientPassport.value = const AsyncData(loading: true);
     PatientPassportRequest request = PatientPassportRequest(
-      passportNumber: form.control('passportNumber').value,
+      passportNumber: form.control('passportNumber').value ?? '',
       issueDate: form.control('issueDate').value,
       expirationDate: form.control('expirationDate').value,
       visaType: form.control('visaType').value,
@@ -423,14 +474,15 @@ class BasicInformationModel {
     );
 
     if (form.control('id').value != null) {
-      await updatePatientPassports(form.control('id').value, request);
+      await updatePatientPassports(form, form.control('id').value, request);
     } else {
-      await postPatientPassports(request);
+      await postPatientPassports(form, request);
     }
   }
 
   // post PATIENT_PASSPORTS
   Future<void> postPatientPassports(
+    FormGroup form,
     PatientPassportRequest patientPassportRequest,
   ) async {
     await patientRepository
@@ -445,6 +497,7 @@ class BasicInformationModel {
 
   // update PATIENT_PASSPORTS
   Future<void> updatePatientPassports(
+    FormGroup form,
     String id,
     PatientPassportRequest patientPassportRequest,
   ) async {
@@ -554,6 +607,20 @@ class BasicInformationModel {
   Future<void> createUpdateMedicalRecords(FormGroup form) async {
     medicalRecord.value = medicalRecord.value.copyWith(loading: true);
     try {
+      List<String?> type = [];
+
+      if (form.control('type').value != null) {
+        for (var i = 0;
+            i < (form.control('type').value as List<dynamic>).length;
+            i++) {
+          if ((form.control('type').value as List<dynamic>)[i]['type'] !=
+                  null ||
+              (form.control('type').value as List<dynamic>)[i]['type'] != '') {
+            type.add((form.control('type').value as List<dynamic>)[i]['type']);
+          }
+        }
+      }
+
       MedicalRecordRequest request = MedicalRecordRequest(
         dateOfBirth: form.control('dateOfBirth').value,
         age: form.control('age').value,
@@ -565,9 +632,7 @@ class BasicInformationModel {
         returnDate: form.control('returnDate').value as DateTime?,
         proposalNumber: form.control('proposalNumber').value,
         receptionDate: form.control('receptionDate').value,
-        type: (form.control('type').value as List<dynamic>)
-            .map((e) => e['type'] as String)
-            .toList(),
+        type: type.isEmpty ? null : type,
         progress: form.control('progress').value,
         advancePaymentDate:
             form.control('advancePaymentDate').value as DateTime?,
@@ -576,9 +641,9 @@ class BasicInformationModel {
         patient: form.control('patient').value,
       );
       if (form.control('id').value != null) {
-        await updateMedicalRecords(form.control('id').value, request);
+        await updateMedicalRecords(form, form.control('id').value, request);
       } else {
-        await postMedicalRecords(request);
+        await postMedicalRecords(form, request);
       }
     } catch (error) {
       logger.d(error);
@@ -589,6 +654,7 @@ class BasicInformationModel {
 
   // post MEDICAL_RECORDS
   Future<void> postMedicalRecords(
+    FormGroup form,
     MedicalRecordRequest medicalRecordRequest,
   ) async {
     await patientRepository
@@ -604,6 +670,7 @@ class BasicInformationModel {
 
   // update MEDICAL_RECORDS
   Future<void> updateMedicalRecords(
+    FormGroup form,
     String id,
     MedicalRecordRequest medicalRecordRequest,
   ) async {
@@ -655,27 +722,32 @@ class BasicInformationModel {
   Future<void> createUpdateMedicalRecordAgents(FormGroup form) async {
     medicalRecordAgents.value = const AsyncData(loading: true);
     MedicalRecordAgentRequest request = MedicalRecordAgentRequest(
-      company: form.control('company').value,
-      nameInKanji: form.control('nameInKanji').value,
-      nameInKana: form.control('nameInKana').value,
+      company: form.control('company').value ?? '',
+      nameInKanji: form.control('nameInKanji').value ?? '',
+      nameInKana: form.control('nameInKana').value ?? '',
       medicalRecord: medicalRecord.value.requireData.id,
     );
 
     if (form.control('id').value != null) {
-      await updateMedicalRecordAgents(form.control('id').value, request);
+      await updateMedicalRecordAgents(form, form.control('id').value, request);
     } else {
-      await postMedicalRecordAgents(request);
+      await postMedicalRecordAgents(form, request);
     }
   }
 
   // post MEDICAL_RECORD_AGENTS
   Future<void> postMedicalRecordAgents(
+    FormGroup form,
     MedicalRecordAgentRequest medicalRecordAgentRequest,
   ) async {
     await patientRepository
         .postMedicalRecordAgent(medicalRecordAgentRequest)
         .then((value) {
       medicalRecordAgents.value = AsyncData(data: value);
+      insertMEDICALRECORDAGENTS(
+        data: value,
+        formGroup: form.control('MEDICAL_RECORD_AGENTS') as FormGroup,
+      );
     }).catchError((error) {
       logger.d(error);
       medicalRecordAgents.value = AsyncData(error: error);
@@ -684,6 +756,7 @@ class BasicInformationModel {
 
   // update MEDICAL_RECORD_AGENTS
   Future<void> updateMedicalRecordAgents(
+    FormGroup form,
     String id,
     MedicalRecordAgentRequest medicalRecordAgentRequest,
   ) async {
@@ -691,6 +764,10 @@ class BasicInformationModel {
         .putMedicalRecordAgent(id, medicalRecordAgentRequest)
         .then((value) {
       medicalRecordAgents.value = AsyncData(data: value);
+      insertMEDICALRECORDAGENTS(
+        data: value,
+        formGroup: form.control('MEDICAL_RECORD_AGENTS') as FormGroup,
+      );
     }).catchError((error) {
       logger.d(error);
       medicalRecordAgents.value = AsyncData(error: error);
@@ -737,27 +814,33 @@ class BasicInformationModel {
   Future<void> createUpdateMedicalRecordReferrers(FormGroup form) async {
     medicalRecordReferrers.value = const AsyncData(loading: true);
     MedicalRecordReferrerRequest request = MedicalRecordReferrerRequest(
-      company: form.control('company').value,
-      nameInKanji: form.control('nameInKanji').value,
-      nameInKana: form.control('nameInKana').value,
+      company: form.control('company').value ?? '',
+      nameInKanji: form.control('nameInKanji').value ?? '',
+      nameInKana: form.control('nameInKana').value ?? '',
       medicalRecord: medicalRecord.value.requireData.id,
     );
 
     if (form.control('id').value != null) {
-      await updateMedicalRecordReferrers(form.control('id').value, request);
+      await updateMedicalRecordReferrers(
+          form, form.control('id').value, request);
     } else {
-      await postMedicalRecordReferrers(request);
+      await postMedicalRecordReferrers(form, request);
     }
   }
 
   // post MEDICAL_RECORD_Referrers
   Future<void> postMedicalRecordReferrers(
+    FormGroup form,
     MedicalRecordReferrerRequest medicalRecordAgentRequest,
   ) async {
     await patientRepository
         .postMedicalRecordReferrer(medicalRecordAgentRequest)
         .then((value) {
       medicalRecordReferrers.value = AsyncData(data: value);
+      insertMEDICALRECORDReferrers(
+        data: value,
+        formGroup: form.control('MEDICAL_RECORD_Referrers') as FormGroup,
+      );
     }).catchError((error) {
       logger.d(error);
       medicalRecordReferrers.value = AsyncData(error: error);
@@ -766,6 +849,7 @@ class BasicInformationModel {
 
   // update MEDICAL_RECORD_Referrers
   Future<void> updateMedicalRecordReferrers(
+    FormGroup form,
     String id,
     MedicalRecordReferrerRequest medicalRecordAgentRequest,
   ) async {
@@ -773,6 +857,10 @@ class BasicInformationModel {
         .putMedicalRecordReferrer(id, medicalRecordAgentRequest)
         .then((value) {
       medicalRecordReferrers.value = AsyncData(data: value);
+      insertMEDICALRECORDReferrers(
+        data: value,
+        formGroup: form.control('MEDICAL_RECORD_Referrers') as FormGroup,
+      );
     }).catchError((error) {
       logger.d(error);
       medicalRecordReferrers.value = AsyncData(error: error);
@@ -817,6 +905,7 @@ class BasicInformationModel {
 
   // post MEDICAL_RECORD_BUDGETS
   Future<void> postMedicalRecordBudgets(
+    FormGroup form,
     MedicalRecordBudgetRequest medicalRecordBudgetRequest,
   ) async {
     medicalRecordBudgets.value = const AsyncData(loading: true);
@@ -825,6 +914,12 @@ class BasicInformationModel {
         .postMedicalRecordBudget(medicalRecordBudgetRequest)
         .then((value) {
       medicalRecordBudgets.value = AsyncData(data: value);
+      if (medicalRecordBudgets.value.hasData) {
+        insertMEDICALRECORDBUDGETS(
+          data: value,
+          formGroup: form.control('MEDICAL_RECORD_BUDGETS') as FormGroup,
+        );
+      }
     }).catchError((error) {
       logger.d(error);
       medicalRecordBudgets.value = AsyncData(error: error);
@@ -833,20 +928,21 @@ class BasicInformationModel {
 
   Future<void> createUpdateMedicalRecordBudgets(FormGroup form) async {
     MedicalRecordBudgetRequest request = MedicalRecordBudgetRequest(
-      budget: double.tryParse(form.control('budget').value) ?? 0.0,
-      remarks: form.control('remarks').value,
+      budget: double.tryParse(form.control('budget').value.toString()) ?? 0.0,
+      remarks: form.control('remarks').value ?? '',
       medicalRecord: medicalRecord.value.requireData.id,
     );
 
     if (form.control('id').value != null) {
-      await updateMedicalRecordBudgets(form.control('id').value, request);
+      await updateMedicalRecordBudgets(form, form.control('id').value, request);
     } else {
-      await postMedicalRecordBudgets(request);
+      await postMedicalRecordBudgets(form, request);
     }
   }
 
   // update MEDICAL_RECORD_BUDGETS
   Future<void> updateMedicalRecordBudgets(
+    FormGroup form,
     String id,
     MedicalRecordBudgetRequest medicalRecordBudgetRequest,
   ) async {
@@ -854,6 +950,12 @@ class BasicInformationModel {
         .putMedicalRecordBudget(id, medicalRecordBudgetRequest)
         .then((value) {
       medicalRecordBudgets.value = AsyncData(data: value);
+      if (medicalRecordBudgets.value.hasData) {
+        insertMEDICALRECORDBUDGETS(
+          data: value,
+          formGroup: form.control('MEDICAL_RECORD_BUDGETS') as FormGroup,
+        );
+      }
     }).catchError((error) {
       logger.d(error);
       medicalRecordBudgets.value = AsyncData(error: error);
@@ -1046,8 +1148,8 @@ class BasicInformationModel {
       await formGroup.control('MEDICAL_RECORD_HOSPITALS').value.forEach(
         (element) async {
           MedicalRecordHospitalRequest request = MedicalRecordHospitalRequest(
-            medicalCardNumber: element['medicalCardNumber'],
-            hospitalName: element['hospitalName'],
+            medicalCardNumber: element['medicalCardNumber'] ?? '',
+            hospitalName: element['hospitalName'] ?? '',
             medicalRecord: medicalRecord.value.requireData.id,
           );
 
@@ -1056,12 +1158,13 @@ class BasicInformationModel {
                 element['medicalCardNumber'].isEmpty) {
               await deleteMedicalRecordHospitals(element['id']);
             } else {
-              await updateMedicalRecordHospitals(element['id'], request);
+              await updateMedicalRecordHospitals(
+                  formGroup, element['id'], request);
             }
           } else {
             if (element['hospitalName'] != null &&
                 element['medicalCardNumber'] != null) {
-              await postMedicalRecordHospitals(request);
+              await postMedicalRecordHospitals(formGroup, request);
             }
           }
         },
@@ -1074,6 +1177,7 @@ class BasicInformationModel {
 
   // post MEDICAL_RECORD_HOSPITALS
   Future<void> postMedicalRecordHospitals(
+    FormGroup form,
     MedicalRecordHospitalRequest medicalRecordHospitalRequest,
   ) async {
     await patientRepository
@@ -1087,6 +1191,13 @@ class BasicInformationModel {
           value,
         ]);
       }
+
+      if (medicalRecordHospitals.value.hasData) {
+        insertMedicalRecordHospitals(
+          data: medicalRecordHospitals.value.requireData,
+          formArray: form.control('MEDICAL_RECORD_HOSPITALS') as FormArray,
+        );
+      }
     }).catchError((error) {
       logger.d(error);
       medicalRecordHospitals.value = AsyncData(error: error);
@@ -1095,6 +1206,7 @@ class BasicInformationModel {
 
   // update MEDICAL_RECORD_HOSPITALS
   Future<void> updateMedicalRecordHospitals(
+    FormGroup form,
     String id,
     MedicalRecordHospitalRequest medicalRecordHospitalRequest,
   ) async {
@@ -1115,6 +1227,13 @@ class BasicInformationModel {
         );
       } else {
         medicalRecordHospitals.value = AsyncData(data: [value]);
+      }
+
+      if (medicalRecordHospitals.value.hasData) {
+        insertMedicalRecordHospitals(
+          data: medicalRecordHospitals.value.requireData,
+          formArray: form.control('MEDICAL_RECORD_HOSPITALS') as FormArray,
+        );
       }
     }).catchError((error) {
       logger.d(error);

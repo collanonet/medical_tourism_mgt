@@ -7,24 +7,24 @@ FormGroup formFilterPatient() => FormGroup(
         'patient_name': FormControl<String>(
           value: '',
         ),
-        'agent_company_name': FormControl<String>(
+        'companyAGENTS': FormControl<String>(
           value: '',
         ),
-        'hospital_name': FormControl<String>(
+        'acceptingHospital': FormControl<String>(
           value: '',
         ),
-        'classification': FormControl<String>(
+        'type': FormControl<String>(
           value: '',
         ),
-        'sales_representative': FormControl<String>(
+        'salesStaff': FormControl<String>(
           value: '',
         ),
-        'entry_date_from': FormControl<DateTime>(),
-        'entry_date_to': FormControl<DateTime>(),
-        'examination_date_from': FormControl<DateTime>(),
-        'examination_date_to': FormControl<DateTime>(),
-        'return_date_from': FormControl<DateTime>(),
-        'return_date_to': FormControl<DateTime>(),
+        'dateOfEntryfrom': FormControl<DateTime>(),
+        'dateOfEntryto': FormControl<DateTime>(),
+        'medicalDayfrom': FormControl<DateTime>(),
+        'medicalDayto': FormControl<DateTime>(),
+        'returnDatefrom': FormControl<DateTime>(),
+        'returnDateto': FormControl<DateTime>(),
       },
     );
 

@@ -3,6 +3,7 @@ import 'package:data_patient/data_patient.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
 class PatientModel with ChangeNotifier {
@@ -15,11 +16,30 @@ class PatientModel with ChangeNotifier {
   AsyncData<Paginated<Patient>> _patientData = const AsyncData();
   AsyncData<Paginated<Patient>> get patientData => _patientData;
 
-  Future<void> patients() {
+  Future<void> patients({FormGroup? form, String? type}) {
     _patientData = const AsyncData(loading: true);
     notifyListeners();
 
-    return patientRepository.patients().then((value) {
+    return patientRepository
+        .patients(
+      patient_name: form?.control('patient_name').value,
+      companyAGENTS: form?.control('companyAGENTS').value,
+      acceptingHospital: form?.control('acceptingHospital').value,
+      type: form?.control('type').value == null ||
+              form!.control('type').value.toString().isEmpty
+          ? type == null
+              ? null
+              : [type]
+          : [form.control('type').value],
+      salesStaff: form?.control('salesStaff').value,
+      dateOfEntryfrom: form?.control('dateOfEntryfrom').value.toString(),
+      dateOfEntryto: form?.control('dateOfEntryto').value.toString(),
+      medicalDayfrom: form?.control('medicalDayfrom').value.toString(),
+      medicalDayto: form?.control('medicalDayto').value.toString(),
+      returnDatefrom: form?.control('returnDatefrom').value.toString(),
+      returnDateto: form?.control('returnDateto').value.toString(),
+    )
+        .then((value) {
       _patientData = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);

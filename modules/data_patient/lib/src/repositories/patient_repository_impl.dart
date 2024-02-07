@@ -57,8 +57,32 @@ class PatientRepositoryIml extends PatientRepository {
   //GET_PATIENTS
 
   @override
-  Future<Paginated<Patient>> patients() {
-    return remote.patients();
+  Future<Paginated<Patient>> patients({
+    String? patient_name,
+    String? companyAGENTS,
+    String? acceptingHospital,
+    List<String?>? type,
+    String? salesStaff,
+    String? dateOfEntryfrom,
+    String? dateOfEntryto,
+    String? medicalDayfrom,
+    String? medicalDayto,
+    String? returnDatefrom,
+    String? returnDateto,
+  }) {
+    return remote.patients(
+      patient_name: patient_name,
+      companyAGENTS: companyAGENTS,
+      acceptingHospital: acceptingHospital,
+      type: type,
+      salesStaff: salesStaff,
+      dateOfEntryfrom: dateOfEntryfrom,
+      dateOfEntryto: dateOfEntryto,
+      medicalDayfrom: medicalDayfrom,
+      medicalDayto: medicalDayto,
+      returnDatefrom: returnDatefrom,
+      returnDateto: returnDateto,
+    );
   }
 
   @override

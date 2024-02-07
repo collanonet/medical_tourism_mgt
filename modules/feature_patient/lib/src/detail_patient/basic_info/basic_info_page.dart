@@ -23,7 +23,7 @@ class BasicInformationPage extends StatelessWidget {
         ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
       },
       child: ReactiveFormBuilder(
-        form: () => basicInfoForm(patientId: patient?.id),
+        form: () => basicInfoForm(patientId: patient?.id)..markAllAsTouched(),
         builder: (context, formGroup, child) {
           return Provider(
             create: (context) => GetIt.I<BasicInformationModel>()

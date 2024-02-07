@@ -54,7 +54,7 @@ class PatientFilter extends StatelessWidget {
                         Expanded(
                           flex: 4,
                           child: ReactiveTextField(
-                            formControlName: 'agent_company_name',
+                            formControlName: 'companyAGENTS',
                             decoration: InputDecoration(
                               label: Text(
                                 context.l10n.labelAgentCompanyName,
@@ -66,7 +66,7 @@ class PatientFilter extends StatelessWidget {
                         Expanded(
                           flex: 4,
                           child: ReactiveTextField(
-                            formControlName: 'hospital_name',
+                            formControlName: 'acceptingHospital',
                             decoration: InputDecoration(
                               label: Text(
                                 context.l10n.labelHospitalName,
@@ -81,20 +81,54 @@ class PatientFilter extends StatelessWidget {
                       children: [
                         Expanded(
                           flex: 4,
-                          child: ReactiveTextField(
-                            formControlName: 'classification',
+                          child: ReactiveDropdownFormField(
+                            formControlName: 'type',
                             decoration: InputDecoration(
                               label: Text(
-                                context.l10n.labelClassification,
+                                '種別',
                               ),
                             ),
+                            items: [
+                              DropdownMenuItem(
+                                value: '治療',
+                                child: Text('治療'),
+                              ),
+                              DropdownMenuItem(
+                                value: '健診',
+                                child: Text('健診'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'その他',
+                                child: Text('その他'),
+                              ),
+                              DropdownMenuItem(
+                                value: '検査ｷｯﾄ',
+                                child: Text('検査ｷｯﾄ'),
+                              ),
+                              DropdownMenuItem(
+                                value: 'ビザ',
+                                child: Text('ビザ'),
+                              ),
+                              DropdownMenuItem(
+                                value: '旅行',
+                                child: Text('旅行'),
+                              ),
+                              DropdownMenuItem(
+                                value: '視察',
+                                child: Text('視察'),
+                              ),
+                              DropdownMenuItem(
+                                value: '再生',
+                                child: Text('再生'),
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
                           flex: 4,
                           child: ReactiveTextField(
-                            formControlName: 'sales_representative',
+                            formControlName: 'salesStaff',
                             decoration: InputDecoration(
                               label: Text(
                                 context.l10n.labelSalesRepresentative,
@@ -112,14 +146,14 @@ class PatientFilter extends StatelessWidget {
                         Expanded(
                           flex: 4,
                           child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'entry_date_from',
+                            formControlName: 'dateOfEntryfrom',
                             firstDate: DateTime(2000),
                             lastDate: DateTime(3000),
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
-                                formControlName: 'entry_date_from',
+                                formControlName: 'dateOfEntryfrom',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
@@ -145,14 +179,14 @@ class PatientFilter extends StatelessWidget {
                         Expanded(
                           flex: 4,
                           child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'entry_date_to',
+                            formControlName: 'dateOfEntryto',
                             firstDate: DateTime(2000),
                             lastDate: DateTime(3000),
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
-                                formControlName: 'entry_date_to',
+                                formControlName: 'dateOfEntryto',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
@@ -175,14 +209,14 @@ class PatientFilter extends StatelessWidget {
                         Expanded(
                           flex: 4,
                           child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'examination_date_from',
+                            formControlName: 'medicalDayfrom',
                             firstDate: DateTime(2000),
                             lastDate: DateTime(3000),
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
-                                formControlName: 'examination_date_from',
+                                formControlName: 'medicalDayfrom',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
@@ -208,14 +242,14 @@ class PatientFilter extends StatelessWidget {
                         Expanded(
                           flex: 4,
                           child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'examination_date_to',
+                            formControlName: 'medicalDayto',
                             firstDate: DateTime(2000),
                             lastDate: DateTime(3000),
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
-                                formControlName: 'examination_date_to',
+                                formControlName: 'medicalDayto',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
@@ -238,14 +272,14 @@ class PatientFilter extends StatelessWidget {
                         Expanded(
                           flex: 4,
                           child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'return_date_from',
+                            formControlName: 'returnDatefrom',
                             firstDate: DateTime(2000),
                             lastDate: DateTime(3000),
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
-                                formControlName: 'return_date_from',
+                                formControlName: 'returnDatefrom',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
@@ -271,14 +305,14 @@ class PatientFilter extends StatelessWidget {
                         Expanded(
                           flex: 4,
                           child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'return_date_to',
+                            formControlName: 'returnDateto',
                             firstDate: DateTime(2000),
                             lastDate: DateTime(3000),
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
-                                formControlName: 'return_date_to',
+                                formControlName: 'returnDateto',
                                 readOnly: true,
                                 onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
@@ -313,7 +347,9 @@ class PatientFilter extends StatelessWidget {
                         ),
                         const SizedBox(width: 16),
                         ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            model.patients(form: formGroup);
+                          },
                           child: Text(context.l10n.actionSearch),
                         ),
                       ],

@@ -230,9 +230,38 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<Paginated<Patient>> patients() async {
+  Future<Paginated<Patient>> patients({
+    int? page,
+    int? limit,
+    String? patientName,
+    String? companyAgents,
+    String? acceptingHospital,
+    List<String?>? type,
+    String? salesStaff,
+    String? dateOfEntryfrom,
+    String? dateOfEntryto,
+    String? medicalDayfrom,
+    String? medicalDayto,
+    String? returnDatefrom,
+    String? returnDateto,
+  }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'limit': limit,
+      r'patient_name': patientName,
+      r'companyAGENTS': companyAgents,
+      r'acceptingHospital': acceptingHospital,
+      r'type': type,
+      r'salesStaff': salesStaff,
+      r'dateOfEntryfrom': dateOfEntryfrom,
+      r'dateOfEntryto': dateOfEntryto,
+      r'medicalDayfrom': medicalDayfrom,
+      r'medicalDayto': medicalDayto,
+      r'returnDatefrom': returnDatefrom,
+      r'returnDateto': returnDateto,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio

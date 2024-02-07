@@ -59,7 +59,21 @@ abstract class ApiService {
   //GET_PATIENTS
 
   @GET(Apis.GET_PATIENTS)
-  Future<Paginated<Patient>> patients();
+  Future<Paginated<Patient>> patients({
+    @Query('page') int? page,
+    @Query('limit') int? limit,
+    @Query('patient_name') String? patientName,
+    @Query('companyAGENTS') String? companyAgents,
+    @Query('acceptingHospital') String? acceptingHospital,
+    @Query('type') List<String?>? type,
+    @Query('salesStaff') String? salesStaff,
+    @Query('dateOfEntryfrom') String? dateOfEntryfrom,
+    @Query('dateOfEntryto') String? dateOfEntryto,
+    @Query('medicalDayfrom') String? medicalDayfrom,
+    @Query('medicalDayto') String? medicalDayto,
+    @Query('returnDatefrom') String? returnDatefrom,
+    @Query('returnDateto') String? returnDateto,
+  });
 
   @GET('${Apis.GET_PATIENT}/{id}')
   Future<Patient> patient(

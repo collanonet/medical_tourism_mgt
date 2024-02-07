@@ -16,20 +16,24 @@ class DetailPatientModel {
       ValueNotifier<AsyncData<Patient>>(const AsyncData());
 
   Future<void> initialData({Patient? patient, String? id}) async {
-    patientData.value = const AsyncData<Patient>(loading: true);
+    if (patient != null || id != null) {
+      patientData.value = const AsyncData<Patient>(loading: true);
 
-    try {
-      if (patient == null) {
-        if (id != null) {
-          var result = await patientRepository.patient(id);
-          patientData.value = AsyncData<Patient>(data: result);
+      try {
+        if (patient == null) {
+          if (id != null) {
+            var result = await patientRepository.patient(id);
+            patientData.value = AsyncData<Patient>(data: result);
+          }
+        } else {
+          patientData.value = AsyncData<Patient>(data: patient);
         }
-      } else {
-        patientData.value = AsyncData<Patient>(data: patient);
+        getPatientNames(patientId: patientData.value.data?.id ?? id ?? '');
+      } catch (error) {
+        patientData.value = AsyncData<Patient>(error: error);
       }
-      getPatientNames(patientId: patientData.value.data?.id ?? id ?? '');
-    } catch (error) {
-      patientData.value = AsyncData<Patient>(error: error);
+    }else{
+      patientData.value = const AsyncData();
     }
   }
 
