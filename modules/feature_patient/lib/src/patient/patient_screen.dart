@@ -280,7 +280,7 @@ class _PatientScreenState extends State<PatientScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        '${item?.firstNameRomanized ?? '-'} ${item?.middleNameRomanized ?? '-'} ${item?.familyNameRomanized ?? '-'}',
+                                        '${item?.firstNameRomanized ?? item?.firstName ?? '-'} ${item?.middleNameRomanized ?? item?.middleName ?? '-'} ${item?.familyNameRomanized ?? item?.familyName ?? '-'}',
                                         style: TextStyle(
                                           color: context.appTheme.primaryColor,
                                           fontFamily: 'NotoSansJP',
