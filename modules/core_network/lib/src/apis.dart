@@ -64,6 +64,8 @@ class Apis {
   static const PUT_MEDICAL_RECORD_REFERRER = '/medical-record-referrers';
   static const DELETE_MEDICAL_RECORD_REFERRER = '/medical-record-referrers';
 
+  static const GET_MEDICAL_RECORD_TRAVEL_GROUP = '/medical-record-travel-group';
+  static const POST_MEDICAL_RECORD_TRAVEL_GROUP = '/medical-record-travel-group';
 
   static const GET_MEDICAL_RECORD_BUDGETS = '/medical-record-budgets';
   static const GET_MEDICAL_RECORD_BUDGETS_BY_MEDICAL_RECORD =

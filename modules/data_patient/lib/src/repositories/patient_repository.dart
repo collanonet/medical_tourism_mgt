@@ -355,4 +355,12 @@ abstract class PatientRepository {
   Future<void> deleteMedicalRecordOverseaData(
     String id,
   );
+
+  Future<MedicalRecordTravelGroup> medicalRecordTravelGroups(
+    String medicalRecord,
+  );
+
+  Future<MedicalRecordTravelGroup> postMedicalRecordTravelGroup(
+    MedicalRecordTravelGroupRequest medicalRecordTravelGroup,
+  );
 }

@@ -45,6 +45,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                       ),
                       children: [
                         RowSeparated(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           separatorBuilder: (BuildContext context, int index) {
                             return SizedBox(
                               width: context.appTheme.spacing.marginMedium,
@@ -79,6 +80,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                           ],
                         ),
                         RowSeparated(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           separatorBuilder: (BuildContext context, int index) {
                             return SizedBox(
                               width: context.appTheme.spacing.marginMedium,
@@ -109,6 +111,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                           ],
                         ),
                         RowSeparated(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           separatorBuilder: (BuildContext context, int index) {
                             return SizedBox(
                               width: context.appTheme.spacing.marginMedium,
@@ -161,6 +164,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                                   (currentForm) => ReactiveForm(
                                     formGroup: currentForm,
                                     child: RowSeparated(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
                                       separatorBuilder:
                                           (BuildContext context, int index) {
                                         return SizedBox(
@@ -241,6 +245,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                           ),
                         ),
                         RowSeparated(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           separatorBuilder: (BuildContext context, int index) {
                             return SizedBox(
                               width: context.appTheme.spacing.marginMedium,

@@ -52,6 +52,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                   ),
                 ),
                 RowSeparated(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   separatorBuilder: (BuildContext context, int index) {
                     return SizedBox(
                       width: context.appTheme.spacing.marginMedium,
@@ -88,7 +89,6 @@ class MedicalRecordNameSection extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Expanded(flex: 3, child: SizedBox())
                   ],
                 ),
                 const Text(
@@ -100,6 +100,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                   ),
                 ),
                 RowSeparated(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   separatorBuilder: (BuildContext context, int index) {
                     return SizedBox(
                       width: context.appTheme.spacing.marginMedium,
@@ -136,7 +137,6 @@ class MedicalRecordNameSection extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Expanded(flex: 3, child: SizedBox())
                   ],
                 ),
                 const Text(
@@ -148,6 +148,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                   ),
                 ),
                 RowSeparated(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   separatorBuilder: (BuildContext context, int index) {
                     return SizedBox(
                       width: context.appTheme.spacing.marginMedium,
@@ -184,7 +185,6 @@ class MedicalRecordNameSection extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Expanded(flex: 3, child: SizedBox())
                   ],
                 ),
                 const Text(
@@ -196,6 +196,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                   ),
                 ),
                 RowSeparated(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   separatorBuilder: (BuildContext context, int index) {
                     return SizedBox(
                       width: context.appTheme.spacing.marginMedium,
@@ -232,7 +233,6 @@ class MedicalRecordNameSection extends StatelessWidget {
                         ),
                       ),
                     ),
-                    Expanded(flex: 3, child: SizedBox())
                   ],
                 ),
               ],

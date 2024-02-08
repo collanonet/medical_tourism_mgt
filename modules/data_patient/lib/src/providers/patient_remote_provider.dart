@@ -446,4 +446,14 @@ class PatientRemoteProvider {
     String id,
   ) async =>
       await apiService.deleteMedicalRecordOverseaData(id);
+
+  Future<MedicalRecordTravelGroup> medicalRecordTravelGroups(
+    String medicalRecord,
+  ) async =>
+      await apiService.medicalRecordsTravelGroup(medicalRecord: medicalRecord);
+
+  Future<MedicalRecordTravelGroup> postMedicalRecordTravelGroup(
+    MedicalRecordTravelGroupRequest medicalRecordTravelGroup,
+  ) async =>
+      await apiService.postMedicalRecordTravelGroup(medicalRecordTravelGroup);
 }

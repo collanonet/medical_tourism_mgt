@@ -54,6 +54,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     ),
                   ), // TODO: l10n 対応 (本人)  (patient)
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
@@ -103,8 +104,10 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                       Expanded(
                           flex: 2,
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -152,6 +155,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                         '性別', //
                                       ),
                                       Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: <Widget>[
                                           Container(
                                             width: 100,
@@ -261,6 +266,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     ],
                   ),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
@@ -359,6 +365,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     ],
                   ),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: ReactiveTextField(
@@ -465,6 +472,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                             (currentForm) => ReactiveForm(
                               formGroup: currentForm,
                               child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Expanded(
                                     child: ReactiveDropdownFormField(
@@ -560,6 +568,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     ),
                   ),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(

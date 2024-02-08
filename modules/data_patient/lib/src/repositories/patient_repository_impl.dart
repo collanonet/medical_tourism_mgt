@@ -620,4 +620,16 @@ class PatientRepositoryIml extends PatientRepository {
   Future<User> patientUser(String userId) {
     return remote.patientUser(userId);
   }
+
+  @override
+  Future<MedicalRecordTravelGroup> medicalRecordTravelGroups(
+      String medicalRecord) {
+    return remote.medicalRecordTravelGroups(medicalRecord);
+  }
+
+  @override
+  Future<MedicalRecordTravelGroup> postMedicalRecordTravelGroup(
+      MedicalRecordTravelGroupRequest medicalRecordTravelGroup) {
+    return remote.postMedicalRecordTravelGroup(medicalRecordTravelGroup);
+  }
 }

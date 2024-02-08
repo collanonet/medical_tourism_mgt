@@ -90,6 +90,9 @@ class BasicInformationModel {
 
           await createUpdateMedicalRecordBudgets(
               form.control('MEDICAL_RECORD_BUDGETS') as FormGroup);
+          //
+          await createUpdateMedicalRecordTravelGroups(
+              form.control('travelGroup') as FormGroup);
 
           // await createUpdateMedicalRecordCompanions(form);
           // await createUpdateMedicalRecordInterpreters(
@@ -555,6 +558,11 @@ class BasicInformationModel {
         formGroup: formGroup,
       );
 
+      getMedicalRecordTravelGroups(
+        medicalRecordId: medicalRecord.value.requireData.id,
+        formGroup: formGroup,
+      );
+
       // getMedicalRecordCompanions(
       //   medicalRecordId: medicalRecord.value.requireData.id,
       //   formGroup: formGroup,
@@ -917,7 +925,7 @@ class BasicInformationModel {
       if (medicalRecordBudgets.value.hasData) {
         insertMEDICALRECORDBUDGETS(
           data: value,
-          formGroup: form.control('MEDICAL_RECORD_BUDGETS') as FormGroup,
+          formGroup: form,
         );
       }
     }).catchError((error) {
@@ -953,7 +961,7 @@ class BasicInformationModel {
       if (medicalRecordBudgets.value.hasData) {
         insertMEDICALRECORDBUDGETS(
           data: value,
-          formGroup: form.control('MEDICAL_RECORD_BUDGETS') as FormGroup,
+          formGroup: form,
         );
       }
     }).catchError((error) {
@@ -1347,6 +1355,87 @@ class BasicInformationModel {
           control.control('id').value, request);
     } else {
       await postMedicalRecordInterpreters(request);
+    }
+  }
+
+  ValueNotifier<AsyncData<MedicalRecordTravelGroup>> medicalRecordTravelGroups =
+      ValueNotifier(
+    const AsyncData(),
+  );
+
+  Future<void> getMedicalRecordTravelGroups(
+      {required String medicalRecordId, required FormGroup formGroup}) async {
+    try {
+      medicalRecordTravelGroups.value = const AsyncData(loading: true);
+
+      var result =
+          await patientRepository.medicalRecordTravelGroups(medicalRecordId);
+      medicalRecordTravelGroups.value = AsyncData(data: result);
+      insertMedicalRecordTravelGroups(
+          data: result,
+          formGroup: formGroup.control('travelGroup') as FormGroup);
+    } catch (e) {
+      logger.d(e);
+      medicalRecordTravelGroups.value = AsyncData(error: e);
+    }
+  }
+
+  void insertMedicalRecordTravelGroups(
+      {MedicalRecordTravelGroup? data, required FormGroup formGroup}) {
+    formGroup.control('id').value = data?.id;
+    formGroup.control('toGroupLeader').value = data?.toGroupLeader;
+
+    final type = formGroup.control('travelGroup') as FormArray;
+    type.clear();
+    data?.travelGroup?.forEach((element) {
+      type.add(
+        FormGroup({
+          'name': FormControl<String>(value: element),
+        }),
+      );
+    });
+
+    if (data?.travelGroup == null || data?.travelGroup?.isEmpty == true) {
+      type.add(
+        FormGroup({
+          'name': FormControl<String>(),
+        }),
+      );
+    }
+  }
+
+  createUpdateMedicalRecordTravelGroups(FormGroup control) async {
+    medicalRecordTravelGroups.value = AsyncData(loading: true);
+    List<String?> type = [];
+
+    if (control.control('travelGroup').value != null) {
+      for (var i = 0;
+      i < (control.control('travelGroup').value as List<dynamic>).length;
+      i++) {
+        if ((control.control('travelGroup').value as List<dynamic>)[i]['travelGroup'] !=
+            null ||
+            (control.control('travelGroup').value as List<dynamic>)[i]['travelGroup'] != '') {
+          type.add((control.control('travelGroup').value as List<dynamic>)[i]['travelGroup']);
+        }
+      }
+    }
+
+    MedicalRecordTravelGroupRequest request = MedicalRecordTravelGroupRequest(
+      toGroupLeader: control.control('toGroupLeader').value ?? false,
+      travelGroup: type.isEmpty ? null : type,
+      medicalRecord: medicalRecord.value.requireData.id,
+    );
+    try {
+      var result =
+          await patientRepository.postMedicalRecordTravelGroup(request);
+      medicalRecordTravelGroups.value = AsyncData(data: result);
+      insertMedicalRecordTravelGroups(
+        data: result,
+        formGroup: control.control('travelGroup') as FormGroup,
+      );
+    } catch (e) {
+      logger.d(e);
+      medicalRecordTravelGroups.value = AsyncData(error: e);
     }
   }
 

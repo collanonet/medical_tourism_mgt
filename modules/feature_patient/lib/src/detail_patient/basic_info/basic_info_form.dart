@@ -52,12 +52,18 @@ FormGroup basicInfoForm({
             'medicalCardNumber': FormControl<String?>(),
           }),
         ]),
-        'Travel_group': FormArray([
-          FormGroup({
-            'id': FormControl<String?>(),
-            'name': FormControl<String?>(),
-          })
-        ]),
+        'travelGroup': FormGroup({
+          'id': FormControl<String?>(),
+          'toGroupLeader': FormControl<bool>(
+            value: false,
+          ),
+          'travelGroup': FormArray([
+            FormGroup({
+              'name': FormControl<String?>(),
+            })
+          ]),
+        }),
+
         'Patient_account': FormGroup({
           'loginId': FormControl<String?>(
             disabled: true,

@@ -5,6 +5,8 @@ import 'package:retrofit/retrofit.dart';
 
 import '../core_network.dart';
 import 'apis.dart';
+import 'entities/medical_record_travel_group.dart';
+import 'entities/medical_record_travel_group_request.dart';
 
 part 'api_service.g.dart';
 
@@ -474,6 +476,16 @@ abstract class ApiService {
   @DELETE('${Apis.DELETE_MEDICAL_RECORDS_OVERSEAS_DATA}/{id}')
   Future<void> deleteMedicalRecordOverseaData(
     @Path('id') String id,
+  );
+
+  @GET('${Apis.GET_MEDICAL_RECORD_TRAVEL_GROUP}/{medicalRecord}')
+  Future<MedicalRecordTravelGroup> medicalRecordsTravelGroup({
+    @Path('medicalRecord') String? medicalRecord,
+  });
+
+  @POST(Apis.POST_MEDICAL_RECORD_TRAVEL_GROUP)
+  Future<MedicalRecordTravelGroup> postMedicalRecordTravelGroup(
+    @Body() MedicalRecordTravelGroupRequest medicalRecordTravelGroupRequest,
   );
 }
 

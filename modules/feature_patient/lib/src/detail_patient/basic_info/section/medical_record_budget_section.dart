@@ -36,6 +36,7 @@ class MedicalRecordBudgetSection extends StatelessWidget {
               ReactiveForm(
                 formGroup: formGroup,
                 child: RowSeparated(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   separatorBuilder: (BuildContext context, int index) {
                     return SizedBox(
                       width: context.appTheme.spacing.marginMedium,

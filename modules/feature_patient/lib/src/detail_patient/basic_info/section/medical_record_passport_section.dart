@@ -93,6 +93,7 @@ class _MedicalRecordPassportSectionState
                     ),
                   ),
                   RowSeparated(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     separatorBuilder: (BuildContext context, int index) {
                       return SizedBox(
                         width: context.appTheme.spacing.marginMedium,
@@ -146,6 +147,7 @@ class _MedicalRecordPassportSectionState
                     ],
                   ),
                   RowSeparated(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     separatorBuilder: (BuildContext context, int index) {
                       return SizedBox(
                         width: context.appTheme.spacing.marginMedium,
@@ -185,6 +187,7 @@ class _MedicalRecordPassportSectionState
                     ],
                   ),
                   RowSeparated(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     separatorBuilder: (BuildContext context, int index) {
                       return SizedBox(
                         width: context.appTheme.spacing.marginMedium,
