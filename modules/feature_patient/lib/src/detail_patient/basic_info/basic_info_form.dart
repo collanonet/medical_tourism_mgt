@@ -179,10 +179,18 @@ FormGroup basicInfoForm({
             'relationship': FormControl<String>(),
             'dateOfBirth': FormControl<DateTime>(),
             'age': FormControl<int?>(),
-            'gender': FormControl<bool>(),
+            'gender': FormControl<bool>(), // 性別
+            'isMale': FormControl<bool>(
+              value: true,
+            ), // 男性
+            'isFemale': FormControl<bool>(), // 女
             'mobileNumber': FormControl<String?>(),
             'email': FormControl<String?>(),
-            'chatToolLink': FormControl<String?>(),
+            'chatToolLink': FormArray([
+              FormGroup({
+                'chatToolLink': FormControl<String>(),
+              })
+            ]),
             'passportNumber': FormControl<String?>(),
             'issueDate': FormControl<DateTime>(),
             'expirationDate': FormControl<DateTime>(),

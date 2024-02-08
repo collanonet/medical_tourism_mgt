@@ -76,7 +76,7 @@ class BasicInfoSection extends StatelessWidget {
               const MedicalRecordAgentSection(),
               const MedicalRecordReferrerSection(),
               const MedicalRecordInterpreterSection(),
-              // const MedicalRecordCompanionSection(),
+              const MedicalRecordCompanionSection(),
             ],
           ),
         ),

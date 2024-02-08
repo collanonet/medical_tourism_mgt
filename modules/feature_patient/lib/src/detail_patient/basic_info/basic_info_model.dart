@@ -94,9 +94,9 @@ class BasicInformationModel {
           await createUpdateMedicalRecordTravelGroups(
               form.control('travelGroup') as FormGroup);
 
-          // await createUpdateMedicalRecordCompanions(form);
-          // await createUpdateMedicalRecordInterpreters(
-          //     form.control('MEDICAL_RECORD_Interpreter') as FormGroup);
+          await createUpdateMedicalRecordCompanions(form);
+          await createUpdateMedicalRecordInterpreters(
+              form.control('MEDICAL_RECORD_Interpreter') as FormGroup);
 
           logger.d('createUpdateAll');
           loading.value = const AsyncData(data: true);
@@ -106,6 +106,11 @@ class BasicInformationModel {
       } catch (error) {
         logger.d(error);
         loading.value = AsyncData(error: error);
+      } finally {
+        initialData(
+          patient: patientData.value.requireData,
+          formGroup: form,
+        );
       }
     }
   }
@@ -242,7 +247,6 @@ class BasicInformationModel {
   ) async {
     await patientRepository.postPatientName(patientNameRequest).then((value) {
       patientNames.value = AsyncData(data: value);
-      insertPatientName(data: [value], formGroup: form);
     }).catchError((error) {
       logger.d(error);
       patientNames.value = AsyncData(error: error);
@@ -259,7 +263,6 @@ class BasicInformationModel {
         .putPatientName(id, patientNameRequest)
         .then((value) {
       patientNames.value = AsyncData(data: value);
-      insertPatientName(data: [value], formGroup: form);
     }).catchError((error) {
       logger.d(error);
       patientNames.value = AsyncData(error: error);
@@ -563,10 +566,10 @@ class BasicInformationModel {
         formGroup: formGroup,
       );
 
-      // getMedicalRecordCompanions(
-      //   medicalRecordId: medicalRecord.value.requireData.id,
-      //   formGroup: formGroup,
-      // );
+      getMedicalRecordCompanions(
+        medicalRecordId: medicalRecord.value.requireData.id,
+        formGroup: formGroup,
+      );
     }
   }
 
@@ -580,8 +583,8 @@ class BasicInformationModel {
     formGroup.control('height').value = data?.height;
     formGroup.control('weight').value = data?.weight;
     formGroup.control('gender').value = data?.gender;
-    formGroup.control('isMale').value = data?.gender;
-    formGroup.control('isFemale').value = data?.gender;
+    formGroup.control('isMale').value = data?.gender == true;
+    formGroup.control('isFemale').value = !(data?.gender == true);
     formGroup.control('arrivalDate').value = data?.arrivalDate;
     formGroup.control('consultationDate').value = data?.consultationDate;
     formGroup.control('returnDate').value = data?.returnDate;
@@ -752,10 +755,6 @@ class BasicInformationModel {
         .postMedicalRecordAgent(medicalRecordAgentRequest)
         .then((value) {
       medicalRecordAgents.value = AsyncData(data: value);
-      insertMEDICALRECORDAGENTS(
-        data: value,
-        formGroup: form.control('MEDICAL_RECORD_AGENTS') as FormGroup,
-      );
     }).catchError((error) {
       logger.d(error);
       medicalRecordAgents.value = AsyncData(error: error);
@@ -772,10 +771,6 @@ class BasicInformationModel {
         .putMedicalRecordAgent(id, medicalRecordAgentRequest)
         .then((value) {
       medicalRecordAgents.value = AsyncData(data: value);
-      insertMEDICALRECORDAGENTS(
-        data: value,
-        formGroup: form.control('MEDICAL_RECORD_AGENTS') as FormGroup,
-      );
     }).catchError((error) {
       logger.d(error);
       medicalRecordAgents.value = AsyncData(error: error);
@@ -845,10 +840,6 @@ class BasicInformationModel {
         .postMedicalRecordReferrer(medicalRecordAgentRequest)
         .then((value) {
       medicalRecordReferrers.value = AsyncData(data: value);
-      insertMEDICALRECORDReferrers(
-        data: value,
-        formGroup: form.control('MEDICAL_RECORD_Referrers') as FormGroup,
-      );
     }).catchError((error) {
       logger.d(error);
       medicalRecordReferrers.value = AsyncData(error: error);
@@ -865,10 +856,6 @@ class BasicInformationModel {
         .putMedicalRecordReferrer(id, medicalRecordAgentRequest)
         .then((value) {
       medicalRecordReferrers.value = AsyncData(data: value);
-      insertMEDICALRECORDReferrers(
-        data: value,
-        formGroup: form.control('MEDICAL_RECORD_Referrers') as FormGroup,
-      );
     }).catchError((error) {
       logger.d(error);
       medicalRecordReferrers.value = AsyncData(error: error);
@@ -922,12 +909,6 @@ class BasicInformationModel {
         .postMedicalRecordBudget(medicalRecordBudgetRequest)
         .then((value) {
       medicalRecordBudgets.value = AsyncData(data: value);
-      if (medicalRecordBudgets.value.hasData) {
-        insertMEDICALRECORDBUDGETS(
-          data: value,
-          formGroup: form,
-        );
-      }
     }).catchError((error) {
       logger.d(error);
       medicalRecordBudgets.value = AsyncData(error: error);
@@ -958,12 +939,6 @@ class BasicInformationModel {
         .putMedicalRecordBudget(id, medicalRecordBudgetRequest)
         .then((value) {
       medicalRecordBudgets.value = AsyncData(data: value);
-      if (medicalRecordBudgets.value.hasData) {
-        insertMEDICALRECORDBUDGETS(
-          data: value,
-          formGroup: form,
-        );
-      }
     }).catchError((error) {
       logger.d(error);
       medicalRecordBudgets.value = AsyncData(error: error);
@@ -971,140 +946,212 @@ class BasicInformationModel {
   }
 
 // //GET_MEDICAL_RECORD_COMPANIONS
-//   AsyncData<List<MedicalRecordCompanion>> _medicalRecordCompanions =
-//       const AsyncData();
-//   AsyncData<List<MedicalRecordCompanion>> get medicalRecordCompanions =>
-//       _medicalRecordCompanions;
-//
-//   Future<void> getMedicalRecordCompanions({
-//     required String medicalRecordId,
-//     required FormGroup formGroup,
-//   }) async {
-//     _medicalRecordCompanions = const AsyncData(loading: true);
-//     notifyListeners();
-//
-//     await patientRepository
-//         .medicalRecordCompanionsByMedicalRecord(medicalRecordId)
-//         .then((value) {
-//       _medicalRecordCompanions = AsyncData(data: value);
-//       insertMEDICALRECORDCOMPANIONS(
-//         data: value,
-//         formArray: formGroup.control('MEDICAL_RECORD_Companion') as FormArray,
-//       );
-//     }).catchError((error) {
-//       logger.d(error);
-//       _medicalRecordCompanions = AsyncData(error: error);
-//     }).whenComplete(() {
-//       notifyListeners();
-//     });
-//   }
-//
-//   void insertMEDICALRECORDCOMPANIONS({
-//     required List<MedicalRecordCompanion> data,
-//     required FormArray formArray,
-//   }) {
-//     try {
-//       logger.d(data.length);
-//       if (data.isNotEmpty) {
-//         formArray.clear();
-//         for (var element in data) {
-//           logger.d(element.toJson());
-//           formArray.add(
-//             FormGroup({
-//               'id': FormControl<String?>(value: element.id),
-//               'leader': FormControl<bool>(value: element.leader),
-//               'remarks': FormControl<String?>(value: element.remarks ?? ''),
-//               'nameInRomanized':
-//                   FormControl<String?>(value: element.nameInRomanized),
-//               'nameInChineseOrKanji':
-//                   FormControl<String?>(value: element.nameInChineseOrKanji),
-//               'nameInJapaneseKanji':
-//                   FormControl<String?>(value: element.nameInJapaneseKanji),
-//               'nameInKana': FormControl<String?>(value: element.nameInKana),
-//               'nationality': FormControl<String?>(value: element.nationality),
-//               'relationship': FormControl<String>(value: element.relationship),
-//               'dateOfBirth': FormControl<DateTime>(value: element.dateOfBirth),
-//               'age': FormControl<int?>(value: element.age ?? 0),
-//               'gender': FormControl<bool>(),
-//               'passportNumber':
-//                   FormControl<String?>(value: element.passportNumber),
-//               'issueDate': FormControl<DateTime>(value: element.issueDate),
-//               'expirationDate':
-//                   FormControl<DateTime>(value: element.expirationDate),
-//               'visaType': FormControl<String>(value: element.visaType),
-//             }),
-//           );
-//         }
-//       }
-//     } catch (e) {
-//       logger.d(e);
-//     }
-//   }
-//
-//   // post MEDICAL_RECORD_COMPANIONS
-//   Future<void> postMedicalRecordCompanions(
-//     MedicalRecordCompanionRequest medicalRecordCompanionRequest,
-//   ) async {
-//     await patientRepository
-//         .postMedicalRecordCompanion(medicalRecordCompanionRequest)
-//         .then((value) {
-//       if (_medicalRecordCompanions.data == null) {
-//         _medicalRecordCompanions = AsyncData(data: [value]);
-//       } else {
-//         _medicalRecordCompanions.data?.add(value);
-//       }
-//     }).catchError((error) {
-//       logger.d(error);
-//     }).whenComplete(() {
-//       notifyListeners();
-//     });
-//   }
-//
-//   // update MEDICAL_RECORD_COMPANIONS
-//   Future<void> updateMedicalRecordCompanions(
-//     String id,
-//     MedicalRecordCompanionRequest medicalRecordCompanionRequest,
-//   ) async {
-//     await patientRepository
-//         .putMedicalRecordCompanion(id, medicalRecordCompanionRequest)
-//         .then((value) {
-//       // Find from list and update or add
-//       final index = _medicalRecordCompanions.data?.indexWhere(
-//             (element) => element.id == id,
-//           ) ??
-//           -1;
-//       if (index >= 0) {
-//         _medicalRecordCompanions.data?[index] = value;
-//       } else {
-//         _medicalRecordCompanions.data?.add(value);
-//       }
-//     }).catchError((error) {
-//       logger.d(error);
-//     }).whenComplete(() {
-//       notifyListeners();
-//     });
-//   }
-//
-//   // delete deleteMedicalRecordCompanions
-//
-//   Future<void> deleteMedicalRecordCompanions(
-//     String id,
-//   ) async {
-//     await patientRepository.deleteMedicalRecordCompanion(id).then((value) {
-//       // Find from list and update or add
-//       final index = _medicalRecordCompanions.data?.indexWhere(
-//             (element) => element.id == id,
-//           ) ??
-//           -1;
-//       if (index >= 0) {
-//         _medicalRecordCompanions.data?.removeAt(index);
-//       }
-//     }).catchError((error) {
-//       logger.d(error);
-//     }).whenComplete(() {
-//       notifyListeners();
-//     });
-//   }
+  ValueNotifier<AsyncData<List<MedicalRecordCompanion>>>
+      medicalRecordCompanions =
+      ValueNotifier<AsyncData<List<MedicalRecordCompanion>>>(const AsyncData());
+
+  Future<void> getMedicalRecordCompanions({
+    required String medicalRecordId,
+    required FormGroup formGroup,
+  }) async {
+    medicalRecordCompanions.value = const AsyncData(loading: true);
+
+    await patientRepository
+        .medicalRecordCompanionsByMedicalRecord(medicalRecordId)
+        .then((value) {
+      medicalRecordCompanions.value = AsyncData(data: value);
+      insertMEDICALRECORDCOMPANIONS(
+        data: value,
+        formArray: formGroup.control('MEDICAL_RECORD_Companion') as FormArray,
+      );
+    }).catchError((error) {
+      logger.d(error);
+      medicalRecordCompanions.value = AsyncData(error: error);
+    });
+  }
+
+  void insertMEDICALRECORDCOMPANIONS({
+    required List<MedicalRecordCompanion> data,
+    required FormArray formArray,
+  }) {
+    try {
+      logger.d(data.length);
+      if (data.isNotEmpty) {
+        formArray.clear();
+        for (var element in data) {
+          FormArray chatToolLink = FormArray([]);
+          chatToolLink.clear();
+          if (element.chatToolLink != null) {
+            for (var i = 0; i < element.chatToolLink!.length; i++) {
+              chatToolLink.add(
+                FormGroup({
+                  'chatToolLink': FormControl<String>(
+                    value: element.chatToolLink![i],
+                  ),
+                }),
+              );
+            }
+          }
+
+          if(element.chatToolLink == null || element.chatToolLink!.isEmpty){
+            chatToolLink.add(
+              FormGroup({
+                'chatToolLink': FormControl<String>(),
+              }),
+            );
+          }
+
+          formArray.add(
+            FormGroup({
+              'id': FormControl<String?>(
+                value: element.id,
+              ),
+              'leader': FormControl<bool>(
+                value: element.leader,
+              ),
+              'remarks': FormControl<String?>(
+                value: element.remarks,
+              ),
+              'familyNameRomanized': FormControl<String?>(
+                value: element.familyNameRomanized,
+              ),
+              'middleNameRomanized': FormControl<String?>(
+                value: element.middleNameRomanized,
+              ),
+              'firstNameRomanized': FormControl<String?>(),
+              'familyNameChineseOrVietnamese': FormControl<String?>(
+                value: element.familyNameChineseOrVietnamese,
+              ),
+              'middleNameChineseOrVietnamese': FormControl<String?>(
+                value: element.middleNameChineseOrVietnamese,
+              ),
+              'firstNameChineseOrVietnamese': FormControl<String?>(
+                value: element.firstNameChineseOrVietnamese,
+              ),
+              'familyNameJapaneseForChinese': FormControl<String?>(
+                value: element.familyNameJapaneseForChinese,
+              ),
+              'middleNameJapaneseForChinese': FormControl<String?>(
+                value: element.middleNameJapaneseForChinese,
+              ),
+              'firstNameJapaneseForChinese': FormControl<String?>(
+                value: element.firstNameJapaneseForChinese,
+              ),
+              'familyNameJapaneseForNonChinese': FormControl<String?>(
+                value: element.familyNameJapaneseForNonChinese,
+              ),
+              'middleNameJapaneseForNonChinese': FormControl<String?>(
+                value: element.middleNameJapaneseForNonChinese,
+              ),
+              'firstNameJapaneseForNonChinese': FormControl<String?>(
+                value: element.firstNameJapaneseForNonChinese,
+              ),
+              'nationality': FormControl<String?>(value: element.nationality),
+              'relationship': FormControl<String>(
+                value: element.relationship,
+              ),
+              'dateOfBirth': FormControl<DateTime>(
+                value: element.dateOfBirth,
+              ),
+              'age': FormControl<int?>(
+                value: element.age,
+              ),
+              'gender': FormControl<bool>(
+                value: element.gender,
+              ),
+              'isMale': FormControl<bool>(
+                value: element.gender == true,
+              ),
+              'isFemale': FormControl<bool>(
+                value: !(element.gender == true),
+              ),
+              'mobileNumber': FormControl<String?>(
+                value: element.mobileNumber,
+              ),
+              'email': FormControl<String?>(
+                value: element.email,
+              ),
+              'chatToolLink': chatToolLink,
+              'passportNumber': FormControl<String?>(
+                value: element.passportNumber,
+              ),
+              'issueDate': FormControl<DateTime>(
+                value: element.issueDate,
+              ),
+              'expirationDate': FormControl<DateTime>(
+                value: element.expirationDate,
+              ),
+              'visaType': FormControl<String>(
+                value: element.visaType,
+              ),
+            }),
+          );
+        }
+      }
+    } catch (e) {
+      logger.d(e);
+      medicalRecordCompanions.value = AsyncData(error: e);
+    }
+  }
+
+  // post MEDICAL_RECORD_COMPANIONS
+  Future<void> postMedicalRecordCompanions(
+    MedicalRecordCompanionRequest medicalRecordCompanionRequest,
+  ) async {
+    await patientRepository
+        .postMedicalRecordCompanion(medicalRecordCompanionRequest)
+        .then((value) {
+      if (medicalRecordCompanions.value.data == null) {
+        medicalRecordCompanions.value = AsyncData(data: [value]);
+      } else {
+        medicalRecordCompanions.value = AsyncData(data: [
+          ...medicalRecordCompanions.value.requireData,
+          value,
+        ]);
+      }
+    }).catchError((error) {
+      logger.d(error);
+      medicalRecordCompanions.value = AsyncData(error: error);
+    });
+  }
+
+  // update MEDICAL_RECORD_COMPANIONS
+  Future<void> updateMedicalRecordCompanions(
+    String id,
+    MedicalRecordCompanionRequest medicalRecordCompanionRequest,
+  ) async {
+    await patientRepository
+        .putMedicalRecordCompanion(id, medicalRecordCompanionRequest)
+        .then((value) {
+      medicalRecordCompanions.value = AsyncData(
+        data: [
+          ...medicalRecordCompanions.value.requireData
+              .map((e) => e.id == id ? value : e)
+        ],
+      );
+    }).catchError((error) {
+      logger.d(error);
+      medicalRecordCompanions.value = AsyncData(error: error);
+    });
+  }
+
+  // delete deleteMedicalRecordCompanions
+
+  Future<void> deleteMedicalRecordCompanions(
+    String id,
+  ) async {
+    await patientRepository.deleteMedicalRecordCompanion(id).then((value) {
+      medicalRecordCompanions.value = AsyncData(
+        data: [
+          ...medicalRecordCompanions.value.requireData
+              .where((element) => element.id != id)
+        ],
+      );
+    }).catchError((error) {
+      logger.d(error);
+      medicalRecordCompanions.value = AsyncData(error: error);
+    });
+  }
 
 // //GET_MEDICAL_RECORD_HOSPITALS
   ValueNotifier<AsyncData<List<MedicalRecordHospital>>> medicalRecordHospitals =
@@ -1166,8 +1213,7 @@ class BasicInformationModel {
                 element['medicalCardNumber'].isEmpty) {
               await deleteMedicalRecordHospitals(element['id']);
             } else {
-              await updateMedicalRecordHospitals(
-                  formGroup, element['id'], request);
+              await updateMedicalRecordHospitals(element['id'], request);
             }
           } else {
             if (element['hospitalName'] != null &&
@@ -1199,13 +1245,6 @@ class BasicInformationModel {
           value,
         ]);
       }
-
-      if (medicalRecordHospitals.value.hasData) {
-        insertMedicalRecordHospitals(
-          data: medicalRecordHospitals.value.requireData,
-          formArray: form.control('MEDICAL_RECORD_HOSPITALS') as FormArray,
-        );
-      }
     }).catchError((error) {
       logger.d(error);
       medicalRecordHospitals.value = AsyncData(error: error);
@@ -1214,7 +1253,6 @@ class BasicInformationModel {
 
   // update MEDICAL_RECORD_HOSPITALS
   Future<void> updateMedicalRecordHospitals(
-    FormGroup form,
     String id,
     MedicalRecordHospitalRequest medicalRecordHospitalRequest,
   ) async {
@@ -1235,13 +1273,6 @@ class BasicInformationModel {
         );
       } else {
         medicalRecordHospitals.value = AsyncData(data: [value]);
-      }
-
-      if (medicalRecordHospitals.value.hasData) {
-        insertMedicalRecordHospitals(
-          data: medicalRecordHospitals.value.requireData,
-          formArray: form.control('MEDICAL_RECORD_HOSPITALS') as FormArray,
-        );
       }
     }).catchError((error) {
       logger.d(error);
@@ -1410,12 +1441,16 @@ class BasicInformationModel {
 
     if (control.control('travelGroup').value != null) {
       for (var i = 0;
-      i < (control.control('travelGroup').value as List<dynamic>).length;
-      i++) {
-        if ((control.control('travelGroup').value as List<dynamic>)[i]['travelGroup'] !=
-            null ||
-            (control.control('travelGroup').value as List<dynamic>)[i]['travelGroup'] != '') {
-          type.add((control.control('travelGroup').value as List<dynamic>)[i]['travelGroup']);
+          i < (control.control('travelGroup').value as List<dynamic>).length;
+          i++) {
+        if ((control.control('travelGroup').value as List<dynamic>)[i]
+                    ['travelGroup'] !=
+                null ||
+            (control.control('travelGroup').value as List<dynamic>)[i]
+                    ['travelGroup'] !=
+                '') {
+          type.add((control.control('travelGroup').value as List<dynamic>)[i]
+              ['travelGroup']);
         }
       }
     }
@@ -1429,10 +1464,6 @@ class BasicInformationModel {
       var result =
           await patientRepository.postMedicalRecordTravelGroup(request);
       medicalRecordTravelGroups.value = AsyncData(data: result);
-      insertMedicalRecordTravelGroups(
-        data: result,
-        formGroup: control.control('travelGroup') as FormGroup,
-      );
     } catch (e) {
       logger.d(e);
       medicalRecordTravelGroups.value = AsyncData(error: e);
@@ -1440,54 +1471,75 @@ class BasicInformationModel {
   }
 
 //
-//   Future<void> createUpdateMedicalRecordCompanions(FormGroup form) async {
-//     await form
-//         .control('MEDICAL_RECORD_Companion')
-//         .value
-//         .forEach((element) async {
-//       MedicalRecordCompanionRequest request = MedicalRecordCompanionRequest(
-//         leader: element['leader'],
-//         remarks: element['remarks'],
-//         nameInRomanized: element['nameInRomanized'],
-//         nameInChineseOrKanji: element['nameInChineseOrKanji'],
-//         nameInJapaneseKanji: element['nameInJapaneseKanji'],
-//         nameInKana: element['nameInKana'],
-//         nationality: element['nationality'],
-//         relationship: element['relationship'],
-//         dateOfBirth: element['dateOfBirth'],
-//         age:
-//             ageCalculator(DateTime.tryParse(element['dateOfBirth'].toString())),
-//         gender: element['gender'],
-//         passportNumber: element['passportNumber'],
-//         issueDate: element['issueDate'],
-//         expirationDate: element['expirationDate'],
-//         visaType: element['visaType'],
-//         medicalRecord: _medicalRecord.data?.id,
-//       );
-//
-//       if (element['id'] != null) {
-//         if (element['nameInRomanized'] != null &&
-//             element['nameInRomanized'] != '' &&
-//             element['passportNumber'] != null &&
-//             element['passportNumber'] != '') {
-//           await updateMedicalRecordCompanions(element['id'], request);
-//         } else {
-//           await deleteMedicalRecordCompanions(element['id']);
-//         }
-//       } else {
-//         if (element['nameInRomanized'] != null &&
-//             element['nameInRomanized'] != '' &&
-//             element['dateOfBirth'] != null &&
-//             element['dateOfBirth'] != '' &&
-//             element['passportNumber'] != null &&
-//             element['passportNumber'] != '' &&
-//             element['issueDate'] != null &&
-//             element['issueDate'] != '' &&
-//             element['expirationDate'] != null &&
-//             element['expirationDate'] != '') {
-//           await postMedicalRecordCompanions(request);
-//         }
-//       }
-//     });
-//   }
+  Future<void> createUpdateMedicalRecordCompanions(FormGroup form) async {
+    try {
+      medicalRecordCompanions.value =
+          medicalRecordCompanions.value.copyWith(loading: true);
+      await form
+          .control('MEDICAL_RECORD_Companion')
+          .value
+          .forEach((element) async {
+        List<String?>? chatToolLink = [];
+        if (element['chatToolLink'] != null) {
+          for (var i = 0;
+              i < (element['chatToolLink'] as List<dynamic>).length;
+              i++) {
+            if ((element['chatToolLink'] as List<dynamic>)[i]['chatToolLink'] !=
+                    null ||
+                (element['chatToolLink'] as List<dynamic>)[i]['chatToolLink'] !=
+                    '') {
+              chatToolLink.add((element['chatToolLink'] as List<dynamic>)[i]
+                  ['chatToolLink']);
+            }
+          }
+        }
+
+        MedicalRecordCompanionRequest request = MedicalRecordCompanionRequest(
+          leader: element['leader'],
+          remarks: element['remarks'],
+          familyNameRomanized: element['familyNameRomanized'],
+          middleNameRomanized: element['middleNameRomanized'],
+          firstNameRomanized: element['firstNameRomanized'],
+          familyNameChineseOrVietnamese:
+              element['familyNameChineseOrVietnamese'],
+          middleNameChineseOrVietnamese:
+              element['middleNameChineseOrVietnamese'],
+          firstNameChineseOrVietnamese: element['firstNameChineseOrVietnamese'],
+          familyNameJapaneseForChinese: element['familyNameJapaneseForChinese'],
+          middleNameJapaneseForChinese: element['middleNameJapaneseForChinese'],
+          firstNameJapaneseForChinese: element['firstNameJapaneseForChinese'],
+          familyNameJapaneseForNonChinese:
+              element['familyNameJapaneseForNonChinese'],
+          middleNameJapaneseForNonChinese:
+              element['middleNameJapaneseForNonChinese'],
+          firstNameJapaneseForNonChinese:
+              element['firstNameJapaneseForNonChinese'],
+          nationality: element['nationality'],
+          relationship: element['relationship'],
+          dateOfBirth: element['dateOfBirth'],
+          age: element['age'],
+          gender: element['gender'],
+          mobileNumber: element['mobileNumber'],
+          email: element['email'],
+          chatToolLink: chatToolLink,
+          passportNumber: element['passportNumber'],
+          issueDate: element['issueDate'],
+          expirationDate: element['expirationDate'],
+          visaType: element['visaType'],
+          medicalRecord: medicalRecord.value.requireData.id,
+        );
+
+        if (element['id'] != null) {
+          await updateMedicalRecordCompanions(element['id'], request);
+        } else {
+          await postMedicalRecordCompanions(request);
+        }
+      });
+      medicalRecordCompanions.value =
+          medicalRecordCompanions.value.copyWith(loading: false);
+    } catch (e) {
+      logger.d(e);
+      medicalRecordCompanions.value = AsyncData(error: e);
+    }
+  }
 }
