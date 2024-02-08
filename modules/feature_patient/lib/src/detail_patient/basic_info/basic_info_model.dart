@@ -624,8 +624,8 @@ class BasicInformationModel {
       MedicalRecordRequest request = MedicalRecordRequest(
         dateOfBirth: form.control('dateOfBirth').value,
         age: form.control('age').value,
-        height: form.control('height').value,
-        weight: form.control('weight').value,
+        height: form.control('height').value as int,
+        weight: form.control('weight').value as int,
         gender: form.control('gender').value,
         arrivalDate: form.control('arrivalDate').value as DateTime?,
         consultationDate: form.control('consultationDate').value as DateTime?,

@@ -10,8 +10,14 @@ FormGroup basicInfoForm({
           validators: [Validators.required],
         ), //生年月日
         'age': FormControl<int?>(), // 年齢
-        'height': FormControl<int?>(), // 身長
-        'weight': FormControl<int?>(), // 体重
+        'height': FormControl<int>(
+          value: 0,
+          validators: [Validators.required],
+        ), // 身長
+        'weight': FormControl<int>(
+          value: 0,
+          validators: [Validators.required],
+        ), // 体重
         'gender': FormControl<bool>(), // 性別
         'isMale': FormControl<bool>(
           value: true,
