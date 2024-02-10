@@ -32,924 +32,944 @@ class _PatientResponseMedicalCheckupScreenState
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   Expanded(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            'その他の健診希望者',
-                            style: context.textTheme.titleMedium,
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                  decoration: BoxDecoration(
-                                      color: context.appTheme.primaryColor,
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: IconButton(
-                                      onPressed: () {
-                                        formGroup
-                                            .control(
-                                                'numberOfPeopleRequestingMedicalCheckup')
-                                            .value = (formGroup
-                                                .control(
-                                                    'numberOfPeopleRequestingMedicalCheckup')
-                                                .value as int) +
-                                            1;
-                                      },
-                                      icon: Icon(
-                                        Icons.add,
-                                        color: Colors.white,
-                                      ))),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              IntrinsicWidth(
-                                stepWidth: 250,
-                                child: ReactiveTextField(
-                                  formControlName:
-                                      'numberOfPeopleRequestingMedicalCheckup',
-                                  decoration: InputDecoration(
-                                    label: Text('健診希望人数'),
-                                  ),
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              Container(
-                                  decoration: BoxDecoration(
-                                      color: context.appTheme.primaryColor,
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: IconButton(
-                                      onPressed: () {
-                                        if ((formGroup
-                                                .control(
-                                                    'numberOfPeopleRequestingMedicalCheckup')
-                                                .value as int) >
-                                            0) {
+                    child: Scrollbar(
+                      trackVisibility: true,
+                      thumbVisibility: true,
+                      child: SingleChildScrollView(
+                        primary: true,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              'その他の健診希望者',
+                              style: context.textTheme.titleMedium,
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Row(
+                              children: [
+                                Container(
+                                    decoration: BoxDecoration(
+                                        color: context.appTheme.primaryColor,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: IconButton(
+                                        onPressed: () {
                                           formGroup
                                               .control(
                                                   'numberOfPeopleRequestingMedicalCheckup')
                                               .value = (formGroup
                                                   .control(
                                                       'numberOfPeopleRequestingMedicalCheckup')
-                                                  .value as int) -
+                                                  .value as int) +
                                               1;
-                                        }
-                                      },
-                                      icon: Icon(
-                                        Icons.remove,
-                                        color: Colors.white,
-                                      ))),
-                            ],
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              IntrinsicWidth(
-                                stepWidth: 100,
-                                child: ReactiveTextField(
-                                  formControlName: 'age',
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
-                                  decoration: InputDecoration(
-                                    label: Text('年齢'),
-                                  ),
+                                        },
+                                        icon: Icon(
+                                          Icons.add,
+                                          color: Colors.white,
+                                        ))),
+                                SizedBox(
+                                  width: context.appTheme.spacing.marginMedium,
                                 ),
-                              ),
-                              SizedBox(
-                                width:
-                                    context.appTheme.spacing.marginExtraSmall,
-                              ),
-                              Text(
-                                '歳',
-                                style: context.textTheme.bodyMedium,
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Text(
-                            '性別',
-                            style: context.textTheme.bodyMedium,
-                          ),
-                          ReactiveValueListenableBuilder(
-                              formControlName: 'sex',
-                              builder: (context, control, _) {
-                                return AnimatedToggleSwitch<String>.size(
-                                  textDirection: TextDirection.rtl,
-                                  current: control.value == true ? '男性' : '女性',
-                                  values: const ['女性', '男性'],
-                                  iconList: [
-                                    Text('女性'),
-                                    Text('男性'),
-                                  ],
-                                  indicatorSize: const Size.fromWidth(100),
-                                  borderWidth: 4.0,
-                                  iconAnimationType: AnimationType.onHover,
-                                  style: ToggleStyle(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        spreadRadius: 1,
-                                        blurRadius: 2,
-                                        offset: Offset(0, 1.5),
-                                      ),
+                                IntrinsicWidth(
+                                  stepWidth: 250,
+                                  child: ReactiveTextField(
+                                    formControlName:
+                                        'numberOfPeopleRequestingMedicalCheckup',
+                                    decoration: InputDecoration(
+                                      label: Text('健診希望人数'),
+                                    ),
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly
                                     ],
                                   ),
-                                  styleBuilder: (i) => ToggleStyle(
-                                    indicatorColor:
-                                        context.appTheme.primaryColor,
-                                    backgroundColor: Colors.white,
+                                ),
+                                SizedBox(
+                                  width: context.appTheme.spacing.marginMedium,
+                                ),
+                                Container(
+                                    decoration: BoxDecoration(
+                                        color: context.appTheme.primaryColor,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: IconButton(
+                                        onPressed: () {
+                                          if ((formGroup
+                                                  .control(
+                                                      'numberOfPeopleRequestingMedicalCheckup')
+                                                  .value as int) >
+                                              0) {
+                                            formGroup
+                                                .control(
+                                                    'numberOfPeopleRequestingMedicalCheckup')
+                                                .value = (formGroup
+                                                    .control(
+                                                        'numberOfPeopleRequestingMedicalCheckup')
+                                                    .value as int) -
+                                                1;
+                                          }
+                                        },
+                                        icon: Icon(
+                                          Icons.remove,
+                                          color: Colors.white,
+                                        ))),
+                              ],
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                IntrinsicWidth(
+                                  stepWidth: 100,
+                                  child: ReactiveTextField(
+                                    formControlName: 'age',
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly
+                                    ],
+                                    decoration: InputDecoration(
+                                      label: Text('年齢'),
+                                    ),
                                   ),
-                                  onChanged: (i) => setState(() {
-                                    control.value = i == '男性';
-                                  }),
-                                );
-                              }),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          IntrinsicWidth(
-                            stepWidth: 350,
-                            child: ReactiveTextField(
-                              formControlName: 'relationshipBetweenPerson',
-                              decoration: InputDecoration(
-                                label: Text('本人との関係'),
+                                ),
+                                SizedBox(
+                                  width:
+                                      context.appTheme.spacing.marginExtraSmall,
+                                ),
+                                Text(
+                                  '歳',
+                                  style: context.textTheme.bodyMedium,
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Text(
+                              '性別',
+                              style: context.textTheme.bodyMedium,
+                            ),
+                            ReactiveValueListenableBuilder(
+                                formControlName: 'sex',
+                                builder: (context, control, _) {
+                                  return AnimatedToggleSwitch<String>.size(
+                                    textDirection: TextDirection.rtl,
+                                    current:
+                                        control.value == true ? '男性' : '女性',
+                                    values: const ['女性', '男性'],
+                                    iconList: [
+                                      Text('女性'),
+                                      Text('男性'),
+                                    ],
+                                    indicatorSize: const Size.fromWidth(100),
+                                    borderWidth: 4.0,
+                                    iconAnimationType: AnimationType.onHover,
+                                    style: ToggleStyle(
+                                      borderColor: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          spreadRadius: 1,
+                                          blurRadius: 2,
+                                          offset: Offset(0, 1.5),
+                                        ),
+                                      ],
+                                    ),
+                                    styleBuilder: (i) => ToggleStyle(
+                                      indicatorColor:
+                                          context.appTheme.primaryColor,
+                                      backgroundColor: Colors.white,
+                                    ),
+                                    onChanged: (i) => setState(() {
+                                      control.value = i == '男性';
+                                    }),
+                                  );
+                                }),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            IntrinsicWidth(
+                              stepWidth: 350,
+                              child: ReactiveTextField(
+                                formControlName: 'relationshipBetweenPerson',
+                                decoration: InputDecoration(
+                                  label: Text('本人との関係'),
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Divider(),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Text('希望医療機関', style: context.textTheme.titleMedium),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Text('希望する医療機関はありますか',
-                              style: context.textTheme.titleMedium),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          ReactiveValueListenableBuilder(
-                              formControlName:
-                                  'isThereMedicalInstitutionToAttend',
-                              builder: (context, control, _) {
-                                return AnimatedToggleSwitch<String>.size(
-                                  textDirection: TextDirection.rtl,
-                                  current: control.value == true ? 'あり' : 'なし',
-                                  values: const ['なし', 'あり'],
-                                  iconList: [
-                                    Text('なし'),
-                                    Text('あり'),
-                                  ],
-                                  indicatorSize: const Size.fromWidth(100),
-                                  borderWidth: 4.0,
-                                  iconAnimationType: AnimationType.onHover,
-                                  style: ToggleStyle(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        spreadRadius: 1,
-                                        blurRadius: 2,
-                                        offset: Offset(0, 1.5),
-                                      ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Divider(),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Text('希望医療機関',
+                                style: context.textTheme.titleMedium),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Text('希望する医療機関はありますか',
+                                style: context.textTheme.titleMedium),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            ReactiveValueListenableBuilder(
+                                formControlName:
+                                    'isThereMedicalInstitutionToAttend',
+                                builder: (context, control, _) {
+                                  return AnimatedToggleSwitch<String>.size(
+                                    textDirection: TextDirection.rtl,
+                                    current:
+                                        control.value == true ? 'あり' : 'なし',
+                                    values: const ['なし', 'あり'],
+                                    iconList: [
+                                      Text('なし'),
+                                      Text('あり'),
                                     ],
-                                  ),
-                                  styleBuilder: (i) => ToggleStyle(
-                                    indicatorColor:
-                                        context.appTheme.primaryColor,
-                                    backgroundColor: Colors.white,
-                                  ),
-                                  onChanged: (i) {
-                                    control.value = i == 'あり';
-                                  },
-                                );
-                              }),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: ReactiveTextField(
-                                  formControlName:
-                                      'desiredAreaOrMedicalInstitutionName',
-                                  maxLines: 3,
-                                  minLines: 2,
-                                  decoration: InputDecoration(
-                                    label: Text('希望するエリア・医療機関名'),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: ReactiveTextField(
-                                  formControlName: 'reason',
-                                  maxLines: 3,
-                                  minLines: 2,
-                                  decoration: InputDecoration(
-                                    label: Text('理由'),
+                                    indicatorSize: const Size.fromWidth(100),
+                                    borderWidth: 4.0,
+                                    iconAnimationType: AnimationType.onHover,
+                                    style: ToggleStyle(
+                                      borderColor: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          spreadRadius: 1,
+                                          blurRadius: 2,
+                                          offset: Offset(0, 1.5),
+                                        ),
+                                      ],
+                                    ),
+                                    styleBuilder: (i) => ToggleStyle(
+                                      indicatorColor:
+                                          context.appTheme.primaryColor,
+                                      backgroundColor: Colors.white,
+                                    ),
+                                    onChanged: (i) {
+                                      control.value = i == 'あり';
+                                    },
+                                  );
+                                }),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: ReactiveTextField(
+                                    formControlName:
+                                        'desiredAreaOrMedicalInstitutionName',
+                                    maxLines: 3,
+                                    minLines: 2,
+                                    decoration: InputDecoration(
+                                      label: Text('希望するエリア・医療機関名'),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Text('希望するメニュー',
-                              style: context.textTheme.titleMedium),
-                          Row(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text('PET-CT'),
-                                  SizedBox(
-                                    height:
-                                        context.appTheme.spacing.marginMedium,
+                              ],
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: ReactiveTextField(
+                                    formControlName: 'reason',
+                                    maxLines: 3,
+                                    minLines: 2,
+                                    decoration: InputDecoration(
+                                      label: Text('理由'),
+                                    ),
                                   ),
-                                  ReactiveValueListenableBuilder(
-                                      formControlName: 'petCT',
-                                      builder: (context, control, _) {
-                                        return AnimatedToggleSwitch<
-                                            String>.size(
-                                          textDirection: TextDirection.rtl,
-                                          current: control.value == true
-                                              ? '希望する'
-                                              : '希望しない',
-                                          values: const ['希望しない', '希望する'],
-                                          iconList: [
-                                            Text('希望しない'),
-                                            Text('希望する'),
-                                          ],
-                                          indicatorSize:
-                                              const Size.fromWidth(100),
-                                          borderWidth: 4.0,
-                                          iconAnimationType:
-                                              AnimationType.onHover,
-                                          style: ToggleStyle(
-                                            borderColor: Colors.transparent,
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                spreadRadius: 1,
-                                                blurRadius: 2,
-                                                offset: Offset(0, 1.5),
-                                              ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Text('希望するメニュー',
+                                style: context.textTheme.titleMedium),
+                            Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text('PET-CT'),
+                                    SizedBox(
+                                      height:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    ReactiveValueListenableBuilder(
+                                        formControlName: 'petCT',
+                                        builder: (context, control, _) {
+                                          return AnimatedToggleSwitch<
+                                              String>.size(
+                                            textDirection: TextDirection.rtl,
+                                            current: control.value == true
+                                                ? '希望する'
+                                                : '希望しない',
+                                            values: const ['希望しない', '希望する'],
+                                            iconList: [
+                                              Text('希望しない'),
+                                              Text('希望する'),
                                             ],
-                                          ),
-                                          styleBuilder: (i) => ToggleStyle(
-                                            indicatorColor:
-                                                context.appTheme.primaryColor,
-                                            backgroundColor: Colors.white,
-                                          ),
-                                          onChanged: (i) {
-                                            control.value = i == '希望する';
-                                          },
-                                        );
-                                      }),
-                                ],
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text('MRI'),
-                                  SizedBox(
-                                    height:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  ReactiveValueListenableBuilder(
-                                      formControlName: 'mri',
-                                      builder: (context, control, _) {
-                                        return AnimatedToggleSwitch<
-                                            String>.size(
-                                          textDirection: TextDirection.rtl,
-                                          current: control.value == true
-                                              ? '希望する'
-                                              : '希望しない',
-                                          values: const ['希望しない', '希望する'],
-                                          iconList: [
-                                            Text('希望しない'),
-                                            Text('希望する'),
-                                          ],
-                                          indicatorSize:
-                                              const Size.fromWidth(100),
-                                          borderWidth: 4.0,
-                                          iconAnimationType:
-                                              AnimationType.onHover,
-                                          style: ToggleStyle(
-                                            borderColor: Colors.transparent,
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                spreadRadius: 1,
-                                                blurRadius: 2,
-                                                offset: Offset(0, 1.5),
-                                              ),
+                                            indicatorSize:
+                                                const Size.fromWidth(100),
+                                            borderWidth: 4.0,
+                                            iconAnimationType:
+                                                AnimationType.onHover,
+                                            style: ToggleStyle(
+                                              borderColor: Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  spreadRadius: 1,
+                                                  blurRadius: 2,
+                                                  offset: Offset(0, 1.5),
+                                                ),
+                                              ],
+                                            ),
+                                            styleBuilder: (i) => ToggleStyle(
+                                              indicatorColor:
+                                                  context.appTheme.primaryColor,
+                                              backgroundColor: Colors.white,
+                                            ),
+                                            onChanged: (i) {
+                                              control.value = i == '希望する';
+                                            },
+                                          );
+                                        }),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: context.appTheme.spacing.marginMedium,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text('MRI'),
+                                    SizedBox(
+                                      height:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    ReactiveValueListenableBuilder(
+                                        formControlName: 'mri',
+                                        builder: (context, control, _) {
+                                          return AnimatedToggleSwitch<
+                                              String>.size(
+                                            textDirection: TextDirection.rtl,
+                                            current: control.value == true
+                                                ? '希望する'
+                                                : '希望しない',
+                                            values: const ['希望しない', '希望する'],
+                                            iconList: [
+                                              Text('希望しない'),
+                                              Text('希望する'),
                                             ],
-                                          ),
-                                          styleBuilder: (i) => ToggleStyle(
-                                            indicatorColor:
-                                                context.appTheme.primaryColor,
-                                            backgroundColor: Colors.white,
-                                          ),
-                                          onChanged: (i) {
-                                            control.value = i == '希望する';
-                                          },
-                                        );
-                                      }),
-                                ],
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text('胃カメラ'),
-                                  SizedBox(
-                                    height:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  ReactiveValueListenableBuilder(
-                                      formControlName: 'gastroscope',
-                                      builder: (context, control, _) {
-                                        return AnimatedToggleSwitch<
-                                            String>.size(
-                                          textDirection: TextDirection.rtl,
-                                          current: control.value == true
-                                              ? '希望する'
-                                              : '希望しない',
-                                          values: const ['希望しない', '希望する'],
-                                          iconList: [
-                                            Text('希望しない'),
-                                            Text('希望する'),
-                                          ],
-                                          indicatorSize:
-                                              const Size.fromWidth(100),
-                                          borderWidth: 4.0,
-                                          iconAnimationType:
-                                              AnimationType.onHover,
-                                          style: ToggleStyle(
-                                            borderColor: Colors.transparent,
-                                            borderRadius:
-                                                BorderRadius.circular(10.0),
-                                            boxShadow: [
-                                              BoxShadow(
-                                                color: Colors.black26,
-                                                spreadRadius: 1,
-                                                blurRadius: 2,
-                                                offset: Offset(0, 1.5),
-                                              ),
+                                            indicatorSize:
+                                                const Size.fromWidth(100),
+                                            borderWidth: 4.0,
+                                            iconAnimationType:
+                                                AnimationType.onHover,
+                                            style: ToggleStyle(
+                                              borderColor: Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  spreadRadius: 1,
+                                                  blurRadius: 2,
+                                                  offset: Offset(0, 1.5),
+                                                ),
+                                              ],
+                                            ),
+                                            styleBuilder: (i) => ToggleStyle(
+                                              indicatorColor:
+                                                  context.appTheme.primaryColor,
+                                              backgroundColor: Colors.white,
+                                            ),
+                                            onChanged: (i) {
+                                              control.value = i == '希望する';
+                                            },
+                                          );
+                                        }),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: context.appTheme.spacing.marginMedium,
+                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Text('胃カメラ'),
+                                    SizedBox(
+                                      height:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    ReactiveValueListenableBuilder(
+                                        formControlName: 'gastroscope',
+                                        builder: (context, control, _) {
+                                          return AnimatedToggleSwitch<
+                                              String>.size(
+                                            textDirection: TextDirection.rtl,
+                                            current: control.value == true
+                                                ? '希望する'
+                                                : '希望しない',
+                                            values: const ['希望しない', '希望する'],
+                                            iconList: [
+                                              Text('希望しない'),
+                                              Text('希望する'),
                                             ],
-                                          ),
-                                          styleBuilder: (i) => ToggleStyle(
-                                            indicatorColor:
-                                                context.appTheme.primaryColor,
-                                            backgroundColor: Colors.white,
-                                          ),
-                                          onChanged: (i) {
-                                            control.value = i == '希望する';
-                                          },
-                                        );
-                                      }),
-                                ],
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: ReactiveTextField(
-                                  formControlName: 'freeInput',
-                                  maxLines: 3,
-                                  minLines: 2,
-                                  decoration: InputDecoration(
-                                    label: Text('自由入力'),
+                                            indicatorSize:
+                                                const Size.fromWidth(100),
+                                            borderWidth: 4.0,
+                                            iconAnimationType:
+                                                AnimationType.onHover,
+                                            style: ToggleStyle(
+                                              borderColor: Colors.transparent,
+                                              borderRadius:
+                                                  BorderRadius.circular(10.0),
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: Colors.black26,
+                                                  spreadRadius: 1,
+                                                  blurRadius: 2,
+                                                  offset: Offset(0, 1.5),
+                                                ),
+                                              ],
+                                            ),
+                                            styleBuilder: (i) => ToggleStyle(
+                                              indicatorColor:
+                                                  context.appTheme.primaryColor,
+                                              backgroundColor: Colors.white,
+                                            ),
+                                            onChanged: (i) {
+                                              control.value = i == '希望する';
+                                            },
+                                          );
+                                        }),
+                                  ],
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: ReactiveTextField(
+                                    formControlName: 'freeInput',
+                                    maxLines: 3,
+                                    minLines: 2,
+                                    decoration: InputDecoration(
+                                      label: Text('自由入力'),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Row(
-                            children: [
-                              Expanded(
-                                child: ReactiveTextField(
-                                  formControlName: 'currentConcerns',
-                                  maxLines: 3,
-                                  minLines: 2,
-                                  decoration: InputDecoration(
-                                    label: Text('現在気になっていること'),
+                              ],
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: ReactiveTextField(
+                                    formControlName: 'currentConcerns',
+                                    maxLines: 3,
+                                    minLines: 2,
+                                    decoration: InputDecoration(
+                                      label: Text('現在気になっていること'),
+                                    ),
                                   ),
                                 ),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          SizedBox(
-                            width: 300,
-                            child: ReactiveTextField(
-                              formControlName: 'brokerageCompanyOrIntroducer',
-                              decoration: InputDecoration(
-                                label: Text('仲介会社・紹介者'),
+                              ],
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            SizedBox(
+                              width: 300,
+                              child: ReactiveTextField(
+                                formControlName: 'brokerageCompanyOrIntroducer',
+                                decoration: InputDecoration(
+                                  label: Text('仲介会社・紹介者'),
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Text('がんについて', style: context.textTheme.titleMedium),
-                          Text('がんの既往歴'),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          ReactiveValueListenableBuilder(
-                              formControlName: 'historyOfCancer',
-                              builder: (context, control, _) {
-                                return AnimatedToggleSwitch<String>.size(
-                                  textDirection: TextDirection.rtl,
-                                  current: control.value == true ? 'あり' : 'なし',
-                                  values: const ['なし', 'あり'],
-                                  iconList: [
-                                    Text('なし'),
-                                    Text('あり'),
-                                  ],
-                                  indicatorSize: const Size.fromWidth(100),
-                                  borderWidth: 4.0,
-                                  iconAnimationType: AnimationType.onHover,
-                                  style: ToggleStyle(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        spreadRadius: 1,
-                                        blurRadius: 2,
-                                        offset: Offset(0, 1.5),
-                                      ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Text('がんについて',
+                                style: context.textTheme.titleMedium),
+                            Text('がんの既往歴'),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            ReactiveValueListenableBuilder(
+                                formControlName: 'historyOfCancer',
+                                builder: (context, control, _) {
+                                  return AnimatedToggleSwitch<String>.size(
+                                    textDirection: TextDirection.rtl,
+                                    current:
+                                        control.value == true ? 'あり' : 'なし',
+                                    values: const ['なし', 'あり'],
+                                    iconList: [
+                                      Text('なし'),
+                                      Text('あり'),
                                     ],
-                                  ),
-                                  styleBuilder: (i) => ToggleStyle(
-                                    indicatorColor:
-                                        context.appTheme.primaryColor,
-                                    backgroundColor: Colors.white,
-                                  ),
-                                  onChanged: (i) {
-                                    control.value = i == 'あり';
-                                  },
-                                );
-                              }),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          SizedBox(
-                            width: 300,
-                            child: ReactiveTextField(
-                              formControlName: 'cancerSite',
-                              decoration: InputDecoration(
-                                label: Text('がんの部位'),
+                                    indicatorSize: const Size.fromWidth(100),
+                                    borderWidth: 4.0,
+                                    iconAnimationType: AnimationType.onHover,
+                                    style: ToggleStyle(
+                                      borderColor: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          spreadRadius: 1,
+                                          blurRadius: 2,
+                                          offset: Offset(0, 1.5),
+                                        ),
+                                      ],
+                                    ),
+                                    styleBuilder: (i) => ToggleStyle(
+                                      indicatorColor:
+                                          context.appTheme.primaryColor,
+                                      backgroundColor: Colors.white,
+                                    ),
+                                    onChanged: (i) {
+                                      control.value = i == 'あり';
+                                    },
+                                  );
+                                }),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            SizedBox(
+                              width: 300,
+                              child: ReactiveTextField(
+                                formControlName: 'cancerSite',
+                                decoration: InputDecoration(
+                                  label: Text('がんの部位'),
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Text('糖尿病について', style: context.textTheme.titleMedium),
-                          Text('現在糖尿病'),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          ReactiveValueListenableBuilder(
-                              formControlName: 'currentlyDiabetes',
-                              builder: (context, control, _) {
-                                return AnimatedToggleSwitch<String>.size(
-                                  textDirection: TextDirection.rtl,
-                                  current: control.value == true ? 'あり' : 'なし',
-                                  values: const ['なし', 'あり'],
-                                  iconList: [
-                                    Text('なし'),
-                                    Text('あり'),
-                                  ],
-                                  indicatorSize: const Size.fromWidth(100),
-                                  borderWidth: 4.0,
-                                  iconAnimationType: AnimationType.onHover,
-                                  style: ToggleStyle(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        spreadRadius: 1,
-                                        blurRadius: 2,
-                                        offset: Offset(0, 1.5),
-                                      ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Text('糖尿病について',
+                                style: context.textTheme.titleMedium),
+                            Text('現在糖尿病'),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            ReactiveValueListenableBuilder(
+                                formControlName: 'currentlyDiabetes',
+                                builder: (context, control, _) {
+                                  return AnimatedToggleSwitch<String>.size(
+                                    textDirection: TextDirection.rtl,
+                                    current:
+                                        control.value == true ? 'あり' : 'なし',
+                                    values: const ['なし', 'あり'],
+                                    iconList: [
+                                      Text('なし'),
+                                      Text('あり'),
+                                    ],
+                                    indicatorSize: const Size.fromWidth(100),
+                                    borderWidth: 4.0,
+                                    iconAnimationType: AnimationType.onHover,
+                                    style: ToggleStyle(
+                                      borderColor: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          spreadRadius: 1,
+                                          blurRadius: 2,
+                                          offset: Offset(0, 1.5),
+                                        ),
+                                      ],
+                                    ),
+                                    styleBuilder: (i) => ToggleStyle(
+                                      indicatorColor:
+                                          context.appTheme.primaryColor,
+                                      backgroundColor: Colors.white,
+                                    ),
+                                    onChanged: (i) {
+                                      control.value = i == 'あり';
+                                    },
+                                  );
+                                }),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Text('糖尿病服薬'),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            ReactiveValueListenableBuilder(
+                                formControlName: 'diabetesMedication',
+                                builder: (context, control, _) {
+                                  return AnimatedToggleSwitch<String>.size(
+                                    textDirection: TextDirection.rtl,
+                                    current:
+                                        control.value == true ? 'あり' : 'なし',
+                                    values: const ['なし', 'あり'],
+                                    iconList: [
+                                      Text('なし'),
+                                      Text('あり'),
+                                    ],
+                                    indicatorSize: const Size.fromWidth(100),
+                                    borderWidth: 4.0,
+                                    iconAnimationType: AnimationType.onHover,
+                                    style: ToggleStyle(
+                                      borderColor: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          spreadRadius: 1,
+                                          blurRadius: 2,
+                                          offset: Offset(0, 1.5),
+                                        ),
+                                      ],
+                                    ),
+                                    styleBuilder: (i) => ToggleStyle(
+                                      indicatorColor:
+                                          context.appTheme.primaryColor,
+                                      backgroundColor: Colors.white,
+                                    ),
+                                    onChanged: (i) {
+                                      control.value = i == 'あり';
+                                    },
+                                  );
+                                }),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Text('空腹時血糖'),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                SizedBox(
+                                  width: 200,
+                                  child: ReactiveTextField(
+                                    formControlName: 'fastingBloodSugarMgPerDl',
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly
                                     ],
                                   ),
-                                  styleBuilder: (i) => ToggleStyle(
-                                    indicatorColor:
-                                        context.appTheme.primaryColor,
-                                    backgroundColor: Colors.white,
-                                  ),
-                                  onChanged: (i) {
-                                    control.value = i == 'あり';
-                                  },
-                                );
-                              }),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Text('糖尿病服薬'),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          ReactiveValueListenableBuilder(
-                              formControlName: 'diabetesMedication',
-                              builder: (context, control, _) {
-                                return AnimatedToggleSwitch<String>.size(
-                                  textDirection: TextDirection.rtl,
-                                  current: control.value == true ? 'あり' : 'なし',
-                                  values: const ['なし', 'あり'],
-                                  iconList: [
-                                    Text('なし'),
-                                    Text('あり'),
-                                  ],
-                                  indicatorSize: const Size.fromWidth(100),
-                                  borderWidth: 4.0,
-                                  iconAnimationType: AnimationType.onHover,
-                                  style: ToggleStyle(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        spreadRadius: 1,
-                                        blurRadius: 2,
-                                        offset: Offset(0, 1.5),
-                                      ),
-                                    ],
-                                  ),
-                                  styleBuilder: (i) => ToggleStyle(
-                                    indicatorColor:
-                                        context.appTheme.primaryColor,
-                                    backgroundColor: Colors.white,
-                                  ),
-                                  onChanged: (i) {
-                                    control.value = i == 'あり';
-                                  },
-                                );
-                              }),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Text('空腹時血糖'),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              SizedBox(
-                                width: 200,
-                                child: ReactiveTextField(
-                                  formControlName: 'fastingBloodSugarMgPerDl',
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
                                 ),
-                              ),
-                              SizedBox(
-                                width:
-                                    context.appTheme.spacing.marginExtraSmall,
-                              ),
-                              Text(
-                                'mg/dL',
-                                style: context.textTheme.bodyMedium,
-                              ),
-                              SizedBox(
-                                width:
-                                    context.appTheme.spacing.marginExtraSmall,
-                              ),
-                              SizedBox(
-                                width: 200,
-                                child: ReactiveTextField(
-                                  formControlName: 'fastingBloodSugarMmolPerL',
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly
-                                  ],
+                                SizedBox(
+                                  width:
+                                      context.appTheme.spacing.marginExtraSmall,
                                 ),
-                              ),
-                              SizedBox(
-                                width:
-                                    context.appTheme.spacing.marginExtraSmall,
-                              ),
-                              Text(
-                                'mmol/L',
-                                style: context.textTheme.bodyMedium,
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Text(
-                            'インプラント',
-                            style: context.textTheme.titleMedium,
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          ReactiveValueListenableBuilder(
-                              formControlName: 'implant',
-                              builder: (context, control, _) {
-                                return AnimatedToggleSwitch<String>.size(
-                                  textDirection: TextDirection.rtl,
-                                  current: control.value == true ? 'あり' : 'なし',
-                                  values: const ['なし', 'あり'],
-                                  iconList: [
-                                    Text('なし'),
-                                    Text('あり'),
-                                  ],
-                                  indicatorSize: const Size.fromWidth(100),
-                                  borderWidth: 4.0,
-                                  iconAnimationType: AnimationType.onHover,
-                                  style: ToggleStyle(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        spreadRadius: 1,
-                                        blurRadius: 2,
-                                        offset: Offset(0, 1.5),
-                                      ),
+                                Text(
+                                  'mg/dL',
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                                SizedBox(
+                                  width:
+                                      context.appTheme.spacing.marginExtraSmall,
+                                ),
+                                SizedBox(
+                                  width: 200,
+                                  child: ReactiveTextField(
+                                    formControlName:
+                                        'fastingBloodSugarMmolPerL',
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly
                                     ],
                                   ),
-                                  styleBuilder: (i) => ToggleStyle(
-                                    indicatorColor:
-                                        context.appTheme.primaryColor,
-                                    backgroundColor: Colors.white,
-                                  ),
-                                  onChanged: (i) {
-                                    control.value = i == 'あり';
-                                  },
-                                );
-                              }),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Text('インプラントをした時期'),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            children: [
-                              SizedBox(
-                                width: 200,
-                                child: ReactiveTextField(
-                                  formControlName: 'implantYear',
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly,
-                                  ],
                                 ),
-                              ),
-                              SizedBox(
-                                width:
-                                    context.appTheme.spacing.marginExtraSmall,
-                              ),
-                              Text(
-                                '年',
-                                style: context.textTheme.bodyMedium,
-                              ),
-                              SizedBox(
-                                width:
-                                    context.appTheme.spacing.marginExtraSmall,
-                              ),
-                              SizedBox(
-                                width: 200,
-                                child: ReactiveTextField(
-                                  formControlName: 'implantMonth',
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.digitsOnly,
-                                  ],
+                                SizedBox(
+                                  width:
+                                      context.appTheme.spacing.marginExtraSmall,
                                 ),
-                              ),
-                              SizedBox(
-                                width:
-                                    context.appTheme.spacing.marginExtraSmall,
-                              ),
-                              Text(
-                                '月頃',
-                                style: context.textTheme.bodyMedium,
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Text(
-                            '体内金属/刺青（tatooo）',
-                            style: context.textTheme.titleMedium,
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          ReactiveValueListenableBuilder(
-                              formControlName: 'bodyMetalOrTattoo',
-                              builder: (context, control, _) {
-                                return AnimatedToggleSwitch<String>.size(
-                                  textDirection: TextDirection.rtl,
-                                  current: control.value == true ? 'あり' : 'なし',
-                                  values: const ['なし', 'あり'],
-                                  iconList: [
-                                    Text('なし'),
-                                    Text('あり'),
-                                  ],
-                                  indicatorSize: const Size.fromWidth(100),
-                                  borderWidth: 4.0,
-                                  iconAnimationType: AnimationType.onHover,
-                                  style: ToggleStyle(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        spreadRadius: 1,
-                                        blurRadius: 2,
-                                        offset: Offset(0, 1.5),
-                                      ),
+                                Text(
+                                  'mmol/L',
+                                  style: context.textTheme.bodyMedium,
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Text(
+                              'インプラント',
+                              style: context.textTheme.titleMedium,
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            ReactiveValueListenableBuilder(
+                                formControlName: 'implant',
+                                builder: (context, control, _) {
+                                  return AnimatedToggleSwitch<String>.size(
+                                    textDirection: TextDirection.rtl,
+                                    current:
+                                        control.value == true ? 'あり' : 'なし',
+                                    values: const ['なし', 'あり'],
+                                    iconList: [
+                                      Text('なし'),
+                                      Text('あり'),
+                                    ],
+                                    indicatorSize: const Size.fromWidth(100),
+                                    borderWidth: 4.0,
+                                    iconAnimationType: AnimationType.onHover,
+                                    style: ToggleStyle(
+                                      borderColor: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          spreadRadius: 1,
+                                          blurRadius: 2,
+                                          offset: Offset(0, 1.5),
+                                        ),
+                                      ],
+                                    ),
+                                    styleBuilder: (i) => ToggleStyle(
+                                      indicatorColor:
+                                          context.appTheme.primaryColor,
+                                      backgroundColor: Colors.white,
+                                    ),
+                                    onChanged: (i) {
+                                      control.value = i == 'あり';
+                                    },
+                                  );
+                                }),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Text('インプラントをした時期'),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                SizedBox(
+                                  width: 200,
+                                  child: ReactiveTextField(
+                                    formControlName: 'implantYear',
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
                                     ],
                                   ),
-                                  styleBuilder: (i) => ToggleStyle(
-                                    indicatorColor:
-                                        context.appTheme.primaryColor,
-                                    backgroundColor: Colors.white,
-                                  ),
-                                  onChanged: (i) {
-                                    control.value = i == 'あり';
-                                  },
-                                );
-                              }),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Text(
-                            '体内金属後に/刺青後にMRI受診したことが',
-                            style: context.textTheme.titleMedium,
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          ReactiveValueListenableBuilder(
-                              formControlName: 'hadMriAfterMetalOrTattoo',
-                              builder: (context, control, _) {
-                                return AnimatedToggleSwitch<String>.size(
-                                  textDirection: TextDirection.rtl,
-                                  current: control.value == true ? 'あり' : 'なし',
-                                  values: const ['なし', 'あり'],
-                                  iconList: [
-                                    Text('なし'),
-                                    Text('あり'),
-                                  ],
-                                  indicatorSize: const Size.fromWidth(100),
-                                  borderWidth: 4.0,
-                                  iconAnimationType: AnimationType.onHover,
-                                  style: ToggleStyle(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        spreadRadius: 1,
-                                        blurRadius: 2,
-                                        offset: Offset(0, 1.5),
-                                      ),
+                                ),
+                                SizedBox(
+                                  width:
+                                      context.appTheme.spacing.marginExtraSmall,
+                                ),
+                                Text(
+                                  '年',
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                                SizedBox(
+                                  width:
+                                      context.appTheme.spacing.marginExtraSmall,
+                                ),
+                                SizedBox(
+                                  width: 200,
+                                  child: ReactiveTextField(
+                                    formControlName: 'implantMonth',
+                                    keyboardType: TextInputType.number,
+                                    inputFormatters: [
+                                      FilteringTextInputFormatter.digitsOnly,
                                     ],
                                   ),
-                                  styleBuilder: (i) => ToggleStyle(
-                                    indicatorColor:
-                                        context.appTheme.primaryColor,
-                                    backgroundColor: Colors.white,
-                                  ),
-                                  onChanged: (i) {
-                                    control.value = i == 'あり';
-                                  },
-                                );
-                              }),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          SizedBox(
-                            width: 300,
-                            child: ReactiveTextField(
-                              formControlName: 'partAndItsMaterial',
-                              decoration: InputDecoration(
-                                hintText: '部位とその材質',
+                                ),
+                                SizedBox(
+                                  width:
+                                      context.appTheme.spacing.marginExtraSmall,
+                                ),
+                                Text(
+                                  '月頃',
+                                  style: context.textTheme.bodyMedium,
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Text(
+                              '体内金属/刺青（tatooo）',
+                              style: context.textTheme.titleMedium,
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            ReactiveValueListenableBuilder(
+                                formControlName: 'bodyMetalOrTattoo',
+                                builder: (context, control, _) {
+                                  return AnimatedToggleSwitch<String>.size(
+                                    textDirection: TextDirection.rtl,
+                                    current:
+                                        control.value == true ? 'あり' : 'なし',
+                                    values: const ['なし', 'あり'],
+                                    iconList: [
+                                      Text('なし'),
+                                      Text('あり'),
+                                    ],
+                                    indicatorSize: const Size.fromWidth(100),
+                                    borderWidth: 4.0,
+                                    iconAnimationType: AnimationType.onHover,
+                                    style: ToggleStyle(
+                                      borderColor: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          spreadRadius: 1,
+                                          blurRadius: 2,
+                                          offset: Offset(0, 1.5),
+                                        ),
+                                      ],
+                                    ),
+                                    styleBuilder: (i) => ToggleStyle(
+                                      indicatorColor:
+                                          context.appTheme.primaryColor,
+                                      backgroundColor: Colors.white,
+                                    ),
+                                    onChanged: (i) {
+                                      control.value = i == 'あり';
+                                    },
+                                  );
+                                }),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Text(
+                              '体内金属後に/刺青後にMRI受診したことが',
+                              style: context.textTheme.titleMedium,
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            ReactiveValueListenableBuilder(
+                                formControlName: 'hadMriAfterMetalOrTattoo',
+                                builder: (context, control, _) {
+                                  return AnimatedToggleSwitch<String>.size(
+                                    textDirection: TextDirection.rtl,
+                                    current:
+                                        control.value == true ? 'あり' : 'なし',
+                                    values: const ['なし', 'あり'],
+                                    iconList: [
+                                      Text('なし'),
+                                      Text('あり'),
+                                    ],
+                                    indicatorSize: const Size.fromWidth(100),
+                                    borderWidth: 4.0,
+                                    iconAnimationType: AnimationType.onHover,
+                                    style: ToggleStyle(
+                                      borderColor: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          spreadRadius: 1,
+                                          blurRadius: 2,
+                                          offset: Offset(0, 1.5),
+                                        ),
+                                      ],
+                                    ),
+                                    styleBuilder: (i) => ToggleStyle(
+                                      indicatorColor:
+                                          context.appTheme.primaryColor,
+                                      backgroundColor: Colors.white,
+                                    ),
+                                    onChanged: (i) {
+                                      control.value = i == 'あり';
+                                    },
+                                  );
+                                }),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            SizedBox(
+                              width: 300,
+                              child: ReactiveTextField(
+                                formControlName: 'partAndItsMaterial',
+                                decoration: InputDecoration(
+                                  hintText: '部位とその材質',
+                                ),
                               ),
                             ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Text(
-                            '閉所恐怖症',
-                            style: context.textTheme.titleMedium,
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          ReactiveValueListenableBuilder(
-                              formControlName: 'claustrophobia',
-                              builder: (context, control, _) {
-                                return AnimatedToggleSwitch<String>.size(
-                                  textDirection: TextDirection.rtl,
-                                  current: control.value == true ? 'あり' : 'なし',
-                                  values: const ['なし', 'あり'],
-                                  iconList: [
-                                    Text('なし'),
-                                    Text('あり'),
-                                  ],
-                                  indicatorSize: const Size.fromWidth(100),
-                                  borderWidth: 4.0,
-                                  iconAnimationType: AnimationType.onHover,
-                                  style: ToggleStyle(
-                                    borderColor: Colors.transparent,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: Colors.black26,
-                                        spreadRadius: 1,
-                                        blurRadius: 2,
-                                        offset: Offset(0, 1.5),
-                                      ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            Text(
+                              '閉所恐怖症',
+                              style: context.textTheme.titleMedium,
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                            ReactiveValueListenableBuilder(
+                                formControlName: 'claustrophobia',
+                                builder: (context, control, _) {
+                                  return AnimatedToggleSwitch<String>.size(
+                                    textDirection: TextDirection.rtl,
+                                    current:
+                                        control.value == true ? 'あり' : 'なし',
+                                    values: const ['なし', 'あり'],
+                                    iconList: [
+                                      Text('なし'),
+                                      Text('あり'),
                                     ],
-                                  ),
-                                  styleBuilder: (i) => ToggleStyle(
-                                    indicatorColor:
-                                        context.appTheme.primaryColor,
-                                    backgroundColor: Colors.white,
-                                  ),
-                                  onChanged: (i) {
-                                    control.value = i == 'あり';
-                                  },
-                                );
-                              }),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                        ],
+                                    indicatorSize: const Size.fromWidth(100),
+                                    borderWidth: 4.0,
+                                    iconAnimationType: AnimationType.onHover,
+                                    style: ToggleStyle(
+                                      borderColor: Colors.transparent,
+                                      borderRadius: BorderRadius.circular(10.0),
+                                      boxShadow: [
+                                        BoxShadow(
+                                          color: Colors.black26,
+                                          spreadRadius: 1,
+                                          blurRadius: 2,
+                                          offset: Offset(0, 1.5),
+                                        ),
+                                      ],
+                                    ),
+                                    styleBuilder: (i) => ToggleStyle(
+                                      indicatorColor:
+                                          context.appTheme.primaryColor,
+                                      backgroundColor: Colors.white,
+                                    ),
+                                    onChanged: (i) {
+                                      control.value = i == 'あり';
+                                    },
+                                  );
+                                }),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),

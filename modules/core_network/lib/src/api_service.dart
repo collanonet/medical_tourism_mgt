@@ -524,23 +524,46 @@ abstract class ApiService {
   );
 
   @GET('${Apis.MEDICAL_RECORD_PATIENT_RESPONSE_TREATMENT}/{medicalRecord}')
-  Future<MedicalRecordPatientResponseTreatment> getMedicalRecordPatientResponseTreatment({
+  Future<MedicalRecordPatientResponseTreatment>
+      getMedicalRecordPatientResponseTreatment({
     @Path('medicalRecord') String? medicalRecord,
   });
 
   @POST(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_TREATMENT)
-  Future<MedicalRecordPatientResponseTreatment> postMedicalRecordPatientResponseTreatment(
-    @Body() MedicalRecordPatientResponseTreatmentRequest medicalRecordPatientResponseTreatmentRequest,
+  Future<MedicalRecordPatientResponseTreatment>
+      postMedicalRecordPatientResponseTreatment(
+    @Body()
+    MedicalRecordPatientResponseTreatmentRequest
+        medicalRecordPatientResponseTreatmentRequest,
   );
 
-  @GET('${Apis.MEDICAL_RECORD_PATIENT_RESPONSE_MEDICAL_CHECKUP}/{medicalRecord}')
-  Future<MedicalRecordPatientResponseMedicalCheckup> getMedicalRecordPatientResponseMedicalCheckup({
+  @GET(
+      '${Apis.MEDICAL_RECORD_PATIENT_RESPONSE_MEDICAL_CHECKUP}/{medicalRecord}')
+  Future<MedicalRecordPatientResponseMedicalCheckup>
+      getMedicalRecordPatientResponseMedicalCheckup({
     @Path('medicalRecord') String? medicalRecord,
   });
 
   @POST(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_MEDICAL_CHECKUP)
-  Future<MedicalRecordPatientResponseMedicalCheckup> postMedicalRecordPatientResponseMedicalCheckup(
-    @Body() MedicalRecordPatientResponseMedicalCheckupRequest medicalRecordPatientResponseMedicalCheckupRequest,
+  Future<MedicalRecordPatientResponseMedicalCheckup>
+      postMedicalRecordPatientResponseMedicalCheckup(
+    @Body()
+    MedicalRecordPatientResponseMedicalCheckupRequest
+        medicalRecordPatientResponseMedicalCheckupRequest,
+  );
+
+  @GET('${Apis.MEDICAL_RECORD_PATIENT_RESPONSE_OTHER}/{medicalRecord}')
+  Future<MedicalRecordPatientResponseOther>
+      getMedicalRecordPatientResponseOther({
+    @Path('medicalRecord') String? medicalRecord,
+  });
+
+  @POST(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_OTHER)
+  Future<MedicalRecordPatientResponseOther>
+      postMedicalRecordPatientResponseOther(
+    @Body()
+    MedicalRecordPatientResponseOtherRequest
+        medicalRecordPatientResponseOtherRequest,
   );
 }
 

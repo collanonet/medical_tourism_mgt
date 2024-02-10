@@ -65,7 +65,8 @@ class Apis {
   static const DELETE_MEDICAL_RECORD_REFERRER = '/medical-record-referrers';
 
   static const GET_MEDICAL_RECORD_TRAVEL_GROUP = '/medical-record-travel-group';
-  static const POST_MEDICAL_RECORD_TRAVEL_GROUP = '/medical-record-travel-group';
+  static const POST_MEDICAL_RECORD_TRAVEL_GROUP =
+      '/medical-record-travel-group';
 
   static const GET_MEDICAL_RECORD_BUDGETS = '/medical-record-budgets';
   static const GET_MEDICAL_RECORD_BUDGETS_BY_MEDICAL_RECORD =
@@ -95,8 +96,12 @@ class Apis {
       '/hospital-proposal/medical-record-id';
   static const MEDICAL_RECORD_PROPOSAL = '/hospital-proposal';
 
-  static const MEDICAL_RECORD_PATIENT_RESPONSE_TREATMENT = '/medical-record-patient-response-treatment';
-  static const MEDICAL_RECORD_PATIENT_RESPONSE_MEDICAL_CHECKUP = '/medical-record-patient-response-medical-checkup';
+  static const MEDICAL_RECORD_PATIENT_RESPONSE_TREATMENT =
+      '/medical-record-patient-response-treatment';
+  static const MEDICAL_RECORD_PATIENT_RESPONSE_MEDICAL_CHECKUP =
+      '/medical-record-patient-response-medical-checkup';
+  static const MEDICAL_RECORD_PATIENT_RESPONSE_OTHER =
+      '/medical-record-patient-response-other';
 
   static const GET_MEDICAL_RECORD_INTERPRETERS = '/medical-record-interpreters';
   static const GET_MEDICAL_RECORD_INTERPRETERS_BY_MEDICAL_RECORD =

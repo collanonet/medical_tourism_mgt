@@ -14,18 +14,19 @@ class PatientResponseOtherPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (context) => GetIt.I<PatientResponseOtherModel>(),
-      child: ReactiveFormConfig(
-        validationMessages: <String, ValidationMessageFunction>{
-          ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
-        },
-        child: ReactiveFormBuilder(
-            form: () => otherForm(),
-            builder: (context, formGroup, child) {
-              return const PatientResponseOtherScreen();
-            }),
-      ),
+    return ReactiveFormConfig(
+      validationMessages: <String, ValidationMessageFunction>{
+        ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
+      },
+      child: ReactiveFormBuilder(
+          form: () => otherForm(),
+          builder: (context, formGroup, child) {
+            return Provider(
+                create: (context) => GetIt.I<PatientResponseOtherModel>()
+                  ..getMedicalRecords(
+                      patientId: patientId, formGroup: formGroup),
+                child: const PatientResponseOtherScreen());
+          }),
     );
   }
 }
