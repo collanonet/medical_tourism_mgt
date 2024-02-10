@@ -456,4 +456,33 @@ class PatientRemoteProvider {
     MedicalRecordTravelGroupRequest medicalRecordTravelGroup,
   ) async =>
       await apiService.postMedicalRecordTravelGroup(medicalRecordTravelGroup);
+
+  Future<List<MedicalRecordProposal>> getAllMedicalRecordProposals() async =>
+      await apiService.getAllMedicalRecordProposals();
+
+  Future<List<MedicalRecordProposal>> getMedicalRecordProposalsByMedicalRecord(
+    String medicalRecord,
+  ) async =>
+      await apiService.getMedicalRecordProposalsByMedicalRecord(medicalRecord);
+
+  Future<List<MedicalRecordProposal>> getOneMedicalRecordProposal(
+    String id,
+  ) async =>
+      await apiService.getOneMedicalRecordProposal(id);
+
+  Future<MedicalRecordProposal> postMedicalRecordProposal(
+    MedicalRecordProposalRequest medicalRecordProposal,
+  ) async =>
+      await apiService.postMedicalRecordProposal(medicalRecordProposal);
+
+  Future<MedicalRecordProposal> putMedicalRecordProposal(
+    String id,
+    MedicalRecordProposalRequest medicalRecordProposal,
+  ) async =>
+      await apiService.putMedicalRecordProposal(id, medicalRecordProposal);
+
+  Future<void> deleteMedicalRecordProposal(
+    String id,
+  ) async =>
+      await apiService.deleteMedicalRecordProposal(id);
 }

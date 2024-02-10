@@ -4,7 +4,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup formFilterHospital() =>  FormGroup(
   {
-    'hospital_name': FormControl<String>(
+    'hospitalName': FormControl<String>(
       value: '',
     ),
     'type': FormControl<String>(

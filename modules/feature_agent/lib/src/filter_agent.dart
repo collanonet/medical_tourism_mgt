@@ -72,7 +72,7 @@ class _AgentFilterState extends State<AgentFilter> {
                         Expanded(
                           flex: 4,
                           child: ReactiveTextField(
-                            formControlName: 'hospital_name',
+                            formControlName: 'hospitalName',
                             decoration: InputDecoration(
                               label: Text(
                                 '報告書',

@@ -632,4 +632,37 @@ class PatientRepositoryIml extends PatientRepository {
       MedicalRecordTravelGroupRequest medicalRecordTravelGroup) {
     return remote.postMedicalRecordTravelGroup(medicalRecordTravelGroup);
   }
+
+  @override
+  Future<void> deleteMedicalRecordProposal(String id) {
+    return remote.deleteMedicalRecordProposal(id);
+  }
+
+  @override
+  Future<List<MedicalRecordProposal>> getAllMedicalRecordProposals() {
+    return remote.getAllMedicalRecordProposals();
+  }
+
+  @override
+  Future<List<MedicalRecordProposal>> getMedicalRecordProposalsByMedicalRecord(
+      String medicalRecord) {
+    return remote.getMedicalRecordProposalsByMedicalRecord(medicalRecord);
+  }
+
+  @override
+  Future<List<MedicalRecordProposal>> getOneMedicalRecordProposal(String id) {
+    return remote.getOneMedicalRecordProposal(id);
+  }
+
+  @override
+  Future<MedicalRecordProposal> postMedicalRecordProposal(
+      MedicalRecordProposalRequest medicalRecordProposal) {
+    return remote.postMedicalRecordProposal(medicalRecordProposal);
+  }
+
+  @override
+  Future<MedicalRecordProposal> putMedicalRecordProposal(
+      String id, MedicalRecordProposalRequest medicalRecordProposal) {
+    return remote.putMedicalRecordProposal(id, medicalRecordProposal);
+  }
 }

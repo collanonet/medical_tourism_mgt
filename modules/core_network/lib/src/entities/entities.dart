@@ -19,3 +19,5 @@ export 'medical_record_oversea.dart';
 export 'medical_record_oversea_data.dart';
 export 'medical_record_travel_group.dart';
 export 'medical_record_travel_group_request.dart';
+export 'medical_record_proposal_request.dart';
+export 'medical_record_proposal.dart';

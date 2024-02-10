@@ -10,7 +10,7 @@ FormGroup formFilterPatient() => FormGroup(
         'agent_company_name': FormControl<String>(
           value: '',
         ),
-        'hospital_name': FormControl<String>(
+        'hospitalName': FormControl<String>(
           value: '',
         ),
         'classification': FormControl<String>(

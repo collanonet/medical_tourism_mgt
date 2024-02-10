@@ -271,6 +271,7 @@ class AppThemeData {
       inputDecorationTheme: InputDecorationTheme(
         fillColor: Colors.white,
         filled: true,
+        alignLabelWithHint: true,
         hintStyle: const TextStyle(
           fontSize: 15.0,
           color: Color(0xFF5B5B5B),

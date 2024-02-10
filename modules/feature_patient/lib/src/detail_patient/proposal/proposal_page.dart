@@ -18,18 +18,18 @@ class ProposalPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (context) => GetIt.I<ProposalModel>(),
-      child: ReactiveFormConfig(
-        validationMessages: <String, ValidationMessageFunction>{
-          ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
+    return ReactiveFormConfig(
+      validationMessages: <String, ValidationMessageFunction>{
+        ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
+      },
+      child: ReactiveFormBuilder(
+        form: () => proposalForm()..markAllAsTouched(),
+        builder: (context, formGroup, child) {
+          return Provider(
+              create: (context) =>
+                  GetIt.I<ProposalModel>()..init(patient?.id ?? '',formGroup),
+              child: const ProposalScreen());
         },
-        child: ReactiveFormBuilder(
-          form: () => proposalForm(),
-          builder: (context, formGroup, child) {
-            return const ProposalScreen();
-          },
-        ),
       ),
     );
   }

@@ -5,6 +5,8 @@ import 'package:retrofit/retrofit.dart';
 
 import '../core_network.dart';
 import 'apis.dart';
+import 'entities/medical_record_proposal.dart';
+import 'entities/medical_record_proposal_request.dart';
 import 'entities/medical_record_travel_group.dart';
 import 'entities/medical_record_travel_group_request.dart';
 
@@ -486,6 +488,37 @@ abstract class ApiService {
   @POST(Apis.POST_MEDICAL_RECORD_TRAVEL_GROUP)
   Future<MedicalRecordTravelGroup> postMedicalRecordTravelGroup(
     @Body() MedicalRecordTravelGroupRequest medicalRecordTravelGroupRequest,
+  );
+
+  //GET_MEDICAL_RECORD_Proposal
+
+  @GET(Apis.MEDICAL_RECORD_PROPOSAL)
+  Future<List<MedicalRecordProposal>> getAllMedicalRecordProposals();
+
+  @GET('${Apis.MEDICAL_RECORD_PROPOSAL_BY_MEDICAL_RECORD}/{medicalRecordId}')
+  Future<List<MedicalRecordProposal>> getMedicalRecordProposalsByMedicalRecord(
+    @Path('medicalRecordId') String medicalRecordId,
+  );
+
+  @GET('${Apis.MEDICAL_RECORD_PROPOSAL}/{id}')
+  Future<List<MedicalRecordProposal>> getOneMedicalRecordProposal(
+    @Path('id') String id,
+  );
+
+  @POST(Apis.MEDICAL_RECORD_PROPOSAL)
+  Future<MedicalRecordProposal> postMedicalRecordProposal(
+    @Body() MedicalRecordProposalRequest medicalRecordProposalRequest,
+  );
+
+  @PUT('${Apis.MEDICAL_RECORD_PROPOSAL}/{id}')
+  Future<MedicalRecordProposal> putMedicalRecordProposal(
+    @Path('id') String id,
+    @Body() MedicalRecordProposalRequest medicalRecordProposalRequest,
+  );
+
+  @DELETE('${Apis.MEDICAL_RECORD_PROPOSAL}/{id}')
+  Future<void> deleteMedicalRecordProposal(
+    @Path('id') String id,
   );
 }
 

@@ -863,7 +863,7 @@ class _EstimateScreenState extends State<EstimateScreen> {
                         children: [
                           Expanded(
                             child: ReactiveTextField(
-                              formControlName: 'search_hospital_name',
+                              formControlName: 'search_hospitalName',
                               decoration: InputDecoration(
                                 suffixIcon: Icon(
                                   Icons.search,
@@ -1319,7 +1319,7 @@ class _EstimateScreenState extends State<EstimateScreen> {
                         children: [
                           Expanded(
                             child: ReactiveTextField(
-                              formControlName: 'search_hospital_name',
+                              formControlName: 'search_hospitalName',
                               decoration: InputDecoration(
                                 suffixIcon: Icon(
                                   Icons.search,

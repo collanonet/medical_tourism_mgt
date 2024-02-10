@@ -970,7 +970,7 @@ class _StatementScreenState extends State<StatementScreen> {
                         children: [
                           Expanded(
                             child: ReactiveTextField(
-                              formControlName: 'search_hospital_name',
+                              formControlName: 'search_hospitalName',
                               decoration: InputDecoration(
                                 suffixIcon: Icon(
                                   Icons.search,
@@ -1426,7 +1426,7 @@ class _StatementScreenState extends State<StatementScreen> {
                         children: [
                           Expanded(
                             child: ReactiveTextField(
-                              formControlName: 'search_hospital_name',
+                              formControlName: 'search_hospitalName',
                               decoration: InputDecoration(
                                 suffixIcon: Icon(
                                   Icons.search,

@@ -37,7 +37,7 @@ abstract class PatientRepository {
     String? medicalDayto,
     String? returnDatefrom,
     String? returnDateto,
-});
+  });
 
   Future<Patient> patient(
     String id,
@@ -178,25 +178,25 @@ abstract class PatientRepository {
   //GET_MEDICAL_RECORD_REFERRERS
 
   Future<List<MedicalRecordReferrer>> medicalRecordReferrers(
-      String medicalRecordId,
-      );
+    String medicalRecordId,
+  );
 
   Future<List<MedicalRecordReferrer>> medicalRecordReferrersByMedicalRecord(
-      String medicalRecordId,
-      );
+    String medicalRecordId,
+  );
 
   Future<MedicalRecordReferrer> postMedicalRecordReferrer(
-      MedicalRecordReferrerRequest medicalRecordAgent,
-      );
+    MedicalRecordReferrerRequest medicalRecordAgent,
+  );
 
   Future<MedicalRecordReferrer> putMedicalRecordReferrer(
-      String id,
-      MedicalRecordReferrerRequest medicalRecordAgent,
-      );
+    String id,
+    MedicalRecordReferrerRequest medicalRecordAgent,
+  );
 
   Future<void> deleteMedicalRecordReferrer(
-      String id,
-      );
+    String id,
+  );
 
   // GET_MEDICAL_RECORD_BUDGETS
 
@@ -362,5 +362,28 @@ abstract class PatientRepository {
 
   Future<MedicalRecordTravelGroup> postMedicalRecordTravelGroup(
     MedicalRecordTravelGroupRequest medicalRecordTravelGroup,
+  );
+
+  Future<List<MedicalRecordProposal>> getAllMedicalRecordProposals();
+
+  Future<List<MedicalRecordProposal>> getMedicalRecordProposalsByMedicalRecord(
+    String medicalRecord,
+  );
+
+  Future<List<MedicalRecordProposal>> getOneMedicalRecordProposal(
+    String id,
+  );
+
+  Future<MedicalRecordProposal> postMedicalRecordProposal(
+    MedicalRecordProposalRequest medicalRecordProposal,
+  );
+
+  Future<MedicalRecordProposal> putMedicalRecordProposal(
+    String id,
+    MedicalRecordProposalRequest medicalRecordProposal,
+  );
+
+  Future<void> deleteMedicalRecordProposal(
+    String id,
   );
 }

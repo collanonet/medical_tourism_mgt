@@ -261,7 +261,7 @@ class _BillingScreenState extends State<BillingScreen> {
                                         Expanded(
                                           flex: 2,
                                           child: ReactiveTextField(
-                                            formControlName: 'hospital_name',
+                                            formControlName: 'hospitalName',
                                             decoration: InputDecoration(
                                               label: Text(
                                                 '病院名',

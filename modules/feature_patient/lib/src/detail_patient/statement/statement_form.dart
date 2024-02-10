@@ -197,10 +197,10 @@ FormGroup statementForm() => FormGroup({
       ]),
       // search treatment_cost
       'search_treatment_cost': FormGroup({
-        'search_hospital_name': FormControl<String>(value: '免疫活性化血管内治療　1回コース'),
+        'search_hospitalName': FormControl<String>(value: '免疫活性化血管内治療　1回コース'),
       }),
       'search_service_fee': FormGroup({
-        'search_hospital_name': FormControl<String>(value: '基本メニュー'),
+        'search_hospitalName': FormControl<String>(value: '基本メニュー'),
       }),
       'estimated_treatment_cost_treatment_cost': FormControl<bool>(),
       'memo': FormControl<String>(value: '''
