@@ -18,6 +18,13 @@ class PatientResponseTreatmentModel {
       medicalRecordPatientResponseTreatment =
       ValueNotifier(const AsyncData<MedicalRecordPatientResponseTreatment>());
 
+
+  ValueNotifier<AsyncData<MedicalRecordPatientResponseTreatment>>
+  createMedicalRecordPatientResponseTreatment =
+  ValueNotifier(const AsyncData<MedicalRecordPatientResponseTreatment>());
+
+
+
   ValueNotifier<AsyncData<MedicalRecord>> medicalRecord =
       ValueNotifier<AsyncData<MedicalRecord>>(const AsyncData());
 
@@ -31,8 +38,7 @@ class PatientResponseTreatmentModel {
       try {
         medicalRecord.value = const AsyncData(loading: true);
 
-        var result =
-            await patientRepository.medicalRecordsByPatient(patientId);
+        var result = await patientRepository.medicalRecordsByPatient(patientId);
         logger.d('result: $result');
         if (result.isNotEmpty) {
           medicalRecord.value = AsyncData(data: result.first);
@@ -227,10 +233,14 @@ class PatientResponseTreatmentModel {
               request.copyWith(drugDetails: drugDetails));
       medicalRecordPatientResponseTreatment.value =
           medicalRecordPatientResponseTreatment.value.copyWith(data: response);
+      createMedicalRecordPatientResponseTreatment.value =
+          createMedicalRecordPatientResponseTreatment.value.copyWith(data: response);
     } catch (e) {
       logger.e(e);
       medicalRecordPatientResponseTreatment.value =
           medicalRecordPatientResponseTreatment.value.copyWith(error: e);
+      createMedicalRecordPatientResponseTreatment.value =
+          createMedicalRecordPatientResponseTreatment.value.copyWith(error: e);
     } finally {
       medicalRecordPatientResponseTreatment.value =
           medicalRecordPatientResponseTreatment.value.copyWith(loading: false);

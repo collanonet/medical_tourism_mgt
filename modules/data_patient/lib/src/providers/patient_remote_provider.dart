@@ -486,14 +486,33 @@ class PatientRemoteProvider {
   ) async =>
       await apiService.deleteMedicalRecordProposal(id);
 
-  Future<MedicalRecordPatientResponseTreatment> getMedicalRecordPatientResponseTreatment({
+  Future<MedicalRecordPatientResponseTreatment>
+      getMedicalRecordPatientResponseTreatment({
     required String medicalRecord,
   }) async =>
-      await apiService.getMedicalRecordPatientResponseTreatment(medicalRecord: medicalRecord);
+          await apiService.getMedicalRecordPatientResponseTreatment(
+              medicalRecord: medicalRecord);
 
-
-  Future<MedicalRecordPatientResponseTreatment> postMedicalRecordPatientResponseTreatment(
-    MedicalRecordPatientResponseTreatmentRequest medicalRecordPatientResponseTreatment,
+  Future<MedicalRecordPatientResponseTreatment>
+      postMedicalRecordPatientResponseTreatment(
+    MedicalRecordPatientResponseTreatmentRequest
+        medicalRecordPatientResponseTreatment,
   ) async =>
-      await apiService.postMedicalRecordPatientResponseTreatment(medicalRecordPatientResponseTreatment);
+          await apiService.postMedicalRecordPatientResponseTreatment(
+              medicalRecordPatientResponseTreatment);
+
+  Future<MedicalRecordPatientResponseMedicalCheckup>
+      getMedicalRecordPatientResponseMedicalCheckup({
+    required String medicalRecord,
+  }) async =>
+          await apiService.getMedicalRecordPatientResponseMedicalCheckup(
+              medicalRecord: medicalRecord);
+
+  Future<MedicalRecordPatientResponseMedicalCheckup>
+      postMedicalRecordPatientResponseMedicalCheckup(
+    MedicalRecordPatientResponseMedicalCheckupRequest
+        medicalRecordPatientResponseMedicalCheckup,
+  ) async =>
+          await apiService.postMedicalRecordPatientResponseMedicalCheckup(
+              medicalRecordPatientResponseMedicalCheckup);
 }

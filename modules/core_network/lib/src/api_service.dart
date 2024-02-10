@@ -532,6 +532,16 @@ abstract class ApiService {
   Future<MedicalRecordPatientResponseTreatment> postMedicalRecordPatientResponseTreatment(
     @Body() MedicalRecordPatientResponseTreatmentRequest medicalRecordPatientResponseTreatmentRequest,
   );
+
+  @GET('${Apis.MEDICAL_RECORD_PATIENT_RESPONSE_MEDICAL_CHECKUP}/{medicalRecord}')
+  Future<MedicalRecordPatientResponseMedicalCheckup> getMedicalRecordPatientResponseMedicalCheckup({
+    @Path('medicalRecord') String? medicalRecord,
+  });
+
+  @POST(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_MEDICAL_CHECKUP)
+  Future<MedicalRecordPatientResponseMedicalCheckup> postMedicalRecordPatientResponseMedicalCheckup(
+    @Body() MedicalRecordPatientResponseMedicalCheckupRequest medicalRecordPatientResponseMedicalCheckupRequest,
+  );
 }
 
 extension ApiServiceExts on ApiService {

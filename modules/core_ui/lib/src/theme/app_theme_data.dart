@@ -292,6 +292,14 @@ class AppThemeData {
           borderRadius: BorderRadius.circular(6.0),
           borderSide: const BorderSide(color: Color(0xffCDD6DD)),
         ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6.0),
+          borderSide: const BorderSide(color: Color(0xffCDD6DD)),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6.0),
+          borderSide: const BorderSide(color: Color(0xffCDD6DD)),
+        ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6.0),
           borderSide: const BorderSide(color: Color(0xffCDD6DD)),

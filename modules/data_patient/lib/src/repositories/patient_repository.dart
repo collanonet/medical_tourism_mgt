@@ -393,4 +393,12 @@ abstract class PatientRepository {
   Future<MedicalRecordPatientResponseTreatment> postMedicalRecordPatientResponseTreatment(
     MedicalRecordPatientResponseTreatmentRequest medicalRecordPatientResponseTreatment,
   );
+
+  Future<MedicalRecordPatientResponseMedicalCheckup> getMedicalRecordPatientResponseMedicalCheckup({
+    required String medicalRecord,
+  });
+
+  Future<MedicalRecordPatientResponseMedicalCheckup> postMedicalRecordPatientResponseMedicalCheckup(
+    MedicalRecordPatientResponseMedicalCheckupRequest medicalRecordPatientResponseMedicalCheckup,
+  );
 }

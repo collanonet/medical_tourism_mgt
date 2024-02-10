@@ -1,6 +1,7 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/async.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -994,14 +995,42 @@ class _PatientResponseTreatmentScreenState
                       ),
                     ),
                   ),
-                  ElevatedButton(
-                    onPressed: () {
-                      context
+                  ValueListenableListener(
+                    valueListenable: context
+                        .read<PatientResponseTreatmentModel>()
+                        .createMedicalRecordPatientResponseTreatment,
+                    onListen: () {
+                      final value = context
                           .read<PatientResponseTreatmentModel>()
-                          .createUpdateMedicalRecordPatientResponseTreatment(
-                              (ReactiveForm.of(context) as FormGroup));
+                          .createMedicalRecordPatientResponseTreatment
+                          .value;
+
+                      if (value.hasData) {
+                        snackBarWidget(
+                          message: '正常に保存されました',
+                          prefixIcon: const Icon(Icons.check_circle,
+                              color: Colors.white),
+                        );
+                      }
+
+                      if (value.hasError) {
+                        snackBarWidget(
+                          message: '保存できませんでした。 もう一度試してください。',
+                          backgroundColor: Colors.red,
+                          prefixIcon:
+                              const Icon(Icons.error, color: Colors.white),
+                        );
+                      }
                     },
-                    child: Text('保存'),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        context
+                            .read<PatientResponseTreatmentModel>()
+                            .createUpdateMedicalRecordPatientResponseTreatment(
+                                (ReactiveForm.of(context) as FormGroup));
+                      },
+                      child: Text('保存する'),
+                    ),
                   )
                 ],
               ),
