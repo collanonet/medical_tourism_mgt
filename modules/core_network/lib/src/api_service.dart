@@ -5,6 +5,8 @@ import 'package:retrofit/retrofit.dart';
 
 import '../core_network.dart';
 import 'apis.dart';
+import 'entities/medical_record_patient_response_treatment.dart';
+import 'entities/medical_record_patient_response_treatment_request.dart';
 import 'entities/medical_record_proposal.dart';
 import 'entities/medical_record_proposal_request.dart';
 import 'entities/medical_record_travel_group.dart';
@@ -519,6 +521,16 @@ abstract class ApiService {
   @DELETE('${Apis.MEDICAL_RECORD_PROPOSAL}/{id}')
   Future<void> deleteMedicalRecordProposal(
     @Path('id') String id,
+  );
+
+  @GET('${Apis.MEDICAL_RECORD_PATIENT_RESPONSE_TREATMENT}/{medicalRecord}')
+  Future<MedicalRecordPatientResponseTreatment> getMedicalRecordPatientResponseTreatment({
+    @Path('medicalRecord') String? medicalRecord,
+  });
+
+  @POST(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_TREATMENT)
+  Future<MedicalRecordPatientResponseTreatment> postMedicalRecordPatientResponseTreatment(
+    @Body() MedicalRecordPatientResponseTreatmentRequest medicalRecordPatientResponseTreatmentRequest,
   );
 }
 

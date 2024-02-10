@@ -53,12 +53,11 @@ class AuthModel extends ChangeNotifier {
     try {
       var result = await authRepository.login(email, password);
       _loginData = AsyncData(data: result);
+      syncAuthState();
     } catch (error) {
       logger.d(error);
       _loginData = AsyncData(error: error);
-    } finally {
       notifyListeners();
-      syncAuthState();
     }
   }
 

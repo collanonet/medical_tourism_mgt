@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class PatientResponseMedicalCheckupModel with ChangeNotifier {
+class PatientResponseMedicalCheckupModel {
   PatientResponseMedicalCheckupModel({
     required this.patientRepository,
   });

@@ -9,11 +9,12 @@ import 'patient_response_other_model.dart';
 import 'patient_response_other_screen.dart';
 
 class PatientResponseOtherPage extends StatelessWidget {
-  const PatientResponseOtherPage({super.key});
+  const PatientResponseOtherPage({super.key, this.patientId});
+  final String? patientId;
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return Provider(
       create: (context) => GetIt.I<PatientResponseOtherModel>(),
       child: ReactiveFormConfig(
         validationMessages: <String, ValidationMessageFunction>{

@@ -21,3 +21,5 @@ export 'medical_record_travel_group.dart';
 export 'medical_record_travel_group_request.dart';
 export 'medical_record_proposal_request.dart';
 export 'medical_record_proposal.dart';
+export 'medical_record_patient_response_treatment.dart';
+export 'medical_record_patient_response_treatment_request.dart';

@@ -386,4 +386,11 @@ abstract class PatientRepository {
   Future<void> deleteMedicalRecordProposal(
     String id,
   );
+  Future<MedicalRecordPatientResponseTreatment> getMedicalRecordPatientResponseTreatment({
+    required String medicalRecord,
+  });
+
+  Future<MedicalRecordPatientResponseTreatment> postMedicalRecordPatientResponseTreatment(
+    MedicalRecordPatientResponseTreatmentRequest medicalRecordPatientResponseTreatment,
+  );
 }

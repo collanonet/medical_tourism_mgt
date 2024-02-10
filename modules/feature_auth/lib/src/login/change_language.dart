@@ -43,74 +43,84 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
               runAlignment: WrapAlignment.center,
               alignment: WrapAlignment.center,
               children: [
-                TextButton(
-                  onPressed: () {
-                    model.setLocale(const Locale('ja', 'JP'));
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      model.locale == const Locale('ja', 'JP')
-                          ? const Icon(Icons.check_circle_rounded)
-                          : const Icon(Icons.circle_outlined),
-                      const Text('日本語'),
-                    ],
+                IntrinsicWidth(
+                  child: TextButton(
+                    onPressed: () {
+                      model.setLocale(const Locale('ja', 'JP'));
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        model.locale == const Locale('ja', 'JP')
+                            ? const Icon(Icons.check_circle_rounded)
+                            : const Icon(Icons.circle_outlined),
+                        const Text('日本語'),
+                      ],
+                    ),
                   ),
                 ),
-                TextButton(
-                  onPressed: () {
-                    model.setLocale(const Locale('zh', 'CN'));
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      model.locale == const Locale('zh', 'CN')
-                          ? const Icon(Icons.check_circle_rounded)
-                          : const Icon(Icons.circle_outlined),
-                      const Text('简体中文'),
-                    ],
+                IntrinsicWidth(
+                  child: TextButton(
+                    onPressed: () {
+                      model.setLocale(const Locale('zh', 'CN'));
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        model.locale == const Locale('zh', 'CN')
+                            ? const Icon(Icons.check_circle_rounded)
+                            : const Icon(Icons.circle_outlined),
+                        const Text('简体中文'),
+                      ],
+                    ),
                   ),
                 ),
-                TextButton(
-                  onPressed: () {
-                    model.setLocale(const Locale('zh', 'TW'));
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      model.locale == const Locale('zh', 'TW')
-                          ? const Icon(Icons.check_circle_rounded)
-                          : const Icon(Icons.circle_outlined),
-                      const Text('繁体中文'),
-                    ],
+                IntrinsicWidth(
+                  child: TextButton(
+                    onPressed: () {
+                      model.setLocale(const Locale('zh', 'TW'));
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        model.locale == const Locale('zh', 'TW')
+                            ? const Icon(Icons.check_circle_rounded)
+                            : const Icon(Icons.circle_outlined),
+                        const Text('繁体中文'),
+                      ],
+                    ),
                   ),
                 ),
-                TextButton(
-                  onPressed: () {
-                    model.setLocale(const Locale('vi', 'VN'));
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      model.locale == const Locale('vi', 'VN')
-                          ? const Icon(Icons.check_circle_rounded)
-                          : const Icon(Icons.circle_outlined),
-                      const Text('Tiếng Việt'),
-                    ],
+                IntrinsicWidth(
+                  child: TextButton(
+                    onPressed: () {
+                      model.setLocale(const Locale('vi', 'VN'));
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        model.locale == const Locale('vi', 'VN')
+                            ? const Icon(Icons.check_circle_rounded)
+                            : const Icon(Icons.circle_outlined),
+                        const Text('Tiếng Việt'),
+                      ],
+                    ),
                   ),
                 ),
-                TextButton(
-                  onPressed: () {
-                    model.setLocale(const Locale('en', 'US'));
-                  },
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      model.locale == const Locale('en', 'US')
-                          ? const Icon(Icons.check_circle_rounded)
-                          : const Icon(Icons.circle_outlined),
-                      const Text('English'),
-                    ],
+                IntrinsicWidth(
+                  child: TextButton(
+                    onPressed: () {
+                      model.setLocale(const Locale('en', 'US'));
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        model.locale == const Locale('en', 'US')
+                            ? const Icon(Icons.check_circle_rounded)
+                            : const Icon(Icons.circle_outlined),
+                        const Text('English'),
+                      ],
+                    ),
                   ),
                 ),
               ],

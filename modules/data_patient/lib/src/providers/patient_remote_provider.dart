@@ -485,4 +485,15 @@ class PatientRemoteProvider {
     String id,
   ) async =>
       await apiService.deleteMedicalRecordProposal(id);
+
+  Future<MedicalRecordPatientResponseTreatment> getMedicalRecordPatientResponseTreatment({
+    required String medicalRecord,
+  }) async =>
+      await apiService.getMedicalRecordPatientResponseTreatment(medicalRecord: medicalRecord);
+
+
+  Future<MedicalRecordPatientResponseTreatment> postMedicalRecordPatientResponseTreatment(
+    MedicalRecordPatientResponseTreatmentRequest medicalRecordPatientResponseTreatment,
+  ) async =>
+      await apiService.postMedicalRecordPatientResponseTreatment(medicalRecordPatientResponseTreatment);
 }

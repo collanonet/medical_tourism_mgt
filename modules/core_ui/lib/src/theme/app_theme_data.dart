@@ -354,7 +354,6 @@ class AppThemeData {
           ),
           borderRadius: BorderRadius.circular(4),
         ),
-
       ),
       radioTheme: RadioThemeData(
         fillColor: MaterialStateProperty.resolveWith(

@@ -28,6 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
         child: SingleChildScrollView(
           child: Consumer<AuthModel>(
             builder: (context, model, child) {
+
               return Center(
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.4,
@@ -150,7 +151,11 @@ class _LoginScreenState extends State<LoginScreen> {
       model.logIn(
         formGroup.control('email').value,
         formGroup.control('password').value,
-      );
+      ).catchError((error) {
+        snackBarWidget(
+          message: error.toString(),
+        );
+      });
     } else {
       snackBarWidget(
         message: context.l10n.mgsRequireInputLogin,

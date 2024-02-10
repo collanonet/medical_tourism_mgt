@@ -1,6 +1,7 @@
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
 import 'tab/patient_response_medical_checkup_page.dart';
@@ -8,24 +9,13 @@ import 'tab/patient_response_other_page.dart';
 import 'tab/patient_response_treatment_page.dart';
 
 class PatientResponseScreen extends StatefulWidget {
-  const PatientResponseScreen({super.key});
-
+  const PatientResponseScreen({super.key, this.patientId});
+  final String? patientId;
   @override
   State<PatientResponseScreen> createState() => _PatientResponseScreenState();
 }
 
 class _PatientResponseScreenState extends State<PatientResponseScreen> {
-  List<String> menu = [
-    '治療', // TODO: l10n 対応 (治療) (treatment)
-    '健診', // TODO: l10n 対応 (健診) (Medical checkup)
-    'その他', // TODO: l10n 対応 (その他) (other)
-  ];
-
-  List<Widget> pages = const [
-    PatientResponseTreatmentPage(),
-    PatientResponseMedicalCheckupPage(),
-    PatientResponseOtherPage(),
-  ];
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
   @override
@@ -44,7 +34,11 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
                 children: [
                   TabBarWidget(
                     selectedIndex: value,
-                    menu: menu,
+                    menu: [
+                      '治療', // TODO: l10n 対応 (治療) (treatment)
+                      '健診', // TODO: l10n 対応 (健診) (Medical checkup)
+                      'その他', // TODO: l10n 対応 (その他) (other)
+                    ],
                     onPressed: (index) {
                       _selectedIndex.value = index;
                     },
@@ -70,7 +64,12 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
                       context.appTheme.spacing.borderRadiusMedium),
                   color: Colors.white,
                 ),
-                child: pages[index],
+                child: [
+                  PatientResponseTreatmentPage(patientId: widget.patientId),
+                  PatientResponseMedicalCheckupPage(
+                      patientId: widget.patientId),
+                  PatientResponseOtherPage(patientId: widget.patientId),
+                ][index],
               ),
             );
           },

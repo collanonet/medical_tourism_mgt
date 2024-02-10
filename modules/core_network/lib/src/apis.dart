@@ -95,6 +95,8 @@ class Apis {
       '/hospital-proposal/medical-record-id';
   static const MEDICAL_RECORD_PROPOSAL = '/hospital-proposal';
 
+  static const MEDICAL_RECORD_PATIENT_RESPONSE_TREATMENT = '/medical-record-patient-response-treatment';
+
   static const GET_MEDICAL_RECORD_INTERPRETERS = '/medical-record-interpreters';
   static const GET_MEDICAL_RECORD_INTERPRETERS_BY_MEDICAL_RECORD =
       '/medical-record-interpreters/medical-record-id';
