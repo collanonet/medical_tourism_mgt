@@ -29,7 +29,7 @@ class TabBarWidget extends StatelessWidget {
               package: 'core_ui',
             ),
           ),
-          isLabelVisible: index == 5,
+          isLabelVisible: index == 20,
           child: index == selectedIndex
               ? ElevatedButton(
                   style: ElevatedButton.styleFrom(

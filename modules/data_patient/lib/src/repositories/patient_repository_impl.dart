@@ -721,4 +721,16 @@ class PatientRepositoryIml extends PatientRepository {
     return remote.postMedicalRecordPatientResponseOther(
         medicalRecordPatientResponseOther);
   }
+
+  @override
+  Future<MedicalRecordSummary> getMedicalRecordSummary(
+      {required String medicalRecord}) {
+    return remote.getMedicalRecordSummary(medicalRecord: medicalRecord);
+  }
+
+  @override
+  Future<MedicalRecordSummary> postMedicalRecordSummary(
+      MedicalRecordSummaryRequest medicalRecordSummary) {
+    return remote.postMedicalRecordSummary(medicalRecordSummary);
+  }
 }

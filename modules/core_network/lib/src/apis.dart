@@ -103,6 +103,9 @@ class Apis {
   static const MEDICAL_RECORD_PATIENT_RESPONSE_OTHER =
       '/medical-record-patient-response-other';
 
+  static const MEDICAL_RECORD_SUMMARY = '/medical-record-summary';
+  static const MEDICAL_RECORD_SUMMARY_LIST = '/medical-record-summary-list';
+
   static const GET_MEDICAL_RECORD_INTERPRETERS = '/medical-record-interpreters';
   static const GET_MEDICAL_RECORD_INTERPRETERS_BY_MEDICAL_RECORD =
       '/medical-record-interpreters/medical-record-id';

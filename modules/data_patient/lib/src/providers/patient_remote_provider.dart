@@ -529,4 +529,14 @@ class PatientRemoteProvider {
   ) async =>
           await apiService.postMedicalRecordPatientResponseOther(
               medicalRecordPatientResponseOther);
+
+  Future<MedicalRecordSummary> getMedicalRecordSummary({
+    required String medicalRecord,
+  }) async =>
+      await apiService.getMedicalRecordSummary(medicalRecord: medicalRecord);
+
+  Future<MedicalRecordSummary> postMedicalRecordSummary(
+    MedicalRecordSummaryRequest medicalRecordSummary,
+  ) async =>
+      await apiService.postMedicalRecordSummary(medicalRecordSummary);
 }

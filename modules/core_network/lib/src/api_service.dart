@@ -565,6 +565,19 @@ abstract class ApiService {
     MedicalRecordPatientResponseOtherRequest
         medicalRecordPatientResponseOtherRequest,
   );
+
+  @GET('${Apis.MEDICAL_RECORD_SUMMARY}/{medicalRecord}')
+  Future<MedicalRecordSummary> getMedicalRecordSummary({
+    @Path('medicalRecord') String? medicalRecord,
+  });
+
+  @POST(Apis.MEDICAL_RECORD_SUMMARY)
+  Future<MedicalRecordSummary> postMedicalRecordSummary(
+    @Body()
+    MedicalRecordSummaryRequest
+        medicalRecordNormalSummaryRequest,
+  );
+
 }
 
 extension ApiServiceExts on ApiService {

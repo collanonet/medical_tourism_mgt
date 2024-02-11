@@ -27,3 +27,5 @@ export 'medical_record_patient_response_medical_checkup.dart';
 export 'medical_record_patient_response_medical_checkup_request.dart';
 export 'medical_record_patient_response_other.dart';
 export 'medical_record_patient_response_other_request.dart';
+export 'medical_record_summary.dart';
+export 'medical_record_summary_request.dart';

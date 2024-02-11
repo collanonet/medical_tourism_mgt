@@ -5,18 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class MedicalSummaryModel with ChangeNotifier {
+class MedicalSummaryModel {
   MedicalSummaryModel({
     required this.patientRepository,
   });
 
   final PatientRepository patientRepository;
-
-  late Patient _patient;
-
-  Patient get patient => _patient;
-
-  Future<void> initialData({Patient? patient, String? id}) async {
-    notifyListeners();
-  }
 }
