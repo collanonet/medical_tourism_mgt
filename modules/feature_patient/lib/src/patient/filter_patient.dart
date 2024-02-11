@@ -1,6 +1,7 @@
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -15,6 +16,7 @@ class PatientFilter extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatter = InputFormatter();
     return Consumer<PatientModel>(
       builder: (context, model, child) {
         return ReactiveFormConfig(
@@ -36,7 +38,7 @@ class PatientFilter extends StatelessWidget {
                       context.l10n.labelPatientSearch,
                       style: context.textTheme.titleMedium,
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 8),
                     Row(
                       children: [
                         Expanded(
@@ -50,7 +52,7 @@ class PatientFilter extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 8),
                         Expanded(
                           flex: 4,
                           child: ReactiveTextField(
@@ -62,7 +64,7 @@ class PatientFilter extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 8),
                         Expanded(
                           flex: 4,
                           child: ReactiveTextField(
@@ -76,7 +78,7 @@ class PatientFilter extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 8),
                     Row(
                       children: [
                         Expanded(
@@ -124,7 +126,7 @@ class PatientFilter extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 8),
                         Expanded(
                           flex: 4,
                           child: ReactiveTextField(
@@ -136,42 +138,63 @@ class PatientFilter extends StatelessWidget {
                             ),
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 8),
                         const Spacer(flex: 4)
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 8),
                     Row(
                       children: [
                         Expanded(
                           flex: 4,
-                          child: ReactiveDatePicker<DateTime>(
+                          child: ReactiveTextField<DateTime>(
                             formControlName: 'dateOfEntryfrom',
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(3000),
-                            builder: (BuildContext context,
-                                ReactiveDatePickerDelegate<dynamic> picker,
-                                Widget? child) {
-                              return ReactiveTextField<DateTime>(
-                                formControlName: 'dateOfEntryfrom',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    context.l10n.labelEntryDateFrom,
-                                  ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                ),
-                              );
-                            },
+                            valueAccessor: DateTimeValueAccessor(
+                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                            ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
+                            decoration: InputDecoration(
+                              label: Text(
+                                context.l10n.labelEntryDateFrom,
+                              ),
+                              suffixIcon: const Icon(
+                                CupertinoIcons.calendar,
+                                color: Colors.grey,
+                              ),
+                            ),
                           ),
                         ),
+                        // Expanded(
+                        //   flex: 4,
+                        //   child: ReactiveDatePicker<DateTime>(
+                        //     formControlName: 'dateOfEntryfrom',
+                        //     firstDate: DateTime(2000),
+                        //     lastDate: DateTime(3000),
+                        //     builder: (BuildContext context,
+                        //         ReactiveDatePickerDelegate<dynamic> picker,
+                        //         Widget? child) {
+                        //       return ReactiveTextField<DateTime>(
+                        //         formControlName: 'dateOfEntryfrom',
+                        //         readOnly: true,
+                        //         onTap: (value) => picker.showPicker(),
+                        //         valueAccessor: DateTimeValueAccessor(
+                        //           dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                        //         ),
+                        //         decoration: InputDecoration(
+                        //           label: Text(
+                        //             context.l10n.labelEntryDateFrom,
+                        //           ),
+                        //           suffixIcon: const Icon(
+                        //             CupertinoIcons.calendar,
+                        //             color: Colors.grey,
+                        //           ),
+                        //         ),
+                        //       );
+                        //     },
+                        //   ),
+                        // ),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 4),
                           child: Text('〜'),
@@ -205,7 +228,7 @@ class PatientFilter extends StatelessWidget {
                             },
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 8),
                         Expanded(
                           flex: 4,
                           child: ReactiveDatePicker<DateTime>(
@@ -268,7 +291,7 @@ class PatientFilter extends StatelessWidget {
                             },
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 8),
                         Expanded(
                           flex: 4,
                           child: ReactiveDatePicker<DateTime>(
@@ -333,7 +356,7 @@ class PatientFilter extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 16),
+                    const SizedBox(height: 8),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
@@ -345,7 +368,7 @@ class PatientFilter extends StatelessWidget {
                             context.l10n.actionClear,
                           ),
                         ),
-                        const SizedBox(width: 16),
+                        const SizedBox(width: 8),
                         ElevatedButton(
                           onPressed: () {
                             model.patients(form: formGroup);

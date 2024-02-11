@@ -1,5 +1,5 @@
 export './src/async_data.dart';
-export './src/bank_account_formatter.dart';
+export './src/input_formatter.dart';
 export './src/crop_image.dart';
 export './src/currency_formatter.dart';
 export './src/error_resolver.dart';
