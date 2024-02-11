@@ -18,6 +18,8 @@ class _DetailPatientWebReservationScreenState
     extends State<DetailPatientWebReservationScreen> {
   @override
   Widget build(BuildContext context) {
+    final formArray = (ReactiveForm.of(context) as FormGroup)
+        .control('candidateDate') as FormArray;
     return SingleChildScrollView(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,14 +37,14 @@ class _DetailPatientWebReservationScreenState
             children: [
               Expanded(
                 child: ReactiveDatePicker<DateTime>(
-                  formControlName: '1st_choice',
+                  formControlName: 'preferredDate1',
                   firstDate: DateTime(2000),
                   lastDate: DateTime(3000),
                   builder: (BuildContext context,
                       ReactiveDatePickerDelegate<dynamic> picker,
                       Widget? child) {
                     return ReactiveTextField<DateTime>(
-                      formControlName: '1st_choice',
+                      formControlName: 'preferredDate1',
                       readOnly: true,
                       onTap: (value) => picker.showPicker(),
                       valueAccessor: DateTimeValueAccessor(
@@ -66,14 +68,14 @@ class _DetailPatientWebReservationScreenState
               ),
               Expanded(
                 child: ReactiveDatePicker<DateTime>(
-                  formControlName: '2nd_choice',
+                  formControlName: 'preferredDate2',
                   firstDate: DateTime(2000),
                   lastDate: DateTime(3000),
                   builder: (BuildContext context,
                       ReactiveDatePickerDelegate<dynamic> picker,
                       Widget? child) {
                     return ReactiveTextField<DateTime>(
-                      formControlName: '2nd_choice',
+                      formControlName: 'preferredDate2',
                       readOnly: true,
                       onTap: (value) => picker.showPicker(),
                       valueAccessor: DateTimeValueAccessor(
@@ -97,14 +99,14 @@ class _DetailPatientWebReservationScreenState
               ),
               Expanded(
                 child: ReactiveDatePicker<DateTime>(
-                  formControlName: '3rd_choice',
+                  formControlName: 'preferredDate3',
                   firstDate: DateTime(2000),
                   lastDate: DateTime(3000),
                   builder: (BuildContext context,
                       ReactiveDatePickerDelegate<dynamic> picker,
                       Widget? child) {
                     return ReactiveTextField<DateTime>(
-                      formControlName: '3rd_choice',
+                      formControlName: 'preferredDate3',
                       readOnly: true,
                       onTap: (value) => picker.showPicker(),
                       valueAccessor: DateTimeValueAccessor(
@@ -130,23 +132,14 @@ class _DetailPatientWebReservationScreenState
           ),
           Row(
             children: [
-              Checkbox(
-                  activeColor: Theme.of(context).primaryColor,
-                  checkColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(4),
-                    side: BorderSide(
-                      color: Colors.grey,
-                    ),
-                  ),
-                  value: true,
-                  onChanged: null),
-              SizedBox(
-                width: context.appTheme.spacing.marginMedium,
-              ),
-              Text(
-                '希望日なし',
-                style: context.textTheme.titleMedium,
+              Expanded(
+                child: ReactiveCheckboxListTile(
+                  contentPadding: EdgeInsets.zero,
+                  dense: true,
+                  controlAffinity: ListTileControlAffinity.leading,
+                  formControlName: 'noDesiredDate',
+                  title: Text('希望日なし'),
+                ),
               ),
             ],
           ),
@@ -179,7 +172,7 @@ class _DetailPatientWebReservationScreenState
             children: [
               Expanded(
                 child: ReactiveTextField(
-                  formControlName: 'Medical_institution_name',
+                  formControlName: 'medicalInstitutionName',
                   decoration: InputDecoration(
                     label: Text('医療機関名'),
                     suffixIcon: Icon(
@@ -194,7 +187,7 @@ class _DetailPatientWebReservationScreenState
               ),
               Expanded(
                 child: ReactiveTextField(
-                  formControlName: 'Doctor_name',
+                  formControlName: 'doctorName',
                   decoration: InputDecoration(
                     label: Text('医師名'),
                     suffixIcon: Icon(
@@ -309,7 +302,7 @@ class _DetailPatientWebReservationScreenState
                   children: [
                     Expanded(
                       child: ReactiveTextField(
-                        formControlName: 'shift_1',
+                        formControlName: 'shift1',
                       ),
                     ),
                     SizedBox(
@@ -381,7 +374,7 @@ class _DetailPatientWebReservationScreenState
                   children: [
                     Expanded(
                       child: ReactiveTextField(
-                        formControlName: 'shift_2',
+                        formControlName: 'shift2',
                       ),
                     ),
                     SizedBox(
@@ -470,7 +463,7 @@ class _DetailPatientWebReservationScreenState
               children: [
                 Text('候補日'),
                 ReactiveFormArray(
-                  formArrayName: 'Candidate_Date',
+                  formArrayName: 'candidateDate',
                   builder: (context, formArray, child) {
                     final rows = formArray.controls
                         .map((control) => control as FormGroup)
@@ -481,7 +474,7 @@ class _DetailPatientWebReservationScreenState
                               children: [
                                 Expanded(
                                   child: ReactiveDatePicker<DateTime>(
-                                    formControlName: 'First_choice',
+                                    formControlName: 'preferredDate',
                                     firstDate: DateTime(1900),
                                     lastDate: DateTime.now(),
                                     builder: (BuildContext context,
@@ -489,7 +482,7 @@ class _DetailPatientWebReservationScreenState
                                             picker,
                                         Widget? child) {
                                       return ReactiveTextField<DateTime>(
-                                        formControlName: 'First_choice',
+                                        formControlName: 'preferredDate',
                                         readOnly: true,
                                         onTap: (value) => picker.showPicker(),
                                         valueAccessor: DateTimeValueAccessor(
@@ -516,60 +509,70 @@ class _DetailPatientWebReservationScreenState
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                boxText(
-                                  context,
-                                  '午前',
-                                  textColor:
-                                      currentForm.control('choice').value ==
-                                              '午前'
-                                          ? Colors.white
-                                          : Colors.black,
-                                  bg: currentForm.control('choice').value ==
-                                          '午前'
-                                      ? Color(0xffF08C67)
-                                      : Colors.white,
-                                  borderC: Color(0xffF08C67),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                boxText(
-                                  context,
-                                  '午後',
-                                  textColor:
-                                      currentForm.control('choice').value ==
-                                              '午後'
-                                          ? Colors.white
-                                          : Colors.black,
-                                  bg: currentForm.control('choice').value ==
-                                          '午後'
-                                      ? Color(0xffF08C67)
-                                      : Colors.white,
-                                  borderC: Color(0xffF08C67),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                boxText(
-                                  context,
-                                  '終日',
-                                  textColor:
-                                      currentForm.control('choice').value ==
-                                              '終日'
-                                          ? Colors.white
-                                          : Colors.black,
-                                  bg: currentForm.control('choice').value ==
-                                          '終日'
-                                      ? Color(0xffF08C67)
-                                      : Colors.white,
-                                  borderC: Color(0xffF08C67),
-                                ),
+                                ReactiveValueListenableBuilder(
+                                    formControlName: 'choice',
+                                    builder: (context, control, _) {
+                                      return Row(
+                                        children: [
+                                          boxText(
+                                            context,
+                                            '午前',
+                                            textColor: control.value == '午前'
+                                                ? Colors.white
+                                                : Colors.black,
+                                            bg: control.value == '午前'
+                                                ? Color(0xffF08C67)
+                                                : Colors.white,
+                                            borderC: Color(0xffF08C67),
+                                            onTap: () {
+                                              control.value = '午前';
+                                            },
+                                          ),
+                                          SizedBox(
+                                            width: context
+                                                .appTheme.spacing.marginMedium,
+                                          ),
+                                          boxText(
+                                            context,
+                                            '午後',
+                                            textColor: control.value == '午後'
+                                                ? Colors.white
+                                                : Colors.black,
+                                            bg: control.value == '午後'
+                                                ? Color(0xffF08C67)
+                                                : Colors.white,
+                                            borderC: Color(0xffF08C67),
+                                            onTap: () {
+                                              control.value = '午後';
+                                            },
+                                          ),
+                                          SizedBox(
+                                            width: context
+                                                .appTheme.spacing.marginMedium,
+                                          ),
+                                          boxText(
+                                            context,
+                                            '終日',
+                                            textColor: control.value == '終日'
+                                                ? Colors.white
+                                                : Colors.black,
+                                            bg: control.value == '終日'
+                                                ? Color(0xffF08C67)
+                                                : Colors.white,
+                                            borderC: Color(0xffF08C67),
+                                            onTap: () {
+                                              control.value = '終日';
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    }),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
                                 Expanded(
                                   child: ReactiveTextField(
-                                    formControlName: 'Time_period_from',
+                                    formControlName: 'timePeriodFrom',
                                     decoration: InputDecoration(
                                       label: Text(
                                         '時間帯（自）',
@@ -586,7 +589,7 @@ class _DetailPatientWebReservationScreenState
                                 ),
                                 Expanded(
                                   child: ReactiveTextField(
-                                    formControlName: 'Time_period_to',
+                                    formControlName: 'timePeriodTo',
                                     decoration: InputDecoration(
                                       label: Text(
                                         '時間帯（至）',
@@ -594,6 +597,16 @@ class _DetailPatientWebReservationScreenState
                                     ),
                                   ),
                                 ),
+                                if (formArray.controls.indexOf(currentForm) !=
+                                    0) ...{
+                                  IconButton(
+                                    icon: Icon(Icons.delete_forever,
+                                        color: Colors.red),
+                                    onPressed: () => formArray.removeAt(
+                                      formArray.controls.indexOf(currentForm),
+                                    ),
+                                  ),
+                                }
                               ],
                             ),
                           ),
@@ -613,7 +626,16 @@ class _DetailPatientWebReservationScreenState
                           height: context.appTheme.spacing.marginMedium,
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            formArray.add(
+                              FormGroup({
+                                'preferredDate': FormControl<DateTime>(),
+                                'choice': FormControl<String>(value: '午前'),
+                                'timePeriodFrom': FormControl<String>(),
+                                'timePeriodTo': FormControl<String>(),
+                              }),
+                            );
+                          },
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -841,21 +863,24 @@ class _DetailPatientWebReservationScreenState
 }
 
 boxText(BuildContext context, String text,
-        {Color? bg, Color? borderC, Color? textColor}) =>
-    Container(
-      padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
-      decoration: BoxDecoration(
-        color: bg,
-        border: Border.all(
-          color: borderC ?? bg ?? Colors.grey,
+        {Color? bg, Color? borderC, Color? textColor, Function()? onTap}) =>
+    InkWell(
+      onTap: onTap,
+      child: Container(
+        padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
+        decoration: BoxDecoration(
+          color: bg,
+          border: Border.all(
+            color: borderC ?? bg ?? Colors.grey,
+          ),
+          borderRadius: BorderRadius.circular(
+              context.appTheme.spacing.borderRadiusMedium),
         ),
-        borderRadius:
-            BorderRadius.circular(context.appTheme.spacing.borderRadiusMedium),
-      ),
-      child: Center(
-        child: Text(
-          text,
-          style: TextStyle(color: textColor ?? Colors.black),
+        child: Center(
+          child: Text(
+            text,
+            style: TextStyle(color: textColor ?? Colors.black),
+          ),
         ),
       ),
     );

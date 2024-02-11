@@ -2,41 +2,32 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup detailPatientWebReservationForm() => FormGroup({
-      '1st_choice': FormControl<DateTime>(
+      'preferredDate1': FormControl<DateTime>(
         disabled: true,
       ), // 第１希望
-      '2nd_choice': FormControl<DateTime>(
+      'preferredDate2': FormControl<DateTime>(
         disabled: true,
       ), // 第２希望
-      '3rd_choice': FormControl<DateTime>(
+      'preferredDate3': FormControl<DateTime>(
         disabled: true,
       ), // 第３希望
-      'No_desired_date': FormControl<bool>(), // 希望日なし
+      'noDesiredDate': FormControl<bool>(
+        disabled: true,
+      ), // 希望日なし
       'remarks': FormControl<String>(
         disabled: true,
       ), // 備考
-      'Medical_institution_name': FormControl<String>(), // 医療機関名
-      'Doctor_name': FormControl<String>(), // 医師名
-      'shift_1': FormControl<String>(value: '10時〜12時'), //
-      'shift_2': FormControl<String>(value: '13時〜16時'), //
-      'Candidate_Date': FormArray([
+      'medicalInstitutionName': FormControl<String>(), // 医療機関名
+      'doctorName': FormControl<String>(), // 医師名
+      'shift1': FormControl<String>(value: '10時〜12時'), //
+      'shift2': FormControl<String>(value: '13時〜16時'), //
+      'candidateDate': FormArray([
         FormGroup({
-          'First_choice': FormControl<DateTime>(), // 第一希望
+          'id' : FormControl<String>(),
+          'preferredDate': FormControl<DateTime>(), // 第一希望
           'choice': FormControl<String>(value: '午前'), // 午前, 午後, 終日
-          'Time_period_from': FormControl<String>(), // 時間帯（自）
-          'Time_period_to': FormControl<String>(), // 時間帯（至）
-        }),
-        FormGroup({
-          'First_choice': FormControl<DateTime>(), // 第一希望
-          'choice': FormControl<String>(value: '午後'), // 午前, 午後, 終日
-          'Time_period_from': FormControl<String>(), // 時間帯（自）
-          'Time_period_to': FormControl<String>(), // 時間帯（至）
-        }),
-        FormGroup({
-          'First_choice': FormControl<DateTime>(), // 第一希望
-          'choice': FormControl<String>(), // 午前, 午後, 終日
-          'Time_period_from': FormControl<String>(), // 時間帯（自）
-          'Time_period_to': FormControl<String>(), // 時間帯（至）
+          'timePeriodFrom': FormControl<String>(), // 時間帯（自）
+          'timePeriodTo': FormControl<String>(), // 時間帯（至）
         }),
       ]),
       'message': FormControl<String>(), // メッセージ（希望日がない場合は、メッセージ欄にてその旨伝えてください）
