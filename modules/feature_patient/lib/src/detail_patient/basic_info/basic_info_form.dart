@@ -18,11 +18,15 @@ FormGroup basicInfoForm({
           value: 0,
           validators: [Validators.required],
         ), // 体重
-        'gender': FormControl<bool>(), // 性別
+        'gender': FormControl<bool>(
+          value: true,
+        ), // 性別
         'isMale': FormControl<bool>(
           value: true,
         ), // 男性
-        'isFemale': FormControl<bool>(), // 女性
+        'isFemale': FormControl<bool>(
+          value: false,
+        ), // 女性
         'arrivalDate': FormControl<DateTime>(
           validators: [Validators.required],
         ), // 来日日
@@ -114,7 +118,9 @@ FormGroup basicInfoForm({
         }),
         'MEDICAL_RECORD_BUDGETS': FormGroup({
           'id': FormControl<String?>(),
-          'budget': FormControl<String?>(),
+          'budget': FormControl<int>(
+            value: 0,
+          ),
           'remarks': FormControl<String?>(),
         }),
         'MEDICAL_RECORD_AGENTS': FormGroup({

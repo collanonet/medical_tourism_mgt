@@ -134,7 +134,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                 children: [
                                   Expanded(
                                     child: ReactiveTextField(
-                                      formControlName: 'patient_name',
+                                      formControlName: 'patientName',
                                       decoration: InputDecoration(
                                         label: Text(
                                           '患者名',

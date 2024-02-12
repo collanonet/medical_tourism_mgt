@@ -54,7 +54,7 @@ class _WebAppointmentDetailScreenState
                     children: [
                       Expanded(
                         child: ReactiveTextField(
-                          formControlName: 'patient_name',
+                          formControlName: 'patientName',
                           decoration: InputDecoration(
                             label: Text('患者名'),
                           ),
@@ -70,8 +70,8 @@ class _WebAppointmentDetailScreenState
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
                           formControlName: '1st_choice',
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(3000),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime(2100),
                           builder: (BuildContext context,
                               ReactiveDatePickerDelegate<dynamic> picker,
                               Widget? child) {
@@ -101,8 +101,8 @@ class _WebAppointmentDetailScreenState
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
                           formControlName: '2nd_choice',
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(3000),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime(2100),
                           builder: (BuildContext context,
                               ReactiveDatePickerDelegate<dynamic> picker,
                               Widget? child) {
@@ -132,8 +132,8 @@ class _WebAppointmentDetailScreenState
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
                           formControlName: '3rd_choice',
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(3000),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime(2100),
                           builder: (BuildContext context,
                               ReactiveDatePickerDelegate<dynamic> picker,
                               Widget? child) {

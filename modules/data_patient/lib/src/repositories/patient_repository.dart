@@ -26,10 +26,11 @@ abstract class PatientRepository {
   //GET_PATIENTS
 
   Future<Paginated<Patient>> patients({
-    String? patient_name,
+    String? progress,
+    String? patientName,
     String? companyAGENTS,
     String? acceptingHospital,
-    List<String?>? type,
+    String? type,
     String? salesStaff,
     String? dateOfEntryfrom,
     String? dateOfEntryto,

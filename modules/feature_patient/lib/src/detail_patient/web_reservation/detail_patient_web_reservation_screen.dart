@@ -38,8 +38,8 @@ class _DetailPatientWebReservationScreenState
               Expanded(
                 child: ReactiveDatePicker<DateTime>(
                   formControlName: 'preferredDate1',
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(3000),
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime(2100),
                   builder: (BuildContext context,
                       ReactiveDatePickerDelegate<dynamic> picker,
                       Widget? child) {
@@ -69,8 +69,8 @@ class _DetailPatientWebReservationScreenState
               Expanded(
                 child: ReactiveDatePicker<DateTime>(
                   formControlName: 'preferredDate2',
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(3000),
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime(2100),
                   builder: (BuildContext context,
                       ReactiveDatePickerDelegate<dynamic> picker,
                       Widget? child) {
@@ -100,8 +100,8 @@ class _DetailPatientWebReservationScreenState
               Expanded(
                 child: ReactiveDatePicker<DateTime>(
                   formControlName: 'preferredDate3',
-                  firstDate: DateTime(2000),
-                  lastDate: DateTime(3000),
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime(2100),
                   builder: (BuildContext context,
                       ReactiveDatePickerDelegate<dynamic> picker,
                       Widget? child) {

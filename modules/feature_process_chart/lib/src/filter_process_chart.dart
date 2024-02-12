@@ -46,7 +46,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                       children: [
                         Expanded(
                           child: ReactiveTextField(
-                            formControlName: 'patient_name',
+                            formControlName: 'patientName',
                             decoration: InputDecoration(
                               label: Text(
                                 'ツアー名',
@@ -96,8 +96,8 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                           flex: 4,
                           child: ReactiveDatePicker<DateTime>(
                             formControlName: 'period_from',
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(3000),
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2100),
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {
@@ -129,8 +129,8 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                           flex: 4,
                           child: ReactiveDatePicker<DateTime>(
                             formControlName: 'period_to',
-                            firstDate: DateTime(2000),
-                            lastDate: DateTime(3000),
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2100),
                             builder: (BuildContext context,
                                 ReactiveDatePickerDelegate<dynamic> picker,
                                 Widget? child) {

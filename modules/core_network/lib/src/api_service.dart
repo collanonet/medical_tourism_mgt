@@ -68,10 +68,11 @@ abstract class ApiService {
   Future<Paginated<Patient>> patients({
     @Query('page') int? page,
     @Query('limit') int? limit,
-    @Query('patient_name') String? patientName,
+    @Query('progress') String? progress,
+    @Query('patientName') String? patientName,
     @Query('companyAGENTS') String? companyAgents,
     @Query('acceptingHospital') String? acceptingHospital,
-    @Query('type') List<String?>? type,
+    @Query('type') String? type,
     @Query('salesStaff') String? salesStaff,
     @Query('dateOfEntryfrom') String? dateOfEntryfrom,
     @Query('dateOfEntryto') String? dateOfEntryto,

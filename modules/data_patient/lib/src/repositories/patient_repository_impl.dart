@@ -58,10 +58,11 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<Paginated<Patient>> patients({
-    String? patient_name,
+    String? progress,
+    String? patientName,
     String? companyAGENTS,
     String? acceptingHospital,
-    List<String?>? type,
+    String? type,
     String? salesStaff,
     String? dateOfEntryfrom,
     String? dateOfEntryto,
@@ -71,7 +72,8 @@ class PatientRepositoryIml extends PatientRepository {
     String? returnDateto,
   }) {
     return remote.patients(
-      patient_name: patient_name,
+      progress: progress,
+      patientName: patientName,
       companyAGENTS: companyAGENTS,
       acceptingHospital: acceptingHospital,
       type: type,

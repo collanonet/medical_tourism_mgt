@@ -233,10 +233,11 @@ class _ApiService implements ApiService {
   Future<Paginated<Patient>> patients({
     int? page,
     int? limit,
+    String? progress,
     String? patientName,
     String? companyAgents,
     String? acceptingHospital,
-    List<String?>? type,
+    String? type,
     String? salesStaff,
     String? dateOfEntryfrom,
     String? dateOfEntryto,
@@ -249,7 +250,8 @@ class _ApiService implements ApiService {
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'limit': limit,
-      r'patient_name': patientName,
+      r'progress': progress,
+      r'patientName': patientName,
       r'companyAGENTS': companyAgents,
       r'acceptingHospital': acceptingHospital,
       r'type': type,

@@ -39,10 +39,11 @@ class PatientRemoteProvider {
       await apiService.deletePrePatient(id);
 
   Future<Paginated<Patient>> patients({
-    String? patient_name,
+    String? progress,
+    String? patientName,
     String? companyAGENTS,
     String? acceptingHospital,
-    List<String?>? type,
+    String? type,
     String? salesStaff,
     String? dateOfEntryfrom,
     String? dateOfEntryto,
@@ -52,7 +53,8 @@ class PatientRemoteProvider {
     String? returnDateto,
   }) async =>
       await apiService.patients(
-        patientName: patient_name,
+        progress: progress,
+        patientName: patientName,
         companyAgents: companyAGENTS,
         acceptingHospital: acceptingHospital,
         type: type,

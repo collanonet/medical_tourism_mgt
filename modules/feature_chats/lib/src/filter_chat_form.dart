@@ -4,7 +4,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup formFilterChat() =>  FormGroup(
   {
-    'Patient_name_message': FormControl<String>(
+    'patientNameMessage': FormControl<String>(
       value: '検索',
     ),
   },

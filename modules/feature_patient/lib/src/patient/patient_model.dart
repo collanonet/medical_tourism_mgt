@@ -16,30 +16,50 @@ class PatientModel with ChangeNotifier {
   AsyncData<Paginated<Patient>> _patientData = const AsyncData();
   AsyncData<Paginated<Patient>> get patientData => _patientData;
 
-  Future<void> patients({FormGroup? form, String? type}) {
+  Future<void> patients({FormGroup? form, String? progress}) async {
     _patientData = const AsyncData(loading: true);
     notifyListeners();
 
-    return patientRepository
+    logger.d(form?.value);
+    await patientRepository
         .patients(
-      patient_name: form?.control('patient_name').value,
-      companyAGENTS: form?.control('companyAGENTS').value,
-      acceptingHospital: form?.control('acceptingHospital').value,
-      type: form?.control('type').value == null ||
-              form!.control('type').value.toString().isEmpty
-          ? type == null
-              ? null
-              : [type]
-          : [form.control('type').value],
-      salesStaff: form?.control('salesStaff').value,
-      dateOfEntryfrom: form?.control('dateOfEntryfrom').value.toString(),
-      dateOfEntryto: form?.control('dateOfEntryto').value.toString(),
-      medicalDayfrom: form?.control('medicalDayfrom').value.toString(),
-      medicalDayto: form?.control('medicalDayto').value.toString(),
-      returnDatefrom: form?.control('returnDatefrom').value.toString(),
-      returnDateto: form?.control('returnDateto').value.toString(),
+      progress: progress,
+      patientName: form?.control('patientName').value == null
+          ? null
+          : form!.control('patientName').value,
+      companyAGENTS: form?.control('companyAGENTS').value == null
+          ? null
+          : form!.control('companyAGENTS').value,
+      acceptingHospital: form?.control('acceptingHospital').value == null
+          ? null
+          : form!.control('acceptingHospital').value,
+      type: form?.control('type').value == null
+          ? null
+          : form!.control('type').value,
+      salesStaff: form?.control('salesStaff').value == null
+          ? null
+          : form!.control('salesStaff').value,
+      dateOfEntryfrom: form?.control('dateOfEntryfrom').value == null
+          ? null
+          : form!.control('dateOfEntryfrom').value.toString(),
+      dateOfEntryto: form?.control('dateOfEntryto').value == null
+          ? null
+          : form!.control('dateOfEntryto').value.toString(),
+      medicalDayfrom: form?.control('medicalDayfrom').value == null
+          ? null
+          : form!.control('medicalDayfrom').value.toString(),
+      medicalDayto: form?.control('medicalDayto').value == null
+          ? null
+          : form!.control('medicalDayto').value.toString(),
+      returnDatefrom: form?.control('returnDatefrom').value == null
+          ? null
+          : form!.control('returnDatefrom').value.toString(),
+      returnDateto: form?.control('returnDateto').value == null
+          ? null
+          : form!.control('returnDateto').value.toString(),
     )
         .then((value) {
+      logger.d(value.items.length);
       _patientData = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);

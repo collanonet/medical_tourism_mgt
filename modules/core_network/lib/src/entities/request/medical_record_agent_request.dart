@@ -4,16 +4,16 @@ part 'medical_record_agent_request.g.dart';
 
 @JsonSerializable()
 class MedicalRecordAgentRequest {
-   String? company;
-   String? nameInKanji;
-   String? nameInKana;
-   String? medicalRecord;
+  String? company;
+  String? nameInKanji;
+  String? nameInKana;
+  String medicalRecord;
 
   MedicalRecordAgentRequest({
-     this.company,
-     this.nameInKanji,
-     this.nameInKana,
-     this.medicalRecord,
+    this.company,
+    this.nameInKanji,
+    this.nameInKana,
+    required this.medicalRecord,
   });
 
   factory MedicalRecordAgentRequest.fromJson(Map<String, dynamic> json) {

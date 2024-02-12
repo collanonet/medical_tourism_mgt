@@ -796,8 +796,8 @@ class _MedicalRecordCompanionSectionState
                                       Expanded(
                                         child: ReactiveDatePicker<DateTime>(
                                           formControlName: 'issueDate',
-                                          firstDate: DateTime(2000),
-                                          lastDate: DateTime(3000),
+                                          firstDate: DateTime(1900),
+                                          lastDate: DateTime(2100),
                                           builder: (BuildContext context,
                                               ReactiveDatePickerDelegate<
                                                       dynamic>
@@ -829,8 +829,8 @@ class _MedicalRecordCompanionSectionState
                                       Expanded(
                                         child: ReactiveDatePicker<DateTime>(
                                           formControlName: 'expirationDate',
-                                          firstDate: DateTime(2000),
-                                          lastDate: DateTime(3000),
+                                          firstDate: DateTime(1900),
+                                          lastDate: DateTime(2100),
                                           builder: (BuildContext context,
                                               ReactiveDatePickerDelegate<
                                                       dynamic>

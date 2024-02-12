@@ -2,21 +2,21 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup itineraryForm() => FormGroup(
       {
-        'patient_names': FormArray(
+        'patientNames': FormArray(
           [
             FormGroup(
               {
-                'patient_name': FormControl<String>(value: ''), // 患者名
+                'patientName': FormControl<String>(value: ''), // 患者名
               },
             ),
             FormGroup(
               {
-                'patient_name': FormControl<String>(value: ''), // 患者名
+                'patientName': FormControl<String>(value: ''), // 患者名
               },
             ),
             FormGroup(
               {
-                'patient_name': FormControl<String>(value: ''), // 患者名
+                'patientName': FormControl<String>(value: ''), // 患者名
               },
             ),
           ],
