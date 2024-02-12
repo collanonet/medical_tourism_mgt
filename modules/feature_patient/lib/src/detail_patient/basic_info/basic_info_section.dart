@@ -37,12 +37,9 @@ class BasicInfoSection extends StatelessWidget {
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text('メモ（エージェント/病院には共有されません）',
-                      style: TextStyle(
-                        fontFamily: 'NotoSansJP',
-                        package: 'core_ui',
-                        fontWeight: FontWeight.bold,
-                      )),
+                  const Text(
+                    'メモ（エージェント/病院には共有されません）',
+                  ),
                   ReactiveTextField(
                     formControlName: 'memo',
                     maxLines: 3,
@@ -62,63 +59,24 @@ class BasicInfoSection extends StatelessWidget {
                   const MedicalRecordHospitalSection(),
                 ],
               ),
-              // Text(
-              //   'グループ', // TODO: l10n 対応 (グループ) (group)
-              //   style: context.textTheme.titleMedium,
-              // ),
-
-              // Row(
-              //   children: [
-              //     const Text('グループリーダーに'),
-              //     SizedBox(
-              //       width: context.appTheme.spacing.marginMedium,
-              //     ),
-              //     AnimatedToggleSwitch<String>.size(
-              //         textDirection: TextDirection.rtl,
-              //         current: 'する',
-              //         values: const ['する', 'しない'],
-              //         iconList: [
-              //           Text('する'),
-              //           Text('しない'),
-              //         ],
-              //         indicatorSize: const Size.fromWidth(100),
-              //         borderWidth: 4.0,
-              //         iconAnimationType: AnimationType.onHover,
-              //         style: ToggleStyle(
-              //           borderColor: Colors.transparent,
-              //           borderRadius: BorderRadius.circular(10.0),
-              //           backgroundColor: Colors.white,
-              //           indicatorColor: Colors.white,
-              //           boxShadow: [
-              //             BoxShadow(
-              //               color: Colors.black26,
-              //               spreadRadius: 1,
-              //               blurRadius: 2,
-              //               offset: Offset(0, 1.5),
-              //             ),
-              //           ],
-              //         ),
-              //         styleBuilder: (i) => ToggleStyle(
-              //               indicatorColor: context.appTheme.primaryColor,
-              //               backgroundColor: Colors.white,
-              //             ),
-              //         onChanged: (i) {}),
-              //   ],
-              // ),
-              // const MedicalRecordTravelGroupSection(),
-              // const MedicalRecordUserAccountSection(),
+              const MedicalRecordTravelGroupSection(),
+              const MedicalRecordUserAccountSection(),
               const MedicalRecordNameSection(),
-              // const MedicalRecordNationalitySection(),
-              // const MedicalRecordBudgetSection(),
-              // const MedicalRecordPassportSection(),
-              // Divider(
-              //   height: 0,
-              //   color: context.appTheme.dividerColor,
-              // ),
-              // const MedicalRecordAgentSection(),
-              // const MedicalRecordReferrerSection(),
-              // const MedicalRecordInterpreterSection(),
-              // const MedicalRecordCompanionSection(),
+              const MedicalRecordNationalitySection(),
+              Divider(
+                height: 0,
+                color: context.appTheme.dividerColor,
+              ),
+              const MedicalRecordBudgetSection(),
+              const MedicalRecordPassportSection(),
+              Divider(
+                height: 0,
+                color: context.appTheme.dividerColor,
+              ),
+              const MedicalRecordAgentSection(),
+              const MedicalRecordReferrerSection(),
+              const MedicalRecordInterpreterSection(),
+              const MedicalRecordCompanionSection(),
             ],
           ),
         ),

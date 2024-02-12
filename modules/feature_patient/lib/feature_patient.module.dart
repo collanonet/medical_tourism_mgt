@@ -24,10 +24,8 @@ import 'src/detail_patient/medical_summary/tabs/normal_summary_model.dart'
     as _i14;
 import 'src/detail_patient/medical_summary/tabs/pick_medical_data_file_model.dart'
     as _i21;
-import 'src/detail_patient/medical_summary/tabs/short_summary_model.dart'
-    as _i25;
 import 'src/detail_patient/medical_summary/tabs/summary_list_model.dart'
-    as _i27;
+    as _i26;
 import 'src/detail_patient/medical_visa/medical_visa_model.dart' as _i13;
 import 'src/detail_patient/overseas_medical_data/overseas_medical_data_model.dart'
     as _i15;
@@ -41,7 +39,7 @@ import 'src/detail_patient/patient_response_data/tab/patient_response_treatment_
     as _i20;
 import 'src/detail_patient/progress_list/progress_list_model.dart' as _i23;
 import 'src/detail_patient/proposal/proposal_model.dart' as _i24;
-import 'src/detail_patient/statement/statement_model.dart' as _i26;
+import 'src/detail_patient/statement/statement_model.dart' as _i25;
 import 'src/detail_patient/web_reservation/detail_patient_web_reservation_model.dart'
     as _i8;
 import 'src/patient/patient_model.dart' as _i16;
@@ -100,11 +98,9 @@ class FeaturePatientPackageModule extends _i1.MicroPackageModule {
         _i23.ProgressListModel(patientRepository: gh<_i4.PatientRepository>()));
     gh.factory<_i24.ProposalModel>(() =>
         _i24.ProposalModel(patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i25.ShortSummaryModel>(() =>
-        _i25.ShortSummaryModel(patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i26.StatementModel>(() =>
-        _i26.StatementModel(patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i27.SummaryListModel>(() =>
-        _i27.SummaryListModel(patientRepository: gh<_i4.PatientRepository>()));
+    gh.factory<_i25.StatementModel>(() =>
+        _i25.StatementModel(patientRepository: gh<_i4.PatientRepository>()));
+    gh.factory<_i26.SummaryListModel>(() =>
+        _i26.SummaryListModel(patientRepository: gh<_i4.PatientRepository>()));
   }
 }

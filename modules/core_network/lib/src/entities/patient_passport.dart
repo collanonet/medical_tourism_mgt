@@ -7,24 +7,24 @@ part 'patient_passport.g.dart';
 class PatientPassport {
   @JsonKey(name: '_id')
   final String id;
-  String passportNumber;
-  DateTime issueDate;
-  DateTime expirationDate;
+  String? passportNumber;
+  DateTime? issueDate;
+  DateTime? expirationDate;
   String visaType;
-  String visaCategory;
-  bool underConfirmation;
+  String? visaCategory;
+  bool? underConfirmation;
   String patient;
   final DateTime createdAt;
   final DateTime updatedAt;
 
   PatientPassport({
     required this.id,
-    required this.passportNumber,
-    required this.issueDate,
-    required this.expirationDate,
+    this.passportNumber,
+    this.issueDate,
+    this.expirationDate,
     required this.visaType,
-    required this.visaCategory,
-    required this.underConfirmation,
+    this.visaCategory,
+    this.underConfirmation,
     required this.patient,
     required this.createdAt,
     required this.updatedAt,

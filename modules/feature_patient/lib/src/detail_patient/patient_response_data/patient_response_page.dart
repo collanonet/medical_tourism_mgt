@@ -15,9 +15,11 @@ class PatientResponsePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return Provider(
       create: (context) => GetIt.I<PatientResponseModel>(),
-      child: const PatientResponseScreen(),
+      child: PatientResponseScreen(
+        patientId: patient?.id,
+      ),
     );
   }
 }

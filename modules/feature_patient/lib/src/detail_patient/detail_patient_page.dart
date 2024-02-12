@@ -21,17 +21,21 @@ class DetailPatientPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return Provider(
       create: (context) =>
           GetIt.I<DetailPatientModel>()..initialData(patient: patient, id: id),
       child: LayoutView(
         selectedIndex: 0,
         page: Consumer<DetailPatientModel>(
           builder: (context, model, _) {
-            return Skeletonizer(
-              enabled: model.patient.loading,
-              child: DetailPatientScreen(patient: model.patient.data),
-            );
+            return ValueListenableBuilder(
+                valueListenable: model.patientData,
+                builder: (context, value, _) {
+                  return Skeletonizer(
+                    enabled: value.loading,
+                    child: DetailPatientScreen(patient: value.data),
+                  );
+                });
           },
         ),
       ),

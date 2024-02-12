@@ -31,9 +31,18 @@ class PrePatientFilter extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
-                      context.l10n.labelWeChatPrePatientSearch,
-                      style: context.textTheme.titleMedium,
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          context.l10n.labelWeChatPrePatientSearch,
+                          style: context.textTheme.titleMedium,
+                        ),
+                        Text(
+                          '事業再構築補助金',
+                          style: context.textTheme.titleMedium,
+                        ),
+                      ],
                     ),
                     const SizedBox(height: 16),
                     Row(

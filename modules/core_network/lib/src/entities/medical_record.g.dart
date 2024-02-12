@@ -29,7 +29,7 @@ MedicalRecord _$MedicalRecordFromJson(Map<String, dynamic> json) =>
       receptionDate: json['receptionDate'] == null
           ? null
           : DateTime.parse(json['receptionDate'] as String),
-      type: (json['type'] as List<dynamic>?)?.map((e) => e as String).toList(),
+      type: (json['type'] as List<dynamic>?)?.map((e) => e as String?).toList(),
       progress: json['progress'] as String?,
       advancePaymentDate: json['advancePaymentDate'] == null
           ? null

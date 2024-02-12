@@ -9,10 +9,10 @@ part of 'user.dart';
 User _$UserFromJson(Map<String, dynamic> json) => User(
       id: json['_id'] as String,
       fullName: json['fullName'] as String,
-      email: json['email'] as String,
+      email: json['email'] as String?,
       idNumber: json['idNumber'] as String,
-      profileImage: json['profileImage'] as String,
-      phoneNumber: json['phoneNumber'] as String,
+      profileImage: json['profileImage'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       role: $enumDecode(_$PermissionRoleEnumMap, json['role']),

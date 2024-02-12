@@ -46,7 +46,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                       children: [
                         Expanded(
                           child: ReactiveTextField(
-                            formControlName: 'hospital_name',
+                            formControlName: 'hospitalName',
                             decoration: InputDecoration(
                               label: Text(
                                 '病院名',

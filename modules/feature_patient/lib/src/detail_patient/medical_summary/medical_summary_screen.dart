@@ -8,26 +8,14 @@ import 'tabs/summary_list_page.dart';
 import 'package:flutter/material.dart';
 
 class MedicalSummaryScreen extends StatefulWidget {
-  const MedicalSummaryScreen({super.key});
+  const MedicalSummaryScreen({super.key, this.patientId});
+  final String? patientId;
 
   @override
   State<MedicalSummaryScreen> createState() => _MedicalSummaryScreenState();
 }
 
 class _MedicalSummaryScreenState extends State<MedicalSummaryScreen> {
-  List<String> menu = const [
-    '自動翻訳', // Auto translate
-    'サマリー（通常版）', // Summary (Normal version)
-    'サマリー（簡易版）', // Summary (Simple version)
-    'サマリー一覧', // Summary list
-  ];
-
-  List<Widget> pages = const [
-    AutoTranslatePage(),
-    NormalSummaryPage(),
-    ShortSummaryPage(),
-    SummaryListPage(),
-  ];
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
   @override
@@ -43,7 +31,12 @@ class _MedicalSummaryScreenState extends State<MedicalSummaryScreen> {
                 children: [
                   TabBarWidget(
                     selectedIndex: value,
-                    menu: menu,
+                    menu: [
+                      '自動翻訳', // Auto translate
+                      'サマリー（通常版）', // Summary (Normal version)
+                      'サマリー（簡易版）', // Summary (Simple version)
+                      'サマリー一覧', // Summary list
+                    ],
                     onPressed: (index) {
                       _selectedIndex.value = index;
                     },
@@ -69,7 +62,12 @@ class _MedicalSummaryScreenState extends State<MedicalSummaryScreen> {
                       context.appTheme.spacing.borderRadiusMedium),
                   color: Colors.white,
                 ),
-                child: pages[index],
+                child: [
+                  const AutoTranslatePage(),
+                  NormalSummaryPage(patientId: widget.patientId),
+                  ShortSummaryPage(patientId: widget.patientId),
+                  SummaryListPage(patientId: widget.patientId),
+                ][index],
               ),
             );
           },

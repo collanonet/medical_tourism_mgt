@@ -230,9 +230,38 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<Paginated<Patient>> patients() async {
+  Future<Paginated<Patient>> patients({
+    int? page,
+    int? limit,
+    String? patientName,
+    String? companyAgents,
+    String? acceptingHospital,
+    List<String?>? type,
+    String? salesStaff,
+    String? dateOfEntryfrom,
+    String? dateOfEntryto,
+    String? medicalDayfrom,
+    String? medicalDayto,
+    String? returnDatefrom,
+    String? returnDateto,
+  }) async {
     const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'limit': limit,
+      r'patient_name': patientName,
+      r'companyAGENTS': companyAgents,
+      r'acceptingHospital': acceptingHospital,
+      r'type': type,
+      r'salesStaff': salesStaff,
+      r'dateOfEntryfrom': dateOfEntryfrom,
+      r'dateOfEntryto': dateOfEntryto,
+      r'medicalDayfrom': medicalDayfrom,
+      r'medicalDayto': medicalDayto,
+      r'returnDatefrom': returnDatefrom,
+      r'returnDateto': returnDateto,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     final Map<String, dynamic>? _data = null;
     final _result = await _dio
@@ -424,6 +453,33 @@ class _ApiService implements ApiService {
     var value = _result.data!
         .map((dynamic i) => PatientName.fromJson(i as Map<String, dynamic>))
         .toList();
+    return value;
+  }
+
+  @override
+  Future<User> patientUser(String userId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/patients/user-id/${userId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = User.fromJson(_result.data!);
     return value;
   }
 
@@ -2263,6 +2319,481 @@ class _ApiService implements ApiService {
           _dio.options.baseUrl,
           baseUrl,
         ))));
+  }
+
+  @override
+  Future<MedicalRecordTravelGroup> medicalRecordsTravelGroup(
+      {String? medicalRecord}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalRecordTravelGroup>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-travel-group/${medicalRecord}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = MedicalRecordTravelGroup.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<MedicalRecordTravelGroup> postMedicalRecordTravelGroup(
+      MedicalRecordTravelGroupRequest medicalRecordTravelGroupRequest) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalRecordTravelGroupRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalRecordTravelGroup>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-travel-group',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = MedicalRecordTravelGroup.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<MedicalRecordProposal>> getAllMedicalRecordProposals() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<MedicalRecordProposal>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/hospital-proposal',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) =>
+            MedicalRecordProposal.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<List<MedicalRecordProposal>> getMedicalRecordProposalsByMedicalRecord(
+      String medicalRecordId) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<MedicalRecordProposal>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/hospital-proposal/medical-record-id/${medicalRecordId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) =>
+            MedicalRecordProposal.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<List<MedicalRecordProposal>> getOneMedicalRecordProposal(
+      String id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<MedicalRecordProposal>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/hospital-proposal/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) =>
+            MedicalRecordProposal.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<MedicalRecordProposal> postMedicalRecordProposal(
+      MedicalRecordProposalRequest medicalRecordProposalRequest) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalRecordProposalRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalRecordProposal>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/hospital-proposal',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = MedicalRecordProposal.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<MedicalRecordProposal> putMedicalRecordProposal(
+    String id,
+    MedicalRecordProposalRequest medicalRecordProposalRequest,
+  ) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalRecordProposalRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalRecordProposal>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/hospital-proposal/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = MedicalRecordProposal.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<void> deleteMedicalRecordProposal(String id) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/hospital-proposal/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+  }
+
+  @override
+  Future<MedicalRecordPatientResponseTreatment>
+      getMedicalRecordPatientResponseTreatment({String? medicalRecord}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalRecordPatientResponseTreatment>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-patient-response-treatment/${medicalRecord}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = MedicalRecordPatientResponseTreatment.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<MedicalRecordPatientResponseTreatment>
+      postMedicalRecordPatientResponseTreatment(
+          MedicalRecordPatientResponseTreatmentRequest
+              medicalRecordPatientResponseTreatmentRequest) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalRecordPatientResponseTreatmentRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalRecordPatientResponseTreatment>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-patient-response-treatment',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = MedicalRecordPatientResponseTreatment.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<MedicalRecordPatientResponseMedicalCheckup>
+      getMedicalRecordPatientResponseMedicalCheckup(
+          {String? medicalRecord}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalRecordPatientResponseMedicalCheckup>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-patient-response-medical-checkup/${medicalRecord}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        MedicalRecordPatientResponseMedicalCheckup.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<MedicalRecordPatientResponseMedicalCheckup>
+      postMedicalRecordPatientResponseMedicalCheckup(
+          MedicalRecordPatientResponseMedicalCheckupRequest
+              medicalRecordPatientResponseMedicalCheckupRequest) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalRecordPatientResponseMedicalCheckupRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalRecordPatientResponseMedicalCheckup>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-patient-response-medical-checkup',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        MedicalRecordPatientResponseMedicalCheckup.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<MedicalRecordPatientResponseOther>
+      getMedicalRecordPatientResponseOther({String? medicalRecord}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalRecordPatientResponseOther>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-patient-response-other/${medicalRecord}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = MedicalRecordPatientResponseOther.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<MedicalRecordPatientResponseOther>
+      postMedicalRecordPatientResponseOther(
+          MedicalRecordPatientResponseOtherRequest
+              medicalRecordPatientResponseOtherRequest) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalRecordPatientResponseOtherRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalRecordPatientResponseOther>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-patient-response-other',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = MedicalRecordPatientResponseOther.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<MedicalRecordSummary> getMedicalRecordSummary(
+      {String? medicalRecord}) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalRecordSummary>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-summary/${medicalRecord}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = MedicalRecordSummary.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<MedicalRecordSummary> postMedicalRecordSummary(
+      MedicalRecordSummaryRequest medicalRecordNormalSummaryRequest) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalRecordNormalSummaryRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalRecordSummary>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-summary',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = MedicalRecordSummary.fromJson(_result.data!);
+    return value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {

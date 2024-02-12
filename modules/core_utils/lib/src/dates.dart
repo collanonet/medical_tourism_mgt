@@ -4,7 +4,6 @@ import 'package:jiffy/jiffy.dart';
 class Dates {
   Dates._();
 
-
   static String formatFullDateTime(DateTime dateTime) {
     return Jiffy.parseFromDateTime(dateTime)
         .toLocal()
@@ -190,6 +189,13 @@ class Dates {
     return dateTime.year == now.year &&
         dateTime.month == now.month &&
         dateTime.day == now.day;
+  }
+
+  static String formShortDate(DateTime? dateOfEntry) {
+    if (dateOfEntry == null) {
+      return '--/--/--';
+    }
+    return Jiffy.parseFromDateTime(dateOfEntry).format(pattern: 'yyyy/MM/dd');
   }
 }
 

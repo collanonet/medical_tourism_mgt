@@ -80,7 +80,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
                         Expanded(
                           flex: 4,
                           child: ReactiveTextField(
-                            formControlName: 'hospital_name',
+                            formControlName: 'hospitalName',
                             decoration: InputDecoration(
                               label: Text(
                                 '報告書',

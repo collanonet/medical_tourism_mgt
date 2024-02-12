@@ -10,22 +10,25 @@ import 'patient_response_medical_checkup_screen.dart';
 import 'package:provider/provider.dart';
 
 class PatientResponseMedicalCheckupPage extends StatelessWidget {
-  const PatientResponseMedicalCheckupPage({super.key});
+  const PatientResponseMedicalCheckupPage({super.key, this.patientId});
+  final String? patientId;
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => GetIt.I<PatientResponseMedicalCheckupModel>(),
-      child: ReactiveFormConfig(
-        validationMessages: <String, ValidationMessageFunction>{
-          ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
-        },
-        child: ReactiveFormBuilder(
-            form: () => medicalCheckupForm(),
-            builder: (context, formGroup, child) {
-              return const PatientResponseMedicalCheckupScreen();
-            }),
-      ),
+    return ReactiveFormConfig(
+      validationMessages: <String, ValidationMessageFunction>{
+        ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
+      },
+      child: ReactiveFormBuilder(
+          form: () => medicalCheckupForm(),
+          builder: (context, formGroup, child) {
+            return Provider(
+                create: (context) =>
+                    GetIt.I<PatientResponseMedicalCheckupModel>()
+                      ..getMedicalRecords(
+                          formGroup: formGroup, patientId: patientId),
+                child: const PatientResponseMedicalCheckupScreen());
+          }),
     );
   }
 }

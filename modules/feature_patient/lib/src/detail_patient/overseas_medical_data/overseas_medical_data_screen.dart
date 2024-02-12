@@ -19,6 +19,9 @@ class OverseasMedicalDataScreen extends StatefulWidget {
 }
 
 class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
+  List<String> ids = [];
+  bool isSelectAll = false;
+
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -33,6 +36,7 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                 context.appTheme.spacing.marginExtraLarge,
               ),
               decoration: BoxDecoration(
+                color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(
                   context.appTheme.spacing.borderRadiusMedium,
                 )),
@@ -56,8 +60,9 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                     children: [
                       Text(
                         '診療データをここにドラッグ＆ドロップ',
-                        style: context.textTheme.titleLarge?.copyWith(
-                          color: context.appTheme.primaryColor,
+                        style: context.textTheme.bodySmall?.copyWith(
+                          fontSize: 22,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                       SizedBox(
@@ -69,11 +74,6 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                         },
                         child: const Text(
                           'またはファイルを選択する',
-                          style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',
-                            color: Colors.white,
-                          ),
                         ),
                       )
                     ],
@@ -94,11 +94,6 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                 },
                 child: const Text(
                   '外部URLを追加',
-                  style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',
-                    color: Colors.white,
-                  ),
                 ),
               )
             ],
@@ -109,13 +104,17 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
           Row(
             children: [
               Checkbox(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  side: BorderSide(color: Colors.grey),
-                ),
-                checkColor: Colors.white,
-                value: false,
-                onChanged: (value) {},
+                value: isSelectAll,
+                onChanged: (value) {
+                  setState(() {
+                    isSelectAll = !isSelectAll;
+                    if (isSelectAll) {
+                      ids = List.generate(10, (index) => index.toString());
+                    } else {
+                      ids = [];
+                    }
+                  });
+                },
               ),
               Expanded(
                   flex: 3,
@@ -145,9 +144,11 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                 style: context.textTheme.bodySmall,
               )),
               Expanded(
-                  child: Text(
-                'QR',
-                style: context.textTheme.bodySmall,
+                  child: Center(
+                child: Text(
+                  'QR',
+                  style: context.textTheme.bodySmall,
+                ),
               )),
               Expanded(
                   child: Text(
@@ -155,18 +156,22 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                 style: context.textTheme.bodySmall,
               )),
               Expanded(
-                  child: Text(
-                '共有',
-                style: context.textTheme.bodySmall,
+                  child: Center(
+                child: Text(
+                  '共有',
+                  style: context.textTheme.bodySmall,
+                ),
               )),
               Expanded(
-                  child: Text(
-                'コメント',
-                style: context.textTheme.bodySmall,
+                  child: Center(
+                child: Text(
+                  'コメント',
+                  style: context.textTheme.bodySmall,
+                ),
               )),
             ],
           ),
-          Divider(),
+          const Divider(),
           ListView(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -181,13 +186,16 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                   child: Row(
                     children: [
                       Checkbox(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                          side: BorderSide(color: Colors.grey),
-                        ),
-                        checkColor: Colors.white,
-                        value: false,
-                        onChanged: (value) {},
+                        value: ids.contains(index.toString()),
+                        onChanged: (value) {
+                          setState(() {
+                            if (ids.contains(index.toString())) {
+                              ids.remove(index.toString());
+                            } else {
+                              ids.add(index.toString());
+                            }
+                          });
+                        },
                       ),
                       Expanded(
                           flex: 3,

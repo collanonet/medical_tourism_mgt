@@ -15,10 +15,9 @@ class MedicalSummaryPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) =>
-      GetIt.I<MedicalSummaryModel>()..initialData(patient: patient ),
-      child: const MedicalSummaryScreen(),
+    return Provider(
+      create: (context) => GetIt.I<MedicalSummaryModel>(),
+      child: MedicalSummaryScreen(patientId: patient?.id),
     );
   }
 }

@@ -8,22 +8,24 @@ import 'normal_summary_model.dart';
 import 'normal_summary_screen.dart';
 
 class NormalSummaryPage extends StatelessWidget {
-  const NormalSummaryPage({super.key});
+  const NormalSummaryPage({super.key, this.patientId});
+  final String? patientId;
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (context) => GetIt.I<NormalSummaryModel>(),
-      child: ReactiveFormConfig(
-        validationMessages: <String, ValidationMessageFunction>{
-          ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
-        },
-        child: ReactiveFormBuilder(
-            form: () => normalSummaryForm(),
-            builder: (context, formGroup, child) {
-              return const NormalSummaryScreen();
-            }),
-      ),
+    return ReactiveFormConfig(
+      validationMessages: <String, ValidationMessageFunction>{
+        ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
+      },
+      child: ReactiveFormBuilder(
+          form: () => normalSummaryForm(),
+          builder: (context, formGroup, child) {
+            return Provider(
+                create: (context) => GetIt.I<NormalSummaryModel>()
+                  ..getMedicalRecords(
+                      formGroup: formGroup, patientId: patientId),
+                child: const NormalSummaryScreen());
+          }),
     );
   }
 }

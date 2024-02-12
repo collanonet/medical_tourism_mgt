@@ -47,7 +47,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
                       children: [
                         Expanded(
                           child: ReactiveTextField(
-                            formControlName: 'hospital_name',
+                            formControlName: 'hospitalName',
                             decoration: InputDecoration(
                               label: Text(
                                 '病院名',

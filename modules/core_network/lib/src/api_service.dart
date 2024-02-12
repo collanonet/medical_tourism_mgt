@@ -5,6 +5,12 @@ import 'package:retrofit/retrofit.dart';
 
 import '../core_network.dart';
 import 'apis.dart';
+import 'entities/medical_record_patient_response_treatment.dart';
+import 'entities/medical_record_patient_response_treatment_request.dart';
+import 'entities/medical_record_proposal.dart';
+import 'entities/medical_record_proposal_request.dart';
+import 'entities/medical_record_travel_group.dart';
+import 'entities/medical_record_travel_group_request.dart';
 
 part 'api_service.g.dart';
 
@@ -59,7 +65,21 @@ abstract class ApiService {
   //GET_PATIENTS
 
   @GET(Apis.GET_PATIENTS)
-  Future<Paginated<Patient>> patients();
+  Future<Paginated<Patient>> patients({
+    @Query('page') int? page,
+    @Query('limit') int? limit,
+    @Query('patient_name') String? patientName,
+    @Query('companyAGENTS') String? companyAgents,
+    @Query('acceptingHospital') String? acceptingHospital,
+    @Query('type') List<String?>? type,
+    @Query('salesStaff') String? salesStaff,
+    @Query('dateOfEntryfrom') String? dateOfEntryfrom,
+    @Query('dateOfEntryto') String? dateOfEntryto,
+    @Query('medicalDayfrom') String? medicalDayfrom,
+    @Query('medicalDayto') String? medicalDayto,
+    @Query('returnDatefrom') String? returnDatefrom,
+    @Query('returnDateto') String? returnDateto,
+  });
 
   @GET('${Apis.GET_PATIENT}/{id}')
   Future<Patient> patient(
@@ -92,6 +112,11 @@ abstract class ApiService {
   @GET('${Apis.GET_PATIENT_NAMES_BY_PATIENT}/{patientId}')
   Future<List<PatientName>> patientNamesByPatient(
     @Path('patientId') String patientId,
+  );
+
+  @GET('${Apis.GET_PATIENT_USER}/{userId}')
+  Future<User> patientUser(
+    @Path('userId') String userId,
   );
 
   @POST(Apis.POST_PATIENT_NAMES)
@@ -456,6 +481,103 @@ abstract class ApiService {
   Future<void> deleteMedicalRecordOverseaData(
     @Path('id') String id,
   );
+
+  @GET('${Apis.GET_MEDICAL_RECORD_TRAVEL_GROUP}/{medicalRecord}')
+  Future<MedicalRecordTravelGroup> medicalRecordsTravelGroup({
+    @Path('medicalRecord') String? medicalRecord,
+  });
+
+  @POST(Apis.POST_MEDICAL_RECORD_TRAVEL_GROUP)
+  Future<MedicalRecordTravelGroup> postMedicalRecordTravelGroup(
+    @Body() MedicalRecordTravelGroupRequest medicalRecordTravelGroupRequest,
+  );
+
+  //GET_MEDICAL_RECORD_Proposal
+
+  @GET(Apis.MEDICAL_RECORD_PROPOSAL)
+  Future<List<MedicalRecordProposal>> getAllMedicalRecordProposals();
+
+  @GET('${Apis.MEDICAL_RECORD_PROPOSAL_BY_MEDICAL_RECORD}/{medicalRecordId}')
+  Future<List<MedicalRecordProposal>> getMedicalRecordProposalsByMedicalRecord(
+    @Path('medicalRecordId') String medicalRecordId,
+  );
+
+  @GET('${Apis.MEDICAL_RECORD_PROPOSAL}/{id}')
+  Future<List<MedicalRecordProposal>> getOneMedicalRecordProposal(
+    @Path('id') String id,
+  );
+
+  @POST(Apis.MEDICAL_RECORD_PROPOSAL)
+  Future<MedicalRecordProposal> postMedicalRecordProposal(
+    @Body() MedicalRecordProposalRequest medicalRecordProposalRequest,
+  );
+
+  @PUT('${Apis.MEDICAL_RECORD_PROPOSAL}/{id}')
+  Future<MedicalRecordProposal> putMedicalRecordProposal(
+    @Path('id') String id,
+    @Body() MedicalRecordProposalRequest medicalRecordProposalRequest,
+  );
+
+  @DELETE('${Apis.MEDICAL_RECORD_PROPOSAL}/{id}')
+  Future<void> deleteMedicalRecordProposal(
+    @Path('id') String id,
+  );
+
+  @GET('${Apis.MEDICAL_RECORD_PATIENT_RESPONSE_TREATMENT}/{medicalRecord}')
+  Future<MedicalRecordPatientResponseTreatment>
+      getMedicalRecordPatientResponseTreatment({
+    @Path('medicalRecord') String? medicalRecord,
+  });
+
+  @POST(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_TREATMENT)
+  Future<MedicalRecordPatientResponseTreatment>
+      postMedicalRecordPatientResponseTreatment(
+    @Body()
+    MedicalRecordPatientResponseTreatmentRequest
+        medicalRecordPatientResponseTreatmentRequest,
+  );
+
+  @GET(
+      '${Apis.MEDICAL_RECORD_PATIENT_RESPONSE_MEDICAL_CHECKUP}/{medicalRecord}')
+  Future<MedicalRecordPatientResponseMedicalCheckup>
+      getMedicalRecordPatientResponseMedicalCheckup({
+    @Path('medicalRecord') String? medicalRecord,
+  });
+
+  @POST(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_MEDICAL_CHECKUP)
+  Future<MedicalRecordPatientResponseMedicalCheckup>
+      postMedicalRecordPatientResponseMedicalCheckup(
+    @Body()
+    MedicalRecordPatientResponseMedicalCheckupRequest
+        medicalRecordPatientResponseMedicalCheckupRequest,
+  );
+
+  @GET('${Apis.MEDICAL_RECORD_PATIENT_RESPONSE_OTHER}/{medicalRecord}')
+  Future<MedicalRecordPatientResponseOther>
+      getMedicalRecordPatientResponseOther({
+    @Path('medicalRecord') String? medicalRecord,
+  });
+
+  @POST(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_OTHER)
+  Future<MedicalRecordPatientResponseOther>
+      postMedicalRecordPatientResponseOther(
+    @Body()
+    MedicalRecordPatientResponseOtherRequest
+        medicalRecordPatientResponseOtherRequest,
+  );
+
+  @GET('${Apis.MEDICAL_RECORD_SUMMARY}/{medicalRecord}')
+  Future<MedicalRecordSummary> getMedicalRecordSummary({
+    @Path('medicalRecord') String? medicalRecord,
+  });
+
+  @POST(Apis.MEDICAL_RECORD_SUMMARY)
+  Future<MedicalRecordSummary> postMedicalRecordSummary(
+    @Body()
+    MedicalRecordSummaryRequest
+        medicalRecordNormalSummaryRequest,
+  );
+
 }
 
 extension ApiServiceExts on ApiService {

@@ -54,6 +54,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     ),
                   ), // TODO: l10n 対応 (本人)  (patient)
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
@@ -103,8 +104,10 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                       Expanded(
                           flex: 2,
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -152,6 +155,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                         '性別', //
                                       ),
                                       Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: <Widget>[
                                           Container(
                                             width: 100,
@@ -261,6 +266,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     ],
                   ),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
@@ -359,6 +365,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     ],
                   ),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: ReactiveTextField(
@@ -439,6 +446,18 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                               value: 'キャンセル',
                               child: Text('キャンセル'),
                             ),
+                            DropdownMenuItem(
+                              value: 'CXL',
+                              child: Text('CXL'),
+                            ),
+                            DropdownMenuItem(
+                              value: '延期',
+                              child: Text('延期'),
+                            ),
+                            DropdownMenuItem(
+                              value: '消滅',
+                              child: Text('消滅'),
+                            ),
                           ],
                         ),
                       ),
@@ -453,19 +472,50 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                             (currentForm) => ReactiveForm(
                               formGroup: currentForm,
                               child: Row(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Expanded(
-                                    child: ReactiveTextField(
+                                  const Expanded(
+                                    child: ReactiveDropdownFormField(
                                       formControlName: 'type',
                                       decoration: InputDecoration(
                                         label: Text(
                                           '種別',
                                         ),
-                                        suffixIcon: Icon(
-                                          Icons.search,
-                                          color: Colors.grey,
-                                        ),
                                       ),
+                                      items: [
+                                        DropdownMenuItem(
+                                          value: '治療',
+                                          child: Text('治療'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '健診',
+                                          child: Text('健診'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: 'その他',
+                                          child: Text('その他'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '検査ｷｯﾄ',
+                                          child: Text('検査ｷｯﾄ'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: 'ビザ',
+                                          child: Text('ビザ'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '旅行',
+                                          child: Text('旅行'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '視察',
+                                          child: Text('視察'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '再生',
+                                          child: Text('再生'),
+                                        ),
+                                      ],
                                     ),
                                   ),
                                   SizedBox(
@@ -491,7 +541,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     onTap: () {
                       (formGroup.control('type') as FormArray).add(
                         FormGroup({
-                          'type': FormControl<String?>(),
+                          'type': FormControl<String>(),
                         }),
                       );
                     },
@@ -518,6 +568,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     ),
                   ),
                   Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(

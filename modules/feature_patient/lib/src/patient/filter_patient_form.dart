@@ -1,30 +1,22 @@
 import 'package:core_l10n/l10n.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup formFilterPatient() => FormGroup(
       {
-        'patient_name': FormControl<String>(
-          value: '',
+        'patient_name': FormControl<String?>(),
+        'companyAGENTS': FormControl<String?>(),
+        'acceptingHospital': FormControl<String>(),
+        'type': FormControl<String>(),
+        'salesStaff': FormControl<String?>(),
+        'dateOfEntryfrom': FormControl<DateTime>(
         ),
-        'agent_company_name': FormControl<String>(
-          value: '',
-        ),
-        'hospital_name': FormControl<String>(
-          value: '',
-        ),
-        'classification': FormControl<String>(
-          value: '',
-        ),
-        'sales_representative': FormControl<String>(
-          value: '',
-        ),
-        'entry_date_from': FormControl<DateTime>(),
-        'entry_date_to': FormControl<DateTime>(),
-        'examination_date_from': FormControl<DateTime>(),
-        'examination_date_to': FormControl<DateTime>(),
-        'return_date_from': FormControl<DateTime>(),
-        'return_date_to': FormControl<DateTime>(),
+        'dateOfEntryto': FormControl<DateTime>(),
+        'medicalDayfrom': FormControl<DateTime>(),
+        'medicalDayto': FormControl<DateTime>(),
+        'returnDatefrom': FormControl<DateTime>(),
+        'returnDateto': FormControl<DateTime>(),
       },
     );
 

@@ -7,7 +7,7 @@ FormGroup billingForm() => FormGroup({
           'occurrence_date': FormControl<DateTime>(
             value: DateTime.now(),
           ),
-          'hospital_name': FormControl<String>(
+          'hospitalName': FormControl<String>(
             value: 'りんくうメディカルクリニック'
           ),
           'treatment_details': FormControl<String>(
@@ -25,7 +25,7 @@ FormGroup billingForm() => FormGroup({
           'occurrence_date': FormControl<DateTime>(
             value: DateTime.now(),
           ),
-          'hospital_name': FormControl<String>(
+          'hospitalName': FormControl<String>(
             value: 'りんくうメディカルクリニック'
           ),
           'treatment_details': FormControl<String>(
@@ -43,7 +43,7 @@ FormGroup billingForm() => FormGroup({
           'occurrence_date': FormControl<DateTime>(
             value: DateTime.now(),
           ),
-          'hospital_name': FormControl<String>(
+          'hospitalName': FormControl<String>(
             value: 'りんくうメディカルクリニック'
           ),
           'treatment_details': FormControl<String>(
@@ -61,7 +61,7 @@ FormGroup billingForm() => FormGroup({
           'occurrence_date': FormControl<DateTime>(
             value: DateTime.now(),
           ),
-          'hospital_name': FormControl<String>(
+          'hospitalName': FormControl<String>(
             value: 'りんくうメディカルクリニック'
           ),
           'treatment_details': FormControl<String>(

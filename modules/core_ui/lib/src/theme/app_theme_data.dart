@@ -271,6 +271,7 @@ class AppThemeData {
       inputDecorationTheme: InputDecorationTheme(
         fillColor: Colors.white,
         filled: true,
+        alignLabelWithHint: true,
         hintStyle: const TextStyle(
           fontSize: 15.0,
           color: Color(0xFF5B5B5B),
@@ -288,6 +289,14 @@ class AppThemeData {
           borderSide: BorderSide(color: primaryColor),
         ),
         border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6.0),
+          borderSide: const BorderSide(color: Color(0xffCDD6DD)),
+        ),
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(6.0),
+          borderSide: const BorderSide(color: Color(0xffCDD6DD)),
+        ),
+        focusedErrorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(6.0),
           borderSide: const BorderSide(color: Color(0xffCDD6DD)),
         ),
@@ -353,7 +362,6 @@ class AppThemeData {
           ),
           borderRadius: BorderRadius.circular(4),
         ),
-
       ),
       radioTheme: RadioThemeData(
         fillColor: MaterialStateProperty.resolveWith(

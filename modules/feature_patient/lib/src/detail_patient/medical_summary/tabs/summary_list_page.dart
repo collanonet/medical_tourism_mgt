@@ -6,7 +6,8 @@ import 'summary_list_model.dart';
 import 'summary_list_screen.dart';
 
 class SummaryListPage extends StatelessWidget {
-  const SummaryListPage({super.key});
+  const SummaryListPage({super.key, this.patientId});
+  final String? patientId;
 
   @override
   Widget build(BuildContext context) {

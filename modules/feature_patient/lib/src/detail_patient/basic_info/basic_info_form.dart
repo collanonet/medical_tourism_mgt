@@ -6,21 +6,37 @@ FormGroup basicInfoForm({
     FormGroup(
       {
         'id': FormControl<String?>(),
-        'dateOfBirth': FormControl<DateTime>(), //生年月日
+        'dateOfBirth': FormControl<DateTime>(
+          validators: [Validators.required],
+        ), //生年月日
         'age': FormControl<int?>(), // 年齢
-        'height': FormControl<int?>(), // 身長
-        'weight': FormControl<int?>(), // 体重
+        'height': FormControl<int>(
+          value: 0,
+          validators: [Validators.required],
+        ), // 身長
+        'weight': FormControl<int>(
+          value: 0,
+          validators: [Validators.required],
+        ), // 体重
         'gender': FormControl<bool>(), // 性別
-        'isMale': FormControl<bool>(), // 男性
+        'isMale': FormControl<bool>(
+          value: true,
+        ), // 男性
         'isFemale': FormControl<bool>(), // 女性
-        'arrivalDate': FormControl<DateTime>(validators: [Validators.required]), // 来日日
+        'arrivalDate': FormControl<DateTime>(
+          validators: [Validators.required],
+        ), // 来日日
         'consultationDate': FormControl<DateTime>(),
         'returnDate': FormControl<DateTime>(),
-        'proposalNumber': FormControl<String>(),
+        'proposalNumber': FormControl<String>(
+          validators: [Validators.required],
+        ),
         'receptionDate': FormControl<DateTime>(),
         'type': FormArray([
           FormGroup({
-            'type': FormControl<String?>(),
+            'type': FormControl<String>(
+              validators: [Validators.required],
+            ),
           })
         ]),
         'progress': FormControl<String>(),
@@ -36,22 +52,36 @@ FormGroup basicInfoForm({
             'medicalCardNumber': FormControl<String?>(),
           }),
         ]),
-        'Travel_group': FormArray([
-          FormGroup({
-            'id': FormControl<String?>(),
-            'name': FormControl<String?>(),
-          })
-        ]),
-        'Patient_account': FormGroup({
+        'travelGroup': FormGroup({
           'id': FormControl<String?>(),
-          'loginId': FormControl<String?>(),
-          'loginPassword': FormControl<String?>(),
+          'toGroupLeader': FormControl<bool>(
+            value: false,
+          ),
+          'travelGroup': FormArray([
+            FormGroup({
+              'name': FormControl<String?>(),
+            })
+          ]),
+        }),
+
+        'Patient_account': FormGroup({
+          'loginId': FormControl<String?>(
+            disabled: true,
+          ),
+          'loginPassword': FormControl<String?>(
+            value: '********',
+            disabled: true,
+          ),
         }),
         'PATIENT_NAMES': FormGroup({
           'id': FormControl<String?>(),
-          'familyNameRomanized': FormControl<String?>(),
+          'familyNameRomanized': FormControl<String?>(
+            validators: [Validators.required],
+          ),
           'middleNameRomanized': FormControl<String?>(),
-          'firstNameRomanized': FormControl<String?>(),
+          'firstNameRomanized': FormControl<String?>(
+            validators: [Validators.required],
+          ),
           'familyNameChineseOrVietnamese': FormControl<String?>(),
           'middleNameChineseOrVietnamese': FormControl<String?>(),
           'firstNameChineseOrVietnamese': FormControl<String?>(),
@@ -70,7 +100,16 @@ FormGroup basicInfoForm({
           'currentAddress': FormControl<String?>(),
           'mobileNumber': FormControl<String?>(),
           'email': FormControl<String?>(),
-          'chat_tool_link': FormControl<String?>(),
+          'chatToolLink': FormArray([
+            FormGroup({
+              'chatToolLink': FormControl<String>(),
+            })
+          ]),
+          'chatQr': FormArray([
+            FormGroup({
+              'chatQr': FormControl<String>(),
+            })
+          ]),
           'patient': FormControl<String?>(),
         }),
         'MEDICAL_RECORD_BUDGETS': FormGroup({
@@ -80,15 +119,27 @@ FormGroup basicInfoForm({
         }),
         'MEDICAL_RECORD_AGENTS': FormGroup({
           'id': FormControl<String?>(),
-          'company': FormControl<String?>(),
-          'nameInKanji': FormControl<String?>(),
-          'nameInKana': FormControl<String?>(),
+          'company': FormControl<String?>(
+            validators: [Validators.required],
+          ),
+          'nameInKanji': FormControl<String?>(
+            validators: [Validators.required],
+          ),
+          'nameInKana': FormControl<String?>(
+            validators: [Validators.required],
+          ),
         }),
         'MEDICAL_RECORD_Referrers': FormGroup({
           'id': FormControl<String?>(),
-          'company': FormControl<String?>(),
-          'nameInKanji': FormControl<String?>(),
-          'nameInKana': FormControl<String?>(),
+          'company': FormControl<String?>(
+            validators: [Validators.required],
+          ),
+          'nameInKanji': FormControl<String?>(
+            validators: [Validators.required],
+          ),
+          'nameInKana': FormControl<String?>(
+            validators: [Validators.required],
+          ),
         }),
         'MEDICAL_RECORD_Interpreter': FormGroup({
           'id': FormControl<String?>(),
@@ -100,7 +151,10 @@ FormGroup basicInfoForm({
           'passportNumber': FormControl<String?>(),
           'issueDate': FormControl<DateTime>(),
           'expirationDate': FormControl<DateTime>(),
-          'visaType': FormControl<String?>(),
+          'visaType': FormControl<String?>(
+            value: 'medicalGuarantee',
+            validators: [Validators.required],
+          ),
           'visaCategory': FormControl<String?>(),
           'underConfirmation': FormControl<bool?>(),
         }),
@@ -125,10 +179,18 @@ FormGroup basicInfoForm({
             'relationship': FormControl<String>(),
             'dateOfBirth': FormControl<DateTime>(),
             'age': FormControl<int?>(),
-            'gender': FormControl<bool>(),
+            'gender': FormControl<bool>(), // 性別
+            'isMale': FormControl<bool>(
+              value: true,
+            ), // 男性
+            'isFemale': FormControl<bool>(), // 女
             'mobileNumber': FormControl<String?>(),
             'email': FormControl<String?>(),
-            'chat_tool_link': FormControl<String?>(),
+            'chatToolLink': FormArray([
+              FormGroup({
+                'chatToolLink': FormControl<String>(),
+              })
+            ]),
             'passportNumber': FormControl<String?>(),
             'issueDate': FormControl<DateTime>(),
             'expirationDate': FormControl<DateTime>(),

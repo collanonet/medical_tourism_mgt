@@ -166,12 +166,7 @@ class SideBarMenu extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () {},
                   child: Text(
-                    context.l10n.labelCenterHeadquarters,
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'NotoSansJP',
-                      package: 'core_ui',
-                    ),
+                    'センター本部専用',
                   ),
                 ),
               ),

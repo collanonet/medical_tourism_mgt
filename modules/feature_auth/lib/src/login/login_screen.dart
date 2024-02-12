@@ -24,110 +24,124 @@ class _LoginScreenState extends State<LoginScreen> {
     final formGroup = ReactiveForm.of(context) as FormGroup;
     return Scaffold(
       backgroundColor: context.appTheme.primaryColor,
-      body: Consumer<AuthModel>(
-        builder: (context, model, child) {
-          return Center(
-            child: Container(
-              width: MediaQuery.of(context).size.width * 0.4,
-              padding:
-                  EdgeInsets.all(context.appTheme.spacing.marginExtraLarge),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                  context.appTheme.spacing.borderRadiusMedium,
-                ),
-                color: context.appTheme.secondaryBackgroundColor,
-              ),
-              child: ColumnSeparated(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(
-                    height: context.appTheme.spacing.marginLarge,
-                  );
-                },
-                children: [
-                  Image.asset(
-                    Images.logoTitle,
-                    package: 'core_ui',
-                  ),
-                  Text(
-                    context.l10n.titleAppJP,
-                    style: context.textTheme.headlineLarge
-                        ?.copyWith(color: context.appTheme.primaryColor),
-                  ),
-                  ReactiveTextField(
-                    formControlName: 'email',
-                    decoration: InputDecoration(
-                      label: Text(
-                        context.l10n.labelId,
-                      ),
-                      hintText: context.l10n.labelPleaseEnterYourInformation,
+      body: Center(
+        child: SingleChildScrollView(
+          child: Consumer<AuthModel>(
+            builder: (context, model, child) {
+
+              return Center(
+                child: Container(
+                  width: MediaQuery.of(context).size.width * 0.4,
+                  margin:
+                      EdgeInsets.all(context.appTheme.spacing.marginExtraLarge),
+                  padding:
+                      EdgeInsets.all(context.appTheme.spacing.marginExtraLarge),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                      context.appTheme.spacing.borderRadiusMedium,
                     ),
-                    onSubmitted: (value) {
-                      setState(() {});
-                    },
+                    color: context.appTheme.secondaryBackgroundColor,
                   ),
-                  ReactiveFormConsumer(
-                    builder: (context, form, _) {
-                      return ReactiveTextField(
-                        formControlName: 'password',
-                        obscureText: obscureText,
+                  child: ColumnSeparated(
+                    mainAxisSize: MainAxisSize.min,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: context.appTheme.spacing.marginLarge,
+                      );
+                    },
+                    children: [
+                      Row(
+                        crossAxisAlignment: CrossAxisAlignment.end,
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          Text(
+                            '事業再構築補助金',
+                            style: context.textTheme.titleMedium,
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Image.asset(
+                        Images.logoTitle,
+                        package: 'core_ui',
+                      ),
+                      Text(
+                        '医療渡航支援企業',
+                        style: context.textTheme.titleLarge
+                            ?.copyWith(color: context.appTheme.primaryColor),
+                      ),
+                      ReactiveTextField(
+                        formControlName: 'email',
                         decoration: InputDecoration(
                           label: Text(
-                            context.l10n.labelPassword,
-                          ),
-                          suffixIcon: IconButton(
-                            color: context.appTheme.primaryColor,
-                            icon: Icon(
-                              obscureText
-                                  ? Icons.visibility
-                                  : Icons.visibility_off,
-                            ),
-                            onPressed: () {
-                              setState(() {
-                                obscureText = !obscureText;
-                              });
-                            },
+                            context.l10n.labelId,
                           ),
                           hintText:
                               context.l10n.labelPleaseEnterYourInformation,
                         ),
-                        onSubmitted: (value) => onSubmit(formGroup, model),
-                      );
-                    },
-                  ),
-                  Align(
-                    alignment: Alignment.centerRight,
-                    child: TextButton(
-                      onPressed: () {},
-                      child: Text(
-                        context.l10n.labelForgotPassword,
+                        onSubmitted: (value) {
+                          setState(() {});
+                        },
                       ),
-                    ),
-                  ),
-                  const ChangeLanguageWidget(),
-                  ReactiveFormConsumer(
-                    builder: (context, form, _) {
-                      return ElevatedButton(
-                        onPressed: model.loginData.loading
-                            ? null
-                            : () => onSubmit(formGroup, model),
-                        child: model.loginData.loading
-                            ? const Padding(
-                                padding: EdgeInsets.all(8.0),
-                                child: CircularProgressIndicator(
-                                  color: Colors.white,
+                      ReactiveFormConsumer(
+                        builder: (context, form, _) {
+                          return ReactiveTextField(
+                            formControlName: 'password',
+                            obscureText: obscureText,
+                            decoration: InputDecoration(
+                              label: Text(
+                                context.l10n.labelPassword,
+                              ),
+                              suffixIcon: IconButton(
+                                color: context.appTheme.primaryColor,
+                                icon: Icon(
+                                  obscureText
+                                      ? Icons.visibility
+                                      : Icons.visibility_off,
                                 ),
-                              )
-                            : Text(context.l10n.actionLogin),
-                      );
-                    },
+                                onPressed: () {
+                                  setState(() {
+                                    obscureText = !obscureText;
+                                  });
+                                },
+                              ),
+                              hintText:
+                                  context.l10n.labelPleaseEnterYourInformation,
+                            ),
+                            onSubmitted: (value) => onSubmit(formGroup, model),
+                          );
+                        },
+                      ),
+                      Align(
+                        alignment: Alignment.centerRight,
+                        child: TextButton(
+                          onPressed: () {},
+                          child: Text(
+                            context.l10n.labelForgotPassword,
+                          ),
+                        ),
+                      ),
+                      const ChangeLanguageWidget(),
+                      ReactiveFormConsumer(
+                        builder: (context, form, _) {
+                          return ElevatedButton(
+                            onPressed: model.loginData.loading
+                                ? null
+                                : () => onSubmit(formGroup, model),
+                            child: WithLoadingButton(
+                                isLoading: model.loginData.loading,
+                                child: Text(context.l10n.actionLogin)),
+                          );
+                        },
+                      ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-          );
-        },
+                ),
+              );
+            },
+          ),
+        ),
       ),
     );
   }
@@ -137,9 +151,14 @@ class _LoginScreenState extends State<LoginScreen> {
       model.logIn(
         formGroup.control('email').value,
         formGroup.control('password').value,
-      );
+      ).catchError((error) {
+        snackBarWidget(
+          message: error.toString(),
+        );
+      });
     } else {
-      snackBarWidget(message: context.l10n.mgsRequireInputLogin,
+      snackBarWidget(
+        message: context.l10n.mgsRequireInputLogin,
       );
     }
   }

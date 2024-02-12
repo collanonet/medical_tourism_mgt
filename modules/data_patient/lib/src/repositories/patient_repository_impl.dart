@@ -57,8 +57,32 @@ class PatientRepositoryIml extends PatientRepository {
   //GET_PATIENTS
 
   @override
-  Future<Paginated<Patient>> patients() {
-    return remote.patients();
+  Future<Paginated<Patient>> patients({
+    String? patient_name,
+    String? companyAGENTS,
+    String? acceptingHospital,
+    List<String?>? type,
+    String? salesStaff,
+    String? dateOfEntryfrom,
+    String? dateOfEntryto,
+    String? medicalDayfrom,
+    String? medicalDayto,
+    String? returnDatefrom,
+    String? returnDateto,
+  }) {
+    return remote.patients(
+      patient_name: patient_name,
+      companyAGENTS: companyAGENTS,
+      acceptingHospital: acceptingHospital,
+      type: type,
+      salesStaff: salesStaff,
+      dateOfEntryfrom: dateOfEntryfrom,
+      dateOfEntryto: dateOfEntryto,
+      medicalDayfrom: medicalDayfrom,
+      medicalDayto: medicalDayto,
+      returnDatefrom: returnDatefrom,
+      returnDateto: returnDateto,
+    );
   }
 
   @override
@@ -590,5 +614,123 @@ class PatientRepositoryIml extends PatientRepository {
     String id,
   ) {
     return remote.deleteMedicalRecordOverseaData(id);
+  }
+
+  @override
+  Future<User> patientUser(String userId) {
+    return remote.patientUser(userId);
+  }
+
+  @override
+  Future<MedicalRecordTravelGroup> medicalRecordTravelGroups(
+      String medicalRecord) {
+    return remote.medicalRecordTravelGroups(medicalRecord);
+  }
+
+  @override
+  Future<MedicalRecordTravelGroup> postMedicalRecordTravelGroup(
+      MedicalRecordTravelGroupRequest medicalRecordTravelGroup) {
+    return remote.postMedicalRecordTravelGroup(medicalRecordTravelGroup);
+  }
+
+  @override
+  Future<void> deleteMedicalRecordProposal(String id) {
+    return remote.deleteMedicalRecordProposal(id);
+  }
+
+  @override
+  Future<List<MedicalRecordProposal>> getAllMedicalRecordProposals() {
+    return remote.getAllMedicalRecordProposals();
+  }
+
+  @override
+  Future<List<MedicalRecordProposal>> getMedicalRecordProposalsByMedicalRecord(
+      String medicalRecord) {
+    return remote.getMedicalRecordProposalsByMedicalRecord(medicalRecord);
+  }
+
+  @override
+  Future<List<MedicalRecordProposal>> getOneMedicalRecordProposal(String id) {
+    return remote.getOneMedicalRecordProposal(id);
+  }
+
+  @override
+  Future<MedicalRecordProposal> postMedicalRecordProposal(
+      MedicalRecordProposalRequest medicalRecordProposal) {
+    return remote.postMedicalRecordProposal(medicalRecordProposal);
+  }
+
+  @override
+  Future<MedicalRecordProposal> putMedicalRecordProposal(
+      String id, MedicalRecordProposalRequest medicalRecordProposal) {
+    return remote.putMedicalRecordProposal(id, medicalRecordProposal);
+  }
+
+  @override
+  Future<MedicalRecordPatientResponseTreatment>
+      getMedicalRecordPatientResponseTreatment({
+    required String medicalRecord,
+  }) {
+    return remote.getMedicalRecordPatientResponseTreatment(
+        medicalRecord: medicalRecord);
+  }
+
+  @override
+  Future<MedicalRecordPatientResponseTreatment>
+      postMedicalRecordPatientResponseTreatment(
+    MedicalRecordPatientResponseTreatmentRequest
+        medicalRecordPatientResponseTreatment,
+  ) {
+    return remote.postMedicalRecordPatientResponseTreatment(
+        medicalRecordPatientResponseTreatment);
+  }
+
+  @override
+  Future<MedicalRecordPatientResponseMedicalCheckup>
+      getMedicalRecordPatientResponseMedicalCheckup({
+    required String medicalRecord,
+  }) {
+    return remote.getMedicalRecordPatientResponseMedicalCheckup(
+        medicalRecord: medicalRecord);
+  }
+
+  @override
+  Future<MedicalRecordPatientResponseMedicalCheckup>
+      postMedicalRecordPatientResponseMedicalCheckup(
+    MedicalRecordPatientResponseMedicalCheckupRequest
+        medicalRecordPatientResponseMedicalCheckup,
+  ) {
+    return remote.postMedicalRecordPatientResponseMedicalCheckup(
+        medicalRecordPatientResponseMedicalCheckup);
+  }
+
+  @override
+  Future<MedicalRecordPatientResponseOther>
+      getMedicalRecordPatientResponseOther({
+    required String medicalRecord,
+  }) {
+    return remote.getMedicalRecordPatientResponseOther(
+        medicalRecord: medicalRecord);
+  }
+
+  @override
+  Future<MedicalRecordPatientResponseOther>
+      postMedicalRecordPatientResponseOther(
+    MedicalRecordPatientResponseOtherRequest medicalRecordPatientResponseOther,
+  ) {
+    return remote.postMedicalRecordPatientResponseOther(
+        medicalRecordPatientResponseOther);
+  }
+
+  @override
+  Future<MedicalRecordSummary> getMedicalRecordSummary(
+      {required String medicalRecord}) {
+    return remote.getMedicalRecordSummary(medicalRecord: medicalRecord);
+  }
+
+  @override
+  Future<MedicalRecordSummary> postMedicalRecordSummary(
+      MedicalRecordSummaryRequest medicalRecordSummary) {
+    return remote.postMedicalRecordSummary(medicalRecordSummary);
   }
 }

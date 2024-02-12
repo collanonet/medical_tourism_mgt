@@ -25,44 +25,57 @@ class WebAppointmentScreen extends StatelessWidget {
             child: Skeletonizer(
               enabled: model.patientData.loading,
               child: DynamicTable(
+                rowsPerPage: (model.patientData.data?.items.length ?? 0) < 10
+                    ? model.patientData.data?.items.length
+                    : model.patientData.data?.items.length ?? 0,
                 data: TableData(
                   columns: [
                     HeaderTableData(
                       flex: 2,
-                      titleHeader: Text('病院名',
+                      titleHeader: Text(
+                        '病院名',
                         style: TextStyle(
                           fontFamily: 'NotoSansJP',
                           package: 'core_ui',
-                        ),),
+                        ),
+                      ),
                     ),
                     HeaderTableData(
-                      titleHeader: Text('状況',
+                      titleHeader: Text(
+                        '状況',
                         style: TextStyle(
                           fontFamily: 'NotoSansJP',
                           package: 'core_ui',
-                        ),),
+                        ),
+                      ),
                     ),
                     HeaderTableData(
                       flex: 2,
-                      titleHeader: Text('患者',
+                      titleHeader: Text(
+                        '患者',
                         style: TextStyle(
                           fontFamily: 'NotoSansJP',
                           package: 'core_ui',
-                        ),),
+                        ),
+                      ),
                     ),
                     HeaderTableData(
-                      titleHeader: Text('予約日',
+                      titleHeader: Text(
+                        '予約日',
                         style: TextStyle(
                           fontFamily: 'NotoSansJP',
                           package: 'core_ui',
-                        ),),
+                        ),
+                      ),
                     ),
                     HeaderTableData(
-                      titleHeader: Text('テストコール日',
+                      titleHeader: Text(
+                        'テストコール日',
                         style: TextStyle(
                           fontFamily: 'NotoSansJP',
                           package: 'core_ui',
-                        ),),
+                        ),
+                      ),
                     ),
                   ],
                   rows: (model.patientData.data?.items.length ?? 0) == 0
@@ -77,11 +90,13 @@ class WebAppointmentScreen extends StatelessWidget {
                                     .push(WebAppointmentDetailRoute());
                               },
                               cell: [
-                                Text('りんくうメディカルクリニック',
+                                Text(
+                                  'りんくうメディカルクリニック',
                                   style: TextStyle(
                                     fontFamily: 'NotoSansJP',
                                     package: 'core_ui',
-                                  ),),
+                                  ),
+                                ),
                                 Row(
                                   children: [
                                     Container(
@@ -94,8 +109,9 @@ class WebAppointmentScreen extends StatelessWidget {
                                       child: const Text(
                                         'CXL',
                                         style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',color: Colors.white),
+                                            fontFamily: 'NotoSansJP',
+                                            package: 'core_ui',
+                                            color: Colors.white),
                                       ),
                                     ),
                                   ],
@@ -123,17 +139,19 @@ class WebAppointmentScreen extends StatelessWidget {
                                         Text(
                                           '${item?.firstName} ${item!.familyName}',
                                           style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',
+                                            fontFamily: 'NotoSansJP',
+                                            package: 'core_ui',
                                             color:
                                                 context.appTheme.primaryColor,
                                           ),
                                         ),
-                                        const Text('刘 伟强 / 劉 偉強 / リュウ　イーチャン',
+                                        const Text(
+                                          '刘 伟强 / 劉 偉強 / リュウ　イーチャン',
                                           style: TextStyle(
                                             fontFamily: 'NotoSansJP',
                                             package: 'core_ui',
-                                          ),),
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ],

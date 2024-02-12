@@ -18,7 +18,7 @@ class DetailPatientWebReservationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return Provider(
       create: (context) => GetIt.I<DetailPatientWebReservationModel>(),
       child: ReactiveFormConfig(
         validationMessages: <String, ValidationMessageFunction>{

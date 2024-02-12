@@ -1,6 +1,7 @@
 //@GeneratedMicroModule;FeatureAuthPackageModule;package:feature_auth/feature_auth.module.dart
 // GENERATED CODE - DO NOT MODIFY BY HAND
-// ignore_for_file: type=lint
+// ignore_for_file: unnecessary_lambdas
+// ignore_for_file: lines_longer_than_80_chars
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes

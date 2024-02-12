@@ -9,6 +9,9 @@ class PatientNationalityRequest {
    String? residentialArea;
    String? currentAddress;
    String? mobileNumber;
+   String? email;
+   List<String?>? chatToolLink;
+   List<String?>? chatQr;
    String? patient;
 
   PatientNationalityRequest({
@@ -17,6 +20,9 @@ class PatientNationalityRequest {
      this.residentialArea,
      this.currentAddress,
      this.mobileNumber,
+     this.email,
+     this.chatToolLink,
+     this.chatQr,
      this.patient,
   });
 
