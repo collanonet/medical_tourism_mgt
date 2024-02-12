@@ -5,113 +5,81 @@ import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class OverseasMedicalDataModel with ChangeNotifier {
+class OverseasMedicalDataModel {
   OverseasMedicalDataModel({
     required this.patientRepository,
   });
 
   final PatientRepository patientRepository;
 
-  late Patient _patient;
-  Patient get patient => _patient;
+  ValueNotifier<AsyncData<bool>> loading =
+      ValueNotifier<AsyncData<bool>>(const AsyncData());
+
+  ValueNotifier<AsyncData<Patient>> patientData =
+      ValueNotifier<AsyncData<Patient>>(const AsyncData());
   Future<void> initialData({Patient? patient, String? id}) async {
-    notifyListeners();
-  }
+    loading.value = const AsyncData(loading: true);
+    if (patient != null || id != null) {
+      patientData.value = const AsyncData<Patient>(loading: true);
 
-//GET_MEDICAL_RECORDS_OVERSEAS
-  AsyncData<List<MedicalRecordOversea>> _medicalRecordsOverseas =
-      const AsyncData();
-  AsyncData<List<MedicalRecordOversea>> get medicalRecordsOverseas =>
-      _medicalRecordsOverseas;
-
-  Future<void> getMedicalRecordsOverseas(String medicalRecordId) async {
-    _medicalRecordsOverseas = const AsyncData(loading: true);
-    notifyListeners();
-
-    await patientRepository
-        .medicalRecordsOverseas(medicalRecordId)
-        .then((value) {
-      _medicalRecordsOverseas = AsyncData(data: value);
-    }).catchError((error) {
-      logger.d(error);
-      _medicalRecordsOverseas = AsyncData(error: error);
-    }).whenComplete(() {
-      notifyListeners();
-    });
-
-    if (_medicalRecordsOverseas.data != null &&
-        _medicalRecordsOverseas.data!.isNotEmpty) {
-      await getMedicalRecordsOverseasData(_medicalRecordsOverseas.data![0].id);
+      try {
+        if (patient == null) {
+          if (id != null) {
+            var result = await patientRepository.patient(id);
+            patientData.value = AsyncData<Patient>(data: result);
+          }
+        } else {
+          patientData.value = AsyncData<Patient>(data: patient);
+        }
+        await getMedicalRecordData(patientData.value.data?.id ?? id ?? '');
+      } catch (error) {
+        patientData.value = AsyncData<Patient>(error: error);
+      } finally {
+        loading.value = const AsyncData();
+      }
+    } else {
+      patientData.value = const AsyncData();
+      loading.value = const AsyncData();
     }
   }
 
-  // post MEDICAL_RECORDS_OVERSEAS
-  Future<void> postMedicalRecordsOverseas(
-    MedicalRecordOverseaRequest medicalRecordOverseaRequest,
-  ) async {
-    _medicalRecordsOverseas = const AsyncData(loading: true);
-    notifyListeners();
+  ValueNotifier<AsyncData<MedicalRecord>> medicalRecordData =
+      ValueNotifier<AsyncData<MedicalRecord>>(const AsyncData());
 
-    await patientRepository
-        .postMedicalRecordOversea(medicalRecordOverseaRequest)
-        .then((value) {
-      _medicalRecordsOverseas.data?.add(value);
-    }).catchError((error) {
-      logger.d(error);
-      _medicalRecordsOverseas = AsyncData(error: error);
-    }).whenComplete(() {
-      notifyListeners();
-    });
-  }
+  getMedicalRecordData(String patientId) async {
+    medicalRecordData.value = const AsyncData(loading: true);
 
-  // update MEDICAL_RECORDS_OVERSEAS
-  Future<void> updateMedicalRecordsOverseas(
-    String id,
-    MedicalRecordOverseaRequest medicalRecordOverseaRequest,
-  ) async {
-    _medicalRecordsOverseas = const AsyncData(loading: true);
-    notifyListeners();
-
-    await patientRepository
-        .putMedicalRecordOversea(id, medicalRecordOverseaRequest)
-        .then((value) {
-      // Find from list and update or add
-      final index = _medicalRecordsOverseas.data?.indexWhere(
-            (element) => element.id == id,
-          ) ??
-          -1;
-      if (index >= 0) {
-        _medicalRecordsOverseas.data?[index] = value;
+    try {
+      var result = await patientRepository.medicalRecordsByPatient(patientId);
+      logger.d('result: $result');
+      if (result.isNotEmpty) {
+        medicalRecordData.value = AsyncData(data: result.first);
+        await getMedicalRecordsOverseasData(medicalRecordData.value.requireData.id);
       } else {
-        _medicalRecordsOverseas.data?.add(value);
+        medicalRecordData.value = const AsyncData();
       }
-    }).catchError((error) {
-      logger.d(error);
-      _medicalRecordsOverseas = AsyncData(error: error);
-    }).whenComplete(() {
-      notifyListeners();
-    });
+    } catch (e) {
+      logger.e(e);
+      medicalRecordData.value = AsyncData(error: e);
+    }
   }
 
 //GET_MEDICAL_RECORDS_OVERSEAS_DATA
-  AsyncData<List<MedicalRecordOverseaData>> _medicalRecordsOverseasData =
-      const AsyncData();
-  AsyncData<List<MedicalRecordOverseaData>> get medicalRecordsOverseasData =>
-      _medicalRecordsOverseasData;
+  ValueNotifier<AsyncData<List<MedicalRecordOverseaData>>>
+      medicalRecordsOverseasData =
+      ValueNotifier<AsyncData<List<MedicalRecordOverseaData>>>(
+          const AsyncData());
 
   Future<void> getMedicalRecordsOverseasData(String medicalRecordId) async {
-    _medicalRecordsOverseasData = const AsyncData(loading: true);
-    notifyListeners();
+    medicalRecordsOverseasData.value = const AsyncData(loading: true);
 
     await patientRepository
         .medicalRecordsOverseasData(medicalRecordId)
         .then((value) {
-      _medicalRecordsOverseasData = AsyncData(data: value);
+      medicalRecordsOverseasData.value = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);
-      _medicalRecordsOverseasData = AsyncData(error: error);
-    }).whenComplete(() {
-      notifyListeners();
+      medicalRecordsOverseasData.value = AsyncData(error: error);
     });
   }
 
@@ -119,18 +87,15 @@ class OverseasMedicalDataModel with ChangeNotifier {
   Future<void> postMedicalRecordsOverseasData(
     MedicalRecordOverseaDataRequest medicalRecordOverseaDataRequest,
   ) async {
-    _medicalRecordsOverseasData = const AsyncData(loading: true);
-    notifyListeners();
+    medicalRecordsOverseasData.value = const AsyncData(loading: true);
 
     await patientRepository
         .postMedicalRecordOverseaData(medicalRecordOverseaDataRequest)
         .then((value) {
-      _medicalRecordsOverseasData.data?.add(value);
+      medicalRecordsOverseasData.value.data?.add(value);
     }).catchError((error) {
       logger.d(error);
-      _medicalRecordsOverseasData = AsyncData(error: error);
-    }).whenComplete(() {
-      notifyListeners();
+      medicalRecordsOverseasData.value = AsyncData(error: error);
     });
   }
 
@@ -138,27 +103,24 @@ class OverseasMedicalDataModel with ChangeNotifier {
     String id,
     MedicalRecordOverseaDataRequest medicalRecordOverseaDataRequest,
   ) async {
-    _medicalRecordsOverseasData = const AsyncData(loading: true);
-    notifyListeners();
+    medicalRecordsOverseasData.value = const AsyncData(loading: true);
 
     await patientRepository
         .putMedicalRecordOverseaData(id, medicalRecordOverseaDataRequest)
         .then((value) {
       // Find from list and update or add
-      final index = _medicalRecordsOverseasData.data?.indexWhere(
+      final index = medicalRecordsOverseasData.value.data?.indexWhere(
             (element) => element.id == id,
           ) ??
           -1;
       if (index >= 0) {
-        _medicalRecordsOverseasData.data?[index] = value;
+        medicalRecordsOverseasData.value.data?[index] = value;
       } else {
-        _medicalRecordsOverseasData.data?.add(value);
+        medicalRecordsOverseasData.value.data?.add(value);
       }
     }).catchError((error) {
       logger.d(error);
-      _medicalRecordsOverseasData = AsyncData(error: error);
-    }).whenComplete(() {
-      notifyListeners();
+      medicalRecordsOverseasData.value = AsyncData(error: error);
     });
   }
 }

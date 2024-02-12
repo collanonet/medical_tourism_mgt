@@ -540,61 +540,15 @@ class PatientRepositoryIml extends PatientRepository {
     return remote.deleteMedicalRecordProgress(id);
   }
 
-//GET_MEDICAL_RECORDS_OVERSEAS
-
-  @override
-  Future<List<MedicalRecordOversea>> medicalRecordsOverseas(
-    String medicalRecordId,
-  ) {
-    return remote.medicalRecordsOverseas(medicalRecordId);
-  }
-
-  @override
-  Future<List<MedicalRecordOversea>> medicalRecordsOverseasByMedicalRecord(
-    String medicalRecordId,
-  ) {
-    return remote.medicalRecordsOverseasByMedicalRecord(medicalRecordId);
-  }
-
-  @override
-  Future<MedicalRecordOversea> postMedicalRecordOversea(
-    MedicalRecordOverseaRequest medicalRecordOversea,
-  ) {
-    return remote.postMedicalRecordOversea(medicalRecordOversea);
-  }
-
-  @override
-  Future<MedicalRecordOversea> putMedicalRecordOversea(
-    String id,
-    MedicalRecordOverseaRequest medicalRecordOversea,
-  ) {
-    return remote.putMedicalRecordOversea(id, medicalRecordOversea);
-  }
-
-  @override
-  Future<void> deleteMedicalRecordOversea(
-    String id,
-  ) {
-    return remote.deleteMedicalRecordOversea(id);
-  }
-
   //GET_MEDICAL_RECORDS_OVERSEAS_DATA
 
   @override
   Future<List<MedicalRecordOverseaData>> medicalRecordsOverseasData(
-    String medicalRecordOverseaId,
+    String medicalRecordId,
   ) {
-    return remote.medicalRecordsOverseaData(medicalRecordOverseaId);
+    return remote.medicalRecordsOverseaData(medicalRecordId);
   }
 
-  @override
-  Future<List<MedicalRecordOverseaData>>
-      medicalRecordsOverseaDataByMedicalRecordOversea(
-    String medicalRecordOverseaId,
-  ) {
-    return remote.medicalRecordsOverseaDataByMedicalRecordOversea(
-        medicalRecordOverseaId);
-  }
 
   @override
   Future<MedicalRecordOverseaData> postMedicalRecordOverseaData(

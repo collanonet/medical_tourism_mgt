@@ -312,37 +312,12 @@ abstract class PatientRepository {
     String id,
   );
 
-//GET_MEDICAL_RECORDS_OVERSEAS
-  Future<List<MedicalRecordOversea>> medicalRecordsOverseas(
-    String medicalRecordId,
-  );
-
-  Future<List<MedicalRecordOversea>> medicalRecordsOverseasByMedicalRecord(
-    String medicalRecordId,
-  );
-
-  Future<MedicalRecordOversea> postMedicalRecordOversea(
-    MedicalRecordOverseaRequest medicalRecordOversea,
-  );
-
-  Future<MedicalRecordOversea> putMedicalRecordOversea(
-    String id,
-    MedicalRecordOverseaRequest medicalRecordOversea,
-  );
-
-  Future<void> deleteMedicalRecordOversea(
-    String id,
-  );
 
 //GET_MEDICAL_RECORDS_OVERSEAS_DATA
   Future<List<MedicalRecordOverseaData>> medicalRecordsOverseasData(
-    String medicalRecordOverseaId,
+    String medicalRecordId,
   );
 
-  Future<List<MedicalRecordOverseaData>>
-      medicalRecordsOverseaDataByMedicalRecordOversea(
-    String medicalRecordOverseaId,
-  );
 
   Future<MedicalRecordOverseaData> postMedicalRecordOverseaData(
     MedicalRecordOverseaDataRequest medicalRecordOverseaData,

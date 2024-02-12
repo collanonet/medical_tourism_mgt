@@ -392,45 +392,11 @@ class PatientRemoteProvider {
   ) async =>
       await apiService.deleteMedicalRecordProgress(id);
 
-// GET_MEDICAL_RECORDS_OVERSEAS
-  Future<List<MedicalRecordOversea>> medicalRecordsOverseas(
-    String medicalRecordId,
-  ) async =>
-      await apiService.medicalRecordsOverseas(medicalRecordId);
-
-  Future<List<MedicalRecordOversea>> medicalRecordsOverseasByMedicalRecord(
-    String medicalRecordId,
-  ) async =>
-      await apiService.medicalRecordsOverseasByMedicalRecord(medicalRecordId);
-
-  Future<MedicalRecordOversea> postMedicalRecordOversea(
-    MedicalRecordOverseaRequest medicalRecordOversea,
-  ) async =>
-      await apiService.postMedicalRecordOversea(medicalRecordOversea);
-
-  Future<MedicalRecordOversea> putMedicalRecordOversea(
-    String id,
-    MedicalRecordOverseaRequest medicalRecordOversea,
-  ) async =>
-      await apiService.putMedicalRecordOversea(id, medicalRecordOversea);
-
-  Future<void> deleteMedicalRecordOversea(
-    String id,
-  ) async =>
-      await apiService.deleteMedicalRecordOversea(id);
-
 // GET_MEDICAL_RECORDS_OVERSEAS_DATA
   Future<List<MedicalRecordOverseaData>> medicalRecordsOverseaData(
-    String medicalRecordOverseaId,
+    String medicalRecordId,
   ) async =>
-      await apiService.medicalRecordsOverseaData(medicalRecordOverseaId);
-
-  Future<List<MedicalRecordOverseaData>>
-      medicalRecordsOverseaDataByMedicalRecordOversea(
-    String medicalRecordOverseaId,
-  ) async =>
-          await apiService.medicalRecordsOverseaDataByRecordsOversea(
-              medicalRecordOverseaId);
+      await apiService.medicalRecordsOverseaData(medicalRecordId);
 
   Future<MedicalRecordOverseaData> postMedicalRecordOverseaData(
     MedicalRecordOverseaDataRequest medicalRecordOverseaData,

@@ -424,47 +424,11 @@ abstract class ApiService {
     @Path('id') String id,
   );
 
-  //GET_MEDICAL_RECORDS_OVERSEAS
-
-  @GET('${Apis.GET_MEDICAL_RECORDS_OVERSEAS}/{medicalRecordId}')
-  Future<List<MedicalRecordOversea>> medicalRecordsOverseas(
-    @Path('medicalRecordId') String medicalRecordId,
-  );
-
-  @GET(
-      '${Apis.GET_MEDICAL_RECORDS_OVERSEAS_BY_MEDICAL_RECORD}/{medicalRecordId}')
-  Future<List<MedicalRecordOversea>> medicalRecordsOverseasByMedicalRecord(
-    @Path('medicalRecordId') String medicalRecordId,
-  );
-
-  @POST(Apis.POST_MEDICAL_RECORDS_OVERSEAS)
-  Future<MedicalRecordOversea> postMedicalRecordOversea(
-    @Body() MedicalRecordOverseaRequest medicalRecordOversea,
-  );
-
-  @PUT('${Apis.PUT_MEDICAL_RECORDS_OVERSEAS}/{id}')
-  Future<MedicalRecordOversea> putMedicalRecordOversea(
-    @Path('id') String id,
-    @Body() MedicalRecordOverseaRequest medicalRecordOversea,
-  );
-
-  @DELETE('${Apis.DELETE_MEDICAL_RECORDS_OVERSEAS}/{id}')
-  Future<void> deleteMedicalRecordOversea(
-    @Path('id') String id,
-  );
-
   //GET_MEDICAL_RECORDS_OVERSEAS_DATA
 
-  @GET('${Apis.GET_MEDICAL_RECORDS_OVERSEAS_DATAS}/{medicalRecordOverseaId}')
+  @GET('${Apis.GET_MEDICAL_RECORDS_OVERSEAS_DATAS}/{medicalRecordId}')
   Future<List<MedicalRecordOverseaData>> medicalRecordsOverseaData(
-    @Path('medicalRecordOverseaId') String medicalRecordOverseaId,
-  );
-
-  @GET(
-      '${Apis.GET_MEDICAL_RECORDS_OVERSEAS_DATA_BY_RECORDS_OVERSEAS}/{medicalRecordOverseaId}')
-  Future<List<MedicalRecordOverseaData>>
-      medicalRecordsOverseaDataByRecordsOversea(
-    @Path('medicalRecordOverseaId') String medicalRecordOverseaId,
+    @Path('medicalRecordId') String medicalRecordId,
   );
 
   @POST(Apis.POST_MEDICAL_RECORDS_OVERSEAS_DATA)
@@ -574,11 +538,8 @@ abstract class ApiService {
 
   @POST(Apis.MEDICAL_RECORD_SUMMARY)
   Future<MedicalRecordSummary> postMedicalRecordSummary(
-    @Body()
-    MedicalRecordSummaryRequest
-        medicalRecordNormalSummaryRequest,
+    @Body() MedicalRecordSummaryRequest medicalRecordNormalSummaryRequest,
   );
-
 }
 
 extension ApiServiceExts on ApiService {
