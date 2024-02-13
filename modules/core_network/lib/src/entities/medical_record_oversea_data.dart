@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:reactive_forms/reactive_forms.dart';
 
 part 'medical_record_oversea_data.g.dart';
 
@@ -7,15 +6,37 @@ part 'medical_record_oversea_data.g.dart';
 class MedicalRecordOverseaData {
   @JsonKey(name: '_id')
   final String id;
-  String medicalRecordOverseas;
-  String note;
+  String? file;
+  String? hospitalName;
+  String? category;
+  String? documentName;
+  String? sharedUrl;
+  String? password;
+  String? qrCode;
+  String? commentHospital1;
+  String? commentOurCompany;
+  String? commentHospital2;
+  DateTime? expirationDate;
+  DateTime? issueDate;
+  String medicalRecord;
   final DateTime createdAt;
   final DateTime updatedAt;
 
   MedicalRecordOverseaData({
     required this.id,
-    required this.medicalRecordOverseas,
-    required this.note,
+    this.file,
+    this.hospitalName,
+    this.category,
+    this.documentName,
+    this.issueDate,
+    this.sharedUrl,
+    this.password,
+    this.qrCode,
+    this.commentHospital1,
+    this.commentOurCompany,
+    this.commentHospital2,
+    this.expirationDate,
+    required this.medicalRecord,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -25,18 +46,4 @@ class MedicalRecordOverseaData {
   }
 
   Map<String, dynamic> toJson() => _$MedicalRecordOverseaDataToJson(this);
-
-  static FormGroup buildFormGroup(
-      MedicalRecordOverseaData? medicalRecordOverseaData) {
-    return FormGroup({
-      'id': FormControl<String>(value: medicalRecordOverseaData?.id),
-      'medicalRecordOverseas': FormControl<String>(
-          value: medicalRecordOverseaData?.medicalRecordOverseas),
-      'note': FormControl<String>(value: medicalRecordOverseaData?.note),
-      'createdAt':
-          FormControl<DateTime>(value: medicalRecordOverseaData?.createdAt),
-      'updatedAt':
-          FormControl<DateTime>(value: medicalRecordOverseaData?.updatedAt),
-    });
-  }
 }

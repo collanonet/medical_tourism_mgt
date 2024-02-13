@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:core_network/core_network.dart';
 
 abstract class PatientRepository {
   //GET_PRE_PATIENTS
+
+  Future<String> uploadFile(
+    File file,
+  );
 
   Future<Paginated<PrePatient>> prePatients({
     int? page,
@@ -312,12 +318,11 @@ abstract class PatientRepository {
     String id,
   );
 
-
 //GET_MEDICAL_RECORDS_OVERSEAS_DATA
-  Future<List<MedicalRecordOverseaData>> medicalRecordsOverseasData(
+  Future<List<MedicalRecordOverseaData>>
+      medicalRecordOverseaDataByMedicalRecord(
     String medicalRecordId,
   );
-
 
   Future<MedicalRecordOverseaData> postMedicalRecordOverseaData(
     MedicalRecordOverseaDataRequest medicalRecordOverseaData,
@@ -362,27 +367,35 @@ abstract class PatientRepository {
   Future<void> deleteMedicalRecordProposal(
     String id,
   );
-  Future<MedicalRecordPatientResponseTreatment> getMedicalRecordPatientResponseTreatment({
+  Future<MedicalRecordPatientResponseTreatment>
+      getMedicalRecordPatientResponseTreatment({
     required String medicalRecord,
   });
 
-  Future<MedicalRecordPatientResponseTreatment> postMedicalRecordPatientResponseTreatment(
-    MedicalRecordPatientResponseTreatmentRequest medicalRecordPatientResponseTreatment,
+  Future<MedicalRecordPatientResponseTreatment>
+      postMedicalRecordPatientResponseTreatment(
+    MedicalRecordPatientResponseTreatmentRequest
+        medicalRecordPatientResponseTreatment,
   );
 
-  Future<MedicalRecordPatientResponseMedicalCheckup> getMedicalRecordPatientResponseMedicalCheckup({
+  Future<MedicalRecordPatientResponseMedicalCheckup>
+      getMedicalRecordPatientResponseMedicalCheckup({
     required String medicalRecord,
   });
 
-  Future<MedicalRecordPatientResponseMedicalCheckup> postMedicalRecordPatientResponseMedicalCheckup(
-    MedicalRecordPatientResponseMedicalCheckupRequest medicalRecordPatientResponseMedicalCheckup,
+  Future<MedicalRecordPatientResponseMedicalCheckup>
+      postMedicalRecordPatientResponseMedicalCheckup(
+    MedicalRecordPatientResponseMedicalCheckupRequest
+        medicalRecordPatientResponseMedicalCheckup,
   );
 
-  Future<MedicalRecordPatientResponseOther> getMedicalRecordPatientResponseOther({
+  Future<MedicalRecordPatientResponseOther>
+      getMedicalRecordPatientResponseOther({
     required String medicalRecord,
   });
 
-  Future<MedicalRecordPatientResponseOther> postMedicalRecordPatientResponseOther(
+  Future<MedicalRecordPatientResponseOther>
+      postMedicalRecordPatientResponseOther(
     MedicalRecordPatientResponseOtherRequest medicalRecordPatientResponseOther,
   );
 

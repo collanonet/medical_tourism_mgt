@@ -1,9 +1,13 @@
+import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class SummaryMedicalOverseaDataScreen extends StatelessWidget {
-  const SummaryMedicalOverseaDataScreen({super.key});
+  const SummaryMedicalOverseaDataScreen({super.key, required this.data});
+  final List<MedicalRecordOverseaData> data;
 
   @override
   Widget build(BuildContext context) {
@@ -33,15 +37,63 @@ class SummaryMedicalOverseaDataScreen extends StatelessWidget {
           maxLines: 10,
           enabled: false,
           decoration: InputDecoration(
-               isDense: true, hintText: '''
-北京協和病院　画像データ（DICOM）　PET-CT 　2023/06/30
-中華人民解放軍総病院　病状資料　入退院記録 　2023/06/30
-四川大学華西病院　病状資料　PET-CT 　2023/06/30
-中華人民解放軍総病院　画像データ（DICOM）　MRI 　2023/06/30
-北京協和病院　画像データ（DICOM）　検査結果 　2023/06/30
-          '''),
+              isDense: true,
+              hintText: data
+                  .map((e) =>
+                      e.hospitalName! +
+                      '    ' +
+                      e.documentName! +
+                      '    ' +
+                      e.category! +
+                      '    ' +
+                      '${Dates.formShortDate(e.issueDate)}')
+                  .join('\n')),
         ),
+        SizedBox(
+          height: context.appTheme.spacing.marginMedium,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                copyToClipboard(data
+                    .map((e) =>
+                        e.hospitalName! +
+                        '    ' +
+                        e.documentName! +
+                        '    ' +
+                        e.category! +
+                        '    ' +
+                        '${Dates.formShortDate(e.issueDate)}')
+                    .join('\n'));
+                snackBarWidget(
+                    message: 'コピーされました',
+                    prefixIcon: Icon(
+                      Icons.check_circle,
+                      color: Colors.white,
+                    ));
+                Navigator.pop(context);
+              },
+
+              child: Text('コピーする'), // TODO: l10n 対応 (コピーする) (copy)
+            ),
+            SizedBox(
+              width: context.appTheme.spacing.marginMedium,
+            ),
+            OutlinedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('　閉じる　'), // TODO: l10n 対応 (閉じる) (close)
+            ),
+          ],
+        )
       ],
     );
+  }
+
+  void copyToClipboard(String text) {
+    Clipboard.setData(ClipboardData(text: text));
   }
 }

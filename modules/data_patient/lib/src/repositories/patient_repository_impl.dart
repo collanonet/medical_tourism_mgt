@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 
@@ -14,6 +16,11 @@ class PatientRepositoryIml extends PatientRepository {
 
   final PatientRemoteProvider remote;
   final PatientLocalProvider local;
+
+  @override
+  Future<String> uploadFile(File file) {
+    return remote.uploadFile(file);
+  }
 
   //GET_PRE_PATIENTS
 
@@ -543,12 +550,11 @@ class PatientRepositoryIml extends PatientRepository {
   //GET_MEDICAL_RECORDS_OVERSEAS_DATA
 
   @override
-  Future<List<MedicalRecordOverseaData>> medicalRecordsOverseasData(
+  Future<List<MedicalRecordOverseaData>> medicalRecordOverseaDataByMedicalRecord(
     String medicalRecordId,
   ) {
-    return remote.medicalRecordsOverseaData(medicalRecordId);
+    return remote.medicalRecordOverseaDataByMedicalRecord(medicalRecordId);
   }
-
 
   @override
   Future<MedicalRecordOverseaData> postMedicalRecordOverseaData(

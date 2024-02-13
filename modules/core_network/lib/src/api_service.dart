@@ -1,8 +1,9 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-
 import '../core_network.dart';
 import 'apis.dart';
 import 'entities/medical_record_patient_response_treatment.dart';
@@ -35,6 +36,9 @@ abstract class ApiService {
 
   @POST(Apis.LOG_OUT)
   Future<AuthData> logOut();
+
+  @POST('/files/upload')
+  Future<String> uploadFile(@Part() File file);
 
   //GET_PRE_PATIENTS
 
@@ -426,26 +430,28 @@ abstract class ApiService {
 
   //GET_MEDICAL_RECORDS_OVERSEAS_DATA
 
-  @GET('${Apis.GET_MEDICAL_RECORDS_OVERSEAS_DATAS}/{medicalRecordId}')
-  Future<List<MedicalRecordOverseaData>> medicalRecordsOverseaData(
+  @GET('${Apis.MEDICAL_RECORDS_OVERSEAS_DATA_MEDICAL_RECORD}/{medicalRecordId}')
+  Future<List<MedicalRecordOverseaData>> medicalRecordOverseaDataByMedicalRecord(
     @Path('medicalRecordId') String medicalRecordId,
   );
 
-  @POST(Apis.POST_MEDICAL_RECORDS_OVERSEAS_DATA)
+  @POST(Apis.MEDICAL_RECORDS_OVERSEAS_DATA)
   Future<MedicalRecordOverseaData> postMedicalRecordOverseaData(
     @Body() MedicalRecordOverseaDataRequest medicalRecordOverseaData,
   );
 
-  @PUT('${Apis.PUT_MEDICAL_RECORDS_OVERSEAS_DATA}/{id}')
+  @PUT('${Apis.MEDICAL_RECORDS_OVERSEAS_DATA}/{id}')
   Future<MedicalRecordOverseaData> putMedicalRecordOverseaData(
     @Path('id') String id,
     @Body() MedicalRecordOverseaDataRequest medicalRecordOverseaData,
   );
 
-  @DELETE('${Apis.DELETE_MEDICAL_RECORDS_OVERSEAS_DATA}/{id}')
+  @DELETE('${Apis.MEDICAL_RECORDS_OVERSEAS_DATA}/{id}')
   Future<void> deleteMedicalRecordOverseaData(
     @Path('id') String id,
   );
+
+  //
 
   @GET('${Apis.GET_MEDICAL_RECORD_TRAVEL_GROUP}/{medicalRecord}')
   Future<MedicalRecordTravelGroup> medicalRecordsTravelGroup({

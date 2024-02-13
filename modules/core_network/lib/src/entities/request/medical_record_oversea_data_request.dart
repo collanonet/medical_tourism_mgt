@@ -4,17 +4,40 @@ part 'medical_record_oversea_data_request.g.dart';
 
 @JsonSerializable()
 class MedicalRecordOverseaDataRequest {
-   String? medicalRecord;
-   String? note;
+  String? file;
+  String? hospitalName;
+  String? category;
+  String? documentName;
+  String? sharedUrl;
+  String? password;
+  String? qrCode;
+  String? commentHospital1;
+  String? commentOurCompany;
+  String? commentHospital2;
+  DateTime? expirationDate;
+  DateTime? issueDate;
+  String medicalRecord;
 
   MedicalRecordOverseaDataRequest({
-     this.medicalRecord,
-     this.note,
+    this.file,
+    this.hospitalName,
+    this.category,
+    this.documentName,
+    this.issueDate,
+    this.sharedUrl,
+    this.password,
+    this.qrCode,
+    this.commentHospital1,
+    this.commentOurCompany,
+    this.commentHospital2,
+    this.expirationDate,
+    required this.medicalRecord,
   });
 
   factory MedicalRecordOverseaDataRequest.fromJson(Map<String, dynamic> json) {
     return _$MedicalRecordOverseaDataRequestFromJson(json);
   }
 
-  Map<String, dynamic> toJson() => _$MedicalRecordOverseaDataRequestToJson(this);
+  Map<String, dynamic> toJson() =>
+      _$MedicalRecordOverseaDataRequestToJson(this);
 }

@@ -3,6 +3,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:data_patient/data_patient.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
 class OverseasMedicalDataModel {
@@ -17,6 +18,7 @@ class OverseasMedicalDataModel {
 
   ValueNotifier<AsyncData<Patient>> patientData =
       ValueNotifier<AsyncData<Patient>>(const AsyncData());
+
   Future<void> initialData({Patient? patient, String? id}) async {
     loading.value = const AsyncData(loading: true);
     if (patient != null || id != null) {
@@ -54,7 +56,8 @@ class OverseasMedicalDataModel {
       logger.d('result: $result');
       if (result.isNotEmpty) {
         medicalRecordData.value = AsyncData(data: result.first);
-        await getMedicalRecordsOverseasData(medicalRecordData.value.requireData.id);
+        await getMedicalRecordsOverseasData(
+            medicalRecordData.value.requireData.id);
       } else {
         medicalRecordData.value = const AsyncData();
       }
@@ -74,7 +77,7 @@ class OverseasMedicalDataModel {
     medicalRecordsOverseasData.value = const AsyncData(loading: true);
 
     await patientRepository
-        .medicalRecordsOverseasData(medicalRecordId)
+        .medicalRecordOverseaDataByMedicalRecord(medicalRecordId)
         .then((value) {
       medicalRecordsOverseasData.value = AsyncData(data: value);
     }).catchError((error) {
@@ -83,44 +86,61 @@ class OverseasMedicalDataModel {
     });
   }
 
+  ValueNotifier<AsyncData<MedicalRecordOverseaData>> createMedicalOverseaData =
+      ValueNotifier<AsyncData<MedicalRecordOverseaData>>(const AsyncData());
+
   // post MEDICAL_RECORDS_OVERSEAS_DATA
   Future<void> postMedicalRecordsOverseasData(
-    MedicalRecordOverseaDataRequest medicalRecordOverseaDataRequest,
+    FormGroup formGroup,
   ) async {
-    medicalRecordsOverseasData.value = const AsyncData(loading: true);
-
-    await patientRepository
-        .postMedicalRecordOverseaData(medicalRecordOverseaDataRequest)
-        .then((value) {
-      medicalRecordsOverseasData.value.data?.add(value);
-    }).catchError((error) {
-      logger.d(error);
-      medicalRecordsOverseasData.value = AsyncData(error: error);
-    });
-  }
-
-  Future<void> updateMedicalRecordsOverseasData(
-    String id,
-    MedicalRecordOverseaDataRequest medicalRecordOverseaDataRequest,
-  ) async {
-    medicalRecordsOverseasData.value = const AsyncData(loading: true);
-
-    await patientRepository
-        .putMedicalRecordOverseaData(id, medicalRecordOverseaDataRequest)
-        .then((value) {
-      // Find from list and update or add
-      final index = medicalRecordsOverseasData.value.data?.indexWhere(
-            (element) => element.id == id,
-          ) ??
-          -1;
-      if (index >= 0) {
-        medicalRecordsOverseasData.value.data?[index] = value;
-      } else {
-        medicalRecordsOverseasData.value.data?.add(value);
+    try {
+      createMedicalOverseaData.value = const AsyncData(loading: true);
+      String? file;
+      if (formGroup.control('file').value != null) {
+        try {
+          file = await patientRepository
+              .uploadFile(formGroup.control('file').value);
+        } catch (e) {
+          logger.e(e);
+        }
       }
-    }).catchError((error) {
-      logger.d(error);
-      medicalRecordsOverseasData.value = AsyncData(error: error);
-    });
+
+      String? qrCode;
+
+      if (formGroup.control('qrCode').value != null) {
+        qrCode = await patientRepository
+            .uploadFile(formGroup.control('qrCode').value);
+      }
+
+      var medicalRecordOverseaDataRequest = MedicalRecordOverseaDataRequest(
+        file: file,
+        hospitalName: formGroup.control('hospitalName').value,
+        category: formGroup.control('category').value,
+        documentName: formGroup.control('documentName').value,
+        issueDate: formGroup.control('issueDate').value,
+        sharedUrl: formGroup.control('sharedUrl').value,
+        password: formGroup.control('password').value,
+        expirationDate: formGroup.control('expirationDate').value,
+        qrCode: qrCode,
+        medicalRecord: medicalRecordData.value.requireData.id,
+      );
+
+      var result = await patientRepository
+          .postMedicalRecordOverseaData(medicalRecordOverseaDataRequest);
+      createMedicalOverseaData.value = AsyncData(data: result);
+      if (medicalRecordsOverseasData.value.hasData) {
+        medicalRecordsOverseasData.value = AsyncData(data: [
+          ...medicalRecordsOverseasData.value.requireData,
+          result,
+        ]);
+      } else {
+        medicalRecordsOverseasData.value = AsyncData(data: [
+          result,
+        ]);
+      }
+    } catch (e) {
+      logger.d(e);
+      createMedicalOverseaData.value = AsyncData(error: e);
+    }
   }
 }

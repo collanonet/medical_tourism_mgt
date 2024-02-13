@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:core_network/core_network.dart';
 import 'package:injectable/injectable.dart';
 
@@ -8,6 +10,11 @@ class PatientRemoteProvider {
   });
 
   final ApiService apiService;
+
+  Future<String> uploadFile(
+    File file,
+  ) async =>
+      await apiService.uploadFile(file);
 
   Future<Paginated<PrePatient>> prePatients({
     int? page,
@@ -393,10 +400,10 @@ class PatientRemoteProvider {
       await apiService.deleteMedicalRecordProgress(id);
 
 // GET_MEDICAL_RECORDS_OVERSEAS_DATA
-  Future<List<MedicalRecordOverseaData>> medicalRecordsOverseaData(
+  Future<List<MedicalRecordOverseaData>> medicalRecordOverseaDataByMedicalRecord(
     String medicalRecordId,
   ) async =>
-      await apiService.medicalRecordsOverseaData(medicalRecordId);
+      await apiService.medicalRecordOverseaDataByMedicalRecord(medicalRecordId);
 
   Future<MedicalRecordOverseaData> postMedicalRecordOverseaData(
     MedicalRecordOverseaDataRequest medicalRecordOverseaData,

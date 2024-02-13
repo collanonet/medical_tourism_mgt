@@ -359,6 +359,7 @@ class AppThemeData {
         checkColor: MaterialStateProperty.resolveWith((states) {
           return Colors.white;
         }),
+        visualDensity: VisualDensity.comfortable,
         side: BorderSide(
           color: context.appTheme.primaryColor,
         ),
