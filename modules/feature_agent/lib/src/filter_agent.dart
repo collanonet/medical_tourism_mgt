@@ -1,6 +1,7 @@
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -18,6 +19,7 @@ class AgentFilter extends StatefulWidget {
 }
 
 class _AgentFilterState extends State<AgentFilter> {
+  final formatter = InputFormatter();
   bool _check = false;
   @override
   Widget build(BuildContext context) {
@@ -144,8 +146,6 @@ class _AgentFilterState extends State<AgentFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'entry_date_from',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -153,11 +153,17 @@ class _AgentFilterState extends State<AgentFilter> {
                                   label: Text(
                                     context.l10n.labelEntryDateFrom,
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),
@@ -177,8 +183,6 @@ class _AgentFilterState extends State<AgentFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'entry_date_to',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -186,11 +190,17 @@ class _AgentFilterState extends State<AgentFilter> {
                                   label: Text(
                                     context.l10n.labelEntryDateTo,
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),
@@ -207,8 +217,6 @@ class _AgentFilterState extends State<AgentFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'examination_date_from',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -216,11 +224,17 @@ class _AgentFilterState extends State<AgentFilter> {
                                   label: Text(
                                     context.l10n.labelExaminationDateFrom,
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),
@@ -240,8 +254,6 @@ class _AgentFilterState extends State<AgentFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'examination_date_to',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -249,11 +261,17 @@ class _AgentFilterState extends State<AgentFilter> {
                                   label: Text(
                                     context.l10n.labelExaminationDateTo,
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),
@@ -270,8 +288,6 @@ class _AgentFilterState extends State<AgentFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'return_date_from',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -279,11 +295,17 @@ class _AgentFilterState extends State<AgentFilter> {
                                   label: Text(
                                     context.l10n.labelReturnDateFrom,
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),
@@ -303,8 +325,6 @@ class _AgentFilterState extends State<AgentFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'return_date_to',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -312,11 +332,17 @@ class _AgentFilterState extends State<AgentFilter> {
                                   label: Text(
                                     context.l10n.labelReturnDateTo,
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),

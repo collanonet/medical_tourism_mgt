@@ -164,28 +164,37 @@ class _ReportFilterState extends State<ReportFilter> {
                       children: [
                         Expanded(
                           flex: 4,
-                          child: ReactiveTextField<DateTime>(
-                            formControlName: 'entry_date_from',
-                            valueAccessor: DateTimeValueAccessor(
-                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                            ),
-                            decoration: InputDecoration(
-                              label: Text(
-                                context.l10n.labelEntryDateFrom,
-                                style: TextStyle(
-                                  fontFamily: 'NotoSansJP',
-                                  package: 'core_ui',
-                                ),
-                              ),
-                              suffixIcon: const Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            inputFormatters: [
-                              formatter.dateFormatter,
-                            ],
-                          ),
+                          child: ReactiveDatePicker<DateTime>(
+                              formControlName: 'entry_date_from',
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime(2100),
+                              builder: (context, picker, child) {
+                                return ReactiveTextField<DateTime>(
+                                  formControlName: 'entry_date_from',
+                                  valueAccessor: DateTimeValueAccessor(
+                                    dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                  ),
+                                  decoration: InputDecoration(
+                                    label: Text(
+                                      context.l10n.labelEntryDateFrom,
+                                      style: TextStyle(
+                                        fontFamily: 'NotoSansJP',
+                                        package: 'core_ui',
+                                      ),
+                                    ),
+                                    suffixIcon: IconButton(
+                                      icon: const Icon(
+                                        CupertinoIcons.calendar,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: picker.showPicker,
+                                    ),
+                                  ),
+                                  inputFormatters: [
+                                    formatter.dateFormatter,
+                                  ],
+                                );
+                              }),
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 4),
@@ -199,28 +208,37 @@ class _ReportFilterState extends State<ReportFilter> {
                         ),
                         Expanded(
                           flex: 4,
-                          child: ReactiveTextField<DateTime>(
-                            formControlName: 'entry_date_to',
-                            valueAccessor: DateTimeValueAccessor(
-                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                            ),
-                            decoration: InputDecoration(
-                              label: Text(
-                                context.l10n.labelEntryDateTo,
-                                style: TextStyle(
-                                  fontFamily: 'NotoSansJP',
-                                  package: 'core_ui',
-                                ),
-                              ),
-                              suffixIcon: const Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
-                              ),
-                            ),
-                            inputFormatters: [
-                              formatter.dateFormatter,
-                            ],
-                          ),
+                          child: ReactiveDatePicker<DateTime>(
+                              formControlName: 'entry_date_to',
+                              firstDate: DateTime(1900),
+                              lastDate: DateTime(2100),
+                              builder: (context, picker, child) {
+                                return ReactiveTextField<DateTime>(
+                                  formControlName: 'entry_date_to',
+                                  valueAccessor: DateTimeValueAccessor(
+                                    dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                  ),
+                                  decoration: InputDecoration(
+                                    label: Text(
+                                      context.l10n.labelEntryDateTo,
+                                      style: TextStyle(
+                                        fontFamily: 'NotoSansJP',
+                                        package: 'core_ui',
+                                      ),
+                                    ),
+                                    suffixIcon: IconButton(
+                                      icon: const Icon(
+                                        CupertinoIcons.calendar,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: picker.showPicker,
+                                    ),
+                                  ),
+                                  inputFormatters: [
+                                    formatter.dateFormatter,
+                                  ],
+                                );
+                              }),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
@@ -234,8 +252,6 @@ class _ReportFilterState extends State<ReportFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'examination_date_from',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -247,11 +263,17 @@ class _ReportFilterState extends State<ReportFilter> {
                                       package: 'core_ui',
                                     ),
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),
@@ -277,8 +299,6 @@ class _ReportFilterState extends State<ReportFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'examination_date_to',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -290,11 +310,17 @@ class _ReportFilterState extends State<ReportFilter> {
                                       package: 'core_ui',
                                     ),
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),
@@ -311,8 +337,6 @@ class _ReportFilterState extends State<ReportFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'return_date_from',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -324,11 +348,17 @@ class _ReportFilterState extends State<ReportFilter> {
                                       package: 'core_ui',
                                     ),
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),
@@ -354,8 +384,6 @@ class _ReportFilterState extends State<ReportFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'return_date_to',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -367,11 +395,17 @@ class _ReportFilterState extends State<ReportFilter> {
                                       package: 'core_ui',
                                     ),
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),

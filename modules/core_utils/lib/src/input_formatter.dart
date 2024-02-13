@@ -5,6 +5,10 @@ class InputFormatter {
     mask: '####/##/##',
     type: MaskAutoCompletionType.eager,
   );
+  final timeFormatter = MaskTextInputFormatter(
+    mask: '##:##',
+    type: MaskAutoCompletionType.eager,
+  );
 
   String maskTextDate(String text) {
     return dateFormatter.maskText(text);

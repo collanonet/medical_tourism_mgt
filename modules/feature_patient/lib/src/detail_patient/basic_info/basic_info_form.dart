@@ -185,7 +185,9 @@ FormGroup basicInfoForm({
             'relationship': FormControl<String>(),
             'dateOfBirth': FormControl<DateTime>(),
             'age': FormControl<int?>(),
-            'gender': FormControl<bool>(), // 性別
+            'gender': FormControl<bool>(
+              value: true,
+            ), // 性別
             'isMale': FormControl<bool>(
               value: true,
             ), // 男性

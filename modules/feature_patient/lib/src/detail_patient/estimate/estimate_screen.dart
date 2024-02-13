@@ -15,6 +15,7 @@ class EstimateScreen extends StatefulWidget {
 }
 
 class _EstimateScreenState extends State<EstimateScreen> {
+  final formatter = InputFormatter();
   @override
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
@@ -110,29 +111,29 @@ class _EstimateScreenState extends State<EstimateScreen> {
                     )),
                     Expanded(
                         child: Row(
-                          children: [
-                            Container(
-                              padding: EdgeInsets.symmetric(
-                                horizontal:
+                      children: [
+                        Container(
+                          padding: EdgeInsets.symmetric(
+                            horizontal:
                                 context.appTheme.spacing.marginExtraSmall,
-                                vertical: context.appTheme.spacing.marginExtraSmall,
-                              ),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: Colors.red,
-                                ),
-                                borderRadius: BorderRadius.circular(
-                                    context.appTheme.spacing.borderRadiusMedium),
-                              ),
-                              child: Text(
-                                '見積書',
-                                style: context.textTheme.bodySmall?.copyWith(
-                                  color: Colors.red,
-                                ),
-                              ),
+                            vertical: context.appTheme.spacing.marginExtraSmall,
+                          ),
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: Colors.red,
                             ),
-                          ],
-                        )),
+                            borderRadius: BorderRadius.circular(
+                                context.appTheme.spacing.borderRadiusMedium),
+                          ),
+                          child: Text(
+                            '見積書',
+                            style: context.textTheme.bodySmall?.copyWith(
+                              color: Colors.red,
+                            ),
+                          ),
+                        ),
+                      ],
+                    )),
                     Expanded(
                         child: Text(
                       '大瀚人力资源集团',
@@ -297,8 +298,6 @@ class _EstimateScreenState extends State<EstimateScreen> {
                               Widget? child) {
                             return ReactiveTextField<DateTime>(
                               formControlName: 'issue_date',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -308,15 +307,21 @@ class _EstimateScreenState extends State<EstimateScreen> {
                               onSubmitted: (value) {
                                 logger.d(value);
                               },
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '発行日',
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                suffixIcon: IconButton(
+                                  icon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: picker.showPicker,
                                 ),
                               ),
+                              inputFormatters: [
+                                formatter.dateFormatter,
+                              ],
                             );
                           },
                         ),
@@ -376,8 +381,6 @@ class _EstimateScreenState extends State<EstimateScreen> {
                               Widget? child) {
                             return ReactiveTextField<DateTime>(
                               formControlName: 'payment_due_date',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -387,15 +390,21 @@ class _EstimateScreenState extends State<EstimateScreen> {
                               onSubmitted: (value) {
                                 logger.d(value);
                               },
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   'お支払い期限',
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                suffixIcon: IconButton(
+                                  icon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: picker.showPicker,
                                 ),
                               ),
+                              inputFormatters: [
+                                formatter.dateFormatter,
+                              ],
                             );
                           },
                         ),
@@ -788,10 +797,10 @@ class _EstimateScreenState extends State<EstimateScreen> {
                           ),
                           Text(
                             '行を追加',
-                            style:
-                                TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',color: context.appTheme.primaryColor),
+                            style: TextStyle(
+                                fontFamily: 'NotoSansJP',
+                                package: 'core_ui',
+                                color: context.appTheme.primaryColor),
                           )
                         ],
                       ),
@@ -1244,10 +1253,10 @@ class _EstimateScreenState extends State<EstimateScreen> {
                           ),
                           Text(
                             '行を追加',
-                            style:
-                                TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',color: context.appTheme.primaryColor),
+                            style: TextStyle(
+                                fontFamily: 'NotoSansJP',
+                                package: 'core_ui',
+                                color: context.appTheme.primaryColor),
                           )
                         ],
                       ),

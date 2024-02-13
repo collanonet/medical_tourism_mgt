@@ -1,5 +1,6 @@
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -18,6 +19,7 @@ class ProcessChartFilter extends StatefulWidget {
 
 class _ProcessChartFilterState extends State<ProcessChartFilter> {
   bool _check = false;
+  final formatter = InputFormatter();
   @override
   Widget build(BuildContext context) {
     return Consumer<ProcessChartModel>(
@@ -103,8 +105,6 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'period_from',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -112,11 +112,17 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                   label: Text(
                                     '期間（自）',
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),
@@ -136,8 +142,6 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'period_to',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -145,11 +149,17 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                   label: Text(
                                     '期間（至）',
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),

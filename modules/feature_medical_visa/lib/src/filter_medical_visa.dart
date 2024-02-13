@@ -1,6 +1,7 @@
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -19,6 +20,7 @@ class MedicalVisaFilter extends StatefulWidget {
 
 class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
   bool _check = false;
+  final formatter = InputFormatter();
   @override
   Widget build(BuildContext context) {
     return Consumer<MedicalVisaModel>(
@@ -167,8 +169,6 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'period_from',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -176,11 +176,17 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                                   label: Text(
                                     '期間（自）',
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),
@@ -200,8 +206,6 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'period_to',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -209,11 +213,17 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                                   label: Text(
                                     '期間（至）',
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),

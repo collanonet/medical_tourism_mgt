@@ -110,8 +110,8 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                               DataCell(
                                 Text('${item.patient}'),
                               ),
-                              DataCell(Text(
-                                  Dates.formatFullDateTime(item.dateOfBirth!))),
+                              DataCell(
+                                  Text(Dates.formShortDate(item.dateOfBirth!))),
                               DataCell(Text(item.gender ? '男性' : '女性')),
                               DataCell(Text('${item.nationality}')),
                               DataCell(Row(

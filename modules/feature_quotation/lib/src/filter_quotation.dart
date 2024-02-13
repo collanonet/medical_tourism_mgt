@@ -1,6 +1,7 @@
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -18,6 +19,7 @@ class QuotationFilter extends StatefulWidget {
 }
 
 class _QuotationFilterState extends State<QuotationFilter> {
+  final formatter = InputFormatter();
   bool _check = false;
   @override
   Widget build(BuildContext context) {
@@ -109,11 +111,13 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                 _check = value!;
                               });
                             }),
-                        Text('取下対象者',
+                        Text(
+                          '取下対象者',
                           style: TextStyle(
                             fontFamily: 'NotoSansJP',
                             package: 'core_ui',
-                          ),)
+                          ),
+                        )
                       ],
                     ),
                     const SizedBox(height: 16),
@@ -168,8 +172,6 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'entry_date_from',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -181,22 +183,30 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                       package: 'core_ui',
                                     ),
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 4),
-                          child: Text('〜',
+                          child: Text(
+                            '〜',
                             style: TextStyle(
                               fontFamily: 'NotoSansJP',
                               package: 'core_ui',
-                            ),),
+                            ),
+                          ),
                         ),
                         Expanded(
                           flex: 4,
@@ -209,8 +219,6 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'entry_date_to',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -222,11 +230,17 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                       package: 'core_ui',
                                     ),
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),
@@ -243,8 +257,6 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'examination_date_from',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -256,22 +268,30 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                       package: 'core_ui',
                                     ),
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 4),
-                          child: Text('〜',
+                          child: Text(
+                            '〜',
                             style: TextStyle(
                               fontFamily: 'NotoSansJP',
                               package: 'core_ui',
-                            ),),
+                            ),
+                          ),
                         ),
                         Expanded(
                           flex: 4,
@@ -284,8 +304,6 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'examination_date_to',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -297,11 +315,17 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                       package: 'core_ui',
                                     ),
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),
@@ -318,8 +342,6 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'return_date_from',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -331,22 +353,30 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                       package: 'core_ui',
                                     ),
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),
                         ),
                         const Padding(
                           padding: EdgeInsets.symmetric(horizontal: 4),
-                          child: Text('〜',
+                          child: Text(
+                            '〜',
                             style: TextStyle(
                               fontFamily: 'NotoSansJP',
                               package: 'core_ui',
-                            ),),
+                            ),
+                          ),
                         ),
                         Expanded(
                           flex: 4,
@@ -359,8 +389,6 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'return_date_to',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -372,11 +400,17 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                       package: 'core_ui',
                                     ),
                                   ),
-                                  suffixIcon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),
@@ -402,11 +436,13 @@ class _QuotationFilterState extends State<QuotationFilter> {
                         const SizedBox(width: 16),
                         ElevatedButton(
                           onPressed: () {},
-                          child: Text(context.l10n.actionSearch,
+                          child: Text(
+                            context.l10n.actionSearch,
                             style: TextStyle(
                               fontFamily: 'NotoSansJP',
                               package: 'core_ui',
-                            ),),
+                            ),
+                          ),
                         ),
                       ],
                     )

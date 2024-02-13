@@ -20,11 +20,10 @@ class MedicalRecordPassportSection extends StatefulWidget {
 
 class _MedicalRecordPassportSectionState
     extends State<MedicalRecordPassportSection> {
+  final formatter = InputFormatter();
   List visaType = ['medicalGuarantee', 'other'];
 
   String selectVisaType = 'medicalGuarantee';
-
-  final formatter = InputFormatter();
 
   Row addRadioButton(int btnValue, String title, FormGroup formGroup) {
     return Row(
@@ -119,24 +118,33 @@ class _MedicalRecordPassportSectionState
                         ),
                       ),
                       Expanded(
-                        child: ReactiveTextField<DateTime>(
-                          formControlName: 'issueDate',
-                          valueAccessor: DateTimeValueAccessor(
-                            dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                          ),
-                          inputFormatters: [
-                            formatter.dateFormatter,
-                          ],
-                          decoration: const InputDecoration(
-                            label: Text(
-                              '発行日', //  TODO: l10n 対応 (発行日) (issueDate)
-                            ),
-                            suffixIcon: Icon(
-                              CupertinoIcons.calendar,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ),
+                        child: ReactiveDatePicker<DateTime>(
+                            formControlName: 'issueDate',
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2100),
+                            builder: (context, picker, child) {
+                              return ReactiveTextField<DateTime>(
+                                formControlName: 'issueDate',
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                ),
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    '発行日', //  TODO: l10n 対応 (発行日) (issueDate)
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
+                                  ),
+                                ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
+                              );
+                            }),
                       ),
                       Expanded(child: SizedBox()),
                     ],
@@ -150,24 +158,33 @@ class _MedicalRecordPassportSectionState
                     },
                     children: [
                       Expanded(
-                        child: ReactiveTextField<DateTime>(
-                          formControlName: 'expirationDate',
-                          valueAccessor: DateTimeValueAccessor(
-                            dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                          ),
-                          inputFormatters: [
-                            formatter.dateFormatter,
-                          ],
-                          decoration: const InputDecoration(
-                            label: Text(
-                              '有効期限', // TODO: l10n 対応 (有効期限) (expirationDate)
-                            ),
-                            suffixIcon: Icon(
-                              CupertinoIcons.calendar,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        ),
+                        child: ReactiveDatePicker<DateTime>(
+                            formControlName: 'expirationDate',
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2100),
+                            builder: (context, picker, child) {
+                              return ReactiveTextField<DateTime>(
+                                formControlName: 'expirationDate',
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                ),
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    '有効期限', // TODO: l10n 対応 (有効期限) (expirationDate)
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
+                                  ),
+                                ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
+                              );
+                            }),
                       ),
                       Expanded(child: SizedBox()),
                       Expanded(child: SizedBox()),

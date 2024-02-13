@@ -17,6 +17,7 @@ class BillingScreen extends StatefulWidget {
 }
 
 class _BillingScreenState extends State<BillingScreen> {
+  final formatter = InputFormatter();
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -54,8 +55,7 @@ class _BillingScreenState extends State<BillingScreen> {
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
-                        Expanded(
-                            flex: 2,child: Text('日本円（税込）')),
+                        Expanded(flex: 2, child: Text('日本円（税込）')),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
@@ -96,8 +96,7 @@ class _BillingScreenState extends State<BillingScreen> {
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
-                        Expanded(
-                            flex: 2,child: Text('日本円（税込）')),
+                        Expanded(flex: 2, child: Text('日本円（税込）')),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
@@ -138,9 +137,7 @@ class _BillingScreenState extends State<BillingScreen> {
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
-                        Expanded(
-                            flex: 2,
-                            child: Text('日本円（税込）')),
+                        Expanded(flex: 2, child: Text('日本円（税込）')),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
@@ -228,9 +225,6 @@ class _BillingScreenState extends State<BillingScreen> {
                                                   DateTime>(
                                                 formControlName:
                                                     'occurrence_date',
-                                                readOnly: true,
-                                                onTap: (value) =>
-                                                    picker.showPicker(),
                                                 valueAccessor:
                                                     DateTimeValueAccessor(
                                                   dateTimeFormat:
@@ -242,14 +236,20 @@ class _BillingScreenState extends State<BillingScreen> {
                                                 onSubmitted: (value) {
                                                   logger.d(value);
                                                 },
-                                                decoration:
-                                                    const InputDecoration(
+                                                decoration: InputDecoration(
                                                   label: Text('発生日'),
-                                                  suffixIcon: Icon(
-                                                    CupertinoIcons.calendar,
-                                                    color: Colors.grey,
+                                                  suffixIcon: IconButton(
+                                                    icon: const Icon(
+                                                      CupertinoIcons.calendar,
+                                                      color: Colors.grey,
+                                                    ),
+                                                    onPressed:
+                                                        picker.showPicker,
                                                   ),
                                                 ),
+                                                inputFormatters: [
+                                                  formatter.dateFormatter,
+                                                ],
                                               );
                                             },
                                           ),
@@ -354,8 +354,8 @@ class _BillingScreenState extends State<BillingScreen> {
                             Text(
                               '本人のビザを追加',
                               style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',
+                                  fontFamily: 'NotoSansJP',
+                                  package: 'core_ui',
                                   color: context.appTheme.primaryColor),
                             )
                           ],

@@ -1,6 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,10 +21,10 @@ class NormalSummaryScreen extends StatefulWidget {
 }
 
 class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
+  final formatter = InputFormatter();
   @override
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
-
     return ValueListenableBuilder(
         valueListenable:
             context.read<NormalSummaryModel>().medicalRecordSummary,
@@ -51,20 +52,24 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
                                   formControlName: 'entryDate',
-                                  readOnly: true,
-                                  onTap: (value) => picker.showPicker(),
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '記載日',
                                     ),
-                                    suffixIcon: Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
+                                    suffixIcon: IconButton(
+                                      icon: const Icon(
+                                        CupertinoIcons.calendar,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: picker.showPicker,
                                     ),
                                   ),
+                                  inputFormatters: [
+                                    formatter.dateFormatter,
+                                  ],
                                 );
                               },
                             ),
@@ -114,25 +119,28 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                             Widget? child) {
                                           return ReactiveTextField<DateTime>(
                                             formControlName: 'dateOfBirth',
-                                            readOnly: true,
-                                            onTap: (value) =>
-                                                picker.showPicker(),
                                             valueAccessor:
                                                 DateTimeValueAccessor(
                                               dateTimeFormat:
                                                   DateFormat('yyyy/MM/dd'),
                                             ),
-                                            decoration: const InputDecoration(
+                                            decoration: InputDecoration(
                                               filled: true,
                                               fillColor: Color(0xffF0F3F5),
                                               label: Text(
                                                 '生年月日', // TODO: l10n 対応 (生年月日) (dateOfBirth)
                                               ),
-                                              suffixIcon: Icon(
-                                                CupertinoIcons.calendar,
-                                                color: Colors.grey,
+                                              suffixIcon: IconButton(
+                                                icon: const Icon(
+                                                  CupertinoIcons.calendar,
+                                                  color: Colors.grey,
+                                                ),
+                                                onPressed: picker.showPicker,
                                               ),
                                             ),
+                                            inputFormatters: [
+                                              formatter.dateFormatter,
+                                            ],
                                           );
                                         },
                                       ),

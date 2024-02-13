@@ -20,7 +20,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
     '短期滞在　医療ビザ→特定活動', // Short-term stay medical visa → Specific activities
     '海外での特定活動ビザ変更', // Change of specific activity visa overseas
   ];
-
+  final formatter = InputFormatter();
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
   @override
@@ -99,8 +99,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                               Widget? child) {
                             return ReactiveTextField<DateTime>(
                               formControlName: 'application_date',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -110,15 +108,21 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                               onSubmitted: (value) {
                                 logger.d(value);
                               },
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '申請日',
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                suffixIcon: IconButton(
+                                  icon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: picker.showPicker,
                                 ),
                               ),
+                              inputFormatters: [
+                                formatter.dateFormatter,
+                              ],
                             );
                           },
                         ),
@@ -136,8 +140,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                               Widget? child) {
                             return ReactiveTextField<DateTime>(
                               formControlName: 'issue_date',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -147,15 +149,21 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                               onSubmitted: (value) {
                                 logger.d(value);
                               },
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '発行日',
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                suffixIcon: IconButton(
+                                  icon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: picker.showPicker,
                                 ),
                               ),
+                              inputFormatters: [
+                                formatter.dateFormatter,
+                              ],
                             );
                           },
                         ),
@@ -177,8 +185,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                               Widget? child) {
                             return ReactiveTextField<DateTime>(
                               formControlName: 'expiration_date',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -188,15 +194,21 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                               onSubmitted: (value) {
                                 logger.d(value);
                               },
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '有効期限',
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                suffixIcon: IconButton(
+                                  icon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: picker.showPicker,
                                 ),
                               ),
+                              inputFormatters: [
+                                formatter.dateFormatter,
+                              ],
                             );
                           },
                         ),
@@ -290,8 +302,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
               Text(
                 '本人のビザを追加',
                 style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',color: context.appTheme.primaryColor),
+                    fontFamily: 'NotoSansJP',
+                    package: 'core_ui',
+                    color: context.appTheme.primaryColor),
               )
             ],
           ),
@@ -325,8 +338,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             return ReactiveTextField<DateTime>(
                               formControlName:
                                   'stay_starting_date_personal_reference',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -336,15 +347,21 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                               onSubmitted: (value) {
                                 logger.d(value);
                               },
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '滞在開始日（身元保証書）',
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                suffixIcon: IconButton(
+                                  icon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: picker.showPicker,
                                 ),
                               ),
+                              inputFormatters: [
+                                formatter.dateFormatter,
+                              ],
                             );
                           },
                         ),
@@ -362,8 +379,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                               Widget? child) {
                             return ReactiveTextField<DateTime>(
                               formControlName: 'stay_end_date',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -373,15 +388,21 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                               onSubmitted: (value) {
                                 logger.d(value);
                               },
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '滞在終了日（身元保証書）',
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                suffixIcon: IconButton(
+                                  icon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: picker.showPicker,
                                 ),
                               ),
+                              inputFormatters: [
+                                formatter.dateFormatter,
+                              ],
                             );
                           },
                         ),
@@ -418,8 +439,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
               Text(
                 '本人のビザを追加',
                 style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',color: context.appTheme.primaryColor),
+                    fontFamily: 'NotoSansJP',
+                    package: 'core_ui',
+                    color: context.appTheme.primaryColor),
               )
             ],
           ),
@@ -448,8 +470,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             Widget? child) {
                           return ReactiveTextField<DateTime>(
                             formControlName: 'passport_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -459,12 +479,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -504,8 +530,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           return ReactiveTextField<DateTime>(
                             formControlName:
                                 'personal_reference_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -515,12 +539,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -576,8 +606,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     Text(
                       '身元保証書を追加',
                       style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',color: context.appTheme.primaryColor),
+                          fontFamily: 'NotoSansJP',
+                          package: 'core_ui',
+                          color: context.appTheme.primaryColor),
                     )
                   ],
                 ),
@@ -601,8 +632,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           return ReactiveTextField<DateTime>(
                             formControlName:
                                 'treatment_schedule_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -612,12 +641,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -655,8 +690,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     Text(
                       '治療予定表を追加',
                       style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',color: context.appTheme.primaryColor),
+                          fontFamily: 'NotoSansJP',
+                          package: 'core_ui',
+                          color: context.appTheme.primaryColor),
                     )
                   ],
                 ),
@@ -680,8 +716,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           return ReactiveTextField<DateTime>(
                             formControlName:
                                 'statement_reasons_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -691,12 +725,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -737,8 +777,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           return ReactiveTextField<DateTime>(
                             formControlName:
                                 'accompanying_persons_list_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -748,12 +786,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -809,8 +853,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
                                   formControlName: 'date_landing_permit',
-                                  readOnly: true,
-                                  onTap: (value) => picker.showPicker(),
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -820,15 +862,21 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   onSubmitted: (value) {
                                     logger.d(value);
                                   },
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '上陸許可日',
                                     ),
-                                    suffixIcon: Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
+                                    suffixIcon: IconButton(
+                                      icon: const Icon(
+                                        CupertinoIcons.calendar,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: picker.showPicker,
                                     ),
                                   ),
+                                  inputFormatters: [
+                                    formatter.dateFormatter,
+                                  ],
                                 );
                               },
                             ),
@@ -846,8 +894,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
                                   formControlName: 'date_visa_expiration',
-                                  readOnly: true,
-                                  onTap: (value) => picker.showPicker(),
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -857,15 +903,21 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   onSubmitted: (value) {
                                     logger.d(value);
                                   },
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       'ビザの有効期限　満了日',
                                     ),
-                                    suffixIcon: Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
+                                    suffixIcon: IconButton(
+                                      icon: const Icon(
+                                        CupertinoIcons.calendar,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: picker.showPicker,
                                     ),
                                   ),
+                                  inputFormatters: [
+                                    formatter.dateFormatter,
+                                  ],
                                 );
                               },
                             ),
@@ -895,8 +947,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
                                   formControlName: 'date_entry_into_japan',
-                                  readOnly: true,
-                                  onTap: (value) => picker.showPicker(),
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -906,15 +956,21 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   onSubmitted: (value) {
                                     logger.d(value);
                                   },
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '日本への入国日',
                                     ),
-                                    suffixIcon: Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
+                                    suffixIcon: IconButton(
+                                      icon: const Icon(
+                                        CupertinoIcons.calendar,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: picker.showPicker,
                                     ),
                                   ),
+                                  inputFormatters: [
+                                    formatter.dateFormatter,
+                                  ],
                                 );
                               },
                             ),
@@ -932,8 +988,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
                                   formControlName: 'date_entry_from_japan',
-                                  readOnly: true,
-                                  onTap: (value) => picker.showPicker(),
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -943,15 +997,21 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   onSubmitted: (value) {
                                     logger.d(value);
                                   },
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '日本からの出国日',
                                     ),
-                                    suffixIcon: Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
+                                    suffixIcon: IconButton(
+                                      icon: const Icon(
+                                        CupertinoIcons.calendar,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: picker.showPicker,
                                     ),
                                   ),
+                                  inputFormatters: [
+                                    formatter.dateFormatter,
+                                  ],
                                 );
                               },
                             ),
@@ -1215,8 +1275,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                         Widget? child) {
                       return ReactiveTextField<DateTime>(
                         formControlName: 'death_or_occurrence_event_date',
-                        readOnly: true,
-                        onTap: (value) => picker.showPicker(),
                         valueAccessor: DateTimeValueAccessor(
                           dateTimeFormat: DateFormat('yyyy/MM/dd'),
                         ),
@@ -1226,15 +1284,21 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                         onSubmitted: (value) {
                           logger.d(value);
                         },
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           label: Text(
                             '死亡日または事由発生日',
                           ),
-                          suffixIcon: Icon(
-                            CupertinoIcons.calendar,
-                            color: Colors.grey,
+                          suffixIcon: IconButton(
+                            icon: const Icon(
+                              CupertinoIcons.calendar,
+                              color: Colors.grey,
+                            ),
+                            onPressed: picker.showPicker,
                           ),
                         ),
+                        inputFormatters: [
+                          formatter.dateFormatter,
+                        ],
                       );
                     },
                   ),
@@ -1256,7 +1320,10 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
           ),
-          Text('ビザ取得後に必要なもの', style: context.textTheme.titleMedium,),
+          Text(
+            'ビザ取得後に必要なもの',
+            style: context.textTheme.titleMedium,
+          ),
           ReactiveForm(
             formGroup: formGroup.control('required_in_japan') as FormGroup,
             child: Column(
@@ -1278,8 +1345,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             Widget? child) {
                           return ReactiveTextField<DateTime>(
                             formControlName: 'visa_page_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -1289,12 +1354,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -1333,8 +1404,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             Widget? child) {
                           return ReactiveTextField<DateTime>(
                             formControlName: 'landing_permit_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -1344,12 +1413,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -1411,8 +1486,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           return ReactiveTextField<DateTime>(
                             formControlName:
                                 'airline_ticke_arrival_japan_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -1422,12 +1495,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -1489,8 +1568,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           return ReactiveTextField<DateTime>(
                             formControlName:
                                 'airline_ticket_return_japan_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -1500,12 +1577,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -1567,8 +1650,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           return ReactiveTextField<DateTime>(
                             formControlName:
                                 'boarding_pass_returning_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -1578,12 +1659,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -1645,8 +1732,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           return ReactiveTextField<DateTime>(
                             formControlName:
                                 'certificate_eligibility_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -1656,12 +1741,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -1702,7 +1793,10 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('同行者', style: context.textTheme.titleMedium,),
+                      Text(
+                        '同行者',
+                        style: context.textTheme.titleMedium,
+                      ),
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),
@@ -1731,8 +1825,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
                                   formControlName: 'date_birth',
-                                  readOnly: true,
-                                  onTap: (value) => picker.showPicker(),
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -1742,15 +1834,21 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   onSubmitted: (value) {
                                     logger.d(value);
                                   },
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '生年月日',
                                     ),
-                                    suffixIcon: Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
+                                    suffixIcon: IconButton(
+                                      icon: const Icon(
+                                        CupertinoIcons.calendar,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: picker.showPicker,
                                     ),
                                   ),
+                                  inputFormatters: [
+                                    formatter.dateFormatter,
+                                  ],
                                 );
                               },
                             ),
@@ -1870,8 +1968,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                         Widget? child) {
                                       return ReactiveTextField<DateTime>(
                                         formControlName: 'date_landing_permit',
-                                        readOnly: true,
-                                        onTap: (value) => picker.showPicker(),
                                         valueAccessor: DateTimeValueAccessor(
                                           dateTimeFormat:
                                               DateFormat('yyyy/MM/dd'),
@@ -1882,15 +1978,21 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                         onSubmitted: (value) {
                                           logger.d(value);
                                         },
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           label: Text(
                                             '上陸許可日',
                                           ),
-                                          suffixIcon: Icon(
-                                            CupertinoIcons.calendar,
-                                            color: Colors.grey,
+                                          suffixIcon: IconButton(
+                                            icon: const Icon(
+                                              CupertinoIcons.calendar,
+                                              color: Colors.grey,
+                                            ),
+                                            onPressed: picker.showPicker,
                                           ),
                                         ),
+                                        inputFormatters: [
+                                          formatter.dateFormatter,
+                                        ],
                                       );
                                     },
                                   ),
@@ -1909,8 +2011,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                         Widget? child) {
                                       return ReactiveTextField<DateTime>(
                                         formControlName: 'date_visa_expiration',
-                                        readOnly: true,
-                                        onTap: (value) => picker.showPicker(),
                                         valueAccessor: DateTimeValueAccessor(
                                           dateTimeFormat:
                                               DateFormat('yyyy/MM/dd'),
@@ -1921,15 +2021,21 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                         onSubmitted: (value) {
                                           logger.d(value);
                                         },
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           label: Text(
                                             'ビザの有効期限　満了日',
                                           ),
-                                          suffixIcon: Icon(
-                                            CupertinoIcons.calendar,
-                                            color: Colors.grey,
+                                          suffixIcon: IconButton(
+                                            icon: const Icon(
+                                              CupertinoIcons.calendar,
+                                              color: Colors.grey,
+                                            ),
+                                            onPressed: picker.showPicker,
                                           ),
                                         ),
+                                        inputFormatters: [
+                                          formatter.dateFormatter,
+                                        ],
                                       );
                                     },
                                   ),
@@ -1962,8 +2068,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                       return ReactiveTextField<DateTime>(
                                         formControlName:
                                             'date_entry_into_japan',
-                                        readOnly: true,
-                                        onTap: (value) => picker.showPicker(),
                                         valueAccessor: DateTimeValueAccessor(
                                           dateTimeFormat:
                                               DateFormat('yyyy/MM/dd'),
@@ -1974,15 +2078,21 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                         onSubmitted: (value) {
                                           logger.d(value);
                                         },
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           label: Text(
                                             '日本への入国日',
                                           ),
-                                          suffixIcon: Icon(
-                                            CupertinoIcons.calendar,
-                                            color: Colors.grey,
+                                          suffixIcon: IconButton(
+                                            icon: const Icon(
+                                              CupertinoIcons.calendar,
+                                              color: Colors.grey,
+                                            ),
+                                            onPressed: picker.showPicker,
                                           ),
                                         ),
+                                        inputFormatters: [
+                                          formatter.dateFormatter,
+                                        ],
                                       );
                                     },
                                   ),
@@ -2002,8 +2112,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                       return ReactiveTextField<DateTime>(
                                         formControlName:
                                             'date_entry_from_japan',
-                                        readOnly: true,
-                                        onTap: (value) => picker.showPicker(),
                                         valueAccessor: DateTimeValueAccessor(
                                           dateTimeFormat:
                                               DateFormat('yyyy/MM/dd'),
@@ -2014,15 +2122,21 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                         onSubmitted: (value) {
                                           logger.d(value);
                                         },
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           label: Text(
                                             '日本からの出国日',
                                           ),
-                                          suffixIcon: Icon(
-                                            CupertinoIcons.calendar,
-                                            color: Colors.grey,
+                                          suffixIcon: IconButton(
+                                            icon: const Icon(
+                                              CupertinoIcons.calendar,
+                                              color: Colors.grey,
+                                            ),
+                                            onPressed: picker.showPicker,
                                           ),
                                         ),
+                                        inputFormatters: [
+                                          formatter.dateFormatter,
+                                        ],
                                       );
                                     },
                                   ),
@@ -2338,8 +2452,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
                                   formControlName: 'visa_page_file_upload_date',
-                                  readOnly: true,
-                                  onTap: (value) => picker.showPicker(),
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -2349,12 +2461,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   onSubmitted: (value) {
                                     logger.d(value);
                                   },
-                                  decoration: const InputDecoration(
-                                    suffixIcon: Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
+                                  decoration: InputDecoration(
+                                    suffixIcon: IconButton(
+                                      icon: const Icon(
+                                        CupertinoIcons.calendar,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: picker.showPicker,
                                     ),
                                   ),
+                                  inputFormatters: [
+                                    formatter.dateFormatter,
+                                  ],
                                 );
                               },
                             ),
@@ -2396,8 +2514,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 return ReactiveTextField<DateTime>(
                                   formControlName:
                                       'landing_permit_file_upload_date',
-                                  readOnly: true,
-                                  onTap: (value) => picker.showPicker(),
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -2407,12 +2523,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   onSubmitted: (value) {
                                     logger.d(value);
                                   },
-                                  decoration: const InputDecoration(
-                                    suffixIcon: Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
+                                  decoration: InputDecoration(
+                                    suffixIcon: IconButton(
+                                      icon: const Icon(
+                                        CupertinoIcons.calendar,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: picker.showPicker,
                                     ),
                                   ),
+                                  inputFormatters: [
+                                    formatter.dateFormatter,
+                                  ],
                                 );
                               },
                             ),
@@ -2476,8 +2598,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 return ReactiveTextField<DateTime>(
                                   formControlName:
                                       'airline_ticke_arrival_japan_file_upload_date',
-                                  readOnly: true,
-                                  onTap: (value) => picker.showPicker(),
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -2487,12 +2607,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   onSubmitted: (value) {
                                     logger.d(value);
                                   },
-                                  decoration: const InputDecoration(
-                                    suffixIcon: Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
+                                  decoration: InputDecoration(
+                                    suffixIcon: IconButton(
+                                      icon: const Icon(
+                                        CupertinoIcons.calendar,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: picker.showPicker,
                                     ),
                                   ),
+                                  inputFormatters: [
+                                    formatter.dateFormatter,
+                                  ],
                                 );
                               },
                             ),
@@ -2556,8 +2682,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 return ReactiveTextField<DateTime>(
                                   formControlName:
                                       'airline_ticket_return_japan_file_upload_date',
-                                  readOnly: true,
-                                  onTap: (value) => picker.showPicker(),
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -2567,12 +2691,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   onSubmitted: (value) {
                                     logger.d(value);
                                   },
-                                  decoration: const InputDecoration(
-                                    suffixIcon: Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
+                                  decoration: InputDecoration(
+                                    suffixIcon: IconButton(
+                                      icon: const Icon(
+                                        CupertinoIcons.calendar,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: picker.showPicker,
                                     ),
                                   ),
+                                  inputFormatters: [
+                                    formatter.dateFormatter,
+                                  ],
                                 );
                               },
                             ),
@@ -2636,8 +2766,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 return ReactiveTextField<DateTime>(
                                   formControlName:
                                       'boarding_pass_returning_file_upload_date',
-                                  readOnly: true,
-                                  onTap: (value) => picker.showPicker(),
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -2647,12 +2775,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   onSubmitted: (value) {
                                     logger.d(value);
                                   },
-                                  decoration: const InputDecoration(
-                                    suffixIcon: Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
+                                  decoration: InputDecoration(
+                                    suffixIcon: IconButton(
+                                      icon: const Icon(
+                                        CupertinoIcons.calendar,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: picker.showPicker,
                                     ),
                                   ),
+                                  inputFormatters: [
+                                    formatter.dateFormatter,
+                                  ],
                                 );
                               },
                             ),
@@ -2716,8 +2850,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 return ReactiveTextField<DateTime>(
                                   formControlName:
                                       'certificate_eligibility_file_upload_date',
-                                  readOnly: true,
-                                  onTap: (value) => picker.showPicker(),
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -2727,12 +2859,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   onSubmitted: (value) {
                                     logger.d(value);
                                   },
-                                  decoration: const InputDecoration(
-                                    suffixIcon: Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
+                                  decoration: InputDecoration(
+                                    suffixIcon: IconButton(
+                                      icon: const Icon(
+                                        CupertinoIcons.calendar,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: picker.showPicker,
                                     ),
                                   ),
+                                  inputFormatters: [
+                                    formatter.dateFormatter,
+                                  ],
                                 );
                               },
                             ),
@@ -2833,8 +2971,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             Widget? child) {
                           return ReactiveTextField<DateTime>(
                             formControlName: 'passport_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -2844,12 +2980,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -2889,8 +3031,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           return ReactiveTextField<DateTime>(
                             formControlName:
                                 'personal_reference_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -2900,12 +3040,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -2963,8 +3109,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           return ReactiveTextField<DateTime>(
                             formControlName:
                                 'treatment_schedule_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -2974,12 +3118,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -3019,8 +3169,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           return ReactiveTextField<DateTime>(
                             formControlName:
                                 'statement_reasons_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -3030,12 +3178,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -3076,8 +3230,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           return ReactiveTextField<DateTime>(
                             formControlName:
                                 'accompanying_persons_list_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -3087,12 +3239,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -3143,8 +3301,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             Widget? child) {
                           return ReactiveTextField<DateTime>(
                             formControlName: 'visa_page_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -3154,12 +3310,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -3198,8 +3360,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             Widget? child) {
                           return ReactiveTextField<DateTime>(
                             formControlName: 'landing_permit_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -3209,12 +3369,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -3276,8 +3442,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           return ReactiveTextField<DateTime>(
                             formControlName:
                                 'airline_ticke_arrival_japan_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -3287,12 +3451,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -3354,8 +3524,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           return ReactiveTextField<DateTime>(
                             formControlName:
                                 'airline_ticket_return_japan_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -3365,12 +3533,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -3432,8 +3606,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           return ReactiveTextField<DateTime>(
                             formControlName:
                                 'boarding_pass_returning_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -3443,12 +3615,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),
@@ -3510,8 +3688,6 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           return ReactiveTextField<DateTime>(
                             formControlName:
                                 'certificate_eligibility_file_upload_date',
-                            readOnly: true,
-                            onTap: (value) => picker.showPicker(),
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -3521,12 +3697,18 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             onSubmitted: (value) {
                               logger.d(value);
                             },
-                            decoration: const InputDecoration(
-                              suffixIcon: Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                            decoration: InputDecoration(
+                              suffixIcon: IconButton(
+                                icon: const Icon(
+                                  CupertinoIcons.calendar,
+                                  color: Colors.grey,
+                                ),
+                                onPressed: picker.showPicker,
                               ),
                             ),
+                            inputFormatters: [
+                              formatter.dateFormatter,
+                            ],
                           );
                         },
                       ),

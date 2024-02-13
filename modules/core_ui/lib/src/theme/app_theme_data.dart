@@ -120,7 +120,7 @@ class AppThemeData {
           fontWeight: FontWeight.w500,
           fontFamily: 'NotoSansJP',
           package: 'core_ui',
-          fontSize: 15.0,
+          fontSize: 12.0,
         ),
       ),
       pinPutTheme: PinPutTheme(
@@ -148,7 +148,7 @@ class AppThemeData {
           titleTextStyle: const TextStyle(
             fontFamily: 'NotoSansJP',
             package: 'core_ui',
-            fontSize: 15.0,
+            fontSize: 12.0,
             fontWeight: FontWeight.w500,
             color: primaryTextColor,
           ),
@@ -156,7 +156,7 @@ class AppThemeData {
             color: secondaryTextColor,
             fontFamily: 'NotoSansJP',
             package: 'core_ui',
-            fontSize: 13.0,
+            fontSize: 11.0,
           ),
         ),
       ),
@@ -194,7 +194,7 @@ class AppThemeData {
         elevation: 1,
         centerTitle: true,
         titleTextStyle: TextStyle(
-          fontSize: 16.0,
+          fontSize: 12.0,
           color: primaryTextColor,
           fontWeight: FontWeight.w500,
           fontFamily: 'NotoSansJP',
@@ -273,7 +273,13 @@ class AppThemeData {
         filled: true,
         alignLabelWithHint: true,
         hintStyle: const TextStyle(
-          fontSize: 15.0,
+          fontSize: 12.0,
+          color: Color(0xFF5B5B5B),
+          fontFamily: 'NotoSansJP',
+          package: 'core_ui',
+        ),
+        labelStyle: const TextStyle(
+          fontSize: 12.0,
           color: Color(0xFF5B5B5B),
           fontFamily: 'NotoSansJP',
           package: 'core_ui',
@@ -482,17 +488,17 @@ class Typography {
         package: 'core_ui',
       ),
       bodyLarge: const TextStyle(
-        fontSize: 17.0,
+        fontSize: 14.0, // updated font size
         fontFamily: 'NotoSansJP',
         package: 'core_ui',
       ),
       bodyMedium: const TextStyle(
-        fontSize: 15.0,
+        fontSize: 13.0, // updated font size
         fontFamily: 'NotoSansJP',
         package: 'core_ui',
       ),
       bodySmall: const TextStyle(
-        fontSize: 13.0,
+        fontSize: 11.0,
         color: Color(0xFF8E8E8E),
         fontFamily: 'NotoSansJP',
         package: 'core_ui',
