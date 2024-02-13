@@ -63,13 +63,13 @@ class CreateMedicalOverseaDataWithUrlScreen extends StatelessWidget {
           children: [
             Expanded(
               child: ReactiveDatePicker<DateTime>(
-                formControlName: 'entry_date_from',
+                formControlName: 'expirationDate',
                 firstDate: DateTime(1900),
                 lastDate: DateTime(2100),
                 builder: (BuildContext context,
                     ReactiveDatePickerDelegate<dynamic> picker, Widget? child) {
                   return ReactiveTextField<DateTime>(
-                    formControlName: 'entry_date_from',
+                    formControlName: 'expirationDate',
                     valueAccessor: DateTimeValueAccessor(
                       dateTimeFormat: DateFormat('yyyy/MM/dd'),
                     ),
