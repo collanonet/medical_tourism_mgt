@@ -223,7 +223,7 @@ class AppThemeData {
           ),
           disabledBackgroundColor: disableButtonColor,
           disabledForegroundColor: Colors.black,
-          textStyle: textTheme.labelLarge,
+          textStyle: textTheme.labelMedium,
         ),
       ),
       bottomNavigationBarTheme: const BottomNavigationBarThemeData(
@@ -239,7 +239,7 @@ class AppThemeData {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
-          textStyle: textTheme.labelLarge,
+          textStyle: textTheme.labelMedium,
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -253,7 +253,7 @@ class AppThemeData {
               borderRadius: BorderRadius.circular(12.0),
             ),
             side: BorderSide(width: 2, color: primaryColor),
-            textStyle: textTheme.labelLarge),
+            textStyle: textTheme.labelMedium),
       ),
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(

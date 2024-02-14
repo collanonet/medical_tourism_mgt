@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:core_l10n/l10n.dart';
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_table_2/data_table_2.dart';
 import '../../feature_patient.gm.dart';
@@ -66,9 +67,11 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                   ),
                   columns: [
                     DataColumn2(
+                      size: ColumnSize.S,
                       label: Text(context.l10n.labelAgents),
                     ),
                     DataColumn2(
+                      size: ColumnSize.S,
                       label: Text(context.l10n.labelPatient),
                     ),
                     DataColumn2(
@@ -76,18 +79,19 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                       label: Text(context.l10n.labelDateOfBirth),
                     ),
                     DataColumn2(
-                      fixedWidth: 100,
+                      size: ColumnSize.S,
                       label: Text(context.l10n.labelGender),
                     ),
                     DataColumn2(
-                      fixedWidth: 100,
+                      size: ColumnSize.S,
                       label: Text(context.l10n.labelNationality),
                     ),
                     DataColumn2(
+                      size: ColumnSize.S,
                       label: Text(context.l10n.labelClassification),
                     ),
                     DataColumn2(
-                      fixedWidth: 100,
+                      size: ColumnSize.S,
                       label: Text(context.l10n.labelNameOfaDisease),
                     ),
                     const DataColumn2(
@@ -145,6 +149,7 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                                       child: Text(context.l10n.actionDeleted),
                                     )
                                   : Row(
+                                      mainAxisSize: MainAxisSize.min,
                                       children: [
                                         ElevatedButton(
                                           onPressed: model.deletePrePatientData
@@ -164,14 +169,16 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                                                     prePatient: item.id,
                                                   ));
                                                 },
-                                          child: model.deletePrePatientData
-                                                      .loading &&
-                                                  model.prePatientId == item.id
-                                              ? const CircularProgressIndicator()
-                                              : Text(context
-                                                  .l10n.actionGoToRegister),
+                                          child: WithLoadingButton(
+                                            isLoading: model
+                                                    .deletePrePatientData
+                                                    .loading &&
+                                                model.prePatientId == item.id,
+                                            child: Text(context
+                                                .l10n.actionGoToRegister),
+                                          ),
                                         ),
-                                        const SizedBox(width: 16),
+                                        const SizedBox(width: 4),
                                         OutlinedButton(
                                           onPressed:
                                               model.deletePrePatientData.loading
@@ -180,15 +187,15 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                                                       model.deletePrePatient(
                                                           item.id);
                                                     },
-                                          child: model.deletePrePatientData
-                                                      .loading &&
-                                                  model.deletePrePatientData
-                                                          .data ==
-                                                      item.id
-                                              ? const CircularProgressIndicator()
-                                              : Text(
-                                                  context.l10n.actionDelete,
-                                                ),
+                                          child: WithLoadingButton(
+                                            isLoading: model
+                                                    .deletePrePatientData
+                                                    .loading &&
+                                                model.prePatientId == item.id,
+                                            child: Text(
+                                              context.l10n.actionDelete,
+                                            ),
+                                          ),
                                         ),
                                       ],
                                     )),
