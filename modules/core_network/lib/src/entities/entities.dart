@@ -15,7 +15,6 @@ export 'medical_record_hospital.dart';
 export 'medical_record_referrer.dart';
 export 'medical_record_progress.dart';
 export 'medical_record_interpreter.dart';
-export 'medical_record_oversea.dart';
 export 'medical_record_oversea_data.dart';
 export 'medical_record_travel_group.dart';
 export 'medical_record_travel_group_request.dart';

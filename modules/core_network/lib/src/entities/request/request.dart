@@ -6,7 +6,6 @@ export 'medical_record_request.dart';
 export 'medical_record_budget_request.dart';
 export 'medical_record_hospital_request.dart';
 export 'medical_record_companion_request.dart';
-export 'medical_record_oversea_request.dart';
 export 'medical_record_oversea_data_request.dart';
 export 'medical_record_progress_request.dart';
 export 'medical_record_referrer_request.dart';

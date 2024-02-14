@@ -106,6 +106,39 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<String> uploadFile(File file) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    _data.files.add(MapEntry(
+      'file',
+      MultipartFile.fromFileSync(
+        file.path,
+        filename: file.path.split(Platform.pathSeparator).last,
+      ),
+    ));
+    final _result = await _dio.fetch<String>(_setStreamType<String>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/files/upload',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+    final value = _result.data!;
+    return value;
+  }
+
+  @override
   Future<Paginated<PrePatient>> prePatients({
     int? page,
     int? limit,
@@ -233,10 +266,11 @@ class _ApiService implements ApiService {
   Future<Paginated<Patient>> patients({
     int? page,
     int? limit,
+    String? progress,
     String? patientName,
     String? companyAgents,
     String? acceptingHospital,
-    List<String?>? type,
+    String? type,
     String? salesStaff,
     String? dateOfEntryfrom,
     String? dateOfEntryto,
@@ -249,7 +283,8 @@ class _ApiService implements ApiService {
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'limit': limit,
-      r'patient_name': patientName,
+      r'progress': progress,
+      r'patientName': patientName,
       r'companyAGENTS': companyAgents,
       r'acceptingHospital': acceptingHospital,
       r'type': type,
@@ -2029,186 +2064,8 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<MedicalRecordOversea>> medicalRecordsOverseas(
-      String medicalRecordId) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<MedicalRecordOversea>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/medical-records-overseas/${medicalRecordId}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    var value = _result.data!
-        .map((dynamic i) =>
-            MedicalRecordOversea.fromJson(i as Map<String, dynamic>))
-        .toList();
-    return value;
-  }
-
-  @override
-  Future<List<MedicalRecordOversea>> medicalRecordsOverseasByMedicalRecord(
-      String medicalRecordId) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<MedicalRecordOversea>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/medical-records-overseas/medical-record-id/${medicalRecordId}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    var value = _result.data!
-        .map((dynamic i) =>
-            MedicalRecordOversea.fromJson(i as Map<String, dynamic>))
-        .toList();
-    return value;
-  }
-
-  @override
-  Future<MedicalRecordOversea> postMedicalRecordOversea(
-      MedicalRecordOverseaRequest medicalRecordOversea) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(medicalRecordOversea.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MedicalRecordOversea>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/medical-records-overseas',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = MedicalRecordOversea.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<MedicalRecordOversea> putMedicalRecordOversea(
-    String id,
-    MedicalRecordOverseaRequest medicalRecordOversea,
-  ) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(medicalRecordOversea.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MedicalRecordOversea>(Options(
-      method: 'PUT',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/medical-records-overseas/${id}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = MedicalRecordOversea.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<void> deleteMedicalRecordOversea(String id) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    await _dio.fetch<void>(_setStreamType<void>(Options(
-      method: 'DELETE',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/medical-records-overseas/${id}',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
-  }
-
-  @override
-  Future<List<MedicalRecordOverseaData>> medicalRecordsOverseaData(
-      String medicalRecordOverseaId) async {
-    const _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<MedicalRecordOverseaData>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/medical-records-overseas-data/${medicalRecordOverseaId}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    var value = _result.data!
-        .map((dynamic i) =>
-            MedicalRecordOverseaData.fromJson(i as Map<String, dynamic>))
-        .toList();
-    return value;
-  }
-
-  @override
   Future<List<MedicalRecordOverseaData>>
-      medicalRecordsOverseaDataByRecordsOversea(
-          String medicalRecordOverseaId) async {
+      medicalRecordOverseaDataByMedicalRecord(String medicalRecordId) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -2221,7 +2078,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-records-overseas-data/medical-record-overseas-id/${medicalRecordOverseaId}',
+              '/medical-records-overseas-data/medical-record/${medicalRecordId}',
               queryParameters: queryParameters,
               data: _data,
             )

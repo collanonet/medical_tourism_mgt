@@ -4,14 +4,14 @@ part 'medical_record_budget_request.g.dart';
 
 @JsonSerializable()
 class MedicalRecordBudgetRequest {
-   double? budget;
+   int? budget;
    String? remarks;
-   String? medicalRecord;
+   String medicalRecord;
 
   MedicalRecordBudgetRequest({
      this.budget,
     this.remarks,
-     this.medicalRecord,
+     required this.medicalRecord,
   });
 
   factory MedicalRecordBudgetRequest.fromJson(Map<String, dynamic> json) {

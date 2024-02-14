@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup formWebAppointment() => FormGroup({
-      'patient_name': FormControl<String>(), // 患者名
+      'patientName': FormControl<String>(), // 患者名
       '1st_choice': FormControl<DateTime>(
         disabled: true,
       ), // 第１希望

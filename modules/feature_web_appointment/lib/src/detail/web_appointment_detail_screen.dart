@@ -16,6 +16,7 @@ class WebAppointmentDetailScreen extends StatefulWidget {
 
 class _WebAppointmentDetailScreenState
     extends State<WebAppointmentDetailScreen> {
+  final formatter = InputFormatter();
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -54,7 +55,7 @@ class _WebAppointmentDetailScreenState
                     children: [
                       Expanded(
                         child: ReactiveTextField(
-                          formControlName: 'patient_name',
+                          formControlName: 'patientName',
                           decoration: InputDecoration(
                             label: Text('患者名'),
                           ),
@@ -70,27 +71,31 @@ class _WebAppointmentDetailScreenState
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
                           formControlName: '1st_choice',
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(3000),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime(2100),
                           builder: (BuildContext context,
                               ReactiveDatePickerDelegate<dynamic> picker,
                               Widget? child) {
                             return ReactiveTextField<DateTime>(
                               formControlName: '1st_choice',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '第１希望',
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                suffixIcon: IconButton(
+                                  icon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: picker.showPicker,
                                 ),
                               ),
+                              inputFormatters: [
+                                formatter.dateFormatter,
+                              ],
                             );
                           },
                         ),
@@ -101,27 +106,31 @@ class _WebAppointmentDetailScreenState
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
                           formControlName: '2nd_choice',
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(3000),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime(2100),
                           builder: (BuildContext context,
                               ReactiveDatePickerDelegate<dynamic> picker,
                               Widget? child) {
                             return ReactiveTextField<DateTime>(
                               formControlName: '2nd_choice',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '第２希望',
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                suffixIcon: IconButton(
+                                  icon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: picker.showPicker,
                                 ),
                               ),
+                              inputFormatters: [
+                                formatter.dateFormatter,
+                              ],
                             );
                           },
                         ),
@@ -132,27 +141,31 @@ class _WebAppointmentDetailScreenState
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
                           formControlName: '3rd_choice',
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(3000),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime(2100),
                           builder: (BuildContext context,
                               ReactiveDatePickerDelegate<dynamic> picker,
                               Widget? child) {
                             return ReactiveTextField<DateTime>(
                               formControlName: '3rd_choice',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '第３希望',
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                suffixIcon: IconButton(
+                                  icon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: picker.showPicker,
                                 ),
                               ),
+                              inputFormatters: [
+                                formatter.dateFormatter,
+                              ],
                             );
                           },
                         ),
@@ -528,9 +541,6 @@ class _WebAppointmentDetailScreenState
                                               return ReactiveTextField<
                                                   DateTime>(
                                                 formControlName: 'First_choice',
-                                                readOnly: true,
-                                                onTap: (value) =>
-                                                    picker.showPicker(),
                                                 valueAccessor:
                                                     DateTimeValueAccessor(
                                                   dateTimeFormat:
@@ -542,14 +552,20 @@ class _WebAppointmentDetailScreenState
                                                 onSubmitted: (value) {
                                                   logger.d(value);
                                                 },
-                                                decoration:
-                                                    const InputDecoration(
+                                                decoration: InputDecoration(
                                                   label: Text('第一希望'),
-                                                  suffixIcon: Icon(
-                                                    CupertinoIcons.calendar,
-                                                    color: Colors.grey,
+                                                  suffixIcon: IconButton(
+                                                    icon: const Icon(
+                                                      CupertinoIcons.calendar,
+                                                      color: Colors.grey,
+                                                    ),
+                                                    onPressed:
+                                                        picker.showPicker,
                                                   ),
                                                 ),
+                                                inputFormatters: [
+                                                  formatter.dateFormatter,
+                                                ],
                                               );
                                             },
                                           ),
@@ -762,8 +778,6 @@ class _WebAppointmentDetailScreenState
                                 Widget? child) {
                               return ReactiveTextField<DateTime>(
                                 formControlName: 'date',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: DateTimeValueAccessor(
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
@@ -773,13 +787,19 @@ class _WebAppointmentDetailScreenState
                                 onSubmitted: (value) {
                                   logger.d(value);
                                 },
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   label: Text('年月日'),
-                                  suffixIcon: Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
                               );
                             },
                           ),
@@ -795,8 +815,6 @@ class _WebAppointmentDetailScreenState
                                 Widget? child) {
                               return ReactiveTextField<TimeOfDay>(
                                 formControlName: 'time',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
                                 valueAccessor: TimeOfDayValueAccessor(),
                                 onChanged: (value) {
                                   logger.d(value);
@@ -804,13 +822,19 @@ class _WebAppointmentDetailScreenState
                                 onSubmitted: (value) {
                                   logger.d(value);
                                 },
-                                decoration: const InputDecoration(
+                                decoration:  InputDecoration(
                                   label: Text('時間'),
-                                  suffixIcon: Icon(
-                                    CupertinoIcons.time,
-                                    color: Colors.grey,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.time,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
                                   ),
                                 ),
+                                inputFormatters: [
+                                  formatter.timeFormatter,
+                                ],
                               );
                             },
                           ),

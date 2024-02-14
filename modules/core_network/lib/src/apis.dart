@@ -124,24 +124,6 @@ class Apis {
   static const PUT_MEDICAL_RECORDS_PROGRESS = '/medical-records-progress';
   static const DELETE_MEDICAL_RECORDS_PROGRESS = '/medical-records-progress';
 
-  static const GET_MEDICAL_RECORDS_OVERSEAS = '/medical-records-overseas';
-  static const GET_MEDICAL_RECORDS_OVERSEAS_BY_MEDICAL_RECORD =
-      '/medical-records-overseas/medical-record-id';
-  static const GET_MEDICAL_RECORDS_OVERSEA = '/medical-records-overseas';
-  static const POST_MEDICAL_RECORDS_OVERSEAS = '/medical-records-overseas';
-  static const PUT_MEDICAL_RECORDS_OVERSEAS = '/medical-records-overseas';
-  static const DELETE_MEDICAL_RECORDS_OVERSEAS = '/medical-records-overseas';
-
-  static const GET_MEDICAL_RECORDS_OVERSEAS_DATAS =
-      '/medical-records-overseas-data';
-  static const GET_MEDICAL_RECORDS_OVERSEAS_DATA_BY_RECORDS_OVERSEAS =
-      '/medical-records-overseas-data/medical-record-overseas-id';
-  static const GET_MEDICAL_RECORDS_OVERSEAS_DATA =
-      '/medical-records-overseas-data';
-  static const POST_MEDICAL_RECORDS_OVERSEAS_DATA =
-      '/medical-records-overseas-data';
-  static const PUT_MEDICAL_RECORDS_OVERSEAS_DATA =
-      '/medical-records-overseas-data';
-  static const DELETE_MEDICAL_RECORDS_OVERSEAS_DATA =
-      '/medical-records-overseas-data';
+  static const MEDICAL_RECORDS_OVERSEAS_DATA = '/medical-records-overseas-data';
+  static const MEDICAL_RECORDS_OVERSEAS_DATA_MEDICAL_RECORD = '/medical-records-overseas-data/medical-record';
 }

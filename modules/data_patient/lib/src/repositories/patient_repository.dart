@@ -1,7 +1,13 @@
+import 'dart:io';
+
 import 'package:core_network/core_network.dart';
 
 abstract class PatientRepository {
   //GET_PRE_PATIENTS
+
+  Future<String> uploadFile(
+    File file,
+  );
 
   Future<Paginated<PrePatient>> prePatients({
     int? page,
@@ -26,10 +32,11 @@ abstract class PatientRepository {
   //GET_PATIENTS
 
   Future<Paginated<Patient>> patients({
-    String? patient_name,
+    String? progress,
+    String? patientName,
     String? companyAGENTS,
     String? acceptingHospital,
-    List<String?>? type,
+    String? type,
     String? salesStaff,
     String? dateOfEntryfrom,
     String? dateOfEntryto,
@@ -311,36 +318,10 @@ abstract class PatientRepository {
     String id,
   );
 
-//GET_MEDICAL_RECORDS_OVERSEAS
-  Future<List<MedicalRecordOversea>> medicalRecordsOverseas(
-    String medicalRecordId,
-  );
-
-  Future<List<MedicalRecordOversea>> medicalRecordsOverseasByMedicalRecord(
-    String medicalRecordId,
-  );
-
-  Future<MedicalRecordOversea> postMedicalRecordOversea(
-    MedicalRecordOverseaRequest medicalRecordOversea,
-  );
-
-  Future<MedicalRecordOversea> putMedicalRecordOversea(
-    String id,
-    MedicalRecordOverseaRequest medicalRecordOversea,
-  );
-
-  Future<void> deleteMedicalRecordOversea(
-    String id,
-  );
-
 //GET_MEDICAL_RECORDS_OVERSEAS_DATA
-  Future<List<MedicalRecordOverseaData>> medicalRecordsOverseasData(
-    String medicalRecordOverseaId,
-  );
-
   Future<List<MedicalRecordOverseaData>>
-      medicalRecordsOverseaDataByMedicalRecordOversea(
-    String medicalRecordOverseaId,
+      medicalRecordOverseaDataByMedicalRecord(
+    String medicalRecordId,
   );
 
   Future<MedicalRecordOverseaData> postMedicalRecordOverseaData(
@@ -386,27 +367,35 @@ abstract class PatientRepository {
   Future<void> deleteMedicalRecordProposal(
     String id,
   );
-  Future<MedicalRecordPatientResponseTreatment> getMedicalRecordPatientResponseTreatment({
+  Future<MedicalRecordPatientResponseTreatment>
+      getMedicalRecordPatientResponseTreatment({
     required String medicalRecord,
   });
 
-  Future<MedicalRecordPatientResponseTreatment> postMedicalRecordPatientResponseTreatment(
-    MedicalRecordPatientResponseTreatmentRequest medicalRecordPatientResponseTreatment,
+  Future<MedicalRecordPatientResponseTreatment>
+      postMedicalRecordPatientResponseTreatment(
+    MedicalRecordPatientResponseTreatmentRequest
+        medicalRecordPatientResponseTreatment,
   );
 
-  Future<MedicalRecordPatientResponseMedicalCheckup> getMedicalRecordPatientResponseMedicalCheckup({
+  Future<MedicalRecordPatientResponseMedicalCheckup>
+      getMedicalRecordPatientResponseMedicalCheckup({
     required String medicalRecord,
   });
 
-  Future<MedicalRecordPatientResponseMedicalCheckup> postMedicalRecordPatientResponseMedicalCheckup(
-    MedicalRecordPatientResponseMedicalCheckupRequest medicalRecordPatientResponseMedicalCheckup,
+  Future<MedicalRecordPatientResponseMedicalCheckup>
+      postMedicalRecordPatientResponseMedicalCheckup(
+    MedicalRecordPatientResponseMedicalCheckupRequest
+        medicalRecordPatientResponseMedicalCheckup,
   );
 
-  Future<MedicalRecordPatientResponseOther> getMedicalRecordPatientResponseOther({
+  Future<MedicalRecordPatientResponseOther>
+      getMedicalRecordPatientResponseOther({
     required String medicalRecord,
   });
 
-  Future<MedicalRecordPatientResponseOther> postMedicalRecordPatientResponseOther(
+  Future<MedicalRecordPatientResponseOther>
+      postMedicalRecordPatientResponseOther(
     MedicalRecordPatientResponseOtherRequest medicalRecordPatientResponseOther,
   );
 

@@ -32,7 +32,7 @@ class ChatFilter extends StatelessWidget {
                     children: [
                       Expanded(
                         child: ReactiveTextField(
-                          formControlName: 'Patient_name_message',
+                          formControlName: 'patientNameMessage',
                           decoration: InputDecoration(
                             label: Text(
                               '患者名/メッセージ',

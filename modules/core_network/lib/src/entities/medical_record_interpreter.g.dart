@@ -10,8 +10,8 @@ MedicalRecordInterpreter _$MedicalRecordInterpreterFromJson(
         Map<String, dynamic> json) =>
     MedicalRecordInterpreter(
       id: json['_id'] as String,
-      requiredOrUnnnecessary: json['requiredOrUnnnecessary'] as bool,
-      interpreter: json['interpreter'] as String,
+      requiredOrUnnnecessary: json['requiredOrUnnnecessary'] as bool?,
+      interpreter: json['interpreter'] as String?,
       medicalRecord: json['medicalRecord'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),

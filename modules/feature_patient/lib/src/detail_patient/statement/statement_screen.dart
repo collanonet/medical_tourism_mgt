@@ -15,6 +15,7 @@ class StatementScreen extends StatefulWidget {
 }
 
 class _StatementScreenState extends State<StatementScreen> {
+  final formatter = InputFormatter();
   @override
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
@@ -311,8 +312,6 @@ class _StatementScreenState extends State<StatementScreen> {
                               Widget? child) {
                             return ReactiveTextField<DateTime>(
                               formControlName: 'issue_date',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -322,15 +321,21 @@ class _StatementScreenState extends State<StatementScreen> {
                               onSubmitted: (value) {
                                 logger.d(value);
                               },
-                              decoration: const InputDecoration(
+                              decoration:  InputDecoration(
                                 label: Text(
                                   '発行日',
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                suffixIcon: IconButton(
+                                  icon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: picker.showPicker,
                                 ),
                               ),
+                              inputFormatters: [
+                                formatter.dateFormatter,
+                              ],
                             );
                           },
                         ),
@@ -390,8 +395,6 @@ class _StatementScreenState extends State<StatementScreen> {
                               Widget? child) {
                             return ReactiveTextField<DateTime>(
                               formControlName: 'payment_due_date',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -401,15 +404,21 @@ class _StatementScreenState extends State<StatementScreen> {
                               onSubmitted: (value) {
                                 logger.d(value);
                               },
-                              decoration: const InputDecoration(
+                              decoration:  InputDecoration(
                                 label: Text(
                                   'お支払い期限',
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                suffixIcon: IconButton(
+                                  icon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: picker.showPicker,
                                 ),
                               ),
+                              inputFormatters: [
+                                formatter.dateFormatter,
+                              ],
                             );
                           },
                         ),

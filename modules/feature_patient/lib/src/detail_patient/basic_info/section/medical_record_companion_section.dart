@@ -1,6 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,6 +21,8 @@ class MedicalRecordCompanionSection extends StatefulWidget {
 
 class _MedicalRecordCompanionSectionState
     extends State<MedicalRecordCompanionSection> {
+  final formatter = InputFormatter();
+
   @override
   Widget build(BuildContext context) {
     final formArray = (ReactiveForm.of(context) as FormGroup)
@@ -397,36 +400,36 @@ class _MedicalRecordCompanionSectionState
                                     children: [
                                       Expanded(
                                         child: ReactiveDatePicker<DateTime>(
-                                          formControlName: 'dateOfBirth',
-                                          firstDate: DateTime(1900),
-                                          lastDate: DateTime.now(),
-                                          builder: (BuildContext context,
-                                              ReactiveDatePickerDelegate<
-                                                      dynamic>
-                                                  picker,
-                                              Widget? child) {
-                                            return ReactiveTextField<DateTime>(
-                                              formControlName: 'dateOfBirth',
-                                              readOnly: true,
-                                              onTap: (value) =>
-                                                  picker.showPicker(),
-                                              valueAccessor:
-                                                  DateTimeValueAccessor(
-                                                dateTimeFormat:
-                                                    DateFormat('yyyy/MM/dd'),
-                                              ),
-                                              decoration: const InputDecoration(
-                                                label: Text(
-                                                  '生年月日', // TODO: l10n 対応 (生年月日) (dateOfBirth)
+                                            formControlName: 'dateOfBirth',
+                                            firstDate: DateTime(1900),
+                                            lastDate: DateTime(2100),
+                                            builder: (context, picker, child) {
+                                              return ReactiveTextField<
+                                                  DateTime>(
+                                                formControlName: 'dateOfBirth',
+                                                valueAccessor:
+                                                    DateTimeValueAccessor(
+                                                  dateTimeFormat:
+                                                      DateFormat('yyyy/MM/dd'),
                                                 ),
-                                                suffixIcon: Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
+                                                decoration: InputDecoration(
+                                                  label: Text(
+                                                    '生年月日',
+                                                  ),
+                                                  suffixIcon: IconButton(
+                                                    icon: const Icon(
+                                                      CupertinoIcons.calendar,
+                                                      color: Colors.grey,
+                                                    ),
+                                                    onPressed:
+                                                        picker.showPicker,
+                                                  ),
                                                 ),
-                                              ),
-                                            );
-                                          },
-                                        ),
+                                                inputFormatters: [
+                                                  formatter.dateFormatter,
+                                                ],
+                                              );
+                                            }),
                                       ),
                                       SizedBox(
                                         width: context
@@ -795,69 +798,70 @@ class _MedicalRecordCompanionSectionState
                                       ),
                                       Expanded(
                                         child: ReactiveDatePicker<DateTime>(
-                                          formControlName: 'issueDate',
-                                          firstDate: DateTime(2000),
-                                          lastDate: DateTime(3000),
-                                          builder: (BuildContext context,
-                                              ReactiveDatePickerDelegate<
-                                                      dynamic>
-                                                  picker,
-                                              Widget? child) {
-                                            return ReactiveTextField<DateTime>(
-                                              formControlName: 'issueDate',
-                                              readOnly: true,
-                                              onTap: (value) =>
-                                                  picker.showPicker(),
-                                              valueAccessor:
-                                                  DateTimeValueAccessor(
-                                                dateTimeFormat:
-                                                    DateFormat('yyyy/MM/dd'),
-                                              ),
-                                              decoration: const InputDecoration(
-                                                label: Text(
-                                                  '発行日', //  TODO: l10n 対応 (発行日) (issueDate)
+                                            formControlName: 'issueDate',
+                                            firstDate: DateTime(1900),
+                                            lastDate: DateTime(2100),
+                                            builder: (context, picker, child) {
+                                              return ReactiveTextField<
+                                                  DateTime>(
+                                                formControlName: 'issueDate',
+                                                valueAccessor:
+                                                    DateTimeValueAccessor(
+                                                  dateTimeFormat:
+                                                      DateFormat('yyyy/MM/dd'),
                                                 ),
-                                                suffixIcon: Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
+                                                decoration: InputDecoration(
+                                                  label: Text(
+                                                    '発行日', //  TODO: l10n 対応 (発行日) (issueDate)
+                                                  ),
+                                                  suffixIcon: IconButton(
+                                                    icon: const Icon(
+                                                      CupertinoIcons.calendar,
+                                                      color: Colors.grey,
+                                                    ),
+                                                    onPressed:
+                                                        picker.showPicker,
+                                                  ),
                                                 ),
-                                              ),
-                                            );
-                                          },
-                                        ),
+                                                inputFormatters: [
+                                                  formatter.dateFormatter,
+                                                ],
+                                              );
+                                            }),
                                       ),
                                       Expanded(
                                         child: ReactiveDatePicker<DateTime>(
-                                          formControlName: 'expirationDate',
-                                          firstDate: DateTime(2000),
-                                          lastDate: DateTime(3000),
-                                          builder: (BuildContext context,
-                                              ReactiveDatePickerDelegate<
-                                                      dynamic>
-                                                  picker,
-                                              Widget? child) {
-                                            return ReactiveTextField<DateTime>(
-                                              formControlName: 'expirationDate',
-                                              readOnly: true,
-                                              valueAccessor:
-                                                  DateTimeValueAccessor(
-                                                dateTimeFormat:
-                                                    DateFormat('yyyy/MM/dd'),
-                                              ),
-                                              onTap: (value) =>
-                                                  picker.showPicker(),
-                                              decoration: const InputDecoration(
-                                                label: Text(
-                                                  '有効期限', // TODO: l10n 対応 (有効期限) (expirationDate)
+                                            formControlName: 'expirationDate',
+                                            firstDate: DateTime(1900),
+                                            lastDate: DateTime(2100),
+                                            builder: (context, picker, child) {
+                                              return ReactiveTextField<
+                                                  DateTime>(
+                                                formControlName:
+                                                    'expirationDate',
+                                                valueAccessor:
+                                                    DateTimeValueAccessor(
+                                                  dateTimeFormat:
+                                                      DateFormat('yyyy/MM/dd'),
                                                 ),
-                                                suffixIcon: Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
+                                                decoration: InputDecoration(
+                                                  label: Text(
+                                                    '有効期限', // TODO: l10n 対応 (有効期限) (expirationDate)
+                                                  ),
+                                                  suffixIcon: IconButton(
+                                                    icon: const Icon(
+                                                      CupertinoIcons.calendar,
+                                                      color: Colors.grey,
+                                                    ),
+                                                    onPressed:
+                                                        picker.showPicker,
+                                                  ),
                                                 ),
-                                              ),
-                                            );
-                                          },
-                                        ),
+                                                inputFormatters: [
+                                                  formatter.dateFormatter,
+                                                ],
+                                              );
+                                            }),
                                       ),
                                     ],
                                   ),
@@ -932,7 +936,9 @@ class _MedicalRecordCompanionSectionState
                       'relationship': FormControl<String>(),
                       'dateOfBirth': FormControl<DateTime>(),
                       'age': FormControl<int?>(),
-                      'gender': FormControl<bool>(), // 性別
+                      'gender': FormControl<bool>(
+                        value: true,
+                      ), // 性別
                       'isMale': FormControl<bool>(
                         value: true,
                       ), // 男性

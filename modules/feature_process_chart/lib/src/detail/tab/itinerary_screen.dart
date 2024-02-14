@@ -23,7 +23,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
         },
         children: [
           ReactiveFormArray(
-            formArrayName: 'patient_names',
+            formArrayName: 'patientNames',
             builder: (context, formArray, child) {
               final rows =
                   formArray.controls.map((control) => control as FormGroup).map(
@@ -32,7 +32,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                           child: SizedBox(
                             width: 250,
                             child: ReactiveTextField(
-                              formControlName: 'patient_name',
+                              formControlName: 'patientName',
                               decoration: const InputDecoration(
                                 label: Text(
                                   '患者名',
@@ -59,7 +59,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                     onTap: () => formArray.add(
                       FormGroup(
                         {
-                          'patient_name': FormControl<String>(value: ''), // 患者名
+                          'patientName': FormControl<String>(value: ''), // 患者名
                         },
                       ),
                     ),

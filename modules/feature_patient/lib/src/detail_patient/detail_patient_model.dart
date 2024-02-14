@@ -32,7 +32,7 @@ class DetailPatientModel {
       } catch (error) {
         patientData.value = AsyncData<Patient>(error: error);
       }
-    }else{
+    } else {
       patientData.value = const AsyncData();
     }
   }
@@ -49,7 +49,6 @@ class DetailPatientModel {
 
     if (patientName != null) {
       patientNames.value = AsyncData(data: patientName);
-      return;
     } else {
       await patientRepository
           .patientNamesByPatient(patientId ?? patientData.value.data?.id ?? '')

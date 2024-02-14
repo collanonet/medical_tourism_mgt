@@ -7,8 +7,8 @@ part 'medical_record_interpreter.g.dart';
 class MedicalRecordInterpreter {
   @JsonKey(name: '_id')
   final String id;
-  bool requiredOrUnnnecessary;
-  String interpreter;
+  bool? requiredOrUnnnecessary;
+  String? interpreter;
   String medicalRecord;
   final DateTime createdAt;
   final DateTime updatedAt;

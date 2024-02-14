@@ -15,9 +15,9 @@ class OverseasMedicalDataPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return Provider(
       create: (context) =>
-      GetIt.I<OverseasMedicalDataModel>()..initialData(patient: patient ),
+          GetIt.I<OverseasMedicalDataModel>()..initialData(patient: patient),
       child: const OverseasMedicalDataScreen(),
     );
   }

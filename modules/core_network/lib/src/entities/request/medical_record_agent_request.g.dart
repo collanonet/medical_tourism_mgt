@@ -12,7 +12,7 @@ MedicalRecordAgentRequest _$MedicalRecordAgentRequestFromJson(
       company: json['company'] as String?,
       nameInKanji: json['nameInKanji'] as String?,
       nameInKana: json['nameInKana'] as String?,
-      medicalRecord: json['medicalRecord'] as String?,
+      medicalRecord: json['medicalRecord'] as String,
     );
 
 Map<String, dynamic> _$MedicalRecordAgentRequestToJson(

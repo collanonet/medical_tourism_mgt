@@ -1,13 +1,22 @@
+import 'dart:io';
+
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup createMedicalOverseaDataWithFileForm() {
+FormGroup createMedicalOverseaDataWithFileForm(File file) {
   return FormGroup({
-    'entry_date_from': FormControl<DateTime>(validators: [Validators.required]),
+    'file': FormControl<File>(value: file),
     'hospitalName': FormControl<String>(validators: [Validators.required]),
-    'hospitalAddress': FormControl<String>(validators: [Validators.required]),
-    'hospitalPhone': FormControl<String>(validators: [Validators.required]),
-    'hospitalFax': FormControl<String>(validators: [Validators.required]),
-    'hospitalEmail': FormControl<String>(validators: [Validators.required]),
-    'hospitalWebsite': FormControl<String>(validators: [Validators.required]),
+    'category': FormControl<String>(value: '画像データ（DICOM）'),
+    'documentName': FormControl<String>(validators: [Validators.required]),
+    'issueDate': FormControl<DateTime>(validators: [Validators.required]),
+
+    'commentHospital1': FormControl<String>(),
+    'commentOurCompany': FormControl<String>(),
+    'commentHospital2': FormControl<String>(),
+
+    'sharedUrl': FormControl<String>(),
+    'password': FormControl<String>(),
+    'expirationDate': FormControl<DateTime>(),
+    'qrCode': FormControl<File>(),
   });
 }

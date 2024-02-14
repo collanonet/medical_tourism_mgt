@@ -3,7 +3,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 FormGroup itinerarySimplifiedForm() {
   return FormGroup({
     'title': FormGroup({
-      'patient_name': FormControl<String>(value: ''), // 患者名
+      'patientName': FormControl<String>(value: ''), // 患者名
       'Medical_institution_name': FormControl<String>(value: ''), // 医療機関名
       'Consultation_date_and_time': FormControl<String>(value: ''), // 受診日時
       'Start_time': FormControl<String>(value: ''), // 開始時間

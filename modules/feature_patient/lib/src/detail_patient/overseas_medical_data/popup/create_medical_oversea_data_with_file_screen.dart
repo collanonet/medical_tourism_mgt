@@ -1,29 +1,31 @@
+import 'dart:io';
+
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/async.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+import '../overseas_medical_data_model.dart';
 
 class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
   const CreateMedicalOverseaDataWithFileScreen({super.key});
-
   @override
   Widget build(BuildContext context) {
+    final formGroup = ReactiveForm.of(context) as FormGroup;
+    final formatter = InputFormatter();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Flexible(
-              child: Text(
-                '先ほど保存したURLの詳細を入力してください。',
-                style: Theme.of(context).textTheme.titleLarge,
-              ),
-            ),
             IconButton(
                 onPressed: () {
                   Navigator.of(context).pop();
@@ -32,6 +34,7 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
           ],
         ),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: Column(
@@ -42,10 +45,10 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
                     '病院',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  TextFormField(
+                  ReactiveTextField<String>(
+                    formControlName: 'hospitalName',
                     decoration: InputDecoration(
-                      isDense: true,
-                      hintText: 'キーワードを入力',
+                      hintText: '病院名を入力',
                     ),
                   ),
                 ],
@@ -64,14 +67,25 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   Row(
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Checkbox(value: true, onChanged: (value) {}),
-                      Text('画像データ（DICOM）'),
+                      IntrinsicWidth(
+                        child: ReactiveRadioListTile(
+                          formControlName: 'category',
+                          title: const Text('画像データ（DICOM）'),
+                          value: '画像データ（DICOM）',
+                        ),
+                      ),
                       SizedBox(
                         width: context.appTheme.spacing.marginMedium,
                       ),
-                      Checkbox(value: true, onChanged: (value) {}),
-                      Text('病状資料'),
+                      IntrinsicWidth(
+                        child: ReactiveRadioListTile(
+                          formControlName: 'category',
+                          title: const Text('病状資料'),
+                          value: '病状資料',
+                        ),
+                      ),
                     ],
                   )
                 ],
@@ -89,11 +103,30 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
                     '書類名',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  TextFormField(
-                    decoration: InputDecoration(
-                      isDense: true,
-                      hintText: 'PET-CT',
-                    ),
+                  const ReactiveDropdownFormField(
+                    formControlName: 'documentName',
+                    items: [
+                      DropdownMenuItem(
+                        value: 'PET-CT',
+                        child: Text('PET-CT'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'MRI',
+                        child: Text('MRI'),
+                      ),
+                      DropdownMenuItem(
+                        value: '入退院記録',
+                        child: Text('入退院記録'),
+                      ),
+                      DropdownMenuItem(
+                        value: '検査結果',
+                        child: Text('検査結果'),
+                      ),
+                      DropdownMenuItem(
+                        value: '手術記録',
+                        child: Text('手術記録'),
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -109,15 +142,13 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
           children: [
             Expanded(
               child: ReactiveDatePicker<DateTime>(
-                formControlName: 'entry_date_from',
-                firstDate: DateTime(2000),
-                lastDate: DateTime(3000),
+                formControlName: 'issueDate',
+                firstDate: DateTime(1900),
+                lastDate: DateTime(2100),
                 builder: (BuildContext context,
                     ReactiveDatePickerDelegate<dynamic> picker, Widget? child) {
                   return ReactiveTextField<DateTime>(
-                    formControlName: 'entry_date_from',
-                    readOnly: true,
-                    onTap: (value) => picker.showPicker(),
+                    formControlName: 'issueDate',
                     valueAccessor: DateTimeValueAccessor(
                       dateTimeFormat: DateFormat('yyyy/MM/dd'),
                     ),
@@ -125,11 +156,17 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
                       label: Text(
                         context.l10n.labelEntryDateFrom,
                       ),
-                      suffixIcon: const Icon(
-                        CupertinoIcons.calendar,
-                        color: Colors.grey,
+                      suffixIcon: IconButton(
+                        icon: const Icon(
+                          CupertinoIcons.calendar,
+                          color: Colors.grey,
+                        ),
+                        onPressed: picker.showPicker,
                       ),
                     ),
+                    inputFormatters: [
+                      formatter.dateFormatter,
+                    ],
                   );
                 },
               ),
@@ -146,6 +183,69 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
             Expanded(
               child: SizedBox.shrink(),
             )
+          ],
+        ),
+        SizedBox(
+          height: context.appTheme.spacing.marginMedium,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            OutlinedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('キャンセル'),
+            ),
+            SizedBox(
+              width: context.appTheme.spacing.marginMedium,
+            ),
+            ValueListenableListener(
+              valueListenable: context
+                  .read<OverseasMedicalDataModel>()
+                  .createMedicalOverseaData,
+              onListen: () {
+                final value = context
+                    .read<OverseasMedicalDataModel>()
+                    .createMedicalOverseaData
+                    .value;
+
+                if (value.hasError) {
+                  snackBarWidget(
+                    message: '保存できませんでした。 もう一度試してください。',
+                    backgroundColor: Colors.red,
+                    prefixIcon: const Icon(Icons.error, color: Colors.white),
+                  );
+                }
+
+                if (value.hasData) {
+                  Navigator.pop(context);
+                  snackBarWidget(
+                    message: '正常に保存されました',
+                    prefixIcon:
+                        const Icon(Icons.check_circle, color: Colors.white),
+                  );
+                }
+              },
+              child: ValueListenableBuilder(
+                  valueListenable: context
+                      .read<OverseasMedicalDataModel>()
+                      .createMedicalOverseaData,
+                  builder: (context, value, _) {
+                    return ElevatedButton(
+                      onPressed: value.loading
+                          ? null
+                          : () {
+                              context
+                                  .read<OverseasMedicalDataModel>()
+                                  .postMedicalRecordsOverseasData(formGroup);
+                            },
+                      child: WithLoadingButton(
+                          isLoading: value.loading, child: Text('保存する')),
+                    );
+                  }),
+            ),
           ],
         )
       ],

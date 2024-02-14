@@ -11,7 +11,7 @@ MedicalRecordInterpreterRequest _$MedicalRecordInterpreterRequestFromJson(
     MedicalRecordInterpreterRequest(
       requiredOrUnnnecessary: json['requiredOrUnnnecessary'] as bool?,
       interpreter: json['interpreter'] as String?,
-      medicalRecord: json['medicalRecord'] as String?,
+      medicalRecord: json['medicalRecord'] as String,
     );
 
 Map<String, dynamic> _$MedicalRecordInterpreterRequestToJson(

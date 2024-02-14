@@ -124,13 +124,13 @@ class _PatientScreenState extends State<PatientScreen> {
                       setState(() {
                         filterText = newSelection.first;
                       });
-                      // if (newSelection.first == 'all') {
-                      //   context.read<PatientModel>().patients();
-                      // } else {
-                      //   context
-                      //       .read<PatientModel>()
-                      //       .patients(type: newSelection.first);
-                      // }
+                      if (newSelection.first == 'all') {
+                        context.read<PatientModel>().patients();
+                      } else {
+                        context
+                            .read<PatientModel>()
+                            .patients(progress: newSelection.first);
+                      }
                     },
                   ),
                   const SizedBox(width: 16),
@@ -165,16 +165,9 @@ class _PatientScreenState extends State<PatientScreen> {
               child: Skeletonizer(
                 enabled: model.patientData.loading,
                 child: DynamicTable(
-                  rowsPerPage: filterText == 'all'
-                      ? (model.patientData.data?.items.length ?? 0) < 10
-                          ? model.patientData.data?.items.length
-                          : 10
-                      : model.patientData.data?.items
-                              .where((element) =>
-                                  element.progress.toString() == filterText)
-                              .toList()
-                              .length ??
-                          0,
+                  rowsPerPage: (model.patientData.data?.items.length ?? 0) < 10
+                      ? model.patientData.data?.items.length
+                      : 10,
                   data: TableData(
                     columns: [
                       HeaderTableData(
@@ -229,23 +222,9 @@ class _PatientScreenState extends State<PatientScreen> {
                     rows: (model.patientData.data?.items.length ?? 0) == 0
                         ? []
                         : List<RowTableData>.generate(
-                            filterText == 'all'
-                                ? model.patientData.data?.items.length ?? 0
-                                : model.patientData.data?.items
-                                        .where((element) =>
-                                            element.progress.toString() ==
-                                            filterText)
-                                        .toList()
-                                        .length ??
-                                    0,
+                            model.patientData.data?.items.length ?? 0,
                             (index) {
-                              var item = filterText == 'all'
-                                  ? model.patientData.data?.items[index]
-                                  : model.patientData.data?.items
-                                      .where((element) =>
-                                          element.progress.toString() ==
-                                          filterText)
-                                      .toList()[index];
+                              var item = model.patientData.data?.items[index];
                               return RowTableData(
                                 onTap: () {
                                   context.router.push(

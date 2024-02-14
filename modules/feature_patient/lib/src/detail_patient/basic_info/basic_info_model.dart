@@ -69,8 +69,11 @@ class BasicInformationModel {
         loading.value = AsyncData(error: error);
       }
     }
+    logger.d('createUpdateAll ${patientData.value.data?.id}');
     if (patientData.value.hasData) {
       try {
+        loading.value = const AsyncData(loading: true);
+
         await createUpdatePatientNames(
             form.control('PATIENT_NAMES') as FormGroup);
         await createUpdatePatientNationalities(
@@ -634,9 +637,9 @@ class BasicInformationModel {
 
       MedicalRecordRequest request = MedicalRecordRequest(
         dateOfBirth: form.control('dateOfBirth').value,
-        age: form.control('age').value,
-        height: form.control('height').value as int,
-        weight: form.control('weight').value as int,
+        age: form.control('age').value ?? 0,
+        height: form.control('height').value ?? 0,
+        weight: form.control('weight').value ?? 0,
         gender: form.control('gender').value,
         arrivalDate: form.control('arrivalDate').value as DateTime?,
         consultationDate: form.control('consultationDate').value as DateTime?,
@@ -649,7 +652,7 @@ class BasicInformationModel {
             form.control('advancePaymentDate').value as DateTime?,
         receivingMethod: form.control('receivingMethod').value,
         memo: form.control('memo').value,
-        patient: form.control('patient').value,
+        patient: patientData.value.requireData.id,
       );
       if (form.control('id').value != null) {
         await updateMedicalRecords(form, form.control('id').value, request);
@@ -879,10 +882,12 @@ class BasicInformationModel {
         .medicalRecordBudgetsByMedicalRecord(medicalRecordId)
         .then((value) {
       medicalRecordBudgets.value = AsyncData(data: value.firstOrNull);
-      insertMEDICALRECORDBUDGETS(
-        data: value.first,
-        formGroup: formGroup.control('MEDICAL_RECORD_BUDGETS') as FormGroup,
-      );
+      if (value.isNotEmpty) {
+        insertMEDICALRECORDBUDGETS(
+          data: value.first,
+          formGroup: formGroup.control('MEDICAL_RECORD_BUDGETS') as FormGroup,
+        );
+      }
     }).catchError((error) {
       logger.d(error);
       medicalRecordBudgets.value = AsyncData(error: error);
@@ -894,7 +899,7 @@ class BasicInformationModel {
     required FormGroup formGroup,
   }) {
     formGroup.control('id').value = data.id;
-    formGroup.control('budget').value = data.budget.toString();
+    formGroup.control('budget').value = data.budget ?? 0;
     formGroup.control('remarks').value = data.remarks;
   }
 
@@ -917,7 +922,7 @@ class BasicInformationModel {
 
   Future<void> createUpdateMedicalRecordBudgets(FormGroup form) async {
     MedicalRecordBudgetRequest request = MedicalRecordBudgetRequest(
-      budget: double.tryParse(form.control('budget').value.toString()) ?? 0.0,
+      budget: form.control('budget').value ?? 0,
       remarks: form.control('remarks').value ?? '',
       medicalRecord: medicalRecord.value.requireData.id,
     );
@@ -993,7 +998,7 @@ class BasicInformationModel {
             }
           }
 
-          if(element.chatToolLink == null || element.chatToolLink!.isEmpty){
+          if (element.chatToolLink == null || element.chatToolLink!.isEmpty) {
             chatToolLink.add(
               FormGroup({
                 'chatToolLink': FormControl<String>(),

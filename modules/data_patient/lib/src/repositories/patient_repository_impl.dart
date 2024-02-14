@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 
@@ -14,6 +16,11 @@ class PatientRepositoryIml extends PatientRepository {
 
   final PatientRemoteProvider remote;
   final PatientLocalProvider local;
+
+  @override
+  Future<String> uploadFile(File file) {
+    return remote.uploadFile(file);
+  }
 
   //GET_PRE_PATIENTS
 
@@ -58,10 +65,11 @@ class PatientRepositoryIml extends PatientRepository {
 
   @override
   Future<Paginated<Patient>> patients({
-    String? patient_name,
+    String? progress,
+    String? patientName,
     String? companyAGENTS,
     String? acceptingHospital,
-    List<String?>? type,
+    String? type,
     String? salesStaff,
     String? dateOfEntryfrom,
     String? dateOfEntryto,
@@ -71,7 +79,8 @@ class PatientRepositoryIml extends PatientRepository {
     String? returnDateto,
   }) {
     return remote.patients(
-      patient_name: patient_name,
+      progress: progress,
+      patientName: patientName,
       companyAGENTS: companyAGENTS,
       acceptingHospital: acceptingHospital,
       type: type,
@@ -538,60 +547,13 @@ class PatientRepositoryIml extends PatientRepository {
     return remote.deleteMedicalRecordProgress(id);
   }
 
-//GET_MEDICAL_RECORDS_OVERSEAS
-
-  @override
-  Future<List<MedicalRecordOversea>> medicalRecordsOverseas(
-    String medicalRecordId,
-  ) {
-    return remote.medicalRecordsOverseas(medicalRecordId);
-  }
-
-  @override
-  Future<List<MedicalRecordOversea>> medicalRecordsOverseasByMedicalRecord(
-    String medicalRecordId,
-  ) {
-    return remote.medicalRecordsOverseasByMedicalRecord(medicalRecordId);
-  }
-
-  @override
-  Future<MedicalRecordOversea> postMedicalRecordOversea(
-    MedicalRecordOverseaRequest medicalRecordOversea,
-  ) {
-    return remote.postMedicalRecordOversea(medicalRecordOversea);
-  }
-
-  @override
-  Future<MedicalRecordOversea> putMedicalRecordOversea(
-    String id,
-    MedicalRecordOverseaRequest medicalRecordOversea,
-  ) {
-    return remote.putMedicalRecordOversea(id, medicalRecordOversea);
-  }
-
-  @override
-  Future<void> deleteMedicalRecordOversea(
-    String id,
-  ) {
-    return remote.deleteMedicalRecordOversea(id);
-  }
-
   //GET_MEDICAL_RECORDS_OVERSEAS_DATA
 
   @override
-  Future<List<MedicalRecordOverseaData>> medicalRecordsOverseasData(
-    String medicalRecordOverseaId,
+  Future<List<MedicalRecordOverseaData>> medicalRecordOverseaDataByMedicalRecord(
+    String medicalRecordId,
   ) {
-    return remote.medicalRecordsOverseaData(medicalRecordOverseaId);
-  }
-
-  @override
-  Future<List<MedicalRecordOverseaData>>
-      medicalRecordsOverseaDataByMedicalRecordOversea(
-    String medicalRecordOverseaId,
-  ) {
-    return remote.medicalRecordsOverseaDataByMedicalRecordOversea(
-        medicalRecordOverseaId);
+    return remote.medicalRecordOverseaDataByMedicalRecord(medicalRecordId);
   }
 
   @override

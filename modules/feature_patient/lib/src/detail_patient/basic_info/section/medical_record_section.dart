@@ -18,6 +18,8 @@ class MedicalRecordSection extends StatefulWidget {
 }
 
 class _MedicalRecordSectionState extends State<MedicalRecordSection> {
+  final formatter = InputFormatter();
+
   @override
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
@@ -58,211 +60,200 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     children: [
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'dateOfBirth',
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime.now(),
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'dateOfBirth',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              onChanged: (value) {
-                                logger.d(value);
-                                formGroup.control('age').value =
-                                    DateTime.now().year - value.value!.year;
-                                setState(() {});
-                              },
-                              onSubmitted: (value) {
-                                logger.d(value);
-                                formGroup.control('age').value =
-                                    DateTime.now().year - value.value!.year;
-                                setState(() {});
-                              },
-                              decoration: const InputDecoration(
-                                label: Text(
-                                  '生年月日', // TODO: l10n 対応 (生年月日) (dateOfBirth)
+                            formControlName: 'dateOfBirth',
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2100),
+                            builder: (context, picker, child) {
+                              return ReactiveTextField<DateTime>(
+                                formControlName: 'dateOfBirth',
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
-                                fillColor: Colors.white,
-                                filled: true,
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                onChanged: (value) {
+                                  formGroup.control('age').value =
+                                      DateTime.now().year - value.value!.year;
+                                  setState(() {});
+                                },
+                                onSubmitted: (value) {
+                                  formGroup.control('age').value =
+                                      DateTime.now().year - value.value!.year;
+                                  setState(() {});
+                                },
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    '生年月日',
+                                  ),
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
+                              );
+                            }),
                       ),
                       SizedBox(
                         width: context.appTheme.spacing.marginMedium,
                       ),
                       Expanded(
-                          flex: 2,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Row(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      const Text(
-                                        '年齢', // TODO: l10n 対応 (年齢) (age)
-                                      ),
-                                      SizedBox(
-                                        height: context
-                                            .appTheme.spacing.marginSmall,
-                                      ),
-                                      ReactiveValueListenableBuilder<DateTime>(
-                                          formControlName: 'dateOfBirth',
-                                          builder: (context, value, child) {
-                                            var age = 0;
-                                            if (value.value != null) {
-                                              age = DateTime.now().year -
-                                                  value.value!.year;
-                                              formGroup.control('age').value =
-                                                  DateTime.now().year -
-                                                      value.value!.year;
-                                            }
-                                            return Text(
-                                              '$age 歳', // TODO: l10n 対応 (歳) (age)
-                                            );
-                                          }),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  Column(
-                                    mainAxisSize: MainAxisSize.max,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      const Text(
-                                        '性別', //
-                                      ),
-                                      Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: <Widget>[
-                                          Container(
-                                            width: 100,
-                                            child: ReactiveCheckboxListTile(
-                                              contentPadding: EdgeInsets.zero,
-                                              formControlName: 'isMale',
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .leading,
-                                              onChanged: (value) {
-                                                formGroup
-                                                        .control('gender')
-                                                        .value =
-                                                    value.value == true;
-                                                formGroup
-                                                        .control('isFemale')
-                                                        .value =
-                                                    value.value == false;
-                                              },
-                                              title: Text('男性'),
-                                            ),
+                        flex: 2,
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      '年齢', // TODO: l10n 対応 (年齢) (age)
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          context.appTheme.spacing.marginSmall,
+                                    ),
+                                    ReactiveValueListenableBuilder<DateTime>(
+                                        formControlName: 'dateOfBirth',
+                                        builder: (context, value, child) {
+                                          var age = 0;
+                                          if (value.value != null) {
+                                            age = DateTime.now().year -
+                                                value.value!.year;
+                                            formGroup.control('age').value =
+                                                DateTime.now().year -
+                                                    value.value!.year;
+                                          }
+                                          return Text(
+                                            '$age 歳', // TODO: l10n 対応 (歳) (age)
+                                          );
+                                        }),
+                                  ],
+                                ),
+                                SizedBox(
+                                  width: context.appTheme.spacing.marginMedium,
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.max,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text(
+                                      '性別', //
+                                    ),
+                                    Row(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        IntrinsicWidth(
+                                          child: ReactiveCheckboxListTile(
+                                            contentPadding: EdgeInsets.zero,
+                                            formControlName: 'isMale',
+                                            controlAffinity:
+                                                ListTileControlAffinity.leading,
+                                            onChanged: (value) {
+                                              formGroup
+                                                  .control('gender')
+                                                  .value = value.value == true;
+                                              formGroup
+                                                  .control('isFemale')
+                                                  .value = value.value == false;
+                                            },
+                                            title: Text('男性'),
                                           ),
-                                          Container(
-                                            width: 100,
-                                            child: ReactiveCheckboxListTile(
-                                              contentPadding: EdgeInsets.zero,
-                                              formControlName: 'isFemale',
-                                              controlAffinity:
-                                                  ListTileControlAffinity
-                                                      .leading,
-                                              onChanged: (value) {
-                                                formGroup
-                                                        .control('gender')
-                                                        .value =
-                                                    value.value == false;
-                                                formGroup
-                                                        .control('isMale')
-                                                        .value =
-                                                    value.value == false;
-                                              },
-                                              title: Text('女性'),
-                                            ),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  )
+                                        ),
+                                        IntrinsicWidth(
+                                          child: ReactiveCheckboxListTile(
+                                            contentPadding: EdgeInsets.zero,
+                                            formControlName: 'isFemale',
+                                            controlAffinity:
+                                                ListTileControlAffinity.leading,
+                                            onChanged: (value) {
+                                              formGroup
+                                                  .control('gender')
+                                                  .value = value.value == false;
+                                              formGroup
+                                                  .control('isMale')
+                                                  .value = value.value == false;
+                                            },
+                                            title: Text('女性'),
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ],
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              width: context.appTheme.spacing.marginMedium,
+                            ),
+                            IntrinsicWidth(
+                              child: ReactiveTextField<int?>(
+                                formControlName: 'height',
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  label: Text(
+                                    '身長',
+                                  ),
+                                  suffixText: 'cm',
+                                ),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]')),
                                 ],
                               ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              Container(
-                                width: 100,
-                                child: ReactiveTextField<int?>(
-                                  formControlName: 'height',
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    label: Text(
-                                      '身長',
-                                    ),
-                                    suffixText: 'cm',
+                            ),
+                            SizedBox(
+                              width: context.appTheme.spacing.marginMedium,
+                            ),
+                            IntrinsicWidth(
+                              child: ReactiveTextField<int?>(
+                                formControlName: 'weight',
+                                keyboardType: TextInputType.number,
+                                decoration: InputDecoration(
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  label: Text(
+                                    '体重',
                                   ),
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
-                                  ],
+                                  suffixText: 'kg',
                                 ),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]')),
+                                ],
                               ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              Container(
-                                width: 100,
-                                child: ReactiveTextField<int?>(
-                                  formControlName: 'weight',
-                                  keyboardType: TextInputType.number,
-                                  decoration: InputDecoration(
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    label: Text(
-                                      '体重',
-                                    ),
-                                    suffixText: 'kg',
-                                  ),
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
-                                  ],
-                                ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              ElevatedButton(
+                            ),
+                            SizedBox(
+                              width: context.appTheme.spacing.marginMedium,
+                            ),
+                            IntrinsicWidth(
+                              child: ElevatedButton(
                                 onPressed: () {
                                   snackBarWidget(message: 'まだ開発中');
                                 },
                                 child: const Text(
                                   'パスポートを表示する',
                                 ),
-                              )
-                            ],
-                          ))
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
                     ],
                   ),
                   Row(
@@ -270,97 +261,100 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     children: [
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'arrivalDate',
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(3000),
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'arrivalDate',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              decoration: const InputDecoration(
-                                fillColor: Colors.white,
-                                filled: true,
-                                label: Text(
-                                  '来日日', // TODO: l10n 対応 (来日日) (arrivalDate)
+                            formControlName: 'arrivalDate',
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2100),
+                            builder: (context, picker, child) {
+                              return ReactiveTextField<DateTime>(
+                                formControlName: 'arrivalDate',
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                decoration: InputDecoration(
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  label: Text(
+                                    '来日日', // TODO: l10n 対応 (来日日) (arrivalDate)
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
+                              );
+                            }),
                       ),
                       SizedBox(
                         width: context.appTheme.spacing.marginMedium,
                       ),
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'consultationDate',
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(3000),
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'consultationDate',
-                              readOnly: true,
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              onTap: (value) => picker.showPicker(),
-                              decoration: const InputDecoration(
-                                fillColor: Colors.white,
-                                filled: true,
-                                label: Text('受診日'),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                            formControlName: 'consultationDate',
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2100),
+                            builder: (context, picker, child) {
+                              return ReactiveTextField<DateTime>(
+                                formControlName: 'consultationDate',
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
+                                decoration: InputDecoration(
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  label: Text('受診日'),
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
+                                  ),
+                                ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
+                              );
+                            }),
                       ),
                       SizedBox(
                         width: context.appTheme.spacing.marginMedium,
                       ),
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'returnDate',
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(2100),
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField(
-                              formControlName: 'returnDate',
-                              readOnly: true,
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              onTap: (value) => picker.showPicker(),
-                              decoration: const InputDecoration(
-                                fillColor: Colors.white,
-                                filled: true,
-                                label: Text(
-                                  '帰国日',
+                            formControlName: 'returnDate',
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2100),
+                            builder: (context, picker, child) {
+                              return ReactiveTextField(
+                                formControlName: 'returnDate',
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                decoration: InputDecoration(
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  label: Text(
+                                    '帰国日',
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
+                              );
+                            }),
                       ),
                     ],
                   ),
@@ -384,31 +378,32 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                       ),
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'receptionDate',
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(3000),
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'receptionDate',
-                              readOnly: true,
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              onTap: (value) => picker.showPicker(),
-                              decoration: const InputDecoration(
-                                label: Text(
-                                  '受付日', // TODO: l10n 対応 (受付日) (receptionDate)
+                            formControlName: 'receptionDate',
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2100),
+                            builder: (context, picker, child) {
+                              return ReactiveTextField<DateTime>(
+                                formControlName: 'receptionDate',
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    '受付日', // TODO: l10n 対応 (受付日) (receptionDate)
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
+                              );
+                            }),
                       ),
                       SizedBox(
                         width: context.appTheme.spacing.marginMedium,
@@ -572,31 +567,32 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     children: [
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'advancePaymentDate',
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(3000),
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'advancePaymentDate',
-                              readOnly: true,
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              onTap: (value) => picker.showPicker(),
-                              decoration: const InputDecoration(
-                                label: Text(
-                                  '前金受取日', //  TODO: l10n 対応 (前金受取日) (advancePaymentDate)
+                            formControlName: 'advancePaymentDate',
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2100),
+                            builder: (context, picker, child) {
+                              return ReactiveTextField<DateTime>(
+                                formControlName: 'advancePaymentDate',
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    '前金受取日', //  TODO: l10n 対応 (前金受取日) (advancePaymentDate)
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
+                              );
+                            }),
                       ),
                       SizedBox(
                         width: context.appTheme.spacing.marginMedium,

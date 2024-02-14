@@ -1,5 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -19,6 +20,7 @@ class MedicalRecordPassportSection extends StatefulWidget {
 
 class _MedicalRecordPassportSectionState
     extends State<MedicalRecordPassportSection> {
+  final formatter = InputFormatter();
   List visaType = ['medicalGuarantee', 'other'];
 
   String selectVisaType = 'medicalGuarantee';
@@ -117,31 +119,32 @@ class _MedicalRecordPassportSectionState
                       ),
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'issueDate',
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(3000),
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'issueDate',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              decoration: const InputDecoration(
-                                label: Text(
-                                  '発行日', //  TODO: l10n 対応 (発行日) (issueDate)
+                            formControlName: 'issueDate',
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2100),
+                            builder: (context, picker, child) {
+                              return ReactiveTextField<DateTime>(
+                                formControlName: 'issueDate',
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    '発行日', //  TODO: l10n 対応 (発行日) (issueDate)
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
+                              );
+                            }),
                       ),
                       Expanded(child: SizedBox()),
                     ],
@@ -156,31 +159,32 @@ class _MedicalRecordPassportSectionState
                     children: [
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'expirationDate',
-                          firstDate: DateTime(2000),
-                          lastDate: DateTime(3000),
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'expirationDate',
-                              readOnly: true,
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              onTap: (value) => picker.showPicker(),
-                              decoration: const InputDecoration(
-                                label: Text(
-                                  '有効期限', // TODO: l10n 対応 (有効期限) (expirationDate)
+                            formControlName: 'expirationDate',
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2100),
+                            builder: (context, picker, child) {
+                              return ReactiveTextField<DateTime>(
+                                formControlName: 'expirationDate',
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
-                                suffixIcon: Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
+                                decoration: InputDecoration(
+                                  label: Text(
+                                    '有効期限', // TODO: l10n 対応 (有効期限) (expirationDate)
+                                  ),
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
+                                    ),
+                                    onPressed: picker.showPicker,
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                        ),
+                                inputFormatters: [
+                                  formatter.dateFormatter,
+                                ],
+                              );
+                            }),
                       ),
                       Expanded(child: SizedBox()),
                       Expanded(child: SizedBox()),

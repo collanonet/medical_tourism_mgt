@@ -21,6 +21,8 @@ class ShortSummaryScreen extends StatefulWidget {
 }
 
 class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
+  final formatter = InputFormatter();
+
   @override
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
@@ -46,26 +48,29 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                             child: ReactiveDatePicker<DateTime>(
                               formControlName: 'entryDate',
                               firstDate: DateTime(1900),
-                              lastDate: DateTime.now(),
-                              builder: (BuildContext context,
-                                  ReactiveDatePickerDelegate<dynamic> picker,
+                              lastDate: DateTime(2100),
+                              builder: (BuildContext context, picker,
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
                                   formControlName: 'entryDate',
-                                  readOnly: true,
-                                  onTap: (value) => picker.showPicker(),
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '記載日',
                                     ),
-                                    suffixIcon: Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
+                                    suffixIcon: IconButton(
+                                      icon: const Icon(
+                                        CupertinoIcons.calendar,
+                                        color: Colors.grey,
+                                      ),
+                                      onPressed: picker.showPicker,
                                     ),
                                   ),
+                                  inputFormatters: [
+                                    formatter.dateFormatter,
+                                  ],
                                 );
                               },
                             ),
@@ -108,32 +113,33 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                                       child: ReactiveDatePicker<DateTime>(
                                         formControlName: 'dateOfBirth',
                                         firstDate: DateTime(1900),
-                                        lastDate: DateTime.now(),
-                                        builder: (BuildContext context,
-                                            ReactiveDatePickerDelegate<dynamic>
-                                                picker,
+                                        lastDate: DateTime(2100),
+                                        builder: (BuildContext context, picker,
                                             Widget? child) {
                                           return ReactiveTextField<DateTime>(
                                             formControlName: 'dateOfBirth',
-                                            readOnly: true,
-                                            onTap: (value) =>
-                                                picker.showPicker(),
                                             valueAccessor:
                                                 DateTimeValueAccessor(
                                               dateTimeFormat:
                                                   DateFormat('yyyy/MM/dd'),
                                             ),
-                                            decoration: const InputDecoration(
+                                            decoration: InputDecoration(
                                               filled: true,
                                               fillColor: Color(0xffF0F3F5),
                                               label: Text(
                                                 '生年月日', // TODO: l10n 対応 (生年月日) (dateOfBirth)
                                               ),
-                                              suffixIcon: Icon(
-                                                CupertinoIcons.calendar,
-                                                color: Colors.grey,
+                                              suffixIcon: IconButton(
+                                                icon: const Icon(
+                                                  CupertinoIcons.calendar,
+                                                  color: Colors.grey,
+                                                ),
+                                                onPressed: picker.showPicker,
                                               ),
                                             ),
+                                            inputFormatters: [
+                                              formatter.dateFormatter,
+                                            ],
                                           );
                                         },
                                       ),

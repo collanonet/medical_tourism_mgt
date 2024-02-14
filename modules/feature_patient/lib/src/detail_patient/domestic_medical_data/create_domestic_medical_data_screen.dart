@@ -1,5 +1,6 @@
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -10,6 +11,7 @@ class CreateDomesticMedicalDataScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formatter = InputFormatter();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisSize: MainAxisSize.min,
@@ -109,14 +111,12 @@ class CreateDomesticMedicalDataScreen extends StatelessWidget {
             Expanded(
               child: ReactiveDatePicker<DateTime>(
                 formControlName: 'entry_date_from',
-                firstDate: DateTime(2000),
-                lastDate: DateTime(3000),
+                firstDate: DateTime(1900),
+                lastDate: DateTime(2100),
                 builder: (BuildContext context,
                     ReactiveDatePickerDelegate<dynamic> picker, Widget? child) {
                   return ReactiveTextField<DateTime>(
                     formControlName: 'entry_date_from',
-                    readOnly: true,
-                    onTap: (value) => picker.showPicker(),
                     valueAccessor: DateTimeValueAccessor(
                       dateTimeFormat: DateFormat('yyyy/MM/dd'),
                     ),
@@ -124,11 +124,17 @@ class CreateDomesticMedicalDataScreen extends StatelessWidget {
                       label: Text(
                         context.l10n.labelEntryDateFrom,
                       ),
-                      suffixIcon: const Icon(
-                        CupertinoIcons.calendar,
-                        color: Colors.grey,
+                      suffixIcon: IconButton(
+                        icon: const Icon(
+                          CupertinoIcons.calendar,
+                          color: Colors.grey,
+                        ),
+                        onPressed: picker.showPicker,
                       ),
                     ),
+                    inputFormatters: [
+                      formatter.dateFormatter,
+                    ],
                   );
                 },
               ),

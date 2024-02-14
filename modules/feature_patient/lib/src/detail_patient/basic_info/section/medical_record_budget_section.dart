@@ -18,63 +18,65 @@ class MedicalRecordBudgetSection extends StatelessWidget {
     return ValueListenableBuilder(
         valueListenable: context.read<BasicInformationModel>().patientNames,
         builder: (context, value, _) => Skeletonizer(
-          enabled: value.loading,
-        child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                '予算',
-                style: TextStyle(
-              fontFamily: 'NotoSansJP',
-              package: 'core_ui',
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-              SizedBox(
-                height: context.appTheme.spacing.marginMedium,
-              ),
-              ReactiveForm(
-                formGroup: formGroup,
-                child: RowSeparated(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  separatorBuilder: (BuildContext context, int index) {
-                    return SizedBox(
-                      width: context.appTheme.spacing.marginMedium,
-                    );
-                  },
-                  children: [
-                     Expanded(
-                      child: ReactiveTextField(
-                        formControlName: 'budget',
-                        keyboardType: TextInputType.number,
-                        decoration: InputDecoration(
-                          prefixText: '¥',
-                          label: Text(
-                            '予算', // Todo: l10n (国籍)
+              enabled: value.loading,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    '予算',
+                    style: TextStyle(
+                      fontFamily: 'NotoSansJP',
+                      package: 'core_ui',
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  SizedBox(
+                    height: context.appTheme.spacing.marginMedium,
+                  ),
+                  ReactiveForm(
+                    formGroup: formGroup,
+                    child: RowSeparated(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      separatorBuilder: (BuildContext context, int index) {
+                        return SizedBox(
+                          width: context.appTheme.spacing.marginMedium,
+                        );
+                      },
+                      children: [
+                        Expanded(
+                          child: ReactiveTextField<int>(
+                            formControlName: 'budget',
+                            keyboardType: TextInputType.number,
+                            decoration: InputDecoration(
+                              fillColor: Colors.white,
+                              filled: true,
+                              label: Text(
+                                '身長',
+                              ),
+                            ),
+                            valueAccessor: IntValueAccessor(),
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9]')),
+                            ],
                           ),
                         ),
-                        inputFormatters: [
-                          FilteringTextInputFormatter.digitsOnly,
-                        ],
-                      ),
-                    ),
-                     Expanded(
-                      flex: 2,
-                      child: ReactiveTextField(
-                        formControlName: 'remarks',
-                        decoration: InputDecoration(
-                          label: Text(
-                            '備考', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
+                        Expanded(
+                          flex: 2,
+                          child: ReactiveTextField(
+                            formControlName: 'remarks',
+                            decoration: InputDecoration(
+                              label: Text(
+                                '備考',
+                              ),
+                            ),
                           ),
                         ),
-                      ),
+                      ],
                     ),
-                  ],
-                ),
-              )
-            ],
-          ),
-      )
-    );
+                  )
+                ],
+              ),
+            ));
   }
 }

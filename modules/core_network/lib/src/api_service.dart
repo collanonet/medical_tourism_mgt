@@ -1,8 +1,9 @@
+import 'dart:io';
+
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
-
 import '../core_network.dart';
 import 'apis.dart';
 import 'entities/medical_record_patient_response_treatment.dart';
@@ -36,6 +37,9 @@ abstract class ApiService {
   @POST(Apis.LOG_OUT)
   Future<AuthData> logOut();
 
+  @POST('/files/upload')
+  Future<String> uploadFile(@Part() File file);
+
   //GET_PRE_PATIENTS
 
   @GET(Apis.GET_PRE_PATIENTS)
@@ -68,10 +72,11 @@ abstract class ApiService {
   Future<Paginated<Patient>> patients({
     @Query('page') int? page,
     @Query('limit') int? limit,
-    @Query('patient_name') String? patientName,
+    @Query('progress') String? progress,
+    @Query('patientName') String? patientName,
     @Query('companyAGENTS') String? companyAgents,
     @Query('acceptingHospital') String? acceptingHospital,
-    @Query('type') List<String?>? type,
+    @Query('type') String? type,
     @Query('salesStaff') String? salesStaff,
     @Query('dateOfEntryfrom') String? dateOfEntryfrom,
     @Query('dateOfEntryto') String? dateOfEntryto,
@@ -423,64 +428,30 @@ abstract class ApiService {
     @Path('id') String id,
   );
 
-  //GET_MEDICAL_RECORDS_OVERSEAS
-
-  @GET('${Apis.GET_MEDICAL_RECORDS_OVERSEAS}/{medicalRecordId}')
-  Future<List<MedicalRecordOversea>> medicalRecordsOverseas(
-    @Path('medicalRecordId') String medicalRecordId,
-  );
-
-  @GET(
-      '${Apis.GET_MEDICAL_RECORDS_OVERSEAS_BY_MEDICAL_RECORD}/{medicalRecordId}')
-  Future<List<MedicalRecordOversea>> medicalRecordsOverseasByMedicalRecord(
-    @Path('medicalRecordId') String medicalRecordId,
-  );
-
-  @POST(Apis.POST_MEDICAL_RECORDS_OVERSEAS)
-  Future<MedicalRecordOversea> postMedicalRecordOversea(
-    @Body() MedicalRecordOverseaRequest medicalRecordOversea,
-  );
-
-  @PUT('${Apis.PUT_MEDICAL_RECORDS_OVERSEAS}/{id}')
-  Future<MedicalRecordOversea> putMedicalRecordOversea(
-    @Path('id') String id,
-    @Body() MedicalRecordOverseaRequest medicalRecordOversea,
-  );
-
-  @DELETE('${Apis.DELETE_MEDICAL_RECORDS_OVERSEAS}/{id}')
-  Future<void> deleteMedicalRecordOversea(
-    @Path('id') String id,
-  );
-
   //GET_MEDICAL_RECORDS_OVERSEAS_DATA
 
-  @GET('${Apis.GET_MEDICAL_RECORDS_OVERSEAS_DATAS}/{medicalRecordOverseaId}')
-  Future<List<MedicalRecordOverseaData>> medicalRecordsOverseaData(
-    @Path('medicalRecordOverseaId') String medicalRecordOverseaId,
+  @GET('${Apis.MEDICAL_RECORDS_OVERSEAS_DATA_MEDICAL_RECORD}/{medicalRecordId}')
+  Future<List<MedicalRecordOverseaData>> medicalRecordOverseaDataByMedicalRecord(
+    @Path('medicalRecordId') String medicalRecordId,
   );
 
-  @GET(
-      '${Apis.GET_MEDICAL_RECORDS_OVERSEAS_DATA_BY_RECORDS_OVERSEAS}/{medicalRecordOverseaId}')
-  Future<List<MedicalRecordOverseaData>>
-      medicalRecordsOverseaDataByRecordsOversea(
-    @Path('medicalRecordOverseaId') String medicalRecordOverseaId,
-  );
-
-  @POST(Apis.POST_MEDICAL_RECORDS_OVERSEAS_DATA)
+  @POST(Apis.MEDICAL_RECORDS_OVERSEAS_DATA)
   Future<MedicalRecordOverseaData> postMedicalRecordOverseaData(
     @Body() MedicalRecordOverseaDataRequest medicalRecordOverseaData,
   );
 
-  @PUT('${Apis.PUT_MEDICAL_RECORDS_OVERSEAS_DATA}/{id}')
+  @PUT('${Apis.MEDICAL_RECORDS_OVERSEAS_DATA}/{id}')
   Future<MedicalRecordOverseaData> putMedicalRecordOverseaData(
     @Path('id') String id,
     @Body() MedicalRecordOverseaDataRequest medicalRecordOverseaData,
   );
 
-  @DELETE('${Apis.DELETE_MEDICAL_RECORDS_OVERSEAS_DATA}/{id}')
+  @DELETE('${Apis.MEDICAL_RECORDS_OVERSEAS_DATA}/{id}')
   Future<void> deleteMedicalRecordOverseaData(
     @Path('id') String id,
   );
+
+  //
 
   @GET('${Apis.GET_MEDICAL_RECORD_TRAVEL_GROUP}/{medicalRecord}')
   Future<MedicalRecordTravelGroup> medicalRecordsTravelGroup({
@@ -573,11 +544,8 @@ abstract class ApiService {
 
   @POST(Apis.MEDICAL_RECORD_SUMMARY)
   Future<MedicalRecordSummary> postMedicalRecordSummary(
-    @Body()
-    MedicalRecordSummaryRequest
-        medicalRecordNormalSummaryRequest,
+    @Body() MedicalRecordSummaryRequest medicalRecordNormalSummaryRequest,
   );
-
 }
 
 extension ApiServiceExts on ApiService {

@@ -104,7 +104,7 @@ scripts:
       melos exec -c 6 --fail-fast -- fvm flutter pub run flutter_launcher_icons -f flutter_launcher_icons*
     packageFilters:
       scope: "medical_tourism_mgt"
-  hosting_web_dev:
+  web-dev:
     description: "hosting_web_dev"
     run: fvm flutter build web --release -t lib/main_dev.dart && firebase deploy --only hosting
 
