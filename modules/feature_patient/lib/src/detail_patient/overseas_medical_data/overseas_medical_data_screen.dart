@@ -4,7 +4,7 @@ import 'package:core_l10n/l10n.dart';
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:feature_patient/src/detail_patient/overseas_medical_data/popup/summary_medical_oversea_data_screen.dart';
+import 'popup/summary_medical_oversea_data_screen.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
@@ -132,7 +132,7 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                 .read<OverseasMedicalDataModel>()
                 .medicalRecordsOverseasData,
             builder: (context, value, _) {
-              return Expanded(
+              return value.loading ? const CircularProgressIndicator.adaptive() : Expanded(
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -397,26 +397,12 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                 context.l10n.mgsFieldRequired,
           },
           child: ReactiveFormBuilder(
-            form: () => createMedicalOverseaDataWithUrlForm(),
+            form: () => createMedicalOverseaDataWithUrlForm()..markAllAsTouched(),
             builder: (context, formGroup, child) {
               return const CreateMedicalOverseaDataWithUrlScreen();
             },
           ),
         ),
-        actions: [
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text('保存する'),
-          ),
-          OutlinedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text('キャンセル'),
-          ),
-        ],
       ),
     );
   }
