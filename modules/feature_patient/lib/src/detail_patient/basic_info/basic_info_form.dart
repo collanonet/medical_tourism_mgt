@@ -48,7 +48,7 @@ FormGroup basicInfoForm({
         'receivingMethod': FormControl<String>(),
         'memo': FormControl<String>(),
         'patient': FormControl<String>(value: patientId),
-
+        'deletedMedicalRecordHospitals': FormControl<List<String>>(value: []),
         'MEDICAL_RECORD_HOSPITALS': FormArray([
           FormGroup({
             'id': FormControl<String?>(),

@@ -88,7 +88,7 @@ class MedicalRecordTravelGroupSection extends StatelessWidget {
                           mainAxisSize: MainAxisSize.min,
                           children: [
                             Text(
-                              '病院名',
+                              '患者名',
                               style: context.textTheme.bodyMedium,
                             ),
                             Row(
