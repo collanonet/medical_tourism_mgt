@@ -28,7 +28,6 @@ class _LoginScreenState extends State<LoginScreen> {
         child: SingleChildScrollView(
           child: Consumer<AuthModel>(
             builder: (context, model, child) {
-
               return Center(
                 child: Container(
                   width: MediaQuery.of(context).size.width * 0.4,
@@ -71,47 +70,68 @@ class _LoginScreenState extends State<LoginScreen> {
                         style: context.textTheme.titleLarge
                             ?.copyWith(color: context.appTheme.primaryColor),
                       ),
-                      ReactiveTextField(
-                        formControlName: 'email',
-                        decoration: InputDecoration(
-                          label: Text(
-                            context.l10n.labelId,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'ID',
+                            style: context.textTheme.bodySmall,
                           ),
-                          hintText:
-                              context.l10n.labelPleaseEnterYourInformation,
-                        ),
-                        onSubmitted: (value) {
-                          setState(() {});
-                        },
-                      ),
-                      ReactiveFormConsumer(
-                        builder: (context, form, _) {
-                          return ReactiveTextField(
-                            formControlName: 'password',
-                            obscureText: obscureText,
-                            decoration: InputDecoration(
-                              label: Text(
-                                context.l10n.labelPassword,
-                              ),
-                              suffixIcon: IconButton(
-                                color: context.appTheme.primaryColor,
-                                icon: Icon(
-                                  obscureText
-                                      ? Icons.visibility
-                                      : Icons.visibility_off,
-                                ),
-                                onPressed: () {
-                                  setState(() {
-                                    obscureText = !obscureText;
-                                  });
-                                },
-                              ),
-                              hintText:
-                                  context.l10n.labelPleaseEnterYourInformation,
+                          SizedBox(
+                            height: context.appTheme.spacing.marginExtraSmall,
+                          ),
+                          ReactiveTextField(
+                            formControlName: 'email',
+                            decoration: const InputDecoration(
+                              hintText: '入力してください',
                             ),
-                            onSubmitted: (value) => onSubmit(formGroup, model),
-                          );
-                        },
+                            onSubmitted: (value) {
+                              setState(() {});
+                            },
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Text(
+                            'パスワード',
+                            style: context.textTheme.bodySmall,
+                          ),
+                          SizedBox(
+                            height: context.appTheme.spacing.marginExtraSmall,
+                          ),
+                          ReactiveFormConsumer(
+                            builder: (context, form, _) {
+                              return ReactiveTextField(
+                                formControlName: 'password',
+                                obscureText: obscureText,
+                                decoration: InputDecoration(
+                                  hintText: '入力してください',
+                                  suffixIcon: IconButton(
+                                    color: context.appTheme.primaryColor,
+                                    icon: Icon(
+                                      obscureText
+                                          ? Icons.visibility
+                                          : Icons.visibility_off,
+                                    ),
+                                    onPressed: () {
+                                      setState(() {
+                                        obscureText = !obscureText;
+                                      });
+                                    },
+                                  ),
+                                ),
+                                onSubmitted: (value) =>
+                                    onSubmit(formGroup, model),
+                              );
+                            },
+                          ),
+                        ],
                       ),
                       Align(
                         alignment: Alignment.centerRight,
@@ -148,10 +168,12 @@ class _LoginScreenState extends State<LoginScreen> {
 
   void onSubmit(FormGroup formGroup, AuthModel model) {
     if (formGroup.valid) {
-      model.logIn(
+      model
+          .logIn(
         formGroup.control('email').value,
         formGroup.control('password').value,
-      ).catchError((error) {
+      )
+          .catchError((error) {
         snackBarWidget(
           message: error.toString(),
         );
