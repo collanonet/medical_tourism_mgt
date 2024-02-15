@@ -14,7 +14,9 @@ import 'package:reactive_forms/reactive_forms.dart';
 import '../overseas_medical_data_model.dart';
 
 class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
-  const CreateMedicalOverseaDataWithFileScreen({super.key});
+  const CreateMedicalOverseaDataWithFileScreen({super.key, this.title});
+
+  final String? title;
   @override
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
@@ -24,8 +26,19 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.end,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
+            if (title != null) ...{
+              Flexible(
+                child: Text(
+                  title!,
+                  style: Theme.of(context).textTheme.titleLarge,
+                ),
+              ),
+              SizedBox(
+                width: context.appTheme.spacing.marginMedium,
+              ),
+            },
             IconButton(
                 onPressed: () {
                   Navigator.of(context).pop();

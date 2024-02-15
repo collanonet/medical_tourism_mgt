@@ -108,8 +108,12 @@ class OverseasMedicalDataModel {
       String? qrCode;
 
       if (formGroup.control('qrCode').value != null) {
-        qrCode = await patientRepository
-            .uploadFile(formGroup.control('qrCode').value);
+        try {
+          qrCode = await patientRepository
+              .uploadFile(formGroup.control('qrCode').value);
+        } catch (e) {
+          logger.e(e);
+        }
       }
 
       var medicalRecordOverseaDataRequest = MedicalRecordOverseaDataRequest(
