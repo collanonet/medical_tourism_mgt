@@ -1203,8 +1203,20 @@ class BasicInformationModel {
 
   Future<void> createUpdateMedicalRecordHospital(FormGroup formGroup) async {
     try {
+    logger.d('medical-record-hospitals 111');
       medicalRecordHospitals.value =
           medicalRecordHospitals.value.copyWith(loading: true);
+      logger.d(formGroup.control('deletedMedicalRecordHospitals').value);
+      await formGroup.control('deletedMedicalRecordHospitals').value.forEach(
+        (element) async {
+          if(element != null){
+            await deleteMedicalRecordHospitals(element);
+          }
+        },
+      );
+      logger.d('medical-record-hospitals 111');
+      logger.d(formGroup.control('MEDICAL_RECORD_HOSPITALS').value);
+
       await formGroup.control('MEDICAL_RECORD_HOSPITALS').value.forEach(
         (element) async {
           MedicalRecordHospitalRequest request = MedicalRecordHospitalRequest(
@@ -1228,7 +1240,11 @@ class BasicInformationModel {
           }
         },
       );
+      medicalRecordHospitals.value = medicalRecordHospitals.value.copyWith(
+        loading: false,
+      );
     } catch (error) {
+      logger.d('medical-record-hospitals 111');
       logger.d(error);
       medicalRecordHospitals.value = AsyncData(error: error);
     }

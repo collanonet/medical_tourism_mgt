@@ -427,7 +427,7 @@ class Spacing {
     this.marginLarge = 24.0,
     this.margin2ExtraLarge = 48.0,
     this.marginExtraLarge = 32.0,
-    this.borderRadiusMedium = 12.0,
+    this.borderRadiusMedium = 6.0,
     this.formSpacing = 24.0,
     this.buttonHorizontal = 24.0,
     this.buttonVertical = 16.0,

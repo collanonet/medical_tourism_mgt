@@ -13,11 +13,11 @@ FormGroup formFilterMedicalVisa() => FormGroup(
         'report': FormControl<String>(
           value: '',
         ),
-        'subjects_withdrawal': FormControl<String>(
-          value: '',
+        'subjects_withdrawal': FormControl<bool>(
+          value: false
         ),
         'refinement_date': FormControl<String>(
-          value: '',
+          value: '来日日',
         ),
         'period_from': FormControl<DateTime>(),
         'period_to': FormControl<DateTime>(),

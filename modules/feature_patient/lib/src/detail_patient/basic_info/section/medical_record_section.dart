@@ -517,7 +517,28 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                     width:
                                         context.appTheme.spacing.marginMedium,
                                   ),
-                                  const Expanded(flex: 2, child: SizedBox())
+                                  Expanded(
+                                      flex: 2,
+                                      child: Row(
+                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        children: [
+                                          if (formArray.controls
+                                                  .indexOf(currentForm) !=
+                                              0) ...{
+                                            IconButton(
+                                              icon: const Icon(
+                                                Icons.remove_circle,
+                                                color: Colors.red,
+                                              ),
+                                              onPressed: () {
+                                                formArray.removeAt(formArray
+                                                    .controls
+                                                    .indexOf(currentForm));
+                                              },
+                                            ),
+                                          },
+                                        ],
+                                      ))
                                 ],
                               ),
                             ),
@@ -553,7 +574,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                           width: context.appTheme.spacing.marginSmall,
                         ),
                         Text(
-                          '病院を追加',
+                          '種別を追加',
                           style: TextStyle(
                               fontFamily: 'NotoSansJP',
                               package: 'core_ui',

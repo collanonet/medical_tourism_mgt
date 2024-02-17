@@ -1,6 +1,5 @@
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
-import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -49,37 +48,66 @@ class _AgentFilterState extends State<AgentFilter> {
                       children: [
                         Expanded(
                           flex: 4,
-                          child: ReactiveTextField(
-                            formControlName: 'patientName',
-                            decoration: InputDecoration(
-                              label: Text(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
                                 context.l10n.labelPatientName,
                               ),
-                            ),
+                              SizedBox(
+                                height:
+                                    context.appTheme.spacing.marginExtraSmall,
+                              ),
+                              ReactiveTextField(
+                                formControlName: 'patientName',
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
                           flex: 4,
-                          child: ReactiveTextField(
-                            formControlName: 'agent_company_name',
-                            decoration: InputDecoration(
-                              label: Text(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
                                 '査証',
+                                style: context.textTheme.bodySmall,
                               ),
-                            ),
+                              SizedBox(
+                                height:
+                                    context.appTheme.spacing.marginExtraSmall,
+                              ),
+                              ReactiveTextField(
+                                formControlName: 'agent_company_name',
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
                           flex: 4,
-                          child: ReactiveTextField(
-                            formControlName: 'hospitalName',
-                            decoration: InputDecoration(
-                              label: Text(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
                                 '報告書',
+                                style: context.textTheme.bodySmall,
                               ),
-                            ),
+                              SizedBox(
+                                height:
+                                    context.appTheme.spacing.marginExtraSmall,
+                              ),
+                              ReactiveTextField(
+                                formControlName: 'hospitalName',
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(width: 16),
@@ -107,25 +135,45 @@ class _AgentFilterState extends State<AgentFilter> {
                       children: [
                         Expanded(
                           flex: 4,
-                          child: ReactiveTextField(
-                            formControlName: 'classification',
-                            decoration: InputDecoration(
-                              label: Text(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
                                 context.l10n.labelClassification,
+                                style: context.textTheme.bodySmall,
                               ),
-                            ),
+                              SizedBox(
+                                height:
+                                    context.appTheme.spacing.marginExtraSmall,
+                              ),
+                              ReactiveTextField(
+                                formControlName: 'classification',
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
                           flex: 4,
-                          child: ReactiveTextField(
-                            formControlName: 'sales_representative',
-                            decoration: InputDecoration(
-                              label: Text(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
                                 context.l10n.labelSalesRepresentative,
+                                style: context.textTheme.bodySmall,
                               ),
-                            ),
+                              SizedBox(
+                                height:
+                                    context.appTheme.spacing.marginExtraSmall,
+                              ),
+                              ReactiveTextField(
+                                formControlName: 'sales_representative',
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(width: 16),
@@ -137,35 +185,47 @@ class _AgentFilterState extends State<AgentFilter> {
                       children: [
                         Expanded(
                           flex: 4,
-                          child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'entry_date_from',
-                            firstDate: DateTime(1900),
-                            lastDate: DateTime(2100),
-                            builder: (BuildContext context,
-                                ReactiveDatePickerDelegate<dynamic> picker,
-                                Widget? child) {
-                              return ReactiveTextField<DateTime>(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                context.l10n.labelEntryDateFrom,
+                                style: context.textTheme.bodySmall,
+                              ),
+                              SizedBox(
+                                height:
+                                    context.appTheme.spacing.marginExtraSmall,
+                              ),
+                              ReactiveDatePicker<DateTime>(
                                 formControlName: 'entry_date_from',
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    context.l10n.labelEntryDateFrom,
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: const Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime(2100),
+                                builder: (BuildContext context,
+                                    ReactiveDatePickerDelegate<dynamic> picker,
+                                    Widget? child) {
+                                  return ReactiveTextField<DateTime>(
+                                    formControlName: 'entry_date_from',
+                                    valueAccessor: DateTimeValueAccessor(
+                                      dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                     ),
-                                    onPressed: picker.showPicker,
-                                  ),
-                                ),
-                                inputFormatters: [
-                                  formatter.dateFormatter,
-                                ],
-                              );
-                            },
+                                    decoration: InputDecoration(
+                                      suffixIcon: IconButton(
+                                        icon: const Icon(
+                                          CupertinoIcons.calendar,
+                                          color: Colors.grey,
+                                        ),
+                                        onPressed: picker.showPicker,
+                                      ),
+                                    ),
+                                    inputFormatters: [
+                                      formatter.dateFormatter,
+                                    ],
+                                  );
+                                },
+                              ),
+                            ],
                           ),
                         ),
                         const Padding(
@@ -174,69 +234,91 @@ class _AgentFilterState extends State<AgentFilter> {
                         ),
                         Expanded(
                           flex: 4,
-                          child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'entry_date_to',
-                            firstDate: DateTime(1900),
-                            lastDate: DateTime(2100),
-                            builder: (BuildContext context,
-                                ReactiveDatePickerDelegate<dynamic> picker,
-                                Widget? child) {
-                              return ReactiveTextField<DateTime>(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text(
+                                context.l10n.labelEntryDateTo,
+                                style: context.textTheme.bodySmall,
+                              ),
+                              SizedBox(
+                                height:
+                                    context.appTheme.spacing.marginExtraSmall,
+                              ),
+                              ReactiveDatePicker<DateTime>(
                                 formControlName: 'entry_date_to',
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    context.l10n.labelEntryDateTo,
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: const Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime(2100),
+                                builder: (BuildContext context,
+                                    ReactiveDatePickerDelegate<dynamic> picker,
+                                    Widget? child) {
+                                  return ReactiveTextField<DateTime>(
+                                    formControlName: 'entry_date_to',
+                                    valueAccessor: DateTimeValueAccessor(
+                                      dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                     ),
-                                    onPressed: picker.showPicker,
-                                  ),
-                                ),
-                                inputFormatters: [
-                                  formatter.dateFormatter,
-                                ],
-                              );
-                            },
+                                    decoration: InputDecoration(
+                                      suffixIcon: IconButton(
+                                        icon: const Icon(
+                                          CupertinoIcons.calendar,
+                                          color: Colors.grey,
+                                        ),
+                                        onPressed: picker.showPicker,
+                                      ),
+                                    ),
+                                    inputFormatters: [
+                                      formatter.dateFormatter,
+                                    ],
+                                  );
+                                },
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
                           flex: 4,
-                          child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'examination_date_from',
-                            firstDate: DateTime(1900),
-                            lastDate: DateTime(2100),
-                            builder: (BuildContext context,
-                                ReactiveDatePickerDelegate<dynamic> picker,
-                                Widget? child) {
-                              return ReactiveTextField<DateTime>(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                context.l10n.labelExaminationDateFrom,
+                                style: context.textTheme.bodySmall,
+                              ),
+                              SizedBox(
+                                height:
+                                    context.appTheme.spacing.marginExtraSmall,
+                              ),
+                              ReactiveDatePicker<DateTime>(
                                 formControlName: 'examination_date_from',
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    context.l10n.labelExaminationDateFrom,
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: const Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime(2100),
+                                builder: (BuildContext context,
+                                    ReactiveDatePickerDelegate<dynamic> picker,
+                                    Widget? child) {
+                                  return ReactiveTextField<DateTime>(
+                                    formControlName: 'examination_date_from',
+                                    valueAccessor: DateTimeValueAccessor(
+                                      dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                     ),
-                                    onPressed: picker.showPicker,
-                                  ),
-                                ),
-                                inputFormatters: [
-                                  formatter.dateFormatter,
-                                ],
-                              );
-                            },
+                                    decoration: InputDecoration(
+                                      suffixIcon: IconButton(
+                                        icon: const Icon(
+                                          CupertinoIcons.calendar,
+                                          color: Colors.grey,
+                                        ),
+                                        onPressed: picker.showPicker,
+                                      ),
+                                    ),
+                                    inputFormatters: [
+                                      formatter.dateFormatter,
+                                    ],
+                                  );
+                                },
+                              ),
+                            ],
                           ),
                         ),
                         const Padding(
@@ -245,35 +327,48 @@ class _AgentFilterState extends State<AgentFilter> {
                         ),
                         Expanded(
                           flex: 4,
-                          child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'examination_date_to',
-                            firstDate: DateTime(1900),
-                            lastDate: DateTime(2100),
-                            builder: (BuildContext context,
-                                ReactiveDatePickerDelegate<dynamic> picker,
-                                Widget? child) {
-                              return ReactiveTextField<DateTime>(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                '予算',
+                                style: context.textTheme.bodySmall,
+                              ),
+                              SizedBox(
+                                height:
+                                    context.appTheme.spacing.marginExtraSmall,
+                              ),
+                              ReactiveDatePicker<DateTime>(
                                 formControlName: 'examination_date_to',
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    context.l10n.labelExaminationDateTo,
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: const Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime(2100),
+                                builder: (BuildContext context,
+                                    ReactiveDatePickerDelegate<dynamic> picker,
+                                    Widget? child) {
+                                  return ReactiveTextField<DateTime>(
+                                    formControlName: 'examination_date_to',
+                                    valueAccessor: DateTimeValueAccessor(
+                                      dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                     ),
-                                    onPressed: picker.showPicker,
-                                  ),
-                                ),
-                                inputFormatters: [
-                                  formatter.dateFormatter,
-                                ],
-                              );
-                            },
+                                    decoration: InputDecoration(
+                                      label: Text(
+                                        context.l10n.labelExaminationDateTo,
+                                      ),
+                                      suffixIcon: IconButton(
+                                        icon: const Icon(
+                                          CupertinoIcons.calendar,
+                                          color: Colors.grey,
+                                        ),
+                                        onPressed: picker.showPicker,
+                                      ),
+                                    ),
+                                    inputFormatters: [
+                                      formatter.dateFormatter,
+                                    ],
+                                  );
+                                },
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(width: 16),

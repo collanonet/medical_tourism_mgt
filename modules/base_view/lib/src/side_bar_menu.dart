@@ -95,7 +95,7 @@ class SideBarMenu extends StatelessWidget {
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
                             horizontal: 16,
-                            vertical: 32,
+                            vertical: 16,
                           ),
                           child: Image.asset(
                             Images.logoMadical,

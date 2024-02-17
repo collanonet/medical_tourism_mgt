@@ -15,6 +15,7 @@ class MedicalRecordHospitalSection extends StatelessWidget {
     final formArray = (ReactiveForm.of(context) as FormGroup)
         .control('MEDICAL_RECORD_HOSPITALS') as FormArray;
 
+    final formGroup = (ReactiveForm.of(context) as FormGroup);
     return ValueListenableBuilder(
         valueListenable:
             context.read<BasicInformationModel>().medicalRecordHospitals,
@@ -90,7 +91,38 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                                     width:
                                         context.appTheme.spacing.marginMedium,
                                   ),
-                                  const Expanded(child: SizedBox())
+                                  Expanded(
+                                      child: Row(
+                                    children: [
+                                      if (formArray.controls
+                                              .indexOf(currentForm) !=
+                                          0)
+                                        IconButton(
+                                          onPressed: () {
+                                            if (currentForm
+                                                    .control('id')
+                                                    .value !=
+                                                null) {
+                                              // deletedMedicalRecordHospitals
+                                              formGroup
+                                                  .control(
+                                                      'deletedMedicalRecordHospitals')
+                                                  .value
+                                                  .add(currentForm
+                                                      .control('id')
+                                                      .value);
+                                            }
+                                            formArray.removeAt(formArray
+                                                .controls
+                                                .indexOf(currentForm));
+                                          },
+                                          icon: const Icon(
+                                            Icons.delete_forever,
+                                            color: Colors.red,
+                                          ),
+                                        ),
+                                    ],
+                                  ))
                                 ],
                               ),
                             ),

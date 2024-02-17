@@ -46,28 +46,45 @@ class PrePatientFilter extends StatelessWidget {
                     ),
                     const SizedBox(height: 16),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
                           flex: 4,
-                          child: ReactiveTextField(
-                            formControlName: 'agents',
-                            decoration: InputDecoration(
-                              label: Text(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
                                 context.l10n.labelAgentName,
+                                style: context.textTheme.bodySmall,
                               ),
-                            ),
+                              SizedBox(
+                                height:
+                                    context.appTheme.spacing.marginExtraSmall,
+                              ),
+                              ReactiveTextField(
+                                formControlName: 'agents',
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
                           flex: 4,
-                          child: ReactiveTextField(
-                            formControlName: 'patient',
-                            decoration: InputDecoration(
-                              label: Text(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
                                 context.l10n.labelPatientName,
+                                style: context.textTheme.bodySmall,
                               ),
-                            ),
+                              SizedBox(
+                                height:
+                                    context.appTheme.spacing.marginExtraSmall,
+                              ),
+                              ReactiveTextField(
+                                formControlName: 'patient',
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(width: 16),

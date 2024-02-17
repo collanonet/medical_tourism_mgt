@@ -44,32 +44,47 @@ class MedicalRecordBudgetSection extends StatelessWidget {
                       },
                       children: [
                         Expanded(
-                          child: ReactiveTextField<int>(
-                            formControlName: 'budget',
-                            keyboardType: TextInputType.number,
-                            decoration: InputDecoration(
-                              fillColor: Colors.white,
-                              filled: true,
-                              label: Text(
-                                '身長',
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text('予算',style: context.textTheme.bodySmall,),
+                              SizedBox(
+                                height: context.appTheme.spacing.marginExtraSmall,
                               ),
-                            ),
-                            valueAccessor: IntValueAccessor(),
-                            inputFormatters: [
-                              FilteringTextInputFormatter.allow(
-                                  RegExp(r'[0-9]')),
+                              ReactiveTextField<int>(
+                                formControlName: 'budget',
+                                keyboardType: TextInputType.number,
+                                decoration: const InputDecoration(
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  prefixText: '¥ ',
+                                ),
+                                valueAccessor: IntValueAccessor(),
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]')),
+                                ],
+                              ),
                             ],
                           ),
                         ),
                         Expanded(
                           flex: 2,
-                          child: ReactiveTextField(
-                            formControlName: 'remarks',
-                            decoration: InputDecoration(
-                              label: Text(
-                                '備考',
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Text('備考',style: context.textTheme.bodySmall,),
+                              SizedBox(
+                                height: context.appTheme.spacing.marginExtraSmall,
                               ),
-                            ),
+                              ReactiveTextField(
+                                formControlName: 'remarks',
+                              ),
+                            ],
                           ),
                         ),
                       ],

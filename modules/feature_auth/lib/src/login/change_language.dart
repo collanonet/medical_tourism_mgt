@@ -14,37 +14,36 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
   @override
   Widget build(BuildContext context) {
     return Consumer<L10nModel>(builder: (context, model, _) {
-      return Container(
-        decoration: BoxDecoration(
-          border: Border.all(color: context.appTheme.primaryColor),
-          borderRadius: BorderRadius.circular(
-              context.appTheme.spacing.borderRadiusMedium),
-        ),
-        padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Center(
-              child: Text(
-                context.l10n.changeLanguage,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontFamily: 'NotoSansJP',
-                  package: 'core_ui',
+      return IntrinsicWidth(
+        child: Container(
+          decoration: BoxDecoration(
+            border: Border.all(color: context.appTheme.primaryColor),
+            borderRadius: BorderRadius.circular(
+                context.appTheme.spacing.borderRadiusMedium),
+          ),
+          padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(
+                child: Text(
+                  context.l10n.changeLanguage,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'NotoSansJP',
+                    package: 'core_ui',
+                  ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: context.appTheme.spacing.marginMedium,
-            ),
-            Wrap(
-              crossAxisAlignment: WrapCrossAlignment.center,
-              runAlignment: WrapAlignment.center,
-              alignment: WrapAlignment.center,
-              children: [
-                IntrinsicWidth(
-                  child: TextButton(
+              SizedBox(
+                height: context.appTheme.spacing.marginMedium,
+              ),
+              Wrap(
+                crossAxisAlignment: WrapCrossAlignment.center,
+                runAlignment: WrapAlignment.center,
+                alignment: WrapAlignment.center,
+                children: [
+                  TextButton(
                     onPressed: () {
                       model.setLocale(const Locale('ja', 'JP'));
                     },
@@ -58,9 +57,7 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
                       ],
                     ),
                   ),
-                ),
-                IntrinsicWidth(
-                  child: TextButton(
+                  TextButton(
                     onPressed: () {
                       model.setLocale(const Locale('zh', 'CN'));
                     },
@@ -74,9 +71,7 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
                       ],
                     ),
                   ),
-                ),
-                IntrinsicWidth(
-                  child: TextButton(
+                  TextButton(
                     onPressed: () {
                       model.setLocale(const Locale('zh', 'TW'));
                     },
@@ -90,9 +85,7 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
                       ],
                     ),
                   ),
-                ),
-                IntrinsicWidth(
-                  child: TextButton(
+                  TextButton(
                     onPressed: () {
                       model.setLocale(const Locale('vi', 'VN'));
                     },
@@ -106,9 +99,7 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
                       ],
                     ),
                   ),
-                ),
-                IntrinsicWidth(
-                  child: TextButton(
+                  TextButton(
                     onPressed: () {
                       model.setLocale(const Locale('en', 'US'));
                     },
@@ -122,10 +113,10 @@ class _ChangeLanguageWidgetState extends State<ChangeLanguageWidget> {
                       ],
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       );
     });

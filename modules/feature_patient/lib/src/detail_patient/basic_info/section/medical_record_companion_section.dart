@@ -337,7 +337,7 @@ class _MedicalRecordCompanionSectionState
                                           formControlName: 'relationship',
                                           decoration: InputDecoration(
                                             label: Text(
-                                              '続柄', //
+                                              '本人との関係', //
                                             ),
                                           ),
                                           items: [

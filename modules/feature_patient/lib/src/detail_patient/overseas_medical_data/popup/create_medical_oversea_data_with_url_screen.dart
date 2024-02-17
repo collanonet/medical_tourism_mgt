@@ -40,7 +40,8 @@ class _CreateMedicalOverseaDataWithUrlScreenState
     final formGroup = ReactiveForm.of(context) as FormGroup;
 
     return isSaveurl
-        ? const CreateMedicalOverseaDataWithFileScreen()
+        ? const CreateMedicalOverseaDataWithFileScreen(
+            title: '先ほど保存したURLの詳細を入力してください。')
         : Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
@@ -67,6 +68,7 @@ class _CreateMedicalOverseaDataWithUrlScreenState
               ),
               ReactiveTextField(
                 formControlName: 'sharedUrl',
+                keyboardType: TextInputType.url,
               ),
               Text(
                 'パスワード',
@@ -96,9 +98,6 @@ class _CreateMedicalOverseaDataWithUrlScreenState
                             dateTimeFormat: DateFormat('yyyy/MM/dd'),
                           ),
                           decoration: InputDecoration(
-                            label: Text(
-                              context.l10n.labelEntryDateFrom,
-                            ),
                             suffixIcon: IconButton(
                               icon: const Icon(
                                 CupertinoIcons.calendar,
@@ -132,6 +131,7 @@ class _CreateMedicalOverseaDataWithUrlScreenState
                               });
                             },
                             child: Container(
+                              height: 250,
                               padding: EdgeInsets.all(
                                 context.appTheme.spacing.marginExtraLarge,
                               ),
@@ -139,49 +139,69 @@ class _CreateMedicalOverseaDataWithUrlScreenState
                                 borderRadius: BorderRadius.all(Radius.circular(
                                   context.appTheme.spacing.borderRadiusMedium,
                                 )),
+                                image: control.value != null
+                                    ? DecorationImage(
+                                        image: FileImage(control.value!),
+                                        fit: BoxFit.cover,
+                                      )
+                                    : null,
                                 border: Border.all(
                                   color: control.valid
                                       ? context.appTheme.primaryColor
                                       : Colors.red,
                                 ),
                               ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    'QRコード画像を\nドラッグ&ドロップ',
-                                    style:
-                                        context.textTheme.titleLarge?.copyWith(
-                                      color: context.appTheme.primaryColor,
+                              child: control.value != null
+                                  ? const SizedBox()
+                                  : Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          'QRコード画像を\nドラッグ&ドロップ',
+                                          style: context.textTheme.titleLarge
+                                              ?.copyWith(
+                                            color:
+                                                context.appTheme.primaryColor,
+                                          ),
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        SizedBox(
+                                          height: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        Icon(
+                                          Icons.copy_all_rounded,
+                                          size: 50,
+                                          color: context.appTheme.primaryColor,
+                                        ),
+                                        SizedBox(
+                                          height: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            pickFile().then((value) {
+                                              if (value != null) {
+                                                formGroup
+                                                    .control('qrCode')
+                                                    .value = value;
+                                                setState(() {});
+                                              }
+                                            });
+                                          },
+                                          child: const Text(
+                                            'ファイルを選択',
+                                            style: TextStyle(
+                                              fontFamily: 'NotoSansJP',
+                                              package: 'core_ui',
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        )
+                                      ],
                                     ),
-                                  ),
-                                  Icon(
-                                    Icons.copy_all_rounded,
-                                    size: 50,
-                                    color: context.appTheme.primaryColor,
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      pickFile().then((value) {
-                                        if (value != null) {
-                                          formGroup.control('qrCode').value =
-                                              value;
-                                          setState(() {});
-                                        }
-                                      });
-                                    },
-                                    child: const Text(
-                                      'ファイルを選択',
-                                      style: TextStyle(
-                                        fontFamily: 'NotoSansJP',
-                                        package: 'core_ui',
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  )
-                                ],
-                              ),
                             ),
                           );
                         }),
@@ -212,14 +232,17 @@ class _CreateMedicalOverseaDataWithUrlScreenState
                                 isSaveurl = true;
                               });
                             },
-                      child: Text('保存する'),
+                      child: const Text('保存する'),
                     );
                   }),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginMedium,
+                  ),
                   OutlinedButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: Text('キャンセル'),
+                    child: const Text('キャンセル'),
                   ),
                 ],
               )

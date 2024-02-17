@@ -28,19 +28,15 @@ class ChatFilter extends StatelessWidget {
                     style: context.textTheme.titleMedium,
                   ),
                   const SizedBox(height: 16),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'patientNameMessage',
-                          decoration: InputDecoration(
-                            label: Text(
-                              '患者名/メッセージ',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                  Text(
+                    '患者名/メッセージ',
+                    style: context.textTheme.bodySmall,
+                  ),
+                  SizedBox(
+                    height: context.appTheme.spacing.marginExtraSmall,
+                  ),
+                  ReactiveTextField(
+                    formControlName: 'patientNameMessage',
                   ),
                 ],
               );
