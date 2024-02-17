@@ -1,6 +1,5 @@
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
-import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -283,8 +282,6 @@ class _AgentFilterState extends State<AgentFilter> {
                           flex: 4,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Text(
                                 context.l10n.labelExaminationDateFrom,
@@ -332,12 +329,14 @@ class _AgentFilterState extends State<AgentFilter> {
                           flex: 4,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisSize: MainAxisSize.min,
-                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text('予算',style: context.textTheme.bodySmall,),
+                              Text(
+                                '予算',
+                                style: context.textTheme.bodySmall,
+                              ),
                               SizedBox(
-                                height: context.appTheme.spacing.marginExtraSmall,
+                                height:
+                                    context.appTheme.spacing.marginExtraSmall,
                               ),
                               ReactiveDatePicker<DateTime>(
                                 formControlName: 'examination_date_to',

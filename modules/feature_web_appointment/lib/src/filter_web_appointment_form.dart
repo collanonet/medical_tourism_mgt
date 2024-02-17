@@ -12,7 +12,8 @@ FormGroup formFilterWebAppointment() => FormGroup(
         ),
         'reservation_date_from': FormControl<DateTime>(),
         'reservation_date_to': FormControl<DateTime>(),
-        'reservations_status': FormControl<String>(),
+        'inquiryInProgress': FormControl<bool>(),
+        'reservationConfirmed': FormControl<bool>(),
       },
     );
 

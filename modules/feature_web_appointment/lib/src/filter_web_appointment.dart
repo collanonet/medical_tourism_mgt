@@ -1,6 +1,4 @@
-import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
-import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -47,147 +45,205 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                     Row(
                       children: [
                         Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'hospitalName',
-                            decoration: InputDecoration(
-                              label: Text(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
                                 '病院名',
-                                style: TextStyle(
-                                  fontFamily: 'NotoSansJP',
-                                  package: 'core_ui',
-                                ),
+                                style: context.textTheme.bodySmall,
                               ),
-                            ),
+                              SizedBox(
+                                height:
+                                    context.appTheme.spacing.marginExtraSmall,
+                              ),
+                              ReactiveTextField(
+                                formControlName: 'hospitalName',
+                              ),
+                            ],
                           ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'doctor_name',
-                            decoration: InputDecoration(
-                              label: Text(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
                                 '医師名',
-                                style: TextStyle(
-                                  fontFamily: 'NotoSansJP',
-                                  package: 'core_ui',
-                                ),
+                                style: context.textTheme.bodySmall,
                               ),
-                            ),
+                              SizedBox(
+                                height:
+                                    context.appTheme.spacing.marginExtraSmall,
+                              ),
+                              ReactiveTextField(
+                                formControlName: 'doctor_name',
+                              ),
+                            ],
                           ),
                         ),
                       ],
                     ),
                     const SizedBox(height: 16),
                     Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       children: [
-                        Container(
-                          padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginSmall),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                  context.appTheme.spacing.borderRadiusMedium),
-                              border: Border.all(color: Colors.grey)),
-                          child: Icon(
-                            Icons.arrow_back_ios_new_rounded,
-                            color: context.appTheme.primaryColor,
-                          ),
-                        ),
-                        SizedBox(width: context.appTheme.spacing.marginSmall),
-                        Expanded(
-                          flex: 4,
-                          child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'reservation_date_from',
-                            firstDate: DateTime(1900),
-                            lastDate: DateTime(2100),
-                            builder: (BuildContext context,
-                                ReactiveDatePickerDelegate<dynamic> picker,
-                                Widget? child) {
-                              return ReactiveTextField<DateTime>(
-                                formControlName: 'reservation_date_from',
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    '予約日（自）',
-                                    style: TextStyle(
-                                      fontFamily: 'NotoSansJP',
-                                      package: 'core_ui',
-                                    ),
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: const Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
-                                    ),
-                                    onPressed: picker.showPicker,
-                                  ),
-                                ),
-                                inputFormatters: [
-                                  formatter.dateFormatter,
-                                ],
-                              );
-                            },
-                          ),
-                        ),
-                        const Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 4),
-                          child: Text(
-                            '〜',
-                            style: TextStyle(
-                              fontFamily: 'NotoSansJP',
-                              package: 'core_ui',
+                        InkWell(
+                          onTap: () {
+                            final periodFrom =
+                                formGroup.control('reservation_date_from');
+                            final periodTo =
+                                formGroup.control('reservation_date_to');
+                            final valueDate =
+                                periodFrom.value ?? DateTime.now();
+                            periodFrom.value = DateTime(
+                                valueDate.year, valueDate.month - 1, 1);
+                            periodTo.value =
+                                DateTime(valueDate.year, valueDate.month, 0);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(
+                                context.appTheme.spacing.marginSmall),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(context
+                                    .appTheme.spacing.borderRadiusMedium),
+                                border: Border.all(color: Colors.grey)),
+                            child: Icon(
+                              Icons.arrow_back_ios_new_rounded,
+                              color: context.appTheme.primaryColor,
                             ),
                           ),
                         ),
-                        Expanded(
-                          flex: 4,
-                          child: ReactiveDatePicker<DateTime>(
-                            formControlName: 'reservation_date_to',
-                            firstDate: DateTime(1900),
-                            lastDate: DateTime(2100),
-                            builder: (BuildContext context,
-                                ReactiveDatePickerDelegate<dynamic> picker,
-                                Widget? child) {
-                              return ReactiveTextField<DateTime>(
-                                formControlName: 'reservation_date_to',
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                                decoration: InputDecoration(
-                                  label: Text(
-                                    '予約日（至）',
-                                    style: TextStyle(
-                                      fontFamily: 'NotoSansJP',
-                                      package: 'core_ui',
-                                    ),
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: const Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
-                                    ),
-                                    onPressed: picker.showPicker,
-                                  ),
-                                ),
-                                inputFormatters: [
-                                  formatter.dateFormatter,
-                                ],
-                              );
-                            },
-                          ),
-                        ),
                         SizedBox(width: context.appTheme.spacing.marginSmall),
-                        Container(
-                          padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginSmall),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(
-                                  context.appTheme.spacing.borderRadiusMedium),
-                              border: Border.all(color: Colors.grey)),
-                          child: Icon(
-                            Icons.arrow_forward_ios,
-                            color: context.appTheme.primaryColor,
+                        Expanded(
+                            child: Row(
+                          children: [
+                            Expanded(
+                              flex: 4,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '予約日（自）',
+                                    style: context.textTheme.bodySmall,
+                                  ),
+                                  SizedBox(
+                                    height: context
+                                        .appTheme.spacing.marginExtraSmall,
+                                  ),
+                                  ReactiveDatePicker<DateTime>(
+                                    formControlName: 'reservation_date_from',
+                                    firstDate: DateTime(1900),
+                                    lastDate: DateTime(2100),
+                                    builder: (BuildContext context,
+                                        ReactiveDatePickerDelegate<dynamic>
+                                            picker,
+                                        Widget? child) {
+                                      return ReactiveTextField<DateTime>(
+                                        formControlName:
+                                            'reservation_date_from',
+                                        valueAccessor: DateTimeValueAccessor(
+                                          dateTimeFormat:
+                                              DateFormat('yyyy/MM/dd'),
+                                        ),
+                                        decoration: InputDecoration(
+                                          suffixIcon: IconButton(
+                                            icon: const Icon(
+                                              CupertinoIcons.calendar,
+                                              color: Colors.grey,
+                                            ),
+                                            onPressed: picker.showPicker,
+                                          ),
+                                        ),
+                                        inputFormatters: [
+                                          formatter.dateFormatter,
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Padding(
+                              padding: EdgeInsets.symmetric(horizontal: 4),
+                              child: Text(
+                                '〜',
+                                style: TextStyle(
+                                  fontFamily: 'NotoSansJP',
+                                  package: 'core_ui',
+                                ),
+                              ),
+                            ),
+                            Expanded(
+                              flex: 4,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '予約日（至）',
+                                    style: context.textTheme.bodySmall,
+                                  ),
+                                  SizedBox(
+                                    height: context
+                                        .appTheme.spacing.marginExtraSmall,
+                                  ),
+                                  ReactiveDatePicker<DateTime>(
+                                    formControlName: 'reservation_date_to',
+                                    firstDate: DateTime(1900),
+                                    lastDate: DateTime(2100),
+                                    builder: (BuildContext context,
+                                        ReactiveDatePickerDelegate<dynamic>
+                                            picker,
+                                        Widget? child) {
+                                      return ReactiveTextField<DateTime>(
+                                        formControlName: 'reservation_date_to',
+                                        valueAccessor: DateTimeValueAccessor(
+                                          dateTimeFormat:
+                                              DateFormat('yyyy/MM/dd'),
+                                        ),
+                                        decoration: InputDecoration(
+                                          suffixIcon: IconButton(
+                                            icon: const Icon(
+                                              CupertinoIcons.calendar,
+                                              color: Colors.grey,
+                                            ),
+                                            onPressed: picker.showPicker,
+                                          ),
+                                        ),
+                                        inputFormatters: [
+                                          formatter.dateFormatter,
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )),
+                        SizedBox(width: context.appTheme.spacing.marginSmall),
+                        InkWell(
+                          onTap: () {
+                            final periodFrom =
+                                formGroup.control('reservation_date_from');
+                            final periodTo =
+                                formGroup.control('reservation_date_to');
+                            final valueDate = periodTo.value ?? DateTime.now();
+                            periodFrom.value = DateTime(
+                                valueDate.year, valueDate.month + 1, 1);
+                            periodTo.value = DateTime(
+                                valueDate.year, valueDate.month + 2, 0);
+                          },
+                          child: Container(
+                            padding: EdgeInsets.all(
+                                context.appTheme.spacing.marginSmall),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(context
+                                    .appTheme.spacing.borderRadiusMedium),
+                                border: Border.all(color: Colors.grey)),
+                            child: Icon(
+                              Icons.arrow_forward_ios,
+                              color: context.appTheme.primaryColor,
+                            ),
                           ),
                         ),
                         SizedBox(width: context.appTheme.spacing.marginMedium),
@@ -196,47 +252,31 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                           children: [
                             Text(
                               '予約状態',
-                              style: TextStyle(
-                                fontFamily: 'NotoSansJP',
-                                package: 'core_ui',
-                              ),
+                              style: context.textTheme.bodySmall,
                             ),
                             Row(
                               children: [
-                                Checkbox(
-                                    activeColor: Theme.of(context).primaryColor,
-                                    checkColor: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                      side: BorderSide(
-                                        color: Colors.grey,
-                                      ),
+                                IntrinsicWidth(
+                                  child: ReactiveCheckboxListTile(
+                                    contentPadding: EdgeInsets.zero,
+                                    controlAffinity:
+                                        ListTileControlAffinity.leading,
+                                    formControlName: 'inquiryInProgress',
+                                    title: Text(
+                                      '問合せ中',
                                     ),
-                                    value: true,
-                                    onChanged: (value) {}),
-                                Text(
-                                  '問合せ中',
-                                  style: TextStyle(
-                                    fontFamily: 'NotoSansJP',
-                                    package: 'core_ui',
                                   ),
                                 ),
-                                Checkbox(
-                                    activeColor: Theme.of(context).primaryColor,
-                                    checkColor: Colors.white,
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                      side: BorderSide(
-                                        color: Colors.grey,
-                                      ),
-                                    ),
-                                    value: true,
-                                    onChanged: (value) {}),
-                                Text(
-                                  '予約確定',
-                                  style: TextStyle(
-                                    fontFamily: 'NotoSansJP',
-                                    package: 'core_ui',
+                                SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium),
+                                IntrinsicWidth(
+                                  child: ReactiveCheckboxListTile(
+                                    contentPadding: EdgeInsets.zero,
+                                    controlAffinity:
+                                        ListTileControlAffinity.leading,
+                                    formControlName: 'reservationConfirmed',
+                                    title: Text('予約確定'),
                                   ),
                                 ),
                               ],
