@@ -150,7 +150,7 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                                 color: context.appTheme.primaryColor,
                               ),
                               Text(
-                                '次月',
+                                '前月',
                                 style: context.textTheme.titleMedium?.copyWith(
                                     color: context.appTheme.primaryColor),
                               ),

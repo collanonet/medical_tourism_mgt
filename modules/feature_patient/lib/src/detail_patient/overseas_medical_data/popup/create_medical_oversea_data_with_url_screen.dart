@@ -98,9 +98,6 @@ class _CreateMedicalOverseaDataWithUrlScreenState
                             dateTimeFormat: DateFormat('yyyy/MM/dd'),
                           ),
                           decoration: InputDecoration(
-                            label: Text(
-                              context.l10n.labelEntryDateFrom,
-                            ),
                             suffixIcon: IconButton(
                               icon: const Icon(
                                 CupertinoIcons.calendar,

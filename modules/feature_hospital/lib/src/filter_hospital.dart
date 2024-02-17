@@ -113,7 +113,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
                                 _check = value!;
                               });
                             }),
-                        Text('取下対象者'),
+                        Text('大学病院'),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
