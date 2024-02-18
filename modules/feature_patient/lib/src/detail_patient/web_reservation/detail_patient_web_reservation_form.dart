@@ -28,6 +28,7 @@ FormGroup detailPatientWebReservationForm() => FormGroup({
           'choice': FormControl<String>(value: '午前'), // 午前, 午後, 終日
           'timePeriodFrom': FormControl<String>(), // 時間帯（自）
           'timePeriodTo': FormControl<String>(), // 時間帯（至）
+          'medicalRecord' : FormControl<String>(),
         }),
       ]),
       'message': FormControl<String>(), // メッセージ（希望日がない場合は、メッセージ欄にてその旨伝えてください）
