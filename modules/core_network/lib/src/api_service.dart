@@ -431,7 +431,8 @@ abstract class ApiService {
   //GET_MEDICAL_RECORDS_OVERSEAS_DATA
 
   @GET('${Apis.MEDICAL_RECORDS_OVERSEAS_DATA_MEDICAL_RECORD}/{medicalRecordId}')
-  Future<List<MedicalRecordOverseaData>> medicalRecordOverseaDataByMedicalRecord(
+  Future<List<MedicalRecordOverseaData>>
+      medicalRecordOverseaDataByMedicalRecord(
     @Path('medicalRecordId') String medicalRecordId,
   );
 
@@ -545,6 +546,20 @@ abstract class ApiService {
   @POST(Apis.MEDICAL_RECORD_SUMMARY)
   Future<MedicalRecordSummary> postMedicalRecordSummary(
     @Body() MedicalRecordSummaryRequest medicalRecordNormalSummaryRequest,
+  );
+
+  @GET('${Apis.BOOKING_MEDICAL_RECORD}/WebBookingPatientPreferredDate/{patientId}')
+  Future<WebBookingPatientPreferredDate> getWebBookingPatientPreferredDate(
+    @Path('patientId') String patientId,
+  );
+
+  @GET('${Apis.BOOKING_MEDICAL_RECORD}/{medicalRecord}')
+  Future<List<WebBookingMedicalRecordResponse>> getBookingMedicalRecord(
+      @Path('medicalRecord') String medicalRecord);
+
+  @POST(Apis.BOOKING_MEDICAL_RECORD)
+  Future<WebBookingMedicalRecordResponse> postBookingMedicalRecord(
+    @Body() WebBookingMedicalRecordRequest webBookingMedicalRecordRequest,
   );
 }
 

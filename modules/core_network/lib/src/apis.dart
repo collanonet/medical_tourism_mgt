@@ -126,4 +126,6 @@ class Apis {
 
   static const MEDICAL_RECORDS_OVERSEAS_DATA = '/medical-records-overseas-data';
   static const MEDICAL_RECORDS_OVERSEAS_DATA_MEDICAL_RECORD = '/medical-records-overseas-data/medical-record';
+
+  static const BOOKING_MEDICAL_RECORD = '/medical-record-web-booking';
 }
