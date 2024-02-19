@@ -400,10 +400,12 @@ class PatientRemoteProvider {
       await apiService.deleteMedicalRecordProgress(id);
 
 // GET_MEDICAL_RECORDS_OVERSEAS_DATA
-  Future<List<MedicalRecordOverseaData>> medicalRecordOverseaDataByMedicalRecord(
+  Future<List<MedicalRecordOverseaData>>
+      medicalRecordOverseaDataByMedicalRecord(
     String medicalRecordId,
   ) async =>
-      await apiService.medicalRecordOverseaDataByMedicalRecord(medicalRecordId);
+          await apiService
+              .medicalRecordOverseaDataByMedicalRecord(medicalRecordId);
 
   Future<MedicalRecordOverseaData> postMedicalRecordOverseaData(
     MedicalRecordOverseaDataRequest medicalRecordOverseaData,
@@ -514,4 +516,19 @@ class PatientRemoteProvider {
     MedicalRecordSummaryRequest medicalRecordSummary,
   ) async =>
       await apiService.postMedicalRecordSummary(medicalRecordSummary);
+
+  Future<WebBookingPatientPreferredDate> getWebBookingPatientPreferredDate(
+    String medicalRecord,
+  ) async =>
+      await apiService.getWebBookingPatientPreferredDate(medicalRecord);
+
+  Future<List<WebBookingMedicalRecordResponse>> getBookingMedicalRecord({
+    required String medicalRecord,
+  }) async =>
+      await apiService.getBookingMedicalRecord(medicalRecord);
+
+  Future<WebBookingMedicalRecordResponse> postBookingMedicalRecord(
+    WebBookingMedicalRecordRequest webBookingMedicalRecord,
+  ) async =>
+      await apiService.postBookingMedicalRecord(webBookingMedicalRecord);
 }

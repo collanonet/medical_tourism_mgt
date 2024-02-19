@@ -17,18 +17,34 @@ FormGroup detailPatientWebReservationForm() => FormGroup({
       'remarks': FormControl<String>(
         disabled: true,
       ), // 備考
-      'medicalInstitutionName': FormControl<String>(), // 医療機関名
-      'doctorName': FormControl<String>(), // 医師名
-      'shift1': FormControl<String>(value: '10時〜12時'), //
-      'shift2': FormControl<String>(value: '13時〜16時'), //
+      'medicalInstitutionName': FormControl<String>(
+        validators: [Validators.required],
+      ), // 医療機関名
+      'doctorName': FormControl<String>(
+        validators: [Validators.required],
+      ), // 医師名
+      'shift1': FormControl<String>(
+        value: '10時〜12時',
+        disabled: true,
+      ), //
+      'shift2': FormControl<String>(
+        value: '13時〜16時',
+        disabled: true,
+      ), //
       'candidateDate': FormArray([
         FormGroup({
-          'id' : FormControl<String>(),
-          'preferredDate': FormControl<DateTime>(), // 第一希望
+          'id': FormControl<String>(),
+          'preferredDate': FormControl<DateTime>(
+            validators: [Validators.required],
+          ), // 第一希望
           'choice': FormControl<String>(value: '午前'), // 午前, 午後, 終日
-          'timePeriodFrom': FormControl<String>(), // 時間帯（自）
-          'timePeriodTo': FormControl<String>(), // 時間帯（至）
-          'medicalRecord' : FormControl<String>(),
+          'timePeriodFrom': FormControl<String>(
+            validators: [Validators.required],
+          ), // 時間帯（自）
+          'timePeriodTo': FormControl<String>(
+            validators: [Validators.required],
+          ), // 時間帯（至）
+          'medicalRecord': FormControl<String>(),
         }),
       ]),
       'message': FormControl<String>(), // メッセージ（希望日がない場合は、メッセージ欄にてその旨伝えてください）

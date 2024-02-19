@@ -28,3 +28,8 @@ export 'medical_record_patient_response_other.dart';
 export 'medical_record_patient_response_other_request.dart';
 export 'medical_record_summary.dart';
 export 'medical_record_summary_request.dart';
+export 'booking_date_request.dart';
+export 'booking_date_response.dart';
+export 'web_booking_medical_record_request.dart';
+export 'web_booking_medical_record_response.dart';
+export 'web_booking_patient_preferred_date.dart';

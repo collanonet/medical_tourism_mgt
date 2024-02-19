@@ -406,4 +406,16 @@ abstract class PatientRepository {
   Future<MedicalRecordSummary> postMedicalRecordSummary(
     MedicalRecordSummaryRequest medicalRecordSummary,
   );
+
+  Future<WebBookingPatientPreferredDate> getWebBookingPatientPreferredDate(
+    String medicalRecord,
+  );
+
+  Future<List<WebBookingMedicalRecordResponse>> getBookingMedicalRecord({
+    required String medicalRecord,
+  });
+
+  Future<WebBookingMedicalRecordResponse> postBookingMedicalRecord(
+    WebBookingMedicalRecordRequest webBookingMedicalRecord,
+  );
 }

@@ -550,7 +550,8 @@ class PatientRepositoryIml extends PatientRepository {
   //GET_MEDICAL_RECORDS_OVERSEAS_DATA
 
   @override
-  Future<List<MedicalRecordOverseaData>> medicalRecordOverseaDataByMedicalRecord(
+  Future<List<MedicalRecordOverseaData>>
+      medicalRecordOverseaDataByMedicalRecord(
     String medicalRecordId,
   ) {
     return remote.medicalRecordOverseaDataByMedicalRecord(medicalRecordId);
@@ -694,5 +695,24 @@ class PatientRepositoryIml extends PatientRepository {
   Future<MedicalRecordSummary> postMedicalRecordSummary(
       MedicalRecordSummaryRequest medicalRecordSummary) {
     return remote.postMedicalRecordSummary(medicalRecordSummary);
+  }
+
+  @override
+  Future<WebBookingPatientPreferredDate> getWebBookingPatientPreferredDate(
+    String medicalRecord,
+  ) {
+    return remote.getWebBookingPatientPreferredDate(medicalRecord);
+  }
+
+  @override
+  Future<List<WebBookingMedicalRecordResponse>> getBookingMedicalRecord(
+      {required String medicalRecord}) {
+    return remote.getBookingMedicalRecord(medicalRecord: medicalRecord);
+  }
+
+  @override
+  Future<WebBookingMedicalRecordResponse> postBookingMedicalRecord(
+      WebBookingMedicalRecordRequest webBookingMedicalRecord) {
+    return remote.postBookingMedicalRecord(webBookingMedicalRecord);
   }
 }

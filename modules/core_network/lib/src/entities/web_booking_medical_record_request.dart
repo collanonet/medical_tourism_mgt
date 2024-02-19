@@ -8,14 +8,22 @@ class WebBookingMedicalRecordRequest {
   String? message;
   String? medicalInstitutionName;
   String? doctorName;
-  List<BookingDate> candidateDate;
-  String? medicalRecord;
+  List<BookingDateRequest> candidateDate;
+  String medicalRecord;
+  String patient;
 
   WebBookingMedicalRecordRequest({
     this.message,
     this.medicalInstitutionName,
     this.doctorName,
     required this.candidateDate,
-    this.medicalRecord,
+    required this.medicalRecord,
+    required this.patient,
   });
+
+  factory WebBookingMedicalRecordRequest.fromJson(Map<String, dynamic> json) {
+    return _$WebBookingMedicalRecordRequestFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() => _$WebBookingMedicalRecordRequestToJson(this);
 }

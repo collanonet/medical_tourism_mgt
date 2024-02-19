@@ -24,4 +24,10 @@ class BookingDateResponse {
     required this.createdAt,
     required this.updatedAt,
   });
+
+  factory BookingDateResponse.fromJson(Map<String, dynamic> json) {
+    return _$BookingDateResponseFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() => _$BookingDateResponseToJson(this);
 }

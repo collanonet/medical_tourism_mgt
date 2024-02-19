@@ -1,7 +1,7 @@
-import 'booking_date_request.dart';
+import 'booking_date_response.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-part 'web_booking_medical_record.g.dart';
+part 'web_booking_medical_record_response.g.dart';
 
 @JsonSerializable()
 class WebBookingMedicalRecordResponse {
@@ -10,8 +10,9 @@ class WebBookingMedicalRecordResponse {
   String? message;
   String? medicalInstitutionName;
   String? doctorName;
-  List<BookingDate> candidateDate;
+  List<BookingDateResponse> candidateDate;
   String medicalRecord;
+  String patient;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -22,7 +23,15 @@ class WebBookingMedicalRecordResponse {
     this.doctorName,
     required this.candidateDate,
     required this.medicalRecord,
+    required this.patient,
     required this.createdAt,
     required this.updatedAt,
   });
+
+  factory WebBookingMedicalRecordResponse.fromJson(Map<String, dynamic> json) {
+    return _$WebBookingMedicalRecordResponseFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() =>
+      _$WebBookingMedicalRecordResponseToJson(this);
 }
