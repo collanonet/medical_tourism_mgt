@@ -922,14 +922,14 @@ class _DetailPatientWebReservationScreenState
                         children: [
                           Expanded(
                             child: ReactiveDatePicker<DateTime>(
-                              formControlName: 'date',
+                              formControlName: 'testCallDate',
                               firstDate: DateTime(1900),
                               lastDate: DateTime.now(),
                               builder: (BuildContext context,
                                   ReactiveDatePickerDelegate<dynamic> picker,
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
-                                  formControlName: 'date',
+                                  formControlName: 'testCallDate',
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -961,12 +961,12 @@ class _DetailPatientWebReservationScreenState
                           ),
                           Expanded(
                             child: ReactiveTimePicker(
-                              formControlName: 'time',
+                              formControlName: 'testCallTime',
                               builder: (BuildContext context,
                                   ReactiveTimePickerDelegate picker,
                                   Widget? child) {
                                 return ReactiveTextField<TimeOfDay>(
-                                  formControlName: 'time',
+                                  formControlName: 'testCallTime',
                                   valueAccessor: TimeOfDayValueAccessor(),
                                   onChanged: (value) {
                                     logger.d(value);
@@ -1088,7 +1088,7 @@ class _DetailPatientWebReservationScreenState
                                                 .join(' - '),
                                           ),
                                           Text(
-                                            '--',
+                                            '${Dates.formShortDate(data.testCallDate)} ${data.testCallTime}',
                                           ),
                                         ],
                                       );

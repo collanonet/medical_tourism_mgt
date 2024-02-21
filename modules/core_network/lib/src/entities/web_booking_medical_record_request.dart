@@ -10,6 +10,8 @@ class WebBookingMedicalRecordRequest {
   String? doctorName;
   List<BookingDateRequest> candidateDate;
   String medicalRecord;
+  String testCallDate;
+  String testCallTime;
   String patient;
 
   WebBookingMedicalRecordRequest({
@@ -18,6 +20,8 @@ class WebBookingMedicalRecordRequest {
     this.doctorName,
     required this.candidateDate,
     required this.medicalRecord,
+    required this.testCallDate,
+    required this.testCallTime,
     required this.patient,
   });
 

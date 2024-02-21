@@ -11,6 +11,8 @@ class WebBookingMedicalRecordResponse {
   String? medicalInstitutionName;
   String? doctorName;
   List<BookingDateResponse> candidateDate;
+  DateTime? testCallDate;
+  String? testCallTime;
   String medicalRecord;
   String patient;
   final DateTime createdAt;
@@ -22,6 +24,8 @@ class WebBookingMedicalRecordResponse {
     this.medicalInstitutionName,
     this.doctorName,
     required this.candidateDate,
+     this.testCallDate,
+     this.testCallTime,
     required this.medicalRecord,
     required this.patient,
     required this.createdAt,
