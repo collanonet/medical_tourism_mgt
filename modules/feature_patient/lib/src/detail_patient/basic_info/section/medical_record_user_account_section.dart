@@ -42,8 +42,15 @@ class MedicalRecordUserAccountSection extends StatelessWidget {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'loginId',
+                              readOnly: true,
                               decoration: InputDecoration(
                                 label: Text('ログインID'),
+                                suffixIcon: IconButton(
+                                  onPressed: (){
+
+                                  },
+                                  icon: Icon(Icons.copy_all_rounded),
+                                )
                               ),
                             ),
                           ),

@@ -70,7 +70,6 @@ FormGroup basicInfoForm({
 
         'Patient_account': FormGroup({
           'loginId': FormControl<String?>(
-            disabled: true,
           ),
           'loginPassword': FormControl<String?>(
             value: '********',

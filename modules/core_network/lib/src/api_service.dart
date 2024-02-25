@@ -548,7 +548,8 @@ abstract class ApiService {
     @Body() MedicalRecordSummaryRequest medicalRecordNormalSummaryRequest,
   );
 
-  @GET('${Apis.BOOKING_MEDICAL_RECORD}/WebBookingPatientPreferredDate/{patientId}')
+  @GET(
+      '${Apis.BOOKING_MEDICAL_RECORD}/WebBookingPatientPreferredDate/{patientId}')
   Future<WebBookingPatientPreferredDate> getWebBookingPatientPreferredDate(
     @Path('patientId') String patientId,
   );
@@ -560,6 +561,20 @@ abstract class ApiService {
   @POST(Apis.BOOKING_MEDICAL_RECORD)
   Future<WebBookingMedicalRecordResponse> postBookingMedicalRecord(
     @Body() WebBookingMedicalRecordRequest webBookingMedicalRecordRequest,
+  );
+
+  @GET(Apis.TYPE)
+  Future<List<TypeResponse>> getTypes();
+
+  @POST(Apis.TYPE)
+  Future<TypeResponse> postType(
+    @Body() TypeRequest typeRequest,
+  );
+
+  @PUT('${Apis.TYPE}/{id}')
+  Future<TypeResponse> putType(
+    @Path('id') String id,
+    @Body() TypeRequest typeRequest,
   );
 }
 
