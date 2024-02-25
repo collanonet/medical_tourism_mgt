@@ -1,13 +1,12 @@
 import 'package:auto_route/annotations.dart';
 import 'package:base_view/base_view.dart';
-import 'package:feature_report/src/type/type_form.dart';
-import 'package:feature_report/src/type/type_model.dart';
+import 'type_form.dart';
+import 'type_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../filter_report_form.dart';
 import 'type_screen.dart';
 
 @RoutePage()
@@ -17,7 +16,7 @@ class ReportTypePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
-      validationMessages: validationMessagesFilterPatient(context),
+      validationMessages: validationMessages(context),
       child: ReactiveFormBuilder(
           form: () => typeForm(),
           builder: (_, formGroup, child) {

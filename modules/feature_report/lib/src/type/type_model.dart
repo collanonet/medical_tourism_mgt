@@ -49,33 +49,41 @@ class TypeModel {
     }
   }
 
-  Future<void> createOrUpdate(FormArray formArray) async {
+  ValueNotifier<AsyncData<bool>> submitData = ValueNotifier(const AsyncData());
+
+  Future<void> createOrUpdate(FormGroup fromGroup) async {
     try {
       data.value = data.value.copyWith(loading: true);
+      submitData.value = const AsyncData(loading: true);
 
-      for (var i = 0; i < formArray.controls.length; i++) {
-        var formGroup = formArray.controls[i] as FormGroup;
-        if (formGroup.control('id').value == null) {
+      await fromGroup.control('type').value.forEach((element) async {
+        if (element['id'] == null) {
           var result = await reportRepository.postType(TypeRequest(
-            typeName: formGroup.control('typeName').value,
-            color: formGroup.control('color').value,
+            typeName: element['typeName'],
+            color: element['color'],
           ));
-
           data.value = data.value.copyWith(data: data.value.data!..add(result));
         } else {
           var result = await reportRepository.putType(
-              formGroup.control('id').value,
-              TypeRequest(
-                typeName: formGroup.control('typeName').value,
-                color: formGroup.control('color').value,
-              ));
+            element['id'],
+            TypeRequest(
+              typeName: element['typeName'],
+              color: element['color'],
+            ),
+          );
           data.value = data.value.copyWith(
-              data: data.value.data!
-                ..[i] = result
-                ..sort((a, b) => a.typeName.compareTo(b.typeName)));
+            data: data.value.data!
+              ..[data.value.data!.indexWhere((e) => e.id == element['id'])] =
+                  result
+              ..sort((a, b) => a.typeName.compareTo(b.typeName)),
+          );
         }
-      }
+      });
+
+      data.value = data.value.copyWith(loading: false);
+      submitData.value = const AsyncData(data: true);
     } catch (e) {
+      submitData.value = AsyncData(error: e);
       data.value = data.value.copyWith(error: e);
     }
   }

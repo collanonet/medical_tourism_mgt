@@ -1,3 +1,5 @@
+import 'package:core_l10n/l10n.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup typeForm() {
@@ -9,9 +11,17 @@ FormGroup typeForm() {
           validators: [Validators.required],
         ),
         'color': FormControl<String>(
+          value: 'FFFFFF',
           validators: [Validators.required],
         ),
       })
     ])
   });
 }
+
+Map<String, String Function(Object)> validationMessages(
+  BuildContext context,
+) =>
+    {
+      ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
+    };

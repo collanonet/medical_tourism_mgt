@@ -1,27 +1,13 @@
 import 'dart:ui';
 
 class ColorUtils {
-  static int _hash(String value) {
-    int hash = 0;
-    value.runes.forEach((code) {
-      hash = code + ((hash << 5) - hash);
-    });
-    return hash;
-  }
-
   static Color stringToColor(String value) {
-    return Color(stringToHexInt(value));
+    int colorValue = stringToHexInt(value);
+    return Color(colorValue).withOpacity(1.0);
   }
 
-  static String stringToHexColor(String value) {
-    String c = (_hash(value) & 0x00FFFFFF).toRadixString(16).toUpperCase();
-    return "0xFF00000".substring(0, 10 - c.length) + c;
-  }
-
-  static int stringToHexInt(String value) {
-    String c = (_hash(value) & 0x00FFFFFF).toRadixString(16).toUpperCase();
-    String hex = "FF00000".substring(0, 8 - c.length) + c;
-    return int.parse(hex, radix: 16);
+  static int stringToHexInt(String color) {
+    return int.tryParse('0xFF$color') ?? 0xFFFFFFFF;
   }
 
   ColorUtils._(); // private constructor

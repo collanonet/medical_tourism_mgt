@@ -1,5 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
 import 'package:flutter/material.dart';
@@ -71,91 +72,68 @@ class _ReportTypeScreenState extends State<ReportTypeScreen> {
                                           crossAxisAlignment:
                                               CrossAxisAlignment.start,
                                           children: [
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Text('type'),
-                                                SizedBox(
-                                                  height: context.appTheme
-                                                      .spacing.marginMedium,
-                                                ),
-                                                IntrinsicWidth(
-                                                  stepWidth: 300,
-                                                  child: ReactiveTextField(
-                                                    formControlName: 'typeName',
-                                                    decoration: InputDecoration(
-                                                      labelText: '種別名',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              width: context.appTheme.spacing
-                                                  .marginMedium,
-                                            ),
-                                            Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Text('color'),
-                                                SizedBox(
-                                                  height: context.appTheme
-                                                      .spacing.marginMedium,
-                                                ),
-                                                IntrinsicWidth(
-                                                  stepWidth: 150,
-                                                  child: ReactiveTextField(
-                                                    formControlName: 'color',
-                                                    decoration: InputDecoration(
-                                                      labelText: '色',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(
-                                              width: context.appTheme.spacing
-                                                  .marginMedium,
-                                            ),
-                                            Expanded(
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisSize: MainAxisSize.min,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.end,
-                                                children: [
-                                                  SizedBox(
-                                                    height: 35,
-                                                  ),
-                                                  if (formArray.controls
-                                                          .indexOf(
-                                                              currentForm) >
-                                                      0)
-                                                    IconButton(
-                                                        onPressed: () {
-                                                          if (formArray.controls
-                                                                  .indexOf(
-                                                                      currentForm) >
-                                                              0) {
-                                                            formArray.removeAt(
-                                                                formArray
-                                                                    .controls
-                                                                    .indexOf(
-                                                                        currentForm));
-                                                          }
-                                                        },
-                                                        icon: Icon(
-                                                          Icons.remove_circle,
-                                                          color: Colors.red,
-                                                        )),
-                                                ],
+                                            IntrinsicWidth(
+                                              stepWidth: 300,
+                                              child: ReactiveTextField(
+                                                formControlName: 'typeName',
                                               ),
-                                            )
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            ReactiveValueListenableBuilder<
+                                                    String>(
+                                                formControlName: 'color',
+                                                builder: (context, control, _) {
+                                                  return InkWell(
+                                                    onTap: () {
+                                                      showColorPicker(
+                                                          currentForm, control);
+                                                    },
+                                                    child: Container(
+                                                      width: 45,
+                                                      height: 45,
+                                                      decoration: BoxDecoration(
+                                                        shape: BoxShape.circle,
+                                                        border: Border.all(
+                                                          color: Colors.black,
+                                                        ),
+                                                        color: ColorUtils
+                                                            .stringToColor(
+                                                          control.value!,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  );
+                                                }),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            if (formArray.controls
+                                                        .indexOf(currentForm) >
+                                                    0 &&
+                                                currentForm
+                                                        .control('id')
+                                                        .value ==
+                                                    null)
+                                              IconButton(
+                                                  onPressed: () {
+                                                    if (formArray.controls
+                                                            .indexOf(
+                                                                currentForm) >
+                                                        0) {
+                                                      formArray.removeAt(
+                                                          formArray.controls
+                                                              .indexOf(
+                                                                  currentForm));
+                                                    }
+                                                  },
+                                                  icon: Icon(
+                                                    Icons.remove_circle,
+                                                    color: Colors.red,
+                                                  ))
                                           ],
                                         ),
                                       );
@@ -177,12 +155,14 @@ class _ReportTypeScreenState extends State<ReportTypeScreen> {
                                           onPressed: () {
                                             formArray.add(
                                               FormGroup({
+                                                'id': FormControl<String>(),
                                                 'typeName': FormControl<String>(
                                                   validators: [
                                                     Validators.required
                                                   ],
                                                 ),
                                                 'color': FormControl<String>(
+                                                  value: 'FFFFFF',
                                                   validators: [
                                                     Validators.required
                                                   ],
@@ -198,18 +178,42 @@ class _ReportTypeScreenState extends State<ReportTypeScreen> {
                             ],
                           ),
                         )),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                context.read<TypeModel>().createOrUpdate(
-                                    (ReactiveForm.of(context) as FormGroup)
-                                        .control('type') as FormArray);
-                              },
-                              child: const Text('保存する'),
-                            ),
-                          ],
+                        ValueListenableListener(
+                          valueListenable: context.read<TypeModel>().submitData,
+                          onListen: () {
+                            final data =
+                                context.read<TypeModel>().submitData.value;
+
+                            if (data.hasData) {
+                              logger.d('loading');
+                              snackBarWidget(
+                                message: '正常に保存されました',
+                                prefixIcon: const Icon(Icons.check_circle,
+                                    color: Colors.white),
+                              );
+                            }
+
+                            if (data.hasError) {
+                              snackBarWidget(
+                                message: '保存できませんでした。 もう一度試してください。',
+                                backgroundColor: Colors.red,
+                                prefixIcon: const Icon(Icons.error,
+                                    color: Colors.white),
+                              );
+                            }
+                          },
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  context.read<TypeModel>().createOrUpdate(
+                                      ReactiveForm.of(context) as FormGroup);
+                                },
+                                child: const Text('保存する'),
+                              ),
+                            ],
+                          ),
                         )
                       ],
                     ),
@@ -221,39 +225,58 @@ class _ReportTypeScreenState extends State<ReportTypeScreen> {
         });
   }
 
-  // AlertDialog showColorPicker() {
-  //   return AlertDialog(
-  //     content: SizedBox(
-  //       width: 200,
-  //       height: 200,
-  //       child: Padding(
-  //         padding: const EdgeInsets.all(6),
-  //         child: Card(
-  //           elevation: 2,
-  //           child: ColorPicker(
-  //             color: currentForm.control('color').value == null
-  //                 ? Colors.blue
-  //                 : ColorUtils.stringToColor(
-  //                     currentForm.control('color').value),
-  //             onColorChanged: (Color color) {
-  //               currentForm.control('color').value =
-  //                   ColorUtils.stringToHexColor(color.toString());
-  //             },
-  //             width: 44,
-  //             height: 44,
-  //             borderRadius: 22,
-  //             heading: Text(
-  //               'Select color',
-  //               style: Theme.of(context).textTheme.headlineSmall,
-  //             ),
-  //             subheading: Text(
-  //               'Select color shade',
-  //               style: Theme.of(context).textTheme.titleSmall,
-  //             ),
-  //           ),
-  //         ),
-  //       ),
-  //     ),
-  //   );
-  // }
+  void showColorPicker(FormGroup currentForm, AbstractControl control) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Card(
+                margin: EdgeInsets.zero,
+                elevation: 2,
+                child: ColorPicker(
+                  pickersEnabled: const <ColorPickerType, bool>{
+                    ColorPickerType.both: false,
+                    ColorPickerType.primary: false,
+                    ColorPickerType.accent: false,
+                    ColorPickerType.wheel: true,
+                  },
+                  pickerTypeLabels: const <ColorPickerType, String>{
+                    ColorPickerType.both: 'Both',
+                    ColorPickerType.primary: 'Primary',
+                    ColorPickerType.accent: 'Accent',
+                    ColorPickerType.wheel: 'Any',
+                  },
+                  color: ColorUtils.stringToColor(control.value),
+                  onColorChanged: (Color color) {
+                    control.value = color.hex;
+                  },
+                  width: 44,
+                  height: 44,
+                  borderRadius: 22,
+                  title: const Text('色の選択'),
+                ),
+              ),
+            ],
+          ),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('キャンセル'),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: const Text('OK'),
+            ),
+          ],
+        );
+      },
+    );
+  }
 }
