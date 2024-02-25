@@ -33,3 +33,6 @@ export 'booking_date_response.dart';
 export 'web_booking_medical_record_request.dart';
 export 'web_booking_medical_record_response.dart';
 export 'web_booking_patient_preferred_date.dart';
+export 'type_request.dart';
+export 'type_response.dart';
+export 'web_booking_medical_record.dart';

@@ -1088,7 +1088,7 @@ class _DetailPatientWebReservationScreenState
                                                 .join(' - '),
                                           ),
                                           Text(
-                                            '${Dates.formShortDate(data.testCallDate)} ${data.testCallTime}',
+                                            '${Dates.formShortDate(data.testCallDate)} ${data.testCallTime ?? '--'}',
                                           ),
                                         ],
                                       );
