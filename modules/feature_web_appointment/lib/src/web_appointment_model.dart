@@ -1,34 +1,28 @@
-import 'package:data_auth/data_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:data_web_appointment/data_web_appointment.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:data_patient/data_patient.dart';
 
 @injectable
-class WebAppointmentModel with ChangeNotifier {
+class WebAppointmentModel {
   WebAppointmentModel({
-    required this.authRepository,
-    required this.patientRepository,
+    required this.repository,
   });
 
-  final AuthRepository authRepository;
-  final PatientRepository patientRepository;
+  final WebAppointmentRepository repository;
 
-  AsyncData<Paginated<Patient>> _patientData = const AsyncData();
-  AsyncData<Paginated<Patient>> get patientData => _patientData;
+  ValueNotifier<AsyncData<List<WebBookingMedicalRecord>>> webBookingAdmin =
+      ValueNotifier(const AsyncData());
 
-  Future<void> patients() {
-    _patientData = const AsyncData(loading: true);
-    notifyListeners();
+  void getWebBookingAdmin() async {
+    try {
+      webBookingAdmin.value = const AsyncData(loading: true);
 
-    return patientRepository.patients().then((value) {
-      _patientData = AsyncData(data: value);
-    }).catchError((error) {
-      logger.d(error);
-      _patientData = AsyncData(error: error);
-    }).whenComplete(() {
-      notifyListeners();
-    });
+      final result = await repository.getWebBookingAdmin();
+      webBookingAdmin.value = AsyncData(data: result);
+    } catch (e) {
+      webBookingAdmin.value = AsyncData(error: e);
+    }
   }
 }

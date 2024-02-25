@@ -2,49 +2,59 @@ import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup formWebAppointment() => FormGroup({
-      'patientName': FormControl<String>(), // 患者名
-      '1st_choice': FormControl<DateTime>(
+      'patientName': FormControl<String>(
+        disabled: true,
+      ),
+      'preferredDate1': FormControl<DateTime>(
         disabled: true,
       ), // 第１希望
-      '2nd_choice': FormControl<DateTime>(
+      'preferredDate2': FormControl<DateTime>(
         disabled: true,
       ), // 第２希望
-      '3rd_choice': FormControl<DateTime>(
+      'preferredDate3': FormControl<DateTime>(
         disabled: true,
       ), // 第３希望
-      'No_desired_date': FormControl<bool>(), // 希望日なし
-
+      'noDesiredDate': FormControl<bool>(
+        disabled: true,
+      ), // 希望日なし
       'remarks': FormControl<String>(
         disabled: true,
-        value: '''例）2024/03/05〜2024/03/10まで
-治療期間に合わせて滞在可能。
-3/13までには必ず帰国したいです。''',
       ), // 備考
-      'Medical_institution_name': FormControl<String>(), // 医療機関名
-      'Doctor_name': FormControl<String>(), // 医師名
-      'shift_1': FormControl<String>(value: '10時〜12時'), //
-      'shift_2': FormControl<String>(value: '13時〜16時'), //
-      'Candidate_Date': FormArray([
+      'medicalInstitutionName': FormControl<String>(
+        validators: [Validators.required],
+      ), // 医療機関名
+      'doctorName': FormControl<String>(
+        validators: [Validators.required],
+      ), // 医師名
+      'shift1': FormControl<String>(
+        value: '10時〜12時',
+        disabled: true,
+      ), //
+      'shift2': FormControl<String>(
+        value: '13時〜16時',
+        disabled: true,
+      ), //
+      'candidateDate': FormArray([
         FormGroup({
-          'First_choice': FormControl<DateTime>(), // 第一希望
+          'id': FormControl<String>(),
+          'preferredDate': FormControl<DateTime>(
+            validators: [Validators.required],
+          ), // 第一希望
           'choice': FormControl<String>(value: '午前'), // 午前, 午後, 終日
-          'Time_period_from': FormControl<String>(), // 時間帯（自）
-          'Time_period_to': FormControl<String>(), // 時間帯（至）
-        }),
-        FormGroup({
-          'First_choice': FormControl<DateTime>(), // 第一希望
-          'choice': FormControl<String>(value: '午後'), // 午前, 午後, 終日
-          'Time_period_from': FormControl<String>(), // 時間帯（自）
-          'Time_period_to': FormControl<String>(), // 時間帯（至）
-        }),
-        FormGroup({
-          'First_choice': FormControl<DateTime>(), // 第一希望
-          'choice': FormControl<String>(), // 午前, 午後, 終日
-          'Time_period_from': FormControl<String>(), // 時間帯（自）
-          'Time_period_to': FormControl<String>(), // 時間帯（至）
+          'timePeriodFrom': FormControl<String>(
+            validators: [Validators.required],
+          ), // 時間帯（自）
+          'timePeriodTo': FormControl<String>(
+            validators: [Validators.required],
+          ), // 時間帯（至）
+          'medicalRecord': FormControl<String>(),
         }),
       ]),
       'message': FormControl<String>(), // メッセージ（希望日がない場合は、メッセージ欄にてその旨伝えてください）
-      'date': FormControl<DateTime>(), // 年月日
-      'time': FormControl<TimeOfDay>(), // 時間
+      'testCallDate': FormControl<DateTime>(
+        validators: [Validators.required],
+      ), // 年月日
+      'testCallTime': FormControl<String>(
+        validators: [Validators.required],
+      ), // 時間
     });

@@ -164,7 +164,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                       height: 60,
                                       width: 60,
                                       decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(4),
+                                        borderRadius: BorderRadius.circular(16),
                                         color: Colors.grey.shade300,
                                       ),
                                       child: const Icon(

@@ -242,7 +242,7 @@ class _PatientScreenState extends State<PatientScreen> {
                                         width: 60,
                                         decoration: BoxDecoration(
                                           borderRadius:
-                                              BorderRadius.circular(4),
+                                              BorderRadius.circular(16),
                                           color: Colors.grey.shade300,
                                         ),
                                         child: const Icon(

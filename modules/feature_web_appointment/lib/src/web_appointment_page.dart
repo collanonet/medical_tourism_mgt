@@ -19,8 +19,8 @@ class WebAppointmentPage extends StatefulWidget {
 class _WebAppointmentPageState extends State<WebAppointmentPage> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => GetIt.I<WebAppointmentModel>()..patients(),
+    return Provider(
+      create: (context) => GetIt.I<WebAppointmentModel>()..getWebBookingAdmin(),
       child: const LayoutView(
         selectedIndex: 3,
         page: WebAppointmentScreen(),

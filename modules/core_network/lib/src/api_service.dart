@@ -576,6 +576,20 @@ abstract class ApiService {
     @Path('id') String id,
     @Body() TypeRequest typeRequest,
   );
+
+  @GET(Apis.WEB_BOOKING_ADMIN)
+  Future<List<WebBookingMedicalRecord>> getWebBookingAdmin();
+
+  @GET('${Apis.WEB_BOOKING_ADMIN}/{id}')
+  Future<WebBookingMedicalRecord> getWebBookingAdminById(
+    @Path('id') String id,
+  );
+
+  @PUT('${Apis.WEB_BOOKING_ADMIN}/{id}')
+  Future<WebBookingMedicalRecord> putWebBookingAdmin(
+    @Path('id') String id,
+    @Body() WebBookingMedicalRecordRequest webBookingMedicalRecordRequest,
+  );
 }
 
 extension ApiServiceExts on ApiService {
