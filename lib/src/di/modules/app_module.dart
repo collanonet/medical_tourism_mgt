@@ -30,6 +30,7 @@ abstract class AppModule {
       policies: {
         LoginRoute.name: [PermissionRole.guest],
         AgentsRoute.name: [PermissionRole.admin],
+        AgentDetailRoute.name: [PermissionRole.admin],
         ChatRoute.name: [PermissionRole.admin],
         HospitalsRoute.name: [PermissionRole.admin],
         InvoicesRoute.name: [PermissionRole.admin],

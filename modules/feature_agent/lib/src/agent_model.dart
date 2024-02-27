@@ -1,3 +1,4 @@
+import 'package:data_agent/data_agent.dart';
 import 'package:data_auth/data_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
@@ -8,5 +9,5 @@ class AgentModel with ChangeNotifier {
     required this.authRepository,
   });
 
-  final AuthRepository authRepository;
+  final AgentRepository authRepository;
 }
