@@ -318,16 +318,18 @@ class _AgentBasicInformationScreenState
                             Expanded(
                               child: Row(
                                 children: [
-                                  IconButton(
-                                    icon: const Icon(
-                                      Icons.delete,
-                                      color: Colors.red,
+                                  if (formArray.controls.indexOf(currentForm) !=
+                                      0)
+                                    IconButton(
+                                      icon: const Icon(
+                                        Icons.delete,
+                                        color: Colors.red,
+                                      ),
+                                      onPressed: () {
+                                        formArray.removeAt(formArray.controls
+                                            .indexOf(currentForm));
+                                      },
                                     ),
-                                    onPressed: () {
-                                      formArray.removeAt(formArray.controls
-                                          .indexOf(currentForm));
-                                    },
-                                  ),
                                 ],
                               ),
                             ),
@@ -420,6 +422,456 @@ class _AgentBasicInformationScreenState
                 ),
               ],
             ),
+          ),
+          ReactiveFormArray(
+            formArrayName: 'manager',
+            builder: (context, formArray, child) {
+              var rows = formArray.controls
+                  .map((control) => control as FormGroup)
+                  .map((currentForm) {
+                return Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    color: Color(0xffF0F3F5),
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: ReactiveForm(
+                    formGroup: currentForm,
+                    child: ColumnSeparated(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(height: 16);
+                      },
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              '担当者',
+                              style: context.textTheme.titleMedium,
+                            ),
+                            if (formArray.controls.indexOf(currentForm) != 0)
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.delete,
+                                  color: Colors.red,
+                                ),
+                                onPressed: () {
+                                  formArray.removeAt(
+                                      formArray.controls.indexOf(currentForm));
+                                },
+                              ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Container(
+                              width: 400,
+                              padding: EdgeInsets.all(
+                                context.appTheme.spacing.marginExtraLarge,
+                              ),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.all(Radius.circular(
+                                  context.appTheme.spacing.borderRadiusMedium,
+                                )),
+                                border: Border.all(
+                                  color: context.appTheme.primaryColor,
+                                ),
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Icon(
+                                    Icons.copy_all_rounded,
+                                    size: 50,
+                                    color: context.appTheme.primaryColor,
+                                  ),
+                                  SizedBox(
+                                    height:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  Text(
+                                    '名刺データをここにドラッグ＆ドロップ',
+                                    style:
+                                        context.textTheme.bodySmall?.copyWith(
+                                      fontSize: 22,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {},
+                                    child: const Text(
+                                      'またはファイルを選択する',
+                                    ),
+                                  )
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        RowSeparated(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const SizedBox(width: 16);
+                          },
+                          children: [
+                            Expanded(
+                              child: ColumnSeparated(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return const SizedBox(height: 8);
+                                },
+                                children: [
+                                  Text(
+                                    '部署名',
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                  ReactiveTextField(
+                                    formControlName: 'departmentName',
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: SizedBox(),
+                            ),
+                            Expanded(
+                              child: SizedBox(),
+                            ),
+                          ],
+                        ),
+                        RowSeparated(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const SizedBox(width: 16);
+                          },
+                          children: [
+                            Expanded(
+                              child: ColumnSeparated(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return const SizedBox(height: 8);
+                                },
+                                children: [
+                                  Text(
+                                    '氏名（ローマ字）',
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                  ReactiveTextField(
+                                    formControlName: 'fullNameRomanji',
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: ColumnSeparated(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return const SizedBox(height: 8);
+                                },
+                                children: [
+                                  Text(
+                                    '氏名（中国語漢字/ベトナム語表記）',
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                  ReactiveTextField(
+                                    formControlName:
+                                        'fullNameChineseKanjiVietnameseNotation',
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: ColumnSeparated(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return const SizedBox(height: 8);
+                                },
+                                children: [
+                                  Text(
+                                    '氏名（日本語漢字）※中国人のみ',
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                  ReactiveTextField(
+                                    formControlName:
+                                        'fullNameJapaneseKanjiChineseOnly',
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        RowSeparated(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const SizedBox(width: 16);
+                          },
+                          children: [
+                            Expanded(
+                              child: ColumnSeparated(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return const SizedBox(height: 8);
+                                },
+                                children: [
+                                  Text(
+                                    '氏名（カナ）',
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                  ReactiveTextField(
+                                    formControlName: 'fullNameKana',
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: SizedBox(),
+                            ),
+                            Expanded(
+                              child: SizedBox(),
+                            ),
+                          ],
+                        ),
+                        RowSeparated(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          separatorBuilder: (BuildContext context, int index) {
+                            return const SizedBox(width: 16);
+                          },
+                          children: [
+                            Expanded(
+                              child: ColumnSeparated(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return const SizedBox(height: 8);
+                                },
+                                children: [
+                                  Text(
+                                    '電話番号',
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                  ReactiveTextField(
+                                    formControlName: 'phoneNumber',
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: ColumnSeparated(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return const SizedBox(height: 8);
+                                },
+                                children: [
+                                  Text(
+                                    'メール', // Email
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                  ReactiveTextField(
+                                    formControlName: 'email',
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Expanded(
+                              child: SizedBox(),
+                            ),
+                          ],
+                        ),
+                        ReactiveFormArray(
+                          formArrayName: 'contactMethods',
+                          builder: (context, formArray, child) {
+                            var rows = formArray.controls
+                                .map((control) => control as FormGroup)
+                                .map((currentForm) {
+                              return ReactiveForm(
+                                formGroup: currentForm,
+                                child: RowSeparated(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  separatorBuilder:
+                                      (BuildContext context, int index) {
+                                    return const SizedBox(width: 16);
+                                  },
+                                  children: [
+                                    Expanded(
+                                      child: ColumnSeparated(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        separatorBuilder:
+                                            (BuildContext context, int index) {
+                                          return const SizedBox(height: 8);
+                                        },
+                                        children: [
+                                          Text(
+                                            '連絡方法',
+                                            style: context.textTheme.bodyMedium,
+                                          ),
+                                          ReactiveTextField(
+                                            formControlName: 'howToContact',
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: ColumnSeparated(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        separatorBuilder:
+                                            (BuildContext context, int index) {
+                                          return const SizedBox(height: 8);
+                                        },
+                                        children: [
+                                          Text(
+                                            '連絡方法QRコード',
+                                            style: context.textTheme.bodyMedium,
+                                          ),
+                                          ReactiveTextField(
+                                            formControlName:
+                                                'howToContactQrCode',
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: Row(
+                                        children: [
+                                          if (formArray.controls
+                                                  .indexOf(currentForm) !=
+                                              0)
+                                            IconButton(
+                                              icon: const Icon(
+                                                Icons.delete,
+                                                color: Colors.red,
+                                              ),
+                                              onPressed: () {
+                                                formArray.removeAt(formArray
+                                                    .controls
+                                                    .indexOf(currentForm));
+                                              },
+                                            ),
+                                        ],
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              );
+                            }).toList();
+
+                            return ColumnSeparated(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
+                                return const SizedBox(height: 8);
+                              },
+                              children: [
+                                ...rows,
+                                InkWell(
+                                  onTap: () {
+                                    formArray.add(
+                                      FormGroup({
+                                        'id': FormControl<String>(),
+                                        'howToContact': FormControl<String>(),
+                                        'howToContactQrCode':
+                                            FormControl<String>(),
+                                      }),
+                                    );
+                                  },
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Icon(
+                                        Icons.add_circle,
+                                        color: context.appTheme.primaryColor,
+                                      ),
+                                      SizedBox(
+                                        width: context
+                                            .appTheme.spacing.marginSmall,
+                                      ),
+                                      Text(
+                                        '同行者を追加',
+                                        style: TextStyle(
+                                            color:
+                                                context.appTheme.primaryColor),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              }).toList();
+
+              return ColumnSeparated(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                separatorBuilder: (BuildContext context, int index) {
+                  return const SizedBox(height: 8);
+                },
+                children: [
+                  ...rows,
+                  InkWell(
+                    onTap: () {
+                      formArray.add(
+                        FormGroup({
+                          'id': FormControl<String>(),
+                          'nameCardDragDrop': FormControl<String>(),
+                          'departmentName': FormControl<String>(),
+                          'fullNameRomanji': FormControl<String>(),
+                          'fullNameChineseKanjiVietnameseNotation':
+                              FormControl<String>(),
+                          'fullNameJapaneseKanjiChineseOnly':
+                              FormControl<String>(),
+                          'fullNameKana': FormControl<String>(),
+                          'phoneNumber': FormControl<String>(),
+                          'email': FormControl<String>(),
+                          'contactMethods': FormArray([
+                            FormGroup({
+                              'id': FormControl<String>(),
+                              'howToContact': FormControl<String>(),
+                              'howToContactQrCode': FormControl<String>(),
+                            }),
+                          ]),
+                        }),
+                      );
+                    },
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.add_circle,
+                          color: context.appTheme.primaryColor,
+                        ),
+                        SizedBox(
+                          width: context.appTheme.spacing.marginSmall,
+                        ),
+                        Text(
+                          '担当者を追加',
+                          style:
+                              TextStyle(color: context.appTheme.primaryColor),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ],
       ),

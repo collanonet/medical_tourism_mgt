@@ -56,7 +56,6 @@ class _AgentDetailScreenState extends State<AgentDetailScreen> {
             ],
           ),
         ),
-        const SizedBox(height: 16),
         Padding(
           padding: EdgeInsets.only(
               top: context.appTheme.spacing.marginMedium,
