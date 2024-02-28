@@ -616,7 +616,13 @@ abstract class ApiService {
   );
 
   @GET(Apis.AGENT_MANAGER)
-  Future<List<AgentManagerResponse>> getAgentManagers();
+  Future<List<AgentManagerResponse>> getAgentManagers(
+  {
+    @Query('page') int? page,
+    @Query('limit') int? limit,
+    @Query('agentRecord') String? agentRecord,
+}
+  );
 
   @GET('${Apis.AGENT_MANAGER}/{id}')
   Future<AgentManagerResponse> getAgentManager(

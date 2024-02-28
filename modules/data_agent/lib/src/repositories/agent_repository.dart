@@ -14,7 +14,7 @@ abstract class AgentRepository {
 
   Future<void> deleteAgent(String id);
 
-  Future<List<AgentManagerResponse>> getAgentManagers();
+  Future<List<AgentManagerResponse>> getAgentManagers({String? agentRecord});
 
   Future<AgentManagerResponse> getAgentManager(String id);
 

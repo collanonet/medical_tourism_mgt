@@ -12,8 +12,6 @@ AgentManagerContactResponse _$AgentManagerContactResponseFromJson(
       id: json['_id'] as String,
       howToContact: json['howToContact'] as String?,
       howToContactQrCode: json['howToContactQrCode'] as String?,
-      createdAt: DateTime.parse(json['createdAt'] as String),
-      updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
 
 Map<String, dynamic> _$AgentManagerContactResponseToJson(
@@ -22,6 +20,4 @@ Map<String, dynamic> _$AgentManagerContactResponseToJson(
       '_id': instance.id,
       'howToContact': instance.howToContact,
       'howToContactQrCode': instance.howToContactQrCode,
-      'createdAt': instance.createdAt.toIso8601String(),
-      'updatedAt': instance.updatedAt.toIso8601String(),
     };

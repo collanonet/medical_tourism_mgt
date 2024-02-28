@@ -29,12 +29,18 @@ FormGroup formBasicInformation() {
         'id': FormControl<String>(),
         'nameCardDragDrop': FormControl<String>(),
         'departmentName': FormControl<String>(),
-        'fullNameRomanji': FormControl<String>(),
+        'fullNameRomanji': FormControl<String>(
+          validators: [Validators.required],
+        ),
         'fullNameChineseKanjiVietnameseNotation': FormControl<String>(),
         'fullNameJapaneseKanjiChineseOnly': FormControl<String>(),
         'fullNameKana': FormControl<String>(),
-        'phoneNumber': FormControl<String>(),
-        'email': FormControl<String>(),
+        'phoneNumber': FormControl<String>(
+          validators: [Validators.required],
+        ),
+        'email': FormControl<String>(
+          validators: [Validators.required],
+        ),
         'contactMethods': FormArray([
           FormGroup({
             'id': FormControl<String>(),

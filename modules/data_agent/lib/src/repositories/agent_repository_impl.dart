@@ -38,8 +38,8 @@ class AgentRepositoryIml extends AgentRepository {
   }
 
   @override
-  Future<List<AgentManagerResponse>> getAgentManagers() {
-    return remote.getAgentManagers();
+  Future<List<AgentManagerResponse>> getAgentManagers({String? agentRecord}) {
+    return remote.getAgentManagers(agentRecord: agentRecord);
   }
 
   @override

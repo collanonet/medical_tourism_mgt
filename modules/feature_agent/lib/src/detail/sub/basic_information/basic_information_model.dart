@@ -23,6 +23,7 @@ class AgentBasicInformationModel {
       try {
         agent.value = const AsyncData(loading: true);
         var response = await authRepository.getAgent(id);
+        getAgentManagers(response.id, formGroup);
         agent.value = AsyncData(data: response);
         insertAgentDataToForm(response, formGroup);
       } catch (error) {
@@ -118,6 +119,144 @@ class AgentBasicInformationModel {
     } catch (error) {
       logger.e(error);
       agent.value = AsyncData(error: error);
+    }
+
+    if (agent.value.hasData) {
+      createOrUpdateAgentManager(formGroup);
+    }
+  }
+
+  ValueNotifier<AsyncData<List<AgentManagerResponse>>> agentManager =
+      ValueNotifier(const AsyncData());
+
+  void getAgentManagers(String agentRecord, FormGroup formGroup) async {
+    try {
+      agentManager.value = const AsyncData(loading: true);
+      var response =
+          await authRepository.getAgentManagers(agentRecord: agentRecord);
+      agentManager.value = AsyncData(data: response);
+      insertAgentManagerDataToForm(response, formGroup);
+    } catch (error) {
+      agentManager.value = AsyncData(error: error);
+    }
+  }
+
+  void insertAgentManagerDataToForm(
+      List<AgentManagerResponse> response, FormGroup formGroup) {
+    FormArray manager = formGroup.control('manager') as FormArray;
+    manager.clear();
+    if (response.isNotEmpty) {
+      for (var element in response) {
+        FormArray contactMethods =
+            element.contactMethods != null && element.contactMethods!.isNotEmpty
+                ? FormArray(
+                    element.contactMethods!.map((e) {
+                      return FormGroup({
+                        'id': FormControl<String>(value: e.id),
+                        'howToContact':
+                            FormControl<String>(value: e.howToContact),
+                        'howToContactQrCode':
+                            FormControl<String>(value: e.howToContactQrCode),
+                      });
+                    }).toList(),
+                  )
+                : FormArray([
+                    FormGroup({
+                      'id': FormControl<String>(),
+                      'howToContact': FormControl<String>(),
+                      'howToContactQrCode': FormControl<String>(),
+                    }),
+                  ]);
+        manager.add(
+          FormGroup({
+            'id': FormControl<String>(value: element.id),
+            'nameCardDragDrop':
+                FormControl<String>(value: element.nameCardDragDrop),
+            'departmentName':
+                FormControl<String>(value: element.departmentName),
+            'fullNameRomanji':
+                FormControl<String>(value: element.fullNameRomanji),
+            'fullNameChineseKanjiVietnameseNotation': FormControl<String>(
+                value: element.fullNameChineseKanjiVietnameseNotation),
+            'fullNameJapaneseKanjiChineseOnly': FormControl<String>(
+                value: element.fullNameJapaneseKanjiChineseOnly),
+            'fullNameKana': FormControl<String>(value: element.fullNameKana),
+            'phoneNumber': FormControl<String>(value: element.phoneNumber),
+            'email': FormControl<String>(value: element.email),
+            'contactMethods': contactMethods,
+          }),
+        );
+      }
+    } else {
+      manager.add(FormGroup({
+        'id': FormControl<String>(),
+        'nameCardDragDrop': FormControl<String>(),
+        'departmentName': FormControl<String>(),
+        'fullNameRomanji': FormControl<String>(
+          validators: [Validators.required],
+        ),
+        'fullNameChineseKanjiVietnameseNotation': FormControl<String>(),
+        'fullNameJapaneseKanjiChineseOnly': FormControl<String>(),
+        'fullNameKana': FormControl<String>(),
+        'phoneNumber': FormControl<String>(
+          validators: [Validators.required],
+        ),
+        'email': FormControl<String>(
+          validators: [Validators.required],
+        ),
+        'contactMethods': FormArray([
+          FormGroup({
+            'id': FormControl<String>(),
+            'howToContact': FormControl<String>(),
+            'howToContactQrCode': FormControl<String>(),
+          }),
+        ]),
+      }));
+    }
+  }
+
+  void createOrUpdateAgentManager(FormGroup formGroup) async {
+    try {
+      agentManager.value = const AsyncData(loading: true);
+
+      await formGroup.control('manager').value.forEach((element) async {
+        List<AgentManagerRequest> manager = [];
+
+        List<AgentManagerContactRequest> contactMethods = [];
+        element['contactMethods'].forEach((e) {
+          contactMethods.add(AgentManagerContactRequest(
+            id: e['id'],
+            howToContact: e['howToContact'],
+            howToContactQrCode: e['howToContactQrCode'],
+          ));
+        });
+
+        manager.add(AgentManagerRequest(
+          nameCardDragDrop: element['nameCardDragDrop'],
+          departmentName: element['departmentName'],
+          fullNameRomanji: element['fullNameRomanji'],
+          fullNameChineseKanjiVietnameseNotation:
+              element['fullNameChineseKanjiVietnameseNotation'],
+          fullNameJapaneseKanjiChineseOnly:
+              element['fullNameJapaneseKanjiChineseOnly'],
+          fullNameKana: element['fullNameKana'],
+          phoneNumber: element['phoneNumber'],
+          email: element['email'],
+          contactMethods: contactMethods,
+          agentRecord: agent.value.requireData.id,
+        ));
+
+        if (element['id'] != null) {
+          await authRepository.putAgentManager(element['id'], manager.first);
+        } else {
+          await authRepository.postAgentManager(manager.first);
+        }
+      });
+
+      agentManager.value = agentManager.value.copyWith(loading: false);
+    } catch (error) {
+      logger.e(error);
+      agentManager.value = AsyncData(error: error);
     }
   }
 }

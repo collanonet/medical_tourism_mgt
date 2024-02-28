@@ -31,8 +31,8 @@ class AgentRemoteProvider {
     return await apiService.deleteAgent(id);
   }
 
-  Future<List<AgentManagerResponse>> getAgentManagers() async {
-    return await apiService.getAgentManagers();
+  Future<List<AgentManagerResponse>> getAgentManagers({String? agentRecord}) async {
+    return await apiService.getAgentManagers(agentRecord: agentRecord);
   }
 
   Future<AgentManagerResponse> getAgentManager(String id) async {

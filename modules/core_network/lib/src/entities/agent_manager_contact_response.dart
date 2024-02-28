@@ -8,15 +8,12 @@ class AgentManagerContactResponse {
   final String id;
   String? howToContact;
   String? howToContactQrCode;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+
 
   AgentManagerContactResponse({
     required this.id,
     this.howToContact,
     this.howToContactQrCode,
-    required this.createdAt,
-    required this.updatedAt,
   });
 
   factory AgentManagerContactResponse.fromJson(Map<String, dynamic> json) {
