@@ -3,8 +3,11 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import '../feature_agent.gm.dart';
+import 'agent_model.dart';
 import 'filter_agent.dart';
 
 class AgentScreen extends StatelessWidget {
@@ -23,7 +26,7 @@ class AgentScreen extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                context.router.push(const AgentDetailRoute());
+                context.router.push(AgentDetailRoute());
               },
               child: Text('新規登録'),
             ),
@@ -90,79 +93,118 @@ class AgentScreen extends StatelessWidget {
                       ]),
                 ),
                 Expanded(
-                    child: ListView.builder(
-                        itemCount: 40,
-                        itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {
-                              context.router.push(const AgentDetailRoute());
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                color: index.isEven
-                                    ? context.appTheme.primaryColor
-                                        .withOpacity(0.1)
-                                    : Colors.white,
-                              ),
-                              padding: const EdgeInsets.all(8.0),
-                              child: RowSeparated(
-                                  separatorBuilder:
-                                      (BuildContext context, int index) {
-                                    return const SizedBox(width: 16);
-                                  },
-                                  children: [
-                                    Expanded(
-                                      flex: 2,
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            'LIU　WEIQIANG ',
-                                            style: context.textTheme.bodyMedium,
-                                          ),
-                                          Text(
-                                            '刘 伟强 / 劉 偉強',
-                                            style: context.textTheme.bodySmall,
-                                          ),
-                                        ],
+                    child: ValueListenableBuilder(
+                        valueListenable: context.read<AgentModel>().agents,
+                        builder: (context, value, child) {
+                          return Skeletonizer(
+                            enabled: value.loading,
+                            child: ListView.builder(
+                                itemCount: value.data?.length ?? 0,
+                                itemBuilder: (context, index) {
+                                  return InkWell(
+                                    onTap: () {
+                                      context.router.push(AgentDetailRoute(
+                                          id: value.requireData[index].id
+                                              .toString()));
+                                    },
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        color: index.isEven
+                                            ? context.appTheme.primaryColor
+                                                .withOpacity(0.1)
+                                            : Colors.white,
                                       ),
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: RowSeparated(
+                                          separatorBuilder:
+                                              (BuildContext context,
+                                                  int index) {
+                                            return const SizedBox(width: 16);
+                                          },
+                                          children: [
+                                            Expanded(
+                                              flex: 2,
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                children: [
+                                                  Text(
+                                                    'LIU　WEIQIANG ',
+                                                    style: context
+                                                        .textTheme.bodyMedium,
+                                                  ),
+                                                  Text(
+                                                    '刘 伟强 / 劉 偉強',
+                                                    style: context
+                                                        .textTheme.bodySmall,
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 2,
+                                              child: Text(
+                                                value.requireData[index]
+                                                        .companyName ??
+                                                    '--',
+                                                style: context
+                                                    .textTheme.bodyMedium,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                value.requireData[index].area ??
+                                                    '--',
+                                                style: context
+                                                    .textTheme.bodyMedium,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                value.requireData[index]
+                                                        .pastCasesNumber
+                                                        ?.toString() ??
+                                                    '--',
+                                                style: context
+                                                    .textTheme.bodyMedium,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                value
+                                                        .requireData[index]
+                                                        .referralCommissions
+                                                        ?.firstOrNull
+                                                        ?.referralCommissionName ??
+                                                    '--',
+                                                style: context
+                                                    .textTheme.bodyMedium,
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                value
+                                                            .requireData[index]
+                                                            .referralCommissions!
+                                                            .length >
+                                                        1
+                                                    ? value
+                                                            .requireData[index]
+                                                            .referralCommissions![
+                                                                1]
+                                                            .referralCommissionName ??
+                                                        '--'
+                                                    : '--',
+                                                style: context
+                                                    .textTheme.bodyMedium,
+                                              ),
+                                            ),
+                                          ]),
                                     ),
-                                    Expanded(
-                                      flex: 2,
-                                      child: Text(
-                                        '大瀚人力资源集团',
-                                        style: context.textTheme.bodyMedium,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        '中国',
-                                        style: context.textTheme.bodyMedium,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        '2',
-                                        style: context.textTheme.bodyMedium,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        'WeChat',
-                                        style: context.textTheme.bodyMedium,
-                                      ),
-                                    ),
-                                    Expanded(
-                                      child: Text(
-                                        'LINE',
-                                        style: context.textTheme.bodyMedium,
-                                      ),
-                                    ),
-                                  ]),
-                            ),
+                                  );
+                                }),
                           );
                         })),
               ],

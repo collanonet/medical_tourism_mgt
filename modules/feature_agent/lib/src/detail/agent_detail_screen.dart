@@ -1,12 +1,13 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
 import 'sub/basic_information/basic_information_page.dart';
 
 class AgentDetailScreen extends StatefulWidget {
-  const AgentDetailScreen({super.key});
-
+  const AgentDetailScreen({super.key, this.id});
+  final String? id;
   @override
   State<AgentDetailScreen> createState() => _AgentDetailScreenState();
 }
@@ -19,12 +20,19 @@ class _AgentDetailScreenState extends State<AgentDetailScreen> {
     '見積書・請求書', // Estimate/Invoice
   ];
 
-  List<Widget> pages = <Widget>[
-    const AgentBasicInformationPage(),
-    const Placeholder(),
-    const Placeholder(),
-    const Placeholder(),
-  ];
+  late List<Widget> pages;
+
+  @override
+  void initState() {
+    super.initState();
+    logger.d('widget.id: ${widget.id}');
+    pages = <Widget>[
+      AgentBasicInformationPage(id: widget.id),
+      Container(),
+      Container(),
+      Container(),
+    ];
+  }
 
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 

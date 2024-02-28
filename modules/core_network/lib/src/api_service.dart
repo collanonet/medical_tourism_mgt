@@ -590,6 +590,54 @@ abstract class ApiService {
     @Path('id') String id,
     @Body() WebBookingMedicalRecordRequest webBookingMedicalRecordRequest,
   );
+
+  @GET(Apis.AGENTS)
+  Future<List<AgentResponse>> getAgents();
+
+  @GET('${Apis.AGENTS}/{id}')
+  Future<AgentResponse> getAgent(
+    @Path('id') String id,
+  );
+
+  @POST(Apis.AGENTS)
+  Future<AgentResponse> postAgent(
+    @Body() AgentRequest agentRequest,
+  );
+
+  @PUT('${Apis.AGENTS}/{id}')
+  Future<AgentResponse> putAgent(
+    @Path('id') String id,
+    @Body() AgentRequest agentRequest,
+  );
+
+  @DELETE('${Apis.AGENTS}/{id}')
+  Future<void> deleteAgent(
+    @Path('id') String id,
+  );
+
+  @GET(Apis.AGENT_MANAGER)
+  Future<List<AgentManagerResponse>> getAgentManagers();
+
+  @GET('${Apis.AGENT_MANAGER}/{id}')
+  Future<AgentManagerResponse> getAgentManager(
+    @Path('id') String id,
+  );
+
+  @POST(Apis.AGENT_MANAGER)
+  Future<AgentManagerResponse> postAgentManager(
+    @Body() AgentManagerRequest agentManagerRequest,
+  );
+
+  @PUT('${Apis.AGENT_MANAGER}/{id}')
+  Future<AgentManagerResponse> putAgentManager(
+    @Path('id') String id,
+    @Body() AgentManagerRequest agentManagerRequest,
+  );
+
+  @DELETE('${Apis.AGENT_MANAGER}/{id}')
+  Future<void> deleteAgentManager(
+    @Path('id') String id,
+  );
 }
 
 extension ApiServiceExts on ApiService {

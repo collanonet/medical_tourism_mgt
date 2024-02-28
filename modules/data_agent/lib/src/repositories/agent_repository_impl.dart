@@ -17,4 +17,55 @@ class AgentRepositoryIml extends AgentRepository {
   final AgentRemoteProvider remote;
   final AgentLocalProvider local;
 
+  @override
+  Future<void> deleteAgent(String id) {
+    return remote.deleteAgent(id);
+  }
+
+  @override
+  Future<void> deleteAgentManager(String id) {
+    return remote.deleteAgentManager(id);
+  }
+
+  @override
+  Future<AgentResponse> getAgent(String id) {
+    return remote.getAgent(id);
+  }
+
+  @override
+  Future<AgentManagerResponse> getAgentManager(String id) {
+    return remote.getAgentManager(id);
+  }
+
+  @override
+  Future<List<AgentManagerResponse>> getAgentManagers() {
+    return remote.getAgentManagers();
+  }
+
+  @override
+  Future<List<AgentResponse>> getAgents() {
+    return remote.getAgents();
+  }
+
+  @override
+  Future<AgentResponse> postAgent(AgentRequest agent) {
+    return remote.postAgent(agent);
+  }
+
+  @override
+  Future<AgentManagerResponse> postAgentManager(
+      AgentManagerRequest agentManager) {
+    return remote.postAgentManager(agentManager);
+  }
+
+  @override
+  Future<AgentResponse> putAgent(String id, AgentRequest agent) {
+    return remote.putAgent(id, agent);
+  }
+
+  @override
+  Future<AgentManagerResponse> putAgentManager(
+      String id, AgentManagerRequest agentManager) {
+    return remote.putAgentManager(id, agentManager);
+  }
 }

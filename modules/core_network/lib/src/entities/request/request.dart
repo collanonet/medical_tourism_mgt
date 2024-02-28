@@ -12,3 +12,7 @@ export 'medical_record_referrer_request.dart';
 export 'patient_nationality_request.dart';
 export 'patient_passport_request.dart';
 export 'pre_patient_request.dart';
+export 'agent_manager_contact_request.dart';
+export 'agent_manager_request.dart';
+export 'agent_referral_commission_request.dart';
+export 'agent_request.dart';

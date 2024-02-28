@@ -7,7 +7,9 @@ FormGroup formBasicInformation() {
     'companyName': FormControl<String>(
       validators: [Validators.required],
     ),
-    'nameKana': FormControl<String>(),
+    'nameKana': FormControl<String>(
+      validators: [Validators.required],
+    ),
     'postalCode': FormControl<String>(),
     'address': FormControl<String>(),
     'area': FormControl<String>(),
@@ -17,7 +19,7 @@ FormGroup formBasicInformation() {
       FormGroup({
         'id': FormControl<String>(),
         'referralCommissionName': FormControl<String>(),
-        'referralCommission': FormControl<String>(),
+        'referralCommission': FormControl<int>(),
       }),
     ]),
     'howToMainPayment': FormControl<String>(),
