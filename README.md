@@ -15,7 +15,7 @@
 
 ## Debuging
 
-`fvm flutter run -d chrome --web-port 5555`
+`fvm flutter run -d chrome --web-port 5555 -t lib/main_dev.dart`
 
 ## Deployment Process
 
