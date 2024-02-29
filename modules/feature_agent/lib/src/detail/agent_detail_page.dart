@@ -9,15 +9,15 @@ import 'agent_detail_screen.dart';
 
 @RoutePage()
 class AgentDetailPage extends StatelessWidget {
-  const AgentDetailPage({super.key});
-
+  const AgentDetailPage({super.key, this.id});
+  final String? id;
   @override
   Widget build(BuildContext context) {
     return Provider(
       create: (context) => GetIt.I<AgentDetailModel>(),
-      child: const LayoutView(
+      child: LayoutView(
         selectedIndex: 6,
-        page: AgentDetailScreen(),
+        page: AgentDetailScreen(id: id),
       ),
     );
   }

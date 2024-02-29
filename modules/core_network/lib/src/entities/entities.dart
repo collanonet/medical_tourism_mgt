@@ -36,3 +36,7 @@ export 'web_booking_patient_preferred_date.dart';
 export 'type_request.dart';
 export 'type_response.dart';
 export 'web_booking_medical_record.dart';
+export 'agent_manager_contact_response.dart';
+export 'agent_manager_response.dart';
+export 'agent_referral_commission_response.dart';
+export 'agent_response.dart';

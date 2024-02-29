@@ -11,14 +11,20 @@
 import 'package:auto_route/auto_route.dart' as _i3;
 import 'package:feature_agent/src/agent_page.dart' as _i2;
 import 'package:feature_agent/src/detail/agent_detail_page.dart' as _i1;
+import 'package:flutter/material.dart' as _i4;
 
 abstract class $FeatureAgentRouterModule extends _i3.AutoRouterModule {
   @override
   final Map<String, _i3.PageFactory> pagesMap = {
     AgentDetailRoute.name: (routeData) {
+      final args = routeData.argsAs<AgentDetailRouteArgs>(
+          orElse: () => const AgentDetailRouteArgs());
       return _i3.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.AgentDetailPage(),
+        child: _i1.AgentDetailPage(
+          key: args.key,
+          id: args.id,
+        ),
       );
     },
     AgentsRoute.name: (routeData) {
@@ -32,16 +38,40 @@ abstract class $FeatureAgentRouterModule extends _i3.AutoRouterModule {
 
 /// generated route for
 /// [_i1.AgentDetailPage]
-class AgentDetailRoute extends _i3.PageRouteInfo<void> {
-  const AgentDetailRoute({List<_i3.PageRouteInfo>? children})
-      : super(
+class AgentDetailRoute extends _i3.PageRouteInfo<AgentDetailRouteArgs> {
+  AgentDetailRoute({
+    _i4.Key? key,
+    String? id,
+    List<_i3.PageRouteInfo>? children,
+  }) : super(
           AgentDetailRoute.name,
+          args: AgentDetailRouteArgs(
+            key: key,
+            id: id,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'AgentDetailRoute';
 
-  static const _i3.PageInfo<void> page = _i3.PageInfo<void>(name);
+  static const _i3.PageInfo<AgentDetailRouteArgs> page =
+      _i3.PageInfo<AgentDetailRouteArgs>(name);
+}
+
+class AgentDetailRouteArgs {
+  const AgentDetailRouteArgs({
+    this.key,
+    this.id,
+  });
+
+  final _i4.Key? key;
+
+  final String? id;
+
+  @override
+  String toString() {
+    return 'AgentDetailRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for

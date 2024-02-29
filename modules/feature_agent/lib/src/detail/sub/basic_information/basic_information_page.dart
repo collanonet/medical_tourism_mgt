@@ -10,8 +10,8 @@ import 'basic_information_model.dart';
 import 'basic_information_screen.dart';
 
 class AgentBasicInformationPage extends StatelessWidget {
-  const AgentBasicInformationPage({super.key});
-
+  const AgentBasicInformationPage({super.key, this.id});
+  final String? id;
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
@@ -22,7 +22,11 @@ class AgentBasicInformationPage extends StatelessWidget {
         form: () => formBasicInformation()..markAllAsTouched(),
         builder: (context, formGroup, child) {
           return Provider(
-            create: (context) => GetIt.I<AgentBasicInformationModel>(),
+            create: (context) => GetIt.I<AgentBasicInformationModel>()
+              ..init(
+                id: id,
+                formGroup: formGroup,
+              ),
             child: ColumnSeparated(
               separatorBuilder: (BuildContext context, int index) {
                 return SizedBox(height: 10);
@@ -32,10 +36,18 @@ class AgentBasicInformationPage extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text('保存する'),
-                    ),
+                    ReactiveFormConsumer(builder: (context, form, child) {
+                      return ElevatedButton(
+                        onPressed: form.invalid
+                            ? null
+                            : () {
+                                context
+                                    .read<AgentBasicInformationModel>()
+                                    .createOrUpdateAgent(formGroup);
+                              },
+                        child: const Text('保存する'),
+                      );
+                    }),
                   ],
                 ),
               ],
