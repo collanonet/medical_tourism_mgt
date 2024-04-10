@@ -5,18 +5,18 @@ packages:
     dependency: transitive
     description:
       name: _fe_analyzer_shared
-      sha256: eb376e9acf6938204f90eb3b1f00b578640d3188b4c8a8ec054f9f479af8d051
+      sha256: "0b2f2bd91ba804e53a61d757b986f89f1f9eaed5b11e4b2f5a2468d86d6c9fc7"
       url: "https://pub.dev"
     source: hosted
-    version: "64.0.0"
+    version: "67.0.0"
   analyzer:
     dependency: transitive
     description:
       name: analyzer
-      sha256: "69f54f967773f6c26c7dcb13e93d7ccee8b17a641689da39e878d5cf13b06893"
+      sha256: "37577842a27e4338429a1cbc32679d508836510b056f1eedf0c8d20e39c1383d"
       url: "https://pub.dev"
     source: hosted
-    version: "6.2.0"
+    version: "6.4.1"
   animated_toggle_switch:
     dependency: "direct main"
     description:
@@ -252,10 +252,10 @@ packages:
     dependency: transitive
     description:
       name: code_builder
-      sha256: b2151ce26a06171005b379ecff6e08d34c470180ffe16b8e14b6d52be292b55f
+      sha256: f692079e25e7869c14132d39f223f8eec9830eb76131925143b2129c4bb01b37
       url: "https://pub.dev"
     source: hosted
-    version: "4.8.0"
+    version: "4.10.0"
   collection:
     dependency: transitive
     description:
@@ -591,10 +591,10 @@ packages:
     dependency: "direct main"
     description:
       name: file_picker
-      sha256: "4e42aacde3b993c5947467ab640882c56947d9d27342a5b6f2895b23956954a6"
+      sha256: d1d0ac3966b36dc3e66eeefb40280c17feb87fa2099c6e22e6a1fc959327bd03
       url: "https://pub.dev"
     source: hosted
-    version: "6.1.1"
+    version: "8.0.0+1"
   file_selector_linux:
     dependency: transitive
     description:
@@ -739,10 +739,10 @@ packages:
     dependency: transitive
     description:
       name: geolocator
-      sha256: e946395fc608842bb2f6c914807e9183f86f3cb787f6b8f832753e5251036f02
+      sha256: "694ec58afe97787b5b72b8a0ab78c1a9244811c3c10e72c4362ef3c0ceb005cd"
       url: "https://pub.dev"
     source: hosted
-    version: "10.1.0"
+    version: "11.0.0"
   geolocator_android:
     dependency: transitive
     description:
@@ -771,10 +771,10 @@ packages:
     dependency: transitive
     description:
       name: geolocator_web
-      sha256: "59083f7e0871b78299918d92bf930a14377f711d2d1156c558cd5ebae6c20d58"
+      sha256: "49d8f846ebeb5e2b6641fe477a7e97e5dd73f03cbfef3fd5c42177b7300fb0ed"
       url: "https://pub.dev"
     source: hosted
-    version: "2.2.0"
+    version: "3.0.0"
   geolocator_windows:
     dependency: transitive
     description:
@@ -787,10 +787,10 @@ packages:
     dependency: "direct main"
     description:
       name: get_it
-      sha256: e6017ce7fdeaf218dc51a100344d8cb70134b80e28b760f8bb23c242437bafd7
+      sha256: "36524bfb3f0b4ec952c3202466fdd69ad1f7ac1dd9b0a7564177707e45bfaeb9"
       url: "https://pub.dev"
     source: hosted
-    version: "7.6.7"
+    version: "7.6.8"
   glob:
     dependency: transitive
     description:
@@ -963,18 +963,18 @@ packages:
     dependency: "direct main"
     description:
       name: injectable
-      sha256: cd3c422e13270c81f64ab73c80406b2b2ed563fe59d0ff2093eb7eee63d0bbeb
+      sha256: "3d98967224a5fdd4094a61bf53ed9616c3fbcf3e090bf83e7cb7d436d0c20041"
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.2"
+    version: "2.4.1"
   injectable_generator:
     dependency: "direct dev"
     description:
       name: injectable_generator
-      sha256: f9d3c05f0938403f79ad6c6d23ec8e37a7a05ad980b1bf9399493f3e41845788
+      sha256: "2ca3ada337eac0ef6b82f8049c970ddb63947738fdf32ac6cbef8d1567d7ba05"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.1"
+    version: "2.6.1"
   intl:
     dependency: "direct main"
     description:
@@ -1227,10 +1227,10 @@ packages:
     dependency: transitive
     description:
       name: pinput
-      sha256: "543da5bfdefd9e06914a12100f8c9156f84cef3efc14bca507c49e966c5b813b"
+      sha256: a92b55ecf9c25d1b9e100af45905385d5bc34fc9b6b04177a9e82cb88fe4d805
       url: "https://pub.dev"
     source: hosted
-    version: "2.3.0"
+    version: "3.0.1"
   platform:
     dependency: transitive
     description:
@@ -1243,10 +1243,10 @@ packages:
     dependency: transitive
     description:
       name: plugin_platform_interface
-      sha256: f4f88d4a900933e7267e2b353594774fc0d07fb072b47eedcd5b54e1ea3269f8
+      sha256: "4820fbfdb9478b1ebae27888254d445073732dae3d6ea81f0b7e06d5dedc3f02"
       url: "https://pub.dev"
     source: hosted
-    version: "2.1.7"
+    version: "2.1.8"
   pointycastle:
     dependency: transitive
     description:
@@ -1363,18 +1363,18 @@ packages:
     dependency: transitive
     description:
       name: reactive_forms
-      sha256: "5aa9c48a0626c20d00a005e597cb10efbdebbfeecb9c4227b03a5945fbb91ec4"
+      sha256: b7d64d8fe45c19f506c762e219f4c6a3bdcfc4842d6fba98f866be5fca75d8e5
       url: "https://pub.dev"
     source: hosted
-    version: "14.3.0"
+    version: "16.1.1"
   reactive_pinput:
     dependency: transitive
     description:
       name: reactive_pinput
-      sha256: ba5b0d2f44c7322d9ee7cc0866382569d598623a265704604241148c8590c7a9
+      sha256: b026ab57b2f57f11cd6d347f123fffbef8852a19cfb3e421e16d02abdda20529
       url: "https://pub.dev"
     source: hosted
-    version: "0.9.0"
+    version: "3.0.0"
   recase:
     dependency: transitive
     description:

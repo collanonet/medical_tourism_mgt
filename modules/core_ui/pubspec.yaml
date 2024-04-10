@@ -16,10 +16,10 @@ dependencies:
   core_network: 0.0.1-alpha.1
   core_l10n: 0.0.1-alpha.1
   core_storage: 0.0.1-alpha.1
-  reactive_forms: ^14.3.0
+  reactive_forms: ^16.1.1
   mask_text_input_formatter: ^2.4.0
   webview_flutter: ^4.2.2
-  auto_route: ^7.7.0
+  auto_route: ^7.8.3
   google_fonts: ^6.1.0
   material_design_icons_flutter: ^7.0.7296
   dotted_line: ^3.2.2
@@ -27,7 +27,7 @@ dependencies:
   bot_toast: ^4.0.4
   cached_network_image: ^3.2.3
   flutter_svg: ^2.0.7
-  reactive_pinput: ^0.9.0
+  reactive_pinput: ^3.0.0
   flutter_speed_dial: ^7.0.0
   collection: ^1.17.2
 
@@ -35,7 +35,7 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^3.0.1
-  build_runner: ^2.4.8
+  build_runner: ^2.4.6
   icon_font_generator: ^4.0.0
 
 flutter:
