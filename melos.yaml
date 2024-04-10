@@ -96,8 +96,8 @@ scripts:
     description: "Generate assets of images and icons"
     run: |
       melos exec --scope="core_ui" -- spider build && ^
-      melos exec --scope="core_ui" -- fvm flutter pub run icon_font_generator --from=assets/icons --package=core_ui --class-name=UiIcons --out-font=assets/fonts/UiIcons.ttf --out-flutter=lib/src/resources/ui_icons.dart --normalize
-  gen_appicon_win: 
+      melos exec --scope="core_ui" -- fvm flutter pub run icon_font_generator:generator
+  gen_appicon_win:
     description: "Generate app icon for android and ios"
     run: |
       melos exec -c 6 --fail-fast -- fvm flutter pub run flutter_launcher_icons -f flutter_launcher_icons*
