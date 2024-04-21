@@ -56,6 +56,7 @@ abstract class RestModule {
   @production
   @Named('baseUrl')
   Uri get prodBaseUrl => Uri();
+
 }
 
 class MerchantInterceptor extends Interceptor {}

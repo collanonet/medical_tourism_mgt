@@ -19,8 +19,10 @@ class DataPatientPackageModule extends _i1.MicroPackageModule {
   @override
   _i2.FutureOr<void> init(_i1.GetItHelper gh) {
     gh.factory<_i3.PatientLocalProvider>(() => _i3.PatientLocalProvider());
-    gh.factory<_i4.PatientRemoteProvider>(
-        () => _i4.PatientRemoteProvider(apiService: gh<_i5.ApiService>()));
+    gh.factory<_i4.PatientRemoteProvider>(() => _i4.PatientRemoteProvider(
+          apiService: gh<_i5.ApiService>(),
+          fileUploadService: gh<_i5.FileUploadService>(),
+        ));
     gh.factory<_i6.PatientRepository>(() => _i7.PatientRepositoryIml(
           remote: gh<_i4.PatientRemoteProvider>(),
           local: gh<_i3.PatientLocalProvider>(),

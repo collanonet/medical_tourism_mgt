@@ -14,7 +14,13 @@ FormGroup formBasicInformation() {
     'address': FormControl<String>(),
     'area': FormControl<String>(),
     'phoneNumber': FormControl<String>(),
-    'transactionStartDate': FormControl<DateTime>(),
+    'transactionStartDate': FormControl<DateTime>(
+      validators: [
+        Validators.pattern(
+          r'^\d(4)\/(0?(1-9)|1(012))\/(0? (1-9)|(12)(0-9)|3(01))$',
+        ),
+      ],
+    ),
     'referralCommissions': FormArray([
       FormGroup({
         'id': FormControl<String>(),

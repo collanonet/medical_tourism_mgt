@@ -8,13 +8,16 @@ import 'dart:async' as _i2;
 
 import 'package:injectable/injectable.dart' as _i1;
 
-import 'core_network.dart' as _i4;
-import 'src/api_service.dart' as _i3;
+import 'core_network.dart' as _i5;
+import 'src/api_service.dart' as _i4;
+import 'src/file_upload.dart' as _i3;
 
 class CoreNetworkPackageModule extends _i1.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
   @override
   _i2.FutureOr<void> init(_i1.GetItHelper gh) {
-    gh.singleton<_i3.ApiService>(() => _i3.ApiService(gh<_i4.RestClient>()));
+    gh.lazySingleton<_i3.FileUploadService>(
+        () => _i3.FileUploadService(gh<Uri>(instanceName: 'baseUrl')));
+    gh.singleton<_i4.ApiService>(() => _i4.ApiService(gh<_i5.RestClient>()));
   }
 }

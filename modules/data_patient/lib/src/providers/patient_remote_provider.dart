@@ -1,5 +1,5 @@
-import 'dart:io';
-
+import 'dart:typed_data';
+import 'package:universal_io/io.dart';
 import 'package:core_network/core_network.dart';
 import 'package:injectable/injectable.dart';
 
@@ -7,14 +7,17 @@ import 'package:injectable/injectable.dart';
 class PatientRemoteProvider {
   PatientRemoteProvider({
     required this.apiService,
+    required this.fileUploadService,
   });
 
   final ApiService apiService;
+  final FileUploadService fileUploadService;
 
   Future<String> uploadFile(
-    File file,
+    Uint8List file,
+    String token,
   ) async =>
-      await apiService.uploadFile(file);
+      await fileUploadService.uploadFile(file, token);
 
   Future<Paginated<PrePatient>> prePatients({
     int? page,

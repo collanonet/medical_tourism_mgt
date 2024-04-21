@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
@@ -18,8 +19,11 @@ class PatientRepositoryIml extends PatientRepository {
   final PatientLocalProvider local;
 
   @override
-  Future<String> uploadFile(File file) {
-    return remote.uploadFile(file);
+  Future<String> uploadFile(
+    Uint8List file,
+    String token,
+  ) {
+    return remote.uploadFile(file, token);
   }
 
   //GET_PRE_PATIENTS
@@ -31,8 +35,6 @@ class PatientRepositoryIml extends PatientRepository {
     String? agents,
     String? patient,
   }) {
-
-
     return remote.prePatients(
       page: page,
       limit: limit,

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
@@ -38,7 +39,7 @@ abstract class ApiService {
   Future<AuthData> logOut();
 
   @POST('/files/upload')
-  Future<String> uploadFile(@Part() File file);
+  Future<FileResponse> uploadFile(@Part() File file);
 
   //GET_PRE_PATIENTS
 

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
@@ -22,17 +23,6 @@ class CreateMedicalOverseaDataWithUrlScreen extends StatefulWidget {
 class _CreateMedicalOverseaDataWithUrlScreenState
     extends State<CreateMedicalOverseaDataWithUrlScreen> {
   bool isSaveurl = false;
-
-  Future<File?> pickFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
-
-    if (result != null) {
-      File file = File(result.files.single.path!);
-      return file;
-    } else {
-      return null;
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -117,13 +107,13 @@ class _CreateMedicalOverseaDataWithUrlScreenState
                     width: context.appTheme.spacing.marginMedium,
                   ),
                   Expanded(
-                    child: ReactiveValueListenableBuilder<File>(
+                    child: ReactiveValueListenableBuilder<Uint8List>(
                         formControlName: 'qrCode',
                         builder: (context, control, _) {
                           logger.d('control.valid: ${control.valid}');
                           return InkWell(
                             onTap: () {
-                              pickFile().then((value) {
+                              filePicker().then((value) {
                                 if (value != null) {
                                   formGroup.control('qrCode').value = value;
                                   setState(() {});
@@ -141,7 +131,8 @@ class _CreateMedicalOverseaDataWithUrlScreenState
                                 )),
                                 image: control.value != null
                                     ? DecorationImage(
-                                        image: FileImage(control.value!),
+                                        image: MemoryImage(
+                                            control.value as Uint8List),
                                         fit: BoxFit.cover,
                                       )
                                     : null,
@@ -182,7 +173,7 @@ class _CreateMedicalOverseaDataWithUrlScreenState
                                         ),
                                         ElevatedButton(
                                           onPressed: () {
-                                            pickFile().then((value) {
+                                            filePicker().then((value) {
                                               if (value != null) {
                                                 formGroup
                                                     .control('qrCode')

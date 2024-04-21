@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:core_network/core_network.dart';
 
@@ -6,7 +6,8 @@ abstract class PatientRepository {
   //GET_PRE_PATIENTS
 
   Future<String> uploadFile(
-    File file,
+      Uint8List file,
+      String token,
   );
 
   Future<Paginated<PrePatient>> prePatients({

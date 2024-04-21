@@ -21,6 +21,7 @@ class BasicInformationPage extends StatelessWidget {
     return ReactiveFormConfig(
       validationMessages: <String, ValidationMessageFunction>{
         ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
+        ValidationMessage.pattern: (error) => '無効な形式',
       },
       child: ReactiveFormBuilder(
         form: () => basicInfoForm(patientId: patient?.id)..markAllAsTouched(),

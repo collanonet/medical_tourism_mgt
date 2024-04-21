@@ -520,7 +520,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                   Expanded(
                                       flex: 2,
                                       child: Row(
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         children: [
                                           if (formArray.controls
                                                   .indexOf(currentForm) !=
