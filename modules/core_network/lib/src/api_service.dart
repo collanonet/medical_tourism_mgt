@@ -39,7 +39,21 @@ abstract class ApiService {
   Future<AuthData> logOut();
 
   @POST('/files/upload')
-  Future<FileResponse> uploadFile(@Part() File file);
+  Future<FileResponse> uploadFile(
+    @Part() File file,
+  );
+
+  @POST('/files/upload-bytes')
+  Future<FileResponse> uploadFileBytes(
+    @Field('file') Uint8List file,
+    @Field('filename') String filename,
+  );
+
+  @POST('/files/upload-base64')
+  Future<FileResponse> uploadFileBase64(
+    @Field('file') String file,
+    @Field('filename') String filename,
+  );
 
   //GET_PRE_PATIENTS
 
@@ -617,13 +631,11 @@ abstract class ApiService {
   );
 
   @GET(Apis.AGENT_MANAGER)
-  Future<List<AgentManagerResponse>> getAgentManagers(
-  {
+  Future<List<AgentManagerResponse>> getAgentManagers({
     @Query('page') int? page,
     @Query('limit') int? limit,
     @Query('agentRecord') String? agentRecord,
-}
-  );
+  });
 
   @GET('${Apis.AGENT_MANAGER}/{id}')
   Future<AgentManagerResponse> getAgentManager(

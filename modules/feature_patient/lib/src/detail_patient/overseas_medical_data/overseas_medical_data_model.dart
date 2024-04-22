@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_auth/data_auth.dart';
@@ -101,9 +104,22 @@ class OverseasMedicalDataModel {
       createMedicalOverseaData.value = const AsyncData(loading: true);
       String? file;
       if (formGroup.control('file').value != null) {
+        // try {
+        //   file = await patientRepository.uploadFileDio(
+        //       formGroup.control('file').value, token ?? '');
+        // } catch (e) {
+        //   logger.e(e);
+        // }
+
         try {
-          file = await patientRepository.uploadFile(
-              formGroup.control('file').value, token ?? '');
+          // convert Uint8List to base64
+          Uint8List bytes = formGroup.control('file').value;
+          String base64Image = base64Encode(bytes);
+          FileResponse fileData = await patientRepository.uploadFileBase64(
+            base64Image,
+            '${DateTime.timestamp()}.png',
+          );
+          file = fileData.filename;
         } catch (e) {
           logger.e(e);
         }
@@ -112,9 +128,22 @@ class OverseasMedicalDataModel {
       String? qrCode;
 
       if (formGroup.control('qrCode').value != null) {
+        // try {
+        //   qrCode = await patientRepository.uploadFileDio(
+        //       formGroup.control('qrCode').value, token ?? '');
+        // } catch (e) {
+        //   logger.e(e);
+        // }
+
         try {
-          qrCode = await patientRepository.uploadFile(
-              formGroup.control('qrCode').value, token ?? '');
+          // convert Uint8List to base64
+          Uint8List bytes = formGroup.control('qrCode').value;
+          String base64Image = base64Encode(bytes);
+          FileResponse qrData = await patientRepository.uploadFileBase64(
+            base64Image,
+            '${DateTime.timestamp()}.png',
+          );
+          qrCode = qrData.filename;
         } catch (e) {
           logger.e(e);
         }

@@ -13,6 +13,7 @@ class FileUploadService {
     @Named('baseUrl') this.baseUrl,
   );
   Uri baseUrl;
+
   Future<String> uploadFile(Uint8List file, String token) async {
     if (file.isEmpty) {
       print('No file to upload');
@@ -36,6 +37,7 @@ class FileUploadService {
         headers: {
           HttpHeaders.authorizationHeader: 'Bearer $token',
           HttpHeaders.contentTypeHeader: 'multipart/form-data',
+          HttpHeaders.acceptHeader: 'application/json',
         },
       ));
 
@@ -47,13 +49,24 @@ class FileUploadService {
           headers: {
             HttpHeaders.authorizationHeader: 'Bearer $token',
             HttpHeaders.contentTypeHeader: 'multipart/form-data',
+            HttpHeaders.acceptHeader: 'application/json',
           },
         ),
       );
 
       return responseD.data['filename'];
     } catch (e) {
-      logger.e('Error uploading file: $e');
+      if (e is DioError) {
+        if (e.error is SocketException) {
+          print('Network error: ${e.error}');
+        } else if (e.response?.statusCode == 404) {
+          print('File not found: ${e.response?.data}');
+        } else {
+          print('Unknown error: ${e.error}');
+        }
+      } else {
+        print('Error uploading file: $e');
+      }
       return '';
     }
   }

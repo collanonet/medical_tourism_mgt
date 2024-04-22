@@ -13,11 +13,28 @@ class PatientRemoteProvider {
   final ApiService apiService;
   final FileUploadService fileUploadService;
 
-  Future<String> uploadFile(
+  Future<String> uploadFileDio(
     Uint8List file,
     String token,
   ) async =>
       await fileUploadService.uploadFile(file, token);
+
+  Future<FileResponse> uploadFile(
+    File file,
+  ) async =>
+      await apiService.uploadFile(file);
+
+  Future<FileResponse> uploadFileBytes(
+    Uint8List file,
+    String filename,
+  ) async =>
+      await apiService.uploadFileBytes(file, filename);
+
+  Future<FileResponse> uploadFileBase64(
+    String file,
+    String filename,
+  ) async =>
+      await apiService.uploadFileBase64(file, filename);
 
   Future<Paginated<PrePatient>> prePatients({
     int? page,

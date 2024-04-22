@@ -140,6 +140,72 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<FileResponse> uploadFileBytes(
+    Uint8List file,
+    String filename,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'file': file,
+      'filename': filename,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<FileResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/files/upload-bytes',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = FileResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<FileResponse> uploadFileBase64(
+    String file,
+    String filename,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {
+      'file': file,
+      'filename': filename,
+    };
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<FileResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/files/upload-base64',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = FileResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<Paginated<PrePatient>> prePatients({
     int? page,
     int? limit,
