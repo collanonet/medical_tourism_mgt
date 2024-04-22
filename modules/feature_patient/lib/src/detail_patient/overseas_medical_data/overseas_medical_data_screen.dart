@@ -212,7 +212,7 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                       value.requireData[index];
                                   return InkWell(
                                     onTap: () {
-                                      showDetailMedicalOverseaDialog(context);
+                                      showDetailMedicalOverseaDialog(context,data);
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
@@ -465,13 +465,13 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
     );
   }
 
-  void showDetailMedicalOverseaDialog(BuildContext context) {
+  void showDetailMedicalOverseaDialog(BuildContext context, MedicalRecordOverseaData data) {
     showDialog(
       context: context,
       builder: (_) => Provider.value(
         value: context.read<OverseasMedicalDataModel>(),
         child: AlertDialog(
-            content: const DetailMedicalOverseaDataScreen(),
+            content: DetailMedicalOverseaDataScreen(medicalRecordOverseaData: data,),
             actions: [
               OutlinedButton(
                 onPressed: () {

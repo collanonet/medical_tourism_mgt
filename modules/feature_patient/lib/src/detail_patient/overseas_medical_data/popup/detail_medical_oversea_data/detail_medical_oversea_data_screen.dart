@@ -1,3 +1,4 @@
+import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,11 @@ import 'hospital_certificate_tab.dart';
 import 'hospital_dicom_tab.dart';
 
 class DetailMedicalOverseaDataScreen extends StatefulWidget {
-  const DetailMedicalOverseaDataScreen({super.key});
-
+  const DetailMedicalOverseaDataScreen({
+    super.key,
+     this.medicalRecordOverseaData,
+  });
+  final MedicalRecordOverseaData? medicalRecordOverseaData;
   @override
   State<DetailMedicalOverseaDataScreen> createState() =>
       _DetailMedicalOverseaDataScreenState();
@@ -25,11 +29,20 @@ class _DetailMedicalOverseaDataScreenState
     '四川大学華西病院_DICOM',
   ];
 
-  List<Widget> pages = const [
-    HospitalDICOMTab(),
-    HospitalCertificateTab(),
-    StudyOfDICOMTab(),
-  ];
+  late List<Widget> pages;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    pages = [
+      HospitalDICOMTab(
+        medicalRecordOverseaData: widget.medicalRecordOverseaData,
+      ),
+      HospitalCertificateTab(),
+      StudyOfDICOMTab(),
+    ];
+  }
 
   @override
   Widget build(BuildContext context) {
