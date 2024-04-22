@@ -35,16 +35,15 @@ class PatientRepositoryIml extends PatientRepository {
   @override
   Future<FileResponse> uploadFileBytes(
     Uint8List file,
-      String filename,
+    String filename,
   ) async =>
       await remote.uploadFileBytes(file, filename);
 
-
   @override
   Future<FileResponse> uploadFileBase64(
-      String file,
-      String filename,
-      ) async =>
+    String file,
+    String filename,
+  ) async =>
       await remote.uploadFileBase64(file, filename);
 
   //GET_PRE_PATIENTS

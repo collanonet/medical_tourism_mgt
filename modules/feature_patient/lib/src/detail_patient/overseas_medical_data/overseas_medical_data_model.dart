@@ -113,11 +113,11 @@ class OverseasMedicalDataModel {
 
         try {
           // convert Uint8List to base64
-          Uint8List bytes = formGroup.control('file').value;
-          String base64Image = base64Encode(bytes);
+          FileSelect docFile = formGroup.control('file').value;
+          String base64Image = base64Encode(docFile.file);
           FileResponse fileData = await patientRepository.uploadFileBase64(
             base64Image,
-            '${DateTime.timestamp()}.png',
+            docFile.filename,
           );
           file = fileData.filename;
         } catch (e) {
@@ -137,11 +137,11 @@ class OverseasMedicalDataModel {
 
         try {
           // convert Uint8List to base64
-          Uint8List bytes = formGroup.control('qrCode').value;
-          String base64Image = base64Encode(bytes);
+          FileSelect qrFile = formGroup.control('qrCode').value;
+          String base64Image = base64Encode(qrFile.file);
           FileResponse qrData = await patientRepository.uploadFileBase64(
             base64Image,
-            '${DateTime.timestamp()}.png',
+            qrFile.filename,
           );
           qrCode = qrData.filename;
         } catch (e) {

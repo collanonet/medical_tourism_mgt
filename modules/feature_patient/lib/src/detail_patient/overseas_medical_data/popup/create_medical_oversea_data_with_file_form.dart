@@ -1,11 +1,12 @@
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:core_network/core_network.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup createMedicalOverseaDataWithFileForm(Uint8List file) {
+FormGroup createMedicalOverseaDataWithFileForm(FileSelect file) {
   return FormGroup({
-    'file': FormControl<Uint8List>(value: file),
+    'file': FormControl<FileSelect>(value: file),
     'hospitalName': FormControl<String>(validators: [Validators.required]),
     'category': FormControl<String>(value: '画像データ（DICOM）'),
     'documentName': FormControl<String>(validators: [Validators.required]),
@@ -18,6 +19,6 @@ FormGroup createMedicalOverseaDataWithFileForm(Uint8List file) {
     'sharedUrl': FormControl<String>(),
     'password': FormControl<String>(),
     'expirationDate': FormControl<DateTime>(),
-    'qrCode': FormControl<Uint8List>(),
+    'qrCode': FormControl<FileSelect>(),
   });
 }

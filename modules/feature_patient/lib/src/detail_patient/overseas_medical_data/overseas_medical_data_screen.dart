@@ -425,7 +425,7 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
     );
   }
 
-  void showCreateWithFileDialog(BuildContext context, Uint8List file) {
+  void showCreateWithFileDialog(BuildContext context, FileSelect file) {
     showDialog(
       context: context,
       builder: (_) => Provider.value(
