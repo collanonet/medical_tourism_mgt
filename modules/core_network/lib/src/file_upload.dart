@@ -20,12 +20,15 @@ class FileUploadService {
     }
 
     try {
-      final formData = FormData.fromMap({
-        'file': MultipartFile.fromBytes(
+      final _data = FormData();
+
+      _data.files.add(MapEntry(
+        'file',
+        MultipartFile.fromBytes(
           file,
           filename: 'file.jpg',
         ),
-      });
+      ));
 
       final dio = Dio(BaseOptions(
         method: 'POST',
@@ -38,8 +41,9 @@ class FileUploadService {
 
       final responseD = await dio.post(
         '/files/upload',
-        data: formData,
+        data: _data,
         options: Options(
+          method: 'POST',
           headers: {
             HttpHeaders.authorizationHeader: 'Bearer $token',
             HttpHeaders.contentTypeHeader: 'multipart/form-data',
