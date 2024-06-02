@@ -522,6 +522,12 @@ class PatientRemoteProvider {
   ) async =>
       await apiService.getWebBookingPatientPreferredDate(medicalRecord);
 
+  Future<MedicalExaminationResponse> getInfoMedicalExamination(
+    String patientId,
+  ) async =>
+      await apiService.getInfoMedicalExamination(patientId);
+
+
   Future<List<WebBookingMedicalRecordResponse>> getBookingMedicalRecord({
     required String medicalRecord,
   }) async =>

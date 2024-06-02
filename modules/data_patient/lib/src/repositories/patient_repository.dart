@@ -5,6 +5,10 @@ import 'package:core_network/core_network.dart';
 abstract class PatientRepository {
   //GET_PRE_PATIENTS
 
+  Future<MedicalExaminationResponse> getInfoMedicalExamination(
+      String patientId,
+      );
+
   Future<String> uploadFile(
     File file,
   );

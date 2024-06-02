@@ -18,6 +18,13 @@ class PatientRepositoryIml extends PatientRepository {
   final PatientLocalProvider local;
 
   @override
+  Future<MedicalExaminationResponse> getInfoMedicalExamination(
+    String patientId,
+  ) {
+    return remote.getInfoMedicalExamination(patientId);
+  }
+
+  @override
   Future<String> uploadFile(File file) {
     return remote.uploadFile(file);
   }
@@ -31,8 +38,6 @@ class PatientRepositoryIml extends PatientRepository {
     String? agents,
     String? patient,
   }) {
-
-
     return remote.prePatients(
       page: page,
       limit: limit,

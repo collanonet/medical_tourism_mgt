@@ -554,6 +554,10 @@ abstract class ApiService {
     @Path('patientId') String patientId,
   );
 
+  @GET('${Apis.BOOKING_MEDICAL_RECORD}/info/{patientId}')
+  Future<MedicalExaminationResponse> getInfoMedicalExamination(
+      @Path('patientId') String patientId);
+
   @GET('${Apis.BOOKING_MEDICAL_RECORD}/{medicalRecord}')
   Future<List<WebBookingMedicalRecordResponse>> getBookingMedicalRecord(
       @Path('medicalRecord') String medicalRecord);
@@ -616,13 +620,11 @@ abstract class ApiService {
   );
 
   @GET(Apis.AGENT_MANAGER)
-  Future<List<AgentManagerResponse>> getAgentManagers(
-  {
+  Future<List<AgentManagerResponse>> getAgentManagers({
     @Query('page') int? page,
     @Query('limit') int? limit,
     @Query('agentRecord') String? agentRecord,
-}
-  );
+  });
 
   @GET('${Apis.AGENT_MANAGER}/{id}')
   Future<AgentManagerResponse> getAgentManager(
