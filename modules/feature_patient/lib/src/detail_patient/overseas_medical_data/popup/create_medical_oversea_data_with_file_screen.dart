@@ -166,8 +166,8 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
                       dateTimeFormat: DateFormat('yyyy/MM/dd'),
                     ),
                     decoration: InputDecoration(
-                      label: Text(
-                        context.l10n.labelEntryDateFrom,
+                      label: const Text(
+                        "発行日",
                       ),
                       suffixIcon: IconButton(
                         icon: const Icon(

@@ -1,4 +1,5 @@
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:core_l10n/l10n.dart';
 import 'package:core_network/core_network.dart';
@@ -30,24 +31,13 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
   List<String> ids = [];
   bool isSelectAll = false;
 
-  Future<File?> pickFile() async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles();
-
-    if (result != null) {
-      File file = File(result.files.single.path!);
-      return file;
-    } else {
-      return null;
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         InkWell(
           onTap: () {
-            pickFile().then((value) {
+            filePicker().then((value) {
               if (value != null) {
                 showCreateWithFileDialog(context, value);
               }
@@ -92,7 +82,7 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        pickFile().then((value) {
+                        filePicker().then((value) {
                           if (value != null) {
                             showCreateWithFileDialog(context, value);
                           }
@@ -222,7 +212,7 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                       value.requireData[index];
                                   return InkWell(
                                     onTap: () {
-                                      showDetailMedicalOverseaDialog(context);
+                                      showDetailMedicalOverseaDialog(context,data);
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
@@ -435,7 +425,7 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
     );
   }
 
-  void showCreateWithFileDialog(BuildContext context, File file) {
+  void showCreateWithFileDialog(BuildContext context, FileSelect file) {
     showDialog(
       context: context,
       builder: (_) => Provider.value(
@@ -447,8 +437,9 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => createMedicalOverseaDataWithFileForm(file)
-                ..markAllAsTouched(),
+              form: () =>
+                  createMedicalOverseaDataWithFileForm(file)
+                    ..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const CreateMedicalOverseaDataWithFileScreen();
               },
@@ -474,13 +465,13 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
     );
   }
 
-  void showDetailMedicalOverseaDialog(BuildContext context) {
+  void showDetailMedicalOverseaDialog(BuildContext context, MedicalRecordOverseaData data) {
     showDialog(
       context: context,
       builder: (_) => Provider.value(
         value: context.read<OverseasMedicalDataModel>(),
         child: AlertDialog(
-            content: const DetailMedicalOverseaDataScreen(),
+            content: DetailMedicalOverseaDataScreen(medicalRecordOverseaData: data,),
             actions: [
               OutlinedButton(
                 onPressed: () {

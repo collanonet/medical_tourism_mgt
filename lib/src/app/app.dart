@@ -35,37 +35,40 @@ class _RootAppState extends State<RootApp> {
 
   @override
   Widget build(BuildContext context) {
-    return AppTheme(
-      themeData: AppThemeData.light(),
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider.value(
-            value: context.read<AppModel>().auth,
+    return NetworkImageProvider(
+      configs: GetIt.I<NetworkImageConfigs>(),
+      child: AppTheme(
+        themeData: AppThemeData.light(),
+        child: MultiProvider(
+          providers: [
+            ChangeNotifierProvider.value(
+              value: context.read<AppModel>().auth,
+            ),
+            ChangeNotifierProvider.value(
+              value: context.read<AppModel>().l10n,
+            ),
+          ],
+          child: Consumer2<AuthModel, L10nModel>(
+            builder: (context, auth, l10n, child) {
+              return MaterialApp.router(
+                title: 'Medical Tourism',
+                theme: context.appTheme.build(context).copyWith(
+                        pageTransitionsTheme:
+                            const PageTransitionsTheme(builders: {
+                      TargetPlatform.fuchsia:
+                          NoShadowCupertinoPageTransitionsBuilder(),
+                      TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+                    })),
+                locale: l10n.locale,
+                builder: BotToastInit(),
+                localizationsDelegates: AppLocalizations.localizationsDelegates,
+                supportedLocales: AppLocalizations.supportedLocales,
+                routerConfig: GetIt.I<AppRouter>().config(
+                  reevaluateListenable: auth,
+                ),
+              );
+            },
           ),
-          ChangeNotifierProvider.value(
-            value: context.read<AppModel>().l10n,
-          ),
-        ],
-        child: Consumer2<AuthModel, L10nModel>(
-          builder: (context, auth, l10n, child) {
-            return MaterialApp.router(
-              title: 'Medical Tourism',
-              theme: context.appTheme.build(context).copyWith(
-                      pageTransitionsTheme:
-                          const PageTransitionsTheme(builders: {
-                    TargetPlatform.fuchsia:
-                        NoShadowCupertinoPageTransitionsBuilder(),
-                    TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
-                  })),
-              locale: l10n.locale,
-              builder: BotToastInit(),
-              localizationsDelegates: AppLocalizations.localizationsDelegates,
-              supportedLocales: AppLocalizations.supportedLocales,
-              routerConfig: GetIt.I<AppRouter>().config(
-                reevaluateListenable: auth,
-              ),
-            );
-          },
         ),
       ),
     );

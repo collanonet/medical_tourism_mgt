@@ -7,3 +7,4 @@ export 'src/widgets/table_responsive.dart';
 export 'src/widgets/reactive_dropdown_field.dart';
 export 'src/widgets/row_separated.dart';
 export 'src/widgets/with_loading_button.dart';
+export 'src/widgets/avatar.dart';

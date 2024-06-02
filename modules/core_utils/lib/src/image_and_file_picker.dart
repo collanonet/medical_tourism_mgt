@@ -1,7 +1,11 @@
 import 'dart:io';
 
+import 'package:core_network/core_network.dart';
 import 'package:file_picker/file_picker.dart';
+import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+
+import '../core_utils.dart';
 
 final ImagePicker picker = ImagePicker();
 
@@ -38,13 +42,18 @@ Future<List<File>?> imageMultiplePicker() async {
   }
 }
 
-Future<File?> filePicker() async {
+// return bytes because web support only bytes
+Future<FileSelect?> filePicker() async {
   FilePickerResult? result = await FilePicker.platform.pickFiles();
 
   try {
     if (result != null) {
-      File file = File(result.files.single.path!);
-      return file;
+      // File file = File(result.files.single.path!);
+      return FileSelect(
+        filename:
+            result.files.single.name,
+        file: result.files.single.bytes!,
+      );
     } else {
       // User canceled the picker
       return null;

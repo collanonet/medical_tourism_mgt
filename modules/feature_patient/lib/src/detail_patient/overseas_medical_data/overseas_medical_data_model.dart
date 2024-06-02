@@ -1,7 +1,12 @@
+import 'dart:convert';
+import 'dart:typed_data';
+
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:data_auth/data_auth.dart';
 import 'package:data_patient/data_patient.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -94,12 +99,21 @@ class OverseasMedicalDataModel {
     FormGroup formGroup,
   ) async {
     try {
+      final token = await GetIt.I<AuthRepository>().getAccessToken();
+      logger.d("token: $token");
       createMedicalOverseaData.value = const AsyncData(loading: true);
+
       String? file;
       if (formGroup.control('file').value != null) {
         try {
-          file = await patientRepository
-              .uploadFile(formGroup.control('file').value);
+          // convert Uint8List to base64
+          FileSelect docFile = formGroup.control('file').value;
+          String base64Image = base64Encode(docFile.file);
+          FileResponse fileData = await patientRepository.uploadFileBase64(
+            base64Image,
+            docFile.filename,
+          );
+          file = fileData.filename;
         } catch (e) {
           logger.e(e);
         }
@@ -109,8 +123,14 @@ class OverseasMedicalDataModel {
 
       if (formGroup.control('qrCode').value != null) {
         try {
-          qrCode = await patientRepository
-              .uploadFile(formGroup.control('qrCode').value);
+          // convert Uint8List to base64
+          FileSelect qrFile = formGroup.control('qrCode').value;
+          String base64Image = base64Encode(qrFile.file);
+          FileResponse qrData = await patientRepository.uploadFileBase64(
+            base64Image,
+            qrFile.filename,
+          );
+          qrCode = qrData.filename;
         } catch (e) {
           logger.e(e);
         }
