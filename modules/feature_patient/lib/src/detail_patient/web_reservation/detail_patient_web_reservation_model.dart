@@ -39,7 +39,7 @@ class DetailPatientWebReservationModel {
       formGroup.control('preferredDate2').value = response.date2;
       formGroup.control('preferredDate3').value = response.date3;
       formGroup.control('noDesiredDate').value = response.desiredDate;
-      formGroup.control('remarks').value = response.reason;
+      formGroup.control('remarks').value = response.remarks;
     } catch (e) {
       infoWebBookingPatient.value = AsyncData(error: e);
     }
