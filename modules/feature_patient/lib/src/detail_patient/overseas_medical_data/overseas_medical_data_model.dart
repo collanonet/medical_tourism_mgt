@@ -102,15 +102,9 @@ class OverseasMedicalDataModel {
       final token = await GetIt.I<AuthRepository>().getAccessToken();
       logger.d("token: $token");
       createMedicalOverseaData.value = const AsyncData(loading: true);
+
       String? file;
       if (formGroup.control('file').value != null) {
-        // try {
-        //   file = await patientRepository.uploadFileDio(
-        //       formGroup.control('file').value, token ?? '');
-        // } catch (e) {
-        //   logger.e(e);
-        // }
-
         try {
           // convert Uint8List to base64
           FileSelect docFile = formGroup.control('file').value;
@@ -128,13 +122,6 @@ class OverseasMedicalDataModel {
       String? qrCode;
 
       if (formGroup.control('qrCode').value != null) {
-        // try {
-        //   qrCode = await patientRepository.uploadFileDio(
-        //       formGroup.control('qrCode').value, token ?? '');
-        // } catch (e) {
-        //   logger.e(e);
-        // }
-
         try {
           // convert Uint8List to base64
           FileSelect qrFile = formGroup.control('qrCode').value;
@@ -149,8 +136,6 @@ class OverseasMedicalDataModel {
         }
       }
 
-      logger.d("file: $file");
-      logger.d("qrCode: $qrCode");
       var medicalRecordOverseaDataRequest = MedicalRecordOverseaDataRequest(
         file: file,
         hospitalName: formGroup.control('hospitalName').value,
