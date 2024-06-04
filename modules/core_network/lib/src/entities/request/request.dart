@@ -16,3 +16,4 @@ export 'agent_manager_contact_request.dart';
 export 'agent_manager_request.dart';
 export 'agent_referral_commission_request.dart';
 export 'agent_request.dart';
+export 'application_regenerative_medicine_request.dart';

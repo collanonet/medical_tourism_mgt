@@ -3273,6 +3273,68 @@ class _ApiService implements ApiService {
         ))));
   }
 
+  @override
+  Future<ApplicationRegenerativeMedicalResponse>
+      getApplicationRegenerattiveMedical({String? medicalRecord}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApplicationRegenerativeMedicalResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-patient-response-regenerative-medical/${medicalRecord}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        ApplicationRegenerativeMedicalResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<ApplicationRegenerativeMedicalResponse>
+      postApplicationRegenerattiveMedical(
+          ApplicationRegenerativeMedicalRequest
+              applicationRegenerativeMedicalRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(applicationRegenerativeMedicalRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ApplicationRegenerativeMedicalResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-patient-response-regenerative-medical',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        ApplicationRegenerativeMedicalResponse.fromJson(_result.data!);
+    return value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

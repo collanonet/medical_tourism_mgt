@@ -7,12 +7,14 @@ import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import '../core_network.dart';
 import 'apis.dart';
+import 'entities/application_regenerative_medicine_response.dart';
 import 'entities/medical_record_patient_response_treatment.dart';
 import 'entities/medical_record_patient_response_treatment_request.dart';
 import 'entities/medical_record_proposal.dart';
 import 'entities/medical_record_proposal_request.dart';
 import 'entities/medical_record_travel_group.dart';
 import 'entities/medical_record_travel_group_request.dart';
+import 'entities/request/application_regenerative_medicine_request.dart';
 
 part 'api_service.g.dart';
 
@@ -656,6 +658,20 @@ abstract class ApiService {
   @DELETE('${Apis.AGENT_MANAGER}/{id}')
   Future<void> deleteAgentManager(
     @Path('id') String id,
+  );
+
+  @GET(
+      '${Apis.MEDICAL_RECORD_PATIENT_RESPONSE_REGENERATIVE_MEDICAL}/{medicalRecord}')
+  Future<ApplicationRegenerativeMedicalResponse>
+      getApplicationRegenerattiveMedical({
+    @Path('medicalRecord') String? medicalRecord,
+  });
+
+  @POST(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_REGENERATIVE_MEDICAL)
+  Future<ApplicationRegenerativeMedicalResponse>
+      postApplicationRegenerattiveMedical(
+    @Body()
+    ApplicationRegenerativeMedicalRequest applicationRegenerativeMedicalRequest,
   );
 }
 

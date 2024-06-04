@@ -158,7 +158,7 @@ class BasicInformationModel {
       if (value.isNotEmpty) {
         patientNames.value = AsyncData(data: value.firstOrNull);
         insertPatientName(
-          data: value,
+          data: value.first,
           formGroup: formGroup.control('PATIENT_NAMES') as FormGroup,
         );
       } else {
@@ -171,36 +171,33 @@ class BasicInformationModel {
   }
 
   void insertPatientName({
-    required List<PatientName> data,
+    required PatientName data,
     required FormGroup formGroup,
   }) {
     formGroup.reset();
 
-    formGroup.control('id').value = data.first.id;
-    formGroup.control('familyNameRomanized').value =
-        data.first.familyNameRomanized;
-    formGroup.control('middleNameRomanized').value =
-        data.first.middleNameRomanized;
-    formGroup.control('firstNameRomanized').value =
-        data.first.firstNameRomanized;
+    formGroup.control('id').value = data.id;
+    formGroup.control('familyNameRomanized').value = data.familyNameRomanized;
+    formGroup.control('middleNameRomanized').value = data.middleNameRomanized;
+    formGroup.control('firstNameRomanized').value = data.firstNameRomanized;
     formGroup.control('familyNameChineseOrVietnamese').value =
-        data.first.familyNameChineseOrVietnamese;
+        data.familyNameChineseOrVietnamese;
     formGroup.control('middleNameChineseOrVietnamese').value =
-        data.first.middleNameChineseOrVietnamese;
+        data.middleNameChineseOrVietnamese;
     formGroup.control('firstNameChineseOrVietnamese').value =
-        data.first.firstNameChineseOrVietnamese;
+        data.firstNameChineseOrVietnamese;
     formGroup.control('familyNameJapaneseForChinese').value =
-        data.first.familyNameJapaneseForChinese;
+        data.familyNameJapaneseForChinese;
     formGroup.control('middleNameJapaneseForChinese').value =
-        data.first.middleNameJapaneseForChinese;
+        data.middleNameJapaneseForChinese;
     formGroup.control('firstNameJapaneseForChinese').value =
-        data.first.firstNameJapaneseForChinese;
+        data.firstNameJapaneseForChinese;
     formGroup.control('familyNameJapaneseForNonChinese').value =
-        data.first.familyNameJapaneseForNonChinese;
+        data.familyNameJapaneseForNonChinese;
     formGroup.control('middleNameJapaneseForNonChinese').value =
-        data.first.middleNameJapaneseForNonChinese;
+        data.middleNameJapaneseForNonChinese;
     formGroup.control('firstNameJapaneseForNonChinese').value =
-        data.first.firstNameJapaneseForNonChinese;
+        data.firstNameJapaneseForNonChinese;
   }
 
   Future<void> createUpdatePatientNames(FormGroup form) async {
@@ -1203,13 +1200,13 @@ class BasicInformationModel {
 
   Future<void> createUpdateMedicalRecordHospital(FormGroup formGroup) async {
     try {
-    logger.d('medical-record-hospitals 111');
+      logger.d('medical-record-hospitals 111');
       medicalRecordHospitals.value =
           medicalRecordHospitals.value.copyWith(loading: true);
       logger.d(formGroup.control('deletedMedicalRecordHospitals').value);
       await formGroup.control('deletedMedicalRecordHospitals').value.forEach(
         (element) async {
-          if(element != null){
+          if (element != null) {
             await deleteMedicalRecordHospitals(element);
           }
         },
