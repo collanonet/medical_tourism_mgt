@@ -19,35 +19,30 @@ class ApplicationRiskTestPage extends StatelessWidget {
     return Provider(
       create: (context) => GetIt.I<ApplicationRiskTestModel>()
         ..getMedicalRecords(patientId: patientId),
-      child: Scaffold(
-        body: LayoutView(
-          selectedIndex: 3,
-          page: Builder(
-            builder: (context) {
-              return ValueListenableBuilder(
-                valueListenable: context
-                    .watch<ApplicationRiskTestModel>()
-                    .applicationRiskTestResponse,
-                builder: (context, value, _) {
-                  return Skeletonizer(
-                    enabled: value.loading,
-                    child: ReactiveFormConfig(
-                      validationMessages: {
-                        ValidationMessage.required: (error) => 'この項目は必須です',
-                      },
-                      child: ReactiveFormBuilder(
-                        form: () => formRiskTest(data: value.data),
-                        builder: (context, formGroup, child) {
-                          return const ApplicationRiskTestScreen();
-                        },
-                      ),
-                    ),
-                  );
-                },
+      child: Builder(
+        builder: (context) {
+          return ValueListenableBuilder(
+            valueListenable: context
+                .watch<ApplicationRiskTestModel>()
+                .applicationRiskTestResponse,
+            builder: (context, value, _) {
+              return Skeletonizer(
+                enabled: value.loading,
+                child: ReactiveFormConfig(
+                  validationMessages: {
+                    ValidationMessage.required: (error) => 'この項目は必須です',
+                  },
+                  child: ReactiveFormBuilder(
+                    form: () => formRiskTest(data: value.data),
+                    builder: (context, formGroup, child) {
+                      return const ApplicationRiskTestScreen();
+                    },
+                  ),
+                ),
               );
             },
-          ),
-        ),
+          );
+        },
       ),
     );
   }
