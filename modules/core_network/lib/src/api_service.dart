@@ -656,9 +656,9 @@ abstract class ApiService {
   @GET(
       '${Apis.MEDICAL_RECORD_PATIENT_RESPONSE_REGENERATIVE_MEDICAL}/{medicalRecord}')
   Future<ApplicationRegenerativeMedicalResponse>
-      getApplicationRegenerattiveMedical({
-    @Path('medicalRecord') String? medicalRecord,
-  });
+      getApplicationRegenerattiveMedical(
+    @Path('medicalRecord') String medicalRecord,
+  );
 
   @POST(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_REGENERATIVE_MEDICAL)
   Future<ApplicationRegenerativeMedicalResponse>

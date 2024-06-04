@@ -6,8 +6,8 @@ abstract class PatientRepository {
   //GET_PRE_PATIENTS
 
   Future<MedicalExaminationResponse> getInfoMedicalExamination(
-      String patientId,
-      );
+    String patientId,
+  );
 
   Future<FileResponse> uploadFileBase64(
     String file,
@@ -423,4 +423,14 @@ abstract class PatientRepository {
   Future<WebBookingMedicalRecordResponse> postBookingMedicalRecord(
     WebBookingMedicalRecordRequest webBookingMedicalRecord,
   );
+
+  Future<ApplicationRegenerativeMedicalResponse>
+      getApplicationRegenerattiveMedical({
+    required String medicalRecord,
+  });
+
+  Future<ApplicationRegenerativeMedicalResponse>
+      postApplicationRegenerattiveMedical(
+          ApplicationRegenerativeMedicalRequest
+              applicationRegenerativeMedicalRequest);
 }

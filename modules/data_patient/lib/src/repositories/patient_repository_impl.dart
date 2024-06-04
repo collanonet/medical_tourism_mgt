@@ -724,4 +724,22 @@ class PatientRepositoryIml extends PatientRepository {
       WebBookingMedicalRecordRequest webBookingMedicalRecord) {
     return remote.postBookingMedicalRecord(webBookingMedicalRecord);
   }
+
+  @override
+  Future<ApplicationRegenerativeMedicalResponse>
+      getApplicationRegenerattiveMedical({
+    required String medicalRecord,
+  }) {
+    return remote.getApplicationRegenerattiveMedical(
+        medicalRecord: medicalRecord);
+  }
+
+  @override
+  Future<ApplicationRegenerativeMedicalResponse>
+      postApplicationRegenerattiveMedical(
+          ApplicationRegenerativeMedicalRequest
+              applicationRegenerativeMedicalRequest) {
+    return remote.postApplicationRegenerattiveMedical(
+        applicationRegenerativeMedicalRequest);
+  }
 }

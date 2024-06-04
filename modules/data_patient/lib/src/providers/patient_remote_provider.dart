@@ -529,7 +529,6 @@ class PatientRemoteProvider {
   ) async =>
       await apiService.getInfoMedicalExamination(patientId);
 
-
   Future<List<WebBookingMedicalRecordResponse>> getBookingMedicalRecord({
     required String medicalRecord,
   }) async =>
@@ -539,4 +538,17 @@ class PatientRemoteProvider {
     WebBookingMedicalRecordRequest webBookingMedicalRecord,
   ) async =>
       await apiService.postBookingMedicalRecord(webBookingMedicalRecord);
+
+  Future<ApplicationRegenerativeMedicalResponse>
+      getApplicationRegenerattiveMedical({
+    required String medicalRecord,
+  }) async =>
+          await apiService.getApplicationRegenerattiveMedical(medicalRecord);
+
+  Future<ApplicationRegenerativeMedicalResponse>
+      postApplicationRegenerattiveMedical(
+              ApplicationRegenerativeMedicalRequest
+                  applicationRegenerativeMedicalRequest) async =>
+          await apiService.postApplicationRegenerattiveMedical(
+              applicationRegenerativeMedicalRequest);
 }

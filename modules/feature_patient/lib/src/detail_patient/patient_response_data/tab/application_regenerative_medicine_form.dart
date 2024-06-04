@@ -3,6 +3,25 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup formApplicationRegenerativeMedical(
     {ApplicationRegenerativeMedicalResponse? data}) {
+  var drug = FormArray([
+    FormGroup({
+      'nameDrug': FormControl<String>(),
+    })
+  ]);
+
+  if (data?.nameDrug != null && data!.nameDrug!.isNotEmpty) {
+    drug.clear();
+    for (var element in data.nameDrug!) {
+      drug.add(
+        FormGroup(
+          {
+            'nameDrug': FormControl<String>(value: element),
+          },
+        ),
+      );
+    }
+  }
+
   return FormGroup({
     'diseasePrevention': FormControl<bool>(
       value: data?.diseasePrevention,
@@ -78,6 +97,73 @@ FormGroup formApplicationRegenerativeMedical(
     ),
     'currentlyConcerned': FormControl<String>(
       value: data?.currentlyConcerned,
+    ),
+    'medicine': FormControl<bool>(
+      value: data?.medicine,
+    ),
+    'item1': FormControl<bool>(
+      value: data?.item1,
+    ),
+    'item2': FormControl<bool>(
+      value: data?.item2,
+    ),
+    'item3': FormControl<bool>(
+      value: data?.item3,
+    ),
+    'item4': FormControl<bool>(
+      value: data?.item4,
+    ),
+    'item5': FormControl<bool>(
+      value: data?.item5,
+    ),
+    'others1': FormControl<String>(
+      value: data?.others1,
+    ),
+    'receive1': FormControl<bool>(
+      value: data?.receive1,
+    ),
+    'receive2': FormControl<bool>(
+      value: data?.receive2,
+    ),
+    'countryOther': FormControl<String>(
+      value: data?.countryOther ?? '',
+    ),
+    'brokerageCompany': FormControl<String>(
+      value: data?.brokerageCompany ?? '',
+    ),
+    'historyCancer': FormControl<bool>(
+      value: data?.historyCancer,
+    ),
+    'cancerSite': FormControl<String>(
+      value: data?.cancerSite ?? '',
+    ),
+    'currentHealth': FormControl<bool>(
+      value: data?.currentHealth,
+    ),
+    'detail': FormControl<String>(
+      value: data?.detail ?? '',
+    ),
+    'currentHealth1': FormControl<bool>(
+      value: data?.currentHealth1,
+    ),
+    'detail1': FormControl<String>(
+      value: data?.detail1 ?? '',
+    ),
+    'nameOfTheDrug': drug,
+    'medicalInformation': FormControl<bool>(
+      value: data?.medicalInformation,
+    ),
+    'dicomImage': FormControl<bool>(
+      value: data?.dicomImage,
+    ),
+    'otherTest': FormControl<bool>(
+      value: data?.otherTest,
+    ),
+    'detail2': FormControl<String>(
+      value: data?.detail2 ?? '',
+    ),
+    'readio': FormControl<String>(
+      value: data?.readio,
     ),
     'privetcy': FormControl<bool>(
       value: data?.privetcy,

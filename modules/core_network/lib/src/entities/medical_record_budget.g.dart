@@ -9,7 +9,7 @@ part of 'medical_record_budget.dart';
 MedicalRecordBudget _$MedicalRecordBudgetFromJson(Map<String, dynamic> json) =>
     MedicalRecordBudget(
       id: json['_id'] as String,
-      budget: json['budget'] as int?,
+      budget: (json['budget'] as num?)?.toInt(),
       remarks: json['remarks'] as String?,
       medicalRecord: json['medicalRecord'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),

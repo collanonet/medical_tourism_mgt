@@ -4,6 +4,7 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
+import 'tab/application_regenerative_medicine_page.dart';
 import 'tab/patient_response_medical_checkup_page.dart';
 import 'tab/patient_response_other_page.dart';
 import 'tab/patient_response_treatment_page.dart';
@@ -38,6 +39,7 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
                       '治療', // TODO: l10n 対応 (治療) (treatment)
                       '健診', // TODO: l10n 対応 (健診) (Medical checkup)
                       'その他', // TODO: l10n 対応 (その他) (other)
+                      '申込_再生医療'
                     ],
                     onPressed: (index) {
                       _selectedIndex.value = index;
@@ -69,6 +71,7 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
                   PatientResponseMedicalCheckupPage(
                       patientId: widget.patientId),
                   PatientResponseOtherPage(patientId: widget.patientId),
+                  ApplicationRegenerativeMedicalPage(patientId: widget.patientId),
                 ][index],
               ),
             );

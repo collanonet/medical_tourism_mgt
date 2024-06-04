@@ -1,10 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/async.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+import 'application_regenerative_medicine_model.dart';
 
 class ApplicationRegenerativeMedicalScreen extends StatefulWidget {
   const ApplicationRegenerativeMedicalScreen({super.key});
@@ -20,6 +23,9 @@ class _ApplicationRegenerativeMedicalScreenState
   @override
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
+    final formArray = (ReactiveForm.of(context) as FormGroup)
+        .control('nameOfTheDrug') as FormArray;
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
@@ -511,6 +517,322 @@ class _ApplicationRegenerativeMedicalScreenState
                 formControlName: "currentlyConcerned",
                 maxLines: 3,
               ),
+              Text(
+                "質問",
+                style: context.textTheme.titleMedium,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                "これまでに再生医療を受けたことが \nありますか？",
+                style: context.textTheme.bodyMedium,
+              ),
+              const SizedBox(height: 8),
+              buttonInfo(formGroup, "medicine"),
+              const SizedBox(height: 8),
+              Text(
+                "あると答えた方は、受けたことのあるメニューをすべて選んでください。",
+                style: context.textTheme.bodyMedium,
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Expanded(
+                      child: ReactiveCheckboxListTile(
+                    controlAffinity: ListTileControlAffinity.leading,
+                    contentPadding: EdgeInsets.zero,
+                    formControlName: "item1",
+                    title: Text("幹細胞療法（移植）"),
+                  )),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      child: ReactiveCheckboxListTile(
+                    controlAffinity: ListTileControlAffinity.leading,
+                    contentPadding: EdgeInsets.zero,
+                    formControlName: "item2",
+                    title: Text("幹細胞療法（上清液"),
+                  )),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      child: ReactiveCheckboxListTile(
+                    controlAffinity: ListTileControlAffinity.leading,
+                    contentPadding: EdgeInsets.zero,
+                    formControlName: "item3",
+                    title: Text("免疫細胞療法"),
+                  )),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      child: ReactiveCheckboxListTile(
+                    controlAffinity: ListTileControlAffinity.leading,
+                    contentPadding: EdgeInsets.zero,
+                    formControlName: "item4",
+                    title: Text("線維芽細胞療法"),
+                  )),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      child: ReactiveCheckboxListTile(
+                    controlAffinity: ListTileControlAffinity.leading,
+                    contentPadding: EdgeInsets.zero,
+                    formControlName: "item5",
+                    title: Text("PRP療法"),
+                  )),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text("その他"),
+              const SizedBox(height: 8),
+              ReactiveTextField(
+                formControlName: "others",
+              ),
+              const SizedBox(height: 8),
+              Text("どこで受けましたか？"),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Expanded(
+                      child: ReactiveCheckboxListTile(
+                    controlAffinity: ListTileControlAffinity.leading,
+                    contentPadding: EdgeInsets.zero,
+                    formControlName: "receive1",
+                    title: Text("母国"),
+                  )),
+                ],
+              ),
+              Row(
+                children: [
+                  Expanded(
+                      child: ReactiveCheckboxListTile(
+                    controlAffinity: ListTileControlAffinity.leading,
+                    contentPadding: EdgeInsets.zero,
+                    formControlName: "receive2",
+                    title: Text("日本"),
+                  )),
+                ],
+              ),
+              const SizedBox(height: 8),
+              Text("母国以外の外国"),
+              const SizedBox(height: 8),
+              ReactiveTextField(
+                formControlName: "countryOther",
+              ),
+              const SizedBox(height: 8),
+              Text("仲介会社・紹介者"),
+              const SizedBox(height: 8),
+              ReactiveTextField(
+                formControlName: "brokerageCompany",
+              ),
+              const SizedBox(height: 8),
+              const Divider(),
+              const SizedBox(height: 8),
+              Text(
+                "がんについて",
+                style: context.textTheme.titleMedium,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                "がんの既往歴",
+                style: context.textTheme.bodyMedium,
+              ),
+              const SizedBox(height: 8),
+              buttonInfo(formGroup, "historyCancer"),
+              const SizedBox(height: 8),
+              Text("がんの部位"),
+              const SizedBox(height: 8),
+              ReactiveTextField(
+                formControlName: "cancerSite",
+              ),
+              const SizedBox(height: 8),
+              const Divider(),
+              const SizedBox(height: 8),
+              Text(
+                "女性の方のみご入力ください",
+                style: context.textTheme.titleMedium,
+              ),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Text(
+                    "妊娠について",
+                    style: context.textTheme.bodyMedium,
+                  ),
+                  const SizedBox(width: 10),
+                  boxRequired(label: '必須', enabled: true),
+                ],
+              ),
+              ReactiveRadioListTile(
+                formControlName: "readio",
+                value: 'option1',
+                title: const Text("妊娠していない"),
+                onChanged: (control) {},
+              ),
+              ReactiveRadioListTile(
+                formControlName: "readio",
+                value: 'option2',
+                title: const Text("妊娠している可能性がある"),
+              ),
+              ReactiveRadioListTile(
+                formControlName: "readio",
+                value: 'option3',
+                title: const Text("妊娠している"),
+              ),
+              const SizedBox(height: 8),
+              const Divider(),
+              const SizedBox(height: 8),
+              Text(
+                "既往歴",
+                style: context.textTheme.titleMedium,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                "今までの健康状態、病気及び治療内容",
+                style: context.textTheme.bodyMedium,
+              ),
+              const SizedBox(height: 8),
+              buttonInfo(formGroup, "currentHealth"),
+              const SizedBox(height: 8),
+              Text("詳細"),
+              const SizedBox(height: 8),
+              ReactiveTextField(
+                formControlName: "detail",
+                maxLines: 3,
+              ),
+              const SizedBox(height: 8),
+              const Divider(),
+              const SizedBox(height: 8),
+              Text(
+                "薬物アレルギー",
+                style: context.textTheme.titleMedium,
+              ),
+              const SizedBox(height: 8),
+              Text("今までの健康状態、病気及び治療内容"),
+              const SizedBox(height: 8),
+              buttonInfo(formGroup, "currentHealth1"),
+              const SizedBox(height: 8),
+              Text("詳細"),
+              const SizedBox(height: 8),
+              ReactiveTextField(
+                formControlName: "detail1",
+                maxLines: 3,
+              ),
+              const SizedBox(height: 8),
+              const Divider(),
+              const SizedBox(height: 8),
+              Text(
+                "服薬中の薬名、有効成分含有量、\n服用方法、服用量など",
+                style: context.textTheme.titleMedium,
+              ),
+              const SizedBox(height: 8),
+              ReactiveFormArray(
+                formArrayName: "nameOfTheDrug",
+                builder: (context, formArray, _) {
+                  final row = formArray.controls
+                      .map((control) => (control as FormGroup))
+                      .map(
+                        (currenForm) => Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          children: [
+                            Text("薬名"),
+                            const SizedBox(height: 8),
+                            ReactiveForm(
+                                formGroup: currenForm,
+                                child: ReactiveTextField(
+                                  formControlName: "nameDrug",
+                                )),
+                          ],
+                        ),
+                      )
+                      .toList();
+
+                  return ColumnSeparated(
+                    separatorBuilder: (context, index) {
+                      return SizedBox(
+                        height: 16,
+                      );
+                    },
+                    children: row,
+                  );
+                },
+              ),
+              ElevatedButton.icon(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Theme.of(context).scaffoldBackgroundColor,
+                  foregroundColor: Colors.transparent,
+                  shadowColor: Theme.of(context).scaffoldBackgroundColor,
+                  surfaceTintColor: Theme.of(context).scaffoldBackgroundColor,
+                  padding: EdgeInsets.zero,
+                ),
+                onPressed: () {
+                  formArray.add(
+                    FormGroup({
+                      'nameDrug': FormControl<String>(),
+                    }),
+                  );
+                  setState(() {});
+                },
+                icon: Icon(
+                  Icons.add_box_rounded,
+                  color: context.appTheme.primaryColor,
+                ),
+                label: Text(
+                  "薬名を追加",
+                  style: TextStyle(color: context.appTheme.primaryColor),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                "母国の医療機関の病状資料（入退院記録等）",
+                style: context.textTheme.titleMedium,
+              ),
+              const SizedBox(height: 8),
+              buttonInfo(formGroup, "medicalInformation"),
+              const SizedBox(height: 8),
+              Row(
+                children: [
+                  Text(
+                    "提供可能なDICOM画像データ",
+                    style: context.textTheme.titleMedium,
+                  ),
+                  IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.question_mark_rounded,
+                        size: 35,
+                        color: context.appTheme.primaryColor,
+                      )),
+                ],
+              ),
+              const SizedBox(height: 8),
+              buttonInfo(formGroup, "dicomImage"),
+              const SizedBox(height: 8),
+              Text(
+                "その他検査データ（血液検査等）",
+                style: context.textTheme.titleMedium,
+              ),
+              const SizedBox(height: 8),
+              buttonInfo(formGroup, "otherTest"),
+              const SizedBox(height: 8),
+              Text("詳細"),
+              const SizedBox(height: 8),
+              ReactiveTextField(
+                formControlName: "detail2",
+                maxLines: 3,
+              ),
+              const SizedBox(height: 8),
+              Text(
+                "DICOMデータは、発症時と最新のデータが\nそれぞれ必要です。",
+                style: context.textTheme.bodyMedium,
+              ),
               Row(
                 children: [
                   Expanded(
@@ -532,18 +854,17 @@ class _ApplicationRegenerativeMedicalScreenState
                 height: 60,
                 child: ValueListenableListener(
                   valueListenable: context
-                      .read<MedicalExaminationModel>()
-                      .submitApplicationRegenerativeMedicalData,
+                      .read<ApplicationRegenerativeMedical>()
+                      .submitApplicationRegenerativeMedical,
                   onListen: () {
                     final value = context
-                        .read<MedicalExaminationModel>()
-                        .submitApplicationRegenerativeMedicalData
+                        .read<ApplicationRegenerativeMedical>()
+                        .submitApplicationRegenerativeMedical
                         .value;
 
                     if (value.hasError) {
                       snackBarWidget(
-                        context: context,
-                        mgs: value.error,
+                        message: value.error,
                         prefixIcon: Icon(
                           Icons.error,
                           color: context.appTheme.errorColor,
@@ -551,17 +872,12 @@ class _ApplicationRegenerativeMedicalScreenState
                       );
                     }
 
-                    if (value.hasData) {
-                      // page I6 can navigation to success page I7
-                      context.router.push(
-                        const ApplicationRegenerativeMedicalRoute1(),
-                      );
-                    }
+                    if (value.hasData) {}
                   },
                   child: ValueListenableBuilder(
                       valueListenable: context
-                          .read<MedicalExaminationModel>()
-                          .submitApplicationRegenerativeMedicalData,
+                          .read<ApplicationRegenerativeMedical>()
+                          .submitApplicationRegenerativeMedical,
                       builder: (context, value, _) {
                         return ReactiveFormConsumer(
                             builder: (context, form, _) {
@@ -570,7 +886,7 @@ class _ApplicationRegenerativeMedicalScreenState
                                 ? () {
                                     // call function submit data for I4
                                     context
-                                        .read<MedicalExaminationModel>()
+                                        .read<ApplicationRegenerativeMedical>()
                                         .postApplicationRegenerativeMedical(
                                             form);
                                   }
