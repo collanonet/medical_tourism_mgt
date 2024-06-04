@@ -872,7 +872,13 @@ class _ApplicationRegenerativeMedicalScreenState
                       );
                     }
 
-                    if (value.hasData) {}
+                    if (value.hasData) {
+                      snackBarWidget(
+                        message: '正常に保存されました',
+                        prefixIcon:
+                            const Icon(Icons.check_circle, color: Colors.white),
+                      );
+                    }
                   },
                   child: ValueListenableBuilder(
                       valueListenable: context
@@ -886,7 +892,8 @@ class _ApplicationRegenerativeMedicalScreenState
                                 ? () {
                                     // call function submit data for I4
                                     context
-                                        .read<ApplicationRegenerativeMedicalModel>()
+                                        .read<
+                                            ApplicationRegenerativeMedicalModel>()
                                         .postApplicationRegenerativeMedical(
                                             form);
                                   }

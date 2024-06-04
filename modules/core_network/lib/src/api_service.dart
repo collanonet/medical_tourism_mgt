@@ -676,6 +676,20 @@ abstract class ApiService {
   Future<ApplicationBeautyResponse> postApplicationBeauty(
     @Body() ApplicationBeautyRequest applicationBeautyRequest,
   );
+
+  @GET(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_BLOOD_PURIFICATION_THERAPY)
+  Future<ApplicationBloodPurificationTherapyResponse>
+      getApplicationBloodPurificationTherapy(
+    @Path('medicalRecord') String medicalRecord,
+  );
+
+  @POST(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_BLOOD_PURIFICATION_THERAPY)
+  Future<ApplicationBloodPurificationTherapyResponse>
+      postApplicationBloodPurificationTherapy(
+    @Body()
+    ApplicationBloodPurificationTherapyRequest
+        applicationBloodPurificationTherapyRequest,
+  );
 }
 
 extension ApiServiceExts on ApiService {

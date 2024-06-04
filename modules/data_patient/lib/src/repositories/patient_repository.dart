@@ -441,4 +441,15 @@ abstract class PatientRepository {
   Future<ApplicationBeautyResponse> postApplicationBeauty(
     ApplicationBeautyRequest applicationBeautyRequest,
   );
+
+  Future<ApplicationBloodPurificationTherapyResponse>
+  getApplicationBloodPurificationTherapy({
+    required String medicalRecord,
+  });
+
+  Future<ApplicationBloodPurificationTherapyResponse>
+  postApplicationBloodPurificationTherapy(
+      ApplicationBloodPurificationTherapyRequest
+      applicationBloodPurificationTherapyRequest,
+      );
 }

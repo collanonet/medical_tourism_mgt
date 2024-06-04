@@ -561,4 +561,19 @@ class PatientRemoteProvider {
     ApplicationBeautyRequest applicationBeautyRequest,
   ) async =>
       await apiService.postApplicationBeauty(applicationBeautyRequest);
+
+  Future<ApplicationBloodPurificationTherapyResponse>
+      getApplicationBloodPurificationTherapy({
+    required String medicalRecord,
+  }) async =>
+          await apiService
+              .getApplicationBloodPurificationTherapy(medicalRecord);
+
+  Future<ApplicationBloodPurificationTherapyResponse>
+      postApplicationBloodPurificationTherapy(
+    ApplicationBloodPurificationTherapyRequest
+        applicationBloodPurificationTherapyRequest,
+  ) async =>
+          await apiService.postApplicationBloodPurificationTherapy(
+              applicationBloodPurificationTherapyRequest);
 }

@@ -46,6 +46,8 @@ class ApplicationBloodPurificationTherapyRequest {
   String? detail2;
   bool? privetcy;
   String? ifwoman;
+  String? medicalRecord;
+
   ApplicationBloodPurificationTherapyRequest({
     this.purposeOfCommission1,
     this.purposeOfCommission2,
@@ -84,19 +86,21 @@ class ApplicationBloodPurificationTherapyRequest {
     this.detail,
     this.treatmentDetail1,
     this.detail1,
-     this.drugName,
+    this.drugName,
     this.dicom,
     this.otherTestData,
     this.detail2,
     this.privetcy,
-    this.ifwoman
+    this.ifwoman,
+    required this.medicalRecord,
   });
 
-  factory ApplicationBloodPurificationTherapyRequest.fromJson(Map<String,dynamic> json){
+  factory ApplicationBloodPurificationTherapyRequest.fromJson(
+      Map<String, dynamic> json) {
     return _$ApplicationBloodPurificationTherapyRequestFromJson(json);
   }
 
-  Map<String,dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return _$ApplicationBloodPurificationTherapyRequestToJson(this);
   }
 }

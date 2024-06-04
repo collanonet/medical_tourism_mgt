@@ -1,15 +1,13 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:core_utils/core_utils.dart';
-import 'package:feature_medical_examination/feature_medical_examination.dart';
-import 'package:feature_medical_examination/src/application_blood_purification_therapy/drup_form.dart';
+import 'package:core_utils/async.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../medical_examination_model.dart';
+import 'application_blood_purification_therapy_model.dart';
 
 class ApplicationBloodPurificationTherapyScreen extends StatefulWidget {
   const ApplicationBloodPurificationTherapyScreen({super.key});
@@ -929,7 +927,40 @@ class _ApplicationBloodPurificationTherapyScreenState
                       style: context.textTheme.titleMedium,
                     ),
                     const SizedBox(height: 8),
-                    const DrugFormBeauty(),
+                    ReactiveFormArray(
+                      formArrayName: "drugName",
+                      builder: (context, formArray, _) {
+                        final row = formArray.controls
+                            .map((control) => (control as FormGroup))
+                            .map(
+                              (currenForm) => Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Text(
+                                    "薬名",
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                  const SizedBox(height: 8),
+                                  ReactiveForm(
+                                      formGroup: currenForm,
+                                      child: ReactiveTextField(
+                                        formControlName: "drug",
+                                      )),
+                                ],
+                              ),
+                            )
+                            .toList();
+
+                        return ColumnSeparated(
+                          separatorBuilder: (context, index) {
+                            return SizedBox(
+                              height: 16,
+                            );
+                          },
+                          children: row,
+                        );
+                      },
+                    ),
                     ElevatedButton.icon(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.transparent,
@@ -952,8 +983,7 @@ class _ApplicationBloodPurificationTherapyScreenState
                       ),
                       label: Text(
                         "薬名を追加",
-                        style:
-                            TextStyle(color: context.appTheme.primaryColor),
+                        style: TextStyle(color: context.appTheme.primaryColor),
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -1111,18 +1141,17 @@ class _ApplicationBloodPurificationTherapyScreenState
                       height: 60,
                       child: ValueListenableListener(
                         valueListenable: context
-                            .read<MedicalExaminationModel>()
-                            .submitApplicationBloodPurificationTherapyData,
+                            .read<ApplicationBloodPurificationTherapyModel>()
+                            .submitApplicationBloodPurificationTherapyResponse,
                         onListen: () {
                           final value = context
-                              .read<MedicalExaminationModel>()
-                              .submitApplicationBloodPurificationTherapyData
+                              .read<ApplicationBloodPurificationTherapyModel>()
+                              .submitApplicationBloodPurificationTherapyResponse
                               .value;
 
                           if (value.hasError) {
                             snackBarWidget(
-                              context: context,
-                              mgs: value.error,
+                              message: value.error,
                               prefixIcon: Icon(
                                 Icons.error,
                                 color: context.appTheme.errorColor,
@@ -1131,16 +1160,18 @@ class _ApplicationBloodPurificationTherapyScreenState
                           }
 
                           if (value.hasData) {
-                            // page I6 can navigation to success page I7
-                            context.router.push(
-                              const ApplicationRiskTestRoute(),
+                            snackBarWidget(
+                              message: '正常に保存されました',
+                              prefixIcon: const Icon(Icons.check_circle,
+                                  color: Colors.white),
                             );
                           }
                         },
                         child: ValueListenableBuilder(
                             valueListenable: context
-                                .read<MedicalExaminationModel>()
-                                .submitApplicationBloodPurificationTherapyData,
+                                .read<
+                                    ApplicationBloodPurificationTherapyModel>()
+                                .submitApplicationBloodPurificationTherapyResponse,
                             builder: (context, value, _) {
                               return ReactiveFormConsumer(
                                   builder: (context, form, _) {
@@ -1149,7 +1180,8 @@ class _ApplicationBloodPurificationTherapyScreenState
                                       ? () {
                                           // call function submit data for I4
                                           context
-                                              .read<MedicalExaminationModel>()
+                                              .read<
+                                                  ApplicationBloodPurificationTherapyModel>()
                                               .postApplicationBloodPurificationTherapy(
                                                   form);
                                         }

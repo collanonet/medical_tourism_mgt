@@ -32,6 +32,8 @@ import 'src/detail_patient/patient_response_data/patient_response_model.dart'
     as _i21;
 import 'src/detail_patient/patient_response_data/tab/application_beauty_model.dart'
     as _i16;
+import 'src/detail_patient/patient_response_data/tab/application_blood_purification_therapy_model.dart'
+    as _i29;
 import 'src/detail_patient/patient_response_data/tab/application_regenerative_medicine_model.dart'
     as _i17;
 import 'src/detail_patient/patient_response_data/tab/patient_response_medical_checkup_model.dart'
@@ -110,5 +112,8 @@ class FeaturePatientPackageModule extends _i1.MicroPackageModule {
         _i27.BillingModel(patientRepository: gh<_i4.PatientRepository>()));
     gh.factory<_i28.PrePatientModel>(() =>
         _i28.PrePatientModel(patientRepository: gh<_i4.PatientRepository>()));
+    gh.factory<_i29.ApplicationBloodPurificationTherapyModel>(() =>
+        _i29.ApplicationBloodPurificationTherapyModel(
+            patientRepository: gh<_i4.PatientRepository>()));
   }
 }

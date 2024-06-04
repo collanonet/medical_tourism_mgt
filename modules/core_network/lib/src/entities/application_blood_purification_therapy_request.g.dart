@@ -26,8 +26,8 @@ ApplicationBloodPurificationTherapyRequest
               : DateTime.parse(json['date3'] as String),
           noDate: json['noDate'] as bool?,
           remarks: json['remarks'] as String?,
-          people: json['people'] as int?,
-          age: json['age'] as int?,
+          people: (json['people'] as num?)?.toInt(),
+          age: (json['age'] as num?)?.toInt(),
           sex: json['sex'] as bool?,
           relationship: json['relationship'] as String?,
           attend: json['attend'] as bool?,
@@ -61,6 +61,7 @@ ApplicationBloodPurificationTherapyRequest
           detail2: json['detail2'] as String?,
           privetcy: json['privetcy'] as bool?,
           ifwoman: json['ifwoman'] as String?,
+          medicalRecord: json['medicalRecord'] as String?,
         );
 
 Map<String, dynamic> _$ApplicationBloodPurificationTherapyRequestToJson(
@@ -109,4 +110,5 @@ Map<String, dynamic> _$ApplicationBloodPurificationTherapyRequestToJson(
       'detail2': instance.detail2,
       'privetcy': instance.privetcy,
       'ifwoman': instance.ifwoman,
+      'medicalRecord': instance.medicalRecord,
     };

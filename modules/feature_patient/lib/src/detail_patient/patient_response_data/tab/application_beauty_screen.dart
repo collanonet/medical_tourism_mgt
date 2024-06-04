@@ -700,7 +700,13 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                           );
                         }
 
-                        if (value.hasData) {}
+                        if (value.hasData) {
+                          snackBarWidget(
+                            message: '正常に保存されました',
+                            prefixIcon: const Icon(Icons.check_circle,
+                                color: Colors.white),
+                          );
+                        }
                       },
                       child: ValueListenableBuilder(
                           valueListenable: context
