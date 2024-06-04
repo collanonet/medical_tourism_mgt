@@ -25,15 +25,19 @@ class _ApplicationBloodPurificationTherapyScreenState
     final formGroup = ReactiveForm.of(context) as FormGroup;
     final formArray = (ReactiveForm.of(context) as FormGroup)
         .control('drugName') as FormArray;
-    return Consumer(
-      builder: (context, model, _) {
-        return Scaffold(
-          body: SafeArea(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      children: [
+        Expanded(
+          child: Scrollbar(
+            trackVisibility: true,
+            thumbVisibility: true,
             child: SingleChildScrollView(
+              primary: true,
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [
@@ -1135,73 +1139,64 @@ class _ApplicationBloodPurificationTherapyScreenState
                         style: context.textTheme.bodyMedium,
                       ),
                     ),
-                    const SizedBox(height: 20),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 60,
-                      child: ValueListenableListener(
-                        valueListenable: context
-                            .read<ApplicationBloodPurificationTherapyModel>()
-                            .submitApplicationBloodPurificationTherapyResponse,
-                        onListen: () {
-                          final value = context
-                              .read<ApplicationBloodPurificationTherapyModel>()
-                              .submitApplicationBloodPurificationTherapyResponse
-                              .value;
-
-                          if (value.hasError) {
-                            snackBarWidget(
-                              message: value.error,
-                              prefixIcon: Icon(
-                                Icons.error,
-                                color: context.appTheme.errorColor,
-                              ),
-                            );
-                          }
-
-                          if (value.hasData) {
-                            snackBarWidget(
-                              message: '正常に保存されました',
-                              prefixIcon: const Icon(Icons.check_circle,
-                                  color: Colors.white),
-                            );
-                          }
-                        },
-                        child: ValueListenableBuilder(
-                            valueListenable: context
-                                .read<
-                                    ApplicationBloodPurificationTherapyModel>()
-                                .submitApplicationBloodPurificationTherapyResponse,
-                            builder: (context, value, _) {
-                              return ReactiveFormConsumer(
-                                  builder: (context, form, _) {
-                                return ElevatedButton(
-                                  onPressed: !value.loading && form.valid
-                                      ? () {
-                                          // call function submit data for I4
-                                          context
-                                              .read<
-                                                  ApplicationBloodPurificationTherapyModel>()
-                                              .postApplicationBloodPurificationTherapy(
-                                                  form);
-                                        }
-                                      : null,
-                                  child: WithLoadingButton(
-                                    isLoading: value.loading,
-                                    child: Text("次へ"),
-                                  ),
-                                );
-                              });
-                            }),
-                      ),
-                    ),
                   ],
                 ),
               ),
             ),
           ),
-        );
-      },
+        ),
+        ValueListenableListener(
+          valueListenable: context
+              .read<ApplicationBloodPurificationTherapyModel>()
+              .submitApplicationBloodPurificationTherapyResponse,
+          onListen: () {
+            final value = context
+                .read<ApplicationBloodPurificationTherapyModel>()
+                .submitApplicationBloodPurificationTherapyResponse
+                .value;
+
+            if (value.hasError) {
+              snackBarWidget(
+                message: value.error,
+                prefixIcon: Icon(
+                  Icons.error,
+                  color: context.appTheme.errorColor,
+                ),
+              );
+            }
+
+            if (value.hasData) {
+              snackBarWidget(
+                message: '正常に保存されました',
+                prefixIcon: const Icon(Icons.check_circle, color: Colors.white),
+              );
+            }
+          },
+          child: ValueListenableBuilder(
+              valueListenable: context
+                  .read<ApplicationBloodPurificationTherapyModel>()
+                  .submitApplicationBloodPurificationTherapyResponse,
+              builder: (context, value, _) {
+                return ReactiveFormConsumer(builder: (context, form, _) {
+                  return ElevatedButton(
+                    onPressed: !value.loading && form.valid
+                        ? () {
+                            // call function submit data for I4
+                            context
+                                .read<
+                                    ApplicationBloodPurificationTherapyModel>()
+                                .postApplicationBloodPurificationTherapy(form);
+                          }
+                        : null,
+                    child: WithLoadingButton(
+                      isLoading: value.loading,
+                      child: Text("保存する"),
+                    ),
+                  );
+                });
+              }),
+        ),
+      ],
     );
   }
 }
