@@ -40,17 +40,6 @@ abstract class ApiService {
   @POST(Apis.LOG_OUT)
   Future<AuthData> logOut();
 
-  @POST('/files/upload')
-  Future<FileResponse> uploadFile(
-    @Part() File file,
-  );
-
-  @POST('/files/upload-bytes')
-  Future<FileResponse> uploadFileBytes(
-    @Field('file') Uint8List file,
-    @Field('filename') String filename,
-  );
-
   @POST('/files/upload-base64')
   Future<FileResponse> uploadFileBase64(
     @Field('file') String file,
@@ -570,6 +559,10 @@ abstract class ApiService {
   Future<WebBookingPatientPreferredDate> getWebBookingPatientPreferredDate(
     @Path('patientId') String patientId,
   );
+
+  @GET('${Apis.BOOKING_MEDICAL_RECORD}/info/{patientId}')
+  Future<MedicalExaminationResponse> getInfoMedicalExamination(
+      @Path('patientId') String patientId);
 
   @GET('${Apis.BOOKING_MEDICAL_RECORD}/{medicalRecord}')
   Future<List<WebBookingMedicalRecordResponse>> getBookingMedicalRecord(

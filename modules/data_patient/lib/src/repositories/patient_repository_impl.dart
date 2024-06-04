@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
@@ -19,25 +18,11 @@ class PatientRepositoryIml extends PatientRepository {
   final PatientLocalProvider local;
 
   @override
-  Future<String> uploadFileDio(
-    Uint8List file,
-    String token,
+  Future<MedicalExaminationResponse> getInfoMedicalExamination(
+    String patientId,
   ) {
-    return remote.uploadFileDio(file, token);
+    return remote.getInfoMedicalExamination(patientId);
   }
-
-  @override
-  Future<FileResponse> uploadFile(
-    File file,
-  ) async =>
-      await remote.uploadFile(file);
-
-  @override
-  Future<FileResponse> uploadFileBytes(
-    Uint8List file,
-    String filename,
-  ) async =>
-      await remote.uploadFileBytes(file, filename);
 
   @override
   Future<FileResponse> uploadFileBase64(

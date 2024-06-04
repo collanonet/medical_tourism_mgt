@@ -40,6 +40,7 @@ export 'agent_manager_contact_response.dart';
 export 'agent_manager_response.dart';
 export 'agent_referral_commission_response.dart';
 export 'agent_response.dart';
+export 'medical_examination_responce.dart';
 export 'file_response.dart';
 export 'file_select.dart';
 export 'token_type.dart';

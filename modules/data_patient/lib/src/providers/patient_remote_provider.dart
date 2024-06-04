@@ -1,5 +1,4 @@
 import 'dart:typed_data';
-import 'package:universal_io/io.dart';
 import 'package:core_network/core_network.dart';
 import 'package:injectable/injectable.dart';
 
@@ -12,23 +11,6 @@ class PatientRemoteProvider {
 
   final ApiService apiService;
   final FileUploadService fileUploadService;
-
-  Future<String> uploadFileDio(
-    Uint8List file,
-    String token,
-  ) async =>
-      await fileUploadService.uploadFile(file, token);
-
-  Future<FileResponse> uploadFile(
-    File file,
-  ) async =>
-      await apiService.uploadFile(file);
-
-  Future<FileResponse> uploadFileBytes(
-    Uint8List file,
-    String filename,
-  ) async =>
-      await apiService.uploadFileBytes(file, filename);
 
   Future<FileResponse> uploadFileBase64(
     String file,
@@ -541,6 +523,12 @@ class PatientRemoteProvider {
     String medicalRecord,
   ) async =>
       await apiService.getWebBookingPatientPreferredDate(medicalRecord);
+
+  Future<MedicalExaminationResponse> getInfoMedicalExamination(
+    String patientId,
+  ) async =>
+      await apiService.getInfoMedicalExamination(patientId);
+
 
   Future<List<WebBookingMedicalRecordResponse>> getBookingMedicalRecord({
     required String medicalRecord,

@@ -1,24 +1,14 @@
 import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:core_network/core_network.dart';
 
 abstract class PatientRepository {
   //GET_PRE_PATIENTS
 
-  Future<String> uploadFileDio(
-    Uint8List file,
-    String token,
-  );
+  Future<MedicalExaminationResponse> getInfoMedicalExamination(
+      String patientId,
+      );
 
-  Future<FileResponse> uploadFile(
-    File file,
-  );
-
-  Future<FileResponse> uploadFileBytes(
-    Uint8List file,
-    String filename,
-  );
   Future<FileResponse> uploadFileBase64(
     String file,
     String filename,

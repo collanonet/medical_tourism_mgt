@@ -25,6 +25,26 @@ class DetailPatientWebReservationModel {
   ValueNotifier<AsyncData<String>> patientIdData =
       ValueNotifier(const AsyncData<String>());
 
+  ValueNotifier<AsyncData<MedicalExaminationResponse>> infoWebBookingPatient =
+      ValueNotifier(const AsyncData());
+
+  void getInfoMedicalExamination(FormGroup formGroup) async {
+    try {
+      infoWebBookingPatient.value = const AsyncData(loading: true);
+      final response = await patientRepository.getInfoMedicalExamination(
+        patientIdData.value.requireData,
+      );
+      infoWebBookingPatient.value = AsyncData(data: response);
+      formGroup.control('preferredDate1').value = response.date1;
+      formGroup.control('preferredDate2').value = response.date2;
+      formGroup.control('preferredDate3').value = response.date3;
+      formGroup.control('noDesiredDate').value = response.desiredDate;
+      formGroup.control('remarks').value = response.remarks;
+    } catch (e) {
+      infoWebBookingPatient.value = AsyncData(error: e);
+    }
+  }
+
   void getMedicalRecords(
       {String? patientId, required FormGroup formGroup}) async {
     if (patientId != null) {
@@ -35,6 +55,8 @@ class DetailPatientWebReservationModel {
         var result = await patientRepository.medicalRecordsByPatient(patientId);
         logger.d('result: $result');
         medicalRecord.value = AsyncData(data: result.firstOrNull);
+
+        getInfoMedicalExamination(formGroup);
         if (result.isNotEmpty) {
           getWebBookingPatientPreferredDate(formGroup, patientId);
           getWebBookingMedicalRecord(medicalRecord.value.requireData.id);

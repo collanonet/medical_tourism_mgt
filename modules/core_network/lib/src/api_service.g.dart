@@ -23,7 +23,7 @@ class _ApiService implements ApiService {
     String email,
     String password,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
@@ -53,7 +53,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<AuthData> refreshToken(String refreshToken) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {'refresh-token': refreshToken};
@@ -80,10 +80,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<AuthData> logOut() async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<AuthData>(Options(
       method: 'POST',
@@ -106,78 +106,11 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<FileResponse> uploadFile(File file) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = FormData();
-    _data.files.add(MapEntry(
-      'file',
-      MultipartFile.fromFileSync(
-        file.path,
-        filename: file.path.split(Platform.pathSeparator).last,
-      ),
-    ));
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<FileResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/files/upload',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = FileResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<FileResponse> uploadFileBytes(
-    Uint8List file,
-    String filename,
-  ) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = {
-      'file': file,
-      'filename': filename,
-    };
-    final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<FileResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/files/upload-bytes',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = FileResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
   Future<FileResponse> uploadFileBase64(
     String file,
     String filename,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = {
@@ -212,7 +145,7 @@ class _ApiService implements ApiService {
     String? agents,
     String? patient,
   }) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'limit': limit,
@@ -221,7 +154,7 @@ class _ApiService implements ApiService {
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<Paginated<PrePatient>>(Options(
       method: 'GET',
@@ -248,7 +181,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<PrePatient> postPrePatient(PrePatientRequest prePatient) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -279,7 +212,7 @@ class _ApiService implements ApiService {
     String id,
     PrePatientRequest prePatient,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -307,10 +240,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<void> deletePrePatient(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -346,7 +279,7 @@ class _ApiService implements ApiService {
     String? returnDatefrom,
     String? returnDateto,
   }) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'limit': limit,
@@ -365,7 +298,7 @@ class _ApiService implements ApiService {
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<Paginated<Patient>>(Options(
       method: 'GET',
@@ -392,10 +325,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<Patient> patient(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<Patient>(Options(
       method: 'GET',
@@ -419,7 +352,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<Patient> postPatient(PatientRequest patient) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -450,7 +383,7 @@ class _ApiService implements ApiService {
     String id,
     PatientRequest patient,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -478,10 +411,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<void> deletePatient(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -502,10 +435,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<List<PatientName>> patientNames(String patientId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<List<dynamic>>(_setStreamType<List<PatientName>>(Options(
       method: 'GET',
@@ -531,10 +464,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<List<PatientName>> patientNamesByPatient(String patientId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<List<dynamic>>(_setStreamType<List<PatientName>>(Options(
       method: 'GET',
@@ -560,10 +493,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<User> patientUser(String userId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result =
         await _dio.fetch<Map<String, dynamic>>(_setStreamType<User>(Options(
       method: 'GET',
@@ -587,7 +520,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<PatientName> postPatientName(PatientNameRequest patientName) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -618,7 +551,7 @@ class _ApiService implements ApiService {
     String id,
     PatientNameRequest patientName,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -646,10 +579,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<void> deletePatientName(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -671,10 +604,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<PatientNationality>> patientNationalities(
       String patientId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<List<dynamic>>(_setStreamType<List<PatientNationality>>(Options(
       method: 'GET',
@@ -702,10 +635,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<PatientNationality>> patientNationalitiesByPatient(
       String patientId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<List<dynamic>>(_setStreamType<List<PatientNationality>>(Options(
       method: 'GET',
@@ -733,7 +666,7 @@ class _ApiService implements ApiService {
   @override
   Future<PatientNationality> postPatientNationality(
       PatientNationalityRequest patientNationality) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -764,7 +697,7 @@ class _ApiService implements ApiService {
     String id,
     PatientNationalityRequest patientNationality,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -792,10 +725,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<void> deletePatientNationality(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -816,10 +749,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<List<PatientPassport>> patientPassports(String patientId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<List<dynamic>>(_setStreamType<List<PatientPassport>>(Options(
       method: 'GET',
@@ -846,10 +779,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<PatientPassport>> patientPassportsByPatient(
       String patientId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<List<dynamic>>(_setStreamType<List<PatientPassport>>(Options(
       method: 'GET',
@@ -876,7 +809,7 @@ class _ApiService implements ApiService {
   @override
   Future<PatientPassport> postPatientPassport(
       PatientPassportRequest patientPassport) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -907,7 +840,7 @@ class _ApiService implements ApiService {
     String id,
     PatientPassportRequest patientPassport,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -935,10 +868,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<void> deletePatientPassport(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -963,7 +896,7 @@ class _ApiService implements ApiService {
     int? limit,
     String? patient,
   }) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'limit': limit,
@@ -971,7 +904,7 @@ class _ApiService implements ApiService {
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<List<dynamic>>(_setStreamType<List<MedicalRecord>>(Options(
       method: 'GET',
@@ -997,10 +930,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<List<MedicalRecord>> medicalRecordsByPatient(String patientId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<List<dynamic>>(_setStreamType<List<MedicalRecord>>(Options(
       method: 'GET',
@@ -1027,7 +960,7 @@ class _ApiService implements ApiService {
   @override
   Future<MedicalRecord> postMedicalRecord(
       MedicalRecordRequest medicalRecord) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1058,7 +991,7 @@ class _ApiService implements ApiService {
     String id,
     MedicalRecordRequest medicalRecord,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1086,10 +1019,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<void> deleteMedicalRecord(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -1111,10 +1044,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<MedicalRecordAgent>> medicalRecordAgents(
       String medicalRecordId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<List<dynamic>>(_setStreamType<List<MedicalRecordAgent>>(Options(
       method: 'GET',
@@ -1142,10 +1075,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<MedicalRecordAgent>> medicalRecordAgentsByMedicalRecord(
       String medicalRecordId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<List<dynamic>>(_setStreamType<List<MedicalRecordAgent>>(Options(
       method: 'GET',
@@ -1173,7 +1106,7 @@ class _ApiService implements ApiService {
   @override
   Future<MedicalRecordAgent> postMedicalRecordAgent(
       MedicalRecordAgentRequest medicalRecordAgent) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1204,7 +1137,7 @@ class _ApiService implements ApiService {
     String id,
     MedicalRecordAgentRequest medicalRecordAgent,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1232,10 +1165,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<void> deleteMedicalRecordAgent(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -1257,10 +1190,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<MedicalRecordReferrer>> medicalRecordReferrers(
       String medicalRecordId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<MedicalRecordReferrer>>(Options(
       method: 'GET',
@@ -1288,10 +1221,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<MedicalRecordReferrer>> medicalRecordReferrersByMedicalRecord(
       String medicalRecordId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<MedicalRecordReferrer>>(Options(
       method: 'GET',
@@ -1319,7 +1252,7 @@ class _ApiService implements ApiService {
   @override
   Future<MedicalRecordReferrer> postMedicalRecordReferrer(
       MedicalRecordReferrerRequest medicalRecordAgent) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1350,7 +1283,7 @@ class _ApiService implements ApiService {
     String id,
     MedicalRecordReferrerRequest medicalRecordAgent,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1378,10 +1311,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<void> deleteMedicalRecordReferrer(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -1403,10 +1336,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<MedicalRecordBudget>> medicalRecordBudgets(
       String medicalRecordId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<List<dynamic>>(_setStreamType<List<MedicalRecordBudget>>(Options(
       method: 'GET',
@@ -1434,10 +1367,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<MedicalRecordBudget>> medicalRecordBudgetsByMedicalRecord(
       String medicalRecordId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<List<dynamic>>(_setStreamType<List<MedicalRecordBudget>>(Options(
       method: 'GET',
@@ -1465,7 +1398,7 @@ class _ApiService implements ApiService {
   @override
   Future<MedicalRecordBudget> postMedicalRecordBudget(
       MedicalRecordBudgetRequest medicalRecordBudget) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1496,7 +1429,7 @@ class _ApiService implements ApiService {
     String id,
     MedicalRecordBudgetRequest medicalRecordBudget,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1524,10 +1457,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<void> deleteMedicalRecordBudget(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -1549,10 +1482,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<MedicalRecordCompanion>> medicalRecordCompanions(
       String medicalRecordId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<MedicalRecordCompanion>>(Options(
       method: 'GET',
@@ -1580,10 +1513,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<MedicalRecordCompanion>> medicalRecordCompanionsByMedicalRecord(
       String medicalRecordId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<MedicalRecordCompanion>>(Options(
       method: 'GET',
@@ -1611,7 +1544,7 @@ class _ApiService implements ApiService {
   @override
   Future<MedicalRecordCompanion> postMedicalRecordCompanion(
       MedicalRecordCompanionRequest medicalRecordCompanion) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1642,7 +1575,7 @@ class _ApiService implements ApiService {
     String id,
     MedicalRecordCompanionRequest medicalRecordCompanion,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1670,10 +1603,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<void> deleteMedicalRecordCompanion(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -1695,10 +1628,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<MedicalRecordHospital>> medicalRecordHospitals(
       String medicalRecordId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<MedicalRecordHospital>>(Options(
       method: 'GET',
@@ -1726,10 +1659,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<MedicalRecordHospital>> medicalRecordHospitalsByMedicalRecord(
       String medicalRecordId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<MedicalRecordHospital>>(Options(
       method: 'GET',
@@ -1757,7 +1690,7 @@ class _ApiService implements ApiService {
   @override
   Future<MedicalRecordHospital> postMedicalRecordHospital(
       MedicalRecordHospitalRequest medicalRecordHospital) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1788,7 +1721,7 @@ class _ApiService implements ApiService {
     String id,
     MedicalRecordHospitalRequest medicalRecordHospital,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1816,10 +1749,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<void> deleteMedicalRecordHospital(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -1841,10 +1774,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<MedicalRecordInterpreter>> medicalRecordInterpreters(
       String medicalRecordId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<MedicalRecordInterpreter>>(Options(
       method: 'GET',
@@ -1872,10 +1805,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<MedicalRecordInterpreter>>
       medicalRecordInterpretersByMedicalRecord(String medicalRecordId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<MedicalRecordInterpreter>>(Options(
       method: 'GET',
@@ -1903,7 +1836,7 @@ class _ApiService implements ApiService {
   @override
   Future<MedicalRecordInterpreter> postMedicalRecordInterpreter(
       MedicalRecordInterpreterRequest medicalRecordInterpreter) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1934,7 +1867,7 @@ class _ApiService implements ApiService {
     String id,
     MedicalRecordInterpreterRequest medicalRecordInterpreter,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -1962,10 +1895,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<void> deleteMedicalRecordInterpreter(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -1987,10 +1920,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<MedicalRecordProgress>> medicalRecordsProgress(
       String medicalRecordId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<MedicalRecordProgress>>(Options(
       method: 'GET',
@@ -2018,10 +1951,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<MedicalRecordProgress>> medicalRecordsProgressByMedicalRecord(
       String medicalRecordId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<MedicalRecordProgress>>(Options(
       method: 'GET',
@@ -2049,7 +1982,7 @@ class _ApiService implements ApiService {
   @override
   Future<MedicalRecordProgress> postMedicalRecordProgress(
       MedicalRecordProgressRequest medicalRecordProgress) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -2080,7 +2013,7 @@ class _ApiService implements ApiService {
     String id,
     MedicalRecordProgressRequest medicalRecordProgress,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -2108,10 +2041,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<void> deleteMedicalRecordProgress(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -2133,10 +2066,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<MedicalRecordOverseaData>>
       medicalRecordOverseaDataByMedicalRecord(String medicalRecordId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<MedicalRecordOverseaData>>(Options(
       method: 'GET',
@@ -2164,7 +2097,7 @@ class _ApiService implements ApiService {
   @override
   Future<MedicalRecordOverseaData> postMedicalRecordOverseaData(
       MedicalRecordOverseaDataRequest medicalRecordOverseaData) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -2195,7 +2128,7 @@ class _ApiService implements ApiService {
     String id,
     MedicalRecordOverseaDataRequest medicalRecordOverseaData,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -2223,10 +2156,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<void> deleteMedicalRecordOverseaData(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -2248,11 +2181,11 @@ class _ApiService implements ApiService {
   @override
   Future<MedicalRecordTravelGroup> medicalRecordsTravelGroup(
       {String? medicalRecord}) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MedicalRecordTravelGroup>(Options(
       method: 'GET',
@@ -2277,7 +2210,7 @@ class _ApiService implements ApiService {
   @override
   Future<MedicalRecordTravelGroup> postMedicalRecordTravelGroup(
       MedicalRecordTravelGroupRequest medicalRecordTravelGroupRequest) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -2305,10 +2238,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<List<MedicalRecordProposal>> getAllMedicalRecordProposals() async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<MedicalRecordProposal>>(Options(
       method: 'GET',
@@ -2336,10 +2269,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<MedicalRecordProposal>> getMedicalRecordProposalsByMedicalRecord(
       String medicalRecordId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<MedicalRecordProposal>>(Options(
       method: 'GET',
@@ -2367,10 +2300,10 @@ class _ApiService implements ApiService {
   @override
   Future<List<MedicalRecordProposal>> getOneMedicalRecordProposal(
       String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<MedicalRecordProposal>>(Options(
       method: 'GET',
@@ -2398,7 +2331,7 @@ class _ApiService implements ApiService {
   @override
   Future<MedicalRecordProposal> postMedicalRecordProposal(
       MedicalRecordProposalRequest medicalRecordProposalRequest) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -2429,7 +2362,7 @@ class _ApiService implements ApiService {
     String id,
     MedicalRecordProposalRequest medicalRecordProposalRequest,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -2457,10 +2390,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<void> deleteMedicalRecordProposal(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -2482,11 +2415,11 @@ class _ApiService implements ApiService {
   @override
   Future<MedicalRecordPatientResponseTreatment>
       getMedicalRecordPatientResponseTreatment({String? medicalRecord}) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MedicalRecordPatientResponseTreatment>(Options(
       method: 'GET',
@@ -2513,7 +2446,7 @@ class _ApiService implements ApiService {
       postMedicalRecordPatientResponseTreatment(
           MedicalRecordPatientResponseTreatmentRequest
               medicalRecordPatientResponseTreatmentRequest) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -2543,11 +2476,11 @@ class _ApiService implements ApiService {
   Future<MedicalRecordPatientResponseMedicalCheckup>
       getMedicalRecordPatientResponseMedicalCheckup(
           {String? medicalRecord}) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MedicalRecordPatientResponseMedicalCheckup>(Options(
       method: 'GET',
@@ -2575,7 +2508,7 @@ class _ApiService implements ApiService {
       postMedicalRecordPatientResponseMedicalCheckup(
           MedicalRecordPatientResponseMedicalCheckupRequest
               medicalRecordPatientResponseMedicalCheckupRequest) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -2605,11 +2538,11 @@ class _ApiService implements ApiService {
   @override
   Future<MedicalRecordPatientResponseOther>
       getMedicalRecordPatientResponseOther({String? medicalRecord}) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MedicalRecordPatientResponseOther>(Options(
       method: 'GET',
@@ -2636,7 +2569,7 @@ class _ApiService implements ApiService {
       postMedicalRecordPatientResponseOther(
           MedicalRecordPatientResponseOtherRequest
               medicalRecordPatientResponseOtherRequest) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -2665,11 +2598,11 @@ class _ApiService implements ApiService {
   @override
   Future<MedicalRecordSummary> getMedicalRecordSummary(
       {String? medicalRecord}) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MedicalRecordSummary>(Options(
       method: 'GET',
@@ -2694,7 +2627,7 @@ class _ApiService implements ApiService {
   @override
   Future<MedicalRecordSummary> postMedicalRecordSummary(
       MedicalRecordSummaryRequest medicalRecordNormalSummaryRequest) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -2723,10 +2656,10 @@ class _ApiService implements ApiService {
   @override
   Future<WebBookingPatientPreferredDate> getWebBookingPatientPreferredDate(
       String patientId) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<WebBookingPatientPreferredDate>(Options(
       method: 'GET',
@@ -2749,12 +2682,40 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<WebBookingMedicalRecordResponse>> getBookingMedicalRecord(
-      String medicalRecord) async {
-    final _extra = <String, dynamic>{};
+  Future<MedicalExaminationResponse> getInfoMedicalExamination(
+      String patientId) async {
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalExaminationResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-web-booking/info/${patientId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = MedicalExaminationResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<WebBookingMedicalRecordResponse>> getBookingMedicalRecord(
+      String medicalRecord) async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<WebBookingMedicalRecordResponse>>(Options(
       method: 'GET',
@@ -2782,7 +2743,7 @@ class _ApiService implements ApiService {
   @override
   Future<WebBookingMedicalRecordResponse> postBookingMedicalRecord(
       WebBookingMedicalRecordRequest webBookingMedicalRecordRequest) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -2810,10 +2771,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<List<TypeResponse>> getTypes() async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<List<dynamic>>(_setStreamType<List<TypeResponse>>(Options(
       method: 'GET',
@@ -2839,7 +2800,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<TypeResponse> postType(TypeRequest typeRequest) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -2870,7 +2831,7 @@ class _ApiService implements ApiService {
     String id,
     TypeRequest typeRequest,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -2898,10 +2859,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<List<WebBookingMedicalRecord>> getWebBookingAdmin() async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<WebBookingMedicalRecord>>(Options(
       method: 'GET',
@@ -2928,10 +2889,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<WebBookingMedicalRecord> getWebBookingAdminById(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<WebBookingMedicalRecord>(Options(
       method: 'GET',
@@ -2958,7 +2919,7 @@ class _ApiService implements ApiService {
     String id,
     WebBookingMedicalRecordRequest webBookingMedicalRecordRequest,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -2986,10 +2947,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<List<AgentResponse>> getAgents() async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<List<dynamic>>(_setStreamType<List<AgentResponse>>(Options(
       method: 'GET',
@@ -3015,10 +2976,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<AgentResponse> getAgent(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio
         .fetch<Map<String, dynamic>>(_setStreamType<AgentResponse>(Options(
       method: 'GET',
@@ -3042,7 +3003,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<AgentResponse> postAgent(AgentRequest agentRequest) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -3073,7 +3034,7 @@ class _ApiService implements ApiService {
     String id,
     AgentRequest agentRequest,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -3101,10 +3062,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<void> deleteAgent(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
@@ -3129,7 +3090,7 @@ class _ApiService implements ApiService {
     int? limit,
     String? agentRecord,
   }) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'limit': limit,
@@ -3137,7 +3098,7 @@ class _ApiService implements ApiService {
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
         _setStreamType<List<AgentManagerResponse>>(Options(
       method: 'GET',
@@ -3164,10 +3125,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<AgentManagerResponse> getAgentManager(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<AgentManagerResponse>(Options(
       method: 'GET',
@@ -3192,7 +3153,7 @@ class _ApiService implements ApiService {
   @override
   Future<AgentManagerResponse> postAgentManager(
       AgentManagerRequest agentManagerRequest) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -3223,7 +3184,7 @@ class _ApiService implements ApiService {
     String id,
     AgentManagerRequest agentManagerRequest,
   ) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
@@ -3251,10 +3212,10 @@ class _ApiService implements ApiService {
 
   @override
   Future<void> deleteAgentManager(String id) async {
-    final _extra = <String, dynamic>{};
+    const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
       method: 'DELETE',
       headers: _headers,
