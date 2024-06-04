@@ -576,4 +576,14 @@ class PatientRemoteProvider {
   ) async =>
           await apiService.postApplicationBloodPurificationTherapy(
               applicationBloodPurificationTherapyRequest);
+
+  Future<ApplicationRiskTestResponse> getApplicationRiskTest({
+    required String medicalRecord,
+  }) async =>
+      await apiService.getApplicationRiskTest(medicalRecord);
+
+  Future<ApplicationRiskTestResponse> postApplicationRiskTest(
+    ApplicationRiskTestRequest applicationRiskTestRequest,
+  ) async =>
+      await apiService.postApplicationRiskTest(applicationRiskTestRequest);
 }

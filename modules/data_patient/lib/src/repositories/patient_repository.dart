@@ -443,13 +443,21 @@ abstract class PatientRepository {
   );
 
   Future<ApplicationBloodPurificationTherapyResponse>
-  getApplicationBloodPurificationTherapy({
+      getApplicationBloodPurificationTherapy({
     required String medicalRecord,
   });
 
   Future<ApplicationBloodPurificationTherapyResponse>
-  postApplicationBloodPurificationTherapy(
-      ApplicationBloodPurificationTherapyRequest
-      applicationBloodPurificationTherapyRequest,
-      );
+      postApplicationBloodPurificationTherapy(
+    ApplicationBloodPurificationTherapyRequest
+        applicationBloodPurificationTherapyRequest,
+  );
+
+  Future<ApplicationRiskTestResponse> getApplicationRiskTest({
+    required String medicalRecord,
+  });
+
+  Future<ApplicationRiskTestResponse> postApplicationRiskTest(
+    ApplicationRiskTestRequest applicationRiskTestRequest,
+  );
 }

@@ -36,6 +36,8 @@ import 'src/detail_patient/patient_response_data/tab/application_blood_purificat
     as _i29;
 import 'src/detail_patient/patient_response_data/tab/application_regenerative_medicine_model.dart'
     as _i17;
+import 'src/detail_patient/patient_response_data/tab/application_risk_test_model.dart'
+    as _i30;
 import 'src/detail_patient/patient_response_data/tab/patient_response_medical_checkup_model.dart'
     as _i20;
 import 'src/detail_patient/patient_response_data/tab/patient_response_other_model.dart'
@@ -114,6 +116,9 @@ class FeaturePatientPackageModule extends _i1.MicroPackageModule {
         _i28.PrePatientModel(patientRepository: gh<_i4.PatientRepository>()));
     gh.factory<_i29.ApplicationBloodPurificationTherapyModel>(() =>
         _i29.ApplicationBloodPurificationTherapyModel(
+            patientRepository: gh<_i4.PatientRepository>()));
+    gh.factory<_i30.ApplicationRiskTestModel>(() =>
+        _i30.ApplicationRiskTestModel(
             patientRepository: gh<_i4.PatientRepository>()));
   }
 }

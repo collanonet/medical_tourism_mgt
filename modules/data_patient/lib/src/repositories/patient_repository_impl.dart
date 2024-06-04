@@ -771,4 +771,16 @@ class PatientRepositoryIml extends PatientRepository {
   ) async =>
           await remote.postApplicationBloodPurificationTherapy(
               applicationBloodPurificationTherapyRequest);
+
+  @override
+  Future<ApplicationRiskTestResponse> getApplicationRiskTest({
+    required String medicalRecord,
+  }) async =>
+      await remote.getApplicationRiskTest(medicalRecord: medicalRecord);
+
+  @override
+  Future<ApplicationRiskTestResponse> postApplicationRiskTest(
+    ApplicationRiskTestRequest applicationRiskTestRequest,
+  ) async =>
+      await remote.postApplicationRiskTest(applicationRiskTestRequest);
 }

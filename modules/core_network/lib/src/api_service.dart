@@ -690,6 +690,16 @@ abstract class ApiService {
     ApplicationBloodPurificationTherapyRequest
         applicationBloodPurificationTherapyRequest,
   );
+
+  @GET(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_RISK_TEST)
+  Future<ApplicationRiskTestResponse> getApplicationRiskTest(
+    @Path('medicalRecord') String medicalRecord,
+  );
+
+  @POST(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_RISK_TEST)
+  Future<ApplicationRiskTestResponse> postApplicationRiskTest(
+    @Body() ApplicationRiskTestRequest applicationRiskTestRequest,
+  );
 }
 
 extension ApiServiceExts on ApiService {

@@ -1,23 +1,24 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:base_view/base_view.dart';
-import 'package:feature_medical_examination/src/application_risk_test/application_risk_test_form.dart';
-import 'package:feature_medical_examination/src/application_risk_test/application_risk_test_screen.dart';
-import 'package:feature_medical_examination/src/medical_examination_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-@RoutePage()
+import 'application_risk_test_form.dart';
+import 'application_risk_test_model.dart';
+import 'application_risk_test_screen.dart';
+
 class ApplicationRiskTestPage extends StatelessWidget {
-  const ApplicationRiskTestPage({super.key});
+  const ApplicationRiskTestPage({super.key, this.patientId});
+
+  final String? patientId;
 
   @override
   Widget build(BuildContext context) {
     return Provider(
-      create: (context) =>
-          GetIt.I<MedicalExaminationModel>()..fechApplicationRiskTest(),
+      create: (context) => GetIt.I<ApplicationRiskTestModel>()
+        ..getMedicalRecords(patientId: patientId),
       child: Scaffold(
         body: LayoutView(
           selectedIndex: 3,
@@ -25,8 +26,8 @@ class ApplicationRiskTestPage extends StatelessWidget {
             builder: (context) {
               return ValueListenableBuilder(
                 valueListenable: context
-                    .watch<MedicalExaminationModel>()
-                    .applicationRiskTestData,
+                    .watch<ApplicationRiskTestModel>()
+                    .applicationRiskTestResponse,
                 builder: (context, value, _) {
                   return Skeletonizer(
                     enabled: value.loading,

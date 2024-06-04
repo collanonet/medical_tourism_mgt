@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'tab/application_beauty_page.dart';
 import 'tab/application_blood_purification_therapy_page.dart';
 import 'tab/application_regenerative_medicine_page.dart';
+import 'tab/application_risk_test_page.dart';
 import 'tab/patient_response_medical_checkup_page.dart';
 import 'tab/patient_response_other_page.dart';
 import 'tab/patient_response_treatment_page.dart';
@@ -38,12 +39,13 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
                   TabBarWidget(
                     selectedIndex: value,
                     menu: [
-                      '治療', // TODO: l10n 対応 (治療) (treatment)
-                      '健診', // TODO: l10n 対応 (健診) (Medical checkup)
-                      'その他', // TODO: l10n 対応 (その他) (other)
-                      '申込_再生医療',
-                      '申込_美容',
-                      '申込_血液浄化療法(アフェレーシス)・透析',
+                      '治療',
+                      '健診',
+                      'その他',
+                      '再生医療',
+                      '美容',
+                      '血液浄化療法(アフェレーシス)・透析',
+                      'リスク検査',
                     ],
                     onPressed: (index) {
                       _selectedIndex.value = index;
@@ -79,6 +81,7 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
                       patientId: widget.patientId),
                   ApplicationBeautyPage(patientId: widget.patientId),
                   ApplicationBloodPurificationTherapyPage(patientId: widget.patientId),
+                  ApplicationRiskTestPage(patientId: widget.patientId),
                 ][index],
               ),
             );

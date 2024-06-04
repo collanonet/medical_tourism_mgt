@@ -1,15 +1,11 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:base_view/base_view.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:core_utils/core_utils.dart';
-import 'package:feature_medical_examination/src/application_risk_test/drup_form.dart';
+import 'package:core_utils/async.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
-import '../medical_examination_model.dart';
+import 'application_risk_test_model.dart';
 
 class ApplicationRiskTestScreen extends StatefulWidget {
   const ApplicationRiskTestScreen({super.key});
@@ -701,7 +697,40 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                     style: context.textTheme.titleMedium,
                   ),
                   const SizedBox(height: 8),
-                  const DrugFormRisk(),
+                  ReactiveFormArray(
+                    formArrayName: "drugName",
+                    builder: (context, formArray, _) {
+                      final row = formArray.controls
+                          .map((control) => (control as FormGroup))
+                          .map(
+                            (currenForm) => Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Text(
+                                  "薬名",
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                                const SizedBox(height: 8),
+                                ReactiveForm(
+                                    formGroup: currenForm,
+                                    child: ReactiveTextField(
+                                      formControlName: "drug",
+                                    )),
+                              ],
+                            ),
+                          )
+                          .toList();
+
+                      return ColumnSeparated(
+                        separatorBuilder: (context, index) {
+                          return SizedBox(
+                            height: 16,
+                          );
+                        },
+                        children: row,
+                      );
+                    },
+                  ),
                   ElevatedButton.icon(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.transparent,
@@ -743,18 +772,17 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                     height: 60,
                     child: ValueListenableListener(
                       valueListenable: context
-                          .read<MedicalExaminationModel>()
-                          .submitApplicationRiskTestData,
+                          .read<ApplicationRiskTestModel>()
+                          .submitApplicationRiskTestResponse,
                       onListen: () {
                         final value = context
-                            .read<MedicalExaminationModel>()
-                            .submitApplicationRiskTestData
+                            .read<ApplicationRiskTestModel>()
+                            .submitApplicationRiskTestResponse
                             .value;
 
                         if (value.hasError) {
                           snackBarWidget(
-                            context: context,
-                            mgs: value.error,
+                            message: value.error,
                             prefixIcon: Icon(
                               Icons.error,
                               color: context.appTheme.errorColor,
@@ -763,24 +791,25 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                         }
 
                         if (value.hasData) {
-                          // navigate to I1 when data success save in server
-                          context.router.push(HomeRoute());
+                          snackBarWidget(
+                            message: '正常に保存されました',
+                            prefixIcon: const Icon(Icons.check_circle,
+                                color: Colors.white),
+                          );
                         }
                       },
                       child: ValueListenableBuilder(
                           valueListenable: context
-                              .read<MedicalExaminationModel>()
-                              .submitApplicationRiskTestData,
+                              .read<ApplicationRiskTestModel>()
+                              .submitApplicationRiskTestResponse,
                           builder: (context, value, _) {
                             return ReactiveFormConsumer(
                                 builder: (context, form, _) {
                               return ElevatedButton(
                                 onPressed: !value.loading && form.valid
                                     ? () {
-                                        // here only call function request save to server
-                                        // call function submit data for I4
                                         context
-                                            .read<MedicalExaminationModel>()
+                                            .read<ApplicationRiskTestModel>()
                                             .postApplicationRiskTesk(form);
                                       }
                                     : null,

@@ -137,4 +137,5 @@ class Apis {
   static const MEDICAL_RECORD_PATIENT_RESPONSE_REGENERATIVE_MEDICAL = '/medical-record-patient-response-regenerative-medical';
   static const MEDICAL_RECORD_PATIENT_RESPONSE_BEAUTY = '/medical-record-patient-response-beauty';
   static const MEDICAL_RECORD_PATIENT_RESPONSE_BLOOD_PURIFICATION_THERAPY = '/medical-record-patient-response-blood-purification-therapy';
+  static const MEDICAL_RECORD_PATIENT_RESPONSE_RISK_TEST = '/medical-record-patient-response-risk-test';
 }

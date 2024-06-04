@@ -37,6 +37,8 @@ class ApplicationRiskTestRequest {
   List<String>? drugName;
   bool? privetcy;
   String? ifwoman;
+  String? medicalRecord;
+
   ApplicationRiskTestRequest({
     this.date1,
     this.date2,
@@ -72,6 +74,7 @@ class ApplicationRiskTestRequest {
     this.drugName,
     this.privetcy,
     this.ifwoman,
+    required this.medicalRecord,
   });
 
   factory ApplicationRiskTestRequest.fromJson(Map<String,dynamic> json){
