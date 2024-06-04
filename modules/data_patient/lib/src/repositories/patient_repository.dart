@@ -433,4 +433,12 @@ abstract class PatientRepository {
       postApplicationRegenerattiveMedical(
           ApplicationRegenerativeMedicalRequest
               applicationRegenerativeMedicalRequest);
+
+  Future<ApplicationBeautyResponse> getApplicationBeauty({
+    required String medicalRecord,
+  });
+
+  Future<ApplicationBeautyResponse> postApplicationBeauty(
+    ApplicationBeautyRequest applicationBeautyRequest,
+  );
 }

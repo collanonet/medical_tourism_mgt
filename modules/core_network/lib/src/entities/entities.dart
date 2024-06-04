@@ -44,4 +44,6 @@ export 'medical_examination_responce.dart';
 export 'file_response.dart';
 export 'file_select.dart';
 export 'token_type.dart';
+export 'application_beauty_response.dart';
+export 'application_beauty_request.dart';
 export 'application_regenerative_medicine_response.dart';

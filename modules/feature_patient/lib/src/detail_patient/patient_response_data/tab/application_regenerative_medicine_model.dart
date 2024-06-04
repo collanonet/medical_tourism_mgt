@@ -7,8 +7,8 @@ import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/src/models/models.dart';
 
 @injectable
-class ApplicationRegenerativeMedical {
-  ApplicationRegenerativeMedical({
+class ApplicationRegenerativeMedicalModel {
+  ApplicationRegenerativeMedicalModel({
     required this.patientRepository,
   });
 
@@ -123,6 +123,7 @@ class ApplicationRegenerativeMedical {
         detail2: formGroup.control('detail2').value,
         readio: formGroup.control('readio').value,
         privetcy: formGroup.control('privetcy').value,
+        medicalRecord: medicalRecord.value.requireData.id,
       ));
       applicationRegenerativeMedical.value = AsyncData(data: response);
       submitApplicationRegenerativeMedical.value = AsyncData(data: response);

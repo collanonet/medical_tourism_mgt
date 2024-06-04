@@ -135,4 +135,5 @@ class Apis {
   static const WEB_BOOKING_ADMIN = '/web-booking-admin';
 
   static const MEDICAL_RECORD_PATIENT_RESPONSE_REGENERATIVE_MEDICAL = '/medical-record-patient-response-regenerative-medical';
+  static const MEDICAL_RECORD_PATIENT_RESPONSE_BEAUTY = '/medical-record-patient-response-beauty';
 }

@@ -854,11 +854,11 @@ class _ApplicationRegenerativeMedicalScreenState
                 height: 60,
                 child: ValueListenableListener(
                   valueListenable: context
-                      .read<ApplicationRegenerativeMedical>()
+                      .read<ApplicationRegenerativeMedicalModel>()
                       .submitApplicationRegenerativeMedical,
                   onListen: () {
                     final value = context
-                        .read<ApplicationRegenerativeMedical>()
+                        .read<ApplicationRegenerativeMedicalModel>()
                         .submitApplicationRegenerativeMedical
                         .value;
 
@@ -876,7 +876,7 @@ class _ApplicationRegenerativeMedicalScreenState
                   },
                   child: ValueListenableBuilder(
                       valueListenable: context
-                          .read<ApplicationRegenerativeMedical>()
+                          .read<ApplicationRegenerativeMedicalModel>()
                           .submitApplicationRegenerativeMedical,
                       builder: (context, value, _) {
                         return ReactiveFormConsumer(
@@ -886,7 +886,7 @@ class _ApplicationRegenerativeMedicalScreenState
                                 ? () {
                                     // call function submit data for I4
                                     context
-                                        .read<ApplicationRegenerativeMedical>()
+                                        .read<ApplicationRegenerativeMedicalModel>()
                                         .postApplicationRegenerativeMedical(
                                             form);
                                   }

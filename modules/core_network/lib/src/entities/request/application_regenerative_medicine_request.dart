@@ -52,6 +52,8 @@ class ApplicationRegenerativeMedicalRequest {
   String? readio;
   bool? privetcy;
   List<String>? nameDrug;
+  String medicalRecord;
+
   ApplicationRegenerativeMedicalRequest({
     this.diseasePrevention,
     this.relapsePrevention,
@@ -102,6 +104,7 @@ class ApplicationRegenerativeMedicalRequest {
     this.readio,
     this.privetcy,
     this.nameDrug,
+    required this.medicalRecord,
   });
 
   factory ApplicationRegenerativeMedicalRequest.fromJson(

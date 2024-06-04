@@ -666,6 +666,16 @@ abstract class ApiService {
     @Body()
     ApplicationRegenerativeMedicalRequest applicationRegenerativeMedicalRequest,
   );
+
+  @GET(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_BEAUTY)
+  Future<ApplicationBeautyResponse> getApplicationBeauty(
+    @Path('medicalRecord') String medicalRecord,
+  );
+
+  @POST(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_BEAUTY)
+  Future<ApplicationBeautyResponse> postApplicationBeauty(
+    @Body() ApplicationBeautyRequest applicationBeautyRequest,
+  );
 }
 
 extension ApiServiceExts on ApiService {

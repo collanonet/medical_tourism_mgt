@@ -67,6 +67,7 @@ ApplicationRegenerativeMedicalRequest
           nameDrug: (json['nameDrug'] as List<dynamic>?)
               ?.map((e) => e as String)
               .toList(),
+          medicalRecord: json['medicalRecord'] as String,
         );
 
 Map<String, dynamic> _$ApplicationRegenerativeMedicalRequestToJson(
@@ -121,4 +122,5 @@ Map<String, dynamic> _$ApplicationRegenerativeMedicalRequestToJson(
       'readio': instance.readio,
       'privetcy': instance.privetcy,
       'nameDrug': instance.nameDrug,
+      'medicalRecord': instance.medicalRecord,
     };

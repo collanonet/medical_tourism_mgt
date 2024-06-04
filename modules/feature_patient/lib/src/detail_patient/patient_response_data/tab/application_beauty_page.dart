@@ -1,31 +1,28 @@
-import 'package:auto_route/annotations.dart';
-import 'package:base_view/base_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import 'application_regenerative_medicine_form.dart';
-import 'application_regenerative_medicine_model.dart';
-import 'application_regenerative_medicine_screen.dart';
+import 'application_beauty_form.dart';
+import 'application_beauty_model.dart';
+import 'application_beauty_screen.dart';
 
-class ApplicationRegenerativeMedicalPage extends StatelessWidget {
-  const ApplicationRegenerativeMedicalPage({super.key, this.patientId});
+class ApplicationBeautyPage extends StatelessWidget {
+  const ApplicationBeautyPage({super.key, this.patientId});
 
   final String? patientId;
 
   @override
   Widget build(BuildContext context) {
     return Provider(
-      create: (context) => GetIt.I<ApplicationRegenerativeMedicalModel>()
+      create: (context) => GetIt.I<ApplicationBeautyModel>()
         ..getMedicalRecords(patientId: patientId),
       child: Builder(
         builder: (context) {
           return ValueListenableBuilder(
-            valueListenable: context
-                .watch<ApplicationRegenerativeMedicalModel>()
-                .applicationRegenerativeMedical,
+            valueListenable:
+                context.watch<ApplicationBeautyModel>().applicationBeautyData,
             builder: (context, value, _) {
               return Skeletonizer(
                 enabled: value.loading,
@@ -34,10 +31,9 @@ class ApplicationRegenerativeMedicalPage extends StatelessWidget {
                     ValidationMessage.required: (error) => 'この項目は必須です',
                   },
                   child: ReactiveFormBuilder(
-                    form: () =>
-                        formApplicationRegenerativeMedical(data: value.data),
+                    form: () => formApplicationBeauty(data: value.data),
                     builder: (context, formGroup, child) {
-                      return const ApplicationRegenerativeMedicalScreen();
+                      return const ApplicationBeautyScreen();
                     },
                   ),
                 ),
