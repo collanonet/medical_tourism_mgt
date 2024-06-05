@@ -1458,20 +1458,25 @@ class BasicInformationModel {
     List<String?> type = [];
 
     if (control.control('travelGroup').value != null) {
+      print("test ${control.control('travelGroup').value}");
       for (var i = 0;
           i < (control.control('travelGroup').value as List<dynamic>).length;
           i++) {
         if ((control.control('travelGroup').value as List<dynamic>)[i]
-                    ['travelGroup'] !=
+                    ['name'] !=
                 null ||
             (control.control('travelGroup').value as List<dynamic>)[i]
-                    ['travelGroup'] !=
+                    ['name'] !=
                 '') {
+          print(
+              "test ${(control.control('travelGroup').value as List<dynamic>)[i]['name']}");
           type.add((control.control('travelGroup').value as List<dynamic>)[i]
-              ['travelGroup']);
+              ['name']);
         }
       }
     }
+
+    print("test ${type}");
 
     MedicalRecordTravelGroupRequest request = MedicalRecordTravelGroupRequest(
       toGroupLeader: control.control('toGroupLeader').value ?? false,
