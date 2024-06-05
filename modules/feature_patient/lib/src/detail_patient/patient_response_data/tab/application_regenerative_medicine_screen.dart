@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -54,7 +55,7 @@ class _ApplicationRegenerativeMedicalScreenState
                     ),
                     Row(
                       children: [
-                        Expanded(
+                        IntrinsicWidth(
                           child: ReactiveCheckboxListTile(
                             controlAffinity: ListTileControlAffinity.leading,
                             contentPadding: EdgeInsets.zero,
@@ -64,7 +65,7 @@ class _ApplicationRegenerativeMedicalScreenState
                           ),
                         ),
                         SizedBox(width: 16),
-                        Expanded(
+                        IntrinsicWidth(
                           child: ReactiveCheckboxListTile(
                             controlAffinity: ListTileControlAffinity.leading,
                             contentPadding: EdgeInsets.zero,
@@ -78,39 +79,27 @@ class _ApplicationRegenerativeMedicalScreenState
                     const SizedBox(height: 16),
                     const Divider(),
                     const SizedBox(height: 16),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: ReactiveCheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          contentPadding: EdgeInsets.zero,
-                          formControlName: "antiAging",
-                          title: Text("アンチエイジング"),
-                        ))
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: ReactiveCheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          contentPadding: EdgeInsets.zero,
-                          formControlName: "beauty",
-                          title: Text("美容"),
-                        ))
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: ReactiveCheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          contentPadding: EdgeInsets.zero,
-                          formControlName: "increaseImmunity",
-                          title: Text("免疫力アップ"),
-                        ))
-                      ],
-                    ),
+                    IntrinsicWidth(
+                        child: ReactiveCheckboxListTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                      formControlName: "antiAging",
+                      title: Text("アンチエイジング"),
+                    )),
+                    IntrinsicWidth(
+                        child: ReactiveCheckboxListTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                      formControlName: "beauty",
+                      title: Text("美容"),
+                    )),
+                    IntrinsicWidth(
+                        child: ReactiveCheckboxListTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                      formControlName: "increaseImmunity",
+                      title: Text("免疫力アップ"),
+                    )),
                     Row(
                       children: [
                         Text(
@@ -129,39 +118,42 @@ class _ApplicationRegenerativeMedicalScreenState
                       style: context.textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 8),
-                    ReactiveDatePicker<DateTime>(
-                      formControlName: 'date1',
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime(2100),
-                      builder: (BuildContext context,
-                          ReactiveDatePickerDelegate<dynamic> picker,
-                          Widget? child) {
-                        return Stack(
-                          children: [
-                            ReactiveTextField<DateTime>(
-                              formControlName: 'date1',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                    IntrinsicWidth(
+                      stepWidth: 250,
+                      child: ReactiveDatePicker<DateTime>(
+                        formControlName: 'date1',
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2100),
+                        builder: (BuildContext context,
+                            ReactiveDatePickerDelegate<dynamic> picker,
+                            Widget? child) {
+                          return Stack(
+                            children: [
+                              ReactiveTextField<DateTime>(
+                                formControlName: 'date1',
+                                readOnly: true,
+                                onTap: (value) => picker.showPicker(),
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 6),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: IconButton(
-                                  onPressed: () => picker.showPicker(),
-                                  icon: Icon(
-                                    Icons.calendar_month,
-                                    color: context.appTheme.primaryColor,
+                              Padding(
+                                padding: const EdgeInsets.only(top: 6),
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: IconButton(
+                                    onPressed: () => picker.showPicker(),
+                                    icon: Icon(
+                                      Icons.calendar_month,
+                                      color: context.appTheme.primaryColor,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        );
-                      },
+                            ],
+                          );
+                        },
+                      ),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -169,39 +161,42 @@ class _ApplicationRegenerativeMedicalScreenState
                       style: context.textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 8),
-                    ReactiveDatePicker<DateTime>(
-                      formControlName: 'date2',
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime(2100),
-                      builder: (BuildContext context,
-                          ReactiveDatePickerDelegate<dynamic> picker,
-                          Widget? child) {
-                        return Stack(
-                          children: [
-                            ReactiveTextField<DateTime>(
-                              formControlName: 'date2',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 6),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: IconButton(
-                                  onPressed: () => picker.showPicker(),
-                                  icon: Icon(
-                                    Icons.calendar_month,
-                                    color: context.appTheme.primaryColor,
-                                  ),
+                    IntrinsicWidth(
+                      stepWidth: 250,
+                      child: ReactiveDatePicker<DateTime>(
+                        formControlName: 'date2',
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2100),
+                        builder: (BuildContext context,
+                            ReactiveDatePickerDelegate<dynamic> picker,
+                            Widget? child) {
+                          return Stack(
+                            children: [
+                              ReactiveTextField<DateTime>(
+                                formControlName: 'date2',
+                                readOnly: true,
+                                onTap: (value) => picker.showPicker(),
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
                               ),
-                            )
-                          ],
-                        );
-                      },
+                              Padding(
+                                padding: const EdgeInsets.only(top: 6),
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: IconButton(
+                                    onPressed: () => picker.showPicker(),
+                                    icon: Icon(
+                                      Icons.calendar_month,
+                                      color: context.appTheme.primaryColor,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          );
+                        },
+                      ),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -209,51 +204,50 @@ class _ApplicationRegenerativeMedicalScreenState
                       style: context.textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 8),
-                    ReactiveDatePicker<DateTime>(
-                      formControlName: 'date3',
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime(2100),
-                      builder: (BuildContext context,
-                          ReactiveDatePickerDelegate<dynamic> picker,
-                          Widget? child) {
-                        return Stack(
-                          children: [
-                            ReactiveTextField<DateTime>(
-                              formControlName: 'date3',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 6),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: IconButton(
-                                  onPressed: () => picker.showPicker(),
-                                  icon: Icon(
-                                    Icons.calendar_month,
-                                    color: context.appTheme.primaryColor,
-                                  ),
+                    IntrinsicWidth(
+                      stepWidth: 250,
+                      child: ReactiveDatePicker<DateTime>(
+                        formControlName: 'date3',
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2100),
+                        builder: (BuildContext context,
+                            ReactiveDatePickerDelegate<dynamic> picker,
+                            Widget? child) {
+                          return Stack(
+                            children: [
+                              ReactiveTextField<DateTime>(
+                                formControlName: 'date3',
+                                readOnly: true,
+                                onTap: (value) => picker.showPicker(),
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
                               ),
-                            )
-                          ],
-                        );
-                      },
+                              Padding(
+                                padding: const EdgeInsets.only(top: 6),
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: IconButton(
+                                    onPressed: () => picker.showPicker(),
+                                    icon: Icon(
+                                      Icons.calendar_month,
+                                      color: context.appTheme.primaryColor,
+                                    ),
+                                  ),
+                                ),
+                              )
+                            ],
+                          );
+                        },
+                      ),
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: ReactiveCheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          contentPadding: EdgeInsets.zero,
-                          formControlName: "noDesiredDate",
-                          title: const Text("希望日なし"),
-                        ))
-                      ],
-                    ),
+                    IntrinsicWidth(
+                        child: ReactiveCheckboxListTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                      formControlName: "noDesiredDate",
+                      title: const Text("希望日なし"),
+                    )),
                     const SizedBox(height: 8),
                     const Text("備考"),
                     const SizedBox(height: 8),
@@ -346,37 +340,12 @@ class _ApplicationRegenerativeMedicalScreenState
                         builder: (context, value, _) {
                           return Row(
                             children: [
-                              Expanded(
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        foregroundColor: value.value == true
-                                            ? Colors.white
-                                            : context.appTheme.primaryColor,
-                                        backgroundColor: value.value == true
-                                            ? context.appTheme.primaryColor
-                                            : Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          side: BorderSide(
-                                            color:
-                                                context.appTheme.primaryColor,
-                                            width: 2,
-                                          ),
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        formGroup.control("sex").value = true;
-                                      },
-                                      child: Text("男性"))),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: ElevatedButton(
+                              ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    foregroundColor: value.value == false
+                                    foregroundColor: value.value == true
                                         ? Colors.white
                                         : context.appTheme.primaryColor,
-                                    backgroundColor: value.value == false
+                                    backgroundColor: value.value == true
                                         ? context.appTheme.primaryColor
                                         : Colors.white,
                                     shape: RoundedRectangleBorder(
@@ -388,10 +357,30 @@ class _ApplicationRegenerativeMedicalScreenState
                                     ),
                                   ),
                                   onPressed: () {
-                                    formGroup.control("sex").value = false;
+                                    formGroup.control("sex").value = true;
                                   },
-                                  child: const Text("女性"),
+                                  child: Text("男性")),
+                              const SizedBox(width: 16),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: value.value == false
+                                      ? Colors.white
+                                      : context.appTheme.primaryColor,
+                                  backgroundColor: value.value == false
+                                      ? context.appTheme.primaryColor
+                                      : Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    side: BorderSide(
+                                      color: context.appTheme.primaryColor,
+                                      width: 2,
+                                    ),
+                                  ),
                                 ),
+                                onPressed: () {
+                                  formGroup.control("sex").value = false;
+                                },
+                                child: const Text("女性"),
                               ),
                             ],
                           );
@@ -420,37 +409,12 @@ class _ApplicationRegenerativeMedicalScreenState
                         builder: (context, value, _) {
                           return Row(
                             children: [
-                              Expanded(
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        foregroundColor: value.value == true
-                                            ? Colors.white
-                                            : context.appTheme.primaryColor,
-                                        backgroundColor: value.value == true
-                                            ? context.appTheme.primaryColor
-                                            : Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          side: BorderSide(
-                                            color:
-                                                context.appTheme.primaryColor,
-                                            width: 2,
-                                          ),
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        formGroup.control("atten").value = true;
-                                      },
-                                      child: Text("あり"))),
-                              const SizedBox(width: 16),
-                              Expanded(
-                                child: ElevatedButton(
+                              ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    foregroundColor: value.value == false
+                                    foregroundColor: value.value == true
                                         ? Colors.white
                                         : context.appTheme.primaryColor,
-                                    backgroundColor: value.value == false
+                                    backgroundColor: value.value == true
                                         ? context.appTheme.primaryColor
                                         : Colors.white,
                                     shape: RoundedRectangleBorder(
@@ -462,10 +426,30 @@ class _ApplicationRegenerativeMedicalScreenState
                                     ),
                                   ),
                                   onPressed: () {
-                                    formGroup.control("atten").value = false;
+                                    formGroup.control("atten").value = true;
                                   },
-                                  child: const Text("なし"),
+                                  child: Text("あり")),
+                              const SizedBox(width: 16),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: value.value == false
+                                      ? Colors.white
+                                      : context.appTheme.primaryColor,
+                                  backgroundColor: value.value == false
+                                      ? context.appTheme.primaryColor
+                                      : Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    side: BorderSide(
+                                      color: context.appTheme.primaryColor,
+                                      width: 2,
+                                    ),
+                                  ),
                                 ),
+                                onPressed: () {
+                                  formGroup.control("atten").value = false;
+                                },
+                                child: const Text("なし"),
                               ),
                             ],
                           );
@@ -548,61 +532,41 @@ class _ApplicationRegenerativeMedicalScreenState
                       style: context.textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: ReactiveCheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          contentPadding: EdgeInsets.zero,
-                          formControlName: "item1",
-                          title: Text("幹細胞療法（移植）"),
-                        )),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: ReactiveCheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          contentPadding: EdgeInsets.zero,
-                          formControlName: "item2",
-                          title: Text("幹細胞療法（上清液"),
-                        )),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: ReactiveCheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          contentPadding: EdgeInsets.zero,
-                          formControlName: "item3",
-                          title: Text("免疫細胞療法"),
-                        )),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: ReactiveCheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          contentPadding: EdgeInsets.zero,
-                          formControlName: "item4",
-                          title: Text("線維芽細胞療法"),
-                        )),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: ReactiveCheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          contentPadding: EdgeInsets.zero,
-                          formControlName: "item5",
-                          title: Text("PRP療法"),
-                        )),
-                      ],
-                    ),
+                    IntrinsicWidth(
+                        child: ReactiveCheckboxListTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                      formControlName: "item1",
+                      title: Text("幹細胞療法（移植）"),
+                    )),
+                    IntrinsicWidth(
+                        child: ReactiveCheckboxListTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                      formControlName: "item2",
+                      title: Text("幹細胞療法（上清液"),
+                    )),
+                    IntrinsicWidth(
+                        child: ReactiveCheckboxListTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                      formControlName: "item3",
+                      title: Text("免疫細胞療法"),
+                    )),
+                    IntrinsicWidth(
+                        child: ReactiveCheckboxListTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                      formControlName: "item4",
+                      title: Text("線維芽細胞療法"),
+                    )),
+                    IntrinsicWidth(
+                        child: ReactiveCheckboxListTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                      formControlName: "item5",
+                      title: Text("PRP療法"),
+                    )),
                     const SizedBox(height: 8),
                     Text("その他"),
                     const SizedBox(height: 8),
@@ -612,28 +576,20 @@ class _ApplicationRegenerativeMedicalScreenState
                     const SizedBox(height: 8),
                     Text("どこで受けましたか？"),
                     const SizedBox(height: 8),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: ReactiveCheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          contentPadding: EdgeInsets.zero,
-                          formControlName: "receive1",
-                          title: Text("母国"),
-                        )),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                            child: ReactiveCheckboxListTile(
-                          controlAffinity: ListTileControlAffinity.leading,
-                          contentPadding: EdgeInsets.zero,
-                          formControlName: "receive2",
-                          title: Text("日本"),
-                        )),
-                      ],
-                    ),
+                    IntrinsicWidth(
+                        child: ReactiveCheckboxListTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                      formControlName: "receive1",
+                      title: Text("母国"),
+                    )),
+                    IntrinsicWidth(
+                        child: ReactiveCheckboxListTile(
+                      controlAffinity: ListTileControlAffinity.leading,
+                      contentPadding: EdgeInsets.zero,
+                      formControlName: "receive2",
+                      title: Text("日本"),
+                    )),
                     const SizedBox(height: 8),
                     Text("母国以外の外国"),
                     const SizedBox(height: 8),
@@ -684,21 +640,27 @@ class _ApplicationRegenerativeMedicalScreenState
                         boxRequired(label: '必須', enabled: true),
                       ],
                     ),
-                    ReactiveRadioListTile(
-                      formControlName: "readio",
-                      value: 'option1',
-                      title: const Text("妊娠していない"),
-                      onChanged: (control) {},
+                    IntrinsicWidth(
+                      child: ReactiveRadioListTile(
+                        formControlName: "readio",
+                        value: 'option1',
+                        title: const Text("妊娠していない"),
+                        onChanged: (control) {},
+                      ),
                     ),
-                    ReactiveRadioListTile(
-                      formControlName: "readio",
-                      value: 'option2',
-                      title: const Text("妊娠している可能性がある"),
+                    IntrinsicWidth(
+                      child: ReactiveRadioListTile(
+                        formControlName: "readio",
+                        value: 'option2',
+                        title: const Text("妊娠している可能性がある"),
+                      ),
                     ),
-                    ReactiveRadioListTile(
-                      formControlName: "readio",
-                      value: 'option3',
-                      title: const Text("妊娠している"),
+                    IntrinsicWidth(
+                      child: ReactiveRadioListTile(
+                        formControlName: "readio",
+                        value: 'option3',
+                        title: const Text("妊娠している"),
+                      ),
                     ),
                     const SizedBox(height: 8),
                     const Divider(),
@@ -758,11 +720,13 @@ class _ApplicationRegenerativeMedicalScreenState
                                 children: [
                                   Text("薬名"),
                                   const SizedBox(height: 8),
-                                  ReactiveForm(
-                                      formGroup: currenForm,
-                                      child: ReactiveTextField(
-                                        formControlName: "nameDrug",
-                                      )),
+                                  IntrinsicWidth(
+                                    child: ReactiveForm(
+                                        formGroup: currenForm,
+                                        child: ReactiveTextField(
+                                          formControlName: "nameDrug",
+                                        )),
+                                  ),
                                 ],
                               ),
                             )
@@ -778,31 +742,36 @@ class _ApplicationRegenerativeMedicalScreenState
                         );
                       },
                     ),
-                    ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        foregroundColor: Colors.transparent,
-                        shadowColor: Theme.of(context).scaffoldBackgroundColor,
-                        surfaceTintColor:
-                            Theme.of(context).scaffoldBackgroundColor,
-                        padding: EdgeInsets.zero,
-                      ),
-                      onPressed: () {
-                        formArray.add(
-                          FormGroup({
-                            'nameDrug': FormControl<String>(),
-                          }),
-                        );
-                        setState(() {});
-                      },
-                      icon: Icon(
-                        Icons.add_box_rounded,
-                        color: context.appTheme.primaryColor,
-                      ),
-                      label: Text(
-                        "薬名を追加",
-                        style: TextStyle(color: context.appTheme.primaryColor),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor:
+                              Theme.of(context).scaffoldBackgroundColor,
+                          foregroundColor: Colors.transparent,
+                          shadowColor:
+                              Theme.of(context).scaffoldBackgroundColor,
+                          surfaceTintColor:
+                              Theme.of(context).scaffoldBackgroundColor,
+                          padding: EdgeInsets.zero,
+                        ),
+                        onPressed: () {
+                          formArray.add(
+                            FormGroup({
+                              'nameDrug': FormControl<String>(),
+                            }),
+                          );
+                          setState(() {});
+                        },
+                        icon: Icon(
+                          Icons.add_box_rounded,
+                          color: context.appTheme.primaryColor,
+                        ),
+                        label: Text(
+                          "薬名を追加",
+                          style:
+                              TextStyle(color: context.appTheme.primaryColor),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 8),
@@ -846,24 +815,20 @@ class _ApplicationRegenerativeMedicalScreenState
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      "DICOMデータは、発症時と最新のデータが\nそれぞれ必要です。",
+                      "DICOMデータは、発症時と最新のデータがそれぞれ必要です。",
                       style: context.textTheme.bodyMedium,
                     ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ReactiveCheckboxListTile(
-                            controlAffinity: ListTileControlAffinity.leading,
-                            contentPadding: EdgeInsets.zero,
-                            formControlName: 'privetcy',
-                            onChanged: (value) {},
-                            title: Text(
-                              '個人情報の取り扱いについて、\nプライバシーポリシーに同意します。',
-                              style: context.textTheme.bodyMedium,
-                            ),
-                          ),
+                    IntrinsicWidth(
+                      child: ReactiveCheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        formControlName: 'privetcy',
+                        onChanged: (value) {},
+                        title: Text(
+                          '個人情報の取り扱いについて、プライバシーポリシーに同意します。',
+                          style: context.textTheme.bodyMedium,
                         ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
@@ -930,49 +895,47 @@ class _ApplicationRegenerativeMedicalScreenState
         builder: (context, value, _) {
           return Row(
             children: [
-              Expanded(
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: value.value == true
-                            ? Colors.white
-                            : context.appTheme.primaryColor,
-                        backgroundColor: value.value == true
-                            ? context.appTheme.primaryColor
-                            : Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          side: BorderSide(
-                            color: context.appTheme.primaryColor,
-                            width: 2,
-                          ),
-                        ),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: value.value == true
+                        ? Colors.white
+                        : context.appTheme.primaryColor,
+                    backgroundColor: value.value == true
+                        ? context.appTheme.primaryColor
+                        : Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(
+                        color: context.appTheme.primaryColor,
+                        width: 2,
                       ),
-                      onPressed: () {
-                        formGroup.control(control).value = true;
-                      },
-                      child: Text("希望する"))),
+                    ),
+                  ),
+                  onPressed: () {
+                    formGroup.control(control).value = true;
+                  },
+                  child: Text("希望する")),
               SizedBox(width: 16),
-              Expanded(
-                  child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        foregroundColor: value.value == false
-                            ? Colors.white
-                            : context.appTheme.primaryColor,
-                        backgroundColor: value.value == false
-                            ? context.appTheme.primaryColor
-                            : Colors.white,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          side: BorderSide(
-                            color: context.appTheme.primaryColor,
-                            width: 2,
-                          ),
-                        ),
+              ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    foregroundColor: value.value == false
+                        ? Colors.white
+                        : context.appTheme.primaryColor,
+                    backgroundColor: value.value == false
+                        ? context.appTheme.primaryColor
+                        : Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      side: BorderSide(
+                        color: context.appTheme.primaryColor,
+                        width: 2,
                       ),
-                      onPressed: () {
-                        formGroup.control(control).value = false;
-                      },
-                      child: Text("希望しない"))),
+                    ),
+                  ),
+                  onPressed: () {
+                    formGroup.control(control).value = false;
+                  },
+                  child: Text("希望しない")),
             ],
           );
         });

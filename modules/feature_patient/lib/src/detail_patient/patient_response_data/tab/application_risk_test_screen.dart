@@ -1,6 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -52,39 +53,42 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                       style: context.textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 8),
-                    ReactiveDatePicker<DateTime>(
-                      formControlName: 'date1',
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime(2100),
-                      builder: (BuildContext context,
-                          ReactiveDatePickerDelegate<dynamic> picker,
-                          Widget? child) {
-                        return Stack(
-                          children: [
-                            ReactiveTextField<DateTime>(
-                              formControlName: 'date1',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                    IntrinsicWidth(
+                      stepWidth: 250,
+                      child: ReactiveDatePicker<DateTime>(
+                        formControlName: 'date1',
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2100),
+                        builder: (BuildContext context,
+                            ReactiveDatePickerDelegate<dynamic> picker,
+                            Widget? child) {
+                          return Stack(
+                            children: [
+                              ReactiveTextField<DateTime>(
+                                formControlName: 'date1',
+                                readOnly: true,
+                                onTap: (value) => picker.showPicker(),
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 6),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: IconButton(
-                                  onPressed: () => picker.showPicker(),
-                                  icon: Icon(
-                                    Icons.calendar_month,
-                                    color: context.appTheme.primaryColor,
+                              Padding(
+                                padding: const EdgeInsets.only(top: 6),
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: IconButton(
+                                    onPressed: () => picker.showPicker(),
+                                    icon: Icon(
+                                      Icons.calendar_month,
+                                      color: context.appTheme.primaryColor,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        );
-                      },
+                            ],
+                          );
+                        },
+                      ),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -92,39 +96,42 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                       style: context.textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 8),
-                    ReactiveDatePicker<DateTime>(
-                      formControlName: 'date2',
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime(2100),
-                      builder: (BuildContext context,
-                          ReactiveDatePickerDelegate<dynamic> picker,
-                          Widget? child) {
-                        return Stack(
-                          children: [
-                            ReactiveTextField<DateTime>(
-                              formControlName: 'date2',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                    IntrinsicWidth(
+                      stepWidth: 250,
+                      child: ReactiveDatePicker<DateTime>(
+                        formControlName: 'date2',
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2100),
+                        builder: (BuildContext context,
+                            ReactiveDatePickerDelegate<dynamic> picker,
+                            Widget? child) {
+                          return Stack(
+                            children: [
+                              ReactiveTextField<DateTime>(
+                                formControlName: 'date2',
+                                readOnly: true,
+                                onTap: (value) => picker.showPicker(),
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 6),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: IconButton(
-                                  onPressed: () => picker.showPicker(),
-                                  icon: Icon(
-                                    Icons.calendar_month,
-                                    color: context.appTheme.primaryColor,
+                              Padding(
+                                padding: const EdgeInsets.only(top: 6),
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: IconButton(
+                                    onPressed: () => picker.showPicker(),
+                                    icon: Icon(
+                                      Icons.calendar_month,
+                                      color: context.appTheme.primaryColor,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        );
-                      },
+                            ],
+                          );
+                        },
+                      ),
                     ),
                     const SizedBox(height: 8),
                     Text(
@@ -132,46 +139,51 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                       style: context.textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 8),
-                    ReactiveDatePicker<DateTime>(
-                      formControlName: 'date3',
-                      firstDate: DateTime.now(),
-                      lastDate: DateTime(2100),
-                      builder: (BuildContext context,
-                          ReactiveDatePickerDelegate<dynamic> picker,
-                          Widget? child) {
-                        return Stack(
-                          children: [
-                            ReactiveTextField<DateTime>(
-                              formControlName: 'date3',
-                              readOnly: true,
-                              onTap: (value) => picker.showPicker(),
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                    IntrinsicWidth(
+                      stepWidth: 250,
+                      child: ReactiveDatePicker<DateTime>(
+                        formControlName: 'date3',
+                        firstDate: DateTime.now(),
+                        lastDate: DateTime(2100),
+                        builder: (BuildContext context,
+                            ReactiveDatePickerDelegate<dynamic> picker,
+                            Widget? child) {
+                          return Stack(
+                            children: [
+                              ReactiveTextField<DateTime>(
+                                formControlName: 'date3',
+                                readOnly: true,
+                                onTap: (value) => picker.showPicker(),
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(top: 6),
-                              child: Align(
-                                alignment: Alignment.centerRight,
-                                child: IconButton(
-                                  onPressed: () => picker.showPicker(),
-                                  icon: Icon(
-                                    Icons.calendar_month,
-                                    color: context.appTheme.primaryColor,
+                              Padding(
+                                padding: const EdgeInsets.only(top: 6),
+                                child: Align(
+                                  alignment: Alignment.centerRight,
+                                  child: IconButton(
+                                    onPressed: () => picker.showPicker(),
+                                    icon: Icon(
+                                      Icons.calendar_month,
+                                      color: context.appTheme.primaryColor,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
-                        );
-                      },
+                            ],
+                          );
+                        },
+                      ),
                     ),
                     const SizedBox(height: 8),
-                    ReactiveCheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      formControlName: "noDate",
-                      title: const Text("希望日なし"),
+                    IntrinsicWidth(
+                      child: ReactiveCheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        formControlName: "noDate",
+                        title: const Text("希望日なし"),
+                      ),
                     ),
                     const SizedBox(height: 8),
                     Text("備考"),
@@ -261,37 +273,12 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                         builder: (context, value, _) {
                           return Row(
                             children: [
-                              Expanded(
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        foregroundColor: value.value == true
-                                            ? Colors.white
-                                            : context.appTheme.primaryColor,
-                                        backgroundColor: value.value == true
-                                            ? context.appTheme.primaryColor
-                                            : Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          side: BorderSide(
-                                            color:
-                                                context.appTheme.primaryColor,
-                                            width: 2,
-                                          ),
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        formGroup.control("sex").value = true;
-                                      },
-                                      child: Text("男性"))),
-                              SizedBox(width: 16),
-                              Expanded(
-                                child: ElevatedButton(
+                              ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    foregroundColor: value.value == false
+                                    foregroundColor: value.value == true
                                         ? Colors.white
                                         : context.appTheme.primaryColor,
-                                    backgroundColor: value.value == false
+                                    backgroundColor: value.value == true
                                         ? context.appTheme.primaryColor
                                         : Colors.white,
                                     shape: RoundedRectangleBorder(
@@ -303,10 +290,30 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                                     ),
                                   ),
                                   onPressed: () {
-                                    formGroup.control("sex").value = false;
+                                    formGroup.control("sex").value = true;
                                   },
-                                  child: Text("女性"),
+                                  child: Text("男性")),
+                              SizedBox(width: 16),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: value.value == false
+                                      ? Colors.white
+                                      : context.appTheme.primaryColor,
+                                  backgroundColor: value.value == false
+                                      ? context.appTheme.primaryColor
+                                      : Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    side: BorderSide(
+                                      color: context.appTheme.primaryColor,
+                                      width: 2,
+                                    ),
+                                  ),
                                 ),
+                                onPressed: () {
+                                  formGroup.control("sex").value = false;
+                                },
+                                child: Text("女性"),
                               ),
                             ],
                           );
@@ -325,84 +332,110 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                       style: context.textTheme.titleMedium,
                     ),
                     const SizedBox(height: 8),
-                    ReactiveCheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      formControlName: "menu1",
-                      title: const Text("CTC（血中循環がん細胞）検査"),
+                    IntrinsicWidth(
+                      child: ReactiveCheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        formControlName: "menu1",
+                        title: const Text("CTC（血中循環がん細胞）検査"),
+                      ),
                     ),
-                    ReactiveCheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      formControlName: "menu2",
-                      title: const Text("遺伝子検査"),
+                    IntrinsicWidth(
+                      child: ReactiveCheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        formControlName: "menu2",
+                        title: const Text("遺伝子検査"),
+                      ),
                     ),
-                    ReactiveCheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      formControlName: "menu3",
-                      title: const Text(
-                          "アミノインデックス（がんリスクスクリーニング(AICS)・生活習慣病リスクスクリーニング(AILS)）"),
+                    IntrinsicWidth(
+                      child: ReactiveCheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        formControlName: "menu3",
+                        title: const Text(
+                            "アミノインデックス（がんリスクスクリーニング(AICS)・生活習慣病リスクスクリーニング(AILS)）"),
+                      ),
                     ),
-                    ReactiveCheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      formControlName: "menu4",
-                      title: const Text("サリバチェッカー"),
+                    IntrinsicWidth(
+                      child: ReactiveCheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        formControlName: "menu4",
+                        title: const Text("サリバチェッカー"),
+                      ),
                     ),
-                    ReactiveCheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      formControlName: "menu5",
-                      title: const Text("マイクロアレイ血液検査"),
+                    IntrinsicWidth(
+                      child: ReactiveCheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        formControlName: "menu5",
+                        title: const Text("マイクロアレイ血液検査"),
+                      ),
                     ),
-                    ReactiveCheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      formControlName: "menu6",
-                      title: const Text("テロメアテスト"),
+                    IntrinsicWidth(
+                      child: ReactiveCheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        formControlName: "menu6",
+                        title: const Text("テロメアテスト"),
+                      ),
                     ),
-                    ReactiveCheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      formControlName: "menu7",
-                      title: const Text("LOX index(ロックス インデックス)"),
+                    IntrinsicWidth(
+                      child: ReactiveCheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        formControlName: "menu7",
+                        title: const Text("LOX index(ロックス インデックス)"),
+                      ),
                     ),
-                    ReactiveCheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      formControlName: "menu8",
-                      title: const Text("Cologic（大腸がんリスク検査）"),
+                    IntrinsicWidth(
+                      child: ReactiveCheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        formControlName: "menu8",
+                        title: const Text("Cologic（大腸がんリスク検査）"),
+                      ),
                     ),
-                    ReactiveCheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      formControlName: "menu9",
-                      title: const Text("ピロリ菌検査"),
+                    IntrinsicWidth(
+                      child: ReactiveCheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        formControlName: "menu9",
+                        title: const Text("ピロリ菌検査"),
+                      ),
                     ),
-                    ReactiveCheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      formControlName: "menu10",
-                      title: const Text("認知症検査"),
+                    IntrinsicWidth(
+                      child: ReactiveCheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        formControlName: "menu10",
+                        title: const Text("認知症検査"),
+                      ),
                     ),
-                    ReactiveCheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      formControlName: "menu11",
-                      title: const Text("有害金属・必須ミネラル検査"),
+                    IntrinsicWidth(
+                      child: ReactiveCheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        formControlName: "menu11",
+                        title: const Text("有害金属・必須ミネラル検査"),
+                      ),
                     ),
-                    ReactiveCheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      formControlName: "menu12",
-                      title: const Text("睡眠時無呼吸症候群検査・治療"),
+                    IntrinsicWidth(
+                      child: ReactiveCheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        formControlName: "menu12",
+                        title: const Text("睡眠時無呼吸症候群検査・治療"),
+                      ),
                     ),
-                    ReactiveCheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      formControlName: "menu13",
-                      title: const Text("メタトロン検査"),
+                    IntrinsicWidth(
+                      child: ReactiveCheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        formControlName: "menu13",
+                        title: const Text("メタトロン検査"),
+                      ),
                     ),
                     const SizedBox(height: 8),
                     Text("その他"),
@@ -441,39 +474,12 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                         builder: (context, value, _) {
                           return Row(
                             children: [
-                              Expanded(
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        foregroundColor: value.value == true
-                                            ? Colors.white
-                                            : context.appTheme.primaryColor,
-                                        backgroundColor: value.value == true
-                                            ? context.appTheme.primaryColor
-                                            : Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          side: BorderSide(
-                                            color:
-                                                context.appTheme.primaryColor,
-                                            width: 2,
-                                          ),
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        formGroup
-                                            .control("historyCancer")
-                                            .value = true;
-                                      },
-                                      child: Text("あり"))),
-                              SizedBox(width: 16),
-                              Expanded(
-                                child: ElevatedButton(
+                              ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    foregroundColor: value.value == false
+                                    foregroundColor: value.value == true
                                         ? Colors.white
                                         : context.appTheme.primaryColor,
-                                    backgroundColor: value.value == false
+                                    backgroundColor: value.value == true
                                         ? context.appTheme.primaryColor
                                         : Colors.white,
                                     shape: RoundedRectangleBorder(
@@ -486,10 +492,31 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                                   ),
                                   onPressed: () {
                                     formGroup.control("historyCancer").value =
-                                        false;
+                                        true;
                                   },
-                                  child: Text("なし"),
+                                  child: Text("あり")),
+                              SizedBox(width: 16),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: value.value == false
+                                      ? Colors.white
+                                      : context.appTheme.primaryColor,
+                                  backgroundColor: value.value == false
+                                      ? context.appTheme.primaryColor
+                                      : Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    side: BorderSide(
+                                      color: context.appTheme.primaryColor,
+                                      width: 2,
+                                    ),
+                                  ),
                                 ),
+                                onPressed: () {
+                                  formGroup.control("historyCancer").value =
+                                      false;
+                                },
+                                child: Text("なし"),
                               ),
                             ],
                           );
@@ -519,26 +546,32 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                       ],
                     ),
                     const SizedBox(height: 8),
-                    ReactiveRadioListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      value: "notPregnant",
-                      formControlName: "ifwoman",
-                      title: const Text("妊娠していない"),
+                    IntrinsicWidth(
+                      child: ReactiveRadioListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        value: "notPregnant",
+                        formControlName: "ifwoman",
+                        title: const Text("妊娠していない"),
+                      ),
                     ),
-                    ReactiveRadioListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      value: "bePregnant",
-                      formControlName: "ifwoman",
-                      title: const Text("妊娠している可能性がある"),
+                    IntrinsicWidth(
+                      child: ReactiveRadioListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        value: "bePregnant",
+                        formControlName: "ifwoman",
+                        title: const Text("妊娠している可能性がある"),
+                      ),
                     ),
-                    ReactiveRadioListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      value: "pregnant",
-                      formControlName: "ifwoman",
-                      title: const Text("妊娠している"),
+                    IntrinsicWidth(
+                      child: ReactiveRadioListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        value: "pregnant",
+                        formControlName: "ifwoman",
+                        title: const Text("妊娠している"),
+                      ),
                     ),
                     const SizedBox(height: 8),
                     const Divider(),
@@ -558,39 +591,12 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                         builder: (context, value, _) {
                           return Row(
                             children: [
-                              Expanded(
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        foregroundColor: value.value == true
-                                            ? Colors.white
-                                            : context.appTheme.primaryColor,
-                                        backgroundColor: value.value == true
-                                            ? context.appTheme.primaryColor
-                                            : Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          side: BorderSide(
-                                            color:
-                                                context.appTheme.primaryColor,
-                                            width: 2,
-                                          ),
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        formGroup
-                                            .control("treatmentDetail")
-                                            .value = true;
-                                      },
-                                      child: Text("あり"))),
-                              SizedBox(width: 16),
-                              Expanded(
-                                child: ElevatedButton(
+                              ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    foregroundColor: value.value == false
+                                    foregroundColor: value.value == true
                                         ? Colors.white
                                         : context.appTheme.primaryColor,
-                                    backgroundColor: value.value == false
+                                    backgroundColor: value.value == true
                                         ? context.appTheme.primaryColor
                                         : Colors.white,
                                     shape: RoundedRectangleBorder(
@@ -603,10 +609,31 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                                   ),
                                   onPressed: () {
                                     formGroup.control("treatmentDetail").value =
-                                        false;
+                                        true;
                                   },
-                                  child: Text("なし"),
+                                  child: Text("あり")),
+                              SizedBox(width: 16),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: value.value == false
+                                      ? Colors.white
+                                      : context.appTheme.primaryColor,
+                                  backgroundColor: value.value == false
+                                      ? context.appTheme.primaryColor
+                                      : Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    side: BorderSide(
+                                      color: context.appTheme.primaryColor,
+                                      width: 2,
+                                    ),
+                                  ),
                                 ),
+                                onPressed: () {
+                                  formGroup.control("treatmentDetail").value =
+                                      false;
+                                },
+                                child: Text("なし"),
                               ),
                             ],
                           );
@@ -636,39 +663,12 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                         builder: (context, value, _) {
                           return Row(
                             children: [
-                              Expanded(
-                                  child: ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        foregroundColor: value.value == true
-                                            ? Colors.white
-                                            : context.appTheme.primaryColor,
-                                        backgroundColor: value.value == true
-                                            ? context.appTheme.primaryColor
-                                            : Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                          side: BorderSide(
-                                            color:
-                                                context.appTheme.primaryColor,
-                                            width: 2,
-                                          ),
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        formGroup
-                                            .control("treatmentDetail1")
-                                            .value = true;
-                                      },
-                                      child: Text("あり"))),
-                              SizedBox(width: 16),
-                              Expanded(
-                                child: ElevatedButton(
+                              ElevatedButton(
                                   style: ElevatedButton.styleFrom(
-                                    foregroundColor: value.value == false
+                                    foregroundColor: value.value == true
                                         ? Colors.white
                                         : context.appTheme.primaryColor,
-                                    backgroundColor: value.value == false
+                                    backgroundColor: value.value == true
                                         ? context.appTheme.primaryColor
                                         : Colors.white,
                                     shape: RoundedRectangleBorder(
@@ -682,10 +682,31 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                                   onPressed: () {
                                     formGroup
                                         .control("treatmentDetail1")
-                                        .value = false;
+                                        .value = true;
                                   },
-                                  child: Text("なし"),
+                                  child: Text("あり")),
+                              SizedBox(width: 16),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: value.value == false
+                                      ? Colors.white
+                                      : context.appTheme.primaryColor,
+                                  backgroundColor: value.value == false
+                                      ? context.appTheme.primaryColor
+                                      : Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    side: BorderSide(
+                                      color: context.appTheme.primaryColor,
+                                      width: 2,
+                                    ),
+                                  ),
                                 ),
+                                onPressed: () {
+                                  formGroup.control("treatmentDetail1").value =
+                                      false;
+                                },
+                                child: Text("なし"),
                               ),
                             ],
                           );
@@ -726,11 +747,14 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                                     style: context.textTheme.bodyMedium,
                                   ),
                                   const SizedBox(height: 8),
-                                  ReactiveForm(
-                                      formGroup: currenForm,
-                                      child: ReactiveTextField(
-                                        formControlName: "drug",
-                                      )),
+                                  IntrinsicWidth(
+                                    stepWidth: 250,
+                                    child: ReactiveForm(
+                                        formGroup: currenForm,
+                                        child: ReactiveTextField(
+                                          formControlName: "drug",
+                                        )),
+                                  ),
                                 ],
                               ),
                             )
@@ -746,39 +770,45 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                         );
                       },
                     ),
-                    ElevatedButton.icon(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.transparent,
-                        foregroundColor: Colors.transparent,
-                        shadowColor: Colors.transparent,
-                        surfaceTintColor: Colors.transparent,
-                        padding: EdgeInsets.zero,
-                      ),
-                      onPressed: () {
-                        formArray.add(
-                          FormGroup({
-                            'drug': FormControl<String>(),
-                          }),
-                        );
-                        setState(() {});
-                      },
-                      icon: Icon(
-                        Icons.add_box_rounded,
-                        color: context.appTheme.primaryColor,
-                      ),
-                      label: Text(
-                        "薬名を追加",
-                        style: TextStyle(color: context.appTheme.primaryColor),
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: ElevatedButton.icon(
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.transparent,
+                          foregroundColor: Colors.transparent,
+                          shadowColor: Colors.transparent,
+                          surfaceTintColor: Colors.transparent,
+                          padding: EdgeInsets.zero,
+                        ),
+                        onPressed: () {
+                          formArray.add(
+                            FormGroup({
+                              'drug': FormControl<String>(),
+                            }),
+                          );
+                          setState(() {});
+                        },
+                        icon: Icon(
+                          Icons.add_box_rounded,
+                          color: context.appTheme.primaryColor,
+                        ),
+                        label: Text(
+                          "薬名を追加",
+                          style:
+                              TextStyle(color: context.appTheme.primaryColor),
+                        ),
                       ),
                     ),
                     const SizedBox(height: 50),
-                    ReactiveCheckboxListTile(
-                      controlAffinity: ListTileControlAffinity.leading,
-                      contentPadding: EdgeInsets.zero,
-                      formControlName: "privetcy",
-                      title: Text(
-                        "個人情報の取り扱いについて、\nプライバシーポリシーに同意します。",
-                        style: context.textTheme.bodyMedium,
+                    IntrinsicWidth(
+                      child: ReactiveCheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        formControlName: "privetcy",
+                        title: Text(
+                          "個人情報の取り扱いについて、プライバシーポリシーに同意します。",
+                          style: context.textTheme.bodyMedium,
+                        ),
                       ),
                     ),
                   ],
