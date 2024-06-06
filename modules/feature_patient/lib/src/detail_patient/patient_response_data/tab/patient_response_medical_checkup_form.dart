@@ -3,6 +3,11 @@ import 'package:reactive_forms/reactive_forms.dart';
 FormGroup medicalCheckupForm() {
   return FormGroup({
     'id': FormControl<String>(),
+    'date1': FormControl<DateTime>(),
+    'date2': FormControl<DateTime>(),
+    'date3': FormControl<DateTime>(),
+    'desiredDate': FormControl<bool>(),
+    'remarks': FormControl<String>(),
     'numberOfPeopleRequestingMedicalCheckup': FormControl<int>(
       value: 0,
     ),

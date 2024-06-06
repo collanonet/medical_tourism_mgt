@@ -10,6 +10,17 @@ MedicalRecordPatientResponseMedicalCheckupRequest
     _$MedicalRecordPatientResponseMedicalCheckupRequestFromJson(
             Map<String, dynamic> json) =>
         MedicalRecordPatientResponseMedicalCheckupRequest(
+          date1: json['date1'] == null
+              ? null
+              : DateTime.parse(json['date1'] as String),
+          date2: json['date2'] == null
+              ? null
+              : DateTime.parse(json['date2'] as String),
+          date3: json['date3'] == null
+              ? null
+              : DateTime.parse(json['date3'] as String),
+          desiredDate: json['desiredDate'] as bool?,
+          remarks: json['remarks'] as String?,
           numberOfPeopleRequestingMedicalCheckup:
               (json['numberOfPeopleRequestingMedicalCheckup'] as num?)?.toInt(),
           age: (json['age'] as num?)?.toInt(),
@@ -49,6 +60,11 @@ MedicalRecordPatientResponseMedicalCheckupRequest
 Map<String, dynamic> _$MedicalRecordPatientResponseMedicalCheckupRequestToJson(
         MedicalRecordPatientResponseMedicalCheckupRequest instance) =>
     <String, dynamic>{
+      'date1': instance.date1?.toIso8601String(),
+      'date2': instance.date2?.toIso8601String(),
+      'date3': instance.date3?.toIso8601String(),
+      'desiredDate': instance.desiredDate,
+      'remarks': instance.remarks,
       'numberOfPeopleRequestingMedicalCheckup':
           instance.numberOfPeopleRequestingMedicalCheckup,
       'age': instance.age,
