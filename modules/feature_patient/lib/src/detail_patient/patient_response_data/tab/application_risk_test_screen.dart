@@ -35,7 +35,7 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
               child: Padding(
                 padding: const EdgeInsets.all(16),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Row(
                       children: [

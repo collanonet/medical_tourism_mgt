@@ -667,7 +667,7 @@ abstract class ApiService {
     ApplicationRegenerativeMedicalRequest applicationRegenerativeMedicalRequest,
   );
 
-  @GET(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_BEAUTY)
+  @GET('${Apis.MEDICAL_RECORD_PATIENT_RESPONSE_BEAUTY}/{medicalRecord}')
   Future<ApplicationBeautyResponse> getApplicationBeauty(
     @Path('medicalRecord') String medicalRecord,
   );
@@ -677,7 +677,7 @@ abstract class ApiService {
     @Body() ApplicationBeautyRequest applicationBeautyRequest,
   );
 
-  @GET(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_BLOOD_PURIFICATION_THERAPY)
+  @GET('${Apis.MEDICAL_RECORD_PATIENT_RESPONSE_BLOOD_PURIFICATION_THERAPY}/{medicalRecord}')
   Future<ApplicationBloodPurificationTherapyResponse>
       getApplicationBloodPurificationTherapy(
     @Path('medicalRecord') String medicalRecord,
@@ -691,7 +691,7 @@ abstract class ApiService {
         applicationBloodPurificationTherapyRequest,
   );
 
-  @GET(Apis.MEDICAL_RECORD_PATIENT_RESPONSE_RISK_TEST)
+  @GET('${Apis.MEDICAL_RECORD_PATIENT_RESPONSE_RISK_TEST}/{medicalRecord}')
   Future<ApplicationRiskTestResponse> getApplicationRiskTest(
     @Path('medicalRecord') String medicalRecord,
   );

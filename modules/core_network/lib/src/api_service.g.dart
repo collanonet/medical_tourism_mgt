@@ -3310,7 +3310,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-record-patient-response-beauty',
+              '/medical-record-patient-response-beauty/${medicalRecord}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3367,7 +3367,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-record-patient-response-blood-purification-therapy',
+              '/medical-record-patient-response-blood-purification-therapy/${medicalRecord}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3428,7 +3428,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-record-patient-response-risk-test',
+              '/medical-record-patient-response-risk-test/${medicalRecord}',
               queryParameters: queryParameters,
               data: _data,
             )
