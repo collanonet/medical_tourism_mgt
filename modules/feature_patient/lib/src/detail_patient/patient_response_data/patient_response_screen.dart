@@ -41,11 +41,11 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
                     menu: [
                       '治療',
                       '健診',
-                      'その他',
                       '再生医療',
                       '美容',
                       '血液浄化療法(アフェレーシス)・透析',
                       'リスク検査',
+                      'その他',
                     ],
                     onPressed: (index) {
                       _selectedIndex.value = index;
@@ -76,12 +76,12 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
                   PatientResponseTreatmentPage(patientId: widget.patientId),
                   PatientResponseMedicalCheckupPage(
                       patientId: widget.patientId),
-                  PatientResponseOtherPage(patientId: widget.patientId),
                   ApplicationRegenerativeMedicalPage(
                       patientId: widget.patientId),
                   ApplicationBeautyPage(patientId: widget.patientId),
                   ApplicationBloodPurificationTherapyPage(patientId: widget.patientId),
                   ApplicationRiskTestPage(patientId: widget.patientId),
+                  PatientResponseOtherPage(patientId: widget.patientId),
                 ][index],
               ),
             );
