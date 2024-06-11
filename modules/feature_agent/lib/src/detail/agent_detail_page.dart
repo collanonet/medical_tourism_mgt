@@ -9,7 +9,10 @@ import 'agent_detail_screen.dart';
 
 @RoutePage()
 class AgentDetailPage extends StatelessWidget {
-  const AgentDetailPage({super.key, this.id});
+  const AgentDetailPage({
+    super.key,
+    @PathParam('id') this.id,
+  });
   final String? id;
   @override
   Widget build(BuildContext context) {

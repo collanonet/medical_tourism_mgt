@@ -2,7 +2,10 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
+import 'agent_detail_model.dart';
 import 'sub/basic_information/basic_information_page.dart';
 
 class AgentDetailScreen extends StatefulWidget {
@@ -47,22 +50,31 @@ class _AgentDetailScreenState extends State<AgentDetailScreen> {
             color: Colors.white,
             borderRadius: BorderRadius.circular(16),
           ),
-          child: ColumnSeparated(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            separatorBuilder: (BuildContext context, int index) {
-              return const SizedBox(height: 16);
-            },
-            children: [
-              Text(
-                '大瀚人力资源集团',
-                style: context.textTheme.titleLarge,
-              ),
-              Text(
-                'ダーハンレンリーカズーユエンジトウァン',
-                style: context.textTheme.titleSmall,
-              ),
-            ],
-          ),
+          child: ValueListenableBuilder(
+              valueListenable: context.read<AgentDetailModel>().agent,
+              builder: (context, value, _) {
+                return Skeletonizer(
+                  enabled: value.loading,
+                  child: ColumnSeparated(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const SizedBox(height: 16);
+                    },
+                    children: [
+                      Text(
+                        value.hasData
+                            ? value.requireData.companyName ?? ''
+                            : '',
+                        style: context.textTheme.titleLarge,
+                      ),
+                      Text(
+                        value.hasData ? value.requireData.nameKana ?? '' : '',
+                        style: context.textTheme.titleSmall,
+                      ),
+                    ],
+                  ),
+                );
+              }),
         ),
         Padding(
           padding: EdgeInsets.only(

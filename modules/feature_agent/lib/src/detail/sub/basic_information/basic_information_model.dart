@@ -34,8 +34,11 @@ class AgentBasicInformationModel {
   }
 
   void insertAgentDataToForm(AgentResponse response, FormGroup formGroup) {
+    FormGroup basicInformationAgentForm =
+        formGroup.control('basicInformationAgent') as FormGroup;
+
     FormArray referralCommissions =
-        formGroup.control('referralCommissions') as FormArray;
+        basicInformationAgentForm.control('referralCommissions') as FormArray;
     referralCommissions.clear();
     if (response.referralCommissions != null &&
         response.referralCommissions!.isNotEmpty) {
@@ -60,19 +63,22 @@ class AgentBasicInformationModel {
       );
     }
 
-    formGroup.patchValue({
-      'id': response.id,
-      'memo': response.memo,
-      'companyName': response.companyName,
-      'nameKana': response.nameKana,
-      'postalCode': response.postalCode,
-      'address': response.address,
-      'area': response.area,
-      'phoneNumber': response.phoneNumber,
-      'transactionStartDate': response.transactionStartDate,
-      'howToMainPayment': response.howToMainPayment,
-      'pastCasesNumber': response.pastCasesNumber,
-    });
+    basicInformationAgentForm.control('id').value = response.id;
+    basicInformationAgentForm.control('memo').value = response.memo;
+    basicInformationAgentForm.control('companyName').value =
+        response.companyName;
+    basicInformationAgentForm.control('nameKana').value = response.nameKana;
+    basicInformationAgentForm.control('postalCode').value = response.postalCode;
+    basicInformationAgentForm.control('address').value = response.address;
+    basicInformationAgentForm.control('area').value = response.area;
+    basicInformationAgentForm.control('phoneNumber').value =
+        response.phoneNumber;
+    basicInformationAgentForm.control('transactionStartDate').value =
+        response.transactionStartDate;
+    basicInformationAgentForm.control('howToMainPayment').value =
+        response.howToMainPayment;
+    basicInformationAgentForm.control('pastCasesNumber').value =
+        response.pastCasesNumber;
   }
 
   void createOrUpdateAgent(FormGroup formGroup) async {
@@ -81,7 +87,10 @@ class AgentBasicInformationModel {
 
       List<AgentReferralCommissionRequest> referralCommissions = [];
 
-      formGroup.control('referralCommissions').value.forEach((element) {
+      formGroup
+          .control('basicInformationAgent.referralCommissions')
+          .value
+          .forEach((element) {
         referralCommissions.add(AgentReferralCommissionRequest(
           id: element['id'],
           referralCommissionName: element['referralCommissionName'],
@@ -95,22 +104,28 @@ class AgentBasicInformationModel {
       logger.d('referralCommissions ${referralCommissions.length}');
 
       var agentRequest = AgentRequest(
-        memo: formGroup.control('memo').value,
-        companyName: formGroup.control('companyName').value,
-        nameKana: formGroup.control('nameKana').value,
-        postalCode: formGroup.control('postalCode').value,
-        address: formGroup.control('address').value,
-        area: formGroup.control('area').value,
-        phoneNumber: formGroup.control('phoneNumber').value,
-        transactionStartDate: formGroup.control('transactionStartDate').value,
-        howToMainPayment: formGroup.control('howToMainPayment').value,
-        pastCasesNumber: formGroup.control('pastCasesNumber').value,
+        memo: formGroup.control('basicInformationAgent.memo').value,
+        companyName:
+            formGroup.control('basicInformationAgent.companyName').value,
+        nameKana: formGroup.control('basicInformationAgent.nameKana').value,
+        postalCode: formGroup.control('basicInformationAgent.postalCode').value,
+        address: formGroup.control('basicInformationAgent.address').value,
+        area: formGroup.control('basicInformationAgent.area').value,
+        phoneNumber:
+            formGroup.control('basicInformationAgent.phoneNumber').value,
+        transactionStartDate: formGroup
+            .control('basicInformationAgent.transactionStartDate')
+            .value,
+        howToMainPayment:
+            formGroup.control('basicInformationAgent.howToMainPayment').value,
+        pastCasesNumber:
+            formGroup.control('basicInformationAgent.pastCasesNumber').value,
         referralCommissions: referralCommissions,
       );
 
-      if (formGroup.control('id').value != null) {
+      if (formGroup.control('basicInformationAgent.id').value != null) {
         var response = await authRepository.putAgent(
-            formGroup.control('id').value, agentRequest);
+            formGroup.control('basicInformationAgent.id').value, agentRequest);
         agent.value = AsyncData(data: response);
       } else {
         var response = await authRepository.postAgent(agentRequest);

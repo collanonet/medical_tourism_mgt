@@ -81,7 +81,7 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
     return [
       AutoRoute(page: LoginRoute.page, path: '/login'),
       AutoRoute(page: AgentsRoute.page, path: '/agents'),
-      AutoRoute(page: AgentDetailRoute.page, path: '/agents-detail'),
+      AutoRoute(page: AgentDetailRoute.page, path: '/agents-detail/:id'),
       AutoRoute(page: ChatRoute.page, path: '/chats'),
       AutoRoute(page: HospitalsRoute.page, path: '/hospitals'),
       AutoRoute(page: InvoicesRoute.page, path: '/invoices'),

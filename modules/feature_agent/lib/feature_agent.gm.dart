@@ -17,8 +17,9 @@ abstract class $FeatureAgentRouterModule extends _i3.AutoRouterModule {
   @override
   final Map<String, _i3.PageFactory> pagesMap = {
     AgentDetailRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
       final args = routeData.argsAs<AgentDetailRouteArgs>(
-          orElse: () => const AgentDetailRouteArgs());
+          orElse: () => AgentDetailRouteArgs(id: pathParams.optString('id')));
       return _i3.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i1.AgentDetailPage(
@@ -49,6 +50,7 @@ class AgentDetailRoute extends _i3.PageRouteInfo<AgentDetailRouteArgs> {
             key: key,
             id: id,
           ),
+          rawPathParams: {'id': id},
           initialChildren: children,
         );
 
