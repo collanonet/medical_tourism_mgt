@@ -1,6 +1,8 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:feature_patient/feature_patient.dart';
+import 'package:feature_patient/feature_patient.gm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -31,7 +33,7 @@ class _AgentDetailScreenState extends State<AgentDetailScreen> {
     logger.d('widget.id: ${widget.id}');
     pages = <Widget>[
       AgentBasicInformationPage(id: widget.id),
-      Container(),
+      const PatientPageFormAgent(),
       Container(),
       Container(),
     ];
