@@ -7,21 +7,27 @@ part 'medical_record_progress.g.dart';
 class MedicalRecordProgress {
   @JsonKey(name: '_id')
   final String id;
+  String key;
+  String tag;
   String task;
   bool completed;
   DateTime? completionDate;
   String? remarks;
   String medicalRecord;
+  String type;
   final DateTime createdAt;
   final DateTime updatedAt;
 
   MedicalRecordProgress({
     required this.id,
+    required this.key,
+    required this.tag,
     required this.task,
     required this.completed,
     this.completionDate,
     this.remarks,
     required this.medicalRecord,
+    required this.type,
     required this.createdAt,
     required this.updatedAt,
   });
