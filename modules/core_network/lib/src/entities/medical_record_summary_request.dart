@@ -12,7 +12,6 @@ class MedicalRecordSummaryRequest {
   final String? nameChineseKanjiVietnamese;
   final String? nameKana;
   final String? currentAddress;
-  final String? mobileNumberPatient;
   final String? mobileNumberDomestic;
   final String? diseaseName;
   final String? tissueType;
@@ -46,7 +45,6 @@ class MedicalRecordSummaryRequest {
     this.nameChineseKanjiVietnamese,
     this.nameKana,
     this.currentAddress,
-    this.mobileNumberPatient,
     this.mobileNumberDomestic,
     this.diseaseName,
     this.tissueType,
