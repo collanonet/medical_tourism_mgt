@@ -7,9 +7,6 @@ import '../../filter_process_chart_form.dart';
 import 'hotel_search_form.dart';
 import 'hotel_search_model.dart';
 import 'hotel_search_screen.dart';
-import 'itinerary_form.dart';
-import 'itinerary_model.dart';
-import 'itinerary_screen.dart';
 
 class HotelSearchPage extends StatelessWidget {
   const HotelSearchPage({super.key});

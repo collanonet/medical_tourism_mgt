@@ -138,4 +138,15 @@ class Endpoints {
   static const MEDICAL_RECORD_PATIENT_RESPONSE_BEAUTY = '/medical-record-patient-response-beauty';
   static const MEDICAL_RECORD_PATIENT_RESPONSE_BLOOD_PURIFICATION_THERAPY = '/medical-record-patient-response-blood-purification-therapy';
   static const MEDICAL_RECORD_PATIENT_RESPONSE_RISK_TEST = '/medical-record-patient-response-risk-test';
+
+  //E1
+  static const FILTER_PROCESS_CHART_PATIENT = '/filter-process-chart-patient';
+  static const ITINERARY_SIMPLE_TITLE = 'itinerary-simple-title';
+  static const ITINERARY_SIMPLE_EXPLANATION = 'itinerary-simple-explanation';
+  static const ITINERARY_SIMPLE_INTERPRETOR_OR_GUIDE = 'itinerary-simple-interpretor-or-guide';
+  static const ITINERARY_SIMPLE_TRANSFER_INPUT = 'itinerary-simple-transfer-input';
+  static const DETAIL_FACILITY_HOSPITAL = 'detail-facility-hospital';
+  static const DETAIL_FACILITY_DROP_IN_FACILITY = 'detail-facility-drop-in-facility';
+  static const DETAIL_HOTEL_REGISTATION = 'detail-hotel-registation';
+  static const DETAIL_HOTEL_SEARCH = 'detail-hotel-search';
 }

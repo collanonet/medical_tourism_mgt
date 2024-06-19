@@ -7,9 +7,6 @@ import '../../filter_process_chart_form.dart';
 import 'hotel_registration_form.dart';
 import 'hotel_registration_model.dart';
 import 'hotel_registration_screen.dart';
-import 'itinerary_form.dart';
-import 'itinerary_model.dart';
-import 'itinerary_screen.dart';
 
 class HotelRegistrationPage extends StatelessWidget {
   const HotelRegistrationPage({super.key});

@@ -1,7 +1,8 @@
-import 'package:flutter/material.dart';
+import 'package:data_process_chart/data_process_chart.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
-class ProcessChartModel extends ChangeNotifier {
-
+class ProcessChartModel{
+  ProcessChartModel({required this.processChartRepository});
+  final ProcessChartRepository processChartRepository;
 }

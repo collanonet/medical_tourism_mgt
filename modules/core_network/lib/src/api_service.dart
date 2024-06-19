@@ -1,11 +1,9 @@
-import 'dart:io';
-import 'dart:typed_data';
-
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
 import '../core_network.dart';
+import '../entities.dart';
 import 'endpoints.dart';
 import 'entities/application_regenerative_medicine_response.dart';
 import 'entities/medical_record_patient_response_treatment.dart';
@@ -700,6 +698,80 @@ abstract class ApiService {
   @POST(Endpoints.MEDICAL_RECORD_PATIENT_RESPONSE_RISK_TEST)
   Future<ApplicationRiskTestResponse> postApplicationRiskTest(
     @Body() ApplicationRiskTestRequest applicationRiskTestRequest,
+  );
+
+  //E1
+
+  @GET(Endpoints.FILTER_PROCESS_CHART_PATIENT)
+  Future<PatientFilterResponse> getFilterPatientChart();
+
+  @POST(Endpoints.FILTER_PROCESS_CHART_PATIENT)
+  Future<PatientFilterResponse> postFilterpatientChart(
+    PatientFilterRequst patientFilterRequst,
+  );
+
+  @GET(Endpoints.ITINERARY_SIMPLE_TITLE)
+  Future<ItineraryTitleResponse> getItineraryTitle();
+
+  @POST(Endpoints.ITINERARY_SIMPLE_TITLE)
+  Future<ItineraryTitleResponse> postItineraryTitle(
+    ItineraryTitleRequest itineraryTitleRequest,
+  );
+
+  @GET(Endpoints.ITINERARY_SIMPLE_EXPLANATION)
+  Future<ItineraryExplanationResponse> getItineraryExplanation();
+
+  @POST(Endpoints.ITINERARY_SIMPLE_EXPLANATION)
+  Future<ItineraryExplanationResponse> postItineraryExplanation(
+    ItineraryExplanationRequest itineraryExplanationRequest,
+  );
+
+  @GET(Endpoints.ITINERARY_SIMPLE_INTERPRETOR_OR_GUIDE)
+  Future<ItineraryInterpreterOrGuideInputResponse> getItineraryInterpretorOrGuideInput();
+
+  @POST(Endpoints.ITINERARY_SIMPLE_INTERPRETOR_OR_GUIDE)
+  Future<ItineraryInterpreterOrGuideInputResponse> postItineraryInterpretorOrGuideInput(
+    ItineraryInterpreterOrGuideInputRequest itineraryInterpreterOrGuideInputRequest,
+  );
+
+  @GET(Endpoints.ITINERARY_SIMPLE_TRANSFER_INPUT)
+  Future<ItineraryTransferInputResponse> getItineraryTransferInput();
+
+  @POST(Endpoints.ITINERARY_SIMPLE_TRANSFER_INPUT)
+  Future<ItineraryTransferInputResponse> postItineraryTransferInput(
+    ItineraryTransferInputRequest itineraryTransferInputRequest,
+  );
+
+  @GET(Endpoints.DETAIL_FACILITY_HOSPITAL)
+  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital();
+
+  @POST(Endpoints.DETAIL_FACILITY_HOSPITAL)
+  Future<DetailFacilityHotelResponse> postDetailFacilityHospital(
+    DetailFacilityHotelRequest detailFacilityHotelRequest,
+  );
+
+  @GET(Endpoints.DETAIL_FACILITY_DROP_IN_FACILITY)
+  Future<DetailDropInFacilityResponse> getDetailFacilityDropIn();
+
+  @POST(Endpoints.DETAIL_FACILITY_DROP_IN_FACILITY)
+  Future<DetailDropInFacilityResponse> postDetailFacilityDropIn(
+    DetailDropInFacilityRequest detailDropInFacilityRequest,
+  );
+
+  @GET(Endpoints.DETAIL_HOTEL_REGISTATION)
+  Future<DetainHotelRegistationResponse> getDetainlHotelRegistation();
+
+  @POST(Endpoints.DETAIL_HOTEL_REGISTATION)
+  Future<DetainHotelRegistationResponse> postDetailHotelRegistation(
+    DetainHotelRegistationRequest detainHotelRegistationRequest,
+  );
+
+  @GET(Endpoints.DETAIL_HOTEL_SEARCH)
+  Future<DetailHotelSearchResponse> getDetailHotelSearch();
+
+  @POST(Endpoints.DETAIL_HOTEL_SEARCH)
+  Future<DetailHotelSearchResponse> postDetialHotelSearch(
+    DetailHotelSearchRequest detailHotelSearchRequest,
   );
 }
 

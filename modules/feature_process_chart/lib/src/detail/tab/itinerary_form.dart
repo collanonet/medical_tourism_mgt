@@ -1,6 +1,7 @@
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup itineraryForm() => FormGroup(
+FormGroup itineraryForm() =>
+ FormGroup(
       {
         'patientNames': FormArray(
           [
