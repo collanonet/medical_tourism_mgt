@@ -237,7 +237,8 @@ abstract class ApiService {
     @Path('medicalRecordId') String medicalRecordId,
   );
 
-  @GET('${Endpoints.GET_MEDICAL_RECORD_AGENTS_BY_MEDICAL_RECORD}/{medicalRecordId}')
+  @GET(
+      '${Endpoints.GET_MEDICAL_RECORD_AGENTS_BY_MEDICAL_RECORD}/{medicalRecordId}')
   Future<List<MedicalRecordAgent>> medicalRecordAgentsByMedicalRecord(
     @Path('medicalRecordId') String medicalRecordId,
   );
@@ -294,7 +295,8 @@ abstract class ApiService {
     @Path('medicalRecordId') String medicalRecordId,
   );
 
-  @GET('${Endpoints.GET_MEDICAL_RECORD_BUDGETS_BY_MEDICAL_RECORD}/{medicalRecordId}')
+  @GET(
+      '${Endpoints.GET_MEDICAL_RECORD_BUDGETS_BY_MEDICAL_RECORD}/{medicalRecordId}')
   Future<List<MedicalRecordBudget>> medicalRecordBudgetsByMedicalRecord(
     @Path('medicalRecordId') String medicalRecordId,
   );
@@ -434,7 +436,8 @@ abstract class ApiService {
 
   //GET_MEDICAL_RECORDS_OVERSEAS_DATA
 
-  @GET('${Endpoints.MEDICAL_RECORDS_OVERSEAS_DATA_MEDICAL_RECORD}/{medicalRecordId}')
+  @GET(
+      '${Endpoints.MEDICAL_RECORDS_OVERSEAS_DATA_MEDICAL_RECORD}/{medicalRecordId}')
   Future<List<MedicalRecordOverseaData>>
       medicalRecordOverseaDataByMedicalRecord(
     @Path('medicalRecordId') String medicalRecordId,
@@ -473,7 +476,8 @@ abstract class ApiService {
   @GET(Endpoints.MEDICAL_RECORD_PROPOSAL)
   Future<List<MedicalRecordProposal>> getAllMedicalRecordProposals();
 
-  @GET('${Endpoints.MEDICAL_RECORD_PROPOSAL_BY_MEDICAL_RECORD}/{medicalRecordId}')
+  @GET(
+      '${Endpoints.MEDICAL_RECORD_PROPOSAL_BY_MEDICAL_RECORD}/{medicalRecordId}')
   Future<List<MedicalRecordProposal>> getMedicalRecordProposalsByMedicalRecord(
     @Path('medicalRecordId') String medicalRecordId,
   );
@@ -727,11 +731,14 @@ abstract class ApiService {
   );
 
   @GET(Endpoints.ITINERARY_SIMPLE_INTERPRETOR_OR_GUIDE)
-  Future<ItineraryInterpreterOrGuideInputResponse> getItineraryInterpretorOrGuideInput();
+  Future<ItineraryInterpreterOrGuideInputResponse>
+      getItineraryInterpretorOrGuideInput();
 
   @POST(Endpoints.ITINERARY_SIMPLE_INTERPRETOR_OR_GUIDE)
-  Future<ItineraryInterpreterOrGuideInputResponse> postItineraryInterpretorOrGuideInput(
-    ItineraryInterpreterOrGuideInputRequest itineraryInterpreterOrGuideInputRequest,
+  Future<ItineraryInterpreterOrGuideInputResponse>
+      postItineraryInterpretorOrGuideInput(
+    ItineraryInterpreterOrGuideInputRequest
+        itineraryInterpreterOrGuideInputRequest,
   );
 
   @GET(Endpoints.ITINERARY_SIMPLE_TRANSFER_INPUT)
@@ -773,6 +780,125 @@ abstract class ApiService {
   Future<DetailHotelSearchResponse> postDetialHotelSearch(
     DetailHotelSearchRequest detailHotelSearchRequest,
   );
+
+  /// Get basic information of hospital C3 Page
+
+  @GET('${Endpoints.BASIC_INFORMATION_HOSPITAL}/{hospitalId}')
+  Future<BasicInformationHospitalResponse> getBasicInformationHospital(
+    @Path('hospitalId') String hospitalId,
+  );
+
+  @POST(Endpoints.BASIC_INFORMATION_HOSPITAL)
+  Future<BasicInformationHospitalResponse> postBasicInformationHospital(
+    @Body() BasicInformationHospitalRequest basicInformationHospitalRequest,
+  );
+
+  @GET('${Endpoints.MEDICAL_RECORD_BASIC_INFO_HOSPITAL}/{hospitalId}')
+  Future<List<MedicalRecordBasicInfoHospitalResponse>>
+      getMedicalRecordBasicInfoHospital(
+    @Path('hospitalId') String hospitalId,
+  );
+
+  @POST(Endpoints.MEDICAL_RECORD_BASIC_INFO_HOSPITAL)
+  Future<MedicalRecordBasicInfoHospitalResponse>
+      postMedicalRecordBasicInfoHospital(
+    @Body()
+    MedicalRecordBasicInfoHospitalRequest basicInformationHospitalRequest,
+  );
+
+  @GET('${Endpoints.DOCTOR_INFORMATION_HOSPITAL}/{hospitalId}')
+  Future<List<DoctorProfileHospitalResponse>> getDoctorInformationHospital(
+    @Path('hospitalId') String hospitalId,
+  );
+
+  @POST(Endpoints.DOCTOR_INFORMATION_HOSPITAL)
+  Future<DoctorProfileHospitalResponse> postDoctorInformationHospital(
+    @Body() DoctorProfileHospitalRequest doctorInformationHospitalRequest,
+  );
+
+  @GET('${Endpoints.ADDITIONALINFORMATION_HOSPITAL}/{hospitalId}')
+  Future<AdditionalInformationSectionResponse> getAdditionalInformationHospital(
+    @Path('hospitalId') String hospitalId,
+  );
+
+  @POST(Endpoints.ADDITIONALINFORMATION_HOSPITAL)
+  Future<AdditionalInformationSectionResponse>
+      postAdditionalInformationHospital(
+    @Body()
+    AdditionalInformationSectionRequest additionalInformationHospitalRequest,
+  );
+
+  @GET('${Endpoints.PAYMENT_OPTION_HOSPITAL}/{hospitalId}')
+  Future<PaymentOptionHospitalResponse> getPaymentOptionHospital(
+    @Path('hospitalId') String hospitalId,
+  );
+
+  @POST(Endpoints.PAYMENT_OPTION_HOSPITAL)
+  Future<PaymentOptionHospitalResponse> postPaymentOptionHospital(
+    @Body() PaymentOptionHospitalRequest paymentOptionHospitalRequest,
+  );
+
+  @GET('${Endpoints.SUPPORT_LANGUAGE_HOSPITAL}/{hospitalId}')
+  Future<List<SupportLanguageHospitalResponse>> getSupportLanguageHospital(
+    @Path('hospitalId') String hospitalId,
+  );
+
+  @POST(Endpoints.SUPPORT_LANGUAGE_HOSPITAL)
+  Future<SupportLanguageHospitalResponse> postSupportLanguageHospital(
+    @Body() SupportLanguageHospitalRequest supportLanguageHospitalRequest,
+  );
+
+  @GET('${Endpoints.GET_HOW_TO_REQUEST_HOSPITAL}/{hospitalId}')
+  Future<HowToRequestHospitalResponse> getHowToRequestHospital(
+    @Path('hospitalId') String hospitalId,
+  );
+
+  @POST(Endpoints.SUPPORT_LANGUAGE_HOSPITAL)
+  Future<HowToRequestHospitalResponse> postHowToRequestHospital(
+    @Body() HowToRequestHospitalRequest supportLanguageHospitalRequest,
+  );
+
+  @GET('${Endpoints.GET_NEW_REGISTRATION_HOSPITAL}/{hospitalId}')
+  Future<NewRegistrationHospitalResponse> getNewRegistrationHospital(
+    @Path('hospitalId') String hospitalId,
+  );
+
+  @POST(Endpoints.GET_NEW_REGISTRATION_HOSPITAL)
+  Future<NewRegistrationHospitalResponse> postNewRegistrationHospital(
+    @Body() NewRegistrationHospitalRequest newRegistrationHospitalRequest,
+  );
+
+  @GET('${Endpoints.GET_LIST_SECTION_HOSPITAL}/{hospitalId}')
+  Future<ListSectionQAndAHospitalResponse> getListSectionQAndAHospital(
+    @Path('hospitalId') String hospitalId,
+  );
+
+  @POST(Endpoints.GET_LIST_SECTION_HOSPITAL)
+  Future<ListSectionQAndAHospitalResponse> postListSectionQAndAHospital(
+    @Body() ListSectionQAndAHospitalRequest listSectionQAndAHospitalRequest,
+  );
+
+  @GET('${Endpoints.GET_MATERIAL_HOSPITAL}/{hospitalId}')
+  Future<MaterialHospitalResponse> getMaterialHospital(
+    @Path('hospitalId') String hospitalId,
+  );
+
+  @POST(Endpoints.GET_MATERIAL_HOSPITAL)
+  Future<MaterialHospitalResponse> postMaterialHospital(
+    @Body() MaterialHospitalRequest materialHospitalRequest,
+  );
+  @GET('${Endpoints.GET_WEB_RESERVATION_PATIENT}/{hospitalId}')
+  Future<PatientSectionHospitalResponse> getPatientSectionHospital(
+    @Path('hospitalId') String hospitalId,
+  );
+
+  @GET('${Endpoints.GET_MEDICAL_INSTITUTION_HOSPITAL}/{hospitalId')
+  Future<MedicalInstitutionSectionHospitalResponse>
+      getMedicalInstitutionSectionHospital(
+    @Path('hospitalId') String hospitalId,
+  );
+
+  /// end get basic information of hospital C3 Page
 }
 
 extension ApiServiceExts on ApiService {
