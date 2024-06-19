@@ -9,8 +9,8 @@ import 'package:provider/provider.dart';
 import 'patient_screen.dart';
 
 class PatientPageFormAgent extends StatefulWidget {
-  const PatientPageFormAgent({super.key});
-
+  const PatientPageFormAgent({super.key, this.id});
+  final String? id;
   @override
   State<PatientPageFormAgent> createState() => _PatientPageState();
 }

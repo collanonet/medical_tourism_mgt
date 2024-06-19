@@ -11,8 +11,8 @@ import 'basic_information_form.dart';
 import 'basic_information_model.dart';
 import 'basic_information_screen.dart';
 
-class AgentBasicInformationPage extends StatelessWidget {
-  const AgentBasicInformationPage({super.key, this.id});
+class BasicInformationPage extends StatelessWidget {
+  const BasicInformationPage({super.key, this.id});
   final String? id;
   @override
   Widget build(BuildContext context) {
