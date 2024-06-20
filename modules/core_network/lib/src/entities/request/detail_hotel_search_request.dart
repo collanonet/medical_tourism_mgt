@@ -16,5 +16,12 @@ class DetailHotelSearchRequest {
      this.supportedLanguage,
   });
 
+  factory DetailHotelSearchRequest.fromJson(Map<String,dynamic> json){
+    return _$DetailHotelSearchRequestFromJson(json);
+  }
+
+  Map<String,dynamic> toJson(){
+    return _$DetailHotelSearchRequestToJson(this);
+  }
   
 }

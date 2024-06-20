@@ -19,5 +19,12 @@ class DetailHotelSearchResponse {
      this.supportedLanguage,
   });
 
+ factory DetailHotelSearchResponse.fromJson(Map<String,dynamic> json){
+  return _$DetailHotelSearchResponseFromJson(json);
+ }
+
+ Map<String,dynamic> toJson(){
+  return _$DetailHotelSearchResponseToJson(this);
+ }
   
 }
