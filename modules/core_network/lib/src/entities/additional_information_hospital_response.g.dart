@@ -10,15 +10,18 @@ AdditionalInformationSectionResponse
     _$AdditionalInformationSectionResponseFromJson(Map<String, dynamic> json) =>
         AdditionalInformationSectionResponse(
           id: json['_id'] as String,
-          hospital: json['hospital'] as String?,
-          signed: json['signed'] as String,
-          notConcluded: json['notConcluded'] as String,
-          canBe: json['canBe'] as String,
-          none: json['none'] as String,
-          referralFee: json['referralFee'] as num,
-          remark: json['remark'] as String,
-          paymentSite: json['paymentSite'] as String,
-          endOfNextMonth: json['endOfNextMonth'] as String,
+          hospital: json['hospital'] as String,
+          outsourcingContract: json['outsourcingContract'] as String?,
+          contract: (json['contract'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
+          msCorporation: json['msCorporation'] as String?,
+          referralFee: json['referralFee'] as String?,
+          treatmentCostPointCalculationPerPoint:
+              json['treatmentCostPointCalculationPerPoint'] as String?,
+          remark: json['remark'] as String?,
+          paymentSiteTighten: json['paymentSiteTighten'] as String?,
+          paymentSitePayment: json['paymentSitePayment'] as String?,
         );
 
 Map<String, dynamic> _$AdditionalInformationSectionResponseToJson(
@@ -26,12 +29,13 @@ Map<String, dynamic> _$AdditionalInformationSectionResponseToJson(
     <String, dynamic>{
       '_id': instance.id,
       'hospital': instance.hospital,
-      'signed': instance.signed,
-      'notConcluded': instance.notConcluded,
-      'canBe': instance.canBe,
-      'none': instance.none,
+      'outsourcingContract': instance.outsourcingContract,
+      'contract': instance.contract,
+      'msCorporation': instance.msCorporation,
       'referralFee': instance.referralFee,
+      'treatmentCostPointCalculationPerPoint':
+          instance.treatmentCostPointCalculationPerPoint,
       'remark': instance.remark,
-      'paymentSite': instance.paymentSite,
-      'endOfNextMonth': instance.endOfNextMonth,
+      'paymentSiteTighten': instance.paymentSiteTighten,
+      'paymentSitePayment': instance.paymentSitePayment,
     };

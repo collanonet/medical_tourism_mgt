@@ -9,12 +9,12 @@ part of 'support_language_hospital_response.dart';
 SupportLanguageHospitalResponse _$SupportLanguageHospitalResponseFromJson(
         Map<String, dynamic> json) =>
     SupportLanguageHospitalResponse(
-      id: json['_id'] as String?,
-      hospital: json['hospital'] as String?,
-      supportLanguage: json['supportLanguage'] as String,
-      foreignStaff: json['foreignStaff'] as bool,
+      id: json['_id'] as String,
+      hospital: json['hospital'] as String,
+      supportLanguage: json['supportLanguage'] as String?,
+      foreignStaff: json['foreignStaff'] as bool?,
       medicalInterpretationSupport:
-          json['medicalInterpretationSupport'] as bool,
+          json['medicalInterpretationSupport'] as bool?,
     );
 
 Map<String, dynamic> _$SupportLanguageHospitalResponseToJson(

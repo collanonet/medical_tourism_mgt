@@ -105,7 +105,7 @@ class BasicInformationModel {
     FormGroup formGroup,
     BasicInformationHospitalResponse data,
   ) {
-    formGroup.control('basicInformation').patchValue(data.toJson());
+    formGroup.patchValue(data.toJson());
   }
 
   Future<void> fetchMedicalRecordBasicInfoHospital({
@@ -169,6 +169,41 @@ class BasicInformationModel {
       formArray.clear();
 
       for (var item in data) {
+        FormArray affiliatedAcademicSociety = FormArray([]);
+        if (item.affiliatedAcademicSociety != null &&
+            item.affiliatedAcademicSociety!.isNotEmpty) {
+          item.affiliatedAcademicSociety!.map((e) {
+            affiliatedAcademicSociety.add(
+              FormGroup({
+                'name': FormControl<String>(value: e),
+              }),
+            );
+          });
+        } else {
+          affiliatedAcademicSociety.add(
+            FormGroup({
+              'name': FormControl<String>(),
+            }),
+          );
+        }
+
+        FormArray qualifications = FormArray([]);
+        if (item.qualifications != null && item.qualifications!.isNotEmpty) {
+          item.qualifications!.map((e) {
+            affiliatedAcademicSociety.add(
+              FormGroup({
+                'name': FormControl<String>(value: e),
+              }),
+            );
+          });
+        } else {
+          affiliatedAcademicSociety.add(
+            FormGroup({
+              'name': FormControl<String>(),
+            }),
+          );
+        }
+
         formArray.add(
           FormGroup({
             '_id': FormControl<String>(value: item.id),
@@ -181,22 +216,8 @@ class BasicInformationModel {
             'specialty': FormControl<String>(value: item.specialty),
             'nameKanji': FormControl<String>(value: item.nameKanji),
             'nameKana': FormControl<String>(value: item.nameKana),
-            'affiliatedAcademicSociety': FormArray([
-              ...item.affiliatedAcademicSociety.map((e) => FormGroup({
-                    'name': FormControl<String>(value: e),
-                  })),
-              FormGroup({
-                'name': FormControl<String>(),
-              })
-            ]),
-            'qualifications': FormArray([
-              ...item.qualifications.map((e) => FormGroup({
-                    'name': FormControl<String>(value: e),
-                  })),
-              FormGroup({
-                'name': FormControl<String>(),
-              })
-            ]),
+            'affiliatedAcademicSociety': affiliatedAcademicSociety,
+            'qualifications': qualifications,
             'trainingCompletionCertificateNumber': FormControl<String>(
                 value: item.trainingCompletionCertificateNumber),
             'telephoneNumber': FormControl<String>(value: item.telephoneNumber),
@@ -227,7 +248,24 @@ class BasicInformationModel {
     FormGroup formGroup,
     AdditionalInformationSectionResponse data,
   ) {
-    formGroup.control('additionalInformationSection').patchValue(data.toJson());
+    formGroup.patchValue(data.toJson());
+    FormArray contract = formGroup.control('contract') as FormArray;
+    contract.clear();
+    if (data.contract != null && data.contract!.isNotEmpty) {
+      for (var item in data.contract!) {
+        contract.add(
+          FormGroup({
+            'name': FormControl<String>(value: item),
+          }),
+        );
+      }
+    } else {
+      contract.add(
+        FormGroup({
+          'name': FormControl<String>(),
+        }),
+      );
+    }
   }
 
   Future<void> fetchPaymentOption(
@@ -248,7 +286,7 @@ class BasicInformationModel {
     FormGroup formGroup,
     PaymentOptionHospitalResponse data,
   ) {
-    formGroup.control('paymentOptionSection').patchValue(data.toJson());
+    formGroup.patchValue(data.toJson());
   }
 
   Future<void> fetchSupportLanguage(
@@ -295,7 +333,7 @@ class BasicInformationModel {
     try {
       submit.value = const AsyncData(loading: true);
       await submitBasicInformation(
-          formGroup.control('basic_information') as FormGroup);
+          formGroup.control('basicInformation') as FormGroup);
 
       if (basicInformationData.value.hasData) {
         await submitHowToMakeRequest(
@@ -405,7 +443,7 @@ class BasicInformationModel {
             request.copyWith(
                 hospital: basicInformationData.value.requireData.id));
         doctorInformationData.value.copyWith(data: [
-          ...doctorInformationData.value.requireData,
+          ...doctorInformationData.value.data ?? [],
           result,
         ]);
       });
@@ -420,8 +458,15 @@ class BasicInformationModel {
   Future<void> submitAdditionalInformation(FormGroup form) async {
     try {
       additionalInformationData.value = const AsyncData(loading: true);
+      Map<String, dynamic> element = form.value;
+
+      element['contract'] = element['contract']
+          .map((e) => e['name'] as String)
+          .toList()
+          .cast<String>();
+
       AdditionalInformationSectionRequest request =
-          AdditionalInformationSectionRequest.fromJson(form.value);
+          AdditionalInformationSectionRequest.fromJson(element);
       var result = await hospitalRepository.postAdditionalInformationHospital(
           request.copyWith(
               hospital: basicInformationData.value.requireData.id));

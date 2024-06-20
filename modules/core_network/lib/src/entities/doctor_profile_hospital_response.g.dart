@@ -9,29 +9,29 @@ part of 'doctor_profile_hospital_response.dart';
 DoctorProfileHospitalResponse _$DoctorProfileHospitalResponseFromJson(
         Map<String, dynamic> json) =>
     DoctorProfileHospitalResponse(
-      id: json['_id'] as String?,
-      hospital: json['hospital'] as String?,
-      can: json['can'] as String,
-      no: json['no'] as String,
-      remark: json['remark'] as String,
-      departmentName: json['departmentName'] as String,
-      post: json['post'] as String,
-      specialty: json['specialty'] as String,
-      nameKanji: json['nameKanji'] as String,
-      nameKana: json['nameKana'] as String,
+      id: json['_id'] as String,
+      hospital: json['hospital'] as String,
+      can: json['can'] as String?,
+      no: json['no'] as String?,
+      remark: json['remark'] as String?,
+      departmentName: json['departmentName'] as String?,
+      post: json['post'] as String?,
+      specialty: json['specialty'] as String?,
+      nameKanji: json['nameKanji'] as String?,
+      nameKana: json['nameKana'] as String?,
       affiliatedAcademicSociety:
-          (json['affiliatedAcademicSociety'] as List<dynamic>)
-              .map((e) => e as String)
+          (json['affiliatedAcademicSociety'] as List<dynamic>?)
+              ?.map((e) => e as String)
               .toList(),
-      qualifications: (json['qualifications'] as List<dynamic>)
-          .map((e) => e as String)
+      qualifications: (json['qualifications'] as List<dynamic>?)
+          ?.map((e) => e as String)
           .toList(),
       trainingCompletionCertificateNumber:
-          json['trainingCompletionCertificateNumber'] as String,
-      telephoneNumber: json['telephoneNumber'] as String,
-      faxNumber: json['faxNumber'] as String,
-      email: json['email'] as String,
-      remark2: json['remark2'] as String,
+          json['trainingCompletionCertificateNumber'] as String?,
+      telephoneNumber: json['telephoneNumber'] as String?,
+      faxNumber: json['faxNumber'] as String?,
+      email: json['email'] as String?,
+      remark2: json['remark2'] as String?,
     );
 
 Map<String, dynamic> _$DoctorProfileHospitalResponseToJson(

@@ -908,6 +908,10 @@ abstract class ApiService {
     @Path('hospitalId') String hospitalId,
   );
 
+
+  @GET(Endpoints.GET_HOSPITAL)
+  Future<List<BasicInformationHospitalResponse>> getHospitals();
+
   /// end get basic information of hospital C3 Page
 }
 

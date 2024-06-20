@@ -14,9 +14,9 @@ class HospitalDetailPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const LayoutView(
+    return LayoutView(
       selectedIndex: 5,
-      page: HospitalDetailScreen(),
+      page: HospitalDetailScreen(hospitalId: id),
     );
   }
 }

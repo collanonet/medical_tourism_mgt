@@ -6,27 +6,27 @@ part 'additional_information_hospital_request.g.dart';
 class AdditionalInformationSectionRequest {
   @JsonKey(name: '_id')
   String? id;
-  String? hospital;
-  String signed;
-  String notConcluded;
-  String canBe;
-  String none;
-  num referralFee;
-  String remark;
-  String paymentSite;
-  String endOfNextMonth;
+  String hospital;
+  String? outsourcingContract;
+  List<String>? contract;
+  String? msCorporation;
+  String? referralFee;
+  String? treatmentCostPointCalculationPerPoint;
+  String? remark;
+  String? paymentSiteTighten;
+  String? paymentSitePayment;
 
   AdditionalInformationSectionRequest({
     this.id,
-    this.hospital,
-    required this.signed,
-    required this.notConcluded,
-    required this.canBe,
-    required this.none,
-    required this.referralFee,
-    required this.remark,
-    required this.paymentSite,
-    required this.endOfNextMonth,
+    required this.hospital,
+    this.outsourcingContract,
+    this.contract,
+    this.msCorporation,
+    this.referralFee,
+    this.treatmentCostPointCalculationPerPoint,
+    this.remark,
+    this.paymentSiteTighten,
+    this.paymentSitePayment,
   });
 
   factory AdditionalInformationSectionRequest.fromJson(
@@ -40,26 +40,28 @@ extension AdditionalInformationSectionRequestExtension
     on AdditionalInformationSectionRequest {
   AdditionalInformationSectionRequest copyWith({
     String? hospital,
-    String? signed,
-    String? notConcluded,
-    String? canBe,
-    String? none,
-    num? referralFee,
+    String? outsourcingContract,
+    List<String>? contract,
+    String? msCorporation,
+    String? referralFee,
+    String? treatmentCostPointCalculationPerPoint,
     String? remark,
-    String? paymentSite,
-    String? endOfNextMonth,
+    String? paymentSiteTighten,
+    String? paymentSitePayment,
   }) {
     return AdditionalInformationSectionRequest(
       id: id,
       hospital: hospital ?? this.hospital,
-      signed: signed ?? this.signed,
-      notConcluded: notConcluded ?? this.notConcluded,
-      canBe: canBe ?? this.canBe,
-      none: none ?? this.none,
+      outsourcingContract: outsourcingContract ?? this.outsourcingContract,
+      contract: contract ?? this.contract,
+      msCorporation: msCorporation ?? this.msCorporation,
       referralFee: referralFee ?? this.referralFee,
+      treatmentCostPointCalculationPerPoint:
+          treatmentCostPointCalculationPerPoint ??
+              this.treatmentCostPointCalculationPerPoint,
       remark: remark ?? this.remark,
-      paymentSite: paymentSite ?? this.paymentSite,
-      endOfNextMonth: endOfNextMonth ?? this.endOfNextMonth,
+      paymentSiteTighten: paymentSiteTighten ?? this.paymentSiteTighten,
+      paymentSitePayment: paymentSitePayment ?? this.paymentSitePayment,
     );
   }
 }

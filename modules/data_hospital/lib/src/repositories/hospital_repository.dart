@@ -76,5 +76,7 @@ abstract class HospitalRepository {
     String hospitalId,
   );
 
+  Future<List<BasicInformationHospitalResponse>> getHospitals();
+
   /// end get basic information of hospital C3 Page
 }

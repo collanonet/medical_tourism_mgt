@@ -3560,7 +3560,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'itinerary-simple-title',
+              '/itinerary-simple-title',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3588,7 +3588,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'itinerary-simple-title',
+              '/itinerary-simple-title',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3615,7 +3615,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'itinerary-simple-explanation',
+              '/itinerary-simple-explanation',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3643,7 +3643,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'itinerary-simple-explanation',
+              '/itinerary-simple-explanation',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3671,7 +3671,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'itinerary-simple-interpretor-or-guide',
+              '/itinerary-simple-interpretor-or-guide',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3702,7 +3702,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'itinerary-simple-interpretor-or-guide',
+              '/itinerary-simple-interpretor-or-guide',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3730,7 +3730,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'itinerary-simple-transfer-input',
+              '/itinerary-simple-transfer-input',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3758,7 +3758,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'itinerary-simple-transfer-input',
+              '/itinerary-simple-transfer-input',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3785,7 +3785,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'detail-facility-hospital',
+              '/detail-facility-hospital',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3816,7 +3816,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'detail-facility-hospital',
+              '/detail-facility-hospital',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3843,7 +3843,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'detail-facility-drop-in-facility',
+              '/detail-facility-drop-in-facility',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3871,7 +3871,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'detail-facility-drop-in-facility',
+              '/detail-facility-drop-in-facility',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3898,7 +3898,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'detail-hotel-registation',
+              '/detail-hotel-registation',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3926,7 +3926,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'detail-hotel-registation',
+              '/detail-hotel-registation',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3953,7 +3953,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'detail-hotel-search',
+              '/detail-hotel-search',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3981,7 +3981,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'detail-hotel-search',
+              '/detail-hotel-search',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4009,7 +4009,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'basic-information-hospital/${hospitalId}',
+              '/basic-information-hospital/${hospitalId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4038,7 +4038,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'basic-information-hospital',
+              '/basic-information-hospital',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4066,7 +4066,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'medical-record-hospital/hospital/${hospitalId}',
+              '/medical-record-hospital/hospital/${hospitalId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4100,7 +4100,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'medical-record-hospital/hospital',
+              '/medical-record-hospital/hospital',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4129,7 +4129,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'doctor-information-hospital/${hospitalId}',
+              '/doctor-information-hospital/${hospitalId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4161,7 +4161,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'doctor-information-hospital',
+              '/doctor-information-hospital',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4189,7 +4189,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'additional-information-hospital/${hospitalId}',
+              '/additional-information-hospital/${hospitalId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4220,7 +4220,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'additional-information-hospital',
+              '/additional-information-hospital',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4248,7 +4248,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'payment-option-hospital/${hospitalId}',
+              '/payment-option-hospital/${hospitalId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4277,7 +4277,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'payment-option-hospital',
+              '/payment-option-hospital',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4305,7 +4305,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'support-language-hospital/${hospitalId}',
+              '/support-language-hospital/${hospitalId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4337,7 +4337,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'support-language-hospital',
+              '/support-language-hospital',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4365,7 +4365,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'how-to-request-hospital/${hospitalId}',
+              '/how-to-request-hospital/${hospitalId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4394,7 +4394,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'support-language-hospital',
+              '/support-language-hospital',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4422,7 +4422,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'new-registration-hospital/${hospitalId}',
+              '/new-registration-hospital/${hospitalId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4451,7 +4451,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'new-registration-hospital',
+              '/new-registration-hospital',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4479,7 +4479,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'section-hospital/${hospitalId}',
+              '/section-hospital/${hospitalId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4508,7 +4508,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'section-hospital',
+              '/section-hospital',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4536,7 +4536,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'material-hospital/${hospitalId}',
+              '/material-hospital/${hospitalId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4565,7 +4565,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'material-hospital',
+              '/material-hospital',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4593,7 +4593,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'web-reservation-patient/${hospitalId}',
+              '/web-reservation-patient/${hospitalId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4621,7 +4621,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'medical-institutions/{hospitalId',
+              '/medical-institutions/{hospitalId',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4632,6 +4632,36 @@ class _ApiService implements ApiService {
             ))));
     final value =
         MedicalInstitutionSectionHospitalResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<BasicInformationHospitalResponse>> getHospitals() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<BasicInformationHospitalResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/hospital',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) => BasicInformationHospitalResponse.fromJson(
+            i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 

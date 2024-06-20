@@ -146,4 +146,9 @@ class HospitalRepositoryIml extends HospitalRepository {
       hospitalId,
     );
   }
+
+  @override
+  Future<List<BasicInformationHospitalResponse>> getHospitals() {
+    return remote.getHospitals();
+  }
 }

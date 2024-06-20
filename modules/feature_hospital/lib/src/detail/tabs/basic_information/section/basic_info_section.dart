@@ -142,10 +142,10 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                   ),
                                 ),
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                    RegExp(
-                                        r'^(https:\/\/maps\.app\.goo\.gl\/).*'),
-                                  ),
+                                  // FilteringTextInputFormatter.allow(
+                                  //   RegExp(
+                                  //       r'^(https:\/\/maps\.app\.goo\.gl\/).*'),
+                                  // ),
                                 ],
                               ),
                             ),

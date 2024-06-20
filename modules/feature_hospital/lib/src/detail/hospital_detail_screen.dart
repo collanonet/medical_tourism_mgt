@@ -16,9 +16,9 @@ import '../widgets/header_detail_hospital.dart';
 class HospitalDetailScreen extends StatefulWidget {
   const HospitalDetailScreen({
     super.key,
-    this.hospital,
+    this.hospitalId,
   });
-  final Hospital? hospital;
+  final String? hospitalId;
 
   @override
   State<HospitalDetailScreen> createState() => _HospitalDetailScreenState();
@@ -43,7 +43,7 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
   void initState() {
     super.initState();
     pages = [
-      const BasicInformationScreen(),
+      BasicInformationScreen(hospitalId: widget.hospitalId),
       const MaterialsScreen(),
       const QAndAScreen(),
       const FacilityPhotoScreen(),

@@ -10,11 +10,11 @@ SupportLanguageHospitalRequest _$SupportLanguageHospitalRequestFromJson(
         Map<String, dynamic> json) =>
     SupportLanguageHospitalRequest(
       id: json['_id'] as String?,
-      hospital: json['hospital'] as String?,
-      supportLanguage: json['supportLanguage'] as String,
-      foreignStaff: json['foreignStaff'] as bool,
+      hospital: json['hospital'] as String,
+      supportLanguage: json['supportLanguage'] as String?,
+      foreignStaff: json['foreignStaff'] as bool?,
       medicalInterpretationSupport:
-          json['medicalInterpretationSupport'] as bool,
+          json['medicalInterpretationSupport'] as bool?,
     );
 
 Map<String, dynamic> _$SupportLanguageHospitalRequestToJson(
