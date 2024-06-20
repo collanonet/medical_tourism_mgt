@@ -101,8 +101,9 @@ FormGroup basicInformationForm() {
       FormGroup({
         '_id': FormControl<String?>(),
         'hospital': FormControl<String?>(),
-        'can': FormControl<String>(),
-        'no': FormControl<String>(),
+        'profile': FormControl<String>(),
+        'photoRelease': FormControl<String>(),
+        'name': FormControl<String>(),
         'remark': FormControl<String>(),
         'departmentName': FormControl<String>(),
         'post': FormControl<String>(),
@@ -119,7 +120,13 @@ FormGroup basicInformationForm() {
             'name': FormControl<String>(),
           })
         ]),
+        'onlineMedicalTreatment': FormControl<String>(),
         'trainingCompletionCertificateNumber': FormControl<String>(),
+        'completionCertificate': FormArray([
+          FormGroup({
+            'name': FormControl<String>(),
+          })
+        ]),
         'telephoneNumber': FormControl<String>(),
         'faxNumber': FormControl<String>(),
         'email': FormControl<String>(),

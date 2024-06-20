@@ -7,8 +7,9 @@ class DoctorProfileHospitalResponse {
   @JsonKey(name: '_id')
   String id;
   String hospital;
-  String? can;
-  String? no;
+  String? profile;
+  String? photoRelease;
+  String? name;
   String? remark;
   String? departmentName;
   String? post;
@@ -17,7 +18,9 @@ class DoctorProfileHospitalResponse {
   String? nameKana;
   List<String>? affiliatedAcademicSociety;
   List<String>? qualifications;
+  String? onlineMedicalTreatment;
   String? trainingCompletionCertificateNumber;
+  List<String>? completionCertificate;
   String? telephoneNumber;
   String? faxNumber;
   String? email;
@@ -26,8 +29,9 @@ class DoctorProfileHospitalResponse {
   DoctorProfileHospitalResponse({
     required this.id,
     required this.hospital,
-    this.can,
-    this.no,
+    this.profile,
+    this.photoRelease,
+    this.name,
     this.remark,
     this.departmentName,
     this.post,
@@ -36,7 +40,9 @@ class DoctorProfileHospitalResponse {
     this.nameKana,
     this.affiliatedAcademicSociety,
     this.qualifications,
+    this.onlineMedicalTreatment,
     this.trainingCompletionCertificateNumber,
+    this.completionCertificate,
     this.telephoneNumber,
     this.faxNumber,
     this.email,

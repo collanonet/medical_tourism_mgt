@@ -7,8 +7,9 @@ class DoctorProfileHospitalRequest {
   @JsonKey(name: '_id')
   String? id;
   String hospital;
-  String? can;
-  String? no;
+  String? profile;
+  String? photoRelease;
+  String? name;
   String? remark;
   String? departmentName;
   String? post;
@@ -17,7 +18,9 @@ class DoctorProfileHospitalRequest {
   String? nameKana;
   List<String>? affiliatedAcademicSociety;
   List<String>? qualifications;
+  String? onlineMedicalTreatment;
   String? trainingCompletionCertificateNumber;
+  List<String>? completionCertificate;
   String? telephoneNumber;
   String? faxNumber;
   String? email;
@@ -26,8 +29,9 @@ class DoctorProfileHospitalRequest {
   DoctorProfileHospitalRequest({
     this.id,
     required this.hospital,
-    this.can,
-    this.no,
+    this.profile,
+    this.photoRelease,
+    this.name,
     this.remark,
     this.departmentName,
     this.post,
@@ -36,7 +40,9 @@ class DoctorProfileHospitalRequest {
     this.nameKana,
     this.affiliatedAcademicSociety,
     this.qualifications,
+    this.onlineMedicalTreatment,
     this.trainingCompletionCertificateNumber,
+    this.completionCertificate,
     this.telephoneNumber,
     this.faxNumber,
     this.email,
@@ -52,8 +58,9 @@ extension DoctorProfileHospitalRequestExtension
     on DoctorProfileHospitalRequest {
   DoctorProfileHospitalRequest copyWith({
     String? hospital,
-    String? can,
-    String? no,
+    String? profile,
+    String? photoRelease,
+    String? name,
     String? remark,
     String? departmentName,
     String? post,
@@ -62,7 +69,9 @@ extension DoctorProfileHospitalRequestExtension
     String? nameKana,
     List<String>? affiliatedAcademicSociety,
     List<String>? qualifications,
+    List<String>? completionCertificate,
     String? trainingCompletionCertificateNumber,
+    String? onlineMedicalTreatment,
     String? telephoneNumber,
     String? faxNumber,
     String? email,
@@ -71,8 +80,9 @@ extension DoctorProfileHospitalRequestExtension
     return DoctorProfileHospitalRequest(
       id: id,
       hospital: hospital ?? this.hospital,
-      can: can ?? this.can,
-      no: no ?? this.no,
+      profile: profile ?? this.profile,
+      photoRelease: photoRelease ?? this.photoRelease,
+      name: name ?? this.name,
       remark: remark ?? this.remark,
       departmentName: departmentName ?? this.departmentName,
       post: post ?? this.post,
@@ -85,6 +95,10 @@ extension DoctorProfileHospitalRequestExtension
       trainingCompletionCertificateNumber:
           trainingCompletionCertificateNumber ??
               this.trainingCompletionCertificateNumber,
+      completionCertificate:
+          completionCertificate ?? this.completionCertificate,
+      onlineMedicalTreatment:
+          onlineMedicalTreatment ?? this.onlineMedicalTreatment,
       telephoneNumber: telephoneNumber ?? this.telephoneNumber,
       faxNumber: faxNumber ?? this.faxNumber,
       email: email ?? this.email,

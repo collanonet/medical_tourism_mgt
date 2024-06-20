@@ -11,8 +11,9 @@ DoctorProfileHospitalResponse _$DoctorProfileHospitalResponseFromJson(
     DoctorProfileHospitalResponse(
       id: json['_id'] as String,
       hospital: json['hospital'] as String,
-      can: json['can'] as String?,
-      no: json['no'] as String?,
+      profile: json['profile'] as String?,
+      photoRelease: json['photoRelease'] as String?,
+      name: json['name'] as String?,
       remark: json['remark'] as String?,
       departmentName: json['departmentName'] as String?,
       post: json['post'] as String?,
@@ -26,8 +27,12 @@ DoctorProfileHospitalResponse _$DoctorProfileHospitalResponseFromJson(
       qualifications: (json['qualifications'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
+      onlineMedicalTreatment: json['onlineMedicalTreatment'] as String?,
       trainingCompletionCertificateNumber:
           json['trainingCompletionCertificateNumber'] as String?,
+      completionCertificate: (json['completionCertificate'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
       telephoneNumber: json['telephoneNumber'] as String?,
       faxNumber: json['faxNumber'] as String?,
       email: json['email'] as String?,
@@ -39,8 +44,9 @@ Map<String, dynamic> _$DoctorProfileHospitalResponseToJson(
     <String, dynamic>{
       '_id': instance.id,
       'hospital': instance.hospital,
-      'can': instance.can,
-      'no': instance.no,
+      'profile': instance.profile,
+      'photoRelease': instance.photoRelease,
+      'name': instance.name,
       'remark': instance.remark,
       'departmentName': instance.departmentName,
       'post': instance.post,
@@ -49,8 +55,10 @@ Map<String, dynamic> _$DoctorProfileHospitalResponseToJson(
       'nameKana': instance.nameKana,
       'affiliatedAcademicSociety': instance.affiliatedAcademicSociety,
       'qualifications': instance.qualifications,
+      'onlineMedicalTreatment': instance.onlineMedicalTreatment,
       'trainingCompletionCertificateNumber':
           instance.trainingCompletionCertificateNumber,
+      'completionCertificate': instance.completionCertificate,
       'telephoneNumber': instance.telephoneNumber,
       'faxNumber': instance.faxNumber,
       'email': instance.email,

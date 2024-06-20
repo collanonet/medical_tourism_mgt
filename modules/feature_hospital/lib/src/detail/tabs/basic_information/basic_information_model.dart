@@ -204,12 +204,30 @@ class BasicInformationModel {
           );
         }
 
+        FormArray completionCertificate = FormArray([]);
+        if (item.completionCertificate != null && item.completionCertificate!.isNotEmpty) {
+          item.completionCertificate!.map((e) {
+            completionCertificate.add(
+              FormGroup({
+                'name': FormControl<String>(value: e),
+              }),
+            );
+          });
+        } else {
+          completionCertificate.add(
+            FormGroup({
+              'name': FormControl<String>(),
+            }),
+          );
+        }
+
         formArray.add(
           FormGroup({
             '_id': FormControl<String>(value: item.id),
             'hospital': FormControl<String>(value: item.hospital),
-            'can': FormControl<String>(value: item.can),
-            'no': FormControl<String>(value: item.no),
+            'profile': FormControl<String>(value: item.profile),
+            'photoRelease': FormControl<String>(value: item.photoRelease),
+            'name': FormControl<String>(value: item.name),
             'remark': FormControl<String>(value: item.remark),
             'departmentName': FormControl<String>(value: item.departmentName),
             'post': FormControl<String>(value: item.post),
@@ -220,7 +238,9 @@ class BasicInformationModel {
             'qualifications': qualifications,
             'trainingCompletionCertificateNumber': FormControl<String>(
                 value: item.trainingCompletionCertificateNumber),
+            'onlineMedicalTreatment': FormControl<String>(value: item.onlineMedicalTreatment),
             'telephoneNumber': FormControl<String>(value: item.telephoneNumber),
+            'completionCertificate': completionCertificate,
             'faxNumber': FormControl<String>(value: item.faxNumber),
             'email': FormControl<String>(value: item.email),
             'remark2': FormControl<String>(value: item.remark2),
@@ -421,6 +441,7 @@ class BasicInformationModel {
           .forEach((element) async {
         List<String> affiliatedAcademicSociety = [];
         List<String> qualifications = [];
+        List<String> completionCertificate = [];
 
         if ((element['affiliatedAcademicSociety'] as List).isNotEmpty) {
           affiliatedAcademicSociety = element['affiliatedAcademicSociety']
@@ -434,8 +455,15 @@ class BasicInformationModel {
               .toList();
         }
 
+        if ((element['completionCertificate'] as List).isNotEmpty) {
+          qualifications = element['completionCertificate']
+              .map((e) => e['name'] as String)
+              .toList();
+        }
+
         element['affiliatedAcademicSociety'] = affiliatedAcademicSociety;
         element['qualifications'] = qualifications;
+        element['completionCertificate'] = completionCertificate;
 
         DoctorProfileHospitalRequest request =
             DoctorProfileHospitalRequest.fromJson(element);
