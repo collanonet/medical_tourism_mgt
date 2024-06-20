@@ -3,8 +3,17 @@ import 'dart:io';
 import 'package:core_network/core_network.dart';
 
 abstract class AgentRepository {
-
-  Future<List<AgentResponse>> getAgents();
+  Future<List<AgentResponse>> getAgents({
+    String? companyName,
+    String? nameKana,
+    String? postalCode,
+    String? address,
+    String? area,
+    String? phoneNumber,
+    DateTime? transactionStartDate,
+    String? howToMainPayment,
+    int? pastCasesNumber,
+  });
 
   Future<AgentResponse> getAgent(String id);
 
@@ -18,9 +27,11 @@ abstract class AgentRepository {
 
   Future<AgentManagerResponse> getAgentManager(String id);
 
-  Future<AgentManagerResponse> postAgentManager(AgentManagerRequest agentManager);
+  Future<AgentManagerResponse> postAgentManager(
+      AgentManagerRequest agentManager);
 
-  Future<AgentManagerResponse> putAgentManager(String id, AgentManagerRequest agentManager);
+  Future<AgentManagerResponse> putAgentManager(
+      String id, AgentManagerRequest agentManager);
 
   Future<void> deleteAgentManager(String id);
 }

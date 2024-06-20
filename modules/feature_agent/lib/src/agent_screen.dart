@@ -131,12 +131,12 @@ class AgentScreen extends StatelessWidget {
                                                     MainAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'LIU　WEIQIANG ',
+                                                    value.requireData[index].manager?.fullNameRomanji ?? '--',
                                                     style: context
                                                         .textTheme.bodyMedium,
                                                   ),
                                                   Text(
-                                                    '刘 伟强 / 劉 偉強',
+                                                    '${value.requireData[index].manager?.fullNameChineseKanjiVietnameseNotation ?? '--'} / ${value.requireData[index].manager?.fullNameJapaneseKanjiChineseOnly ?? '--'}',
                                                     style: context
                                                         .textTheme.bodySmall,
                                                   ),

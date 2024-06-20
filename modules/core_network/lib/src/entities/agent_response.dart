@@ -20,7 +20,7 @@ class AgentResponse {
   String? howToMainPayment;
   int? pastCasesNumber;
   List<AgentReferralCommissionResponse>? referralCommissions;
-  AgentManagerResponse? manager;
+  AgentManager? manager;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -47,4 +47,40 @@ class AgentResponse {
   }
 
   Map<String, dynamic> toJson() => _$AgentResponseToJson(this);
+}
+
+@JsonSerializable()
+class AgentManager {
+  @JsonKey(name: '_id')
+  final String id;
+  String? nameCardDragDrop;
+  String? departmentName;
+  String? fullNameRomanji;
+  String? fullNameChineseKanjiVietnameseNotation;
+  String? fullNameJapaneseKanjiChineseOnly;
+  String? fullNameKana;
+  String? phoneNumber;
+  String? email;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  AgentManager({
+    required this.id,
+    this.nameCardDragDrop,
+    this.departmentName,
+    this.fullNameRomanji,
+    this.fullNameChineseKanjiVietnameseNotation,
+    this.fullNameJapaneseKanjiChineseOnly,
+    this.fullNameKana,
+    this.phoneNumber,
+    this.email,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory AgentManager.fromJson(Map<String, dynamic> json) {
+    return _$AgentManagerFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() => _$AgentManagerToJson(this);
 }

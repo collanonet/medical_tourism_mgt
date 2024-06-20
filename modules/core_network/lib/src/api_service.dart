@@ -604,7 +604,17 @@ abstract class ApiService {
   );
 
   @GET(Endpoints.AGENTS)
-  Future<List<AgentResponse>> getAgents();
+  Future<List<AgentResponse>> getAgents({
+    @Query('companyName') String? companyName,
+    @Query('nameKana') String? nameKana,
+    @Query('postalCode') String? postalCode,
+    @Query('address') String? address,
+    @Query('area') String? area,
+    @Query('phoneNumber') String? phoneNumber,
+    @Query('transactionStartDate') DateTime? transactionStartDate,
+    @Query('howToMainPayment') String? howToMainPayment,
+    @Query('pastCasesNumber') int? pastCasesNumber,
+  });
 
   @GET('${Endpoints.AGENTS}/{id}')
   Future<AgentResponse> getAgent(

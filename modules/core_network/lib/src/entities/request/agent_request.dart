@@ -7,6 +7,7 @@ part 'agent_request.g.dart';
 @JsonSerializable()
 class AgentRequest {
   String? memo;
+  String? manager;
   String? companyName;
   String? nameKana;
   String? postalCode;
@@ -19,6 +20,7 @@ class AgentRequest {
   List<AgentReferralCommissionRequest>? referralCommissions;
 
   AgentRequest({
+    this.manager,
     this.memo,
     this.companyName,
     this.nameKana,

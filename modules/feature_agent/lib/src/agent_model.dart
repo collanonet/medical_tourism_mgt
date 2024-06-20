@@ -13,12 +13,33 @@ class AgentModel with ChangeNotifier {
 
   final AgentRepository authRepository;
 
-  ValueNotifier<AsyncData<List<AgentResponse>>> agents = ValueNotifier(const AsyncData());
+  ValueNotifier<AsyncData<List<AgentResponse>>> agents =
+      ValueNotifier(const AsyncData());
 
-  void getAgents() async {
+  void getAgents({
+    String? companyName,
+    String? nameKana,
+    String? postalCode,
+    String? address,
+    String? area,
+    String? phoneNumber,
+    DateTime? transactionStartDate,
+    String? howToMainPayment,
+    int? pastCasesNumber,
+  }) async {
     try {
       agents.value = const AsyncData(loading: true);
-      var response = await authRepository.getAgents();
+      var response = await authRepository.getAgents(
+        companyName: companyName,
+        nameKana: nameKana,
+        postalCode: postalCode,
+        address: address,
+        area: area,
+        phoneNumber: phoneNumber,
+        transactionStartDate: transactionStartDate,
+        howToMainPayment: howToMainPayment,
+        pastCasesNumber: pastCasesNumber,
+      );
       agents.value = AsyncData(data: response);
     } catch (error) {
       agents.value = AsyncData(error: error);

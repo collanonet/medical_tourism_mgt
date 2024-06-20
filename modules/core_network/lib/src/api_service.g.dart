@@ -2946,9 +2946,30 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<AgentResponse>> getAgents() async {
+  Future<List<AgentResponse>> getAgents({
+    String? companyName,
+    String? nameKana,
+    String? postalCode,
+    String? address,
+    String? area,
+    String? phoneNumber,
+    DateTime? transactionStartDate,
+    String? howToMainPayment,
+    int? pastCasesNumber,
+  }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'companyName': companyName,
+      r'nameKana': nameKana,
+      r'postalCode': postalCode,
+      r'address': address,
+      r'area': area,
+      r'phoneNumber': phoneNumber,
+      r'transactionStartDate': transactionStartDate?.toIso8601String(),
+      r'howToMainPayment': howToMainPayment,
+      r'pastCasesNumber': pastCasesNumber,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio
