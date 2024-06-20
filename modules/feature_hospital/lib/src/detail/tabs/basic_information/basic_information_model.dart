@@ -205,7 +205,8 @@ class BasicInformationModel {
         }
 
         FormArray completionCertificate = FormArray([]);
-        if (item.completionCertificate != null && item.completionCertificate!.isNotEmpty) {
+        if (item.completionCertificate != null &&
+            item.completionCertificate!.isNotEmpty) {
           item.completionCertificate!.map((e) {
             completionCertificate.add(
               FormGroup({
@@ -238,7 +239,8 @@ class BasicInformationModel {
             'qualifications': qualifications,
             'trainingCompletionCertificateNumber': FormControl<String>(
                 value: item.trainingCompletionCertificateNumber),
-            'onlineMedicalTreatment': FormControl<String>(value: item.onlineMedicalTreatment),
+            'onlineMedicalTreatment':
+                FormControl<String>(value: item.onlineMedicalTreatment),
             'telephoneNumber': FormControl<String>(value: item.telephoneNumber),
             'completionCertificate': completionCertificate,
             'faxNumber': FormControl<String>(value: item.faxNumber),
@@ -350,202 +352,215 @@ class BasicInformationModel {
   ValueNotifier<AsyncData<bool>> submit = ValueNotifier(const AsyncData());
 
   void submitData(FormGroup formGroup) async {
-    try {
-      submit.value = const AsyncData(loading: true);
-      await submitBasicInformation(
-          formGroup.control('basicInformation') as FormGroup);
+    // try {
+    submit.value = const AsyncData(loading: true);
+    await submitBasicInformation(
+        formGroup.control('basicInformation') as FormGroup);
 
-      if (basicInformationData.value.hasData) {
-        await submitHowToMakeRequest(
-            formGroup.control('howToMakeRequest') as FormGroup);
-        await submitPaymentOption(
-            formGroup.control('paymentOptionSection') as FormGroup);
-        await submitAdditionalInformation(
-            formGroup.control('additionalInformationSection') as FormGroup);
-        await submitSupportLanguage(formGroup);
-        await submitMedicalRecordBasicInfo(formGroup);
-        await submitDoctorInformation(formGroup);
-      }
-
-      submit.value = const AsyncData(data: true);
-    } catch (e) {
-      submit.value = AsyncData(error: e);
+    logger.d(basicInformationData.value.hasData);
+    if (basicInformationData.value.hasData) {
+      await submitHowToMakeRequest(
+          formGroup.control('howToMakeRequest') as FormGroup);
+      await submitPaymentOption(
+          formGroup.control('paymentOptionSection') as FormGroup);
+      await submitAdditionalInformation(
+          formGroup.control('additionalInformationSection') as FormGroup);
+      await submitSupportLanguage(formGroup);
+      await submitMedicalRecordBasicInfo(formGroup);
+      await submitDoctorInformation(formGroup);
     }
+
+    submit.value = const AsyncData(data: true);
+    // } catch (e) {
+    //   submit.value = AsyncData(error: e);
+    // }
   }
 
   Future<void> submitBasicInformation(FormGroup formGroup) async {
-    try {
-      basicInformationData.value = const AsyncData(loading: true);
+    // try {
+    basicInformationData.value = const AsyncData(loading: true);
+    logger.d(formGroup.value);
+    final result = await hospitalRepository.postBasicInformationHospital(
+      BasicInformationHospitalRequest.fromJson(formGroup.value),
+    );
 
-      final result = await hospitalRepository.postBasicInformationHospital(
-        BasicInformationHospitalRequest.fromJson(formGroup.value),
-      );
-
-      basicInformationData.value = AsyncData(data: result);
-    } catch (e) {
-      basicInformationData.value = AsyncData(error: e);
-    }
+    basicInformationData.value = AsyncData(data: result);
+    // } catch (e) {
+    //   basicInformationData.value = AsyncData(error: e);
+    // }
   }
 
   Future<void> submitHowToMakeRequest(FormGroup form) async {
-    try {
-      howToMakeRequestHospitalData.value = const AsyncData(loading: true);
-      HowToRequestHospitalRequest request =
-          HowToRequestHospitalRequest.fromJson(form.value);
-      await hospitalRepository
-          .postHowToRequestHospital(request.copyWith(
-              hospital: basicInformationData.value.requireData.id))
-          .then((value) {
-        howToMakeRequestHospitalData.value = AsyncData(data: value);
-      });
-    } catch (e) {
-      logger.d(e);
-      howToMakeRequestHospitalData.value = AsyncData(error: e);
-    }
+    // try {
+    howToMakeRequestHospitalData.value = const AsyncData(loading: true);
+    logger.d(form.value);
+    Map<String, dynamic> json = form.value;
+    json['hospital'] = basicInformationData.value.requireData.id;
+    HowToRequestHospitalRequest request =
+        HowToRequestHospitalRequest.fromJson(json);
+    await hospitalRepository
+        .postHowToRequestHospital(request.copyWith(
+            hospital: basicInformationData.value.requireData.id))
+        .then((value) {
+      howToMakeRequestHospitalData.value = AsyncData(data: value);
+    });
+    // } catch (e) {
+    //   logger.d(e);
+    //   howToMakeRequestHospitalData.value = AsyncData(error: e);
+    // }
   }
 
   Future<void> submitMedicalRecordBasicInfo(FormGroup formGroup) async {
-    try {
-      medicalRecordBasicInfoData.value = const AsyncData(loading: true);
+    // try {
+    medicalRecordBasicInfoData.value = const AsyncData(loading: true);
 
-      await formGroup
-          .control('medicalRecordHospitals')
-          .value
-          .forEach((element) async {
-        MedicalRecordBasicInfoHospitalRequest request =
-            MedicalRecordBasicInfoHospitalRequest.fromJson(element);
-        var result =
-            await hospitalRepository.postMedicalRecordBasicInfoHospital(request
-                .copyWith(hospital: basicInformationData.value.requireData.id));
-
-        medicalRecordBasicInfoData.value.copyWith(data: [
-          ...medicalRecordBasicInfoData.value.requireData,
-          result,
-        ]);
-      });
-
-      medicalRecordBasicInfoData.value.copyWith(loading: false);
-    } catch (e) {
-      logger.d(e);
-      medicalRecordBasicInfoData.value = AsyncData(error: e);
-    }
-  }
-
-  Future<void> submitDoctorInformation(FormGroup formGroup) async {
-    try {
-      doctorInformationData.value = const AsyncData(loading: true);
-
-      await formGroup
-          .control('addDoctorProfile')
-          .value
-          .forEach((element) async {
-        List<String> affiliatedAcademicSociety = [];
-        List<String> qualifications = [];
-        List<String> completionCertificate = [];
-
-        if ((element['affiliatedAcademicSociety'] as List).isNotEmpty) {
-          affiliatedAcademicSociety = element['affiliatedAcademicSociety']
-              .map((e) => e['name'] as String)
-              .toList();
-        }
-
-        if ((element['qualifications'] as List).isNotEmpty) {
-          qualifications = element['qualifications']
-              .map((e) => e['name'] as String)
-              .toList();
-        }
-
-        if ((element['completionCertificate'] as List).isNotEmpty) {
-          qualifications = element['completionCertificate']
-              .map((e) => e['name'] as String)
-              .toList();
-        }
-
-        element['affiliatedAcademicSociety'] = affiliatedAcademicSociety;
-        element['qualifications'] = qualifications;
-        element['completionCertificate'] = completionCertificate;
-
-        DoctorProfileHospitalRequest request =
-            DoctorProfileHospitalRequest.fromJson(element);
-        var result = await hospitalRepository.postDoctorInformationHospital(
-            request.copyWith(
-                hospital: basicInformationData.value.requireData.id));
-        doctorInformationData.value.copyWith(data: [
-          ...doctorInformationData.value.data ?? [],
-          result,
-        ]);
-      });
-
-      doctorInformationData.value.copyWith(loading: false);
-    } catch (e) {
-      logger.d(e);
-      doctorInformationData.value = AsyncData(error: e);
-    }
-  }
-
-  Future<void> submitAdditionalInformation(FormGroup form) async {
-    try {
-      additionalInformationData.value = const AsyncData(loading: true);
-      Map<String, dynamic> element = form.value;
-
-      element['contract'] = element['contract']
-          .map((e) => e['name'] as String)
-          .toList()
-          .cast<String>();
-
-      AdditionalInformationSectionRequest request =
-          AdditionalInformationSectionRequest.fromJson(element);
-      var result = await hospitalRepository.postAdditionalInformationHospital(
+    await formGroup
+        .control('medicalRecordHospitals')
+        .value
+        .forEach((element) async {
+      logger.d(element);
+      Map<String, dynamic> json = element;
+      json['hospital'] = basicInformationData.value.requireData.id;
+      MedicalRecordBasicInfoHospitalRequest request =
+          MedicalRecordBasicInfoHospitalRequest.fromJson(json);
+      var result = await hospitalRepository.postMedicalRecordBasicInfoHospital(
           request.copyWith(
               hospital: basicInformationData.value.requireData.id));
 
-      additionalInformationData.value = AsyncData(data: result);
-    } catch (e) {
-      logger.d(e);
-      additionalInformationData.value = AsyncData(error: e);
-    }
+      medicalRecordBasicInfoData.value.copyWith(data: [
+        ...medicalRecordBasicInfoData.value.requireData,
+        result,
+      ]);
+    });
+
+    medicalRecordBasicInfoData.value.copyWith(loading: false);
+    // } catch (e) {
+    //   logger.d(e);
+    //   medicalRecordBasicInfoData.value = AsyncData(error: e);
+    // }
+  }
+
+  Future<void> submitDoctorInformation(FormGroup formGroup) async {
+    // try {
+    doctorInformationData.value = const AsyncData(loading: true);
+
+    await formGroup.control('addDoctorProfile').value.forEach((element) async {
+      List<String> affiliatedAcademicSociety = [];
+      List<String> qualifications = [];
+      List<String> completionCertificate = [];
+
+      if ((element['affiliatedAcademicSociety'] as List).isNotEmpty) {
+        affiliatedAcademicSociety = element['affiliatedAcademicSociety']
+            .map((e) => e['name'] as String)
+            .toList();
+      }
+
+      if ((element['qualifications'] as List).isNotEmpty) {
+        qualifications =
+            element['qualifications'].map((e) => e['name'] as String).toList();
+      }
+
+      if ((element['completionCertificate'] as List).isNotEmpty) {
+        qualifications = element['completionCertificate']
+            .map((e) => e['name'] as String)
+            .toList();
+      }
+
+      element['affiliatedAcademicSociety'] = affiliatedAcademicSociety;
+      element['qualifications'] = qualifications;
+      element['completionCertificate'] = completionCertificate;
+
+      logger.d(element);
+      element['hospital'] = basicInformationData.value.requireData.id;
+      DoctorProfileHospitalRequest request =
+          DoctorProfileHospitalRequest.fromJson(element);
+      var result = await hospitalRepository.postDoctorInformationHospital(
+          request.copyWith(
+              hospital: basicInformationData.value.requireData.id));
+      doctorInformationData.value.copyWith(data: [
+        ...doctorInformationData.value.data ?? [],
+        result,
+      ]);
+    });
+
+    doctorInformationData.value.copyWith(loading: false);
+    // } catch (e) {
+    //   logger.d(e);
+    //   doctorInformationData.value = AsyncData(error: e);
+    // }
+  }
+
+  Future<void> submitAdditionalInformation(FormGroup form) async {
+    // try {
+    additionalInformationData.value = const AsyncData(loading: true);
+    Map<String, dynamic> element = form.value;
+
+    element['contract'] = element['contract']
+        .map((e) => e['name'] as String)
+        .toList()
+        .cast<String>();
+
+    logger.d(element);
+
+    element['hospital'] = basicInformationData.value.requireData.id;
+    AdditionalInformationSectionRequest request =
+        AdditionalInformationSectionRequest.fromJson(element);
+    var result = await hospitalRepository.postAdditionalInformationHospital(
+        request.copyWith(hospital: basicInformationData.value.requireData.id));
+
+    additionalInformationData.value = AsyncData(data: result);
+    // } catch (e) {
+    //   logger.d(e);
+    //   additionalInformationData.value = AsyncData(error: e);
+    // }
   }
 
   Future<void> submitPaymentOption(FormGroup form) async {
-    try {
-      paymentOptionData.value = const AsyncData(loading: true);
-      PaymentOptionHospitalRequest request =
-          PaymentOptionHospitalRequest.fromJson(form.value);
-      var result = await hospitalRepository.postPaymentOptionHospital(request
-          .copyWith(hospital: basicInformationData.value.requireData.id));
+    // try {
+    paymentOptionData.value = const AsyncData(loading: true);
+    logger.d(form.value);
+    Map<String, dynamic> json = form.value;
+    json['hospital'] = basicInformationData.value.requireData.id;
+    PaymentOptionHospitalRequest request =
+        PaymentOptionHospitalRequest.fromJson(json);
+    var result = await hospitalRepository.postPaymentOptionHospital(
+        request.copyWith(hospital: basicInformationData.value.requireData.id));
 
-      paymentOptionData.value = AsyncData(data: result);
-    } catch (e) {
-      logger.d(e);
-      paymentOptionData.value = AsyncData(error: e);
-    }
+    paymentOptionData.value = AsyncData(data: result);
+    // } catch (e) {
+    //   logger.d(e);
+    //   paymentOptionData.value = AsyncData(error: e);
+    // }
   }
 
   Future<void> submitSupportLanguage(FormGroup formGroup) async {
-    try {
-      supportLangaugeData.value = const AsyncData(loading: true);
+    // try {
+    supportLangaugeData.value = const AsyncData(loading: true);
 
-      await formGroup
-          .control('supportLanguageSection')
-          .value
-          .forEach((element) async {
-        SupportLanguageHospitalRequest request =
-            SupportLanguageHospitalRequest.fromJson(element);
+    await formGroup
+        .control('supportLanguageSection')
+        .value
+        .forEach((element) async {
+      logger.d(element);
 
-        var result = await hospitalRepository.postSupportLanguageHospital(
-            request.copyWith(
-                hospital: basicInformationData.value.requireData.id));
+      Map<String, dynamic> json = element;
+      json['hospital'] = basicInformationData.value.requireData.id;
+      SupportLanguageHospitalRequest request =
+          SupportLanguageHospitalRequest.fromJson(json);
 
-        supportLangaugeData.value.copyWith(data: [
-          ...supportLangaugeData.value.requireData,
-          result,
-        ]);
-      });
+      var result = await hospitalRepository.postSupportLanguageHospital(request
+          .copyWith(hospital: basicInformationData.value.requireData.id));
 
-      supportLangaugeData.value.copyWith(loading: false);
-    } catch (e) {
-      logger.d(e);
-      supportLangaugeData.value = AsyncData(error: e);
-    }
+      supportLangaugeData.value.copyWith(data: [
+        ...supportLangaugeData.value.requireData,
+        result,
+      ]);
+    });
+
+    supportLangaugeData.value.copyWith(loading: false);
+    // } catch (e) {
+    //   logger.d(e);
+    //   supportLangaugeData.value = AsyncData(error: e);
+    // }
   }
 }

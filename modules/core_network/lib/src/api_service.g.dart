@@ -4066,7 +4066,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-record-hospital/hospital/${hospitalId}',
+              '/medical-record-hospitals/${hospitalId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4100,7 +4100,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-record-hospital/hospital',
+              '/medical-record-hospitals',
               queryParameters: queryParameters,
               data: _data,
             )

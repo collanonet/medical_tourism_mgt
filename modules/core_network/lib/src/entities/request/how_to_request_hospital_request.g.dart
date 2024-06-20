@@ -9,7 +9,7 @@ part of 'how_to_request_hospital_request.dart';
 HowToRequestHospitalRequest _$HowToRequestHospitalRequestFromJson(
         Map<String, dynamic> json) =>
     HowToRequestHospitalRequest(
-      hospital: json['hospital'] as String?,
+      hospital: json['hospital'] as String,
       id: json['_id'] as String?,
       dateOfUpdate: json['dateOfUpdate'] == null
           ? null

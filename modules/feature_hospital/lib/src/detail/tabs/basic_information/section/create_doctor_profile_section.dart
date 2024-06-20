@@ -137,7 +137,7 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                           child:
                                                               ReactiveRadioListTile(
                                                             formControlName:
-                                                                'can',
+                                                                'photoRelease',
                                                             value: '可',
                                                             onChanged:
                                                                 (value) {},
@@ -154,7 +154,7 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                           child:
                                                               ReactiveRadioListTile(
                                                             formControlName:
-                                                                'no',
+                                                                'photoRelease',
                                                             value: '不可',
                                                             onChanged:
                                                                 (value) {},
@@ -196,7 +196,7 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                           child:
                                                               ReactiveRadioListTile(
                                                             formControlName:
-                                                                'can',
+                                                                'name',
                                                             value: '可',
                                                             onChanged:
                                                                 (value) {},
@@ -213,7 +213,7 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                           child:
                                                               ReactiveRadioListTile(
                                                             formControlName:
-                                                                'no',
+                                                                'name',
                                                             value: '不可',
                                                             onChanged:
                                                                 (value) {},
@@ -545,7 +545,8 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                     stepWidth: 2,
                                                     child:
                                                         ReactiveRadioListTile(
-                                                      formControlName: 'can',
+                                                      formControlName:
+                                                          'onlineMedicalTreatment',
                                                       value: '可',
                                                       onChanged: (value) {},
                                                       title: Text(
@@ -559,7 +560,8 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                     stepWidth: 2,
                                                     child:
                                                         ReactiveRadioListTile(
-                                                      formControlName: 'no',
+                                                      formControlName:
+                                                          'onlineMedicalTreatment',
                                                       value: '不可',
                                                       onChanged: (value) {},
                                                       title: Text(
@@ -682,8 +684,9 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                   onTap: () => formArray.add(FormGroup({
                     '_id': FormControl<String?>(),
                     'hospital': FormControl<String?>(),
-                    'can': FormControl<String>(),
-                    'no': FormControl<String>(),
+                    'profile': FormControl<String>(),
+                    'photoRelease': FormControl<String>(),
+                    'name': FormControl<String>(),
                     'remark': FormControl<String>(),
                     'departmentName': FormControl<String>(),
                     'post': FormControl<String>(),
@@ -700,8 +703,14 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                         'name': FormControl<String>(),
                       })
                     ]),
+                    'onlineMedicalTreatment': FormControl<String>(),
                     'trainingCompletionCertificateNumber':
                         FormControl<String>(),
+                    'completionCertificate': FormArray([
+                      FormGroup({
+                        'name': FormControl<String>(),
+                      })
+                    ]),
                     'telephoneNumber': FormControl<String>(),
                     'faxNumber': FormControl<String>(),
                     'email': FormControl<String>(),
