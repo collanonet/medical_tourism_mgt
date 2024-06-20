@@ -159,7 +159,8 @@ class Endpoints {
   static const DETAIL_HOTEL_SEARCH = '/detail-hotel-search';
 
   static const BASIC_INFORMATION_HOSPITAL = '/basic-information-hospital';
-  static const MEDICAL_RECORD_BASIC_INFO_HOSPITAL = '/medical-record-hospitals';
+  static const MEDICAL_RECORD_BASIC_INFO_HOSPITAL =
+      '/medical-record-information-hospital/hospital';
 
   static const DOCTOR_INFORMATION_HOSPITAL = '/doctor-information-hospital';
 

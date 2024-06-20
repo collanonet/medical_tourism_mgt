@@ -2,7 +2,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup basicInformationForm() {
   return FormGroup({
-    'howTopMakeRequest': FormGroup({
+    'howToMakeRequest': FormGroup({
       '_id': FormControl<String?>(),
       'hospital': FormControl<String?>(),
       'dateOfUpdate': FormControl<DateTime>(
