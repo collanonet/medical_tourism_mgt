@@ -81,8 +81,6 @@ class WebAppointmentDetailModel {
         doctorName: formGroup.control('doctorName').value,
         candidateDate: candidateDate,
         message: formGroup.control('message').value,
-        testCallDate: formGroup.control('testCallDate').value.toString(),
-        testCallTime: formGroup.control('testCallTime').value,
       );
 
       final result = await repository.putWebBookingAdmin(
