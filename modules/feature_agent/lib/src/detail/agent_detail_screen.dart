@@ -1,14 +1,14 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:core_utils/core_utils.dart';
 import 'package:feature_patient/feature_patient.dart';
-import 'package:feature_patient/feature_patient.gm.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import 'agent_detail_model.dart';
 import 'sub/basic_information/basic_information_page.dart';
+import 'sub/contract/contract_page.dart';
+import 'sub/estimate_invoice/estimate_invoice_page.dart';
 
 class AgentDetailScreen extends StatefulWidget {
   const AgentDetailScreen({super.key, this.id});
@@ -30,12 +30,11 @@ class _AgentDetailScreenState extends State<AgentDetailScreen> {
   @override
   void initState() {
     super.initState();
-    logger.d('widget.id: ${widget.id}');
     pages = <Widget>[
-      AgentBasicInformationPage(id: widget.id),
-      const PatientPageFormAgent(),
-      Container(),
-      Container(),
+      BasicInformationPage(id: widget.id),
+      PatientPageFormAgent(id: widget.id),
+      ContractPage(id: widget.id),
+      EstimateInvoicePage(id: widget.id),
     ];
   }
 

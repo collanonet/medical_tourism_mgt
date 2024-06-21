@@ -1,0 +1,170 @@
+import 'package:reactive_forms/reactive_forms.dart';
+
+FormGroup basicInformationForm() {
+  return FormGroup({
+    'howTopMakeRequest': FormGroup({
+      '_id': FormControl<String?>(),
+      'hospital': FormControl<String?>(),
+      'dateOfUpdate': FormControl<DateTime>(
+        validators: [Validators.required],
+      ),
+      'updater': FormControl<String>(),
+      'memo': FormControl<String>(),
+      'updates': FormControl<String>(),
+    }),
+    'basicInformation': FormGroup({
+      '_id': FormControl<String?>(),
+      'hospitalNameChinese': FormControl<String>(),
+      'hospitalNameKatakana': FormControl<String>(),
+      'zipCode': FormControl<String>(),
+      'location': FormControl<String>(),
+      'googleMap': FormControl<String>(),
+      'phoneNumber': FormControl<String>(),
+      'faxNumber': FormControl<String>(),
+      'homepage': FormControl<String>(),
+      'supportedMenu': FormControl<bool>(value: false),
+      'healthCheckup': FormControl<bool>(value: false),
+      'treatment': FormControl<bool>(value: false),
+      'heavy-ionBeam': FormControl<bool>(value: false),
+      'protonBeam': FormControl<bool>(value: false),
+      'regenerativeMedicine': FormControl<bool>(value: false),
+      'beauty': FormControl<bool>(value: false),
+      'phone': FormControl<bool>(value: false),
+      'fax': FormControl<bool>(value: false),
+      'mail': FormControl<bool>(value: false),
+      'line': FormControl<bool>(value: false),
+      'note': FormControl<String>(),
+      'english': FormControl<bool>(value: false),
+      'chinese': FormControl<bool>(value: false),
+      'vietnamese': FormControl<bool>(value: false),
+      'otherLanguages': FormControl<bool>(value: false),
+      'languages': FormControl<String>(),
+      'onlineCheck': FormControl<String>(),
+      'appointment': FormControl<String>(),
+      'cdr': FormControl<bool>(value: false),
+      'storageUrl': FormControl<bool>(value: false),
+      'viewMyPage': FormControl<bool>(value: false),
+      'mailAttachment': FormControl<bool>(value: false),
+      'loanerTablet': FormControl<bool>(value: false),
+      'jmip': FormControl<bool>(value: false),
+      'jci': FormControl<bool>(value: false),
+      'jih': FormControl<bool>(value: false),
+      'ningenDoctor': FormControl<bool>(value: false),
+      'japanHealth': FormControl<bool>(value: false),
+      'societyRorRegenerativeMedicine': FormControl<bool>(value: false),
+      'osakaPrefecturalBase': FormControl<bool>(value: false),
+      'certified': FormControl<bool>(value: false),
+      'shift1': FormControl<String>(),
+      'shift2': FormControl<String>(),
+      'shift1Mon': FormControl<String>(),
+      'shift1Tue': FormControl<String>(),
+      'shift1Wed': FormControl<String>(),
+      'shift1Thu': FormControl<String>(),
+      'shift1Fri': FormControl<String>(),
+      'shift1Sat': FormControl<String>(),
+      'shift1Sun': FormControl<String>(),
+      'shift2Mon': FormControl<String>(),
+      'shift2Tue': FormControl<String>(),
+      'shift2Wed': FormControl<String>(),
+      'shift2Thu': FormControl<String>(),
+      'shift2Fri': FormControl<String>(),
+      'shift2Sat': FormControl<String>(),
+      'shift2Sun': FormControl<String>(),
+      'memo': FormControl<String>(),
+    }),
+    'medicalRecordHospitals': FormArray([
+      FormGroup({
+        '_id': FormControl<String?>(),
+        'hospital': FormControl<String?>(),
+        'dateOfUpdate': FormControl<DateTime>(
+          validators: [Validators.required],
+        ),
+        'departmentName': FormControl<String>(),
+        'nameKanji': FormControl<String>(),
+        'nameKana': FormControl<String>(),
+        'telephoneNumber': FormControl<String>(),
+        'email': FormControl<String>(),
+        'faxNumber': FormControl<String>(),
+      }),
+    ]),
+    'addDoctorProfile': FormArray([
+      FormGroup({
+        '_id': FormControl<String?>(),
+        'hospital': FormControl<String?>(),
+        'can': FormControl<String>(),
+        'no': FormControl<String>(),
+        'remark': FormControl<String>(),
+        'departmentName': FormControl<String>(),
+        'post': FormControl<String>(),
+        'specialty': FormControl<String>(),
+        'nameKanji': FormControl<String>(),
+        'nameKana': FormControl<String>(),
+        'affiliatedAcademicSociety': FormArray([
+          FormGroup({
+            'name': FormControl<String>(),
+          })
+        ]),
+        'qualifications': FormArray([
+          FormGroup({
+            'name': FormControl<String>(),
+          })
+        ]),
+        'trainingCompletionCertificateNumber': FormControl<String>(),
+        'telephoneNumber': FormControl<String>(),
+        'faxNumber': FormControl<String>(),
+        'email': FormControl<String>(),
+        'remark2': FormControl<String>(),
+      })
+    ]),
+    'additionalInformationSection': FormGroup({
+      '_id': FormControl<String?>(),
+      'hospital': FormControl<String?>(),
+      'signed': FormControl<String>(),
+      'notConcluded': FormControl<String>(),
+      'canBe': FormControl<String>(),
+      'none': FormControl<String>(),
+      'referralFee': FormControl<num>(),
+      'remark': FormControl<String>(),
+      'paymentSite': FormControl<String>(),
+      'endOfNextMonth': FormControl<String>(),
+    }),
+    'paymentOptionSection': FormGroup({
+      '_id': FormControl<String?>(),
+      'hospital': FormControl<String?>(),
+      'payer': FormControl<String>(),
+      'paymentTiming': FormControl<String>(),
+      'feeBack': FormControl<String>(),
+      'paymentDirectlyToTheHospital': FormControl<String>(),
+      'transfer': FormControl<bool>(value: false),
+      'electronicPayment': FormControl<bool>(),
+      'alipay': FormControl<bool>(),
+      'unionPayPay': FormControl<bool>(),
+      'unionPay': FormControl<bool>(),
+      'weChatPay': FormControl<bool>(),
+      'creditCard': FormControl<bool>(),
+      'visa': FormControl<bool>(),
+      'masterCard': FormControl<bool>(),
+      'americanExpress': FormControl<bool>(),
+      'jcb': FormControl<bool>(),
+      'cash': FormControl<bool>(),
+      'remark': FormControl<String>(),
+    }),
+    'supportLanguageSection': createSupportLanguageSection(languages),
+  });
+}
+
+List<String> languages = ['中国語', 'ベトナム語', '英語', '自由入力'];
+
+FormArray createSupportLanguageSection(List<String> languages) {
+  return FormArray(
+    languages
+        .map((language) => FormGroup({
+              '_id': FormControl<String?>(),
+              'hospital': FormControl<String?>(),
+              'supportLanguage': FormControl<String>(value: language),
+              'foreignStaff': FormControl<bool>(value: false),
+              'medicalInterpretationSupport': FormControl<bool>(value: false),
+            }))
+        .toList(),
+  );
+}

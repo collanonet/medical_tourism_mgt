@@ -33,6 +33,7 @@ abstract class AppModule {
         AgentDetailRoute.name: [PermissionRole.admin],
         ChatRoute.name: [PermissionRole.admin],
         HospitalsRoute.name: [PermissionRole.admin],
+        HospitalDetailRoute.name: [PermissionRole.admin],
         InvoicesRoute.name: [PermissionRole.admin],
         MedicalVisasRoute.name: [PermissionRole.admin],
         PrePatientRoute.name: [PermissionRole.admin],

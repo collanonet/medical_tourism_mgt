@@ -1,6 +1,8 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/material.dart';
 
+import '../feature_hospital.gm.dart';
 import 'filter_hospital.dart';
 
 class HospitalScreen extends StatelessWidget {
@@ -19,7 +21,9 @@ class HospitalScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                context.router.push(HospitalDetailRoute());
+              },
               child: const Text('新規登録'),
             ),
           ],
@@ -59,35 +63,40 @@ class HospitalScreen extends StatelessWidget {
                   child: ListView.builder(
                     itemCount: 10,
                     itemBuilder: (context, index) {
-                      return Container(
-                        padding: const EdgeInsets.all(16),
-                        color: index.isEven
-                            ? const Color(0xffEDF8F8)
-                            : Colors.white,
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 2,
-                              child: Row(
-                                children: [
-                                  Text('種別'),
-                                ],
+                      return InkWell(
+                        onTap: () {
+                          context.router.push(HospitalDetailRoute());
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(16),
+                          color: index.isEven
+                              ? const Color(0xffEDF8F8)
+                              : Colors.white,
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Row(
+                                  children: [
+                                    Text('種別'),
+                                  ],
+                                ),
                               ),
-                            ),
-                            Expanded(
-                              flex: 2,
-                              child: Text('大阪府済生会吹田病院'),
-                            ),
-                            Expanded(
-                              child: Text('大阪'),
-                            ),
-                            Expanded(
-                              child: Text('◎'), // ○
-                            ),
-                            Expanded(
-                              child: Text('サインポストの遺伝子検査のベトナム展開は独占に近い'),
-                            ),
-                          ],
+                              Expanded(
+                                flex: 2,
+                                child: Text('大阪府済生会吹田病院'),
+                              ),
+                              Expanded(
+                                child: Text('大阪'),
+                              ),
+                              Expanded(
+                                child: Text('◎'), // ○
+                              ),
+                              Expanded(
+                                child: Text('サインポストの遺伝子検査のベトナム展開は独占に近い'),
+                              ),
+                            ],
+                          ),
                         ),
                       );
                     },

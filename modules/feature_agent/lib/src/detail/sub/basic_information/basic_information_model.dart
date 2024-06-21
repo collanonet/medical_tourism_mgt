@@ -45,7 +45,7 @@ class AgentBasicInformationModel {
       for (var element in response.referralCommissions!) {
         referralCommissions.add(
           FormGroup({
-            'id': FormControl<String>(value: element.id),
+            '_id': FormControl<String>(value: element.id),
             'referralCommissionName':
                 FormControl<String>(value: element.referralCommissionName),
             'referralCommission':
@@ -56,14 +56,14 @@ class AgentBasicInformationModel {
     } else {
       referralCommissions.add(
         FormGroup({
-          'id': FormControl<String>(),
+          '_id': FormControl<String>(),
           'referralCommissionName': FormControl<String>(),
           'referralCommission': FormControl<int>(),
         }),
       );
     }
 
-    basicInformationAgentForm.control('id').value = response.id;
+    basicInformationAgentForm.control('_id').value = response.id;
     basicInformationAgentForm.control('memo').value = response.memo;
     basicInformationAgentForm.control('companyName').value =
         response.companyName;
@@ -92,7 +92,7 @@ class AgentBasicInformationModel {
           .value
           .forEach((element) {
         referralCommissions.add(AgentReferralCommissionRequest(
-          id: element['id'],
+          id: element['_id'],
           referralCommissionName: element['referralCommissionName'],
           referralCommission: element['referralCommission'] != null
               ? int.tryParse(element['referralCommission'].toString()) ?? 0
@@ -123,9 +123,9 @@ class AgentBasicInformationModel {
         referralCommissions: referralCommissions,
       );
 
-      if (formGroup.control('basicInformationAgent.id').value != null) {
+      if (formGroup.control('basicInformationAgent._id').value != null) {
         var response = await authRepository.putAgent(
-            formGroup.control('basicInformationAgent.id').value, agentRequest);
+            formGroup.control('basicInformationAgent._id').value, agentRequest);
         agent.value = AsyncData(data: response);
       } else {
         var response = await authRepository.postAgent(agentRequest);
@@ -159,15 +159,16 @@ class AgentBasicInformationModel {
   void insertAgentManagerDataToForm(
       List<AgentManagerResponse> response, FormGroup formGroup) {
     FormArray manager = formGroup.control('manager') as FormArray;
-    manager.clear();
+
     if (response.isNotEmpty) {
+      manager.clear();
       for (var element in response) {
         FormArray contactMethods =
             element.contactMethods != null && element.contactMethods!.isNotEmpty
                 ? FormArray(
                     element.contactMethods!.map((e) {
                       return FormGroup({
-                        'id': FormControl<String>(value: e.id),
+                        '_id': FormControl<String>(value: e.id),
                         'howToContact':
                             FormControl<String>(value: e.howToContact),
                         'howToContactQrCode':
@@ -177,14 +178,14 @@ class AgentBasicInformationModel {
                   )
                 : FormArray([
                     FormGroup({
-                      'id': FormControl<String>(),
+                      '_id': FormControl<String>(),
                       'howToContact': FormControl<String>(),
                       'howToContactQrCode': FormControl<String>(),
                     }),
                   ]);
         manager.add(
           FormGroup({
-            'id': FormControl<String>(value: element.id),
+            '_id': FormControl<String>(value: element.id),
             'nameCardDragDrop':
                 FormControl<String>(value: element.nameCardDragDrop),
             'departmentName':
@@ -202,31 +203,6 @@ class AgentBasicInformationModel {
           }),
         );
       }
-    } else {
-      manager.add(FormGroup({
-        'id': FormControl<String>(),
-        'nameCardDragDrop': FormControl<String>(),
-        'departmentName': FormControl<String>(),
-        'fullNameRomanji': FormControl<String>(
-          validators: [Validators.required],
-        ),
-        'fullNameChineseKanjiVietnameseNotation': FormControl<String>(),
-        'fullNameJapaneseKanjiChineseOnly': FormControl<String>(),
-        'fullNameKana': FormControl<String>(),
-        'phoneNumber': FormControl<String>(
-          validators: [Validators.required],
-        ),
-        'email': FormControl<String>(
-          validators: [Validators.required],
-        ),
-        'contactMethods': FormArray([
-          FormGroup({
-            'id': FormControl<String>(),
-            'howToContact': FormControl<String>(),
-            'howToContactQrCode': FormControl<String>(),
-          }),
-        ]),
-      }));
     }
   }
 
@@ -240,7 +216,7 @@ class AgentBasicInformationModel {
         List<AgentManagerContactRequest> contactMethods = [];
         element['contactMethods'].forEach((e) {
           contactMethods.add(AgentManagerContactRequest(
-            id: e['id'],
+            id: e['_id'],
             howToContact: e['howToContact'],
             howToContactQrCode: e['howToContactQrCode'],
           ));
@@ -261,8 +237,8 @@ class AgentBasicInformationModel {
           agentRecord: agent.value.requireData.id,
         ));
 
-        if (element['id'] != null) {
-          await authRepository.putAgentManager(element['id'], manager.first);
+        if (element['_id'] != null) {
+          await authRepository.putAgentManager(element['_id'], manager.first);
         } else {
           await authRepository.postAgentManager(manager.first);
         }

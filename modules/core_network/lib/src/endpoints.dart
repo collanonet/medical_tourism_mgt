@@ -125,7 +125,8 @@ class Endpoints {
   static const DELETE_MEDICAL_RECORDS_PROGRESS = '/medical-records-progress';
 
   static const MEDICAL_RECORDS_OVERSEAS_DATA = '/medical-records-overseas-data';
-  static const MEDICAL_RECORDS_OVERSEAS_DATA_MEDICAL_RECORD = '/medical-records-overseas-data/medical-record';
+  static const MEDICAL_RECORDS_OVERSEAS_DATA_MEDICAL_RECORD =
+      '/medical-records-overseas-data/medical-record';
 
   static const BOOKING_MEDICAL_RECORD = '/medical-record-web-booking';
 
@@ -134,19 +135,51 @@ class Endpoints {
   static const AGENT_MANAGER = '/agents-manager';
   static const WEB_BOOKING_ADMIN = '/web-booking-admin';
 
-  static const MEDICAL_RECORD_PATIENT_RESPONSE_REGENERATIVE_MEDICAL = '/medical-record-patient-response-regenerative-medical';
-  static const MEDICAL_RECORD_PATIENT_RESPONSE_BEAUTY = '/medical-record-patient-response-beauty';
-  static const MEDICAL_RECORD_PATIENT_RESPONSE_BLOOD_PURIFICATION_THERAPY = '/medical-record-patient-response-blood-purification-therapy';
-  static const MEDICAL_RECORD_PATIENT_RESPONSE_RISK_TEST = '/medical-record-patient-response-risk-test';
+  static const MEDICAL_RECORD_PATIENT_RESPONSE_REGENERATIVE_MEDICAL =
+      '/medical-record-patient-response-regenerative-medical';
+  static const MEDICAL_RECORD_PATIENT_RESPONSE_BEAUTY =
+      '/medical-record-patient-response-beauty';
+  static const MEDICAL_RECORD_PATIENT_RESPONSE_BLOOD_PURIFICATION_THERAPY =
+      '/medical-record-patient-response-blood-purification-therapy';
+  static const MEDICAL_RECORD_PATIENT_RESPONSE_RISK_TEST =
+      '/medical-record-patient-response-risk-test';
 
   //E1
   static const FILTER_PROCESS_CHART_PATIENT = '/filter-process-chart-patient';
   static const ITINERARY_SIMPLE_TITLE = 'itinerary-simple-title';
   static const ITINERARY_SIMPLE_EXPLANATION = 'itinerary-simple-explanation';
-  static const ITINERARY_SIMPLE_INTERPRETOR_OR_GUIDE = 'itinerary-simple-interpretor-or-guide';
-  static const ITINERARY_SIMPLE_TRANSFER_INPUT = 'itinerary-simple-transfer-input';
+  static const ITINERARY_SIMPLE_INTERPRETOR_OR_GUIDE =
+      'itinerary-simple-interpretor-or-guide';
+  static const ITINERARY_SIMPLE_TRANSFER_INPUT =
+      'itinerary-simple-transfer-input';
   static const DETAIL_FACILITY_HOSPITAL = 'detail-facility-hospital';
-  static const DETAIL_FACILITY_DROP_IN_FACILITY = 'detail-facility-drop-in-facility';
+  static const DETAIL_FACILITY_DROP_IN_FACILITY =
+      'detail-facility-drop-in-facility';
   static const DETAIL_HOTEL_REGISTATION = 'detail-hotel-registation';
   static const DETAIL_HOTEL_SEARCH = 'detail-hotel-search';
+
+  static const BASIC_INFORMATION_HOSPITAL = 'basic-information-hospital';
+  static const MEDICAL_RECORD_BASIC_INFO_HOSPITAL =
+      'medical-record-hospital/hospital';
+
+  static const DOCTOR_INFORMATION_HOSPITAL = 'doctor-information-hospital';
+
+  static const ADDITIONALINFORMATION_HOSPITAL =
+      'additional-information-hospital';
+
+  static const PAYMENT_OPTION_HOSPITAL = 'payment-option-hospital';
+
+  static const SUPPORT_LANGUAGE_HOSPITAL = 'support-language-hospital';
+
+  static const GET_HOW_TO_REQUEST_HOSPITAL = 'how-to-request-hospital';
+
+  static const GET_NEW_REGISTRATION_HOSPITAL = 'new-registration-hospital';
+
+  static const GET_LIST_SECTION_HOSPITAL = 'section-hospital';
+
+  static const GET_MATERIAL_HOSPITAL = 'material-hospital';
+
+  static const GET_WEB_RESERVATION_PATIENT = 'web-reservation-patient';
+
+  static const GET_MEDICAL_INSTITUTION_HOSPITAL = 'medical-institutions';
 }

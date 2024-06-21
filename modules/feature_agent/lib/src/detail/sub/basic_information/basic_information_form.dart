@@ -3,7 +3,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 FormGroup formBasicInformation() {
   return FormGroup({
     'basicInformationAgent': FormGroup({
-      'id': FormControl<String>(),
+      '_id': FormControl<String>(),
       'memo': FormControl<String>(),
       'companyName': FormControl<String>(
         validators: [Validators.required],
@@ -22,7 +22,7 @@ FormGroup formBasicInformation() {
       ),
       'referralCommissions': FormArray([
         FormGroup({
-          'id': FormControl<String>(),
+          '_id': FormControl<String>(),
           'referralCommissionName': FormControl<String>(),
           'referralCommission': FormControl<int>(),
         }),
@@ -32,7 +32,7 @@ FormGroup formBasicInformation() {
     }),
     'manager': FormArray([
       FormGroup({
-        'id': FormControl<String>(),
+        '_id': FormControl<String>(),
         'nameCardDragDrop': FormControl<String>(),
         'departmentName': FormControl<String>(),
         'fullNameRomanji': FormControl<String>(
@@ -49,7 +49,7 @@ FormGroup formBasicInformation() {
         ),
         'contactMethods': FormArray([
           FormGroup({
-            'id': FormControl<String>(),
+            '_id': FormControl<String>(),
             'howToContact': FormControl<String>(),
             'howToContactQrCode': FormControl<String>(),
           }),

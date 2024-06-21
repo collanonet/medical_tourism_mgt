@@ -1,5 +1,4 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:reactive_forms/reactive_forms.dart';
 
 part 'patient_passport.g.dart';
 

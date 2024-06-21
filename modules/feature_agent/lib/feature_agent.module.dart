@@ -12,6 +12,8 @@ import 'package:injectable/injectable.dart' as _i1;
 import 'src/agent_model.dart' as _i3;
 import 'src/detail/agent_detail_model.dart' as _i5;
 import 'src/detail/sub/basic_information/basic_information_model.dart' as _i6;
+import 'src/detail/sub/contract/contract_model.dart' as _i7;
+import 'src/detail/sub/estimate_invoice/estimate_invoice_model.dart' as _i8;
 
 class FeatureAgentPackageModule extends _i1.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -24,5 +26,9 @@ class FeatureAgentPackageModule extends _i1.MicroPackageModule {
     gh.factory<_i6.AgentBasicInformationModel>(() =>
         _i6.AgentBasicInformationModel(
             authRepository: gh<_i4.AgentRepository>()));
+    gh.factory<_i7.ContractModel>(
+        () => _i7.ContractModel(authRepository: gh<_i4.AgentRepository>()));
+    gh.factory<_i8.EstimateInvoiceModel>(() =>
+        _i8.EstimateInvoiceModel(authRepository: gh<_i4.AgentRepository>()));
   }
 }
