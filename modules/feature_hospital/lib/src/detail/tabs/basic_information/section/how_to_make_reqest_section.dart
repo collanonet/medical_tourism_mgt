@@ -20,7 +20,7 @@ class _HowtoMakeReqestSectionState extends State<HowtoMakeReqestSection> {
   @override
   Widget build(BuildContext context) {
     final formGroup = (ReactiveForm.of(context) as FormGroup)
-        .control('howTopMakeRequest') as FormGroup;
+        .control('howToMakeRequest') as FormGroup;
     final formatter = InputFormatter();
     return ValueListenableBuilder(
         valueListenable:

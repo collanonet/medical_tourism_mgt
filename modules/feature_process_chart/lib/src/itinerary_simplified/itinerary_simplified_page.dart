@@ -16,7 +16,7 @@ class ItinerarySimplifiedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return Provider(
       create: (context) => GetIt.I<ItinerarySimplifiedModel>(),
       child: ReactiveFormConfig(
         validationMessages: validationMessagesFilterPatient(context),

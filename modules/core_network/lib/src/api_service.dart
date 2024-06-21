@@ -596,7 +596,17 @@ abstract class ApiService {
   );
 
   @GET(Endpoints.AGENTS)
-  Future<List<AgentResponse>> getAgents();
+  Future<List<AgentResponse>> getAgents({
+    @Query('companyName') String? companyName,
+    @Query('nameKana') String? nameKana,
+    @Query('postalCode') String? postalCode,
+    @Query('address') String? address,
+    @Query('area') String? area,
+    @Query('phoneNumber') String? phoneNumber,
+    @Query('transactionStartDate') DateTime? transactionStartDate,
+    @Query('howToMainPayment') String? howToMainPayment,
+    @Query('pastCasesNumber') int? pastCasesNumber,
+  });
 
   @GET('${Endpoints.AGENTS}/{id}')
   Future<AgentResponse> getAgent(
@@ -889,6 +899,10 @@ abstract class ApiService {
       getMedicalInstitutionSectionHospital(
     @Path('hospitalId') String hospitalId,
   );
+
+
+  @GET(Endpoints.GET_HOSPITAL)
+  Future<List<BasicInformationHospitalResponse>> getHospitals();
 
   /// end get basic information of hospital C3 Page
 }

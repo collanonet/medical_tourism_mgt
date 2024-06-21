@@ -6,41 +6,47 @@ part 'doctor_profile_hospital_request.g.dart';
 class DoctorProfileHospitalRequest {
   @JsonKey(name: '_id')
   String? id;
-  String? hospital;
-  String can;
-  String no;
-  String remark;
-  String departmentName;
-  String post;
-  String specialty;
-  String nameKanji;
-  String nameKana;
-  List<String> affiliatedAcademicSociety;
-  List<String> qualifications;
-  String trainingCompletionCertificateNumber;
-  String telephoneNumber;
-  String faxNumber;
-  String email;
-  String remark2;
+  String hospital;
+  String? profile;
+  String? photoRelease;
+  String? name;
+  String? remark;
+  String? departmentName;
+  String? post;
+  String? specialty;
+  String? nameKanji;
+  String? nameKana;
+  List<String>? affiliatedAcademicSociety;
+  List<String>? qualifications;
+  String? onlineMedicalTreatment;
+  String? trainingCompletionCertificateNumber;
+  List<String>? completionCertificate;
+  String? telephoneNumber;
+  String? faxNumber;
+  String? email;
+  String? remark2;
 
   DoctorProfileHospitalRequest({
     this.id,
-    this.hospital,
-    required this.can,
-    required this.no,
-    required this.remark,
-    required this.departmentName,
-    required this.post,
-    required this.specialty,
-    required this.nameKanji,
-    required this.nameKana,
-    required this.affiliatedAcademicSociety,
-    required this.qualifications,
-    required this.trainingCompletionCertificateNumber,
-    required this.telephoneNumber,
-    required this.faxNumber,
-    required this.email,
-    required this.remark2,
+    required this.hospital,
+    this.profile,
+    this.photoRelease,
+    this.name,
+    this.remark,
+    this.departmentName,
+    this.post,
+    this.specialty,
+    this.nameKanji,
+    this.nameKana,
+    this.affiliatedAcademicSociety,
+    this.qualifications,
+    this.onlineMedicalTreatment,
+    this.trainingCompletionCertificateNumber,
+    this.completionCertificate,
+    this.telephoneNumber,
+    this.faxNumber,
+    this.email,
+    this.remark2,
   });
 
   factory DoctorProfileHospitalRequest.fromJson(Map<String, dynamic> json) =>
@@ -48,11 +54,13 @@ class DoctorProfileHospitalRequest {
   Map<String, dynamic> toJson() => _$DoctorProfileHospitalRequestToJson(this);
 }
 
-extension DoctorProfileHospitalRequestExtension on DoctorProfileHospitalRequest {
+extension DoctorProfileHospitalRequestExtension
+    on DoctorProfileHospitalRequest {
   DoctorProfileHospitalRequest copyWith({
     String? hospital,
-    String? can,
-    String? no,
+    String? profile,
+    String? photoRelease,
+    String? name,
     String? remark,
     String? departmentName,
     String? post,
@@ -61,7 +69,9 @@ extension DoctorProfileHospitalRequestExtension on DoctorProfileHospitalRequest 
     String? nameKana,
     List<String>? affiliatedAcademicSociety,
     List<String>? qualifications,
+    List<String>? completionCertificate,
     String? trainingCompletionCertificateNumber,
+    String? onlineMedicalTreatment,
     String? telephoneNumber,
     String? faxNumber,
     String? email,
@@ -70,17 +80,25 @@ extension DoctorProfileHospitalRequestExtension on DoctorProfileHospitalRequest 
     return DoctorProfileHospitalRequest(
       id: id,
       hospital: hospital ?? this.hospital,
-      can: can ?? this.can,
-      no: no ?? this.no,
+      profile: profile ?? this.profile,
+      photoRelease: photoRelease ?? this.photoRelease,
+      name: name ?? this.name,
       remark: remark ?? this.remark,
       departmentName: departmentName ?? this.departmentName,
       post: post ?? this.post,
       specialty: specialty ?? this.specialty,
       nameKanji: nameKanji ?? this.nameKanji,
       nameKana: nameKana ?? this.nameKana,
-      affiliatedAcademicSociety: affiliatedAcademicSociety ?? this.affiliatedAcademicSociety,
+      affiliatedAcademicSociety:
+          affiliatedAcademicSociety ?? this.affiliatedAcademicSociety,
       qualifications: qualifications ?? this.qualifications,
-      trainingCompletionCertificateNumber: trainingCompletionCertificateNumber ?? this.trainingCompletionCertificateNumber,
+      trainingCompletionCertificateNumber:
+          trainingCompletionCertificateNumber ??
+              this.trainingCompletionCertificateNumber,
+      completionCertificate:
+          completionCertificate ?? this.completionCertificate,
+      onlineMedicalTreatment:
+          onlineMedicalTreatment ?? this.onlineMedicalTreatment,
       telephoneNumber: telephoneNumber ?? this.telephoneNumber,
       faxNumber: faxNumber ?? this.faxNumber,
       email: email ?? this.email,
@@ -88,4 +106,3 @@ extension DoctorProfileHospitalRequestExtension on DoctorProfileHospitalRequest 
     );
   }
 }
-

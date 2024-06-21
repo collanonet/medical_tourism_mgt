@@ -11,8 +11,28 @@ class AgentRemoteProvider {
 
   final ApiService apiService;
 
-  Future<List<AgentResponse>> getAgents() async {
-    return await apiService.getAgents();
+  Future<List<AgentResponse>> getAgents({
+    String? companyName,
+    String? nameKana,
+    String? postalCode,
+    String? address,
+    String? area,
+    String? phoneNumber,
+    DateTime? transactionStartDate,
+    String? howToMainPayment,
+    int? pastCasesNumber,
+  }) async {
+    return await apiService.getAgents(
+      companyName: companyName,
+      nameKana: nameKana,
+      postalCode: postalCode,
+      address: address,
+      area: area,
+      phoneNumber: phoneNumber,
+      transactionStartDate: transactionStartDate,
+      howToMainPayment: howToMainPayment,
+      pastCasesNumber: pastCasesNumber,
+    );
   }
 
   Future<AgentResponse> getAgent(String id) async {
@@ -31,7 +51,8 @@ class AgentRemoteProvider {
     return await apiService.deleteAgent(id);
   }
 
-  Future<List<AgentManagerResponse>> getAgentManagers({String? agentRecord}) async {
+  Future<List<AgentManagerResponse>> getAgentManagers(
+      {String? agentRecord}) async {
     return await apiService.getAgentManagers(agentRecord: agentRecord);
   }
 

@@ -73,7 +73,7 @@ class _AdditionalInformationSectionState
                                     IntrinsicWidth(
                                       stepWidth: 2,
                                       child: ReactiveRadioListTile(
-                                        formControlName: 'signed',
+                                        formControlName: 'outsourcingContract',
                                         value: '締結済',
                                         onChanged: (value) {},
                                         title: Text(
@@ -85,7 +85,7 @@ class _AdditionalInformationSectionState
                                     IntrinsicWidth(
                                       stepWidth: 2,
                                       child: ReactiveRadioListTile(
-                                        formControlName: 'notConcluded',
+                                        formControlName: 'outsourcingContract',
                                         value: '未締結',
                                         onChanged: (value) {},
                                         title: Text(
@@ -176,7 +176,7 @@ class _AdditionalInformationSectionState
                                     IntrinsicWidth(
                                       stepWidth: 2,
                                       child: ReactiveRadioListTile(
-                                        formControlName: 'canBe',
+                                        formControlName: 'msCorporation',
                                         value: 'あり',
                                         onChanged: (value) {},
                                         title: Text(
@@ -188,7 +188,7 @@ class _AdditionalInformationSectionState
                                     IntrinsicWidth(
                                       stepWidth: 2,
                                       child: ReactiveRadioListTile(
-                                        formControlName: 'none',
+                                        formControlName: 'msCorporation',
                                         value: 'なし',
                                         onChanged: (value) {},
                                         title: Text(
@@ -217,13 +217,10 @@ class _AdditionalInformationSectionState
                                 ),
                                 children: [
                                   IntrinsicWidth(
-                                    stepWidth: 300,
+                                    stepWidth: 200,
                                     child: ReactiveTextField(
                                       formControlName: 'referralFee',
                                       keyboardType: TextInputType.number,
-                                      decoration: const InputDecoration(
-                                        hintText: '20',
-                                      ),
                                     ),
                                   ),
                                   Text('％', style: context.textTheme.bodySmall),
@@ -249,49 +246,49 @@ class _AdditionalInformationSectionState
                                       ),
                                   children: [
                                     IntrinsicWidth(
-                                      stepWidth: 2,
                                       child: ReactiveRadioListTile(
-                                        formControlName: 'canBe',
-                                        value: 'あり',
+                                        formControlName:
+                                            'treatmentCostPointCalculationPerPoint',
+                                        value: '10円',
                                         onChanged: (value) {},
                                         title: Text(
-                                          "あり",
+                                          "10円",
                                           style: context.textTheme.bodySmall,
                                         ),
                                       ),
                                     ),
                                     IntrinsicWidth(
-                                      stepWidth: 2,
                                       child: ReactiveRadioListTile(
-                                        formControlName: 'none',
-                                        value: 'なし',
+                                        formControlName:
+                                            'treatmentCostPointCalculationPerPoint',
+                                        value: '20円',
                                         onChanged: (value) {},
                                         title: Text(
-                                          "なし",
+                                          "20円",
                                           style: context.textTheme.bodySmall,
                                         ),
                                       ),
                                     ),
                                     IntrinsicWidth(
-                                      stepWidth: 2,
                                       child: ReactiveRadioListTile(
-                                        formControlName: 'none',
-                                        value: 'なし',
+                                        formControlName:
+                                            'treatmentCostPointCalculationPerPoint',
+                                        value: '30円',
                                         onChanged: (value) {},
                                         title: Text(
-                                          "なし",
+                                          "30円",
                                           style: context.textTheme.bodySmall,
                                         ),
                                       ),
                                     ),
                                     IntrinsicWidth(
-                                      stepWidth: 2,
                                       child: ReactiveRadioListTile(
-                                        formControlName: 'none',
-                                        value: 'なし',
+                                        formControlName:
+                                            'treatmentCostPointCalculationPerPoint',
+                                        value: 'その他',
                                         onChanged: (value) {},
                                         title: Text(
-                                          "なし",
+                                          "その他",
                                           style: context.textTheme.bodySmall,
                                         ),
                                       ),
@@ -310,8 +307,7 @@ class _AdditionalInformationSectionState
                                 style: context.textTheme.bodyMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth:
-                                    MediaQuery.of(context).size.width * 0.16,
+                                stepWidth: 200,
                                 child: ReactiveTextField(
                                   formControlName: 'remark',
                                 ),
@@ -336,9 +332,9 @@ class _AdditionalInformationSectionState
                                 style: context.textTheme.bodyMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 300,
+                                stepWidth: 100,
                                 child: ReactiveTextField(
-                                  formControlName: 'paymentSite',
+                                  formControlName: 'paymentSiteTighten',
                                 ),
                               ),
                             ]),
@@ -348,11 +344,9 @@ class _AdditionalInformationSectionState
                           ),
                           children: [
                             IntrinsicWidth(
-                              stepWidth: 300,
+                              stepWidth: 100,
                               child: ReactiveTextField(
-                                formControlName: 'endOfNextMonth',
-                                decoration:
-                                    const InputDecoration(hintText: '翌月末'),
+                                formControlName: 'paymentSitePayment',
                               ),
                             ),
                             Text(

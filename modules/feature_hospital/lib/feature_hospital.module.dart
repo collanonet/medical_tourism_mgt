@@ -6,10 +6,10 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i2;
 
-import 'package:data_auth/data_auth.dart' as _i9;
 import 'package:data_hospital/data_hospital.dart' as _i4;
 import 'package:injectable/injectable.dart' as _i1;
 
+import 'src/detail/hospital_detail_model.dart' as _i9;
 import 'src/detail/tabs/basic_information/basic_information_model.dart' as _i3;
 import 'src/detail/tabs/materials/material_model.dart' as _i5;
 import 'src/detail/tabs/q_and_a/g_and_a_model.dart' as _i6;
@@ -28,7 +28,9 @@ class FeatureHospitalPackageModule extends _i1.MicroPackageModule {
         () => _i6.QAndAModel(hospitalRepository: gh<_i4.HospitalRepository>()));
     gh.factory<_i7.WebReservationModel>(() => _i7.WebReservationModel(
         hospitalRepository: gh<_i4.HospitalRepository>()));
-    gh.factory<_i8.HospitalModel>(
-        () => _i8.HospitalModel(authRepository: gh<_i9.AuthRepository>()));
+    gh.factory<_i8.HospitalModel>(() =>
+        _i8.HospitalModel(hospitalRepository: gh<_i4.HospitalRepository>()));
+    gh.factory<_i9.HospitalDetailModel>(() => _i9.HospitalDetailModel(
+        hospitalRepository: gh<_i4.HospitalRepository>()));
   }
 }

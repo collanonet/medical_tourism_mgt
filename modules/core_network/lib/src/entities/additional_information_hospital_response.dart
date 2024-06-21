@@ -6,27 +6,27 @@ part 'additional_information_hospital_response.g.dart';
 class AdditionalInformationSectionResponse {
   @JsonKey(name: '_id')
   String id;
-  String? hospital;
-  String signed;
-  String notConcluded;
-  String canBe;
-  String none;
-  num referralFee;
-  String remark;
-  String paymentSite;
-  String endOfNextMonth;
+  String hospital;
+  String? outsourcingContract;
+  List<String>? contract;
+  String? msCorporation;
+  String? referralFee;
+  String? treatmentCostPointCalculationPerPoint;
+  String? remark;
+  String? paymentSiteTighten;
+  String? paymentSitePayment;
 
   AdditionalInformationSectionResponse({
     required this.id,
-    this.hospital,
-    required this.signed,
-    required this.notConcluded,
-    required this.canBe,
-    required this.none,
-    required this.referralFee,
-    required this.remark,
-    required this.paymentSite,
-    required this.endOfNextMonth,
+    required this.hospital,
+    this.outsourcingContract,
+    this.contract,
+    this.msCorporation,
+    this.referralFee,
+    this.treatmentCostPointCalculationPerPoint,
+    this.remark,
+    this.paymentSiteTighten,
+    this.paymentSitePayment,
   });
 
   factory AdditionalInformationSectionResponse.fromJson(

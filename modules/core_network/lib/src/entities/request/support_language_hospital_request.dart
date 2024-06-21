@@ -6,17 +6,17 @@ part 'support_language_hospital_request.g.dart';
 class SupportLanguageHospitalRequest {
   @JsonKey(name: '_id')
   String? id;
-  String? hospital;
-  String supportLanguage;
-  bool foreignStaff;
-  bool medicalInterpretationSupport;
+  String hospital;
+  String? supportLanguage;
+  bool? foreignStaff;
+  bool? medicalInterpretationSupport;
 
   SupportLanguageHospitalRequest({
     this.id,
-    this.hospital,
-    required this.supportLanguage,
-    required this.foreignStaff,
-    required this.medicalInterpretationSupport,
+    required this.hospital,
+    this.supportLanguage,
+    this.foreignStaff,
+    this.medicalInterpretationSupport,
   });
 
   factory SupportLanguageHospitalRequest.fromJson(Map<String, dynamic> json) =>

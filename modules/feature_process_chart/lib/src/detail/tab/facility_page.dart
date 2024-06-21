@@ -13,7 +13,7 @@ class FacilityPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return Provider(
       create: (context) => GetIt.I<FacilityModel>(),
       child: ReactiveFormConfig(
         validationMessages: validationMessagesFilterPatient(context),

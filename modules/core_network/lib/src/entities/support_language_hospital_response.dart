@@ -5,18 +5,18 @@ part 'support_language_hospital_response.g.dart';
 @JsonSerializable()
 class SupportLanguageHospitalResponse {
   @JsonKey(name: '_id')
-  String? id;
-  String? hospital;
-  String supportLanguage;
-  bool foreignStaff;
-  bool medicalInterpretationSupport;
+  String id;
+  String hospital;
+  String? supportLanguage;
+  bool? foreignStaff;
+  bool? medicalInterpretationSupport;
 
   SupportLanguageHospitalResponse({
-    this.id,
-    this.hospital,
-    required this.supportLanguage,
-    required this.foreignStaff,
-    required this.medicalInterpretationSupport,
+    required this.id,
+    required this.hospital,
+    this.supportLanguage,
+    this.foreignStaff,
+    this.medicalInterpretationSupport,
   });
 
   factory SupportLanguageHospitalResponse.fromJson(Map<String, dynamic> json) =>

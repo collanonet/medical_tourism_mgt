@@ -129,5 +129,9 @@ class HospitalRemoteProvider {
     return apiService.getMedicalInstitutionSectionHospital(hospitalId);
   }
 
+  Future<List<BasicInformationHospitalResponse>> getHospitals() {
+    return apiService.getHospitals();
+  }
+
   /// end get basic information of hospital C3 Page
 }

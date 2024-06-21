@@ -27,7 +27,7 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<ItineraryExplanationResponse> getInfoMedicalExamination() {
+  Future<ItineraryExplanationResponse> getInfoItineraryExamination() {
     return remote.getInfoMedicalExamination();
   }
 

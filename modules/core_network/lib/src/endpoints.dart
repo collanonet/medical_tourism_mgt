@@ -146,40 +146,42 @@ class Endpoints {
 
   //E1
   static const FILTER_PROCESS_CHART_PATIENT = '/filter-process-chart-patient';
-  static const ITINERARY_SIMPLE_TITLE = 'itinerary-simple-title';
-  static const ITINERARY_SIMPLE_EXPLANATION = 'itinerary-simple-explanation';
+  static const ITINERARY_SIMPLE_TITLE = '/itinerary-simple-title';
+  static const ITINERARY_SIMPLE_EXPLANATION = '/itinerary-simple-explanation';
   static const ITINERARY_SIMPLE_INTERPRETOR_OR_GUIDE =
-      'itinerary-simple-interpretor-or-guide';
+      '/itinerary-simple-interpretor-or-guide';
   static const ITINERARY_SIMPLE_TRANSFER_INPUT =
-      'itinerary-simple-transfer-input';
-  static const DETAIL_FACILITY_HOSPITAL = 'detail-facility-hospital';
+      '/itinerary-simple-transfer-input';
+  static const DETAIL_FACILITY_HOSPITAL = '/detail-facility-hospital';
   static const DETAIL_FACILITY_DROP_IN_FACILITY =
-      'detail-facility-drop-in-facility';
-  static const DETAIL_HOTEL_REGISTATION = 'detail-hotel-registation';
-  static const DETAIL_HOTEL_SEARCH = 'detail-hotel-search';
+      '/detail-facility-drop-in-facility';
+  static const DETAIL_HOTEL_REGISTATION = '/detail-hotel-registation';
+  static const DETAIL_HOTEL_SEARCH = '/detail-hotel-search';
 
-  static const BASIC_INFORMATION_HOSPITAL = 'basic-information-hospital';
+  static const BASIC_INFORMATION_HOSPITAL = '/basic-information-hospital';
   static const MEDICAL_RECORD_BASIC_INFO_HOSPITAL =
-      'medical-record-hospital/hospital';
+      '/medical-record-information-hospital/hospital';
 
-  static const DOCTOR_INFORMATION_HOSPITAL = 'doctor-information-hospital';
+  static const DOCTOR_INFORMATION_HOSPITAL = '/doctor-information-hospital';
 
   static const ADDITIONALINFORMATION_HOSPITAL =
-      'additional-information-hospital';
+      '/additional-information-hospital';
 
-  static const PAYMENT_OPTION_HOSPITAL = 'payment-option-hospital';
+  static const PAYMENT_OPTION_HOSPITAL = '/payment-option-hospital';
 
-  static const SUPPORT_LANGUAGE_HOSPITAL = 'support-language-hospital';
+  static const SUPPORT_LANGUAGE_HOSPITAL = '/support-language-hospital';
 
-  static const GET_HOW_TO_REQUEST_HOSPITAL = 'how-to-request-hospital';
+  static const GET_HOW_TO_REQUEST_HOSPITAL = '/how-to-request-hospital';
 
-  static const GET_NEW_REGISTRATION_HOSPITAL = 'new-registration-hospital';
+  static const GET_NEW_REGISTRATION_HOSPITAL = '/new-registration-hospital';
 
-  static const GET_LIST_SECTION_HOSPITAL = 'section-hospital';
+  static const GET_LIST_SECTION_HOSPITAL = '/section-hospital';
 
-  static const GET_MATERIAL_HOSPITAL = 'material-hospital';
+  static const GET_MATERIAL_HOSPITAL = '/material-hospital';
 
-  static const GET_WEB_RESERVATION_PATIENT = 'web-reservation-patient';
+  static const GET_WEB_RESERVATION_PATIENT = '/web-reservation-patient';
 
-  static const GET_MEDICAL_INSTITUTION_HOSPITAL = 'medical-institutions';
+  static const GET_MEDICAL_INSTITUTION_HOSPITAL = '/medical-institutions';
+
+  static const GET_HOSPITAL = '/hospital';
 }

@@ -6,45 +6,45 @@ part 'payment_option_hospital_request.g.dart';
 class PaymentOptionHospitalRequest {
   @JsonKey(name: '_id')
   String? id;
-  String? hospital;
-  String payer;
-  String paymentTiming;
-  String feeBack;
-  String paymentDirectlyToTheHospital;
-  bool transfer;
-  bool electronicPayment;
-  bool alipay;
-  bool unionPayPay;
-  bool unionPay;
-  bool weChatPay;
-  bool creditCard;
-  bool visa;
-  bool masterCard;
-  bool americanExpress;
-  bool jcb;
-  bool cash;
-  String remark;
+  String hospital;
+  String? payer;
+  String? paymentTiming;
+  String? feeBack;
+  String? paymentDirectlyToTheHospital;
+  bool? transfer;
+  bool? electronicPayment;
+  bool? alipay;
+  bool? unionPayPay;
+  bool? unionPay;
+  bool? weChatPay;
+  bool? creditCard;
+  bool? visa;
+  bool? masterCard;
+  bool? americanExpress;
+  bool? jcb;
+  bool? cash;
+  String? remark;
 
   PaymentOptionHospitalRequest({
     this.id,
-    this.hospital,
-    required this.payer,
-    required this.paymentTiming,
-    required this.feeBack,
-    required this.paymentDirectlyToTheHospital,
-    required this.transfer,
-    required this.electronicPayment,
-    required this.alipay,
-    required this.unionPayPay,
-    required this.unionPay,
-    required this.weChatPay,
-    required this.creditCard,
-    required this.visa,
-    required this.masterCard,
-    required this.americanExpress,
-    required this.jcb,
-    required this.cash,
-    required this.remark,
+    required this.hospital,
+    this.payer,
+    this.paymentTiming,
+    this.feeBack,
+    this.paymentDirectlyToTheHospital,
+    this.transfer,
+    this.electronicPayment,
+    this.alipay,
+    this.unionPayPay,
+    this.unionPay,
+    this.weChatPay,
+    this.creditCard,
+    this.visa,
+    this.masterCard,
+    this.americanExpress,
+    this.jcb,
+    this.cash,
+    this.remark,
   });
 
   factory PaymentOptionHospitalRequest.fromJson(Map<String, dynamic> json) =>

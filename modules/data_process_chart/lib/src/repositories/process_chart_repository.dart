@@ -14,7 +14,7 @@ abstract class ProcessChartRepository {
       ItineraryTitleRequest itineraryTitleRequest,
     );
 
-    Future<ItineraryExplanationResponse> getInfoMedicalExamination();
+    Future<ItineraryExplanationResponse> getInfoItineraryExamination();
 
     Future<ItineraryExplanationResponse> postItineraryExplanation(
       ItineraryExplanationRequest itineraryExplanationRequest,

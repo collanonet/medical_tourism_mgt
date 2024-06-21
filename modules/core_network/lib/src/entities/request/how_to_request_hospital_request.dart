@@ -6,14 +6,14 @@ part 'how_to_request_hospital_request.g.dart';
 class HowToRequestHospitalRequest {
   @JsonKey(name: '_id')
   String? id;
-  String? hospital;
+  String hospital;
   DateTime? dateOfUpdate;
   String? updater;
   String? memo;
   String? updates;
 
   HowToRequestHospitalRequest({
-    this.hospital,
+    required this.hospital,
     this.id,
     this.dateOfUpdate,
     this.updater,

@@ -18,12 +18,11 @@ class AgentBasicInformationModel {
       ValueNotifier(const AsyncData());
 
   void init({String? id, required FormGroup formGroup}) async {
-    logger.d('init $id');
     if (id != null) {
       try {
         agent.value = const AsyncData(loading: true);
         var response = await authRepository.getAgent(id);
-        getAgentManagers(response.id, formGroup);
+        await getAgentManagers(response.id, formGroup);
         agent.value = AsyncData(data: response);
         insertAgentDataToForm(response, formGroup);
       } catch (error) {
@@ -144,7 +143,7 @@ class AgentBasicInformationModel {
   ValueNotifier<AsyncData<List<AgentManagerResponse>>> agentManager =
       ValueNotifier(const AsyncData());
 
-  void getAgentManagers(String agentRecord, FormGroup formGroup) async {
+  Future<void> getAgentManagers(String agentRecord, FormGroup formGroup) async {
     try {
       agentManager.value = const AsyncData(loading: true);
       var response =
@@ -159,30 +158,32 @@ class AgentBasicInformationModel {
   void insertAgentManagerDataToForm(
       List<AgentManagerResponse> response, FormGroup formGroup) {
     FormArray manager = formGroup.control('manager') as FormArray;
-
+    manager.clear();
     if (response.isNotEmpty) {
-      manager.clear();
       for (var element in response) {
-        FormArray contactMethods =
-            element.contactMethods != null && element.contactMethods!.isNotEmpty
-                ? FormArray(
-                    element.contactMethods!.map((e) {
-                      return FormGroup({
-                        '_id': FormControl<String>(value: e.id),
-                        'howToContact':
-                            FormControl<String>(value: e.howToContact),
-                        'howToContactQrCode':
-                            FormControl<String>(value: e.howToContactQrCode),
-                      });
-                    }).toList(),
-                  )
-                : FormArray([
-                    FormGroup({
-                      '_id': FormControl<String>(),
-                      'howToContact': FormControl<String>(),
-                      'howToContactQrCode': FormControl<String>(),
-                    }),
-                  ]);
+        FormArray contactMethods = FormArray([
+          FormGroup({
+            '_id': FormControl<String>(),
+            'howToContact': FormControl<String>(),
+            'howToContactQrCode': FormControl<String>(),
+          }),
+        ]);
+
+        if (element.contactMethods != null &&
+            element.contactMethods!.isNotEmpty) {
+          contactMethods.clear();
+          for (var e in element.contactMethods!) {
+            contactMethods.add(
+              FormGroup({
+                '_id': FormControl<String>(value: e.id),
+                'howToContact': FormControl<String>(value: e.howToContact),
+                'howToContactQrCode':
+                    FormControl<String>(value: e.howToContactQrCode),
+              }),
+            );
+          }
+        }
+
         manager.add(
           FormGroup({
             '_id': FormControl<String>(value: element.id),
@@ -203,6 +204,33 @@ class AgentBasicInformationModel {
           }),
         );
       }
+    } else {
+      manager.add(
+        FormGroup({
+          '_id': FormControl<String>(),
+          'nameCardDragDrop': FormControl<String>(),
+          'departmentName': FormControl<String>(),
+          'fullNameRomanji': FormControl<String>(
+            validators: [Validators.required],
+          ),
+          'fullNameChineseKanjiVietnameseNotation': FormControl<String>(),
+          'fullNameJapaneseKanjiChineseOnly': FormControl<String>(),
+          'fullNameKana': FormControl<String>(),
+          'phoneNumber': FormControl<String>(
+            validators: [Validators.required],
+          ),
+          'email': FormControl<String>(
+            validators: [Validators.required],
+          ),
+          'contactMethods': FormArray([
+            FormGroup({
+              '_id': FormControl<String>(),
+              'howToContact': FormControl<String>(),
+              'howToContactQrCode': FormControl<String>(),
+            }),
+          ]),
+        }),
+      );
     }
   }
 

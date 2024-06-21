@@ -2,7 +2,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup basicInformationForm() {
   return FormGroup({
-    'howTopMakeRequest': FormGroup({
+    'howToMakeRequest': FormGroup({
       '_id': FormControl<String?>(),
       'hospital': FormControl<String?>(),
       'dateOfUpdate': FormControl<DateTime>(
@@ -14,13 +14,23 @@ FormGroup basicInformationForm() {
     }),
     'basicInformation': FormGroup({
       '_id': FormControl<String?>(),
-      'hospitalNameChinese': FormControl<String>(),
-      'hospitalNameKatakana': FormControl<String>(),
+      'hospitalNameChinese': FormControl<String>(
+        validators: [Validators.required],
+      ),
+      'hospitalNameKatakana': FormControl<String>(
+        validators: [Validators.required],
+      ),
       'zipCode': FormControl<String>(),
-      'location': FormControl<String>(),
+      'location': FormControl<String>(
+        validators: [Validators.required],
+      ),
       'googleMap': FormControl<String>(),
-      'phoneNumber': FormControl<String>(),
-      'faxNumber': FormControl<String>(),
+      'phoneNumber': FormControl<String>(
+        validators: [Validators.required],
+      ),
+      'faxNumber': FormControl<String>(
+        validators: [Validators.required],
+      ),
       'homepage': FormControl<String>(),
       'supportedMenu': FormControl<bool>(value: false),
       'healthCheckup': FormControl<bool>(value: false),
@@ -56,20 +66,20 @@ FormGroup basicInformationForm() {
       'certified': FormControl<bool>(value: false),
       'shift1': FormControl<String>(),
       'shift2': FormControl<String>(),
-      'shift1Mon': FormControl<String>(),
-      'shift1Tue': FormControl<String>(),
-      'shift1Wed': FormControl<String>(),
-      'shift1Thu': FormControl<String>(),
-      'shift1Fri': FormControl<String>(),
-      'shift1Sat': FormControl<String>(),
-      'shift1Sun': FormControl<String>(),
-      'shift2Mon': FormControl<String>(),
-      'shift2Tue': FormControl<String>(),
-      'shift2Wed': FormControl<String>(),
-      'shift2Thu': FormControl<String>(),
-      'shift2Fri': FormControl<String>(),
-      'shift2Sat': FormControl<String>(),
-      'shift2Sun': FormControl<String>(),
+      'shift1Mon': FormControl<String>(value: '×'),
+      'shift1Tue': FormControl<String>(value: '×'),
+      'shift1Wed': FormControl<String>(value: '×'),
+      'shift1Thu': FormControl<String>(value: '×'),
+      'shift1Fri': FormControl<String>(value: '×'),
+      'shift1Sat': FormControl<String>(value: '×'),
+      'shift1Sun': FormControl<String>(value: '×'),
+      'shift2Mon': FormControl<String>(value: '×'),
+      'shift2Tue': FormControl<String>(value: '×'),
+      'shift2Wed': FormControl<String>(value: '×'),
+      'shift2Thu': FormControl<String>(value: '×'),
+      'shift2Fri': FormControl<String>(value: '×'),
+      'shift2Sat': FormControl<String>(value: '×'),
+      'shift2Sun': FormControl<String>(value: '×'),
       'memo': FormControl<String>(),
     }),
     'medicalRecordHospitals': FormArray([
@@ -91,8 +101,9 @@ FormGroup basicInformationForm() {
       FormGroup({
         '_id': FormControl<String?>(),
         'hospital': FormControl<String?>(),
-        'can': FormControl<String>(),
-        'no': FormControl<String>(),
+        'profile': FormControl<String>(),
+        'photoRelease': FormControl<String>(),
+        'name': FormControl<String>(),
         'remark': FormControl<String>(),
         'departmentName': FormControl<String>(),
         'post': FormControl<String>(),
@@ -109,7 +120,13 @@ FormGroup basicInformationForm() {
             'name': FormControl<String>(),
           })
         ]),
+        'onlineMedicalTreatment': FormControl<String>(),
         'trainingCompletionCertificateNumber': FormControl<String>(),
+        'completionCertificate': FormArray([
+          FormGroup({
+            'name': FormControl<String>(),
+          })
+        ]),
         'telephoneNumber': FormControl<String>(),
         'faxNumber': FormControl<String>(),
         'email': FormControl<String>(),
@@ -119,14 +136,18 @@ FormGroup basicInformationForm() {
     'additionalInformationSection': FormGroup({
       '_id': FormControl<String?>(),
       'hospital': FormControl<String?>(),
-      'signed': FormControl<String>(),
-      'notConcluded': FormControl<String>(),
-      'canBe': FormControl<String>(),
-      'none': FormControl<String>(),
-      'referralFee': FormControl<num>(),
+      'outsourcingContract': FormControl<String>(),
+      'contract': FormArray([
+        FormGroup({
+          'name': FormControl<String>(),
+        })
+      ]),
+      'msCorporation': FormControl<String>(),
+      'referralFee': FormControl<String>(),
+      'treatmentCostPointCalculationPerPoint': FormControl<String>(),
       'remark': FormControl<String>(),
-      'paymentSite': FormControl<String>(),
-      'endOfNextMonth': FormControl<String>(),
+      'paymentSiteTighten': FormControl<String>(),
+      'paymentSitePayment': FormControl<String>(),
     }),
     'paymentOptionSection': FormGroup({
       '_id': FormControl<String?>(),

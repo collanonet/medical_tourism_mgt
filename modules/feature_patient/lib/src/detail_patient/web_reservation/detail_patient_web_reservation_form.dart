@@ -48,10 +48,6 @@ FormGroup detailPatientWebReservationForm() => FormGroup({
         }),
       ]),
       'message': FormControl<String>(), // メッセージ（希望日がない場合は、メッセージ欄にてその旨伝えてください）
-      'testCallDate': FormControl<DateTime>(
-        validators: [Validators.required],
-      ), // 年月日
-      'testCallTime': FormControl<TimeOfDay>(
-        validators: [Validators.required],
-      ), // 時間
+      'testCallDate': FormControl<DateTime>(), // 年月日
+      'testCallTime': FormControl<TimeOfDay>(), // 時間
     });

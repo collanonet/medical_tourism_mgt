@@ -7,6 +7,7 @@ part of 'agent_request.dart';
 // **************************************************************************
 
 AgentRequest _$AgentRequestFromJson(Map<String, dynamic> json) => AgentRequest(
+      manager: json['manager'] as String?,
       memo: json['memo'] as String?,
       companyName: json['companyName'] as String?,
       nameKana: json['nameKana'] as String?,
@@ -28,6 +29,7 @@ AgentRequest _$AgentRequestFromJson(Map<String, dynamic> json) => AgentRequest(
 Map<String, dynamic> _$AgentRequestToJson(AgentRequest instance) =>
     <String, dynamic>{
       'memo': instance.memo,
+      'manager': instance.manager,
       'companyName': instance.companyName,
       'nameKana': instance.nameKana,
       'postalCode': instance.postalCode,

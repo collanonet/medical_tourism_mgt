@@ -43,8 +43,28 @@ class AgentRepositoryIml extends AgentRepository {
   }
 
   @override
-  Future<List<AgentResponse>> getAgents() {
-    return remote.getAgents();
+  Future<List<AgentResponse>> getAgents({
+    String? companyName,
+    String? nameKana,
+    String? postalCode,
+    String? address,
+    String? area,
+    String? phoneNumber,
+    DateTime? transactionStartDate,
+    String? howToMainPayment,
+    int? pastCasesNumber,
+  }) {
+    return remote.getAgents(
+      companyName: companyName,
+      nameKana: nameKana,
+      postalCode: postalCode,
+      address: address,
+      area: area,
+      phoneNumber: phoneNumber,
+      transactionStartDate: transactionStartDate,
+      howToMainPayment: howToMainPayment,
+      pastCasesNumber: pastCasesNumber,
+    );
   }
 
   @override

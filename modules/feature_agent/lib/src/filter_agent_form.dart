@@ -4,10 +4,10 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup formFilterPatient() => FormGroup(
       {
-        'agentPerson': FormControl<String>(),
-        'agentCompany': FormControl<String>(),
-        'pastCasesNumber': FormControl<String>(),
-        'country': FormControl<String>(),
+        'nameKana': FormControl<String>(),
+        'companyName': FormControl<String>(),
+        'pastCasesNumber': FormControl<int>(),
+        'address': FormControl<String>(),
         'area': FormControl<String>(),
         'patientName': FormControl<String>(),
       },
