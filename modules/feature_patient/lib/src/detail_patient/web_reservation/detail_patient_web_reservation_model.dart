@@ -136,9 +136,6 @@ class DetailPatientWebReservationModel {
         doctorName: formGroup.control('doctorName').value,
         candidateDate: candidateDate,
         message: formGroup.control('message').value,
-        testCallDate: formGroup.control('testCallDate').value.toString(),
-        testCallTime:
-            '${(formGroup.control('testCallTime').value as TimeOfDay).hour}:${(formGroup.control('testCallTime').value as TimeOfDay).minute}',
       );
 
       logger.d('webBookingMedicalRecord: ${webBookingMedicalRecord.toJson()}');
