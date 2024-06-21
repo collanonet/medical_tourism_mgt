@@ -545,7 +545,7 @@ class _DetailPatientWebReservationScreenState
                                                         firstDate:
                                                             DateTime(1900),
                                                         lastDate:
-                                                            DateTime.now(),
+                                                            DateTime(2100),
                                                         builder: (BuildContext
                                                                 context,
                                                             ReactiveDatePickerDelegate<
