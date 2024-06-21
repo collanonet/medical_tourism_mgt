@@ -25,7 +25,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
         .control('medicalRecordHospitals') as FormArray;
     return ValueListenableBuilder(
         valueListenable:
-            context.read<BasicInformationModel>().medicalRecordBasicInfoData,
+            context.watch<BasicInformationModel>().medicalRecordBasicInfoData,
         builder: (context, value, _) {
           return Skeletonizer(
             enabled: value.loading,
@@ -53,7 +53,6 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                   ),
                 ),
 
-                // Todo Will implement form array late
                 ReactiveFormArray(
                     formArrayName: 'medicalRecordHospitals',
                     builder: (context, formArray, child) {

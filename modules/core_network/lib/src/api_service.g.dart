@@ -4100,7 +4100,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-record-information-hospital/hospital',
+              '/medical-record-information-hospital',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4394,7 +4394,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/support-language-hospital',
+              '/how-to-request-hospital',
               queryParameters: queryParameters,
               data: _data,
             )

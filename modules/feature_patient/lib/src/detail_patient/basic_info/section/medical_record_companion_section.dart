@@ -30,7 +30,7 @@ class _MedicalRecordCompanionSectionState
 
     return ValueListenableBuilder(
         valueListenable:
-            context.read<BasicInformationModel>().medicalRecordCompanions,
+            context.watch<BasicInformationModel>().medicalRecordCompanions,
         builder: (context, value, _) {
           return Skeletonizer(
             enabled: value.loading,

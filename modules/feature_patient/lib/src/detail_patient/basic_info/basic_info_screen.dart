@@ -49,7 +49,7 @@ class BasicInformationScreen extends StatelessWidget {
               },
               child: ValueListenableBuilder(
                   valueListenable:
-                      context.read<BasicInformationModel>().loading,
+                      context.watch<BasicInformationModel>().loading,
                   builder: (context, value, child) {
                     return ReactiveFormConsumer(
                       builder: (context, form, _) {

@@ -10,12 +10,12 @@ class BasicInformationHospitalResponse {
   String? updater;
   String? memo;
   String? updates;
-  String hospitalNameChinese;
-  String hospitalNameKatakana;
+  String? hospitalNameChinese;
+  String? hospitalNameKatakana;
   String? zipCode;
-  String location;
+  String? location;
   String? googleMap;
-  String phoneNumber;
+  String? phoneNumber;
   String? faxNumber;
   String? homepage;
   bool? supportedMenu;
@@ -75,13 +75,13 @@ class BasicInformationHospitalResponse {
     this.updater,
     this.memo,
     this.updates,
-    required this.hospitalNameChinese,
-    required this.hospitalNameKatakana,
+    this.hospitalNameChinese,
+    this.hospitalNameKatakana,
     this.zipCode,
-    required this.location,
+    this.location,
     this.googleMap,
-    required this.phoneNumber,
-    required this.faxNumber,
+    this.phoneNumber,
+    this.faxNumber,
     this.homepage,
     this.supportedMenu,
     this.healthCheckup,

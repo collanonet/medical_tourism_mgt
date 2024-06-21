@@ -30,7 +30,7 @@ class _AdditionalInformationSectionState
         .control('additionalInformationSection') as FormGroup;
     return ValueListenableBuilder(
         valueListenable:
-            context.read<BasicInformationModel>().additionalInformationData,
+            context.watch<BasicInformationModel>().additionalInformationData,
         builder: (context, value, _) {
           return Skeletonizer(
             enabled: value.loading,

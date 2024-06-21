@@ -38,7 +38,7 @@ MedicalRecordCompanion _$MedicalRecordCompanionFromJson(
       dateOfBirth: json['dateOfBirth'] == null
           ? null
           : DateTime.parse(json['dateOfBirth'] as String),
-      age: (json['age'] as num?)?.toInt(),
+      age: json['age'] as int?,
       gender: json['gender'] as bool?,
       mobileNumber: json['mobileNumber'] as String?,
       email: json['email'] as String?,

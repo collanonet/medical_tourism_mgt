@@ -24,7 +24,7 @@ class _HowtoMakeReqestSectionState extends State<HowtoMakeReqestSection> {
     final formatter = InputFormatter();
     return ValueListenableBuilder(
         valueListenable:
-            context.read<BasicInformationModel>().howToMakeRequestHospitalData,
+            context.watch<BasicInformationModel>().howToMakeRequestHospitalData,
         builder: (context, value, _) {
           return Skeletonizer(
             enabled: value.loading,

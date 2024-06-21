@@ -52,7 +52,7 @@ class _AgentDetailScreenState extends State<AgentDetailScreen> {
             borderRadius: BorderRadius.circular(16),
           ),
           child: ValueListenableBuilder(
-              valueListenable: context.read<AgentDetailModel>().agent,
+              valueListenable: context.watch<AgentDetailModel>().agent,
               builder: (context, value, _) {
                 return Skeletonizer(
                   enabled: value.loading,

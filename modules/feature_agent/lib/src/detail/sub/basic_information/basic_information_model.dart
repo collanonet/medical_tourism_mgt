@@ -17,6 +17,9 @@ class AgentBasicInformationModel {
   ValueNotifier<AsyncData<AgentResponse>> agent =
       ValueNotifier(const AsyncData());
 
+  ValueNotifier<AsyncData<AgentResponse>> submitAgent =
+      ValueNotifier(const AsyncData());
+
   void init({String? id, required FormGroup formGroup}) async {
     if (id != null) {
       try {
@@ -82,7 +85,7 @@ class AgentBasicInformationModel {
 
   void createOrUpdateAgent(FormGroup formGroup) async {
     try {
-      agent.value = const AsyncData(loading: true);
+      submitAgent.value = const AsyncData(loading: true);
 
       List<AgentReferralCommissionRequest> referralCommissions = [];
 
@@ -125,18 +128,17 @@ class AgentBasicInformationModel {
       if (formGroup.control('basicInformationAgent._id').value != null) {
         var response = await authRepository.putAgent(
             formGroup.control('basicInformationAgent._id').value, agentRequest);
-        agent.value = AsyncData(data: response);
+        submitAgent.value = AsyncData(data: response);
       } else {
         var response = await authRepository.postAgent(agentRequest);
-        agent.value = AsyncData(data: response);
+        if (submitAgent.value.hasData) {
+          createOrUpdateAgentManager(formGroup);
+        }
+        submitAgent.value = AsyncData(data: response);
       }
     } catch (error) {
       logger.e(error);
-      agent.value = AsyncData(error: error);
-    }
-
-    if (agent.value.hasData) {
-      createOrUpdateAgentManager(formGroup);
+      submitAgent.value = AsyncData(error: error);
     }
   }
 

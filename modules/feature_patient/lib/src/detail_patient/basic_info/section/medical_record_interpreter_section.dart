@@ -16,7 +16,7 @@ class MedicalRecordInterpreterSection extends StatelessWidget {
         .control('MEDICAL_RECORD_Interpreter') as FormGroup;
     return ValueListenableBuilder(
         valueListenable:
-            context.read<BasicInformationModel>().medicalRecordInterpreters,
+            context.watch<BasicInformationModel>().medicalRecordInterpreters,
         builder: (context, value, _) => Skeletonizer(
               enabled: value.loading,
               child: Column(

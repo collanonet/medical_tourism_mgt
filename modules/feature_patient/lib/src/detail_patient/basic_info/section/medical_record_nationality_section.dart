@@ -18,7 +18,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
         .control('PATIENT_NATIONALITIES') as FormGroup;
     return ValueListenableBuilder(
         valueListenable:
-            context.read<BasicInformationModel>().patientNationalities,
+            context.watch<BasicInformationModel>().patientNationalities,
         builder: (context, value, _) => Skeletonizer(
               enabled: value.loading,
               child: Column(

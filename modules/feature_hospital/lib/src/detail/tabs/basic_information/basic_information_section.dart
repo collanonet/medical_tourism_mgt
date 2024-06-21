@@ -88,7 +88,7 @@ class _BasicInformationSectionState extends State<BasicInformationSection> {
                 }
               },
               child: ValueListenableBuilder(
-                  valueListenable: context.read<BasicInformationModel>().submit,
+                  valueListenable: context.watch<BasicInformationModel>().submit,
                   builder: (context, value, child) {
                     return ReactiveFormConsumer(
                       builder: (context, form, _) {

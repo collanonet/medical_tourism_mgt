@@ -18,7 +18,7 @@ class MedicalRecordHospitalSection extends StatelessWidget {
     final formGroup = (ReactiveForm.of(context) as FormGroup);
     return ValueListenableBuilder(
         valueListenable:
-            context.read<BasicInformationModel>().medicalRecordHospitals,
+            context.watch<BasicInformationModel>().medicalRecordHospitals,
         builder: (context, value, _) {
           return Skeletonizer(
             enabled: value.loading,

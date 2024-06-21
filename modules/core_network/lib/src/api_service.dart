@@ -795,7 +795,7 @@ abstract class ApiService {
     @Body() BasicInformationHospitalRequest basicInformationHospitalRequest,
   );
 
-  @GET('${Endpoints.MEDICAL_RECORD_BASIC_INFO_HOSPITAL}/{hospitalId}')
+  @GET('${Endpoints.MEDICAL_RECORD_BASIC_INFO_HOSPITAL}/hospital/{hospitalId}')
   Future<List<MedicalRecordBasicInfoHospitalResponse>>
       getMedicalRecordBasicInfoHospital(
     @Path('hospitalId') String hospitalId,
@@ -855,7 +855,7 @@ abstract class ApiService {
     @Path('hospitalId') String hospitalId,
   );
 
-  @POST(Endpoints.SUPPORT_LANGUAGE_HOSPITAL)
+  @POST(Endpoints.GET_HOW_TO_REQUEST_HOSPITAL)
   Future<HowToRequestHospitalResponse> postHowToRequestHospital(
     @Body() HowToRequestHospitalRequest supportLanguageHospitalRequest,
   );

@@ -30,7 +30,7 @@ class MedicalRecordNameSection extends StatelessWidget {
         }
       },
       child: ValueListenableBuilder(
-        valueListenable: context.read<BasicInformationModel>().patientNames,
+        valueListenable: context.watch<BasicInformationModel>().patientNames,
         builder: (context, value, _) => Skeletonizer(
           enabled: value.loading,
           child: ReactiveForm(

@@ -28,20 +28,20 @@ class _AgentBasicInformationScreenState
     return ValueListenableBuilder(
         valueListenable: context.watch<AgentBasicInformationModel>().agent,
         builder: (context, value, child) {
-          return Skeletonizer(
-            enabled: value.loading,
-            child: SingleChildScrollView(
-              child: ColumnSeparated(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                separatorBuilder: (BuildContext context, int index) {
-                  return const SizedBox(height: 16);
-                },
-                children: [
-                  ReactiveFormBuilder(
-                      form: () => formGroup.control('basicInformationAgent')
-                          as FormGroup,
-                      builder: (context, form, _) {
-                        return ColumnSeparated(
+          return SingleChildScrollView(
+            child: ColumnSeparated(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              separatorBuilder: (BuildContext context, int index) {
+                return const SizedBox(height: 16);
+              },
+              children: [
+                ReactiveFormBuilder(
+                    form: () =>
+                        formGroup.control('basicInformationAgent') as FormGroup,
+                    builder: (context, form, _) {
+                      return Skeletonizer(
+                        enabled: value.loading,
+                        child: ColumnSeparated(
                           separatorBuilder: (BuildContext context, int index) {
                             return SizedBox(height: 8);
                           },
@@ -549,21 +549,23 @@ class _AgentBasicInformationScreenState
                               ),
                             ),
                           ],
-                        );
-                      }),
-                  if (value.hasData)
-                    ValueListenableBuilder(
-                        valueListenable: context
-                            .watch<AgentBasicInformationModel>()
-                            .agentManager,
-                        builder: (context, value, child) {
-                          return ReactiveFormArray(
-                            formArrayName: 'manager',
-                            builder: (context, formArray, child) {
-                              var rows = formArray.controls
-                                  .map((control) => control as FormGroup)
-                                  .map((currentForm) {
-                                return Container(
+                        ),
+                      );
+                    }),
+                if (value.hasData)
+                  ReactiveFormArray(
+                    formArrayName: 'manager',
+                    builder: (context, formArray, child) {
+                      var rows = formArray.controls
+                          .map((control) => control as FormGroup)
+                          .map((currentForm) {
+                        return ValueListenableBuilder(
+                            valueListenable: context
+                                .watch<AgentBasicInformationModel>()
+                                .agentManager,
+                            builder: (context, value, child) {
+                              return Skeletonizer(
+                                child: Container(
                                   padding: const EdgeInsets.all(16),
                                   decoration: BoxDecoration(
                                     color: Color(0xffF0F3F5),
@@ -1049,81 +1051,74 @@ class _AgentBasicInformationScreenState
                                       ],
                                     ),
                                   ),
-                                );
-                              }).toList();
+                                ),
+                              );
+                            });
+                      }).toList();
 
-                              return ColumnSeparated(
-                                crossAxisAlignment: CrossAxisAlignment.stretch,
-                                separatorBuilder:
-                                    (BuildContext context, int index) {
-                                  return const SizedBox(height: 16);
-                                },
-                                children: [
-                                  ...rows,
-                                  InkWell(
-                                    onTap: () {
-                                      formArray.add(
-                                        FormGroup({
-                                          'id': FormControl<String>(),
-                                          'nameCardDragDrop':
-                                              FormControl<String>(),
-                                          'departmentName':
-                                              FormControl<String>(),
-                                          'fullNameRomanji':
-                                              FormControl<String>(
-                                            validators: [Validators.required],
-                                          ),
-                                          'fullNameChineseKanjiVietnameseNotation':
-                                              FormControl<String>(),
-                                          'fullNameJapaneseKanjiChineseOnly':
-                                              FormControl<String>(),
-                                          'fullNameKana': FormControl<String>(),
-                                          'phoneNumber': FormControl<String>(
-                                            validators: [Validators.required],
-                                          ),
-                                          'email': FormControl<String>(
-                                            validators: [Validators.required],
-                                          ),
-                                          'contactMethods': FormArray([
-                                            FormGroup({
-                                              'id': FormControl<String>(),
-                                              'howToContact':
-                                                  FormControl<String>(),
-                                              'howToContactQrCode':
-                                                  FormControl<String>(),
-                                            }),
-                                          ]),
-                                        })
-                                          ..markAllAsTouched(),
-                                      );
-                                    },
-                                    child: Row(
-                                      mainAxisSize: MainAxisSize.min,
-                                      children: [
-                                        Icon(
-                                          Icons.add_circle,
-                                          color: context.appTheme.primaryColor,
-                                        ),
-                                        SizedBox(
-                                          width: context
-                                              .appTheme.spacing.marginSmall,
-                                        ),
-                                        Text(
-                                          '担当者を追加',
-                                          style: TextStyle(
-                                              color: context
-                                                  .appTheme.primaryColor),
-                                        )
-                                      ],
-                                    ),
+                      return ColumnSeparated(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const SizedBox(height: 16);
+                        },
+                        children: [
+                          ...rows,
+                          InkWell(
+                            onTap: () {
+                              formArray.add(
+                                FormGroup({
+                                  'id': FormControl<String>(),
+                                  'nameCardDragDrop': FormControl<String>(),
+                                  'departmentName': FormControl<String>(),
+                                  'fullNameRomanji': FormControl<String>(
+                                    validators: [Validators.required],
                                   ),
-                                ],
+                                  'fullNameChineseKanjiVietnameseNotation':
+                                      FormControl<String>(),
+                                  'fullNameJapaneseKanjiChineseOnly':
+                                      FormControl<String>(),
+                                  'fullNameKana': FormControl<String>(),
+                                  'phoneNumber': FormControl<String>(
+                                    validators: [Validators.required],
+                                  ),
+                                  'email': FormControl<String>(
+                                    validators: [Validators.required],
+                                  ),
+                                  'contactMethods': FormArray([
+                                    FormGroup({
+                                      'id': FormControl<String>(),
+                                      'howToContact': FormControl<String>(),
+                                      'howToContactQrCode':
+                                          FormControl<String>(),
+                                    }),
+                                  ]),
+                                })
+                                  ..markAllAsTouched(),
                               );
                             },
-                          );
-                        }),
-                ],
-              ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Icon(
+                                  Icons.add_circle,
+                                  color: context.appTheme.primaryColor,
+                                ),
+                                SizedBox(
+                                  width: context.appTheme.spacing.marginSmall,
+                                ),
+                                Text(
+                                  '担当者を追加',
+                                  style: TextStyle(
+                                      color: context.appTheme.primaryColor),
+                                )
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
+                    },
+                  ),
+              ],
             ),
           );
         });

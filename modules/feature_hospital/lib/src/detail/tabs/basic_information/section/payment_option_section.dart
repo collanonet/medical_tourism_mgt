@@ -21,7 +21,7 @@ class _PaymentOptionSectionState extends State<PaymentOptionSection> {
         .control('paymentOptionSection') as FormGroup;
     return ValueListenableBuilder(
         valueListenable:
-            context.read<BasicInformationModel>().paymentOptionData,
+            context.watch<BasicInformationModel>().paymentOptionData,
         builder: (context, value, _) {
           return Skeletonizer(
             enabled: value.loading,

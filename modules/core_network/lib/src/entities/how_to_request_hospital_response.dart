@@ -5,7 +5,7 @@ part 'how_to_request_hospital_response.g.dart';
 @JsonSerializable()
 class HowToRequestHospitalResponse {
   @JsonKey(name: '_id')
-  String? id;
+  String id;
   String? hospital;
   DateTime? dateOfUpdate;
   String? updater;
@@ -13,7 +13,7 @@ class HowToRequestHospitalResponse {
   String? updates;
 
   HowToRequestHospitalResponse({
-    this.id,
+    required this.id,
     this.hospital,
     this.dateOfUpdate,
     this.updater,

@@ -21,7 +21,7 @@ class _SupportLanguageSectionState extends State<SupportLanguageSection> {
         .control('supportLanguageSection') as FormArray;
     return ValueListenableBuilder(
         valueListenable:
-            context.read<BasicInformationModel>().supportLangaugeData,
+            context.watch<BasicInformationModel>().supportLangaugeData,
         builder: (context, value, _) {
           return Skeletonizer(
             enabled: value.loading,
