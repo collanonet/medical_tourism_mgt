@@ -157,6 +157,10 @@ class Endpoints {
       '/detail-facility-drop-in-facility';
   static const DETAIL_HOTEL_REGISTATION = '/detail-hotel-registation';
   static const DETAIL_HOTEL_SEARCH = '/detail-hotel-search';
+  static const DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER = 'detail-related-parties-guide-or-interpreter';
+  static const DETAIL_RELATED_PARTIES_BUS_COMPANY = 'detail-related-parties-bus-company';
+  static const DETAIL_RELATED_PARTIES_DRIVER = 'detail-related-parties-driver';
+  static const DETAIL_RELATED_EMERGENCY_CONTACT = 'detail-related-parties-emergecy-contact';
 
   static const BASIC_INFORMATION_HOSPITAL = '/basic-information-hospital';
   static const MEDICAL_RECORD_BASIC_INFO_HOSPITAL =

@@ -5,6 +5,9 @@ import 'package:retrofit/retrofit.dart';
 import '../core_network.dart';
 import '../entities.dart';
 import 'endpoints.dart';
+import 'entities/request/detail_related_parties_bus_company_request.dart';
+import 'entities/request/detail_related_parties_emergency_contact_request.dart';
+import 'entities/request/detail_related_parties_request.dart';
 
 part 'api_service.g.dart';
 
@@ -713,7 +716,7 @@ abstract class ApiService {
 
   @POST(Endpoints.FILTER_PROCESS_CHART_PATIENT)
   Future<PatientFilterResponse> postFilterpatientChart(
-    PatientFilterRequst patientFilterRequst,
+    @Body() PatientFilterRequst patientFilterRequst,
   );
 
   @GET(Endpoints.ITINERARY_SIMPLE_TITLE)
@@ -721,7 +724,7 @@ abstract class ApiService {
 
   @POST(Endpoints.ITINERARY_SIMPLE_TITLE)
   Future<ItineraryTitleResponse> postItineraryTitle(
-    ItineraryTitleRequest itineraryTitleRequest,
+    @Body() ItineraryTitleRequest itineraryTitleRequest,
   );
 
   @GET(Endpoints.ITINERARY_SIMPLE_EXPLANATION)
@@ -729,7 +732,7 @@ abstract class ApiService {
 
   @POST(Endpoints.ITINERARY_SIMPLE_EXPLANATION)
   Future<ItineraryExplanationResponse> postItineraryExplanation(
-    ItineraryExplanationRequest itineraryExplanationRequest,
+    @Body() ItineraryExplanationRequest itineraryExplanationRequest,
   );
 
   @GET(Endpoints.ITINERARY_SIMPLE_INTERPRETOR_OR_GUIDE)
@@ -739,6 +742,7 @@ abstract class ApiService {
   @POST(Endpoints.ITINERARY_SIMPLE_INTERPRETOR_OR_GUIDE)
   Future<ItineraryInterpreterOrGuideInputResponse>
       postItineraryInterpretorOrGuideInput(
+    @Body()
     ItineraryInterpreterOrGuideInputRequest
         itineraryInterpreterOrGuideInputRequest,
   );
@@ -748,7 +752,7 @@ abstract class ApiService {
 
   @POST(Endpoints.ITINERARY_SIMPLE_TRANSFER_INPUT)
   Future<ItineraryTransferInputResponse> postItineraryTransferInput(
-    ItineraryTransferInputRequest itineraryTransferInputRequest,
+    @Body() ItineraryTransferInputRequest itineraryTransferInputRequest,
   );
 
   @GET(Endpoints.DETAIL_FACILITY_HOSPITAL)
@@ -756,7 +760,7 @@ abstract class ApiService {
 
   @POST(Endpoints.DETAIL_FACILITY_HOSPITAL)
   Future<DetailFacilityHotelResponse> postDetailFacilityHospital(
-    DetailFacilityHotelRequest detailFacilityHotelRequest,
+    @Body() DetailFacilityHotelRequest detailFacilityHotelRequest,
   );
 
   @GET(Endpoints.DETAIL_FACILITY_DROP_IN_FACILITY)
@@ -764,7 +768,7 @@ abstract class ApiService {
 
   @POST(Endpoints.DETAIL_FACILITY_DROP_IN_FACILITY)
   Future<DetailDropInFacilityResponse> postDetailFacilityDropIn(
-    DetailDropInFacilityRequest detailDropInFacilityRequest,
+    @Body() DetailDropInFacilityRequest detailDropInFacilityRequest,
   );
 
   @GET(Endpoints.DETAIL_HOTEL_REGISTATION)
@@ -772,7 +776,7 @@ abstract class ApiService {
 
   @POST(Endpoints.DETAIL_HOTEL_REGISTATION)
   Future<DetainHotelRegistationResponse> postDetailHotelRegistation(
-    DetainHotelRegistationRequest detainHotelRegistationRequest,
+    @Body() DetainHotelRegistationRequest detainHotelRegistationRequest,
   );
 
   @GET(Endpoints.DETAIL_HOTEL_SEARCH)
@@ -780,9 +784,41 @@ abstract class ApiService {
 
   @POST(Endpoints.DETAIL_HOTEL_SEARCH)
   Future<DetailHotelSearchResponse> postDetialHotelSearch(
-    DetailHotelSearchRequest detailHotelSearchRequest,
+    @Body() DetailHotelSearchRequest detailHotelSearchRequest,
   );
 
+  @GET(Endpoints.DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER)
+  Future<DetailRelatedPartiesResponse>
+      getRelatedPartiesGuideOrInterpreter();
+
+  @POST(Endpoints.DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER)
+  Future<DetailRelatedPartiesResponse> postRelatedPartiesGuideOrInterpreter(
+   @Body() DetailRelatedPartiesRequest detailRelatedPartiesRequest,
+  );
+
+  @GET(Endpoints.DETAIL_RELATED_PARTIES_BUS_COMPANY)
+  Future<DetailRelatedPartiesBusCompanyResponse> getRelatedPartiesBusCompany();
+
+  @POST(Endpoints.DETAIL_RELATED_PARTIES_BUS_COMPANY)
+  Future<DetailRelatedPartiesBusCompanyResponse> postRelatedPartiesBusCompany(
+    @Body() DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest,
+  );
+
+  @GET(Endpoints.DETAIL_RELATED_PARTIES_DRIVER)
+  Future<DetailRelatedPartiesDriverResponse> getRelatedPartiesDriver();
+
+  @POST(Endpoints.DETAIL_RELATED_PARTIES_DRIVER)
+  Future<DetailRelatedPartiesDriverResponse> postRelatedPartiesDriver(
+    @Body() DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest,
+  );
+
+  @GET(Endpoints.DETAIL_RELATED_EMERGENCY_CONTACT)
+  Future<DetailRelatedPartiesEmergencyContactResponse> getRelatedPartiesEmergencyContact();
+
+  @POST(Endpoints.DETAIL_RELATED_EMERGENCY_CONTACT)
+  Future<DetailRelatedPartiesEmergencyContactResponse> postRelatedPartiesEmergencyContact(
+    @Body() DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest,
+  );
   /// Get basic information of hospital C3 Page
 
   @GET('${Endpoints.BASIC_INFORMATION_HOSPITAL}/{hospitalId}')
@@ -899,7 +935,6 @@ abstract class ApiService {
       getMedicalInstitutionSectionHospital(
     @Path('hospitalId') String hospitalId,
   );
-
 
   @GET(Endpoints.GET_HOSPITAL)
   Future<List<BasicInformationHospitalResponse>> getHospitals();

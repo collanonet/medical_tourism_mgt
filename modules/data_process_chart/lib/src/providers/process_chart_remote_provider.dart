@@ -82,4 +82,36 @@ class ProcessChartRemoteProvider {
   Future<DetailHotelSearchResponse> postDetialHotelSearch(DetailHotelSearchRequest detailHotelSearchRequest) async{
     return await apiService.postDetialHotelSearch(detailHotelSearchRequest);
   }
+
+  Future<DetailRelatedPartiesResponse> getRelatedPartiesGuideOrInterpreter() async{
+    return await apiService.getRelatedPartiesGuideOrInterpreter();
+  }
+
+  Future<DetailRelatedPartiesResponse> postRelatedPartiesGuideOrInterpreter(DetailRelatedPartiesRequest detailRelatedPartiesRequest) async{
+    return await apiService.postRelatedPartiesGuideOrInterpreter(detailRelatedPartiesRequest);
+  }
+
+  Future<DetailRelatedPartiesBusCompanyResponse> getRelatedPartiesBusCompany() async{
+    return await apiService.getRelatedPartiesBusCompany();
+  }
+
+  Future<DetailRelatedPartiesBusCompanyResponse> postRelatedPartiesBusCompany(DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest) async{
+    return await apiService.postRelatedPartiesBusCompany(detailRelatedPartiesBusCompanyRequest);
+  }
+
+  Future<DetailRelatedPartiesDriverResponse> getRelatedPartiesDriver() async{
+    return await apiService.getRelatedPartiesDriver();
+  }
+
+  Future<DetailRelatedPartiesDriverResponse> postRelatedPartiesDriver(DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest) async{
+    return await apiService.postRelatedPartiesDriver(detailRelatedPartiesDriverRequest);
+  }
+
+  Future<DetailRelatedPartiesEmergencyContactResponse> getRelatedPartiesEmergencyContact() async{
+    return await apiService.getRelatedPartiesEmergencyContact();
+  }
+
+  Future<DetailRelatedPartiesEmergencyContactResponse> postRelatedPartiesEmergencyContact(DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest) async{
+    return await apiService.postRelatedPartiesEmergencyContact(detailRelatedPartiesEmergencyContactRequest);
+  }
 }
