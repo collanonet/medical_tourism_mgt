@@ -25,6 +25,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
         },
         children: [
           Text('ガイドまたは通訳者'),
+          const SizedBox(height: 20,),
           ReactiveFormArray(
             formArrayName: 'guide_or_interpreter',
             builder: (context, formArray, child) {

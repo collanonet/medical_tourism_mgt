@@ -3524,7 +3524,8 @@ class _ApiService implements ApiService {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(patientFilterRequst.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<PatientFilterResponse>(Options(
       method: 'POST',
@@ -3579,7 +3580,8 @@ class _ApiService implements ApiService {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(itineraryTitleRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ItineraryTitleResponse>(Options(
       method: 'POST',
@@ -3634,7 +3636,8 @@ class _ApiService implements ApiService {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(itineraryExplanationRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ItineraryExplanationResponse>(Options(
       method: 'POST',
@@ -3693,7 +3696,8 @@ class _ApiService implements ApiService {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(itineraryInterpreterOrGuideInputRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ItineraryInterpreterOrGuideInputResponse>(Options(
       method: 'POST',
@@ -3749,7 +3753,8 @@ class _ApiService implements ApiService {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(itineraryTransferInputRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ItineraryTransferInputResponse>(Options(
       method: 'POST',
@@ -3807,7 +3812,8 @@ class _ApiService implements ApiService {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(detailFacilityHotelRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DetailFacilityHotelResponse>(Options(
       method: 'POST',
@@ -3862,7 +3868,8 @@ class _ApiService implements ApiService {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(detailDropInFacilityRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DetailDropInFacilityResponse>(Options(
       method: 'POST',
@@ -3917,7 +3924,8 @@ class _ApiService implements ApiService {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(detainHotelRegistationRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DetainHotelRegistationResponse>(Options(
       method: 'POST',
@@ -3972,7 +3980,8 @@ class _ApiService implements ApiService {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(detailHotelSearchRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DetailHotelSearchResponse>(Options(
       method: 'POST',
@@ -3991,6 +4000,241 @@ class _ApiService implements ApiService {
               baseUrl,
             ))));
     final value = DetailHotelSearchResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailRelatedPartiesResponse>
+      getRelatedPartiesGuideOrInterpreter() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailRelatedPartiesResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-related-parties-guide-or-interpreter',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DetailRelatedPartiesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailRelatedPartiesResponse> postRelatedPartiesGuideOrInterpreter(
+      DetailRelatedPartiesRequest detailRelatedPartiesRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailRelatedPartiesRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailRelatedPartiesResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-related-parties-guide-or-interpreter',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DetailRelatedPartiesResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailRelatedPartiesBusCompanyResponse>
+      getRelatedPartiesBusCompany() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailRelatedPartiesBusCompanyResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-related-parties-bus-company',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        DetailRelatedPartiesBusCompanyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailRelatedPartiesBusCompanyResponse> postRelatedPartiesBusCompany(
+      DetailRelatedPartiesBusCompanyRequest
+          detailRelatedPartiesBusCompanyRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailRelatedPartiesBusCompanyRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailRelatedPartiesBusCompanyResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-related-parties-bus-company',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        DetailRelatedPartiesBusCompanyResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailRelatedPartiesDriverResponse> getRelatedPartiesDriver() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailRelatedPartiesDriverResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-related-parties-driver',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DetailRelatedPartiesDriverResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailRelatedPartiesDriverResponse> postRelatedPartiesDriver(
+      DetailRelatedPartiesDriverRequest
+          detailRelatedPartiesDriverRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailRelatedPartiesDriverRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailRelatedPartiesDriverResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-related-parties-driver',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DetailRelatedPartiesDriverResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailRelatedPartiesEmergencyContactResponse>
+      getRelatedPartiesEmergencyContact() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailRelatedPartiesEmergencyContactResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-related-parties-emergecy-contact',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        DetailRelatedPartiesEmergencyContactResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailRelatedPartiesEmergencyContactResponse>
+      postRelatedPartiesEmergencyContact(
+          DetailRelatedPartiesEmergencyContactRequest
+              detailRelatedPartiesEmergencyContactRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailRelatedPartiesEmergencyContactRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailRelatedPartiesEmergencyContactResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-related-parties-emergecy-contact',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        DetailRelatedPartiesEmergencyContactResponse.fromJson(_result.data!);
     return value;
   }
 
