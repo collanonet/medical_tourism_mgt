@@ -144,7 +144,7 @@ class Endpoints {
   static const MEDICAL_RECORD_PATIENT_RESPONSE_RISK_TEST =
       '/medical-record-patient-response-risk-test';
 
-  //E1
+  //E1 - E7
   static const FILTER_PROCESS_CHART_PATIENT = '/filter-process-chart-patient';
   static const ITINERARY_SIMPLE_TITLE = '/itinerary-simple-title';
   static const ITINERARY_SIMPLE_EXPLANATION = '/itinerary-simple-explanation';
@@ -161,6 +161,10 @@ class Endpoints {
   static const DETAIL_RELATED_PARTIES_BUS_COMPANY = 'detail-related-parties-bus-company';
   static const DETAIL_RELATED_PARTIES_DRIVER = 'detail-related-parties-driver';
   static const DETAIL_RELATED_EMERGENCY_CONTACT = 'detail-related-parties-emergecy-contact';
+  static const DETAIL_ITINERARY_SIMPLE_VERSION_TITLE = 'detail-itinerary-simple-versoin-title';
+  static const DETAIL_ITINERARY_SIMPLE_VERSION_EXPANATION = 'detail-itinerary-simple-veraion-explanation';
+  static const DETAIL_ITINERARY_SIMPLE_VERSION_INTERPRETER = 'detail-itineray-simple-version-interpreter';
+  static const DETAIL_ITINERARY_SIMPLE_VERAION_PICK_UP = 'detail-itinerary-simple-version-pick-up';
 
   static const BASIC_INFORMATION_HOSPITAL = '/basic-information-hospital';
   static const MEDICAL_RECORD_BASIC_INFO_HOSPITAL =
