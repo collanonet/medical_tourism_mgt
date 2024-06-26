@@ -32,7 +32,7 @@ class _SupportLanguageSectionState extends State<SupportLanguageSection> {
                     ),
                 children: [
                   Text(
-                    '対応言語',
+                    '言語を追加',
                     style: context.textTheme.bodyLarge,
                   ),
                   RowSeparated(

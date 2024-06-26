@@ -5,9 +5,6 @@ import 'package:retrofit/retrofit.dart';
 import '../core_network.dart';
 import '../entities.dart';
 import 'endpoints.dart';
-import 'entities/request/detail_related_parties_bus_company_request.dart';
-import 'entities/request/detail_related_parties_emergency_contact_request.dart';
-import 'entities/request/detail_related_parties_request.dart';
 
 part 'api_service.g.dart';
 
@@ -819,6 +816,49 @@ abstract class ApiService {
   Future<DetailRelatedPartiesEmergencyContactResponse> postRelatedPartiesEmergencyContact(
     @Body() DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest,
   );
+
+  @GET(Endpoints.DETAIL_ITINERARY_SIMPLE_VERSION_TITLE)
+  Future<DetailItinerarySimpleTitle> getDetailItinerarySimpleTitle();
+
+  @POST(Endpoints.DETAIL_ITINERARY_SIMPLE_VERSION_TITLE)
+  Future<DetailItinerarySimpleTitle> postDetailItinerarySimpleTitle(
+    @Body() DetailItinerarySimpleTitleRequest detailItinerarySimpleTitleRequest,
+  );
+
+  @GET(Endpoints.DETAIL_ITINERARY_SIMPLE_VERSION_EXPANATION)
+  Future<DetailItinerarySimplePriorExplanationResponse> getDetailItinerarySimpleExplanation();
+
+  @POST(Endpoints.DETAIL_ITINERARY_SIMPLE_VERSION_EXPANATION)
+  Future<DetailItinerarySimplePriorExplanationResponse> postDetailItinerarySimpleExplanation(
+   @Body() DetailItinerarySimplePriorExplanationRequest detailItinerarySimplePriorExplanationRequest,
+  );
+
+  @GET(Endpoints.DETAIL_ITINERARY_SIMPLE_VERSION_INTERPRETER)
+  Future<DetailItinerarySimpleInterpreterOrGuideResponse> getDetailItinerarySimpleInterpreter();
+
+  @POST(Endpoints.DETAIL_ITINERARY_SIMPLE_VERSION_INTERPRETER)
+  Future<DetailItinerarySimpleInterpreterOrGuideResponse> postDetailItinerarySimpleInterpreter(
+    @Body() DetailItinerarySimpleInterpreterOrGuideResponse detailItinerarySimpleInterpreterOrGuideResponse,
+  );
+
+  @GET(Endpoints.DETAIL_ITINERARY_SIMPLE_VERAION_PICK_UP)
+  Future<DetailItinerarySimplePickUpAndDropOffResponse> getDetailItinerarySimplePickUp();
+
+  @POST(Endpoints.DETAIL_ITINERARY_SIMPLE_VERAION_PICK_UP)
+  Future<DetailItinerarySimplePickUpAndDropOffResponse> postDetailItinerarySimplePickUp(
+    @Body() DetailItinerarySimplePickUpAndDropOffRequest detailItinerarySimplePickUpAndDropOffRequest,
+  );
+
+
+  @GET(Endpoints.DETAIL_ITINERARY)
+  Future<DetailItineraryResponse> getDetailitinerary();
+
+  @POST(Endpoints.DETAIL_ITINERARY)
+  Future<DetailItineraryResponse> postDetailItinerary(
+    @Body() DetailIneraryRequest detailIneraryRequest,
+  );
+ 
+  
   /// Get basic information of hospital C3 Page
 
   @GET('${Endpoints.BASIC_INFORMATION_HOSPITAL}/{hospitalId}')

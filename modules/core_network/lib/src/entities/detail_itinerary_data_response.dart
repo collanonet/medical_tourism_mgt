@@ -1,44 +1,17 @@
-
 import 'package:json_annotation/json_annotation.dart';
-part 'detail_itinerary_request.g.dart';
-@JsonSerializable()
-class DetailItineraryRequest {
-  List<Patient>? patientNames;
-  String? tourName;
-  String? numberOfPeople;
-  String? groupType;
-  List<Day>? days;
-
-  DetailItineraryRequest({
-     this.patientNames,
-     this.tourName,
-     this.numberOfPeople,
-     this.groupType,
-     this.days,
-  });
-
-  factory DetailItineraryRequest.fromJson(Map<String,dynamic> json){
-    return _$DetailItineraryRequestFromJson(json);
-  }
-
-  Map<String,dynamic> toJson(){
-    return _$DetailItineraryRequestToJson(this);
-  }
-  
-}
+part 'detail_itinerary_data_response.g.dart';
 
 @JsonSerializable()
-class Patient {
+class ItineraryPatient {
   String? patientName;
 
-  Patient({ this.patientName});
-
-  factory Patient.fromJson(Map<String,dynamic> json){
-    return _$PatientFromJson(json);
+  ItineraryPatient({this.patientName});
+  factory ItineraryPatient.fromJson(Map<String,dynamic> json){
+    return _$ItineraryPatientFromJson(json);
   }
 
   Map<String,dynamic> toJson(){
-    return _$PatientToJson(this);
+    return _$ItineraryPatientToJson(this);
   }
 }
 
@@ -66,6 +39,7 @@ class Task {
     return _$TaskToJson(this);
   }
 
+
 }
 
 @JsonSerializable()
@@ -73,13 +47,16 @@ class Group {
   List<Task>? tasks;
 
   Group({ this.tasks});
-  factory Group.fromJson(Map<String,dynamic> json){
-    return _$GroupFromJson(json);
-  }
+ 
+ factory Group.fromJson(Map<String,dynamic> json){
+  return _$GroupFromJson(json);
+ }
 
-  Map<String,dynamic> toJson(){
-    return _$GroupToJson(this);
-  }
+ Map<String,dynamic> toJson(){
+  return _$GroupToJson(this);
+ }
+
+ 
 }
 
 @JsonSerializable()
@@ -105,7 +82,6 @@ class Day {
   Map<String,dynamic> toJson(){
     return _$DayToJson(this);
   }
-
   
 }
 

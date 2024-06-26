@@ -4239,6 +4239,301 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<DetailItinerarySimpleTitle> getDetailItinerarySimpleTitle() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailItinerarySimpleTitle>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-itinerary-simple-versoin-title',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DetailItinerarySimpleTitle.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailItinerarySimpleTitle> postDetailItinerarySimpleTitle(
+      DetailItinerarySimpleTitleRequest
+          detailItinerarySimpleTitleRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailItinerarySimpleTitleRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailItinerarySimpleTitle>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-itinerary-simple-versoin-title',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DetailItinerarySimpleTitle.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailItinerarySimplePriorExplanationResponse>
+      getDetailItinerarySimpleExplanation() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailItinerarySimplePriorExplanationResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-itinerary-simple-veraion-explanation',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        DetailItinerarySimplePriorExplanationResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailItinerarySimplePriorExplanationResponse>
+      postDetailItinerarySimpleExplanation(
+          DetailItinerarySimplePriorExplanationRequest
+              detailItinerarySimplePriorExplanationRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailItinerarySimplePriorExplanationRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailItinerarySimplePriorExplanationResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-itinerary-simple-veraion-explanation',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        DetailItinerarySimplePriorExplanationResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailItinerarySimpleInterpreterOrGuideResponse>
+      getDetailItinerarySimpleInterpreter() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailItinerarySimpleInterpreterOrGuideResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-itineray-simple-version-interpreter',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        DetailItinerarySimpleInterpreterOrGuideResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailItinerarySimpleInterpreterOrGuideResponse>
+      postDetailItinerarySimpleInterpreter(
+          DetailItinerarySimpleInterpreterOrGuideResponse
+              detailItinerarySimpleInterpreterOrGuideResponse) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailItinerarySimpleInterpreterOrGuideResponse.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailItinerarySimpleInterpreterOrGuideResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-itineray-simple-version-interpreter',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        DetailItinerarySimpleInterpreterOrGuideResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailItinerarySimplePickUpAndDropOffResponse>
+      getDetailItinerarySimplePickUp() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailItinerarySimplePickUpAndDropOffResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-itinerary-simple-version-pick-up',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        DetailItinerarySimplePickUpAndDropOffResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailItinerarySimplePickUpAndDropOffResponse>
+      postDetailItinerarySimplePickUp(
+          DetailItinerarySimplePickUpAndDropOffRequest
+              detailItinerarySimplePickUpAndDropOffRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailItinerarySimplePickUpAndDropOffRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailItinerarySimplePickUpAndDropOffResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-itinerary-simple-version-pick-up',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value =
+        DetailItinerarySimplePickUpAndDropOffResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailItineraryResponse> getDetailitinerary() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailItineraryResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-itinerary',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DetailItineraryResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailItineraryResponse> postDetailItinerary(
+      DetailIneraryRequest detailIneraryRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = detailIneraryRequest;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailItineraryResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'detail-itinerary',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DetailItineraryResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<BasicInformationHospitalResponse> getBasicInformationHospital(
       String hospitalId) async {
     final _extra = <String, dynamic>{};

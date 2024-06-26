@@ -1483,14 +1483,14 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                     )
                     // Memo
                     ,
-                    const Text(
-                      'メモ',
-                      style: TextStyle(
-                        fontFamily: 'NotoSansJP',
-                        package: 'core_ui',
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
+                    // const Text(
+                    //   'メモ',
+                    //   style: TextStyle(
+                    //     fontFamily: 'NotoSansJP',
+                    //     package: 'core_ui',
+                    //     fontWeight: FontWeight.bold,
+                    //   ),
+                    // ),
                     ReactiveTextField(
                       formControlName: 'memo',
                       maxLines: 6,
