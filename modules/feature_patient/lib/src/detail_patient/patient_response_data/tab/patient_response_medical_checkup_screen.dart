@@ -258,8 +258,10 @@ class _PatientResponseMedicalCheckupScreenState
                                       label: Text('健診希望人数'),
                                     ),
                                     keyboardType: TextInputType.number,
+
                                     inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'[0-9]')),
                                     ],
                                   ),
                                 ),
@@ -305,8 +307,10 @@ class _PatientResponseMedicalCheckupScreenState
                                   child: ReactiveTextField(
                                     formControlName: 'age',
                                     keyboardType: TextInputType.number,
+
                                     inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'[0-9]')),
                                     ],
                                     decoration: InputDecoration(
                                       label: Text('年齢'),
@@ -852,8 +856,10 @@ class _PatientResponseMedicalCheckupScreenState
                                   child: ReactiveTextField(
                                     formControlName: 'fastingBloodSugarMgPerDl',
                                     keyboardType: TextInputType.number,
+
                                     inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'[0-9]')),
                                     ],
                                   ),
                                 ),
@@ -875,8 +881,10 @@ class _PatientResponseMedicalCheckupScreenState
                                     formControlName:
                                         'fastingBloodSugarMmolPerL',
                                     keyboardType: TextInputType.number,
+
                                     inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'[0-9]')),
                                     ],
                                   ),
                                 ),
@@ -952,8 +960,10 @@ class _PatientResponseMedicalCheckupScreenState
                                   child: ReactiveTextField(
                                     formControlName: 'implantYear',
                                     keyboardType: TextInputType.number,
+
                                     inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly,
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'[0-9]')),
                                     ],
                                   ),
                                 ),
@@ -974,8 +984,10 @@ class _PatientResponseMedicalCheckupScreenState
                                   child: ReactiveTextField(
                                     formControlName: 'implantMonth',
                                     keyboardType: TextInputType.number,
+
                                     inputFormatters: [
-                                      FilteringTextInputFormatter.digitsOnly,
+                                      FilteringTextInputFormatter.allow(
+                                          RegExp(r'[0-9]')),
                                     ],
                                   ),
                                 ),

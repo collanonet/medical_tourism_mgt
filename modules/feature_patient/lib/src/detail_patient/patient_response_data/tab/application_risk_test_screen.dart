@@ -3,6 +3,7 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -228,6 +229,10 @@ class _ApplicationRiskTestScreenState extends State<ApplicationRiskTestScreen> {
                           child: ReactiveTextField<int>(
                             formControlName: "people",
                             keyboardType: TextInputType.number,
+                            inputFormatters: [
+                              FilteringTextInputFormatter.allow(
+                                  RegExp(r'[0-9]')),
+                            ],
                           ),
                         ),
                         IconButton(

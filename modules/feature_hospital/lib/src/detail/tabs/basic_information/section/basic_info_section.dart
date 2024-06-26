@@ -180,6 +180,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'phoneNumber',
+                                  keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
                                     fillColor: Colors.white,
                                     filled: true,
@@ -187,6 +188,10 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                       '電話番号',
                                     ),
                                   ),
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9]')),
+                                  ],
                                 ),
                               ),
                               SizedBox(

@@ -706,7 +706,10 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                     ]),
                     'telephoneNumber': FormControl<String>(),
                     'faxNumber': FormControl<String>(),
-                    'email': FormControl<String>(),
+                    'email': FormControl<String>(
+                      validators: [
+                        Validators.email,
+                      ],),
                     'remark2': FormControl<String>(),
                   })),
                   child: Row(

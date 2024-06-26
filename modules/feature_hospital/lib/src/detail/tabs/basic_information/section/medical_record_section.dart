@@ -265,7 +265,10 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                       'nameKanji': FormControl<String>(),
                       'nameKana': FormControl<String>(),
                       'telephoneNumber': FormControl<String>(),
-                      'email': FormControl<String>(),
+                      'email': FormControl<String>(
+                        validators: [
+                          Validators.email,
+                        ],),
                       'faxNumber': FormControl<String>(),
                     }),
                   ),

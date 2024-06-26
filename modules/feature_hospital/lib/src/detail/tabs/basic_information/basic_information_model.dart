@@ -142,7 +142,10 @@ class BasicInformationModel {
             'nameKanji': FormControl<String>(value: item.nameKanji),
             'nameKana': FormControl<String>(value: item.nameKana),
             'telephoneNumber': FormControl<String>(value: item.telephoneNumber),
-            'email': FormControl<String>(value: item.email),
+            'email': FormControl<String>(
+                validators: [
+                  Validators.email,
+                ],value: item.email),
             'faxNumber': FormControl<String>(value: item.faxNumber),
           }),
         );
@@ -245,7 +248,10 @@ class BasicInformationModel {
             'telephoneNumber': FormControl<String>(value: item.telephoneNumber),
             'completionCertificate': completionCertificate,
             'faxNumber': FormControl<String>(value: item.faxNumber),
-            'email': FormControl<String>(value: item.email),
+            'email': FormControl<String>(value: item.email,
+              validators: [
+              Validators.email,
+              ],),
             'remark2': FormControl<String>(value: item.remark2),
           }),
         );

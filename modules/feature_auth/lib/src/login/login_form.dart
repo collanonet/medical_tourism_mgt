@@ -6,7 +6,8 @@ import 'package:reactive_forms/reactive_forms.dart';
 FormGroup formLogin() => FormGroup({
       'email': FormControl<String>(
         value: '',
-        validators: [Validators.required],
+        validators: [Validators.required,
+            Validators.email,],
       ),
       'password': FormControl<String>(
         value: '',

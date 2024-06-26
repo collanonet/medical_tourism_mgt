@@ -83,12 +83,14 @@ class _AgentBasicInformationScreenState
                                   RowSeparated(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     separatorBuilder:
                                         (BuildContext context, int index) {
                                       return const SizedBox(width: 16);
                                     },
                                     children: [
-                                      Expanded(
+                                      IntrinsicWidth(
+                                        stepWidth: 300,
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -109,7 +111,8 @@ class _AgentBasicInformationScreenState
                                           ],
                                         ),
                                       ),
-                                      Expanded(
+                                      IntrinsicWidth(
+                                        stepWidth: 300,
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -130,21 +133,19 @@ class _AgentBasicInformationScreenState
                                           ],
                                         ),
                                       ),
-                                      const Expanded(
-                                        child: SizedBox(),
-                                      ),
                                     ],
                                   ),
                                   RowSeparated(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     separatorBuilder:
                                         (BuildContext context, int index) {
                                       return const SizedBox(width: 16);
                                     },
                                     children: [
                                       IntrinsicWidth(
-                                        stepWidth: 250,
+                                        stepWidth: 300,
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -165,8 +166,8 @@ class _AgentBasicInformationScreenState
                                           ],
                                         ),
                                       ),
-                                      Expanded(
-                                        flex: 2,
+                                      IntrinsicWidth(
+                                        stepWidth: 300,
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -187,20 +188,19 @@ class _AgentBasicInformationScreenState
                                           ],
                                         ),
                                       ),
-                                      const Expanded(
-                                        child: SizedBox(),
-                                      ),
                                     ],
                                   ),
                                   RowSeparated(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     separatorBuilder:
                                         (BuildContext context, int index) {
                                       return const SizedBox(width: 16);
                                     },
                                     children: [
-                                      Expanded(
+                                      IntrinsicWidth(
+                                        stepWidth: 300,
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -221,23 +221,19 @@ class _AgentBasicInformationScreenState
                                           ],
                                         ),
                                       ),
-                                      const Expanded(
-                                        child: SizedBox(),
-                                      ),
-                                      const Expanded(
-                                        child: SizedBox(),
-                                      ),
                                     ],
                                   ),
                                   RowSeparated(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     separatorBuilder:
                                         (BuildContext context, int index) {
                                       return const SizedBox(width: 16);
                                     },
                                     children: [
-                                      Expanded(
+                                      IntrinsicWidth(
+                                        stepWidth: 300,
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -258,29 +254,25 @@ class _AgentBasicInformationScreenState
                                                   TextInputType.number,
                                               inputFormatters: [
                                                 FilteringTextInputFormatter
-                                                    .digitsOnly,
+                                                    .allow(RegExp(r'[0-9]')),
                                               ],
                                             ),
                                           ],
                                         ),
-                                      ),
-                                      const Expanded(
-                                        child: SizedBox(),
-                                      ),
-                                      const Expanded(
-                                        child: SizedBox(),
                                       ),
                                     ],
                                   ),
                                   RowSeparated(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     separatorBuilder:
                                         (BuildContext context, int index) {
                                       return const SizedBox(width: 16);
                                     },
                                     children: [
-                                      Expanded(
+                                      IntrinsicWidth(
+                                        stepWidth: 300,
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -333,12 +325,6 @@ class _AgentBasicInformationScreenState
                                           ],
                                         ),
                                       ),
-                                      const Expanded(
-                                        child: SizedBox(),
-                                      ),
-                                      const Expanded(
-                                        child: SizedBox(),
-                                      ),
                                     ],
                                   ),
                                   ReactiveFormArray(
@@ -352,14 +338,17 @@ class _AgentBasicInformationScreenState
                                           formGroup: currentForm,
                                           child: RowSeparated(
                                             crossAxisAlignment:
-                                                CrossAxisAlignment.center,
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
                                             separatorBuilder:
                                                 (BuildContext context,
                                                     int index) {
                                               return const SizedBox(width: 16);
                                             },
                                             children: [
-                                              Expanded(
+                                              IntrinsicWidth(
+                                                stepWidth: 300,
                                                 child: ColumnSeparated(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment
@@ -383,7 +372,7 @@ class _AgentBasicInformationScreenState
                                                   ],
                                                 ),
                                               ),
-                                              Expanded(
+                                              IntrinsicWidth(
                                                 child: ColumnSeparated(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment
@@ -400,46 +389,47 @@ class _AgentBasicInformationScreenState
                                                       style: context
                                                           .textTheme.bodyMedium,
                                                     ),
-                                                    ReactiveTextField(
-                                                      formControlName:
-                                                          'referralCommission',
-                                                      keyboardType:
-                                                          TextInputType.number,
-                                                      inputFormatters: [
-                                                        FilteringTextInputFormatter
-                                                            .digitsOnly,
+                                                    Row(
+                                                      children: [
+                                                        IntrinsicWidth(
+                                                          stepWidth: 300,
+                                                          child:
+                                                              ReactiveTextField(
+                                                            formControlName:
+                                                                'referralCommission',
+                                                            keyboardType:
+                                                                TextInputType
+                                                                    .number,
+                                                            inputFormatters: [
+                                                              FilteringTextInputFormatter
+                                                                  .allow(RegExp(
+                                                                      r'[0-9]')),
+                                                            ],
+                                                            decoration:
+                                                                InputDecoration(
+                                                              suffixText: '%',
+                                                            ),
+                                                          ),
+                                                        ),
+                                                        if (formArray.controls
+                                                                .indexOf(
+                                                                    currentForm) !=
+                                                            0)
+                                                          IconButton(
+                                                            icon: const Icon(
+                                                              Icons.delete,
+                                                              color: Colors.red,
+                                                            ),
+                                                            onPressed: () {
+                                                              formArray.removeAt(
+                                                                  formArray
+                                                                      .controls
+                                                                      .indexOf(
+                                                                          currentForm));
+                                                            },
+                                                          ),
                                                       ],
                                                     ),
-                                                  ],
-                                                ),
-                                              ),
-                                              const Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  SizedBox(height: 20),
-                                                  Text('%'),
-                                                ],
-                                              ),
-                                              Expanded(
-                                                child: Row(
-                                                  children: [
-                                                    if (formArray.controls
-                                                            .indexOf(
-                                                                currentForm) !=
-                                                        0)
-                                                      IconButton(
-                                                        icon: const Icon(
-                                                          Icons.delete,
-                                                          color: Colors.red,
-                                                        ),
-                                                        onPressed: () {
-                                                          formArray.removeAt(
-                                                              formArray.controls
-                                                                  .indexOf(
-                                                                      currentForm));
-                                                        },
-                                                      ),
                                                   ],
                                                 ),
                                               ),
@@ -497,13 +487,14 @@ class _AgentBasicInformationScreenState
                                   RowSeparated(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     separatorBuilder:
                                         (BuildContext context, int index) {
                                       return const SizedBox(width: 16);
                                     },
                                     children: [
-                                      Expanded(
+                                      IntrinsicWidth(
+                                        stepWidth: 300,
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -525,7 +516,8 @@ class _AgentBasicInformationScreenState
                                           ],
                                         ),
                                       ),
-                                      Expanded(
+                                      IntrinsicWidth(
+                                        stepWidth: 300,
                                         child: ColumnSeparated(
                                           crossAxisAlignment:
                                               CrossAxisAlignment.stretch,
@@ -547,21 +539,15 @@ class _AgentBasicInformationScreenState
                                                   TextInputType.number,
                                               inputFormatters: [
                                                 FilteringTextInputFormatter
-                                                    .digitsOnly,
+                                                    .allow(RegExp(r'[0-9]')),
                                               ],
+                                              decoration: InputDecoration(
+                                                suffixText: '件',
+                                              ),
                                             ),
                                           ],
                                         ),
                                       ),
-                                      const Column(
-                                        children: [
-                                          SizedBox(
-                                            height: 40,
-                                          ),
-                                          Text('件'),
-                                        ],
-                                      ),
-                                      Expanded(child: SizedBox()),
                                     ],
                                   ),
                                 ],
@@ -584,6 +570,7 @@ class _AgentBasicInformationScreenState
                                 .agentManager,
                             builder: (context, value, child) {
                               return Skeletonizer(
+                                enabled: value.loading,
                                 child: Container(
                                   padding: const EdgeInsets.all(16),
                                   decoration: BoxDecoration(
@@ -689,14 +676,17 @@ class _AgentBasicInformationScreenState
                                         ),
                                         RowSeparated(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           separatorBuilder:
                                               (BuildContext context,
                                                   int index) {
                                             return const SizedBox(width: 16);
                                           },
                                           children: [
-                                            Expanded(
+                                            IntrinsicWidth(
+                                              stepWidth: 300,
                                               child: ColumnSeparated(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.stretch,
@@ -719,24 +709,21 @@ class _AgentBasicInformationScreenState
                                                 ],
                                               ),
                                             ),
-                                            Expanded(
-                                              child: SizedBox(),
-                                            ),
-                                            Expanded(
-                                              child: SizedBox(),
-                                            ),
                                           ],
                                         ),
                                         RowSeparated(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           separatorBuilder:
                                               (BuildContext context,
                                                   int index) {
                                             return const SizedBox(width: 16);
                                           },
                                           children: [
-                                            Expanded(
+                                            IntrinsicWidth(
+                                              stepWidth: 300,
                                               child: ColumnSeparated(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.stretch,
@@ -759,7 +746,8 @@ class _AgentBasicInformationScreenState
                                                 ],
                                               ),
                                             ),
-                                            Expanded(
+                                            IntrinsicWidth(
+                                              stepWidth: 300,
                                               child: ColumnSeparated(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.stretch,
@@ -782,7 +770,8 @@ class _AgentBasicInformationScreenState
                                                 ],
                                               ),
                                             ),
-                                            Expanded(
+                                            IntrinsicWidth(
+                                              stepWidth: 300,
                                               child: ColumnSeparated(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.stretch,
@@ -809,14 +798,17 @@ class _AgentBasicInformationScreenState
                                         ),
                                         RowSeparated(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           separatorBuilder:
                                               (BuildContext context,
                                                   int index) {
                                             return const SizedBox(width: 16);
                                           },
                                           children: [
-                                            Expanded(
+                                            IntrinsicWidth(
+                                              stepWidth: 300,
                                               child: ColumnSeparated(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.stretch,
@@ -839,24 +831,21 @@ class _AgentBasicInformationScreenState
                                                 ],
                                               ),
                                             ),
-                                            Expanded(
-                                              child: SizedBox(),
-                                            ),
-                                            Expanded(
-                                              child: SizedBox(),
-                                            ),
                                           ],
                                         ),
                                         RowSeparated(
                                           crossAxisAlignment:
-                                              CrossAxisAlignment.center,
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           separatorBuilder:
                                               (BuildContext context,
                                                   int index) {
                                             return const SizedBox(width: 16);
                                           },
                                           children: [
-                                            Expanded(
+                                            IntrinsicWidth(
+                                              stepWidth: 300,
                                               child: ColumnSeparated(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.stretch,
@@ -875,11 +864,19 @@ class _AgentBasicInformationScreenState
                                                   ReactiveTextField(
                                                     formControlName:
                                                         'phoneNumber',
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    inputFormatters: [
+                                                      FilteringTextInputFormatter
+                                                          .allow(
+                                                              RegExp(r'[0-9]')),
+                                                    ],
                                                   ),
                                                 ],
                                               ),
                                             ),
-                                            Expanded(
+                                            IntrinsicWidth(
+                                              stepWidth: 300,
                                               child: ColumnSeparated(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.stretch,
@@ -907,9 +904,6 @@ class _AgentBasicInformationScreenState
                                                 ],
                                               ),
                                             ),
-                                            Expanded(
-                                              child: SizedBox(),
-                                            ),
                                           ],
                                         ),
                                         ReactiveFormArray(
@@ -923,7 +917,9 @@ class _AgentBasicInformationScreenState
                                                 formGroup: currentForm,
                                                 child: RowSeparated(
                                                   crossAxisAlignment:
-                                                      CrossAxisAlignment.center,
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
                                                   separatorBuilder:
                                                       (BuildContext context,
                                                           int index) {
@@ -931,7 +927,8 @@ class _AgentBasicInformationScreenState
                                                         width: 16);
                                                   },
                                                   children: [
-                                                    Expanded(
+                                                    IntrinsicWidth(
+                                                      stepWidth: 300,
                                                       child: ColumnSeparated(
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
@@ -957,7 +954,8 @@ class _AgentBasicInformationScreenState
                                                         ],
                                                       ),
                                                     ),
-                                                    Expanded(
+                                                    IntrinsicWidth(
+                                                      stepWidth: 300,
                                                       child: ColumnSeparated(
                                                         crossAxisAlignment:
                                                             CrossAxisAlignment
@@ -976,34 +974,39 @@ class _AgentBasicInformationScreenState
                                                                 .textTheme
                                                                 .bodyMedium,
                                                           ),
-                                                          ReactiveTextField(
-                                                            formControlName:
-                                                                'howToContactQrCode',
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                    Expanded(
-                                                      child: Row(
-                                                        children: [
-                                                          if (formArray.controls
-                                                                  .indexOf(
-                                                                      currentForm) !=
-                                                              0)
-                                                            IconButton(
-                                                              icon: const Icon(
-                                                                Icons.delete,
-                                                                color:
-                                                                    Colors.red,
+                                                          Row(
+                                                            children: [
+                                                              IntrinsicWidth(
+                                                                stepWidth: 300,
+                                                                child:
+                                                                    ReactiveTextField(
+                                                                  formControlName:
+                                                                      'howToContactQrCode',
+                                                                ),
                                                               ),
-                                                              onPressed: () {
-                                                                formArray.removeAt(
-                                                                    formArray
+                                                              if (formArray
+                                                                      .controls
+                                                                      .indexOf(
+                                                                          currentForm) !=
+                                                                  0)
+                                                                IconButton(
+                                                                  icon:
+                                                                      const Icon(
+                                                                    Icons
+                                                                        .delete,
+                                                                    color: Colors
+                                                                        .red,
+                                                                  ),
+                                                                  onPressed:
+                                                                      () {
+                                                                    formArray.removeAt(formArray
                                                                         .controls
                                                                         .indexOf(
                                                                             currentForm));
-                                                              },
-                                                            ),
+                                                                  },
+                                                                ),
+                                                            ],
+                                                          ),
                                                         ],
                                                       ),
                                                     ),
@@ -1086,7 +1089,7 @@ class _AgentBasicInformationScreenState
                             onTap: () {
                               formArray.add(
                                 FormGroup({
-                                  'id': FormControl<String>(),
+                                  '_id': FormControl<String>(),
                                   'nameCardDragDrop': FormControl<String>(),
                                   'departmentName': FormControl<String>(),
                                   'fullNameRomanji': FormControl<String>(
@@ -1101,11 +1104,14 @@ class _AgentBasicInformationScreenState
                                     validators: [Validators.required],
                                   ),
                                   'email': FormControl<String>(
-                                    validators: [Validators.required],
+                                    validators: [
+                                      Validators.required,
+                                      Validators.email,
+                                    ],
                                   ),
                                   'contactMethods': FormArray([
                                     FormGroup({
-                                      'id': FormControl<String>(),
+                                      '_id': FormControl<String>(),
                                       'howToContact': FormControl<String>(),
                                       'howToContactQrCode':
                                           FormControl<String>(),
