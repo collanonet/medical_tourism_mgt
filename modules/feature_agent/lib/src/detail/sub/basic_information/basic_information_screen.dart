@@ -3,7 +3,9 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:intl/intl.dart';
@@ -411,6 +413,14 @@ class _AgentBasicInformationScreenState
                                                   ],
                                                 ),
                                               ),
+                                              const Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  SizedBox(height: 20),
+                                                  Text('%'),
+                                                ],
+                                              ),
                                               Expanded(
                                                 child: Row(
                                                   children: [
@@ -487,6 +497,7 @@ class _AgentBasicInformationScreenState
                                   RowSeparated(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     separatorBuilder:
                                         (BuildContext context, int index) {
                                       return const SizedBox(width: 16);
@@ -541,6 +552,14 @@ class _AgentBasicInformationScreenState
                                             ),
                                           ],
                                         ),
+                                      ),
+                                      const Column(
+                                        children: [
+                                          SizedBox(
+                                            height: 40,
+                                          ),
+                                          Text('件'),
+                                        ],
                                       ),
                                       Expanded(child: SizedBox()),
                                     ],
@@ -1035,7 +1054,7 @@ class _AgentBasicInformationScreenState
                                                             .marginSmall,
                                                       ),
                                                       Text(
-                                                        '同行者を追加',
+                                                        '連絡方法を追加',
                                                         style: TextStyle(
                                                             color: context
                                                                 .appTheme

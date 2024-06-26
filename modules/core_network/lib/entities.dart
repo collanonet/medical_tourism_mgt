@@ -34,3 +34,5 @@ export 'src/entities/request/detail_itinerary_simple_interpreter_request.dart';
 export 'src/entities/request/detail_itinerary_simple_pick_up_request.dart';
 export 'src/entities/request/detail_itinerary_simple_prior_explanation_request.dart';
 export 'src/entities/request/detail_itinerary_simple_version_title_request.dart';
+export 'src/entities/request/detail_inerary_request.dart';
+export 'src/entities/detail_itinerary_response.dart';

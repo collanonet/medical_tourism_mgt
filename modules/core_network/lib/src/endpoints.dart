@@ -165,6 +165,7 @@ class Endpoints {
   static const DETAIL_ITINERARY_SIMPLE_VERSION_EXPANATION = 'detail-itinerary-simple-veraion-explanation';
   static const DETAIL_ITINERARY_SIMPLE_VERSION_INTERPRETER = 'detail-itineray-simple-version-interpreter';
   static const DETAIL_ITINERARY_SIMPLE_VERAION_PICK_UP = 'detail-itinerary-simple-version-pick-up';
+  static const DETAIL_ITINERARY = 'detail-itinerary';
 
   static const BASIC_INFORMATION_HOSPITAL = '/basic-information-hospital';
   static const MEDICAL_RECORD_BASIC_INFO_HOSPITAL =

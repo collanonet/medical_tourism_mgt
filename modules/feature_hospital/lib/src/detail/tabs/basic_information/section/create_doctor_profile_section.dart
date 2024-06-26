@@ -37,7 +37,7 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                   SizedBox(height: context.appTheme.spacing.formSpacing),
               children: [
                 const Text(
-                  'メモ',
+                  '医師',
                   style: TextStyle(
                     fontFamily: 'NotoSansJP',
                     package: 'core_ui',
