@@ -46,8 +46,8 @@ class _AdditionalInformationSectionState
                     style: context.textTheme.bodyLarge,
                   ),
                   RowSeparated(
-                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       separatorBuilder: (context, index) => SizedBox(
                             width: context.appTheme.spacing.formSpacing,
                           ),
@@ -64,6 +64,8 @@ class _AdditionalInformationSectionState
                                 style: context.textTheme.bodySmall,
                               ),
                               RowSeparated(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   separatorBuilder: (context, index) =>
                                       SizedBox(
                                         width: context
@@ -71,7 +73,6 @@ class _AdditionalInformationSectionState
                                       ),
                                   children: [
                                     IntrinsicWidth(
-                                      stepWidth: 2,
                                       child: ReactiveRadioListTile(
                                         formControlName: 'outsourcingContract',
                                         value: '締結済',
@@ -83,7 +84,6 @@ class _AdditionalInformationSectionState
                                       ),
                                     ),
                                     IntrinsicWidth(
-                                      stepWidth: 2,
                                       child: ReactiveRadioListTile(
                                         formControlName: 'outsourcingContract',
                                         value: '未締結',
@@ -107,6 +107,8 @@ class _AdditionalInformationSectionState
                                 style: context.textTheme.bodySmall,
                               ),
                               RowSeparated(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   separatorBuilder: (context, index) =>
                                       SizedBox(
                                         width: context
@@ -114,6 +116,10 @@ class _AdditionalInformationSectionState
                                       ),
                                   children: [
                                     RowSeparated(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         separatorBuilder: (context, index) =>
                                             SizedBox(
                                               width: context.appTheme.spacing
@@ -152,6 +158,8 @@ class _AdditionalInformationSectionState
                             ])
                       ]),
                   RowSeparated(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       separatorBuilder: (context, index) => SizedBox(
                             width: context.appTheme.spacing.marginExtraSmall,
                           ),
@@ -167,6 +175,8 @@ class _AdditionalInformationSectionState
                                 style: context.textTheme.bodyMedium,
                               ),
                               RowSeparated(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   separatorBuilder: (context, index) =>
                                       SizedBox(
                                         width: context
@@ -174,7 +184,6 @@ class _AdditionalInformationSectionState
                                       ),
                                   children: [
                                     IntrinsicWidth(
-                                      stepWidth: 2,
                                       child: ReactiveRadioListTile(
                                         formControlName: 'msCorporation',
                                         value: 'あり',
@@ -186,7 +195,6 @@ class _AdditionalInformationSectionState
                                       ),
                                     ),
                                     IntrinsicWidth(
-                                      stepWidth: 2,
                                       child: ReactiveRadioListTile(
                                         formControlName: 'msCorporation',
                                         value: 'なし',
@@ -211,19 +219,23 @@ class _AdditionalInformationSectionState
                                 style: context.textTheme.bodyMedium,
                               ),
                               RowSeparated(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 separatorBuilder: (context, index) => SizedBox(
                                   width:
                                       context.appTheme.spacing.marginExtraSmall,
                                 ),
                                 children: [
                                   IntrinsicWidth(
-                                    stepWidth: 200,
+                                    stepWidth: 300,
                                     child: ReactiveTextField(
                                       formControlName: 'referralFee',
                                       keyboardType: TextInputType.number,
+                                      decoration: InputDecoration(
+                                        suffixText: '％',
+                                      ),
                                     ),
                                   ),
-                                  Text('％', style: context.textTheme.bodySmall),
                                 ],
                               ),
                             ]),
@@ -239,6 +251,8 @@ class _AdditionalInformationSectionState
                                 style: context.textTheme.bodyMedium,
                               ),
                               RowSeparated(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   separatorBuilder: (context, index) =>
                                       SizedBox(
                                         width: context
@@ -307,7 +321,7 @@ class _AdditionalInformationSectionState
                                 style: context.textTheme.bodyMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 200,
+                                stepWidth: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'remark',
                                 ),
@@ -315,7 +329,8 @@ class _AdditionalInformationSectionState
                             ])
                       ]),
                   RowSeparated(
-                      crossAxisAlignment: CrossAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       separatorBuilder: (context, index) => SizedBox(
                             width: context.appTheme.spacing.formSpacing,
                           ),
@@ -331,20 +346,35 @@ class _AdditionalInformationSectionState
                                 '支払いサイト',
                                 style: context.textTheme.bodyMedium,
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 100,
-                                child: ReactiveTextField(
-                                  formControlName: 'paymentSiteTighten',
+                              RowSeparated(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                separatorBuilder: (context, index) => SizedBox(
+                                  width: context.appTheme.spacing.formSpacing,
                                 ),
+                                children: [
+                                  IntrinsicWidth(
+                                    stepWidth: 300,
+                                    child: ReactiveTextField(
+                                      formControlName: 'paymentSiteTighten',
+                                    ),
+                                  ),
+                                  Text(
+                                    '締め',
+                                    style: context.textTheme.bodyMedium,
+                                  )
+                                ],
                               ),
                             ]),
                         RowSeparated(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
                           separatorBuilder: (context, index) => SizedBox(
                             width: context.appTheme.spacing.formSpacing,
                           ),
                           children: [
                             IntrinsicWidth(
-                              stepWidth: 100,
+                              stepWidth: 300,
                               child: ReactiveTextField(
                                 formControlName: 'paymentSitePayment',
                               ),

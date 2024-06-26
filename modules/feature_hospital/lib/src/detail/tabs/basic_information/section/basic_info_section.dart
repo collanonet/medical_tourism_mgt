@@ -78,7 +78,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'hospitalNameChinese',
                                   decoration: const InputDecoration(
@@ -93,7 +94,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'hospitalNameKatakana',
                                   decoration: const InputDecoration(
@@ -110,7 +112,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'zipCode',
                                   decoration: const InputDecoration(
@@ -125,8 +128,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              Expanded(
-                                flex: 2,
+                              IntrinsicWidth(
+                                stepWidth: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'location',
                                   decoration: const InputDecoration(
@@ -143,8 +146,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
-                                flex: 2,
+                              IntrinsicWidth(
+                                stepWidth: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'googleMap',
                                   decoration: const InputDecoration(
@@ -177,7 +180,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'phoneNumber',
                                   keyboardType: TextInputType.number,
@@ -197,7 +201,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'faxNumber',
                                   decoration: const InputDecoration(
@@ -214,7 +219,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'homepage',
                                   decoration: InputDecoration(
@@ -266,6 +272,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                   RowSeparated(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     separatorBuilder:
                                         (BuildContext context, int index) {
                                       return SizedBox(
@@ -397,124 +404,115 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Expanded(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.max,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    const Text(
-                                      '連絡方法', //
-                                    ),
-                                    RowSeparated(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      separatorBuilder:
-                                          (BuildContext context, int index) {
-                                        return SizedBox(
-                                          width: context
-                                              .appTheme.spacing.marginMedium,
-                                        );
-                                      },
-                                      children: <Widget>[
-                                        IntrinsicWidth(
-                                          child: ReactiveCheckboxListTile(
-                                            checkboxShape:
-                                                RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5)),
-                                            contentPadding: EdgeInsets.zero,
-                                            formControlName: 'phone',
-                                            controlAffinity:
-                                                ListTileControlAffinity.leading,
-                                            onChanged: (value) {
-                                              formGroup.control('phone').value =
-                                                  value.value == true;
-                                            },
-                                            title: Text('電話',
-                                                style: context
-                                                    .textTheme.labelLarge),
-                                          ),
+                              Column(
+                                mainAxisSize: MainAxisSize.max,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  const Text(
+                                    '連絡方法', //
+                                  ),
+                                  RowSeparated(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    separatorBuilder:
+                                        (BuildContext context, int index) {
+                                      return SizedBox(
+                                        width: context
+                                            .appTheme.spacing.marginMedium,
+                                      );
+                                    },
+                                    children: <Widget>[
+                                      IntrinsicWidth(
+                                        child: ReactiveCheckboxListTile(
+                                          checkboxShape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          contentPadding: EdgeInsets.zero,
+                                          formControlName: 'phone',
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          onChanged: (value) {
+                                            formGroup.control('phone').value =
+                                                value.value == true;
+                                          },
+                                          title: Text('電話',
+                                              style:
+                                                  context.textTheme.labelLarge),
                                         ),
-                                        IntrinsicWidth(
-                                          child: ReactiveCheckboxListTile(
-                                            checkboxShape:
-                                                RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5)),
-                                            contentPadding: EdgeInsets.zero,
-                                            formControlName: 'fax',
-                                            controlAffinity:
-                                                ListTileControlAffinity.leading,
-                                            onChanged: (value) {
-                                              formGroup.control('fax').value =
-                                                  value.value == true;
-                                            },
-                                            title: Text('FAX',
-                                                style: context
-                                                    .textTheme.labelLarge),
-                                          ),
+                                      ),
+                                      IntrinsicWidth(
+                                        child: ReactiveCheckboxListTile(
+                                          checkboxShape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          contentPadding: EdgeInsets.zero,
+                                          formControlName: 'fax',
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          onChanged: (value) {
+                                            formGroup.control('fax').value =
+                                                value.value == true;
+                                          },
+                                          title: Text('FAX',
+                                              style:
+                                                  context.textTheme.labelLarge),
                                         ),
-                                        IntrinsicWidth(
-                                          child: ReactiveCheckboxListTile(
-                                            checkboxShape:
-                                                RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5)),
-                                            contentPadding: EdgeInsets.zero,
-                                            formControlName: 'mail',
-                                            controlAffinity:
-                                                ListTileControlAffinity.leading,
-                                            onChanged: (value) {
-                                              formGroup.control('mail').value =
-                                                  value.value == true;
-                                            },
-                                            title: Text('メール',
-                                                style: context
-                                                    .textTheme.labelLarge),
-                                          ),
+                                      ),
+                                      IntrinsicWidth(
+                                        child: ReactiveCheckboxListTile(
+                                          checkboxShape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          contentPadding: EdgeInsets.zero,
+                                          formControlName: 'mail',
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          onChanged: (value) {
+                                            formGroup.control('mail').value =
+                                                value.value == true;
+                                          },
+                                          title: Text('メール',
+                                              style:
+                                                  context.textTheme.labelLarge),
                                         ),
-                                        IntrinsicWidth(
-                                          child: ReactiveCheckboxListTile(
-                                            checkboxShape:
-                                                RoundedRectangleBorder(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            5)),
-                                            contentPadding: EdgeInsets.zero,
-                                            formControlName: 'line',
-                                            controlAffinity:
-                                                ListTileControlAffinity.leading,
-                                            onChanged: (value) {
-                                              formGroup.control('line').value =
-                                                  value.value == true;
-                                            },
-                                            title: Text('LINE',
-                                                style: context
-                                                    .textTheme.labelLarge),
-                                          ),
+                                      ),
+                                      IntrinsicWidth(
+                                        child: ReactiveCheckboxListTile(
+                                          checkboxShape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(5)),
+                                          contentPadding: EdgeInsets.zero,
+                                          formControlName: 'line',
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          onChanged: (value) {
+                                            formGroup.control('line').value =
+                                                value.value == true;
+                                          },
+                                          title: Text('LINE',
+                                              style:
+                                                  context.textTheme.labelLarge),
                                         ),
-                                        Expanded(
-                                          child: ReactiveTextField(
-                                            formControlName: 'note',
-                                            decoration: const InputDecoration(
-                                              fillColor: Colors.white,
-                                              filled: true,
-                                              label: Text(
-                                                '備考',
-                                              ),
+                                      ),
+                                      IntrinsicWidth(
+                                        stepWidth: 300,
+                                        child: ReactiveTextField(
+                                          formControlName: 'note',
+                                          decoration: const InputDecoration(
+                                            fillColor: Colors.white,
+                                            filled: true,
+                                            label: Text(
+                                              '備考',
                                             ),
                                           ),
                                         ),
-                                        const Expanded(child: SizedBox())
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -538,6 +536,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                           RowSeparated(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
                                             separatorBuilder:
                                                 (BuildContext context,
                                                     int index) {
@@ -647,7 +647,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                                           .labelLarge),
                                                 ),
                                               ),
-                                              Expanded(
+                                              IntrinsicWidth(
+                                                stepWidth: 300,
                                                 child: ReactiveTextField(
                                                   formControlName: 'languages',
                                                   decoration:
@@ -678,7 +679,6 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                         Row(
                                           children: [
                                             IntrinsicWidth(
-                                              stepWidth: 2,
                                               child: ReactiveRadioListTile(
                                                 formControlName: 'onlineCheck',
                                                 value: '可',
@@ -691,7 +691,6 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                               ),
                                             ),
                                             IntrinsicWidth(
-                                              stepWidth: 2,
                                               child: ReactiveRadioListTile(
                                                 formControlName: 'onlineCheck',
                                                 value: '不可',
@@ -720,7 +719,6 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                         Row(
                                           children: [
                                             IntrinsicWidth(
-                                              stepWidth: 2,
                                               child: ReactiveRadioListTile(
                                                 formControlName: 'appointment',
                                                 value: '可',
@@ -733,7 +731,6 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                               ),
                                             ),
                                             IntrinsicWidth(
-                                              stepWidth: 2,
                                               child: ReactiveRadioListTile(
                                                 formControlName: 'appointment',
                                                 value: '不可',
@@ -769,6 +766,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                   RowSeparated(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     separatorBuilder:
                                         (BuildContext context, int index) {
                                       return SizedBox(
@@ -900,6 +898,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                   RowSeparated(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     separatorBuilder:
                                         (BuildContext context, int index) {
                                       return SizedBox(
@@ -967,6 +966,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                   RowSeparated(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     separatorBuilder:
                                         (BuildContext context, int index) {
                                       return SizedBox(
@@ -1098,26 +1098,23 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Row(
-                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  padding: const EdgeInsets.all(10),
-                                  child: const Text(
-                                    '診療時間',
-                                    style: TextStyle(
-                                      fontFamily: 'NotoSansJP',
-                                      package: 'core_ui',
-                                      fontWeight: FontWeight.bold,
-                                    ),
+                              IntrinsicWidth(
+                                stepWidth: 200,
+                                child: const Text(
+                                  '診療時間',
+                                  style: TextStyle(
+                                    fontFamily: 'NotoSansJP',
+                                    package: 'core_ui',
+                                    fontWeight: FontWeight.bold,
                                   ),
                                 ),
                               ),
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: boxText(
                                   context,
                                   '月',
@@ -1128,7 +1125,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: boxText(
                                   context,
                                   '火',
@@ -1139,7 +1137,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: boxText(
                                   context,
                                   '水',
@@ -1150,7 +1149,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: boxText(
                                   context,
                                   '木',
@@ -1161,7 +1161,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: boxText(
                                   context,
                                   '金',
@@ -1172,7 +1173,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: boxText(
                                   context,
                                   '土',
@@ -1183,17 +1185,14 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: boxText(
                                   context,
                                   '日',
                                   textColor: Colors.white,
                                   bg: context.appTheme.primaryColor,
                                 ),
-                              ),
-                              const Expanded(
-                                flex: 7,
-                                child: SizedBox(),
                               ),
                             ],
                           ),
@@ -1202,8 +1201,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           ),
                           Row(
                             children: [
-                              Expanded(
-                                flex: 2,
+                              IntrinsicWidth(
+                                stepWidth: 200,
                                 child: ReactiveTextField(
                                   formControlName: 'shift1',
                                 ),
@@ -1211,7 +1210,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Mon',
                                   items: [
@@ -1229,7 +1229,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Tue',
                                   items: [
@@ -1247,7 +1248,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Wed',
                                   items: [
@@ -1265,7 +1267,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Thu',
                                   items: [
@@ -1283,7 +1286,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Fri',
                                   items: [
@@ -1301,7 +1305,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Sat',
                                   items: [
@@ -1319,7 +1324,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Sun',
                                   items: [
@@ -1334,10 +1340,6 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                   ],
                                 ),
                               ),
-                              const Expanded(
-                                flex: 7,
-                                child: SizedBox(),
-                              ),
                             ],
                           ),
                           SizedBox(
@@ -1345,8 +1347,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           ),
                           Row(
                             children: [
-                              Expanded(
-                                flex: 2,
+                              IntrinsicWidth(
+                                stepWidth: 200,
                                 child: ReactiveTextField(
                                   formControlName: 'shift2',
                                 ),
@@ -1354,7 +1356,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Mon',
                                   items: [
@@ -1372,7 +1375,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Tue',
                                   items: [
@@ -1390,7 +1394,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Wed',
                                   items: [
@@ -1408,7 +1413,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Thu',
                                   items: [
@@ -1426,7 +1432,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Fri',
                                   items: [
@@ -1444,7 +1451,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Sat',
                                   items: [
@@ -1462,7 +1470,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 100,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Sun',
                                   items: [
@@ -1477,29 +1486,16 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                   ],
                                 ),
                               ),
-                              const Expanded(
-                                flex: 7,
-                                child: SizedBox(),
-                              ),
                             ],
                           ),
                         ],
                       ),
-                    )
-                    // Memo
-                    ,
-                    // const Text(
-                    //   'メモ',
-                    //   style: TextStyle(
-                    //     fontFamily: 'NotoSansJP',
-                    //     package: 'core_ui',
-                    //     fontWeight: FontWeight.bold,
-                    //   ),
-                    // ),
+                    ),
                     ReactiveTextField(
                       formControlName: 'memo',
                       maxLines: 6,
                       decoration: const InputDecoration(
+                        label: Text('メモ'),
                         hintText: '来日の意向が確定してから問い合わせること。',
                       ),
                     ),

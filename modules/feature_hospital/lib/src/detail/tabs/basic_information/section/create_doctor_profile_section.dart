@@ -68,6 +68,9 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                             )),
                                     children: [
                                       RowSeparated(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           separatorBuilder:
                                               ((BuildContext context, index) =>
                                                   SizedBox(
@@ -124,6 +127,9 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                 children: [
                                                   const Text('写真公開'),
                                                   RowSeparated(
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                      mainAxisAlignment: MainAxisAlignment.start,
                                                       separatorBuilder:
                                                           ((context, index) =>
                                                               SizedBox(
@@ -134,7 +140,6 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                               )),
                                                       children: [
                                                         IntrinsicWidth(
-                                                          stepWidth: 2,
                                                           child:
                                                               ReactiveRadioListTile(
                                                             formControlName:
@@ -151,7 +156,6 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                           ),
                                                         ),
                                                         IntrinsicWidth(
-                                                          stepWidth: 2,
                                                           child:
                                                               ReactiveRadioListTile(
                                                             formControlName:
@@ -183,6 +187,9 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                 children: [
                                                   const Text('指名'),
                                                   RowSeparated(
+                                                      crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                      mainAxisAlignment: MainAxisAlignment.start,
                                                       separatorBuilder: ((context,
                                                               index) =>
                                                           const SizedBox(
@@ -193,7 +200,6 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                               )),
                                                       children: [
                                                         IntrinsicWidth(
-                                                          stepWidth: 2,
                                                           child:
                                                               ReactiveRadioListTile(
                                                             formControlName:
@@ -210,7 +216,6 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                           ),
                                                         ),
                                                         IntrinsicWidth(
-                                                          stepWidth: 2,
                                                           child:
                                                               ReactiveRadioListTile(
                                                             formControlName:
@@ -228,7 +233,8 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                         ),
                                                       ])
                                                 ]),
-                                            Expanded(
+                                            IntrinsicWidth(
+                                              stepWidth: 300,
                                               child: ReactiveTextField(
                                                 formControlName: 'remark',
                                                 decoration:
@@ -243,6 +249,9 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                             ),
                                           ]),
                                       RowSeparated(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         separatorBuilder:
                                             (BuildContext context, int index) =>
                                                 SizedBox(
@@ -250,7 +259,8 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                               .appTheme.spacing.formSpacing,
                                         ),
                                         children: [
-                                          Expanded(
+                                          IntrinsicWidth(
+                                            stepWidth: 300,
                                             child: ReactiveTextField(
                                               formControlName: 'departmentName',
                                               decoration: const InputDecoration(
@@ -262,7 +272,8 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                               ),
                                             ),
                                           ),
-                                          Expanded(
+                                          IntrinsicWidth(
+                                            stepWidth: 300,
                                             child: ReactiveTextField(
                                               formControlName: 'post',
                                               decoration: const InputDecoration(
@@ -274,7 +285,8 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                               ),
                                             ),
                                           ),
-                                          Expanded(
+                                          IntrinsicWidth(
+                                            stepWidth: 300,
                                             child: ReactiveTextField(
                                               formControlName: 'specialty',
                                               decoration: const InputDecoration(
@@ -289,6 +301,9 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                         ],
                                       ),
                                       RowSeparated(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         separatorBuilder:
                                             (BuildContext context, int index) =>
                                                 SizedBox(
@@ -296,7 +311,8 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                               .appTheme.spacing.formSpacing,
                                         ),
                                         children: [
-                                          Expanded(
+                                          IntrinsicWidth(
+                                            stepWidth: 300,
                                             child: ReactiveTextField(
                                               formControlName: 'nameKanji',
                                               decoration: const InputDecoration(
@@ -308,7 +324,8 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                               ),
                                             ),
                                           ),
-                                          Expanded(
+                                          IntrinsicWidth(
+                                            stepWidth: 300,
                                             child: ReactiveTextField(
                                               formControlName: 'nameKana',
                                               decoration: const InputDecoration(
@@ -319,9 +336,6 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                 ),
                                               ),
                                             ),
-                                          ),
-                                          const Expanded(
-                                            child: SizedBox(),
                                           ),
                                         ],
                                       ),
@@ -338,6 +352,9 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                           formGroup:
                                                               currentForm,
                                                           child: RowSeparated(
+                                                            crossAxisAlignment:
+                                                            CrossAxisAlignment.start,
+                                                            mainAxisAlignment: MainAxisAlignment.start,
                                                             separatorBuilder:
                                                                 ((BuildContext
                                                                             context,
@@ -433,6 +450,9 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                           formGroup:
                                                               currentForm,
                                                           child: RowSeparated(
+                                                            crossAxisAlignment:
+                                                            CrossAxisAlignment.start,
+                                                            mainAxisAlignment: MainAxisAlignment.start,
                                                             separatorBuilder:
                                                                 ((BuildContext
                                                                             context,
@@ -527,6 +547,9 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                           children: [
                                             const Text('オンライン診療'),
                                             RowSeparated(
+                                                crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                                mainAxisAlignment: MainAxisAlignment.start,
                                                 separatorBuilder:
                                                     ((context, index) =>
                                                         SizedBox(
@@ -537,7 +560,6 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                         )),
                                                 children: [
                                                   IntrinsicWidth(
-                                                    stepWidth: 2,
                                                     child:
                                                         ReactiveRadioListTile(
                                                       formControlName:
@@ -552,7 +574,6 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                     ),
                                                   ),
                                                   IntrinsicWidth(
-                                                    stepWidth: 2,
                                                     child:
                                                         ReactiveRadioListTile(
                                                       formControlName:
@@ -569,13 +590,17 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                 ])
                                           ]),
                                       RowSeparated(
+                                          crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                          mainAxisAlignment: MainAxisAlignment.start,
                                           separatorBuilder: ((context, index) =>
                                               SizedBox(
                                                 width: context.appTheme.spacing
                                                     .formSpacing,
                                               )),
                                           children: [
-                                            Expanded(
+                                            IntrinsicWidth(
+                                              stepWidth: 300,
                                               child: ReactiveTextField(
                                                 formControlName:
                                                     'trainingCompletionCertificateNumber',
@@ -591,6 +616,9 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                             ),
                                           ]),
                                       RowSeparated(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         separatorBuilder:
                                             (BuildContext context, int index) =>
                                                 SizedBox(
@@ -598,7 +626,8 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                               .appTheme.spacing.formSpacing,
                                         ),
                                         children: [
-                                          Expanded(
+                                          IntrinsicWidth(
+                                            stepWidth: 300,
                                             child: ReactiveTextField(
                                               formControlName:
                                                   'telephoneNumber',
@@ -611,7 +640,8 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                               ),
                                             ),
                                           ),
-                                          Expanded(
+                                          IntrinsicWidth(
+                                            stepWidth: 300,
                                             child: ReactiveTextField(
                                               formControlName: 'faxNumber',
                                               decoration: const InputDecoration(
@@ -623,7 +653,8 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                               ),
                                             ),
                                           ),
-                                          Expanded(
+                                          IntrinsicWidth(
+                                            stepWidth: 300,
                                             child: ReactiveTextField(
                                               formControlName: 'email',
                                               decoration: const InputDecoration(
@@ -648,21 +679,19 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                         ),
                                       ),
                                       if (formArray.controls
-                                                  .indexOf(currentForm) !=
-                                              0 ||
-                                          currentForm
-                                                  .control('departmentName')
-                                                  .value !=
-                                              null) ...{
+                                              .indexOf(currentForm) !=
+                                          0)
                                         IconButton(
-                                          icon: const Icon(Icons.delete_forever,
-                                              color: Colors.red),
-                                          onPressed: () => formArray.removeAt(
-                                            formArray.controls
-                                                .indexOf(currentForm),
+                                          icon: const Icon(
+                                            Icons.delete,
+                                            color: Colors.red,
                                           ),
+                                          onPressed: () {
+                                            formArray.removeAt(formArray
+                                                .controls
+                                                .indexOf(currentForm));
+                                          },
                                         ),
-                                      }
                                     ],
                                   )),
                                 ],
@@ -709,7 +738,8 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                     'email': FormControl<String>(
                       validators: [
                         Validators.email,
-                      ],),
+                      ],
+                    ),
                     'remark2': FormControl<String>(),
                   })),
                   child: Row(

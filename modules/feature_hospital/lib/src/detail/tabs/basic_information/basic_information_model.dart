@@ -142,10 +142,9 @@ class BasicInformationModel {
             'nameKanji': FormControl<String>(value: item.nameKanji),
             'nameKana': FormControl<String>(value: item.nameKana),
             'telephoneNumber': FormControl<String>(value: item.telephoneNumber),
-            'email': FormControl<String>(
-                validators: [
-                  Validators.email,
-                ],value: item.email),
+            'email': FormControl<String>(validators: [
+              Validators.email,
+            ], value: item.email),
             'faxNumber': FormControl<String>(value: item.faxNumber),
           }),
         );
@@ -248,10 +247,12 @@ class BasicInformationModel {
             'telephoneNumber': FormControl<String>(value: item.telephoneNumber),
             'completionCertificate': completionCertificate,
             'faxNumber': FormControl<String>(value: item.faxNumber),
-            'email': FormControl<String>(value: item.email,
+            'email': FormControl<String>(
+              value: item.email,
               validators: [
-              Validators.email,
-              ],),
+                Validators.email,
+              ],
+            ),
             'remark2': FormControl<String>(value: item.remark2),
           }),
         );
@@ -364,22 +365,6 @@ class BasicInformationModel {
       await submitBasicInformation(
           formGroup.control('basicInformation') as FormGroup);
 
-      logger.d(basicInformationData.value.hasData);
-      if (basicInformationData.value.hasData) {
-        logger.d("test data " + basicInformationData.value.requireData.id);
-        await submitHowToMakeRequest(
-            formGroup.control('howToMakeRequest') as FormGroup);
-        await submitMedicalRecordBasicInfo(formGroup);
-        await submitDoctorInformation(formGroup);
-        await submitAdditionalInformation(
-            formGroup.control('additionalInformationSection') as FormGroup);
-
-        await submitPaymentOption(
-            formGroup.control('paymentOptionSection') as FormGroup);
-        //
-        await submitSupportLanguage(formGroup);
-      }
-
       submit.value = const AsyncData(data: true);
     } catch (e) {
       logger.d(e);
@@ -396,6 +381,18 @@ class BasicInformationModel {
       );
 
       basicInformationData.value = AsyncData(data: result);
+
+      if (basicInformationData.value.hasData) {
+        await submitHowToMakeRequest(
+            formGroup.control('howToMakeRequest') as FormGroup);
+        await submitMedicalRecordBasicInfo(formGroup);
+        await submitDoctorInformation(formGroup);
+        await submitAdditionalInformation(
+            formGroup.control('additionalInformationSection') as FormGroup);
+        await submitPaymentOption(
+            formGroup.control('paymentOptionSection') as FormGroup);
+        await submitSupportLanguage(formGroup);
+      }
     } catch (e) {
       logger.d(e);
       basicInformationData.value = AsyncData(error: e);
@@ -543,15 +540,10 @@ class BasicInformationModel {
       additionalInformationData.value = const AsyncData(loading: true);
 
       List<String> contract = [];
-      FormArray formArray = form.control('contract') as FormArray;
-      if (formArray.value != null) {
-        for (var i = 0; i < (formArray.value as List<dynamic>).length; i++) {
-          if ((formArray.value as List<dynamic>)[i]['name'] != null ||
-              (formArray.value as List<dynamic>)[i]['name'] != '') {
-            contract.add((formArray.value as List<dynamic>)[i]['name']);
-          }
-        }
-      }
+
+      form.control('contract').value.forEach((element) {
+        contract.add(element['name']);
+      });
 
       AdditionalInformationSectionRequest request =
           AdditionalInformationSectionRequest(
@@ -581,9 +573,6 @@ class BasicInformationModel {
     try {
       paymentOptionData.value = const AsyncData(loading: true);
 
-      Map<String, dynamic> json = form.value;
-      json['hospital'] = basicInformationData.value.requireData.id;
-      logger.d(json);
       PaymentOptionHospitalRequest request = PaymentOptionHospitalRequest(
         hospital: basicInformationData.value.requireData.id,
         id: form.control('_id').value,
@@ -623,7 +612,6 @@ class BasicInformationModel {
           .control('supportLanguageSection')
           .value
           .forEach((element) async {
-        logger.e(element);
         if (element['supportLanguage'] != null &&
             element['supportLanguage'].toString().isNotEmpty) {
           SupportLanguageHospitalRequest request =
@@ -635,14 +623,7 @@ class BasicInformationModel {
             medicalInterpretationSupport:
                 element['medicalInterpretationSupport'],
           );
-          //
-          // var result =
           await hospitalRepository.postSupportLanguageHospital(request);
-
-          // supportLangaugeData.value.copyWith(data: [
-          //   ...supportLangaugeData.value.requireData,
-          //   result,
-          // ]);
         }
       });
 
