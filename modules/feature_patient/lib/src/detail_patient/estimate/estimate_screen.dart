@@ -290,14 +290,14 @@ class _EstimateScreenState extends State<EstimateScreen> {
                       ),
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'issue_date',
+                          formControlName: 'issueDate',
                           firstDate: DateTime(1900),
                           lastDate: DateTime.now(),
                           builder: (BuildContext context,
                               ReactiveDatePickerDelegate<dynamic> picker,
                               Widget? child) {
                             return ReactiveTextField<DateTime>(
-                              formControlName: 'issue_date',
+                              formControlName: 'issueDate',
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
