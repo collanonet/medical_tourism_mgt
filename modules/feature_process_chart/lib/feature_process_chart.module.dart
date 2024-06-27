@@ -6,16 +6,16 @@
 // ignore_for_file: no_leading_underscores_for_library_prefixes
 import 'dart:async' as _i2;
 
-import 'package:data_process_chart/data_process_chart.dart' as _i10;
+import 'package:data_process_chart/data_process_chart.dart' as _i8;
 import 'package:injectable/injectable.dart' as _i1;
 
 import 'src/detail/detail_process_chart_model.dart' as _i3;
-import 'src/detail/tab/facility_model.dart' as _i9;
-import 'src/detail/tab/hotel_registration_model.dart' as _i4;
-import 'src/detail/tab/hotel_search_model.dart' as _i5;
-import 'src/detail/tab/itinerary_model.dart' as _i6;
-import 'src/detail/tab/itinerary_simple_version_model.dart' as _i8;
-import 'src/detail/tab/related_parties_model.dart' as _i7;
+import 'src/detail/tab/facility_model.dart' as _i7;
+import 'src/detail/tab/hotel_registration_model.dart' as _i9;
+import 'src/detail/tab/hotel_search_model.dart' as _i10;
+import 'src/detail/tab/itinerary_model.dart' as _i4;
+import 'src/detail/tab/itinerary_simple_version_model.dart' as _i6;
+import 'src/detail/tab/related_parties_model.dart' as _i5;
 import 'src/itinerary_simplified/itinerary_simplified_model.dart' as _i11;
 import 'src/process_chart_model.dart' as _i12;
 
@@ -25,18 +25,20 @@ class FeatureProcessChartPackageModule extends _i1.MicroPackageModule {
   _i2.FutureOr<void> init(_i1.GetItHelper gh) {
     gh.factory<_i3.DetailProcessChartModel>(
         () => _i3.DetailProcessChartModel());
-    gh.factory<_i4.HotelRegistrationModel>(() => _i4.HotelRegistrationModel());
-    gh.factory<_i5.HotelSearchModel>(() => _i5.HotelSearchModel());
-    gh.factory<_i6.ItineraryModel>(() => _i6.ItineraryModel());
-    gh.factory<_i7.RelatedPartiesModel>(() => _i7.RelatedPartiesModel());
-    gh.factory<_i8.ItinerarySimpleVersionModel>(
-        () => _i8.ItinerarySimpleVersionModel());
-    gh.factory<_i9.FacilityModel>(() => _i9.FacilityModel(
-        processChartRepository: gh<_i10.ProcessChartRepository>()));
+    gh.factory<_i4.ItineraryModel>(() => _i4.ItineraryModel());
+    gh.factory<_i5.RelatedPartiesModel>(() => _i5.RelatedPartiesModel());
+    gh.factory<_i6.ItinerarySimpleVersionModel>(
+        () => _i6.ItinerarySimpleVersionModel());
+    gh.factory<_i7.FacilityModel>(() => _i7.FacilityModel(
+        processChartRepository: gh<_i8.ProcessChartRepository>()));
+    gh.factory<_i9.HotelRegistrationModel>(() => _i9.HotelRegistrationModel(
+        processChartRepository: gh<_i8.ProcessChartRepository>()));
+    gh.factory<_i10.HotelSearchModel>(() => _i10.HotelSearchModel(
+        processChartRepository: gh<_i8.ProcessChartRepository>()));
     gh.factory<_i11.ItinerarySimplifiedModel>(() =>
         _i11.ItinerarySimplifiedModel(
-            processChartRepository: gh<_i10.ProcessChartRepository>()));
+            processChartRepository: gh<_i8.ProcessChartRepository>()));
     gh.factory<_i12.ProcessChartModel>(() => _i12.ProcessChartModel(
-        processChartRepository: gh<_i10.ProcessChartRepository>()));
+        processChartRepository: gh<_i8.ProcessChartRepository>()));
   }
 }

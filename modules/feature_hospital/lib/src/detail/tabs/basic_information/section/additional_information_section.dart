@@ -1,4 +1,3 @@
-import 'dart:html';
 
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';

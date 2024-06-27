@@ -10,21 +10,37 @@ class ItinerarySimplifiedModel {
   ItinerarySimplifiedModel({required this.processChartRepository});
   final ProcessChartRepository processChartRepository;
 
-  Future<void> fetchData(FormGroup formGroup) async{
-    await fetchItineraryTitel(formGroup.control('title') as FormGroup);
-    await fetchItineraryExplanation(formGroup.control('prior_explanation') as FormGroup);
-    await fetchItineraryInterpreterOrGuideInput(formGroup.control('interpreter_or_guide_input') as FormGroup);
-    await fetchItineraryTransferInpu(formGroup.control('Transfer_input') as FormGroup);
+  Future<void> fetchData(FormGroup formGroup) async {
+    try {
+      await fetchItineraryTitel(formGroup.control('title') as FormGroup);
+      await fetchItineraryExplanation(
+          formGroup.control('prior_explanation') as FormGroup);
+      await fetchItineraryInterpreterOrGuideInput(
+          formGroup.control('interpreter_or_guide_input') as FormGroup);
+      await fetchItineraryTransferInpu(
+          formGroup.control('Transfer_input') as FormGroup);
+    } catch (e) {
+      logger.d(e);
+    }
   }
 
   ValueNotifier<AsyncData<bool>> submit = ValueNotifier(const AsyncData());
-  void submitData(FormGroup formGroup) async{
-    await submitItineraryTitle(formGroup.control('title') as FormGroup);
-    await submitItineraryExplanation(formGroup.control('prior_explanation') as FormGroup);
-    await submitItineraryInterpreterOrGuideInput(formGroup.control('interpreter_or_guide_input') as FormGroup);
-    await submitItineraryTransferInput(formGroup.control('Transfer_input') as FormGroup);
+  void submitData(FormGroup formGroup) async {
+    try {
+      submit.value = const AsyncData(loading: true);
+      await submitItineraryTitle(formGroup.control('title') as FormGroup);
+      await submitItineraryExplanation(
+          formGroup.control('prior_explanation') as FormGroup);
+      await submitItineraryInterpreterOrGuideInput(
+          formGroup.control('interpreter_or_guide_input') as FormGroup);
+      await submitItineraryTransferInput(
+          formGroup.control('Transfer_input') as FormGroup);
+      submit.value = const AsyncData(loading: false);
+    } catch (e) {
+      logger.d(e);
+    }
   }
-  
+
   ValueNotifier<AsyncData<ItineraryTitleResponse>> itineraryTitleData =
       ValueNotifier(const AsyncData());
   Future<void> fetchItineraryTitel(FormGroup formGroup) async {
@@ -142,40 +158,49 @@ class ItinerarySimplifiedModel {
   }
 
   void insertItineraryInterpreterOrGuideInput(
-      FormGroup formGroup,
-      ItineraryInterpreterOrGuideInputResponse? data) {
-      formGroup.control('Explanation_of_various_tests').value = data?.interpreterOrGuide;
-      formGroup.control('date').value = data?.date;
-      formGroup.control('time').value = data?.time;
-      formGroup.control('meeting_place').value = data?.meetingPlace;
+      FormGroup formGroup, ItineraryInterpreterOrGuideInputResponse? data) {
+    formGroup.control('Explanation_of_various_tests').value =
+        data?.interpreterOrGuide;
+    formGroup.control('date').value = data?.date;
+    formGroup.control('time').value = data?.time;
+    formGroup.control('meeting_place').value = data?.meetingPlace;
   }
 
-  ValueNotifier<AsyncData<ItineraryInterpreterOrGuideInputResponse>> submititineraryInterpreterOrGuideInputData = ValueNotifier(const AsyncData());
-  Future<void> submitItineraryInterpreterOrGuideInput(FormGroup formGroup) async {
-    try{
-      submititineraryInterpreterOrGuideInputData.value = const AsyncData(loading: true);
-      final response = await processChartRepository.postItineraryInterpretorOrGuideInput(ItineraryInterpreterOrGuideInputRequest.fromJson(
+  ValueNotifier<AsyncData<ItineraryInterpreterOrGuideInputResponse>>
+      submititineraryInterpreterOrGuideInputData =
+      ValueNotifier(const AsyncData());
+  Future<void> submitItineraryInterpreterOrGuideInput(
+      FormGroup formGroup) async {
+    try {
+      submititineraryInterpreterOrGuideInputData.value =
+          const AsyncData(loading: true);
+      final response =
+          await processChartRepository.postItineraryInterpretorOrGuideInput(
+              ItineraryInterpreterOrGuideInputRequest.fromJson(
         formGroup.control('interpreter_or_guide_input').value,
       ));
-      submititineraryInterpreterOrGuideInputData.value = AsyncData(data: response);
+      submititineraryInterpreterOrGuideInputData.value =
+          AsyncData(data: response);
       itineraryInterpreterOrGuideInputData.value = AsyncData(data: response);
-    }catch(e){
+    } catch (e) {
       submititineraryInterpreterOrGuideInputData.value = AsyncData(error: e);
     }
   }
 
-  ValueNotifier<AsyncData<ItineraryTransferInputResponse>> itineraryTransferData = ValueNotifier(const AsyncData());
+  ValueNotifier<AsyncData<ItineraryTransferInputResponse>>
+      itineraryTransferData = ValueNotifier(const AsyncData());
   Future<void> fetchItineraryTransferInpu(FormGroup formGroup) async {
-    try{
+    try {
       itineraryTransferData.value = const AsyncData(loading: true);
       final response = await processChartRepository.getItineraryTransferInput();
       insertItineraryTransferInput(formGroup, response);
-
-    }catch(e){
+    } catch (e) {
       itineraryTransferData.value = AsyncData(error: e);
     }
   }
-  void insertItineraryTransferInput(FormGroup formGroup, ItineraryTransferInputResponse? data) {
+
+  void insertItineraryTransferInput(
+      FormGroup formGroup, ItineraryTransferInputResponse? data) {
     formGroup.control('Transfer').value = data?.transfer;
     formGroup.control('date').value = data?.date;
     formGroup.control('time').value = data?.time;
@@ -183,17 +208,18 @@ class ItinerarySimplifiedModel {
     formGroup.control('Driver_in_charge').value = data?.driverInCharge;
   }
 
-  ValueNotifier<AsyncData<ItineraryTransferInputResponse>> submititineraryTransferData = ValueNotifier(const AsyncData());
+  ValueNotifier<AsyncData<ItineraryTransferInputResponse>>
+      submititineraryTransferData = ValueNotifier(const AsyncData());
   Future<void> submitItineraryTransferInput(FormGroup formGroup) async {
-    try{
+    try {
       submititineraryData.value = const AsyncData(loading: true);
-      final response = await processChartRepository.postItineraryTransferInput(ItineraryTransferInputRequest.fromJson(
+      final response = await processChartRepository
+          .postItineraryTransferInput(ItineraryTransferInputRequest.fromJson(
         formGroup.control('Transfer_input').value,
       ));
       submititineraryTransferData.value = AsyncData(data: response);
       itineraryTransferData.value = AsyncData(data: response);
-
-    }catch(e){
+    } catch (e) {
       submititineraryTransferData.value = AsyncData(error: e);
     }
   }
