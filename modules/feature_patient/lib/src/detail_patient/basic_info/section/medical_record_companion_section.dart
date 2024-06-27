@@ -582,12 +582,20 @@ class _MedicalRecordCompanionSectionState
                                               '携帯番号',
                                             ),
                                           ),
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter.allow(
+                                                RegExp(r'[0-9]')),
+                                          ],
                                         ),
                                       ),
                                       Expanded(
                                         child: ReactiveTextField(
                                           formControlName: 'email',
                                           keyboardType: TextInputType.number,
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter.allow(
+                                                RegExp(r'[0-9]')),
+                                          ],
                                           decoration: InputDecoration(
                                             label: Text(
                                               'Email',
@@ -944,7 +952,11 @@ class _MedicalRecordCompanionSectionState
                       ), // 男性
                       'isFemale': FormControl<bool>(), // 女
                       'mobileNumber': FormControl<String?>(),
-                      'email': FormControl<String?>(),
+                      'email': FormControl<String?>(
+                        validators: [
+                          Validators.email,
+                        ],
+                      ),
                       'chatToolLink': FormArray([
                         FormGroup({
                           'chatToolLink': FormControl<String>(),

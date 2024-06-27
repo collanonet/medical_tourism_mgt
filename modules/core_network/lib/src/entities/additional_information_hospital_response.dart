@@ -8,7 +8,7 @@ class AdditionalInformationSectionResponse {
   String id;
   String hospital;
   String? outsourcingContract;
-  List<String>? contract;
+  List<String?>? contract;
   String? msCorporation;
   String? referralFee;
   String? treatmentCostPointCalculationPerPoint;

@@ -26,16 +26,19 @@ class AgentBasicInformationModel {
         agent.value = const AsyncData(loading: true);
         var response = await authRepository.getAgent(id);
         await getAgentManagers(response.id, formGroup);
+        await insertAgentDataToForm(response, formGroup);
         agent.value = AsyncData(data: response);
-        insertAgentDataToForm(response, formGroup);
       } catch (error) {
         logger.e(error);
-        agent.value = agent.value.copyWith(error: error);
+        agent.value = AsyncData(error: error);
       }
     }
   }
 
-  void insertAgentDataToForm(AgentResponse response, FormGroup formGroup) {
+  Future<void> insertAgentDataToForm(
+    AgentResponse response,
+    FormGroup formGroup,
+  ) async {
     FormGroup basicInformationAgentForm =
         formGroup.control('basicInformationAgent') as FormGroup;
 
@@ -83,9 +86,11 @@ class AgentBasicInformationModel {
         response.pastCasesNumber;
   }
 
+  ValueNotifier<AsyncData<bool>> submit = ValueNotifier(const AsyncData());
+
   void createOrUpdateAgent(FormGroup formGroup) async {
     try {
-      submitAgent.value = const AsyncData(loading: true);
+      submit.value = const AsyncData(loading: true);
 
       List<AgentReferralCommissionRequest> referralCommissions = [];
 
@@ -131,14 +136,14 @@ class AgentBasicInformationModel {
         submitAgent.value = AsyncData(data: response);
       } else {
         var response = await authRepository.postAgent(agentRequest);
-        if (submitAgent.value.hasData) {
-          createOrUpdateAgentManager(formGroup);
-        }
         submitAgent.value = AsyncData(data: response);
       }
+
+      await createOrUpdateAgentManager(formGroup);
+      submit.value = const AsyncData(data: true);
     } catch (error) {
       logger.e(error);
-      submitAgent.value = AsyncData(error: error);
+      submit.value = AsyncData(error: error);
     }
   }
 
@@ -150,8 +155,8 @@ class AgentBasicInformationModel {
       agentManager.value = const AsyncData(loading: true);
       var response =
           await authRepository.getAgentManagers(agentRecord: agentRecord);
-      agentManager.value = AsyncData(data: response);
       insertAgentManagerDataToForm(response, formGroup);
+      agentManager.value = AsyncData(data: response);
     } catch (error) {
       agentManager.value = AsyncData(error: error);
     }
@@ -201,7 +206,10 @@ class AgentBasicInformationModel {
                 value: element.fullNameJapaneseKanjiChineseOnly),
             'fullNameKana': FormControl<String>(value: element.fullNameKana),
             'phoneNumber': FormControl<String>(value: element.phoneNumber),
-            'email': FormControl<String>(value: element.email),
+            'email': FormControl<String>(value: element.email,
+              validators: [
+
+              Validators.email,],),
             'contactMethods': contactMethods,
           }),
         );
@@ -222,7 +230,9 @@ class AgentBasicInformationModel {
             validators: [Validators.required],
           ),
           'email': FormControl<String>(
-            validators: [Validators.required],
+            validators: [Validators.required,
+
+                Validators.email,],
           ),
           'contactMethods': FormArray([
             FormGroup({
@@ -236,13 +246,11 @@ class AgentBasicInformationModel {
     }
   }
 
-  void createOrUpdateAgentManager(FormGroup formGroup) async {
+  Future<void> createOrUpdateAgentManager(FormGroup formGroup) async {
     try {
       agentManager.value = const AsyncData(loading: true);
 
       await formGroup.control('manager').value.forEach((element) async {
-        List<AgentManagerRequest> manager = [];
-
         List<AgentManagerContactRequest> contactMethods = [];
         element['contactMethods'].forEach((e) {
           contactMethods.add(AgentManagerContactRequest(
@@ -252,7 +260,7 @@ class AgentBasicInformationModel {
           ));
         });
 
-        manager.add(AgentManagerRequest(
+        AgentManagerRequest manager = AgentManagerRequest(
           nameCardDragDrop: element['nameCardDragDrop'],
           departmentName: element['departmentName'],
           fullNameRomanji: element['fullNameRomanji'],
@@ -265,16 +273,16 @@ class AgentBasicInformationModel {
           email: element['email'],
           contactMethods: contactMethods,
           agentRecord: agent.value.requireData.id,
-        ));
+        );
 
         if (element['_id'] != null) {
-          await authRepository.putAgentManager(element['_id'], manager.first);
+          await authRepository.putAgentManager(element['_id'], manager);
         } else {
-          await authRepository.postAgentManager(manager.first);
+          await authRepository.postAgentManager(manager);
         }
       });
 
-      agentManager.value = agentManager.value.copyWith(loading: false);
+      agentManager.value = const AsyncData(data: []);
     } catch (error) {
       logger.e(error);
       agentManager.value = AsyncData(error: error);

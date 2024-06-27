@@ -128,8 +128,10 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                                     '携帯番号',
                                   ),
                                 ),
+
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly,
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]')),
                                 ],
                               ),
                             ),

@@ -37,6 +37,7 @@ class _SupportLanguageSectionState extends State<SupportLanguageSection> {
                   ),
                   RowSeparated(
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       separatorBuilder: (context, index) => SizedBox(
                             width: context.appTheme.spacing.formSpacing,
                           ),
@@ -48,13 +49,14 @@ class _SupportLanguageSectionState extends State<SupportLanguageSection> {
                                       context.appTheme.spacing.marginExtraSmall,
                                 ),
                             children: ['', '外国人スタッフ', '医療通訳対応']
-                                .map((text) => SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.075,
-                                      child: Text(
-                                        text,
-                                        style: context.textTheme.bodyMedium,
+                                .map((text) => IntrinsicWidth(
+                                      stepWidth: 150,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(16.0),
+                                        child: Text(
+                                          text,
+                                          style: context.textTheme.bodyMedium,
+                                        ),
                                       ),
                                     ))
                                 .toList()),
@@ -63,6 +65,8 @@ class _SupportLanguageSectionState extends State<SupportLanguageSection> {
                             formArrayName: 'supportLanguageSection',
                             builder: (context, formArray, child) {
                               return RowSeparated(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 separatorBuilder: (context, index) => SizedBox(
                                   width: context.appTheme.spacing.formSpacing,
                                 ),
@@ -76,10 +80,7 @@ class _SupportLanguageSectionState extends State<SupportLanguageSection> {
                                           )),
                                       children: <Widget>[
                                         IntrinsicWidth(
-                                          stepWidth: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.1,
+                                          stepWidth: 150,
                                           child: ReactiveTextField<String>(
                                             formControl: (fg as FormGroup)
                                                     .control('supportLanguage')
@@ -87,10 +88,7 @@ class _SupportLanguageSectionState extends State<SupportLanguageSection> {
                                           ),
                                         ),
                                         IntrinsicWidth(
-                                          stepWidth: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.1,
+                                          stepWidth: 150,
                                           child: ReactiveDropdownField(
                                             formControl:
                                                 (fg).control('foreignStaff')
@@ -109,10 +107,7 @@ class _SupportLanguageSectionState extends State<SupportLanguageSection> {
                                           ),
                                         ),
                                         IntrinsicWidth(
-                                          stepWidth: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.1,
+                                          stepWidth: 150,
                                           child: ReactiveDropdownField(
                                             formControl: (fg).control(
                                                     'medicalInterpretationSupport')

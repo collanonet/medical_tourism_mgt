@@ -15,7 +15,6 @@ class HospitalFilter extends StatefulWidget {
 }
 
 class _HospitalFilterState extends State<HospitalFilter> {
-  bool _check = false;
   @override
   Widget build(BuildContext context) {
     return Consumer<HospitalModel>(
@@ -95,79 +94,66 @@ class _HospitalFilterState extends State<HospitalFilter> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Checkbox(
+                        IntrinsicWidth(
+                          child: ReactiveCheckboxListTile(
+                            formControlName: 'hospital_type1',
                             activeColor: Theme.of(context).primaryColor,
                             checkColor: Colors.white,
+                            controlAffinity: ListTileControlAffinity.leading,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
                               side: BorderSide(
                                 color: Colors.grey,
                               ),
                             ),
-                            value: _check,
-                            onChanged: (value) {
-                              setState(() {
-                                _check = value!;
-                              });
-                            }),
-                        Text('大学病院'),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
+                            title: Text('大学病院'),
+                          ),
                         ),
-                        Checkbox(
+                        IntrinsicWidth(
+                          child: ReactiveCheckboxListTile(
+                            formControlName: 'hospital_type2',
                             activeColor: Theme.of(context).primaryColor,
                             checkColor: Colors.white,
+                            controlAffinity: ListTileControlAffinity.leading,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
                               side: BorderSide(
                                 color: Colors.grey,
                               ),
                             ),
-                            value: _check,
-                            onChanged: (value) {
-                              setState(() {
-                                _check = value!;
-                              });
-                            }),
-                        Text('国公立病院'),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
+                            title: Text('国公立病院'),
+                          ),
                         ),
-                        Checkbox(
+                        IntrinsicWidth(
+                          child: ReactiveCheckboxListTile(
+                            formControlName: 'hospital_type3',
                             activeColor: Theme.of(context).primaryColor,
                             checkColor: Colors.white,
+                            controlAffinity: ListTileControlAffinity.leading,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
                               side: BorderSide(
                                 color: Colors.grey,
                               ),
                             ),
-                            value: _check,
-                            onChanged: (value) {
-                              setState(() {
-                                _check = value!;
-                              });
-                            }),
-                        Text('私立病院'),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
+                            title: Text('私立病院'),
+                          ),
                         ),
-                        Checkbox(
+                        IntrinsicWidth(
+                          child: ReactiveCheckboxListTile(
+                            formControlName: 'hospital_type4',
                             activeColor: Theme.of(context).primaryColor,
                             checkColor: Colors.white,
+                            controlAffinity: ListTileControlAffinity.leading,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
                               side: BorderSide(
                                 color: Colors.grey,
                               ),
                             ),
-                            value: _check,
-                            onChanged: (value) {
-                              setState(() {
-                                _check = value!;
-                              });
-                            }),
-                        Text('クリニック'),
+                            title: Text('クリニック'),
+                          ),
+                        ),
                         Spacer(),
                         ElevatedButton(onPressed: () {}, child: Text('検索')),
                       ],

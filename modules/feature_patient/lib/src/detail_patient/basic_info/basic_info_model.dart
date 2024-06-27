@@ -1072,6 +1072,9 @@ class BasicInformationModel {
               ),
               'email': FormControl<String?>(
                 value: element.email,
+                validators: [
+                  Validators.email,
+                ],
               ),
               'chatToolLink': chatToolLink,
               'passportNumber': FormControl<String?>(

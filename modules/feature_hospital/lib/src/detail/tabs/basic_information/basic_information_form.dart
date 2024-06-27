@@ -93,7 +93,10 @@ FormGroup basicInformationForm() {
         'nameKanji': FormControl<String>(),
         'nameKana': FormControl<String>(),
         'telephoneNumber': FormControl<String>(),
-        'email': FormControl<String>(),
+        'email': FormControl<String>(
+          validators: [
+            Validators.email,
+          ],),
         'faxNumber': FormControl<String>(),
       }),
     ]),
@@ -129,7 +132,10 @@ FormGroup basicInformationForm() {
         ]),
         'telephoneNumber': FormControl<String>(),
         'faxNumber': FormControl<String>(),
-        'email': FormControl<String>(),
+        'email': FormControl<String>(
+          validators: [
+            Validators.email,
+          ],),
         'remark2': FormControl<String>(),
       })
     ]),

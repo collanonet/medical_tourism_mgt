@@ -45,7 +45,10 @@ FormGroup formBasicInformation() {
           validators: [Validators.required],
         ),
         'email': FormControl<String>(
-          validators: [Validators.required],
+          validators: [
+            Validators.required,
+            Validators.email,
+          ],
         ),
         'contactMethods': FormArray([
           FormGroup({

@@ -38,6 +38,9 @@ class _PaymentOptionSectionState extends State<PaymentOptionSection> {
                       style: context.textTheme.bodyLarge,
                     ),
                     RowSeparated(
+                      crossAxisAlignment:
+                      CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       separatorBuilder: (context, index) => SizedBox(
                         width: context.appTheme.spacing.formSpacing,
                       ),
@@ -85,6 +88,9 @@ class _PaymentOptionSectionState extends State<PaymentOptionSection> {
                               style: context.textTheme.bodyMedium,
                             ),
                             RowSeparated(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 separatorBuilder: ((context, index) => SizedBox(
                                       width: context
                                           .appTheme.spacing.marginExtraSmall,
@@ -125,6 +131,9 @@ class _PaymentOptionSectionState extends State<PaymentOptionSection> {
                               style: context.textTheme.bodyMedium,
                             ),
                             RowSeparated(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 separatorBuilder: ((context, index) => SizedBox(
                                       width: context
                                           .appTheme.spacing.marginExtraSmall,
@@ -158,6 +167,9 @@ class _PaymentOptionSectionState extends State<PaymentOptionSection> {
                               style: context.textTheme.bodyMedium,
                             ),
                             RowSeparated(
+                                crossAxisAlignment:
+                                CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 separatorBuilder: ((context, index) => SizedBox(
                                       width: context
                                           .appTheme.spacing.marginExtraSmall,
@@ -207,6 +219,9 @@ class _PaymentOptionSectionState extends State<PaymentOptionSection> {
                             title: const Text('振込'),
                           )),
                           RowSeparated(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               separatorBuilder: (context, index) => SizedBox(
                                     width: 3 *
                                         context
@@ -225,6 +240,9 @@ class _PaymentOptionSectionState extends State<PaymentOptionSection> {
                                   title: const Text('電子決済'),
                                 )),
                                 RowSeparated(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     separatorBuilder: (context, index) =>
                                         SizedBox(
                                           width: context.appTheme.spacing
@@ -272,6 +290,9 @@ class _PaymentOptionSectionState extends State<PaymentOptionSection> {
                                     ]),
                               ]),
                           RowSeparated(
+                              crossAxisAlignment:
+                              CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               separatorBuilder: (context, index) => SizedBox(
                                     width: 3 *
                                         context
@@ -290,6 +311,9 @@ class _PaymentOptionSectionState extends State<PaymentOptionSection> {
                                   title: const Text('クレジットカード'),
                                 )),
                                 RowSeparated(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     separatorBuilder: (context, index) =>
                                         SizedBox(
                                           width: context.appTheme.spacing
@@ -374,7 +398,7 @@ class _PaymentOptionSectionState extends State<PaymentOptionSection> {
                           )),
                         ]),
                     IntrinsicWidth(
-                      stepWidth: MediaQuery.of(context).size.width * 0.4,
+                      stepWidth: 300,
                       child: ReactiveTextField(
                         formControlName: 'remark',
                       ),

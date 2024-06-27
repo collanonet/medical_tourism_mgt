@@ -68,6 +68,9 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                       child: Column(
                                     children: [
                                       RowSeparated(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         separatorBuilder:
                                             (BuildContext context, int index) =>
                                                 SizedBox(
@@ -75,7 +78,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                               .appTheme.spacing.formSpacing,
                                         ),
                                         children: [
-                                          Expanded(
+                                          IntrinsicWidth(
+                                            stepWidth: 300,
                                             child: ReactiveDatePicker<DateTime>(
                                                 formControlName: 'dateOfUpdate',
                                                 firstDate: DateTime(1900),
@@ -114,12 +118,6 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                                   );
                                                 }),
                                           ),
-                                          const Expanded(
-                                            child: SizedBox(),
-                                          ),
-                                          const Expanded(
-                                            child: SizedBox(),
-                                          ),
                                         ],
                                       ),
                                       SizedBox(
@@ -127,6 +125,9 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                             .appTheme.spacing.marginMedium,
                                       ),
                                       RowSeparated(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         separatorBuilder:
                                             (BuildContext context, int index) =>
                                                 SizedBox(
@@ -134,7 +135,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                               .appTheme.spacing.formSpacing,
                                         ),
                                         children: [
-                                          Expanded(
+                                          IntrinsicWidth(
+                                            stepWidth: 300,
                                             child: ReactiveTextField(
                                               formControlName: 'departmentName',
                                               decoration: const InputDecoration(
@@ -146,7 +148,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                               ),
                                             ),
                                           ),
-                                          Expanded(
+                                          IntrinsicWidth(
+                                            stepWidth: 300,
                                             child: ReactiveTextField(
                                               formControlName: 'nameKanji',
                                               decoration: const InputDecoration(
@@ -158,7 +161,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                               ),
                                             ),
                                           ),
-                                          Expanded(
+                                          IntrinsicWidth(
+                                            stepWidth: 300,
                                             child: ReactiveTextField(
                                               formControlName: 'nameKana',
                                               decoration: const InputDecoration(
@@ -177,6 +181,9 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                             .appTheme.spacing.marginMedium,
                                       ),
                                       RowSeparated(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.start,
                                         separatorBuilder:
                                             (BuildContext context, int index) =>
                                                 SizedBox(
@@ -184,7 +191,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                               .appTheme.spacing.formSpacing,
                                         ),
                                         children: [
-                                          Expanded(
+                                          IntrinsicWidth(
+                                            stepWidth: 300,
                                             child: ReactiveTextField(
                                               formControlName:
                                                   'telephoneNumber',
@@ -197,7 +205,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                               ),
                                             ),
                                           ),
-                                          Expanded(
+                                          IntrinsicWidth(
+                                            stepWidth: 300,
                                             child: ReactiveTextField(
                                               formControlName: 'faxNumber',
                                               decoration: const InputDecoration(
@@ -209,7 +218,8 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                               ),
                                             ),
                                           ),
-                                          Expanded(
+                                          IntrinsicWidth(
+                                            stepWidth: 300,
                                             child: ReactiveTextField(
                                               formControlName: 'email',
                                               decoration: const InputDecoration(
@@ -223,22 +233,20 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                           ),
                                         ],
                                       ),
-                                      if (formArray.controls
+                                      Row(
+                                        children: [
+                                          if (formArray.controls
                                                   .indexOf(currentForm) !=
-                                              0 ||
-                                          currentForm
-                                                  .control('departmentName')
-                                                  .value !=
-                                              null) ...{
-                                        IconButton(
-                                          icon: const Icon(Icons.delete_forever,
-                                              color: Colors.red),
-                                          onPressed: () => formArray.removeAt(
-                                            formArray.controls
-                                                .indexOf(currentForm),
-                                          ),
-                                        ),
-                                      }
+                                              0)
+                                            IconButton(
+                                                icon: const Icon(
+                                                    Icons.delete_forever,
+                                                    color: Colors.red),
+                                                onPressed: () => formArray
+                                                    .removeAt(formArray.controls
+                                                        .indexOf(currentForm))),
+                                        ],
+                                      )
                                     ],
                                   )),
                                 ],
@@ -265,7 +273,11 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                       'nameKanji': FormControl<String>(),
                       'nameKana': FormControl<String>(),
                       'telephoneNumber': FormControl<String>(),
-                      'email': FormControl<String>(),
+                      'email': FormControl<String>(
+                        validators: [
+                          Validators.email,
+                        ],
+                      ),
                       'faxNumber': FormControl<String>(),
                     }),
                   ),

@@ -51,66 +51,60 @@ class _HowtoMakeReqestSectionState extends State<HowtoMakeReqestSection> {
                         ],
                       ),
                       RowSeparated(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         separatorBuilder: (BuildContext context, int index) {
                           return SizedBox(
                             width: context.appTheme.spacing.formSpacing,
                           );
                         },
                         children: [
-                          const Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ReactiveDropdownFormField(
-                                  formControlName: 'updater',
-                                  decoration: InputDecoration(
-                                    label: Text(
-                                      '更新者',
-                                    ),
-                                  ),
-                                  items: [
-                                    DropdownMenuItem(
-                                      value: '谷川真理子',
-                                      child: Text('谷川真理子'),
-                                    ),
-                                  ],
+                          IntrinsicWidth(
+                            stepWidth: 300,
+                            child: ReactiveDropdownFormField(
+                              formControlName: 'updater',
+                              decoration: InputDecoration(
+                                label: Text(
+                                  '更新者',
+                                ),
+                              ),
+                              items: [
+                                DropdownMenuItem(
+                                  value: '谷川真理子',
+                                  child: Text('谷川真理子'),
                                 ),
                               ],
                             ),
                           ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                ReactiveDatePicker<DateTime>(
+                          IntrinsicWidth(
+                            stepWidth: 300,
+                            child: ReactiveDatePicker<DateTime>(
+                                formControlName: 'dateOfUpdate',
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime(2100),
+                                builder: (context, picker, child) {
+                                  return ReactiveTextField<DateTime>(
                                     formControlName: 'dateOfUpdate',
-                                    firstDate: DateTime(1900),
-                                    lastDate: DateTime(2100),
-                                    builder: (context, picker, child) {
-                                      return ReactiveTextField<DateTime>(
-                                        formControlName: 'dateOfUpdate',
-                                        valueAccessor: DateTimeValueAccessor(),
-                                        decoration: InputDecoration(
-                                          label: const Text(
-                                            '更新日',
-                                          ),
-                                          fillColor: Colors.white,
-                                          filled: true,
-                                          suffixIcon: IconButton(
-                                            icon: const Icon(
-                                              CupertinoIcons.calendar,
-                                              color: Colors.grey,
-                                            ),
-                                            onPressed: picker.showPicker,
-                                          ),
+                                    valueAccessor: DateTimeValueAccessor(),
+                                    decoration: InputDecoration(
+                                      label: const Text(
+                                        '更新日',
+                                      ),
+                                      fillColor: Colors.white,
+                                      filled: true,
+                                      suffixIcon: IconButton(
+                                        icon: const Icon(
+                                          CupertinoIcons.calendar,
+                                          color: Colors.grey,
                                         ),
-                                        inputFormatters: [
-                                          formatter.dateFormatter,
-                                        ],
-                                      );
-                                    }),
-                              ],
-                            ),
+                                        onPressed: picker.showPicker,
+                                      ),
+                                    ),
+                                    inputFormatters: [
+                                      formatter.dateFormatter,
+                                    ],
+                                  );
+                                }),
                           ),
                         ],
                       ),
@@ -125,7 +119,6 @@ class _HowtoMakeReqestSectionState extends State<HowtoMakeReqestSection> {
                           ),
                           ReactiveTextField(
                             formControlName: 'updates',
-                            maxLines: 1,
                           ),
                         ],
                       ),

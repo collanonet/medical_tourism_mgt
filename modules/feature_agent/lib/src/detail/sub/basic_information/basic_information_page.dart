@@ -56,13 +56,12 @@ class BasicInformationPage extends StatelessWidget {
                           }
                         },
                         child: ValueListenableListener(
-                          valueListenable: context
-                              .read<AgentBasicInformationModel>()
-                              .submitAgent,
+                          valueListenable:
+                              context.read<AgentBasicInformationModel>().submit,
                           onListen: () {
                             var data = context
                                 .read<AgentBasicInformationModel>()
-                                .submitAgent
+                                .submit
                                 .value;
 
                             if (data.hasData) {
@@ -85,7 +84,7 @@ class BasicInformationPage extends StatelessWidget {
                           child: ValueListenableBuilder(
                               valueListenable: context
                                   .read<AgentBasicInformationModel>()
-                                  .submitAgent,
+                                  .submit,
                               builder: (context, value, child) {
                                 return ReactiveFormConsumer(
                                     builder: (context, formGroup, child) {
