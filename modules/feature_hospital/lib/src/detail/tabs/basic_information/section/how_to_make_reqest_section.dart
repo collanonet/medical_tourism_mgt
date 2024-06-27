@@ -51,8 +51,7 @@ class _HowtoMakeReqestSectionState extends State<HowtoMakeReqestSection> {
                         ],
                       ),
                       RowSeparated(
-                        crossAxisAlignment:
-                        CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         separatorBuilder: (BuildContext context, int index) {
                           return SizedBox(
@@ -120,7 +119,6 @@ class _HowtoMakeReqestSectionState extends State<HowtoMakeReqestSection> {
                           ),
                           ReactiveTextField(
                             formControlName: 'updates',
-                            maxLines: 1,
                           ),
                         ],
                       ),

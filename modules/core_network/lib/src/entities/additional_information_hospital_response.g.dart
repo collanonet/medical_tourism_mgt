@@ -13,7 +13,7 @@ AdditionalInformationSectionResponse
           hospital: json['hospital'] as String,
           outsourcingContract: json['outsourcingContract'] as String?,
           contract: (json['contract'] as List<dynamic>?)
-              ?.map((e) => e as String)
+              ?.map((e) => e as String?)
               .toList(),
           msCorporation: json['msCorporation'] as String?,
           referralFee: json['referralFee'] as String?,

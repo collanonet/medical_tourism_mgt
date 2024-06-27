@@ -329,7 +329,7 @@ class _AdditionalInformationSectionState
                             ])
                       ]),
                   RowSeparated(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.end,
                       mainAxisAlignment: MainAxisAlignment.start,
                       separatorBuilder: (context, index) => SizedBox(
                             width: context.appTheme.spacing.formSpacing,
@@ -347,7 +347,7 @@ class _AdditionalInformationSectionState
                                 style: context.textTheme.bodyMedium,
                               ),
                               RowSeparated(
-                                crossAxisAlignment: CrossAxisAlignment.start,
+                                crossAxisAlignment: CrossAxisAlignment.end,
                                 mainAxisAlignment: MainAxisAlignment.start,
                                 separatorBuilder: (context, index) => SizedBox(
                                   width: context.appTheme.spacing.formSpacing,
@@ -367,7 +367,7 @@ class _AdditionalInformationSectionState
                               ),
                             ]),
                         RowSeparated(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.end,
                           mainAxisAlignment: MainAxisAlignment.start,
                           separatorBuilder: (context, index) => SizedBox(
                             width: context.appTheme.spacing.formSpacing,

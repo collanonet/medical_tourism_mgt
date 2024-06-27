@@ -93,7 +93,7 @@ class _BasicInformationSectionState extends State<BasicInformationSection> {
                     return ReactiveFormConsumer(
                       builder: (context, form, _) {
                         return ElevatedButton(
-                            onPressed: !value.loading && form.valid
+                            onPressed: !value.loading
                                 ? () => context
                                     .read<BasicInformationModel>()
                                     .submitData(form)

@@ -266,35 +266,52 @@ class BasicInformationModel {
       additionalInformationData.value = const AsyncData(loading: true);
       final result =
           await hospitalRepository.getAdditionalInformationHospital(hospitalId);
+      await insertDataAdditionalInformation(formGroup, result);
       additionalInformationData.value = AsyncData(data: result);
-      insertDataAdditionalInformation(formGroup, result);
     } catch (e) {
-      logger.d(e);
+      logger.d("error get data additional information $e");
       additionalInformationData.value = AsyncData(error: e);
     }
   }
 
-  void insertDataAdditionalInformation(
+  Future<void> insertDataAdditionalInformation(
     FormGroup formGroup,
     AdditionalInformationSectionResponse data,
-  ) {
-    formGroup.patchValue(data.toJson());
-    FormArray contract = formGroup.control('contract') as FormArray;
-    contract.clear();
-    if (data.contract != null && data.contract!.isNotEmpty) {
-      for (var item in data.contract!) {
-        contract.add(
-          FormGroup({
-            'name': FormControl<String>(value: item),
-          }),
-        );
+  ) async {
+    try {
+      logger.d("data additional information $data");
+      logger.d(data.toJson());
+
+      formGroup.control('_id').value = data.id;
+      formGroup.control('hospital').value = data.hospital;
+      formGroup.control('outsourcingContract').value = data.outsourcingContract;
+      formGroup.control('msCorporation').value = data.msCorporation;
+      formGroup.control('referralFee').value = data.referralFee;
+      formGroup.control('treatmentCostPointCalculationPerPoint').value =
+          data.treatmentCostPointCalculationPerPoint;
+      formGroup.control('remark').value = data.remark;
+      formGroup.control('paymentSiteTighten').value = data.paymentSiteTighten;
+      formGroup.control('paymentSitePayment').value = data.paymentSitePayment;
+
+      FormArray contract = FormArray([]);
+      if (data.contract != null && data.contract!.isNotEmpty) {
+        data.contract!.map((e) {
+          if (e != null) {
+            contract.add(
+              FormGroup({
+                'name': FormControl<String>(value: e),
+              }),
+            );
+          }
+        });
       }
-    } else {
       contract.add(
         FormGroup({
           'name': FormControl<String>(),
         }),
       );
+    } catch (e) {
+      logger.d("error insert data additional information $e");
     }
   }
 
@@ -362,8 +379,7 @@ class BasicInformationModel {
   void submitData(FormGroup formGroup) async {
     try {
       submit.value = const AsyncData(loading: true);
-      await submitBasicInformation(
-          formGroup.control('basicInformation') as FormGroup);
+      await submitBasicInformation(formGroup);
 
       submit.value = const AsyncData(data: true);
     } catch (e) {
@@ -377,22 +393,21 @@ class BasicInformationModel {
       basicInformationData.value = const AsyncData(loading: true);
       logger.d(formGroup.value);
       final result = await hospitalRepository.postBasicInformationHospital(
-        BasicInformationHospitalRequest.fromJson(formGroup.value),
+        BasicInformationHospitalRequest.fromJson(
+            (formGroup.control('basicInformation') as FormGroup).value),
       );
 
       basicInformationData.value = AsyncData(data: result);
 
-      if (basicInformationData.value.hasData) {
-        await submitHowToMakeRequest(
-            formGroup.control('howToMakeRequest') as FormGroup);
-        await submitMedicalRecordBasicInfo(formGroup);
-        await submitDoctorInformation(formGroup);
-        await submitAdditionalInformation(
-            formGroup.control('additionalInformationSection') as FormGroup);
-        await submitPaymentOption(
-            formGroup.control('paymentOptionSection') as FormGroup);
-        await submitSupportLanguage(formGroup);
-      }
+      await submitHowToMakeRequest(
+          formGroup.control('howToMakeRequest') as FormGroup);
+      await submitMedicalRecordBasicInfo(formGroup);
+      await submitDoctorInformation(formGroup);
+      await submitAdditionalInformation(
+          formGroup.control('additionalInformationSection') as FormGroup);
+      await submitPaymentOption(
+          formGroup.control('paymentOptionSection') as FormGroup);
+      await submitSupportLanguage(formGroup);
     } catch (e) {
       logger.d(e);
       basicInformationData.value = AsyncData(error: e);
@@ -542,7 +557,9 @@ class BasicInformationModel {
       List<String> contract = [];
 
       form.control('contract').value.forEach((element) {
-        contract.add(element['name']);
+        if (element['name'] != null) {
+          contract.add(element['name']);
+        }
       });
 
       AdditionalInformationSectionRequest request =
@@ -559,12 +576,13 @@ class BasicInformationModel {
         paymentSiteTighten: form.control('paymentSiteTighten').value,
         paymentSitePayment: form.control('paymentSitePayment').value,
       );
+      logger.e(request.toJson());
       var result =
           await hospitalRepository.postAdditionalInformationHospital(request);
 
       additionalInformationData.value = AsyncData(data: result);
     } catch (e) {
-      logger.d(e);
+      logger.d("additional error: $e");
       additionalInformationData.value = AsyncData(error: e);
     }
   }
