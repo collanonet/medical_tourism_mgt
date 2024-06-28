@@ -114,4 +114,45 @@ class ProcessChartRemoteProvider {
   Future<DetailRelatedPartiesEmergencyContactResponse> postRelatedPartiesEmergencyContact(DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest) async{
     return await apiService.postRelatedPartiesEmergencyContact(detailRelatedPartiesEmergencyContactRequest);
   }
+
+  Future<DetailItinerarySimpleTitle> getDetailItinerarySimpleTitle() async{
+    return await apiService.getDetailItinerarySimpleTitle();
+  }
+
+  Future<DetailItinerarySimpleTitle> postDetailItinerarySimpleTitle(DetailItinerarySimpleTitleRequest detailItinerarySimpleTitleRequest) async{
+    return await apiService.postDetailItinerarySimpleTitle(detailItinerarySimpleTitleRequest);
+  }
+
+  Future<DetailItinerarySimplePriorExplanationResponse> getDetailItinerarySimplePriorExplanation() async{
+    return await apiService.getDetailItinerarySimpleExplanation();
+  }
+
+  Future<DetailItinerarySimplePriorExplanationResponse> postDetailItinerarySimpleExplanation(DetailItinerarySimplePriorExplanationRequest detailItinerarySimplePriorExplanationRequest) async{
+    return await apiService.postDetailItinerarySimpleExplanation(detailItinerarySimplePriorExplanationRequest);
+  }
+
+  Future<DetailItinerarySimpleInterpreterOrGuideResponse> getDetailItinerarySimpleInterpretorOrGuide() async{
+      return await apiService.getDetailItinerarySimpleInterpreter();
+  }
+
+  Future<DetailItinerarySimpleInterpreterOrGuideResponse> postDetailItinerarySimpleInterpretorOrGuide(DetailItinerarySimpleInterpreterOrGuideRequest detailItinerarySimpleInterpreterOrGuideRequest) async{
+    return await apiService.postDetailItinerarySimpleInterpreter(detailItinerarySimpleInterpreterOrGuideRequest);
+  }
+
+  Future<DetailItinerarySimplePickUpAndDropOffResponse> getDetailItinerarySimplePickUpAndDropOff() async{
+    return await apiService.getDetailItinerarySimplePickUp();
+  }
+
+  Future<DetailItinerarySimplePickUpAndDropOffResponse> postDetailItinerarySimplePickUp(DetailItinerarySimplePickUpAndDropOffRequest detailItinerarySimplePickUpAnd) async{
+    return await apiService.postDetailItinerarySimplePickUp(detailItinerarySimplePickUpAnd);
+  }
+
+  Future<DetailItineraryResponse> getDetailitinerary() async{
+    return await apiService.getDetailitinerary();
+  }
+
+  Future<DetailItineraryResponse> postDetailitinerary(DetailIneraryRequest detailIneraryRequest) async{
+    return await apiService.postDetailItinerary(detailIneraryRequest);
+  }
+
 }

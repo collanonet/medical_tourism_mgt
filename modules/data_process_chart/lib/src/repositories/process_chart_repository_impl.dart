@@ -105,5 +105,95 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   Future<DetailHotelSearchResponse> postDetialHotelSearch(DetailHotelSearchRequest detailHotelSearchRequest) {
     return remote.postDetialHotelSearch(detailHotelSearchRequest);
   }
+  
+  @override
+  Future<DetailItinerarySimpleInterpreterOrGuideResponse> getDetailItinerarySimpleInterpretorOrGuideInput() {
+    return remote.getDetailItinerarySimpleInterpretorOrGuide();
+  }
+  
+  @override
+  Future<DetailItinerarySimplePickUpAndDropOffResponse> getDetailItinerarySimplePickUpAndDropOff() {
+    return remote.getDetailItinerarySimplePickUpAndDropOff();
+  }
+  
+  @override
+  Future<DetailItinerarySimplePriorExplanationResponse> getDetailItinerarySimplePriorExplanation() {
+    return remote.getDetailItinerarySimplePriorExplanation();
+  }
+  
+  @override
+  Future<DetailItinerarySimpleTitle> getDetailItinerarySimpleTitle() {
+   return remote.getDetailItinerarySimpleTitle();
+  }
+  
+  @override
+  Future<DetailItinerarySimpleInterpreterOrGuideResponse> postDetailItinerarySimpleInterpretorOrGuideInput(DetailItinerarySimpleInterpreterOrGuideRequest detailItinerarySimpleInterpreterOrGuideRequest) {
+    return remote.postDetailItinerarySimpleInterpretorOrGuide(detailItinerarySimpleInterpreterOrGuideRequest);
+  }
+  
+  @override
+  Future<DetailItinerarySimplePickUpAndDropOffResponse> postDetailItinerarySimplePickUpAndDropOff(DetailItinerarySimplePickUpAndDropOffRequest detailItinerarySimplePickUpAndDropOffRequest) {
+    return remote.postDetailItinerarySimplePickUp(detailItinerarySimplePickUpAndDropOffRequest);
+  }
+  
+  @override
+  Future<DetailItinerarySimplePriorExplanationResponse> postDetailItinerarySimplePriorExplanation(DetailItinerarySimplePriorExplanationRequest detailItinerarySimplePriorExplanationRequest) {
+    return remote.postDetailItinerarySimpleExplanation(detailItinerarySimplePriorExplanationRequest);
+  }
+  
+  @override
+  Future<DetailItinerarySimpleTitle> postDetailItinerarySimpleTitle(DetailItinerarySimpleTitleRequest detailItinerarySimpleTitleRequest) {
+    return remote.postDetailItinerarySimpleTitle(detailItinerarySimpleTitleRequest);
+  }
+  
+  @override
+  Future<DetailRelatedPartiesResponse> getDetailRelatedParties() {
+    return remote.getRelatedPartiesGuideOrInterpreter();
+  }
+  
+  @override
+  Future<DetailRelatedPartiesBusCompanyResponse> getDetailRelatedPartiesBusCompany() {
+    return remote.getRelatedPartiesBusCompany();
+  }
+  
+  @override
+  Future<DetailRelatedPartiesDriverResponse> getDetailRelatedPartiesDriver() {
+   return remote.getRelatedPartiesDriver();
+  }
+  
+  @override
+  Future<DetailRelatedPartiesEmergencyContactResponse> getDetailRelatedPartiesEmergencyContact() {
+    return remote.getRelatedPartiesEmergencyContact();
+  }
+  
+  @override
+  Future<DetailRelatedPartiesResponse> postDetailRelatedParties(DetailRelatedPartiesRequest detailRelatedPartiesRequest) {
+    return remote.postRelatedPartiesGuideOrInterpreter(detailRelatedPartiesRequest);
+  }
+  
+  @override
+  Future<DetailRelatedPartiesBusCompanyResponse> postDetailRelatedPartiesBusCompany(DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest) {
+    return remote.postRelatedPartiesBusCompany(detailRelatedPartiesBusCompanyRequest);
+  }
+  
+  @override
+  Future<DetailRelatedPartiesDriverResponse> postDetailRelatedPartiesDriver(DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest) {
+    return remote.postRelatedPartiesDriver(detailRelatedPartiesDriverRequest);
+  }
+  
+  @override
+  Future<DetailRelatedPartiesEmergencyContactResponse> postDetailRelatedPartiesEmergencyContact(DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest) {
+    return remote.postRelatedPartiesEmergencyContact(detailRelatedPartiesEmergencyContactRequest);
+  }
+  
+  @override
+  Future<DetailItineraryResponse> getDetailItinerary() {
+    return remote.getDetailitinerary();
+  }
+  
+  @override
+  Future<DetailItineraryResponse> postDetailItinerary(DetailIneraryRequest detailIneraryRequest) {
+    return remote.postDetailitinerary(detailIneraryRequest);
+  }
 
 }

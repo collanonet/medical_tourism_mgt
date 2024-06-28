@@ -15,7 +15,8 @@ DetailItineraryResponse _$DetailItineraryResponseFromJson(
           .toList(),
       tourName: json['tourName'] as String?,
       numberOfPeople: json['numberOfPeople'] as String?,
-      groupType: json['groupType'] as String?,
+      type: json['type'] as String?,
+      group: json['group'] as String?,
       days: (json['days'] as List<dynamic>?)
           ?.map((e) => Day.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -28,6 +29,7 @@ Map<String, dynamic> _$DetailItineraryResponseToJson(
       'patientNames': instance.patientNames,
       'tourName': instance.tourName,
       'numberOfPeople': instance.numberOfPeople,
-      'groupType': instance.groupType,
+      'group': instance.group,
+      'type': instance.type,
       'days': instance.days,
     };

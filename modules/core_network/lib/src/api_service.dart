@@ -838,7 +838,7 @@ abstract class ApiService {
 
   @POST(Endpoints.DETAIL_ITINERARY_SIMPLE_VERSION_INTERPRETER)
   Future<DetailItinerarySimpleInterpreterOrGuideResponse> postDetailItinerarySimpleInterpreter(
-    @Body() DetailItinerarySimpleInterpreterOrGuideResponse detailItinerarySimpleInterpreterOrGuideResponse,
+    @Body() DetailItinerarySimpleInterpreterOrGuideRequest detailItinerarySimpleInterpreterOrGuideRequest,
   );
 
   @GET(Endpoints.DETAIL_ITINERARY_SIMPLE_VERAION_PICK_UP)

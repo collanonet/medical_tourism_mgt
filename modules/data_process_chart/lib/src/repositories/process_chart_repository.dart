@@ -55,4 +55,58 @@ abstract class ProcessChartRepository {
     Future<DetailHotelSearchResponse> postDetialHotelSearch(
       DetailHotelSearchRequest detailHotelSearchRequest,
     );
+
+    Future<DetailItinerarySimpleTitle> getDetailItinerarySimpleTitle();
+
+    Future<DetailItinerarySimpleTitle> postDetailItinerarySimpleTitle(
+      DetailItinerarySimpleTitleRequest detailItinerarySimpleTitleRequest,
+    );
+
+    Future<DetailItinerarySimplePriorExplanationResponse> getDetailItinerarySimplePriorExplanation();
+
+    Future<DetailItinerarySimplePriorExplanationResponse> postDetailItinerarySimplePriorExplanation(
+      DetailItinerarySimplePriorExplanationRequest detailItinerarySimplePriorExplanationRequest,
+    );
+
+    Future<DetailItinerarySimpleInterpreterOrGuideResponse> getDetailItinerarySimpleInterpretorOrGuideInput();
+
+    Future<DetailItinerarySimpleInterpreterOrGuideResponse> postDetailItinerarySimpleInterpretorOrGuideInput(
+     DetailItinerarySimpleInterpreterOrGuideRequest detailItinerarySimpleInterpreterOrGuideRequest,
+    );
+
+    Future<DetailItinerarySimplePickUpAndDropOffResponse> getDetailItinerarySimplePickUpAndDropOff();
+
+    Future<DetailItinerarySimplePickUpAndDropOffResponse> postDetailItinerarySimplePickUpAndDropOff(
+      DetailItinerarySimplePickUpAndDropOffRequest detailItinerarySimplePickUpAndDropOffRequest,
+    );
+
+    Future<DetailRelatedPartiesResponse> getDetailRelatedParties();
+
+    Future<DetailRelatedPartiesResponse> postDetailRelatedParties(
+      DetailRelatedPartiesRequest detailRelatedPartiesRequest,
+    );
+
+    Future<DetailRelatedPartiesBusCompanyResponse> getDetailRelatedPartiesBusCompany();
+
+    Future<DetailRelatedPartiesBusCompanyResponse> postDetailRelatedPartiesBusCompany(
+      DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest,
+    );
+
+    Future<DetailRelatedPartiesDriverResponse> getDetailRelatedPartiesDriver();
+
+    Future<DetailRelatedPartiesDriverResponse> postDetailRelatedPartiesDriver(
+      DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest,
+    );
+
+    Future<DetailRelatedPartiesEmergencyContactResponse> getDetailRelatedPartiesEmergencyContact();
+
+    Future<DetailRelatedPartiesEmergencyContactResponse> postDetailRelatedPartiesEmergencyContact(
+      DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest,
+    );
+
+    Future<DetailItineraryResponse> getDetailItinerary();
+
+    Future<DetailItineraryResponse> postDetailItinerary(
+      DetailIneraryRequest detailIneraryRequest,
+    );
 }

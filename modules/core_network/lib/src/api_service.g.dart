@@ -4388,13 +4388,13 @@ class _ApiService implements ApiService {
   @override
   Future<DetailItinerarySimpleInterpreterOrGuideResponse>
       postDetailItinerarySimpleInterpreter(
-          DetailItinerarySimpleInterpreterOrGuideResponse
-              detailItinerarySimpleInterpreterOrGuideResponse) async {
+          DetailItinerarySimpleInterpreterOrGuideRequest
+              detailItinerarySimpleInterpreterOrGuideRequest) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(detailItinerarySimpleInterpreterOrGuideResponse.toJson());
+    _data.addAll(detailItinerarySimpleInterpreterOrGuideRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<DetailItinerarySimpleInterpreterOrGuideResponse>(Options(
       method: 'POST',

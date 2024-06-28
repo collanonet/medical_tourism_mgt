@@ -10,7 +10,8 @@ class DetailItineraryResponse {
   List<Patient>? patientNames;
   String? tourName;
   String? numberOfPeople;
-  String? groupType;
+  String? group;
+  String? type;
   List<Day>? days;
 
   DetailItineraryResponse({
@@ -18,7 +19,8 @@ class DetailItineraryResponse {
      this.patientNames,
      this.tourName,
      this.numberOfPeople,
-     this.groupType,
+     this.type,
+     this.group,
      this.days,
   });
 
