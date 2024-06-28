@@ -100,28 +100,32 @@ class HospitalScreen extends StatelessWidget {
                                                                 .healthCheckup ==
                                                             true
                                                         ? '健診'
-                                                        : value
-                                                                    .requireData[
-                                                                        index]
-                                                                    .treatment ==
-                                                                true
-                                                            ? '治療'
-                                                            : value
-                                                                        .requireData[
-                                                                            index]
-                                                                        .heavyIonBeam ==
-                                                                    true
-                                                                ? '重粒子線'
-                                                                : value.requireData[index].protonBeam ==
-                                                                        true
-                                                                    ? '陽子線'
-                                                                    : value.requireData[index].regenerativeMedicine ==
-                                                                            true
-                                                                        ? '再生医療'
-                                                                        : value.requireData[index].beauty ==
-                                                                                true
-                                                                            ? '美容'
-                                                                            : null
+                                                        : null,
+                                                    value.requireData[index]
+                                                                .treatment ==
+                                                            true
+                                                        ? '治療'
+                                                        : null,
+                                                    value.requireData[index]
+                                                                .heavyIonBeam ==
+                                                            true
+                                                        ? '重粒子線'
+                                                        : null,
+                                                    value.requireData[index]
+                                                                .protonBeam ==
+                                                            true
+                                                        ? '陽子線'
+                                                        : null,
+                                                    value.requireData[index]
+                                                                .regenerativeMedicine ==
+                                                            true
+                                                        ? '再生医療'
+                                                        : null,
+                                                    value.requireData[index]
+                                                                .beauty ==
+                                                            true
+                                                        ? '美容'
+                                                        : null,
                                                   ].map((e) {
                                                     return e == null
                                                         ? const SizedBox()
