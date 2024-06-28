@@ -134,13 +134,16 @@ class AgentBasicInformationModel {
         var response = await authRepository.putAgent(
             formGroup.control('basicInformationAgent._id').value, agentRequest);
         submitAgent.value = AsyncData(data: response);
+        agent.value = AsyncData(data: response);
       } else {
         var response = await authRepository.postAgent(agentRequest);
         submitAgent.value = AsyncData(data: response);
+        agent.value = AsyncData(data: response);
       }
 
       await createOrUpdateAgentManager(formGroup);
       submit.value = const AsyncData(data: true);
+      init(id: agent.value.requireData.id, formGroup: formGroup);
     } catch (error) {
       logger.e(error);
       submit.value = AsyncData(error: error);
@@ -206,10 +209,12 @@ class AgentBasicInformationModel {
                 value: element.fullNameJapaneseKanjiChineseOnly),
             'fullNameKana': FormControl<String>(value: element.fullNameKana),
             'phoneNumber': FormControl<String>(value: element.phoneNumber),
-            'email': FormControl<String>(value: element.email,
+            'email': FormControl<String>(
+              value: element.email,
               validators: [
-
-              Validators.email,],),
+                Validators.email,
+              ],
+            ),
             'contactMethods': contactMethods,
           }),
         );
@@ -230,9 +235,10 @@ class AgentBasicInformationModel {
             validators: [Validators.required],
           ),
           'email': FormControl<String>(
-            validators: [Validators.required,
-
-                Validators.email,],
+            validators: [
+              Validators.required,
+              Validators.email,
+            ],
           ),
           'contactMethods': FormArray([
             FormGroup({

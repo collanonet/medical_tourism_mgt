@@ -88,19 +88,82 @@ class HospitalScreen extends StatelessWidget {
                                     children: [
                                       Expanded(
                                         flex: 2,
-                                        child: Row(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start, // start
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start, // center
                                           children: [
-                                            Text('--'),
+                                            Wrap(
+                                              children: [
+                                                    value.requireData[index]
+                                                                .healthCheckup ==
+                                                            true
+                                                        ? '健診'
+                                                        : value
+                                                                    .requireData[
+                                                                        index]
+                                                                    .treatment ==
+                                                                true
+                                                            ? '治療'
+                                                            : value
+                                                                        .requireData[
+                                                                            index]
+                                                                        .heavyIonBeam ==
+                                                                    true
+                                                                ? '重粒子線'
+                                                                : value.requireData[index].protonBeam ==
+                                                                        true
+                                                                    ? '陽子線'
+                                                                    : value.requireData[index].regenerativeMedicine ==
+                                                                            true
+                                                                        ? '再生医療'
+                                                                        : value.requireData[index].beauty ==
+                                                                                true
+                                                                            ? '美容'
+                                                                            : null
+                                                  ].map((e) {
+                                                    return e == null
+                                                        ? const SizedBox()
+                                                        : Container(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .all(4),
+                                                            margin:
+                                                                const EdgeInsets
+                                                                    .all(4),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              color: Colors
+                                                                  .blueGrey,
+                                                              borderRadius:
+                                                                  BorderRadius
+                                                                      .circular(
+                                                                          4),
+                                                            ),
+                                                            child: Text(
+                                                              e,
+                                                              style:
+                                                                  const TextStyle(
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ),
+                                                          );
+                                                  }).toList() ??
+                                                  [],
+                                            ),
                                           ],
                                         ),
                                       ),
                                       Expanded(
                                         flex: 2,
                                         child: Text(
-                                            '${value.requireData[index].hospitalNameChinese}'),
+                                            '${value.requireData[index].hospitalNameChinese ?? ''}'),
                                       ),
                                       Expanded(
-                                        child: Text('--'),
+                                        child: Text(
+                                            '${value.requireData[index].location ?? '--'}'),
                                       ),
                                       Expanded(
                                         child: Text('--'), // ○
