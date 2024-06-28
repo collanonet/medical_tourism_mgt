@@ -35,7 +35,7 @@ FormGroup basicInformationForm() {
       'supportedMenu': FormControl<bool>(value: false),
       'healthCheckup': FormControl<bool>(value: false),
       'treatment': FormControl<bool>(value: false),
-      'heavy-ionBeam': FormControl<bool>(value: false),
+      'heavyIonBeam': FormControl<bool>(value: false),
       'protonBeam': FormControl<bool>(value: false),
       'regenerativeMedicine': FormControl<bool>(value: false),
       'beauty': FormControl<bool>(value: false),

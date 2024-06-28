@@ -325,12 +325,12 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                               borderRadius:
                                                   BorderRadius.circular(5)),
                                           contentPadding: EdgeInsets.zero,
-                                          formControlName: 'heavy-ionBeam',
+                                          formControlName: 'heavyIonBeam',
                                           controlAffinity:
                                               ListTileControlAffinity.leading,
                                           onChanged: (value) {
                                             formGroup
-                                                .control('heavy-ionBeam')
+                                                .control('heavyIonBeam')
                                                 .value = value.value == true;
                                           },
                                           title: Text('重粒子線',
