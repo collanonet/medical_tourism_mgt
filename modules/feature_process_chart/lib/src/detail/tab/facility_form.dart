@@ -13,6 +13,11 @@ FormGroup facilityForm() => FormGroup(
             'telephone_number': FormControl<String>(value: ''), // 電話番号
             'remarks': FormControl<String>(value: ''), // 備考
             'Foreign_language_staff': FormControl<String>(value: ''), // 外国語スタッフ
+            'japanese': FormControl<bool>(), //
+            'chinese': FormControl<bool>(), //
+            'vietnamese': FormControl<bool>(), //
+            'english': FormControl<bool>(), //
+            'others': FormControl<bool>(), //
           }),
         ]),
         'drop_in_facility': FormGroup({

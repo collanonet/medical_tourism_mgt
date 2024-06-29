@@ -13,15 +13,17 @@ class ItinerarySimpleVersionPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   return Provider(
-      create: (context) => GetIt.I<ItinerarySimpleVersionModel>(),
-      child: ReactiveFormConfig(
-        validationMessages: validationMessagesFilterPatient(context),
-        child: ReactiveFormBuilder(
-            form: () => inerarySimpleVersionForm(),
-            builder: (context, formGroup, child) {
-              return const ItinerarySimpleVersionScreen();
-            }),
+    return ReactiveFormConfig(
+      validationMessages: validationMessagesFilterPatient(context),
+      child: ReactiveFormBuilder(
+        form: () => inerarySimpleVersionForm(),
+        builder: (context, formGroup, child) {
+          return Provider(
+            create: (context) =>
+                GetIt.I<ItinerarySimpleVersionModel>()..fetchData(formGroup),
+            child: const ItinerarySimpleVersionScreen(),
+          );
+        },
       ),
     );
   }

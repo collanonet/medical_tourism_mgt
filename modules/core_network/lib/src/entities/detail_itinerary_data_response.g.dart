@@ -47,9 +47,9 @@ Day _$DayFromJson(Map<String, dynamic> json) => Day(
       meal: json['meal'] as String?,
       placeName: json['placeName'] as String?,
       accommodation: json['accommodation'] as String?,
-      group: json['group'] == null
-          ? null
-          : Group.fromJson(json['group'] as Map<String, dynamic>),
+      group: (json['group'] as List<dynamic>?)
+          ?.map((e) => Group.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$DayToJson(Day instance) => <String, dynamic>{

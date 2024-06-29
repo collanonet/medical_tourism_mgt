@@ -65,7 +65,7 @@ class Day {
   String? meal;
   String? placeName;
   String? accommodation;
-  Group? group;
+  List<Group>? group;
 
   Day({
      this.date,

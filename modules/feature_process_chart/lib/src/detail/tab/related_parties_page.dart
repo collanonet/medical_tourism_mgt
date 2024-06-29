@@ -13,15 +13,17 @@ class RelatedPartiesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (context) => GetIt.I<RelatedPartiesModel>(),
-      child: ReactiveFormConfig(
-        validationMessages: validationMessagesFilterPatient(context),
-        child: ReactiveFormBuilder(
-            form: () => relatedPartiesForm(),
-            builder: (context, formGroup, child) {
-              return const RelatedPartiesScreen();
-            }),
+    return ReactiveFormConfig(
+      validationMessages: validationMessagesFilterPatient(context),
+      child: ReactiveFormBuilder(
+        form: () => relatedPartiesForm(),
+        builder: (context, formGroup, child) {
+          return Provider(
+            create: (context) =>
+                GetIt.I<RelatedPartiesModel>()..fetchData(formGroup),
+            child: const RelatedPartiesScreen(),
+          );
+        },
       ),
     );
   }

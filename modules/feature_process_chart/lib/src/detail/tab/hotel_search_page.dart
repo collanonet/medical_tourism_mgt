@@ -13,15 +13,17 @@ class HotelSearchPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (context) => GetIt.I<HotelSearchModel>(),
-      child: ReactiveFormConfig(
-        validationMessages: validationMessagesFilterPatient(context),
-        child: ReactiveFormBuilder(
-            form: () => hotelSearchForm(),
-            builder: (context, formGroup, child) {
-              return const HotelSearchScreen();
-            }),
+    return ReactiveFormConfig(
+      validationMessages: validationMessagesFilterPatient(context),
+      child: ReactiveFormBuilder(
+        form: () => hotelSearchForm()..markAllAsTouched(),
+        builder: (context, formGroup, child) {
+          return Provider(
+            create: (context) =>
+                GetIt.I<HotelSearchModel>()..fetchHotelSearch(formGroup),
+            child: const HotelSearchScreen(),
+          );
+        },
       ),
     );
   }

@@ -13,16 +13,17 @@ class HotelRegistrationPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (context) => GetIt.I<HotelRegistrationModel>(),
-      child: ReactiveFormConfig(
-        validationMessages: validationMessagesFilterPatient(context),
-        child: ReactiveFormBuilder(
-            form: () => hotelRegistrationForm(),
-            builder: (context, formGroup, child) {
-              return const HotelRegistrationScreen();
-            }),
-      ),
+    return ReactiveFormConfig(
+      validationMessages: validationMessagesFilterPatient(context),
+      child: ReactiveFormBuilder(
+          form: () => hotelRegistrationForm()..markAllAsTouched(),
+          builder: (context, formGroup, child) {
+            return Provider(
+              create: (context) => GetIt.I<HotelRegistrationModel>()
+                ..fetchHotelregister(formGroup),
+                child: const HotelRegistrationScreen(),
+            );
+          }),
     );
   }
 }
