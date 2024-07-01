@@ -2,6 +2,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -161,48 +162,41 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                         Text('資格'),
                                         Row(
                                           children: [
-                                            Checkbox(
-                                                activeColor: Theme.of(context)
-                                                    .primaryColor,
-                                                checkColor: Colors.white,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(4),
-                                                  side: BorderSide(
-                                                    color: Colors.grey,
-                                                  ),
-                                                ),
-                                                value: true,
-                                                onChanged: (value) {}),
-                                            Text('旅程管理'),
-                                            Checkbox(
-                                                activeColor: Theme.of(context)
-                                                    .primaryColor,
-                                                checkColor: Colors.white,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(4),
-                                                  side: BorderSide(
-                                                    color: Colors.grey,
-                                                  ),
-                                                ),
-                                                value: true,
-                                                onChanged: (value) {}),
-                                            Text('通訳案内士'),
-                                            Checkbox(
-                                                activeColor: Theme.of(context)
-                                                    .primaryColor,
-                                                checkColor: Colors.white,
-                                                shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                      BorderRadius.circular(4),
-                                                  side: BorderSide(
-                                                    color: Colors.grey,
-                                                  ),
-                                                ),
-                                                value: true,
-                                                onChanged: (value) {}),
-                                            Text('医療通訳者'),
+                                            IntrinsicWidth(
+                                              child: ReactiveCheckboxListTile(
+                                                controlAffinity:
+                                                    ListTileControlAffinity
+                                                        .leading,
+                                                contentPadding: EdgeInsets.zero,
+                                                formControlName:
+                                                    'itinerary_management',
+                                                title: const Text('旅程管理'),
+                                              ),
+                                            ),
+                                            const SizedBox(width: 10),
+                                            IntrinsicWidth(
+                                              child: ReactiveCheckboxListTile(
+                                                controlAffinity:
+                                                    ListTileControlAffinity
+                                                        .leading,
+                                                contentPadding: EdgeInsets.zero,
+                                                formControlName:
+                                                    'guide_interpreter',
+                                                title: const Text('通訳案内士'),
+                                              ),
+                                            ),
+                                            const SizedBox(width: 10),
+                                            IntrinsicWidth(
+                                              child: ReactiveCheckboxListTile(
+                                                controlAffinity:
+                                                    ListTileControlAffinity
+                                                        .leading,
+                                                contentPadding: EdgeInsets.zero,
+                                                formControlName:
+                                                    'medical_interpreter',
+                                                title: const Text('医療通訳者'),
+                                              ),
+                                            )
                                           ],
                                         )
                                       ],
@@ -225,16 +219,29 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                 Text('同宿可否'),
                                 Row(
                                   children: [
-                                    RadioMenuButton(
+                                    IntrinsicWidth(
+                                      child: ReactiveRadioListTile(
+                                        controlAffinity:
+                                            ListTileControlAffinity.leading,
+                                        contentPadding: EdgeInsets.zero,
+                                        formControlName:
+                                            'Possibility_of_staying_together',
                                         value: true,
-                                        groupValue: false,
-                                        onChanged: (value) {},
-                                        child: Text('同宿OK')),
-                                    RadioMenuButton(
-                                        value: true,
-                                        groupValue: false,
-                                        onChanged: (value) {},
-                                        child: Text('同宿NG')),
+                                        title: const Text('同宿OK'),
+                                      ),
+                                    ),
+                                    const SizedBox(width: 20),
+                                    IntrinsicWidth(
+                                      child: ReactiveRadioListTile(
+                                        controlAffinity:
+                                            ListTileControlAffinity.leading,
+                                        contentPadding: EdgeInsets.zero,
+                                        formControlName:
+                                            'Possibility_of_staying_together',
+                                        value: false,
+                                        title: const Text('同宿NG'),
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 Row(
@@ -481,21 +488,41 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                         Text('車種'),
                                         Row(
                                           children: [
-                                            RadioMenuButton(
-                                                value: true,
-                                                groupValue: true,
-                                                onChanged: (value) {},
-                                                child: Text('アルファード')),
-                                            RadioMenuButton(
-                                                value: true,
-                                                groupValue: false,
-                                                onChanged: (value) {},
-                                                child: Text('ハイエース')),
-                                            RadioMenuButton(
-                                                value: true,
-                                                groupValue: false,
-                                                onChanged: (value) {},
-                                                child: Text('その他')),
+                                            IntrinsicWidth(
+                                              child: ReactiveRadioListTile(
+                                                controlAffinity:
+                                                    ListTileControlAffinity
+                                                        .leading,
+                                                contentPadding: EdgeInsets.zero,
+                                                formControlName: 'car_model',
+                                                value: 'Alphard',
+                                                title: const Text('アルファード'),
+                                              ),
+                                            ),
+                                            const SizedBox(width: 16),
+                                            IntrinsicWidth(
+                                              child: ReactiveRadioListTile(
+                                                controlAffinity:
+                                                    ListTileControlAffinity
+                                                        .leading,
+                                                contentPadding: EdgeInsets.zero,
+                                                formControlName: 'car_model',
+                                                value: 'Hiace',
+                                                title: const Text('ハイエース'),
+                                              ),
+                                            ),
+                                            const SizedBox(width: 16),
+                                            IntrinsicWidth(
+                                              child: ReactiveRadioListTile(
+                                                controlAffinity:
+                                                    ListTileControlAffinity
+                                                        .leading,
+                                                contentPadding: EdgeInsets.zero,
+                                                formControlName: 'car_model',
+                                                value: 'others',
+                                                title: const Text('その他'),
+                                              ),
+                                            ),
                                           ],
                                         )
                                       ],
@@ -545,114 +572,71 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text('対応言語'),
-                                    Row(
+                                    RowSeparated(
+                                      separatorBuilder:
+                                          (BuildContext context, int index) {
+                                        return SizedBox(
+                                          width: context
+                                              .appTheme.spacing.marginMedium,
+                                        );
+                                      },
                                       children: [
-                                        Checkbox(
-                                            activeColor:
-                                                Theme.of(context).primaryColor,
-                                            checkColor: Colors.white,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                              side: BorderSide(
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                            value: true,
-                                            onChanged: (value) {}),
-                                        Text('日本語'),
-                                        SizedBox(
-                                          width: context
-                                              .appTheme.spacing.marginMedium,
+                                        IntrinsicWidth(
+                                          child: ReactiveCheckboxListTile(
+                                            controlAffinity:
+                                                ListTileControlAffinity.leading,
+                                            contentPadding: EdgeInsets.zero,
+                                            formControlName: 'japanese',
+                                            title: const Text('日本語'),
+                                          ),
                                         ),
-                                        Checkbox(
-                                            activeColor:
-                                                Theme.of(context).primaryColor,
-                                            checkColor: Colors.white,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                              side: BorderSide(
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                            value: true,
-                                            onChanged: (value) {}),
-                                        Text('中国語'),
-                                        SizedBox(
-                                          width: context
-                                              .appTheme.spacing.marginMedium,
+                                        IntrinsicWidth(
+                                          child: ReactiveCheckboxListTile(
+                                            controlAffinity:
+                                                ListTileControlAffinity.leading,
+                                            contentPadding: EdgeInsets.zero,
+                                            formControlName: 'chinese',
+                                            title: const Text('中国語'),
+                                          ),
                                         ),
-                                        Checkbox(
-                                            activeColor:
-                                                Theme.of(context).primaryColor,
-                                            checkColor: Colors.white,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                              side: BorderSide(
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                            value: true,
-                                            onChanged: (value) {}),
-                                        Text('ベトナム語'),
-                                        SizedBox(
-                                          width: context
-                                              .appTheme.spacing.marginMedium,
+                                        IntrinsicWidth(
+                                          child: ReactiveCheckboxListTile(
+                                            controlAffinity:
+                                                ListTileControlAffinity.leading,
+                                            contentPadding: EdgeInsets.zero,
+                                            formControlName: 'vietnamese',
+                                            title: const Text('ベトナム語'),
+                                          ),
                                         ),
-                                        Checkbox(
-                                            activeColor:
-                                                Theme.of(context).primaryColor,
-                                            checkColor: Colors.white,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                              side: BorderSide(
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                            value: true,
-                                            onChanged: (value) {}),
-                                        Text('英語'),
-                                        SizedBox(
-                                          width: context
-                                              .appTheme.spacing.marginMedium,
+                                        IntrinsicWidth(
+                                          child: ReactiveCheckboxListTile(
+                                            controlAffinity:
+                                                ListTileControlAffinity.leading,
+                                            contentPadding: EdgeInsets.zero,
+                                            formControlName: 'english',
+                                            title: const Text('英語'),
+                                          ),
                                         ),
-                                        Checkbox(
-                                            activeColor:
-                                                Theme.of(context).primaryColor,
-                                            checkColor: Colors.white,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                              side: BorderSide(
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                            value: true,
-                                            onChanged: (value) {}),
-                                        Text('韓国語'),
-                                        SizedBox(
-                                          width: context
-                                              .appTheme.spacing.marginMedium,
+                                        IntrinsicWidth(
+                                          child: ReactiveCheckboxListTile(
+                                            controlAffinity:
+                                                ListTileControlAffinity.leading,
+                                            contentPadding: EdgeInsets.zero,
+                                            formControlName: 'korean',
+                                            title: const Text('韓国語'),
+                                          ),
                                         ),
-                                        Checkbox(
-                                            activeColor:
-                                                Theme.of(context).primaryColor,
-                                            checkColor: Colors.white,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(4),
-                                              side: BorderSide(
-                                                color: Colors.grey,
-                                              ),
-                                            ),
-                                            value: true,
-                                            onChanged: (value) {}),
-                                        Text('タイ語'),
+                                        IntrinsicWidth(
+                                          child: ReactiveCheckboxListTile(
+                                            controlAffinity:
+                                                ListTileControlAffinity.leading,
+                                            contentPadding: EdgeInsets.zero,
+                                            formControlName: 'other',
+                                            title: const Text('その他'),
+                                          ),
+                                        )
                                       ],
-                                    ),
+                                    )
                                   ],
                                 ),
                                 Row(
@@ -664,16 +648,31 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                         Text('同宿可否'),
                                         Row(
                                           children: [
-                                            RadioMenuButton(
+                                            IntrinsicWidth(
+                                              child: ReactiveRadioListTile(
+                                                controlAffinity:
+                                                    ListTileControlAffinity
+                                                        .leading,
+                                                contentPadding: EdgeInsets.zero,
+                                                formControlName:
+                                                    'Possibility_of_staying_together',
                                                 value: true,
-                                                groupValue: false,
-                                                onChanged: (value) {},
-                                                child: Text('同宿OK')),
-                                            RadioMenuButton(
-                                                value: true,
-                                                groupValue: false,
-                                                onChanged: (value) {},
-                                                child: Text('同宿NG')),
+                                                title: const Text('同宿OK'),
+                                              ),
+                                            ),
+                                            const SizedBox(width: 20),
+                                            IntrinsicWidth(
+                                              child: ReactiveRadioListTile(
+                                                controlAffinity:
+                                                    ListTileControlAffinity
+                                                        .leading,
+                                                contentPadding: EdgeInsets.zero,
+                                                formControlName:
+                                                    'Possibility_of_staying_together',
+                                                value: false,
+                                                title: const Text('同宿NG'),
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ],
@@ -690,16 +689,31 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                         Text('ホテル手配'),
                                         Row(
                                           children: [
-                                            RadioMenuButton(
+                                            IntrinsicWidth(
+                                              child: ReactiveRadioListTile(
+                                                controlAffinity:
+                                                    ListTileControlAffinity
+                                                        .leading,
+                                                contentPadding: EdgeInsets.zero,
+                                                formControlName:
+                                                    'hotel_arrangements',
                                                 value: true,
-                                                groupValue: false,
-                                                onChanged: (value) {},
-                                                child: Text('仲介会社')),
-                                            RadioMenuButton(
-                                                value: true,
-                                                groupValue: false,
-                                                onChanged: (value) {},
-                                                child: Text('バス会社')),
+                                                title: const Text('仲介会社'),
+                                              ),
+                                            ),
+                                            const SizedBox(width: 20),
+                                            IntrinsicWidth(
+                                              child: ReactiveRadioListTile(
+                                                controlAffinity:
+                                                    ListTileControlAffinity
+                                                        .leading,
+                                                contentPadding: EdgeInsets.zero,
+                                                formControlName:
+                                                    'hotel_arrangements',
+                                                value: false,
+                                                title: const Text('バス会社'),
+                                              ),
+                                            ),
                                           ],
                                         ),
                                       ],

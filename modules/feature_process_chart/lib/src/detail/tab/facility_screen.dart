@@ -174,7 +174,15 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text('外国語スタッフ'),
-                                              Row(
+                                              RowSeparated(
+                                                separatorBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  return SizedBox(
+                                                    width: context.appTheme
+                                                        .spacing.marginMedium,
+                                                  );
+                                                },
                                                 children: [
                                                   IntrinsicWidth(
                                                     child:

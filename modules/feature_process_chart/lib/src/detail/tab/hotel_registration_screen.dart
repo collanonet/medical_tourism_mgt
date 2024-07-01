@@ -2,7 +2,9 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -130,86 +132,67 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text('外国語スタッフ'),
-                                  SizedBox(
-                                    height:
-                                        context.appTheme.spacing.marginSmall,
-                                  ),
-                                  Row(
+                                  RowSeparated(
+                                    separatorBuilder:
+                                        (BuildContext context, int index) {
+                                      return SizedBox(
+                                        width: context
+                                            .appTheme.spacing.marginMedium,
+                                      );
+                                    },
                                     children: [
-                                      Checkbox(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          side: BorderSide(color: Colors.grey),
+                                      IntrinsicWidth(
+                                        child: ReactiveCheckboxListTile(
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          contentPadding: EdgeInsets.zero,
+                                          formControlName: 'japanese',
+                                          title: const Text('日本語'),
                                         ),
-                                        checkColor: Colors.white,
-                                        value: true,
-                                        onChanged: (value) {},
                                       ),
-                                      Text('日本語'),
-                                      Checkbox(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          side: BorderSide(color: Colors.grey),
+                                      IntrinsicWidth(
+                                        child: ReactiveCheckboxListTile(
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          contentPadding: EdgeInsets.zero,
+                                          formControlName: 'chinese',
+                                          title: const Text('中国語'),
                                         ),
-                                        checkColor: Colors.white,
-                                        value: true,
-                                        onChanged: (value) {},
                                       ),
-                                      Text('中国語'),
-                                      Checkbox(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          side: BorderSide(color: Colors.grey),
+                                      IntrinsicWidth(
+                                        child: ReactiveCheckboxListTile(
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          contentPadding: EdgeInsets.zero,
+                                          formControlName: 'vietnamese',
+                                          title: const Text('ベトナム語'),
                                         ),
-                                        checkColor: Colors.white,
-                                        value: true,
-                                        onChanged: (value) {},
                                       ),
-                                      Text('ベトナム語'),
-                                      Checkbox(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          side: BorderSide(color: Colors.grey),
+                                      IntrinsicWidth(
+                                        child: ReactiveCheckboxListTile(
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          contentPadding: EdgeInsets.zero,
+                                          formControlName: 'english',
+                                          title: const Text('英語'),
                                         ),
-                                        checkColor: Colors.white,
-                                        value: true,
-                                        onChanged: (value) {},
                                       ),
-                                      Text('英語'),
-                                      Checkbox(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          side: BorderSide(color: Colors.grey),
+                                      IntrinsicWidth(
+                                        child: ReactiveCheckboxListTile(
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          contentPadding: EdgeInsets.zero,
+                                          formControlName: 'other',
+                                          title: const Text('その他'),
                                         ),
-                                        checkColor: Colors.white,
-                                        value: true,
-                                        onChanged: (value) {},
-                                      ),
-                                      Text('韓国語'),
-                                      Checkbox(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          side: BorderSide(color: Colors.grey),
-                                        ),
-                                        checkColor: Colors.white,
-                                        value: true,
-                                        onChanged: (value) {},
-                                      ),
-                                      Text('タイ語'),
+                                      )
                                     ],
                                   )
                                 ],
                               ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              Expanded(
+                              const SizedBox(width: 20),
+                              IntrinsicWidth(
+                                stepWidth: 200,
                                 child: ReactiveTextField(
                                   formControlName: 'Foreign_language_staff',
                                 ),

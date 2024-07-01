@@ -18,6 +18,10 @@ FormGroup relatedPartiesForm() => FormGroup(
             'Name_of_facility': FormControl<String>(value: ''), // 施設名
             'location': FormControl<String>(value: ''), // 所在地
             'telephone_number_2': FormControl<String>(value: ''), // 電話番号
+            'itinerary_management': FormControl<bool>(value: false),
+            'guide_interpreter': FormControl<bool>(value: false),
+            'medical_interpreter': FormControl<bool>(value: false),
+            'Possibility_of_staying_together': FormControl<bool>(),
           })
         ]),
         //バス会社
@@ -43,6 +47,15 @@ FormGroup relatedPartiesForm() => FormGroup(
             'Name_of_facility': FormControl<String>(value: ''), // 施設名
             'location': FormControl<String>(value: ''), // 所在地
             'telephone_number_2': FormControl<String>(value: ''), // 電話番号
+            'car_model': FormControl<String>(value: ''), //
+            'japanese': FormControl<bool>(value: false),
+            'chinese': FormControl<bool>(value: false),
+            'vietnamese': FormControl<bool>(value: false),
+            'english': FormControl<bool>(value: false),
+            'korean': FormControl<bool>(value: false),
+            'other': FormControl<bool>(value: false),
+            'Possibility_of_staying_together': FormControl<bool>(),
+            'hotel_arrangements' : FormControl<bool>(value: false),
           })
         ]),
         //緊急連絡先

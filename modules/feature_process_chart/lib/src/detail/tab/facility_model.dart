@@ -12,7 +12,7 @@ class FacilityModel {
 
   Future<void> fetchData(FormGroup formGroup) async {
     try{
-      await fetchDetailFacilityHotel(formGroup.control('Hotel') as FormGroup);
+      await fetchDetailFacilityHotel(formGroup.control('Hotel') as FormArray);
     await fetchDetailDropInFacility(
         formGroup.control('drop_in_facility') as FormGroup);
 
@@ -26,7 +26,7 @@ class FacilityModel {
   void submit(FormGroup formGroup) async {
     try{
       submitData.value = const AsyncData(loading: true);
-       await submitDetailFacilityHotel(formGroup.control('Hotel') as FormGroup);
+       await submitDetailFacilityHotel(formGroup);
       await submitDropInDacility(
         formGroup.control('drop_in_facility') as FormGroup);
        
@@ -39,22 +39,23 @@ class FacilityModel {
 
   ValueNotifier<AsyncData<List<DetailFacilityHotelResponse>>>
       detailFacilityHotelData = ValueNotifier(const AsyncData());
-  Future<void> fetchDetailFacilityHotel(FormGroup formGroup) async {
+  Future<void> fetchDetailFacilityHotel(FormArray formArray) async {
     try {
       detailFacilityHotelData.value = const AsyncData(loading: true);
       final response = await processChartRepository.getDetialFacilityHospital();
-      insertFacilityHotel(formGroup, response);
+      insertFacilityHotel(formArray, response);
     } catch (e) {
       detailFacilityHotelData.value = AsyncData(error: e);
     }
   }
 
   void insertFacilityHotel(
-      FormGroup formGroup, List<DetailFacilityHotelResponse>? data) {
-    var hotel = formGroup.control('Hotel') as FormArray;
+      FormArray formArray, List<DetailFacilityHotelResponse>? data) {
+   // var hotel = formGroup.control('Hotel') as FormArray;
+  
     if (data!.isNotEmpty) {
       for (var element in data) {
-        hotel.add(
+      formArray.add(
           FormGroup({
             'Person_in_charge_of_arrangements': FormControl<String>(
                 value: element.personInChargeOfArrangements),
