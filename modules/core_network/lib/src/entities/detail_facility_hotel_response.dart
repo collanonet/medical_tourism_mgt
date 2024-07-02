@@ -11,6 +11,11 @@ class DetailFacilityHotelResponse {
   String? telephoneNumber;
   String? remarks;
   String? foreignLanguageStaff;
+   bool? japanese;
+  bool? chinese;
+  bool? vietnamese;
+  bool? english;
+  bool? others;
 
   DetailFacilityHotelResponse({
     required this.id,
@@ -21,6 +26,11 @@ class DetailFacilityHotelResponse {
      this.telephoneNumber,
      this.remarks,
      this.foreignLanguageStaff,
+     this.japanese,
+     this.chinese,
+     this.vietnamese,
+     this.english,
+     this.others
   });
 
   factory DetailFacilityHotelResponse.fromJson(Map<String,dynamic> json){

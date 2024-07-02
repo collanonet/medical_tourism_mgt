@@ -18,6 +18,11 @@ DetainHotelRegistationResponse _$DetainHotelRegistationResponseFromJson(
       accommodationMemo: json['accommodationMemo'] as String?,
       foreignLanguageStaff: json['foreignLanguageStaff'] as String?,
       evaluation: json['evaluation'] as String?,
+      japanese: json['japanese'] as bool?,
+      chinese: json['chinese'] as bool?,
+      vietnamese: json['vietnamese'] as bool?,
+      english: json['english'] as bool?,
+      others: json['others'] as bool?,
     );
 
 Map<String, dynamic> _$DetainHotelRegistationResponseToJson(
@@ -32,4 +37,9 @@ Map<String, dynamic> _$DetainHotelRegistationResponseToJson(
       'accommodationMemo': instance.accommodationMemo,
       'foreignLanguageStaff': instance.foreignLanguageStaff,
       'evaluation': instance.evaluation,
+      'japanese': instance.japanese,
+      'chinese': instance.chinese,
+      'vietnamese': instance.vietnamese,
+      'english': instance.english,
+      'others': instance.others,
     };

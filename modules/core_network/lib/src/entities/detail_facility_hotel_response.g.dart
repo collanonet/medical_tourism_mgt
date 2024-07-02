@@ -18,6 +18,11 @@ DetailFacilityHotelResponse _$DetailFacilityHotelResponseFromJson(
       telephoneNumber: json['telephoneNumber'] as String?,
       remarks: json['remarks'] as String?,
       foreignLanguageStaff: json['foreignLanguageStaff'] as String?,
+      japanese: json['japanese'] as bool?,
+      chinese: json['chinese'] as bool?,
+      vietnamese: json['vietnamese'] as bool?,
+      english: json['english'] as bool?,
+      others: json['others'] as bool?,
     );
 
 Map<String, dynamic> _$DetailFacilityHotelResponseToJson(
@@ -31,4 +36,9 @@ Map<String, dynamic> _$DetailFacilityHotelResponseToJson(
       'telephoneNumber': instance.telephoneNumber,
       'remarks': instance.remarks,
       'foreignLanguageStaff': instance.foreignLanguageStaff,
+      'japanese': instance.japanese,
+      'chinese': instance.chinese,
+      'vietnamese': instance.vietnamese,
+      'english': instance.english,
+      'others': instance.others,
     };

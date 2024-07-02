@@ -90,6 +90,11 @@ class FacilityModel {
           telephoneNumber: element['telephone_number'],
           remarks: element['remarks'],
           foreignLanguageStaff: element['Foreign_language_staff'],
+          japanese: element['japanese'],
+          english: element['english'],
+          chinese: element['chinese'],
+          vietnamese: element['vietnamese'],
+          others: element['others'],
         );
          await processChartRepository.postDetailFacilityHospital(request);
       });

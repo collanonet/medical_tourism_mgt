@@ -13,6 +13,11 @@ class DetainHotelRegistationResponse {
   String? accommodationMemo;
   String? foreignLanguageStaff;
   String? evaluation;
+   bool? japanese;
+  bool? chinese;
+  bool? vietnamese;
+  bool? english;
+  bool? others;
 
   DetainHotelRegistationResponse({
     required this.id,
@@ -24,6 +29,11 @@ class DetainHotelRegistationResponse {
      this.accommodationMemo,
      this.foreignLanguageStaff,
      this.evaluation,
+     this.japanese,
+     this.chinese,
+     this.vietnamese,
+     this.english,
+     this.others
   });
 
   factory DetainHotelRegistationResponse.fromJson(Map<String,dynamic> json){
