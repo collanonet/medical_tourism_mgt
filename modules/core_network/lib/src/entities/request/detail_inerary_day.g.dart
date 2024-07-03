@@ -18,7 +18,9 @@ Map<String, dynamic> _$DayListToJson(DayList instance) => <String, dynamic>{
 
 Day _$DayFromJson(Map<String, dynamic> json) => Day(
       date: json['date'] as String? ?? '',
-      meal: json['meal'] as String? ?? '',
+      morning: json['morning'] as bool?,
+      noon: json['noon'] as bool?,
+      evening: json['evening'] as bool?,
       placeName: json['placeName'] as String? ?? '',
       accommodation: json['accommodation'] as String? ?? '',
       groupList: json['groupList'] == null
@@ -28,7 +30,9 @@ Day _$DayFromJson(Map<String, dynamic> json) => Day(
 
 Map<String, dynamic> _$DayToJson(Day instance) => <String, dynamic>{
       'date': instance.date,
-      'meal': instance.meal,
+      'morning': instance.morning,
+      'noon': instance.noon,
+      'evening': instance.evening,
       'placeName': instance.placeName,
       'accommodation': instance.accommodation,
       'groupList': instance.groupList,

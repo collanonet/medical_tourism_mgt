@@ -55,7 +55,7 @@ FormGroup relatedPartiesForm() => FormGroup(
             'korean': FormControl<bool>(value: false),
             'other': FormControl<bool>(value: false),
             'Possibility_of_staying_together': FormControl<bool>(),
-            'hotel_arrangements' : FormControl<bool>(value: false),
+            'hotel_arrangements' : FormControl<bool>(),
           })
         ]),
         //緊急連絡先

@@ -62,14 +62,18 @@ class Group {
 @JsonSerializable()
 class Day {
   String? date;
-  String? meal;
+ bool? morning;
+  bool? noon;
+  bool? evening;
   String? placeName;
   String? accommodation;
   List<Group>? group;
 
   Day({
      this.date,
-     this.meal,
+     this.morning,
+     this.noon,
+     this.evening,
      this.placeName,
      this.accommodation,
      this.group,

@@ -17,26 +17,27 @@ class DetainHotelRegistationRequest {
   bool? english;
   bool? other;
 
-  DetainHotelRegistationRequest(
-      {this.name,
-      this.location,
-      this.personInChargeName,
-      this.telephoneNumber,
-      this.oneNightPrice,
-      this.accommodationMemo,
-      this.foreignLanguageStaff,
-      this.evaluation,
-      this.japanese,
-      this.chinese,
-      this.vietnamese,
-      this.english,
-      this.other});
+  DetainHotelRegistationRequest({
+    this.name,
+    this.location,
+    this.personInChargeName,
+    this.telephoneNumber,
+    this.oneNightPrice,
+    this.accommodationMemo,
+    this.foreignLanguageStaff,
+    this.evaluation,
+    this.japanese,
+    this.chinese,
+    this.vietnamese,
+    this.english,
+    this.other,
+  });
 
   factory DetainHotelRegistationRequest.fromJson(Map<String, dynamic> json) {
     return _$DetainHotelRegistationRequestFromJson(json);
   }
 
-  Map<String?, dynamic> toJson() {
+  Map<String, dynamic> toJson() {
     return _$DetainHotelRegistationRequestToJson(this);
   }
 }

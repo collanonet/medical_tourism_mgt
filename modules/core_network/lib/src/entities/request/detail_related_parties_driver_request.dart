@@ -15,6 +15,15 @@ class DetailRelatedPartiesDriverRequest {
   String? nameOfFacility;
   String? location;
   String? telephoneNumber2;
+  String? carModel2;
+  bool? japanese;
+  bool? chinese;
+  bool? vietnamese;
+  bool? english;
+  bool? korean;
+  bool? other;
+  bool? possibilityOfStayingTogether;
+  bool? hotelArrangements;
 
   DetailRelatedPartiesDriverRequest({
     this.dateFrom,
@@ -30,6 +39,15 @@ class DetailRelatedPartiesDriverRequest {
     this.nameOfFacility,
     this.location,
     this.telephoneNumber2,
+    this.carModel2,
+    this.japanese,
+    this.chinese,
+    this.vietnamese,
+    this.english,
+    this.korean,
+    this.other,
+    this.possibilityOfStayingTogether,
+    this.hotelArrangements,
   });
 
   factory DetailRelatedPartiesDriverRequest.fromJson(Map<String,dynamic> json){

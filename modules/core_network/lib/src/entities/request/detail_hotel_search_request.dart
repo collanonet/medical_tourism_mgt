@@ -7,6 +7,15 @@ class DetailHotelSearchRequest {
   String? usageRecord;
   String? area;
   String? supportedLanguage;
+  bool? hotel;
+  bool? apartmentHotel;
+  String? usageHistory;
+  bool? japanese;
+  bool? chinese;
+  bool? vietnamese;
+  bool? english;
+  bool? korean;
+  bool? thai;
 
   DetailHotelSearchRequest({
      this.name,
@@ -14,6 +23,15 @@ class DetailHotelSearchRequest {
      this.usageRecord,
      this.area,
      this.supportedLanguage,
+     this.hotel,
+     this.apartmentHotel,
+     this.usageHistory,
+     this.japanese,
+     this.chinese,
+     this.vietnamese,
+     this.english,
+     this.korean,
+     this.thai
   });
 
   factory DetailHotelSearchRequest.fromJson(Map<String,dynamic> json){

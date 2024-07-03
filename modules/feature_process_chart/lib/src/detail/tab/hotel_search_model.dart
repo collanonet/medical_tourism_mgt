@@ -31,6 +31,15 @@ class HotelSearchModel{
     formGroup.control('Usage_record').value = data?.usageRecord;
     formGroup.control('area').value = data?.area;
     formGroup.control('supported_language').value = data?.supportedLanguage;
+    formGroup.control('hotel').value = data?.hotel;
+    formGroup.control('apartment_hotel').value = data?.apartmentHotel;
+    formGroup.control('usage_history').value = data?.usageHistory;
+    formGroup.control('japanese').value = data?.japanese;
+    formGroup.control('chinese').value = data?.chinese;
+    formGroup.control('vietnamese').value = data?.vietnamese;
+    formGroup.control('english').value = data?.english;
+    formGroup.control('korean').value = data?.korean;
+    formGroup.control('thai').value = data?.thai;
   }
 
 
@@ -46,6 +55,18 @@ class HotelSearchModel{
           usageRecord: formGroup.control('Usage_record').value,
           area: formGroup.control('area').value,
           supportedLanguage: formGroup.control('supported_language').value,
+          hotel: formGroup.control('hotel').value,
+          apartmentHotel: formGroup.control('apartment_hotel').value,
+          usageHistory: formGroup.control('usage_history').value,
+          japanese: formGroup.control('japanese').value,
+          chinese: formGroup.control('chinese').value,
+            vietnamese: formGroup.control('vietnamese').value,
+            english: formGroup.control('english').value,
+          korean: formGroup.control('korean').value,
+          thai: formGroup.control('thai').value,
+         
+        
+
         ),
       );
       submitHotelSearchData.value = AsyncData(data: response);

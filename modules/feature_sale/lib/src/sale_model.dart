@@ -26,6 +26,15 @@ class SaleModel{
       Tax(tax: '非課税'),
 
   ]);
+
+  ValueNotifier<List<SubmitItem>> submitData = ValueNotifier([
+    SubmitItem(item: 'ここにテキストが入ります'),
+    SubmitItem(item: '1月2日半日分'),
+    SubmitItem(item: '1月3日半日分'),
+    SubmitItem(item: '自由入力できます'),
+    SubmitItem(item: 'ここにテキストが入ります'),
+    
+  ]);
 }
 
 class Items{
@@ -42,4 +51,9 @@ class Unit{
 class Tax{
   String tax;
   Tax({required this.tax});
+}
+
+class SubmitItem{
+  String item;
+  SubmitItem({required this.item});
 }

@@ -65,6 +65,10 @@ class RelatedPartiesModel {
     formGroup.control('Name_of_facility').value = data?.nameOfFacility;
     formGroup.control('location').value = data?.location;
     formGroup.control('telephone_number_2').value = data?.telephoneNumber2;
+    formGroup.control('itinerary_management').value = data?.itineraryManagement;
+    formGroup.control('guide_or_interpreter').value = data?.guideInterpreter;
+    formGroup.control('medical_interpreter').value = data?.medicalInterpreter;
+    formGroup.control('Possibility_of_staying_together').value = data?.personInChargeOfArrangements;
   }
 
   ValueNotifier<AsyncData<DetailRelatedPartiesResponse>> submitPartiesData =
@@ -90,6 +94,10 @@ class RelatedPartiesModel {
                 nameOfFacility: element['Name_of_facility'],
                 location: element['location'],
                 telephoneNumber2: element['telephone_number_2'],
+                itineraryManagement: element['itinerary_management'],
+                guideInterpreter: element['guide_interpreter'],
+                medicalInterpreter: element['medical_interpreter'],
+                possibilityOfStayingTogether: element['Possibility_of_staying_together'],
               );
               await processChartRepository.postDetailRelatedParties(request);
             },
@@ -172,6 +180,15 @@ class RelatedPartiesModel {
     formGroup.control('Name_of_facility').value = data?.nameOfFacility;
     formGroup.control('location').value = data?.location;
     formGroup.control('telephone_number_2').value = data?.telephoneNumber2;
+    formGroup.control('car_model').value = data?.carModel2;
+    formGroup.control('japanese').value = data?.japanese;
+    formGroup.control('chinese').value = data?.chinese;
+    formGroup.control('vietnamese').value = data?.vietnamese;
+    formGroup.control('english').value = data?.english;
+    formGroup.control('korean').value = data?.korean;
+    formGroup.control('other').value = data?.other;
+    formGroup.control('Possibility_of_staying_together').value = data?.possibilityOfStayingTogether;
+    formGroup.control('hotel_arrangements').value = data?.hotelArrangements;
   }
 
   ValueNotifier<AsyncData<DetailRelatedPartiesDriverResponse>> submitPartiesDriverData = ValueNotifier(const AsyncData());

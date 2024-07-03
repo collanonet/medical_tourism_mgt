@@ -30,7 +30,18 @@ FormGroup saleManagementForm() {
       'tax' : FormControl<String>(),
     }),
     'expenses' : FormGroup({
-      'major_items' : FormControl<String>()
+      'major_items' : FormControl<String>(),
+      'subitems' : FormArray([
+        FormGroup({
+          'submit' : FormControl<String>(),
+        }),
+      ]),
+      'quantity' : FormControl<int>(),
+      'unit' : FormControl<String>(),
+      'unit_price' : FormControl<int>(),
+      'amount_of_money' : FormControl<int>(),
+      'payment_document' : FormControl<int>(),
+      
     }),
     'total' : FormGroup({
       'total_sales' : FormControl<int>(),

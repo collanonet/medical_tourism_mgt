@@ -16,6 +16,10 @@ class DetailRelatedPartiesResponse {
   String? nameOfFacility;
   String? location;
   String? telephoneNumber2;
+   bool? itineraryManagement;
+  bool? guideInterpreter;
+  bool? medicalInterpreter;
+  bool? possibilityOfStayingTogether;
 
   DetailRelatedPartiesResponse({
     required this.id,
@@ -31,6 +35,10 @@ class DetailRelatedPartiesResponse {
     this.nameOfFacility,
     this.location,
     this.telephoneNumber2,
+    this.itineraryManagement,
+    this.guideInterpreter,
+    this.medicalInterpreter,
+    this.possibilityOfStayingTogether,
   });
 
   factory DetailRelatedPartiesResponse.fromJson(Map<String,dynamic> json){

@@ -23,6 +23,11 @@ DetailRelatedPartiesResponse _$DetailRelatedPartiesResponseFromJson(
       nameOfFacility: json['nameOfFacility'] as String?,
       location: json['location'] as String?,
       telephoneNumber2: json['telephoneNumber2'] as String?,
+      itineraryManagement: json['itineraryManagement'] as bool?,
+      guideInterpreter: json['guideInterpreter'] as bool?,
+      medicalInterpreter: json['medicalInterpreter'] as bool?,
+      possibilityOfStayingTogether:
+          json['possibilityOfStayingTogether'] as bool?,
     );
 
 Map<String, dynamic> _$DetailRelatedPartiesResponseToJson(
@@ -41,4 +46,8 @@ Map<String, dynamic> _$DetailRelatedPartiesResponseToJson(
       'nameOfFacility': instance.nameOfFacility,
       'location': instance.location,
       'telephoneNumber2': instance.telephoneNumber2,
+      'itineraryManagement': instance.itineraryManagement,
+      'guideInterpreter': instance.guideInterpreter,
+      'medicalInterpreter': instance.medicalInterpreter,
+      'possibilityOfStayingTogether': instance.possibilityOfStayingTogether,
     };

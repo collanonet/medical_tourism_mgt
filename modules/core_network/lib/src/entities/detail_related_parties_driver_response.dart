@@ -17,6 +17,15 @@ class DetailRelatedPartiesDriverResponse {
   String? nameOfFacility;
   String? location;
   String? telephoneNumber2;
+   String? carModel2;
+  bool? japanese;
+  bool? chinese;
+  bool? vietnamese;
+  bool? english;
+  bool? korean;
+  bool? other;
+  bool? possibilityOfStayingTogether;
+  bool? hotelArrangements;
 
   DetailRelatedPartiesDriverResponse({
     required this.id,
@@ -33,6 +42,15 @@ class DetailRelatedPartiesDriverResponse {
     this.nameOfFacility,
     this.location,
     this.telephoneNumber2,
+    this.carModel2,
+    this.japanese,
+    this.chinese,
+    this.vietnamese,
+    this.english,
+    this.korean,
+    this.other,
+    this.possibilityOfStayingTogether,
+    this.hotelArrangements,
   });
 
   factory DetailRelatedPartiesDriverResponse.fromJson(Map<String,dynamic> json){

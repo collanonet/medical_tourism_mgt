@@ -2,7 +2,9 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -61,13 +63,15 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                           ),
                           Row(
                             children: [
-                              Expanded(
-                                  child: ReactiveTextField(
-                                formControlName: 'Name_of_facility',
-                                decoration: InputDecoration(
-                                  label: Text('施設名'),
+                              IntrinsicWidth(
+                                stepWidth: 300,
+                                child: ReactiveTextField(
+                                  formControlName: 'Name_of_facility',
+                                  decoration: const InputDecoration(
+                                    label: Text('施設名'),
+                                  ),
                                 ),
-                              )),
+                              ),
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
@@ -77,28 +81,24 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                   Text('タイプ'),
                                   Row(
                                     children: [
-                                      Checkbox(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          side: BorderSide(color: Colors.grey),
+                                      IntrinsicWidth(
+                                        child: ReactiveCheckboxListTile(
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          contentPadding: EdgeInsets.zero,
+                                          formControlName: 'hotel',
+                                          title: const Text('ホテル'),
                                         ),
-                                        checkColor: Colors.white,
-                                        value: true,
-                                        onChanged: (value) {},
                                       ),
-                                      Text('ホテル'),
-                                      Checkbox(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          side: BorderSide(color: Colors.grey),
+                                      IntrinsicWidth(
+                                        child: ReactiveCheckboxListTile(
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          contentPadding: EdgeInsets.zero,
+                                          formControlName: 'apartment_hotel',
+                                          title: const Text('民泊/アパートメントホテル'),
                                         ),
-                                        checkColor: Colors.white,
-                                        value: true,
-                                        onChanged: (value) {},
                                       ),
-                                      Text('民泊/アパートメントホテル'),
                                     ],
                                   )
                                 ],
@@ -112,17 +112,27 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                   Text('利用実績'),
                                   Row(
                                     children: [
-                                      RadioMenuButton(
-                                        value: 'あり',
-                                        groupValue: 'あり',
-                                        onChanged: (value) {},
-                                        child: Text('あり'),
+                                      IntrinsicWidth(
+                                        stepWidth: 30,
+                                        child: ReactiveRadioListTile(
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          contentPadding: EdgeInsets.zero,
+                                          value: 'true',
+                                          formControlName: 'usage_history',
+                                          title: const Text('あり'),
+                                        ),
                                       ),
-                                      RadioMenuButton(
-                                        value: 'あり',
-                                        groupValue: 'あり',
-                                        onChanged: (value) {},
-                                        child: Text('なし'),
+                                      IntrinsicWidth(
+                                        stepWidth: 30,
+                                        child: ReactiveRadioListTile(
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          contentPadding: EdgeInsets.zero,
+                                          value: 'false',
+                                          formControlName: 'usage_history',
+                                          title: const Text('なし'),
+                                        ),
                                       ),
                                     ],
                                   )
@@ -150,72 +160,60 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                   Text('対応言語'),
                                   Row(
                                     children: [
-                                      Checkbox(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          side: BorderSide(color: Colors.grey),
+                                      IntrinsicWidth(
+                                        child: ReactiveCheckboxListTile(
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          contentPadding: EdgeInsets.zero,
+                                          formControlName: 'japanese',
+                                          title: const Text('日本語'),
                                         ),
-                                        checkColor: Colors.white,
-                                        value: true,
-                                        onChanged: (value) {},
                                       ),
-                                      Text('日本語'),
-                                      Checkbox(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          side: BorderSide(color: Colors.grey),
+                                      IntrinsicWidth(
+                                        child: ReactiveCheckboxListTile(
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          contentPadding: EdgeInsets.zero,
+                                          formControlName: 'chinese',
+                                          title: const Text('中国語'),
                                         ),
-                                        checkColor: Colors.white,
-                                        value: true,
-                                        onChanged: (value) {},
                                       ),
-                                      Text('中国語'),
-                                      Checkbox(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          side: BorderSide(color: Colors.grey),
+                                      IntrinsicWidth(
+                                        child: ReactiveCheckboxListTile(
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          contentPadding: EdgeInsets.zero,
+                                          formControlName: 'vietnamese',
+                                          title: const Text('ベトナム語'),
                                         ),
-                                        checkColor: Colors.white,
-                                        value: true,
-                                        onChanged: (value) {},
                                       ),
-                                      Text('ベトナム語'),
-                                      Checkbox(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          side: BorderSide(color: Colors.grey),
+                                      IntrinsicWidth(
+                                        child: ReactiveCheckboxListTile(
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          contentPadding: EdgeInsets.zero,
+                                          formControlName: 'english',
+                                          title: const Text('英語'),
                                         ),
-                                        checkColor: Colors.white,
-                                        value: true,
-                                        onChanged: (value) {},
                                       ),
-                                      Text('英語'),
-                                      Checkbox(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          side: BorderSide(color: Colors.grey),
+                                      IntrinsicWidth(
+                                        child: ReactiveCheckboxListTile(
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          contentPadding: EdgeInsets.zero,
+                                          formControlName: 'korean',
+                                          title: const Text('韓国語'),
                                         ),
-                                        checkColor: Colors.white,
-                                        value: true,
-                                        onChanged: (value) {},
                                       ),
-                                      Text('韓国語'),
-                                      Checkbox(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(4),
-                                          side: BorderSide(color: Colors.grey),
+                                      IntrinsicWidth(
+                                        child: ReactiveCheckboxListTile(
+                                          controlAffinity:
+                                              ListTileControlAffinity.leading,
+                                          contentPadding: EdgeInsets.zero,
+                                          formControlName: 'thai',
+                                          title: const Text('タイ語'),
                                         ),
-                                        checkColor: Colors.white,
-                                        value: true,
-                                        onChanged: (value) {},
                                       ),
-                                      Text('タイ語'),
                                     ],
                                   )
                                 ],

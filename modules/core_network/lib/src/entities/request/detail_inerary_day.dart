@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 part 'detail_inerary_day.g.dart';
 
@@ -7,38 +6,40 @@ class DayList {
   List<Day>? days;
 
   DayList({this.days});
-  
-  factory DayList.fromJson(Map<String,dynamic> json){
+
+  factory DayList.fromJson(Map<String, dynamic> json) {
     return _$DayListFromJson(json);
   }
 
-  Map<String,dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return _$DayListToJson(this);
   }
-
 }
-
 
 @JsonSerializable()
 class Day {
   String? date;
-  String? meal;
+  bool? morning;
+  bool? noon;
+  bool? evening;
   String? placeName;
   String? accommodation;
   GroupList? groupList;
 
   Day({
     this.date = '',
-    this.meal = '',
+    this.morning,
+    this.noon,
+    this.evening,
     this.placeName = '',
     this.accommodation = '',
     this.groupList,
   });
 
-  factory Day.fromJson(Map<String,dynamic> json){
+  factory Day.fromJson(Map<String, dynamic> json) {
     return _$DayFromJson(json);
   }
-  Map<String,dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return _$DayToJson(this);
   }
 }
@@ -48,11 +49,11 @@ class GroupList {
   List<Group>? groups;
   GroupList({this.groups});
 
-  factory GroupList.fromJson(Map<String,dynamic> json){
+  factory GroupList.fromJson(Map<String, dynamic> json) {
     return _$GroupListFromJson(json);
   }
 
-  Map<String,dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return _$GroupListToJson(this);
   }
 }
@@ -63,15 +64,14 @@ class Group {
 
   Group({this.taskList});
 
-  factory Group.fromJson(Map<String,dynamic> json){
+  factory Group.fromJson(Map<String, dynamic> json) {
     return _$GroupFromJson(json);
   }
 
-  Map<String,dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return _$GroupToJson(this);
   }
 }
-
 
 @JsonSerializable()
 class TaskList {
@@ -79,11 +79,11 @@ class TaskList {
 
   TaskList({this.tasks});
 
-  factory TaskList.fromJson(Map<String,dynamic> json){
+  factory TaskList.fromJson(Map<String, dynamic> json) {
     return _$TaskListFromJson(json);
   }
 
-  Map<String,dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return _$TaskListToJson(this);
   }
 }
@@ -104,19 +104,11 @@ class Task {
     this.itinerary = '',
   });
 
-  factory Task.fromJson(Map<String,dynamic> json){
+  factory Task.fromJson(Map<String, dynamic> json) {
     return _$TaskFromJson(json);
   }
 
-  Map<String,dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return _$TaskToJson(this);
   }
-
 }
-
-
-
-
-
-
-

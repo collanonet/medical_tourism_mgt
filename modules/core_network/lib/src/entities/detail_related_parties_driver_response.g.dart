@@ -23,6 +23,16 @@ DetailRelatedPartiesDriverResponse _$DetailRelatedPartiesDriverResponseFromJson(
       nameOfFacility: json['nameOfFacility'] as String?,
       location: json['location'] as String?,
       telephoneNumber2: json['telephoneNumber2'] as String?,
+      carModel2: json['carModel2'] as String?,
+      japanese: json['japanese'] as bool?,
+      chinese: json['chinese'] as bool?,
+      vietnamese: json['vietnamese'] as bool?,
+      english: json['english'] as bool?,
+      korean: json['korean'] as bool?,
+      other: json['other'] as bool?,
+      possibilityOfStayingTogether:
+          json['possibilityOfStayingTogether'] as bool?,
+      hotelArrangements: json['hotelArrangements'] as bool?,
     );
 
 Map<String, dynamic> _$DetailRelatedPartiesDriverResponseToJson(
@@ -42,4 +52,13 @@ Map<String, dynamic> _$DetailRelatedPartiesDriverResponseToJson(
       'nameOfFacility': instance.nameOfFacility,
       'location': instance.location,
       'telephoneNumber2': instance.telephoneNumber2,
+      'carModel2': instance.carModel2,
+      'japanese': instance.japanese,
+      'chinese': instance.chinese,
+      'vietnamese': instance.vietnamese,
+      'english': instance.english,
+      'korean': instance.korean,
+      'other': instance.other,
+      'possibilityOfStayingTogether': instance.possibilityOfStayingTogether,
+      'hotelArrangements': instance.hotelArrangements,
     };

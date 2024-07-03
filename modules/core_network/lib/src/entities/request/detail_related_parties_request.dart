@@ -15,6 +15,10 @@ class DetailRelatedPartiesRequest {
   String? nameOfFacility;
   String? location;
   String? telephoneNumber2;
+  bool? itineraryManagement;
+  bool? guideInterpreter;
+  bool? medicalInterpreter;
+  bool? possibilityOfStayingTogether;
 
   DetailRelatedPartiesRequest({
     this.personInChargeOfArrangements,
@@ -29,6 +33,10 @@ class DetailRelatedPartiesRequest {
     this.nameOfFacility,
     this.location,
     this.telephoneNumber2,
+    this.itineraryManagement,
+    this.guideInterpreter ,
+    this.medicalInterpreter,
+    this.possibilityOfStayingTogether,
   });
 
   factory DetailRelatedPartiesRequest.fromJson(Map<String,dynamic> json){
