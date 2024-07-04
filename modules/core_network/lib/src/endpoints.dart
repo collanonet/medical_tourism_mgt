@@ -193,4 +193,10 @@ class Endpoints {
   static const GET_MEDICAL_INSTITUTION_HOSPITAL = '/medical-institutions';
 
   static const GET_HOSPITAL = '/hospital';
+
+  //G2
+  static const SALE_DEARD_INFO = 'sale-info';
+  static const SALE_SERVICE_FREE = 'sale-service-free';
+  static const SALE_EXPLENSES = 'sale-explenses';
+  static const SALE_TOTAL = 'sale-total';
 }

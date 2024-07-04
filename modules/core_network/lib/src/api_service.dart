@@ -5,6 +5,7 @@ import 'package:retrofit/retrofit.dart';
 import '../core_network.dart';
 import '../entities.dart';
 import 'endpoints.dart';
+import 'entities/sale_service_free_response.dart';
 
 part 'api_service.g.dart';
 
@@ -980,6 +981,40 @@ abstract class ApiService {
   Future<List<BasicInformationHospitalResponse>> getHospitals();
 
   /// end get basic information of hospital C3 Page
+  
+  /// G2
+  @GET(Endpoints.SALE_DEARD_INFO)
+  Future<HeadInfoResponse> getHeadInfo();
+
+  @POST(Endpoints.SALE_DEARD_INFO)
+  Future<HeadInfoResponse> postHeadInfo(
+    @Body() HeadInfoRequest headInfoRequest,
+  );
+
+  @GET(Endpoints.SALE_SERVICE_FREE)
+  Future<ServiceFeeResponse> getServiceFree();
+
+  @POST(Endpoints.SALE_SERVICE_FREE)
+  Future<ServiceFeeResponse> postServiceFree(
+    @Body() ServiceFeeRequest serviceFeeRequest,
+  );
+
+  @GET(Endpoints.SALE_EXPLENSES)
+  Future<ExpensesResponse> getExpense();
+
+  @POST(Endpoints.SALE_EXPLENSES)
+  Future<ExpensesResponse> postExpense(
+    @Body() ExpensesRequest expensesRequest,
+  );
+
+  @GET(Endpoints.SALE_TOTAL)
+  Future<TotalResponse> getTotal();
+
+  @POST(Endpoints.SALE_TOTAL)
+  Future<TotalResponse> postTotal(
+    @Body() TotalRequest totalRequest,
+  );
+
 }
 
 extension ApiServiceExts on ApiService {

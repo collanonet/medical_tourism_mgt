@@ -36,3 +36,11 @@ export 'src/entities/request/detail_itinerary_simple_prior_explanation_request.d
 export 'src/entities/request/detail_itinerary_simple_version_title_request.dart';
 export 'src/entities/request/detail_inerary_request.dart';
 export 'src/entities/detail_itinerary_response.dart';
+export 'src/entities/request/sale_explenses_request.dart';
+export 'src/entities/request/sale_head_info_request.dart';
+export 'src/entities/request/sale_service_free_request.dart';
+export 'src/entities/request/sale_total_request.dart';
+export 'src/entities/sale_head_info_response.dart';
+export 'src/entities/sale_explenses_response.dart';
+export 'src/entities/sale_total_response.dart';
+export 'src/entities/sale_service_free_response.dart';
