@@ -32,26 +32,26 @@ import 'src/detail_patient/overseas_medical_data/overseas_medical_data_model.dar
 import 'src/detail_patient/patient_response_data/patient_response_model.dart'
     as _i17;
 import 'src/detail_patient/patient_response_data/tab/application_beauty_model.dart'
-    as _i18;
+    as _i27;
 import 'src/detail_patient/patient_response_data/tab/application_blood_purification_therapy_model.dart'
-    as _i19;
-import 'src/detail_patient/patient_response_data/tab/application_regenerative_medicine_model.dart'
-    as _i20;
-import 'src/detail_patient/patient_response_data/tab/application_risk_test_model.dart'
-    as _i21;
-import 'src/detail_patient/patient_response_data/tab/patient_response_medical_checkup_model.dart'
-    as _i22;
-import 'src/detail_patient/patient_response_data/tab/patient_response_other_model.dart'
-    as _i23;
-import 'src/detail_patient/patient_response_data/tab/patient_response_treatment_model.dart'
-    as _i24;
-import 'src/detail_patient/progress_list/progress_list_model.dart' as _i25;
-import 'src/detail_patient/proposal/proposal_model.dart' as _i26;
-import 'src/detail_patient/statement/statement_model.dart' as _i27;
-import 'src/detail_patient/web_reservation/detail_patient_web_reservation_model.dart'
     as _i28;
-import 'src/patient/patient_model.dart' as _i29;
-import 'src/pre_patient/pre_patient_model.dart' as _i30;
+import 'src/detail_patient/patient_response_data/tab/application_regenerative_medicine_model.dart'
+    as _i29;
+import 'src/detail_patient/patient_response_data/tab/application_risk_test_model.dart'
+    as _i30;
+import 'src/detail_patient/patient_response_data/tab/patient_response_medical_checkup_model.dart'
+    as _i18;
+import 'src/detail_patient/patient_response_data/tab/patient_response_other_model.dart'
+    as _i19;
+import 'src/detail_patient/patient_response_data/tab/patient_response_treatment_model.dart'
+    as _i20;
+import 'src/detail_patient/progress_list/progress_list_model.dart' as _i21;
+import 'src/detail_patient/proposal/proposal_model.dart' as _i22;
+import 'src/detail_patient/statement/statement_model.dart' as _i23;
+import 'src/detail_patient/web_reservation/detail_patient_web_reservation_model.dart'
+    as _i24;
+import 'src/patient/patient_model.dart' as _i25;
+import 'src/pre_patient/pre_patient_model.dart' as _i26;
 
 class FeaturePatientPackageModule extends _i1.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -88,38 +88,38 @@ class FeaturePatientPackageModule extends _i1.MicroPackageModule {
             patientRepository: gh<_i4.PatientRepository>()));
     gh.factory<_i17.PatientResponseModel>(() => _i17.PatientResponseModel(
         patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i18.ApplicationBeautyModel>(() => _i18.ApplicationBeautyModel(
+    gh.factory<_i18.PatientResponseMedicalCheckupModel>(() =>
+        _i18.PatientResponseMedicalCheckupModel(
+            patientRepository: gh<_i4.PatientRepository>()));
+    gh.factory<_i19.PatientResponseOtherModel>(() =>
+        _i19.PatientResponseOtherModel(
+            patientRepository: gh<_i4.PatientRepository>()));
+    gh.factory<_i20.PatientResponseTreatmentModel>(() =>
+        _i20.PatientResponseTreatmentModel(
+            patientRepository: gh<_i4.PatientRepository>()));
+    gh.factory<_i21.ProgressListModel>(() =>
+        _i21.ProgressListModel(patientRepository: gh<_i4.PatientRepository>()));
+    gh.factory<_i22.ProposalModel>(() =>
+        _i22.ProposalModel(patientRepository: gh<_i4.PatientRepository>()));
+    gh.factory<_i23.StatementModel>(() =>
+        _i23.StatementModel(patientRepository: gh<_i4.PatientRepository>()));
+    gh.factory<_i24.DetailPatientWebReservationModel>(() =>
+        _i24.DetailPatientWebReservationModel(
+            patientRepository: gh<_i4.PatientRepository>()));
+    gh.factory<_i25.PatientModel>(() =>
+        _i25.PatientModel(patientRepository: gh<_i4.PatientRepository>()));
+    gh.factory<_i26.PrePatientModel>(() =>
+        _i26.PrePatientModel(patientRepository: gh<_i4.PatientRepository>()));
+    gh.factory<_i27.ApplicationBeautyModel>(() => _i27.ApplicationBeautyModel(
         patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i19.ApplicationBloodPurificationTherapyModel>(() =>
-        _i19.ApplicationBloodPurificationTherapyModel(
+    gh.factory<_i28.ApplicationBloodPurificationTherapyModel>(() =>
+        _i28.ApplicationBloodPurificationTherapyModel(
             patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i20.ApplicationRegenerativeMedicalModel>(() =>
-        _i20.ApplicationRegenerativeMedicalModel(
+    gh.factory<_i29.ApplicationRegenerativeMedicalModel>(() =>
+        _i29.ApplicationRegenerativeMedicalModel(
             patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i21.ApplicationRiskTestModel>(() =>
-        _i21.ApplicationRiskTestModel(
+    gh.factory<_i30.ApplicationRiskTestModel>(() =>
+        _i30.ApplicationRiskTestModel(
             patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i22.PatientResponseMedicalCheckupModel>(() =>
-        _i22.PatientResponseMedicalCheckupModel(
-            patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i23.PatientResponseOtherModel>(() =>
-        _i23.PatientResponseOtherModel(
-            patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i24.PatientResponseTreatmentModel>(() =>
-        _i24.PatientResponseTreatmentModel(
-            patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i25.ProgressListModel>(() =>
-        _i25.ProgressListModel(patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i26.ProposalModel>(() =>
-        _i26.ProposalModel(patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i27.StatementModel>(() =>
-        _i27.StatementModel(patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i28.DetailPatientWebReservationModel>(() =>
-        _i28.DetailPatientWebReservationModel(
-            patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i29.PatientModel>(() =>
-        _i29.PatientModel(patientRepository: gh<_i4.PatientRepository>()));
-    gh.factory<_i30.PrePatientModel>(() =>
-        _i30.PrePatientModel(patientRepository: gh<_i4.PatientRepository>()));
   }
 }
