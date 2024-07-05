@@ -1,13 +1,13 @@
-#pre-commit:
-#  commands:
-#    pretty:
-#      glob: "*.dart"
-#      run: lefthook run fixer . && git add .
-#
-#
-#fixer:
-#  commands:
-#    dart-fix-import:
-#      run: fvm flutter pub run import_sorter:main
-#    dart-fixer:
-#      run: dart fix --apply
+pre-commit:
+  commands:
+    pretty:
+      glob: "*.dart"
+      run: lefthook run fixer . && git add .
+
+
+fixer:
+  commands:
+    dart-fix-import:
+      run: fvm flutter pub run import_sorter:main
+    dart-fixer:
+      run: dart fix --apply
