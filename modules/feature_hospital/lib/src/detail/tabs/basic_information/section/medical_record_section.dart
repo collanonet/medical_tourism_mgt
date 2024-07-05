@@ -35,14 +35,14 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                   SizedBox(height: context.appTheme.spacing.formSpacing),
               children: [
                 // Memo
-                const Text(
-                  'メモ',
-                  style: TextStyle(
-                    fontFamily: 'NotoSansJP',
-                    package: 'core_ui',
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
+                // const Text(
+                //   'メモ',
+                //   style: TextStyle(
+                //     fontFamily: 'NotoSansJP',
+                //     package: 'core_ui',
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                // ),
 
                 const Text(
                   '担当者名',
@@ -69,8 +69,9 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                     children: [
                                       RowSeparated(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         separatorBuilder:
                                             (BuildContext context, int index) =>
                                                 SizedBox(
@@ -126,8 +127,9 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                       ),
                                       RowSeparated(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         separatorBuilder:
                                             (BuildContext context, int index) =>
                                                 SizedBox(
@@ -182,8 +184,9 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                       ),
                                       RowSeparated(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         separatorBuilder:
                                             (BuildContext context, int index) =>
                                                 SizedBox(

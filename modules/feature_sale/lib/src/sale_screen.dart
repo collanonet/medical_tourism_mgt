@@ -1,6 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'body/sale_expenses.dart';
 import 'body/sale_service_free.dart';
@@ -166,7 +167,8 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                         ReactiveTextField<DateTime>(
                                           formControlName: 'payment_day',
                                           readOnly: true,
-                                          onTap: (value) => picker.showPicker(),
+                                          onTap: (value) =>
+                                              picker.showPicker(),
                                           valueAccessor:
                                               DateTimeValueAccessor(),
                                         ),
@@ -174,7 +176,8 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                           padding:
                                               const EdgeInsets.only(top: 6),
                                           child: Align(
-                                            alignment: Alignment.centerRight,
+                                            alignment:
+                                                Alignment.centerRight,
                                             child: IconButton(
                                               onPressed: () =>
                                                   picker.showPicker(),
@@ -225,7 +228,8 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                         ReactiveTextField<DateTime>(
                                           formControlName: 'settlement_day',
                                           readOnly: true,
-                                          onTap: (value) => picker.showPicker(),
+                                          onTap: (value) =>
+                                              picker.showPicker(),
                                           valueAccessor:
                                               DateTimeValueAccessor(),
                                         ),
@@ -233,7 +237,8 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                           padding:
                                               const EdgeInsets.only(top: 6),
                                           child: Align(
-                                            alignment: Alignment.centerRight,
+                                            alignment:
+                                                Alignment.centerRight,
                                             child: IconButton(
                                               onPressed: () =>
                                                   picker.showPicker(),
@@ -272,18 +277,18 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                     ],
                   ),
                 ),
-
+                    
                 const Text('サービス費'),
-
+                    
                 //class
                 const SaleServiceFree(),
                 const SizedBox(height: 20),
-
+                    
                 const Text('経費'),
                 //class
                 const SaleExpenses(),
                 const SizedBox(height: 20),
-
+                    
                 const Text('合計'),
                 const SaleTotal(),
               ],

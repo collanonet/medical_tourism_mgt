@@ -69,8 +69,9 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                     children: [
                                       RowSeparated(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.start,
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           separatorBuilder:
                                               ((BuildContext context, index) =>
                                                   SizedBox(
@@ -128,8 +129,11 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                   const Text('写真公開'),
                                                   RowSeparated(
                                                       crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
                                                       separatorBuilder:
                                                           ((context, index) =>
                                                               SizedBox(
@@ -188,8 +192,11 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                   const Text('指名'),
                                                   RowSeparated(
                                                       crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                      mainAxisAlignment: MainAxisAlignment.start,
+                                                          CrossAxisAlignment
+                                                              .start,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .start,
                                                       separatorBuilder: ((context,
                                                               index) =>
                                                           const SizedBox(
@@ -250,8 +257,9 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                           ]),
                                       RowSeparated(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         separatorBuilder:
                                             (BuildContext context, int index) =>
                                                 SizedBox(
@@ -302,8 +310,9 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                       ),
                                       RowSeparated(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         separatorBuilder:
                                             (BuildContext context, int index) =>
                                                 SizedBox(
@@ -353,8 +362,11 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                               currentForm,
                                                           child: RowSeparated(
                                                             crossAxisAlignment:
-                                                            CrossAxisAlignment.start,
-                                                            mainAxisAlignment: MainAxisAlignment.start,
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
                                                             separatorBuilder:
                                                                 ((BuildContext
                                                                             context,
@@ -402,36 +414,41 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                       'name':
                                                           FormControl<String>(),
                                                     })),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Icon(
-                                                          Icons.add_circle,
-                                                          color: context
-                                                              .appTheme
-                                                              .primaryColor,
-                                                        ),
-                                                        SizedBox(
-                                                          width: context
-                                                              .appTheme
-                                                              .spacing
-                                                              .marginSmall,
-                                                        ),
-                                                        Text(
-                                                          '所属学会を追加',
-                                                          style: TextStyle(
-                                                              color: context
-                                                                  .appTheme
-                                                                  .primaryColor),
-                                                        )
-                                                      ],
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 12),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Icon(
+                                                            Icons.add_circle,
+                                                            color: context
+                                                                .appTheme
+                                                                .primaryColor,
+                                                          ),
+                                                          SizedBox(
+                                                            width: context
+                                                                .appTheme
+                                                                .spacing
+                                                                .marginSmall,
+                                                          ),
+                                                          Text(
+                                                            '所属学会を追加',
+                                                            style: TextStyle(
+                                                                color: context
+                                                                    .appTheme
+                                                                    .primaryColor),
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -451,8 +468,11 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                               currentForm,
                                                           child: RowSeparated(
                                                             crossAxisAlignment:
-                                                            CrossAxisAlignment.start,
-                                                            mainAxisAlignment: MainAxisAlignment.start,
+                                                                CrossAxisAlignment
+                                                                    .start,
+                                                            mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .start,
                                                             separatorBuilder:
                                                                 ((BuildContext
                                                                             context,
@@ -500,36 +520,41 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                       'name':
                                                           FormControl<String>(),
                                                     })),
-                                                    child: Row(
-                                                      mainAxisSize:
-                                                          MainAxisSize.min,
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .center,
-                                                      mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                      children: [
-                                                        Icon(
-                                                          Icons.add_circle,
-                                                          color: context
-                                                              .appTheme
-                                                              .primaryColor,
-                                                        ),
-                                                        SizedBox(
-                                                          width: context
-                                                              .appTheme
-                                                              .spacing
-                                                              .marginSmall,
-                                                        ),
-                                                        Text(
-                                                          '資格を追加',
-                                                          style: TextStyle(
-                                                              color: context
-                                                                  .appTheme
-                                                                  .primaryColor),
-                                                        )
-                                                      ],
+                                                    child: Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 12),
+                                                      child: Row(
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
+                                                        crossAxisAlignment:
+                                                            CrossAxisAlignment
+                                                                .center,
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Icon(
+                                                            Icons.add_circle,
+                                                            color: context
+                                                                .appTheme
+                                                                .primaryColor,
+                                                          ),
+                                                          SizedBox(
+                                                            width: context
+                                                                .appTheme
+                                                                .spacing
+                                                                .marginSmall,
+                                                          ),
+                                                          Text(
+                                                            '資格を追加',
+                                                            style: TextStyle(
+                                                                color: context
+                                                                    .appTheme
+                                                                    .primaryColor),
+                                                          )
+                                                        ],
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -548,8 +573,9 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                             const Text('オンライン診療'),
                                             RowSeparated(
                                                 crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                                mainAxisAlignment: MainAxisAlignment.start,
+                                                    CrossAxisAlignment.start,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
                                                 separatorBuilder:
                                                     ((context, index) =>
                                                         SizedBox(
@@ -591,8 +617,9 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                           ]),
                                       RowSeparated(
                                           crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                          mainAxisAlignment: MainAxisAlignment.start,
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           separatorBuilder: ((context, index) =>
                                               SizedBox(
                                                 width: context.appTheme.spacing
@@ -617,8 +644,9 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                           ]),
                                       RowSeparated(
                                         crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.start,
+                                            CrossAxisAlignment.start,
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
                                         separatorBuilder:
                                             (BuildContext context, int index) =>
                                                 SizedBox(

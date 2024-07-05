@@ -76,7 +76,7 @@ class _ReservationDateSectionState extends State<ReservationDateSection> {
                                                     ),
                                             children: [
                                               Text(
-                                                '${formArray.controls.indexOf(control) + 1}',
+                                                '${1}',
                                                 style: context
                                                     .textTheme.bodyMedium,
                                               ),
@@ -109,7 +109,8 @@ class _ReservationDateSectionState extends State<ReservationDateSection> {
                                               ),
                                             ]),
                                       ),
-                                      Expanded(
+                                      SizedBox(
+                                        width: 350,
                                         child: RowSeparated(
                                           separatorBuilder: (context, index) =>
                                               SizedBox(
@@ -170,8 +171,10 @@ class _ReservationDateSectionState extends State<ReservationDateSection> {
                                                 CrossAxisAlignment.start,
                                             separatorBuilder:
                                                 (context, index) => SizedBox(
-                                                      height: context.appTheme
-                                                          .spacing.formSpacing,
+                                                      height: context
+                                                          .appTheme
+                                                          .spacing
+                                                          .marginExtraSmall,
                                                     ),
                                             children: [
                                               Text(
@@ -203,6 +206,10 @@ class _ReservationDateSectionState extends State<ReservationDateSection> {
                                                 },
                                               ),
                                             ]),
+                                      ),
+                                      const Text(
+                                        '~',
+                                        style: TextStyle(fontSize: 30),
                                       ),
                                       Expanded(
                                         child: ColumnSeparated(

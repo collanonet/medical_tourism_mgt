@@ -673,8 +673,11 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        const Text(
-                                          'オンライン診療', //
+                                        const Padding(
+                                          padding: EdgeInsets.only(left: 16),
+                                          child: Text(
+                                            'オンライン診療', //
+                                          ),
                                         ),
                                         Row(
                                           children: [
@@ -713,8 +716,11 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        const Text(
-                                          '医師の指名', //
+                                        const Padding(
+                                          padding: EdgeInsets.only(left: 18),
+                                          child: Text(
+                                            '医師の指名', //
+                                          ),
                                         ),
                                         Row(
                                           children: [

@@ -101,7 +101,7 @@ class _AgentBasicInformationScreenState
                                           },
                                           children: [
                                             Text(
-                                              '担当者名',
+                                              '会社名',
                                               style:
                                                   context.textTheme.bodyMedium,
                                             ),
@@ -472,7 +472,7 @@ class _AgentBasicInformationScreenState
                                                       .spacing.marginSmall,
                                                 ),
                                                 Text(
-                                                  '同行者を追加',
+                                                  '紹介手数料を追加',
                                                   style: TextStyle(
                                                       color: context.appTheme
                                                           .primaryColor),

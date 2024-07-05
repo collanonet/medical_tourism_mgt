@@ -124,9 +124,12 @@ class _QAndANewRegistrationSectionState
                                       context.appTheme.spacing.marginExtraSmall,
                                 ),
                             children: [
-                              Text(
-                                '分類',
-                                style: context.textTheme.bodyMedium,
+                              Padding(
+                                padding: const EdgeInsets.only(left: 12),
+                                child: Text(
+                                  '病院とこのQAデータを共有',
+                                  style: context.textTheme.bodyMedium,
+                                ),
                               ),
                               RowSeparated(
                                   separatorBuilder: (context, index) =>
