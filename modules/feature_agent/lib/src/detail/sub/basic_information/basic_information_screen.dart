@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:intl/intl.dart';
@@ -250,11 +251,13 @@ class _AgentBasicInformationScreenState
                                             ),
                                             ReactiveTextField(
                                               formControlName: 'phoneNumber',
-                                              keyboardType:
-                                                  TextInputType.number,
+                                              keyboardType: TextInputType.phone,
+                                              decoration: InputDecoration(
+                                                hintText: '+XXX-XXXX-XXXX',
+                                                prefixText: '',
+                                              ),
                                               inputFormatters: [
-                                                FilteringTextInputFormatter
-                                                    .allow(RegExp(r'[0-9]')),
+                                                CustomPhoneFormatter(),
                                               ],
                                             ),
                                           ],

@@ -138,8 +138,23 @@ class HospitalScreen extends StatelessWidget {
                                                                     .all(4),
                                                             decoration:
                                                                 BoxDecoration(
-                                                              color: Colors
-                                                                  .blueGrey,
+                                                              color: e == '健診'
+                                                                  ? Color(
+                                                                      0xffE238A0)
+                                                                  : e == '治療'
+                                                                      ? Color(
+                                                                          0xff53A6FF)
+                                                                      : e ==
+                                                                              '重粒子線'
+                                                                          ? Color(
+                                                                              0xffE238A0)
+                                                                          : e == '陽子線'
+                                                                              ? Color(0xff98DE51)
+                                                                              : e == '再生医療'
+                                                                                  ? Color(0xffE238A0)
+                                                                                  : e == '美容'
+                                                                                      ? Color(0xffF7654A)
+                                                                                      : Colors.blueGrey,
                                                               borderRadius:
                                                                   BorderRadius
                                                                       .circular(
