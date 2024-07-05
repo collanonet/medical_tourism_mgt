@@ -37,7 +37,8 @@ class DateFormatValidator extends TextInputFormatter {
     if (newValue.text.isEmpty) {
       return newValue;
     }
-    final isValidFormat = RegExp(r'^\d{4}/\d{2}/\d{2}$').hasMatch(newValue.text);
+    final isValidFormat =
+        RegExp(r'^\d{4}/\d{2}/\d{2}$').hasMatch(newValue.text);
     if (isValidFormat) {
       try {
         DateFormat('yyyy/MM/dd').parseStrict(newValue.text);
@@ -48,5 +49,35 @@ class DateFormatValidator extends TextInputFormatter {
     } else {
       return oldValue;
     }
+  }
+}
+
+class CustomPhoneFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+    String newText = newValue.text;
+    if (newText.isEmpty) return newValue.copyWith(text: '+');
+
+    // Ensure the first character is always '+'
+    if (newText[0] != '+') {
+      newText = '+' + newText.replaceAll('+', '');
+    }
+
+    // Remove all non-numeric characters except the leading '+'
+    newText = newText.substring(0, 1) + newText.substring(1).replaceAll(RegExp(r'[^0-9]'), '');
+
+    // Apply formatting
+    String formattedText = '+';
+    for (int i = 1; i < newText.length && i < 14; i++) {
+      if (i == 4 || i == 8) {
+        formattedText += '-';
+      }
+      formattedText += newText[i];
+    }
+
+    return newValue.copyWith(
+      text: formattedText,
+      selection: TextSelection.collapsed(offset: formattedText.length),
+    );
   }
 }
