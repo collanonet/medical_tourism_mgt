@@ -21,16 +21,16 @@ class SalePage extends StatefulWidget {
 class _SalePageState extends State<SalePage> {
   @override
   Widget build(BuildContext context) {
-    return Provider(
-      create: (context) => GetIt.I<SaleModel>(),
-      child: LayoutView(
-        selectedIndex: 9,
-        page: ReactiveFormBuilder(
+    return LayoutView(
+      selectedIndex: 9,
+      page: ReactiveFormConfig(
+        validationMessages: {},
+        child: ReactiveFormBuilder(
           form: () => saleManagementForm(),
           builder: (context, formGroup, child) {
-            return const ReactiveFormConfig(
-              validationMessages: {},
-              child: SaleManagementScreen(),
+            return Provider(
+              create: (context) => GetIt.I<SaleModel>()..fetchData(formGroup),
+              child: const SaleManagementScreen(),
             );
           },
         ),
