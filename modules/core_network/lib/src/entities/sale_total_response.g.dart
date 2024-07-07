@@ -9,8 +9,8 @@ part of 'sale_total_response.dart';
 TotalResponse _$TotalResponseFromJson(Map<String, dynamic> json) =>
     TotalResponse(
       id: json['_id'] as String,
-      totalSales: json['totalSales'] as int?,
-      totalSaleTax: json['totalSaleTax'] as int?,
+      totalSales: (json['totalSales'] as num?)?.toInt(),
+      totalSaleTax: (json['totalSaleTax'] as num?)?.toInt(),
       totalCost: json['totalCost'] as String?,
       totalCostTax: json['totalCostTax'] as String?,
       grossProfit: json['grossProfit'] as String?,
