@@ -151,6 +151,7 @@ class OverseasMedicalDataModel {
 
       var result = await patientRepository
           .postMedicalRecordOverseaData(medicalRecordOverseaDataRequest);
+
       createMedicalOverseaData.value = AsyncData(data: result);
       if (medicalRecordsOverseasData.value.hasData) {
         medicalRecordsOverseasData.value = AsyncData(data: [
