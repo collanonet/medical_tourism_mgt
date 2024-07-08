@@ -64,3 +64,4 @@ export 'medical_record_basic_info_hospital_response.dart';
 export 'additional_information_hospital_response.dart';
 export 'payment_option_hospital_response.dart';
 export 'support_language_hospital_response.dart';
+export 'application_treament_responce.dart';

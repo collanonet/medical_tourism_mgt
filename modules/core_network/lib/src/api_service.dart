@@ -556,7 +556,7 @@ abstract class ApiService {
   );
 
   @GET('${Endpoints.BOOKING_MEDICAL_RECORD}/info/{patientId}')
-  Future<MedicalExaminationResponse> getInfoMedicalExamination(
+  Future<TreamentResponce> getInfoMedicalExamination(
       @Path('patientId') String patientId);
 
   @GET('${Endpoints.BOOKING_MEDICAL_RECORD}/{medicalRecord}')

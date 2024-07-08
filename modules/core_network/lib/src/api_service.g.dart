@@ -2684,14 +2684,13 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<MedicalExaminationResponse> getInfoMedicalExamination(
-      String patientId) async {
+  Future<TreamentResponce> getInfoMedicalExamination(String patientId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MedicalExaminationResponse>(Options(
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<TreamentResponce>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -2707,7 +2706,7 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final _value = MedicalExaminationResponse.fromJson(_result.data!);
+    final _value = TreamentResponce.fromJson(_result.data!);
     return _value;
   }
 

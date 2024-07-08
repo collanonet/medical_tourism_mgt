@@ -25,7 +25,7 @@ class DetailPatientWebReservationModel {
   ValueNotifier<AsyncData<String>> patientIdData =
       ValueNotifier(const AsyncData<String>());
 
-  ValueNotifier<AsyncData<MedicalExaminationResponse>> infoWebBookingPatient =
+  ValueNotifier<AsyncData<TreamentResponce>> infoWebBookingPatient =
       ValueNotifier(const AsyncData());
 
   void getInfoMedicalExamination(FormGroup formGroup) async {
@@ -35,11 +35,15 @@ class DetailPatientWebReservationModel {
         patientIdData.value.requireData,
       );
       infoWebBookingPatient.value = AsyncData(data: response);
-      formGroup.control('preferredDate1').value = response.date1;
-      formGroup.control('preferredDate2').value = response.date2;
-      formGroup.control('preferredDate3').value = response.date3;
-      formGroup.control('noDesiredDate').value = response.desiredDate;
-      formGroup.control('remarks').value = response.remarks;
+      formGroup.control('preferredDate1').value = response.desiredDate1;
+      formGroup.control('preferredDate2').value = response.desiredDate2;
+      formGroup.control('preferredDate3').value = response.desiredDate3;
+      formGroup.control('noDesiredDate').value =
+          response.desiredDate1 == null &&
+              response.desiredDate2 == null &&
+              response.desiredDate3 == null;
+      formGroup.control('remarks').value = response.reason;
+      formGroup.control('medicalInstitutionName').value = response.medicalName;
     } catch (e) {
       infoWebBookingPatient.value = AsyncData(error: e);
     }

@@ -15,7 +15,7 @@ class PatientRepositoryIml extends PatientRepository {
   final PatientRemoteProvider remote;
 
   @override
-  Future<MedicalExaminationResponse> getInfoMedicalExamination(
+  Future<TreamentResponce> getInfoMedicalExamination(
     String patientId,
   ) {
     return remote.getInfoMedicalExamination(patientId);
