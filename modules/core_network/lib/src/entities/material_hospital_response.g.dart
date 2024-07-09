@@ -11,6 +11,11 @@ MaterialHospitalResponse _$MaterialHospitalResponseFromJson(
     MaterialHospitalResponse(
       id: json['_id'] as String?,
       memo: json['memo'] as String?,
+      file: json['file'] as String?,
+      brochureName: json['brochureName'] as String?,
+      author: json['author'] as String?,
+      dateOfIssue: json['dateOfIssue'] as String?,
+      share: json['share'] as String?,
     );
 
 Map<String, dynamic> _$MaterialHospitalResponseToJson(
@@ -18,4 +23,9 @@ Map<String, dynamic> _$MaterialHospitalResponseToJson(
     <String, dynamic>{
       '_id': instance.id,
       'memo': instance.memo,
+      'file': instance.file,
+      'brochureName': instance.brochureName,
+      'author': instance.author,
+      'dateOfIssue': instance.dateOfIssue,
+      'share': instance.share,
     };

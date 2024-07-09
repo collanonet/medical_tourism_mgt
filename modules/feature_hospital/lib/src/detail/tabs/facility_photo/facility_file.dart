@@ -1,18 +1,16 @@
-
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../overseas_medical_data_model.dart';
+import 'facility_photo_model.dart';
 
-class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
-  const CreateMedicalOverseaDataWithFileScreen({super.key, this.title});
+class Popup extends StatelessWidget {
+  const Popup({super.key, this.title});
 
   final String? title;
   @override
@@ -45,21 +43,22 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
           ],
         ),
         Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    '病院',
+                    'パンフレット名',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  ReactiveTextField<String>(
-                    formControlName: 'hospitalName',
-                    decoration: InputDecoration(
-                      hintText: '病院名を入力',
+                  IntrinsicWidth(
+                    stepWidth: 300,
+                    child: ReactiveTextField<String>(
+                      formControlName: 'NameOfHspital',
+                      decoration: InputDecoration(
+                        hintText: '病院名を入力',
+                      ),
                     ),
                   ),
                 ],
@@ -71,115 +70,96 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    'カテゴリ',
+                    '作成者',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  Row(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      IntrinsicWidth(
-                        child: ReactiveRadioListTile(
-                          formControlName: 'category',
-                          title: const Text('画像データ（DICOM）'),
-                          value: '画像データ（DICOM）',
-                        ),
+                  IntrinsicWidth(
+                    stepWidth: 300,
+                    child: ReactiveTextField<String>(
+                      formControlName: 'photograph',
+                      decoration: InputDecoration(
+                        hintText: '作成者',
                       ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      IntrinsicWidth(
-                        child: ReactiveRadioListTile(
-                          formControlName: 'category',
-                          title: const Text('病状資料'),
-                          value: '病状資料',
-                        ),
-                      ),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    '書類名',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  const ReactiveDropdownFormField(
-                    formControlName: 'documentName',
-                    items: [
-                      DropdownMenuItem(
-                        value: 'PET-CT',
-                        child: Text('PET-CT'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'MRI',
-                        child: Text('MRI'),
-                      ),
-                      DropdownMenuItem(
-                        value: '入退院記録',
-                        child: Text('入退院記録'),
-                      ),
-                      DropdownMenuItem(
-                        value: '検査結果',
-                        child: Text('検査結果'),
-                      ),
-                      DropdownMenuItem(
-                        value: '手術記録',
-                        child: Text('手術記録'),
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),
             ),
           ],
         ),
-        Text(
-          '発行日',
-          style: Theme.of(context).textTheme.bodySmall,
+        SizedBox(
+          height: context.appTheme.spacing.marginMedium,
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: ReactiveDatePicker<DateTime>(
-                formControlName: 'issueDate',
-                firstDate: DateTime(1900),
-                lastDate: DateTime(2100),
-                builder: (BuildContext context,
-                    ReactiveDatePickerDelegate<dynamic> picker, Widget? child) {
-                  return ReactiveTextField<DateTime>(
-                    formControlName: 'issueDate',
-                    valueAccessor: DateTimeValueAccessor(
-                      dateTimeFormat: DateFormat('yyyy/MM/dd'),
+              child: Column(
+                children: [
+                  Text(
+                    '発行日',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  IntrinsicWidth(
+                    stepWidth: 300,
+                    child: ReactiveDatePicker<DateTime>(
+                      formControlName: 'shooting_date',
+                      firstDate: DateTime(1900),
+                      lastDate: DateTime(2100),
+                      builder: (BuildContext context,
+                          ReactiveDatePickerDelegate<dynamic> picker,
+                          Widget? child) {
+                        return ReactiveTextField<DateTime>(
+                          formControlName: 'shooting_date',
+                          valueAccessor: DateTimeValueAccessor(
+                              //dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                              ),
+                          decoration: InputDecoration(
+                            label: const Text(
+                              "発行日",
+                            ),
+                            suffixIcon: IconButton(
+                              icon: const Icon(
+                                CupertinoIcons.calendar,
+                                color: Colors.grey,
+                              ),
+                              onPressed: picker.showPicker,
+                            ),
+                          ),
+                          inputFormatters: [
+                            formatter.dateFormatter,
+                          ],
+                        );
+                      },
                     ),
-                    decoration: InputDecoration(
-                      label: const Text(
-                        "発行日",
-                      ),
-                      suffixIcon: IconButton(
-                        icon: const Icon(
-                          CupertinoIcons.calendar,
-                          color: Colors.grey,
-                        ),
-                        onPressed: picker.showPicker,
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: context.appTheme.spacing.marginMedium,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    '共有',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  IntrinsicWidth(
+                    stepWidth: 300,
+                    child: ReactiveTextField<String>(
+                      formControlName: 'share',
+                      decoration: InputDecoration(
+                        hintText: '共有',
                       ),
                     ),
-                    inputFormatters: [
-                      formatter.dateFormatter,
-                    ],
-                  );
-                },
+                  ),
+                ],
               ),
             ),
             SizedBox(
@@ -213,14 +193,9 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
               width: context.appTheme.spacing.marginMedium,
             ),
             ValueListenableListener(
-              valueListenable: context
-                  .read<OverseasMedicalDataModel>()
-                  .createMedicalOverseaData,
+              valueListenable: context.read<FacilityModel>().submit,
               onListen: () {
-                final value = context
-                    .read<OverseasMedicalDataModel>()
-                    .createMedicalOverseaData
-                    .value;
+                final value = context.read<FacilityModel>().submit.value;
 
                 if (value.hasError) {
                   snackBarWidget(
@@ -240,17 +215,15 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
                 }
               },
               child: ValueListenableBuilder(
-                  valueListenable: context
-                      .read<OverseasMedicalDataModel>()
-                      .createMedicalOverseaData,
+                  valueListenable: context.read<FacilityModel>().submit,
                   builder: (context, value, _) {
                     return ElevatedButton(
                       onPressed: value.loading
                           ? null
                           : () {
                               context
-                                  .read<OverseasMedicalDataModel>()
-                                  .postMedicalRecordsOverseasData(formGroup);
+                                  .read<FacilityModel>()
+                                  .fetchFacility(formGroup);
                             },
                       child: WithLoadingButton(
                           isLoading: value.loading, child: Text('保存する')),

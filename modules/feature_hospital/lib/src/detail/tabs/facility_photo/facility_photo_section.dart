@@ -1,10 +1,16 @@
-import 'dart:js';
-
+import 'package:core_l10n/l10n.dart';
+import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+
+import 'facility_file.dart';
+import 'facility_photo_form.dart';
+import 'facility_photo_model.dart';
 
 class FacilityPhotoSection extends StatefulWidget {
   const FacilityPhotoSection({super.key});
@@ -24,7 +30,9 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
         InkWell(
           onTap: () {
             filePicker().then((value) {
-              debugPrint(value.toString());
+              if (value != null) {
+                showCreateWithFileDialog(context, value);
+              }
             });
           },
           child: Container(
@@ -55,7 +63,7 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                 Column(
                   children: [
                     Text(
-                      'パンフレットや資料をここにドラッグ＆ドロップ',
+                      '診療データをここにドラッグ＆ドロップ',
                       style: context.textTheme.bodySmall?.copyWith(
                         fontSize: 22,
                         fontWeight: FontWeight.bold,
@@ -67,7 +75,7 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                     ElevatedButton(
                       onPressed: () {
                         filePicker().then((value) {
-                          debugPrint(value.toString());
+                          if (value != null) {}
                         });
                       },
                       child: const Text(
@@ -80,6 +88,65 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
             ),
           ),
         ),
+        // InkWell(
+        //   onTap: () {
+        //     filePicker().then((value) {
+        //       debugPrint(value.toString());
+        //     });
+        //   },
+        //   child: Container(
+        //     padding: EdgeInsets.all(
+        //       context.appTheme.spacing.marginExtraLarge,
+        //     ),
+        //     decoration: BoxDecoration(
+        //       color: Colors.white,
+        //       borderRadius: BorderRadius.all(Radius.circular(
+        //         context.appTheme.spacing.borderRadiusMedium,
+        //       )),
+        //       border: Border.all(
+        //         color: context.appTheme.primaryColor,
+        //       ),
+        //     ),
+        //     child: Row(
+        //       crossAxisAlignment: CrossAxisAlignment.center,
+        //       mainAxisAlignment: MainAxisAlignment.center,
+        //       children: [
+        //         Icon(
+        //           Icons.copy_all_rounded,
+        //           size: 50,
+        //           color: context.appTheme.primaryColor,
+        //         ),
+        //         SizedBox(
+        //           width: context.appTheme.spacing.marginMedium,
+        //         ),
+        //         Column(
+        //           children: [
+        //             Text(
+        //               'パンフレットや資料をここにドラッグ＆ドロップ',
+        //               style: context.textTheme.bodySmall?.copyWith(
+        //                 fontSize: 22,
+        //                 fontWeight: FontWeight.bold,
+        //               ),
+        //             ),
+        //             SizedBox(
+        //               height: context.appTheme.spacing.marginMedium,
+        //             ),
+        //             ElevatedButton(
+        //               onPressed: () {
+        //                 filePicker().then((value) {
+        //                   debugPrint(value.toString());
+        //                 });
+        //               },
+        //               child: const Text(
+        //                 'またはファイルを選択する',
+        //               ),
+        //             )
+        //           ],
+        //         )
+        //       ],
+        //     ),
+        //   ),
+        // ),
         Expanded(
           child: DataTable2(
             columnSpacing: 16,
@@ -165,6 +232,29 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
           ),
         )
       ],
+    );
+  }
+
+  void showCreateWithFileDialog(BuildContext context, FileSelect file) {
+    showDialog(
+      context: context,
+      builder: (_) => Provider.value(
+        value: context.read<FacilityModel>(),
+        child: AlertDialog(
+          content: ReactiveFormConfig(
+            validationMessages: <String, ValidationMessageFunction>{
+              ValidationMessage.required: (error) =>
+                  context.l10n.mgsFieldRequired,
+            },
+            child: ReactiveFormBuilder(
+              form: () => facilityPhotoForm()..markAllAsTouched(),
+              builder: (context, formGroup, child) {
+                return const Popup();
+              },
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1027,6 +1027,14 @@ abstract class ApiService {
   Future<TotalResponse> postTotal(
     @Body() TotalRequest totalRequest,
   );
+
+  @GET(Endpoints.FACILITY_PHOTO)
+  Future<FacilityResponse> getFacilityPhoto();
+
+  @POST(Endpoints.FACILITY_PHOTO)
+  Future<FacilityResponse> postFacilityPhoto(
+    @Body() FacilityRequest facilityRequest,
+  );
 }
 
 extension ApiServiceExts on ApiService {

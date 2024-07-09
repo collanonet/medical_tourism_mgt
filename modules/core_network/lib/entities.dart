@@ -44,3 +44,5 @@ export 'src/entities/sale_head_info_response.dart';
 export 'src/entities/sale_explenses_response.dart';
 export 'src/entities/sale_total_response.dart';
 export 'src/entities/sale_service_free_response.dart';
+export 'src/entities/facility_photo_response.dart';
+export 'src/entities/request/facility_photo_request.dart';

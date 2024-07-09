@@ -1,17 +1,24 @@
 import 'package:json_annotation/json_annotation.dart';
-
 part 'material_hospital_request.g.dart';
 
 @JsonSerializable()
 class MaterialHospitalRequest {
-  @JsonKey(name: '_id')
-  final String? id;
-  final String? memo;
 
-  MaterialHospitalRequest({
-    this.id,
+   String? memo;
+  final String? file;
+   String? brochureName;
+   String? author;
+   String? dateOfIssue;
+   String? share;
+
+ MaterialHospitalRequest({
     this.memo,
-  });
+    this.file,
+    this.brochureName,
+    this.author,
+    this.dateOfIssue,
+    this.share,
+ });
 
   factory MaterialHospitalRequest.fromJson(Map<String, dynamic> json) =>
       _$MaterialHospitalRequestFromJson(json);

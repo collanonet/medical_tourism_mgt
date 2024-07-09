@@ -1,7 +1,13 @@
 import 'package:core_network/core_network.dart';
+import 'package:core_network/entities.dart';
 
 abstract class HospitalRepository {
   /// Get basic information of hospital C3 Page
+  ///
+  Future<FileResponse> uploadFileBase64(
+    String file,
+    String filename,
+  );
 
   Future<BasicInformationHospitalResponse> getBasicInformationHospital(
     String hospitalId,
@@ -77,6 +83,12 @@ abstract class HospitalRepository {
   );
 
   Future<List<BasicInformationHospitalResponse>> getHospitals();
+
+  Future<FacilityResponse> getFacilityPhoto();
+
+  Future<FacilityResponse> postFacilityPhoto(
+    FacilityRequest facilityRequest,
+  );
 
   /// end get basic information of hospital C3 Page
 }

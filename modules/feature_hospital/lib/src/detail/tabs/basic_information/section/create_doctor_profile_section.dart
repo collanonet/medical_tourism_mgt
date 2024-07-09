@@ -4,12 +4,9 @@ import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-
 import '../basic_information_model.dart';
 
 class AddDoctorProfile extends StatefulWidget {
@@ -79,6 +76,7 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                         .spacing.formSpacing,
                                                   )),
                                           children: [
+                                            
                                             InkWell(
                                               onTap: () {
                                                 imagePicker().then((value) => {

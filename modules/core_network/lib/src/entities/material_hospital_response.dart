@@ -6,11 +6,21 @@ part 'material_hospital_response.g.dart';
 class MaterialHospitalResponse {
   @JsonKey(name: '_id')
   final String? id;
-  final String? memo;
+ String? memo;
+   String? file;
+   String? brochureName;
+   String? author;
+   String? dateOfIssue;
+   String? share;
 
   MaterialHospitalResponse({
     this.id,
     this.memo,
+    this.file,
+    this.brochureName,
+    this.author,
+    this.dateOfIssue,
+    this.share,
   });
 
   factory MaterialHospitalResponse.fromJson(Map<String, dynamic> json) =>

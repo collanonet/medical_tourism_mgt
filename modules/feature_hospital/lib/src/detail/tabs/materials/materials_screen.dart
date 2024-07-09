@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:core_network/core_network.dart';
 import 'package:feature_hospital/src/detail/tabs/materials/material_model.dart';
 import 'package:feature_hospital/src/detail/tabs/materials/materials_section.dart';
 import 'package:flutter/material.dart';

@@ -1,6 +1,8 @@
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -42,46 +44,89 @@ class _HospitalFilterState extends State<HospitalFilter> {
                     Row(
                       children: [
                         Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'hospitalName',
-                            decoration: InputDecoration(
-                              label: Text(
-                                '病院名',
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('病院名'),
+                              ReactiveTextField(
+                                formControlName: 'hospitalName',
                               ),
-                            ),
+                            ],
                           ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'type',
-                            decoration: InputDecoration(
-                              label: Text(
-                                '種別',
-                              ),
-                            ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('種別'),
+                              ValueListenableBuilder(
+                                  valueListenable:
+                                      context.read<HospitalModel>().typeData,
+                                  builder: (context, value, _) {
+                                    return ReactiveDropdownFormField(
+                                      formControlName: 'type',
+                                      items: value
+                                          .map((e) => DropdownMenuItem(
+                                                value: e.type,
+                                                child: Text(
+                                                  e.type,
+                                                ),
+                                              ))
+                                          .toList(),
+                                    );
+                                  }),
+                            ],
                           ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'keyword',
-                            decoration: InputDecoration(
-                              label: Text(
-                                'エリア',
-                              ),
-                            ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('エリア'),
+                              ValueListenableBuilder(
+                                  valueListenable:
+                                      context.read<HospitalModel>().areaData,
+                                  builder: (context, value, _) {
+                                    return ReactiveDropdownFormField(
+                                      formControlName: 'keyword',
+                                      items: value
+                                          .map((e) => DropdownMenuItem(
+                                                value: e.item,
+                                                child: Text(
+                                                  e.item,
+                                                ),
+                                              ))
+                                          .toList(),
+                                    );
+                                  }),
+                            ],
                           ),
                         ),
                         const SizedBox(width: 16),
                         Expanded(
-                          child: ReactiveTextField(
-                            formControlName: 'r_have',
-                            decoration: InputDecoration(
-                              label: Text(
-                                'Rあり',
-                              ),
-                            ),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const Text('Rあり'),
+                              ValueListenableBuilder(
+                                  valueListenable:
+                                      context.read<HospitalModel>().withRData,
+                                  builder: (context, value, _) {
+                                    return ReactiveDropdownFormField(
+                                      formControlName: 'r_have',
+                                      items: value
+                                          .map((e) => DropdownMenuItem(
+                                                value: e.item,
+                                                child: Text(
+                                                  e.item,
+                                                ),
+                                              ))
+                                          .toList(),
+                                    );
+                                  }),
+                            ],
                           ),
                         ),
                       ],

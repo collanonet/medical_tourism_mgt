@@ -1,4 +1,5 @@
 import 'package:core_network/core_network.dart';
+import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
@@ -133,5 +134,18 @@ class HospitalRemoteProvider {
     return apiService.getHospitals();
   }
 
+  Future<FacilityResponse> getFacilityPhoto(){
+    return apiService.getFacilityPhoto();
+  }
+
+  Future<FacilityResponse> postFacilityPhoto(FacilityRequest facilityRequest){
+    return apiService.postFacilityPhoto(facilityRequest);
+  }
+
+   Future<FileResponse> uploadFileBase64(
+    String file,
+    String filename) {
+      return apiService.uploadFileBase64(file, filename);
+    }
   /// end get basic information of hospital C3 Page
 }

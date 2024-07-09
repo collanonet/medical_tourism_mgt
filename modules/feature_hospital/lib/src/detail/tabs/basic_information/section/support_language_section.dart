@@ -19,152 +19,166 @@ class _SupportLanguageSectionState extends State<SupportLanguageSection> {
   Widget build(BuildContext context) {
     final formArray = (ReactiveForm.of(context) as FormGroup)
         .control('supportLanguageSection') as FormArray;
+    final form = (ReactiveForm.of(context) as FormGroup);
     return ValueListenableBuilder(
-        valueListenable:
-            context.watch<BasicInformationModel>().supportLangaugeData,
-        builder: (context, value, _) {
-          return Skeletonizer(
-            enabled: value.loading,
-            child: ColumnSeparated(
+      valueListenable:
+          context.watch<BasicInformationModel>().supportLangaugeData,
+      builder: (context, value, _) {
+        return Skeletonizer(
+          enabled: value.loading,
+          child: ColumnSeparated(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            separatorBuilder: (context, index) => SizedBox(
+              height: context.appTheme.spacing.formSpacing,
+            ),
+            children: [
+              Text(
+                '言語を追加',
+                style: context.textTheme.bodyLarge,
+              ),
+              RowSeparated(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
                 separatorBuilder: (context, index) => SizedBox(
-                      height: context.appTheme.spacing.formSpacing,
-                    ),
+                  width: context.appTheme.spacing.formSpacing,
+                ),
                 children: [
-                  Text(
-                    '言語を追加',
-                    style: context.textTheme.bodyLarge,
-                  ),
-                  RowSeparated(
+                  ColumnSeparated(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
                       separatorBuilder: (context, index) => SizedBox(
+                            height: context.appTheme.spacing.marginExtraSmall,
+                          ),
+                      children: ['', '外国人スタッフ', '医療通訳対応']
+                          .map((text) => IntrinsicWidth(
+                                stepWidth: 150,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Text(
+                                    text,
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                ),
+                              ))
+                          .toList()),
+                  IntrinsicWidth(
+                    child: ReactiveFormArray(
+                      formArrayName: 'supportLanguageSection',
+                      builder: (context, formArray, child) {
+                        return RowSeparated(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          separatorBuilder: (context, index) => SizedBox(
                             width: context.appTheme.spacing.formSpacing,
                           ),
-                      children: [
-                        ColumnSeparated(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            separatorBuilder: (context, index) => SizedBox(
-                                  height:
-                                      context.appTheme.spacing.marginExtraSmall,
-                                ),
-                            children: ['', '外国人スタッフ', '医療通訳対応']
-                                .map((text) => IntrinsicWidth(
-                                      stepWidth: 150,
-                                      child: Padding(
-                                        padding: const EdgeInsets.all(16.0),
-                                        child: Text(
-                                          text,
-                                          style: context.textTheme.bodyMedium,
+                          children: formArray.controls.map((fg) {
+                            return Expanded(
+                              child: ColumnSeparated(
+                                separatorBuilder: ((context, index) => SizedBox(
+                                      height: context
+                                          .appTheme.spacing.marginExtraSmall,
+                                    )),
+                                children: <Widget>[
+                                  IntrinsicWidth(
+                                    stepWidth: 150,
+                                    child: ReactiveTextField<String>(
+                                      formControl: (fg as FormGroup)
+                                              .control('supportLanguage')
+                                          as FormControl<String>,
+                                    ),
+                                  ),
+                                  IntrinsicWidth(
+                                    stepWidth: 150,
+                                    child: ReactiveDropdownField(
+                                      formControl: (fg).control('foreignStaff')
+                                          as FormControl<bool>,
+                                      items: const <DropdownMenuItem<bool>>[
+                                        DropdownMenuItem<bool>(
+                                          value: true,
+                                          child: Text('○'),
                                         ),
-                                      ),
-                                    ))
-                                .toList()),
-                        IntrinsicWidth(
-                          child: ReactiveFormArray(
-                            formArrayName: 'supportLanguageSection',
-                            builder: (context, formArray, child) {
-                              return RowSeparated(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                separatorBuilder: (context, index) => SizedBox(
-                                  width: context.appTheme.spacing.formSpacing,
-                                ),
-                                children: formArray.controls.map((fg) {
-                                  return Expanded(
-                                    child: ColumnSeparated(
-                                      separatorBuilder: ((context, index) =>
-                                          SizedBox(
-                                            height: context.appTheme.spacing
-                                                .marginExtraSmall,
-                                          )),
-                                      children: <Widget>[
-                                        IntrinsicWidth(
-                                          stepWidth: 150,
-                                          child: ReactiveTextField<String>(
-                                            formControl: (fg as FormGroup)
-                                                    .control('supportLanguage')
-                                                as FormControl<String>,
-                                          ),
-                                        ),
-                                        IntrinsicWidth(
-                                          stepWidth: 150,
-                                          child: ReactiveDropdownField(
-                                            formControl:
-                                                (fg).control('foreignStaff')
-                                                    as FormControl<bool>,
-                                            items: const <DropdownMenuItem<
-                                                bool>>[
-                                              DropdownMenuItem<bool>(
-                                                value: true,
-                                                child: Text('○'),
-                                              ),
-                                              DropdownMenuItem<bool>(
-                                                value: false,
-                                                child: Text('✖︎'),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                        IntrinsicWidth(
-                                          stepWidth: 150,
-                                          child: ReactiveDropdownField(
-                                            formControl: (fg).control(
-                                                    'medicalInterpretationSupport')
-                                                as FormControl<bool>,
-                                            items: const <DropdownMenuItem<
-                                                bool>>[
-                                              DropdownMenuItem<bool>(
-                                                value: true,
-                                                child: Text('○'),
-                                              ),
-                                              DropdownMenuItem<bool>(
-                                                value: false,
-                                                child: Text('✖︎'),
-                                              ),
-                                            ],
-                                          ),
+                                        DropdownMenuItem<bool>(
+                                          value: false,
+                                          child: Text('✖︎'),
                                         ),
                                       ],
                                     ),
-                                  );
-                                }).toList(),
-                              );
-                            },
-                          ),
-                        ),
-                        InkWell(
-                          onTap: () => formArray.add(FormGroup({
-                            '_id': FormControl<String?>(),
-                            'hospital': FormControl<String?>(),
-                            'supportLanguage': FormControl<String>(),
-                            'foreignStaff': FormControl<bool>(value: false),
-                            'medicalInterpretationSupport':
-                                FormControl<bool>(value: false),
-                          })),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.add_circle,
-                                color: context.appTheme.primaryColor,
+                                  ),
+                                  IntrinsicWidth(
+                                    stepWidth: 150,
+                                    child: ReactiveDropdownField(
+                                      formControl: (fg).control(
+                                              'medicalInterpretationSupport')
+                                          as FormControl<bool>,
+                                      items: const <DropdownMenuItem<bool>>[
+                                        DropdownMenuItem<bool>(
+                                          value: true,
+                                          child: Text('○'),
+                                        ),
+                                        DropdownMenuItem<bool>(
+                                          value: false,
+                                          child: Text('✖︎'),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginSmall,
-                              ),
-                              Text(
-                                '担当者を追加',
-                                style: TextStyle(
-                                    color: context.appTheme.primaryColor),
-                              )
-                            ],
-                          ),
+                            );
+                          }).toList(),
+                        );
+                      },
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () => formArray.add(FormGroup({
+                      '_id': FormControl<String?>(),
+                      'hospital': FormControl<String?>(),
+                      'supportLanguage': FormControl<String>(),
+                      'foreignStaff': FormControl<bool>(value: false),
+                      'medicalInterpretationSupport':
+                          FormControl<bool>(value: false),
+                    })),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.add_circle,
+                          color: context.appTheme.primaryColor,
                         ),
-                      ]),
-                ]),
-          );
-        });
+                        SizedBox(
+                          width: context.appTheme.spacing.marginSmall,
+                        ),
+                        Text(
+                          '担当者を追加',
+                          style:
+                              TextStyle(color: context.appTheme.primaryColor),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+              ReactiveForm(
+                formGroup: form.control('paymentOptionSection') as FormGroup,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 160),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text('備考'),
+                      ReactiveTextField(
+                        formControlName: 'supportLanguagr_remark',
+                      ),
+                    ],
+                  ),
+                ),
+              )
+            ],
+          ),
+        );
+      },
+    );
   }
 }

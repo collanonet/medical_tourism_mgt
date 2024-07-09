@@ -1,4 +1,5 @@
 import 'package:core_network/core_network.dart';
+import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 
 import '../providers/hospital_local_provider.dart';
@@ -150,5 +151,20 @@ class HospitalRepositoryIml extends HospitalRepository {
   @override
   Future<List<BasicInformationHospitalResponse>> getHospitals() {
     return remote.getHospitals();
+  }
+  
+  @override
+  Future<FileResponse> uploadFileBase64(String file, String filename) {
+    return remote.uploadFileBase64(file, filename);
+  }
+
+  @override
+  Future<FacilityResponse> getFacilityPhoto() {
+   return remote.getFacilityPhoto();
+  }
+
+  @override
+  Future<FacilityResponse> postFacilityPhoto(FacilityRequest facilityRequest) {
+    return remote.postFacilityPhoto(facilityRequest);
   }
 }

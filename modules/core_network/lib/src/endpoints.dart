@@ -199,4 +199,7 @@ class Endpoints {
   static const SALE_SERVICE_FREE = 'sale-service-free';
   static const SALE_EXPLENSES = 'sale-explenses';
   static const SALE_TOTAL = 'sale-total';
+
+  //C5
+  static const FACILITY_PHOTO = 'facility-photo';
 }
