@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup formWebAppointment() => FormGroup({
+FormGroup formWebAppointment({String? id}) => FormGroup({
       'patientName': FormControl<String>(
-        disabled: true,
+        disabled: id != null,
       ),
       'preferredDate1': FormControl<DateTime>(
         disabled: true,

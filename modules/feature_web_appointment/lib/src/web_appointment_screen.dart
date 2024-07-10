@@ -46,7 +46,7 @@ class WebAppointmentScreen extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                context.router.push(DetailPatientRoute());
+                context.router.push(WebAppointmentDetailRoute());
               },
               child: Text(context.l10n.actionNewRegistration),
             ),

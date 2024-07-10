@@ -9,6 +9,14 @@ class WebAppointmentRemoteProvider {
 
   final ApiService apiService;
 
+  Future<TreamentResponce> getInfoMedicalExamination(
+      String patientId,
+      ) async {
+    return apiService.getInfoMedicalExamination(
+      patientId,
+    );
+  }
+
   Future<List<WebBookingMedicalRecord>> getWebBookingAdmin() async {
     return apiService.getWebBookingAdmin();
   }

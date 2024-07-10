@@ -18,7 +18,10 @@ abstract class $FeatureWebAppointmentRouterModule extends _i3.AutoRouterModule {
   @override
   final Map<String, _i3.PageFactory> pagesMap = {
     WebAppointmentDetailRoute.name: (routeData) {
-      final args = routeData.argsAs<WebAppointmentDetailRouteArgs>();
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<WebAppointmentDetailRouteArgs>(
+          orElse: () =>
+              WebAppointmentDetailRouteArgs(id: pathParams.optString('id')));
       return _i3.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i1.WebAppointmentDetailPage(
@@ -42,7 +45,7 @@ class WebAppointmentDetailRoute
     extends _i3.PageRouteInfo<WebAppointmentDetailRouteArgs> {
   WebAppointmentDetailRoute({
     _i4.Key? key,
-    required String id,
+    String? id,
     List<_i3.PageRouteInfo>? children,
   }) : super(
           WebAppointmentDetailRoute.name,
@@ -50,6 +53,7 @@ class WebAppointmentDetailRoute
             key: key,
             id: id,
           ),
+          rawPathParams: {'id': id},
           initialChildren: children,
         );
 
@@ -62,12 +66,12 @@ class WebAppointmentDetailRoute
 class WebAppointmentDetailRouteArgs {
   const WebAppointmentDetailRouteArgs({
     this.key,
-    required this.id,
+    this.id,
   });
 
   final _i4.Key? key;
 
-  final String id;
+  final String? id;
 
   @override
   String toString() {
