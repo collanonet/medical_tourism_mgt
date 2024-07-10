@@ -971,9 +971,9 @@ abstract class ApiService {
   );
 
   @GET('${Endpoints.GET_MATERIAL_HOSPITAL}/{hospitalId}')
-  Future<MaterialHospitalResponse> getMaterialHospital(
-    @Path('hospitalId') String hospitalId,
-  );
+  Future<List<MaterialHospitalResponse>> getMaterialHospital({
+    @Path('hospitalId') required String hospitalId,
+  });
 
   @POST(Endpoints.GET_MATERIAL_HOSPITAL)
   Future<MaterialHospitalResponse> postMaterialHospital(

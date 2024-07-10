@@ -1,10 +1,11 @@
 import 'package:core_network/entities.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup estimateInvoiceForm({required String agentRecordId}) {
+FormGroup estimateInvoiceForm(
+    {required String agentRecordId, required FileSelect file}) {
   return FormGroup({
     'agentRecord': FormControl<String>(value: agentRecordId),
-    'uploadFile': FormControl<FileSelect>(),
+    'uploadFile': FormControl<FileSelect>(value: file),
     'documentName': FormControl<String>(),
     'publisher': FormControl<String>(),
     'dateOfIssue': FormControl<DateTime>(),

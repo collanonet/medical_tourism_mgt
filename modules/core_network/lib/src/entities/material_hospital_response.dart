@@ -6,7 +6,6 @@ part 'material_hospital_response.g.dart';
 class MaterialHospitalResponse {
   @JsonKey(name: '_id')
   final String? id;
- String? memo;
    String? file;
    String? brochureName;
    String? author;
@@ -15,7 +14,6 @@ class MaterialHospitalResponse {
 
   MaterialHospitalResponse({
     this.id,
-    this.memo,
     this.file,
     this.brochureName,
     this.author,

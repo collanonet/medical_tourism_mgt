@@ -132,7 +132,8 @@ class _ContractScreenState extends State<ContractScreen> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => contractForm(agentRecordId: widget.id)..markAllAsTouched(),
+              form: () => contractForm(agentRecordId: widget.id, file: file)
+                ..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const Popup();
               },

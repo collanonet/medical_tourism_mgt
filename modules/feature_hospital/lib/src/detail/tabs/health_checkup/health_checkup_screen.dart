@@ -21,16 +21,12 @@ class _HealthCheckupScreenState extends State<HealthCheckupScreen> {
       validationMessages: {
         ValidationMessage.required: (error) => 'This field is required',
       },
-      child: ReactiveFormBuilder(
-          form: () => healthCheckupForm(hospitalRecordId: widget.id),
-          builder: (context, form, _) {
-            return Provider(
-              create: (context) => GetIt.I<HealthModel>()..fetchHeadInfo(id: widget.id),
-              child: HealthCheckupSection(
-                id: widget.id,
-              ),
-            );
-          }),
+      child: Provider(
+        create: (context) => GetIt.I<HealthModel>()..fetchHeadInfo(id: widget.id),
+        child: HealthCheckupSection(
+          id: widget.id,
+        ),
+      ),
     );
   }
 }

@@ -70,7 +70,7 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
         ),
         ValueListenableBuilder(
             valueListenable:
-                context.read<HospitalDetailModel>().basicInformationData,
+                context.watch<HospitalDetailModel>().basicInformationData,
             builder: (context, value, _) {
               return ValueListenableBuilder<int>(
                 valueListenable: _selectedIndex,
@@ -87,7 +87,9 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                       child: [
                         BasicInformationScreen(hospitalId: widget.hospitalId),
                         if (value.hasData) ...[
-                          const MaterialsScreen(),
+                          MaterialsScreen(
+                            id: value.requireData.id,
+                          ),
                           const QAndAScreen(),
                           FacilityPhotoScreen(
                             id: value.requireData.id,

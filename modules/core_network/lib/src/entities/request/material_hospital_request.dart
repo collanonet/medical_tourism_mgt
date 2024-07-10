@@ -3,22 +3,21 @@ part 'material_hospital_request.g.dart';
 
 @JsonSerializable()
 class MaterialHospitalRequest {
-
-   String? memo;
   final String? file;
-   String? brochureName;
-   String? author;
-   String? dateOfIssue;
-   String? share;
+  String? brochureName;
+  String? author;
+  String? dateOfIssue;
+  String? share;
+  String hospitalRecord;
 
- MaterialHospitalRequest({
-    this.memo,
+  MaterialHospitalRequest({
     this.file,
     this.brochureName,
     this.author,
     this.dateOfIssue,
     this.share,
- });
+    required this.hospitalRecord,
+  });
 
   factory MaterialHospitalRequest.fromJson(Map<String, dynamic> json) =>
       _$MaterialHospitalRequestFromJson(json);

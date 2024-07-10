@@ -242,7 +242,7 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => healthCheckupForm(hospitalRecordId: widget.id)..markAllAsTouched(),
+              form: () => healthCheckupForm(hospitalRecordId: widget.id,file: file)..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const Popup();
               },

@@ -10,7 +10,6 @@ MaterialHospitalResponse _$MaterialHospitalResponseFromJson(
         Map<String, dynamic> json) =>
     MaterialHospitalResponse(
       id: json['_id'] as String?,
-      memo: json['memo'] as String?,
       file: json['file'] as String?,
       brochureName: json['brochureName'] as String?,
       author: json['author'] as String?,
@@ -22,7 +21,6 @@ Map<String, dynamic> _$MaterialHospitalResponseToJson(
         MaterialHospitalResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
-      'memo': instance.memo,
       'file': instance.file,
       'brochureName': instance.brochureName,
       'author': instance.author,

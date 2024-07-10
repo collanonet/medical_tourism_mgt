@@ -21,15 +21,11 @@ class _DocumentScreenState extends State<DocumentScreen> {
       validationMessages: {
         ValidationMessage.required: (error) => 'This field is required',
       },
-      child: ReactiveFormBuilder(
-          form: () => documentForm(hospitalRecordId: widget.id),
-          builder: (context, form, _) {
-            return Provider(
-              create: (context) =>
-                  GetIt.I<DocumentModel>()..fetchDocument(id: widget.id),
-              child: DocumentSection(id: widget.id,),
-            );
-          }),
+      child: Provider(
+        create: (context) =>
+            GetIt.I<DocumentModel>()..fetchDocument(id: widget.id),
+        child: DocumentSection(id: widget.id,),
+      ),
     );
   }
 }

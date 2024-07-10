@@ -254,7 +254,7 @@ class _DocumentSectionState extends State<DocumentSection> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => documentForm(hospitalRecordId: widget.id)..markAllAsTouched(),
+              form: () => documentForm(hospitalRecordId: widget.id,file: file)..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const Popup();
               },

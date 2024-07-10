@@ -250,7 +250,7 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => facilityPhotoForm(hospitalRecordId: widget.id)..markAllAsTouched(),
+              form: () => facilityPhotoForm(hospitalRecordId: widget.id,file: file)..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const Popup();
               },

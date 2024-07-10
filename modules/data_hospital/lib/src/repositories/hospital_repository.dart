@@ -67,7 +67,7 @@ abstract class HospitalRepository {
   Future<ListSectionQAndAHospitalResponse> getListSectionQAndAHospital(
       String hospitalId);
 
-  Future<MaterialHospitalResponse> getMaterialHospital(String hospitalId);
+  Future<List<MaterialHospitalResponse>> getMaterialHospital(String hospitalId);
 
   Future<MaterialHospitalResponse> postMaterialHospital(
     MaterialHospitalRequest materialHospitalRequest,

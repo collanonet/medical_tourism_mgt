@@ -13,8 +13,8 @@ import 'materials_form.dart';
 import 'popup.dart';
 
 class MaterialSection extends StatefulWidget {
-  const MaterialSection({super.key});
-
+  const MaterialSection({super.key, required this.id});
+  final String id;
   @override
   State<MaterialSection> createState() => MaterialSectionState();
 }
@@ -328,7 +328,8 @@ class MaterialSectionState extends State<MaterialSection> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => materialsForm()..markAllAsTouched(),
+              form: () => materialsForm(hospitalRecordId: widget.id, file: file)
+                ..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const Popup();
               },

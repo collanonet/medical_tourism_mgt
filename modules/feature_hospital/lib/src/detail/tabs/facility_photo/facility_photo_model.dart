@@ -36,14 +36,12 @@ class FacilityModel {
   Future<void> submitFacility(FormGroup formGroup) async {
     try {
       submit.value = const AsyncData(loading: true);
-      final token = await GetIt.I<AuthRepository>().getAccessToken();
-      logger.d("token: $token");
 
       String? file;
-      if (formGroup.control('UploadePhoto').value != null) {
+      if (formGroup.control('uploadedPhoto').value != null) {
         try {
           // convert Uint8List to base64
-          FileSelect docFile = formGroup.control('UploadePhoto').value;
+          FileSelect docFile = formGroup.control('uploadedPhoto').value;
           String base64Image = base64Encode(docFile.file);
           FileResponse fileData = await hospitalRepository.uploadFileBase64(
             base64Image,
@@ -54,20 +52,21 @@ class FacilityModel {
           logger.e(e);
         }
       }
+
       final response =
           await hospitalRepository.postFacilityPhoto(FacilityRequest(
-        facilityFile: formGroup.control('facilityFile').value,
+        facilityFile: file,
         nameOfHospital: formGroup.control('NameOfHspital').value,
         photograph: formGroup.control('photograph').value,
         shootingDate: formGroup.control('shootingDate').value,
         share: formGroup.control('share').value,
         uploadedPhoto: file,
-            hospitalRecord: formGroup.control('hospitalRecord').value,
+        hospitalRecord: formGroup.control('hospitalRecord').value,
       ));
       facilityData.value =
           AsyncData(data: facilityData.value.data!..add(response));
     } catch (e) {
-      logger.d(e);
+      logger.e(e);
       facilityData.value = AsyncData(error: e.toString());
     }
   }

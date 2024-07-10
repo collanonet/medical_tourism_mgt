@@ -239,7 +239,7 @@ class ContractSectionState extends State<ContractSection> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => contractForm(hospitalRecordId: widget.id)..markAllAsTouched(),
+              form: () => contractForm(hospitalRecordId: widget.id,file: file)..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const Popup();
               },

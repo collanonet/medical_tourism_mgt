@@ -18,34 +18,18 @@ class MaterialsModel {
 
   HospitalRepository hospitalRepository;
 
-  ValueNotifier<AsyncData<MaterialHospitalResponse>> materialsData =
+  ValueNotifier<AsyncData<List<MaterialHospitalResponse>>> materialsData =
       ValueNotifier(const AsyncData());
 
-  Future<void> fetchData(FormGroup formGroup, {String? hospitalId}) async {
-    try {
-      if (hospitalId != null) {
-        await getMemo(formGroup, hospitalId);
-      }
-    } catch (e) {
-      logger.d(e);
-    }
-  }
-
-  Future<void> getMemo(FormGroup formGroup, String hospitalId) async {
+  Future<void> fetchData({required String hospitalId}) async {
     try {
       materialsData.value = const AsyncData(loading: true);
       final result = await hospitalRepository.getMaterialHospital(hospitalId);
-      insertDataMemo(formGroup, result);
+      materialsData.value = AsyncData(data: result);
     } catch (e) {
       logger.d(e);
       materialsData.value = AsyncData(error: e);
     }
-  }
-
-  void insertDataMemo(FormGroup formGroup, MaterialHospitalResponse data) {
-    formGroup.control('memoSection').patchValue({
-      'memo': data.memo,
-    });
   }
 
   ValueNotifier<AsyncData<MaterialHospitalResponse>> submitMaterialHospital =
@@ -54,9 +38,6 @@ class MaterialsModel {
   Future<void> postMemo(FormGroup formGroup) async {
     try {
       submitMaterialHospital.value = const AsyncData(loading: true);
-      final token = await GetIt.I<AuthRepository>().getAccessToken();
-      logger.d("token: $token");
-      materialsData.value = const AsyncData(loading: true);
 
       String? file;
       if (formGroup.control('file').value != null) {
@@ -73,10 +54,9 @@ class MaterialsModel {
           logger.e(e);
         }
       }
-      materialsData.value = const AsyncData(loading: true);
       final response = await hospitalRepository.postMaterialHospital(
         MaterialHospitalRequest(
-          memo: formGroup.control('memo').value,
+          hospitalRecord: formGroup.control('hospitalRecord').value,
           file: file,
           brochureName: formGroup.control('brochureName').value,
           author: formGroup.control('author').value,
@@ -84,7 +64,8 @@ class MaterialsModel {
           share: formGroup.control('share').value,
         ),
       );
-      materialsData.value = AsyncData(data: response);
+      materialsData.value =
+          AsyncData(data: materialsData.value.data!..add(response));
       submitMaterialHospital.value = AsyncData(data: response);
     } catch (e) {
       logger.d(e);

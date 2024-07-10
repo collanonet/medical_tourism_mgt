@@ -158,21 +158,21 @@ class Endpoints {
   static const DETAIL_HOTEL_REGISTATION = '/detail-hotel-registation';
   static const DETAIL_HOTEL_SEARCH = '/detail-hotel-search';
   static const DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER =
-      'detail-related-parties-guide-or-interpreter';
+      '/detail-related-parties-guide-or-interpreter';
   static const DETAIL_RELATED_PARTIES_BUS_COMPANY =
-      'detail-related-parties-bus-company';
-  static const DETAIL_RELATED_PARTIES_DRIVER = 'detail-related-parties-driver';
+      '/detail-related-parties-bus-company';
+  static const DETAIL_RELATED_PARTIES_DRIVER = '/detail-related-parties-driver';
   static const DETAIL_RELATED_EMERGENCY_CONTACT =
-      'detail-related-parties-emergecy-contact';
+      '/detail-related-parties-emergecy-contact';
   static const DETAIL_ITINERARY_SIMPLE_VERSION_TITLE =
-      'detail-itinerary-simple-versoin-title';
+      '/detail-itinerary-simple-versoin-title';
   static const DETAIL_ITINERARY_SIMPLE_VERSION_EXPANATION =
-      'detail-itinerary-simple-veraion-explanation';
+      '/detail-itinerary-simple-veraion-explanation';
   static const DETAIL_ITINERARY_SIMPLE_VERSION_INTERPRETER =
-      'detail-itineray-simple-version-interpreter';
+      '/detail-itineray-simple-version-interpreter';
   static const DETAIL_ITINERARY_SIMPLE_VERAION_PICK_UP =
-      'detail-itinerary-simple-version-pick-up';
-  static const DETAIL_ITINERARY = 'detail-itinerary';
+      '/detail-itinerary-simple-version-pick-up';
+  static const DETAIL_ITINERARY = '/detail-itinerary';
 
   static const BASIC_INFORMATION_HOSPITAL = '/basic-information-hospital';
   static const MEDICAL_RECORD_BASIC_INFO_HOSPITAL =
@@ -193,7 +193,7 @@ class Endpoints {
 
   static const GET_LIST_SECTION_HOSPITAL = '/section-hospital';
 
-  static const GET_MATERIAL_HOSPITAL = '/material-hospital';
+  static const GET_MATERIAL_HOSPITAL = '/hospital-materials';
 
   static const GET_WEB_RESERVATION_PATIENT = '/web-reservation-patient';
 
@@ -202,18 +202,18 @@ class Endpoints {
   static const GET_HOSPITAL = '/hospital';
 
   //G2
-  static const SALE_DEARD_INFO = 'sale-info';
-  static const SALE_SERVICE_FREE = 'sale-service-free';
-  static const SALE_EXPLENSES = 'sale-explenses';
-  static const SALE_TOTAL = 'sale-total';
+  static const SALE_DEARD_INFO = '/sale-info';
+  static const SALE_SERVICE_FREE = '/sale-service-free';
+  static const SALE_EXPLENSES = '/sale-explenses';
+  static const SALE_TOTAL = '/sale-total';
 
   //C5
-  static const FACILITY_PHOTO = 'hospital-facility-photos';
-  static const DOCUMENT = 'hospital-documents';
-  static const HEALTH_CHECKUP = 'hospital-health-checkups';
-  static const CONTRACT = 'hospital-contacts';
+  static const FACILITY_PHOTO = '/hospital-facility-photos';
+  static const DOCUMENT = '/hospital-documents';
+  static const HEALTH_CHECKUP = '/hospital-health-checkups';
+  static const CONTRACT = '/hospital-contacts';
 
   // Agent
-  static const CONTRANT_AGENT = 'agent-contracts';
-  static const ESTIMATE_INVOICE = 'agent-estimate-invoices';
+  static const CONTRANT_AGENT = '/agent-contracts';
+  static const ESTIMATE_INVOICE = '/agent-estimate-invoices';
 }

@@ -130,8 +130,9 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => estimateInvoiceForm(agentRecordId: widget.id)
-                ..markAllAsTouched(),
+              form: () =>
+                  estimateInvoiceForm(agentRecordId: widget.id, file: file)
+                    ..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const Popup();
               },

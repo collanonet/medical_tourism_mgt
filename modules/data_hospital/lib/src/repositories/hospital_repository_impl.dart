@@ -119,7 +119,7 @@ class HospitalRepositoryIml extends HospitalRepository {
   }
 
   @override
-  Future<MaterialHospitalResponse> getMaterialHospital(String hospitalId) {
+  Future<List<MaterialHospitalResponse>> getMaterialHospital(String hospitalId) {
     return remote.getMaterialHospital(hospitalId);
   }
 

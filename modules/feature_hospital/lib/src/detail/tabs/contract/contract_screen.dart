@@ -21,17 +21,13 @@ class _ContractScreenState extends State<ContractScreen> {
       validationMessages: {
         ValidationMessage.required: (error) => 'This field is required',
       },
-      child: ReactiveFormBuilder(
-          form: () => contractForm(hospitalRecordId: widget.id),
-          builder: (context, form, _) {
-            return Provider(
-              create: (context) =>
-                  GetIt.I<ContrantModel>()..fetchContrant(id: widget.id),
-              child: ContractSection(
-                id: widget.id,
-              ),
-            );
-          }),
+      child: Provider(
+        create: (context) =>
+            GetIt.I<ContrantModel>()..fetchContrant(id: widget.id),
+        child: ContractSection(
+          id: widget.id,
+        ),
+      ),
     );
   }
 }

@@ -17,20 +17,13 @@ class EstimateInvoicePage extends StatelessWidget {
       validationMessages: <String, ValidationMessageFunction>{
         ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
       },
-      child: ReactiveFormBuilder(
-          form: () => estimateInvoiceForm(agentRecordId: id),
-          builder: (context, form, _) {
-            return Provider(
-              create: (context) => GetIt.I<EstimateInvoiceModel>(),
-              child: Provider(
-                create: (context) => GetIt.I<EstimateInvoiceModel>()
-                  ..fetchEstimateInvoice(id: id),
-                child: EstimateInvoiceScreen(
-                  id: id,
-                ),
-              ),
-            );
-          }),
+      child: Provider(
+        create: (context) =>
+            GetIt.I<EstimateInvoiceModel>()..fetchEstimateInvoice(id: id),
+        child: EstimateInvoiceScreen(
+          id: id,
+        ),
+      ),
     );
   }
 }

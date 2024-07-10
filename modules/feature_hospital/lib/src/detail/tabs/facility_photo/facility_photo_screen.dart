@@ -21,15 +21,11 @@ class _FacilityPhotoScreenState extends State<FacilityPhotoScreen> {
       validationMessages: {
         ValidationMessage.required: (error) => 'This field is required',
       },
-      child: ReactiveFormBuilder(
-          form: () => facilityPhotoForm(hospitalRecordId: widget.id),
-          builder: (context, form, _) {
-            return Provider(
-              create: (context) =>
-                  GetIt.I<FacilityModel>()..fetchFacility(id: widget.id),
-              child: FacilityPhotoSection(id: widget.id,),
-            );
-          }),
+      child: Provider(
+        create: (context) =>
+            GetIt.I<FacilityModel>()..fetchFacility(id: widget.id),
+        child: FacilityPhotoSection(id: widget.id,),
+      ),
     );
   }
 }

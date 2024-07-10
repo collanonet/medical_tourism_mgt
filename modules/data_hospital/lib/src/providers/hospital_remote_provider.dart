@@ -107,8 +107,9 @@ class HospitalRemoteProvider {
     return apiService.getListSectionQAndAHospital(hospitalId);
   }
 
-  Future<MaterialHospitalResponse> getMaterialHospital(String hospitalId) {
-    return apiService.getMaterialHospital(hospitalId);
+  Future<List<MaterialHospitalResponse>> getMaterialHospital(
+      String hospitalId) {
+    return apiService.getMaterialHospital(hospitalId: hospitalId);
   }
 
   Future<MaterialHospitalResponse> postMaterialHospital(
@@ -134,42 +135,41 @@ class HospitalRemoteProvider {
     return apiService.getHospitals();
   }
 
-  Future<List<FacilityResponse>> getFacilityPhoto({required String id}){
+  Future<List<FacilityResponse>> getFacilityPhoto({required String id}) {
     return apiService.getFacilityPhoto(id: id);
   }
 
-  Future<FacilityResponse> postFacilityPhoto(FacilityRequest facilityRequest){
+  Future<FacilityResponse> postFacilityPhoto(FacilityRequest facilityRequest) {
     return apiService.postFacilityPhoto(facilityRequest);
   }
 
-  Future<List<DocumentResponse>> getDocument({required String id}){
+  Future<List<DocumentResponse>> getDocument({required String id}) {
     return apiService.getDocument(id: id);
   }
 
-  Future<DocumentResponse> postDocument(DocumentRequest documentRequest){
+  Future<DocumentResponse> postDocument(DocumentRequest documentRequest) {
     return apiService.postDocument(documentRequest);
   }
 
-  Future<List<HealthResponse>> getHealth({required String id}){
+  Future<List<HealthResponse>> getHealth({required String id}) {
     return apiService.getHealthCheckup(id: id);
   }
 
-  Future<HealthResponse> postHealth(HealthRequest healthRequest){
+  Future<HealthResponse> postHealth(HealthRequest healthRequest) {
     return apiService.postHealthCheckup(healthRequest);
   }
 
-  Future<List<ContractResponse>> getContract({required String id}){
+  Future<List<ContractResponse>> getContract({required String id}) {
     return apiService.getContract(id: id);
   }
 
-  Future<ContractResponse> postContract(ContractRequest contractRequest){
+  Future<ContractResponse> postContract(ContractRequest contractRequest) {
     return apiService.postContract(contractRequest);
   }
 
-   Future<FileResponse> uploadFileBase64(
-    String file,
-    String filename) {
-      return apiService.uploadFileBase64(file, filename);
-    }
+  Future<FileResponse> uploadFileBase64(String file, String filename) {
+    return apiService.uploadFileBase64(file, filename);
+  }
+
   /// end get basic information of hospital C3 Page
 }

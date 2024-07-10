@@ -17,17 +17,13 @@ class ContractPage extends StatelessWidget {
       validationMessages: <String, ValidationMessageFunction>{
         ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
       },
-      child: ReactiveFormBuilder(
-          form: () => contractForm(agentRecordId: id),
-          builder: (context, form, _) {
-            return Provider(
-              create: (context) =>
-                  GetIt.I<ContractModel>()..fetchContrant(id: id),
-              child: ContractScreen(
-                id: id,
-              ),
-            );
-          }),
+      child: Provider(
+        create: (context) =>
+            GetIt.I<ContractModel>()..fetchContrant(id: id),
+        child: ContractScreen(
+          id: id,
+        ),
+      ),
     );
   }
 }

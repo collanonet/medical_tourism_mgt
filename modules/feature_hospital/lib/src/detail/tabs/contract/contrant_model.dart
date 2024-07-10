@@ -61,7 +61,7 @@ class ContrantModel {
           AsyncData(data: contrantData.value.data!..add(response));
       submitData.value = AsyncData(data: response);
     } catch (e) {
-      logger.d(e);
+      logger.e(e);
       submitData.value = AsyncData(error: e.toString());
     }
   }
