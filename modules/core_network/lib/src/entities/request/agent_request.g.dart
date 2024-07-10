@@ -18,7 +18,7 @@ AgentRequest _$AgentRequestFromJson(Map<String, dynamic> json) => AgentRequest(
           ? null
           : DateTime.parse(json['transactionStartDate'] as String),
       howToMainPayment: json['howToMainPayment'] as String?,
-      pastCasesNumber: (json['pastCasesNumber'] as num?)?.toInt(),
+      pastCasesNumber: json['pastCasesNumber'] as int?,
       referralCommissions: (json['referralCommissions'] as List<dynamic>?)
           ?.map((e) => AgentReferralCommissionRequest.fromJson(
               e as Map<String, dynamic>))

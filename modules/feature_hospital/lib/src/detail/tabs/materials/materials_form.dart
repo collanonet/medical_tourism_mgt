@@ -8,7 +8,7 @@ FormGroup materialsForm() {
     'memo': FormControl<String>(),
     'brochureName' : FormControl<String>(),
     'author' : FormControl<String>(),
-    'date_of_issue' : FormControl<DateTime>(),
+    'dateOfIssue' : FormControl<DateTime>(),
     'share' : FormControl<String>(),
   });
 }

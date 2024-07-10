@@ -1029,7 +1029,7 @@ abstract class ApiService {
   );
 
   @GET(Endpoints.FACILITY_PHOTO)
-  Future<FacilityResponse> getFacilityPhoto();
+  Future<List<FacilityResponse>> getFacilityPhoto();
 
   @POST(Endpoints.FACILITY_PHOTO)
   Future<FacilityResponse> postFacilityPhoto(
@@ -1037,7 +1037,7 @@ abstract class ApiService {
   );
 
   @GET(Endpoints.DOCUMENT)
-  Future<DocumentResponse> getDocument();
+  Future<List<DocumentResponse>> getDocument();
 
   @POST(Endpoints.DOCUMENT)
   Future<DocumentResponse> postDocument(
@@ -1045,7 +1045,7 @@ abstract class ApiService {
   );
 
   @GET(Endpoints.HEALTH_CHECKUP)
-  Future<HealthResponse> getHealthCheckup();
+  Future<List<HealthResponse>> getHealthCheckup();
 
   @POST(Endpoints.HEALTH_CHECKUP)
   Future<HealthResponse> postHealthCheckup(
@@ -1053,7 +1053,7 @@ abstract class ApiService {
   );
 
   @GET(Endpoints.CONTRACT)
-  Future<ContractResponse> getContract();
+  Future<List<ContractResponse>> getContract();
 
   @POST(Endpoints.CONTRACT)
   Future<ContractResponse> postContract(
@@ -1061,7 +1061,7 @@ abstract class ApiService {
   );
 
   @GET(Endpoints.CONTRANT_AGENT)
-  Future<ContrantAgentResponse> getContractAgent();
+  Future<List<ContrantAgentResponse>> getContractAgent();
 
   @POST(Endpoints.CONTRANT_AGENT)
   Future<ContrantAgentResponse> postContractAgent(
@@ -1069,7 +1069,7 @@ abstract class ApiService {
   );
 
   @GET(Endpoints.ESTIMATE_INVOICE)
-  Future<EstimateInvoiceResponse> getEstimateInvoice();
+  Future<List<EstimateInvoiceResponse>> getEstimateInvoice();
 
   @POST(Endpoints.ESTIMATE_INVOICE)
   Future<EstimateInvoiceResponse> postEstimateInvoice(

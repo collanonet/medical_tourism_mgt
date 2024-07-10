@@ -14,30 +14,24 @@ class EstimateInvoiceModel {
   });
 
   final AgentRepository authRepository;
-  ValueNotifier<AsyncData<EstimateInvoiceResponse>> estimateInvoiceData = ValueNotifier(const AsyncData());
-  Future<void> fetchEstimateInvoice(FormGroup formGroup) async{
-    try{
+  ValueNotifier<AsyncData<List<EstimateInvoiceResponse>>> estimateInvoiceData =
+      ValueNotifier(const AsyncData());
+  Future<void> fetchEstimateInvoice(FormGroup formGroup) async {
+    try {
       estimateInvoiceData.value = const AsyncData(loading: true);
       final response = await authRepository.getEstimateInvoice();
-      insertEstimateInvoice(formGroup, response);
-    estimateInvoiceData.value = AsyncData(data: response);
-    }catch(e){
+      estimateInvoiceData.value = AsyncData(data: response);
+    } catch (e) {
       logger.d(e);
+      estimateInvoiceData.value = AsyncData(error: e.toString());
     }
   }
 
-  void insertEstimateInvoice(FormGroup formGroup,EstimateInvoiceResponse? data){
-    formGroup.control('documentName').value = data?.documentName;
-    formGroup.control('publisher').value = data?.publisher;
-    formGroup.control('date_of_issue').value = data?.dateOfIssue;
-    formGroup.control('date_of_payment').value = data?.dateOfPayment;
-    formGroup.control('payment_day').value = data?.paymentDay;
-    formGroup.control('method_of_payment').value = data?.methodOfPayment;
-  }
+  ValueNotifier<AsyncData<EstimateInvoiceResponse>> submit =
+      ValueNotifier(const AsyncData());
 
-  ValueNotifier<AsyncData<EstimateInvoiceResponse>> submit = ValueNotifier(const AsyncData());
-  Future<void> submitEstimateInvoice(FormGroup formGroup) async{
-    try{
+  Future<void> submitEstimateInvoice(FormGroup formGroup) async {
+    try {
       submit.value = const AsyncData(loading: true);
       String? file;
       if (formGroup.control('uploadFile').value != null) {
@@ -54,22 +48,23 @@ class EstimateInvoiceModel {
           logger.e(e);
         }
       }
-      final response = await authRepository.postEstimateInvoice(
-        EstimateInvoiceRequest(
-          uploadFile: file,
-          documentName: formGroup.control('documentName').value,
-          publisher: formGroup.control('publisher').value,
-          dateOfIssue: formGroup.control('date_of_issue').value,
-          dateOfPayment: formGroup.control('date_of_payment').value,
-          paymentDay: formGroup.control('payment_day').value,
-          methodOfPayment: formGroup.control('method_of_payment').value,
-        )
-      );
+      final response =
+          await authRepository.postEstimateInvoice(EstimateInvoiceRequest(
+        uploadFile: file,
+        documentName: formGroup.control('documentName').value,
+        publisher: formGroup.control('publisher').value,
+        dateOfIssue: formGroup.control('dateOfIssue').value,
+        dateOfPayment: formGroup.control('dateOfPayment').value,
+        paymentDay: formGroup.control('paymentDay').value,
+        methodOfPayment: formGroup.control('methodOfPayment').value,
+        agentRecord: formGroup.control('agentRecord').value,
+      ));
       submit.value = AsyncData(data: response);
-      estimateInvoiceData.value = AsyncData(data: response);
-
-    }catch(e){
+      estimateInvoiceData.value =
+          AsyncData(data: estimateInvoiceData.value.data!..add(response));
+    } catch (e) {
       logger.d(e);
+      submit.value = AsyncData(error: e.toString());
     }
   }
 }

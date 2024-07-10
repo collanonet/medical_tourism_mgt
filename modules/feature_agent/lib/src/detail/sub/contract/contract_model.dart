@@ -14,21 +14,22 @@ class ContractModel {
   });
 
   final AgentRepository authRepository;
-  ValueNotifier<AsyncData<ContrantAgentResponse>> contrantData = ValueNotifier(const AsyncData());
-   Future<void> fetchContrant(FormGroup formGroup) async {
-    contrantData.value = const AsyncData(loading: true);
-    final response = await authRepository.getContrantAgent();
-    insertHealth(formGroup, response);
-  }
-
-  void insertHealth(FormGroup formGroup,ContrantAgentResponse? data) {
-    formGroup.control('uploadFile').value = data?.uploadFile;
-    formGroup.control('fileName').value = data?.fileName;
-    formGroup.control('updatedOn').value = data?.uploadOn;
+  ValueNotifier<AsyncData<List<ContrantAgentResponse>>> contrantData =
+      ValueNotifier(const AsyncData());
+  Future<void> fetchContrant(FormGroup formGroup) async {
+    try {
+      contrantData.value = const AsyncData(loading: true);
+      final response = await authRepository.getContrantAgent();
+      contrantData.value = AsyncData(data: response);
+    } catch (e) {
+      logger.e(e);
+      contrantData.value = AsyncData(error: e.toString());
+    }
   }
 
   ValueNotifier<AsyncData<ContrantAgentResponse>> submitData =
       ValueNotifier(const AsyncData());
+
   Future<void> submit(FormGroup formGroup) async {
     try {
       submitData.value = const AsyncData(loading: true);
@@ -47,18 +48,20 @@ class ContractModel {
           logger.e(e);
         }
       }
-      final response = await  authRepository.postContrantAgent(
-        ContrantAgentRequest(
-          uploadFile: file,
-          fileName: formGroup.control('fileName').value,
-          uploadOn: formGroup.control('updatedOn').value,
-        )
-      );
+      final response =
+          await authRepository.postContrantAgent(ContrantAgentRequest(
+        uploadFile: file,
+        fileName: formGroup.control('fileName').value,
+        uploadOn: formGroup.control('updatedOn').value,
+        agentRecord: formGroup.control('agentRecord').value,
+      ));
 
-      contrantData.value = AsyncData(data: response);
+      contrantData.value =
+          AsyncData(data: contrantData.value.data!..add(response));
       submitData.value = AsyncData(data: response);
     } catch (e) {
       logger.d(e);
+      submitData.value = AsyncData(error: e.toString());
     }
   }
 }

@@ -8,6 +8,7 @@ class FacilityRequest {
   DateTime? shootingDate;
   String? share;
   String? uploadedPhoto;
+  String hospitalRecord;
 
   FacilityRequest({
     this.facilityFile,
@@ -16,6 +17,7 @@ class FacilityRequest {
     this.shootingDate,
     this.share,
     this.uploadedPhoto,
+    required this.hospitalRecord,
   });
 
   factory FacilityRequest.fromJson(Map<String, dynamic> json) => _$FacilityRequestFromJson(json);

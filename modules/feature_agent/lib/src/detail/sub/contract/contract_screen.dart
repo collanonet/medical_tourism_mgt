@@ -13,8 +13,8 @@ import 'contract_model.dart';
 import 'contrant_file.dart';
 
 class ContractScreen extends StatefulWidget {
-  const ContractScreen({super.key});
-
+  const ContractScreen({super.key, required this.id});
+  final String id;
   @override
   State<ContractScreen> createState() => _ContractScreenState();
 }
@@ -32,7 +32,7 @@ class _ContractScreenState extends State<ContractScreen> {
                   onTap: () {
                     filePicker().then((value) {
                       if (value != null) {
-                         showCreateWithFileDialog(context, value);
+                        showCreateWithFileDialog(context, value);
                       }
                     });
                   },
@@ -77,7 +77,7 @@ class _ContractScreenState extends State<ContractScreen> {
                               onPressed: () {
                                 filePicker().then((value) {
                                   if (value != null) {
-                                     showCreateWithFileDialog(context, value);
+                                    showCreateWithFileDialog(context, value);
                                   }
                                 });
                               },
@@ -132,7 +132,7 @@ class _ContractScreenState extends State<ContractScreen> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => contractForm()..markAllAsTouched(),
+              form: () => contractForm(agentRecordId: widget.id)..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const Popup();
               },

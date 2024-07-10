@@ -74,7 +74,7 @@ class AgentRemoteProvider {
     return await apiService.deleteAgentManager(id);
   }
 
-  Future<ContrantAgentResponse> getContrantAgent() async{
+  Future<List<ContrantAgentResponse>> getContrantAgent() async{
     return await apiService.getContractAgent();
   }
 
@@ -82,7 +82,7 @@ class AgentRemoteProvider {
     return await apiService.postContractAgent(contrantAgent);
   }
 
-  Future<EstimateInvoiceResponse> getEstimateInvoice() async{
+  Future<List<EstimateInvoiceResponse>> getEstimateInvoice() async{
     return await apiService.getEstimateInvoice();
   }
 

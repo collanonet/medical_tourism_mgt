@@ -158,7 +158,7 @@ class HospitalRepositoryIml extends HospitalRepository {
   }
 
   @override
-  Future<FacilityResponse> getFacilityPhoto() {
+  Future<List<FacilityResponse>> getFacilityPhoto() {
    return remote.getFacilityPhoto();
   }
 
@@ -168,7 +168,7 @@ class HospitalRepositoryIml extends HospitalRepository {
   }
   
   @override
-  Future<DocumentResponse> getDocument() {
+  Future<List<DocumentResponse>> getDocument() {
     return remote.getDocument();
   }
   
@@ -178,7 +178,7 @@ class HospitalRepositoryIml extends HospitalRepository {
   }
   
   @override
-  Future<HealthResponse> getHealth() {
+  Future<List<HealthResponse>> getHealth() {
     return remote.getHealth();
   }
   
@@ -188,7 +188,7 @@ class HospitalRepositoryIml extends HospitalRepository {
   }
   
   @override
-  Future<ContractResponse> getContract() {
+  Future<List<ContractResponse>> getContract() {
     return remote.getContract();
   }
   

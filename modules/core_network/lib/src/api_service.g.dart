@@ -5425,20 +5425,20 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<FacilityResponse> getFacilityPhoto() async {
+  Future<List<FacilityResponse>> getFacilityPhoto() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<FacilityResponse>(Options(
+        .fetch<List<dynamic>>(_setStreamType<List<FacilityResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'facility-photo',
+              'hospital-facility-photos',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -5447,7 +5447,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = FacilityResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map(
+            (dynamic i) => FacilityResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
@@ -5467,7 +5470,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'facility-photo',
+              'hospital-facility-photos',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -5481,20 +5484,20 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<DocumentResponse> getDocument() async {
+  Future<List<DocumentResponse>> getDocument() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<DocumentResponse>(Options(
+        .fetch<List<dynamic>>(_setStreamType<List<DocumentResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'document',
+              'hospital-documents',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -5503,7 +5506,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DocumentResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map(
+            (dynamic i) => DocumentResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
@@ -5522,7 +5528,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'document',
+              'hospital-documents',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -5536,20 +5542,20 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<HealthResponse> getHealthCheckup() async {
+  Future<List<HealthResponse>> getHealthCheckup() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<HealthResponse>(Options(
+        .fetch<List<dynamic>>(_setStreamType<List<HealthResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'health-checkup',
+              'hospital-health-checkups',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -5558,7 +5564,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = HealthResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) => HealthResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
@@ -5578,7 +5586,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'health-checkup',
+              'hospital-health-checkups',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -5592,20 +5600,20 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<ContractResponse> getContract() async {
+  Future<List<ContractResponse>> getContract() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio
-        .fetch<Map<String, dynamic>>(_setStreamType<ContractResponse>(Options(
+        .fetch<List<dynamic>>(_setStreamType<List<ContractResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'contact',
+              'hospital-contacts',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -5614,7 +5622,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ContractResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map(
+            (dynamic i) => ContractResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
@@ -5633,7 +5644,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'contact',
+              'hospital-contacts',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -5647,20 +5658,20 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<ContrantAgentResponse> getContractAgent() async {
+  Future<List<ContrantAgentResponse>> getContractAgent() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ContrantAgentResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<ContrantAgentResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'contact-agent',
+              'agent-contracts',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -5669,7 +5680,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ContrantAgentResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) =>
+            ContrantAgentResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
@@ -5689,7 +5703,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'contact-agent',
+              'agent-contracts',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -5703,20 +5717,20 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<EstimateInvoiceResponse> getEstimateInvoice() async {
+  Future<List<EstimateInvoiceResponse>> getEstimateInvoice() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<EstimateInvoiceResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<EstimateInvoiceResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'estimate-voice',
+              'agent-estimate-invoices',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -5725,7 +5739,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = EstimateInvoiceResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) =>
+            EstimateInvoiceResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
@@ -5745,7 +5762,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'estimate-voice',
+              'agent-estimate-invoices',
               queryParameters: queryParameters,
               data: _data,
             )

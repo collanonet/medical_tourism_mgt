@@ -13,7 +13,8 @@ import 'health_checkup_form.dart';
 import 'health_checkup_model.dart';
 
 class HealthCheckupSection extends StatefulWidget {
-  const HealthCheckupSection({super.key});
+  const HealthCheckupSection({super.key, required this.id});
+  final String id;
 
   @override
   State<HealthCheckupSection> createState() => _HealthCheckupSectionState();
@@ -241,7 +242,7 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => healthCheckupForm()..markAllAsTouched(),
+              form: () => healthCheckupForm(hospitalRecordId: widget.id)..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const Popup();
               },

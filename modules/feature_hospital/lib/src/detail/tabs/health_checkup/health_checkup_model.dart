@@ -10,18 +10,17 @@ class HealthModel {
   HealthModel({required this.hospitalRepository});
   final HospitalRepository hospitalRepository;
 
-  ValueNotifier<AsyncData<HealthResponse>> healthData =
+  ValueNotifier<AsyncData<List<HealthResponse>>> healthData =
       ValueNotifier(const AsyncData());
   Future<void> fetchHeadInfo(FormGroup formGroup) async {
-    healthData.value = const AsyncData(loading: true);
-    final response = await hospitalRepository.getHealth();
-    insertHealth(formGroup, response);
-  }
-
-  void insertHealth(FormGroup formGroup, HealthResponse? data) {
-    formGroup.control('uploadFile').value = data?.uploadFile;
-    formGroup.control('fileName').value = data?.fileName;
-    formGroup.control('updatedOn').value = data?.uploadDate;
+    try {
+      healthData.value = const AsyncData(loading: true);
+      final response = await hospitalRepository.getHealth();
+      healthData.value = AsyncData(data: response);
+    } catch (e) {
+      logger.d(e);
+      healthData.value = AsyncData(error: e.toString());
+    }
   }
 
   ValueNotifier<AsyncData<HealthResponse>> submitData =
@@ -30,14 +29,17 @@ class HealthModel {
     try {
       submitData.value = const AsyncData(loading: true);
       final response = await hospitalRepository.postHealth(HealthRequest(
-          uploadFile: formGroup.control('uploadFile').value,
-          fileName: formGroup.control('fileName').value,
-          uploadDate: formGroup.control('updatedOn').value));
+        uploadFile: formGroup.control('uploadFile').value,
+        fileName: formGroup.control('fileName').value,
+        uploadDate: formGroup.control('updatedOn').value,
+        hospitalRecord: formGroup.control('hospitalRecord').value,
+      ));
 
-      healthData.value = AsyncData(data: response);
+      healthData.value = AsyncData(data: healthData.value.data!..add(response));
       submitData.value = AsyncData(data: response);
     } catch (e) {
       logger.d(e);
+      submitData.value = AsyncData(error: e.toString());
     }
   }
 }

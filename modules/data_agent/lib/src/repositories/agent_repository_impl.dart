@@ -89,7 +89,7 @@ class AgentRepositoryIml extends AgentRepository {
   }
   
   @override
-  Future<ContrantAgentResponse> getContrantAgent() {
+  Future<List<ContrantAgentResponse>> getContrantAgent() {
     return remote.getContrantAgent();
   }
   
@@ -99,7 +99,7 @@ class AgentRepositoryIml extends AgentRepository {
   }
   
   @override
-  Future<EstimateInvoiceResponse> getEstimateInvoice() {
+  Future<List<EstimateInvoiceResponse>> getEstimateInvoice() {
     return remote.getEstimateInvoice();
   }
   

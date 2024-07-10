@@ -1,10 +1,11 @@
 import 'package:core_network/entities.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup documentForm(){
+FormGroup documentForm({required String hospitalRecordId}) {
   return FormGroup({
+    'hospitalRecord': FormControl<String>(value: hospitalRecordId),
     'uploadFile' : FormControl<FileSelect>(),
-    'document_name' : FormControl<String>(),
+    'documentName' : FormControl<String>(),
     'updatedOn' : FormControl<DateTime>(),
     'translationLanguage' : FormControl<String>(),
     'translator' : FormControl<String>(),

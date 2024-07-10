@@ -80,7 +80,7 @@ class MaterialsModel {
           file: file,
           brochureName: formGroup.control('brochureName').value,
           author: formGroup.control('author').value,
-          dateOfIssue: formGroup.control('date_of_issue').value,
+          dateOfIssue: formGroup.control('dateOfIssue').value,
           share: formGroup.control('share').value,
         ),
       );

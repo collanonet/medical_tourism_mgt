@@ -1,11 +1,12 @@
 import 'package:core_network/entities.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup contractForm() {
+FormGroup contractForm({required String agentRecordId}) {
   return FormGroup({
-    'uploadFile' : FormControl<FileSelect>(),
-    'DocumentName' : FormControl<String>(),
-    'updatedOn' : FormControl<DateTime>(),
+    'agentRecord': FormControl<String>(value: agentRecordId),
+    'uploadFile': FormControl<FileSelect>(),
+    'DocumentName': FormControl<String>(),
+    'updatedOn': FormControl<DateTime>(),
     'contract': FormGroup({
       '_id': FormControl<String?>(),
       'contractDate': FormControl<DateTime>(

@@ -8,8 +8,8 @@ import 'contract_form.dart';
 import 'contrant_model.dart';
 
 class ContractScreen extends StatefulWidget {
-  const ContractScreen({super.key});
-
+  const ContractScreen({super.key, required this.id});
+  final String id;
   @override
   State<ContractScreen> createState() => _ContractScreenState();
 }
@@ -22,12 +22,12 @@ class _ContractScreenState extends State<ContractScreen> {
         ValidationMessage.required: (error) => 'This field is required',
       },
       child: ReactiveFormBuilder(
-          form: () => contractForm(),
+          form: () => contractForm(hospitalRecordId: widget.id),
           builder: (context, form, _) {
             return Provider(
               create: (context) =>
                   GetIt.I<ContrantModel>()..fetchContrant(form),
-              child: const ContractSection(),
+              child:  ContractSection(id: widget.id,),
             );
           }),
     );

@@ -4,7 +4,7 @@ FormGroup saleManagementForm() {
   return FormGroup({
     'head_info': FormGroup({
       'medical_expense_deposit': FormControl<int>(value: 12333),
-      'payment_day': FormControl<DateTime>(),
+      'paymentDay': FormControl<DateTime>(),
       'actual_cost': FormControl<int>(),
       'settlement_day': FormControl<DateTime>(),
       'actual_cost_breakdown': FormControl<String>(),

@@ -9,8 +9,8 @@ import 'estimate_invoice_model.dart';
 import 'estimate_invoice_screen.dart';
 
 class EstimateInvoicePage extends StatelessWidget {
-  const EstimateInvoicePage({super.key, this.id});
-  final String? id;
+  const EstimateInvoicePage({super.key, required this.id});
+  final String id;
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
@@ -18,14 +18,16 @@ class EstimateInvoicePage extends StatelessWidget {
         ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
       },
       child: ReactiveFormBuilder(
-          form: () => estimateInvoiceForm(),
+          form: () => estimateInvoiceForm(agentRecordId: id),
           builder: (context, form, _) {
             return Provider(
               create: (context) => GetIt.I<EstimateInvoiceModel>(),
               child: Provider(
                 create: (context) =>
                     GetIt.I<EstimateInvoiceModel>()..fetchEstimateInvoice(form),
-                child: const EstimateInvoiceScreen(),
+                child: EstimateInvoiceScreen(
+                  id: id,
+                ),
               ),
             );
           }),

@@ -15,6 +15,12 @@ ContrantAgentResponse _$ContrantAgentResponseFromJson(
       uploadOn: json['uploadOn'] == null
           ? null
           : DateTime.parse(json['uploadOn'] as String),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
+      updatedAt: json['updatedAt'] == null
+          ? null
+          : DateTime.parse(json['updatedAt'] as String),
     );
 
 Map<String, dynamic> _$ContrantAgentResponseToJson(
@@ -24,4 +30,6 @@ Map<String, dynamic> _$ContrantAgentResponseToJson(
       'uploadFile': instance.uploadFile,
       'fileName': instance.fileName,
       'uploadOn': instance.uploadOn?.toIso8601String(),
+      'createdAt': instance.createdAt?.toIso8601String(),
+      'updatedAt': instance.updatedAt?.toIso8601String(),
     };

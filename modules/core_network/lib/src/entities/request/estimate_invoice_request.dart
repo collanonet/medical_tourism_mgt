@@ -9,6 +9,7 @@ class EstimateInvoiceRequest {
   DateTime? dateOfPayment;
   DateTime? paymentDay;
   String? methodOfPayment;
+  String agentRecord;
 
   EstimateInvoiceRequest({
     this.uploadFile,
@@ -18,6 +19,7 @@ class EstimateInvoiceRequest {
     this.dateOfPayment,
     this.paymentDay,
     this.methodOfPayment,
+    required this.agentRecord,
   });
 
   factory EstimateInvoiceRequest.fromJson(Map<String, dynamic> json) => _$EstimateInvoiceRequestFromJson(json);

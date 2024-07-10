@@ -13,29 +13,17 @@ class DocumentModel {
   DocumentModel({required this.hospitalRepository});
   HospitalRepository hospitalRepository;
 
-  ValueNotifier<AsyncData<DocumentResponse>> documentData =
+  ValueNotifier<AsyncData<List<DocumentResponse>>> documentData =
       ValueNotifier(const AsyncData());
   Future<void> fetchDocument(FormGroup formGroup) async {
     try {
       documentData.value = const AsyncData(loading: true);
       final response = await hospitalRepository.getDocument();
-      insertDocument(formGroup, response);
 
       documentData.value = AsyncData(data: response);
     } catch (e) {
       logger.d(e);
-    }
-  }
-
-  void insertDocument(FormGroup formGroup, DocumentResponse? data) {
-    try {
-      formGroup.control('uploadFile').value = data?.updatedOn;
-      formGroup.control('document_name').value = data?.documentName;
-      formGroup.control('updatedOn').value = data?.updatedOn;
-      formGroup.control('translationLanguage').value = data?.translationLanguage;
-      formGroup.control('translator').value = data?.translator;
-    } catch (e) {
-      logger.d(e);
+      documentData.value = AsyncData(error: e.toString());
     }
   }
 
@@ -62,15 +50,18 @@ class DocumentModel {
       }
       final response = await hospitalRepository.postDocument(DocumentRequest(
         uploadFile: file,
-       documentName: formGroup.control('document_name').value,
+        documentName: formGroup.control('documentName').value,
         updatedOn: formGroup.control('updatedOn').value,
         translationLanguage: formGroup.control('translationLanguage').value,
         translator: formGroup.control('translator').value,
+        hospitalRecord: formGroup.control('hospitalRecord').value,
       ));
       submitDocumentData.value = AsyncData(data: response);
-      documentData.value = AsyncData(data: response);
+      documentData.value =
+          AsyncData(data: documentData.value.data!..add(response));
     } catch (e) {
       logger.d(e);
+      submitDocumentData.value = AsyncData(error: e.toString());
     }
   }
 }

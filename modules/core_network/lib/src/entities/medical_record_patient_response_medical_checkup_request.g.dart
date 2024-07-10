@@ -22,8 +22,8 @@ MedicalRecordPatientResponseMedicalCheckupRequest
           desiredDate: json['desiredDate'] as bool?,
           remarks: json['remarks'] as String?,
           numberOfPeopleRequestingMedicalCheckup:
-              (json['numberOfPeopleRequestingMedicalCheckup'] as num?)?.toInt(),
-          age: (json['age'] as num?)?.toInt(),
+              json['numberOfPeopleRequestingMedicalCheckup'] as int?,
+          age: json['age'] as int?,
           sex: json['sex'] as bool?,
           relationshipBetweenPerson:
               json['relationshipBetweenPerson'] as String?,
@@ -43,13 +43,11 @@ MedicalRecordPatientResponseMedicalCheckupRequest
           cancerSite: json['cancerSite'] as String?,
           currentlyDiabetes: json['currentlyDiabetes'] as bool?,
           diabetesMedication: json['diabetesMedication'] as bool?,
-          fastingBloodSugarMgPerDl:
-              (json['fastingBloodSugarMgPerDl'] as num?)?.toInt(),
-          fastingBloodSugarMmolPerL:
-              (json['fastingBloodSugarMmolPerL'] as num?)?.toInt(),
+          fastingBloodSugarMgPerDl: json['fastingBloodSugarMgPerDl'] as int?,
+          fastingBloodSugarMmolPerL: json['fastingBloodSugarMmolPerL'] as int?,
           implant: json['implant'] as bool?,
-          implantYear: (json['implantYear'] as num?)?.toInt(),
-          implantMonth: (json['implantMonth'] as num?)?.toInt(),
+          implantYear: json['implantYear'] as int?,
+          implantMonth: json['implantMonth'] as int?,
           bodyMetalOrTattoo: json['bodyMetalOrTattoo'] as bool?,
           hadMriAfterMetalOrTattoo: json['hadMriAfterMetalOrTattoo'] as bool?,
           partAndItsMaterial: json['partAndItsMaterial'] as String?,

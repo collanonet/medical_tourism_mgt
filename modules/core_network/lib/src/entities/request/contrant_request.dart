@@ -5,11 +5,13 @@ class ContractRequest{
   String? uploadFile;
   String? fileName;
   DateTime? uploadDate;
+  String hospitalRecord;
 
   ContractRequest({
     this.uploadFile,
     this.fileName,
-    this.uploadDate
+    this.uploadDate,
+    required this.hospitalRecord,
   });
 
   factory ContractRequest.fromJson(Map<String, dynamic> json) => _$ContractRequestFromJson(json);

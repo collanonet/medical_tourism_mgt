@@ -16,8 +16,8 @@ import 'document_form.dart';
 import 'document_model.dart';
 
 class DocumentSection extends StatefulWidget {
-  const DocumentSection({super.key});
-
+  const DocumentSection({super.key, required this.id});
+  final String id;
   @override
   State<DocumentSection> createState() => _DocumentSectionState();
 }
@@ -254,7 +254,7 @@ class _DocumentSectionState extends State<DocumentSection> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => documentForm()..markAllAsTouched(),
+              form: () => documentForm(hospitalRecordId: widget.id)..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const Popup();
               },

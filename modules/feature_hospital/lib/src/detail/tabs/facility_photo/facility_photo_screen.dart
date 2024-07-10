@@ -8,8 +8,8 @@ import 'facility_photo_form.dart';
 import 'facility_photo_model.dart';
 
 class FacilityPhotoScreen extends StatefulWidget {
-  const FacilityPhotoScreen({super.key});
-
+  const FacilityPhotoScreen({super.key, required this.id});
+  final String id;
   @override
   State<FacilityPhotoScreen> createState() => _FacilityPhotoScreenState();
 }
@@ -22,12 +22,12 @@ class _FacilityPhotoScreenState extends State<FacilityPhotoScreen> {
         ValidationMessage.required: (error) => 'This field is required',
       },
       child: ReactiveFormBuilder(
-          form: () => facilityPhotoForm(),
+          form: () => facilityPhotoForm(hospitalRecordId: widget.id),
           builder: (context, form, _) {
             return Provider(
               create: (context) =>
                   GetIt.I<FacilityModel>()..fetchFacility(form),
-              child: const FacilityPhotoSection(),
+              child: FacilityPhotoSection(id: widget.id,),
             );
           }),
     );

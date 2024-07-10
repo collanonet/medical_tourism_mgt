@@ -12,14 +12,14 @@ ExpensesRequest _$ExpensesRequestFromJson(Map<String, dynamic> json) =>
       subitems: (json['subitems'] as List<dynamic>?)
           ?.map((e) => Subitem.fromJson(e as Map<String, dynamic>))
           .toList(),
-      quantity: (json['quantity'] as num?)?.toInt(),
+      quantity: json['quantity'] as int?,
       unit: json['unit'] as String?,
-      unitPrice: (json['unitPrice'] as num?)?.toInt(),
-      amountOfMoney: (json['amountOfMoney'] as num?)?.toInt(),
-      paymentDocument: (json['paymentDocument'] as num?)?.toInt(),
-      totalExpenses: (json['totalExpenses'] as num?)?.toInt(),
-      totalExpensesTax: (json['totalExpensesTax'] as num?)?.toInt(),
-      totalExpensesAmount: (json['totalExpensesAmount'] as num?)?.toInt(),
+      unitPrice: json['unitPrice'] as int?,
+      amountOfMoney: json['amountOfMoney'] as int?,
+      paymentDocument: json['paymentDocument'] as int?,
+      totalExpenses: json['totalExpenses'] as int?,
+      totalExpensesTax: json['totalExpensesTax'] as int?,
+      totalExpensesAmount: json['totalExpensesAmount'] as int?,
       typeOfTax: json['typeOfTax'] as String?,
     );
 

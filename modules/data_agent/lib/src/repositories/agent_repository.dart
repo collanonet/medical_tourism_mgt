@@ -34,13 +34,13 @@ abstract class AgentRepository {
 
   Future<void> deleteAgentManager(String id);
 
-  Future<ContrantAgentResponse> getContrantAgent();
+  Future<List<ContrantAgentResponse>> getContrantAgent();
 
   Future<ContrantAgentResponse> postContrantAgent(
     ContrantAgentRequest contrantAgent,
   );
 
-  Future<EstimateInvoiceResponse> getEstimateInvoice();
+  Future<List<EstimateInvoiceResponse>> getEstimateInvoice();
 
   Future<EstimateInvoiceResponse> postEstimateInvoice(
     EstimateInvoiceRequest estimateInvoice,

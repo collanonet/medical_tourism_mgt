@@ -11,8 +11,8 @@ import 'estimate_invoice_form.dart';
 import 'estimate_invoice_model.dart';
 
 class EstimateInvoiceScreen extends StatefulWidget {
-  const EstimateInvoiceScreen({super.key});
-
+  const EstimateInvoiceScreen({super.key, required this.id});
+  final String id;
   @override
   State<EstimateInvoiceScreen> createState() => _EstimateInvoiceScreenState();
 }
@@ -130,7 +130,8 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => estimateInvoiceForm()..markAllAsTouched(),
+              form: () => estimateInvoiceForm(agentRecordId: widget.id)
+                ..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const Popup();
               },

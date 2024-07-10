@@ -12,26 +12,27 @@ class ContrantModel {
   ContrantModel({required this.hospitalRepository});
   final HospitalRepository hospitalRepository;
 
-  ValueNotifier<AsyncData<ContractResponse>> contrantData =
+  ValueNotifier<AsyncData<List<ContractResponse>>> contrantData =
       ValueNotifier(const AsyncData());
-  Future<void> fetchContrant(FormGroup formGroup) async {
-    contrantData.value = const AsyncData(loading: true);
-    final response = await hospitalRepository.getContract();
-    insertHealth(formGroup, response);
-  }
 
-  void insertHealth(FormGroup formGroup,ContractResponse? data) {
-    formGroup.control('uploadFile').value = data?.uploadFile;
-    formGroup.control('fileName').value = data?.fileName;
-    formGroup.control('updatedOn').value = data?.uploadDate;
+  Future<void> fetchContrant(FormGroup formGroup) async {
+    try {
+      contrantData.value = const AsyncData(loading: true);
+      final response = await hospitalRepository.getContract();
+      contrantData.value = AsyncData(data: response);
+    } catch (e) {
+      logger.e(e);
+      contrantData.value = AsyncData(error: e.toString());
+    }
   }
 
   ValueNotifier<AsyncData<ContractResponse>> submitData =
       ValueNotifier(const AsyncData());
+
   Future<void> submit(FormGroup formGroup) async {
     try {
       submitData.value = const AsyncData(loading: true);
-      
+
       String? file;
       if (formGroup.control('uploadFile').value != null) {
         try {
@@ -51,14 +52,17 @@ class ContrantModel {
         ContractRequest(
           uploadFile: file,
           fileName: formGroup.control('fileName').value,
-          uploadDate: formGroup.control('updatedOn').value
-        )
+          uploadDate: formGroup.control('updatedOn').value,
+          hospitalRecord: formGroup.control('hospitalRecord').value,
+        ),
       );
 
-      contrantData.value = AsyncData(data: response);
+      contrantData.value =
+          AsyncData(data: contrantData.value.data!..add(response));
       submitData.value = AsyncData(data: response);
     } catch (e) {
       logger.d(e);
+      submitData.value = AsyncData(error: e.toString());
     }
   }
 }

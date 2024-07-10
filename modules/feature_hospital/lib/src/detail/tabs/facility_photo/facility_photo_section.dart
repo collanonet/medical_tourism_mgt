@@ -13,7 +13,8 @@ import 'facility_photo_form.dart';
 import 'facility_photo_model.dart';
 
 class FacilityPhotoSection extends StatefulWidget {
-  const FacilityPhotoSection({super.key});
+  const FacilityPhotoSection({super.key, required this.id});
+  final String id;
 
   @override
   State<FacilityPhotoSection> createState() => _FacilityPhotoSectionState();
@@ -249,7 +250,7 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => facilityPhotoForm()..markAllAsTouched(),
+              form: () => facilityPhotoForm(hospitalRecordId: widget.id)..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const Popup();
               },

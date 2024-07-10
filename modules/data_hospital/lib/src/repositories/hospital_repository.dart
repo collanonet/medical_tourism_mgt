@@ -84,25 +84,25 @@ abstract class HospitalRepository {
 
   Future<List<BasicInformationHospitalResponse>> getHospitals();
 
-  Future<FacilityResponse> getFacilityPhoto();
+  Future<List<FacilityResponse>> getFacilityPhoto();
 
   Future<FacilityResponse> postFacilityPhoto(
     FacilityRequest facilityRequest,
   );
 
-  Future<DocumentResponse> getDocument();
+  Future<List<DocumentResponse>> getDocument();
 
   Future<DocumentResponse> postDocument(
     DocumentRequest documentRequest,
   );
 
-  Future<HealthResponse> getHealth();
+  Future<List<HealthResponse>> getHealth();
 
   Future<HealthResponse> postHealth(
    HealthRequest headInfoRequest,
   );
 
-  Future<ContractResponse> getContract();
+  Future<List<ContractResponse>> getContract();
 
   Future<ContractResponse> postContract(
     ContractRequest contractRequest,

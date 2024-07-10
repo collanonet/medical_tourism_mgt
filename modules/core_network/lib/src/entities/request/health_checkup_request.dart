@@ -5,11 +5,13 @@ class HealthRequest{
   String? uploadFile;
   String? fileName;
   DateTime? uploadDate;
+  String hospitalRecord;
 
   HealthRequest({
     this.uploadFile,
     this.fileName,
-    this.uploadDate
+    this.uploadDate,
+    required this.hospitalRecord,
   });
 
   factory HealthRequest.fromJson(Map<String, dynamic> json) => _$HealthRequestFromJson(json);

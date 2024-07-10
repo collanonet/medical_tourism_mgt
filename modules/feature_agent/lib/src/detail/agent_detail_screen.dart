@@ -25,19 +25,6 @@ class _AgentDetailScreenState extends State<AgentDetailScreen> {
     '見積書・請求書', // Estimate/Invoice
   ];
 
-  late List<Widget> pages;
-
-  @override
-  void initState() {
-    super.initState();
-    pages = <Widget>[
-      BasicInformationPage(id: widget.id),
-      PatientPageFormAgent(id: widget.id),
-      ContractPage(id: widget.id),
-      EstimateInvoicePage(id: widget.id),
-    ];
-  }
-
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
   @override
@@ -98,22 +85,34 @@ class _AgentDetailScreenState extends State<AgentDetailScreen> {
             },
           ),
         ),
-        ValueListenableBuilder<int>(
-          valueListenable: _selectedIndex,
-          builder: (BuildContext context, int index, Widget? child) {
-            return Expanded(
-              child: Container(
-                padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                      context.appTheme.spacing.borderRadiusMedium),
-                  color: Colors.white,
-                ),
-                child: pages[index],
-              ),
-            );
-          },
-        )
+        ValueListenableBuilder(
+            valueListenable: context.watch<AgentDetailModel>().agent,
+            builder: (context, value, _) {
+              return ValueListenableBuilder<int>(
+                valueListenable: _selectedIndex,
+                builder: (BuildContext context, int index, Widget? child) {
+                  return Expanded(
+                    child: Container(
+                      padding:
+                          EdgeInsets.all(context.appTheme.spacing.marginMedium),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                            context.appTheme.spacing.borderRadiusMedium),
+                        color: Colors.white,
+                      ),
+                      child: <Widget>[
+                        BasicInformationPage(id: widget.id),
+                        if (value.hasData) ...[
+                          PatientPageFormAgent(id: value.requireData.id),
+                          ContractPage(id: value.requireData.id),
+                          EstimateInvoicePage(id: value.requireData.id),
+                        ]
+                      ][index],
+                    ),
+                  );
+                },
+              );
+            })
       ],
     );
   }

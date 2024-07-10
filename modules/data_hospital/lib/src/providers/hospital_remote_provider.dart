@@ -134,7 +134,7 @@ class HospitalRemoteProvider {
     return apiService.getHospitals();
   }
 
-  Future<FacilityResponse> getFacilityPhoto(){
+  Future<List<FacilityResponse>> getFacilityPhoto(){
     return apiService.getFacilityPhoto();
   }
 
@@ -142,7 +142,7 @@ class HospitalRemoteProvider {
     return apiService.postFacilityPhoto(facilityRequest);
   }
 
-  Future<DocumentResponse> getDocument(){
+  Future<List<DocumentResponse>> getDocument(){
     return apiService.getDocument();
   }
 
@@ -150,7 +150,7 @@ class HospitalRemoteProvider {
     return apiService.postDocument(documentRequest);
   }
 
-  Future<HealthResponse> getHealth(){
+  Future<List<HealthResponse>> getHealth(){
     return apiService.getHealthCheckup();
   }
 
@@ -158,7 +158,7 @@ class HospitalRemoteProvider {
     return apiService.postHealthCheckup(healthRequest);
   }
 
-  Future<ContractResponse> getContract(){
+  Future<List<ContractResponse>> getContract(){
     return apiService.getContract();
   }
 

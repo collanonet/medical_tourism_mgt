@@ -7,6 +7,7 @@ class DocumentRequest{
   DateTime? updatedOn;
   String? translationLanguage;
   String? translator;
+  String hospitalRecord;
 
   DocumentRequest({
     this.uploadFile,
@@ -14,6 +15,7 @@ class DocumentRequest{
     this.updatedOn,
     this.translationLanguage,
     this.translator,
+    required this.hospitalRecord,
   });
   factory DocumentRequest.fromJson(Map<String, dynamic> json) => _$DocumentRequestFromJson(json);
   Map<String, dynamic> toJson() => _$DocumentRequestToJson(this);

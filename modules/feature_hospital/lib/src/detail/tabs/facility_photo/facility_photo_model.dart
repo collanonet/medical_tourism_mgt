@@ -17,34 +17,27 @@ class FacilityModel {
 
   HospitalRepository hospitalRepository;
 
-  ValueNotifier<AsyncData<FacilityResponse>> facilityData =
+  ValueNotifier<AsyncData<List<FacilityResponse>>> facilityData =
       ValueNotifier(const AsyncData());
   Future<void> fetchFacility(FormGroup formGroup) async {
     try {
       facilityData.value = const AsyncData(loading: true);
       final response = await hospitalRepository.getFacilityPhoto();
-      insertFacility(formGroup, response);
+      facilityData.value = AsyncData(data: response);
     } catch (e) {
       logger.d(e);
+      facilityData.value = AsyncData(error: e.toString());
     }
   }
 
-  void insertFacility(FormGroup formGroup, FacilityResponse? data) {
-    formGroup.control('facilityFile').value = data?.facilityFile;
-    formGroup.control('NameOfHspital').value = data?.nameOfHospital;
-    formGroup.control('photograph').value = data?.photograph;
-    formGroup.control('shooting_date').value = data?.shootingDate;
-    formGroup.control('share').value = data?.share;
-    formGroup.control('UploadePhoto').value = data?.uploadedPhoto;
-  }
+  ValueNotifier<AsyncData<FacilityResponse>> submit =
+      ValueNotifier(const AsyncData());
 
-  ValueNotifier<AsyncData<FacilityResponse>> submit = ValueNotifier(const AsyncData());
-  Future<void> submitFacility(FormGroup formGroup) async{
+  Future<void> submitFacility(FormGroup formGroup) async {
     try {
       submit.value = const AsyncData(loading: true);
       final token = await GetIt.I<AuthRepository>().getAccessToken();
       logger.d("token: $token");
-     
 
       String? file;
       if (formGroup.control('UploadePhoto').value != null) {
@@ -61,19 +54,21 @@ class FacilityModel {
           logger.e(e);
         }
       }
-      final response = await hospitalRepository.postFacilityPhoto(
-        FacilityRequest(
-          facilityFile: formGroup.control('facilityFile').value,
-          nameOfHospital: formGroup.control('NameOfHspital').value,
-          photograph: formGroup.control('photograph').value,
-          shootingDate: formGroup.control('shooting_date').value,
-          share: formGroup.control('share').value,
-          uploadedPhoto: file,
-        )
-      );
-      facilityData.value = AsyncData(data: response);
+      final response =
+          await hospitalRepository.postFacilityPhoto(FacilityRequest(
+        facilityFile: formGroup.control('facilityFile').value,
+        nameOfHospital: formGroup.control('NameOfHspital').value,
+        photograph: formGroup.control('photograph').value,
+        shootingDate: formGroup.control('shootingDate').value,
+        share: formGroup.control('share').value,
+        uploadedPhoto: file,
+            hospitalRecord: formGroup.control('hospitalRecord').value,
+      ));
+      facilityData.value =
+          AsyncData(data: facilityData.value.data!..add(response));
     } catch (e) {
       logger.d(e);
+      facilityData.value = AsyncData(error: e.toString());
     }
   }
 }

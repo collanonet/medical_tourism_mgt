@@ -118,14 +118,14 @@ class Popup extends StatelessWidget {
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveDatePicker<DateTime>(
-                      formControlName: 'shooting_date',
+                      formControlName: 'shootingDate',
                       firstDate: DateTime(1900),
                       lastDate: DateTime(2100),
                       builder: (BuildContext context,
                           ReactiveDatePickerDelegate<dynamic> picker,
                           Widget? child) {
                         return ReactiveTextField<DateTime>(
-                          formControlName: 'shooting_date',
+                          formControlName: 'shootingDate',
                           valueAccessor: DateTimeValueAccessor(
                               //dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),

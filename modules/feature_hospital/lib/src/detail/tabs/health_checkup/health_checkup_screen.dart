@@ -8,8 +8,8 @@ import 'health_checkup_form.dart';
 import 'health_checkup_model.dart';
 
 class HealthCheckupScreen extends StatefulWidget {
-  const HealthCheckupScreen({super.key});
-
+  const HealthCheckupScreen({super.key, required this.id});
+  final String id;
   @override
   State<HealthCheckupScreen> createState() => _HealthCheckupScreenState();
 }
@@ -22,11 +22,13 @@ class _HealthCheckupScreenState extends State<HealthCheckupScreen> {
         ValidationMessage.required: (error) => 'This field is required',
       },
       child: ReactiveFormBuilder(
-          form: () => healthCheckupForm(),
+          form: () => healthCheckupForm(hospitalRecordId: widget.id),
           builder: (context, form, _) {
             return Provider(
               create: (context) => GetIt.I<HealthModel>()..fetchHeadInfo(form),
-              child: const HealthCheckupSection(),
+              child: HealthCheckupSection(
+                id: widget.id,
+              ),
             );
           }),
     );

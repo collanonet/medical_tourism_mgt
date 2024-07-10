@@ -175,7 +175,7 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                           IntrinsicWidth(
                                             stepWidth: 200,
                                             child: ReactiveDatePicker<DateTime>(
-                                              formControlName: 'payment_day',
+                                              formControlName: 'paymentDay',
                                               firstDate: DateTime(1900),
                                               lastDate: DateTime.now(),
                                               builder: (BuildContext context,
@@ -187,7 +187,7 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                                   children: [
                                                     ReactiveTextField<DateTime>(
                                                       formControlName:
-                                                          'payment_day',
+                                                          'paymentDay',
                                                       readOnly: true,
                                                       onTap: (value) =>
                                                           picker.showPicker(),

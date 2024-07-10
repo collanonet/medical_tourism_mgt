@@ -48,7 +48,7 @@ class SaleModel {
   }
   void insertHeadInfo(FormGroup formGroup, HeadInfoResponse? data){
     formGroup.control('medical_expense_deposit').value = data?.medicalExpenseDeposit;
-    formGroup.control('payment_day').value = data?.paymentDay;
+    formGroup.control('paymentDay').value = data?.paymentDay;
     formGroup.control('actual_cost').value = data?.actualCost;
     formGroup.control('settlement_day').value = data?.settlementDay;
     formGroup.control('actual_cost_breakdown').value = data?.actualCostBreakdown;

@@ -13,8 +13,8 @@ import 'contrant_file.dart';
 import 'contrant_model.dart';
 
 class ContractSection extends StatefulWidget {
-  const ContractSection({super.key});
-
+  const ContractSection({super.key, required this.id});
+  final String id;
   @override
   State<ContractSection> createState() => ContractSectionState();
 }
@@ -239,7 +239,7 @@ class ContractSectionState extends State<ContractSection> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => contractForm()..markAllAsTouched(),
+              form: () => contractForm(hospitalRecordId: widget.id)..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const Popup();
               },

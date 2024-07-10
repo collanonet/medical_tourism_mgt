@@ -1,4 +1,3 @@
-
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:feature_hospital/src/detail/tabs/basic_information/basic_information_screen.dart';
@@ -9,8 +8,11 @@ import 'package:feature_hospital/src/detail/tabs/health_checkup/health_checkup_s
 import 'package:feature_hospital/src/detail/tabs/q_and_a/q_and_a_screen.dart';
 import 'package:feature_hospital/src/detail/tabs/treatment/treatment_screen.dart';
 import 'package:feature_hospital/src/detail/tabs/web_reservation/web_reservation_screen.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../widgets/header_detail_hospital.dart';
+import 'hospital_detail_model.dart';
 import 'tabs/materials/materials_screen.dart';
 
 class HospitalDetailScreen extends StatefulWidget {
@@ -36,24 +38,6 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
     '書類', // document
     '契約書', // contract
   ];
-
-  late List<Widget> pages;
-
-  @override
-  void initState() {
-    super.initState();
-    pages = [
-      BasicInformationScreen(hospitalId: widget.hospitalId),
-      const MaterialsScreen(),
-      const QAndAScreen(),
-      const FacilityPhotoScreen(),
-      const WebReservationScreen(),
-      const HealthCheckupScreen(),
-      const TreatmentScreen(),
-      const DocumentScreen(),
-      const ContractScreen(),
-    ];
-  }
 
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
@@ -84,22 +68,48 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
             },
           ),
         ),
-        ValueListenableBuilder<int>(
-          valueListenable: _selectedIndex,
-          builder: (BuildContext context, int index, Widget? child) {
-            return Expanded(
-              child: Container(
-                padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                      context.appTheme.spacing.borderRadiusMedium),
-                  color: Colors.white,
-                ),
-                child: pages[index],
-              ),
-            );
-          },
-        )
+        ValueListenableBuilder(
+            valueListenable:
+                context.read<HospitalDetailModel>().basicInformationData,
+            builder: (context, value, _) {
+              return ValueListenableBuilder<int>(
+                valueListenable: _selectedIndex,
+                builder: (BuildContext context, int index, Widget? child) {
+                  return Expanded(
+                    child: Container(
+                      padding:
+                          EdgeInsets.all(context.appTheme.spacing.marginMedium),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                            context.appTheme.spacing.borderRadiusMedium),
+                        color: Colors.white,
+                      ),
+                      child: [
+                        BasicInformationScreen(hospitalId: widget.hospitalId),
+                        if (value.hasData) ...[
+                          const MaterialsScreen(),
+                          const QAndAScreen(),
+                          FacilityPhotoScreen(
+                            id: value.requireData.id,
+                          ),
+                          const WebReservationScreen(),
+                          HealthCheckupScreen(
+                            id: value.requireData.id,
+                          ),
+                          const TreatmentScreen(),
+                          DocumentScreen(
+                            id: value.requireData.id,
+                          ),
+                          ContractScreen(
+                            id: value.requireData.id,
+                          ),
+                        ]
+                      ][index],
+                    ),
+                  );
+                },
+              );
+            })
       ],
     );
   }

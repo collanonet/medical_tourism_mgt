@@ -8,8 +8,8 @@ import 'document_form.dart';
 import 'document_model.dart';
 
 class DocumentScreen extends StatefulWidget {
-  const DocumentScreen({super.key});
-
+  const DocumentScreen({super.key, required this.id});
+  final String id;
   @override
   State<DocumentScreen> createState() => _DocumentScreenState();
 }
@@ -22,12 +22,12 @@ class _DocumentScreenState extends State<DocumentScreen> {
         ValidationMessage.required: (error) => 'This field is required',
       },
       child: ReactiveFormBuilder(
-          form: () => documentForm(),
+          form: () => documentForm(hospitalRecordId: widget.id),
           builder: (context, form, _) {
             return Provider(
               create: (context) =>
                   GetIt.I<DocumentModel>()..fetchDocument(form),
-              child: const DocumentSection(),
+              child: DocumentSection(id: widget.id,),
             );
           }),
     );

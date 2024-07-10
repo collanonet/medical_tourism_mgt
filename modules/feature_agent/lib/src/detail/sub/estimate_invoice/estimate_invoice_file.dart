@@ -118,14 +118,14 @@ class Popup extends StatelessWidget {
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveDatePicker<DateTime>(
-                      formControlName: 'date_of_issue',
+                      formControlName: 'dateOfIssue',
                       firstDate: DateTime(1900),
                       lastDate: DateTime(2100),
                       builder: (BuildContext context,
                           ReactiveDatePickerDelegate<dynamic> picker,
                           Widget? child) {
                         return ReactiveTextField<DateTime>(
-                          formControlName: 'date_of_issue',
+                          formControlName: 'dateOfIssue',
                           valueAccessor: DateTimeValueAccessor(
                               //dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -165,14 +165,14 @@ class Popup extends StatelessWidget {
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveDatePicker<DateTime>(
-                      formControlName: 'date_of_payment',
+                      formControlName: 'dateOfPayment',
                       firstDate: DateTime(1900),
                       lastDate: DateTime(2100),
                       builder: (BuildContext context,
                           ReactiveDatePickerDelegate<dynamic> picker,
                           Widget? child) {
                         return ReactiveTextField<DateTime>(
-                          formControlName: 'date_of_payment',
+                          formControlName: 'dateOfPayment',
                           valueAccessor: DateTimeValueAccessor(
                               //dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -229,14 +229,14 @@ class Popup extends StatelessWidget {
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveDatePicker<DateTime>(
-                      formControlName: 'payment_day',
+                      formControlName: 'paymentDay',
                       firstDate: DateTime(1900),
                       lastDate: DateTime(2100),
                       builder: (BuildContext context,
                           ReactiveDatePickerDelegate<dynamic> picker,
                           Widget? child) {
                         return ReactiveTextField<DateTime>(
-                          formControlName: 'payment_day',
+                          formControlName: 'paymentDay',
                           valueAccessor: DateTimeValueAccessor(
                               //dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -276,7 +276,7 @@ class Popup extends StatelessWidget {
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
-                      formControlName: 'method_of_payment',
+                      formControlName: 'methodOfPayment',
                       decoration: InputDecoration(
                         hintText: '支払い方法',
                       ),
@@ -346,7 +346,7 @@ class Popup extends StatelessWidget {
                           : () {
                               context
                                   .read<EstimateInvoiceModel>()
-                                  .fetchEstimateInvoice(formGroup);
+                                  .submitEstimateInvoice(formGroup);
                             },
                       child: WithLoadingButton(
                           isLoading: value.loading, child: Text('保存する')),
