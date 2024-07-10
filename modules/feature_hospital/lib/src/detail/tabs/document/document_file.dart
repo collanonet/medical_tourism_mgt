@@ -237,7 +237,7 @@ class Popup extends StatelessWidget {
                           : () {
                               context
                                   .read<DocumentModel>()
-                                  .fetchDocument(formGroup);
+                                  .submitDocument(formGroup);
                             },
                       child: WithLoadingButton(
                           isLoading: value.loading, child: Text('保存する')),
