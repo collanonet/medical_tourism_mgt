@@ -51,7 +51,7 @@ class ContrantModel {
       final response = await hospitalRepository.postContract(
         ContractRequest(
           uploadFile: file,
-          fileName: formGroup.control('fileName').value,
+          fileName: formGroup.control('DocumentName').value,
           uploadDate: formGroup.control('updatedOn').value,
           hospitalRecord: formGroup.control('hospitalRecord').value,
         ),

@@ -34,20 +34,23 @@ class EstimateInvoiceModel {
     try {
       submit.value = const AsyncData(loading: true);
       String? file;
-      if (formGroup.control('uploadFile').value != null) {
-        try {
-          // convert Uint8List to base64
-          FileSelect docFile = formGroup.control('uploadFile').value;
-          String base64Image = base64Encode(docFile.file);
-          FileResponse fileData = await authRepository.uploadFileBase64(
-            base64Image,
-            docFile.filename,
-          );
-          file = fileData.filename;
-        } catch (e) {
-          logger.e(e);
+      await Future(() async {
+        if (formGroup.control('uploadFile').value != null) {
+          try {
+            // convert Uint8List to base64
+            FileSelect docFile = formGroup.control('uploadFile').value;
+            String base64Image = base64Encode(docFile.file);
+            FileResponse fileData = await authRepository.uploadFileBase64(
+              base64Image,
+              docFile.filename,
+            );
+            file = fileData.filename;
+          } catch (e) {
+            logger.e(e);
+          }
         }
-      }
+      });
+
       final response =
           await authRepository.postEstimateInvoice(EstimateInvoiceRequest(
         uploadFile: file,

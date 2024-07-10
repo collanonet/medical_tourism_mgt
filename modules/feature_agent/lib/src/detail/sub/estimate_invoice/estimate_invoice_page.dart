@@ -13,16 +13,11 @@ class EstimateInvoicePage extends StatelessWidget {
   final String id;
   @override
   Widget build(BuildContext context) {
-    return ReactiveFormConfig(
-      validationMessages: <String, ValidationMessageFunction>{
-        ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
-      },
-      child: Provider(
-        create: (context) =>
-            GetIt.I<EstimateInvoiceModel>()..fetchEstimateInvoice(id: id),
-        child: EstimateInvoiceScreen(
-          id: id,
-        ),
+    return Provider(
+      create: (context) =>
+          GetIt.I<EstimateInvoiceModel>()..fetchEstimateInvoice(id: id),
+      child: EstimateInvoiceScreen(
+        id: id,
       ),
     );
   }
