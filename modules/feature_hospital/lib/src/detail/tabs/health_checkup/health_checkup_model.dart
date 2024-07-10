@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_hospital/data_hospital.dart';
@@ -28,8 +30,25 @@ class HealthModel {
   Future<void> submit(FormGroup formGroup) async {
     try {
       submitData.value = const AsyncData(loading: true);
+
+      String? file;
+      if (formGroup.control('uploadFile').value != null) {
+        try {
+          // convert Uint8List to base64
+          FileSelect docFile = formGroup.control('uploadFile').value;
+          String base64Image = base64Encode(docFile.file);
+          FileResponse fileData = await hospitalRepository.uploadFileBase64(
+            base64Image,
+            docFile.filename,
+          );
+          file = fileData.filename;
+        } catch (e) {
+          logger.e(e);
+        }
+      }
+
       final response = await hospitalRepository.postHealth(HealthRequest(
-        uploadFile: formGroup.control('uploadFile').value,
+        uploadFile: file,
         fileName: formGroup.control('fileName').value,
         uploadDate: formGroup.control('updatedOn').value,
         hospitalRecord: formGroup.control('hospitalRecord').value,
