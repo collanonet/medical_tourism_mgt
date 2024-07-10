@@ -76,7 +76,9 @@ class ContractSectionState extends State<ContractSection> {
                       ElevatedButton(
                         onPressed: () {
                           filePicker().then((value) {
-                            if (value != null) {}
+                            if (value != null) {
+                              showCreateWithFileDialog(context, value);
+                            }
                           });
                         },
                         child: const Text(

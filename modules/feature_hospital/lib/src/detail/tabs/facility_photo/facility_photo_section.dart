@@ -75,7 +75,9 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                     ElevatedButton(
                       onPressed: () {
                         filePicker().then((value) {
-                          if (value != null) {}
+                          if (value != null) {
+                             showCreateWithFileDialog(context, value);
+                          }
                         });
                       },
                       child: const Text(

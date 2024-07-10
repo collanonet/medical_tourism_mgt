@@ -76,7 +76,9 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                       ElevatedButton(
                         onPressed: () {
                           filePicker().then((value) {
-                            if (value != null) {}
+                            if (value != null) {
+                              showCreateWithFileDialog(context, value);
+                            }
                           });
                         },
                         child: const Text(
