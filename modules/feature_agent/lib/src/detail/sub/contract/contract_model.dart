@@ -16,10 +16,10 @@ class ContractModel {
   final AgentRepository authRepository;
   ValueNotifier<AsyncData<List<ContrantAgentResponse>>> contrantData =
       ValueNotifier(const AsyncData());
-  Future<void> fetchContrant(FormGroup formGroup) async {
+  Future<void> fetchContrant({required String id}) async {
     try {
       contrantData.value = const AsyncData(loading: true);
-      final response = await authRepository.getContrantAgent();
+      final response = await authRepository.getContrantAgent(id: id);
       contrantData.value = AsyncData(data: response);
     } catch (e) {
       logger.e(e);

@@ -26,7 +26,7 @@ class _FacilityPhotoScreenState extends State<FacilityPhotoScreen> {
           builder: (context, form, _) {
             return Provider(
               create: (context) =>
-                  GetIt.I<FacilityModel>()..fetchFacility(form),
+                  GetIt.I<FacilityModel>()..fetchFacility(id: widget.id),
               child: FacilityPhotoSection(id: widget.id,),
             );
           }),

@@ -12,10 +12,10 @@ class HealthModel {
 
   ValueNotifier<AsyncData<List<HealthResponse>>> healthData =
       ValueNotifier(const AsyncData());
-  Future<void> fetchHeadInfo(FormGroup formGroup) async {
+  Future<void> fetchHeadInfo({required String id}) async {
     try {
       healthData.value = const AsyncData(loading: true);
-      final response = await hospitalRepository.getHealth();
+      final response = await hospitalRepository.getHealth(id: id);
       healthData.value = AsyncData(data: response);
     } catch (e) {
       logger.d(e);

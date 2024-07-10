@@ -16,10 +16,10 @@ class EstimateInvoiceModel {
   final AgentRepository authRepository;
   ValueNotifier<AsyncData<List<EstimateInvoiceResponse>>> estimateInvoiceData =
       ValueNotifier(const AsyncData());
-  Future<void> fetchEstimateInvoice(FormGroup formGroup) async {
+  Future<void> fetchEstimateInvoice({required String id}) async {
     try {
       estimateInvoiceData.value = const AsyncData(loading: true);
-      final response = await authRepository.getEstimateInvoice();
+      final response = await authRepository.getEstimateInvoice(id: id);
       estimateInvoiceData.value = AsyncData(data: response);
     } catch (e) {
       logger.d(e);

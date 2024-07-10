@@ -1028,48 +1028,60 @@ abstract class ApiService {
     @Body() TotalRequest totalRequest,
   );
 
-  @GET(Endpoints.FACILITY_PHOTO)
-  Future<List<FacilityResponse>> getFacilityPhoto();
+  @GET('${Endpoints.FACILITY_PHOTO}/{id}')
+  Future<List<FacilityResponse>> getFacilityPhoto({
+    @Path('id') required String id,
+  });
 
   @POST(Endpoints.FACILITY_PHOTO)
   Future<FacilityResponse> postFacilityPhoto(
     @Body() FacilityRequest facilityRequest,
   );
 
-  @GET(Endpoints.DOCUMENT)
-  Future<List<DocumentResponse>> getDocument();
+  @GET('${Endpoints.DOCUMENT}/{id}')
+  Future<List<DocumentResponse>> getDocument({
+    @Path('id') required String id,
+  });
 
   @POST(Endpoints.DOCUMENT)
   Future<DocumentResponse> postDocument(
     @Body() DocumentRequest documentRequest,
   );
 
-  @GET(Endpoints.HEALTH_CHECKUP)
-  Future<List<HealthResponse>> getHealthCheckup();
+  @GET('${Endpoints.HEALTH_CHECKUP}/{id}')
+  Future<List<HealthResponse>> getHealthCheckup({
+    @Path('id') required String id,
+  });
 
   @POST(Endpoints.HEALTH_CHECKUP)
   Future<HealthResponse> postHealthCheckup(
     @Body() HealthRequest healthCheckupRequest,
   );
 
-  @GET(Endpoints.CONTRACT)
-  Future<List<ContractResponse>> getContract();
+  @GET('${Endpoints.CONTRACT}/{id}')
+  Future<List<ContractResponse>> getContract({
+    @Path('id') required String id,
+  });
 
   @POST(Endpoints.CONTRACT)
   Future<ContractResponse> postContract(
     @Body() ContractRequest contractRequest,
   );
 
-  @GET(Endpoints.CONTRANT_AGENT)
-  Future<List<ContrantAgentResponse>> getContractAgent();
+  @GET('${Endpoints.CONTRANT_AGENT}/{id}')
+  Future<List<ContrantAgentResponse>> getContractAgent({
+    @Path('id') required String id,
+  });
 
   @POST(Endpoints.CONTRANT_AGENT)
   Future<ContrantAgentResponse> postContractAgent(
     @Body() ContrantAgentRequest contrantAgentRequest,
   );
 
-  @GET(Endpoints.ESTIMATE_INVOICE)
-  Future<List<EstimateInvoiceResponse>> getEstimateInvoice();
+  @GET('${Endpoints.ESTIMATE_INVOICE}/{id}')
+  Future<List<EstimateInvoiceResponse>> getEstimateInvoice({
+    @Path('id') required String id,
+  });
 
   @POST(Endpoints.ESTIMATE_INVOICE)
   Future<EstimateInvoiceResponse> postEstimateInvoice(

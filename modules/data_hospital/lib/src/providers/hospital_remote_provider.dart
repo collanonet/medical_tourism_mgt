@@ -134,32 +134,32 @@ class HospitalRemoteProvider {
     return apiService.getHospitals();
   }
 
-  Future<List<FacilityResponse>> getFacilityPhoto(){
-    return apiService.getFacilityPhoto();
+  Future<List<FacilityResponse>> getFacilityPhoto({required String id}){
+    return apiService.getFacilityPhoto(id: id);
   }
 
   Future<FacilityResponse> postFacilityPhoto(FacilityRequest facilityRequest){
     return apiService.postFacilityPhoto(facilityRequest);
   }
 
-  Future<List<DocumentResponse>> getDocument(){
-    return apiService.getDocument();
+  Future<List<DocumentResponse>> getDocument({required String id}){
+    return apiService.getDocument(id: id);
   }
 
   Future<DocumentResponse> postDocument(DocumentRequest documentRequest){
     return apiService.postDocument(documentRequest);
   }
 
-  Future<List<HealthResponse>> getHealth(){
-    return apiService.getHealthCheckup();
+  Future<List<HealthResponse>> getHealth({required String id}){
+    return apiService.getHealthCheckup(id: id);
   }
 
   Future<HealthResponse> postHealth(HealthRequest healthRequest){
     return apiService.postHealthCheckup(healthRequest);
   }
 
-  Future<List<ContractResponse>> getContract(){
-    return apiService.getContract();
+  Future<List<ContractResponse>> getContract({required String id}){
+    return apiService.getContract(id: id);
   }
 
   Future<ContractResponse> postContract(ContractRequest contractRequest){

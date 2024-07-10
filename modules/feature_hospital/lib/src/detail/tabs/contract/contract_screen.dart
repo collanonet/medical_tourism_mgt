@@ -26,8 +26,10 @@ class _ContractScreenState extends State<ContractScreen> {
           builder: (context, form, _) {
             return Provider(
               create: (context) =>
-                  GetIt.I<ContrantModel>()..fetchContrant(form),
-              child:  ContractSection(id: widget.id,),
+                  GetIt.I<ContrantModel>()..fetchContrant(id: widget.id),
+              child: ContractSection(
+                id: widget.id,
+              ),
             );
           }),
     );

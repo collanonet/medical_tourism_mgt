@@ -26,7 +26,7 @@ class _DocumentScreenState extends State<DocumentScreen> {
           builder: (context, form, _) {
             return Provider(
               create: (context) =>
-                  GetIt.I<DocumentModel>()..fetchDocument(form),
+                  GetIt.I<DocumentModel>()..fetchDocument(id: widget.id),
               child: DocumentSection(id: widget.id,),
             );
           }),

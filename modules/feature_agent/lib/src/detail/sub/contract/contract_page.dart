@@ -22,8 +22,10 @@ class ContractPage extends StatelessWidget {
           builder: (context, form, _) {
             return Provider(
               create: (context) =>
-                  GetIt.I<ContractModel>()..fetchContrant(form),
-              child:  ContractScreen(id: id,),
+                  GetIt.I<ContractModel>()..fetchContrant(id: id),
+              child: ContractScreen(
+                id: id,
+              ),
             );
           }),
     );

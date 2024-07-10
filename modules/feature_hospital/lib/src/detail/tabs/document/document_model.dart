@@ -15,10 +15,10 @@ class DocumentModel {
 
   ValueNotifier<AsyncData<List<DocumentResponse>>> documentData =
       ValueNotifier(const AsyncData());
-  Future<void> fetchDocument(FormGroup formGroup) async {
+  Future<void> fetchDocument({required String id}) async {
     try {
       documentData.value = const AsyncData(loading: true);
-      final response = await hospitalRepository.getDocument();
+      final response = await hospitalRepository.getDocument(id: id);
 
       documentData.value = AsyncData(data: response);
     } catch (e) {

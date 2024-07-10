@@ -15,10 +15,10 @@ class ContrantModel {
   ValueNotifier<AsyncData<List<ContractResponse>>> contrantData =
       ValueNotifier(const AsyncData());
 
-  Future<void> fetchContrant(FormGroup formGroup) async {
+  Future<void> fetchContrant({required String id}) async {
     try {
       contrantData.value = const AsyncData(loading: true);
-      final response = await hospitalRepository.getContract();
+      final response = await hospitalRepository.getContract(id: id);
       contrantData.value = AsyncData(data: response);
     } catch (e) {
       logger.e(e);

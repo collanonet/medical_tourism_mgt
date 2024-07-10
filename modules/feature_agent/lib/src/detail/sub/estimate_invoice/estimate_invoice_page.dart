@@ -23,8 +23,8 @@ class EstimateInvoicePage extends StatelessWidget {
             return Provider(
               create: (context) => GetIt.I<EstimateInvoiceModel>(),
               child: Provider(
-                create: (context) =>
-                    GetIt.I<EstimateInvoiceModel>()..fetchEstimateInvoice(form),
+                create: (context) => GetIt.I<EstimateInvoiceModel>()
+                  ..fetchEstimateInvoice(id: id),
                 child: EstimateInvoiceScreen(
                   id: id,
                 ),

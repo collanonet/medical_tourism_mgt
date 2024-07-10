@@ -25,7 +25,7 @@ class _HealthCheckupScreenState extends State<HealthCheckupScreen> {
           form: () => healthCheckupForm(hospitalRecordId: widget.id),
           builder: (context, form, _) {
             return Provider(
-              create: (context) => GetIt.I<HealthModel>()..fetchHeadInfo(form),
+              create: (context) => GetIt.I<HealthModel>()..fetchHeadInfo(id: widget.id),
               child: HealthCheckupSection(
                 id: widget.id,
               ),

@@ -1,4 +1,3 @@
-
 import 'package:core_network/core_network.dart';
 import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
@@ -74,25 +73,27 @@ class AgentRemoteProvider {
     return await apiService.deleteAgentManager(id);
   }
 
-  Future<List<ContrantAgentResponse>> getContrantAgent() async{
-    return await apiService.getContractAgent();
+  Future<List<ContrantAgentResponse>> getContrantAgent(
+      {required String id}) async {
+    return await apiService.getContractAgent(id: id);
   }
 
-  Future<ContrantAgentResponse> postContrantAgent(ContrantAgentRequest contrantAgent) async{
+  Future<ContrantAgentResponse> postContrantAgent(
+      ContrantAgentRequest contrantAgent) async {
     return await apiService.postContractAgent(contrantAgent);
   }
 
-  Future<List<EstimateInvoiceResponse>> getEstimateInvoice() async{
-    return await apiService.getEstimateInvoice();
+  Future<List<EstimateInvoiceResponse>> getEstimateInvoice(
+      {required String id}) async {
+    return await apiService.getEstimateInvoice(id: id);
   }
 
-  Future<EstimateInvoiceResponse> postEstimateInvoice(EstimateInvoiceRequest estimateInvoice) async{
+  Future<EstimateInvoiceResponse> postEstimateInvoice(
+      EstimateInvoiceRequest estimateInvoice) async {
     return await apiService.postEstimateInvoice(estimateInvoice);
   }
 
-   Future<FileResponse> uploadFileBase64(
-    String file,
-    String filename) {
-      return apiService.uploadFileBase64(file, filename);
-    }
+  Future<FileResponse> uploadFileBase64(String file, String filename) {
+    return apiService.uploadFileBase64(file, filename);
+  }
 }

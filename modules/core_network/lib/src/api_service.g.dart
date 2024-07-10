@@ -5425,7 +5425,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<FacilityResponse>> getFacilityPhoto() async {
+  Future<List<FacilityResponse>> getFacilityPhoto({required String id}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -5438,7 +5438,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'hospital-facility-photos',
+              'hospital-facility-photos/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -5484,7 +5484,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<DocumentResponse>> getDocument() async {
+  Future<List<DocumentResponse>> getDocument({required String id}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -5497,7 +5497,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'hospital-documents',
+              'hospital-documents/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -5542,7 +5542,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<HealthResponse>> getHealthCheckup() async {
+  Future<List<HealthResponse>> getHealthCheckup({required String id}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -5555,7 +5555,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'hospital-health-checkups',
+              'hospital-health-checkups/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -5600,7 +5600,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<ContractResponse>> getContract() async {
+  Future<List<ContractResponse>> getContract({required String id}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -5613,7 +5613,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'hospital-contacts',
+              'hospital-contacts/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -5658,7 +5658,8 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<ContrantAgentResponse>> getContractAgent() async {
+  Future<List<ContrantAgentResponse>> getContractAgent(
+      {required String id}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -5671,7 +5672,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'agent-contracts',
+              'agent-contracts/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -5717,7 +5718,8 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<EstimateInvoiceResponse>> getEstimateInvoice() async {
+  Future<List<EstimateInvoiceResponse>> getEstimateInvoice(
+      {required String id}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -5730,7 +5732,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'agent-estimate-invoices',
+              'agent-estimate-invoices/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
