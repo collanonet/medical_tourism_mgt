@@ -22,7 +22,11 @@ class EstimateInvoicePage extends StatelessWidget {
           builder: (context, form, _) {
             return Provider(
               create: (context) => GetIt.I<EstimateInvoiceModel>(),
-              child: const EstimateInvoiceScreen(),
+              child: Provider(
+                create: (context) =>
+                    GetIt.I<EstimateInvoiceModel>()..fetchEstimateInvoice(form),
+                child: const EstimateInvoiceScreen(),
+              ),
             );
           }),
     );

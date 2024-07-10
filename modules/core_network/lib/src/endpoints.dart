@@ -202,4 +202,11 @@ class Endpoints {
 
   //C5
   static const FACILITY_PHOTO = 'facility-photo';
+  static const DOCUMENT = 'document';
+  static const HEALTH_CHECKUP = 'health-checkup';
+  static const CONTRACT = 'contact';
+
+  // Agent
+  static const CONTRANT_AGENT = 'contact-agent';
+  static const ESTIMATE_INVOICE = 'estimate-voice';
 }

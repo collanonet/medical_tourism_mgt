@@ -14,19 +14,21 @@ class TreatmentSection extends StatefulWidget {
 class _TreatmentSectionState extends State<TreatmentSection> {
   @override
   Widget build(BuildContext context) {
-    return ColumnSeparated(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      separatorBuilder: (context, index) => SizedBox(
-        height: context.appTheme.spacing.formSpacing,
+    return SingleChildScrollView(
+      child: ColumnSeparated(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        separatorBuilder: (context, index) => SizedBox(
+          height: context.appTheme.spacing.formSpacing,
+        ),
+        children: [
+          const TreatmentMenuSection(),
+          const TelemedicineMenuSection(),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: ElevatedButton(onPressed: () {}, child: const Text('印刷する')),
+          )
+        ],
       ),
-      children: [
-        const TreatmentMenuSection(),
-        const TelemedicineMenuSection(),
-        Align(
-          alignment: Alignment.bottomRight,
-          child: ElevatedButton(onPressed: () {}, child: const Text('印刷する')),
-        )
-      ],
     );
   }
 }

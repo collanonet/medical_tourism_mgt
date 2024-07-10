@@ -6,8 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
-import 'facility_photo_model.dart';
+import 'contract_model.dart';
 
 class Popup extends StatelessWidget {
   const Popup({super.key, this.title});
@@ -43,94 +42,33 @@ class Popup extends StatelessWidget {
           ],
         ),
         Row(
-          children: [
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    'パンフレット名',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  IntrinsicWidth(
-                    stepWidth: 300,
-                    child: ReactiveTextField<String>(
-                      formControlName: 'NameOfHspital',
-                      decoration: InputDecoration(
-                        hintText: '病院名を入力',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '作成者',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  IntrinsicWidth(
-                    stepWidth: 300,
-                    child: ReactiveTextField<String>(
-                      formControlName: 'photograph',
-                      decoration: InputDecoration(
-                        hintText: '作成者',
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            Expanded(
-              child: SizedBox.shrink(),
-            ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            Expanded(
-              child: SizedBox.shrink(),
-            )
-          ],
-        ),
-        SizedBox(
-          height: context.appTheme.spacing.marginMedium,
-        ),
-        Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '発行日',
+                    '更新日',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveDatePicker<DateTime>(
-                      formControlName: 'shooting_date',
+                      formControlName: 'updatedOn',
                       firstDate: DateTime(1900),
                       lastDate: DateTime(2100),
                       builder: (BuildContext context,
                           ReactiveDatePickerDelegate<dynamic> picker,
                           Widget? child) {
                         return ReactiveTextField<DateTime>(
-                          formControlName: 'shooting_date',
+                          formControlName: 'updatedOn',
                           valueAccessor: DateTimeValueAccessor(
                               //dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
                           decoration: InputDecoration(
                             label: const Text(
-                              "発行日",
+                              "更新日",
                             ),
                             suffixIcon: IconButton(
                               icon: const Icon(
@@ -159,15 +97,15 @@ class Popup extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    '共有',
+                    'ファイル名',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
-                      formControlName: 'share',
+                      formControlName: 'DocumentName',
                       decoration: InputDecoration(
-                        hintText: '共有',
+                        hintText: 'ファイル名',
                       ),
                     ),
                   ),
@@ -205,9 +143,9 @@ class Popup extends StatelessWidget {
               width: context.appTheme.spacing.marginMedium,
             ),
             ValueListenableListener(
-              valueListenable: context.read<FacilityModel>().submit,
+              valueListenable: context.read<ContractModel>().submitData,
               onListen: () {
-                final value = context.read<FacilityModel>().submit.value;
+                final value = context.read<ContractModel>().submitData.value;
 
                 if (value.hasError) {
                   snackBarWidget(
@@ -227,15 +165,15 @@ class Popup extends StatelessWidget {
                 }
               },
               child: ValueListenableBuilder(
-                  valueListenable: context.read<FacilityModel>().submit,
+                  valueListenable: context.read<ContractModel>().submitData,
                   builder: (context, value, _) {
                     return ElevatedButton(
                       onPressed: value.loading
                           ? null
                           : () {
                               context
-                                  .read<FacilityModel>()
-                                  .fetchFacility(formGroup);
+                                  .read<ContractModel>()
+                                  .fetchContrant(formGroup);
                             },
                       child: WithLoadingButton(
                           isLoading: value.loading, child: Text('保存する')),

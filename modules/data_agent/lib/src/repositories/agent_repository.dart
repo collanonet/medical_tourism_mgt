@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:core_network/core_network.dart';
+import 'package:core_network/entities.dart';
 
 abstract class AgentRepository {
   Future<List<AgentResponse>> getAgents({
@@ -34,4 +33,21 @@ abstract class AgentRepository {
       String id, AgentManagerRequest agentManager);
 
   Future<void> deleteAgentManager(String id);
+
+  Future<ContrantAgentResponse> getContrantAgent();
+
+  Future<ContrantAgentResponse> postContrantAgent(
+    ContrantAgentRequest contrantAgent,
+  );
+
+  Future<EstimateInvoiceResponse> getEstimateInvoice();
+
+  Future<EstimateInvoiceResponse> postEstimateInvoice(
+    EstimateInvoiceRequest estimateInvoice,
+  );
+
+  Future<FileResponse> uploadFileBase64(
+    String file,
+    String filename,
+  );
 }

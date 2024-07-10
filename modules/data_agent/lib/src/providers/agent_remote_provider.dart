@@ -1,6 +1,6 @@
-import 'dart:io';
 
 import 'package:core_network/core_network.dart';
+import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
@@ -73,4 +73,26 @@ class AgentRemoteProvider {
   Future<void> deleteAgentManager(String id) async {
     return await apiService.deleteAgentManager(id);
   }
+
+  Future<ContrantAgentResponse> getContrantAgent() async{
+    return await apiService.getContractAgent();
+  }
+
+  Future<ContrantAgentResponse> postContrantAgent(ContrantAgentRequest contrantAgent) async{
+    return await apiService.postContractAgent(contrantAgent);
+  }
+
+  Future<EstimateInvoiceResponse> getEstimateInvoice() async{
+    return await apiService.getEstimateInvoice();
+  }
+
+  Future<EstimateInvoiceResponse> postEstimateInvoice(EstimateInvoiceRequest estimateInvoice) async{
+    return await apiService.postEstimateInvoice(estimateInvoice);
+  }
+
+   Future<FileResponse> uploadFileBase64(
+    String file,
+    String filename) {
+      return apiService.uploadFileBase64(file, filename);
+    }
 }

@@ -113,7 +113,12 @@ class _QAndANewRegistrationSectionState
                                 ),
                                 ReactiveDropdownField(
                                   formControlName: 'classification',
-                                  items: const [],
+                                  items: const [
+                                    DropdownMenuItem(
+                                      value: '予約方法について',
+                                      child: Text('予約方法について'),
+                                    )
+                                  ],
                                 )
                               ]),
                         ),

@@ -1,8 +1,11 @@
 import 'package:feature_hospital/src/detail/tabs/document/document_section.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import 'document_form.dart';
+import 'document_model.dart';
 
 class DocumentScreen extends StatefulWidget {
   const DocumentScreen({super.key});
@@ -21,7 +24,11 @@ class _DocumentScreenState extends State<DocumentScreen> {
       child: ReactiveFormBuilder(
           form: () => documentForm(),
           builder: (context, form, _) {
-            return const DocumentSection();
+            return Provider(
+              create: (context) =>
+                  GetIt.I<DocumentModel>()..fetchDocument(form),
+              child: const DocumentSection(),
+            );
           }),
     );
   }

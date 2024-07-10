@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import 'facility_photo_model.dart';
+import 'document_model.dart';
 
 class Popup extends StatelessWidget {
   const Popup({super.key, this.title});
@@ -49,15 +49,15 @@ class Popup extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'パンフレット名',
+                    '書類名',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
-                      formControlName: 'NameOfHspital',
+                      formControlName: 'document_name',
                       decoration: InputDecoration(
-                        hintText: '病院名を入力',
+                        hintText: '書類名',
                       ),
                     ),
                   ),
@@ -72,15 +72,15 @@ class Popup extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '作成者',
+                    '翻訳言語',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
-                      formControlName: 'photograph',
+                      formControlName: 'translationLanguage',
                       decoration: InputDecoration(
-                        hintText: '作成者',
+                        hintText: '翻訳言語',
                       ),
                     ),
                   ),
@@ -111,26 +111,26 @@ class Popup extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    '発行日',
+                    '更新日',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveDatePicker<DateTime>(
-                      formControlName: 'shooting_date',
+                      formControlName: 'updatedOn',
                       firstDate: DateTime(1900),
                       lastDate: DateTime(2100),
                       builder: (BuildContext context,
                           ReactiveDatePickerDelegate<dynamic> picker,
                           Widget? child) {
                         return ReactiveTextField<DateTime>(
-                          formControlName: 'shooting_date',
+                          formControlName: 'updatedOn',
                           valueAccessor: DateTimeValueAccessor(
                               //dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
                           decoration: InputDecoration(
                             label: const Text(
-                              "発行日",
+                              "更新日",
                             ),
                             suffixIcon: IconButton(
                               icon: const Icon(
@@ -159,15 +159,15 @@ class Popup extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    '共有',
+                    '翻訳者',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
-                      formControlName: 'share',
+                      formControlName: 'translator',
                       decoration: InputDecoration(
-                        hintText: '共有',
+                        hintText: '翻訳者',
                       ),
                     ),
                   ),
@@ -205,9 +205,10 @@ class Popup extends StatelessWidget {
               width: context.appTheme.spacing.marginMedium,
             ),
             ValueListenableListener(
-              valueListenable: context.read<FacilityModel>().submit,
+              valueListenable: context.read<DocumentModel>().submitDocumentData,
               onListen: () {
-                final value = context.read<FacilityModel>().submit.value;
+                final value =
+                    context.read<DocumentModel>().submitDocumentData.value;
 
                 if (value.hasError) {
                   snackBarWidget(
@@ -227,15 +228,16 @@ class Popup extends StatelessWidget {
                 }
               },
               child: ValueListenableBuilder(
-                  valueListenable: context.read<FacilityModel>().submit,
+                  valueListenable:
+                      context.read<DocumentModel>().submitDocumentData,
                   builder: (context, value, _) {
                     return ElevatedButton(
                       onPressed: value.loading
                           ? null
                           : () {
                               context
-                                  .read<FacilityModel>()
-                                  .fetchFacility(formGroup);
+                                  .read<DocumentModel>()
+                                  .fetchDocument(formGroup);
                             },
                       child: WithLoadingButton(
                           isLoading: value.loading, child: Text('保存する')),

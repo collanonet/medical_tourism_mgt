@@ -90,5 +90,23 @@ abstract class HospitalRepository {
     FacilityRequest facilityRequest,
   );
 
+  Future<DocumentResponse> getDocument();
+
+  Future<DocumentResponse> postDocument(
+    DocumentRequest documentRequest,
+  );
+
+  Future<HealthResponse> getHealth();
+
+  Future<HealthResponse> postHealth(
+   HealthRequest headInfoRequest,
+  );
+
+  Future<ContractResponse> getContract();
+
+  Future<ContractResponse> postContract(
+    ContractRequest contractRequest,
+  );
+
   /// end get basic information of hospital C3 Page
 }

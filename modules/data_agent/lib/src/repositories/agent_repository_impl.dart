@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
@@ -87,5 +86,30 @@ class AgentRepositoryIml extends AgentRepository {
   Future<AgentManagerResponse> putAgentManager(
       String id, AgentManagerRequest agentManager) {
     return remote.putAgentManager(id, agentManager);
+  }
+  
+  @override
+  Future<ContrantAgentResponse> getContrantAgent() {
+    return remote.getContrantAgent();
+  }
+  
+  @override
+  Future<ContrantAgentResponse> postContrantAgent(ContrantAgentRequest contrantAgent) {
+    return remote.postContrantAgent(contrantAgent);
+  }
+  
+  @override
+  Future<EstimateInvoiceResponse> getEstimateInvoice() {
+    return remote.getEstimateInvoice();
+  }
+  
+  @override
+  Future<EstimateInvoiceResponse> postEstimateInvoice(EstimateInvoiceRequest estimateInvoice) {
+    return remote.postEstimateInvoice(estimateInvoice);
+  }
+  
+  @override
+  Future<FileResponse> uploadFileBase64(String file, String filename) {
+    return remote.uploadFileBase64(file, filename);
   }
 }

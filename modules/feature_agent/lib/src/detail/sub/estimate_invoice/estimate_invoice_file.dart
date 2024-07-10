@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import 'facility_photo_model.dart';
+import 'estimate_invoice_model.dart';
 
 class Popup extends StatelessWidget {
   const Popup({super.key, this.title});
@@ -49,15 +49,15 @@ class Popup extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'パンフレット名',
+                    '書類名',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
-                      formControlName: 'NameOfHspital',
+                      formControlName: 'documentName',
                       decoration: InputDecoration(
-                        hintText: '病院名を入力',
+                        hintText: '書類名',
                       ),
                     ),
                   ),
@@ -72,15 +72,15 @@ class Popup extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '作成者',
+                    '発行元',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
-                      formControlName: 'photograph',
+                      formControlName: 'publisher',
                       decoration: InputDecoration(
-                        hintText: '作成者',
+                        hintText: '発行元',
                       ),
                     ),
                   ),
@@ -109,6 +109,7 @@ class Popup extends StatelessWidget {
           children: [
             Expanded(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
                     '発行日',
@@ -117,14 +118,14 @@ class Popup extends StatelessWidget {
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveDatePicker<DateTime>(
-                      formControlName: 'shooting_date',
+                      formControlName: 'date_of_issue',
                       firstDate: DateTime(1900),
                       lastDate: DateTime(2100),
                       builder: (BuildContext context,
                           ReactiveDatePickerDelegate<dynamic> picker,
                           Widget? child) {
                         return ReactiveTextField<DateTime>(
-                          formControlName: 'shooting_date',
+                          formControlName: 'date_of_issue',
                           valueAccessor: DateTimeValueAccessor(
                               //dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -153,22 +154,45 @@ class Popup extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+           Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    '共有',
+                    '支払期限',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   IntrinsicWidth(
                     stepWidth: 300,
-                    child: ReactiveTextField<String>(
-                      formControlName: 'share',
-                      decoration: InputDecoration(
-                        hintText: '共有',
-                      ),
+                    child: ReactiveDatePicker<DateTime>(
+                      formControlName: 'date_of_payment',
+                      firstDate: DateTime(1900),
+                      lastDate: DateTime(2100),
+                      builder: (BuildContext context,
+                          ReactiveDatePickerDelegate<dynamic> picker,
+                          Widget? child) {
+                        return ReactiveTextField<DateTime>(
+                          formControlName: 'date_of_payment',
+                          valueAccessor: DateTimeValueAccessor(
+                              //dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                              ),
+                          decoration: InputDecoration(
+                            label: const Text(
+                              "支払期限",
+                            ),
+                            suffixIcon: IconButton(
+                              icon: const Icon(
+                                CupertinoIcons.calendar,
+                                color: Colors.grey,
+                              ),
+                              onPressed: picker.showPicker,
+                            ),
+                          ),
+                          inputFormatters: [
+                            formatter.dateFormatter,
+                          ],
+                        );
+                      },
                     ),
                   ),
                 ],
@@ -192,6 +216,93 @@ class Popup extends StatelessWidget {
           height: context.appTheme.spacing.marginMedium,
         ),
         Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '入金日',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  IntrinsicWidth(
+                    stepWidth: 300,
+                    child: ReactiveDatePicker<DateTime>(
+                      formControlName: 'payment_day',
+                      firstDate: DateTime(1900),
+                      lastDate: DateTime(2100),
+                      builder: (BuildContext context,
+                          ReactiveDatePickerDelegate<dynamic> picker,
+                          Widget? child) {
+                        return ReactiveTextField<DateTime>(
+                          formControlName: 'payment_day',
+                          valueAccessor: DateTimeValueAccessor(
+                              //dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                              ),
+                          decoration: InputDecoration(
+                            label: const Text(
+                              "入金日",
+                            ),
+                            suffixIcon: IconButton(
+                              icon: const Icon(
+                                CupertinoIcons.calendar,
+                                color: Colors.grey,
+                              ),
+                              onPressed: picker.showPicker,
+                            ),
+                          ),
+                          inputFormatters: [
+                            formatter.dateFormatter,
+                          ],
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: context.appTheme.spacing.marginMedium,
+            ),
+           Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '支払い方法',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  IntrinsicWidth(
+                    stepWidth: 300,
+                    child: ReactiveTextField<String>(
+                      formControlName: 'method_of_payment',
+                      decoration: InputDecoration(
+                        hintText: '支払い方法',
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: context.appTheme.spacing.marginMedium,
+            ),
+            Expanded(
+              child: SizedBox.shrink(),
+            ),
+            SizedBox(
+              width: context.appTheme.spacing.marginMedium,
+            ),
+            Expanded(
+              child: SizedBox.shrink(),
+            )
+          ],
+        ),
+         SizedBox(
+          height: context.appTheme.spacing.marginMedium,
+        ),
+        Row(
           mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
@@ -205,9 +316,9 @@ class Popup extends StatelessWidget {
               width: context.appTheme.spacing.marginMedium,
             ),
             ValueListenableListener(
-              valueListenable: context.read<FacilityModel>().submit,
+              valueListenable: context.read<EstimateInvoiceModel>().submit,
               onListen: () {
-                final value = context.read<FacilityModel>().submit.value;
+                final value = context.read<EstimateInvoiceModel>().submit.value;
 
                 if (value.hasError) {
                   snackBarWidget(
@@ -227,15 +338,15 @@ class Popup extends StatelessWidget {
                 }
               },
               child: ValueListenableBuilder(
-                  valueListenable: context.read<FacilityModel>().submit,
+                  valueListenable: context.read<EstimateInvoiceModel>().submit,
                   builder: (context, value, _) {
                     return ElevatedButton(
                       onPressed: value.loading
                           ? null
                           : () {
                               context
-                                  .read<FacilityModel>()
-                                  .fetchFacility(formGroup);
+                                  .read<EstimateInvoiceModel>()
+                                  .fetchEstimateInvoice(formGroup);
                             },
                       child: WithLoadingButton(
                           isLoading: value.loading, child: Text('保存する')),

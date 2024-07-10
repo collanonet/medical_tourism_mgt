@@ -142,6 +142,30 @@ class HospitalRemoteProvider {
     return apiService.postFacilityPhoto(facilityRequest);
   }
 
+  Future<DocumentResponse> getDocument(){
+    return apiService.getDocument();
+  }
+
+  Future<DocumentResponse> postDocument(DocumentRequest documentRequest){
+    return apiService.postDocument(documentRequest);
+  }
+
+  Future<HealthResponse> getHealth(){
+    return apiService.getHealthCheckup();
+  }
+
+  Future<HealthResponse> postHealth(HealthRequest healthRequest){
+    return apiService.postHealthCheckup(healthRequest);
+  }
+
+  Future<ContractResponse> getContract(){
+    return apiService.getContract();
+  }
+
+  Future<ContractResponse> postContract(ContractRequest contractRequest){
+    return apiService.postContract(contractRequest);
+  }
+
    Future<FileResponse> uploadFileBase64(
     String file,
     String filename) {

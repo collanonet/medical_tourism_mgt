@@ -1035,6 +1035,46 @@ abstract class ApiService {
   Future<FacilityResponse> postFacilityPhoto(
     @Body() FacilityRequest facilityRequest,
   );
+
+  @GET(Endpoints.DOCUMENT)
+  Future<DocumentResponse> getDocument();
+
+  @POST(Endpoints.DOCUMENT)
+  Future<DocumentResponse> postDocument(
+    @Body() DocumentRequest documentRequest,
+  );
+
+  @GET(Endpoints.HEALTH_CHECKUP)
+  Future<HealthResponse> getHealthCheckup();
+
+  @POST(Endpoints.HEALTH_CHECKUP)
+  Future<HealthResponse> postHealthCheckup(
+    @Body() HealthRequest healthCheckupRequest,
+  );
+
+  @GET(Endpoints.CONTRACT)
+  Future<ContractResponse> getContract();
+
+  @POST(Endpoints.CONTRACT)
+  Future<ContractResponse> postContract(
+    @Body() ContractRequest contractRequest,
+  );
+
+  @GET(Endpoints.CONTRANT_AGENT)
+  Future<ContrantAgentResponse> getContractAgent();
+
+  @POST(Endpoints.CONTRANT_AGENT)
+  Future<ContrantAgentResponse> postContractAgent(
+    @Body() ContrantAgentRequest contrantAgentRequest,
+  );
+
+  @GET(Endpoints.ESTIMATE_INVOICE)
+  Future<EstimateInvoiceResponse> getEstimateInvoice();
+
+  @POST(Endpoints.ESTIMATE_INVOICE)
+  Future<EstimateInvoiceResponse> postEstimateInvoice(
+    @Body() EstimateInvoiceRequest estimateInvoiceRequest,
+  );
 }
 
 extension ApiServiceExts on ApiService {

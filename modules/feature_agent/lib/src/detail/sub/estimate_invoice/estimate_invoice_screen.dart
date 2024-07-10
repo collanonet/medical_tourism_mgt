@@ -1,6 +1,14 @@
+import 'package:core_l10n/l10n.dart';
+import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+
+import 'estimate_invoice_file.dart';
+import 'estimate_invoice_form.dart';
+import 'estimate_invoice_model.dart';
 
 class EstimateInvoiceScreen extends StatefulWidget {
   const EstimateInvoiceScreen({super.key});
@@ -22,7 +30,7 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
                   onTap: () {
                     filePicker().then((value) {
                       if (value != null) {
-                        // todo: showCreateWithFileDialog(context, value);
+                        showCreateWithFileDialog(context, value);
                       }
                     });
                   },
@@ -107,6 +115,29 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
           ],
         )
       ],
+    );
+  }
+
+  void showCreateWithFileDialog(BuildContext context, FileSelect file) {
+    showDialog(
+      context: context,
+      builder: (_) => Provider.value(
+        value: context.read<EstimateInvoiceModel>(),
+        child: AlertDialog(
+          content: ReactiveFormConfig(
+            validationMessages: <String, ValidationMessageFunction>{
+              ValidationMessage.required: (error) =>
+                  context.l10n.mgsFieldRequired,
+            },
+            child: ReactiveFormBuilder(
+              form: () => estimateInvoiceForm()..markAllAsTouched(),
+              builder: (context, formGroup, child) {
+                return const Popup();
+              },
+            ),
+          ),
+        ),
+      ),
     );
   }
 }

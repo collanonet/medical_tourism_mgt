@@ -1,4 +1,3 @@
-import 'package:auto_route/annotations.dart';
 import 'package:core_l10n/l10n.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -22,7 +21,7 @@ class ContractPage extends StatelessWidget {
           form: () => contractForm(),
           builder: (context, form, _) {
             return Provider(
-              create: (context) => GetIt.I<ContractModel>(),
+              create: (context) => GetIt.I<ContractModel>()..fetchContrant(form),
               child: const ContractScreen(),
             );
           }),
