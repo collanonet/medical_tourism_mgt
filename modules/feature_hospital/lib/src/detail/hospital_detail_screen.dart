@@ -27,52 +27,52 @@ class HospitalDetailScreen extends StatefulWidget {
 }
 
 class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
-  List<String> menu = [
-    '基本情報', // basic information
-    'パンフ・資料', // materials
-    'Q＆A', //
-    '施設写真', // Facility photos
-    'Web 予約', //
-    '健診メニュー', // Health checkup menu
-    '治療メニュー', // treatment menu
-    '書類', // document
-    '契約書', // contract
-  ];
-
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const HeaderDetailHospital(),
-        Padding(
-          padding: EdgeInsets.only(
-              top: context.appTheme.spacing.marginMedium,
-              left: context.appTheme.spacing.marginMedium),
-          child: ValueListenableBuilder<int>(
-            valueListenable: _selectedIndex,
-            builder: (BuildContext context, int value, Widget? child) {
-              return Wrap(
-                children: [
-                  TabBarWidget(
-                    selectedIndex: value,
-                    menu: menu,
-                    onPressed: (index) {
-                      _selectedIndex.value = index;
-                    },
-                  ),
-                ],
-              );
-            },
-          ),
-        ),
-        ValueListenableBuilder(
-            valueListenable:
-                context.watch<HospitalDetailModel>().basicInformationData,
-            builder: (context, value, _) {
-              return ValueListenableBuilder<int>(
+    return ValueListenableBuilder(
+        valueListenable:
+            context.watch<HospitalDetailModel>().basicInformationData,
+        builder: (context, value, _) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const HeaderDetailHospital(),
+              Padding(
+                padding: EdgeInsets.only(
+                    top: context.appTheme.spacing.marginMedium,
+                    left: context.appTheme.spacing.marginMedium),
+                child: ValueListenableBuilder<int>(
+                  valueListenable: _selectedIndex,
+                  builder: (BuildContext context, int index, Widget? child) {
+                    return Wrap(
+                      children: [
+                        TabBarWidget(
+                          selectedIndex: index,
+                          menu: [
+                            '基本情報', // basic information
+                            if (value.hasData) ...[
+                              'パンフ・資料', // materials
+                              'Q＆A', //
+                              '施設写真', // Facility photos
+                              'Web 予約', //
+                              '健診メニュー', // Health checkup menu
+                              '治療メニュー', // treatment menu
+                              '書類', // document
+                              '契約書', // contract
+                            ]
+                          ],
+                          onPressed: (index) {
+                            _selectedIndex.value = index;
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              ValueListenableBuilder<int>(
                 valueListenable: _selectedIndex,
                 builder: (BuildContext context, int index, Widget? child) {
                   return Expanded(
@@ -110,9 +110,9 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                     ),
                   );
                 },
-              );
-            })
-      ],
-    );
+              )
+            ],
+          );
+        });
   }
 }

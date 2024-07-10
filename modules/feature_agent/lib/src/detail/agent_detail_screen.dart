@@ -18,30 +18,25 @@ class AgentDetailScreen extends StatefulWidget {
 }
 
 class _AgentDetailScreenState extends State<AgentDetailScreen> {
-  List<String> menu = <String>[
-    '基本情報', // basic information
-    '対応患者', // Compatible patients
-    '契約書', // contract
-    '見積書・請求書', // Estimate/Invoice
-  ];
+  List<String> menu = <String>[];
 
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Container(
-          padding: const EdgeInsets.all(16),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: ValueListenableBuilder(
-              valueListenable: context.watch<AgentDetailModel>().agent,
-              builder: (context, value, _) {
-                return Skeletonizer(
+    return ValueListenableBuilder(
+        valueListenable: context.watch<AgentDetailModel>().agent,
+        builder: (context, value, _) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                child: Skeletonizer(
                   enabled: value.loading,
                   child: ColumnSeparated(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -61,34 +56,38 @@ class _AgentDetailScreenState extends State<AgentDetailScreen> {
                       ),
                     ],
                   ),
-                );
-              }),
-        ),
-        Padding(
-          padding: EdgeInsets.only(
-              top: context.appTheme.spacing.marginMedium,
-              left: context.appTheme.spacing.marginMedium),
-          child: ValueListenableBuilder<int>(
-            valueListenable: _selectedIndex,
-            builder: (BuildContext context, int value, Widget? child) {
-              return Wrap(
-                children: [
-                  TabBarWidget(
-                    selectedIndex: value,
-                    menu: menu,
-                    onPressed: (index) {
-                      _selectedIndex.value = index;
-                    },
-                  ),
-                ],
-              );
-            },
-          ),
-        ),
-        ValueListenableBuilder(
-            valueListenable: context.watch<AgentDetailModel>().agent,
-            builder: (context, value, _) {
-              return ValueListenableBuilder<int>(
+                ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                    top: context.appTheme.spacing.marginMedium,
+                    left: context.appTheme.spacing.marginMedium),
+                child: ValueListenableBuilder<int>(
+                  valueListenable: _selectedIndex,
+                  builder: (BuildContext context, int index, Widget? child) {
+                    return Wrap(
+                      children: [
+                        TabBarWidget(
+                          selectedIndex: index,
+                          menu: [
+                            '基本情報', // basic information
+                            if (value.hasData) ...[
+                              '対応患者', // Compatible patients
+                              '契約書', // contract
+                              '見積書・請求書', // Estimate/Invoice
+                            ]
+                          ],
+                          onPressed: (index) {
+                            _selectedIndex.value = index;
+                            setState(() {});
+                          },
+                        ),
+                      ],
+                    );
+                  },
+                ),
+              ),
+              ValueListenableBuilder<int>(
                 valueListenable: _selectedIndex,
                 builder: (BuildContext context, int index, Widget? child) {
                   return Expanded(
@@ -111,9 +110,9 @@ class _AgentDetailScreenState extends State<AgentDetailScreen> {
                     ),
                   );
                 },
-              );
-            })
-      ],
-    );
+              )
+            ],
+          );
+        });
   }
 }

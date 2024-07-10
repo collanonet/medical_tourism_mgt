@@ -12,7 +12,7 @@ class HealthModel {
 
   ValueNotifier<AsyncData<List<HealthResponse>>> healthData =
       ValueNotifier(const AsyncData());
-  Future<void> fetchHeadInfo({required String id}) async {
+  void fetchHeadInfo({required String id}) async {
     try {
       healthData.value = const AsyncData(loading: true);
       final response = await hospitalRepository.getHealth(id: id);

@@ -103,7 +103,7 @@ class Popup extends StatelessWidget {
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
-                      formControlName: 'DocumentName',
+                      formControlName: 'fileName',
                       decoration: InputDecoration(
                         hintText: 'ファイル名',
                       ),

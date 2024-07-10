@@ -21,7 +21,7 @@ class MaterialsModel {
   ValueNotifier<AsyncData<List<MaterialHospitalResponse>>> materialsData =
       ValueNotifier(const AsyncData());
 
-  Future<void> fetchData({required String hospitalId}) async {
+  void fetchData({required String hospitalId}) async {
     try {
       materialsData.value = const AsyncData(loading: true);
       final result = await hospitalRepository.getMaterialHospital(hospitalId);

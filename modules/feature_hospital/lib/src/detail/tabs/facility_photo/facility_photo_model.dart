@@ -19,7 +19,7 @@ class FacilityModel {
 
   ValueNotifier<AsyncData<List<FacilityResponse>>> facilityData =
       ValueNotifier(const AsyncData());
-  Future<void> fetchFacility({required String id}) async {
+  void fetchFacility({required String id}) async {
     try {
       facilityData.value = const AsyncData(loading: true);
       final response = await hospitalRepository.getFacilityPhoto(id: id);

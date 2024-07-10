@@ -15,7 +15,7 @@ class ContrantModel {
   ValueNotifier<AsyncData<List<ContractResponse>>> contrantData =
       ValueNotifier(const AsyncData());
 
-  Future<void> fetchContrant({required String id}) async {
+  void fetchContrant({required String id}) async {
     try {
       contrantData.value = const AsyncData(loading: true);
       final response = await hospitalRepository.getContract(id: id);
