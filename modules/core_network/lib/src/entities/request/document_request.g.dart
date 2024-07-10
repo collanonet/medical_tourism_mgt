@@ -15,6 +15,7 @@ DocumentRequest _$DocumentRequestFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['updatedOn'] as String),
       translationLanguage: json['translationLanguage'] as String?,
       translator: json['translator'] as String?,
+      hospitalRecord: json['hospitalRecord'] as String,
     );
 
 Map<String, dynamic> _$DocumentRequestToJson(DocumentRequest instance) =>
@@ -24,4 +25,5 @@ Map<String, dynamic> _$DocumentRequestToJson(DocumentRequest instance) =>
       'updatedOn': instance.updatedOn?.toIso8601String(),
       'translationLanguage': instance.translationLanguage,
       'translator': instance.translator,
+      'hospitalRecord': instance.hospitalRecord,
     };

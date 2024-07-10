@@ -22,6 +22,7 @@ EstimateInvoiceRequest _$EstimateInvoiceRequestFromJson(
           ? null
           : DateTime.parse(json['paymentDay'] as String),
       methodOfPayment: json['methodOfPayment'] as String?,
+      agentRecord: json['agentRecord'] as String,
     );
 
 Map<String, dynamic> _$EstimateInvoiceRequestToJson(
@@ -34,4 +35,5 @@ Map<String, dynamic> _$EstimateInvoiceRequestToJson(
       'dateOfPayment': instance.dateOfPayment?.toIso8601String(),
       'paymentDay': instance.paymentDay?.toIso8601String(),
       'methodOfPayment': instance.methodOfPayment,
+      'agentRecord': instance.agentRecord,
     };

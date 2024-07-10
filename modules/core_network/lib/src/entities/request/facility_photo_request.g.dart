@@ -16,6 +16,7 @@ FacilityRequest _$FacilityRequestFromJson(Map<String, dynamic> json) =>
           : DateTime.parse(json['shootingDate'] as String),
       share: json['share'] as String?,
       uploadedPhoto: json['uploadedPhoto'] as String?,
+      hospitalRecord: json['hospitalRecord'] as String,
     );
 
 Map<String, dynamic> _$FacilityRequestToJson(FacilityRequest instance) =>
@@ -26,4 +27,5 @@ Map<String, dynamic> _$FacilityRequestToJson(FacilityRequest instance) =>
       'shootingDate': instance.shootingDate?.toIso8601String(),
       'share': instance.share,
       'uploadedPhoto': instance.uploadedPhoto,
+      'hospitalRecord': instance.hospitalRecord,
     };

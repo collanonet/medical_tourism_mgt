@@ -13,6 +13,7 @@ HealthRequest _$HealthRequestFromJson(Map<String, dynamic> json) =>
       uploadDate: json['uploadDate'] == null
           ? null
           : DateTime.parse(json['uploadDate'] as String),
+      hospitalRecord: json['hospitalRecord'] as String,
     );
 
 Map<String, dynamic> _$HealthRequestToJson(HealthRequest instance) =>
@@ -20,4 +21,5 @@ Map<String, dynamic> _$HealthRequestToJson(HealthRequest instance) =>
       'uploadFile': instance.uploadFile,
       'fileName': instance.fileName,
       'uploadDate': instance.uploadDate?.toIso8601String(),
+      'hospitalRecord': instance.hospitalRecord,
     };

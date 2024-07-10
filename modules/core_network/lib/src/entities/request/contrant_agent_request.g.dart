@@ -14,6 +14,7 @@ ContrantAgentRequest _$ContrantAgentRequestFromJson(
       uploadOn: json['uploadOn'] == null
           ? null
           : DateTime.parse(json['uploadOn'] as String),
+      agentRecord: json['agentRecord'] as String,
     );
 
 Map<String, dynamic> _$ContrantAgentRequestToJson(
@@ -22,4 +23,5 @@ Map<String, dynamic> _$ContrantAgentRequestToJson(
       'uploadFile': instance.uploadFile,
       'fileName': instance.fileName,
       'uploadOn': instance.uploadOn?.toIso8601String(),
+      'agentRecord': instance.agentRecord,
     };
