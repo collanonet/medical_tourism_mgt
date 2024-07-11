@@ -17,11 +17,18 @@ class PatientPageFormAgent extends StatefulWidget {
 }
 
 class _PatientPageState extends State<PatientPageFormAgent> {
+  ScrollController? scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => GetIt.I<PatientModel>()..patients(),
-      child: Expanded(child: const PatientScreenForAgent()),
+      child: Expanded(
+        child: SingleChildScrollView(
+          controller: scrollController,
+          child: const PatientScreenForAgent(),
+        ),
+      ),
     );
   }
 }
