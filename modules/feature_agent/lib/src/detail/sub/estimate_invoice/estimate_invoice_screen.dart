@@ -3,6 +3,7 @@ import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -23,77 +24,140 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
     return Column(
       children: [
         Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                InkWell(
-                  onTap: () {
-                    filePicker().then((value) {
-                      if (value != null) {
-                        showCreateWithFileDialog(context, value);
-                      }
-                    });
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(
-                      context.appTheme.spacing.marginExtraLarge,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(
-                        context.appTheme.spacing.borderRadiusMedium,
-                      )),
-                      border: Border.all(
-                        color: context.appTheme.primaryColor,
-                      ),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.copy_all_rounded,
-                          size: 50,
-                          color: context.appTheme.primaryColor,
-                        ),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                              '見積書・請求書をここにドラッグ＆ドロップ',
-                              style: context.textTheme.bodySmall?.copyWith(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(
-                              height: context.appTheme.spacing.marginMedium,
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                filePicker().then((value) {
-                                  if (value != null) {
-                                    showCreateWithFileDialog(context, value);
-                                  }
-                                });
-                              },
-                              child: const Text(
-                                'またはファイルを選択する',
-                              ),
-                            )
-                          ],
-                        )
-                      ],
+          child: Column(
+            children: [
+              InkWell(
+                onTap: () {
+                  filePicker().then((value) {
+                    if (value != null) {
+                      showCreateWithFileDialog(context, value);
+                    }
+                  });
+                },
+                child: Container(
+                  padding: EdgeInsets.all(
+                    context.appTheme.spacing.marginExtraLarge,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(
+                      context.appTheme.spacing.borderRadiusMedium,
+                    )),
+                    border: Border.all(
+                      color: context.appTheme.primaryColor,
                     ),
                   ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.copy_all_rounded,
+                        size: 50,
+                        color: context.appTheme.primaryColor,
+                      ),
+                      SizedBox(
+                        width: context.appTheme.spacing.marginMedium,
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            '見積書・請求書をここにドラッグ＆ドロップ',
+                            style: context.textTheme.bodySmall?.copyWith(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: context.appTheme.spacing.marginMedium,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              filePicker().then((value) {
+                                if (value != null) {
+                                  showCreateWithFileDialog(context, value);
+                                }
+                              });
+                            },
+                            child: const Text(
+                              'またはファイルを選択する',
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 ),
-                SizedBox(
-                  height: context.appTheme.spacing.marginMedium,
-                ),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: context.appTheme.spacing.marginMedium,
+              ),
+              const Row(
+                children: [
+                  Expanded(flex: 2, child: Text('書類名')),
+                  Expanded(child: Text('発行元')),
+                  Expanded(child: Text('発行日')),
+                  Expanded(child: Text('支払期限')),
+                  Expanded(child: Text('入金日')),
+                  Expanded(child: Text('支払い方法')),
+                ],
+              ),
+              ValueListenableBuilder(
+                  valueListenable:
+                      context.read<EstimateInvoiceModel>().estimateInvoiceData,
+                  builder: (context, value, _) {
+                    return Expanded(
+                      child: ListView.builder(
+                        itemCount: value.data?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          return Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Text(
+                                    value.requireData[index].documentName ??
+                                        ''),
+                              ),
+                              Expanded(
+                                child: Text(
+                                    value.requireData[index].publisher ?? ''),
+                              ),
+                              Expanded(
+                                child: Text(value
+                                            .requireData[index].dateOfIssue ==
+                                        null
+                                    ? ''
+                                    : Dates.formShortDate(
+                                        value.requireData[index].dateOfIssue)),
+                              ),
+                              Expanded(
+                                child: Text(
+                                    value.requireData[index].dateOfPayment ==
+                                            null
+                                        ? ''
+                                        : Dates.formShortDate(value
+                                            .requireData[index].dateOfPayment)),
+                              ),
+                              Expanded(
+                                child: Text(value
+                                            .requireData[index].paymentDay ==
+                                        null
+                                    ? ''
+                                    : Dates.formShortDate(
+                                        value.requireData[index].paymentDay)),
+                              ),
+                              Expanded(
+                                child: Text(
+                                    value.requireData[index].methodOfPayment ??
+                                        ''),
+                              ),
+                            ],
+                          );
+                        },
+                      ),
+                    );
+                  })
+            ],
           ),
         ),
         const SizedBox(height: 16),

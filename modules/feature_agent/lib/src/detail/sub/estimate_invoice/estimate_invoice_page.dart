@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import 'estimate_invoice_form.dart';
 import 'estimate_invoice_model.dart';
@@ -16,9 +17,19 @@ class EstimateInvoicePage extends StatelessWidget {
     return Provider(
       create: (context) =>
           GetIt.I<EstimateInvoiceModel>()..fetchEstimateInvoice(id: id),
-      child: EstimateInvoiceScreen(
-        id: id,
-      ),
+      child: Builder(builder: (context) {
+        return ValueListenableBuilder(
+            valueListenable:
+                context.read<EstimateInvoiceModel>().estimateInvoiceData,
+            builder: (context, value, _) {
+              return Skeletonizer(
+                enabled: value.loading,
+                child: EstimateInvoiceScreen(
+                  id: id,
+                ),
+              );
+            });
+      }),
     );
   }
 }
