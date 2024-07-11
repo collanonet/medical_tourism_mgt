@@ -102,56 +102,68 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
                   Expanded(child: Text('支払い方法')),
                 ],
               ),
+              SizedBox(
+                height: context.appTheme.spacing.marginMedium,
+              ),
               ValueListenableBuilder(
                   valueListenable:
                       context.read<EstimateInvoiceModel>().estimateInvoiceData,
                   builder: (context, value, _) {
                     return Expanded(
-                      child: ListView.builder(
+                      child: ListView.separated(
                         itemCount: value.data?.length ?? 0,
                         itemBuilder: (context, index) {
-                          return Row(
-                            children: [
-                              Expanded(
-                                flex: 2,
-                                child: Text(
-                                    value.requireData[index].documentName ??
-                                        ''),
-                              ),
-                              Expanded(
-                                child: Text(
-                                    value.requireData[index].publisher ?? ''),
-                              ),
-                              Expanded(
-                                child: Text(value
-                                            .requireData[index].dateOfIssue ==
-                                        null
-                                    ? ''
-                                    : Dates.formShortDate(
-                                        value.requireData[index].dateOfIssue)),
-                              ),
-                              Expanded(
-                                child: Text(
-                                    value.requireData[index].dateOfPayment ==
-                                            null
-                                        ? ''
-                                        : Dates.formShortDate(value
-                                            .requireData[index].dateOfPayment)),
-                              ),
-                              Expanded(
-                                child: Text(value
-                                            .requireData[index].paymentDay ==
-                                        null
-                                    ? ''
-                                    : Dates.formShortDate(
-                                        value.requireData[index].paymentDay)),
-                              ),
-                              Expanded(
-                                child: Text(
-                                    value.requireData[index].methodOfPayment ??
-                                        ''),
-                              ),
-                            ],
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                      value.requireData[index].documentName ??
+                                          ''),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                      value.requireData[index].publisher ?? ''),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                      value.requireData[index].dateOfIssue ==
+                                              null
+                                          ? ''
+                                          : Dates.formShortDate(value
+                                              .requireData[index].dateOfIssue)),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                      value.requireData[index].dateOfPayment ==
+                                              null
+                                          ? ''
+                                          : Dates.formShortDate(value
+                                              .requireData[index]
+                                              .dateOfPayment)),
+                                ),
+                                Expanded(
+                                  child: Text(value
+                                              .requireData[index].paymentDay ==
+                                          null
+                                      ? ''
+                                      : Dates.formShortDate(
+                                          value.requireData[index].paymentDay)),
+                                ),
+                                Expanded(
+                                  child: Text(value
+                                          .requireData[index].methodOfPayment ??
+                                      ''),
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const Divider(
+                            color: Colors.grey,
                           );
                         },
                       ),

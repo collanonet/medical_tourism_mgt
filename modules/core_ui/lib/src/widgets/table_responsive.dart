@@ -10,6 +10,7 @@ class DynamicTable extends StatefulWidget {
   final Color? oddRowColor;
   final Color? evenRowColor;
   final int? rowsPerPage;
+  final bool enableScroll;
 
   const DynamicTable({
     Key? key,
@@ -21,6 +22,7 @@ class DynamicTable extends StatefulWidget {
     this.oddRowColor,
     this.evenRowColor,
     this.rowsPerPage = 10,
+    this.enableScroll = true,
   }) : super(key: key);
 
   @override
@@ -128,57 +130,19 @@ class _DynamicTableState extends State<DynamicTable> {
         ),
         widget.data.rows.isEmpty
             ? Center(
-              child: Text(
-                'No data available',
-                style: TextStyle(
-                  fontFamily: 'NotoSansJP',
-                  package: 'core_ui',
+                child: Text(
+                  'No data available',
+                  style: TextStyle(
+                    fontFamily: 'NotoSansJP',
+                    package: 'core_ui',
+                  ),
                 ),
-              ),
-            )
-            : Expanded(
-                child: ListView.builder(
-                  controller: _scrollController,
-                  itemCount: rowsToShow.length,
-                  itemBuilder: (context, index) {
-                    Decoration? rowDecoration;
-                    if (widget.data.rows.isNotEmpty) {
-                      final rowIndex = startIndex + index;
-                      final rowColor = rowIndex.isOdd
-                          ? widget.oddRowColor ?? Colors.white
-                          : widget.evenRowColor ?? const Color(0xffEDF8F8);
-                      rowDecoration = widget.rowDecoration ??
-                          BoxDecoration(color: rowColor);
-                    }
-
-                    return InkWell(
-                      onTap: rowsToShow[index].onTap,
-                      hoverColor: Colors.grey,
-                      child: Container(
-                        decoration: rowDecoration,
-                        width: MediaQuery.of(context).size.width,
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 8.0,
-                          horizontal: 4.0,
-                        ),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: rowsToShow[index]
-                              .cell
-                              .mapIndexed(
-                                (cellIndex, cell) => Expanded(
-                                  flex: widget.data.columns[cellIndex].flex,
-                                  child: cell,
-                                ),
-                              )
-                              .toList(),
-                        ),
-                      ),
-                    );
-                  },
-                ),
-              ),
+              )
+            : widget.enableScroll
+                ? Expanded(
+                    child: list(),
+                  )
+                : list(),
         if (widget.data.rows.isNotEmpty && widget.rowsPerPage != null)
           Container(
             decoration: widget.headerDecoration ??
@@ -212,6 +176,54 @@ class _DynamicTableState extends State<DynamicTable> {
             ),
           ),
       ],
+    );
+  }
+
+  list() {
+    return ListView.builder(
+      controller: _scrollController,
+      itemCount: rowsToShow.length,
+      shrinkWrap: !widget.enableScroll,
+      physics: widget.enableScroll
+          ? const AlwaysScrollableScrollPhysics()
+          : const NeverScrollableScrollPhysics(),
+      itemBuilder: (context, index) {
+        Decoration? rowDecoration;
+        if (widget.data.rows.isNotEmpty) {
+          final rowIndex = startIndex + index;
+          final rowColor = rowIndex.isOdd
+              ? widget.oddRowColor ?? Colors.white
+              : widget.evenRowColor ?? const Color(0xffEDF8F8);
+          rowDecoration =
+              widget.rowDecoration ?? BoxDecoration(color: rowColor);
+        }
+
+        return InkWell(
+          onTap: rowsToShow[index].onTap,
+          hoverColor: Colors.grey,
+          child: Container(
+            decoration: rowDecoration,
+            width: MediaQuery.of(context).size.width,
+            padding: const EdgeInsets.symmetric(
+              vertical: 8.0,
+              horizontal: 4.0,
+            ),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: rowsToShow[index]
+                  .cell
+                  .mapIndexed(
+                    (cellIndex, cell) => Expanded(
+                      flex: widget.data.columns[cellIndex].flex,
+                      child: cell,
+                    ),
+                  )
+                  .toList(),
+            ),
+          ),
+        );
+      },
     );
   }
 }

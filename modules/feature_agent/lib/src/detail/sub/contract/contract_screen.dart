@@ -25,77 +25,119 @@ class _ContractScreenState extends State<ContractScreen> {
     return Column(
       children: [
         Expanded(
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                InkWell(
-                  onTap: () {
-                    filePicker().then((value) {
-                      if (value != null) {
-                        showCreateWithFileDialog(context, value);
-                      }
-                    });
-                  },
-                  child: Container(
-                    padding: EdgeInsets.all(
-                      context.appTheme.spacing.marginExtraLarge,
-                    ),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.all(Radius.circular(
-                        context.appTheme.spacing.borderRadiusMedium,
-                      )),
-                      border: Border.all(
-                        color: context.appTheme.primaryColor,
-                      ),
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          Icons.copy_all_rounded,
-                          size: 50,
-                          color: context.appTheme.primaryColor,
-                        ),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        ),
-                        Column(
-                          children: [
-                            Text(
-                              '契約書をここにドラッグ＆ドロップ',
-                              style: context.textTheme.bodySmall?.copyWith(
-                                fontSize: 22,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            SizedBox(
-                              height: context.appTheme.spacing.marginMedium,
-                            ),
-                            ElevatedButton(
-                              onPressed: () {
-                                filePicker().then((value) {
-                                  if (value != null) {
-                                    showCreateWithFileDialog(context, value);
-                                  }
-                                });
-                              },
-                              child: const Text(
-                                'またはファイルを選択する',
-                              ),
-                            )
-                          ],
-                        )
-                      ],
+          child: Column(
+            children: [
+              InkWell(
+                onTap: () {
+                  filePicker().then((value) {
+                    if (value != null) {
+                      showCreateWithFileDialog(context, value);
+                    }
+                  });
+                },
+                child: Container(
+                  padding: EdgeInsets.all(
+                    context.appTheme.spacing.marginExtraLarge,
+                  ),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(
+                      context.appTheme.spacing.borderRadiusMedium,
+                    )),
+                    border: Border.all(
+                      color: context.appTheme.primaryColor,
                     ),
                   ),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(
+                        Icons.copy_all_rounded,
+                        size: 50,
+                        color: context.appTheme.primaryColor,
+                      ),
+                      SizedBox(
+                        width: context.appTheme.spacing.marginMedium,
+                      ),
+                      Column(
+                        children: [
+                          Text(
+                            '契約書をここにドラッグ＆ドロップ',
+                            style: context.textTheme.bodySmall?.copyWith(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: context.appTheme.spacing.marginMedium,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              filePicker().then((value) {
+                                if (value != null) {
+                                  showCreateWithFileDialog(context, value);
+                                }
+                              });
+                            },
+                            child: const Text(
+                              'またはファイルを選択する',
+                            ),
+                          )
+                        ],
+                      )
+                    ],
+                  ),
                 ),
-                SizedBox(
-                  height: context.appTheme.spacing.marginMedium,
-                ),
-              ],
-            ),
+              ),
+              SizedBox(
+                height: context.appTheme.spacing.marginMedium,
+              ),
+              const Row(
+                children: [
+                  Expanded(flex: 2, child: Text('書類名')),
+                  Expanded(child: Text('締結日')),
+                ],
+              ),
+              SizedBox(
+                height: context.appTheme.spacing.marginMedium,
+              ),
+              ValueListenableBuilder(
+                  valueListenable: context.read<ContractModel>().contrantData,
+                  builder: (context, value, _) {
+                    return Expanded(
+                      child: ListView.separated(
+                        itemCount: value.data?.length ?? 0,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                      value.requireData[index].fileName ?? ''),
+                                ),
+                                Expanded(
+                                  child: Text(value
+                                              .requireData[index].updatedAt ==
+                                          null
+                                      ? ''
+                                      : Dates.formShortDate(
+                                          value.requireData[index].updatedAt)),
+                                ),
+                              ],
+                            ),
+                          );
+                        }, separatorBuilder: (BuildContext context, int index) {
+                          return const Divider(
+                            color: Colors.grey,
+                          );
+                      },
+                      ),
+                    );
+                  })
+            ],
           ),
         ),
         const SizedBox(height: 16),
