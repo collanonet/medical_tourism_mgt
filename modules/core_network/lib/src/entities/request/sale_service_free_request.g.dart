@@ -11,15 +11,16 @@ ServiceFeeRequest _$ServiceFeeRequestFromJson(Map<String, dynamic> json) =>
       serviceItem: (json['serviceItem'] as List<dynamic>)
           .map((e) => ServiceItem.fromJson(e as Map<String, dynamic>))
           .toList(),
-      amountOfMoneyTotalSale: json['amountOfMoneyTotalSale'] as int?,
-      amountOfMoneyTotalTax: json['amountOfMoneyTotalTax'] as int?,
-      amountOfMoneyTotalAmount: json['amountOfMoneyTotalAmount'] as int?,
-      costSale: json['costSale'] as int?,
-      costTax: json['costTax'] as int?,
-      costAmount: json['costAmount'] as int?,
-      profitSale: json['profitSale'] as int?,
-      profitTax: json['profitTax'] as int?,
-      profitAmount: json['profitAmount'] as int?,
+      amountOfMoneyTotalSale: (json['amountOfMoneyTotalSale'] as num?)?.toInt(),
+      amountOfMoneyTotalTax: (json['amountOfMoneyTotalTax'] as num?)?.toInt(),
+      amountOfMoneyTotalAmount:
+          (json['amountOfMoneyTotalAmount'] as num?)?.toInt(),
+      costSale: (json['costSale'] as num?)?.toInt(),
+      costTax: (json['costTax'] as num?)?.toInt(),
+      costAmount: (json['costAmount'] as num?)?.toInt(),
+      profitSale: (json['profitSale'] as num?)?.toInt(),
+      profitTax: (json['profitTax'] as num?)?.toInt(),
+      profitAmount: (json['profitAmount'] as num?)?.toInt(),
       tax: json['tax'] as String?,
       taxExcluded: json['taxExcluded'] as String?,
       taxExempt: json['taxExempt'] as String?,
@@ -44,14 +45,14 @@ Map<String, dynamic> _$ServiceFeeRequestToJson(ServiceFeeRequest instance) =>
 
 ServiceItem _$ServiceItemFromJson(Map<String, dynamic> json) => ServiceItem(
       item: json['item'] as String?,
-      quantity: json['quantity'] as int?,
+      quantity: (json['quantity'] as num?)?.toInt(),
       unit: json['unit'] as String?,
-      unitPrice: json['unitPrice'] as int?,
-      amountOfMoney: json['amountOfMoney'] as int?,
-      cost: json['cost'] as int?,
-      profit: json['profit'] as int?,
-      invoiceNo: json['invoiceNo'] as int?,
-      paymentDocumentNo: json['paymentDocumentNo'] as int?,
+      unitPrice: (json['unitPrice'] as num?)?.toInt(),
+      amountOfMoney: (json['amountOfMoney'] as num?)?.toInt(),
+      cost: (json['cost'] as num?)?.toInt(),
+      profit: (json['profit'] as num?)?.toInt(),
+      invoiceNo: (json['invoiceNo'] as num?)?.toInt(),
+      paymentDocumentNo: (json['paymentDocumentNo'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$ServiceItemToJson(ServiceItem instance) =>

@@ -8,16 +8,16 @@ part of 'sale_head_info_request.dart';
 
 HeadInfoRequest _$HeadInfoRequestFromJson(Map<String, dynamic> json) =>
     HeadInfoRequest(
-      medicalExpenseDeposit: json['medicalExpenseDeposit'] as int?,
+      medicalExpenseDeposit: (json['medicalExpenseDeposit'] as num?)?.toInt(),
       paymentDay: json['paymentDay'] == null
           ? null
           : DateTime.parse(json['paymentDay'] as String),
-      actualCost: json['actualCost'] as int?,
+      actualCost: (json['actualCost'] as num?)?.toInt(),
       settlementDay: json['settlementDay'] == null
           ? null
           : DateTime.parse(json['settlementDay'] as String),
       actualCostBreakdown: json['actualCostBreakdown'] as String?,
-      refundAmount: json['refundAmount'] as int?,
+      refundAmount: (json['refundAmount'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$HeadInfoRequestToJson(HeadInfoRequest instance) =>
