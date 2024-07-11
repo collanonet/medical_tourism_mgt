@@ -194,6 +194,7 @@ class Endpoints {
   static const GET_LIST_SECTION_HOSPITAL = '/section-hospital';
 
   static const GET_MATERIAL_HOSPITAL = '/hospital-materials';
+  static const GET_MEMO_MATERIAL_HOSPITAL = '/hospital-memo-materials';
 
   static const GET_WEB_RESERVATION_PATIENT = '/web-reservation-patient';
 

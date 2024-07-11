@@ -13,7 +13,9 @@ MaterialHospitalResponse _$MaterialHospitalResponseFromJson(
       file: json['file'] as String?,
       brochureName: json['brochureName'] as String?,
       author: json['author'] as String?,
-      dateOfIssue: json['dateOfIssue'] as String?,
+      dateOfIssue: json['dateOfIssue'] == null
+          ? null
+          : DateTime.parse(json['dateOfIssue'] as String),
       share: json['share'] as String?,
     );
 
@@ -24,6 +26,6 @@ Map<String, dynamic> _$MaterialHospitalResponseToJson(
       'file': instance.file,
       'brochureName': instance.brochureName,
       'author': instance.author,
-      'dateOfIssue': instance.dateOfIssue,
+      'dateOfIssue': instance.dateOfIssue?.toIso8601String(),
       'share': instance.share,
     };

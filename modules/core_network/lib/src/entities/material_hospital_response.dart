@@ -9,7 +9,7 @@ class MaterialHospitalResponse {
    String? file;
    String? brochureName;
    String? author;
-   String? dateOfIssue;
+   DateTime? dateOfIssue;
    String? share;
 
   MaterialHospitalResponse({

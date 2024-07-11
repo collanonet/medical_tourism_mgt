@@ -979,6 +979,17 @@ abstract class ApiService {
   Future<MaterialHospitalResponse> postMaterialHospital(
     @Body() MaterialHospitalRequest materialHospitalRequest,
   );
+
+  @GET('${Endpoints.GET_MEMO_MATERIAL_HOSPITAL}/{hospitalId}')
+  Future<MemoMaterialHospitalResponse> getMemoMaterialHospital({
+    @Path('hospitalId') required String hospitalId,
+  });
+
+  @POST(Endpoints.GET_MEMO_MATERIAL_HOSPITAL)
+  Future<MemoMaterialHospitalResponse> postMemoMaterialHospital(
+    @Body() MemoMaterialHospitalRequest memoMaterialHospitalRequest,
+  );
+
   @GET('${Endpoints.GET_WEB_RESERVATION_PATIENT}/{hospitalId}')
   Future<PatientSectionHospitalResponse> getPatientSectionHospital(
     @Path('hospitalId') String hospitalId,

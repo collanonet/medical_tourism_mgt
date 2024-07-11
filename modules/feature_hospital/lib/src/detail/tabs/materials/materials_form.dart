@@ -1,7 +1,7 @@
 import 'package:core_network/core_network.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup materialsMemoForm({required String hospitalRecordId}) {
+FormGroup memoMaterialsMemoForm({required String hospitalRecordId}) {
   return FormGroup({
     'hospitalRecord': FormControl<String>(value: hospitalRecordId),
     'memo': FormControl<String>(),

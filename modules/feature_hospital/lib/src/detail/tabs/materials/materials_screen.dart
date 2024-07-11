@@ -5,17 +5,13 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import 'materials_form.dart';
 
-class MaterialsScreen extends StatefulWidget {
+class MaterialsScreen extends StatelessWidget {
   const MaterialsScreen({super.key, required this.id});
   final String id;
-  @override
-  State<MaterialsScreen> createState() => _MaterialsScreenState();
-}
-
-class _MaterialsScreenState extends State<MaterialsScreen> {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
@@ -23,14 +19,24 @@ class _MaterialsScreenState extends State<MaterialsScreen> {
         ValidationMessage.required: (error) => 'This field is required',
       },
       child: ReactiveFormBuilder(
-          form: () => materialsMemoForm(hospitalRecordId: widget.id),
+          form: () => memoMaterialsMemoForm(hospitalRecordId: id),
           builder: (context, form, _) {
             return Provider(
-                create: (context) =>
-                    GetIt.I<MaterialsModel>()..fetchData(hospitalId: widget.id),
-                child: MaterialSection(
-                  id: widget.id,
-                ));
+                create: (context) => GetIt.I<MaterialsModel>()
+                  ..fetchData(formGroup: form, hospitalId: id),
+                child: Builder(builder: (context) {
+                  return ValueListenableBuilder(
+                      valueListenable:
+                          context.read<MaterialsModel>().materialsData,
+                      builder: (context, value, _) {
+                        return Skeletonizer(
+                          enabled: value.loading,
+                          child: MaterialSection(
+                            id: id,
+                          ),
+                        );
+                      });
+                }));
           }),
     );
   }
