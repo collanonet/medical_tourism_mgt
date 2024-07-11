@@ -1,6 +1,6 @@
-import 'dart:io';
 
 import 'package:core_network/core_network.dart';
+import 'package:core_network/entities.dart';
 
 abstract class PatientRepository {
   //GET_PRE_PATIENTS
@@ -459,5 +459,17 @@ abstract class PatientRepository {
 
   Future<ApplicationRiskTestResponse> postApplicationRiskTest(
     ApplicationRiskTestRequest applicationRiskTestRequest,
+  );
+
+  Future<List<DomesticMedicalDataResponse>> getDomesticMedicalData({required String medicalRecordId});
+
+  Future<DomesticMedicalDataResponse> postDomesticMedicalData(
+    DomesticMedicalDataRequest domesticMedicalDataRequest,
+  );
+
+  Future<List<MedicalPaymentResponse>> getMedicalPayment({required String medicalRecordId});
+
+  Future<MedicalPaymentResponse> postMedicalPayment(
+    MedicalPaymentRequest medicalPaymentRequest,
   );
 }

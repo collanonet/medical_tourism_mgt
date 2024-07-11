@@ -1,5 +1,6 @@
 import 'package:core_l10n/l10n.dart';
 import 'package:core_network/core_network.dart';
+import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
@@ -23,6 +24,7 @@ class HealthCheckupSection extends StatefulWidget {
 class _HealthCheckupSectionState extends State<HealthCheckupSection> {
   @override
   Widget build(BuildContext context) {
+    HealthResponse? data;
     return ColumnSeparated(
         separatorBuilder: (context, index) => SizedBox(
               height: context.appTheme.spacing.formSpacing,
@@ -41,6 +43,8 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
               padding: EdgeInsets.all(
                 context.appTheme.spacing.marginExtraLarge,
               ),
+
+             
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(
@@ -49,6 +53,7 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                 border: Border.all(
                   color: context.appTheme.primaryColor,
                 ),
+                image: DecorationImage(image: NetworkImage(data!.uploadFile.toString()))
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,

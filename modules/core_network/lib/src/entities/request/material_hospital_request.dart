@@ -6,7 +6,7 @@ class MaterialHospitalRequest {
   final String? file;
   String? brochureName;
   String? author;
-  String? dateOfIssue;
+  DateTime? dateOfIssue;
   String? share;
   String hospitalRecord;
 

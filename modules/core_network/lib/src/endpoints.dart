@@ -216,4 +216,8 @@ class Endpoints {
   // Agent
   static const CONTRANT_AGENT = '/agent-contracts';
   static const ESTIMATE_INVOICE = '/agent-estimate-invoices';
+
+  //Patient
+  static const DOMESTIC_MEDICAL_DATA = '/domestic-medical-data';
+  static const MEDICAL_PAYMENT_DETAIL = '/medical-payment-details';
 }

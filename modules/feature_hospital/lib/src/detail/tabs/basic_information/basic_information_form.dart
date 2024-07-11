@@ -175,7 +175,7 @@ FormGroup basicInformationForm() {
       'jcb': FormControl<bool>(value: false),
       'cash': FormControl<bool>(value: false),
       'remark': FormControl<String>(),
-      'supportLanguagr_remark' : FormControl<String>(),
+      'supportLanguagr_remark': FormControl<String>(),
     }),
     'supportLanguageSection': createSupportLanguageSection(languages),
   });

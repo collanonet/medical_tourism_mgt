@@ -1,15 +1,19 @@
 import 'package:core_l10n/l10n.dart';
+import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../overseas_medical_data/popup/detail_medical_oversea_data/detail_medical_oversea_data_screen.dart';
 import 'create_domestic_medical_data_form.dart';
-import 'create_domestic_medical_data_screen.dart';
+import 'domestic_medical_data_file.dart';
+import 'domestic_medical_data_model.dart';
 
 class DomesticMedicalDataScreen extends StatefulWidget {
-  const DomesticMedicalDataScreen({super.key});
-
+  const DomesticMedicalDataScreen({super.key,this.id});
+  final String? id;
   @override
   State<DomesticMedicalDataScreen> createState() =>
       _DomesticMedicalDataScreenState();
@@ -22,63 +26,126 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
       child: Column(
         children: [
           InkWell(
-            onTap: () {
-              showCreateWithFileDialog(context);
-            },
-            child: Container(
-              padding: EdgeInsets.all(
-                context.appTheme.spacing.marginExtraLarge,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(
-                  context.appTheme.spacing.borderRadiusMedium,
-                )),
-                border: Border.all(
-                  color: context.appTheme.primaryColor,
-                ),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.copy_all_rounded,
-                    size: 50,
-                    color: context.appTheme.primaryColor,
+                onTap: () {
+                  filePicker().then((value) {
+                    if (value != null) {
+                      showCreateWithFileDialog(context, value);
+                    }
+                  });
+                },
+                child: Container(
+                  padding: EdgeInsets.all(
+                    context.appTheme.spacing.marginExtraLarge,
                   ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(
+                      context.appTheme.spacing.borderRadiusMedium,
+                    )),
+                    border: Border.all(
+                      color: context.appTheme.primaryColor,
+                    ),
                   ),
-                  Column(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        '診療データをここにドラッグ＆ドロップ',
-                        style: context.textTheme.titleLarge?.copyWith(
-                          color: context.appTheme.primaryColor,
-                        ),
+                      Icon(
+                        Icons.copy_all_rounded,
+                        size: 50,
+                        color: context.appTheme.primaryColor,
                       ),
                       SizedBox(
-                        height: context.appTheme.spacing.marginMedium,
+                        width: context.appTheme.spacing.marginMedium,
                       ),
-                      ElevatedButton(
-                        onPressed: () {
-                          showCreateWithFileDialog(context);
-                        },
-                        child: const Text(
-                          'またはファイルを選択する',
-                          style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',
-                            color: Colors.white,
+                      Column(
+                        children: [
+                          Text(
+                            '診療データをここにドラッグ＆ドロップ',
+                            style: context.textTheme.bodySmall?.copyWith(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
+                          SizedBox(
+                            height: context.appTheme.spacing.marginMedium,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              filePicker().then((value) {
+                                if (value != null) {
+                                  showCreateWithFileDialog(context, value);
+                                }
+                              });
+                            },
+                            child: const Text(
+                              'またはファイルを選択する',
+                            ),
+                          )
+                        ],
                       )
                     ],
-                  )
-                ],
+                  ),
+                ),
               ),
-            ),
-          ),
+        //   InkWell(
+        //     onTap: () {
+        //       showCreateWithFileDialog(context);
+        //     },
+        //     child: Container(
+        //       padding: EdgeInsets.all(
+        //         context.appTheme.spacing.marginExtraLarge,
+        //       ),
+        //       decoration: BoxDecoration(
+        //         borderRadius: BorderRadius.all(Radius.circular(
+        //           context.appTheme.spacing.borderRadiusMedium,
+        //         )),
+        //         border: Border.all(
+        //           color: context.appTheme.primaryColor,
+        //         ),
+        //       ),
+        //       child: Row(
+        //         crossAxisAlignment: CrossAxisAlignment.center,
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         children: [
+        //           Icon(
+        //             Icons.copy_all_rounded,
+        //             size: 50,
+        //             color: context.appTheme.primaryColor,
+        //           ),
+        //           SizedBox(
+        //             width: context.appTheme.spacing.marginMedium,
+        //           ),
+        //           Column(
+        //             children: [
+        //               Text(
+        //                 '診療データをここにドラッグ＆ドロップ',
+        //                 style: context.textTheme.titleLarge?.copyWith(
+        //                   color: context.appTheme.primaryColor,
+        //                 ),
+        //               ),
+        //               SizedBox(
+        //                 height: context.appTheme.spacing.marginMedium,
+        //               ),
+        //               ElevatedButton(
+        //                 onPressed: () {
+        //                   showCreateWithFileDialog(context);
+        //                 },
+        //                 child: const Text(
+        //                   'またはファイルを選択する',
+        //                   style: TextStyle(
+        // fontFamily: 'NotoSansJP',
+        // package: 'core_ui',
+        //                     color: Colors.white,
+        //                   ),
+        //                 ),
+        //               )
+        //             ],
+        //           )
+        //         ],
+        //       ),
+        //     ),
+        //   ),
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
           ),
@@ -230,36 +297,27 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
     );
   }
 
-  void showCreateWithFileDialog(BuildContext context) {
+  void showCreateWithFileDialog(BuildContext context, FileSelect file) {
     showDialog(
       context: context,
-      builder: (context) => AlertDialog(
-        content: ReactiveFormConfig(
-          validationMessages: <String, ValidationMessageFunction>{
-            ValidationMessage.required: (error) =>
-                context.l10n.mgsFieldRequired,
-          },
-          child: ReactiveFormBuilder(
-            form: () => createDomesticMedicalDataForm(),
-            builder: (context, formGroup, child) {
-              return const CreateDomesticMedicalDataScreen();
+      builder: (_) => Provider.value(
+        value: context.read<DomesticMedicalDataModel>(),
+        child: AlertDialog(
+          content: ReactiveFormConfig(
+            validationMessages: <String, ValidationMessageFunction>{
+              ValidationMessage.required: (error) =>
+                  context.l10n.mgsFieldRequired,
             },
+            child: ReactiveFormBuilder(
+              form: () =>
+                  domesticMedicalDataForm(medicalRecordId: widget.id!, file: file)
+                    ..markAllAsTouched(),
+              builder: (context, formGroup, child) {
+                return const Popup();
+              },
+            ),
           ),
         ),
-        actions: [
-          OutlinedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text('キャンセル'), // TODO: l10n 対応 (保存する) (save)
-          ),
-          ElevatedButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            child: Text('保存する'), // TODO: l10n 対応 (キャンセル) (cancel)
-          ),
-        ],
       ),
     );
   }
@@ -291,4 +349,6 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
           ]),
     );
   }
+
+  
 }

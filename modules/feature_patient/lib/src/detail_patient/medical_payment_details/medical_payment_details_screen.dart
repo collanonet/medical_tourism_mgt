@@ -1,8 +1,18 @@
+import 'package:core_l10n/l10n.dart';
+import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+
+import 'medical_payment_details_file.dart';
+import 'medical_payment_details_form.dart';
+import 'medical_payment_details_model.dart';
 
 class MedicalPaymentDetailScreen extends StatefulWidget {
-  const MedicalPaymentDetailScreen({super.key});
+  const MedicalPaymentDetailScreen({super.key, this.id});
+  final String? id;
 
   @override
   State<MedicalPaymentDetailScreen> createState() =>
@@ -17,59 +27,122 @@ class _MedicalPaymentDetailScreenState
       child: Column(
         children: [
           InkWell(
-            onTap: () {},
-            child: Container(
-              padding: EdgeInsets.all(
-                context.appTheme.spacing.marginExtraLarge,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(
-                  context.appTheme.spacing.borderRadiusMedium,
-                )),
-                border: Border.all(
-                  color: context.appTheme.primaryColor,
-                ),
-              ),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.copy_all_rounded,
-                    size: 50,
-                    color: context.appTheme.primaryColor,
+                onTap: () {
+                  filePicker().then((value) {
+                    if (value != null) {
+                      showCreateWithFileDialog(context, value);
+                    }
+                  });
+                },
+                child: Container(
+                  padding: EdgeInsets.all(
+                    context.appTheme.spacing.marginExtraLarge,
                   ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.all(Radius.circular(
+                      context.appTheme.spacing.borderRadiusMedium,
+                    )),
+                    border: Border.all(
+                      color: context.appTheme.primaryColor,
+                    ),
                   ),
-                  Column(
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(
-                        '診療データをここにドラッグ＆ドロップ',
-                        style: context.textTheme.titleLarge?.copyWith(
-                          color: context.appTheme.primaryColor,
-                        ),
+                      Icon(
+                        Icons.copy_all_rounded,
+                        size: 50,
+                        color: context.appTheme.primaryColor,
                       ),
                       SizedBox(
-                        height: context.appTheme.spacing.marginMedium,
+                        width: context.appTheme.spacing.marginMedium,
                       ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'またはファイルを選択する',
-                          style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',
-                            color: Colors.white,
+                      Column(
+                        children: [
+                          Text(
+                            '診療データをここにドラッグ＆ドロップ',
+                            style: context.textTheme.bodySmall?.copyWith(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
+                          SizedBox(
+                            height: context.appTheme.spacing.marginMedium,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              filePicker().then((value) {
+                                if (value != null) {
+                                  showCreateWithFileDialog(context, value);
+                                }
+                              });
+                            },
+                            child: const Text(
+                              'またはファイルを選択する',
+                            ),
+                          )
+                        ],
                       )
                     ],
-                  )
-                ],
+                  ),
+                ),
               ),
-            ),
-          ),
+        //   InkWell(
+        //     onTap: () {},
+        //     child: Container(
+        //       padding: EdgeInsets.all(
+        //         context.appTheme.spacing.marginExtraLarge,
+        //       ),
+        //       decoration: BoxDecoration(
+        //         borderRadius: BorderRadius.all(Radius.circular(
+        //           context.appTheme.spacing.borderRadiusMedium,
+        //         )),
+        //         border: Border.all(
+        //           color: context.appTheme.primaryColor,
+        //         ),
+        //       ),
+        //       child: Row(
+        //         crossAxisAlignment: CrossAxisAlignment.center,
+        //         mainAxisAlignment: MainAxisAlignment.center,
+        //         children: [
+        //           Icon(
+        //             Icons.copy_all_rounded,
+        //             size: 50,
+        //             color: context.appTheme.primaryColor,
+        //           ),
+        //           SizedBox(
+        //             width: context.appTheme.spacing.marginMedium,
+        //           ),
+        //           Column(
+        //             children: [
+        //               Text(
+        //                 '診療データをここにドラッグ＆ドロップ',
+        //                 style: context.textTheme.titleLarge?.copyWith(
+        //                   color: context.appTheme.primaryColor,
+        //                 ),
+        //               ),
+        //               SizedBox(
+        //                 height: context.appTheme.spacing.marginMedium,
+        //               ),
+        //               ElevatedButton(
+        //                 onPressed: () {},
+        //                 child: const Text(
+        //                   'またはファイルを選択する',
+        //                   style: TextStyle(
+        // fontFamily: 'NotoSansJP',
+        // package: 'core_ui',
+        //                     color: Colors.white,
+        //                   ),
+        //                 ),
+        //               )
+        //             ],
+        //           )
+        //         ],
+        //       ),
+        //     ),
+        //   ),
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
           ),
@@ -199,6 +272,31 @@ class _MedicalPaymentDetailScreenState
             ],
           ),
         ],
+      ),
+    );
+  }
+
+  void showCreateWithFileDialog(BuildContext context, FileSelect file) {
+    showDialog(
+      context: context,
+      builder: (_) => Provider.value(
+        value: context.read<MedicalPaymentDetailModel>(),
+        child: AlertDialog(
+          content: ReactiveFormConfig(
+            validationMessages: <String, ValidationMessageFunction>{
+              ValidationMessage.required: (error) =>
+                  context.l10n.mgsFieldRequired,
+            },
+            child: ReactiveFormBuilder(
+              form: () =>
+                  medicalPaymentForm(medicalRecordId: widget.id!, file: file)
+                    ..markAllAsTouched(),
+              builder: (context, formGroup, child) {
+                return const Popup();
+              },
+            ),
+          ),
+        ),
       ),
     );
   }

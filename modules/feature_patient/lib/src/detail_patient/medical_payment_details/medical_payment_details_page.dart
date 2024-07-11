@@ -7,17 +7,19 @@ import 'medical_payment_details_model.dart';
 import 'medical_payment_details_screen.dart';
 
 class MedicalPaymentDetailsPage extends StatelessWidget {
-  const MedicalPaymentDetailsPage({
+   MedicalPaymentDetailsPage({
     super.key,
     this.patient,
+     this.id,
   });
   final Patient? patient;
+  String? id;
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return Provider(
       create: (context) =>
-      GetIt.I<MedicalPaymentDetailModel>()..initialData(patient: patient ),
+      GetIt.I<MedicalPaymentDetailModel>()..fetchMedicalPayment(id: id!),
       child: const MedicalPaymentDetailScreen(),
     );
   }

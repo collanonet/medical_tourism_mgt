@@ -1,5 +1,5 @@
-import 'dart:typed_data';
 import 'package:core_network/core_network.dart';
+import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
@@ -586,4 +586,14 @@ class PatientRemoteProvider {
     ApplicationRiskTestRequest applicationRiskTestRequest,
   ) async =>
       await apiService.postApplicationRiskTest(applicationRiskTestRequest);
+
+  Future<List<DomesticMedicalDataResponse>> getDomesticMedicalData(
+          {required String medicalRecordId}) async =>
+      await apiService.getDomesticMedicalData(id: medicalRecordId);
+  Future<DomesticMedicalDataResponse> postDomesticMedicalData(
+      DomesticMedicalDataRequest domesticMedicalDataRequest) async => await apiService.postDomesticMedicalData(domesticMedicalDataRequest);
+  Future<List<MedicalPaymentResponse>> getMedicalPayment({required String medicalRecordId}) async => await apiService.getMedicalPaymentDetail(id: medicalRecordId);
+
+  Future<MedicalPaymentResponse> postMedicalPayment(
+      MedicalPaymentRequest medicalPaymentRequest) async => await apiService.postMedicalPaymentDetail(medicalPaymentRequest);
 }

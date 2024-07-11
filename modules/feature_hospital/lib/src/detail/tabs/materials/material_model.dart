@@ -3,10 +3,8 @@ import 'dart:convert';
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_hospital/data_hospital.dart';
-import 'package:feature_auth/feature_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -26,6 +24,7 @@ class MaterialsModel {
       materialsData.value = const AsyncData(loading: true);
       final result = await hospitalRepository.getMaterialHospital(hospitalId);
       materialsData.value = AsyncData(data: result);
+      logger.d(result);
     } catch (e) {
       logger.d(e);
       materialsData.value = AsyncData(error: e);

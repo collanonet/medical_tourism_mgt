@@ -1087,6 +1087,27 @@ abstract class ApiService {
   Future<EstimateInvoiceResponse> postEstimateInvoice(
     @Body() EstimateInvoiceRequest estimateInvoiceRequest,
   );
+
+  @GET('${Endpoints.DOMESTIC_MEDICAL_DATA}/{id}')
+  Future<List<DomesticMedicalDataResponse>> getDomesticMedicalData({
+    @Path('id') required String id,
+  });
+
+  @POST(Endpoints.DOMESTIC_MEDICAL_DATA)
+  Future<DomesticMedicalDataResponse> postDomesticMedicalData(
+    @Body() DomesticMedicalDataRequest domesticMedicalDataRequest,
+  );
+
+  @GET('${Endpoints.MEDICAL_PAYMENT_DETAIL}/{id}')
+  Future<List<MedicalPaymentResponse>> getMedicalPaymentDetail({
+    @Path('id') required String id,
+  });
+
+  @POST(Endpoints.MEDICAL_PAYMENT_DETAIL)
+  Future<MedicalPaymentResponse> postMedicalPaymentDetail(
+    @Body() MedicalPaymentRequest medicalPaymentRequest,
+  );
+  
 }
 
 extension ApiServiceExts on ApiService {

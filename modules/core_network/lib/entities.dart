@@ -56,3 +56,7 @@ export 'src/entities/contrant_agent_response.dart';
 export 'src/entities/request/contrant_agent_request.dart';
 export 'src/entities/estimate_invoice_response.dart';
 export 'src/entities/request/estimate_invoice_request.dart';
+export 'src/entities/create_domestic_medical_data_response.dart';
+export 'src/entities/request/create_domestic_medical_data_request.dart';
+export 'src/entities/medical_payment_details_respnse.dart';
+export 'src/entities/request/medical_payment_details_request.dart';

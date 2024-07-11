@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
@@ -780,4 +779,26 @@ class PatientRepositoryIml extends PatientRepository {
     ApplicationRiskTestRequest applicationRiskTestRequest,
   ) async =>
       await remote.postApplicationRiskTest(applicationRiskTestRequest);
+
+  @override
+  Future<DomesticMedicalDataResponse> postDomesticMedicalData(
+      DomesticMedicalDataRequest domesticMedicalDataRequest) {
+    return remote.postDomesticMedicalData(domesticMedicalDataRequest);
+  }
+
+  @override
+  Future<List<DomesticMedicalDataResponse>> getDomesticMedicalData(
+      {required String medicalRecordId}) {
+    return remote.getDomesticMedicalData(medicalRecordId: medicalRecordId);
+  }
+  
+  @override
+  Future<List<MedicalPaymentResponse>> getMedicalPayment({required String medicalRecordId}) {
+    return remote.getMedicalPayment(medicalRecordId: medicalRecordId);
+  }
+  
+  @override
+  Future<MedicalPaymentResponse> postMedicalPayment(MedicalPaymentRequest medicalPaymentRequest) {
+    return remote.postMedicalPayment(medicalPaymentRequest);
+  }
 }

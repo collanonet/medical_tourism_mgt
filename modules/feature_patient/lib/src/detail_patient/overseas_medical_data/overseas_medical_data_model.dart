@@ -147,6 +147,9 @@ class OverseasMedicalDataModel {
         expirationDate: formGroup.control('expirationDate').value,
         qrCode: qrCode,
         medicalRecord: medicalRecordData.value.requireData.id,
+        commentHospital1: formGroup.control('commentHospital1').value,
+        commentOurCompany: formGroup.control('commentOurCompany').value,
+        commentHospital2: formGroup.control('commentHospital2').value,
       );
 
       var result = await patientRepository

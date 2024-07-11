@@ -22,8 +22,10 @@ class DetailPatientScreen extends StatefulWidget {
   const DetailPatientScreen({
     super.key,
     this.patient,
+   this.id,
   });
   final Patient? patient;
+  final String? id;
   @override
   State<DetailPatientScreen> createState() => _DetailPatientScreenState();
 }
@@ -77,6 +79,7 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
       ),
       DomesticMedicalDataPage(
         patient: widget.patient,
+        id: widget.id,
       ),
       EstimatePage(
         patient: widget.patient,
@@ -89,6 +92,7 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
       ),
       MedicalPaymentDetailsPage(
         patient: widget.patient,
+        id: widget.id,
       ),
     ];
   }
