@@ -34,7 +34,7 @@ class _QAndANewRegistrationSectionState
           Container(
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-                color: context.appTheme.secondaryColor,
+                color: Color(0xffF8F8D9),
                 borderRadius: BorderRadius.circular(6)),
             padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
             child: ColumnSeparated(

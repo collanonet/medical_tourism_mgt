@@ -19,22 +19,41 @@ class MaterialsModel {
   ValueNotifier<AsyncData<List<MaterialHospitalResponse>>> materialsData =
       ValueNotifier(const AsyncData());
 
-  void fetchData({required String hospitalId}) async {
+  ValueNotifier<AsyncData<MemoMaterialHospitalResponse>> memoMaterialsData =
+      ValueNotifier(const AsyncData());
+
+  void fetchData(
+      {required FormGroup formGroup, required String hospitalId}) async {
     try {
       materialsData.value = const AsyncData(loading: true);
       final result = await hospitalRepository.getMaterialHospital(hospitalId);
       materialsData.value = AsyncData(data: result);
-      logger.d(result);
     } catch (e) {
       logger.d(e);
       materialsData.value = AsyncData(error: e);
     }
   }
 
+  Future<void> submitMemoData(FormGroup formGroup) async {
+    try {
+      memoMaterialsData.value = const AsyncData(loading: true);
+      final response = await hospitalRepository.postMemoMaterialHospital(
+        MemoMaterialHospitalRequest(
+          hospitalRecord: formGroup.control('hospitalRecord').value,
+          memo: formGroup.control('memo').value,
+        ),
+      );
+      memoMaterialsData.value = AsyncData(data: response);
+    } catch (e) {
+      logger.d(e);
+      memoMaterialsData.value = AsyncData(error: e);
+    }
+  }
+
   ValueNotifier<AsyncData<MaterialHospitalResponse>> submitMaterialHospital =
       ValueNotifier(const AsyncData());
 
-  Future<void> postMemo(FormGroup formGroup) async {
+  Future<void> postFile(FormGroup formGroup) async {
     try {
       submitMaterialHospital.value = const AsyncData(loading: true);
 

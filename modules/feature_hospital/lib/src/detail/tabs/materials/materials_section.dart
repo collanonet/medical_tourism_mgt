@@ -7,6 +7,7 @@ import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import 'material_model.dart';
 import 'materials_form.dart';
@@ -24,7 +25,6 @@ class MaterialSectionState extends State<MaterialSection> {
 
   @override
   Widget build(BuildContext context) {
-    MaterialHospitalResponse? data;
     return SingleChildScrollView(
       child: ColumnSeparated(
         separatorBuilder: (BuildContext context, int index) =>
@@ -193,74 +193,69 @@ class MaterialSectionState extends State<MaterialSection> {
           //   ),
           // ),
 
-          ValueListenableBuilder(
-            valueListenable: context.watch<MaterialsModel>().materialsData,
-            builder: (context, value, child) {
-              return SizedBox(
-                height: 500,
-                child: DataTable2(
-                  columnSpacing: 8,
-                  horizontalMargin: 16,
-                  minWidth: 450,
-                  dataRowHeight: 70,
-                  isVerticalScrollBarVisible: true,
-                  isHorizontalScrollBarVisible: true,
-                  showCheckboxColumn: true,
-                  onSelectAll: (bool? value) {},
-                  datarowCheckboxTheme: CheckboxThemeData(
-                    checkColor: MaterialStateProperty.resolveWith(
-                        (states) => context.appTheme.primaryColor),
-                  ),
-                  headingTextStyle: const TextStyle(
-                      fontFamily: 'NotoSansJP',
-                      package: 'core_ui',
-                      color: Colors.grey),
-                  dividerThickness: 0,
-                  columns: [
-                    ...[
-                      'パンフレット名',
-                      '作成者',
-                      '発行日',
-                      '共有',
-                    ].map((e) => DataColumn2(
-                          label: Text(
-                            e,
-                            style: context.textTheme.bodySmall,
+          SizedBox(
+            height: 500,
+            child: DataTable2(
+              columnSpacing: 8,
+              horizontalMargin: 16,
+              minWidth: 450,
+              dataRowHeight: 70,
+              isVerticalScrollBarVisible: true,
+              isHorizontalScrollBarVisible: true,
+              showCheckboxColumn: true,
+              onSelectAll: (bool? value) {},
+              datarowCheckboxTheme: CheckboxThemeData(
+                checkColor: MaterialStateProperty.resolveWith(
+                    (states) => context.appTheme.primaryColor),
+              ),
+              headingTextStyle: const TextStyle(
+                  fontFamily: 'NotoSansJP',
+                  package: 'core_ui',
+                  color: Colors.grey),
+              dividerThickness: 0,
+              columns: [
+                ...[
+                  'パンフレット名',
+                  '作成者',
+                  '発行日',
+                  '共有',
+                ].map((e) => DataColumn2(
+                      label: Text(
+                        e,
+                        style: context.textTheme.bodySmall,
+                      ),
+                    )),
+              ],
+              rows: List.generate(6, (index) {
+                return DataRow2(
+                  selected: false,
+                  onSelectChanged: (value) => debugPrint('row selected'),
+                  cells: [
+                    const DataCell(Text('パンフレット名')),
+                    DataCell(Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 8, vertical: 4),
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.blue),
+                              borderRadius: BorderRadius.circular(4)),
+                          child: const Text(
+                            '作成者',
+                            style: TextStyle(
+                                fontFamily: 'NotoSansJP',
+                                package: 'core_ui',
+                                color: Colors.blue),
                           ),
-                        )),
-                  ],
-                  rows: List.generate(value.data!.length, (index) {
-                    return DataRow2(
-                      selected: false,
-                      onSelectChanged: (value) => debugPrint('row selected'),
-                      cells: [
-                        const DataCell(Text('パンフレット名')),
-                        DataCell(Row(
-                          children: [
-                            Container(
-                              padding: const EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 4),
-                              decoration: BoxDecoration(
-                                  border: Border.all(color: Colors.blue),
-                                  borderRadius: BorderRadius.circular(4)),
-                              child: Text(
-                                 'Test',
-                                style: TextStyle(
-                                    fontFamily: 'NotoSansJP',
-                                    package: 'core_ui',
-                                    color: Colors.blue),
-                              ),
-                            ),
-                          ],
-                        )),
-                        const DataCell(Text('2021-09-01')),
-                        const DataCell(Icon(Icons.person)),
+                        ),
                       ],
-                    );
-                  }).toList(),
-                ),
-              );
-            },
+                    )),
+                    const DataCell(Text('2021-09-01')),
+                    const DataCell(Icon(Icons.person)),
+                  ],
+                );
+              }).toList(),
+            ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.end,

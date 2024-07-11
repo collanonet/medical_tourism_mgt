@@ -228,7 +228,7 @@ class Popup extends StatelessWidget {
                 }
               },
               child: ValueListenableBuilder(
-                  valueListenable: context.read<FacilityModel>().submit,
+                  valueListenable: context.watch<FacilityModel>().submit,
                   builder: (context, value, _) {
                     return ElevatedButton(
                       onPressed: value.loading

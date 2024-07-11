@@ -1,6 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:base_view/base_view.dart';
 import 'package:core_utils/routes.dart';
+import 'package:feature_patient/src/patient/patient_screen_for_agent.dart';
 import 'patient_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -16,11 +17,18 @@ class PatientPageFormAgent extends StatefulWidget {
 }
 
 class _PatientPageState extends State<PatientPageFormAgent> {
+  ScrollController? scrollController = ScrollController();
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => GetIt.I<PatientModel>()..patients(),
-      child: const PatientScreen(),
+      child: Expanded(
+        child: SingleChildScrollView(
+          controller: scrollController,
+          child: const PatientScreenForAgent(),
+        ),
+      ),
     );
   }
 }

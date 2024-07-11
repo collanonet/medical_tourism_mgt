@@ -118,6 +118,17 @@ class HospitalRemoteProvider {
     return apiService.postMaterialHospital(materialHospitalRequest);
   }
 
+  Future<MemoMaterialHospitalResponse> getMemoMaterialHospital(
+      String hospitalId) {
+    return apiService.getMemoMaterialHospital(hospitalId: hospitalId);
+  }
+
+  Future<MemoMaterialHospitalResponse> postMemoMaterialHospital(
+    MemoMaterialHospitalRequest memoMaterialHospitalRequest,
+  ) {
+    return apiService.postMemoMaterialHospital(memoMaterialHospitalRequest);
+  }
+
   Future<PatientSectionHospitalResponse> getWebReservationPatient(
     String hospitalId,
   ) {

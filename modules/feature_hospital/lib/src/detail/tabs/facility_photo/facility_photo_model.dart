@@ -65,6 +65,7 @@ class FacilityModel {
       ));
       facilityData.value =
           AsyncData(data: facilityData.value.data!..add(response));
+      submit.value = AsyncData(data: response);
     } catch (e) {
       logger.e(e);
       facilityData.value = AsyncData(error: e.toString());

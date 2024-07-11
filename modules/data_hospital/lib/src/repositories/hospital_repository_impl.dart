@@ -119,7 +119,8 @@ class HospitalRepositoryIml extends HospitalRepository {
   }
 
   @override
-  Future<List<MaterialHospitalResponse>> getMaterialHospital(String hospitalId) {
+  Future<List<MaterialHospitalResponse>> getMaterialHospital(
+      String hospitalId) {
     return remote.getMaterialHospital(hospitalId);
   }
 
@@ -151,7 +152,7 @@ class HospitalRepositoryIml extends HospitalRepository {
   Future<List<BasicInformationHospitalResponse>> getHospitals() {
     return remote.getHospitals();
   }
-  
+
   @override
   Future<FileResponse> uploadFileBase64(String file, String filename) {
     return remote.uploadFileBase64(file, filename);
@@ -159,43 +160,53 @@ class HospitalRepositoryIml extends HospitalRepository {
 
   @override
   Future<List<FacilityResponse>> getFacilityPhoto({required String id}) {
-   return remote.getFacilityPhoto(id: id);
+    return remote.getFacilityPhoto(id: id);
   }
 
   @override
   Future<FacilityResponse> postFacilityPhoto(FacilityRequest facilityRequest) {
     return remote.postFacilityPhoto(facilityRequest);
   }
-  
+
   @override
   Future<List<DocumentResponse>> getDocument({required String id}) {
     return remote.getDocument(id: id);
   }
-  
+
   @override
   Future<DocumentResponse> postDocument(DocumentRequest documentRequest) {
-   return remote.postDocument(documentRequest);
+    return remote.postDocument(documentRequest);
   }
-  
+
   @override
   Future<List<HealthResponse>> getHealth({required String id}) {
     return remote.getHealth(id: id);
   }
-  
+
   @override
   Future<HealthResponse> postHealth(HealthRequest healthRequest) {
-   return remote.postHealth(healthRequest);
+    return remote.postHealth(healthRequest);
   }
-  
+
   @override
   Future<List<ContractResponse>> getContract({required String id}) {
     return remote.getContract(id: id);
   }
-  
+
   @override
   Future<ContractResponse> postContract(ContractRequest contractRequest) {
     return remote.postContract(contractRequest);
   }
-  
-  
+
+  @override
+  Future<MemoMaterialHospitalResponse> getMemoMaterialHospital(
+      String hospitalId) {
+    return remote.getMemoMaterialHospital(hospitalId);
+  }
+
+  @override
+  Future<MemoMaterialHospitalResponse> postMemoMaterialHospital(
+      MemoMaterialHospitalRequest memoMaterialHospitalRequest) {
+    return remote.postMemoMaterialHospital(memoMaterialHospitalRequest);
+  }
 }
