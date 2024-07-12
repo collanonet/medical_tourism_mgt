@@ -6,7 +6,6 @@ import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 import '../../feature_patient.dart';
-import 'filter_patient.dart';
 import 'package:flutter/material.dart';
 
 import 'filter_patient_for_agent.dart';

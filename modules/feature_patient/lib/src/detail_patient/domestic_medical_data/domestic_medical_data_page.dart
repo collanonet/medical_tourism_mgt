@@ -11,7 +11,7 @@ class DomesticMedicalDataPage extends StatelessWidget {
   const DomesticMedicalDataPage({
     super.key,
     this.patient,
-   this.id,
+    this.id,
   });
   final Patient? patient;
   final String? id;
@@ -19,8 +19,8 @@ class DomesticMedicalDataPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Provider(
-      create: (context) =>
-          GetIt.I<DomesticMedicalDataModel>()..fetchDomesticMedicalData(id: id!),
+      create: (context) => GetIt.I<DomesticMedicalDataModel>()
+        ..fetchDomesticMedicalData(id: id!),
       child: Builder(
         builder: (context) {
           return ValueListenableBuilder(
@@ -28,6 +28,7 @@ class DomesticMedicalDataPage extends StatelessWidget {
                 context.read<DomesticMedicalDataModel>().domesticMedicalData,
             builder: (context, value, child) {
               return Skeletonizer(
+                enabled: value.loading,
                 child: DomesticMedicalDataScreen(
                   id: id,
                 ),

@@ -86,6 +86,9 @@ class Popup extends StatelessWidget {
                 ],
               ),
             ),
+            SizedBox(
+              width: context.appTheme.spacing.marginMedium,
+            ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -118,7 +121,7 @@ class Popup extends StatelessWidget {
             Expanded(
               child: SizedBox.shrink(),
             ),
-             Expanded(
+            Expanded(
               child: SizedBox.shrink(),
             )
           ],
@@ -129,7 +132,7 @@ class Popup extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-             Expanded(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -148,6 +151,9 @@ class Popup extends StatelessWidget {
                   ),
                 ],
               ),
+            ),
+            SizedBox(
+              width: context.appTheme.spacing.marginMedium,
             ),
             Expanded(
               child: Column(
@@ -192,7 +198,9 @@ class Popup extends StatelessWidget {
                   ),
                 ],
               ),
-              
+            ),
+            SizedBox(
+              width: context.appTheme.spacing.marginMedium,
             ),
             Expanded(
               child: Column(
@@ -217,7 +225,6 @@ class Popup extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-           
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
@@ -261,7 +268,7 @@ class Popup extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-           Expanded(
+            Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -272,7 +279,8 @@ class Popup extends StatelessWidget {
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
-                      formControlName: 'disclosure_to_other_medical_institutions',
+                      formControlName:
+                          'disclosure_to_other_medical_institutions',
                       decoration: InputDecoration(
                         hintText: '他医療機関へ開示',
                       ),
@@ -295,7 +303,7 @@ class Popup extends StatelessWidget {
             )
           ],
         ),
-         SizedBox(
+        SizedBox(
           height: context.appTheme.spacing.marginMedium,
         ),
         Row(
@@ -314,7 +322,8 @@ class Popup extends StatelessWidget {
             ValueListenableListener(
               valueListenable: context.read<DomesticMedicalDataModel>().submit,
               onListen: () {
-                final value = context.read<DomesticMedicalDataModel>().submit.value;
+                final value =
+                    context.read<DomesticMedicalDataModel>().submit.value;
 
                 if (value.hasError) {
                   snackBarWidget(
@@ -334,7 +343,8 @@ class Popup extends StatelessWidget {
                 }
               },
               child: ValueListenableBuilder(
-                  valueListenable: context.read<DomesticMedicalDataModel>().submit,
+                  valueListenable:
+                      context.read<DomesticMedicalDataModel>().submit,
                   builder: (context, value, _) {
                     return ElevatedButton(
                       onPressed: value.loading

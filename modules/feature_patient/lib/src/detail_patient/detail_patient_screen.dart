@@ -1,7 +1,9 @@
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:provider/provider.dart';
 import 'billing/billing_page.dart';
+import 'detail_patient_model.dart';
 import 'patient_response_data/patient_response_page.dart';
 import 'proposal/proposal_page.dart';
 import 'statement/statement_page.dart';
@@ -22,7 +24,7 @@ class DetailPatientScreen extends StatefulWidget {
   const DetailPatientScreen({
     super.key,
     this.patient,
-   this.id,
+    this.id,
   });
   final Patient? patient;
   final String? id;
@@ -52,97 +54,106 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
   @override
   void initState() {
     super.initState();
-    pages = [
-      BasicInformationPage(
-        patient: widget.patient,
-      ),
-      DetailPatientWebReservationPage(
-        patient: widget.patient,
-      ),
-      ProgressListPage(
-        patient: widget.patient,
-      ),
-      PatientResponsePage(
-        patient: widget.patient,
-      ),
-      OverseasMedicalDataPage(
-        patient: widget.patient,
-      ),
-      MedicalSummaryPage(
-        patient: widget.patient,
-      ),
-      ProposalPage(
-        patient: widget.patient,
-      ),
-      MedicalVisaPage(
-        patient: widget.patient,
-      ),
-      DomesticMedicalDataPage(
-        patient: widget.patient,
-        id: widget.id,
-      ),
-      EstimatePage(
-        patient: widget.patient,
-      ),
-      StatementPage(
-        patient: widget.patient,
-      ),
-      BillingPage(
-        patient: widget.patient,
-      ),
-      MedicalPaymentDetailsPage(
-        patient: widget.patient,
-        id: widget.id,
-      ),
-    ];
+    pages = [];
   }
 
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const HeaderDetailPatient(),
-        Padding(
-          padding: EdgeInsets.only(
-              top: context.appTheme.spacing.marginMedium,
-              left: context.appTheme.spacing.marginMedium),
-          child: ValueListenableBuilder<int>(
-            valueListenable: _selectedIndex,
-            builder: (BuildContext context, int value, Widget? child) {
-              return Wrap(
-                children: [
-                  TabBarWidget(
-                    selectedIndex: value,
-                    menu: menu,
-                    onPressed: (index) {
-                      _selectedIndex.value = index;
-                    },
-                  ),
-                ],
-              );
-            },
-          ),
-        ),
-        ValueListenableBuilder<int>(
-          valueListenable: _selectedIndex,
-          builder: (BuildContext context, int index, Widget? child) {
-            return Expanded(
-              child: Container(
-                padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(
-                      context.appTheme.spacing.borderRadiusMedium),
-                  color: Colors.white,
-                ),
-                child: pages[index],
+    return ValueListenableBuilder(
+      valueListenable: context.watch<DetailPatientModel>().patientData,
+      builder: (context, value, child) {
+        return Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const HeaderDetailPatient(),
+            Padding(
+              padding: EdgeInsets.only(
+                  top: context.appTheme.spacing.marginMedium,
+                  left: context.appTheme.spacing.marginMedium),
+              child: ValueListenableBuilder<int>(
+                valueListenable: _selectedIndex,
+                builder: (BuildContext context, int value, Widget? child) {
+                  return Wrap(
+                    children: [
+                      TabBarWidget(
+                        selectedIndex: value,
+                        menu: menu,
+                        onPressed: (index) {
+                          _selectedIndex.value = index;
+                        },
+                      ),
+                    ],
+                  );
+                },
               ),
-            );
-          },
-        )
-      ],
+            ),
+            ValueListenableBuilder<int>(
+              valueListenable: _selectedIndex,
+              builder: (BuildContext context, int index, Widget? child) {
+                return Expanded(
+                  child: Container(
+                    padding:
+                        EdgeInsets.all(context.appTheme.spacing.marginMedium),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                          context.appTheme.spacing.borderRadiusMedium),
+                      color: Colors.white,
+                    ),
+                    child: <Widget>[
+                      BasicInformationPage(
+                        patient: widget.patient,
+                      ),
+                      if (value.hasData) ...[
+                        DetailPatientWebReservationPage(
+                          patient: widget.patient,
+                        ),
+                        ProgressListPage(
+                          patient: widget.patient,
+                        ),
+                        PatientResponsePage(
+                          patient: widget.patient,
+                        ),
+                        OverseasMedicalDataPage(
+                          patient: widget.patient,
+                        ),
+                        MedicalSummaryPage(
+                          patient: widget.patient,
+                        ),
+                        ProposalPage(
+                          patient: widget.patient,
+                        ),
+                        MedicalVisaPage(
+                          patient: widget.patient,
+                        ),
+                        DomesticMedicalDataPage(
+                          patient: widget.patient,
+                          id: value.requireData.id,
+                        ),
+                        EstimatePage(
+                          patient: widget.patient,
+                        ),
+                        StatementPage(
+                          patient: widget.patient,
+                        ),
+                        BillingPage(
+                          patient: widget.patient,
+                        ),
+                        MedicalPaymentDetailsPage(
+                          patient: widget.patient,
+                          id: value.requireData.id,
+                        ),
+                      ]
+                    ][index],
+                  ),
+                );
+              },
+            )
+          ],
+        );
+      },
     );
   }
 }
+//pages[index]

@@ -11,7 +11,7 @@ import 'medical_payment_details_form.dart';
 import 'medical_payment_details_model.dart';
 
 class MedicalPaymentDetailScreen extends StatefulWidget {
-  const MedicalPaymentDetailScreen({super.key, this.id});
+  const MedicalPaymentDetailScreen({super.key,this.id});
   final String? id;
 
   @override

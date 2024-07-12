@@ -30,8 +30,6 @@ class DomesticMedicalDataModel{
       domesticMedicalData.value = const AsyncData(loading: true);
       final response = await patientRepository.getDomesticMedicalData(medicalRecordId: id);
       domesticMedicalData.value = AsyncData(data: response);
-
-
     }catch(e){
       logger.d(e);
       domesticMedicalData.value = AsyncData(error: e);
@@ -77,7 +75,6 @@ class DomesticMedicalDataModel{
       );
       domesticMedicalData.value = AsyncData(data: domesticMedicalData.value.data!..add(response));
       submit.value = AsyncData(data: response);
-
 
     }catch(e){
       logger.d(e);
