@@ -6,7 +6,7 @@ part of 'api_service.dart';
 // RetrofitGenerator
 // **************************************************************************
 
-// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers
+// ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element
 
 class _ApiService implements ApiService {
   _ApiService(
@@ -47,8 +47,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = AuthData.fromJson(_result.data!);
-    return value;
+    final _value = AuthData.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -74,8 +74,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = AuthData.fromJson(_result.data!);
-    return value;
+    final _value = AuthData.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -101,8 +101,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = AuthData.fromJson(_result.data!);
-    return value;
+    final _value = AuthData.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -134,8 +134,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = FileResponse.fromJson(_result.data!);
-    return value;
+    final _value = FileResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -172,11 +172,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = Paginated<PrePatient>.fromJson(
+    final _value = Paginated<PrePatient>.fromJson(
       _result.data!,
       (json) => PrePatient.fromJson(json as Map<String, dynamic>),
     );
-    return value;
+    return _value;
   }
 
   @override
@@ -203,8 +203,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PrePatient.fromJson(_result.data!);
-    return value;
+    final _value = PrePatient.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -234,8 +234,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PrePatient.fromJson(_result.data!);
-    return value;
+    final _value = PrePatient.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -316,11 +316,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = Paginated<Patient>.fromJson(
+    final _value = Paginated<Patient>.fromJson(
       _result.data!,
       (json) => Patient.fromJson(json as Map<String, dynamic>),
     );
-    return value;
+    return _value;
   }
 
   @override
@@ -346,8 +346,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = Patient.fromJson(_result.data!);
-    return value;
+    final _value = Patient.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -374,8 +374,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = Patient.fromJson(_result.data!);
-    return value;
+    final _value = Patient.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -405,8 +405,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = Patient.fromJson(_result.data!);
-    return value;
+    final _value = Patient.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -456,10 +456,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) => PatientName.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -485,10 +485,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) => PatientName.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -514,8 +514,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = User.fromJson(_result.data!);
-    return value;
+    final _value = User.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -542,8 +542,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PatientName.fromJson(_result.data!);
-    return value;
+    final _value = PatientName.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -573,8 +573,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PatientName.fromJson(_result.data!);
-    return value;
+    final _value = PatientName.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -625,11 +625,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             PatientNationality.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -656,11 +656,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             PatientNationality.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -688,8 +688,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PatientNationality.fromJson(_result.data!);
-    return value;
+    final _value = PatientNationality.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -719,8 +719,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PatientNationality.fromJson(_result.data!);
-    return value;
+    final _value = PatientNationality.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -770,10 +770,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) => PatientPassport.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -800,10 +800,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) => PatientPassport.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -831,8 +831,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PatientPassport.fromJson(_result.data!);
-    return value;
+    final _value = PatientPassport.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -862,8 +862,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PatientPassport.fromJson(_result.data!);
-    return value;
+    final _value = PatientPassport.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -922,10 +922,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) => MedicalRecord.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -951,10 +951,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) => MedicalRecord.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -982,8 +982,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecord.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecord.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -1013,8 +1013,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecord.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecord.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -1065,11 +1065,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordAgent.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -1096,11 +1096,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordAgent.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -1128,8 +1128,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordAgent.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordAgent.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -1159,8 +1159,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordAgent.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordAgent.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -1211,11 +1211,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordReferrer.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -1242,11 +1242,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordReferrer.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -1274,8 +1274,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordReferrer.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordReferrer.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -1305,8 +1305,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordReferrer.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordReferrer.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -1357,11 +1357,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordBudget.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -1388,11 +1388,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordBudget.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -1420,8 +1420,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordBudget.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordBudget.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -1451,8 +1451,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordBudget.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordBudget.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -1503,11 +1503,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordCompanion.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -1534,11 +1534,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordCompanion.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -1566,8 +1566,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordCompanion.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordCompanion.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -1597,8 +1597,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordCompanion.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordCompanion.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -1649,11 +1649,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordHospital.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -1680,11 +1680,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordHospital.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -1712,8 +1712,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordHospital.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordHospital.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -1743,8 +1743,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordHospital.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordHospital.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -1795,11 +1795,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordInterpreter.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -1826,11 +1826,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordInterpreter.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -1858,8 +1858,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordInterpreter.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordInterpreter.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -1889,8 +1889,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordInterpreter.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordInterpreter.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -1941,11 +1941,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordProgress.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -1972,11 +1972,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordProgress.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -2004,8 +2004,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordProgress.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordProgress.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2035,8 +2035,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordProgress.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordProgress.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2087,11 +2087,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordOverseaData.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -2119,8 +2119,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordOverseaData.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordOverseaData.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2150,8 +2150,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordOverseaData.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordOverseaData.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2203,8 +2203,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordTravelGroup.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordTravelGroup.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2232,8 +2232,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordTravelGroup.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordTravelGroup.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2259,11 +2259,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordProposal.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -2290,11 +2290,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordProposal.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -2321,11 +2321,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalRecordProposal.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -2353,8 +2353,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordProposal.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordProposal.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2384,8 +2384,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordProposal.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordProposal.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2437,8 +2437,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordPatientResponseTreatment.fromJson(_result.data!);
-    return value;
+    final _value =
+        MedicalRecordPatientResponseTreatment.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2468,8 +2469,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordPatientResponseTreatment.fromJson(_result.data!);
-    return value;
+    final _value =
+        MedicalRecordPatientResponseTreatment.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2498,9 +2500,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         MedicalRecordPatientResponseMedicalCheckup.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -2530,9 +2532,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         MedicalRecordPatientResponseMedicalCheckup.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -2560,8 +2562,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordPatientResponseOther.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordPatientResponseOther.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2591,8 +2593,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordPatientResponseOther.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordPatientResponseOther.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2620,8 +2622,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordSummary.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordSummary.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2649,8 +2651,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalRecordSummary.fromJson(_result.data!);
-    return value;
+    final _value = MedicalRecordSummary.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2677,8 +2679,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = WebBookingPatientPreferredDate.fromJson(_result.data!);
-    return value;
+    final _value = WebBookingPatientPreferredDate.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2704,8 +2706,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = TreamentResponce.fromJson(_result.data!);
-    return value;
+    final _value = TreamentResponce.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2732,11 +2734,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             WebBookingMedicalRecordResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -2764,8 +2766,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = WebBookingMedicalRecordResponse.fromJson(_result.data!);
-    return value;
+    final _value = WebBookingMedicalRecordResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2791,10 +2793,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) => TypeResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -2821,8 +2823,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = TypeResponse.fromJson(_result.data!);
-    return value;
+    final _value = TypeResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2852,8 +2854,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = TypeResponse.fromJson(_result.data!);
-    return value;
+    final _value = TypeResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2879,11 +2881,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             WebBookingMedicalRecord.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -2909,8 +2911,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = WebBookingMedicalRecord.fromJson(_result.data!);
-    return value;
+    final _value = WebBookingMedicalRecord.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2940,8 +2942,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = WebBookingMedicalRecord.fromJson(_result.data!);
-    return value;
+    final _value = WebBookingMedicalRecord.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -2988,10 +2990,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) => AgentResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -3017,8 +3019,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = AgentResponse.fromJson(_result.data!);
-    return value;
+    final _value = AgentResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3045,8 +3047,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = AgentResponse.fromJson(_result.data!);
-    return value;
+    final _value = AgentResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3076,8 +3078,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = AgentResponse.fromJson(_result.data!);
-    return value;
+    final _value = AgentResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3136,11 +3138,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             AgentManagerResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -3166,8 +3168,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = AgentManagerResponse.fromJson(_result.data!);
-    return value;
+    final _value = AgentManagerResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3195,8 +3197,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = AgentManagerResponse.fromJson(_result.data!);
-    return value;
+    final _value = AgentManagerResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3226,8 +3228,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = AgentManagerResponse.fromJson(_result.data!);
-    return value;
+    final _value = AgentManagerResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3278,9 +3280,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         ApplicationRegenerativeMedicalResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -3310,9 +3312,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         ApplicationRegenerativeMedicalResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -3339,8 +3341,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ApplicationBeautyResponse.fromJson(_result.data!);
-    return value;
+    final _value = ApplicationBeautyResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3368,8 +3370,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ApplicationBeautyResponse.fromJson(_result.data!);
-    return value;
+    final _value = ApplicationBeautyResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3396,9 +3398,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         ApplicationBloodPurificationTherapyResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -3428,9 +3430,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         ApplicationBloodPurificationTherapyResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -3457,8 +3459,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ApplicationRiskTestResponse.fromJson(_result.data!);
-    return value;
+    final _value = ApplicationRiskTestResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3486,8 +3488,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ApplicationRiskTestResponse.fromJson(_result.data!);
-    return value;
+    final _value = ApplicationRiskTestResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3513,8 +3515,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PatientFilterResponse.fromJson(_result.data!);
-    return value;
+    final _value = PatientFilterResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3542,8 +3544,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PatientFilterResponse.fromJson(_result.data!);
-    return value;
+    final _value = PatientFilterResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3569,8 +3571,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ItineraryTitleResponse.fromJson(_result.data!);
-    return value;
+    final _value = ItineraryTitleResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3598,8 +3600,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ItineraryTitleResponse.fromJson(_result.data!);
-    return value;
+    final _value = ItineraryTitleResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3625,8 +3627,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ItineraryExplanationResponse.fromJson(_result.data!);
-    return value;
+    final _value = ItineraryExplanationResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3654,8 +3656,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ItineraryExplanationResponse.fromJson(_result.data!);
-    return value;
+    final _value = ItineraryExplanationResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3682,9 +3684,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         ItineraryInterpreterOrGuideInputResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -3714,9 +3716,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         ItineraryInterpreterOrGuideInputResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -3742,8 +3744,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ItineraryTransferInputResponse.fromJson(_result.data!);
-    return value;
+    final _value = ItineraryTransferInputResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3771,8 +3773,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ItineraryTransferInputResponse.fromJson(_result.data!);
-    return value;
+    final _value = ItineraryTransferInputResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3798,11 +3800,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             DetailFacilityHotelResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -3830,8 +3832,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetailFacilityHotelResponse.fromJson(_result.data!);
-    return value;
+    final _value = DetailFacilityHotelResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3857,8 +3859,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetailDropInFacilityResponse.fromJson(_result.data!);
-    return value;
+    final _value = DetailDropInFacilityResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3886,8 +3888,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetailDropInFacilityResponse.fromJson(_result.data!);
-    return value;
+    final _value = DetailDropInFacilityResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3913,8 +3915,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetainHotelRegistationResponse.fromJson(_result.data!);
-    return value;
+    final _value = DetainHotelRegistationResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3942,8 +3944,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetainHotelRegistationResponse.fromJson(_result.data!);
-    return value;
+    final _value = DetainHotelRegistationResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3969,8 +3971,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetailHotelSearchResponse.fromJson(_result.data!);
-    return value;
+    final _value = DetailHotelSearchResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -3998,8 +4000,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetailHotelSearchResponse.fromJson(_result.data!);
-    return value;
+    final _value = DetailHotelSearchResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4026,8 +4028,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetailRelatedPartiesResponse.fromJson(_result.data!);
-    return value;
+    final _value = DetailRelatedPartiesResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4055,8 +4057,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetailRelatedPartiesResponse.fromJson(_result.data!);
-    return value;
+    final _value = DetailRelatedPartiesResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4083,9 +4085,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         DetailRelatedPartiesBusCompanyResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -4114,9 +4116,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         DetailRelatedPartiesBusCompanyResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -4142,8 +4144,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetailRelatedPartiesDriverResponse.fromJson(_result.data!);
-    return value;
+    final _value = DetailRelatedPartiesDriverResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4172,8 +4174,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetailRelatedPartiesDriverResponse.fromJson(_result.data!);
-    return value;
+    final _value = DetailRelatedPartiesDriverResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4200,9 +4202,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         DetailRelatedPartiesEmergencyContactResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -4232,9 +4234,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         DetailRelatedPartiesEmergencyContactResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -4260,8 +4262,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetailItinerarySimpleTitle.fromJson(_result.data!);
-    return value;
+    final _value = DetailItinerarySimpleTitle.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4290,8 +4292,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetailItinerarySimpleTitle.fromJson(_result.data!);
-    return value;
+    final _value = DetailItinerarySimpleTitle.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4318,9 +4320,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         DetailItinerarySimplePriorExplanationResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -4350,9 +4352,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         DetailItinerarySimplePriorExplanationResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -4379,9 +4381,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         DetailItinerarySimpleInterpreterOrGuideResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -4411,9 +4413,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         DetailItinerarySimpleInterpreterOrGuideResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -4440,9 +4442,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         DetailItinerarySimplePickUpAndDropOffResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -4472,9 +4474,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         DetailItinerarySimplePickUpAndDropOffResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -4500,8 +4502,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetailItineraryResponse.fromJson(_result.data!);
-    return value;
+    final _value = DetailItineraryResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4528,8 +4530,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetailItineraryResponse.fromJson(_result.data!);
-    return value;
+    final _value = DetailItineraryResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4556,8 +4558,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = BasicInformationHospitalResponse.fromJson(_result.data!);
-    return value;
+    final _value = BasicInformationHospitalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4585,8 +4587,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = BasicInformationHospitalResponse.fromJson(_result.data!);
-    return value;
+    final _value = BasicInformationHospitalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4613,11 +4615,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) => MedicalRecordBasicInfoHospitalResponse.fromJson(
             i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -4647,9 +4649,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         MedicalRecordBasicInfoHospitalResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -4676,11 +4678,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             DoctorProfileHospitalResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -4708,8 +4710,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DoctorProfileHospitalResponse.fromJson(_result.data!);
-    return value;
+    final _value = DoctorProfileHospitalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4736,8 +4738,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = AdditionalInformationSectionResponse.fromJson(_result.data!);
-    return value;
+    final _value = AdditionalInformationSectionResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4767,8 +4769,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = AdditionalInformationSectionResponse.fromJson(_result.data!);
-    return value;
+    final _value = AdditionalInformationSectionResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4795,8 +4797,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PaymentOptionHospitalResponse.fromJson(_result.data!);
-    return value;
+    final _value = PaymentOptionHospitalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4824,8 +4826,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PaymentOptionHospitalResponse.fromJson(_result.data!);
-    return value;
+    final _value = PaymentOptionHospitalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4852,11 +4854,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             SupportLanguageHospitalResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -4884,8 +4886,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = SupportLanguageHospitalResponse.fromJson(_result.data!);
-    return value;
+    final _value = SupportLanguageHospitalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4912,8 +4914,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = HowToRequestHospitalResponse.fromJson(_result.data!);
-    return value;
+    final _value = HowToRequestHospitalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4941,8 +4943,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = HowToRequestHospitalResponse.fromJson(_result.data!);
-    return value;
+    final _value = HowToRequestHospitalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4969,8 +4971,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = NewRegistrationHospitalResponse.fromJson(_result.data!);
-    return value;
+    final _value = NewRegistrationHospitalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -4998,8 +5000,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = NewRegistrationHospitalResponse.fromJson(_result.data!);
-    return value;
+    final _value = NewRegistrationHospitalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5026,8 +5028,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ListSectionQAndAHospitalResponse.fromJson(_result.data!);
-    return value;
+    final _value = ListSectionQAndAHospitalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5055,8 +5057,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ListSectionQAndAHospitalResponse.fromJson(_result.data!);
-    return value;
+    final _value = ListSectionQAndAHospitalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5083,11 +5085,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MaterialHospitalResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -5115,8 +5117,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MaterialHospitalResponse.fromJson(_result.data!);
-    return value;
+    final _value = MaterialHospitalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5143,8 +5145,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MemoMaterialHospitalResponse.fromJson(_result.data!);
-    return value;
+    final _value = MemoMaterialHospitalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5172,8 +5174,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MemoMaterialHospitalResponse.fromJson(_result.data!);
-    return value;
+    final _value = MemoMaterialHospitalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5200,8 +5202,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = PatientSectionHospitalResponse.fromJson(_result.data!);
-    return value;
+    final _value = PatientSectionHospitalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5228,9 +5230,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
+    final _value =
         MedicalInstitutionSectionHospitalResponse.fromJson(_result.data!);
-    return value;
+    return _value;
   }
 
   @override
@@ -5256,11 +5258,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) => BasicInformationHospitalResponse.fromJson(
             i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -5286,8 +5288,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = HeadInfoResponse.fromJson(_result.data!);
-    return value;
+    final _value = HeadInfoResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5314,8 +5316,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = HeadInfoResponse.fromJson(_result.data!);
-    return value;
+    final _value = HeadInfoResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5341,8 +5343,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ServiceFeeResponse.fromJson(_result.data!);
-    return value;
+    final _value = ServiceFeeResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5370,8 +5372,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ServiceFeeResponse.fromJson(_result.data!);
-    return value;
+    final _value = ServiceFeeResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5397,8 +5399,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ExpensesResponse.fromJson(_result.data!);
-    return value;
+    final _value = ExpensesResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5425,8 +5427,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ExpensesResponse.fromJson(_result.data!);
-    return value;
+    final _value = ExpensesResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5452,8 +5454,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = TotalResponse.fromJson(_result.data!);
-    return value;
+    final _value = TotalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5480,8 +5482,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = TotalResponse.fromJson(_result.data!);
-    return value;
+    final _value = TotalResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5507,11 +5509,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map(
             (dynamic i) => FacilityResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -5539,8 +5541,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = FacilityResponse.fromJson(_result.data!);
-    return value;
+    final _value = FacilityResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5566,11 +5568,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map(
             (dynamic i) => DocumentResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -5597,8 +5599,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DocumentResponse.fromJson(_result.data!);
-    return value;
+    final _value = DocumentResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5624,10 +5626,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) => HealthResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -5655,8 +5657,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = HealthResponse.fromJson(_result.data!);
-    return value;
+    final _value = HealthResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5682,11 +5684,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map(
             (dynamic i) => ContractResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -5713,8 +5715,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ContractResponse.fromJson(_result.data!);
-    return value;
+    final _value = ContractResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5741,11 +5743,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             ContrantAgentResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -5773,8 +5775,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = ContrantAgentResponse.fromJson(_result.data!);
-    return value;
+    final _value = ContrantAgentResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5801,11 +5803,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             EstimateInvoiceResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -5833,8 +5835,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = EstimateInvoiceResponse.fromJson(_result.data!);
-    return value;
+    final _value = EstimateInvoiceResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5861,11 +5863,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             DomesticMedicalDataResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -5893,8 +5895,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DomesticMedicalDataResponse.fromJson(_result.data!);
-    return value;
+    final _value = DomesticMedicalDataResponse.fromJson(_result.data!);
+    return _value;
   }
 
   @override
@@ -5921,11 +5923,11 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
+    var _value = _result.data!
         .map((dynamic i) =>
             MedicalPaymentResponse.fromJson(i as Map<String, dynamic>))
         .toList();
-    return value;
+    return _value;
   }
 
   @override
@@ -5953,8 +5955,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = MedicalPaymentResponse.fromJson(_result.data!);
-    return value;
+    final _value = MedicalPaymentResponse.fromJson(_result.data!);
+    return _value;
   }
 
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
