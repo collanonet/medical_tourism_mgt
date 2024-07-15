@@ -127,14 +127,18 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                                           value.requireData[index].createdAt)),
                             ),
                             Expanded(
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  context.read<HealthModel>().deleteHealth(
-                                      id: value.requireData[index].id);
-                                },
-                                child: const Text(
-                                  'エクセルを開く',
-                                ),
+                              child: Row(
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      context.read<HealthModel>().deleteHealth(
+                                          id: value.requireData[index].id);
+                                    },
+                                    child: const Text(
+                                      'エクセルを開く',
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],
