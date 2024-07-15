@@ -25,51 +25,70 @@ class MaterialSectionState extends State<MaterialSection> {
 
   @override
   Widget build(BuildContext context) {
+    final formGroup = ReactiveForm.of(context) as FormGroup;
     return SingleChildScrollView(
       child: ColumnSeparated(
         separatorBuilder: (BuildContext context, int index) =>
             SizedBox(height: context.appTheme.spacing.formSpacing),
         children: [
           // Memo
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'メモ',
-              ),
-              ReactiveTextField(
-                formControlName: 'memo',
-                maxLines: 6,
-              ),
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              // Make as a copy button
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text(
-                  'コピーする',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
+          ValueListenableBuilder(
+            valueListenable: context.read<MaterialsModel>().memoMaterialsData,
+            builder: (context, value, _) {
+              return Skeletonizer(
+                enabled: value.loading,
+                child: Column(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'メモ',
+                        ),
+                        ReactiveTextField(
+                          formControlName: 'memo',
+                          maxLines: 6,
+                        ),
+                      ],
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        // Make as a copy button
+                        ElevatedButton(
+                          onPressed: () {
+                            // todo: copy memo to clipboard
+                          },
+                          child: const Text(
+                            'コピーする',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: context.appTheme.spacing.marginMedium,
+                        ),
+                        // Save button
+                        ElevatedButton(
+                          onPressed: () {
+                            context
+                                .read<MaterialsModel>()
+                                .submitMemoData(formGroup);
+                          },
+                          child: const Text(
+                            '保存する',
+                            style: TextStyle(
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-              ),
-              SizedBox(
-                width: context.appTheme.spacing.marginMedium,
-              ),
-              // Save button
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text(
-                  '保存する',
-                  style: TextStyle(
-                    color: Colors.white,
-                  ),
-                ),
-              ),
-            ],
+              );
+            },
           ),
           //Drag and drop file
           InkWell(
@@ -120,7 +139,9 @@ class MaterialSectionState extends State<MaterialSection> {
                       ElevatedButton(
                         onPressed: () {
                           filePicker().then((value) {
-                            if (value != null) {}
+                            if (value != null) {
+                              showCreateWithFileDialog(context, value);
+                            }
                           });
                         },
                         child: const Text(
@@ -133,65 +154,6 @@ class MaterialSectionState extends State<MaterialSection> {
               ),
             ),
           ),
-          // InkWell(
-          //   onTap: () {
-          //     filePicker().then((value) {
-          //       debugPrint(value.toString());
-          //     });
-          //   },
-          //   child: Container(
-          //     padding: EdgeInsets.all(
-          //       context.appTheme.spacing.marginExtraLarge,
-          //     ),
-          //     decoration: BoxDecoration(
-          //       color: Colors.white,
-          //       borderRadius: BorderRadius.all(Radius.circular(
-          //         context.appTheme.spacing.borderRadiusMedium,
-          //       )),
-          //       border: Border.all(
-          //         color: context.appTheme.primaryColor,
-          //       ),
-          //     ),
-          //     child: Row(
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       children: [
-          //         Icon(
-          //           Icons.copy_all_rounded,
-          //           size: 50,
-          //           color: context.appTheme.primaryColor,
-          //         ),
-          //         SizedBox(
-          //           width: context.appTheme.spacing.marginMedium,
-          //         ),
-          //         Column(
-          //           children: [
-          //             Text(
-          //               'パンフレットや資料をここにドラッグ＆ドロップ',
-          //               style: context.textTheme.bodySmall?.copyWith(
-          //                 fontSize: 22,
-          //                 fontWeight: FontWeight.bold,
-          //               ),
-          //             ),
-          //             SizedBox(
-          //               height: context.appTheme.spacing.marginMedium,
-          //             ),
-          //             ElevatedButton(
-          //               onPressed: () {
-          //                 filePicker().then((value) {
-          //                   debugPrint(value.toString());
-          //                 });
-          //               },
-          //               child: const Text(
-          //                 'またはファイルを選択する',
-          //               ),
-          //             )
-          //           ],
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // ),
 
           SizedBox(
             height: 500,

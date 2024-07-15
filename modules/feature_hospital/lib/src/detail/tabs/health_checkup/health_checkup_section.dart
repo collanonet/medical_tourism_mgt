@@ -30,7 +30,6 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
               height: context.appTheme.spacing.formSpacing,
             ),
         children: [
-          //Drag and drop file
           InkWell(
             onTap: () {
               filePicker().then((value) {
@@ -43,8 +42,6 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
               padding: EdgeInsets.all(
                 context.appTheme.spacing.marginExtraLarge,
               ),
-
-             
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(
@@ -53,7 +50,6 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                 border: Border.all(
                   color: context.appTheme.primaryColor,
                 ),
-                image: DecorationImage(image: NetworkImage(data!.uploadFile.toString()))
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -97,66 +93,6 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
               ),
             ),
           ),
-          // InkWell(
-          //   onTap: () {
-          //     filePicker().then((value) {
-          //       debugPrint(value.toString());
-          //     });
-          //   },
-          //   child: Container(
-          //     padding: EdgeInsets.all(
-          //       context.appTheme.spacing.marginExtraLarge,
-          //     ),
-          //     decoration: BoxDecoration(
-          //       color: Colors.white,
-          //       borderRadius: BorderRadius.all(Radius.circular(
-          //         context.appTheme.spacing.borderRadiusMedium,
-          //       )),
-          //       border: Border.all(
-          //         color: context.appTheme.primaryColor,
-          //       ),
-          //     ),
-          //     child: Row(
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       children: [
-          //         Icon(
-          //           Icons.copy_all_rounded,
-          //           size: 50,
-          //           color: context.appTheme.primaryColor,
-          //         ),
-          //         SizedBox(
-          //           width: context.appTheme.spacing.marginMedium,
-          //         ),
-          //         Column(
-          //           children: [
-          //             Text(
-          //               'パンフレットや資料をここにドラッグ＆ドロップ',
-          //               style: context.textTheme.bodySmall?.copyWith(
-          //                 fontSize: 22,
-          //                 fontWeight: FontWeight.bold,
-          //               ),
-          //             ),
-          //             SizedBox(
-          //               height: context.appTheme.spacing.marginMedium,
-          //             ),
-          //             ElevatedButton(
-          //               onPressed: () {
-          //                 filePicker().then((value) {
-          //                   debugPrint(value.toString());
-          //                 });
-          //               },
-          //               child: const Text(
-          //                 'またはファイルを選択する',
-          //               ),
-          //             )
-          //           ],
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // ),
-
           Expanded(
             child: DataTable2(
               columnSpacing: 16,
@@ -235,7 +171,7 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
         ]);
   }
 
-   void showCreateWithFileDialog(BuildContext context, FileSelect file) {
+  void showCreateWithFileDialog(BuildContext context, FileSelect file) {
     showDialog(
       context: context,
       builder: (_) => Provider.value(
@@ -247,7 +183,9 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => healthCheckupForm(hospitalRecordId: widget.id,file: file)..markAllAsTouched(),
+              form: () =>
+                  healthCheckupForm(hospitalRecordId: widget.id, file: file)
+                    ..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const Popup();
               },

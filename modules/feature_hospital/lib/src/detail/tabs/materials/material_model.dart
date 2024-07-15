@@ -28,6 +28,10 @@ class MaterialsModel {
       materialsData.value = const AsyncData(loading: true);
       final result = await hospitalRepository.getMaterialHospital(hospitalId);
       materialsData.value = AsyncData(data: result);
+      final resultMenu = await hospitalRepository.getMemoMaterialHospital(hospitalId);
+      formGroup.control('memo').value = resultMenu.memo;
+      formGroup.control('hospitalRecord').value = hospitalId;
+      memoMaterialsData.value = AsyncData(data: resultMenu);
     } catch (e) {
       logger.d(e);
       materialsData.value = AsyncData(error: e);
