@@ -1,4 +1,3 @@
-
 import 'package:core_l10n/l10n.dart';
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
@@ -30,7 +29,6 @@ class _DocumentSectionState extends State<DocumentSection> {
               height: context.appTheme.spacing.formSpacing,
             ),
         children: [
-          //Drag and drop file
           InkWell(
             onTap: () {
               filePicker().then((value) {
@@ -79,7 +77,9 @@ class _DocumentSectionState extends State<DocumentSection> {
                       ElevatedButton(
                         onPressed: () {
                           filePicker().then((value) {
-                            if (value != null) {}
+                            if (value != null) {
+                              showCreateWithFileDialog(context, value);
+                            }
                           });
                         },
                         child: const Text(
@@ -92,128 +92,58 @@ class _DocumentSectionState extends State<DocumentSection> {
               ),
             ),
           ),
-          // InkWell(
-          //   onTap: () {
-          //     filePicker().then((value) {
-          //       debugPrint(value.toString());
-          //     });
-          //   },
-          //   child: Container(
-          //     padding: EdgeInsets.all(
-          //       context.appTheme.spacing.marginExtraLarge,
-          //     ),
-          //     decoration: BoxDecoration(
-          //       color: Colors.white,
-          //       borderRadius: BorderRadius.all(Radius.circular(
-          //         context.appTheme.spacing.borderRadiusMedium,
-          //       )),
-          //       border: Border.all(
-          //         color: context.appTheme.primaryColor,
-          //       ),
-          //     ),
-          //     child: Row(
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       children: [
-          //         Icon(
-          //           Icons.copy_all_rounded,
-          //           size: 50,
-          //           color: context.appTheme.primaryColor,
-          //         ),
-          //         SizedBox(
-          //           width: context.appTheme.spacing.marginMedium,
-          //         ),
-          //         Column(
-          //           children: [
-          //             Text(
-          //               'パンフレットや資料をここにドラッグ＆ドロップ',
-          //               style: context.textTheme.bodySmall?.copyWith(
-          //                 fontSize: 22,
-          //                 fontWeight: FontWeight.bold,
-          //               ),
-          //             ),
-          //             SizedBox(
-          //               height: context.appTheme.spacing.marginMedium,
-          //             ),
-          //             ElevatedButton(
-          //               onPressed: () {
-          //                 filePicker().then((value) {
-          //                   debugPrint(value.toString());
-          //                 });
-          //               },
-          //               child: const Text(
-          //                 'またはファイルを選択する',
-          //               ),
-          //             )
-          //           ],
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // ),
-
-          Expanded(
-            child: DataTable2(
-              columnSpacing: 16,
-              horizontalMargin: 16,
-              minWidth: 450,
-              dataRowHeight: 70,
-              border: const TableBorder(
-                horizontalInside: BorderSide(
-                  color: Colors.grey,
-                  width: 0.5,
-                ),
-              ),
-              isVerticalScrollBarVisible: true,
-              isHorizontalScrollBarVisible: true,
-              showCheckboxColumn: true,
-              onSelectAll: (bool? value) {},
-              datarowCheckboxTheme: CheckboxThemeData(
-                checkColor: MaterialStateProperty.resolveWith(
-                    (states) => context.appTheme.primaryColor),
-              ),
-              headingTextStyle: const TextStyle(
-                  fontFamily: 'NotoSansJP',
-                  package: 'core_ui',
-                  color: Colors.grey),
-              dividerThickness: 0,
-              columns: [
-                ...['書類名', '更新日', '翻訳言語', '翻訳者'].map((e) => DataColumn2(
-                      label: Text(
-                        e,
-                        style: context.textTheme.bodySmall,
-                      ),
-                    )),
-              ],
-              rows: List.generate(6, (index) {
-                return DataRow2(
-                  selected: false,
-                  onSelectChanged: (value) => debugPrint('row selected'),
-                  cells: [
-                    DataCell(Text(
-                      '吹田徳洲会病院　人間ドック検査項目一覧表',
-                      style: context.textTheme.bodyMedium!
-                          .copyWith(color: context.appTheme.primaryColor),
-                    )),
-                    const DataCell(Text('2023/06/30')),
-                    const DataCell(Text('英語')),
-                    DataCell(Container(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 12, vertical: 6),
-                      decoration: BoxDecoration(
-                          border:
-                              Border.all(color: context.appTheme.primaryColor)),
-                      child: Text(
-                        'エクセルを開く',
-                        style: context.textTheme.bodyMedium!
-                            .copyWith(color: context.appTheme.primaryColor),
-                      ),
-                    )),
-                  ],
-                );
-              }).toList(),
-            ),
+          const Row(
+            children: [
+              Expanded(flex: 2, child: Text('書類名')),
+              Expanded(child: Text('更新日')),
+              Expanded(child: Text('翻訳言語')),
+              Expanded(child: Text('翻訳者')),
+            ],
           ),
+          ValueListenableBuilder(
+              valueListenable: context.read<DocumentModel>().documentData,
+              builder: (context, value, _) {
+                return Expanded(
+                  child: ListView.separated(
+                    itemCount: value.data?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: Text(
+                                  value.requireData[index].documentName ?? ''),
+                            ),
+                            Expanded(
+                              child: Text(
+                                  value.requireData[index].updatedOn == null
+                                      ? ''
+                                      : Dates.formShortDate(
+                                          value.requireData[index].updatedOn)),
+                            ),
+                            Expanded(
+                              child: Text(value
+                                      .requireData[index].translationLanguage ??
+                                  ''),
+                            ),
+                            Expanded(
+                              child: Text(
+                                  value.requireData[index].translator ?? ''),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const Divider(
+                        color: Colors.grey,
+                      );
+                    },
+                  ),
+                );
+              }),
           RowSeparated(
             mainAxisAlignment: MainAxisAlignment.end,
             separatorBuilder: (context, index) => SizedBox(
@@ -241,7 +171,6 @@ class _DocumentSectionState extends State<DocumentSection> {
         ]);
   }
 
-  
   void showCreateWithFileDialog(BuildContext context, FileSelect file) {
     showDialog(
       context: context,
@@ -254,7 +183,8 @@ class _DocumentSectionState extends State<DocumentSection> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => documentForm(hospitalRecordId: widget.id,file: file)..markAllAsTouched(),
+              form: () => documentForm(hospitalRecordId: widget.id, file: file)
+                ..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const Popup();
               },
