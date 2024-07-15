@@ -50,6 +50,7 @@ abstract class AppModule {
         MedicalVisaDetailRoute.name: [PermissionRole.admin],
         WebAppointmentDetailRoute.name: [PermissionRole.admin],
         MasterRoute.name: [PermissionRole.admin],
+        ContractRoute.name: [PermissionRole.admin],
       },
     );
   }

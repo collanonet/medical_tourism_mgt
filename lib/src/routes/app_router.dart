@@ -95,6 +95,7 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
       AutoRoute(page: QuotationsRoute.page, path: '/quotations'),
       AutoRoute(page: ReportsRoute.page, path: '/reports'),
       AutoRoute(page: MasterRoute.page, path: '/master'),
+      AutoRoute(page: ContractRoute.page, path: '/contracts'),
       AutoRoute(page: ReportTypeRoute.page, path: '/report-type'),
       AutoRoute(page: SalesRoute.page, path: '/sales'),
       AutoRoute(page: ProcessChartsRoute.page, path: '/precess-charts'),
