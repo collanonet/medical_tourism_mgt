@@ -1,6 +1,5 @@
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
-import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -54,7 +53,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
                             decoration: InputDecoration(
                               label: Text(
                                 context.l10n.labelPatientName,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontFamily: 'NotoSansJP',
                                   package: 'core_ui',
                                 ),
@@ -67,7 +66,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
                           flex: 4,
                           child: ReactiveTextField(
                             formControlName: 'agent_company_name',
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               label: Text(
                                 '査証',
                                 style: TextStyle(
@@ -83,7 +82,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
                           flex: 4,
                           child: ReactiveTextField(
                             formControlName: 'hospitalName',
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               label: Text(
                                 '報告書',
                                 style: TextStyle(
@@ -101,7 +100,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
                             checkColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
-                              side: BorderSide(
+                              side: const BorderSide(
                                 color: Colors.grey,
                               ),
                             ),

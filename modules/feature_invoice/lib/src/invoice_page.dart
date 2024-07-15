@@ -3,6 +3,9 @@ import 'package:base_view/base_view.dart';
 import 'package:core_utils/routes.dart';
 import 'package:feature_invoice/src/invoice_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:provider/provider.dart';
+import 'invoice_model.dart';
 
 @RoutePage(name: Routes.invoicesRoute)
 class InvoicePage extends StatefulWidget {
@@ -15,9 +18,12 @@ class InvoicePage extends StatefulWidget {
 class _InvoicePageState extends State<InvoicePage> {
   @override
   Widget build(BuildContext context) {
-    return const LayoutView(
-      selectedIndex: 8,
-      page: InvoiceScreen(),
+    return Provider(
+      create: (context) => GetIt.I<InvoiceModel>(),
+      child: const LayoutView(
+        selectedIndex: 8,
+        page: InvoiceScreen(),
+      ),
     );
   }
 }
