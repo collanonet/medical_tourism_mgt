@@ -1118,7 +1118,23 @@ abstract class ApiService {
   Future<MedicalPaymentResponse> postMedicalPaymentDetail(
     @Body() MedicalPaymentRequest medicalPaymentRequest,
   );
+
+  @GET(Endpoints.INVOICE_DETAIL)
+  Future<List<InvoiceResponse>> getInvoiceDetail();
   
+  @POST(Endpoints.INVOICE_DETAIL)
+  Future<InvoiceResponse> postInvoiceDetail(
+    @Body() InvoiceRequest invoiceRequest,
+  );
+  
+
+  @GET(Endpoints.FILTER_IVOICE)
+  Future<List<InvoiceFilterResponse>> filterInvoice();
+
+  @POST(Endpoints.FILTER_IVOICE)
+  Future<InvoiceFilterResponse> postFilterInvoice(
+    @Body() InvoiceFilterRequest invoiceFilterRequest,
+  );
 }
 
 extension ApiServiceExts on ApiService {
