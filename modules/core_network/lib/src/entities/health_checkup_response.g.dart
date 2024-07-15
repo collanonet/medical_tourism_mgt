@@ -14,6 +14,9 @@ HealthResponse _$HealthResponseFromJson(Map<String, dynamic> json) =>
       uploadDate: json['uploadDate'] == null
           ? null
           : DateTime.parse(json['uploadDate'] as String),
+      createdAt: json['createdAt'] == null
+          ? null
+          : DateTime.parse(json['createdAt'] as String),
     );
 
 Map<String, dynamic> _$HealthResponseToJson(HealthResponse instance) =>
@@ -22,4 +25,5 @@ Map<String, dynamic> _$HealthResponseToJson(HealthResponse instance) =>
       'uploadFile': instance.uploadFile,
       'fileName': instance.fileName,
       'uploadDate': instance.uploadDate?.toIso8601String(),
+      'createdAt': instance.createdAt?.toIso8601String(),
     };

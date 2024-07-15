@@ -93,64 +93,62 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
               ),
             ),
           ),
-          Expanded(
-            child: DataTable2(
-              columnSpacing: 16,
-              horizontalMargin: 16,
-              minWidth: 450,
-              dataRowHeight: 70,
-              border: const TableBorder(
-                horizontalInside: BorderSide(
-                  color: Colors.grey,
-                  width: 0.5,
-                ),
-              ),
-              isVerticalScrollBarVisible: true,
-              isHorizontalScrollBarVisible: true,
-              showCheckboxColumn: true,
-              onSelectAll: (bool? value) {},
-              datarowCheckboxTheme: CheckboxThemeData(
-                checkColor: MaterialStateProperty.resolveWith(
-                    (states) => context.appTheme.primaryColor),
-              ),
-              headingTextStyle: const TextStyle(
-                  fontFamily: 'NotoSansJP',
-                  package: 'core_ui',
-                  color: Colors.grey),
-              dividerThickness: 0,
-              columns: [
-                ...['ファイル名ファイル名', '更新日', ''].map((e) => DataColumn2(
-                      label: Text(
-                        e,
-                        style: context.textTheme.bodySmall,
-                      ),
-                    )),
-              ],
-              rows: List.generate(6, (index) {
-                return DataRow2(
-                  selected: false,
-                  onSelectChanged: (value) => debugPrint('row selected'),
-                  cells: [
-                    DataCell(Text(
-                      '吹田徳洲会病院　人間ドック検査項目一覧表',
-                      style: context.textTheme.bodyMedium!
-                          .copyWith(color: context.appTheme.primaryColor),
-                    )),
-                    const DataCell(Text('2023/06/30')),
-                    DataCell(ElevatedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'エクセルを開く',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    )),
-                  ],
-                );
-              }).toList(),
-            ),
+          const Row(
+            children: [
+              Expanded(flex: 2, child: Text('ファイル名')),
+              Expanded(child: Text('更新日')),
+              Expanded(child: SizedBox()),
+            ],
           ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          ValueListenableBuilder(
+              valueListenable: context.read<HealthModel>().healthData,
+              builder: (context, value, _) {
+                return Expanded(
+                  child: ListView.separated(
+                    itemCount: value.data?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child:
+                                  Text(value.requireData[index].fileName ?? ''),
+                            ),
+                            Expanded(
+                              child: Text(
+                                  value.requireData[index].createdAt == null
+                                      ? ''
+                                      : Dates.formShortDate(
+                                          value.requireData[index].createdAt)),
+                            ),
+                            Expanded(
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  context.read<HealthModel>().deleteHealth(
+                                      id: value.requireData[index].id);
+                                },
+                                child: const Text(
+                                  'エクセルを開く',
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const Divider(
+                        color: Colors.grey,
+                      );
+                    },
+                  ),
+                );
+              }),
           Align(
             alignment: Alignment.bottomRight,
             child: OutlinedButton(
