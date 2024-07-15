@@ -176,6 +176,8 @@ class BasicInformationModel {
   }) {
     formGroup.reset();
 
+    // formGroup.updateValue(data.toJson());
+
     formGroup.control('id').value = data.id;
     formGroup.control('familyNameRomanized').value = data.familyNameRomanized;
     formGroup.control('middleNameRomanized').value = data.middleNameRomanized;

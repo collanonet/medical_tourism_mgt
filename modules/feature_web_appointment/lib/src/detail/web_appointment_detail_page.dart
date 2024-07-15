@@ -18,6 +18,7 @@ class WebAppointmentDetailPage extends StatelessWidget {
     super.key,
     @PathParam('id') this.id,
   });
+
   final String? id;
   @override
   Widget build(BuildContext context) {

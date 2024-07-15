@@ -6,7 +6,7 @@ class InvoiceScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Center(
-      child: Text('Invoice Screen'),
+      child: Text('Screen was remove'),
     );
   }
 }

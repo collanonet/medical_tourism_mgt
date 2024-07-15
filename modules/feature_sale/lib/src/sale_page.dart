@@ -22,7 +22,7 @@ class _SalePageState extends State<SalePage> {
   @override
   Widget build(BuildContext context) {
     return LayoutView(
-      selectedIndex: 9,
+      selectedIndex: 8,
       page: ReactiveFormConfig(
         validationMessages: {},
         child: ReactiveFormBuilder(

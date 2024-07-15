@@ -22,7 +22,7 @@ class _ReportPageState extends State<ReportPage> {
     return ChangeNotifierProvider(
       create: (context) => GetIt.I<ReportModel>()..getReports(),
       child: const LayoutView(
-        selectedIndex: 10,
+        selectedIndex: 9,
         page: ReportScreen(),
       ),
     );

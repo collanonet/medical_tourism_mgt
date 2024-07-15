@@ -49,6 +49,7 @@ abstract class AppModule {
         WebAppointmentsRoute.name: [PermissionRole.admin],
         MedicalVisaDetailRoute.name: [PermissionRole.admin],
         WebAppointmentDetailRoute.name: [PermissionRole.admin],
+        MasterRoute.name: [PermissionRole.admin],
       },
     );
   }
