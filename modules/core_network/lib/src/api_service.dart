@@ -1135,6 +1135,30 @@ abstract class ApiService {
   Future<InvoiceFilterResponse> postFilterInvoice(
     @Body() InvoiceFilterRequest invoiceFilterRequest,
   );
+
+  @GET(Endpoints.ESTIMATE_MASTER)
+  Future<List<EstimateMasterResponse>> getEstimateMaster();
+
+  @POST(Endpoints.ESTIMATE_MASTER)
+  Future<EstimateMasterResponse> postEstimateMaster(
+    @Body() EstimateMasterRequest estimateMasterRequest,
+  );
+
+  @GET(Endpoints.REPROT_CONTRACT)
+  Future<List<ReportContractResponse>> getReportContract();
+
+  @POST(Endpoints.REPROT_CONTRACT)
+  Future<ReportContractResponse> postReportContract(
+    @Body() ReportContractRequest reportContractRequest,
+  );
+
+  @GET(Endpoints.REPROT_CONTRACT_FILTER)
+  Future<ContractFilterResponse> getReportFilter();
+
+  @POST(Endpoints.REPROT_CONTRACT_FILTER)
+  Future<ContractFilterResponse> postReportFilter(
+    @Body() ContractFilterRequest contractFilterRequest,
+  );
 }
 
 extension ApiServiceExts on ApiService {

@@ -76,7 +76,6 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                         .spacing.formSpacing,
                                                   )),
                                           children: [
-                                            
                                             InkWell(
                                               onTap: () {
                                                 imagePicker().then((value) => {
@@ -781,7 +780,7 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                         width: context.appTheme.spacing.marginSmall,
                       ),
                       Text(
-                        '担当者を追加',
+                        '医師を追加',
                         style: TextStyle(color: context.appTheme.primaryColor),
                       )
                     ],

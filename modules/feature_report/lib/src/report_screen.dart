@@ -60,7 +60,7 @@ class ReportScreen extends StatelessWidget {
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
+                                  const Text(
                                     '種別マスタ',
                                     style: TextStyle(
                                       fontFamily: 'NotoSansJP',
@@ -77,6 +77,314 @@ class ReportScreen extends StatelessWidget {
                                           .push(const ReportTypeRoute());
                                     },
                                     child: const Text('種別マスタ'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                    ),
+                    Expanded(
+                      child: ValueListenableBuilder(
+                          valueListenable: context.read<ReportModel>().dataType,
+                          builder: (context, value, child) {
+                            return Skeletonizer(
+                              enabled: value.loading,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    '種別マスタ',
+                                    style: TextStyle(
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Divider(
+                                    color: context.appTheme.primaryColor,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      context.router
+                                          .push(const ReportTypeRoute());
+                                    },
+                                    child: const Text('種別マスタ'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                    ),
+                    Expanded(
+                      child: ValueListenableBuilder(
+                          valueListenable: context.read<ReportModel>().dataType,
+                          builder: (context, value, child) {
+                            return Skeletonizer(
+                              enabled: value.loading,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    '種別マスタ',
+                                    style: TextStyle(
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Divider(
+                                    color: context.appTheme.primaryColor,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      context.router
+                                          .push(const ReportTypeRoute());
+                                    },
+                                    child: const Text('種別マスタ'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                    ),
+                    Expanded(child: SizedBox()),
+                    Expanded(child: SizedBox()),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        //Comlumn 2
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.all(context.appTheme.spacing.gutter),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(
+                  context.appTheme.spacing.borderRadiusMedium),
+            ),
+            child: Column(
+              children: [
+                RowSeparated(
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    );
+                  },
+                  children: [
+                    Expanded(
+                      child: ValueListenableBuilder(
+                          valueListenable: context.read<ReportModel>().dataType,
+                          builder: (context, value, child) {
+                            return Skeletonizer(
+                              enabled: value.loading,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    '種別マスタ',
+                                    style: TextStyle(
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Divider(
+                                    color: context.appTheme.primaryColor,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      context.router
+                                          .push(const ReportTypeRoute());
+                                    },
+                                    child: const Text('種別マスタ'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                    ),
+                    Expanded(
+                      child: ValueListenableBuilder(
+                          valueListenable: context.read<ReportModel>().dataType,
+                          builder: (context, value, child) {
+                            return Skeletonizer(
+                              enabled: value.loading,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    '種別マスタ',
+                                    style: TextStyle(
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Divider(
+                                    color: context.appTheme.primaryColor,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      context.router
+                                          .push(const ReportTypeRoute());
+                                    },
+                                    child: const Text('種別マスタ'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                    ),
+                    Expanded(
+                      child: ValueListenableBuilder(
+                          valueListenable: context.read<ReportModel>().dataType,
+                          builder: (context, value, child) {
+                            return Skeletonizer(
+                              enabled: value.loading,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    '種別マスタ',
+                                    style: TextStyle(
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Divider(
+                                    color: context.appTheme.primaryColor,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      context.router
+                                          .push(const ReportTypeRoute());
+                                    },
+                                    child: const Text('種別マスタ'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                    ),
+                    Expanded(child: SizedBox()),
+                    Expanded(child: SizedBox()),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+        //Column3
+        Expanded(
+          child: Container(
+            padding: EdgeInsets.all(context.appTheme.spacing.gutter),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(
+                  context.appTheme.spacing.borderRadiusMedium),
+            ),
+            child: Column(
+              children: [
+                RowSeparated(
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(
+                      width: context.appTheme.spacing.marginMedium,
+                    );
+                  },
+                  children: [
+                    Expanded(
+                      child: ValueListenableBuilder(
+                          valueListenable: context.read<ReportModel>().dataType,
+                          builder: (context, value, child) {
+                            return Skeletonizer(
+                              enabled: value.loading,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    '見積書',
+                                    style: TextStyle(
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Divider(
+                                    color: context.appTheme.primaryColor,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      context.router
+                                          .push(const EstimateMasterRoute());
+                                    },
+                                    child: const Text('見積マスタ'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                    ),
+                    Expanded(
+                      child: ValueListenableBuilder(
+                          valueListenable: context.read<ReportModel>().dataType,
+                          builder: (context, value, child) {
+                            return Skeletonizer(
+                              enabled: value.loading,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    '種別マスタ',
+                                    style: TextStyle(
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Divider(
+                                    color: context.appTheme.primaryColor,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      context.router
+                                          .push(const ReportTypeRoute());
+                                    },
+                                    child: const Text('種別マスタ'),
+                                  ),
+                                ],
+                              ),
+                            );
+                          }),
+                    ),
+                    Expanded(
+                      child: ValueListenableBuilder(
+                          valueListenable: context.read<ReportModel>().dataType,
+                          builder: (context, value, child) {
+                            return Skeletonizer(
+                              enabled: value.loading,
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    '売上管理',
+                                    style: TextStyle(
+                                      fontFamily: 'NotoSansJP',
+                                      package: 'core_ui',
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  Divider(
+                                    color: context.appTheme.primaryColor,
+                                  ),
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      context.router
+                                          .push(const ProspectivePankRoute());
+                                    },
+                                    child: const Text('見込みランク'),
                                   ),
                                 ],
                               ),

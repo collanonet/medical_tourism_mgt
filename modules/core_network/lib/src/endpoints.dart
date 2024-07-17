@@ -225,4 +225,10 @@ class Endpoints {
   //Invoice and Quote
   static const INVOICE_DETAIL = '/invoice-details';
   static const FILTER_IVOICE = '/filter-invoice';
+
+  //Report
+  static const ESTIMATE_MASTER = '/estimate-master';
+  static const REPROT_CONTRACT = '/report-contract';
+  static const REPROT_CONTRACT_FILTER = '/report-contract-filter';
+  static const REPROT_CONTRACT_DETAIL = '/report-contract-details';
 }

@@ -33,7 +33,7 @@ class _SupportLanguageSectionState extends State<SupportLanguageSection> {
             ),
             children: [
               Text(
-                '言語を追加',
+                '対応言語',
                 style: context.textTheme.bodyLarge,
               ),
               RowSeparated(
@@ -151,7 +151,7 @@ class _SupportLanguageSectionState extends State<SupportLanguageSection> {
                           width: context.appTheme.spacing.marginSmall,
                         ),
                         Text(
-                          '担当者を追加',
+                          '言語を追加',
                           style:
                               TextStyle(color: context.appTheme.primaryColor),
                         )

@@ -51,6 +51,9 @@ abstract class AppModule {
         WebAppointmentDetailRoute.name: [PermissionRole.admin],
         MasterRoute.name: [PermissionRole.admin],
         ContractRoute.name: [PermissionRole.admin],
+        EstimateMasterRoute.name: [PermissionRole.admin],
+        ProspectivePankRoute.name: [PermissionRole.admin],
+        ContractDetailRoute.name: [PermissionRole.admin],
       },
     );
   }

@@ -9,6 +9,7 @@ import 'dart:async' as _i2;
 import 'package:data_report/data_report.dart' as _i4;
 import 'package:injectable/injectable.dart' as _i1;
 
+import 'src/contract/contract_model.dart' as _i6;
 import 'src/report_model.dart' as _i3;
 import 'src/type/type_model.dart' as _i5;
 
@@ -20,5 +21,7 @@ class FeatureReportPackageModule extends _i1.MicroPackageModule {
         () => _i3.ReportModel(reportRepository: gh<_i4.ReportRepository>()));
     gh.factory<_i5.TypeModel>(
         () => _i5.TypeModel(reportRepository: gh<_i4.ReportRepository>()));
+    gh.factory<_i6.ContractModel>(
+        () => _i6.ContractModel(reportRepository: gh<_i4.ReportRepository>()));
   }
 }

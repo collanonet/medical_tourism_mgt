@@ -4,7 +4,6 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -94,10 +93,10 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
         ),
         const Row(
           children: [
-            Expanded(flex: 2, child: Text('書類名')),
-            Expanded(child: Text('発行元')),
-            Expanded(child: Text('発行日')),
-            Expanded(child: Text('支払期限')),
+            Expanded(flex: 2, child: Text('施設写真名')),
+            Expanded(child: Text('撮影')),
+            Expanded(child: Text('撮影日')),
+            Expanded(child: Text('共有')),
             Expanded(child: SizedBox()),
           ],
         ),
@@ -132,6 +131,7 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                                         value.requireData[index].shootingDate)),
                           ),
                           Expanded(
+                            flex: 3,
                             child: value.requireData[index].share == null
                                 ? SizedBox()
                                 : Icon(Icons.person),

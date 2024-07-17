@@ -1,5 +1,4 @@
 import 'package:core_l10n/l10n.dart';
-import 'package:core_network/core_network.dart';
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
@@ -43,8 +42,6 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
               padding: EdgeInsets.all(
                 context.appTheme.spacing.marginExtraLarge,
               ),
-
-             
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(
@@ -53,7 +50,8 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                 border: Border.all(
                   color: context.appTheme.primaryColor,
                 ),
-                image: DecorationImage(image: NetworkImage(data!.uploadFile.toString()))
+                image: DecorationImage(
+                    image: NetworkImage(data!.uploadFile.toString())),
               ),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -178,9 +176,10 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                     (states) => context.appTheme.primaryColor),
               ),
               headingTextStyle: const TextStyle(
-                  fontFamily: 'NotoSansJP',
-                  package: 'core_ui',
-                  color: Colors.grey),
+                fontFamily: 'NotoSansJP',
+                package: 'core_ui',
+                color: Colors.grey,
+              ),
               dividerThickness: 0,
               columns: [
                 ...['ファイル名ファイル名', '更新日', ''].map((e) => DataColumn2(
@@ -201,15 +200,15 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                           .copyWith(color: context.appTheme.primaryColor),
                     )),
                     const DataCell(Text('2023/06/30')),
-                    DataCell(ElevatedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'エクセルを開く',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    )),
+                    // DataCell(ElevatedButton(
+                    //   onPressed: () {},
+                    //   child: const Text(
+                    //     'エクセルを開く',
+                    //     style: TextStyle(
+                    //       color: Colors.white,
+                    //     ),
+                    //   ),
+                    // )),
                   ],
                 );
               }).toList(),
@@ -235,7 +234,7 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
         ]);
   }
 
-   void showCreateWithFileDialog(BuildContext context, FileSelect file) {
+  void showCreateWithFileDialog(BuildContext context, FileSelect file) {
     showDialog(
       context: context,
       builder: (_) => Provider.value(
@@ -247,7 +246,9 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => healthCheckupForm(hospitalRecordId: widget.id,file: file)..markAllAsTouched(),
+              form: () =>
+                  healthCheckupForm(hospitalRecordId: widget.id, file: file)
+                    ..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const Popup();
               },
