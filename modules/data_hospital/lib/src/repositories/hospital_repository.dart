@@ -115,5 +115,7 @@ abstract class HospitalRepository {
     ContractRequest contractRequest,
   );
 
+  Future<void> deleteHealth({required String id});
+
   /// end get basic information of hospital C3 Page
 }

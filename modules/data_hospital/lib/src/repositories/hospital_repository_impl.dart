@@ -209,4 +209,9 @@ class HospitalRepositoryIml extends HospitalRepository {
       MemoMaterialHospitalRequest memoMaterialHospitalRequest) {
     return remote.postMemoMaterialHospital(memoMaterialHospitalRequest);
   }
+
+  @override
+  Future<void> deleteHealth({required String id}) {
+    return remote.deleteHealth(id: id);
+  }
 }

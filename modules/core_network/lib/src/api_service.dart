@@ -1069,6 +1069,11 @@ abstract class ApiService {
     @Body() HealthRequest healthCheckupRequest,
   );
 
+  @DELETE('${Endpoints.HEALTH_CHECKUP}/{id}')
+  Future<void> deleteHealth({
+    @Path('id') required String id,
+  });
+
   @GET('${Endpoints.CONTRACT}/{id}')
   Future<List<ContractResponse>> getContract({
     @Path('id') required String id,
@@ -1121,12 +1126,11 @@ abstract class ApiService {
 
   @GET(Endpoints.INVOICE_DETAIL)
   Future<List<InvoiceResponse>> getInvoiceDetail();
-  
+
   @POST(Endpoints.INVOICE_DETAIL)
   Future<InvoiceResponse> postInvoiceDetail(
     @Body() InvoiceRequest invoiceRequest,
   );
-  
 
   @GET(Endpoints.FILTER_IVOICE)
   Future<List<InvoiceFilterResponse>> filterInvoice();

@@ -91,115 +91,47 @@ class ContractSectionState extends State<ContractSection> {
               ),
             ),
           ),
-          // InkWell(
-          //   onTap: () {
-          //     filePicker().then((value) {
-          //       debugPrint(value.toString());
-          //     });
-          //   },
-          //   child: Container(
-          //     padding: EdgeInsets.all(
-          //       context.appTheme.spacing.marginExtraLarge,
-          //     ),
-          //     decoration: BoxDecoration(
-          //       color: Colors.white,
-          //       borderRadius: BorderRadius.all(Radius.circular(
-          //         context.appTheme.spacing.borderRadiusMedium,
-          //       )),
-          //       border: Border.all(
-          //         color: context.appTheme.primaryColor,
-          //       ),
-          //     ),
-          //     child: Row(
-          //       crossAxisAlignment: CrossAxisAlignment.center,
-          //       mainAxisAlignment: MainAxisAlignment.center,
-          //       children: [
-          //         Icon(
-          //           Icons.copy_all_rounded,
-          //           size: 50,
-          //           color: context.appTheme.primaryColor,
-          //         ),
-          //         SizedBox(
-          //           width: context.appTheme.spacing.marginMedium,
-          //         ),
-          //         Column(
-          //           children: [
-          //             Text(
-          //               'パンフレットや資料をここにドラッグ＆ドロップ',
-          //               style: context.textTheme.bodySmall?.copyWith(
-          //                 fontSize: 22,
-          //                 fontWeight: FontWeight.bold,
-          //               ),
-          //             ),
-          //             SizedBox(
-          //               height: context.appTheme.spacing.marginMedium,
-          //             ),
-          //             ElevatedButton(
-          //               onPressed: () {
-          //                 filePicker().then((value) {
-          //                   debugPrint(value.toString());
-          //                 });
-          //               },
-          //               child: const Text(
-          //                 'またはファイルを選択する',
-          //               ),
-          //             )
-          //           ],
-          //         )
-          //       ],
-          //     ),
-          //   ),
-          // ),
-
-          Expanded(
-            child: DataTable2(
-              columnSpacing: 16,
-              horizontalMargin: 16,
-              minWidth: 450,
-              dataRowHeight: 70,
-              border: const TableBorder(
-                horizontalInside: BorderSide(
-                  color: Colors.grey,
-                  width: 0.5,
-                ),
-              ),
-              isVerticalScrollBarVisible: true,
-              isHorizontalScrollBarVisible: true,
-              showCheckboxColumn: true,
-              onSelectAll: (bool? value) {},
-              datarowCheckboxTheme: CheckboxThemeData(
-                checkColor: MaterialStateProperty.resolveWith(
-                    (states) => context.appTheme.primaryColor),
-              ),
-              headingTextStyle: const TextStyle(
-                  fontFamily: 'NotoSansJP',
-                  package: 'core_ui',
-                  color: Colors.grey),
-              dividerThickness: 0,
-              columns: [
-                ...['書類名', '締結日'].map((e) => DataColumn2(
-                      label: Text(
-                        e,
-                        style: context.textTheme.bodySmall,
-                      ),
-                    )),
-              ],
-              rows: List.generate(6, (index) {
-                return DataRow2(
-                  selected: false,
-                  onSelectChanged: (value) => debugPrint('row selected'),
-                  cells: [
-                    DataCell(Text(
-                      '吹田徳洲会病院　人間ドック検査項目一覧表',
-                      style: context.textTheme.bodyMedium!
-                          .copyWith(color: context.appTheme.primaryColor),
-                    )),
-                    const DataCell(Text('2023/06/30')),
-                  ],
-                );
-              }).toList(),
-            ),
+          const Row(
+            children: [
+              Expanded(flex: 2, child: Text('書類名')),
+              Expanded(child: Text('締結日')),
+            ],
           ),
+          ValueListenableBuilder(
+              valueListenable: context.read<ContrantModel>().contrantData,
+              builder: (context, value, _) {
+                return Expanded(
+                  child: ListView.separated(
+                    itemCount: value.data?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child:
+                                  Text(value.requireData[index].fileName ?? ''),
+                            ),
+                            Expanded(
+                              child: Text(
+                                  value.requireData[index].uploadDate == null
+                                      ? ''
+                                      : Dates.formShortDate(
+                                          value.requireData[index].uploadDate)),
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const Divider(
+                        color: Colors.grey,
+                      );
+                    },
+                  ),
+                );
+              }),
           RowSeparated(
             mainAxisAlignment: MainAxisAlignment.end,
             separatorBuilder: (context, index) => SizedBox(
@@ -239,7 +171,8 @@ class ContractSectionState extends State<ContractSection> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => contractForm(hospitalRecordId: widget.id,file: file)..markAllAsTouched(),
+              form: () => contractForm(hospitalRecordId: widget.id, file: file)
+                ..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const Popup();
               },

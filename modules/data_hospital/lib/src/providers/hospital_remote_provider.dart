@@ -182,5 +182,9 @@ class HospitalRemoteProvider {
     return apiService.uploadFileBase64(file, filename);
   }
 
+  Future<void> deleteHealth({required String id}) {
+    return apiService.deleteHealth(id: id);
+  }
+
   /// end get basic information of hospital C3 Page
 }

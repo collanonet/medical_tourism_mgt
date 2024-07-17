@@ -61,4 +61,16 @@ class HealthModel {
       submitData.value = AsyncData(error: e.toString());
     }
   }
+
+  Future<void> deleteHealth({required String id}) async {
+    try {
+      await hospitalRepository.deleteHealth(id: id);
+      healthData.value = AsyncData(
+        data: healthData.value.data!
+          ..removeWhere((element) => element.id == id),
+      );
+    } catch (e) {
+      logger.d(e);
+    }
+  }
 }
