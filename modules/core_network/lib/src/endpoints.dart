@@ -231,4 +231,7 @@ class Endpoints {
   static const REPROT_CONTRACT = '/report-contract';
   static const REPROT_CONTRACT_FILTER = '/report-contract-filter';
   static const REPROT_CONTRACT_DETAIL = '/report-contract-details';
+  static const CONTRACT_TEMPLATE_DETAIL_BASIC_INFO = 'contact-template-detail-basic-info';
+  static const ESTIMATE_MASTER_REPORT = 'estimate-master-report';
+  static const PROSPECTIVE_RANK = 'progressive-rank';
 }

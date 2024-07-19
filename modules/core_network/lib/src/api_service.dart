@@ -1163,6 +1163,38 @@ abstract class ApiService {
   Future<ContractFilterResponse> postReportFilter(
     @Body() ContractFilterRequest contractFilterRequest,
   );
+
+  @GET(Endpoints.REPROT_CONTRACT_DETAIL)
+  Future<ContractReportDetailResponse> getContractReportDetail();
+
+  @POST(Endpoints.REPROT_CONTRACT_DETAIL)
+  Future<ContractReportDetailResponse> postContractReportDetail(
+    @Body() ContractReportDetailRequest contractReportDetailRequest,
+  );
+
+  @GET(Endpoints.CONTRACT_TEMPLATE_DETAIL_BASIC_INFO)
+  Future<ContractTemplateBasicInformationResponse> getContractTemplateBasicInformation();
+
+  @POST(Endpoints.CONTRACT_TEMPLATE_DETAIL_BASIC_INFO)
+  Future<ContractTemplateBasicInformationResponse> postContractTemplateBasicInformation(
+    ContractTemplateBasicInformationRequest contractTemplateBasicInformationRequest,
+  );
+
+  @GET(Endpoints.ESTIMATE_MASTER_REPORT)
+  Future<List<EstimatemasterReportResponse>> getEstimateMasterReport();
+
+  @POST(Endpoints.ESTIMATE_MASTER_REPORT)
+  Future<EstimatemasterReportResponse> postEstimateMasterReport(
+    @Body() EstimatemasterReportRequest estimateMasterReportRequest,
+  );
+
+  @GET(Endpoints.PROSPECTIVE_RANK)
+  Future<List<ProspectiveRankResponse>> getProspectiveRank();
+
+  @POST(Endpoints.PROSPECTIVE_RANK)
+  Future<ProspectiveRankResponse> postProspectiveRank(
+    @Body() ProspectiveRankRequest prospectiveRankRequest,
+  );
 }
 
 extension ApiServiceExts on ApiService {

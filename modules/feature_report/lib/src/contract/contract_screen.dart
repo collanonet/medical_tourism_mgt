@@ -152,109 +152,123 @@ class ContractScreen extends StatelessWidget {
             ),
           ],
         ),
-        Container(
-          width: MediaQuery.of(context).size.width,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          padding: EdgeInsets.all(16),
-          child: Column(
-            children: [
-              const Row(
-                children: [
-                  SizedBox(width: 50),
-                  Expanded(
-                    flex: 1,
-                    child: Text('甲'),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text('乙'),
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: Text('書類名'),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text('更新日'),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text('病院との契約先'),
-                  ),
-                  Expanded(
-                    flex: 1,
-                    child: Text('締結方法'),
-                  ),
-                ],
-              ),
-              RowSeparated(
-                separatorBuilder: (context, index) =>
-                    SizedBox(height: context.appTheme.spacing.marginMedium),
-                children: [
-                  Column(
-                    children: List.generate(5, (index) {
-                      return RowSeparated(
+        Expanded(
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            padding: EdgeInsets.all(16),
+            child: Column(
+              children: [
+                const Row(
+                  children: [
+                    SizedBox(width: 50),
+                    Expanded(
+                      flex: 1,
+                      child: Text('甲'),
+                    ),
+                    Expanded(
+                      child: Text('乙'),
+                    ),
+                    Expanded(
+                      flex: 3,
+                      child: Text('書類名'),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Text('更新日'),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Text('病院との契約先'),
+                    ),
+                    Expanded(
+                      flex: 1,
+                      child: Text('締結方法'),
+                    ),
+                  ],
+                ),
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Container(
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      padding: const EdgeInsets.all(20),
+                      child: ColumnSeparated(
                         separatorBuilder: (context, index) => SizedBox(
-                            height: context.appTheme.spacing.marginMedium),
+                          height: context.appTheme.spacing.marginMedium,
+                        ),
                         children: [
-                          Expanded(
-                            child: Container(
-                              width: 75,
-                              height: 35,
-                              decoration: BoxDecoration(
-                                color: Colors.green[400],
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 5),
-                              child: Center(child: Text('自社')),
-                            ),
-                          ),
-                          Expanded(
-                            child: Container(
-                              width: 75,
-                              height: 35,
-                              decoration: BoxDecoration(
-                                color: Colors.purple[200],
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 5),
-                              child: Center(child: Text('患者')),
-                            ),
-                          ),
-                          Expanded(
-                            child: Text('【医療滞在ビザのみ契約書 日本語】医療滞在ビザ身元保証　契約書'),
-                          ),
-                          Expanded(
-                            child: Text('2020/04/22'),
-                          ),
-                          Expanded(child: Text('MS法人')),
-                          Expanded(
-                            child: Container(
-                              width: 75,
-                              height: 35,
-                              decoration: BoxDecoration(
-                                color: Colors.purple[200],
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              margin: EdgeInsets.symmetric(
-                                  horizontal: 8, vertical: 5),
-                              child: Center(
-                                child: Text('電子契約'),
-                              ),
+                          ColumnSeparated(
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return const SizedBox(height: 16);
+                            },
+                            children: List.generate(
+                              10,
+                              (index) {
+                                return Container(
+                                  decoration: BoxDecoration(
+                                    color: index.isEven
+                                        ? context.appTheme.primaryColor
+                                            .withOpacity(0.1)
+                                        : Colors.white,
+                                  ),
+                                  padding: const EdgeInsets.all(10),
+                                  child: RowSeparated(
+                                    separatorBuilder:
+                                        (BuildContext context, int index) {
+                                      return const SizedBox(width: 16);
+                                    },
+                                    children: [
+                                      boxRequired(
+                                          enabled: index.isEven ? true : false,
+                                          label: '見積書'),
+                                      const SizedBox(width: 20),
+                                      boxRequired(
+                                          enabled: index.isEven ? true : false,
+                                          label: '患者'),
+                                      const SizedBox(width: 20),
+                                      Expanded(
+                                        flex: 3,
+                                        child: Text(
+                                          '【医療滞在ビザのみ契約書 日本語】医療滞在ビザ身元保証　契約書',
+                                          style: context.textTheme.bodySmall,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 1,
+                                        child: Text(
+                                          '2020/04/22',
+                                          style: context.textTheme.bodyMedium,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          'MS法人',
+                                          style: context.textTheme.bodyMedium,
+                                        ),
+                                      ),
+                                      boxRequired(enabled: true, label: '電子契約'),
+                                    ],
+                                  ),
+                                );
+                              },
                             ),
                           ),
                         ],
-                      );
-                    }),
-                  )
-                ],
-              )
-            ],
+                      ),
+                    ),
+                  ),
+                ),
+                
+              ],
+            ),
           ),
         )
       ],

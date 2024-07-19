@@ -209,6 +209,7 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                   ],
                 );
               }),
+            )),
           Align(
             alignment: Alignment.bottomRight,
             child: OutlinedButton(
