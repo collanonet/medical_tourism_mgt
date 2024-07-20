@@ -4,6 +4,7 @@ FormGroup estimateMasterForm() {
   return FormGroup({
     'arr': FormArray([
       FormGroup({
+         'id': FormControl<String>(),
         'item': FormControl<String>(),
         'sell_unitPrice': FormControl<String>(),
         'sell_amountOfMoney': FormControl<String>(),

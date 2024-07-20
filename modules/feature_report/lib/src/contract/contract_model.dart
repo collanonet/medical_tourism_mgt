@@ -12,12 +12,12 @@ class ContractModel{
  final ReportRepository reportRepository;
 
 
- ValueNotifier<AsyncData<List<ReportContractResponse>>> contractData = ValueNotifier(const AsyncData());
+ ValueNotifier<AsyncData<List<ReportContractResponse>>> contractData = ValueNotifier(const AsyncData<List<ReportContractResponse>>(data: []));
   Future<void> fetchContract() async {
     try{
       contractData.value = const AsyncData(loading: true);
       final response = await reportRepository.getReportContract();
-     // contractData.value = AsyncData(data: contractData.value.data!..add(response));
+      contractData.value = AsyncData(data: response);
 
     }catch(e){
       logger.d(e);

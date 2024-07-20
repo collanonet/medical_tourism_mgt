@@ -19,7 +19,7 @@ class ProspectivePankPage extends StatelessWidget {
     return ReactiveFormConfig(
       validationMessages: validationMessages(context),
       child: ReactiveFormBuilder(
-          form: () => ProspectivePankForm(),
+          form: () => prospectivePankForm(),
           builder: (_, formGroup, child) {
             return LayoutView(
               selectedIndex: 9,

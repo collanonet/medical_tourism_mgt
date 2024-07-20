@@ -1,17 +1,7 @@
-import 'package:core_network/src/entities/contract_report_detail_response.dart';
-import 'package:core_network/src/entities/contract_template_detail_basic_info_response.dart';
-import 'package:core_network/src/entities/estimate_master_report_response.dart';
-import 'package:core_network/src/entities/report_contract_filter_response.dart';
-import 'package:core_network/src/entities/report_contract_response.dart';
-import 'package:core_network/src/entities/request/contract_report_detail_request.dart';
-import 'package:core_network/src/entities/request/contract_request.dart';
-import 'package:core_network/src/entities/request/contract_template_detail_basic_info_request.dart';
-import 'package:core_network/src/entities/request/estimate_master_report_request.dart';
-import 'package:core_network/src/entities/request/report_contract_filter_request.dart';
-import 'package:core_network/src/entities/type_request.dart';
-import 'package:core_network/src/entities/type_response.dart';
-import 'package:injectable/injectable.dart';
 
+import 'package:core_network/core_network.dart';
+import 'package:core_network/entities.dart';
+import 'package:injectable/injectable.dart';
 import '../providers/report_remote_provider.dart';
 import 'report_repository.dart';
 
@@ -86,5 +76,15 @@ class ReportRepositoryIml extends ReportRepository {
   @override
   Future<EstimatemasterReportResponse> postEstimatemasterReport(EstimatemasterReportRequest estimatemasterReportRequest) {
     return remote.postEstimatemasterReport(estimatemasterReportRequest);
+  }
+
+  @override
+  Future<List<ProspectiveRankResponse>> getProspectiveRank() {
+    return remote.getProspectiveRank();
+  }
+
+  @override
+  Future<ProspectiveRankResponse> postProspectiveRank(ProspectiveRankRequest prospectiveRankRequest) {
+    return remote.postProspectiveRank(prospectiveRankRequest);
   }
 }

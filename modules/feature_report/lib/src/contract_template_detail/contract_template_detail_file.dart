@@ -7,6 +7,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+import 'contract_template_detail_model.dart';
+
 class Popup extends StatelessWidget {
   const Popup({super.key, this.title});
 
@@ -192,59 +194,59 @@ class Popup extends StatelessWidget {
             )
           ],
         ),
-        // Row(
-        //   mainAxisAlignment: MainAxisAlignment.end,
-        //   crossAxisAlignment: CrossAxisAlignment.end,
-        //   children: [
-        //     OutlinedButton(
-        //       onPressed: () {
-        //         Navigator.pop(context);
-        //       },
-        //       child: Text('キャンセル'),
-        //     ),
-        //     SizedBox(
-        //       width: context.appTheme.spacing.marginMedium,
-        //     ),
-        //     ValueListenableListener(
-        //       valueListenable: context.read<HealthModel>().submitData,
-        //       onListen: () {
-        //         final value = context.read<HealthModel>().submitData.value;
+        Row(
+          mainAxisAlignment: MainAxisAlignment.end,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            OutlinedButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: Text('キャンセル'),
+            ),
+            SizedBox(
+              width: context.appTheme.spacing.marginMedium,
+            ),
+            ValueListenableListener(
+              valueListenable: context.read<ContractTemplateModel>().submitFormContractData,
+              onListen: () {
+                final value = context.read<ContractTemplateModel>().submitFormContractData.value;
 
-        //         if (value.hasError) {
-        //           snackBarWidget(
-        //             message: '保存できませんでした。 もう一度試してください。',
-        //             backgroundColor: Colors.red,
-        //             prefixIcon: const Icon(Icons.error, color: Colors.white),
-        //           );
-        //         }
+                if (value.hasError) {
+                  snackBarWidget(
+                    message: '保存できませんでした。 もう一度試してください。',
+                    backgroundColor: Colors.red,
+                    prefixIcon: const Icon(Icons.error, color: Colors.white),
+                  );
+                }
 
-        //         if (value.hasData) {
-        //           Navigator.pop(context);
-        //           snackBarWidget(
-        //             message: '正常に保存されました',
-        //             prefixIcon:
-        //                 const Icon(Icons.check_circle, color: Colors.white),
-        //           );
-        //         }
-        //       },
-        //       child: ValueListenableBuilder(
-        //           valueListenable: context.read<HealthModel>().submitData,
-        //           builder: (context, value, _) {
-        //             return ElevatedButton(
-        //               onPressed: value.loading
-        //                   ? null
-        //                   : () {
-        //                       context
-        //                           .read<HealthModel>()
-        //                           .submit(formGroup);
-        //                     },
-        //               child: WithLoadingButton(
-        //                   isLoading: value.loading, child: Text('保存する')),
-        //             );
-        //           }),
-        //     ),
-        //   ],
-        // )
+                if (value.hasData) {
+                  Navigator.pop(context);
+                  snackBarWidget(
+                    message: '正常に保存されました',
+                    prefixIcon:
+                        const Icon(Icons.check_circle, color: Colors.white),
+                  );
+                }
+              },
+              child: ValueListenableBuilder(
+                  valueListenable: context.read<ContractTemplateModel>().submitFormContractData,
+                  builder: (context, value, _) {
+                    return ElevatedButton(
+                      onPressed: value.loading
+                          ? null
+                          : () {
+                              context
+                                  .read<ContractTemplateModel>()
+                                  .postContractTemplate(formGroup);
+                            },
+                      child: WithLoadingButton(
+                          isLoading: value.loading, child: Text('保存する')),
+                    );
+                  }),
+            ),
+          ],
+        )
       ],
     );
   }

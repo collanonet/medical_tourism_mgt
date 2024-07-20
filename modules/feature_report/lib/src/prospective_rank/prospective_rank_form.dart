@@ -1,9 +1,10 @@
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup ProspectivePankForm() {
+FormGroup prospectivePankForm() {
   return FormGroup({
     'data': FormArray([
       FormGroup({
+         'id': FormControl<String>(),
         'prospective_rank': FormControl<String>(),
       }),
     ]),

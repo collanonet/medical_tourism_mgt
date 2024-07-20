@@ -35,4 +35,10 @@ abstract class ReportRepository {
   Future<EstimatemasterReportResponse> postEstimatemasterReport(
     EstimatemasterReportRequest estimatemasterReportRequest,
   );
+
+  Future<List<ProspectiveRankResponse>> getProspectiveRank();
+
+  Future<ProspectiveRankResponse> postProspectiveRank(
+    ProspectiveRankRequest prospectiveRankRequest,
+  );
 }
