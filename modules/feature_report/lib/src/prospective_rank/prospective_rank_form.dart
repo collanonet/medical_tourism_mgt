@@ -6,6 +6,7 @@ FormGroup prospectivePankForm() {
       FormGroup({
          'id': FormControl<String>(),
         'prospective_rank': FormControl<String>(),
+        'filterText' : FormControl<String>(),
       }),
     ]),
   });

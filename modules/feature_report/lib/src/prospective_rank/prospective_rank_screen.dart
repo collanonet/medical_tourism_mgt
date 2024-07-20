@@ -15,7 +15,6 @@ class ProspectivePankScreen extends StatefulWidget {
 class _ProspectivePankScreenState extends State<ProspectivePankScreen> {
   @override
   Widget build(BuildContext context) {
-    String filterText = '';
     return Column(
       children: [
         Container(
@@ -82,60 +81,74 @@ class _ProspectivePankScreenState extends State<ProspectivePankScreen> {
                             ),
                           ),
                           const SizedBox(width: 20),
-                          SegmentedButton<String>(
-                            showSelectedIcon: false,
-                            style: ButtonStyle(
-                              enableFeedback: true,
-                              shape: MaterialStatePropertyAll(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4),
-                                    side: BorderSide(
-                                        color: context.appTheme.primaryColor)),
-                              ),
-                              foregroundColor: MaterialStatePropertyAll(
-                                  context.appTheme.primaryColor),
-                              side: MaterialStatePropertyAll(
-                                BorderSide(
-                                    color: context.appTheme.primaryColor),
-                              ),
-                            ),
-                            segments: <ButtonSegment<String>>[
-                              ButtonSegment<String>(
-                                value: '受注',
-                                label: Text(
-                                  '受注のみ',
-                                  style: TextStyle(
-                                    color: filterText == '受注'
-                                        ? Colors.white
-                                        : context.appTheme.primaryColor,
-                                    fontFamily: 'NotoSansJP',
-                                    package: 'core_ui',
+                          ReactiveValueListenableBuilder(
+                              formControlName: 'filterText',
+                              builder: (context, controller, _) {
+                                return SegmentedButton<String>(
+                                  showSelectedIcon: false,
+                                  style: ButtonStyle(
+                                    enableFeedback: true,
+                                    shape: MaterialStatePropertyAll(
+                                      RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(4),
+                                          side: BorderSide(
+                                              color: context
+                                                  .appTheme.primaryColor)),
+                                    ),
+                                    foregroundColor: MaterialStatePropertyAll(
+                                        context.appTheme.primaryColor),
+                                    side: MaterialStatePropertyAll(
+                                      BorderSide(
+                                          color: context.appTheme.primaryColor),
+                                    ),
                                   ),
-                                ),
-                                tooltip: context.l10n.labelOrdersOnly,
-                              ),
-                              ButtonSegment<String>(
-                                value: 'CXL',
-                                label: Text(
-                                  'CXL',
-                                  style: TextStyle(
-                                    color: filterText == 'CXL'
-                                        ? Colors.white
-                                        : context.appTheme.primaryColor,
-                                    fontFamily: 'NotoSansJP',
-                                    package: 'core_ui',
-                                  ),
-                                ),
-                                tooltip: context.l10n.labelCXL,
-                              ),
-                            ],
-                            selected: <String>{filterText},
-                            onSelectionChanged: (Set<String> newSelection) {
-                              setState(() {
-                                filterText = newSelection.first;
-                              });
-                            },
-                          ),
+                                  segments: <ButtonSegment<String>>[
+                                    ButtonSegment<String>(
+                                      value: '受注のみ',
+                                      label: Text(
+                                        '受注のみ',
+                                        style: TextStyle(
+                                          color: controller.value == '受注のみ'
+                                              ? Colors.white
+                                              : context.appTheme.primaryColor,
+                                          fontFamily: 'NotoSansJP',
+                                          package: 'core_ui',
+                                        ),
+                                      ),
+                                      tooltip: context.l10n.labelOrdersOnly,
+                                    ),
+                                    ButtonSegment<String>(
+                                      value: 'all',
+                                      label: Text(
+                                        context.l10n.labelAll,
+                                        style: TextStyle(
+                                          color: controller.value == 'all'
+                                              ? Colors.white
+                                              : context.appTheme.primaryColor,
+                                          fontFamily: 'NotoSansJP',
+                                          package: 'core_ui',
+                                        ),
+                                      ),
+                                      tooltip: context.l10n.labelAll,
+                                    ),
+                                  ],
+                                  selected: <String>{
+                                    controller.value.toString()
+                                  },
+                                  onSelectionChanged:
+                                      (Set<String> newSelection) {
+                                    // in case we have listener on field controller
+                                    controller.value = newSelection.first;
+
+                                    // in case we don't have listerner on field controller
+                                    // and we can listener from formGroup that register
+
+                                    // formGroup.control('filterText').value =
+                                    //     newSelection.first;
+                                  },
+                                );
+                              }),
                         ],
                       ),
                     );
@@ -154,6 +167,7 @@ class _ProspectivePankScreenState extends State<ProspectivePankScreen> {
                           formArray.add(
                             FormGroup({
                               'prospective_rank': FormControl<String>(),
+                              'filterText': FormControl<String>(),
                             }),
                           );
                         },
