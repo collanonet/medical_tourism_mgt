@@ -3,7 +3,7 @@ import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:data_table_2/data_table_2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -155,116 +155,127 @@ class MaterialSectionState extends State<MaterialSection> {
             ),
           ),
         ),
-        const Row(
-          children: [
-            Expanded(flex: 2, child: Text('パンフレット名')),
-            Expanded(child: Text('作成者')),
-            Expanded(child: Text('発行日')),
-            Expanded(child: Text('共有')),
-          ],
-        ),
-        ValueListenableBuilder(
-            valueListenable: context.read<MaterialsModel>().materialsData,
-            builder: (context, value, _) {
-              return Expanded(
-                child: ListView.separated(
-                  itemCount: value.data?.length ?? 0,
-                  itemBuilder: (context, index) {
-                    return Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: Text(
-                                value.requireData[index].brochureName ?? ''),
-                          ),
-                          Expanded(
-                            child: Text(value.requireData[index].author ?? ''),
-                          ),
-                          Expanded(
-                            child: Text(
-                                value.requireData[index].dateOfIssue == null
+        Expanded(
+          child: Column(
+            children: [
+              const Row(
+                children: [
+                  Expanded(flex: 2, child: Text('パンフレット名')),
+                  Expanded(child: Text('作成者')),
+                  Expanded(child: Text('発行日')),
+                  Expanded(child: Text('共有')),
+                ],
+              ),
+              ValueListenableBuilder(
+                valueListenable: context.read<MaterialsModel>().materialsData,
+                builder: (context, value, _) {
+                  return Expanded(
+                    child: ListView.separated(
+                      itemCount: value.data?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Row(
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Text(
+                                    value.requireData[index].brochureName ??
+                                        ''),
+                              ),
+                              Expanded(
+                                child:
+                                    Text(value.requireData[index].author ?? ''),
+                              ),
+                              Expanded(
+                                child: Text(value
+                                            .requireData[index].dateOfIssue ==
+                                        null
                                     ? ''
                                     : Dates.formShortDate(
                                         value.requireData[index].dateOfIssue)),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: value.requireData[index].share == null
+                                    ? SizedBox()
+                                    : Icon(Icons.person),
+                              ),
+                            ],
                           ),
-                          Expanded(
-                            child: value.requireData[index].share == null
-                                ? SizedBox()
-                                : Icon(Icons.person),
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  separatorBuilder: (BuildContext context, int index) {
-                    return const Divider(
-                      color: Colors.grey,
-                    );
-                  },
-                ),
-              );
-            }),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            OutlinedButton(
-                style: OutlinedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: context.appTheme.spacing.marginSmall,
-                      vertical: context.appTheme.spacing.buttonVertical,
+                        );
+                      },
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const Divider(
+                          color: Colors.grey,
+                        );
+                      },
                     ),
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20))),
-                onPressed: () {},
-                child: Text(
-                  "削除する",
-                  style: context.textTheme.labelLarge
-                      ?.copyWith(color: context.appTheme.primaryColor),
-                )),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text(
-                '共有する',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
+                  );
+                },
               ),
-            ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text(
-                '閲覧する',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text(
-                '印刷する',
-                style: TextStyle(
-                  color: Colors.white,
-                ),
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );
   }
 
+//  Row(
+//           mainAxisAlignment: MainAxisAlignment.end,
+//           children: [
+//             OutlinedButton(
+//                 style: OutlinedButton.styleFrom(
+//                     padding: EdgeInsets.symmetric(
+//                       horizontal: context.appTheme.spacing.marginSmall,
+//                       vertical: context.appTheme.spacing.buttonVertical,
+//                     ),
+//                     shape: RoundedRectangleBorder(
+//                         borderRadius: BorderRadius.circular(20))),
+//                 onPressed: () {},
+//                 child: Text(
+//                   "削除する",
+//                   style: context.textTheme.labelLarge
+//                       ?.copyWith(color: context.appTheme.primaryColor),
+//                 )),
+//             SizedBox(
+//               width: context.appTheme.spacing.marginMedium,
+//             ),
+//             ElevatedButton(
+//               onPressed: () {},
+//               child: const Text(
+//                 '共有する',
+//                 style: TextStyle(
+//                   color: Colors.white,
+//                 ),
+//               ),
+//             ),
+//             SizedBox(
+//               width: context.appTheme.spacing.marginMedium,
+//             ),
+//             ElevatedButton(
+//               onPressed: () {},
+//               child: const Text(
+//                 '閲覧する',
+//                 style: TextStyle(
+//                   color: Colors.white,
+//                 ),
+//               ),
+//             ),
+//             SizedBox(
+//               width: context.appTheme.spacing.marginMedium,
+//             ),
+//             ElevatedButton(
+//               onPressed: () {},
+//               child: const Text(
+//                 '印刷する',
+//                 style: TextStyle(
+//                   color: Colors.white,
+//                 ),
+//               ),
+//             ),
+//           ],
+//         ),
   void showCreateWithFileDialog(BuildContext context, FileSelect file) {
     showDialog(
       context: context,

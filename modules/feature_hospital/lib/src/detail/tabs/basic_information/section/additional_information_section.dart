@@ -1,4 +1,3 @@
-
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
@@ -45,117 +44,115 @@ class _AdditionalInformationSectionState
                     style: context.textTheme.bodyLarge,
                   ),
                   RowSeparated(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      separatorBuilder: (context, index) => SizedBox(
-                            width: context.appTheme.spacing.formSpacing,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    separatorBuilder: (context, index) => SizedBox(
+                      width: context.appTheme.spacing.formSpacing,
+                    ),
+                    children: [
+                      ColumnSeparated(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          separatorBuilder: (context, index) => SizedBox(
+                                height:
+                                    context.appTheme.spacing.marginExtraSmall,
+                              ),
+                          children: [
+                            Text(
+                              '業務委託契約書',
+                              style: context.textTheme.bodySmall,
+                            ),
+                            RowSeparated(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                separatorBuilder: (context, index) => SizedBox(
+                                      width:
+                                          context.appTheme.spacing.formSpacing,
+                                    ),
+                                children: [
+                                  IntrinsicWidth(
+                                    child: ReactiveRadioListTile(
+                                      formControlName: 'outsourcingContract',
+                                      value: '締結済',
+                                      onChanged: (value) {},
+                                      title: Text(
+                                        "締結済",
+                                        style: context.textTheme.bodySmall,
+                                      ),
+                                    ),
+                                  ),
+                                  IntrinsicWidth(
+                                    child: ReactiveRadioListTile(
+                                      formControlName: 'outsourcingContract',
+                                      value: '未締結',
+                                      onChanged: (value) {},
+                                      title: Text(
+                                        "未締結",
+                                        style: context.textTheme.bodySmall,
+                                      ),
+                                    ),
+                                  ),
+                                ])
+                          ]),
+                      ColumnSeparated(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        separatorBuilder: (context, index) => SizedBox(
+                          height: context.appTheme.spacing.formSpacing,
+                        ),
+                        children: [
+                          Text(
+                            '契約書',
+                            style: context.textTheme.bodySmall,
                           ),
-                      children: [
-                        ColumnSeparated(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            separatorBuilder: (context, index) => SizedBox(
-                                  height:
-                                      context.appTheme.spacing.marginExtraSmall,
-                                ),
-                            children: [
-                              Text(
-                                '業務委託契約書',
-                                style: context.textTheme.bodySmall,
-                              ),
-                              RowSeparated(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  separatorBuilder: (context, index) =>
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.formSpacing,
-                                      ),
-                                  children: [
-                                    IntrinsicWidth(
-                                      child: ReactiveRadioListTile(
-                                        formControlName: 'outsourcingContract',
-                                        value: '締結済',
-                                        onChanged: (value) {},
-                                        title: Text(
-                                          "締結済",
-                                          style: context.textTheme.bodySmall,
+                          RowSeparated(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              separatorBuilder: (context, index) => SizedBox(
+                                    width: context.appTheme.spacing.formSpacing,
+                                  ),
+                              children: [
+                                RowSeparated(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(
+                                          width: context.appTheme.spacing
+                                              .marginExtraSmall,
                                         ),
-                                      ),
-                                    ),
-                                    IntrinsicWidth(
-                                      child: ReactiveRadioListTile(
-                                        formControlName: 'outsourcingContract',
-                                        value: '未締結',
-                                        onChanged: (value) {},
-                                        title: Text(
-                                          "未締結",
-                                          style: context.textTheme.bodySmall,
-                                        ),
-                                      ),
-                                    ),
-                                  ])
-                            ]),
-                        ColumnSeparated(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            separatorBuilder: (context, index) => SizedBox(
-                                  height: context.appTheme.spacing.formSpacing,
-                                ),
-                            children: [
-                              Text(
-                                '契約書',
-                                style: context.textTheme.bodySmall,
-                              ),
-                              RowSeparated(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  separatorBuilder: (context, index) =>
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.formSpacing,
-                                      ),
-                                  children: [
-                                    RowSeparated(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        separatorBuilder: (context, index) =>
-                                            SizedBox(
-                                              width: context.appTheme.spacing
-                                                  .marginExtraSmall,
+                                    children: [
+                                      IconButton(
+                                          onPressed: () {
+                                            filePicker().then((value) =>
+                                                setState(
+                                                    () => fileSelect = value));
+                                          },
+                                          icon: Icon(
+                                            CupertinoIcons.paperclip,
+                                            color:
+                                                context.appTheme.primaryColor,
+                                          )),
+                                      fileSelect != null
+                                          ? Text(fileSelect!.filename)
+                                          : Text(
+                                              'File Input .....',
+                                              style:
+                                                  context.textTheme.bodySmall,
                                             ),
-                                        children: [
-                                          IconButton(
-                                              onPressed: () {
-                                                filePicker().then((value) =>
-                                                    setState(() =>
-                                                        fileSelect = value));
-                                              },
-                                              icon: Icon(
-                                                CupertinoIcons.paperclip,
-                                                color: context
-                                                    .appTheme.primaryColor,
-                                              )),
-                                          fileSelect != null
-                                              ? Text(fileSelect!.filename)
-                                              : Text(
-                                                  'File Input .....',
-                                                  style: context
-                                                      .textTheme.bodySmall,
-                                                ),
-                                        ]),
-                                    Chip(
-                                      label: const Text('変更する'),
-                                      labelStyle: TextStyle(
-                                        color: context
-                                            .appTheme.secondaryBackgroundColor,
-                                      ),
-                                      backgroundColor:
-                                          context.appTheme.primaryColor,
-                                    ),
-                                  ])
-                            ])
-                      ]),
+                                    ]),
+                                Chip(
+                                  label: const Text('変更する'),
+                                  labelStyle: TextStyle(
+                                    color: context
+                                        .appTheme.secondaryBackgroundColor,
+                                  ),
+                                  backgroundColor:
+                                      context.appTheme.primaryColor,
+                                ),
+                              ])
+                        ],
+                      )
+                    ],
+                  ),
                   RowSeparated(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisAlignment: MainAxisAlignment.start,

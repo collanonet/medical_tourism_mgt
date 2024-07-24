@@ -6,10 +6,6 @@ part 'basic_information_hospital_request.g.dart';
 class BasicInformationHospitalRequest {
   @JsonKey(name: '_id')
   String? id;
-  DateTime? dateOfUpdate;
-  String? updater;
-  String? memo;
-  String? updates;
   String hospitalNameChinese;
   String hospitalNameKatakana;
   String? zipCode;
@@ -69,10 +65,6 @@ class BasicInformationHospitalRequest {
 
   BasicInformationHospitalRequest({
     this.id,
-     this.dateOfUpdate,
-     this.updater,
-     this.memo,
-     this.updates,
     required this.hospitalNameChinese,
     required this.hospitalNameKatakana,
      this.zipCode,

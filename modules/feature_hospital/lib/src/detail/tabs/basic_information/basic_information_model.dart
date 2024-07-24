@@ -70,6 +70,7 @@ class BasicInformationModel {
           await hospitalRepository.getHowToRequestHospital(hospitalId);
       howToMakeRequestHospitalData.value = AsyncData(data: result);
       insertDataHowToMakeRequest(formGroup, result);
+      logger.d('howToMakeRequest : ${result.toJson()}');
     } catch (e) {
       logger.d(e);
       howToMakeRequestHospitalData.value = AsyncData(error: e);

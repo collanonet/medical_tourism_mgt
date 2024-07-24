@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_hospital/data_hospital.dart';
@@ -28,7 +27,10 @@ class MaterialsModel {
       materialsData.value = const AsyncData(loading: true);
       final result = await hospitalRepository.getMaterialHospital(hospitalId);
       materialsData.value = AsyncData(data: result);
-      final resultMenu = await hospitalRepository.getMemoMaterialHospital(hospitalId);
+
+      
+      final resultMenu =
+          await hospitalRepository.getMemoMaterialHospital(hospitalId);
       formGroup.control('memo').value = resultMenu.memo;
       formGroup.control('hospitalRecord').value = hospitalId;
       memoMaterialsData.value = AsyncData(data: resultMenu);
@@ -79,17 +81,18 @@ class MaterialsModel {
 
       final response = await hospitalRepository.postMaterialHospital(
         MaterialHospitalRequest(
-          hospitalRecord: formGroup.control('hospitalRecord').value,
           file: file,
           brochureName: formGroup.control('brochureName').value,
           author: formGroup.control('author').value,
           dateOfIssue: formGroup.control('dateOfIssue').value,
           share: formGroup.control('share').value,
+          hospitalRecord: formGroup.control('hospitalRecord').value,
         ),
       );
       materialsData.value =
           AsyncData(data: materialsData.value.data!..add(response));
       submitMaterialHospital.value = AsyncData(data: response);
+      logger.d(response.toJson());
     } catch (e) {
       logger.d(e);
       materialsData.value = AsyncData(error: e);

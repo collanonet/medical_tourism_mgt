@@ -214,4 +214,29 @@ class HospitalRepositoryIml extends HospitalRepository {
   Future<void> deleteHealth({required String id}) {
     return remote.deleteHealth(id: id);
   }
+  
+  @override
+  Future<NewRegistrationHospitalResponse> postNewRegistrationHospital(NewRegistrationHospitalRequest newRegistrationHospitalRequest) {
+    return remote.postNewRegistrationHospital(newRegistrationHospitalRequest);
+  }
+  
+  @override
+  Future<List<TreatmentMenuResponse>> getTreatmentMenu({required String id}) {
+    return remote.getTreatmentMenu(id: id);
+  }
+  
+  @override
+  Future<List<TreatmentTeleMenuResponse>> getTreatmentTeleMenu({required String id}) {
+    return remote.getTreatmentTeleMenu(id: id);
+  }
+  
+  @override
+  Future<TreatmentMenuResponse> postTreatmentMenu(TreatmentMenuRequest treatmentMenuRequest) {
+    return remote.postTreatmentMenu(treatmentMenuRequest);
+  }
+  
+  @override
+  Future<TreatmentTeleMenuResponse> postTreatmentTeleMenu(TreatmentTeleMenuRequest treatmentTeleMenuRequest) {
+    return remote.postTreatmentTeleMenu(treatmentTeleMenuRequest);
+  }
 }

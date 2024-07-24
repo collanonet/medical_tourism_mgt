@@ -648,7 +648,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                                 ),
                                               ),
                                               IntrinsicWidth(
-                                                stepWidth: 300,
+                                                stepWidth: 200,
                                                 child: ReactiveTextField(
                                                   formControlName: 'languages',
                                                   decoration:

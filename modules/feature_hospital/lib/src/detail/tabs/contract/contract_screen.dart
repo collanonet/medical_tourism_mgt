@@ -1,10 +1,10 @@
-import 'package:feature_hospital/src/detail/tabs/contract/contract_section.dart';
+
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import 'contract_form.dart';
+import 'contract_section.dart';
 import 'contrant_model.dart';
 
 class ContractScreen extends StatefulWidget {

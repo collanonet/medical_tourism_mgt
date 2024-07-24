@@ -10,12 +10,6 @@ BasicInformationHospitalResponse _$BasicInformationHospitalResponseFromJson(
         Map<String, dynamic> json) =>
     BasicInformationHospitalResponse(
       id: json['_id'] as String,
-      dateOfUpdate: json['dateOfUpdate'] == null
-          ? null
-          : DateTime.parse(json['dateOfUpdate'] as String),
-      updater: json['updater'] as String?,
-      memo: json['memo'] as String?,
-      updates: json['updates'] as String?,
       hospitalNameChinese: json['hospitalNameChinese'] as String?,
       hospitalNameKatakana: json['hospitalNameKatakana'] as String?,
       zipCode: json['zipCode'] as String?,
@@ -81,10 +75,6 @@ Map<String, dynamic> _$BasicInformationHospitalResponseToJson(
         BasicInformationHospitalResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
-      'dateOfUpdate': instance.dateOfUpdate?.toIso8601String(),
-      'updater': instance.updater,
-      'memo': instance.memo,
-      'updates': instance.updates,
       'hospitalNameChinese': instance.hospitalNameChinese,
       'hospitalNameKatakana': instance.hospitalNameKatakana,
       'zipCode': instance.zipCode,

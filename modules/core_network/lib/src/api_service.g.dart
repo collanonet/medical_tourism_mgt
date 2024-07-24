@@ -4960,7 +4960,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/new-registration-hospital/${hospitalId}',
+              '/qa/by-hospital/${hospitalId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4989,7 +4989,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/new-registration-hospital',
+              '/qa',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -6503,6 +6503,126 @@ class _ApiService implements ApiService {
               baseUrl,
             ))));
     final value = ProspectiveRankResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<TreatmentMenuResponse>> getTreatmentMenu(
+      {required String id}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<TreatmentMenuResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/treatment-menu/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) =>
+            TreatmentMenuResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<TreatmentMenuResponse> postTreatmentMenu(
+      TreatmentMenuRequest treatmentMenuRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(treatmentMenuRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<TreatmentMenuResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/treatment-menu',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = TreatmentMenuResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<TreatmentTeleMenuResponse>> getTreatmentTeleMenu(
+      {required String id}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<TreatmentTeleMenuResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/hospital-tele-medicine-menu/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) =>
+            TreatmentTeleMenuResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<TreatmentTeleMenuResponse> postTreatmentTeleMenu(
+      TreatmentTeleMenuRequest treatmentTeleMenuRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(treatmentTeleMenuRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<TreatmentTeleMenuResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/hospital-tele-medicine-menu',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = TreatmentTeleMenuResponse.fromJson(_result.data!);
     return value;
   }
 

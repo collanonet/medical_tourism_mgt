@@ -4,7 +4,6 @@ import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -88,6 +87,15 @@ class Popup extends StatelessWidget {
                 ],
               ),
             ),
+            Expanded(
+              child: SizedBox.shrink(),
+            ),
+            SizedBox(
+              width: context.appTheme.spacing.marginMedium,
+            ),
+            Expanded(
+              child: SizedBox.shrink(),
+            )
           ],
         ),
         SizedBox(
@@ -228,7 +236,9 @@ class Popup extends StatelessWidget {
                                   .postFile(formGroup);
                             },
                       child: WithLoadingButton(
-                          isLoading: value.loading, child: Text('保存する')),
+                        isLoading: value.loading,
+                        child: Text('保存する'),
+                      ),
                     );
                   }),
             ),

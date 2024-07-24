@@ -9,7 +9,7 @@ part of 'new_registration_hospital_request.dart';
 NewRegistrationHospitalRequest _$NewRegistrationHospitalRequestFromJson(
         Map<String, dynamic> json) =>
     NewRegistrationHospitalRequest(
-      id: json['_id'] as String?,
+      hospitalId: json['hospitalId'] as String,
       updateDate: json['updateDate'] == null
           ? null
           : DateTime.parse(json['updateDate'] as String),
@@ -24,7 +24,7 @@ NewRegistrationHospitalRequest _$NewRegistrationHospitalRequestFromJson(
 Map<String, dynamic> _$NewRegistrationHospitalRequestToJson(
         NewRegistrationHospitalRequest instance) =>
     <String, dynamic>{
-      '_id': instance.id,
+      'hospitalId': instance.hospitalId,
       'updateDate': instance.updateDate?.toIso8601String(),
       'updater': instance.updater,
       'classification': instance.classification,

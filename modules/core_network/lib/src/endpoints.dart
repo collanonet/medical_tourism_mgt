@@ -189,7 +189,7 @@ class Endpoints {
 
   static const GET_HOW_TO_REQUEST_HOSPITAL = '/how-to-request-hospital';
 
-  static const GET_NEW_REGISTRATION_HOSPITAL = '/new-registration-hospital';
+  static const GET_NEW_REGISTRATION_HOSPITAL =  '/qa';//'/new-registration-hospital';
 
   static const GET_LIST_SECTION_HOSPITAL = '/section-hospital';
 
@@ -201,6 +201,7 @@ class Endpoints {
   static const GET_MEDICAL_INSTITUTION_HOSPITAL = '/medical-institutions';
 
   static const GET_HOSPITAL = '/hospital';
+ // static const QA = '/qa';
 
   //G2
   static const SALE_DEARD_INFO = '/sale-info';
@@ -213,6 +214,8 @@ class Endpoints {
   static const DOCUMENT = '/hospital-documents';
   static const HEALTH_CHECKUP = '/hospital-health-checkups';
   static const CONTRACT = '/hospital-contacts';
+  static const TREATMENT_MENU = '/treatment-menu';
+  static const TREATMENT_TELE_MENU = '/hospital-tele-medicine-menu';
 
   // Agent
   static const CONTRANT_AGENT = '/agent-contracts';

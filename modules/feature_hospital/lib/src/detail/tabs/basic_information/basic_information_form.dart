@@ -4,7 +4,7 @@ FormGroup basicInformationForm() {
   return FormGroup({
     'howToMakeRequest': FormGroup({
       '_id': FormControl<String?>(),
-      'hospital': FormControl<String?>(),
+      'hospital': FormControl<String>(),
       'dateOfUpdate': FormControl<DateTime>(
         validators: [Validators.required],
       ),

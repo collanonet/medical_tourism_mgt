@@ -187,10 +187,10 @@ class HospitalScreen extends StatelessWidget {
                                       Expanded(
                                         child: Text('--'), // ○
                                       ),
-                                      Expanded(
-                                        child: Text(
-                                            '${value.requireData[index].memo ?? ''}'),
-                                      ),
+                                      // Expanded(
+                                      //   child: Text(
+                                      //       '${value.requireData[index].memo ?? ''}'),
+                                      // ),
                                     ],
                                   ),
                                 ),

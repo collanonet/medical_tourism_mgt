@@ -90,7 +90,9 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                           MaterialsScreen(
                             id: value.requireData.id,
                           ),
-                          const QAndAScreen(),
+                           QAndAScreen(
+                            hospitalId: value.requireData.id,
+                          ),
                           FacilityPhotoScreen(
                             id: value.requireData.id,
                           ),
@@ -98,7 +100,9 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                           HealthCheckupScreen(
                             id: value.requireData.id,
                           ),
-                          const TreatmentScreen(),
+                          TreatmentScreen(
+                            hospitalId: value.requireData.id,
+                          ),
                           DocumentScreen(
                             id: value.requireData.id,
                           ),

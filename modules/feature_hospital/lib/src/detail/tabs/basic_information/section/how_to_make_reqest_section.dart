@@ -59,7 +59,7 @@ class _HowtoMakeReqestSectionState extends State<HowtoMakeReqestSection> {
                           );
                         },
                         children: [
-                          IntrinsicWidth(
+                          const IntrinsicWidth(
                             stepWidth: 300,
                             child: ReactiveDropdownFormField(
                               formControlName: 'updater',

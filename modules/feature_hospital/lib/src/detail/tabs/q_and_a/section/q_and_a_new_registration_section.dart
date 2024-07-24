@@ -1,9 +1,13 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/async.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+import '../g_and_a_model.dart';
 
 class QAndANewRegistrationSection extends StatefulWidget {
   const QAndANewRegistrationSection({super.key});
@@ -197,38 +201,82 @@ class _QAndANewRegistrationSectionState
                       )
                     ],
                   ),
-                  RowSeparated(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      separatorBuilder: (context, index) => SizedBox(
+                  ValueListenableListener(
+                    valueListenable:
+                        context.read<QAndAModel>().newRegistrationHospitalData,
+                    onListen: () {
+                      final value = context
+                          .read<QAndAModel>()
+                          .newRegistrationHospitalData
+                          .value;
+
+                      if (value.hasError) {
+                        snackBarWidget(
+                          message: '保存できませんでした。 もう一度試してください。',
+                          backgroundColor: Colors.red,
+                          prefixIcon:
+                              const Icon(Icons.error, color: Colors.white),
+                        );
+                      }
+
+                      if (value.hasData) {
+                        Navigator.pop(context);
+                        snackBarWidget(
+                          message: '正常に保存されました',
+                          prefixIcon: const Icon(Icons.check_circle,
+                              color: Colors.white),
+                        );
+                      }
+                    },
+                    child: ValueListenableBuilder(
+                      valueListenable: context
+                          .read<QAndAModel>()
+                          .newRegistrationHospitalData,
+                      builder: (context, value, _) {
+                        return RowSeparated(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          separatorBuilder: (context, index) => SizedBox(
                             width: context.appTheme.spacing.formSpacing,
                           ),
-                      children: [
-                        OutlinedButton(
-                            style: OutlinedButton.styleFrom(
-                                padding: EdgeInsets.symmetric(
-                                  horizontal:
-                                      context.appTheme.spacing.marginSmall,
-                                  vertical:
-                                      context.appTheme.spacing.buttonVertical,
+                          children: [
+                            OutlinedButton(
+                                style: OutlinedButton.styleFrom(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal:
+                                          context.appTheme.spacing.marginSmall,
+                                      vertical: context
+                                          .appTheme.spacing.buttonVertical,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(20))),
+                                onPressed: () {},
+                                child: Text(
+                                  "キャンセル",
+                                  style: context.textTheme.labelLarge?.copyWith(
+                                      color: context.appTheme.primaryColor),
+                                )),
+                            ElevatedButton(
+                              onPressed: value.loading
+                                  ? null
+                                  : () {
+                                      context
+                                          .read<QAndAModel>()
+                                          .submitNewRegistrationHospital(
+                                              formGroup);
+                                    },
+                              child: const Text(
+                                '保存する',
+                                style: TextStyle(
+                                  color: Colors.white,
                                 ),
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(20))),
-                            onPressed: () {},
-                            child: Text(
-                              "キャンセル",
-                              style: context.textTheme.labelLarge?.copyWith(
-                                  color: context.appTheme.primaryColor),
-                            )),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: const Text(
-                            '保存する',
-                            style: TextStyle(
-                              color: Colors.white,
+                              ),
                             ),
-                          ),
-                        ),
-                      ])
+                          ],
+                        );
+                      },
+                    ),
+                  )
                 ]),
           ),
         ],

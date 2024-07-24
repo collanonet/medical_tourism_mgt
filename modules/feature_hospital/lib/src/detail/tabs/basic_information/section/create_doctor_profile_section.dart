@@ -1,3 +1,4 @@
+import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
@@ -18,6 +19,7 @@ class AddDoctorProfile extends StatefulWidget {
 
 class AddeDoctorProfileState extends State<AddDoctorProfile> {
   Uint8List imageBytes = Uint8List(8);
+  FileSelect? fileSelect;
   @override
   Widget build(BuildContext context) {
     final formArray = (ReactiveForm.of(context) as FormGroup)
@@ -91,6 +93,12 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                 width: 80,
                                                 height: 80,
                                                 decoration: BoxDecoration(
+                                                    image: DecorationImage(
+                                                        image: NetworkImage(
+                                                            value.requireData
+                                                                .map((e) =>
+                                                                    e.profile)
+                                                                .toString())),
                                                     borderRadius:
                                                         const BorderRadius.all(
                                                             Radius.circular(6)),
@@ -638,6 +646,91 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                 ),
                                               ),
                                             ),
+                                            ColumnSeparated(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.start,
+                                              separatorBuilder:
+                                                  (context, index) => SizedBox(
+                                                height: context.appTheme.spacing
+                                                    .formSpacing,
+                                              ),
+                                              children: [
+                                                Text(
+                                                  '厚生労働省指定オンライン診療研修修了証',
+                                                  style: context
+                                                      .textTheme.bodySmall,
+                                                ),
+                                                RowSeparated(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment.start,
+                                                    separatorBuilder:
+                                                        (context, index) =>
+                                                            SizedBox(
+                                                              width: context
+                                                                  .appTheme
+                                                                  .spacing
+                                                                  .formSpacing,
+                                                            ),
+                                                    children: [
+                                                      RowSeparated(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          separatorBuilder:
+                                                              (context,
+                                                                      index) =>
+                                                                  SizedBox(
+                                                                    width: context
+                                                                        .appTheme
+                                                                        .spacing
+                                                                        .marginExtraSmall,
+                                                                  ),
+                                                          children: [
+                                                            IconButton(
+                                                                onPressed: () {
+                                                                  filePicker().then((value) =>
+                                                                      setState(() =>
+                                                                          fileSelect =
+                                                                              value));
+                                                                },
+                                                                icon: Icon(
+                                                                  CupertinoIcons
+                                                                      .paperclip,
+                                                                  color: context
+                                                                      .appTheme
+                                                                      .primaryColor,
+                                                                )),
+                                                            fileSelect != null
+                                                                ? Text(fileSelect!
+                                                                    .filename)
+                                                                : Text(
+                                                                    'File Input .....',
+                                                                    style: context
+                                                                        .textTheme
+                                                                        .bodySmall,
+                                                                  ),
+                                                          ]),
+                                                      Chip(
+                                                        label:
+                                                            const Text('変更する'),
+                                                        labelStyle: TextStyle(
+                                                          color: context
+                                                              .appTheme
+                                                              .secondaryBackgroundColor,
+                                                        ),
+                                                        backgroundColor: context
+                                                            .appTheme
+                                                            .primaryColor,
+                                                      ),
+                                                    ])
+                                              ],
+                                            )
                                           ]),
                                       RowSeparated(
                                         crossAxisAlignment:

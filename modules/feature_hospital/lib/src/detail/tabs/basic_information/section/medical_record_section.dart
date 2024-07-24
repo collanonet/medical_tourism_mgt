@@ -197,6 +197,9 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                           IntrinsicWidth(
                                             stepWidth: 300,
                                             child: ReactiveTextField(
+                                              inputFormatters: [
+                                                CustomPhoneFormatter()
+                                              ],
                                               formControlName:
                                                   'telephoneNumber',
                                               decoration: const InputDecoration(

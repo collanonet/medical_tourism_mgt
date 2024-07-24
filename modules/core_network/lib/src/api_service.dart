@@ -950,7 +950,7 @@ abstract class ApiService {
     @Body() HowToRequestHospitalRequest supportLanguageHospitalRequest,
   );
 
-  @GET('${Endpoints.GET_NEW_REGISTRATION_HOSPITAL}/{hospitalId}')
+  @GET('${Endpoints.GET_NEW_REGISTRATION_HOSPITAL}/by-hospital/{hospitalId}')
   Future<NewRegistrationHospitalResponse> getNewRegistrationHospital(
     @Path('hospitalId') String hospitalId,
   );
@@ -1173,11 +1173,14 @@ abstract class ApiService {
   );
 
   @GET(Endpoints.CONTRACT_TEMPLATE_DETAIL_BASIC_INFO)
-  Future<ContractTemplateBasicInformationResponse> getContractTemplateBasicInformation();
+  Future<ContractTemplateBasicInformationResponse>
+      getContractTemplateBasicInformation();
 
   @POST(Endpoints.CONTRACT_TEMPLATE_DETAIL_BASIC_INFO)
-  Future<ContractTemplateBasicInformationResponse> postContractTemplateBasicInformation(
-    ContractTemplateBasicInformationRequest contractTemplateBasicInformationRequest,
+  Future<ContractTemplateBasicInformationResponse>
+      postContractTemplateBasicInformation(
+    ContractTemplateBasicInformationRequest
+        contractTemplateBasicInformationRequest,
   );
 
   @GET(Endpoints.ESTIMATE_MASTER_REPORT)
@@ -1194,6 +1197,26 @@ abstract class ApiService {
   @POST(Endpoints.PROSPECTIVE_RANK)
   Future<ProspectiveRankResponse> postProspectiveRank(
     @Body() ProspectiveRankRequest prospectiveRankRequest,
+  );
+
+  @GET('${Endpoints.TREATMENT_MENU}/{id}')
+  Future<List<TreatmentMenuResponse>> getTreatmentMenu({
+    @Path('id') required String id,
+  });
+
+  @POST(Endpoints.TREATMENT_MENU)
+  Future<TreatmentMenuResponse> postTreatmentMenu(
+    @Body() TreatmentMenuRequest treatmentMenuRequest,
+  );
+
+  @GET('${Endpoints.TREATMENT_TELE_MENU}/{id}')
+  Future<List<TreatmentTeleMenuResponse>> getTreatmentTeleMenu({
+    @Path('id') required String id,
+  });
+
+  @POST(Endpoints.TREATMENT_TELE_MENU)
+  Future<TreatmentTeleMenuResponse> postTreatmentTeleMenu(
+    @Body() TreatmentTeleMenuRequest treatmentTeleMenuRequest,
   );
 }
 

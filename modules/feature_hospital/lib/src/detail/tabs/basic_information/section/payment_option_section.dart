@@ -236,8 +236,8 @@ class _PaymentOptionSectionState extends State<PaymentOptionSection> {
                                 )),
                                 RowSeparated(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     separatorBuilder: (context, index) =>
                                         SizedBox(
                                           width: context.appTheme.spacing
@@ -306,8 +306,8 @@ class _PaymentOptionSectionState extends State<PaymentOptionSection> {
                                 )),
                                 RowSeparated(
                                     crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
+                                        CrossAxisAlignment.center,
+                                    mainAxisAlignment: MainAxisAlignment.center,
                                     separatorBuilder: (context, index) =>
                                         SizedBox(
                                           width: context.appTheme.spacing
