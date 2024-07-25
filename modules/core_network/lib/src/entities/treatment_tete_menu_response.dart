@@ -7,7 +7,7 @@ class TreatmentTeleMenuResponse {
   String id;
   String? project;
   num? treatmentCostExcludingTax;
-  num? treatmentCostIncludingTax;
+  num? treatmentCostTaxIncluded;
   String? remark;
   String? hospital;
 
@@ -15,7 +15,7 @@ class TreatmentTeleMenuResponse {
     required this.id,
     this.project,
     this.treatmentCostExcludingTax,
-    this.treatmentCostIncludingTax,
+    this.treatmentCostTaxIncluded,
     this.remark,
     this.hospital,
   });

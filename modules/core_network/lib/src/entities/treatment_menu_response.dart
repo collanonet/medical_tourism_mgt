@@ -5,21 +5,21 @@ part 'treatment_menu_response.g.dart';
 class TreatmentMenuResponse {
   @JsonKey(name: '_id')
   String id;
-  String? hospitalId;
+  String? hospital;
   String? project;
-  num? treatmentCostExcludingTax;
-  num? treatmentCostIncludingTax;
+  double? treatmentCostExcludingTax;
+  double? treatmentCostTaxIncluded;
   String? remark;
-  List<TaxModel>? includeTax;
+  List<TaxModel>? treatmentCostTax;
 
   TreatmentMenuResponse({
     required this.id,
-    this.hospitalId,
+    this.hospital,
     this.project,
     this.treatmentCostExcludingTax,
-    this.treatmentCostIncludingTax,
+    this.treatmentCostTaxIncluded,
     this.remark,
-    this.includeTax,
+    this.treatmentCostTax,
   });
 
   factory TreatmentMenuResponse.fromJson(Map<String, dynamic> json) =>
@@ -29,8 +29,12 @@ class TreatmentMenuResponse {
 
 @JsonSerializable()
 class TaxModel {
-  num? tax;
-  num? taxRate;
+  // cost
+  @JsonKey(name: 'cost')
+  double? tax;
+  // tax
+  @JsonKey(name: 'tax')
+  int? taxRate;
   TaxModel({this.tax, this.taxRate});
 
   factory TaxModel.fromJson(Map<String, dynamic> json) =>

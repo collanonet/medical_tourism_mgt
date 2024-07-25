@@ -11,8 +11,11 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'treatment_model.dart';
 
 class TreatmentSection extends StatefulWidget {
-  const TreatmentSection({super.key});
+  const TreatmentSection({super.key,
+    required this.hospitalId
 
+  });
+final String hospitalId;
   @override
   State<TreatmentSection> createState() => _TreatmentSectionState();
 }
@@ -27,16 +30,14 @@ class _TreatmentSectionState extends State<TreatmentSection> {
           height: context.appTheme.spacing.formSpacing,
         ),
         children: [
-          const TreatmentMenuSection(),
+          TreatmentMenuSection(hospitalId: widget.hospitalId,),
           const TelemedicineMenuSection(),
           ValueListenableListener(
             valueListenable:
-                context.read<TreatmentModle>().submitTreatmentMenuTeledata,
+                context.read<TreatmentModle>().submitTreatmentMenudata,
             onListen: () {
-              final value = context
-                  .read<TreatmentModle>()
-                  .submitTreatmentMenuTeledata
-                  .value;
+              final value =
+                  context.read<TreatmentModle>().submitTreatmentMenudata.value;
 
               if (value.hasError) {
                 snackBarWidget(
@@ -47,7 +48,6 @@ class _TreatmentSectionState extends State<TreatmentSection> {
               }
 
               if (value.hasData) {
-                Navigator.pop(context);
                 snackBarWidget(
                   message: '正常に保存されました',
                   prefixIcon:
@@ -57,7 +57,7 @@ class _TreatmentSectionState extends State<TreatmentSection> {
             },
             child: ValueListenableBuilder(
               valueListenable:
-                  context.watch<TreatmentModle>().submitTreatmentMenuTeledata,
+                  context.watch<TreatmentModle>().submitTreatmentMenudata,
               builder: (context, value, child) {
                 return Align(
                   alignment: Alignment.bottomRight,
@@ -69,7 +69,7 @@ class _TreatmentSectionState extends State<TreatmentSection> {
                             : () {
                                 context
                                     .read<TreatmentModle>()
-                                    .submitTreatmentMenuTele(formGroup);
+                                    .submitTreatmentMenu(formGroup);
                               },
                         child: WithLoadingButton(
                           isLoading: value.loading,

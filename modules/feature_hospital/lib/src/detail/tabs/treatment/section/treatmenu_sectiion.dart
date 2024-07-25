@@ -1,23 +1,29 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/async.dart';
+import 'package:core_utils/core_utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class TreatmentMenuSection extends StatefulWidget {
-  const TreatmentMenuSection({super.key});
-
+  const TreatmentMenuSection({super.key, required this.hospitalId});
+  final String hospitalId;
   @override
   State<TreatmentMenuSection> createState() => _TreatmentMenuSectionState();
 }
 
 class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
+  ValueNotifier<int> addIncludeTax = ValueNotifier(1);
+
   @override
   Widget build(BuildContext context) {
     final formArray = (ReactiveForm.of(context) as FormGroup)
         .control('treatmentMenu') as FormArray;
-    final firstFormGroup = formArray.controls.first as FormGroup;
-    final includeTaxFormArray =
-        firstFormGroup.control('includeTax') as FormArray;
+
+    final taxRateFormArray =
+        (ReactiveForm.of(context) as FormGroup).control('taxRate') as FormArray;
+
     return ColumnSeparated(
       crossAxisAlignment: CrossAxisAlignment.start,
       separatorBuilder: (context, index) => SizedBox(
@@ -53,7 +59,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                     Expanded(
                       flex: 3,
                       child: ReactiveFormArray(
-                          formArray: includeTaxFormArray,
+                          formArrayName: 'taxRate',
                           builder: (context, formArray, child) {
                             final row = formArray.controls
                                 .map((control) => control as FormGroup)
@@ -134,12 +140,12 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                           Expanded(
                               flex: 1,
                               child: ReactiveTextField(
-                                formControlName: 'treatmentCostExcludingTax',
+                                formControlName: 'treatmentCostTaxIncluded',
                               )),
                           Expanded(
                             flex: 4,
                             child: ReactiveFormArray(
-                              formArrayName: 'includeTax',
+                              formArrayName: 'treatmentCostTax',
                               builder: (context, formArray, child) {
                                 final row = formArray.controls
                                     .map((control) => control as FormGroup)
@@ -155,12 +161,30 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                       ),
                                     );
 
-                                return RowSeparated(
-                                  separatorBuilder: (context, index) =>
-                                      SizedBox(
-                                          width: context
-                                              .appTheme.spacing.formSpacing),
-                                  children: row.toList(),
+                                return ValueListenableListener(
+                                  valueListenable: addIncludeTax,
+                                  onListen: () {
+                                    // add into row of treatment
+                                    formArray.add(
+                                      FormGroup({
+                                        'tax': FormControl<double>(),
+                                        'taxRate': FormControl<int>(value: 15),
+                                      }),
+                                    );
+                                    // add into header
+                                    taxRateFormArray.add(
+                                      FormGroup({
+                                        'taxRate': FormControl<int>(),
+                                      }),
+                                    );
+                                  },
+                                  child: RowSeparated(
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(
+                                            width: context
+                                                .appTheme.spacing.formSpacing),
+                                    children: row.toList(),
+                                  ),
                                 );
                               },
                             ),
@@ -180,10 +204,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
             ),
             InkWell(
                 onTap: () {
-                  includeTaxFormArray.add(FormGroup({
-                    'tax': FormControl<String>(),
-                    'taxRate': FormControl<String>(),
-                  }));
+                  addIncludeTax.value += 1;
                 },
                 child: Column(
                   children: [
@@ -221,35 +242,55 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                     }))
           ],
         ),
-        InkWell(
-          onTap: () {
-            formArray.add(FormGroup({
-              'project': FormControl<String>(),
-              'treatmentCostExcludingTax': FormControl<String>(),
-              'treatmentCostIncludingTax': FormControl<String>(),
-              'preparationForExams': FormControl<String>(),
-              'includeTax': includeTaxFormArray,
-            }));
-          },
-          child: Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.add_circle,
-                color: context.appTheme.primaryColor,
-              ),
-              SizedBox(
-                width: context.appTheme.spacing.marginSmall,
-              ),
-              Text(
-                '担当者を追加',
-                style: TextStyle(color: context.appTheme.primaryColor),
-              )
-            ],
-          ),
-        ),
+        ValueListenableBuilder(
+            valueListenable: addIncludeTax,
+            builder: (context, value, _) {
+              return InkWell(
+                onTap: () {
+                  formArray.add(
+                    FormGroup({
+                      // todo: add id field
+                      'hospitalId':
+                          FormControl<String>(value: widget.hospitalId),
+                      'project': FormControl<String>(),
+                      'treatmentCostExcludingTax': FormControl<double>(),
+                      'treatmentCostTaxIncluded': FormControl<double>(),
+                      'remark': FormControl<String>(),
+                      'treatmentCostTax': FormArray([
+                        FormGroup({
+                          'tax': FormControl<double>(),
+                          'taxRate': FormControl<int>(value: 15),
+                        }),
+                        ...List.generate(value - 1, (index) {
+                          return FormGroup({
+                            'tax': FormControl<double>(),
+                            'taxRate': FormControl<int>(),
+                          });
+                        })
+                      ])
+                    }),
+                  );
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.add_circle,
+                      color: context.appTheme.primaryColor,
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginSmall,
+                    ),
+                    Text(
+                      '担当者を追加',
+                      style: TextStyle(color: context.appTheme.primaryColor),
+                    )
+                  ],
+                ),
+              );
+            }),
       ],
     );
   }

@@ -11,7 +11,7 @@ TreatmentTeleMenuRequest _$TreatmentTeleMenuRequestFromJson(
     TreatmentTeleMenuRequest(
       project: json['project'] as String?,
       treatmentCostExcludingTax: json['treatmentCostExcludingTax'] as num?,
-      treatmentCostIncludingTax: json['treatmentCostIncludingTax'] as num?,
+      treatmentCostTaxIncluded: json['treatmentCostTaxIncluded'] as num?,
       remark: json['remark'] as String?,
       hospital: json['hospital'] as String?,
     );
@@ -21,7 +21,7 @@ Map<String, dynamic> _$TreatmentTeleMenuRequestToJson(
     <String, dynamic>{
       'project': instance.project,
       'treatmentCostExcludingTax': instance.treatmentCostExcludingTax,
-      'treatmentCostIncludingTax': instance.treatmentCostIncludingTax,
+      'treatmentCostTaxIncluded': instance.treatmentCostTaxIncluded,
       'remark': instance.remark,
       'hospital': instance.hospital,
     };

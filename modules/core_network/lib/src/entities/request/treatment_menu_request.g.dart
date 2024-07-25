@@ -9,12 +9,14 @@ part of 'treatment_menu_request.dart';
 TreatmentMenuRequest _$TreatmentMenuRequestFromJson(
         Map<String, dynamic> json) =>
     TreatmentMenuRequest(
-      hospitalId: json['hospitalId'] as String?,
+      hospital: json['hospital'] as String?,
       project: json['project'] as String?,
-      treatmentCostExcludingTax: json['treatmentCostExcludingTax'] as num?,
-      treatmentCostIncludingTax: json['treatmentCostIncludingTax'] as num?,
+      treatmentCostExcludingTax:
+          (json['treatmentCostExcludingTax'] as num?)?.toDouble(),
+      treatmentCostTaxIncluded:
+          (json['treatmentCostTaxIncluded'] as num?)?.toDouble(),
       remark: json['remark'] as String?,
-      includeTax: (json['includeTax'] as List<dynamic>?)
+      treatmentCostTax: (json['treatmentCostTax'] as List<dynamic>?)
           ?.map((e) => TaxModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -22,10 +24,10 @@ TreatmentMenuRequest _$TreatmentMenuRequestFromJson(
 Map<String, dynamic> _$TreatmentMenuRequestToJson(
         TreatmentMenuRequest instance) =>
     <String, dynamic>{
-      'hospitalId': instance.hospitalId,
+      'hospital': instance.hospital,
       'project': instance.project,
       'treatmentCostExcludingTax': instance.treatmentCostExcludingTax,
-      'treatmentCostIncludingTax': instance.treatmentCostIncludingTax,
+      'treatmentCostTaxIncluded': instance.treatmentCostTaxIncluded,
       'remark': instance.remark,
-      'includeTax': instance.includeTax,
+      'treatmentCostTax': instance.treatmentCostTax,
     };

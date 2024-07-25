@@ -10,12 +10,14 @@ TreatmentMenuResponse _$TreatmentMenuResponseFromJson(
         Map<String, dynamic> json) =>
     TreatmentMenuResponse(
       id: json['_id'] as String,
-      hospitalId: json['hospitalId'] as String?,
+      hospital: json['hospital'] as String?,
       project: json['project'] as String?,
-      treatmentCostExcludingTax: json['treatmentCostExcludingTax'] as num?,
-      treatmentCostIncludingTax: json['treatmentCostIncludingTax'] as num?,
+      treatmentCostExcludingTax:
+          (json['treatmentCostExcludingTax'] as num?)?.toDouble(),
+      treatmentCostTaxIncluded:
+          (json['treatmentCostTaxIncluded'] as num?)?.toDouble(),
       remark: json['remark'] as String?,
-      includeTax: (json['includeTax'] as List<dynamic>?)
+      treatmentCostTax: (json['treatmentCostTax'] as List<dynamic>?)
           ?.map((e) => TaxModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -24,20 +26,20 @@ Map<String, dynamic> _$TreatmentMenuResponseToJson(
         TreatmentMenuResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
-      'hospitalId': instance.hospitalId,
+      'hospital': instance.hospital,
       'project': instance.project,
       'treatmentCostExcludingTax': instance.treatmentCostExcludingTax,
-      'treatmentCostIncludingTax': instance.treatmentCostIncludingTax,
+      'treatmentCostTaxIncluded': instance.treatmentCostTaxIncluded,
       'remark': instance.remark,
-      'includeTax': instance.includeTax,
+      'treatmentCostTax': instance.treatmentCostTax,
     };
 
 TaxModel _$TaxModelFromJson(Map<String, dynamic> json) => TaxModel(
-      tax: json['tax'] as num?,
-      taxRate: json['taxRate'] as num?,
+      tax: (json['cost'] as num?)?.toDouble(),
+      taxRate: (json['tax'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$TaxModelToJson(TaxModel instance) => <String, dynamic>{
-      'tax': instance.tax,
-      'taxRate': instance.taxRate,
+      'cost': instance.tax,
+      'tax': instance.taxRate,
     };

@@ -84,7 +84,7 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                           Expanded(
                             flex: 2,
                             child: ReactiveTextField(
-                              formControlName: 'treatmentCostIncludingTax',
+                              formControlName: 'treatmentCostTaxIncluded',
                             ),
                           ),
                           Expanded(
@@ -115,7 +115,7 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
           onTap: () => formArray.add(FormGroup({
             'project': FormControl<String>(),
             'treatmentCostExcludingTax': FormControl<String>(),
-            'treatmentCostIncludingTax': FormControl<String>(),
+            'treatmentCostTaxIncluded': FormControl<String>(),
             'remarks': FormControl<String>(),
           })),
           child: Row(

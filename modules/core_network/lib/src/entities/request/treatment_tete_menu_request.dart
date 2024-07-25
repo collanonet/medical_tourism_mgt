@@ -5,14 +5,14 @@ part 'treatment_tete_menu_request.g.dart';
 class TreatmentTeleMenuRequest {
   String? project;
   num? treatmentCostExcludingTax;
-  num? treatmentCostIncludingTax;
+  num? treatmentCostTaxIncluded;
   String? remark;
   String? hospital;
 
   TreatmentTeleMenuRequest({
     this.project,
     this.treatmentCostExcludingTax,
-    this.treatmentCostIncludingTax,
+    this.treatmentCostTaxIncluded,
     this.remark,
     this.hospital,
   });

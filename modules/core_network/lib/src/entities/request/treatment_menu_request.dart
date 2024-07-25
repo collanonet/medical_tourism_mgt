@@ -6,20 +6,20 @@ part 'treatment_menu_request.g.dart';
 
 @JsonSerializable()
 class TreatmentMenuRequest {
-  String? hospitalId;
+  String? hospital;
   String? project;
-  num? treatmentCostExcludingTax;
-  num? treatmentCostIncludingTax;
+  double? treatmentCostExcludingTax;
+  double? treatmentCostTaxIncluded;
   String? remark;
-  List<TaxModel>? includeTax;
+  List<TaxModel>? treatmentCostTax;
 
   TreatmentMenuRequest({
-    this.hospitalId,
+    this.hospital,
     this.project,
     this.treatmentCostExcludingTax,
-    this.treatmentCostIncludingTax,
+    this.treatmentCostTaxIncluded,
     this.remark,
-    this.includeTax,
+    this.treatmentCostTax,
   });
 
   factory TreatmentMenuRequest.fromJson(Map<String, dynamic> json) =>
