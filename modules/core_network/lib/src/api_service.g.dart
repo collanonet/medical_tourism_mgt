@@ -6569,6 +6569,61 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<TreatmentMenuResponse> putTreatmentMenu({
+    required String id,
+    required TreatmentMenuRequest treatmentMenuRequest,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(treatmentMenuRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<TreatmentMenuResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/treatment-menu/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = TreatmentMenuResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<void> deleteTreatmentMenu({required String id}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/treatment-menu/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+  }
+
+  @override
   Future<List<TreatmentTeleMenuResponse>> getTreatmentTeleMenu(
       {required String id}) async {
     final _extra = <String, dynamic>{};
