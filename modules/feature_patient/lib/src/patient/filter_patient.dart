@@ -471,7 +471,73 @@ class PatientFilter extends StatelessWidget {
                           child: Text(context.l10n.actionSearch),
                         ),
                       ],
-                    )
+                    ),
+
+                    // todo:
+
+                    ReactiveValueListenableBuilder(
+                        formControlName: 'filterText',
+                        builder: (context, controller, _) {
+                          return SegmentedButton<String>(
+                            showSelectedIcon: false,
+                            style: ButtonStyle(
+                              enableFeedback: true,
+                              shape: MaterialStatePropertyAll(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(4),
+                                    side: BorderSide(
+                                        color: context.appTheme.primaryColor)),
+                              ),
+                              foregroundColor: MaterialStatePropertyAll(
+                                  context.appTheme.primaryColor),
+                              side: MaterialStatePropertyAll(
+                                BorderSide(
+                                    color: context.appTheme.primaryColor),
+                              ),
+                            ),
+                            segments: <ButtonSegment<String>>[
+                              ButtonSegment<String>(
+                                value: '受注のみ',
+                                label: Text(
+                                  '受注のみ',
+                                  style: TextStyle(
+                                    color: controller.value == '受注のみ'
+                                        ? Colors.white
+                                        : context.appTheme.primaryColor,
+                                    fontFamily: 'NotoSansJP',
+                                    package: 'core_ui',
+                                  ),
+                                ),
+                                tooltip: context.l10n.labelOrdersOnly,
+                              ),
+                              ButtonSegment<String>(
+                                value: 'all',
+                                label: Text(
+                                  context.l10n.labelAll,
+                                  style: TextStyle(
+                                    color: controller.value == 'all'
+                                        ? Colors.white
+                                        : context.appTheme.primaryColor,
+                                    fontFamily: 'NotoSansJP',
+                                    package: 'core_ui',
+                                  ),
+                                ),
+                                tooltip: context.l10n.labelAll,
+                              ),
+                            ],
+                            selected: <String>{controller.value.toString()},
+                            onSelectionChanged: (Set<String> newSelection) {
+                              // in case we have listener on field controller
+                              controller.value = newSelection.first;
+
+                              // in case we don't have listerner on field controller
+                              // and we can listener from formGroup that register
+
+                              // formGroup.control('filterText').value =
+                              //     newSelection.first;
+                            },
+                          );
+                        }),
                   ],
                 ),
               );
