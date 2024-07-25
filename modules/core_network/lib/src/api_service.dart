@@ -1199,7 +1199,7 @@ abstract class ApiService {
     @Body() ProspectiveRankRequest prospectiveRankRequest,
   );
 
-  @GET('${Endpoints.TREATMENT_MENU}/{id}')
+  @GET('${Endpoints.TREATMENT_MENU}/by-hospital/{id}')
   Future<List<TreatmentMenuResponse>> getTreatmentMenu({
     @Path('id') required String id,
   });
@@ -1208,6 +1208,17 @@ abstract class ApiService {
   Future<TreatmentMenuResponse> postTreatmentMenu(
     @Body() TreatmentMenuRequest treatmentMenuRequest,
   );
+
+  @PUT('${Endpoints.TREATMENT_MENU}/{id}')
+  Future<TreatmentMenuResponse> putTreatmentMenu({
+    @Path('id') required String id,
+    @Body() TreatmentMenuRequest treatmentMenuRequest,
+  });
+
+  @DELETE('${Endpoints.TREATMENT_MENU}/{id}')
+  Future<void> deleteTreatmentMenu({
+    @Path('id') required String id,
+  });
 
   @GET('${Endpoints.TREATMENT_TELE_MENU}/by-hospital/{id}')
   Future<List<TreatmentTeleMenuResponse>> getTreatmentTeleMenu({

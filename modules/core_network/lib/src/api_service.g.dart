@@ -6523,7 +6523,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/treatment-menu/${id}',
+              '/treatment-menu/by-hospital/${id}',
               queryParameters: queryParameters,
               data: _data,
             )

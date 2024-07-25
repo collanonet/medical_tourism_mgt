@@ -4,6 +4,7 @@ import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class TreatmentMenuSection extends StatefulWidget {
@@ -56,58 +57,45 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                         flex: 1,
                         child: Text('治療費用（税込）',
                             style: context.textTheme.bodyMedium)),
-                    Expanded(
-                      flex: 3,
-                      child: ReactiveFormArray(
-                          formArrayName: 'taxRate',
-                          builder: (context, formArray, child) {
-                            final row = formArray.controls
-                                .map((control) => control as FormGroup)
-                                .map(
-                                  (currentForm) => ReactiveForm(
+                    ReactiveFormArray(
+                        formArrayName: 'taxRate',
+                        builder: (context, formArray, child) {
+                          final row = formArray.controls
+                              .map((control) => control as FormGroup)
+                              .map(
+                                (currentForm) => IntrinsicWidth(
+                                  stepWidth: 80,
+                                  child: ReactiveForm(
                                     formGroup: currentForm,
-                                    child: Expanded(
-                                      child: RowSeparated(
-                                        separatorBuilder: (context, index) =>
-                                            SizedBox(
-                                          width: context.appTheme.spacing
-                                              .marginExtraSmall,
+                                    child: SizedBox(
+                                      width: 80,
+                                      child: ReactiveTextField(
+                                        formControlName: 'taxRate',
+                                        decoration: InputDecoration(
+                                          prefixText: 'R ',
+                                          suffixText: ' %',
                                         ),
-                                        children: [
-                                          Text(
-                                            'R',
-                                            style: context.textTheme.bodyMedium,
-                                          ),
-                                          Expanded(
-                                            flex: 1,
-                                            child: ReactiveTextField(
-                                              formControlName: 'taxRate',
-                                            ),
-                                          ),
-                                          Text(
-                                            '%',
-                                            style: context.textTheme.bodyMedium,
-                                          )
-                                        ],
                                       ),
                                     ),
                                   ),
-                                );
-                            return RowSeparated(
-                              separatorBuilder: (context, index) => SizedBox(
-                                width: context.appTheme.spacing.formSpacing,
-                              ),
-                              children: row.toList(),
-                            );
-                          }),
-                    )
+                                ),
+                              );
+                          return RowSeparated(
+                            separatorBuilder: (context, index) => SizedBox(
+                              width: context.appTheme.spacing.formSpacing,
+                            ),
+                            children: row.toList(),
+                          );
+                        })
                   ],
                 ),
               ),
               const SizedBox(
                 width: 8,
               ),
-              Expanded(child: Text('準備検査', style: context.textTheme.bodyMedium))
+              IntrinsicWidth(
+                  stepWidth: 250,
+                  child: Text('準備検査', style: context.textTheme.bodyMedium))
             ]),
         RowSeparated(
           separatorBuilder: (context, index) => SizedBox(
@@ -142,52 +130,43 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                               child: ReactiveTextField(
                                 formControlName: 'treatmentCostTaxIncluded',
                               )),
-                          Expanded(
-                            flex: 4,
-                            child: ReactiveFormArray(
-                              formArrayName: 'treatmentCostTax',
-                              builder: (context, formArray, child) {
-                                final row = formArray.controls
-                                    .map((control) => control as FormGroup)
-                                    .map(
-                                      (currentForm) => ReactiveForm(
+                          ReactiveFormArray(
+                            formArrayName: 'treatmentCostTax',
+                            builder: (context, formArray, child) {
+                              final row = formArray.controls
+                                  .map((control) => control as FormGroup)
+                                  .map(
+                                    (currentForm) => IntrinsicWidth(
+                                      stepWidth: 70,
+                                      child: ReactiveForm(
                                         formGroup: currentForm,
-                                        child: Expanded(
-                                          flex: 1,
-                                          child: ReactiveTextField(
-                                            formControlName: 'tax',
-                                          ),
+                                        child: ReactiveTextField(
+                                          formControlName: 'tax',
                                         ),
                                       ),
-                                    );
+                                    ),
+                                  );
 
-                                return ValueListenableListener(
-                                  valueListenable: addIncludeTax,
-                                  onListen: () {
-                                    // add into row of treatment
-                                    formArray.add(
-                                      FormGroup({
-                                        'tax': FormControl<double>(),
-                                        'taxRate': FormControl<int>(value: 15),
-                                      }),
-                                    );
-                                    // add into header
-                                    taxRateFormArray.add(
-                                      FormGroup({
-                                        'taxRate': FormControl<int>(),
-                                      }),
-                                    );
-                                  },
-                                  child: RowSeparated(
-                                    separatorBuilder: (context, index) =>
-                                        SizedBox(
-                                            width: context
-                                                .appTheme.spacing.formSpacing),
-                                    children: row.toList(),
-                                  ),
-                                );
-                              },
-                            ),
+                              return ValueListenableListener(
+                                valueListenable: addIncludeTax,
+                                onListen: () {
+                                  // add into row of treatment
+                                  formArray.add(
+                                    FormGroup({
+                                      'tax': FormControl<double>(),
+                                      'taxRate': FormControl<int>(value: 15),
+                                    }),
+                                  );
+                                },
+                                child: RowSeparated(
+                                  separatorBuilder: (context, index) =>
+                                      SizedBox(
+                                          width: context
+                                              .appTheme.spacing.formSpacing),
+                                  children: row.toList(),
+                                ),
+                              );
+                            },
                           )
                         ],
                       ),
@@ -204,42 +183,52 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
             ),
             InkWell(
                 onTap: () {
-                  addIncludeTax.value += 1;
+                  if (addIncludeTax.value <= 3) {
+                    addIncludeTax.value += 1;
+                    // add into header
+                    taxRateFormArray.add(
+                      FormGroup({
+                        'taxRate': FormControl<int>(),
+                      }),
+                    );
+                  }
                 },
                 child: Column(
+                  mainAxisSize: MainAxisSize.min,
                   children: [
                     Icon(Icons.add_circle,
                         color: context.appTheme.primaryColor),
-                    Text('行を追加'),
+                    RotatedBox(quarterTurns: 1, child: Text('行を追加')),
                   ],
                 )),
-            Expanded(
-                flex: 1,
-                child: ReactiveFormArray(
-                    formArrayName: 'treatmentMenu',
-                    builder: (context, formArray, child) {
-                      final rows =
-                          formArray.controls.map((control) => ReactiveForm(
-                              formGroup: control as FormGroup,
-                              child: RowSeparated(
-                                separatorBuilder: (context, index) => SizedBox(
-                                  width: context.appTheme.spacing.formSpacing,
-                                ),
-                                children: [
-                                  Expanded(
-                                    flex: 2,
-                                    child: ReactiveTextField(
-                                      formControlName: 'remark',
-                                    ),
-                                  ),
-                                ],
-                              )));
-                      return ColumnSeparated(
-                          separatorBuilder: (context, index) => SizedBox(
-                                height: context.appTheme.spacing.formSpacing,
+            IntrinsicWidth(
+              stepWidth: 250,
+              child: ReactiveFormArray(
+                  formArrayName: 'treatmentMenu',
+                  builder: (context, formArray, child) {
+                    final rows =
+                        formArray.controls.map((control) => ReactiveForm(
+                            formGroup: control as FormGroup,
+                            child: RowSeparated(
+                              separatorBuilder: (context, index) => SizedBox(
+                                width: context.appTheme.spacing.formSpacing,
                               ),
-                          children: rows.toList());
-                    }))
+                              children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: ReactiveTextField(
+                                    formControlName: 'remark',
+                                  ),
+                                ),
+                              ],
+                            )));
+                    return ColumnSeparated(
+                        separatorBuilder: (context, index) => SizedBox(
+                              height: context.appTheme.spacing.formSpacing,
+                            ),
+                        children: rows.toList());
+                  }),
+            )
           ],
         ),
         ValueListenableBuilder(

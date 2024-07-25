@@ -90,7 +90,7 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                           MaterialsScreen(
                             id: value.requireData.id,
                           ),
-                           QAndAScreen(
+                          QAndAScreen(
                             hospitalId: value.requireData.id,
                           ),
                           FacilityPhotoScreen(

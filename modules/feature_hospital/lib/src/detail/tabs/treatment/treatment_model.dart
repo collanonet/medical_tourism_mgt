@@ -103,10 +103,12 @@ class TreatmentModle {
         List<TaxModel>? treatmentCostTax = [];
 
         for (var elementx in element['treatmentCostTax']) {
-          // todo:
+          int index = element['treatmentCostTax'].indexOf(elementx);
+          // get tax rate from header
+          int? taxRate = formGroup.control('taxRate').value[index]['taxRate'];
           treatmentCostTax.add(TaxModel(
             tax: elementx['tax'],
-            taxRate: 15,
+            taxRate: taxRate ?? 0,
           ));
         }
 
