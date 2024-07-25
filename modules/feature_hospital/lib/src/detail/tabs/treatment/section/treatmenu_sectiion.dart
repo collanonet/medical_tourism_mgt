@@ -122,12 +122,12 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                           ),
                           Expanded(
                               flex: 1,
-                              child: ReactiveTextField(
+                              child: ReactiveTextField<double>(
                                 formControlName: 'treatmentCostExcludingTax',
                               )),
                           Expanded(
                               flex: 1,
-                              child: ReactiveTextField(
+                              child: ReactiveTextField<double>(
                                 formControlName: 'treatmentCostTaxIncluded',
                               )),
                           ReactiveFormArray(

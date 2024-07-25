@@ -1212,7 +1212,7 @@ abstract class ApiService {
   @PUT('${Endpoints.TREATMENT_MENU}/{id}')
   Future<TreatmentMenuResponse> putTreatmentMenu({
     @Path('id') required String id,
-    @Body() TreatmentMenuRequest treatmentMenuRequest,
+    @Body() required TreatmentMenuRequest treatmentMenuRequest,
   });
 
   @DELETE('${Endpoints.TREATMENT_MENU}/{id}')

@@ -13,8 +13,7 @@ class TreatmentModle {
   Future<void> fetchData(FormGroup formGroup, {String? hospitalId}) async {
     try {
       if (hospitalId != null) {
-        await fetchTreatmentMenu(
-            formGroup.control('treatmentMenu') as FormArray, hospitalId);
+        await fetchTreatmentMenu(formGroup, hospitalId);
         // fetchTreatmentMenuTele(
         //     formGroup.control('telemedicineMenu') as FormGroup, hospitalId);
       }
@@ -33,7 +32,7 @@ class TreatmentModle {
       ValueNotifier(const AsyncData());
 
   Future<void> fetchTreatmentMenu(
-      FormArray formArray, String hospitalId) async {
+      FormGroup formGroup, String hospitalId) async {
     try {
       // show loading to user
       treatmentMenuData.value = const AsyncData(loading: true);
@@ -43,7 +42,7 @@ class TreatmentModle {
           await hospitalRepository.getTreatmentMenu(id: hospitalId);
 
       // insert data after get data from api server
-      insertTreatmentMenu(formArray, response);
+      insertTreatmentMenu(formGroup, response);
 
       // hide loading to user and keep data
       treatmentMenuData.value = AsyncData(data: response);
@@ -56,8 +55,29 @@ class TreatmentModle {
   }
 
   void insertTreatmentMenu(
-      FormArray formArray, List<TreatmentMenuResponse> data) {
+      FormGroup formGroup, List<TreatmentMenuResponse> data) {
     try {
+      // get formArray treatmentMenu for insert data
+      FormArray treatmentMenuFormArray =
+          formGroup.control('treatmentMenu') as FormArray;
+
+      FormArray taxRateFormArray =
+          formGroup.control('treatmentMenu') as FormArray;
+
+      // check if data is not empty then clear form
+      if (data.isNotEmpty) {
+        logger.d('data is not empty');
+        treatmentMenuFormArray.clear();
+        taxRateFormArray.clear();
+
+        // get tax rate from header
+        data.first.treatmentCostTax!.map((e) {
+          taxRateFormArray.add(FormGroup({
+            'taxRate': FormControl<int>(value: e.taxRate),
+          }));
+        });
+      }
+
       for (var element in data) {
         FormArray include = FormArray([]);
 
@@ -75,14 +95,14 @@ class TreatmentModle {
           }));
         }
 
-        formArray.add(
+        treatmentMenuFormArray.add(
           FormGroup({
             'hospitalId': FormControl<String>(value: element.hospital),
             'project': FormControl<String>(value: element.project),
             'treatmentCostExcludingTax':
-                FormControl<num>(value: element.treatmentCostExcludingTax),
+                FormControl<double>(value: element.treatmentCostExcludingTax),
             'treatmentCostTaxIncluded':
-                FormControl<num>(value: element.treatmentCostTaxIncluded),
+                FormControl<double>(value: element.treatmentCostTaxIncluded),
             'remark': FormControl<String>(value: element.remark),
             'treatmentCostTax': include,
           }),
