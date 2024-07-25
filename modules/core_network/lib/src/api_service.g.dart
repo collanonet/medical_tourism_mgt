@@ -6581,7 +6581,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/hospital-tele-medicine-menu/${id}',
+              '/hospital-tele-medicine-menu/by-hospital/${id}',
               queryParameters: queryParameters,
               data: _data,
             )

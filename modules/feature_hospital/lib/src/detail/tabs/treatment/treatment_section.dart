@@ -29,51 +29,59 @@ class _TreatmentSectionState extends State<TreatmentSection> {
         children: [
           const TreatmentMenuSection(),
           const TelemedicineMenuSection(),
-          // ValueListenableListener(
-          //   valueListenable: context.read<TreatmentModle>().submitData,
-          //   onListen: () {
-          //     final value = context.read<TreatmentModle>().submitData.value;
+          ValueListenableListener(
+            valueListenable:
+                context.read<TreatmentModle>().submitTreatmentMenuTeledata,
+            onListen: () {
+              final value = context
+                  .read<TreatmentModle>()
+                  .submitTreatmentMenuTeledata
+                  .value;
 
-          //     if (value.hasError) {
-          //       snackBarWidget(
-          //         message: '保存できませんでした。 もう一度試してください。',
-          //         backgroundColor: Colors.red,
-          //         prefixIcon: const Icon(Icons.error, color: Colors.white),
-          //       );
-          //     }
+              if (value.hasError) {
+                snackBarWidget(
+                  message: '保存できませんでした。 もう一度試してください。',
+                  backgroundColor: Colors.red,
+                  prefixIcon: const Icon(Icons.error, color: Colors.white),
+                );
+              }
 
-          //     if (value.hasData) {
-          //       Navigator.pop(context);
-          //       snackBarWidget(
-          //         message: '正常に保存されました',
-          //         prefixIcon:
-          //             const Icon(Icons.check_circle, color: Colors.white),
-          //       );
-          //     }
-          //   },
-          //   child: ValueListenableBuilder(
-          //     valueListenable: context.watch<TreatmentModle>().submitData,
-          //     builder: (context, value, child) {
-          //       return Align(
-          //         alignment: Alignment.bottomRight,
-          //         child: ReactiveFormConsumer(
-          //           builder: (context, formGroup, child) {
-          //             return ElevatedButton(
-          //               onPressed: value.loading
-          //                   ? null
-          //                   : () {
-          //                       context
-          //                           .read<TreatmentModle>()
-          //                           .fetchData(formGroup);
-          //                     },
-          //               child: const Text('印刷する'),
-          //             );
-          //           },
-          //         ),
-          //       );
-          //     },
-          //   ),
-          // )
+              if (value.hasData) {
+                Navigator.pop(context);
+                snackBarWidget(
+                  message: '正常に保存されました',
+                  prefixIcon:
+                      const Icon(Icons.check_circle, color: Colors.white),
+                );
+              }
+            },
+            child: ValueListenableBuilder(
+              valueListenable:
+                  context.watch<TreatmentModle>().submitTreatmentMenuTeledata,
+              builder: (context, value, child) {
+                return Align(
+                  alignment: Alignment.bottomRight,
+                  child: ReactiveFormConsumer(
+                    builder: (context, formGroup, child) {
+                      return ElevatedButton(
+                        onPressed: value.loading
+                            ? null
+                            : () {
+                                context
+                                    .read<TreatmentModle>()
+                                    .submitTreatmentMenuTele(formGroup);
+                              },
+                        child: WithLoadingButton(
+                          isLoading: value.loading,
+                          child: const Text('印刷する'),
+                        ),
+                      );
+                    },
+                  ),
+                );
+              },
+            ),
+          )
         ],
       ),
     );

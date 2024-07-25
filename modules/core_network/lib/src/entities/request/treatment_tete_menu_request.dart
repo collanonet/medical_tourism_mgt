@@ -1,23 +1,24 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'treatment_tete_menu_request.g.dart';
+
 @JsonSerializable()
 class TreatmentTeleMenuRequest {
   String? project;
-  num? treatingCostExcludingTax;
-  num? treatingCostIncludingTax;
-  String? remarks;
-  String? hospitalId;
+  num? treatmentCostExcludingTax;
+  num? treatmentCostIncludingTax;
+  String? remark;
+  String? hospital;
 
   TreatmentTeleMenuRequest({
     this.project,
-    this.treatingCostExcludingTax,
-    this.treatingCostIncludingTax,
-    this.remarks,
-    this.hospitalId,
+    this.treatmentCostExcludingTax,
+    this.treatmentCostIncludingTax,
+    this.remark,
+    this.hospital,
   });
-  factory TreatmentTeleMenuRequest.fromJson(Map<String,dynamic> json){
+  factory TreatmentTeleMenuRequest.fromJson(Map<String, dynamic> json) {
     return _$TreatmentTeleMenuRequestFromJson(json);
   }
-  
+
   Map<String, dynamic> toJson() => _$TreatmentTeleMenuRequestToJson(this);
 }

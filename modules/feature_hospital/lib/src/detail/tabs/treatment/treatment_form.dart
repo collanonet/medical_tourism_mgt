@@ -4,11 +4,11 @@ FormGroup treatmentForm({required String hospitalId}) {
   return FormGroup({
     'treatmentMenu': FormArray([
       FormGroup({
-        'hospitalId' : FormControl<String>(value: hospitalId),
+        'hospitalId': FormControl<String>(value: hospitalId),
         'project': FormControl<String>(),
-        'treatingCostExcludingTax': FormControl<num>(),
-        'treatingCostIncludingTax': FormControl<num>(),
-        'preparationForExams': FormControl<String>(),
+        'treatmentCostExcludingTax': FormControl<num>(),
+        'treatmentCostIncludingTax': FormControl<num>(),
+        'remark': FormControl<String>(),
         'includeTax': FormArray([
           FormGroup({
             'tax': FormControl<num>(),
@@ -19,11 +19,11 @@ FormGroup treatmentForm({required String hospitalId}) {
     ]),
     'telemedicineMenu': FormArray([
       FormGroup({
-        'hospitalId' : FormControl<String>(value: hospitalId),
+        'hospital': FormControl<String>(value: hospitalId),
         'project': FormControl<String>(),
-        'treatingCostExcludingTax': FormControl<num>(),
-        'treatingCostIncludingTax': FormControl<num>(),
-        'remarks': FormControl<String>(),
+        'treatmentCostExcludingTax': FormControl<num>(),
+        'treatmentCostIncludingTax': FormControl<num>(),
+        'remark': FormControl<String>(),
       }),
     ])
   });

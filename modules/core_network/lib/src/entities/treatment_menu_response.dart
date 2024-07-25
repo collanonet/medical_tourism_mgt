@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 part 'treatment_menu_response.g.dart';
 
@@ -8,22 +7,23 @@ class TreatmentMenuResponse {
   String id;
   String? hospitalId;
   String? project;
-  num? treatingCostExcludingTax;
-  num? treatingCostIncludingTax;
-  String? preparationForExams;
+  num? treatmentCostExcludingTax;
+  num? treatmentCostIncludingTax;
+  String? remark;
   List<TaxModel>? includeTax;
 
   TreatmentMenuResponse({
     required this.id,
     this.hospitalId,
     this.project,
-    this.treatingCostExcludingTax,
-    this.treatingCostIncludingTax,
-    this.preparationForExams,
+    this.treatmentCostExcludingTax,
+    this.treatmentCostIncludingTax,
+    this.remark,
     this.includeTax,
   });
 
-  factory TreatmentMenuResponse.fromJson(Map<String, dynamic> json) => _$TreatmentMenuResponseFromJson(json);
+  factory TreatmentMenuResponse.fromJson(Map<String, dynamic> json) =>
+      _$TreatmentMenuResponseFromJson(json);
   Map<String, dynamic> toJson() => _$TreatmentMenuResponseToJson(this);
 }
 
@@ -33,6 +33,7 @@ class TaxModel {
   num? taxRate;
   TaxModel({this.tax, this.taxRate});
 
-  factory TaxModel.fromJson(Map<String, dynamic> json) => _$TaxModelFromJson(json);
+  factory TaxModel.fromJson(Map<String, dynamic> json) =>
+      _$TaxModelFromJson(json);
   Map<String, dynamic> toJson() => _$TaxModelToJson(this);
 }

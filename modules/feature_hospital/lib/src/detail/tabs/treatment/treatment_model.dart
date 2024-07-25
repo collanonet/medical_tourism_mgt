@@ -10,14 +10,15 @@ class TreatmentModle {
   TreatmentModle({required this.hospitalRepository});
   final HospitalRepository hospitalRepository;
 
-  Future<void> fetchData(FormGroup formGroup,{String? hospitalId}) async{
-    try{
-      if(hospitalId != null){
-        fetchTreatmentMenu(formGroup.control('treatmentMenu') as FormGroup, hospitalId);
-        fetchTreatmentMenuTele(formGroup.control('telemedicineMenu') as FormGroup, hospitalId);
+  Future<void> fetchData(FormGroup formGroup, {String? hospitalId}) async {
+    try {
+      if (hospitalId != null) {
+        fetchTreatmentMenu(
+            formGroup.control('treatmentMenu') as FormGroup, hospitalId);
+        fetchTreatmentMenuTele(
+            formGroup.control('telemedicineMenu') as FormGroup, hospitalId);
       }
-      
-    }catch(e){
+    } catch (e) {
       logger.d(e);
     }
   }
@@ -58,12 +59,11 @@ class TreatmentModle {
         FormGroup({
           'hospitalId': FormControl<String>(value: element.hospitalId),
           'project': FormControl<String>(value: element.project),
-          'treatingCostExcludingTax':
-              FormControl<num>(value: element.treatingCostExcludingTax),
-          'treatingCostIncludingTax':
-              FormControl<num>(value: element.treatingCostIncludingTax),
-          'preparationForExams':
-              FormControl<String>(value: element.preparationForExams),
+          'treatmentCostExcludingTax':
+              FormControl<num>(value: element.treatmentCostExcludingTax),
+          'treatmentCostIncludingTax':
+              FormControl<num>(value: element.treatmentCostIncludingTax),
+          'remark': FormControl<String>(value: element.remark),
           'includeTax': include,
         }),
       );
@@ -79,9 +79,9 @@ class TreatmentModle {
         TreatmentMenuRequest response = TreatmentMenuRequest(
           hospitalId: element['hospitalId'],
           project: element['project'],
-          treatingCostExcludingTax: element['treatingCostExcludingTax'],
-          treatingCostIncludingTax: element['treatingCostIncludingTax'],
-          preparationForExams: element['preparationForExams'],
+          treatmentCostExcludingTax: element['treatmentCostExcludingTax'],
+          treatmentCostIncludingTax: element['treatmentCostIncludingTax'],
+          remark: element['remark'],
           includeTax: element['includeTax'],
         );
         hospitalRepository.postTreatmentMenu(response);
@@ -92,7 +92,8 @@ class TreatmentModle {
   }
 
   ValueNotifier<AsyncData<List<TreatmentTeleMenuResponse>>>
-      treatmentMenuTeleData = ValueNotifier(const AsyncData());
+      treatmentMenuTeleData =
+      ValueNotifier(const AsyncData<List<TreatmentTeleMenuResponse>>(data: []));
   Future<void> fetchTreatmentMenuTele(
       FormGroup formGroup, String hospitalId) async {
     try {
@@ -100,45 +101,52 @@ class TreatmentModle {
       final response =
           await hospitalRepository.getTreatmentTeleMenu(id: hospitalId);
       insertTreatmentMenuTele(formGroup, response);
+      logger.d(response);
     } catch (e) {
       logger.d(e);
     }
   }
 
-  void insertTreatmentMenuTele(FormGroup formGroup,List<TreatmentTeleMenuResponse> data) {
+  void insertTreatmentMenuTele(
+      FormGroup formGroup, List<TreatmentTeleMenuResponse> data) {
     var treatmentTeleMenu = formGroup.control('telemedicineMenu') as FormArray;
     for (var element in data) {
       treatmentTeleMenu.add(
         FormGroup({
-          'hospitalId': FormControl<String>(value: element.hospitalId),
+          'hospital': FormControl<String>(value: element.hospital),
           'project': FormControl<String>(value: element.project),
-          'treatingCostExcludingTax':
-              FormControl<num>(value: element.treatingCostExcludingTax),
-          'treatingCostIncludingTax':
-              FormControl<num>(value: element.treatingCostIncludingTax),
-          'remarks': FormControl<String>(value: element.remarks),
+          'treatmentCostExcludingTax':
+              FormControl<num>(value: element.treatmentCostExcludingTax),
+          'treatmentCostIncludingTax':
+              FormControl<num>(value: element.treatmentCostIncludingTax),
+          'remark': FormControl<String>(value: element.remark),
         }),
       );
     }
   }
 
-  ValueNotifier<AsyncData<TreatmentTeleMenuResponse>> submitTreatmentMenuTeledata = ValueNotifier(const AsyncData());
+  ValueNotifier<AsyncData<TreatmentTeleMenuResponse>>
+      submitTreatmentMenuTeledata = ValueNotifier(const AsyncData());
   Future<void> submitTreatmentMenuTele(FormGroup formGroup) async {
-    try{
+    try {
+      treatmentMenuTeleData.value = const AsyncData(loading: true, data: []);
       submitTreatmentMenuTeledata.value = const AsyncData(loading: true);
-      formGroup.control('telemedicineMenu').value.forEach((element) {
-          TreatmentTeleMenuRequest response = TreatmentTeleMenuRequest(
-            hospitalId: element['hospitalId'],
-            project: element['project'],
-            treatingCostExcludingTax: element['treatingCostExcludingTax'],
-            treatingCostIncludingTax: element['treatingCostIncludingTax'],
-            remarks: element['remarks'],
-          );
-          hospitalRepository.postTreatmentTeleMenu(response);
+      await formGroup
+          .control('telemedicineMenu')
+          .value
+          .forEach((element) async {
+        TreatmentTeleMenuRequest response = TreatmentTeleMenuRequest(
+          hospital: element['hospital'],
+          project: element['project'],
+          treatmentCostExcludingTax: element['treatmentCostExcludingTax'],
+          treatmentCostIncludingTax: element['treatmentCostIncludingTax'],
+          remark: element['remark'],
+        );
+        await hospitalRepository.postTreatmentTeleMenu(response);
       });
-
-
-    }catch(e){
+      treatmentMenuTeleData.value = AsyncData(data: []);
+      submitTreatmentMenuTeledata.value = const AsyncData(loading: false);
+    } catch (e) {
       logger.d(e);
       submitTreatmentMenuTeledata.value = AsyncData(error: e);
     }

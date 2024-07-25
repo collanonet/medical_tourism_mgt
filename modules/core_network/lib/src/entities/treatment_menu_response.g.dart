@@ -12,9 +12,9 @@ TreatmentMenuResponse _$TreatmentMenuResponseFromJson(
       id: json['_id'] as String,
       hospitalId: json['hospitalId'] as String?,
       project: json['project'] as String?,
-      treatingCostExcludingTax: json['treatingCostExcludingTax'] as num?,
-      treatingCostIncludingTax: json['treatingCostIncludingTax'] as num?,
-      preparationForExams: json['preparationForExams'] as String?,
+      treatmentCostExcludingTax: json['treatmentCostExcludingTax'] as num?,
+      treatmentCostIncludingTax: json['treatmentCostIncludingTax'] as num?,
+      remark: json['remark'] as String?,
       includeTax: (json['includeTax'] as List<dynamic>?)
           ?.map((e) => TaxModel.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -26,9 +26,9 @@ Map<String, dynamic> _$TreatmentMenuResponseToJson(
       '_id': instance.id,
       'hospitalId': instance.hospitalId,
       'project': instance.project,
-      'treatingCostExcludingTax': instance.treatingCostExcludingTax,
-      'treatingCostIncludingTax': instance.treatingCostIncludingTax,
-      'preparationForExams': instance.preparationForExams,
+      'treatmentCostExcludingTax': instance.treatmentCostExcludingTax,
+      'treatmentCostIncludingTax': instance.treatmentCostIncludingTax,
+      'remark': instance.remark,
       'includeTax': instance.includeTax,
     };
 

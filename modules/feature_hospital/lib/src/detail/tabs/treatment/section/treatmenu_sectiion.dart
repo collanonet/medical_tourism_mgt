@@ -41,8 +41,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                   children: [
                     Expanded(
                         flex: 2,
-                        child:
-                            Text('項目', style: context.textTheme.bodyMedium)),
+                        child: Text('項目', style: context.textTheme.bodyMedium)),
                     Expanded(
                         flex: 1,
                         child: Text('治療費用（税別）',
@@ -71,8 +70,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                         children: [
                                           Text(
                                             'R',
-                                            style:
-                                                context.textTheme.bodyMedium,
+                                            style: context.textTheme.bodyMedium,
                                           ),
                                           Expanded(
                                             flex: 1,
@@ -82,8 +80,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                           ),
                                           Text(
                                             '%',
-                                            style:
-                                                context.textTheme.bodyMedium,
+                                            style: context.textTheme.bodyMedium,
                                           )
                                         ],
                                       ),
@@ -104,8 +101,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
               const SizedBox(
                 width: 8,
               ),
-              Expanded(
-                  child: Text('準備検査', style: context.textTheme.bodyMedium))
+              Expanded(child: Text('準備検査', style: context.textTheme.bodyMedium))
             ]),
         RowSeparated(
           separatorBuilder: (context, index) => SizedBox(
@@ -133,12 +129,12 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                           Expanded(
                               flex: 1,
                               child: ReactiveTextField(
-                                formControlName: 'treatingCostExcludingTax',
+                                formControlName: 'treatmentCostExcludingTax',
                               )),
                           Expanded(
                               flex: 1,
                               child: ReactiveTextField(
-                                formControlName: 'treatingCostExcludingTax',
+                                formControlName: 'treatmentCostExcludingTax',
                               )),
                           Expanded(
                             flex: 4,
@@ -158,7 +154,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                         ),
                                       ),
                                     );
-    
+
                                 return RowSeparated(
                                   separatorBuilder: (context, index) =>
                                       SizedBox(
@@ -205,15 +201,14 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                           formArray.controls.map((control) => ReactiveForm(
                               formGroup: control as FormGroup,
                               child: RowSeparated(
-                                separatorBuilder: (context, index) =>
-                                    SizedBox(
+                                separatorBuilder: (context, index) => SizedBox(
                                   width: context.appTheme.spacing.formSpacing,
                                 ),
                                 children: [
                                   Expanded(
                                     flex: 2,
                                     child: ReactiveTextField(
-                                      formControlName: 'preparationForExams',
+                                      formControlName: 'remark',
                                     ),
                                   ),
                                 ],
@@ -230,8 +225,8 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
           onTap: () {
             formArray.add(FormGroup({
               'project': FormControl<String>(),
-              'treatingCostExcludingTax': FormControl<String>(),
-              'treatingCostIncludingTax': FormControl<String>(),
+              'treatmentCostExcludingTax': FormControl<String>(),
+              'treatmentCostIncludingTax': FormControl<String>(),
               'preparationForExams': FormControl<String>(),
               'includeTax': includeTaxFormArray,
             }));

@@ -1209,7 +1209,7 @@ abstract class ApiService {
     @Body() TreatmentMenuRequest treatmentMenuRequest,
   );
 
-  @GET('${Endpoints.TREATMENT_TELE_MENU}/{id}')
+  @GET('${Endpoints.TREATMENT_TELE_MENU}/by-hospital/{id}')
   Future<List<TreatmentTeleMenuResponse>> getTreatmentTeleMenu({
     @Path('id') required String id,
   });

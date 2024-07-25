@@ -11,10 +11,10 @@ TreatmentTeleMenuResponse _$TreatmentTeleMenuResponseFromJson(
     TreatmentTeleMenuResponse(
       id: json['_id'] as String,
       project: json['project'] as String?,
-      treatingCostExcludingTax: json['treatingCostExcludingTax'] as num?,
-      treatingCostIncludingTax: json['treatingCostIncludingTax'] as num?,
-      remarks: json['remarks'] as String?,
-      hospitalId: json['hospitalId'] as String?,
+      treatmentCostExcludingTax: json['treatmentCostExcludingTax'] as num?,
+      treatmentCostIncludingTax: json['treatmentCostIncludingTax'] as num?,
+      remark: json['remark'] as String?,
+      hospital: json['hospital'] as String?,
     );
 
 Map<String, dynamic> _$TreatmentTeleMenuResponseToJson(
@@ -22,8 +22,8 @@ Map<String, dynamic> _$TreatmentTeleMenuResponseToJson(
     <String, dynamic>{
       '_id': instance.id,
       'project': instance.project,
-      'treatingCostExcludingTax': instance.treatingCostExcludingTax,
-      'treatingCostIncludingTax': instance.treatingCostIncludingTax,
-      'remarks': instance.remarks,
-      'hospitalId': instance.hospitalId,
+      'treatmentCostExcludingTax': instance.treatmentCostExcludingTax,
+      'treatmentCostIncludingTax': instance.treatmentCostIncludingTax,
+      'remark': instance.remark,
+      'hospital': instance.hospital,
     };

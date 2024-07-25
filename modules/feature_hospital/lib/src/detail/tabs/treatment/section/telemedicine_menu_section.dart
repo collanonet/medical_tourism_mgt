@@ -1,4 +1,3 @@
-
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/material.dart';
@@ -79,19 +78,19 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                           Expanded(
                             flex: 2,
                             child: ReactiveTextField(
-                              formControlName: 'treatingCostExcludingTax',
+                              formControlName: 'treatmentCostExcludingTax',
                             ),
                           ),
                           Expanded(
                             flex: 2,
                             child: ReactiveTextField(
-                              formControlName: 'treatingCostIncludingTax',
+                              formControlName: 'treatmentCostIncludingTax',
                             ),
                           ),
                           Expanded(
                             flex: 3,
                             child: ReactiveTextField(
-                              formControlName: 'remarks',
+                              formControlName: 'remark',
                             ),
                           ),
                           MaterialButton(
@@ -115,8 +114,8 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
         InkWell(
           onTap: () => formArray.add(FormGroup({
             'project': FormControl<String>(),
-            'treatingCostExcludingTax': FormControl<String>(),
-            'treatingCostIncludingTax': FormControl<String>(),
+            'treatmentCostExcludingTax': FormControl<String>(),
+            'treatmentCostIncludingTax': FormControl<String>(),
             'remarks': FormControl<String>(),
           })),
           child: Row(
