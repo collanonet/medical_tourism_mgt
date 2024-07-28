@@ -97,7 +97,8 @@ FormGroup basicInformationForm() {
         'email': FormControl<String>(
           validators: [
             Validators.email,
-          ],),
+          ],
+        ),
         'faxNumber': FormControl<String>(),
       }),
     ]),
@@ -107,7 +108,9 @@ FormGroup basicInformationForm() {
         'hospital': FormControl<String?>(),
         'profile': FormControl<FileSelect>(),
         'photoRelease': FormControl<String>(),
-        'name': FormControl<String>(),
+        'name': FormControl<String>(
+          validators: [Validators.required],
+        ),
         'remark': FormControl<String>(),
         'departmentName': FormControl<String>(),
         'post': FormControl<String>(),
@@ -131,12 +134,23 @@ FormGroup basicInformationForm() {
             'name': FormControl<String>(),
           })
         ]),
-        'telephoneNumber': FormControl<String>(),
-        'faxNumber': FormControl<String>(),
+        'telephoneNumber': FormControl<String>(
+          validators: [
+            Validators.required,
+            Validators.number,
+          ],
+        ),
+        'faxNumber': FormControl<String>(
+          validators: [
+            Validators.number,
+          ],
+        ),
         'email': FormControl<String>(
           validators: [
+            Validators.required,
             Validators.email,
-          ],),
+          ],
+        ),
         'remark2': FormControl<String>(),
       })
     ]),

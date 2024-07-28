@@ -14,7 +14,12 @@ FormGroup formBasicInformation() {
       'postalCode': FormControl<String>(),
       'address': FormControl<String>(),
       'area': FormControl<String>(),
-      'phoneNumber': FormControl<String>(),
+      'phoneNumber': FormControl<String>(
+        validators: [
+          Validators.required,
+          Validators.number,
+        ],
+      ),
       'transactionStartDate': FormControl<DateTime>(
         validators: [
           Validators.required,
@@ -42,7 +47,10 @@ FormGroup formBasicInformation() {
         'fullNameJapaneseKanjiChineseOnly': FormControl<String>(),
         'fullNameKana': FormControl<String>(),
         'phoneNumber': FormControl<String>(
-          validators: [Validators.required],
+          validators: [
+            Validators.required,
+            Validators.number,
+          ],
         ),
         'email': FormControl<String>(
           validators: [
