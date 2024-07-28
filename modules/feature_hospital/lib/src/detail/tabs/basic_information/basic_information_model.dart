@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
@@ -15,7 +16,6 @@ class BasicInformationModel {
 
   final HospitalRepository hospitalRepository;
 
-  // todo: value data repsonse as valuenotifier
   ValueNotifier<AsyncData<BasicInformationHospitalResponse>>
       basicInformationData = ValueNotifier(const AsyncData());
 
@@ -37,8 +37,11 @@ class BasicInformationModel {
   ValueNotifier<AsyncData<List<SupportLanguageHospitalResponse>>>
       supportLangaugeData = ValueNotifier(const AsyncData());
 
+  ValueNotifier<String?> hospitalId = ValueNotifier(null);
+
   Future<void> fetchData(FormGroup formGroup, {String? hospitalId}) async {
     try {
+      this.hospitalId.value = hospitalId;
       if (hospitalId != null) {
         await fetchBasicInformation(
             formGroup.control('basicInformation') as FormGroup, hospitalId);
@@ -83,7 +86,7 @@ class BasicInformationModel {
       FormGroup formGroup, HowToRequestHospitalResponse data) {
     formGroup.patchValue({
       'id': data.id,
-      'hospital': basicInformationData.value.requireData.id,
+      'hospital': hospitalId.value ?? basicInformationData.value.data?.id ?? '',
       'dateOfUpdate': data.dateOfUpdate,
       'updater': data.updater,
       'memo': data.memo,
@@ -142,7 +145,8 @@ class BasicInformationModel {
               value: item.id,
             ),
             'hospital': FormControl<String>(
-              value: basicInformationData.value.requireData.id,
+              value:
+                  hospitalId.value ?? basicInformationData.value.data?.id ?? '',
             ),
             'dateOfUpdate': FormControl<DateTime>(
               value: item.dateOfUpdate,
@@ -255,7 +259,8 @@ class BasicInformationModel {
               value: item.id,
             ),
             'hospital': FormControl<String>(
-              value: basicInformationData.value.requireData.id,
+              value:
+                  hospitalId.value ?? basicInformationData.value.data?.id ?? '',
             ),
             'profile': FormControl<String>(
               value: item.profile,
@@ -329,7 +334,7 @@ class BasicInformationModel {
       await insertDataAdditionalInformation(formGroup, result);
       additionalInformationData.value = AsyncData(data: result);
     } catch (e) {
-      logger.d("error get data additional information $e");
+      logger.e(e);
       additionalInformationData.value = AsyncData(error: e);
     }
   }
@@ -339,12 +344,9 @@ class BasicInformationModel {
     AdditionalInformationSectionResponse data,
   ) async {
     try {
-      logger.d("data additional information $data");
-      logger.d(data.toJson());
-
       formGroup.control('_id').value = data.id;
       formGroup.control('hospital').value =
-          basicInformationData.value.requireData.id;
+          hospitalId.value ?? basicInformationData.value.data?.id ?? '';
       formGroup.control('outsourcingContract').value = data.outsourcingContract;
       formGroup.control('msCorporation').value = data.msCorporation;
       formGroup.control('referralFee').value = data.referralFee;
@@ -372,7 +374,7 @@ class BasicInformationModel {
         }),
       );
     } catch (e) {
-      logger.d("error insert data additional information $e");
+      logger.e(e);
     }
   }
 
@@ -385,7 +387,7 @@ class BasicInformationModel {
       paymentOptionData.value = AsyncData(data: result);
       insertDataPaymentOption(formGroup, result);
     } catch (e) {
-      logger.d(e);
+      logger.e(e);
       paymentOptionData.value = AsyncData(error: e);
     }
   }
@@ -408,7 +410,7 @@ class BasicInformationModel {
       supportLangaugeData.value = AsyncData(data: result);
       insertDataSupportLanguage(formArray, result);
     } catch (e) {
-      logger.d(e);
+      logger.e(e);
       supportLangaugeData.value = AsyncData(error: e);
     }
   }
@@ -423,7 +425,8 @@ class BasicInformationModel {
           FormGroup({
             '_id': FormControl<String>(value: item.id),
             'hospital': FormControl<String>(
-              value: basicInformationData.value.requireData.id,
+              value:
+                  hospitalId.value ?? basicInformationData.value.data?.id ?? '',
             ),
             'supportLanguage': FormControl<String>(value: item.supportLanguage),
             'foreignStaff': FormControl<bool>(value: item.foreignStaff),
@@ -444,9 +447,20 @@ class BasicInformationModel {
       submit.value = const AsyncData(loading: true);
       await submitBasicInformation(formGroup);
 
+      if (hospitalId.value != null) {
+        await submitHowToMakeRequest(
+            formGroup.control('howToMakeRequest') as FormGroup);
+        await submitMedicalRecordBasicInfo(formGroup);
+        await submitDoctorInformation(formGroup);
+        await submitAdditionalInformation(
+            formGroup.control('additionalInformationSection') as FormGroup);
+        await submitPaymentOption(
+            formGroup.control('paymentOptionSection') as FormGroup);
+        await submitSupportLanguage(formGroup);
+      }
+
       submit.value = const AsyncData(data: true);
     } catch (e) {
-      logger.d(e);
       submit.value = AsyncData(error: e);
     }
   }
@@ -454,23 +468,13 @@ class BasicInformationModel {
   Future<void> submitBasicInformation(FormGroup formGroup) async {
     try {
       basicInformationData.value = const AsyncData(loading: true);
-      logger.d(formGroup.value);
       final result = await hospitalRepository.postBasicInformationHospital(
         BasicInformationHospitalRequest.fromJson(
             (formGroup.control('basicInformation') as FormGroup).value),
       );
 
+      hospitalId.value = hospitalId.value ?? result.id;
       basicInformationData.value = AsyncData(data: result);
-
-      await submitHowToMakeRequest(
-          formGroup.control('howToMakeRequest') as FormGroup);
-      await submitMedicalRecordBasicInfo(formGroup);
-      await submitDoctorInformation(formGroup);
-      await submitAdditionalInformation(
-          formGroup.control('additionalInformationSection') as FormGroup);
-      await submitPaymentOption(
-          formGroup.control('paymentOptionSection') as FormGroup);
-      await submitSupportLanguage(formGroup);
     } catch (e) {
       logger.d(e);
       basicInformationData.value = AsyncData(error: e);
@@ -482,7 +486,7 @@ class BasicInformationModel {
       howToMakeRequestHospitalData.value = const AsyncData(loading: true);
 
       HowToRequestHospitalRequest request = HowToRequestHospitalRequest(
-        hospital: basicInformationData.value.requireData.id,
+        hospital: hospitalId.value ?? basicInformationData.value.data?.id ?? '',
         id: form.control('_id').value,
         dateOfUpdate: form.control('dateOfUpdate').value,
         updater: form.control('updater').value,
@@ -493,6 +497,7 @@ class BasicInformationModel {
 
       howToMakeRequestHospitalData.value = AsyncData(data: result);
     } catch (e) {
+      logger.e(e);
       howToMakeRequestHospitalData.value = AsyncData(error: e);
     }
   }
@@ -508,7 +513,8 @@ class BasicInformationModel {
           .forEach((element) async {
         MedicalRecordBasicInfoHospitalRequest request =
             MedicalRecordBasicInfoHospitalRequest(
-          hospital: basicInformationData.value.requireData.id,
+          hospital:
+              hospitalId.value ?? basicInformationData.value.data?.id ?? '',
           id: element['_id'],
           dateOfUpdate: element['dateOfUpdate'],
           departmentName: element['departmentName'],
@@ -538,59 +544,36 @@ class BasicInformationModel {
   Future<void> submitDoctorInformation(FormGroup formGroup) async {
     try {
       doctorInformationData.value = const AsyncData(loading: true);
-      String? file;
-      if (formGroup.control('uploadFile').value != null) {
-        try {
-          // convert Uint8List to base64
-          FileSelect docFile = formGroup.control('profile').value;
-          String base64Image = base64Encode(docFile.file);
-          FileResponse fileData = await hospitalRepository.uploadFileBase64(
-            base64Image,
-            docFile.filename,
-          );
-          file = fileData.filename;
-        } catch (e) {
-          logger.e(e);
-        }
-      }
       await formGroup
           .control('addDoctorProfile')
           .value
           .forEach((element) async {
-        logger.e(element);
-
-        List<String> affiliatedAcademicSociety = [];
-        List data = element['affiliatedAcademicSociety'] as List;
-        if (data.isNotEmpty) {
-          for (var i = 0; i < data.length; i++) {
-            if (data[i]['name'] != null || data[i]['name'] != '') {
-              affiliatedAcademicSociety.add(data[i]['name']);
-            }
+        String? file;
+        if (formGroup.control('profile').value != null) {
+          try {
+            FileSelect docFile = formGroup.control('profile').value;
+            String base64Image = base64Encode(docFile.file);
+            FileResponse fileData = await hospitalRepository.uploadFileBase64(
+              base64Image,
+              docFile.filename,
+            );
+            file = fileData.filename;
+          } catch (e) {
+            logger.e(e);
           }
         }
 
-        List<String> qualifications = [];
-        List data1 = element['qualifications'] as List;
-        if (data1.isNotEmpty) {
-          for (var i = 0; i < data1.length; i++) {
-            if (data1[i]['name'] != null || data1[i]['name'] != '') {
-              qualifications.add(data1[i]['name']);
-            }
-          }
-        }
+        List<String> affiliatedAcademicSociety =
+            convertToList(element, 'affiliatedAcademicSociety');
 
-        List<String> completionCertificate = [];
-        List data2 = element['completionCertificate'] as List;
-        if (data2.isNotEmpty) {
-          for (var i = 0; i < data2.length; i++) {
-            if (data2[i]['name'] != null || data2[i]['name'] != '') {
-              completionCertificate.add(data2[i]['name']);
-            }
-          }
-        }
+        List<String> qualifications = convertToList(element, 'qualifications');
+
+        List<String> completionCertificate =
+            convertToList(element, 'completionCertificate');
 
         DoctorProfileHospitalRequest request = DoctorProfileHospitalRequest(
-          hospital: basicInformationData.value.requireData.id,
+          hospital:
+              hospitalId.value ?? basicInformationData.value.data?.id ?? '',
           id: element['_id'],
           profile: file,
           photoRelease: element['photoRelease'],
@@ -623,6 +606,7 @@ class BasicInformationModel {
       doctorInformationData.value =
           AsyncData(data: doctorInformationData.value.data);
     } catch (e) {
+      logger.e(e);
       doctorInformationData.value = AsyncData(error: e);
     }
   }
@@ -631,17 +615,11 @@ class BasicInformationModel {
     try {
       additionalInformationData.value = const AsyncData(loading: true);
 
-      List<String> contract = [];
-
-      form.control('contract').value.forEach((element) {
-        if (element['name'] != null) {
-          contract.add(element['name']);
-        }
-      });
+      List<String> contract = convertToList(form.value, 'contract');
 
       AdditionalInformationSectionRequest request =
           AdditionalInformationSectionRequest(
-        hospital: basicInformationData.value.requireData.id,
+        hospital: hospitalId.value ?? basicInformationData.value.data?.id ?? '',
         id: form.control('_id').value,
         outsourcingContract: form.control('outsourcingContract').value,
         contract: contract,
@@ -658,6 +636,7 @@ class BasicInformationModel {
 
       additionalInformationData.value = AsyncData(data: result);
     } catch (e) {
+      logger.e(e);
       additionalInformationData.value = AsyncData(error: e);
     }
   }
@@ -667,7 +646,7 @@ class BasicInformationModel {
       paymentOptionData.value = const AsyncData(loading: true);
 
       PaymentOptionHospitalRequest request = PaymentOptionHospitalRequest(
-        hospital: basicInformationData.value.requireData.id,
+        hospital: hospitalId.value ?? basicInformationData.value.data?.id ?? '',
         id: form.control('_id').value,
         payer: form.control('payer').value,
         paymentTiming: form.control('paymentTiming').value,
@@ -709,7 +688,8 @@ class BasicInformationModel {
             element['supportLanguage'].toString().isNotEmpty) {
           SupportLanguageHospitalRequest request =
               SupportLanguageHospitalRequest(
-            hospital: basicInformationData.value.requireData.id,
+            hospital:
+                hospitalId.value ?? basicInformationData.value.data?.id ?? '',
             id: element['_id'],
             supportLanguage: element['supportLanguage'],
             foreignStaff: element['foreignStaff'],
@@ -722,6 +702,7 @@ class BasicInformationModel {
 
       supportLangaugeData.value = AsyncData(data: []);
     } catch (e) {
+      logger.e(e);
       supportLangaugeData.value = AsyncData(error: e);
     }
   }

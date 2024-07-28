@@ -1,4 +1,3 @@
-
 import 'package:core_network/core_network.dart';
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
@@ -98,9 +97,11 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                 width: 80,
                                                 height: 80,
                                                 decoration: BoxDecoration(
-                                                    image: DecorationImage(
-                                                        image: NetworkImage(
-                                                            value.requireData
+                                                    image: value.data == null
+                                                        ? null
+                                                        : DecorationImage(
+                                                            image: NetworkImage(value
+                                                                .requireData
                                                                 .map((e) =>
                                                                     e.profile)
                                                                 .toString())),
@@ -110,11 +111,10 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                     border: Border.fromBorderSide(
                                                         BorderSide(
                                                             color: Colors.black,
-                                                            width: imageBytes
-                                                                        .length !=
-                                                                    8
-                                                                ? 0
-                                                                : 1))),
+                                                            width:
+                                                                imageBytes.length != 8
+                                                                    ? 0
+                                                                    : 1))),
                                                 child: imageBytes.length != 8
                                                     ? Image.memory(
                                                         imageBytes,
