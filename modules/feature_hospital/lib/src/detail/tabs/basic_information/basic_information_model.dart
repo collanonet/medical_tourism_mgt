@@ -239,7 +239,12 @@ class BasicInformationModel {
             'departmentName': FormControl<String>(value: item.departmentName),
             'post': FormControl<String>(value: item.post),
             'specialty': FormControl<String>(value: item.specialty),
-            'nameKanji': FormControl<String>(value: item.nameKanji),
+            'nameKanji': FormControl<String>(
+              value: item.nameKanji ?? '',
+              validators: [
+                Validators.number,
+              ],
+            ),
             'nameKana': FormControl<String>(value: item.nameKana),
             'affiliatedAcademicSociety': affiliatedAcademicSociety,
             'qualifications': qualifications,
@@ -247,12 +252,23 @@ class BasicInformationModel {
                 value: item.trainingCompletionCertificateNumber),
             'onlineMedicalTreatment':
                 FormControl<String>(value: item.onlineMedicalTreatment),
-            'telephoneNumber': FormControl<String>(value: item.telephoneNumber),
-            'completionCertificate': completionCertificate,
-            'faxNumber': FormControl<String>(value: item.faxNumber),
-            'email': FormControl<String>(
-              value: item.email,
+            'telephoneNumber': FormControl<String>(
+              value: item.telephoneNumber ?? '',
               validators: [
+                Validators.number,
+              ],
+            ),
+            'completionCertificate': completionCertificate,
+            'faxNumber': FormControl<String>(
+              value: item.faxNumber ?? '',
+              validators: [
+                Validators.number,
+              ],
+            ),
+            'email': FormControl<String>(
+              value: item.email ?? '',
+              validators: [
+                Validators.required,
                 Validators.email,
               ],
             ),
@@ -501,34 +517,34 @@ class BasicInformationModel {
         logger.e(element);
 
         List<String> affiliatedAcademicSociety = [];
-        // List data = element['affiliatedAcademicSociety'] as List;
-        // if (data.isNotEmpty) {
-        //   for (var i = 0; i < data.length; i++) {
-        //     if (data[i]['name'] != null || data[i]['name'] != '') {
-        //       affiliatedAcademicSociety.add(data[i]['name']);
-        //     }
-        //   }
-        // }
+        List data = element['affiliatedAcademicSociety'] as List;
+        if (data.isNotEmpty) {
+          for (var i = 0; i < data.length; i++) {
+            if (data[i]['name'] != null || data[i]['name'] != '') {
+              affiliatedAcademicSociety.add(data[i]['name']);
+            }
+          }
+        }
 
         List<String> qualifications = [];
-        // List data1 = element['qualifications'] as List;
-        // if (data1.isNotEmpty) {
-        //   for (var i = 0; i < data1.length; i++) {
-        //     if (data1[i]['name'] != null || data1[i]['name'] != '') {
-        //       qualifications.add(data1[i]['name']);
-        //     }
-        //   }
-        // }
+        List data1 = element['qualifications'] as List;
+        if (data1.isNotEmpty) {
+          for (var i = 0; i < data1.length; i++) {
+            if (data1[i]['name'] != null || data1[i]['name'] != '') {
+              qualifications.add(data1[i]['name']);
+            }
+          }
+        }
 
         List<String> completionCertificate = [];
-        // List data2 = element['completionCertificate'] as List;
-        // if (data2.isNotEmpty) {
-        //   for (var i = 0; i < data2.length; i++) {
-        //     if (data2[i]['name'] != null || data2[i]['name'] != '') {
-        //       completionCertificate.add(data2[i]['name']);
-        //     }
-        //   }
-        // }
+        List data2 = element['completionCertificate'] as List;
+        if (data2.isNotEmpty) {
+          for (var i = 0; i < data2.length; i++) {
+            if (data2[i]['name'] != null || data2[i]['name'] != '') {
+              completionCertificate.add(data2[i]['name']);
+            }
+          }
+        }
 
         DoctorProfileHospitalRequest request = DoctorProfileHospitalRequest(
           hospital: basicInformationData.value.requireData.id,
@@ -553,15 +569,16 @@ class BasicInformationModel {
           email: element['email'],
           remark2: element['remark2'],
         );
-        // var result =
-        await hospitalRepository.postDoctorInformationHospital(request);
-        // doctorInformationData.value.copyWith(data: [
-        //   ...doctorInformationData.value.data ?? [],
-        //   result,
-        // ]);
+        var result =
+            await hospitalRepository.postDoctorInformationHospital(request);
+        doctorInformationData.value.copyWith(data: [
+          ...doctorInformationData.value.data ?? [],
+          result,
+        ]);
       });
 
-      doctorInformationData.value = AsyncData(data: []);
+      doctorInformationData.value =
+          AsyncData(data: doctorInformationData.value.data);
     } catch (e) {
       logger.d("error create doctor $e");
       doctorInformationData.value = AsyncData(error: e);

@@ -201,17 +201,26 @@ class AgentBasicInformationModel {
                 FormControl<String>(value: element.nameCardDragDrop),
             'departmentName':
                 FormControl<String>(value: element.departmentName),
-            'fullNameRomanji':
-                FormControl<String>(value: element.fullNameRomanji),
+            'fullNameRomanji': FormControl<String>(
+              value: element.fullNameRomanji ?? '',
+              validators: [Validators.required],
+            ),
             'fullNameChineseKanjiVietnameseNotation': FormControl<String>(
                 value: element.fullNameChineseKanjiVietnameseNotation),
             'fullNameJapaneseKanjiChineseOnly': FormControl<String>(
                 value: element.fullNameJapaneseKanjiChineseOnly),
             'fullNameKana': FormControl<String>(value: element.fullNameKana),
-            'phoneNumber': FormControl<String>(value: element.phoneNumber),
+            'phoneNumber': FormControl<String>(
+              value: element.phoneNumber ?? '',
+              validators: [
+                Validators.required,
+                Validators.number,
+              ],
+            ),
             'email': FormControl<String>(
               value: element.email,
               validators: [
+                Validators.required,
                 Validators.email,
               ],
             ),

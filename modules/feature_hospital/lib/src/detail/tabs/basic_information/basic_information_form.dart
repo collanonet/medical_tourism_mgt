@@ -108,14 +108,14 @@ FormGroup basicInformationForm() {
         'hospital': FormControl<String?>(),
         'profile': FormControl<FileSelect>(),
         'photoRelease': FormControl<String>(),
-        'name': FormControl<String>(
-          validators: [Validators.required],
-        ),
+        'name': FormControl<String>(),
         'remark': FormControl<String>(),
         'departmentName': FormControl<String>(),
         'post': FormControl<String>(),
         'specialty': FormControl<String>(),
-        'nameKanji': FormControl<String>(),
+        'nameKanji': FormControl<String>(
+          validators: [Validators.required],
+        ),
         'nameKana': FormControl<String>(),
         'affiliatedAcademicSociety': FormArray([
           FormGroup({
