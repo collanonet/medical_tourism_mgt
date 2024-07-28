@@ -19,12 +19,8 @@ class _QAndASectionState extends State<QAndASection> {
         separatorBuilder: ((context, index) => SizedBox(
               height: context.appTheme.spacing.formSpacing,
             )),
-        children: const [
-          QAndANewRegistrationSection(),
-        ],
+        children: const [QAndANewRegistrationSection(), QAndAListSection()],
       ),
     );
   }
 }
-
-//QAndAListSection()

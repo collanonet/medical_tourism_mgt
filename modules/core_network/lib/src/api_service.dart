@@ -951,7 +951,7 @@ abstract class ApiService {
   );
 
   @GET('${Endpoints.GET_NEW_REGISTRATION_HOSPITAL}/by-hospital/{hospitalId}')
-  Future<NewRegistrationHospitalResponse> getNewRegistrationHospital(
+  Future<List<NewRegistrationHospitalResponse>> getNewRegistrationHospital(
     @Path('hospitalId') String hospitalId,
   );
 
@@ -1229,6 +1229,12 @@ abstract class ApiService {
   Future<TreatmentTeleMenuResponse> postTreatmentTeleMenu(
     @Body() TreatmentTeleMenuRequest treatmentTeleMenuRequest,
   );
+
+  @PUT(Endpoints.TREATMENT_TELE_MENU)
+  Future<TreatmentTeleMenuResponse> putTreatmentTeleMenu({
+    @Path('id') required String id,
+    @Body() required TreatmentTeleMenuRequest treatmentTeleMenuRequest,
+  });
 }
 
 extension ApiServiceExts on ApiService {

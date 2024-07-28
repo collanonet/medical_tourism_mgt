@@ -1,7 +1,12 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+import '../g_and_a_model.dart';
 
 class QAndAListSection extends StatefulWidget {
   const QAndAListSection({super.key});
@@ -83,39 +88,59 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                           ),
                         ])
                   ]),
-              ExpansionTile(
-                collapsedBackgroundColor:
-                    context.appTheme.primaryBackgroundColor,
-                title: Text(
-                  'こちらの病院のベットは、個室ベットはありますか？こちらの病院のベットは、個室ベットはありますか？',
-                  style: context.textTheme.bodyMedium!
-                      .copyWith(color: context.appTheme.primaryColor),
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 300,
+                child: ValueListenableBuilder(
+                  valueListenable:
+                      context.read<QAndAModel>().newRegistrationHospitalData,
+                  builder: (context, value, child) {
+                    return ListView.builder(
+                      itemCount: value.requireData.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(10),
+                          child: ExpansionTile(
+                              collapsedBackgroundColor:
+                                  context.appTheme.primaryBackgroundColor,
+                              title: Text(
+                                value.requireData[index].question.toString(),
+                                style: context.textTheme.bodyMedium!.copyWith(
+                                    color: context.appTheme.primaryColor),
+                              ),
+                              children: [
+                                Text(
+                                    value.requireData[index].answer.toString()),
+                              ]),
+                        );
+                      },
+                    );
+                  },
                 ),
-                children: List.generate(
-                    3, (index) => const ListTile(title: Text('Answer'))),
               ),
-              ExpansionTile(
-                collapsedBackgroundColor:
-                    context.appTheme.primaryBackgroundColor,
-                title: Text(
-                  '医師の経歴を教えてください。',
-                  style: context.textTheme.bodyMedium!
-                      .copyWith(color: context.appTheme.primaryColor),
-                ),
-                children: List.generate(
-                    3, (index) => const ListTile(title: Text('Answer'))),
-              ),
-              ExpansionTile(
-                collapsedBackgroundColor:
-                    context.appTheme.primaryBackgroundColor,
-                title: Text(
-                  '医師の経歴を教えてください。',
-                  style: context.textTheme.bodyMedium!
-                      .copyWith(color: context.appTheme.primaryColor),
-                ),
-                children: List.generate(
-                    3, (index) => const ListTile(title: Text('Answer'))),
-              ),
+
+              // ExpansionTile(
+              //   collapsedBackgroundColor:
+              //       context.appTheme.primaryBackgroundColor,
+              //   title: Text(
+              //     '医師の経歴を教えてください。',
+              //     style: context.textTheme.bodyMedium!
+              //         .copyWith(color: context.appTheme.primaryColor),
+              //   ),
+              //   children: List.generate(
+              //       3, (index) => const ListTile(title: Text('Answer'))),
+              // ),
+              // ExpansionTile(
+              //   collapsedBackgroundColor:
+              //       context.appTheme.primaryBackgroundColor,
+              //   title: Text(
+              //     '医師の経歴を教えてください。',
+              //     style: context.textTheme.bodyMedium!
+              //         .copyWith(color: context.appTheme.primaryColor),
+              //   ),
+              //   children: List.generate(
+              //       3, (index) => const ListTile(title: Text('Answer'))),
+              // ),
               ReactiveTextField(
                 formControlName: 'about',
                 maxLines: 6,

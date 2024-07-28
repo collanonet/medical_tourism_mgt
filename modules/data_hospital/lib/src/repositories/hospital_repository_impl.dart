@@ -107,7 +107,7 @@ class HospitalRepositoryIml extends HospitalRepository {
   }
 
   @override
-  Future<NewRegistrationHospitalResponse> getNewRegistrationHospital(
+  Future<List<NewRegistrationHospitalResponse>> getNewRegistrationHospital(
       String hospitalId) {
     return remote.getNewRegistrationHospital(hospitalId);
   }
@@ -238,5 +238,15 @@ class HospitalRepositoryIml extends HospitalRepository {
   @override
   Future<TreatmentTeleMenuResponse> postTreatmentTeleMenu(TreatmentTeleMenuRequest treatmentTeleMenuRequest) {
     return remote.postTreatmentTeleMenu(treatmentTeleMenuRequest);
+  }
+  
+  @override
+  Future<TreatmentMenuResponse> putTreatmentMenu( String id, TreatmentMenuRequest treatmentMenuRequest) {
+    return remote.putTreatmentMenu(id, treatmentMenuRequest);
+  }
+  
+  @override
+  Future<TreatmentTeleMenuResponse> putTreatmentTeleMenu(String id, TreatmentTeleMenuRequest treatmentTeleMenuRequest) {
+    return remote.putTreatmentTeleMenu(id, treatmentTeleMenuRequest);
   }
 }

@@ -7,20 +7,22 @@ class NewRegistrationHospitalResponse {
   @JsonKey(name: '_id')
   final String? id;
   final DateTime? updateDate;
-  final String? updater;
+  final String? updatedBy;
   final String? classification;
   final bool? shareThisQADataWithHospitals;
   final String? question;
   final String? answer;
+  final String? hospital;
 
   NewRegistrationHospitalResponse({
     this.id,
     this.updateDate,
-    this.updater,
+    this.updatedBy,
     this.classification,
     this.shareThisQADataWithHospitals,
     this.question,
     this.answer,
+    this.hospital,
   });
 
   factory NewRegistrationHospitalResponse.fromJson(Map<String, dynamic> json) =>

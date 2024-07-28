@@ -2,9 +2,9 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup treatmentForm({required String hospitalId}) {
   return FormGroup({
-    'taxRate': FormArray([
+    'cost': FormArray([
       FormGroup({
-        'taxRate': FormControl<int>(
+        'cost': FormControl<int>(
             value: 15
         ),
       })
@@ -12,6 +12,7 @@ FormGroup treatmentForm({required String hospitalId}) {
     'treatmentMenu': FormArray([
       FormGroup({
         // todo: add id field
+        '_id' : FormControl<String>(),
         'hospitalId': FormControl<String>(value: hospitalId),
         'project': FormControl<String>(),
         'treatmentCostExcludingTax': FormControl<double>(),
@@ -19,10 +20,10 @@ FormGroup treatmentForm({required String hospitalId}) {
         'remark': FormControl<String>(),
         'treatmentCostTax': FormArray([
           FormGroup({
-            'tax': FormControl<double>(
+            'cost': FormControl<double>(
 
             ),
-            'taxRate': FormControl<int>(
+            'tax': FormControl<int>(
                 value: 15
             ),
           })
@@ -32,6 +33,7 @@ FormGroup treatmentForm({required String hospitalId}) {
     'telemedicineMenu': FormArray([
       FormGroup({
         // todo: add id field
+        '_id' : FormControl<String>(),
         'hospital': FormControl<String>(value: hospitalId),
         'project': FormControl<String>(),
         'treatmentCostExcludingTax': FormControl<num>(),

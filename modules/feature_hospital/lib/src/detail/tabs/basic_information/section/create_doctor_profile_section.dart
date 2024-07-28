@@ -1,3 +1,5 @@
+
+import 'package:core_network/core_network.dart';
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
@@ -83,9 +85,12 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                 imagePicker().then((value) => {
                                                       if (value != null)
                                                         {
-                                                          // setState(() {
-                                                          //   imageBytes = value;
-                                                          // })
+                                                          setState(() {
+                                                            logger.d(value);
+                                                            //fileSelect = value;
+                                                            //imageBytes = value;
+                                                            // logger.d(fileSelect);
+                                                          })
                                                         }
                                                     });
                                               },

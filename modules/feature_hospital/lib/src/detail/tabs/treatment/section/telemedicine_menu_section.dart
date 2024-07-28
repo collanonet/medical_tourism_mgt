@@ -116,7 +116,7 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
             'project': FormControl<String>(),
             'treatmentCostExcludingTax': FormControl<String>(),
             'treatmentCostTaxIncluded': FormControl<String>(),
-            'remarks': FormControl<String>(),
+            'remark': FormControl<String>(),
           })),
           child: Row(
             mainAxisSize: MainAxisSize.min,

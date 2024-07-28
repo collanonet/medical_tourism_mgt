@@ -14,8 +14,7 @@ class TreatmentModle {
     try {
       if (hospitalId != null) {
         await fetchTreatmentMenu(formGroup, hospitalId);
-        // fetchTreatmentMenuTele(
-        //     formGroup.control('telemedicineMenu') as FormGroup, hospitalId);
+        await fetchTreatmentMenuTele(formGroup, hospitalId);
       }
     } catch (e) {
       logger.d(e);
@@ -73,7 +72,7 @@ class TreatmentModle {
         // get tax rate from header
         data.first.treatmentCostTax!.map((e) {
           taxRateFormArray.add(FormGroup({
-            'taxRate': FormControl<int>(value: e.taxRate),
+            'tax': FormControl<int>(value: e.tax),
           }));
         });
       }
@@ -84,19 +83,20 @@ class TreatmentModle {
         if (element.treatmentCostTax?.isNotEmpty == true) {
           for (var elementx in element.treatmentCostTax!) {
             include.add(FormGroup({
-              'tax': FormControl<double>(value: elementx.tax),
-              'taxRate': FormControl<int>(value: elementx.taxRate),
+              'cost': FormControl<double>(value: elementx.cost),
+              'tax': FormControl<int>(value: elementx.tax),
             }));
           }
         } else {
           include.add(FormGroup({
-            'tax': FormControl<double>(),
-            'taxRate': FormControl<int>(value: 15),
+            'cost': FormControl<double>(),
+            'tax': FormControl<int>(value: 15),
           }));
         }
 
         treatmentMenuFormArray.add(
           FormGroup({
+            'id': FormControl<String>(value: element.id),
             'hospitalId': FormControl<String>(value: element.hospital),
             'project': FormControl<String>(value: element.project),
             'treatmentCostExcludingTax':
@@ -121,14 +121,13 @@ class TreatmentModle {
       submitTreatmentMenudata.value = const AsyncData(loading: true);
       await formGroup.control('treatmentMenu').value.forEach((element) async {
         List<TaxModel>? treatmentCostTax = [];
-
         for (var elementx in element['treatmentCostTax']) {
           int index = element['treatmentCostTax'].indexOf(elementx);
           // get tax rate from header
-          int? taxRate = formGroup.control('taxRate').value[index]['taxRate'];
+          int? taxRate = formGroup.control('cost').value[index]['cost'];
           treatmentCostTax.add(TaxModel(
-            tax: elementx['tax'],
-            taxRate: taxRate ?? 0,
+            cost: elementx['cost'] ?? 0,
+            tax: taxRate ?? 0,
           ));
         }
 
@@ -138,7 +137,7 @@ class TreatmentModle {
           treatmentCostExcludingTax: element['treatmentCostExcludingTax'],
           treatmentCostTaxIncluded: element['treatmentCostTaxIncluded'],
           remark: element['remark'],
-          treatmentCostTax: treatmentCostTax,
+          //treatmentCostTax: treatmentCostTax,
         );
         logger.d(request.toJson());
         logger.d(request.treatmentCostTax?.first.toJson());
@@ -177,8 +176,12 @@ class TreatmentModle {
       FormGroup formGroup, List<TreatmentTeleMenuResponse> data) {
     var treatmentTeleMenu = formGroup.control('telemedicineMenu') as FormArray;
     for (var element in data) {
+      if (data.isEmpty) {
+        treatmentTeleMenu.clear();
+      }
       treatmentTeleMenu.add(
         FormGroup({
+          '_id': FormControl<String>(value: element.id),
           'hospital': FormControl<String>(value: element.hospital),
           'project': FormControl<String>(value: element.project),
           'treatmentCostExcludingTax':
@@ -202,16 +205,30 @@ class TreatmentModle {
           .value
           .forEach((element) async {
         // mapping data from form into object model
-        TreatmentTeleMenuRequest response = TreatmentTeleMenuRequest(
+        TreatmentTeleMenuRequest request = TreatmentTeleMenuRequest(
           hospital: element['hospital'],
           project: element['project'],
           treatmentCostExcludingTax: element['treatmentCostExcludingTax'],
           treatmentCostTaxIncluded: element['treatmentCostTaxIncluded'],
           remark: element['remark'],
         );
+        if (formGroup.control('telemedicineMenu._id').valid != null) {
+          final response = await hospitalRepository.putTreatmentTeleMenu(
+              formGroup.control('telemedicineMenu._id').value, request);
+          submitTreatmentMenuTeledata.value = AsyncData(
+              data: submitTreatmentMenuTeledata.value.data!..add(response));
+          treatmentMenuTeleData.value =
+              AsyncData(data: treatmentMenuTeleData.value.data!..add(response));
+        } else {
+          final response =
+              await hospitalRepository.postTreatmentTeleMenu(request);
+          submitTreatmentMenuTeledata.value = AsyncData(
+              data: submitTreatmentMenuTeledata.value.data!..add(response));
+          treatmentMenuTeleData.value =
+              AsyncData(data: treatmentMenuTeleData.value.data!..add(response));
+        }
         // todo: check element['id'] if exist then update data
         // create function
-        await hospitalRepository.postTreatmentTeleMenu(response);
       });
 
       submitTreatmentMenuTeledata.value = const AsyncData(data: []);

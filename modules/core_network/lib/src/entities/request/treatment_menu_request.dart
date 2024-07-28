@@ -1,7 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../../entities.dart';
-
+import 'treatment_menu_tax.dart';
 part 'treatment_menu_request.g.dart';
 
 @JsonSerializable()

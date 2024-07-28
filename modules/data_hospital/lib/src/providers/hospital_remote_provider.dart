@@ -97,7 +97,7 @@ class HospitalRemoteProvider {
     return apiService.postHowToRequestHospital(howToRequestHospitalRequest);
   }
 
-  Future<NewRegistrationHospitalResponse> getNewRegistrationHospital(
+  Future<List<NewRegistrationHospitalResponse>> getNewRegistrationHospital(
       String hospitalId) {
     return apiService.getNewRegistrationHospital(hospitalId);
   }
@@ -200,6 +200,10 @@ class HospitalRemoteProvider {
     return apiService.postTreatmentMenu(treatmentMenuRequest);
   }
 
+  Future<TreatmentMenuResponse> putTreatmentMenu(String id,TreatmentMenuRequest treatmentMenuRequest){
+    return apiService.putTreatmentMenu(id: id, treatmentMenuRequest: treatmentMenuRequest);
+  }
+
   Future<List<TreatmentTeleMenuResponse>> getTreatmentTeleMenu({required String id}){
     return apiService.getTreatmentTeleMenu(id: id);
   }
@@ -208,6 +212,10 @@ class HospitalRemoteProvider {
     TreatmentTeleMenuRequest treatmentTeleMenuRequest,
   ) {
     return apiService.postTreatmentTeleMenu(treatmentTeleMenuRequest);
+  }
+
+  Future<TreatmentTeleMenuResponse> putTreatmentTeleMenu(String id,TreatmentTeleMenuRequest treatmentTeleMenuRequest){
+    return apiService.putTreatmentTeleMenu(id: id,treatmentTeleMenuRequest: treatmentTeleMenuRequest);
   }
   /// end get basic information of hospital C3 Page
 }

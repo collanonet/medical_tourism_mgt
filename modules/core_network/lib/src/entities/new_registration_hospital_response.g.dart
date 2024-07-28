@@ -13,12 +13,13 @@ NewRegistrationHospitalResponse _$NewRegistrationHospitalResponseFromJson(
       updateDate: json['updateDate'] == null
           ? null
           : DateTime.parse(json['updateDate'] as String),
-      updater: json['updater'] as String?,
+      updatedBy: json['updatedBy'] as String?,
       classification: json['classification'] as String?,
       shareThisQADataWithHospitals:
           json['shareThisQADataWithHospitals'] as bool?,
       question: json['question'] as String?,
       answer: json['answer'] as String?,
+      hospital: json['hospital'] as String?,
     );
 
 Map<String, dynamic> _$NewRegistrationHospitalResponseToJson(
@@ -26,9 +27,10 @@ Map<String, dynamic> _$NewRegistrationHospitalResponseToJson(
     <String, dynamic>{
       '_id': instance.id,
       'updateDate': instance.updateDate?.toIso8601String(),
-      'updater': instance.updater,
+      'updatedBy': instance.updatedBy,
       'classification': instance.classification,
       'shareThisQADataWithHospitals': instance.shareThisQADataWithHospitals,
       'question': instance.question,
       'answer': instance.answer,
+      'hospital': instance.hospital,
     };

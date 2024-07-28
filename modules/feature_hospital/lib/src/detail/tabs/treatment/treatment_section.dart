@@ -11,11 +11,8 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'treatment_model.dart';
 
 class TreatmentSection extends StatefulWidget {
-  const TreatmentSection({super.key,
-    required this.hospitalId
-
-  });
-final String hospitalId;
+  const TreatmentSection({super.key, required this.hospitalId});
+  final String hospitalId;
   @override
   State<TreatmentSection> createState() => _TreatmentSectionState();
 }
@@ -30,14 +27,14 @@ class _TreatmentSectionState extends State<TreatmentSection> {
           height: context.appTheme.spacing.formSpacing,
         ),
         children: [
-          TreatmentMenuSection(hospitalId: widget.hospitalId,),
+          TreatmentMenuSection(
+            hospitalId: widget.hospitalId,
+          ),
           const TelemedicineMenuSection(),
           ValueListenableListener(
-            valueListenable:
-                context.read<TreatmentModle>().submitTreatmentMenudata,
+            valueListenable: context.read<TreatmentModle>().submitTreatmentMenudata,
             onListen: () {
-              final value =
-                  context.read<TreatmentModle>().submitTreatmentMenudata.value;
+              final value = context.read<TreatmentModle>().submitTreatmentMenudata.value;
 
               if (value.hasError) {
                 snackBarWidget(
@@ -56,8 +53,7 @@ class _TreatmentSectionState extends State<TreatmentSection> {
               }
             },
             child: ValueListenableBuilder(
-              valueListenable:
-                  context.watch<TreatmentModle>().submitTreatmentMenudata,
+              valueListenable: context.watch<TreatmentModle>().submitTreatmentMenudata,
               builder: (context, value, child) {
                 return Align(
                   alignment: Alignment.bottomRight,

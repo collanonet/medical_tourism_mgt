@@ -35,11 +35,11 @@ Map<String, dynamic> _$TreatmentMenuResponseToJson(
     };
 
 TaxModel _$TaxModelFromJson(Map<String, dynamic> json) => TaxModel(
-      tax: (json['cost'] as num?)?.toDouble(),
-      taxRate: (json['tax'] as num?)?.toInt(),
+      cost: (json['cost'] as num?)?.toDouble(),
+      tax: (json['tax'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$TaxModelToJson(TaxModel instance) => <String, dynamic>{
-      'cost': instance.tax,
-      'tax': instance.taxRate,
+      'cost': instance.cost,
+      'tax': instance.tax,
     };

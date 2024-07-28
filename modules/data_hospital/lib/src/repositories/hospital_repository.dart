@@ -61,7 +61,7 @@ abstract class HospitalRepository {
     HowToRequestHospitalRequest howToRequestHospitalRequest,
   );
 
-  Future<NewRegistrationHospitalResponse> getNewRegistrationHospital(
+  Future<List<NewRegistrationHospitalResponse>> getNewRegistrationHospital(
       String hospitalId);
   
   Future<NewRegistrationHospitalResponse> postNewRegistrationHospital(
@@ -129,5 +129,9 @@ abstract class HospitalRepository {
   Future<List<TreatmentTeleMenuResponse>> getTreatmentTeleMenu({required String id});
 
   Future<TreatmentTeleMenuResponse> postTreatmentTeleMenu(TreatmentTeleMenuRequest treatmentTeleMenuRequest);
+
+  Future<TreatmentMenuResponse> putTreatmentMenu(String id,TreatmentMenuRequest treatmentMenuRequest);
+
+  Future<TreatmentTeleMenuResponse> putTreatmentTeleMenu( String id, TreatmentTeleMenuRequest treatmentTeleMenuRequest);
   /// end get basic information of hospital C3 Page
 }

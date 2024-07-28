@@ -1,7 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
-import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -23,7 +22,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
         .control('treatmentMenu') as FormArray;
 
     final taxRateFormArray =
-        (ReactiveForm.of(context) as FormGroup).control('taxRate') as FormArray;
+        (ReactiveForm.of(context) as FormGroup).control('cost') as FormArray;
 
     return ColumnSeparated(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +57,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                         child: Text('治療費用（税込）',
                             style: context.textTheme.bodyMedium)),
                     ReactiveFormArray(
-                        formArrayName: 'taxRate',
+                        formArrayName: 'cost',
                         builder: (context, formArray, child) {
                           final row = formArray.controls
                               .map((control) => control as FormGroup)
@@ -70,7 +69,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                     child: SizedBox(
                                       width: 80,
                                       child: ReactiveTextField(
-                                        formControlName: 'taxRate',
+                                        formControlName: 'cost',
                                         decoration: InputDecoration(
                                           prefixText: 'R ',
                                           suffixText: ' %',
@@ -141,7 +140,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                       child: ReactiveForm(
                                         formGroup: currentForm,
                                         child: ReactiveTextField(
-                                          formControlName: 'tax',
+                                          formControlName: 'cost',
                                         ),
                                       ),
                                     ),
@@ -153,8 +152,8 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                   // add into row of treatment
                                   formArray.add(
                                     FormGroup({
-                                      'tax': FormControl<double>(),
-                                      'taxRate': FormControl<int>(value: 15),
+                                      'cost': FormControl<double>(),
+                                      'tax': FormControl<int>(value: 15),
                                     }),
                                   );
                                 },
@@ -188,7 +187,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                     // add into header
                     taxRateFormArray.add(
                       FormGroup({
-                        'taxRate': FormControl<int>(),
+                        'cost': FormControl<int>(),
                       }),
                     );
                   }
@@ -247,13 +246,13 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                       'remark': FormControl<String>(),
                       'treatmentCostTax': FormArray([
                         FormGroup({
-                          'tax': FormControl<double>(),
-                          'taxRate': FormControl<int>(value: 15),
+                          'cost': FormControl<double>(),
+                          'tax': FormControl<int>(value: 15),
                         }),
                         ...List.generate(value - 1, (index) {
                           return FormGroup({
-                            'tax': FormControl<double>(),
-                            'taxRate': FormControl<int>(),
+                            'cost': FormControl<double>(),
+                            'tax': FormControl<int>(),
                           });
                         })
                       ])

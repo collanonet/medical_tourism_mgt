@@ -23,7 +23,8 @@ class _QAndAScreenState extends State<QAndAScreen> {
         ValidationMessage.required: (error) => 'This field is required',
       },
       child: ReactiveFormBuilder(
-          form: () => qAndAForm(hospitalId: widget.hospitalId),
+          form: () => qAndAForm(
+            hospital: widget.hospitalId),
           builder: (context, form, _) {
             return Provider(
               create: (context) => GetIt.I<QAndAModel>()

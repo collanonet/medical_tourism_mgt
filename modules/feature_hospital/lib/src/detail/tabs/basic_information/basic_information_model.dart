@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_hospital/data_hospital.dart';
@@ -477,6 +479,21 @@ class BasicInformationModel {
   Future<void> submitDoctorInformation(FormGroup formGroup) async {
     try {
       doctorInformationData.value = const AsyncData(loading: true);
+      String? file;
+      if (formGroup.control('uploadFile').value != null) {
+        try {
+          // convert Uint8List to base64
+          FileSelect docFile = formGroup.control('profile').value;
+          String base64Image = base64Encode(docFile.file);
+          FileResponse fileData = await hospitalRepository.uploadFileBase64(
+            base64Image,
+            docFile.filename,
+          );
+          file = fileData.filename;
+        } catch (e) {
+          logger.e(e);
+        }
+      }
       await formGroup
           .control('addDoctorProfile')
           .value
@@ -516,7 +533,7 @@ class BasicInformationModel {
         DoctorProfileHospitalRequest request = DoctorProfileHospitalRequest(
           hospital: basicInformationData.value.requireData.id,
           id: element['_id'],
-          profile: element['profile'],
+          profile: file,
           photoRelease: element['photoRelease'],
           name: element['name'],
           remark: element['remark'],

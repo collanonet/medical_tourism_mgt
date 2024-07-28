@@ -29,13 +29,9 @@ class TreatmentMenuResponse {
 
 @JsonSerializable()
 class TaxModel {
-  // cost
-  @JsonKey(name: 'cost')
-  double? tax;
-  // tax
-  @JsonKey(name: 'tax')
-  int? taxRate;
-  TaxModel({this.tax, this.taxRate});
+  double? cost;
+  int? tax;
+  TaxModel({this.cost, this.tax});
 
   factory TaxModel.fromJson(Map<String, dynamic> json) =>
       _$TaxModelFromJson(json);

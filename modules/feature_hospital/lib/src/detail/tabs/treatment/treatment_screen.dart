@@ -27,7 +27,7 @@ class _TreatmentScreenState extends State<TreatmentScreen> {
           builder: (context, form, _) {
             return Provider(
               create: (context) => GetIt.I<TreatmentModle>()
-                ..fetchData(form, hospitalId: widget.hospitalId),
+                ..fetchTreatmentMenu(form, widget.hospitalId),
               child: TreatmentSection(hospitalId: widget.hospitalId),
             );
           }),

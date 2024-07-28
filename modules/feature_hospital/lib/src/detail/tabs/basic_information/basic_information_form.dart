@@ -1,3 +1,4 @@
+import 'package:core_network/core_network.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup basicInformationForm() {
@@ -104,7 +105,7 @@ FormGroup basicInformationForm() {
       FormGroup({
         '_id': FormControl<String?>(),
         'hospital': FormControl<String?>(),
-        'profile': FormControl<String>(),
+        'profile': FormControl<FileSelect>(),
         'photoRelease': FormControl<String>(),
         'name': FormControl<String>(),
         'remark': FormControl<String>(),

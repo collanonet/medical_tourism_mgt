@@ -98,7 +98,7 @@ class _QAndANewRegistrationSectionState
                                   style: context.textTheme.bodyMedium,
                                 ),
                                 ReactiveTextField(
-                                  formControlName: 'updater',
+                                  formControlName: 'updatedBy',
                                 )
                               ]),
                         ),
@@ -202,13 +202,9 @@ class _QAndANewRegistrationSectionState
                     ],
                   ),
                   ValueListenableListener(
-                    valueListenable:
-                        context.read<QAndAModel>().newRegistrationHospitalData,
+                    valueListenable: context.read<QAndAModel>().submit,
                     onListen: () {
-                      final value = context
-                          .read<QAndAModel>()
-                          .newRegistrationHospitalData
-                          .value;
+                      final value = context.read<QAndAModel>().submit.value;
 
                       if (value.hasError) {
                         snackBarWidget(
@@ -229,50 +225,57 @@ class _QAndANewRegistrationSectionState
                       }
                     },
                     child: ValueListenableBuilder(
-                      valueListenable: context
-                          .read<QAndAModel>()
-                          .newRegistrationHospitalData,
+                      valueListenable: context.read<QAndAModel>().submit,
                       builder: (context, value, _) {
-                        return RowSeparated(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          separatorBuilder: (context, index) => SizedBox(
-                            width: context.appTheme.spacing.formSpacing,
-                          ),
-                          children: [
-                            OutlinedButton(
-                                style: OutlinedButton.styleFrom(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal:
-                                          context.appTheme.spacing.marginSmall,
-                                      vertical: context
-                                          .appTheme.spacing.buttonVertical,
-                                    ),
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                            BorderRadius.circular(20))),
-                                onPressed: () {},
-                                child: Text(
-                                  "キャンセル",
-                                  style: context.textTheme.labelLarge?.copyWith(
-                                      color: context.appTheme.primaryColor),
-                                )),
-                            ElevatedButton(
-                              onPressed: value.loading
-                                  ? null
-                                  : () {
-                                      context
-                                          .read<QAndAModel>()
-                                          .submitNewRegistrationHospital(
-                                              formGroup);
-                                    },
-                              child: const Text(
-                                '保存する',
-                                style: TextStyle(
-                                  color: Colors.white,
-                                ),
+                        return ReactiveFormConsumer(
+                          builder: (context, formGroup, child) {
+                            return RowSeparated(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              separatorBuilder: (context, index) => SizedBox(
+                                width: context.appTheme.spacing.formSpacing,
                               ),
-                            ),
-                          ],
+                              children: [
+                                OutlinedButton(
+                                    style: OutlinedButton.styleFrom(
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: context
+                                              .appTheme.spacing.marginSmall,
+                                          vertical: context
+                                              .appTheme.spacing.buttonVertical,
+                                        ),
+                                        shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(20))),
+                                    onPressed: () {},
+                                    child: Text(
+                                      "キャンセル",
+                                      style: context.textTheme.labelLarge
+                                          ?.copyWith(
+                                              color: context
+                                                  .appTheme.primaryColor),
+                                    )),
+                                ElevatedButton(
+                                  onPressed: value.loading
+                                      ? null
+                                      : () {
+                                          context
+                                              .read<QAndAModel>()
+                                              .submitNewRegistrationHospital(
+                                                  formGroup);
+                                        },
+                                  child: WithLoadingButton(
+                                    isLoading: value.loading,
+                                    child: const Text(
+                                      '保存する',
+                                      style: TextStyle(
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            );
+                          },
                         );
                       },
                     ),

@@ -5,18 +5,18 @@ part 'new_registration_hospital_request.g.dart';
 @JsonSerializable()
 class NewRegistrationHospitalRequest {
   // @JsonKey(name: '_id')
-  final String hospitalId;
+  final String hospital;
   final DateTime? updateDate;
-  final String? updater;
+  final String? updatedBy;
   final String? classification;
   final bool? shareThisQADataWithHospitals;
   final String? question;
   final String? answer;
 
   NewRegistrationHospitalRequest({
-    required this.hospitalId,
+    required this.hospital,
     this.updateDate,
-    this.updater,
+    this.updatedBy,
     this.classification,
     this.shareThisQADataWithHospitals,
     this.question,
