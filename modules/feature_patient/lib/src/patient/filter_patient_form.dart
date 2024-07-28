@@ -16,10 +16,6 @@ FormGroup formFilterPatient() => FormGroup(
         'medicalDayto': FormControl<DateTime>(),
         'returnDatefrom': FormControl<DateTime>(),
         'returnDateto': FormControl<DateTime>(),
-        'filterText': FormControl<String>(
-          value: '受注のみ'
-          // value: 'all'
-        ),
       },
     );
 
