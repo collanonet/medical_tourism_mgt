@@ -83,7 +83,7 @@ class BasicInformationModel {
       FormGroup formGroup, HowToRequestHospitalResponse data) {
     formGroup.patchValue({
       'id': data.id,
-      'hospital': data.hospital,
+      'hospital': basicInformationData.value.requireData.id,
       'dateOfUpdate': data.dateOfUpdate,
       'updater': data.updater,
       'memo': data.memo,
@@ -138,17 +138,36 @@ class BasicInformationModel {
       for (var item in data) {
         formArray.add(
           FormGroup({
-            '_id': FormControl<String>(value: item.id),
-            'hospital': FormControl<String>(value: item.hospital),
-            'dateOfUpdate': FormControl<DateTime>(value: item.dateOfUpdate),
-            'departmentName': FormControl<String>(value: item.departmentName),
-            'nameKanji': FormControl<String>(value: item.nameKanji),
-            'nameKana': FormControl<String>(value: item.nameKana),
-            'telephoneNumber': FormControl<String>(value: item.telephoneNumber),
-            'email': FormControl<String>(validators: [
-              Validators.email,
-            ], value: item.email),
-            'faxNumber': FormControl<String>(value: item.faxNumber),
+            '_id': FormControl<String>(
+              value: item.id,
+            ),
+            'hospital': FormControl<String>(
+              value: basicInformationData.value.requireData.id,
+            ),
+            'dateOfUpdate': FormControl<DateTime>(
+              value: item.dateOfUpdate,
+            ),
+            'departmentName': FormControl<String>(
+              value: item.departmentName,
+            ),
+            'nameKanji': FormControl<String>(
+              value: item.nameKanji ?? '',
+            ),
+            'nameKana': FormControl<String>(
+              value: item.nameKana ?? '',
+            ),
+            'telephoneNumber': FormControl<String>(
+              value: item.telephoneNumber ?? '',
+            ),
+            'email': FormControl<String>(
+              validators: [
+                Validators.email,
+              ],
+              value: item.email,
+            ),
+            'faxNumber': FormControl<String>(
+              value: item.faxNumber ?? '',
+            ),
           }),
         );
       }
@@ -170,7 +189,9 @@ class BasicInformationModel {
   }
 
   void insertDataDoctorInformation(
-      FormArray formArray, List<DoctorProfileHospitalResponse> data) {
+    FormArray formArray,
+    List<DoctorProfileHospitalResponse> data,
+  ) {
     if (data.isNotEmpty) {
       formArray.clear();
 
@@ -230,19 +251,37 @@ class BasicInformationModel {
 
         formArray.add(
           FormGroup({
-            '_id': FormControl<String>(value: item.id),
-            'hospital': FormControl<String>(value: item.hospital),
-            'profile': FormControl<String>(value: item.profile),
-            'photoRelease': FormControl<String>(value: item.photoRelease),
-            'name': FormControl<String>(value: item.name),
-            'remark': FormControl<String>(value: item.remark),
-            'departmentName': FormControl<String>(value: item.departmentName),
-            'post': FormControl<String>(value: item.post),
-            'specialty': FormControl<String>(value: item.specialty),
+            '_id': FormControl<String>(
+              value: item.id,
+            ),
+            'hospital': FormControl<String>(
+              value: basicInformationData.value.requireData.id,
+            ),
+            'profile': FormControl<String>(
+              value: item.profile,
+            ),
+            'photoRelease': FormControl<String>(
+              value: item.photoRelease,
+            ),
+            'name': FormControl<String>(
+              value: item.name,
+            ),
+            'remark': FormControl<String>(
+              value: item.remark,
+            ),
+            'departmentName': FormControl<String>(
+              value: item.departmentName,
+            ),
+            'post': FormControl<String>(
+              value: item.post,
+            ),
+            'specialty': FormControl<String>(
+              value: item.specialty,
+            ),
             'nameKanji': FormControl<String>(
               value: item.nameKanji ?? '',
               validators: [
-                Validators.number,
+                Validators.required,
               ],
             ),
             'nameKana': FormControl<String>(value: item.nameKana),
@@ -255,6 +294,7 @@ class BasicInformationModel {
             'telephoneNumber': FormControl<String>(
               value: item.telephoneNumber ?? '',
               validators: [
+                Validators.required,
                 Validators.number,
               ],
             ),
@@ -262,6 +302,7 @@ class BasicInformationModel {
             'faxNumber': FormControl<String>(
               value: item.faxNumber ?? '',
               validators: [
+                Validators.required,
                 Validators.number,
               ],
             ),
@@ -302,7 +343,8 @@ class BasicInformationModel {
       logger.d(data.toJson());
 
       formGroup.control('_id').value = data.id;
-      formGroup.control('hospital').value = data.hospital;
+      formGroup.control('hospital').value =
+          basicInformationData.value.requireData.id;
       formGroup.control('outsourcingContract').value = data.outsourcingContract;
       formGroup.control('msCorporation').value = data.msCorporation;
       formGroup.control('referralFee').value = data.referralFee;
@@ -380,7 +422,9 @@ class BasicInformationModel {
         formArray.add(
           FormGroup({
             '_id': FormControl<String>(value: item.id),
-            'hospital': FormControl<String>(value: item.hospital),
+            'hospital': FormControl<String>(
+              value: basicInformationData.value.requireData.id,
+            ),
             'supportLanguage': FormControl<String>(value: item.supportLanguage),
             'foreignStaff': FormControl<bool>(value: item.foreignStaff),
             'medicalInterpretationSupport':
@@ -445,12 +489,10 @@ class BasicInformationModel {
         memo: form.control('memo').value,
         updates: form.control('updates').value,
       );
-      logger.e(request.toJson());
       var result = await hospitalRepository.postHowToRequestHospital(request);
 
       howToMakeRequestHospitalData.value = AsyncData(data: result);
     } catch (e) {
-      logger.d("test why $e");
       howToMakeRequestHospitalData.value = AsyncData(error: e);
     }
   }
@@ -476,16 +518,17 @@ class BasicInformationModel {
           email: element['email'],
           faxNumber: element['faxNumber'],
         );
-        // var result =
-        await hospitalRepository.postMedicalRecordBasicInfoHospital(request);
+        var result = await hospitalRepository
+            .postMedicalRecordBasicInfoHospital(request);
 
-        // medicalRecordBasicInfoData.value.copyWith(data: [
-        //   ...medicalRecordBasicInfoData.value.requireData,
-        //   result,
-        // ]);
+        medicalRecordBasicInfoData.value.copyWith(data: [
+          ...medicalRecordBasicInfoData.value.requireData,
+          result,
+        ]);
       });
 
-      medicalRecordBasicInfoData.value = AsyncData(data: []);
+      medicalRecordBasicInfoData.value =
+          AsyncData(data: medicalRecordBasicInfoData.value.data);
     } catch (e) {
       logger.d(e);
       medicalRecordBasicInfoData.value = AsyncData(error: e);
@@ -580,7 +623,6 @@ class BasicInformationModel {
       doctorInformationData.value =
           AsyncData(data: doctorInformationData.value.data);
     } catch (e) {
-      logger.d("error create doctor $e");
       doctorInformationData.value = AsyncData(error: e);
     }
   }
@@ -611,13 +653,11 @@ class BasicInformationModel {
         paymentSiteTighten: form.control('paymentSiteTighten').value,
         paymentSitePayment: form.control('paymentSitePayment').value,
       );
-      logger.e(request.toJson());
       var result =
           await hospitalRepository.postAdditionalInformationHospital(request);
 
       additionalInformationData.value = AsyncData(data: result);
     } catch (e) {
-      logger.d("additional error: $e");
       additionalInformationData.value = AsyncData(error: e);
     }
   }
@@ -682,7 +722,6 @@ class BasicInformationModel {
 
       supportLangaugeData.value = AsyncData(data: []);
     } catch (e) {
-      logger.d(e);
       supportLangaugeData.value = AsyncData(error: e);
     }
   }

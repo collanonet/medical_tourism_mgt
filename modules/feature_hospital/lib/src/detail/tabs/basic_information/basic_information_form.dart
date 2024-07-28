@@ -114,7 +114,9 @@ FormGroup basicInformationForm() {
         'post': FormControl<String>(),
         'specialty': FormControl<String>(),
         'nameKanji': FormControl<String>(
-          validators: [Validators.required],
+          validators: [
+            Validators.required,
+          ],
         ),
         'nameKana': FormControl<String>(),
         'affiliatedAcademicSociety': FormArray([
@@ -142,6 +144,7 @@ FormGroup basicInformationForm() {
         ),
         'faxNumber': FormControl<String>(
           validators: [
+            Validators.required,
             Validators.number,
           ],
         ),
