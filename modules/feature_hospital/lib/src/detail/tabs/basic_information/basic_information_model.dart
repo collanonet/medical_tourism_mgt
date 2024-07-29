@@ -696,11 +696,17 @@ class BasicInformationModel {
             medicalInterpretationSupport:
                 element['medicalInterpretationSupport'],
           );
-          await hospitalRepository.postSupportLanguageHospital(request);
+          var result =
+              await hospitalRepository.postSupportLanguageHospital(request);
+          supportLangaugeData.value.copyWith(data: [
+            ...supportLangaugeData.value.requireData,
+            result,
+          ]);
         }
       });
 
-      supportLangaugeData.value = AsyncData(data: []);
+      supportLangaugeData.value =
+          AsyncData(data: supportLangaugeData.value.data);
     } catch (e) {
       logger.e(e);
       supportLangaugeData.value = AsyncData(error: e);
