@@ -161,7 +161,7 @@ class _SupportLanguageSectionState extends State<SupportLanguageSection> {
                 ],
               ),
               ReactiveForm(
-                formGroup: form.control('paymentOptionSection') as FormGroup,
+                formGroup: form.control('basicInformation') as FormGroup,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 160),
                   child: Column(
@@ -169,7 +169,7 @@ class _SupportLanguageSectionState extends State<SupportLanguageSection> {
                     children: [
                       const Text('備考'),
                       ReactiveTextField(
-                        formControlName: 'supportLanguagr_remark',
+                        formControlName: 'supportLanguageRemark',
                       ),
                     ],
                   ),

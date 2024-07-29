@@ -67,6 +67,8 @@ BasicInformationHospitalResponse _$BasicInformationHospitalResponseFromJson(
       shift2Fri: json['shift2Fri'] as String?,
       shift2Sat: json['shift2Sat'] as String?,
       shift2Sun: json['shift2Sun'] as String?,
+      memo: json['memo'] as String?,
+      supportLanguageRemark: json['supportLanguageRemark'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
@@ -131,6 +133,8 @@ Map<String, dynamic> _$BasicInformationHospitalResponseToJson(
       'shift2Fri': instance.shift2Fri,
       'shift2Sat': instance.shift2Sat,
       'shift2Sun': instance.shift2Sun,
+      'memo': instance.memo,
+      'supportLanguageRemark': instance.supportLanguageRemark,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
     };

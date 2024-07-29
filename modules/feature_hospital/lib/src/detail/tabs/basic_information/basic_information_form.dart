@@ -82,6 +82,7 @@ FormGroup basicInformationForm() {
       'shift2Sat': FormControl<String>(value: '×'),
       'shift2Sun': FormControl<String>(value: '×'),
       'memo': FormControl<String>(),
+      'supportLanguageRemark': FormControl<String>(),
     }),
     'medicalRecordHospitals': FormArray([
       FormGroup({
@@ -193,7 +194,6 @@ FormGroup basicInformationForm() {
       'jcb': FormControl<bool>(value: false),
       'cash': FormControl<bool>(value: false),
       'remark': FormControl<String>(),
-      'supportLanguagr_remark': FormControl<String>(),
     }),
     'supportLanguageSection': createSupportLanguageSection(languages),
   });
