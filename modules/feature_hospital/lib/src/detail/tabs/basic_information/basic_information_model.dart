@@ -150,6 +150,7 @@ class BasicInformationModel {
             ),
             'dateOfUpdate': FormControl<DateTime>(
               value: item.dateOfUpdate,
+              validators: [Validators.required],
             ),
             'departmentName': FormControl<String>(
               value: item.departmentName,
@@ -159,15 +160,21 @@ class BasicInformationModel {
             ),
             'nameKana': FormControl<String>(
               value: item.nameKana ?? '',
+              validators: [Validators.required],
             ),
             'telephoneNumber': FormControl<String>(
               value: item.telephoneNumber ?? '',
+              validators: [
+                Validators.required,
+                Validators.number,
+              ],
             ),
             'email': FormControl<String>(
               validators: [
+                Validators.required,
                 Validators.email,
               ],
-              value: item.email,
+              value: item.email ?? '',
             ),
             'faxNumber': FormControl<String>(
               value: item.faxNumber ?? '',

@@ -92,11 +92,19 @@ FormGroup basicInformationForm() {
           validators: [Validators.required],
         ),
         'departmentName': FormControl<String>(),
-        'nameKanji': FormControl<String>(),
+        'nameKanji': FormControl<String>(
+          validators: [Validators.required],
+        ),
         'nameKana': FormControl<String>(),
-        'telephoneNumber': FormControl<String>(),
+        'telephoneNumber': FormControl<String>(
+          validators: [
+            Validators.required,
+            Validators.number,
+          ],
+        ),
         'email': FormControl<String>(
           validators: [
+            Validators.required,
             Validators.email,
           ],
         ),
