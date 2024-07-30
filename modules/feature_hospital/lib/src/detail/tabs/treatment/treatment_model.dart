@@ -212,6 +212,8 @@ class TreatmentModle {
           treatmentCostTaxIncluded: element['treatmentCostTaxIncluded'],
           remark: element['remark'],
         );
+        // todo: check element['id'] if exist then update data
+        // create function
         if (formGroup.control('telemedicineMenu._id').valid != null) {
           final response = await hospitalRepository.putTreatmentTeleMenu(
               formGroup.control('telemedicineMenu._id').value, request);
@@ -227,8 +229,7 @@ class TreatmentModle {
           treatmentMenuTeleData.value =
               AsyncData(data: treatmentMenuTeleData.value.data!..add(response));
         }
-        // todo: check element['id'] if exist then update data
-        // create function
+        
       });
 
       submitTreatmentMenuTeledata.value = const AsyncData(data: []);

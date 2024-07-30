@@ -158,12 +158,6 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                       'GoogleMapリンク',
                                     ),
                                   ),
-                                  inputFormatters: [
-                                    // FilteringTextInputFormatter.allow(
-                                    //   RegExp(
-                                    //       r'^(https:\/\/maps\.app\.goo\.gl\/).*'),
-                                    // ),
-                                  ],
                                 ),
                               ),
                               SizedBox(
@@ -194,8 +188,9 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                     ),
                                   ),
                                   inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
+                                    CustomPhoneFormatter(),
+                                    // FilteringTextInputFormatter.allow(
+                                    //     RegExp(r'[0-9]')),
                                   ],
                                 ),
                               ),

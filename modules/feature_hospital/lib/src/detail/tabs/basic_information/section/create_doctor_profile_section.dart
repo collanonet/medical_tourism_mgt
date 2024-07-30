@@ -21,10 +21,12 @@ class AddDoctorProfile extends StatefulWidget {
 class AddeDoctorProfileState extends State<AddDoctorProfile> {
   Uint8List imageBytes = Uint8List(8);
   FileSelect? fileSelect;
+
   @override
   Widget build(BuildContext context) {
     final formArray = (ReactiveForm.of(context) as FormGroup)
         .control('addDoctorProfile') as FormArray;
+    final form = ReactiveForm.of(context) as FormGroup;
     return ValueListenableBuilder(
         valueListenable:
             context.watch<BasicInformationModel>().doctorInformationData,
@@ -84,13 +86,13 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                 imagePicker().then((value) => {
                                                       if (value != null)
                                                         {
-                                                          setState(() {
-                                                            logger.d(value);
-                                                            //fileSelect = value;
-                                                            //imageBytes = value;
-                                                            // logger.d(fileSelect);
-                                                          })
-                                                        }
+                                                          form
+                                                              .control(
+                                                                  'profile')
+                                                              .updateValue(
+                                                                  value.path),
+                                                        },
+                                                      
                                                     });
                                               },
                                               child: Container(

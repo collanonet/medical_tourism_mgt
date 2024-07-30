@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:math';
 
 import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
@@ -562,6 +561,7 @@ class BasicInformationModel {
             logger.e(e);
           }
         }
+        logger.d(file);
 
         List<String> affiliatedAcademicSociety =
             convertToList(element, 'affiliatedAcademicSociety');
@@ -575,7 +575,7 @@ class BasicInformationModel {
           hospital:
               hospitalId.value ?? basicInformationData.value.data?.id ?? '',
           id: element['_id'],
-          profile: file,
+          profile: element['profile'],
           photoRelease: element['photoRelease'],
           name: element['name'],
           remark: element['remark'],

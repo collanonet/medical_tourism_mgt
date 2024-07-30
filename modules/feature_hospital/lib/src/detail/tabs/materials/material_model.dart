@@ -21,6 +21,18 @@ class MaterialsModel {
   ValueNotifier<AsyncData<MemoMaterialHospitalResponse>> memoMaterialsData =
       ValueNotifier(const AsyncData());
 
+  Future<void> fetchMaterial(
+      {required FormGroup formGroup, required String hospital}) async {
+    try {
+      materialsData.value = const AsyncData(loading: true);
+      final response = await hospitalRepository.getMaterialHospital(hospital);
+      materialsData.value = AsyncData(data: response);
+    } catch (e) {
+      logger.d(e);
+      materialsData.value = AsyncData(error: e);
+    }
+  }
+
   void fetchData(
       {required FormGroup formGroup, required String hospitalId}) async {
     try {
@@ -28,7 +40,6 @@ class MaterialsModel {
       final result = await hospitalRepository.getMaterialHospital(hospitalId);
       materialsData.value = AsyncData(data: result);
 
-      
       final resultMenu =
           await hospitalRepository.getMemoMaterialHospital(hospitalId);
       formGroup.control('memo').value = resultMenu.memo;

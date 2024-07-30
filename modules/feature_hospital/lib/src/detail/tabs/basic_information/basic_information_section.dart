@@ -97,7 +97,7 @@ class _BasicInformationSectionState extends State<BasicInformationSection> {
                             onPressed: !value.loading
                                 ? () => context
                                     .read<BasicInformationModel>()
-                                    .submitData(form)
+                                    .submitData(form,)
                                 : null,
                             child: WithLoadingButton(
                               isLoading: value.loading,

@@ -72,9 +72,15 @@ class AgentScreen extends StatelessWidget {
                                     style: context.textTheme.bodyMedium,
                                   ),
                                 ),
+                                // Expanded(
+                                //   child: Text(
+                                //     '国',
+                                //     style: context.textTheme.bodyMedium,
+                                //   ),
+                                // ),
                                 Expanded(
                                   child: Text(
-                                    '国',
+                                    '地域',
                                     style: context.textTheme.bodyMedium,
                                   ),
                                 ),

@@ -1,11 +1,12 @@
 import 'package:core_network/core_network.dart';
+import 'package:core_network/entities.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup basicInformationForm() {
+FormGroup basicInformationForm({required String hospital}) {
   return FormGroup({
     'howToMakeRequest': FormGroup({
       '_id': FormControl<String?>(),
-      'hospital': FormControl<String>(),
+      'hospital': FormControl<String>(value: hospital),
       'dateOfUpdate': FormControl<DateTime>(
         validators: [Validators.required],
       ),
@@ -113,11 +114,7 @@ FormGroup basicInformationForm() {
         'departmentName': FormControl<String>(),
         'post': FormControl<String>(),
         'specialty': FormControl<String>(),
-        'nameKanji': FormControl<String>(
-          validators: [
-            Validators.required,
-          ],
-        ),
+        'nameKanji': FormControl<String>(),
         'nameKana': FormControl<String>(),
         'affiliatedAcademicSociety': FormArray([
           FormGroup({
@@ -136,21 +133,10 @@ FormGroup basicInformationForm() {
             'name': FormControl<String>(),
           })
         ]),
-        'telephoneNumber': FormControl<String>(
-          validators: [
-            Validators.required,
-            Validators.number,
-          ],
-        ),
-        'faxNumber': FormControl<String>(
-          validators: [
-            Validators.required,
-            Validators.number,
-          ],
-        ),
+        'telephoneNumber': FormControl<String>(validators: [Validators.number]),
+        'faxNumber': FormControl<String>(),
         'email': FormControl<String>(
           validators: [
-            Validators.required,
             Validators.email,
           ],
         ),

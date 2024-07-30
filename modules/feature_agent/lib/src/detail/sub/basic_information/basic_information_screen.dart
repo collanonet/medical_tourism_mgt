@@ -252,7 +252,7 @@ class _AgentBasicInformationScreenState
                                             ReactiveTextField(
                                               formControlName: 'phoneNumber',
                                               keyboardType: TextInputType.phone,
-                                              decoration: InputDecoration(
+                                              decoration: const InputDecoration(
                                                 hintText: '+XXX-XXXX-XXXX',
                                                 prefixText: '',
                                               ),
@@ -864,6 +864,7 @@ class _AgentBasicInformationScreenState
                                                   keyboardType:
                                                       TextInputType.number,
                                                   inputFormatters: [
+                                                    CustomPhoneFormatter(),
                                                     FilteringTextInputFormatter
                                                         .allow(
                                                             RegExp(r'[0-9]')),

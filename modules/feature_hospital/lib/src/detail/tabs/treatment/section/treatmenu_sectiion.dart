@@ -3,6 +3,7 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -69,8 +70,13 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                     child: SizedBox(
                                       width: 80,
                                       child: ReactiveTextField(
+                                        keyboardType: TextInputType.number,
+                                        inputFormatters: [
+                                          FilteringTextInputFormatter.allow(
+                                              RegExp(r'[0-9]')),
+                                        ],
                                         formControlName: 'cost',
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                           prefixText: 'R ',
                                           suffixText: ' %',
                                         ),
@@ -122,11 +128,21 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                           Expanded(
                               flex: 1,
                               child: ReactiveTextField<double>(
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]')),
+                                ],
                                 formControlName: 'treatmentCostExcludingTax',
                               )),
                           Expanded(
                               flex: 1,
                               child: ReactiveTextField<double>(
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]')),
+                                ],
                                 formControlName: 'treatmentCostTaxIncluded',
                               )),
                           ReactiveFormArray(
@@ -140,6 +156,11 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                       child: ReactiveForm(
                                         formGroup: currentForm,
                                         child: ReactiveTextField(
+                                          keyboardType: TextInputType.number,
+                                          inputFormatters: [
+                                            FilteringTextInputFormatter.allow(
+                                                RegExp(r'[0-9]')),
+                                          ],
                                           formControlName: 'cost',
                                         ),
                                       ),
