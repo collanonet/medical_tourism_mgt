@@ -83,6 +83,7 @@ FormGroup basicInformationForm({required String hospital}) {
       'shift2Sat': FormControl<String>(value: '×'),
       'shift2Sun': FormControl<String>(value: '×'),
       'memo': FormControl<String>(),
+      'supportLanguageRemark': FormControl<String>(),
     }),
     'medicalRecordHospitals': FormArray([
       FormGroup({
@@ -92,11 +93,19 @@ FormGroup basicInformationForm({required String hospital}) {
           validators: [Validators.required],
         ),
         'departmentName': FormControl<String>(),
-        'nameKanji': FormControl<String>(),
+        'nameKanji': FormControl<String>(
+          validators: [Validators.required],
+        ),
         'nameKana': FormControl<String>(),
-        'telephoneNumber': FormControl<String>(),
+        'telephoneNumber': FormControl<String>(
+          validators: [
+            Validators.required,
+            Validators.number,
+          ],
+        ),
         'email': FormControl<String>(
           validators: [
+            Validators.required,
             Validators.email,
           ],
         ),
@@ -179,7 +188,6 @@ FormGroup basicInformationForm({required String hospital}) {
       'jcb': FormControl<bool>(value: false),
       'cash': FormControl<bool>(value: false),
       'remark': FormControl<String>(),
-      'supportLanguagr_remark': FormControl<String>(),
     }),
     'supportLanguageSection': createSupportLanguageSection(languages),
   });

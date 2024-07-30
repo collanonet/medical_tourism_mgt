@@ -62,6 +62,8 @@ class BasicInformationHospitalRequest {
   String? shift2Fri;
   String? shift2Sat;
   String? shift2Sun;
+  String? memo;
+  String? supportLanguageRemark;
 
   BasicInformationHospitalRequest({
     this.id,
@@ -121,6 +123,8 @@ class BasicInformationHospitalRequest {
      this.shift2Fri,
      this.shift2Sat,
      this.shift2Sun,
+      this.memo,
+      this.supportLanguageRemark,
   });
 
   factory BasicInformationHospitalRequest.fromJson(Map<String, dynamic> json) =>

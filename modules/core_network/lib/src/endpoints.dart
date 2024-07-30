@@ -1,5 +1,5 @@
-class Endpoints {
-  Endpoints._();
+class EndPoints {
+  EndPoints._();
 
   static const LOG_IN = '/auth/login';
   static const REFRESH_TOKEN = '/auth/refresh-token';

@@ -62,6 +62,8 @@ class BasicInformationHospitalResponse {
   String? shift2Fri;
   String? shift2Sat;
   String? shift2Sun;
+  String? memo;
+  String? supportLanguageRemark;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -123,6 +125,8 @@ class BasicInformationHospitalResponse {
     this.shift2Fri,
     this.shift2Sat,
     this.shift2Sun,
+    this.memo,
+    this.supportLanguageRemark,
     required this.createdAt,
     required this.updatedAt,
   });
