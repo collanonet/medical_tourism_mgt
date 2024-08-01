@@ -81,51 +81,55 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                         .spacing.formSpacing,
                                                   )),
                                           children: [
-                                            InkWell(
-                                              onTap: () {
-                                                imagePicker().then((value) => {
-                                                      if (value != null)
-                                                        {
-                                                          form
-                                                              .control(
-                                                                  'profile')
-                                                              .updateValue(
-                                                                  value.path),
-                                                        },
-                                                      
-                                                    });
-                                              },
-                                              child: Container(
-                                                width: 80,
-                                                height: 80,
-                                                decoration: BoxDecoration(
-                                                    image: value.data == null
-                                                        ? null
-                                                        : DecorationImage(
-                                                            image: NetworkImage(value
-                                                                .requireData
-                                                                .map((e) =>
-                                                                    e.profile)
-                                                                .toString())),
-                                                    borderRadius:
-                                                        const BorderRadius.all(
-                                                            Radius.circular(6)),
-                                                    border: Border.fromBorderSide(
-                                                        BorderSide(
-                                                            color: Colors.black,
-                                                            width:
-                                                                imageBytes.length != 8
-                                                                    ? 0
-                                                                    : 1))),
-                                                child: imageBytes.length != 8
-                                                    ? Image.memory(
-                                                        imageBytes,
-                                                        fit: BoxFit.fill,
-                                                      )
-                                                    : const Icon(
-                                                        CupertinoIcons.camera),
-                                              ),
-                                            ),
+                                            ReactiveValueListenableBuilder(
+                                                formControlName: 'profile',
+                                                builder:
+                                                    (context, controller, _) {
+                                                  return InkWell(
+                                                    onTap: () {
+                                                      imagePicker()
+                                                          .then((value) => {
+                                                                if (value !=
+                                                                    null)
+                                                                  {
+                                                                    controller
+                                                                            .value =
+                                                                        value,
+                                                                  },
+                                                              });
+                                                    },
+                                                    child: Container(
+                                                      width: 80,
+                                                      height: 80,
+                                                      decoration: BoxDecoration(
+                                                          image: value.data == null
+                                                              ? null
+                                                              : DecorationImage(
+                                                                  image: NetworkImage(value
+                                                                      .requireData
+                                                                      .map((e) => e
+                                                                          .profile)
+                                                                      .toString())),
+                                                          borderRadius: const BorderRadius.all(
+                                                              Radius.circular(
+                                                                  6)),
+                                                          border: Border.fromBorderSide(BorderSide(
+                                                              color: Colors.black,
+                                                              width: imageBytes.length != 8 ? 0 : 1))),
+                                                      child: controller.value !=
+                                                              null
+                                                          ? Image.memory(
+                                                              (controller.value
+                                                                      as FileSelect)
+                                                                  .file,
+                                                              fit: BoxFit.fill,
+                                                            )
+                                                          : const Icon(
+                                                              CupertinoIcons
+                                                                  .camera),
+                                                    ),
+                                                  );
+                                                }),
                                             ColumnSeparated(
                                                 crossAxisAlignment:
                                                     CrossAxisAlignment.start,
@@ -701,10 +705,8 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                           children: [
                                                             IconButton(
                                                                 onPressed: () {
-                                                                  filePicker().then((value) =>
-                                                                      setState(() =>
-                                                                          fileSelect =
-                                                                              value));
+                                                                  filePicker().then(
+                                                                      (value) {});
                                                                 },
                                                                 icon: Icon(
                                                                   CupertinoIcons

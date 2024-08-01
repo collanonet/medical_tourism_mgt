@@ -18,8 +18,7 @@ class BasicInformationScreen extends StatelessWidget {
         ValidationMessage.required: (error) => 'This field is required',
       },
       child: ReactiveFormBuilder(
-          form: () =>
-              basicInformationForm(hospital: hospitalId!)..markAllAsTouched(),
+          form: () => basicInformationForm()..markAllAsTouched(),
           builder: (context, form, _) {
             return Provider(
               create: (_) => GetIt.I<BasicInformationModel>()
