@@ -2,11 +2,11 @@ import 'package:core_network/core_network.dart';
 import 'package:core_network/entities.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup basicInformationForm({required String hospital}) {
+FormGroup basicInformationForm() {
   return FormGroup({
     'howToMakeRequest': FormGroup({
       '_id': FormControl<String?>(),
-      'hospital': FormControl<String>(value: hospital),
+      'hospital': FormControl<String>(),
       'dateOfUpdate': FormControl<DateTime>(
         validators: [Validators.required],
       ),

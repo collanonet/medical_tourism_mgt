@@ -92,6 +92,7 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                               .updateValue(
                                                                   value.path),
                                                         },
+                                                      
                                                     });
                                               },
                                               child: Container(
@@ -699,10 +700,8 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                           children: [
                                                             IconButton(
                                                                 onPressed: () {
-                                                                  filePicker().then((value) =>
-                                                                      setState(() =>
-                                                                          fileSelect =
-                                                                              value));
+                                                                  filePicker().then(
+                                                                      (value) {});
                                                                 },
                                                                 icon: Icon(
                                                                   CupertinoIcons

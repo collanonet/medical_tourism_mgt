@@ -9,13 +9,16 @@ import '../core_utils.dart';
 
 final ImagePicker picker = ImagePicker();
 
-Future<File?> imagePicker(
+Future<FileSelect?> imagePicker(
     {ImageSource imageSource = ImageSource.gallery}) async {
   try {
     XFile? image = await picker.pickImage(source: imageSource);
 
     if (image != null) {
-      return File(image.path);
+      return FileSelect(
+        filename: image.name,
+        file: await image.readAsBytes(),
+      );
     } else {
       // User canceled the picker
       return null;
@@ -50,8 +53,7 @@ Future<FileSelect?> filePicker() async {
     if (result != null) {
       // File file = File(result.files.single.path!);
       return FileSelect(
-        filename:
-            result.files.single.name,
+        filename: result.files.single.name,
         file: result.files.single.bytes!,
       );
     } else {
