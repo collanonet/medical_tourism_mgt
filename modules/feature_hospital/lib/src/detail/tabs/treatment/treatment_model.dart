@@ -113,45 +113,7 @@ class TreatmentModle {
     }
   }
 
-  ValueNotifier<AsyncData<List<TreatmentMenuResponse>>>
-      submitTreatmentMenudata = ValueNotifier(const AsyncData());
-
-  Future<void> submitTreatmentMenu(FormGroup formGroup) async {
-    try {
-      submitTreatmentMenudata.value = const AsyncData(loading: true);
-      await formGroup.control('treatmentMenu').value.forEach((element) async {
-        List<TaxModel>? treatmentCostTax = [];
-        for (var elementx in element['treatmentCostTax']) {
-          int index = element['treatmentCostTax'].indexOf(elementx);
-          // get tax rate from header
-          int? taxRate = formGroup.control('cost').value[index]['cost'];
-          treatmentCostTax.add(TaxModel(
-            cost: elementx['cost'] ?? 0,
-            tax: taxRate ?? 0,
-          ));
-        }
-
-        TreatmentMenuRequest request = TreatmentMenuRequest(
-          hospital: element['hospitalId'],
-          project: element['project'],
-          treatmentCostExcludingTax: element['treatmentCostExcludingTax'],
-          treatmentCostTaxIncluded: element['treatmentCostTaxIncluded'],
-          remark: element['remark'],
-          //treatmentCostTax: treatmentCostTax,
-        );
-        logger.d(request.toJson());
-        logger.d(request.treatmentCostTax?.first.toJson());
-        logger.d(request.treatmentCostTax?.last.toJson());
-        await hospitalRepository.postTreatmentMenu(request);
-      });
-
-      submitTreatmentMenudata.value = AsyncData(data: []);
-    } catch (e) {
-      logger.d(e);
-      submitTreatmentMenudata.value = AsyncData(error: e);
-    }
-  }
-
+  
   ValueNotifier<AsyncData<List<TreatmentTeleMenuResponse>>>
       treatmentMenuTeleData =
       ValueNotifier(const AsyncData<List<TreatmentTeleMenuResponse>>(data: []));
@@ -194,6 +156,46 @@ class TreatmentModle {
     }
   }
 
+  ValueNotifier<AsyncData<List<TreatmentMenuResponse>>>
+      submitTreatmentMenudata = ValueNotifier(const AsyncData());
+
+  Future<void> submitTreatmentMenu(FormGroup formGroup) async {
+    try {
+      submitTreatmentMenudata.value = const AsyncData(loading: true);
+      await formGroup.control('treatmentMenu').value.forEach((element) async {
+        List<TaxModel>? treatmentCostTax = [];
+        for (var elementx in element['treatmentCostTax']) {
+          int index = element['treatmentCostTax'].indexOf(elementx);
+          // get tax rate from header
+          int? taxRate = formGroup.control('cost').value[index]['cost'];
+          treatmentCostTax.add(TaxModel(
+            cost: elementx['cost'] ?? 0,
+            tax: taxRate ?? 0,
+          ));
+        }
+
+        TreatmentMenuRequest request = TreatmentMenuRequest(
+          hospital: element['hospitalId'],
+          project: element['project'],
+          treatmentCostExcludingTax: element['treatmentCostExcludingTax'],
+          treatmentCostTaxIncluded: element['treatmentCostTaxIncluded'],
+          remark: element['remark'],
+         // treatmentCostTax: treatmentCostTax,
+        );
+        logger.d(request.toJson());
+        logger.d(request.treatmentCostTax?.first.toJson());
+        logger.d(request.treatmentCostTax?.last.toJson());
+        await hospitalRepository.postTreatmentMenu(request);
+      });
+
+      submitTreatmentMenudata.value = AsyncData(data: []);
+    } catch (e) {
+      logger.d(e);
+      submitTreatmentMenudata.value = AsyncData(error: e);
+    }
+  }
+
+
   ValueNotifier<AsyncData<List<TreatmentTeleMenuResponse>>>
       submitTreatmentMenuTeledata = ValueNotifier(const AsyncData());
 
@@ -229,7 +231,6 @@ class TreatmentModle {
           treatmentMenuTeleData.value =
               AsyncData(data: treatmentMenuTeleData.value.data!..add(response));
         }
-        
       });
 
       submitTreatmentMenuTeledata.value = const AsyncData(data: []);

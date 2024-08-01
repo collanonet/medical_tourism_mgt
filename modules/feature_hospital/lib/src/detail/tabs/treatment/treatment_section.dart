@@ -32,9 +32,9 @@ class _TreatmentSectionState extends State<TreatmentSection> {
           ),
           const TelemedicineMenuSection(),
           ValueListenableListener(
-            valueListenable: context.read<TreatmentModle>().submitTreatmentMenudata,
+            valueListenable: context.read<TreatmentModle>().submitData,
             onListen: () {
-              final value = context.read<TreatmentModle>().submitTreatmentMenudata.value;
+              final value = context.read<TreatmentModle>().submitData.value;
 
               if (value.hasError) {
                 snackBarWidget(
@@ -53,7 +53,7 @@ class _TreatmentSectionState extends State<TreatmentSection> {
               }
             },
             child: ValueListenableBuilder(
-              valueListenable: context.watch<TreatmentModle>().submitTreatmentMenudata,
+              valueListenable: context.watch<TreatmentModle>().submitData,
               builder: (context, value, child) {
                 return Align(
                   alignment: Alignment.bottomRight,
@@ -65,7 +65,7 @@ class _TreatmentSectionState extends State<TreatmentSection> {
                             : () {
                                 context
                                     .read<TreatmentModle>()
-                                    .submitTreatmentMenu(formGroup);
+                                    .submitForm(formGroup);
                               },
                         child: WithLoadingButton(
                           isLoading: value.loading,

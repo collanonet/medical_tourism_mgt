@@ -116,7 +116,7 @@ FormGroup basicInformationForm({required String hospital}) {
       FormGroup({
         '_id': FormControl<String?>(),
         'hospital': FormControl<String?>(),
-        'profile': FormControl<FileSelect>(),
+        'profile': FormControl<String>(),
         'photoRelease': FormControl<String>(),
         'name': FormControl<String>(),
         'remark': FormControl<String>(),

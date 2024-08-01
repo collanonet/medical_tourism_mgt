@@ -616,61 +616,70 @@ class _AgentBasicInformationScreenState
                                       ),
                                       Row(
                                         children: [
-                                          Container(
-                                            width: 400,
-                                            padding: EdgeInsets.all(
-                                              context.appTheme.spacing
-                                                  .marginExtraLarge,
-                                            ),
-                                            decoration: BoxDecoration(
-                                              color: Colors.white,
-                                              borderRadius: BorderRadius.all(
-                                                  Radius.circular(
+                                          InkWell(
+                                            onTap: () {
+                                              filePicker().then((value) {});
+                                            },
+                                            child: Container(
+                                              width: 400,
+                                              padding: EdgeInsets.all(
                                                 context.appTheme.spacing
-                                                    .borderRadiusMedium,
-                                              )),
-                                              border: Border.all(
-                                                color: context
-                                                    .appTheme.primaryColor,
+                                                    .marginExtraLarge,
                                               ),
-                                            ),
-                                            child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.center,
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment.center,
-                                              mainAxisSize: MainAxisSize.min,
-                                              children: [
-                                                Icon(
-                                                  Icons.copy_all_rounded,
-                                                  size: 50,
+                                              decoration: BoxDecoration(
+                                                color: Colors.white,
+                                                borderRadius: BorderRadius.all(
+                                                    Radius.circular(
+                                                  context.appTheme.spacing
+                                                      .borderRadiusMedium,
+                                                )),
+                                                border: Border.all(
                                                   color: context
                                                       .appTheme.primaryColor,
                                                 ),
-                                                SizedBox(
-                                                  height: context.appTheme
-                                                      .spacing.marginMedium,
-                                                ),
-                                                Text(
-                                                  '名刺データをここにドラッグ＆ドロップ',
-                                                  style: context
-                                                      .textTheme.bodySmall
-                                                      ?.copyWith(
-                                                    fontSize: 22,
-                                                    fontWeight: FontWeight.bold,
+                                              ),
+                                              child: Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
+                                                mainAxisSize: MainAxisSize.min,
+                                                children: [
+                                                  Icon(
+                                                    Icons.copy_all_rounded,
+                                                    size: 50,
+                                                    color: context
+                                                        .appTheme.primaryColor,
                                                   ),
-                                                ),
-                                                SizedBox(
-                                                  height: context.appTheme
-                                                      .spacing.marginMedium,
-                                                ),
-                                                ElevatedButton(
-                                                  onPressed: () {},
-                                                  child: const Text(
-                                                    'またはファイルを選択する',
+                                                  SizedBox(
+                                                    height: context.appTheme
+                                                        .spacing.marginMedium,
                                                   ),
-                                                )
-                                              ],
+                                                  Text(
+                                                    '名刺データをここにドラッグ＆ドロップ',
+                                                    style: context
+                                                        .textTheme.bodySmall
+                                                        ?.copyWith(
+                                                      fontSize: 22,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                    ),
+                                                  ),
+                                                  SizedBox(
+                                                    height: context.appTheme
+                                                        .spacing.marginMedium,
+                                                  ),
+                                                  ElevatedButton(
+                                                    onPressed: () {
+                                                      filePicker()
+                                                          .then((value) {});
+                                                    },
+                                                    child: const Text(
+                                                      'またはファイルを選択する',
+                                                    ),
+                                                  )
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ],
@@ -865,9 +874,9 @@ class _AgentBasicInformationScreenState
                                                       TextInputType.number,
                                                   inputFormatters: [
                                                     CustomPhoneFormatter(),
-                                                    FilteringTextInputFormatter
-                                                        .allow(
-                                                            RegExp(r'[0-9]')),
+                                                    // FilteringTextInputFormatter
+                                                    //     .allow(
+                                                    //         RegExp(r'[0-9]')),
                                                   ],
                                                 ),
                                               ],
@@ -944,10 +953,34 @@ class _AgentBasicInformationScreenState
                                                               .textTheme
                                                               .bodyMedium,
                                                         ),
-                                                        ReactiveTextField(
-                                                          formControlName:
-                                                              'howToContact',
-                                                        ),
+                                                        ValueListenableBuilder(
+                                                            valueListenable: context
+                                                                .read<
+                                                                    AgentBasicInformationModel>()
+                                                                .contactList,
+                                                            builder: (context,
+                                                                value, _) {
+                                                              return ReactiveDropdownFormField(
+                                                                formControlName:
+                                                                    'howToContact',
+                                                                items: value
+                                                                    .map((e) =>
+                                                                        DropdownMenuItem(
+                                                                          value:
+                                                                              e.value,
+                                                                          child:
+                                                                              Text(
+                                                                            e.value,
+                                                                          ),
+                                                                        ))
+                                                                    .toList(),
+                                                              );
+                                                            }),
+
+                                                        // ReactiveTextField(
+                                                        //   formControlName:
+                                                        //       'howToContact',
+                                                        // ),
                                                       ],
                                                     ),
                                                   ),

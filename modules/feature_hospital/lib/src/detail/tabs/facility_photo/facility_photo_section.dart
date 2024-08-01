@@ -5,6 +5,7 @@ import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -21,6 +22,7 @@ class FacilityPhotoSection extends StatefulWidget {
 }
 
 class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
+  late bool? isCheck = false;
   @override
   Widget build(BuildContext context) {
     return ColumnSeparated(
@@ -93,10 +95,11 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
         ),
         const Row(
           children: [
+            SizedBox(width: 20),
             Expanded(flex: 2, child: Text('施設写真名')),
             Expanded(child: Text('撮影')),
             Expanded(child: Text('撮影日')),
-            Expanded(child: Text('共有')),
+            Expanded(flex: 3, child: Text('共有')),
             Expanded(child: SizedBox()),
           ],
         ),
@@ -114,6 +117,16 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                       padding: const EdgeInsets.all(8.0),
                       child: Row(
                         children: [
+                          IntrinsicWidth(
+                            child: Checkbox(
+                              value: isCheck,
+                              onChanged: (value) {
+                                setState(() {
+                                  isCheck = value;
+                                });
+                              },
+                            ),
+                          ),
                           Expanded(
                             flex: 2,
                             child: Text(
@@ -131,7 +144,7 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                                         value.requireData[index].shootingDate)),
                           ),
                           Expanded(
-                            flex: 3,
+                            flex: 1,
                             child: value.requireData[index].share == null
                                 ? SizedBox()
                                 : Icon(Icons.person),
@@ -140,7 +153,7 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                             child: Avatar.network(
                               value.requireData[index].facilityFile ??
                                   value.requireData[index].uploadedPhoto,
-                              placeholder: AssetImage(
+                              placeholder: const AssetImage(
                                 Images.logoMadical,
                                 package: 'core_ui',
                               ),

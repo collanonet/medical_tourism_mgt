@@ -240,6 +240,17 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                     formControlName: 'remark',
                                   ),
                                 ),
+                                if (formArray.controls.indexOf(control) != 0)
+                                  IconButton(
+                                    icon: const Icon(
+                                      Icons.remove_circle,
+                                      color: Colors.red,
+                                    ),
+                                    onPressed: () {
+                                      formArray.removeAt(
+                                          formArray.controls.indexOf(control));
+                                    },
+                                  ),
                               ],
                             )));
                     return ColumnSeparated(

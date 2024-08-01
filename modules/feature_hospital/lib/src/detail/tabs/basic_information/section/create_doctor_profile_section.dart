@@ -92,7 +92,6 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                                               .updateValue(
                                                                   value.path),
                                                         },
-                                                      
                                                     });
                                               },
                                               child: Container(
@@ -361,112 +360,111 @@ class AddeDoctorProfileState extends State<AddDoctorProfile> {
                                         ],
                                       ),
                                       ReactiveFormArray(
-                                          formArrayName:
-                                              'affiliatedAcademicSociety',
-                                          builder: (context, formArray, child) {
-                                            final rows = formArray.controls
-                                                .map((control) =>
-                                                    control as FormGroup)
-                                                .map((currentForm) =>
-                                                    IntrinsicWidth(
-                                                      child: ReactiveForm(
-                                                          formGroup:
-                                                              currentForm,
-                                                          child: RowSeparated(
-                                                            crossAxisAlignment:
-                                                                CrossAxisAlignment
-                                                                    .start,
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .start,
-                                                            separatorBuilder:
-                                                                ((BuildContext
-                                                                            context,
-                                                                        int index) =>
-                                                                    SizedBox(
-                                                                      width: context
-                                                                          .appTheme
-                                                                          .spacing
-                                                                          .formSpacing,
-                                                                    )),
-                                                            children: [
-                                                              IntrinsicWidth(
-                                                                stepWidth: 300,
-                                                                child:
-                                                                    ReactiveTextField(
-                                                                  formControlName:
-                                                                      'name',
-                                                                  decoration:
-                                                                      const InputDecoration(
-                                                                    fillColor:
-                                                                        Colors
-                                                                            .white,
-                                                                    filled:
-                                                                        true,
-                                                                    label: Text(
-                                                                      '所属学会',
-                                                                    ),
+                                        formArrayName:
+                                            'affiliatedAcademicSociety',
+                                        builder: (context, formArray, child) {
+                                          final rows = formArray.controls
+                                              .map((control) =>
+                                                  control as FormGroup)
+                                              .map((currentForm) =>
+                                                  IntrinsicWidth(
+                                                    child: ReactiveForm(
+                                                        formGroup: currentForm,
+                                                        child: RowSeparated(
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          separatorBuilder:
+                                                              ((BuildContext
+                                                                          context,
+                                                                      int index) =>
+                                                                  SizedBox(
+                                                                    width: context
+                                                                        .appTheme
+                                                                        .spacing
+                                                                        .formSpacing,
+                                                                  )),
+                                                          children: [
+                                                            IntrinsicWidth(
+                                                              stepWidth: 300,
+                                                              child:
+                                                                  ReactiveTextField(
+                                                                formControlName:
+                                                                    'name',
+                                                                decoration:
+                                                                    const InputDecoration(
+                                                                  fillColor:
+                                                                      Colors
+                                                                          .white,
+                                                                  filled: true,
+                                                                  label: Text(
+                                                                    '所属学会',
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ],
-                                                          )),
-                                                    ));
-                                            return Wrap(
-                                              spacing: context
-                                                  .appTheme.spacing.formSpacing,
-                                              runSpacing: context
-                                                  .appTheme.spacing.formSpacing,
-                                              children: [
-                                                ...rows,
-                                                IntrinsicWidth(
-                                                  child: InkWell(
-                                                    onTap: () => formArray
-                                                        .add(FormGroup({
-                                                      'name':
-                                                          FormControl<String>(),
-                                                    })),
-                                                    child: Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 12),
-                                                      child: Row(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        crossAxisAlignment:
-                                                            CrossAxisAlignment
-                                                                .center,
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Icon(
-                                                            Icons.add_circle,
-                                                            color: context
-                                                                .appTheme
-                                                                .primaryColor,
-                                                          ),
-                                                          SizedBox(
-                                                            width: context
-                                                                .appTheme
-                                                                .spacing
-                                                                .marginSmall,
-                                                          ),
-                                                          Text(
-                                                            '所属学会を追加',
-                                                            style: TextStyle(
-                                                                color: context
-                                                                    .appTheme
-                                                                    .primaryColor),
-                                                          )
-                                                        ],
-                                                      ),
+                                                            ),
+                                                          ],
+                                                        )),
+                                                  ));
+                                          return Wrap(
+                                            spacing: context
+                                                .appTheme.spacing.formSpacing,
+                                            runSpacing: context
+                                                .appTheme.spacing.formSpacing,
+                                            children: [
+                                              ...rows,
+                                              IntrinsicWidth(
+                                                child: InkWell(
+                                                  onTap: () =>
+                                                      formArray.add(FormGroup({
+                                                    'name':
+                                                        FormControl<String>(),
+                                                  })),
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            top: 12),
+                                                    child: Row(
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Icon(
+                                                          Icons.add_circle,
+                                                          color: context
+                                                              .appTheme
+                                                              .primaryColor,
+                                                        ),
+                                                        SizedBox(
+                                                          width: context
+                                                              .appTheme
+                                                              .spacing
+                                                              .marginSmall,
+                                                        ),
+                                                        Text(
+                                                          '所属学会を追加',
+                                                          style: TextStyle(
+                                                              color: context
+                                                                  .appTheme
+                                                                  .primaryColor),
+                                                        )
+                                                      ],
                                                     ),
                                                   ),
                                                 ),
-                                              ],
-                                            );
-                                          }),
+                                              ),
+                                            ],
+                                          );
+                                        },
+                                      ),
                                       ReactiveFormArray(
                                           formArrayName: 'qualifications',
                                           builder: (context, formArray, child) {

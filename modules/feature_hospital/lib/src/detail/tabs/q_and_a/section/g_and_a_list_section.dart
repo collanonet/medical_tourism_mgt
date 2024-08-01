@@ -63,9 +63,11 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                       MediaQuery.of(context).size.width * 0.2,
                                   child: ReactiveDropdownField(
                                     formControlName: 'classification',
-                                    decoration: const InputDecoration(
-                                        hintText: '予約方法について'),
-                                    items: const [],
+                                    items: const [
+                                      DropdownMenuItem(
+                                        child: Text('予約方法について'),
+                                      ),
+                                    ],
                                   ),
                                 )
                               ]),
@@ -88,7 +90,7 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                           ),
                         ])
                   ]),
-              Container(
+              SizedBox(
                 width: MediaQuery.of(context).size.width,
                 height: 300,
                 child: ValueListenableBuilder(
@@ -101,6 +103,14 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                         return Padding(
                           padding: const EdgeInsets.all(10),
                           child: ExpansionTile(
+                              onExpansionChanged: (isExpanding) {
+                                if (isExpanding == true) {
+                                  setState(() {
+                                    formGroup.control('about').updateValue(
+                                        value.requireData[index].answer);
+                                  });
+                                }
+                              },
                               collapsedBackgroundColor:
                                   context.appTheme.primaryBackgroundColor,
                               title: Text(
@@ -123,28 +133,7 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                 ),
               ),
 
-              // ExpansionTile(
-              //   collapsedBackgroundColor:
-              //       context.appTheme.primaryBackgroundColor,
-              //   title: Text(
-              //     '医師の経歴を教えてください。',
-              //     style: context.textTheme.bodyMedium!
-              //         .copyWith(color: context.appTheme.primaryColor),
-              //   ),
-              //   children: List.generate(
-              //       3, (index) => const ListTile(title: Text('Answer'))),
-              // ),
-              // ExpansionTile(
-              //   collapsedBackgroundColor:
-              //       context.appTheme.primaryBackgroundColor,
-              //   title: Text(
-              //     '医師の経歴を教えてください。',
-              //     style: context.textTheme.bodyMedium!
-              //         .copyWith(color: context.appTheme.primaryColor),
-              //   ),
-              //   children: List.generate(
-              //       3, (index) => const ListTile(title: Text('Answer'))),
-              // ),
+
               ReactiveTextField(
                 formControlName: 'about',
                 maxLines: 6,

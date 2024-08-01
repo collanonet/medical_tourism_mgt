@@ -303,4 +303,15 @@ class AgentBasicInformationModel {
       agentManager.value = AsyncData(error: error);
     }
   }
+
+  ValueNotifier<List<Contact>> contactList = ValueNotifier([
+    Contact(value: 'WeChat'),
+    Contact(value: 'Line'),
+  ]);
+}
+
+
+class Contact{
+  String value;
+  Contact({required this.value});
 }

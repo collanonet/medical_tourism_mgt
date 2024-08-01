@@ -64,7 +64,8 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
           formArrayName: 'telemedicineMenu',
           builder: (context, formArray, child) {
             final rows = formArray.controls
-                .map((control) => ReactiveForm(
+                .map(
+                  (control) => ReactiveForm(
                     formGroup: control as FormGroup,
                     child: RowSeparated(
                         separatorBuilder: (context, index) => SizedBox(
@@ -93,15 +94,30 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                               formControlName: 'remark',
                             ),
                           ),
-                          MaterialButton(
-                            onPressed: () => formArray
-                                .removeAt(formArray.controls.indexOf(control)),
-                            child: Icon(
-                              Icons.remove_circle,
-                              color: context.appTheme.primaryColor,
+                          if (formArray.controls.indexOf(control) != 0)
+                            IconButton(
+                              icon: const Icon(
+                                Icons.remove_circle,
+                                color: Colors.red,
+                              ),
+                              onPressed: () {
+                                formArray.removeAt(
+                                    formArray.controls.indexOf(control));
+                              },
                             ),
-                          )
-                        ])))
+                          // MaterialButton(onPressed: () {
+                          //   if (formArray.controls.indexOf(control) != 0) {
+                          //     formArray.removeAt(
+                          //         formArray.controls.indexOf(control));
+                          //     Icon(
+                          //       Icons.remove_circle,
+                          //       color: context.appTheme.primaryColor,
+                          //     );
+                          //   }
+                          // })
+                        ]),
+                  ),
+                )
                 .toList();
             return ColumnSeparated(
               separatorBuilder: (BuildContext context, int index) => SizedBox(
