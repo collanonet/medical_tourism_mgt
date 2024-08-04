@@ -5,6 +5,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -222,7 +223,22 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                                           .primaryColor),
                                             )),
                                         ElevatedButton(
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            Clipboard.setData(
+                                              ClipboardData(
+                                                text: '''
+                                                質問：${value.requireData[index].question}
+                                                回答：${value.requireData[index].answer}
+                                                ''',
+                                              ),
+                                            );
+                                            snackBarWidget(
+                                              message: 'コピーしました',
+                                              prefixIcon: const Icon(
+                                                  Icons.check_circle,
+                                                  color: Colors.white),
+                                            );
+                                          },
                                           child: const Text(
                                             'コピーする',
                                             style: TextStyle(
