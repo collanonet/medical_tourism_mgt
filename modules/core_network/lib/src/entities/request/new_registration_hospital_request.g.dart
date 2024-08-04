@@ -10,9 +10,9 @@ NewRegistrationHospitalRequest _$NewRegistrationHospitalRequestFromJson(
         Map<String, dynamic> json) =>
     NewRegistrationHospitalRequest(
       hospital: json['hospital'] as String,
-      updateDate: json['updateDate'] == null
+      updatedDate: json['updatedDate'] == null
           ? null
-          : DateTime.parse(json['updateDate'] as String),
+          : DateTime.parse(json['updatedDate'] as String),
       updatedBy: json['updatedBy'] as String?,
       classification: json['classification'] as String?,
       shareThisQADataWithHospitals:
@@ -25,7 +25,7 @@ Map<String, dynamic> _$NewRegistrationHospitalRequestToJson(
         NewRegistrationHospitalRequest instance) =>
     <String, dynamic>{
       'hospital': instance.hospital,
-      'updateDate': instance.updateDate?.toIso8601String(),
+      'updatedDate': instance.updatedDate?.toIso8601String(),
       'updatedBy': instance.updatedBy,
       'classification': instance.classification,
       'shareThisQADataWithHospitals': instance.shareThisQADataWithHospitals,

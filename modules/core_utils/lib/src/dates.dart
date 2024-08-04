@@ -10,6 +10,12 @@ class Dates {
         .format(pattern: 'dd MMM yyyy, HH:MM');
   }
 
+  static String formatFullDate(DateTime dateTime) {
+    return Jiffy.parseFromDateTime(dateTime)
+        .toLocal()
+        .format(pattern: 'yyyy/dd/MM ');
+  }
+
   /// Returns a list of two [DateTime] objects representing the start and end of a period of time.
   /// The length of the period is determined by the [days] parameter.
   /// If [days] is positive, the period starts from the current date and ends [days] days later.

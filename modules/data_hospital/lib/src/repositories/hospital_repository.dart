@@ -61,9 +61,12 @@ abstract class HospitalRepository {
     HowToRequestHospitalRequest howToRequestHospitalRequest,
   );
 
-  Future<List<NewRegistrationHospitalResponse>> getNewRegistrationHospital(
-      String hospitalId);
-  
+  Future<List<NewRegistrationHospitalResponse>> getNewRegistrationHospital({
+    required String hospitalId,
+    String? classification,
+    String? search,
+  });
+
   Future<NewRegistrationHospitalResponse> postNewRegistrationHospital(
     NewRegistrationHospitalRequest newRegistrationHospitalRequest,
   );
@@ -81,8 +84,8 @@ abstract class HospitalRepository {
       String hospitalId);
 
   Future<MemoMaterialHospitalResponse> postMemoMaterialHospital(
-      MemoMaterialHospitalRequest memoMaterialHospitalRequest,
-      );
+    MemoMaterialHospitalRequest memoMaterialHospitalRequest,
+  );
 
   Future<PatientSectionHospitalResponse> getWebReservationPatient(
     String hospitalId,
@@ -110,7 +113,7 @@ abstract class HospitalRepository {
   Future<List<HealthResponse>> getHealth({required String id});
 
   Future<HealthResponse> postHealth(
-   HealthRequest headInfoRequest,
+    HealthRequest headInfoRequest,
   );
 
   Future<List<ContractResponse>> getContract({required String id});
@@ -121,21 +124,20 @@ abstract class HospitalRepository {
 
   Future<void> deleteHealth({required String id});
 
-
   Future<List<TreatmentMenuResponse>> getTreatmentMenu({required String id});
 
-  Future<TreatmentMenuResponse> postTreatmentMenu(TreatmentMenuRequest treatmentMenuRequest);
+  Future<TreatmentMenuResponse> postTreatmentMenu(
+      TreatmentMenuRequest treatmentMenuRequest);
 
-  Future<List<TreatmentTeleMenuResponse>> getTreatmentTeleMenu({required String id});
+  Future<List<TreatmentTeleMenuResponse>> getTreatmentTeleMenu(
+      {required String id});
 
-  Future<TreatmentTeleMenuResponse> postTreatmentTeleMenu(TreatmentTeleMenuRequest treatmentTeleMenuRequest);
+  Future<TreatmentTeleMenuResponse> postTreatmentTeleMenu(
+      TreatmentTeleMenuRequest treatmentTeleMenuRequest);
 
-  Future<TreatmentMenuResponse> putTreatmentMenu(String id,TreatmentMenuRequest treatmentMenuRequest);
+  Future<TreatmentMenuResponse> putTreatmentMenu(
+      String id, TreatmentMenuRequest treatmentMenuRequest);
 
-  Future<TreatmentTeleMenuResponse> putTreatmentTeleMenu( String id, TreatmentTeleMenuRequest treatmentTeleMenuRequest);
-
-  Future<List<SearchQAResponse>> getSearchQA({String? classification,String? search});
-
-  Future<SearchQAResponse> postSearchQA(SearchQARequest searchQARequest);
-  /// end get basic information of hospital C3 Page
+  Future<TreatmentTeleMenuResponse> putTreatmentTeleMenu(
+      String id, TreatmentTeleMenuRequest treatmentTeleMenuRequest);
 }

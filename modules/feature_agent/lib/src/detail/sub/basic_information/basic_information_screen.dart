@@ -618,7 +618,9 @@ class _AgentBasicInformationScreenState
                                         children: [
                                           InkWell(
                                             onTap: () {
-                                              filePicker().then((value) {});
+                                              filePicker().then((value) {
+
+                                              });
                                             },
                                             child: Container(
                                               width: 400,
@@ -672,7 +674,9 @@ class _AgentBasicInformationScreenState
                                                   ElevatedButton(
                                                     onPressed: () {
                                                       filePicker()
-                                                          .then((value) {});
+                                                          .then((value) {
+
+                                                      });
                                                     },
                                                     child: const Text(
                                                       'またはファイルを選択する',

@@ -6,7 +6,7 @@ part 'new_registration_hospital_response.g.dart';
 class NewRegistrationHospitalResponse {
   @JsonKey(name: '_id')
   final String? id;
-  final DateTime? updateDate;
+  final DateTime? updatedDate;
   final String? updatedBy;
   final String? classification;
   final bool? shareThisQADataWithHospitals;
@@ -16,7 +16,7 @@ class NewRegistrationHospitalResponse {
 
   NewRegistrationHospitalResponse({
     this.id,
-    this.updateDate,
+    this.updatedDate,
     this.updatedBy,
     this.classification,
     this.shareThisQADataWithHospitals,

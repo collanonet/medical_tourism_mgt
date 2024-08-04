@@ -43,7 +43,7 @@ class _QAndANewRegistrationSectionState
             padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
             child: ColumnSeparated(
                 separatorBuilder: (context, index) => SizedBox(
-                      height: context.appTheme.spacing.formSpacing,
+                      height: context.appTheme.spacing.marginMedium,
                     ),
                 children: [
                   RowSeparated(
@@ -65,7 +65,7 @@ class _QAndANewRegistrationSectionState
                                   style: context.textTheme.bodyMedium,
                                 ),
                                 ReactiveDatePicker(
-                                  formControlName: 'updateDate',
+                                  formControlName: 'updatedDate',
                                   firstDate: DateTime(2000),
                                   lastDate: DateTime(2100),
                                   builder: (BuildContext context,
@@ -73,7 +73,7 @@ class _QAndANewRegistrationSectionState
                                           picker,
                                       Widget? child) {
                                     return ReactiveTextField(
-                                      formControlName: 'updateDate',
+                                      formControlName: 'updatedDate',
                                       decoration: InputDecoration(
                                           suffixIcon: IconButton(
                                         icon: const Icon(Icons.calendar_today),
@@ -177,9 +177,7 @@ class _QAndANewRegistrationSectionState
                       ),
                       ReactiveTextField(
                         formControlName: 'question',
-                        maxLines: 6,
-                        decoration: const InputDecoration(
-                            hintText: 'こちらの病院のベットは、個室ベットはありますか？'),
+                        maxLines: 2,
                       )
                     ],
                   ),
@@ -194,10 +192,7 @@ class _QAndANewRegistrationSectionState
                       ),
                       ReactiveTextField(
                         formControlName: 'answer',
-                        maxLines: 6,
-                        decoration: const InputDecoration(
-                            hintText:
-                                '個室ベットはあります。冷蔵庫/テレビ/ミニテーブル付きです。トイレ・お風呂は共用です。'),
+                        maxLines: 4,
                       )
                     ],
                   ),
@@ -216,7 +211,6 @@ class _QAndANewRegistrationSectionState
                       }
 
                       if (value.hasData) {
-                        Navigator.pop(context);
                         snackBarWidget(
                           message: '正常に保存されました',
                           prefixIcon: const Icon(Icons.check_circle,

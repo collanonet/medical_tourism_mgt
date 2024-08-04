@@ -1,5 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -65,6 +66,7 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                     formControlName: 'classification',
                                     items: const [
                                       DropdownMenuItem(
+                                        value: '予約方法について',
                                         child: Text('予約方法について'),
                                       ),
                                     ],
@@ -79,63 +81,76 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                   const InputDecoration(hintText: 'キーワードを入力'),
                             ),
                           ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: const Text(
-                              '保存する',
-                              style: TextStyle(
-                                color: Colors.white,
+                          ReactiveFormConsumer(builder: (context, form, _) {
+                            return ElevatedButton(
+                              onPressed: () {
+                                context.read<QAndAModel>().fetchDataAndSearch(
+                                      classification: formGroup
+                                          .control('classification')
+                                          .value,
+                                      search: formGroup
+                                          .control('enterKeyword')
+                                          .value,
+                                    );
+                              },
+                              child: const Text(
+                                '保存する',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
-                            ),
-                          ),
+                            );
+                          }),
                         ])
                   ]),
-              SizedBox(
-                width: MediaQuery.of(context).size.width,
-                height: 300,
-                child: ValueListenableBuilder(
-                  valueListenable:
-                      context.read<QAndAModel>().newRegistrationHospitalData,
-                  builder: (context, value, child) {
-                    return ListView.builder(
-                      itemCount: value.requireData.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(10),
-                          child: ExpansionTile(
-                              onExpansionChanged: (isExpanding) {
-                                if (isExpanding == true) {
-                                  setState(() {
-                                    formGroup.control('about').updateValue(
-                                        value.requireData[index].answer);
-                                  });
-                                }
-                              },
-                              collapsedBackgroundColor:
-                                  context.appTheme.primaryBackgroundColor,
-                              title: Text(
-                                value.requireData[index].question.toString(),
-                                style: context.textTheme.bodyMedium!.copyWith(
-                                    color: context.appTheme.primaryColor),
-                              ),
-                              children: [
-                                // Padding(
-                                //   padding:
-                                //       const EdgeInsets.symmetric(vertical: 10),
-                                //   child: Text(value.requireData[index].answer
-                                //       .toString()),
-                                // ),
-                              ]),
-                        );
-                      },
-                    );
-                  },
-                ),
-              ),
-              ReactiveTextField(
-                formControlName: 'about',
-                maxLines: 6,
-                decoration: const InputDecoration(hintText: '分類'),
+              ValueListenableBuilder(
+                valueListenable:
+                    context.read<QAndAModel>().newRegistrationHospitalData,
+                builder: (context, value, child) {
+                  return ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: value.data?.length ?? 0,
+                    itemBuilder: (context, index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(10),
+                        child: ExpansionTile(
+                            collapsedBackgroundColor:
+                                context.appTheme.primaryBackgroundColor,
+                            title: Text(
+                              value.requireData[index].question.toString(),
+                              style: context.textTheme.bodyMedium!.copyWith(
+                                  color: context.appTheme.primaryColor),
+                            ),
+
+                            children: [
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                    child: Text(
+                                      // '更新日：${value.requireData[index].updatedDate.toString()}　更新者：${value.requireData[index].updatedBy}',
+                                      '更新日：${value.requireData[index].updatedDate == null ? '' : Dates.formatFullDate(value.requireData[index].updatedDate!)}　更新者：${value.requireData[index].updatedBy}',
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                    child: Text(
+                                      value.requireData[index].answer ?? '',
+                                      softWrap: true,
+                                    ),
+                                  ),
+                                ],
+                              )
+
+                            ]),
+                      );
+                    },
+                  );
+                },
               ),
               RowSeparated(
                   mainAxisAlignment: MainAxisAlignment.end,

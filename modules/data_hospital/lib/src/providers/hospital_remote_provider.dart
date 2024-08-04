@@ -97,13 +97,22 @@ class HospitalRemoteProvider {
     return apiService.postHowToRequestHospital(howToRequestHospitalRequest);
   }
 
-  Future<List<NewRegistrationHospitalResponse>> getNewRegistrationHospital(
-      String hospitalId) {
-    return apiService.getNewRegistrationHospital(hospitalId);
+  Future<List<NewRegistrationHospitalResponse>> getNewRegistrationHospital({
+    required String hospitalId,
+    String? classification,
+    String? search,
+  }) {
+    return apiService.getNewRegistrationHospital(
+      hospitalId: hospitalId,
+      classification: classification,
+      search: search,
+    );
   }
 
-  Future<NewRegistrationHospitalResponse> postNewRegistrationHospital(NewRegistrationHospitalRequest newRegistrationHospitalRequest){
-    return apiService.postNewRegistrationHospital(newRegistrationHospitalRequest);
+  Future<NewRegistrationHospitalResponse> postNewRegistrationHospital(
+      NewRegistrationHospitalRequest newRegistrationHospitalRequest) {
+    return apiService
+        .postNewRegistrationHospital(newRegistrationHospitalRequest);
   }
 
   Future<ListSectionQAndAHospitalResponse> getListSectionQAndAHospital(
@@ -200,11 +209,14 @@ class HospitalRemoteProvider {
     return apiService.postTreatmentMenu(treatmentMenuRequest);
   }
 
-  Future<TreatmentMenuResponse> putTreatmentMenu(String id,TreatmentMenuRequest treatmentMenuRequest){
-    return apiService.putTreatmentMenu(id: id, treatmentMenuRequest: treatmentMenuRequest);
+  Future<TreatmentMenuResponse> putTreatmentMenu(
+      String id, TreatmentMenuRequest treatmentMenuRequest) {
+    return apiService.putTreatmentMenu(
+        id: id, treatmentMenuRequest: treatmentMenuRequest);
   }
 
-  Future<List<TreatmentTeleMenuResponse>> getTreatmentTeleMenu({required String id}){
+  Future<List<TreatmentTeleMenuResponse>> getTreatmentTeleMenu(
+      {required String id}) {
     return apiService.getTreatmentTeleMenu(id: id);
   }
 
@@ -214,18 +226,9 @@ class HospitalRemoteProvider {
     return apiService.postTreatmentTeleMenu(treatmentTeleMenuRequest);
   }
 
-  Future<TreatmentTeleMenuResponse> putTreatmentTeleMenu(String id,TreatmentTeleMenuRequest treatmentTeleMenuRequest){
-    return apiService.putTreatmentTeleMenu(id: id,treatmentTeleMenuRequest: treatmentTeleMenuRequest);
+  Future<TreatmentTeleMenuResponse> putTreatmentTeleMenu(
+      String id, TreatmentTeleMenuRequest treatmentTeleMenuRequest) {
+    return apiService.putTreatmentTeleMenu(
+        id: id, treatmentTeleMenuRequest: treatmentTeleMenuRequest);
   }
-
-  Future<List<SearchQAResponse>> getSearchQA({String? classification,String? search}){
-    return apiService.getSearchQA(classification: classification,search: search);
-  }
-
-  Future<SearchQAResponse> postSearchQA(
-    SearchQARequest searchQARequest
-  ){
-    return apiService.postSearchQA(searchQARequest);
-  }
-  /// end get basic information of hospital C3 Page
 }

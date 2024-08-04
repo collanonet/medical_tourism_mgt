@@ -8,7 +8,7 @@ import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
-class QAndAModel extends ChangeNotifier {
+class QAndAModel {
   QAndAModel({
     required this.hospitalRepository,
   });
@@ -19,68 +19,38 @@ class QAndAModel extends ChangeNotifier {
       newRegistrationHospitalData = ValueNotifier(
           const AsyncData<List<NewRegistrationHospitalResponse>>(data: []));
 
-  AsyncData<List<SearchQAResponse>>
-      listSectionQAndAHospitalData = const AsyncData();
+  ValueNotifier<String?> hospitalId = ValueNotifier(null);
 
-  Future<void> fetchData(FormGroup formGroup, {String? hospitalId}) async {
+  Future<void> fetchData({
+    String? hospitalId,
+  }) async {
     try {
       if (hospitalId != null) {
-        await fetchNewRegistrationHospital(formGroup, hospitalId);
+        this.hospitalId.value = hospitalId;
+        await fetchDataAndSearch();
       }
     } catch (e) {
       logger.d(e);
     }
   }
 
-  Future<void> fetchNewRegistrationHospital(
-      FormGroup formGroup, String hospitalId) async {
+  Future<void> fetchDataAndSearch({
+    String? classification,
+    String? search,
+  }) async {
     try {
       newRegistrationHospitalData.value = const AsyncData(loading: true);
       final result = await hospitalRepository.getNewRegistrationHospital(
-        hospitalId,
+        hospitalId: hospitalId.value!,
+        classification: classification,
+        search: search,
       );
-      // insertDataNewRegisterRequest(formGroup, result);
       newRegistrationHospitalData.value = AsyncData(data: result);
     } catch (e) {
       logger.d(e);
       newRegistrationHospitalData.value = AsyncData(error: e);
     }
   }
-
-  Future<void> fetchSearchQA({String? classification,String? search}) async{
-    
-      listSectionQAndAHospitalData = const AsyncData(loading: true);
-      notifyListeners();
-      return hospitalRepository.getSearchQA(classification: classification,search: search).then((value){
-        listSectionQAndAHospitalData = AsyncData(data: value);
-     
-      }).catchError((error){
-        logger.d(error);
-        listSectionQAndAHospitalData = AsyncData(error: error);
-      }).whenComplete((){
-        notifyListeners();
-      });
-   
-  }
-
- AsyncData<SearchQAResponse> _postSearchQAData = const  AsyncData();
-  AsyncData<SearchQAResponse> get postSearchQAData => _postSearchQAData;
-
-  Future<void> postSearchQA(SearchQARequest searchQARequest) async{
-    _postSearchQAData = const AsyncData(loading: true);
-    notifyListeners();
-
-    return hospitalRepository.postSearchQA(searchQARequest).then((value){
-      _postSearchQAData = AsyncData(data: value);
-    //  listSectionQAndAHospitalData.data?.removeWhere((element) => element.id == searchQARequest.)
-    }).catchError((error){
-      logger.d(error);
-      _postSearchQAData = AsyncData(error: error);
-    }).whenComplete((){
-      notifyListeners();
-    });
-  }
-
 
   ValueNotifier<AsyncData<NewRegistrationHospitalResponse>> submit =
       ValueNotifier(const AsyncData());
@@ -91,7 +61,7 @@ class QAndAModel extends ChangeNotifier {
       final response = await hospitalRepository.postNewRegistrationHospital(
         NewRegistrationHospitalRequest(
           hospital: formGroup.control('hospital').value,
-          updateDate: formGroup.control('updateDate').value,
+          updatedDate: formGroup.control('updatedDate').value,
           updatedBy: formGroup.control('updatedBy').value,
           classification: formGroup.control('classification').value,
           shareThisQADataWithHospitals:

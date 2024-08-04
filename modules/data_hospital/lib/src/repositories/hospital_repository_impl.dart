@@ -107,9 +107,16 @@ class HospitalRepositoryIml extends HospitalRepository {
   }
 
   @override
-  Future<List<NewRegistrationHospitalResponse>> getNewRegistrationHospital(
-      String hospitalId) {
-    return remote.getNewRegistrationHospital(hospitalId);
+  Future<List<NewRegistrationHospitalResponse>> getNewRegistrationHospital({
+    required String hospitalId,
+    String? classification,
+    String? search,
+  }) {
+    return remote.getNewRegistrationHospital(
+      hospitalId: hospitalId,
+      classification: classification,
+      search: search,
+    );
   }
 
   @override
@@ -214,50 +221,46 @@ class HospitalRepositoryIml extends HospitalRepository {
   Future<void> deleteHealth({required String id}) {
     return remote.deleteHealth(id: id);
   }
-  
+
   @override
-  Future<NewRegistrationHospitalResponse> postNewRegistrationHospital(NewRegistrationHospitalRequest newRegistrationHospitalRequest) {
+  Future<NewRegistrationHospitalResponse> postNewRegistrationHospital(
+      NewRegistrationHospitalRequest newRegistrationHospitalRequest) {
     return remote.postNewRegistrationHospital(newRegistrationHospitalRequest);
   }
-  
+
   @override
   Future<List<TreatmentMenuResponse>> getTreatmentMenu({required String id}) {
     return remote.getTreatmentMenu(id: id);
   }
-  
+
   @override
-  Future<List<TreatmentTeleMenuResponse>> getTreatmentTeleMenu({required String id}) {
+  Future<List<TreatmentTeleMenuResponse>> getTreatmentTeleMenu(
+      {required String id}) {
     return remote.getTreatmentTeleMenu(id: id);
   }
-  
+
   @override
-  Future<TreatmentMenuResponse> postTreatmentMenu(TreatmentMenuRequest treatmentMenuRequest) {
+  Future<TreatmentMenuResponse> postTreatmentMenu(
+      TreatmentMenuRequest treatmentMenuRequest) {
     return remote.postTreatmentMenu(treatmentMenuRequest);
   }
-  
+
   @override
-  Future<TreatmentTeleMenuResponse> postTreatmentTeleMenu(TreatmentTeleMenuRequest treatmentTeleMenuRequest) {
+  Future<TreatmentTeleMenuResponse> postTreatmentTeleMenu(
+      TreatmentTeleMenuRequest treatmentTeleMenuRequest) {
     return remote.postTreatmentTeleMenu(treatmentTeleMenuRequest);
   }
-  
+
   @override
-  Future<TreatmentMenuResponse> putTreatmentMenu( String id, TreatmentMenuRequest treatmentMenuRequest) {
+  Future<TreatmentMenuResponse> putTreatmentMenu(
+      String id, TreatmentMenuRequest treatmentMenuRequest) {
     return remote.putTreatmentMenu(id, treatmentMenuRequest);
   }
-  
+
   @override
-  Future<TreatmentTeleMenuResponse> putTreatmentTeleMenu(String id, TreatmentTeleMenuRequest treatmentTeleMenuRequest) {
+  Future<TreatmentTeleMenuResponse> putTreatmentTeleMenu(
+      String id, TreatmentTeleMenuRequest treatmentTeleMenuRequest) {
     return remote.putTreatmentTeleMenu(id, treatmentTeleMenuRequest);
   }
-  
-  @override
-  Future<List<SearchQAResponse>> getSearchQA({String? classification, String? search}) {
-    return remote.getSearchQA(classification: classification, search: search);
-  }
-  
-  @override
-  Future<SearchQAResponse> postSearchQA(SearchQARequest searchQARequest) {
-    return remote.postSearchQA(searchQARequest);
-  }
-  
+
 }
