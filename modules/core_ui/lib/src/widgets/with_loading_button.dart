@@ -5,12 +5,12 @@ class WithLoadingButton extends StatelessWidget {
     super.key,
     required this.isLoading,
     required this.child,
-    this.color,
+    this.loadingColor,
   });
 
   final bool isLoading;
   final Widget child;
-  final Color? color;
+  final Color? loadingColor;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +18,7 @@ class WithLoadingButton extends StatelessWidget {
         ? SizedBox.square(
             dimension: 20.0,
             child: CircularProgressIndicator.adaptive(
-              backgroundColor: color ?? Colors.white,
+              backgroundColor: loadingColor ?? Colors.white,
               strokeWidth: 1.0,
             ),
           )

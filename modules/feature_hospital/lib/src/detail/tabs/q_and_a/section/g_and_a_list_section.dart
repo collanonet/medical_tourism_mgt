@@ -198,7 +198,8 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                                     child: WithLoadingButton(
                                                         isLoading:
                                                             value.loading,
-                                                        color: context.appTheme
+                                                        loadingColor: context
+                                                            .appTheme
                                                             .primaryColor,
                                                         child: Text(
                                                           "削除する",

@@ -1,12 +1,12 @@
-import 'package:feature_hospital/src/detail/tabs/materials/material_model.dart';
-import 'package:feature_hospital/src/detail/tabs/materials/materials_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import 'material_model.dart';
 import 'materials_form.dart';
+import 'materials_section.dart';
 
 class MaterialsScreen extends StatelessWidget {
   const MaterialsScreen({super.key, required this.id});

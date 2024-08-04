@@ -987,6 +987,11 @@ abstract class ApiService {
     @Body() MaterialHospitalRequest materialHospitalRequest,
   );
 
+  @DELETE('${EndPoints.GET_MATERIAL_HOSPITAL}/{id}')
+  Future<void> deleteMaterialHospital(
+    @Path('id') String id,
+  );
+
   @GET('${EndPoints.GET_MEMO_MATERIAL_HOSPITAL}/{hospitalId}')
   Future<MemoMaterialHospitalResponse> getMemoMaterialHospital({
     @Path('hospitalId') required String hospitalId,

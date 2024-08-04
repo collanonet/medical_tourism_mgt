@@ -142,4 +142,6 @@ abstract class HospitalRepository {
       String id, TreatmentTeleMenuRequest treatmentTeleMenuRequest);
 
   Future<void> deleteNewRegistrationHospital(String id);
+
+  Future<void> deleteMaterialHospital(String id);
 }
