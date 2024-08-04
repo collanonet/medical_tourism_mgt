@@ -1,4 +1,6 @@
 import 'package:core_network/core_network.dart';
+import 'package:core_network/entities.dart';
+import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_hospital/data_hospital.dart';
 import 'package:flutter/foundation.dart';
@@ -6,7 +8,7 @@ import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
-class QAndAModel {
+class QAndAModel extends ChangeNotifier {
   QAndAModel({
     required this.hospitalRepository,
   });
@@ -17,8 +19,8 @@ class QAndAModel {
       newRegistrationHospitalData = ValueNotifier(
           const AsyncData<List<NewRegistrationHospitalResponse>>(data: []));
 
-  ValueNotifier<AsyncData<ListSectionQAndAHospitalResponse>>
-      listSectionQAndAHospitalData = ValueNotifier(const AsyncData());
+  AsyncData<List<SearchQAResponse>>
+      listSectionQAndAHospitalData = const AsyncData();
 
   Future<void> fetchData(FormGroup formGroup, {String? hospitalId}) async {
     try {
@@ -45,48 +47,40 @@ class QAndAModel {
     }
   }
 
-  // void insertDataNewRegisterRequest(
-  //     FormGroup formGroup, List<NewRegistrationHospitalResponse> data) {
-  //   FormArray dataQa = formGroup.control('newRegistrationSection') as FormArray;
-  //   for (var item in data) {
-  //     dataQa.add(
-  //       FormGroup({
-  //         'hospital': FormControl<String>(value: item.hospital),
-  //         'updateDate': FormControl<DateTime>(
-  //             validators: [Validators.required], value: item.updateDate),
-  //         'updatedBy': FormControl<String>(
-  //             validators: [Validators.required], value: item.updatedBy),
-  //         'classification': FormControl<String>(
-  //             validators: [Validators.required], value: item.classification),
-  //         'shareThisQADataWithHospitals': FormControl<bool>(
-  //             validators: [Validators.required],
-  //             value: item.shareThisQADataWithHospitals),
-  //         'question': FormControl<String>(
-  //             validators: [Validators.required], value: item.question),
-  //         'answer': FormControl<String>(
-  //             validators: [Validators.required], value: item.answer),
-  //       }),
-  //     );
-  //   }
+  Future<void> fetchSearchQA({String? classification,String? search}) async{
+    
+      listSectionQAndAHospitalData = const AsyncData(loading: true);
+      notifyListeners();
+      return hospitalRepository.getSearchQA(classification: classification,search: search).then((value){
+        listSectionQAndAHospitalData = AsyncData(data: value);
+     
+      }).catchError((error){
+        logger.d(error);
+        listSectionQAndAHospitalData = AsyncData(error: error);
+      }).whenComplete((){
+        notifyListeners();
+      });
+   
+  }
 
-  //   // formGroup.control('updateDate').value = data.updateDate;
-  //   // formGroup.control('updatedBy').value = data.updatedBy;
-  //   // formGroup.control('classification').value = data.classification;
-  //   // formGroup.control('shareThisQADataWithHospitals').value =
-  //   //     data.shareThisQADataWithHospitals;
-  //   // formGroup.control('question').value = data.question;
-  //   // formGroup.control('answer').value = data.answer;
-  //   // formGroup.control('hospital').value = data.hospital;
-  //   // formGroup.control('newRegistrationSection').patchValue({
-  //   //   'updateDate': data.updateDate,
-  //   //   'updatedBy': data.updatedBy,
-  //   //   'classification': data.classification,
-  //   //   'shareThisQADataWithHospitals': data.shareThisQADataWithHospitals,
-  //   //   'question': data.question,
-  //   //   'answer': data.answer,
-  //   //   'hospital': data.hospital,
-  //   // });
-  // }
+ AsyncData<SearchQAResponse> _postSearchQAData = const  AsyncData();
+  AsyncData<SearchQAResponse> get postSearchQAData => _postSearchQAData;
+
+  Future<void> postSearchQA(SearchQARequest searchQARequest) async{
+    _postSearchQAData = const AsyncData(loading: true);
+    notifyListeners();
+
+    return hospitalRepository.postSearchQA(searchQARequest).then((value){
+      _postSearchQAData = AsyncData(data: value);
+    //  listSectionQAndAHospitalData.data?.removeWhere((element) => element.id == searchQARequest.)
+    }).catchError((error){
+      logger.d(error);
+      _postSearchQAData = AsyncData(error: error);
+    }).whenComplete((){
+      notifyListeners();
+    });
+  }
+
 
   ValueNotifier<AsyncData<NewRegistrationHospitalResponse>> submit =
       ValueNotifier(const AsyncData());

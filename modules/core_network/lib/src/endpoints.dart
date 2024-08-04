@@ -189,7 +189,7 @@ class EndPoints {
 
   static const GET_HOW_TO_REQUEST_HOSPITAL = '/how-to-request-hospital';
 
-  static const GET_NEW_REGISTRATION_HOSPITAL =  '/qa';//'/new-registration-hospital';
+  static const GET_NEW_REGISTRATION_HOSPITAL =  '/qa';
 
   static const GET_LIST_SECTION_HOSPITAL = '/section-hospital';
 

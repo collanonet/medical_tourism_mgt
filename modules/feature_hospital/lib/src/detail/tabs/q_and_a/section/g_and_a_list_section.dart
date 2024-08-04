@@ -119,12 +119,12 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                     color: context.appTheme.primaryColor),
                               ),
                               children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 10),
-                                  child: Text(value.requireData[index].answer
-                                      .toString()),
-                                ),
+                                // Padding(
+                                //   padding:
+                                //       const EdgeInsets.symmetric(vertical: 10),
+                                //   child: Text(value.requireData[index].answer
+                                //       .toString()),
+                                // ),
                               ]),
                         );
                       },
@@ -132,8 +132,6 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                   },
                 ),
               ),
-
-
               ReactiveTextField(
                 formControlName: 'about',
                 maxLines: 6,

@@ -249,4 +249,15 @@ class HospitalRepositoryIml extends HospitalRepository {
   Future<TreatmentTeleMenuResponse> putTreatmentTeleMenu(String id, TreatmentTeleMenuRequest treatmentTeleMenuRequest) {
     return remote.putTreatmentTeleMenu(id, treatmentTeleMenuRequest);
   }
+  
+  @override
+  Future<List<SearchQAResponse>> getSearchQA({String? classification, String? search}) {
+    return remote.getSearchQA(classification: classification, search: search);
+  }
+  
+  @override
+  Future<SearchQAResponse> postSearchQA(SearchQARequest searchQARequest) {
+    return remote.postSearchQA(searchQARequest);
+  }
+  
 }

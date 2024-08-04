@@ -217,5 +217,15 @@ class HospitalRemoteProvider {
   Future<TreatmentTeleMenuResponse> putTreatmentTeleMenu(String id,TreatmentTeleMenuRequest treatmentTeleMenuRequest){
     return apiService.putTreatmentTeleMenu(id: id,treatmentTeleMenuRequest: treatmentTeleMenuRequest);
   }
+
+  Future<List<SearchQAResponse>> getSearchQA({String? classification,String? search}){
+    return apiService.getSearchQA(classification: classification,search: search);
+  }
+
+  Future<SearchQAResponse> postSearchQA(
+    SearchQARequest searchQARequest
+  ){
+    return apiService.postSearchQA(searchQARequest);
+  }
   /// end get basic information of hospital C3 Page
 }

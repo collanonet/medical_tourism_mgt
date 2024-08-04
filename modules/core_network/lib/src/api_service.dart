@@ -955,6 +955,17 @@ abstract class ApiService {
     @Path('hospitalId') String hospitalId,
   );
 
+  @GET('${EndPoints.GET_NEW_REGISTRATION_HOSPITAL}/by-hospital/{hospitalId}')
+  Future<List<SearchQAResponse>> getSearchQA({
+    @Query('classification') String? classification,
+    @Query('search') String? search,
+  });
+
+  @POST(EndPoints.GET_NEW_REGISTRATION_HOSPITAL)
+  Future<SearchQAResponse> postSearchQA(
+    @Body() SearchQARequest searchQARequest,
+  );
+
   @POST(EndPoints.GET_NEW_REGISTRATION_HOSPITAL)
   Future<NewRegistrationHospitalResponse> postNewRegistrationHospital(
     @Body() NewRegistrationHospitalRequest newRegistrationHospitalRequest,

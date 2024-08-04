@@ -133,5 +133,9 @@ abstract class HospitalRepository {
   Future<TreatmentMenuResponse> putTreatmentMenu(String id,TreatmentMenuRequest treatmentMenuRequest);
 
   Future<TreatmentTeleMenuResponse> putTreatmentTeleMenu( String id, TreatmentTeleMenuRequest treatmentTeleMenuRequest);
+
+  Future<List<SearchQAResponse>> getSearchQA({String? classification,String? search});
+
+  Future<SearchQAResponse> postSearchQA(SearchQARequest searchQARequest);
   /// end get basic information of hospital C3 Page
 }

@@ -82,3 +82,5 @@ export 'src/entities/treatment_menu_response.dart';
 export 'src/entities/request/treatment_menu_request.dart';
 export 'src/entities/treatment_tete_menu_response.dart';
 export 'src/entities/request/treatment_tete_menu_request.dart';
+export 'src/entities/search_qa_response.dart';
+export 'src/entities/request/search_qa_request.dart';

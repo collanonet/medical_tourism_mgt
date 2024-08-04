@@ -26,7 +26,7 @@ class _QAndAScreenState extends State<QAndAScreen> {
           form: () => qAndAForm(
             hospital: widget.hospitalId),
           builder: (context, form, _) {
-            return Provider(
+            return ChangeNotifierProvider(
               create: (context) => GetIt.I<QAndAModel>()
                 ..fetchNewRegistrationHospital(form, widget.hospitalId),
               child: const QAndASection(),
