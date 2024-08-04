@@ -1096,6 +1096,11 @@ abstract class ApiService {
     @Body() ContractRequest contractRequest,
   );
 
+  @DELETE('${EndPoints.CONTRACT}/{id}')
+  Future<void> deleteContract({
+    @Path('id') required String id,
+  });
+
   @GET('${EndPoints.CONTRANT_AGENT}/{id}')
   Future<List<ContrantAgentResponse>> getContractAgent({
     @Path('id') required String id,

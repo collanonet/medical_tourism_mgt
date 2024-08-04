@@ -42,7 +42,7 @@ class MaterialSectionState extends State<MaterialSection> {
                       // Memo
                       ValueListenableBuilder(
                         valueListenable:
-                        context.read<MaterialsModel>().memoMaterialsData,
+                            context.read<MaterialsModel>().memoMaterialsData,
                         builder: (context, value, _) {
                           return Skeletonizer(
                             enabled: value.loading,
@@ -80,7 +80,7 @@ class MaterialSectionState extends State<MaterialSection> {
                                     ),
                                     SizedBox(
                                       width:
-                                      context.appTheme.spacing.marginMedium,
+                                          context.appTheme.spacing.marginMedium,
                                     ),
                                     // Save button
                                     ElevatedButton(
@@ -138,7 +138,7 @@ class MaterialSectionState extends State<MaterialSection> {
                                   ),
                                   SizedBox(
                                     width:
-                                    context.appTheme.spacing.marginMedium,
+                                        context.appTheme.spacing.marginMedium,
                                   ),
                                   Column(
                                     children: [
@@ -233,7 +233,7 @@ class MaterialSectionState extends State<MaterialSection> {
                                               } else {
                                                 selected.value = [
                                                   ...sels.where(
-                                                          (e) => e != data?.id)
+                                                      (e) => e != data?.id)
                                                 ];
                                               }
                                             }
@@ -251,7 +251,7 @@ class MaterialSectionState extends State<MaterialSection> {
                                     child: Text(data?.dateOfIssue == null
                                         ? ''
                                         : Dates.formShortDate(
-                                        data?.dateOfIssue)),
+                                            data?.dateOfIssue)),
                                   ),
                                   Expanded(
                                     flex: 1,
@@ -320,41 +320,41 @@ class MaterialSectionState extends State<MaterialSection> {
                               onPressed: sels.isEmpty || value.loading
                                   ? null
                                   : () {
-                                showDialog(
-                                    context: context,
-                                    builder: (_) {
-                                      return Provider.value(
-                                        value: context
-                                            .read<MaterialsModel>(),
-                                        child: AlertDialog(
-                                          title: Text("削除確認"),
-                                          content:
-                                          Text("選択したデータを削除しますか？"),
-                                          actions: [
-                                            TextButton(
-                                              onPressed: () {
-                                                Navigator.of(context)
-                                                    .pop();
-                                              },
-                                              child: Text("キャンセル"),
-                                            ),
-                                            TextButton(
-                                              onPressed: () {
-                                                context
-                                                    .read<
-                                                    MaterialsModel>()
-                                                    .deleteMaterials(
-                                                    sels);
-                                                Navigator.of(context)
-                                                    .pop();
-                                              },
-                                              child: Text("削除する"),
-                                            ),
-                                          ],
-                                        ),
-                                      );
-                                    });
-                              },
+                                      showDialog(
+                                          context: context,
+                                          builder: (_) {
+                                            return Provider.value(
+                                              value: context
+                                                  .read<MaterialsModel>(),
+                                              child: AlertDialog(
+                                                title: Text("削除確認"),
+                                                content:
+                                                    Text("選択したデータを削除しますか？"),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text("キャンセル"),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      context
+                                                          .read<
+                                                              MaterialsModel>()
+                                                          .deleteMaterials(
+                                                              sels);
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: Text("削除する"),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          });
+                                    },
                               child: WithLoadingButton(
                                 isLoading: value.loading,
                                 loadingColor: context.appTheme.primaryColor,
@@ -408,7 +408,7 @@ class MaterialSectionState extends State<MaterialSection> {
           content: ReactiveFormConfig(
             validationMessages: <String, ValidationMessageFunction>{
               ValidationMessage.required: (error) =>
-              context.l10n.mgsFieldRequired,
+                  context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
               form: () => materialsForm(hospitalRecordId: widget.id, file: file)
@@ -424,11 +424,11 @@ class MaterialSectionState extends State<MaterialSection> {
   }
 
   void showDetailDialog(
-      BuildContext context, List<MaterialHospitalResponse> materials) {
+      BuildContext context, List<MaterialHospitalResponse> datas) {
     showDialog(
       context: context,
       builder: (_) => AlertDialog(
-        content: ViewPopup(materials: materials),
+        content: ViewPopup(datas: datas),
       ),
     );
   }

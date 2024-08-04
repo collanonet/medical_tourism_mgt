@@ -1,4 +1,6 @@
 import 'package:core_network/core_network.dart';
+import 'package:core_network/entities.dart';
+import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
@@ -10,7 +12,7 @@ class ViewPopup extends StatelessWidget {
     required this.datas,
   });
 
-  final List<MaterialHospitalResponse> datas;
+  final List<ContractResponse> datas;
 
   @override
   Widget build(BuildContext context) {
@@ -30,9 +32,8 @@ class ViewPopup extends StatelessWidget {
         ),
         const Row(
           children: [
-            Expanded(flex: 2, child: Text('パンフレット名')),
-            Expanded(child: Text('作成者')),
-            Expanded(child: Text('発行日')),
+            Expanded(flex: 2, child: Text('書類名')),
+            Expanded(child: Text('締結日')),
             Expanded(flex: 2, child: SizedBox())
           ],
         ),
@@ -51,22 +52,25 @@ class ViewPopup extends StatelessWidget {
               return Row(
                 children: [
                   Expanded(
+                    flex: 1,
+                    child: Text(data.fileName ?? '',
+                        style: context.textTheme.titleMedium
+                            ?.copyWith(color: context.appTheme.primaryColor)),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Text(
+                        data.uploadDate != null
+                            ? Dates.formatFullDateTime(data.uploadDate!)
+                            : '',
+                        style: context.textTheme.titleMedium),
+                  ),
+                  SizedBox(width: 16),
+                  Expanded(
                     flex: 2,
-                    child: Text(data.brochureName ?? ''),
-                  ),
-                  Expanded(
-                    child: Text(data.author ?? ''),
-                  ),
-                  Expanded(
-                    child: Text(data.dateOfIssue == null
-                        ? ''
-                        : Dates.formShortDate(data.dateOfIssue)),
-                  ),
-                  Expanded(
-                    flex: 2,
-                    child: isImage(data.file)
+                    child: isImage(data.uploadFile)
                         ? Avatar.network(
-                            data.file,
+                            data.uploadFile,
                             placeholder: const AssetImage(
                               Images.logoMadical,
                               package: 'core_ui',
@@ -74,10 +78,10 @@ class ViewPopup extends StatelessWidget {
                             shape: BoxShape.rectangle,
                             customSize: const Size(60, 60),
                           )
-                        : data.file != null
+                        : data.uploadFile != null
                             ? SizedBox(
-                                child:
-                                    Text(data.file.toString().split('.').last),
+                                child: Text(
+                                    data.uploadFile.toString().split('.').last),
                               )
                             : SizedBox(),
                   ),

@@ -144,4 +144,6 @@ abstract class HospitalRepository {
   Future<void> deleteNewRegistrationHospital(String id);
 
   Future<void> deleteMaterialHospital(String id);
+
+  Future<void>  deleteContract(String id);
 }
