@@ -5,7 +5,7 @@ part 'new_registration_hospital_response.g.dart';
 @JsonSerializable()
 class NewRegistrationHospitalResponse {
   @JsonKey(name: '_id')
-  final String? id;
+  final String id;
   final DateTime? updatedDate;
   final String? updatedBy;
   final String? classification;
@@ -15,7 +15,7 @@ class NewRegistrationHospitalResponse {
   final String? hospital;
 
   NewRegistrationHospitalResponse({
-    this.id,
+    required this.id,
     this.updatedDate,
     this.updatedBy,
     this.classification,

@@ -5,18 +5,20 @@ class WithLoadingButton extends StatelessWidget {
     super.key,
     required this.isLoading,
     required this.child,
+    this.color,
   });
 
   final bool isLoading;
   final Widget child;
+  final Color? color;
 
   @override
   Widget build(BuildContext context) {
     return isLoading
-        ? const SizedBox.square(
+        ? SizedBox.square(
             dimension: 20.0,
             child: CircularProgressIndicator.adaptive(
-              backgroundColor: Colors.white,
+              backgroundColor: color ?? Colors.white,
               strokeWidth: 1.0,
             ),
           )

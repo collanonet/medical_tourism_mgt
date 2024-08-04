@@ -957,6 +957,11 @@ abstract class ApiService {
     @Query('search') String? search,
   });
 
+  @DELETE('${EndPoints.GET_NEW_REGISTRATION_HOSPITAL}/{id}')
+  Future<void> deleteNewRegistrationHospital(
+    @Path('id') String id,
+  );
+
   @POST(EndPoints.GET_NEW_REGISTRATION_HOSPITAL)
   Future<NewRegistrationHospitalResponse> postNewRegistrationHospital(
     @Body() NewRegistrationHospitalRequest newRegistrationHospitalRequest,

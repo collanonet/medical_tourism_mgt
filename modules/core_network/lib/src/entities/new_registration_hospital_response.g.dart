@@ -9,7 +9,7 @@ part of 'new_registration_hospital_response.dart';
 NewRegistrationHospitalResponse _$NewRegistrationHospitalResponseFromJson(
         Map<String, dynamic> json) =>
     NewRegistrationHospitalResponse(
-      id: json['_id'] as String?,
+      id: json['_id'] as String,
       updatedDate: json['updatedDate'] == null
           ? null
           : DateTime.parse(json['updatedDate'] as String),

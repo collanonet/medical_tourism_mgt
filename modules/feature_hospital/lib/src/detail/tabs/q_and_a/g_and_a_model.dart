@@ -78,4 +78,23 @@ class QAndAModel {
       submit.value = AsyncData(error: e);
     }
   }
+
+  ValueNotifier<AsyncData<bool>> delete = ValueNotifier(const AsyncData());
+
+  Future<void> deleteData(NewRegistrationHospitalResponse requireData) async {
+    try {
+      delete.value = const AsyncData(loading: true);
+      await hospitalRepository.deleteNewRegistrationHospital(
+        requireData.id,
+      );
+      newRegistrationHospitalData.value = AsyncData(
+        data: newRegistrationHospitalData.value.data!
+          ..removeWhere((element) => element == requireData),
+      );
+      delete.value = const AsyncData(data: true);
+    } catch (e) {
+      logger.d(e);
+      delete.value = AsyncData(error: e);
+    }
+  }
 }

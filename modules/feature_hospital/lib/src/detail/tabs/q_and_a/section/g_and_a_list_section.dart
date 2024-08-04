@@ -1,7 +1,9 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -122,80 +124,124 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                               style: context.textTheme.bodyMedium!.copyWith(
                                   color: context.appTheme.primaryColor),
                             ),
-
                             children: [
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Padding(
-                                    padding:
-                                    const EdgeInsets.symmetric(vertical: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
                                     child: Text(
                                       // '更新日：${value.requireData[index].updatedDate.toString()}　更新者：${value.requireData[index].updatedBy}',
                                       '更新日：${value.requireData[index].updatedDate == null ? '' : Dates.formatFullDate(value.requireData[index].updatedDate!)}　更新者：${value.requireData[index].updatedBy}',
                                     ),
                                   ),
                                   Padding(
-                                    padding:
-                                    const EdgeInsets.symmetric(vertical: 10),
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 10),
                                     child: Text(
                                       value.requireData[index].answer ?? '',
                                       softWrap: true,
                                     ),
                                   ),
+                                  RowSeparated(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      separatorBuilder: (context, index) =>
+                                          SizedBox(
+                                            width: context
+                                                .appTheme.spacing.formSpacing,
+                                          ),
+                                      children: [
+                                        ValueListenableListener(
+                                          valueListenable: context
+                                              .read<QAndAModel>()
+                                              .newRegistrationHospitalData,
+                                          onListen: () {
+                                            var value = context
+                                                .read<QAndAModel>()
+                                                .delete
+                                                .value;
+
+                                            if (value.hasError) {
+                                              snackBarWidget(
+                                                message: '削除に失敗しました',
+                                                backgroundColor: Colors.red,
+                                                prefixIcon: const Icon(
+                                                    Icons.error,
+                                                    color: Colors.white),
+                                              );
+                                            }
+
+                                            if (value.hasData) {
+                                              snackBarWidget(
+                                                message: '削除しました',
+                                                prefixIcon: const Icon(
+                                                    Icons.check_circle,
+                                                    color: Colors.white),
+                                              );
+                                            }
+                                          },
+                                          child: ValueListenableBuilder(
+                                              valueListenable: context
+                                                  .read<QAndAModel>()
+                                                  .newRegistrationHospitalData,
+                                              builder: (context, value, _) {
+                                                return OutlinedButton(
+                                                    onPressed: () {
+                                                      context
+                                                          .read<QAndAModel>()
+                                                          .deleteData(
+                                                              value.requireData[
+                                                                  index]);
+                                                    },
+                                                    child: WithLoadingButton(
+                                                        isLoading:
+                                                            value.loading,
+                                                        color: context.appTheme
+                                                            .primaryColor,
+                                                        child: Text(
+                                                          "削除する",
+                                                          style: context
+                                                              .textTheme
+                                                              .labelLarge
+                                                              ?.copyWith(
+                                                                  color: context
+                                                                      .appTheme
+                                                                      .primaryColor),
+                                                        )));
+                                              }),
+                                        ),
+                                        OutlinedButton(
+                                            onPressed: () {},
+                                            child: Text(
+                                              "編集する",
+                                              style: context
+                                                  .textTheme.labelLarge
+                                                  ?.copyWith(
+                                                      color: context.appTheme
+                                                          .primaryColor),
+                                            )),
+                                        ElevatedButton(
+                                          onPressed: () {},
+                                          child: const Text(
+                                            'コピーする',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ),
+                                      ]),
+                                  SizedBox(
+                                    height: 10,
+                                  )
                                 ],
                               )
-
                             ]),
                       );
                     },
                   );
                 },
               ),
-              RowSeparated(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  separatorBuilder: (context, index) => SizedBox(
-                        width: context.appTheme.spacing.formSpacing,
-                      ),
-                  children: [
-                    OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: context.appTheme.spacing.marginSmall,
-                              vertical: context.appTheme.spacing.buttonVertical,
-                            ),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20))),
-                        onPressed: () {},
-                        child: Text(
-                          "削除する",
-                          style: context.textTheme.labelLarge
-                              ?.copyWith(color: context.appTheme.primaryColor),
-                        )),
-                    OutlinedButton(
-                        style: OutlinedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: context.appTheme.spacing.marginSmall,
-                              vertical: context.appTheme.spacing.buttonVertical,
-                            ),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(20))),
-                        onPressed: () {},
-                        child: Text(
-                          "編集する",
-                          style: context.textTheme.labelLarge
-                              ?.copyWith(color: context.appTheme.primaryColor),
-                        )),
-                    ElevatedButton(
-                      onPressed: () {},
-                      child: const Text(
-                        'コピーする',
-                        style: TextStyle(
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ])
             ]));
   }
 }

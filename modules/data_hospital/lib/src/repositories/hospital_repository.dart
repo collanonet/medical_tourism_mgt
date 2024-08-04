@@ -140,4 +140,6 @@ abstract class HospitalRepository {
 
   Future<TreatmentTeleMenuResponse> putTreatmentTeleMenu(
       String id, TreatmentTeleMenuRequest treatmentTeleMenuRequest);
+
+  Future<void> deleteNewRegistrationHospital(String id);
 }

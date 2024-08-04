@@ -219,7 +219,7 @@ class AppThemeData {
             horizontal: spacing.buttonHorizontal,
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(spacing.borderRadiusMedium),
+            borderRadius: BorderRadius.circular(20),
           ),
           disabledBackgroundColor: disableButtonColor,
           disabledForegroundColor: Colors.black,
@@ -234,10 +234,11 @@ class AppThemeData {
           foregroundColor: Colors.white,
           backgroundColor: primaryColor,
           padding: EdgeInsets.symmetric(
-              vertical: spacing.buttonVertical,
-              horizontal: spacing.buttonHorizontal),
+            vertical: spacing.buttonVertical,
+            horizontal: spacing.buttonHorizontal,
+          ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(20.0),
           ),
           textStyle: textTheme.labelMedium,
         ),
@@ -247,10 +248,11 @@ class AppThemeData {
             foregroundColor: primaryColor,
             backgroundColor: Colors.white,
             padding: EdgeInsets.symmetric(
-                vertical: spacing.buttonVertical,
-                horizontal: spacing.buttonHorizontal),
+              vertical: spacing.buttonVertical,
+              horizontal: spacing.buttonHorizontal,
+            ),
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12.0),
+              borderRadius: BorderRadius.circular(20.0),
             ),
             side: BorderSide(width: 2, color: primaryColor),
             textStyle: textTheme.labelMedium),
