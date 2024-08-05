@@ -555,9 +555,9 @@ class BasicInformationModel {
           .value
           .forEach((element) async {
         String? file;
-        if (formGroup.control('profile').value != null) {
+        if (element['profile'] != null) {
           try {
-            FileSelect docFile = formGroup.control('profile').value;
+            FileSelect docFile = element['profile'];
             String base64Image = base64Encode(docFile.file);
             FileResponse fileData = await hospitalRepository.uploadFileBase64(
               base64Image,
