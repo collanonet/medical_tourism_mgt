@@ -40,7 +40,8 @@ abstract class AgentRepository {
     ContrantAgentRequest contrantAgent,
   );
 
-  Future<List<EstimateInvoiceResponse>> getEstimateInvoice({required String id});
+  Future<List<EstimateInvoiceResponse>> getEstimateInvoice(
+      {required String id});
 
   Future<EstimateInvoiceResponse> postEstimateInvoice(
     EstimateInvoiceRequest estimateInvoice,
@@ -52,4 +53,6 @@ abstract class AgentRepository {
   );
 
   Future<void> deleteContract(String id);
+
+  Future<void> deleteEstimateInvoice(String id);
 }

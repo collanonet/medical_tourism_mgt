@@ -70,4 +70,23 @@ class EstimateInvoiceModel {
       submit.value = AsyncData(error: e.toString());
     }
   }
+
+  ValueNotifier<AsyncData<bool>> delete = ValueNotifier(const AsyncData());
+
+  Future<void> deleteEstimateInvoice(List<String> ids) async {
+    try {
+      delete.value = const AsyncData(loading: true);
+      for (var id in ids) {
+        await authRepository.deleteEstimateInvoice(id);
+        estimateInvoiceData.value = AsyncData(
+            data: estimateInvoiceData.value.data!
+              ..removeWhere((element) => element.id == id));
+      }
+
+      delete.value = const AsyncData(data: true);
+    } catch (e) {
+      logger.e(e);
+      delete.value = AsyncData(error: e.toString());
+    }
+  }
 }

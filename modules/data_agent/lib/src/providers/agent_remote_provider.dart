@@ -100,4 +100,8 @@ class AgentRemoteProvider {
   Future<void> deleteContract(String id) {
     return apiService.deleteContract(id: id);
   }
+
+  Future<void> deleteEstimateInvoice(String id) {
+    return apiService.deleteEstimateInvoice(id);
+  }
 }

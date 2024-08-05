@@ -1131,6 +1131,11 @@ abstract class ApiService {
     @Body() EstimateInvoiceRequest estimateInvoiceRequest,
   );
 
+  @DELETE('${EndPoints.ESTIMATE_INVOICE}/{id}')
+  Future<void> deleteEstimateInvoice(
+    @Path('id') String id,
+  );
+
   @GET('${EndPoints.DOMESTIC_MEDICAL_DATA}/{id}')
   Future<List<DomesticMedicalDataResponse>> getDomesticMedicalData({
     @Path('id') required String id,
