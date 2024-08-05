@@ -165,7 +165,6 @@ class BasicInformationModel {
               value: item.telephoneNumber ?? '',
               validators: [
                 Validators.required,
-                Validators.number,
               ],
             ),
             'email': FormControl<String>(
@@ -306,7 +305,6 @@ class BasicInformationModel {
               value: item.telephoneNumber ?? '',
               validators: [
                 Validators.required,
-                Validators.number,
               ],
             ),
             'completionCertificate': completionCertificate,
@@ -314,7 +312,6 @@ class BasicInformationModel {
               value: item.faxNumber ?? '',
               validators: [
                 Validators.required,
-                Validators.number,
               ],
             ),
             'email': FormControl<String>(

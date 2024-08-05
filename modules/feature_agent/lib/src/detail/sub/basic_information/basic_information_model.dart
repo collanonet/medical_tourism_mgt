@@ -214,7 +214,6 @@ class AgentBasicInformationModel {
               value: element.phoneNumber ?? '',
               validators: [
                 Validators.required,
-                Validators.number,
               ],
             ),
             'email': FormControl<String>(

@@ -17,7 +17,6 @@ FormGroup formBasicInformation() {
       'phoneNumber': FormControl<String>(
         validators: [
           Validators.required,
-          //Validators.number,
         ],
       ),
       'transactionStartDate': FormControl<DateTime>(
@@ -49,7 +48,6 @@ FormGroup formBasicInformation() {
         'phoneNumber': FormControl<String>(
           validators: [
             Validators.required,
-            Validators.number,
           ],
         ),
         'email': FormControl<String>(

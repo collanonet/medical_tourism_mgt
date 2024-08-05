@@ -141,7 +141,7 @@ FormGroup basicInformationForm() {
             'name': FormControl<String>(),
           })
         ]),
-        'telephoneNumber': FormControl<String>(validators: [Validators.number]),
+        'telephoneNumber': FormControl<String>(),
         'faxNumber': FormControl<String>(),
         'email': FormControl<String>(
           validators: [
