@@ -53,8 +53,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                         Text('済/未',
                             style: Theme.of(context).textTheme.bodySmall),
                         SizedBox(
-                          width:
-                              context.appTheme.spacing.marginExtraLarge * 2,
+                          width: context.appTheme.spacing.marginExtraLarge * 2,
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginExtraLarge,
@@ -62,24 +61,21 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                         Expanded(
                             flex: 4,
                             child: Text('タスク',
-                                style:
-                                    Theme.of(context).textTheme.bodySmall)),
+                                style: Theme.of(context).textTheme.bodySmall)),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         Expanded(
                             flex: 1,
                             child: Text('完了日',
-                                style:
-                                    Theme.of(context).textTheme.bodySmall)),
+                                style: Theme.of(context).textTheme.bodySmall)),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         Expanded(
                             flex: 3,
                             child: Text('備考',
-                                style:
-                                    Theme.of(context).textTheme.bodySmall)),
+                                style: Theme.of(context).textTheme.bodySmall)),
                       ],
                     ),
                     const Divider(),
@@ -88,8 +84,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                       child: const ProgressRecordWidget(),
                     ),
                     ReactiveForm(
-                      formGroup:
-                          formGroup.control('application') as FormGroup,
+                      formGroup: formGroup.control('application') as FormGroup,
                       child: const ProgressRecordWidget(),
                     ),
                     ReactiveForm(
@@ -103,19 +98,18 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                       child: const ProgressRecordWidget(),
                     ),
                     ReactiveForm(
-                      formGroup: formGroup
-                          .control('contractConclusionDeposit') as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup
-                              .control('documentTranslationHospitalInquiries')
+                      formGroup: formGroup.control('contractConclusionDeposit')
                           as FormGroup,
                       child: const ProgressRecordWidget(),
                     ),
                     ReactiveForm(
                       formGroup: formGroup.control(
-                              'judgingWhetherToVisitJapanForTreatment')
+                          'documentTranslationHospitalInquiries') as FormGroup,
+                      child: const ProgressRecordWidget(),
+                    ),
+                    ReactiveForm(
+                      formGroup: formGroup
+                              .control('judgingWhetherToVisitJapanForTreatment')
                           as FormGroup,
                       child: const ProgressRecordWidget(),
                     ),
@@ -168,8 +162,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                         Text('済/未',
                             style: Theme.of(context).textTheme.bodySmall),
                         SizedBox(
-                          width:
-                              context.appTheme.spacing.marginExtraLarge * 2,
+                          width: context.appTheme.spacing.marginExtraLarge * 2,
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginExtraLarge,
@@ -177,24 +170,21 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                         Expanded(
                             flex: 4,
                             child: Text('タスク',
-                                style:
-                                    Theme.of(context).textTheme.bodySmall)),
+                                style: Theme.of(context).textTheme.bodySmall)),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         Expanded(
                             flex: 1,
                             child: Text('完了日',
-                                style:
-                                    Theme.of(context).textTheme.bodySmall)),
+                                style: Theme.of(context).textTheme.bodySmall)),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         Expanded(
                             flex: 3,
                             child: Text('備考',
-                                style:
-                                    Theme.of(context).textTheme.bodySmall)),
+                                style: Theme.of(context).textTheme.bodySmall)),
                       ],
                     ),
                     const Divider(),
@@ -203,13 +193,12 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                       child: const ProgressRecordWidget(),
                     ),
                     ReactiveForm(
-                      formGroup:
-                          formGroup.control('application1') as FormGroup,
+                      formGroup: formGroup.control('application1') as FormGroup,
                       child: const ProgressRecordWidget(),
                     ),
                     ReactiveForm(
-                      formGroup: formGroup
-                          .control('submitRequiredInformation') as FormGroup,
+                      formGroup: formGroup.control('submitRequiredInformation')
+                          as FormGroup,
                       child: const ProgressRecordWidget(),
                     ),
                     ReactiveForm(
@@ -225,8 +214,8 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                       child: const ProgressRecordWidget(),
                     ),
                     ReactiveForm(
-                      formGroup: formGroup
-                          .control('contractConclusionDeposit1') as FormGroup,
+                      formGroup: formGroup.control('contractConclusionDeposit1')
+                          as FormGroup,
                       child: const ProgressRecordWidget(),
                     ),
                     ReactiveForm(
@@ -259,8 +248,8 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                       child: const ProgressRecordWidget(),
                     ),
                     ReactiveForm(
-                      formGroup: formGroup.control('sendingResultReport')
-                          as FormGroup,
+                      formGroup:
+                          formGroup.control('sendingResultReport') as FormGroup,
                       child: const ProgressRecordWidget(),
                     ),
                     SizedBox(

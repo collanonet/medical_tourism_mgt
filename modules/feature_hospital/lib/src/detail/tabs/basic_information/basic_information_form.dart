@@ -100,7 +100,6 @@ FormGroup basicInformationForm() {
         'telephoneNumber': FormControl<String>(
           validators: [
             Validators.required,
-            Validators.number,
           ],
         ),
         'email': FormControl<String>(
