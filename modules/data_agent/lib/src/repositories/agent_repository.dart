@@ -50,4 +50,6 @@ abstract class AgentRepository {
     String file,
     String filename,
   );
+
+  Future<void> deleteContract(String id);
 }

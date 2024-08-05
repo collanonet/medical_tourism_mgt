@@ -112,4 +112,9 @@ class AgentRepositoryIml extends AgentRepository {
   Future<FileResponse> uploadFileBase64(String file, String filename) {
     return remote.uploadFileBase64(file, filename);
   }
+
+  @override
+  Future<void> deleteContract(String id) {
+    return remote.deleteContract(id);
+  }
 }

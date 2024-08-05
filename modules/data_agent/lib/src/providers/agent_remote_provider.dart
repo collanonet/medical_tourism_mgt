@@ -96,4 +96,8 @@ class AgentRemoteProvider {
   Future<FileResponse> uploadFileBase64(String file, String filename) {
     return apiService.uploadFileBase64(file, filename);
   }
+
+  Future<void> deleteContract(String id) {
+    return apiService.deleteContract(id: id);
+  }
 }
