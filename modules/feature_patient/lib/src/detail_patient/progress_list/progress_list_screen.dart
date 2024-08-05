@@ -153,9 +153,8 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                     SizedBox(
                       height: context.appTheme.spacing.marginExtraLarge,
                     ),
-                    // 訪日検診の流れ // Procedure
                     Text(
-                      '訪日検診の流れ',
+                      '訪日健診の流れ',
                       style: Theme.of(context).textTheme.titleMedium,
                     ),
                     SizedBox(

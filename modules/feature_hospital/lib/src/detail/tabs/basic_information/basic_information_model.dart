@@ -582,7 +582,7 @@ class BasicInformationModel {
           hospital:
               hospitalId.value ?? basicInformationData.value.data?.id ?? '',
           id: element['_id'],
-          profile: element['profile'],
+          profile: file,
           photoRelease: element['photoRelease'],
           name: element['name'],
           remark: element['remark'],
@@ -722,8 +722,12 @@ class BasicInformationModel {
 }
 
 List<String> convertToList(Map<String, dynamic> element, String key) {
-  if ((element[key] as List).isNotEmpty) {
-    return element[key].map((e) => e['name'] as String).toList();
+  try {
+    if ((element[key] as List).isNotEmpty) {
+      return element[key].map((e) => e['name'] as String).toList();
+    }
+    return [];
+  } catch (e) {
+    return [];
   }
-  return [];
 }
