@@ -69,4 +69,23 @@ class FacilityModel {
       facilityData.value = AsyncData(error: e.toString());
     }
   }
+
+  ValueNotifier<AsyncData<bool>> delete = ValueNotifier(const AsyncData());
+
+  Future<void> deleteFacilityPhoto(List<String> ids) async {
+    try {
+      delete.value = const AsyncData(loading: true);
+      for (var id in ids) {
+        await hospitalRepository.deleteFacilityPhoto(id);
+        facilityData.value = AsyncData(
+            data: facilityData.value.data!
+              ..removeWhere((element) => element.id == id));
+      }
+
+      delete.value = const AsyncData(data: true);
+    } catch (e) {
+      logger.e(e);
+      delete.value = AsyncData(error: e.toString());
+    }
+  }
 }

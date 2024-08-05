@@ -247,4 +247,8 @@ class HospitalRemoteProvider {
   Future<void> deleteDocument(String id) {
     return apiService.deleteDocument(id: id);
   }
+
+  Future<void> deleteFacilityPhoto(String id) {
+    return apiService.deleteFacilityPhoto(id);
+  }
 }

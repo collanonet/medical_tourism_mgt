@@ -284,4 +284,9 @@ class HospitalRepositoryIml extends HospitalRepository {
     return remote.deleteDocument(id);
   }
 
+  @override
+  Future<void> deleteFacilityPhoto(String id) {
+    return remote.deleteFacilityPhoto(id);
+  }
+
 }

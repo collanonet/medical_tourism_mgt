@@ -1061,6 +1061,11 @@ abstract class ApiService {
     @Body() FacilityRequest facilityRequest,
   );
 
+  @DELETE('${EndPoints.FACILITY_PHOTO}/{id}')
+  Future<void> deleteFacilityPhoto(
+    @Path('id') String id,
+  );
+
   @GET('${EndPoints.DOCUMENT}/{id}')
   Future<List<DocumentResponse>> getDocument({
     @Path('id') required String id,
@@ -1257,7 +1262,6 @@ abstract class ApiService {
     @Path('id') required String id,
     @Body() required TreatmentTeleMenuRequest treatmentTeleMenuRequest,
   });
-
 }
 
 extension ApiServiceExts on ApiService {
