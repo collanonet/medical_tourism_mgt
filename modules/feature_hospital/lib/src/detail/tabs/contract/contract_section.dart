@@ -131,44 +131,41 @@ class ContractSectionState extends State<ContractSection> {
                     itemBuilder: (context, index) {
                       final data = value.data?[index];
 
-                      return Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Row(
-                          children: [
-                            ValueListenableBuilder(
-                                valueListenable: selected,
-                                builder: (context, sels, _) {
-                                  return Checkbox(
-                                    value: sels.contains(data?.id),
-                                    onChanged: (sel) {
-                                      if (sel != null) {
-                                        if (sel) {
-                                          selected.value = [
-                                            ...sels,
-                                            data?.id ?? ''
-                                          ];
-                                        } else {
-                                          selected.value = [
-                                            ...sels.where((e) => e != data?.id)
-                                          ];
-                                        }
+                      return Row(
+                        children: [
+                          ValueListenableBuilder(
+                              valueListenable: selected,
+                              builder: (context, sels, _) {
+                                return Checkbox(
+                                  value: sels.contains(data?.id),
+                                  onChanged: (sel) {
+                                    if (sel != null) {
+                                      if (sel) {
+                                        selected.value = [
+                                          ...sels,
+                                          data?.id ?? ''
+                                        ];
+                                      } else {
+                                        selected.value = [
+                                          ...sels.where((e) => e != data?.id)
+                                        ];
                                       }
-                                    },
-                                  );
-                                }),
-                            Expanded(
-                              flex: 2,
-                              child: Text(data?.fileName ?? ''),
+                                    }
+                                  },
+                                );
+                              }),
+                          Expanded(
+                            flex: 2,
+                            child: Text(data?.fileName ?? ''),
+                          ),
+                          Expanded(
+                            child: Text(
+                              data?.uploadDate == null
+                                  ? ''
+                                  : Dates.formShortDate(data?.uploadDate),
                             ),
-                            Expanded(
-                              child: Text(
-                                data?.uploadDate == null
-                                    ? ''
-                                    : Dates.formShortDate(data?.uploadDate),
-                              ),
-                            ),
-                          ],
-                        ),
+                          ),
+                        ],
                       );
                     },
                     separatorBuilder: (BuildContext context, int index) {

@@ -23,7 +23,6 @@ class HealthCheckupSection extends StatefulWidget {
 class _HealthCheckupSectionState extends State<HealthCheckupSection> {
   @override
   Widget build(BuildContext context) {
-    // HealthResponse? data;
     return ValueListenableBuilder(
       valueListenable: context.read<HealthModel>().submitData,
       builder: (context, value, child) {
@@ -52,9 +51,6 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                   border: Border.all(
                     color: context.appTheme.primaryColor,
                   ),
-                  // image: DecorationImage(
-                  //   image: NetworkImage(data!.uploadFile.toString()),
-                  // ),
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -117,10 +113,6 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                     isHorizontalScrollBarVisible: true,
                     showCheckboxColumn: true,
                     onSelectAll: (bool? value) {},
-                    datarowCheckboxTheme: CheckboxThemeData(
-                      checkColor: MaterialStateProperty.resolveWith(
-                          (states) => context.appTheme.primaryColor),
-                    ),
                     headingTextStyle: const TextStyle(
                         fontFamily: 'NotoSansJP',
                         package: 'core_ui',
@@ -135,7 +127,7 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                           )),
                     ],
                     rows: List.generate(
-                      value.requireData.length,
+                      value.data?.length ?? 0,
                       (index) {
                         return DataRow2(
                           selected: false,
@@ -147,8 +139,13 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                               style: context.textTheme.bodyMedium!.copyWith(
                                   color: context.appTheme.primaryColor),
                             )),
-                            DataCell(Text(value.requireData[index].uploadDate
-                                .toString())),
+                            DataCell(Text(
+                              value.requireData[index].uploadDate != null
+                                  ? Dates.formatFullDateTime(
+                                      value.requireData[index].uploadDate!)
+                                  : '',
+                              style: context.textTheme.bodyMedium,
+                            )),
                             DataCell(
                               ElevatedButton(
                                 onPressed: () {},

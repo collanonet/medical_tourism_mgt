@@ -6,6 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import '../document/document_model.dart';
 import 'contrant_model.dart';
 
 class Popup extends StatelessWidget {
@@ -142,9 +143,10 @@ class Popup extends StatelessWidget {
               width: context.appTheme.spacing.marginMedium,
             ),
             ValueListenableListener(
-              valueListenable: context.read<ContrantModel>().submitData,
+              valueListenable: context.read<DocumentModel>().submitDocumentData,
               onListen: () {
-                final value = context.read<ContrantModel>().submitData.value;
+                final value =
+                    context.read<DocumentModel>().submitDocumentData.value;
 
                 if (value.hasError) {
                   snackBarWidget(
@@ -164,15 +166,16 @@ class Popup extends StatelessWidget {
                 }
               },
               child: ValueListenableBuilder(
-                  valueListenable: context.read<ContrantModel>().submitData,
+                  valueListenable:
+                      context.read<DocumentModel>().submitDocumentData,
                   builder: (context, value, _) {
                     return ElevatedButton(
                       onPressed: value.loading
                           ? null
                           : () {
                               context
-                                  .read<ContrantModel>()
-                                  .submit(formGroup);
+                                  .read<DocumentModel>()
+                                  .submitDocument(formGroup);
                             },
                       child: WithLoadingButton(
                           isLoading: value.loading, child: Text('保存する')),
