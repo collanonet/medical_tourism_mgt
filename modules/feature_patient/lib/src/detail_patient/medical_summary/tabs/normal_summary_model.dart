@@ -34,12 +34,16 @@ class NormalSummaryModel {
         logger.d('result: $result');
         if (result.isNotEmpty) {
           medicalRecord.value = AsyncData(data: result.first);
-          formGroup.patchValue({
-            'dateOfBirth': medicalRecord.value.requireData.dateOfBirth,
-            'age': medicalRecord.value.requireData.age,
-            'gender': medicalRecord.value.requireData.gender,
-            'medicalRecord': medicalRecord.value.requireData.id,
-          });
+          formGroup.control('dateOfBirth').value =
+              medicalRecord.value.requireData.dateOfBirth;
+          formGroup.control('age').value = medicalRecord.value.requireData.age;
+          formGroup.control('gender').value =
+              medicalRecord.value.requireData.gender;
+          formGroup.control('medicalRecord').value =
+              medicalRecord.value.requireData.id;
+          await getPatientNationalities(
+              patientId: patientId, formGroup: formGroup);
+          await getPatientNames(patientId: patientId, formGroup: formGroup);
           await getMedicalRecordSummary(formGroup);
         } else {
           medicalRecord.value = const AsyncData();
@@ -49,6 +53,41 @@ class NormalSummaryModel {
         medicalRecord.value = AsyncData(error: e);
       }
     }
+  }
+
+  ValueNotifier<AsyncData<PatientNationality>> patientNationalities =
+      ValueNotifier<AsyncData<PatientNationality>>(const AsyncData());
+
+  Future<void> getPatientNationalities({
+    required String patientId,
+    required FormGroup formGroup,
+  }) async {
+    patientNationalities.value = const AsyncData(loading: true);
+
+    await patientRepository
+        .patientNationalitiesByPatient(patientId)
+        .then((value) {
+      if (value.isNotEmpty) {
+        patientNationalities.value = AsyncData(data: value.first);
+        insertPATIENTNATIONALITIES(
+          data: value.first,
+          formGroup: formGroup,
+        );
+      } else {
+        patientNationalities.value = const AsyncData();
+      }
+    }).catchError((error) {
+      logger.d(error);
+      patientNationalities.value = AsyncData(error: error);
+    });
+  }
+
+  void insertPATIENTNATIONALITIES({
+    required PatientNationality data,
+    required FormGroup formGroup,
+  }) {
+    formGroup.control('currentAddress').value = data.currentAddress;
+    formGroup.control('mobileNumberPatient').value = data.mobileNumber;
   }
 
   getMedicalRecordSummary(FormGroup formGroup) async {
@@ -71,14 +110,7 @@ class NormalSummaryModel {
     formGroup.patchValue({
       'id': result.id,
       'entryDate': result.entryDate,
-      'namePassport': result.namePassport,
-      'dateOfBirth': medicalRecord.value.requireData.dateOfBirth,
-      'age': medicalRecord.value.requireData.age,
-      'gender': medicalRecord.value.requireData.gender,
-      'nameChineseKanjiVietnamese': result.nameChineseKanjiVietnamese,
-      'nameKana': result.nameKana,
       'currentAddress': result.currentAddress,
-      'mobileNumberPatient': result.mobileNumberPatient,
       'mobileNumberDomestic': result.mobileNumberDomestic,
       'diseaseName': result.diseaseName,
       'tissueType': result.tissueType,
@@ -102,18 +134,66 @@ class NormalSummaryModel {
       'patientsAddressStay': result.patientsAddressStay,
       'emergencyContact': result.emergencyContact,
       'remarks': result.remarks,
-      'attachDocuments': result.attachDocuments
-              ?.map((e) => FormGroup({
-                    'attachDocumentsName': FormControl<String>(value: e),
-                  }))
-              .toList() ??
-          [
-            FormGroup({
-              'attachDocumentsName': FormControl<String>(),
-            })
-          ],
+      // 'attachDocuments': result.attachDocuments
+      //         ?.map((e) => FormGroup({
+      //               'attachDocumentsName': FormControl<String>(value: e),
+      //             }))
+      //         .toList() ??
+      //     [
+      //       FormGroup({
+      //         'attachDocumentsName': FormControl<String>(),
+      //       })
+      //     ],
       'medicalRecord': medicalRecord.value.requireData.id,
     });
+  }
+
+  ValueNotifier<AsyncData<PatientName>> patientNames = ValueNotifier(
+    const AsyncData(),
+  );
+
+  Future<void> getPatientNames({
+    required String patientId,
+    required FormGroup formGroup,
+  }) async {
+    patientNames.value = const AsyncData(loading: true);
+
+    await patientRepository.patientNamesByPatient(patientId).then((value) {
+      if (value.isNotEmpty) {
+        patientNames.value = AsyncData(data: value.firstOrNull);
+        insertPatientName(
+          data: value.first,
+          formGroup: formGroup,
+        );
+      } else {
+        patientNames.value = const AsyncData();
+      }
+    }).catchError((error) {
+      logger.d(error);
+      patientNames.value = AsyncData(error: error);
+    });
+  }
+
+  void insertPatientName({
+    required PatientName data,
+    required FormGroup formGroup,
+  }) {
+    formGroup.control('namePassport').value = data.familyNameRomanized +
+        " " +
+        data.middleNameRomanized +
+        " " +
+        data.firstNameRomanized;
+    formGroup.control('nameChineseKanjiVietnamese').value =
+        data.familyNameChineseOrVietnamese +
+            " " +
+            data.middleNameChineseOrVietnamese +
+            " " +
+            data.firstNameChineseOrVietnamese;
+    formGroup.control('nameKana').value = data.familyNameJapaneseForChinese +
+        " " +
+        data.middleNameJapaneseForChinese +
+        " " +
+        data.firstNameJapaneseForChinese;
   }
 
   void createUpdateMedicalRecordSummary(FormGroup formGroup) async {
@@ -146,7 +226,6 @@ class NormalSummaryModel {
             formGroup.control('nameChineseKanjiVietnamese').value,
         nameKana: formGroup.control('nameKana').value,
         currentAddress: formGroup.control('currentAddress').value,
-        mobileNumberPatient: formGroup.control('mobileNumberPatient').value,
         mobileNumberDomestic: formGroup.control('mobileNumberDomestic').value,
         diseaseName: formGroup.control('diseaseName').value,
         tissueType: formGroup.control('tissueType').value,

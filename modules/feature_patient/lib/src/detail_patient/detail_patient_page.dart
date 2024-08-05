@@ -2,6 +2,7 @@ import 'package:auto_route/auto_route.dart';
 import 'package:base_view/base_view.dart';
 import 'package:core_network/entities.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -33,7 +34,7 @@ class DetailPatientPage extends StatelessWidget {
                 builder: (context, value, _) {
                   return Skeletonizer(
                     enabled: value.loading,
-                    child: DetailPatientScreen(patient: value.data),
+                    child: DetailPatientScreen(patient: value.data, id: id),
                   );
                 });
           },

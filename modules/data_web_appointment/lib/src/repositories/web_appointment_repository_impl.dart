@@ -1,3 +1,4 @@
+import 'package:core_network/src/entities/application_treament_responce.dart';
 import 'package:core_network/src/entities/type_request.dart';
 import 'package:core_network/src/entities/type_response.dart';
 import 'package:core_network/src/entities/web_booking_medical_record.dart';
@@ -29,5 +30,10 @@ class WebAppointmentRepositoryIml extends WebAppointmentRepository {
   Future<WebBookingMedicalRecord> putWebBookingAdmin(String id,
       WebBookingMedicalRecordRequest webBookingMedicalRecordRequest) {
     return remote.putWebBookingAdmin(id, webBookingMedicalRecordRequest);
+  }
+
+  @override
+  Future<TreamentResponce> getInfoMedicalExamination(String patientId) {
+    return remote.getInfoMedicalExamination(patientId);
   }
 }

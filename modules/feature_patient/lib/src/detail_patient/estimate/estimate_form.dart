@@ -4,7 +4,7 @@ FormGroup estimateForm() => FormGroup({
       'title_estimate': FormGroup({
         'title': FormControl<String>(value: '劉 偉強 様 呼吸器疾患の受診（京大病院）'),
         'quotation_number': FormControl<String>(value: '19Y−0630−1'),
-        'issue_date': FormControl<DateTime>(value: DateTime.now()),
+        'issueDate': FormControl<DateTime>(value: DateTime.now()),
         'disclosure_agent_patient': FormControl<String>(value: '見積書'),
         'payment_due_date': FormControl<DateTime>(value: DateTime.now()),
         'payment_terms': FormControl<String>(value: '来日前前金（預り金）、終了後精算'),

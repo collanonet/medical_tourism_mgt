@@ -17,32 +17,40 @@ class AgentBasicInformationModel {
   ValueNotifier<AsyncData<AgentResponse>> agent =
       ValueNotifier(const AsyncData());
 
+  ValueNotifier<AsyncData<AgentResponse>> submitAgent =
+      ValueNotifier(const AsyncData());
+
   void init({String? id, required FormGroup formGroup}) async {
-    logger.d('init $id');
     if (id != null) {
       try {
         agent.value = const AsyncData(loading: true);
         var response = await authRepository.getAgent(id);
-        getAgentManagers(response.id, formGroup);
+        await getAgentManagers(response.id, formGroup);
+        await insertAgentDataToForm(response, formGroup);
         agent.value = AsyncData(data: response);
-        insertAgentDataToForm(response, formGroup);
       } catch (error) {
         logger.e(error);
-        agent.value = agent.value.copyWith(error: error);
+        agent.value = AsyncData(error: error);
       }
     }
   }
 
-  void insertAgentDataToForm(AgentResponse response, FormGroup formGroup) {
+  Future<void> insertAgentDataToForm(
+    AgentResponse response,
+    FormGroup formGroup,
+  ) async {
+    FormGroup basicInformationAgentForm =
+        formGroup.control('basicInformationAgent') as FormGroup;
+
     FormArray referralCommissions =
-        formGroup.control('referralCommissions') as FormArray;
+        basicInformationAgentForm.control('referralCommissions') as FormArray;
     referralCommissions.clear();
     if (response.referralCommissions != null &&
         response.referralCommissions!.isNotEmpty) {
       for (var element in response.referralCommissions!) {
         referralCommissions.add(
           FormGroup({
-            'id': FormControl<String>(value: element.id),
+            '_id': FormControl<String>(value: element.id),
             'referralCommissionName':
                 FormControl<String>(value: element.referralCommissionName),
             'referralCommission':
@@ -53,37 +61,45 @@ class AgentBasicInformationModel {
     } else {
       referralCommissions.add(
         FormGroup({
-          'id': FormControl<String>(),
+          '_id': FormControl<String>(),
           'referralCommissionName': FormControl<String>(),
           'referralCommission': FormControl<int>(),
         }),
       );
     }
 
-    formGroup.patchValue({
-      'id': response.id,
-      'memo': response.memo,
-      'companyName': response.companyName,
-      'nameKana': response.nameKana,
-      'postalCode': response.postalCode,
-      'address': response.address,
-      'area': response.area,
-      'phoneNumber': response.phoneNumber,
-      'transactionStartDate': response.transactionStartDate,
-      'howToMainPayment': response.howToMainPayment,
-      'pastCasesNumber': response.pastCasesNumber,
-    });
+    basicInformationAgentForm.control('_id').value = response.id;
+    basicInformationAgentForm.control('memo').value = response.memo;
+    basicInformationAgentForm.control('companyName').value =
+        response.companyName;
+    basicInformationAgentForm.control('nameKana').value = response.nameKana;
+    basicInformationAgentForm.control('postalCode').value = response.postalCode;
+    basicInformationAgentForm.control('address').value = response.address;
+    basicInformationAgentForm.control('area').value = response.area;
+    basicInformationAgentForm.control('phoneNumber').value =
+        response.phoneNumber;
+    basicInformationAgentForm.control('transactionStartDate').value =
+        response.transactionStartDate;
+    basicInformationAgentForm.control('howToMainPayment').value =
+        response.howToMainPayment;
+    basicInformationAgentForm.control('pastCasesNumber').value =
+        response.pastCasesNumber;
   }
+
+  ValueNotifier<AsyncData<bool>> submit = ValueNotifier(const AsyncData());
 
   void createOrUpdateAgent(FormGroup formGroup) async {
     try {
-      agent.value = const AsyncData(loading: true);
+      submit.value = const AsyncData(loading: true);
 
       List<AgentReferralCommissionRequest> referralCommissions = [];
 
-      formGroup.control('referralCommissions').value.forEach((element) {
+      formGroup
+          .control('basicInformationAgent.referralCommissions')
+          .value
+          .forEach((element) {
         referralCommissions.add(AgentReferralCommissionRequest(
-          id: element['id'],
+          id: element['_id'],
           referralCommissionName: element['referralCommissionName'],
           referralCommission: element['referralCommission'] != null
               ? int.tryParse(element['referralCommission'].toString()) ?? 0
@@ -95,47 +111,55 @@ class AgentBasicInformationModel {
       logger.d('referralCommissions ${referralCommissions.length}');
 
       var agentRequest = AgentRequest(
-        memo: formGroup.control('memo').value,
-        companyName: formGroup.control('companyName').value,
-        nameKana: formGroup.control('nameKana').value,
-        postalCode: formGroup.control('postalCode').value,
-        address: formGroup.control('address').value,
-        area: formGroup.control('area').value,
-        phoneNumber: formGroup.control('phoneNumber').value,
-        transactionStartDate: formGroup.control('transactionStartDate').value,
-        howToMainPayment: formGroup.control('howToMainPayment').value,
-        pastCasesNumber: formGroup.control('pastCasesNumber').value,
+        memo: formGroup.control('basicInformationAgent.memo').value,
+        companyName:
+            formGroup.control('basicInformationAgent.companyName').value,
+        nameKana: formGroup.control('basicInformationAgent.nameKana').value,
+        postalCode: formGroup.control('basicInformationAgent.postalCode').value,
+        address: formGroup.control('basicInformationAgent.address').value,
+        area: formGroup.control('basicInformationAgent.area').value,
+        phoneNumber:
+            formGroup.control('basicInformationAgent.phoneNumber').value,
+        transactionStartDate: formGroup
+            .control('basicInformationAgent.transactionStartDate')
+            .value,
+        howToMainPayment:
+            formGroup.control('basicInformationAgent.howToMainPayment').value,
+        pastCasesNumber:
+            formGroup.control('basicInformationAgent.pastCasesNumber').value,
         referralCommissions: referralCommissions,
       );
 
-      if (formGroup.control('id').value != null) {
+      if (formGroup.control('basicInformationAgent._id').value != null) {
         var response = await authRepository.putAgent(
-            formGroup.control('id').value, agentRequest);
+            formGroup.control('basicInformationAgent._id').value, agentRequest);
+        submitAgent.value = AsyncData(data: response);
         agent.value = AsyncData(data: response);
       } else {
         var response = await authRepository.postAgent(agentRequest);
+        submitAgent.value = AsyncData(data: response);
         agent.value = AsyncData(data: response);
       }
+
+      await createOrUpdateAgentManager(formGroup);
+      submit.value = const AsyncData(data: true);
+      init(id: agent.value.requireData.id, formGroup: formGroup);
     } catch (error) {
       logger.e(error);
-      agent.value = AsyncData(error: error);
-    }
-
-    if (agent.value.hasData) {
-      createOrUpdateAgentManager(formGroup);
+      submit.value = AsyncData(error: error);
     }
   }
 
   ValueNotifier<AsyncData<List<AgentManagerResponse>>> agentManager =
       ValueNotifier(const AsyncData());
 
-  void getAgentManagers(String agentRecord, FormGroup formGroup) async {
+  Future<void> getAgentManagers(String agentRecord, FormGroup formGroup) async {
     try {
       agentManager.value = const AsyncData(loading: true);
       var response =
           await authRepository.getAgentManagers(agentRecord: agentRecord);
-      agentManager.value = AsyncData(data: response);
       insertAgentManagerDataToForm(response, formGroup);
+      agentManager.value = AsyncData(data: response);
     } catch (error) {
       agentManager.value = AsyncData(error: error);
     }
@@ -147,91 +171,111 @@ class AgentBasicInformationModel {
     manager.clear();
     if (response.isNotEmpty) {
       for (var element in response) {
-        FormArray contactMethods =
-            element.contactMethods != null && element.contactMethods!.isNotEmpty
-                ? FormArray(
-                    element.contactMethods!.map((e) {
-                      return FormGroup({
-                        'id': FormControl<String>(value: e.id),
-                        'howToContact':
-                            FormControl<String>(value: e.howToContact),
-                        'howToContactQrCode':
-                            FormControl<String>(value: e.howToContactQrCode),
-                      });
-                    }).toList(),
-                  )
-                : FormArray([
-                    FormGroup({
-                      'id': FormControl<String>(),
-                      'howToContact': FormControl<String>(),
-                      'howToContactQrCode': FormControl<String>(),
-                    }),
-                  ]);
+        FormArray contactMethods = FormArray([
+          FormGroup({
+            '_id': FormControl<String>(),
+            'howToContact': FormControl<String>(),
+            'howToContactQrCode': FormControl<String>(),
+          }),
+        ]);
+
+        if (element.contactMethods != null &&
+            element.contactMethods!.isNotEmpty) {
+          contactMethods.clear();
+          for (var e in element.contactMethods!) {
+            contactMethods.add(
+              FormGroup({
+                '_id': FormControl<String>(value: e.id),
+                'howToContact': FormControl<String>(value: e.howToContact),
+                'howToContactQrCode':
+                    FormControl<String>(value: e.howToContactQrCode),
+              }),
+            );
+          }
+        }
+
         manager.add(
           FormGroup({
-            'id': FormControl<String>(value: element.id),
+            '_id': FormControl<String>(value: element.id),
             'nameCardDragDrop':
                 FormControl<String>(value: element.nameCardDragDrop),
             'departmentName':
                 FormControl<String>(value: element.departmentName),
-            'fullNameRomanji':
-                FormControl<String>(value: element.fullNameRomanji),
+            'fullNameRomanji': FormControl<String>(
+              value: element.fullNameRomanji ?? '',
+              validators: [Validators.required],
+            ),
             'fullNameChineseKanjiVietnameseNotation': FormControl<String>(
                 value: element.fullNameChineseKanjiVietnameseNotation),
             'fullNameJapaneseKanjiChineseOnly': FormControl<String>(
                 value: element.fullNameJapaneseKanjiChineseOnly),
             'fullNameKana': FormControl<String>(value: element.fullNameKana),
-            'phoneNumber': FormControl<String>(value: element.phoneNumber),
-            'email': FormControl<String>(value: element.email),
+            'phoneNumber': FormControl<String>(
+              value: element.phoneNumber ?? '',
+              validators: [
+                Validators.required,
+                Validators.number,
+              ],
+            ),
+            'email': FormControl<String>(
+              value: element.email,
+              validators: [
+                Validators.required,
+                Validators.email,
+              ],
+            ),
             'contactMethods': contactMethods,
           }),
         );
       }
     } else {
-      manager.add(FormGroup({
-        'id': FormControl<String>(),
-        'nameCardDragDrop': FormControl<String>(),
-        'departmentName': FormControl<String>(),
-        'fullNameRomanji': FormControl<String>(
-          validators: [Validators.required],
-        ),
-        'fullNameChineseKanjiVietnameseNotation': FormControl<String>(),
-        'fullNameJapaneseKanjiChineseOnly': FormControl<String>(),
-        'fullNameKana': FormControl<String>(),
-        'phoneNumber': FormControl<String>(
-          validators: [Validators.required],
-        ),
-        'email': FormControl<String>(
-          validators: [Validators.required],
-        ),
-        'contactMethods': FormArray([
-          FormGroup({
-            'id': FormControl<String>(),
-            'howToContact': FormControl<String>(),
-            'howToContactQrCode': FormControl<String>(),
-          }),
-        ]),
-      }));
+      manager.add(
+        FormGroup({
+          '_id': FormControl<String>(),
+          'nameCardDragDrop': FormControl<String>(),
+          'departmentName': FormControl<String>(),
+          'fullNameRomanji': FormControl<String>(
+            validators: [Validators.required],
+          ),
+          'fullNameChineseKanjiVietnameseNotation': FormControl<String>(),
+          'fullNameJapaneseKanjiChineseOnly': FormControl<String>(),
+          'fullNameKana': FormControl<String>(),
+          'phoneNumber': FormControl<String>(
+            validators: [Validators.required],
+          ),
+          'email': FormControl<String>(
+            validators: [
+              Validators.required,
+              Validators.email,
+            ],
+          ),
+          'contactMethods': FormArray([
+            FormGroup({
+              '_id': FormControl<String>(),
+              'howToContact': FormControl<String>(),
+              'howToContactQrCode': FormControl<String>(),
+            }),
+          ]),
+        }),
+      );
     }
   }
 
-  void createOrUpdateAgentManager(FormGroup formGroup) async {
+  Future<void> createOrUpdateAgentManager(FormGroup formGroup) async {
     try {
       agentManager.value = const AsyncData(loading: true);
 
       await formGroup.control('manager').value.forEach((element) async {
-        List<AgentManagerRequest> manager = [];
-
         List<AgentManagerContactRequest> contactMethods = [];
         element['contactMethods'].forEach((e) {
           contactMethods.add(AgentManagerContactRequest(
-            id: e['id'],
+            id: e['_id'],
             howToContact: e['howToContact'],
             howToContactQrCode: e['howToContactQrCode'],
           ));
         });
 
-        manager.add(AgentManagerRequest(
+        AgentManagerRequest manager = AgentManagerRequest(
           nameCardDragDrop: element['nameCardDragDrop'],
           departmentName: element['departmentName'],
           fullNameRomanji: element['fullNameRomanji'],
@@ -244,19 +288,30 @@ class AgentBasicInformationModel {
           email: element['email'],
           contactMethods: contactMethods,
           agentRecord: agent.value.requireData.id,
-        ));
+        );
 
-        if (element['id'] != null) {
-          await authRepository.putAgentManager(element['id'], manager.first);
+        if (element['_id'] != null) {
+          await authRepository.putAgentManager(element['_id'], manager);
         } else {
-          await authRepository.postAgentManager(manager.first);
+          await authRepository.postAgentManager(manager);
         }
       });
 
-      agentManager.value = agentManager.value.copyWith(loading: false);
+      agentManager.value = const AsyncData(data: []);
     } catch (error) {
       logger.e(error);
       agentManager.value = AsyncData(error: error);
     }
   }
+
+  ValueNotifier<List<Contact>> contactList = ValueNotifier([
+    Contact(value: 'WeChat'),
+    Contact(value: 'Line'),
+  ]);
+}
+
+
+class Contact{
+  String value;
+  Contact({required this.value});
 }

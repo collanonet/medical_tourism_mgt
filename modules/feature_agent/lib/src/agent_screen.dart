@@ -33,71 +33,78 @@ class AgentScreen extends StatelessWidget {
           ],
         ),
         Expanded(
-          child: Container(
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              color: Colors.white,
-            ),
-            child: ColumnSeparated(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              separatorBuilder: (BuildContext context, int index) {
-                return const SizedBox(height: 8);
-              },
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RowSeparated(
+          child: ValueListenableBuilder(
+              valueListenable: context.watch<AgentModel>().agents,
+              builder: (context, value, child) {
+                return Container(
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    color: Colors.white,
+                  ),
+                  child: Skeletonizer(
+                    enabled: value.loading,
+                    child: ColumnSeparated(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
                       separatorBuilder: (BuildContext context, int index) {
-                        return const SizedBox(width: 16);
+                        return const SizedBox(height: 8);
                       },
                       children: [
-                        Expanded(
-                          flex: 2,
-                          child: Text(
-                            '担当者名',
-                            style: context.textTheme.bodyMedium,
-                          ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: RowSeparated(
+                              separatorBuilder:
+                                  (BuildContext context, int index) {
+                                return const SizedBox(width: 16);
+                              },
+                              children: [
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    '担当者名',
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                ),
+                                Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    '会社名',
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                ),
+                                // Expanded(
+                                //   child: Text(
+                                //     '国',
+                                //     style: context.textTheme.bodyMedium,
+                                //   ),
+                                // ),
+                                Expanded(
+                                  child: Text(
+                                    '地域',
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    '過去実績案件数',
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    '連絡方法１',
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                ),
+                                Expanded(
+                                  child: Text(
+                                    '連絡方法２',
+                                    style: context.textTheme.bodyMedium,
+                                  ),
+                                ),
+                              ]),
                         ),
                         Expanded(
-                          flex: 2,
-                          child: Text(
-                            '会社名',
-                            style: context.textTheme.bodyMedium,
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            '国',
-                            style: context.textTheme.bodyMedium,
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            '過去実績案件数',
-                            style: context.textTheme.bodyMedium,
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            '連絡方法１',
-                            style: context.textTheme.bodyMedium,
-                          ),
-                        ),
-                        Expanded(
-                          child: Text(
-                            '連絡方法２',
-                            style: context.textTheme.bodyMedium,
-                          ),
-                        ),
-                      ]),
-                ),
-                Expanded(
-                    child: ValueListenableBuilder(
-                        valueListenable: context.read<AgentModel>().agents,
-                        builder: (context, value, child) {
-                          return Skeletonizer(
-                            enabled: value.loading,
                             child: ListView.builder(
                                 itemCount: value.data?.length ?? 0,
                                 itemBuilder: (context, index) {
@@ -131,12 +138,16 @@ class AgentScreen extends StatelessWidget {
                                                     MainAxisAlignment.start,
                                                 children: [
                                                   Text(
-                                                    'LIU　WEIQIANG ',
+                                                    value
+                                                            .requireData[index]
+                                                            .manager
+                                                            ?.fullNameRomanji ??
+                                                        '--',
                                                     style: context
                                                         .textTheme.bodyMedium,
                                                   ),
                                                   Text(
-                                                    '刘 伟强 / 劉 偉強',
+                                                    '${value.requireData[index].manager?.fullNameChineseKanjiVietnameseNotation ?? '--'} / ${value.requireData[index].manager?.fullNameJapaneseKanjiChineseOnly ?? '--'}',
                                                     style: context
                                                         .textTheme.bodySmall,
                                                   ),
@@ -204,12 +215,12 @@ class AgentScreen extends StatelessWidget {
                                           ]),
                                     ),
                                   );
-                                }),
-                          );
-                        })),
-              ],
-            ),
-          ),
+                                })),
+                      ],
+                    ),
+                  ),
+                );
+              }),
         ),
       ],
     );

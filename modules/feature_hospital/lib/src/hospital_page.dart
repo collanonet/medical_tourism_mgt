@@ -20,7 +20,7 @@ class _HospitalPageState extends State<HospitalPage> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => GetIt.I<HospitalModel>(),
+      create: (context) => GetIt.I<HospitalModel>()..fetchHospitals(),
       child: const LayoutView(
         selectedIndex: 5,
         page: HospitalScreen(),

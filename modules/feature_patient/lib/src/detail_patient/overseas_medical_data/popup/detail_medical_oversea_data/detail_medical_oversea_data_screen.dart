@@ -1,5 +1,4 @@
 import 'package:core_network/core_network.dart';
-import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/material.dart';
 import 'study_of_dicom_tab.dart';
@@ -11,7 +10,7 @@ import 'hospital_dicom_tab.dart';
 class DetailMedicalOverseaDataScreen extends StatefulWidget {
   const DetailMedicalOverseaDataScreen({
     super.key,
-     this.medicalRecordOverseaData,
+    this.medicalRecordOverseaData,
   });
   final MedicalRecordOverseaData? medicalRecordOverseaData;
   @override

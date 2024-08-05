@@ -1,4 +1,3 @@
-import 'package:core_network/core_network.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
@@ -49,7 +48,7 @@ class BasicInformationScreen extends StatelessWidget {
               },
               child: ValueListenableBuilder(
                   valueListenable:
-                      context.read<BasicInformationModel>().loading,
+                      context.watch<BasicInformationModel>().loading,
                   builder: (context, value, child) {
                     return ReactiveFormConsumer(
                       builder: (context, form, _) {

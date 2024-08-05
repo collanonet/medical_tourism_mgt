@@ -1,11 +1,8 @@
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
-import 'package:core_ui/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
-import '../patient/patient_model.dart';
 import 'filter_pre_patient_form.dart';
 import 'pre_patient_model.dart';
 

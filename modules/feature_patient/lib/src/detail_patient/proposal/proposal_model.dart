@@ -61,18 +61,19 @@ class ProposalModel {
   void insertProposal(
       List<MedicalRecordProposal> data, FormGroup formGroup) async {
     if (data.isNotEmpty) {
-      formGroup.patchValue({
-        'proposal': data
-            .map((e) => {
-                  'id': e.id,
-                  'hospitalName': e.hospitalName,
-                  'postalCode': e.postalCode,
-                  'address': e.address,
-                  'summary': e.summary,
-                  'medicalRecord': e.medicalRecord,
-                })
-            .toList()
-      });
+      formGroup.reset();
+      FormArray proposal = formGroup.control('proposal') as FormArray;
+
+      for (var d in data) {
+        proposal.add(FormGroup({
+          'id': FormControl<String?>(value: d.id),
+          'hospitalName': FormControl<String>(value: d.hospitalName),
+          'postalCode': FormControl<String>(value: d.postalCode),
+          'address': FormControl<String>(value: d.address),
+          'summary': FormControl<String>(value: d.summary),
+          'medicalRecord': FormControl<String>(value: d.medicalRecord),
+        }));
+      }
     }
   }
 

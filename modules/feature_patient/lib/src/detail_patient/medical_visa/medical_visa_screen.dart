@@ -78,7 +78,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     children: [
                       Expanded(
                         child: ReactiveTextField(
-                          formControlName: 'medical_visa',
+                          formControlName: 'medicalVisa',
                           decoration: InputDecoration(
                             label: Text(
                               '医療ビザ',
@@ -91,14 +91,14 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       ),
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'application_date',
+                          formControlName: 'applicationDate',
                           firstDate: DateTime(1900),
                           lastDate: DateTime.now(),
                           builder: (BuildContext context,
                               ReactiveDatePickerDelegate<dynamic> picker,
                               Widget? child) {
                             return ReactiveTextField<DateTime>(
-                              formControlName: 'application_date',
+                              formControlName: 'applicationDate',
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -132,14 +132,14 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       ),
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'issue_date',
+                          formControlName: 'issueDate',
                           firstDate: DateTime(1900),
                           lastDate: DateTime.now(),
                           builder: (BuildContext context,
                               ReactiveDatePickerDelegate<dynamic> picker,
                               Widget? child) {
                             return ReactiveTextField<DateTime>(
-                              formControlName: 'issue_date',
+                              formControlName: 'issueDate',
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -177,14 +177,14 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     children: [
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'expiration_date',
+                          formControlName: 'expirationDate',
                           firstDate: DateTime(1900),
                           lastDate: DateTime.now(),
                           builder: (BuildContext context,
                               ReactiveDatePickerDelegate<dynamic> picker,
                               Widget? child) {
                             return ReactiveTextField<DateTime>(
-                              formControlName: 'expiration_date',
+                              formControlName: 'expirationDate',
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -218,7 +218,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       ),
                       Expanded(
                         child: ReactiveTextField(
-                          formControlName: 'accompanying_persons_number',
+                          formControlName: 'accompanyingPersonsNumber',
                           decoration: InputDecoration(
                             label: Text(
                               '同伴者人数',
@@ -232,7 +232,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName:
-                              'visa_issuing_overseas_establishments',
+                              'visaIssuingOverseasEstablishments',
                           decoration: InputDecoration(
                             label: Text(
                               'ビザ発行在外公館',
@@ -262,7 +262,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       ),
                       Expanded(
                         child: ReactiveTextField(
-                          formControlName: 'payment_status',
+                          formControlName: 'paymentStatus',
                           decoration: InputDecoration(
                             label: Text(
                               '入金状況',
@@ -312,7 +312,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
             height: context.appTheme.spacing.marginMedium,
           ),
           ReactiveForm(
-            formGroup: formGroup.control('stay_period') as FormGroup,
+            formGroup: formGroup.control('stayPeriod') as FormGroup,
             child: Container(
               decoration: BoxDecoration(
                 border: Border.all(
@@ -329,7 +329,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
                           formControlName:
-                              'stay_starting_date_personal_reference',
+                              'stayStartingDatePersonalReference',
                           firstDate: DateTime(1900),
                           lastDate: DateTime.now(),
                           builder: (BuildContext context,
@@ -337,7 +337,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                               Widget? child) {
                             return ReactiveTextField<DateTime>(
                               formControlName:
-                                  'stay_starting_date_personal_reference',
+                                  'stayStartingDatePersonalReference',
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -371,14 +371,14 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       ),
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'stay_end_date',
+                          formControlName: 'stayEndDate',
                           firstDate: DateTime(1900),
                           lastDate: DateTime.now(),
                           builder: (BuildContext context,
                               ReactiveDatePickerDelegate<dynamic> picker,
                               Widget? child) {
                             return ReactiveTextField<DateTime>(
-                              formControlName: 'stay_end_date',
+                              formControlName: 'stayEndDate',
                               valueAccessor: DateTimeValueAccessor(
                                 dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
@@ -450,7 +450,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
           ),
           Text('日本で必要な書類'),
           ReactiveForm(
-            formGroup: formGroup.control('required_in_japan') as FormGroup,
+            formGroup: formGroup.control('requiredInJapan') as FormGroup,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -462,14 +462,14 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     ),
                     Expanded(
                       child: ReactiveDatePicker<DateTime>(
-                        formControlName: 'passport_file_upload_date',
+                        formControlName: 'passportFileUploadDate',
                         firstDate: DateTime(1900),
                         lastDate: DateTime.now(),
                         builder: (BuildContext context,
                             ReactiveDatePickerDelegate<dynamic> picker,
                             Widget? child) {
                           return ReactiveTextField<DateTime>(
-                            formControlName: 'passport_file_upload_date',
+                            formControlName: 'passportFileUploadDate',
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -845,14 +845,14 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                         children: [
                           Expanded(
                             child: ReactiveDatePicker<DateTime>(
-                              formControlName: 'date_landing_permit',
+                              formControlName: 'dateLandingPermit',
                               firstDate: DateTime(1900),
                               lastDate: DateTime.now(),
                               builder: (BuildContext context,
                                   ReactiveDatePickerDelegate<dynamic> picker,
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
-                                  formControlName: 'date_landing_permit',
+                                  formControlName: 'dateLandingPermit',
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -886,14 +886,14 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           ),
                           Expanded(
                             child: ReactiveDatePicker<DateTime>(
-                              formControlName: 'date_visa_expiration',
+                              formControlName: 'dateVisaExpiration',
                               firstDate: DateTime(1900),
                               lastDate: DateTime.now(),
                               builder: (BuildContext context,
                                   ReactiveDatePickerDelegate<dynamic> picker,
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
-                                  formControlName: 'date_visa_expiration',
+                                  formControlName: 'dateVisaExpiration',
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -939,14 +939,14 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                         children: [
                           Expanded(
                             child: ReactiveDatePicker<DateTime>(
-                              formControlName: 'date_entry_into_japan',
+                              formControlName: 'dateEntryIntoJapan',
                               firstDate: DateTime(1900),
                               lastDate: DateTime.now(),
                               builder: (BuildContext context,
                                   ReactiveDatePickerDelegate<dynamic> picker,
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
-                                  formControlName: 'date_entry_into_japan',
+                                  formControlName: 'dateEntryIntoJapan',
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -980,14 +980,14 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           ),
                           Expanded(
                             child: ReactiveDatePicker<DateTime>(
-                              formControlName: 'date_entry_from_japan',
+                              formControlName: 'dateEntryFromJapan',
                               firstDate: DateTime(1900),
                               lastDate: DateTime.now(),
                               builder: (BuildContext context,
                                   ReactiveDatePickerDelegate<dynamic> picker,
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
-                                  formControlName: 'date_entry_from_japan',
+                                  formControlName: 'dateEntryFromJapan',
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -1038,7 +1038,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             flex: 2,
                             child: ReactiveTextField(
-                              formControlName: 'departure_entry',
+                              formControlName: 'departureEntry',
                               decoration: InputDecoration(
                                 label: Text(
                                   '出発地',
@@ -1052,7 +1052,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             flex: 2,
                             child: ReactiveTextField(
-                              formControlName: 'arrival_entry',
+                              formControlName: 'arrivalEntry',
                               decoration: InputDecoration(
                                 label: Text(
                                   '到着地',
@@ -1065,7 +1065,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           ),
                           Expanded(
                             child: ReactiveTextField(
-                              formControlName: 'flight_number_entry',
+                              formControlName: 'flightNumberEntry',
                               decoration: InputDecoration(
                                 label: Text(
                                   '便名',
@@ -1078,7 +1078,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           ),
                           Expanded(
                             child: ReactiveTextField(
-                              formControlName: 'departure_time_entry',
+                              formControlName: 'departureTimeEntry',
                               decoration: InputDecoration(
                                 label: Text(
                                   '発時刻',
@@ -1091,7 +1091,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           ),
                           Expanded(
                             child: ReactiveTextField(
-                              formControlName: 'arrival_time_entry',
+                              formControlName: 'arrivalTimeEntry',
                               decoration: InputDecoration(
                                 label: Text(
                                   '着時刻',
@@ -1121,7 +1121,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             flex: 2,
                             child: ReactiveTextField(
-                              formControlName: 'departure_departure',
+                              formControlName: 'departureDeparture',
                               decoration: InputDecoration(
                                 label: Text(
                                   '出発地',
@@ -1135,7 +1135,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             flex: 2,
                             child: ReactiveTextField(
-                              formControlName: 'arrival_departure',
+                              formControlName: 'arrivalDeparture',
                               decoration: InputDecoration(
                                 label: Text(
                                   '到着地',
@@ -1148,7 +1148,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           ),
                           Expanded(
                             child: ReactiveTextField(
-                              formControlName: 'flight_number_departure',
+                              formControlName: 'flightNumberDeparture',
                               decoration: InputDecoration(
                                 label: Text(
                                   '便名',
@@ -1161,7 +1161,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           ),
                           Expanded(
                             child: ReactiveTextField(
-                              formControlName: 'departure_time_departure',
+                              formControlName: 'departureTimeDeparture',
                               decoration: InputDecoration(
                                 label: Text(
                                   '発時刻',
@@ -1174,7 +1174,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           ),
                           Expanded(
                             child: ReactiveTextField(
-                              formControlName: 'arrival_time_departure',
+                              formControlName: 'arrivalTimeDeparture',
                               decoration: InputDecoration(
                                 label: Text(
                                   '着時刻',
@@ -1187,7 +1187,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           ),
                           Expanded(
                             child: ReactiveTextField(
-                              formControlName: 'flight_seat_numbe_departurer',
+                              formControlName: 'flightSeatNumbeDeparturer',
                               decoration: InputDecoration(
                                 label: Text(
                                   '座席番号',
@@ -1257,7 +1257,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
             height: context.appTheme.spacing.marginMedium,
           ),
           ReactiveForm(
-            formGroup: formGroup.control('withdrawal_of_visa') as FormGroup,
+            formGroup: formGroup.control('withdrawalOfVisa') as FormGroup,
             child: Row(
               children: [
                 Checkbox(value: true, onChanged: (value) {}),
@@ -1267,14 +1267,14 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Expanded(
                   child: ReactiveDatePicker<DateTime>(
-                    formControlName: 'death_or_occurrence_event_date',
+                    formControlName: 'deathOrOccurrenceEventDate',
                     firstDate: DateTime(1900),
                     lastDate: DateTime.now(),
                     builder: (BuildContext context,
                         ReactiveDatePickerDelegate<dynamic> picker,
                         Widget? child) {
                       return ReactiveTextField<DateTime>(
-                        formControlName: 'death_or_occurrence_event_date',
+                        formControlName: 'deathOrOccurrenceEventDate',
                         valueAccessor: DateTimeValueAccessor(
                           dateTimeFormat: DateFormat('yyyy/MM/dd'),
                         ),
@@ -1325,7 +1325,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
             style: context.textTheme.titleMedium,
           ),
           ReactiveForm(
-            formGroup: formGroup.control('required_in_japan') as FormGroup,
+            formGroup: formGroup.control('requiredInJapan') as FormGroup,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -1641,7 +1641,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     Expanded(
                       child: ReactiveDatePicker<DateTime>(
                         formControlName:
-                            'boarding_pass_returning_file_upload_date',
+                            'boardingPassReturningFileUploadDate',
                         firstDate: DateTime(1900),
                         lastDate: DateTime.now(),
                         builder: (BuildContext context,
@@ -1649,7 +1649,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             Widget? child) {
                           return ReactiveTextField<DateTime>(
                             formControlName:
-                                'boarding_pass_returning_file_upload_date',
+                                'boardingPassReturningFileUploadDate',
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -1723,7 +1723,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     Expanded(
                       child: ReactiveDatePicker<DateTime>(
                         formControlName:
-                            'certificate_eligibility_file_upload_date',
+                            'certificateEligibilityFileUploadDate',
                         firstDate: DateTime(1900),
                         lastDate: DateTime.now(),
                         builder: (BuildContext context,
@@ -1731,7 +1731,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             Widget? child) {
                           return ReactiveTextField<DateTime>(
                             formControlName:
-                                'certificate_eligibility_file_upload_date',
+                                'certificateEligibilityFileUploadDate',
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -1789,7 +1789,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 ReactiveForm(
-                  formGroup: formGroup.control('companion_other') as FormGroup,
+                  formGroup: formGroup.control('companionOther') as FormGroup,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -1804,7 +1804,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                         children: [
                           Expanded(
                             child: ReactiveTextField(
-                              formControlName: 'name_romaji',
+                              formControlName: 'nameRomaji',
                               decoration: InputDecoration(
                                 label: Text(
                                   '氏名（ローマ字）',
@@ -1817,14 +1817,14 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           ),
                           Expanded(
                             child: ReactiveDatePicker<DateTime>(
-                              formControlName: 'date_birth',
+                              formControlName: 'dateBirth',
                               firstDate: DateTime(1900),
                               lastDate: DateTime.now(),
                               builder: (BuildContext context,
                                   ReactiveDatePickerDelegate<dynamic> picker,
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
-                                  formControlName: 'date_birth',
+                                  formControlName: 'dateBirth',
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -1865,7 +1865,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   children: [
                                     Text('性別'),
                                     ReactiveValueListenableBuilder<DateTime>(
-                                      formControlName: 'date_birth',
+                                      formControlName: 'dateBirth',
                                       builder: (context, value, _) {
                                         return Text(value.value == null
                                             ? '0歳'
@@ -1908,7 +1908,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                         children: [
                           Expanded(
                             child: ReactiveTextField(
-                              formControlName: 'address_area',
+                              formControlName: 'addressArea',
                               decoration: InputDecoration(
                                 label: Text(
                                   '居住地域',
@@ -1921,7 +1921,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           ),
                           Expanded(
                             child: ReactiveTextField(
-                              formControlName: 'number_passport',
+                              formControlName: 'numberPassport',
                               decoration: InputDecoration(
                                 label: Text(
                                   '旅券番号',
@@ -1959,7 +1959,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                               children: [
                                 Expanded(
                                   child: ReactiveDatePicker<DateTime>(
-                                    formControlName: 'date_landing_permit',
+                                    formControlName: 'dateLandingPermit',
                                     firstDate: DateTime(1900),
                                     lastDate: DateTime.now(),
                                     builder: (BuildContext context,
@@ -1967,7 +1967,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                             picker,
                                         Widget? child) {
                                       return ReactiveTextField<DateTime>(
-                                        formControlName: 'date_landing_permit',
+                                        formControlName: 'dateLandingPermit',
                                         valueAccessor: DateTimeValueAccessor(
                                           dateTimeFormat:
                                               DateFormat('yyyy/MM/dd'),
@@ -2002,7 +2002,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 ),
                                 Expanded(
                                   child: ReactiveDatePicker<DateTime>(
-                                    formControlName: 'date_visa_expiration',
+                                    formControlName: 'dateVisaExpiration',
                                     firstDate: DateTime(1900),
                                     lastDate: DateTime.now(),
                                     builder: (BuildContext context,
@@ -2010,7 +2010,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                             picker,
                                         Widget? child) {
                                       return ReactiveTextField<DateTime>(
-                                        formControlName: 'date_visa_expiration',
+                                        formControlName: 'dateVisaExpiration',
                                         valueAccessor: DateTimeValueAccessor(
                                           dateTimeFormat:
                                               DateFormat('yyyy/MM/dd'),
@@ -2058,7 +2058,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                               children: [
                                 Expanded(
                                   child: ReactiveDatePicker<DateTime>(
-                                    formControlName: 'date_entry_into_japan',
+                                    formControlName: 'dateEntryIntoJapan',
                                     firstDate: DateTime(1900),
                                     lastDate: DateTime.now(),
                                     builder: (BuildContext context,
@@ -2067,7 +2067,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                         Widget? child) {
                                       return ReactiveTextField<DateTime>(
                                         formControlName:
-                                            'date_entry_into_japan',
+                                            'dateEntryIntoJapan',
                                         valueAccessor: DateTimeValueAccessor(
                                           dateTimeFormat:
                                               DateFormat('yyyy/MM/dd'),
@@ -2102,7 +2102,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 ),
                                 Expanded(
                                   child: ReactiveDatePicker<DateTime>(
-                                    formControlName: 'date_entry_from_japan',
+                                    formControlName: 'dateEntryFromJapan',
                                     firstDate: DateTime(1900),
                                     lastDate: DateTime.now(),
                                     builder: (BuildContext context,
@@ -2111,7 +2111,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                         Widget? child) {
                                       return ReactiveTextField<DateTime>(
                                         formControlName:
-                                            'date_entry_from_japan',
+                                            'dateEntryFromJapan',
                                         valueAccessor: DateTimeValueAccessor(
                                           dateTimeFormat:
                                               DateFormat('yyyy/MM/dd'),
@@ -2164,7 +2164,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 Expanded(
                                   flex: 2,
                                   child: ReactiveTextField(
-                                    formControlName: 'departure_entry',
+                                    formControlName: 'departureEntry',
                                     decoration: InputDecoration(
                                       label: Text(
                                         '出発地',
@@ -2178,7 +2178,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 Expanded(
                                   flex: 2,
                                   child: ReactiveTextField(
-                                    formControlName: 'arrival_entry',
+                                    formControlName: 'arrivalEntry',
                                     decoration: InputDecoration(
                                       label: Text(
                                         '到着地',
@@ -2191,7 +2191,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 ),
                                 Expanded(
                                   child: ReactiveTextField(
-                                    formControlName: 'flight_number_entry',
+                                    formControlName: 'flightNumberEntry',
                                     decoration: InputDecoration(
                                       label: Text(
                                         '便名',
@@ -2204,7 +2204,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 ),
                                 Expanded(
                                   child: ReactiveTextField(
-                                    formControlName: 'departure_time_entry',
+                                    formControlName: 'departureTimeEntry',
                                     decoration: InputDecoration(
                                       label: Text(
                                         '発時刻',
@@ -2217,7 +2217,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 ),
                                 Expanded(
                                   child: ReactiveTextField(
-                                    formControlName: 'arrival_time_entry',
+                                    formControlName: 'arrivalTimeEntry',
                                     decoration: InputDecoration(
                                       label: Text(
                                         '着時刻',
@@ -2248,7 +2248,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 Expanded(
                                   flex: 2,
                                   child: ReactiveTextField(
-                                    formControlName: 'departure_departure',
+                                    formControlName: 'departureDeparture',
                                     decoration: InputDecoration(
                                       label: Text(
                                         '出発地',
@@ -2262,7 +2262,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 Expanded(
                                   flex: 2,
                                   child: ReactiveTextField(
-                                    formControlName: 'arrival_departure',
+                                    formControlName: 'arrivalDeparture',
                                     decoration: InputDecoration(
                                       label: Text(
                                         '到着地',
@@ -2275,7 +2275,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 ),
                                 Expanded(
                                   child: ReactiveTextField(
-                                    formControlName: 'flight_number_departure',
+                                    formControlName: 'flightNumberDeparture',
                                     decoration: InputDecoration(
                                       label: Text(
                                         '便名',
@@ -2288,7 +2288,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 ),
                                 Expanded(
                                   child: ReactiveTextField(
-                                    formControlName: 'departure_time_departure',
+                                    formControlName: 'departureTimeDeparture',
                                     decoration: InputDecoration(
                                       label: Text(
                                         '発時刻',
@@ -2301,7 +2301,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 ),
                                 Expanded(
                                   child: ReactiveTextField(
-                                    formControlName: 'arrival_time_departure',
+                                    formControlName: 'arrivalTimeDeparture',
                                     decoration: InputDecoration(
                                       label: Text(
                                         '着時刻',
@@ -2315,7 +2315,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 Expanded(
                                   child: ReactiveTextField(
                                     formControlName:
-                                        'flight_seat_numbe_departurer',
+                                        'flightSeatNumbeDeparturer',
                                     decoration: InputDecoration(
                                       label: Text(
                                         '座席番号',
@@ -2382,7 +2382,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                   height: context.appTheme.spacing.marginMedium,
                 ),
                 ReactiveForm(
-                  formGroup: formGroup.control('withdrawal_of_visa_other')
+                  formGroup: formGroup.control('withdrawalOfVisaOther')
                       as FormGroup,
                   child: Row(
                     children: [
@@ -2432,7 +2432,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 ReactiveForm(
                   formGroup:
-                      formGroup.control('required_in_japan') as FormGroup,
+                      formGroup.control('requiredInJapan') as FormGroup,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -2757,7 +2757,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             child: ReactiveDatePicker<DateTime>(
                               formControlName:
-                                  'boarding_pass_returning_file_upload_date',
+                                  'boardingPassReturningFileUploadDate',
                               firstDate: DateTime(1900),
                               lastDate: DateTime.now(),
                               builder: (BuildContext context,
@@ -2765,7 +2765,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
                                   formControlName:
-                                      'boarding_pass_returning_file_upload_date',
+                                      'boardingPassReturningFileUploadDate',
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -2841,7 +2841,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             child: ReactiveDatePicker<DateTime>(
                               formControlName:
-                                  'certificate_eligibility_file_upload_date',
+                                  'certificateEligibilityFileUploadDate',
                               firstDate: DateTime(1900),
                               lastDate: DateTime.now(),
                               builder: (BuildContext context,
@@ -2849,7 +2849,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
                                   formControlName:
-                                      'certificate_eligibility_file_upload_date',
+                                      'certificateEligibilityFileUploadDate',
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
@@ -2951,7 +2951,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
             style: context.textTheme.titleMedium,
           ),
           ReactiveForm(
-            formGroup: formGroup.control('required_in_japan') as FormGroup,
+            formGroup: formGroup.control('requiredInJapan') as FormGroup,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -2963,14 +2963,14 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     ),
                     Expanded(
                       child: ReactiveDatePicker<DateTime>(
-                        formControlName: 'passport_file_upload_date',
+                        formControlName: 'passportFileUploadDate',
                         firstDate: DateTime(1900),
                         lastDate: DateTime.now(),
                         builder: (BuildContext context,
                             ReactiveDatePickerDelegate<dynamic> picker,
                             Widget? child) {
                           return ReactiveTextField<DateTime>(
-                            formControlName: 'passport_file_upload_date',
+                            formControlName: 'passportFileUploadDate',
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -3281,7 +3281,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
             style: context.textTheme.titleMedium,
           ),
           ReactiveForm(
-            formGroup: formGroup.control('required_in_japan') as FormGroup,
+            formGroup: formGroup.control('requiredInJapan') as FormGroup,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -3597,7 +3597,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     Expanded(
                       child: ReactiveDatePicker<DateTime>(
                         formControlName:
-                            'boarding_pass_returning_file_upload_date',
+                            'boardingPassReturningFileUploadDate',
                         firstDate: DateTime(1900),
                         lastDate: DateTime.now(),
                         builder: (BuildContext context,
@@ -3605,7 +3605,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             Widget? child) {
                           return ReactiveTextField<DateTime>(
                             formControlName:
-                                'boarding_pass_returning_file_upload_date',
+                                'boardingPassReturningFileUploadDate',
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),
@@ -3679,7 +3679,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     Expanded(
                       child: ReactiveDatePicker<DateTime>(
                         formControlName:
-                            'certificate_eligibility_file_upload_date',
+                            'certificateEligibilityFileUploadDate',
                         firstDate: DateTime(1900),
                         lastDate: DateTime.now(),
                         builder: (BuildContext context,
@@ -3687,7 +3687,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             Widget? child) {
                           return ReactiveTextField<DateTime>(
                             formControlName:
-                                'certificate_eligibility_file_upload_date',
+                                'certificateEligibilityFileUploadDate',
                             valueAccessor: DateTimeValueAccessor(
                               dateTimeFormat: DateFormat('yyyy/MM/dd'),
                             ),

@@ -51,7 +51,7 @@ class _WebAppointmentDetailScreenState
       },
       child: ValueListenableBuilder(
           valueListenable:
-              context.read<WebAppointmentDetailModel>().webBookingAdmin,
+              context.watch<WebAppointmentDetailModel>().webBookingAdmin,
           builder: (context, value, _) {
             return Skeletonizer(
               enabled: value.loading,

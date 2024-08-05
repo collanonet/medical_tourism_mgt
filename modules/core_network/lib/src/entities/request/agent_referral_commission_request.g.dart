@@ -11,7 +11,7 @@ AgentReferralCommissionRequest _$AgentReferralCommissionRequestFromJson(
     AgentReferralCommissionRequest(
       id: json['id'] as String?,
       referralCommissionName: json['referralCommissionName'] as String?,
-      referralCommission: json['referralCommission'] as int?,
+      referralCommission: (json['referralCommission'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$AgentReferralCommissionRequestToJson(

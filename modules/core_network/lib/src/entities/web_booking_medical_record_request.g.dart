@@ -16,8 +16,6 @@ WebBookingMedicalRecordRequest _$WebBookingMedicalRecordRequestFromJson(
           .map((e) => BookingDateRequest.fromJson(e as Map<String, dynamic>))
           .toList(),
       medicalRecord: json['medicalRecord'] as String,
-      testCallDate: json['testCallDate'] as String,
-      testCallTime: json['testCallTime'] as String,
       patient: json['patient'] as String,
     );
 
@@ -29,7 +27,5 @@ Map<String, dynamic> _$WebBookingMedicalRecordRequestToJson(
       'doctorName': instance.doctorName,
       'candidateDate': instance.candidateDate,
       'medicalRecord': instance.medicalRecord,
-      'testCallDate': instance.testCallDate,
-      'testCallTime': instance.testCallTime,
       'patient': instance.patient,
     };

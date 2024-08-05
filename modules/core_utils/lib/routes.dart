@@ -10,4 +10,5 @@ class Routes {
   static const quotationsRoute = 'QuotationsRoute';
   static const reportsRoute = 'ReportsRoute';
   static const salesRoute = 'SalesRoute';
+  static const masterRoute = 'MasterRoute';
 }

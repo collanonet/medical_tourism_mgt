@@ -1,10 +1,18 @@
-import 'dart:io';
-
 import 'package:core_network/core_network.dart';
+import 'package:core_network/entities.dart';
 
 abstract class AgentRepository {
-
-  Future<List<AgentResponse>> getAgents();
+  Future<List<AgentResponse>> getAgents({
+    String? companyName,
+    String? nameKana,
+    String? postalCode,
+    String? address,
+    String? area,
+    String? phoneNumber,
+    DateTime? transactionStartDate,
+    String? howToMainPayment,
+    int? pastCasesNumber,
+  });
 
   Future<AgentResponse> getAgent(String id);
 
@@ -18,9 +26,33 @@ abstract class AgentRepository {
 
   Future<AgentManagerResponse> getAgentManager(String id);
 
-  Future<AgentManagerResponse> postAgentManager(AgentManagerRequest agentManager);
+  Future<AgentManagerResponse> postAgentManager(
+      AgentManagerRequest agentManager);
 
-  Future<AgentManagerResponse> putAgentManager(String id, AgentManagerRequest agentManager);
+  Future<AgentManagerResponse> putAgentManager(
+      String id, AgentManagerRequest agentManager);
 
   Future<void> deleteAgentManager(String id);
+
+  Future<List<ContrantAgentResponse>> getContrantAgent({required String id});
+
+  Future<ContrantAgentResponse> postContrantAgent(
+    ContrantAgentRequest contrantAgent,
+  );
+
+  Future<List<EstimateInvoiceResponse>> getEstimateInvoice(
+      {required String id});
+
+  Future<EstimateInvoiceResponse> postEstimateInvoice(
+    EstimateInvoiceRequest estimateInvoice,
+  );
+
+  Future<FileResponse> uploadFileBase64(
+    String file,
+    String filename,
+  );
+
+  Future<void> deleteContract(String id);
+
+  Future<void> deleteEstimateInvoice(String id);
 }

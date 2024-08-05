@@ -20,15 +20,14 @@ AgentResponse _$AgentResponseFromJson(Map<String, dynamic> json) =>
           ? null
           : DateTime.parse(json['transactionStartDate'] as String),
       howToMainPayment: json['howToMainPayment'] as String?,
-      pastCasesNumber: json['pastCasesNumber'] as int?,
+      pastCasesNumber: (json['pastCasesNumber'] as num?)?.toInt(),
       referralCommissions: (json['referralCommissions'] as List<dynamic>?)
           ?.map((e) => AgentReferralCommissionResponse.fromJson(
               e as Map<String, dynamic>))
           .toList(),
       manager: json['manager'] == null
           ? null
-          : AgentManagerResponse.fromJson(
-              json['manager'] as Map<String, dynamic>),
+          : AgentManager.fromJson(json['manager'] as Map<String, dynamic>),
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
@@ -48,6 +47,39 @@ Map<String, dynamic> _$AgentResponseToJson(AgentResponse instance) =>
       'pastCasesNumber': instance.pastCasesNumber,
       'referralCommissions': instance.referralCommissions,
       'manager': instance.manager,
+      'createdAt': instance.createdAt.toIso8601String(),
+      'updatedAt': instance.updatedAt.toIso8601String(),
+    };
+
+AgentManager _$AgentManagerFromJson(Map<String, dynamic> json) => AgentManager(
+      id: json['_id'] as String,
+      nameCardDragDrop: json['nameCardDragDrop'] as String?,
+      departmentName: json['departmentName'] as String?,
+      fullNameRomanji: json['fullNameRomanji'] as String?,
+      fullNameChineseKanjiVietnameseNotation:
+          json['fullNameChineseKanjiVietnameseNotation'] as String?,
+      fullNameJapaneseKanjiChineseOnly:
+          json['fullNameJapaneseKanjiChineseOnly'] as String?,
+      fullNameKana: json['fullNameKana'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
+      email: json['email'] as String?,
+      createdAt: DateTime.parse(json['createdAt'] as String),
+      updatedAt: DateTime.parse(json['updatedAt'] as String),
+    );
+
+Map<String, dynamic> _$AgentManagerToJson(AgentManager instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'nameCardDragDrop': instance.nameCardDragDrop,
+      'departmentName': instance.departmentName,
+      'fullNameRomanji': instance.fullNameRomanji,
+      'fullNameChineseKanjiVietnameseNotation':
+          instance.fullNameChineseKanjiVietnameseNotation,
+      'fullNameJapaneseKanjiChineseOnly':
+          instance.fullNameJapaneseKanjiChineseOnly,
+      'fullNameKana': instance.fullNameKana,
+      'phoneNumber': instance.phoneNumber,
+      'email': instance.email,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
     };

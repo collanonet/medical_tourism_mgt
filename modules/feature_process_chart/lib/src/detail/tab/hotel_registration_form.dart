@@ -9,6 +9,11 @@ FormGroup hotelRegistrationForm() => FormGroup(
         '1_night_price': FormControl<String>(value: ''), // 1泊の料金
         'Accommodation_memo': FormControl<String>(value: ''), // 宿泊メモ
         'Foreign_language_staff': FormControl<String>(value: ''), // 外国語スタッフ
-        'evaluation': FormControl<String>(value: ''), // 評価
+        'evaluation': FormControl<String>(value: ''),// 評価
+        'japanese' : FormControl<bool>(value: false),
+        'chinese' : FormControl<bool>(value: false),
+        'vietnamese' : FormControl<bool>(value: false),
+        'english' : FormControl<bool>(value: false),
+        'other' : FormControl<bool>(value: false),
       },
     );

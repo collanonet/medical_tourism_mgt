@@ -81,9 +81,10 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
     return [
       AutoRoute(page: LoginRoute.page, path: '/login'),
       AutoRoute(page: AgentsRoute.page, path: '/agents'),
-      AutoRoute(page: AgentDetailRoute.page, path: '/agents-detail'),
+      AutoRoute(page: AgentDetailRoute.page, path: '/agents-detail/:id'),
       AutoRoute(page: ChatRoute.page, path: '/chats'),
       AutoRoute(page: HospitalsRoute.page, path: '/hospitals'),
+      AutoRoute(page: HospitalDetailRoute.page, path: '/hospital-detail/:id'),
       AutoRoute(page: InvoicesRoute.page, path: '/invoices'),
       AutoRoute(page: MedicalVisasRoute.page, path: '/medical-visa'),
       AutoRoute(
@@ -93,6 +94,8 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
       AutoRoute(page: PrePatientRoute.page, path: '/pre-patients'),
       AutoRoute(page: QuotationsRoute.page, path: '/quotations'),
       AutoRoute(page: ReportsRoute.page, path: '/reports'),
+      AutoRoute(page: MasterRoute.page, path: '/master'),
+      AutoRoute(page: ContractRoute.page, path: '/contracts'),
       AutoRoute(page: ReportTypeRoute.page, path: '/report-type'),
       AutoRoute(page: SalesRoute.page, path: '/sales'),
       AutoRoute(page: ProcessChartsRoute.page, path: '/precess-charts'),
@@ -102,8 +105,11 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
       AutoRoute(page: WebAppointmentsRoute.page, path: '/web-appointments'),
       AutoRoute(
           page: WebAppointmentDetailRoute.page,
-          path: '/web-appointment-detail'),
-      RedirectRoute(path: '*', redirectTo: '/patients')
+          path: '/web-appointment-detail/:id'),
+      RedirectRoute(path: '*', redirectTo: '/patients'),
+      AutoRoute(page: EstimateMasterRoute.page,),
+      AutoRoute(page: ProspectivePankRoute.page),
+      AutoRoute(page: ContractDetailRoute.page),
     ];
   }
 }

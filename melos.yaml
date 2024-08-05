@@ -1,6 +1,7 @@
 name: medical_tourism_mgt
 
-sdkPath: .fvm/flutter_sdk
+# sdkPath: .fvm/flutter_sdk
+
 ide:
   intellij: true
 
@@ -106,6 +107,7 @@ scripts:
   web_dev:
     description: "hosting_web_dev"
     run: fvm flutter build web --release -t lib/main_dev.dart && firebase deploy --only hosting
+
 
 
   core_network:

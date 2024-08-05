@@ -1,6 +1,5 @@
-import 'dart:io';
-
 import 'package:core_network/core_network.dart';
+import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
@@ -11,8 +10,28 @@ class AgentRemoteProvider {
 
   final ApiService apiService;
 
-  Future<List<AgentResponse>> getAgents() async {
-    return await apiService.getAgents();
+  Future<List<AgentResponse>> getAgents({
+    String? companyName,
+    String? nameKana,
+    String? postalCode,
+    String? address,
+    String? area,
+    String? phoneNumber,
+    DateTime? transactionStartDate,
+    String? howToMainPayment,
+    int? pastCasesNumber,
+  }) async {
+    return await apiService.getAgents(
+      companyName: companyName,
+      nameKana: nameKana,
+      postalCode: postalCode,
+      address: address,
+      area: area,
+      phoneNumber: phoneNumber,
+      transactionStartDate: transactionStartDate,
+      howToMainPayment: howToMainPayment,
+      pastCasesNumber: pastCasesNumber,
+    );
   }
 
   Future<AgentResponse> getAgent(String id) async {
@@ -31,7 +50,8 @@ class AgentRemoteProvider {
     return await apiService.deleteAgent(id);
   }
 
-  Future<List<AgentManagerResponse>> getAgentManagers({String? agentRecord}) async {
+  Future<List<AgentManagerResponse>> getAgentManagers(
+      {String? agentRecord}) async {
     return await apiService.getAgentManagers(agentRecord: agentRecord);
   }
 
@@ -51,5 +71,37 @@ class AgentRemoteProvider {
 
   Future<void> deleteAgentManager(String id) async {
     return await apiService.deleteAgentManager(id);
+  }
+
+  Future<List<ContrantAgentResponse>> getContrantAgent(
+      {required String id}) async {
+    return await apiService.getContractAgent(id: id);
+  }
+
+  Future<ContrantAgentResponse> postContrantAgent(
+      ContrantAgentRequest contrantAgent) async {
+    return await apiService.postContractAgent(contrantAgent);
+  }
+
+  Future<List<EstimateInvoiceResponse>> getEstimateInvoice(
+      {required String id}) async {
+    return await apiService.getEstimateInvoice(id: id);
+  }
+
+  Future<EstimateInvoiceResponse> postEstimateInvoice(
+      EstimateInvoiceRequest estimateInvoice) async {
+    return await apiService.postEstimateInvoice(estimateInvoice);
+  }
+
+  Future<FileResponse> uploadFileBase64(String file, String filename) {
+    return apiService.uploadFileBase64(file, filename);
+  }
+
+  Future<void> deleteContract(String id) {
+    return apiService.deleteContract(id: id);
+  }
+
+  Future<void> deleteEstimateInvoice(String id) {
+    return apiService.deleteEstimateInvoice(id);
   }
 }

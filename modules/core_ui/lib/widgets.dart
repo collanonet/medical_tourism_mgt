@@ -8,3 +8,4 @@ export 'src/widgets/reactive_dropdown_field.dart';
 export 'src/widgets/row_separated.dart';
 export 'src/widgets/with_loading_button.dart';
 export 'src/widgets/avatar.dart';
+export 'src/widgets/box_required.dart';

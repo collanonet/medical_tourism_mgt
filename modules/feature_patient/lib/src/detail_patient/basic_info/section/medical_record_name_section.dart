@@ -1,4 +1,3 @@
-import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
@@ -30,7 +29,7 @@ class MedicalRecordNameSection extends StatelessWidget {
         }
       },
       child: ValueListenableBuilder(
-        valueListenable: context.read<BasicInformationModel>().patientNames,
+        valueListenable: context.watch<BasicInformationModel>().patientNames,
         builder: (context, value, _) => Skeletonizer(
           enabled: value.loading,
           child: ReactiveForm(

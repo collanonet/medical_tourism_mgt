@@ -6,6 +6,11 @@ part 'medical_record_patient_response_medical_checkup.g.dart';
 class MedicalRecordPatientResponseMedicalCheckup {
   @JsonKey(name: '_id')
   String id;
+  DateTime? date1;
+  DateTime? date2;
+  DateTime? date3;
+  bool? desiredDate;
+  String? remarks;
   int? numberOfPeopleRequestingMedicalCheckup;
   int? age;
   bool? sex;
@@ -38,6 +43,11 @@ class MedicalRecordPatientResponseMedicalCheckup {
 
   MedicalRecordPatientResponseMedicalCheckup({
     required this.id,
+    this.date1,
+    this.date2,
+    this.date3,
+    this.desiredDate,
+    this.remarks,
     this.numberOfPeopleRequestingMedicalCheckup,
     this.age,
     this.sex,

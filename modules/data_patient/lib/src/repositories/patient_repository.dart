@@ -1,24 +1,14 @@
-import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:core_network/core_network.dart';
+import 'package:core_network/entities.dart';
 
 abstract class PatientRepository {
   //GET_PRE_PATIENTS
 
-  Future<String> uploadFileDio(
-    Uint8List file,
-    String token,
+  Future<TreamentResponce> getInfoMedicalExamination(
+    String patientId,
   );
 
-  Future<FileResponse> uploadFile(
-    File file,
-  );
-
-  Future<FileResponse> uploadFileBytes(
-    Uint8List file,
-    String filename,
-  );
   Future<FileResponse> uploadFileBase64(
     String file,
     String filename,
@@ -432,5 +422,54 @@ abstract class PatientRepository {
 
   Future<WebBookingMedicalRecordResponse> postBookingMedicalRecord(
     WebBookingMedicalRecordRequest webBookingMedicalRecord,
+  );
+
+  Future<ApplicationRegenerativeMedicalResponse>
+      getApplicationRegenerattiveMedical({
+    required String medicalRecord,
+  });
+
+  Future<ApplicationRegenerativeMedicalResponse>
+      postApplicationRegenerattiveMedical(
+          ApplicationRegenerativeMedicalRequest
+              applicationRegenerativeMedicalRequest);
+
+  Future<ApplicationBeautyResponse> getApplicationBeauty({
+    required String medicalRecord,
+  });
+
+  Future<ApplicationBeautyResponse> postApplicationBeauty(
+    ApplicationBeautyRequest applicationBeautyRequest,
+  );
+
+  Future<ApplicationBloodPurificationTherapyResponse>
+      getApplicationBloodPurificationTherapy({
+    required String medicalRecord,
+  });
+
+  Future<ApplicationBloodPurificationTherapyResponse>
+      postApplicationBloodPurificationTherapy(
+    ApplicationBloodPurificationTherapyRequest
+        applicationBloodPurificationTherapyRequest,
+  );
+
+  Future<ApplicationRiskTestResponse> getApplicationRiskTest({
+    required String medicalRecord,
+  });
+
+  Future<ApplicationRiskTestResponse> postApplicationRiskTest(
+    ApplicationRiskTestRequest applicationRiskTestRequest,
+  );
+
+  Future<List<DomesticMedicalDataResponse>> getDomesticMedicalData({required String medicalRecordId});
+
+  Future<DomesticMedicalDataResponse> postDomesticMedicalData(
+    DomesticMedicalDataRequest domesticMedicalDataRequest,
+  );
+
+  Future<List<MedicalPaymentResponse>> getMedicalPayment({required String medicalRecordId});
+
+  Future<MedicalPaymentResponse> postMedicalPayment(
+    MedicalPaymentRequest medicalPaymentRequest,
   );
 }

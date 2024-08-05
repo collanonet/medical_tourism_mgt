@@ -16,9 +16,10 @@ import 'web_appointment_detail_screen.dart';
 class WebAppointmentDetailPage extends StatelessWidget {
   const WebAppointmentDetailPage({
     super.key,
-    required this.id,
+    @PathParam('id') this.id,
   });
-  final String id;
+
+  final String? id;
   @override
   Widget build(BuildContext context) {
     return LayoutView(
@@ -26,11 +27,11 @@ class WebAppointmentDetailPage extends StatelessWidget {
       page: ReactiveFormConfig(
         validationMessages: validationMessagesFilterPatient(context),
         child: ReactiveFormBuilder(
-            form: () => formWebAppointment()..markAllAsTouched(),
+            form: () => formWebAppointment(id: id)..markAllAsTouched(),
             builder: (context, formGroup, child) {
               return Provider(
                   create: (context) => GetIt.I<WebAppointmentDetailModel>()
-                    ..getWebBookingAdmin(id, formGroup),
+                    ..getWebBookingAdmin(id: id, formGroup: formGroup),
                   child: const WebAppointmentDetailScreen());
             }),
       ),

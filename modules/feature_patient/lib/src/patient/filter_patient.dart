@@ -471,7 +471,7 @@ class PatientFilter extends StatelessWidget {
                           child: Text(context.l10n.actionSearch),
                         ),
                       ],
-                    )
+                    ),
                   ],
                 ),
               );

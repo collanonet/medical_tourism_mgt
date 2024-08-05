@@ -31,7 +31,10 @@ FormGroup itineraryForm() => FormGroup(
             FormGroup(
               {
                 'date': FormControl<String>(value: ''), // 日付
-                'meal': FormControl<String>(value: ''), // 食事
+                //'meal': FormControl<String>(value: ''),
+                'morning': FormControl<bool>(),
+                'noon': FormControl<bool>(),
+                'evening': FormControl<bool>(), // 食事
                 'place_name': FormControl<String>(value: ''), // 地名
                 'Accommodation': FormControl<String>(value: ''), // 宿泊場所
                 'group': FormArray(
@@ -57,14 +60,14 @@ FormGroup itineraryForm() => FormGroup(
                             FormGroup(
                               {
                                 'place_name':
-                                FormControl<String>(value: ''), // 地名
+                                    FormControl<String>(value: ''), // 地名
                                 'Time_from':
-                                FormControl<String>(value: ''), // 時刻（自）
+                                    FormControl<String>(value: ''), // 時刻（自）
                                 'Time_to':
-                                FormControl<String>(value: ''), // 時刻（至）
+                                    FormControl<String>(value: ''), // 時刻（至）
                                 'traffic': FormControl<String>(value: ''), // 交通
                                 'Itinerary':
-                                FormControl<String>(value: ''), // 行程
+                                    FormControl<String>(value: ''), // 行程
                               },
                             ),
                           ],

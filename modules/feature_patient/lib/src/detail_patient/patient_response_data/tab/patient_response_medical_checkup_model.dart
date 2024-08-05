@@ -62,6 +62,11 @@ class PatientResponseMedicalCheckupModel {
       FormGroup formGroup, MedicalRecordPatientResponseMedicalCheckup result) {
     formGroup.patchValue({
       'id': result.id,
+      'date1': result.date1,
+      'date2': result.date2,
+      'date3': result.date3,
+      'desiredDate': result.desiredDate,
+      'remarks': result.remarks,
       'numberOfPeopleRequestingMedicalCheckup':
           result.numberOfPeopleRequestingMedicalCheckup ?? 0,
       'age': result.age ?? 0,
@@ -102,6 +107,11 @@ class PatientResponseMedicalCheckupModel {
       var data = MedicalRecordPatientResponseMedicalCheckupRequest(
         numberOfPeopleRequestingMedicalCheckup:
             formGroup.control('numberOfPeopleRequestingMedicalCheckup').value,
+        date1: formGroup.control('date1').value,
+        date2: formGroup.control('date2').value,
+        date3: formGroup.control('date3').value,
+        desiredDate: formGroup.control('desiredDate').value,
+        remarks: formGroup.control('remarks').value,
         age: formGroup.control('age').value,
         sex: formGroup.control('sex').value,
         relationshipBetweenPerson:

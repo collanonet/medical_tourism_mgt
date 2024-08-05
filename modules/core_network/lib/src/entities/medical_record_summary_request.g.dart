@@ -16,12 +16,11 @@ MedicalRecordSummaryRequest _$MedicalRecordSummaryRequestFromJson(
       dateOfBirth: json['dateOfBirth'] == null
           ? null
           : DateTime.parse(json['dateOfBirth'] as String),
-      age: json['age'] as int?,
+      age: (json['age'] as num?)?.toInt(),
       gender: json['gender'] as bool?,
       nameChineseKanjiVietnamese: json['nameChineseKanjiVietnamese'] as String?,
       nameKana: json['nameKana'] as String?,
       currentAddress: json['currentAddress'] as String?,
-      mobileNumberPatient: json['mobileNumberPatient'] as String?,
       mobileNumberDomestic: json['mobileNumberDomestic'] as String?,
       diseaseName: json['diseaseName'] as String?,
       tissueType: json['tissueType'] as String?,
@@ -64,7 +63,6 @@ Map<String, dynamic> _$MedicalRecordSummaryRequestToJson(
       'nameChineseKanjiVietnamese': instance.nameChineseKanjiVietnamese,
       'nameKana': instance.nameKana,
       'currentAddress': instance.currentAddress,
-      'mobileNumberPatient': instance.mobileNumberPatient,
       'mobileNumberDomestic': instance.mobileNumberDomestic,
       'diseaseName': instance.diseaseName,
       'tissueType': instance.tissueType,

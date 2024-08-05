@@ -16,7 +16,7 @@ class MedicalRecordBudgetSection extends StatelessWidget {
     final formGroup = (ReactiveForm.of(context) as FormGroup)
         .control('MEDICAL_RECORD_BUDGETS') as FormGroup;
     return ValueListenableBuilder(
-        valueListenable: context.read<BasicInformationModel>().patientNames,
+        valueListenable: context.watch<BasicInformationModel>().patientNames,
         builder: (context, value, _) => Skeletonizer(
               enabled: value.loading,
               child: Column(

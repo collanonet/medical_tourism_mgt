@@ -1,12 +1,9 @@
-import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:core_l10n/l10n.dart';
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_utils/core_utils.dart';
 import 'popup/summary_medical_oversea_data_screen.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'overseas_medical_data_model.dart';

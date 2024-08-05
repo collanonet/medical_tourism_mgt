@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:core_l10n/l10n.dart';
+import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:file_picker/file_picker.dart';
@@ -107,7 +108,7 @@ class _CreateMedicalOverseaDataWithUrlScreenState
                     width: context.appTheme.spacing.marginMedium,
                   ),
                   Expanded(
-                    child: ReactiveValueListenableBuilder<Uint8List>(
+                    child: ReactiveValueListenableBuilder<FileSelect>(
                         formControlName: 'qrCode',
                         builder: (context, control, _) {
                           logger.d('control.valid: ${control.valid}');
@@ -129,10 +130,9 @@ class _CreateMedicalOverseaDataWithUrlScreenState
                                 borderRadius: BorderRadius.all(Radius.circular(
                                   context.appTheme.spacing.borderRadiusMedium,
                                 )),
-                                image: control.value != null
+                                image: control.value?.file != null
                                     ? DecorationImage(
-                                        image: MemoryImage(
-                                            control.value as Uint8List),
+                                        image: MemoryImage(control.value!.file),
                                         fit: BoxFit.cover,
                                       )
                                     : null,
@@ -142,7 +142,7 @@ class _CreateMedicalOverseaDataWithUrlScreenState
                                       : Colors.red,
                                 ),
                               ),
-                              child: control.value != null
+                              child: control.value?.file != null
                                   ? const SizedBox()
                                   : Column(
                                       mainAxisSize: MainAxisSize.min,

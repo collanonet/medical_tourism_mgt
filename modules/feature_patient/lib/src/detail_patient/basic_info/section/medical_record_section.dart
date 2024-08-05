@@ -487,8 +487,12 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                           child: Text('健診'),
                                         ),
                                         DropdownMenuItem(
-                                          value: 'その他',
-                                          child: Text('その他'),
+                                          value: '検診',
+                                          child: Text('検診'),
+                                        ),
+                                        DropdownMenuItem(
+                                          value: '再生',
+                                          child: Text('再生'),
                                         ),
                                         DropdownMenuItem(
                                           value: '検査ｷｯﾄ',
@@ -499,16 +503,12 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                           child: Text('ビザ'),
                                         ),
                                         DropdownMenuItem(
-                                          value: '旅行',
-                                          child: Text('旅行'),
-                                        ),
-                                        DropdownMenuItem(
                                           value: '視察',
                                           child: Text('視察'),
                                         ),
                                         DropdownMenuItem(
-                                          value: '再生',
-                                          child: Text('再生'),
+                                          value: 'その他',
+                                          child: Text('その他'),
                                         ),
                                       ],
                                     ),

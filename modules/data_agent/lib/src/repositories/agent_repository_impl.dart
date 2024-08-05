@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
@@ -43,8 +42,28 @@ class AgentRepositoryIml extends AgentRepository {
   }
 
   @override
-  Future<List<AgentResponse>> getAgents() {
-    return remote.getAgents();
+  Future<List<AgentResponse>> getAgents({
+    String? companyName,
+    String? nameKana,
+    String? postalCode,
+    String? address,
+    String? area,
+    String? phoneNumber,
+    DateTime? transactionStartDate,
+    String? howToMainPayment,
+    int? pastCasesNumber,
+  }) {
+    return remote.getAgents(
+      companyName: companyName,
+      nameKana: nameKana,
+      postalCode: postalCode,
+      address: address,
+      area: area,
+      phoneNumber: phoneNumber,
+      transactionStartDate: transactionStartDate,
+      howToMainPayment: howToMainPayment,
+      pastCasesNumber: pastCasesNumber,
+    );
   }
 
   @override
@@ -67,5 +86,40 @@ class AgentRepositoryIml extends AgentRepository {
   Future<AgentManagerResponse> putAgentManager(
       String id, AgentManagerRequest agentManager) {
     return remote.putAgentManager(id, agentManager);
+  }
+  
+  @override
+  Future<List<ContrantAgentResponse>> getContrantAgent({required String id}) {
+    return remote.getContrantAgent(id: id);
+  }
+  
+  @override
+  Future<ContrantAgentResponse> postContrantAgent(ContrantAgentRequest contrantAgent) {
+    return remote.postContrantAgent(contrantAgent);
+  }
+  
+  @override
+  Future<List<EstimateInvoiceResponse>> getEstimateInvoice({required String id}) {
+    return remote.getEstimateInvoice(id: id);
+  }
+  
+  @override
+  Future<EstimateInvoiceResponse> postEstimateInvoice(EstimateInvoiceRequest estimateInvoice) {
+    return remote.postEstimateInvoice(estimateInvoice);
+  }
+  
+  @override
+  Future<FileResponse> uploadFileBase64(String file, String filename) {
+    return remote.uploadFileBase64(file, filename);
+  }
+
+  @override
+  Future<void> deleteContract(String id) {
+    return remote.deleteContract(id);
+  }
+
+  @override
+  Future<void> deleteEstimateInvoice(String id) {
+    return remote.deleteEstimateInvoice(id);
   }
 }

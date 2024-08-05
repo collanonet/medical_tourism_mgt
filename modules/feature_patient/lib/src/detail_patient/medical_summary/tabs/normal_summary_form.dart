@@ -27,6 +27,7 @@ FormGroup normalSummaryForm() {
       disabled: true,
     ),
     'mobileNumberDomestic': FormControl<String>(),
+
     'diseaseName': FormControl<String>(),
     'tissueType': FormControl<String>(),
     'diseaseNotices': FormControl<bool>(),

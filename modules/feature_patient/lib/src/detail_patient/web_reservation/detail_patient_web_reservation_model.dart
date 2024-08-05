@@ -25,6 +25,30 @@ class DetailPatientWebReservationModel {
   ValueNotifier<AsyncData<String>> patientIdData =
       ValueNotifier(const AsyncData<String>());
 
+  ValueNotifier<AsyncData<TreamentResponce>> infoWebBookingPatient =
+      ValueNotifier(const AsyncData());
+
+  void getInfoMedicalExamination(FormGroup formGroup) async {
+    try {
+      infoWebBookingPatient.value = const AsyncData(loading: true);
+      final response = await patientRepository.getInfoMedicalExamination(
+        patientIdData.value.requireData,
+      );
+      infoWebBookingPatient.value = AsyncData(data: response);
+      formGroup.control('preferredDate1').value = response.desiredDate1;
+      formGroup.control('preferredDate2').value = response.desiredDate2;
+      formGroup.control('preferredDate3').value = response.desiredDate3;
+      formGroup.control('noDesiredDate').value =
+          response.desiredDate1 == null &&
+              response.desiredDate2 == null &&
+              response.desiredDate3 == null;
+      formGroup.control('remarks').value = response.reason;
+      formGroup.control('medicalInstitutionName').value = response.medicalName;
+    } catch (e) {
+      infoWebBookingPatient.value = AsyncData(error: e);
+    }
+  }
+
   void getMedicalRecords(
       {String? patientId, required FormGroup formGroup}) async {
     if (patientId != null) {
@@ -35,6 +59,8 @@ class DetailPatientWebReservationModel {
         var result = await patientRepository.medicalRecordsByPatient(patientId);
         logger.d('result: $result');
         medicalRecord.value = AsyncData(data: result.firstOrNull);
+
+        getInfoMedicalExamination(formGroup);
         if (result.isNotEmpty) {
           getWebBookingPatientPreferredDate(formGroup, patientId);
           getWebBookingMedicalRecord(medicalRecord.value.requireData.id);
@@ -114,9 +140,6 @@ class DetailPatientWebReservationModel {
         doctorName: formGroup.control('doctorName').value,
         candidateDate: candidateDate,
         message: formGroup.control('message').value,
-        testCallDate: formGroup.control('testCallDate').value.toString(),
-        testCallTime:
-            '${(formGroup.control('testCallTime').value as TimeOfDay).hour}:${(formGroup.control('testCallTime').value as TimeOfDay).minute}',
       );
 
       logger.d('webBookingMedicalRecord: ${webBookingMedicalRecord.toJson()}');

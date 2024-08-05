@@ -1,10 +1,9 @@
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -60,7 +59,7 @@ class AgentFilter extends StatelessWidget {
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
                               ReactiveTextField(
-                                formControlName: 'agentPerson',
+                                formControlName: 'nameKana',
                               ),
                             ],
                           ),
@@ -80,7 +79,7 @@ class AgentFilter extends StatelessWidget {
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
                               ReactiveTextField(
-                                formControlName: 'agentCompany',
+                                formControlName: 'companyName',
                               ),
                             ],
                           ),
@@ -99,8 +98,12 @@ class AgentFilter extends StatelessWidget {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              ReactiveTextField(
+                              ReactiveTextField<int>(
                                 formControlName: 'pastCasesNumber',
+                                keyboardType: TextInputType.number,
+                                inputFormatters: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                ],
                               ),
                             ],
                           ),
@@ -134,7 +137,7 @@ class AgentFilter extends StatelessWidget {
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
                               ReactiveTextField(
-                                formControlName: 'country',
+                                formControlName: 'address',
                               ),
                             ],
                           ),
@@ -189,14 +192,28 @@ class AgentFilter extends StatelessWidget {
                             children: [
                               OutlinedButton(
                                 onPressed: () {
-                                  formGroup.reset();
+                                  context.read<AgentModel>().getAgents();
                                 },
                                 child: Text(
                                   context.l10n.actionClear,
                                 ),
                               ),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  context.read<AgentModel>().getAgents(
+                                        companyName: formGroup
+                                            .control('companyName')
+                                            .value,
+                                        nameKana:
+                                            formGroup.control('nameKana').value,
+                                        address:
+                                            formGroup.control('address').value,
+                                        area: formGroup.control('area').value,
+                                        pastCasesNumber: formGroup
+                                            .control('pastCasesNumber')
+                                            .value,
+                                      );
+                                },
                                 child: Text(context.l10n.actionSearch),
                               ),
                             ],

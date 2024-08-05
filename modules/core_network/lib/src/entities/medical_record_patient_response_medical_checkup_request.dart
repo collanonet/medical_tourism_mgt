@@ -4,6 +4,11 @@ part 'medical_record_patient_response_medical_checkup_request.g.dart';
 
 @JsonSerializable()
 class MedicalRecordPatientResponseMedicalCheckupRequest {
+  DateTime? date1;
+  DateTime? date2;
+  DateTime? date3;
+  bool? desiredDate;
+  String? remarks;
   int? numberOfPeopleRequestingMedicalCheckup;
   int? age;
   bool? sex;
@@ -33,6 +38,11 @@ class MedicalRecordPatientResponseMedicalCheckupRequest {
   String medicalRecord;
 
   MedicalRecordPatientResponseMedicalCheckupRequest({
+    this.date1,
+    this.date2,
+    this.date3,
+    this.desiredDate,
+    this.remarks,
     this.numberOfPeopleRequestingMedicalCheckup,
     this.age,
     this.sex,

@@ -658,8 +658,10 @@ class _PatientResponseTreatmentScreenState
                             ReactiveTextField(
                               formControlName: 'treatmentCosts',
                               keyboardType: TextInputType.number,
+
                               inputFormatters: [
-                                FilteringTextInputFormatter.digitsOnly,
+                                FilteringTextInputFormatter.allow(
+                                    RegExp(r'[0-9]')),
                               ],
                             ),
                             Text('希望医療機関',

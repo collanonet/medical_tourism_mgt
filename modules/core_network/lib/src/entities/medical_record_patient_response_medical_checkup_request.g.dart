@@ -10,9 +10,20 @@ MedicalRecordPatientResponseMedicalCheckupRequest
     _$MedicalRecordPatientResponseMedicalCheckupRequestFromJson(
             Map<String, dynamic> json) =>
         MedicalRecordPatientResponseMedicalCheckupRequest(
+          date1: json['date1'] == null
+              ? null
+              : DateTime.parse(json['date1'] as String),
+          date2: json['date2'] == null
+              ? null
+              : DateTime.parse(json['date2'] as String),
+          date3: json['date3'] == null
+              ? null
+              : DateTime.parse(json['date3'] as String),
+          desiredDate: json['desiredDate'] as bool?,
+          remarks: json['remarks'] as String?,
           numberOfPeopleRequestingMedicalCheckup:
-              json['numberOfPeopleRequestingMedicalCheckup'] as int?,
-          age: json['age'] as int?,
+              (json['numberOfPeopleRequestingMedicalCheckup'] as num?)?.toInt(),
+          age: (json['age'] as num?)?.toInt(),
           sex: json['sex'] as bool?,
           relationshipBetweenPerson:
               json['relationshipBetweenPerson'] as String?,
@@ -32,11 +43,13 @@ MedicalRecordPatientResponseMedicalCheckupRequest
           cancerSite: json['cancerSite'] as String?,
           currentlyDiabetes: json['currentlyDiabetes'] as bool?,
           diabetesMedication: json['diabetesMedication'] as bool?,
-          fastingBloodSugarMgPerDl: json['fastingBloodSugarMgPerDl'] as int?,
-          fastingBloodSugarMmolPerL: json['fastingBloodSugarMmolPerL'] as int?,
+          fastingBloodSugarMgPerDl:
+              (json['fastingBloodSugarMgPerDl'] as num?)?.toInt(),
+          fastingBloodSugarMmolPerL:
+              (json['fastingBloodSugarMmolPerL'] as num?)?.toInt(),
           implant: json['implant'] as bool?,
-          implantYear: json['implantYear'] as int?,
-          implantMonth: json['implantMonth'] as int?,
+          implantYear: (json['implantYear'] as num?)?.toInt(),
+          implantMonth: (json['implantMonth'] as num?)?.toInt(),
           bodyMetalOrTattoo: json['bodyMetalOrTattoo'] as bool?,
           hadMriAfterMetalOrTattoo: json['hadMriAfterMetalOrTattoo'] as bool?,
           partAndItsMaterial: json['partAndItsMaterial'] as String?,
@@ -47,6 +60,11 @@ MedicalRecordPatientResponseMedicalCheckupRequest
 Map<String, dynamic> _$MedicalRecordPatientResponseMedicalCheckupRequestToJson(
         MedicalRecordPatientResponseMedicalCheckupRequest instance) =>
     <String, dynamic>{
+      'date1': instance.date1?.toIso8601String(),
+      'date2': instance.date2?.toIso8601String(),
+      'date3': instance.date3?.toIso8601String(),
+      'desiredDate': instance.desiredDate,
+      'remarks': instance.remarks,
       'numberOfPeopleRequestingMedicalCheckup':
           instance.numberOfPeopleRequestingMedicalCheckup,
       'age': instance.age,

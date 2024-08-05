@@ -1,6 +1,5 @@
-import 'dart:typed_data';
-import 'package:universal_io/io.dart';
 import 'package:core_network/core_network.dart';
+import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
@@ -12,23 +11,6 @@ class PatientRemoteProvider {
 
   final ApiService apiService;
   final FileUploadService fileUploadService;
-
-  Future<String> uploadFileDio(
-    Uint8List file,
-    String token,
-  ) async =>
-      await fileUploadService.uploadFile(file, token);
-
-  Future<FileResponse> uploadFile(
-    File file,
-  ) async =>
-      await apiService.uploadFile(file);
-
-  Future<FileResponse> uploadFileBytes(
-    Uint8List file,
-    String filename,
-  ) async =>
-      await apiService.uploadFileBytes(file, filename);
 
   Future<FileResponse> uploadFileBase64(
     String file,
@@ -542,6 +524,11 @@ class PatientRemoteProvider {
   ) async =>
       await apiService.getWebBookingPatientPreferredDate(medicalRecord);
 
+  Future<TreamentResponce> getInfoMedicalExamination(
+    String patientId,
+  ) async =>
+      await apiService.getInfoMedicalExamination(patientId);
+
   Future<List<WebBookingMedicalRecordResponse>> getBookingMedicalRecord({
     required String medicalRecord,
   }) async =>
@@ -551,4 +538,62 @@ class PatientRemoteProvider {
     WebBookingMedicalRecordRequest webBookingMedicalRecord,
   ) async =>
       await apiService.postBookingMedicalRecord(webBookingMedicalRecord);
+
+  Future<ApplicationRegenerativeMedicalResponse>
+      getApplicationRegenerattiveMedical({
+    required String medicalRecord,
+  }) async =>
+          await apiService.getApplicationRegenerattiveMedical(medicalRecord);
+
+  Future<ApplicationRegenerativeMedicalResponse>
+      postApplicationRegenerattiveMedical(
+              ApplicationRegenerativeMedicalRequest
+                  applicationRegenerativeMedicalRequest) async =>
+          await apiService.postApplicationRegenerattiveMedical(
+              applicationRegenerativeMedicalRequest);
+
+  Future<ApplicationBeautyResponse> getApplicationBeauty({
+    required String medicalRecord,
+  }) async =>
+      await apiService.getApplicationBeauty(medicalRecord);
+
+  Future<ApplicationBeautyResponse> postApplicationBeauty(
+    ApplicationBeautyRequest applicationBeautyRequest,
+  ) async =>
+      await apiService.postApplicationBeauty(applicationBeautyRequest);
+
+  Future<ApplicationBloodPurificationTherapyResponse>
+      getApplicationBloodPurificationTherapy({
+    required String medicalRecord,
+  }) async =>
+          await apiService
+              .getApplicationBloodPurificationTherapy(medicalRecord);
+
+  Future<ApplicationBloodPurificationTherapyResponse>
+      postApplicationBloodPurificationTherapy(
+    ApplicationBloodPurificationTherapyRequest
+        applicationBloodPurificationTherapyRequest,
+  ) async =>
+          await apiService.postApplicationBloodPurificationTherapy(
+              applicationBloodPurificationTherapyRequest);
+
+  Future<ApplicationRiskTestResponse> getApplicationRiskTest({
+    required String medicalRecord,
+  }) async =>
+      await apiService.getApplicationRiskTest(medicalRecord);
+
+  Future<ApplicationRiskTestResponse> postApplicationRiskTest(
+    ApplicationRiskTestRequest applicationRiskTestRequest,
+  ) async =>
+      await apiService.postApplicationRiskTest(applicationRiskTestRequest);
+
+  Future<List<DomesticMedicalDataResponse>> getDomesticMedicalData(
+          {required String medicalRecordId}) async =>
+      await apiService.getDomesticMedicalData(id: medicalRecordId);
+  Future<DomesticMedicalDataResponse> postDomesticMedicalData(
+      DomesticMedicalDataRequest domesticMedicalDataRequest) async => await apiService.postDomesticMedicalData(domesticMedicalDataRequest);
+  Future<List<MedicalPaymentResponse>> getMedicalPayment({required String medicalRecordId}) async => await apiService.getMedicalPaymentDetail(id: medicalRecordId);
+
+  Future<MedicalPaymentResponse> postMedicalPayment(
+      MedicalPaymentRequest medicalPaymentRequest) async => await apiService.postMedicalPaymentDetail(medicalPaymentRequest);
 }

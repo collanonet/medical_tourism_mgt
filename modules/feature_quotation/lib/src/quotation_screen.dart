@@ -1,21 +1,26 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import 'filter_quotation.dart';
+import 'quotion_detail.dart';
 
 class QuotationScreen extends StatelessWidget {
   const QuotationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return const Column(
       children: [
         QuotationFilter(),
-        const Center(
-          child: Text('Quotation Screen',
-            style: TextStyle(
-              fontFamily: 'NotoSansJP',
-              package: 'core_ui',
-            ),),
+        
+        Expanded(
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                QuotionDetail(),
+              ],
+            ),
+          ),
         ),
       ],
     );

@@ -14,3 +14,4 @@ export './src/subscription_manager.dart';
 export './src/age_calculator.dart';
 export './src/dates.dart';
 export './src/string_to_color.dart';
+export './src/is_image.dart';

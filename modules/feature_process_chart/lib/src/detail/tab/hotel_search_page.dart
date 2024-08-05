@@ -7,24 +7,23 @@ import '../../filter_process_chart_form.dart';
 import 'hotel_search_form.dart';
 import 'hotel_search_model.dart';
 import 'hotel_search_screen.dart';
-import 'itinerary_form.dart';
-import 'itinerary_model.dart';
-import 'itinerary_screen.dart';
 
 class HotelSearchPage extends StatelessWidget {
   const HotelSearchPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => GetIt.I<HotelSearchModel>(),
-      child: ReactiveFormConfig(
-        validationMessages: validationMessagesFilterPatient(context),
-        child: ReactiveFormBuilder(
-            form: () => hotelSearchForm(),
-            builder: (context, formGroup, child) {
-              return const HotelSearchScreen();
-            }),
+    return ReactiveFormConfig(
+      validationMessages: validationMessagesFilterPatient(context),
+      child: ReactiveFormBuilder(
+        form: () => hotelSearchForm()..markAllAsTouched(),
+        builder: (context, formGroup, child) {
+          return Provider(
+            create: (context) =>
+                GetIt.I<HotelSearchModel>()..fetchHotelSearch(formGroup),
+            child: const HotelSearchScreen(),
+          );
+        },
       ),
     );
   }

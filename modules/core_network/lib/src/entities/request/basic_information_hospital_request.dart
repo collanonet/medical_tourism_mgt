@@ -1,0 +1,134 @@
+import 'package:json_annotation/json_annotation.dart';
+
+part 'basic_information_hospital_request.g.dart';
+
+@JsonSerializable()
+class BasicInformationHospitalRequest {
+  @JsonKey(name: '_id')
+  String? id;
+  String hospitalNameChinese;
+  String hospitalNameKatakana;
+  String? zipCode;
+  String location;
+  String? googleMap;
+  String phoneNumber;
+  String? faxNumber;
+  String? homepage;
+  bool? supportedMenu;
+  bool? healthCheckup;
+  bool? treatment;
+  bool? heavyIonBeam;
+  bool? protonBeam;
+  bool? regenerativeMedicine;
+  bool? beauty;
+  bool? phone;
+  bool? fax;
+  bool? mail;
+  bool? line;
+  String? note;
+  bool? english;
+  bool? chinese;
+  bool? vietnamese;
+  bool? otherLanguages;
+  String? languages;
+  String? onlineCheck;
+  String? appointment;
+  bool? cdr;
+  bool? storageUrl;
+  bool? viewMyPage;
+  bool? mailAttachment;
+  bool? loanerTablet;
+  bool? jmip;
+  bool? jci;
+  bool? jih;
+  bool? ningenDoctor;
+  bool? japanHealth;
+  bool? societyRorRegenerativeMedicine;
+  bool? osakaPrefecturalBase;
+  bool? certified;
+  String? shift1;
+  String? shift2;
+  String? shift1Mon;
+  String? shift1Tue;
+  String? shift1Wed;
+  String? shift1Thu;
+  String? shift1Fri;
+  String? shift1Sat;
+  String? shift1Sun;
+  String? shift2Mon;
+  String? shift2Tue;
+  String? shift2Wed;
+  String? shift2Thu;
+  String? shift2Fri;
+  String? shift2Sat;
+  String? shift2Sun;
+  String? memo;
+  String? supportLanguageRemark;
+
+  BasicInformationHospitalRequest({
+    this.id,
+    required this.hospitalNameChinese,
+    required this.hospitalNameKatakana,
+     this.zipCode,
+    required this.location,
+     this.googleMap,
+    required this.phoneNumber,
+    required this.faxNumber,
+     this.homepage,
+     this.supportedMenu,
+     this.healthCheckup,
+     this.treatment,
+     this.heavyIonBeam,
+     this.protonBeam,
+     this.regenerativeMedicine,
+     this.beauty,
+     this.phone,
+     this.fax,
+     this.mail,
+     this.line,
+     this.note,
+     this.english,
+     this.chinese,
+     this.vietnamese,
+     this.otherLanguages,
+     this.languages,
+     this.onlineCheck,
+     this.appointment,
+     this.cdr,
+     this.storageUrl,
+     this.viewMyPage,
+     this.mailAttachment,
+     this.loanerTablet,
+     this.jmip,
+     this.jci,
+     this.jih,
+     this.ningenDoctor,
+     this.japanHealth,
+     this.societyRorRegenerativeMedicine,
+     this.osakaPrefecturalBase,
+     this.certified,
+     this.shift1,
+     this.shift2,
+     this.shift1Mon,
+     this.shift1Tue,
+     this.shift1Wed,
+     this.shift1Thu,
+     this.shift1Fri,
+     this.shift1Sat,
+     this.shift1Sun,
+     this.shift2Mon,
+     this.shift2Tue,
+     this.shift2Wed,
+     this.shift2Thu,
+     this.shift2Fri,
+     this.shift2Sat,
+     this.shift2Sun,
+      this.memo,
+      this.supportLanguageRemark,
+  });
+
+  factory BasicInformationHospitalRequest.fromJson(Map<String, dynamic> json) =>
+      _$BasicInformationHospitalRequestFromJson(json);
+  Map<String, dynamic> toJson() =>
+      _$BasicInformationHospitalRequestToJson(this);
+}

@@ -13,15 +13,16 @@ class FacilityPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => GetIt.I<FacilityModel>(),
-      child: ReactiveFormConfig(
-        validationMessages: validationMessagesFilterPatient(context),
-        child: ReactiveFormBuilder(
-            form: () => facilityForm(),
-            builder: (context, formGroup, child) {
-              return const FacilityScreen();
-            }),
+    return ReactiveFormConfig(
+      validationMessages: validationMessagesFilterPatient(context),
+      child: ReactiveFormBuilder(
+        form: () => facilityForm()..markAllAsTouched(),
+        builder: (context, formGroup, child) {
+          return Provider(
+            create: (context) => GetIt.I<FacilityModel>()..fetchData(formGroup),
+            child: const FacilityScreen(),
+          );
+        },
       ),
     );
   }

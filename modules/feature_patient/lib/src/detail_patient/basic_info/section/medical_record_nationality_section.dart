@@ -18,7 +18,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
         .control('PATIENT_NATIONALITIES') as FormGroup;
     return ValueListenableBuilder(
         valueListenable:
-            context.read<BasicInformationModel>().patientNationalities,
+            context.watch<BasicInformationModel>().patientNationalities,
         builder: (context, value, _) => Skeletonizer(
               enabled: value.loading,
               child: Column(
@@ -128,8 +128,10 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                                     '携帯番号',
                                   ),
                                 ),
+
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.digitsOnly,
+                                  FilteringTextInputFormatter.allow(
+                                      RegExp(r'[0-9]')),
                                 ],
                               ),
                             ),

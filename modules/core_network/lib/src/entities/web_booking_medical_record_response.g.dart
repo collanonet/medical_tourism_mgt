@@ -16,10 +16,6 @@ WebBookingMedicalRecordResponse _$WebBookingMedicalRecordResponseFromJson(
       candidateDate: (json['candidateDate'] as List<dynamic>)
           .map((e) => BookingDateResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
-      testCallDate: json['testCallDate'] == null
-          ? null
-          : DateTime.parse(json['testCallDate'] as String),
-      testCallTime: json['testCallTime'] as String?,
       medicalRecord: json['medicalRecord'] as String,
       patient: json['patient'] as String,
       createdAt: DateTime.parse(json['createdAt'] as String),
@@ -34,8 +30,6 @@ Map<String, dynamic> _$WebBookingMedicalRecordResponseToJson(
       'medicalInstitutionName': instance.medicalInstitutionName,
       'doctorName': instance.doctorName,
       'candidateDate': instance.candidateDate,
-      'testCallDate': instance.testCallDate?.toIso8601String(),
-      'testCallTime': instance.testCallTime,
       'medicalRecord': instance.medicalRecord,
       'patient': instance.patient,
       'createdAt': instance.createdAt.toIso8601String(),

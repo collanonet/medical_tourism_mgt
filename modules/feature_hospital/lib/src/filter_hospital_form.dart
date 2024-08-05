@@ -16,8 +16,13 @@ FormGroup formFilterHospital() => FormGroup(
         'r_have': FormControl<String>(
           value: '',
         ),
-        'hospital_type': FormControl<String>(
-          value: '',
+        'hospital_type1': FormControl<bool>(
+        ),
+        'hospital_type2': FormControl<bool>(
+        ),
+        'hospital_type3': FormControl<bool>(
+        ),
+        'hospital_type4': FormControl<bool>(
         ),
       },
     );

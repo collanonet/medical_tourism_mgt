@@ -4,9 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../filter_process_chart_form.dart';
-import 'itinerary_form.dart';
-import 'itinerary_model.dart';
-import 'itinerary_screen.dart';
 import 'related_parties_form.dart';
 import 'related_parties_model.dart';
 import 'related_parties_screen.dart';
@@ -16,15 +13,17 @@ class RelatedPartiesPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => GetIt.I<RelatedPartiesModel>(),
-      child: ReactiveFormConfig(
-        validationMessages: validationMessagesFilterPatient(context),
-        child: ReactiveFormBuilder(
-            form: () => relatedPartiesForm(),
-            builder: (context, formGroup, child) {
-              return const RelatedPartiesScreen();
-            }),
+    return ReactiveFormConfig(
+      validationMessages: validationMessagesFilterPatient(context),
+      child: ReactiveFormBuilder(
+        form: () => relatedPartiesForm(),
+        builder: (context, formGroup, child) {
+          return Provider(
+            create: (context) =>
+                GetIt.I<RelatedPartiesModel>()..fetchData(formGroup),
+            child: const RelatedPartiesScreen(),
+          );
+        },
       ),
     );
   }

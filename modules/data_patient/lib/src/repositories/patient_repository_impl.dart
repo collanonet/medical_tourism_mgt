@@ -1,10 +1,7 @@
-import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 
-import '../providers/patient_local_provider.dart';
 import '../providers/patient_remote_provider.dart';
 import 'patient_repository.dart';
 
@@ -12,32 +9,16 @@ import 'patient_repository.dart';
 class PatientRepositoryIml extends PatientRepository {
   PatientRepositoryIml({
     required this.remote,
-    required this.local,
   });
 
   final PatientRemoteProvider remote;
-  final PatientLocalProvider local;
 
   @override
-  Future<String> uploadFileDio(
-    Uint8List file,
-    String token,
+  Future<TreamentResponce> getInfoMedicalExamination(
+    String patientId,
   ) {
-    return remote.uploadFileDio(file, token);
+    return remote.getInfoMedicalExamination(patientId);
   }
-
-  @override
-  Future<FileResponse> uploadFile(
-    File file,
-  ) async =>
-      await remote.uploadFile(file);
-
-  @override
-  Future<FileResponse> uploadFileBytes(
-    Uint8List file,
-    String filename,
-  ) async =>
-      await remote.uploadFileBytes(file, filename);
 
   @override
   Future<FileResponse> uploadFileBase64(
@@ -738,5 +719,86 @@ class PatientRepositoryIml extends PatientRepository {
   Future<WebBookingMedicalRecordResponse> postBookingMedicalRecord(
       WebBookingMedicalRecordRequest webBookingMedicalRecord) {
     return remote.postBookingMedicalRecord(webBookingMedicalRecord);
+  }
+
+  @override
+  Future<ApplicationRegenerativeMedicalResponse>
+      getApplicationRegenerattiveMedical({
+    required String medicalRecord,
+  }) {
+    return remote.getApplicationRegenerattiveMedical(
+        medicalRecord: medicalRecord);
+  }
+
+  @override
+  Future<ApplicationRegenerativeMedicalResponse>
+      postApplicationRegenerattiveMedical(
+          ApplicationRegenerativeMedicalRequest
+              applicationRegenerativeMedicalRequest) {
+    return remote.postApplicationRegenerattiveMedical(
+        applicationRegenerativeMedicalRequest);
+  }
+
+  @override
+  Future<ApplicationBeautyResponse> getApplicationBeauty({
+    required String medicalRecord,
+  }) async =>
+      await remote.getApplicationBeauty(medicalRecord: medicalRecord);
+
+  @override
+  Future<ApplicationBeautyResponse> postApplicationBeauty(
+    ApplicationBeautyRequest applicationBeautyRequest,
+  ) async =>
+      await remote.postApplicationBeauty(applicationBeautyRequest);
+
+  @override
+  Future<ApplicationBloodPurificationTherapyResponse>
+      getApplicationBloodPurificationTherapy({
+    required String medicalRecord,
+  }) async =>
+          await remote.getApplicationBloodPurificationTherapy(
+              medicalRecord: medicalRecord);
+
+  @override
+  Future<ApplicationBloodPurificationTherapyResponse>
+      postApplicationBloodPurificationTherapy(
+    ApplicationBloodPurificationTherapyRequest
+        applicationBloodPurificationTherapyRequest,
+  ) async =>
+          await remote.postApplicationBloodPurificationTherapy(
+              applicationBloodPurificationTherapyRequest);
+
+  @override
+  Future<ApplicationRiskTestResponse> getApplicationRiskTest({
+    required String medicalRecord,
+  }) async =>
+      await remote.getApplicationRiskTest(medicalRecord: medicalRecord);
+
+  @override
+  Future<ApplicationRiskTestResponse> postApplicationRiskTest(
+    ApplicationRiskTestRequest applicationRiskTestRequest,
+  ) async =>
+      await remote.postApplicationRiskTest(applicationRiskTestRequest);
+
+  @override
+  Future<DomesticMedicalDataResponse> postDomesticMedicalData(
+      DomesticMedicalDataRequest domesticMedicalDataRequest) {
+    return remote.postDomesticMedicalData(domesticMedicalDataRequest);
+  }
+
+  @override
+  Future<List<DomesticMedicalDataResponse>> getDomesticMedicalData(
+      {required String medicalRecordId}) {
+    return remote.getDomesticMedicalData(medicalRecordId: medicalRecordId);
+  }
+  
+  @override
+  Future<List<MedicalPaymentResponse>> getMedicalPayment({required String medicalRecordId}) {
+    return remote.getMedicalPayment(medicalRecordId: medicalRecordId);
+  }
+  
+  @override
+  Future<MedicalPaymentResponse> postMedicalPayment(MedicalPaymentRequest medicalPaymentRequest) {
+    return remote.postMedicalPayment(medicalPaymentRequest);
   }
 }
