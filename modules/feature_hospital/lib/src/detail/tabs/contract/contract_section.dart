@@ -1,5 +1,4 @@
 import 'package:core_l10n/l10n.dart';
-import 'package:core_network/core_network.dart';
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';

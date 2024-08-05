@@ -2,6 +2,7 @@ import 'package:core_l10n/l10n.dart';
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
@@ -21,10 +22,12 @@ class HealthCheckupSection extends StatefulWidget {
 }
 
 class _HealthCheckupSectionState extends State<HealthCheckupSection> {
+  ValueNotifier<List<String>> selected = ValueNotifier([]);
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-      valueListenable: context.read<HealthModel>().submitData,
+      valueListenable: context.read<HealthModel>().healthData,
       builder: (context, value, child) {
         return ColumnSeparated(
           separatorBuilder: (context, index) => SizedBox(
@@ -94,93 +97,168 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                 ),
               ),
             ),
+            Row(
+              children: [
+                ValueListenableBuilder(
+                    valueListenable: selected,
+                    builder: (context, ids, _) {
+                      return Checkbox(
+                        value: ids.isEmpty
+                            ? false
+                            : value.data?.length == ids.length,
+                        onChanged: (select) {
+                          if (select != null) {
+                            if (select) {
+                              if (value.hasData) {
+                                selected.value = value.requireData
+                                    .map((e) => e.id.toString())
+                                    .toList();
+                              }
+                            } else {
+                              selected.value = [];
+                            }
+                          }
+                        },
+                      );
+                    }),
+                Expanded(flex: 2, child: Text('ファイル名ファイル名')),
+                Expanded(child: Text('更新日')),
+                Expanded(child: Text('')),
+              ],
+            ),
             Expanded(
-              child: ValueListenableBuilder(
-                valueListenable: context.read<HealthModel>().healthData,
-                builder: (context, value, child) {
-                  return DataTable2(
-                    columnSpacing: 16,
-                    horizontalMargin: 16,
-                    minWidth: 450,
-                    dataRowHeight: 70,
-                    border: const TableBorder(
-                      horizontalInside: BorderSide(
-                        color: Colors.grey,
-                        width: 0.5,
+              child: ListView.separated(
+                itemCount: value.data?.length ?? 0,
+                itemBuilder: (context, index) {
+                  final data = value.data?[index];
+
+                  return Row(
+                    children: [
+                      ValueListenableBuilder(
+                          valueListenable: selected,
+                          builder: (context, sels, _) {
+                            return Checkbox(
+                              value: sels.contains(data?.id),
+                              onChanged: (sel) {
+                                if (sel != null) {
+                                  if (sel) {
+                                    selected.value = [...sels, data?.id ?? ''];
+                                  } else {
+                                    selected.value = [
+                                      ...sels.where((e) => e != data?.id)
+                                    ];
+                                  }
+                                }
+                              },
+                            );
+                          }),
+                      Expanded(
+                        flex: 2,
+                        child: Text(data?.fileName ?? ''),
                       ),
-                    ),
-                    isVerticalScrollBarVisible: true,
-                    isHorizontalScrollBarVisible: true,
-                    showCheckboxColumn: true,
-                    onSelectAll: (bool? value) {},
-                    headingTextStyle: const TextStyle(
-                        fontFamily: 'NotoSansJP',
-                        package: 'core_ui',
-                        color: Colors.grey),
-                    dividerThickness: 0,
-                    columns: [
-                      ...['ファイル名ファイル名', '更新日', ''].map((e) => DataColumn2(
-                            label: Text(
-                              e,
-                              style: context.textTheme.bodySmall,
-                            ),
-                          )),
+                      Expanded(
+                        child: Text(
+                          data?.uploadDate == null
+                              ? ''
+                              : Dates.formShortDate(data?.uploadDate),
+                        ),
+                      ),
                     ],
-                    rows: List.generate(
-                      value.data?.length ?? 0,
-                      (index) {
-                        return DataRow2(
-                          selected: false,
-                          onSelectChanged: (value) =>
-                              debugPrint('row selected'),
-                          cells: [
-                            DataCell(Text(
-                              value.requireData[index].fileName.toString(),
-                              style: context.textTheme.bodyMedium!.copyWith(
-                                  color: context.appTheme.primaryColor),
-                            )),
-                            DataCell(Text(
-                              value.requireData[index].uploadDate != null
-                                  ? Dates.formatFullDateTime(
-                                      value.requireData[index].uploadDate!)
-                                  : '',
-                              style: context.textTheme.bodyMedium,
-                            )),
-                            DataCell(
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: const Text(
-                                  'エクセルを開く',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        );
-                      },
-                    ),
+                  );
+                },
+                separatorBuilder: (BuildContext context, int index) {
+                  return const Divider(
+                    color: Colors.grey,
                   );
                 },
               ),
             ),
             Align(
               alignment: Alignment.bottomRight,
-              child: OutlinedButton(
-                  style: OutlinedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: context.appTheme.spacing.marginSmall,
-                        vertical: context.appTheme.spacing.buttonVertical,
-                      ),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(20))),
-                  onPressed: () {},
-                  child: Text(
-                    "削除する",
-                    style: context.textTheme.labelLarge
-                        ?.copyWith(color: context.appTheme.primaryColor),
-                  )),
+              child: ValueListenableBuilder(
+                  valueListenable: selected,
+                  builder: (context, sels, _) {
+                    return ValueListenableListener(
+                      valueListenable: context.read<HealthModel>().delete,
+                      onListen: () {
+                        var delete = context.read<HealthModel>().delete.value;
+
+                        if (delete.hasError) {
+                          snackBarWidget(
+                            message: '削除に失敗しました',
+                            backgroundColor: Colors.red,
+                            prefixIcon: const Icon(
+                              Icons.error,
+                              color: Colors.white,
+                            ),
+                          );
+                        }
+
+                        if (delete.hasData) {
+                          selected.value = [];
+                          snackBarWidget(
+                            message: '削除しました',
+                            prefixIcon: const Icon(
+                              Icons.check_circle,
+                              color: Colors.white,
+                            ),
+                          );
+                        }
+                      },
+                      child: ValueListenableBuilder(
+                          valueListenable: context.read<HealthModel>().delete,
+                          builder: (context, value, _) {
+                            return OutlinedButton(
+                                onPressed: sels.isEmpty || value.loading
+                                    ? null
+                                    : () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (_) {
+                                              return Provider.value(
+                                                value:
+                                                    context.read<HealthModel>(),
+                                                child: AlertDialog(
+                                                  title: Text("削除確認"),
+                                                  content:
+                                                      Text("選択した書類を削除しますか？"),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: Text("キャンセル"),
+                                                    ),
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        context
+                                                            .read<HealthModel>()
+                                                            .deleteHealth(sels);
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: Text("削除する"),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            });
+                                      },
+                                child: WithLoadingButton(
+                                  isLoading: value.loading,
+                                  loadingColor: context.appTheme.primaryColor,
+                                  child: Text(
+                                    "削除する",
+                                    style: context.textTheme.labelLarge
+                                        ?.copyWith(
+                                            color:
+                                                context.appTheme.primaryColor),
+                                  ),
+                                ));
+                          }),
+                    );
+                  }),
             ),
           ],
         );

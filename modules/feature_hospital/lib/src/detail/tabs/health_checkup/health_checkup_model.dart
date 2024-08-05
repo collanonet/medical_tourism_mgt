@@ -62,15 +62,22 @@ class HealthModel {
     }
   }
 
-  Future<void> deleteHealth({required String id}) async {
+  ValueNotifier<AsyncData<bool>> delete = ValueNotifier(const AsyncData());
+
+  Future<void> deleteHealth(List<String> ids) async {
     try {
-      await hospitalRepository.deleteHealth(id: id);
-      healthData.value = AsyncData(
-        data: healthData.value.data!
-          ..removeWhere((element) => element.id == id),
-      );
+      delete.value = const AsyncData(loading: true);
+      for (var id in ids) {
+        await hospitalRepository.deleteHealth(id: id);
+        healthData.value = AsyncData(
+            data: healthData.value.data!
+              ..removeWhere((element) => element.id == id));
+      }
+
+      delete.value = const AsyncData(data: true);
     } catch (e) {
-      logger.d(e);
+      logger.e(e);
+      delete.value = AsyncData(error: e.toString());
     }
   }
 }
