@@ -309,8 +309,7 @@ class AgentBasicInformationModel {
   ]);
 }
 
-
-class Contact{
+class Contact {
   String value;
   Contact({required this.value});
 }

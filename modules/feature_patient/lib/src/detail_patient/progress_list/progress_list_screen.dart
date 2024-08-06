@@ -66,14 +66,14 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         Expanded(
-                            flex: 1,
+                            flex: 2,
                             child: Text('完了日',
                                 style: Theme.of(context).textTheme.bodySmall)),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         Expanded(
-                            flex: 3,
+                            flex: 2,
                             child: Text('備考',
                                 style: Theme.of(context).textTheme.bodySmall)),
                       ],

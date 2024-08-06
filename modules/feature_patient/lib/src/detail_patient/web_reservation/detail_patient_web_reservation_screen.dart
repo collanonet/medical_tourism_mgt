@@ -972,7 +972,7 @@ class _DetailPatientWebReservationScreenState
                                   child: ReactiveDatePicker<DateTime>(
                                     formControlName: 'testCallDate',
                                     firstDate: DateTime(1900),
-                                    lastDate: DateTime.now(),
+                                    lastDate: DateTime(2100),
                                     builder: (BuildContext context,
                                         ReactiveDatePickerDelegate<dynamic>
                                             picker,

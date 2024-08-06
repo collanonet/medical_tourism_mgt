@@ -1,5 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -49,9 +50,13 @@ class MedicalRecordBudgetSection extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text('予算',style: context.textTheme.bodySmall,),
+                              Text(
+                                '予算',
+                                style: context.textTheme.bodySmall,
+                              ),
                               SizedBox(
-                                height: context.appTheme.spacing.marginExtraSmall,
+                                height:
+                                    context.appTheme.spacing.marginExtraSmall,
                               ),
                               ReactiveTextField<int>(
                                 formControlName: 'budget',
@@ -63,8 +68,9 @@ class MedicalRecordBudgetSection extends StatelessWidget {
                                 ),
                                 valueAccessor: IntValueAccessor(),
                                 inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp(r'[0-9]')),
+                                  CustomCurrencyFormatter(),
+                                  // FilteringTextInputFormatter.allow(
+                                  //     RegExp(r'[0-9]')),
                                 ],
                               ),
                             ],
@@ -77,9 +83,13 @@ class MedicalRecordBudgetSection extends StatelessWidget {
                             mainAxisSize: MainAxisSize.min,
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
-                              Text('備考',style: context.textTheme.bodySmall,),
+                              Text(
+                                '備考',
+                                style: context.textTheme.bodySmall,
+                              ),
                               SizedBox(
-                                height: context.appTheme.spacing.marginExtraSmall,
+                                height:
+                                    context.appTheme.spacing.marginExtraSmall,
                               ),
                               ReactiveTextField(
                                 formControlName: 'remarks',
