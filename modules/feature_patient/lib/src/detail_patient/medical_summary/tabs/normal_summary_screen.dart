@@ -46,7 +46,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                             child: ReactiveDatePicker<DateTime>(
                               formControlName: 'entryDate',
                               firstDate: DateTime(1900),
-                              lastDate: DateTime.now(),
+                              lastDate: DateTime(2100),
                               builder: (BuildContext context,
                                   ReactiveDatePickerDelegate<dynamic> picker,
                                   Widget? child) {

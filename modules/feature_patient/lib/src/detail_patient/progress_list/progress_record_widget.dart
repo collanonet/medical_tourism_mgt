@@ -15,7 +15,8 @@ class ProgressRecordWidget extends StatelessWidget {
         formControlName: 'key',
         builder: (context, key, child) {
           return ValueListenableBuilder(
-            valueListenable: context.read<ProgressListModel>().submitMedicalRecordsProgress,
+            valueListenable:
+                context.read<ProgressListModel>().submitMedicalRecordsProgress,
             builder: (context, value, child) => Skeletonizer(
               enabled: value.loading && key.value == value.data,
               child: Container(
@@ -76,7 +77,7 @@ class ProgressRecordWidget extends StatelessWidget {
                       width: context.appTheme.spacing.marginMedium,
                     ),
                     Expanded(
-                        flex: 1,
+                        flex: 2,
                         child: ReactiveDatePicker<DateTime>(
                           formControlName: 'completionDate',
                           firstDate: DateTime(2000),

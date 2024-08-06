@@ -157,36 +157,38 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                           CrossAxisAlignment.start,
                                       children: <Widget>[
                                         IntrinsicWidth(
-                                          child: ReactiveCheckboxListTile(
+                                          child: ReactiveRadioListTile(
+                                            value: true,
                                             contentPadding: EdgeInsets.zero,
                                             formControlName: 'isMale',
                                             controlAffinity:
                                                 ListTileControlAffinity.leading,
-                                            onChanged: (value) {
-                                              formGroup
-                                                  .control('gender')
-                                                  .value = value.value == true;
-                                              formGroup
-                                                  .control('isFemale')
-                                                  .value = value.value == false;
-                                            },
+                                            // onChanged: (value) {
+                                            //   formGroup
+                                            //       .control('gender')
+                                            //       .value = value.value == true;
+                                            //   formGroup
+                                            //       .control('isFemale')
+                                            //       .value = value.value == false;
+                                            // },
                                             title: Text('男性'),
                                           ),
                                         ),
                                         IntrinsicWidth(
-                                          child: ReactiveCheckboxListTile(
+                                          child: ReactiveRadioListTile(
+                                            value: false,
                                             contentPadding: EdgeInsets.zero,
-                                            formControlName: 'isFemale',
+                                            formControlName: 'isMale',
                                             controlAffinity:
                                                 ListTileControlAffinity.leading,
-                                            onChanged: (value) {
-                                              formGroup
-                                                  .control('gender')
-                                                  .value = value.value == false;
-                                              formGroup
-                                                  .control('isMale')
-                                                  .value = value.value == false;
-                                            },
+                                            // onChanged: (value) {
+                                            //   formGroup
+                                            //       .control('gender')
+                                            //       .value = value.value == false;
+                                            //   formGroup
+                                            //       .control('isMale')
+                                            //       .value = value.value == false;
+                                            // },
                                             title: Text('女性'),
                                           ),
                                         )

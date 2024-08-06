@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:intl/intl.dart';
@@ -216,9 +215,29 @@ class _AgentBasicInformationScreenState
                                               style:
                                                   context.textTheme.bodyMedium,
                                             ),
-                                            ReactiveTextField(
-                                              formControlName: 'area',
-                                            ),
+                                            ValueListenableBuilder(
+                                                valueListenable: context
+                                                    .read<
+                                                        AgentBasicInformationModel>()
+                                                    .contactList,
+                                                builder: (context, value, _) {
+                                                  return ReactiveDropdownFormField(
+                                                    formControlName: 'area',
+                                                    items: value
+                                                        .map((e) =>
+                                                            DropdownMenuItem(
+                                                              value: e.value,
+                                                              child: Text(
+                                                                e.value,
+                                                              ),
+                                                            ))
+                                                        .toList(),
+                                                  );
+                                                }),
+
+                                            // ReactiveTextField(
+                                            //   formControlName: 'area',
+                                            // ),
                                           ],
                                         ),
                                       ),
@@ -408,12 +427,15 @@ class _AgentBasicInformationScreenState
                                                                   .allow(RegExp(
                                                                       r'[0-9]')),
                                                             ],
-                                                            decoration:
-                                                                InputDecoration(
-                                                              suffixText: '%',
-                                                            ),
+                                                            // decoration:
+                                                            //     InputDecoration(
+                                                            //   suffixText: '%',
+                                                            // ),
                                                           ),
                                                         ),
+                                                        const SizedBox(
+                                                            width: 16),
+                                                        Text('%'),
                                                         if (formArray.controls
                                                                 .indexOf(
                                                                     currentForm) !=
@@ -488,8 +510,7 @@ class _AgentBasicInformationScreenState
                                     },
                                   ),
                                   RowSeparated(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
+                                    crossAxisAlignment: CrossAxisAlignment.end,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     separatorBuilder:
                                         (BuildContext context, int index) {
@@ -544,13 +565,17 @@ class _AgentBasicInformationScreenState
                                                 FilteringTextInputFormatter
                                                     .allow(RegExp(r'[0-9]')),
                                               ],
-                                              decoration: InputDecoration(
-                                                suffixText: '件',
-                                              ),
+                                              // decoration: InputDecoration(
+                                              //   suffixText: '件',
+                                              // ),
                                             ),
                                           ],
                                         ),
                                       ),
+                                      const Padding(
+                                        padding: EdgeInsets.only(bottom: 16),
+                                        child: Text('件'),
+                                      )
                                     ],
                                   ),
                                 ],
@@ -618,9 +643,7 @@ class _AgentBasicInformationScreenState
                                         children: [
                                           InkWell(
                                             onTap: () {
-                                              filePicker().then((value) {
-
-                                              });
+                                              filePicker().then((value) {});
                                             },
                                             child: Container(
                                               width: 400,
@@ -674,9 +697,7 @@ class _AgentBasicInformationScreenState
                                                   ElevatedButton(
                                                     onPressed: () {
                                                       filePicker()
-                                                          .then((value) {
-
-                                                      });
+                                                          .then((value) {});
                                                     },
                                                     child: const Text(
                                                       'またはファイルを選択する',
