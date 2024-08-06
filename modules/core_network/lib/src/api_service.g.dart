@@ -5934,6 +5934,33 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<ContrantAgentResponse> deleteContractAgent(String id) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ContrantAgentResponse>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/agent-contracts/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = ContrantAgentResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
   Future<List<EstimateInvoiceResponse>> getEstimateInvoice(
       {required String id}) async {
     final _extra = <String, dynamic>{};
