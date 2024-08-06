@@ -101,7 +101,7 @@ FormGroup basicInfoForm({
           'residentialArea': FormControl<String?>(),
           'currentAddress': FormControl<String?>(),
           'mobileNumber': FormControl<String?>(),
-          'email': FormControl<String?>(
+          'email': FormControl<String>(
             validators: [
               Validators.email,
             ],),
@@ -194,7 +194,7 @@ FormGroup basicInfoForm({
             ), // 男性
             'isFemale': FormControl<bool>(), // 女
             'mobileNumber': FormControl<String?>(),
-            'email': FormControl<String?>(
+            'email': FormControl<String>(
               validators: [
                 Validators.email,
               ],),

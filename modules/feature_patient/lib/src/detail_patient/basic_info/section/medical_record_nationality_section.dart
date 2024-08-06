@@ -144,10 +144,6 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                                     'Email',
                                   ),
                                 ),
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.deny(
-                                      RegExp(r'\s')),
-                                ],
                               ),
                             ),
                             Expanded(

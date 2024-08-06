@@ -591,11 +591,6 @@ class _MedicalRecordCompanionSectionState
                                       Expanded(
                                         child: ReactiveTextField(
                                           formControlName: 'email',
-                                          keyboardType: TextInputType.number,
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter.allow(
-                                                RegExp(r'[0-9]')),
-                                          ],
                                           decoration: InputDecoration(
                                             label: Text(
                                               'Email',
