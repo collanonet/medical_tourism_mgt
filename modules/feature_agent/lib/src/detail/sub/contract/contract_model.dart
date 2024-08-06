@@ -36,18 +36,23 @@ class ContractModel {
       submitData.value = const AsyncData(loading: true);
       String? file;
       if (formGroup.control('uploadFile').value != null) {
-        try {
-          // convert Uint8List to base64
-          FileSelect docFile = formGroup.control('uploadFile').value;
-          String base64Image = base64Encode(docFile.file);
-          FileResponse fileData = await authRepository.uploadFileBase64(
-            base64Image,
-            docFile.filename,
-          );
-          file = fileData.filename;
-        } catch (e) {
-          logger.e("update file test");
-          logger.e(e);
+        FileSelect docFile = formGroup.control('uploadFile').value;
+
+        if (docFile.file != null) {
+          try {
+            // convert Uint8List to base64
+            String base64Image = base64Encode(docFile.file!);
+            FileResponse fileData = await authRepository.uploadFileBase64(
+              base64Image,
+              docFile.filename!,
+            );
+            file = fileData.filename;
+          } catch (e) {
+            logger.e("update file test");
+            logger.e(e);
+          }
+        } else {
+          file = docFile.filename;
         }
       }
       final response =

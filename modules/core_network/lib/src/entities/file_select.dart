@@ -1,13 +1,15 @@
 import 'dart:typed_data';
 
 class FileSelect {
-  String filename;
-  Uint8List file;
+  String? filename;
+  Uint8List? file;
+  String? url;
   String? path;
 
   FileSelect({
-    required this.filename,
-    required this.file,
+    this.filename,
+    this.file,
+    this.url,
     this.path,
   });
 }
