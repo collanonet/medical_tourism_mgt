@@ -1,6 +1,7 @@
 import 'package:core_network/core_network.dart';
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -119,14 +120,34 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                               const BorderRadius.all(Radius.circular(6)),
                           border: const Border.fromBorderSide(
                               BorderSide(color: Colors.black, width: 1))),
-                      child: currentForm.control('profile').value != null
+                      child: currentForm.control('profile').value != null &&
+                              (currentForm.control('profile').value
+                                          as FileSelect)
+                                      .file !=
+                                  null
                           ? Image.memory(
                               (currentForm.control('profile').value
                                       as FileSelect)
-                                  .file,
+                                  .file!,
                               fit: BoxFit.fill,
                             )
-                          : const Icon(CupertinoIcons.camera),
+                          : currentForm.control('profile').value != null &&
+                                  (currentForm.control('profile').value
+                                              as FileSelect)
+                                          .url !=
+                                      null
+                              ? Avatar.network(
+                                  (currentForm.control('profile').value
+                                          as FileSelect)
+                                      .url,
+                                  placeholder: const AssetImage(
+                                    Images.logoMadical,
+                                    package: 'core_ui',
+                                  ),
+                                  shape: BoxShape.rectangle,
+                                  customSize: const Size(200, 200),
+                                )
+                              : const Icon(CupertinoIcons.camera),
                     ),
                   ),
                   ColumnSeparated(

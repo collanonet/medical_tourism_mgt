@@ -132,7 +132,7 @@ class _CreateMedicalOverseaDataWithUrlScreenState
                                 )),
                                 image: control.value?.file != null
                                     ? DecorationImage(
-                                        image: MemoryImage(control.value!.file),
+                                        image: MemoryImage(control.value!.file!),
                                         fit: BoxFit.cover,
                                       )
                                     : null,

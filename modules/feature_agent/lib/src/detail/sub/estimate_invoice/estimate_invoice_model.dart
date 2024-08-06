@@ -36,17 +36,22 @@ class EstimateInvoiceModel {
       String? file;
       await Future(() async {
         if (formGroup.control('uploadFile').value != null) {
-          try {
-            // convert Uint8List to base64
-            FileSelect docFile = formGroup.control('uploadFile').value;
-            String base64Image = base64Encode(docFile.file);
-            FileResponse fileData = await authRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename,
-            );
-            file = fileData.filename;
-          } catch (e) {
-            logger.e(e);
+          FileSelect docFile = formGroup.control('uploadFile').value;
+
+          if (docFile.file != null) {
+            try {
+              // convert Uint8List to base64
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await authRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              file = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            file = docFile.filename;
           }
         }
       });

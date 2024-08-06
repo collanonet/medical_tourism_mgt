@@ -267,8 +267,12 @@ class BasicInformationModel {
               value:
                   hospitalId.value ?? basicInformationData.value.data?.id ?? '',
             ),
-            'profile': FormControl<String>(
-              value: item.profile,
+            'profile': FormControl<FileSelect>(
+              value: item.profile != null
+                  ? FileSelect(
+                      url: item.profile,
+                    )
+                  : null,
             ),
             'photoRelease': FormControl<String>(
               value: item.photoRelease,
@@ -553,16 +557,20 @@ class BasicInformationModel {
           .forEach((element) async {
         String? file;
         if (element['profile'] != null) {
-          try {
-            FileSelect docFile = element['profile'];
-            String base64Image = base64Encode(docFile.file);
-            FileResponse fileData = await hospitalRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename,
-            );
-            file = fileData.filename;
-          } catch (e) {
-            logger.e(e);
+          FileSelect docFile = element['profile'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await hospitalRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              file = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            file = docFile.url;
           }
         }
         logger.d(file);
