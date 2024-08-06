@@ -46,6 +46,8 @@ class BasicInformationHospitalResponse {
   bool? societyRorRegenerativeMedicine;
   bool? osakaPrefecturalBase;
   bool? certified;
+  String? department1;
+  String? department2;
   String? shift1;
   String? shift2;
   String? shift1Mon;
@@ -109,6 +111,8 @@ class BasicInformationHospitalResponse {
     this.societyRorRegenerativeMedicine,
     this.osakaPrefecturalBase,
     this.certified,
+    this.department1,
+    this.department2,
     this.shift1,
     this.shift2,
     this.shift1Mon,
