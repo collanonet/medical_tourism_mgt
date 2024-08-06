@@ -259,7 +259,7 @@ class _ContractScreenState extends State<ContractScreen> {
                                                             context
                                                                 .read<
                                                                     ContractModel>()
-                                                                .deleteContract(
+                                                                .deleteContractAgent(
                                                                     sels);
                                                             Navigator.of(
                                                                     context)

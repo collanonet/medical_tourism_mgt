@@ -74,11 +74,11 @@ class ContractModel {
 
   ValueNotifier<AsyncData<bool>> delete = ValueNotifier(const AsyncData());
 
-  Future<void> deleteContract(List<String> ids) async {
+  Future<void> deleteContractAgent(List<String> ids) async {
     try {
       delete.value = const AsyncData(loading: true);
       for (var id in ids) {
-        await authRepository.deleteContract(id);
+        await authRepository.deleteContractAgent(id);
         contrantData.value = AsyncData(
             data: contrantData.value.data!
               ..removeWhere((element) => element.id == id));

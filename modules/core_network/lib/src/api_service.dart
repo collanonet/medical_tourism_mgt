@@ -1121,6 +1121,11 @@ abstract class ApiService {
     @Body() ContrantAgentRequest contrantAgentRequest,
   );
 
+  @DELETE('${EndPoints.CONTRANT_AGENT}/{id}')
+  Future<ContrantAgentResponse> deleteContractAgent(
+    @Path('id') String id,
+  );
+
   @GET('${EndPoints.ESTIMATE_INVOICE}/{id}')
   Future<List<EstimateInvoiceResponse>> getEstimateInvoice({
     @Path('id') required String id,
