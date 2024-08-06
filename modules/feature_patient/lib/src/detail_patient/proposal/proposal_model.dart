@@ -64,6 +64,7 @@ class ProposalModel {
       formGroup.reset();
       FormArray proposal = formGroup.control('proposal') as FormArray;
 
+      proposal.clear();
       for (var d in data) {
         proposal.add(FormGroup({
           'id': FormControl<String?>(value: d.id),
