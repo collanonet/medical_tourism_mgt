@@ -1066,7 +1066,21 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           Row(
                             children: [
                               IntrinsicWidth(
-                                stepWidth: 200,
+                                stepWidth: 150,
+                                child: const Text(
+                                  '部門',
+                                  style: TextStyle(
+                                    fontFamily: 'NotoSansJP',
+                                    package: 'core_ui',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: context.appTheme.spacing.marginMedium,
+                              ),
+                              IntrinsicWidth(
+                                stepWidth: 150,
                                 child: const Text(
                                   '診療時間',
                                   style: TextStyle(
@@ -1177,7 +1191,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 200,
+                                stepWidth: 150,
                                 child: ReactiveTextField(
                                   formControlName: 'shift1',
                                 ),
