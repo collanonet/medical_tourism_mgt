@@ -23,12 +23,16 @@ FormGroup detailPatientWebReservationForm() => FormGroup({
       'doctorName': FormControl<String>(
         validators: [Validators.required],
       ), // 医師名
+      'department1': FormControl<String>(
+        disabled: true,
+      ), //
+      'department2': FormControl<String>(
+        disabled: true,
+      ), //
       'shift1': FormControl<String>(
-        value: '10時〜12時',
         disabled: true,
       ), //
       'shift2': FormControl<String>(
-        value: '13時〜16時',
         disabled: true,
       ), //
       'candidateDate': FormArray([
