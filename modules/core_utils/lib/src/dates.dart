@@ -13,7 +13,7 @@ class Dates {
   static String formatFullDate(DateTime dateTime) {
     return Jiffy.parseFromDateTime(dateTime)
         .toLocal()
-        .format(pattern: 'yyyy/dd/MM ');
+        .format(pattern: 'yyyy/MM/dd');
   }
 
   /// Returns a list of two [DateTime] objects representing the start and end of a period of time.
