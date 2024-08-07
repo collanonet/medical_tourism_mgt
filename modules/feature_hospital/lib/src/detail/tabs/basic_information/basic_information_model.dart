@@ -226,14 +226,14 @@ class BasicInformationModel {
         FormArray qualifications = FormArray([]);
         if (item.qualifications != null && item.qualifications!.isNotEmpty) {
           for (var e in item.qualifications!) {
-            affiliatedAcademicSociety.add(
+            qualifications.add(
               FormGroup({
                 'name': FormControl<String>(value: e),
               }),
             );
           }
         } else {
-          affiliatedAcademicSociety.add(
+          qualifications.add(
             FormGroup({
               'name': FormControl<String>(),
             }),
