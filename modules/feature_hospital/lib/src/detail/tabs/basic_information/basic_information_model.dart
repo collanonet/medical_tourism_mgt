@@ -729,10 +729,14 @@ class BasicInformationModel {
 List<String> convertToList(Map<String, dynamic> element, String key) {
   try {
     if ((element[key] as List).isNotEmpty) {
-      return element[key].map((e) => e['name'] as String).toList();
+      return element[key]
+          .where((e) => e['name'] != null && e['name'].isNotEmpty)
+          .map((e) => e['name'] as String)
+          .toList();
     }
     return [];
   } catch (e) {
+    logger.e(e);
     return [];
   }
 }
