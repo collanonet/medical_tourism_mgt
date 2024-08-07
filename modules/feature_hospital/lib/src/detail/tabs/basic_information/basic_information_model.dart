@@ -208,13 +208,13 @@ class BasicInformationModel {
         FormArray affiliatedAcademicSociety = FormArray([]);
         if (item.affiliatedAcademicSociety != null &&
             item.affiliatedAcademicSociety!.isNotEmpty) {
-          item.affiliatedAcademicSociety!.map((e) {
+          for (var e in item.affiliatedAcademicSociety!) {
             affiliatedAcademicSociety.add(
               FormGroup({
                 'name': FormControl<String>(value: e),
               }),
             );
-          });
+          }
         } else {
           affiliatedAcademicSociety.add(
             FormGroup({
@@ -225,15 +225,15 @@ class BasicInformationModel {
 
         FormArray qualifications = FormArray([]);
         if (item.qualifications != null && item.qualifications!.isNotEmpty) {
-          item.qualifications!.map((e) {
-            affiliatedAcademicSociety.add(
+          for (var e in item.qualifications!) {
+            qualifications.add(
               FormGroup({
                 'name': FormControl<String>(value: e),
               }),
             );
-          });
+          }
         } else {
-          affiliatedAcademicSociety.add(
+          qualifications.add(
             FormGroup({
               'name': FormControl<String>(),
             }),
@@ -243,13 +243,13 @@ class BasicInformationModel {
         FormArray completionCertificate = FormArray([]);
         if (item.completionCertificate != null &&
             item.completionCertificate!.isNotEmpty) {
-          item.completionCertificate!.map((e) {
+          for (var e in item.completionCertificate!) {
             completionCertificate.add(
               FormGroup({
                 'name': FormControl<String>(value: e),
               }),
             );
-          });
+          }
         } else {
           completionCertificate.add(
             FormGroup({
@@ -365,7 +365,7 @@ class BasicInformationModel {
 
       FormArray contract = FormArray([]);
       if (data.contract != null && data.contract!.isNotEmpty) {
-        data.contract!.map((e) {
+        for (var e in data.contract!) {
           if (e != null) {
             contract.add(
               FormGroup({
@@ -373,13 +373,14 @@ class BasicInformationModel {
               }),
             );
           }
-        });
+        }
+      } else {
+        contract.add(
+          FormGroup({
+            'name': FormControl<String>(),
+          }),
+        );
       }
-      contract.add(
-        FormGroup({
-          'name': FormControl<String>(),
-        }),
-      );
     } catch (e) {
       logger.e(e);
     }
@@ -729,10 +730,14 @@ class BasicInformationModel {
 List<String> convertToList(Map<String, dynamic> element, String key) {
   try {
     if ((element[key] as List).isNotEmpty) {
-      return element[key].map((e) => e['name'] as String).toList();
+      return element[key]
+          .where((e) => e['name'] != null && e['name'].isNotEmpty)
+          .map((e) => e['name'] as String)
+          .toList();
     }
     return [];
   } catch (e) {
+    logger.e(e);
     return [];
   }
 }

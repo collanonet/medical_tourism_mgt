@@ -254,15 +254,20 @@ class _DetailPatientWebReservationScreenState
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
-                                Row(
-                                  mainAxisSize: MainAxisSize.min,
+                                RowSeparated(
+                                  separatorBuilder:
+                                      (BuildContext context, int index) {
+                                    return SizedBox(
+                                      width:
+                                      context.appTheme.spacing.marginMedium,
+                                    );
+                                  },
                                   children: [
                                     Expanded(
                                       child: SizedBox(),
                                     ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
+                                    Expanded(
+                                      child: SizedBox(),
                                     ),
                                     boxText(
                                       context,
@@ -270,19 +275,11 @@ class _DetailPatientWebReservationScreenState
                                       textColor: Colors.white,
                                       bg: context.appTheme.primaryColor,
                                     ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
                                     boxText(
                                       context,
                                       '火',
                                       textColor: Colors.white,
                                       bg: context.appTheme.primaryColor,
-                                    ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
                                     ),
                                     boxText(
                                       context,
@@ -290,19 +287,11 @@ class _DetailPatientWebReservationScreenState
                                       textColor: Colors.white,
                                       bg: context.appTheme.primaryColor,
                                     ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
                                     boxText(
                                       context,
                                       '木',
                                       textColor: Colors.white,
                                       bg: context.appTheme.primaryColor,
-                                    ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
                                     ),
                                     boxText(
                                       context,
@@ -310,20 +299,14 @@ class _DetailPatientWebReservationScreenState
                                       textColor: Colors.white,
                                       bg: context.appTheme.primaryColor,
                                     ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
+
                                     boxText(
                                       context,
                                       '土',
                                       textColor: Colors.white,
                                       bg: context.appTheme.primaryColor,
                                     ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
+
                                     boxText(
                                       context,
                                       '日',
@@ -339,70 +322,55 @@ class _DetailPatientWebReservationScreenState
                                 SizedBox(
                                   height: context.appTheme.spacing.marginMedium,
                                 ),
-                                Row(
+                                RowSeparated(
+                                  separatorBuilder:
+                                      (BuildContext context, int index) {
+                                    return SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
+                                    );
+                                  },
                                   children: [
+                                    Expanded(
+                                      child: ReactiveTextField(
+                                        formControlName: 'department1',
+                                      ),
+                                    ),
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'shift1',
                                       ),
                                     ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
+
                                     boxText(
                                       context,
                                       '×',
                                       bg: Colors.white,
-                                    ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
                                     ),
                                     boxText(
                                       context,
                                       '○',
                                       bg: Colors.white,
                                     ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
+                                    boxText(
+                                      context,
+                                      '×',
+                                      bg: Colors.white,
                                     ),
                                     boxText(
                                       context,
                                       '×',
                                       bg: Colors.white,
                                     ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    boxText(
-                                      context,
-                                      '×',
-                                      bg: Colors.white,
-                                    ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
                                     boxText(
                                       context,
                                       '○',
                                       bg: Colors.white,
                                     ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
                                     boxText(
                                       context,
                                       '○',
                                       bg: Colors.white,
-                                    ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
                                     ),
                                     boxText(
                                       context,
@@ -418,70 +386,54 @@ class _DetailPatientWebReservationScreenState
                                 SizedBox(
                                   height: context.appTheme.spacing.marginMedium,
                                 ),
-                                Row(
+                                RowSeparated(
+                                  separatorBuilder:
+                                      (BuildContext context, int index) {
+                                    return SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
+                                    );
+                                  },
                                   children: [
+                                    Expanded(
+                                      child: ReactiveTextField(
+                                        formControlName: 'department2',
+                                      ),
+                                    ),
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'shift2',
                                       ),
                                     ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
+                                    boxText(
+                                      context,
+                                      '○',
+                                      bg: Colors.white,
                                     ),
                                     boxText(
                                       context,
                                       '○',
                                       bg: Colors.white,
                                     ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
                                     boxText(
                                       context,
                                       '○',
                                       bg: Colors.white,
-                                    ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    boxText(
-                                      context,
-                                      '○',
-                                      bg: Colors.white,
-                                    ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
                                     ),
                                     boxText(
                                       context,
                                       '×',
                                       bg: Colors.white,
                                     ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
                                     boxText(
                                       context,
                                       '○',
                                       bg: Colors.white,
                                     ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
                                     boxText(
                                       context,
                                       '×',
                                       bg: Colors.white,
-                                    ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
                                     ),
                                     boxText(
                                       context,
@@ -1107,22 +1059,6 @@ class _DetailPatientWebReservationScreenState
                                                       width: context.appTheme
                                                           .spacing.marginMedium,
                                                     ),
-                                                    // Container(
-                                                    //   padding:
-                                                    //       const EdgeInsets.symmetric(
-                                                    //           horizontal: 8,
-                                                    //           vertical: 4),
-                                                    //   decoration: BoxDecoration(
-                                                    //       color: Color(0xff98A6B5),
-                                                    //       borderRadius:
-                                                    //           BorderRadius.circular(
-                                                    //               4)),
-                                                    //   child: const Text(
-                                                    //     'CXL',
-                                                    //     style: TextStyle(
-                                                    //         color: Colors.white),
-                                                    //   ),
-                                                    // ),
                                                   ],
                                                 ),
                                                 Text(

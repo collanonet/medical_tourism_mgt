@@ -1,4 +1,6 @@
+import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -619,76 +621,7 @@ class _AgentBasicInformationScreenState
                                             ),
                                         ],
                                       ),
-                                      Row(
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              filePicker().then((value) {});
-                                            },
-                                            child: Container(
-                                              width: 400,
-                                              padding: EdgeInsets.all(
-                                                context.appTheme.spacing
-                                                    .marginExtraLarge,
-                                              ),
-                                              decoration: BoxDecoration(
-                                                color: Colors.white,
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(
-                                                  context.appTheme.spacing
-                                                      .borderRadiusMedium,
-                                                )),
-                                                border: Border.all(
-                                                  color: context
-                                                      .appTheme.primaryColor,
-                                                ),
-                                              ),
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  Icon(
-                                                    Icons.copy_all_rounded,
-                                                    size: 50,
-                                                    color: context
-                                                        .appTheme.primaryColor,
-                                                  ),
-                                                  SizedBox(
-                                                    height: context.appTheme
-                                                        .spacing.marginMedium,
-                                                  ),
-                                                  Text(
-                                                    '名刺データをここにドラッグ＆ドロップ',
-                                                    style: context
-                                                        .textTheme.bodySmall
-                                                        ?.copyWith(
-                                                      fontSize: 22,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                    ),
-                                                  ),
-                                                  SizedBox(
-                                                    height: context.appTheme
-                                                        .spacing.marginMedium,
-                                                  ),
-                                                  ElevatedButton(
-                                                    onPressed: () {
-                                                      filePicker()
-                                                          .then((value) {});
-                                                    },
-                                                    child: const Text(
-                                                      'またはファイルを選択する',
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                                      managerCard(currentForm, context),
                                       RowSeparated(
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
@@ -1117,7 +1050,7 @@ class _AgentBasicInformationScreenState
                             formArray.add(
                               FormGroup({
                                 '_id': FormControl<String>(),
-                                'nameCardDragDrop': FormControl<String>(),
+                                'nameCardDragDrop': FormControl<FileSelect>(),
                                 'departmentName': FormControl<String>(),
                                 'fullNameRomanji': FormControl<String>(
                                   validators: [Validators.required],
@@ -1173,5 +1106,86 @@ class _AgentBasicInformationScreenState
             ),
           );
         });
+  }
+
+  Row managerCard(FormGroup currentForm, BuildContext context) {
+    final file = currentForm.control('nameCardDragDrop').value as FileSelect?;
+    return Row(
+      children: [
+        InkWell(
+          onTap: () {
+            filePicker().then((value) {
+              currentForm.control('nameCardDragDrop').value = value;
+            });
+          },
+          child: Container(
+            width: 400,
+            padding: EdgeInsets.all(
+              context.appTheme.spacing.marginExtraLarge,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(
+                context.appTheme.spacing.borderRadiusMedium,
+              )),
+              border: Border.all(
+                color: context.appTheme.primaryColor,
+              ),
+            ),
+            child: file != null && file.file != null
+                ? Image.memory(
+                    file.file!,
+                    fit: BoxFit.fill,
+                  )
+                : file != null && file.url != null
+                    ? Avatar.network(
+                        file.url,
+                        placeholder: const AssetImage(
+                          Images.logoMadical,
+                          package: 'core_ui',
+                        ),
+                        shape: BoxShape.rectangle,
+                        customSize: const Size(200, 200),
+                      )
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.copy_all_rounded,
+                            size: 50,
+                            color: context.appTheme.primaryColor,
+                          ),
+                          SizedBox(
+                            height: context.appTheme.spacing.marginMedium,
+                          ),
+                          Text(
+                            '名刺データをここにドラッグ＆ドロップ',
+                            style: context.textTheme.bodySmall?.copyWith(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: context.appTheme.spacing.marginMedium,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              filePicker().then((value) {
+                                currentForm.control('nameCardDragDrop').value =
+                                    value;
+                              });
+                            },
+                            child: const Text(
+                              'またはファイルを選択する',
+                            ),
+                          )
+                        ],
+                      ),
+          ),
+        ),
+      ],
+    );
   }
 }

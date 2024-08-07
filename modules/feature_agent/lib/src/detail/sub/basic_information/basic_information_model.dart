@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:core_network/core_network.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
@@ -197,8 +199,8 @@ class AgentBasicInformationModel {
         manager.add(
           FormGroup({
             '_id': FormControl<String>(value: element.id),
-            'nameCardDragDrop':
-                FormControl<String>(value: element.nameCardDragDrop),
+            'nameCardDragDrop': FormControl<FileSelect>(
+                value: FileSelect(url: element.nameCardDragDrop)),
             'departmentName':
                 FormControl<String>(value: element.departmentName),
             'fullNameRomanji': FormControl<String>(
@@ -231,7 +233,7 @@ class AgentBasicInformationModel {
       manager.add(
         FormGroup({
           '_id': FormControl<String>(),
-          'nameCardDragDrop': FormControl<String>(),
+          'nameCardDragDrop': FormControl<FileSelect>(),
           'departmentName': FormControl<String>(),
           'fullNameRomanji': FormControl<String>(
             validators: [Validators.required],
@@ -275,8 +277,27 @@ class AgentBasicInformationModel {
           ));
         });
 
+        String? file;
+        if (element['nameCardDragDrop'] != null) {
+          FileSelect docFile = element['nameCardDragDrop'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await authRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              file = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            file = docFile.url;
+          }
+        }
+
         AgentManagerRequest manager = AgentManagerRequest(
-          nameCardDragDrop: element['nameCardDragDrop'],
+          nameCardDragDrop: file,
           departmentName: element['departmentName'],
           fullNameRomanji: element['fullNameRomanji'],
           fullNameChineseKanjiVietnameseNotation:
