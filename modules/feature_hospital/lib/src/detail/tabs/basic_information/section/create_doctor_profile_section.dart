@@ -5,7 +5,6 @@ import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -110,12 +109,6 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                       width: 80,
                       height: 80,
                       decoration: BoxDecoration(
-                          image: value.data == null
-                              ? null
-                              : DecorationImage(
-                                  image: NetworkImage(value.requireData
-                                      .map((e) => e.profile)
-                                      .toString())),
                           borderRadius:
                               const BorderRadius.all(Radius.circular(6)),
                           border: const Border.fromBorderSide(
