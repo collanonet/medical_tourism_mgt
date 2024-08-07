@@ -103,7 +103,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                                 formControlName: 'currentAddress',
                                 decoration: InputDecoration(
                                   label: Text(
-                                    '現住所', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
+                                    '住所（つづき）',
                                   ),
                                 ),
                               ),
