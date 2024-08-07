@@ -70,7 +70,7 @@ class _MedicalRecordCompanionSectionState
                                 },
                                 children: [
                                   Text(
-                                    '同行者 ${formArray.value!.length}',
+                                    '同行者 ${getCurrentFormIndex(formArray, currentForm) + 1}',
                                     style: const TextStyle(
                                       fontFamily: 'NotoSansJP',
                                       package: 'core_ui',
@@ -1064,4 +1064,13 @@ class _MedicalRecordCompanionSectionState
           );
         });
   }
+}
+
+int getCurrentFormIndex(FormArray formArray, FormGroup currentForm) {
+  for (int i = 0; i < formArray.controls.length; i++) {
+    if (formArray.controls[i] == currentForm) {
+      return i;
+    }
+  }
+  return -1; // Return -1 if the form is not found
 }
