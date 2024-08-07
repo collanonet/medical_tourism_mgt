@@ -215,29 +215,9 @@ class _AgentBasicInformationScreenState
                                               style:
                                                   context.textTheme.bodyMedium,
                                             ),
-                                            ValueListenableBuilder(
-                                                valueListenable: context
-                                                    .read<
-                                                        AgentBasicInformationModel>()
-                                                    .contactList,
-                                                builder: (context, value, _) {
-                                                  return ReactiveDropdownFormField(
-                                                    formControlName: 'area',
-                                                    items: value
-                                                        .map((e) =>
-                                                            DropdownMenuItem(
-                                                              value: e.value,
-                                                              child: Text(
-                                                                e.value,
-                                                              ),
-                                                            ))
-                                                        .toList(),
-                                                  );
-                                                }),
-
-                                            // ReactiveTextField(
-                                            //   formControlName: 'area',
-                                            // ),
+                                            ReactiveTextField(
+                                              formControlName: 'area',
+                                            ),
                                           ],
                                         ),
                                       ),

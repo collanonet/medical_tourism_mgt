@@ -129,19 +129,19 @@ class AgentBasicInformationModel {
             formGroup.control('basicInformationAgent.pastCasesNumber').value,
         referralCommissions: referralCommissions,
       );
-
+      AgentResponse response;
       if (formGroup.control('basicInformationAgent._id').value != null) {
-        var response = await authRepository.putAgent(
+        response = await authRepository.putAgent(
             formGroup.control('basicInformationAgent._id').value, agentRequest);
         submitAgent.value = AsyncData(data: response);
         agent.value = AsyncData(data: response);
       } else {
-        var response = await authRepository.postAgent(agentRequest);
+        response = await authRepository.postAgent(agentRequest);
         submitAgent.value = AsyncData(data: response);
         agent.value = AsyncData(data: response);
       }
 
-      await createOrUpdateAgentManager(formGroup);
+      await createOrUpdateAgentManager(response.id, formGroup);
       submit.value = const AsyncData(data: true);
       init(id: agent.value.requireData.id, formGroup: formGroup);
     } catch (error) {
@@ -260,7 +260,8 @@ class AgentBasicInformationModel {
     }
   }
 
-  Future<void> createOrUpdateAgentManager(FormGroup formGroup) async {
+  Future<void> createOrUpdateAgentManager(
+      String id, FormGroup formGroup) async {
     try {
       agentManager.value = const AsyncData(loading: true);
 
@@ -286,7 +287,7 @@ class AgentBasicInformationModel {
           phoneNumber: element['phoneNumber'],
           email: element['email'],
           contactMethods: contactMethods,
-          agentRecord: agent.value.requireData.id,
+          agentRecord: id,
         );
 
         if (element['_id'] != null) {
@@ -306,6 +307,9 @@ class AgentBasicInformationModel {
   ValueNotifier<List<Contact>> contactList = ValueNotifier([
     Contact(value: 'WeChat'),
     Contact(value: 'Line'),
+    Contact(value: 'Telegram'),
+    Contact(value: 'Messenger'),
+    Contact(value: 'WhatsApp'),
   ]);
 }
 

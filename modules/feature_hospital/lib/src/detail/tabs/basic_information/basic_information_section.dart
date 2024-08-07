@@ -38,24 +38,27 @@ class _BasicInformationSectionState extends State<BasicInformationSection> {
             thumbVisibility: true,
             child: SingleChildScrollView(
               primary: true,
-              child: ColumnSeparated(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                separatorBuilder: (BuildContext context, int index) =>
-                    SizedBox(height: context.appTheme.spacing.formSpacing),
-                children: const [
-                  HowtoMakeReqestSection(),
-                  BasicInfoSection(),
-                  Divider(),
-                  MedicalRecordSection(),
-                  Divider(),
-                  AddDoctorProfile(),
-                  Divider(),
-                  AdditionalInformationSection(),
-                  Divider(),
-                  PaymentOptionSection(),
-                  Divider(),
-                  SupportLanguageSection(),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.only(right: 24),
+                child: ColumnSeparated(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  separatorBuilder: (BuildContext context, int index) =>
+                      SizedBox(height: context.appTheme.spacing.formSpacing),
+                  children: const [
+                    HowtoMakeReqestSection(),
+                    BasicInfoSection(),
+                    Divider(),
+                    MedicalRecordSection(),
+                    Divider(),
+                    AddDoctorProfile(),
+                    Divider(),
+                    AdditionalInformationSection(),
+                    Divider(),
+                    PaymentOptionSection(),
+                    Divider(),
+                    SupportLanguageSection(),
+                  ],
+                ),
               ),
             ),
           ),
