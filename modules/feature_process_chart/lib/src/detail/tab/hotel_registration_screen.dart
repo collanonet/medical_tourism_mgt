@@ -60,7 +60,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                             children: [
                               Expanded(
                                 child: ReactiveTextField(
-                                  formControlName: 'Name_of_facility',
+                                  formControlName: 'accommodationName',
                                   decoration: InputDecoration(
                                     labelText: '施設名',
                                   ),
@@ -72,7 +72,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                               Expanded(
                                 flex: 2,
                                 child: ReactiveTextField(
-                                  formControlName: 'location',
+                                  formControlName: 'address',
                                   decoration: InputDecoration(
                                     labelText: '所在地',
                                   ),
@@ -84,7 +84,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                             children: [
                               Expanded(
                                 child: ReactiveTextField(
-                                  formControlName: 'Person_in_charge_name',
+                                  formControlName: 'contactPersonName',
                                   decoration: InputDecoration(
                                     labelText: '担当者名',
                                   ),
@@ -95,7 +95,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                               ),
                               Expanded(
                                 child: ReactiveTextField(
-                                  formControlName: 'telephone_number',
+                                  formControlName: 'phoneNumber',
                                   decoration: InputDecoration(
                                     labelText: '電話番号',
                                   ),
@@ -106,7 +106,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                               ),
                               Expanded(
                                 child: ReactiveTextField(
-                                  formControlName: '1_night_price',
+                                  formControlName: 'ratePerNight',
                                   decoration: InputDecoration(
                                     labelText: '1泊の料金',
                                   ),
@@ -118,7 +118,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                             children: [
                               Expanded(
                                 child: ReactiveTextField(
-                                  formControlName: 'Accommodation_memo',
+                                  formControlName: 'accommodationMemo',
                                   decoration: InputDecoration(
                                     labelText: '宿泊メモ',
                                   ),

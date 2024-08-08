@@ -5,8 +5,8 @@ part 'detail_hotel_search_response.g.dart';
 class DetailHotelSearchResponse {
   @JsonKey(name: '_id')
   final String? id;
-  String? name;
-  String? type;
+  String? accommodationName;
+  String? accommodationType;
   String? usageRecord;
   String? area;
   String? supportedLanguage;
@@ -22,8 +22,8 @@ class DetailHotelSearchResponse {
 
   DetailHotelSearchResponse({
     required this.id,
-    this.name,
-    this.type,
+    this.accommodationName,
+    this.accommodationType,
     this.usageRecord,
     this.area,
     this.supportedLanguage,

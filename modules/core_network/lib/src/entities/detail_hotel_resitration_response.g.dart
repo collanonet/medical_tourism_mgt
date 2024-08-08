@@ -10,11 +10,11 @@ DetainHotelRegistationResponse _$DetainHotelRegistationResponseFromJson(
         Map<String, dynamic> json) =>
     DetainHotelRegistationResponse(
       id: json['_id'] as String?,
-      name: json['name'] as String?,
-      location: json['location'] as String?,
-      personInChargeName: json['personInChargeName'] as String?,
-      telephoneNumber: json['telephoneNumber'] as String?,
-      oneNightPrice: json['oneNightPrice'] as String?,
+      accommodationName: json['accommodationName'] as String?,
+      address: json['address'] as String?,
+      contactPersonName: json['contactPersonName'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
+      ratePerNight: json['ratePerNight'] as String?,
       accommodationMemo: json['accommodationMemo'] as String?,
       foreignLanguageStaff: json['foreignLanguageStaff'] as String?,
       evaluation: json['evaluation'] as String?,
@@ -29,11 +29,11 @@ Map<String, dynamic> _$DetainHotelRegistationResponseToJson(
         DetainHotelRegistationResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
-      'name': instance.name,
-      'location': instance.location,
-      'personInChargeName': instance.personInChargeName,
-      'telephoneNumber': instance.telephoneNumber,
-      'oneNightPrice': instance.oneNightPrice,
+      'accommodationName': instance.accommodationName,
+      'address': instance.address,
+      'contactPersonName': instance.contactPersonName,
+      'phoneNumber': instance.phoneNumber,
+      'ratePerNight': instance.ratePerNight,
       'accommodationMemo': instance.accommodationMemo,
       'foreignLanguageStaff': instance.foreignLanguageStaff,
       'evaluation': instance.evaluation,

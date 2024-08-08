@@ -3,11 +3,11 @@ part 'detail_hotel_resitration_request.g.dart';
 
 @JsonSerializable()
 class DetainHotelRegistationRequest {
-  String? name;
-  String? location;
-  String? personInChargeName;
-  String? telephoneNumber;
-  String? oneNightPrice;
+  String? accommodationName;
+  String? address;
+  String? contactPersonName;
+  String? phoneNumber;
+  String? ratePerNight;
   String? accommodationMemo;
   String? foreignLanguageStaff;
   String? evaluation;
@@ -18,12 +18,12 @@ class DetainHotelRegistationRequest {
   bool? other;
 
   DetainHotelRegistationRequest({
-    this.name,
-    this.location,
-    this.personInChargeName,
-    this.telephoneNumber,
-    this.oneNightPrice,
-    this.accommodationMemo,
+    this.accommodationName,
+     this.address,
+     this.contactPersonName,
+     this.phoneNumber,
+     this.ratePerNight,
+     this.accommodationMemo,
     this.foreignLanguageStaff,
     this.evaluation,
     this.japanese,

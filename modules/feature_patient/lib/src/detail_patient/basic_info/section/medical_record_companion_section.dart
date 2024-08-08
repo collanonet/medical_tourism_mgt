@@ -70,7 +70,7 @@ class _MedicalRecordCompanionSectionState
                                 },
                                 children: [
                                   Text(
-                                    '同行者 ${getCurrentFormIndex(formArray, currentForm) + 1}',
+                                    '同行者 ${formArray.controls.indexOf(currentForm) + 1}',
                                     style: const TextStyle(
                                       fontFamily: 'NotoSansJP',
                                       package: 'core_ui',

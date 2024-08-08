@@ -1,4 +1,3 @@
-
 import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 
@@ -22,7 +21,8 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<PatientFilterResponse> postFilterpatientChart(PatientFilterRequst patientFilterRequst) {
+  Future<PatientFilterResponse> postFilterpatientChart(
+      PatientFilterRequst patientFilterRequst) {
     return remote.postFilterpatientChart(patientFilterRequst);
   }
 
@@ -37,163 +37,229 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<ItineraryExplanationResponse> postItineraryExplanation(ItineraryExplanationRequest itineraryExplanationRequest) {
+  Future<ItineraryExplanationResponse> postItineraryExplanation(
+      ItineraryExplanationRequest itineraryExplanationRequest) {
     return remote.postItineraryExplanation(itineraryExplanationRequest);
   }
 
   @override
-  Future<ItineraryTitleResponse> postItineraryTitle(ItineraryTitleRequest itineraryTitleRequest) {
+  Future<ItineraryTitleResponse> postItineraryTitle(
+      ItineraryTitleRequest itineraryTitleRequest) {
     return remote.postItineraryTitle(itineraryTitleRequest);
   }
-  
+
   @override
-  Future<ItineraryInterpreterOrGuideInputResponse> getItineraryInterpretorOrGuideInput() {
+  Future<ItineraryInterpreterOrGuideInputResponse>
+      getItineraryInterpretorOrGuideInput() {
     return remote.getItineraryInterpretorOrGuideInput();
   }
-  
+
   @override
   Future<ItineraryTransferInputResponse> getItineraryTransferInput() {
     return remote.getItineraryTransferInput();
   }
-  
+
   @override
-  Future<ItineraryInterpreterOrGuideInputResponse> postItineraryInterpretorOrGuideInput(ItineraryInterpreterOrGuideInputRequest itineraryInterpreterOrGuideInputRequest) {
-    return remote.postItineraryInterpretorOrGuideInput(itineraryInterpreterOrGuideInputRequest);
+  Future<ItineraryInterpreterOrGuideInputResponse>
+      postItineraryInterpretorOrGuideInput(
+          ItineraryInterpreterOrGuideInputRequest
+              itineraryInterpreterOrGuideInputRequest) {
+    return remote.postItineraryInterpretorOrGuideInput(
+        itineraryInterpreterOrGuideInputRequest);
   }
-  
+
   @override
-  Future<ItineraryTransferInputResponse> postItineraryTransferInput(ItineraryTransferInputRequest itineraryTransferInputRequest) {
-   return remote.postItineraryTransferInput(itineraryTransferInputRequest);
+  Future<ItineraryTransferInputResponse> postItineraryTransferInput(
+      ItineraryTransferInputRequest itineraryTransferInputRequest) {
+    return remote.postItineraryTransferInput(itineraryTransferInputRequest);
   }
-  
+
   @override
   Future<DetailDropInFacilityResponse> getDetailFacilityDropIn() {
     return remote.getDetailFacilityDropIn();
   }
-  
+
   @override
   Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital() {
-   return remote.getDetialFacilityHospital();
+    return remote.getDetialFacilityHospital();
   }
-  
+
   @override
-  Future<DetailDropInFacilityResponse> postDetailFacilityDropIn(DetailDropInFacilityRequest detailDropInFacilityRequest) {
-   return remote.postDetailFacilityDropIn(detailDropInFacilityRequest);
+  Future<DetailDropInFacilityResponse> postDetailFacilityDropIn(
+      DetailDropInFacilityRequest detailDropInFacilityRequest) {
+    return remote.postDetailFacilityDropIn(detailDropInFacilityRequest);
   }
-  
+
   @override
-  Future<DetailFacilityHotelResponse> postDetailFacilityHospital(DetailFacilityHotelRequest detailFacilityHotelRequest) {
-   return remote.postDetailFacilityHospital(detailFacilityHotelRequest);
+  Future<DetailFacilityHotelResponse> postDetailFacilityHospital(
+      DetailFacilityHotelRequest detailFacilityHotelRequest) {
+    return remote.postDetailFacilityHospital(detailFacilityHotelRequest);
   }
-  
+
   @override
   Future<DetainHotelRegistationResponse> getDetainlHotelRegistation() {
-   return remote.getDetainlHotelRegistation();
+    return remote.getDetainlHotelRegistation();
   }
-  
+
   @override
-  Future<DetainHotelRegistationResponse> postDetailHotelRegistation(DetainHotelRegistationRequest detainHotelRegistationRequest) {
+  Future<DetainHotelRegistationResponse> postDetailHotelRegistation(
+      DetainHotelRegistationRequest detainHotelRegistationRequest) {
     return remote.postDetailHotelRegistation(detainHotelRegistationRequest);
   }
-  
+
   @override
-  Future<DetailHotelSearchResponse> getDetailHotelSearch() {
-    return remote.getDetailHotelSearch();
-  }
-  
-  @override
-  Future<DetailHotelSearchResponse> postDetialHotelSearch(DetailHotelSearchRequest detailHotelSearchRequest) {
+  Future<DetailHotelSearchResponse> postDetialHotelSearch(
+      DetailHotelSearchRequest detailHotelSearchRequest) {
     return remote.postDetialHotelSearch(detailHotelSearchRequest);
   }
-  
+
   @override
-  Future<DetailItinerarySimpleInterpreterOrGuideResponse> getDetailItinerarySimpleInterpretorOrGuideInput() {
+  Future<DetailItinerarySimpleInterpreterOrGuideResponse>
+      getDetailItinerarySimpleInterpretorOrGuideInput() {
     return remote.getDetailItinerarySimpleInterpretorOrGuide();
   }
-  
+
   @override
-  Future<DetailItinerarySimplePickUpAndDropOffResponse> getDetailItinerarySimplePickUpAndDropOff() {
+  Future<DetailItinerarySimplePickUpAndDropOffResponse>
+      getDetailItinerarySimplePickUpAndDropOff() {
     return remote.getDetailItinerarySimplePickUpAndDropOff();
   }
-  
+
   @override
-  Future<DetailItinerarySimplePriorExplanationResponse> getDetailItinerarySimplePriorExplanation() {
+  Future<DetailItinerarySimplePriorExplanationResponse>
+      getDetailItinerarySimplePriorExplanation() {
     return remote.getDetailItinerarySimplePriorExplanation();
   }
-  
+
   @override
   Future<DetailItinerarySimpleTitle> getDetailItinerarySimpleTitle() {
-   return remote.getDetailItinerarySimpleTitle();
+    return remote.getDetailItinerarySimpleTitle();
   }
-  
+
   @override
-  Future<DetailItinerarySimpleInterpreterOrGuideResponse> postDetailItinerarySimpleInterpretorOrGuideInput(DetailItinerarySimpleInterpreterOrGuideRequest detailItinerarySimpleInterpreterOrGuideRequest) {
-    return remote.postDetailItinerarySimpleInterpretorOrGuide(detailItinerarySimpleInterpreterOrGuideRequest);
+  Future<DetailItinerarySimpleInterpreterOrGuideResponse>
+      postDetailItinerarySimpleInterpretorOrGuideInput(
+          DetailItinerarySimpleInterpreterOrGuideRequest
+              detailItinerarySimpleInterpreterOrGuideRequest) {
+    return remote.postDetailItinerarySimpleInterpretorOrGuide(
+        detailItinerarySimpleInterpreterOrGuideRequest);
   }
-  
+
   @override
-  Future<DetailItinerarySimplePickUpAndDropOffResponse> postDetailItinerarySimplePickUpAndDropOff(DetailItinerarySimplePickUpAndDropOffRequest detailItinerarySimplePickUpAndDropOffRequest) {
-    return remote.postDetailItinerarySimplePickUp(detailItinerarySimplePickUpAndDropOffRequest);
+  Future<DetailItinerarySimplePickUpAndDropOffResponse>
+      postDetailItinerarySimplePickUpAndDropOff(
+          DetailItinerarySimplePickUpAndDropOffRequest
+              detailItinerarySimplePickUpAndDropOffRequest) {
+    return remote.postDetailItinerarySimplePickUp(
+        detailItinerarySimplePickUpAndDropOffRequest);
   }
-  
+
   @override
-  Future<DetailItinerarySimplePriorExplanationResponse> postDetailItinerarySimplePriorExplanation(DetailItinerarySimplePriorExplanationRequest detailItinerarySimplePriorExplanationRequest) {
-    return remote.postDetailItinerarySimpleExplanation(detailItinerarySimplePriorExplanationRequest);
+  Future<DetailItinerarySimplePriorExplanationResponse>
+      postDetailItinerarySimplePriorExplanation(
+          DetailItinerarySimplePriorExplanationRequest
+              detailItinerarySimplePriorExplanationRequest) {
+    return remote.postDetailItinerarySimpleExplanation(
+        detailItinerarySimplePriorExplanationRequest);
   }
-  
+
   @override
-  Future<DetailItinerarySimpleTitle> postDetailItinerarySimpleTitle(DetailItinerarySimpleTitleRequest detailItinerarySimpleTitleRequest) {
-    return remote.postDetailItinerarySimpleTitle(detailItinerarySimpleTitleRequest);
+  Future<DetailItinerarySimpleTitle> postDetailItinerarySimpleTitle(
+      DetailItinerarySimpleTitleRequest detailItinerarySimpleTitleRequest) {
+    return remote
+        .postDetailItinerarySimpleTitle(detailItinerarySimpleTitleRequest);
   }
-  
+
   @override
   Future<DetailRelatedPartiesResponse> getDetailRelatedParties() {
     return remote.getRelatedPartiesGuideOrInterpreter();
   }
-  
+
   @override
-  Future<DetailRelatedPartiesBusCompanyResponse> getDetailRelatedPartiesBusCompany() {
+  Future<DetailRelatedPartiesBusCompanyResponse>
+      getDetailRelatedPartiesBusCompany() {
     return remote.getRelatedPartiesBusCompany();
   }
-  
+
   @override
   Future<DetailRelatedPartiesDriverResponse> getDetailRelatedPartiesDriver() {
-   return remote.getRelatedPartiesDriver();
+    return remote.getRelatedPartiesDriver();
   }
-  
+
   @override
-  Future<DetailRelatedPartiesEmergencyContactResponse> getDetailRelatedPartiesEmergencyContact() {
+  Future<DetailRelatedPartiesEmergencyContactResponse>
+      getDetailRelatedPartiesEmergencyContact() {
     return remote.getRelatedPartiesEmergencyContact();
   }
-  
+
   @override
-  Future<DetailRelatedPartiesResponse> postDetailRelatedParties(DetailRelatedPartiesRequest detailRelatedPartiesRequest) {
-    return remote.postRelatedPartiesGuideOrInterpreter(detailRelatedPartiesRequest);
+  Future<DetailRelatedPartiesResponse> postDetailRelatedParties(
+      DetailRelatedPartiesRequest detailRelatedPartiesRequest) {
+    return remote
+        .postRelatedPartiesGuideOrInterpreter(detailRelatedPartiesRequest);
   }
-  
+
   @override
-  Future<DetailRelatedPartiesBusCompanyResponse> postDetailRelatedPartiesBusCompany(DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest) {
-    return remote.postRelatedPartiesBusCompany(detailRelatedPartiesBusCompanyRequest);
+  Future<DetailRelatedPartiesBusCompanyResponse>
+      postDetailRelatedPartiesBusCompany(
+          DetailRelatedPartiesBusCompanyRequest
+              detailRelatedPartiesBusCompanyRequest) {
+    return remote
+        .postRelatedPartiesBusCompany(detailRelatedPartiesBusCompanyRequest);
   }
-  
+
   @override
-  Future<DetailRelatedPartiesDriverResponse> postDetailRelatedPartiesDriver(DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest) {
+  Future<DetailRelatedPartiesDriverResponse> postDetailRelatedPartiesDriver(
+      DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest) {
     return remote.postRelatedPartiesDriver(detailRelatedPartiesDriverRequest);
   }
-  
+
   @override
-  Future<DetailRelatedPartiesEmergencyContactResponse> postDetailRelatedPartiesEmergencyContact(DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest) {
-    return remote.postRelatedPartiesEmergencyContact(detailRelatedPartiesEmergencyContactRequest);
+  Future<DetailRelatedPartiesEmergencyContactResponse>
+      postDetailRelatedPartiesEmergencyContact(
+          DetailRelatedPartiesEmergencyContactRequest
+              detailRelatedPartiesEmergencyContactRequest) {
+    return remote.postRelatedPartiesEmergencyContact(
+        detailRelatedPartiesEmergencyContactRequest);
   }
-  
+
   @override
   Future<DetailItineraryResponse> getDetailItinerary() {
     return remote.getDetailitinerary();
   }
-  
+
   @override
-  Future<DetailItineraryResponse> postDetailItinerary(DetailIneraryRequest detailIneraryRequest) {
+  Future<DetailItineraryResponse> postDetailItinerary(
+      DetailIneraryRequest detailIneraryRequest) {
     return remote.postDetailitinerary(detailIneraryRequest);
   }
 
+  @override
+  Future<DetailHotelSearchResponse> getDetailHotelSearch(
+      {
+        //required String id,
+      String? accommodationName,
+      String? accommodationType,
+      String? area,
+      bool? usageRecord,
+      bool? japanese,
+      bool? english,
+      bool? vietnamese,
+      bool? thai,
+      bool? korean,
+      bool? chinese}) {
+    return remote.getDetailHotelSearch(
+     // id: id,
+      accommodationName: accommodationName,
+      accommodationType: accommodationType,
+      area: area,
+      usageRecord: usageRecord,
+      japanese: japanese,
+      chinese: chinese,
+      korean: korean,
+      english: english,
+      vietnamese: vietnamese,
+      thai: thai,
+    );
+  }
 }

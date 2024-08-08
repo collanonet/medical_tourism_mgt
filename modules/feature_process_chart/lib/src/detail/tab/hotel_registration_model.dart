@@ -29,11 +29,11 @@ class HotelRegistrationModel {
 
   void insertHotelRegister(
       FormGroup formGroup, DetainHotelRegistationResponse? data) {
-    formGroup.control('Name_of_facility').value = data?.name;
-    formGroup.control('location').value = data?.location;
-    formGroup.control('Person_in_charge_name').value = data?.personInChargeName;
-    formGroup.control('telephone_number').value = data?.telephoneNumber;
-    formGroup.control('1_night_price').value = data?.oneNightPrice;
+    formGroup.control('Name_of_facility').value = data?.accommodationName;
+    formGroup.control('location').value = data?.address;
+    formGroup.control('Person_in_charge_name').value = data?.contactPersonName;
+    formGroup.control('telephone_number').value = data?.phoneNumber;
+    formGroup.control('1_night_price').value = data?.ratePerNight;
     formGroup.control('Accommodation_memo').value = data?.accommodationMemo;
     formGroup.control('Foreign_language_staff').value =
         data?.foreignLanguageStaff;
@@ -47,12 +47,12 @@ class HotelRegistrationModel {
       submitHotelRegisterData.value = const AsyncData(loading: true);
       final response = await processChartRepository
           .postDetailHotelRegistation(DetainHotelRegistationRequest(
-        name: formGroup.control('Name_of_facility').value,
-        location: formGroup.control('location').value,
-        personInChargeName: formGroup.control('Person_in_charge_name').value,
-        telephoneNumber: formGroup.control('telephone_number').value,
-        oneNightPrice: formGroup.control('1_night_price').value,
-        accommodationMemo: formGroup.control('Accommodation_memo').value,
+        accommodationName: formGroup.control('accommodationName').value,
+        address: formGroup.control('address').value,
+        contactPersonName: formGroup.control('contactPersonName').value,
+        phoneNumber: formGroup.control('phoneNumber').value,
+        ratePerNight: formGroup.control('ratePerNight').value,
+        accommodationMemo: formGroup.control('accommodationMemo').value,
         foreignLanguageStaff: formGroup.control('Foreign_language_staff').value,
         evaluation: formGroup.control('evaluation').value,
       ));

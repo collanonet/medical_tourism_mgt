@@ -776,8 +776,20 @@ abstract class ApiService {
     @Body() DetainHotelRegistationRequest detainHotelRegistationRequest,
   );
 
-  @GET(EndPoints.DETAIL_HOTEL_SEARCH)
-  Future<DetailHotelSearchResponse> getDetailHotelSearch();
+  @GET('${EndPoints.DETAIL_HOTEL_SEARCH}/{id}')
+  Future<DetailHotelSearchResponse> getDetailHotelSearch({
+   // @Path('id') String id,
+    @Query('accommodationName') String? accommodationName,
+    @Query('accommodationType') String? accommodationType,
+    @Query('usageRecord') bool? usageRecord,
+    @Query('area') String? area,
+    @Query('japanese') bool? japanese,
+    @Query('chinese') bool? chinese,
+    @Query('vietnamese') bool? vietnamese,
+    @Query('english') bool? english,
+    @Query('korean') bool? korean,
+    @Query('thai') bool? thai,
+  });
 
   @POST(EndPoints.DETAIL_HOTEL_SEARCH)
   Future<DetailHotelSearchResponse> postDetialHotelSearch(

@@ -5,11 +5,11 @@ part 'detail_hotel_resitration_response.g.dart';
 class DetainHotelRegistationResponse {
   @JsonKey(name: '_id')
   final String? id;
-  String? name;
-  String? location;
-  String? personInChargeName;
-  String? telephoneNumber;
-  String? oneNightPrice;
+  String? accommodationName;
+  String? address;
+  String? contactPersonName;
+  String? phoneNumber;
+  String? ratePerNight;
   String? accommodationMemo;
   String? foreignLanguageStaff;
   String? evaluation;
@@ -21,11 +21,11 @@ class DetainHotelRegistationResponse {
 
   DetainHotelRegistationResponse({
     required this.id,
-     this.name,
-     this.location,
-     this.personInChargeName,
-     this.telephoneNumber,
-     this.oneNightPrice,
+     this.accommodationName,
+     this.address,
+     this.contactPersonName,
+     this.phoneNumber,
+     this.ratePerNight,
      this.accommodationMemo,
      this.foreignLanguageStaff,
      this.evaluation,

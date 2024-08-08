@@ -20,7 +20,7 @@ class HotelSearchPage extends StatelessWidget {
         builder: (context, formGroup, child) {
           return Provider(
             create: (context) =>
-                GetIt.I<HotelSearchModel>()..fetchHotelSearch(formGroup),
+                GetIt.I<HotelSearchModel>()..fetchHotelSearch(),
             child: const HotelSearchScreen(),
           );
         },
