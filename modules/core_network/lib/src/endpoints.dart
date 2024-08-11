@@ -155,7 +155,7 @@ class EndPoints {
   static const DETAIL_FACILITY_HOSPITAL = '/detail-facility-hospital';
   static const DETAIL_FACILITY_DROP_IN_FACILITY =
       '/detail-facility-drop-in-facility';
-  static const DETAIL_HOTEL_REGISTATION = '/detail-hotel-registation';
+  static const DETAIL_HOTEL_REGISTATION = '/hotel';
   static const DETAIL_HOTEL_SEARCH = '/hotel';
   static const DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER =
       '/detail-related-parties-guide-or-interpreter';

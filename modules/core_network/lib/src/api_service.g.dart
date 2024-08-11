@@ -3891,20 +3891,41 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<DetainHotelRegistationResponse> getDetainlHotelRegistation() async {
+  Future<List<DetainHotelRegistationResponse>> getDetainlHotelRegistation({
+    String? accommodationName,
+    bool? usageRecord,
+    String? area,
+    bool? isJapanese,
+    bool? isChinese,
+    bool? isVietnamese,
+    bool? isEnglish,
+    bool? isKorean,
+    bool? isThai,
+  }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'accommodationName': accommodationName,
+      r'usageRecord': usageRecord,
+      r'area': area,
+      r'isJapanese': isJapanese,
+      r'isChinese': isChinese,
+      r'isVietnamese': isVietnamese,
+      r'isEnglish': isEnglish,
+      r'isKorean': isKorean,
+      r'isThai': isThai,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DetainHotelRegistationResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<DetainHotelRegistationResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/detail-hotel-registation',
+              '/hotel',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3913,7 +3934,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetainHotelRegistationResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) =>
+            DetainHotelRegistationResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
@@ -3933,7 +3957,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-hotel-registation',
+              '/hotel',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -3943,57 +3967,6 @@ class _ApiService implements ApiService {
               baseUrl,
             ))));
     final value = DetainHotelRegistationResponse.fromJson(_result.data!);
-    return value;
-  }
-
-  @override
-  Future<DetailHotelSearchResponse> getDetailHotelSearch({
-    required String id,
-    String? accommodationName,
-    String? accommodationType,
-    bool? usageRecord,
-    String? area,
-    bool? japanese,
-    bool? chinese,
-    bool? vietnamese,
-    bool? english,
-    bool? korean,
-    bool? thai,
-  }) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{
-      r'accommodationName': accommodationName,
-      r'accommodationType': accommodationType,
-      r'usageRecord': usageRecord,
-      r'area': area,
-      r'japanese': japanese,
-      r'chinese': chinese,
-      r'vietnamese': vietnamese,
-      r'english': english,
-      r'korean': korean,
-      r'thai': thai,
-    };
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DetailHotelSearchResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/hotel/${id}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final value = DetailHotelSearchResponse.fromJson(_result.data!);
     return value;
   }
 

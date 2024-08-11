@@ -146,7 +146,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                                           controlAffinity:
                                               ListTileControlAffinity.leading,
                                           contentPadding: EdgeInsets.zero,
-                                          formControlName: 'japanese',
+                                          formControlName: 'isJapanese',
                                           title: const Text('日本語'),
                                         ),
                                       ),
@@ -155,7 +155,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                                           controlAffinity:
                                               ListTileControlAffinity.leading,
                                           contentPadding: EdgeInsets.zero,
-                                          formControlName: 'chinese',
+                                          formControlName: 'isChinese',
                                           title: const Text('中国語'),
                                         ),
                                       ),
@@ -164,7 +164,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                                           controlAffinity:
                                               ListTileControlAffinity.leading,
                                           contentPadding: EdgeInsets.zero,
-                                          formControlName: 'vietnamese',
+                                          formControlName: 'isVietnamese',
                                           title: const Text('ベトナム語'),
                                         ),
                                       ),
@@ -173,7 +173,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                                           controlAffinity:
                                               ListTileControlAffinity.leading,
                                           contentPadding: EdgeInsets.zero,
-                                          formControlName: 'english',
+                                          formControlName: 'isEnglish',
                                           title: const Text('英語'),
                                         ),
                                       ),
@@ -182,7 +182,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                                           controlAffinity:
                                               ListTileControlAffinity.leading,
                                           contentPadding: EdgeInsets.zero,
-                                          formControlName: 'other',
+                                          formControlName: 'isOthers',
                                           title: const Text('その他'),
                                         ),
                                       )
@@ -194,7 +194,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                               IntrinsicWidth(
                                 stepWidth: 200,
                                 child: ReactiveTextField(
-                                  formControlName: 'Foreign_language_staff',
+                                  formControlName: 'other',
                                 ),
                               ),
                             ],

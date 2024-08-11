@@ -97,8 +97,30 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<DetainHotelRegistationResponse> getDetainlHotelRegistation() {
-    return remote.getDetainlHotelRegistation();
+  Future<List<DetainHotelRegistationResponse>> getDetainlHotelRegistation({
+      String? accommodationName,
+   // List<String>? accommodationType,
+    String? area,
+    bool? usageRecord,
+    bool? isJapanese,
+    bool? isEnglish,
+    bool? isVietnamese,
+    bool? isThai,
+    bool? isKorean,
+    bool? isChinese,
+  }) {
+    return remote.getDetainlHotelRegistation(
+        accommodationName: accommodationName,
+    //  accommodationType: accommodationType,
+      area: area,
+      usageRecord: usageRecord,
+      isJapanese: isJapanese,
+      isEnglish: isEnglish,
+      isThai: isThai,
+      isKorean: isKorean,
+      isVietnamese: isVietnamese,
+      isChinese: isChinese,
+    );
   }
 
   @override
@@ -232,34 +254,5 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   Future<DetailItineraryResponse> postDetailItinerary(
       DetailIneraryRequest detailIneraryRequest) {
     return remote.postDetailitinerary(detailIneraryRequest);
-  }
-
-  @override
-  Future<DetailHotelSearchResponse> getDetailHotelSearch(
-      {
-        //required String id,
-      String? accommodationName,
-      String? accommodationType,
-      String? area,
-      bool? usageRecord,
-      bool? japanese,
-      bool? english,
-      bool? vietnamese,
-      bool? thai,
-      bool? korean,
-      bool? chinese}) {
-    return remote.getDetailHotelSearch(
-     // id: id,
-      accommodationName: accommodationName,
-      accommodationType: accommodationType,
-      area: area,
-      usageRecord: usageRecord,
-      japanese: japanese,
-      chinese: chinese,
-      korean: korean,
-      english: english,
-      vietnamese: vietnamese,
-      thai: thai,
-    );
   }
 }

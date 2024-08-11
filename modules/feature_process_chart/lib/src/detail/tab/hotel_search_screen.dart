@@ -1,7 +1,5 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:core_utils/async.dart';
-import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
@@ -9,7 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import 'hotel_search_model.dart';
+import 'hotel_registration_model.dart';
 
 class HotelSearchScreen extends StatefulWidget {
   const HotelSearchScreen({super.key});
@@ -22,9 +20,10 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
   @override
   Widget build(BuildContext context) {
     final formGroup = (ReactiveForm.of(context) as FormGroup);
+
     return ValueListenableBuilder(
-      valueListenable: context.watch<HotelSearchModel>().hotelSearchData,
-      builder: (context, value, _) {
+      valueListenable: context.read<HotelRegistrationModel>().hotelregisterData,
+      builder: (context, value, child) {
         return Skeletonizer(
           enabled: value.loading,
           child: ColumnSeparated(
@@ -169,7 +168,7 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                             controlAffinity:
                                                 ListTileControlAffinity.leading,
                                             contentPadding: EdgeInsets.zero,
-                                            formControlName: 'japanese',
+                                            formControlName: 'isJapanese',
                                             title: const Text('日本語'),
                                           ),
                                         ),
@@ -178,7 +177,7 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                             controlAffinity:
                                                 ListTileControlAffinity.leading,
                                             contentPadding: EdgeInsets.zero,
-                                            formControlName: 'chinese',
+                                            formControlName: 'isChinese',
                                             title: const Text('中国語'),
                                           ),
                                         ),
@@ -187,7 +186,7 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                             controlAffinity:
                                                 ListTileControlAffinity.leading,
                                             contentPadding: EdgeInsets.zero,
-                                            formControlName: 'vietnamese',
+                                            formControlName: 'isVietnamese',
                                             title: const Text('ベトナム語'),
                                           ),
                                         ),
@@ -196,7 +195,7 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                             controlAffinity:
                                                 ListTileControlAffinity.leading,
                                             contentPadding: EdgeInsets.zero,
-                                            formControlName: 'english',
+                                            formControlName: 'isEnglish',
                                             title: const Text('英語'),
                                           ),
                                         ),
@@ -205,7 +204,7 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                             controlAffinity:
                                                 ListTileControlAffinity.leading,
                                             contentPadding: EdgeInsets.zero,
-                                            formControlName: 'korean',
+                                            formControlName: 'isKorean',
                                             title: const Text('韓国語'),
                                           ),
                                         ),
@@ -214,7 +213,7 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                             controlAffinity:
                                                 ListTileControlAffinity.leading,
                                             contentPadding: EdgeInsets.zero,
-                                            formControlName: 'thai',
+                                            formControlName: 'isThai',
                                             title: const Text('タイ語'),
                                           ),
                                         ),
@@ -227,13 +226,10 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                     return ElevatedButton(
                                       onPressed: () {
                                         context
-                                            .read<HotelSearchModel>()
-                                            .fetchHotelSearch(
+                                            .read<HotelRegistrationModel>()
+                                            .fetchHotelregister(
                                               accommodationName: formGroup
                                                   .control('accommodationName')
-                                                  .value,
-                                              accommodationType: formGroup
-                                                  .control('accommodationType')
                                                   .value,
                                               usageRecord: formGroup
                                                   .control('usageRecord')
@@ -241,17 +237,23 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                               area: formGroup
                                                   .control('area')
                                                   .value,
-                                              japanese: formGroup
-                                                  .control('japanese')
+                                              isJapanese: formGroup
+                                                  .control('isJapanese')
                                                   .value,
-                                              chinese: formGroup
-                                                  .control('chinese')
+                                              isChinese: formGroup
+                                                  .control('isChinese')
                                                   .value,
-                                              vietnamese: formGroup
-                                                  .control('vietnamese')
+                                              isVietnamese: formGroup
+                                                  .control('isVietnamese')
                                                   .value,
-                                              english: formGroup
-                                                  .control('english')
+                                              isEnglish: formGroup
+                                                  .control('isEnglish')
+                                                  .value,
+                                              isKorean: formGroup
+                                                  .control('isKorean')
+                                                  .value,
+                                              isThai: formGroup
+                                                  .control('isThai')
                                                   .value,
                                             );
                                       },
@@ -275,177 +277,136 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                               onPressed: () {}, child: Text('新規登録する')),
                         ],
                       ),
-                      // ListView.separated(
-                      //   itemCount: 10,
-                      //   shrinkWrap: true,
-                      //   physics: const NeverScrollableScrollPhysics(),
-                      //   itemBuilder: (context, index) {
-                      //     return Container(
-                      //       padding: EdgeInsets.all(
-                      //           context.appTheme.spacing.marginMedium),
-                      //       decoration: index % 2 != 0
-                      //           ? null
-                      //           : BoxDecoration(
-                      //               color: context.appTheme.primaryColor
-                      //                   .withOpacity(0.1),
-                      //               borderRadius: BorderRadius.circular(
-                      //                 context
-                      //                     .appTheme.spacing.borderRadiusMedium,
-                      //               ),
-                      //             ),
-                      //       child: Row(
-                      //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //         children: [
-                      //           ColumnSeparated(
-                      //             crossAxisAlignment: CrossAxisAlignment.start,
-                      //             separatorBuilder:
-                      //                 (BuildContext context, int index) {
-                      //               return SizedBox(
-                      //                 height:
-                      //                     context.appTheme.spacing.marginSmall,
-                      //               );
-                      //             },
-                      //             children: [
-                      //               Row(
-                      //                 children: [
-                      //                   Text('Aranvert Hotel Kyoto'),
-                      //                   SizedBox(
-                      //                     width: context
-                      //                         .appTheme.spacing.marginMedium,
-                      //                   ),
-                      //                   Icon(
-                      //                     Icons.star,
-                      //                     color: context.appTheme.primaryColor,
-                      //                   ),
-                      //                   Icon(
-                      //                     Icons.star,
-                      //                     color: context.appTheme.primaryColor,
-                      //                   ),
-                      //                   Icon(
-                      //                     Icons.star,
-                      //                     color: context.appTheme.primaryColor,
-                      //                   ),
-                      //                   Icon(
-                      //                     Icons.star,
-                      //                     color: context.appTheme.primaryColor,
-                      //                   ),
-                      //                   Icon(
-                      //                     Icons.star,
-                      //                     color: context.appTheme.primaryColor,
-                      //                   ),
-                      //                 ],
-                      //               ),
-                      //               Row(
-                      //                 children: [
-                      //                   Text('住所：京都府京都市下京区東錺屋町179'),
-                      //                   SizedBox(
-                      //                     width: context
-                      //                         .appTheme.spacing.marginMedium,
-                      //                   ),
-                      //                   Text('TEL：075-365-5111')
-                      //                 ],
-                      //               ),
-                      //               Row(
-                      //                 children: [
-                      //                   Text('対応言語：'),
-                      //                   SizedBox(
-                      //                     width: context
-                      //                         .appTheme.spacing.marginMedium,
-                      //                   ),
-                      //                   Icon(Icons.check, color: Colors.green),
-                      //                   Text('日本語'),
-                      //                   SizedBox(
-                      //                     width: context
-                      //                         .appTheme.spacing.marginMedium,
-                      //                   ),
-                      //                   Icon(Icons.check, color: Colors.green),
-                      //                   Text('中国語'),
-                      //                   SizedBox(
-                      //                     width: context
-                      //                         .appTheme.spacing.marginMedium,
-                      //                   ),
-                      //                   Icon(Icons.check, color: Colors.green),
-                      //                   Text('タイ語')
-                      //                 ],
-                      //               ),
-                      //               Row(
-                      //                 children: [
-                      //                   Text(
-                      //                       '住所：メモ：2020年9月は、スタンダードルーム１泊20,000円で宿泊できました。'),
-                      //                 ],
-                      //               ),
-                      //             ],
-                      //           ),
-                      //           ElevatedButton(
-                      //               onPressed: () {},
-                      //               child: Text('このホテルを工程表へ追加')),
-                      //         ],
-                      //       ),
-                      //     );
-                      //   },
-                      //   separatorBuilder: (BuildContext context, int index) {
-                      //     return SizedBox(
-                      //       height: context.appTheme.spacing.marginMedium,
-                      //     );
-                      //   },
-                      // ),
+                      ListView.separated(
+                        itemCount: value.data!.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Container(
+                            padding: EdgeInsets.all(
+                                context.appTheme.spacing.marginMedium),
+                            decoration: index % 2 != 0
+                                ? null
+                                : BoxDecoration(
+                                    color: context.appTheme.primaryColor
+                                        .withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(
+                                      context
+                                          .appTheme.spacing.borderRadiusMedium,
+                                    ),
+                                  ),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                ColumnSeparated(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  separatorBuilder:
+                                      (BuildContext context, int index) {
+                                    return SizedBox(
+                                      height:
+                                          context.appTheme.spacing.marginSmall,
+                                    );
+                                  },
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Text(value.data?[index]
+                                                .accommodationName ??
+                                            ''),
+                                        SizedBox(
+                                          width: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          color: context.appTheme.primaryColor,
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          color: context.appTheme.primaryColor,
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          color: context.appTheme.primaryColor,
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          color: context.appTheme.primaryColor,
+                                        ),
+                                        Icon(
+                                          Icons.star,
+                                          color: context.appTheme.primaryColor,
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                            '住所：${value.data?[index].address}'),
+                                        SizedBox(
+                                          width: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        Text(
+                                            'TEL：${value.data?[index].phoneNumber}'),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        const Text('対応言語：'),
+                                        SizedBox(
+                                          width: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        const Icon(Icons.check,
+                                            color: Colors.green),
+                                        Text(value.data?[index].isJapanese ==
+                                                true
+                                            ? '日本語'
+                                            : ''),
+                                        SizedBox(
+                                          width: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        const Icon(Icons.check,
+                                            color: Colors.green),
+                                        Text(
+                                            value.data?[index].isChinese == true
+                                                ? '中国語'
+                                                : ''),
+                                        SizedBox(
+                                          width: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        Icon(Icons.check, color: Colors.green),
+                                        Text('タイ語')
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        Text(
+                                            'メモ：${value.data?[index].accommodationMemo}'),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                ElevatedButton(
+                                    onPressed: () {},
+                                    child: Text('このホテルを工程表へ追加')),
+                              ],
+                            ),
+                          );
+                        },
+                        separatorBuilder: (BuildContext context, int index) {
+                          return SizedBox(
+                            height: context.appTheme.spacing.marginMedium,
+                          );
+                        },
+                      ),
                     ],
                   ),
                 ),
               ),
-              // Row(
-              //   crossAxisAlignment: CrossAxisAlignment.end,
-              //   mainAxisAlignment: MainAxisAlignment.end,
-              //   children: [
-              //     ValueListenableListener(
-              //       valueListenable:
-              //           context.read<HotelSearchModel>().submitHotelSearchData,
-              //       onListen: () {
-              //         final value = context
-              //             .read<HotelSearchModel>()
-              //             .submitHotelSearchData
-              //             .value;
-              //         if (value.hasData) {
-              //           logger.d('loading');
-              //           snackBarWidget(
-              //             message: '正常に保存されました',
-              //             prefixIcon: const Icon(Icons.check_circle,
-              //                 color: Colors.white),
-              //           );
-              //         }
-
-              //         if (value.hasError) {
-              //           snackBarWidget(
-              //             message: '保存できませんでした。 もう一度試してください。',
-              //             backgroundColor: Colors.red,
-              //             prefixIcon:
-              //                 const Icon(Icons.error, color: Colors.white),
-              //           );
-              //         }
-              //       },
-              //       child: ValueListenableBuilder(
-              //           valueListenable: context
-              //               .watch<HotelSearchModel>()
-              //               .submitHotelSearchData,
-              //           builder: (context, value, child) {
-              //             return ReactiveFormConsumer(
-              //               builder: (context, form, _) {
-              //                 return ElevatedButton(
-              //                     onPressed: !value.loading && form.valid
-              //                         ? () => context
-              //                             .read<HotelSearchModel>()
-              //                             .submitHotelSearch(form)
-              //                         : null,
-              //                     child: WithLoadingButton(
-              //                       isLoading: value.loading,
-              //                       child: Text('保存する'),
-              //                     ));
-              //               },
-              //             );
-              //           }),
-              //     )
-              //   ],
-              // )
             ],
           ),
         );

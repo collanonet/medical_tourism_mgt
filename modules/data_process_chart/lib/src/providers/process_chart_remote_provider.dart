@@ -81,42 +81,36 @@ class ProcessChartRemoteProvider {
         .postDetailFacilityDropIn(detailDropInFacilityRequest);
   }
 
-  Future<DetainHotelRegistationResponse> getDetainlHotelRegistation() async {
-    return await apiService.getDetainlHotelRegistation();
+  Future<List<DetainHotelRegistationResponse>> getDetainlHotelRegistation({
+    String? accommodationName,
+  //  List<String>? accommodationType,
+    String? area,
+    bool? usageRecord,
+    bool? isJapanese,
+    bool? isEnglish,
+    bool? isVietnamese,
+    bool? isThai,
+    bool? isKorean,
+    bool? isChinese,
+  }) async {
+    return await apiService.getDetainlHotelRegistation(
+      accommodationName: accommodationName,
+     // accommodationType: accommodationType,
+      area: area,
+      usageRecord: usageRecord,
+      isJapanese: isJapanese,
+      isEnglish: isEnglish,
+      isThai: isThai,
+      isKorean: isKorean,
+      isVietnamese: isVietnamese,
+      isChinese: isChinese,
+    );
   }
 
   Future<DetainHotelRegistationResponse> postDetailHotelRegistation(
       DetainHotelRegistationRequest detainHotelRegistationRequest) async {
     return await apiService
         .postDetailHotelRegistation(detainHotelRegistationRequest);
-  }
-
-  Future<DetailHotelSearchResponse> getDetailHotelSearch({
-   // required String id,
-    String? accommodationName,
-    String? accommodationType,
-    String? area,
-    bool? usageRecord,
-    bool? japanese,
-    bool? english,
-    bool? vietnamese,
-    bool? thai,
-    bool? korean,
-    bool? chinese,
-  }) async {
-    return await apiService.getDetailHotelSearch(
-     // id: id,
-      accommodationName: accommodationName,
-      accommodationType: accommodationType,
-      area: area,
-      usageRecord: usageRecord,
-      japanese: japanese,
-      chinese: chinese,
-      english: english,
-      korean: korean,
-      vietnamese: vietnamese,
-      thai: thai,
-    );
   }
 
   Future<DetailHotelSearchResponse> postDetialHotelSearch(

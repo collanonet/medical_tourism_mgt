@@ -44,25 +44,23 @@ abstract class ProcessChartRepository {
       DetailDropInFacilityRequest detailDropInFacilityRequest,
     );
 
-    Future<DetainHotelRegistationResponse> getDetainlHotelRegistation();
+    Future<List<DetainHotelRegistationResponse>> getDetainlHotelRegistation(
+      { String? accommodationName,
+   // List<String>? accommodationType,
+    String? area,
+    bool? usageRecord,
+    bool? isJapanese,
+    bool? isEnglish,
+    bool? isVietnamese,
+    bool? isThai,
+    bool? isKorean,
+    bool? isChinese,
+      }
+    );
 
     Future<DetainHotelRegistationResponse> postDetailHotelRegistation(
       DetainHotelRegistationRequest detainHotelRegistationRequest,
     );
-
-    Future<DetailHotelSearchResponse> getDetailHotelSearch({
-    //required String id,
-    String? accommodationName,
-    String? accommodationType,
-    String? area,
-    bool? usageRecord,
-    bool? japanese,
-    bool? english,
-    bool? vietnamese,
-    bool? thai,
-    bool? korean,
-    bool? chinese,
-  });
 
     Future<DetailHotelSearchResponse> postDetialHotelSearch(
       DetailHotelSearchRequest detailHotelSearchRequest,

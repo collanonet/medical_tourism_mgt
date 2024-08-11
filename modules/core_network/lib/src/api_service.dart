@@ -769,27 +769,23 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_HOTEL_REGISTATION)
-  Future<DetainHotelRegistationResponse> getDetainlHotelRegistation();
+  Future<List<DetainHotelRegistationResponse>> getDetainlHotelRegistation({
+    @Query('accommodationName') String? accommodationName,
+  //  @Query('accommodationType') List<String>? accommodationType,
+    @Query('usageRecord') bool? usageRecord,
+    @Query('area') String? area,
+    @Query('isJapanese') bool? isJapanese,
+    @Query('isChinese') bool? isChinese,
+    @Query('isVietnamese') bool? isVietnamese,
+    @Query('isEnglish') bool? isEnglish,
+    @Query('isKorean') bool? isKorean,
+    @Query('isThai') bool? isThai,
+  });
 
   @POST(EndPoints.DETAIL_HOTEL_REGISTATION)
   Future<DetainHotelRegistationResponse> postDetailHotelRegistation(
     @Body() DetainHotelRegistationRequest detainHotelRegistationRequest,
   );
-
-  @GET('${EndPoints.DETAIL_HOTEL_SEARCH}/{id}')
-  Future<DetailHotelSearchResponse> getDetailHotelSearch({
-   // @Path('id') String id,
-    @Query('accommodationName') String? accommodationName,
-    @Query('accommodationType') String? accommodationType,
-    @Query('usageRecord') bool? usageRecord,
-    @Query('area') String? area,
-    @Query('japanese') bool? japanese,
-    @Query('chinese') bool? chinese,
-    @Query('vietnamese') bool? vietnamese,
-    @Query('english') bool? english,
-    @Query('korean') bool? korean,
-    @Query('thai') bool? thai,
-  });
 
   @POST(EndPoints.DETAIL_HOTEL_SEARCH)
   Future<DetailHotelSearchResponse> postDetialHotelSearch(
