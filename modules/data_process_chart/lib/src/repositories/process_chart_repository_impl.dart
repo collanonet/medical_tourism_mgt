@@ -99,7 +99,7 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   @override
   Future<List<DetainHotelRegistationResponse>> getDetainlHotelRegistation({
       String? accommodationName,
-   // List<String>? accommodationType,
+  //  List<String>? accommodationType,
     String? area,
     bool? usageRecord,
     bool? isJapanese,
@@ -111,7 +111,7 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }) {
     return remote.getDetainlHotelRegistation(
         accommodationName: accommodationName,
-    //  accommodationType: accommodationType,
+   //   accommodationType: accommodationType,
       area: area,
       usageRecord: usageRecord,
       isJapanese: isJapanese,

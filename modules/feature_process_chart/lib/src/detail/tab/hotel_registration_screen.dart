@@ -5,6 +5,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -20,8 +21,10 @@ class HotelRegistrationScreen extends StatefulWidget {
 }
 
 class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
+  double _rating = 0;
   @override
   Widget build(BuildContext context) {
+    final formGroup = (ReactiveForm.of(context) as FormGroup);
     return ValueListenableBuilder(
       valueListenable:
           context.watch<HotelRegistrationModel>().submitHotelRegisterData,
@@ -208,26 +211,27 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                               ),
                               Row(
                                 children: [
-                                  Icon(
-                                    Icons.star,
-                                    color: context.appTheme.primaryColor,
-                                  ),
-                                  Icon(
-                                    Icons.star,
-                                    color: context.appTheme.primaryColor,
-                                  ),
-                                  Icon(
-                                    Icons.star,
-                                    color: context.appTheme.primaryColor,
-                                  ),
-                                  Icon(
-                                    Icons.star,
-                                    color: context.appTheme.primaryColor,
-                                  ),
-                                  Icon(
-                                    Icons.star,
-                                    color: context.appTheme.primaryColor,
-                                  ),
+                                  RatingBar.builder(
+                                    initialRating: _rating,
+                                    minRating: 1,
+                                    allowHalfRating: true,
+                                    unratedColor: Colors.blue[100],
+                                    itemCount: 5,
+                                    itemSize: 30,
+                                    itemPadding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0),
+                                    itemBuilder: (context, _) => const Icon(
+                                      Icons.star,
+                                      color: Colors.blue,
+                                    ),
+                                    onRatingUpdate: (rating) {
+                                      setState(() {
+                                        _rating = rating;
+                                        formGroup.control('evaluation').value = _rating;
+                                      });
+                                    },
+                                    updateOnDrag: true,
+                                  )
                                 ],
                               )
                             ],

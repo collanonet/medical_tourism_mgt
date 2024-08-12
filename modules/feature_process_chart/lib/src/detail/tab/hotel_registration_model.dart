@@ -11,11 +11,12 @@ class HotelRegistrationModel {
   final ProcessChartRepository processChartRepository;
 
   ValueNotifier<AsyncData<List<DetainHotelRegistationResponse>>>
-      hotelregisterData = ValueNotifier(const AsyncData());
+      hotelregisterData = ValueNotifier(
+          const AsyncData<List<DetainHotelRegistationResponse>>(data: []));
 
   Future<void> fetchHotelregister({
-     String? accommodationName,
-   // List<String>? accommodationType,
+    String? accommodationName,
+    //List<String>? accommodationType,
     String? area,
     bool? usageRecord,
     bool? isJapanese,
@@ -24,25 +25,23 @@ class HotelRegistrationModel {
     bool? isThai,
     bool? isKorean,
     bool? isChinese,
-  }) async{
-    try{
-      hotelregisterData.value = const  AsyncData(loading: true);
+  }) async {
+    try {
+      hotelregisterData.value = const AsyncData(loading: true);
       final response = await processChartRepository.getDetainlHotelRegistation(
-       accommodationName: accommodationName,
-    //  accommodationType: accommodationType,
-      area: area,
-      usageRecord: usageRecord,
-      isJapanese: isJapanese,
-      isEnglish: isEnglish,
-      isThai: isThai,
-      isKorean: isKorean,
-      isVietnamese: isVietnamese,
-      isChinese: isChinese,
+        accommodationName: accommodationName,
+      // accommodationType: accommodationType,
+        area: area,
+        usageRecord: usageRecord,
+        isJapanese: isJapanese,
+        isEnglish: isEnglish,
+        isThai: isThai,
+        isKorean: isKorean,
+        isVietnamese: isVietnamese,
+        isChinese: isChinese,
       );
-
-      //insertHotelSearch(formGroup, response);
       hotelregisterData.value = AsyncData(data: response);
-    }catch(e){
+    } catch (e) {
       logger.d(e);
       hotelregisterData.value = AsyncData(error: e);
     }
@@ -56,7 +55,7 @@ class HotelRegistrationModel {
       final response = await processChartRepository
           .postDetailHotelRegistation(DetainHotelRegistationRequest(
         accommodationName: formGroup.control('accommodationName').value,
-         address: formGroup.control('address').value,
+        address: formGroup.control('address').value,
         contactPersonName: formGroup.control('contactPersonName').value,
         phoneNumber: formGroup.control('phoneNumber').value,
         ratePerNight: formGroup.control('ratePerNight').value,

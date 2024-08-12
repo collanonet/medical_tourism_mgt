@@ -3,6 +3,7 @@ import 'package:core_ui/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -21,29 +22,30 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
   Widget build(BuildContext context) {
     final formGroup = (ReactiveForm.of(context) as FormGroup);
 
-    return ValueListenableBuilder(
-      valueListenable: context.read<HotelRegistrationModel>().hotelregisterData,
-      builder: (context, value, child) {
-        return Skeletonizer(
-          enabled: value.loading,
-          child: ColumnSeparated(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            separatorBuilder: (BuildContext context, int index) {
-              return SizedBox(
-                height: context.appTheme.spacing.marginMedium,
-              );
-            },
-            children: [
-              Expanded(
-                child: SingleChildScrollView(
-                  child: ColumnSeparated(
-                    separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(
-                        height: context.appTheme.spacing.marginMedium,
-                      );
-                    },
-                    children: [
-                      Container(
+    return ColumnSeparated(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      separatorBuilder: (BuildContext context, int index) {
+        return SizedBox(
+          height: context.appTheme.spacing.marginMedium,
+        );
+      },
+      children: [
+        Expanded(
+          child: SingleChildScrollView(
+            child: ColumnSeparated(
+              separatorBuilder: (BuildContext context, int index) {
+                return SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                );
+              },
+              children: [
+                ValueListenableBuilder(
+                  valueListenable:
+                      context.watch<HotelRegistrationModel>().hotelregisterData,
+                  builder: (context, value, _) {
+                    return Skeletonizer(
+                      enabled: value.loading,
+                      child: Container(
                         padding: EdgeInsets.all(
                             context.appTheme.spacing.marginMedium),
                         decoration: BoxDecoration(
@@ -225,12 +227,29 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                   builder: (context, form, _) {
                                     return ElevatedButton(
                                       onPressed: () {
+                                        // List<String> type = [];
+                                        // formGroup
+                                        //     .control('accommodationType')
+                                        //     .value = type;
+                                        // if (formGroup.control('hotel').value ==
+                                        //     true) {
+                                        //   type.add('民泊');
+                                        // }
+                                        // if (formGroup
+                                        //         .control('apartment_hotel')
+                                        //         .value ==
+                                        //     true) {
+                                        //   type.add('アパートメントホテル');
+                                        // }
                                         context
                                             .read<HotelRegistrationModel>()
                                             .fetchHotelregister(
                                               accommodationName: formGroup
                                                   .control('accommodationName')
                                                   .value,
+                                              // accommodationType: formGroup
+                                              //     .control('accommodationType')
+                                              //     .value,
                                               usageRecord: formGroup
                                                   .control('usageRecord')
                                                   .value,
@@ -257,7 +276,7 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                                   .value,
                                             );
                                       },
-                                      child: Text('検索する'),
+                                      child: const Text('検索する'),
                                     );
                                   },
                                 ),
@@ -266,22 +285,31 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                           ],
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            '検索結果',
-                            style: context.textTheme.titleMedium,
-                          ),
-                          ElevatedButton(
-                              onPressed: () {}, child: Text('新規登録する')),
-                        ],
-                      ),
-                      ListView.separated(
-                        itemCount: value.data!.length,
+                    );
+                  },
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '検索結果',
+                      style: context.textTheme.titleMedium,
+                    ),
+                    ElevatedButton(onPressed: () {}, child: Text('新規登録する')),
+                  ],
+                ),
+                ValueListenableBuilder(
+                  valueListenable:
+                      context.watch<HotelRegistrationModel>().hotelregisterData,
+                  builder: (context, value, child) {
+                    return Skeletonizer(
+                      enabled: value.loading,
+                      child: ListView.separated(
+                        itemCount: value.data?.length ?? 0,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
+                          var rate = value.data?[index].evaluation;
                           return Container(
                             padding: EdgeInsets.all(
                                 context.appTheme.spacing.marginMedium),
@@ -317,26 +345,24 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                           width: context
                                               .appTheme.spacing.marginMedium,
                                         ),
-                                        Icon(
-                                          Icons.star,
-                                          color: context.appTheme.primaryColor,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: context.appTheme.primaryColor,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: context.appTheme.primaryColor,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: context.appTheme.primaryColor,
-                                        ),
-                                        Icon(
-                                          Icons.star,
-                                          color: context.appTheme.primaryColor,
-                                        ),
+                                        RatingBar.builder(
+                                          initialRating: rate?.toDouble() ?? 0,
+                                          minRating: 1,
+                                          allowHalfRating: true,
+                                          unratedColor: Colors.blue[100],
+                                          itemCount: 5,
+                                          itemSize: 30,
+                                          itemPadding:
+                                              const EdgeInsets.symmetric(
+                                                  horizontal: 4.0),
+                                          itemBuilder: (context, _) =>
+                                              const Icon(
+                                            Icons.star,
+                                            color: Colors.blue,
+                                          ),
+                                          onRatingUpdate: (rating) {},
+                                          updateOnDrag: false,
+                                        )
                                       ],
                                     ),
                                     Row(
@@ -403,14 +429,14 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                           );
                         },
                       ),
-                    ],
-                  ),
+                    );
+                  },
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
-        );
-      },
+        ),
+      ],
     );
   }
 }

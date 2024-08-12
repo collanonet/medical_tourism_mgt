@@ -46,7 +46,7 @@ abstract class ProcessChartRepository {
 
     Future<List<DetainHotelRegistationResponse>> getDetainlHotelRegistation(
       { String? accommodationName,
-   // List<String>? accommodationType,
+  //  List<String>? accommodationType,
     String? area,
     bool? usageRecord,
     bool? isJapanese,
