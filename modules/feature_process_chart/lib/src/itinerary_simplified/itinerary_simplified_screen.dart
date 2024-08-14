@@ -1,3 +1,4 @@
+import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
@@ -34,61 +35,11 @@ class _ItinerarySimpleVersionScreenState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Container(
-                        padding: const EdgeInsets.symmetric(horizontal: 30),
-                        width: MediaQuery.of(context).size.width,
-                        height: 200,
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10),
-                          border: Border.all(color: Colors.grey, width: 1),
-                          color: Colors.white,
-                        ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: 80,
-                              height: 80,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                border:
-                                Border.all(color: Colors.grey, width: 1),
-                                color: Colors.grey.withOpacity(0.3),
-                              ),
-                              child: const Center(
-                                child: Icon(
-                                  Icons.work,
-                                  size: 40,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 20),
-                            const Expanded(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '李明様向け　行程表',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.w600,
-                                        fontSize: 16),
-                                  ),
-                                  Text('2023/11/11〜2023/11/15')
-                                ],
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                      const SizedBox(height: 20),
-                      Container(
                         padding: EdgeInsets.all(20),
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
-                          color: Color.fromARGB(0, 152, 209, 248),
-                          border: Border.all(
-                              color: Colors.grey.withOpacity(0.5), width: 1),
+                          color: Color(0xffF0F3F5),
                         ),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +57,7 @@ class _ItinerarySimpleVersionScreenState
                                 final rows = formArray.controls
                                     .map((control) => control as FormGroup)
                                     .map(
-                                      (currentForm) {
+                                  (currentForm) {
                                     return ReactiveForm(
                                       formGroup: currentForm,
                                       child: Column(
@@ -120,8 +71,8 @@ class _ItinerarySimpleVersionScreenState
                                                   decoration: InputDecoration(
                                                     border: OutlineInputBorder(
                                                       borderRadius:
-                                                      BorderRadius.circular(
-                                                          10),
+                                                          BorderRadius.circular(
+                                                              10),
                                                       borderSide: BorderSide(
                                                           color: Colors.grey,
                                                           width: 1),
@@ -132,15 +83,15 @@ class _ItinerarySimpleVersionScreenState
                                               ),
                                               const SizedBox(width: 30),
                                               IntrinsicWidth(
-                                                stepWidth: 300,
+                                                stepWidth: 400,
                                                 child: ReactiveTextField(
                                                   formControlName:
-                                                  'Name_of_medical_institution',
+                                                      'Name_of_medical_institution',
                                                   decoration: InputDecoration(
                                                     border: OutlineInputBorder(
                                                       borderRadius:
-                                                      BorderRadius.circular(
-                                                          10),
+                                                          BorderRadius.circular(
+                                                              10),
                                                       borderSide: BorderSide(
                                                           color: Colors.grey,
                                                           width: 1),
@@ -159,81 +110,54 @@ class _ItinerarySimpleVersionScreenState
                                                 child: ReactiveDatePicker<
                                                     DateTime>(
                                                   formControlName:
-                                                  'dateAndTimeConsultaion',
+                                                      'dateAndTimeConsultaion',
                                                   firstDate: DateTime(1900),
                                                   lastDate: DateTime.now(),
                                                   builder: (BuildContext
-                                                  context,
+                                                          context,
                                                       ReactiveDatePickerDelegate<
-                                                          dynamic>
-                                                      picker,
+                                                              dynamic>
+                                                          picker,
                                                       Widget? child) {
-                                                    return Stack(
-                                                      children: [
-                                                        ReactiveTextField<
-                                                            DateTime>(
-                                                          decoration:
+                                                    return ReactiveTextField<
+                                                        DateTime>(
+                                                      decoration:
                                                           InputDecoration(
                                                               border:
-                                                              OutlineInputBorder(
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    10),
-                                                                borderSide:
-                                                                BorderSide(
-                                                                    color: Colors
-                                                                        .grey,
-                                                                    width: 1),
-                                                              )),
-                                                          formControlName:
+                                                                  OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        borderSide: BorderSide(
+                                                            color: Colors.grey,
+                                                            width: 1),
+                                                      )),
+                                                      formControlName:
                                                           'dateAndTimeConsultaion',
-                                                          readOnly: true,
-                                                          onTap: (value) =>
-                                                              picker
-                                                                  .showPicker(),
-                                                          valueAccessor:
+                                                      readOnly: true,
+                                                      onTap: (value) =>
+                                                          picker.showPicker(),
+                                                      valueAccessor:
                                                           DateTimeValueAccessor(),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                          const EdgeInsets
-                                                              .only(top: 6),
-                                                          child: Align(
-                                                            alignment: Alignment
-                                                                .centerRight,
-                                                            child: IconButton(
-                                                              onPressed: () =>
-                                                                  picker
-                                                                      .showPicker(),
-                                                              icon: const Icon(
-                                                                  Icons
-                                                                      .calendar_month,
-                                                                  color: Colors
-                                                                      .blue),
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ],
                                                     );
                                                   },
                                                 ),
                                               ),
                                               const SizedBox(width: 20),
                                               IntrinsicWidth(
-                                                stepWidth: 180,
+                                                stepWidth: 150,
                                                 child: ReactiveTextField(
                                                   formControlName: 'startTime',
                                                   decoration: InputDecoration(
                                                     border: OutlineInputBorder(
                                                       borderRadius:
-                                                      BorderRadius.circular(
-                                                          10),
+                                                          BorderRadius.circular(
+                                                              10),
                                                       borderSide:
-                                                      const BorderSide(
-                                                          color:
-                                                          Colors.grey,
-                                                          width: 1),
+                                                          const BorderSide(
+                                                              color:
+                                                                  Colors.grey,
+                                                              width: 1),
                                                     ),
                                                     label: Text('開始時間'),
                                                   ),
@@ -241,19 +165,19 @@ class _ItinerarySimpleVersionScreenState
                                               ),
                                               const SizedBox(width: 20),
                                               IntrinsicWidth(
-                                                stepWidth: 180,
+                                                stepWidth: 150,
                                                 child: ReactiveTextField(
                                                   formControlName: 'endTime',
                                                   decoration: InputDecoration(
                                                     border: OutlineInputBorder(
                                                       borderRadius:
-                                                      BorderRadius.circular(
-                                                          10),
+                                                          BorderRadius.circular(
+                                                              10),
                                                       borderSide:
-                                                      const BorderSide(
-                                                          color:
-                                                          Colors.grey,
-                                                          width: 1),
+                                                          const BorderSide(
+                                                              color:
+                                                                  Colors.grey,
+                                                              width: 1),
                                                     ),
                                                     label: Text('終了時間（予定）'),
                                                   ),
@@ -262,96 +186,83 @@ class _ItinerarySimpleVersionScreenState
                                             ],
                                           ),
                                           const SizedBox(height: 20),
-                                          Row(
-                                            children: [
-                                              IntrinsicWidth(
-                                                stepWidth: 700,
-                                                child: ReactiveTextField(
-                                                  formControlName:
-                                                  'Health_Check_Package',
-                                                  decoration: InputDecoration(
-                                                    border: OutlineInputBorder(
-                                                      borderRadius:
-                                                      BorderRadius.circular(
-                                                          10),
-                                                      borderSide:
-                                                      const BorderSide(
-                                                          color:
-                                                          Colors.grey,
-                                                          width: 1),
-                                                    ),
-                                                    label: Text('健康診断パッケージ'),
-                                                  ),
-                                                ),
-                                              )
-                                            ],
+                                          ReactiveTextField(
+                                            formControlName:
+                                                'Health_Check_Package',
+                                            decoration: InputDecoration(
+                                              border: OutlineInputBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                borderSide: const BorderSide(
+                                                    color: Colors.grey,
+                                                    width: 1),
+                                              ),
+                                              label: Text('健康診断パッケージ'),
+                                            ),
                                           ),
                                           const SizedBox(height: 20),
                                           Row(
                                             mainAxisAlignment:
-                                            MainAxisAlignment.start,
+                                                MainAxisAlignment.start,
                                             children: [
                                               IntrinsicWidth(
-                                                stepWidth: 200,
+                                                stepWidth: 250,
                                                 child: ReactiveTextField(
                                                   formControlName: 'optionName',
                                                   decoration: InputDecoration(
                                                     border: OutlineInputBorder(
                                                       borderRadius:
-                                                      BorderRadius.circular(
-                                                          10),
+                                                          BorderRadius.circular(
+                                                              10),
                                                       borderSide:
-                                                      const BorderSide(
-                                                          color:
-                                                          Colors.grey,
-                                                          width: 1),
+                                                          const BorderSide(
+                                                              color:
+                                                                  Colors.grey,
+                                                              width: 1),
                                                     ),
                                                     label: Text('オプション名'),
                                                   ),
                                                 ),
                                               ),
                                               const SizedBox(width: 20),
-                                              IntrinsicWidth(
-                                                stepWidth: 200,
-                                                child: Column(
-                                                  crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                                  children: [
-                                                    Text('健診日'),
-                                                    Row(
-                                                      children: [
-                                                        Expanded(
-                                                          child:
-                                                          ReactiveRadioListTile(
-                                                            contentPadding:
-                                                            EdgeInsets.zero,
-                                                            controlAffinity:
-                                                            ListTileControlAffinity
-                                                                .leading,
-                                                            formControlName:
-                                                            'checkupDate',
-                                                            value: true,
-                                                            title: Text('同日'),
-                                                          ),
+                                              Column(
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.start,
+                                                children: [
+                                                  Text('健診日'),
+                                                  Row(
+                                                    children: [
+                                                      IntrinsicWidth(
+                                                        child:
+                                                            ReactiveRadioListTile(
+                                                          contentPadding:
+                                                              EdgeInsets.zero,
+                                                          controlAffinity:
+                                                              ListTileControlAffinity
+                                                                  .leading,
+                                                          formControlName:
+                                                              'checkupDate',
+                                                          value: true,
+                                                          title: Text('同日'),
                                                         ),
-                                                        Expanded(
-                                                          child:
-                                                          ReactiveRadioListTile(
-                                                            contentPadding:
-                                                            EdgeInsets.zero,
-                                                            controlAffinity:
-                                                            ListTileControlAffinity
-                                                                .leading,
-                                                            formControlName:
-                                                            'checkupDate',
-                                                            value: false,
-                                                            title: Text('別日'),
-                                                          ),
-                                                        )
-                                                      ],
-                                                    ),
-                                                  ],
-                                                ),
+                                                      ),
+                                                      IntrinsicWidth(
+                                                        child:
+                                                            ReactiveRadioListTile(
+                                                          contentPadding:
+                                                              EdgeInsets.zero,
+                                                          controlAffinity:
+                                                              ListTileControlAffinity
+                                                                  .leading,
+                                                          formControlName:
+                                                              'checkupDate',
+                                                          value: false,
+                                                          title: Text('別日'),
+                                                        ),
+                                                      )
+                                                    ],
+                                                  ),
+                                                ],
                                               ),
                                               const SizedBox(width: 20),
                                               IntrinsicWidth(
@@ -362,77 +273,49 @@ class _ItinerarySimpleVersionScreenState
                                                   firstDate: DateTime(1900),
                                                   lastDate: DateTime.now(),
                                                   builder: (BuildContext
-                                                  context,
+                                                          context,
                                                       ReactiveDatePickerDelegate<
-                                                          dynamic>
-                                                      picker,
+                                                              dynamic>
+                                                          picker,
                                                       Widget? child) {
-                                                    return Stack(
-                                                      children: [
-                                                        ReactiveTextField<
-                                                            DateTime>(
-                                                          decoration:
+                                                    return ReactiveTextField<
+                                                        DateTime>(
+                                                      decoration:
                                                           InputDecoration(
                                                               border:
-                                                              OutlineInputBorder(
-                                                                borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                    10),
-                                                                borderSide:
-                                                                BorderSide(
-                                                                    color: Colors
-                                                                        .grey,
-                                                                    width: 1),
-                                                              )),
-                                                          formControlName:
-                                                          'date',
-                                                          readOnly: true,
-                                                          onTap: (value) =>
-                                                              picker
-                                                                  .showPicker(),
-                                                          valueAccessor:
+                                                                  OutlineInputBorder(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(10),
+                                                        borderSide: BorderSide(
+                                                            color: Colors.grey,
+                                                            width: 1),
+                                                      )),
+                                                      formControlName: 'date',
+                                                      readOnly: true,
+                                                      onTap: (value) =>
+                                                          picker.showPicker(),
+                                                      valueAccessor:
                                                           DateTimeValueAccessor(),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                          const EdgeInsets
-                                                              .only(top: 6),
-                                                          child: Align(
-                                                            alignment: Alignment
-                                                                .centerRight,
-                                                            child: IconButton(
-                                                              onPressed: () =>
-                                                                  picker
-                                                                      .showPicker(),
-                                                              icon: const Icon(
-                                                                  Icons
-                                                                      .calendar_month,
-                                                                  color: Colors
-                                                                      .blue),
-                                                            ),
-                                                          ),
-                                                        )
-                                                      ],
                                                     );
                                                   },
                                                 ),
                                               ),
                                               const SizedBox(width: 20),
                                               IntrinsicWidth(
-                                                stepWidth: 200,
+                                                stepWidth: 150,
                                                 child: ReactiveTextField(
                                                   formControlName: 'time',
                                                   decoration: InputDecoration(
                                                     border: OutlineInputBorder(
                                                       borderRadius:
-                                                      BorderRadius.circular(
-                                                          10),
+                                                          BorderRadius.circular(
+                                                              10),
                                                       borderSide:
-                                                      const BorderSide(
-                                                          color:
-                                                          Colors.grey,
-                                                          width: 1),
+                                                          const BorderSide(
+                                                              color:
+                                                                  Colors.grey,
+                                                              width: 1),
                                                     ),
                                                   ),
                                                 ),
@@ -454,26 +337,35 @@ class _ItinerarySimpleVersionScreenState
                                       formArray.add(FormGroup({
                                         'patienName': FormControl<String>(),
                                         'Name_of_medical_institution':
-                                        FormControl<String>(),
+                                            FormControl<String>(),
                                         'dateAndTimeConsultaion':
-                                        FormControl<DateTime>(),
+                                            FormControl<DateTime>(),
                                         'startTime': FormControl<String>(),
                                         'endTime': FormControl<String>(),
                                         'Health_Check_Package':
-                                        FormControl<String>(),
+                                            FormControl<String>(),
                                         'optionName': FormControl<String>(),
                                         'checkupDate': FormControl<bool>(),
                                         'date': FormControl<DateTime>(),
                                         'time': FormControl<String>(),
                                       }));
                                     },
-                                    child: const Padding(
+                                    child: Padding(
                                       padding:
-                                      EdgeInsets.symmetric(vertical: 20),
+                                          EdgeInsets.symmetric(vertical: 20),
                                       child: Row(
                                         children: [
-                                          Icon(Icons.add_box_rounded),
-                                          Text('オプションを追加'),
+                                          Icon(
+                                            Icons.add_box_rounded,
+                                            color:
+                                                context.appTheme.primaryColor,
+                                          ),
+                                          Text(
+                                            'オプションを追加',
+                                            style: TextStyle(
+                                                color: context
+                                                    .appTheme.primaryColor),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -496,7 +388,7 @@ class _ItinerarySimpleVersionScreenState
                       const SizedBox(height: 20),
                       ReactiveForm(
                         formGroup:
-                        form.control('prior_explanation') as FormGroup,
+                            form.control('prior_explanation') as FormGroup,
                         child: Column(
                           children: [
                             Row(
@@ -510,14 +402,14 @@ class _ItinerarySimpleVersionScreenState
                                       builder: (context, value, _) {
                                         return ReactiveDropdownFormField(
                                           formControlName:
-                                          'Explanation_of_various_tests',
+                                              'Explanation_of_various_tests',
                                           items: value
                                               .map((e) => DropdownMenuItem(
-                                            value: e.various,
-                                            child: Text(
-                                              e.various,
-                                            ),
-                                          ))
+                                                    value: e.various,
+                                                    child: Text(
+                                                      e.various,
+                                                    ),
+                                                  ))
                                               .toList(),
                                         );
                                       }),
@@ -535,7 +427,7 @@ class _ItinerarySimpleVersionScreenState
                               child: ReactiveTextField(
                                 maxLines: 3,
                                 formControlName:
-                                'Meals_before_and_on_the_day_of_the_examination',
+                                    'Meals_before_and_on_the_day_of_the_examination',
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
@@ -568,7 +460,7 @@ class _ItinerarySimpleVersionScreenState
                               child: ReactiveTextField(
                                 maxLines: 3,
                                 formControlName:
-                                'bring_on_the_day_of_your_health_check',
+                                    'bring_on_the_day_of_your_health_check',
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(10),
@@ -610,7 +502,7 @@ class _ItinerarySimpleVersionScreenState
                       const SizedBox(height: 20),
                       ReactiveForm(
                         formGroup:
-                        form.control('Interpreter_or_guide') as FormGroup,
+                            form.control('Interpreter_or_guide') as FormGroup,
                         child: Column(
                           children: [
                             Row(
@@ -619,7 +511,7 @@ class _ItinerarySimpleVersionScreenState
                                   stepWidth: 200,
                                   child: Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text('通訳者またはガイド'),
@@ -629,10 +521,10 @@ class _ItinerarySimpleVersionScreenState
                                             child: ReactiveRadioListTile(
                                               contentPadding: EdgeInsets.zero,
                                               controlAffinity:
-                                              ListTileControlAffinity
-                                                  .leading,
+                                                  ListTileControlAffinity
+                                                      .leading,
                                               formControlName:
-                                              'interpreter_or_guide',
+                                                  'interpreter_or_guide',
                                               value: true,
                                               title: Text('あり'),
                                             ),
@@ -641,10 +533,10 @@ class _ItinerarySimpleVersionScreenState
                                             child: ReactiveRadioListTile(
                                               contentPadding: EdgeInsets.zero,
                                               controlAffinity:
-                                              ListTileControlAffinity
-                                                  .leading,
+                                                  ListTileControlAffinity
+                                                      .leading,
                                               formControlName:
-                                              'interpreter_or_guide',
+                                                  'interpreter_or_guide',
                                               value: false,
                                               title: Text('なし'),
                                             ),
@@ -663,28 +555,28 @@ class _ItinerarySimpleVersionScreenState
                                     lastDate: DateTime.now(),
                                     builder: (BuildContext context,
                                         ReactiveDatePickerDelegate<dynamic>
-                                        picker,
+                                            picker,
                                         Widget? child) {
                                       return Stack(
                                         children: [
                                           ReactiveTextField<DateTime>(
                                             decoration: InputDecoration(
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
+                                              borderRadius:
                                                   BorderRadius.circular(10),
-                                                  borderSide: BorderSide(
-                                                      color: Colors.grey, width: 1),
-                                                )),
+                                              borderSide: BorderSide(
+                                                  color: Colors.grey, width: 1),
+                                            )),
                                             formControlName: 'date',
                                             readOnly: true,
                                             onTap: (value) =>
                                                 picker.showPicker(),
                                             valueAccessor:
-                                            DateTimeValueAccessor(),
+                                                DateTimeValueAccessor(),
                                           ),
                                           Padding(
                                             padding:
-                                            const EdgeInsets.only(top: 6),
+                                                const EdgeInsets.only(top: 6),
                                             child: Align(
                                               alignment: Alignment.centerRight,
                                               child: IconButton(
@@ -747,7 +639,7 @@ class _ItinerarySimpleVersionScreenState
                       const SizedBox(height: 20),
                       ReactiveForm(
                         formGroup:
-                        form.control('pick_up_and_drop_off') as FormGroup,
+                            form.control('pick_up_and_drop_off') as FormGroup,
                         child: Column(
                           children: [
                             Row(
@@ -756,7 +648,7 @@ class _ItinerarySimpleVersionScreenState
                                   stepWidth: 200,
                                   child: Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text('送迎'),
@@ -766,10 +658,10 @@ class _ItinerarySimpleVersionScreenState
                                             child: ReactiveRadioListTile(
                                               contentPadding: EdgeInsets.zero,
                                               controlAffinity:
-                                              ListTileControlAffinity
-                                                  .leading,
+                                                  ListTileControlAffinity
+                                                      .leading,
                                               formControlName:
-                                              'pick_up_and_drop_off_check',
+                                                  'pick_up_and_drop_off_check',
                                               value: true,
                                               title: Text('あり'),
                                             ),
@@ -778,10 +670,10 @@ class _ItinerarySimpleVersionScreenState
                                             child: ReactiveRadioListTile(
                                               contentPadding: EdgeInsets.zero,
                                               controlAffinity:
-                                              ListTileControlAffinity
-                                                  .leading,
+                                                  ListTileControlAffinity
+                                                      .leading,
                                               formControlName:
-                                              'pick_up_and_drop_off_check',
+                                                  'pick_up_and_drop_off_check',
                                               value: false,
                                               title: Text('なし'),
                                             ),
@@ -800,29 +692,29 @@ class _ItinerarySimpleVersionScreenState
                                     lastDate: DateTime.now(),
                                     builder: (BuildContext context,
                                         ReactiveDatePickerDelegate<dynamic>
-                                        picker,
+                                            picker,
                                         Widget? child) {
                                       return Stack(
                                         children: [
                                           ReactiveTextField<DateTime>(
                                             decoration: InputDecoration(
                                                 border: OutlineInputBorder(
-                                                  borderRadius:
+                                              borderRadius:
                                                   BorderRadius.circular(10),
-                                                  borderSide: BorderSide(
-                                                      color: Colors.grey, width: 1),
-                                                )),
+                                              borderSide: BorderSide(
+                                                  color: Colors.grey, width: 1),
+                                            )),
                                             formControlName:
-                                            'Pick_up_date_and_time',
+                                                'Pick_up_date_and_time',
                                             readOnly: true,
                                             onTap: (value) =>
                                                 picker.showPicker(),
                                             valueAccessor:
-                                            DateTimeValueAccessor(),
+                                                DateTimeValueAccessor(),
                                           ),
                                           Padding(
                                             padding:
-                                            const EdgeInsets.only(top: 6),
+                                                const EdgeInsets.only(top: 6),
                                             child: Align(
                                               alignment: Alignment.centerRight,
                                               child: IconButton(
@@ -877,7 +769,7 @@ class _ItinerarySimpleVersionScreenState
                                   stepWidth: 200,
                                   child: Column(
                                     crossAxisAlignment:
-                                    CrossAxisAlignment.start,
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
                                       Text('種別'),
@@ -887,8 +779,8 @@ class _ItinerarySimpleVersionScreenState
                                             child: ReactiveRadioListTile(
                                               contentPadding: EdgeInsets.zero,
                                               controlAffinity:
-                                              ListTileControlAffinity
-                                                  .leading,
+                                                  ListTileControlAffinity
+                                                      .leading,
                                               formControlName: 'type',
                                               value: true,
                                               title: Text('専用車'),
@@ -898,8 +790,8 @@ class _ItinerarySimpleVersionScreenState
                                             child: ReactiveRadioListTile(
                                               contentPadding: EdgeInsets.zero,
                                               controlAffinity:
-                                              ListTileControlAffinity
-                                                  .leading,
+                                                  ListTileControlAffinity
+                                                      .leading,
                                               formControlName: 'type',
                                               value: false,
                                               title: Text('タクシー利用'),
@@ -1004,7 +896,7 @@ class _ItinerarySimpleVersionScreenState
                 children: [
                   ValueListenableListener(
                     valueListenable:
-                    context.read<ItinerarySimpleVersionModel>().submit,
+                        context.read<ItinerarySimpleVersionModel>().submit,
                     onListen: () {
                       final value = context
                           .read<ItinerarySimpleVersionModel>()
@@ -1024,21 +916,21 @@ class _ItinerarySimpleVersionScreenState
                           message: '保存できませんでした。 もう一度試してください。',
                           backgroundColor: Colors.red,
                           prefixIcon:
-                          const Icon(Icons.error, color: Colors.white),
+                              const Icon(Icons.error, color: Colors.white),
                         );
                       }
                     },
                     child: ValueListenableBuilder(
                         valueListenable:
-                        context.watch<ItinerarySimpleVersionModel>().submit,
+                            context.watch<ItinerarySimpleVersionModel>().submit,
                         builder: (context, value, child) {
                           return ReactiveFormConsumer(
                             builder: (context, form, _) {
                               return ElevatedButton(
                                   onPressed: !value.loading && form.valid
                                       ? () => context
-                                      .read<ItinerarySimpleVersionModel>()
-                                      .submitData(form)
+                                          .read<ItinerarySimpleVersionModel>()
+                                          .submitData(form)
                                       : null,
                                   child: WithLoadingButton(
                                     isLoading: value.loading,
