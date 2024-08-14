@@ -16,20 +16,18 @@ class ItinerarySimplifiedPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  ReactiveFormConfig(
-          validationMessages: validationMessagesFilterPatient(context),
-          child: ReactiveFormBuilder(
-            form: () => itinerarySimplifiedForm()..markAllAsTouched(),
-            builder: (context, formGroup, child) {
-              return Provider(
-                create: (context) => GetIt.I<ItinerarySimplifiedModel>()..fetchData(formGroup),
-                child: const LayoutView(
-                  selectedIndex: 4,
-                  page:  ItinerarySimplifiedScreen(),
-                ),
-              );
-            },
-          ),
-        );
+    return ReactiveFormConfig(
+      validationMessages: validationMessagesFilterPatient(context),
+      child: ReactiveFormBuilder(
+        form: () => inerarySimpleVersionForm(),
+        builder: (context, formGroup, child) {
+          return Provider(
+            create: (context) =>
+            GetIt.I<ItinerarySimpleVersionModel>()..fetchData(formGroup),
+            child: const ItinerarySimpleVersionScreen(),
+          );
+        },
+      ),
+    );
   }
 }
