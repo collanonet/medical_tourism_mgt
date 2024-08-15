@@ -1,3 +1,4 @@
+import 'package:core_network/core_network.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup basicInfoForm({
@@ -203,6 +204,7 @@ FormGroup basicInfoForm({
                 'chatToolLink': FormControl<String>(),
               })
             ]),
+            'chatQrImage': FormControl<FileSelect>(),
             'passportNumber': FormControl<String?>(),
             'issueDate': FormControl<DateTime>(),
             'expirationDate': FormControl<DateTime>(),
