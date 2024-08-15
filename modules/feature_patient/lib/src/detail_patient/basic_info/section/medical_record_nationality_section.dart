@@ -1,6 +1,8 @@
+import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -128,7 +130,6 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                                     '携帯番号',
                                   ),
                                 ),
-
                                 inputFormatters: [
                                   FilteringTextInputFormatter.allow(
                                       RegExp(r'[0-9]')),
@@ -162,7 +163,8 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                                   (currentForm) => ReactiveForm(
                                     formGroup: currentForm,
                                     child: RowSeparated(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       separatorBuilder:
                                           (BuildContext context, int index) {
                                         return SizedBox(
@@ -266,36 +268,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                                 package: 'core_ui',
                               ),
                             ),
-                            Container(
-                              width: 250,
-                              height: 250,
-                              padding: EdgeInsets.all(
-                                  context.appTheme.spacing.marginMedium),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                    color: context.appTheme.primaryColor),
-                                borderRadius: BorderRadius.circular(context
-                                    .appTheme.spacing.borderRadiusMedium),
-                              ),
-                              child: ColumnSeparated(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                separatorBuilder:
-                                    (BuildContext context, int index) {
-                                  return SizedBox(
-                                    height:
-                                        context.appTheme.spacing.marginMedium,
-                                  );
-                                },
-                                children: [
-                                  Icon(Icons.copy_all_rounded),
-                                  Text('QRコードをここにドラッグ＆ドロップ'),
-                                  ElevatedButton(
-                                      onPressed: () {},
-                                      child: Text('またはファイルを選択する'))
-                                ],
-                              ),
-                            ),
+                            qRChatCompanion(formGroup, context),
                           ],
                         )
                       ],
@@ -304,5 +277,62 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                 ],
               ),
             ));
+  }
+
+  InkWell qRChatCompanion(FormGroup currentForm, BuildContext context) {
+    final file = currentForm.control('chatQrImage').value as FileSelect?;
+
+    return InkWell(
+      onTap: () {
+        imagePicker().then((value) {
+          currentForm.control('chatQrImage').value = value;
+        });
+      },
+      child: Container(
+        width: 250,
+        height: 250,
+        padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
+        decoration: BoxDecoration(
+          border: Border.all(color: context.appTheme.primaryColor),
+          borderRadius: BorderRadius.circular(
+              context.appTheme.spacing.borderRadiusMedium),
+        ),
+        child: file != null && file.file != null
+            ? Image.memory(
+                file.file!,
+                fit: BoxFit.fill,
+              )
+            : file != null && file.url != null
+                ? Avatar.network(
+                    file.url,
+                    placeholder: const AssetImage(
+                      Images.logoMadical,
+                      package: 'core_ui',
+                    ),
+                    shape: BoxShape.rectangle,
+                    customSize: const Size(200, 200),
+                  )
+                : ColumnSeparated(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      );
+                    },
+                    children: [
+                      Icon(Icons.copy_all_rounded),
+                      Text('QRコードをここにドラッグ＆ドロップ'),
+                      ElevatedButton(
+                          onPressed: () {
+                            imagePicker().then((value) {
+                              currentForm.control('chatQrImage').value = value;
+                            });
+                          },
+                          child: Text('またはファイルを選択する'))
+                    ],
+                  ),
+      ),
+    );
   }
 }

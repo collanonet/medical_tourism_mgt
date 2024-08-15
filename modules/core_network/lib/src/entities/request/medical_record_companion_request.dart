@@ -30,6 +30,7 @@ class MedicalRecordCompanionRequest {
   DateTime? issueDate;
   DateTime? expirationDate;
   String? visaType;
+  String? chatQrImage;
   String? medicalRecord;
 
   MedicalRecordCompanionRequest({
@@ -60,6 +61,7 @@ class MedicalRecordCompanionRequest {
     this.expirationDate,
     this.visaType,
     this.medicalRecord,
+    this.chatQrImage,
   });
 
   factory MedicalRecordCompanionRequest.fromJson(Map<String, dynamic> json) {

@@ -20,6 +20,7 @@ PatientNationality _$PatientNationalityFromJson(Map<String, dynamic> json) =>
           .toList(),
       chatQr:
           (json['chatQr'] as List<dynamic>?)?.map((e) => e as String?).toList(),
+      chatQrImage: json['chatQrImage'] as String?,
       patient: json['patient'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
@@ -36,6 +37,7 @@ Map<String, dynamic> _$PatientNationalityToJson(PatientNationality instance) =>
       'email': instance.email,
       'chatToolLink': instance.chatToolLink,
       'chatQr': instance.chatQr,
+      'chatQrImage': instance.chatQrImage,
       'patient': instance.patient,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),

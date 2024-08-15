@@ -1001,6 +1001,7 @@ class _MedicalRecordCompanionSectionState
                           'chatToolLink': FormControl<String>(),
                         })
                       ]),
+                      'chatQrImage': FormControl<FileSelect>(),
                       'passportNumber': FormControl<String?>(),
                       'issueDate': FormControl<DateTime>(),
                       'expirationDate': FormControl<DateTime>(),

@@ -15,6 +15,7 @@ class PatientNationality {
   String? email;
   List<String?>? chatToolLink;
   List<String?>? chatQr;
+  String? chatQrImage;
   String? patient;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -29,6 +30,7 @@ class PatientNationality {
     this.email,
     this.chatToolLink,
     this.chatQr,
+    this.chatQrImage,
     this.patient,
     required this.createdAt,
     required this.updatedAt,

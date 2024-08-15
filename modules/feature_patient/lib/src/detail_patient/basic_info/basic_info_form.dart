@@ -111,11 +111,7 @@ FormGroup basicInfoForm({
               'chatToolLink': FormControl<String>(),
             })
           ]),
-          'chatQr': FormArray([
-            FormGroup({
-              'chatQr': FormControl<String>(),
-            })
-          ]),
+          'chatQrImage': FormControl<FileSelect>(),
           'patient': FormControl<String?>(),
         }),
         'MEDICAL_RECORD_BUDGETS': FormGroup({

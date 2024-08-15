@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_patient/data_patient.dart';
@@ -333,24 +335,7 @@ class BasicInformationModel {
       );
     }
 
-    final chatQr = formGroup.control('chatQr') as FormArray;
-    chatQr.clear();
-    data.chatQr?.forEach((element) {
-      chatQr.add(
-        FormGroup({
-          'chatQr': FormControl<String>(value: element ?? ''),
-        }),
-      );
-    });
-
-    if (data.chatQr == null || data.chatQr!.isEmpty) {
-      chatQr.clear();
-      chatQr.add(
-        FormGroup({
-          'chatQr': FormControl<String>(),
-        }),
-      );
-    }
+    formGroup.control('chatQrImage').value = FileSelect(url: data.chatQrImage);
   }
 
   // post PATIENT_NATIONALITIES
@@ -385,16 +370,22 @@ class BasicInformationModel {
       }
     }
 
-    List<String?> chatQr = [];
-    if (form.control('chatQr').value != null) {
-      for (var i = 0;
-          i < (form.control('chatQr').value as List<dynamic>).length;
-          i++) {
-        if ((form.control('chatQr').value as List<dynamic>)[i]['chatQr'] !=
-            null) {
-          chatQr.add(
-              (form.control('chatQr').value as List<dynamic>)[i]['chatQr']);
+    String? file;
+    if (form.control('chatQrImage').value != null) {
+      FileSelect docFile = form.control('chatQrImage').value;
+      if (docFile.file != null) {
+        try {
+          String base64Image = base64Encode(docFile.file!);
+          FileResponse fileData = await patientRepository.uploadFileBase64(
+            base64Image,
+            docFile.filename!,
+          );
+          file = fileData.filename;
+        } catch (e) {
+          logger.e(e);
         }
+      } else {
+        file = docFile.url;
       }
     }
 
@@ -406,7 +397,7 @@ class BasicInformationModel {
       mobileNumber: form.control('mobileNumber').value,
       email: form.control('email').value,
       chatToolLink: chatToolLink.isEmpty ? null : chatToolLink,
-      chatQr: chatQr.isEmpty ? null : chatQr,
+      chatQrImage: file,
       patient: patientData.value.requireData.id,
     );
 
@@ -1079,6 +1070,9 @@ class BasicInformationModel {
                 ],
               ),
               'chatToolLink': chatToolLink,
+              'chatQrImage': FormControl<FileSelect?>(
+                value: FileSelect(url: element.chatQrImage),
+              ),
               'passportNumber': FormControl<String?>(
                 value: element.passportNumber,
               ),
@@ -1522,6 +1516,25 @@ class BasicInformationModel {
           }
         }
 
+        String? file;
+        if (element['chatQrImage'] != null) {
+          FileSelect docFile = element['chatQrImage'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              file = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            file = docFile.url;
+          }
+        }
+
         MedicalRecordCompanionRequest request = MedicalRecordCompanionRequest(
           leader: element['leader'],
           remarks: element['remarks'],
@@ -1550,6 +1563,7 @@ class BasicInformationModel {
           mobileNumber: element['mobileNumber'],
           email: element['email'],
           chatToolLink: chatToolLink,
+          chatQrImage: file,
           passportNumber: element['passportNumber'],
           issueDate: element['issueDate'],
           expirationDate: element['expirationDate'],
