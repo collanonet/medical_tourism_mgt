@@ -976,7 +976,8 @@ class BasicInformationModel {
         for (var element in data) {
           FormArray chatToolLink = FormArray([]);
           chatToolLink.clear();
-          if (element.chatToolLink != null) {
+          if (element.chatToolLink != null &&
+              element.chatToolLink!.isNotEmpty) {
             for (var i = 0; i < element.chatToolLink!.length; i++) {
               chatToolLink.add(
                 FormGroup({
@@ -986,9 +987,7 @@ class BasicInformationModel {
                 }),
               );
             }
-          }
-
-          if (element.chatToolLink == null || element.chatToolLink!.isEmpty) {
+          } else {
             chatToolLink.add(
               FormGroup({
                 'chatToolLink': FormControl<String>(),
@@ -1070,7 +1069,7 @@ class BasicInformationModel {
                 ],
               ),
               'chatToolLink': chatToolLink,
-              'chatQrImage': FormControl<FileSelect?>(
+              'chatQrImage': FormControl<FileSelect>(
                 value: FileSelect(url: element.chatQrImage),
               ),
               'passportNumber': FormControl<String?>(
