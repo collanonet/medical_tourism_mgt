@@ -10,48 +10,50 @@ class ItineraryModel {
   ItineraryModel({required this.processChartRepository});
   final ProcessChartRepository processChartRepository;
 
-  ValueNotifier<AsyncData<DetailItineraryResponse>> itinerraryData =
-      ValueNotifier(const AsyncData());
+  ValueNotifier<AsyncData<List<DetailItineraryResponse>>> itinerraryData =
+      ValueNotifier(const AsyncData<List<DetailItineraryResponse>>(data: []));
   Future<void> fetchItinerary(FormGroup formGroup) async {
     try {
       itinerraryData.value = const AsyncData(loading: true);
       final response = await processChartRepository.getDetailItinerary();
-      insertItinerary(formGroup, response);
+      // insertItinerary(formGroup, response);
+      itinerraryData.value = AsyncData(data: response);
+      logger.d(response.toList());
     } catch (e) {
       logger.d(e);
     }
   }
 
   void insertItinerary(FormGroup formGroup, DetailItineraryResponse? data) {
-    var patientName = formGroup.control('patientNames') as FormArray;
-    for (var element in data!.patientNames!) {
+    var patientName = formGroup.control('patient') as FormArray;
+    for (var element in data!.patient!) {
       patientName.add(
         FormGroup(
           {
-            'patientName':
-                FormControl<String>(value: element.patientName), // 患者名
+            'patientName': FormControl<String>(value: ''), // 患者名
           },
         ),
       );
     }
-    formGroup.control('tour_name').value = data.tourName;
-    formGroup.control('Number_of_people').value = data.numberOfPeople;
+    formGroup.control('tourName').value = data.tourName;
+    formGroup.control('peopleNumber').value = data.peopleNumber;
     formGroup.control('group').value = data.group;
-    formGroup.control('type').value = data.type;
+    formGroup.control('classification').value = data.classification;
 
     var day = formGroup.control('day') as FormArray;
-    for (var element in data.days!) {
-      for (var elementg in element.group!) {
+    for (var element in data.day!) {
+      for (var elementg in element.groups!) {
         var task = formGroup.control('task') as FormArray;
-        for (var elementk in elementg.tasks!) {
+        for (var elementk in elementg.task!) {
           task.add(
             FormGroup(
               {
-                'place_name': FormControl<String>(value: elementk.placeName),
-                'Time_from': FormControl<String>(value: elementk.timeFrom),
-                'Time_to': FormControl<String>(value: elementk.timeTo),
-                'traffic': FormControl<String>(value: elementk.traffic),
-                'Itinerary': FormControl<String>(value: elementk.itinerary),
+                'placeName': FormControl<String>(value: elementk.placeName),
+                'timeFrom': FormControl<String>(value: elementk.timeFrom),
+                'timeTo': FormControl<String>(value: elementk.timeTo),
+                'transportation':
+                    FormControl<String>(value: elementk.transportation),
+                'itinerary': FormControl<String>(value: elementk.itinerary),
               },
             ),
           );
@@ -68,11 +70,8 @@ class ItineraryModel {
         FormGroup(
           {
             'date': FormControl<String>(value: element.date), // 日付
-            'morning': FormControl<bool>(value: element.morning),
-            'noon': FormControl<bool>(value: element.noon = true),
-            'evening': FormControl<bool>(value: element.evening),
-            'place_name': FormControl<String>(value: element.placeName), // 地名
-            'Accommodation': FormControl<String>(value: element.accommodation),
+            'placeName': FormControl<String>(value: element.placeName), // 地名
+            'placeStay': FormControl<String>(value: element.accommodation),
             'group': day,
           },
         ),
@@ -86,15 +85,18 @@ class ItineraryModel {
     try {
       submitData.value = const AsyncData(loading: true);
       final response = await processChartRepository.postDetailItinerary(
-          DetailIneraryRequest(
-              tourName: formGroup.control('tour_name').value,
-              numberOfPeople: formGroup.control('Number_of_people').value,
-              group: formGroup.control('group').value,
-              type: formGroup.control('type').value,
-              patientName: formGroup.control('patientNames').value,
-              listday: formGroup.control('day').value));
+        DetailIneraryRequest(
+          tourName: formGroup.control('tourName').value,
+          peopleNumber: formGroup.control('peopleNumber').value,
+          group: formGroup.control('group').value,
+          classification: formGroup.control('classification').value,
+          patient: formGroup.control('patient').value,
+          day: formGroup.control('day').value,
+        ),
+      );
       submitData.value = AsyncData(data: response);
-      itinerraryData.value = AsyncData(data: response);
+      itinerraryData.value =
+          AsyncData(data: itinerraryData.value.data!..add(response));
     } catch (e) {
       logger.d(e);
       submitData.value = AsyncData(error: e);

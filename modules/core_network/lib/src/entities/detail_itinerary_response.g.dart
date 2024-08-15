@@ -10,14 +10,13 @@ DetailItineraryResponse _$DetailItineraryResponseFromJson(
         Map<String, dynamic> json) =>
     DetailItineraryResponse(
       id: json['_id'] as String?,
-      patientNames: (json['patientNames'] as List<dynamic>?)
-          ?.map((e) => ItineraryPatient.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      patient:
+          (json['patient'] as List<dynamic>?)?.map((e) => e as String).toList(),
       tourName: json['tourName'] as String?,
-      numberOfPeople: json['numberOfPeople'] as String?,
-      type: json['type'] as String?,
-      group: json['group'] as String?,
-      days: (json['days'] as List<dynamic>?)
+      peopleNumber: (json['peopleNumber'] as num?)?.toInt(),
+      classification: json['classification'] as String?,
+      group: (json['group'] as num?)?.toInt(),
+      day: (json['day'] as List<dynamic>?)
           ?.map((e) => Day.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -26,10 +25,10 @@ Map<String, dynamic> _$DetailItineraryResponseToJson(
         DetailItineraryResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
-      'patientNames': instance.patientNames,
+      'patient': instance.patient,
       'tourName': instance.tourName,
-      'numberOfPeople': instance.numberOfPeople,
+      'peopleNumber': instance.peopleNumber,
       'group': instance.group,
-      'type': instance.type,
-      'days': instance.days,
+      'classification': instance.classification,
+      'day': instance.day,
     };

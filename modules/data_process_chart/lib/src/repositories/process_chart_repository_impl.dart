@@ -246,7 +246,7 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<DetailItineraryResponse> getDetailItinerary() {
+  Future<List<DetailItineraryResponse>> getDetailItinerary() {
     return remote.getDetailitinerary();
   }
 

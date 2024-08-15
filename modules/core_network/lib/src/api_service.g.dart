@@ -4475,20 +4475,20 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<DetailItineraryResponse> getDetailitinerary() async {
+  Future<List<DetailItineraryResponse>> getDetailitinerary() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DetailItineraryResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<DetailItineraryResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/detail-itinerary',
+              '/tour',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4497,7 +4497,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetailItineraryResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) =>
+            DetailItineraryResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
@@ -4516,7 +4519,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-itinerary',
+              '/tour',
               queryParameters: queryParameters,
               data: _data,
             )

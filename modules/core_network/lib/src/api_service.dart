@@ -874,7 +874,7 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_ITINERARY)
-  Future<DetailItineraryResponse> getDetailitinerary();
+  Future<List<DetailItineraryResponse>> getDetailitinerary();
 
   @POST(EndPoints.DETAIL_ITINERARY)
   Future<DetailItineraryResponse> postDetailItinerary(

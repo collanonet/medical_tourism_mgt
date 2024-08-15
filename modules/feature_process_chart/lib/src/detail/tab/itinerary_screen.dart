@@ -36,7 +36,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                   },
                   children: [
                     ReactiveFormArray(
-                      formArrayName: 'patientNames',
+                      formArrayName: 'patient',
                       builder: (context, formArray, child) {
                         final rows = formArray.controls
                             .map((control) => control as FormGroup)
@@ -106,7 +106,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                       children: [
                         Expanded(
                           child: ReactiveTextField(
-                            formControlName: 'tour_name',
+                            formControlName: 'tourName',
                             decoration: InputDecoration(
                               label: Text('ツアー名'),
                             ),
@@ -118,7 +118,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                       children: [
                         Expanded(
                           child: ReactiveTextField(
-                            formControlName: 'Number_of_people',
+                            formControlName: 'peopleNumber',
                             decoration: InputDecoration(
                               label: Text('人数'),
                             ),
@@ -141,7 +141,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                         Expanded(
                           flex: 4,
                           child: ReactiveTextField(
-                            formControlName: 'type',
+                            formControlName: 'classification',
                             decoration: InputDecoration(
                               label: Text('種別'),
                             ),
@@ -292,7 +292,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                                   Expanded(
                                                     child: ReactiveTextField(
                                                       formControlName:
-                                                          'place_name',
+                                                          'placeName',
                                                       decoration:
                                                           const InputDecoration(
                                                         label: Text(
@@ -308,7 +308,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                                   Expanded(
                                                     child: ReactiveTextField(
                                                       formControlName:
-                                                          'Accommodation',
+                                                          'placeStay',
                                                       decoration:
                                                           const InputDecoration(
                                                         label: Text(
@@ -326,7 +326,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                           ),
                                         ),
                                         ReactiveFormArray(
-                                          formArrayName: 'group',
+                                          formArrayName: 'groups',
                                           builder: (context, formArray, child) {
                                             final rows =
                                                 formArray.controls
@@ -413,7 +413,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                                                               Expanded(
                                                                                 flex: 2,
                                                                                 child: ReactiveTextField(
-                                                                                  formControlName: 'place_name',
+                                                                                  formControlName: 'placeName',
                                                                                   decoration: const InputDecoration(
                                                                                     label: Text(
                                                                                       '地名',
@@ -426,7 +426,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                                                               ),
                                                                               Expanded(
                                                                                 child: ReactiveTextField(
-                                                                                  formControlName: 'Time_from',
+                                                                                  formControlName: 'timeFrom',
                                                                                   decoration: const InputDecoration(
                                                                                     label: Text(
                                                                                       '時刻（自）',
@@ -439,7 +439,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                                                               ),
                                                                               Expanded(
                                                                                 child: ReactiveTextField(
-                                                                                  formControlName: 'Time_to',
+                                                                                  formControlName: 'timeTo',
                                                                                   decoration: const InputDecoration(
                                                                                     label: Text(
                                                                                       '時刻（至）',
@@ -452,7 +452,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                                                               ),
                                                                               Expanded(
                                                                                 child: ReactiveTextField(
-                                                                                  formControlName: 'traffic',
+                                                                                  formControlName: 'transportation',
                                                                                   decoration: const InputDecoration(
                                                                                     label: Text(
                                                                                       '交通',
@@ -466,7 +466,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                                                               Expanded(
                                                                                 flex: 4,
                                                                                 child: ReactiveTextField(
-                                                                                  formControlName: 'Itinerary',
+                                                                                  formControlName: 'itinerary',
                                                                                   decoration: const InputDecoration(
                                                                                     label: Text(
                                                                                       '行程',
@@ -507,11 +507,11 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                                                             formArray.add(
                                                                           FormGroup(
                                                                             {
-                                                                              'place_name': FormControl<String>(value: ''), // 地名
-                                                                              'Time_from': FormControl<String>(value: ''), // 時刻（自）
-                                                                              'Time_to': FormControl<String>(value: ''), // 時刻（至）
-                                                                              'traffic': FormControl<String>(value: ''), // 交通
-                                                                              'Itinerary': FormControl<String>(value: ''), // 行程
+                                                                              'placeName': FormControl<String>(value: ''), // 地名
+                                                                              'timeFrom': FormControl<String>(value: ''), // 時刻（自）
+                                                                              'timeTo': FormControl<String>(value: ''), // 時刻（至）
+                                                                              'transportation': FormControl<String>(value: ''), // 交通
+                                                                              'itinerary': FormControl<String>(value: ''), // 行程
                                                                             },
                                                                           ),
                                                                         ),
@@ -573,33 +573,33 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                                   onTap: () => formArray.add(
                                                     FormGroup(
                                                       {
-                                                        'group_number':
-                                                            FormControl<String>(
-                                                                value:
-                                                                    ''), // グループ番号
+                                                        'groups': FormControl<
+                                                                String>(
+                                                            value:
+                                                                ''), // グループ番号
                                                         'task': FormArray(
                                                           [
                                                             FormGroup(
                                                               {
-                                                                'place_name':
+                                                                'placeName':
                                                                     FormControl<
                                                                             String>(
                                                                         value:
                                                                             ''), // 地名
-                                                                'Time_from':
-                                                                    FormControl<
-                                                                            String>(
-                                                                        value:
-                                                                            ''), // 時刻（自）
-                                                                'Time_to': FormControl<
+                                                                'timeFrom': FormControl<
+                                                                        String>(
+                                                                    value:
+                                                                        ''), // 時刻（自）
+                                                                'timeTo': FormControl<
                                                                         String>(
                                                                     value:
                                                                         ''), // 時刻（至）
-                                                                'traffic': FormControl<
-                                                                        String>(
-                                                                    value:
-                                                                        ''), // 交通
-                                                                'Itinerary':
+                                                                'transportation':
+                                                                    FormControl<
+                                                                            String>(
+                                                                        value:
+                                                                            ''), // 交通
+                                                                'itinerary':
                                                                     FormControl<
                                                                             String>(
                                                                         value:
@@ -692,11 +692,11 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                         'noon': FormControl<bool>(),
                                         'evening':
                                             FormControl<bool>(), // 食事 // 食事
-                                        'place_name': FormControl<String>(
+                                        'placeName': FormControl<String>(
                                             value: ''), // 地名
-                                        'Accommodation': FormControl<String>(
+                                        'placeStay': FormControl<String>(
                                             value: ''), // 宿泊場所
-                                        'group': FormArray(
+                                        'groups': FormArray(
                                           // グループ
                                           [
                                             FormGroup(
@@ -708,22 +708,21 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                                   [
                                                     FormGroup(
                                                       {
-                                                        'place_name':
+                                                        'placeName':
                                                             FormControl<String>(
                                                                 value:
                                                                     ''), // 地名
-                                                        'Time_from':
-                                                            FormControl<String>(
-                                                                value:
-                                                                    ''), // 時刻（自）
-                                                        'Time_to': FormControl<
+                                                        'timeFrom': FormControl<
+                                                                String>(
+                                                            value: ''), // 時刻（自）
+                                                        'timeTo': FormControl<
                                                                 String>(
                                                             value: ''), // 時刻（至）
-                                                        'traffic':
+                                                        'transportation':
                                                             FormControl<String>(
                                                                 value:
                                                                     ''), // 交通
-                                                        'Itinerary':
+                                                        'itinerary':
                                                             FormControl<String>(
                                                                 value:
                                                                     ''), // 行程

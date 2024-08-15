@@ -114,7 +114,7 @@ abstract class ProcessChartRepository {
       DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest,
     );
 
-    Future<DetailItineraryResponse> getDetailItinerary();
+    Future<List<DetailItineraryResponse>> getDetailItinerary();
 
     Future<DetailItineraryResponse> postDetailItinerary(
       DetailIneraryRequest detailIneraryRequest,
