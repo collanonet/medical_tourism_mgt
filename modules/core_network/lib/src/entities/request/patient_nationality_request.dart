@@ -11,7 +11,6 @@ class PatientNationalityRequest {
   String? mobileNumber;
   String? email;
   List<String?>? chatToolLink;
-  List<String?>? chatQr;
   String? chatQrImage;
   String? patient;
 
@@ -23,7 +22,6 @@ class PatientNationalityRequest {
     this.mobileNumber,
     this.email,
     this.chatToolLink,
-    this.chatQr,
     this.patient,
     this.chatQrImage,
   });
