@@ -11,7 +11,7 @@ class DetailIneraryRequest {
   String? peopleNumber;
   String? group;
   String? classification;
-  List<DayList>? day;
+  List<Day>? day;
 
   DetailIneraryRequest({
     this.patient,

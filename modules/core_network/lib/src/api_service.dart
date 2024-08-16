@@ -761,7 +761,7 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_FACILITY_DROP_IN_FACILITY)
-  Future<DetailDropInFacilityResponse> getDetailFacilityDropIn();
+  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn();
 
   @POST(EndPoints.DETAIL_FACILITY_DROP_IN_FACILITY)
   Future<DetailDropInFacilityResponse> postDetailFacilityDropIn(
@@ -874,7 +874,14 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_ITINERARY)
-  Future<List<DetailItineraryResponse>> getDetailitinerary();
+  Future<List<DetailItineraryResponse>> getDetailitinerary(
+    {
+      @Query('tourName') String? tourName,
+      @Query('classification') String? classification,
+      @Query('dateFrom') DateTime? dateFrom,
+      @Query('dateTo') DateTime? dateTo,
+    }
+  );
 
   @POST(EndPoints.DETAIL_ITINERARY)
   Future<DetailItineraryResponse> postDetailItinerary(

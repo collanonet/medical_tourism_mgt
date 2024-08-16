@@ -38,7 +38,7 @@ abstract class ProcessChartRepository {
       DetailFacilityHotelRequest detailFacilityHotelRequest,
     );
 
-    Future<DetailDropInFacilityResponse> getDetailFacilityDropIn();
+    Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn();
 
     Future<DetailDropInFacilityResponse> postDetailFacilityDropIn(
       DetailDropInFacilityRequest detailDropInFacilityRequest,
@@ -114,7 +114,7 @@ abstract class ProcessChartRepository {
       DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest,
     );
 
-    Future<List<DetailItineraryResponse>> getDetailItinerary();
+    Future<List<DetailItineraryResponse>> getDetailItinerary({String? tourName,String? classification,DateTime? dateFrom,DateTime? dateTo});
 
     Future<DetailItineraryResponse> postDetailItinerary(
       DetailIneraryRequest detailIneraryRequest,

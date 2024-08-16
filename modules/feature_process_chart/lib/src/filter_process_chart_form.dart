@@ -5,23 +5,14 @@ import 'package:reactive_forms/reactive_forms.dart';
 FormGroup formFilterPatient() =>
  FormGroup(
       {
-        'patientName': FormControl<String>(
+        'tourName': FormControl<String>(
           value: '',
         ),
-        'visa': FormControl<String>(
+        'classification': FormControl<String>(
           value: '',
         ),
-        'report': FormControl<String>(
-          value: '',
-        ),
-        'subjects_withdrawal': FormControl<String>(
-          value: '',
-        ),
-        'refinement_date': FormControl<String>(
-          value: '',
-        ),
-        'period_from': FormControl<DateTime>(),
-        'period_to': FormControl<DateTime>(),
+        'dateFrom': FormControl<DateTime>(),
+        'dateTo': FormControl<DateTime>(),
       },
     );
 

@@ -75,7 +75,7 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<DetailDropInFacilityResponse> getDetailFacilityDropIn() {
+  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn() {
     return remote.getDetailFacilityDropIn();
   }
 
@@ -246,8 +246,13 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<List<DetailItineraryResponse>> getDetailItinerary() {
-    return remote.getDetailitinerary();
+  Future<List<DetailItineraryResponse>> getDetailItinerary({String? tourName,String? classification,DateTime? dateFrom,DateTime? dateTo}) {
+    return remote.getDetailitinerary(
+      tourName: tourName,
+      classification: classification,
+      dateFrom: dateFrom,
+      dateTo: dateTo,
+    );
   }
 
   @override

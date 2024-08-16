@@ -6,13 +6,13 @@ part 'detail_facility_drop_in_facility_response.g.dart';
 class DetailDropInFacilityResponse {
   @JsonKey(name: '_id')
   final String id;
-  String? personInChargeOfArrangements;
-  List<Facility>? facilities;
+  String? arrangePerson;
+  List<Facility>? places;
 
   DetailDropInFacilityResponse({
     required this.id,
-     this.personInChargeOfArrangements,
-     this.facilities,
+     this.arrangePerson,
+     this.places,
   });
 
   factory DetailDropInFacilityResponse.fromJson(Map<String,dynamic> json){

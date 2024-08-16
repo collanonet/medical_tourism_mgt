@@ -2,31 +2,23 @@ import 'package:json_annotation/json_annotation.dart';
 part 'detail_facility_hotel_request.g.dart';
 @JsonSerializable()
 class DetailFacilityHotelRequest {
-  String? personInChargeOfArrangements;
-  String? nameOfFacility;
-  String? location;
-  String? personInChargeName;
-  String? telephoneNumber;
+  String? arrangePerson;
+  String? accommodationName;
+  String? address;
+  String? contactPersonName;
+  String? phoneNumber;
   String? remarks;
-  String? foreignLanguageStaff;
-  bool? japanese;
-  bool? chinese;
-  bool? vietnamese;
-  bool? english;
+  List<String>? foreignLanguageStaff;
   bool? others;
 
   DetailFacilityHotelRequest({
-     this.personInChargeOfArrangements,
-     this.nameOfFacility,
-     this.location,
-     this.personInChargeName,
-     this.telephoneNumber,
+     this.arrangePerson,
+     this.accommodationName,
+     this.address,
+     this.contactPersonName,
+     this.phoneNumber,
      this.remarks,
      this.foreignLanguageStaff,
-     this.japanese,
-     this.chinese,
-     this.vietnamese,
-     this.english,
      this.others
   });
 

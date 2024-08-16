@@ -2,19 +2,19 @@ import 'package:json_annotation/json_annotation.dart';
 part 'detail_inerary_day.g.dart';
 
 @JsonSerializable()
-class DayList {
-  List<Day>? day;
+// class DayList {
+//   List<Day>? day;
 
-  DayList({this.day});
+//   DayList({this.day});
 
-  factory DayList.fromJson(Map<String, dynamic> json) {
-    return _$DayListFromJson(json);
-  }
+//   factory DayList.fromJson(Map<String, dynamic> json) {
+//     return _$DayListFromJson(json);
+//   }
 
-  Map<String, dynamic> toJson() {
-    return _$DayListToJson(this);
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     return _$DayListToJson(this);
+//   }
+// }
 
 @JsonSerializable()
 class Day {

@@ -152,9 +152,9 @@ class EndPoints {
       '/itinerary-simple-interpretor-or-guide';
   static const ITINERARY_SIMPLE_TRANSFER_INPUT =
       '/itinerary-simple-transfer-input';
-  static const DETAIL_FACILITY_HOSPITAL = '/detail-facility-hospital';
+  static const DETAIL_FACILITY_HOSPITAL = '/facility';
   static const DETAIL_FACILITY_DROP_IN_FACILITY =
-      '/detail-facility-drop-in-facility';
+      '/stopover-facilities';
   static const DETAIL_HOTEL_REGISTATION = '/hotel';
   static const DETAIL_HOTEL_SEARCH = '/hotel';
   static const DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER =

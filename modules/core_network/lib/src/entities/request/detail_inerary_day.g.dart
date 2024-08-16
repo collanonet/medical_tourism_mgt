@@ -6,16 +6,6 @@ part of 'detail_inerary_day.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-DayList _$DayListFromJson(Map<String, dynamic> json) => DayList(
-      day: (json['day'] as List<dynamic>?)
-          ?.map((e) => Day.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$DayListToJson(DayList instance) => <String, dynamic>{
-      'day': instance.day,
-    };
-
 Day _$DayFromJson(Map<String, dynamic> json) => Day(
       date: json['date'] as String? ?? '',
       morning: json['morning'] as bool?,

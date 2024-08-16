@@ -4,12 +4,12 @@ part 'detail_facility_drop_in_facility_request.g.dart';
 
 @JsonSerializable()
 class DetailDropInFacilityRequest {
-  String personInChargeOfArrangements;
-  List<Facility> facilities;
+  String? arrangePerson;
+  List<Facility>? places;
 
   DetailDropInFacilityRequest({
-    required this.personInChargeOfArrangements,
-    required this.facilities,
+     this.arrangePerson,
+     this.places,
   });
 
   factory DetailDropInFacilityRequest.fromJson(Map<String,dynamic> json){
@@ -24,16 +24,16 @@ class DetailDropInFacilityRequest {
 
 @JsonSerializable()
 class Facility {
-  String name;
-  String location;
-  String personInChargeName;
-  String telephoneNumber;
+  String? accommodationName;
+  String? address;
+  String? contctPersonName;
+  String? phoneNumber;
 
   Facility({
-    required this.name,
-    required this.location,
-    required this.personInChargeName,
-    required this.telephoneNumber,
+     this.accommodationName,
+     this.address,
+     this.contctPersonName,
+     this.phoneNumber,
   });
 
   factory Facility.fromJson(Map<String,dynamic> json){

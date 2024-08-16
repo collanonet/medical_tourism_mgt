@@ -83,6 +83,16 @@ class ItineraryModel {
       ValueNotifier(const AsyncData());
   Future<void> submitItinerary(FormGroup formGroup) async {
     try {
+      // List<Day> days =  [];
+      // await formGroup.control('').value.forEach((element){
+      //   days.add(
+      //     Day(
+      //       date: element['data'],
+      //       accommodation: element['accommodation'],
+      //       evening: 
+      //     )
+      //   );
+      // });
       submitData.value = const AsyncData(loading: true);
       final response = await processChartRepository.postDetailItinerary(
         DetailIneraryRequest(
