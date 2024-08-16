@@ -258,7 +258,7 @@ class _PatientScreenForAgentState extends State<PatientScreenForAgent> {
                                       CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '${item?.firstNameRomanized ?? item?.firstName ?? '-'} ${item?.middleNameRomanized ?? item?.middleName ?? '-'} ${item?.familyNameRomanized ?? item?.familyName ?? '-'}',
+                                      '${item?.firstNameRomanized ?? '-'} ${item?.middleNameRomanized ?? '-'} ${item?.familyNameRomanized ?? '-'}',
                                       style: TextStyle(
                                         color: context.appTheme.primaryColor,
                                         fontFamily: 'NotoSansJP',

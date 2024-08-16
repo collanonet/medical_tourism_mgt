@@ -30,6 +30,7 @@ class ChatScreen extends StatelessWidget {
                           physics: const AlwaysScrollableScrollPhysics(),
                           itemCount: model.patientData.data?.items.length ?? 0,
                           itemBuilder: (context, index) {
+                            var item = model.patientData.data?.items[index];
                             return Container(
                               decoration: BoxDecoration(
                                 color: index % 2 != 0
@@ -59,50 +60,34 @@ class ChatScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceAround,
                                   children: [
                                     Text(
-                                      model.patientData.data!.items[index]
-                                          .familyName!,
+                                      '${item?.firstNameRomanized ?? '-'} ${item?.middleNameRomanized ?? '-'} ${item?.familyNameRomanized ?? '-'}',
                                       style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          color: context.appTheme.primaryColor),
-                                    ),
-                                    Icon(
-                                      Icons.star,
-                                      color: Colors.orange,
-                                    ),
-                                    Spacer(),
-                                    Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: 4, vertical: 2),
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(4),
-                                        color: Colors.red,
+                                        color: context.appTheme.primaryColor,
+                                        fontFamily: 'NotoSansJP',
+                                        package: 'core_ui',
                                       ),
-                                      child: Text(
-                                        '出国報告書対象者',
-                                        style: TextStyle(color: Colors.white),
-                                      ),
-                                    )
+                                    ),
+                                    // Icon(
+                                    //   Icons.star,
+                                    //   color: Colors.orange,
+                                    // ),
+                                    // Spacer(),
+                                    // Container(
+                                    //   padding: const EdgeInsets.symmetric(
+                                    //       horizontal: 4, vertical: 2),
+                                    //   decoration: BoxDecoration(
+                                    //     borderRadius: BorderRadius.circular(4),
+                                    //     color: Colors.red,
+                                    //   ),
+                                    //   child: Text(
+                                    //     '出国報告書対象者',
+                                    //     style: TextStyle(color: Colors.white),
+                                    //   ),
+                                    // )
                                   ],
                                 ),
-                                subtitle: Row(
-                                  children: [
-                                    Text(
-                                      '刘 伟强',
-                                    ),
-                                    Text(
-                                      ' / ',
-                                    ),
-                                    Text(
-                                      '劉 偉強',
-                                    ),
-                                    Text(
-                                      ' / ',
-                                    ),
-                                    Text(
-                                      'リュウ　イーチャン',
-                                    ),
-                                  ],
-                                ),
+                                subtitle: Text(
+                                    '${item?.firstNameChineseOrVietnamese ?? '-'} ${item?.middleNameChineseOrVietnamese ?? '-'} ${item?.familyNameChineseOrVietnamese ?? '-'} / ${item?.firstNameJapaneseForChinese ?? '-'} ${item?.middleNameJapaneseForChinese ?? '-'} ${item?.familyNameJapaneseForChinese ?? '-'} / ${item?.firstNameJapaneseForNonChinese ?? '-'} ${item?.middleNameJapaneseForNonChinese ?? '-'} ${item?.familyNameJapaneseForNonChinese ?? '-'} '),
                               ),
                             );
                           }),

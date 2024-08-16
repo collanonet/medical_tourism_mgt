@@ -84,7 +84,7 @@ class BasicInformationModel {
             form.control('PATIENT_PASSPORTS') as FormGroup);
         await createUpdateMedicalRecords(form);
 
-        if (medicalRecord.value.hasData) {
+        if (medicalRecordId.value.hasData) {
           await createUpdateMedicalRecordHospital(form);
 
           await createUpdateMedicalRecordAgents(
@@ -514,6 +514,9 @@ class BasicInformationModel {
   ValueNotifier<AsyncData<MedicalRecord>> medicalRecord =
       ValueNotifier<AsyncData<MedicalRecord>>(const AsyncData());
 
+  ValueNotifier<AsyncData<String>> medicalRecordId =
+      ValueNotifier<AsyncData<String>>(const AsyncData());
+
   Future<void> getMedicalRecords({
     required String patientId,
     required FormGroup formGroup,
@@ -522,6 +525,7 @@ class BasicInformationModel {
 
     await patientRepository.medicalRecordsByPatient(patientId).then((value) {
       if (value.isNotEmpty) {
+        medicalRecordId.value = AsyncData(data: value.first.id);
         medicalRecord.value = AsyncData(data: value.first);
         insertMedicalRecord(data: value.first, formGroup: formGroup);
       } else {
@@ -531,36 +535,36 @@ class BasicInformationModel {
       logger.d(error);
       medicalRecord.value = AsyncData(error: error);
     });
-    if (medicalRecord.value.data != null) {
+    if (medicalRecordId.value.hasData) {
       getMedicalRecordHospitals(
-        medicalRecordId: medicalRecord.value.requireData.id,
+        medicalRecordId: medicalRecordId.value.requireData,
         formGroup: formGroup,
       );
       getMedicalRecordBudgets(
-        medicalRecordId: medicalRecord.value.requireData.id,
+        medicalRecordId: medicalRecordId.value.requireData,
         formGroup: formGroup,
       );
       getMedicalRecordAgents(
-        medicalRecordId: medicalRecord.value.requireData.id,
+        medicalRecordId: medicalRecordId.value.requireData,
         formGroup: formGroup,
       );
       getMedicalRecordReferrers(
-        medicalRecordId: medicalRecord.value.requireData.id,
+        medicalRecordId: medicalRecordId.value.requireData,
         formGroup: formGroup,
       );
 
       getMedicalRecordInterpreters(
-        medicalRecordId: medicalRecord.value.requireData.id,
+        medicalRecordId: medicalRecordId.value.requireData,
         formGroup: formGroup,
       );
 
       getMedicalRecordTravelGroups(
-        medicalRecordId: medicalRecord.value.requireData.id,
+        medicalRecordId: medicalRecordId.value.requireData,
         formGroup: formGroup,
       );
 
       getMedicalRecordCompanions(
-        medicalRecordId: medicalRecord.value.requireData.id,
+        medicalRecordId: medicalRecordId.value.requireData,
         formGroup: formGroup,
       );
     }
@@ -664,6 +668,7 @@ class BasicInformationModel {
     await patientRepository
         .postMedicalRecord(medicalRecordRequest)
         .then((value) {
+      medicalRecordId.value = AsyncData(data: value.id);
       medicalRecord.value = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);
@@ -729,7 +734,7 @@ class BasicInformationModel {
       company: form.control('company').value ?? '',
       nameInKanji: form.control('nameInKanji').value ?? '',
       nameInKana: form.control('nameInKana').value ?? '',
-      medicalRecord: medicalRecord.value.requireData.id,
+      medicalRecord: medicalRecordId.value.requireData,
     );
 
     if (form.control('id').value != null) {
@@ -813,7 +818,7 @@ class BasicInformationModel {
       company: form.control('company').value ?? '',
       nameInKanji: form.control('nameInKanji').value ?? '',
       nameInKana: form.control('nameInKana').value ?? '',
-      medicalRecord: medicalRecord.value.requireData.id,
+      medicalRecord: medicalRecordId.value.requireData,
     );
 
     if (form.control('id').value != null) {
@@ -914,7 +919,7 @@ class BasicInformationModel {
     MedicalRecordBudgetRequest request = MedicalRecordBudgetRequest(
       budget: form.control('budget').value ?? 0,
       remarks: form.control('remarks').value ?? '',
-      medicalRecord: medicalRecord.value.requireData.id,
+      medicalRecord: medicalRecordId.value.requireData,
     );
 
     if (form.control('id').value != null) {
@@ -1217,7 +1222,7 @@ class BasicInformationModel {
           MedicalRecordHospitalRequest request = MedicalRecordHospitalRequest(
             medicalCardNumber: element['medicalCardNumber'] ?? '',
             hospitalName: element['hospitalName'] ?? '',
-            medicalRecord: medicalRecord.value.requireData.id,
+            medicalRecord: medicalRecordId.value.requireData,
           );
 
           if (element['id'] != null) {
@@ -1394,7 +1399,7 @@ class BasicInformationModel {
       requiredOrUnnnecessary:
           control.control('requiredOrUnnnecessary').value == '要' ? true : false,
       interpreter: control.control('interpreter').value,
-      medicalRecord: medicalRecord.value.requireData.id,
+      medicalRecord: medicalRecordId.value.requireData,
     );
 
     if (control.control('id').value != null) {
@@ -1451,7 +1456,7 @@ class BasicInformationModel {
     }
   }
 
-  createUpdateMedicalRecordTravelGroups(FormGroup control) async {
+  Future<void> createUpdateMedicalRecordTravelGroups(FormGroup control) async {
     medicalRecordTravelGroups.value = AsyncData(loading: true);
     List<String?> type = [];
 
@@ -1479,7 +1484,7 @@ class BasicInformationModel {
     MedicalRecordTravelGroupRequest request = MedicalRecordTravelGroupRequest(
       toGroupLeader: control.control('toGroupLeader').value ?? false,
       travelGroup: type.isEmpty ? null : type,
-      medicalRecord: medicalRecord.value.requireData.id,
+      medicalRecord: medicalRecordId.value.requireData,
     );
     try {
       var result =
@@ -1567,7 +1572,7 @@ class BasicInformationModel {
           issueDate: element['issueDate'],
           expirationDate: element['expirationDate'],
           visaType: element['visaType'],
-          medicalRecord: medicalRecord.value.requireData.id,
+          medicalRecord: medicalRecordId.value.requireData,
         );
 
         if (element['id'] != null) {

@@ -18,8 +18,6 @@ PatientNationalityRequest _$PatientNationalityRequestFromJson(
       chatToolLink: (json['chatToolLink'] as List<dynamic>?)
           ?.map((e) => e as String?)
           .toList(),
-      chatQr:
-          (json['chatQr'] as List<dynamic>?)?.map((e) => e as String?).toList(),
       patient: json['patient'] as String?,
       chatQrImage: json['chatQrImage'] as String?,
     );
@@ -34,7 +32,6 @@ Map<String, dynamic> _$PatientNationalityRequestToJson(
       'mobileNumber': instance.mobileNumber,
       'email': instance.email,
       'chatToolLink': instance.chatToolLink,
-      'chatQr': instance.chatQr,
       'chatQrImage': instance.chatQrImage,
       'patient': instance.patient,
     };

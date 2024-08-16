@@ -185,7 +185,7 @@ class WebAppointmentScreen extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                '${item.patient.firstNameRomanized ?? item.patient.firstName ?? '-'} ${item.patient.middleNameRomanized ?? item.patient.middleName ?? '-'} ${item.patient.familyNameRomanized ?? item.patient.familyName ?? '-'}',
+                                                '${item.patient.firstNameRomanized ?? '-'} ${item.patient.middleNameRomanized  ?? '-'} ${item.patient.familyNameRomanized  ?? '-'}',
                                                 style: TextStyle(
                                                   color: context
                                                       .appTheme.primaryColor,

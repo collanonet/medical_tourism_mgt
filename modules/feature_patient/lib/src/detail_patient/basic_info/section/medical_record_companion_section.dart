@@ -1064,7 +1064,7 @@ class _MedicalRecordCompanionSectionState
                       package: 'core_ui',
                     ),
                     shape: BoxShape.rectangle,
-                    customSize: const Size(200, 200),
+                    customSize: const Size(250, 250),
                   )
                 : ColumnSeparated(
                     crossAxisAlignment: CrossAxisAlignment.center,

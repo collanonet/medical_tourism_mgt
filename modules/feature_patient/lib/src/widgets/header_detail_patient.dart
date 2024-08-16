@@ -137,7 +137,7 @@ class HeaderDetailPatient extends StatelessWidget {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xff00C6C6),
+                      backgroundColor: Color(0xffB76D0F),
                     ),
                     onPressed: () {},
                     child: const Text('受注'),
