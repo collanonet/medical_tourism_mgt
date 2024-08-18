@@ -140,8 +140,12 @@ class MedicalRecordUserAccountSection extends StatelessWidget {
                                                   ),
                                               onChanged: (i) {
                                                 formGroup
-                                                    .control('isClose')
+                                                    .control('isClosed')
                                                     .value = i;
+                                                context
+                                                    .read<
+                                                        BasicInformationModel>()
+                                                    .closePatientAccount();
                                               });
                                         }),
                                   );

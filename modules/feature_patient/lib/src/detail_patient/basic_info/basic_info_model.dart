@@ -143,7 +143,6 @@ class BasicInformationModel {
 
   void insertUserAccount({required User data, required FormGroup formGroup}) {
     formGroup.control('loginId').value = data.idNumber;
-    formGroup.control('loginPassword').value = '********';
     formGroup.control('isClosed').value = data.isClosed;
   }
 
