@@ -75,6 +75,9 @@ FormGroup basicInfoForm({
             value: '********',
             disabled: true,
           ),
+          'isClose': FormControl<bool>(
+            value: false,
+          ),
         }),
         'PATIENT_NAMES': FormGroup({
           'id': FormControl<String?>(),
@@ -105,7 +108,8 @@ FormGroup basicInfoForm({
           'email': FormControl<String>(
             validators: [
               Validators.email,
-            ],),
+            ],
+          ),
           'chatToolLink': FormArray([
             FormGroup({
               'chatToolLink': FormControl<String>(),
@@ -194,7 +198,8 @@ FormGroup basicInfoForm({
             'email': FormControl<String>(
               validators: [
                 Validators.email,
-              ],),
+              ],
+            ),
             'chatToolLink': FormArray([
               FormGroup({
                 'chatToolLink': FormControl<String>(),

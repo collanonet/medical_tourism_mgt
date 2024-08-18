@@ -472,4 +472,6 @@ abstract class PatientRepository {
   Future<MedicalPaymentResponse> postMedicalPayment(
     MedicalPaymentRequest medicalPaymentRequest,
   );
+
+  Future<void> closePatientAccount(String id);
 }

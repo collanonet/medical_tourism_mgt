@@ -771,7 +771,7 @@ abstract class ApiService {
   @GET(EndPoints.DETAIL_HOTEL_REGISTATION)
   Future<List<DetainHotelRegistationResponse>> getDetainlHotelRegistation({
     @Query('accommodationName') String? accommodationName,
-  //  @Query('accommodationType') List<String>? accommodationType,
+    //  @Query('accommodationType') List<String>? accommodationType,
     @Query('usageRecord') bool? usageRecord,
     @Query('area') String? area,
     @Query('isJapanese') bool? isJapanese,
@@ -874,14 +874,12 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_ITINERARY)
-  Future<List<DetailItineraryResponse>> getDetailitinerary(
-    {
-      @Query('tourName') String? tourName,
-      @Query('classification') String? classification,
-      @Query('dateFrom') DateTime? dateFrom,
-      @Query('dateTo') DateTime? dateTo,
-    }
-  );
+  Future<List<DetailItineraryResponse>> getDetailitinerary({
+    @Query('tourName') String? tourName,
+    @Query('classification') String? classification,
+    @Query('dateFrom') DateTime? dateFrom,
+    @Query('dateTo') DateTime? dateTo,
+  });
 
   @POST(EndPoints.DETAIL_ITINERARY)
   Future<DetailItineraryResponse> postDetailItinerary(
@@ -1287,7 +1285,13 @@ abstract class ApiService {
     @Path('id') required String id,
     @Body() required TreatmentTeleMenuRequest treatmentTeleMenuRequest,
   });
+
+  @DELETE('${EndPoints.CLOSE_PATIENT}/{id}')
+  Future<void> closePatientAccount(
+    @Path('id') String id,
+  );
 }
+
 
 extension ApiServiceExts on ApiService {
   RestClient get client => GetIt.I<RestClient>();

@@ -1588,4 +1588,18 @@ class BasicInformationModel {
       medicalRecordCompanions.value = AsyncData(error: e);
     }
   }
+
+  ValueNotifier<AsyncData<bool>> isClose = ValueNotifier(const AsyncData());
+
+  Future<void> closePatientAccount() async {
+    isClose.value = const AsyncData(loading: true);
+    try {
+      await patientRepository
+          .closePatientAccount(patientData.value.requireData.id);
+      isClose.value = const AsyncData(data: true);
+    } catch (e) {
+      logger.d(e);
+      isClose.value = AsyncData(error: e);
+    }
+  }
 }
