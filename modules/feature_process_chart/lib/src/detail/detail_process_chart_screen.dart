@@ -20,11 +20,11 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
   List<String> menu = [
-    '行程', // Itinerary
-    '施設', // Facility
-    'ホテル検索', // HotelSearch
-    'ホテル登録', // HotelRegistration
-    '関係者', // RelatedParties
+    '行程',
+    '施設',
+    'ホテル検索',
+    'ホテル登録',
+    '関係者',
   ];
 
   List<Widget> pages = const [
