@@ -6916,7 +6916,7 @@ class _ApiService implements ApiService {
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     await _dio.fetch<void>(_setStreamType<void>(Options(
-      method: 'DELETE',
+      method: 'GET',
       headers: _headers,
       extra: _extra,
     )

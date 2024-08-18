@@ -1286,7 +1286,7 @@ abstract class ApiService {
     @Body() required TreatmentTeleMenuRequest treatmentTeleMenuRequest,
   });
 
-  @DELETE('${EndPoints.CLOSE_PATIENT}/{id}')
+  @GET('${EndPoints.CLOSE_PATIENT}/{id}')
   Future<void> closePatientAccount(
     @Path('id') String id,
   );
