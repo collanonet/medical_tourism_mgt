@@ -14,6 +14,7 @@ class User {
   final DateTime createdAt;
   final DateTime updatedAt;
   final PermissionRole role;
+  final bool isClosed;
 
   User({
     required this.id,
@@ -25,6 +26,7 @@ class User {
     required this.createdAt,
     required this.updatedAt,
     required this.role,
+    required this.isClosed,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {

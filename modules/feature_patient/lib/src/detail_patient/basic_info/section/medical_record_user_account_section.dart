@@ -79,11 +79,11 @@ class MedicalRecordUserAccountSection extends StatelessWidget {
                           ),
                           ValueListenableListener(
                             valueListenable:
-                                context.read<BasicInformationModel>().isClose,
+                                context.read<BasicInformationModel>().isClosed,
                             onListen: () {
                               final value = context
                                   .read<BasicInformationModel>()
-                                  .isClose
+                                  .isClosed
                                   .value;
                               if (value.hasData) {
                                 snackBarWidget(message: "更新しました");
@@ -96,12 +96,12 @@ class MedicalRecordUserAccountSection extends StatelessWidget {
                             child: ValueListenableBuilder(
                                 valueListenable: context
                                     .watch<BasicInformationModel>()
-                                    .isClose,
+                                    .isClosed,
                                 builder: (context, value, _) {
                                   return Skeletonizer(
                                     enabled: value.loading,
                                     child: ReactiveValueListenableBuilder<bool>(
-                                        formControlName: 'isClose',
+                                        formControlName: 'isClosed',
                                         builder: (context, value, child) {
                                           return AnimatedToggleSwitch<
                                                   bool>.size(

@@ -75,7 +75,7 @@ FormGroup basicInfoForm({
             value: '********',
             disabled: true,
           ),
-          'isClose': FormControl<bool>(
+          'isClosed': FormControl<bool>(
             value: false,
           ),
         }),
