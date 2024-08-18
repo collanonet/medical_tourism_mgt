@@ -16,7 +16,7 @@ User _$UserFromJson(Map<String, dynamic> json) => User(
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
       role: $enumDecode(_$PermissionRoleEnumMap, json['role']),
-      isClosed: json['isClosed'] as bool,
+      isClosed: json['isClosed'] as bool? ?? false,
     );
 
 Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{

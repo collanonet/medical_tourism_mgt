@@ -56,7 +56,7 @@ Patient _$PatientFromJson(Map<String, dynamic> json) => Patient(
       acceptingHospital: json['acceptingHospital'] as String?,
       groupSize: json['groupSize'] as String?,
       profile: json['profile'] as String?,
-      isClosed: json['isClosed'] as String?,
+      isClosed: json['isClosed'] as bool? ?? false,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );

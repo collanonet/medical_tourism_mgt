@@ -26,7 +26,7 @@ class User {
     required this.createdAt,
     required this.updatedAt,
     required this.role,
-    required this.isClosed,
+    this.isClosed = false,
   });
 
   factory User.fromJson(Map<String, dynamic> json) {
