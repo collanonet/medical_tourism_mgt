@@ -143,6 +143,7 @@ class BasicInformationModel {
 
   void insertUserAccount({required User data, required FormGroup formGroup}) {
     formGroup.control('loginId').value = data.idNumber;
+    formGroup.control('isClosed').value = data.isClosed;
   }
 
   // //GET_PATIENT_NAMES
@@ -1586,6 +1587,20 @@ class BasicInformationModel {
     } catch (e) {
       logger.d(e);
       medicalRecordCompanions.value = AsyncData(error: e);
+    }
+  }
+
+  ValueNotifier<AsyncData<bool>> isClosed = ValueNotifier(const AsyncData());
+
+  Future<void> closePatientAccount() async {
+    isClosed.value = const AsyncData(loading: true);
+    try {
+      await patientRepository
+          .closePatientAccount(patientData.value.requireData.id);
+      isClosed.value = const AsyncData(data: true);
+    } catch (e) {
+      logger.d(e);
+      isClosed.value = AsyncData(error: e);
     }
   }
 }

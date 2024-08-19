@@ -801,4 +801,9 @@ class PatientRepositoryIml extends PatientRepository {
   Future<MedicalPaymentResponse> postMedicalPayment(MedicalPaymentRequest medicalPaymentRequest) {
     return remote.postMedicalPayment(medicalPaymentRequest);
   }
+
+  @override
+  Future<void> closePatientAccount(String id) {
+    return remote.closePatientAccount(id);
+  }
 }

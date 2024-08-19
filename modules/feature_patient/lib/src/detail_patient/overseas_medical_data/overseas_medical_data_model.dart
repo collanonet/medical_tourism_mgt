@@ -171,4 +171,23 @@ class OverseasMedicalDataModel {
       createMedicalOverseaData.value = AsyncData(error: e);
     }
   }
+
+  ValueNotifier<AsyncData<bool>> delete = ValueNotifier(const AsyncData());
+
+  Future<void> deleteMedicalRecordOverseaData(List<String> ids) async {
+    try {
+      delete.value = const AsyncData(loading: true);
+      for (var id in ids) {
+        await patientRepository.deleteMedicalRecordOverseaData(id);
+        medicalRecordsOverseasData.value = AsyncData(
+            data: medicalRecordsOverseasData.value.data!
+              ..removeWhere((element) => element.id == id));
+      }
+
+      delete.value = const AsyncData(data: true);
+    } catch (e) {
+      logger.e(e);
+      delete.value = AsyncData(error: e.toString());
+    }
+  }
 }

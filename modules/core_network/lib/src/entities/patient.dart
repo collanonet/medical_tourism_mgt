@@ -38,7 +38,7 @@ class Patient {
   String? acceptingHospital;
   String? groupSize;
   String? profile;
-  String? isClosed;
+  bool isClosed;
 
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -76,7 +76,7 @@ class Patient {
     this.acceptingHospital,
     this.groupSize,
     this.profile,
-    this.isClosed,
+    this.isClosed = false,
     required this.createdAt,
     required this.updatedAt,
   });

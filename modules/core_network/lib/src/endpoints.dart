@@ -17,6 +17,7 @@ class EndPoints {
   static const POST_PATIENTS = '/patients';
   static const PUT_PATIENTS = '/patients';
   static const DELETE_PATIENT = '/patients';
+  static const CLOSE_PATIENT = '/patients/close';
 
   static const GET_PATIENT_NAMES = '/patient-names';
   static const GET_PATIENT_NAMES_BY_PATIENT = '/patient-names/patient-id';
