@@ -11,20 +11,22 @@ DetailRelatedPartiesEmergencyContactResponse
             Map<String, dynamic> json) =>
         DetailRelatedPartiesEmergencyContactResponse(
           id: json['_id'] as String?,
-          dateFrom: json['dateFrom'] as String? ?? '',
-          dateTo: json['dateTo'] as String? ?? '',
-          personInChargeKanji: json['personInChargeKanji'] as String? ?? '',
-          personInChargeKana: json['personInChargeKana'] as String? ?? '',
-          telephoneNumber: json['telephoneNumber'] as String? ?? '',
+          dateYearFrom: json['dateYearFrom'] as String?,
+          dateYearTo: json['dateYearTo'] as String?,
+          contactPersonNamaKanji: json['contactPersonNamaKanji'] as String?,
+          contactPersonNameKana: json['contactPersonNameKana'] as String?,
+          phoneNumber: json['phoneNumber'] as String?,
+          tour: json['tour'] as String?,
         );
 
 Map<String, dynamic> _$DetailRelatedPartiesEmergencyContactResponseToJson(
         DetailRelatedPartiesEmergencyContactResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
-      'dateFrom': instance.dateFrom,
-      'dateTo': instance.dateTo,
-      'personInChargeKanji': instance.personInChargeKanji,
-      'personInChargeKana': instance.personInChargeKana,
-      'telephoneNumber': instance.telephoneNumber,
+      'dateYearFrom': instance.dateYearFrom,
+      'dateYearTo': instance.dateYearTo,
+      'contactPersonNamaKanji': instance.contactPersonNamaKanji,
+      'contactPersonNameKana': instance.contactPersonNameKana,
+      'phoneNumber': instance.phoneNumber,
+      'tour': instance.tour,
     };

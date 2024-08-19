@@ -22,7 +22,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
     return ValueListenableBuilder(
-      valueListenable: context.read<FacilityModel>().submitDetailFacilityData,
+      valueListenable: context.watch<FacilityModel>().submitDetailFacilityData,
       builder: (context, value, _) {
         return Skeletonizer(
           enabled: value.loading,
@@ -357,7 +357,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                 Expanded(
                                   child: ReactiveTextField(
                                     formControlName: 'arrangePerson',
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       label: Text(
                                         '手配担当',
                                       ),

@@ -18,7 +18,8 @@ DetailFacilityHotelRequest _$DetailFacilityHotelRequestFromJson(
       foreignLanguageStaff: (json['foreignLanguageStaff'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      others: json['others'] as bool?,
+      other: json['other'] as String?,
+      hotel: json['hotel'] as String?,
     );
 
 Map<String, dynamic> _$DetailFacilityHotelRequestToJson(
@@ -31,5 +32,6 @@ Map<String, dynamic> _$DetailFacilityHotelRequestToJson(
       'phoneNumber': instance.phoneNumber,
       'remarks': instance.remarks,
       'foreignLanguageStaff': instance.foreignLanguageStaff,
-      'others': instance.others,
+      'other': instance.other,
+      'hotel': instance.hotel,
     };

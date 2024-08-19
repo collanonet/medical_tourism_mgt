@@ -118,7 +118,7 @@ class ProcessChartRemoteProvider {
     return await apiService.postDetialHotelSearch(detailHotelSearchRequest);
   }
 
-  Future<DetailRelatedPartiesResponse>
+  Future<List<DetailRelatedPartiesResponse>>
       getRelatedPartiesGuideOrInterpreter() async {
     return await apiService.getRelatedPartiesGuideOrInterpreter();
   }
@@ -129,7 +129,7 @@ class ProcessChartRemoteProvider {
         .postRelatedPartiesGuideOrInterpreter(detailRelatedPartiesRequest);
   }
 
-  Future<DetailRelatedPartiesBusCompanyResponse>
+  Future<List<DetailRelatedPartiesBusCompanyResponse>>
       getRelatedPartiesBusCompany() async {
     return await apiService.getRelatedPartiesBusCompany();
   }

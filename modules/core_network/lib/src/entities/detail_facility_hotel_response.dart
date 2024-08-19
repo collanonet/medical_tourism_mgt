@@ -11,10 +11,6 @@ class DetailFacilityHotelResponse {
   String? phoneNumber;
   String? remarks;
   List<String>? foreignLanguageStaff;
-   bool? japanese;
-  bool? chinese;
-  bool? vietnamese;
-  bool? english;
   bool? others;
 
   DetailFacilityHotelResponse({

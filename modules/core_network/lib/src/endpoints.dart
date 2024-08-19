@@ -158,12 +158,12 @@ class EndPoints {
   static const DETAIL_HOTEL_REGISTATION = '/hotel';
   static const DETAIL_HOTEL_SEARCH = '/hotel';
   static const DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER =
-      '/detail-related-parties-guide-or-interpreter';
+      '/guide-interpreter';
   static const DETAIL_RELATED_PARTIES_BUS_COMPANY =
-      '/detail-related-parties-bus-company';
-  static const DETAIL_RELATED_PARTIES_DRIVER = '/detail-related-parties-driver';
+      '/bus-lines';
+  static const DETAIL_RELATED_PARTIES_DRIVER = '/driver';
   static const DETAIL_RELATED_EMERGENCY_CONTACT =
-      '/detail-related-parties-emergecy-contact';
+      '/emergency-contact';
   static const DETAIL_ITINERARY_SIMPLE_VERSION_TITLE =
       '/detail-itinerary-simple-versoin-title';
   static const DETAIL_ITINERARY_SIMPLE_VERSION_EXPANATION =

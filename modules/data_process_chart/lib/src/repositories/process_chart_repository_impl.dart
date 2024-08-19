@@ -193,12 +193,12 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<DetailRelatedPartiesResponse> getDetailRelatedParties() {
+  Future<List<DetailRelatedPartiesResponse>> getDetailRelatedParties() {
     return remote.getRelatedPartiesGuideOrInterpreter();
   }
 
   @override
-  Future<DetailRelatedPartiesBusCompanyResponse>
+  Future<List<DetailRelatedPartiesBusCompanyResponse>>
       getDetailRelatedPartiesBusCompany() {
     return remote.getRelatedPartiesBusCompany();
   }

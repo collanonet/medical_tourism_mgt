@@ -9,7 +9,8 @@ class DetailFacilityHotelRequest {
   String? phoneNumber;
   String? remarks;
   List<String>? foreignLanguageStaff;
-  bool? others;
+  String? other;
+  String? hotel;
 
   DetailFacilityHotelRequest({
      this.arrangePerson,
@@ -19,7 +20,8 @@ class DetailFacilityHotelRequest {
      this.phoneNumber,
      this.remarks,
      this.foreignLanguageStaff,
-     this.others
+     this.other,
+     this.hotel,
   });
 
   factory DetailFacilityHotelRequest.fromJson(Map<String,dynamic> json){

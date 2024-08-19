@@ -4003,21 +4003,21 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<DetailRelatedPartiesResponse>
+  Future<List<DetailRelatedPartiesResponse>>
       getRelatedPartiesGuideOrInterpreter() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DetailRelatedPartiesResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<DetailRelatedPartiesResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/detail-related-parties-guide-or-interpreter',
+              '/guide-interpreter',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4026,7 +4026,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value = DetailRelatedPartiesResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) =>
+            DetailRelatedPartiesResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
@@ -4046,7 +4049,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-related-parties-guide-or-interpreter',
+              '/guide-interpreter',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4060,21 +4063,21 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<DetailRelatedPartiesBusCompanyResponse>
+  Future<List<DetailRelatedPartiesBusCompanyResponse>>
       getRelatedPartiesBusCompany() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DetailRelatedPartiesBusCompanyResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<DetailRelatedPartiesBusCompanyResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/detail-related-parties-bus-company',
+              '/bus-lines',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4083,8 +4086,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
-        DetailRelatedPartiesBusCompanyResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) => DetailRelatedPartiesBusCompanyResponse.fromJson(
+            i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
@@ -4105,7 +4110,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-related-parties-bus-company',
+              '/bus-lines',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4133,7 +4138,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-related-parties-driver',
+              '/driver',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4163,7 +4168,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-related-parties-driver',
+              '/driver',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4191,7 +4196,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-related-parties-emergecy-contact',
+              '/emergency-contact',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4223,7 +4228,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-related-parties-emergecy-contact',
+              '/emergency-contact',
               queryParameters: queryParameters,
               data: _data,
             )

@@ -90,13 +90,13 @@ abstract class ProcessChartRepository {
       DetailItinerarySimplePickUpAndDropOffRequest detailItinerarySimplePickUpAndDropOffRequest,
     );
 
-    Future<DetailRelatedPartiesResponse> getDetailRelatedParties();
+    Future<List<DetailRelatedPartiesResponse>> getDetailRelatedParties();
 
     Future<DetailRelatedPartiesResponse> postDetailRelatedParties(
       DetailRelatedPartiesRequest detailRelatedPartiesRequest,
     );
 
-    Future<DetailRelatedPartiesBusCompanyResponse> getDetailRelatedPartiesBusCompany();
+    Future<List<DetailRelatedPartiesBusCompanyResponse>> getDetailRelatedPartiesBusCompany();
 
     Future<DetailRelatedPartiesBusCompanyResponse> postDetailRelatedPartiesBusCompany(
       DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest,

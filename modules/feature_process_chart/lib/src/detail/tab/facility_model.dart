@@ -12,7 +12,7 @@ class FacilityModel {
 
   Future<void> fetchData(FormGroup formGroup) async {
     try {
-      await fetchDetailFacilityHotel(formGroup.control('Hotel') as FormArray);
+      // await fetchDetailFacilityHotel(formGroup.control('Hotel') as FormArray);
       await fetchDetailDropInFacility(
           formGroup.control('drop_in_facility') as FormGroup);
     } catch (e) {
@@ -27,19 +27,21 @@ class FacilityModel {
       await submitDetailFacilityHotel(formGroup);
       await submitDropInDacility(
           formGroup.control('drop_in_facility') as FormGroup);
-      //submitData.value = const AsyncData(loading: false);
+      submitData.value = const AsyncData(data: true);
     } catch (e) {
       logger.d(e);
+      submitData.value = AsyncData(error: e);
     }
   }
 
   ValueNotifier<AsyncData<List<DetailFacilityHotelResponse>>>
-      detailFacilityHotelData = ValueNotifier(const AsyncData());
-  Future<void> fetchDetailFacilityHotel(FormArray formArray) async {
+      detailFacilityHotelData = ValueNotifier(
+          const AsyncData<List<DetailFacilityHotelResponse>>(data: []));
+  Future<void> fetchDetailFacilityHotel() async {
     try {
       detailFacilityHotelData.value = const AsyncData(loading: true);
       final response = await processChartRepository.getDetialFacilityHospital();
-     // insertFacilityHotel(formArray, response);
+      // insertFacilityHotel(formArray, response);
     } catch (e) {
       detailFacilityHotelData.value = AsyncData(error: e);
     }
@@ -52,12 +54,22 @@ class FacilityModel {
       submitDetailFacilityData = ValueNotifier(const AsyncData());
   Future<void> submitDetailFacilityHotel(FormGroup formGroup) async {
     try {
-      submitDetailFacilityData.value = const AsyncData(error: true);
+      detailFacilityHotelData.value = const AsyncData(loading: true, data: []);
       List<String>? languages = [];
-      if (formGroup.control('japanese').value == true) {
-        languages.add('日本語');
-      }
-       formGroup.control('Hotel').value.forEach((element) async{
+      // if (formGroup.control('japanese').value == true) {
+      //   languages.add('日本語');
+      // }
+      // if (formGroup.control('chinese').value == true) {
+      //   languages.add('中国語');
+      // }
+      // if (formGroup.control('vietnamese').value == true) {
+      //   languages.add('ベトナム語');
+      // }
+      // if (formGroup.control('english').value == true) {
+      //   languages.add('英語');
+      // }
+      formGroup.control('Hotel').value.forEach(
+        (element) async {
           DetailFacilityHotelRequest request = DetailFacilityHotelRequest(
             accommodationName: element['accommodationName'],
             contactPersonName: element['contactPersonName'],
@@ -65,25 +77,31 @@ class FacilityModel {
             arrangePerson: element['arrangePerson'],
             phoneNumber: element['phoneNumber'],
             remarks: element['remarks'],
-            foreignLanguageStaff: languages,
+            foreignLanguageStaff: ['kk'],
+            other: element['others'],
+            hotel: '',
           );
-           var result = await processChartRepository.postDetailFacilityHospital(request);
-            detailFacilityHotelData.value.copyWith(data: [...detailFacilityHotelData.value.requireData,result]);
-        });
-      
-    
+          var result =
+              await processChartRepository.postDetailFacilityHospital(request);
+          detailFacilityHotelData.value.copyWith(
+              data: [...detailFacilityHotelData.value.requireData, result]);
+        },
+      );
+      detailFacilityHotelData.value =
+          AsyncData(data: detailFacilityHotelData.value.data);
     } catch (e) {
+      logger.d(e);
       submitDetailFacilityData.value = AsyncData(error: e);
     }
   }
 
-  ValueNotifier<AsyncData<List<DetailDropInFacilityResponse>>> dropInFacilityData =
-      ValueNotifier(const AsyncData());
+  ValueNotifier<AsyncData<List<DetailDropInFacilityResponse>>>
+      dropInFacilityData = ValueNotifier(const AsyncData());
   Future<void> fetchDetailDropInFacility(FormGroup formGroup) async {
     try {
       dropInFacilityData.value = const AsyncData(loading: true);
       final response = await processChartRepository.getDetailFacilityDropIn();
-     // insertDropInFacility(formGroup, response);
+      // insertDropInFacility(formGroup, response);
       dropInFacilityData.value = AsyncData(data: response);
     } catch (e) {
       logger.d(e);
@@ -101,8 +119,8 @@ class FacilityModel {
   //         'accommodationName':
   //             FormControl<String>(value: element.accommodationName), // 施設名
   //         'address': FormControl<String>(value: element.address), // 所在地
-  //         'contctPersonName':
-  //             FormControl<String>(value: element.contctPersonName), // 担当者名
+  //         'contactPersonName':
+  //             FormControl<String>(value: element.contactPersonName), // 担当者名
   //         'phoneNumber':
   //             FormControl<String>(value: element.phoneNumber), // 電話番号
   //       }));
@@ -118,10 +136,10 @@ class FacilityModel {
       List<Facility> places = [];
       formGroup.control('places').value.forEach((element) {
         places.add(Facility(
-          accommodationName: element['accommodationName'].value,
-          address: element['address'].value,
-          contctPersonName: element['contctPersonName'].value,
-          phoneNumber: element['phoneNumber'].value,
+          accommodationName: element['accommodationName'],
+          address: element['address'],
+          contctPersonName: element['contactPersonName'],
+          phoneNumber: element['phoneNumber'],
         ));
       });
       final response = await processChartRepository.postDetailFacilityDropIn(
@@ -130,7 +148,9 @@ class FacilityModel {
           places: places,
         ),
       );
-      dropInFacilityData.value = AsyncData(data: dropInFacilityData.value.data!..add(response));
+      logger.d('Data${formGroup.control('arrangePerson').value}');
+      dropInFacilityData.value =
+          AsyncData(data: dropInFacilityData.value.data!..add(response));
       submitDropInFacilityData.value = AsyncData(data: response);
     } catch (e) {
       logger.d(e);

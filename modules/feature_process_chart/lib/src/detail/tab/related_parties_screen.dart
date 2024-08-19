@@ -24,10 +24,10 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
     final formGroup = ReactiveForm.of(context) as FormGroup;
 
     return ValueListenableBuilder(
-      valueListenable: context.watch<RelatedPartiesModel>().submit,
+      valueListenable: context.watch<RelatedPartiesModel>().submitPartiesData,
       builder: (context, value, _) {
         return Skeletonizer(
-          enabled: false,
+          enabled: value.loading,
           child: SingleChildScrollView(
             child: ColumnSeparated(
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -42,7 +42,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                   height: 20,
                 ),
                 ReactiveFormArray(
-                  formArrayName: 'guide_or_interpreter',
+                  formArrayName: 'guideInterpreter',
                   builder: (context, formArray, child) {
                     final rows = formArray.controls
                         .map((control) => control as FormGroup)
@@ -62,8 +62,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                   children: [
                                     Expanded(
                                       child: ReactiveTextField(
-                                        formControlName:
-                                            'Person_in_charge_of_arrangements',
+                                        formControlName: 'arrangePerson',
                                         decoration: InputDecoration(
                                           label: Text(
                                             '手配担当',
@@ -87,7 +86,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                   children: [
                                     Expanded(
                                         child: ReactiveTextField(
-                                      formControlName: 'Date_from',
+                                      formControlName: 'dateFrom',
                                       decoration: InputDecoration(
                                         label: Text(
                                           '年月日（自）',
@@ -105,7 +104,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     ),
                                     Expanded(
                                         child: ReactiveTextField(
-                                      formControlName: 'Date_to',
+                                      formControlName: 'dateTo',
                                       decoration: InputDecoration(
                                         label: Text(
                                           '年月日（至）',
@@ -118,7 +117,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                   children: [
                                     Expanded(
                                         child: ReactiveTextField(
-                                      formControlName: 'Guide_name_Kanji',
+                                      formControlName: 'guideNamaKanji',
                                       decoration: InputDecoration(
                                         label: Text(
                                           'ガイド名（漢字）',
@@ -131,7 +130,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     ),
                                     Expanded(
                                         child: ReactiveTextField(
-                                      formControlName: 'Guide_name_kana',
+                                      formControlName: 'guideNameKana',
                                       decoration: InputDecoration(
                                         label: Text(
                                           'ガイド名（カナ）',
@@ -144,7 +143,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     ),
                                     Expanded(
                                         child: ReactiveTextField(
-                                      formControlName: 'telephone_number_1',
+                                      formControlName: 'phoneNumber',
                                       decoration: InputDecoration(
                                         label: Text(
                                           '電話番号',
@@ -225,7 +224,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                             ListTileControlAffinity.leading,
                                         contentPadding: EdgeInsets.zero,
                                         formControlName:
-                                            'Possibility_of_staying_together',
+                                            'possibility_of_staying_together',
                                         value: true,
                                         title: const Text('同宿OK'),
                                       ),
@@ -237,7 +236,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                             ListTileControlAffinity.leading,
                                         contentPadding: EdgeInsets.zero,
                                         formControlName:
-                                            'Possibility_of_staying_together',
+                                            'possibility_of_staying_together',
                                         value: false,
                                         title: const Text('同宿NG'),
                                       ),
@@ -248,7 +247,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                   children: [
                                     Expanded(
                                         child: ReactiveTextField(
-                                      formControlName: 'Name_of_facility',
+                                      formControlName: 'accommodationName',
                                       decoration: InputDecoration(
                                         label: Text('施設名'),
                                       ),
@@ -259,7 +258,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     ),
                                     Expanded(
                                         child: ReactiveTextField(
-                                      formControlName: 'location',
+                                      formControlName: 'address',
                                       decoration: InputDecoration(
                                         label: Text('所在地'),
                                       ),
@@ -270,7 +269,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                   children: [
                                     Expanded(
                                         child: ReactiveTextField(
-                                      formControlName: 'telephone_number_2',
+                                      formControlName: 'phoneNumber2',
                                       decoration: InputDecoration(
                                         label: Text('電話番号'),
                                       ),
@@ -350,7 +349,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                   style: context.textTheme.titleMedium,
                 ),
                 ReactiveForm(
-                  formGroup: formGroup.control('bus_company') as FormGroup,
+                  formGroup: formGroup.control('busCompany') as FormGroup,
                   child: ColumnSeparated(
                     separatorBuilder: (BuildContext context, int index) {
                       return SizedBox(
@@ -362,9 +361,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                         children: [
                           Expanded(
                             child: ReactiveTextField(
-                              formControlName:
-                                  'Person_in_charge_of_arrangements',
-                              decoration: InputDecoration(
+                              formControlName: 'arrangePerson',
+                              decoration: const InputDecoration(
                                 label: Text(
                                   '手配担当',
                                 ),
@@ -385,8 +383,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                         children: [
                           Expanded(
                             child: ReactiveTextField(
-                              formControlName: 'Bus_company_name',
-                              decoration: InputDecoration(
+                              formControlName: 'busCompanyName',
+                              decoration: const InputDecoration(
                                 label: Text(
                                   'バス会社名',
                                 ),
@@ -398,8 +396,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                           ),
                           Expanded(
                             child: ReactiveTextField(
-                              formControlName: 'manager',
-                              decoration: InputDecoration(
+                              formControlName: 'contactPerson',
+                              decoration: const InputDecoration(
                                 label: Text(
                                   '担当者',
                                 ),
@@ -655,7 +653,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                         .leading,
                                                 contentPadding: EdgeInsets.zero,
                                                 formControlName:
-                                                    'Possibility_of_staying_together',
+                                                    'possibility_of_staying_together',
                                                 value: true,
                                                 title: const Text('同宿OK'),
                                               ),
@@ -668,7 +666,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                         .leading,
                                                 contentPadding: EdgeInsets.zero,
                                                 formControlName:
-                                                    'Possibility_of_staying_together',
+                                                    'possibility_of_staying_together',
                                                 value: false,
                                                 title: const Text('同宿NG'),
                                               ),
@@ -982,10 +980,12 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                   children: [
                     ValueListenableListener(
                       valueListenable:
-                          context.read<RelatedPartiesModel>().submit,
+                          context.read<RelatedPartiesModel>().submitPartiesData,
                       onListen: () {
-                        final value =
-                            context.read<RelatedPartiesModel>().submit.value;
+                        final value = context
+                            .read<RelatedPartiesModel>()
+                            .submitPartiesData
+                            .value;
                         if (value.hasData) {
                           logger.d('loading');
                           snackBarWidget(
@@ -1005,20 +1005,21 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                         }
                       },
                       child: ValueListenableBuilder(
-                          valueListenable:
-                              context.watch<RelatedPartiesModel>().submit,
-                          builder: (context, value, child) {
+                          valueListenable: context
+                              .watch<RelatedPartiesModel>()
+                              .submitPartiesData,
+                          builder: (context, value, _) {
                             return ReactiveFormConsumer(
                               builder: (context, form, _) {
                                 return ElevatedButton(
                                     onPressed: !value.loading && form.valid
                                         ? () => context
                                             .read<RelatedPartiesModel>()
-                                            .submitData(form)
+                                            .submitParties(formGroup)
                                         : null,
                                     child: WithLoadingButton(
                                       isLoading: value.loading,
-                                      child: Text('保存する'),
+                                      child: const Text('保存する'),
                                     ));
                               },
                             );
