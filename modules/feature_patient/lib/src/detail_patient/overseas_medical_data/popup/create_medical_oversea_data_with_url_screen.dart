@@ -1,7 +1,11 @@
+import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:core_l10n/l10n.dart';
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -46,7 +50,7 @@ class _CreateMedicalOverseaDataWithUrlScreenState
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      icon: const Icon(Icons.close)),
+                      icon: Icon(Icons.close)),
                 ],
               ),
               Text(

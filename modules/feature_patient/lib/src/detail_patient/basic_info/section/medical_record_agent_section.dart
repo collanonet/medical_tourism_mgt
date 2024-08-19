@@ -64,7 +64,7 @@ class MedicalRecordAgentSection extends StatelessWidget {
                         Expanded(
                           child: ReactiveTextField(
                             formControlName: 'company',
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               label: Text(
                                 '企業', // Todo: l10n (国籍)
                               ),
@@ -74,7 +74,7 @@ class MedicalRecordAgentSection extends StatelessWidget {
                         Expanded(
                           child: ReactiveTextField(
                             formControlName: 'nameInKanji',
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               label: Text(
                                 '氏名（漢字）', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
                               ),
@@ -84,7 +84,7 @@ class MedicalRecordAgentSection extends StatelessWidget {
                         Expanded(
                           child: ReactiveTextField(
                             formControlName: 'nameInKana',
-                            decoration: const InputDecoration(
+                            decoration: InputDecoration(
                               label: Text(
                                 '氏名（カナ）', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
                               ),

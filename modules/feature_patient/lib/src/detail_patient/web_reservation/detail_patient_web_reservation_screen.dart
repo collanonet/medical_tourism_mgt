@@ -37,7 +37,7 @@ class _DetailPatientWebReservationScreenState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const Text(
+                          Text(
                             '希望日',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -64,7 +64,7 @@ class _DetailPatientWebReservationScreenState
                                             DateFormat('yyyy/MM/dd'),
                                       ),
                                       decoration: InputDecoration(
-                                        label: const Text(
+                                        label: Text(
                                           '第１希望',
                                         ),
                                         suffixIcon: IconButton(
@@ -101,7 +101,7 @@ class _DetailPatientWebReservationScreenState
                                             DateFormat('yyyy/MM/dd'),
                                       ),
                                       decoration: InputDecoration(
-                                        label: const Text(
+                                        label: Text(
                                           '第２希望',
                                         ),
                                         suffixIcon: IconButton(
@@ -138,7 +138,7 @@ class _DetailPatientWebReservationScreenState
                                             DateFormat('yyyy/MM/dd'),
                                       ),
                                       decoration: InputDecoration(
-                                        label: const Text(
+                                        label: Text(
                                           '第３希望',
                                         ),
                                         suffixIcon: IconButton(
@@ -170,7 +170,7 @@ class _DetailPatientWebReservationScreenState
                                   controlAffinity:
                                       ListTileControlAffinity.leading,
                                   formControlName: 'noDesiredDate',
-                                  title: const Text('希望日なし'),
+                                  title: Text('希望日なし'),
                                 ),
                               ),
                             ],
@@ -185,14 +185,14 @@ class _DetailPatientWebReservationScreenState
                                   minLines: 3,
                                   maxLines: 5,
                                   formControlName: 'remarks',
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text('備考'),
                                   ),
                                 ),
                               ),
                             ],
                           ),
-                          const Divider(),
+                          Divider(),
                           Text(
                             '医療機関',
                             style: context.textTheme.titleLarge,
@@ -206,7 +206,7 @@ class _DetailPatientWebReservationScreenState
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'medicalInstitutionName',
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text('医療機関名'),
                                     suffixIcon: Icon(
                                       Icons.search,
@@ -221,7 +221,7 @@ class _DetailPatientWebReservationScreenState
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'doctorName',
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text('医師名'),
                                     suffixIcon: Icon(
                                       Icons.search,
@@ -263,10 +263,10 @@ class _DetailPatientWebReservationScreenState
                                     );
                                   },
                                   children: [
-                                    const Expanded(
+                                    Expanded(
                                       child: SizedBox(),
                                     ),
-                                    const Expanded(
+                                    Expanded(
                                       child: SizedBox(),
                                     ),
                                     boxText(
@@ -313,7 +313,7 @@ class _DetailPatientWebReservationScreenState
                                       textColor: Colors.white,
                                       bg: context.appTheme.primaryColor,
                                     ),
-                                    const Expanded(
+                                    Expanded(
                                       flex: 3,
                                       child: SizedBox(),
                                     ),
@@ -377,7 +377,7 @@ class _DetailPatientWebReservationScreenState
                                       '×',
                                       bg: Colors.white,
                                     ),
-                                    const Expanded(
+                                    Expanded(
                                       flex: 3,
                                       child: SizedBox(),
                                     ),
@@ -440,7 +440,7 @@ class _DetailPatientWebReservationScreenState
                                       '○',
                                       bg: Colors.white,
                                     ),
-                                    const Expanded(
+                                    Expanded(
                                       flex: 3,
                                       child: SizedBox(),
                                     ),
@@ -449,7 +449,7 @@ class _DetailPatientWebReservationScreenState
                               ],
                             ),
                           ),
-                          const Divider(),
+                          Divider(),
                           Text(
                             '予約日',
                             style: context.textTheme.titleLarge,
@@ -496,7 +496,7 @@ class _DetailPatientWebReservationScreenState
                                       padding: EdgeInsets.all(context
                                           .appTheme.spacing.marginMedium),
                                       decoration: BoxDecoration(
-                                        color: const Color(0xffFFECE5),
+                                        color: Color(0xffFFECE5),
                                         borderRadius: BorderRadius.circular(
                                           context.appTheme.spacing
                                               .borderRadiusMedium,
@@ -506,7 +506,7 @@ class _DetailPatientWebReservationScreenState
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          const Text('候補日'),
+                                          Text('候補日'),
                                           ReactiveFormArray(
                                             formArrayName: 'candidateDate',
                                             builder:
@@ -564,7 +564,7 @@ class _DetailPatientWebReservationScreenState
                                                                       },
                                                                       decoration:
                                                                           InputDecoration(
-                                                                        label: const Text(
+                                                                        label: Text(
                                                                             '第一希望'),
                                                                         suffixIcon:
                                                                             IconButton(
@@ -608,10 +608,10 @@ class _DetailPatientWebReservationScreenState
                                                                               ? Colors.white
                                                                               : Colors.black,
                                                                           bg: control.value == '午前'
-                                                                              ? const Color(0xffF08C67)
+                                                                              ? Color(0xffF08C67)
                                                                               : Colors.white,
                                                                           borderC:
-                                                                              const Color(0xffF08C67),
+                                                                              Color(0xffF08C67),
                                                                           onTap:
                                                                               () {
                                                                             control.value =
@@ -631,10 +631,10 @@ class _DetailPatientWebReservationScreenState
                                                                               ? Colors.white
                                                                               : Colors.black,
                                                                           bg: control.value == '午後'
-                                                                              ? const Color(0xffF08C67)
+                                                                              ? Color(0xffF08C67)
                                                                               : Colors.white,
                                                                           borderC:
-                                                                              const Color(0xffF08C67),
+                                                                              Color(0xffF08C67),
                                                                           onTap:
                                                                               () {
                                                                             control.value =
@@ -654,10 +654,10 @@ class _DetailPatientWebReservationScreenState
                                                                               ? Colors.white
                                                                               : Colors.black,
                                                                           bg: control.value == '終日'
-                                                                              ? const Color(0xffF08C67)
+                                                                              ? Color(0xffF08C67)
                                                                               : Colors.white,
                                                                           borderC:
-                                                                              const Color(0xffF08C67),
+                                                                              Color(0xffF08C67),
                                                                           onTap:
                                                                               () {
                                                                             control.value =
@@ -686,7 +686,7 @@ class _DetailPatientWebReservationScreenState
                                                                         .timeFormatter,
                                                                   ],
                                                                   decoration:
-                                                                      const InputDecoration(
+                                                                      InputDecoration(
                                                                     label: Text(
                                                                       '時間帯（自）',
                                                                     ),
@@ -699,7 +699,7 @@ class _DetailPatientWebReservationScreenState
                                                                     .spacing
                                                                     .marginMedium,
                                                               ),
-                                                              const Text('〜'),
+                                                              Text('〜'),
                                                               SizedBox(
                                                                 width: context
                                                                     .appTheme
@@ -719,7 +719,7 @@ class _DetailPatientWebReservationScreenState
                                                                         .timeFormatter,
                                                                   ],
                                                                   decoration:
-                                                                      const InputDecoration(
+                                                                      InputDecoration(
                                                                     label: Text(
                                                                       '時間帯（至）',
                                                                     ),
@@ -734,7 +734,7 @@ class _DetailPatientWebReservationScreenState
                                                                             .indexOf(currentForm) !=
                                                                         0) ...{
                                                                       IconButton(
-                                                                        icon: const Icon(
+                                                                        icon: Icon(
                                                                             Icons
                                                                                 .delete_forever,
                                                                             color:
@@ -825,7 +825,7 @@ class _DetailPatientWebReservationScreenState
                                                           MainAxisAlignment
                                                               .center,
                                                       children: [
-                                                        const Icon(
+                                                        Icon(
                                                           Icons.add_circle,
                                                           color:
                                                               Color(0xffF08C67),
@@ -836,7 +836,7 @@ class _DetailPatientWebReservationScreenState
                                                               .spacing
                                                               .marginSmall,
                                                         ),
-                                                        const Text(
+                                                        Text(
                                                           '候補日を追加',
                                                           style: TextStyle(
                                                               color: Color(
@@ -860,7 +860,7 @@ class _DetailPatientWebReservationScreenState
                                                   minLines: 3,
                                                   maxLines: 5,
                                                   formControlName: 'message',
-                                                  decoration: const InputDecoration(
+                                                  decoration: InputDecoration(
                                                     label: Text(
                                                         'メッセージ（希望日がない場合は、メッセージ欄にてその旨伝えてください）'),
                                                   ),
@@ -878,7 +878,7 @@ class _DetailPatientWebReservationScreenState
                                               return ElevatedButton(
                                                 style: ElevatedButton.styleFrom(
                                                   backgroundColor:
-                                                      const Color(0xffF08C67),
+                                                      Color(0xffF08C67),
                                                 ),
                                                 onPressed: () {
                                                   if (form.valid) {
@@ -889,7 +889,7 @@ class _DetailPatientWebReservationScreenState
                                                             form);
                                                   }
                                                 },
-                                                child: const Text('予約日を病院へ送信する'),
+                                                child: Text('予約日を病院へ送信する'),
                                               );
                                             }),
                                           )
@@ -942,7 +942,7 @@ class _DetailPatientWebReservationScreenState
                                           logger.d(value);
                                         },
                                         decoration: InputDecoration(
-                                          label: const Text('年月日'),
+                                          label: Text('年月日'),
                                           suffixIcon: IconButton(
                                             icon: const Icon(
                                               CupertinoIcons.calendar,
@@ -977,7 +977,7 @@ class _DetailPatientWebReservationScreenState
                                           logger.d(value);
                                         },
                                         decoration: InputDecoration(
-                                          label: const Text('時間'),
+                                          label: Text('時間'),
                                           suffixIcon: IconButton(
                                             icon: const Icon(
                                               CupertinoIcons.time,
@@ -1013,7 +1013,7 @@ class _DetailPatientWebReservationScreenState
                               builder: (context, value, _) {
                                 return Skeletonizer(
                                   enabled: value.loading,
-                                  child: SizedBox(
+                                  child: Container(
                                     height: 400,
                                     width: double.infinity,
                                     child: DynamicTable(
@@ -1021,16 +1021,16 @@ class _DetailPatientWebReservationScreenState
                                       data: TableData(
                                         columns: [
                                           HeaderTableData(
-                                            titleHeader: const Text('状況'),
+                                            titleHeader: Text('状況'),
                                           ),
                                           HeaderTableData(
-                                            titleHeader: const Text('医療機関'),
+                                            titleHeader: Text('医療機関'),
                                           ),
                                           HeaderTableData(
-                                            titleHeader: const Text('予約日'),
+                                            titleHeader: Text('予約日'),
                                           ),
                                           HeaderTableData(
-                                            titleHeader: const Text('テストコール'),
+                                            titleHeader: Text('テストコール'),
                                           ),
                                         ],
                                         rows: List<RowTableData>.generate(
@@ -1079,7 +1079,7 @@ class _DetailPatientWebReservationScreenState
                                                       .join(' - '),
                                                 ),
                                                 Text(
-                                                  Dates.formatFullDateTime(data.createdAt),
+                                                  '${Dates.formatFullDateTime(data.createdAt)}',
                                                 ),
                                               ],
                                             );
@@ -1141,7 +1141,7 @@ class _DetailPatientWebReservationScreenState
                                 : null,
                             child: WithLoadingButton(
                               isLoading: value.loading,
-                              child: const Text('保存する'),
+                              child: Text('保存する'),
                             ));
                       },
                     );

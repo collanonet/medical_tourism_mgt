@@ -44,7 +44,7 @@ class _PatientResponseMedicalCheckupScreenState
                             Row(
                               children: [
                                 Text(
-                                  '健診希望日',
+                                  "健診希望日",
                                   style: context.textTheme.titleMedium,
                                 ),
                                 const SizedBox(
@@ -55,7 +55,7 @@ class _PatientResponseMedicalCheckupScreenState
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              '第１希望',
+                              "第１希望",
                               style: context.textTheme.bodyMedium,
                             ),
                             const SizedBox(
@@ -103,7 +103,7 @@ class _PatientResponseMedicalCheckupScreenState
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              '第 2 希望',
+                              "第 2 希望",
                               style: context.textTheme.bodyMedium,
                             ),
                             const SizedBox(
@@ -151,7 +151,7 @@ class _PatientResponseMedicalCheckupScreenState
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              '第 3 希望',
+                              "第 3 希望",
                               style: context.textTheme.bodyMedium,
                             ),
                             const SizedBox(height: 8),
@@ -201,20 +201,20 @@ class _PatientResponseMedicalCheckupScreenState
                                 controlAffinity:
                                     ListTileControlAffinity.leading,
                                 contentPadding: EdgeInsets.zero,
-                                formControlName: 'desiredDate',
+                                formControlName: "desiredDate",
                                 onChanged: (control) {},
-                                title: const Text('希望日なし'),
+                                title: const Text("希望日なし"),
                               ),
                             ),
                             const SizedBox(height: 8),
                             Text(
-                              '備考',
+                              "備考",
                               style: context.textTheme.bodyMedium,
                             ),
                             const SizedBox(height: 8),
                             ReactiveTextField(
                               maxLines: 3,
-                              formControlName: 'remarks',
+                              formControlName: "remarks",
                             ),
                             const Divider(),
                             Text(
@@ -242,7 +242,7 @@ class _PatientResponseMedicalCheckupScreenState
                                                   .value as int) +
                                               1;
                                         },
-                                        icon: const Icon(
+                                        icon: Icon(
                                           Icons.add,
                                           color: Colors.white,
                                         ))),
@@ -254,7 +254,7 @@ class _PatientResponseMedicalCheckupScreenState
                                   child: ReactiveTextField(
                                     formControlName:
                                         'numberOfPeopleRequestingMedicalCheckup',
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text('健診希望人数'),
                                     ),
                                     keyboardType: TextInputType.number,
@@ -290,7 +290,7 @@ class _PatientResponseMedicalCheckupScreenState
                                                 1;
                                           }
                                         },
-                                        icon: const Icon(
+                                        icon: Icon(
                                           Icons.remove,
                                           color: Colors.white,
                                         ))),
@@ -312,7 +312,7 @@ class _PatientResponseMedicalCheckupScreenState
                                       FilteringTextInputFormatter.allow(
                                           RegExp(r'[0-9]')),
                                     ],
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text('年齢'),
                                     ),
                                   ),
@@ -342,7 +342,7 @@ class _PatientResponseMedicalCheckupScreenState
                                     current:
                                         control.value == true ? '男性' : '女性',
                                     values: const ['女性', '男性'],
-                                    iconList: const [
+                                    iconList: [
                                       Text('女性'),
                                       Text('男性'),
                                     ],
@@ -353,7 +353,7 @@ class _PatientResponseMedicalCheckupScreenState
                                       borderColor: Colors.transparent,
                                       borderRadius: BorderRadius.circular(10.0),
                                       boxShadow: [
-                                        const BoxShadow(
+                                        BoxShadow(
                                           color: Colors.black26,
                                           spreadRadius: 1,
                                           blurRadius: 2,
@@ -378,7 +378,7 @@ class _PatientResponseMedicalCheckupScreenState
                               stepWidth: 350,
                               child: ReactiveTextField(
                                 formControlName: 'relationshipBetweenPerson',
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   label: Text('本人との関係'),
                                 ),
                               ),
@@ -386,7 +386,7 @@ class _PatientResponseMedicalCheckupScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            const Divider(),
+                            Divider(),
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
@@ -409,7 +409,7 @@ class _PatientResponseMedicalCheckupScreenState
                                     current:
                                         control.value == true ? 'あり' : 'なし',
                                     values: const ['なし', 'あり'],
-                                    iconList: const [
+                                    iconList: [
                                       Text('なし'),
                                       Text('あり'),
                                     ],
@@ -420,7 +420,7 @@ class _PatientResponseMedicalCheckupScreenState
                                       borderColor: Colors.transparent,
                                       borderRadius: BorderRadius.circular(10.0),
                                       boxShadow: [
-                                        const BoxShadow(
+                                        BoxShadow(
                                           color: Colors.black26,
                                           spreadRadius: 1,
                                           blurRadius: 2,
@@ -449,7 +449,7 @@ class _PatientResponseMedicalCheckupScreenState
                                         'desiredAreaOrMedicalInstitutionName',
                                     maxLines: 3,
                                     minLines: 2,
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text('希望するエリア・医療機関名'),
                                     ),
                                   ),
@@ -466,7 +466,7 @@ class _PatientResponseMedicalCheckupScreenState
                                     formControlName: 'reason',
                                     maxLines: 3,
                                     minLines: 2,
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text('理由'),
                                     ),
                                   ),
@@ -484,7 +484,7 @@ class _PatientResponseMedicalCheckupScreenState
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    const Text('PET-CT'),
+                                    Text('PET-CT'),
                                     SizedBox(
                                       height:
                                           context.appTheme.spacing.marginMedium,
@@ -499,7 +499,7 @@ class _PatientResponseMedicalCheckupScreenState
                                                 ? '希望する'
                                                 : '希望しない',
                                             values: const ['希望しない', '希望する'],
-                                            iconList: const [
+                                            iconList: [
                                               Text('希望しない'),
                                               Text('希望する'),
                                             ],
@@ -513,7 +513,7 @@ class _PatientResponseMedicalCheckupScreenState
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
                                               boxShadow: [
-                                                const BoxShadow(
+                                                BoxShadow(
                                                   color: Colors.black26,
                                                   spreadRadius: 1,
                                                   blurRadius: 2,
@@ -540,7 +540,7 @@ class _PatientResponseMedicalCheckupScreenState
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    const Text('MRI'),
+                                    Text('MRI'),
                                     SizedBox(
                                       height:
                                           context.appTheme.spacing.marginMedium,
@@ -555,7 +555,7 @@ class _PatientResponseMedicalCheckupScreenState
                                                 ? '希望する'
                                                 : '希望しない',
                                             values: const ['希望しない', '希望する'],
-                                            iconList: const [
+                                            iconList: [
                                               Text('希望しない'),
                                               Text('希望する'),
                                             ],
@@ -569,7 +569,7 @@ class _PatientResponseMedicalCheckupScreenState
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
                                               boxShadow: [
-                                                const BoxShadow(
+                                                BoxShadow(
                                                   color: Colors.black26,
                                                   spreadRadius: 1,
                                                   blurRadius: 2,
@@ -596,7 +596,7 @@ class _PatientResponseMedicalCheckupScreenState
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    const Text('胃カメラ'),
+                                    Text('胃カメラ'),
                                     SizedBox(
                                       height:
                                           context.appTheme.spacing.marginMedium,
@@ -611,7 +611,7 @@ class _PatientResponseMedicalCheckupScreenState
                                                 ? '希望する'
                                                 : '希望しない',
                                             values: const ['希望しない', '希望する'],
-                                            iconList: const [
+                                            iconList: [
                                               Text('希望しない'),
                                               Text('希望する'),
                                             ],
@@ -625,7 +625,7 @@ class _PatientResponseMedicalCheckupScreenState
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
                                               boxShadow: [
-                                                const BoxShadow(
+                                                BoxShadow(
                                                   color: Colors.black26,
                                                   spreadRadius: 1,
                                                   blurRadius: 2,
@@ -657,7 +657,7 @@ class _PatientResponseMedicalCheckupScreenState
                                     formControlName: 'freeInput',
                                     maxLines: 3,
                                     minLines: 2,
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text('自由入力'),
                                     ),
                                   ),
@@ -674,7 +674,7 @@ class _PatientResponseMedicalCheckupScreenState
                                     formControlName: 'currentConcerns',
                                     maxLines: 3,
                                     minLines: 2,
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text('現在気になっていること'),
                                     ),
                                   ),
@@ -688,7 +688,7 @@ class _PatientResponseMedicalCheckupScreenState
                               width: 300,
                               child: ReactiveTextField(
                                 formControlName: 'brokerageCompanyOrIntroducer',
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   label: Text('仲介会社・紹介者'),
                                 ),
                               ),
@@ -698,7 +698,7 @@ class _PatientResponseMedicalCheckupScreenState
                             ),
                             Text('がんについて',
                                 style: context.textTheme.titleMedium),
-                            const Text('がんの既往歴'),
+                            Text('がんの既往歴'),
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
@@ -710,7 +710,7 @@ class _PatientResponseMedicalCheckupScreenState
                                     current:
                                         control.value == true ? 'あり' : 'なし',
                                     values: const ['なし', 'あり'],
-                                    iconList: const [
+                                    iconList: [
                                       Text('なし'),
                                       Text('あり'),
                                     ],
@@ -721,7 +721,7 @@ class _PatientResponseMedicalCheckupScreenState
                                       borderColor: Colors.transparent,
                                       borderRadius: BorderRadius.circular(10.0),
                                       boxShadow: [
-                                        const BoxShadow(
+                                        BoxShadow(
                                           color: Colors.black26,
                                           spreadRadius: 1,
                                           blurRadius: 2,
@@ -746,7 +746,7 @@ class _PatientResponseMedicalCheckupScreenState
                               width: 300,
                               child: ReactiveTextField(
                                 formControlName: 'cancerSite',
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   label: Text('がんの部位'),
                                 ),
                               ),
@@ -756,7 +756,7 @@ class _PatientResponseMedicalCheckupScreenState
                             ),
                             Text('糖尿病について',
                                 style: context.textTheme.titleMedium),
-                            const Text('現在糖尿病'),
+                            Text('現在糖尿病'),
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
@@ -768,7 +768,7 @@ class _PatientResponseMedicalCheckupScreenState
                                     current:
                                         control.value == true ? 'あり' : 'なし',
                                     values: const ['なし', 'あり'],
-                                    iconList: const [
+                                    iconList: [
                                       Text('なし'),
                                       Text('あり'),
                                     ],
@@ -779,7 +779,7 @@ class _PatientResponseMedicalCheckupScreenState
                                       borderColor: Colors.transparent,
                                       borderRadius: BorderRadius.circular(10.0),
                                       boxShadow: [
-                                        const BoxShadow(
+                                        BoxShadow(
                                           color: Colors.black26,
                                           spreadRadius: 1,
                                           blurRadius: 2,
@@ -800,7 +800,7 @@ class _PatientResponseMedicalCheckupScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            const Text('糖尿病服薬'),
+                            Text('糖尿病服薬'),
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
@@ -812,7 +812,7 @@ class _PatientResponseMedicalCheckupScreenState
                                     current:
                                         control.value == true ? 'あり' : 'なし',
                                     values: const ['なし', 'あり'],
-                                    iconList: const [
+                                    iconList: [
                                       Text('なし'),
                                       Text('あり'),
                                     ],
@@ -823,7 +823,7 @@ class _PatientResponseMedicalCheckupScreenState
                                       borderColor: Colors.transparent,
                                       borderRadius: BorderRadius.circular(10.0),
                                       boxShadow: [
-                                        const BoxShadow(
+                                        BoxShadow(
                                           color: Colors.black26,
                                           spreadRadius: 1,
                                           blurRadius: 2,
@@ -844,7 +844,7 @@ class _PatientResponseMedicalCheckupScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            const Text('空腹時血糖'),
+                            Text('空腹時血糖'),
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
@@ -916,7 +916,7 @@ class _PatientResponseMedicalCheckupScreenState
                                     current:
                                         control.value == true ? 'あり' : 'なし',
                                     values: const ['なし', 'あり'],
-                                    iconList: const [
+                                    iconList: [
                                       Text('なし'),
                                       Text('あり'),
                                     ],
@@ -927,7 +927,7 @@ class _PatientResponseMedicalCheckupScreenState
                                       borderColor: Colors.transparent,
                                       borderRadius: BorderRadius.circular(10.0),
                                       boxShadow: [
-                                        const BoxShadow(
+                                        BoxShadow(
                                           color: Colors.black26,
                                           spreadRadius: 1,
                                           blurRadius: 2,
@@ -948,7 +948,7 @@ class _PatientResponseMedicalCheckupScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            const Text('インプラントをした時期'),
+                            Text('インプラントをした時期'),
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
@@ -1019,7 +1019,7 @@ class _PatientResponseMedicalCheckupScreenState
                                     current:
                                         control.value == true ? 'あり' : 'なし',
                                     values: const ['なし', 'あり'],
-                                    iconList: const [
+                                    iconList: [
                                       Text('なし'),
                                       Text('あり'),
                                     ],
@@ -1030,7 +1030,7 @@ class _PatientResponseMedicalCheckupScreenState
                                       borderColor: Colors.transparent,
                                       borderRadius: BorderRadius.circular(10.0),
                                       boxShadow: [
-                                        const BoxShadow(
+                                        BoxShadow(
                                           color: Colors.black26,
                                           spreadRadius: 1,
                                           blurRadius: 2,
@@ -1066,7 +1066,7 @@ class _PatientResponseMedicalCheckupScreenState
                                     current:
                                         control.value == true ? 'あり' : 'なし',
                                     values: const ['なし', 'あり'],
-                                    iconList: const [
+                                    iconList: [
                                       Text('なし'),
                                       Text('あり'),
                                     ],
@@ -1077,7 +1077,7 @@ class _PatientResponseMedicalCheckupScreenState
                                       borderColor: Colors.transparent,
                                       borderRadius: BorderRadius.circular(10.0),
                                       boxShadow: [
-                                        const BoxShadow(
+                                        BoxShadow(
                                           color: Colors.black26,
                                           spreadRadius: 1,
                                           blurRadius: 2,
@@ -1102,7 +1102,7 @@ class _PatientResponseMedicalCheckupScreenState
                               width: 300,
                               child: ReactiveTextField(
                                 formControlName: 'partAndItsMaterial',
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   hintText: '部位とその材質',
                                 ),
                               ),
@@ -1125,7 +1125,7 @@ class _PatientResponseMedicalCheckupScreenState
                                     current:
                                         control.value == true ? 'あり' : 'なし',
                                     values: const ['なし', 'あり'],
-                                    iconList: const [
+                                    iconList: [
                                       Text('なし'),
                                       Text('あり'),
                                     ],
@@ -1136,7 +1136,7 @@ class _PatientResponseMedicalCheckupScreenState
                                       borderColor: Colors.transparent,
                                       borderRadius: BorderRadius.circular(10.0),
                                       boxShadow: [
-                                        const BoxShadow(
+                                        BoxShadow(
                                           color: Colors.black26,
                                           spreadRadius: 1,
                                           blurRadius: 2,
@@ -1196,7 +1196,7 @@ class _PatientResponseMedicalCheckupScreenState
                             .postMedicalRecordPatientResponseMedicalCheckup(
                                 formGroup);
                       },
-                      child: const Text('保存する'),
+                      child: Text('保存する'),
                     ),
                   ),
                 ],

@@ -60,7 +60,7 @@ class BasicInformationScreen extends StatelessWidget {
                                 : null,
                             child: WithLoadingButton(
                               isLoading: value.loading,
-                              child: const Text('保存する'),
+                              child: Text('保存する'),
                             ));
                       },
                     );

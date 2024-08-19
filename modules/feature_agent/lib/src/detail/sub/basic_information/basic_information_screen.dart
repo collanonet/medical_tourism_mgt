@@ -5,7 +5,9 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:intl/intl.dart';
@@ -45,7 +47,7 @@ class _AgentBasicInformationScreenState
                         enabled: value.loading,
                         child: ColumnSeparated(
                           separatorBuilder: (BuildContext context, int index) {
-                            return const SizedBox(height: 8);
+                            return SizedBox(height: 8);
                           },
                           children: [
                             Column(
@@ -55,7 +57,7 @@ class _AgentBasicInformationScreenState
                                   'メモ',
                                   style: context.textTheme.bodySmall,
                                 ),
-                                const SizedBox(height: 8),
+                                SizedBox(height: 8),
                                 ReactiveTextField(
                                   formControlName: 'memo',
                                   keyboardType: TextInputType.multiline,
@@ -66,7 +68,7 @@ class _AgentBasicInformationScreenState
                             Container(
                               padding: const EdgeInsets.all(16),
                               decoration: BoxDecoration(
-                                color: const Color(0xffF8F8D9),
+                                color: Color(0xffF8F8D9),
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               child: ColumnSeparated(
@@ -415,7 +417,7 @@ class _AgentBasicInformationScreenState
                                                         ),
                                                         const SizedBox(
                                                             width: 16),
-                                                        const Text('%'),
+                                                        Text('%'),
                                                         if (formArray.controls
                                                                 .indexOf(
                                                                     currentForm) !=
@@ -581,7 +583,7 @@ class _AgentBasicInformationScreenState
                               child: Container(
                                 padding: const EdgeInsets.all(16),
                                 decoration: BoxDecoration(
-                                  color: const Color(0xffF0F3F5),
+                                  color: Color(0xffF0F3F5),
                                   borderRadius: BorderRadius.circular(16),
                                 ),
                                 child: ReactiveForm(

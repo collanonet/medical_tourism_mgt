@@ -25,7 +25,7 @@ class ReportTypePage extends StatelessWidget {
               page: Provider(
                   create: (context) =>
                       GetIt.I<TypeModel>()..getTypes(formGroup),
-                  child: const ReportTypeScreen()),
+                  child: ReportTypeScreen()),
             );
           }),
     );

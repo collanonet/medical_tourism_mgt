@@ -22,7 +22,7 @@ class _MasterScreenState extends State<MasterScreen> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16), color: Colors.white),
           padding: const EdgeInsets.all(16),
-          child: const Text('マスタトップ'),
+          child: Text('マスタトップ'),
         ),
         SizedBox(
           height: context.appTheme.spacing.marginMedium,
@@ -41,12 +41,12 @@ class _MasterScreenState extends State<MasterScreen> {
                 children: [
                   InkWell(
                     onTap: (){
-                      context.router.push(const ContractRoute());
+                      context.router.push(ContractRoute());
                     },
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        color: const Color(0xffF0F3F5),
+                        color: Color(0xffF0F3F5),
                       ),
                       padding: const EdgeInsets.all(40),
                       child: Row(
@@ -67,12 +67,12 @@ class _MasterScreenState extends State<MasterScreen> {
                   ),
                   InkWell(
                     onTap: (){
-                      context.router.push(const ReportsRoute());
+                      context.router.push(ReportsRoute());
                     },
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        color: const Color(0xffF0F3F5),
+                        color: Color(0xffF0F3F5),
                       ),
                       padding: const EdgeInsets.all(40),
                       child: Row(

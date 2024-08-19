@@ -14,11 +14,11 @@ class StudyOfDICOMTab extends StatelessWidget {
         children: [
           Row(
             children: [
-              const ElevatedButton(onPressed: null, child: Text('001-C-20')),
+              ElevatedButton(onPressed: null, child: Text('001-C-20')),
               SizedBox(
                 width: context.appTheme.spacing.marginMedium,
               ),
-              const ElevatedButton(onPressed: null, child: Text('王　沐宸')),
+              ElevatedButton(onPressed: null, child: Text('王　沐宸')),
             ],
           ),
         ],

@@ -1,4 +1,6 @@
 import 'package:core_network/src/entities/application_treament_responce.dart';
+import 'package:core_network/src/entities/type_request.dart';
+import 'package:core_network/src/entities/type_response.dart';
 import 'package:core_network/src/entities/web_booking_medical_record.dart';
 import 'package:core_network/src/entities/web_booking_medical_record_request.dart';
 import 'package:injectable/injectable.dart';

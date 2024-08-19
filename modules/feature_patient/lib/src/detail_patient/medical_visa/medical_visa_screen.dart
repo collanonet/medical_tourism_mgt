@@ -48,9 +48,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
             padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
             child: Row(
               children: [
-                const Text('医療ビザ：マルチビザ'),
-                const Text('申請日：2023/05/31'),
-                const Spacer(),
+                Text('医療ビザ：マルチビザ'),
+                Text('申請日：2023/05/31'),
+                Spacer(),
                 Icon(
                   Icons.keyboard_arrow_down_rounded,
                   color: context.appTheme.primaryColor,
@@ -79,7 +79,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'medicalVisa',
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             label: Text(
                               '医療ビザ',
                             ),
@@ -109,7 +109,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 logger.d(value);
                               },
                               decoration: InputDecoration(
-                                label: const Text(
+                                label: Text(
                                   '申請日',
                                 ),
                                 suffixIcon: IconButton(
@@ -150,7 +150,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 logger.d(value);
                               },
                               decoration: InputDecoration(
-                                label: const Text(
+                                label: Text(
                                   '発行日',
                                 ),
                                 suffixIcon: IconButton(
@@ -195,7 +195,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 logger.d(value);
                               },
                               decoration: InputDecoration(
-                                label: const Text(
+                                label: Text(
                                   '有効期限',
                                 ),
                                 suffixIcon: IconButton(
@@ -219,7 +219,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'accompanyingPersonsNumber',
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             label: Text(
                               '同伴者人数',
                             ),
@@ -233,7 +233,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                         child: ReactiveTextField(
                           formControlName:
                               'visaIssuingOverseasEstablishments',
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             label: Text(
                               'ビザ発行在外公館',
                             ),
@@ -250,7 +250,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'remarks',
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             label: Text(
                               '備考',
                             ),
@@ -263,7 +263,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'paymentStatus',
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             label: Text(
                               '入金状況',
                             ),
@@ -348,7 +348,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 logger.d(value);
                               },
                               decoration: InputDecoration(
-                                label: const Text(
+                                label: Text(
                                   '滞在開始日（身元保証書）',
                                 ),
                                 suffixIcon: IconButton(
@@ -389,7 +389,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 logger.d(value);
                               },
                               decoration: InputDecoration(
-                                label: const Text(
+                                label: Text(
                                   '滞在終了日（身元保証書）',
                                 ),
                                 suffixIcon: IconButton(
@@ -448,7 +448,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
           ),
-          const Text('日本で必要な書類'),
+          Text('日本で必要な書類'),
           ReactiveForm(
             formGroup: formGroup.control('requiredInJapan') as FormGroup,
             child: Column(
@@ -456,7 +456,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
               children: [
                 Row(
                   children: [
-                    const Expanded(child: Text('パスポート')),
+                    Expanded(child: Text('パスポート')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -507,7 +507,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -515,7 +515,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('身元保証書')),
+                    Expanded(child: Text('身元保証書')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -565,27 +565,27 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Checkbox(value: true, onChanged: (value) {}),
-                          const Text('原本送付'),
-                          const Text('（'),
+                          Text('原本送付'),
+                          Text('（'),
                           Checkbox(value: false, onChanged: (value) {}),
-                          const Text('EMS'),
+                          Text('EMS'),
                           Checkbox(value: true, onChanged: (value) {}),
-                          const Text('Fedex'),
+                          Text('Fedex'),
                           Checkbox(value: false, onChanged: (value) {}),
-                          const Text('その他'),
-                          const Text('）'),
+                          Text('その他'),
+                          Text('）'),
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
                           Checkbox(value: true, onChanged: (value) {}),
-                          const Text('PDF送付'),
+                          Text('PDF送付'),
                         ],
                       ),
                     ),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -617,7 +617,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('治療予定表')),
+                    Expanded(child: Text('治療予定表')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -669,7 +669,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -701,7 +701,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('理由書')),
+                    Expanded(child: Text('理由書')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -753,7 +753,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -761,7 +761,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('同行者リスト')),
+                    Expanded(child: Text('同行者リスト')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -814,7 +814,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
               ],
@@ -863,7 +863,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                     logger.d(value);
                                   },
                                   decoration: InputDecoration(
-                                    label: const Text(
+                                    label: Text(
                                       '上陸許可日',
                                     ),
                                     suffixIcon: IconButton(
@@ -904,7 +904,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                     logger.d(value);
                                   },
                                   decoration: InputDecoration(
-                                    label: const Text(
+                                    label: Text(
                                       'ビザの有効期限　満了日',
                                     ),
                                     suffixIcon: IconButton(
@@ -957,7 +957,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                     logger.d(value);
                                   },
                                   decoration: InputDecoration(
-                                    label: const Text(
+                                    label: Text(
                                       '日本への入国日',
                                     ),
                                     suffixIcon: IconButton(
@@ -998,7 +998,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                     logger.d(value);
                                   },
                                   decoration: InputDecoration(
-                                    label: const Text(
+                                    label: Text(
                                       '日本からの出国日',
                                     ),
                                     suffixIcon: IconButton(
@@ -1029,7 +1029,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),
-                      const Text('入国'),
+                      Text('入国'),
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),
@@ -1039,7 +1039,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             flex: 2,
                             child: ReactiveTextField(
                               formControlName: 'departureEntry',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '出発地',
                                 ),
@@ -1053,7 +1053,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             flex: 2,
                             child: ReactiveTextField(
                               formControlName: 'arrivalEntry',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '到着地',
                                 ),
@@ -1066,7 +1066,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'flightNumberEntry',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '便名',
                                 ),
@@ -1079,7 +1079,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'departureTimeEntry',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '発時刻',
                                 ),
@@ -1092,7 +1092,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'arrivalTimeEntry',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '着時刻',
                                 ),
@@ -1112,7 +1112,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),
-                      const Text('出国'),
+                      Text('出国'),
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),
@@ -1122,7 +1122,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             flex: 2,
                             child: ReactiveTextField(
                               formControlName: 'departureDeparture',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '出発地',
                                 ),
@@ -1136,7 +1136,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             flex: 2,
                             child: ReactiveTextField(
                               formControlName: 'arrivalDeparture',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '到着地',
                                 ),
@@ -1149,7 +1149,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'flightNumberDeparture',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '便名',
                                 ),
@@ -1162,7 +1162,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'departureTimeDeparture',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '発時刻',
                                 ),
@@ -1175,7 +1175,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'arrivalTimeDeparture',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '着時刻',
                                 ),
@@ -1188,7 +1188,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'flightSeatNumbeDeparturer',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '座席番号',
                                 ),
@@ -1205,7 +1205,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'remarks',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '出発地',
                                 ),
@@ -1252,7 +1252,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
           ),
-          const Text('ビザの取り下げ'),
+          Text('ビザの取り下げ'),
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
           ),
@@ -1261,7 +1261,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
             child: Row(
               children: [
                 Checkbox(value: true, onChanged: (value) {}),
-                const Text('ビザ取下対象とする'),
+                Text('ビザ取下対象とする'),
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
@@ -1285,7 +1285,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           logger.d(value);
                         },
                         decoration: InputDecoration(
-                          label: const Text(
+                          label: Text(
                             '死亡日または事由発生日',
                           ),
                           suffixIcon: IconButton(
@@ -1309,7 +1309,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 Expanded(
                   child: ReactiveTextField(
                     formControlName: 'remarks',
-                    decoration: const InputDecoration(
+                    decoration: InputDecoration(
                       label: Text('備考'),
                     ),
                   ),
@@ -1331,7 +1331,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
               children: [
                 Row(
                   children: [
-                    const Expanded(child: Text('ビザのページ')),
+                    Expanded(child: Text('ビザのページ')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -1382,7 +1382,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -1390,7 +1390,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('上陸許可証')),
+                    Expanded(child: Text('上陸許可証')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -1441,7 +1441,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -1470,7 +1470,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('来日時の飛行機チケット')),
+                    Expanded(child: Text('来日時の飛行機チケット')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -1523,7 +1523,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -1552,7 +1552,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('帰国時の飛行機チケット')),
+                    Expanded(child: Text('帰国時の飛行機チケット')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -1605,7 +1605,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -1634,7 +1634,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('帰国時のボーディングパス')),
+                    Expanded(child: Text('帰国時のボーディングパス')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -1687,7 +1687,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -1716,7 +1716,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('在留資格認定証明書')),
+                    Expanded(child: Text('在留資格認定証明書')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -1769,7 +1769,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
               ],
@@ -1805,7 +1805,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'nameRomaji',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '氏名（ローマ字）',
                                 ),
@@ -1835,7 +1835,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                     logger.d(value);
                                   },
                                   decoration: InputDecoration(
-                                    label: const Text(
+                                    label: Text(
                                       '生年月日',
                                     ),
                                     suffixIcon: IconButton(
@@ -1863,7 +1863,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 Column(
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    const Text('性別'),
+                                    Text('性別'),
                                     ReactiveValueListenableBuilder<DateTime>(
                                       formControlName: 'dateBirth',
                                       builder: (context, value, _) {
@@ -1881,17 +1881,17 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   mainAxisSize: MainAxisSize.min,
                                   children: [
-                                    const Text('性別'),
+                                    Text('性別'),
                                     Row(
                                       children: [
                                         Checkbox(
                                             value: false,
                                             onChanged: (value) {}),
-                                        const Text('男性'),
+                                        Text('男性'),
                                         Checkbox(
                                             value: false,
                                             onChanged: (value) {}),
-                                        const Text('女性'),
+                                        Text('女性'),
                                       ],
                                     )
                                   ],
@@ -1909,7 +1909,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'addressArea',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '居住地域',
                                 ),
@@ -1922,7 +1922,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'numberPassport',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '旅券番号',
                                 ),
@@ -1979,7 +1979,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                           logger.d(value);
                                         },
                                         decoration: InputDecoration(
-                                          label: const Text(
+                                          label: Text(
                                             '上陸許可日',
                                           ),
                                           suffixIcon: IconButton(
@@ -2022,7 +2022,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                           logger.d(value);
                                         },
                                         decoration: InputDecoration(
-                                          label: const Text(
+                                          label: Text(
                                             'ビザの有効期限　満了日',
                                           ),
                                           suffixIcon: IconButton(
@@ -2079,7 +2079,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                           logger.d(value);
                                         },
                                         decoration: InputDecoration(
-                                          label: const Text(
+                                          label: Text(
                                             '日本への入国日',
                                           ),
                                           suffixIcon: IconButton(
@@ -2123,7 +2123,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                           logger.d(value);
                                         },
                                         decoration: InputDecoration(
-                                          label: const Text(
+                                          label: Text(
                                             '日本からの出国日',
                                           ),
                                           suffixIcon: IconButton(
@@ -2155,7 +2155,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            const Text('入国'),
+                            Text('入国'),
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
@@ -2165,7 +2165,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   flex: 2,
                                   child: ReactiveTextField(
                                     formControlName: 'departureEntry',
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text(
                                         '出発地',
                                       ),
@@ -2179,7 +2179,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   flex: 2,
                                   child: ReactiveTextField(
                                     formControlName: 'arrivalEntry',
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text(
                                         '到着地',
                                       ),
@@ -2192,7 +2192,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 Expanded(
                                   child: ReactiveTextField(
                                     formControlName: 'flightNumberEntry',
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text(
                                         '便名',
                                       ),
@@ -2205,7 +2205,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 Expanded(
                                   child: ReactiveTextField(
                                     formControlName: 'departureTimeEntry',
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text(
                                         '発時刻',
                                       ),
@@ -2218,7 +2218,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 Expanded(
                                   child: ReactiveTextField(
                                     formControlName: 'arrivalTimeEntry',
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text(
                                         '着時刻',
                                       ),
@@ -2239,7 +2239,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            const Text('出国'),
+                            Text('出国'),
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
@@ -2249,7 +2249,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   flex: 2,
                                   child: ReactiveTextField(
                                     formControlName: 'departureDeparture',
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text(
                                         '出発地',
                                       ),
@@ -2263,7 +2263,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   flex: 2,
                                   child: ReactiveTextField(
                                     formControlName: 'arrivalDeparture',
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text(
                                         '到着地',
                                       ),
@@ -2276,7 +2276,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 Expanded(
                                   child: ReactiveTextField(
                                     formControlName: 'flightNumberDeparture',
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text(
                                         '便名',
                                       ),
@@ -2289,7 +2289,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 Expanded(
                                   child: ReactiveTextField(
                                     formControlName: 'departureTimeDeparture',
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text(
                                         '発時刻',
                                       ),
@@ -2302,7 +2302,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 Expanded(
                                   child: ReactiveTextField(
                                     formControlName: 'arrivalTimeDeparture',
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text(
                                         '着時刻',
                                       ),
@@ -2316,7 +2316,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   child: ReactiveTextField(
                                     formControlName:
                                         'flightSeatNumbeDeparturer',
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text(
                                         '座席番号',
                                       ),
@@ -2358,7 +2358,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'remarks',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '備考',
                                 ),
@@ -2387,7 +2387,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                   child: Row(
                     children: [
                       Checkbox(value: true, onChanged: (value) {}),
-                      const Text('ビザの取り下げ'),
+                      Text('ビザの取り下げ'),
                       SizedBox(
                         width: context.appTheme.spacing.marginMedium,
                       ),
@@ -2395,13 +2395,13 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
-                          const Text('理由'),
+                          Text('理由'),
                           Row(
                             children: [
                               Checkbox(value: false, onChanged: (value) {}),
-                              const Text('患者死亡'),
+                              Text('患者死亡'),
                               Checkbox(value: false, onChanged: (value) {}),
-                              const Text('その他'),
+                              Text('その他'),
                             ],
                           )
                         ],
@@ -2412,7 +2412,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'remarks',
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             label: Text('備考'),
                           ),
                         ),
@@ -2438,7 +2438,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     children: [
                       Row(
                         children: [
-                          const Expanded(child: Text('ビザのページ')),
+                          Expanded(child: Text('ビザのページ')),
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
@@ -2490,7 +2490,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             width: context.appTheme.spacing.marginMedium,
                           ),
                           ElevatedButton(
-                              onPressed: () {}, child: const Text('ファイル選択'))
+                              onPressed: () {}, child: Text('ファイル選択'))
                         ],
                       ),
                       SizedBox(
@@ -2498,7 +2498,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       ),
                       Row(
                         children: [
-                          const Expanded(child: Text('上陸許可証')),
+                          Expanded(child: Text('上陸許可証')),
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
@@ -2552,7 +2552,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             width: context.appTheme.spacing.marginMedium,
                           ),
                           ElevatedButton(
-                              onPressed: () {}, child: const Text('ファイル選択'))
+                              onPressed: () {}, child: Text('ファイル選択'))
                         ],
                       ),
                       SizedBox(
@@ -2582,7 +2582,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       ),
                       Row(
                         children: [
-                          const Expanded(child: Text('来日時の飛行機チケット')),
+                          Expanded(child: Text('来日時の飛行機チケット')),
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
@@ -2636,7 +2636,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             width: context.appTheme.spacing.marginMedium,
                           ),
                           ElevatedButton(
-                              onPressed: () {}, child: const Text('ファイル選択'))
+                              onPressed: () {}, child: Text('ファイル選択'))
                         ],
                       ),
                       SizedBox(
@@ -2666,7 +2666,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       ),
                       Row(
                         children: [
-                          const Expanded(child: Text('帰国時の飛行機チケット')),
+                          Expanded(child: Text('帰国時の飛行機チケット')),
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
@@ -2720,7 +2720,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             width: context.appTheme.spacing.marginMedium,
                           ),
                           ElevatedButton(
-                              onPressed: () {}, child: const Text('ファイル選択'))
+                              onPressed: () {}, child: Text('ファイル選択'))
                         ],
                       ),
                       SizedBox(
@@ -2750,7 +2750,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       ),
                       Row(
                         children: [
-                          const Expanded(child: Text('帰国時のボーディングパス')),
+                          Expanded(child: Text('帰国時のボーディングパス')),
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
@@ -2804,7 +2804,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             width: context.appTheme.spacing.marginMedium,
                           ),
                           ElevatedButton(
-                              onPressed: () {}, child: const Text('ファイル選択'))
+                              onPressed: () {}, child: Text('ファイル選択'))
                         ],
                       ),
                       SizedBox(
@@ -2834,7 +2834,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       ),
                       Row(
                         children: [
-                          const Expanded(child: Text('在留資格認定証明書')),
+                          Expanded(child: Text('在留資格認定証明書')),
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
@@ -2888,7 +2888,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             width: context.appTheme.spacing.marginMedium,
                           ),
                           ElevatedButton(
-                              onPressed: () {}, child: const Text('ファイル選択'))
+                              onPressed: () {}, child: Text('ファイル選択'))
                         ],
                       ),
                     ],
@@ -2924,13 +2924,13 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
             height: context.appTheme.spacing.marginMedium,
           ),
           Row(children: [
-            const Expanded(
+            Expanded(
               child: Text('書類'),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            const Expanded(
+            Expanded(
               child: Text('発行日'),
             ),
             SizedBox(
@@ -2942,7 +2942,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
               ),
             ),
           ]),
-          const Divider(),
+          Divider(),
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
           ),
@@ -2957,7 +2957,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
               children: [
                 Row(
                   children: [
-                    const Expanded(child: Text('パスポート')),
+                    Expanded(child: Text('パスポート')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -3008,7 +3008,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3016,7 +3016,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('身元保証書')),
+                    Expanded(child: Text('身元保証書')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -3066,27 +3066,27 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Checkbox(value: true, onChanged: (value) {}),
-                          const Text('原本送付'),
-                          const Text('（'),
+                          Text('原本送付'),
+                          Text('（'),
                           Checkbox(value: false, onChanged: (value) {}),
-                          const Text('EMS'),
+                          Text('EMS'),
                           Checkbox(value: true, onChanged: (value) {}),
-                          const Text('Fedex'),
+                          Text('Fedex'),
                           Checkbox(value: false, onChanged: (value) {}),
-                          const Text('その他'),
-                          const Text('）'),
+                          Text('その他'),
+                          Text('）'),
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
                           Checkbox(value: true, onChanged: (value) {}),
-                          const Text('PDF送付'),
+                          Text('PDF送付'),
                         ],
                       ),
                     ),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3094,7 +3094,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('治療予定表')),
+                    Expanded(child: Text('治療予定表')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -3146,7 +3146,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3154,7 +3154,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('理由書')),
+                    Expanded(child: Text('理由書')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -3206,7 +3206,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3214,7 +3214,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('同行者リスト')),
+                    Expanded(child: Text('同行者リスト')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -3267,7 +3267,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
               ],
@@ -3287,7 +3287,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
               children: [
                 Row(
                   children: [
-                    const Expanded(child: Text('ビザのページ')),
+                    Expanded(child: Text('ビザのページ')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -3338,7 +3338,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3346,7 +3346,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('上陸許可証')),
+                    Expanded(child: Text('上陸許可証')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -3397,7 +3397,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3426,7 +3426,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('来日時の飛行機チケット')),
+                    Expanded(child: Text('来日時の飛行機チケット')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -3479,7 +3479,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3508,7 +3508,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('帰国時の飛行機チケット')),
+                    Expanded(child: Text('帰国時の飛行機チケット')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -3561,7 +3561,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3590,7 +3590,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('帰国時のボーディングパス')),
+                    Expanded(child: Text('帰国時のボーディングパス')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -3643,7 +3643,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3672,7 +3672,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 ),
                 Row(
                   children: [
-                    const Expanded(child: Text('在留資格認定証明書')),
+                    Expanded(child: Text('在留資格認定証明書')),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
@@ -3725,7 +3725,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(onPressed: () {}, child: Text('ファイル選択'))
                   ],
                 ),
               ],

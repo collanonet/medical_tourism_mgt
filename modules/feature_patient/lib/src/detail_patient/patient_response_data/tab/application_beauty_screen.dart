@@ -1,6 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -39,16 +40,16 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                     Row(
                       children: [
                         Text(
-                          '希望日',
+                          "希望日",
                           style: context.textTheme.titleMedium,
                         ),
                         const SizedBox(width: 10),
-                        boxRequired(enabled: true, label: '必須')
+                        boxRequired(enabled: true, label: "必須")
                       ],
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      '第１希望',
+                      "第１希望",
                       style: context.textTheme.bodyMedium,
                     ),
                     const SizedBox(
@@ -93,7 +94,7 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      '第​ 2 希望',
+                      "第​ 2 希望",
                       style: context.textTheme.bodyMedium,
                     ),
                     const SizedBox(
@@ -138,7 +139,7 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      '第 3 希望',
+                      "第 3 希望",
                       style: context.textTheme.bodyMedium,
                     ),
                     const SizedBox(
@@ -186,30 +187,30 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'desiredDate',
-                        title: const Text('希望日なし'),
+                        formControlName: "desiredDate",
+                        title: Text("希望日なし"),
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Text('備考'),
+                    Text("備考"),
                     const SizedBox(height: 8),
                     ReactiveTextField(
-                      formControlName: 'remarks',
+                      formControlName: "remarks",
                       maxLines: 3,
                     ),
                     const SizedBox(height: 8),
                     const Divider(),
                     const SizedBox(height: 8),
                     Text(
-                      'その他の希望者',
+                      "その他の希望者",
                       style: context.textTheme.titleMedium,
                     ),
                     const SizedBox(height: 8),
                     Row(
                       children: [
-                        const Text('希望人数'),
+                        Text("希望人数"),
                         const SizedBox(width: 10),
-                        boxRequired(enabled: true, label: '必須'),
+                        boxRequired(enabled: true, label: "必須"),
                       ],
                     ),
                     const SizedBox(height: 8),
@@ -217,7 +218,7 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                       children: [
                         IconButton(
                           onPressed: () {
-                            formGroup.control('people').value++;
+                            formGroup.control("people").value++;
                           },
                           icon: Icon(
                             Icons.add_box_rounded,
@@ -228,7 +229,7 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                         SizedBox(
                           width: 100,
                           child: ReactiveTextField<int>(
-                            formControlName: 'people',
+                            formControlName: "people",
                             keyboardType: TextInputType.number,
                             inputFormatters: [
                               FilteringTextInputFormatter.allow(
@@ -238,8 +239,8 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                         ),
                         IconButton(
                           onPressed: () {
-                            if (formGroup.control('people').value > 0) {
-                              formGroup.control('people').value--;
+                            if (formGroup.control("people").value > 0) {
+                              formGroup.control("people").value--;
                             }
                           },
                           icon: Icon(
@@ -251,31 +252,31 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                       ],
                     ),
                     const SizedBox(height: 8),
-                    const Text('年齢'),
+                    Text("年齢"),
                     const SizedBox(height: 8),
                     Row(
                       children: [
                         SizedBox(
                           width: 100,
                           child: ReactiveTextField(
-                            formControlName: 'age',
+                            formControlName: "age",
                           ),
                         ),
                         const SizedBox(width: 20),
-                        const Text('歳')
+                        const Text("歳")
                       ],
                     ),
                     const SizedBox(height: 8),
                     Row(
                       children: [
-                        const Text('性別'),
+                        Text("性別"),
                         const SizedBox(width: 10),
-                        boxRequired(enabled: true, label: '必須')
+                        boxRequired(enabled: true, label: "必須")
                       ],
                     ),
                     const SizedBox(height: 8),
                     ReactiveValueListenableBuilder(
-                      formControlName: 'sex',
+                      formControlName: "sex",
                       builder: (context, value, _) {
                         return Row(
                           children: [
@@ -296,10 +297,10 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  formGroup.control('sex').value = true;
+                                  formGroup.control("sex").value = true;
                                 },
-                                child: const Text('男性')),
-                            const SizedBox(width: 16),
+                                child: Text("男性")),
+                            SizedBox(width: 16),
                             ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   foregroundColor: value.value == false
@@ -317,37 +318,37 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  formGroup.control('sex').value = false;
+                                  formGroup.control("sex").value = false;
                                 },
-                                child: const Text('女性')),
+                                child: Text("女性")),
                           ],
                         );
                       },
                     ),
                     const SizedBox(height: 8),
-                    const Text('本人との関係'),
+                    Text("本人との関係"),
                     const SizedBox(height: 8),
                     IntrinsicWidth(
                       stepWidth: 250,
                       child: ReactiveTextField(
-                        formControlName: 'relationship',
+                        formControlName: "relationship",
                       ),
                     ),
                     const SizedBox(height: 8),
                     const Divider(),
                     const SizedBox(height: 8),
                     Text(
-                      '希望医療機関',
+                      "希望医療機関",
                       style: context.textTheme.titleMedium,
                     ),
                     const SizedBox(height: 8),
                     Text(
-                      '希望する医療機関はありますか',
+                      "希望する医療機関はありますか",
                       style: context.textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 8),
                     ReactiveValueListenableBuilder(
-                      formControlName: 'attend',
+                      formControlName: "attend",
                       builder: (context, value, _) {
                         return Row(
                           children: [
@@ -368,10 +369,10 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  formGroup.control('attend').value = true;
+                                  formGroup.control("attend").value = true;
                                 },
-                                child: const Text('あり')),
-                            const SizedBox(width: 16),
+                                child: Text("あり")),
+                            SizedBox(width: 16),
                             ElevatedButton(
                                 style: ElevatedButton.styleFrom(
                                   foregroundColor: value.value == false
@@ -389,128 +390,128 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                                   ),
                                 ),
                                 onPressed: () {
-                                  formGroup.control('attend').value = false;
+                                  formGroup.control("attend").value = false;
                                 },
-                                child: const Text('なし')),
+                                child: Text("なし")),
                           ],
                         );
                       },
                     ),
                     const SizedBox(height: 8),
-                    const Text('希望するエリア・医療機関名'),
+                    Text("希望するエリア・医療機関名"),
                     const SizedBox(height: 8),
                     ReactiveTextField(
-                      formControlName: 'desiredArea',
+                      formControlName: "desiredArea",
                       maxLines: 3,
                     ),
                     const SizedBox(height: 8),
-                    const Text('理由'),
+                    Text("理由"),
                     const SizedBox(height: 8),
                     ReactiveTextField(
-                      formControlName: 'reason',
+                      formControlName: "reason",
                       maxLines: 3,
                     ),
                     const SizedBox(height: 8),
                     const Divider(),
                     const SizedBox(height: 16),
                     Text(
-                      '希望するメニュー',
+                      "希望するメニュー",
                       style: context.textTheme.titleMedium,
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      '顔',
+                      "顔",
                       style: context.textTheme.bodyMedium,
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'faceMenu1',
+                        formControlName: "faceMenu1",
                         onChanged: (control) {},
-                        title: const Text('二重整形・目元整形'),
+                        title: const Text("二重整形・目元整形"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'faceMenu2',
+                        formControlName: "faceMenu2",
                         onChanged: (control) {},
-                        title: const Text('目元のクマ・しわ・たるみ取り'),
+                        title: const Text("目元のクマ・しわ・たるみ取り"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'faceMenu3',
+                        formControlName: "faceMenu3",
                         onChanged: (control) {},
-                        title: const Text('鼻の整形'),
+                        title: const Text("鼻の整形"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'faceMenu4',
+                        formControlName: "faceMenu4",
                         onChanged: (control) {},
-                        title: const Text('口元・ガミースマイル・たらこ唇'),
+                        title: const Text("口元・ガミースマイル・たらこ唇"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'faceMenu5',
+                        formControlName: "faceMenu5",
                         onChanged: (control) {},
-                        title: const Text('小顔・顔のたるみ・フェイスライン・リフトアップ'),
+                        title: const Text("小顔・顔のたるみ・フェイスライン・リフトアップ"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'faceMenu6',
+                        formControlName: "faceMenu6",
                         onChanged: (control) {},
-                        title: const Text('ヒアルロン酸注射'),
+                        title: const Text("ヒアルロン酸注射"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'faceMenu7',
+                        formControlName: "faceMenu7",
                         onChanged: (control) {},
-                        title: const Text('ボトックス注射'),
+                        title: const Text("ボトックス注射"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'faceMenu8',
+                        formControlName: "faceMenu8",
                         onChanged: (control) {},
-                        title: const Text('脂肪注入'),
+                        title: const Text("脂肪注入"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'faceMenu9',
+                        formControlName: "faceMenu9",
                         onChanged: (control) {},
-                        title: const Text('若返り・エイジングケア'),
+                        title: const Text("若返り・エイジングケア"),
                       ),
                     ),
-                    const Text('その他'),
+                    const Text("その他"),
                     const SizedBox(height: 8),
                     ReactiveTextField(
-                      formControlName: 'others',
+                      formControlName: "others",
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'ボディ',
+                      "ボディ",
                       style: context.textTheme.titleMedium,
                     ),
                     const SizedBox(height: 16),
@@ -518,55 +519,55 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'bodyMenu1',
+                        formControlName: "bodyMenu1",
                         onChanged: (control) {},
-                        title: const Text('豊胸・バストアップ'),
+                        title: const Text("豊胸・バストアップ"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'bodyMenu2',
+                        formControlName: "bodyMenu2",
                         onChanged: (control) {},
-                        title: const Text('婦人科形成'),
+                        title: const Text("婦人科形成"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'bodyMenu3',
+                        formControlName: "bodyMenu3",
                         onChanged: (control) {},
-                        title: const Text('痩身・ダイエット・脂肪溶解注射'),
+                        title: const Text("痩身・ダイエット・脂肪溶解注射"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'bodyMenu4',
+                        formControlName: "bodyMenu4",
                         onChanged: (control) {},
-                        title: const Text('脂肪吸引'),
+                        title: const Text("脂肪吸引"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'bodyMenu5',
+                        formControlName: "bodyMenu5",
                         onChanged: (control) {},
-                        title: const Text('ヒップ'),
+                        title: const Text("ヒップ"),
                       ),
                     ),
-                    const Text('その他'),
+                    Text("その他"),
                     const SizedBox(height: 8),
                     ReactiveTextField(
-                      formControlName: 'others1',
+                      formControlName: "others1",
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      '肌',
+                      "肌",
                       style: context.textTheme.titleMedium,
                     ),
                     const SizedBox(height: 16),
@@ -574,32 +575,32 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'skinMenu1',
+                        formControlName: "skinMenu1",
                         onChanged: (control) {},
-                        title: const Text('内服薬・外用薬'),
+                        title: const Text("内服薬・外用薬"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'skinMenu2',
+                        formControlName: "skinMenu2",
                         onChanged: (control) {},
-                        title: const Text('ヒップ'),
+                        title: const Text("ヒップ"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'skinMenu3',
+                        formControlName: "skinMenu3",
                         onChanged: (control) {},
-                        title: const Text('スキンケア（美白・しみ・肝斑）'),
+                        title: const Text("スキンケア（美白・しみ・肝斑）"),
                       ),
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      '脱毛',
+                      "脱毛",
                       style: context.textTheme.titleMedium,
                     ),
                     const SizedBox(height: 16),
@@ -607,23 +608,23 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'hairRemovalMeun1',
+                        formControlName: "hairRemovalMeun1",
                         onChanged: (control) {},
-                        title: const Text('全身脱毛（顔・VIO・首・おなじ除く）'),
+                        title: const Text("全身脱毛（顔・VIO・首・おなじ除く）"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'hairRemovalMeun2',
+                        formControlName: "hairRemovalMeun2",
                         onChanged: (control) {},
-                        title: const Text('VIO脱毛'),
+                        title: const Text("VIO脱毛"),
                       ),
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'その他',
+                      "その他",
                       style: context.textTheme.titleMedium,
                     ),
                     const SizedBox(height: 16),
@@ -631,50 +632,50 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'otherMenu1',
+                        formControlName: "otherMenu1",
                         onChanged: (control) {},
-                        title: const Text('女性の薄毛治療（FAGA）'),
+                        title: const Text("女性の薄毛治療（FAGA）"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'otherMenu2',
+                        formControlName: "otherMenu2",
                         onChanged: (control) {},
-                        title: const Text('ピアス穴開け・耳・へその整形'),
+                        title: const Text("ピアス穴開け・耳・へその整形"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'otherMenu3',
+                        formControlName: "otherMenu3",
                         onChanged: (control) {},
-                        title: const Text('多汗症・わきが治療'),
+                        title: const Text("多汗症・わきが治療"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'otherMenu4',
+                        formControlName: "otherMenu4",
                         onChanged: (control) {},
-                        title: const Text('ほくろ除去・いぼ治療'),
+                        title: const Text("ほくろ除去・いぼ治療"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'otherMenu5',
+                        formControlName: "otherMenu5",
                         onChanged: (control) {},
-                        title: const Text('ケロイド・タトゥー'),
+                        title: const Text("ケロイド・タトゥー"),
                       ),
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      'メンズ',
+                      "メンズ",
                       style: context.textTheme.titleMedium,
                     ),
                     const SizedBox(height: 16),
@@ -682,23 +683,23 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'menMenu1',
+                        formControlName: "menMenu1",
                         onChanged: (control) {},
-                        title: const Text('AGA'),
+                        title: const Text("AGA"),
                       ),
                     ),
                     IntrinsicWidth(
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'menMenu2',
+                        formControlName: "menMenu2",
                         onChanged: (control) {},
-                        title: const Text('ED治療'),
+                        title: const Text("ED治療"),
                       ),
                     ),
                     const SizedBox(height: 16),
                     Text(
-                      '他院修正',
+                      "他院修正",
                       style: context.textTheme.titleMedium,
                     ),
                     const SizedBox(height: 16),
@@ -706,29 +707,29 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                       child: ReactiveCheckboxListTile(
                         controlAffinity: ListTileControlAffinity.leading,
                         contentPadding: EdgeInsets.zero,
-                        formControlName: 'otherHospital',
+                        formControlName: "otherHospital",
                         onChanged: (control) {},
-                        title: const Text('セカンドオピニオン'),
+                        title: const Text("セカンドオピニオン"),
                       ),
                     ),
                     const SizedBox(height: 8),
-                    const Text('その他'),
-                    const SizedBox(height: 8),
-                    ReactiveTextField(
-                      formControlName: 'others2',
-                    ),
-                    const SizedBox(height: 8),
-                    const Text('現在気になっていること'),
+                    Text("その他"),
                     const SizedBox(height: 8),
                     ReactiveTextField(
-                      formControlName: 'concerne',
+                      formControlName: "others2",
+                    ),
+                    const SizedBox(height: 8),
+                    Text("現在気になっていること"),
+                    const SizedBox(height: 8),
+                    ReactiveTextField(
+                      formControlName: "concerne",
                       maxLines: 3,
                     ),
                     const SizedBox(height: 8),
-                    const Text('仲介会社・紹介者'),
+                    Text("仲介会社・紹介者"),
                     const SizedBox(height: 8),
                     ReactiveTextField(
-                      formControlName: 'brokerageCompany',
+                      formControlName: "brokerageCompany",
                     ),
                     const SizedBox(height: 16),
                     IntrinsicWidth(
@@ -793,7 +794,7 @@ class _ApplicationBeautyScreenState extends State<ApplicationBeautyScreen> {
                         : null,
                     child: WithLoadingButton(
                       isLoading: value.loading,
-                      child: const Text('保存する'),
+                      child: Text("保存する"),
                     ),
                   );
                 });

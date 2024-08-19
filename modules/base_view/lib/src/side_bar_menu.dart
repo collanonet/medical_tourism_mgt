@@ -161,7 +161,7 @@ class SideBarMenu extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(16.0, 2, 16, 16),
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: const Text(
+                  child: Text(
                     'センター本部専用',
                   ),
                 ),
@@ -183,21 +183,21 @@ class SideBarMenu extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: const Text('Logout'),
-                          content: const Text('Are you sure you want to log out?'),
+                          title: Text('Logout'),
+                          content: Text('Are you sure you want to log out?'),
                           actions: [
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: const Text('Cancel'),
+                              child: Text('Cancel'),
                             ),
                             ElevatedButton(
                               onPressed: () {
                                 context.read<AuthModel>().logOut();
                                 Navigator.of(context).pop();
                               },
-                              child: const Text('Logout'),
+                              child: Text('Logout'),
                             ),
                           ],
                         );

@@ -138,7 +138,7 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
               )),
             ],
           ),
-          const Divider(),
+          Divider(),
           ListView.separated(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -151,13 +151,13 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                           Checkbox(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
-                              side: const BorderSide(color: Colors.grey),
+                              side: BorderSide(color: Colors.grey),
                             ),
                             checkColor: Colors.white,
                             value: false,
                             onChanged: (value) {},
                           ),
-                          const Expanded(
+                          Expanded(
                               flex: 2,
                               child: Row(
                                 children: [
@@ -171,20 +171,20 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                             style: context.textTheme.bodySmall?.copyWith(
                                 color: context.appTheme.primaryColor),
                           )),
-                          const Expanded(child: Text('2023/06/30')),
+                          Expanded(child: Text('2023/06/30')),
                           Expanded(
                               child: Icon(
                             Icons.qr_code_scanner,
                             color: context.appTheme.primaryColor,
                           )),
-                          const Expanded(child: Text('○')),
-                          const Expanded(child: Text('×')),
+                          Expanded(child: Text('○')),
+                          Expanded(child: Text('×')),
                         ],
                       ),
                     ),
                   ),
               separatorBuilder: (BuildContext context, int index) {
-                return const Divider(
+                return Divider(
                   thickness: 0.5,
                 );
               },
@@ -272,19 +272,19 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('　閉じる　'), // TODO: l10n 対応 (閉じる) (close)
+              child: Text('　閉じる　'), // TODO: l10n 対応 (閉じる) (close)
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('　共有する　'), // TODO: l10n 対応 (閉じる) (close)
+              child: Text('　共有する　'), // TODO: l10n 対応 (閉じる) (close)
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('　印刷する　'), // TODO: l10n 対応 (閉じる) (close)
+              child: Text('　印刷する　'), // TODO: l10n 対応 (閉じる) (close)
             ),
           ]),
     );

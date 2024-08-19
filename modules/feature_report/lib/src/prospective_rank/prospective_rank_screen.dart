@@ -1,6 +1,7 @@
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -19,7 +20,7 @@ class _ProspectivePankScreenState extends State<ProspectivePankScreen> {
         Container(
           width: MediaQuery.of(context).size.width,
           height: 100,
-          padding: const EdgeInsets.all(10),
+          padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10), color: Colors.white),
           child: const Row(
@@ -39,7 +40,7 @@ class _ProspectivePankScreenState extends State<ProspectivePankScreen> {
         const SizedBox(height: 20),
         Container(
           width: MediaQuery.of(context).size.width,
-          padding: const EdgeInsets.all(10),
+          padding: EdgeInsets.all(10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10), color: Colors.white),
           child: ColumnSeparated(
