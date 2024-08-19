@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:typed_data';
 
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
@@ -100,7 +99,7 @@ class OverseasMedicalDataModel {
   ) async {
     try {
       final token = await GetIt.I<AuthRepository>().getAccessToken();
-      logger.d("token: $token");
+      logger.d('token: $token');
       createMedicalOverseaData.value = const AsyncData(loading: true);
 
       String? file;

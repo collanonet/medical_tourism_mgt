@@ -4,9 +4,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -125,8 +123,8 @@ class _ContractScreenState extends State<ContractScreen> {
                                 },
                               );
                             }),
-                        Expanded(flex: 2, child: Text('書類名')),
-                        Expanded(child: Text('締結日')),
+                        const Expanded(flex: 2, child: Text('書類名')),
+                        const Expanded(child: Text('締結日')),
                       ],
                     ),
                     SizedBox(
@@ -242,9 +240,9 @@ class _ContractScreenState extends State<ContractScreen> {
                                                     value: context
                                                         .read<ContractModel>(),
                                                     child: AlertDialog(
-                                                      title: Text("削除確認"),
-                                                      content: Text(
-                                                          "選択した書類を削除しますか？"),
+                                                      title: const Text('削除確認'),
+                                                      content: const Text(
+                                                          '選択した書類を削除しますか？'),
                                                       actions: [
                                                         TextButton(
                                                           onPressed: () {
@@ -252,7 +250,7 @@ class _ContractScreenState extends State<ContractScreen> {
                                                                     context)
                                                                 .pop();
                                                           },
-                                                          child: Text("キャンセル"),
+                                                          child: const Text('キャンセル'),
                                                         ),
                                                         TextButton(
                                                           onPressed: () {
@@ -265,7 +263,7 @@ class _ContractScreenState extends State<ContractScreen> {
                                                                     context)
                                                                 .pop();
                                                           },
-                                                          child: Text("削除する"),
+                                                          child: const Text('削除する'),
                                                         ),
                                                       ],
                                                     ),
@@ -277,7 +275,7 @@ class _ContractScreenState extends State<ContractScreen> {
                                       loadingColor:
                                           context.appTheme.primaryColor,
                                       child: Text(
-                                        "削除する",
+                                        '削除する',
                                         style: context.textTheme.labelLarge
                                             ?.copyWith(
                                                 color: context
@@ -291,7 +289,7 @@ class _ContractScreenState extends State<ContractScreen> {
                         ),
                         ElevatedButton(
                           onPressed: () {},
-                          child: Text('印刷する'),
+                          child: const Text('印刷する'),
                         )
                       ],
                     );

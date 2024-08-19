@@ -1,6 +1,5 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -13,14 +12,14 @@ class SaleExpenses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final form = ReactiveForm.of(context) as FormGroup;
-    var formArrays;
+    FormArray<Object?> formArrays;
     return Container(
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        border: Border.all(color: Color.fromARGB(255, 14, 158, 194), width: 2),
+        border: Border.all(color: const Color.fromARGB(255, 14, 158, 194), width: 2),
         borderRadius: BorderRadius.circular(10),
       ),
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: ReactiveForm(
         formGroup: form.control('expenses') as FormGroup,
         child: ColumnSeparated(
@@ -33,22 +32,22 @@ class SaleExpenses extends StatelessWidget {
                 const SizedBox(
                   width: 120,
                 ),
-                Expanded(child: Text('大項目')),
-                SizedBox(
+                const Expanded(child: Text('大項目')),
+                const SizedBox(
                   width: 160,
                 ),
-                Expanded(child: Text('小項目')),
-                SizedBox(
+                const Expanded(child: Text('小項目')),
+                const SizedBox(
                   width: 120,
                 ),
-                Expanded(child: Text('数量')),
+                const Expanded(child: Text('数量')),
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
-                Expanded(child: Text('単位')),
-                Expanded(child: Text('単価')),
-                Expanded(child: Text('金額')),
-                Expanded(child: Text('支払書類No.')),
+                const Expanded(child: Text('単位')),
+                const Expanded(child: Text('単価')),
+                const Expanded(child: Text('金額')),
+                const Expanded(child: Text('支払書類No.')),
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
@@ -120,7 +119,7 @@ class SaleExpenses extends StatelessWidget {
                             }),
                           );
                         },
-                        icon: Icon(Icons.add_box_rounded),
+                        icon: const Icon(Icons.add_box_rounded),
                       ),
                       IntrinsicWidth(
                         stepWidth: 60,

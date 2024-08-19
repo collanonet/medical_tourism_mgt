@@ -2,9 +2,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -78,41 +76,41 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                         SizedBox(
                           height: context.appTheme.spacing.marginMedium,
                         ),
-                        Text('刘 伟强  劉 偉強  リュウ イーチャン')
+                        const Text('刘 伟强  劉 偉強  リュウ イーチャン')
                       ],
                     ),
-                    Spacer(),
-                    Text('種別'),
+                    const Spacer(),
+                    const Text('種別'),
                     ElevatedButton(
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(Colors.blue),
                       ),
                       onPressed: () {},
-                      child: Text('治療'),
+                      child: const Text('治療'),
                     ),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    Text('ビザ'),
+                    const Text('ビザ'),
                     ElevatedButton(
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(
                             Color.fromARGB(255, 206, 195, 95)),
                       ),
                       onPressed: () {},
-                      child: Text('医療ビザ'),
+                      child: const Text('医療ビザ'),
                     ),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    Text('進捗'),
+                    const Text('進捗'),
                     ElevatedButton(
                       style: const ButtonStyle(
                         backgroundColor: MaterialStatePropertyAll(
                             Color.fromARGB(255, 32, 171, 225)),
                       ),
                       onPressed: () {},
-                      child: Text('受注'),
+                      child: const Text('受注'),
                     ),
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
@@ -160,7 +158,7 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                               '医療費預り金',
                                               '日本円（税込）',
                                               '123456',
-                                              Color.fromARGB(
+                                              const Color.fromARGB(
                                                   255, 249, 242, 174)),
                                         ],
                                       ),
@@ -233,7 +231,7 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                               '実費',
                                               '日本円（税込）',
                                               '1,500,000円',
-                                              Color.fromARGB(
+                                              const Color.fromARGB(
                                                   255, 244, 237, 178)),
                                         ],
                                       ),
@@ -244,7 +242,7 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text('精算日'),
+                                          const Text('精算日'),
                                           IntrinsicWidth(
                                             stepWidth: 200,
                                             child: ReactiveDatePicker<DateTime>(
@@ -304,14 +302,14 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                       formControlName: 'actual_cost',
                                       decoration: const InputDecoration(
                                         labelText: '実費内訳',
-                                        fillColor: Color(0xF8F8D9),
+                                        fillColor: Color(0x00f8f8d9),
                                       ),
                                       valueAccessor: IntValueAccessor(),
                                       readOnly: true,
                                     ),
                                   ),
                                   boxStyle('返金額', '日本円（税込）', '320,000円',
-                                      Color.fromARGB(255, 120, 161, 194)),
+                                      const Color.fromARGB(255, 120, 161, 194)),
                                 ],
                               ),
                             ),
@@ -374,7 +372,7 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                                   : null,
                                           child: WithLoadingButton(
                                             isLoading: value.loading,
-                                            child: Text('保存する'),
+                                            child: const Text('保存する'),
                                           ));
                                     },
                                   );

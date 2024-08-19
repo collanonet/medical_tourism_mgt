@@ -108,10 +108,10 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                     child: Container(
                       width: 80,
                       height: 80,
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                           borderRadius:
-                              const BorderRadius.all(Radius.circular(6)),
-                          border: const Border.fromBorderSide(
+                              BorderRadius.all(Radius.circular(6)),
+                          border: Border.fromBorderSide(
                               BorderSide(color: Colors.black, width: 1))),
                       child: currentForm.control('profile').value != null &&
                               (currentForm.control('profile').value
@@ -163,7 +163,7 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                               value: '可',
                               onChanged: (value) {},
                               title: Text(
-                                "可",
+                                '可',
                                 style: context.textTheme.bodySmall,
                               ),
                             ),
@@ -174,7 +174,7 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                               value: '不可',
                               onChanged: (value) {},
                               title: Text(
-                                "不可",
+                                '不可',
                                 style: context.textTheme.bodySmall,
                               ),
                             ),
@@ -202,7 +202,7 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                               value: '可',
                               onChanged: (value) {},
                               title: Text(
-                                "可",
+                                '可',
                                 style: context.textTheme.bodySmall,
                               ),
                             ),
@@ -213,7 +213,7 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                               value: '不可',
                               onChanged: (value) {},
                               title: Text(
-                                "不可",
+                                '不可',
                                 style: context.textTheme.bodySmall,
                               ),
                             ),
@@ -488,7 +488,7 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                           value: '可',
                           onChanged: (value) {},
                           title: Text(
-                            "可",
+                            '可',
                             style: context.textTheme.bodySmall,
                           ),
                         ),
@@ -499,7 +499,7 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                           value: '不可',
                           onChanged: (value) {},
                           title: Text(
-                            "不可",
+                            '不可',
                             style: context.textTheme.bodySmall,
                           ),
                         ),

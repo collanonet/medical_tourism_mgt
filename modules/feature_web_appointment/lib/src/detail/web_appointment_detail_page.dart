@@ -1,7 +1,5 @@
 import 'package:auto_route/annotations.dart';
 import 'package:base_view/base_view.dart';
-import 'package:core_network/core_network.dart';
-import 'package:feature_patient/feature_patient.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
