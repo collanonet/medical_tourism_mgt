@@ -61,7 +61,7 @@ class CustomPhoneFormatter extends TextInputFormatter {
 
     // Ensure the first character is always '+'
     if (newText[0] != '+') {
-      newText = '+${newText.replaceAll('+', '')}';
+      newText = '+' + newText.replaceAll('+', '');
     }
 
     // Remove all non-numeric characters except the leading '+'
@@ -106,7 +106,7 @@ class CustomCurrencyFormatter extends TextInputFormatter {
     var formattedString = '';
     for (int i = 0; i < digits.length; i++) {
       if (i % 3 == 0 && i != 0) {
-        formattedString = ',$formattedString';
+        formattedString = ',' + formattedString;
       }
       formattedString = digits[digits.length - 1 - i] + formattedString;
     }

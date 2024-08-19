@@ -1,4 +1,4 @@
-import 'q_and_a_section.dart';
+import 'package:feature_hospital/src/detail/tabs/q_and_a/q_and_a_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';

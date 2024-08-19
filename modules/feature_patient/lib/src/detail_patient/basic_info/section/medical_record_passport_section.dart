@@ -105,7 +105,7 @@ class _MedicalRecordPassportSectionState
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'passportNumber',
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             label: Text(
                               '旅券番号', //   TODO: l10n 対応 (旅券番号) (passportNumber)
                             ),
@@ -129,7 +129,7 @@ class _MedicalRecordPassportSectionState
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
                                 decoration: InputDecoration(
-                                  label: const Text(
+                                  label: Text(
                                     '発行日', //  TODO: l10n 対応 (発行日) (issueDate)
                                   ),
                                   suffixIcon: IconButton(
@@ -146,7 +146,7 @@ class _MedicalRecordPassportSectionState
                               );
                             }),
                       ),
-                      const Expanded(child: SizedBox()),
+                      Expanded(child: SizedBox()),
                     ],
                   ),
                   RowSeparated(
@@ -169,7 +169,7 @@ class _MedicalRecordPassportSectionState
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
                                 decoration: InputDecoration(
-                                  label: const Text(
+                                  label: Text(
                                     '有効期限', // TODO: l10n 対応 (有効期限) (expirationDate)
                                   ),
                                   suffixIcon: IconButton(
@@ -186,8 +186,8 @@ class _MedicalRecordPassportSectionState
                               );
                             }),
                       ),
-                      const Expanded(child: SizedBox()),
-                      const Expanded(child: SizedBox()),
+                      Expanded(child: SizedBox()),
+                      Expanded(child: SizedBox()),
                     ],
                   ),
                   RowSeparated(
@@ -220,7 +220,7 @@ class _MedicalRecordPassportSectionState
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'visaCategory',
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             label: Text(
                               'ビザ種類', //  TODO: l10n 対応 (ビザ種類) (visaCategory)
                             ),

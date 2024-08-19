@@ -2,6 +2,7 @@ import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
@@ -36,7 +37,7 @@ class MedicalRecordUserAccountSection extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('患者マイページ'),
+                      Text('患者マイページ'),
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),
@@ -47,7 +48,7 @@ class MedicalRecordUserAccountSection extends StatelessWidget {
                               formControlName: 'loginId',
                               readOnly: true,
                               decoration: InputDecoration(
-                                  label: const Text('ログインID'),
+                                  label: Text('ログインID'),
                                   suffixIcon: IconButton(
                                     onPressed: () {
                                       // copy to clipboard
@@ -57,7 +58,7 @@ class MedicalRecordUserAccountSection extends StatelessWidget {
                                               .value));
                                       snackBarWidget(message: 'コピーしました');
                                     },
-                                    icon: const Icon(Icons.copy_all_rounded),
+                                    icon: Icon(Icons.copy_all_rounded),
                                   )),
                             ),
                           ),
@@ -68,7 +69,7 @@ class MedicalRecordUserAccountSection extends StatelessWidget {
                             child: ReactiveTextField(
                               formControlName: 'loginPassword',
                               obscureText: true,
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text('ログインPW'),
                               ),
                             ),
@@ -85,11 +86,11 @@ class MedicalRecordUserAccountSection extends StatelessWidget {
                                   .isClosed
                                   .value;
                               if (value.hasData) {
-                                snackBarWidget(message: '更新しました');
+                                snackBarWidget(message: "更新しました");
                               }
 
                               if (value.hasError) {
-                                snackBarWidget(message: '更新に失敗しました');
+                                snackBarWidget(message: "更新に失敗しました");
                               }
                             },
                             child: ValueListenableBuilder(
@@ -107,7 +108,7 @@ class MedicalRecordUserAccountSection extends StatelessWidget {
                                               textDirection: TextDirection.rtl,
                                               current: value.value ?? false,
                                               values: const [true, false],
-                                              iconList: const [
+                                              iconList: [
                                                 Text('CLOSE'),
                                                 Text('OPEN'),
                                               ],
@@ -123,7 +124,7 @@ class MedicalRecordUserAccountSection extends StatelessWidget {
                                                 backgroundColor: Colors.white,
                                                 indicatorColor: Colors.white,
                                                 boxShadow: [
-                                                  const BoxShadow(
+                                                  BoxShadow(
                                                     color: Colors.black26,
                                                     spreadRadius: 1,
                                                     blurRadius: 2,

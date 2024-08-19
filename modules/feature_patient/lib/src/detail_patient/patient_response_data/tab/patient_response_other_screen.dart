@@ -62,7 +62,7 @@ class _PatientResponseOtherScreenState
                                             ? 'はい'
                                             : 'いいえ',
                                         values: const ['いいえ', 'はい'],
-                                        iconList: const [
+                                        iconList: [
                                           Text('いいえ'),
                                           Text('はい'),
                                         ],
@@ -76,7 +76,7 @@ class _PatientResponseOtherScreenState
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                           boxShadow: [
-                                            const BoxShadow(
+                                            BoxShadow(
                                               color: Colors.black26,
                                               spreadRadius: 1,
                                               blurRadius: 2,
@@ -109,30 +109,30 @@ class _PatientResponseOtherScreenState
                             IntrinsicWidth(
                               child: ReactiveDropdownFormField(
                                 formControlName: 'visa',
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   label: Text(
                                     'ビザ',
                                   ),
                                 ),
                                 items: [
-                                  '医療ビザ',
+                                  "医療ビザ",
                                   '短期滞在ビザ ',
                                   '観光ビザ',
                                   '親族訪問ビザ',
-                                  '商用ビザ',
-                                  '留学ビザ',
-                                  '就業ビザ',
-                                  '技術者・人文知識・国際業務ビザ',
-                                  '配偶者ビザ',
-                                  '定住者ビザ',
-                                  '特定技能ビザ',
-                                  '文化活動ビザ',
-                                  '宗教ビザ',
-                                  '人道上の理由による在留資格',
-                                  '特例ビザ',
-                                  '企業内転勤者ビザ ',
-                                  '技能実習制度',
-                                  '特別永住者ビザ',
+                                  "商用ビザ",
+                                  "留学ビザ",
+                                  "就業ビザ",
+                                  "技術者・人文知識・国際業務ビザ",
+                                  "配偶者ビザ",
+                                  "定住者ビザ",
+                                  "特定技能ビザ",
+                                  "文化活動ビザ",
+                                  "宗教ビザ",
+                                  "人道上の理由による在留資格",
+                                  "特例ビザ",
+                                  "企業内転勤者ビザ ",
+                                  "技能実習制度",
+                                  "特別永住者ビザ",
                                 ]
                                     .map((e) => DropdownMenuItem(
                                           value: e,
@@ -172,12 +172,12 @@ class _PatientResponseOtherScreenState
                               stepWidth: 300,
                               child: ReactiveTextField(
                                 formControlName: 'remarks',
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   hintText: '備考',
                                 ),
                               ),
                             ),
-                            const Divider(),
+                            Divider(),
                             Text(
                               '同行者',
                               style: context.textTheme.titleLarge,
@@ -185,7 +185,7 @@ class _PatientResponseOtherScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            const Text(
+                            Text(
                               '有効なビザをもっていますか？',
                             ),
                             SizedBox(
@@ -203,7 +203,7 @@ class _PatientResponseOtherScreenState
                                             ? 'はい'
                                             : 'いいえ',
                                         values: const ['いいえ', 'はい'],
-                                        iconList: const [
+                                        iconList: [
                                           Text('いいえ'),
                                           Text('はい'),
                                         ],
@@ -217,7 +217,7 @@ class _PatientResponseOtherScreenState
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                           boxShadow: [
-                                            const BoxShadow(
+                                            BoxShadow(
                                               color: Colors.black26,
                                               spreadRadius: 1,
                                               blurRadius: 2,
@@ -250,30 +250,30 @@ class _PatientResponseOtherScreenState
                             IntrinsicWidth(
                               child: ReactiveDropdownFormField(
                                 formControlName: 'companionVisa',
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   label: Text(
                                     'ビザ',
                                   ),
                                 ),
                                 items: [
-                                  '医療ビザ',
+                                  "医療ビザ",
                                   '短期滞在ビザ ',
                                   '観光ビザ',
                                   '親族訪問ビザ',
-                                  '商用ビザ',
-                                  '留学ビザ',
-                                  '就業ビザ',
-                                  '技術者・人文知識・国際業務ビザ',
-                                  '配偶者ビザ',
-                                  '定住者ビザ',
-                                  '特定技能ビザ',
-                                  '文化活動ビザ',
-                                  '宗教ビザ',
-                                  '人道上の理由による在留資格',
-                                  '特例ビザ',
-                                  '企業内転勤者ビザ ',
-                                  '技能実習制度',
-                                  '特別永住者ビザ',
+                                  "商用ビザ",
+                                  "留学ビザ",
+                                  "就業ビザ",
+                                  "技術者・人文知識・国際業務ビザ",
+                                  "配偶者ビザ",
+                                  "定住者ビザ",
+                                  "特定技能ビザ",
+                                  "文化活動ビザ",
+                                  "宗教ビザ",
+                                  "人道上の理由による在留資格",
+                                  "特例ビザ",
+                                  "企業内転勤者ビザ ",
+                                  "技能実習制度",
+                                  "特別永住者ビザ",
                                 ]
                                     .map((e) => DropdownMenuItem(
                                           value: e,
@@ -340,7 +340,7 @@ class _PatientResponseOtherScreenState
                             .read<PatientResponseOtherModel>()
                             .createMedicalRecordPatientResponseOther(formGroup);
                       },
-                      child: const Text('保存する'),
+                      child: Text('保存する'),
                     ),
                   ),
                 ],

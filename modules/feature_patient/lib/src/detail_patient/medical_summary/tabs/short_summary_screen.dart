@@ -57,7 +57,7 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
                                   decoration: InputDecoration(
-                                    label: const Text(
+                                    label: Text(
                                       '記載日',
                                     ),
                                     suffixIcon: IconButton(
@@ -96,7 +96,7 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'namePassport',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           filled: true,
                                           fillColor: Color(0xffF0F3F5),
                                           label: Text(
@@ -125,8 +125,8 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                                             ),
                                             decoration: InputDecoration(
                                               filled: true,
-                                              fillColor: const Color(0xffF0F3F5),
-                                              label: const Text(
+                                              fillColor: Color(0xffF0F3F5),
+                                              label: Text(
                                                 '生年月日', // TODO: l10n 対応 (生年月日) (dateOfBirth)
                                               ),
                                               suffixIcon: IconButton(
@@ -226,7 +226,7 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                                       child: ReactiveTextField(
                                         formControlName:
                                             'nameChineseKanjiVietnamese',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           filled: true,
                                           fillColor: Color(0xffF0F3F5),
                                           label: Text(
@@ -265,7 +265,7 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'nameKana',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           filled: true,
                                           fillColor: Color(0xffF0F3F5),
                                           label: Text(
@@ -304,7 +304,7 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'currentAddress',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           label: Text(
                                             '現住所',
                                           ),
@@ -331,7 +331,7 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'mobileNumberPatient',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           filled: true,
                                           fillColor: Color(0xffF0F3F5),
                                           label: Text(
@@ -352,7 +352,7 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'mobileNumberDomestic',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           label: Text(
                                             '携帯番号（国内可）',
                                           ),
@@ -390,7 +390,7 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                                       'diseaseCourseSndTestResultsEtc',
                                   minLines: 5,
                                   maxLines: 15,
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '病状経過および検査結果など',
                                     ),
@@ -497,8 +497,8 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
   void showMedicalDataFilePicker(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => const AlertDialog(
-        content: PickMedicalDataFilePage(),
+      builder: (context) => AlertDialog(
+        content: const PickMedicalDataFilePage(),
       ),
     );
   }

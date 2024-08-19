@@ -1,7 +1,6 @@
 import 'package:core_l10n/l10n.dart';
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
-import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +19,8 @@ class OverseasMedicalDataScreen extends StatefulWidget {
   const OverseasMedicalDataScreen({super.key});
 
   @override
-  State<OverseasMedicalDataScreen> createState() => _OverseasMedicalDataScreenState();
+  State<OverseasMedicalDataScreen> createState() =>
+      _OverseasMedicalDataScreenState();
 }
 
 class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
@@ -114,7 +114,9 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
           height: context.appTheme.spacing.marginMedium,
         ),
         ValueListenableBuilder(
-            valueListenable: context.read<OverseasMedicalDataModel>().medicalRecordsOverseasData,
+            valueListenable: context
+                .read<OverseasMedicalDataModel>()
+                .medicalRecordsOverseasData,
             builder: (context, value, _) {
               return value.loading
                   ? const CircularProgressIndicator.adaptive()
@@ -130,7 +132,11 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                   setState(() {
                                     isSelectAll = !isSelectAll;
                                     if (isSelectAll) {
-                                      ids = List.generate(value.hasData ? value.requireData.length : 0, (index) => index.toString());
+                                      ids = List.generate(
+                                          value.hasData
+                                              ? value.requireData.length
+                                              : 0,
+                                          (index) => index.toString());
                                     } else {
                                       ids = [];
                                     }
@@ -198,20 +204,25 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                               children: List.generate(
                                 value.hasData ? value.requireData.length : 0,
                                 (index) {
-                                  final MedicalRecordOverseaData data = value.requireData[index];
+                                  final MedicalRecordOverseaData data =
+                                      value.requireData[index];
                                   return InkWell(
                                     onTap: () {
-                                      showDetailMedicalOverseaDialog(context, data);
+                                      showDetailMedicalOverseaDialog(
+                                          context, data);
                                     },
                                     child: Padding(
-                                      padding: const EdgeInsets.symmetric(vertical: 4),
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 4),
                                       child: Row(
                                         children: [
                                           Checkbox(
-                                            value: ids.contains(index.toString()),
+                                            value:
+                                                ids.contains(index.toString()),
                                             onChanged: (value) {
                                               setState(() {
-                                                if (ids.contains(index.toString())) {
+                                                if (ids.contains(
+                                                    index.toString())) {
                                                   ids.remove(index.toString());
                                                 } else {
                                                   ids.add(index.toString());
@@ -222,20 +233,35 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                           Expanded(
                                               flex: 3,
                                               child: Row(
-                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
-                                                  Flexible(child: Text(data.hospitalName ?? '--')),
-                                                  if (data.expirationDate != null) ...{
+                                                  Flexible(
+                                                      child: Text(
+                                                          data.hospitalName ??
+                                                              '--')),
+                                                  if (data.expirationDate !=
+                                                      null) ...{
                                                     Container(
-                                                      margin: const EdgeInsets.only(right: 8),
-                                                      padding: const EdgeInsets.all(4),
+                                                      margin: EdgeInsets.only(
+                                                          right: 8),
+                                                      padding:
+                                                          EdgeInsets.all(4),
                                                       decoration: BoxDecoration(
-                                                        borderRadius: BorderRadius.circular(4),
-                                                        border: Border.all(color: Colors.red),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        border: Border.all(
+                                                            color: Colors.red),
                                                       ),
                                                       child: Text(
                                                         '有効期限あり',
-                                                        style: context.textTheme.bodySmall?.copyWith(color: Colors.red),
+                                                        style: context
+                                                            .textTheme.bodySmall
+                                                            ?.copyWith(
+                                                                color:
+                                                                    Colors.red),
                                                       ),
                                                     )
                                                   }
@@ -245,42 +271,69 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                               child: Row(
                                             children: [
                                               Container(
-                                                padding: const EdgeInsets.all(4),
+                                                padding: EdgeInsets.all(4),
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(4),
-                                                  border: Border.all(color: context.appTheme.primaryColor),
+                                                  borderRadius:
+                                                      BorderRadius.circular(4),
+                                                  border: Border.all(
+                                                      color: context.appTheme
+                                                          .primaryColor),
                                                 ),
                                                 child: Text(
                                                   '社内',
-                                                  style: context.textTheme.bodySmall?.copyWith(color: context.appTheme.primaryColor),
+                                                  style: context
+                                                      .textTheme.bodySmall
+                                                      ?.copyWith(
+                                                          color: context
+                                                              .appTheme
+                                                              .primaryColor),
                                                 ),
                                               )
                                             ],
                                           )),
-                                          Expanded(flex: 2, child: Text(data.category ?? '--')),
+                                          Expanded(
+                                              flex: 2,
+                                              child:
+                                                  Text(data.category ?? '--')),
                                           Expanded(
                                               child: Text(
                                             data.documentName ?? '--',
-                                            style: context.textTheme.bodySmall?.copyWith(color: context.appTheme.primaryColor),
+                                            style: context.textTheme.bodySmall
+                                                ?.copyWith(
+                                                    color: context
+                                                        .appTheme.primaryColor),
                                           )),
-                                          Expanded(child: Text(data.issueDate != null ? Dates.formShortDate(data.issueDate) : '--')),
+                                          Expanded(
+                                              child: Text(data.issueDate != null
+                                                  ? Dates.formShortDate(
+                                                      data.issueDate)
+                                                  : '--')),
                                           Expanded(
                                               child: data.qrCode == null
-                                                  ? const SizedBox()
+                                                  ? SizedBox()
                                                   : Icon(
-                                                      Icons.qr_code_scanner_rounded,
-                                                      color: context.appTheme.primaryColor,
+                                                      Icons
+                                                          .qr_code_scanner_rounded,
+                                                      color: context.appTheme
+                                                          .primaryColor,
                                                     )),
-                                          Expanded(child: Text(data.expirationDate != null ? Dates.formShortDate(data.expirationDate) : '--')),
+                                          Expanded(
+                                              child: Text(
+                                                  data.expirationDate != null
+                                                      ? Dates.formShortDate(
+                                                          data.expirationDate)
+                                                      : '--')),
                                           Expanded(
                                               child: Icon(
                                             Icons.person,
-                                            color: context.appTheme.primaryColor,
+                                            color:
+                                                context.appTheme.primaryColor,
                                           )),
                                           Expanded(
                                               child: Icon(
                                             CupertinoIcons.chat_bubble_2_fill,
-                                            color: context.appTheme.primaryColor,
+                                            color:
+                                                context.appTheme.primaryColor,
                                           )),
                                         ],
                                       ),
@@ -296,33 +349,34 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              ValueListenableBuilder(
-                                  valueListenable: context.watch<OverseasMedicalDataModel>().delete,
-                                  builder: (context, d, child) {
-                                    return ElevatedButton(
-                                        onPressed: !d.loading
-                                            ? () async {
-                                                try {
-                                                  List<String> mongoseIds = ids.map((e) {
-                                                    return value.requireData[int.parse(e)].id;
-                                                  }).toList();
-                                                  await context.read<OverseasMedicalDataModel>().deleteMedicalRecordOverseaData(mongoseIds);
-                                                  ids = [];
-                                                } catch (e) {
-                                                  snackBarWidget(message: '$e');
-                                                }
-                                              }
-                                            : null,
-                                        child: WithLoadingButton(
-                                          isLoading: d.loading,
-                                          child: const Text(
-                                            '削除する',
-                                            style: TextStyle(
-                                              color: Colors.white,
-                                            ),
-                                          ),
-                                        ));
-                                  }),
+                              ElevatedButton(
+                                onPressed: () async {
+                                  try {
+                                    List<String> mongoseIds = ids.map((e) {
+                                      return value.requireData[int.parse(e)].id;
+                                    }).toList();
+                                    await context
+                                        .read<OverseasMedicalDataModel>()
+                                        .deleteMedicalRecordOverseaData(
+                                            mongoseIds);
+                                    ids = [];
+                                  } catch (e) {
+                                    print("Error delete patient oversea $e");
+                                  }
+                                },
+                                child: context
+                                            .read<OverseasMedicalDataModel>()
+                                            .delete
+                                            .value ==
+                                        true
+                                    ? CircularProgressIndicator()
+                                    : const Text(
+                                        '削除する',
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                        ),
+                                      ),
+                              ),
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
@@ -371,10 +425,12 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
         child: AlertDialog(
           content: ReactiveFormConfig(
             validationMessages: <String, ValidationMessageFunction>{
-              ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
+              ValidationMessage.required: (error) =>
+                  context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => createMedicalOverseaDataWithUrlForm()..markAllAsTouched(),
+              form: () =>
+                  createMedicalOverseaDataWithUrlForm()..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const CreateMedicalOverseaDataWithUrlScreen();
               },
@@ -393,10 +449,12 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
         child: AlertDialog(
           content: ReactiveFormConfig(
             validationMessages: <String, ValidationMessageFunction>{
-              ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
+              ValidationMessage.required: (error) =>
+                  context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () => createMedicalOverseaDataWithFileForm(file)..markAllAsTouched(),
+              form: () => createMedicalOverseaDataWithFileForm(file)
+                ..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const CreateMedicalOverseaDataWithFileScreen();
               },
@@ -407,7 +465,8 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
     );
   }
 
-  void showSummaryDialog(BuildContext context, List<MedicalRecordOverseaData> data) {
+  void showSummaryDialog(
+      BuildContext context, List<MedicalRecordOverseaData> data) {
     showDialog(
       context: context,
       builder: (_) => Provider.value(
@@ -421,7 +480,8 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
     );
   }
 
-  void showDetailMedicalOverseaDialog(BuildContext context, MedicalRecordOverseaData data) {
+  void showDetailMedicalOverseaDialog(
+      BuildContext context, MedicalRecordOverseaData data) {
     showDialog(
       context: context,
       builder: (_) => Provider.value(
@@ -435,19 +495,19 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('　閉じる　'), // TODO: l10n 対応 (閉じる) (close)
+                child: Text('　閉じる　'), // TODO: l10n 対応 (閉じる) (close)
               ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('　共有する　'), // TODO: l10n 対応 (閉じる) (close)
+                child: Text('　共有する　'), // TODO: l10n 対応 (閉じる) (close)
               ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('　印刷する　'), // TODO: l10n 対応 (閉じる) (close)
+                child: Text('　印刷する　'), // TODO: l10n 対応 (閉じる) (close)
               ),
             ]),
       ),

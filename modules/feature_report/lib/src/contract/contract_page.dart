@@ -19,7 +19,7 @@ class ContractPage extends StatelessWidget {
       form: () => contractForm()..markAllAsTouched(),
       builder: (context, formGroup, child) {
         return ReactiveFormConfig(
-          validationMessages: const {},
+          validationMessages: {},
           child: LayoutView(
             selectedIndex: 9,
             page: Provider(

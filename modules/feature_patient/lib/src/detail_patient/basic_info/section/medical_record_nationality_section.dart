@@ -57,7 +57,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                             Expanded(
                               child: ReactiveTextField(
                                 formControlName: 'nationality',
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   label: Text(
                                     '国籍', // Todo: l10n (国籍)
                                   ),
@@ -71,14 +71,14 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                             Expanded(
                               child: ReactiveTextField(
                                 formControlName: 'nativeLanguage',
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   label: Text(
                                     '母国語', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
                                   ),
                                 ),
                               ),
                             ),
-                            const Expanded(child: SizedBox())
+                            Expanded(child: SizedBox())
                           ],
                         ),
                         RowSeparated(
@@ -92,7 +92,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                             Expanded(
                               child: ReactiveTextField(
                                 formControlName: 'residentialArea',
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   label: Text(
                                     '居住地域', // Todo: l10n (国籍)
                                   ),
@@ -103,7 +103,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                               flex: 2,
                               child: ReactiveTextField(
                                 formControlName: 'currentAddress',
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   label: Text(
                                     '住所（つづき）',
                                   ),
@@ -124,7 +124,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                               child: ReactiveTextField(
                                 formControlName: 'mobileNumber',
                                 keyboardType: TextInputType.number,
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   prefixText: '+ ',
                                   label: Text(
                                     '携帯番号',
@@ -140,7 +140,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                               child: ReactiveTextField(
                                 formControlName: 'email',
                                 keyboardType: TextInputType.emailAddress,
-                                decoration: const InputDecoration(
+                                decoration: InputDecoration(
                                   label: Text(
                                     'Email',
                                   ),
@@ -177,7 +177,7 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                                           child: ReactiveTextField(
                                             formControlName: 'chatToolLink',
                                             keyboardType: TextInputType.url,
-                                            decoration: const InputDecoration(
+                                            decoration: InputDecoration(
                                               label: Text(
                                                 'チャットツールリンク',
                                               ),
@@ -321,15 +321,15 @@ class MedicalRecordNationalitySection extends StatelessWidget {
                       );
                     },
                     children: [
-                      const Icon(Icons.copy_all_rounded),
-                      const Text('QRコードをここにドラッグ＆ドロップ'),
+                      Icon(Icons.copy_all_rounded),
+                      Text('QRコードをここにドラッグ＆ドロップ'),
                       ElevatedButton(
                           onPressed: () {
                             imagePicker().then((value) {
                               currentForm.control('chatQrImage').value = value;
                             });
                           },
-                          child: const Text('またはファイルを選択する'))
+                          child: Text('またはファイルを選択する'))
                     ],
                   ),
       ),

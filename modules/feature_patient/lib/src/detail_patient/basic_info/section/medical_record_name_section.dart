@@ -61,7 +61,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     Expanded(
                       child: ReactiveTextField(
                         formControlName: 'familyNameRomanized',
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           label: Text(
                             'ファミリーネーム', // Todo: l10n 対応 (ファミリーネーム) (familyName)
                           ),
@@ -71,7 +71,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     Expanded(
                       child: ReactiveTextField(
                         formControlName: 'middleNameRomanized',
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           label: Text(
                             'ミドルネーム', // Todo: l10n 対応 (ミドルネーム) (middleName)
                           ),
@@ -81,7 +81,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     Expanded(
                       child: ReactiveTextField(
                         formControlName: 'firstNameRomanized',
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           label: Text(
                             'ファーストネーム', // Todo: l10n 対応 (ファーストネーム) (firstName)
                           ),
@@ -109,7 +109,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     Expanded(
                       child: ReactiveTextField(
                         formControlName: 'familyNameChineseOrVietnamese',
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           label: Text(
                             'ファミリーネーム', // Todo: l10n 対応 (ファミリーネーム) (familyName)
                           ),
@@ -119,7 +119,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     Expanded(
                       child: ReactiveTextField(
                         formControlName: 'middleNameChineseOrVietnamese',
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           label: Text(
                             'ミドルネーム', // Todo: l10n 対応 (ミドルネーム) (middleName)
                           ),
@@ -129,7 +129,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     Expanded(
                       child: ReactiveTextField(
                         formControlName: 'firstNameChineseOrVietnamese',
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           label: Text(
                             'ファーストネーム', // Todo: l10n 対応 (ファーストネーム) (firstName)
                           ),
@@ -157,7 +157,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     Expanded(
                       child: ReactiveTextField(
                         formControlName: 'familyNameJapaneseForChinese',
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           label: Text(
                             'ファミリーネーム', // Todo: l10n 対応 (ファミリーネーム) (familyName)
                           ),
@@ -167,7 +167,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     Expanded(
                       child: ReactiveTextField(
                         formControlName: 'middleNameJapaneseForChinese',
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           label: Text(
                             'ミドルネーム', // Todo: l10n 対応 (ミドルネーム) (middleName)
                           ),
@@ -177,7 +177,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     Expanded(
                       child: ReactiveTextField(
                         formControlName: 'firstNameJapaneseForChinese',
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           label: Text(
                             'ファーストネーム', // Todo: l10n 対応 (ファーストネーム) (firstName)
                           ),
@@ -205,7 +205,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     Expanded(
                       child: ReactiveTextField(
                         formControlName: 'familyNameJapaneseForNonChinese',
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           label: Text(
                             'ファミリーネーム', // Todo: l10n 対応 (ファミリーネーム) (familyName)
                           ),
@@ -215,7 +215,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     Expanded(
                       child: ReactiveTextField(
                         formControlName: 'middleNameJapaneseForNonChinese',
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           label: Text(
                             'ミドルネーム', // Todo: l10n 対応 (ミドルネーム) (middleName)
                           ),
@@ -225,7 +225,7 @@ class MedicalRecordNameSection extends StatelessWidget {
                     Expanded(
                       child: ReactiveTextField(
                         formControlName: 'firstNameJapaneseForNonChinese',
-                        decoration: const InputDecoration(
+                        decoration: InputDecoration(
                           label: Text(
                             'ファーストネーム', // Todo: l10n 対応 (ファーストネーム) (firstName)
                           ),

@@ -120,7 +120,7 @@ class PatientFilter extends StatelessWidget {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              const ReactiveDropdownFormField(
+                              ReactiveDropdownFormField(
                                 formControlName: 'type',
                                 items: [
                                   DropdownMenuItem(

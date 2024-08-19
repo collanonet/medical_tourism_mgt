@@ -1,4 +1,5 @@
 
+import 'package:core_network/core_network.dart';
 import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 import '../providers/report_remote_provider.dart';

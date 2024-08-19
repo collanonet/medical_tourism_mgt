@@ -6,7 +6,7 @@ class PickMedicalDataFileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: MediaQuery.of(context).size.height * 0.5,
       width: MediaQuery.of(context).size.width * 0.5,
       child: Column(
@@ -25,7 +25,7 @@ class PickMedicalDataFileScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  icon: const Icon(Icons.close)),
+                  icon: Icon(Icons.close)),
             ],
           ),
           Row(
@@ -69,7 +69,7 @@ class PickMedicalDataFileScreen extends StatelessWidget {
               )),
             ],
           ),
-          const Divider(),
+          Divider(),
           Flexible(
             child: ListView(
               children: List.generate(
@@ -80,7 +80,7 @@ class PickMedicalDataFileScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 4),
                     child: Row(
                       children: [
-                        const Expanded(
+                        Expanded(
                             flex: 3,
                             child: Row(
                               children: [
@@ -91,24 +91,24 @@ class PickMedicalDataFileScreen extends StatelessWidget {
                             child: Row(
                           children: [
                             Container(
-                              padding: const EdgeInsets.all(4),
+                              padding: EdgeInsets.all(4),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4),
                                 border: Border.all(
                                     color: context.appTheme.primaryColor),
                               ),
-                              child: const Text('社内'),
+                              child: Text('社内'),
                             ),
                           ],
                         )),
-                        const Expanded(flex: 2, child: Text('画像データ（DICOM）')),
+                        Expanded(flex: 2, child: Text('画像データ（DICOM）')),
                         Expanded(
                             child: Text(
                           'PET-CT',
                           style: context.textTheme.bodySmall
                               ?.copyWith(color: context.appTheme.primaryColor),
                         )),
-                        const Expanded(child: Text('2023/06/30')),
+                        Expanded(child: Text('2023/06/30')),
                         Expanded(
                             child: Row(
                           children: [
