@@ -119,10 +119,10 @@ class _DocumentSectionState extends State<DocumentSection> {
                             },
                           );
                         }),
-                    Expanded(flex: 2, child: Text('書類名')),
-                    Expanded(child: Text('更新日')),
-                    Expanded(child: Text('翻訳言語')),
-                    Expanded(child: Text('翻訳者')),
+                    const Expanded(flex: 2, child: Text('書類名')),
+                    const Expanded(child: Text('更新日')),
+                    const Expanded(child: Text('翻訳言語')),
+                    const Expanded(child: Text('翻訳者')),
                   ],
                 ),
                 Expanded(
@@ -238,9 +238,9 @@ class _DocumentSectionState extends State<DocumentSection> {
                                                       value: context.read<
                                                           DocumentModel>(),
                                                       child: AlertDialog(
-                                                        title: Text("削除確認"),
-                                                        content: Text(
-                                                            "選択した書類を削除しますか？"),
+                                                        title: const Text('削除確認'),
+                                                        content: const Text(
+                                                            '選択した書類を削除しますか？'),
                                                         actions: [
                                                           TextButton(
                                                             onPressed: () {
@@ -249,7 +249,7 @@ class _DocumentSectionState extends State<DocumentSection> {
                                                                   .pop();
                                                             },
                                                             child:
-                                                                Text("キャンセル"),
+                                                                const Text('キャンセル'),
                                                           ),
                                                           TextButton(
                                                             onPressed: () {
@@ -262,7 +262,7 @@ class _DocumentSectionState extends State<DocumentSection> {
                                                                       context)
                                                                   .pop();
                                                             },
-                                                            child: Text("削除する"),
+                                                            child: const Text('削除する'),
                                                           ),
                                                         ],
                                                       ),

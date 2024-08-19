@@ -251,7 +251,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                   
                                 );
                               },
-                              child: Text('検索'),
+                              child: const Text('検索'),
                             );
                           },
                         ),

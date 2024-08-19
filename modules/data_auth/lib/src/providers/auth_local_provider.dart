@@ -1,4 +1,3 @@
-import 'package:core_network/core_network.dart';
 import 'package:core_storage/core_storage.dart';
 import 'package:injectable/injectable.dart';
 import 'package:core_network/entities.dart';

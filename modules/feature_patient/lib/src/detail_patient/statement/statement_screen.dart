@@ -1,4 +1,3 @@
-import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
@@ -31,7 +30,7 @@ class _StatementScreenState extends State<StatementScreen> {
               Checkbox(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4),
-                  side: BorderSide(color: Colors.grey),
+                  side: const BorderSide(color: Colors.grey),
                 ),
                 checkColor: Colors.white,
                 value: false,
@@ -98,7 +97,7 @@ class _StatementScreenState extends State<StatementScreen> {
                     Checkbox(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
-                        side: BorderSide(color: Colors.grey),
+                        side: const BorderSide(color: Colors.grey),
                       ),
                       checkColor: Colors.white,
                       value: false,
@@ -170,7 +169,7 @@ class _StatementScreenState extends State<StatementScreen> {
                         children: [
                           ElevatedButton(
                             onPressed: () {},
-                            child: Text('請求書を発行する'),
+                            child: const Text('請求書を発行する'),
                           )
                         ],
                       ),
@@ -180,7 +179,7 @@ class _StatementScreenState extends State<StatementScreen> {
               ),
             ),
             separatorBuilder: (BuildContext context, int index) {
-              return Divider(
+              return const Divider(
                 thickness: 0.5,
               );
             },
@@ -258,7 +257,7 @@ class _StatementScreenState extends State<StatementScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text('タイトル'),
+                  const Text('タイトル'),
                   SizedBox(
                     height: context.appTheme.spacing.marginMedium,
                   ),
@@ -267,7 +266,7 @@ class _StatementScreenState extends State<StatementScreen> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'title',
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             label: Text(
                               '件名',
                             ),
@@ -292,7 +291,7 @@ class _StatementScreenState extends State<StatementScreen> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'quotation_number',
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             label: Text(
                               '見積番号',
                             ),
@@ -322,7 +321,7 @@ class _StatementScreenState extends State<StatementScreen> {
                                 logger.d(value);
                               },
                               decoration:  InputDecoration(
-                                label: Text(
+                                label: const Text(
                                   '発行日',
                                 ),
                                 suffixIcon: IconButton(
@@ -349,29 +348,29 @@ class _StatementScreenState extends State<StatementScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('開示先'),
+                              const Text('開示先'),
                               Row(
                                 children: [
                                   Checkbox(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(4),
-                                      side: BorderSide(color: Colors.grey),
+                                      side: const BorderSide(color: Colors.grey),
                                     ),
                                     checkColor: Colors.white,
                                     value: false,
                                     onChanged: (value) {},
                                   ),
-                                  Text('エージェント'),
+                                  const Text('エージェント'),
                                   Checkbox(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(4),
-                                      side: BorderSide(color: Colors.grey),
+                                      side: const BorderSide(color: Colors.grey),
                                     ),
                                     checkColor: Colors.white,
                                     value: false,
                                     onChanged: (value) {},
                                   ),
-                                  Text('患者'),
+                                  const Text('患者'),
                                 ],
                               )
                             ],
@@ -405,7 +404,7 @@ class _StatementScreenState extends State<StatementScreen> {
                                 logger.d(value);
                               },
                               decoration:  InputDecoration(
-                                label: Text(
+                                label: const Text(
                                   'お支払い期限',
                                 ),
                                 suffixIcon: IconButton(
@@ -429,7 +428,7 @@ class _StatementScreenState extends State<StatementScreen> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'payment_terms',
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             label: Text(
                               'お支払い条件',
                             ),
@@ -442,7 +441,7 @@ class _StatementScreenState extends State<StatementScreen> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'contact_person',
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             label: Text(
                               '担当者',
                             ),
@@ -455,7 +454,7 @@ class _StatementScreenState extends State<StatementScreen> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'prospective',
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             label: Text(
                               '見込み',
                             ),
@@ -484,7 +483,7 @@ class _StatementScreenState extends State<StatementScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('エージェント'),
+                const Text('エージェント'),
                 SizedBox(
                   height: context.appTheme.spacing.marginMedium,
                 ),
@@ -495,7 +494,7 @@ class _StatementScreenState extends State<StatementScreen> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'agent_company_name',
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             label: Text(
                               '企業',
                             ),
@@ -508,7 +507,7 @@ class _StatementScreenState extends State<StatementScreen> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'full_name_kanji',
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             label: Text(
                               '氏名（漢字）',
                             ),
@@ -521,7 +520,7 @@ class _StatementScreenState extends State<StatementScreen> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'name_kana',
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             label: Text(
                               '氏名（カナ）',
                             ),
@@ -534,7 +533,7 @@ class _StatementScreenState extends State<StatementScreen> {
                 SizedBox(
                   height: context.appTheme.spacing.marginMedium,
                 ),
-                Text('紹介者'),
+                const Text('紹介者'),
                 SizedBox(
                   height: context.appTheme.spacing.marginMedium,
                 ),
@@ -545,7 +544,7 @@ class _StatementScreenState extends State<StatementScreen> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'introducer_company_name',
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             label: Text(
                               '企業',
                             ),
@@ -558,7 +557,7 @@ class _StatementScreenState extends State<StatementScreen> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'full_name_kanji',
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             label: Text(
                               '氏名（漢字）',
                             ),
@@ -571,7 +570,7 @@ class _StatementScreenState extends State<StatementScreen> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'name_kana',
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             label: Text(
                               '氏名（カナ）',
                             ),
@@ -590,7 +589,7 @@ class _StatementScreenState extends State<StatementScreen> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [ElevatedButton(onPressed: () {}, child: Text('プレビュー'))],
+            children: [ElevatedButton(onPressed: () {}, child: const Text('プレビュー'))],
           ),
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
@@ -619,7 +618,7 @@ class _StatementScreenState extends State<StatementScreen> {
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
-                Expanded(flex: 2, child: Text('日本円（税込）')),
+                const Expanded(flex: 2, child: Text('日本円（税込）')),
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
@@ -660,7 +659,7 @@ class _StatementScreenState extends State<StatementScreen> {
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
-                Expanded(flex: 2, child: Text('日本円（税込）')),
+                const Expanded(flex: 2, child: Text('日本円（税込）')),
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
@@ -701,7 +700,7 @@ class _StatementScreenState extends State<StatementScreen> {
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
-                Expanded(flex: 2, child: Text('日本円（税込）')),
+                const Expanded(flex: 2, child: Text('日本円（税込）')),
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
@@ -725,13 +724,13 @@ class _StatementScreenState extends State<StatementScreen> {
                 groupValue: 1,
                 onChanged: (value) {},
               ),
-              Text('治療費概算'),
+              const Text('治療費概算'),
               Radio(
                 value: 1,
                 groupValue: 1,
                 onChanged: (value) {},
               ),
-              Text('治療費'),
+              const Text('治療費'),
             ],
           ),
           SizedBox(
@@ -777,7 +776,7 @@ class _StatementScreenState extends State<StatementScreen> {
                                         flex: 2,
                                         child: ReactiveTextField(
                                           formControlName: 'item',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               '項目',
                                             ),
@@ -794,7 +793,7 @@ class _StatementScreenState extends State<StatementScreen> {
                                             Expanded(
                                               child: ReactiveTextField(
                                                 formControlName: 'quantity',
-                                                decoration: InputDecoration(
+                                                decoration: const InputDecoration(
                                                   label: Text(
                                                     '数量',
                                                   ),
@@ -816,7 +815,7 @@ class _StatementScreenState extends State<StatementScreen> {
                                       Expanded(
                                         child: ReactiveTextField(
                                           formControlName: 'unit_price',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               '単価',
                                             ),
@@ -830,7 +829,7 @@ class _StatementScreenState extends State<StatementScreen> {
                                       Expanded(
                                         child: ReactiveTextField(
                                           formControlName: 'amount',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               '金額',
                                             ),
@@ -844,7 +843,7 @@ class _StatementScreenState extends State<StatementScreen> {
                                       Expanded(
                                         child: ReactiveTextField(
                                           formControlName: 'cost',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               '原価',
                                             ),
@@ -858,7 +857,7 @@ class _StatementScreenState extends State<StatementScreen> {
                                       Expanded(
                                         child: ReactiveTextField(
                                           formControlName: 'profit',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               '利益',
                                             ),
@@ -935,13 +934,13 @@ class _StatementScreenState extends State<StatementScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  Spacer(),
-                                  Text('小計'),
+                                  const Spacer(),
+                                  const Text('小計'),
                                   SizedBox(
                                     width:
                                         context.appTheme.spacing.marginMedium,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 20,
                                     child: VerticalDivider(
                                       thickness: 0.5,
@@ -980,7 +979,7 @@ class _StatementScreenState extends State<StatementScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'search_hospitalName',
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 suffixIcon: Icon(
                                   Icons.search,
                                   color: Colors.grey,
@@ -1011,14 +1010,14 @@ class _StatementScreenState extends State<StatementScreen> {
                         children: [
                           Row(
                             children: [
-                              Expanded(
+                              const Expanded(
                                 flex: 2,
                                 child: Center(child: Text('項目')),
                               ),
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              Expanded(
+                              const Expanded(
                                 child: Center(child: Text('単価')),
                               ),
                             ],
@@ -1041,14 +1040,14 @@ class _StatementScreenState extends State<StatementScreen> {
                             ),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text('免疫活性化血管内治療　1回コース'),
                                 ),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Text('1,000,000'),
                                 ),
                               ],
@@ -1072,14 +1071,14 @@ class _StatementScreenState extends State<StatementScreen> {
                             ),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text('免疫活性化血管内治療　3回コース'),
                                 ),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Text('2,500,000'),
                                 ),
                               ],
@@ -1103,14 +1102,14 @@ class _StatementScreenState extends State<StatementScreen> {
                             ),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text('活性化リンパ球療法（キラーT細胞）'),
                                 ),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Text('400,000'),
                                 ),
                               ],
@@ -1134,14 +1133,14 @@ class _StatementScreenState extends State<StatementScreen> {
                             ),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text('MSC‐CM（エクソソーム）動脈直注投与'),
                                 ),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Text('605,000'),
                                 ),
                               ],
@@ -1165,14 +1164,14 @@ class _StatementScreenState extends State<StatementScreen> {
                             ),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text('仲介手数料20%'),
                                 ),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Text('各項目×20％を控除'),
                                 ),
                               ],
@@ -1233,7 +1232,7 @@ class _StatementScreenState extends State<StatementScreen> {
                                         flex: 2,
                                         child: ReactiveTextField(
                                           formControlName: 'item',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               '項目',
                                             ),
@@ -1250,7 +1249,7 @@ class _StatementScreenState extends State<StatementScreen> {
                                             Expanded(
                                               child: ReactiveTextField(
                                                 formControlName: 'quantity',
-                                                decoration: InputDecoration(
+                                                decoration: const InputDecoration(
                                                   label: Text(
                                                     '数量',
                                                   ),
@@ -1272,7 +1271,7 @@ class _StatementScreenState extends State<StatementScreen> {
                                       Expanded(
                                         child: ReactiveTextField(
                                           formControlName: 'unit_price',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               '単価',
                                             ),
@@ -1286,7 +1285,7 @@ class _StatementScreenState extends State<StatementScreen> {
                                       Expanded(
                                         child: ReactiveTextField(
                                           formControlName: 'amount',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               '金額',
                                             ),
@@ -1300,7 +1299,7 @@ class _StatementScreenState extends State<StatementScreen> {
                                       Expanded(
                                         child: ReactiveTextField(
                                           formControlName: 'cost',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               '原価',
                                             ),
@@ -1314,7 +1313,7 @@ class _StatementScreenState extends State<StatementScreen> {
                                       Expanded(
                                         child: ReactiveTextField(
                                           formControlName: 'profit',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               '利益',
                                             ),
@@ -1391,13 +1390,13 @@ class _StatementScreenState extends State<StatementScreen> {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceAround,
                                 children: [
-                                  Spacer(),
-                                  Text('小計'),
+                                  const Spacer(),
+                                  const Text('小計'),
                                   SizedBox(
                                     width:
                                         context.appTheme.spacing.marginMedium,
                                   ),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 20,
                                     child: VerticalDivider(
                                       thickness: 0.5,
@@ -1436,7 +1435,7 @@ class _StatementScreenState extends State<StatementScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'search_hospitalName',
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 suffixIcon: Icon(
                                   Icons.search,
                                   color: Colors.grey,
@@ -1467,14 +1466,14 @@ class _StatementScreenState extends State<StatementScreen> {
                         children: [
                           Row(
                             children: [
-                              Expanded(
+                              const Expanded(
                                 flex: 2,
                                 child: Center(child: Text('項目')),
                               ),
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              Expanded(
+                              const Expanded(
                                 child: Center(child: Text('単価')),
                               ),
                             ],
@@ -1497,14 +1496,14 @@ class _StatementScreenState extends State<StatementScreen> {
                             ),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text('1-A 医療機関マッチング・来日前折衝費用'),
                                 ),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Text('100,000'),
                                 ),
                               ],
@@ -1528,14 +1527,14 @@ class _StatementScreenState extends State<StatementScreen> {
                             ),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text('1-A 医療機関マッチング・来日前折衝費用'),
                                 ),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Text('100,000'),
                                 ),
                               ],
@@ -1559,14 +1558,14 @@ class _StatementScreenState extends State<StatementScreen> {
                             ),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text('1-A 医療機関マッチング・来日前折衝費用'),
                                 ),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Text('100,000'),
                                 ),
                               ],
@@ -1590,14 +1589,14 @@ class _StatementScreenState extends State<StatementScreen> {
                             ),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text('1-A 医療機関マッチング・来日前折衝費用'),
                                 ),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Text('100,000'),
                                 ),
                               ],
@@ -1621,14 +1620,14 @@ class _StatementScreenState extends State<StatementScreen> {
                             ),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text('1-A 医療機関マッチング・来日前折衝費用'),
                                 ),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Text('100,000'),
                                 ),
                               ],
@@ -1652,14 +1651,14 @@ class _StatementScreenState extends State<StatementScreen> {
                             ),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text('1-A 医療機関マッチング・来日前折衝費用'),
                                 ),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Text('100,000'),
                                 ),
                               ],
@@ -1683,14 +1682,14 @@ class _StatementScreenState extends State<StatementScreen> {
                             ),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text('1-A 医療機関マッチング・来日前折衝費用'),
                                 ),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Text('100,000'),
                                 ),
                               ],
@@ -1714,14 +1713,14 @@ class _StatementScreenState extends State<StatementScreen> {
                             ),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text('1-A 医療機関マッチング・来日前折衝費用'),
                                 ),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Text('100,000'),
                                 ),
                               ],
@@ -1745,14 +1744,14 @@ class _StatementScreenState extends State<StatementScreen> {
                             ),
                             child: Row(
                               children: [
-                                Expanded(
+                                const Expanded(
                                   flex: 2,
                                   child: Text('1-A 医療機関マッチング・来日前折衝費用'),
                                 ),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(
+                                const Expanded(
                                   child: Text('100,000'),
                                 ),
                               ],
@@ -1789,12 +1788,12 @@ class _StatementScreenState extends State<StatementScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Spacer(),
-                      Text('計'),
+                      const Spacer(),
+                      const Text('計'),
                       SizedBox(
                         width: context.appTheme.spacing.marginMedium,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                         child: VerticalDivider(
                           thickness: 0.5,
@@ -1844,12 +1843,12 @@ class _StatementScreenState extends State<StatementScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Spacer(),
-                      Text('消費税'),
+                      const Spacer(),
+                      const Text('消費税'),
                       SizedBox(
                         width: context.appTheme.spacing.marginMedium,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                         child: VerticalDivider(
                           thickness: 0.5,
@@ -1899,12 +1898,12 @@ class _StatementScreenState extends State<StatementScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Spacer(),
-                      Text('合計'),
+                      const Spacer(),
+                      const Text('合計'),
                       SizedBox(
                         width: context.appTheme.spacing.marginMedium,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                         child: VerticalDivider(
                           thickness: 0.5,
@@ -1954,12 +1953,12 @@ class _StatementScreenState extends State<StatementScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Spacer(),
-                      Text('利益'),
+                      const Spacer(),
+                      const Text('利益'),
                       SizedBox(
                         width: context.appTheme.spacing.marginMedium,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 20,
                         child: VerticalDivider(
                           thickness: 0.5,
@@ -2000,7 +1999,7 @@ class _StatementScreenState extends State<StatementScreen> {
                   maxLines: 15,
                   minLines: 1,
                   formControlName: 'memo',
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     label: Text('メモ'),
                   ),
                 ),

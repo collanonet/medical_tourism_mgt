@@ -28,10 +28,10 @@ class SummaryMedicalOverseaDataScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(Icons.close)),
+                icon: const Icon(Icons.close)),
           ],
         ),
-        Text('テキスト'),
+        const Text('テキスト'),
         TextFormField(
           minLines: 3,
           maxLines: 10,
@@ -40,13 +40,7 @@ class SummaryMedicalOverseaDataScreen extends StatelessWidget {
               isDense: true,
               hintText: data
                   .map((e) =>
-                      e.hospitalName! +
-                      '    ' +
-                      e.documentName! +
-                      '    ' +
-                      e.category! +
-                      '    ' +
-                      '${Dates.formShortDate(e.issueDate)}')
+                      '${e.hospitalName!}    ${e.documentName!}    ${e.category!}    ${Dates.formShortDate(e.issueDate)}')
                   .join('\n')),
         ),
         SizedBox(
@@ -59,24 +53,18 @@ class SummaryMedicalOverseaDataScreen extends StatelessWidget {
               onPressed: () {
                 copyToClipboard(data
                     .map((e) =>
-                        e.hospitalName! +
-                        '    ' +
-                        e.documentName! +
-                        '    ' +
-                        e.category! +
-                        '    ' +
-                        '${Dates.formShortDate(e.issueDate)}')
+                        '${e.hospitalName!}    ${e.documentName!}    ${e.category!}    ${Dates.formShortDate(e.issueDate)}')
                     .join('\n'));
                 snackBarWidget(
                     message: 'コピーされました',
-                    prefixIcon: Icon(
+                    prefixIcon: const Icon(
                       Icons.check_circle,
                       color: Colors.white,
                     ));
                 Navigator.pop(context);
               },
 
-              child: Text('コピーする'), // TODO: l10n 対応 (コピーする) (copy)
+              child: const Text('コピーする'), // TODO: l10n 対応 (コピーする) (copy)
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
@@ -85,7 +73,7 @@ class SummaryMedicalOverseaDataScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('　閉じる　'), // TODO: l10n 対応 (閉じる) (close)
+              child: const Text('　閉じる　'), // TODO: l10n 対応 (閉じる) (close)
             ),
           ],
         )

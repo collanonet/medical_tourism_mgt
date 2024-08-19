@@ -1,6 +1,5 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -20,7 +19,7 @@ class HospitalScreen extends StatelessWidget {
         return const SizedBox(height: 16);
       },
       children: [
-        HospitalFilter(),
+        const HospitalFilter(),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -139,21 +138,21 @@ class HospitalScreen extends StatelessWidget {
                                                             decoration:
                                                                 BoxDecoration(
                                                               color: e == '健診'
-                                                                  ? Color(
+                                                                  ? const Color(
                                                                       0xffE238A0)
                                                                   : e == '治療'
-                                                                      ? Color(
+                                                                      ? const Color(
                                                                           0xff53A6FF)
                                                                       : e ==
                                                                               '重粒子線'
-                                                                          ? Color(
+                                                                          ? const Color(
                                                                               0xffE238A0)
                                                                           : e == '陽子線'
-                                                                              ? Color(0xff98DE51)
+                                                                              ? const Color(0xff98DE51)
                                                                               : e == '再生医療'
-                                                                                  ? Color(0xffE238A0)
+                                                                                  ? const Color(0xffE238A0)
                                                                                   : e == '美容'
-                                                                                      ? Color(0xffF7654A)
+                                                                                      ? const Color(0xffF7654A)
                                                                                       : Colors.blueGrey,
                                                               borderRadius:
                                                                   BorderRadius
@@ -178,13 +177,13 @@ class HospitalScreen extends StatelessWidget {
                                       Expanded(
                                         flex: 2,
                                         child: Text(
-                                            '${value.requireData[index].hospitalNameChinese ?? ''}'),
+                                            value.requireData[index].hospitalNameChinese ?? ''),
                                       ),
                                       Expanded(
                                         child: Text(
-                                            '${value.requireData[index].location ?? '--'}'),
+                                            value.requireData[index].location ?? '--'),
                                       ),
-                                      Expanded(
+                                      const Expanded(
                                         child: Text('--'), // ○
                                       ),
                                       // Expanded(

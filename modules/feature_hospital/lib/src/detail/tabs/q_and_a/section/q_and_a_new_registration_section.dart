@@ -1,9 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -38,7 +36,7 @@ class _QAndANewRegistrationSectionState
           Container(
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
-                color: Color(0xffF8F8D9),
+                color: const Color(0xffF8F8D9),
                 borderRadius: BorderRadius.circular(6)),
             padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
             child: ColumnSeparated(
@@ -242,7 +240,7 @@ class _QAndANewRegistrationSectionState
                                                 BorderRadius.circular(20))),
                                     onPressed: () {},
                                     child: Text(
-                                      "キャンセル",
+                                      'キャンセル',
                                       style: context.textTheme.labelLarge
                                           ?.copyWith(
                                               color: context

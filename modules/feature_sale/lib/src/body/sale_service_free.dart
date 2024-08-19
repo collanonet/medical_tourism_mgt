@@ -1,6 +1,5 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -16,10 +15,10 @@ class SaleServiceFree extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        border: Border.all(color: Color.fromARGB(255, 14, 158, 194), width: 2),
+        border: Border.all(color: const Color.fromARGB(255, 14, 158, 194), width: 2),
         borderRadius: BorderRadius.circular(10),
       ),
-      padding: EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       child: ColumnSeparated(
         separatorBuilder: (context, index) {
           return SizedBox(
@@ -33,39 +32,39 @@ class SaleServiceFree extends StatelessWidget {
               const SizedBox(
                 width: 120,
               ),
-              Expanded(child: Text('項目')),
+              const Expanded(child: Text('項目')),
               SizedBox(
                 width: context.appTheme.spacing.marginLarge,
               ),
-              Expanded(child: Text('数量')),
+              const Expanded(child: Text('数量')),
               SizedBox(
                 width: context.appTheme.spacing.marginMedium,
               ),
-              Expanded(child: Text('単位')),
+              const Expanded(child: Text('単位')),
               SizedBox(
                 width: context.appTheme.spacing.marginMedium,
               ),
-              Expanded(child: Text('単価')),
+              const Expanded(child: Text('単価')),
               SizedBox(
                 width: context.appTheme.spacing.marginMedium,
               ),
-              Expanded(child: Text('金額')),
+              const Expanded(child: Text('金額')),
               SizedBox(
                 width: context.appTheme.spacing.marginMedium,
               ),
-              Expanded(child: Text('原価')),
+              const Expanded(child: Text('原価')),
               SizedBox(
                 width: context.appTheme.spacing.marginMedium,
               ),
-              Expanded(child: Text('利益')),
+              const Expanded(child: Text('利益')),
               SizedBox(
                 width: context.appTheme.spacing.marginMedium,
               ),
-              Expanded(child: Text('請求書No.')),
+              const Expanded(child: Text('請求書No.')),
               SizedBox(
                 width: context.appTheme.spacing.marginMedium,
               ),
-              Expanded(child: Text('支払書類No.')),
+              const Expanded(child: Text('支払書類No.')),
             ],
           ),
           ReactiveForm(
