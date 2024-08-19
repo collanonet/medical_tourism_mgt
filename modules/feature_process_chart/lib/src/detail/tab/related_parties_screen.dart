@@ -2,7 +2,9 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -35,7 +37,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                 );
               },
               children: [
-                const Text('ガイドまたは通訳者'),
+                Text('ガイドまたは通訳者'),
                 const SizedBox(
                   height: 20,
                 ),
@@ -62,7 +64,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       child: ReactiveTextField(
                                         formControlName:
                                             'Person_in_charge_of_arrangements',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           label: Text(
                                             '手配担当',
                                           ),
@@ -73,12 +75,12 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const Expanded(child: SizedBox()),
+                                    Expanded(child: SizedBox()),
                                     SizedBox(
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const Expanded(child: SizedBox()),
+                                    Expanded(child: SizedBox()),
                                   ],
                                 ),
                                 Row(
@@ -86,7 +88,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'Date_from',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text(
                                           '年月日（自）',
                                         ),
@@ -96,7 +98,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const Text('〜'),
+                                    Text('〜'),
                                     SizedBox(
                                       width:
                                           context.appTheme.spacing.marginMedium,
@@ -104,7 +106,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'Date_to',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text(
                                           '年月日（至）',
                                         ),
@@ -117,7 +119,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'Guide_name_Kanji',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text(
                                           'ガイド名（漢字）',
                                         ),
@@ -130,7 +132,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'Guide_name_kana',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text(
                                           'ガイド名（カナ）',
                                         ),
@@ -143,7 +145,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'telephone_number_1',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text(
                                           '電話番号',
                                         ),
@@ -157,7 +159,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const Text('資格'),
+                                        Text('資格'),
                                         Row(
                                           children: [
                                             IntrinsicWidth(
@@ -208,13 +210,13 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       formControlName: 'report',
                                       minLines: 3,
                                       maxLines: 3,
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text('報告書'),
                                       ),
                                     )),
                                   ],
                                 ),
-                                const Text('同宿可否'),
+                                Text('同宿可否'),
                                 Row(
                                   children: [
                                     IntrinsicWidth(
@@ -247,7 +249,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'Name_of_facility',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text('施設名'),
                                       ),
                                     )),
@@ -258,7 +260,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'location',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text('所在地'),
                                       ),
                                     )),
@@ -269,7 +271,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'telephone_number_2',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text('電話番号'),
                                       ),
                                     )),
@@ -342,7 +344,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                     );
                   },
                 ),
-                const Divider(),
+                Divider(),
                 Text(
                   'バス会社',
                   style: context.textTheme.titleMedium,
@@ -362,7 +364,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                             child: ReactiveTextField(
                               formControlName:
                                   'Person_in_charge_of_arrangements',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '手配担当',
                                 ),
@@ -372,11 +374,11 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
-                          const Expanded(child: SizedBox()),
+                          Expanded(child: SizedBox()),
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
-                          const Expanded(child: SizedBox()),
+                          Expanded(child: SizedBox()),
                         ],
                       ),
                       Row(
@@ -384,7 +386,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'Bus_company_name',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   'バス会社名',
                                 ),
@@ -397,7 +399,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'manager',
-                              decoration: const InputDecoration(
+                              decoration: InputDecoration(
                                 label: Text(
                                   '担当者',
                                 ),
@@ -435,7 +437,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'Date_from',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           label: Text(
                                             '年月日（自）',
                                           ),
@@ -446,7 +448,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const Text('〜'),
+                                    Text('〜'),
                                     SizedBox(
                                       width:
                                           context.appTheme.spacing.marginMedium,
@@ -454,7 +456,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'Date_to',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           label: Text(
                                             '年月日（至）',
                                           ),
@@ -468,7 +470,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'car_number',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           label: Text(
                                             '車番',
                                           ),
@@ -483,7 +485,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const Text('車種'),
+                                        Text('車種'),
                                         Row(
                                           children: [
                                             IntrinsicWidth(
@@ -532,7 +534,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'Driver_name_Kanji',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text(
                                           'ドライバー名（漢字）',
                                         ),
@@ -545,7 +547,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'Driver_name_kana',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text(
                                           'ドライバー名（カナ）',
                                         ),
@@ -558,7 +560,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'telephone_number_1',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text(
                                           '電話番号',
                                         ),
@@ -569,7 +571,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text('対応言語'),
+                                    Text('対応言語'),
                                     RowSeparated(
                                       separatorBuilder:
                                           (BuildContext context, int index) {
@@ -643,7 +645,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const Text('同宿可否'),
+                                        Text('同宿可否'),
                                         Row(
                                           children: [
                                             IntrinsicWidth(
@@ -679,12 +681,12 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const Text('('),
+                                    Text('('),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const Text('ホテル手配'),
+                                        Text('ホテル手配'),
                                         Row(
                                           children: [
                                             IntrinsicWidth(
@@ -716,7 +718,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                         ),
                                       ],
                                     ),
-                                    const Text(')'),
+                                    Text(')'),
                                   ],
                                 ),
                                 Row(
@@ -724,7 +726,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'Name_of_facility',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text('施設名'),
                                       ),
                                     )),
@@ -735,7 +737,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'location',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text('所在地'),
                                       ),
                                     )),
@@ -746,7 +748,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'telephone_number_2',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text('電話番号'),
                                       ),
                                     )),
@@ -820,7 +822,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                     );
                   },
                 ),
-                const Divider(),
+                Divider(),
                 Text(
                   '緊急連絡先',
                   style: context.textTheme.titleMedium,
@@ -847,7 +849,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'Date_from',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           label: Text(
                                             '年月日（自）',
                                           ),
@@ -858,7 +860,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const Text('〜'),
+                                    Text('〜'),
                                     SizedBox(
                                       width:
                                           context.appTheme.spacing.marginMedium,
@@ -866,7 +868,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'Date_to',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           label: Text(
                                             '年月日（至）',
                                           ),
@@ -881,7 +883,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       child: ReactiveTextField(
                                         formControlName:
                                             'Person_in_charge_Kanji',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           label: Text(
                                             '担当者名（漢字）',
                                           ),
@@ -896,7 +898,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       child: ReactiveTextField(
                                         formControlName:
                                             'Person_in_charge_kana',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           label: Text(
                                             '担当者名（カナ）',
                                           ),
@@ -910,7 +912,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'telephone_number',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           label: Text(
                                             '電話番号',
                                           ),
@@ -1016,7 +1018,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                         : null,
                                     child: WithLoadingButton(
                                       isLoading: value.loading,
-                                      child: const Text('保存する'),
+                                      child: Text('保存する'),
                                     ));
                               },
                             );

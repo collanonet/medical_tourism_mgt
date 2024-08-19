@@ -27,7 +27,7 @@ class PatientFilterForAgent extends StatelessWidget {
               return Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    color: const Color(0xffF0F3F5)),
+                    color: Color(0xffF0F3F5)),
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -120,7 +120,7 @@ class PatientFilterForAgent extends StatelessWidget {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              const ReactiveDropdownFormField(
+                              ReactiveDropdownFormField(
                                 formControlName: 'type',
                                 items: [
                                   DropdownMenuItem(

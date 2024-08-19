@@ -39,7 +39,7 @@ class Popup extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: const Icon(Icons.close)),
+                icon: Icon(Icons.close)),
           ],
         ),
         Row(
@@ -59,7 +59,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
                       formControlName: 'version',
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: 'バージョン',
                       ),
                     ),
@@ -94,7 +94,7 @@ class Popup extends StatelessWidget {
                               ),
                           decoration: InputDecoration(
                             label: const Text(
-                              '更新日',
+                              "更新日",
                             ),
                             suffixIcon: IconButton(
                               icon: const Icon(
@@ -118,13 +118,13 @@ class Popup extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            const Expanded(
+            Expanded(
               child: SizedBox.shrink(),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            const Expanded(
+            Expanded(
               child: SizedBox.shrink(),
             )
           ],
@@ -148,7 +148,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
                       formControlName: 'subject',
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: '件名',
                       ),
                     ),
@@ -172,7 +172,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
                       formControlName: 'operation',
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                         hintText: '運用',
                       ),
                     ),
@@ -183,13 +183,13 @@ class Popup extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            const Expanded(
+            Expanded(
               child: SizedBox.shrink(),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            const Expanded(
+            Expanded(
               child: SizedBox.shrink(),
             )
           ],
@@ -202,7 +202,7 @@ class Popup extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: const Text('キャンセル'),
+              child: Text('キャンセル'),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
@@ -241,7 +241,7 @@ class Popup extends StatelessWidget {
                                   .postContractTemplate(formGroup);
                             },
                       child: WithLoadingButton(
-                          isLoading: value.loading, child: const Text('保存する')),
+                          isLoading: value.loading, child: Text('保存する')),
                     );
                   }),
             ),

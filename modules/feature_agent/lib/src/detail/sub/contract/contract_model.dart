@@ -48,7 +48,7 @@ class ContractModel {
             );
             file = fileData.filename;
           } catch (e) {
-            logger.e('update file test');
+            logger.e("update file test");
             logger.e(e);
           }
         } else {

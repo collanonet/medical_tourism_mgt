@@ -4,6 +4,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -120,9 +121,9 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                         },
                       );
                     }),
-                const Expanded(flex: 2, child: Text('ファイル名ファイル名')),
-                const Expanded(child: Text('更新日')),
-                const Expanded(child: Text('')),
+                Expanded(flex: 2, child: Text('ファイル名ファイル名')),
+                Expanded(child: Text('更新日')),
+                Expanded(child: Text('')),
               ],
             ),
             Expanded(
@@ -218,16 +219,16 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                                                 value:
                                                     context.read<HealthModel>(),
                                                 child: AlertDialog(
-                                                  title: const Text('削除確認'),
+                                                  title: Text("削除確認"),
                                                   content:
-                                                      const Text('選択した書類を削除しますか？'),
+                                                      Text("選択した書類を削除しますか？"),
                                                   actions: [
                                                     TextButton(
                                                       onPressed: () {
                                                         Navigator.of(context)
                                                             .pop();
                                                       },
-                                                      child: const Text('キャンセル'),
+                                                      child: Text("キャンセル"),
                                                     ),
                                                     TextButton(
                                                       onPressed: () {
@@ -237,7 +238,7 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                                                         Navigator.of(context)
                                                             .pop();
                                                       },
-                                                      child: const Text('削除する'),
+                                                      child: Text("削除する"),
                                                     ),
                                                   ],
                                                 ),
@@ -248,7 +249,7 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                                   isLoading: value.loading,
                                   loadingColor: context.appTheme.primaryColor,
                                   child: Text(
-                                    '削除する',
+                                    "削除する",
                                     style: context.textTheme.labelLarge
                                         ?.copyWith(
                                             color:

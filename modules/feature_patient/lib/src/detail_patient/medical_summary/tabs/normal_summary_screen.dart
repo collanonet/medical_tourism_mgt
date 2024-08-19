@@ -56,7 +56,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),
                                   decoration: InputDecoration(
-                                    label: const Text(
+                                    label: Text(
                                       '記載日',
                                     ),
                                     suffixIcon: IconButton(
@@ -95,7 +95,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'namePassport',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           filled: true,
                                           fillColor: Color(0xffF0F3F5),
                                           label: Text(
@@ -126,8 +126,8 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                             ),
                                             decoration: InputDecoration(
                                               filled: true,
-                                              fillColor: const Color(0xffF0F3F5),
-                                              label: const Text(
+                                              fillColor: Color(0xffF0F3F5),
+                                              label: Text(
                                                 '生年月日', // TODO: l10n 対応 (生年月日) (dateOfBirth)
                                               ),
                                               suffixIcon: IconButton(
@@ -227,7 +227,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                       child: ReactiveTextField(
                                         formControlName:
                                             'nameChineseKanjiVietnamese',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           filled: true,
                                           fillColor: Color(0xffF0F3F5),
                                           label: Text(
@@ -266,7 +266,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'nameKana',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           filled: true,
                                           fillColor: Color(0xffF0F3F5),
                                           label: Text(
@@ -305,7 +305,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'currentAddress',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           label: Text(
                                             '現住所',
                                           ),
@@ -332,7 +332,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'mobileNumberPatient',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           filled: true,
                                           fillColor: Color(0xffF0F3F5),
                                           label: Text(
@@ -353,7 +353,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'mobileNumberDomestic',
-                                        decoration: const InputDecoration(
+                                        decoration: InputDecoration(
                                           label: Text(
                                             '携帯番号（国内可）',
                                           ),
@@ -388,7 +388,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'diseaseName',
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '病名',
                                     ),
@@ -401,7 +401,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'tissueType',
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '組織型', // TODO: l10n 対応 (組織型) (tissueType)
                                     ),
@@ -460,7 +460,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                 child: ReactiveTextField(
                                   formControlName:
                                       'diagnosticMedicalInstitutionName',
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '診断医療機関名', // TODO: l10n 対応 (診断医療機関名) (diagnosticMedicalInstitutionName)
                                     ),
@@ -493,7 +493,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'pastIllnessFamilyHistory',
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '既往症・家族歴',
                                     ),
@@ -511,7 +511,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                 child: ReactiveTextField(
                                   formControlName:
                                       'referralMedicalInstitutionEtc',
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '紹介元医療機関など',
                                     ),
@@ -531,7 +531,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                       'diseaseCourseSndTestResultsEtc',
                                   minLines: 5,
                                   maxLines: 15,
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '病状経過および検査結果など',
                                     ),
@@ -548,7 +548,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'symptoms',
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '症状', // TODO: l10n 対応 (症状) (symptom)
                                     ),
@@ -775,7 +775,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                   formControlName: 'patientsWishes',
                                   minLines: 1,
                                   maxLines: 3,
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '患者の希望事項',
                                     ),
@@ -784,7 +784,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                               ),
                             ],
                           ),
-                          const Divider(),
+                          Divider(),
                           Text(
                             '代理者（コーディネーターなど）',
                             style: context.textTheme.titleLarge,
@@ -797,7 +797,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'agentName',
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     filled: true,
                                     fillColor: Color(0xffF0F3F5),
                                     label: Text(
@@ -832,7 +832,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'personInChargeName',
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '担当者名',
                                     ),
@@ -845,7 +845,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'mobileNumber',
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '電話番号',
                                     ),
@@ -870,7 +870,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'patientsAddressStay',
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '患者滞在先',
                                     ),
@@ -903,7 +903,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'emergencyContact',
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '緊急連絡先',
                                     ),
@@ -940,7 +940,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'remarks',
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text(
                                       '備考',
                                     ),
@@ -952,7 +952,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                           SizedBox(
                             height: context.appTheme.spacing.marginMedium,
                           ),
-                          const Text('添付書類'),
+                          Text('添付書類'),
                           SizedBox(
                             height: context.appTheme.spacing.marginMedium,
                           ),
@@ -1051,8 +1051,8 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
   void showMedicalDataFilePicker(BuildContext context) {
     showDialog(
       context: context,
-      builder: (context) => const AlertDialog(
-        content: PickMedicalDataFilePage(),
+      builder: (context) => AlertDialog(
+        content: const PickMedicalDataFilePage(),
       ),
     );
   }

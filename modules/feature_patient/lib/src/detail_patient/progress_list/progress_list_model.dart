@@ -242,7 +242,7 @@ class ProgressListModel {
 
   Future<void> submitData(FormGroup formGroup) async {
     try {
-      submit.value = const AsyncData(loading: true);
+      submit.value = AsyncData(loading: true);
 
       await postMedicalRecordsProgress(
           mapData(formGroup.control('contactUs') as FormGroup));

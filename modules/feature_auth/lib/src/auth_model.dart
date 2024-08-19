@@ -1,3 +1,4 @@
+import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_auth/data_auth.dart';
 import 'package:flutter/widgets.dart';

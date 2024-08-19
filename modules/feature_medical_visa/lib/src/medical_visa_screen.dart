@@ -1,9 +1,11 @@
+import 'package:core_utils/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../feature_medical_visa.gm.dart';
 import 'filter_medical_visa.dart';
 import 'package:auto_route/auto_route.dart';
+import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -27,7 +29,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
     return Consumer<MedicalVisaModel>(builder: (context, model, _) {
       return Column(
         children: [
-          const MedicalVisaFilter(),
+          MedicalVisaFilter(),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 16),
             child: Row(
@@ -53,23 +55,23 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     ),
                   ),
                   onPressed: () {},
-                  child: const Text('報告済みにする'),
+                  child: Text('報告済みにする'),
                 ),
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
                 OutlinedButton.icon(
                   onPressed: () {},
-                  label: const Text('取下申立書'),
-                  icon: const Icon(Icons.note_add_rounded),
+                  label: Text('取下申立書'),
+                  icon: Icon(Icons.note_add_rounded),
                 ),
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
                 OutlinedButton.icon(
                   onPressed: () {},
-                  label: const Text('出国報告書'),
-                  icon: const Icon(Icons.note_add_rounded),
+                  label: Text('出国報告書'),
+                  icon: Icon(Icons.note_add_rounded),
                 ),
               ],
             ),
@@ -84,7 +86,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 data: TableData(
                   columns: [
                     HeaderTableData(
-                      titleHeader: const SizedBox(),
+                      titleHeader: SizedBox(),
                     ),
                     HeaderTableData(
                       titleHeader: SizedBox(
@@ -92,46 +94,46 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       ),
                     ),
                     HeaderTableData(
-                      titleHeader: const Text('患者'),
+                      titleHeader: Text('患者'),
                     ),
                     HeaderTableData(
-                      titleHeader: const Text('状況'),
+                      titleHeader: Text('状況'),
                     ),
                     HeaderTableData(
-                      titleHeader: const Text('報告書'),
+                      titleHeader: Text('報告書'),
                     ),
                     HeaderTableData(
-                      titleHeader: const Text('案件番号'),
+                      titleHeader: Text('案件番号'),
                     ),
                     HeaderTableData(
-                      titleHeader: const Text('同伴者'),
+                      titleHeader: Text('同伴者'),
                     ),
                     HeaderTableData(
-                      titleHeader: const Text('査証書類'),
+                      titleHeader: Text('査証書類'),
                     ),
                     HeaderTableData(
-                      titleHeader: const Text('査証発行日'),
+                      titleHeader: Text('査証発行日'),
                     ),
                     HeaderTableData(
-                      titleHeader: const Text('査証有効日'),
+                      titleHeader: Text('査証有効日'),
                     ),
                     HeaderTableData(
-                      titleHeader: const Text('滞在状況'),
+                      titleHeader: Text('滞在状況'),
                     ),
                     HeaderTableData(
-                      titleHeader: const Text('来日日'),
+                      titleHeader: Text('来日日'),
                     ),
                     HeaderTableData(
-                      titleHeader: const Text('帰国日'),
+                      titleHeader: Text('帰国日'),
                     ),
                     HeaderTableData(
-                      titleHeader: const Text('身元保証書発行日'),
+                      titleHeader: Text('身元保証書発行日'),
                     ),
                     HeaderTableData(
-                      titleHeader: const Text('取下げ'),
+                      titleHeader: Text('取下げ'),
                     ),
                     HeaderTableData(
-                      titleHeader: const Text('備考'),
+                      titleHeader: Text('備考'),
                     ),
                   ],
                   rows: (model.patientData.data?.items.length ?? 0) == 0
@@ -151,7 +153,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                     checkColor: Colors.white,
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(4),
-                                      side: const BorderSide(
+                                      side: BorderSide(
                                         color: Colors.grey,
                                       ),
                                     ),
@@ -228,31 +230,31 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                     ),
                                   ],
                                 ),
-                                const Text(
+                                Text(
                                   '001-C-20-1',
                                 ),
-                                const Text(
+                                Text(
                                   '1',
                                 ),
-                                const Text(
+                                Text(
                                   '特定活動',
                                 ),
-                                const Text(
+                                Text(
                                   '2020/04/22',
                                 ),
-                                const Text(
+                                Text(
                                   '2020/04/22',
                                 ),
-                                const Text(
+                                Text(
                                   '2020/06/22〜2020/07/10',
                                 ),
-                                const Text(
+                                Text(
                                   '2020/04/22',
                                 ),
-                                const Text(
+                                Text(
                                   '2020/04/22',
                                 ),
-                                const Text(
+                                Text(
                                   '2020/04/22',
                                 ),
                                 Row(
@@ -274,7 +276,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                     ),
                                   ],
                                 ),
-                                const Text(
+                                Text(
                                   '要望があったため',
                                 ),
                               ],

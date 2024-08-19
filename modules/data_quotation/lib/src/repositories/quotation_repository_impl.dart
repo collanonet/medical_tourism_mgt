@@ -1,4 +1,6 @@
+import 'dart:io';
 
+import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 
 import '../providers/quotation_local_provider.dart';

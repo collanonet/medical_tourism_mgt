@@ -130,7 +130,7 @@ class _ReportTypeScreenState extends State<ReportTypeScreen> {
                                                                   currentForm));
                                                     }
                                                   },
-                                                  icon: const Icon(
+                                                  icon: Icon(
                                                     Icons.remove_circle,
                                                     color: Colors.red,
                                                   ))

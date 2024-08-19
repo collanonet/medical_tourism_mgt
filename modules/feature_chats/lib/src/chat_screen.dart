@@ -21,10 +21,10 @@ class ChatScreen extends StatelessWidget {
               padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
-                  const ChatFilter(),
-                  const SizedBox(height: 16),
+                  ChatFilter(),
+                  SizedBox(height: 16),
                   Expanded(
-                    child: SizedBox(
+                    child: Container(
                       height: MediaQuery.of(context).size.height * 0.8,
                       child: ListView.builder(
                           physics: const AlwaysScrollableScrollPhysics(),
@@ -35,7 +35,7 @@ class ChatScreen extends StatelessWidget {
                               decoration: BoxDecoration(
                                 color: index % 2 != 0
                                     ? Colors.white
-                                    : const Color(0xffEDF8F8),
+                                    : Color(0xffEDF8F8),
                                 borderRadius: BorderRadius.circular(4),
                               ),
                               child: ListTile(
@@ -97,8 +97,8 @@ class ChatScreen extends StatelessWidget {
               ),
             ),
           ),
-          const VerticalDivider(),
-          const Expanded(child: MessageScreen()),
+          VerticalDivider(),
+          Expanded(child: MessageScreen()),
         ],
       );
     });

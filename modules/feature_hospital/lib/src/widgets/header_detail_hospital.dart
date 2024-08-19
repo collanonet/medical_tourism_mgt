@@ -77,7 +77,7 @@ class HeaderDetailHospital extends StatelessWidget {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff53A6FF),
+                              backgroundColor: Color(0xff53A6FF),
                             ),
                             onPressed: () {},
                             child: const Text('--'),
@@ -87,7 +87,7 @@ class HeaderDetailHospital extends StatelessWidget {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff53A6FF),
+                              backgroundColor: Color(0xff53A6FF),
                             ),
                             onPressed: () {},
                             child: const Text('--'),
@@ -97,7 +97,7 @@ class HeaderDetailHospital extends StatelessWidget {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff53A6FF),
+                              backgroundColor: Color(0xff53A6FF),
                             ),
                             onPressed: () {},
                             child: const Text('--'),

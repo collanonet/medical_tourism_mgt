@@ -80,7 +80,7 @@ class _WebAppointmentDetailScreenState
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text(
+                            Text(
                               '患者',
                               style: TextStyle(
                                 fontWeight: FontWeight.bold,
@@ -94,7 +94,7 @@ class _WebAppointmentDetailScreenState
                                 Expanded(
                                   child: ReactiveTextField(
                                     formControlName: 'patientName',
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text('患者名'),
                                     ),
                                   ),
@@ -102,13 +102,13 @@ class _WebAppointmentDetailScreenState
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                const Expanded(
+                                Expanded(
                                   child: SizedBox(),
                                 ),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                const Expanded(
+                                Expanded(
                                   child: SizedBox(),
                                 ),
                               ],
@@ -134,7 +134,7 @@ class _WebAppointmentDetailScreenState
                                               DateFormat('yyyy/MM/dd'),
                                         ),
                                         decoration: InputDecoration(
-                                          label: const Text(
+                                          label: Text(
                                             '第１希望',
                                           ),
                                           suffixIcon: IconButton(
@@ -171,7 +171,7 @@ class _WebAppointmentDetailScreenState
                                               DateFormat('yyyy/MM/dd'),
                                         ),
                                         decoration: InputDecoration(
-                                          label: const Text(
+                                          label: Text(
                                             '第２希望',
                                           ),
                                           suffixIcon: IconButton(
@@ -208,7 +208,7 @@ class _WebAppointmentDetailScreenState
                                               DateFormat('yyyy/MM/dd'),
                                         ),
                                         decoration: InputDecoration(
-                                          label: const Text(
+                                          label: Text(
                                             '第３希望',
                                           ),
                                           suffixIcon: IconButton(
@@ -240,7 +240,7 @@ class _WebAppointmentDetailScreenState
                                     controlAffinity:
                                         ListTileControlAffinity.leading,
                                     formControlName: 'noDesiredDate',
-                                    title: const Text('希望日なし'),
+                                    title: Text('希望日なし'),
                                   ),
                                 ),
                               ],
@@ -255,14 +255,14 @@ class _WebAppointmentDetailScreenState
                                     minLines: 3,
                                     maxLines: 5,
                                     formControlName: 'remarks',
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text('備考'),
                                     ),
                                   ),
                                 ),
                               ],
                             ),
-                            const Divider(),
+                            Divider(),
                             Text(
                               '医療機関',
                               style: context.textTheme.titleLarge,
@@ -276,7 +276,7 @@ class _WebAppointmentDetailScreenState
                                 Expanded(
                                   child: ReactiveTextField(
                                     formControlName: 'medicalInstitutionName',
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text('医療機関名'),
                                       suffixIcon: Icon(
                                         Icons.search,
@@ -291,7 +291,7 @@ class _WebAppointmentDetailScreenState
                                 Expanded(
                                   child: ReactiveTextField(
                                     formControlName: 'doctorName',
-                                    decoration: const InputDecoration(
+                                    decoration: InputDecoration(
                                       label: Text('医師名'),
                                       suffixIcon: Icon(
                                         Icons.search,
@@ -327,7 +327,7 @@ class _WebAppointmentDetailScreenState
                                   Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      const Expanded(
+                                      Expanded(
                                         child: SizedBox(),
                                       ),
                                       SizedBox(
@@ -400,7 +400,7 @@ class _WebAppointmentDetailScreenState
                                         textColor: Colors.white,
                                         bg: context.appTheme.primaryColor,
                                       ),
-                                      const Expanded(
+                                      Expanded(
                                         flex: 3,
                                         child: SizedBox(),
                                       ),
@@ -480,7 +480,7 @@ class _WebAppointmentDetailScreenState
                                         '×',
                                         bg: Colors.white,
                                       ),
-                                      const Expanded(
+                                      Expanded(
                                         flex: 3,
                                         child: SizedBox(),
                                       ),
@@ -560,7 +560,7 @@ class _WebAppointmentDetailScreenState
                                         '○',
                                         bg: Colors.white,
                                       ),
-                                      const Expanded(
+                                      Expanded(
                                         flex: 3,
                                         child: SizedBox(),
                                       ),
@@ -569,7 +569,7 @@ class _WebAppointmentDetailScreenState
                                 ],
                               ),
                             ),
-                            const Divider(),
+                            Divider(),
                             Text(
                               '予約日',
                               style: context.textTheme.titleLarge,
@@ -581,7 +581,7 @@ class _WebAppointmentDetailScreenState
                               padding: EdgeInsets.all(
                                   context.appTheme.spacing.marginMedium),
                               decoration: BoxDecoration(
-                                color: const Color(0xffFFECE5),
+                                color: Color(0xffFFECE5),
                                 borderRadius: BorderRadius.circular(
                                   context.appTheme.spacing.borderRadiusMedium,
                                 ),
@@ -589,7 +589,7 @@ class _WebAppointmentDetailScreenState
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  const Text('候補日'),
+                                  Text('候補日'),
                                   ReactiveFormArray(
                                     formArrayName: 'candidateDate',
                                     builder: (context, formArray, child) {
@@ -634,7 +634,7 @@ class _WebAppointmentDetailScreenState
                                                           },
                                                           decoration:
                                                               InputDecoration(
-                                                            label: const Text('第一希望'),
+                                                            label: Text('第一希望'),
                                                             suffixIcon:
                                                                 IconButton(
                                                               icon: const Icon(
@@ -676,11 +676,11 @@ class _WebAppointmentDetailScreenState
                                                                       .black,
                                                               bg: control.value ==
                                                                       '午前'
-                                                                  ? const Color(
+                                                                  ? Color(
                                                                       0xffF08C67)
                                                                   : Colors
                                                                       .white,
-                                                              borderC: const Color(
+                                                              borderC: Color(
                                                                   0xffF08C67),
                                                               onTap: () {
                                                                 control.value =
@@ -704,11 +704,11 @@ class _WebAppointmentDetailScreenState
                                                                       .black,
                                                               bg: control.value ==
                                                                       '午後'
-                                                                  ? const Color(
+                                                                  ? Color(
                                                                       0xffF08C67)
                                                                   : Colors
                                                                       .white,
-                                                              borderC: const Color(
+                                                              borderC: Color(
                                                                   0xffF08C67),
                                                               onTap: () {
                                                                 control.value =
@@ -732,11 +732,11 @@ class _WebAppointmentDetailScreenState
                                                                       .black,
                                                               bg: control.value ==
                                                                       '終日'
-                                                                  ? const Color(
+                                                                  ? Color(
                                                                       0xffF08C67)
                                                                   : Colors
                                                                       .white,
-                                                              borderC: const Color(
+                                                              borderC: Color(
                                                                   0xffF08C67),
                                                               onTap: () {
                                                                 control.value =
@@ -760,7 +760,7 @@ class _WebAppointmentDetailScreenState
                                                         formatter.timeFormatter,
                                                       ],
                                                       decoration:
-                                                          const InputDecoration(
+                                                          InputDecoration(
                                                         label: Text(
                                                           '時間帯（自）',
                                                         ),
@@ -771,7 +771,7 @@ class _WebAppointmentDetailScreenState
                                                     width: context.appTheme
                                                         .spacing.marginMedium,
                                                   ),
-                                                  const Text('〜'),
+                                                  Text('〜'),
                                                   SizedBox(
                                                     width: context.appTheme
                                                         .spacing.marginMedium,
@@ -786,7 +786,7 @@ class _WebAppointmentDetailScreenState
                                                         formatter.timeFormatter,
                                                       ],
                                                       decoration:
-                                                          const InputDecoration(
+                                                          InputDecoration(
                                                         label: Text(
                                                           '時間帯（至）',
                                                         ),
@@ -801,7 +801,7 @@ class _WebAppointmentDetailScreenState
                                                                     currentForm) !=
                                                             0) ...{
                                                           IconButton(
-                                                            icon: const Icon(
+                                                            icon: Icon(
                                                                 Icons
                                                                     .delete_forever,
                                                                 color:
@@ -880,7 +880,7 @@ class _WebAppointmentDetailScreenState
                                               mainAxisAlignment:
                                                   MainAxisAlignment.center,
                                               children: [
-                                                const Icon(
+                                                Icon(
                                                   Icons.add_circle,
                                                   color: Color(0xffF08C67),
                                                 ),
@@ -888,7 +888,7 @@ class _WebAppointmentDetailScreenState
                                                   width: context.appTheme
                                                       .spacing.marginSmall,
                                                 ),
-                                                const Text(
+                                                Text(
                                                   '候補日を追加',
                                                   style: TextStyle(
                                                       color: Color(0xffF08C67)),
@@ -911,7 +911,7 @@ class _WebAppointmentDetailScreenState
                                           minLines: 3,
                                           maxLines: 5,
                                           formControlName: 'message',
-                                          decoration: const InputDecoration(
+                                          decoration: InputDecoration(
                                             label: Text(
                                                 'メッセージ（希望日がない場合は、メッセージ欄にてその旨伝えてください）'),
                                           ),
@@ -928,7 +928,7 @@ class _WebAppointmentDetailScreenState
                                         builder: (context, form, _) {
                                       return ElevatedButton(
                                         style: ElevatedButton.styleFrom(
-                                          backgroundColor: const Color(0xffF08C67),
+                                          backgroundColor: Color(0xffF08C67),
                                         ),
                                         onPressed: form.invalid
                                             ? null
@@ -939,7 +939,7 @@ class _WebAppointmentDetailScreenState
                                                     .updateWebBookingAdmin(
                                                         form);
                                               },
-                                        child: const Text('予約日を病院へ送信する'),
+                                        child: Text('予約日を病院へ送信する'),
                                       );
                                     }),
                                   )
@@ -990,7 +990,7 @@ class _WebAppointmentDetailScreenState
                                             logger.d(value);
                                           },
                                           decoration: InputDecoration(
-                                            label: const Text('年月日'),
+                                            label: Text('年月日'),
                                             suffixIcon: IconButton(
                                               icon: const Icon(
                                                 CupertinoIcons.calendar,
@@ -1017,7 +1017,7 @@ class _WebAppointmentDetailScreenState
                                       inputFormatters: [
                                         formatter.timeFormatter,
                                       ],
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text('時間'),
                                       ),
                                     ),
