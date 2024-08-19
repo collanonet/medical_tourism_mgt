@@ -58,7 +58,7 @@ class _MedicalVisaDetailScreenState extends State<MedicalVisaDetailScreen> {
                           Checkbox(
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
-                              side: BorderSide(color: Colors.grey),
+                              side: const BorderSide(color: Colors.grey),
                             ),
                             checkColor: Colors.white,
                             value: false,
@@ -87,7 +87,7 @@ class _MedicalVisaDetailScreenState extends State<MedicalVisaDetailScreen> {
                           )),
                         ],
                       ),
-                      Divider(),
+                      const Divider(),
                       ListView(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -102,7 +102,7 @@ class _MedicalVisaDetailScreenState extends State<MedicalVisaDetailScreen> {
                                   Checkbox(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(4),
-                                      side: BorderSide(color: Colors.grey),
+                                      side: const BorderSide(color: Colors.grey),
                                     ),
                                     checkColor: Colors.white,
                                     value: false,
@@ -117,8 +117,8 @@ class _MedicalVisaDetailScreenState extends State<MedicalVisaDetailScreen> {
                                                 color: context
                                                     .appTheme.primaryColor),
                                       )),
-                                  Expanded(child: Text('2023/06/30')),
-                                  Expanded(
+                                  const Expanded(child: Text('2023/06/30')),
+                                  const Expanded(
                                       child: Text(
                                     '2',
                                   )),

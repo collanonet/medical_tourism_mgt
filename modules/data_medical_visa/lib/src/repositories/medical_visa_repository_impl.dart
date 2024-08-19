@@ -1,6 +1,4 @@
-import 'dart:io';
 
-import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 
 import '../providers/medical_visa_local_provider.dart';

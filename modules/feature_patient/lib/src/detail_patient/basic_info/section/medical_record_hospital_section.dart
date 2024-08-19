@@ -62,7 +62,7 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                                   Expanded(
                                     child: ReactiveTextField(
                                       formControlName: 'hospitalName',
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           '病院名', //   TODO: l10n 対応 (病院名) (hospitalName)
                                         ),
@@ -80,7 +80,7 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                                   Expanded(
                                     child: ReactiveTextField(
                                       formControlName: 'medicalCardNumber',
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           '診察券番号', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
                                         ),

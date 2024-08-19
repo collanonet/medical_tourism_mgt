@@ -79,7 +79,7 @@ class ViewPopup extends StatelessWidget {
                                 child:
                                     Text(data.file.toString().split('.').last),
                               )
-                            : SizedBox(),
+                            : const SizedBox(),
                   ),
                 ],
               );

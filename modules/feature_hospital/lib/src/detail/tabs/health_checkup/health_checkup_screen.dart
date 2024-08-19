@@ -1,4 +1,4 @@
-import 'package:feature_hospital/src/detail/tabs/health_checkup/health_checkup_section.dart';
+import 'health_checkup_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';

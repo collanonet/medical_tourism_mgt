@@ -29,7 +29,7 @@ class CreateDomesticMedicalDataScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(Icons.close)),
+                icon: const Icon(Icons.close)),
           ],
         ),
         Row(
@@ -44,7 +44,7 @@ class CreateDomesticMedicalDataScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       isDense: true,
                       hintText: 'キーワードを入力',
                     ),
@@ -67,12 +67,12 @@ class CreateDomesticMedicalDataScreen extends StatelessWidget {
                   Row(
                     children: [
                       Checkbox(value: true, onChanged: (value) {}),
-                      Text('画像データ（DICOM）'),
+                      const Text('画像データ（DICOM）'),
                       SizedBox(
                         width: context.appTheme.spacing.marginMedium,
                       ),
                       Checkbox(value: true, onChanged: (value) {}),
-                      Text('病状資料'),
+                      const Text('病状資料'),
                     ],
                   )
                 ],
@@ -91,7 +91,7 @@ class CreateDomesticMedicalDataScreen extends StatelessWidget {
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   TextFormField(
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       isDense: true,
                       hintText: 'PET-CT',
                     ),
@@ -142,13 +142,13 @@ class CreateDomesticMedicalDataScreen extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             )
           ],

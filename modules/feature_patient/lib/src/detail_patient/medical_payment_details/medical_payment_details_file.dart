@@ -38,7 +38,7 @@ class Popup extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(Icons.close)),
+                icon: const Icon(Icons.close)),
           ],
         ),
         Row(
@@ -55,7 +55,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
                       formControlName: 'name_of_hospital',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '書類名',
                       ),
                     ),
@@ -78,7 +78,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
                       formControlName: 'documentName',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '発行元',
                       ),
                     ),
@@ -89,13 +89,13 @@ class Popup extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             )
           ],
@@ -130,7 +130,7 @@ class Popup extends StatelessWidget {
                               ),
                           decoration: InputDecoration(
                             label: const Text(
-                              "発行日",
+                              '発行日',
                             ),
                             suffixIcon: IconButton(
                               icon: const Icon(
@@ -156,13 +156,13 @@ class Popup extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             )
           ],
@@ -181,7 +181,7 @@ class Popup extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('キャンセル'),
+              child: const Text('キャンセル'),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
@@ -222,7 +222,7 @@ class Popup extends StatelessWidget {
                                   .submitMedicalPayment(formGroup);
                             },
                       child: WithLoadingButton(
-                          isLoading: value.loading, child: Text('保存する')),
+                          isLoading: value.loading, child: const Text('保存する')),
                     );
                   }),
             ),
