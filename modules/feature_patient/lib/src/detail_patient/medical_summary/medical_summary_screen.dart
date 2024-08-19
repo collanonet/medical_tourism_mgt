@@ -31,7 +31,7 @@ class _MedicalSummaryScreenState extends State<MedicalSummaryScreen> {
                 children: [
                   TabBarWidget(
                     selectedIndex: value,
-                    menu: const [
+                    menu: [
                       '自動翻訳', // Auto translate
                       'サマリー（通常版）', // Summary (Normal version)
                       'サマリー（簡易版）', // Summary (Simple version)

@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:core_network/entities.dart';
 import 'package:feature_agent/feature_agent.gm.dart';
 import 'package:feature_auth/feature_auth.dart';

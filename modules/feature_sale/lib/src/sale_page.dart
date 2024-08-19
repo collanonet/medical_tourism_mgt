@@ -24,7 +24,7 @@ class _SalePageState extends State<SalePage> {
     return LayoutView(
       selectedIndex: 8,
       page: ReactiveFormConfig(
-        validationMessages: const {},
+        validationMessages: {},
         child: ReactiveFormBuilder(
           form: () => saleManagementForm(),
           builder: (context, formGroup, child) {

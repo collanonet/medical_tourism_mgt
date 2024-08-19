@@ -1,5 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -15,10 +16,10 @@ class SaleTotal extends StatelessWidget {
     return Container(
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
-        border: Border.all(color: const Color.fromARGB(255, 14, 158, 194), width: 2),
+        border: Border.all(color: Color.fromARGB(255, 14, 158, 194), width: 2),
         borderRadius: BorderRadius.circular(10),
       ),
-      padding: const EdgeInsets.all(10),
+      padding: EdgeInsets.all(10),
       child: ReactiveForm(
         formGroup: form.control('total') as FormGroup,
         child: ColumnSeparated(

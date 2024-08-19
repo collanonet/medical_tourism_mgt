@@ -1,6 +1,8 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -81,7 +83,7 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text('タイプ'),
+                                    Text('タイプ'),
                                     Row(
                                       children: [
                                         IntrinsicWidth(
@@ -112,7 +114,7 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text('利用実績'),
+                                    Text('利用実績'),
                                     Row(
                                       children: [
                                         IntrinsicWidth(
@@ -148,7 +150,7 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                 Expanded(
                                     child: ReactiveTextField(
                                   formControlName: 'area',
-                                  decoration: const InputDecoration(
+                                  decoration: InputDecoration(
                                     label: Text('エリア'),
                                   ),
                                 )),
@@ -160,7 +162,7 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text('対応言語'),
+                                    Text('対応言語'),
                                     Row(
                                       children: [
                                         IntrinsicWidth(
@@ -293,7 +295,7 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                       '検索結果',
                       style: context.textTheme.titleMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('新規登録する')),
+                    ElevatedButton(onPressed: () {}, child: Text('新規登録する')),
                   ],
                 ),
                 ValueListenableBuilder(
@@ -402,8 +404,8 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                           width: context
                                               .appTheme.spacing.marginMedium,
                                         ),
-                                        const Icon(Icons.check, color: Colors.green),
-                                        const Text('タイ語')
+                                        Icon(Icons.check, color: Colors.green),
+                                        Text('タイ語')
                                       ],
                                     ),
                                     Row(
@@ -416,7 +418,7 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                 ),
                                 ElevatedButton(
                                     onPressed: () {},
-                                    child: const Text('このホテルを工程表へ追加')),
+                                    child: Text('このホテルを工程表へ追加')),
                               ],
                             ),
                           );

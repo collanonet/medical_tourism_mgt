@@ -21,28 +21,28 @@ class HospitalDICOMTab extends StatelessWidget {
         },
         children: [
           TextFormField(
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               isDense: true,
               hintText: 'コメント 大阪府済生会吹田病院',
             ),
           ),
 
           TextFormField(
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               isDense: true,
               hintText: 'コメント 自社',
             ),
           ),
 
           TextFormField(
-            decoration: const InputDecoration(
+            decoration: InputDecoration(
               isDense: true,
               hintText: 'コメント 大阪府済生会吹田病院',
             ),
           ),
           Avatar.network(
             medicalRecordOverseaData?.file,
-            placeholder: const AssetImage(
+            placeholder: AssetImage(
               Images.logoMadical,
               package: 'core_ui',
             ),

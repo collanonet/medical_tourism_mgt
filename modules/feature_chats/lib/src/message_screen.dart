@@ -13,7 +13,7 @@ class MessageScreen extends StatelessWidget {
           'LIU　WEIQIANG ',
           style: context.textTheme.titleLarge,
         ),
-        const SizedBox(
+        SizedBox(
           height: 16,
         ),
         // generate list bubble message list with with message send and receive
@@ -36,7 +36,7 @@ class MessageScreen extends StatelessWidget {
                       ),
                       child: Text(
                         messages[index],
-                        style: context.textTheme.bodyLarge,
+                        style: context.textTheme.bodyText1,
                       ),
                     ),
                   ],

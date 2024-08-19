@@ -6,6 +6,7 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -121,11 +122,11 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                           },
                         );
                       }),
-                  const Expanded(flex: 2, child: Text('施設写真名')),
-                  const Expanded(child: Text('撮影')),
-                  const Expanded(child: Text('撮影日')),
-                  const Expanded(child: Text('共有')),
-                  const Expanded(child: SizedBox()),
+                  Expanded(flex: 2, child: Text('施設写真名')),
+                  Expanded(child: Text('撮影')),
+                  Expanded(child: Text('撮影日')),
+                  Expanded(child: Text('共有')),
+                  Expanded(child: SizedBox()),
                 ],
               ),
               SizedBox(
@@ -178,8 +179,8 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                         ),
                         Expanded(
                           child: value.requireData[index].share == null
-                              ? const SizedBox()
-                              : const Icon(Icons.person),
+                              ? SizedBox()
+                              : Icon(Icons.person),
                         ),
                         Expanded(
                           child: Avatar.network(
@@ -256,9 +257,9 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                                                     value: context
                                                         .read<FacilityModel>(),
                                                     child: AlertDialog(
-                                                      title: const Text('削除確認'),
-                                                      content: const Text(
-                                                          '選択した書類を削除しますか？'),
+                                                      title: Text("削除確認"),
+                                                      content: Text(
+                                                          "選択した書類を削除しますか？"),
                                                       actions: [
                                                         TextButton(
                                                           onPressed: () {
@@ -266,7 +267,7 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                                                                     context)
                                                                 .pop();
                                                           },
-                                                          child: const Text('キャンセル'),
+                                                          child: Text("キャンセル"),
                                                         ),
                                                         TextButton(
                                                           onPressed: () {
@@ -279,7 +280,7 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                                                                     context)
                                                                 .pop();
                                                           },
-                                                          child: const Text('削除する'),
+                                                          child: Text("削除する"),
                                                         ),
                                                       ],
                                                     ),

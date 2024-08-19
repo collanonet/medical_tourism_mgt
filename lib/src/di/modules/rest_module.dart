@@ -1,9 +1,8 @@
-import 'package:flutter/foundation.dart';
-
-import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/foundation.dart';
 import 'package:data_auth/data_auth.dart';
+import 'package:core_network/core_network.dart';
 import 'package:dio/dio.dart';
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart';
 import 'package:feature_auth/feature_auth.dart';
