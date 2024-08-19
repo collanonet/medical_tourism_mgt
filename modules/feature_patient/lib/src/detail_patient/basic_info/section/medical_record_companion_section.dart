@@ -87,18 +87,18 @@ class _MedicalRecordCompanionSectionState
                                       );
                                     },
                                     children: [
-                                      Container(
+                                      SizedBox(
                                         width: 250,
                                         child: ReactiveCheckboxListTile(
                                             controlAffinity:
                                                 ListTileControlAffinity.leading,
                                             formControlName: 'leader',
-                                            title: Text('同行者のリーダーとする')),
+                                            title: const Text('同行者のリーダーとする')),
                                       ),
                                       Expanded(
                                         child: ReactiveTextField(
                                           formControlName: 'remarks',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               '備考', //    TODO: l10n 対応 (備考) (remarks
                                             ),
@@ -128,7 +128,7 @@ class _MedicalRecordCompanionSectionState
                                         child: ReactiveTextField(
                                           formControlName:
                                               'familyNameRomanized',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               'ファミリーネーム', // Todo: l10n 対応 (ファミリーネーム) (familyName)
                                             ),
@@ -139,7 +139,7 @@ class _MedicalRecordCompanionSectionState
                                         child: ReactiveTextField(
                                           formControlName:
                                               'middleNameRomanized',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               'ミドルネーム', // Todo: l10n 対応 (ミドルネーム) (middleName)
                                             ),
@@ -149,7 +149,7 @@ class _MedicalRecordCompanionSectionState
                                       Expanded(
                                         child: ReactiveTextField(
                                           formControlName: 'firstNameRomanized',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               'ファーストネーム', // Todo: l10n 対応 (ファーストネーム) (firstName)
                                             ),
@@ -179,7 +179,7 @@ class _MedicalRecordCompanionSectionState
                                         child: ReactiveTextField(
                                           formControlName:
                                               'familyNameChineseOrVietnamese',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               'ファミリーネーム', // Todo: l10n 対応 (ファミリーネーム) (familyName)
                                             ),
@@ -190,7 +190,7 @@ class _MedicalRecordCompanionSectionState
                                         child: ReactiveTextField(
                                           formControlName:
                                               'middleNameChineseOrVietnamese',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               'ミドルネーム', // Todo: l10n 対応 (ミドルネーム) (middleName)
                                             ),
@@ -201,7 +201,7 @@ class _MedicalRecordCompanionSectionState
                                         child: ReactiveTextField(
                                           formControlName:
                                               'firstNameChineseOrVietnamese',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               'ファーストネーム', // Todo: l10n 対応 (ファーストネーム) (firstName)
                                             ),
@@ -231,7 +231,7 @@ class _MedicalRecordCompanionSectionState
                                         child: ReactiveTextField(
                                           formControlName:
                                               'familyNameJapaneseForChinese',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               'ファミリーネーム', // Todo: l10n 対応 (ファミリーネーム) (familyName)
                                             ),
@@ -242,7 +242,7 @@ class _MedicalRecordCompanionSectionState
                                         child: ReactiveTextField(
                                           formControlName:
                                               'middleNameJapaneseForChinese',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               'ミドルネーム', // Todo: l10n 対応 (ミドルネーム) (middleName)
                                             ),
@@ -253,7 +253,7 @@ class _MedicalRecordCompanionSectionState
                                         child: ReactiveTextField(
                                           formControlName:
                                               'firstNameJapaneseForChinese',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               'ファーストネーム', // Todo: l10n 対応 (ファーストネーム) (firstName)
                                             ),
@@ -283,7 +283,7 @@ class _MedicalRecordCompanionSectionState
                                         child: ReactiveTextField(
                                           formControlName:
                                               'familyNameJapaneseForNonChinese',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               'ファミリーネーム', // Todo: l10n 対応 (ファミリーネーム) (familyName)
                                             ),
@@ -294,7 +294,7 @@ class _MedicalRecordCompanionSectionState
                                         child: ReactiveTextField(
                                           formControlName:
                                               'middleNameJapaneseForNonChinese',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               'ミドルネーム', // Todo: l10n 対応 (ミドルネーム) (middleName)
                                             ),
@@ -305,7 +305,7 @@ class _MedicalRecordCompanionSectionState
                                         child: ReactiveTextField(
                                           formControlName:
                                               'firstNameJapaneseForNonChinese',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               'ファーストネーム', // Todo: l10n 対応 (ファーストネーム) (firstName)
                                             ),
@@ -326,14 +326,14 @@ class _MedicalRecordCompanionSectionState
                                       Expanded(
                                         child: ReactiveTextField(
                                           formControlName: 'nationality',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               '国籍', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
                                             ),
                                           ),
                                         ),
                                       ),
-                                      Expanded(
+                                      const Expanded(
                                         child: ReactiveDropdownFormField(
                                           formControlName: 'relationship',
                                           decoration: InputDecoration(
@@ -414,7 +414,7 @@ class _MedicalRecordCompanionSectionState
                                                       DateFormat('yyyy/MM/dd'),
                                                 ),
                                                 decoration: InputDecoration(
-                                                  label: Text(
+                                                  label: const Text(
                                                     '生年月日',
                                                   ),
                                                   suffixIcon: IconButton(
@@ -501,7 +501,7 @@ class _MedicalRecordCompanionSectionState
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: <Widget>[
-                                                    Container(
+                                                    SizedBox(
                                                       width: 100,
                                                       child:
                                                           ReactiveCheckboxListTile(
@@ -525,10 +525,10 @@ class _MedicalRecordCompanionSectionState
                                                                   .value ==
                                                               false;
                                                         },
-                                                        title: Text('男性'),
+                                                        title: const Text('男性'),
                                                       ),
                                                     ),
-                                                    Container(
+                                                    SizedBox(
                                                       width: 100,
                                                       child:
                                                           ReactiveCheckboxListTile(
@@ -551,7 +551,7 @@ class _MedicalRecordCompanionSectionState
                                                                   .value ==
                                                               false;
                                                         },
-                                                        title: Text('女性'),
+                                                        title: const Text('女性'),
                                                       ),
                                                     )
                                                   ],
@@ -563,7 +563,7 @@ class _MedicalRecordCompanionSectionState
                                       ),
                                     ],
                                   ),
-                                  Text('連絡先'),
+                                  const Text('連絡先'),
                                   RowSeparated(
                                     separatorBuilder:
                                         (BuildContext context, int index) {
@@ -577,7 +577,7 @@ class _MedicalRecordCompanionSectionState
                                         child: ReactiveTextField(
                                           formControlName: 'mobileNumber',
                                           keyboardType: TextInputType.number,
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             prefixText: '+',
                                             label: Text(
                                               '携帯番号',
@@ -592,7 +592,7 @@ class _MedicalRecordCompanionSectionState
                                       Expanded(
                                         child: ReactiveTextField(
                                           formControlName: 'email',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               'Email',
                                             ),
@@ -635,7 +635,7 @@ class _MedicalRecordCompanionSectionState
                                                       keyboardType:
                                                           TextInputType.url,
                                                       decoration:
-                                                          InputDecoration(
+                                                          const InputDecoration(
                                                         label: Text(
                                                           'チャットツールリンク',
                                                         ),
@@ -740,9 +740,9 @@ class _MedicalRecordCompanionSectionState
                                       qRChatCompanion(currentForm, context),
                                     ],
                                   ),
-                                  Text(
+                                  const Text(
                                       'パスポート', // TODO: l10n 対応 (パスポート) (passport)
-                                      style: const TextStyle(
+                                      style: TextStyle(
                                         fontFamily: 'NotoSansJP',
                                         package: 'core_ui',
                                         fontWeight: FontWeight.bold,
@@ -759,7 +759,7 @@ class _MedicalRecordCompanionSectionState
                                       Expanded(
                                         child: ReactiveTextField(
                                           formControlName: 'passportNumber',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             label: Text(
                                               '旅券番号', //   TODO: l10n 対応 (旅券番号) (passportNumber)
                                             ),
@@ -781,7 +781,7 @@ class _MedicalRecordCompanionSectionState
                                                       DateFormat('yyyy/MM/dd'),
                                                 ),
                                                 decoration: InputDecoration(
-                                                  label: Text(
+                                                  label: const Text(
                                                     '発行日', //  TODO: l10n 対応 (発行日) (issueDate)
                                                   ),
                                                   suffixIcon: IconButton(
@@ -815,7 +815,7 @@ class _MedicalRecordCompanionSectionState
                                                       DateFormat('yyyy/MM/dd'),
                                                 ),
                                                 decoration: InputDecoration(
-                                                  label: Text(
+                                                  label: const Text(
                                                     '有効期限', // TODO: l10n 対応 (有効期限) (expirationDate)
                                                   ),
                                                   suffixIcon: IconButton(
@@ -1075,15 +1075,15 @@ class _MedicalRecordCompanionSectionState
                       );
                     },
                     children: [
-                      Icon(Icons.copy_all_rounded),
-                      Text('QRコードをここにドラッグ＆ドロップ'),
+                      const Icon(Icons.copy_all_rounded),
+                      const Text('QRコードをここにドラッグ＆ドロップ'),
                       ElevatedButton(
                           onPressed: () {
                             imagePicker().then((value) {
                               currentForm.control('chatQrImage').value = value;
                             });
                           },
-                          child: Text('またはファイルを選択する'))
+                          child: const Text('またはファイルを選択する'))
                     ],
                   ),
       ),

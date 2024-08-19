@@ -81,15 +81,15 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
                   SizedBox(
                     height: context.appTheme.spacing.marginMedium,
                   ),
-                  Text('2023/11/11〜2023/11/15')
+                  const Text('2023/11/11〜2023/11/15')
                 ],
               ),
-              Spacer(),
-              Text('進捗'),
+              const Spacer(),
+              const Text('進捗'),
               SizedBox(
                 width: context.appTheme.spacing.marginMedium,
               ),
-              ElevatedButton(onPressed: () {}, child: Text('新規見積依頼'))
+              ElevatedButton(onPressed: () {}, child: const Text('新規見積依頼'))
             ],
           ),
         ),

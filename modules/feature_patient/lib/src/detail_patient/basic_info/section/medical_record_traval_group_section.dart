@@ -41,7 +41,7 @@ class MedicalRecordTravelGroupSection extends StatelessWidget {
                           textDirection: TextDirection.rtl,
                           current: control.value == true ? 'する' : 'しない',
                           values: const ['する', 'しない'],
-                          iconList: [
+                          iconList: const [
                             Text('しない'),
                             Text('する'),
                           ],
@@ -54,7 +54,7 @@ class MedicalRecordTravelGroupSection extends StatelessWidget {
                             backgroundColor: Colors.white,
                             indicatorColor: Colors.white,
                             boxShadow: [
-                              BoxShadow(
+                              const BoxShadow(
                                 color: Colors.black26,
                                 spreadRadius: 1,
                                 blurRadius: 2,
@@ -96,7 +96,7 @@ class MedicalRecordTravelGroupSection extends StatelessWidget {
                                 Expanded(
                                   child: ReactiveTextField(
                                     formControlName: 'name',
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       suffixIcon: Icon(
                                         Icons.search,
                                         color: Colors.grey,
@@ -119,7 +119,7 @@ class MedicalRecordTravelGroupSection extends StatelessWidget {
                                                 .controls
                                                 .indexOf(currentForm));
                                           },
-                                          icon: Icon(
+                                          icon: const Icon(
                                             Icons.delete_forever,
                                             color: Colors.red,
                                           )),

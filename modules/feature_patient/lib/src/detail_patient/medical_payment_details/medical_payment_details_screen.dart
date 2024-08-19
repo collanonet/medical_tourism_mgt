@@ -170,7 +170,7 @@ class _MedicalPaymentDetailScreenState
               Checkbox(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4),
-                  side: BorderSide(color: Colors.grey),
+                  side: const BorderSide(color: Colors.grey),
                 ),
                 checkColor: Colors.white,
                 value: false,
@@ -193,7 +193,7 @@ class _MedicalPaymentDetailScreenState
               )),
             ],
           ),
-          Divider(),
+          const Divider(),
           ListView(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -208,20 +208,20 @@ class _MedicalPaymentDetailScreenState
                       Checkbox(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4),
-                          side: BorderSide(color: Colors.grey),
+                          side: const BorderSide(color: Colors.grey),
                         ),
                         checkColor: Colors.white,
                         value: false,
                         onChanged: (value) {},
                       ),
-                      Expanded(child: Text('りんくうメディカルクリニック')),
+                      const Expanded(child: Text('りんくうメディカルクリニック')),
                       Expanded(
                           child: Text(
                         '診療明細報酬書',
                         style: context.textTheme.bodySmall
                             ?.copyWith(color: context.appTheme.primaryColor),
                       )),
-                      Expanded(child: Text('2023/06/30')),
+                      const Expanded(child: Text('2023/06/30')),
                     ],
                   ),
                 ),

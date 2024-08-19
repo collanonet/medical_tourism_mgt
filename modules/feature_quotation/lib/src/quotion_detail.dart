@@ -1,7 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class QuotionDetail extends StatefulWidget {
   const QuotionDetail({super.key});

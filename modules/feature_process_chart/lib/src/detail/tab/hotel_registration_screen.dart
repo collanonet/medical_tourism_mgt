@@ -2,9 +2,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -64,7 +62,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'accommodationName',
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     labelText: '施設名',
                                   ),
                                 ),
@@ -76,7 +74,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                                 flex: 2,
                                 child: ReactiveTextField(
                                   formControlName: 'address',
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     labelText: '所在地',
                                   ),
                                 ),
@@ -88,7 +86,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'contactPersonName',
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     labelText: '担当者名',
                                   ),
                                 ),
@@ -99,7 +97,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'phoneNumber',
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     labelText: '電話番号',
                                   ),
                                 ),
@@ -110,7 +108,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'ratePerNight',
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     labelText: '1泊の料金',
                                   ),
                                 ),
@@ -122,7 +120,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                               Expanded(
                                 child: ReactiveTextField(
                                   formControlName: 'accommodationMemo',
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     labelText: '宿泊メモ',
                                   ),
                                 ),
@@ -134,7 +132,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                               Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text('外国語スタッフ'),
+                                  const Text('外国語スタッフ'),
                                   RowSeparated(
                                     separatorBuilder:
                                         (BuildContext context, int index) {
@@ -205,7 +203,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                           Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text('評価'),
+                              const Text('評価'),
                               SizedBox(
                                 height: context.appTheme.spacing.marginSmall,
                               ),
@@ -288,7 +286,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                                       : null,
                                   child: WithLoadingButton(
                                     isLoading: value.loading,
-                                    child: Text('保存する'),
+                                    child: const Text('保存する'),
                                   ));
                             },
                           );

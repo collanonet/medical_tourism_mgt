@@ -106,7 +106,7 @@ class BasicInformationModel {
           logger.d('createUpdateAll');
           loading.value = const AsyncData(data: true);
         } else {
-          medicalRecord.value = AsyncData(error: '黄色のボックスに患者様の個人情報をご入力ください');
+          medicalRecord.value = const AsyncData(error: '黄色のボックスに患者様の個人情報をご入力ください');
         }
       } catch (error) {
         logger.d(error);
@@ -1458,7 +1458,7 @@ class BasicInformationModel {
   }
 
   Future<void> createUpdateMedicalRecordTravelGroups(FormGroup control) async {
-    medicalRecordTravelGroups.value = AsyncData(loading: true);
+    medicalRecordTravelGroups.value = const AsyncData(loading: true);
     List<String?> type = [];
 
     if (control.control('travelGroup').value != null) {
@@ -1480,7 +1480,7 @@ class BasicInformationModel {
       }
     }
 
-    print("test ${type}");
+    print('test $type');
 
     MedicalRecordTravelGroupRequest request = MedicalRecordTravelGroupRequest(
       toGroupLeader: control.control('toGroupLeader').value ?? false,

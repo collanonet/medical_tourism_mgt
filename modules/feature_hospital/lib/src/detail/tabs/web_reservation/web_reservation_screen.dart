@@ -1,4 +1,4 @@
-import 'package:feature_hospital/src/detail/tabs/web_reservation/web_reservation_section.dart';
+import 'web_reservation_section.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 

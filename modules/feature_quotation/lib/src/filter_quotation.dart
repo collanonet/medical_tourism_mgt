@@ -110,7 +110,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                 _check = value!;
                               });
                             }),
-                        Text(
+                        const Text(
                           '取下対象者',
                           style: TextStyle(
                             fontFamily: 'NotoSansJP',
@@ -129,7 +129,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
                             decoration: InputDecoration(
                               label: Text(
                                 context.l10n.labelClassification,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontFamily: 'NotoSansJP',
                                   package: 'core_ui',
                                 ),
@@ -145,7 +145,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
                             decoration: InputDecoration(
                               label: Text(
                                 context.l10n.labelSalesRepresentative,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   fontFamily: 'NotoSansJP',
                                   package: 'core_ui',
                                 ),
@@ -177,7 +177,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelEntryDateFrom,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontFamily: 'NotoSansJP',
                                       package: 'core_ui',
                                     ),
@@ -224,7 +224,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelEntryDateTo,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontFamily: 'NotoSansJP',
                                       package: 'core_ui',
                                     ),
@@ -262,7 +262,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelExaminationDateFrom,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontFamily: 'NotoSansJP',
                                       package: 'core_ui',
                                     ),
@@ -309,7 +309,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelExaminationDateTo,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontFamily: 'NotoSansJP',
                                       package: 'core_ui',
                                     ),
@@ -347,7 +347,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelReturnDateFrom,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontFamily: 'NotoSansJP',
                                       package: 'core_ui',
                                     ),
@@ -394,7 +394,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
                                 decoration: InputDecoration(
                                   label: Text(
                                     context.l10n.labelReturnDateTo,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontFamily: 'NotoSansJP',
                                       package: 'core_ui',
                                     ),
@@ -426,7 +426,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
                           },
                           child: Text(
                             context.l10n.actionClear,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontFamily: 'NotoSansJP',
                               package: 'core_ui',
                             ),
@@ -437,7 +437,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
                           onPressed: () {},
                           child: Text(
                             context.l10n.actionSearch,
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontFamily: 'NotoSansJP',
                               package: 'core_ui',
                             ),

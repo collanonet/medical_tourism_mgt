@@ -1,7 +1,5 @@
-import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
 import 'tab/application_beauty_page.dart';
@@ -38,7 +36,7 @@ class _PatientResponseScreenState extends State<PatientResponseScreen> {
                 children: [
                   TabBarWidget(
                     selectedIndex: value,
-                    menu: [
+                    menu: const [
                       '治療',
                       '健診',
                       '再生医療',

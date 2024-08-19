@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -20,7 +19,7 @@ class AgentScreen extends StatelessWidget {
         return const SizedBox(height: 16);
       },
       children: [
-        AgentFilter(),
+        const AgentFilter(),
         Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
@@ -28,7 +27,7 @@ class AgentScreen extends StatelessWidget {
               onPressed: () {
                 context.router.push(AgentDetailRoute());
               },
-              child: Text('新規登録'),
+              child: const Text('新規登録'),
             ),
           ],
         ),

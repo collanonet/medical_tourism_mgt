@@ -4,7 +4,6 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -75,7 +74,7 @@ class _AdditionalInformationSectionState
                                       value: '締結済',
                                       onChanged: (value) {},
                                       title: Text(
-                                        "締結済",
+                                        '締結済',
                                         style: context.textTheme.bodySmall,
                                       ),
                                     ),
@@ -86,7 +85,7 @@ class _AdditionalInformationSectionState
                                       value: '未締結',
                                       onChanged: (value) {},
                                       title: Text(
-                                        "未締結",
+                                        '未締結',
                                         style: context.textTheme.bodySmall,
                                       ),
                                     ),
@@ -187,7 +186,7 @@ class _AdditionalInformationSectionState
                                         value: 'あり',
                                         onChanged: (value) {},
                                         title: Text(
-                                          "あり",
+                                          'あり',
                                           style: context.textTheme.bodySmall,
                                         ),
                                       ),
@@ -198,7 +197,7 @@ class _AdditionalInformationSectionState
                                         value: 'なし',
                                         onChanged: (value) {},
                                         title: Text(
-                                          "なし",
+                                          'なし',
                                           style: context.textTheme.bodySmall,
                                         ),
                                       ),
@@ -229,7 +228,7 @@ class _AdditionalInformationSectionState
                                     child: ReactiveTextField(
                                       formControlName: 'referralFee',
                                       keyboardType: TextInputType.number,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         suffixText: '％',
                                       ),
                                     ),
@@ -264,7 +263,7 @@ class _AdditionalInformationSectionState
                                         value: '10円',
                                         onChanged: (value) {},
                                         title: Text(
-                                          "10円",
+                                          '10円',
                                           style: context.textTheme.bodySmall,
                                         ),
                                       ),
@@ -276,7 +275,7 @@ class _AdditionalInformationSectionState
                                         value: '20円',
                                         onChanged: (value) {},
                                         title: Text(
-                                          "20円",
+                                          '20円',
                                           style: context.textTheme.bodySmall,
                                         ),
                                       ),
@@ -288,7 +287,7 @@ class _AdditionalInformationSectionState
                                         value: '30円',
                                         onChanged: (value) {},
                                         title: Text(
-                                          "30円",
+                                          '30円',
                                           style: context.textTheme.bodySmall,
                                         ),
                                       ),
@@ -300,7 +299,7 @@ class _AdditionalInformationSectionState
                                         value: 'その他',
                                         onChanged: (value) {},
                                         title: Text(
-                                          "その他",
+                                          'その他',
                                           style: context.textTheme.bodySmall,
                                         ),
                                       ),

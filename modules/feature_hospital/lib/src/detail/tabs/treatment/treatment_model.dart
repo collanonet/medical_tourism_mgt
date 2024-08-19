@@ -188,7 +188,7 @@ class TreatmentModle {
         await hospitalRepository.postTreatmentMenu(request);
       });
 
-      submitTreatmentMenudata.value = AsyncData(data: []);
+      submitTreatmentMenudata.value = const AsyncData(data: []);
     } catch (e) {
       logger.d(e);
       submitTreatmentMenudata.value = AsyncData(error: e);
@@ -216,22 +216,13 @@ class TreatmentModle {
         );
         // todo: check element['id'] if exist then update data
         // create function
-        if (formGroup.control('telemedicineMenu._id').valid != null) {
-          final response = await hospitalRepository.putTreatmentTeleMenu(
-              formGroup.control('telemedicineMenu._id').value, request);
-          submitTreatmentMenuTeledata.value = AsyncData(
-              data: submitTreatmentMenuTeledata.value.data!..add(response));
-          treatmentMenuTeleData.value =
-              AsyncData(data: treatmentMenuTeleData.value.data!..add(response));
-        } else {
-          final response =
-              await hospitalRepository.postTreatmentTeleMenu(request);
-          submitTreatmentMenuTeledata.value = AsyncData(
-              data: submitTreatmentMenuTeledata.value.data!..add(response));
-          treatmentMenuTeleData.value =
-              AsyncData(data: treatmentMenuTeleData.value.data!..add(response));
-        }
-      });
+        final response = await hospitalRepository.putTreatmentTeleMenu(
+            formGroup.control('telemedicineMenu._id').value, request);
+        submitTreatmentMenuTeledata.value = AsyncData(
+            data: submitTreatmentMenuTeledata.value.data!..add(response));
+        treatmentMenuTeleData.value =
+            AsyncData(data: treatmentMenuTeleData.value.data!..add(response));
+            });
 
       submitTreatmentMenuTeledata.value = const AsyncData(data: []);
     } catch (e) {

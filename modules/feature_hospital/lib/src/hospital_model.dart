@@ -1,5 +1,4 @@
 import 'package:core_network/core_network.dart';
-import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_hospital/data_hospital.dart';
 import 'package:flutter/material.dart';

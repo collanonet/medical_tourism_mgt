@@ -262,7 +262,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                     controlAffinity:
                                         ListTileControlAffinity.leading,
                                     formControlName: 'inquiryInProgress',
-                                    title: Text(
+                                    title: const Text(
                                       '問合せ中',
                                     ),
                                   ),
@@ -276,7 +276,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                     controlAffinity:
                                         ListTileControlAffinity.leading,
                                     formControlName: 'reservationConfirmed',
-                                    title: Text('予約確定'),
+                                    title: const Text('予約確定'),
                                   ),
                                 ),
                               ],
@@ -286,7 +286,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                         SizedBox(width: context.appTheme.spacing.marginMedium),
                         ElevatedButton(
                           onPressed: () {},
-                          child: Text(
+                          child: const Text(
                             '検索',
                             style: TextStyle(
                               fontFamily: 'NotoSansJP',

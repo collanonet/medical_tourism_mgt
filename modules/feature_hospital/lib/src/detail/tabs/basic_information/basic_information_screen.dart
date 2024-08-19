@@ -1,4 +1,4 @@
-import 'package:feature_hospital/src/detail/tabs/basic_information/basic_information_section.dart';
+import 'basic_information_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
