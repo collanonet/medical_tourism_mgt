@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'web_booking_medical_record.g.dart';
 
+@Deprecated('Use WebBookingMedicalRecord instead')
 @JsonSerializable()
 class WebBookingMedicalRecord {
   @JsonKey(name: '_id')

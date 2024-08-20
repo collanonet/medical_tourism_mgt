@@ -793,7 +793,8 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER)
-  Future<List<DetailRelatedPartiesResponse>> getRelatedPartiesGuideOrInterpreter();
+  Future<List<DetailRelatedPartiesResponse>>
+      getRelatedPartiesGuideOrInterpreter();
 
   @POST(EndPoints.DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER)
   Future<DetailRelatedPartiesResponse> postRelatedPartiesGuideOrInterpreter(
@@ -801,7 +802,7 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_RELATED_PARTIES_BUS_COMPANY)
-  Future<DetailRelatedPartiesBusCompanyResponse> getRelatedPartiesBusCompany();
+  Future<List<DetailRelatedPartiesBusCompanyResponse>> getRelatedPartiesBusCompany();
 
   @POST(EndPoints.DETAIL_RELATED_PARTIES_BUS_COMPANY)
   Future<DetailRelatedPartiesBusCompanyResponse> postRelatedPartiesBusCompany(
@@ -1027,7 +1028,10 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.GET_HOSPITAL)
-  Future<List<BasicInformationHospitalResponse>> getHospitals();
+  Future<List<BasicInformationHospitalResponse>> getHospitals({
+    @Query('page') int? page,
+    @Query('pageSize') int? pageSize,
+  });
 
   /// end get basic information of hospital C3 Page
 
@@ -1290,8 +1294,73 @@ abstract class ApiService {
   Future<void> closePatientAccount(
     @Path('id') String id,
   );
-}
 
+  //WEB_BOOKING_HOSPITAL
+  @GET('${EndPoints.WEB_BOOKING_HOSPITAL}/get-by-hospital-id/{id}')
+  Future<BasicInformationHospitalResponse> webBookingGetHospitalById(
+    @Path('id') String hospitalId,
+  );
+
+  @GET('${EndPoints.WEB_BOOKING_HOSPITAL}/search')
+  Future<List<BasicInformationHospitalResponse>> webBookingSearchHospital({
+    @Query('search') String? search,
+  });
+
+  @GET('${EndPoints.WEB_BOOKING_HOSPITAL}/{hospitalId}/doctors')
+  Future<List<DoctorProfileHospitalResponse>> getDoctorsByHospitalId(
+    @Path('hospitalId') String hospitalId,
+  );
+
+  //WEB_BOOKING_PATIENT
+
+  @GET('${EndPoints.WEB_BOOKING_PATIENT}/get-by-patient-id/{id}')
+  Future<Patient> webBookingGetPatientById(
+    @Path('id') String patientId,
+  );
+
+  @GET('${EndPoints.WEB_BOOKING_PATIENT}/search')
+  Future<List<Patient>> webBookingSearchPatients({
+    @Query('search') String? search,
+  });
+
+  @GET('${EndPoints.WEB_BOOKING_PATIENT}/{patientId}/booking')
+  Future<TreamentResponce> getBookingByPatientId(
+    @Path('patientId') String patientId,
+  );
+
+  //WEB_BOOKING_RESERVATION
+
+  @GET(EndPoints.WEB_BOOKING_RESERVATION)
+  Future<List<WebBookingMedicalRecordResponse>> webBookingGetReservationAll({
+    @Query('hospitalName') String? hospitalName,
+    @Query('doctor_name') String? doctor_name,
+    @Query('reservation_date_from') DateTime? reservation_date_from,
+    @Query('reservation_date_to') DateTime? reservation_date_to,
+    @Query('inquiryInProgress') bool? inquiryInProgress,
+    @Query('reservationConfirmed') bool? reservationConfirmed,
+  });
+
+  @GET('${EndPoints.WEB_BOOKING_RESERVATION}/{id}')
+  Future<WebBookingMedicalRecordResponse> webBookingGetReservationById(
+    @Path('id') String reservationId,
+  );
+
+  @POST(EndPoints.WEB_BOOKING_RESERVATION)
+  Future<WebBookingMedicalRecordResponse> webBookingPostReservation(
+    @Body() WebBookingMedicalRecordRequest webBookingMedicalRecordRequest,
+  );
+
+  @PUT('${EndPoints.WEB_BOOKING_RESERVATION}/{id}')
+  Future<WebBookingMedicalRecordResponse> webBookingPutReservation(
+    @Path('id') String reservationId,
+    @Body() WebBookingMedicalRecordRequest webBookingMedicalRecordRequest,
+  );
+
+  @DELETE('${EndPoints.WEB_BOOKING_RESERVATION}/{id}')
+  Future<void> webBookingDeleteReservation(
+    @Path('id') String reservationId,
+  );
+}
 
 extension ApiServiceExts on ApiService {
   RestClient get client => GetIt.I<RestClient>();

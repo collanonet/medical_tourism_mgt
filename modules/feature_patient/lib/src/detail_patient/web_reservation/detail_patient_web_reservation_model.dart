@@ -120,37 +120,37 @@ class DetailPatientWebReservationModel {
 
   Future<void> postBookingMedicalRecord(FormGroup formGroup) async {
     try {
-      createWebBookingMedicalRecord.value = const AsyncData(loading: true);
+      // createWebBookingMedicalRecord.value = const AsyncData(loading: true);
 
-      List<BookingDateRequest> candidateDate = [];
-      await formGroup.control('candidateDate').value.forEach((element) async {
-        candidateDate.add(BookingDateRequest(
-          preferredDate: element['preferredDate'],
-          choice: element['choice'],
-          timePeriodFrom: element['timePeriodFrom'],
-          timePeriodTo: element['timePeriodTo'],
-          medicalRecord: medicalRecord.value.requireData.id,
-        ));
-      });
-      final webBookingMedicalRecord = WebBookingMedicalRecordRequest(
-        medicalRecord: medicalRecord.value.requireData.id,
-        patient: patientIdData.value.requireData,
-        medicalInstitutionName:
-            formGroup.control('medicalInstitutionName').value,
-        doctorName: formGroup.control('doctorName').value,
-        candidateDate: candidateDate,
-        message: formGroup.control('message').value,
-      );
+      // List<BookingDateRequest> candidateDate = [];
+      // await formGroup.control('candidateDate').value.forEach((element) async {
+      //   candidateDate.add(BookingDateRequest(
+      //     preferredDate: element['preferredDate'],
+      //     choice: element['choice'],
+      //     timePeriodFrom: element['timePeriodFrom'],
+      //     timePeriodTo: element['timePeriodTo'],
+      //     medicalRecord: medicalRecord.value.requireData.id,
+      //   ));
+      // });
+      // final webBookingMedicalRecord = WebBookingMedicalRecordRequest(
+      //   medicalRecord: medicalRecord.value.requireData.id,
+      //   patient: patientIdData.value.requireData,
+      //   medicalInstitutionName:
+      //       formGroup.control('medicalInstitutionName').value,
+      //   doctorName: formGroup.control('doctorName').value,
+      //   candidateDate: candidateDate,
+      //   message: formGroup.control('message').value,
+      // );
 
-      logger.d('webBookingMedicalRecord: ${webBookingMedicalRecord.toJson()}');
-
-      final response = await patientRepository
-          .postBookingMedicalRecord(webBookingMedicalRecord);
-      createWebBookingMedicalRecord.value = AsyncData(data: response);
-      webBookingMedicalRecordData.value = AsyncData(data: [
-        ...webBookingMedicalRecordData.value.data ?? [],
-        response,
-      ]);
+      // logger.d('webBookingMedicalRecord: ${webBookingMedicalRecord.toJson()}');
+      //
+      // final response = await patientRepository
+      //     .postBookingMedicalRecord(webBookingMedicalRecord);
+      // createWebBookingMedicalRecord.value = AsyncData(data: response);
+      // webBookingMedicalRecordData.value = AsyncData(data: [
+      //   ...webBookingMedicalRecordData.value.data ?? [],
+      //   response,
+      // ]);
     } catch (e) {
       createWebBookingMedicalRecord.value = AsyncData(error: e);
     }

@@ -238,4 +238,9 @@ class EndPoints {
   static const CONTRACT_TEMPLATE_DETAIL_BASIC_INFO = 'contact-template-detail-basic-info';
   static const ESTIMATE_MASTER_REPORT = 'estimate-master-report';
   static const PROSPECTIVE_RANK = 'progressive-rank';
+
+  // Web Booking new
+  static const WEB_BOOKING_HOSPITAL = '/web-booking-hospital';
+  static const WEB_BOOKING_PATIENT = '/web-booking-patient';
+  static const WEB_BOOKING_RESERVATION = '/web-booking-reservation';
 }

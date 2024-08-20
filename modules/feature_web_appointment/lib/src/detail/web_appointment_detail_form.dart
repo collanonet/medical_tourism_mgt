@@ -1,10 +1,9 @@
+import 'package:core_network/core_network.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup formWebAppointment({String? id}) => FormGroup({
-      'patientName': FormControl<String>(
-        disabled: id != null,
-      ),
+FormGroup formWebAppointment() => FormGroup({
+      'patientName': FormControl<String>(),
       'preferredDate1': FormControl<DateTime>(
         disabled: true,
       ), // 第１希望
@@ -23,17 +22,63 @@ FormGroup formWebAppointment({String? id}) => FormGroup({
       'medicalInstitutionName': FormControl<String>(
         validators: [Validators.required],
       ), // 医療機関名
-      'doctorName': FormControl<String>(
+      'doctorName': FormControl<DoctorProfileHospitalResponse>(
         validators: [Validators.required],
       ), // 医師名
+      'department1': FormControl<String>(
+        disabled: true,
+      ),
+      'department2': FormControl<String>(
+        disabled: true,
+      ),
       'shift1': FormControl<String>(
-        value: '10時〜12時',
         disabled: true,
-      ), //
+      ),
       'shift2': FormControl<String>(
-        value: '13時〜16時',
         disabled: true,
-      ), //
+      ),
+      'shift1Mon': FormControl<String>(
+        disabled: true,
+      ),
+      'shift1Tue': FormControl<String>(
+        disabled: true,
+      ),
+      'shift1Wed': FormControl<String>(
+        disabled: true,
+      ),
+      'shift1Thu': FormControl<String>(
+        disabled: true,
+      ),
+      'shift1Fri': FormControl<String>(
+        disabled: true,
+      ),
+      'shift1Sat': FormControl<String>(
+        disabled: true,
+      ),
+      'shift1Sun': FormControl<String>(
+        disabled: true,
+      ),
+      'shift2Mon': FormControl<String>(
+        disabled: true,
+      ),
+      'shift2Tue': FormControl<String>(
+        disabled: true,
+      ),
+      'shift2Wed': FormControl<String>(
+        disabled: true,
+      ),
+      'shift2Thu': FormControl<String>(
+        disabled: true,
+      ),
+      'shift2Fri': FormControl<String>(
+        disabled: true,
+      ),
+      'shift2Sat': FormControl<String>(
+        disabled: true,
+      ),
+      'shift2Sun': FormControl<String>(
+        disabled: true,
+      ),
       'candidateDate': FormArray([
         FormGroup({
           'id': FormControl<String>(),
@@ -47,14 +92,9 @@ FormGroup formWebAppointment({String? id}) => FormGroup({
           'timePeriodTo': FormControl<String>(
             validators: [Validators.required],
           ), // 時間帯（至）
-          'medicalRecord': FormControl<String>(),
         }),
       ]),
       'message': FormControl<String>(), // メッセージ（希望日がない場合は、メッセージ欄にてその旨伝えてください）
-      'testCallDate': FormControl<DateTime>(
-        validators: [Validators.required],
-      ), // 年月日
-      'testCallTime': FormControl<String>(
-        validators: [Validators.required],
-      ), // 時間
+      'testCallDate': FormControl<DateTime>(), // 年月日
+      'testCallTime': FormControl<String>(), // 時間
     });

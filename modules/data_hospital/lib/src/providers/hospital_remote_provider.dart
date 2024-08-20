@@ -155,8 +155,14 @@ class HospitalRemoteProvider {
     return apiService.getMedicalInstitutionSectionHospital(hospitalId);
   }
 
-  Future<List<BasicInformationHospitalResponse>> getHospitals() {
-    return apiService.getHospitals();
+  Future<List<BasicInformationHospitalResponse>> getHospitals({
+    int? page,
+    int? pageSize,
+  }) {
+    return apiService.getHospitals(
+      page: page,
+      pageSize: pageSize,
+    );
   }
 
   Future<List<FacilityResponse>> getFacilityPhoto({required String id}) {

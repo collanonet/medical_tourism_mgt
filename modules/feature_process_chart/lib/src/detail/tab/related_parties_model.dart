@@ -152,7 +152,7 @@ class RelatedPartiesModel {
     }
   }
 
-  ValueNotifier<AsyncData<DetailRelatedPartiesBusCompanyResponse>>
+  ValueNotifier<AsyncData<List<DetailRelatedPartiesBusCompanyResponse>>>
       busCompanyData = ValueNotifier(const AsyncData());
 
   Future<void> fetchBusCompany(FormGroup formGroup) async {
@@ -169,10 +169,10 @@ class RelatedPartiesModel {
   }
 
   void insertBusCompany(
-      FormGroup formGroup, DetailRelatedPartiesBusCompanyResponse data) {
-    formGroup.control('arrangePerson').value = data.arrangePerson;
-    formGroup.control('busCompanyName').value = data.busCompanyName;
-    formGroup.control('contactPerson').value = data.contactPerson;
+      FormGroup formGroup, List<DetailRelatedPartiesBusCompanyResponse> data) {
+    // formGroup.control('arrangePerson').value = data.arrangePerson;
+    // formGroup.control('busCompanyName').value = data.busCompanyName;
+    // formGroup.control('contactPerson').value = data.contactPerson;
   }
 
   ValueNotifier<AsyncData<DetailRelatedPartiesBusCompanyResponse>>
@@ -185,7 +185,7 @@ class RelatedPartiesModel {
               DetailRelatedPartiesBusCompanyRequest.fromJson(
         (formGroup.control('busCompany') as FormGroup).value,
       ));
-      busCompanyData.value = AsyncData(data: response);
+      busCompanyData.value = AsyncData(data: busCompanyData.value.data);
       submitBusCompanyData.value = AsyncData(data: response);
     } catch (e) {
       logger.d(e);

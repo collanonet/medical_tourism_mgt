@@ -4063,14 +4063,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<DetailRelatedPartiesBusCompanyResponse>
+  Future<List<DetailRelatedPartiesBusCompanyResponse>>
       getRelatedPartiesBusCompany() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DetailRelatedPartiesBusCompanyResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<DetailRelatedPartiesBusCompanyResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -4086,8 +4086,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final value =
-        DetailRelatedPartiesBusCompanyResponse.fromJson(_result.data!);
+    var value = _result.data!
+        .map((dynamic i) => DetailRelatedPartiesBusCompanyResponse.fromJson(
+            i as Map<String, dynamic>))
+        .toList();
     return value;
   }
 
@@ -5309,9 +5311,16 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<BasicInformationHospitalResponse>> getHospitals() async {
+  Future<List<BasicInformationHospitalResponse>> getHospitals({
+    int? page,
+    int? pageSize,
+  }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'pageSize': pageSize,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
@@ -6924,6 +6933,338 @@ class _ApiService implements ApiService {
         .compose(
           _dio.options,
           '/patients/close/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+  }
+
+  @override
+  Future<BasicInformationHospitalResponse> webBookingGetHospitalById(
+      String hospitalId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<BasicInformationHospitalResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/web-booking-hospital/get-by-hospital-id/${hospitalId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = BasicInformationHospitalResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<BasicInformationHospitalResponse>> webBookingSearchHospital(
+      {String? search}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'search': search};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<BasicInformationHospitalResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/web-booking-hospital/search',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) => BasicInformationHospitalResponse.fromJson(
+            i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<List<DoctorProfileHospitalResponse>> getDoctorsByHospitalId(
+      String hospitalId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<DoctorProfileHospitalResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/web-booking-hospital/${hospitalId}/doctors',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) =>
+            DoctorProfileHospitalResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<Patient> webBookingGetPatientById(String patientId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Patient>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/web-booking-patient/get-by-patient-id/${patientId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = Patient.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<Patient>> webBookingSearchPatients({String? search}) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'search': search};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result =
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Patient>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/web-booking-patient/search',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) => Patient.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<TreamentResponce> getBookingByPatientId(String patientId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio
+        .fetch<Map<String, dynamic>>(_setStreamType<TreamentResponce>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/web-booking-patient/${patientId}/booking',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = TreamentResponce.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<List<WebBookingMedicalRecordResponse>> webBookingGetReservationAll({
+    String? hospitalName,
+    String? doctor_name,
+    DateTime? reservation_date_from,
+    DateTime? reservation_date_to,
+    bool? inquiryInProgress,
+    bool? reservationConfirmed,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'hospitalName': hospitalName,
+      r'doctor_name': doctor_name,
+      r'reservation_date_from': reservation_date_from?.toIso8601String(),
+      r'reservation_date_to': reservation_date_to?.toIso8601String(),
+      r'inquiryInProgress': inquiryInProgress,
+      r'reservationConfirmed': reservationConfirmed,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<WebBookingMedicalRecordResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/web-booking-reservation',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var value = _result.data!
+        .map((dynamic i) =>
+            WebBookingMedicalRecordResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return value;
+  }
+
+  @override
+  Future<WebBookingMedicalRecordResponse> webBookingGetReservationById(
+      String reservationId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<WebBookingMedicalRecordResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/web-booking-reservation/${reservationId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = WebBookingMedicalRecordResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<WebBookingMedicalRecordResponse> webBookingPostReservation(
+      WebBookingMedicalRecordRequest webBookingMedicalRecordRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(webBookingMedicalRecordRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<WebBookingMedicalRecordResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/web-booking-reservation',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = WebBookingMedicalRecordResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<WebBookingMedicalRecordResponse> webBookingPutReservation(
+    String reservationId,
+    WebBookingMedicalRecordRequest webBookingMedicalRecordRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(webBookingMedicalRecordRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<WebBookingMedicalRecordResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/web-booking-reservation/${reservationId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = WebBookingMedicalRecordResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<void> webBookingDeleteReservation(String reservationId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/web-booking-reservation/${reservationId}',
           queryParameters: queryParameters,
           data: _data,
         )
