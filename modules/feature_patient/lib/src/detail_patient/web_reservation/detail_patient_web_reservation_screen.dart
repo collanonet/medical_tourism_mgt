@@ -259,7 +259,7 @@ class _DetailPatientWebReservationScreenState
                                       (BuildContext context, int index) {
                                     return SizedBox(
                                       width:
-                                      context.appTheme.spacing.marginMedium,
+                                          context.appTheme.spacing.marginMedium,
                                     );
                                   },
                                   children: [
@@ -299,14 +299,12 @@ class _DetailPatientWebReservationScreenState
                                       textColor: Colors.white,
                                       bg: context.appTheme.primaryColor,
                                     ),
-
                                     boxText(
                                       context,
                                       '土',
                                       textColor: Colors.white,
                                       bg: context.appTheme.primaryColor,
                                     ),
-
                                     boxText(
                                       context,
                                       '日',
@@ -341,7 +339,6 @@ class _DetailPatientWebReservationScreenState
                                         formControlName: 'shift1',
                                       ),
                                     ),
-
                                     boxText(
                                       context,
                                       '×',
@@ -1062,7 +1059,8 @@ class _DetailPatientWebReservationScreenState
                                                   ],
                                                 ),
                                                 Text(
-                                                  data.medicalInstitutionName ??
+                                                  data.hospital
+                                                          ?.hospitalNameKatakana ??
                                                       '',
                                                   style: context
                                                       .textTheme.titleLarge
@@ -1072,14 +1070,15 @@ class _DetailPatientWebReservationScreenState
                                                               .primaryColor),
                                                 ),
                                                 Text(
-                                                  data.candidateDate
-                                                      .map((e) =>
-                                                          Dates.formShortDate(
-                                                              e.preferredDate))
-                                                      .join(' - '),
+                                                  data.proposedDates
+                                                          ?.map((e) => Dates
+                                                              .formShortDate(e
+                                                                  .proposedDate))
+                                                          .join(' - ') ??
+                                                      '',
                                                 ),
                                                 Text(
-                                                  '${Dates.formatFullDateTime(data.createdAt)}',
+                                                  Dates.formatFullDateTime(data.createdAt),
                                                 ),
                                               ],
                                             );
