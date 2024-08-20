@@ -22,16 +22,13 @@ class WebAppointmentDetailScreen extends StatefulWidget {
 class _WebAppointmentDetailScreenState
     extends State<WebAppointmentDetailScreen> {
   final formatter = InputFormatter();
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableListener(
-      valueListenable:
-          context.read<WebAppointmentDetailModel>().updateWebBookingAdminData,
+      valueListenable: context.read<WebAppointmentDetailModel>().submit,
       onListen: () {
-        final data = context
-            .read<WebAppointmentDetailModel>()
-            .updateWebBookingAdminData
-            .value;
+        final data = context.read<WebAppointmentDetailModel>().submit.value;
 
         if (data.hasData) {
           logger.d('loading');
@@ -51,7 +48,7 @@ class _WebAppointmentDetailScreenState
       },
       child: ValueListenableBuilder(
           valueListenable:
-              context.watch<WebAppointmentDetailModel>().webBookingAdmin,
+              context.watch<WebAppointmentDetailModel>().webBooking,
           builder: (context, value, _) {
             return Skeletonizer(
               enabled: value.loading,
@@ -325,84 +322,123 @@ class _WebAppointmentDetailScreenState
                                 mainAxisSize: MainAxisSize.min,
                                 children: [
                                   Row(
-                                    mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      Expanded(
-                                        child: SizedBox(),
+                                      const IntrinsicWidth(
+                                        stepWidth: 150,
+                                        child: Text(
+                                          '部門',
+                                          style: TextStyle(
+                                            fontFamily: 'NotoSansJP',
+                                            package: 'core_ui',
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '月',
-                                        textColor: Colors.white,
-                                        bg: context.appTheme.primaryColor,
+                                      const IntrinsicWidth(
+                                        stepWidth: 150,
+                                        child: Text(
+                                          '診療時間',
+                                          style: TextStyle(
+                                            fontFamily: 'NotoSansJP',
+                                            package: 'core_ui',
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '火',
-                                        textColor: Colors.white,
-                                        bg: context.appTheme.primaryColor,
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: boxText(
+                                          context,
+                                          '月',
+                                          textColor: Colors.white,
+                                          bg: context.appTheme.primaryColor,
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '水',
-                                        textColor: Colors.white,
-                                        bg: context.appTheme.primaryColor,
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: boxText(
+                                          context,
+                                          '火',
+                                          textColor: Colors.white,
+                                          bg: context.appTheme.primaryColor,
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '木',
-                                        textColor: Colors.white,
-                                        bg: context.appTheme.primaryColor,
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: boxText(
+                                          context,
+                                          '水',
+                                          textColor: Colors.white,
+                                          bg: context.appTheme.primaryColor,
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '金',
-                                        textColor: Colors.white,
-                                        bg: context.appTheme.primaryColor,
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: boxText(
+                                          context,
+                                          '木',
+                                          textColor: Colors.white,
+                                          bg: context.appTheme.primaryColor,
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '土',
-                                        textColor: Colors.white,
-                                        bg: context.appTheme.primaryColor,
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: boxText(
+                                          context,
+                                          '金',
+                                          textColor: Colors.white,
+                                          bg: context.appTheme.primaryColor,
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '日',
-                                        textColor: Colors.white,
-                                        bg: context.appTheme.primaryColor,
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: boxText(
+                                          context,
+                                          '土',
+                                          textColor: Colors.white,
+                                          bg: context.appTheme.primaryColor,
+                                        ),
                                       ),
-                                      Expanded(
-                                        flex: 3,
-                                        child: SizedBox(),
+                                      SizedBox(
+                                        width: context
+                                            .appTheme.spacing.marginMedium,
+                                      ),
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: boxText(
+                                          context,
+                                          '日',
+                                          textColor: Colors.white,
+                                          bg: context.appTheme.primaryColor,
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -412,7 +448,18 @@ class _WebAppointmentDetailScreenState
                                   ),
                                   Row(
                                     children: [
-                                      Expanded(
+                                      IntrinsicWidth(
+                                        stepWidth: 150,
+                                        child: ReactiveTextField(
+                                          formControlName: 'department1',
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: context
+                                            .appTheme.spacing.marginMedium,
+                                      ),
+                                      IntrinsicWidth(
+                                        stepWidth: 150,
                                         child: ReactiveTextField(
                                           formControlName: 'shift1',
                                         ),
@@ -421,68 +468,141 @@ class _WebAppointmentDetailScreenState
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '×',
-                                        bg: Colors.white,
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: ReactiveDropdownFormField(
+                                          formControlName: 'shift1Mon',
+                                          items: [
+                                            DropdownMenuItem(
+                                              value: '×',
+                                              child: Text('×'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: '○',
+                                              child: Text('○'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '○',
-                                        bg: Colors.white,
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: ReactiveDropdownFormField(
+                                          formControlName: 'shift1Tue',
+                                          items: [
+                                            DropdownMenuItem(
+                                              value: '×',
+                                              child: Text('×'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: '○',
+                                              child: Text('○'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '×',
-                                        bg: Colors.white,
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: ReactiveDropdownFormField(
+                                          formControlName: 'shift1Wed',
+                                          items: [
+                                            DropdownMenuItem(
+                                              value: '×',
+                                              child: Text('×'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: '○',
+                                              child: Text('○'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '×',
-                                        bg: Colors.white,
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: ReactiveDropdownFormField(
+                                          formControlName: 'shift1Thu',
+                                          items: [
+                                            DropdownMenuItem(
+                                              value: '×',
+                                              child: Text('×'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: '○',
+                                              child: Text('○'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '○',
-                                        bg: Colors.white,
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: ReactiveDropdownFormField(
+                                          formControlName: 'shift1Fri',
+                                          items: [
+                                            DropdownMenuItem(
+                                              value: '×',
+                                              child: Text('×'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: '○',
+                                              child: Text('○'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '○',
-                                        bg: Colors.white,
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: ReactiveDropdownFormField(
+                                          formControlName: 'shift1Sat',
+                                          items: [
+                                            DropdownMenuItem(
+                                              value: '×',
+                                              child: Text('×'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: '○',
+                                              child: Text('○'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '×',
-                                        bg: Colors.white,
-                                      ),
-                                      Expanded(
-                                        flex: 3,
-                                        child: SizedBox(),
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: ReactiveDropdownFormField(
+                                          formControlName: 'shift1Sun',
+                                          items: [
+                                            DropdownMenuItem(
+                                              value: '×',
+                                              child: Text('×'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: '○',
+                                              child: Text('○'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -492,7 +612,18 @@ class _WebAppointmentDetailScreenState
                                   ),
                                   Row(
                                     children: [
-                                      Expanded(
+                                      IntrinsicWidth(
+                                        stepWidth: 150,
+                                        child: ReactiveTextField(
+                                          formControlName: 'department2',
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: context
+                                            .appTheme.spacing.marginMedium,
+                                      ),
+                                      IntrinsicWidth(
+                                        stepWidth: 150,
                                         child: ReactiveTextField(
                                           formControlName: 'shift2',
                                         ),
@@ -501,68 +632,141 @@ class _WebAppointmentDetailScreenState
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '○',
-                                        bg: Colors.white,
+                                      const IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: ReactiveDropdownFormField(
+                                          formControlName: 'shift2Mon',
+                                          items: [
+                                            DropdownMenuItem(
+                                              value: '×',
+                                              child: Text('×'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: '○',
+                                              child: Text('○'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '○',
-                                        bg: Colors.white,
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: ReactiveDropdownFormField(
+                                          formControlName: 'shift2Tue',
+                                          items: [
+                                            DropdownMenuItem(
+                                              value: '×',
+                                              child: Text('×'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: '○',
+                                              child: Text('○'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '○',
-                                        bg: Colors.white,
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: ReactiveDropdownFormField(
+                                          formControlName: 'shift2Wed',
+                                          items: [
+                                            DropdownMenuItem(
+                                              value: '×',
+                                              child: Text('×'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: '○',
+                                              child: Text('○'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '×',
-                                        bg: Colors.white,
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: ReactiveDropdownFormField(
+                                          formControlName: 'shift2Thu',
+                                          items: [
+                                            DropdownMenuItem(
+                                              value: '×',
+                                              child: Text('×'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: '○',
+                                              child: Text('○'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '○',
-                                        bg: Colors.white,
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: ReactiveDropdownFormField(
+                                          formControlName: 'shift2Fri',
+                                          items: [
+                                            DropdownMenuItem(
+                                              value: '×',
+                                              child: Text('×'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: '○',
+                                              child: Text('○'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '×',
-                                        bg: Colors.white,
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: ReactiveDropdownFormField(
+                                          formControlName: 'shift2Sat',
+                                          items: [
+                                            DropdownMenuItem(
+                                              value: '×',
+                                              child: Text('×'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: '○',
+                                              child: Text('○'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      boxText(
-                                        context,
-                                        '○',
-                                        bg: Colors.white,
-                                      ),
-                                      Expanded(
-                                        flex: 3,
-                                        child: SizedBox(),
+                                      IntrinsicWidth(
+                                        stepWidth: 80,
+                                        child: ReactiveDropdownFormField(
+                                          formControlName: 'shift2Sun',
+                                          items: [
+                                            DropdownMenuItem(
+                                              value: '×',
+                                              child: Text('×'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: '○',
+                                              child: Text('○'),
+                                            ),
+                                          ],
+                                        ),
                                       ),
                                     ],
                                   ),
@@ -936,8 +1140,7 @@ class _WebAppointmentDetailScreenState
                                                 context
                                                     .read<
                                                         WebAppointmentDetailModel>()
-                                                    .updateWebBookingAdmin(
-                                                        form);
+                                                    .submitData();
                                               },
                                         child: Text('予約日を病院へ送信する'),
                                       );

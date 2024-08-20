@@ -6953,7 +6953,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/web-booking/hospital/hospital/{id}',
+              '/web-booking-hospital/{id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -6982,7 +6982,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/web-booking/hospital/hospital/search',
+              '/web-booking-hospital/search',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -7010,7 +7010,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/web-booking/hospital/hospital/${hospitalId}/doctors',
+              '/web-booking-hospital/${hospitalId}/doctors',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -7040,7 +7040,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/web-booking/patient/patient/${patientId}',
+              '/web-booking-patient/${patientId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -7068,7 +7068,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/web-booking/patient/patient/search',
+              '/web-booking-patient/search',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -7095,7 +7095,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/web-booking/patient/patient/${patientId}/booking',
+              '/web-booking-patient/${patientId}/booking',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -7124,7 +7124,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/web-booking/web-reservation/web-reservation',
+              '/web-booking-reservation',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -7155,7 +7155,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/web-booking/web-reservation/web-reservation/${reservationId}',
+              '/web-booking-reservation/${reservationId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -7184,7 +7184,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/web-booking/web-reservation/web-reservation/search',
+              '/web-booking-reservation/search',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -7213,7 +7213,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/web-booking/web-reservation/web-reservation',
+              '/web-booking-reservation',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -7244,7 +7244,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/web-booking/web-reservation/web-reservation/${reservationId}',
+              '/web-booking-reservation/${reservationId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -7270,7 +7270,7 @@ class _ApiService implements ApiService {
     )
         .compose(
           _dio.options,
-          '/web-booking/web-reservation/web-reservation/${reservationId}',
+          '/web-booking-reservation/${reservationId}',
           queryParameters: queryParameters,
           data: _data,
         )

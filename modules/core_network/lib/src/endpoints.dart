@@ -240,7 +240,7 @@ class EndPoints {
   static const PROSPECTIVE_RANK = 'progressive-rank';
 
   // Web Booking new
-  static const WEB_BOOKING_HOSPITAL = '/web-booking/hospital';
-  static const WEB_BOOKING_PATIENT = '/web-booking/patient';
-  static const WEB_BOOKING_RESERVATION = '/web-booking/web-reservation';
+  static const WEB_BOOKING_HOSPITAL = '/web-booking-hospital';
+  static const WEB_BOOKING_PATIENT = '/web-booking-patient';
+  static const WEB_BOOKING_RESERVATION = '/web-booking-reservation';
 }
