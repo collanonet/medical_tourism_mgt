@@ -3,7 +3,7 @@ import 'package:core_network/core_network.dart';
 abstract class WebAppointmentRepository {
   Future<BasicInformationHospitalResponse> webBookingGetHospitalById(String id);
 
-  Future<BasicInformationHospitalResponse> webBookingSearchHospital(
+  Future<List<BasicInformationHospitalResponse>> webBookingSearchHospital(
       {String? search});
 
   Future<List<DoctorProfileHospitalResponse>> getDoctorsByHospitalId(
@@ -16,7 +16,14 @@ abstract class WebAppointmentRepository {
   Future<TreamentResponce> getBookingByPatientId(String patientId);
 
   Future<List<WebBookingMedicalRecordResponse>> webBookingGetReservationAll(
-      {String? search});
+      {
+    String? hospitalName,
+    String? doctor_name,
+        DateTime? reservation_date_from,
+        DateTime? reservation_date_to,
+    bool? inquiryInProgress,
+    bool? reservationConfirmed,
+});
 
   Future<WebBookingMedicalRecordResponse> webBookingGetReservationById(
       String id);

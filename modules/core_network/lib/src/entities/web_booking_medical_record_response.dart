@@ -17,6 +17,8 @@ class WebBookingMedicalRecordResponse {
   String? timeZoneConfirmationTo;
   List<MessageFrom>? messageFrom;
   bool? isClosed;
+  DateTime? testCallDate;
+  String? testCallTime;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -32,6 +34,8 @@ class WebBookingMedicalRecordResponse {
     this.timeZoneConfirmationTo,
     this.messageFrom,
     this.isClosed,
+    this.testCallDate,
+    this.testCallTime,
     required this.createdAt,
     required this.updatedAt,
   });
@@ -44,9 +48,10 @@ class WebBookingMedicalRecordResponse {
       _$WebBookingMedicalRecordResponseToJson(this);
 }
 
-
 @JsonSerializable()
 class ProposedDate {
+  @JsonKey(name: '_id')
+  String? id;
   DateTime? proposedDate;
   String? selectMorningAfternoonAllDay;
   String? timeZoneFrom;
@@ -54,6 +59,7 @@ class ProposedDate {
   bool? isConfirmed;
 
   ProposedDate({
+    this.id,
     this.proposedDate,
     this.selectMorningAfternoonAllDay,
     this.timeZoneFrom,
@@ -68,13 +74,18 @@ class ProposedDate {
   Map<String, dynamic> toJson() => _$ProposedDateToJson(this);
 }
 
-
 @JsonSerializable()
 class MessageFrom {
+  @JsonKey(name: '_id')
+  String? id;
   String? message;
   String? from;
 
-  MessageFrom({this.message, this.from});
+  MessageFrom({
+    this.id,
+    this.message,
+    this.from,
+  });
 
   factory MessageFrom.fromJson(Map<String, dynamic> json) {
     return _$MessageFromFromJson(json);

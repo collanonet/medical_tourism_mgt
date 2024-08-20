@@ -25,6 +25,10 @@ WebBookingMedicalRecordRequest _$WebBookingMedicalRecordRequestFromJson(
           ?.map((e) => MessageFrom.fromJson(e as Map<String, dynamic>))
           .toList(),
       isClosed: json['isClosed'] as bool?,
+      testCallDate: json['testCallDate'] == null
+          ? null
+          : DateTime.parse(json['testCallDate'] as String),
+      testCallTime: json['testCallTime'] as String?,
     );
 
 Map<String, dynamic> _$WebBookingMedicalRecordRequestToJson(
@@ -41,4 +45,6 @@ Map<String, dynamic> _$WebBookingMedicalRecordRequestToJson(
       'timeZoneConfirmationTo': instance.timeZoneConfirmationTo,
       'messageFrom': instance.messageFrom,
       'isClosed': instance.isClosed,
+      'testCallDate': instance.testCallDate?.toIso8601String(),
+      'testCallTime': instance.testCallTime,
     };

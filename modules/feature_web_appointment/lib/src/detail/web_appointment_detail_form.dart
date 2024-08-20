@@ -1,3 +1,4 @@
+import 'package:core_network/core_network.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -21,7 +22,7 @@ FormGroup formWebAppointment() => FormGroup({
       'medicalInstitutionName': FormControl<String>(
         validators: [Validators.required],
       ), // 医療機関名
-      'doctorName': FormControl<String>(
+      'doctorName': FormControl<DoctorProfileHospitalResponse>(
         validators: [Validators.required],
       ), // 医師名
       'department1': FormControl<String>(
@@ -91,7 +92,6 @@ FormGroup formWebAppointment() => FormGroup({
           'timePeriodTo': FormControl<String>(
             validators: [Validators.required],
           ), // 時間帯（至）
-          'medicalRecord': FormControl<String>(),
         }),
       ]),
       'message': FormControl<String>(), // メッセージ（希望日がない場合は、メッセージ欄にてその旨伝えてください）

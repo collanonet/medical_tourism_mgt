@@ -14,7 +14,7 @@ class WebAppointmentRemoteProvider {
     return apiService.webBookingGetHospitalById(id);
   }
 
-  Future<BasicInformationHospitalResponse> webBookingSearchHospital(
+  Future<List<BasicInformationHospitalResponse>> webBookingSearchHospital(
       {String? search}) async {
     return apiService.webBookingSearchHospital(search: search);
   }
@@ -36,9 +36,22 @@ class WebAppointmentRemoteProvider {
     return apiService.getBookingByPatientId(patientId);
   }
 
-  Future<List<WebBookingMedicalRecordResponse>> webBookingGetReservationAll(
-      {String? search}) async {
-    return apiService.webBookingGetReservationAll(search: search);
+  Future<List<WebBookingMedicalRecordResponse>> webBookingGetReservationAll({
+    String? hospitalName,
+    String? doctor_name,
+    DateTime? reservation_date_from,
+    DateTime? reservation_date_to,
+    bool? inquiryInProgress,
+    bool? reservationConfirmed,
+  }) async {
+    return apiService.webBookingGetReservationAll(
+      hospitalName: hospitalName,
+      doctor_name: doctor_name,
+      reservation_date_from: reservation_date_from,
+      reservation_date_to: reservation_date_to,
+      inquiryInProgress: inquiryInProgress,
+      reservationConfirmed: reservationConfirmed,
+    );
   }
 
   Future<WebBookingMedicalRecordResponse> webBookingGetReservationById(

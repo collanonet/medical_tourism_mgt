@@ -1029,7 +1029,10 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.GET_HOSPITAL)
-  Future<List<BasicInformationHospitalResponse>> getHospitals();
+  Future<List<BasicInformationHospitalResponse>> getHospitals({
+    @Query('page') int? page,
+    @Query('pageSize') int? pageSize,
+  });
 
   /// end get basic information of hospital C3 Page
 
@@ -1294,13 +1297,13 @@ abstract class ApiService {
   );
 
   //WEB_BOOKING_HOSPITAL
-  @GET('${EndPoints.WEB_BOOKING_HOSPITAL}/{id}')
+  @GET('${EndPoints.WEB_BOOKING_HOSPITAL}/get-by-hospital-id/{id}')
   Future<BasicInformationHospitalResponse> webBookingGetHospitalById(
-    @Query('id') String hospitalId,
+    @Path('id') String hospitalId,
   );
 
   @GET('${EndPoints.WEB_BOOKING_HOSPITAL}/search')
-  Future<BasicInformationHospitalResponse> webBookingSearchHospital({
+  Future<List<BasicInformationHospitalResponse>> webBookingSearchHospital({
     @Query('search') String? search,
   });
 
@@ -1330,7 +1333,12 @@ abstract class ApiService {
 
   @GET(EndPoints.WEB_BOOKING_RESERVATION)
   Future<List<WebBookingMedicalRecordResponse>> webBookingGetReservationAll({
-    @Query('search') String? search,
+    @Query('hospitalName') String? hospitalName,
+    @Query('doctor_name') String? doctor_name,
+    @Query('reservation_date_from') DateTime? reservation_date_from,
+    @Query('reservation_date_to') DateTime? reservation_date_to,
+    @Query('inquiryInProgress') bool? inquiryInProgress,
+    @Query('reservationConfirmed') bool? reservationConfirmed,
   });
 
   @GET('${EndPoints.WEB_BOOKING_RESERVATION}/{id}')

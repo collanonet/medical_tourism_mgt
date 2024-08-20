@@ -15,6 +15,8 @@ class WebBookingMedicalRecordRequest {
   String? timeZoneConfirmationTo;
   List<MessageFrom>? messageFrom;
   bool? isClosed;
+  DateTime? testCallDate;
+  String? testCallTime;
 
   WebBookingMedicalRecordRequest({
     this.patientName,
@@ -27,6 +29,8 @@ class WebBookingMedicalRecordRequest {
     this.timeZoneConfirmationTo,
     this.messageFrom,
     this.isClosed,
+    this.testCallDate,
+    this.testCallTime,
   });
 
   factory WebBookingMedicalRecordRequest.fromJson(Map<String, dynamic> json) {

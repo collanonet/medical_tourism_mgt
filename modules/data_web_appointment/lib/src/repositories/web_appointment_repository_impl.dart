@@ -45,9 +45,22 @@ class WebAppointmentRepositoryIml extends WebAppointmentRepository {
   }
 
   @override
-  Future<List<WebBookingMedicalRecordResponse>> webBookingGetReservationAll(
-      {String? search}) {
-    return remote.webBookingGetReservationAll(search: search);
+  Future<List<WebBookingMedicalRecordResponse>> webBookingGetReservationAll({
+    String? hospitalName,
+    String? doctor_name,
+    DateTime? reservation_date_from,
+    DateTime? reservation_date_to,
+    bool? inquiryInProgress,
+    bool? reservationConfirmed,
+  }) {
+    return remote.webBookingGetReservationAll(
+      hospitalName: hospitalName,
+      doctor_name: doctor_name,
+      reservation_date_from: reservation_date_from,
+      reservation_date_to: reservation_date_to,
+      inquiryInProgress: inquiryInProgress,
+      reservationConfirmed: reservationConfirmed,
+    );
   }
 
   @override
@@ -69,7 +82,7 @@ class WebAppointmentRepositoryIml extends WebAppointmentRepository {
   }
 
   @override
-  Future<BasicInformationHospitalResponse> webBookingSearchHospital(
+  Future<List<BasicInformationHospitalResponse>> webBookingSearchHospital(
       {String? search}) {
     return remote.webBookingSearchHospital(search: search);
   }
@@ -78,5 +91,4 @@ class WebAppointmentRepositoryIml extends WebAppointmentRepository {
   Future<List<Patient>> webBookingSearchPatients({String? search}) {
     return remote.webBookingSearchPatients(search: search);
   }
-
 }

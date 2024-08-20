@@ -5313,9 +5313,16 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<BasicInformationHospitalResponse>> getHospitals() async {
+  Future<List<BasicInformationHospitalResponse>> getHospitals({
+    int? page,
+    int? pageSize,
+  }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'page': page,
+      r'pageSize': pageSize,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
@@ -6942,7 +6949,7 @@ class _ApiService implements ApiService {
   Future<BasicInformationHospitalResponse> webBookingGetHospitalById(
       String hospitalId) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'id': hospitalId};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -6953,7 +6960,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/web-booking-hospital/{id}',
+              '/web-booking-hospital/get-by-hospital-id/${hospitalId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -6967,15 +6974,15 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<BasicInformationHospitalResponse> webBookingSearchHospital(
+  Future<List<BasicInformationHospitalResponse>> webBookingSearchHospital(
       {String? search}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'search': search};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<BasicInformationHospitalResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<BasicInformationHospitalResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -6991,7 +6998,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final _value = BasicInformationHospitalResponse.fromJson(_result.data!);
+    var _value = _result.data!
+        .map((dynamic i) => BasicInformationHospitalResponse.fromJson(
+            i as Map<String, dynamic>))
+        .toList();
     return _value;
   }
 
@@ -7111,10 +7121,23 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<WebBookingMedicalRecordResponse>> webBookingGetReservationAll(
-      {String? search}) async {
+  Future<List<WebBookingMedicalRecordResponse>> webBookingGetReservationAll({
+    String? hospitalName,
+    String? doctor_name,
+    DateTime? reservation_date_from,
+    DateTime? reservation_date_to,
+    bool? inquiryInProgress,
+    bool? reservationConfirmed,
+  }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'search': search};
+    final queryParameters = <String, dynamic>{
+      r'hospitalName': hospitalName,
+      r'doctor_name': doctor_name,
+      r'reservation_date_from': reservation_date_from?.toIso8601String(),
+      r'reservation_date_to': reservation_date_to?.toIso8601String(),
+      r'inquiryInProgress': inquiryInProgress,
+      r'reservationConfirmed': reservationConfirmed,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;

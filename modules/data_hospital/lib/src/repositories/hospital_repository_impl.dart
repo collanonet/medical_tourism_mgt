@@ -156,8 +156,14 @@ class HospitalRepositoryIml extends HospitalRepository {
   }
 
   @override
-  Future<List<BasicInformationHospitalResponse>> getHospitals() {
-    return remote.getHospitals();
+  Future<List<BasicInformationHospitalResponse>> getHospitals({
+    int? page,
+    int? pageSize,
+  }) {
+    return remote.getHospitals(
+      page: page,
+      pageSize: pageSize,
+    );
   }
 
   @override
@@ -268,7 +274,6 @@ class HospitalRepositoryIml extends HospitalRepository {
     return remote.deleteNewRegistrationHospital(id);
   }
 
-
   @override
   Future<void> deleteContract(String id) {
     return remote.deleteContract(id);
@@ -288,5 +293,4 @@ class HospitalRepositoryIml extends HospitalRepository {
   Future<void> deleteFacilityPhoto(String id) {
     return remote.deleteFacilityPhoto(id);
   }
-
 }

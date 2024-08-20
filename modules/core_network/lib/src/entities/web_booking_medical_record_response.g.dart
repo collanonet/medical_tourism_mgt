@@ -34,6 +34,10 @@ WebBookingMedicalRecordResponse _$WebBookingMedicalRecordResponseFromJson(
           ?.map((e) => MessageFrom.fromJson(e as Map<String, dynamic>))
           .toList(),
       isClosed: json['isClosed'] as bool?,
+      testCallDate: json['testCallDate'] == null
+          ? null
+          : DateTime.parse(json['testCallDate'] as String),
+      testCallTime: json['testCallTime'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
@@ -53,11 +57,14 @@ Map<String, dynamic> _$WebBookingMedicalRecordResponseToJson(
       'timeZoneConfirmationTo': instance.timeZoneConfirmationTo,
       'messageFrom': instance.messageFrom,
       'isClosed': instance.isClosed,
+      'testCallDate': instance.testCallDate?.toIso8601String(),
+      'testCallTime': instance.testCallTime,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
     };
 
 ProposedDate _$ProposedDateFromJson(Map<String, dynamic> json) => ProposedDate(
+      id: json['_id'] as String?,
       proposedDate: json['proposedDate'] == null
           ? null
           : DateTime.parse(json['proposedDate'] as String),
@@ -70,6 +77,7 @@ ProposedDate _$ProposedDateFromJson(Map<String, dynamic> json) => ProposedDate(
 
 Map<String, dynamic> _$ProposedDateToJson(ProposedDate instance) =>
     <String, dynamic>{
+      '_id': instance.id,
       'proposedDate': instance.proposedDate?.toIso8601String(),
       'selectMorningAfternoonAllDay': instance.selectMorningAfternoonAllDay,
       'timeZoneFrom': instance.timeZoneFrom,
@@ -78,12 +86,14 @@ Map<String, dynamic> _$ProposedDateToJson(ProposedDate instance) =>
     };
 
 MessageFrom _$MessageFromFromJson(Map<String, dynamic> json) => MessageFrom(
+      id: json['_id'] as String?,
       message: json['message'] as String?,
       from: json['from'] as String?,
     );
 
 Map<String, dynamic> _$MessageFromToJson(MessageFrom instance) =>
     <String, dynamic>{
+      '_id': instance.id,
       'message': instance.message,
       'from': instance.from,
     };

@@ -23,6 +23,11 @@ class WebAppointmentDetailModel {
       patient.value = const AsyncData(loading: true);
       final result = await repository.webBookingGetPatientById(id);
       patient.value = AsyncData(data: result);
+      if (patient.value.hasData) {
+        formGroup.control('patientName').value =
+            '${patient.value.requireData.firstNameRomanized} ${patient.value.requireData.middleNameRomanized} ${patient.value.requireData.familyNameRomanized}';
+        getBookingByPatientId(patient.value.requireData.id);
+      }
     } catch (e) {
       logger.e(e);
       patient.value = AsyncData(error: e);
@@ -84,6 +89,13 @@ class WebAppointmentDetailModel {
       hospital.value = const AsyncData(loading: true);
       final result = await repository.webBookingGetHospitalById(id);
       hospital.value = AsyncData(data: result);
+
+      if (hospital.value.hasData) {
+        formGroup.control('medicalInstitutionName').value =
+            hospital.value.requireData.hospitalNameKatakana;
+        insertHospitalSchedule();
+        getDoctorsByHospitalId(hospital.value.requireData.id);
+      }
     } catch (e) {
       logger.e(e);
       hospital.value = AsyncData(error: e);
@@ -94,11 +106,40 @@ class WebAppointmentDetailModel {
     try {
       hospital.value = const AsyncData(loading: true);
       final result = await repository.webBookingSearchHospital(search: search);
-      hospital.value = AsyncData(data: result);
+      hospital.value = AsyncData(data: result.first);
+
+      if (hospital.value.hasData) {
+        insertHospitalSchedule();
+        getDoctorsByHospitalId(hospital.value.requireData.id);
+      }
     } catch (e) {
       logger.e(e);
       hospital.value = AsyncData(error: e);
     }
+  }
+
+  void insertHospitalSchedule() {
+    var data = hospital.value.requireData;
+    formGroup.control('medicalInstitutionName').value =
+        data.hospitalNameKatakana;
+    formGroup.control('department1').value = data.department1;
+    formGroup.control('department2').value = data.department2;
+    formGroup.control('shift1').value = data.shift1;
+    formGroup.control('shift2').value = data.shift2;
+    formGroup.control('shift1Mon').value = data.shift1Mon;
+    formGroup.control('shift1Tue').value = data.shift1Tue;
+    formGroup.control('shift1Wed').value = data.shift1Wed;
+    formGroup.control('shift1Thu').value = data.shift1Thu;
+    formGroup.control('shift1Fri').value = data.shift1Fri;
+    formGroup.control('shift1Sat').value = data.shift1Sat;
+    formGroup.control('shift1Sun').value = data.shift1Sun;
+    formGroup.control('shift2Mon').value = data.shift2Mon;
+    formGroup.control('shift2Tue').value = data.shift2Tue;
+    formGroup.control('shift2Wed').value = data.shift2Wed;
+    formGroup.control('shift2Thu').value = data.shift2Thu;
+    formGroup.control('shift2Fri').value = data.shift2Fri;
+    formGroup.control('shift2Sat').value = data.shift2Sat;
+    formGroup.control('shift2Sun').value = data.shift2Sun;
   }
 
   ValueNotifier<AsyncData<List<DoctorProfileHospitalResponse>>> doctors =
@@ -109,6 +150,16 @@ class WebAppointmentDetailModel {
       doctors.value = const AsyncData(loading: true);
       final result = await repository.getDoctorsByHospitalId(hospitalId);
       doctors.value = AsyncData(data: result);
+      if (webBooking.value.hasData && doctors.value.hasData) {
+        doctorSelected.value = AsyncData(
+            data: doctors.value.requireData.firstWhere((element) =>
+                element.id == webBooking.value.requireData.doctor?.id));
+
+        if (doctorSelected.value.hasData) {
+          formGroup.control('doctorName').value =
+              doctorSelected.value.requireData;
+        }
+      }
     } catch (e) {
       logger.e(e);
       doctors.value = AsyncData(error: e);
@@ -129,12 +180,40 @@ class WebAppointmentDetailModel {
     try {
       if (id != null) {
         webBooking.value = const AsyncData(loading: true);
-        final result = await repository.webBookingGetReservationById(id!);
+        final result = await repository.webBookingGetReservationById(id);
         webBooking.value = AsyncData(data: result);
+
+        if (webBooking.value.hasData) {
+          insertWebBooking();
+          formGroup.control('testCallDate').value =
+              webBooking.value.requireData.testCallDate;
+          formGroup.control('testCallTime').value =
+              webBooking.value.requireData.testCallTime;
+          getPatientById(webBooking.value.requireData.patient?.id ?? '');
+          getHospitalById(webBooking.value.requireData.hospital?.id ?? '');
+        }
       }
     } catch (e) {
       logger.e(e);
       webBooking.value = AsyncData(error: e);
+    }
+  }
+
+  void insertWebBooking() {
+    var data = webBooking.value.requireData;
+
+    FormArray candidateDate = formGroup.control('candidateDate') as FormArray;
+
+    if (data.proposedDates != null && data.proposedDates!.isNotEmpty) {
+      candidateDate.clear(updateParent: true);
+      data.proposedDates?.map((e) {
+        candidateDate.add(FormGroup({
+          'preferredDate': FormControl<DateTime>(value: e.proposedDate),
+          'choice': FormControl<String>(value: e.selectMorningAfternoonAllDay),
+          'timePeriodFrom': FormControl<String>(value: e.timeZoneFrom),
+          'timePeriodTo': FormControl<String>(value: e.timeZoneTo),
+        }));
+      }).toList();
     }
   }
 
@@ -161,6 +240,7 @@ class WebAppointmentDetailModel {
           await repository.webBookingPutReservation(reservationId, request);
       submit.value = AsyncData(data: result);
       webBooking.value = AsyncData(data: result);
+      formGroup.control('message').value = null;
     } catch (e) {
       logger.e(e);
       submit.value = AsyncData(error: e);
@@ -173,10 +253,11 @@ class WebAppointmentDetailModel {
 
       formGroup.control('candidateDate').value.forEach((element) {
         proposedDates.add(ProposedDate(
-          proposedDate: element.control('preferredDate').value,
-          selectMorningAfternoonAllDay: element.control('choice').value,
-          timeZoneFrom: element.control('timePeriodFrom').value,
-          timeZoneTo: element.control('timePeriodTo').value,
+          id: element['id'],
+          proposedDate: element['preferredDate'],
+          selectMorningAfternoonAllDay: element['choice'],
+          timeZoneFrom: element['timePeriodFrom'],
+          timeZoneTo: element['timePeriodTo'],
         ));
       });
 
@@ -203,6 +284,8 @@ class WebAppointmentDetailModel {
             webBooking.value.data?.timeZoneConfirmationFrom,
         reservationConfirmationDate:
             webBooking.value.data?.reservationConfirmationDate,
+        testCallDate: formGroup.control('testCallDate').value,
+        testCallTime: formGroup.control('testCallTime').value,
       );
       updateReservation(webBooking.value.requireData.id, request);
     } else {
@@ -210,10 +293,11 @@ class WebAppointmentDetailModel {
 
       formGroup.control('candidateDate').value.forEach((element) {
         proposedDates.add(ProposedDate(
-          proposedDate: element.control('preferredDate').value,
-          selectMorningAfternoonAllDay: element.control('choice').value,
-          timeZoneFrom: element.control('timePeriodFrom').value,
-          timeZoneTo: element.control('timePeriodTo').value,
+          id: element['id'],
+          proposedDate: element['preferredDate'],
+          selectMorningAfternoonAllDay: element['choice'],
+          timeZoneFrom: element['timePeriodFrom'],
+          timeZoneTo: element['timePeriodTo'],
         ));
       });
 
@@ -230,6 +314,8 @@ class WebAppointmentDetailModel {
             from: 'Admin',
           ),
         ],
+        testCallDate: formGroup.control('testCallDate').value,
+        testCallTime: formGroup.control('testCallTime').value,
       );
       submitReservation(request);
     }

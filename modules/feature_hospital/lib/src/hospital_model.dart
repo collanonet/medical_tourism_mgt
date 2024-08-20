@@ -19,7 +19,9 @@ class HospitalModel with ChangeNotifier {
   Future<void> fetchHospitals() async {
     hospitals.value = const AsyncData(loading: true);
     try {
-      final response = await hospitalRepository.getHospitals();
+      final response = await hospitalRepository.getHospitals(
+        pageSize: 30,
+      );
       logger.d(response.length);
       hospitals.value = AsyncData(data: response);
     } catch (e) {
