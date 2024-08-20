@@ -4063,14 +4063,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<DetailRelatedPartiesBusCompanyResponse>>
+  Future<DetailRelatedPartiesBusCompanyResponse>
       getRelatedPartiesBusCompany() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<DetailRelatedPartiesBusCompanyResponse>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailRelatedPartiesBusCompanyResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -4086,10 +4086,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var value = _result.data!
-        .map((dynamic i) => DetailRelatedPartiesBusCompanyResponse.fromJson(
-            i as Map<String, dynamic>))
-        .toList();
+    final value =
+        DetailRelatedPartiesBusCompanyResponse.fromJson(_result.data!);
     return value;
   }
 

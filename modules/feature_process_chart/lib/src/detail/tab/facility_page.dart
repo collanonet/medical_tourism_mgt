@@ -20,7 +20,7 @@ class FacilityPage extends StatelessWidget {
         builder: (context, formGroup, child) {
           return Provider(
             create: (context) =>
-                GetIt.I<FacilityModel>()..fetchDetailFacilityHotel(),
+                GetIt.I<FacilityModel>()..fetchData(formGroup),
             child: const FacilityScreen(),
           );
         },

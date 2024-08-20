@@ -129,7 +129,7 @@ class ProcessChartRemoteProvider {
         .postRelatedPartiesGuideOrInterpreter(detailRelatedPartiesRequest);
   }
 
-  Future<List<DetailRelatedPartiesBusCompanyResponse>>
+  Future<DetailRelatedPartiesBusCompanyResponse>
       getRelatedPartiesBusCompany() async {
     return await apiService.getRelatedPartiesBusCompany();
   }

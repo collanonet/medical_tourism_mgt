@@ -16,10 +16,6 @@ class DetailRelatedPartiesRequest {
   String? address;
   String? phoneNumber2;
   String? tour;
-  // bool? itineraryManagement;
-  // bool? guideInterpreter;
-  // bool? medicalInterpreter;
-  // bool? possibilityOfStayingTogether;
 
   DetailRelatedPartiesRequest({
     this.arrangePerson,

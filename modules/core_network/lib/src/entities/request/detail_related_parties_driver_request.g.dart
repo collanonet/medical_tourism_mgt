@@ -9,8 +9,12 @@ part of 'detail_related_parties_driver_request.dart';
 DetailRelatedPartiesDriverRequest _$DetailRelatedPartiesDriverRequestFromJson(
         Map<String, dynamic> json) =>
     DetailRelatedPartiesDriverRequest(
-      dateYearFrom: json['dateYearFrom'] as String?,
-      dateYearTo: json['dateYearTo'] as String?,
+      dateYearFrom: json['dateYearFrom'] == null
+          ? null
+          : DateTime.parse(json['dateYearFrom'] as String),
+      dateYearTo: json['dateYearTo'] == null
+          ? null
+          : DateTime.parse(json['dateYearTo'] as String),
       carNumber: json['carNumber'] as String?,
       vehicleType: json['vehicleType'] as String?,
       driverNamaKanji: json['driverNamaKanji'] as String?,
@@ -29,8 +33,8 @@ DetailRelatedPartiesDriverRequest _$DetailRelatedPartiesDriverRequestFromJson(
 Map<String, dynamic> _$DetailRelatedPartiesDriverRequestToJson(
         DetailRelatedPartiesDriverRequest instance) =>
     <String, dynamic>{
-      'dateYearFrom': instance.dateYearFrom,
-      'dateYearTo': instance.dateYearTo,
+      'dateYearFrom': instance.dateYearFrom?.toIso8601String(),
+      'dateYearTo': instance.dateYearTo?.toIso8601String(),
       'carNumber': instance.carNumber,
       'vehicleType': instance.vehicleType,
       'driverNamaKanji': instance.driverNamaKanji,

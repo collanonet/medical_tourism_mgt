@@ -290,8 +290,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                             ListTileControlAffinity.leading,
                                         contentPadding: EdgeInsets.zero,
                                         formControlName:
-                                            'possibility_of_staying_together',
-                                        value: true,
+                                            'accommodationAvailability',
+                                        value: '同宿OK',
                                         title: const Text('同宿OK'),
                                       ),
                                     ),
@@ -302,8 +302,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                             ListTileControlAffinity.leading,
                                         contentPadding: EdgeInsets.zero,
                                         formControlName:
-                                            'possibility_of_staying_together',
-                                        value: false,
+                                            'accommodationAvailability',
+                                        value: '同宿NG',
                                         title: const Text('同宿NG'),
                                       ),
                                     ),
@@ -362,29 +362,34 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                           height: context.appTheme.spacing.marginMedium,
                         ),
                         InkWell(
-                          onTap: () => formArray.add(FormGroup({
-                            'Person_in_charge_of_arrangements':
-                                FormControl<String>(value: ''), // 手配担当
-                            'Date_from':
-                                FormControl<String>(value: ''), // 年月日（自）
-                            'Date_to': FormControl<String>(value: ''), // 年月日（至）
-                            'Guide_name_Kanji':
-                                FormControl<String>(value: ''), // ガイド名（漢字）
-                            'Guide_name_kana':
-                                FormControl<String>(value: ''), // ガイド名（カナ）
-                            'telephone_number_1':
-                                FormControl<String>(value: ''), // 電話番号
-                            'qualification':
-                                FormControl<String>(value: ''), // 資格
-                            'report': FormControl<String>(value: ''), // 報告書
-                            'Accommodation_possible':
-                                FormControl<String>(value: ''), // 同宿可否
-                            'Name_of_facility':
-                                FormControl<String>(value: ''), // 施設名
-                            'location': FormControl<String>(value: ''), // 所在地
-                            'telephone_number_2':
-                                FormControl<String>(value: ''), // 電話番号
-                          })),
+                          onTap: () => formArray.add(FormGroup(
+                            {
+                              'arrangePerson':
+                                  FormControl<String>(value: ''), // 手配担当
+                              'dateFrom': FormControl<DateTime>(), // 年月日（自）
+                              'dateTo': FormControl<DateTime>(), // 年月日（至）
+                              'guideNamaKanji':
+                                  FormControl<String>(value: ''), // ガイド名（漢字）
+                              'guideNameKana':
+                                  FormControl<String>(value: ''), // ガイド名（カナ）
+                              'phoneNumber':
+                                  FormControl<String>(value: ''), // 電話番号
+                              'report': FormControl<String>(value: ''), // 報告書
+                              'accommodationAvailability':
+                                  FormControl<String>(value: ''), // 同宿可否
+                              'accommodationName':
+                                  FormControl<String>(value: ''), // 施設名
+                              'address': FormControl<String>(value: ''), // 所在地
+                              'phoneNumber2': FormControl<String>(value: ''),
+                              //qualification
+                              'itinerary_management':
+                                  FormControl<bool>(value: false),
+                              'guide_interpreter':
+                                  FormControl<bool>(value: false),
+                              'medical_interpreter':
+                                  FormControl<bool>(value: false),
+                            },
+                          )),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -498,14 +503,47 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                               children: [
                                 Row(
                                   children: [
-                                    Expanded(
-                                      child: ReactiveTextField(
-                                        formControlName: 'Date_from',
-                                        decoration: InputDecoration(
-                                          label: Text(
-                                            '年月日（自）',
+                                    IntrinsicWidth(
+                                      stepWidth: 300,
+                                      child: ColumnSeparated(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        separatorBuilder:
+                                            (BuildContext context, int index) {
+                                          return const SizedBox(height: 8);
+                                        },
+                                        children: [
+                                          Text(
+                                            '年月日（至）',
+                                            style: context.textTheme.bodyMedium,
                                           ),
-                                        ),
+                                          ReactiveDatePicker<DateTime>(
+                                              formControlName: 'dateYearFrom',
+                                              firstDate: DateTime(1900),
+                                              lastDate: DateTime(2100),
+                                              builder:
+                                                  (context, picker, child) {
+                                                return ReactiveTextField<
+                                                    DateTime>(
+                                                  formControlName:
+                                                      'dateYearFrom',
+                                                  valueAccessor:
+                                                      DateTimeValueAccessor(),
+                                                  decoration: InputDecoration(
+                                                    fillColor: Colors.white,
+                                                    filled: true,
+                                                    suffixIcon: IconButton(
+                                                      icon: const Icon(
+                                                        CupertinoIcons.calendar,
+                                                        color: Colors.grey,
+                                                      ),
+                                                      onPressed:
+                                                          picker.showPicker,
+                                                    ),
+                                                  ),
+                                                );
+                                              }),
+                                        ],
                                       ),
                                     ),
                                     SizedBox(
@@ -517,14 +555,46 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    Expanded(
-                                      child: ReactiveTextField(
-                                        formControlName: 'Date_to',
-                                        decoration: InputDecoration(
-                                          label: Text(
+                                    IntrinsicWidth(
+                                      stepWidth: 300,
+                                      child: ColumnSeparated(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        separatorBuilder:
+                                            (BuildContext context, int index) {
+                                          return const SizedBox(height: 8);
+                                        },
+                                        children: [
+                                          Text(
                                             '年月日（至）',
+                                            style: context.textTheme.bodyMedium,
                                           ),
-                                        ),
+                                          ReactiveDatePicker<DateTime>(
+                                              formControlName: 'dateYearTo',
+                                              firstDate: DateTime(1900),
+                                              lastDate: DateTime(2100),
+                                              builder:
+                                                  (context, picker, child) {
+                                                return ReactiveTextField<
+                                                    DateTime>(
+                                                  formControlName: 'dateYearTo',
+                                                  valueAccessor:
+                                                      DateTimeValueAccessor(),
+                                                  decoration: InputDecoration(
+                                                    fillColor: Colors.white,
+                                                    filled: true,
+                                                    suffixIcon: IconButton(
+                                                      icon: const Icon(
+                                                        CupertinoIcons.calendar,
+                                                        color: Colors.grey,
+                                                      ),
+                                                      onPressed:
+                                                          picker.showPicker,
+                                                    ),
+                                                  ),
+                                                );
+                                              }),
+                                        ],
                                       ),
                                     ),
                                     SizedBox(
@@ -532,13 +602,18 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                           context.appTheme.spacing.marginMedium,
                                     ),
                                     Expanded(
-                                      child: ReactiveTextField(
-                                        formControlName: 'car_number',
-                                        decoration: InputDecoration(
-                                          label: Text(
-                                            '車番',
+                                      child: Column(
+                                        children: [
+                                          const SizedBox(height: 30),
+                                          ReactiveTextField(
+                                            formControlName: 'carNumber',
+                                            decoration: const InputDecoration(
+                                              label: Text(
+                                                '車番',
+                                              ),
+                                            ),
                                           ),
-                                        ),
+                                        ],
                                       ),
                                     ),
                                     SizedBox(
@@ -549,7 +624,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text('車種'),
+                                        const Text('車種'),
                                         Row(
                                           children: [
                                             IntrinsicWidth(
@@ -558,8 +633,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                     ListTileControlAffinity
                                                         .leading,
                                                 contentPadding: EdgeInsets.zero,
-                                                formControlName: 'car_model',
-                                                value: 'Alphard',
+                                                formControlName: 'vehicleType',
+                                                value: 'アルファード',
                                                 title: const Text('アルファード'),
                                               ),
                                             ),
@@ -570,8 +645,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                     ListTileControlAffinity
                                                         .leading,
                                                 contentPadding: EdgeInsets.zero,
-                                                formControlName: 'car_model',
-                                                value: 'Hiace',
+                                                formControlName: 'vehicleType',
+                                                value: 'ハイエース',
                                                 title: const Text('ハイエース'),
                                               ),
                                             ),
@@ -582,8 +657,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                     ListTileControlAffinity
                                                         .leading,
                                                 contentPadding: EdgeInsets.zero,
-                                                formControlName: 'car_model',
-                                                value: 'others',
+                                                formControlName: 'vehicleType',
+                                                value: 'その他',
                                                 title: const Text('その他'),
                                               ),
                                             ),
@@ -597,8 +672,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                   children: [
                                     Expanded(
                                         child: ReactiveTextField(
-                                      formControlName: 'Driver_name_Kanji',
-                                      decoration: InputDecoration(
+                                      formControlName: 'driverNamaKanji',
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           'ドライバー名（漢字）',
                                         ),
@@ -610,8 +685,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     ),
                                     Expanded(
                                         child: ReactiveTextField(
-                                      formControlName: 'Driver_name_kana',
-                                      decoration: InputDecoration(
+                                      formControlName: 'driverNameKana',
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           'ドライバー名（カナ）',
                                         ),
@@ -623,8 +698,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     ),
                                     Expanded(
                                         child: ReactiveTextField(
-                                      formControlName: 'telephone_number_1',
-                                      decoration: InputDecoration(
+                                      formControlName: 'phoneNumber',
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           '電話番号',
                                         ),
@@ -695,8 +770,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                             controlAffinity:
                                                 ListTileControlAffinity.leading,
                                             contentPadding: EdgeInsets.zero,
-                                            formControlName: 'other',
-                                            title: const Text('その他'),
+                                            formControlName: 'thai',
+                                            title: const Text('タイ語'),
                                           ),
                                         )
                                       ],
@@ -719,8 +794,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                         .leading,
                                                 contentPadding: EdgeInsets.zero,
                                                 formControlName:
-                                                    'possibility_of_staying_together',
-                                                value: true,
+                                                    'accommodationAvailability',
+                                                value: '同宿OK',
                                                 title: const Text('同宿OK'),
                                               ),
                                             ),
@@ -732,8 +807,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                         .leading,
                                                 contentPadding: EdgeInsets.zero,
                                                 formControlName:
-                                                    'possibility_of_staying_together',
-                                                value: false,
+                                                    'accommodationAvailability',
+                                                value: '同宿NG',
                                                 title: const Text('同宿NG'),
                                               ),
                                             ),
@@ -745,12 +820,15 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    Text('('),
+                                    const Padding(
+                                      padding: EdgeInsets.only(top: 18),
+                                      child: Text('('),
+                                    ),
                                     Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        Text('ホテル手配'),
+                                        const Text('ホテル手配'),
                                         Row(
                                           children: [
                                             IntrinsicWidth(
@@ -760,8 +838,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                         .leading,
                                                 contentPadding: EdgeInsets.zero,
                                                 formControlName:
-                                                    'hotel_arrangements',
-                                                value: true,
+                                                    'hotelArrangement',
+                                                value: '仲介会社',
                                                 title: const Text('仲介会社'),
                                               ),
                                             ),
@@ -773,8 +851,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                         .leading,
                                                 contentPadding: EdgeInsets.zero,
                                                 formControlName:
-                                                    'hotel_arrangements',
-                                                value: false,
+                                                    'hotelArrangement',
+                                                value: 'バス会社',
                                                 title: const Text('バス会社'),
                                               ),
                                             ),
@@ -782,14 +860,17 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                         ),
                                       ],
                                     ),
-                                    Text(')'),
+                                    const Padding(
+                                      padding: EdgeInsets.only(top: 18),
+                                      child: Text(')'),
+                                    ),
                                   ],
                                 ),
                                 Row(
                                   children: [
                                     Expanded(
                                         child: ReactiveTextField(
-                                      formControlName: 'Name_of_facility',
+                                      formControlName: 'accommodationName',
                                       decoration: InputDecoration(
                                         label: Text('施設名'),
                                       ),
@@ -800,7 +881,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     ),
                                     Expanded(
                                         child: ReactiveTextField(
-                                      formControlName: 'location',
+                                      formControlName: 'address',
                                       decoration: InputDecoration(
                                         label: Text('所在地'),
                                       ),
@@ -811,7 +892,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                   children: [
                                     Expanded(
                                         child: ReactiveTextField(
-                                      formControlName: 'telephone_number_2',
+                                      formControlName: 'phoneNumber2',
                                       decoration: InputDecoration(
                                         label: Text('電話番号'),
                                       ),
@@ -838,30 +919,36 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                           height: context.appTheme.spacing.marginMedium,
                         ),
                         InkWell(
-                          onTap: () => formArray.add(FormGroup({
-                            'Date_from':
-                                FormControl<String>(value: ''), // 年月日（自）
-                            'Date_to': FormControl<String>(value: ''), // 年月日（至）
-                            'car_number': FormControl<String>(value: ''), // 車番
-                            'Car_model': FormControl<String>(value: ''), // 車種
-                            'Driver_name_Kanji':
-                                FormControl<String>(value: ''), // ドライバー名（漢字）
-                            'Driver_name_kana':
-                                FormControl<String>(value: ''), // ドライバー名（カナ）
-                            'telephone_number_1':
-                                FormControl<String>(value: ''), // 電話番号
-                            'supported_language':
-                                FormControl<String>(value: ''), // 対応言語
-                            'Accommodation_possible':
-                                FormControl<String>(value: ''), // 同宿可否
-                            'Hotel_arrangement':
-                                FormControl<String>(value: ''), // ホテル手配
-                            'Name_of_facility':
-                                FormControl<String>(value: ''), // 施設名
-                            'location': FormControl<String>(value: ''), // 所在地
-                            'telephone_number_2':
-                                FormControl<String>(value: ''), // 電話番号
-                          })),
+                          onTap: () => formArray.add(FormGroup(
+                            {
+                              'dateYearFrom': FormControl<DateTime>(), // 年月日（自）
+                              'dateYearTo': FormControl<DateTime>(), // 年月日（至）
+                              'carNumber': FormControl<String>(value: ''), // 車番
+                              'vehicleType':
+                                  FormControl<String>(value: ''), // 車種
+                              'driverNamaKanji':
+                                  FormControl<String>(value: ''), // ドライバー名（漢字）
+                              'driverNameKana':
+                                  FormControl<String>(value: ''), // ドライバー名（カナ）
+                              'phoneNumber':
+                                  FormControl<String>(value: ''), // 電話番号
+                              'accommodationAvailability':
+                                  FormControl<String>(value: ''), // 同宿可否
+                              'hotelArrangement':
+                                  FormControl<String>(value: ''), // ホテル手配
+                              'accommodationName':
+                                  FormControl<String>(value: ''), // 施設名
+                              'address': FormControl<String>(value: ''), // 所在地
+                              'phoneNumber2': FormControl<String>(value: ''),
+                              //language
+                              'japanese': FormControl<bool>(value: false),
+                              'chinese': FormControl<bool>(value: false),
+                              'vietnamese': FormControl<bool>(value: false),
+                              'english': FormControl<bool>(value: false),
+                              'korean': FormControl<bool>(value: false),
+                              'thai': FormControl<bool>(value: false),
+                            },
+                          )),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -892,7 +979,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                   style: context.textTheme.titleMedium,
                 ),
                 ReactiveFormArray(
-                  formArrayName: 'emergency_contact',
+                  formArrayName: 'emergencyContact',
                   builder: (context, formArray, child) {
                     final rows = formArray.controls
                         .map((control) => control as FormGroup)
@@ -910,14 +997,47 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                               children: [
                                 Row(
                                   children: [
-                                    Expanded(
-                                      child: ReactiveTextField(
-                                        formControlName: 'Date_from',
-                                        decoration: InputDecoration(
-                                          label: Text(
-                                            '年月日（自）',
+                                    IntrinsicWidth(
+                                      stepWidth: 300,
+                                      child: ColumnSeparated(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        separatorBuilder:
+                                            (BuildContext context, int index) {
+                                          return const SizedBox(height: 8);
+                                        },
+                                        children: [
+                                          Text(
+                                            '年月日（至）',
+                                            style: context.textTheme.bodyMedium,
                                           ),
-                                        ),
+                                          ReactiveDatePicker<DateTime>(
+                                              formControlName: 'dateYearFrom',
+                                              firstDate: DateTime(1900),
+                                              lastDate: DateTime(2100),
+                                              builder:
+                                                  (context, picker, child) {
+                                                return ReactiveTextField<
+                                                    DateTime>(
+                                                  formControlName:
+                                                      'dateYearFrom',
+                                                  valueAccessor:
+                                                      DateTimeValueAccessor(),
+                                                  decoration: InputDecoration(
+                                                    fillColor: Colors.white,
+                                                    filled: true,
+                                                    suffixIcon: IconButton(
+                                                      icon: const Icon(
+                                                        CupertinoIcons.calendar,
+                                                        color: Colors.grey,
+                                                      ),
+                                                      onPressed:
+                                                          picker.showPicker,
+                                                    ),
+                                                  ),
+                                                );
+                                              }),
+                                        ],
                                       ),
                                     ),
                                     SizedBox(
@@ -929,14 +1049,46 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    Expanded(
-                                      child: ReactiveTextField(
-                                        formControlName: 'Date_to',
-                                        decoration: InputDecoration(
-                                          label: Text(
+                                    IntrinsicWidth(
+                                      stepWidth: 300,
+                                      child: ColumnSeparated(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        separatorBuilder:
+                                            (BuildContext context, int index) {
+                                          return const SizedBox(height: 8);
+                                        },
+                                        children: [
+                                          Text(
                                             '年月日（至）',
+                                            style: context.textTheme.bodyMedium,
                                           ),
-                                        ),
+                                          ReactiveDatePicker<DateTime>(
+                                            formControlName: 'dateYearTo',
+                                            firstDate: DateTime(1900),
+                                            lastDate: DateTime(2100),
+                                            builder: (context, picker, child) {
+                                              return ReactiveTextField<
+                                                  DateTime>(
+                                                formControlName: 'dateYearTo',
+                                                valueAccessor:
+                                                    DateTimeValueAccessor(),
+                                                decoration: InputDecoration(
+                                                  fillColor: Colors.white,
+                                                  filled: true,
+                                                  suffixIcon: IconButton(
+                                                    icon: const Icon(
+                                                      CupertinoIcons.calendar,
+                                                      color: Colors.grey,
+                                                    ),
+                                                    onPressed:
+                                                        picker.showPicker,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ],
                                       ),
                                     ),
                                     SizedBox(
@@ -944,14 +1096,19 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                           context.appTheme.spacing.marginMedium,
                                     ),
                                     Expanded(
-                                      child: ReactiveTextField(
-                                        formControlName:
-                                            'Person_in_charge_Kanji',
-                                        decoration: InputDecoration(
-                                          label: Text(
-                                            '担当者名（漢字）',
+                                      child: Column(
+                                        children: [
+                                          const SizedBox(height: 30),
+                                          ReactiveTextField(
+                                            formControlName:
+                                                'contactPersonNamaKanji',
+                                            decoration: const InputDecoration(
+                                              label: Text(
+                                                '担当者名（漢字）',
+                                              ),
+                                            ),
                                           ),
-                                        ),
+                                        ],
                                       ),
                                     ),
                                     SizedBox(
@@ -959,14 +1116,19 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                           context.appTheme.spacing.marginMedium,
                                     ),
                                     Expanded(
-                                      child: ReactiveTextField(
-                                        formControlName:
-                                            'Person_in_charge_kana',
-                                        decoration: InputDecoration(
-                                          label: Text(
-                                            '担当者名（カナ）',
+                                      child: Column(
+                                        children: [
+                                          const SizedBox(height: 30),
+                                          ReactiveTextField(
+                                            formControlName:
+                                                'contactPersonNameKana',
+                                            decoration: const InputDecoration(
+                                              label: Text(
+                                                '担当者名（カナ）',
+                                              ),
+                                            ),
                                           ),
-                                        ),
+                                        ],
                                       ),
                                     ),
                                     SizedBox(
@@ -974,13 +1136,18 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                           context.appTheme.spacing.marginMedium,
                                     ),
                                     Expanded(
-                                      child: ReactiveTextField(
-                                        formControlName: 'telephone_number',
-                                        decoration: InputDecoration(
-                                          label: Text(
-                                            '電話番号',
+                                      child: Column(
+                                        children: [
+                                          const SizedBox(height: 30),
+                                          ReactiveTextField(
+                                            formControlName: 'phoneNumber',
+                                            decoration: const InputDecoration(
+                                              label: Text(
+                                                '電話番号',
+                                              ),
+                                            ),
                                           ),
-                                        ),
+                                        ],
                                       ),
                                     ),
                                   ],
@@ -1005,17 +1172,18 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                           height: context.appTheme.spacing.marginMedium,
                         ),
                         InkWell(
-                          onTap: () => formArray.add(FormGroup({
-                            'Date_from':
-                                FormControl<String>(value: ''), // 年月日（自）
-                            'Date_to': FormControl<String>(value: ''), // 年月日（至）
-                            'Person_in_charge_Kanji':
-                                FormControl<String>(value: ''), // 担当者名（漢字）
-                            'Person_in_charge_kana':
-                                FormControl<String>(value: ''), // 担当者名（カナ）
-                            'telephone_number':
-                                FormControl<String>(value: ''), // 電話番号
-                          })),
+                          onTap: () => formArray.add(FormGroup(
+                            {
+                              'dateYearFrom': FormControl<DateTime>(), // 年月日（自）
+                              'dateYearTo': FormControl<DateTime>(), // 年月日（至）
+                              'contactPersonNamaKanji':
+                                  FormControl<String>(value: ''), // 担当者名（漢字）
+                              'contactPersonNameKana':
+                                  FormControl<String>(value: ''), // 担当者名（カナ）
+                              'phoneNumber':
+                                  FormControl<String>(value: ''), // 電話番号
+                            },
+                          )),
                           child: Row(
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.center,

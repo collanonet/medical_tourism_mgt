@@ -17,10 +17,6 @@ class DetailRelatedPartiesResponse {
   String? address;
   String? phoneNumber2;
   String? tour;
-  //  bool? itineraryManagement;
-  // bool? guideInterpreter;
-  // bool? medicalInterpreter;
-  // bool? possibilityOfStayingTogether;
 
   DetailRelatedPartiesResponse({
     required this.id,

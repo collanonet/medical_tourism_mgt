@@ -4,8 +4,8 @@ part 'detail_related_parties_emergency_contact_response.g.dart';
 class DetailRelatedPartiesEmergencyContactResponse {
        @JsonKey(name: '_id')
   final String? id;
-  String? dateYearFrom;
-  String? dateYearTo;
+  DateTime? dateYearFrom;
+  DateTime? dateYearTo;
   String? contactPersonNamaKanji;
   String? contactPersonNameKana;
   String? phoneNumber;

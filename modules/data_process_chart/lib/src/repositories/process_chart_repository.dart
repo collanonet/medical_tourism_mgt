@@ -96,7 +96,7 @@ abstract class ProcessChartRepository {
       DetailRelatedPartiesRequest detailRelatedPartiesRequest,
     );
 
-    Future<List<DetailRelatedPartiesBusCompanyResponse>> getDetailRelatedPartiesBusCompany();
+    Future<DetailRelatedPartiesBusCompanyResponse> getDetailRelatedPartiesBusCompany();
 
     Future<DetailRelatedPartiesBusCompanyResponse> postDetailRelatedPartiesBusCompany(
       DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest,

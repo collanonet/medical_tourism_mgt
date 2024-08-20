@@ -22,7 +22,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
     return ValueListenableBuilder(
-      valueListenable: context.watch<FacilityModel>().submitDetailFacilityData,
+      valueListenable: context.watch<FacilityModel>().submitData,
       builder: (context, value, _) {
         return Skeletonizer(
           enabled: value.loading,
@@ -540,11 +540,11 @@ class _FacilityScreenState extends State<FacilityScreen> {
                 children: [
                   ValueListenableListener(
                     valueListenable:
-                        context.read<FacilityModel>().submitDetailFacilityData,
+                        context.read<FacilityModel>().submitData,
                     onListen: () {
                       final value = context
                           .read<FacilityModel>()
-                          .submitDetailFacilityData
+                          .submitData
                           .value;
                       if (value.hasData) {
                         logger.d('loading');
@@ -567,7 +567,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                     child: ValueListenableBuilder(
                         valueListenable: context
                             .watch<FacilityModel>()
-                            .submitDetailFacilityData,
+                            .submitData,
                         builder: (context, value, _) {
                           return ReactiveFormConsumer(
                             builder: (context, form, _) {
@@ -575,7 +575,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                   onPressed: !value.loading && form.valid
                                       ? () => context
                                           .read<FacilityModel>()
-                                          .submitDetailFacilityHotel(formGroup)
+                                          .submit(formGroup)
                                       : null,
                                   child: WithLoadingButton(
                                     isLoading: value.loading,
