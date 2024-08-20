@@ -4,8 +4,8 @@ part 'detail_related_parties_request.g.dart';
 @JsonSerializable()
 class DetailRelatedPartiesRequest {
   String? arrangePerson;
-  String? dateFrom;
-  String? dateTo;
+  DateTime? dateFrom;
+  DateTime? dateTo;
   String? guideNamaKanji;
   String? guideNameKana;
   String? phoneNumber;

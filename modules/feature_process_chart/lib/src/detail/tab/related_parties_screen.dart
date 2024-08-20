@@ -24,7 +24,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
     final formGroup = ReactiveForm.of(context) as FormGroup;
 
     return ValueListenableBuilder(
-      valueListenable: context.watch<RelatedPartiesModel>().submitPartiesData,
+      valueListenable: context.watch<RelatedPartiesModel>().submit,
       builder: (context, value, _) {
         return Skeletonizer(
           enabled: value.loading,
@@ -63,7 +63,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                       child: ReactiveTextField(
                                         formControlName: 'arrangePerson',
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                           label: Text(
                                             '手配担当',
                                           ),
@@ -84,15 +84,48 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                 ),
                                 Row(
                                   children: [
-                                    Expanded(
-                                        child: ReactiveTextField(
-                                      formControlName: 'dateFrom',
-                                      decoration: InputDecoration(
-                                        label: Text(
-                                          '年月日（自）',
-                                        ),
+                                    IntrinsicWidth(
+                                      stepWidth: 300,
+                                      child: ColumnSeparated(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        separatorBuilder:
+                                            (BuildContext context, int index) {
+                                          return const SizedBox(height: 8);
+                                        },
+                                        children: [
+                                          Text(
+                                            '年月日（自）',
+                                            style: context.textTheme.bodyMedium,
+                                          ),
+                                          ReactiveDatePicker<DateTime>(
+                                              formControlName: 'dateFrom',
+                                              firstDate: DateTime(1900),
+                                              lastDate: DateTime(2100),
+                                              builder:
+                                                  (context, picker, child) {
+                                                return ReactiveTextField<
+                                                    DateTime>(
+                                                  formControlName: 'dateFrom',
+                                                  valueAccessor:
+                                                      DateTimeValueAccessor(),
+                                                  decoration: InputDecoration(
+                                                    fillColor: Colors.white,
+                                                    filled: true,
+                                                    suffixIcon: IconButton(
+                                                      icon: const Icon(
+                                                        CupertinoIcons.calendar,
+                                                        color: Colors.grey,
+                                                      ),
+                                                      onPressed:
+                                                          picker.showPicker,
+                                                    ),
+                                                  ),
+                                                );
+                                              }),
+                                        ],
                                       ),
-                                    )),
+                                    ),
                                     SizedBox(
                                       width:
                                           context.appTheme.spacing.marginMedium,
@@ -102,15 +135,48 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    Expanded(
-                                        child: ReactiveTextField(
-                                      formControlName: 'dateTo',
-                                      decoration: InputDecoration(
-                                        label: Text(
-                                          '年月日（至）',
-                                        ),
+                                    IntrinsicWidth(
+                                      stepWidth: 300,
+                                      child: ColumnSeparated(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        separatorBuilder:
+                                            (BuildContext context, int index) {
+                                          return const SizedBox(height: 8);
+                                        },
+                                        children: [
+                                          Text(
+                                            '年月日（至）',
+                                            style: context.textTheme.bodyMedium,
+                                          ),
+                                          ReactiveDatePicker<DateTime>(
+                                              formControlName: 'dateTo',
+                                              firstDate: DateTime(1900),
+                                              lastDate: DateTime(2100),
+                                              builder:
+                                                  (context, picker, child) {
+                                                return ReactiveTextField<
+                                                    DateTime>(
+                                                  formControlName: 'dateTo',
+                                                  valueAccessor:
+                                                      DateTimeValueAccessor(),
+                                                  decoration: InputDecoration(
+                                                    fillColor: Colors.white,
+                                                    filled: true,
+                                                    suffixIcon: IconButton(
+                                                      icon: const Icon(
+                                                        CupertinoIcons.calendar,
+                                                        color: Colors.grey,
+                                                      ),
+                                                      onPressed:
+                                                          picker.showPicker,
+                                                    ),
+                                                  ),
+                                                );
+                                              }),
+                                        ],
                                       ),
-                                    )),
+                                    ),
                                   ],
                                 ),
                                 Row(
@@ -980,12 +1046,10 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                   children: [
                     ValueListenableListener(
                       valueListenable:
-                          context.read<RelatedPartiesModel>().submitPartiesData,
+                          context.read<RelatedPartiesModel>().submit,
                       onListen: () {
-                        final value = context
-                            .read<RelatedPartiesModel>()
-                            .submitPartiesData
-                            .value;
+                        final value =
+                            context.read<RelatedPartiesModel>().submit.value;
                         if (value.hasData) {
                           logger.d('loading');
                           snackBarWidget(
@@ -1005,9 +1069,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                         }
                       },
                       child: ValueListenableBuilder(
-                          valueListenable: context
-                              .watch<RelatedPartiesModel>()
-                              .submitPartiesData,
+                          valueListenable:
+                              context.watch<RelatedPartiesModel>().submit,
                           builder: (context, value, _) {
                             return ReactiveFormConsumer(
                               builder: (context, form, _) {
@@ -1015,7 +1078,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     onPressed: !value.loading && form.valid
                                         ? () => context
                                             .read<RelatedPartiesModel>()
-                                            .submitParties(formGroup)
+                                            .submitData(formGroup)
                                         : null,
                                     child: WithLoadingButton(
                                       isLoading: value.loading,

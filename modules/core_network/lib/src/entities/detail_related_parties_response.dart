@@ -5,8 +5,8 @@ class DetailRelatedPartiesResponse {
    @JsonKey(name: '_id')
   final String? id;
   String? arrangePerson;
-  String? dateFrom;
-  String? dateTo;
+  DateTime? dateFrom;
+  DateTime? dateTo;
   String? guideNamaKanji;
   String? guideNameKana;
   String? phoneNumber;

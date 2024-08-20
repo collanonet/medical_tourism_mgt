@@ -25,10 +25,10 @@ class RelatedPartiesModel {
   Future<void> submitData(FormGroup formGroup) async {
     try {
       submit.value = const AsyncData(loading: true);
-      await submitParties(formGroup);
-      await submitBusCompany(formGroup);
-      await submitPartiesDriver(formGroup);
-      await submitEmergencyContact(formGroup);
+       await submitParties(formGroup);
+      // await submitBusCompany(formGroup);
+      // await submitPartiesDriver(formGroup);
+      // await submitEmergencyContact(formGroup);
       submit.value = const AsyncData(data: true);
     } catch (e) {
       logger.d(e);
@@ -75,7 +75,8 @@ class RelatedPartiesModel {
       ValueNotifier(const AsyncData());
   Future<void> submitParties(FormGroup formGroup) async {
     try {
-      submitPartiesData.value = const AsyncData(loading: true);
+      // submitPartiesData.value = const AsyncData(loading: true);
+      partiesData.value = const AsyncData(loading: true,data: []);
       await formGroup.control('guideInterpreter').value.forEach(
         (element) async {
           DetailRelatedPartiesRequest request = DetailRelatedPartiesRequest(
@@ -85,9 +86,9 @@ class RelatedPartiesModel {
             guideNamaKanji: element['guideNamaKanji'],
             guideNameKana: element['guideNameKana'],
             phoneNumber: element['phoneNumber'],
-            qualification: [],
-            report: element.report,
-            accommodationAvailability: element['accommodationAvailability'],
+            qualification: ['test'],
+            report: element['report'],
+            accommodationAvailability: 'test',
             accommodationName: element['accommodationName'],
             address: element['address'],
             phoneNumber2: element['phoneNumber2'],
@@ -99,13 +100,14 @@ class RelatedPartiesModel {
             ...partiesData.value.requireData,
             result,
           ]);
+          logger.d('Data : ${element['arrangePerson']}');
         },
       );
       partiesData.value = AsyncData(data: partiesData.value.data);
-      //submitPartiesData.value =  AsyncData(data: );
+      // submitPartiesData.value = AsyncData(data: submitPartiesData.value.data);
     } catch (e) {
       logger.d(e);
-      submitPartiesData.value = AsyncData(error: e);
+      partiesData.value = AsyncData(error: e);
     }
   }
 

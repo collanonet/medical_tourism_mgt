@@ -8,8 +8,8 @@ FormGroup relatedPartiesForm() => FormGroup(
             FormGroup(
               {
                 'arrangePerson': FormControl<String>(value: ''), // 手配担当
-                'dateFrom': FormControl<String>(value: ''), // 年月日（自）
-                'dateTo': FormControl<String>(value: ''), // 年月日（至）
+                'dateFrom': FormControl<DateTime>(), // 年月日（自）
+                'dateTo': FormControl<DateTime>(), // 年月日（至）
                 'guideNamaKanji': FormControl<String>(value: ''), // ガイド名（漢字）
                 'guideNameKana': FormControl<String>(value: ''), // ガイド名（カナ）
                 'phoneNumber': FormControl<String>(value: ''), // 電話番号
