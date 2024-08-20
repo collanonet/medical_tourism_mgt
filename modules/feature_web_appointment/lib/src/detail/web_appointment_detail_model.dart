@@ -33,7 +33,10 @@ class WebAppointmentDetailModel {
     try {
       patient.value = const AsyncData(loading: true);
       final result = await repository.webBookingSearchPatients(search: search);
-      patient.value = AsyncData(data: result);
+      patient.value = AsyncData(data: result.first);
+      if (patient.value.hasData) {
+        getBookingByPatientId(patient.value.requireData.id);
+      }
     } catch (e) {
       logger.e(e);
       patient.value = AsyncData(error: e);
@@ -48,8 +51,27 @@ class WebAppointmentDetailModel {
       bookingByPatient.value = const AsyncData(loading: true);
       final result = await repository.getBookingByPatientId(patientId);
       bookingByPatient.value = AsyncData(data: result);
+
+      if (bookingByPatient.value.hasData) {
+        formGroup.control('preferredDate1').value =
+            bookingByPatient.value.requireData.desiredDate1;
+        formGroup.control('preferredDate2').value =
+            bookingByPatient.value.requireData.desiredDate2;
+        formGroup.control('preferredDate3').value =
+            bookingByPatient.value.requireData.desiredDate3;
+        var noDesiredDate =
+            bookingByPatient.value.requireData.desiredDate1 == null &&
+                bookingByPatient.value.requireData.desiredDate2 == null &&
+                bookingByPatient.value.requireData.desiredDate3 == null;
+        formGroup.control('noDesiredDate').value = noDesiredDate;
+        formGroup.control('remarks').value =
+            bookingByPatient.value.requireData.reason;
+      } else {
+        formGroup.control('noDesiredDate').value = true;
+      }
     } catch (e) {
       logger.e(e);
+      formGroup.control('noDesiredDate').value = true;
       bookingByPatient.value = AsyncData(error: e);
     }
   }
@@ -169,7 +191,7 @@ class WebAppointmentDetailModel {
 
       var request = WebBookingMedicalRecordRequest(
         patientName:
-            patient.value.data?.firstNameRomanized, // will add more name
+            '${patient.value.data?.firstNameRomanized ?? '-'} ${patient.value.data?.middleNameRomanized ?? '-'} ${patient.value.data?.familyNameRomanized ?? '-'}',
         patient: patient.value.data?.id,
         hospital: hospital.value.data?.id,
         doctor: doctorSelected.value.data?.id,
@@ -197,7 +219,7 @@ class WebAppointmentDetailModel {
 
       var request = WebBookingMedicalRecordRequest(
         patientName:
-            patient.value.data?.firstNameRomanized, // will add more name
+            '${patient.value.data?.firstNameRomanized ?? '-'} ${patient.value.data?.middleNameRomanized ?? '-'} ${patient.value.data?.familyNameRomanized ?? '-'}',
         patient: patient.value.data?.id,
         hospital: hospital.value.data?.id,
         doctor: doctorSelected.value.data?.id,

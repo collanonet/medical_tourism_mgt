@@ -1311,13 +1311,13 @@ abstract class ApiService {
 
   //WEB_BOOKING_PATIENT
 
-  @GET('${EndPoints.WEB_BOOKING_PATIENT}/{id}')
+  @GET('${EndPoints.WEB_BOOKING_PATIENT}/get-by-patient-id/{id}')
   Future<Patient> webBookingGetPatientById(
     @Path('id') String patientId,
   );
 
   @GET('${EndPoints.WEB_BOOKING_PATIENT}/search')
-  Future<Patient> webBookingSearchPatients({
+  Future<List<Patient>> webBookingSearchPatients({
     @Query('search') String? search,
   });
 
@@ -1337,11 +1337,6 @@ abstract class ApiService {
   Future<WebBookingMedicalRecordResponse> webBookingGetReservationById(
     @Path('id') String reservationId,
   );
-
-  @GET('${EndPoints.WEB_BOOKING_RESERVATION}/search')
-  Future<WebBookingMedicalRecordResponse> webBookingSearchReservation({
-    @Query('search') String? search,
-  });
 
   @POST(EndPoints.WEB_BOOKING_RESERVATION)
   Future<WebBookingMedicalRecordResponse> webBookingPostReservation(

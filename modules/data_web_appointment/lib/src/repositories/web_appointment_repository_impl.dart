@@ -75,13 +75,8 @@ class WebAppointmentRepositoryIml extends WebAppointmentRepository {
   }
 
   @override
-  Future<Patient> webBookingSearchPatients({String? search}) {
+  Future<List<Patient>> webBookingSearchPatients({String? search}) {
     return remote.webBookingSearchPatients(search: search);
   }
 
-  @override
-  Future<WebBookingMedicalRecordResponse> webBookingSearchReservation(
-      {String? search}) {
-    return remote.webBookingSearchReservation(search: search);
-  }
 }

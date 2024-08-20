@@ -7040,7 +7040,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/web-booking-patient/${patientId}',
+              '/web-booking-patient/get-by-patient-id/${patientId}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -7054,14 +7054,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<Patient> webBookingSearchPatients({String? search}) async {
+  Future<List<Patient>> webBookingSearchPatients({String? search}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'search': search};
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result =
-        await _dio.fetch<Map<String, dynamic>>(_setStreamType<Patient>(Options(
+        await _dio.fetch<List<dynamic>>(_setStreamType<List<Patient>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -7077,7 +7077,9 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final _value = Patient.fromJson(_result.data!);
+    var _value = _result.data!
+        .map((dynamic i) => Patient.fromJson(i as Map<String, dynamic>))
+        .toList();
     return _value;
   }
 
@@ -7156,35 +7158,6 @@ class _ApiService implements ApiService {
             .compose(
               _dio.options,
               '/web-booking-reservation/${reservationId}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = WebBookingMedicalRecordResponse.fromJson(_result.data!);
-    return _value;
-  }
-
-  @override
-  Future<WebBookingMedicalRecordResponse> webBookingSearchReservation(
-      {String? search}) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'search': search};
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<WebBookingMedicalRecordResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/web-booking-reservation/search',
               queryParameters: queryParameters,
               data: _data,
             )

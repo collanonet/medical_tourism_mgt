@@ -28,7 +28,7 @@ class WebAppointmentRemoteProvider {
     return apiService.webBookingGetPatientById(id);
   }
 
-  Future<Patient> webBookingSearchPatients({String? search}) async {
+  Future<List<Patient>> webBookingSearchPatients({String? search}) async {
     return apiService.webBookingSearchPatients(search: search);
   }
 
@@ -44,11 +44,6 @@ class WebAppointmentRemoteProvider {
   Future<WebBookingMedicalRecordResponse> webBookingGetReservationById(
       String id) async {
     return apiService.webBookingGetReservationById(id);
-  }
-
-  Future<WebBookingMedicalRecordResponse> webBookingSearchReservation(
-      {String? search}) async {
-    return apiService.webBookingSearchReservation(search: search);
   }
 
   Future<WebBookingMedicalRecordResponse> webBookingPostReservation(

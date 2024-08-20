@@ -11,7 +11,7 @@ abstract class WebAppointmentRepository {
 
   Future<Patient> webBookingGetPatientById(String id);
 
-  Future<Patient> webBookingSearchPatients({String? search});
+  Future<List<Patient>> webBookingSearchPatients({String? search});
 
   Future<TreamentResponce> getBookingByPatientId(String patientId);
 
@@ -20,9 +20,6 @@ abstract class WebAppointmentRepository {
 
   Future<WebBookingMedicalRecordResponse> webBookingGetReservationById(
       String id);
-
-  Future<WebBookingMedicalRecordResponse> webBookingSearchReservation(
-      {String? search});
 
   Future<WebBookingMedicalRecordResponse> webBookingPostReservation(
       WebBookingMedicalRecordRequest request);
