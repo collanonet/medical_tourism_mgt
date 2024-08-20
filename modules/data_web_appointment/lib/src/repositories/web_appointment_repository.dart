@@ -15,15 +15,16 @@ abstract class WebAppointmentRepository {
 
   Future<TreamentResponce> getBookingByPatientId(String patientId);
 
-  Future<List<WebBookingMedicalRecordResponse>> webBookingGetReservationAll(
-      {
+  Future<List<WebBookingMedicalRecordResponse>> webBookingGetReservationAll({
     String? hospitalName,
     String? doctor_name,
-        DateTime? reservation_date_from,
-        DateTime? reservation_date_to,
+    DateTime? reservation_date_from,
+    DateTime? reservation_date_to,
     bool? inquiryInProgress,
     bool? reservationConfirmed,
-});
+    String? hospitalId,
+    String? patientId,
+  });
 
   Future<WebBookingMedicalRecordResponse> webBookingGetReservationById(
       String id);

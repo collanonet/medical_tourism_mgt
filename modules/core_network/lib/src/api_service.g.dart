@@ -7126,6 +7126,8 @@ class _ApiService implements ApiService {
     DateTime? reservation_date_to,
     bool? inquiryInProgress,
     bool? reservationConfirmed,
+    String? hospitalId,
+    String? patientId,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
@@ -7135,6 +7137,8 @@ class _ApiService implements ApiService {
       r'reservation_date_to': reservation_date_to?.toIso8601String(),
       r'inquiryInProgress': inquiryInProgress,
       r'reservationConfirmed': reservationConfirmed,
+      r'hospital': hospitalId,
+      r'patient': patientId,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};

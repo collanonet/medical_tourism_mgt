@@ -24,15 +24,19 @@ class DetailPatientWebReservationPage extends StatelessWidget {
       validationMessages: <String, ValidationMessageFunction>{
         ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
       },
-      child: ReactiveFormBuilder(
-          form: () => detailPatientWebReservationForm()..markAllAsTouched(),
-          builder: (context, formGroup, child) {
-            return Provider(
-                create: (context) => GetIt.I<DetailPatientWebReservationModel>()
-                  ..getMedicalRecords(
-                      patientId: patient?.id, formGroup: formGroup),
-                child: const DetailPatientWebReservationScreen());
-          }),
+      child: Provider(
+        create: (context) => GetIt.I<DetailPatientWebReservationModel>()
+          ..getPatientById(patient?.id ?? ''),
+        child: Builder(builder: (context) {
+          return ReactiveFormBuilder(
+              form: () =>
+                  context.read<DetailPatientWebReservationModel>().formGroup
+                    ..markAllAsTouched(),
+              builder: (context, formGroup, child) {
+                return const DetailPatientWebReservationScreen();
+              });
+        }),
+      ),
     );
   }
 }

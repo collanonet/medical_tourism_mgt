@@ -43,6 +43,8 @@ class WebAppointmentRemoteProvider {
     DateTime? reservation_date_to,
     bool? inquiryInProgress,
     bool? reservationConfirmed,
+    String? hospitalId,
+    String? patientId,
   }) async {
     return apiService.webBookingGetReservationAll(
       hospitalName: hospitalName,
@@ -51,6 +53,8 @@ class WebAppointmentRemoteProvider {
       reservation_date_to: reservation_date_to,
       inquiryInProgress: inquiryInProgress,
       reservationConfirmed: reservationConfirmed,
+      hospitalId: hospitalId,
+      patientId: patientId,
     );
   }
 

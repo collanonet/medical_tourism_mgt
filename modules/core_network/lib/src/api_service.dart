@@ -1338,6 +1338,8 @@ abstract class ApiService {
     @Query('reservation_date_to') DateTime? reservation_date_to,
     @Query('inquiryInProgress') bool? inquiryInProgress,
     @Query('reservationConfirmed') bool? reservationConfirmed,
+    @Query('hospital') String? hospitalId,
+    @Query('patient') String? patientId,
   });
 
   @GET('${EndPoints.WEB_BOOKING_RESERVATION}/{id}')

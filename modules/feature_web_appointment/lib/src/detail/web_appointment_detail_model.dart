@@ -208,6 +208,7 @@ class WebAppointmentDetailModel {
       candidateDate.clear(updateParent: true);
       data.proposedDates?.map((e) {
         candidateDate.add(FormGroup({
+          'id': FormControl<String>(value: e.id),
           'preferredDate': FormControl<DateTime>(value: e.proposedDate),
           'choice': FormControl<String>(value: e.selectMorningAfternoonAllDay),
           'timePeriodFrom': FormControl<String>(value: e.timeZoneFrom),
@@ -300,7 +301,14 @@ class WebAppointmentDetailModel {
           timeZoneTo: element['timePeriodTo'],
         ));
       });
+      List<MessageFrom> messageFrom = [];
 
+      if (formGroup.control('message').value != null) {
+        messageFrom.add(MessageFrom(
+          message: formGroup.control('message').value,
+          from: 'Admin',
+        ));
+      }
       var request = WebBookingMedicalRecordRequest(
         patientName:
             '${patient.value.data?.firstNameRomanized ?? '-'} ${patient.value.data?.middleNameRomanized ?? '-'} ${patient.value.data?.familyNameRomanized ?? '-'}',
@@ -308,16 +316,31 @@ class WebAppointmentDetailModel {
         hospital: hospital.value.data?.id,
         doctor: doctorSelected.value.data?.id,
         proposedDates: proposedDates,
-        messageFrom: [
-          MessageFrom(
-            message: formGroup.control('message').value,
-            from: 'Admin',
-          ),
-        ],
+        messageFrom: messageFrom,
         testCallDate: formGroup.control('testCallDate').value,
         testCallTime: formGroup.control('testCallTime').value,
       );
       submitReservation(request);
+    }
+  }
+
+  ValueNotifier<AsyncData<List<WebBookingMedicalRecordResponse>>> webBookings =
+      ValueNotifier(const AsyncData());
+
+  void getReservationAll({
+    String? hospitalId,
+    String? patientId,
+  }) async {
+    try {
+      webBookings.value = const AsyncData(loading: true);
+      final result = await repository.webBookingGetReservationAll(
+        hospitalId: hospitalId,
+        patientId: patientId,
+      );
+      webBookings.value = AsyncData(data: result);
+    } catch (e) {
+      logger.e(e);
+      webBookings.value = AsyncData(error: e);
     }
   }
 }

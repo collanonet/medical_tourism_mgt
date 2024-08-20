@@ -454,7 +454,7 @@ class _WebAppointmentDetailScreenState
                                                         (e) => DropdownMenuItem(
                                                               value: e,
                                                               child: Text(
-                                                                  e.name ??
+                                                                  e.nameKanji ??
                                                                       'NoName'),
                                                               onTap: () {
                                                                 context
@@ -1286,6 +1286,10 @@ class _WebAppointmentDetailScreenState
                                         .read<WebAppointmentDetailModel>()
                                         .webBooking,
                                     builder: (context, value, _) {
+                                      if (value.data?.messageFrom == null ||
+                                          value.data!.messageFrom!.isEmpty) {
+                                        return SizedBox();
+                                      }
                                       return ColumnSeparated(
                                         separatorBuilder:
                                             (BuildContext context, int index) {
