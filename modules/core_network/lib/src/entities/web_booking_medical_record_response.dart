@@ -11,7 +11,6 @@ class WebBookingMedicalRecordResponse {
   Patient? patient;
   BasicInformationHospitalResponse? hospital;
   DoctorProfileHospitalResponse? doctor;
-  String? message;
   List<ProposedDate>? proposedDates;
   DateTime? reservationConfirmationDate;
   String? timeZoneConfirmationFrom;
@@ -27,7 +26,6 @@ class WebBookingMedicalRecordResponse {
     this.patient,
     this.hospital,
     this.doctor,
-    this.message,
     this.proposedDates,
     this.reservationConfirmationDate,
     this.timeZoneConfirmationFrom,

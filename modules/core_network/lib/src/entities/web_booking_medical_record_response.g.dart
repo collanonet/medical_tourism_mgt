@@ -22,7 +22,6 @@ WebBookingMedicalRecordResponse _$WebBookingMedicalRecordResponseFromJson(
           ? null
           : DoctorProfileHospitalResponse.fromJson(
               json['doctor'] as Map<String, dynamic>),
-      message: json['message'] as String?,
       proposedDates: (json['proposedDates'] as List<dynamic>?)
           ?.map((e) => ProposedDate.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -47,7 +46,6 @@ Map<String, dynamic> _$WebBookingMedicalRecordResponseToJson(
       'patient': instance.patient,
       'hospital': instance.hospital,
       'doctor': instance.doctor,
-      'message': instance.message,
       'proposedDates': instance.proposedDates,
       'reservationConfirmationDate':
           instance.reservationConfirmationDate?.toIso8601String(),

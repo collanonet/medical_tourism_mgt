@@ -93,6 +93,13 @@ class WebAppointmentDetailModel {
     }
   }
 
+  ValueNotifier<AsyncData<DoctorProfileHospitalResponse>> doctorSelected =
+      ValueNotifier(const AsyncData());
+
+  void selectDoctor(DoctorProfileHospitalResponse doctor) {
+    doctorSelected.value = AsyncData(data: doctor);
+  }
+
   ValueNotifier<AsyncData<WebBookingMedicalRecordResponse>> webBooking =
       ValueNotifier(const AsyncData());
 
@@ -140,24 +147,68 @@ class WebAppointmentDetailModel {
 
   void submitData() {
     if (webBooking.value.hasData) {
+      List<ProposedDate> proposedDates = [];
+
+      formGroup.control('candidateDate').value.forEach((element) {
+        proposedDates.add(ProposedDate(
+          proposedDate: element.control('preferredDate').value,
+          selectMorningAfternoonAllDay: element.control('choice').value,
+          timeZoneFrom: element.control('timePeriodFrom').value,
+          timeZoneTo: element.control('timePeriodTo').value,
+        ));
+      });
+
+      List<MessageFrom> messageFrom = webBooking.value.data!.messageFrom ?? [];
+
+      if (formGroup.control('message').value != null) {
+        messageFrom.add(MessageFrom(
+          message: formGroup.control('message').value,
+          from: 'Admin',
+        ));
+      }
+
       var request = WebBookingMedicalRecordRequest(
-          // medicalRecord: webBooking.value.requireData.medicalRecord,
-          // patient: webBooking.value.requireData.patient.id,
-          // medicalInstitutionName: form.control('medicalInstitutionName').value,
-          // doctorName: form.control('doctorName').value,
-          // candidateDate: [],
-          // message: form.control('message').value,
-          );
+        patientName:
+            patient.value.data?.firstNameRomanized, // will add more name
+        patient: patient.value.data?.id,
+        hospital: hospital.value.data?.id,
+        doctor: doctorSelected.value.data?.id,
+        proposedDates: proposedDates,
+        messageFrom: messageFrom,
+        isClosed: webBooking.value.data?.isClosed,
+        timeZoneConfirmationTo: webBooking.value.data?.timeZoneConfirmationTo,
+        timeZoneConfirmationFrom:
+            webBooking.value.data?.timeZoneConfirmationFrom,
+        reservationConfirmationDate:
+            webBooking.value.data?.reservationConfirmationDate,
+      );
       updateReservation(webBooking.value.requireData.id, request);
     } else {
+      List<ProposedDate> proposedDates = [];
+
+      formGroup.control('candidateDate').value.forEach((element) {
+        proposedDates.add(ProposedDate(
+          proposedDate: element.control('preferredDate').value,
+          selectMorningAfternoonAllDay: element.control('choice').value,
+          timeZoneFrom: element.control('timePeriodFrom').value,
+          timeZoneTo: element.control('timePeriodTo').value,
+        ));
+      });
+
       var request = WebBookingMedicalRecordRequest(
-          // medicalRecord: '',
-          // patient: patient.value.requireData.id,
-          // medicalInstitutionName: form.control('medicalInstitutionName').value,
-          // doctorName: form.control('doctorName').value,
-          // candidateDate: [],
-          // message: form.control('message').value,
-          );
+        patientName:
+            patient.value.data?.firstNameRomanized, // will add more name
+        patient: patient.value.data?.id,
+        hospital: hospital.value.data?.id,
+        doctor: doctorSelected.value.data?.id,
+        proposedDates: proposedDates,
+        messageFrom: [
+          MessageFrom(
+            message: formGroup.control('message').value,
+            from: 'Admin',
+          ),
+        ],
+      );
       submitReservation(request);
     }
   }

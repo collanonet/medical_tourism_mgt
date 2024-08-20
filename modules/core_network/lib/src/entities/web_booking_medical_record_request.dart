@@ -9,7 +9,6 @@ class WebBookingMedicalRecordRequest {
   String? patient;
   String? hospital;
   String? doctor;
-  String? message;
   List<ProposedDate>? proposedDates;
   DateTime? reservationConfirmationDate;
   String? timeZoneConfirmationFrom;
@@ -22,7 +21,6 @@ class WebBookingMedicalRecordRequest {
     this.patient,
     this.hospital,
     this.doctor,
-    this.message,
     this.proposedDates,
     this.reservationConfirmationDate,
     this.timeZoneConfirmationFrom,
