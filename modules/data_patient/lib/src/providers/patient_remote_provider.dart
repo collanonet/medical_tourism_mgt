@@ -590,12 +590,18 @@ class PatientRemoteProvider {
   Future<List<DomesticMedicalDataResponse>> getDomesticMedicalData(
           {required String medicalRecordId}) async =>
       await apiService.getDomesticMedicalData(id: medicalRecordId);
+
   Future<DomesticMedicalDataResponse> postDomesticMedicalData(
-      DomesticMedicalDataRequest domesticMedicalDataRequest) async => await apiService.postDomesticMedicalData(domesticMedicalDataRequest);
-  Future<List<MedicalPaymentResponse>> getMedicalPayment({required String medicalRecordId}) async => await apiService.getMedicalPaymentDetail(id: medicalRecordId);
+          DomesticMedicalDataRequest domesticMedicalDataRequest) async =>
+      await apiService.postDomesticMedicalData(domesticMedicalDataRequest);
+
+  Future<List<MedicalPaymentResponse>> getMedicalPayment(
+          {required String medicalRecordId}) async =>
+      await apiService.getMedicalPaymentDetail(id: medicalRecordId);
 
   Future<MedicalPaymentResponse> postMedicalPayment(
-      MedicalPaymentRequest medicalPaymentRequest) async => await apiService.postMedicalPaymentDetail(medicalPaymentRequest);
+          MedicalPaymentRequest medicalPaymentRequest) async =>
+      await apiService.postMedicalPaymentDetail(medicalPaymentRequest);
 
   Future<void> closePatientAccount(String id) {
     return apiService.closePatientAccount(id);
@@ -671,4 +677,3 @@ class PatientRemoteProvider {
     return apiService.webBookingDeleteReservation(reservationId);
   }
 }
-

@@ -9,7 +9,6 @@ part of 'medical_record_progress_request.dart';
 MedicalRecordProgressRequest _$MedicalRecordProgressRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalRecordProgressRequest(
-      id: json['id'] as String?,
       key: json['key'] as String,
       tag: json['tag'] as String,
       task: json['task'] as String,
@@ -25,7 +24,6 @@ MedicalRecordProgressRequest _$MedicalRecordProgressRequestFromJson(
 Map<String, dynamic> _$MedicalRecordProgressRequestToJson(
         MedicalRecordProgressRequest instance) =>
     <String, dynamic>{
-      'id': instance.id,
       'key': instance.key,
       'tag': instance.tag,
       'task': instance.task,

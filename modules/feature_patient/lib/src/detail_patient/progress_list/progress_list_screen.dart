@@ -34,229 +34,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
             builder: (context, value, child) => Skeletonizer(
               enabled: value.loading,
               child: SingleChildScrollView(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    // 訪日治療の流れ // Treatment
-                    Text(
-                      '訪日治療の流れ',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    SizedBox(
-                      height: context.appTheme.spacing.marginMedium,
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        ),
-                        Text('済/未',
-                            style: Theme.of(context).textTheme.bodySmall),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginExtraLarge * 2,
-                        ),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginExtraLarge,
-                        ),
-                        Expanded(
-                            flex: 4,
-                            child: Text('タスク',
-                                style: Theme.of(context).textTheme.bodySmall)),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        ),
-                        Expanded(
-                            flex: 2,
-                            child: Text('完了日',
-                                style: Theme.of(context).textTheme.bodySmall)),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        ),
-                        Expanded(
-                            flex: 2,
-                            child: Text('備考',
-                                style: Theme.of(context).textTheme.bodySmall)),
-                      ],
-                    ),
-                    const Divider(),
-                    ReactiveForm(
-                      formGroup: formGroup.control('contactUs') as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup.control('application') as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup:
-                          formGroup.control('submitMaterials') as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup.control(
-                          'medicalInstitutionSelectionProposal') as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup.control('contractConclusionDeposit')
-                          as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup.control(
-                          'documentTranslationHospitalInquiries') as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup
-                              .control('judgingWhetherToVisitJapanForTreatment')
-                          as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup.control('decidingToComeToJapan')
-                          as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup.control(
-                          'medicalVisaApplicationOfArrivalDate') as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup.control(
-                          'submitVisaAirlineTicketInformation') as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup.control(
-                              'officialReservationAtAMedicalInstitution')
-                          as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup.control(
-                          'treatmentExaminationSupportInJapan') as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup.control('completionOfTreatment')
-                          as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    SizedBox(
-                      height: context.appTheme.spacing.marginExtraLarge,
-                    ),
-                    Text(
-                      '訪日健診の流れ',
-                      style: Theme.of(context).textTheme.titleMedium,
-                    ),
-                    SizedBox(
-                      height: context.appTheme.spacing.marginMedium,
-                    ),
-                    Row(
-                      children: [
-                        SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        ),
-                        Text('済/未',
-                            style: Theme.of(context).textTheme.bodySmall),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginExtraLarge * 2,
-                        ),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginExtraLarge,
-                        ),
-                        Expanded(
-                            flex: 4,
-                            child: Text('タスク',
-                                style: Theme.of(context).textTheme.bodySmall)),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        ),
-                        Expanded(
-                            flex: 1,
-                            child: Text('完了日',
-                                style: Theme.of(context).textTheme.bodySmall)),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        ),
-                        Expanded(
-                            flex: 3,
-                            child: Text('備考',
-                                style: Theme.of(context).textTheme.bodySmall)),
-                      ],
-                    ),
-                    const Divider(),
-                    ReactiveForm(
-                      formGroup: formGroup.control('contactUs1') as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup.control('application1') as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup.control('submitRequiredInformation')
-                          as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup:
-                          formGroup.control('hospitalCourseSelectionProposal')
-                              as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup.control(
-                              'courseConfirmationScheduleAdjustmentTentativeReservation')
-                          as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup.control('contractConclusionDeposit1')
-                          as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup.control(
-                              'officialReservationAtAMedicalInstitution1')
-                          as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup.control(
-                              'estimateForAdditionalServicesSuchAsAccommodationAndSightseeing')
-                          as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup: formGroup.control(
-                          'submitVisaAirlineTicketInformation1') as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup:
-                          formGroup.control('fillConfirmMedicalQuestionnaire')
-                              as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup:
-                          formGroup.control('medicalExaminationAccompanied')
-                              as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    ReactiveForm(
-                      formGroup:
-                          formGroup.control('sendingResultReport') as FormGroup,
-                      child: const ProgressRecordWidget(),
-                    ),
-                    SizedBox(
-                      height: context.appTheme.spacing.marginExtraLarge,
-                    ),
-                  ],
-                ),
+                child: section(formGroup),
               ),
             ),
           ),
@@ -270,8 +48,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
               valueListenable: context.read<ProgressListModel>().submit,
               onListen: () {
                 final value = context.read<ProgressListModel>().submit.value;
-                if (!value.hasError && !value.loading) {
-                  logger.d('loading');
+                if (value.hasData) {
                   snackBarWidget(
                     message: '正常に保存されました',
                     prefixIcon:
@@ -309,6 +86,166 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
           ],
         )
       ],
+    );
+  }
+
+  ReactiveFormArray<Object?> section(FormGroup formGroup) {
+    return ReactiveFormArray(
+      formArrayName: 'progressList',
+      builder: (context, formArray, child) {
+        final rows =
+            formArray.controls.map((control) => control as FormGroup).map(
+                  (currentForm) => ReactiveForm(
+                    formGroup: currentForm,
+                    child: listOfItemInSection(
+                        formArray.controls.indexOf(currentForm)),
+                  ),
+                );
+
+        return ColumnSeparated(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          separatorBuilder: (BuildContext context, int index) => Divider(),
+          children: [
+            ...rows,
+            InkWell(
+              onTap: () {
+                formArray.add(FormGroup({
+                  'progress': FormArray([
+                    // record of item
+                    FormGroup({
+                      'id': FormControl<String>(),
+                      'completed': FormControl<bool>(value: false),
+                      'key': FormControl<String>(),
+                      'tag': FormControl<String>(),
+                      'task': FormControl<String>(),
+                      'completionDate': FormControl<DateTime>(),
+                      'remarks': FormControl<String>(),
+                      'medicalRecord': FormControl<String>(),
+                      'type': FormControl<String>(
+                        value: rows.length.toString(),
+                      ),
+                    }),
+                  ]),
+                }));
+              },
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add_box_rounded,
+                    color: context.appTheme.primaryColor,
+                  ),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginSmall,
+                  ),
+                  Text(
+                    'さらにセクションを追加',
+                    style: TextStyle(color: context.appTheme.primaryColor),
+                  )
+                ],
+              ),
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  ReactiveFormArray<Object?> listOfItemInSection(int index) {
+    return ReactiveFormArray(
+      formArrayName: 'progress',
+      builder: (context, formArray, child) {
+        final rows =
+            formArray.controls.map((control) => control as FormGroup).map(
+                  (currentForm) => ReactiveForm(
+                    formGroup: currentForm,
+                    child: const ProgressRecordWidget(),
+                  ),
+                );
+
+        return ColumnSeparated(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            separatorBuilder: (BuildContext context, int index) => SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
+                ),
+            children: [
+              Text(
+                '訪日治療の流れ',
+                style: Theme.of(context).textTheme.titleMedium,
+              ),
+              Row(
+                children: [
+                  SizedBox(
+                    width: context.appTheme.spacing.marginMedium,
+                  ),
+                  Text('済/未', style: Theme.of(context).textTheme.bodySmall),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginExtraLarge * 2,
+                  ),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginExtraLarge,
+                  ),
+                  Expanded(
+                      flex: 4,
+                      child: Text('タスク',
+                          style: Theme.of(context).textTheme.bodySmall)),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginMedium,
+                  ),
+                  Expanded(
+                      flex: 2,
+                      child: Text('完了日',
+                          style: Theme.of(context).textTheme.bodySmall)),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginMedium,
+                  ),
+                  Expanded(
+                      flex: 2,
+                      child: Text('備考',
+                          style: Theme.of(context).textTheme.bodySmall)),
+                ],
+              ),
+              const Divider(),
+              ...rows,
+              InkWell(
+                onTap: () {
+                  formArray.add(
+                    FormGroup({
+                      'id': FormControl<String>(),
+                      'completed': FormControl<bool>(value: false),
+                      'key': FormControl<String>(),
+                      'tag': FormControl<String>(),
+                      'task': FormControl<String>(),
+                      'completionDate': FormControl<DateTime>(),
+                      'remarks': FormControl<String>(),
+                      'medicalRecord': FormControl<String>(),
+                      'type': FormControl<String>(value: index.toString()),
+                    }),
+                  );
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.add_box_rounded,
+                      color: context.appTheme.primaryColor,
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginSmall,
+                    ),
+                    Text(
+                      'さらにアイテムを追加',
+                      style: TextStyle(color: context.appTheme.primaryColor),
+                    )
+                  ],
+                ),
+              )
+            ]);
+      },
     );
   }
 }
