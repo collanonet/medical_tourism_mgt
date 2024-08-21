@@ -1,64 +1,48 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'detail_related_parties_driver_response.g.dart';
+
 @JsonSerializable()
 class DetailRelatedPartiesDriverResponse {
-      @JsonKey(name: '_id')
+  @JsonKey(name: '_id')
   final String? id;
-  String? dateFrom;
-  String? dateTo;
+  DateTime? dateYearFrom;
+  DateTime? dateYearTo;
   String? carNumber;
-  String? carModel;
-  String? driverNameKanji;
+  String? vehicleType;
+  String? driverNamaKanji;
   String? driverNameKana;
-  String? telephoneNumber1;
-  String? supportedLanguage;
-  String? accommodationPossible;
+  String? phoneNumber;
+  List<String>? language;
+  String? accommodationAvailability;
   String? hotelArrangement;
-  String? nameOfFacility;
-  String? location;
-  String? telephoneNumber2;
-   String? carModel2;
-  bool? japanese;
-  bool? chinese;
-  bool? vietnamese;
-  bool? english;
-  bool? korean;
-  bool? other;
-  bool? possibilityOfStayingTogether;
-  bool? hotelArrangements;
+  String? accommodationName;
+  String? address;
+  String? phoneNumber2;
+
 
   DetailRelatedPartiesDriverResponse({
     required this.id,
-    this.dateFrom,
-    this.dateTo,
+    this.dateYearFrom,
+    this.dateYearTo,
     this.carNumber,
-    this.carModel,
-    this.driverNameKanji,
+    this.vehicleType,
+    this.driverNamaKanji,
     this.driverNameKana,
-    this.telephoneNumber1,
-    this.supportedLanguage,
-    this.accommodationPossible,
+    this.phoneNumber,
+    this.language,
+    this.accommodationAvailability,
     this.hotelArrangement,
-    this.nameOfFacility,
-    this.location,
-    this.telephoneNumber2,
-    this.carModel2,
-    this.japanese,
-    this.chinese,
-    this.vietnamese,
-    this.english,
-    this.korean,
-    this.other,
-    this.possibilityOfStayingTogether,
-    this.hotelArrangements,
+    this.accommodationName,
+    this.address,
+    this.phoneNumber2,
   });
 
-  factory DetailRelatedPartiesDriverResponse.fromJson(Map<String,dynamic> json){
+  factory DetailRelatedPartiesDriverResponse.fromJson(
+      Map<String, dynamic> json) {
     return _$DetailRelatedPartiesDriverResponseFromJson(json);
   }
 
-  Map<String,dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return _$DetailRelatedPartiesDriverResponseToJson(this);
   }
-
 }

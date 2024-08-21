@@ -132,7 +132,9 @@ class _AdditionalInformationSectionState
                                                 context.appTheme.primaryColor,
                                           )),
                                       fileSelect != null
-                                          ? Text(fileSelect!.filename)
+                                          ? Text(fileSelect!.filename ?? '',
+                                              style:
+                                                  context.textTheme.bodySmall)
                                           : Text(
                                               'File Input .....',
                                               style:

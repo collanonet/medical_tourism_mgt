@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_patient/data_patient.dart';
@@ -82,7 +84,7 @@ class BasicInformationModel {
             form.control('PATIENT_PASSPORTS') as FormGroup);
         await createUpdateMedicalRecords(form);
 
-        if (medicalRecord.value.hasData) {
+        if (medicalRecordId.value.hasData) {
           await createUpdateMedicalRecordHospital(form);
 
           await createUpdateMedicalRecordAgents(
@@ -141,6 +143,7 @@ class BasicInformationModel {
 
   void insertUserAccount({required User data, required FormGroup formGroup}) {
     formGroup.control('loginId').value = data.idNumber;
+    formGroup.control('isClosed').value = data.isClosed;
   }
 
   // //GET_PATIENT_NAMES
@@ -333,24 +336,7 @@ class BasicInformationModel {
       );
     }
 
-    final chatQr = formGroup.control('chatQr') as FormArray;
-    chatQr.clear();
-    data.chatQr?.forEach((element) {
-      chatQr.add(
-        FormGroup({
-          'chatQr': FormControl<String>(value: element ?? ''),
-        }),
-      );
-    });
-
-    if (data.chatQr == null || data.chatQr!.isEmpty) {
-      chatQr.clear();
-      chatQr.add(
-        FormGroup({
-          'chatQr': FormControl<String>(),
-        }),
-      );
-    }
+    formGroup.control('chatQrImage').value = FileSelect(url: data.chatQrImage);
   }
 
   // post PATIENT_NATIONALITIES
@@ -385,16 +371,22 @@ class BasicInformationModel {
       }
     }
 
-    List<String?> chatQr = [];
-    if (form.control('chatQr').value != null) {
-      for (var i = 0;
-          i < (form.control('chatQr').value as List<dynamic>).length;
-          i++) {
-        if ((form.control('chatQr').value as List<dynamic>)[i]['chatQr'] !=
-            null) {
-          chatQr.add(
-              (form.control('chatQr').value as List<dynamic>)[i]['chatQr']);
+    String? file;
+    if (form.control('chatQrImage').value != null) {
+      FileSelect docFile = form.control('chatQrImage').value;
+      if (docFile.file != null) {
+        try {
+          String base64Image = base64Encode(docFile.file!);
+          FileResponse fileData = await patientRepository.uploadFileBase64(
+            base64Image,
+            docFile.filename!,
+          );
+          file = fileData.filename;
+        } catch (e) {
+          logger.e(e);
         }
+      } else {
+        file = docFile.url;
       }
     }
 
@@ -406,7 +398,7 @@ class BasicInformationModel {
       mobileNumber: form.control('mobileNumber').value,
       email: form.control('email').value,
       chatToolLink: chatToolLink.isEmpty ? null : chatToolLink,
-      chatQr: chatQr.isEmpty ? null : chatQr,
+      chatQrImage: file,
       patient: patientData.value.requireData.id,
     );
 
@@ -523,6 +515,9 @@ class BasicInformationModel {
   ValueNotifier<AsyncData<MedicalRecord>> medicalRecord =
       ValueNotifier<AsyncData<MedicalRecord>>(const AsyncData());
 
+  ValueNotifier<AsyncData<String>> medicalRecordId =
+      ValueNotifier<AsyncData<String>>(const AsyncData());
+
   Future<void> getMedicalRecords({
     required String patientId,
     required FormGroup formGroup,
@@ -531,6 +526,7 @@ class BasicInformationModel {
 
     await patientRepository.medicalRecordsByPatient(patientId).then((value) {
       if (value.isNotEmpty) {
+        medicalRecordId.value = AsyncData(data: value.first.id);
         medicalRecord.value = AsyncData(data: value.first);
         insertMedicalRecord(data: value.first, formGroup: formGroup);
       } else {
@@ -540,36 +536,36 @@ class BasicInformationModel {
       logger.d(error);
       medicalRecord.value = AsyncData(error: error);
     });
-    if (medicalRecord.value.data != null) {
+    if (medicalRecordId.value.hasData) {
       getMedicalRecordHospitals(
-        medicalRecordId: medicalRecord.value.requireData.id,
+        medicalRecordId: medicalRecordId.value.requireData,
         formGroup: formGroup,
       );
       getMedicalRecordBudgets(
-        medicalRecordId: medicalRecord.value.requireData.id,
+        medicalRecordId: medicalRecordId.value.requireData,
         formGroup: formGroup,
       );
       getMedicalRecordAgents(
-        medicalRecordId: medicalRecord.value.requireData.id,
+        medicalRecordId: medicalRecordId.value.requireData,
         formGroup: formGroup,
       );
       getMedicalRecordReferrers(
-        medicalRecordId: medicalRecord.value.requireData.id,
+        medicalRecordId: medicalRecordId.value.requireData,
         formGroup: formGroup,
       );
 
       getMedicalRecordInterpreters(
-        medicalRecordId: medicalRecord.value.requireData.id,
+        medicalRecordId: medicalRecordId.value.requireData,
         formGroup: formGroup,
       );
 
       getMedicalRecordTravelGroups(
-        medicalRecordId: medicalRecord.value.requireData.id,
+        medicalRecordId: medicalRecordId.value.requireData,
         formGroup: formGroup,
       );
 
       getMedicalRecordCompanions(
-        medicalRecordId: medicalRecord.value.requireData.id,
+        medicalRecordId: medicalRecordId.value.requireData,
         formGroup: formGroup,
       );
     }
@@ -673,6 +669,7 @@ class BasicInformationModel {
     await patientRepository
         .postMedicalRecord(medicalRecordRequest)
         .then((value) {
+      medicalRecordId.value = AsyncData(data: value.id);
       medicalRecord.value = AsyncData(data: value);
     }).catchError((error) {
       logger.d(error);
@@ -738,7 +735,7 @@ class BasicInformationModel {
       company: form.control('company').value ?? '',
       nameInKanji: form.control('nameInKanji').value ?? '',
       nameInKana: form.control('nameInKana').value ?? '',
-      medicalRecord: medicalRecord.value.requireData.id,
+      medicalRecord: medicalRecordId.value.requireData,
     );
 
     if (form.control('id').value != null) {
@@ -822,7 +819,7 @@ class BasicInformationModel {
       company: form.control('company').value ?? '',
       nameInKanji: form.control('nameInKanji').value ?? '',
       nameInKana: form.control('nameInKana').value ?? '',
-      medicalRecord: medicalRecord.value.requireData.id,
+      medicalRecord: medicalRecordId.value.requireData,
     );
 
     if (form.control('id').value != null) {
@@ -923,7 +920,7 @@ class BasicInformationModel {
     MedicalRecordBudgetRequest request = MedicalRecordBudgetRequest(
       budget: form.control('budget').value ?? 0,
       remarks: form.control('remarks').value ?? '',
-      medicalRecord: medicalRecord.value.requireData.id,
+      medicalRecord: medicalRecordId.value.requireData,
     );
 
     if (form.control('id').value != null) {
@@ -985,7 +982,8 @@ class BasicInformationModel {
         for (var element in data) {
           FormArray chatToolLink = FormArray([]);
           chatToolLink.clear();
-          if (element.chatToolLink != null) {
+          if (element.chatToolLink != null &&
+              element.chatToolLink!.isNotEmpty) {
             for (var i = 0; i < element.chatToolLink!.length; i++) {
               chatToolLink.add(
                 FormGroup({
@@ -995,9 +993,7 @@ class BasicInformationModel {
                 }),
               );
             }
-          }
-
-          if (element.chatToolLink == null || element.chatToolLink!.isEmpty) {
+          } else {
             chatToolLink.add(
               FormGroup({
                 'chatToolLink': FormControl<String>(),
@@ -1079,6 +1075,9 @@ class BasicInformationModel {
                 ],
               ),
               'chatToolLink': chatToolLink,
+              'chatQrImage': FormControl<FileSelect>(
+                value: FileSelect(url: element.chatQrImage),
+              ),
               'passportNumber': FormControl<String?>(
                 value: element.passportNumber,
               ),
@@ -1224,7 +1223,7 @@ class BasicInformationModel {
           MedicalRecordHospitalRequest request = MedicalRecordHospitalRequest(
             medicalCardNumber: element['medicalCardNumber'] ?? '',
             hospitalName: element['hospitalName'] ?? '',
-            medicalRecord: medicalRecord.value.requireData.id,
+            medicalRecord: medicalRecordId.value.requireData,
           );
 
           if (element['id'] != null) {
@@ -1401,7 +1400,7 @@ class BasicInformationModel {
       requiredOrUnnnecessary:
           control.control('requiredOrUnnnecessary').value == '要' ? true : false,
       interpreter: control.control('interpreter').value,
-      medicalRecord: medicalRecord.value.requireData.id,
+      medicalRecord: medicalRecordId.value.requireData,
     );
 
     if (control.control('id').value != null) {
@@ -1458,7 +1457,7 @@ class BasicInformationModel {
     }
   }
 
-  createUpdateMedicalRecordTravelGroups(FormGroup control) async {
+  Future<void> createUpdateMedicalRecordTravelGroups(FormGroup control) async {
     medicalRecordTravelGroups.value = AsyncData(loading: true);
     List<String?> type = [];
 
@@ -1486,7 +1485,7 @@ class BasicInformationModel {
     MedicalRecordTravelGroupRequest request = MedicalRecordTravelGroupRequest(
       toGroupLeader: control.control('toGroupLeader').value ?? false,
       travelGroup: type.isEmpty ? null : type,
-      medicalRecord: medicalRecord.value.requireData.id,
+      medicalRecord: medicalRecordId.value.requireData,
     );
     try {
       var result =
@@ -1522,6 +1521,25 @@ class BasicInformationModel {
           }
         }
 
+        String? file;
+        if (element['chatQrImage'] != null) {
+          FileSelect docFile = element['chatQrImage'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              file = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            file = docFile.url;
+          }
+        }
+
         MedicalRecordCompanionRequest request = MedicalRecordCompanionRequest(
           leader: element['leader'],
           remarks: element['remarks'],
@@ -1550,11 +1568,12 @@ class BasicInformationModel {
           mobileNumber: element['mobileNumber'],
           email: element['email'],
           chatToolLink: chatToolLink,
+          chatQrImage: file,
           passportNumber: element['passportNumber'],
           issueDate: element['issueDate'],
           expirationDate: element['expirationDate'],
           visaType: element['visaType'],
-          medicalRecord: medicalRecord.value.requireData.id,
+          medicalRecord: medicalRecordId.value.requireData,
         );
 
         if (element['id'] != null) {
@@ -1568,6 +1587,20 @@ class BasicInformationModel {
     } catch (e) {
       logger.d(e);
       medicalRecordCompanions.value = AsyncData(error: e);
+    }
+  }
+
+  ValueNotifier<AsyncData<bool>> isClosed = ValueNotifier(const AsyncData());
+
+  Future<void> closePatientAccount() async {
+    isClosed.value = const AsyncData(loading: true);
+    try {
+      await patientRepository
+          .closePatientAccount(patientData.value.requireData.id);
+      isClosed.value = const AsyncData(data: true);
+    } catch (e) {
+      logger.d(e);
+      isClosed.value = AsyncData(error: e);
     }
   }
 }

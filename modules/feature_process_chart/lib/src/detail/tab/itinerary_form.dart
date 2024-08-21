@@ -2,7 +2,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup itineraryForm() => FormGroup(
       {
-        'patientNames': FormArray(
+        'patient': FormArray(
           [
             FormGroup(
               {
@@ -21,10 +21,10 @@ FormGroup itineraryForm() => FormGroup(
             ),
           ],
         ),
-        'tour_name': FormControl<String>(value: ''), // ツアー名
-        'Number_of_people': FormControl<String>(value: ''), // 人数
+        'tourName': FormControl<String>(value: ''), // ツアー名
+        'peopleNumber': FormControl<String>(value: ''), // 人数
         'group': FormControl<String>(value: ''), // グループ
-        'type': FormControl<String>(value: ''), // 種別
+        'classification': FormControl<String>(value: ''), // 種別
         'day': FormArray(
           // 日目
           [
@@ -32,12 +32,12 @@ FormGroup itineraryForm() => FormGroup(
               {
                 'date': FormControl<String>(value: ''), // 日付
                 //'meal': FormControl<String>(value: ''),
-                'morning': FormControl<bool>(),
-                'noon': FormControl<bool>(),
+                'morning': FormControl<bool>(value: false),
+                'noon': FormControl<bool>(value: false),
                 'evening': FormControl<bool>(), // 食事
-                'place_name': FormControl<String>(value: ''), // 地名
-                'Accommodation': FormControl<String>(value: ''), // 宿泊場所
-                'group': FormArray(
+                'placeName': FormControl<String>(value: ''), // 地名
+                'placeStay': FormControl<String>(value: ''), // 宿泊場所
+                'groups': FormArray(
                   // グループ
                   [
                     FormGroup(
@@ -46,28 +46,28 @@ FormGroup itineraryForm() => FormGroup(
                           [
                             FormGroup(
                               {
-                                'place_name':
+                                'placeName':
                                     FormControl<String>(value: ''), // 地名
-                                'Time_from':
+                                'timeFrom':
                                     FormControl<String>(value: ''), // 時刻（自）
-                                'Time_to':
+                                'timeTo':
                                     FormControl<String>(value: ''), // 時刻（至）
-                                'traffic': FormControl<String>(value: ''), // 交通
-                                'Itinerary':
+                                'transportation': FormControl<String>(value: ''), // 交通
+                                'itinerary':
                                     FormControl<String>(value: ''), // 行程
                               },
                             ),
                             FormGroup(
                               {
-                                'place_name':
+                                'placeName':
                                     FormControl<String>(value: ''), // 地名
-                                'Time_from':
+                                'timeFrom':
                                     FormControl<String>(value: ''), // 時刻（自）
-                                'Time_to':
+                                'timeTo':
                                     FormControl<String>(value: ''), // 時刻（至）
-                                'traffic': FormControl<String>(value: ''), // 交通
-                                'Itinerary':
-                                    FormControl<String>(value: ''), // 行程
+                                'transportation': FormControl<String>(value: ''), // 交通
+                                'itinerary':
+                                    FormControl<String>(value: ''),  // 行程
                               },
                             ),
                           ],

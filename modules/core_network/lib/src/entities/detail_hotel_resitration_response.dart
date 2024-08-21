@@ -5,35 +5,42 @@ part 'detail_hotel_resitration_response.g.dart';
 class DetainHotelRegistationResponse {
   @JsonKey(name: '_id')
   final String? id;
-  String? name;
-  String? location;
-  String? personInChargeName;
-  String? telephoneNumber;
-  String? oneNightPrice;
+  String? accommodationName;
+  List<String>? accommodationType;
+  String? area;
+  String? address;
+  String? contactPersonName;
+  String? phoneNumber;
+  double? ratePerNight;
   String? accommodationMemo;
-  String? foreignLanguageStaff;
-  String? evaluation;
-   bool? japanese;
-  bool? chinese;
-  bool? vietnamese;
-  bool? english;
-  bool? others;
+  bool? isJapanese;
+  bool? isChinese;
+  bool? isVietnamese;
+  bool? isEnglish;
+  bool? isOthers;
+  String? other;
+  int? evaluation;
+  String? memo;
+
 
   DetainHotelRegistationResponse({
     required this.id,
-     this.name,
-     this.location,
-     this.personInChargeName,
-     this.telephoneNumber,
-     this.oneNightPrice,
-     this.accommodationMemo,
-     this.foreignLanguageStaff,
-     this.evaluation,
-     this.japanese,
-     this.chinese,
-     this.vietnamese,
-     this.english,
-     this.others
+     this.accommodationName,
+    this.accommodationType,
+    this.area,
+    this.address,
+    this.contactPersonName,
+    this.phoneNumber,
+    this.ratePerNight,
+    this.accommodationMemo,
+    this.isJapanese,
+    this.isChinese,
+    this.isVietnamese,
+    this.isEnglish,
+    this.isOthers,
+    this.other,
+    this.evaluation,
+    this.memo,
   });
 
   factory DetainHotelRegistationResponse.fromJson(Map<String,dynamic> json){

@@ -3,7 +3,6 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -108,7 +107,7 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                   ]),
               ValueListenableBuilder(
                 valueListenable:
-                    context.read<QAndAModel>().newRegistrationHospitalData,
+                    context.watch<QAndAModel>().newRegistrationHospitalData,
                 builder: (context, value, child) {
                   return ListView.builder(
                     shrinkWrap: true,
@@ -133,7 +132,6 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                     padding: const EdgeInsets.symmetric(
                                         vertical: 10),
                                     child: Text(
-                                      // '更新日：${value.requireData[index].updatedDate.toString()}　更新者：${value.requireData[index].updatedBy}',
                                       '更新日：${value.requireData[index].updatedDate == null ? '' : Dates.formatFullDate(value.requireData[index].updatedDate!)}　更新者：${value.requireData[index].updatedBy}',
                                     ),
                                   ),

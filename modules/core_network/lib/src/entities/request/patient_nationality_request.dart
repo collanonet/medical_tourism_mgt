@@ -4,26 +4,26 @@ part 'patient_nationality_request.g.dart';
 
 @JsonSerializable()
 class PatientNationalityRequest {
-   String? nationality;
-   String? nativeLanguage;
-   String? residentialArea;
-   String? currentAddress;
-   String? mobileNumber;
-   String? email;
-   List<String?>? chatToolLink;
-   List<String?>? chatQr;
-   String? patient;
+  String? nationality;
+  String? nativeLanguage;
+  String? residentialArea;
+  String? currentAddress;
+  String? mobileNumber;
+  String? email;
+  List<String?>? chatToolLink;
+  String? chatQrImage;
+  String? patient;
 
   PatientNationalityRequest({
-     this.nationality,
-     this.nativeLanguage,
-     this.residentialArea,
-     this.currentAddress,
-     this.mobileNumber,
-     this.email,
-     this.chatToolLink,
-     this.chatQr,
-     this.patient,
+    this.nationality,
+    this.nativeLanguage,
+    this.residentialArea,
+    this.currentAddress,
+    this.mobileNumber,
+    this.email,
+    this.chatToolLink,
+    this.patient,
+    this.chatQrImage,
   });
 
   factory PatientNationalityRequest.fromJson(Map<String, dynamic> json) {

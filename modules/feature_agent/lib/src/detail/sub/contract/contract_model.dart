@@ -36,18 +36,23 @@ class ContractModel {
       submitData.value = const AsyncData(loading: true);
       String? file;
       if (formGroup.control('uploadFile').value != null) {
-        try {
-          // convert Uint8List to base64
-          FileSelect docFile = formGroup.control('uploadFile').value;
-          String base64Image = base64Encode(docFile.file);
-          FileResponse fileData = await authRepository.uploadFileBase64(
-            base64Image,
-            docFile.filename,
-          );
-          file = fileData.filename;
-        } catch (e) {
-          logger.e("update file test");
-          logger.e(e);
+        FileSelect docFile = formGroup.control('uploadFile').value;
+
+        if (docFile.file != null) {
+          try {
+            // convert Uint8List to base64
+            String base64Image = base64Encode(docFile.file!);
+            FileResponse fileData = await authRepository.uploadFileBase64(
+              base64Image,
+              docFile.filename!,
+            );
+            file = fileData.filename;
+          } catch (e) {
+            logger.e("update file test");
+            logger.e(e);
+          }
+        } else {
+          file = docFile.filename;
         }
       }
       final response =
@@ -69,11 +74,11 @@ class ContractModel {
 
   ValueNotifier<AsyncData<bool>> delete = ValueNotifier(const AsyncData());
 
-  Future<void> deleteContract(List<String> ids) async {
+  Future<void> deleteContractAgent(List<String> ids) async {
     try {
       delete.value = const AsyncData(loading: true);
       for (var id in ids) {
-        await authRepository.deleteContract(id);
+        await authRepository.deleteContractAgent(id);
         contrantData.value = AsyncData(
             data: contrantData.value.data!
               ..removeWhere((element) => element.id == id));

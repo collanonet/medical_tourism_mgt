@@ -1,3 +1,4 @@
+import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
@@ -69,9 +70,9 @@ class _MedicalRecordCompanionSectionState
                                   );
                                 },
                                 children: [
-                                  const Text(
-                                    '同行者',
-                                    style: TextStyle(
+                                  Text(
+                                    '同行者 ${formArray.controls.indexOf(currentForm) + 1}',
+                                    style: const TextStyle(
                                       fontFamily: 'NotoSansJP',
                                       package: 'core_ui',
                                       fontWeight: FontWeight.bold,
@@ -591,11 +592,6 @@ class _MedicalRecordCompanionSectionState
                                       Expanded(
                                         child: ReactiveTextField(
                                           formControlName: 'email',
-                                          keyboardType: TextInputType.number,
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter.allow(
-                                                RegExp(r'[0-9]')),
-                                          ],
                                           decoration: InputDecoration(
                                             label: Text(
                                               'Email',
@@ -741,41 +737,7 @@ class _MedicalRecordCompanionSectionState
                                           package: 'core_ui',
                                         ),
                                       ),
-                                      Container(
-                                        width: 250,
-                                        height: 250,
-                                        padding: EdgeInsets.all(context
-                                            .appTheme.spacing.marginMedium),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: context
-                                                  .appTheme.primaryColor),
-                                          borderRadius: BorderRadius.circular(
-                                              context.appTheme.spacing
-                                                  .borderRadiusMedium),
-                                        ),
-                                        child: ColumnSeparated(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          separatorBuilder:
-                                              (BuildContext context,
-                                                  int index) {
-                                            return SizedBox(
-                                              height: context.appTheme.spacing
-                                                  .marginMedium,
-                                            );
-                                          },
-                                          children: [
-                                            Icon(Icons.copy_all_rounded),
-                                            Text('QRコードをここにドラッグ＆ドロップ'),
-                                            ElevatedButton(
-                                                onPressed: () {},
-                                                child: Text('またはファイルを選択する'))
-                                          ],
-                                        ),
-                                      ),
+                                      qRChatCompanion(currentForm, context),
                                     ],
                                   ),
                                   Text(
@@ -887,13 +849,90 @@ class _MedicalRecordCompanionSectionState
                                           ),
                                           items: [
                                             DropdownMenuItem(
-                                              value: 'medicalGuarantee',
-                                              child: Text('ビザ'),
+                                              value: 'medicalVisa',
+                                              child: Text('医療ビザ'),
                                             ),
                                             DropdownMenuItem(
-                                              value: 'other',
-                                              child: Text('その他（ビザの種類）'),
+                                              value: 'short_term_stay_visa',
+                                              child: Text('短期滞在ビザ'),
                                             ),
+                                            DropdownMenuItem(
+                                              value: 'touristVisa',
+                                              child: Text('観光ビザ'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: 'familyVisitingVisa',
+                                              child: Text('親族訪問ビザ'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: 'businessVisa',
+                                              child: Text('商用ビザ'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: 'studentVisa',
+                                              child: Text('留学ビザ'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: 'workingVisa',
+                                              child: Text('就業ビザ'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value:
+                                                  'engineer_specialist_humanities_international_business_visa',
+                                              child: Text('技術者・人文知識・国際業務ビザ'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: 'spouseVisa',
+                                              child: Text('配偶者ビザ'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: 'long_term_resident_visa',
+                                              child: Text('定住者ビザ'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: 'specifiedSkills',
+                                              child: Text('特定技能ビザ'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: 'culturalActivities',
+                                              child: Text('文化活動ビザ'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: 'religiousVisa',
+                                              child: Text('宗教ビザ'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value:
+                                                  'status_of_residence_for_humanitarian_reasons',
+                                              child: Text('人道上の理由による在留資格'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value: 'specialVisa',
+                                              child: Text('特例ビザ'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value:
+                                                  'intra_company_transferee_visa',
+                                              child: Text('企業内転勤者ビザ'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value:
+                                                  'technical_intern_training_program',
+                                              child: Text('技能実習制度'),
+                                            ),
+                                            DropdownMenuItem(
+                                              value:
+                                                  'special_permanent_resident_visa',
+                                              child: Text('特別永住者ビザ'),
+                                            ),
+                                            // DropdownMenuItem(
+                                            //   value: 'medicalGuarantee',
+                                            //   child: Text('ビザ'),
+                                            // ),
+                                            // DropdownMenuItem(
+                                            //   value: 'other',
+                                            //   child: Text('その他（ビザの種類）'),
+                                            // ),
                                           ],
                                         ),
                                       ),
@@ -962,6 +1001,7 @@ class _MedicalRecordCompanionSectionState
                           'chatToolLink': FormControl<String>(),
                         })
                       ]),
+                      'chatQrImage': FormControl<FileSelect>(),
                       'passportNumber': FormControl<String?>(),
                       'issueDate': FormControl<DateTime>(),
                       'expirationDate': FormControl<DateTime>(),
@@ -992,4 +1032,70 @@ class _MedicalRecordCompanionSectionState
           );
         });
   }
+
+  InkWell qRChatCompanion(FormGroup currentForm, BuildContext context) {
+    final file = currentForm.control('chatQrImage').value as FileSelect?;
+
+    return InkWell(
+      onTap: () {
+        imagePicker().then((value) {
+          currentForm.control('chatQrImage').value = value;
+        });
+      },
+      child: Container(
+        width: 250,
+        height: 250,
+        padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
+        decoration: BoxDecoration(
+          border: Border.all(color: context.appTheme.primaryColor),
+          borderRadius: BorderRadius.circular(
+              context.appTheme.spacing.borderRadiusMedium),
+        ),
+        child: file != null && file.file != null
+            ? Image.memory(
+                file.file!,
+                fit: BoxFit.fill,
+              )
+            : file != null && file.url != null
+                ? Avatar.network(
+                    file.url,
+                    placeholder: const AssetImage(
+                      Images.logoMadical,
+                      package: 'core_ui',
+                    ),
+                    shape: BoxShape.rectangle,
+                    customSize: const Size(250, 250),
+                  )
+                : ColumnSeparated(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      );
+                    },
+                    children: [
+                      Icon(Icons.copy_all_rounded),
+                      Text('QRコードをここにドラッグ＆ドロップ'),
+                      ElevatedButton(
+                          onPressed: () {
+                            imagePicker().then((value) {
+                              currentForm.control('chatQrImage').value = value;
+                            });
+                          },
+                          child: Text('またはファイルを選択する'))
+                    ],
+                  ),
+      ),
+    );
+  }
+}
+
+int getCurrentFormIndex(FormArray formArray, FormGroup currentForm) {
+  for (int i = 0; i < formArray.controls.length; i++) {
+    if (formArray.controls[i] == currentForm) {
+      return i;
+    }
+  }
+  return -1; // Return -1 if the form is not found
 }

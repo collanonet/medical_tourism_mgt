@@ -9,12 +9,7 @@ class Patient {
   DateTime? dateOfBirth;
   int? age;
   bool? gender;
-  // will remove these fields
-  String? familyName;
-  String? middleName;
-  String? firstName;
 
-  // New fields
   String? familyNameRomanized;
   String? middleNameRomanized;
   String? firstNameRomanized;
@@ -42,6 +37,9 @@ class Patient {
   String? businessStaff;
   String? acceptingHospital;
   String? groupSize;
+  String? profile;
+  bool isClosed;
+
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -50,9 +48,6 @@ class Patient {
     this.dateOfBirth,
     this.age,
     this.gender,
-    this.familyName,
-    this.middleName,
-    this.firstName,
     this.familyNameRomanized,
     this.middleNameRomanized,
     this.firstNameRomanized,
@@ -80,6 +75,8 @@ class Patient {
     this.businessStaff,
     this.acceptingHospital,
     this.groupSize,
+    this.profile,
+    this.isClosed = false,
     required this.createdAt,
     required this.updatedAt,
   });

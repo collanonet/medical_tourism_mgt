@@ -57,7 +57,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
                               ReactiveTextField(
-                                formControlName: 'patientName',
+                                formControlName: 'tourName',
                               ),
                             ],
                           ),
@@ -76,7 +76,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
                               ReactiveTextField(
-                                formControlName: 'visa',
+                                formControlName: 'classification',
                               ),
                             ],
                           ),
@@ -89,10 +89,8 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                       children: [
                         InkWell(
                           onTap: () {
-                            final periodFrom =
-                            formGroup.control('period_from');
-                            final periodTo =
-                            formGroup.control('period_to');
+                            final periodFrom = formGroup.control('dateFrom');
+                            final periodTo = formGroup.control('dateTo');
                             final valueDate = periodTo.value ?? DateTime.now();
                             periodFrom.value = DateTime(
                                 valueDate.year, valueDate.month + 1, 1);
@@ -103,8 +101,8 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                             padding: EdgeInsets.all(
                                 context.appTheme.spacing.marginSmall),
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(
-                                    context.appTheme.spacing.borderRadiusMedium),
+                                borderRadius: BorderRadius.circular(context
+                                    .appTheme.spacing.borderRadiusMedium),
                                 border: Border.all(color: Colors.grey)),
                             child: Row(
                               children: [
@@ -114,8 +112,9 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                 ),
                                 Text(
                                   '次月',
-                                  style: context.textTheme.titleMedium?.copyWith(
-                                      color: context.appTheme.primaryColor),
+                                  style: context.textTheme.titleMedium
+                                      ?.copyWith(
+                                          color: context.appTheme.primaryColor),
                                 ),
                               ],
                             ),
@@ -139,7 +138,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                         .appTheme.spacing.marginExtraSmall,
                                   ),
                                   ReactiveDatePicker<DateTime>(
-                                    formControlName: 'period_from',
+                                    formControlName: 'dateFrom',
                                     firstDate: DateTime(1900),
                                     lastDate: DateTime(2100),
                                     builder: (BuildContext context,
@@ -147,7 +146,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                             picker,
                                         Widget? child) {
                                       return ReactiveTextField<DateTime>(
-                                        formControlName: 'period_from',
+                                        formControlName: 'dateFrom',
                                         valueAccessor: DateTimeValueAccessor(
                                           dateTimeFormat:
                                               DateFormat('yyyy/MM/dd'),
@@ -188,7 +187,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                         .appTheme.spacing.marginExtraSmall,
                                   ),
                                   ReactiveDatePicker<DateTime>(
-                                    formControlName: 'period_to',
+                                    formControlName: 'dateTo',
                                     firstDate: DateTime(1900),
                                     lastDate: DateTime(2100),
                                     builder: (BuildContext context,
@@ -196,7 +195,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                             picker,
                                         Widget? child) {
                                       return ReactiveTextField<DateTime>(
-                                        formControlName: 'period_to',
+                                        formControlName: 'dateTo',
                                         valueAccessor: DateTimeValueAccessor(
                                           dateTimeFormat:
                                               DateFormat('yyyy/MM/dd'),
@@ -244,9 +243,17 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                           ),
                         ),
                         SizedBox(width: context.appTheme.spacing.marginMedium),
-                        ElevatedButton(
-                          onPressed: () {},
-                          child: Text('検索'),
+                        ReactiveFormConsumer(
+                          builder: (context, formGroup, _) {
+                            return ElevatedButton(
+                              onPressed: () {
+                                context.read<ProcessChartModel>().fetchItinerary(
+                                  
+                                );
+                              },
+                              child: Text('検索'),
+                            );
+                          },
                         ),
                       ],
                     ),

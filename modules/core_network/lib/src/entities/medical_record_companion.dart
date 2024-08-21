@@ -32,6 +32,7 @@ class MedicalRecordCompanion {
   DateTime? expirationDate;
   String? visaType;
   String medicalRecord;
+  String? chatQrImage;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -59,6 +60,7 @@ class MedicalRecordCompanion {
     this.mobileNumber,
     this.email,
     this.chatToolLink,
+    this.chatQrImage,
     this.passportNumber,
     this.issueDate,
     this.expirationDate,

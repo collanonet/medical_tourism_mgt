@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:core_network/core_network.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
@@ -129,19 +131,19 @@ class AgentBasicInformationModel {
             formGroup.control('basicInformationAgent.pastCasesNumber').value,
         referralCommissions: referralCommissions,
       );
-
+      AgentResponse response;
       if (formGroup.control('basicInformationAgent._id').value != null) {
-        var response = await authRepository.putAgent(
+        response = await authRepository.putAgent(
             formGroup.control('basicInformationAgent._id').value, agentRequest);
         submitAgent.value = AsyncData(data: response);
         agent.value = AsyncData(data: response);
       } else {
-        var response = await authRepository.postAgent(agentRequest);
+        response = await authRepository.postAgent(agentRequest);
         submitAgent.value = AsyncData(data: response);
         agent.value = AsyncData(data: response);
       }
 
-      await createOrUpdateAgentManager(formGroup);
+      await createOrUpdateAgentManager(response.id, formGroup);
       submit.value = const AsyncData(data: true);
       init(id: agent.value.requireData.id, formGroup: formGroup);
     } catch (error) {
@@ -197,8 +199,8 @@ class AgentBasicInformationModel {
         manager.add(
           FormGroup({
             '_id': FormControl<String>(value: element.id),
-            'nameCardDragDrop':
-                FormControl<String>(value: element.nameCardDragDrop),
+            'nameCardDragDrop': FormControl<FileSelect>(
+                value: FileSelect(url: element.nameCardDragDrop)),
             'departmentName':
                 FormControl<String>(value: element.departmentName),
             'fullNameRomanji': FormControl<String>(
@@ -214,7 +216,6 @@ class AgentBasicInformationModel {
               value: element.phoneNumber ?? '',
               validators: [
                 Validators.required,
-                Validators.number,
               ],
             ),
             'email': FormControl<String>(
@@ -232,7 +233,7 @@ class AgentBasicInformationModel {
       manager.add(
         FormGroup({
           '_id': FormControl<String>(),
-          'nameCardDragDrop': FormControl<String>(),
+          'nameCardDragDrop': FormControl<FileSelect>(),
           'departmentName': FormControl<String>(),
           'fullNameRomanji': FormControl<String>(
             validators: [Validators.required],
@@ -261,7 +262,8 @@ class AgentBasicInformationModel {
     }
   }
 
-  Future<void> createOrUpdateAgentManager(FormGroup formGroup) async {
+  Future<void> createOrUpdateAgentManager(
+      String id, FormGroup formGroup) async {
     try {
       agentManager.value = const AsyncData(loading: true);
 
@@ -275,8 +277,27 @@ class AgentBasicInformationModel {
           ));
         });
 
+        String? file;
+        if (element['nameCardDragDrop'] != null) {
+          FileSelect docFile = element['nameCardDragDrop'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await authRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              file = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            file = docFile.url;
+          }
+        }
+
         AgentManagerRequest manager = AgentManagerRequest(
-          nameCardDragDrop: element['nameCardDragDrop'],
+          nameCardDragDrop: file,
           departmentName: element['departmentName'],
           fullNameRomanji: element['fullNameRomanji'],
           fullNameChineseKanjiVietnameseNotation:
@@ -287,7 +308,7 @@ class AgentBasicInformationModel {
           phoneNumber: element['phoneNumber'],
           email: element['email'],
           contactMethods: contactMethods,
-          agentRecord: agent.value.requireData.id,
+          agentRecord: id,
         );
 
         if (element['_id'] != null) {
@@ -307,11 +328,13 @@ class AgentBasicInformationModel {
   ValueNotifier<List<Contact>> contactList = ValueNotifier([
     Contact(value: 'WeChat'),
     Contact(value: 'Line'),
+    Contact(value: 'Telegram'),
+    Contact(value: 'Messenger'),
+    Contact(value: 'WhatsApp'),
   ]);
 }
 
-
-class Contact{
+class Contact {
   String value;
   Contact({required this.value});
 }

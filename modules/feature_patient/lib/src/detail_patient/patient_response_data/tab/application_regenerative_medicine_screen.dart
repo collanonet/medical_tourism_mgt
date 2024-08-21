@@ -1,4 +1,3 @@
-import 'package:auto_route/auto_route.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
@@ -530,7 +529,57 @@ class _ApplicationRegenerativeMedicalScreenState
                       style: context.textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 8),
-                    buttonInfo(formGroup, "medicine"),
+                    ReactiveValueListenableBuilder(
+                        formControlName: 'medicine',
+                        builder: (context, value, _) {
+                          return Row(
+                            children: [
+                              ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    foregroundColor: value.value == true
+                                        ? Colors.white
+                                        : context.appTheme.primaryColor,
+                                    backgroundColor: value.value == true
+                                        ? context.appTheme.primaryColor
+                                        : Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      side: BorderSide(
+                                        color: context.appTheme.primaryColor,
+                                        width: 2,
+                                      ),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    formGroup.control('medicine').value = true;
+                                  },
+                                  child: Text("はい")),
+                              SizedBox(width: 16),
+                              ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                    foregroundColor: value.value == false
+                                        ? Colors.white
+                                        : context.appTheme.primaryColor,
+                                    backgroundColor: value.value == false
+                                        ? context.appTheme.primaryColor
+                                        : Colors.white,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(8),
+                                      side: BorderSide(
+                                        color: context.appTheme.primaryColor,
+                                        width: 2,
+                                      ),
+                                    ),
+                                  ),
+                                  onPressed: () {
+                                    formGroup.control('medicine').value = false;
+                                  },
+                                  child: Text("いいえ")),
+                            ],
+                          );
+                        }),
+
+                    // buttonInfo(formGroup, "medicine"),
                     const SizedBox(height: 8),
                     Text(
                       "あると答えた方は、受けたことのあるメニューをすべて選んでください。",

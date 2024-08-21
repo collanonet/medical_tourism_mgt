@@ -5,6 +5,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -20,8 +21,10 @@ class HotelRegistrationScreen extends StatefulWidget {
 }
 
 class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
+  double _rating = 0;
   @override
   Widget build(BuildContext context) {
+    final formGroup = (ReactiveForm.of(context) as FormGroup);
     return ValueListenableBuilder(
       valueListenable:
           context.watch<HotelRegistrationModel>().submitHotelRegisterData,
@@ -60,7 +63,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                             children: [
                               Expanded(
                                 child: ReactiveTextField(
-                                  formControlName: 'Name_of_facility',
+                                  formControlName: 'accommodationName',
                                   decoration: InputDecoration(
                                     labelText: '施設名',
                                   ),
@@ -72,7 +75,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                               Expanded(
                                 flex: 2,
                                 child: ReactiveTextField(
-                                  formControlName: 'location',
+                                  formControlName: 'address',
                                   decoration: InputDecoration(
                                     labelText: '所在地',
                                   ),
@@ -84,7 +87,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                             children: [
                               Expanded(
                                 child: ReactiveTextField(
-                                  formControlName: 'Person_in_charge_name',
+                                  formControlName: 'contactPersonName',
                                   decoration: InputDecoration(
                                     labelText: '担当者名',
                                   ),
@@ -95,7 +98,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                               ),
                               Expanded(
                                 child: ReactiveTextField(
-                                  formControlName: 'telephone_number',
+                                  formControlName: 'phoneNumber',
                                   decoration: InputDecoration(
                                     labelText: '電話番号',
                                   ),
@@ -106,7 +109,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                               ),
                               Expanded(
                                 child: ReactiveTextField(
-                                  formControlName: '1_night_price',
+                                  formControlName: 'ratePerNight',
                                   decoration: InputDecoration(
                                     labelText: '1泊の料金',
                                   ),
@@ -118,7 +121,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                             children: [
                               Expanded(
                                 child: ReactiveTextField(
-                                  formControlName: 'Accommodation_memo',
+                                  formControlName: 'accommodationMemo',
                                   decoration: InputDecoration(
                                     labelText: '宿泊メモ',
                                   ),
@@ -146,7 +149,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                                           controlAffinity:
                                               ListTileControlAffinity.leading,
                                           contentPadding: EdgeInsets.zero,
-                                          formControlName: 'japanese',
+                                          formControlName: 'isJapanese',
                                           title: const Text('日本語'),
                                         ),
                                       ),
@@ -155,7 +158,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                                           controlAffinity:
                                               ListTileControlAffinity.leading,
                                           contentPadding: EdgeInsets.zero,
-                                          formControlName: 'chinese',
+                                          formControlName: 'isChinese',
                                           title: const Text('中国語'),
                                         ),
                                       ),
@@ -164,7 +167,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                                           controlAffinity:
                                               ListTileControlAffinity.leading,
                                           contentPadding: EdgeInsets.zero,
-                                          formControlName: 'vietnamese',
+                                          formControlName: 'isVietnamese',
                                           title: const Text('ベトナム語'),
                                         ),
                                       ),
@@ -173,7 +176,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                                           controlAffinity:
                                               ListTileControlAffinity.leading,
                                           contentPadding: EdgeInsets.zero,
-                                          formControlName: 'english',
+                                          formControlName: 'isEnglish',
                                           title: const Text('英語'),
                                         ),
                                       ),
@@ -182,7 +185,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                                           controlAffinity:
                                               ListTileControlAffinity.leading,
                                           contentPadding: EdgeInsets.zero,
-                                          formControlName: 'other',
+                                          formControlName: 'isOthers',
                                           title: const Text('その他'),
                                         ),
                                       )
@@ -194,7 +197,7 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                               IntrinsicWidth(
                                 stepWidth: 200,
                                 child: ReactiveTextField(
-                                  formControlName: 'Foreign_language_staff',
+                                  formControlName: 'other',
                                 ),
                               ),
                             ],
@@ -208,26 +211,27 @@ class _HotelRegistrationScreenState extends State<HotelRegistrationScreen> {
                               ),
                               Row(
                                 children: [
-                                  Icon(
-                                    Icons.star,
-                                    color: context.appTheme.primaryColor,
-                                  ),
-                                  Icon(
-                                    Icons.star,
-                                    color: context.appTheme.primaryColor,
-                                  ),
-                                  Icon(
-                                    Icons.star,
-                                    color: context.appTheme.primaryColor,
-                                  ),
-                                  Icon(
-                                    Icons.star,
-                                    color: context.appTheme.primaryColor,
-                                  ),
-                                  Icon(
-                                    Icons.star,
-                                    color: context.appTheme.primaryColor,
-                                  ),
+                                  RatingBar.builder(
+                                    initialRating: _rating,
+                                    minRating: 1,
+                                    allowHalfRating: true,
+                                    unratedColor: Colors.blue[100],
+                                    itemCount: 5,
+                                    itemSize: 30,
+                                    itemPadding: const EdgeInsets.symmetric(
+                                        horizontal: 4.0),
+                                    itemBuilder: (context, _) => const Icon(
+                                      Icons.star,
+                                      color: Colors.blue,
+                                    ),
+                                    onRatingUpdate: (rating) {
+                                      setState(() {
+                                        _rating = rating;
+                                        formGroup.control('evaluation').value = _rating;
+                                      });
+                                    },
+                                    updateOnDrag: true,
+                                  )
                                 ],
                               )
                             ],

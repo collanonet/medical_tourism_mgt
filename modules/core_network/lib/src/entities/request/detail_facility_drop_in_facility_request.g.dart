@@ -9,30 +9,29 @@ part of 'detail_facility_drop_in_facility_request.dart';
 DetailDropInFacilityRequest _$DetailDropInFacilityRequestFromJson(
         Map<String, dynamic> json) =>
     DetailDropInFacilityRequest(
-      personInChargeOfArrangements:
-          json['personInChargeOfArrangements'] as String,
-      facilities: (json['facilities'] as List<dynamic>)
-          .map((e) => Facility.fromJson(e as Map<String, dynamic>))
+      arrangePerson: json['arrangePerson'] as String?,
+      places: (json['places'] as List<dynamic>?)
+          ?.map((e) => Facility.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$DetailDropInFacilityRequestToJson(
         DetailDropInFacilityRequest instance) =>
     <String, dynamic>{
-      'personInChargeOfArrangements': instance.personInChargeOfArrangements,
-      'facilities': instance.facilities,
+      'arrangePerson': instance.arrangePerson,
+      'places': instance.places,
     };
 
 Facility _$FacilityFromJson(Map<String, dynamic> json) => Facility(
-      name: json['name'] as String,
-      location: json['location'] as String,
-      personInChargeName: json['personInChargeName'] as String,
-      telephoneNumber: json['telephoneNumber'] as String,
+      accommodationName: json['accommodationName'] as String?,
+      address: json['address'] as String?,
+      contctPersonName: json['contctPersonName'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
     );
 
 Map<String, dynamic> _$FacilityToJson(Facility instance) => <String, dynamic>{
-      'name': instance.name,
-      'location': instance.location,
-      'personInChargeName': instance.personInChargeName,
-      'telephoneNumber': instance.telephoneNumber,
+      'accommodationName': instance.accommodationName,
+      'address': instance.address,
+      'contctPersonName': instance.contctPersonName,
+      'phoneNumber': instance.phoneNumber,
     };

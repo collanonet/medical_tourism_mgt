@@ -801,4 +801,92 @@ class PatientRepositoryIml extends PatientRepository {
   Future<MedicalPaymentResponse> postMedicalPayment(MedicalPaymentRequest medicalPaymentRequest) {
     return remote.postMedicalPayment(medicalPaymentRequest);
   }
+
+  @override
+  Future<void> closePatientAccount(String id) {
+    return remote.closePatientAccount(id);
+  }
+
+  // web booking v2
+
+
+  @override
+  Future<TreamentResponce> getBookingByPatientId(String patientId) {
+    return remote.getBookingByPatientId(patientId);
+  }
+
+  @override
+  Future<List<DoctorProfileHospitalResponse>> getDoctorsByHospitalId(
+      String hospitalId) {
+    return remote.getDoctorsByHospitalId(hospitalId);
+  }
+
+  @override
+  Future<void> webBookingDeleteReservation(String reservationId) {
+    return remote.webBookingDeleteReservation(reservationId);
+  }
+
+  @override
+  Future<BasicInformationHospitalResponse> webBookingGetHospitalById(
+      String id) {
+    return remote.webBookingGetHospitalById(id);
+  }
+
+  @override
+  Future<Patient> webBookingGetPatientById(String id) {
+    return remote.webBookingGetPatientById(id);
+  }
+
+  @override
+  Future<List<WebBookingMedicalRecordResponse>> webBookingGetReservationAll({
+    String? hospitalName,
+    String? doctor_name,
+    DateTime? reservation_date_from,
+    DateTime? reservation_date_to,
+    bool? inquiryInProgress,
+    bool? reservationConfirmed,
+    String? hospitalId,
+    String? patientId,
+  }) {
+    return remote.webBookingGetReservationAll(
+      hospitalName: hospitalName,
+      doctor_name: doctor_name,
+      reservation_date_from: reservation_date_from,
+      reservation_date_to: reservation_date_to,
+      inquiryInProgress: inquiryInProgress,
+      reservationConfirmed: reservationConfirmed,
+      hospitalId: hospitalId,
+      patientId: patientId,
+    );
+  }
+
+  @override
+  Future<WebBookingMedicalRecordResponse> webBookingGetReservationById(
+      String id) {
+    return remote.webBookingGetReservationById(id);
+  }
+
+  @override
+  Future<WebBookingMedicalRecordResponse> webBookingPostReservation(
+      WebBookingMedicalRecordRequest request) {
+    return remote.webBookingPostReservation(request);
+  }
+
+  @override
+  Future<WebBookingMedicalRecordResponse> webBookingPutReservation(
+      String reservationId, WebBookingMedicalRecordRequest request) {
+    return remote.webBookingPutReservation(reservationId, request);
+  }
+
+  @override
+  Future<List<BasicInformationHospitalResponse>> webBookingSearchHospital(
+      {String? search}) {
+    return remote.webBookingSearchHospital(search: search);
+  }
+
+  @override
+  Future<List<Patient>> webBookingSearchPatients({String? search}) {
+    return remote.webBookingSearchPatients(search: search);
+  }
 }
+

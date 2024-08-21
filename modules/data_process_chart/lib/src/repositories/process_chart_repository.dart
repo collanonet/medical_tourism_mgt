@@ -38,19 +38,29 @@ abstract class ProcessChartRepository {
       DetailFacilityHotelRequest detailFacilityHotelRequest,
     );
 
-    Future<DetailDropInFacilityResponse> getDetailFacilityDropIn();
+    Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn();
 
     Future<DetailDropInFacilityResponse> postDetailFacilityDropIn(
       DetailDropInFacilityRequest detailDropInFacilityRequest,
     );
 
-    Future<DetainHotelRegistationResponse> getDetainlHotelRegistation();
+    Future<List<DetainHotelRegistationResponse>> getDetainlHotelRegistation(
+      { String? accommodationName,
+  //  List<String>? accommodationType,
+    String? area,
+    bool? usageRecord,
+    bool? isJapanese,
+    bool? isEnglish,
+    bool? isVietnamese,
+    bool? isThai,
+    bool? isKorean,
+    bool? isChinese,
+      }
+    );
 
     Future<DetainHotelRegistationResponse> postDetailHotelRegistation(
       DetainHotelRegistationRequest detainHotelRegistationRequest,
     );
-
-    Future<DetailHotelSearchResponse> getDetailHotelSearch();
 
     Future<DetailHotelSearchResponse> postDetialHotelSearch(
       DetailHotelSearchRequest detailHotelSearchRequest,
@@ -80,13 +90,13 @@ abstract class ProcessChartRepository {
       DetailItinerarySimplePickUpAndDropOffRequest detailItinerarySimplePickUpAndDropOffRequest,
     );
 
-    Future<DetailRelatedPartiesResponse> getDetailRelatedParties();
+    Future<List<DetailRelatedPartiesResponse>> getDetailRelatedParties();
 
     Future<DetailRelatedPartiesResponse> postDetailRelatedParties(
       DetailRelatedPartiesRequest detailRelatedPartiesRequest,
     );
 
-    Future<DetailRelatedPartiesBusCompanyResponse> getDetailRelatedPartiesBusCompany();
+    Future<List<DetailRelatedPartiesBusCompanyResponse>> getDetailRelatedPartiesBusCompany();
 
     Future<DetailRelatedPartiesBusCompanyResponse> postDetailRelatedPartiesBusCompany(
       DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest,
@@ -104,7 +114,7 @@ abstract class ProcessChartRepository {
       DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest,
     );
 
-    Future<DetailItineraryResponse> getDetailItinerary();
+    Future<List<DetailItineraryResponse>> getDetailItinerary({String? tourName,String? classification,DateTime? dateFrom,DateTime? dateTo});
 
     Future<DetailItineraryResponse> postDetailItinerary(
       DetailIneraryRequest detailIneraryRequest,

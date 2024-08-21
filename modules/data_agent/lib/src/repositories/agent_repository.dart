@@ -52,7 +52,7 @@ abstract class AgentRepository {
     String filename,
   );
 
-  Future<void> deleteContract(String id);
+  Future<void> deleteContractAgent(String id);
 
   Future<void> deleteEstimateInvoice(String id);
 }

@@ -9,8 +9,8 @@ part of 'detail_hotel_search_request.dart';
 DetailHotelSearchRequest _$DetailHotelSearchRequestFromJson(
         Map<String, dynamic> json) =>
     DetailHotelSearchRequest(
-      name: json['name'] as String?,
-      type: json['type'] as String?,
+      accommodationName: json['accommodationName'] as String?,
+      accommodationType: json['accommodationType'] as String?,
       usageRecord: json['usageRecord'] as String?,
       area: json['area'] as String?,
       supportedLanguage: json['supportedLanguage'] as String?,
@@ -28,8 +28,8 @@ DetailHotelSearchRequest _$DetailHotelSearchRequestFromJson(
 Map<String, dynamic> _$DetailHotelSearchRequestToJson(
         DetailHotelSearchRequest instance) =>
     <String, dynamic>{
-      'name': instance.name,
-      'type': instance.type,
+      'accommodationName': instance.accommodationName,
+      'accommodationType': instance.accommodationType,
       'usageRecord': instance.usageRecord,
       'area': instance.area,
       'supportedLanguage': instance.supportedLanguage,

@@ -1,24 +1,36 @@
-import 'booking_date_request.dart';
+import '../../core_network.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'web_booking_medical_record_request.g.dart';
 
 @JsonSerializable()
 class WebBookingMedicalRecordRequest {
-  String? message;
-  String? medicalInstitutionName;
-  String? doctorName;
-  List<BookingDateRequest> candidateDate;
-  String medicalRecord;
-  String patient;
+  String? patientName;
+  String? patient;
+  String? hospital;
+  String? doctor;
+  List<ProposedDate>? proposedDates;
+  DateTime? reservationConfirmationDate;
+  String? timeZoneConfirmationFrom;
+  String? timeZoneConfirmationTo;
+  List<MessageFrom>? messageFrom;
+  bool? isClosed;
+  DateTime? testCallDate;
+  String? testCallTime;
 
   WebBookingMedicalRecordRequest({
-    this.message,
-    this.medicalInstitutionName,
-    this.doctorName,
-    required this.candidateDate,
-    required this.medicalRecord,
-    required this.patient,
+    this.patientName,
+    this.patient,
+    this.hospital,
+    this.doctor,
+    this.proposedDates,
+    this.reservationConfirmationDate,
+    this.timeZoneConfirmationFrom,
+    this.timeZoneConfirmationTo,
+    this.messageFrom,
+    this.isClosed,
+    this.testCallDate,
+    this.testCallTime,
   });
 
   factory WebBookingMedicalRecordRequest.fromJson(Map<String, dynamic> json) {

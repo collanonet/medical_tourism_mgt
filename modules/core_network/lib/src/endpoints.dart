@@ -17,6 +17,7 @@ class EndPoints {
   static const POST_PATIENTS = '/patients';
   static const PUT_PATIENTS = '/patients';
   static const DELETE_PATIENT = '/patients';
+  static const CLOSE_PATIENT = '/patients/close';
 
   static const GET_PATIENT_NAMES = '/patient-names';
   static const GET_PATIENT_NAMES_BY_PATIENT = '/patient-names/patient-id';
@@ -152,18 +153,18 @@ class EndPoints {
       '/itinerary-simple-interpretor-or-guide';
   static const ITINERARY_SIMPLE_TRANSFER_INPUT =
       '/itinerary-simple-transfer-input';
-  static const DETAIL_FACILITY_HOSPITAL = '/detail-facility-hospital';
+  static const DETAIL_FACILITY_HOSPITAL = '/facility';
   static const DETAIL_FACILITY_DROP_IN_FACILITY =
-      '/detail-facility-drop-in-facility';
-  static const DETAIL_HOTEL_REGISTATION = '/detail-hotel-registation';
-  static const DETAIL_HOTEL_SEARCH = '/detail-hotel-search';
+      '/stopover-facilities';
+  static const DETAIL_HOTEL_REGISTATION = '/hotel';
+  static const DETAIL_HOTEL_SEARCH = '/hotel';
   static const DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER =
-      '/detail-related-parties-guide-or-interpreter';
+      '/guide-interpreter';
   static const DETAIL_RELATED_PARTIES_BUS_COMPANY =
-      '/detail-related-parties-bus-company';
-  static const DETAIL_RELATED_PARTIES_DRIVER = '/detail-related-parties-driver';
+      '/bus-lines';
+  static const DETAIL_RELATED_PARTIES_DRIVER = '/driver';
   static const DETAIL_RELATED_EMERGENCY_CONTACT =
-      '/detail-related-parties-emergecy-contact';
+      '/emergency-contact';
   static const DETAIL_ITINERARY_SIMPLE_VERSION_TITLE =
       '/detail-itinerary-simple-versoin-title';
   static const DETAIL_ITINERARY_SIMPLE_VERSION_EXPANATION =
@@ -172,7 +173,7 @@ class EndPoints {
       '/detail-itineray-simple-version-interpreter';
   static const DETAIL_ITINERARY_SIMPLE_VERAION_PICK_UP =
       '/detail-itinerary-simple-version-pick-up';
-  static const DETAIL_ITINERARY = '/detail-itinerary';
+  static const DETAIL_ITINERARY = '/tour';
 
   static const BASIC_INFORMATION_HOSPITAL = '/basic-information-hospital';
   static const MEDICAL_RECORD_BASIC_INFO_HOSPITAL =
@@ -237,4 +238,9 @@ class EndPoints {
   static const CONTRACT_TEMPLATE_DETAIL_BASIC_INFO = 'contact-template-detail-basic-info';
   static const ESTIMATE_MASTER_REPORT = 'estimate-master-report';
   static const PROSPECTIVE_RANK = 'progressive-rank';
+
+  // Web Booking new
+  static const WEB_BOOKING_HOSPITAL = '/web-booking-hospital';
+  static const WEB_BOOKING_PATIENT = '/web-booking-patient';
+  static const WEB_BOOKING_RESERVATION = '/web-booking-reservation';
 }

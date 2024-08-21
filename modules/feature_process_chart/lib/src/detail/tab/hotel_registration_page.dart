@@ -20,7 +20,7 @@ class HotelRegistrationPage extends StatelessWidget {
           builder: (context, formGroup, child) {
             return Provider(
               create: (context) => GetIt.I<HotelRegistrationModel>()
-                ..fetchHotelregister(formGroup),
+                ..fetchHotelregister(),
                 child: const HotelRegistrationScreen(),
             );
           }),

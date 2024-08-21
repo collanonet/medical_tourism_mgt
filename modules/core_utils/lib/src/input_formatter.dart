@@ -54,7 +54,8 @@ class DateFormatValidator extends TextInputFormatter {
 
 class CustomPhoneFormatter extends TextInputFormatter {
   @override
-  TextEditingValue formatEditUpdate(TextEditingValue oldValue, TextEditingValue newValue) {
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
     String newText = newValue.text;
     if (newText.isEmpty) return newValue.copyWith(text: '+');
 
@@ -64,7 +65,8 @@ class CustomPhoneFormatter extends TextInputFormatter {
     }
 
     // Remove all non-numeric characters except the leading '+'
-    newText = newText.substring(0, 1) + newText.substring(1).replaceAll(RegExp(r'[^0-9]'), '');
+    newText = newText.substring(0, 1) +
+        newText.substring(1).replaceAll(RegExp(r'[^0-9]'), '');
 
     // Apply formatting
     String formattedText = '+';
@@ -79,5 +81,35 @@ class CustomPhoneFormatter extends TextInputFormatter {
       text: formattedText,
       selection: TextSelection.collapsed(offset: formattedText.length),
     );
+  }
+}
+
+class CustomCurrencyFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    if (newValue.text.isEmpty) return newValue;
+
+    final regex = RegExp(r'[^0-9]');
+    final digits = newValue.text.replaceAll(regex, '');
+    final formattedString = _format(digits);
+
+    return TextEditingValue(
+      text: formattedString,
+      selection: TextSelection.collapsed(offset: formattedString.length),
+    );
+  }
+
+  String _format(String digits) {
+    var formattedString = '';
+    for (int i = 0; i < digits.length; i++) {
+      if (i % 3 == 0 && i != 0) {
+        formattedString = ',' + formattedString;
+      }
+      formattedString = digits[digits.length - 1 - i] + formattedString;
+    }
+    return formattedString;
   }
 }

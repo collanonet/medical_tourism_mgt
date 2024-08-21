@@ -1,20 +1,20 @@
-
 import 'package:core_l10n/l10n.dart';
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'popup/summary_medical_oversea_data_screen.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:reactive_forms/reactive_forms.dart';
+
 import 'overseas_medical_data_model.dart';
 import 'popup/create_medical_oversea_data_with_file_form.dart';
 import 'popup/create_medical_oversea_data_with_file_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:reactive_forms/reactive_forms.dart';
-
 import 'popup/create_medical_oversea_data_with_url_form.dart';
 import 'popup/create_medical_oversea_data_with_url_screen.dart';
 import 'popup/detail_medical_oversea_data/detail_medical_oversea_data_screen.dart';
+import 'popup/summary_medical_oversea_data_screen.dart';
 
 class OverseasMedicalDataScreen extends StatefulWidget {
   const OverseasMedicalDataScreen({super.key});
@@ -209,7 +209,8 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                       value.requireData[index];
                                   return InkWell(
                                     onTap: () {
-                                      showDetailMedicalOverseaDialog(context,data);
+                                      showDetailMedicalOverseaDialog(
+                                          context, data);
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
@@ -349,20 +350,61 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: const Text(
-                                  '削除する',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
+                              ValueListenableBuilder(
+                                  valueListenable: context
+                                      .watch<OverseasMedicalDataModel>()
+                                      .delete,
+                                  builder: (context, d, child) {
+                                    return ElevatedButton(
+                                        onPressed: !d.loading
+                                            ? () async {
+                                                try {
+                                                  List<String> mongoseIds =
+                                                      ids.map((e) {
+                                                    return value
+                                                        .requireData[
+                                                            int.parse(e)]
+                                                        .id;
+                                                  }).toList();
+                                                  await context
+                                                      .read<
+                                                          OverseasMedicalDataModel>()
+                                                      .deleteMedicalRecordOverseaData(
+                                                          mongoseIds);
+                                                  ids = [];
+                                                } catch (e) {
+                                                  snackBarWidget(message: '$e');
+                                                }
+                                              }
+                                            : null,
+                                        child: WithLoadingButton(
+                                          isLoading: d.loading,
+                                          child: const Text(
+                                            '削除する',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ));
+                                  }),
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () async {
+                                  var list = ids.map((e) {
+                                    return value.requireData[int.parse(e)];
+                                  }).toList();
+                                  showDialog(
+                                      context: context,
+                                      builder: (_) => AlertDialog(
+                                            content: ViewAndPrintFileWidget(list
+                                                .map((e) =>
+                                                    "https://medical-tourism-api-dev-collabonet.pixelplatforms.com/files/" +
+                                                    e.qrCode.toString())
+                                                .toList()),
+                                          ));
+                                },
                                 child: const Text(
                                   '印刷する',
                                   style: TextStyle(
@@ -434,9 +476,8 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                   context.l10n.mgsFieldRequired,
             },
             child: ReactiveFormBuilder(
-              form: () =>
-                  createMedicalOverseaDataWithFileForm(file)
-                    ..markAllAsTouched(),
+              form: () => createMedicalOverseaDataWithFileForm(file)
+                ..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const CreateMedicalOverseaDataWithFileScreen();
               },
@@ -462,13 +503,16 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
     );
   }
 
-  void showDetailMedicalOverseaDialog(BuildContext context, MedicalRecordOverseaData data) {
+  void showDetailMedicalOverseaDialog(
+      BuildContext context, MedicalRecordOverseaData data) {
     showDialog(
       context: context,
       builder: (_) => Provider.value(
         value: context.read<OverseasMedicalDataModel>(),
         child: AlertDialog(
-            content: DetailMedicalOverseaDataScreen(medicalRecordOverseaData: data,),
+            content: DetailMedicalOverseaDataScreen(
+              medicalRecordOverseaData: data,
+            ),
             actions: [
               OutlinedButton(
                 onPressed: () {

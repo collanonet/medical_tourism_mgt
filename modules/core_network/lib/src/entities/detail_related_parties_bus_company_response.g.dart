@@ -11,17 +11,18 @@ DetailRelatedPartiesBusCompanyResponse
             Map<String, dynamic> json) =>
         DetailRelatedPartiesBusCompanyResponse(
           id: json['_id'] as String?,
-          personInChargeOfArrangements:
-              json['personInChargeOfArrangements'] as String?,
+          arrangePerson: json['arrangePerson'] as String?,
           busCompanyName: json['busCompanyName'] as String?,
-          manager: json['manager'] as String?,
+          contactPerson: json['contactPerson'] as String?,
+          tour: json['tour'] as String?,
         );
 
 Map<String, dynamic> _$DetailRelatedPartiesBusCompanyResponseToJson(
         DetailRelatedPartiesBusCompanyResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
-      'personInChargeOfArrangements': instance.personInChargeOfArrangements,
+      'arrangePerson': instance.arrangePerson,
       'busCompanyName': instance.busCompanyName,
-      'manager': instance.manager,
+      'contactPerson': instance.contactPerson,
+      'tour': instance.tour,
     };

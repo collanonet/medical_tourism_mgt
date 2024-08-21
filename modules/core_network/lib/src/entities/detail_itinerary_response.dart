@@ -5,21 +5,21 @@ part 'detail_itinerary_response.g.dart';
 class DetailItineraryResponse {
   @JsonKey(name: '_id')
   final String? id;
-  List<ItineraryPatient>? patientNames;
+  List<String>? patient;
   String? tourName;
-  String? numberOfPeople;
-  String? group;
-  String? type;
-  List<Day>? days;
+  int? peopleNumber;
+  int? group;
+  String? classification;
+  List<Day>? day;
 
   DetailItineraryResponse({
     required this.id,
-     this.patientNames,
+     this.patient,
      this.tourName,
-     this.numberOfPeople,
-     this.type,
+     this.peopleNumber,
+     this.classification,
      this.group,
-     this.days,
+     this.day,
   });
 
   factory DetailItineraryResponse.fromJson(Map<String,dynamic> json){

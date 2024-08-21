@@ -10,16 +10,17 @@ DetailRelatedPartiesBusCompanyRequest
     _$DetailRelatedPartiesBusCompanyRequestFromJson(
             Map<String, dynamic> json) =>
         DetailRelatedPartiesBusCompanyRequest(
-          personInChargeOfArrangements:
-              json['personInChargeOfArrangements'] as String?,
+          arrangePerson: json['arrangePerson'] as String?,
           busCompanyName: json['busCompanyName'] as String?,
-          manager: json['manager'] as String?,
+          contactPerson: json['contactPerson'] as String?,
+          tour: json['tour'] as String?,
         );
 
 Map<String, dynamic> _$DetailRelatedPartiesBusCompanyRequestToJson(
         DetailRelatedPartiesBusCompanyRequest instance) =>
     <String, dynamic>{
-      'personInChargeOfArrangements': instance.personInChargeOfArrangements,
+      'arrangePerson': instance.arrangePerson,
       'busCompanyName': instance.busCompanyName,
-      'manager': instance.manager,
+      'contactPerson': instance.contactPerson,
+      'tour': instance.tour,
     };

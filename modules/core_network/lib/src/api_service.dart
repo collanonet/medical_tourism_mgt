@@ -761,7 +761,7 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_FACILITY_DROP_IN_FACILITY)
-  Future<DetailDropInFacilityResponse> getDetailFacilityDropIn();
+  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn();
 
   @POST(EndPoints.DETAIL_FACILITY_DROP_IN_FACILITY)
   Future<DetailDropInFacilityResponse> postDetailFacilityDropIn(
@@ -769,15 +769,23 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_HOTEL_REGISTATION)
-  Future<DetainHotelRegistationResponse> getDetainlHotelRegistation();
+  Future<List<DetainHotelRegistationResponse>> getDetainlHotelRegistation({
+    @Query('accommodationName') String? accommodationName,
+    //  @Query('accommodationType') List<String>? accommodationType,
+    @Query('usageRecord') bool? usageRecord,
+    @Query('area') String? area,
+    @Query('isJapanese') bool? isJapanese,
+    @Query('isChinese') bool? isChinese,
+    @Query('isVietnamese') bool? isVietnamese,
+    @Query('isEnglish') bool? isEnglish,
+    @Query('isKorean') bool? isKorean,
+    @Query('isThai') bool? isThai,
+  });
 
   @POST(EndPoints.DETAIL_HOTEL_REGISTATION)
   Future<DetainHotelRegistationResponse> postDetailHotelRegistation(
     @Body() DetainHotelRegistationRequest detainHotelRegistationRequest,
   );
-
-  @GET(EndPoints.DETAIL_HOTEL_SEARCH)
-  Future<DetailHotelSearchResponse> getDetailHotelSearch();
 
   @POST(EndPoints.DETAIL_HOTEL_SEARCH)
   Future<DetailHotelSearchResponse> postDetialHotelSearch(
@@ -785,7 +793,8 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER)
-  Future<DetailRelatedPartiesResponse> getRelatedPartiesGuideOrInterpreter();
+  Future<List<DetailRelatedPartiesResponse>>
+      getRelatedPartiesGuideOrInterpreter();
 
   @POST(EndPoints.DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER)
   Future<DetailRelatedPartiesResponse> postRelatedPartiesGuideOrInterpreter(
@@ -793,7 +802,7 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_RELATED_PARTIES_BUS_COMPANY)
-  Future<DetailRelatedPartiesBusCompanyResponse> getRelatedPartiesBusCompany();
+  Future<List<DetailRelatedPartiesBusCompanyResponse>> getRelatedPartiesBusCompany();
 
   @POST(EndPoints.DETAIL_RELATED_PARTIES_BUS_COMPANY)
   Future<DetailRelatedPartiesBusCompanyResponse> postRelatedPartiesBusCompany(
@@ -866,7 +875,12 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_ITINERARY)
-  Future<DetailItineraryResponse> getDetailitinerary();
+  Future<List<DetailItineraryResponse>> getDetailitinerary({
+    @Query('tourName') String? tourName,
+    @Query('classification') String? classification,
+    @Query('dateFrom') DateTime? dateFrom,
+    @Query('dateTo') DateTime? dateTo,
+  });
 
   @POST(EndPoints.DETAIL_ITINERARY)
   Future<DetailItineraryResponse> postDetailItinerary(
@@ -1014,7 +1028,10 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.GET_HOSPITAL)
-  Future<List<BasicInformationHospitalResponse>> getHospitals();
+  Future<List<BasicInformationHospitalResponse>> getHospitals({
+    @Query('page') int? page,
+    @Query('pageSize') int? pageSize,
+  });
 
   /// end get basic information of hospital C3 Page
 
@@ -1119,6 +1136,11 @@ abstract class ApiService {
   @POST(EndPoints.CONTRANT_AGENT)
   Future<ContrantAgentResponse> postContractAgent(
     @Body() ContrantAgentRequest contrantAgentRequest,
+  );
+
+  @DELETE('${EndPoints.CONTRANT_AGENT}/{id}')
+  Future<ContrantAgentResponse> deleteContractAgent(
+    @Path('id') String id,
   );
 
   @GET('${EndPoints.ESTIMATE_INVOICE}/{id}')
@@ -1267,6 +1289,79 @@ abstract class ApiService {
     @Path('id') required String id,
     @Body() required TreatmentTeleMenuRequest treatmentTeleMenuRequest,
   });
+
+  @GET('${EndPoints.CLOSE_PATIENT}/{id}')
+  Future<void> closePatientAccount(
+    @Path('id') String id,
+  );
+
+  //WEB_BOOKING_HOSPITAL
+  @GET('${EndPoints.WEB_BOOKING_HOSPITAL}/get-by-hospital-id/{id}')
+  Future<BasicInformationHospitalResponse> webBookingGetHospitalById(
+    @Path('id') String hospitalId,
+  );
+
+  @GET('${EndPoints.WEB_BOOKING_HOSPITAL}/search')
+  Future<List<BasicInformationHospitalResponse>> webBookingSearchHospital({
+    @Query('search') String? search,
+  });
+
+  @GET('${EndPoints.WEB_BOOKING_HOSPITAL}/{hospitalId}/doctors')
+  Future<List<DoctorProfileHospitalResponse>> getDoctorsByHospitalId(
+    @Path('hospitalId') String hospitalId,
+  );
+
+  //WEB_BOOKING_PATIENT
+
+  @GET('${EndPoints.WEB_BOOKING_PATIENT}/get-by-patient-id/{id}')
+  Future<Patient> webBookingGetPatientById(
+    @Path('id') String patientId,
+  );
+
+  @GET('${EndPoints.WEB_BOOKING_PATIENT}/search')
+  Future<List<Patient>> webBookingSearchPatients({
+    @Query('search') String? search,
+  });
+
+  @GET('${EndPoints.WEB_BOOKING_PATIENT}/{patientId}/booking')
+  Future<TreamentResponce> getBookingByPatientId(
+    @Path('patientId') String patientId,
+  );
+
+  //WEB_BOOKING_RESERVATION
+
+  @GET(EndPoints.WEB_BOOKING_RESERVATION)
+  Future<List<WebBookingMedicalRecordResponse>> webBookingGetReservationAll({
+    @Query('hospitalName') String? hospitalName,
+    @Query('doctor_name') String? doctor_name,
+    @Query('reservation_date_from') DateTime? reservation_date_from,
+    @Query('reservation_date_to') DateTime? reservation_date_to,
+    @Query('inquiryInProgress') bool? inquiryInProgress,
+    @Query('reservationConfirmed') bool? reservationConfirmed,
+    @Query('hospital') String? hospitalId,
+    @Query('patient') String? patientId,
+  });
+
+  @GET('${EndPoints.WEB_BOOKING_RESERVATION}/{id}')
+  Future<WebBookingMedicalRecordResponse> webBookingGetReservationById(
+    @Path('id') String reservationId,
+  );
+
+  @POST(EndPoints.WEB_BOOKING_RESERVATION)
+  Future<WebBookingMedicalRecordResponse> webBookingPostReservation(
+    @Body() WebBookingMedicalRecordRequest webBookingMedicalRecordRequest,
+  );
+
+  @PUT('${EndPoints.WEB_BOOKING_RESERVATION}/{id}')
+  Future<WebBookingMedicalRecordResponse> webBookingPutReservation(
+    @Path('id') String reservationId,
+    @Body() WebBookingMedicalRecordRequest webBookingMedicalRecordRequest,
+  );
+
+  @DELETE('${EndPoints.WEB_BOOKING_RESERVATION}/{id}')
+  Future<void> webBookingDeleteReservation(
+    @Path('id') String reservationId,
+  );
 }
 
 extension ApiServiceExts on ApiService {

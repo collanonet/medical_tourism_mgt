@@ -1,3 +1,4 @@
+import 'package:core_network/core_network.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup formBasicInformation() {
@@ -17,7 +18,6 @@ FormGroup formBasicInformation() {
       'phoneNumber': FormControl<String>(
         validators: [
           Validators.required,
-          //Validators.number,
         ],
       ),
       'transactionStartDate': FormControl<DateTime>(
@@ -38,7 +38,7 @@ FormGroup formBasicInformation() {
     'manager': FormArray([
       FormGroup({
         '_id': FormControl<String>(),
-        'nameCardDragDrop': FormControl<String>(),
+        'nameCardDragDrop': FormControl<FileSelect>(),
         'departmentName': FormControl<String>(),
         'fullNameRomanji': FormControl<String>(
           validators: [Validators.required],
@@ -49,7 +49,6 @@ FormGroup formBasicInformation() {
         'phoneNumber': FormControl<String>(
           validators: [
             Validators.required,
-            Validators.number,
           ],
         ),
         'email': FormControl<String>(

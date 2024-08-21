@@ -20,14 +20,14 @@ class Task {
   String? placeName;
   String? timeFrom;
   String? timeTo;
-  String? traffic;
+  String? transportation;
   String? itinerary;
 
   Task({
      this.placeName,
      this.timeFrom,
      this.timeTo,
-     this.traffic,
+     this.transportation,
      this.itinerary,
   });
 
@@ -44,9 +44,9 @@ class Task {
 
 @JsonSerializable()
 class Group {
-  List<Task>? tasks;
+  List<Task>? task;
 
-  Group({ this.tasks});
+  Group({ this.task});
  
  factory Group.fromJson(Map<String,dynamic> json){
   return _$GroupFromJson(json);
@@ -62,21 +62,17 @@ class Group {
 @JsonSerializable()
 class Day {
   String? date;
- bool? morning;
-  bool? noon;
-  bool? evening;
+List<bool>? meals;
   String? placeName;
   String? accommodation;
-  List<Group>? group;
+  List<Group>? groups;
 
   Day({
      this.date,
-     this.morning,
-     this.noon,
-     this.evening,
+     this.meals,
      this.placeName,
      this.accommodation,
-     this.group,
+     this.groups,
   });
 
   factory Day.fromJson(Map<String,dynamic> json){

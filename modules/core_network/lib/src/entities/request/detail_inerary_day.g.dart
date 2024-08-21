@@ -6,16 +6,6 @@ part of 'detail_inerary_day.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-DayList _$DayListFromJson(Map<String, dynamic> json) => DayList(
-      days: (json['days'] as List<dynamic>?)
-          ?.map((e) => Day.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$DayListToJson(DayList instance) => <String, dynamic>{
-      'days': instance.days,
-    };
-
 Day _$DayFromJson(Map<String, dynamic> json) => Day(
       date: json['date'] as String? ?? '',
       morning: json['morning'] as bool?,
@@ -23,9 +13,9 @@ Day _$DayFromJson(Map<String, dynamic> json) => Day(
       evening: json['evening'] as bool?,
       placeName: json['placeName'] as String? ?? '',
       accommodation: json['accommodation'] as String? ?? '',
-      groupList: json['groupList'] == null
+      groups: json['groups'] == null
           ? null
-          : GroupList.fromJson(json['groupList'] as Map<String, dynamic>),
+          : GroupList.fromJson(json['groups'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$DayToJson(Day instance) => <String, dynamic>{
@@ -35,7 +25,7 @@ Map<String, dynamic> _$DayToJson(Day instance) => <String, dynamic>{
       'evening': instance.evening,
       'placeName': instance.placeName,
       'accommodation': instance.accommodation,
-      'groupList': instance.groupList,
+      'groups': instance.groups,
     };
 
 GroupList _$GroupListFromJson(Map<String, dynamic> json) => GroupList(
@@ -49,30 +39,30 @@ Map<String, dynamic> _$GroupListToJson(GroupList instance) => <String, dynamic>{
     };
 
 Group _$GroupFromJson(Map<String, dynamic> json) => Group(
-      taskList: json['taskList'] == null
+      task: json['task'] == null
           ? null
-          : TaskList.fromJson(json['taskList'] as Map<String, dynamic>),
+          : TaskList.fromJson(json['task'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
-      'taskList': instance.taskList,
+      'task': instance.task,
     };
 
 TaskList _$TaskListFromJson(Map<String, dynamic> json) => TaskList(
-      tasks: (json['tasks'] as List<dynamic>?)
+      task: (json['task'] as List<dynamic>?)
           ?.map((e) => Task.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$TaskListToJson(TaskList instance) => <String, dynamic>{
-      'tasks': instance.tasks,
+      'task': instance.task,
     };
 
 Task _$TaskFromJson(Map<String, dynamic> json) => Task(
       placeName: json['placeName'] as String? ?? '',
       timeFrom: json['timeFrom'] as String? ?? '',
       timeTo: json['timeTo'] as String? ?? '',
-      traffic: json['traffic'] as String? ?? '',
+      transportation: json['transportation'] as String? ?? '',
       itinerary: json['itinerary'] as String? ?? '',
     );
 
@@ -80,6 +70,6 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
       'placeName': instance.placeName,
       'timeFrom': instance.timeFrom,
       'timeTo': instance.timeTo,
-      'traffic': instance.traffic,
+      'transportation': instance.transportation,
       'itinerary': instance.itinerary,
     };

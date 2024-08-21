@@ -2,10 +2,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -147,6 +144,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           ),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Expanded(
                                 child: ReactiveTextField(
@@ -165,10 +163,6 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               ),
                               ElevatedButton(
                                   onPressed: () async {},
-                                  style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(20))),
                                   child: const Text('QR コードを生成'))
                             ],
                           ),
@@ -644,7 +638,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                                 ),
                                               ),
                                               IntrinsicWidth(
-                                                stepWidth: 200,
+                                                stepWidth: 120,
                                                 child: ReactiveTextField(
                                                   formControlName: 'languages',
                                                   decoration:
@@ -681,7 +675,6 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                               child: ReactiveRadioListTile(
                                                 formControlName: 'onlineCheck',
                                                 value: '可',
-                                                onChanged: (value) {},
                                                 title: Text(
                                                   "可",
                                                   style: context
@@ -693,7 +686,6 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                               child: ReactiveRadioListTile(
                                                 formControlName: 'onlineCheck',
                                                 value: '不可',
-                                                onChanged: (value) {},
                                                 title: Text(
                                                   "不可",
                                                   style: context
@@ -765,17 +757,17 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                   const Text(
                                     '画像データの提出方法', //
                                   ),
-                                  RowSeparated(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    separatorBuilder:
-                                        (BuildContext context, int index) {
-                                      return SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      );
-                                    },
+                                  Wrap(
+                                    // crossAxisAlignment:
+                                    //     CrossAxisAlignment.start,
+                                    // mainAxisAlignment: MainAxisAlignment.start,
+                                    // separatorBuilder:
+                                    //     (BuildContext context, int index) {
+                                    //   return SizedBox(
+                                    //     width: context
+                                    //         .appTheme.spacing.marginMedium,
+                                    //   );
+                                    // },
                                     children: <Widget>[
                                       IntrinsicWidth(
                                         child: ReactiveCheckboxListTile(
@@ -885,205 +877,174 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           ),
                           SizedBox(
                               height: context.appTheme.spacing.marginMedium),
-                          Row(
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
                             crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Column(
-                                mainAxisSize: MainAxisSize.max,
+                              const Text(
+                                '所属学会', //
+                              ),
+                              RowSeparated(
                                 crossAxisAlignment: CrossAxisAlignment.start,
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  const Text(
-                                    '所属学会', //
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return SizedBox(
+                                    width:
+                                        context.appTheme.spacing.marginMedium,
+                                  );
+                                },
+                                children: <Widget>[
+                                  IntrinsicWidth(
+                                    child: ReactiveCheckboxListTile(
+                                      checkboxShape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      contentPadding: EdgeInsets.zero,
+                                      formControlName: 'jmip',
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      onChanged: (value) {
+                                        formGroup.control('jmip').value =
+                                            value.value == true;
+                                      },
+                                      title: Text('JMIP',
+                                          style: context.textTheme.labelLarge),
+                                    ),
                                   ),
-                                  RowSeparated(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    separatorBuilder:
-                                        (BuildContext context, int index) {
-                                      return SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      );
-                                    },
-                                    children: <Widget>[
-                                      IntrinsicWidth(
-                                        child: ReactiveCheckboxListTile(
-                                          checkboxShape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5)),
-                                          contentPadding: EdgeInsets.zero,
-                                          formControlName: 'jmip',
-                                          controlAffinity:
-                                              ListTileControlAffinity.leading,
-                                          onChanged: (value) {
-                                            formGroup.control('jmip').value =
-                                                value.value == true;
-                                          },
-                                          title: Text('JMIP',
-                                              style:
-                                                  context.textTheme.labelLarge),
-                                        ),
-                                      ),
-                                      IntrinsicWidth(
-                                        child: ReactiveCheckboxListTile(
-                                          checkboxShape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5)),
-                                          contentPadding: EdgeInsets.zero,
-                                          formControlName: 'jci',
-                                          controlAffinity:
-                                              ListTileControlAffinity.leading,
-                                          onChanged: (value) {
-                                            formGroup.control('jci').value =
-                                                value.value == true;
-                                          },
-                                          title: Text('JCI',
-                                              style:
-                                                  context.textTheme.labelLarge),
-                                        ),
-                                      ),
-                                      IntrinsicWidth(
-                                        child: ReactiveCheckboxListTile(
-                                          checkboxShape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5)),
-                                          contentPadding: EdgeInsets.zero,
-                                          formControlName: 'jih',
-                                          controlAffinity:
-                                              ListTileControlAffinity.leading,
-                                          onChanged: (value) {
-                                            formGroup.control('jih').value =
-                                                value.value == true;
-                                          },
-                                          title: Text('JIH',
-                                              style:
-                                                  context.textTheme.labelLarge),
-                                        ),
-                                      ),
-                                    ],
+                                  IntrinsicWidth(
+                                    child: ReactiveCheckboxListTile(
+                                      checkboxShape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      contentPadding: EdgeInsets.zero,
+                                      formControlName: 'jci',
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      onChanged: (value) {
+                                        formGroup.control('jci').value =
+                                            value.value == true;
+                                      },
+                                      title: Text('JCI',
+                                          style: context.textTheme.labelLarge),
+                                    ),
                                   ),
-                                  RowSeparated(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    separatorBuilder:
-                                        (BuildContext context, int index) {
-                                      return SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      );
-                                    },
-                                    children: <Widget>[
-                                      IntrinsicWidth(
-                                        child: ReactiveCheckboxListTile(
-                                          checkboxShape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5)),
-                                          contentPadding: EdgeInsets.zero,
-                                          formControlName: 'ningenDoctor',
-                                          controlAffinity:
-                                              ListTileControlAffinity.leading,
-                                          onChanged: (value) {
-                                            formGroup
-                                                .control('ningenDoctor')
-                                                .value = value.value == true;
-                                          },
-                                          title: Text('日本人間ドック学会',
-                                              style:
-                                                  context.textTheme.labelLarge),
-                                        ),
-                                      ),
-                                      IntrinsicWidth(
-                                        child: ReactiveCheckboxListTile(
-                                          checkboxShape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5)),
-                                          contentPadding: EdgeInsets.zero,
-                                          formControlName: 'japanHealth',
-                                          controlAffinity:
-                                              ListTileControlAffinity.leading,
-                                          onChanged: (value) {
-                                            formGroup
-                                                .control('japanHealth')
-                                                .value = value.value == true;
-                                          },
-                                          title: Text('日本健診協会',
-                                              style:
-                                                  context.textTheme.labelLarge),
-                                        ),
-                                      ),
-                                      IntrinsicWidth(
-                                        child: ReactiveCheckboxListTile(
-                                          checkboxShape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5)),
-                                          contentPadding: EdgeInsets.zero,
-                                          formControlName:
-                                              'societyRorRegenerativeMedicine',
-                                          controlAffinity:
-                                              ListTileControlAffinity.leading,
-                                          onChanged: (value) {
-                                            formGroup
-                                                .control(
-                                                    'societyRorRegenerativeMedicine')
-                                                .value = value.value == true;
-                                          },
-                                          title: Text('再生医療学会',
-                                              style:
-                                                  context.textTheme.labelLarge),
-                                        ),
-                                      ),
-                                      IntrinsicWidth(
-                                        child: ReactiveCheckboxListTile(
-                                          checkboxShape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5)),
-                                          contentPadding: EdgeInsets.zero,
-                                          formControlName:
-                                              'osakaPrefecturalBase',
-                                          controlAffinity:
-                                              ListTileControlAffinity.leading,
-                                          onChanged: (value) {
-                                            formGroup
-                                                .control('osakaPrefecturalBase')
-                                                .value = value.value == true;
-                                          },
-                                          title: Text('大阪府外国人患者受入れ拠点医療機関',
-                                              style:
-                                                  context.textTheme.labelLarge),
-                                        ),
-                                      ),
-                                      IntrinsicWidth(
-                                        child: ReactiveCheckboxListTile(
-                                          checkboxShape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(5)),
-                                          contentPadding: EdgeInsets.zero,
-                                          formControlName: 'certified',
-                                          controlAffinity:
-                                              ListTileControlAffinity.leading,
-                                          onChanged: (value) {
-                                            formGroup
-                                                .control('certified')
-                                                .value = value.value == true;
-                                          },
-                                          title: Text('日本総合健診医学会認定',
-                                              style:
-                                                  context.textTheme.labelLarge),
-                                        ),
-                                      ),
-                                    ],
+                                  IntrinsicWidth(
+                                    child: ReactiveCheckboxListTile(
+                                      checkboxShape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      contentPadding: EdgeInsets.zero,
+                                      formControlName: 'jih',
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      onChanged: (value) {
+                                        formGroup.control('jih').value =
+                                            value.value == true;
+                                      },
+                                      title: Text('JIH',
+                                          style: context.textTheme.labelLarge),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Wrap(
+                                children: <Widget>[
+                                  IntrinsicWidth(
+                                    child: ReactiveCheckboxListTile(
+                                      checkboxShape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      contentPadding: EdgeInsets.zero,
+                                      formControlName: 'ningenDoctor',
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      onChanged: (value) {
+                                        formGroup
+                                            .control('ningenDoctor')
+                                            .value = value.value == true;
+                                      },
+                                      title: Text('日本人間ドック学会',
+                                          style: context.textTheme.labelLarge),
+                                    ),
+                                  ),
+                                  IntrinsicWidth(
+                                    child: ReactiveCheckboxListTile(
+                                      checkboxShape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      contentPadding: EdgeInsets.zero,
+                                      formControlName: 'japanHealth',
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      onChanged: (value) {
+                                        formGroup.control('japanHealth').value =
+                                            value.value == true;
+                                      },
+                                      title: Text('日本健診協会',
+                                          style: context.textTheme.labelLarge),
+                                    ),
+                                  ),
+                                  IntrinsicWidth(
+                                    child: ReactiveCheckboxListTile(
+                                      checkboxShape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      contentPadding: EdgeInsets.zero,
+                                      formControlName:
+                                          'societyRorRegenerativeMedicine',
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      onChanged: (value) {
+                                        formGroup
+                                            .control(
+                                                'societyRorRegenerativeMedicine')
+                                            .value = value.value == true;
+                                      },
+                                      title: Text('再生医療学会',
+                                          style: context.textTheme.labelLarge),
+                                    ),
+                                  ),
+                                  IntrinsicWidth(
+                                    child: ReactiveCheckboxListTile(
+                                      checkboxShape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      contentPadding: EdgeInsets.zero,
+                                      formControlName: 'osakaPrefecturalBase',
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      onChanged: (value) {
+                                        formGroup
+                                            .control('osakaPrefecturalBase')
+                                            .value = value.value == true;
+                                      },
+                                      title: Text('大阪府外国人患者受入れ拠点医療機関',
+                                          style: context.textTheme.labelLarge),
+                                    ),
+                                  ),
+                                  IntrinsicWidth(
+                                    child: ReactiveCheckboxListTile(
+                                      checkboxShape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5)),
+                                      contentPadding: EdgeInsets.zero,
+                                      formControlName: 'certified',
+                                      controlAffinity:
+                                          ListTileControlAffinity.leading,
+                                      onChanged: (value) {
+                                        formGroup.control('certified').value =
+                                            value.value == true;
+                                      },
+                                      title: Text('日本総合健診医学会認定',
+                                          style: context.textTheme.labelLarge),
+                                    ),
                                   ),
                                 ],
                               ),
                             ],
                           ),
-                          // section open and close hours
-
-                          // add field meno
                         ],
                       ),
                     ),
@@ -1102,7 +1063,21 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           Row(
                             children: [
                               IntrinsicWidth(
-                                stepWidth: 200,
+                                stepWidth: 150,
+                                child: const Text(
+                                  '部門',
+                                  style: TextStyle(
+                                    fontFamily: 'NotoSansJP',
+                                    package: 'core_ui',
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: context.appTheme.spacing.marginMedium,
+                              ),
+                              IntrinsicWidth(
+                                stepWidth: 150,
                                 child: const Text(
                                   '診療時間',
                                   style: TextStyle(
@@ -1116,7 +1091,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: boxText(
                                   context,
                                   '月',
@@ -1128,7 +1103,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: boxText(
                                   context,
                                   '火',
@@ -1140,7 +1115,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: boxText(
                                   context,
                                   '水',
@@ -1152,7 +1127,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: boxText(
                                   context,
                                   '木',
@@ -1164,7 +1139,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: boxText(
                                   context,
                                   '金',
@@ -1176,7 +1151,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: boxText(
                                   context,
                                   '土',
@@ -1188,7 +1163,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: boxText(
                                   context,
                                   '日',
@@ -1204,7 +1179,16 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           Row(
                             children: [
                               IntrinsicWidth(
-                                stepWidth: 200,
+                                stepWidth: 150,
+                                child: ReactiveTextField(
+                                  formControlName: 'department1',
+                                ),
+                              ),
+                              SizedBox(
+                                width: context.appTheme.spacing.marginMedium,
+                              ),
+                              IntrinsicWidth(
+                                stepWidth: 150,
                                 child: ReactiveTextField(
                                   formControlName: 'shift1',
                                 ),
@@ -1213,7 +1197,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Mon',
                                   items: [
@@ -1232,7 +1216,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Tue',
                                   items: [
@@ -1251,7 +1235,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Wed',
                                   items: [
@@ -1270,7 +1254,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Thu',
                                   items: [
@@ -1289,7 +1273,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Fri',
                                   items: [
@@ -1308,7 +1292,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Sat',
                                   items: [
@@ -1327,7 +1311,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Sun',
                                   items: [
@@ -1350,7 +1334,16 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           Row(
                             children: [
                               IntrinsicWidth(
-                                stepWidth: 200,
+                                stepWidth: 150,
+                                child: ReactiveTextField(
+                                  formControlName: 'department2',
+                                ),
+                              ),
+                              SizedBox(
+                                width: context.appTheme.spacing.marginMedium,
+                              ),
+                              IntrinsicWidth(
+                                stepWidth: 150,
                                 child: ReactiveTextField(
                                   formControlName: 'shift2',
                                 ),
@@ -1359,7 +1352,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Mon',
                                   items: [
@@ -1378,7 +1371,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Tue',
                                   items: [
@@ -1397,7 +1390,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Wed',
                                   items: [
@@ -1416,7 +1409,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Thu',
                                   items: [
@@ -1435,7 +1428,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Fri',
                                   items: [
@@ -1454,7 +1447,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Sat',
                                   items: [
@@ -1473,7 +1466,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                stepWidth: 100,
+                                stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Sun',
                                   items: [

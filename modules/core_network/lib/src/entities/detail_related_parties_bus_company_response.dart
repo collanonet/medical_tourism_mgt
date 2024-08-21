@@ -4,15 +4,17 @@ part 'detail_related_parties_bus_company_response.g.dart';
 class DetailRelatedPartiesBusCompanyResponse {
      @JsonKey(name: '_id')
   final String? id;
-  String? personInChargeOfArrangements;
+  String? arrangePerson;
   String? busCompanyName;
-  String? manager;
+  String? contactPerson;
+  String? tour;
 
   DetailRelatedPartiesBusCompanyResponse({
     required this.id,
-    this.personInChargeOfArrangements,
+    this.arrangePerson,
     this.busCompanyName,
-    this.manager,
+    this.contactPerson,
+    this.tour,
   });
 
   factory DetailRelatedPartiesBusCompanyResponse.fromJson(Map<String,dynamic> json){

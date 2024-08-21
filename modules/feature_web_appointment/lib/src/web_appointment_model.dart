@@ -12,14 +12,28 @@ class WebAppointmentModel {
 
   final WebAppointmentRepository repository;
 
-  ValueNotifier<AsyncData<List<WebBookingMedicalRecord>>> webBookingAdmin =
-      ValueNotifier(const AsyncData());
+  ValueNotifier<AsyncData<List<WebBookingMedicalRecordResponse>>>
+      webBookingAdmin = ValueNotifier(const AsyncData());
 
-  void getWebBookingAdmin() async {
+  void getWebBookingAdmin({
+    String? hospitalName,
+    String? doctor_name,
+    DateTime? reservation_date_from,
+    DateTime? reservation_date_to,
+    bool? inquiryInProgress,
+    bool? reservationConfirmed,
+  }) async {
     try {
       webBookingAdmin.value = const AsyncData(loading: true);
 
-      final result = await repository.getWebBookingAdmin();
+      final result = await repository.webBookingGetReservationAll(
+        hospitalName: hospitalName,
+        doctor_name: doctor_name,
+        reservation_date_from: reservation_date_from,
+        reservation_date_to: reservation_date_to,
+        inquiryInProgress: inquiryInProgress,
+        reservationConfirmed: reservationConfirmed,
+      );
       webBookingAdmin.value = AsyncData(data: result);
     } catch (e) {
       webBookingAdmin.value = AsyncData(error: e);

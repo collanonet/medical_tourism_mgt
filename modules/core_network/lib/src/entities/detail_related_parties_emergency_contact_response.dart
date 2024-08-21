@@ -4,19 +4,21 @@ part 'detail_related_parties_emergency_contact_response.g.dart';
 class DetailRelatedPartiesEmergencyContactResponse {
        @JsonKey(name: '_id')
   final String? id;
-  String? dateFrom;
-  String? dateTo;
-  String? personInChargeKanji;
-  String? personInChargeKana;
-  String? telephoneNumber;
+  DateTime? dateYearFrom;
+  DateTime? dateYearTo;
+  String? contactPersonNamaKanji;
+  String? contactPersonNameKana;
+  String? phoneNumber;
+  String? tour;
 
   DetailRelatedPartiesEmergencyContactResponse({
     required this.id,
-    this.dateFrom = '',
-    this.dateTo = '',
-    this.personInChargeKanji = '',
-    this.personInChargeKana = '',
-    this.telephoneNumber = '',
+    this.dateYearFrom,
+    this.dateYearTo,
+    this.contactPersonNamaKanji,
+    this.contactPersonNameKana,
+    this.phoneNumber,
+    this.tour,
   });
 
   factory DetailRelatedPartiesEmergencyContactResponse.fromJson(Map<String,dynamic> json){

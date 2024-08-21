@@ -114,8 +114,8 @@ class AgentRepositoryIml extends AgentRepository {
   }
 
   @override
-  Future<void> deleteContract(String id) {
-    return remote.deleteContract(id);
+  Future<void> deleteContractAgent(String id) {
+    return remote.deleteContractAgent(id);
   }
 
   @override

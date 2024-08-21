@@ -53,6 +53,7 @@ MedicalRecordCompanionRequest _$MedicalRecordCompanionRequestFromJson(
           : DateTime.parse(json['expirationDate'] as String),
       visaType: json['visaType'] as String?,
       medicalRecord: json['medicalRecord'] as String?,
+      chatQrImage: json['chatQrImage'] as String?,
     );
 
 Map<String, dynamic> _$MedicalRecordCompanionRequestToJson(
@@ -86,5 +87,6 @@ Map<String, dynamic> _$MedicalRecordCompanionRequestToJson(
       'issueDate': instance.issueDate?.toIso8601String(),
       'expirationDate': instance.expirationDate?.toIso8601String(),
       'visaType': instance.visaType,
+      'chatQrImage': instance.chatQrImage,
       'medicalRecord': instance.medicalRecord,
     };

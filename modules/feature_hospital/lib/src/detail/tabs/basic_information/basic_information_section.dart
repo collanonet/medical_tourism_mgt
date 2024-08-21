@@ -38,24 +38,27 @@ class _BasicInformationSectionState extends State<BasicInformationSection> {
             thumbVisibility: true,
             child: SingleChildScrollView(
               primary: true,
-              child: ColumnSeparated(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                separatorBuilder: (BuildContext context, int index) =>
-                    SizedBox(height: context.appTheme.spacing.formSpacing),
-                children: const [
-                  HowtoMakeReqestSection(),
-                  BasicInfoSection(),
-                  Divider(),
-                  MedicalRecordSection(),
-                  Divider(),
-                  AddDoctorProfile(),
-                  Divider(),
-                  AdditionalInformationSection(),
-                  Divider(),
-                  PaymentOptionSection(),
-                  Divider(),
-                  SupportLanguageSection(),
-                ],
+              child: Padding(
+                padding: const EdgeInsets.only(right: 24),
+                child: ColumnSeparated(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  separatorBuilder: (BuildContext context, int index) =>
+                      SizedBox(height: context.appTheme.spacing.formSpacing),
+                  children: const [
+                    HowtoMakeReqestSection(),
+                    BasicInfoSection(),
+                    Divider(),
+                    MedicalRecordSection(),
+                    Divider(),
+                    AddDoctorProfile(),
+                    Divider(),
+                    AdditionalInformationSection(),
+                    Divider(),
+                    PaymentOptionSection(),
+                    Divider(),
+                    SupportLanguageSection(),
+                  ],
+                ),
               ),
             ),
           ),
@@ -94,10 +97,12 @@ class _BasicInformationSectionState extends State<BasicInformationSection> {
                     return ReactiveFormConsumer(
                       builder: (context, form, _) {
                         return ElevatedButton(
-                            onPressed: !value.loading
+                            onPressed: !value.loading && form.valid
                                 ? () => context
                                     .read<BasicInformationModel>()
-                                    .submitData(form,)
+                                    .submitData(
+                                      form,
+                                    )
                                 : null,
                             child: WithLoadingButton(
                               isLoading: value.loading,

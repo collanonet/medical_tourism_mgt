@@ -4,41 +4,38 @@ part 'detail_related_parties_response.g.dart';
 class DetailRelatedPartiesResponse {
    @JsonKey(name: '_id')
   final String? id;
-  String? personInChargeOfArrangements;
-  String? dateFrom;
-  String? dateTo;
-  String? guideNameKanji;
+  String? arrangePerson;
+  DateTime? dateFrom;
+  DateTime? dateTo;
+  String? guideNamaKanji;
   String? guideNameKana;
-  String? telephoneNumber1;
-  String? qualification;
+  String? phoneNumber;
+  List<String>? qualification;
   String? report;
-  String? accommodationPossible;
-  String? nameOfFacility;
-  String? location;
-  String? telephoneNumber2;
-   bool? itineraryManagement;
-  bool? guideInterpreter;
-  bool? medicalInterpreter;
-  bool? possibilityOfStayingTogether;
+  String? accommodationAvailability;
+  String? accommodationName;
+  String? address;
+  String? phoneNumber2;
+  String? tour;
 
   DetailRelatedPartiesResponse({
     required this.id,
-    this.personInChargeOfArrangements,
+    this.arrangePerson,
     this.dateFrom,
     this.dateTo,
-    this.guideNameKanji,
+    this.guideNamaKanji,
     this.guideNameKana,
-    this.telephoneNumber1,
+    this.phoneNumber,
     this.qualification,
     this.report,
-    this.accommodationPossible,
-    this.nameOfFacility,
-    this.location,
-    this.telephoneNumber2,
-    this.itineraryManagement,
-    this.guideInterpreter,
-    this.medicalInterpreter,
-    this.possibilityOfStayingTogether,
+    this.accommodationAvailability,
+    this.accommodationName,
+    this.address,
+    this.phoneNumber2,
+    // this.itineraryManagement,
+    // this.guideInterpreter,
+    // this.medicalInterpreter,
+    // this.possibilityOfStayingTogether,
   });
 
   factory DetailRelatedPartiesResponse.fromJson(Map<String,dynamic> json){

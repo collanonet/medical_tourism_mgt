@@ -2,19 +2,19 @@ import 'package:json_annotation/json_annotation.dart';
 part 'detail_inerary_day.g.dart';
 
 @JsonSerializable()
-class DayList {
-  List<Day>? days;
+// class DayList {
+//   List<Day>? day;
 
-  DayList({this.days});
+//   DayList({this.day});
 
-  factory DayList.fromJson(Map<String, dynamic> json) {
-    return _$DayListFromJson(json);
-  }
+//   factory DayList.fromJson(Map<String, dynamic> json) {
+//     return _$DayListFromJson(json);
+//   }
 
-  Map<String, dynamic> toJson() {
-    return _$DayListToJson(this);
-  }
-}
+//   Map<String, dynamic> toJson() {
+//     return _$DayListToJson(this);
+//   }
+// }
 
 @JsonSerializable()
 class Day {
@@ -24,7 +24,7 @@ class Day {
   bool? evening;
   String? placeName;
   String? accommodation;
-  GroupList? groupList;
+  GroupList? groups;
 
   Day({
     this.date = '',
@@ -33,7 +33,7 @@ class Day {
     this.evening,
     this.placeName = '',
     this.accommodation = '',
-    this.groupList,
+    this.groups,
   });
 
   factory Day.fromJson(Map<String, dynamic> json) {
@@ -60,9 +60,9 @@ class GroupList {
 
 @JsonSerializable()
 class Group {
-  TaskList? taskList;
+  TaskList? task;
 
-  Group({this.taskList});
+  Group({this.task});
 
   factory Group.fromJson(Map<String, dynamic> json) {
     return _$GroupFromJson(json);
@@ -75,9 +75,9 @@ class Group {
 
 @JsonSerializable()
 class TaskList {
-  List<Task>? tasks;
+  List<Task>? task;
 
-  TaskList({this.tasks});
+  TaskList({this.task});
 
   factory TaskList.fromJson(Map<String, dynamic> json) {
     return _$TaskListFromJson(json);
@@ -93,14 +93,14 @@ class Task {
   String placeName;
   String timeFrom;
   String timeTo;
-  String traffic;
+  String transportation;
   String itinerary;
 
   Task({
     this.placeName = '',
     this.timeFrom = '',
     this.timeTo = '',
-    this.traffic = '',
+    this.transportation = '',
     this.itinerary = '',
   });
 

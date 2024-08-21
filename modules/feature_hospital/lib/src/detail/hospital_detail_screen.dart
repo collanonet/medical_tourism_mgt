@@ -96,7 +96,9 @@ class _HospitalDetailScreenState extends State<HospitalDetailScreen> {
                           FacilityPhotoScreen(
                             id: value.requireData.id,
                           ),
-                          const WebReservationScreen(),
+                          WebReservationScreen(
+                            hospitalId: value.requireData.id,
+                          ),
                           HealthCheckupScreen(
                             id: value.requireData.id,
                           ),

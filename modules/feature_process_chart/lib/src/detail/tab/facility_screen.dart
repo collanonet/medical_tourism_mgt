@@ -61,9 +61,8 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                         children: [
                                           Expanded(
                                             child: ReactiveTextField(
-                                              formControlName:
-                                                  'Person_in_charge_of_arrangements',
-                                              decoration: InputDecoration(
+                                              formControlName: 'arrangePerson',
+                                              decoration: const InputDecoration(
                                                 label: Text(
                                                   '手配担当',
                                                 ),
@@ -87,7 +86,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                           Expanded(
                                             child: ReactiveTextField(
                                               formControlName:
-                                                  'Name_of_facility',
+                                                  'accommodationName',
                                               decoration: InputDecoration(
                                                 label: Text(
                                                   '施設名',
@@ -102,7 +101,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                           Expanded(
                                             flex: 2,
                                             child: ReactiveTextField(
-                                              formControlName: 'location',
+                                              formControlName: 'address',
                                               decoration: InputDecoration(
                                                 label: Text(
                                                   '所在地',
@@ -117,7 +116,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                           Expanded(
                                             child: ReactiveTextField(
                                               formControlName:
-                                                  'Person_in_charge_name',
+                                                  'contactPersonName',
                                               decoration: InputDecoration(
                                                 label: Text(
                                                   '担当者名',
@@ -131,8 +130,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                           ),
                                           Expanded(
                                             child: ReactiveTextField(
-                                              formControlName:
-                                                  'telephone_number',
+                                              formControlName: 'phoneNumber',
                                               decoration: InputDecoration(
                                                 label: Text(
                                                   '電話番号',
@@ -245,15 +243,14 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                               .leading,
                                                       contentPadding:
                                                           EdgeInsets.zero,
-                                                      formControlName: 'others',
+                                                      formControlName: 'other',
                                                       title: const Text('その他'),
                                                     ),
                                                   ),
                                                   Container(
                                                     width: 250,
                                                     child: ReactiveTextField(
-                                                      formControlName:
-                                                          'Foreign_language_staff',
+                                                      formControlName: 'others',
                                                       decoration:
                                                           InputDecoration(
                                                         label: Text(
@@ -292,21 +289,24 @@ class _FacilityScreenState extends State<FacilityScreen> {
                               InkWell(
                                 onTap: () => formArray.add(
                                   FormGroup({
-                                    'Person_in_charge_of_arrangements':
+                                    'arrangePerson':
                                         FormControl<String>(value: ''), // 手配担当
-                                    'Name_of_facility':
+                                    'accommodationName':
                                         FormControl<String>(value: ''), // 施設名
-                                    'location':
+                                    'address':
                                         FormControl<String>(value: ''), // 所在地
-                                    'Person_in_charge_name':
+                                    'contactPersonName':
                                         FormControl<String>(value: ''), // 担当者名
-                                    'telephone_number':
+                                    'phoneNumber':
                                         FormControl<String>(value: ''), // 電話番号
                                     'remarks':
                                         FormControl<String>(value: ''), // 備考
-                                    'Foreign_language_staff':
-                                        FormControl<String>(
-                                            value: ''), // 外国語スタッフ
+                                    'other': FormControl<bool>(),
+                                    'japanese': FormControl<bool>(), //
+                                    'chinese': FormControl<bool>(), //
+                                    'vietnamese': FormControl<bool>(), //
+                                    'english': FormControl<bool>(),
+                                    'others': FormControl<String>(),
                                   }),
                                 ),
                                 child: Row(
@@ -356,9 +356,8 @@ class _FacilityScreenState extends State<FacilityScreen> {
                               children: [
                                 Expanded(
                                   child: ReactiveTextField(
-                                    formControlName:
-                                        'Person_in_charge_of_arrangements',
-                                    decoration: InputDecoration(
+                                    formControlName: 'arrangePerson',
+                                    decoration: const InputDecoration(
                                       label: Text(
                                         '手配担当',
                                       ),
@@ -376,7 +375,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                               ],
                             ),
                             ReactiveFormArray(
-                              formArrayName: 'facility',
+                              formArrayName: 'places',
                               builder: (context, formArray, child) {
                                 final rows = formArray.controls
                                     .map((control) => control as FormGroup)
@@ -398,7 +397,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                 Expanded(
                                                   child: ReactiveTextField(
                                                     formControlName:
-                                                        'Name_of_facility',
+                                                        'accommodationName',
                                                     decoration: InputDecoration(
                                                       label: Text(
                                                         '施設名',
@@ -413,7 +412,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                 Expanded(
                                                   flex: 2,
                                                   child: ReactiveTextField(
-                                                    formControlName: 'location',
+                                                    formControlName: 'address',
                                                     decoration: InputDecoration(
                                                       label: Text(
                                                         '所在地',
@@ -428,7 +427,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                 Expanded(
                                                   child: ReactiveTextField(
                                                     formControlName:
-                                                        'Person_in_charge_name',
+                                                        'contactPersonName',
                                                     decoration: InputDecoration(
                                                       label: Text(
                                                         '担当者名',
@@ -443,7 +442,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                 Expanded(
                                                   child: ReactiveTextField(
                                                     formControlName:
-                                                        'telephone_number',
+                                                        'phoneNumber',
                                                     decoration: InputDecoration(
                                                       label: Text(
                                                         '電話番号',
@@ -488,14 +487,15 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                     ),
                                     InkWell(
                                       onTap: () => formArray.add(FormGroup({
-                                        'Name_of_facility': FormControl<String>(
-                                            value: ''), // 施設名
-                                        'location': FormControl<String>(
+                                        'accommodationName':
+                                            FormControl<String>(
+                                                value: ''), // 施設名
+                                        'address': FormControl<String>(
                                             value: ''), // 所在地
-                                        'Person_in_charge_name':
+                                        'contactPersonName':
                                             FormControl<String>(
                                                 value: ''), // 担当者名
-                                        'telephone_number': FormControl<String>(
+                                        'phoneNumber': FormControl<String>(
                                             value: ''), // 電話番号
                                       })),
                                       child: Row(
@@ -539,10 +539,13 @@ class _FacilityScreenState extends State<FacilityScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ValueListenableListener(
-                    valueListenable: context.read<FacilityModel>().submitData,
+                    valueListenable:
+                        context.read<FacilityModel>().submitData,
                     onListen: () {
-                      final value =
-                          context.read<FacilityModel>().submitData.value;
+                      final value = context
+                          .read<FacilityModel>()
+                          .submitData
+                          .value;
                       if (value.hasData) {
                         logger.d('loading');
                         snackBarWidget(
@@ -562,9 +565,10 @@ class _FacilityScreenState extends State<FacilityScreen> {
                       }
                     },
                     child: ValueListenableBuilder(
-                        valueListenable:
-                            context.watch<FacilityModel>().submitData,
-                        builder: (context, value, child) {
+                        valueListenable: context
+                            .watch<FacilityModel>()
+                            .submitData,
+                        builder: (context, value, _) {
                           return ReactiveFormConsumer(
                             builder: (context, form, _) {
                               return ElevatedButton(

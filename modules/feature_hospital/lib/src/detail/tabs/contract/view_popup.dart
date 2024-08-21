@@ -61,7 +61,7 @@ class ViewPopup extends StatelessWidget {
                     flex: 1,
                     child: Text(
                         data.uploadDate != null
-                            ? Dates.formatFullDateTime(data.uploadDate!)
+                            ? Dates.formatFullDate(data.uploadDate!)
                             : '',
                         style: context.textTheme.titleMedium),
                   ),

@@ -5,7 +5,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 FormGroup basicInformationForm() {
   return FormGroup({
     'howToMakeRequest': FormGroup({
-      '_id': FormControl<String?>(),
+      '_id': FormControl<String>(),
       'hospital': FormControl<String>(),
       'dateOfUpdate': FormControl<DateTime>(
         validators: [Validators.required],
@@ -15,7 +15,7 @@ FormGroup basicInformationForm() {
       'updates': FormControl<String>(),
     }),
     'basicInformation': FormGroup({
-      '_id': FormControl<String?>(),
+      '_id': FormControl<String>(),
       'hospitalNameChinese': FormControl<String>(
         validators: [Validators.required],
       ),
@@ -66,6 +66,8 @@ FormGroup basicInformationForm() {
       'societyRorRegenerativeMedicine': FormControl<bool>(value: false),
       'osakaPrefecturalBase': FormControl<bool>(value: false),
       'certified': FormControl<bool>(value: false),
+      'department1': FormControl<String>(),
+      'department2': FormControl<String>(),
       'shift1': FormControl<String>(),
       'shift2': FormControl<String>(),
       'shift1Mon': FormControl<String>(value: '×'),
@@ -87,7 +89,7 @@ FormGroup basicInformationForm() {
     }),
     'medicalRecordHospitals': FormArray([
       FormGroup({
-        '_id': FormControl<String?>(),
+        '_id': FormControl<String>(),
         'hospital': FormControl<String?>(),
         'dateOfUpdate': FormControl<DateTime>(
           validators: [Validators.required],
@@ -100,7 +102,6 @@ FormGroup basicInformationForm() {
         'telephoneNumber': FormControl<String>(
           validators: [
             Validators.required,
-            Validators.number,
           ],
         ),
         'email': FormControl<String>(
@@ -114,7 +115,7 @@ FormGroup basicInformationForm() {
     ]),
     'addDoctorProfile': FormArray([
       FormGroup({
-        '_id': FormControl<String?>(),
+        '_id': FormControl<String>(),
         'hospital': FormControl<String?>(),
         'profile': FormControl<FileSelect>(),
         'photoRelease': FormControl<String>(),
@@ -142,7 +143,7 @@ FormGroup basicInformationForm() {
             'name': FormControl<String>(),
           })
         ]),
-        'telephoneNumber': FormControl<String>(validators: [Validators.number]),
+        'telephoneNumber': FormControl<String>(),
         'faxNumber': FormControl<String>(),
         'email': FormControl<String>(
           validators: [
@@ -153,7 +154,7 @@ FormGroup basicInformationForm() {
       })
     ]),
     'additionalInformationSection': FormGroup({
-      '_id': FormControl<String?>(),
+      '_id': FormControl<String>(),
       'hospital': FormControl<String?>(),
       'outsourcingContract': FormControl<String>(),
       'contract': FormArray([
@@ -169,8 +170,8 @@ FormGroup basicInformationForm() {
       'paymentSitePayment': FormControl<String>(),
     }),
     'paymentOptionSection': FormGroup({
-      '_id': FormControl<String?>(),
-      'hospital': FormControl<String?>(),
+      '_id': FormControl<String>(),
+      'hospital': FormControl<String>(),
       'payer': FormControl<String>(),
       'paymentTiming': FormControl<String>(),
       'feeBack': FormControl<String>(),
@@ -199,8 +200,8 @@ FormArray createSupportLanguageSection(List<String> languages) {
   return FormArray(
     languages
         .map((language) => FormGroup({
-              '_id': FormControl<String?>(),
-              'hospital': FormControl<String?>(),
+              '_id': FormControl<String>(),
+              'hospital': FormControl<String>(),
               'supportLanguage': FormControl<String>(value: language),
               'foreignStaff': FormControl<bool>(value: false),
               'medicalInterpretationSupport': FormControl<bool>(value: false),

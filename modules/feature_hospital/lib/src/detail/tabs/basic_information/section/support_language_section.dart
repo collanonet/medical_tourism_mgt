@@ -89,7 +89,7 @@ class _SupportLanguageSectionState extends State<SupportLanguageSection> {
                                   IntrinsicWidth(
                                     stepWidth: 150,
                                     child: ReactiveDropdownField(
-                                      formControl: (fg).control('foreignStaff')
+                                      formControl: fg.control('foreignStaff')
                                           as FormControl<bool>,
                                       items: const <DropdownMenuItem<bool>>[
                                         DropdownMenuItem<bool>(
@@ -106,7 +106,7 @@ class _SupportLanguageSectionState extends State<SupportLanguageSection> {
                                   IntrinsicWidth(
                                     stepWidth: 150,
                                     child: ReactiveDropdownField(
-                                      formControl: (fg).control(
+                                      formControl: fg.control(
                                               'medicalInterpretationSupport')
                                           as FormControl<bool>,
                                       items: const <DropdownMenuItem<bool>>[

@@ -3,14 +3,16 @@ import 'package:json_annotation/json_annotation.dart';
 part 'detail_related_parties_bus_company_request.g.dart';
 @JsonSerializable()
 class DetailRelatedPartiesBusCompanyRequest {
-  String? personInChargeOfArrangements;
+  String? arrangePerson;
   String? busCompanyName;
-  String? manager;
+  String? contactPerson;
+  String? tour;
 
   DetailRelatedPartiesBusCompanyRequest({
-    this.personInChargeOfArrangements,
+    this.arrangePerson,
     this.busCompanyName,
-    this.manager,
+    this.contactPerson,
+    this.tour,
   });
 
   factory DetailRelatedPartiesBusCompanyRequest.fromJson(Map<String,dynamic> json){

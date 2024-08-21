@@ -165,7 +165,6 @@ class BasicInformationModel {
               value: item.telephoneNumber ?? '',
               validators: [
                 Validators.required,
-                Validators.number,
               ],
             ),
             'email': FormControl<String>(
@@ -209,13 +208,13 @@ class BasicInformationModel {
         FormArray affiliatedAcademicSociety = FormArray([]);
         if (item.affiliatedAcademicSociety != null &&
             item.affiliatedAcademicSociety!.isNotEmpty) {
-          item.affiliatedAcademicSociety!.map((e) {
+          for (var e in item.affiliatedAcademicSociety!) {
             affiliatedAcademicSociety.add(
               FormGroup({
                 'name': FormControl<String>(value: e),
               }),
             );
-          });
+          }
         } else {
           affiliatedAcademicSociety.add(
             FormGroup({
@@ -226,15 +225,15 @@ class BasicInformationModel {
 
         FormArray qualifications = FormArray([]);
         if (item.qualifications != null && item.qualifications!.isNotEmpty) {
-          item.qualifications!.map((e) {
-            affiliatedAcademicSociety.add(
+          for (var e in item.qualifications!) {
+            qualifications.add(
               FormGroup({
                 'name': FormControl<String>(value: e),
               }),
             );
-          });
+          }
         } else {
-          affiliatedAcademicSociety.add(
+          qualifications.add(
             FormGroup({
               'name': FormControl<String>(),
             }),
@@ -244,13 +243,13 @@ class BasicInformationModel {
         FormArray completionCertificate = FormArray([]);
         if (item.completionCertificate != null &&
             item.completionCertificate!.isNotEmpty) {
-          item.completionCertificate!.map((e) {
+          for (var e in item.completionCertificate!) {
             completionCertificate.add(
               FormGroup({
                 'name': FormControl<String>(value: e),
               }),
             );
-          });
+          }
         } else {
           completionCertificate.add(
             FormGroup({
@@ -268,8 +267,12 @@ class BasicInformationModel {
               value:
                   hospitalId.value ?? basicInformationData.value.data?.id ?? '',
             ),
-            'profile': FormControl<String>(
-              value: item.profile,
+            'profile': FormControl<FileSelect>(
+              value: item.profile != null
+                  ? FileSelect(
+                      url: item.profile,
+                    )
+                  : null,
             ),
             'photoRelease': FormControl<String>(
               value: item.photoRelease,
@@ -306,7 +309,6 @@ class BasicInformationModel {
               value: item.telephoneNumber ?? '',
               validators: [
                 Validators.required,
-                Validators.number,
               ],
             ),
             'completionCertificate': completionCertificate,
@@ -314,7 +316,6 @@ class BasicInformationModel {
               value: item.faxNumber ?? '',
               validators: [
                 Validators.required,
-                Validators.number,
               ],
             ),
             'email': FormControl<String>(
@@ -364,7 +365,7 @@ class BasicInformationModel {
 
       FormArray contract = FormArray([]);
       if (data.contract != null && data.contract!.isNotEmpty) {
-        data.contract!.map((e) {
+        for (var e in data.contract!) {
           if (e != null) {
             contract.add(
               FormGroup({
@@ -372,13 +373,14 @@ class BasicInformationModel {
               }),
             );
           }
-        });
+        }
+      } else {
+        contract.add(
+          FormGroup({
+            'name': FormControl<String>(),
+          }),
+        );
       }
-      contract.add(
-        FormGroup({
-          'name': FormControl<String>(),
-        }),
-      );
     } catch (e) {
       logger.e(e);
     }
@@ -556,16 +558,20 @@ class BasicInformationModel {
           .forEach((element) async {
         String? file;
         if (element['profile'] != null) {
-          try {
-            FileSelect docFile = element['profile'];
-            String base64Image = base64Encode(docFile.file);
-            FileResponse fileData = await hospitalRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename,
-            );
-            file = fileData.filename;
-          } catch (e) {
-            logger.e(e);
+          FileSelect docFile = element['profile'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await hospitalRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              file = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            file = docFile.url;
           }
         }
         logger.d(file);
@@ -582,7 +588,7 @@ class BasicInformationModel {
           hospital:
               hospitalId.value ?? basicInformationData.value.data?.id ?? '',
           id: element['_id'],
-          profile: element['profile'],
+          profile: file,
           photoRelease: element['photoRelease'],
           name: element['name'],
           remark: element['remark'],
@@ -722,8 +728,16 @@ class BasicInformationModel {
 }
 
 List<String> convertToList(Map<String, dynamic> element, String key) {
-  if ((element[key] as List).isNotEmpty) {
-    return element[key].map((e) => e['name'] as String).toList();
+  try {
+    if ((element[key] as List).isNotEmpty) {
+      return element[key]
+          .where((e) => e['name'] != null && e['name'].isNotEmpty)
+          .map((e) => e['name'] as String)
+          .toList();
+    }
+    return [];
+  } catch (e) {
+    logger.e(e);
+    return [];
   }
-  return [];
 }

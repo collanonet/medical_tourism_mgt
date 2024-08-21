@@ -108,10 +108,10 @@ class OverseasMedicalDataModel {
         try {
           // convert Uint8List to base64
           FileSelect docFile = formGroup.control('file').value;
-          String base64Image = base64Encode(docFile.file);
+          String base64Image = base64Encode(docFile.file!);
           FileResponse fileData = await patientRepository.uploadFileBase64(
             base64Image,
-            docFile.filename,
+            docFile.filename!,
           );
           file = fileData.filename;
         } catch (e) {
@@ -125,10 +125,10 @@ class OverseasMedicalDataModel {
         try {
           // convert Uint8List to base64
           FileSelect qrFile = formGroup.control('qrCode').value;
-          String base64Image = base64Encode(qrFile.file);
+          String base64Image = base64Encode(qrFile.file!);
           FileResponse qrData = await patientRepository.uploadFileBase64(
             base64Image,
-            qrFile.filename,
+            qrFile.filename!,
           );
           qrCode = qrData.filename;
         } catch (e) {
@@ -169,6 +169,25 @@ class OverseasMedicalDataModel {
     } catch (e) {
       logger.d(e);
       createMedicalOverseaData.value = AsyncData(error: e);
+    }
+  }
+
+  ValueNotifier<AsyncData<bool>> delete = ValueNotifier(const AsyncData());
+
+  Future<void> deleteMedicalRecordOverseaData(List<String> ids) async {
+    try {
+      delete.value = const AsyncData(loading: true);
+      for (var id in ids) {
+        await patientRepository.deleteMedicalRecordOverseaData(id);
+        medicalRecordsOverseasData.value = AsyncData(
+            data: medicalRecordsOverseasData.value.data!
+              ..removeWhere((element) => element.id == id));
+      }
+
+      delete.value = const AsyncData(data: true);
+    } catch (e) {
+      logger.e(e);
+      delete.value = AsyncData(error: e.toString());
     }
   }
 }

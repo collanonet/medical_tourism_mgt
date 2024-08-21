@@ -45,6 +45,7 @@ MedicalRecordCompanion _$MedicalRecordCompanionFromJson(
       chatToolLink: (json['chatToolLink'] as List<dynamic>?)
           ?.map((e) => e as String?)
           .toList(),
+      chatQrImage: json['chatQrImage'] as String?,
       passportNumber: json['passportNumber'] as String?,
       issueDate: json['issueDate'] == null
           ? null
@@ -91,6 +92,7 @@ Map<String, dynamic> _$MedicalRecordCompanionToJson(
       'expirationDate': instance.expirationDate?.toIso8601String(),
       'visaType': instance.visaType,
       'medicalRecord': instance.medicalRecord,
+      'chatQrImage': instance.chatQrImage,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
     };

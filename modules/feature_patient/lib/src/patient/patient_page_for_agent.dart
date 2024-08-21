@@ -18,12 +18,7 @@ class _PatientPageState extends State<PatientPageFormAgent> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => GetIt.I<PatientModel>()..patients(),
-      child: Expanded(
-        child: SingleChildScrollView(
-          controller: scrollController,
-          child: const PatientScreenForAgent(),
-        ),
-      ),
+      child: SingleChildScrollView(child: const PatientScreenForAgent()),
     );
   }
 }

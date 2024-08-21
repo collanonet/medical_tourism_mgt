@@ -79,10 +79,10 @@ class MaterialsModel {
         try {
           // convert Uint8List to base64
           FileSelect docFile = formGroup.control('file').value;
-          String base64Image = base64Encode(docFile.file);
+          String base64Image = base64Encode(docFile.file!);
           FileResponse fileData = await hospitalRepository.uploadFileBase64(
             base64Image,
-            docFile.filename,
+            docFile.filename!,
           );
           file = fileData.filename;
         } catch (e) {

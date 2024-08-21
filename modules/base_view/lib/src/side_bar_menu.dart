@@ -244,7 +244,7 @@ class ArrowBackgroundPainter extends CustomPainter {
       ..maskFilter = const MaskFilter.blur(BlurStyle.outer, 8);
 
     final paint = Paint()
-      ..color = const Color(0xFF00C6C6)
+      ..color = const Color(0xFFB76D0F)
       ..style = PaintingStyle.fill;
 
     final path = Path()

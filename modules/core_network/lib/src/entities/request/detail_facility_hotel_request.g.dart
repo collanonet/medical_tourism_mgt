@@ -9,34 +9,29 @@ part of 'detail_facility_hotel_request.dart';
 DetailFacilityHotelRequest _$DetailFacilityHotelRequestFromJson(
         Map<String, dynamic> json) =>
     DetailFacilityHotelRequest(
-      personInChargeOfArrangements:
-          json['personInChargeOfArrangements'] as String?,
-      nameOfFacility: json['nameOfFacility'] as String?,
-      location: json['location'] as String?,
-      personInChargeName: json['personInChargeName'] as String?,
-      telephoneNumber: json['telephoneNumber'] as String?,
+      arrangePerson: json['arrangePerson'] as String?,
+      accommodationName: json['accommodationName'] as String?,
+      address: json['address'] as String?,
+      contactPersonName: json['contactPersonName'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
       remarks: json['remarks'] as String?,
-      foreignLanguageStaff: json['foreignLanguageStaff'] as String?,
-      japanese: json['japanese'] as bool?,
-      chinese: json['chinese'] as bool?,
-      vietnamese: json['vietnamese'] as bool?,
-      english: json['english'] as bool?,
-      others: json['others'] as bool?,
+      foreignLanguageStaff: (json['foreignLanguageStaff'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      other: json['other'] as String?,
+      hotel: json['hotel'] as String?,
     );
 
 Map<String, dynamic> _$DetailFacilityHotelRequestToJson(
         DetailFacilityHotelRequest instance) =>
     <String, dynamic>{
-      'personInChargeOfArrangements': instance.personInChargeOfArrangements,
-      'nameOfFacility': instance.nameOfFacility,
-      'location': instance.location,
-      'personInChargeName': instance.personInChargeName,
-      'telephoneNumber': instance.telephoneNumber,
+      'arrangePerson': instance.arrangePerson,
+      'accommodationName': instance.accommodationName,
+      'address': instance.address,
+      'contactPersonName': instance.contactPersonName,
+      'phoneNumber': instance.phoneNumber,
       'remarks': instance.remarks,
       'foreignLanguageStaff': instance.foreignLanguageStaff,
-      'japanese': instance.japanese,
-      'chinese': instance.chinese,
-      'vietnamese': instance.vietnamese,
-      'english': instance.english,
-      'others': instance.others,
+      'other': instance.other,
+      'hotel': instance.hotel,
     };

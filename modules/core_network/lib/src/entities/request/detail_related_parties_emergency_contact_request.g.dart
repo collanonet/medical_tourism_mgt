@@ -10,19 +10,25 @@ DetailRelatedPartiesEmergencyContactRequest
     _$DetailRelatedPartiesEmergencyContactRequestFromJson(
             Map<String, dynamic> json) =>
         DetailRelatedPartiesEmergencyContactRequest(
-          dateFrom: json['dateFrom'] as String? ?? '',
-          dateTo: json['dateTo'] as String? ?? '',
-          personInChargeKanji: json['personInChargeKanji'] as String? ?? '',
-          personInChargeKana: json['personInChargeKana'] as String? ?? '',
-          telephoneNumber: json['telephoneNumber'] as String? ?? '',
+          dateYearFrom: json['dateYearFrom'] == null
+              ? null
+              : DateTime.parse(json['dateYearFrom'] as String),
+          dateYearTo: json['dateYearTo'] == null
+              ? null
+              : DateTime.parse(json['dateYearTo'] as String),
+          contactPersonNamaKanji: json['contactPersonNamaKanji'] as String?,
+          contactPersonNameKana: json['contactPersonNameKana'] as String?,
+          phoneNumber: json['phoneNumber'] as String?,
+          tour: json['tour'] as String?,
         );
 
 Map<String, dynamic> _$DetailRelatedPartiesEmergencyContactRequestToJson(
         DetailRelatedPartiesEmergencyContactRequest instance) =>
     <String, dynamic>{
-      'dateFrom': instance.dateFrom,
-      'dateTo': instance.dateTo,
-      'personInChargeKanji': instance.personInChargeKanji,
-      'personInChargeKana': instance.personInChargeKana,
-      'telephoneNumber': instance.telephoneNumber,
+      'dateYearFrom': instance.dateYearFrom?.toIso8601String(),
+      'dateYearTo': instance.dateYearTo?.toIso8601String(),
+      'contactPersonNamaKanji': instance.contactPersonNamaKanji,
+      'contactPersonNameKana': instance.contactPersonNameKana,
+      'phoneNumber': instance.phoneNumber,
+      'tour': instance.tour,
     };

@@ -28,7 +28,7 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-        valueListenable: context.read<FacilityModel>().facilityData,
+        valueListenable: context.watch<FacilityModel>().facilityData,
         builder: (context, value, _) {
           return ColumnSeparated(
             separatorBuilder: (BuildContext context, int index) =>
@@ -122,11 +122,10 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                           },
                         );
                       }),
-                  SizedBox(width: 20),
                   Expanded(flex: 2, child: Text('施設写真名')),
                   Expanded(child: Text('撮影')),
                   Expanded(child: Text('撮影日')),
-                  Expanded(flex: 3, child: Text('共有')),
+                  Expanded(child: Text('共有')),
                   Expanded(child: SizedBox()),
                 ],
               ),
@@ -179,7 +178,6 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                                       value.requireData[index].shootingDate)),
                         ),
                         Expanded(
-                          flex: 1,
                           child: value.requireData[index].share == null
                               ? SizedBox()
                               : Icon(Icons.person),

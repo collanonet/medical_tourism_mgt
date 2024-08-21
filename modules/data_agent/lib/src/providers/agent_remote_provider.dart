@@ -97,8 +97,8 @@ class AgentRemoteProvider {
     return apiService.uploadFileBase64(file, filename);
   }
 
-  Future<void> deleteContract(String id) {
-    return apiService.deleteContract(id: id);
+  Future<void> deleteContractAgent(String id) {
+    return apiService.deleteContractAgent(id);
   }
 
   Future<void> deleteEstimateInvoice(String id) {

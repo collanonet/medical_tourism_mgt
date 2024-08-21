@@ -6,7 +6,6 @@ import 'tab/facility_page.dart';
 import 'tab/hotel_registration_page.dart';
 import 'tab/hotel_search_page.dart';
 import 'tab/itinerary_page.dart';
-import 'tab/itinerary_simple_version_page.dart';
 import 'tab/related_parties_page.dart';
 
 class DetailProcessChartScreen extends StatefulWidget {
@@ -21,12 +20,11 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
   List<String> menu = [
-    '行程', // Itinerary
-    '施設', // Facility
-    'ホテル検索', // HotelSearch
-    'ホテル登録', // HotelRegistration
-    '関係者', // RelatedParties
-    '行程表', //Itinerary
+    '行程',
+    '施設',
+    'ホテル検索',
+    'ホテル登録',
+    '関係者',
   ];
 
   List<Widget> pages = const [
@@ -35,7 +33,6 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
     HotelSearchPage(),
     HotelRegistrationPage(),
     RelatedPartiesPage(),
-    ItinerarySimpleVersionPage(),
   ];
 
   @override

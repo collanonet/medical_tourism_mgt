@@ -2,8 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 part 'detail_hotel_search_request.g.dart';
 @JsonSerializable()
 class DetailHotelSearchRequest {
-  String? name;
-  String? type;
+  String? accommodationName;
+  String? accommodationType;
   String? usageRecord;
   String? area;
   String? supportedLanguage;
@@ -18,8 +18,8 @@ class DetailHotelSearchRequest {
   bool? thai;
 
   DetailHotelSearchRequest({
-     this.name,
-     this.type,
+     this.accommodationName,
+     this.accommodationType,
      this.usageRecord,
      this.area,
      this.supportedLanguage,

@@ -134,7 +134,8 @@ class WebAppointmentScreen extends StatelessWidget {
                                     },
                                     cell: [
                                       Text(
-                                        item.medicalInstitutionName ?? '-',
+                                        item.hospital?.hospitalNameKatakana ??
+                                            '-',
                                         style: TextStyle(
                                           fontFamily: 'NotoSansJP',
                                           package: 'core_ui',
@@ -150,7 +151,7 @@ class WebAppointmentScreen extends StatelessWidget {
                                                 borderRadius:
                                                     BorderRadius.circular(4)),
                                             child: Text(
-                                              item.patient.progress ?? '-',
+                                              item.patient?.progress ?? '-',
                                               style: TextStyle(
                                                   fontFamily: 'NotoSansJP',
                                                   package: 'core_ui',
@@ -185,7 +186,7 @@ class WebAppointmentScreen extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               Text(
-                                                '${item.patient.firstNameRomanized ?? item.patient.firstName ?? '-'} ${item.patient.middleNameRomanized ?? item.patient.middleName ?? '-'} ${item.patient.familyNameRomanized ?? item.patient.familyName ?? '-'}',
+                                                '${item.patient?.firstNameRomanized ?? '-'} ${item.patient?.middleNameRomanized ?? '-'} ${item.patient?.familyNameRomanized ?? '-'}',
                                                 style: TextStyle(
                                                   color: context
                                                       .appTheme.primaryColor,
@@ -194,19 +195,22 @@ class WebAppointmentScreen extends StatelessWidget {
                                                 ),
                                               ),
                                               Text(
-                                                  '${item.patient.firstNameChineseOrVietnamese ?? '-'} ${item.patient.middleNameChineseOrVietnamese ?? '-'} ${item.patient.familyNameChineseOrVietnamese ?? '-'} / ${item.patient.firstNameJapaneseForChinese ?? '-'} ${item.patient.middleNameJapaneseForChinese ?? '-'} ${item.patient.familyNameJapaneseForChinese ?? '-'} / ${item.patient.firstNameJapaneseForNonChinese ?? '-'} ${item.patient.middleNameJapaneseForNonChinese ?? '-'} ${item.patient.familyNameJapaneseForNonChinese ?? '-'} '),
+                                                  '${item.patient?.firstNameChineseOrVietnamese ?? '-'} ${item.patient?.middleNameChineseOrVietnamese ?? '-'} ${item.patient?.familyNameChineseOrVietnamese ?? '-'} / ${item.patient?.firstNameJapaneseForChinese ?? '-'} ${item.patient?.middleNameJapaneseForChinese ?? '-'} ${item.patient?.familyNameJapaneseForChinese ?? '-'} / ${item.patient?.firstNameJapaneseForNonChinese ?? '-'} ${item.patient?.middleNameJapaneseForNonChinese ?? '-'} ${item.patient?.familyNameJapaneseForNonChinese ?? '-'} '),
                                             ],
                                           ),
                                         ],
                                       ),
                                       Text(
-                                        item.candidateDate
-                                            .map((e) => Dates.formShortDate(
-                                                e.preferredDate))
-                                            .join(' - '),
+                                        item.proposedDates
+                                                ?.map((e) =>
+                                                    Dates.formShortDate(
+                                                        e.proposedDate))
+                                                .join(' - ') ??
+                                            '-',
                                       ),
                                       Text(
-                                        '${Dates.formShortDate(item.testCallDate)} ${item.testCallTime ?? '--'}',
+                                        Dates.formatFullDateTime(
+                                            item.createdAt),
                                       ),
                                     ],
                                   );

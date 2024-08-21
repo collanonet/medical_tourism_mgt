@@ -144,7 +144,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                             var item = model.patientData.data?.items[index];
                             return RowTableData(
                               onTap: () {
-                                context.router.push(const MedicalVisaDetailRoute());
+                                context.router
+                                    .push(const MedicalVisaDetailRoute());
                               },
                               cell: [
                                 Checkbox(
@@ -180,14 +181,15 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      '${item?.firstName} ${item!.familyName}',
+                                      '${item?.firstNameRomanized ?? '-'} ${item?.middleNameRomanized ?? '-'} ${item?.familyNameRomanized ?? '-'}',
                                       style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',
                                         color: context.appTheme.primaryColor,
+                                        fontFamily: 'NotoSansJP',
+                                        package: 'core_ui',
                                       ),
                                     ),
-                                    const Text('刘 伟强 / 劉 偉強 / リュウ　イーチャン'),
+                                    Text(
+                                        '${item?.firstNameChineseOrVietnamese ?? '-'} ${item?.middleNameChineseOrVietnamese ?? '-'} ${item?.familyNameChineseOrVietnamese ?? '-'} / ${item?.firstNameJapaneseForChinese ?? '-'} ${item?.middleNameJapaneseForChinese ?? '-'} ${item?.familyNameJapaneseForChinese ?? '-'} / ${item?.firstNameJapaneseForNonChinese ?? '-'} ${item?.middleNameJapaneseForNonChinese ?? '-'} ${item?.familyNameJapaneseForNonChinese ?? '-'} '),
                                   ],
                                 ),
                                 Row(
@@ -202,8 +204,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                       child: const Text(
                                         '帰国済',
                                         style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',color: Colors.white),
+                                            fontFamily: 'NotoSansJP',
+                                            package: 'core_ui',
+                                            color: Colors.white),
                                       ),
                                     ),
                                   ],
@@ -220,8 +223,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                       child: const Text(
                                         '報告済',
                                         style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',color: Colors.white),
+                                            fontFamily: 'NotoSansJP',
+                                            package: 'core_ui',
+                                            color: Colors.white),
                                       ),
                                     ),
                                   ],
@@ -265,8 +269,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                       child: const Text(
                                         '取下げ',
                                         style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',color: Colors.white),
+                                            fontFamily: 'NotoSansJP',
+                                            package: 'core_ui',
+                                            color: Colors.white),
                                       ),
                                     ),
                                   ],

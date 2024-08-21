@@ -17,7 +17,7 @@ class RelatedPartiesPage extends StatelessWidget {
       validationMessages: validationMessagesFilterPatient(context),
       child: ReactiveFormBuilder(
         form: () => relatedPartiesForm(),
-        builder: (context, formGroup, child) {
+        builder: (context, formGroup, _) {
           return Provider(
             create: (context) =>
                 GetIt.I<RelatedPartiesModel>()..fetchData(formGroup),
