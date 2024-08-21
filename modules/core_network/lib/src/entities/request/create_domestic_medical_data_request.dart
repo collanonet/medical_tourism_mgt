@@ -1,5 +1,6 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'create_domestic_medical_data_request.g.dart';
+
 @JsonSerializable()
 class DomesticMedicalDataRequest {
   String? file;
@@ -11,6 +12,7 @@ class DomesticMedicalDataRequest {
   String? sharedUrlIssue;
   String? disclosureToPatients;
   String? disclosureToOtherMedicalInstitutions;
+  String medicalRecordId;
 
   DomesticMedicalDataRequest({
     this.file,
@@ -22,8 +24,10 @@ class DomesticMedicalDataRequest {
     this.sharedUrlIssue,
     this.disclosureToPatients,
     this.disclosureToOtherMedicalInstitutions,
+    required this.medicalRecordId,
   });
 
-  factory DomesticMedicalDataRequest.fromJson(Map<String, dynamic> json) => _$DomesticMedicalDataRequestFromJson(json);
+  factory DomesticMedicalDataRequest.fromJson(Map<String, dynamic> json) =>
+      _$DomesticMedicalDataRequestFromJson(json);
   Map<String, dynamic> toJson() => _$DomesticMedicalDataRequestToJson(this);
 }

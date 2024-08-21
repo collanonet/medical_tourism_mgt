@@ -107,46 +107,55 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
           separatorBuilder: (BuildContext context, int index) => Divider(),
           children: [
             ...rows,
-            InkWell(
-              onTap: () {
-                formArray.add(FormGroup({
-                  'progress': FormArray([
-                    // record of item
-                    FormGroup({
-                      'id': FormControl<String>(),
-                      'completed': FormControl<bool>(value: false),
-                      'key': FormControl<String>(),
-                      'tag': FormControl<String>(),
-                      'task': FormControl<String>(),
-                      'completionDate': FormControl<DateTime>(),
-                      'remarks': FormControl<String>(),
-                      'medicalRecord': FormControl<String>(),
-                      'type': FormControl<String>(
-                        value: rows.length.toString(),
-                      ),
-                    }),
-                  ]),
-                }));
-              },
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.add_box_rounded,
-                    color: context.appTheme.primaryColor,
-                  ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginSmall,
-                  ),
-                  Text(
-                    'さらにセクションを追加',
-                    style: TextStyle(color: context.appTheme.primaryColor),
-                  )
-                ],
-              ),
-            )
+            if (rows.length < 3)
+              InkWell(
+                onTap: () {
+                  formArray.add(FormGroup({
+                    'progress': FormArray([
+                      // record of item
+                      for (ItemProgress item
+                          in context.read<ProgressListModel>().titleList) ...{
+                        FormGroup({
+                          'id': FormControl<String>(),
+                          'completed': FormControl<bool>(value: false),
+                          'key': FormControl<String>(),
+                          'tag': FormControl<String>(
+                            value: item.tag,
+                          ),
+                          'task': FormControl<String>(
+                            value: item.task,
+                            disabled: true,
+                          ),
+                          'completionDate': FormControl<DateTime>(),
+                          'remarks': FormControl<String>(),
+                          'medicalRecord': FormControl<String>(),
+                          'type': FormControl<String>(
+                            value: rows.length.toString(),
+                          ),
+                        }),
+                      }
+                    ]),
+                  }));
+                },
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.add_box_rounded,
+                      color: context.appTheme.primaryColor,
+                    ),
+                    SizedBox(
+                      width: context.appTheme.spacing.marginSmall,
+                    ),
+                    Text(
+                      'さらにセクションを追加',
+                      style: TextStyle(color: context.appTheme.primaryColor),
+                    )
+                  ],
+                ),
+              )
           ],
         );
       },
@@ -172,7 +181,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                 ),
             children: [
               Text(
-                '訪日治療の流れ',
+                '訪日再生医療の流れ',
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               Row(

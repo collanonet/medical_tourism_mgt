@@ -17,6 +17,21 @@ class ProgressListModel {
   ValueNotifier<AsyncData<MedicalRecord>> medicalRecord =
       ValueNotifier<AsyncData<MedicalRecord>>(const AsyncData());
 
+  List<ItemProgress> titleList = [
+    ItemProgress(tag: '患者', task: 'お問い合せ'),
+    ItemProgress(tag: '患者', task: 'お申込み'),
+    ItemProgress(tag: '患者', task: '資料提出'),
+    ItemProgress(tag: '当社', task: '医療機関の選定・ご提案'),
+    ItemProgress(tag: '患者', task: '契約締結・入金'),
+    ItemProgress(tag: '当社', task: '資料翻訳・病院問い合わせ'),
+    ItemProgress(tag: '病院', task: '訪日治療適応判断（オンライン・書面）'),
+    ItemProgress(tag: '当社', task: '来日決定・お見積提示・入金'),
+    ItemProgress(tag: '当社', task: '医療ビザ申請・来日日程確定'),
+    ItemProgress(tag: '当社', task: '医療機関の正式予約'),
+    ItemProgress(tag: '患者', task: '来日治療・受診サポート'),
+    ItemProgress(tag: '当社', task: '治療終了・帰国・フォローアップ'),
+  ];
+
   Future<void> getMedicalRecords(FormGroup formGroup,
       {String? patientId}) async {
     if (patientId != null) {
@@ -60,50 +75,53 @@ class ProgressListModel {
     FormGroup formGroup,
     List<MedicalRecordProgress> data,
   ) async {
-    // Group by type
-    var groupByType = groupBy(data, (MedicalRecordProgress e) => e.type);
+    if (data.isNotEmpty) {
+      // Group by type
+      var groupByType = groupBy(data, (MedicalRecordProgress e) => e.type);
 
-    FormArray formArray = formGroup.control('progressList') as FormArray;
-    formArray.clear();
+      FormArray formArray = formGroup.control('progressList') as FormArray;
+      formArray.clear();
 
-    groupByType.forEach((type, records) {
-      // Create form group for each group
-      int index = groupByType.keys.toList().indexOf(type);
-      FormArray formArrayProgress = FormArray([]);
+      groupByType.forEach((type, records) {
+        // Create form group for each group
+        int index = groupByType.keys.toList().indexOf(type);
+        FormArray formArrayProgress = FormArray([]);
 
-      // Insert data for each group
-      for (var record in records) {
-        formArrayProgress.add(FormGroup({
-          'id': FormControl<String>(
-            value: record.id,
-          ),
-          'completed': FormControl<bool>(value: record.completed),
-          'key': FormControl<String>(
-            value: record.key,
-          ),
-          'tag': FormControl<String>(
-            value: record.tag,
-          ),
-          'task': FormControl<String>(
-            value: record.task,
-          ),
-          'completionDate': FormControl<DateTime>(
-            value: record.completionDate,
-          ),
-          'remarks': FormControl<String>(
-            value: record.remarks,
-          ),
-          'medicalRecord': FormControl<String>(
-            value: record.medicalRecord,
-          ),
-          'type': FormControl<String>(
-            value: index.toString(),
-          ),
-        }));
-      }
+        // Insert data for each group
+        for (var record in records) {
+          formArrayProgress.add(FormGroup({
+            'id': FormControl<String>(
+              value: record.id,
+            ),
+            'completed': FormControl<bool>(value: record.completed),
+            'key': FormControl<String>(
+              value: record.key,
+            ),
+            'tag': FormControl<String>(
+              value: record.tag,
+            ),
+            'task': FormControl<String>(
+              value: record.task,
+              disabled: true,
+            ),
+            'completionDate': FormControl<DateTime>(
+              value: record.completionDate,
+            ),
+            'remarks': FormControl<String>(
+              value: record.remarks,
+            ),
+            'medicalRecord': FormControl<String>(
+              value: record.medicalRecord,
+            ),
+            'type': FormControl<String>(
+              value: index.toString(),
+            ),
+          }));
+        }
 
-      formArray.add(FormGroup({'progress': formArrayProgress}));
-    });
+        formArray.add(FormGroup({'progress': formArrayProgress}));
+      });
+    }
   }
 
   ValueNotifier<AsyncData<dynamic>> submit = ValueNotifier(const AsyncData());
@@ -142,4 +160,14 @@ class ProgressListModel {
       type: element['type'],
     );
   }
+}
+
+class ItemProgress {
+  String tag;
+  String task;
+
+  ItemProgress({
+    required this.tag,
+    required this.task,
+  });
 }

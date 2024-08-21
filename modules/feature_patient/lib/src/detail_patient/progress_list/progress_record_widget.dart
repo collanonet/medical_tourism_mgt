@@ -26,32 +26,32 @@ class ProgressRecordWidget extends StatelessWidget {
             ),
             checkColor: Colors.white,
           ),
-          // ReactiveValueListenableBuilder<String?>(
-          //     formControlName: 'tag',
-          //     builder: (context, control, child) {
-          //       return control.value == null
-          //           ? const SizedBox.shrink()
-          //           : Container(
-          //               width: context.appTheme.spacing.marginExtraLarge * 2,
-          //               padding: const EdgeInsets.symmetric(
-          //                   vertical: 2, horizontal: 4),
-          //               decoration: BoxDecoration(
-          //                 border: Border.all(
-          //                   color: context.appTheme.primaryColor,
-          //                 ),
-          //                 borderRadius: BorderRadius.circular(4),
-          //               ),
-          //               child: Center(
-          //                 child: Text(
-          //                   control.value ?? '',
-          //                   style: TextStyle(
-          //                       fontFamily: 'NotoSansJP',
-          //                       package: 'core_ui',
-          //                       color: context.appTheme.primaryColor),
-          //                 ),
-          //               ),
-          //             );
-          //     }),
+          ReactiveValueListenableBuilder<String?>(
+              formControlName: 'tag',
+              builder: (context, control, child) {
+                return control.value == null
+                    ? const SizedBox.shrink()
+                    : Container(
+                        width: context.appTheme.spacing.marginExtraLarge * 2,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 2, horizontal: 4),
+                        decoration: BoxDecoration(
+                          border: Border.all(
+                            color: context.appTheme.primaryColor,
+                          ),
+                          borderRadius: BorderRadius.circular(4),
+                        ),
+                        child: Center(
+                          child: Text(
+                            control.value ?? '',
+                            style: TextStyle(
+                                fontFamily: 'NotoSansJP',
+                                package: 'core_ui',
+                                color: context.appTheme.primaryColor),
+                          ),
+                        ),
+                      );
+              }),
           SizedBox(
             width: context.appTheme.spacing.marginExtraLarge,
           ),

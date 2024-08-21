@@ -4,6 +4,7 @@ import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'domestic_medical_data_model.dart';
@@ -54,7 +55,7 @@ class Popup extends StatelessWidget {
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
-                      formControlName: 'name_of_medical_institution',
+                      formControlName: 'nameOfMedicalInstitution',
                       decoration: InputDecoration(
                         hintText: '医療機関名',
                       ),
@@ -166,17 +167,17 @@ class Popup extends StatelessWidget {
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveDatePicker<DateTime>(
-                      formControlName: 'date_of_issue',
+                      formControlName: 'dateOfIssue',
                       firstDate: DateTime(1900),
                       lastDate: DateTime(2100),
                       builder: (BuildContext context,
                           ReactiveDatePickerDelegate<dynamic> picker,
                           Widget? child) {
                         return ReactiveTextField<DateTime>(
-                          formControlName: 'date_of_issue',
+                          formControlName: 'dateOfIssue',
                           valueAccessor: DateTimeValueAccessor(
-                              //dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
+                            dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                          ),
                           decoration: InputDecoration(
                             label: const Text(
                               "発行日",
@@ -213,7 +214,7 @@ class Popup extends StatelessWidget {
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
-                      formControlName: 'shared_URL_issue',
+                      formControlName: 'sharedUrlIssue',
                       decoration: InputDecoration(
                         hintText: '共有URL発行',
                       ),
@@ -255,8 +256,18 @@ class Popup extends StatelessWidget {
                   ),
                   IntrinsicWidth(
                     stepWidth: 300,
-                    child: ReactiveTextField<String>(
-                      formControlName: 'disclosure_to_patients',
+                    child: ReactiveDropdownField<String>(
+                      formControlName: 'disclosureToPatients',
+                      items: [
+                        DropdownMenuItem(
+                          value: '○',
+                          child: Text('○'),
+                        ),
+                        DropdownMenuItem(
+                          value: '×',
+                          child: Text('×'),
+                        ),
+                      ],
                       decoration: InputDecoration(
                         hintText: '患者へ開示',
                       ),
@@ -278,9 +289,18 @@ class Popup extends StatelessWidget {
                   ),
                   IntrinsicWidth(
                     stepWidth: 300,
-                    child: ReactiveTextField<String>(
-                      formControlName:
-                          'disclosure_to_other_medical_institutions',
+                    child: ReactiveDropdownField<String>(
+                      formControlName: 'disclosureToOtherMedicalInstitutions',
+                      items: [
+                        DropdownMenuItem(
+                          value: '○',
+                          child: Text('○'),
+                        ),
+                        DropdownMenuItem(
+                          value: '×',
+                          child: Text('×'),
+                        ),
+                      ],
                       decoration: InputDecoration(
                         hintText: '他医療機関へ開示',
                       ),
