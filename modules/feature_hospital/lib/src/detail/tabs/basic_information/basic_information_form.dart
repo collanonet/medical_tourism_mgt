@@ -8,6 +8,7 @@ FormGroup basicInformationForm() {
       '_id': FormControl<String>(),
       'hospital': FormControl<String>(),
       'dateOfUpdate': FormControl<DateTime>(
+        value: DateTime.now(),
         validators: [Validators.required],
       ),
       'updater': FormControl<String>(),
@@ -24,15 +25,12 @@ FormGroup basicInformationForm() {
       ),
       'zipCode': FormControl<String>(),
       'location': FormControl<String>(
+        value: '',
         validators: [Validators.required],
       ),
       'googleMap': FormControl<String>(),
-      'phoneNumber': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'faxNumber': FormControl<String>(
-        validators: [Validators.required],
-      ),
+      'phoneNumber': FormControl<String>(),
+      'faxNumber': FormControl<String>(),
       'homepage': FormControl<String>(),
       'supportedMenu': FormControl<bool>(value: false),
       'healthCheckup': FormControl<bool>(value: false),
@@ -92,6 +90,7 @@ FormGroup basicInformationForm() {
         '_id': FormControl<String>(),
         'hospital': FormControl<String?>(),
         'dateOfUpdate': FormControl<DateTime>(
+          value: DateTime.now(),
           validators: [Validators.required],
         ),
         'departmentName': FormControl<String>(),
@@ -99,11 +98,7 @@ FormGroup basicInformationForm() {
           validators: [Validators.required],
         ),
         'nameKana': FormControl<String>(),
-        'telephoneNumber': FormControl<String>(
-          validators: [
-            Validators.required,
-          ],
-        ),
+        'telephoneNumber': FormControl<String>(),
         'email': FormControl<String>(
           validators: [
             Validators.required,
@@ -145,11 +140,7 @@ FormGroup basicInformationForm() {
         ]),
         'telephoneNumber': FormControl<String>(),
         'faxNumber': FormControl<String>(),
-        'email': FormControl<String>(
-          validators: [
-            Validators.email,
-          ],
-        ),
+        'email': FormControl<String>(),
         'remark2': FormControl<String>(),
       })
     ]),
