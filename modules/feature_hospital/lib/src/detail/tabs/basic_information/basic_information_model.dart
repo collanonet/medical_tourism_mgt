@@ -495,11 +495,11 @@ class BasicInformationModel {
 
       HowToRequestHospitalRequest request = HowToRequestHospitalRequest(
         hospital: hospitalId.value ?? basicInformationData.value.data?.id ?? '',
-        id: form.control('_id').value,
-        dateOfUpdate: form.control('dateOfUpdate').value,
-        updater: form.control('updater').value,
-        memo: form.control('memo').value,
-        updates: form.control('updates').value,
+        id: form.control('_id').value ?? '',
+        dateOfUpdate: form.control('dateOfUpdate').value ?? DateTime.now(),
+        updater: form.control('updater').value ?? '',
+        memo: form.control('memo').value ?? '',
+        updates: form.control('updates').value ?? '',
       );
       var result = await hospitalRepository.postHowToRequestHospital(request);
 
@@ -524,13 +524,13 @@ class BasicInformationModel {
           hospital:
               hospitalId.value ?? basicInformationData.value.data?.id ?? '',
           id: element['_id'],
-          dateOfUpdate: element['dateOfUpdate'],
-          departmentName: element['departmentName'],
-          nameKanji: element['nameKanji'],
-          nameKana: element['nameKana'],
-          telephoneNumber: element['telephoneNumber'],
-          email: element['email'],
-          faxNumber: element['faxNumber'],
+          dateOfUpdate: element['dateOfUpdate'] ?? DateTime.now(),
+          departmentName: element['departmentName'] ?? '',
+          nameKanji: element['nameKanji'] ?? '',
+          nameKana: element['nameKana'] ?? '',
+          telephoneNumber: element['telephoneNumber'] ?? '',
+          email: element['email'] ?? '',
+          faxNumber: element['faxNumber'] ?? '',
         );
         var result = await hospitalRepository
             .postMedicalRecordBasicInfoHospital(request);
@@ -589,24 +589,24 @@ class BasicInformationModel {
               hospitalId.value ?? basicInformationData.value.data?.id ?? '',
           id: element['_id'],
           profile: file,
-          photoRelease: element['photoRelease'],
-          name: element['name'],
-          remark: element['remark'],
-          departmentName: element['departmentName'],
-          post: element['post'],
-          specialty: element['specialty'],
-          nameKanji: element['nameKanji'],
-          nameKana: element['nameKana'],
+          photoRelease: element['photoRelease'] ?? '',
+          name: element['name'] ?? '',
+          remark: element['remark'] ?? '',
+          departmentName: element['departmentName'] ?? '',
+          post: element['post'] ?? '',
+          specialty: element['specialty'] ?? '',
+          nameKanji: element['nameKanji'] ?? '',
+          nameKana: element['nameKana'] ?? '',
           affiliatedAcademicSociety: affiliatedAcademicSociety,
           qualifications: qualifications,
-          onlineMedicalTreatment: element['onlineMedicalTreatment'],
+          onlineMedicalTreatment: element['onlineMedicalTreatment'] ?? '',
           trainingCompletionCertificateNumber:
-              element['trainingCompletionCertificateNumber'],
+              element['trainingCompletionCertificateNumber'] ?? '',
           completionCertificate: completionCertificate,
-          telephoneNumber: element['telephoneNumber'],
-          faxNumber: element['faxNumber'],
-          email: element['email'],
-          remark2: element['remark2'],
+          telephoneNumber: element['telephoneNumber'] ?? '',
+          faxNumber: element['faxNumber'] ?? '',
+          email: element['email'] ?? '',
+          remark2: element['remark2'] ?? '',
         );
         var result =
             await hospitalRepository.postDoctorInformationHospital(request);
@@ -634,15 +634,15 @@ class BasicInformationModel {
           AdditionalInformationSectionRequest(
         hospital: hospitalId.value ?? basicInformationData.value.data?.id ?? '',
         id: form.control('_id').value,
-        outsourcingContract: form.control('outsourcingContract').value,
+        outsourcingContract: form.control('outsourcingContract').value ?? '',
         contract: contract,
-        msCorporation: form.control('msCorporation').value,
-        referralFee: form.control('referralFee').value,
+        msCorporation: form.control('msCorporation').value ?? '',
+        referralFee: form.control('referralFee').value ?? '',
         treatmentCostPointCalculationPerPoint:
-            form.control('treatmentCostPointCalculationPerPoint').value,
-        remark: form.control('remark').value,
-        paymentSiteTighten: form.control('paymentSiteTighten').value,
-        paymentSitePayment: form.control('paymentSitePayment').value,
+            form.control('treatmentCostPointCalculationPerPoint').value ?? '',
+        remark: form.control('remark').value ?? '',
+        paymentSiteTighten: form.control('paymentSiteTighten').value ?? '',
+        paymentSitePayment: form.control('paymentSitePayment').value ?? '',
       );
       var result =
           await hospitalRepository.postAdditionalInformationHospital(request);
@@ -660,25 +660,25 @@ class BasicInformationModel {
 
       PaymentOptionHospitalRequest request = PaymentOptionHospitalRequest(
         hospital: hospitalId.value ?? basicInformationData.value.data?.id ?? '',
-        id: form.control('_id').value,
-        payer: form.control('payer').value,
-        paymentTiming: form.control('paymentTiming').value,
-        feeBack: form.control('feeBack').value,
+        id: form.control('_id').value ?? '',
+        payer: form.control('payer').value ?? '',
+        paymentTiming: form.control('paymentTiming').value ?? '',
+        feeBack: form.control('feeBack').value ?? '',
         paymentDirectlyToTheHospital:
-            form.control('paymentDirectlyToTheHospital').value,
-        transfer: form.control('transfer').value,
-        electronicPayment: form.control('electronicPayment').value,
-        alipay: form.control('alipay').value,
-        unionPayPay: form.control('unionPayPay').value,
-        unionPay: form.control('unionPay').value,
-        weChatPay: form.control('weChatPay').value,
-        creditCard: form.control('creditCard').value,
-        visa: form.control('visa').value,
-        masterCard: form.control('masterCard').value,
-        americanExpress: form.control('americanExpress').value,
-        jcb: form.control('jcb').value,
-        cash: form.control('cash').value,
-        remark: form.control('remark').value,
+            form.control('paymentDirectlyToTheHospital').value ?? '',
+        transfer: form.control('transfer').value ?? false,
+        electronicPayment: form.control('electronicPayment').value ?? false,
+        alipay: form.control('alipay').value ?? false,
+        unionPayPay: form.control('unionPayPay').value ?? false,
+        unionPay: form.control('unionPay').value ?? false,
+        weChatPay: form.control('weChatPay').value ?? false,
+        creditCard: form.control('creditCard').value ?? false,
+        visa: form.control('visa').value ?? false,
+        masterCard: form.control('masterCard').value ?? false,
+        americanExpress: form.control('americanExpress').value ?? false,
+        jcb: form.control('jcb').value ?? false,
+        cash: form.control('cash').value ?? false,
+        remark: form.control('remark').value ?? '',
       );
       var result = await hospitalRepository.postPaymentOptionHospital(request);
 
@@ -705,9 +705,9 @@ class BasicInformationModel {
                 hospitalId.value ?? basicInformationData.value.data?.id ?? '',
             id: element['_id'],
             supportLanguage: element['supportLanguage'],
-            foreignStaff: element['foreignStaff'],
+            foreignStaff: element['foreignStaff'] ?? false,
             medicalInterpretationSupport:
-                element['medicalInterpretationSupport'],
+                element['medicalInterpretationSupport'] ?? false,
           );
           var result =
               await hospitalRepository.postSupportLanguageHospital(request);
