@@ -128,25 +128,25 @@ FormGroup basicInfoForm({
         'MEDICAL_RECORD_AGENTS': FormGroup({
           'id': FormControl<String?>(),
           'company': FormControl<String?>(
-            validators: [Validators.required],
+            value: '',
           ),
           'nameInKanji': FormControl<String?>(
-            validators: [Validators.required],
+            value: '',
           ),
           'nameInKana': FormControl<String?>(
-            validators: [Validators.required],
+            value: '',
           ),
         }),
         'MEDICAL_RECORD_Referrers': FormGroup({
           'id': FormControl<String?>(),
           'company': FormControl<String?>(
-            validators: [Validators.required],
+            value: '',
           ),
           'nameInKanji': FormControl<String?>(
-            validators: [Validators.required],
+            value: '',
           ),
           'nameInKana': FormControl<String?>(
-            validators: [Validators.required],
+            value: '',
           ),
         }),
         'MEDICAL_RECORD_Interpreter': FormGroup({
@@ -169,7 +169,9 @@ FormGroup basicInfoForm({
         'MEDICAL_RECORD_Companion': FormArray([
           FormGroup({
             'id': FormControl<String?>(),
-            'leader': FormControl<bool>(),
+            'leader': FormControl<bool>(
+              value: false,
+            ),
             'remarks': FormControl<String?>(),
             'familyNameRomanized': FormControl<String?>(),
             'middleNameRomanized': FormControl<String?>(),
