@@ -83,27 +83,67 @@ class ItineraryModel {
       ValueNotifier(const AsyncData());
   Future<void> submitItinerary(FormGroup formGroup) async {
     try {
-      // List<Day> days =  [];
-      // await formGroup.control('').value.forEach((element){
-      //   days.add(
-      //     Day(
-      //       date: element['data'],
-      //       accommodation: element['accommodation'],
-      //       evening: 
-      //     )
-      //   );
-      // });
-      submitData.value = const AsyncData(loading: true);
-      final response = await processChartRepository.postDetailItinerary(
-        DetailIneraryRequest(
-          tourName: formGroup.control('tourName').value,
-          peopleNumber: formGroup.control('peopleNumber').value,
-          group: formGroup.control('group').value,
-          classification: formGroup.control('classification').value,
-          patient: formGroup.control('patient').value,
-          day: formGroup.control('day').value,
-        ),
+      List<String> patients = [];
+      formGroup.control('patient').value.forEach((element){
+        patients.add(
+          element['patientName']
+        );
+      });
+      List<Day> days = [];
+      formGroup.control('day').value.forEach(
+        (element) {
+          List<bool> meals = [];
+          meals.add(element['morning']);
+          meals.add(element['noon']);
+          meals.add(element['evening']);
+
+          List<Group> groups = [];
+          element['groups'].forEach(
+            (groupElement) {
+              List<Task> tasks = [];
+              groupElement['task'].forEach(
+                (taskElement) {
+                  tasks.add(
+                    Task(
+                      placeName: taskElement['placeName'],
+                      timeFrom: taskElement['timeFrom'],
+                      timeTo: taskElement['timeTo'],
+                      transportation: taskElement['transportation'],
+                      itinerary: taskElement['itinerary'],
+                    ),
+                  );
+                  logger.d('placeName ${taskElement['placeName']}');
+                },
+              );
+
+              groups.add(
+                Group(task: tasks),
+              );
+            },
+          );
+          days.add(
+            Day(
+              date: element['date'],
+              meals: meals,
+              placeName: element['placeName'],
+              placeStay: element['placeStay'],
+              groups: groups,
+            ),
+          );
+        },
       );
+      submitData.value = const AsyncData(loading: true);
+      DetailIneraryRequest request = DetailIneraryRequest(
+        patient: patients,
+        tourName: formGroup.control('tourName').value,
+        peopleNumber: formGroup.control('peopleNumber').value,
+        group: formGroup.control('group').value,
+        classification: formGroup.control('classification').value,
+        day: days,
+      );
+      
+      final response =
+          await processChartRepository.postDetailItinerary(request);
       submitData.value = AsyncData(data: response);
       itinerraryData.value =
           AsyncData(data: itinerraryData.value.data!..add(response));
