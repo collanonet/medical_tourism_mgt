@@ -5,25 +5,29 @@ FormGroup formBasicInformation() {
   return FormGroup({
     'basicInformationAgent': FormGroup({
       '_id': FormControl<String>(),
-      'memo': FormControl<String>(),
+      'memo': FormControl<String>(
+        value: '',
+      ),
       'companyName': FormControl<String>(
         validators: [Validators.required],
       ),
       'nameKana': FormControl<String>(
         validators: [Validators.required],
       ),
-      'postalCode': FormControl<String>(),
-      'address': FormControl<String>(),
-      'area': FormControl<String>(),
+      'postalCode': FormControl<String>(
+        value: '',
+      ),
+      'address': FormControl<String>(
+        value: '',
+      ),
+      'area': FormControl<String>(
+        value: '',
+      ),
       'phoneNumber': FormControl<String>(
-        validators: [
-          Validators.required,
-        ],
+        value: '',
       ),
       'transactionStartDate': FormControl<DateTime>(
-        validators: [
-          Validators.required,
-        ],
+        value: DateTime.now(),
       ),
       'referralCommissions': FormArray([
         FormGroup({
@@ -32,7 +36,9 @@ FormGroup formBasicInformation() {
           'referralCommission': FormControl<int>(),
         }),
       ]),
-      'howToMainPayment': FormControl<String>(),
+      'howToMainPayment': FormControl<String>(
+        value: '',
+      ),
       'pastCasesNumber': FormControl<int>(),
     }),
     'manager': FormArray([
@@ -46,11 +52,7 @@ FormGroup formBasicInformation() {
         'fullNameChineseKanjiVietnameseNotation': FormControl<String>(),
         'fullNameJapaneseKanjiChineseOnly': FormControl<String>(),
         'fullNameKana': FormControl<String>(),
-        'phoneNumber': FormControl<String>(
-          validators: [
-            Validators.required,
-          ],
-        ),
+        'phoneNumber': FormControl<String>(),
         'email': FormControl<String>(
           validators: [
             Validators.required,

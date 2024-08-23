@@ -183,8 +183,6 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                   ),
                                   inputFormatters: [
                                     CustomPhoneFormatter(),
-                                    // FilteringTextInputFormatter.allow(
-                                    //     RegExp(r'[0-9]')),
                                   ],
                                 ),
                               ),
@@ -222,23 +220,20 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                     suffixIcon: Container(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 5, horizontal: 20),
-                                      child: InkWell(
-                                        onTap: () {},
-                                        child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              vertical: 5, horizontal: 15),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(20),
-                                              color: context
-                                                  .appTheme.primaryColor),
-                                          child: Text(
-                                            '開く',
-                                            style: context.textTheme.labelLarge
-                                                ?.copyWith(
-                                                    color: const Color(
-                                                        0xffFFFFFF)),
-                                          ),
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                            vertical: 5, horizontal: 15),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(20),
+                                            color: context
+                                                .appTheme.primaryColor),
+                                        child: Text(
+                                          '開く',
+                                          style: context.textTheme.labelLarge
+                                              ?.copyWith(
+                                                  color: const Color(
+                                                      0xffFFFFFF)),
                                         ),
                                       ),
                                     ),

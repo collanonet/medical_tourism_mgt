@@ -1,10 +1,10 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'create_domestic_medical_data_response.g.dart';
+
 @JsonSerializable()
 class DomesticMedicalDataResponse {
-   @JsonKey(name: '_id')
+  @JsonKey(name: '_id')
   final String id;
-
   String? file;
   String? nameOfMedicalInstitution;
   String? category;
@@ -14,6 +14,7 @@ class DomesticMedicalDataResponse {
   String? sharedUrlIssue;
   String? disclosureToPatients;
   String? disclosureToOtherMedicalInstitutions;
+  String medicalRecordId;
 
   DomesticMedicalDataResponse({
     required this.id,
@@ -26,8 +27,10 @@ class DomesticMedicalDataResponse {
     this.sharedUrlIssue,
     this.disclosureToPatients,
     this.disclosureToOtherMedicalInstitutions,
+    required this.medicalRecordId,
   });
 
-  factory DomesticMedicalDataResponse.fromJson(Map<String, dynamic> json) => _$DomesticMedicalDataResponseFromJson(json);
+  factory DomesticMedicalDataResponse.fromJson(Map<String, dynamic> json) =>
+      _$DomesticMedicalDataResponseFromJson(json);
   Map<String, dynamic> toJson() => _$DomesticMedicalDataResponseToJson(this);
 }
