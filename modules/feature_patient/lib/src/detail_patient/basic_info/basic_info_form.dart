@@ -7,17 +7,13 @@ FormGroup basicInfoForm({
     FormGroup(
       {
         'id': FormControl<String?>(),
-        'dateOfBirth': FormControl<DateTime>(
-          validators: [Validators.required],
-        ), //生年月日
-        'age': FormControl<int?>(), // 年齢
+        'dateOfBirth': FormControl<DateTime>(), //生年月日
+        'age': FormControl<int?>(value: 0), // 年齢
         'height': FormControl<int>(
           value: 0,
-          validators: [Validators.required],
         ), // 身長
         'weight': FormControl<int>(
           value: 0,
-          validators: [Validators.required],
         ), // 体重
         'gender': FormControl<bool>(
           value: true,
@@ -28,20 +24,14 @@ FormGroup basicInfoForm({
         'isFemale': FormControl<bool>(
           value: false,
         ), // 女性
-        'arrivalDate': FormControl<DateTime>(
-          validators: [Validators.required],
-        ), // 来日日
+        'arrivalDate': FormControl<DateTime>(), // 来日日
         'consultationDate': FormControl<DateTime>(),
         'returnDate': FormControl<DateTime>(),
-        'proposalNumber': FormControl<String>(
-          validators: [Validators.required],
-        ),
+        'proposalNumber': FormControl<String>(),
         'receptionDate': FormControl<DateTime>(),
         'type': FormArray([
           FormGroup({
-            'type': FormControl<String>(
-              validators: [Validators.required],
-            ),
+            'type': FormControl<String>(),
           })
         ]),
         'progress': FormControl<String>(),
@@ -161,7 +151,6 @@ FormGroup basicInfoForm({
           'expirationDate': FormControl<DateTime>(),
           'visaType': FormControl<String?>(
             value: 'medicalGuarantee',
-            validators: [Validators.required],
           ),
           'visaCategory': FormControl<String?>(),
           'underConfirmation': FormControl<bool?>(),
