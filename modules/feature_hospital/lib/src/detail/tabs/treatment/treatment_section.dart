@@ -27,9 +27,10 @@ class _TreatmentSectionState extends State<TreatmentSection> {
           height: context.appTheme.spacing.formSpacing,
         ),
         children: [
-          TreatmentMenuSection(
-            hospitalId: widget.hospitalId,
-          ),
+          //Todo: Uncomment this code but need redo
+          // TreatmentMenuSection(
+          //   hospitalId: widget.hospitalId,
+          // ),
           const TelemedicineMenuSection(),
           ValueListenableListener(
             valueListenable: context.read<TreatmentModle>().submitData,

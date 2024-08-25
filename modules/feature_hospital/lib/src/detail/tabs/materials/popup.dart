@@ -6,7 +6,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-
+import 'package:intl/intl.dart';
 import 'material_model.dart';
 
 class Popup extends StatelessWidget {
@@ -123,7 +123,7 @@ class Popup extends StatelessWidget {
                         return ReactiveTextField<DateTime>(
                           formControlName: 'dateOfIssue',
                           valueAccessor: DateTimeValueAccessor(
-                              //dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
                           decoration: InputDecoration(
                             label: const Text(
