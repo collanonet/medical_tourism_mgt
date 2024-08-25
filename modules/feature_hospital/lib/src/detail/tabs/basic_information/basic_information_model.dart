@@ -159,13 +159,9 @@ class BasicInformationModel {
             ),
             'nameKana': FormControl<String>(
               value: item.nameKana ?? '',
-              validators: [Validators.required],
             ),
             'telephoneNumber': FormControl<String>(
               value: item.telephoneNumber ?? '',
-              validators: [
-                Validators.required,
-              ],
             ),
             'email': FormControl<String>(
               validators: [
@@ -294,9 +290,6 @@ class BasicInformationModel {
             ),
             'nameKanji': FormControl<String>(
               value: item.nameKanji ?? '',
-              validators: [
-                Validators.required,
-              ],
             ),
             'nameKana': FormControl<String>(value: item.nameKana),
             'affiliatedAcademicSociety': affiliatedAcademicSociety,
@@ -307,21 +300,14 @@ class BasicInformationModel {
                 FormControl<String>(value: item.onlineMedicalTreatment),
             'telephoneNumber': FormControl<String>(
               value: item.telephoneNumber ?? '',
-              validators: [
-                Validators.required,
-              ],
             ),
             'completionCertificate': completionCertificate,
             'faxNumber': FormControl<String>(
               value: item.faxNumber ?? '',
-              validators: [
-                Validators.required,
-              ],
             ),
             'email': FormControl<String>(
               value: item.email ?? '',
               validators: [
-                Validators.required,
                 Validators.email,
               ],
             ),

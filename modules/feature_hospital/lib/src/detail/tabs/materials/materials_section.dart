@@ -143,7 +143,7 @@ class MaterialSectionState extends State<MaterialSection> {
                                   Column(
                                     children: [
                                       Text(
-                                        '診療データをここにドラッグ＆ドロップ',
+                                        'パンフレット、資料をここにドラッグ＆ドロップ',
                                         style: context.textTheme.bodySmall
                                             ?.copyWith(
                                           fontSize: 22,
