@@ -491,6 +491,8 @@ abstract class PatientRepository {
 
   Future<TreamentResponce> getBookingByPatientId(String patientId);
 
+  Future<TreamentResponce> updateBooking(String treatmentId, TreamentRequest treatmentRequest);
+
   Future<List<WebBookingMedicalRecordResponse>> webBookingGetReservationAll({
     String? hospitalName,
     String? doctor_name,

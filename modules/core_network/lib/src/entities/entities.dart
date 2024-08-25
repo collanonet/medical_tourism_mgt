@@ -66,3 +66,4 @@ export 'payment_option_hospital_response.dart';
 export 'support_language_hospital_response.dart';
 export 'application_treament_responce.dart';
 export 'memo_material_hospital_response.dart';
+export 'application_treament_request.dart';

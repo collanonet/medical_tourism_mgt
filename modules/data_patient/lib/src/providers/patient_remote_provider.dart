@@ -676,4 +676,11 @@ class PatientRemoteProvider {
   Future<void> webBookingDeleteReservation(String reservationId) async {
     return apiService.webBookingDeleteReservation(reservationId);
   }
+
+  Future<TreamentResponce> updateBooking(String treatmentId, TreamentRequest treatmentRequest) {
+    return apiService.updateBooking(
+      treatmentId,
+      treatmentRequest,
+    );
+  }
 }

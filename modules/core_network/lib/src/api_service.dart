@@ -1329,6 +1329,12 @@ abstract class ApiService {
     @Path('patientId') String patientId,
   );
 
+  @PUT('${EndPoints.WEB_BOOKING_PATIENT}/{id}')
+  Future<TreamentResponce> updateBooking(
+    @Path('id') String id,
+    @Body() TreamentRequest treamentResponce,
+  );
+
   //WEB_BOOKING_RESERVATION
 
   @GET(EndPoints.WEB_BOOKING_RESERVATION)

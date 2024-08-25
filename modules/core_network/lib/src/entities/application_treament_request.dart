@@ -1,10 +1,8 @@
-import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
-part 'application_treament_responce.g.dart';
+part 'application_treament_request.g.dart';
 
-@CopyWith()
 @JsonSerializable()
-class TreamentResponce {
+class TreamentRequest {
   @JsonKey(name: '_id')
   String id;
   bool? medicalInfo;
@@ -30,7 +28,7 @@ class TreamentResponce {
   DateTime? desiredDate3;
   String? scheduled;
 
-  TreamentResponce({
+  TreamentRequest({
     required this.id,
     this.medicalInfo,
     this.dicom,
@@ -55,11 +53,11 @@ class TreamentResponce {
     this.desiredDate3,
     this.scheduled,
   });
-  factory TreamentResponce.fromJson(Map<String, dynamic> json) {
-    return _$TreamentResponceFromJson(json);
+  factory TreamentRequest.fromJson(Map<String, dynamic> json) {
+    return _$TreamentRequestFromJson(json);
   }
 
   Map<String, dynamic> toJson() {
-    return _$TreamentResponceToJson(this);
+    return _$TreamentRequestToJson(this);
   }
 }
