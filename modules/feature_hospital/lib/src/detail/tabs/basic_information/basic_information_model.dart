@@ -642,6 +642,25 @@ class BasicInformationModel {
     try {
       additionalInformationData.value = const AsyncData(loading: true);
 
+      String? file;
+      if (form.control('file').value != null) {
+        FileSelect docFile = form.control('file').value;
+        if (docFile.file != null) {
+          try {
+            String base64Image = base64Encode(docFile.file!);
+            FileResponse fileData = await hospitalRepository.uploadFileBase64(
+              base64Image,
+              docFile.filename!,
+            );
+            file = fileData.filename;
+          } catch (e) {
+            logger.e(e);
+          }
+        } else {
+          file = docFile.url;
+        }
+      }
+
       List<String> contract = convertToList(form.value, 'contract');
 
       AdditionalInformationSectionRequest request =
@@ -650,6 +669,7 @@ class BasicInformationModel {
         id: form.control('_id').value,
         outsourcingContract: form.control('outsourcingContract').value ?? '',
         contract: contract,
+        file: file,
         msCorporation: form.control('msCorporation').value ?? '',
         referralFee: form.control('referralFee').value ?? '',
         treatmentCostPointCalculationPerPoint:

@@ -15,6 +15,7 @@ class AdditionalInformationSectionRequest {
   String? remark;
   String? paymentSiteTighten;
   String? paymentSitePayment;
+  String? file;
 
   AdditionalInformationSectionRequest({
     this.id,
@@ -27,6 +28,7 @@ class AdditionalInformationSectionRequest {
     this.remark,
     this.paymentSiteTighten,
     this.paymentSitePayment,
+    this.file,
   });
 
   factory AdditionalInformationSectionRequest.fromJson(
