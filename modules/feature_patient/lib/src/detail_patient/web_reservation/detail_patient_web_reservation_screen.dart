@@ -1218,16 +1218,27 @@ class _DetailPatientWebReservationScreenState
                               ),
                               IntrinsicWidth(
                                 stepWidth: 100,
-                                child: ReactiveTextField(
-                                  formControlName: 'testCallTime',
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    formatter.timeFormatter,
-                                  ],
-                                  decoration: InputDecoration(
-                                    label: Text('時間'),
-                                  ),
-                                ),
+                                child: ReactiveValueListenableBuilder<String>(
+                                    formControlName: 'testCallTime',
+                                    builder: (context, control, _) {
+                                      return ReactiveTextField<String>(
+                                        formControlName: 'testCallTime',
+                                        keyboardType: TextInputType.number,
+                                        inputFormatters: [
+                                          formatter.timeFormatter,
+                                        ],
+                                        onChanged: (value) {
+                                          if (value.value != null) {
+                                            var time =
+                                                processTimeInput(value.value!);
+                                            control.value = time;
+                                          }
+                                        },
+                                        decoration: InputDecoration(
+                                          label: Text('時間'),
+                                        ),
+                                      );
+                                    }),
                               ),
                             ],
                           ),
