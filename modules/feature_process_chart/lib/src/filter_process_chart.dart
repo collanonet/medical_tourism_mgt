@@ -244,12 +244,21 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                         ),
                         SizedBox(width: context.appTheme.spacing.marginMedium),
                         ReactiveFormConsumer(
-                          builder: (context, formGroup, _) {
+                          builder: (context, form, _) {
                             return ElevatedButton(
                               onPressed: () {
-                                context.read<ProcessChartModel>().fetchItinerary(
-                                  
-                                );
+                                context
+                                    .read<ProcessChartModel>()
+                                    .fetchItinerary(
+                                      tourName:
+                                          formGroup.control('tourName').value,
+                                      classification: formGroup
+                                          .control('classification')
+                                          .value,
+                                      dateFrom:
+                                          formGroup.control('dateFrom').value,
+                                      dateTo: formGroup.control('dateTo').value,
+                                    );
                               },
                               child: Text('検索'),
                             );

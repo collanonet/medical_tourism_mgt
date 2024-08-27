@@ -134,7 +134,7 @@ class _DetailPatientWebReservationScreenState
                                 .read<DetailPatientWebReservationModel>()
                                 .bookingByPatient
                                 .value;
-              
+
                             if (!data.hasData && !data.loading) {
                               snackBarWidget(
                                   message: '予約が見つかりませんでした。',
@@ -153,10 +153,8 @@ class _DetailPatientWebReservationScreenState
                                       Row(
                                         children: [
                                           Expanded(
-                                            child:
-                                                ReactiveDatePicker<DateTime>(
-                                              formControlName:
-                                                  'preferredDate1',
+                                            child: ReactiveDatePicker<DateTime>(
+                                              formControlName: 'preferredDate1',
                                               firstDate: DateTime(1900),
                                               lastDate: DateTime(2100),
                                               builder: (BuildContext context,
@@ -170,9 +168,8 @@ class _DetailPatientWebReservationScreenState
                                                       'preferredDate1',
                                                   valueAccessor:
                                                       DateTimeValueAccessor(
-                                                    dateTimeFormat:
-                                                        DateFormat(
-                                                            'yyyy/MM/dd'),
+                                                    dateTimeFormat: DateFormat(
+                                                        'yyyy/MM/dd'),
                                                   ),
                                                   decoration: InputDecoration(
                                                     label: Text(
@@ -180,8 +177,7 @@ class _DetailPatientWebReservationScreenState
                                                     ),
                                                     suffixIcon: IconButton(
                                                       icon: const Icon(
-                                                        CupertinoIcons
-                                                            .calendar,
+                                                        CupertinoIcons.calendar,
                                                         color: Colors.grey,
                                                       ),
                                                       onPressed:
@@ -196,14 +192,12 @@ class _DetailPatientWebReservationScreenState
                                             ),
                                           ),
                                           SizedBox(
-                                            width: context.appTheme.spacing
-                                                .marginMedium,
+                                            width: context
+                                                .appTheme.spacing.marginMedium,
                                           ),
                                           Expanded(
-                                            child:
-                                                ReactiveDatePicker<DateTime>(
-                                              formControlName:
-                                                  'preferredDate2',
+                                            child: ReactiveDatePicker<DateTime>(
+                                              formControlName: 'preferredDate2',
                                               firstDate: DateTime(1900),
                                               lastDate: DateTime(2100),
                                               builder: (BuildContext context,
@@ -217,9 +211,8 @@ class _DetailPatientWebReservationScreenState
                                                       'preferredDate2',
                                                   valueAccessor:
                                                       DateTimeValueAccessor(
-                                                    dateTimeFormat:
-                                                        DateFormat(
-                                                            'yyyy/MM/dd'),
+                                                    dateTimeFormat: DateFormat(
+                                                        'yyyy/MM/dd'),
                                                   ),
                                                   decoration: InputDecoration(
                                                     label: Text(
@@ -227,8 +220,7 @@ class _DetailPatientWebReservationScreenState
                                                     ),
                                                     suffixIcon: IconButton(
                                                       icon: const Icon(
-                                                        CupertinoIcons
-                                                            .calendar,
+                                                        CupertinoIcons.calendar,
                                                         color: Colors.grey,
                                                       ),
                                                       onPressed:
@@ -243,14 +235,12 @@ class _DetailPatientWebReservationScreenState
                                             ),
                                           ),
                                           SizedBox(
-                                            width: context.appTheme.spacing
-                                                .marginMedium,
+                                            width: context
+                                                .appTheme.spacing.marginMedium,
                                           ),
                                           Expanded(
-                                            child:
-                                                ReactiveDatePicker<DateTime>(
-                                              formControlName:
-                                                  'preferredDate3',
+                                            child: ReactiveDatePicker<DateTime>(
+                                              formControlName: 'preferredDate3',
                                               firstDate: DateTime(1900),
                                               lastDate: DateTime(2100),
                                               builder: (BuildContext context,
@@ -264,9 +254,8 @@ class _DetailPatientWebReservationScreenState
                                                       'preferredDate3',
                                                   valueAccessor:
                                                       DateTimeValueAccessor(
-                                                    dateTimeFormat:
-                                                        DateFormat(
-                                                            'yyyy/MM/dd'),
+                                                    dateTimeFormat: DateFormat(
+                                                        'yyyy/MM/dd'),
                                                   ),
                                                   decoration: InputDecoration(
                                                     label: Text(
@@ -274,8 +263,7 @@ class _DetailPatientWebReservationScreenState
                                                     ),
                                                     suffixIcon: IconButton(
                                                       icon: const Icon(
-                                                        CupertinoIcons
-                                                            .calendar,
+                                                        CupertinoIcons.calendar,
                                                         color: Colors.grey,
                                                       ),
                                                       onPressed:
@@ -304,8 +292,7 @@ class _DetailPatientWebReservationScreenState
                                               controlAffinity:
                                                   ListTileControlAffinity
                                                       .leading,
-                                              formControlName:
-                                                  'noDesiredDate',
+                                              formControlName: 'noDesiredDate',
                                               title: Text('希望日なし'),
                                             ),
                                           ),
@@ -352,11 +339,10 @@ class _DetailPatientWebReservationScreenState
                                     .hospital,
                                 onListen: () {
                                   var data = context
-                                      .read<
-                                          DetailPatientWebReservationModel>()
+                                      .read<DetailPatientWebReservationModel>()
                                       .hospital
                                       .value;
-              
+
                                   if (data.hasError) {
                                     snackBarWidget(
                                         message: '病院が見つからない。',
@@ -390,10 +376,32 @@ class _DetailPatientWebReservationScreenState
                                                   width: 30,
                                                   child:
                                                       const CircularProgressIndicator())
-                                              : Icon(
-                                                  Icons.search,
-                                                  color: Colors.grey,
-                                                ),
+                                              : ReactiveValueListenableBuilder<
+                                                      String>(
+                                                  formControlName:
+                                                      'medicalInstitutionName',
+                                                  builder:
+                                                      (context, control, _) {
+                                                    return IconButton(
+                                                      onPressed: () {
+                                                        if (control.value !=
+                                                                null &&
+                                                            control.value!
+                                                                .isNotEmpty) {
+                                                          context
+                                                              .read<
+                                                                  DetailPatientWebReservationModel>()
+                                                              .searchHospital(
+                                                                  search: control
+                                                                      .value);
+                                                        }
+                                                      },
+                                                      icon: Icon(
+                                                        Icons.search,
+                                                        color: Colors.grey,
+                                                      ),
+                                                    );
+                                                  }),
                                         ),
                                       );
                                     }),
@@ -409,18 +417,17 @@ class _DetailPatientWebReservationScreenState
                                     .doctors,
                                 onListen: () {
                                   var data = context
-                                      .read<
-                                          DetailPatientWebReservationModel>()
+                                      .read<DetailPatientWebReservationModel>()
                                       .doctors
                                       .value;
-              
+
                                   if (data.hasData &&
                                       data.requireData.isEmpty) {
                                     snackBarWidget(
                                         message: 'この病院には医者がいない。',
                                         backgroundColor: Colors.red);
                                   }
-              
+
                                   if (data.hasError) {
                                     snackBarWidget(
                                         message: 'この病院には医者がいない。',
@@ -442,20 +449,18 @@ class _DetailPatientWebReservationScreenState
                                             labelText: '医者',
                                           ),
                                           items: value.data
-                                                  ?.map(
-                                                      (e) => DropdownMenuItem(
-                                                            value: e,
-                                                            child: Text(
-                                                                e.nameKanji ??
-                                                                    'NoName'),
-                                                            onTap: () {
-                                                              context
-                                                                  .read<
-                                                                      DetailPatientWebReservationModel>()
-                                                                  .selectDoctor(
-                                                                      e);
-                                                            },
-                                                          ))
+                                                  ?.map((e) => DropdownMenuItem(
+                                                        value: e,
+                                                        child: Text(
+                                                            e.nameKanji ??
+                                                                'NoName'),
+                                                        onTap: () {
+                                                          context
+                                                              .read<
+                                                                  DetailPatientWebReservationModel>()
+                                                              .selectDoctor(e);
+                                                        },
+                                                      ))
                                                   .toList() ??
                                               [
                                                 DropdownMenuItem(
@@ -1007,29 +1012,26 @@ class _DetailPatientWebReservationScreenState
                                                       decoration:
                                                           InputDecoration(
                                                         label: Text('第一希望'),
-                                                        suffixIcon:
-                                                            IconButton(
+                                                        suffixIcon: IconButton(
                                                           icon: const Icon(
                                                             CupertinoIcons
                                                                 .calendar,
-                                                            color:
-                                                                Colors.grey,
+                                                            color: Colors.grey,
                                                           ),
-                                                          onPressed: picker
-                                                              .showPicker,
+                                                          onPressed:
+                                                              picker.showPicker,
                                                         ),
                                                       ),
                                                       inputFormatters: [
-                                                        formatter
-                                                            .dateFormatter,
+                                                        formatter.dateFormatter,
                                                       ],
                                                     );
                                                   },
                                                 ),
                                               ),
                                               SizedBox(
-                                                width: context.appTheme
-                                                    .spacing.marginMedium,
+                                                width: context.appTheme.spacing
+                                                    .marginMedium,
                                               ),
                                               ReactiveValueListenableBuilder(
                                                   formControlName: 'choice',
@@ -1040,20 +1042,18 @@ class _DetailPatientWebReservationScreenState
                                                         boxText(
                                                           context,
                                                           '午前',
-                                                          textColor:
-                                                              control.value ==
-                                                                      '午前'
-                                                                  ? Colors
-                                                                      .white
-                                                                  : Colors
-                                                                      .black,
+                                                          textColor: control
+                                                                      .value ==
+                                                                  '午前'
+                                                              ? Colors.white
+                                                              : Colors.black,
                                                           bg: control.value ==
                                                                   '午前'
                                                               ? Color(
                                                                   0xffF08C67)
                                                               : Colors.white,
-                                                          borderC: Color(
-                                                              0xffF08C67),
+                                                          borderC:
+                                                              Color(0xffF08C67),
                                                           onTap: () {
                                                             control.value =
                                                                 '午前';
@@ -1068,20 +1068,18 @@ class _DetailPatientWebReservationScreenState
                                                         boxText(
                                                           context,
                                                           '午後',
-                                                          textColor:
-                                                              control.value ==
-                                                                      '午後'
-                                                                  ? Colors
-                                                                      .white
-                                                                  : Colors
-                                                                      .black,
+                                                          textColor: control
+                                                                      .value ==
+                                                                  '午後'
+                                                              ? Colors.white
+                                                              : Colors.black,
                                                           bg: control.value ==
                                                                   '午後'
                                                               ? Color(
                                                                   0xffF08C67)
                                                               : Colors.white,
-                                                          borderC: Color(
-                                                              0xffF08C67),
+                                                          borderC:
+                                                              Color(0xffF08C67),
                                                           onTap: () {
                                                             control.value =
                                                                 '午後';
@@ -1096,20 +1094,18 @@ class _DetailPatientWebReservationScreenState
                                                         boxText(
                                                           context,
                                                           '終日',
-                                                          textColor:
-                                                              control.value ==
-                                                                      '終日'
-                                                                  ? Colors
-                                                                      .white
-                                                                  : Colors
-                                                                      .black,
+                                                          textColor: control
+                                                                      .value ==
+                                                                  '終日'
+                                                              ? Colors.white
+                                                              : Colors.black,
                                                           bg: control.value ==
                                                                   '終日'
                                                               ? Color(
                                                                   0xffF08C67)
                                                               : Colors.white,
-                                                          borderC: Color(
-                                                              0xffF08C67),
+                                                          borderC:
+                                                              Color(0xffF08C67),
                                                           onTap: () {
                                                             control.value =
                                                                 '終日';
@@ -1119,8 +1115,8 @@ class _DetailPatientWebReservationScreenState
                                                     );
                                                   }),
                                               SizedBox(
-                                                width: context.appTheme
-                                                    .spacing.marginMedium,
+                                                width: context.appTheme.spacing
+                                                    .marginMedium,
                                               ),
                                               Expanded(
                                                 child: ReactiveTextField(
@@ -1139,13 +1135,13 @@ class _DetailPatientWebReservationScreenState
                                                 ),
                                               ),
                                               SizedBox(
-                                                width: context.appTheme
-                                                    .spacing.marginMedium,
+                                                width: context.appTheme.spacing
+                                                    .marginMedium,
                                               ),
                                               Text('〜'),
                                               SizedBox(
-                                                width: context.appTheme
-                                                    .spacing.marginMedium,
+                                                width: context.appTheme.spacing
+                                                    .marginMedium,
                                               ),
                                               Expanded(
                                                 child: ReactiveTextField(
@@ -1174,11 +1170,9 @@ class _DetailPatientWebReservationScreenState
                                                         icon: Icon(
                                                             Icons
                                                                 .delete_forever,
-                                                            color:
-                                                                Colors.red),
+                                                            color: Colors.red),
                                                         onPressed: () =>
-                                                            formArray
-                                                                .removeAt(
+                                                            formArray.removeAt(
                                                           formArray.controls
                                                               .indexOf(
                                                                   currentForm),
@@ -1192,15 +1186,14 @@ class _DetailPatientWebReservationScreenState
                                           ),
                                         ),
                                       );
-              
+
                                   return Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
                                       ColumnSeparated(
                                         separatorBuilder:
-                                            (BuildContext context,
-                                                    int index) =>
+                                            (BuildContext context, int index) =>
                                                 SizedBox(
                                           height: context
                                               .appTheme.spacing.marginMedium,
@@ -1255,8 +1248,8 @@ class _DetailPatientWebReservationScreenState
                                               color: Color(0xffF08C67),
                                             ),
                                             SizedBox(
-                                              width: context.appTheme.spacing
-                                                  .marginSmall,
+                                              width: context
+                                                  .appTheme.spacing.marginSmall,
                                             ),
                                             Text(
                                               '候補日を追加',
@@ -1275,8 +1268,7 @@ class _DetailPatientWebReservationScreenState
                               ),
                               ValueListenableBuilder(
                                   valueListenable: context
-                                      .read<
-                                          DetailPatientWebReservationModel>()
+                                      .read<DetailPatientWebReservationModel>()
                                       .webBooking,
                                   builder: (context, value, _) {
                                     if (value.data?.messageFrom == null ||
@@ -1466,7 +1458,7 @@ class _DetailPatientWebReservationScreenState
                               .read<DetailPatientWebReservationModel>()
                               .submit
                               .value;
-              
+
                           if (data.hasData) {
                             logger.d('loading');
                             snackBarWidget(
@@ -1475,7 +1467,7 @@ class _DetailPatientWebReservationScreenState
                                   color: Colors.white),
                             );
                           }
-              
+
                           if (data.hasError) {
                             snackBarWidget(
                               message: '保存できませんでした。 もう一度試してください。',
@@ -1554,18 +1546,19 @@ class _DetailPatientWebReservationScreenState
                                           children: [
                                             Text(
                                               '${index + 1}',
-                                              style: context.textTheme.titleLarge
+                                              style: context
+                                                  .textTheme.titleLarge
                                                   ?.copyWith(
-                                                      color: context
-                                                          .appTheme.primaryColor),
+                                                      color: context.appTheme
+                                                          .primaryColor),
                                             ),
                                             SizedBox(
-                                              width: context
-                                                  .appTheme.spacing.marginMedium,
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
                                             ),
                                             SizedBox(
-                                              width: context
-                                                  .appTheme.spacing.marginMedium,
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
                                             ),
                                           ],
                                         ),

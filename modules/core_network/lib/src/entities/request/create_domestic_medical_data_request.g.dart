@@ -21,6 +21,7 @@ DomesticMedicalDataRequest _$DomesticMedicalDataRequestFromJson(
       disclosureToPatients: json['disclosureToPatients'] as String?,
       disclosureToOtherMedicalInstitutions:
           json['disclosureToOtherMedicalInstitutions'] as String?,
+      medicalRecordId: json['medicalRecordId'] as String,
     );
 
 Map<String, dynamic> _$DomesticMedicalDataRequestToJson(
@@ -36,4 +37,5 @@ Map<String, dynamic> _$DomesticMedicalDataRequestToJson(
       'disclosureToPatients': instance.disclosureToPatients,
       'disclosureToOtherMedicalInstitutions':
           instance.disclosureToOtherMedicalInstitutions,
+      'medicalRecordId': instance.medicalRecordId,
     };

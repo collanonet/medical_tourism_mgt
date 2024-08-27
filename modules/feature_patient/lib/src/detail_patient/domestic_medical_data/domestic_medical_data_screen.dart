@@ -98,97 +98,108 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
               Checkbox(
                 checkColor: Colors.white,
                 value: false,
-                onChanged: (value) {},
+                onChanged: (value) {
+                  selected.value = [];
+                },
               ),
               Expanded(
                   flex: 2,
                   child: Text(
-                    '病院名',
+                    '病院名', // Hospital name
                     style: context.textTheme.bodySmall,
                   )),
               Expanded(
                   child: Text(
-                'カテゴリ',
+                'カテゴリ', // category
                 style: context.textTheme.bodySmall,
               )),
               Expanded(
                   child: Text(
-                '書類名',
+                '書類名', // Document name
                 style: context.textTheme.bodySmall,
               )),
               Expanded(
                   child: Text(
-                '発行日',
+                '発行日', // Publication date
                 style: context.textTheme.bodySmall,
               )),
               Expanded(
                   child: Text(
-                '共有URL発行',
+                '共有URL発行', // Shared URL issue
                 style: context.textTheme.bodySmall,
               )),
               Expanded(
                   child: Text(
-                '患者へ開示',
+                '患者へ開示', // Disclosure to patient
                 style: context.textTheme.bodySmall,
               )),
               Expanded(
                   child: Text(
-                '他病院へ開示',
+                '他病院へ開示', // Disclosure to other hospitals
                 style: context.textTheme.bodySmall,
               )),
             ],
           ),
           Divider(),
-          ListView.separated(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              itemBuilder: (BuildContext context, int index) => InkWell(
-                    onTap: () {},
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: Row(
-                        children: [
-                          Checkbox(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              side: BorderSide(color: Colors.grey),
-                            ),
-                            checkColor: Colors.white,
-                            value: false,
-                            onChanged: (value) {},
-                          ),
-                          Expanded(
-                              flex: 2,
-                              child: Row(
-                                children: [
-                                  Flexible(child: Text('りんくうメディカルクリニック')),
-                                ],
+          ValueListenableBuilder(
+              valueListenable:
+                  context.read<DomesticMedicalDataModel>().domesticMedicalData,
+              builder: (context, value, child) {
+                return ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (BuildContext context, int index) {
+                      var item = value.data![index];
+                      return InkWell(
+                        onTap: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4),
+                          child: Row(
+                            children: [
+                              Checkbox(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                  side: BorderSide(color: Colors.grey),
+                                ),
+                                checkColor: Colors.white,
+                                value: false,
+                                onChanged: (value) {},
+                              ),
+                              Expanded(
+                                  flex: 2,
+                                  child: Row(
+                                    children: [
+                                      Flexible(
+                                          child: Text(item.category ?? '')),
+                                    ],
+                                  )),
+                              const Expanded(child: Text('検査結果報告書')),
+                              Expanded(
+                                  child: Text(
+                                'MRI ',
+                                style: context.textTheme.bodySmall?.copyWith(
+                                    color: context.appTheme.primaryColor),
                               )),
-                          const Expanded(child: Text('検査結果報告書')),
-                          Expanded(
-                              child: Text(
-                            'MRI ',
-                            style: context.textTheme.bodySmall?.copyWith(
-                                color: context.appTheme.primaryColor),
-                          )),
-                          Expanded(child: Text('2023/06/30')),
-                          Expanded(
-                              child: Icon(
-                            Icons.qr_code_scanner,
-                            color: context.appTheme.primaryColor,
-                          )),
-                          Expanded(child: Text('○')),
-                          Expanded(child: Text('×')),
-                        ],
-                      ),
-                    ),
-                  ),
-              separatorBuilder: (BuildContext context, int index) {
-                return Divider(
-                  thickness: 0.5,
-                );
-              },
-              itemCount: 10),
+                              Expanded(child: Text('2023/06/30')),
+                              Expanded(
+                                  child: Icon(
+                                Icons.qr_code_scanner,
+                                color: context.appTheme.primaryColor,
+                              )),
+                              Expanded(child: Text('○')),
+                              Expanded(child: Text('×')),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return Divider(
+                        thickness: 0.5,
+                      );
+                    },
+                    itemCount: value.data?.length ?? 0);
+              }),
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
           ),

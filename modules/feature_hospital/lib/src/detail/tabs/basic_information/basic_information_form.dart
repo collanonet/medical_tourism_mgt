@@ -8,6 +8,7 @@ FormGroup basicInformationForm() {
       '_id': FormControl<String>(),
       'hospital': FormControl<String>(),
       'dateOfUpdate': FormControl<DateTime>(
+        value: DateTime.now(),
         validators: [Validators.required],
       ),
       'updater': FormControl<String>(),
@@ -22,18 +23,21 @@ FormGroup basicInformationForm() {
       'hospitalNameKatakana': FormControl<String>(
         validators: [Validators.required],
       ),
-      'zipCode': FormControl<String>(),
+      'zipCode': FormControl<String>(
+        value: '',
+      ),
       'location': FormControl<String>(
-        validators: [Validators.required],
+        value: '',
       ),
-      'googleMap': FormControl<String>(),
+      'googleMap': FormControl<String>(
+        value: '',
+      ),
       'phoneNumber': FormControl<String>(
-        validators: [Validators.required],
-      ),
+        value: '',),
       'faxNumber': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'homepage': FormControl<String>(),
+        value: '',),
+      'homepage': FormControl<String>(
+        value: '',),
       'supportedMenu': FormControl<bool>(value: false),
       'healthCheckup': FormControl<bool>(value: false),
       'treatment': FormControl<bool>(value: false),
@@ -45,14 +49,18 @@ FormGroup basicInformationForm() {
       'fax': FormControl<bool>(value: false),
       'mail': FormControl<bool>(value: false),
       'line': FormControl<bool>(value: false),
-      'note': FormControl<String>(),
+      'note': FormControl<String>(
+        value: '',),
       'english': FormControl<bool>(value: false),
       'chinese': FormControl<bool>(value: false),
       'vietnamese': FormControl<bool>(value: false),
       'otherLanguages': FormControl<bool>(value: false),
-      'languages': FormControl<String>(),
-      'onlineCheck': FormControl<String>(),
-      'appointment': FormControl<String>(),
+      'languages': FormControl<String>(
+        value: '',),
+      'onlineCheck': FormControl<String>(
+        value: '',),
+      'appointment': FormControl<String>(
+        value: '',),
       'cdr': FormControl<bool>(value: false),
       'storageUrl': FormControl<bool>(value: false),
       'viewMyPage': FormControl<bool>(value: false),
@@ -66,10 +74,14 @@ FormGroup basicInformationForm() {
       'societyRorRegenerativeMedicine': FormControl<bool>(value: false),
       'osakaPrefecturalBase': FormControl<bool>(value: false),
       'certified': FormControl<bool>(value: false),
-      'department1': FormControl<String>(),
-      'department2': FormControl<String>(),
-      'shift1': FormControl<String>(),
-      'shift2': FormControl<String>(),
+      'department1': FormControl<String>(
+        value: '',),
+      'department2': FormControl<String>(
+        value: '',),
+      'shift1': FormControl<String>(
+        value: '',),
+      'shift2': FormControl<String>(
+        value: '',),
       'shift1Mon': FormControl<String>(value: '×'),
       'shift1Tue': FormControl<String>(value: '×'),
       'shift1Wed': FormControl<String>(value: '×'),
@@ -84,14 +96,17 @@ FormGroup basicInformationForm() {
       'shift2Fri': FormControl<String>(value: '×'),
       'shift2Sat': FormControl<String>(value: '×'),
       'shift2Sun': FormControl<String>(value: '×'),
-      'memo': FormControl<String>(),
-      'supportLanguageRemark': FormControl<String>(),
+      'memo': FormControl<String>(
+        value: '',),
+      'supportLanguageRemark': FormControl<String>(
+        value: '',),
     }),
     'medicalRecordHospitals': FormArray([
       FormGroup({
         '_id': FormControl<String>(),
         'hospital': FormControl<String?>(),
         'dateOfUpdate': FormControl<DateTime>(
+          value: DateTime.now(),
           validators: [Validators.required],
         ),
         'departmentName': FormControl<String>(),
@@ -99,11 +114,7 @@ FormGroup basicInformationForm() {
           validators: [Validators.required],
         ),
         'nameKana': FormControl<String>(),
-        'telephoneNumber': FormControl<String>(
-          validators: [
-            Validators.required,
-          ],
-        ),
+        'telephoneNumber': FormControl<String>(),
         'email': FormControl<String>(
           validators: [
             Validators.required,
@@ -145,11 +156,7 @@ FormGroup basicInformationForm() {
         ]),
         'telephoneNumber': FormControl<String>(),
         'faxNumber': FormControl<String>(),
-        'email': FormControl<String>(
-          validators: [
-            Validators.email,
-          ],
-        ),
+        'email': FormControl<String>(),
         'remark2': FormControl<String>(),
       })
     ]),

@@ -111,10 +111,32 @@ class _WebAppointmentDetailScreenState
                                                     width: 30,
                                                     child:
                                                         const CircularProgressIndicator())
-                                                : Icon(
-                                                    Icons.search,
-                                                    color: Colors.grey,
-                                                  ),
+                                                : ReactiveValueListenableBuilder<
+                                                        String>(
+                                                    formControlName:
+                                                        'patientName',
+                                                    builder:
+                                                        (context, control, _) {
+                                                      return IconButton(
+                                                        onPressed: () {
+                                                          if (control.value !=
+                                                                  null &&
+                                                              control.value!
+                                                                  .isNotEmpty) {
+                                                            context
+                                                                .read<
+                                                                    WebAppointmentDetailModel>()
+                                                                .searchPatient(
+                                                                    search: control
+                                                                        .value);
+                                                          }
+                                                        },
+                                                        icon: Icon(
+                                                          Icons.search,
+                                                          color: Colors.grey,
+                                                        ),
+                                                      );
+                                                    }),
                                           ),
                                         ),
                                       );
@@ -400,10 +422,32 @@ class _WebAppointmentDetailScreenState
                                                     width: 30,
                                                     child:
                                                         const CircularProgressIndicator())
-                                                : Icon(
-                                                    Icons.search,
-                                                    color: Colors.grey,
-                                                  ),
+                                                : ReactiveValueListenableBuilder<
+                                                        String>(
+                                                    formControlName:
+                                                        'medicalInstitutionName',
+                                                    builder:
+                                                        (context, control, _) {
+                                                      return IconButton(
+                                                        onPressed: () {
+                                                          if (control.value !=
+                                                                  null &&
+                                                              control.value!
+                                                                  .isNotEmpty) {
+                                                            context
+                                                                .read<
+                                                                    WebAppointmentDetailModel>()
+                                                                .searchHospital(
+                                                                    search: control
+                                                                        .value);
+                                                          }
+                                                        },
+                                                        icon: Icon(
+                                                          Icons.search,
+                                                          color: Colors.grey,
+                                                        ),
+                                                      );
+                                                    }),
                                           ),
                                         );
                                       }),

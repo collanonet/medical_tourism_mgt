@@ -157,7 +157,7 @@ class FacilityModel {
   void insertDropInFacility(
       FormGroup formGroup, List<DetailDropInFacilityResponse> data) {
     for (var item in data) {
-      FormArray places = FormArray([]);
+     var places = formGroup.control('places') as FormArray;
       if (data.isEmpty) {
         for (var e in item.places!) {
           places.add(
@@ -187,6 +187,7 @@ class FacilityModel {
         );
       }
       formGroup.control('arrangePerson').value = item.arrangePerson;
+      
     }
   }
 
@@ -210,7 +211,6 @@ class FacilityModel {
           places: places,
         ),
       );
-      logger.d('Data${formGroup.control('arrangePerson').value}');
       dropInFacilityData.value =
           AsyncData(data: dropInFacilityData.value.data!..add(response));
       submitDropInFacilityData.value = AsyncData(data: response);

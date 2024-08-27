@@ -22,6 +22,7 @@ DomesticMedicalDataResponse _$DomesticMedicalDataResponseFromJson(
       disclosureToPatients: json['disclosureToPatients'] as String?,
       disclosureToOtherMedicalInstitutions:
           json['disclosureToOtherMedicalInstitutions'] as String?,
+      medicalRecordId: json['medicalRecordId'] as String,
     );
 
 Map<String, dynamic> _$DomesticMedicalDataResponseToJson(
@@ -38,4 +39,5 @@ Map<String, dynamic> _$DomesticMedicalDataResponseToJson(
       'disclosureToPatients': instance.disclosureToPatients,
       'disclosureToOtherMedicalInstitutions':
           instance.disclosureToOtherMedicalInstitutions,
+      'medicalRecordId': instance.medicalRecordId,
     };

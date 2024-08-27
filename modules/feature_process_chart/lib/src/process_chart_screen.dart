@@ -90,7 +90,7 @@ class ProcessChartScreen extends StatelessWidget {
                             return ListView.builder(
                               itemCount: value.data?.length ?? 0,
                               itemBuilder: (context, index) {
-                                var item = value.requireData[index];
+                               // var item = value.requireData[index];
                                 return InkWell(
                                   onTap: () {
                                     context.router

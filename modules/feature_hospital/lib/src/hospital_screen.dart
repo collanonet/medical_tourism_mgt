@@ -75,9 +75,11 @@ class HospitalScreen extends StatelessWidget {
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () {
-                                  context.router.push(HospitalDetailRoute(
-                                    id: value.requireData[index].id,
-                                  ));
+                                  context.router.push(
+                                    HospitalDetailRoute(
+                                      id: value.requireData[index].id,
+                                    ),
+                                  );
                                 },
                                 child: Container(
                                   padding: const EdgeInsets.all(16),

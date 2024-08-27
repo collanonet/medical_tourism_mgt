@@ -4,7 +4,6 @@ part 'medical_record_progress_request.g.dart';
 
 @JsonSerializable()
 class MedicalRecordProgressRequest {
-  String? id;
   String key;
   String tag;
   String task;
@@ -15,7 +14,6 @@ class MedicalRecordProgressRequest {
   String type;
 
   MedicalRecordProgressRequest({
-    this.id,
     required this.key,
     required this.tag,
     required this.task,

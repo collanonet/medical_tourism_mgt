@@ -27,6 +27,7 @@ dependencies:
   animated_toggle_switch: ^0.8.0
   badges: ^3.1.2
   file_picker: ^8.0.1
+  collection: ^1.18.0
 
 dev_dependencies:
   flutter_test:

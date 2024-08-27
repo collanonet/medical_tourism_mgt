@@ -71,7 +71,7 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                       Column(
                         children: [
                           Text(
-                            '診療データをここにドラッグ＆ドロップ',
+                            '施設写真をここにドラッグ＆ドロップ',
                             style: context.textTheme.bodySmall?.copyWith(
                               fontSize: 22,
                               fontWeight: FontWeight.bold,

@@ -802,7 +802,8 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_RELATED_PARTIES_BUS_COMPANY)
-  Future<List<DetailRelatedPartiesBusCompanyResponse>> getRelatedPartiesBusCompany();
+  Future<List<DetailRelatedPartiesBusCompanyResponse>>
+      getRelatedPartiesBusCompany();
 
   @POST(EndPoints.DETAIL_RELATED_PARTIES_BUS_COMPANY)
   Future<DetailRelatedPartiesBusCompanyResponse> postRelatedPartiesBusCompany(
@@ -1326,6 +1327,12 @@ abstract class ApiService {
   @GET('${EndPoints.WEB_BOOKING_PATIENT}/{patientId}/booking')
   Future<TreamentResponce> getBookingByPatientId(
     @Path('patientId') String patientId,
+  );
+
+  @PUT('${EndPoints.WEB_BOOKING_PATIENT}/{id}')
+  Future<TreamentResponce> updateBooking(
+    @Path('id') String id,
+    @Body() TreamentRequest treamentResponce,
   );
 
   //WEB_BOOKING_RESERVATION

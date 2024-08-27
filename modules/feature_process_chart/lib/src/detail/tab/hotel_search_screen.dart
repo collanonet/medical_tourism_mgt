@@ -227,20 +227,7 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                   builder: (context, form, _) {
                                     return ElevatedButton(
                                       onPressed: () {
-                                        // List<String> type = [];
-                                        // formGroup
-                                        //     .control('accommodationType')
-                                        //     .value = type;
-                                        // if (formGroup.control('hotel').value ==
-                                        //     true) {
-                                        //   type.add('民泊');
-                                        // }
-                                        // if (formGroup
-                                        //         .control('apartment_hotel')
-                                        //         .value ==
-                                        //     true) {
-                                        //   type.add('アパートメントホテル');
-                                        // }
+                                        
                                         context
                                             .read<HotelRegistrationModel>()
                                             .fetchHotelregister(
