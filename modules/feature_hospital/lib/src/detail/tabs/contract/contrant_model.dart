@@ -10,6 +10,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 @injectable
 class ContrantModel {
   ContrantModel({required this.hospitalRepository});
+
   final HospitalRepository hospitalRepository;
 
   ValueNotifier<AsyncData<List<ContractResponse>>> contrantData =
@@ -57,8 +58,9 @@ class ContrantModel {
         ),
       );
 
-      contrantData.value =
-          AsyncData(data: contrantData.value.data!..add(response));
+      contrantData.value = AsyncData(
+          data: contrantData.value.data ?? []
+            ..add(response));
       submitData.value = AsyncData(data: response);
     } catch (e) {
       logger.e(e);
@@ -74,7 +76,7 @@ class ContrantModel {
       for (var id in ids) {
         await hospitalRepository.deleteContract(id);
         contrantData.value = AsyncData(
-            data: contrantData.value.data!
+            data: contrantData.value.data ?? []
               ..removeWhere((element) => element.id == id));
       }
 

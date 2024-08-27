@@ -17,6 +17,7 @@ class FacilityModel {
 
   ValueNotifier<AsyncData<List<FacilityResponse>>> facilityData =
       ValueNotifier(const AsyncData());
+
   void fetchFacility({required String id}) async {
     try {
       facilityData.value = const AsyncData(loading: true);
@@ -61,8 +62,9 @@ class FacilityModel {
         uploadedPhoto: file,
         hospitalRecord: formGroup.control('hospitalRecord').value,
       ));
-      facilityData.value =
-          AsyncData(data: facilityData.value.data!..add(response));
+      facilityData.value = AsyncData(
+          data: facilityData.value.data ?? []
+            ..add(response));
       submit.value = AsyncData(data: response);
     } catch (e) {
       logger.e(e);
@@ -78,7 +80,7 @@ class FacilityModel {
       for (var id in ids) {
         await hospitalRepository.deleteFacilityPhoto(id);
         facilityData.value = AsyncData(
-            data: facilityData.value.data!
+            data: facilityData.value.data ?? []
               ..removeWhere((element) => element.id == id));
       }
 

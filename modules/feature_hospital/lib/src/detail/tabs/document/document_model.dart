@@ -57,8 +57,9 @@ class DocumentModel {
         hospitalRecord: formGroup.control('hospitalRecord').value,
       ));
       submitDocumentData.value = AsyncData(data: response);
-      documentData.value =
-          AsyncData(data: documentData.value.data!..add(response));
+      documentData.value = AsyncData(
+          data: documentData.value.data ?? []
+            ..add(response));
     } catch (e) {
       logger.d(e);
       submitDocumentData.value = AsyncData(error: e.toString());
@@ -73,7 +74,7 @@ class DocumentModel {
       for (var id in ids) {
         await hospitalRepository.deleteDocument(id);
         documentData.value = AsyncData(
-            data: documentData.value.data!
+            data: documentData.value.data ?? []
               ..removeWhere((element) => element.id == id));
       }
 
