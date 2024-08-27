@@ -588,15 +588,14 @@ class BasicInformationModel {
                 base64Image,
                 docFile.filename!,
               );
-              file = fileData.filename;
+              fileDoctor = fileData.filename;
             } catch (e) {
               logger.e(e);
             }
           } else {
-            file = docFile.url;
+            fileDoctor = docFile.url;
           }
         }
-        logger.d(file);
 
         DoctorProfileHospitalRequest request = DoctorProfileHospitalRequest(
           hospital:
