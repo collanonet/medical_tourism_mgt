@@ -25,7 +25,7 @@ class _QuotationFilterState extends State<QuotationFilter> {
     return Consumer<QuotationModel>(
       builder: (context, model, child) {
         return ReactiveFormConfig(
-          validationMessages: validationMessagesFilterPatient(context),
+          validationMessages: validationMessages,
           child: ReactiveFormBuilder(
             form: () => formFilterPatient(),
             builder: (context, formGroup, child) {

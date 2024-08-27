@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+import 'package:core_utils/core_utils.dart';
 import 'sale_form.dart';
 import 'sale_model.dart';
 import 'sale_screen.dart';
@@ -24,7 +25,7 @@ class _SalePageState extends State<SalePage> {
     return LayoutView(
       selectedIndex: 8,
       page: ReactiveFormConfig(
-        validationMessages: {},
+        validationMessages: validationMessages,
         child: ReactiveFormBuilder(
           form: () => saleManagementForm(),
           builder: (context, formGroup, child) {

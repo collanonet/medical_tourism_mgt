@@ -290,10 +290,7 @@ class ContractSectionState extends State<ContractSection> {
         value: context.read<ContrantModel>(),
         child: AlertDialog(
           content: ReactiveFormConfig(
-            validationMessages: <String, ValidationMessageFunction>{
-              ValidationMessage.required: (error) =>
-                  context.l10n.mgsFieldRequired,
-            },
+            validationMessages: validationMessages,
             child: ReactiveFormBuilder(
               form: () => contractForm(hospitalRecordId: widget.id, file: file)
                 ..markAllAsTouched(),

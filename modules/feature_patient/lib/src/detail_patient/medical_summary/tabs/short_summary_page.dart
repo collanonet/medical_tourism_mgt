@@ -6,6 +6,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'normal_summary_form.dart';
 import 'normal_summary_model.dart';
 import 'short_summary_screen.dart';
+import 'package:core_utils/core_utils.dart';
 
 class ShortSummaryPage extends StatelessWidget {
   const ShortSummaryPage({super.key, this.patientId});
@@ -14,9 +15,7 @@ class ShortSummaryPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
-      validationMessages: <String, ValidationMessageFunction>{
-        ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
-      },
+      validationMessages: validationMessages,
       child: ReactiveFormBuilder(
           form: () => normalSummaryForm(),
           builder: (context, formGroup, child) {

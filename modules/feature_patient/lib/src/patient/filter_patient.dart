@@ -20,7 +20,7 @@ class PatientFilter extends StatelessWidget {
     return Consumer<PatientModel>(
       builder: (context, model, child) {
         return ReactiveFormConfig(
-          validationMessages: validationMessagesFilterPatient(context),
+          validationMessages: validationMessages,
           child: ReactiveFormBuilder(
             form: () => formFilterPatient(),
             builder: (context, formGroup, child) {

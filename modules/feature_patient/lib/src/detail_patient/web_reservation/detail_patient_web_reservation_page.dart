@@ -21,10 +21,7 @@ class DetailPatientWebReservationPage extends StatelessWidget {
   Widget build(BuildContext context) {
     logger.d('patient: ${patient?.id}');
     return ReactiveFormConfig(
-      validationMessages: <String, ValidationMessageFunction>{
-        ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
-        ValidationMessage.pattern: (error) => "無効な形式",
-      },
+      validationMessages: validationMessages,
       child: Provider(
         create: (context) => GetIt.I<DetailPatientWebReservationModel>()
           ..getPatientById(patient?.id ?? ''),

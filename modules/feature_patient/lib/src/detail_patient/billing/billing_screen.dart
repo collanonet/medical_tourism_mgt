@@ -22,9 +22,7 @@ class _BillingScreenState extends State<BillingScreen> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: ReactiveFormConfig(
-        validationMessages: <String, ValidationMessageFunction>{
-          ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
-        },
+        validationMessages: validationMessages,
         child: ReactiveFormBuilder(
             form: () => billingForm(),
             builder: (context, formGroup, child) {

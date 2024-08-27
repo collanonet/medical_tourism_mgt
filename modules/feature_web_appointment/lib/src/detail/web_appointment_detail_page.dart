@@ -1,14 +1,11 @@
 import 'package:auto_route/annotations.dart';
 import 'package:base_view/base_view.dart';
-import 'package:core_network/core_network.dart';
-import 'package:feature_patient/feature_patient.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../filter_web_appointment_form.dart';
-import 'web_appointment_detail_form.dart';
+import 'package:core_utils/core_utils.dart';
 import 'web_appointment_detail_model.dart';
 import 'web_appointment_detail_screen.dart';
 
@@ -29,7 +26,7 @@ class WebAppointmentDetailPage extends StatelessWidget {
             GetIt.I<WebAppointmentDetailModel>()..getReservationById(id: id),
         child: Builder(builder: (context) {
           return ReactiveFormConfig(
-            validationMessages: validationMessagesFilterPatient(context),
+            validationMessages: validationMessages,
             child: ReactiveFormBuilder(
                 form: () => context.read<WebAppointmentDetailModel>().formGroup
                   ..markAllAsTouched(),

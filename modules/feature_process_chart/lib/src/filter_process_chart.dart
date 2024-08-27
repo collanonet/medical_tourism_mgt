@@ -23,7 +23,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
     return Consumer<ProcessChartModel>(
       builder: (context, model, child) {
         return ReactiveFormConfig(
-          validationMessages: validationMessagesFilterPatient(context),
+          validationMessages: validationMessages,
           child: ReactiveFormBuilder(
             form: () => formFilterPatient(),
             builder: (context, formGroup, child) {

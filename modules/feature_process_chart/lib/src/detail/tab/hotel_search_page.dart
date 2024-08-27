@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import '../../filter_process_chart_form.dart';
+import 'package:core_utils/core_utils.dart';
 import 'hotel_registration_model.dart';
 import 'hotel_search_form.dart';
 import 'hotel_search_screen.dart';
@@ -14,7 +15,7 @@ class HotelSearchPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
-      validationMessages: validationMessagesFilterPatient(context),
+      validationMessages: validationMessages,
       child: ReactiveFormBuilder(
         form: () => hotelSearchForm()..markAllAsTouched(),
         builder: (context, formGroup, child) {

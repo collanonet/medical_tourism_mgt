@@ -6,6 +6,7 @@ import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+import 'package:core_utils/core_utils.dart';
 import 'statement_model.dart';
 import 'statement_screen.dart';
 
@@ -22,9 +23,7 @@ class StatementPage extends StatelessWidget {
       create: (context) =>
           GetIt.I<StatementModel>()..initialData(patient: patient),
       child: ReactiveFormConfig(
-        validationMessages: <String, ValidationMessageFunction>{
-          ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
-        },
+        validationMessages: validationMessages,
         child: ReactiveFormBuilder(
             form: () => statementForm(),
             builder: (context, formGroup, child) {

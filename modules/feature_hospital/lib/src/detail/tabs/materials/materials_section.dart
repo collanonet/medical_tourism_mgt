@@ -406,10 +406,7 @@ class MaterialSectionState extends State<MaterialSection> {
         value: context.read<MaterialsModel>(),
         child: AlertDialog(
           content: ReactiveFormConfig(
-            validationMessages: <String, ValidationMessageFunction>{
-              ValidationMessage.required: (error) =>
-                  context.l10n.mgsFieldRequired,
-            },
+            validationMessages: validationMessages,
             child: ReactiveFormBuilder(
               form: () => materialsForm(hospitalRecordId: widget.id, file: file)
                 ..markAllAsTouched(),

@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+import 'package:core_utils/core_utils.dart';
 import 'proposal_form.dart';
 import 'proposal_model.dart';
 import 'proposal_screen.dart';
@@ -19,9 +20,7 @@ class ProposalPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
-      validationMessages: <String, ValidationMessageFunction>{
-        ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
-      },
+      validationMessages: validationMessages,
       child: ReactiveFormBuilder(
         form: () => proposalForm()..markAllAsTouched(),
         builder: (context, formGroup, child) {

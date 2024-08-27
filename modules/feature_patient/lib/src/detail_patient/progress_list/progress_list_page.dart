@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'progress_list_model.dart';
 import 'progress_list_screen.dart';
+import 'package:core_utils/core_utils.dart';
 
 class ProgressListPage extends StatelessWidget {
   const ProgressListPage({
@@ -18,9 +19,7 @@ class ProgressListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
-      validationMessages: <String, ValidationMessageFunction>{
-        ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
-      },
+      validationMessages: validationMessages,
       child: ReactiveFormBuilder(
           form: () => progressListForm(),
           builder: (context, form, _) {

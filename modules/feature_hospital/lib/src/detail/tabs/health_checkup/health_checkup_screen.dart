@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'health_checkup_model.dart';
 
+import 'package:core_utils/core_utils.dart';
 class HealthCheckupScreen extends StatefulWidget {
   const HealthCheckupScreen({super.key, required this.id});
   final String id;
@@ -16,9 +17,7 @@ class _HealthCheckupScreenState extends State<HealthCheckupScreen> {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
-      validationMessages: {
-        ValidationMessage.required: (error) => 'This field is required',
-      },
+      validationMessages: validationMessages,
       child: Provider(
         create: (context) => GetIt.I<HealthModel>()..fetchHeadInfo(id: widget.id),
         child: HealthCheckupSection(

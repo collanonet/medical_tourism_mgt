@@ -273,10 +273,7 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
         value: context.read<HealthModel>(),
         child: AlertDialog(
           content: ReactiveFormConfig(
-            validationMessages: <String, ValidationMessageFunction>{
-              ValidationMessage.required: (error) =>
-                  context.l10n.mgsFieldRequired,
-            },
+            validationMessages: validationMessages,
             child: ReactiveFormBuilder(
               form: () =>
                   healthCheckupForm(hospitalRecordId: widget.id, file: file)

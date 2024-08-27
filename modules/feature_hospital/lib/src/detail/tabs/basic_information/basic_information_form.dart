@@ -33,11 +33,14 @@ FormGroup basicInformationForm() {
         value: '',
       ),
       'phoneNumber': FormControl<String>(
-        value: '',),
+        value: '',
+      ),
       'faxNumber': FormControl<String>(
-        value: '',),
+        value: '',
+      ),
       'homepage': FormControl<String>(
-        value: '',),
+        value: '',
+      ),
       'supportedMenu': FormControl<bool>(value: false),
       'healthCheckup': FormControl<bool>(value: false),
       'treatment': FormControl<bool>(value: false),
@@ -50,17 +53,21 @@ FormGroup basicInformationForm() {
       'mail': FormControl<bool>(value: false),
       'line': FormControl<bool>(value: false),
       'note': FormControl<String>(
-        value: '',),
+        value: '',
+      ),
       'english': FormControl<bool>(value: false),
       'chinese': FormControl<bool>(value: false),
       'vietnamese': FormControl<bool>(value: false),
       'otherLanguages': FormControl<bool>(value: false),
       'languages': FormControl<String>(
-        value: '',),
+        value: '',
+      ),
       'onlineCheck': FormControl<String>(
-        value: '',),
+        value: '',
+      ),
       'appointment': FormControl<String>(
-        value: '',),
+        value: '',
+      ),
       'cdr': FormControl<bool>(value: false),
       'storageUrl': FormControl<bool>(value: false),
       'viewMyPage': FormControl<bool>(value: false),
@@ -75,13 +82,17 @@ FormGroup basicInformationForm() {
       'osakaPrefecturalBase': FormControl<bool>(value: false),
       'certified': FormControl<bool>(value: false),
       'department1': FormControl<String>(
-        value: '',),
+        value: '',
+      ),
       'department2': FormControl<String>(
-        value: '',),
+        value: '',
+      ),
       'shift1': FormControl<String>(
-        value: '',),
+        value: '',
+      ),
       'shift2': FormControl<String>(
-        value: '',),
+        value: '',
+      ),
       'shift1Mon': FormControl<String>(value: '×'),
       'shift1Tue': FormControl<String>(value: '×'),
       'shift1Wed': FormControl<String>(value: '×'),
@@ -97,9 +108,11 @@ FormGroup basicInformationForm() {
       'shift2Sat': FormControl<String>(value: '×'),
       'shift2Sun': FormControl<String>(value: '×'),
       'memo': FormControl<String>(
-        value: '',),
+        value: '',
+      ),
       'supportLanguageRemark': FormControl<String>(
-        value: '',),
+        value: '',
+      ),
     }),
     'medicalRecordHospitals': FormArray([
       FormGroup({

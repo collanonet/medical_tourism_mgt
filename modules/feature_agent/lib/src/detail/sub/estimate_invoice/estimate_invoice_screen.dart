@@ -337,10 +337,7 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
         value: context.read<EstimateInvoiceModel>(),
         child: AlertDialog(
           content: ReactiveFormConfig(
-            validationMessages: <String, ValidationMessageFunction>{
-              ValidationMessage.required: (error) =>
-                  context.l10n.mgsFieldRequired,
-            },
+            validationMessages: validationMessages,
             child: ReactiveFormBuilder(
               form: () =>
                   estimateInvoiceForm(agentRecordId: widget.id, file: file)
