@@ -69,7 +69,7 @@ class ContractSectionState extends State<ContractSection> {
                         Column(
                           children: [
                             Text(
-                              'パンフレットや資料をここにドラッグ＆ドロップ',
+                              '契約書データをここにドラッグ＆ドロップ',
                               style: context.textTheme.bodySmall?.copyWith(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
