@@ -7,16 +7,42 @@ import '../core_utils.dart';
 class InputFormatter {
   final dateFormatter = MaskTextInputFormatter(
     mask: '####/##/##',
+    filter: {'#': RegExp(r'[0-9]')}, // Only allow numbers
     type: MaskAutoCompletionType.eager,
   );
   final timeFormatter = MaskTextInputFormatter(
     mask: '##:##',
+    filter: {'#': RegExp(r'[0-9]')}, // Only allow numbers
     type: MaskAutoCompletionType.eager,
   );
 
   String maskTextDate(String text) {
     return dateFormatter.maskText(text);
   }
+}
+
+// Function to process input and apply mask
+String processTimeInput(String input) {
+
+  logger.d('input: $input');
+  var text = input.replaceAll(':', '');
+  logger.d('text: $text');
+  // If input length is 3 digits, prepend a '0'
+  if (text.length == 3) {
+    text = '0' + text;
+  }
+
+  // // If input length is 5 digits, remove 0 at index 0
+  // if (text.length >=4 && text.length <= 5) {
+  //   if(text[0] == '0') {
+  //     text = text.substring(1);
+  //   }
+  // }
+
+  logger.d('text: $text');
+
+  // Apply the mask
+  return InputFormatter().timeFormatter.maskText(text);
 }
 
 bool isValidDate(DateTime date) {
@@ -27,6 +53,27 @@ bool isValidDate(DateTime date) {
   } catch (e) {
     logger.e(e);
     return false;
+  }
+}
+
+class TimeFormatValidator extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+      TextEditingValue oldValue, TextEditingValue newValue) {
+    if (newValue.text.isEmpty) {
+      return newValue;
+    }
+    final isValidFormat = RegExp(r'^\d{2}:\d{2}$').hasMatch(newValue.text);
+    if (isValidFormat) {
+      try {
+        DateFormat('HH:mm').parseStrict(newValue.text);
+        return newValue;
+      } catch (e) {
+        return oldValue;
+      }
+    } else {
+      return oldValue;
+    }
   }
 }
 

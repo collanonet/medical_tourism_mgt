@@ -976,214 +976,8 @@ class _DetailPatientWebReservationScreenState
                                       .map(
                                         (currentForm) => ReactiveForm(
                                           formGroup: currentForm,
-                                          child: Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              Expanded(
-                                                child: ReactiveDatePicker<
-                                                    DateTime>(
-                                                  formControlName:
-                                                      'preferredDate',
-                                                  firstDate: DateTime(1900),
-                                                  lastDate: DateTime(2100),
-                                                  builder: (BuildContext
-                                                          context,
-                                                      ReactiveDatePickerDelegate<
-                                                              dynamic>
-                                                          picker,
-                                                      Widget? child) {
-                                                    return ReactiveTextField<
-                                                        DateTime>(
-                                                      formControlName:
-                                                          'preferredDate',
-                                                      valueAccessor:
-                                                          DateTimeValueAccessor(
-                                                        dateTimeFormat:
-                                                            DateFormat(
-                                                                'yyyy/MM/dd'),
-                                                      ),
-                                                      onChanged: (value) {
-                                                        logger.d(value);
-                                                      },
-                                                      onSubmitted: (value) {
-                                                        logger.d(value);
-                                                      },
-                                                      decoration:
-                                                          InputDecoration(
-                                                        label: Text('第一希望'),
-                                                        suffixIcon: IconButton(
-                                                          icon: const Icon(
-                                                            CupertinoIcons
-                                                                .calendar,
-                                                            color: Colors.grey,
-                                                          ),
-                                                          onPressed:
-                                                              picker.showPicker,
-                                                        ),
-                                                      ),
-                                                      inputFormatters: [
-                                                        formatter.dateFormatter,
-                                                      ],
-                                                    );
-                                                  },
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              ReactiveValueListenableBuilder(
-                                                  formControlName: 'choice',
-                                                  builder:
-                                                      (context, control, _) {
-                                                    return Row(
-                                                      children: [
-                                                        boxText(
-                                                          context,
-                                                          '午前',
-                                                          textColor: control
-                                                                      .value ==
-                                                                  '午前'
-                                                              ? Colors.white
-                                                              : Colors.black,
-                                                          bg: control.value ==
-                                                                  '午前'
-                                                              ? Color(
-                                                                  0xffF08C67)
-                                                              : Colors.white,
-                                                          borderC:
-                                                              Color(0xffF08C67),
-                                                          onTap: () {
-                                                            control.value =
-                                                                '午前';
-                                                          },
-                                                        ),
-                                                        SizedBox(
-                                                          width: context
-                                                              .appTheme
-                                                              .spacing
-                                                              .marginMedium,
-                                                        ),
-                                                        boxText(
-                                                          context,
-                                                          '午後',
-                                                          textColor: control
-                                                                      .value ==
-                                                                  '午後'
-                                                              ? Colors.white
-                                                              : Colors.black,
-                                                          bg: control.value ==
-                                                                  '午後'
-                                                              ? Color(
-                                                                  0xffF08C67)
-                                                              : Colors.white,
-                                                          borderC:
-                                                              Color(0xffF08C67),
-                                                          onTap: () {
-                                                            control.value =
-                                                                '午後';
-                                                          },
-                                                        ),
-                                                        SizedBox(
-                                                          width: context
-                                                              .appTheme
-                                                              .spacing
-                                                              .marginMedium,
-                                                        ),
-                                                        boxText(
-                                                          context,
-                                                          '終日',
-                                                          textColor: control
-                                                                      .value ==
-                                                                  '終日'
-                                                              ? Colors.white
-                                                              : Colors.black,
-                                                          bg: control.value ==
-                                                                  '終日'
-                                                              ? Color(
-                                                                  0xffF08C67)
-                                                              : Colors.white,
-                                                          borderC:
-                                                              Color(0xffF08C67),
-                                                          onTap: () {
-                                                            control.value =
-                                                                '終日';
-                                                          },
-                                                        ),
-                                                      ],
-                                                    );
-                                                  }),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Expanded(
-                                                child: ReactiveTextField(
-                                                  formControlName:
-                                                      'timePeriodFrom',
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  inputFormatters: [
-                                                    formatter.timeFormatter,
-                                                  ],
-                                                  decoration: InputDecoration(
-                                                    label: Text(
-                                                      '時間帯（自）',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Text('〜'),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Expanded(
-                                                child: ReactiveTextField(
-                                                  formControlName:
-                                                      'timePeriodTo',
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  inputFormatters: [
-                                                    formatter.timeFormatter,
-                                                  ],
-                                                  decoration: InputDecoration(
-                                                    label: Text(
-                                                      '時間帯（至）',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              Expanded(
-                                                child: Row(
-                                                  children: [
-                                                    if (formArray.controls
-                                                            .indexOf(
-                                                                currentForm) !=
-                                                        0) ...{
-                                                      IconButton(
-                                                        icon: Icon(
-                                                            Icons
-                                                                .delete_forever,
-                                                            color: Colors.red),
-                                                        onPressed: () =>
-                                                            formArray.removeAt(
-                                                          formArray.controls
-                                                              .indexOf(
-                                                                  currentForm),
-                                                        ),
-                                                      ),
-                                                    }
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
+                                          child: timeBooking(
+                                              context, formArray, currentForm),
                                         ),
                                       );
 
@@ -1596,6 +1390,178 @@ class _DetailPatientWebReservationScreenState
             ),
           );
         });
+  }
+
+  Row timeBooking(BuildContext context, FormArray<Object?> formArray,
+      FormGroup currentForm) {
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Expanded(
+          child: ReactiveDatePicker<DateTime>(
+            formControlName: 'preferredDate',
+            firstDate: DateTime(1900),
+            lastDate: DateTime(2100),
+            builder: (BuildContext context,
+                ReactiveDatePickerDelegate<dynamic> picker, Widget? child) {
+              return ReactiveTextField<DateTime>(
+                formControlName: 'preferredDate',
+                valueAccessor: DateTimeValueAccessor(
+                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                ),
+                onChanged: (value) {
+                  logger.d(value);
+                },
+                onSubmitted: (value) {
+                  logger.d(value);
+                },
+                decoration: InputDecoration(
+                  label: Text('第一希望'),
+                  suffixIcon: IconButton(
+                    icon: const Icon(
+                      CupertinoIcons.calendar,
+                      color: Colors.grey,
+                    ),
+                    onPressed: picker.showPicker,
+                  ),
+                ),
+                inputFormatters: [
+                  formatter.dateFormatter,
+                ],
+              );
+            },
+          ),
+        ),
+        SizedBox(
+          width: context.appTheme.spacing.marginMedium,
+        ),
+        ReactiveValueListenableBuilder(
+            formControlName: 'choice',
+            builder: (context, control, _) {
+              return Row(
+                children: [
+                  boxText(
+                    context,
+                    '午前',
+                    textColor:
+                        control.value == '午前' ? Colors.white : Colors.black,
+                    bg: control.value == '午前'
+                        ? Color(0xffF08C67)
+                        : Colors.white,
+                    borderC: Color(0xffF08C67),
+                    onTap: () {
+                      control.value = '午前';
+                    },
+                  ),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginMedium,
+                  ),
+                  boxText(
+                    context,
+                    '午後',
+                    textColor:
+                        control.value == '午後' ? Colors.white : Colors.black,
+                    bg: control.value == '午後'
+                        ? Color(0xffF08C67)
+                        : Colors.white,
+                    borderC: Color(0xffF08C67),
+                    onTap: () {
+                      control.value = '午後';
+                    },
+                  ),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginMedium,
+                  ),
+                  boxText(
+                    context,
+                    '終日',
+                    textColor:
+                        control.value == '終日' ? Colors.white : Colors.black,
+                    bg: control.value == '終日'
+                        ? Color(0xffF08C67)
+                        : Colors.white,
+                    borderC: Color(0xffF08C67),
+                    onTap: () {
+                      control.value = '終日';
+                    },
+                  ),
+                ],
+              );
+            }),
+        SizedBox(
+          width: context.appTheme.spacing.marginMedium,
+        ),
+        Expanded(
+          child: ReactiveValueListenableBuilder<String>(
+              formControlName: 'timePeriodFrom',
+              builder: (context, control, _) {
+                return ReactiveTextField<String>(
+                  formControlName: 'timePeriodFrom',
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    formatter.timeFormatter,
+                  ],
+                  onChanged: (value) {
+                    if (value.value != null) {
+                      var time = processTimeInput(value.value!);
+                      control.value = time;
+                    }
+                  },
+                  decoration: InputDecoration(
+                    label: Text(
+                      '時間帯（自）',
+                    ),
+                  ),
+                );
+              }),
+        ),
+        SizedBox(
+          width: context.appTheme.spacing.marginMedium,
+        ),
+        Text('〜'),
+        SizedBox(
+          width: context.appTheme.spacing.marginMedium,
+        ),
+        Expanded(
+          child: ReactiveValueListenableBuilder<String>(
+              formControlName: 'timePeriodTo',
+              builder: (context, control, _) {
+                return ReactiveTextField<String>(
+                  formControlName: 'timePeriodTo',
+                  keyboardType: TextInputType.number,
+                  inputFormatters: [
+                    formatter.timeFormatter,
+                  ],
+                  onChanged: (value) {
+                    if (value.value != null) {
+                      var time = processTimeInput(value.value!);
+                      control.value = time;
+                    }
+                  },
+                  decoration: InputDecoration(
+                    label: Text(
+                      '時間帯（至）',
+                    ),
+                  ),
+                );
+              }),
+        ),
+        Expanded(
+          child: Row(
+            children: [
+              if (formArray.controls.indexOf(currentForm) != 0) ...{
+                IconButton(
+                  icon: Icon(Icons.delete_forever, color: Colors.red),
+                  onPressed: () => formArray.removeAt(
+                    formArray.controls.indexOf(currentForm),
+                  ),
+                ),
+              }
+            ],
+          ),
+        ),
+      ],
+    );
   }
 }
 
