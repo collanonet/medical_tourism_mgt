@@ -349,6 +349,10 @@ class BasicInformationModel {
       formGroup.control('hospital').value =
           hospitalId.value ?? basicInformationData.value.data?.id ?? '';
       formGroup.control('outsourcingContract').value = data.outsourcingContract;
+      formGroup.control('file').value = FileSelect(
+        url: data.file,
+        filename: data.file?.split('/').last ?? '',
+      );
       formGroup.control('msCorporation').value = data.msCorporation;
       formGroup.control('referralFee').value = data.referralFee;
       formGroup.control('treatmentCostPointCalculationPerPoint').value =
