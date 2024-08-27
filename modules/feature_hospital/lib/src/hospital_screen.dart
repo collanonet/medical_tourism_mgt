@@ -141,21 +141,21 @@ class HospitalScreen extends StatelessWidget {
                                                             decoration:
                                                                 BoxDecoration(
                                                               color: e == '健診'
-                                                                  ? Color(
+                                                                  ? const Color(
                                                                       0xffE238A0)
                                                                   : e == '治療'
-                                                                      ? Color(
+                                                                      ? const Color(
                                                                           0xff53A6FF)
                                                                       : e ==
                                                                               '重粒子線'
-                                                                          ? Color(
+                                                                          ? const Color(
                                                                               0xffE238A0)
                                                                           : e == '陽子線'
-                                                                              ? Color(0xff98DE51)
+                                                                              ? const Color(0xff98DE51)
                                                                               : e == '再生医療'
-                                                                                  ? Color(0xffE238A0)
+                                                                                  ? const Color(0xffE238A0)
                                                                                   : e == '美容'
-                                                                                      ? Color(0xffF7654A)
+                                                                                      ? const Color(0xffF7654A)
                                                                                       : Colors.blueGrey,
                                                               borderRadius:
                                                                   BorderRadius
@@ -179,20 +179,23 @@ class HospitalScreen extends StatelessWidget {
                                       ),
                                       Expanded(
                                         flex: 2,
-                                        child: Text(
-                                            '${value.requireData[index].hospitalNameChinese ?? ''}'),
+                                        child: Text(value.requireData[index]
+                                                .hospitalNameChinese ??
+                                            ''),
                                       ),
                                       Expanded(
                                         child: Text(
-                                            '${value.requireData[index].location ?? '--'}'),
+                                            value.requireData[index].location ??
+                                                '--'),
                                       ),
-                                      Expanded(
+                                      const Expanded(
                                         child: Text('--'), // ○
                                       ),
-                                      // Expanded(
-                                      //   child: Text(
-                                      //       '${value.requireData[index].memo ?? ''}'),
-                                      // ),
+                                      Expanded(
+                                        child: Text(
+                                            value.requireData[index].memo ??
+                                                ''),
+                                      ),
                                     ],
                                   ),
                                 ),

@@ -3,24 +3,11 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup formWebAppointment() => FormGroup({
       'patientName': FormControl<String>(),
-      'preferredDate1': FormControl<DateTime>(
-        disabled: true,
-      ), // 第１希望
-      'preferredDate2': FormControl<DateTime>(
-        disabled: true,
-      ), // 第２希望
-      'preferredDate3': FormControl<DateTime>(
-        disabled: true,
-      ), // 第３希望
-      'noDesiredDate': FormControl<bool>(
-        disabled: true,
-      ), // 希望日なし
-      'remarks': FormControl<String>(
-        disabled: true,
-      ), // 備考
-      'medicalInstitutionName': FormControl<String>(
-        validators: [Validators.required],
-      ), // 医療機関名
+      'preferredDate1': FormControl<DateTime>(), // 第１希望
+      'preferredDate2': FormControl<DateTime>(), // 第２希望
+      'preferredDate3': FormControl<DateTime>(), // 第３希望
+      'noDesiredDate': FormControl<bool>(), // 希望日なし
+      'remarks': FormControl<String>(), // 備考
       'doctorName': FormControl<DoctorProfileHospitalResponse>(
         validators: [Validators.required],
       ), // 医師名

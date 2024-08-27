@@ -192,5 +192,8 @@ abstract class HospitalRepository {
       String reservationId, WebBookingMedicalRecordRequest request);
 
   Future<void> webBookingDeleteReservation(String reservationId);
+
+  Future<TreamentResponce> updateBooking(String treatmentId, TreamentRequest treatmentRequest);
+
 }
 

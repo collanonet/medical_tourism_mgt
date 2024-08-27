@@ -375,4 +375,9 @@ class HospitalRepositoryIml extends HospitalRepository {
   Future<List<Patient>> webBookingSearchPatients({String? search}) {
     return remote.webBookingSearchPatients(search: search);
   }
+
+  @override
+  Future<TreamentResponce> updateBooking(String treatmentId, TreamentRequest treatmentRequest) {
+    return remote.updateBooking(treatmentId, treatmentRequest);
+  }
 }
