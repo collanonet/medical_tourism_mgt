@@ -142,8 +142,8 @@ FormGroup basicInformationForm() {
         '_id': FormControl<String>(),
         'hospital': FormControl<String?>(),
         'profile': FormControl<FileSelect>(),
-        'photoRelease': FormControl<String>(),
-        'name': FormControl<String>(),
+        'photoRelease': FormControl<String>(value: '可'),
+        'name': FormControl<String>(value: '可'),
         'remark': FormControl<String>(),
         'departmentName': FormControl<String>(),
         'post': FormControl<String>(),
@@ -160,8 +160,9 @@ FormGroup basicInformationForm() {
             'name': FormControl<String>(),
           })
         ]),
-        'onlineMedicalTreatment': FormControl<String>(),
+        'onlineMedicalTreatment': FormControl<String>(value: '可'),
         'trainingCompletionCertificateNumber': FormControl<String>(),
+        'fileDoctor': FormControl<FileSelect>(),
         'completionCertificate': FormArray([
           FormGroup({
             'name': FormControl<String>(),
@@ -169,7 +170,11 @@ FormGroup basicInformationForm() {
         ]),
         'telephoneNumber': FormControl<String>(),
         'faxNumber': FormControl<String>(),
-        'email': FormControl<String>(),
+        'email': FormControl<String>(
+          validators: [
+            Validators.email,
+          ],
+        ),
         'remark2': FormControl<String>(),
       })
     ]),

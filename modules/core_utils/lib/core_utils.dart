@@ -16,3 +16,4 @@ export './src/dates.dart';
 export './src/string_to_color.dart';
 export './src/is_image.dart';
 export './src/validation_message.dart';
+export './src/open_url_in_browser.dart';

@@ -296,6 +296,14 @@ class BasicInformationModel {
             'qualifications': qualifications,
             'trainingCompletionCertificateNumber': FormControl<String>(
                 value: item.trainingCompletionCertificateNumber),
+            'fileDoctor': FormControl<FileSelect>(
+              value: item.fileDoctor != null
+                  ? FileSelect(
+                      url: item.fileDoctor,
+                      filename: item.fileDoctor?.split('/').last ?? '',
+                    )
+                  : null,
+            ),
             'onlineMedicalTreatment':
                 FormControl<String>(value: item.onlineMedicalTreatment),
             'telephoneNumber': FormControl<String>(
@@ -570,6 +578,26 @@ class BasicInformationModel {
         List<String> completionCertificate =
             convertToList(element, 'completionCertificate');
 
+        String? fileDoctor;
+        if (element['fileDoctor'] != null) {
+          FileSelect docFile = element['fileDoctor'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await hospitalRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              file = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            file = docFile.url;
+          }
+        }
+        logger.d(file);
+
         DoctorProfileHospitalRequest request = DoctorProfileHospitalRequest(
           hospital:
               hospitalId.value ?? basicInformationData.value.data?.id ?? '',
@@ -588,6 +616,7 @@ class BasicInformationModel {
           onlineMedicalTreatment: element['onlineMedicalTreatment'] ?? '',
           trainingCompletionCertificateNumber:
               element['trainingCompletionCertificateNumber'] ?? '',
+          fileDoctor: fileDoctor,
           completionCertificate: completionCertificate,
           telephoneNumber: element['telephoneNumber'] ?? '',
           faxNumber: element['faxNumber'] ?? '',
