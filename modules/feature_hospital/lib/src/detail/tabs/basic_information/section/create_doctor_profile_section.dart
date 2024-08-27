@@ -558,8 +558,9 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                                     onPressed: () {
                                       filePicker().then((value) {
                                         if (value != null) {
-                                          currentForm.control('fileDoctor').value =
-                                              value;
+                                          currentForm
+                                              .control('fileDoctor')
+                                              .value = value;
                                         }
                                       });
                                     },
@@ -589,7 +590,8 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                             onTap: () {
                               filePicker().then((value) {
                                 if (value != null) {
-                                  currentForm.control('fileDoctor').value = value;
+                                  currentForm.control('fileDoctor').value =
+                                      value;
                                 }
                               });
                             },
