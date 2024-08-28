@@ -1,4 +1,5 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
 import 'package:bot_toast/bot_toast.dart';
@@ -65,6 +66,9 @@ class _RootAppState extends State<RootApp> {
                 supportedLocales: AppLocalizations.supportedLocales,
                 routerConfig: GetIt.I<AppRouter>().config(
                   reevaluateListenable: auth,
+                  navigatorObservers: () => [
+                    ClearFocusNavigatorObserver(),
+                  ],
                 ),
               );
             },

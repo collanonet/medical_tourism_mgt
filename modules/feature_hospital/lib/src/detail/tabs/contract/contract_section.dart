@@ -294,7 +294,7 @@ class ContractSectionState extends State<ContractSection> {
             child: ReactiveFormBuilder(
               form: () => contractForm(hospitalRecordId: widget.id, file: file)
                 ..markAllAsTouched(),
-              builder: (context, formGroup, child) {
+              builder: (_, formGroup, child) {
                 return const Popup();
               },
             ),
