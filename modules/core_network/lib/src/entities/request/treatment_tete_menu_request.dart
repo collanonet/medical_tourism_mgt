@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'treatment_tete_menu_request.g.dart';
 
 @JsonSerializable()

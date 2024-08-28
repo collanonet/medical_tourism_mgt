@@ -1,11 +1,15 @@
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+
+// Package imports:
 import 'package:auto_route/annotations.dart';
 import 'package:base_view/base_view.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import 'package:core_utils/core_utils.dart';
+// Project imports:
 import '../type/type_model.dart';
 import 'prospective_rank_form.dart';
 import 'prospective_rank_screen.dart';

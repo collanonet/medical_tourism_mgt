@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:core_network/entities.dart';
+
+// Project imports:
 import '../entities/index.dart';
 
 abstract class AuthRepository {

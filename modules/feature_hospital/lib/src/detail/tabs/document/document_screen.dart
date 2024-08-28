@@ -1,11 +1,15 @@
-import 'document_section.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_utils/core_utils.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import 'package:core_utils/core_utils.dart';
+// Project imports:
 import 'document_model.dart';
+import 'document_section.dart';
 
 class DocumentScreen extends StatefulWidget {
   const DocumentScreen({super.key, required this.id});

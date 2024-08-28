@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'detail_itinerary_simple_prior_explanation_request.g.dart';
 @JsonSerializable()
 class DetailItinerarySimplePriorExplanationRequest {

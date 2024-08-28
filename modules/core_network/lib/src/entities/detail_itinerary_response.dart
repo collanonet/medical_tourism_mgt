@@ -1,5 +1,9 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
+// Project imports:
 import 'detail_itinerary_data_response.dart';
+
 part 'detail_itinerary_response.g.dart';
 @JsonSerializable()
 class DetailItineraryResponse {

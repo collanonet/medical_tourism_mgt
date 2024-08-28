@@ -1,5 +1,8 @@
-import 'package:collection/collection.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:collection/collection.dart';
 
 class DynamicTable extends StatefulWidget {
   final TableData data;

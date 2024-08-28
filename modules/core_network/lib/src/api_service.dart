@@ -1,7 +1,10 @@
+// Package imports:
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
+
+// Project imports:
 import '../core_network.dart';
 import '../entities.dart';
 import 'endpoints.dart';

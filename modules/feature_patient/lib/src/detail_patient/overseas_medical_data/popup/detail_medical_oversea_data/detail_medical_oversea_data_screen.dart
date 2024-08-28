@@ -1,11 +1,15 @@
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:flutter/material.dart';
-import 'study_of_dicom_tab.dart';
-import 'package:flutter/cupertino.dart';
 
+// Project imports:
 import 'hospital_certificate_tab.dart';
 import 'hospital_dicom_tab.dart';
+import 'study_of_dicom_tab.dart';
 
 class DetailMedicalOverseaDataScreen extends StatefulWidget {
   const DetailMedicalOverseaDataScreen({

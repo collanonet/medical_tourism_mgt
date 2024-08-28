@@ -1,11 +1,15 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import '../basic_info_model.dart';
 
 class MedicalRecordTravelGroupSection extends StatelessWidget {

@@ -1,5 +1,8 @@
-import 'package:core_ui/core_ui.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_ui/core_ui.dart';
 
 class AutoTranslateScreen extends StatelessWidget {
   const AutoTranslateScreen({super.key});

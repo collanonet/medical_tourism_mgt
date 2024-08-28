@@ -1,12 +1,16 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'report_model.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import '../feature_report.gm.dart';
+import 'report_model.dart';
 
 class ReportScreen extends StatelessWidget {
   const ReportScreen({super.key});

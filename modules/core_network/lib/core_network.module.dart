@@ -4,10 +4,14 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
+// Dart imports:
 import 'dart:async' as _i2;
 
+// Package imports:
 import 'package:injectable/injectable.dart' as _i1;
 
+// Project imports:
 import 'core_network.dart' as _i5;
 import 'src/api_service.dart' as _i4;
 import 'src/file_upload.dart' as _i3;

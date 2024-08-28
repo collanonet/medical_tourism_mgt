@@ -1,5 +1,7 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
+// Project imports:
 import 'user.dart';
 
 part 'auth_data.g.dart';

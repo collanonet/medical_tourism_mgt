@@ -1,7 +1,10 @@
+// Flutter imports:
+import 'package:flutter/widgets.dart';
+
+// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_process_chart/data_process_chart.dart';
-import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable

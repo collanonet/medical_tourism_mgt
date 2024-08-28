@@ -1,6 +1,9 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
+// Project imports:
 import 'request/detail_facility_drop_in_facility_request.dart';
+
 part 'detail_facility_drop_in_facility_response.g.dart';
 @JsonSerializable()
 class DetailDropInFacilityResponse {

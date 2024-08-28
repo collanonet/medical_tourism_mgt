@@ -1,6 +1,10 @@
-import 'package:equatable/equatable.dart';
+// Flutter imports:
 import 'package:flutter/widgets.dart';
 
+// Package imports:
+import 'package:equatable/equatable.dart';
+
+// Project imports:
 import 'currency_formatter.dart';
 
 final formatter = CurrencyFormatter();

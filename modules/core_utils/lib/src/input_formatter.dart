@@ -1,7 +1,11 @@
+// Flutter imports:
 import 'package:flutter/services.dart';
+
+// Package imports:
 import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
 
+// Project imports:
 import '../core_utils.dart';
 
 class InputFormatter {

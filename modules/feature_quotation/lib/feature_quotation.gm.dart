@@ -8,7 +8,11 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
+// Package imports:
 import 'package:auto_route/auto_route.dart' as _i2;
+
+// Project imports:
 import 'package:feature_quotation/src/quotation_page.dart' as _i1;
 
 abstract class $FeatureQuotationRouterModule extends _i2.AutoRouterModule {

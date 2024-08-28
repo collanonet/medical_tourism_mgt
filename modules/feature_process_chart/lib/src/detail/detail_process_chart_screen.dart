@@ -1,7 +1,11 @@
-import 'package:core_ui/core_ui.dart';
-import 'package:core_ui/widgets.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/widgets.dart';
+
+// Project imports:
 import 'tab/facility_page.dart';
 import 'tab/hotel_registration_page.dart';
 import 'tab/hotel_search_page.dart';

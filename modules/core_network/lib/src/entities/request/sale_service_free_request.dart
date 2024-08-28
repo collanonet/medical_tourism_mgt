@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'sale_service_free_request.g.dart';
 @JsonSerializable()
 class ServiceFeeRequest {

@@ -1,8 +1,12 @@
-import 'package:core_ui/core_ui.dart';
-import 'package:feature_chats/src/chat_model.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_ui/core_ui.dart';
 import 'package:provider/provider.dart';
 
+// Project imports:
+import 'package:feature_chats/src/chat_model.dart';
 import 'filter_chat.dart';
 import 'message_screen.dart';
 

@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
 part 'medical_visa_visa_withdrawal_response.g.dart';

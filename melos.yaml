@@ -31,6 +31,9 @@ scripts:
   run_debug:
     description: "run_debug"
     run: fvm flutter run -d chrome --web-port 5555
+  pub:add:
+    description: "Add pub for all modules"
+    run: melos exec -- \ fvm flutter pub add
   pub:get:
     description: "Sync pub for all modules"
     run: melos exec -- \ fvm flutter pub get
@@ -53,6 +56,12 @@ scripts:
   fixer:
     description: "Autofix dart files with import_sorter"
     run: melos exec "lefthook run fixer"
+  sort_imports:
+    description: "Sort imports"
+    run: melos exec -- \ fvm flutter pub run import_sorter:main
+  dart_fix:
+    description: "Apply dart fix"
+    run: melos exec -- \ fvm dart fix --apply
   gen-l10n:
     description: "Generate localized strings"
     run: melos exec --scope="core_l10n" -- \ fvm flutter gen-l10n

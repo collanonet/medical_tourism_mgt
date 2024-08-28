@@ -1,5 +1,8 @@
-import 'package:injectable/injectable.dart';
+// Package imports:
 import 'package:core_network/entities.dart';
+import 'package:injectable/injectable.dart';
+
+// Project imports:
 import '../entities/index.dart';
 import '../exceptions/expired_token_exception.dart';
 import '../providers/auth_provider.dart';

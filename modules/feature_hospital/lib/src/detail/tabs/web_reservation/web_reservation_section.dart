@@ -1,16 +1,21 @@
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
-import '../basic_information/section/basic_info_section.dart';
-import 'section/reservation_history_section.dart';
-import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import 'package:intl/intl.dart';
+
+// Project imports:
+import '../basic_information/section/basic_info_section.dart';
+import 'section/reservation_history_section.dart';
 import 'web_reservation_model.dart';
 
 class WebReservationSection extends StatefulWidget {

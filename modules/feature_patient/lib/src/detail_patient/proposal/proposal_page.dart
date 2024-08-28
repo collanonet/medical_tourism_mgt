@@ -1,10 +1,14 @@
-import 'package:core_network/entities.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_network/entities.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import 'package:core_utils/core_utils.dart';
+// Project imports:
 import 'proposal_form.dart';
 import 'proposal_model.dart';
 import 'proposal_screen.dart';

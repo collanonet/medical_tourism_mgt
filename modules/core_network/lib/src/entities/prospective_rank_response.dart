@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'prospective_rank_response.g.dart';
 @JsonSerializable()
 class ProspectiveRankResponse {

@@ -1,8 +1,12 @@
-import 'package:core_ui/core_ui.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_ui/core_ui.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import '../detail/hospital_detail_model.dart';
 
 class HeaderDetailHospital extends StatelessWidget {

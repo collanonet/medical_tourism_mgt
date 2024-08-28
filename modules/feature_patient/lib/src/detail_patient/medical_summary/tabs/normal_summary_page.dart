@@ -1,9 +1,14 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_utils/core_utils.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+// Project imports:
 import 'normal_summary_form.dart';
-import 'package:core_utils/core_utils.dart';
 import 'normal_summary_model.dart';
 import 'normal_summary_screen.dart';
 

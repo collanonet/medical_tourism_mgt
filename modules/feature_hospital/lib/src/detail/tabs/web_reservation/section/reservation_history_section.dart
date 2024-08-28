@@ -1,11 +1,15 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import '../web_reservation_model.dart';
 
 class ReservationHistorySection extends StatefulWidget {

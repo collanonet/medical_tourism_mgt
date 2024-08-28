@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'itinerary_simplified_interpretor_or_guide_response.g.dart';
 @JsonSerializable()
 class ItineraryInterpreterOrGuideInputResponse {

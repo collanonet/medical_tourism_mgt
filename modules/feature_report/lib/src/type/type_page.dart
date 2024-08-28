@@ -1,13 +1,17 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:auto_route/annotations.dart';
 import 'package:base_view/base_view.dart';
-import 'type_form.dart';
-import 'type_model.dart';
-import 'package:flutter/material.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import 'package:core_utils/core_utils.dart';
+// Project imports:
+import 'type_form.dart';
+import 'type_model.dart';
 import 'type_screen.dart';
 
 @RoutePage()

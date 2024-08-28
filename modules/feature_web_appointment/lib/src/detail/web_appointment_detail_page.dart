@@ -1,11 +1,15 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:auto_route/annotations.dart';
 import 'package:base_view/base_view.dart';
-import 'package:flutter/material.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import 'package:core_utils/core_utils.dart';
+// Project imports:
 import 'web_appointment_detail_model.dart';
 import 'web_appointment_detail_screen.dart';
 

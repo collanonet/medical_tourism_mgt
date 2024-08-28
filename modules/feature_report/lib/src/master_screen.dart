@@ -1,7 +1,11 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:core_ui/core_ui.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:auto_route/auto_route.dart';
+import 'package:core_ui/core_ui.dart';
+
+// Project imports:
 import '../feature_report.dart';
 import '../feature_report.gm.dart';
 

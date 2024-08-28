@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'detail_hotel_search_request.g.dart';
 @JsonSerializable()
 class DetailHotelSearchRequest {

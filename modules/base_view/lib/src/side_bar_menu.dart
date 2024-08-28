@@ -1,10 +1,13 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:core_l10n/l10n.dart';
+import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_utils/routes.dart';
 import 'package:feature_auth/feature_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:core_ui/core_ui.dart';
 import 'package:provider/provider.dart';
 
 class SideBarMenu extends StatelessWidget {

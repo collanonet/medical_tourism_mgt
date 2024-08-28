@@ -1,5 +1,8 @@
-import '../../core_network.dart';
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
+// Project imports:
+import '../../core_network.dart';
 
 part 'web_booking_medical_record_request.g.dart';
 

@@ -1,5 +1,8 @@
-import '../../core_ui.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Project imports:
+import '../../core_ui.dart';
 
 class TabBarWidget extends StatelessWidget {
   const TabBarWidget({

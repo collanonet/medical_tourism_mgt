@@ -1,12 +1,16 @@
-import 'treatment_section.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_utils/core_utils.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import 'package:core_utils/core_utils.dart';
+// Project imports:
 import 'treatment_form.dart';
 import 'treatment_model.dart';
+import 'treatment_section.dart';
 
 class TreatmentScreen extends StatefulWidget {
   const TreatmentScreen({super.key, required this.hospitalId});

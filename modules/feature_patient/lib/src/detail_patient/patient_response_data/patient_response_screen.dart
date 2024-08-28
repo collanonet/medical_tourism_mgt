@@ -1,7 +1,11 @@
-import 'package:core_ui/core_ui.dart';
-import 'package:core_ui/widgets.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/widgets.dart';
+
+// Project imports:
 import 'tab/application_beauty_page.dart';
 import 'tab/application_blood_purification_therapy_page.dart';
 import 'tab/application_regenerative_medicine_page.dart';

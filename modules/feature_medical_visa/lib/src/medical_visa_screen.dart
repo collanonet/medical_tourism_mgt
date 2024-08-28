@@ -1,13 +1,16 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
-import '../feature_medical_visa.gm.dart';
-import 'filter_medical_visa.dart';
+// Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
+import '../feature_medical_visa.gm.dart';
+import 'filter_medical_visa.dart';
 import 'medical_visa_model.dart';
 
 class MedicalVisaScreen extends StatefulWidget {

@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'application_regenerative_medicine_response.g.dart';
 
 @JsonSerializable()

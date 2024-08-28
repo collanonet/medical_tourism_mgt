@@ -36,6 +36,7 @@ dependencies:
   http: any
   path_provider: any
   pdf: any
+  import_sorter: ^4.6.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

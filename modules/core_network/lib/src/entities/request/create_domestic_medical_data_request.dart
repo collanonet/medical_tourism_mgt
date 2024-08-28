@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'create_domestic_medical_data_request.g.dart';
 
 @JsonSerializable()

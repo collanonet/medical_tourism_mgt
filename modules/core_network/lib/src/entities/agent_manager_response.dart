@@ -1,5 +1,7 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
+// Project imports:
 import 'agent_manager_contact_response.dart';
 
 part 'agent_manager_response.g.dart';

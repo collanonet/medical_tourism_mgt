@@ -1,7 +1,11 @@
-import 'package:core_ui/core_ui.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_ui/core_ui.dart';
 import 'package:provider/provider.dart';
 
+// Project imports:
 import 'medical_visa_detail_model.dart';
 
 class MedicalVisaDetailScreen extends StatefulWidget {

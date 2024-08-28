@@ -1,8 +1,12 @@
-import 'package:core_network/core_network.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_network/core_network.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
+// Project imports:
 import 'medical_summary_model.dart';
 import 'medical_summary_screen.dart';
 

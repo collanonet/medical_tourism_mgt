@@ -1,18 +1,23 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:provider/provider.dart';
+
+// Project imports:
+import '../widgets/header_detail_hospital.dart';
+import 'hospital_detail_model.dart';
 import 'tabs/basic_information/basic_information_screen.dart';
 import 'tabs/contract/contract_screen.dart';
 import 'tabs/document/document_screen.dart';
 import 'tabs/facility_photo/facility_photo_screen.dart';
 import 'tabs/health_checkup/health_checkup_screen.dart';
+import 'tabs/materials/materials_screen.dart';
 import 'tabs/q_and_a/q_and_a_screen.dart';
 import 'tabs/treatment/treatment_screen.dart';
 import 'tabs/web_reservation/web_reservation_screen.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../widgets/header_detail_hospital.dart';
-import 'hospital_detail_model.dart';
-import 'tabs/materials/materials_screen.dart';
 
 class HospitalDetailScreen extends StatefulWidget {
   const HospitalDetailScreen({

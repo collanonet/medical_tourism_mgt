@@ -1,6 +1,10 @@
-import '../../core_network.dart';
-import 'package:json_annotation/json_annotation.dart';
+// Package imports:
 import 'package:copy_with_extension/copy_with_extension.dart';
+import 'package:json_annotation/json_annotation.dart';
+
+// Project imports:
+import '../../core_network.dart';
+
 part 'web_booking_medical_record_response.g.dart';
 
 @JsonSerializable()

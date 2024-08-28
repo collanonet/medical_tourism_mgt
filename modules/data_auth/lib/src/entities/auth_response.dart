@@ -1,7 +1,10 @@
+// Package imports:
+import 'package:core_network/entities.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+// Project imports:
 import 'credentials.dart';
-import 'package:core_network/entities.dart';
+
 part 'auth_response.g.dart';
 
 @JsonSerializable()

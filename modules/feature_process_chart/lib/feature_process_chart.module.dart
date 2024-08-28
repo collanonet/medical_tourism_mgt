@@ -4,11 +4,15 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
+// Dart imports:
 import 'dart:async' as _i2;
 
+// Package imports:
 import 'package:data_process_chart/data_process_chart.dart' as _i5;
 import 'package:injectable/injectable.dart' as _i1;
 
+// Project imports:
 import 'src/detail/detail_process_chart_model.dart' as _i3;
 import 'src/detail/tab/facility_model.dart' as _i4;
 import 'src/detail/tab/hotel_registration_model.dart' as _i6;

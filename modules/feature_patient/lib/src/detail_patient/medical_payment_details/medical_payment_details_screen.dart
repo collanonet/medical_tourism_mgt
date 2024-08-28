@@ -1,10 +1,14 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+// Project imports:
 import 'medical_payment_details_file.dart';
 import 'medical_payment_details_form.dart';
 import 'medical_payment_details_model.dart';
