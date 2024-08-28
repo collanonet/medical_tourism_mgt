@@ -20,6 +20,7 @@ class HospitalDetailScreen extends StatefulWidget {
     super.key,
     this.hospitalId,
   });
+
   final String? hospitalId;
 
   @override

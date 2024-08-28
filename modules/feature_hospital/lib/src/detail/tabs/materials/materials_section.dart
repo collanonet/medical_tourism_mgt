@@ -4,6 +4,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
+import 'preview_file.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -216,50 +217,55 @@ class MaterialSectionState extends State<MaterialSection> {
                             itemCount: value.data?.length ?? 0,
                             itemBuilder: (context, index) {
                               final data = value.data?[index];
-                              return Row(
-                                children: [
-                                  ValueListenableBuilder(
-                                      valueListenable: selected,
-                                      builder: (context, sels, _) {
-                                        return Checkbox(
-                                          value: sels.contains(data?.id),
-                                          onChanged: (sel) {
-                                            if (sel != null) {
-                                              if (sel) {
-                                                selected.value = [
-                                                  ...sels,
-                                                  data?.id ?? ''
-                                                ];
-                                              } else {
-                                                selected.value = [
-                                                  ...sels.where(
-                                                      (e) => e != data?.id)
-                                                ];
+                              return InkWell(
+                                onTap: (){
+                                  showPreviewFile(context, data!);
+                                },
+                                child: Row(
+                                  children: [
+                                    ValueListenableBuilder(
+                                        valueListenable: selected,
+                                        builder: (context, sels, _) {
+                                          return Checkbox(
+                                            value: sels.contains(data?.id),
+                                            onChanged: (sel) {
+                                              if (sel != null) {
+                                                if (sel) {
+                                                  selected.value = [
+                                                    ...sels,
+                                                    data?.id ?? ''
+                                                  ];
+                                                } else {
+                                                  selected.value = [
+                                                    ...sels.where(
+                                                        (e) => e != data?.id)
+                                                  ];
+                                                }
                                               }
-                                            }
-                                          },
-                                        );
-                                      }),
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(data?.brochureName ?? ''),
-                                  ),
-                                  Expanded(
-                                    child: Text(data?.author ?? ''),
-                                  ),
-                                  Expanded(
-                                    child: Text(data?.dateOfIssue == null
-                                        ? ''
-                                        : Dates.formShortDate(
-                                            data?.dateOfIssue)),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: data?.share == null
-                                        ? SizedBox()
-                                        : Icon(Icons.person),
-                                  ),
-                                ],
+                                            },
+                                          );
+                                        }),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(data?.brochureName ?? ''),
+                                    ),
+                                    Expanded(
+                                      child: Text(data?.author ?? ''),
+                                    ),
+                                    Expanded(
+                                      child: Text(data?.dateOfIssue == null
+                                          ? ''
+                                          : Dates.formShortDate(
+                                              data?.dateOfIssue)),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: data?.share == null
+                                          ? SizedBox()
+                                          : Icon(Icons.person),
+                                    ),
+                                  ],
+                                ),
                               );
                             },
                             separatorBuilder:
@@ -396,6 +402,18 @@ class MaterialSectionState extends State<MaterialSection> {
               );
             }),
       ],
+    );
+  }
+
+  void showPreviewFile(BuildContext context, MaterialHospitalResponse data) {
+    showDialog(
+      context: context,
+      builder: (_) => Provider.value(
+        value: context.read<MaterialsModel>(),
+        child: AlertDialog(
+          content: PreviewFile(data: data),
+        ),
+      ),
     );
   }
 

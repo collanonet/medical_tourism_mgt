@@ -138,7 +138,7 @@ class _AdditionalInformationSectionState
                                               FileSelect>(
                                           formControlName: 'file',
                                           builder: (context, control, _) {
-                                            return GestureDetector(
+                                            return InkWell(
                                               onTap: () {
                                                 if (control.value?.url !=
                                                     null) {

@@ -19,12 +19,12 @@ class FilePreview extends StatefulWidget {
 class _FilePreviewState extends State<FilePreview> {
   String? _filePath;
   bool _loading = true;
-  late String baseUrl;
+  String baseUrl =
+      'https://medical-tourism-api-dev-collabonet.pixelplatforms.com/files';
 
   @override
   void initState() {
     super.initState();
-    baseUrl = GetIt.I<String>(instanceName: 'baseUrl');
     _downloadFile();
   }
 

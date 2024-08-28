@@ -571,7 +571,7 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                                 ReactiveValueListenableBuilder<FileSelect>(
                                     formControlName: 'fileDoctor',
                                     builder: (context, control, _) {
-                                      return GestureDetector(
+                                      return InkWell(
                                         onTap: () {
                                           if (control.value?.url != null) {
                                             openUrlInBrowser(
