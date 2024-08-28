@@ -9,13 +9,13 @@ import 'medical_payment_details_model.dart';
 import 'medical_payment_details_screen.dart';
 
 class MedicalPaymentDetailsPage extends StatelessWidget {
-  MedicalPaymentDetailsPage({
+  const MedicalPaymentDetailsPage({
     super.key,
     this.patient,
     this.id,
     });
   final Patient? patient;
-  String? id;
+  final String? id;
 
   @override
   Widget build(BuildContext context) {

@@ -19,7 +19,6 @@ class MedicalVisaFilter extends StatefulWidget {
 }
 
 class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
-  final bool _check = false;
   final formatter = InputFormatter();
   @override
   Widget build(BuildContext context) {

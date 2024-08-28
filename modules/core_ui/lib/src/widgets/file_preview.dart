@@ -1,6 +1,5 @@
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
@@ -58,8 +57,12 @@ class _FilePreviewState extends State<FilePreview> {
     final fileExtension = _filePath!.split('.').last.toLowerCase();
 
     if (fileExtension == 'pdf') {
-      return PDFView(
-        filePath: _filePath!,
+      return Container(
+        child: TextButton(
+            onPressed: () {
+              openUrlInBrowser(fileName: widget.fileName);
+            },
+            child: const Text('Download')),
       );
     } else if (['jpg', 'jpeg', 'png', 'gif'].contains(fileExtension)) {
       return Image.file(File(_filePath!));

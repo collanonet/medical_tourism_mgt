@@ -170,8 +170,8 @@ class HospitalScreen extends StatelessWidget {
                                                               ),
                                                             ),
                                                           );
-                                                  }).toList() ??
-                                                  [],
+                                                  }).toList()
+                                                  ,
                                             ),
                                           ],
                                         ),
