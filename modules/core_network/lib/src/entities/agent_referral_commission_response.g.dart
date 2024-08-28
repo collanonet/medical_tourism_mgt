@@ -11,7 +11,7 @@ AgentReferralCommissionResponse _$AgentReferralCommissionResponseFromJson(
     AgentReferralCommissionResponse(
       id: json['_id'] as String,
       referralCommissionName: json['referralCommissionName'] as String?,
-      referralCommission: json['referralCommission'] as int?,
+      referralCommission: (json['referralCommission'] as num?)?.toInt(),
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );

@@ -26,7 +26,7 @@ DetainHotelRegistationResponse _$DetainHotelRegistationResponseFromJson(
       isEnglish: json['isEnglish'] as bool?,
       isOthers: json['isOthers'] as bool?,
       other: json['other'] as String?,
-      evaluation: json['evaluation'] as int?,
+      evaluation: (json['evaluation'] as num?)?.toInt(),
       memo: json['memo'] as String?,
     );
 

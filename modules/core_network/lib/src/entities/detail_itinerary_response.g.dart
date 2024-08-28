@@ -13,9 +13,9 @@ DetailItineraryResponse _$DetailItineraryResponseFromJson(
       patient:
           (json['patient'] as List<dynamic>?)?.map((e) => e as String).toList(),
       tourName: json['tourName'] as String?,
-      peopleNumber: json['peopleNumber'] as int?,
+      peopleNumber: (json['peopleNumber'] as num?)?.toInt(),
       classification: json['classification'] as String?,
-      group: json['group'] as int?,
+      group: (json['group'] as num?)?.toInt(),
       day: (json['day'] as List<dynamic>?)
           ?.map((e) => Day.fromJson(e as Map<String, dynamic>))
           .toList(),

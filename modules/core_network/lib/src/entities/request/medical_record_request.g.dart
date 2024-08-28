@@ -12,9 +12,9 @@ MedicalRecordRequest _$MedicalRecordRequestFromJson(
       dateOfBirth: json['dateOfBirth'] == null
           ? null
           : DateTime.parse(json['dateOfBirth'] as String),
-      age: json['age'] as int?,
-      height: json['height'] as int?,
-      weight: json['weight'] as int?,
+      age: (json['age'] as num?)?.toInt(),
+      height: (json['height'] as num?)?.toInt(),
+      weight: (json['weight'] as num?)?.toInt(),
       gender: json['gender'] as bool?,
       arrivalDate: json['arrivalDate'] == null
           ? null

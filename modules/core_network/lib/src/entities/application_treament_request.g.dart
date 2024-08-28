@@ -8,7 +8,6 @@ part of 'application_treament_request.dart';
 
 TreamentRequest _$TreamentRequestFromJson(Map<String, dynamic> json) =>
     TreamentRequest(
-      id: json['_id'] as String,
       medicalInfo: json['medicalInfo'] as bool?,
       dicom: json['dicom'] as bool?,
       bloodTests: json['bloodTests'] as bool?,
@@ -43,7 +42,6 @@ TreamentRequest _$TreamentRequestFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$TreamentRequestToJson(TreamentRequest instance) =>
     <String, dynamic>{
-      '_id': instance.id,
       'medicalInfo': instance.medicalInfo,
       'dicom': instance.dicom,
       'bloodTests': instance.bloodTests,

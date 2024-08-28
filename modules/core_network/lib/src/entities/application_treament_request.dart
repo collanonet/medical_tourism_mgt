@@ -3,8 +3,6 @@ part 'application_treament_request.g.dart';
 
 @JsonSerializable()
 class TreamentRequest {
-  @JsonKey(name: '_id')
-  String id;
   bool? medicalInfo;
   bool? dicom;
   bool? bloodTests;
@@ -29,7 +27,6 @@ class TreamentRequest {
   String? scheduled;
 
   TreamentRequest({
-    required this.id,
     this.medicalInfo,
     this.dicom,
     this.bloodTests,

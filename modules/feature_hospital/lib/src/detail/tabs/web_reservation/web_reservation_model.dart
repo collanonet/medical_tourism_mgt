@@ -385,15 +385,27 @@ class WebAppointmentDetailModel {
 
   Future<void> updateBooking() async {
     try {
-      var data = bookingByPatient.value.requireData.copyWith(
-        desiredDate1: formGroup.control('preferredDate1').value,
-        desiredDate2: formGroup.control('preferredDate2').value,
-        desiredDate3: formGroup.control('preferredDate3').value,
-        reason: formGroup.control('remarks').value,
-      );
+      var data;
+
+      if (bookingByPatient.value.hasData) {
+        data = bookingByPatient.value.requireData.copyWith(
+          desiredDate1: formGroup.control('preferredDate1').value,
+          desiredDate2: formGroup.control('preferredDate2').value,
+          desiredDate3: formGroup.control('preferredDate3').value,
+          reason: formGroup.control('remarks').value,
+        );
+      } else {
+        data = TreamentRequest(
+          desiredDate1: formGroup.control('preferredDate1').value,
+          desiredDate2: formGroup.control('preferredDate2').value,
+          desiredDate3: formGroup.control('preferredDate3').value,
+          reason: formGroup.control('remarks').value,
+        );
+      }
+
       bookingByPatient.value = const AsyncData(loading: true);
       final result = await repository.updateBooking(
-          bookingByPatient.value.requireData.id,
+          patient.value.requireData.id,
           TreamentRequest.fromJson(data.toJson()));
       bookingByPatient.value = AsyncData(data: result);
     } catch (e) {
