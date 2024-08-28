@@ -1,4 +1,3 @@
-import 'package:core_l10n/l10n.dart';
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
@@ -198,10 +197,10 @@ class MaterialSectionState extends State<MaterialSection> {
                                       },
                                     );
                                   }),
-                              Expanded(flex: 2, child: Text('パンフレット名')),
-                              Expanded(child: Text('作成者')),
-                              Expanded(child: Text('発行日')),
-                              Expanded(child: Text('共有')),
+                              const Expanded(flex: 2, child: Text('パンフレット名')),
+                              const Expanded(child: Text('作成者')),
+                              const Expanded(child: Text('発行日')),
+                              const Expanded(child: Text('共有')),
                             ],
                           ),
                           const Divider(
@@ -261,8 +260,8 @@ class MaterialSectionState extends State<MaterialSection> {
                                     Expanded(
                                       flex: 1,
                                       child: data?.share == null
-                                          ? SizedBox()
-                                          : Icon(Icons.person),
+                                          ? const SizedBox()
+                                          : const Icon(Icons.person),
                                     ),
                                   ],
                                 ),
@@ -288,10 +287,10 @@ class MaterialSectionState extends State<MaterialSection> {
             builder: (context, sels, _) {
               return RowSeparated(
                 separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(width: 16);
+                  return const SizedBox(width: 16);
                 },
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   ValueListenableListener(
                     valueListenable: context.read<MaterialsModel>().delete,
                     onListen: () {
@@ -333,16 +332,16 @@ class MaterialSectionState extends State<MaterialSection> {
                                               value: context
                                                   .read<MaterialsModel>(),
                                               child: AlertDialog(
-                                                title: Text("削除確認"),
+                                                title: const Text('削除確認'),
                                                 content:
-                                                    Text("選択したデータを削除しますか？"),
+                                                    const Text('選択したデータを削除しますか？'),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("キャンセル"),
+                                                    child: const Text('キャンセル'),
                                                   ),
                                                   TextButton(
                                                     onPressed: () {
@@ -354,7 +353,7 @@ class MaterialSectionState extends State<MaterialSection> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("削除する"),
+                                                    child: const Text('削除する'),
                                                   ),
                                                 ],
                                               ),
@@ -365,7 +364,7 @@ class MaterialSectionState extends State<MaterialSection> {
                                 isLoading: value.loading,
                                 loadingColor: context.appTheme.primaryColor,
                                 child: Text(
-                                  "削除する",
+                                  '削除する',
                                   style: context.textTheme.labelLarge?.copyWith(
                                       color: context.appTheme.primaryColor),
                                 ),
@@ -374,7 +373,7 @@ class MaterialSectionState extends State<MaterialSection> {
                   ),
                   ElevatedButton(
                     onPressed: () {},
-                    child: Text("共有する"),
+                    child: const Text('共有する'),
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -392,11 +391,11 @@ class MaterialSectionState extends State<MaterialSection> {
                         );
                       }
                     },
-                    child: Text("閲覧する"),
+                    child: const Text('閲覧する'),
                   ),
                   ElevatedButton(
                     onPressed: () {},
-                    child: Text("印刷する"),
+                    child: const Text('印刷する'),
                   ),
                 ],
               );

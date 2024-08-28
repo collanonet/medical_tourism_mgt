@@ -2,9 +2,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -77,7 +75,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                                 : null,
                             child: WithLoadingButton(
                               isLoading: value.loading,
-                              child: Text('保存する'),
+                              child: const Text('保存する'),
                             ));
                       },
                     );
@@ -104,7 +102,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
 
         return ColumnSeparated(
           crossAxisAlignment: CrossAxisAlignment.start,
-          separatorBuilder: (BuildContext context, int index) => Divider(),
+          separatorBuilder: (BuildContext context, int index) => const Divider(),
           children: [
             ...rows,
             if (rows.length < 3)

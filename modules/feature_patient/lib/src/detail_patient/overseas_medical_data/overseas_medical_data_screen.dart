@@ -1,4 +1,3 @@
-import 'package:core_l10n/l10n.dart';
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
@@ -245,10 +244,10 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                                   if (data.expirationDate !=
                                                       null) ...{
                                                     Container(
-                                                      margin: EdgeInsets.only(
+                                                      margin: const EdgeInsets.only(
                                                           right: 8),
                                                       padding:
-                                                          EdgeInsets.all(4),
+                                                          const EdgeInsets.all(4),
                                                       decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius
@@ -272,7 +271,7 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                               child: Row(
                                             children: [
                                               Container(
-                                                padding: EdgeInsets.all(4),
+                                                padding: const EdgeInsets.all(4),
                                                 decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(4),
@@ -311,7 +310,7 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                                   : '--')),
                                           Expanded(
                                               child: data.qrCode == null
-                                                  ? SizedBox()
+                                                  ? const SizedBox()
                                                   : Icon(
                                                       Icons
                                                           .qr_code_scanner_rounded,
@@ -400,8 +399,7 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                       builder: (_) => AlertDialog(
                                             content: ViewAndPrintFileWidget(list
                                                 .map((e) =>
-                                                    "https://medical-tourism-api-dev-collabonet.pixelplatforms.com/files/" +
-                                                    e.qrCode.toString())
+                                                    'https://medical-tourism-api-dev-collabonet.pixelplatforms.com/files/${e.qrCode}')
                                                 .toList()),
                                           ));
                                 },
@@ -512,19 +510,19 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('　閉じる　'), // TODO: l10n 対応 (閉じる) (close)
+                child: const Text('　閉じる　'), // TODO: l10n 対応 (閉じる) (close)
               ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('　共有する　'), // TODO: l10n 対応 (閉じる) (close)
+                child: const Text('　共有する　'), // TODO: l10n 対応 (閉じる) (close)
               ),
               ElevatedButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: Text('　印刷する　'), // TODO: l10n 対応 (閉じる) (close)
+                child: const Text('　印刷する　'), // TODO: l10n 対応 (閉じる) (close)
               ),
             ]),
       ),

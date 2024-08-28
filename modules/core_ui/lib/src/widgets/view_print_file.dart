@@ -15,7 +15,7 @@ class ViewAndPrintFileWidget extends StatelessWidget {
     // var imageList =
     //     await Future.wait([for (var url in urlList) networkImage(url)]);
     for (var url in urlList) {
-      if (url.contains(".pdf") || url.contains("/view")) {
+      if (url.contains('.pdf') || url.contains('/view')) {
         final http.Response responseData = await http.get(Uri.parse(url));
         Uint8List pdf = responseData.bodyBytes;
         await Printing.layoutPdf(onLayout: (_) => pdf.buffer.asUint8List());

@@ -18,6 +18,8 @@ dependencies:
   data_auth: 0.0.1-alpha.1
   feature_auth: 0.0.1-alpha.1
 
+  auto_route: any
+  provider: any
 dev_dependencies:
   flutter_test:
     sdk: flutter

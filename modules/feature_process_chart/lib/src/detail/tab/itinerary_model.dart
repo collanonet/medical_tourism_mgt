@@ -132,7 +132,7 @@ class ItineraryModel {
           logger.d('date ${element['date']}');
           logger.d('placeName ${element['placeName']}');
           logger.d('placeStay ${element['placeStay']}');
-          logger.d('days ${days}');
+          logger.d('days $days');
         },
       );
       submitData.value = const AsyncData(loading: true);

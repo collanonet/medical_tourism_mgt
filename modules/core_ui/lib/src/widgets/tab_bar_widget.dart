@@ -1,4 +1,4 @@
-import 'package:core_ui/core_ui.dart';
+import '../../core_ui.dart';
 import 'package:flutter/material.dart';
 
 class TabBarWidget extends StatelessWidget {
@@ -57,7 +57,7 @@ class TabBarWidget extends StatelessWidget {
                     onPressed?.call(index);
                   },
                   child: Text(menu[index],
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'NotoSansJP',
                         package: 'core_ui',
                       )),
@@ -66,7 +66,7 @@ class TabBarWidget extends StatelessWidget {
                   style: ElevatedButton.styleFrom(
                     foregroundColor: context.appTheme.primaryColor,
                     backgroundColor: Colors.white,
-                    textStyle: TextStyle(
+                    textStyle: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontFamily: 'NotoSansJP',
                       package: 'core_ui',
@@ -89,7 +89,7 @@ class TabBarWidget extends StatelessWidget {
                   },
                   child: Text(
                     menu[index],
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontFamily: 'NotoSansJP',
                       package: 'core_ui',
                     ),

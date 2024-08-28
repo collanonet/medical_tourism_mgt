@@ -81,7 +81,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                   setState(() {});
                                 },
                                 decoration: InputDecoration(
-                                  label: Text(
+                                  label: const Text(
                                     '生年月日',
                                   ),
                                   fillColor: Colors.white,
@@ -172,7 +172,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                             //       .control('isFemale')
                                             //       .value = value.value == false;
                                             // },
-                                            title: Text('男性'),
+                                            title: const Text('男性'),
                                           ),
                                         ),
                                         IntrinsicWidth(
@@ -190,7 +190,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                             //       .control('isMale')
                                             //       .value = value.value == false;
                                             // },
-                                            title: Text('女性'),
+                                            title: const Text('女性'),
                                           ),
                                         )
                                       ],
@@ -206,7 +206,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                               child: ReactiveTextField<int?>(
                                 formControlName: 'height',
                                 keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   fillColor: Colors.white,
                                   filled: true,
                                   label: Text(
@@ -227,7 +227,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                               child: ReactiveTextField<int?>(
                                 formControlName: 'weight',
                                 keyboardType: TextInputType.number,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   fillColor: Colors.white,
                                   filled: true,
                                   label: Text(
@@ -276,7 +276,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                 decoration: InputDecoration(
                                   fillColor: Colors.white,
                                   filled: true,
-                                  label: Text(
+                                  label: const Text(
                                     '来日日', // TODO: l10n 対応 (来日日) (arrivalDate)
                                   ),
                                   suffixIcon: IconButton(
@@ -310,7 +310,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                 decoration: InputDecoration(
                                   fillColor: Colors.white,
                                   filled: true,
-                                  label: Text('受診日'),
+                                  label: const Text('受診日'),
                                   suffixIcon: IconButton(
                                     icon: const Icon(
                                       CupertinoIcons.calendar,
@@ -342,7 +342,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                 decoration: InputDecoration(
                                   fillColor: Colors.white,
                                   filled: true,
-                                  label: Text(
+                                  label: const Text(
                                     '帰国日',
                                   ),
                                   suffixIcon: IconButton(
@@ -367,7 +367,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'proposalNumber',
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             fillColor: Colors.white,
                             filled: true,
                             label: Text(
@@ -394,7 +394,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                   formatter.dateFormatter,
                                 ],
                                 decoration: InputDecoration(
-                                  label: Text(
+                                  label: const Text(
                                     '受付日', // TODO: l10n 対応 (受付日) (receptionDate)
                                   ),
                                   suffixIcon: IconButton(
@@ -411,7 +411,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                       SizedBox(
                         width: context.appTheme.spacing.marginMedium,
                       ),
-                      Expanded(
+                      const Expanded(
                         child: ReactiveDropdownFormField(
                           formControlName: 'progress',
                           decoration: InputDecoration(
@@ -605,7 +605,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                   formatter.dateFormatter,
                                 ],
                                 decoration: InputDecoration(
-                                  label: Text(
+                                  label: const Text(
                                     '前金受取日', //  TODO: l10n 対応 (前金受取日) (advancePaymentDate)
                                   ),
                                   suffixIcon: IconButton(

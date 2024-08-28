@@ -1,6 +1,8 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 part 'application_treament_request.g.dart';
 
+@CopyWith()
 @JsonSerializable()
 class TreamentRequest {
   bool? medicalInfo;

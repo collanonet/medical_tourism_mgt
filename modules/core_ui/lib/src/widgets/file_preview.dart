@@ -1,11 +1,9 @@
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
-import 'package:image/image.dart' as img;
 import 'package:http/http.dart' as http;
 import 'dart:io';
 import 'package:path_provider/path_provider.dart';
-import 'package:get_it/get_it.dart';
 
 class FilePreview extends StatefulWidget {
   const FilePreview({super.key, required this.fileName});
@@ -69,12 +67,12 @@ class _FilePreviewState extends State<FilePreview> {
       return Center(
         child: Column(
           children: [
-            Text('Unsupported file format'),
+            const Text('Unsupported file format'),
             TextButton(
                 onPressed: () {
                   openUrlInBrowser(fileName: widget.fileName);
                 },
-                child: Text("Download"))
+                child: const Text('Download'))
           ],
         ),
       );

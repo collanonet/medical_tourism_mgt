@@ -1,7 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -25,7 +24,7 @@ class _ReservationHistorySectionState extends State<ReservationHistorySection> {
         builder: (context, value, _) {
           return Skeletonizer(
             enabled: value.loading,
-            child: Container(
+            child: SizedBox(
               height: 400,
               width: double.infinity,
               child: DynamicTable(
@@ -33,16 +32,16 @@ class _ReservationHistorySectionState extends State<ReservationHistorySection> {
                 data: TableData(
                   columns: [
                     HeaderTableData(
-                      titleHeader: Text('状況'),
+                      titleHeader: const Text('状況'),
                     ),
                     HeaderTableData(
-                      titleHeader: Text('医療機関'),
+                      titleHeader: const Text('医療機関'),
                     ),
                     HeaderTableData(
-                      titleHeader: Text('予約日'),
+                      titleHeader: const Text('予約日'),
                     ),
                     HeaderTableData(
-                      titleHeader: Text('テストコール'),
+                      titleHeader: const Text('テストコール'),
                     ),
                   ],
                   rows: List<RowTableData>.generate(

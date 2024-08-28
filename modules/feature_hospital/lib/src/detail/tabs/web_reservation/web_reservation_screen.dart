@@ -1,11 +1,10 @@
-import 'package:feature_hospital/src/detail/tabs/web_reservation/web_reservation_section.dart';
+import 'web_reservation_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:core_utils/core_utils.dart';
 
-import '../../../filter_hospital_form.dart';
 import 'web_reservation_model.dart';
 
 class WebReservationScreen extends StatefulWidget {

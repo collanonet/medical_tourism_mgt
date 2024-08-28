@@ -1,4 +1,3 @@
-import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -109,7 +108,7 @@ class HeaderDetailPatient extends StatelessWidget {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xff53A6FF),
+                      backgroundColor: const Color(0xff53A6FF),
                     ),
                     onPressed: () {},
                     child: const Text('治療'),
@@ -123,7 +122,7 @@ class HeaderDetailPatient extends StatelessWidget {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xffDBE238),
+                      backgroundColor: const Color(0xffDBE238),
                     ),
                     onPressed: () {},
                     child: const Text('医療ビザ'),
@@ -137,7 +136,7 @@ class HeaderDetailPatient extends StatelessWidget {
                   ),
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Color(0xffB76D0F),
+                      backgroundColor: const Color(0xffB76D0F),
                     ),
                     onPressed: () {},
                     child: const Text('受注'),

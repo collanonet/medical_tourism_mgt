@@ -2,10 +2,8 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -200,7 +198,7 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                                             .appTheme
                                                             .primaryColor,
                                                         child: Text(
-                                                          "削除する",
+                                                          '削除する',
                                                           style: context
                                                               .textTheme
                                                               .labelLarge
@@ -214,7 +212,7 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                         OutlinedButton(
                                             onPressed: () {},
                                             child: Text(
-                                              "編集する",
+                                              '編集する',
                                               style: context
                                                   .textTheme.labelLarge
                                                   ?.copyWith(
@@ -246,7 +244,7 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                           ),
                                         ),
                                       ]),
-                                  SizedBox(
+                                  const SizedBox(
                                     height: 10,
                                   )
                                 ],

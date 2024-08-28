@@ -13,7 +13,7 @@ class DynamicTable extends StatefulWidget {
   final bool enableScroll;
 
   const DynamicTable({
-    Key? key,
+    super.key,
     required this.data,
     this.onScrollMax,
     this.onScrollMin,
@@ -23,7 +23,7 @@ class DynamicTable extends StatefulWidget {
     this.evenRowColor,
     this.rowsPerPage = 10,
     this.enableScroll = true,
-  }) : super(key: key);
+  });
 
   @override
   State<DynamicTable> createState() => _DynamicTableState();
@@ -129,7 +129,7 @@ class _DynamicTableState extends State<DynamicTable> {
           ),
         ),
         widget.data.rows.isEmpty
-            ? Center(
+            ? const Center(
                 child: Text(
                   'No data available',
                   style: TextStyle(
@@ -162,7 +162,7 @@ class _DynamicTableState extends State<DynamicTable> {
                 ),
                 Text(
                   'Page ${_currentPage + 1}',
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontFamily: 'NotoSansJP',
                     package: 'core_ui',
                   ),

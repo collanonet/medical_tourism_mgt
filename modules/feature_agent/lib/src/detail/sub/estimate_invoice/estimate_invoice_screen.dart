@@ -1,4 +1,3 @@
-import 'package:core_l10n/l10n.dart';
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
@@ -124,12 +123,12 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
                                 },
                               );
                             }),
-                        Expanded(flex: 2, child: Text('書類名')),
-                        Expanded(child: Text('発行元')),
-                        Expanded(child: Text('発行日')),
-                        Expanded(child: Text('支払期限')),
-                        Expanded(child: Text('入金日')),
-                        Expanded(child: Text('支払い方法')),
+                        const Expanded(flex: 2, child: Text('書類名')),
+                        const Expanded(child: Text('発行元')),
+                        const Expanded(child: Text('発行日')),
+                        const Expanded(child: Text('支払期限')),
+                        const Expanded(child: Text('入金日')),
+                        const Expanded(child: Text('支払い方法')),
                       ],
                     ),
                     SizedBox(
@@ -271,9 +270,9 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
                                                     value: context.read<
                                                         EstimateInvoiceModel>(),
                                                     child: AlertDialog(
-                                                      title: Text("削除確認"),
-                                                      content: Text(
-                                                          "選択した書類を削除しますか？"),
+                                                      title: const Text('削除確認'),
+                                                      content: const Text(
+                                                          '選択した書類を削除しますか？'),
                                                       actions: [
                                                         TextButton(
                                                           onPressed: () {
@@ -281,7 +280,7 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
                                                                     context)
                                                                 .pop();
                                                           },
-                                                          child: Text("キャンセル"),
+                                                          child: const Text('キャンセル'),
                                                         ),
                                                         TextButton(
                                                           onPressed: () {
@@ -294,7 +293,7 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
                                                                     context)
                                                                 .pop();
                                                           },
-                                                          child: Text("削除する"),
+                                                          child: const Text('削除する'),
                                                         ),
                                                       ],
                                                     ),
@@ -306,7 +305,7 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
                                       loadingColor:
                                           context.appTheme.primaryColor,
                                       child: Text(
-                                        "削除する",
+                                        '削除する',
                                         style: context.textTheme.labelLarge
                                             ?.copyWith(
                                                 color: context
@@ -320,7 +319,7 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
                         ),
                         ElevatedButton(
                           onPressed: () {},
-                          child: Text('印刷する'),
+                          child: const Text('印刷する'),
                         )
                       ],
                     );

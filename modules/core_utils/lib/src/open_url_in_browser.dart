@@ -1,4 +1,3 @@
-import 'package:get_it/get_it.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 Future<void> openUrlInBrowser({required String fileName}) async {

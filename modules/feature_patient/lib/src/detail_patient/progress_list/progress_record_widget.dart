@@ -1,10 +1,7 @@
 import 'package:core_ui/core_ui.dart';
-import 'progress_list_model.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 class ProgressRecordWidget extends StatelessWidget {
   const ProgressRecordWidget({super.key});

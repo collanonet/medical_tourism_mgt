@@ -4,7 +4,6 @@ import 'package:data_web_appointment/data_web_appointment.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:reactive_forms/src/models/models.dart';
 
 import 'web_appointment_detail_form.dart';
 
@@ -363,10 +362,13 @@ class WebAppointmentDetailModel {
 
   Future<void> updateBooking() async {
     try {
-      var data;
+      TreamentRequest data;
 
       if (bookingByPatient.value.hasData) {
-        data = bookingByPatient.value.requireData.copyWith(
+        data = TreamentRequest.fromJson(
+            bookingByPatient.value.requireData.toJson());
+
+        data = data.copyWith(
           desiredDate1: formGroup.control('preferredDate1').value,
           desiredDate2: formGroup.control('preferredDate2').value,
           desiredDate3: formGroup.control('preferredDate3').value,

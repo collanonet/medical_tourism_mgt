@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import 'package:core_utils/core_utils.dart';
-import '../type/type_form.dart';
 import '../type/type_model.dart';
 import 'estimate_master_form.dart';
 import 'estimate_master_screen.dart';

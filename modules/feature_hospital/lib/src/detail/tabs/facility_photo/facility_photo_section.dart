@@ -120,11 +120,11 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                           },
                         );
                       }),
-                  Expanded(flex: 2, child: Text('施設写真名')),
-                  Expanded(child: Text('撮影')),
-                  Expanded(child: Text('撮影日')),
-                  Expanded(child: Text('共有')),
-                  Expanded(child: SizedBox()),
+                  const Expanded(flex: 2, child: Text('施設写真名')),
+                  const Expanded(child: Text('撮影')),
+                  const Expanded(child: Text('撮影日')),
+                  const Expanded(child: Text('共有')),
+                  const Expanded(child: SizedBox()),
                 ],
               ),
               SizedBox(
@@ -177,8 +177,8 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                         ),
                         Expanded(
                           child: value.requireData[index].share == null
-                              ? SizedBox()
-                              : Icon(Icons.person),
+                              ? const SizedBox()
+                              : const Icon(Icons.person),
                         ),
                         Expanded(
                           child: InkWell(
@@ -269,9 +269,9 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                                                     value: context
                                                         .read<FacilityModel>(),
                                                     child: AlertDialog(
-                                                      title: Text("削除確認"),
-                                                      content: Text(
-                                                          "選択した書類を削除しますか？"),
+                                                      title: const Text('削除確認'),
+                                                      content: const Text(
+                                                          '選択した書類を削除しますか？'),
                                                       actions: [
                                                         TextButton(
                                                           onPressed: () {
@@ -279,7 +279,7 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                                                                     context)
                                                                 .pop();
                                                           },
-                                                          child: Text("キャンセル"),
+                                                          child: const Text('キャンセル'),
                                                         ),
                                                         TextButton(
                                                           onPressed: () {
@@ -292,7 +292,7 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                                                                     context)
                                                                 .pop();
                                                           },
-                                                          child: Text("削除する"),
+                                                          child: const Text('削除する'),
                                                         ),
                                                       ],
                                                     ),

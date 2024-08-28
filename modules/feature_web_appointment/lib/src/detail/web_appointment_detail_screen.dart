@@ -5,7 +5,6 @@ import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -57,7 +56,7 @@ class _WebAppointmentDetailScreenState
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(
+                          const Text(
                             '患者',
                             style: TextStyle(
                               fontWeight: FontWeight.bold,
@@ -104,13 +103,13 @@ class _WebAppointmentDetailScreenState
                                             }
                                           },
                                           decoration: InputDecoration(
-                                            label: Text('患者名'),
+                                            label: const Text('患者名'),
                                             suffixIcon: value.loading
-                                                ? SizedBox(
+                                                ? const SizedBox(
                                                     height: 30,
                                                     width: 30,
                                                     child:
-                                                        const CircularProgressIndicator())
+                                                        CircularProgressIndicator())
                                                 : ReactiveValueListenableBuilder<
                                                         String>(
                                                     formControlName:
@@ -131,7 +130,7 @@ class _WebAppointmentDetailScreenState
                                                                         .value);
                                                           }
                                                         },
-                                                        icon: Icon(
+                                                        icon: const Icon(
                                                           Icons.search,
                                                           color: Colors.grey,
                                                         ),
@@ -145,13 +144,13 @@ class _WebAppointmentDetailScreenState
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              Expanded(
+                              const Expanded(
                                 child: SizedBox(),
                               ),
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              Expanded(
+                              const Expanded(
                                 child: SizedBox(),
                               ),
                             ],
@@ -209,7 +208,7 @@ class _WebAppointmentDetailScreenState
                                                               'yyyy/MM/dd'),
                                                     ),
                                                     decoration: InputDecoration(
-                                                      label: Text(
+                                                      label: const Text(
                                                         '第１希望',
                                                       ),
                                                       suffixIcon: IconButton(
@@ -256,7 +255,7 @@ class _WebAppointmentDetailScreenState
                                                               'yyyy/MM/dd'),
                                                     ),
                                                     decoration: InputDecoration(
-                                                      label: Text(
+                                                      label: const Text(
                                                         '第２希望',
                                                       ),
                                                       suffixIcon: IconButton(
@@ -303,7 +302,7 @@ class _WebAppointmentDetailScreenState
                                                               'yyyy/MM/dd'),
                                                     ),
                                                     decoration: InputDecoration(
-                                                      label: Text(
+                                                      label: const Text(
                                                         '第３希望',
                                                       ),
                                                       suffixIcon: IconButton(
@@ -340,7 +339,7 @@ class _WebAppointmentDetailScreenState
                                                         .leading,
                                                 formControlName:
                                                     'noDesiredDate',
-                                                title: Text('希望日なし'),
+                                                title: const Text('希望日なし'),
                                               ),
                                             ),
                                           ],
@@ -356,7 +355,7 @@ class _WebAppointmentDetailScreenState
                                                 minLines: 3,
                                                 maxLines: 5,
                                                 formControlName: 'remarks',
-                                                decoration: InputDecoration(
+                                                decoration: const InputDecoration(
                                                   label: Text('備考'),
                                                 ),
                                               ),
@@ -368,7 +367,7 @@ class _WebAppointmentDetailScreenState
                                   );
                                 }),
                           ),
-                          Divider(),
+                          const Divider(),
                           Text(
                             '医療機関',
                             style: context.textTheme.titleLarge,
@@ -415,13 +414,13 @@ class _WebAppointmentDetailScreenState
                                             }
                                           },
                                           decoration: InputDecoration(
-                                            label: Text('医療機関名'),
+                                            label: const Text('医療機関名'),
                                             suffixIcon: value.loading
-                                                ? SizedBox(
+                                                ? const SizedBox(
                                                     height: 30,
                                                     width: 30,
                                                     child:
-                                                        const CircularProgressIndicator())
+                                                        CircularProgressIndicator())
                                                 : ReactiveValueListenableBuilder<
                                                         String>(
                                                     formControlName:
@@ -442,7 +441,7 @@ class _WebAppointmentDetailScreenState
                                                                         .value);
                                                           }
                                                         },
-                                                        icon: Icon(
+                                                        icon: const Icon(
                                                           Icons.search,
                                                           color: Colors.grey,
                                                         ),
@@ -490,7 +489,7 @@ class _WebAppointmentDetailScreenState
                                           child: ReactiveDropdownField<
                                               DoctorProfileHospitalResponse>(
                                             formControlName: 'doctorName',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               labelText: '医者',
                                             ),
                                             items: value.data
@@ -510,7 +509,7 @@ class _WebAppointmentDetailScreenState
                                                             ))
                                                     .toList() ??
                                                 [
-                                                  DropdownMenuItem(
+                                                  const DropdownMenuItem(
                                                     value: null,
                                                     child: Text('NoName'),
                                                   )
@@ -690,7 +689,7 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
+                                    const IntrinsicWidth(
                                       stepWidth: 80,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift1Mon',
@@ -710,7 +709,7 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
+                                    const IntrinsicWidth(
                                       stepWidth: 80,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift1Tue',
@@ -730,7 +729,7 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
+                                    const IntrinsicWidth(
                                       stepWidth: 80,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift1Wed',
@@ -750,7 +749,7 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
+                                    const IntrinsicWidth(
                                       stepWidth: 80,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift1Thu',
@@ -770,7 +769,7 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
+                                    const IntrinsicWidth(
                                       stepWidth: 80,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift1Fri',
@@ -790,7 +789,7 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
+                                    const IntrinsicWidth(
                                       stepWidth: 80,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift1Sat',
@@ -810,7 +809,7 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
+                                    const IntrinsicWidth(
                                       stepWidth: 80,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift1Sun',
@@ -873,7 +872,7 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
+                                    const IntrinsicWidth(
                                       stepWidth: 80,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift2Tue',
@@ -893,7 +892,7 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
+                                    const IntrinsicWidth(
                                       stepWidth: 80,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift2Wed',
@@ -913,7 +912,7 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
+                                    const IntrinsicWidth(
                                       stepWidth: 80,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift2Thu',
@@ -933,7 +932,7 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
+                                    const IntrinsicWidth(
                                       stepWidth: 80,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift2Fri',
@@ -953,7 +952,7 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
+                                    const IntrinsicWidth(
                                       stepWidth: 80,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift2Sat',
@@ -973,7 +972,7 @@ class _WebAppointmentDetailScreenState
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    IntrinsicWidth(
+                                    const IntrinsicWidth(
                                       stepWidth: 80,
                                       child: ReactiveDropdownFormField(
                                         formControlName: 'shift2Sun',
@@ -994,7 +993,7 @@ class _WebAppointmentDetailScreenState
                               ],
                             ),
                           ),
-                          Divider(),
+                          const Divider(),
                           Text(
                             '予約日',
                             style: context.textTheme.titleLarge,
@@ -1006,7 +1005,7 @@ class _WebAppointmentDetailScreenState
                             padding: EdgeInsets.all(
                                 context.appTheme.spacing.marginMedium),
                             decoration: BoxDecoration(
-                              color: Color(0xffFFECE5),
+                              color: const Color(0xffFFECE5),
                               borderRadius: BorderRadius.circular(
                                 context.appTheme.spacing.borderRadiusMedium,
                               ),
@@ -1014,7 +1013,7 @@ class _WebAppointmentDetailScreenState
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text('候補日'),
+                                const Text('候補日'),
                                 ReactiveFormArray(
                                   formArrayName: 'candidateDate',
                                   builder: (context, formArray, child) {
@@ -1085,7 +1084,7 @@ class _WebAppointmentDetailScreenState
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
                                             children: [
-                                              Icon(
+                                              const Icon(
                                                 Icons.add_circle,
                                                 color: Color(0xffF08C67),
                                               ),
@@ -1093,7 +1092,7 @@ class _WebAppointmentDetailScreenState
                                                 width: context.appTheme.spacing
                                                     .marginSmall,
                                               ),
-                                              Text(
+                                              const Text(
                                                 '候補日を追加',
                                                 style: TextStyle(
                                                     color: Color(0xffF08C67)),
@@ -1115,7 +1114,7 @@ class _WebAppointmentDetailScreenState
                                     builder: (context, value, _) {
                                       if (value.data?.messageFrom == null ||
                                           value.data!.messageFrom!.isEmpty) {
-                                        return SizedBox();
+                                        return const SizedBox();
                                       }
                                       return ColumnSeparated(
                                         separatorBuilder:
@@ -1166,8 +1165,8 @@ class _WebAppointmentDetailScreenState
                                         minLines: 3,
                                         maxLines: 5,
                                         formControlName: 'message',
-                                        decoration: InputDecoration(
-                                          label: Text("メッセージ"),
+                                        decoration: const InputDecoration(
+                                          label: Text('メッセージ'),
                                           hintText:
                                               'メッセージ（希望日がない場合は、メッセージ欄にてその旨伝えてください）',
                                         ),
@@ -1183,7 +1182,7 @@ class _WebAppointmentDetailScreenState
                                       builder: (context, form, _) {
                                     return ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: Color(0xffF08C67),
+                                        backgroundColor: const Color(0xffF08C67),
                                       ),
                                       onPressed: form.invalid
                                           ? null
@@ -1193,7 +1192,7 @@ class _WebAppointmentDetailScreenState
                                                       WebAppointmentDetailModel>()
                                                   .submitData();
                                             },
-                                      child: Text('予約日を病院へ送信する'),
+                                      child: const Text('予約日を病院へ送信する'),
                                     );
                                   }),
                                 )
@@ -1245,7 +1244,7 @@ class _WebAppointmentDetailScreenState
                                           logger.d(value);
                                         },
                                         decoration: InputDecoration(
-                                          label: Text('年月日'),
+                                          label: const Text('年月日'),
                                           suffixIcon: IconButton(
                                             icon: const Icon(
                                               CupertinoIcons.calendar,
@@ -1272,7 +1271,7 @@ class _WebAppointmentDetailScreenState
                                     inputFormatters: [
                                       formatter.timeFormatter,
                                     ],
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       label: Text('時間'),
                                     ),
                                   ),
@@ -1334,7 +1333,7 @@ class _WebAppointmentDetailScreenState
                                         : null,
                                     child: WithLoadingButton(
                                       isLoading: value.loading,
-                                      child: Text('保存する'),
+                                      child: const Text('保存する'),
                                     ));
                               },
                             );
@@ -1403,9 +1402,9 @@ class _WebAppointmentDetailScreenState
                     textColor:
                         control.value == '午前' ? Colors.white : Colors.black,
                     bg: control.value == '午前'
-                        ? Color(0xffF08C67)
+                        ? const Color(0xffF08C67)
                         : Colors.white,
-                    borderC: Color(0xffF08C67),
+                    borderC: const Color(0xffF08C67),
                     onTap: () {
                       control.value = '午前';
                     },
@@ -1419,9 +1418,9 @@ class _WebAppointmentDetailScreenState
                     textColor:
                         control.value == '午後' ? Colors.white : Colors.black,
                     bg: control.value == '午後'
-                        ? Color(0xffF08C67)
+                        ? const Color(0xffF08C67)
                         : Colors.white,
-                    borderC: Color(0xffF08C67),
+                    borderC: const Color(0xffF08C67),
                     onTap: () {
                       control.value = '午後';
                     },
@@ -1435,9 +1434,9 @@ class _WebAppointmentDetailScreenState
                     textColor:
                         control.value == '終日' ? Colors.white : Colors.black,
                     bg: control.value == '終日'
-                        ? Color(0xffF08C67)
+                        ? const Color(0xffF08C67)
                         : Colors.white,
-                    borderC: Color(0xffF08C67),
+                    borderC: const Color(0xffF08C67),
                     onTap: () {
                       control.value = '終日';
                     },
@@ -1464,7 +1463,7 @@ class _WebAppointmentDetailScreenState
                       control.value = time;
                     }
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     label: Text(
                       '時間帯（自）',
                     ),
@@ -1475,7 +1474,7 @@ class _WebAppointmentDetailScreenState
         SizedBox(
           width: context.appTheme.spacing.marginMedium,
         ),
-        Text('〜'),
+        const Text('〜'),
         SizedBox(
           width: context.appTheme.spacing.marginMedium,
         ),
@@ -1495,7 +1494,7 @@ class _WebAppointmentDetailScreenState
                       control.value = time;
                     }
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     label: Text(
                       '時間帯（至）',
                     ),
@@ -1508,7 +1507,7 @@ class _WebAppointmentDetailScreenState
             children: [
               if (formArray.controls.indexOf(currentForm) != 0) ...{
                 IconButton(
-                  icon: Icon(Icons.delete_forever, color: Colors.red),
+                  icon: const Icon(Icons.delete_forever, color: Colors.red),
                   onPressed: () => formArray.removeAt(
                     formArray.controls.indexOf(currentForm),
                   ),

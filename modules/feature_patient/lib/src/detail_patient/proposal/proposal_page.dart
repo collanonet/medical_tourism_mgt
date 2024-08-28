@@ -1,4 +1,3 @@
-import 'package:core_l10n/l10n.dart';
 import 'package:core_network/entities.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';

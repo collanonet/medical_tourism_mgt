@@ -38,8 +38,8 @@ class _DetailMedicalOverseaDataScreenState
       HospitalDICOMTab(
         medicalRecordOverseaData: widget.medicalRecordOverseaData,
       ),
-      HospitalCertificateTab(),
-      StudyOfDICOMTab(),
+      const HospitalCertificateTab(),
+      const StudyOfDICOMTab(),
     ];
   }
 

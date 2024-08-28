@@ -383,15 +383,19 @@ class WebAppointmentDetailModel {
     webBookingSelected.value = AsyncData(data: reservation);
   }
 
-  Future<void> updateBooking() async {
+    Future<void> updateBooking() async {
     try {
-      var data;
+      TreamentRequest data;
 
       if (bookingByPatient.value.hasData) {
-        data = bookingByPatient.value.requireData.copyWith(
+        data = TreamentRequest.fromJson(
+            bookingByPatient.value.requireData.toJson());
+
+        data = data.copyWith(
           desiredDate1: formGroup.control('preferredDate1').value,
           desiredDate2: formGroup.control('preferredDate2').value,
           desiredDate3: formGroup.control('preferredDate3').value,
+          medicalName: hospital.value.requireData.hospitalNameKatakana,
           reason: formGroup.control('remarks').value,
         );
       } else {
@@ -399,6 +403,7 @@ class WebAppointmentDetailModel {
           desiredDate1: formGroup.control('preferredDate1').value,
           desiredDate2: formGroup.control('preferredDate2').value,
           desiredDate3: formGroup.control('preferredDate3').value,
+          medicalName: hospital.value.requireData.hospitalNameKatakana,
           reason: formGroup.control('remarks').value,
         );
       }

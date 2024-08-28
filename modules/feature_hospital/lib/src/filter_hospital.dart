@@ -1,8 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:core_utils/core_utils.dart';
@@ -133,7 +131,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
                       ],
                     ),
                     const SizedBox(height: 16),
-                    Text(
+                    const Text(
                       '病院種別',
                     ),
                     const SizedBox(height: 16),
@@ -148,11 +146,11 @@ class _HospitalFilterState extends State<HospitalFilter> {
                             controlAffinity: ListTileControlAffinity.leading,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
-                              side: BorderSide(
+                              side: const BorderSide(
                                 color: Colors.grey,
                               ),
                             ),
-                            title: Text('大学病院'),
+                            title: const Text('大学病院'),
                           ),
                         ),
                         IntrinsicWidth(
@@ -163,11 +161,11 @@ class _HospitalFilterState extends State<HospitalFilter> {
                             controlAffinity: ListTileControlAffinity.leading,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
-                              side: BorderSide(
+                              side: const BorderSide(
                                 color: Colors.grey,
                               ),
                             ),
-                            title: Text('国公立病院'),
+                            title: const Text('国公立病院'),
                           ),
                         ),
                         IntrinsicWidth(
@@ -178,11 +176,11 @@ class _HospitalFilterState extends State<HospitalFilter> {
                             controlAffinity: ListTileControlAffinity.leading,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
-                              side: BorderSide(
+                              side: const BorderSide(
                                 color: Colors.grey,
                               ),
                             ),
-                            title: Text('私立病院'),
+                            title: const Text('私立病院'),
                           ),
                         ),
                         IntrinsicWidth(
@@ -193,15 +191,15 @@ class _HospitalFilterState extends State<HospitalFilter> {
                             controlAffinity: ListTileControlAffinity.leading,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
-                              side: BorderSide(
+                              side: const BorderSide(
                                 color: Colors.grey,
                               ),
                             ),
-                            title: Text('クリニック'),
+                            title: const Text('クリニック'),
                           ),
                         ),
-                        Spacer(),
-                        ElevatedButton(onPressed: () {}, child: Text('検索')),
+                        const Spacer(),
+                        ElevatedButton(onPressed: () {}, child: const Text('検索')),
                       ],
                     ),
                   ],

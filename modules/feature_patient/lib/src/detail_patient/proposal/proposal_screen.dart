@@ -54,7 +54,7 @@ class ProposalScreen extends StatelessWidget {
                                                         formControlName:
                                                             'hospitalName',
                                                         decoration:
-                                                            InputDecoration(
+                                                            const InputDecoration(
                                                           label: Text(
                                                             '病院名',
                                                           ),
@@ -98,7 +98,7 @@ class ProposalScreen extends StatelessWidget {
                                                         formControlName:
                                                             'postalCode',
                                                         decoration:
-                                                            InputDecoration(
+                                                            const InputDecoration(
                                                           label: Text(
                                                             '郵便番号',
                                                           ),
@@ -115,7 +115,7 @@ class ProposalScreen extends StatelessWidget {
                                                         formControlName:
                                                             'address',
                                                         decoration:
-                                                            InputDecoration(
+                                                            const InputDecoration(
                                                           label: Text(
                                                             '所在地',
                                                           ),
@@ -149,7 +149,7 @@ class ProposalScreen extends StatelessWidget {
                                                         formControlName:
                                                             'summary',
                                                         decoration:
-                                                            InputDecoration(
+                                                            const InputDecoration(
                                                           label: Text(
                                                             '概要',
                                                           ),
@@ -167,7 +167,7 @@ class ProposalScreen extends StatelessWidget {
                                               currentForm.control('id').value !=
                                                   null) ...{
                                             IconButton(
-                                              icon: Icon(Icons.delete_forever,
+                                              icon: const Icon(Icons.delete_forever,
                                                   color: Colors.red),
                                               onPressed: () =>
                                                   formArray.removeAt(
@@ -184,7 +184,7 @@ class ProposalScreen extends StatelessWidget {
                               return ColumnSeparated(
                                 separatorBuilder:
                                     (BuildContext context, int index) =>
-                                        Divider(),
+                                        const Divider(),
                                 children: rows.toList(),
                               );
                             },
@@ -238,7 +238,7 @@ class ProposalScreen extends StatelessWidget {
                           .read<ProposalModel>()
                           .createUpdateProposal(formArray);
                     },
-                    child: Text('保存'),
+                    child: const Text('保存'),
                   )
                 ],
               ),

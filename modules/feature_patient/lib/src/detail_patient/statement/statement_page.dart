@@ -1,4 +1,3 @@
-import 'package:core_l10n/l10n.dart';
 import 'package:core_network/core_network.dart';
 import 'statement_form.dart';
 import 'package:flutter/material.dart';

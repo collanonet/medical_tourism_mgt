@@ -1,4 +1,3 @@
-import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
@@ -53,7 +52,7 @@ class _BillingScreenState extends State<BillingScreen> {
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
-                        Expanded(flex: 2, child: Text('日本円（税込）')),
+                        const Expanded(flex: 2, child: Text('日本円（税込）')),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
@@ -94,7 +93,7 @@ class _BillingScreenState extends State<BillingScreen> {
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
-                        Expanded(flex: 2, child: Text('日本円（税込）')),
+                        const Expanded(flex: 2, child: Text('日本円（税込）')),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
@@ -135,7 +134,7 @@ class _BillingScreenState extends State<BillingScreen> {
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
-                        Expanded(flex: 2, child: Text('日本円（税込）')),
+                        const Expanded(flex: 2, child: Text('日本円（税込）')),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
@@ -165,7 +164,7 @@ class _BillingScreenState extends State<BillingScreen> {
                           flex: 2,
                           child: ReactiveTextField(
                             formControlName: 'remarks',
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               label: Text(
                                 '備考',
                               ),
@@ -235,7 +234,7 @@ class _BillingScreenState extends State<BillingScreen> {
                                                   logger.d(value);
                                                 },
                                                 decoration: InputDecoration(
-                                                  label: Text('発生日'),
+                                                  label: const Text('発生日'),
                                                   suffixIcon: IconButton(
                                                     icon: const Icon(
                                                       CupertinoIcons.calendar,
@@ -260,7 +259,7 @@ class _BillingScreenState extends State<BillingScreen> {
                                           flex: 2,
                                           child: ReactiveTextField(
                                             formControlName: 'hospitalName',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text(
                                                 '病院名',
                                               ),
@@ -276,7 +275,7 @@ class _BillingScreenState extends State<BillingScreen> {
                                           child: ReactiveTextField(
                                             formControlName:
                                                 'treatment_details',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text(
                                                 '治療内容',
                                               ),
@@ -290,7 +289,7 @@ class _BillingScreenState extends State<BillingScreen> {
                                         Expanded(
                                           child: ReactiveTextField(
                                             formControlName: 'amount',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text(
                                                 '金額',
                                               ),
@@ -304,7 +303,7 @@ class _BillingScreenState extends State<BillingScreen> {
                                         Expanded(
                                           child: ReactiveTextField(
                                             formControlName: 'remaining_amount',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text(
                                                 '残金',
                                               ),
@@ -319,7 +318,7 @@ class _BillingScreenState extends State<BillingScreen> {
                                           Icons.file_present_rounded,
                                           color: context.appTheme.primaryColor,
                                         ),
-                                        Text('請求書.pdf'),
+                                        const Text('請求書.pdf'),
                                       ],
                                     ),
                                   ),
@@ -366,12 +365,12 @@ class _BillingScreenState extends State<BillingScreen> {
                   ),
                   ElevatedButton(
                     onPressed: () {},
-                    child: Text('上記内容を確定し、患者に承認依頼をする'),
+                    child: const Text('上記内容を確定し、患者に承認依頼をする'),
                   ),
-                  Icon(Icons.arrow_drop_down, size: 50),
-                  Text('患者側で承認されました　2023/10/21 　18:23'),
-                  Icon(Icons.arrow_drop_down, size: 50),
-                  ElevatedButton(
+                  const Icon(Icons.arrow_drop_down, size: 50),
+                  const Text('患者側で承認されました　2023/10/21 　18:23'),
+                  const Icon(Icons.arrow_drop_down, size: 50),
+                  const ElevatedButton(
                     onPressed: null,
                     child: Text('精算内容を確定する'),
                   ),

@@ -1,5 +1,4 @@
 import 'package:core_network/core_network.dart';
-import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_patient/data_patient.dart';
 import 'package:flutter/material.dart';
@@ -358,12 +357,15 @@ class DetailPatientWebReservationModel {
     }
   }
 
-  Future<void> updateBooking() async {
+    Future<void> updateBooking() async {
     try {
-      var data;
+      TreamentRequest data;
 
       if (bookingByPatient.value.hasData) {
-        data = bookingByPatient.value.requireData.copyWith(
+        data = TreamentRequest.fromJson(
+            bookingByPatient.value.requireData.toJson());
+
+        data = data.copyWith(
           desiredDate1: formGroup.control('preferredDate1').value,
           desiredDate2: formGroup.control('preferredDate2').value,
           desiredDate3: formGroup.control('preferredDate3').value,

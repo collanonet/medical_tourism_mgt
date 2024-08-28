@@ -6,7 +6,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import '../document/document_model.dart';
 import 'contrant_model.dart';
 import 'package:intl/intl.dart';
 
@@ -38,7 +37,7 @@ class Popup extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(Icons.close)),
+                icon: const Icon(Icons.close)),
           ],
         ),
         Row(
@@ -68,7 +67,7 @@ class Popup extends StatelessWidget {
                           ),
                           decoration: InputDecoration(
                             label: const Text(
-                              "更新日",
+                              '更新日',
                             ),
                             suffixIcon: IconButton(
                               icon: const Icon(
@@ -105,7 +104,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
                       formControlName: 'DocumentName',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'ファイル名',
                       ),
                     ),
@@ -126,7 +125,7 @@ class Popup extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('キャンセル'),
+              child: const Text('キャンセル'),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
@@ -163,7 +162,7 @@ class Popup extends StatelessWidget {
                               context.read<ContrantModel>().submit(formGroup);
                             },
                       child: WithLoadingButton(
-                          isLoading: value.loading, child: Text('保存する')),
+                          isLoading: value.loading, child: const Text('保存する')),
                     );
                   }),
             ),

@@ -4,7 +4,6 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/widgets.dart';
 import '../basic_information/section/basic_info_section.dart';
 import 'section/reservation_history_section.dart';
 import 'package:flutter/material.dart';
@@ -45,7 +44,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       if (!webBookingSelected.hasData) ...{
-                        Text(
+                        const Text(
                           '患者',
                           style: TextStyle(
                             fontWeight: FontWeight.bold,
@@ -92,13 +91,13 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                           }
                                         },
                                         decoration: InputDecoration(
-                                          label: Text('患者名'),
+                                          label: const Text('患者名'),
                                           suffixIcon: value.loading
-                                              ? SizedBox(
+                                              ? const SizedBox(
                                                   height: 30,
                                                   width: 30,
                                                   child:
-                                                      const CircularProgressIndicator())
+                                                      CircularProgressIndicator())
                                               : ReactiveValueListenableBuilder<
                                                       String>(
                                                   formControlName:
@@ -120,7 +119,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                                         .value);
                                                           }
                                                         },
-                                                        icon: Icon(
+                                                        icon: const Icon(
                                                           Icons.search,
                                                           color: Colors.grey,
                                                         ));
@@ -133,13 +132,13 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                             SizedBox(
                               width: context.appTheme.spacing.marginMedium,
                             ),
-                            Expanded(
+                            const Expanded(
                               child: SizedBox(),
                             ),
                             SizedBox(
                               width: context.appTheme.spacing.marginMedium,
                             ),
-                            Expanded(
+                            const Expanded(
                               child: SizedBox(),
                             ),
                           ],
@@ -194,7 +193,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                         'yyyy/MM/dd'),
                                                   ),
                                                   decoration: InputDecoration(
-                                                    label: Text(
+                                                    label: const Text(
                                                       '第１希望',
                                                     ),
                                                     suffixIcon: IconButton(
@@ -237,7 +236,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                         'yyyy/MM/dd'),
                                                   ),
                                                   decoration: InputDecoration(
-                                                    label: Text(
+                                                    label: const Text(
                                                       '第２希望',
                                                     ),
                                                     suffixIcon: IconButton(
@@ -280,7 +279,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                         'yyyy/MM/dd'),
                                                   ),
                                                   decoration: InputDecoration(
-                                                    label: Text(
+                                                    label: const Text(
                                                       '第３希望',
                                                     ),
                                                     suffixIcon: IconButton(
@@ -315,7 +314,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                   ListTileControlAffinity
                                                       .leading,
                                               formControlName: 'noDesiredDate',
-                                              title: Text('希望日なし'),
+                                              title: const Text('希望日なし'),
                                             ),
                                           ),
                                         ],
@@ -331,7 +330,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                               minLines: 3,
                                               maxLines: 5,
                                               formControlName: 'remarks',
-                                              decoration: InputDecoration(
+                                              decoration: const InputDecoration(
                                                 label: Text('備考'),
                                               ),
                                             ),
@@ -343,7 +342,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 );
                               }),
                         ),
-                        Divider(),
+                        const Divider(),
                         Text(
                           '医療機関',
                           style: context.textTheme.titleLarge,
@@ -389,7 +388,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                         child: ReactiveDropdownField<
                                             DoctorProfileHospitalResponse>(
                                           formControlName: 'doctorName',
-                                          decoration: InputDecoration(
+                                          decoration: const InputDecoration(
                                             labelText: '医者',
                                           ),
                                           items: value.data
@@ -407,7 +406,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                       ))
                                                   .toList() ??
                                               [
-                                                DropdownMenuItem(
+                                                const DropdownMenuItem(
                                                   value: null,
                                                   child: Text('NoName'),
                                                 )
@@ -578,7 +577,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                IntrinsicWidth(
+                                const IntrinsicWidth(
                                   stepWidth: 80,
                                   child: ReactiveDropdownFormField(
                                     formControlName: 'shift1Mon',
@@ -597,7 +596,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                IntrinsicWidth(
+                                const IntrinsicWidth(
                                   stepWidth: 80,
                                   child: ReactiveDropdownFormField(
                                     formControlName: 'shift1Tue',
@@ -616,7 +615,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                IntrinsicWidth(
+                                const IntrinsicWidth(
                                   stepWidth: 80,
                                   child: ReactiveDropdownFormField(
                                     formControlName: 'shift1Wed',
@@ -635,7 +634,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                IntrinsicWidth(
+                                const IntrinsicWidth(
                                   stepWidth: 80,
                                   child: ReactiveDropdownFormField(
                                     formControlName: 'shift1Thu',
@@ -654,7 +653,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                IntrinsicWidth(
+                                const IntrinsicWidth(
                                   stepWidth: 80,
                                   child: ReactiveDropdownFormField(
                                     formControlName: 'shift1Fri',
@@ -673,7 +672,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                IntrinsicWidth(
+                                const IntrinsicWidth(
                                   stepWidth: 80,
                                   child: ReactiveDropdownFormField(
                                     formControlName: 'shift1Sat',
@@ -692,7 +691,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                IntrinsicWidth(
+                                const IntrinsicWidth(
                                   stepWidth: 80,
                                   child: ReactiveDropdownFormField(
                                     formControlName: 'shift1Sun',
@@ -752,7 +751,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                IntrinsicWidth(
+                                const IntrinsicWidth(
                                   stepWidth: 80,
                                   child: ReactiveDropdownFormField(
                                     formControlName: 'shift2Tue',
@@ -771,7 +770,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                IntrinsicWidth(
+                                const IntrinsicWidth(
                                   stepWidth: 80,
                                   child: ReactiveDropdownFormField(
                                     formControlName: 'shift2Wed',
@@ -790,7 +789,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                IntrinsicWidth(
+                                const IntrinsicWidth(
                                   stepWidth: 80,
                                   child: ReactiveDropdownFormField(
                                     formControlName: 'shift2Thu',
@@ -809,7 +808,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                IntrinsicWidth(
+                                const IntrinsicWidth(
                                   stepWidth: 80,
                                   child: ReactiveDropdownFormField(
                                     formControlName: 'shift2Fri',
@@ -828,7 +827,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                IntrinsicWidth(
+                                const IntrinsicWidth(
                                   stepWidth: 80,
                                   child: ReactiveDropdownFormField(
                                     formControlName: 'shift2Sat',
@@ -847,7 +846,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                IntrinsicWidth(
+                                const IntrinsicWidth(
                                   stepWidth: 80,
                                   child: ReactiveDropdownFormField(
                                     formControlName: 'shift2Sun',
@@ -868,7 +867,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                           ],
                         ),
                       ),
-                      Divider(),
+                      const Divider(),
                       Text(
                         '予約日',
                         style: context.textTheme.titleLarge,
@@ -880,7 +879,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                         padding: EdgeInsets.all(
                             context.appTheme.spacing.marginMedium),
                         decoration: BoxDecoration(
-                          color: Color(0xffFFECE5),
+                          color: const Color(0xffFFECE5),
                           borderRadius: BorderRadius.circular(
                             context.appTheme.spacing.borderRadiusMedium,
                           ),
@@ -888,7 +887,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('候補日'),
+                            const Text('候補日'),
                             ReactiveFormArray(
                               formArrayName: 'candidateDate',
                               builder: (context, formArray, child) {
@@ -964,7 +963,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.add_circle,
                                             color: Color(0xffF08C67),
                                           ),
@@ -972,7 +971,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                             width: context
                                                 .appTheme.spacing.marginSmall,
                                           ),
-                                          Text(
+                                          const Text(
                                             '候補日を追加',
                                             style: TextStyle(
                                                 color: Color(0xffF08C67)),
@@ -994,7 +993,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 builder: (context, value, _) {
                                   if (value.data?.messageFrom == null ||
                                       value.data!.messageFrom!.isEmpty) {
-                                    return SizedBox();
+                                    return const SizedBox();
                                   }
                                   return ColumnSeparated(
                                     separatorBuilder:
@@ -1044,8 +1043,8 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                     minLines: 3,
                                     maxLines: 5,
                                     formControlName: 'message',
-                                    decoration: InputDecoration(
-                                      label: Text("メッセージ"),
+                                    decoration: const InputDecoration(
+                                      label: Text('メッセージ'),
                                       hintText:
                                           'メッセージ（希望日がない場合は、メッセージ欄にてその旨伝えてください）',
                                     ),
@@ -1082,7 +1081,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                       isClosed: true,
                                                     );
                                               },
-                                        child: Text('キャンセルして病院へ回答する'),
+                                        child: const Text('キャンセルして病院へ回答する'),
                                       );
                                     }),
                                   },
@@ -1090,7 +1089,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                       builder: (context, form, _) {
                                     return ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: Color(0xffF08C67),
+                                        backgroundColor: const Color(0xffF08C67),
                                       ),
                                       onPressed: form.invalid
                                           ? null
@@ -1100,7 +1099,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                       WebAppointmentDetailModel>()
                                                   .submitData();
                                             },
-                                      child: Text('予約日を病院へ送信する'),
+                                      child: const Text('予約日を病院へ送信する'),
                                     );
                                   }),
                                 ],
@@ -1152,7 +1151,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                       logger.d(value);
                                     },
                                     decoration: InputDecoration(
-                                      label: Text('年月日'),
+                                      label: const Text('年月日'),
                                       suffixIcon: IconButton(
                                         icon: const Icon(
                                           CupertinoIcons.calendar,
@@ -1189,7 +1188,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                           control.value = time;
                                         }
                                       },
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         label: Text('時間'),
                                       ),
                                     );
@@ -1250,7 +1249,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                               : null,
                                           child: WithLoadingButton(
                                             isLoading: value.loading,
-                                            child: Text('保存する'),
+                                            child: const Text('保存する'),
                                           ));
                                     },
                                   );
@@ -1261,7 +1260,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                     ],
                   ),
                 ),
-                ReservationHistorySection()
+                const ReservationHistorySection()
               ],
             ),
           );
@@ -1323,9 +1322,9 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                     textColor:
                         control.value == '午前' ? Colors.white : Colors.black,
                     bg: control.value == '午前'
-                        ? Color(0xffF08C67)
+                        ? const Color(0xffF08C67)
                         : Colors.white,
-                    borderC: Color(0xffF08C67),
+                    borderC: const Color(0xffF08C67),
                     onTap: () {
                       control.value = '午前';
                     },
@@ -1339,9 +1338,9 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                     textColor:
                         control.value == '午後' ? Colors.white : Colors.black,
                     bg: control.value == '午後'
-                        ? Color(0xffF08C67)
+                        ? const Color(0xffF08C67)
                         : Colors.white,
-                    borderC: Color(0xffF08C67),
+                    borderC: const Color(0xffF08C67),
                     onTap: () {
                       control.value = '午後';
                     },
@@ -1355,9 +1354,9 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                     textColor:
                         control.value == '終日' ? Colors.white : Colors.black,
                     bg: control.value == '終日'
-                        ? Color(0xffF08C67)
+                        ? const Color(0xffF08C67)
                         : Colors.white,
-                    borderC: Color(0xffF08C67),
+                    borderC: const Color(0xffF08C67),
                     onTap: () {
                       control.value = '終日';
                     },
@@ -1384,7 +1383,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                       control.value = time;
                     }
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     label: Text(
                       '時間帯（自）',
                     ),
@@ -1395,7 +1394,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
         SizedBox(
           width: context.appTheme.spacing.marginMedium,
         ),
-        Text('〜'),
+        const Text('〜'),
         SizedBox(
           width: context.appTheme.spacing.marginMedium,
         ),
@@ -1415,7 +1414,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                       control.value = time;
                     }
                   },
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     label: Text(
                       '時間帯（至）',
                     ),
@@ -1428,7 +1427,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
             children: [
               if (formArray.controls.indexOf(currentForm) != 0) ...{
                 IconButton(
-                  icon: Icon(Icons.delete_forever, color: Colors.red),
+                  icon: const Icon(Icons.delete_forever, color: Colors.red),
                   onPressed: () => formArray.removeAt(
                     formArray.controls.indexOf(currentForm),
                   ),

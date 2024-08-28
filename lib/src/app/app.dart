@@ -1,11 +1,11 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
+import 'package:auto_route/auto_route.dart';
 import 'package:bot_toast/bot_toast.dart';
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/theme.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:feature_auth/feature_auth.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
 import 'package:get_it/get_it.dart';

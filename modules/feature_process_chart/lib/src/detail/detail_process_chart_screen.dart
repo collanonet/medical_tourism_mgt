@@ -1,7 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 import 'tab/facility_page.dart';
 import 'tab/hotel_registration_page.dart';
@@ -83,15 +82,15 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
                   SizedBox(
                     height: context.appTheme.spacing.marginMedium,
                   ),
-                  Text('2023/11/11〜2023/11/15')
+                  const Text('2023/11/11〜2023/11/15')
                 ],
               ),
-              Spacer(),
-              Text('進捗'),
+              const Spacer(),
+              const Text('進捗'),
               SizedBox(
                 width: context.appTheme.spacing.marginMedium,
               ),
-              ElevatedButton(onPressed: () {}, child: Text('新規見積依頼'))
+              ElevatedButton(onPressed: () {}, child: const Text('新規見積依頼'))
             ],
           ),
         ),
@@ -129,10 +128,10 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
                 ),
                 child: [
                   ItineraryPage(id: widget.id!),
-                  FacilityPage(),
-                  HotelSearchPage(),
-                  HotelRegistrationPage(),
-                  RelatedPartiesPage(),
+                  const FacilityPage(),
+                  const HotelSearchPage(),
+                  const HotelRegistrationPage(),
+                  const RelatedPartiesPage(),
                 ][index],
               ),
             );

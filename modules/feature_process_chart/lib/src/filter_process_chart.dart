@@ -261,7 +261,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                       dateTo: formGroup.control('dateTo').value,
                                     );
                               },
-                              child: Text('検索'),
+                              child: const Text('検索'),
                             );
                           },
                         ),

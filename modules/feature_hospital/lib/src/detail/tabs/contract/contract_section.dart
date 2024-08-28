@@ -1,4 +1,3 @@
-import 'package:core_l10n/l10n.dart';
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
@@ -120,8 +119,8 @@ class ContractSectionState extends State<ContractSection> {
                             },
                           );
                         }),
-                    Expanded(flex: 2, child: Text('書類名')),
-                    Expanded(child: Text('締結日')),
+                    const Expanded(flex: 2, child: Text('書類名')),
+                    const Expanded(child: Text('締結日')),
                   ],
                 ),
                 Expanded(
@@ -227,9 +226,9 @@ class ContractSectionState extends State<ContractSection> {
                                                       value: context.read<
                                                           ContrantModel>(),
                                                       child: AlertDialog(
-                                                        title: Text("削除確認"),
-                                                        content: Text(
-                                                            "選択した書類を削除しますか？"),
+                                                        title: const Text('削除確認'),
+                                                        content: const Text(
+                                                            '選択した書類を削除しますか？'),
                                                         actions: [
                                                           TextButton(
                                                             onPressed: () {
@@ -238,7 +237,7 @@ class ContractSectionState extends State<ContractSection> {
                                                                   .pop();
                                                             },
                                                             child:
-                                                                Text("キャンセル"),
+                                                                const Text('キャンセル'),
                                                           ),
                                                           TextButton(
                                                             onPressed: () {
@@ -251,7 +250,7 @@ class ContractSectionState extends State<ContractSection> {
                                                                       context)
                                                                   .pop();
                                                             },
-                                                            child: Text("削除する"),
+                                                            child: const Text('削除する'),
                                                           ),
                                                         ],
                                                       ),
@@ -263,7 +262,7 @@ class ContractSectionState extends State<ContractSection> {
                                         loadingColor:
                                             context.appTheme.primaryColor,
                                         child: Text(
-                                          "削除する",
+                                          '削除する',
                                           style: context.textTheme.labelLarge
                                               ?.copyWith(
                                                   color: context
