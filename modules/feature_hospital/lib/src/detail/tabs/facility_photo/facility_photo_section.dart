@@ -183,15 +183,29 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                               : Icon(Icons.person),
                         ),
                         Expanded(
-                          child: Avatar.network(
-                            value.requireData[index].facilityFile ??
-                                value.requireData[index].uploadedPhoto,
-                            placeholder: const AssetImage(
-                              Images.logoMadical,
-                              package: 'core_ui',
+                          child: InkWell(
+                            onTap: () {
+                              if (value.requireData[index].facilityFile !=
+                                      null ||
+                                  value.requireData[index].uploadedPhoto !=
+                                      null) {
+                                openUrlInBrowser(
+                                    fileName:
+                                        value.requireData[index].facilityFile ??
+                                            value.requireData[index]
+                                                .uploadedPhoto!);
+                              }
+                            },
+                            child: Avatar.network(
+                              value.requireData[index].facilityFile ??
+                                  value.requireData[index].uploadedPhoto,
+                              placeholder: const AssetImage(
+                                Images.logoMadical,
+                                package: 'core_ui',
+                              ),
+                              shape: BoxShape.rectangle,
+                              customSize: const Size(60, 60),
                             ),
-                            shape: BoxShape.rectangle,
-                            customSize: const Size(60, 60),
                           ),
                         ),
                       ],
