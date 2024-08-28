@@ -70,7 +70,7 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                     Column(
                       children: [
                         Text(
-                          '書類データをここにドラッグ＆ドロップ',
+                          '健診メニュー　エクセルデータをここにドラッグ＆ドロップ',
                           style: context.textTheme.bodySmall?.copyWith(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,

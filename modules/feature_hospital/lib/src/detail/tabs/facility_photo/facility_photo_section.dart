@@ -1,4 +1,3 @@
-import 'package:core_l10n/l10n.dart';
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
@@ -6,7 +5,6 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
