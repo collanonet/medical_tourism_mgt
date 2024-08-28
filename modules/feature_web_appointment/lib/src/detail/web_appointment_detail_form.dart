@@ -1,6 +1,5 @@
 import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup formWebAppointment() => FormGroup({
@@ -107,13 +106,17 @@ FormGroup formWebAppointment() => FormGroup({
           'timePeriodFrom': FormControl<String>(
             validators: [
               Validators.required,
-              Validators.pattern(ValidatorRegExp.time)
+              Validators.pattern(
+                ValidatorRegExp.time,
+              )
             ],
           ), // 時間帯（自）
           'timePeriodTo': FormControl<String>(
             validators: [
               Validators.required,
-              Validators.pattern(ValidatorRegExp.time)
+              Validators.pattern(
+                ValidatorRegExp.time,
+              )
             ],
           ), // 時間帯（至）
         }),
@@ -127,6 +130,10 @@ FormGroup formWebAppointment() => FormGroup({
         ],
       ), // 年月日
       'testCallTime': FormControl<String>(
-        validators: [Validators.pattern(ValidatorRegExp.time)],
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.time,
+          )
+        ],
       ), // 時間
     });

@@ -976,7 +976,7 @@ class _DetailPatientWebReservationScreenState
                                       .map(
                                         (currentForm) => ReactiveForm(
                                           formGroup: currentForm,
-                                          child: timeBooking(
+                                          child: candidateBooking(
                                               context, formArray, currentForm),
                                         ),
                                       );
@@ -1408,7 +1408,7 @@ class _DetailPatientWebReservationScreenState
         });
   }
 
-  Row timeBooking(BuildContext context, FormArray<Object?> formArray,
+  Row candidateBooking(BuildContext context, FormArray<Object?> formArray,
       FormGroup currentForm) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
