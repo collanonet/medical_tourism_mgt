@@ -46,7 +46,10 @@ Future<List<File>?> imageMultiplePicker() async {
 
 // return bytes because web support only bytes
 Future<FileSelect?> filePicker() async {
-  FilePickerResult? result = await FilePicker.platform.pickFiles();
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+    allowMultiple: false,
+    allowedExtensions: ['jpg', 'pdf', 'png', 'jpeg'],
+  );
 
   try {
     if (result != null) {
@@ -65,8 +68,10 @@ Future<FileSelect?> filePicker() async {
 }
 
 Future<List<File>?> fileMultiplePicker() async {
-  FilePickerResult? result =
-      await FilePicker.platform.pickFiles(allowMultiple: true);
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+    allowMultiple: true,
+    allowedExtensions: ['jpg', 'pdf', 'png', 'jpeg'],
+  );
 
   try {
     if (result != null) {
