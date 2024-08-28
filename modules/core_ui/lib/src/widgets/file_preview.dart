@@ -9,6 +9,9 @@ import 'package:core_utils/core_utils.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
 
+import '../../resources.dart';
+import 'avatar.dart';
+
 class FilePreview extends StatefulWidget {
   const FilePreview({super.key, required this.fileName});
 
@@ -19,58 +22,49 @@ class FilePreview extends StatefulWidget {
 }
 
 class _FilePreviewState extends State<FilePreview> {
-  String? _filePath;
-  bool _loading = true;
   String baseUrl =
       'https://medical-tourism-api-dev-collabonet.pixelplatforms.com/files';
 
   @override
   void initState() {
     super.initState();
-    _downloadFile();
-  }
-
-  Future<void> _downloadFile() async {
-    try {
-      final response = await http.get(Uri.parse('$baseUrl/${widget.fileName}'));
-      final bytes = response.bodyBytes;
-      final dir = await getTemporaryDirectory();
-      final file = File('${dir.path}/${widget.fileName}');
-      await file.writeAsBytes(bytes);
-      setState(() {
-        _filePath = file.path;
-        _loading = false;
-      });
-    } catch (e) {
-      setState(() {
-        _loading = false;
-      });
-      // Handle error
-    }
   }
 
   @override
   Widget build(BuildContext context) {
-    if (_loading) {
-      return const Center(child: CircularProgressIndicator());
-    }
-
-    if (_filePath == null) {
-      return const Center(child: Text('Failed to load file'));
-    }
-
-    final fileExtension = _filePath!.split('.').last.toLowerCase();
+    final fileExtension = widget.fileName.split('.').last.toLowerCase();
 
     if (fileExtension == 'pdf') {
-      return Container(
-        child: TextButton(
-            onPressed: () {
-              openUrlInBrowser(fileName: widget.fileName);
-            },
-            child: const Text('Download')),
+      return Column(
+        children: [
+          TextButton(
+              onPressed: () {
+                openUrlInBrowser(fileName: widget.fileName);
+              },
+              child: const Text('Download PDF')),
+        ],
       );
     } else if (['jpg', 'jpeg', 'png', 'gif'].contains(fileExtension)) {
-      return Image.file(File(_filePath!));
+      return Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          TextButton(
+              onPressed: () {
+                openUrlInBrowser(fileName: widget.fileName);
+              },
+              child: const Text('Download Image')),
+          Avatar.network(
+            widget.fileName,
+            shape: BoxShape.rectangle,
+            customSize: const Size(200, 200),
+            placeholder: const AssetImage(
+              Images.logoMadical,
+              package: 'core_ui',
+            ),
+          ),
+        ],
+      );
     } else {
       return Center(
         child: Column(
@@ -80,7 +74,7 @@ class _FilePreviewState extends State<FilePreview> {
                 onPressed: () {
                   openUrlInBrowser(fileName: widget.fileName);
                 },
-                child: const Text('Download'))
+                child: const Text('Open in browser')),
           ],
         ),
       );

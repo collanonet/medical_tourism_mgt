@@ -12,6 +12,20 @@ class PreviewFile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return FilePreview(fileName: data.file!);
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.close,
+          ),
+        ),
+        FilePreview(fileName: data.file!),
+      ],
+    );
   }
 }
