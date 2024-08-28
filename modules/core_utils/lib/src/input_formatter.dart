@@ -24,25 +24,16 @@ class InputFormatter {
 // Function to process input and apply mask
 String processTimeInput(String input) {
 // Remove any non-digit characters
-  String cleanInput = input.replaceAll(RegExp(r'[^0-9]'), '');
-
-  // Format the input as HH:MM
-  if (cleanInput.length == 3) {
-    cleanInput =
-        '0$cleanInput'; // Prepend '0' if only 3 digits (e.g., 930 -> 0930)
-  }
-
-  if (cleanInput.length >= 4) {
-    // Split into hours and minutes
-    String hours = cleanInput.substring(0, 2);
-    String minutes = cleanInput.substring(2, 4);
-    input = '$hours:$minutes';
-  } else {
-    input = cleanInput; // Allow partial inputs if less than 4 digits
+  logger.d('input: $input');
+  var text = input.replaceAll(':', '');
+  logger.d('text: $text');
+  // If input length is 3 digits, prepend a '0'
+  if (text.length == 3) {
+    text = '0$text';
   }
 
   // Apply the mask
-  return InputFormatter().timeFormatter.maskText(input);
+  return InputFormatter().timeFormatter.maskText(text);
 }
 
 bool isValidDate(DateTime date) {
