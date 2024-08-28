@@ -1170,7 +1170,8 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                               validators: [
                                                 Validators.required,
                                                 Validators.pattern(
-                                                    r'^\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$'),
+                                                  ValidatorRegExp.date,
+                                                ),
                                               ],
                                             ), // 第一希望
                                             'choice': FormControl<String>(
@@ -1181,7 +1182,8 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                 Validators.required,
                                                 // validate time format
                                                 Validators.pattern(
-                                                    r'^([01]?[0-9]|2[0-3]):[0-5][0-9]$'),
+                                                  ValidatorRegExp.time,
+                                                ),
                                               ],
                                             ), // 時間帯（自）
                                             'timePeriodTo': FormControl<String>(
@@ -1189,7 +1191,8 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                 Validators.required,
                                                 // validate time format
                                                 Validators.pattern(
-                                                    r'^([01]?[0-9]|2[0-3]):[0-5][0-9]$'),
+                                                  ValidatorRegExp.time,
+                                                ),
                                               ],
                                             ), // 時間帯（至）
                                           })

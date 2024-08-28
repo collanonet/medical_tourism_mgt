@@ -105,10 +105,16 @@ FormGroup formWebAppointment() => FormGroup({
           ), // 第一希望
           'choice': FormControl<String>(value: '午前'), // 午前, 午後, 終日
           'timePeriodFrom': FormControl<String>(
-            validators: [Validators.required],
+            validators: [
+              Validators.required,
+              Validators.pattern(ValidatorRegExp.time)
+            ],
           ), // 時間帯（自）
           'timePeriodTo': FormControl<String>(
-            validators: [Validators.required],
+            validators: [
+              Validators.required,
+              Validators.pattern(ValidatorRegExp.time)
+            ],
           ), // 時間帯（至）
         }),
       ]),
@@ -120,5 +126,7 @@ FormGroup formWebAppointment() => FormGroup({
           ),
         ],
       ), // 年月日
-      'testCallTime': FormControl<String>(), // 時間
+      'testCallTime': FormControl<String>(
+        validators: [Validators.pattern(ValidatorRegExp.time)],
+      ), // 時間
     });

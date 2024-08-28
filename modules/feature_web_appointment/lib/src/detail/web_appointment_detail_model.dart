@@ -219,8 +219,17 @@ class WebAppointmentDetailModel {
             ],
           ),
           'choice': FormControl<String>(value: e.selectMorningAfternoonAllDay),
-          'timePeriodFrom': FormControl<String>(value: e.timeZoneFrom),
-          'timePeriodTo': FormControl<String>(value: e.timeZoneTo),
+          'timePeriodFrom':
+              FormControl<String>(value: e.timeZoneFrom, validators: [
+            Validators.pattern(
+              ValidatorRegExp.time,
+            ),
+          ]),
+          'timePeriodTo': FormControl<String>(value: e.timeZoneTo, validators: [
+            Validators.pattern(
+              ValidatorRegExp.time,
+            ),
+          ]),
         }));
       }).toList();
     }

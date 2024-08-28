@@ -1,11 +1,30 @@
 import 'package:core_network/core_network.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup formWebAppointment() => FormGroup({
       'patientName': FormControl<String>(),
-      'preferredDate1': FormControl<DateTime>(), // 第１希望
-      'preferredDate2': FormControl<DateTime>(), // 第２希望
-      'preferredDate3': FormControl<DateTime>(), // 第３希望
+      'preferredDate1': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ), // 第１希望
+      'preferredDate2': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ), // 第２希望
+      'preferredDate3': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ), // 第３希望
       'noDesiredDate': FormControl<bool>(), // 希望日なし
       'remarks': FormControl<String>(), // 備考
       'doctorName': FormControl<DoctorProfileHospitalResponse>(
@@ -72,7 +91,8 @@ FormGroup formWebAppointment() => FormGroup({
             validators: [
               Validators.required,
               Validators.pattern(
-                  r'^\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$'),
+                ValidatorRegExp.date,
+              ),
             ],
           ), // 第一希望
           'choice': FormControl<String>(value: '午前'), // 午前, 午後, 終日
@@ -80,23 +100,34 @@ FormGroup formWebAppointment() => FormGroup({
             validators: [
               Validators.required,
               // validate time format
-              Validators.pattern(r'^([01]?[0-9]|2[0-3]):[0-5][0-9]$'),
+              Validators.pattern(
+                ValidatorRegExp.time,
+              ),
             ],
           ), // 時間帯（自）
           'timePeriodTo': FormControl<String>(
             validators: [
               Validators.required,
-              // validate time format
-              Validators.pattern(r'^([01]?[0-9]|2[0-3]):[0-5][0-9]$'),
+              Validators.pattern(
+                ValidatorRegExp.time,
+              )
             ],
           ), // 時間帯（至）
         }),
       ]),
       'message': FormControl<String>(), // メッセージ（希望日がない場合は、メッセージ欄にてその旨伝えてください）
-      'testCallDate': FormControl<DateTime>(), // 年月日
+      'testCallDate': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ), // 年月日
       'testCallTime': FormControl<String>(
         validators: [
-          Validators.pattern(r'^([01]?[0-9]|2[0-3]):[0-5][0-9]$'),
+          Validators.pattern(
+            ValidatorRegExp.time,
+          ),
         ],
       ), // 時間
     });

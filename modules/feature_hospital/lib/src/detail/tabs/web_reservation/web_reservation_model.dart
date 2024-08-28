@@ -209,10 +209,22 @@ class WebAppointmentDetailModel {
       data.proposedDates?.map((e) {
         candidateDate.add(FormGroup({
           'id': FormControl<String>(value: e.id),
-          'preferredDate': FormControl<DateTime>(value: e.proposedDate),
+          'preferredDate':
+              FormControl<DateTime>(value: e.proposedDate, validators: [
+            Validators.required,
+            Validators.pattern(ValidatorRegExp.date),
+          ]),
           'choice': FormControl<String>(value: e.selectMorningAfternoonAllDay),
-          'timePeriodFrom': FormControl<String>(value: e.timeZoneFrom),
-          'timePeriodTo': FormControl<String>(value: e.timeZoneTo),
+          'timePeriodFrom': FormControl<String>(
+              value: e.timeZoneFrom,
+              validators: [
+                Validators.required,
+                Validators.pattern(ValidatorRegExp.time)
+              ]),
+          'timePeriodTo': FormControl<String>(value: e.timeZoneTo, validators: [
+            Validators.required,
+            Validators.pattern(ValidatorRegExp.time)
+          ]),
         }));
       }).toList();
     }
