@@ -37,7 +37,7 @@ class ProcessChartScreen extends StatelessWidget {
                   ),
                   ElevatedButton(
                       onPressed: () {
-                        context.router.push(const DetailProcessChartRoute());
+                        context.router.push(DetailProcessChartRoute());
                       },
                       child: Text('ツアー行程表を新規作成')),
                 ],
@@ -94,7 +94,7 @@ class ProcessChartScreen extends StatelessWidget {
                                 return InkWell(
                                   onTap: () {
                                     context.router
-                                        .push(const DetailProcessChartRoute());
+                                        .push( DetailProcessChartRoute());
                                   },
                                   child: Container(
                                     padding: EdgeInsets.all(

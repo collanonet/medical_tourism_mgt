@@ -11,10 +11,11 @@ class ProcessChartModel {
 
   ValueNotifier<AsyncData<List<DetailItineraryResponse>>> itinerraryData =
       ValueNotifier(const AsyncData<List<DetailItineraryResponse>>(data: []));
-  Future<void> fetchItinerary({String? tourName,String? classification,DateTime? dateFrom,DateTime? dateTo}) async {
+  Future<void> fetchItinerary({required String id,String? tourName,String? classification,DateTime? dateFrom,DateTime? dateTo,}) async {
     try {
       itinerraryData.value = const AsyncData(loading: true);
       final response = await processChartRepository.getDetailItinerary(
+        id: id,
         tourName: tourName,
         classification: classification,
         dateFrom: dateFrom,

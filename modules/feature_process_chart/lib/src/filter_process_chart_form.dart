@@ -5,6 +5,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 FormGroup formFilterPatient() =>
  FormGroup(
       {
+        '_id' : FormControl<String>(),
         'tourName': FormControl<String>(
           value: '',
         ),

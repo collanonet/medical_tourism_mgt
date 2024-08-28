@@ -9,7 +9,8 @@ import 'process_chart_screen.dart';
 
 @RoutePage(name: Routes.processChartsRoute)
 class ProcessChartPage extends StatefulWidget {
-  const ProcessChartPage({super.key});
+  const ProcessChartPage({super.key,this.id});
+  final String? id;
 
   @override
   State<ProcessChartPage> createState() => _ProcessChartPageState();
@@ -19,7 +20,7 @@ class _ProcessChartPageState extends State<ProcessChartPage> {
   @override
   Widget build(BuildContext context) {
     return Provider(
-      create: (context) => GetIt.I<ProcessChartModel>()..fetchItinerary(),
+      create: (context) => GetIt.I<ProcessChartModel>()..fetchItinerary(id: widget.id!),
       child: const LayoutView(
         selectedIndex: 4,
         page: ProcessChartScreen(),
