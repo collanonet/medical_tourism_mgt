@@ -1,17 +1,14 @@
-// Flutter imports:
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-// Project imports:
 import 'related_parties_model.dart';
 
 class RelatedPartiesScreen extends StatefulWidget {
@@ -40,7 +37,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                 );
               },
               children: [
-                const Text('ガイドまたは通訳者'),
+                Text('ガイドまたは通訳者'),
                 const SizedBox(
                   height: 20,
                 ),
@@ -77,12 +74,12 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const Expanded(child: SizedBox()),
+                                    Expanded(child: SizedBox()),
                                     SizedBox(
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const Expanded(child: SizedBox()),
+                                    Expanded(child: SizedBox()),
                                   ],
                                 ),
                                 Row(
@@ -133,7 +130,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const Text('〜'),
+                                    Text('〜'),
                                     SizedBox(
                                       width:
                                           context.appTheme.spacing.marginMedium,
@@ -187,7 +184,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'guideNamaKanji',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text(
                                           'ガイド名（漢字）',
                                         ),
@@ -200,7 +197,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'guideNameKana',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text(
                                           'ガイド名（カナ）',
                                         ),
@@ -213,7 +210,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'phoneNumber',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text(
                                           '電話番号',
                                         ),
@@ -227,7 +224,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const Text('資格'),
+                                        Text('資格'),
                                         Row(
                                           children: [
                                             IntrinsicWidth(
@@ -278,13 +275,13 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       formControlName: 'report',
                                       minLines: 3,
                                       maxLines: 3,
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text('報告書'),
                                       ),
                                     )),
                                   ],
                                 ),
-                                const Text('同宿可否'),
+                                Text('同宿可否'),
                                 Row(
                                   children: [
                                     IntrinsicWidth(
@@ -317,7 +314,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'accommodationName',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text('施設名'),
                                       ),
                                     )),
@@ -328,7 +325,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'address',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text('所在地'),
                                       ),
                                     )),
@@ -339,7 +336,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'phoneNumber2',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text('電話番号'),
                                       ),
                                     )),
@@ -417,7 +414,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                     );
                   },
                 ),
-                const Divider(),
+                Divider(),
                 Text(
                   'バス会社',
                   style: context.textTheme.titleMedium,
@@ -446,11 +443,11 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
-                          const Expanded(child: SizedBox()),
+                          Expanded(child: SizedBox()),
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
-                          const Expanded(child: SizedBox()),
+                          Expanded(child: SizedBox()),
                         ],
                       ),
                       Row(
@@ -553,7 +550,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const Text('〜'),
+                                    Text('〜'),
                                     SizedBox(
                                       width:
                                           context.appTheme.spacing.marginMedium,
@@ -713,7 +710,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    const Text('対応言語'),
+                                    Text('対応言語'),
                                     RowSeparated(
                                       separatorBuilder:
                                           (BuildContext context, int index) {
@@ -787,7 +784,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const Text('同宿可否'),
+                                        Text('同宿可否'),
                                         Row(
                                           children: [
                                             IntrinsicWidth(
@@ -874,7 +871,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'accommodationName',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text('施設名'),
                                       ),
                                     )),
@@ -885,7 +882,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'address',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text('所在地'),
                                       ),
                                     )),
@@ -896,7 +893,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     Expanded(
                                         child: ReactiveTextField(
                                       formControlName: 'phoneNumber2',
-                                      decoration: const InputDecoration(
+                                      decoration: InputDecoration(
                                         label: Text('電話番号'),
                                       ),
                                     )),
@@ -976,7 +973,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                     );
                   },
                 ),
-                const Divider(),
+                Divider(),
                 Text(
                   '緊急連絡先',
                   style: context.textTheme.titleMedium,
@@ -1047,7 +1044,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const Text('〜'),
+                                    Text('〜'),
                                     SizedBox(
                                       width:
                                           context.appTheme.spacing.marginMedium,

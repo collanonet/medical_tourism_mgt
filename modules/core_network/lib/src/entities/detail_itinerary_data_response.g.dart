@@ -33,7 +33,8 @@ Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
     };
 
 Day _$DayFromJson(Map<String, dynamic> json) => Day(
-      date: json['date'] as String?,
+      date:
+          json['date'] == null ? null : DateTime.parse(json['date'] as String),
       meals: (json['meals'] as List<dynamic>?)?.map((e) => e as bool).toList(),
       placeName: json['placeName'] as String?,
       accommodation: json['accommodation'] as String?,
@@ -43,7 +44,7 @@ Day _$DayFromJson(Map<String, dynamic> json) => Day(
     );
 
 Map<String, dynamic> _$DayToJson(Day instance) => <String, dynamic>{
-      'date': instance.date,
+      'date': instance.date?.toIso8601String(),
       'meals': instance.meals,
       'placeName': instance.placeName,
       'accommodation': instance.accommodation,

@@ -1,16 +1,13 @@
-// Flutter imports:
-import 'package:flutter/material.dart';
-
-// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-// Project imports:
 import 'facility_model.dart';
 
 class FacilityScreen extends StatefulWidget {
@@ -76,12 +73,12 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                             width: context
                                                 .appTheme.spacing.marginMedium,
                                           ),
-                                          const Expanded(child: SizedBox()),
+                                          Expanded(child: SizedBox()),
                                           SizedBox(
                                             width: context
                                                 .appTheme.spacing.marginMedium,
                                           ),
-                                          const Expanded(child: SizedBox()),
+                                          Expanded(child: SizedBox()),
                                         ],
                                       ),
                                       Row(
@@ -90,7 +87,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                             child: ReactiveTextField(
                                               formControlName:
                                                   'accommodationName',
-                                              decoration: const InputDecoration(
+                                              decoration: InputDecoration(
                                                 label: Text(
                                                   '施設名',
                                                 ),
@@ -105,7 +102,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                             flex: 2,
                                             child: ReactiveTextField(
                                               formControlName: 'address',
-                                              decoration: const InputDecoration(
+                                              decoration: InputDecoration(
                                                 label: Text(
                                                   '所在地',
                                                 ),
@@ -120,7 +117,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                             child: ReactiveTextField(
                                               formControlName:
                                                   'contactPersonName',
-                                              decoration: const InputDecoration(
+                                              decoration: InputDecoration(
                                                 label: Text(
                                                   '担当者名',
                                                 ),
@@ -134,7 +131,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                           Expanded(
                                             child: ReactiveTextField(
                                               formControlName: 'phoneNumber',
-                                              decoration: const InputDecoration(
+                                              decoration: InputDecoration(
                                                 label: Text(
                                                   '電話番号',
                                                 ),
@@ -159,7 +156,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                           Expanded(
                                             child: ReactiveTextField(
                                               formControlName: 'remarks',
-                                              decoration: const InputDecoration(
+                                              decoration: InputDecoration(
                                                 label: Text(
                                                   '備考',
                                                 ),
@@ -174,7 +171,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              const Text('外国語スタッフ'),
+                                              Text('外国語スタッフ'),
                                               RowSeparated(
                                                 separatorBuilder:
                                                     (BuildContext context,
@@ -250,12 +247,12 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                       title: const Text('その他'),
                                                     ),
                                                   ),
-                                                  SizedBox(
+                                                  Container(
                                                     width: 250,
                                                     child: ReactiveTextField(
                                                       formControlName: 'others',
                                                       decoration:
-                                                          const InputDecoration(
+                                                          InputDecoration(
                                                         label: Text(
                                                           '備考',
                                                         ),
@@ -337,7 +334,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                           );
                         },
                       ),
-                      const Divider(),
+                      Divider(),
                       Text(
                         '立ち寄り施設',
                         style: context.textTheme.titleMedium,
@@ -370,11 +367,11 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                const Expanded(child: SizedBox()),
+                                Expanded(child: SizedBox()),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                const Expanded(child: SizedBox()),
+                                Expanded(child: SizedBox()),
                               ],
                             ),
                             ReactiveFormArray(
@@ -401,7 +398,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                   child: ReactiveTextField(
                                                     formControlName:
                                                         'accommodationName',
-                                                    decoration: const InputDecoration(
+                                                    decoration: InputDecoration(
                                                       label: Text(
                                                         '施設名',
                                                       ),
@@ -416,7 +413,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                   flex: 2,
                                                   child: ReactiveTextField(
                                                     formControlName: 'address',
-                                                    decoration: const InputDecoration(
+                                                    decoration: InputDecoration(
                                                       label: Text(
                                                         '所在地',
                                                       ),
@@ -431,7 +428,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                   child: ReactiveTextField(
                                                     formControlName:
                                                         'contactPersonName',
-                                                    decoration: const InputDecoration(
+                                                    decoration: InputDecoration(
                                                       label: Text(
                                                         '担当者名',
                                                       ),
@@ -446,7 +443,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                   child: ReactiveTextField(
                                                     formControlName:
                                                         'phoneNumber',
-                                                    decoration: const InputDecoration(
+                                                    decoration: InputDecoration(
                                                       label: Text(
                                                         '電話番号',
                                                       ),
@@ -582,7 +579,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                       : null,
                                   child: WithLoadingButton(
                                     isLoading: value.loading,
-                                    child: const Text('保存する'),
+                                    child: Text('保存する'),
                                   ));
                             },
                           );

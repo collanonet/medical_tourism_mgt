@@ -2,7 +2,7 @@
 import 'package:core_network/entities.dart';
 
 abstract class ProcessChartRepository {
-  Future<PatientFilterResponse> getFilterPatientChart();
+
 
   Future<PatientFilterResponse> postFilterpatientChart(
     PatientFilterRequst patientFilterRequst,
@@ -130,8 +130,9 @@ abstract class ProcessChartRepository {
         detailRelatedPartiesEmergencyContactRequest,
   );
 
-  Future<List<DetailItineraryResponse>> getDetailItinerary({
-    required String id,
+  Future<DetailItineraryResponse> getDetailItinerary(String id);
+
+    Future<List<DetailItineraryResponse>> getPatientChart({
     String? tourName,
     String? classification,
     DateTime? dateFrom,

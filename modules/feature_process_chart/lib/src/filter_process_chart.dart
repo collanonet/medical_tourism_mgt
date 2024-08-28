@@ -1,15 +1,11 @@
-// Flutter imports:
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-// Project imports:
 import 'filter_process_chart_form.dart';
 import 'process_chart_model.dart';
 
@@ -254,7 +250,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                 context
                                     .read<ProcessChartModel>()
                                     .fetchItinerary(
-                                      id: formGroup.control('_id').value,
+                                      //id: formGroup.control('_id').value,
                                       tourName:
                                           formGroup.control('tourName').value,
                                       classification: formGroup
@@ -265,7 +261,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                       dateTo: formGroup.control('dateTo').value,
                                     );
                               },
-                              child: const Text('検索'),
+                              child: Text('検索'),
                             );
                           },
                         ),

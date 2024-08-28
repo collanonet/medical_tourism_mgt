@@ -63,7 +63,7 @@ class Group {
 
 @JsonSerializable()
 class Day {
-  String? date;
+  DateTime? date;
 List<bool>? meals;
   String? placeName;
   String? accommodation;

@@ -17,10 +17,7 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   final ProcessChartRemoteProvider remote;
   final ProcessChartLocalProvider local;
 
-  @override
-  Future<PatientFilterResponse> getFilterPatientChart() {
-    return remote.getFilterPatientChart();
-  }
+  
 
   @override
   Future<PatientFilterResponse> postFilterpatientChart(
@@ -248,16 +245,22 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<List<DetailItineraryResponse>> getDetailItinerary({
-    required String id,
+  Future<DetailItineraryResponse> getDetailItinerary(String id) {
+    return remote.getDetailitinerary(
+     id,
+     
+    );
+  }
+
+  @override
+  Future<List<DetailItineraryResponse>> getPatientChart({
     String? tourName,
     String? classification,
     DateTime? dateFrom,
     DateTime? dateTo,
   }) {
-    return remote.getDetailitinerary(
-      id: id,
-      tourName: tourName,
+    return remote.getPatientChart(
+       tourName: tourName,
       classification: classification,
       dateFrom: dateFrom,
       dateTo: dateTo,

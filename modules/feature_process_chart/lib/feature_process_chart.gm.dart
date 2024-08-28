@@ -8,20 +8,14 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-
-// Flutter imports:
-import 'package:flutter/material.dart' as _i5;
-
-// Package imports:
 import 'package:auto_route/auto_route.dart' as _i4;
-
-// Project imports:
-import 'package:feature_process_chart/src/process_chart_page.dart' as _i3;
-
 import 'package:feature_process_chart/src/detail/detail_process_chart_page.dart'
     as _i1;
 import 'package:feature_process_chart/src/itinerary_simplified/itinerary_simplified_page.dart'
     as _i2;
+import 'package:feature_process_chart/src/process_chart_page.dart' as _i3;
+import 'package:flutter/cupertino.dart' as _i6;
+import 'package:flutter/material.dart' as _i5;
 
 abstract class $FeatureProcessChartRouterModule extends _i4.AutoRouterModule {
   @override
@@ -117,7 +111,7 @@ class ItinerarySimplifiedRoute extends _i4.PageRouteInfo<void> {
 /// [_i3.ProcessChartPage]
 class ProcessChartsRoute extends _i4.PageRouteInfo<ProcessChartsRouteArgs> {
   ProcessChartsRoute({
-    _i5.Key? key,
+    _i6.Key? key,
     String? id,
     List<_i4.PageRouteInfo>? children,
   }) : super(
@@ -141,7 +135,7 @@ class ProcessChartsRouteArgs {
     this.id,
   });
 
-  final _i5.Key? key;
+  final _i6.Key? key;
 
   final String? id;
 

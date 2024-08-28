@@ -1,13 +1,8 @@
-// Flutter imports:
-import 'package:flutter/material.dart';
-
-// Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-
-// Project imports:
 import '../feature_process_chart.gm.dart';
 import 'filter_process_chart.dart';
 import 'process_chart_model.dart';
@@ -36,7 +31,7 @@ class ProcessChartScreen extends StatelessWidget {
                       onPressed: () {
                         context.router.push(const ItinerarySimplifiedRoute());
                       },
-                      child: const Text('簡易版行程表を新規作成')),
+                      child: Text('簡易版行程表を新規作成')),
                   SizedBox(
                     width: context.appTheme.spacing.marginMedium,
                   ),
@@ -44,7 +39,7 @@ class ProcessChartScreen extends StatelessWidget {
                       onPressed: () {
                         context.router.push(DetailProcessChartRoute());
                       },
-                      child: const Text('ツアー行程表を新規作成')),
+                      child: Text('ツアー行程表を新規作成')),
                 ],
               ),
               SizedBox(
@@ -65,23 +60,23 @@ class ProcessChartScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          const Expanded(flex: 2, child: Text('ツアー名')),
+                          Expanded(flex: 2, child: Text('ツアー名')),
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
-                          const Expanded(flex: 2, child: Text('日程')),
+                          Expanded(flex: 2, child: Text('日程')),
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
-                          const Expanded(child: Text('人数')),
+                          Expanded(child: Text('人数')),
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
-                          const Expanded(child: Text('グループ')),
+                          Expanded(child: Text('グループ')),
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
-                          const Expanded(child: Text('種別')),
+                          Expanded(child: Text('種別')),
                         ],
                       ),
                       SizedBox(
@@ -95,11 +90,11 @@ class ProcessChartScreen extends StatelessWidget {
                             return ListView.builder(
                               itemCount: value.data?.length ?? 0,
                               itemBuilder: (context, index) {
-                               // var item = value.requireData[index];
+                                var item = value.requireData[index];
                                 return InkWell(
                                   onTap: () {
-                                    context.router
-                                        .push( DetailProcessChartRoute());
+                                    context.router.push(
+                                        DetailProcessChartRoute(id: item.id));
                                   },
                                   child: Container(
                                     padding: EdgeInsets.all(
@@ -111,7 +106,7 @@ class ProcessChartScreen extends StatelessWidget {
                                               .borderRadiusMedium,
                                         ),
                                         color: index % 2 == 0
-                                            ? const Color(0xffEDF8F8)
+                                            ? Color(0xffEDF8F8)
                                             : Colors.white),
                                     child: Row(
                                       children: [
@@ -124,7 +119,7 @@ class ProcessChartScreen extends StatelessWidget {
                                           width: context
                                               .appTheme.spacing.marginMedium,
                                         ),
-                                        const Expanded(
+                                        Expanded(
                                             flex: 2,
                                             child: Text(
                                                 '2023/10/22　ー　2023/10/29')),
@@ -149,7 +144,7 @@ class ProcessChartScreen extends StatelessWidget {
                                         Expanded(
                                           child: ElevatedButton(
                                             onPressed: () {},
-                                            child: const Text('新規見積依頼'),
+                                            child: Text('新規見積依頼'),
                                           ),
                                         ),
                                       ],

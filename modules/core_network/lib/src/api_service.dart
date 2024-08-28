@@ -711,8 +711,6 @@ abstract class ApiService {
 
   //E1
 
-  @GET(EndPoints.FILTER_PROCESS_CHART_PATIENT)
-  Future<PatientFilterResponse> getFilterPatientChart();
 
   @POST(EndPoints.FILTER_PROCESS_CHART_PATIENT)
   Future<PatientFilterResponse> postFilterpatientChart(
@@ -879,9 +877,15 @@ abstract class ApiService {
   );
 
   @GET('${EndPoints.DETAIL_ITINERARY}/{id}')
-  Future<List<DetailItineraryResponse>> getDetailitinerary({
+  Future<DetailItineraryResponse> getDetailitinerary({
     @Path('id') String? id,
-    @Query('tourName') String? tourName,
+   
+  });
+
+  
+  @GET(EndPoints.DETAIL_ITINERARY)
+  Future<List<DetailItineraryResponse>> getPatientChart({
+     @Query('tourName') String? tourName,
     @Query('classification') String? classification,
     @Query('dateFrom') DateTime? dateFrom,
     @Query('dateTo') DateTime? dateTo,

@@ -1,17 +1,13 @@
-// Flutter imports:
-import 'package:flutter/material.dart';
-
-// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_process_chart/data_process_chart.dart';
+import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
 class RelatedPartiesModel {
   RelatedPartiesModel({required this.processChartRepository});
-
   final ProcessChartRepository processChartRepository;
 
   Future<void> fetchData(FormGroup formGroup) async {
@@ -26,7 +22,6 @@ class RelatedPartiesModel {
   }
 
   ValueNotifier<AsyncData<bool>> submit = ValueNotifier(const AsyncData());
-
   Future<void> submitData(FormGroup formGroup) async {
     try {
       submit.value = const AsyncData(loading: true);
@@ -42,7 +37,6 @@ class RelatedPartiesModel {
 
   ValueNotifier<AsyncData<List<DetailRelatedPartiesResponse>>> partiesData =
       ValueNotifier(const AsyncData());
-
   Future<void> fetchParties(FormArray formArray) async {
     try {
       partiesData.value = const AsyncData(loading: true);
@@ -112,7 +106,6 @@ class RelatedPartiesModel {
 
   ValueNotifier<AsyncData<DetailRelatedPartiesResponse>> submitPartiesData =
       ValueNotifier(const AsyncData());
-
   Future<void> submitParties(FormGroup formGroup) async {
     try {
       partiesData.value = const AsyncData(loading: true, data: []);
@@ -184,7 +177,6 @@ class RelatedPartiesModel {
 
   ValueNotifier<AsyncData<DetailRelatedPartiesBusCompanyResponse>>
       submitBusCompanyData = ValueNotifier(const AsyncData());
-
   Future<void> submitBusCompany(FormGroup formGroup) async {
     try {
       submitBusCompanyData.value = const AsyncData(loading: true);
@@ -203,7 +195,6 @@ class RelatedPartiesModel {
 
   ValueNotifier<AsyncData<DetailRelatedPartiesDriverResponse>>
       partiesDriverData = ValueNotifier(const AsyncData());
-
   Future<void> fetchPartiesDriver(FormGroup formGroup) async {
     try {
       partiesDriverData.value = const AsyncData(loading: true);
@@ -238,7 +229,6 @@ class RelatedPartiesModel {
 
   ValueNotifier<AsyncData<DetailRelatedPartiesDriverResponse>>
       submitPartiesDriverData = ValueNotifier(const AsyncData());
-
   Future<void> submitPartiesDriver(FormGroup formGroup) async {
     try {
       partiesDriverData.value = const AsyncData(loading: true);
@@ -292,7 +282,6 @@ class RelatedPartiesModel {
 
   ValueNotifier<AsyncData<DetailRelatedPartiesEmergencyContactResponse>>
       emergencyContactData = ValueNotifier(const AsyncData());
-
   Future<void> fetchEmergencyContact(FormGroup formGroup) async {
     try {
       emergencyContactData.value = const AsyncData(loading: true);
@@ -319,7 +308,6 @@ class RelatedPartiesModel {
 
   ValueNotifier<AsyncData<DetailRelatedPartiesEmergencyContactResponse>>
       submitEmergencyContactData = ValueNotifier(const AsyncData());
-
   Future<void> submitEmergencyContact(FormGroup formGroup) async {
     try {
       emergencyContactData.value = const AsyncData(loading: true);
