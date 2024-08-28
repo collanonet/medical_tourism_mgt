@@ -17,16 +17,19 @@ FormGroup formWebAppointment() => FormGroup({
             ValidatorRegExp.date,
           ),
         ],
-      ), // 第２希望
+      ),
       'preferredDate3': FormControl<DateTime>(
         validators: [
           Validators.pattern(
             ValidatorRegExp.date,
           ),
         ],
-      ), // 第３希望
+      ),
       'noDesiredDate': FormControl<bool>(), // 希望日なし
       'remarks': FormControl<String>(), // 備考
+      'medicalInstitutionName': FormControl<String>(
+        validators: [Validators.required],
+      ),
       'doctorName': FormControl<DoctorProfileHospitalResponse>(
         validators: [Validators.required],
       ), // 医師名

@@ -575,7 +575,7 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                                         onTap: () {
                                           if (control.value?.url != null) {
                                             openUrlInBrowser(
-                                                control.value!.url!);
+                                                fileName: control.value!.url!);
                                           }
                                         },
                                         child: Text(

@@ -143,7 +143,8 @@ class _AdditionalInformationSectionState
                                                 if (control.value?.url !=
                                                     null) {
                                                   openUrlInBrowser(
-                                                      control.value!.url!);
+                                                      fileName:
+                                                          control.value!.url!);
                                                 }
                                               },
                                               child: Text(
