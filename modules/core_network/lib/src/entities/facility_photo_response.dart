@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'facility_photo_response.g.dart';
 @JsonSerializable()
 class FacilityResponse {

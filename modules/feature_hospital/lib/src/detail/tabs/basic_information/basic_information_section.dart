@@ -1,21 +1,23 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:feature_hospital/src/detail/tabs/basic_information/section/additional_information_section.dart';
-import 'package:feature_hospital/src/detail/tabs/basic_information/section/create_doctor_profile_section.dart';
-import 'package:feature_hospital/src/detail/tabs/basic_information/section/how_to_make_reqest_section.dart';
-import 'package:feature_hospital/src/detail/tabs/basic_information/section/medical_record_section.dart';
-import 'package:feature_hospital/src/detail/tabs/basic_information/section/payment_option_section.dart';
-import 'package:feature_hospital/src/detail/tabs/basic_information/section/support_language_section.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+// Project imports:
 import 'basic_information_model.dart';
+import 'section/additional_information_section.dart';
 import 'section/basic_info_section.dart';
+import 'section/create_doctor_profile_section.dart';
+import 'section/how_to_make_reqest_section.dart';
+import 'section/medical_record_section.dart';
+import 'section/payment_option_section.dart';
+import 'section/support_language_section.dart';
 
 class BasicInformationSection extends StatefulWidget {
   const BasicInformationSection({super.key});
@@ -106,7 +108,7 @@ class _BasicInformationSectionState extends State<BasicInformationSection> {
                                 : null,
                             child: WithLoadingButton(
                               isLoading: value.loading,
-                              child: Text('保存する'),
+                              child: const Text('保存する'),
                             ));
                       },
                     );

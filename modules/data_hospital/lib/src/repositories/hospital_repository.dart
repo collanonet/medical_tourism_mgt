@@ -1,4 +1,4 @@
-import 'package:core_network/core_network.dart';
+// Package imports:
 import 'package:core_network/entities.dart';
 
 abstract class HospitalRepository {
@@ -192,5 +192,8 @@ abstract class HospitalRepository {
       String reservationId, WebBookingMedicalRecordRequest request);
 
   Future<void> webBookingDeleteReservation(String reservationId);
+
+  Future<TreamentResponce> updateBooking(String treatmentId, TreamentRequest treatmentRequest);
+
 }
 

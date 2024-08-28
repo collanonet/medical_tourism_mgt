@@ -1,9 +1,14 @@
+// Dart imports:
 import 'dart:convert';
+
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_hospital/data_hospital.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -21,25 +26,20 @@ class MaterialsModel {
   ValueNotifier<AsyncData<MemoMaterialHospitalResponse>> memoMaterialsData =
       ValueNotifier(const AsyncData());
 
-  Future<void> fetchMaterial(
-      {required FormGroup formGroup, required String hospital}) async {
-    try {
-      materialsData.value = const AsyncData(loading: true);
-      final response = await hospitalRepository.getMaterialHospital(hospital);
-      materialsData.value = AsyncData(data: response);
-    } catch (e) {
-      logger.d(e);
-      materialsData.value = AsyncData(error: e);
-    }
-  }
-
-  void fetchData(
-      {required FormGroup formGroup, required String hospitalId}) async {
+  void fetchData({
+    required FormGroup formGroup,
+    required String hospitalId,
+  }) async {
     try {
       materialsData.value = const AsyncData(loading: true);
       final result = await hospitalRepository.getMaterialHospital(hospitalId);
       materialsData.value = AsyncData(data: result);
-
+    } catch (e) {
+      logger.d(e);
+      materialsData.value = AsyncData(error: e);
+    }
+    try {
+      memoMaterialsData.value = const AsyncData(loading: true);
       final resultMenu =
           await hospitalRepository.getMemoMaterialHospital(hospitalId);
       formGroup.control('memo').value = resultMenu.memo;
@@ -47,7 +47,7 @@ class MaterialsModel {
       memoMaterialsData.value = AsyncData(data: resultMenu);
     } catch (e) {
       logger.d(e);
-      materialsData.value = AsyncData(error: e);
+      memoMaterialsData.value = AsyncData(error: e);
     }
   }
 
@@ -100,8 +100,9 @@ class MaterialsModel {
           hospitalRecord: formGroup.control('hospitalRecord').value,
         ),
       );
-      materialsData.value =
-          AsyncData(data: materialsData.value.data!..add(response));
+      materialsData.value = AsyncData(
+          data: materialsData.value.data ?? []
+            ..add(response));
       submitMaterialHospital.value = AsyncData(data: response);
       logger.d(response.toJson());
     } catch (e) {

@@ -1,6 +1,10 @@
-import 'package:dio/dio.dart';
+// Flutter imports:
 import 'package:flutter/foundation.dart';
 
+// Package imports:
+import 'package:dio/dio.dart';
+
+// Project imports:
 import '../entities/token_type.dart';
 
 class Token {

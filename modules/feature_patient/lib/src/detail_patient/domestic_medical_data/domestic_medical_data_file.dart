@@ -1,12 +1,17 @@
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+// Project imports:
 import 'domestic_medical_data_model.dart';
 
 class Popup extends StatelessWidget {
@@ -39,7 +44,7 @@ class Popup extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(Icons.close)),
+                icon: const Icon(Icons.close)),
           ],
         ),
         Row(
@@ -56,7 +61,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
                       formControlName: 'nameOfMedicalInstitution',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '医療機関名',
                       ),
                     ),
@@ -79,7 +84,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
                       formControlName: 'category',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'カテゴリ',
                       ),
                     ),
@@ -102,7 +107,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
                       formControlName: 'documentName',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '書類名',
                       ),
                     ),
@@ -113,16 +118,16 @@ class Popup extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             )
           ],
@@ -145,7 +150,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
                       formControlName: 'remark',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '備考欄',
                       ),
                     ),
@@ -180,7 +185,7 @@ class Popup extends StatelessWidget {
                           ),
                           decoration: InputDecoration(
                             label: const Text(
-                              "発行日",
+                              '発行日',
                             ),
                             suffixIcon: IconButton(
                               icon: const Icon(
@@ -215,7 +220,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
                       formControlName: 'sharedUrlIssue',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '共有URL発行',
                       ),
                     ),
@@ -229,13 +234,13 @@ class Popup extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             )
           ],
@@ -258,7 +263,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveDropdownField<String>(
                       formControlName: 'disclosureToPatients',
-                      items: [
+                      items: const [
                         DropdownMenuItem(
                           value: '○',
                           child: Text('○'),
@@ -268,7 +273,7 @@ class Popup extends StatelessWidget {
                           child: Text('×'),
                         ),
                       ],
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '患者へ開示',
                       ),
                     ),
@@ -291,7 +296,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveDropdownField<String>(
                       formControlName: 'disclosureToOtherMedicalInstitutions',
-                      items: [
+                      items: const [
                         DropdownMenuItem(
                           value: '○',
                           child: Text('○'),
@@ -301,7 +306,7 @@ class Popup extends StatelessWidget {
                           child: Text('×'),
                         ),
                       ],
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '他医療機関へ開示',
                       ),
                     ),
@@ -312,13 +317,13 @@ class Popup extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             )
           ],
@@ -334,7 +339,7 @@ class Popup extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('キャンセル'),
+              child: const Text('キャンセル'),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
@@ -375,7 +380,7 @@ class Popup extends StatelessWidget {
                                   .submitDomesticMedicalData(formGroup);
                             },
                       child: WithLoadingButton(
-                          isLoading: value.loading, child: Text('保存する')),
+                          isLoading: value.loading, child: const Text('保存する')),
                     );
                   }),
             ),

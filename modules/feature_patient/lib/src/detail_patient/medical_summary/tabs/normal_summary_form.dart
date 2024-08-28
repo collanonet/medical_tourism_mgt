@@ -1,14 +1,27 @@
+// Package imports:
+import 'package:core_utils/core_utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup normalSummaryForm() {
   return FormGroup({
     'id': FormControl<String>(),
-    'entryDate': FormControl<DateTime>(),
+    'entryDate': FormControl<DateTime>(
+      validators: [
+        Validators.pattern(
+          ValidatorRegExp.date,
+        ),
+      ],
+    ),
     'namePassport': FormControl<String>(
       disabled: true,
     ),
     'dateOfBirth': FormControl<DateTime>(
       disabled: true,
+      validators: [
+        Validators.pattern(
+          ValidatorRegExp.date,
+        ),
+      ],
     ),
     'age': FormControl<int>(
       disabled: true,
@@ -27,7 +40,6 @@ FormGroup normalSummaryForm() {
       disabled: true,
     ),
     'mobileNumberDomestic': FormControl<String>(),
-
     'diseaseName': FormControl<String>(),
     'tissueType': FormControl<String>(),
     'diseaseNotices': FormControl<bool>(),

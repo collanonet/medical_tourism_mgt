@@ -1,5 +1,8 @@
-import 'package:core_ui/core_ui.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_ui/core_ui.dart';
 
 class StudyOfDICOMTab extends StatelessWidget {
   const StudyOfDICOMTab({super.key});
@@ -14,11 +17,11 @@ class StudyOfDICOMTab extends StatelessWidget {
         children: [
           Row(
             children: [
-              ElevatedButton(onPressed: null, child: Text('001-C-20')),
+              const ElevatedButton(onPressed: null, child: Text('001-C-20')),
               SizedBox(
                 width: context.appTheme.spacing.marginMedium,
               ),
-              ElevatedButton(onPressed: null, child: Text('王　沐宸')),
+              const ElevatedButton(onPressed: null, child: Text('王　沐宸')),
             ],
           ),
         ],

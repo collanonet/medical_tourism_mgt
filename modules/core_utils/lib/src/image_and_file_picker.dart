@@ -1,11 +1,10 @@
+// Dart imports:
 import 'dart:io';
 
+// Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
-
-import '../core_utils.dart';
 
 final ImagePicker picker = ImagePicker();
 
@@ -47,7 +46,10 @@ Future<List<File>?> imageMultiplePicker() async {
 
 // return bytes because web support only bytes
 Future<FileSelect?> filePicker() async {
-  FilePickerResult? result = await FilePicker.platform.pickFiles();
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+    allowMultiple: false,
+    allowedExtensions: ['jpg', 'pdf', 'png', 'jpeg'],
+  );
 
   try {
     if (result != null) {
@@ -66,8 +68,10 @@ Future<FileSelect?> filePicker() async {
 }
 
 Future<List<File>?> fileMultiplePicker() async {
-  FilePickerResult? result =
-      await FilePicker.platform.pickFiles(allowMultiple: true);
+  FilePickerResult? result = await FilePicker.platform.pickFiles(
+    allowMultiple: true,
+    allowedExtensions: ['jpg', 'pdf', 'png', 'jpeg'],
+  );
 
   try {
     if (result != null) {

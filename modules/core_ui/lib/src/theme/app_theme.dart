@@ -1,5 +1,7 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Project imports:
 import 'app_theme_data.dart';
 
 class AppTheme extends InheritedWidget {

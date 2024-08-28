@@ -1,5 +1,8 @@
-import 'package:core_ui/core_ui.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_ui/core_ui.dart';
 
 class SummaryListScreen extends StatelessWidget {
   const SummaryListScreen({super.key});
@@ -16,7 +19,7 @@ class SummaryListScreen extends StatelessWidget {
             Checkbox(
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(4),
-                side: BorderSide(color: Colors.grey),
+                side: const BorderSide(color: Colors.grey),
               ),
               checkColor: Colors.white,
               value: false,
@@ -44,7 +47,7 @@ class SummaryListScreen extends StatelessWidget {
             )),
           ],
         ),
-        Divider(),
+        const Divider(),
         ListView(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
@@ -59,7 +62,7 @@ class SummaryListScreen extends StatelessWidget {
                     Checkbox(
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4),
-                        side: BorderSide(color: Colors.grey),
+                        side: const BorderSide(color: Colors.grey),
                       ),
                       checkColor: Colors.white,
                       value: false,
@@ -68,10 +71,10 @@ class SummaryListScreen extends StatelessWidget {
                     Expanded(
                         child: Row(
                       children: [
-                        Flexible(child: Text('診療データサマリー')),
-                        Spacer(),
+                        const Flexible(child: Text('診療データサマリー')),
+                        const Spacer(),
                         Container(
-                          padding: EdgeInsets.all(4),
+                          padding: const EdgeInsets.all(4),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
                             border: Border.all(
@@ -85,7 +88,7 @@ class SummaryListScreen extends StatelessWidget {
                         )
                       ],
                     )),
-                    Expanded(child: Text('2023/06/30')),
+                    const Expanded(child: Text('2023/06/30')),
                     Expanded(
                         child: Row(
                       children: [

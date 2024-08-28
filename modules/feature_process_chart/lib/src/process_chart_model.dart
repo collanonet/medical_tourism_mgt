@@ -1,7 +1,10 @@
+// Flutter imports:
+import 'package:flutter/widgets.dart';
+
+// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_process_chart/data_process_chart.dart';
-import 'package:flutter/widgets.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable
@@ -11,10 +14,11 @@ class ProcessChartModel {
 
   ValueNotifier<AsyncData<List<DetailItineraryResponse>>> itinerraryData =
       ValueNotifier(const AsyncData<List<DetailItineraryResponse>>(data: []));
-  Future<void> fetchItinerary({String? tourName,String? classification,DateTime? dateFrom,DateTime? dateTo}) async {
+  Future<void> fetchItinerary({required String id,String? tourName,String? classification,DateTime? dateFrom,DateTime? dateTo,}) async {
     try {
       itinerraryData.value = const AsyncData(loading: true);
       final response = await processChartRepository.getDetailItinerary(
+        id: id,
         tourName: tourName,
         classification: classification,
         dateFrom: dateFrom,

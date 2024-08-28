@@ -1,3 +1,7 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
@@ -5,9 +9,9 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
-import '../../feature_patient.dart';
-import 'package:flutter/material.dart';
 
+// Project imports:
+import '../../feature_patient.dart';
 import 'filter_patient_for_agent.dart';
 import 'patient_model.dart';
 

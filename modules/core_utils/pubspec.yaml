@@ -32,6 +32,8 @@ dependencies:
   jiffy: ^6.2.1
   flutter_image_compress: ^2.3.0
 
+  reactive_forms: any
+  import_sorter: ^4.6.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

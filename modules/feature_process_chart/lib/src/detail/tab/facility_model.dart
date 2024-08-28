@@ -1,7 +1,10 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_process_chart/data_process_chart.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -49,7 +52,7 @@ class FacilityModel {
 
   void insertFacilityHotel(
       FormArray formArray, List<DetailFacilityHotelResponse>? data) {
-    if (data!.isEmpty) {
+    if (data!.isNotEmpty) {
       formArray.clear();
       for (var item in data) {
         for (int i = 0; i < item.foreignLanguageStaff!.length; i++) {
@@ -155,10 +158,12 @@ class FacilityModel {
   }
 
   void insertDropInFacility(
-      FormGroup formGroup, List<DetailDropInFacilityResponse> data) {
-    for (var item in data) {
-     var places = formGroup.control('places') as FormArray;
-      if (data.isEmpty) {
+      FormGroup formGroup, List<DetailDropInFacilityResponse>? data) {
+    // var firstData = data![0];
+    for (var item in data!) {
+      var places = formGroup.control('places') as FormArray;
+      if (data.isNotEmpty) {
+        places.clear();
         for (var e in item.places!) {
           places.add(
             FormGroup(
@@ -187,7 +192,6 @@ class FacilityModel {
         );
       }
       formGroup.control('arrangePerson').value = item.arrangePerson;
-      
     }
   }
 

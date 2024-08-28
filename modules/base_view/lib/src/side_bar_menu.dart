@@ -1,10 +1,13 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:core_l10n/l10n.dart';
+import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_utils/routes.dart';
 import 'package:feature_auth/feature_auth.dart';
-import 'package:flutter/material.dart';
-import 'package:core_ui/core_ui.dart';
 import 'package:provider/provider.dart';
 
 class SideBarMenu extends StatelessWidget {
@@ -161,7 +164,7 @@ class SideBarMenu extends StatelessWidget {
                 padding: const EdgeInsets.fromLTRB(16.0, 2, 16, 16),
                 child: ElevatedButton(
                   onPressed: () {},
-                  child: Text(
+                  child: const Text(
                     'センター本部専用',
                   ),
                 ),
@@ -183,21 +186,21 @@ class SideBarMenu extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return AlertDialog(
-                          title: Text('Logout'),
-                          content: Text('Are you sure you want to log out?'),
+                          title: const Text('Logout'),
+                          content: const Text('Are you sure you want to log out?'),
                           actions: [
                             TextButton(
                               onPressed: () {
                                 Navigator.of(context).pop();
                               },
-                              child: Text('Cancel'),
+                              child: const Text('Cancel'),
                             ),
                             ElevatedButton(
                               onPressed: () {
                                 context.read<AuthModel>().logOut();
                                 Navigator.of(context).pop();
                               },
-                              child: Text('Logout'),
+                              child: const Text('Logout'),
                             ),
                           ],
                         );

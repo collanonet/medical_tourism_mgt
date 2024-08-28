@@ -1,7 +1,9 @@
-
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
+// Project imports:
 import '../../entities.dart';
+
 part 'itinerary_simplified_title_response.g.dart';
 @JsonSerializable()
 class ItineraryTitleResponse {

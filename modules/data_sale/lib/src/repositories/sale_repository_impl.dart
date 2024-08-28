@@ -1,7 +1,8 @@
-
+// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 
+// Project imports:
 import '../providers/sale_local_provider.dart';
 import '../providers/sale_remote_provider.dart';
 import 'sale_repository.dart';

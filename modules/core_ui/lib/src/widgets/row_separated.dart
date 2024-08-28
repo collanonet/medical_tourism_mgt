@@ -1,5 +1,8 @@
-import 'package:core_utils/lists.dart';
+// Flutter imports:
 import 'package:flutter/widgets.dart';
+
+// Package imports:
+import 'package:core_utils/lists.dart';
 
 class RowSeparated extends StatelessWidget {
   final IndexedWidgetBuilder separatorBuilder;

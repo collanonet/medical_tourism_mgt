@@ -1,9 +1,13 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_utils/core_utils.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../../filter_process_chart_form.dart';
+// Project imports:
 import 'hotel_registration_form.dart';
 import 'hotel_registration_model.dart';
 import 'hotel_registration_screen.dart';
@@ -14,7 +18,7 @@ class HotelRegistrationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
-      validationMessages: validationMessagesFilterPatient(context),
+      validationMessages: validationMessages,
       child: ReactiveFormBuilder(
           form: () => hotelRegistrationForm()..markAllAsTouched(),
           builder: (context, formGroup, child) {

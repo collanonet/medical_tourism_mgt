@@ -4,12 +4,16 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
+// Dart imports:
 import 'dart:async' as _i2;
 
+// Package imports:
 import 'package:data_auth/data_auth.dart' as _i4;
 import 'package:data_patient/data_patient.dart' as _i5;
 import 'package:injectable/injectable.dart' as _i1;
 
+// Project imports:
 import 'src/chat_model.dart' as _i3;
 
 class FeatureChatsPackageModule extends _i1.MicroPackageModule {

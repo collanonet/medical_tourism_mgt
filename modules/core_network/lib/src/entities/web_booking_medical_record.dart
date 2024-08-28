@@ -1,5 +1,8 @@
-import '../../entities.dart';
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
+// Project imports:
+import '../../entities.dart';
 
 part 'web_booking_medical_record.g.dart';
 

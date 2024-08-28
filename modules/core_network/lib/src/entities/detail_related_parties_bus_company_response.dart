@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'detail_related_parties_bus_company_response.g.dart';
 @JsonSerializable()
 class DetailRelatedPartiesBusCompanyResponse {

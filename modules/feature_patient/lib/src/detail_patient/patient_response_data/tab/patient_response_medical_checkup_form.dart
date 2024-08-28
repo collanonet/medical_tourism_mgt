@@ -1,9 +1,17 @@
+// Package imports:
+import 'package:core_utils/core_utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup medicalCheckupForm() {
   return FormGroup({
     'id': FormControl<String>(),
-    'date1': FormControl<DateTime>(),
+    'date1': FormControl<DateTime>(
+      validators: [
+        Validators.pattern(
+          ValidatorRegExp.date,
+        ),
+      ],
+    ),
     'date2': FormControl<DateTime>(),
     'date3': FormControl<DateTime>(),
     'desiredDate': FormControl<bool>(),

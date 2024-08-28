@@ -1,11 +1,15 @@
-import 'package:feature_hospital/src/detail/tabs/web_reservation/web_reservation_section.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_utils/core_utils.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../../../filter_hospital_form.dart';
+// Project imports:
 import 'web_reservation_model.dart';
+import 'web_reservation_section.dart';
 
 class WebReservationScreen extends StatefulWidget {
   const WebReservationScreen({super.key, required this.hospitalId});
@@ -18,9 +22,7 @@ class _WebReservationScreenState extends State<WebReservationScreen> {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
-      validationMessages: {
-        ValidationMessage.required: (error) => 'This field is required',
-      },
+      validationMessages: validationMessages,
       child: Provider(
         create: (context) => GetIt.I<WebAppointmentDetailModel>()
           ..getReservationAll(hospitalId: widget.hospitalId),

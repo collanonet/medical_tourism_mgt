@@ -1,6 +1,10 @@
+// Dart imports:
 import 'dart:typed_data';
 
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:http/http.dart' as http;
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -15,7 +19,7 @@ class ViewAndPrintFileWidget extends StatelessWidget {
     // var imageList =
     //     await Future.wait([for (var url in urlList) networkImage(url)]);
     for (var url in urlList) {
-      if (url.contains(".pdf") || url.contains("/view")) {
+      if (url.contains('.pdf') || url.contains('/view')) {
         final http.Response responseData = await http.get(Uri.parse(url));
         Uint8List pdf = responseData.bodyBytes;
         await Printing.layoutPdf(onLayout: (_) => pdf.buffer.asUint8List());

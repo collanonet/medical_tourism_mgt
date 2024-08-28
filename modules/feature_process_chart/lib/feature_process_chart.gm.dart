@@ -8,20 +8,35 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
+// Flutter imports:
+import 'package:flutter/material.dart' as _i5;
+
+// Package imports:
 import 'package:auto_route/auto_route.dart' as _i4;
+
+// Project imports:
+import 'package:feature_process_chart/src/process_chart_page.dart' as _i3;
+
 import 'package:feature_process_chart/src/detail/detail_process_chart_page.dart'
     as _i1;
 import 'package:feature_process_chart/src/itinerary_simplified/itinerary_simplified_page.dart'
     as _i2;
-import 'package:feature_process_chart/src/process_chart_page.dart' as _i3;
 
 abstract class $FeatureProcessChartRouterModule extends _i4.AutoRouterModule {
   @override
   final Map<String, _i4.PageFactory> pagesMap = {
     DetailProcessChartRoute.name: (routeData) {
+      final pathParams = routeData.inheritedPathParams;
+      final args = routeData.argsAs<DetailProcessChartRouteArgs>(
+          orElse: () =>
+              DetailProcessChartRouteArgs(id: pathParams.optString('id')));
       return _i4.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i1.DetailProcessChartPage(),
+        child: _i1.DetailProcessChartPage(
+          key: args.key,
+          id: args.id,
+        ),
       );
     },
     ItinerarySimplifiedRoute.name: (routeData) {
@@ -31,9 +46,14 @@ abstract class $FeatureProcessChartRouterModule extends _i4.AutoRouterModule {
       );
     },
     ProcessChartsRoute.name: (routeData) {
+      final args = routeData.argsAs<ProcessChartsRouteArgs>(
+          orElse: () => const ProcessChartsRouteArgs());
       return _i4.AutoRoutePage<dynamic>(
         routeData: routeData,
-        child: const _i3.ProcessChartPage(),
+        child: _i3.ProcessChartPage(
+          key: args.key,
+          id: args.id,
+        ),
       );
     },
   };
@@ -41,16 +61,42 @@ abstract class $FeatureProcessChartRouterModule extends _i4.AutoRouterModule {
 
 /// generated route for
 /// [_i1.DetailProcessChartPage]
-class DetailProcessChartRoute extends _i4.PageRouteInfo<void> {
-  const DetailProcessChartRoute({List<_i4.PageRouteInfo>? children})
-      : super(
+class DetailProcessChartRoute
+    extends _i4.PageRouteInfo<DetailProcessChartRouteArgs> {
+  DetailProcessChartRoute({
+    _i5.Key? key,
+    String? id,
+    List<_i4.PageRouteInfo>? children,
+  }) : super(
           DetailProcessChartRoute.name,
+          args: DetailProcessChartRouteArgs(
+            key: key,
+            id: id,
+          ),
+          rawPathParams: {'id': id},
           initialChildren: children,
         );
 
   static const String name = 'DetailProcessChartRoute';
 
-  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
+  static const _i4.PageInfo<DetailProcessChartRouteArgs> page =
+      _i4.PageInfo<DetailProcessChartRouteArgs>(name);
+}
+
+class DetailProcessChartRouteArgs {
+  const DetailProcessChartRouteArgs({
+    this.key,
+    this.id,
+  });
+
+  final _i5.Key? key;
+
+  final String? id;
+
+  @override
+  String toString() {
+    return 'DetailProcessChartRouteArgs{key: $key, id: $id}';
+  }
 }
 
 /// generated route for
@@ -69,14 +115,38 @@ class ItinerarySimplifiedRoute extends _i4.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i3.ProcessChartPage]
-class ProcessChartsRoute extends _i4.PageRouteInfo<void> {
-  const ProcessChartsRoute({List<_i4.PageRouteInfo>? children})
-      : super(
+class ProcessChartsRoute extends _i4.PageRouteInfo<ProcessChartsRouteArgs> {
+  ProcessChartsRoute({
+    _i5.Key? key,
+    String? id,
+    List<_i4.PageRouteInfo>? children,
+  }) : super(
           ProcessChartsRoute.name,
+          args: ProcessChartsRouteArgs(
+            key: key,
+            id: id,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'ProcessChartsRoute';
 
-  static const _i4.PageInfo<void> page = _i4.PageInfo<void>(name);
+  static const _i4.PageInfo<ProcessChartsRouteArgs> page =
+      _i4.PageInfo<ProcessChartsRouteArgs>(name);
+}
+
+class ProcessChartsRouteArgs {
+  const ProcessChartsRouteArgs({
+    this.key,
+    this.id,
+  });
+
+  final _i5.Key? key;
+
+  final String? id;
+
+  @override
+  String toString() {
+    return 'ProcessChartsRouteArgs{key: $key, id: $id}';
+  }
 }

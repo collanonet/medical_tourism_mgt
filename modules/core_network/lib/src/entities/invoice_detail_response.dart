@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'invoice_detail_response.g.dart';
 @JsonSerializable()
 class InvoiceResponse {

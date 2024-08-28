@@ -1,11 +1,15 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import '../basic_info_model.dart';
 
 class MedicalRecordTravelGroupSection extends StatelessWidget {
@@ -41,7 +45,7 @@ class MedicalRecordTravelGroupSection extends StatelessWidget {
                           textDirection: TextDirection.rtl,
                           current: control.value == true ? 'する' : 'しない',
                           values: const ['する', 'しない'],
-                          iconList: [
+                          iconList: const [
                             Text('しない'),
                             Text('する'),
                           ],
@@ -54,7 +58,7 @@ class MedicalRecordTravelGroupSection extends StatelessWidget {
                             backgroundColor: Colors.white,
                             indicatorColor: Colors.white,
                             boxShadow: [
-                              BoxShadow(
+                              const BoxShadow(
                                 color: Colors.black26,
                                 spreadRadius: 1,
                                 blurRadius: 2,
@@ -96,7 +100,7 @@ class MedicalRecordTravelGroupSection extends StatelessWidget {
                                 Expanded(
                                   child: ReactiveTextField(
                                     formControlName: 'name',
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       suffixIcon: Icon(
                                         Icons.search,
                                         color: Colors.grey,
@@ -119,7 +123,7 @@ class MedicalRecordTravelGroupSection extends StatelessWidget {
                                                 .controls
                                                 .indexOf(currentForm));
                                           },
-                                          icon: Icon(
+                                          icon: const Icon(
                                             Icons.delete_forever,
                                             color: Colors.red,
                                           )),

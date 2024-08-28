@@ -1,12 +1,16 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:feature_hospital/src/detail/tabs/q_and_a/section/g_and_a_list_section.dart';
-import 'package:feature_hospital/src/detail/tabs/q_and_a/section/q_and_a_new_registration_section.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import 'g_and_a_model.dart';
+import 'section/g_and_a_list_section.dart';
+import 'section/q_and_a_new_registration_section.dart';
 
 class QAndASection extends StatefulWidget {
   const QAndASection({super.key});

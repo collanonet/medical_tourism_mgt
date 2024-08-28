@@ -1,8 +1,11 @@
-import 'package:data_web_appointment/data_web_appointment.dart';
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
-import 'package:injectable/injectable.dart';
+
+// Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:data_web_appointment/data_web_appointment.dart';
+import 'package:injectable/injectable.dart';
 
 @injectable
 class WebAppointmentModel {

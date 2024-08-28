@@ -1,7 +1,10 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:flutter/material.dart';
 
 class HospitalDICOMTab extends StatelessWidget {
   const HospitalDICOMTab({
@@ -21,28 +24,28 @@ class HospitalDICOMTab extends StatelessWidget {
         },
         children: [
           TextFormField(
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               isDense: true,
               hintText: 'コメント 大阪府済生会吹田病院',
             ),
           ),
 
           TextFormField(
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               isDense: true,
               hintText: 'コメント 自社',
             ),
           ),
 
           TextFormField(
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
               isDense: true,
               hintText: 'コメント 大阪府済生会吹田病院',
             ),
           ),
           Avatar.network(
             medicalRecordOverseaData?.file,
-            placeholder: AssetImage(
+            placeholder: const AssetImage(
               Images.logoMadical,
               package: 'core_ui',
             ),

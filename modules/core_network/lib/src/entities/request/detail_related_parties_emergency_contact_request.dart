@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'detail_related_parties_emergency_contact_request.g.dart';
 @JsonSerializable()
 class DetailRelatedPartiesEmergencyContactRequest {

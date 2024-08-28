@@ -1,13 +1,17 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+// Package imports:
 import 'package:animated_toggle_switch/animated_toggle_switch.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import 'patient_response_treatment_model.dart';
 
 class PatientResponseTreatmentScreen extends StatefulWidget {
@@ -56,7 +60,7 @@ class _PatientResponseTreatmentScreenState
                                   controlAffinity:
                                       ListTileControlAffinity.leading,
                                   formControlName: 'treatment',
-                                  title: Text('治療'),
+                                  title: const Text('治療'),
                                 )),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
@@ -72,7 +76,7 @@ class _PatientResponseTreatmentScreenState
                                         controlAffinity:
                                             ListTileControlAffinity.leading,
                                         formControlName: 'treatmentInJapan',
-                                        title: Text('来日治療'),
+                                        title: const Text('来日治療'),
                                       )),
                                       IntrinsicWidth(
                                           child: ReactiveCheckboxListTile(
@@ -80,34 +84,34 @@ class _PatientResponseTreatmentScreenState
                                         controlAffinity:
                                             ListTileControlAffinity.leading,
                                         formControlName: 'secondOpinion',
-                                        title: Text('セカンドオピニオン'),
+                                        title: const Text('セカンドオピニオン'),
                                       )),
                                     ],
                                   ),
                                 ),
                               ],
                             ),
-                            Divider(),
+                            const Divider(),
                             IntrinsicWidth(
                               child: ReactiveCheckboxListTile(
                                 contentPadding: EdgeInsets.zero,
                                 controlAffinity:
                                     ListTileControlAffinity.leading,
                                 formControlName: 'detailedExamination',
-                                title: Text('精密検査'),
+                                title: const Text('精密検査'),
                               ),
                             ),
-                            Divider(),
+                            const Divider(),
                             IntrinsicWidth(
                               child: ReactiveCheckboxListTile(
                                 contentPadding: EdgeInsets.zero,
                                 controlAffinity:
                                     ListTileControlAffinity.leading,
                                 formControlName: 'medicalCheckup',
-                                title: Text('健診'),
+                                title: const Text('健診'),
                               ),
                             ),
-                            Divider(),
+                            const Divider(),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
@@ -117,7 +121,7 @@ class _PatientResponseTreatmentScreenState
                                   controlAffinity:
                                       ListTileControlAffinity.leading,
                                   formControlName: 'regenerativeMedicine',
-                                  title: Text('再生医療'),
+                                  title: const Text('再生医療'),
                                 )),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
@@ -133,7 +137,7 @@ class _PatientResponseTreatmentScreenState
                                         controlAffinity:
                                             ListTileControlAffinity.leading,
                                         formControlName: 'stemCellTherapy',
-                                        title: Text('幹細胞療法'),
+                                        title: const Text('幹細胞療法'),
                                       )),
                                       IntrinsicWidth(
                                           child: ReactiveCheckboxListTile(
@@ -141,7 +145,7 @@ class _PatientResponseTreatmentScreenState
                                         controlAffinity:
                                             ListTileControlAffinity.leading,
                                         formControlName: 'immuneCellTherapy',
-                                        title: Text('免疫細胞療法'),
+                                        title: const Text('免疫細胞療法'),
                                       )),
                                       IntrinsicWidth(
                                           child: ReactiveCheckboxListTile(
@@ -149,14 +153,14 @@ class _PatientResponseTreatmentScreenState
                                         controlAffinity:
                                             ListTileControlAffinity.leading,
                                         formControlName: 'regenerativeOthers',
-                                        title: Text('その他'),
+                                        title: const Text('その他'),
                                       )),
                                     ],
                                   ),
                                 ),
                               ],
                             ),
-                            Divider(),
+                            const Divider(),
                             Row(
                               children: [
                                 IntrinsicWidth(
@@ -165,11 +169,11 @@ class _PatientResponseTreatmentScreenState
                                   controlAffinity:
                                       ListTileControlAffinity.leading,
                                   formControlName: 'bloodPurificationTherapy',
-                                  title: Text('血液浄化療法(アフェレーシス)・透析'),
+                                  title: const Text('血液浄化療法(アフェレーシス)・透析'),
                                 )),
                               ],
                             ),
-                            Divider(),
+                            const Divider(),
                             Row(
                               children: [
                                 IntrinsicWidth(
@@ -178,11 +182,11 @@ class _PatientResponseTreatmentScreenState
                                   controlAffinity:
                                       ListTileControlAffinity.leading,
                                   formControlName: 'riskInspection',
-                                  title: Text('リスク検査'),
+                                  title: const Text('リスク検査'),
                                 )),
                               ],
                             ),
-                            Divider(),
+                            const Divider(),
                             Row(
                               children: [
                                 IntrinsicWidth(
@@ -191,12 +195,12 @@ class _PatientResponseTreatmentScreenState
                                     controlAffinity:
                                         ListTileControlAffinity.leading,
                                     formControlName: 'beauty',
-                                    title: Text('美容'),
+                                    title: const Text('美容'),
                                   ),
                                 ),
                               ],
                             ),
-                            Divider(),
+                            const Divider(),
                             Row(
                               children: [
                                 IntrinsicWidth(
@@ -205,7 +209,7 @@ class _PatientResponseTreatmentScreenState
                                     controlAffinity:
                                         ListTileControlAffinity.leading,
                                     formControlName: 'others',
-                                    title: Text('その他'),
+                                    title: const Text('その他'),
                                   ),
                                 ),
                                 SizedBox(
@@ -227,7 +231,7 @@ class _PatientResponseTreatmentScreenState
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('母国の医療機関の病状資料（入退院記録等）'),
+                                    const Text('母国の医療機関の病状資料（入退院記録等）'),
                                     SizedBox(
                                       height:
                                           context.appTheme.spacing.marginMedium,
@@ -243,7 +247,7 @@ class _PatientResponseTreatmentScreenState
                                                 ? 'あり'
                                                 : 'なし',
                                             values: const ['あり', 'なし'],
-                                            iconList: [
+                                            iconList: const [
                                               Text('あり'),
                                               Text('なし'),
                                             ],
@@ -257,7 +261,7 @@ class _PatientResponseTreatmentScreenState
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
                                               boxShadow: [
-                                                BoxShadow(
+                                                const BoxShadow(
                                                   color: Colors.black26,
                                                   spreadRadius: 1,
                                                   blurRadius: 2,
@@ -284,7 +288,7 @@ class _PatientResponseTreatmentScreenState
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('提供可能なDICOM画像データ'),
+                                    const Text('提供可能なDICOM画像データ'),
                                     SizedBox(
                                       height:
                                           context.appTheme.spacing.marginMedium,
@@ -299,7 +303,7 @@ class _PatientResponseTreatmentScreenState
                                                 ? 'あり'
                                                 : 'なし',
                                             values: const ['あり', 'なし'],
-                                            iconList: [
+                                            iconList: const [
                                               Text('あり'),
                                               Text('なし'),
                                             ],
@@ -313,7 +317,7 @@ class _PatientResponseTreatmentScreenState
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
                                               boxShadow: [
-                                                BoxShadow(
+                                                const BoxShadow(
                                                   color: Colors.black26,
                                                   spreadRadius: 1,
                                                   blurRadius: 2,
@@ -340,7 +344,7 @@ class _PatientResponseTreatmentScreenState
                                 Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text('その他検査データ（血液検査等）'),
+                                    const Text('その他検査データ（血液検査等）'),
                                     SizedBox(
                                       height:
                                           context.appTheme.spacing.marginMedium,
@@ -355,7 +359,7 @@ class _PatientResponseTreatmentScreenState
                                                 ? 'あり'
                                                 : 'なし',
                                             values: const ['あり', 'なし'],
-                                            iconList: [
+                                            iconList: const [
                                               Text('あり'),
                                               Text('なし'),
                                             ],
@@ -369,7 +373,7 @@ class _PatientResponseTreatmentScreenState
                                               borderRadius:
                                                   BorderRadius.circular(10.0),
                                               boxShadow: [
-                                                BoxShadow(
+                                                const BoxShadow(
                                                   color: Colors.black26,
                                                   spreadRadius: 1,
                                                   blurRadius: 2,
@@ -394,7 +398,7 @@ class _PatientResponseTreatmentScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            Text('詳細'),
+                            const Text('詳細'),
                             ReactiveTextField(
                               formControlName: 'detail',
                               minLines: 3,
@@ -403,14 +407,14 @@ class _PatientResponseTreatmentScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            Text('母国の医療機関での診断名'),
+                            const Text('母国の医療機関での診断名'),
                             ReactiveTextField(
                               formControlName: 'diagnosisAtHomeCountry',
                             ),
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            Text('病状説明'),
+                            const Text('病状説明'),
                             ReactiveTextField(
                               formControlName: 'medicalConditionExplanation',
                               minLines: 3,
@@ -419,7 +423,7 @@ class _PatientResponseTreatmentScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            Text('発症の経緯'),
+                            const Text('発症の経緯'),
                             ReactiveTextField(
                               formControlName: 'historyOfOnset',
                               minLines: 3,
@@ -428,7 +432,7 @@ class _PatientResponseTreatmentScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            Text('現在行っている治療'),
+                            const Text('現在行っている治療'),
                             ReactiveTextField(
                               formControlName: 'currentTreatment',
                               minLines: 3,
@@ -533,7 +537,7 @@ class _PatientResponseTreatmentScreenState
                                         current:
                                             control.value == true ? 'あり' : 'なし',
                                         values: const ['あり', 'なし'],
-                                        iconList: [
+                                        iconList: const [
                                           Text('あり'),
                                           Text('なし'),
                                         ],
@@ -547,7 +551,7 @@ class _PatientResponseTreatmentScreenState
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                           boxShadow: [
-                                            BoxShadow(
+                                            const BoxShadow(
                                               color: Colors.black26,
                                               spreadRadius: 1,
                                               blurRadius: 2,
@@ -570,7 +574,7 @@ class _PatientResponseTreatmentScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            Text('詳細'),
+                            const Text('詳細'),
                             ReactiveTextField(
                               formControlName: 'medicalHistoryDetail',
                               minLines: 3,
@@ -579,8 +583,8 @@ class _PatientResponseTreatmentScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            Text('家族歴'),
-                            Text('詳細'),
+                            const Text('家族歴'),
+                            const Text('詳細'),
                             ReactiveTextField(
                               formControlName: 'familyHistoryDetail',
                               minLines: 3,
@@ -606,7 +610,7 @@ class _PatientResponseTreatmentScreenState
                                         current:
                                             control.value == true ? 'あり' : 'なし',
                                         values: const ['あり', 'なし'],
-                                        iconList: [
+                                        iconList: const [
                                           Text('あり'),
                                           Text('なし'),
                                         ],
@@ -620,7 +624,7 @@ class _PatientResponseTreatmentScreenState
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                           boxShadow: [
-                                            BoxShadow(
+                                            const BoxShadow(
                                               color: Colors.black26,
                                               spreadRadius: 1,
                                               blurRadius: 2,
@@ -643,7 +647,7 @@ class _PatientResponseTreatmentScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            Text('詳細'),
+                            const Text('詳細'),
                             ReactiveTextField(
                               formControlName: 'drugAllergyDetail',
                               minLines: 3,
@@ -654,7 +658,7 @@ class _PatientResponseTreatmentScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            Text('予算（自国の通貨でご入力ください）'),
+                            const Text('予算（自国の通貨でご入力ください）'),
                             ReactiveTextField(
                               formControlName: 'treatmentCosts',
                               keyboardType: TextInputType.number,
@@ -685,7 +689,7 @@ class _PatientResponseTreatmentScreenState
                                         current:
                                             control.value == true ? 'あり' : 'なし',
                                         values: const ['あり', 'なし'],
-                                        iconList: [
+                                        iconList: const [
                                           Text('あり'),
                                           Text('なし'),
                                         ],
@@ -699,7 +703,7 @@ class _PatientResponseTreatmentScreenState
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                           boxShadow: [
-                                            BoxShadow(
+                                            const BoxShadow(
                                               color: Colors.black26,
                                               spreadRadius: 1,
                                               blurRadius: 2,
@@ -722,14 +726,14 @@ class _PatientResponseTreatmentScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            Text('希望するエリア・医療機関名'),
+                            const Text('希望するエリア・医療機関名'),
                             ReactiveTextField(
                               formControlName:
                                   'desiredAreaMedicalInstitutionName',
                               minLines: 3,
                               maxLines: 3,
                             ),
-                            Text('理由'),
+                            const Text('理由'),
                             ReactiveTextField(
                               formControlName: 'reason',
                               minLines: 3,
@@ -742,7 +746,7 @@ class _PatientResponseTreatmentScreenState
                             ReactiveTextField(
                               formControlName: 'desiredDateOfConsultation',
                             ),
-                            Text('日本滞在予定期間'),
+                            const Text('日本滞在予定期間'),
                             ReactiveTextField(
                               formControlName: 'scheduledPeriodOfStayInJapan',
                               minLines: 3,
@@ -768,7 +772,7 @@ class _PatientResponseTreatmentScreenState
                                             ? '独立'
                                             : '要支援',
                                         values: const ['独立', '要支援'],
-                                        iconList: [
+                                        iconList: const [
                                           Text('独立'),
                                           Text('要支援'),
                                         ],
@@ -782,7 +786,7 @@ class _PatientResponseTreatmentScreenState
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                           boxShadow: [
-                                            BoxShadow(
+                                            const BoxShadow(
                                               color: Colors.black26,
                                               spreadRadius: 1,
                                               blurRadius: 2,
@@ -805,7 +809,7 @@ class _PatientResponseTreatmentScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            Text('詳細'),
+                            const Text('詳細'),
                             ReactiveTextField(
                               formControlName: 'walkingDetail',
                               minLines: 3,
@@ -826,7 +830,7 @@ class _PatientResponseTreatmentScreenState
                                             ? '独立'
                                             : '要支援',
                                         values: const ['独立', '要支援'],
-                                        iconList: [
+                                        iconList: const [
                                           Text('独立'),
                                           Text('要支援'),
                                         ],
@@ -840,7 +844,7 @@ class _PatientResponseTreatmentScreenState
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                           boxShadow: [
-                                            BoxShadow(
+                                            const BoxShadow(
                                               color: Colors.black26,
                                               spreadRadius: 1,
                                               blurRadius: 2,
@@ -863,7 +867,7 @@ class _PatientResponseTreatmentScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            Text('詳細'),
+                            const Text('詳細'),
                             ReactiveTextField(
                               formControlName: 'sittingDetail',
                               minLines: 3,
@@ -884,7 +888,7 @@ class _PatientResponseTreatmentScreenState
                                             ? '独立'
                                             : '要支援',
                                         values: const ['独立', '要支援'],
-                                        iconList: [
+                                        iconList: const [
                                           Text('独立'),
                                           Text('要支援'),
                                         ],
@@ -898,7 +902,7 @@ class _PatientResponseTreatmentScreenState
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                           boxShadow: [
-                                            BoxShadow(
+                                            const BoxShadow(
                                               color: Colors.black26,
                                               spreadRadius: 1,
                                               blurRadius: 2,
@@ -921,7 +925,7 @@ class _PatientResponseTreatmentScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            Text('詳細'),
+                            const Text('詳細'),
                             ReactiveTextField(
                               formControlName: 'mealDetail',
                               minLines: 3,
@@ -942,7 +946,7 @@ class _PatientResponseTreatmentScreenState
                                             ? '独立'
                                             : '要支援',
                                         values: const ['独立', '要支援'],
-                                        iconList: [
+                                        iconList: const [
                                           Text('独立'),
                                           Text('要支援'),
                                         ],
@@ -956,7 +960,7 @@ class _PatientResponseTreatmentScreenState
                                           borderRadius:
                                               BorderRadius.circular(10.0),
                                           boxShadow: [
-                                            BoxShadow(
+                                            const BoxShadow(
                                               color: Colors.black26,
                                               spreadRadius: 1,
                                               blurRadius: 2,
@@ -979,7 +983,7 @@ class _PatientResponseTreatmentScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            Text('詳細'),
+                            const Text('詳細'),
                             ReactiveTextField(
                               formControlName: 'excretionDetail',
                               minLines: 3,
@@ -998,7 +1002,7 @@ class _PatientResponseTreatmentScreenState
                                     contentPadding: EdgeInsets.zero,
                                     formControlName: 'aboutPregnancy',
                                     value: '妊娠していない',
-                                    title: Text('妊娠していない'),
+                                    title: const Text('妊娠していない'),
                                   ),
                                 ),
                               ],
@@ -1010,7 +1014,7 @@ class _PatientResponseTreatmentScreenState
                                     contentPadding: EdgeInsets.zero,
                                     formControlName: 'aboutPregnancy',
                                     value: '妊娠している可能性がある',
-                                    title: Text('妊娠している可能性がある'),
+                                    title: const Text('妊娠している可能性がある'),
                                   ),
                                 ),
                               ],
@@ -1022,7 +1026,7 @@ class _PatientResponseTreatmentScreenState
                                     contentPadding: EdgeInsets.zero,
                                     formControlName: 'aboutPregnancy',
                                     value: '妊娠している',
-                                    title: Text('妊娠している'),
+                                    title: const Text('妊娠している'),
                                   ),
                                 ),
                               ],
@@ -1066,7 +1070,7 @@ class _PatientResponseTreatmentScreenState
                             .createUpdateMedicalRecordPatientResponseTreatment(
                                 (ReactiveForm.of(context) as FormGroup));
                       },
-                      child: Text('保存する'),
+                      child: const Text('保存する'),
                     ),
                   )
                 ],

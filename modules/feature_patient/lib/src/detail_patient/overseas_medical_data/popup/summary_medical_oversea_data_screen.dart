@@ -1,9 +1,12 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+// Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 class SummaryMedicalOverseaDataScreen extends StatelessWidget {
   const SummaryMedicalOverseaDataScreen({super.key, required this.data});
@@ -28,10 +31,10 @@ class SummaryMedicalOverseaDataScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(Icons.close)),
+                icon: const Icon(Icons.close)),
           ],
         ),
-        Text('テキスト'),
+        const Text('テキスト'),
         TextFormField(
           minLines: 3,
           maxLines: 10,
@@ -40,13 +43,7 @@ class SummaryMedicalOverseaDataScreen extends StatelessWidget {
               isDense: true,
               hintText: data
                   .map((e) =>
-                      e.hospitalName! +
-                      '    ' +
-                      e.documentName! +
-                      '    ' +
-                      e.category! +
-                      '    ' +
-                      '${Dates.formShortDate(e.issueDate)}')
+                      '${e.hospitalName!}    ${e.documentName!}    ${e.category!}    ${Dates.formShortDate(e.issueDate)}')
                   .join('\n')),
         ),
         SizedBox(
@@ -59,24 +56,18 @@ class SummaryMedicalOverseaDataScreen extends StatelessWidget {
               onPressed: () {
                 copyToClipboard(data
                     .map((e) =>
-                        e.hospitalName! +
-                        '    ' +
-                        e.documentName! +
-                        '    ' +
-                        e.category! +
-                        '    ' +
-                        '${Dates.formShortDate(e.issueDate)}')
+                        '${e.hospitalName!}    ${e.documentName!}    ${e.category!}    ${Dates.formShortDate(e.issueDate)}')
                     .join('\n'));
                 snackBarWidget(
                     message: 'コピーされました',
-                    prefixIcon: Icon(
+                    prefixIcon: const Icon(
                       Icons.check_circle,
                       color: Colors.white,
                     ));
                 Navigator.pop(context);
               },
 
-              child: Text('コピーする'), // TODO: l10n 対応 (コピーする) (copy)
+              child: const Text('コピーする'), // TODO: l10n 対応 (コピーする) (copy)
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
@@ -85,7 +76,7 @@ class SummaryMedicalOverseaDataScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('　閉じる　'), // TODO: l10n 対応 (閉じる) (close)
+              child: const Text('　閉じる　'), // TODO: l10n 対応 (閉じる) (close)
             ),
           ],
         )

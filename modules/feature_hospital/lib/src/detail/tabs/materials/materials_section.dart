@@ -1,17 +1,21 @@
-import 'package:core_l10n/l10n.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import 'material_model.dart';
 import 'materials_form.dart';
 import 'popup.dart';
+import 'preview_file.dart';
 import 'view_popup.dart';
 
 class MaterialSection extends StatefulWidget {
@@ -197,10 +201,10 @@ class MaterialSectionState extends State<MaterialSection> {
                                       },
                                     );
                                   }),
-                              Expanded(flex: 2, child: Text('パンフレット名')),
-                              Expanded(child: Text('作成者')),
-                              Expanded(child: Text('発行日')),
-                              Expanded(child: Text('共有')),
+                              const Expanded(flex: 2, child: Text('パンフレット名')),
+                              const Expanded(child: Text('作成者')),
+                              const Expanded(child: Text('発行日')),
+                              const Expanded(child: Text('共有')),
                             ],
                           ),
                           const Divider(
@@ -216,50 +220,55 @@ class MaterialSectionState extends State<MaterialSection> {
                             itemCount: value.data?.length ?? 0,
                             itemBuilder: (context, index) {
                               final data = value.data?[index];
-                              return Row(
-                                children: [
-                                  ValueListenableBuilder(
-                                      valueListenable: selected,
-                                      builder: (context, sels, _) {
-                                        return Checkbox(
-                                          value: sels.contains(data?.id),
-                                          onChanged: (sel) {
-                                            if (sel != null) {
-                                              if (sel) {
-                                                selected.value = [
-                                                  ...sels,
-                                                  data?.id ?? ''
-                                                ];
-                                              } else {
-                                                selected.value = [
-                                                  ...sels.where(
-                                                      (e) => e != data?.id)
-                                                ];
+                              return InkWell(
+                                onTap: (){
+                                  showPreviewFile(context, data!);
+                                },
+                                child: Row(
+                                  children: [
+                                    ValueListenableBuilder(
+                                        valueListenable: selected,
+                                        builder: (context, sels, _) {
+                                          return Checkbox(
+                                            value: sels.contains(data?.id),
+                                            onChanged: (sel) {
+                                              if (sel != null) {
+                                                if (sel) {
+                                                  selected.value = [
+                                                    ...sels,
+                                                    data?.id ?? ''
+                                                  ];
+                                                } else {
+                                                  selected.value = [
+                                                    ...sels.where(
+                                                        (e) => e != data?.id)
+                                                  ];
+                                                }
                                               }
-                                            }
-                                          },
-                                        );
-                                      }),
-                                  Expanded(
-                                    flex: 2,
-                                    child: Text(data?.brochureName ?? ''),
-                                  ),
-                                  Expanded(
-                                    child: Text(data?.author ?? ''),
-                                  ),
-                                  Expanded(
-                                    child: Text(data?.dateOfIssue == null
-                                        ? ''
-                                        : Dates.formShortDate(
-                                            data?.dateOfIssue)),
-                                  ),
-                                  Expanded(
-                                    flex: 1,
-                                    child: data?.share == null
-                                        ? SizedBox()
-                                        : Icon(Icons.person),
-                                  ),
-                                ],
+                                            },
+                                          );
+                                        }),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(data?.brochureName ?? ''),
+                                    ),
+                                    Expanded(
+                                      child: Text(data?.author ?? ''),
+                                    ),
+                                    Expanded(
+                                      child: Text(data?.dateOfIssue == null
+                                          ? ''
+                                          : Dates.formShortDate(
+                                              data?.dateOfIssue)),
+                                    ),
+                                    Expanded(
+                                      flex: 1,
+                                      child: data?.share == null
+                                          ? const SizedBox()
+                                          : const Icon(Icons.person),
+                                    ),
+                                  ],
+                                ),
                               );
                             },
                             separatorBuilder:
@@ -282,10 +291,10 @@ class MaterialSectionState extends State<MaterialSection> {
             builder: (context, sels, _) {
               return RowSeparated(
                 separatorBuilder: (BuildContext context, int index) {
-                  return SizedBox(width: 16);
+                  return const SizedBox(width: 16);
                 },
                 children: [
-                  Spacer(),
+                  const Spacer(),
                   ValueListenableListener(
                     valueListenable: context.read<MaterialsModel>().delete,
                     onListen: () {
@@ -327,16 +336,16 @@ class MaterialSectionState extends State<MaterialSection> {
                                               value: context
                                                   .read<MaterialsModel>(),
                                               child: AlertDialog(
-                                                title: Text("削除確認"),
+                                                title: const Text('削除確認'),
                                                 content:
-                                                    Text("選択したデータを削除しますか？"),
+                                                    const Text('選択したデータを削除しますか？'),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("キャンセル"),
+                                                    child: const Text('キャンセル'),
                                                   ),
                                                   TextButton(
                                                     onPressed: () {
@@ -348,7 +357,7 @@ class MaterialSectionState extends State<MaterialSection> {
                                                       Navigator.of(context)
                                                           .pop();
                                                     },
-                                                    child: Text("削除する"),
+                                                    child: const Text('削除する'),
                                                   ),
                                                 ],
                                               ),
@@ -359,7 +368,7 @@ class MaterialSectionState extends State<MaterialSection> {
                                 isLoading: value.loading,
                                 loadingColor: context.appTheme.primaryColor,
                                 child: Text(
-                                  "削除する",
+                                  '削除する',
                                   style: context.textTheme.labelLarge?.copyWith(
                                       color: context.appTheme.primaryColor),
                                 ),
@@ -368,7 +377,7 @@ class MaterialSectionState extends State<MaterialSection> {
                   ),
                   ElevatedButton(
                     onPressed: () {},
-                    child: Text("共有する"),
+                    child: const Text('共有する'),
                   ),
                   ElevatedButton(
                     onPressed: () {
@@ -386,16 +395,28 @@ class MaterialSectionState extends State<MaterialSection> {
                         );
                       }
                     },
-                    child: Text("閲覧する"),
+                    child: const Text('閲覧する'),
                   ),
                   ElevatedButton(
                     onPressed: () {},
-                    child: Text("印刷する"),
+                    child: const Text('印刷する'),
                   ),
                 ],
               );
             }),
       ],
+    );
+  }
+
+  void showPreviewFile(BuildContext context, MaterialHospitalResponse data) {
+    showDialog(
+      context: context,
+      builder: (_) => Provider.value(
+        value: context.read<MaterialsModel>(),
+        child: AlertDialog(
+          content: PreviewFile(data: data),
+        ),
+      ),
     );
   }
 
@@ -406,10 +427,7 @@ class MaterialSectionState extends State<MaterialSection> {
         value: context.read<MaterialsModel>(),
         child: AlertDialog(
           content: ReactiveFormConfig(
-            validationMessages: <String, ValidationMessageFunction>{
-              ValidationMessage.required: (error) =>
-                  context.l10n.mgsFieldRequired,
-            },
+            validationMessages: validationMessages,
             child: ReactiveFormBuilder(
               form: () => materialsForm(hospitalRecordId: widget.id, file: file)
                 ..markAllAsTouched(),

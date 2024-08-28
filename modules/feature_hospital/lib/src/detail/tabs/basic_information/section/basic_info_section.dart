@@ -1,12 +1,16 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import '../../../hospital_detail_model.dart';
 import '../basic_information_model.dart';
 
@@ -671,7 +675,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                                 formControlName: 'onlineCheck',
                                                 value: '可',
                                                 title: Text(
-                                                  "可",
+                                                  '可',
                                                   style: context
                                                       .textTheme.bodySmall,
                                                 ),
@@ -682,7 +686,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                                 formControlName: 'onlineCheck',
                                                 value: '不可',
                                                 title: Text(
-                                                  "不可",
+                                                  '不可',
                                                   style: context
                                                       .textTheme.bodySmall,
                                                 ),
@@ -713,7 +717,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                                 value: '可',
                                                 onChanged: (value) {},
                                                 title: Text(
-                                                  "可",
+                                                  '可',
                                                   style: context
                                                       .textTheme.bodySmall,
                                                 ),
@@ -725,7 +729,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                                 value: '不可',
                                                 onChanged: (value) {},
                                                 title: Text(
-                                                  "不可",
+                                                  '不可',
                                                   style: context
                                                       .textTheme.bodySmall,
                                                 ),
@@ -1057,9 +1061,9 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                         children: [
                           Row(
                             children: [
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 150,
-                                child: const Text(
+                                child: Text(
                                   '部門',
                                   style: TextStyle(
                                     fontFamily: 'NotoSansJP',
@@ -1071,9 +1075,9 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 150,
-                                child: const Text(
+                                child: Text(
                                   '診療時間',
                                   style: TextStyle(
                                     fontFamily: 'NotoSansJP',
@@ -1191,7 +1195,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Mon',
@@ -1210,7 +1214,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Tue',
@@ -1229,7 +1233,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Wed',
@@ -1248,7 +1252,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Thu',
@@ -1267,7 +1271,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Fri',
@@ -1286,7 +1290,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Sat',
@@ -1305,7 +1309,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift1Sun',
@@ -1346,7 +1350,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Mon',
@@ -1365,7 +1369,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Tue',
@@ -1384,7 +1388,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Wed',
@@ -1403,7 +1407,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Thu',
@@ -1422,7 +1426,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Fri',
@@ -1441,7 +1445,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Sat',
@@ -1460,7 +1464,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 80,
                                 child: ReactiveDropdownFormField(
                                   formControlName: 'shift2Sun',

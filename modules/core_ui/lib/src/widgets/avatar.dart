@@ -1,8 +1,13 @@
+// Dart imports:
 import 'dart:io';
 
-import 'package:cached_network_image/cached_network_image.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:cached_network_image/cached_network_image.dart';
+
+// Project imports:
 import '../images/network_image_provider.dart';
 
 enum AvatarSize {

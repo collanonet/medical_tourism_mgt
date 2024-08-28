@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
 part 'doctor_profile_hospital_request.g.dart';
@@ -25,6 +26,7 @@ class DoctorProfileHospitalRequest {
   String? faxNumber;
   String? email;
   String? remark2;
+  String? fileDoctor;
 
   DoctorProfileHospitalRequest({
     this.id,
@@ -47,10 +49,12 @@ class DoctorProfileHospitalRequest {
     this.faxNumber,
     this.email,
     this.remark2,
+    this.fileDoctor,
   });
 
   factory DoctorProfileHospitalRequest.fromJson(Map<String, dynamic> json) =>
       _$DoctorProfileHospitalRequestFromJson(json);
+
   Map<String, dynamic> toJson() => _$DoctorProfileHospitalRequestToJson(this);
 }
 

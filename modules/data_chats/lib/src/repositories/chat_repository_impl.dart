@@ -1,8 +1,7 @@
-import 'dart:io';
-
-import 'package:core_network/entities.dart';
+// Package imports:
 import 'package:injectable/injectable.dart';
 
+// Project imports:
 import '../providers/chat_local_provider.dart';
 import '../providers/chat_remote_provider.dart';
 import 'chat_repository.dart';

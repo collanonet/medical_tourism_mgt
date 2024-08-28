@@ -1,12 +1,16 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import 'itinerary_simplified_model.dart';
 
 class ItinerarySimplifiedScreen extends StatefulWidget {
@@ -70,7 +74,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                         SizedBox(
                           height: context.appTheme.spacing.marginMedium,
                         ),
-                        Text('2023/11/11〜2023/11/15')
+                        const Text('2023/11/11〜2023/11/15')
                       ],
                     ),
                   ],
@@ -84,7 +88,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                   children: [
                     TabBarWidget(
                       selectedIndex: 0,
-                      menu: ['行程表'],
+                      menu: const ['行程表'],
                       onPressed: (index) {},
                     ),
                   ],
@@ -149,7 +153,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                         Expanded(
                                           child: ReactiveTextField(
                                             formControlName: 'patientName',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text(
                                                 '患者名',
                                               ),
@@ -164,7 +168,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                           child: ReactiveTextField(
                                             formControlName:
                                                 'Medical_institution_name',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text(
                                                 '医療機関名',
                                               ),
@@ -175,7 +179,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                           width: context
                                               .appTheme.spacing.marginMedium,
                                         ),
-                                        Expanded(child: SizedBox()),
+                                        const Expanded(child: SizedBox()),
                                       ],
                                     ),
                                     Row(
@@ -184,7 +188,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                           child: ReactiveTextField(
                                             formControlName:
                                                 'Consultation_date_and_time',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text(
                                                 '受診日時',
                                               ),
@@ -198,7 +202,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                         Expanded(
                                           child: ReactiveTextField(
                                             formControlName: 'Start_time',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text(
                                                 '開始時間',
                                               ),
@@ -213,7 +217,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                           child: ReactiveTextField(
                                             formControlName:
                                                 'Ending_time_planned',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text(
                                                 '終了時間（予定）',
                                               ),
@@ -228,7 +232,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                           child: ReactiveTextField(
                                             formControlName:
                                                 'health_checkup_package',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text(
                                                 '健康診断パッケージ',
                                               ),
@@ -273,7 +277,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                                           '健診日',
                                                           style: context
                                                               .textTheme
-                                                              .bodyText1,
+                                                              .bodyLarge,
                                                         ),
                                                         Row(
                                                           children: [
@@ -284,7 +288,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                                                 onChanged:
                                                                     (value) {},
                                                                 child:
-                                                                    Text('同日')),
+                                                                    const Text('同日')),
                                                             RadioMenuButton(
                                                                 value: false,
                                                                 groupValue:
@@ -292,7 +296,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                                                 onChanged:
                                                                     (value) {},
                                                                 child:
-                                                                    Text('別日')),
+                                                                    const Text('別日')),
                                                           ],
                                                         )
                                                       ],
@@ -412,7 +416,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                     child: ReactiveTextField(
                                       formControlName:
                                           'Explanation_of_various_tests',
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           '各種検査の説明',
                                         ),
@@ -429,7 +433,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                           'Explanation_of_various_tests_note',
                                       minLines: 3,
                                       maxLines: 3,
-                                      decoration: InputDecoration(),
+                                      decoration: const InputDecoration(),
                                     ),
                                   ),
                                 ],
@@ -442,7 +446,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                           'Meals_before_and_on_the_day_of_the_test',
                                       minLines: 3,
                                       maxLines: 3,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           '検査前・当日の食事について',
                                         ),
@@ -458,7 +462,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                       formControlName: 'About_taking_medicine',
                                       minLines: 3,
                                       maxLines: 3,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           '薬の服用について',
                                         ),
@@ -475,7 +479,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                           'What_to_bring_on_the_day_of_the_medical_examination',
                                       minLines: 3,
                                       maxLines: 3,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           '健康診断当日の持ち物',
                                         ),
@@ -491,7 +495,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                       formControlName: 'Other_considerations',
                                       minLines: 3,
                                       maxLines: 3,
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           'その他の考慮事項',
                                         ),
@@ -525,7 +529,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                     children: [
                                       Text(
                                         '通訳者またはガイド',
-                                        style: context.textTheme.bodyText1,
+                                        style: context.textTheme.bodyLarge,
                                       ),
                                       Row(
                                         children: [
@@ -533,12 +537,12 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                               value: false,
                                               groupValue: true,
                                               onChanged: (value) {},
-                                              child: Text('あり')),
+                                              child: const Text('あり')),
                                           RadioMenuButton(
                                               value: false,
                                               groupValue: true,
                                               onChanged: (value) {},
-                                              child: Text('なし')),
+                                              child: const Text('なし')),
                                         ],
                                       )
                                     ],
@@ -550,7 +554,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                   Expanded(
                                     child: ReactiveTextField(
                                       formControlName: 'date',
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           '合流日時',
                                         ),
@@ -564,7 +568,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                   Expanded(
                                     child: ReactiveTextField(
                                       formControlName: 'time',
-                                      decoration: InputDecoration(),
+                                      decoration: const InputDecoration(),
                                     ),
                                   ),
                                   SizedBox(
@@ -574,7 +578,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                   Expanded(
                                     child: ReactiveTextField(
                                       formControlName: 'meeting_place',
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           '合流場所',
                                         ),
@@ -607,7 +611,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                     children: [
                                       Text(
                                         '送迎',
-                                        style: context.textTheme.bodyText1,
+                                        style: context.textTheme.bodyLarge,
                                       ),
                                       Row(
                                         children: [
@@ -615,12 +619,12 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                               value: false,
                                               groupValue: true,
                                               onChanged: (value) {},
-                                              child: Text('あり')),
+                                              child: const Text('あり')),
                                           RadioMenuButton(
                                               value: false,
                                               groupValue: true,
                                               onChanged: (value) {},
-                                              child: Text('なし')),
+                                              child: const Text('なし')),
                                         ],
                                       )
                                     ],
@@ -632,7 +636,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                   Expanded(
                                     child: ReactiveTextField(
                                       formControlName: 'date',
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           '合流日時',
                                         ),
@@ -646,7 +650,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                   Expanded(
                                     child: ReactiveTextField(
                                       formControlName: 'time',
-                                      decoration: InputDecoration(),
+                                      decoration: const InputDecoration(),
                                     ),
                                   ),
                                   SizedBox(
@@ -656,7 +660,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                   Expanded(
                                     child: ReactiveTextField(
                                       formControlName: 'place',
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           '場所',
                                         ),
@@ -670,7 +674,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                   Expanded(
                                     child: ReactiveTextField(
                                       formControlName: 'Driver_in_charge',
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           '担当ドライバー',
                                         ),
@@ -729,7 +733,7 @@ class _ItinerarySimplifiedScreenState extends State<ItinerarySimplifiedScreen> {
                                       : null,
                                   child: WithLoadingButton(
                                     isLoading: value.loading,
-                                    child: Text('保存する'),
+                                    child: const Text('保存する'),
                                   ));
                             },
                           );

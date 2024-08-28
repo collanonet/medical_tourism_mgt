@@ -1,7 +1,11 @@
-import 'package:core_ui/core_ui.dart';
-import 'package:core_ui/widgets.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/widgets.dart';
+
+// Project imports:
 import 'tab/facility_page.dart';
 import 'tab/hotel_registration_page.dart';
 import 'tab/hotel_search_page.dart';
@@ -9,7 +13,8 @@ import 'tab/itinerary_page.dart';
 import 'tab/related_parties_page.dart';
 
 class DetailProcessChartScreen extends StatefulWidget {
-  const DetailProcessChartScreen({super.key});
+  const DetailProcessChartScreen({super.key, this.id});
+  final String? id;
 
   @override
   State<DetailProcessChartScreen> createState() =>
@@ -28,7 +33,7 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
   ];
 
   List<Widget> pages = const [
-    ItineraryPage(),
+    // ItineraryPage(),
     FacilityPage(),
     HotelSearchPage(),
     HotelRegistrationPage(),
@@ -81,15 +86,15 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
                   SizedBox(
                     height: context.appTheme.spacing.marginMedium,
                   ),
-                  Text('2023/11/11〜2023/11/15')
+                  const Text('2023/11/11〜2023/11/15')
                 ],
               ),
-              Spacer(),
-              Text('進捗'),
+              const Spacer(),
+              const Text('進捗'),
               SizedBox(
                 width: context.appTheme.spacing.marginMedium,
               ),
-              ElevatedButton(onPressed: () {}, child: Text('新規見積依頼'))
+              ElevatedButton(onPressed: () {}, child: const Text('新規見積依頼'))
             ],
           ),
         ),
@@ -125,7 +130,13 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
                       context.appTheme.spacing.borderRadiusMedium),
                   color: Colors.white,
                 ),
-                child: pages[index],
+                child: [
+                  ItineraryPage(id: widget.id!),
+                  const FacilityPage(),
+                  const HotelSearchPage(),
+                  const HotelRegistrationPage(),
+                  const RelatedPartiesPage(),
+                ][index],
               ),
             );
           },

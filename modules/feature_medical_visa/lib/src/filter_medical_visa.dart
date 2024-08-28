@@ -1,13 +1,17 @@
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+// Project imports:
 import 'filter_medical_visa_form.dart';
 import 'medical_visa_model.dart';
 
@@ -19,14 +23,13 @@ class MedicalVisaFilter extends StatefulWidget {
 }
 
 class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
-  bool _check = false;
   final formatter = InputFormatter();
   @override
   Widget build(BuildContext context) {
     return Consumer<MedicalVisaModel>(
       builder: (context, model, child) {
         return ReactiveFormConfig(
-          validationMessages: validationMessagesFilterPatient(context),
+          validationMessages: validationMessages,
           child: ReactiveFormBuilder(
             form: () => formFilterMedicalVisa(),
             builder: (context, formGroup, child) {
@@ -113,7 +116,7 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                             contentPadding: EdgeInsets.zero,
                             controlAffinity: ListTileControlAffinity.leading,
                             formControlName: 'subjects_withdrawal',
-                            title: Text('取下対象者'),
+                            title: const Text('取下対象者'),
                           ),
                         ),
                       ],
@@ -125,7 +128,7 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               '日付絞込み',
                             ),
                             RowSeparated(
@@ -142,8 +145,8 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                                     controlAffinity:
                                         ListTileControlAffinity.leading,
                                     formControlName: 'refinement_date',
-                                    value: "来日日",
-                                    title: Text('来日日'),
+                                    value: '来日日',
+                                    title: const Text('来日日'),
                                   ),
                                 ),
                                 IntrinsicWidth(
@@ -152,8 +155,8 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                                     controlAffinity:
                                         ListTileControlAffinity.leading,
                                     formControlName: 'refinement_date',
-                                    value: "帰国日",
-                                    title: Text('帰国日'),
+                                    value: '帰国日',
+                                    title: const Text('帰国日'),
                                   ),
                                 ),
                                 IntrinsicWidth(
@@ -162,8 +165,8 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                                     controlAffinity:
                                         ListTileControlAffinity.leading,
                                     formControlName: 'refinement_date',
-                                    value: "身元保証書発行日",
-                                    title: Text('身元保証書発行日'),
+                                    value: '身元保証書発行日',
+                                    title: const Text('身元保証書発行日'),
                                   ),
                                 ),
                               ],
@@ -265,7 +268,7 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      "期間（至）",
+                                      '期間（至）',
                                       style: context.textTheme.bodySmall,
                                     ),
                                     SizedBox(
@@ -344,7 +347,7 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                         SizedBox(width: context.appTheme.spacing.marginMedium),
                         ElevatedButton(
                           onPressed: () {},
-                          child: Text('検索'),
+                          child: const Text('検索'),
                         ),
                       ],
                     ),

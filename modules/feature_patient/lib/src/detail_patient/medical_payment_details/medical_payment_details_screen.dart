@@ -1,11 +1,14 @@
-import 'package:core_l10n/l10n.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+// Project imports:
 import 'medical_payment_details_file.dart';
 import 'medical_payment_details_form.dart';
 import 'medical_payment_details_model.dart';
@@ -170,7 +173,7 @@ class _MedicalPaymentDetailScreenState
               Checkbox(
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(4),
-                  side: BorderSide(color: Colors.grey),
+                  side: const BorderSide(color: Colors.grey),
                 ),
                 checkColor: Colors.white,
                 value: false,
@@ -193,7 +196,7 @@ class _MedicalPaymentDetailScreenState
               )),
             ],
           ),
-          Divider(),
+          const Divider(),
           ListView(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),
@@ -208,20 +211,20 @@ class _MedicalPaymentDetailScreenState
                       Checkbox(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4),
-                          side: BorderSide(color: Colors.grey),
+                          side: const BorderSide(color: Colors.grey),
                         ),
                         checkColor: Colors.white,
                         value: false,
                         onChanged: (value) {},
                       ),
-                      Expanded(child: Text('りんくうメディカルクリニック')),
+                      const Expanded(child: Text('りんくうメディカルクリニック')),
                       Expanded(
                           child: Text(
                         '診療明細報酬書',
                         style: context.textTheme.bodySmall
                             ?.copyWith(color: context.appTheme.primaryColor),
                       )),
-                      Expanded(child: Text('2023/06/30')),
+                      const Expanded(child: Text('2023/06/30')),
                     ],
                   ),
                 ),
@@ -283,10 +286,7 @@ class _MedicalPaymentDetailScreenState
         value: context.read<MedicalPaymentDetailModel>(),
         child: AlertDialog(
           content: ReactiveFormConfig(
-            validationMessages: <String, ValidationMessageFunction>{
-              ValidationMessage.required: (error) =>
-                  context.l10n.mgsFieldRequired,
-            },
+            validationMessages: validationMessages,
             child: ReactiveFormBuilder(
               form: () =>
                   medicalPaymentForm(medicalRecordId: widget.id!, file: file)

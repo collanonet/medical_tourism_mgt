@@ -1,12 +1,17 @@
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import '../document/document_model.dart';
+
+// Project imports:
 import 'contrant_model.dart';
 
 class Popup extends StatelessWidget {
@@ -25,11 +30,9 @@ class Popup extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             if (title != null) ...{
-              Flexible(
-                child: Text(
-                  title!,
-                  style: Theme.of(context).textTheme.titleLarge,
-                ),
+              Text(
+                title!,
+                style: Theme.of(context).textTheme.titleLarge,
               ),
               SizedBox(
                 width: context.appTheme.spacing.marginMedium,
@@ -39,13 +42,14 @@ class Popup extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(Icons.close)),
+                icon: const Icon(Icons.close)),
           ],
         ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Expanded(
+            IntrinsicWidth(
+              stepWidth: 300,
               child: Column(
                 children: [
                   Text(
@@ -64,11 +68,11 @@ class Popup extends StatelessWidget {
                         return ReactiveTextField<DateTime>(
                           formControlName: 'updatedOn',
                           valueAccessor: DateTimeValueAccessor(
-                              //dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
+                            dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                          ),
                           decoration: InputDecoration(
                             label: const Text(
-                              "更新日",
+                              '更新日',
                             ),
                             suffixIcon: IconButton(
                               icon: const Icon(
@@ -91,7 +95,8 @@ class Popup extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            IntrinsicWidth(
+              stepWidth: 300,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisSize: MainAxisSize.min,
@@ -104,7 +109,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
                       formControlName: 'DocumentName',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: 'ファイル名',
                       ),
                     ),
@@ -112,18 +117,6 @@ class Popup extends StatelessWidget {
                 ],
               ),
             ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            Expanded(
-              child: SizedBox.shrink(),
-            ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            Expanded(
-              child: SizedBox.shrink(),
-            )
           ],
         ),
         SizedBox(
@@ -137,16 +130,15 @@ class Popup extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('キャンセル'),
+              child: const Text('キャンセル'),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
             ValueListenableListener(
-              valueListenable: context.read<DocumentModel>().submitDocumentData,
+              valueListenable: context.read<ContrantModel>().submitData,
               onListen: () {
-                final value =
-                    context.read<DocumentModel>().submitDocumentData.value;
+                final value = context.read<ContrantModel>().submitData.value;
 
                 if (value.hasError) {
                   snackBarWidget(
@@ -166,19 +158,16 @@ class Popup extends StatelessWidget {
                 }
               },
               child: ValueListenableBuilder(
-                  valueListenable:
-                      context.read<DocumentModel>().submitDocumentData,
+                  valueListenable: context.read<ContrantModel>().submitData,
                   builder: (context, value, _) {
                     return ElevatedButton(
                       onPressed: value.loading
                           ? null
                           : () {
-                              context
-                                  .read<DocumentModel>()
-                                  .submitDocument(formGroup);
+                              context.read<ContrantModel>().submit(formGroup);
                             },
                       child: WithLoadingButton(
-                          isLoading: value.loading, child: Text('保存する')),
+                          isLoading: value.loading, child: const Text('保存する')),
                     );
                   }),
             ),

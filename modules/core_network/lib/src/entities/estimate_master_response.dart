@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'estimate_master_response.g.dart';
 @JsonSerializable()
 class EstimateMasterResponse {

@@ -1,11 +1,15 @@
-import 'package:core_ui/core_ui.dart';
-import 'package:core_utils/core_utils.dart';
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_ui/core_ui.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+// Project imports:
 import 'filter_process_chart_form.dart';
 import 'process_chart_model.dart';
 
@@ -23,7 +27,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
     return Consumer<ProcessChartModel>(
       builder: (context, model, child) {
         return ReactiveFormConfig(
-          validationMessages: validationMessagesFilterPatient(context),
+          validationMessages: validationMessages,
           child: ReactiveFormBuilder(
             form: () => formFilterPatient(),
             builder: (context, formGroup, child) {
@@ -250,6 +254,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                 context
                                     .read<ProcessChartModel>()
                                     .fetchItinerary(
+                                      id: formGroup.control('_id').value,
                                       tourName:
                                           formGroup.control('tourName').value,
                                       classification: formGroup
@@ -260,7 +265,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                       dateTo: formGroup.control('dateTo').value,
                                     );
                               },
-                              child: Text('検索'),
+                              child: const Text('検索'),
                             );
                           },
                         ),

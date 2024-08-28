@@ -1,9 +1,14 @@
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_utils/core_utils.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import 'application_beauty_form.dart';
 import 'application_beauty_model.dart';
 import 'application_beauty_screen.dart';
@@ -27,9 +32,7 @@ class ApplicationBeautyPage extends StatelessWidget {
               return Skeletonizer(
                 enabled: value.loading,
                 child: ReactiveFormConfig(
-                  validationMessages: {
-                    ValidationMessage.required: (error) => 'この項目は必須です',
-                  },
+                  validationMessages: validationMessages,
                   child: ReactiveFormBuilder(
                     form: () => formApplicationBeauty(data: value.data),
                     builder: (context, formGroup, child) {

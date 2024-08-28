@@ -1,13 +1,17 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flex_color_picker/flex_color_picker.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import 'type_model.dart';
 
 class ReportTypeScreen extends StatefulWidget {
@@ -130,7 +134,7 @@ class _ReportTypeScreenState extends State<ReportTypeScreen> {
                                                                   currentForm));
                                                     }
                                                   },
-                                                  icon: Icon(
+                                                  icon: const Icon(
                                                     Icons.remove_circle,
                                                     color: Colors.red,
                                                   ))

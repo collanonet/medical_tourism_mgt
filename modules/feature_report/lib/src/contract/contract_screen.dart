@@ -1,12 +1,14 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+// Project imports:
 import '../../feature_report.gm.dart';
 import 'contract_model.dart';
 
@@ -26,7 +28,7 @@ class ContractScreen extends StatelessWidget {
             color: Colors.white,
             borderRadius: BorderRadius.circular(10),
           ),
-          padding: EdgeInsets.all(16),
+          padding: const EdgeInsets.all(16),
           child: ColumnSeparated(
             separatorBuilder: (context, index) => SizedBox(
               height: context.appTheme.spacing.marginMedium,
@@ -39,7 +41,7 @@ class ContractScreen extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('契約書名'),
+                      const Text('契約書名'),
                       IntrinsicWidth(
                         stepWidth: 300,
                         child: ReactiveTextField(
@@ -130,10 +132,10 @@ class ContractScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                  Spacer(),
+                  const Spacer(),
                   ElevatedButton(
                     onPressed: () {},
-                    child: Text('　検索　'),
+                    child: const Text('　検索　'),
                   ),
                 ],
               )
@@ -148,7 +150,7 @@ class ContractScreen extends StatelessWidget {
               onPressed: () {
                 context.router.push(const ContractDetailRoute());
               },
-              child: Text('新規登録'),
+              child: const Text('新規登録'),
             ),
           ],
         ),
@@ -159,7 +161,7 @@ class ContractScreen extends StatelessWidget {
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
             ),
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: Column(
               children: [
                 const Row(

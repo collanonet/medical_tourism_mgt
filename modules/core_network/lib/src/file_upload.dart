@@ -1,10 +1,9 @@
-import 'dart:convert';
+// Dart imports:
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:core_utils/core_utils.dart';
+// Package imports:
 import 'package:dio/dio.dart';
-import 'package:http/http.dart' as http;
 import 'package:injectable/injectable.dart';
 
 @lazySingleton
@@ -21,9 +20,9 @@ class FileUploadService {
     }
 
     try {
-      final _data = FormData();
+      final data = FormData();
 
-      _data.files.add(MapEntry(
+      data.files.add(MapEntry(
         'file',
         MultipartFile.fromBytes(
           file,
@@ -43,7 +42,7 @@ class FileUploadService {
 
       final responseD = await dio.post(
         '/files/upload',
-        data: _data,
+        data: data,
         options: Options(
           method: 'POST',
           headers: {

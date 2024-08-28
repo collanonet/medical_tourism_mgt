@@ -1,10 +1,14 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_web_appointment/data_web_appointment.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
-import 'package:reactive_forms/src/models/models.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
+// Project imports:
 import 'web_appointment_detail_form.dart';
 
 @injectable
@@ -209,10 +213,26 @@ class WebAppointmentDetailModel {
       data.proposedDates?.map((e) {
         candidateDate.add(FormGroup({
           'id': FormControl<String>(value: e.id),
-          'preferredDate': FormControl<DateTime>(value: e.proposedDate),
+          'preferredDate': FormControl<DateTime>(
+            value: e.proposedDate,
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
           'choice': FormControl<String>(value: e.selectMorningAfternoonAllDay),
-          'timePeriodFrom': FormControl<String>(value: e.timeZoneFrom),
-          'timePeriodTo': FormControl<String>(value: e.timeZoneTo),
+          'timePeriodFrom':
+              FormControl<String>(value: e.timeZoneFrom, validators: [
+            Validators.pattern(
+              ValidatorRegExp.time,
+            ),
+          ]),
+          'timePeriodTo': FormControl<String>(value: e.timeZoneTo, validators: [
+            Validators.pattern(
+              ValidatorRegExp.time,
+            ),
+          ]),
         }));
       }).toList();
     }
@@ -341,6 +361,41 @@ class WebAppointmentDetailModel {
     } catch (e) {
       logger.e(e);
       webBookings.value = AsyncData(error: e);
+    }
+  }
+
+  Future<void> updateBooking() async {
+    try {
+      TreamentRequest data;
+
+      if (bookingByPatient.value.hasData) {
+        data = TreamentRequest.fromJson(
+            bookingByPatient.value.requireData.toJson());
+
+        data = data.copyWith(
+          desiredDate1: formGroup.control('preferredDate1').value,
+          desiredDate2: formGroup.control('preferredDate2').value,
+          desiredDate3: formGroup.control('preferredDate3').value,
+          medicalName: hospital.value.requireData.hospitalNameKatakana,
+          reason: formGroup.control('remarks').value,
+        );
+      } else {
+        data = TreamentRequest(
+          desiredDate1: formGroup.control('preferredDate1').value,
+          desiredDate2: formGroup.control('preferredDate2').value,
+          desiredDate3: formGroup.control('preferredDate3').value,
+          medicalName: hospital.value.requireData.hospitalNameKatakana,
+          reason: formGroup.control('remarks').value,
+        );
+      }
+
+      bookingByPatient.value = const AsyncData(loading: true);
+      final result = await repository.updateBooking(
+          patient.value.requireData.id,
+          TreamentRequest.fromJson(data.toJson()));
+      bookingByPatient.value = AsyncData(data: result);
+    } catch (e) {
+      logger.e(e);
     }
   }
 }

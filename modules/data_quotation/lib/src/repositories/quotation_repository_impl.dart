@@ -1,8 +1,7 @@
-import 'dart:io';
-
-import 'package:core_network/entities.dart';
+// Package imports:
 import 'package:injectable/injectable.dart';
 
+// Project imports:
 import '../providers/quotation_local_provider.dart';
 import '../providers/quotation_remote_provider.dart';
 import 'quotation_repository.dart';

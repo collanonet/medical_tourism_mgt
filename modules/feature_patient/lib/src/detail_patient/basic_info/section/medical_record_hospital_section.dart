@@ -1,10 +1,14 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import '../basic_info_model.dart';
 
 class MedicalRecordHospitalSection extends StatelessWidget {
@@ -62,7 +66,7 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                                   Expanded(
                                     child: ReactiveTextField(
                                       formControlName: 'hospitalName',
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           '病院名', //   TODO: l10n 対応 (病院名) (hospitalName)
                                         ),
@@ -80,7 +84,7 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                                   Expanded(
                                     child: ReactiveTextField(
                                       formControlName: 'medicalCardNumber',
-                                      decoration: InputDecoration(
+                                      decoration: const InputDecoration(
                                         label: Text(
                                           '診察券番号', //   TODO: l10n 対応 (診察券番号) (medicalCardNumber)
                                         ),

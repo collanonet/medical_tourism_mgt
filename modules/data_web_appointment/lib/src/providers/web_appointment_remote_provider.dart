@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:injectable/injectable.dart';
 
@@ -75,5 +76,9 @@ class WebAppointmentRemoteProvider {
 
   Future<void> webBookingDeleteReservation(String reservationId) async {
     return apiService.webBookingDeleteReservation(reservationId);
+  }
+
+  Future<TreamentResponce> updateBooking(String treatmentId, TreamentRequest treatmentRequest) {
+    return apiService.updateBooking(treatmentId, treatmentRequest);
   }
 }

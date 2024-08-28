@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
@@ -83,7 +84,7 @@ class ProcessChartRemoteProvider {
 
   Future<List<DetainHotelRegistationResponse>> getDetainlHotelRegistation({
     String? accommodationName,
-   // List<String>? accommodationType,
+    // List<String>? accommodationType,
     String? area,
     bool? usageRecord,
     bool? isJapanese,
@@ -95,7 +96,7 @@ class ProcessChartRemoteProvider {
   }) async {
     return await apiService.getDetainlHotelRegistation(
       accommodationName: accommodationName,
-    // accommodationType: accommodationType,
+      // accommodationType: accommodationType,
       area: area,
       usageRecord: usageRecord,
       isJapanese: isJapanese,
@@ -215,13 +216,19 @@ class ProcessChartRemoteProvider {
         .postDetailItinerarySimplePickUp(detailItinerarySimplePickUpAnd);
   }
 
-  Future<List<DetailItineraryResponse>> getDetailitinerary({String? tourName,String? classification,DateTime? dateFrom,DateTime? dateTo}) async {
+  Future<List<DetailItineraryResponse>> getDetailitinerary({
+    required String id,
+    String? tourName,
+    String? classification,
+    DateTime? dateFrom,
+    DateTime? dateTo,
+  }) async {
     return await apiService.getDetailitinerary(
+      id: id,
       tourName: tourName,
       classification: classification,
       dateFrom: dateFrom,
       dateTo: dateTo,
-
     );
   }
 

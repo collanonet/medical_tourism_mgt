@@ -1,8 +1,9 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class EstimateMasterScreen extends StatefulWidget {
@@ -23,7 +24,7 @@ class _EstimateMasterScreenState extends State<EstimateMasterScreen> {
         Container(
           width: MediaQuery.of(context).size.width,
           height: 100,
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10), color: Colors.white),
           child: const Row(
@@ -42,7 +43,7 @@ class _EstimateMasterScreenState extends State<EstimateMasterScreen> {
         ),
         Container(
           width: MediaQuery.of(context).size.width,
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10), color: Colors.white),
           child: ColumnSeparated(

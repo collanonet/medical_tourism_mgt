@@ -1,14 +1,17 @@
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import 'itinerary_model.dart';
 
 class ItineraryScreen extends StatefulWidget {
@@ -124,7 +127,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'peopleNumber',
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 label: Text('人数'),
                               ),
                             ),
@@ -135,7 +138,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                           Expanded(
                             child: ReactiveTextField(
                               formControlName: 'group',
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 label: Text('グループ'),
                               ),
                             ),
@@ -147,7 +150,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                             flex: 4,
                             child: ReactiveTextField(
                               formControlName: 'classification',
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                 label: Text('種別'),
                               ),
                             ),
@@ -262,7 +265,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    Text('食事'),
+                                                    const Text('食事'),
                                                     SizedBox(
                                                       height: context.appTheme
                                                           .spacing.marginSmall,
@@ -279,7 +282,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                                                 EdgeInsets.zero,
                                                             formControlName:
                                                                 'morning',
-                                                            title: Text('朝'),
+                                                            title: const Text('朝'),
                                                           ),
                                                         ),
                                                         SizedBox(
@@ -298,7 +301,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                                                 EdgeInsets.zero,
                                                             formControlName:
                                                                 'noon',
-                                                            title: Text('昼'),
+                                                            title: const Text('昼'),
                                                           ),
                                                         ),
                                                         SizedBox(
@@ -317,7 +320,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                                                 EdgeInsets.zero,
                                                             formControlName:
                                                                 'evening',
-                                                            title: Text('夕'),
+                                                            title: const Text('夕'),
                                                           ),
                                                         ),
                                                       ],
@@ -358,7 +361,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                                 ),
                                               ],
                                             ),
-                                            Divider(
+                                            const Divider(
                                               color: Colors.grey,
                                             ),
                                           ],
@@ -734,8 +737,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                       FormGroup(
                                         {
                                           'date': FormControl<DateTime>(), // 日付
-                                          'meals': FormControl<List<String>>(
-                                              value: []),
+
                                           //meals
                                           'morning':
                                               FormControl<bool>(value: false),
@@ -866,7 +868,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                       : null,
                                   child: WithLoadingButton(
                                     isLoading: value.loading,
-                                    child: Text('保存する'),
+                                    child: const Text('保存する'),
                                   ));
                             },
                           );
