@@ -1,3 +1,4 @@
+import 'package:core_utils/core_utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup billingForm() => FormGroup({
@@ -6,13 +7,14 @@ FormGroup billingForm() => FormGroup({
         FormGroup({
           'occurrence_date': FormControl<DateTime>(
             value: DateTime.now(),
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
           ),
-          'hospitalName': FormControl<String>(
-            value: 'りんくうメディカルクリニック'
-          ),
-          'treatment_details': FormControl<String>(
-            value: '免疫活性化血管内治療　1回コース'
-          ),
+          'hospitalName': FormControl<String>(value: 'りんくうメディカルクリニック'),
+          'treatment_details': FormControl<String>(value: '免疫活性化血管内治療　1回コース'),
           'amount': FormControl<String>(
             value: '1,000,000',
           ),
@@ -24,13 +26,14 @@ FormGroup billingForm() => FormGroup({
         FormGroup({
           'occurrence_date': FormControl<DateTime>(
             value: DateTime.now(),
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
           ),
-          'hospitalName': FormControl<String>(
-            value: 'りんくうメディカルクリニック'
-          ),
-          'treatment_details': FormControl<String>(
-            value: '免疫活性化血管内治療　1回コース'
-          ),
+          'hospitalName': FormControl<String>(value: 'りんくうメディカルクリニック'),
+          'treatment_details': FormControl<String>(value: '免疫活性化血管内治療　1回コース'),
           'amount': FormControl<String>(
             value: '1,000,000',
           ),
@@ -42,13 +45,14 @@ FormGroup billingForm() => FormGroup({
         FormGroup({
           'occurrence_date': FormControl<DateTime>(
             value: DateTime.now(),
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
           ),
-          'hospitalName': FormControl<String>(
-            value: 'りんくうメディカルクリニック'
-          ),
-          'treatment_details': FormControl<String>(
-            value: '免疫活性化血管内治療　1回コース'
-          ),
+          'hospitalName': FormControl<String>(value: 'りんくうメディカルクリニック'),
+          'treatment_details': FormControl<String>(value: '免疫活性化血管内治療　1回コース'),
           'amount': FormControl<String>(
             value: '1,000,000',
           ),
@@ -60,13 +64,14 @@ FormGroup billingForm() => FormGroup({
         FormGroup({
           'occurrence_date': FormControl<DateTime>(
             value: DateTime.now(),
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
           ),
-          'hospitalName': FormControl<String>(
-            value: 'りんくうメディカルクリニック'
-          ),
-          'treatment_details': FormControl<String>(
-            value: '免疫活性化血管内治療　1回コース'
-          ),
+          'hospitalName': FormControl<String>(value: 'りんくうメディカルクリニック'),
+          'treatment_details': FormControl<String>(value: '免疫活性化血管内治療　1回コース'),
           'amount': FormControl<String>(
             value: '1,000,000',
           ),

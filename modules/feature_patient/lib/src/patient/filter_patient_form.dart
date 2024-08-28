@@ -1,4 +1,5 @@
 import 'package:core_l10n/l10n.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -10,12 +11,47 @@ FormGroup formFilterPatient() => FormGroup(
         'type': FormControl<String>(),
         'salesStaff': FormControl<String?>(),
         'dateOfEntryfrom': FormControl<DateTime>(
+          validators: [
+            Validators.pattern(
+              ValidatorRegExp.date,
+            ),
+          ],
         ),
-        'dateOfEntryto': FormControl<DateTime>(),
-        'medicalDayfrom': FormControl<DateTime>(),
-        'medicalDayto': FormControl<DateTime>(),
-        'returnDatefrom': FormControl<DateTime>(),
-        'returnDateto': FormControl<DateTime>(),
+        'dateOfEntryto': FormControl<DateTime>(
+          validators: [
+            Validators.pattern(
+              ValidatorRegExp.date,
+            ),
+          ],
+        ),
+        'medicalDayfrom': FormControl<DateTime>(
+          validators: [
+            Validators.pattern(
+              ValidatorRegExp.date,
+            ),
+          ],
+        ),
+        'medicalDayto': FormControl<DateTime>(
+          validators: [
+            Validators.pattern(
+              ValidatorRegExp.date,
+            ),
+          ],
+        ),
+        'returnDatefrom': FormControl<DateTime>(
+          validators: [
+            Validators.pattern(
+              ValidatorRegExp.date,
+            ),
+          ],
+        ),
+        'returnDateto': FormControl<DateTime>(
+          validators: [
+            Validators.pattern(
+              ValidatorRegExp.date,
+            ),
+          ],
+        ),
       },
     );
 

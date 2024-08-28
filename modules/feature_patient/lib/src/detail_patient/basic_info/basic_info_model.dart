@@ -1052,6 +1052,11 @@ class BasicInformationModel {
               ),
               'dateOfBirth': FormControl<DateTime>(
                 value: element.dateOfBirth,
+                validators: [
+                  Validators.pattern(
+                    ValidatorRegExp.date,
+                  ),
+                ],
               ),
               'age': FormControl<int?>(
                 value: element.age,
@@ -1082,10 +1087,18 @@ class BasicInformationModel {
                 value: element.passportNumber,
               ),
               'issueDate': FormControl<DateTime>(
-                value: element.issueDate,
+                value: element.issueDate,validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
               ),
               'expirationDate': FormControl<DateTime>(
-                value: element.expirationDate,
+                value: element.expirationDate,validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
               ),
               'visaType': FormControl<String>(
                 value: element.visaType,

@@ -3,6 +3,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:data_web_appointment/data_web_appointment.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 import 'package:reactive_forms/src/models/models.dart';
 
 import 'web_appointment_detail_form.dart';
@@ -209,7 +210,14 @@ class WebAppointmentDetailModel {
       data.proposedDates?.map((e) {
         candidateDate.add(FormGroup({
           'id': FormControl<String>(value: e.id),
-          'preferredDate': FormControl<DateTime>(value: e.proposedDate),
+          'preferredDate': FormControl<DateTime>(
+            value: e.proposedDate,
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
           'choice': FormControl<String>(value: e.selectMorningAfternoonAllDay),
           'timePeriodFrom': FormControl<String>(value: e.timeZoneFrom),
           'timePeriodTo': FormControl<String>(value: e.timeZoneTo),

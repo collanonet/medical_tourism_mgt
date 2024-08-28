@@ -1007,9 +1007,11 @@ class _DetailPatientWebReservationScreenState
                                                   FormControl<DateTime>(
                                                 validators: [
                                                   Validators.required,
-                                                  Validators.pattern(
-                                                      r'^\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$'),
-                                                ],
+
+                                                      Validators.pattern(
+                                                        ValidatorRegExp.date,
+                                                      ),
+                                                    ],
                                               ), // 第一希望
                                               'choice': FormControl<String>(
                                                   value: '午前'), // 午前, 午後, 終日

@@ -105,7 +105,11 @@ class ProgressListModel {
               disabled: true,
             ),
             'completionDate': FormControl<DateTime>(
-              value: record.completionDate,
+              value: record.completionDate,validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
             ),
             'remarks': FormControl<String>(
               value: record.remarks,

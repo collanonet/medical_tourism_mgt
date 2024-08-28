@@ -1,9 +1,9 @@
 import 'package:core_l10n/l10n.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup formFilterPatient() =>
- FormGroup(
+FormGroup formFilterPatient() => FormGroup(
       {
         'tourName': FormControl<String>(
           value: '',
@@ -11,7 +11,13 @@ FormGroup formFilterPatient() =>
         'classification': FormControl<String>(
           value: '',
         ),
-        'dateFrom': FormControl<DateTime>(),
+        'dateFrom': FormControl<DateTime>(
+          validators: [
+            Validators.pattern(
+              ValidatorRegExp.date,
+            ),
+          ],
+        ),
         'dateTo': FormControl<DateTime>(),
       },
     );

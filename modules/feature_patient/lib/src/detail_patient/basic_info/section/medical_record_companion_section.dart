@@ -981,7 +981,11 @@ class _MedicalRecordCompanionSectionState
                       'firstNameJapaneseForNonChinese': FormControl<String?>(),
                       'nationality': FormControl<String?>(),
                       'relationship': FormControl<String>(),
-                      'dateOfBirth': FormControl<DateTime>(),
+                      'dateOfBirth': FormControl<DateTime>(validators: [
+                        Validators.pattern(
+                          ValidatorRegExp.date,
+                        ),
+                      ],),
                       'age': FormControl<int?>(),
                       'gender': FormControl<bool>(
                         value: true,
@@ -1003,8 +1007,16 @@ class _MedicalRecordCompanionSectionState
                       ]),
                       'chatQrImage': FormControl<FileSelect>(),
                       'passportNumber': FormControl<String?>(),
-                      'issueDate': FormControl<DateTime>(),
-                      'expirationDate': FormControl<DateTime>(),
+                      'issueDate': FormControl<DateTime>(validators: [
+                        Validators.pattern(
+                          ValidatorRegExp.date,
+                        ),
+                      ],),
+                      'expirationDate': FormControl<DateTime>(validators: [
+                        Validators.pattern(
+                          ValidatorRegExp.date,
+                        ),
+                      ],),
                       'visaType': FormControl<String>(),
                     }),
                   ),
