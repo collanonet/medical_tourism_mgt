@@ -4436,7 +4436,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/detail-itinerary-simple-version-pick-up',
+              '/detail-itinerary-simple-version-pick-up/{id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4484,6 +4484,7 @@ class _ApiService implements ApiService {
 
   @override
   Future<List<DetailItineraryResponse>> getDetailitinerary({
+    String? id,
     String? tourName,
     String? classification,
     DateTime? dateFrom,
@@ -4507,7 +4508,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/tour',
+              '/tour/${id}',
               queryParameters: queryParameters,
               data: _data,
             )

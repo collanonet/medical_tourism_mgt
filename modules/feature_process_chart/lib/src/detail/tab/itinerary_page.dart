@@ -10,7 +10,8 @@ import 'itinerary_model.dart';
 import 'itinerary_screen.dart';
 
 class ItineraryPage extends StatelessWidget {
-  const ItineraryPage({super.key});
+  const ItineraryPage({super.key,required this.id});
+  final String id;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +22,7 @@ class ItineraryPage extends StatelessWidget {
         builder: (context, formGroup, child) {
           return Provider(
             create: (context) =>
-                GetIt.I<ItineraryModel>()..fetchItinerary(formGroup),
+                GetIt.I<ItineraryModel>()..fetchItinerary(formGroup,id: id),
             child: const ItineraryScreen(),
           );
         },

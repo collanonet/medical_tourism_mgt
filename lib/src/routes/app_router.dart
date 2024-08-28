@@ -98,8 +98,10 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
       AutoRoute(page: ContractRoute.page, path: '/contracts'),
       AutoRoute(page: ReportTypeRoute.page, path: '/report-type'),
       AutoRoute(page: SalesRoute.page, path: '/sales'),
-      AutoRoute(page: ProcessChartsRoute.page, path: '/precess-charts'),
-      AutoRoute(page: ItinerarySimplifiedRoute.page, path: '/precess-charts-itinerary-simplified'),
+      AutoRoute(page: ProcessChartsRoute.page, path: '/precess-charts/:id'),
+      AutoRoute(
+          page: ItinerarySimplifiedRoute.page,
+          path: '/precess-charts-itinerary-simplified'),
       AutoRoute(
           page: DetailProcessChartRoute.page, path: '/precess-chart-detail'),
       AutoRoute(page: WebAppointmentsRoute.page, path: '/web-appointments'),
@@ -107,7 +109,9 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
           page: WebAppointmentDetailRoute.page,
           path: '/web-appointment-detail/:id'),
       RedirectRoute(path: '*', redirectTo: '/patients'),
-      AutoRoute(page: EstimateMasterRoute.page,),
+      AutoRoute(
+        page: EstimateMasterRoute.page,
+      ),
       AutoRoute(page: ProspectivePankRoute.page),
       AutoRoute(page: ContractDetailRoute.page),
     ];

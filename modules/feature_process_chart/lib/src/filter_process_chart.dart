@@ -250,6 +250,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                 context
                                     .read<ProcessChartModel>()
                                     .fetchItinerary(
+                                      id: formGroup.control('_id').value,
                                       tourName:
                                           formGroup.control('tourName').value,
                                       classification: formGroup

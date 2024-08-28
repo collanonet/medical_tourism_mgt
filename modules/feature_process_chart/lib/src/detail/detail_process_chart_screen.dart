@@ -1,6 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import 'tab/facility_page.dart';
 import 'tab/hotel_registration_page.dart';
@@ -9,7 +10,8 @@ import 'tab/itinerary_page.dart';
 import 'tab/related_parties_page.dart';
 
 class DetailProcessChartScreen extends StatefulWidget {
-  const DetailProcessChartScreen({super.key});
+  const DetailProcessChartScreen({super.key, this.id});
+  final String? id;
 
   @override
   State<DetailProcessChartScreen> createState() =>
@@ -28,7 +30,7 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
   ];
 
   List<Widget> pages = const [
-    ItineraryPage(),
+    // ItineraryPage(),
     FacilityPage(),
     HotelSearchPage(),
     HotelRegistrationPage(),
@@ -125,7 +127,13 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
                       context.appTheme.spacing.borderRadiusMedium),
                   color: Colors.white,
                 ),
-                child: pages[index],
+                child: [
+                  ItineraryPage(id: widget.id!),
+                  FacilityPage(),
+                  HotelSearchPage(),
+                  HotelRegistrationPage(),
+                  RelatedPartiesPage(),
+                ][index],
               ),
             );
           },

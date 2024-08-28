@@ -734,8 +734,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                       FormGroup(
                                         {
                                           'date': FormControl<DateTime>(), // 日付
-                                          'meals': FormControl<List<String>>(
-                                              value: []),
+
                                           //meals
                                           'morning':
                                               FormControl<bool>(value: false),

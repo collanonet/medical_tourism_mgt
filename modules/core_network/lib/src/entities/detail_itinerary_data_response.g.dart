@@ -6,16 +6,6 @@ part of 'detail_itinerary_data_response.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-ItineraryPatient _$ItineraryPatientFromJson(Map<String, dynamic> json) =>
-    ItineraryPatient(
-      patientName: json['patientName'] as String?,
-    );
-
-Map<String, dynamic> _$ItineraryPatientToJson(ItineraryPatient instance) =>
-    <String, dynamic>{
-      'patientName': instance.patientName,
-    };
-
 Task _$TaskFromJson(Map<String, dynamic> json) => Task(
       placeName: json['placeName'] as String?,
       timeFrom: json['timeFrom'] as String?,

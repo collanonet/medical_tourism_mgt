@@ -6,8 +6,8 @@ part 'detail_inerary_request.g.dart';
 class DetailIneraryRequest {
   List<String>? patient;
   String? tourName;
-  String? peopleNumber;
-  String? group;
+  int? peopleNumber;
+  int? group;
   String? classification;
   List<Day>? day;
 

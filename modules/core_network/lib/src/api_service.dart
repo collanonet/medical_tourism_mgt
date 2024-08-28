@@ -863,7 +863,7 @@ abstract class ApiService {
         detailItinerarySimpleInterpreterOrGuideRequest,
   );
 
-  @GET(EndPoints.DETAIL_ITINERARY_SIMPLE_VERAION_PICK_UP)
+  @GET('${EndPoints.DETAIL_ITINERARY_SIMPLE_VERAION_PICK_UP}/{id}')
   Future<DetailItinerarySimplePickUpAndDropOffResponse>
       getDetailItinerarySimplePickUp();
 
@@ -875,8 +875,9 @@ abstract class ApiService {
         detailItinerarySimplePickUpAndDropOffRequest,
   );
 
-  @GET(EndPoints.DETAIL_ITINERARY)
+  @GET('${EndPoints.DETAIL_ITINERARY}/{id}')
   Future<List<DetailItineraryResponse>> getDetailitinerary({
+    @Path('id') String? id,
     @Query('tourName') String? tourName,
     @Query('classification') String? classification,
     @Query('dateFrom') DateTime? dateFrom,

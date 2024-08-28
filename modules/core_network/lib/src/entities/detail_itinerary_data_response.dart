@@ -1,19 +1,19 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'detail_itinerary_data_response.g.dart';
 
-@JsonSerializable()
-class ItineraryPatient {
-  String? patientName;
+// @JsonSerializable()
+// class ItineraryPatient {
+//   String? patientName;
 
-  ItineraryPatient({this.patientName});
-  factory ItineraryPatient.fromJson(Map<String,dynamic> json){
-    return _$ItineraryPatientFromJson(json);
-  }
+//   ItineraryPatient({this.patientName});
+//   factory ItineraryPatient.fromJson(Map<String,dynamic> json){
+//     return _$ItineraryPatientFromJson(json);
+//   }
 
-  Map<String,dynamic> toJson(){
-    return _$ItineraryPatientToJson(this);
-  }
-}
+//   Map<String,dynamic> toJson(){
+//     return _$ItineraryPatientToJson(this);
+//   }
+// }
 
 @JsonSerializable()
 class Task {

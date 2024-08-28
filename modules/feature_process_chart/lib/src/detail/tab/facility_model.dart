@@ -49,7 +49,7 @@ class FacilityModel {
 
   void insertFacilityHotel(
       FormArray formArray, List<DetailFacilityHotelResponse>? data) {
-    if (data!.isEmpty) {
+    if (data!.isNotEmpty) {
       formArray.clear();
       for (var item in data) {
         for (int i = 0; i < item.foreignLanguageStaff!.length; i++) {
@@ -155,10 +155,12 @@ class FacilityModel {
   }
 
   void insertDropInFacility(
-      FormGroup formGroup, List<DetailDropInFacilityResponse> data) {
-    for (var item in data) {
-     var places = formGroup.control('places') as FormArray;
-      if (data.isEmpty) {
+      FormGroup formGroup, List<DetailDropInFacilityResponse>? data) {
+    // var firstData = data![0];
+    for (var item in data!) {
+      var places = formGroup.control('places') as FormArray;
+      if (data.isNotEmpty) {
+        places.clear();
         for (var e in item.places!) {
           places.add(
             FormGroup(
@@ -187,7 +189,6 @@ class FacilityModel {
         );
       }
       formGroup.control('arrangePerson').value = item.arrangePerson;
-      
     }
   }
 

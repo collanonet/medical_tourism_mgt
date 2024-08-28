@@ -12,10 +12,10 @@ class ItineraryModel {
 
   ValueNotifier<AsyncData<List<DetailItineraryResponse>>> itinerraryData =
       ValueNotifier(const AsyncData<List<DetailItineraryResponse>>(data: []));
-  Future<void> fetchItinerary(FormGroup formGroup) async {
+  Future<void> fetchItinerary(FormGroup formGroup,{required String id}) async {
     try {
       itinerraryData.value = const AsyncData(loading: true);
-      final response = await processChartRepository.getDetailItinerary();
+      final response = await processChartRepository.getDetailItinerary(id: id);
       // insertItinerary(formGroup, response);
       itinerraryData.value = AsyncData(data: response);
       logger.d(response.toList());
@@ -84,25 +84,24 @@ class ItineraryModel {
   Future<void> submitItinerary(FormGroup formGroup) async {
     try {
       List<String> patients = [];
-      formGroup.control('patient').value.forEach((element){
-        patients.add(
-          element['patientName']
-        );
+      await formGroup.control('patient').value.forEach((element) {
+        patients.add(element['patientName']);
       });
+
       List<Day> days = [];
-      formGroup.control('day').value.forEach(
-        (element) {
+      await formGroup.control('day').value.forEach(
+        (element) async {
           List<bool> meals = [];
           meals.add(element['morning']);
           meals.add(element['noon']);
           meals.add(element['evening']);
 
           List<Group> groups = [];
-          element['groups'].forEach(
+          await element['groups'].forEach(
             (groupElement) {
               List<Task> tasks = [];
               groupElement['task'].forEach(
-                (taskElement) {
+                (taskElement) async {
                   tasks.add(
                     Task(
                       placeName: taskElement['placeName'],
@@ -130,6 +129,10 @@ class ItineraryModel {
               groups: groups,
             ),
           );
+          logger.d('date ${element['date']}');
+          logger.d('placeName ${element['placeName']}');
+          logger.d('placeStay ${element['placeStay']}');
+          logger.d('days ${days}');
         },
       );
       submitData.value = const AsyncData(loading: true);
@@ -139,9 +142,27 @@ class ItineraryModel {
         peopleNumber: formGroup.control('peopleNumber').value,
         group: formGroup.control('group').value,
         classification: formGroup.control('classification').value,
-        day: days,
+        day: [
+          Day(
+            date: DateTime.now(),
+            meals: [true, false, true],
+            placeName: '新��',
+            placeStay: '新�����',
+            groups: [
+              Group(task: [
+                Task(
+                  placeName: '新�����',
+                  timeFrom: '08:00',
+                  timeTo: '10:00',
+                  transportation: '新����',
+                  itinerary: '新�����',
+                ),
+              ]),
+            ],
+          ),
+        ],
       );
-      
+
       final response =
           await processChartRepository.postDetailItinerary(request);
       submitData.value = AsyncData(data: response);
