@@ -9,6 +9,7 @@ import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 // Project imports:
 import '../g_and_a_model.dart';
@@ -108,157 +109,185 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                         ])
                   ]),
               ValueListenableBuilder(
-                valueListenable:
-                    context.watch<QAndAModel>().newRegistrationHospitalData,
-                builder: (context, value, child) {
-                  return ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: value.data?.length ?? 0,
-                    itemBuilder: (context, index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(10),
-                        child: ExpansionTile(
-                            collapsedBackgroundColor:
-                                context.appTheme.primaryBackgroundColor,
-                            title: Text(
-                              value.requireData[index].question.toString(),
-                              style: context.textTheme.bodyMedium!.copyWith(
-                                  color: context.appTheme.primaryColor),
-                            ),
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10),
-                                    child: Text(
-                                      '更新日：${value.requireData[index].updatedDate == null ? '' : Dates.formatFullDate(value.requireData[index].updatedDate!)}　更新者：${value.requireData[index].updatedBy}',
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        vertical: 10),
-                                    child: Text(
-                                      value.requireData[index].answer ?? '',
-                                      softWrap: true,
-                                    ),
-                                  ),
-                                  RowSeparated(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      separatorBuilder: (context, index) =>
-                                          SizedBox(
-                                            width: context
-                                                .appTheme.spacing.formSpacing,
-                                          ),
+                  valueListenable: context.watch<QAndAModel>().delete,
+                  builder: (context, value, child) {
+                    return Skeletonizer(
+                      enabled: value.loading,
+                      child: ValueListenableBuilder(
+                        valueListenable: context
+                            .watch<QAndAModel>()
+                            .newRegistrationHospitalData,
+                        builder: (context, value, child) {
+                          return Skeletonizer(
+                            enabled: value.loading,
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              physics: const NeverScrollableScrollPhysics(),
+                              itemCount: value.data?.length ?? 0,
+                              itemBuilder: (context, index) {
+                                return Padding(
+                                  padding: const EdgeInsets.all(10),
+                                  child: ExpansionTile(
+                                      collapsedBackgroundColor: context
+                                          .appTheme.primaryBackgroundColor,
+                                      title: Text(
+                                        value.requireData[index].question
+                                            .toString(),
+                                        style: context.textTheme.bodyMedium!
+                                            .copyWith(
+                                                color: context
+                                                    .appTheme.primaryColor),
+                                      ),
                                       children: [
-                                        ValueListenableListener(
-                                          valueListenable: context
-                                              .read<QAndAModel>()
-                                              .newRegistrationHospitalData,
-                                          onListen: () {
-                                            var value = context
-                                                .read<QAndAModel>()
-                                                .delete
-                                                .value;
-
-                                            if (value.hasError) {
-                                              snackBarWidget(
-                                                message: '削除に失敗しました',
-                                                backgroundColor: Colors.red,
-                                                prefixIcon: const Icon(
-                                                    Icons.error,
-                                                    color: Colors.white),
-                                              );
-                                            }
-
-                                            if (value.hasData) {
-                                              snackBarWidget(
-                                                message: '削除しました',
-                                                prefixIcon: const Icon(
-                                                    Icons.check_circle,
-                                                    color: Colors.white),
-                                              );
-                                            }
-                                          },
-                                          child: ValueListenableBuilder(
-                                              valueListenable: context
-                                                  .read<QAndAModel>()
-                                                  .newRegistrationHospitalData,
-                                              builder: (context, value, _) {
-                                                return OutlinedButton(
-                                                    onPressed: () {
-                                                      context
-                                                          .read<QAndAModel>()
-                                                          .deleteData(
-                                                              value.requireData[
-                                                                  index]);
-                                                    },
-                                                    child: WithLoadingButton(
-                                                        isLoading:
-                                                            value.loading,
-                                                        loadingColor: context
-                                                            .appTheme
-                                                            .primaryColor,
-                                                        child: Text(
-                                                          '削除する',
-                                                          style: context
-                                                              .textTheme
-                                                              .labelLarge
-                                                              ?.copyWith(
-                                                                  color: context
-                                                                      .appTheme
-                                                                      .primaryColor),
-                                                        )));
-                                              }),
-                                        ),
-                                        OutlinedButton(
-                                            onPressed: () {},
-                                            child: Text(
-                                              '編集する',
-                                              style: context
-                                                  .textTheme.labelLarge
-                                                  ?.copyWith(
-                                                      color: context.appTheme
-                                                          .primaryColor),
-                                            )),
-                                        ElevatedButton(
-                                          onPressed: () {
-                                            Clipboard.setData(
-                                              ClipboardData(
-                                                text: '''
-                                                質問：${value.requireData[index].question}
-                                                回答：${value.requireData[index].answer}
-                                                ''',
+                                        Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 10),
+                                              child: Text(
+                                                '更新日：${value.requireData[index].updatedDate == null ? '' : Dates.formatFullDate(value.requireData[index].updatedDate!)}　更新者：${value.requireData[index].updatedBy}',
                                               ),
-                                            );
-                                            snackBarWidget(
-                                              message: 'コピーしました',
-                                              prefixIcon: const Icon(
-                                                  Icons.check_circle,
-                                                  color: Colors.white),
-                                            );
-                                          },
-                                          child: const Text(
-                                            'コピーする',
-                                            style: TextStyle(
-                                              color: Colors.white,
                                             ),
-                                          ),
-                                        ),
+                                            Padding(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 10),
+                                              child: Text(
+                                                value.requireData[index]
+                                                        .answer ??
+                                                    '',
+                                                softWrap: true,
+                                              ),
+                                            ),
+                                            RowSeparated(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                separatorBuilder:
+                                                    (context, index) =>
+                                                        SizedBox(
+                                                          width: context
+                                                              .appTheme
+                                                              .spacing
+                                                              .formSpacing,
+                                                        ),
+                                                children: [
+                                                  ValueListenableListener(
+                                                    valueListenable: context
+                                                        .read<QAndAModel>()
+                                                        .newRegistrationHospitalData,
+                                                    onListen: () {
+                                                      var value = context
+                                                          .read<QAndAModel>()
+                                                          .delete
+                                                          .value;
+
+                                                      if (value.hasError) {
+                                                        snackBarWidget(
+                                                          message: '削除に失敗しました',
+                                                          backgroundColor:
+                                                              Colors.red,
+                                                          prefixIcon:
+                                                              const Icon(
+                                                                  Icons.error,
+                                                                  color: Colors
+                                                                      .white),
+                                                        );
+                                                      }
+
+                                                      if (value.hasData) {
+                                                        snackBarWidget(
+                                                          message: '削除しました',
+                                                          prefixIcon: const Icon(
+                                                              Icons
+                                                                  .check_circle,
+                                                              color:
+                                                                  Colors.white),
+                                                        );
+                                                      }
+                                                    },
+                                                    child:
+                                                        ValueListenableBuilder(
+                                                            valueListenable: context
+                                                                .read<
+                                                                    QAndAModel>()
+                                                                .newRegistrationHospitalData,
+                                                            builder: (context,
+                                                                value, _) {
+                                                              return OutlinedButton(
+                                                                  onPressed:
+                                                                      () {
+                                                                    context
+                                                                        .read<
+                                                                            QAndAModel>()
+                                                                        .deleteData(
+                                                                            value.requireData[index]);
+                                                                  },
+                                                                  child: WithLoadingButton(
+                                                                      isLoading: value.loading,
+                                                                      loadingColor: context.appTheme.primaryColor,
+                                                                      child: Text(
+                                                                        '削除する',
+                                                                        style: context
+                                                                            .textTheme
+                                                                            .labelLarge
+                                                                            ?.copyWith(color: context.appTheme.primaryColor),
+                                                                      )));
+                                                            }),
+                                                  ),
+                                                  OutlinedButton(
+                                                      onPressed: () {},
+                                                      child: Text(
+                                                        '編集する',
+                                                        style: context.textTheme
+                                                            .labelLarge
+                                                            ?.copyWith(
+                                                                color: context
+                                                                    .appTheme
+                                                                    .primaryColor),
+                                                      )),
+                                                  ElevatedButton(
+                                                    onPressed: () {
+                                                      Clipboard.setData(
+                                                        ClipboardData(
+                                                          text: '''
+                                                        質問：${value.requireData[index].question}
+                                                        回答：${value.requireData[index].answer}
+                                                        ''',
+                                                        ),
+                                                      );
+                                                      snackBarWidget(
+                                                        message: 'コピーしました',
+                                                        prefixIcon: const Icon(
+                                                            Icons.check_circle,
+                                                            color:
+                                                                Colors.white),
+                                                      );
+                                                    },
+                                                    child: const Text(
+                                                      'コピーする',
+                                                      style: TextStyle(
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ]),
+                                            const SizedBox(
+                                              height: 10,
+                                            )
+                                          ],
+                                        )
                                       ]),
-                                  const SizedBox(
-                                    height: 10,
-                                  )
-                                ],
-                              )
-                            ]),
-                      );
-                    },
-                  );
-                },
-              ),
+                                );
+                              },
+                            ),
+                          );
+                        },
+                      ),
+                    );
+                  }),
             ]));
   }
 }

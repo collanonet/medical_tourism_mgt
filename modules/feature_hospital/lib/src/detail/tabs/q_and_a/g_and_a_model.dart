@@ -85,6 +85,7 @@ class QAndAModel {
 
   Future<void> deleteData(NewRegistrationHospitalResponse requireData) async {
     try {
+
       delete.value = const AsyncData(loading: true);
       await hospitalRepository.deleteNewRegistrationHospital(
         requireData.id,

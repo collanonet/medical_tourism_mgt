@@ -48,6 +48,7 @@ Future<List<File>?> imageMultiplePicker() async {
 Future<FileSelect?> filePicker() async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     allowMultiple: false,
+    type: FileType.custom,
     allowedExtensions: ['jpg', 'pdf', 'png', 'jpeg'],
   );
 
@@ -70,6 +71,7 @@ Future<FileSelect?> filePicker() async {
 Future<List<File>?> fileMultiplePicker() async {
   FilePickerResult? result = await FilePicker.platform.pickFiles(
     allowMultiple: true,
+    type: FileType.custom,
     allowedExtensions: ['jpg', 'pdf', 'png', 'jpeg'],
   );
 

@@ -30,7 +30,7 @@ class _QAndANewRegistrationSectionState
       child: ColumnSeparated(
         crossAxisAlignment: CrossAxisAlignment.start,
         separatorBuilder: (context, index) => SizedBox(
-          height: context.appTheme.spacing.formSpacing,
+          height: context.appTheme.spacing.marginMedium,
         ),
         children: [
           Text(
@@ -213,6 +213,8 @@ class _QAndANewRegistrationSectionState
                       }
 
                       if (value.hasData) {
+                        // reset form only when success
+                        formGroup.reset();
                         snackBarWidget(
                           message: '正常に保存されました',
                           prefixIcon: const Icon(Icons.check_circle,
