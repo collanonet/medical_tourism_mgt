@@ -1023,7 +1023,8 @@ class _DetailPatientWebReservationScreenState
                                                 validators: [
                                                   Validators.required,
                                                   Validators.pattern(
-                                                      r'^([01]?[0-9]|2[0-3]):[0-5][0-9]$'),
+                                                    ValidatorRegExp.time,
+                                                  ),
                                                 ],
                                               ), // 時間帯（自）
                                               'timePeriodTo':
@@ -1032,7 +1033,8 @@ class _DetailPatientWebReservationScreenState
                                                   Validators.required,
                                                   // validate time format
                                                   Validators.pattern(
-                                                      r'^([01]?[0-9]|2[0-3]):[0-5][0-9]$'),
+                                                    ValidatorRegExp.time,
+                                                  ),
                                                 ],
                                               ), // 時間帯（至）
                                             })

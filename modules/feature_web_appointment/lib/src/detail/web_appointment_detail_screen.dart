@@ -359,7 +359,8 @@ class _WebAppointmentDetailScreenState
                                                 minLines: 3,
                                                 maxLines: 5,
                                                 formControlName: 'remarks',
-                                                decoration: const InputDecoration(
+                                                decoration:
+                                                    const InputDecoration(
                                                   label: Text('備考'),
                                                 ),
                                               ),
@@ -1053,30 +1054,36 @@ class _WebAppointmentDetailScreenState
                                           onTap: () {
                                             formArray.add(
                                               FormGroup({
+                                                'id': FormControl<String>(),
                                                 'preferredDate':
                                                     FormControl<DateTime>(
                                                   validators: [
-                                                    Validators.required
+                                                    Validators.required,
+                                                    Validators.pattern(
+                                                      ValidatorRegExp.date,
+                                                    ),
                                                   ],
-                                                ),
-                                                // 第一希望
+                                                ), // 第一希望
                                                 'choice': FormControl<String>(
-                                                    value: '午前'),
-                                                // 午前, 午後, 終日
+                                                    value: '午前'), // 午前, 午後, 終日
                                                 'timePeriodFrom':
                                                     FormControl<String>(
                                                   validators: [
-                                                    Validators.required
+                                                    Validators.required,
+                                                    Validators.pattern(
+                                                      ValidatorRegExp.time,
+                                                    )
                                                   ],
-                                                ),
-                                                // 時間帯（自）
+                                                ), // 時間帯（自）
                                                 'timePeriodTo':
                                                     FormControl<String>(
                                                   validators: [
-                                                    Validators.required
+                                                    Validators.required,
+                                                    Validators.pattern(
+                                                      ValidatorRegExp.time,
+                                                    )
                                                   ],
-                                                ),
-                                                // 時間帯（至）
+                                                ), // 時間帯（至）
                                               })
                                                 ..markAllAsTouched(),
                                             );
@@ -1186,7 +1193,8 @@ class _WebAppointmentDetailScreenState
                                       builder: (context, form, _) {
                                     return ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color(0xffF08C67),
+                                        backgroundColor:
+                                            const Color(0xffF08C67),
                                       ),
                                       onPressed: form.invalid
                                           ? null

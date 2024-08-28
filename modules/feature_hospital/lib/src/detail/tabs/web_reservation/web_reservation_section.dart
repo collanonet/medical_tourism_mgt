@@ -942,7 +942,6 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                 FormControl<String>(
                                               validators: [
                                                 Validators.required,
-                                                // validate time format
                                                 Validators.pattern(
                                                   ValidatorRegExp.time,
                                                 ),
@@ -1094,7 +1093,8 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                       builder: (context, form, _) {
                                     return ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        backgroundColor: const Color(0xffF08C67),
+                                        backgroundColor:
+                                            const Color(0xffF08C67),
                                       ),
                                       onPressed: form.invalid
                                           ? null
