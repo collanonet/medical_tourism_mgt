@@ -1007,11 +1007,10 @@ class _DetailPatientWebReservationScreenState
                                                   FormControl<DateTime>(
                                                 validators: [
                                                   Validators.required,
-
-                                                      Validators.pattern(
-                                                        ValidatorRegExp.date,
-                                                      ),
-                                                    ],
+                                                  Validators.pattern(
+                                                    ValidatorRegExp.date,
+                                                  ),
+                                                ],
                                               ), // 第一希望
                                               'choice': FormControl<String>(
                                                   value: '午前'), // 午前, 午後, 終日
@@ -1433,7 +1432,8 @@ class _DetailPatientWebReservationScreenState
                   logger.d(value);
                 },
                 decoration: InputDecoration(
-                  label: Text('第一希望'),
+                  label: Text(
+                      '第 ${formArray.controls.indexOf(currentForm) + 1} 希望'),
                   suffixIcon: IconButton(
                     icon: const Icon(
                       CupertinoIcons.calendar,
