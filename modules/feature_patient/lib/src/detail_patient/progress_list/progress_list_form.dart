@@ -1,3 +1,4 @@
+import 'package:core_utils/core_utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup progressListForm() {
@@ -13,7 +14,13 @@ FormGroup progressListForm() {
             'key': FormControl<String>(),
             'tag': FormControl<String>(),
             'task': FormControl<String>(),
-            'completionDate': FormControl<DateTime>(),
+            'completionDate': FormControl<DateTime>(
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
             'remarks': FormControl<String>(),
             'medicalRecord': FormControl<String>(),
             'type': FormControl<String>(),

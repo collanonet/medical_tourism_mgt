@@ -209,10 +209,27 @@ class WebAppointmentDetailModel {
       data.proposedDates?.map((e) {
         candidateDate.add(FormGroup({
           'id': FormControl<String>(value: e.id),
-          'preferredDate': FormControl<DateTime>(value: e.proposedDate),
+          'preferredDate':
+              FormControl<DateTime>(value: e.proposedDate, validators: [
+            Validators.required,
+            Validators.pattern(
+              ValidatorRegExp.date,
+            ),
+          ]),
           'choice': FormControl<String>(value: e.selectMorningAfternoonAllDay),
-          'timePeriodFrom': FormControl<String>(value: e.timeZoneFrom),
-          'timePeriodTo': FormControl<String>(value: e.timeZoneTo),
+          'timePeriodFrom':
+              FormControl<String>(value: e.timeZoneFrom, validators: [
+            Validators.required,
+            Validators.pattern(
+              ValidatorRegExp.time,
+            )
+          ]),
+          'timePeriodTo': FormControl<String>(value: e.timeZoneTo, validators: [
+            Validators.required,
+            Validators.pattern(
+              ValidatorRegExp.time,
+            )
+          ]),
         }));
       }).toList();
     }
@@ -256,8 +273,10 @@ class WebAppointmentDetailModel {
     }
   }
 
-  void submitData({bool? isClosed}) {
+  Future<void> submitData({bool? isClosed}) async {
     if (webBooking.value.hasData) {
+      await updateBooking();
+
       List<ProposedDate> proposedDates = [];
 
       formGroup.control('candidateDate').value.forEach((element) {
@@ -295,7 +314,6 @@ class WebAppointmentDetailModel {
             webBooking.value.data?.reservationConfirmationDate,
         testCallDate: formGroup.control('testCallDate').value,
         testCallTime: formGroup.control('testCallTime').value,
-
       );
       updateReservation(webBooking.value.requireData.id, request);
     } else {
@@ -363,5 +381,23 @@ class WebAppointmentDetailModel {
     formGroup.reset(updateParent: true);
     getReservationById(id: reservation.id);
     webBookingSelected.value = AsyncData(data: reservation);
+  }
+
+  Future<void> updateBooking() async {
+    try {
+      var data = bookingByPatient.value.requireData.copyWith(
+        desiredDate1: formGroup.control('preferredDate1').value,
+        desiredDate2: formGroup.control('preferredDate2').value,
+        desiredDate3: formGroup.control('preferredDate3').value,
+        reason: formGroup.control('remarks').value,
+      );
+      bookingByPatient.value = const AsyncData(loading: true);
+      final result = await repository.updateBooking(
+          bookingByPatient.value.requireData.id,
+          TreamentRequest.fromJson(data.toJson()));
+      bookingByPatient.value = AsyncData(data: result);
+    } catch (e) {
+      logger.e(e);
+    }
   }
 }

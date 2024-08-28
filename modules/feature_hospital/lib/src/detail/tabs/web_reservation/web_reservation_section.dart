@@ -99,10 +99,32 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                   width: 30,
                                                   child:
                                                       const CircularProgressIndicator())
-                                              : Icon(
-                                                  Icons.search,
-                                                  color: Colors.grey,
-                                                ),
+                                              : ReactiveValueListenableBuilder<
+                                                      String>(
+                                                  formControlName:
+                                                      'patientName',
+                                                  builder:
+                                                      (context, control, _) {
+                                                    return IconButton(
+                                                        onPressed: () {
+                                                          logger.d(value);
+                                                          if (control.value !=
+                                                                  null &&
+                                                              control.value!
+                                                                  .isNotEmpty) {
+                                                            context
+                                                                .read<
+                                                                    WebAppointmentDetailModel>()
+                                                                .searchPatient(
+                                                                    search: control
+                                                                        .value);
+                                                          }
+                                                        },
+                                                        icon: Icon(
+                                                          Icons.search,
+                                                          color: Colors.grey,
+                                                        ));
+                                                  }),
                                         ),
                                       ),
                                     );
@@ -332,58 +354,6 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            // Expanded(
-                            //   child: ValueListenableListener(
-                            //     valueListenable: context
-                            //         .read<WebAppointmentDetailModel>()
-                            //         .hospital,
-                            //     onListen: () {
-                            //       var data = context
-                            //           .read<WebAppointmentDetailModel>()
-                            //           .hospital
-                            //           .value;
-                            //
-                            //       if (data.hasError) {
-                            //         snackBarWidget(
-                            //             message: '病院が見つからない。',
-                            //             backgroundColor: Colors.red);
-                            //       }
-                            //     },
-                            //     child: ValueListenableBuilder(
-                            //         valueListenable: context
-                            //             .watch<WebAppointmentDetailModel>()
-                            //             .hospital,
-                            //         builder: (context, value, _) {
-                            //           return ReactiveTextField<String>(
-                            //             formControlName: 'medicalInstitutionName',
-                            //             onSubmitted: (value) {
-                            //               logger.d(value);
-                            //               if (value.isNotNullOrEmpty) {
-                            //                 context
-                            //                     .read<WebAppointmentDetailModel>()
-                            //                     .searchHospital(search: value.value);
-                            //               }
-                            //             },
-                            //             decoration: InputDecoration(
-                            //               label: Text('医療機関名'),
-                            //               suffixIcon: value.loading
-                            //                   ? SizedBox(
-                            //                       height: 30,
-                            //                       width: 30,
-                            //                       child:
-                            //                           const CircularProgressIndicator())
-                            //                   : Icon(
-                            //                       Icons.search,
-                            //                       color: Colors.grey,
-                            //                     ),
-                            //             ),
-                            //           );
-                            //         }),
-                            //   ),
-                            // ),
-                            // SizedBox(
-                            //   width: context.appTheme.spacing.marginMedium,
-                            // ),
                             IntrinsicWidth(
                               stepWidth: 300,
                               child: ValueListenableListener(
@@ -960,7 +930,8 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                       logger.d(value);
                                                     },
                                                     decoration: InputDecoration(
-                                                      label: Text('第一希望'),
+                                                      label: Text(
+                                                          '第 ${formArray.controls.indexOf(currentForm) + 1} 希望'),
                                                       suffixIcon: IconButton(
                                                         icon: const Icon(
                                                           CupertinoIcons
@@ -1061,20 +1032,43 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                   .marginMedium,
                                             ),
                                             Expanded(
-                                              child: ReactiveTextField(
-                                                formControlName:
-                                                    'timePeriodFrom',
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                inputFormatters: [
-                                                  formatter.timeFormatter,
-                                                ],
-                                                decoration: InputDecoration(
-                                                  label: Text(
-                                                    '時間帯（自）',
-                                                  ),
-                                                ),
-                                              ),
+                                              child:
+                                                  ReactiveValueListenableBuilder<
+                                                          String>(
+                                                      formControlName:
+                                                          'timePeriodFrom',
+                                                      builder: (context,
+                                                          control, _) {
+                                                        return ReactiveTextField<
+                                                            String>(
+                                                          formControlName:
+                                                              'timePeriodFrom',
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .number,
+                                                          inputFormatters: [
+                                                            formatter
+                                                                .timeFormatter,
+                                                          ],
+                                                          onChanged: (value) {
+                                                            if (value.value !=
+                                                                null) {
+                                                              var time =
+                                                                  processTimeInput(
+                                                                      value
+                                                                          .value!);
+                                                              control.value =
+                                                                  time;
+                                                            }
+                                                          },
+                                                          decoration:
+                                                              InputDecoration(
+                                                            label: Text(
+                                                              '時間帯（自）',
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }),
                                             ),
                                             SizedBox(
                                               width: context.appTheme.spacing
@@ -1086,19 +1080,43 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                   .marginMedium,
                                             ),
                                             Expanded(
-                                              child: ReactiveTextField(
-                                                formControlName: 'timePeriodTo',
-                                                keyboardType:
-                                                    TextInputType.number,
-                                                inputFormatters: [
-                                                  formatter.timeFormatter,
-                                                ],
-                                                decoration: InputDecoration(
-                                                  label: Text(
-                                                    '時間帯（至）',
-                                                  ),
-                                                ),
-                                              ),
+                                              child:
+                                                  ReactiveValueListenableBuilder<
+                                                          String>(
+                                                      formControlName:
+                                                          'timePeriodTo',
+                                                      builder: (context,
+                                                          control, _) {
+                                                        return ReactiveTextField<
+                                                            String>(
+                                                          formControlName:
+                                                              'timePeriodTo',
+                                                          keyboardType:
+                                                              TextInputType
+                                                                  .number,
+                                                          inputFormatters: [
+                                                            formatter
+                                                                .timeFormatter,
+                                                          ],
+                                                          onChanged: (value) {
+                                                            if (value.value !=
+                                                                null) {
+                                                              var time =
+                                                                  processTimeInput(
+                                                                      value
+                                                                          .value!);
+                                                              control.value =
+                                                                  time;
+                                                            }
+                                                          },
+                                                          decoration:
+                                                              InputDecoration(
+                                                            label: Text(
+                                                              '時間帯（至）',
+                                                            ),
+                                                          ),
+                                                        );
+                                                      }),
                                             ),
                                             Expanded(
                                               child: Row(
@@ -1147,23 +1165,37 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                       onTap: () {
                                         formArray.add(
                                           FormGroup({
+                                            'id': FormControl<String>(),
                                             'preferredDate':
                                                 FormControl<DateTime>(
-                                              validators: [Validators.required],
-                                            ),
-                                            // 第一希望
+                                              validators: [
+                                                Validators.required,
+                                                Validators.pattern(
+                                                  ValidatorRegExp.date,
+                                                ),
+                                              ],
+                                            ), // 第一希望
                                             'choice': FormControl<String>(
-                                                value: '午前'),
-                                            // 午前, 午後, 終日
+                                                value: '午前'), // 午前, 午後, 終日
                                             'timePeriodFrom':
                                                 FormControl<String>(
-                                              validators: [Validators.required],
-                                            ),
-                                            // 時間帯（自）
+                                              validators: [
+                                                Validators.required,
+                                                // validate time format
+                                                Validators.pattern(
+                                                  ValidatorRegExp.time,
+                                                ),
+                                              ],
+                                            ), // 時間帯（自）
                                             'timePeriodTo': FormControl<String>(
-                                              validators: [Validators.required],
-                                            ),
-                                            // 時間帯（至）
+                                              validators: [
+                                                Validators.required,
+                                                // validate time format
+                                                Validators.pattern(
+                                                  ValidatorRegExp.time,
+                                                ),
+                                              ],
+                                            ), // 時間帯（至）
                                           })
                                             ..markAllAsTouched(),
                                         );
@@ -1279,24 +1311,23 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                   );
                                 },
                                 children: [
-                                  if(webBookingSelected.hasData)...{
+                                  if (webBookingSelected.hasData) ...{
                                     ReactiveFormConsumer(
                                         builder: (context, form, _) {
-                                          return OutlinedButton(
-                                            onPressed: form.invalid
-                                                ? null
-                                                : () {
-                                              context
-                                                  .read<
-                                                  WebAppointmentDetailModel>()
-                                                  .submitData(
-                                                isClosed: true,
-                                              );
-                                            },
-                                            child: Text(
-                                                'キャンセルして病院へ回答する'),
-                                          );
-                                        }),
+                                      return OutlinedButton(
+                                        onPressed: form.invalid
+                                            ? null
+                                            : () {
+                                                context
+                                                    .read<
+                                                        WebAppointmentDetailModel>()
+                                                    .submitData(
+                                                      isClosed: true,
+                                                    );
+                                              },
+                                        child: Text('キャンセルして病院へ回答する'),
+                                      );
+                                    }),
                                   },
                                   ReactiveFormConsumer(
                                       builder: (context, form, _) {
@@ -1385,16 +1416,27 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                             ),
                             IntrinsicWidth(
                               stepWidth: 100,
-                              child: ReactiveTextField(
-                                formControlName: 'testCallTime',
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  formatter.timeFormatter,
-                                ],
-                                decoration: InputDecoration(
-                                  label: Text('時間'),
-                                ),
-                              ),
+                              child: ReactiveValueListenableBuilder<String>(
+                                  formControlName: 'testCallTime',
+                                  builder: (context, control, _) {
+                                    return ReactiveTextField<String>(
+                                      formControlName: 'testCallTime',
+                                      keyboardType: TextInputType.number,
+                                      inputFormatters: [
+                                        formatter.timeFormatter,
+                                      ],
+                                      onChanged: (value) {
+                                        if (value.value != null) {
+                                          var time =
+                                              processTimeInput(value.value!);
+                                          control.value = time;
+                                        }
+                                      },
+                                      decoration: InputDecoration(
+                                        label: Text('時間'),
+                                      ),
+                                    );
+                                  }),
                             ),
                           ],
                         ),

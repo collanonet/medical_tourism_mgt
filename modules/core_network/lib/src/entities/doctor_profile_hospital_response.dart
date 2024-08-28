@@ -25,6 +25,7 @@ class DoctorProfileHospitalResponse {
   String? faxNumber;
   String? email;
   String? remark2;
+  String? fileDoctor;
 
   DoctorProfileHospitalResponse({
     required this.id,
@@ -47,6 +48,7 @@ class DoctorProfileHospitalResponse {
     this.faxNumber,
     this.email,
     this.remark2,
+    this.fileDoctor,
   });
 
   factory DoctorProfileHospitalResponse.fromJson(Map<String, dynamic> json) =>

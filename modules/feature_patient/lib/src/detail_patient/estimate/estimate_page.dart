@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:core_utils/core_utils.dart';
 
 import 'estimate_form.dart';
 import 'estimate_model.dart';
@@ -22,9 +23,7 @@ class EstimatePage extends StatelessWidget {
       create: (context) =>
           GetIt.I<EstimateModel>()..initialData(patient: patient),
       child: ReactiveFormConfig(
-        validationMessages: <String, ValidationMessageFunction>{
-          ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
-        },
+        validationMessages: validationMessages,
         child: ReactiveFormBuilder(
             form: () => estimateForm(),
             builder: (context, formGroup, child) {

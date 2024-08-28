@@ -6,6 +6,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 import 'contract_section.dart';
 import 'contrant_model.dart';
+import 'package:core_utils/core_utils.dart';
 
 class ContractScreen extends StatefulWidget {
   const ContractScreen({super.key, required this.id});
@@ -18,9 +19,7 @@ class _ContractScreenState extends State<ContractScreen> {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
-      validationMessages: {
-        ValidationMessage.required: (error) => 'This field is required',
-      },
+      validationMessages: validationMessages,
       child: Provider(
         create: (context) =>
             GetIt.I<ContrantModel>()..fetchContrant(id: widget.id),

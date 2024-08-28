@@ -16,7 +16,7 @@ MedicalRecordSummaryRequest _$MedicalRecordSummaryRequestFromJson(
       dateOfBirth: json['dateOfBirth'] == null
           ? null
           : DateTime.parse(json['dateOfBirth'] as String),
-      age: (json['age'] as num?)?.toInt(),
+      age: json['age'] as int?,
       gender: json['gender'] as bool?,
       nameChineseKanjiVietnamese: json['nameChineseKanjiVietnamese'] as String?,
       nameKana: json['nameKana'] as String?,

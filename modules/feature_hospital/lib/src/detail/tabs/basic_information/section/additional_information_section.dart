@@ -21,7 +21,6 @@ class AdditionalInformationSection extends StatefulWidget {
 
 class _AdditionalInformationSectionState
     extends State<AdditionalInformationSection> {
-  FileSelect? fileSelect;
   @override
   Widget build(BuildContext context) {
     final formGroup = (ReactiveForm.of(context) as FormGroup)
@@ -122,33 +121,58 @@ class _AdditionalInformationSectionState
                                     children: [
                                       IconButton(
                                           onPressed: () {
-                                            filePicker().then((value) =>
-                                                setState(
-                                                    () => fileSelect = value));
+                                            filePicker().then((value) {
+                                              if (value != null) {
+                                                formGroup
+                                                    .control('file')
+                                                    .value = value;
+                                              }
+                                            });
                                           },
                                           icon: Icon(
                                             CupertinoIcons.paperclip,
                                             color:
                                                 context.appTheme.primaryColor,
                                           )),
-                                      fileSelect != null
-                                          ? Text(fileSelect!.filename ?? '',
-                                              style:
-                                                  context.textTheme.bodySmall)
-                                          : Text(
-                                              'File Input .....',
-                                              style:
-                                                  context.textTheme.bodySmall,
-                                            ),
+                                      ReactiveValueListenableBuilder<
+                                              FileSelect>(
+                                          formControlName: 'file',
+                                          builder: (context, control, _) {
+                                            return GestureDetector(
+                                              onTap: () {
+                                                if (control.value?.url !=
+                                                    null) {
+                                                  openUrlInBrowser(
+                                                      fileName:
+                                                          control.value!.url!);
+                                                }
+                                              },
+                                              child: Text(
+                                                control.value?.filename ??
+                                                    'File Input .....',
+                                                style:
+                                                    context.textTheme.bodySmall,
+                                              ),
+                                            );
+                                          }),
                                     ]),
-                                Chip(
-                                  label: const Text('変更する'),
-                                  labelStyle: TextStyle(
-                                    color: context
-                                        .appTheme.secondaryBackgroundColor,
+                                GestureDetector(
+                                  onTap: () {
+                                    filePicker().then((value) {
+                                      if (value != null) {
+                                        formGroup.control('file').value = value;
+                                      }
+                                    });
+                                  },
+                                  child: Chip(
+                                    label: const Text('変更する'),
+                                    labelStyle: TextStyle(
+                                      color: context
+                                          .appTheme.secondaryBackgroundColor,
+                                    ),
+                                    backgroundColor:
+                                        context.appTheme.primaryColor,
                                   ),
-                                  backgroundColor:
-                                      context.appTheme.primaryColor,
                                 ),
                               ])
                         ],

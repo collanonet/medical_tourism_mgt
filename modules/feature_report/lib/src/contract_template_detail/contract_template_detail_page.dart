@@ -5,6 +5,7 @@ import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+import 'package:core_utils/core_utils.dart';
 import 'contract_template_detail_form.dart';
 import 'contract_template_detail_model.dart';
 import 'contract_template_detail_screen.dart';
@@ -19,7 +20,7 @@ class ContractDetailPage extends StatelessWidget {
       form: () => contractTemplatebasicInformation()..markAllAsTouched(),
       builder: (context, formGroup, child) {
         return ReactiveFormConfig(
-          validationMessages: {},
+          validationMessages: validationMessages,
           child: LayoutView(
             selectedIndex: 9,
             page: Provider(

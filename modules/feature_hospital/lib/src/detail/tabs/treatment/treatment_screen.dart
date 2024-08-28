@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+import 'package:core_utils/core_utils.dart';
 import 'treatment_form.dart';
 import 'treatment_model.dart';
 
@@ -18,9 +19,7 @@ class _TreatmentScreenState extends State<TreatmentScreen> {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
-      validationMessages: {
-        ValidationMessage.required: (error) => 'This field is required',
-      },
+      validationMessages: validationMessages,
       child: ReactiveFormBuilder(
           form: () =>
               treatmentForm(hospitalId: widget.hospitalId)..markAllAsTouched(),

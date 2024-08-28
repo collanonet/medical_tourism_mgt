@@ -1,3 +1,4 @@
+import 'package:core_utils/core_utils.dart';
 import 'package:feature_hospital/src/detail/tabs/basic_information/basic_information_section.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
@@ -14,9 +15,7 @@ class BasicInformationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
-      validationMessages: {
-        ValidationMessage.required: (error) => 'This field is required',
-      },
+      validationMessages: validationMessages,
       child: ReactiveFormBuilder(
           form: () => basicInformationForm()..markAllAsTouched(),
           builder: (context, form, _) {

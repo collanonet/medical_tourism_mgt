@@ -2,6 +2,7 @@ import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:core_network/core_network.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup createMedicalOverseaDataWithFileForm(FileSelect file) {
@@ -10,7 +11,14 @@ FormGroup createMedicalOverseaDataWithFileForm(FileSelect file) {
     'hospitalName': FormControl<String>(validators: [Validators.required]),
     'category': FormControl<String>(value: '画像データ（DICOM）'),
     'documentName': FormControl<String>(validators: [Validators.required]),
-    'issueDate': FormControl<DateTime>(validators: [Validators.required]),
+    'issueDate': FormControl<DateTime>(
+        validators: [
+          Validators.required,
+  Validators.pattern(
+  ValidatorRegExp.date,
+  ),
+  ],
+    ),
 
     'commentHospital1': FormControl<String>(),
     'commentOurCompany': FormControl<String>(),
@@ -18,7 +26,11 @@ FormGroup createMedicalOverseaDataWithFileForm(FileSelect file) {
 
     'sharedUrl': FormControl<String>(),
     'password': FormControl<String>(),
-    'expirationDate': FormControl<DateTime>(),
+    'expirationDate': FormControl<DateTime>(validators: [
+      Validators.pattern(
+        ValidatorRegExp.date,
+      ),
+    ],),
     'qrCode': FormControl<FileSelect>(),
   });
 }

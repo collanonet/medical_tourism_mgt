@@ -25,7 +25,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
     return Consumer<WebAppointmentModel>(
       builder: (context, model, child) {
         return ReactiveFormConfig(
-          validationMessages: validationMessagesFilterPatient(context),
+          validationMessages: validationMessages,
           child: ReactiveFormBuilder(
             form: () => formFilterWebAppointment(),
             builder: (context, formGroup, child) {

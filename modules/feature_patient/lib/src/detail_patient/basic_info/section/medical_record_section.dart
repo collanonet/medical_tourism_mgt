@@ -61,7 +61,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                       Expanded(
                         child: ReactiveDatePicker<DateTime>(
                             formControlName: 'dateOfBirth',
-                            firstDate: DateTime(1900),
+                            firstDate: DateTime(1100),
                             lastDate: DateTime(2100),
                             builder: (context, picker, child) {
                               return ReactiveTextField<DateTime>(
@@ -70,6 +70,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
                                 onChanged: (value) {
+                                  logger.d(value.value);
                                   formGroup.control('age').value =
                                       DateTime.now().year - value.value!.year;
                                   setState(() {});

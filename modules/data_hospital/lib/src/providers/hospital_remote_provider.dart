@@ -258,9 +258,7 @@ class HospitalRemoteProvider {
     return apiService.deleteFacilityPhoto(id);
   }
 
-
   // web booking v2
-
 
   Future<BasicInformationHospitalResponse> webBookingGetHospitalById(
       String id) async {
@@ -329,6 +327,9 @@ class HospitalRemoteProvider {
   Future<void> webBookingDeleteReservation(String reservationId) async {
     return apiService.webBookingDeleteReservation(reservationId);
   }
+
+  Future<TreamentResponce> updateBooking(
+      String treatmentId, TreamentRequest treatmentRequest) {
+    return apiService.updateBooking(treatmentId, treatmentRequest);
+  }
 }
-
-

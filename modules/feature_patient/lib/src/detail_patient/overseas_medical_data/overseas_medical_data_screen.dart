@@ -447,10 +447,7 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
         value: context.read<OverseasMedicalDataModel>(),
         child: AlertDialog(
           content: ReactiveFormConfig(
-            validationMessages: <String, ValidationMessageFunction>{
-              ValidationMessage.required: (error) =>
-                  context.l10n.mgsFieldRequired,
-            },
+            validationMessages: validationMessages,
             child: ReactiveFormBuilder(
               form: () =>
                   createMedicalOverseaDataWithUrlForm()..markAllAsTouched(),
@@ -471,10 +468,7 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
         value: context.read<OverseasMedicalDataModel>(),
         child: AlertDialog(
           content: ReactiveFormConfig(
-            validationMessages: <String, ValidationMessageFunction>{
-              ValidationMessage.required: (error) =>
-                  context.l10n.mgsFieldRequired,
-            },
+            validationMessages: validationMessages,
             child: ReactiveFormBuilder(
               form: () => createMedicalOverseaDataWithFileForm(file)
                 ..markAllAsTouched(),

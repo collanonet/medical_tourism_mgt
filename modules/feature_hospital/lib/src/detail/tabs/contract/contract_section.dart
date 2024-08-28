@@ -69,7 +69,7 @@ class ContractSectionState extends State<ContractSection> {
                         Column(
                           children: [
                             Text(
-                              'パンフレットや資料をここにドラッグ＆ドロップ',
+                              '契約書データをここにドラッグ＆ドロップ',
                               style: context.textTheme.bodySmall?.copyWith(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
@@ -290,14 +290,11 @@ class ContractSectionState extends State<ContractSection> {
         value: context.read<ContrantModel>(),
         child: AlertDialog(
           content: ReactiveFormConfig(
-            validationMessages: <String, ValidationMessageFunction>{
-              ValidationMessage.required: (error) =>
-                  context.l10n.mgsFieldRequired,
-            },
+            validationMessages: validationMessages,
             child: ReactiveFormBuilder(
               form: () => contractForm(hospitalRecordId: widget.id, file: file)
                 ..markAllAsTouched(),
-              builder: (context, formGroup, child) {
+              builder: (_, formGroup, child) {
                 return const Popup();
               },
             ),

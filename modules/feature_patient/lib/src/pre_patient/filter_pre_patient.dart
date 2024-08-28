@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'filter_pre_patient_form.dart';
 import 'pre_patient_model.dart';
+import 'package:core_utils/core_utils.dart';
 
 class PrePatientFilter extends StatelessWidget {
   const PrePatientFilter({super.key});
@@ -14,7 +15,7 @@ class PrePatientFilter extends StatelessWidget {
     return Consumer<PrePatientModel>(
       builder: (context, model, child) {
         return ReactiveFormConfig(
-          validationMessages: validationMessagesFilterPrePatient(context),
+          validationMessages: validationMessages,
           child: ReactiveFormBuilder(
             form: () => formFilterPrePatient(),
             builder: (context, formGroup, child) {

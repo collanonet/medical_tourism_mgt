@@ -547,10 +547,7 @@ class _ContractDetailScreenState extends State<ContractDetailScreen> {
         value: context.read<ContractTemplateModel>(),
         child: AlertDialog(
           content: ReactiveFormConfig(
-            validationMessages: <String, ValidationMessageFunction>{
-              ValidationMessage.required: (error) =>
-                  context.l10n.mgsFieldRequired,
-            },
+            validationMessages: validationMessages,
             child: ReactiveFormBuilder(
               form: () => contractTemplateform(file)..markAllAsTouched(),
               builder: (context, formGroup, child) {

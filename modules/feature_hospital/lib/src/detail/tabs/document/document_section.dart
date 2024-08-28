@@ -68,7 +68,7 @@ class _DocumentSectionState extends State<DocumentSection> {
                         Column(
                           children: [
                             Text(
-                              'パンフレットや資料をここにドラッグ＆ドロップ',
+                              '書類データをここにドラッグ＆ドロップ',
                               style: context.textTheme.bodySmall?.copyWith(
                                 fontSize: 22,
                                 fontWeight: FontWeight.bold,
@@ -301,10 +301,7 @@ class _DocumentSectionState extends State<DocumentSection> {
         value: context.read<DocumentModel>(),
         child: AlertDialog(
           content: ReactiveFormConfig(
-            validationMessages: <String, ValidationMessageFunction>{
-              ValidationMessage.required: (error) =>
-                  context.l10n.mgsFieldRequired,
-            },
+            validationMessages: validationMessages,
             child: ReactiveFormBuilder(
               form: () => documentForm(hospitalRecordId: widget.id, file: file)
                 ..markAllAsTouched(),

@@ -1,4 +1,5 @@
 import 'package:core_network/entities.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup formRiskTest({ApplicationRiskTestResponse? data}) {
@@ -23,12 +24,27 @@ FormGroup formRiskTest({ApplicationRiskTestResponse? data}) {
   return FormGroup({
     'date1': FormControl<DateTime>(
       value: data?.date1,
+      validators: [
+        Validators.pattern(
+          ValidatorRegExp.date,
+        ),
+      ],
     ),
     'date2': FormControl<DateTime>(
       value: data?.date2,
+      validators: [
+        Validators.pattern(
+          ValidatorRegExp.date,
+        ),
+      ],
     ),
     'date3': FormControl<DateTime>(
       value: data?.date3,
+      validators: [
+        Validators.pattern(
+          ValidatorRegExp.date,
+        ),
+      ],
     ),
     'noDate': FormControl<bool>(
       value: data?.noDate,

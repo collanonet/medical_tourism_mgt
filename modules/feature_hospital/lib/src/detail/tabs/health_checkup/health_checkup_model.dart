@@ -54,7 +54,9 @@ class HealthModel {
         hospitalRecord: formGroup.control('hospitalRecord').value,
       ));
 
-      healthData.value = AsyncData(data: healthData.value.data!..add(response));
+      healthData.value = AsyncData(
+          data: healthData.value.data ?? []
+            ..add(response));
       submitData.value = AsyncData(data: response);
     } catch (e) {
       logger.d(e);
@@ -70,7 +72,7 @@ class HealthModel {
       for (var id in ids) {
         await hospitalRepository.deleteHealth(id: id);
         healthData.value = AsyncData(
-            data: healthData.value.data!
+            data: healthData.value.data ?? []
               ..removeWhere((element) => element.id == id));
       }
 

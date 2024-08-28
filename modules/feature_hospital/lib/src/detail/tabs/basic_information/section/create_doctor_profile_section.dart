@@ -6,6 +6,7 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -163,7 +164,7 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                               value: '可',
                               onChanged: (value) {},
                               title: Text(
-                                "可",
+                                '可',
                                 style: context.textTheme.bodySmall,
                               ),
                             ),
@@ -174,7 +175,7 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                               value: '不可',
                               onChanged: (value) {},
                               title: Text(
-                                "不可",
+                                '不可',
                                 style: context.textTheme.bodySmall,
                               ),
                             ),
@@ -202,7 +203,7 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                               value: '可',
                               onChanged: (value) {},
                               title: Text(
-                                "可",
+                                '可',
                                 style: context.textTheme.bodySmall,
                               ),
                             ),
@@ -213,7 +214,7 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                               value: '不可',
                               onChanged: (value) {},
                               title: Text(
-                                "不可",
+                                '不可',
                                 style: context.textTheme.bodySmall,
                               ),
                             ),
@@ -555,23 +556,53 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                               children: [
                                 IconButton(
                                     onPressed: () {
-                                      filePicker().then((value) {});
+                                      filePicker().then((value) {
+                                        if (value != null) {
+                                          currentForm
+                                              .control('fileDoctor')
+                                              .value = value;
+                                        }
+                                      });
                                     },
                                     icon: Icon(
                                       CupertinoIcons.paperclip,
                                       color: context.appTheme.primaryColor,
                                     )),
-                                Text(
-                                  'File Input .....',
-                                  style: context.textTheme.bodySmall,
-                                ),
+                                ReactiveValueListenableBuilder<FileSelect>(
+                                    formControlName: 'fileDoctor',
+                                    builder: (context, control, _) {
+                                      return GestureDetector(
+                                        onTap: () {
+                                          if (control.value?.url != null) {
+                                            openUrlInBrowser(
+                                                fileName: control.value!.url!);
+                                          }
+                                        },
+                                        child: Text(
+                                          control.value?.filename ??
+                                              'File Input .....',
+                                          style: context.textTheme.bodySmall,
+                                        ),
+                                      );
+                                    }),
                               ]),
-                          Chip(
-                            label: const Text('変更する'),
-                            labelStyle: TextStyle(
-                              color: context.appTheme.secondaryBackgroundColor,
+                          GestureDetector(
+                            onTap: () {
+                              filePicker().then((value) {
+                                if (value != null) {
+                                  currentForm.control('fileDoctor').value =
+                                      value;
+                                }
+                              });
+                            },
+                            child: Chip(
+                              label: const Text('変更する'),
+                              labelStyle: TextStyle(
+                                color:
+                                    context.appTheme.secondaryBackgroundColor,
+                              ),
+                              backgroundColor: context.appTheme.primaryColor,
                             ),
-                            backgroundColor: context.appTheme.primaryColor,
                           ),
                         ],
                       )
@@ -657,11 +688,11 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
   InkWell addMore(FormArray<dynamic> formArray, BuildContext context) {
     return InkWell(
       onTap: () => formArray.add(FormGroup({
-        '_id': FormControl<String?>(),
+        '_id': FormControl<String>(),
         'hospital': FormControl<String?>(),
         'profile': FormControl<FileSelect>(),
-        'photoRelease': FormControl<String>(),
-        'name': FormControl<String>(),
+        'photoRelease': FormControl<String>(value: '可'),
+        'name': FormControl<String>(value: '可'),
         'remark': FormControl<String>(),
         'departmentName': FormControl<String>(),
         'post': FormControl<String>(),
@@ -678,8 +709,9 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
             'name': FormControl<String>(),
           })
         ]),
-        'onlineMedicalTreatment': FormControl<String>(),
+        'onlineMedicalTreatment': FormControl<String>(value: '可'),
         'trainingCompletionCertificateNumber': FormControl<String>(),
+        'fileDoctor': FormControl<FileSelect>(),
         'completionCertificate': FormArray([
           FormGroup({
             'name': FormControl<String>(),

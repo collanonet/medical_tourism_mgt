@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+import 'package:core_utils/core_utils.dart';
 import 'application_blood_purification_therapy_form.dart';
 import 'application_blood_purification_therapy_model.dart';
 import 'application_blood_purification_therapy_screen.dart';
@@ -28,9 +29,7 @@ class ApplicationBloodPurificationTherapyPage extends StatelessWidget {
               return Skeletonizer(
                 enabled: value.loading,
                 child: ReactiveFormConfig(
-                  validationMessages: {
-                    ValidationMessage.required: (error) => 'この項目は必須です',
-                  },
+                  validationMessages: validationMessages,
                   child: ReactiveFormBuilder(
                     form: () => formPurificationTherapy(data: value.data),
                     builder: (context, formGroup, child) {

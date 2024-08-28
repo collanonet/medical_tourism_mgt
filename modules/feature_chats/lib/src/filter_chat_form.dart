@@ -7,10 +7,3 @@ FormGroup formFilterChat() => FormGroup(
         'patientNameMessage': FormControl<String>(),
       },
     );
-
-Map<String, String Function(Object)> validationMessagesFilterPatient(
-  BuildContext context,
-) =>
-    {
-      ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
-    };

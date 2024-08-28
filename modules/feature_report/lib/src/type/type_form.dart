@@ -18,10 +18,3 @@ FormGroup typeForm() {
     ])
   });
 }
-
-Map<String, String Function(Object)> validationMessages(
-  BuildContext context,
-) =>
-    {
-      ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
-    };

@@ -126,7 +126,11 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                             value: item.task,
                             disabled: true,
                           ),
-                          'completionDate': FormControl<DateTime>(),
+                          'completionDate': FormControl<DateTime>(validators: [
+                            Validators.pattern(
+                              ValidatorRegExp.date,
+                            ),
+                          ],),
                           'remarks': FormControl<String>(),
                           'medicalRecord': FormControl<String>(),
                           'type': FormControl<String>(
@@ -227,7 +231,11 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                       'key': FormControl<String>(),
                       'tag': FormControl<String>(),
                       'task': FormControl<String>(),
-                      'completionDate': FormControl<DateTime>(),
+                      'completionDate': FormControl<DateTime>(validators: [
+                        Validators.pattern(
+                          ValidatorRegExp.date,
+                        ),
+                      ],),
                       'remarks': FormControl<String>(),
                       'medicalRecord': FormControl<String>(),
                       'type': FormControl<String>(value: index.toString()),

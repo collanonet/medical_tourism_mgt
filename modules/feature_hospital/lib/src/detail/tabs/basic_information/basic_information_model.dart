@@ -296,6 +296,14 @@ class BasicInformationModel {
             'qualifications': qualifications,
             'trainingCompletionCertificateNumber': FormControl<String>(
                 value: item.trainingCompletionCertificateNumber),
+            'fileDoctor': FormControl<FileSelect>(
+              value: item.fileDoctor != null
+                  ? FileSelect(
+                      url: item.fileDoctor,
+                      filename: item.fileDoctor?.split('/').last ?? '',
+                    )
+                  : null,
+            ),
             'onlineMedicalTreatment':
                 FormControl<String>(value: item.onlineMedicalTreatment),
             'telephoneNumber': FormControl<String>(
@@ -341,6 +349,10 @@ class BasicInformationModel {
       formGroup.control('hospital').value =
           hospitalId.value ?? basicInformationData.value.data?.id ?? '';
       formGroup.control('outsourcingContract').value = data.outsourcingContract;
+      formGroup.control('file').value = FileSelect(
+        url: data.file,
+        filename: data.file?.split('/').last ?? '',
+      );
       formGroup.control('msCorporation').value = data.msCorporation;
       formGroup.control('referralFee').value = data.referralFee;
       formGroup.control('treatmentCostPointCalculationPerPoint').value =
@@ -570,6 +582,25 @@ class BasicInformationModel {
         List<String> completionCertificate =
             convertToList(element, 'completionCertificate');
 
+        String? fileDoctor;
+        if (element['fileDoctor'] != null) {
+          FileSelect docFile = element['fileDoctor'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await hospitalRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              fileDoctor = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            fileDoctor = docFile.url;
+          }
+        }
+
         DoctorProfileHospitalRequest request = DoctorProfileHospitalRequest(
           hospital:
               hospitalId.value ?? basicInformationData.value.data?.id ?? '',
@@ -588,6 +619,7 @@ class BasicInformationModel {
           onlineMedicalTreatment: element['onlineMedicalTreatment'] ?? '',
           trainingCompletionCertificateNumber:
               element['trainingCompletionCertificateNumber'] ?? '',
+          fileDoctor: fileDoctor,
           completionCertificate: completionCertificate,
           telephoneNumber: element['telephoneNumber'] ?? '',
           faxNumber: element['faxNumber'] ?? '',
@@ -614,6 +646,25 @@ class BasicInformationModel {
     try {
       additionalInformationData.value = const AsyncData(loading: true);
 
+      String? file;
+      if (form.control('file').value != null) {
+        FileSelect docFile = form.control('file').value;
+        if (docFile.file != null) {
+          try {
+            String base64Image = base64Encode(docFile.file!);
+            FileResponse fileData = await hospitalRepository.uploadFileBase64(
+              base64Image,
+              docFile.filename!,
+            );
+            file = fileData.filename;
+          } catch (e) {
+            logger.e(e);
+          }
+        } else {
+          file = docFile.url;
+        }
+      }
+
       List<String> contract = convertToList(form.value, 'contract');
 
       AdditionalInformationSectionRequest request =
@@ -622,6 +673,7 @@ class BasicInformationModel {
         id: form.control('_id').value,
         outsourcingContract: form.control('outsourcingContract').value ?? '',
         contract: contract,
+        file: file,
         msCorporation: form.control('msCorporation').value ?? '',
         referralFee: form.control('referralFee').value ?? '',
         treatmentCostPointCalculationPerPoint:

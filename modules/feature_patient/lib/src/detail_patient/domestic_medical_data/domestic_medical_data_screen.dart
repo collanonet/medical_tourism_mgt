@@ -255,10 +255,7 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
         value: context.read<DomesticMedicalDataModel>(),
         child: AlertDialog(
           content: ReactiveFormConfig(
-            validationMessages: <String, ValidationMessageFunction>{
-              ValidationMessage.required: (error) =>
-                  context.l10n.mgsFieldRequired,
-            },
+            validationMessages: validationMessages,
             child: ReactiveFormBuilder(
               form: () => domesticMedicalDataForm(
                   medicalRecordId: widget.id!, file: file)

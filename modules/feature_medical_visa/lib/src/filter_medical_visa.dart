@@ -26,7 +26,7 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
     return Consumer<MedicalVisaModel>(
       builder: (context, model, child) {
         return ReactiveFormConfig(
-          validationMessages: validationMessagesFilterPatient(context),
+          validationMessages: validationMessages,
           child: ReactiveFormBuilder(
             form: () => formFilterMedicalVisa(),
             builder: (context, formGroup, child) {

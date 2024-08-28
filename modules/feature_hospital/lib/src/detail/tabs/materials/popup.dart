@@ -123,8 +123,8 @@ class Popup extends StatelessWidget {
                         return ReactiveTextField<DateTime>(
                           formControlName: 'dateOfIssue',
                           valueAccessor: DateTimeValueAccessor(
-                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
+                            dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                          ),
                           decoration: InputDecoration(
                             label: const Text(
                               "発行日",
@@ -202,10 +202,11 @@ class Popup extends StatelessWidget {
               width: context.appTheme.spacing.marginMedium,
             ),
             ValueListenableListener(
-              valueListenable: context.read<MaterialsModel>().materialsData,
+              valueListenable:
+                  context.read<MaterialsModel>().submitMaterialHospital,
               onListen: () {
                 final value =
-                    context.read<MaterialsModel>().materialsData.value;
+                    context.read<MaterialsModel>().submitMaterialHospital.value;
 
                 if (value.hasError) {
                   snackBarWidget(
@@ -225,7 +226,8 @@ class Popup extends StatelessWidget {
                 }
               },
               child: ValueListenableBuilder(
-                  valueListenable: context.read<MaterialsModel>().materialsData,
+                  valueListenable:
+                      context.read<MaterialsModel>().submitMaterialHospital,
                   builder: (context, value, _) {
                     return ElevatedButton(
                       onPressed: value.loading

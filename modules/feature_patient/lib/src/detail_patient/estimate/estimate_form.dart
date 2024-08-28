@@ -1,12 +1,27 @@
+import 'package:core_utils/core_utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup estimateForm() => FormGroup({
       'title_estimate': FormGroup({
         'title': FormControl<String>(value: '劉 偉強 様 呼吸器疾患の受診（京大病院）'),
         'quotation_number': FormControl<String>(value: '19Y−0630−1'),
-        'issueDate': FormControl<DateTime>(value: DateTime.now()),
+        'issueDate': FormControl<DateTime>(
+          value: DateTime.now(),
+          validators: [
+            Validators.pattern(
+              ValidatorRegExp.date,
+            ),
+          ],
+        ),
         'disclosure_agent_patient': FormControl<String>(value: '見積書'),
-        'payment_due_date': FormControl<DateTime>(value: DateTime.now()),
+        'payment_due_date': FormControl<DateTime>(
+          value: DateTime.now(),
+          validators: [
+            Validators.pattern(
+              ValidatorRegExp.date,
+            ),
+          ],
+        ),
         'payment_terms': FormControl<String>(value: '来日前前金（預り金）、終了後精算'),
         'contact_person': FormControl<String>(value: '谷川'),
         'prospective': FormControl<String>(value: 'A'),

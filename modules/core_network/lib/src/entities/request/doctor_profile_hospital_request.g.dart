@@ -37,6 +37,7 @@ DoctorProfileHospitalRequest _$DoctorProfileHospitalRequestFromJson(
       faxNumber: json['faxNumber'] as String?,
       email: json['email'] as String?,
       remark2: json['remark2'] as String?,
+      fileDoctor: json['fileDoctor'] as String?,
     );
 
 Map<String, dynamic> _$DoctorProfileHospitalRequestToJson(
@@ -63,4 +64,5 @@ Map<String, dynamic> _$DoctorProfileHospitalRequestToJson(
       'faxNumber': instance.faxNumber,
       'email': instance.email,
       'remark2': instance.remark2,
+      'fileDoctor': instance.fileDoctor,
     };

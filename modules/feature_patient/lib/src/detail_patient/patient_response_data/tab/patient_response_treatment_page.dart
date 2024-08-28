@@ -17,9 +17,7 @@ class PatientResponseTreatmentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     logger.d('patientId build: $patientId');
     return ReactiveFormConfig(
-      validationMessages: <String, ValidationMessageFunction>{
-        ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
-      },
+      validationMessages: validationMessages,
       child: ReactiveFormBuilder(
           form: () => treatmentForm(),
           builder: (context, formGroup, child) {

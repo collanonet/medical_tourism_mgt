@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+import 'package:core_utils/core_utils.dart';
 import 'filter_chat_form.dart';
 import 'chat_model.dart';
 
@@ -14,7 +15,7 @@ class ChatFilter extends StatelessWidget {
     return Consumer<ChatModel>(
       builder: (context, model, child) {
         return ReactiveFormConfig(
-          validationMessages: validationMessagesFilterPatient(context),
+          validationMessages: validationMessages,
           child: ReactiveFormBuilder(
             form: () => formFilterChat(),
             builder: (context, formGroup, child) {

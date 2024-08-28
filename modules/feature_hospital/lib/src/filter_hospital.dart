@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:core_utils/core_utils.dart';
 
 import 'filter_hospital_form.dart';
 import 'hospital_model.dart';
@@ -22,7 +23,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
     return Consumer<HospitalModel>(
       builder: (context, model, child) {
         return ReactiveFormConfig(
-          validationMessages: validationMessagesFilterPatient(context),
+          validationMessages: validationMessages,
           child: ReactiveFormBuilder(
             form: () => formFilterHospital(),
             builder: (context, formGroup, child) {

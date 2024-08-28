@@ -1,6 +1,7 @@
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
@@ -17,10 +18,7 @@ class BasicInformationPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
-      validationMessages: <String, ValidationMessageFunction>{
-        ValidationMessage.required: (error) => context.l10n.mgsFieldRequired,
-        ValidationMessage.pattern: (error) => '無効な形式',
-      },
+      validationMessages: validationMessages,
       child: ReactiveFormBuilder(
         form: () => formBasicInformation()..markAllAsTouched(),
         builder: (context, formGroup, child) {

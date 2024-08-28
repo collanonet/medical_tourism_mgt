@@ -1058,7 +1058,8 @@ class _WebAppointmentDetailScreenState
                                                         },
                                                         decoration:
                                                             InputDecoration(
-                                                          label: Text('第一希望'),
+                                                          label: Text(
+                                                              '第 ${formArray.controls.indexOf(currentForm) + 1} 希望'),
                                                           suffixIcon:
                                                               IconButton(
                                                             icon: const Icon(
