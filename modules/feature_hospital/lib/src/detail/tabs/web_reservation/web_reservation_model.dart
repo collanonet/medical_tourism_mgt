@@ -210,6 +210,7 @@ class WebAppointmentDetailModel {
 
     if (data.proposedDates != null && data.proposedDates!.isNotEmpty) {
       candidateDate.clear(updateParent: true);
+      candidateDate.reset(updateParent: true);
       data.proposedDates?.map((e) {
         candidateDate.add(FormGroup({
           'id': FormControl<String>(value: e.id),

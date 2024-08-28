@@ -9,11 +9,13 @@ class DetailProcessChartModel {
   DetailProcessChartModel({
     required this.processChartRepository,
   });
+
   final ProcessChartRepository processChartRepository;
 
-  ValueNotifier<AsyncData<DetailItineraryResponse>> getProcessData = ValueNotifier(const AsyncData());
+  ValueNotifier<AsyncData<DetailItineraryResponse>> getProcessData =
+      ValueNotifier(const AsyncData());
 
-  void update(DetailItineraryResponse data){
-    getProcessData.value = AsyncData(data:data);
+  void update(DetailItineraryResponse data) {
+    getProcessData.value = AsyncData(data: data);
   }
 }

@@ -126,6 +126,7 @@ class ProgressListModel {
           }));
         }
 
+
         formArray.add(FormGroup({'progress': formArrayProgress}));
       });
     }

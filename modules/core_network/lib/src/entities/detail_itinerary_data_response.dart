@@ -26,64 +26,58 @@ class Task {
   String? itinerary;
 
   Task({
-     this.placeName,
-     this.timeFrom,
-     this.timeTo,
-     this.transportation,
-     this.itinerary,
+    this.placeName,
+    this.timeFrom,
+    this.timeTo,
+    this.transportation,
+    this.itinerary,
   });
 
-  factory Task.fromJson(Map<String,dynamic> json){
+  factory Task.fromJson(Map<String, dynamic> json) {
     return _$TaskFromJson(json);
   }
 
-  Map<String,dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return _$TaskToJson(this);
   }
-
-
 }
 
 @JsonSerializable()
 class Group {
   List<Task>? task;
 
-  Group({ this.task});
- 
- factory Group.fromJson(Map<String,dynamic> json){
-  return _$GroupFromJson(json);
- }
+  Group({this.task});
 
- Map<String,dynamic> toJson(){
-  return _$GroupToJson(this);
- }
+  factory Group.fromJson(Map<String, dynamic> json) {
+    return _$GroupFromJson(json);
+  }
 
- 
+  Map<String, dynamic> toJson() {
+    return _$GroupToJson(this);
+  }
 }
 
 @JsonSerializable()
 class Day {
   DateTime? date;
-List<bool>? meals;
+  List<bool>? meals;
   String? placeName;
   String? accommodation;
   List<Group>? groups;
 
   Day({
-     this.date,
-     this.meals,
-     this.placeName,
-     this.accommodation,
-     this.groups,
+    this.date,
+    this.meals,
+    this.placeName,
+    this.accommodation,
+    this.groups,
   });
 
-  factory Day.fromJson(Map<String,dynamic> json){
+  factory Day.fromJson(Map<String, dynamic> json) {
     return _$DayFromJson(json);
   }
 
-  Map<String,dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return _$DayToJson(this);
   }
-  
 }
-

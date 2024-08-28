@@ -8,37 +8,40 @@ import 'package:reactive_forms/reactive_forms.dart';
 @injectable
 class ItineraryModel {
   ItineraryModel({required this.processChartRepository});
+
   final ProcessChartRepository processChartRepository;
   ValueNotifier<String?> id = ValueNotifier(null);
 
   ValueNotifier<AsyncData<DetailItineraryResponse>> itinerraryData =
       ValueNotifier(const AsyncData());
+
   Future<void> fetchItinerary(FormGroup formGroup, {String? id}) async {
     try {
-      itinerraryData.value = const AsyncData(loading: true);
       this.id.value = id;
       if (id != null) {
+        itinerraryData.value = const AsyncData(loading: true);
         final response = await processChartRepository.getDetailItinerary(id);
         insertItinerary(formGroup, response);
         itinerraryData.value = AsyncData(data: response);
       }
     } catch (e) {
       logger.d(e);
+      itinerraryData.value = AsyncData(error: e);
     }
   }
 
-  void insertItinerary(FormGroup formGroup, DetailItineraryResponse? data) {
+  void insertItinerary(FormGroup formGroup, DetailItineraryResponse data) {
     try {
-      FormArray patientName = FormArray([]);
-      for (var element in data!.patient!) {
-        patientName.add(
-          FormGroup(
-            {
-              'patientName': FormControl<String>(value: element), // 患者名
-            },
-          ),
-        );
-      }
+      // FormArray patientName = FormArray([]);
+      // for (var element in data!.patient!) {
+      //   patientName.add(
+      //     FormGroup(
+      //       {
+      //         'patientName': FormControl<String>(value: element), // 患者名
+      //       },
+      //     ),
+      //   );
+      // }
       formGroup.control('tourName').value = data.tourName;
       formGroup.control('peopleNumber').value = data.peopleNumber;
       formGroup.control('group').value = data.group;
@@ -46,37 +49,171 @@ class ItineraryModel {
       formGroup.control('_id').value = data.id;
 
       FormArray days = FormArray([]);
-      // formGroup.control('day').value = days;
-      if (data.day != null && data.day!.isNotEmpty) {
-        for (var e in data.day!) {
-          days.add(
+
+      data.day?.forEach((e) {
+        logger.d('date ${e.toJson()}');
+        // // work with groups
+        FormArray groups = FormArray([]);
+
+        e.groups?.forEach((element) {
+          // working with tasks
+          FormArray tasks = FormArray([]);
+          element.task?.forEach((element) {
+            tasks.add(FormGroup({
+              '_id': FormControl<String>(),
+              'placeName': FormControl<String>(value: element.placeName),
+              'timeFrom': FormControl<String>(value: element.timeFrom),
+              'timeTo': FormControl<String>(value: element.timeTo),
+              'transportation':
+                  FormControl<String>(value: element.transportation),
+              'itinerary': FormControl<String>(value: element.itinerary),
+            }));
+          });
+
+          // insert default form if task null
+          if (element.task == null) {
+            tasks = FormArray(
+              [
+                FormGroup(
+                  {
+                    '_id': FormControl<String>(),
+                    'placeName': FormControl<String>(value: ''), // 地名
+                    'timeFrom': FormControl<String>(value: ''), // 時刻（自）
+                    'timeTo': FormControl<String>(value: ''), // 時刻（至）
+                    'transportation': FormControl<String>(value: ''), // 交通
+                    'itinerary': FormControl<String>(value: ''), // 行程
+                  },
+                ),
+              ],
+            );
+          }
+
+          groups.add(FormGroup({
+            'task': tasks,
+          }));
+        });
+
+        // insert default form if groups null
+        if (e.groups == null) {
+          groups = FormArray(
+            // グループ
+            [
+              FormGroup(
+                {
+                  'task': FormArray(
+                    [
+                      FormGroup(
+                        {
+                          '_id': FormControl<String>(),
+                          'placeName': FormControl<String>(value: ''), // 地名
+                          'timeFrom': FormControl<String>(value: ''), // 時刻（自）
+                          'timeTo': FormControl<String>(value: ''), // 時刻（至）
+                          'transportation':
+                              FormControl<String>(value: ''), // 交通
+                          'itinerary': FormControl<String>(value: ''), // 行程
+                        },
+                      ),
+                    ],
+                  ),
+                },
+              ),
+            ],
+          );
+        }
+
+        days.add(
+          FormGroup(
+            {
+              '_id': FormControl<String>(),
+              'date': FormControl<DateTime>(value: e.date), // 日付
+              'meals': FormControl<List<bool>>(value: e.meals ?? []),
+              'morning': FormControl<bool>(value: e.meals?[0] ?? false),
+              'noon': FormControl<bool>(value: e.meals?[1] ?? false),
+              'evening': FormControl<bool>(value: e.meals?[2] ?? false),
+              'placeName': FormControl<String>(value: e.placeName), // 地名
+              'placeStay': FormControl<String>(value: e.accommodation), // 宿泊場所
+              'groups': groups,
+            },
+          ),
+        );
+      });
+
+      if (data.day == null || data.day!.isEmpty) {
+        days = FormArray(
+          [
             FormGroup(
               {
-                'date': FormControl<DateTime>(value: e.date), // 日付
+                '_id': FormControl<String>(value: ''),
+                'date': FormControl<DateTime>(), // 日付
+                'meals': FormControl<List<bool>>(value: []),
+                //meals
                 'morning': FormControl<bool>(value: false),
                 'noon': FormControl<bool>(value: false),
                 'evening': FormControl<bool>(value: false),
-                'placeName': FormControl<String>(value: e.placeName), // 地名
-                'placeStay':
-                    FormControl<String>(value: e.accommodation), // 宿泊場所
-                'groups': FormArray([]), // グループ
+
+                'placeName': FormControl<String>(value: ''), // 地名
+                'placeStay': FormControl<String>(value: ''), // 宿泊場所
+                'groups': FormArray(
+                  // グループ
+                  [
+                    FormGroup(
+                      {
+                        'task': FormArray(
+                          [
+                            FormGroup(
+                              {
+                                '_id': FormControl<String>(),
+                                'placeName':
+                                    FormControl<String>(value: ''), // 地名
+                                'timeFrom':
+                                    FormControl<String>(value: ''), // 時刻（自）
+                                'timeTo':
+                                    FormControl<String>(value: ''), // 時刻（至）
+                                'transportation':
+                                    FormControl<String>(value: ''), // 交通
+                                'itinerary':
+                                    FormControl<String>(value: ''), // 行程
+                              },
+                            ),
+                          ],
+                        ),
+                      },
+                    ),
+                  ],
+                ),
               },
             ),
-          );
-        }
-      } else {
-        FormGroup(
-          {
-            'date': FormControl<DateTime>(), // 日付
-            'morning': FormControl<bool>(value: false),
-            'noon': FormControl<bool>(value: false),
-            'evening': FormControl<bool>(value: false),
-            'placeName': FormControl<String>(value: ''), // 地名
-            'placeStay': FormControl<String>(value: ''), // 宿泊場所
-            'groups': FormArray([]), // グループ
-          },
+          ],
         );
       }
+
+      logger.d('days ${days.value}');
+      formGroup = FormGroup({
+        'patient': FormArray(
+          [
+            FormGroup(
+              {
+                'patientName': FormControl<String>(value: ''), // 患者名
+              },
+            ),
+            FormGroup(
+              {
+                'patientName': FormControl<String>(value: ''), // 患者名
+              },
+            ),
+            FormGroup(
+              {
+                'patientName': FormControl<String>(value: ''), // 患者名
+              },
+            ),
+          ],
+        ),
+        'tourName': FormControl<String>(value: data.tourName),
+        'peopleNumber': FormControl<int>(value: data.peopleNumber),
+        'group': FormControl<int>(value: data.group),
+        'classification': FormControl<String>(value: data.classification),
+        'day': days,
+      });
     } catch (e) {
       logger.d(e);
     }
@@ -84,27 +221,28 @@ class ItineraryModel {
 
   ValueNotifier<AsyncData<DetailItineraryResponse>> submitData =
       ValueNotifier(const AsyncData());
+
   Future<void> submitItinerary(FormGroup formGroup) async {
     try {
       List<String>? patients = [];
-      await formGroup.control('patient').value.forEach((element) {
+      formGroup.control('patient').value.forEach((element) {
         patients.add(element['patientName']);
       });
 
       List<Day>? days = [];
-      await formGroup.control('day').value.forEach(
-        (element) async {
+      formGroup.control('day').value.forEach(
+        (element) {
           List<bool> meals = [];
           meals.add(element['morning']);
           meals.add(element['noon']);
           meals.add(element['evening']);
 
           List<Group>? groups = [];
-          await element['groups'].forEach(
+          element['groups'].forEach(
             (groupElement) {
               List<Task>? tasks = [];
               groupElement['task'].forEach(
-                (taskElement) async {
+                (taskElement) {
                   tasks.add(
                     Task(
                       placeName: taskElement['placeName'],

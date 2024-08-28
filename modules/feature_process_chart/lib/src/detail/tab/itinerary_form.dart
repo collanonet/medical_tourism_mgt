@@ -45,25 +45,11 @@ FormGroup itineraryForm() => FormGroup(
                   [
                     FormGroup(
                       {
-                        '_id' : FormControl<String>(),
                         'task': FormArray(
                           [
                             FormGroup(
                               {
-                                'placeName':
-                                    FormControl<String>(value: ''), // 地名
-                                'timeFrom':
-                                    FormControl<String>(value: ''), // 時刻（自）
-                                'timeTo':
-                                    FormControl<String>(value: ''), // 時刻（至）
-                                'transportation':
-                                    FormControl<String>(value: ''), // 交通
-                                'itinerary':
-                                    FormControl<String>(value: ''), // 行程
-                              },
-                            ),
-                            FormGroup(
-                              {
+                                '_id' : FormControl<String>(),
                                 'placeName':
                                     FormControl<String>(value: ''), // 地名
                                 'timeFrom':
