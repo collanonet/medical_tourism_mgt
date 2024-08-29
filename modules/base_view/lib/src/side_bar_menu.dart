@@ -21,8 +21,7 @@ class SideBarMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
-    final appVersion = GetIt.I<String>(instanceName: 'appVersion');
+    // final appVersion = GetIt.I<String>(instanceName: 'appVersion') ?? '';
 
     List<Menu> menus = [
       Menu(
@@ -174,7 +173,8 @@ class SideBarMenu extends StatelessWidget {
                 ),
               ),
               Text(
-                'version: $appVersion',
+                'version: 1.0.0(2)',
+                // 'version: $appVersion',
                 style: const TextStyle(
                   color: Colors.grey,
                   fontFamily: 'NotoSansJP',

@@ -1,1 +1,1 @@
-enum Server { local,dev, production}
+enum Server { local, dev,stage, production }

@@ -115,8 +115,16 @@ scripts:
       scope: "medical_tourism_mgt"
   web_dev:
     description: "hosting_web_dev"
-    run: fvm flutter build web --release -t lib/main_dev.dart && firebase deploy --only hosting
-
+    run: |
+      fvm flutter build web --release -t lib/main_dev.dart && \
+      cp firebase-dev.json firebase.json && \
+      firebase deploy --only hosting:medical-tourism-dev
+  web_stage:
+    description: "hosting_web_stage"
+    run: |
+      fvm flutter build web --release -t lib/main_stage.dart && \
+      cp firebase-stage.json firebase.json && \
+      firebase deploy --only hosting:medical-tourism-stage
 
 
   core_network:

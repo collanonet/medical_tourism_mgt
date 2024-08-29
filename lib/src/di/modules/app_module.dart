@@ -18,6 +18,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../routes/app_router.dart';
 import '../../routes/guards.dart';
+import '../injection.dart';
 
 @module
 abstract class AppModule {
@@ -70,7 +71,14 @@ abstract class AppModule {
     return 'DEV ${await Strings.appVersion()}';
   }
 
-  @prod
+  @stage
+  @preResolve
+  @Named('appVersion')
+  Future<String> get stageAppVersion async {
+    return 'STAGE ${await Strings.appVersion()}';
+  }
+
+  @production
   @preResolve
   @Named('appVersion')
   Future<String> get prodAppVersion async {

@@ -18,6 +18,7 @@ import '../config/server.dart';
 import 'injection.config.dart';
 
 const local = Environment('local');
+const stage = Environment('stage');
 const production = Environment('production');
 
 @InjectableInit(

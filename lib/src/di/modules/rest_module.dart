@@ -52,6 +52,7 @@ abstract class RestModule {
   }
 
   @local
+  @Order(0)
   @Named('baseUrl')
   Uri get localBaseUrl {
     return Uri(
@@ -62,6 +63,7 @@ abstract class RestModule {
   }
 
   @dev
+  @Order(0)
   @Named('baseUrl')
   Uri get devBaseUrl {
     return Uri(
@@ -70,7 +72,18 @@ abstract class RestModule {
     );
   }
 
+  @stage
+  @Order(0)
+  @Named('baseUrl')
+  Uri get stageBaseUrl {
+    return Uri(
+      scheme: 'https',
+      host: 'medical-tourism-api-stage-collabonet.pixelplatforms.com',
+    );
+  }
+
   @production
+  @Order(0)
   @Named('baseUrl')
   Uri get prodBaseUrl => Uri();
 }
