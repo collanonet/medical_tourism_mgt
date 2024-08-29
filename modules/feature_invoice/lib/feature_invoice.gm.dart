@@ -8,11 +8,7 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-
-// Package imports:
 import 'package:auto_route/auto_route.dart' as _i2;
-
-// Project imports:
 import 'package:feature_invoice/src/invoice_page.dart' as _i1;
 
 abstract class $FeatureInvoiceRouterModule extends _i2.AutoRouterModule {

@@ -20,3 +20,4 @@ export './src/open_url_in_browser.dart';
 export './src/validator_regexp.dart';
 export './src/clear_focus_navigator_observer.dart';
 export './src/keyboards.dart';
+export './src/strings.dart';

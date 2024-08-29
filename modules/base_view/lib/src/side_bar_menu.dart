@@ -8,6 +8,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_utils/routes.dart';
 import 'package:feature_auth/feature_auth.dart';
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
 class SideBarMenu extends StatelessWidget {
@@ -20,6 +21,9 @@ class SideBarMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final appVersion = GetIt.I<String>(instanceName: 'appVersion');
+
     List<Menu> menus = [
       Menu(
         title: context.l10n.labelPatient,
@@ -169,6 +173,14 @@ class SideBarMenu extends StatelessWidget {
                   ),
                 ),
               ),
+              Text(
+                'version: $appVersion',
+                style: const TextStyle(
+                  color: Colors.grey,
+                  fontFamily: 'NotoSansJP',
+                  package: 'core_ui',
+                ),
+              ),
               Divider(
                 endIndent: 20,
                 indent: 4,
@@ -187,7 +199,8 @@ class SideBarMenu extends StatelessWidget {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: const Text('Logout'),
-                          content: const Text('Are you sure you want to log out?'),
+                          content:
+                              const Text('Are you sure you want to log out?'),
                           actions: [
                             TextButton(
                               onPressed: () {
