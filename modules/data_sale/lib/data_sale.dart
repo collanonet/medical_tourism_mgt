@@ -1,5 +1,6 @@
 library micro;
 
+// Package imports:
 import 'package:injectable/injectable.dart';
 
 export 'src/repositories/sale_repository.dart';

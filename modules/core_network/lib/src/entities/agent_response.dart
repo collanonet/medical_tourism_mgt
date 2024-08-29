@@ -1,4 +1,7 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
+// Project imports:
 import 'agent_referral_commission_response.dart';
 
 part 'agent_response.g.dart';

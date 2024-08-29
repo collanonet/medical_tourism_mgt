@@ -1,5 +1,4 @@
-
-import 'package:core_network/core_network.dart';
+// Package imports:
 import 'package:core_network/entities.dart';
 
 abstract class PatientRepository {

@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:core_network/core_network.dart';
 
 abstract class WebAppointmentRepository {
@@ -36,4 +37,7 @@ abstract class WebAppointmentRepository {
       String reservationId, WebBookingMedicalRecordRequest request);
 
   Future<void> webBookingDeleteReservation(String reservationId);
+
+  Future<TreamentResponce> updateBooking(String treatmentId, TreamentRequest treatmentRequest);
+
 }

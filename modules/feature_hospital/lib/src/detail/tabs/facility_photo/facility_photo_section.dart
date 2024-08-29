@@ -1,15 +1,17 @@
-import 'package:core_l10n/l10n.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+// Project imports:
 import 'facility_file.dart';
 import 'facility_photo_form.dart';
 import 'facility_photo_model.dart';
@@ -122,11 +124,11 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                           },
                         );
                       }),
-                  Expanded(flex: 2, child: Text('施設写真名')),
-                  Expanded(child: Text('撮影')),
-                  Expanded(child: Text('撮影日')),
-                  Expanded(child: Text('共有')),
-                  Expanded(child: SizedBox()),
+                  const Expanded(flex: 2, child: Text('施設写真名')),
+                  const Expanded(child: Text('撮影')),
+                  const Expanded(child: Text('撮影日')),
+                  const Expanded(child: Text('共有')),
+                  const Expanded(child: SizedBox()),
                 ],
               ),
               SizedBox(
@@ -179,19 +181,33 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                         ),
                         Expanded(
                           child: value.requireData[index].share == null
-                              ? SizedBox()
-                              : Icon(Icons.person),
+                              ? const SizedBox()
+                              : const Icon(Icons.person),
                         ),
                         Expanded(
-                          child: Avatar.network(
-                            value.requireData[index].facilityFile ??
-                                value.requireData[index].uploadedPhoto,
-                            placeholder: const AssetImage(
-                              Images.logoMadical,
-                              package: 'core_ui',
+                          child: InkWell(
+                            onTap: () {
+                              if (value.requireData[index].facilityFile !=
+                                      null ||
+                                  value.requireData[index].uploadedPhoto !=
+                                      null) {
+                                openUrlInBrowser(
+                                    fileName:
+                                        value.requireData[index].facilityFile ??
+                                            value.requireData[index]
+                                                .uploadedPhoto!);
+                              }
+                            },
+                            child: Avatar.network(
+                              value.requireData[index].facilityFile ??
+                                  value.requireData[index].uploadedPhoto,
+                              placeholder: const AssetImage(
+                                Images.logoMadical,
+                                package: 'core_ui',
+                              ),
+                              shape: BoxShape.rectangle,
+                              customSize: const Size(60, 60),
                             ),
-                            shape: BoxShape.rectangle,
-                            customSize: const Size(60, 60),
                           ),
                         ),
                       ],
@@ -257,9 +273,9 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                                                     value: context
                                                         .read<FacilityModel>(),
                                                     child: AlertDialog(
-                                                      title: Text("削除確認"),
-                                                      content: Text(
-                                                          "選択した書類を削除しますか？"),
+                                                      title: const Text('削除確認'),
+                                                      content: const Text(
+                                                          '選択した書類を削除しますか？'),
                                                       actions: [
                                                         TextButton(
                                                           onPressed: () {
@@ -267,7 +283,7 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                                                                     context)
                                                                 .pop();
                                                           },
-                                                          child: Text("キャンセル"),
+                                                          child: const Text('キャンセル'),
                                                         ),
                                                         TextButton(
                                                           onPressed: () {
@@ -280,7 +296,7 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                                                                     context)
                                                                 .pop();
                                                           },
-                                                          child: Text("削除する"),
+                                                          child: const Text('削除する'),
                                                         ),
                                                       ],
                                                     ),
@@ -320,10 +336,7 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
         value: context.read<FacilityModel>(),
         child: AlertDialog(
           content: ReactiveFormConfig(
-            validationMessages: <String, ValidationMessageFunction>{
-              ValidationMessage.required: (error) =>
-                  context.l10n.mgsFieldRequired,
-            },
+            validationMessages: validationMessages,
             child: ReactiveFormBuilder(
               form: () =>
                   facilityPhotoForm(hospitalRecordId: widget.id, file: file)

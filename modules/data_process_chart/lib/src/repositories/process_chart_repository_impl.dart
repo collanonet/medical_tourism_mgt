@@ -1,6 +1,8 @@
+// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 
+// Project imports:
 import '../providers/process_chart_local_provider.dart';
 import '../providers/process_chart_remote_provider.dart';
 import 'process_chart_repository.dart';
@@ -15,10 +17,7 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   final ProcessChartRemoteProvider remote;
   final ProcessChartLocalProvider local;
 
-  @override
-  Future<PatientFilterResponse> getFilterPatientChart() {
-    return remote.getFilterPatientChart();
-  }
+  
 
   @override
   Future<PatientFilterResponse> postFilterpatientChart(
@@ -98,8 +97,8 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
 
   @override
   Future<List<DetainHotelRegistationResponse>> getDetainlHotelRegistation({
-      String? accommodationName,
-  //  List<String>? accommodationType,
+    String? accommodationName,
+    //  List<String>? accommodationType,
     String? area,
     bool? usageRecord,
     bool? isJapanese,
@@ -110,8 +109,8 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
     bool? isChinese,
   }) {
     return remote.getDetainlHotelRegistation(
-        accommodationName: accommodationName,
-   //   accommodationType: accommodationType,
+      accommodationName: accommodationName,
+      //   accommodationType: accommodationType,
       area: area,
       usageRecord: usageRecord,
       isJapanese: isJapanese,
@@ -246,9 +245,22 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<List<DetailItineraryResponse>> getDetailItinerary({String? tourName,String? classification,DateTime? dateFrom,DateTime? dateTo}) {
+  Future<DetailItineraryResponse> getDetailItinerary(String id) {
     return remote.getDetailitinerary(
-      tourName: tourName,
+     id,
+     
+    );
+  }
+
+  @override
+  Future<List<DetailItineraryResponse>> getPatientChart({
+    String? tourName,
+    String? classification,
+    DateTime? dateFrom,
+    DateTime? dateTo,
+  }) {
+    return remote.getPatientChart(
+       tourName: tourName,
       classification: classification,
       dateFrom: dateFrom,
       dateTo: dateTo,

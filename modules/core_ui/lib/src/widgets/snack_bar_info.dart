@@ -1,6 +1,10 @@
-import 'package:bot_toast/bot_toast.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:bot_toast/bot_toast.dart';
+
+// Project imports:
 import '../theme/app_theme_data.dart';
 
 snackBarWidget({

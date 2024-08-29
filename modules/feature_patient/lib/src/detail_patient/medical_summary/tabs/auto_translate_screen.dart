@@ -1,5 +1,8 @@
-import 'package:core_ui/core_ui.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_ui/core_ui.dart';
 
 class AutoTranslateScreen extends StatelessWidget {
   const AutoTranslateScreen({super.key});
@@ -100,7 +103,7 @@ class AutoTranslateScreen extends StatelessWidget {
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(
                           context.appTheme.spacing.borderRadiusMedium)),
-                  child: SingleChildScrollView(
+                  child: const SingleChildScrollView(
                     child: Text('''
 1、关于患者的病理过程：
 患者何时、多大年龄被诊断出？
@@ -154,7 +157,7 @@ class AutoTranslateScreen extends StatelessWidget {
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(
                           context.appTheme.spacing.borderRadiusMedium)),
-                  child: SingleChildScrollView(
+                  child: const SingleChildScrollView(
                     child: Text('''
 1. 患者の病理学的過程に関して：
 患者はいつ、何歳で診断されましたか?

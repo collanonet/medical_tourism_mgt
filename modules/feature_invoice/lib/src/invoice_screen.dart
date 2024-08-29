@@ -1,12 +1,15 @@
-import 'package:core_ui/core_ui.dart';
-import 'package:core_ui/widgets.dart';
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+
+// Package imports:
+import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+// Project imports:
 import 'detail/quote_screen.dart';
 import 'invoice_form.dart';
 import 'invoice_model.dart';

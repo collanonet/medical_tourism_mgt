@@ -1,7 +1,5 @@
-
-import 'package:core_network/core_network.dart';
+// Package imports:
 import 'package:data_patient/data_patient.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable

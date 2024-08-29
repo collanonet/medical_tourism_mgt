@@ -1,16 +1,20 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:core_l10n/l10n.dart';
 import 'package:core_network/entities.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_table_2/data_table_2.dart';
-import '../../feature_patient.gm.dart';
-import 'pre_patient_model.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
+import '../../feature_patient.gm.dart';
 import 'filter_pre_patient.dart';
+import 'pre_patient_model.dart';
 
 class PrePatientScreen extends StatefulWidget {
   const PrePatientScreen({super.key});

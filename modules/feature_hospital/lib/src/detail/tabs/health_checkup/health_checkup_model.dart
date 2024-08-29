@@ -1,9 +1,13 @@
+// Dart imports:
 import 'dart:convert';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_hospital/data_hospital.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -54,7 +58,9 @@ class HealthModel {
         hospitalRecord: formGroup.control('hospitalRecord').value,
       ));
 
-      healthData.value = AsyncData(data: healthData.value.data!..add(response));
+      healthData.value = AsyncData(
+          data: healthData.value.data ?? []
+            ..add(response));
       submitData.value = AsyncData(data: response);
     } catch (e) {
       logger.d(e);
@@ -70,7 +76,7 @@ class HealthModel {
       for (var id in ids) {
         await hospitalRepository.deleteHealth(id: id);
         healthData.value = AsyncData(
-            data: healthData.value.data!
+            data: healthData.value.data ?? []
               ..removeWhere((element) => element.id == id));
       }
 

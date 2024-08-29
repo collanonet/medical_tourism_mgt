@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:core_network/core_network.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup basicInfoForm({
@@ -7,7 +9,13 @@ FormGroup basicInfoForm({
     FormGroup(
       {
         'id': FormControl<String?>(),
-        'dateOfBirth': FormControl<DateTime>(), //生年月日
+        'dateOfBirth': FormControl<DateTime>(
+          validators: [
+            Validators.pattern(
+              ValidatorRegExp.date,
+            ),
+          ],
+        ), //生年月日
         'age': FormControl<int?>(value: 0), // 年齢
         'height': FormControl<int>(
           value: 0,
@@ -24,18 +32,48 @@ FormGroup basicInfoForm({
         'isFemale': FormControl<bool>(
           value: false,
         ), // 女性
-        'arrivalDate': FormControl<DateTime>(), // 来日日
-        'consultationDate': FormControl<DateTime>(),
-        'returnDate': FormControl<DateTime>(),
+        'arrivalDate': FormControl<DateTime>(
+          validators: [
+            Validators.pattern(
+              ValidatorRegExp.date,
+            ),
+          ],
+        ), // 来日日
+        'consultationDate': FormControl<DateTime>(
+          validators: [
+            Validators.pattern(
+              ValidatorRegExp.date,
+            ),
+          ],
+        ),
+        'returnDate': FormControl<DateTime>(
+          validators: [
+            Validators.pattern(
+              ValidatorRegExp.date,
+            ),
+          ],
+        ),
         'proposalNumber': FormControl<String>(),
-        'receptionDate': FormControl<DateTime>(),
+        'receptionDate': FormControl<DateTime>(
+          validators: [
+            Validators.pattern(
+              ValidatorRegExp.date,
+            ),
+          ],
+        ),
         'type': FormArray([
           FormGroup({
             'type': FormControl<String>(),
           })
         ]),
         'progress': FormControl<String>(),
-        'advancePaymentDate': FormControl<DateTime>(),
+        'advancePaymentDate': FormControl<DateTime>(
+          validators: [
+            Validators.pattern(
+              ValidatorRegExp.date,
+            ),
+          ],
+        ),
         'receivingMethod': FormControl<String>(),
         'memo': FormControl<String>(),
         'patient': FormControl<String>(value: patientId),
@@ -147,8 +185,20 @@ FormGroup basicInfoForm({
         'PATIENT_PASSPORTS': FormGroup({
           'id': FormControl<String?>(),
           'passportNumber': FormControl<String?>(),
-          'issueDate': FormControl<DateTime>(),
-          'expirationDate': FormControl<DateTime>(),
+          'issueDate': FormControl<DateTime>(
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'expirationDate': FormControl<DateTime>(
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
           'visaType': FormControl<String?>(
             value: 'medicalGuarantee',
           ),
@@ -176,7 +226,13 @@ FormGroup basicInfoForm({
             'firstNameJapaneseForNonChinese': FormControl<String?>(),
             'nationality': FormControl<String?>(),
             'relationship': FormControl<String>(),
-            'dateOfBirth': FormControl<DateTime>(),
+            'dateOfBirth': FormControl<DateTime>(
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
             'age': FormControl<int?>(),
             'gender': FormControl<bool>(
               value: true,
@@ -198,8 +254,20 @@ FormGroup basicInfoForm({
             ]),
             'chatQrImage': FormControl<FileSelect>(),
             'passportNumber': FormControl<String?>(),
-            'issueDate': FormControl<DateTime>(),
-            'expirationDate': FormControl<DateTime>(),
+            'issueDate': FormControl<DateTime>(
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'expirationDate': FormControl<DateTime>(
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
             'visaType': FormControl<String>(),
           }),
         ]),

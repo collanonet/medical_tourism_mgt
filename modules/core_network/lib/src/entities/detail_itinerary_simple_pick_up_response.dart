@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'detail_itinerary_simple_pick_up_response.g.dart';
 @JsonSerializable()
 class DetailItinerarySimplePickUpAndDropOffResponse {

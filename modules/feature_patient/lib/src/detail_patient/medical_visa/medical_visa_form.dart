@@ -1,3 +1,5 @@
+// Package imports:
+import 'package:core_utils/core_utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup medicalVisaForm() {
@@ -6,9 +8,27 @@ FormGroup medicalVisaForm() {
 
     'personal': FormGroup({
       'medicalVisa': FormControl<String>(),
-      'applicationDate': FormControl<DateTime>(),
-      'issueDate': FormControl<DateTime>(),
-      'expirationDate': FormControl<DateTime>(),
+      'applicationDate': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
+      'issueDate': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
+      'expirationDate': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'accompanyingPersonsNumber': FormControl<String>(),
       'visaIssuingOverseasEstablishments': FormControl<String>(),
       'remarks': FormControl<String>(),
@@ -17,10 +37,34 @@ FormGroup medicalVisaForm() {
 
 // 滞在期間 stay period
     'stayPeriod': FormGroup({
-      'stayStartingDatePersonalReference': FormControl<DateTime>(),
-      'stayEndDate': FormControl<DateTime>(),
-      'stayStartingDateActual': FormControl<DateTime>(),
-      'expirationDate': FormControl<DateTime>(),
+      'stayStartingDatePersonalReference': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
+      'stayEndDate': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
+      'stayStartingDateActual': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
+      'expirationDate': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
     }),
 
     // 入国 hand in
@@ -44,7 +88,13 @@ FormGroup medicalVisaForm() {
     // ビザの取り下げ visa withdrawal
     'visaWithdrawal': FormGroup({
       'subjectVisaWithdrawal': FormControl<String>(),
-      'deathOrOccurrenceEventDate': FormControl<DateTime>(),
+      'deathOrOccurrenceEventDate': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'remarks': FormControl<String>(),
     }),
 // 同行者  companion
@@ -55,60 +105,180 @@ FormGroup medicalVisaForm() {
     }),
     // 日本で必要 required in Japan
     'requiredInJapan': FormGroup({
-      'passportFileUploadDate': FormControl<DateTime>(),
+      'passportFileUploadDate': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'passportFileUpload': FormControl<String>(),
 
-      'personal_reference_file_upload_date': FormControl<DateTime>(),
+      'personal_reference_file_upload_date': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'personal_reference_file_upload': FormControl<String>(),
       'send_original_ems_fedex_pds_file_upload': FormControl<String>(),
 
-      'treatment_schedule_file_upload_date': FormControl<DateTime>(),
+      'treatment_schedule_file_upload_date': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'treatment_schedule_file_upload': FormControl<String>(),
 
-      'statement_reasons_file_upload_date': FormControl<DateTime>(),
+      'statement_reasons_file_upload_date': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'statement_reasons_file_upload': FormControl<String>(),
 
-      'accompanying_persons_list_file_upload_date': FormControl<DateTime>(),
+      'accompanying_persons_list_file_upload_date': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'accompanying_persons_list_file_upload': FormControl<String>(),
       // ビザ取得後に必要なもの required after obtaining a visa
-      'visa_page_file_upload_date': FormControl<DateTime>(),
+      'visa_page_file_upload_date': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'visa_page_file_upload': FormControl<String>(),
 
-      'landing_permit_file_upload_date': FormControl<DateTime>(),
+      'landing_permit_file_upload_date': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'landing_permit_file_upload': FormControl<String>(),
 
-      'airline_ticke_arrival_japan_file_upload_date': FormControl<DateTime>(),
+      'airline_ticke_arrival_japan_file_upload_date': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'airline_ticke_arrival_japan_file_upload': FormControl<String>(),
 
-      'airline_ticket_return_japan_file_upload_date': FormControl<DateTime>(),
+      'airline_ticket_return_japan_file_upload_date': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'airline_ticket_return_japan_file_upload': FormControl<String>(),
 
-      'boardingPassReturningFileUploadDate': FormControl<DateTime>(),
+      'boardingPassReturningFileUploadDate': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'boardingPassReturningFileUpload': FormControl<String>(),
 
-      'certificateEligibilityFileUploadDate': FormControl<DateTime>(),
+      'certificateEligibilityFileUploadDate': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'certificateEligibilityFileUpload': FormControl<String>(),
       // 申請時に必要なもの required at the time of application
-      'photoFileUploadDate': FormControl<DateTime>(),
+      'photoFileUploadDate': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'photoFileUpload': FormControl<String>(),
 
-      'visaApplicationFormFileUploadDate': FormControl<DateTime>(),
+      'visaApplicationFormFileUploadDate': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'visaApplicationFormFileUpload': FormControl<String>(),
 
-      'bankBalanceCertificateFileUploadDate': FormControl<DateTime>(),
+      'bankBalanceCertificateFileUploadDate': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'bankBalanceCertificateFileUpload': FormControl<String>(),
 
-      'identificationDocumentsFileUploadDate': FormControl<DateTime>(),
+      'identificationDocumentsFileUploadDate': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'identificationDocumentsFileUpload': FormControl<String>(),
 
-      'othersFileUploadDate': FormControl<DateTime>(),
+      'othersFileUploadDate': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'othersFileUpload': FormControl<String>(),
     }),
     'addition': FormGroup({
-      'dateLandingPermit': FormControl<DateTime>(),
-      'dateVisaExpiration': FormControl<DateTime>(),
-      'dateEntryIntoJapan': FormControl<DateTime>(),
-      'dateEntryFromJapan': FormControl<DateTime>(),
+      'dateLandingPermit': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
+      'dateVisaExpiration': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
+      'dateEntryIntoJapan': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
+      'dateEntryFromJapan': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'departureEntry': FormControl<String>(),
       'arrivalEntry': FormControl<String>(),
       'flightNumberEntry': FormControl<String>(),
@@ -125,7 +295,13 @@ FormGroup medicalVisaForm() {
     // Withdrawal of visa
     'withdrawalOfVisa': FormGroup({
       'subjectToVisaWithdrawal': FormControl<bool>(),
-      'deathOrOccurrenceEventDate': FormControl<DateTime>(),
+      'deathOrOccurrenceEventDate': FormControl<DateTime>(
+        validators: [
+          Validators.pattern(
+            ValidatorRegExp.date,
+          ),
+        ],
+      ),
       'remarks': FormControl<String>(),
     }),
 

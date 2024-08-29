@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
 part 'additional_information_hospital_response.g.dart';
@@ -15,6 +16,7 @@ class AdditionalInformationSectionResponse {
   String? remark;
   String? paymentSiteTighten;
   String? paymentSitePayment;
+  String? file;
 
   AdditionalInformationSectionResponse({
     required this.id,
@@ -27,6 +29,7 @@ class AdditionalInformationSectionResponse {
     this.remark,
     this.paymentSiteTighten,
     this.paymentSitePayment,
+    this.file,
   });
 
   factory AdditionalInformationSectionResponse.fromJson(

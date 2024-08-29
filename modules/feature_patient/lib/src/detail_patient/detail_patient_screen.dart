@@ -1,23 +1,27 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:provider/provider.dart';
+
+// Project imports:
+import '../widgets/header_detail_patient.dart';
+import 'basic_info/basic_info_page.dart';
 import 'billing/billing_page.dart';
 import 'detail_patient_model.dart';
-import 'patient_response_data/patient_response_page.dart';
-import 'proposal/proposal_page.dart';
-import 'statement/statement_page.dart';
-import '../widgets/header_detail_patient.dart';
-import 'package:flutter/material.dart';
-
-import 'basic_info/basic_info_page.dart';
 import 'domestic_medical_data/domestic_medical_data_page.dart';
 import 'estimate/estimate_page.dart';
 import 'medical_payment_details/medical_payment_details_page.dart';
 import 'medical_summary/medical_summary_page.dart';
 import 'medical_visa/medical_visa_page.dart';
 import 'overseas_medical_data/overseas_medical_data_page.dart';
+import 'patient_response_data/patient_response_page.dart';
 import 'progress_list/progress_list_page.dart';
+import 'proposal/proposal_page.dart';
+import 'statement/statement_page.dart';
 import 'web_reservation/detail_patient_web_reservation_page.dart';
 
 class DetailPatientScreen extends StatefulWidget {

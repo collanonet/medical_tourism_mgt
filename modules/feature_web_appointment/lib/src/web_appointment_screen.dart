@@ -1,13 +1,16 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:feature_patient/feature_patient.gm.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import '../feature_web_appointment.gm.dart';
 import 'filter_web_appointment.dart';
 import 'web_appointment_model.dart';
@@ -74,7 +77,7 @@ class WebAppointmentScreen extends StatelessWidget {
                         columns: [
                           HeaderTableData(
                             flex: 2,
-                            titleHeader: Text(
+                            titleHeader: const Text(
                               '病院名',
                               style: TextStyle(
                                 fontFamily: 'NotoSansJP',
@@ -83,7 +86,7 @@ class WebAppointmentScreen extends StatelessWidget {
                             ),
                           ),
                           HeaderTableData(
-                            titleHeader: Text(
+                            titleHeader: const Text(
                               '状況',
                               style: TextStyle(
                                 fontFamily: 'NotoSansJP',
@@ -93,7 +96,7 @@ class WebAppointmentScreen extends StatelessWidget {
                           ),
                           HeaderTableData(
                             flex: 2,
-                            titleHeader: Text(
+                            titleHeader: const Text(
                               '患者',
                               style: TextStyle(
                                 fontFamily: 'NotoSansJP',
@@ -102,7 +105,7 @@ class WebAppointmentScreen extends StatelessWidget {
                             ),
                           ),
                           HeaderTableData(
-                            titleHeader: Text(
+                            titleHeader: const Text(
                               '予約日',
                               style: TextStyle(
                                 fontFamily: 'NotoSansJP',
@@ -111,7 +114,7 @@ class WebAppointmentScreen extends StatelessWidget {
                             ),
                           ),
                           HeaderTableData(
-                            titleHeader: Text(
+                            titleHeader: const Text(
                               'テストコール日',
                               style: TextStyle(
                                 fontFamily: 'NotoSansJP',
@@ -136,7 +139,7 @@ class WebAppointmentScreen extends StatelessWidget {
                                       Text(
                                         item.hospital?.hospitalNameKatakana ??
                                             '-',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           fontFamily: 'NotoSansJP',
                                           package: 'core_ui',
                                         ),
@@ -147,12 +150,12 @@ class WebAppointmentScreen extends StatelessWidget {
                                             padding: const EdgeInsets.symmetric(
                                                 horizontal: 8, vertical: 4),
                                             decoration: BoxDecoration(
-                                                color: Color(0xff98A6B5),
+                                                color: const Color(0xff98A6B5),
                                                 borderRadius:
                                                     BorderRadius.circular(4)),
                                             child: Text(
                                               item.patient?.progress ?? '-',
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   fontFamily: 'NotoSansJP',
                                                   package: 'core_ui',
                                                   color: Colors.white),

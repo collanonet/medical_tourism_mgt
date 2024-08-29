@@ -1,8 +1,10 @@
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+
+// Package imports:
 import 'package:core_network/core_network.dart';
-import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_patient/data_patient.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -15,10 +17,10 @@ class NormalSummaryModel {
   final PatientRepository patientRepository;
 
   ValueNotifier<AsyncData<MedicalRecordSummary>> medicalRecordSummary =
-      ValueNotifier(AsyncData());
+      ValueNotifier(const AsyncData());
 
   ValueNotifier<AsyncData<MedicalRecordSummary>> createMedicalRecordSummary =
-      ValueNotifier(AsyncData());
+      ValueNotifier(const AsyncData());
 
   ValueNotifier<AsyncData<MedicalRecord>> medicalRecord =
       ValueNotifier<AsyncData<MedicalRecord>>(const AsyncData());
@@ -178,22 +180,10 @@ class NormalSummaryModel {
     required PatientName data,
     required FormGroup formGroup,
   }) {
-    formGroup.control('namePassport').value = data.familyNameRomanized +
-        " " +
-        data.middleNameRomanized +
-        " " +
-        data.firstNameRomanized;
+    formGroup.control('namePassport').value = '${data.familyNameRomanized} ${data.middleNameRomanized} ${data.firstNameRomanized}';
     formGroup.control('nameChineseKanjiVietnamese').value =
-        data.familyNameChineseOrVietnamese +
-            " " +
-            data.middleNameChineseOrVietnamese +
-            " " +
-            data.firstNameChineseOrVietnamese;
-    formGroup.control('nameKana').value = data.familyNameJapaneseForChinese +
-        " " +
-        data.middleNameJapaneseForChinese +
-        " " +
-        data.firstNameJapaneseForChinese;
+        '${data.familyNameChineseOrVietnamese} ${data.middleNameChineseOrVietnamese} ${data.firstNameChineseOrVietnamese}';
+    formGroup.control('nameKana').value = '${data.familyNameJapaneseForChinese} ${data.middleNameJapaneseForChinese} ${data.firstNameJapaneseForChinese}';
   }
 
   void createUpdateMedicalRecordSummary(FormGroup formGroup) async {

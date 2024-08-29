@@ -1,5 +1,6 @@
-
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'itinerary_simplified_title_addoption_response.g.dart';
 @JsonSerializable()
 class AddOption {

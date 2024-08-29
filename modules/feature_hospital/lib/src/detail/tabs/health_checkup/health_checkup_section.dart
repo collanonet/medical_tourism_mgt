@@ -1,14 +1,16 @@
-import 'package:core_l10n/l10n.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:data_table_2/data_table_2.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+// Project imports:
 import 'health_checkup_file.dart';
 import 'health_checkup_form.dart';
 import 'health_checkup_model.dart';
@@ -70,7 +72,7 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                     Column(
                       children: [
                         Text(
-                          'パンフレットや資料をここにドラッグ＆ドロップ',
+                          '健診メニュー　エクセルデータをここにドラッグ＆ドロップ',
                           style: context.textTheme.bodySmall?.copyWith(
                             fontSize: 22,
                             fontWeight: FontWeight.bold,
@@ -121,9 +123,9 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                         },
                       );
                     }),
-                Expanded(flex: 2, child: Text('ファイル名ファイル名')),
-                Expanded(child: Text('更新日')),
-                Expanded(child: Text('')),
+                const Expanded(flex: 2, child: Text('ファイル名ファイル名')),
+                const Expanded(child: Text('更新日')),
+                const Expanded(child: Text('')),
               ],
             ),
             Expanded(
@@ -219,16 +221,16 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                                                 value:
                                                     context.read<HealthModel>(),
                                                 child: AlertDialog(
-                                                  title: Text("削除確認"),
+                                                  title: const Text('削除確認'),
                                                   content:
-                                                      Text("選択した書類を削除しますか？"),
+                                                      const Text('選択した書類を削除しますか？'),
                                                   actions: [
                                                     TextButton(
                                                       onPressed: () {
                                                         Navigator.of(context)
                                                             .pop();
                                                       },
-                                                      child: Text("キャンセル"),
+                                                      child: const Text('キャンセル'),
                                                     ),
                                                     TextButton(
                                                       onPressed: () {
@@ -238,7 +240,7 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                                                         Navigator.of(context)
                                                             .pop();
                                                       },
-                                                      child: Text("削除する"),
+                                                      child: const Text('削除する'),
                                                     ),
                                                   ],
                                                 ),
@@ -249,7 +251,7 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                                   isLoading: value.loading,
                                   loadingColor: context.appTheme.primaryColor,
                                   child: Text(
-                                    "削除する",
+                                    '削除する',
                                     style: context.textTheme.labelLarge
                                         ?.copyWith(
                                             color:
@@ -273,10 +275,7 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
         value: context.read<HealthModel>(),
         child: AlertDialog(
           content: ReactiveFormConfig(
-            validationMessages: <String, ValidationMessageFunction>{
-              ValidationMessage.required: (error) =>
-                  context.l10n.mgsFieldRequired,
-            },
+            validationMessages: validationMessages,
             child: ReactiveFormBuilder(
               form: () =>
                   healthCheckupForm(hospitalRecordId: widget.id, file: file)

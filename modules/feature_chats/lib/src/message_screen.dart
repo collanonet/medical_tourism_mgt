@@ -1,5 +1,8 @@
-import 'package:core_ui/core_ui.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_ui/core_ui.dart';
 
 class MessageScreen extends StatelessWidget {
   const MessageScreen({super.key});
@@ -13,7 +16,7 @@ class MessageScreen extends StatelessWidget {
           'LIU　WEIQIANG ',
           style: context.textTheme.titleLarge,
         ),
-        SizedBox(
+        const SizedBox(
           height: 16,
         ),
         // generate list bubble message list with with message send and receive
@@ -36,7 +39,7 @@ class MessageScreen extends StatelessWidget {
                       ),
                       child: Text(
                         messages[index],
-                        style: context.textTheme.bodyText1,
+                        style: context.textTheme.bodyLarge,
                       ),
                     ),
                   ],

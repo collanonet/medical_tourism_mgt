@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'report_contract_filter_response.g.dart';
 
 @JsonSerializable()

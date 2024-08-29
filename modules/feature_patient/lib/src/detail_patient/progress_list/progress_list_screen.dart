@@ -1,14 +1,16 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import 'progress_list_model.dart';
 import 'progress_record_widget.dart';
 
@@ -77,7 +79,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                                 : null,
                             child: WithLoadingButton(
                               isLoading: value.loading,
-                              child: Text('保存する'),
+                              child: const Text('保存する'),
                             ));
                       },
                     );
@@ -104,7 +106,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
 
         return ColumnSeparated(
           crossAxisAlignment: CrossAxisAlignment.start,
-          separatorBuilder: (BuildContext context, int index) => Divider(),
+          separatorBuilder: (BuildContext context, int index) => const Divider(),
           children: [
             ...rows,
             if (rows.length < 3)
@@ -126,7 +128,11 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                             value: item.task,
                             disabled: true,
                           ),
-                          'completionDate': FormControl<DateTime>(),
+                          'completionDate': FormControl<DateTime>(validators: [
+                            Validators.pattern(
+                              ValidatorRegExp.date,
+                            ),
+                          ],),
                           'remarks': FormControl<String>(),
                           'medicalRecord': FormControl<String>(),
                           'type': FormControl<String>(
@@ -227,7 +233,11 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                       'key': FormControl<String>(),
                       'tag': FormControl<String>(),
                       'task': FormControl<String>(),
-                      'completionDate': FormControl<DateTime>(),
+                      'completionDate': FormControl<DateTime>(validators: [
+                        Validators.pattern(
+                          ValidatorRegExp.date,
+                        ),
+                      ],),
                       'remarks': FormControl<String>(),
                       'medicalRecord': FormControl<String>(),
                       'type': FormControl<String>(value: index.toString()),

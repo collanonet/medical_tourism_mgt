@@ -1,3 +1,5 @@
+// Package imports:
+import 'package:core_network/src/entities/application_treament_request.dart';
 import 'package:core_network/src/entities/application_treament_responce.dart';
 import 'package:core_network/src/entities/basic_information_hospital_response.dart';
 import 'package:core_network/src/entities/doctor_profile_hospital_response.dart';
@@ -6,6 +8,7 @@ import 'package:core_network/src/entities/web_booking_medical_record_request.dar
 import 'package:core_network/src/entities/web_booking_medical_record_response.dart';
 import 'package:injectable/injectable.dart';
 
+// Project imports:
 import '../providers/web_appointment_remote_provider.dart';
 import 'web_appointment_repository.dart';
 
@@ -94,5 +97,10 @@ class WebAppointmentRepositoryIml extends WebAppointmentRepository {
   @override
   Future<List<Patient>> webBookingSearchPatients({String? search}) {
     return remote.webBookingSearchPatients(search: search);
+  }
+
+  @override
+  Future<TreamentResponce> updateBooking(String treatmentId, TreamentRequest treatmentRequest) {
+    return remote.updateBooking(treatmentId, treatmentRequest);
   }
 }

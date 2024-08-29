@@ -15,6 +15,7 @@ dependencies:
   injectable: ^2.4.1
   core_storage: 0.0.1-alpha.1
   intl: ^0.18.1
+  import_sorter: ^4.6.0
 
 dev_dependencies:
   flutter_test:

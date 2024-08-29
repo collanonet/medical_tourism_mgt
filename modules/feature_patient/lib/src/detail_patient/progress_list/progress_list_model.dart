@@ -1,8 +1,11 @@
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+
+// Package imports:
 import 'package:collection/collection.dart';
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_patient/data_patient.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -105,7 +108,11 @@ class ProgressListModel {
               disabled: true,
             ),
             'completionDate': FormControl<DateTime>(
-              value: record.completionDate,
+              value: record.completionDate,validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
             ),
             'remarks': FormControl<String>(
               value: record.remarks,
@@ -118,6 +125,7 @@ class ProgressListModel {
             ),
           }));
         }
+
 
         formArray.add(FormGroup({'progress': formArrayProgress}));
       });

@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:core_network/entities.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup domesticMedicalDataForm(
@@ -10,7 +12,13 @@ FormGroup domesticMedicalDataForm(
     'category': FormControl<String>(),
     'documentName': FormControl<String>(),
     'remark': FormControl<String>(),
-    'dateOfIssue': FormControl<DateTime>(),
+    'dateOfIssue': FormControl<DateTime>(
+      validators: [
+        Validators.pattern(
+          ValidatorRegExp.date,
+        ),
+      ],
+    ),
     'sharedUrlIssue': FormControl<String>(),
     'disclosureToPatients': FormControl<String>(),
     'disclosureToOtherMedicalInstitutions': FormControl<String>(),

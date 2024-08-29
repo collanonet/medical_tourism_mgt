@@ -1,8 +1,11 @@
+// Dart imports:
 import 'dart:ui';
 
-import 'package:core_storage/core_storage.dart';
+// Flutter imports:
 import 'package:flutter/foundation.dart';
 
+// Package imports:
+import 'package:core_storage/core_storage.dart';
 import 'package:injectable/injectable.dart';
 
 @injectable

@@ -1,14 +1,17 @@
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+// Project imports:
 import '../overseas_medical_data_model.dart';
 
 class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
@@ -41,7 +44,7 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(Icons.close)),
+                icon: const Icon(Icons.close)),
           ],
         ),
         Row(
@@ -58,7 +61,7 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
                   ),
                   ReactiveTextField<String>(
                     formControlName: 'hospitalName',
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       hintText: '病院名を入力',
                     ),
                   ),
@@ -165,7 +168,7 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
                     ),
                     decoration: InputDecoration(
                       label: const Text(
-                        "発行日",
+                        '発行日',
                       ),
                       suffixIcon: IconButton(
                         icon: const Icon(
@@ -185,13 +188,13 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             )
           ],
@@ -207,7 +210,7 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('キャンセル'),
+              child: const Text('キャンセル'),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
@@ -253,7 +256,7 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
                                   .postMedicalRecordsOverseasData(formGroup);
                             },
                       child: WithLoadingButton(
-                          isLoading: value.loading, child: Text('保存する')),
+                          isLoading: value.loading, child: const Text('保存する')),
                     );
                   }),
             ),

@@ -1,10 +1,12 @@
-import 'package:core_network/core_network.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/material.dart';
 
 class ViewPopup extends StatelessWidget {
   const ViewPopup({
@@ -65,7 +67,7 @@ class ViewPopup extends StatelessWidget {
                             : '',
                         style: context.textTheme.titleMedium),
                   ),
-                  SizedBox(width: 16),
+                  const SizedBox(width: 16),
                   Expanded(
                     flex: 2,
                     child: isImage(data.uploadFile)
@@ -83,7 +85,7 @@ class ViewPopup extends StatelessWidget {
                                 child: Text(
                                     data.uploadFile.toString().split('.').last),
                               )
-                            : SizedBox(),
+                            : const SizedBox(),
                   ),
                 ],
               );

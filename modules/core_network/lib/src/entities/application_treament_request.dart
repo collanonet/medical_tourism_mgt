@@ -1,10 +1,12 @@
+// Package imports:
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
+
 part 'application_treament_request.g.dart';
 
+@CopyWith()
 @JsonSerializable()
 class TreamentRequest {
-  @JsonKey(name: '_id')
-  String id;
   bool? medicalInfo;
   bool? dicom;
   bool? bloodTests;
@@ -29,7 +31,6 @@ class TreamentRequest {
   String? scheduled;
 
   TreamentRequest({
-    required this.id,
     this.medicalInfo,
     this.dicom,
     this.bloodTests,

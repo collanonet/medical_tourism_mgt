@@ -1,52 +1,55 @@
-
+// Package imports:
 import 'package:core_network/entities.dart';
 
 abstract class ProcessChartRepository {
-    Future<PatientFilterResponse> getFilterPatientChart();
 
-    Future<PatientFilterResponse> postFilterpatientChart(
-      PatientFilterRequst patientFilterRequst,
-    );
 
-    Future<ItineraryTitleResponse> getItineraryTitle();
+  Future<PatientFilterResponse> postFilterpatientChart(
+    PatientFilterRequst patientFilterRequst,
+  );
 
-    Future<ItineraryTitleResponse> postItineraryTitle(
-      ItineraryTitleRequest itineraryTitleRequest,
-    );
+  Future<ItineraryTitleResponse> getItineraryTitle();
 
-    Future<ItineraryExplanationResponse> getInfoItineraryExamination();
+  Future<ItineraryTitleResponse> postItineraryTitle(
+    ItineraryTitleRequest itineraryTitleRequest,
+  );
 
-    Future<ItineraryExplanationResponse> postItineraryExplanation(
-      ItineraryExplanationRequest itineraryExplanationRequest,
-    );
+  Future<ItineraryExplanationResponse> getInfoItineraryExamination();
 
-    Future<ItineraryInterpreterOrGuideInputResponse> getItineraryInterpretorOrGuideInput();
+  Future<ItineraryExplanationResponse> postItineraryExplanation(
+    ItineraryExplanationRequest itineraryExplanationRequest,
+  );
 
-    Future<ItineraryInterpreterOrGuideInputResponse> postItineraryInterpretorOrGuideInput(
-      ItineraryInterpreterOrGuideInputRequest itineraryInterpreterOrGuideInputRequest,
-    );
+  Future<ItineraryInterpreterOrGuideInputResponse>
+      getItineraryInterpretorOrGuideInput();
 
-    Future<ItineraryTransferInputResponse> getItineraryTransferInput();
+  Future<ItineraryInterpreterOrGuideInputResponse>
+      postItineraryInterpretorOrGuideInput(
+    ItineraryInterpreterOrGuideInputRequest
+        itineraryInterpreterOrGuideInputRequest,
+  );
 
-    Future<ItineraryTransferInputResponse> postItineraryTransferInput(
-      ItineraryTransferInputRequest itineraryTransferInputRequest,
-    );
+  Future<ItineraryTransferInputResponse> getItineraryTransferInput();
 
-    Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital();
+  Future<ItineraryTransferInputResponse> postItineraryTransferInput(
+    ItineraryTransferInputRequest itineraryTransferInputRequest,
+  );
 
-    Future<DetailFacilityHotelResponse> postDetailFacilityHospital(
-      DetailFacilityHotelRequest detailFacilityHotelRequest,
-    );
+  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital();
 
-    Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn();
+  Future<DetailFacilityHotelResponse> postDetailFacilityHospital(
+    DetailFacilityHotelRequest detailFacilityHotelRequest,
+  );
 
-    Future<DetailDropInFacilityResponse> postDetailFacilityDropIn(
-      DetailDropInFacilityRequest detailDropInFacilityRequest,
-    );
+  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn();
 
-    Future<List<DetainHotelRegistationResponse>> getDetainlHotelRegistation(
-      { String? accommodationName,
-  //  List<String>? accommodationType,
+  Future<DetailDropInFacilityResponse> postDetailFacilityDropIn(
+    DetailDropInFacilityRequest detailDropInFacilityRequest,
+  );
+
+  Future<List<DetainHotelRegistationResponse>> getDetainlHotelRegistation({
+    String? accommodationName,
+    //  List<String>? accommodationType,
     String? area,
     bool? usageRecord,
     bool? isJapanese,
@@ -55,68 +58,88 @@ abstract class ProcessChartRepository {
     bool? isThai,
     bool? isKorean,
     bool? isChinese,
-      }
-    );
+  });
 
-    Future<DetainHotelRegistationResponse> postDetailHotelRegistation(
-      DetainHotelRegistationRequest detainHotelRegistationRequest,
-    );
+  Future<DetainHotelRegistationResponse> postDetailHotelRegistation(
+    DetainHotelRegistationRequest detainHotelRegistationRequest,
+  );
 
-    Future<DetailHotelSearchResponse> postDetialHotelSearch(
-      DetailHotelSearchRequest detailHotelSearchRequest,
-    );
+  Future<DetailHotelSearchResponse> postDetialHotelSearch(
+    DetailHotelSearchRequest detailHotelSearchRequest,
+  );
 
-    Future<DetailItinerarySimpleTitle> getDetailItinerarySimpleTitle();
+  Future<DetailItinerarySimpleTitle> getDetailItinerarySimpleTitle();
 
-    Future<DetailItinerarySimpleTitle> postDetailItinerarySimpleTitle(
-      DetailItinerarySimpleTitleRequest detailItinerarySimpleTitleRequest,
-    );
+  Future<DetailItinerarySimpleTitle> postDetailItinerarySimpleTitle(
+    DetailItinerarySimpleTitleRequest detailItinerarySimpleTitleRequest,
+  );
 
-    Future<DetailItinerarySimplePriorExplanationResponse> getDetailItinerarySimplePriorExplanation();
+  Future<DetailItinerarySimplePriorExplanationResponse>
+      getDetailItinerarySimplePriorExplanation();
 
-    Future<DetailItinerarySimplePriorExplanationResponse> postDetailItinerarySimplePriorExplanation(
-      DetailItinerarySimplePriorExplanationRequest detailItinerarySimplePriorExplanationRequest,
-    );
+  Future<DetailItinerarySimplePriorExplanationResponse>
+      postDetailItinerarySimplePriorExplanation(
+    DetailItinerarySimplePriorExplanationRequest
+        detailItinerarySimplePriorExplanationRequest,
+  );
 
-    Future<DetailItinerarySimpleInterpreterOrGuideResponse> getDetailItinerarySimpleInterpretorOrGuideInput();
+  Future<DetailItinerarySimpleInterpreterOrGuideResponse>
+      getDetailItinerarySimpleInterpretorOrGuideInput();
 
-    Future<DetailItinerarySimpleInterpreterOrGuideResponse> postDetailItinerarySimpleInterpretorOrGuideInput(
-     DetailItinerarySimpleInterpreterOrGuideRequest detailItinerarySimpleInterpreterOrGuideRequest,
-    );
+  Future<DetailItinerarySimpleInterpreterOrGuideResponse>
+      postDetailItinerarySimpleInterpretorOrGuideInput(
+    DetailItinerarySimpleInterpreterOrGuideRequest
+        detailItinerarySimpleInterpreterOrGuideRequest,
+  );
 
-    Future<DetailItinerarySimplePickUpAndDropOffResponse> getDetailItinerarySimplePickUpAndDropOff();
+  Future<DetailItinerarySimplePickUpAndDropOffResponse>
+      getDetailItinerarySimplePickUpAndDropOff();
 
-    Future<DetailItinerarySimplePickUpAndDropOffResponse> postDetailItinerarySimplePickUpAndDropOff(
-      DetailItinerarySimplePickUpAndDropOffRequest detailItinerarySimplePickUpAndDropOffRequest,
-    );
+  Future<DetailItinerarySimplePickUpAndDropOffResponse>
+      postDetailItinerarySimplePickUpAndDropOff(
+    DetailItinerarySimplePickUpAndDropOffRequest
+        detailItinerarySimplePickUpAndDropOffRequest,
+  );
 
-    Future<List<DetailRelatedPartiesResponse>> getDetailRelatedParties();
+  Future<List<DetailRelatedPartiesResponse>> getDetailRelatedParties();
 
-    Future<DetailRelatedPartiesResponse> postDetailRelatedParties(
-      DetailRelatedPartiesRequest detailRelatedPartiesRequest,
-    );
+  Future<DetailRelatedPartiesResponse> postDetailRelatedParties(
+    DetailRelatedPartiesRequest detailRelatedPartiesRequest,
+  );
 
-    Future<List<DetailRelatedPartiesBusCompanyResponse>> getDetailRelatedPartiesBusCompany();
+  Future<List<DetailRelatedPartiesBusCompanyResponse>>
+      getDetailRelatedPartiesBusCompany();
 
-    Future<DetailRelatedPartiesBusCompanyResponse> postDetailRelatedPartiesBusCompany(
-      DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest,
-    );
+  Future<DetailRelatedPartiesBusCompanyResponse>
+      postDetailRelatedPartiesBusCompany(
+    DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest,
+  );
 
-    Future<DetailRelatedPartiesDriverResponse> getDetailRelatedPartiesDriver();
+  Future<DetailRelatedPartiesDriverResponse> getDetailRelatedPartiesDriver();
 
-    Future<DetailRelatedPartiesDriverResponse> postDetailRelatedPartiesDriver(
-      DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest,
-    );
+  Future<DetailRelatedPartiesDriverResponse> postDetailRelatedPartiesDriver(
+    DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest,
+  );
 
-    Future<DetailRelatedPartiesEmergencyContactResponse> getDetailRelatedPartiesEmergencyContact();
+  Future<DetailRelatedPartiesEmergencyContactResponse>
+      getDetailRelatedPartiesEmergencyContact();
 
-    Future<DetailRelatedPartiesEmergencyContactResponse> postDetailRelatedPartiesEmergencyContact(
-      DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest,
-    );
+  Future<DetailRelatedPartiesEmergencyContactResponse>
+      postDetailRelatedPartiesEmergencyContact(
+    DetailRelatedPartiesEmergencyContactRequest
+        detailRelatedPartiesEmergencyContactRequest,
+  );
 
-    Future<List<DetailItineraryResponse>> getDetailItinerary({String? tourName,String? classification,DateTime? dateFrom,DateTime? dateTo});
+  Future<DetailItineraryResponse> getDetailItinerary(String id);
 
-    Future<DetailItineraryResponse> postDetailItinerary(
-      DetailIneraryRequest detailIneraryRequest,
-    );
+    Future<List<DetailItineraryResponse>> getPatientChart({
+    String? tourName,
+    String? classification,
+    DateTime? dateFrom,
+    DateTime? dateTo,
+  });
+
+  Future<DetailItineraryResponse> postDetailItinerary(
+    DetailIneraryRequest detailIneraryRequest,
+  );
 }

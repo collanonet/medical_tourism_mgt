@@ -1,6 +1,8 @@
+// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
 
+// Project imports:
 import '../providers/hospital_local_provider.dart';
 import '../providers/hospital_remote_provider.dart';
 import 'hospital_repository.dart';
@@ -374,5 +376,10 @@ class HospitalRepositoryIml extends HospitalRepository {
   @override
   Future<List<Patient>> webBookingSearchPatients({String? search}) {
     return remote.webBookingSearchPatients(search: search);
+  }
+
+  @override
+  Future<TreamentResponce> updateBooking(String treatmentId, TreamentRequest treatmentRequest) {
+    return remote.updateBooking(treatmentId, treatmentRequest);
   }
 }

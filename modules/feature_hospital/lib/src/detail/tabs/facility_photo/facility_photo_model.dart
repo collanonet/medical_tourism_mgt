@@ -1,9 +1,13 @@
+// Dart imports:
 import 'dart:convert';
 
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_hospital/data_hospital.dart';
-import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -17,6 +21,7 @@ class FacilityModel {
 
   ValueNotifier<AsyncData<List<FacilityResponse>>> facilityData =
       ValueNotifier(const AsyncData());
+
   void fetchFacility({required String id}) async {
     try {
       facilityData.value = const AsyncData(loading: true);
@@ -61,8 +66,9 @@ class FacilityModel {
         uploadedPhoto: file,
         hospitalRecord: formGroup.control('hospitalRecord').value,
       ));
-      facilityData.value =
-          AsyncData(data: facilityData.value.data!..add(response));
+      facilityData.value = AsyncData(
+          data: facilityData.value.data ?? []
+            ..add(response));
       submit.value = AsyncData(data: response);
     } catch (e) {
       logger.e(e);
@@ -78,7 +84,7 @@ class FacilityModel {
       for (var id in ids) {
         await hospitalRepository.deleteFacilityPhoto(id);
         facilityData.value = AsyncData(
-            data: facilityData.value.data!
+            data: facilityData.value.data ?? []
               ..removeWhere((element) => element.id == id));
       }
 

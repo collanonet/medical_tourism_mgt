@@ -2,6 +2,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup itineraryForm() => FormGroup(
       {
+        '_id' : FormControl<String>(),
         'patient': FormArray(
           [
             FormGroup(
@@ -9,29 +10,29 @@ FormGroup itineraryForm() => FormGroup(
                 'patientName': FormControl<String>(value: ''), // 患者名
               },
             ),
-            // FormGroup(
-            //   {
-            //     'patientName': FormControl<String>(value: ''), // 患者名
-            //   },
-            // ),
-            // FormGroup(
-            //   {
-            //     'patientName': FormControl<String>(value: ''), // 患者名
-            //   },
-            // ),
+            FormGroup(
+              {
+                'patientName': FormControl<String>(value: ''), // 患者名
+              },
+            ),
+            FormGroup(
+              {
+                'patientName': FormControl<String>(value: ''), // 患者名
+              },
+            ),
           ],
         ),
         'tourName': FormControl<String>(value: ''), // ツアー名
-        'peopleNumber': FormControl<String>(value: ''), // 人数
-        'group': FormControl<String>(value: ''), // グループ
+        'peopleNumber': FormControl<int>(), // 人数
+        'group': FormControl<int>(), // グループ
         'classification': FormControl<String>(value: ''), // 種別
         'day': FormArray(
-          // 日目
           [
             FormGroup(
               {
+                '_id' : FormControl<String>(value: ''),
                 'date': FormControl<DateTime>(), // 日付
-                'meals': FormControl<List<String>>(value: []),
+                'meals': FormControl<List<bool>>(value: []),
                 //meals
                 'morning': FormControl<bool>(value: false),
                 'noon': FormControl<bool>(value: false),
@@ -48,6 +49,7 @@ FormGroup itineraryForm() => FormGroup(
                           [
                             FormGroup(
                               {
+                                '_id' : FormControl<String>(),
                                 'placeName':
                                     FormControl<String>(value: ''), // 地名
                                 'timeFrom':
@@ -60,19 +62,6 @@ FormGroup itineraryForm() => FormGroup(
                                     FormControl<String>(value: ''), // 行程
                               },
                             ),
-                            // FormGroup(
-                            //   {
-                            //     'placeName':
-                            //         FormControl<String>(value: ''), // 地名
-                            //     'timeFrom':
-                            //         FormControl<String>(value: ''), // 時刻（自）
-                            //     'timeTo':
-                            //         FormControl<String>(value: ''), // 時刻（至）
-                            //     'transportation': FormControl<String>(value: ''), // 交通
-                            //     'itinerary':
-                            //         FormControl<String>(value: ''),  // 行程
-                            //   },
-                            // ),
                           ],
                         ),
                       },

@@ -1,7 +1,11 @@
-import 'package:auto_route/auto_route.dart';
-import 'package:core_ui/core_ui.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:auto_route/auto_route.dart';
+import 'package:core_ui/core_ui.dart';
+
+// Project imports:
 import '../feature_report.dart';
 import '../feature_report.gm.dart';
 
@@ -22,7 +26,7 @@ class _MasterScreenState extends State<MasterScreen> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16), color: Colors.white),
           padding: const EdgeInsets.all(16),
-          child: Text('マスタトップ'),
+          child: const Text('マスタトップ'),
         ),
         SizedBox(
           height: context.appTheme.spacing.marginMedium,
@@ -41,12 +45,12 @@ class _MasterScreenState extends State<MasterScreen> {
                 children: [
                   InkWell(
                     onTap: (){
-                      context.router.push(ContractRoute());
+                      context.router.push(const ContractRoute());
                     },
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        color: Color(0xffF0F3F5),
+                        color: const Color(0xffF0F3F5),
                       ),
                       padding: const EdgeInsets.all(40),
                       child: Row(
@@ -67,12 +71,12 @@ class _MasterScreenState extends State<MasterScreen> {
                   ),
                   InkWell(
                     onTap: (){
-                      context.router.push(ReportsRoute());
+                      context.router.push(const ReportsRoute());
                     },
                     child: Container(
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
-                        color: Color(0xffF0F3F5),
+                        color: const Color(0xffF0F3F5),
                       ),
                       padding: const EdgeInsets.all(40),
                       child: Row(

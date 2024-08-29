@@ -1,12 +1,15 @@
-import 'package:core_ui/core_ui.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_ui/core_ui.dart';
 
 class PickMedicalDataFileScreen extends StatelessWidget {
   const PickMedicalDataFileScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: MediaQuery.of(context).size.height * 0.5,
       width: MediaQuery.of(context).size.width * 0.5,
       child: Column(
@@ -25,7 +28,7 @@ class PickMedicalDataFileScreen extends StatelessWidget {
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
-                  icon: Icon(Icons.close)),
+                  icon: const Icon(Icons.close)),
             ],
           ),
           Row(
@@ -69,7 +72,7 @@ class PickMedicalDataFileScreen extends StatelessWidget {
               )),
             ],
           ),
-          Divider(),
+          const Divider(),
           Flexible(
             child: ListView(
               children: List.generate(
@@ -80,7 +83,7 @@ class PickMedicalDataFileScreen extends StatelessWidget {
                     padding: const EdgeInsets.symmetric(vertical: 4),
                     child: Row(
                       children: [
-                        Expanded(
+                        const Expanded(
                             flex: 3,
                             child: Row(
                               children: [
@@ -91,24 +94,24 @@ class PickMedicalDataFileScreen extends StatelessWidget {
                             child: Row(
                           children: [
                             Container(
-                              padding: EdgeInsets.all(4),
+                              padding: const EdgeInsets.all(4),
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(4),
                                 border: Border.all(
                                     color: context.appTheme.primaryColor),
                               ),
-                              child: Text('社内'),
+                              child: const Text('社内'),
                             ),
                           ],
                         )),
-                        Expanded(flex: 2, child: Text('画像データ（DICOM）')),
+                        const Expanded(flex: 2, child: Text('画像データ（DICOM）')),
                         Expanded(
                             child: Text(
                           'PET-CT',
                           style: context.textTheme.bodySmall
                               ?.copyWith(color: context.appTheme.primaryColor),
                         )),
-                        Expanded(child: Text('2023/06/30')),
+                        const Expanded(child: Text('2023/06/30')),
                         Expanded(
                             child: Row(
                           children: [

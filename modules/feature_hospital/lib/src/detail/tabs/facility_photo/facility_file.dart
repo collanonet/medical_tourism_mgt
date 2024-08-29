@@ -1,12 +1,16 @@
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+// Project imports:
 import 'facility_photo_model.dart';
 
 class Popup extends StatelessWidget {
@@ -39,7 +43,7 @@ class Popup extends StatelessWidget {
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
-                icon: Icon(Icons.close)),
+                icon: const Icon(Icons.close)),
           ],
         ),
         Row(
@@ -56,7 +60,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
                       formControlName: 'NameOfHspital',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '病院名を入力',
                       ),
                     ),
@@ -79,7 +83,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
                       formControlName: 'photograph',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '作成者',
                       ),
                     ),
@@ -90,13 +94,13 @@ class Popup extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             )
           ],
@@ -131,7 +135,7 @@ class Popup extends StatelessWidget {
                               ),
                           decoration: InputDecoration(
                             label: const Text(
-                              "発行日",
+                              '発行日',
                             ),
                             suffixIcon: IconButton(
                               icon: const Icon(
@@ -167,7 +171,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
                       formControlName: 'share',
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         hintText: '共有',
                       ),
                     ),
@@ -178,13 +182,13 @@ class Popup extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            Expanded(
+            const Expanded(
               child: SizedBox.shrink(),
             )
           ],
@@ -200,7 +204,7 @@ class Popup extends StatelessWidget {
               onPressed: () {
                 Navigator.pop(context);
               },
-              child: Text('キャンセル'),
+              child: const Text('キャンセル'),
             ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
@@ -239,7 +243,7 @@ class Popup extends StatelessWidget {
                                   .submitFacility(formGroup);
                             },
                       child: WithLoadingButton(
-                          isLoading: value.loading, child: Text('保存する')),
+                          isLoading: value.loading, child: const Text('保存する')),
                     );
                   }),
             ),

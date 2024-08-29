@@ -1,11 +1,16 @@
-import 'package:feature_hospital/src/detail/tabs/q_and_a/q_and_a_section.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_utils/core_utils.dart';
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+// Project imports:
 import 'g_and_a_model.dart';
 import 'q_and_a_form.dart';
+import 'q_and_a_section.dart';
 
 class QAndAScreen extends StatefulWidget {
   const QAndAScreen({super.key, required this.hospitalId});
@@ -19,9 +24,7 @@ class _QAndAScreenState extends State<QAndAScreen> {
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
-      validationMessages: {
-        ValidationMessage.required: (error) => 'This field is required',
-      },
+      validationMessages: validationMessages,
       child: ReactiveFormBuilder(
           form: () => qAndAForm(hospital: widget.hospitalId),
           builder: (context, form, _) {

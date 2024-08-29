@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:core_network/entities.dart';
 import 'package:injectable/injectable.dart';
@@ -10,9 +11,7 @@ class ProcessChartRemoteProvider {
 
   final ApiService apiService;
 
-  Future<PatientFilterResponse> getFilterPatientChart() async {
-    return await apiService.getFilterPatientChart();
-  }
+ 
 
   Future<PatientFilterResponse> postFilterpatientChart(
       PatientFilterRequst patientFilterRequst) async {
@@ -83,7 +82,7 @@ class ProcessChartRemoteProvider {
 
   Future<List<DetainHotelRegistationResponse>> getDetainlHotelRegistation({
     String? accommodationName,
-   // List<String>? accommodationType,
+    // List<String>? accommodationType,
     String? area,
     bool? usageRecord,
     bool? isJapanese,
@@ -95,7 +94,7 @@ class ProcessChartRemoteProvider {
   }) async {
     return await apiService.getDetainlHotelRegistation(
       accommodationName: accommodationName,
-    // accommodationType: accommodationType,
+      // accommodationType: accommodationType,
       area: area,
       usageRecord: usageRecord,
       isJapanese: isJapanese,
@@ -215,13 +214,25 @@ class ProcessChartRemoteProvider {
         .postDetailItinerarySimplePickUp(detailItinerarySimplePickUpAnd);
   }
 
-  Future<List<DetailItineraryResponse>> getDetailitinerary({String? tourName,String? classification,DateTime? dateFrom,DateTime? dateTo}) async {
+  Future<DetailItineraryResponse> getDetailitinerary(String id) async {
     return await apiService.getDetailitinerary(
+      id: id,
+      
+    );
+  }
+
+   Future<List<DetailItineraryResponse>> getPatientChart({
+    
+    String? tourName,
+    String? classification,
+    DateTime? dateFrom,
+    DateTime? dateTo,
+  }) async {
+    return await apiService.getPatientChart(
       tourName: tourName,
       classification: classification,
       dateFrom: dateFrom,
       dateTo: dateTo,
-
     );
   }
 

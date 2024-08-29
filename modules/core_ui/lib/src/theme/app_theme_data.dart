@@ -1,7 +1,11 @@
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:reactive_pinput/reactive_pinput.dart';
 
+// Project imports:
 import '../extensions/context_exts.dart';
 import '../utils/generate_material_color.dart';
 

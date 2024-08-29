@@ -1,11 +1,15 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 
+// Project imports:
 import 'tabs/auto_translate_page.dart';
 import 'tabs/normal_summary_page.dart';
 import 'tabs/short_summary_page.dart';
 import 'tabs/summary_list_page.dart';
-import 'package:flutter/material.dart';
 
 class MedicalSummaryScreen extends StatefulWidget {
   const MedicalSummaryScreen({super.key, this.patientId});
@@ -31,7 +35,7 @@ class _MedicalSummaryScreenState extends State<MedicalSummaryScreen> {
                 children: [
                   TabBarWidget(
                     selectedIndex: value,
-                    menu: [
+                    menu: const [
                       '自動翻訳', // Auto translate
                       'サマリー（通常版）', // Summary (Normal version)
                       'サマリー（簡易版）', // Summary (Simple version)

@@ -1,5 +1,6 @@
-
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'filter_process_chart_request.g.dart';
 
 @JsonSerializable()

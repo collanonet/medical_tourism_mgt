@@ -8,17 +8,22 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
+
+// Package imports:
 import 'package:auto_route/auto_route.dart' as _i8;
+
+// Project imports:
 import 'package:feature_report/src/contract/contract_page.dart' as _i2;
+import 'package:feature_report/src/master_page.dart' as _i4;
+import 'package:feature_report/src/report_page.dart' as _i6;
+import 'package:feature_report/src/type/type_page.dart' as _i7;
+
 import 'package:feature_report/src/contract_template_detail/contract_template_detail_page.dart'
     as _i1;
 import 'package:feature_report/src/estimate_master/estimate_master_page.dart'
     as _i3;
-import 'package:feature_report/src/master_page.dart' as _i4;
 import 'package:feature_report/src/prospective_rank/prospective_rank_page.dart'
     as _i5;
-import 'package:feature_report/src/report_page.dart' as _i6;
-import 'package:feature_report/src/type/type_page.dart' as _i7;
 
 abstract class $FeatureReportRouterModule extends _i8.AutoRouterModule {
   @override

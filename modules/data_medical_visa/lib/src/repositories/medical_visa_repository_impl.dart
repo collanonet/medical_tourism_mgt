@@ -1,8 +1,7 @@
-import 'dart:io';
-
-import 'package:core_network/entities.dart';
+// Package imports:
 import 'package:injectable/injectable.dart';
 
+// Project imports:
 import '../providers/medical_visa_local_provider.dart';
 import '../providers/medical_visa_remote_provider.dart';
 import 'medical_visa_repository.dart';

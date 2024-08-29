@@ -1,7 +1,10 @@
+// Package imports:
 import 'package:dio/dio.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
 import 'package:retrofit/retrofit.dart';
+
+// Project imports:
 import '../core_network.dart';
 import '../entities.dart';
 import 'endpoints.dart';
@@ -708,8 +711,6 @@ abstract class ApiService {
 
   //E1
 
-  @GET(EndPoints.FILTER_PROCESS_CHART_PATIENT)
-  Future<PatientFilterResponse> getFilterPatientChart();
 
   @POST(EndPoints.FILTER_PROCESS_CHART_PATIENT)
   Future<PatientFilterResponse> postFilterpatientChart(
@@ -863,7 +864,7 @@ abstract class ApiService {
         detailItinerarySimpleInterpreterOrGuideRequest,
   );
 
-  @GET(EndPoints.DETAIL_ITINERARY_SIMPLE_VERAION_PICK_UP)
+  @GET('${EndPoints.DETAIL_ITINERARY_SIMPLE_VERAION_PICK_UP}/{id}')
   Future<DetailItinerarySimplePickUpAndDropOffResponse>
       getDetailItinerarySimplePickUp();
 
@@ -875,9 +876,16 @@ abstract class ApiService {
         detailItinerarySimplePickUpAndDropOffRequest,
   );
 
+  @GET('${EndPoints.DETAIL_ITINERARY}/{id}')
+  Future<DetailItineraryResponse> getDetailitinerary({
+    @Path('id') String? id,
+   
+  });
+
+  
   @GET(EndPoints.DETAIL_ITINERARY)
-  Future<List<DetailItineraryResponse>> getDetailitinerary({
-    @Query('tourName') String? tourName,
+  Future<List<DetailItineraryResponse>> getPatientChart({
+     @Query('tourName') String? tourName,
     @Query('classification') String? classification,
     @Query('dateFrom') DateTime? dateFrom,
     @Query('dateTo') DateTime? dateTo,

@@ -1,13 +1,18 @@
-import 'package:core_ui/core_ui.dart';
-import 'package:core_ui/widgets.dart';
-import 'package:core_utils/core_utils.dart';
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+
+// Package imports:
+import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+
+// Project imports:
 import '../basic_info_model.dart';
 
 class MedicalRecordPassportSection extends StatefulWidget {
@@ -105,7 +110,7 @@ class _MedicalRecordPassportSectionState
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'passportNumber',
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             label: Text(
                               '旅券番号', //   TODO: l10n 対応 (旅券番号) (passportNumber)
                             ),
@@ -129,7 +134,7 @@ class _MedicalRecordPassportSectionState
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
                                 decoration: InputDecoration(
-                                  label: Text(
+                                  label: const Text(
                                     '発行日', //  TODO: l10n 対応 (発行日) (issueDate)
                                   ),
                                   suffixIcon: IconButton(
@@ -146,7 +151,7 @@ class _MedicalRecordPassportSectionState
                               );
                             }),
                       ),
-                      Expanded(child: SizedBox()),
+                      const Expanded(child: SizedBox()),
                     ],
                   ),
                   RowSeparated(
@@ -169,7 +174,7 @@ class _MedicalRecordPassportSectionState
                                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                 ),
                                 decoration: InputDecoration(
-                                  label: Text(
+                                  label: const Text(
                                     '有効期限', // TODO: l10n 対応 (有効期限) (expirationDate)
                                   ),
                                   suffixIcon: IconButton(
@@ -186,8 +191,8 @@ class _MedicalRecordPassportSectionState
                               );
                             }),
                       ),
-                      Expanded(child: SizedBox()),
-                      Expanded(child: SizedBox()),
+                      const Expanded(child: SizedBox()),
+                      const Expanded(child: SizedBox()),
                     ],
                   ),
                   RowSeparated(
@@ -220,7 +225,7 @@ class _MedicalRecordPassportSectionState
                       Expanded(
                         child: ReactiveTextField(
                           formControlName: 'visaCategory',
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             label: Text(
                               'ビザ種類', //  TODO: l10n 対応 (ビザ種類) (visaCategory)
                             ),

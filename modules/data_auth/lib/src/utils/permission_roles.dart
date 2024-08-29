@@ -1,3 +1,4 @@
+// Package imports:
 import 'package:core_network/entities.dart';
 
 const _dataMap = {

@@ -1,14 +1,15 @@
-import 'package:core_l10n/l10n.dart';
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+// Project imports:
 import 'contract_template_detail_file.dart';
 import 'contract_template_detail_form.dart';
 import 'contract_template_detail_model.dart';
@@ -73,26 +74,26 @@ class _ContractDetailScreenState extends State<ContractDetailScreen> {
                   boxRequired(enabled: true, label: '電子契約'),
                 ],
               ),
-              Spacer(),
-              Text('甲'),
+              const Spacer(),
+              const Text('甲'),
               ElevatedButton(
                 style: const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(Colors.blue),
                 ),
                 onPressed: () {},
-                child: Text('自社'),
+                child: const Text('自社'),
               ),
               SizedBox(
                 width: context.appTheme.spacing.marginMedium,
               ),
-              Text('乙'),
+              const Text('乙'),
               ElevatedButton(
                 style: const ButtonStyle(
                   backgroundColor: MaterialStatePropertyAll(
                       Color.fromARGB(255, 206, 195, 95)),
                 ),
                 onPressed: () {},
-                child: Text('患者'),
+                child: const Text('患者'),
               ),
               SizedBox(
                 width: context.appTheme.spacing.marginMedium,
@@ -111,7 +112,7 @@ class _ContractDetailScreenState extends State<ContractDetailScreen> {
               color: Colors.white,
               borderRadius: BorderRadius.circular(10),
             ),
-            padding: EdgeInsets.all(16),
+            padding: const EdgeInsets.all(16),
             child: ColumnSeparated(
               separatorBuilder: (context, index) =>
                   SizedBox(height: context.appTheme.spacing.marginMedium),
@@ -287,7 +288,7 @@ class _ContractDetailScreenState extends State<ContractDetailScreen> {
                             color: Colors.grey[200],
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          padding: EdgeInsets.all(16),
+                          padding: const EdgeInsets.all(16),
                           child: ColumnSeparated(
                             separatorBuilder: (context, index) => SizedBox(
                               height: context.appTheme.spacing.marginMedium,
@@ -302,7 +303,7 @@ class _ContractDetailScreenState extends State<ContractDetailScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text('バージョン'),
+                                      const Text('バージョン'),
                                       IntrinsicWidth(
                                         stepWidth: 300,
                                         child: ReactiveTextField(
@@ -316,7 +317,7 @@ class _ContractDetailScreenState extends State<ContractDetailScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text('書類名'),
+                                      const Text('書類名'),
                                       IntrinsicWidth(
                                         stepWidth: 500,
                                         child: ReactiveTextField(
@@ -456,7 +457,7 @@ class _ContractDetailScreenState extends State<ContractDetailScreen> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      Text('病院の場合の契約先'),
+                                      const Text('病院の場合の契約先'),
                                       Row(
                                         children: [
                                           IntrinsicWidth(
@@ -468,7 +469,7 @@ class _ContractDetailScreenState extends State<ContractDetailScreen> {
                                               value: 'Other_MS_Corporations',
                                               formControlName:
                                                   'contracting_party_for_hospitals',
-                                              title: Text('MS法人'),
+                                              title: const Text('MS法人'),
                                             ),
                                           ),
                                           const SizedBox(width: 20),
@@ -481,7 +482,7 @@ class _ContractDetailScreenState extends State<ContractDetailScreen> {
                                               value: 'MS_Corporation',
                                               formControlName:
                                                   'contracting_party_for_hospitals',
-                                              title: Text('その他のMS法人'),
+                                              title: const Text('その他のMS法人'),
                                             ),
                                           ),
                                         ],
@@ -490,14 +491,14 @@ class _ContractDetailScreenState extends State<ContractDetailScreen> {
                                   ),
                                   Column(
                                     children: [
-                                      Text('運用'),
+                                      const Text('運用'),
                                       IntrinsicWidth(
                                         child: ReactiveCheckboxListTile(
                                           controlAffinity:
                                               ListTileControlAffinity.leading,
                                           contentPadding: EdgeInsets.zero,
                                           formControlName: 'operation',
-                                          title: Text('このデータをシステム上で運用する'),
+                                          title: const Text('このデータをシステム上で運用する'),
                                         ),
                                       ),
                                     ],
@@ -512,12 +513,12 @@ class _ContractDetailScreenState extends State<ContractDetailScreen> {
                           children: [
                             ElevatedButton(
                               onPressed: () {},
-                              child: Text('更新する'),
+                              child: const Text('更新する'),
                             ),
                             const SizedBox(width: 20),
                             ElevatedButton(
                               onPressed: () {},
-                              child: Text('新規登録'),
+                              child: const Text('新規登録'),
                             )
                           ],
                         ),
@@ -547,10 +548,7 @@ class _ContractDetailScreenState extends State<ContractDetailScreen> {
         value: context.read<ContractTemplateModel>(),
         child: AlertDialog(
           content: ReactiveFormConfig(
-            validationMessages: <String, ValidationMessageFunction>{
-              ValidationMessage.required: (error) =>
-                  context.l10n.mgsFieldRequired,
-            },
+            validationMessages: validationMessages,
             child: ReactiveFormBuilder(
               form: () => contractTemplateform(file)..markAllAsTouched(),
               builder: (context, formGroup, child) {

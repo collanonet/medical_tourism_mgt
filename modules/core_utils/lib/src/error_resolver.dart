@@ -1,9 +1,14 @@
+// Dart imports:
 import 'dart:io';
 
-import 'package:core_l10n/l10n.dart';
-import 'package:dio/dio.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Package imports:
+import 'package:core_l10n/l10n.dart';
+import 'package:dio/dio.dart';
+
+// Project imports:
 import '../core_utils.dart';
 
 abstract class ErrorResolver {

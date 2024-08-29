@@ -1,9 +1,11 @@
+// Flutter imports:
+import 'package:flutter/foundation.dart';
+
+// Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:core_network/entities.dart';
-import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_hospital/data_hospital.dart';
-import 'package:flutter/foundation.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -83,6 +85,7 @@ class QAndAModel {
 
   Future<void> deleteData(NewRegistrationHospitalResponse requireData) async {
     try {
+
       delete.value = const AsyncData(loading: true);
       await hospitalRepository.deleteNewRegistrationHospital(
         requireData.id,

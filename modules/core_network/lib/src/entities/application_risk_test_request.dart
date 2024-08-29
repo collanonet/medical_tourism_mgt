@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'application_risk_test_request.g.dart';
 
 @JsonSerializable()

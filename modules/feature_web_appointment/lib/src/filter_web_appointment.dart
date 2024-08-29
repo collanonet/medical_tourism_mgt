@@ -1,12 +1,16 @@
-import 'package:core_ui/core_ui.dart';
-import 'package:core_utils/core_utils.dart';
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+
+// Package imports:
+import 'package:core_ui/core_ui.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import 'filter_web_appointment_form.dart';
 import 'web_appointment_model.dart';
 
@@ -25,7 +29,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
     return Consumer<WebAppointmentModel>(
       builder: (context, model, child) {
         return ReactiveFormConfig(
-          validationMessages: validationMessagesFilterPatient(context),
+          validationMessages: validationMessages,
           child: ReactiveFormBuilder(
             form: () => formFilterWebAppointment(),
             builder: (context, formGroup, child) {
@@ -55,7 +59,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                 Expanded(
                                   child: ReactiveTextField(
                                     formControlName: 'hospitalName',
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       label: Text('病院名'),
                                     ),
                                   ),
@@ -64,7 +68,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                 Expanded(
                                   child: ReactiveTextField(
                                     formControlName: 'doctor_name',
-                                    decoration: InputDecoration(
+                                    decoration: const InputDecoration(
                                       label: Text('医師名'),
                                     ),
                                   ),
@@ -128,7 +132,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                                   DateFormat('yyyy/MM/dd'),
                                             ),
                                             decoration: InputDecoration(
-                                              label: Text('予約日（自）'),
+                                              label: const Text('予約日（自）'),
                                               suffixIcon: IconButton(
                                                 icon: const Icon(
                                                   CupertinoIcons.calendar,
@@ -174,7 +178,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                                   DateFormat('yyyy/MM/dd'),
                                             ),
                                             decoration: InputDecoration(
-                                              label: Text('予約日（至）'),
+                                              label: const Text('予約日（至）'),
                                               suffixIcon: IconButton(
                                                 icon: const Icon(
                                                   CupertinoIcons.calendar,
@@ -241,7 +245,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                                 ListTileControlAffinity.leading,
                                             formControlName:
                                                 'inquiryInProgress',
-                                            title: Text(
+                                            title: const Text(
                                               '問合せ中',
                                             ),
                                           ),
@@ -256,7 +260,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                                 ListTileControlAffinity.leading,
                                             formControlName:
                                                 'reservationConfirmed',
-                                            title: Text('予約確定'),
+                                            title: const Text('予約確定'),
                                           ),
                                         ),
                                       ],
@@ -273,7 +277,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                         .read<WebAppointmentModel>()
                                         .getWebBookingAdmin();
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     'クリア',
                                     style: TextStyle(
                                       fontFamily: 'NotoSansJP',
@@ -309,7 +313,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                               .value,
                                         );
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     '検索',
                                     style: TextStyle(
                                       fontFamily: 'NotoSansJP',

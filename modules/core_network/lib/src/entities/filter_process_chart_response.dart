@@ -1,5 +1,6 @@
-
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'filter_process_chart_response.g.dart';
 @JsonSerializable()
 class PatientFilterResponse {

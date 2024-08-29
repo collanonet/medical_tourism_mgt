@@ -1,8 +1,12 @@
-
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+
+// Project imports:
 import 'facility_photo_model.dart';
 import 'facility_photo_section.dart';
 

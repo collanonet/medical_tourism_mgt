@@ -1,6 +1,9 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 class ChangeLanguageWidget extends StatefulWidget {

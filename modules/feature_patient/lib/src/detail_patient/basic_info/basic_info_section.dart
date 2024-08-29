@@ -1,8 +1,13 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'section/medical_record_agent_section.dart';
-import 'package:flutter/material.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+// Project imports:
+import 'section/medical_record_agent_section.dart';
 import 'section/medical_record_budget_section.dart';
 import 'section/medical_record_companion_section.dart';
 import 'section/medical_record_hospital_section.dart';

@@ -1,15 +1,19 @@
+// Flutter imports:
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import 'patient_model.dart';
+// Project imports:
 import 'filter_patient_form.dart';
+import 'patient_model.dart';
 
 class PatientFilterForAgent extends StatelessWidget {
   const PatientFilterForAgent({super.key});
@@ -20,14 +24,14 @@ class PatientFilterForAgent extends StatelessWidget {
     return Consumer<PatientModel>(
       builder: (context, model, child) {
         return ReactiveFormConfig(
-          validationMessages: validationMessagesFilterPatient(context),
+          validationMessages: validationMessages,
           child: ReactiveFormBuilder(
             form: () => formFilterPatient(),
             builder: (context, formGroup, child) {
               return Container(
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
-                    color: Color(0xffF0F3F5)),
+                    color: const Color(0xffF0F3F5)),
                 padding: const EdgeInsets.all(16),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
@@ -120,7 +124,7 @@ class PatientFilterForAgent extends StatelessWidget {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              ReactiveDropdownFormField(
+                              const ReactiveDropdownFormField(
                                 formControlName: 'type',
                                 items: [
                                   DropdownMenuItem(
