@@ -64,12 +64,12 @@ abstract class AppModule {
   @Named('defaultLocale')
   Locale get defaultLocale => const Locale('ja');
 
-  // @dev
-  // @preResolve
-  // @Named('appVersion')
-  // Future<String> get devAppVersion async {
-  //   return 'DEV ${await Strings.appVersion()}';
-  // }
+  @dev
+  @preResolve
+  @Named('appVersion')
+  Future<String> get devAppVersion async {
+    return 'DEV ${await Strings.appVersion()}';
+  }
 
   @stage
   @preResolve

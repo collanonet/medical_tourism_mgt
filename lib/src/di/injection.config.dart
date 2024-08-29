@@ -115,6 +115,12 @@ extension GetItInjectableX on _i1.GetIt {
       instanceName: 'baseUrl',
       registerFor: {_dev},
     );
+    await gh.factoryAsync<String>(
+      () => appModule.devAppVersion,
+      instanceName: 'appVersion',
+      registerFor: {_dev},
+      preResolve: true,
+    );
     gh.singleton<_i19.Storage>(
       () => storageModule.authStorage,
       instanceName: 'authStorage',

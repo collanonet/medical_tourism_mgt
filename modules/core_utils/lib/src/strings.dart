@@ -1,5 +1,10 @@
+import 'dart:convert';
+import 'dart:html' as html;
 import 'package:jiffy/jiffy.dart';
-import 'package:package_info_plus/package_info_plus.dart';
+
+import 'package:http/http.dart' as http;
+
+import '../core_utils.dart';
 
 /// A utility class for working with strings.
 ///
@@ -48,11 +53,33 @@ class Strings {
   static Future<String> appVersion({
     bool? buildNumber = true,
   }) async {
-    final info = await PackageInfo.fromPlatform();
-    if (buildNumber == false) {
-      return info.version;
+    try {
+      var url = html.window.location.href;
+
+      logger.i('url: $url');
+      String uri;
+      if (url.contains('localhost')) {
+        uri = '1.0.0';
+      } else {
+        uri = '${url.split('app/').first}app/';
+      }
+      logger.i('uri: $uri');
+
+      final info = await http.get(
+        Uri.parse('$uri/version.json'),
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      );
+      var data = json.decode(info.body);
+      if (buildNumber == false) {
+        return data['version'];
+      }
+      return '${data["version"]} (${data["build_number"]})';
+    } catch (e) {
+      logger.e(e);
+      return '1.0.0';
     }
-    return '${info.version} (${info.buildNumber})';
   }
 
   static shortDateTimeName(DateTime dateTime) {
