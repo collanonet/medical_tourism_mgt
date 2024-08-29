@@ -8,7 +8,6 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_utils/routes.dart';
 import 'package:feature_auth/feature_auth.dart';
-import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
 class SideBarMenu extends StatelessWidget {
