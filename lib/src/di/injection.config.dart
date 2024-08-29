@@ -58,6 +58,7 @@ import 'modules/storage_module.dart' as _i40;
 const String _local = 'local';
 const String _dev = 'dev';
 const String _production = 'production';
+const String _prod = 'prod';
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -104,6 +105,12 @@ extension GetItInjectableX on _i1.GetIt {
       instanceName: 'baseUrl',
       registerFor: {_dev},
     );
+    await gh.factoryAsync<String>(
+      () => appModule.devAppVersion,
+      instanceName: 'appVersion',
+      registerFor: {_dev},
+      preResolve: true,
+    );
     gh.singleton<_i19.Storage>(
       () => storageModule.authStorage,
       instanceName: 'authStorage',
@@ -129,6 +136,12 @@ extension GetItInjectableX on _i1.GetIt {
     );
     gh.singleton<_i26.AppRouter>(
         () => appModule.appRouter(gh<_i18.RoleGuard>()));
+    await gh.factoryAsync<String>(
+      () => appModule.prodAppVersion,
+      instanceName: 'appVersion',
+      registerFor: {_prod},
+      preResolve: true,
+    );
     await _i27.CoreL10nPackageModule().init(gh);
     await _i28.CoreNetworkPackageModule().init(gh);
     await _i29.FeatureAuthPackageModule().init(gh);

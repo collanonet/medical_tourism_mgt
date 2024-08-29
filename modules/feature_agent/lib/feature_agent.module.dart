@@ -4,15 +4,11 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-
-// Dart imports:
 import 'dart:async' as _i2;
 
-// Package imports:
 import 'package:data_agent/data_agent.dart' as _i4;
 import 'package:injectable/injectable.dart' as _i1;
 
-// Project imports:
 import 'src/agent_model.dart' as _i8;
 import 'src/detail/agent_detail_model.dart' as _i3;
 import 'src/detail/sub/basic_information/basic_information_model.dart' as _i6;
