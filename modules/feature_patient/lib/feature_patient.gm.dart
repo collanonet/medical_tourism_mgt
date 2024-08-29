@@ -8,20 +8,13 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-
-// Flutter imports:
-import 'package:flutter/material.dart' as _i5;
-
-// Package imports:
 import 'package:auto_route/auto_route.dart' as _i4;
 import 'package:core_network/entities.dart' as _i6;
-
-// Project imports:
-import 'package:feature_patient/src/patient/patient_page.dart' as _i2;
-import 'package:feature_patient/src/pre_patient/pre_patient_page.dart' as _i3;
-
 import 'package:feature_patient/src/detail_patient/detail_patient_page.dart'
     as _i1;
+import 'package:feature_patient/src/patient/patient_page.dart' as _i2;
+import 'package:feature_patient/src/pre_patient/pre_patient_page.dart' as _i3;
+import 'package:flutter/material.dart' as _i5;
 
 abstract class $FeaturePatientRouterModule extends _i4.AutoRouterModule {
   @override

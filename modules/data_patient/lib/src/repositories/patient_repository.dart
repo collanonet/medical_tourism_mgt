@@ -472,6 +472,8 @@ abstract class PatientRepository {
     MedicalPaymentRequest medicalPaymentRequest,
   );
 
+  Future<void> deleteMedicalPayment(String id);
+
   Future<void> closePatientAccount(String id);
 
   // web booking v2

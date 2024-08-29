@@ -224,7 +224,7 @@ class EndPoints {
 
   //Patient
   static const DOMESTIC_MEDICAL_DATA = '/domestic-medical-data';
-  static const MEDICAL_PAYMENT_DETAIL = '/medical-payment-details';
+  static const MEDICAL_PAYMENT_DETAIL = '/medical-treatment-fee-details'; //'/medical-payment-details';
 
   //Invoice and Quote
   static const INVOICE_DETAIL = '/invoice-details';

@@ -6145,7 +6145,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-payment-details/${id}',
+              '/medical-treatment-fee-details/by-medical-record/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -6177,7 +6177,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-payment-details',
+              '/medical-treatment-fee-details',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -6188,6 +6188,30 @@ class _ApiService implements ApiService {
             ))));
     final value = MedicalPaymentResponse.fromJson(_result.data!);
     return value;
+  }
+
+  @override
+  Future<void> deleteMedicalPaymentDetail(String id) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/medical-treatment-fee-details/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
   }
 
   @override

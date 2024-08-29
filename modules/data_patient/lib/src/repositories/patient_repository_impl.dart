@@ -803,6 +803,11 @@ class PatientRepositoryIml extends PatientRepository {
     return remote.postMedicalPayment(medicalPaymentRequest);
   }
 
+   @override
+  Future<void> deleteMedicalPayment(String id) {
+    return remote.deleteMedicalPayment(id);
+  }
+
   @override
   Future<void> closePatientAccount(String id) {
     return remote.closePatientAccount(id);
@@ -894,5 +899,7 @@ class PatientRepositoryIml extends PatientRepository {
   Future<TreamentResponce> updateBooking(String treatmentId, TreamentRequest treatmentRequest) {
     return remote.updateBooking(treatmentId, treatmentRequest);
   }
+  
+ 
 }
 

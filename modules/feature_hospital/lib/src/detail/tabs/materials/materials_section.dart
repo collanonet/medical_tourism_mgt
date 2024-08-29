@@ -221,33 +221,34 @@ class MaterialSectionState extends State<MaterialSection> {
                             itemBuilder: (context, index) {
                               final data = value.data?[index];
                               return InkWell(
-                                onTap: (){
+                                onTap: () {
                                   showPreviewFile(context, data!);
                                 },
                                 child: Row(
                                   children: [
                                     ValueListenableBuilder(
-                                        valueListenable: selected,
-                                        builder: (context, sels, _) {
-                                          return Checkbox(
-                                            value: sels.contains(data?.id),
-                                            onChanged: (sel) {
-                                              if (sel != null) {
-                                                if (sel) {
-                                                  selected.value = [
-                                                    ...sels,
-                                                    data?.id ?? ''
-                                                  ];
-                                                } else {
-                                                  selected.value = [
-                                                    ...sels.where(
-                                                        (e) => e != data?.id)
-                                                  ];
-                                                }
+                                      valueListenable: selected,
+                                      builder: (context, sels, _) {
+                                        return Checkbox(
+                                          value: sels.contains(data?.id),
+                                          onChanged: (sel) {
+                                            if (sel != null) {
+                                              if (sel) {
+                                                selected.value = [
+                                                  ...sels,
+                                                  data?.id ?? ''
+                                                ];
+                                              } else {
+                                                selected.value = [
+                                                  ...sels.where(
+                                                      (e) => e != data?.id)
+                                                ];
                                               }
-                                            },
-                                          );
-                                        }),
+                                            }
+                                          },
+                                        );
+                                      },
+                                    ),
                                     Expanded(
                                       flex: 2,
                                       child: Text(data?.brochureName ?? ''),
@@ -337,8 +338,8 @@ class MaterialSectionState extends State<MaterialSection> {
                                                   .read<MaterialsModel>(),
                                               child: AlertDialog(
                                                 title: const Text('削除確認'),
-                                                content:
-                                                    const Text('選択したデータを削除しますか？'),
+                                                content: const Text(
+                                                    '選択したデータを削除しますか？'),
                                                 actions: [
                                                   TextButton(
                                                     onPressed: () {

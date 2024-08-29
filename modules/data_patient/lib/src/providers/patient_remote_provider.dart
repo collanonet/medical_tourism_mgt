@@ -603,6 +603,10 @@ class PatientRemoteProvider {
   Future<MedicalPaymentResponse> postMedicalPayment(
           MedicalPaymentRequest medicalPaymentRequest) async =>
       await apiService.postMedicalPaymentDetail(medicalPaymentRequest);
+  
+  Future<void> deleteMedicalPayment(String id) async {
+    await apiService.deleteMedicalPaymentDetail(id);
+  }
 
   Future<void> closePatientAccount(String id) {
     return apiService.closePatientAccount(id);
