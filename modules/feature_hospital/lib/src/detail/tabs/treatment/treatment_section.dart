@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:feature_hospital/src/detail/tabs/treatment/section/treatmenu_sectiion.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -29,10 +30,9 @@ class _TreatmentSectionState extends State<TreatmentSection> {
           height: context.appTheme.spacing.formSpacing,
         ),
         children: [
-          //Todo: Uncomment this code but need redo
-          // TreatmentMenuSection(
-          //   hospitalId: widget.hospitalId,
-          // ),
+          TreatmentMenuSection(
+            hospitalId: widget.hospitalId,
+          ),
           const TelemedicineMenuSection(),
           ValueListenableListener(
             valueListenable: context.read<TreatmentModle>().submitData,

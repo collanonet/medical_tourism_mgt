@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:core_network/entities.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:feature_agent/feature_agent.gm.dart';
 import 'package:feature_auth/feature_auth.dart';
 import 'package:feature_chats/feature_chats.gm.dart';
@@ -60,5 +61,10 @@ abstract class AppModule {
   }
 
   @Named('defaultLocale')
-  Locale get defaultLocale => const Locale('en');
+  Locale get defaultLocale => const Locale('ja');
+
+  @Named('appVersion')
+  Future<String> get appVersion async {
+    return 'DEV ${await Strings.appVersion()}';
+  }
 }
