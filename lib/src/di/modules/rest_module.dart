@@ -83,6 +83,7 @@ abstract class RestModule {
   }
 
   @production
+  @prod
   @Order(0)
   @Named('baseUrl')
   Uri get prodBaseUrl => Uri();

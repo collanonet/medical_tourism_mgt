@@ -15,14 +15,14 @@ class SideBarMenu extends StatelessWidget {
   const SideBarMenu({
     super.key,
     required this.selectedIndex,
+    required this.appVersion,
   });
 
   final int selectedIndex;
+  final String appVersion;
 
   @override
   Widget build(BuildContext context) {
-    // final appVersion = GetIt.I<String>(instanceName: 'appVersion') ?? '';
-
     List<Menu> menus = [
       Menu(
         title: context.l10n.labelPatient,
@@ -172,13 +172,15 @@ class SideBarMenu extends StatelessWidget {
                   ),
                 ),
               ),
-              Text(
-                'version: 1.0.0(2)',
-                // 'version: $appVersion',
-                style: const TextStyle(
-                  color: Colors.grey,
-                  fontFamily: 'NotoSansJP',
-                  package: 'core_ui',
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 2, 16, 16),
+                child: Text(
+                  'version: $appVersion',
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontFamily: 'NotoSansJP',
+                    package: 'core_ui',
+                  ),
                 ),
               ),
               Divider(

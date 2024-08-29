@@ -1,6 +1,5 @@
 {
   "hosting": {
-    "site": "medical-tourism-dev",
     "public": "/build/web",
     "ignore": [
       "firebase.json",

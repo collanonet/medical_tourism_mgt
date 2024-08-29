@@ -55,10 +55,11 @@ import 'modules/app_module.dart' as _i42;
 import 'modules/rest_module.dart' as _i41;
 import 'modules/storage_module.dart' as _i40;
 
+const String _prod = 'prod';
+const String _production = 'production';
 const String _local = 'local';
 const String _dev = 'dev';
 const String _stage = 'stage';
-const String _production = 'production';
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -91,6 +92,15 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<String>(() => storageModule.storagePrefixKey);
     gh.singleton<_i17.CacheOptions>(() => restModule.cacheOptions);
     gh.singleton<_i18.RoleGuard>(() => appModule.roleGuard);
+    await gh.factoryAsync<String>(
+      () => appModule.prodAppVersion,
+      instanceName: 'appVersion',
+      registerFor: {
+        _prod,
+        _production,
+      },
+      preResolve: true,
+    );
     gh.factory<Uri>(
       () => restModule.localBaseUrl,
       instanceName: 'baseUrl',
@@ -104,12 +114,6 @@ extension GetItInjectableX on _i1.GetIt {
       () => restModule.devBaseUrl,
       instanceName: 'baseUrl',
       registerFor: {_dev},
-    );
-    await gh.factoryAsync<String>(
-      () => appModule.devAppVersion,
-      instanceName: 'appVersion',
-      registerFor: {_dev},
-      preResolve: true,
     );
     gh.singleton<_i19.Storage>(
       () => storageModule.authStorage,
@@ -138,19 +142,16 @@ extension GetItInjectableX on _i1.GetIt {
           gh<Uri>(instanceName: 'baseUrl'),
           gh<_i17.CacheOptions>(),
         ));
-    gh.lazySingleton<_i25.NetworkImageConfigs>(() =>
-        restModule.networkImage(baseUrl: gh<Uri>(instanceName: 'baseUrl')));
-    await gh.factoryAsync<String>(
-      () => appModule.prodAppVersion,
-      instanceName: 'appVersion',
-      registerFor: {_production},
-      preResolve: true,
-    );
     gh.factory<Uri>(
       () => restModule.prodBaseUrl,
       instanceName: 'baseUrl',
-      registerFor: {_production},
+      registerFor: {
+        _production,
+        _prod,
+      },
     );
+    gh.lazySingleton<_i25.NetworkImageConfigs>(() =>
+        restModule.networkImage(baseUrl: gh<Uri>(instanceName: 'baseUrl')));
     gh.singleton<_i26.AppRouter>(
         () => appModule.appRouter(gh<_i18.RoleGuard>()));
     await _i27.CoreL10nPackageModule().init(gh);
