@@ -900,6 +900,11 @@ class PatientRepositoryIml extends PatientRepository {
     return remote.updateBooking(treatmentId, treatmentRequest);
   }
   
+  @override
+  Future<void> deleteDomesticMedical(String id) {
+    return remote.deleteDomesticMedical(id);
+  }
+  
  
 }
 

@@ -20,7 +20,7 @@ FormGroup domesticMedicalDataForm(
       ],
     ),
     'sharedUrlIssue': FormControl<String>(),
-    'disclosureToPatients': FormControl<String>(),
-    'disclosureToOtherMedicalInstitutions': FormControl<String>(),
+    'disclosureToPatients': FormControl<String>(value: ''),
+    'disclosureToOtherMedicalInstitutions': FormControl<String>(value: ''),
   });
 }

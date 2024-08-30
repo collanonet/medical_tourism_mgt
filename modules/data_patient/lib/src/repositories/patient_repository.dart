@@ -476,6 +476,8 @@ abstract class PatientRepository {
 
   Future<void> closePatientAccount(String id);
 
+  Future<void> deleteDomesticMedical(String id);
+
   // web booking v2
 
   Future<BasicInformationHospitalResponse> webBookingGetHospitalById(String id);

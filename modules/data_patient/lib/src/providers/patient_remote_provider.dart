@@ -596,6 +596,10 @@ class PatientRemoteProvider {
           DomesticMedicalDataRequest domesticMedicalDataRequest) async =>
       await apiService.postDomesticMedicalData(domesticMedicalDataRequest);
 
+  Future<void> deleteDomesticMedical(String id) {
+    return apiService.deleteDomesticMedical(id);
+  }
+
   Future<List<MedicalPaymentResponse>> getMedicalPayment(
           {required String medicalRecordId}) async =>
       await apiService.getMedicalPaymentDetail(id: medicalRecordId);
