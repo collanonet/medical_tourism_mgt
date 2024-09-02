@@ -28,6 +28,14 @@ scripts:
       fvm dart run flutter_native_splash:create --path=flutter_native_splash.yaml
     env:
       FLUTTER_VERSION: 3.19.5
+  flutter:use:
+    description: "Use flutter version"
+    run: |
+      fvm use $FLUTTER_VERSION && \
+      fvm global $FLUTTER_VERSION && \
+      dart pub global activate spider
+    env:
+      FLUTTER_VERSION: 3.19.5
   run_debug:
     description: "run_debug"
     run: fvm flutter run -d chrome --web-port 5555
