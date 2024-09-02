@@ -169,9 +169,8 @@ class _PatientScreenState extends State<PatientScreen> {
               child: Skeletonizer(
                 enabled: model.patientData.loading,
                 child: DynamicTable(
-                  rowsPerPage: (model.patientData.data?.items.length ?? 0) < 10
-                      ? model.patientData.data?.items.length
-                      : 10,
+                  rowsPerPage: model.patientData.data?.items.length ?? 0,
+                  totalPages: model.patientData.data?.totalPages ?? 1,
                   data: TableData(
                     columns: [
                       HeaderTableData(

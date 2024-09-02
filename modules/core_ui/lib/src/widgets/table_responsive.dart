@@ -12,6 +12,7 @@ class DynamicTable extends StatefulWidget {
   final BoxDecoration? headerDecoration;
   final Color? oddRowColor;
   final Color? evenRowColor;
+  final int? totalPages;
   final int? rowsPerPage;
   final bool enableScroll;
 
@@ -24,6 +25,7 @@ class DynamicTable extends StatefulWidget {
     this.headerDecoration,
     this.oddRowColor,
     this.evenRowColor,
+    this.totalPages = 1,
     this.rowsPerPage = 10,
     this.enableScroll = true,
   });
@@ -66,7 +68,7 @@ class _DynamicTableState extends State<DynamicTable> {
   void _loadNextPage() {
     if (widget.data.rows.isNotEmpty && widget.rowsPerPage != null) {
       setState(() {
-        _currentPage = (_currentPage + 1).clamp(1, totalPages);
+        _currentPage = (_currentPage + 1).clamp(1, widget.totalPages ?? 1);
       });
     }
   }
@@ -74,18 +76,18 @@ class _DynamicTableState extends State<DynamicTable> {
   void _loadPreviousPage() {
     if (widget.data.rows.isNotEmpty && widget.rowsPerPage != null) {
       setState(() {
-        _currentPage = (_currentPage - 1).clamp(1, totalPages);
+        _currentPage = (_currentPage - 1).clamp(1, widget.totalPages ?? 1);
       });
     }
   }
 
-  int get totalPages {
-    if (widget.data.rows.isNotEmpty && widget.rowsPerPage != null) {
-      return (widget.data.rows.length / widget.rowsPerPage!).ceil();
-    } else {
-      return 1;
-    }
-  }
+  // int get totalPages {
+  //   if (widget.data.rows.isNotEmpty && widget.rowsPerPage != null) {
+  //     return (widget.data.rows.length / widget.rowsPerPage!).ceil();
+  //   } else {
+  //     return 1;
+  //   }
+  // }
 
   late List<RowTableData> rowsToShow;
   late int startIndex;
@@ -156,9 +158,15 @@ class _DynamicTableState extends State<DynamicTable> {
                   ),
                 ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                SizedBox(
+                  width: 16,
+                ),
+                Text('Total Page: ${widget.totalPages ?? 1}'),
+                Spacer(),
+                Text('Total Per Page: ${rowsPerPage}'),
                 IconButton(
                   onPressed: _currentPage > 0 ? _loadPreviousPage : null,
                   icon: const Icon(Icons.arrow_left),
