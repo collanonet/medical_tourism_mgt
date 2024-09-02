@@ -243,4 +243,7 @@ class EndPoints {
   static const WEB_BOOKING_HOSPITAL = '/web-booking-hospital';
   static const WEB_BOOKING_PATIENT = '/web-booking-patient';
   static const WEB_BOOKING_RESERVATION = '/web-booking-reservation';
+
+  //A9
+  static const SUMMARY_LIST = '/summary-list';
 }

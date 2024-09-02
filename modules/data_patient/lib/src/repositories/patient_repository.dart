@@ -517,5 +517,10 @@ abstract class PatientRepository {
       String reservationId, WebBookingMedicalRecordRequest request);
 
   Future<void> webBookingDeleteReservation(String reservationId);
+
+  //A9
+  Future<List<SummaryListResponse>> getSummaryList(String patientId);
+
+  Future<void> deleteSummaryList(String patientId);
 }
 

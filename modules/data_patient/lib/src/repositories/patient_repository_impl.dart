@@ -905,6 +905,17 @@ class PatientRepositoryIml extends PatientRepository {
     return remote.deleteDomesticMedical(id);
   }
   
+  //A9
+  @override
+  Future<void> deleteSummaryList(String patientId) {
+    return remote.deleteSummaryList(patientId);
+  }
+  
+  @override
+  Future<List<SummaryListResponse>> getSummaryList(String patientId) {
+    return remote.getSummaryList(patientId);
+  }
+  
  
 }
 

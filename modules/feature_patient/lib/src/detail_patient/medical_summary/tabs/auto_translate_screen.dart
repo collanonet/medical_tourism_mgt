@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -13,7 +14,11 @@ class AutoTranslateScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         InkWell(
-          onTap: () {},
+          onTap: () {
+            filePicker().then((value) {
+              if (value != null) {}
+            });
+          },
           child: Container(
             padding: EdgeInsets.all(
               context.appTheme.spacing.marginExtraLarge,
@@ -50,12 +55,16 @@ class AutoTranslateScreen extends StatelessWidget {
                       height: context.appTheme.spacing.marginMedium,
                     ),
                     ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        filePicker().then((value) {
+                          if (value != null) {}
+                        });
+                      },
                       child: const Text(
                         'またはファイルを選択する',
                         style: TextStyle(
-        fontFamily: 'NotoSansJP',
-        package: 'core_ui',
+                          fontFamily: 'NotoSansJP',
+                          package: 'core_ui',
                           color: Colors.white,
                         ),
                       ),

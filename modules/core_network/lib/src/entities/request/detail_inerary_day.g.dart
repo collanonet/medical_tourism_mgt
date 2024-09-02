@@ -12,7 +12,8 @@ Day _$DayFromJson(Map<String, dynamic> json) => Day(
       placeName: json['placeName'] as String?,
       placeStay: json['placeStay'] as String?,
       groups: (json['groups'] as List<dynamic>?)
-          ?.map((e) => Group.fromJson(e as Map<String, dynamic>))
+          ?.map((e) =>
+              e == null ? null : Group.fromJson(e as Map<String, dynamic>))
           .toList(),
       meals: (json['meals'] as List<dynamic>?)?.map((e) => e as bool).toList(),
     );
@@ -26,13 +27,14 @@ Map<String, dynamic> _$DayToJson(Day instance) => <String, dynamic>{
     };
 
 Group _$GroupFromJson(Map<String, dynamic> json) => Group(
-      task: (json['task'] as List<dynamic>?)
-          ?.map((e) => Task.fromJson(e as Map<String, dynamic>))
+      tasks: (json['tasks'] as List<dynamic>?)
+          ?.map((e) =>
+              e == null ? null : Task.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
-      'task': instance.task,
+      'tasks': instance.tasks,
     };
 
 Task _$TaskFromJson(Map<String, dynamic> json) => Task(

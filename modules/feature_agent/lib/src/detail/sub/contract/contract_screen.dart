@@ -140,7 +140,7 @@ class _ContractScreenState extends State<ContractScreen> {
                           final data = value.data?[index];
 
                           return Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.symmetric(vertical: 10),
                             child: Row(
                               children: [
                                 ValueListenableBuilder(
@@ -253,7 +253,8 @@ class _ContractScreenState extends State<ContractScreen> {
                                                                     context)
                                                                 .pop();
                                                           },
-                                                          child: const Text('キャンセル'),
+                                                          child: const Text(
+                                                              'キャンセル'),
                                                         ),
                                                         TextButton(
                                                           onPressed: () {
@@ -266,7 +267,8 @@ class _ContractScreenState extends State<ContractScreen> {
                                                                     context)
                                                                 .pop();
                                                           },
-                                                          child: const Text('削除する'),
+                                                          child: const Text(
+                                                              '削除する'),
                                                         ),
                                                       ],
                                                     ),

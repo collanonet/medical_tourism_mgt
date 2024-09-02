@@ -672,7 +672,60 @@ class _ApplicationRegenerativeMedicalScreenState
                       style: context.textTheme.bodyMedium,
                     ),
                     const SizedBox(height: 8),
-                    buttonInfo(formGroup, 'historyCancer'),
+                    ReactiveValueListenableBuilder(
+                      formControlName: 'historyCancer',
+                      builder: (context, value, _) {
+                        return Row(
+                          children: [
+                            ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  foregroundColor: value.value == true
+                                      ? Colors.white
+                                      : context.appTheme.primaryColor,
+                                  backgroundColor: value.value == true
+                                      ? context.appTheme.primaryColor
+                                      : Colors.white,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    side: BorderSide(
+                                      color: context.appTheme.primaryColor,
+                                      width: 2,
+                                    ),
+                                  ),
+                                ),
+                                onPressed: () {
+                                  formGroup.control('historyCancer').value =
+                                      true;
+                                },
+                                child: const Text('あり')),
+                            const SizedBox(width: 16),
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                foregroundColor: value.value == false
+                                    ? Colors.white
+                                    : context.appTheme.primaryColor,
+                                backgroundColor: value.value == false
+                                    ? context.appTheme.primaryColor
+                                    : Colors.white,
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(8),
+                                  side: BorderSide(
+                                    color: context.appTheme.primaryColor,
+                                    width: 2,
+                                  ),
+                                ),
+                              ),
+                              onPressed: () {
+                                formGroup.control('historyCancer').value =
+                                    false;
+                              },
+                              child: const Text('なし'),
+                            ),
+                          ],
+                        );
+                      },
+                    ),
+                    //   buttonInfo(formGroup, 'historyCancer'),
                     const SizedBox(height: 8),
                     const Text('がんの部位'),
                     const SizedBox(height: 8),
@@ -948,53 +1001,54 @@ class _ApplicationRegenerativeMedicalScreenState
 
   Widget buttonInfo(FormGroup formGroup, String control) {
     return ReactiveValueListenableBuilder(
-        formControlName: control,
-        builder: (context, value, _) {
-          return Row(
-            children: [
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: value.value == true
-                        ? Colors.white
-                        : context.appTheme.primaryColor,
-                    backgroundColor: value.value == true
-                        ? context.appTheme.primaryColor
-                        : Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      side: BorderSide(
-                        color: context.appTheme.primaryColor,
-                        width: 2,
-                      ),
+      formControlName: control,
+      builder: (context, value, _) {
+        return Row(
+          children: [
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: value.value == true
+                      ? Colors.white
+                      : context.appTheme.primaryColor,
+                  backgroundColor: value.value == true
+                      ? context.appTheme.primaryColor
+                      : Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: BorderSide(
+                      color: context.appTheme.primaryColor,
+                      width: 2,
                     ),
                   ),
-                  onPressed: () {
-                    formGroup.control(control).value = true;
-                  },
-                  child: const Text('希望する')),
-              const SizedBox(width: 16),
-              ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    foregroundColor: value.value == false
-                        ? Colors.white
-                        : context.appTheme.primaryColor,
-                    backgroundColor: value.value == false
-                        ? context.appTheme.primaryColor
-                        : Colors.white,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8),
-                      side: BorderSide(
-                        color: context.appTheme.primaryColor,
-                        width: 2,
-                      ),
+                ),
+                onPressed: () {
+                  formGroup.control(control).value = true;
+                },
+                child: const Text('希望する')),
+            const SizedBox(width: 16),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: value.value == false
+                      ? Colors.white
+                      : context.appTheme.primaryColor,
+                  backgroundColor: value.value == false
+                      ? context.appTheme.primaryColor
+                      : Colors.white,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8),
+                    side: BorderSide(
+                      color: context.appTheme.primaryColor,
+                      width: 2,
                     ),
                   ),
-                  onPressed: () {
-                    formGroup.control(control).value = false;
-                  },
-                  child: const Text('希望しない')),
-            ],
-          );
-        });
+                ),
+                onPressed: () {
+                  formGroup.control(control).value = false;
+                },
+                child: const Text('希望しない')),
+          ],
+        );
+      },
+    );
   }
 }

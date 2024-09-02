@@ -1387,6 +1387,17 @@ abstract class ApiService {
   Future<void> webBookingDeleteReservation(
     @Path('id') String reservationId,
   );
+
+  //Agent A9
+  @GET('${EndPoints.SUMMARY_LIST}/{id}')
+  Future<List<SummaryListResponse>> getSummaryList(
+    @Path('id') String patientId,
+  );
+
+  @DELETE('${EndPoints.SUMMARY_LIST}/{id}')
+  Future<void> deleteSummaryList(
+    @Path('id') String patientId,
+  );
 }
 
 extension ApiServiceExts on ApiService {

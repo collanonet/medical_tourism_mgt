@@ -7,6 +7,7 @@ part of 'detail_itinerary_data_response.dart';
 // **************************************************************************
 
 Task _$TaskFromJson(Map<String, dynamic> json) => Task(
+      id: json['_id'] as String?,
       placeName: json['placeName'] as String?,
       timeFrom: json['timeFrom'] as String?,
       timeTo: json['timeTo'] as String?,
@@ -15,6 +16,7 @@ Task _$TaskFromJson(Map<String, dynamic> json) => Task(
     );
 
 Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
+      '_id': instance.id,
       'placeName': instance.placeName,
       'timeFrom': instance.timeFrom,
       'timeTo': instance.timeTo,
@@ -23,16 +25,19 @@ Map<String, dynamic> _$TaskToJson(Task instance) => <String, dynamic>{
     };
 
 Group _$GroupFromJson(Map<String, dynamic> json) => Group(
-      task: (json['task'] as List<dynamic>?)
+      tasks: (json['tasks'] as List<dynamic>?)
           ?.map((e) => Task.fromJson(e as Map<String, dynamic>))
           .toList(),
+      id: json['_id'] as String?,
     );
 
 Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
-      'task': instance.task,
+      '_id': instance.id,
+      'tasks': instance.tasks,
     };
 
 Day _$DayFromJson(Map<String, dynamic> json) => Day(
+      id: json['_id'] as String?,
       date:
           json['date'] == null ? null : DateTime.parse(json['date'] as String),
       meals: (json['meals'] as List<dynamic>?)?.map((e) => e as bool).toList(),
@@ -44,6 +49,7 @@ Day _$DayFromJson(Map<String, dynamic> json) => Day(
     );
 
 Map<String, dynamic> _$DayToJson(Day instance) => <String, dynamic>{
+      '_id': instance.id,
       'date': instance.date?.toIso8601String(),
       'meals': instance.meals,
       'placeName': instance.placeName,

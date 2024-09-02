@@ -24,7 +24,6 @@ class PatientResponseTreatmentScreen extends StatefulWidget {
 
 class _PatientResponseTreatmentScreenState
     extends State<PatientResponseTreatmentScreen> {
-
   @override
   Widget build(BuildContext context) {
     final formArray = (ReactiveForm.of(context) as FormGroup)
@@ -662,7 +661,6 @@ class _PatientResponseTreatmentScreenState
                             ReactiveTextField(
                               formControlName: 'treatmentCosts',
                               keyboardType: TextInputType.number,
-
                               inputFormatters: [
                                 FilteringTextInputFormatter.allow(
                                     RegExp(r'[0-9]')),
@@ -800,7 +798,7 @@ class _PatientResponseTreatmentScreenState
                                           backgroundColor: Colors.white,
                                         ),
                                         onChanged: (i) => setState(() {
-                                          control.value = i == 'あり';
+                                          control.value = i == '独立';
                                         }),
                                       );
                                     }),
@@ -858,7 +856,7 @@ class _PatientResponseTreatmentScreenState
                                           backgroundColor: Colors.white,
                                         ),
                                         onChanged: (i) => setState(() {
-                                          control.value = i == 'あり';
+                                          control.value = i == '独立';
                                         }),
                                       );
                                     }),
@@ -916,7 +914,7 @@ class _PatientResponseTreatmentScreenState
                                           backgroundColor: Colors.white,
                                         ),
                                         onChanged: (i) => setState(() {
-                                          control.value = i == 'あり';
+                                          control.value = i == '独立';
                                         }),
                                       );
                                     }),
@@ -974,7 +972,7 @@ class _PatientResponseTreatmentScreenState
                                           backgroundColor: Colors.white,
                                         ),
                                         onChanged: (i) => setState(() {
-                                          control.value = i == 'あり';
+                                          control.value = i == '独立';
                                         }),
                                       );
                                     }),

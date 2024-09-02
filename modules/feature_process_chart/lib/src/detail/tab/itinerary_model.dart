@@ -58,7 +58,7 @@ class ItineraryModel {
         e.groups?.forEach((element) {
           // working with tasks
           FormArray tasks = FormArray([]);
-          element.task?.forEach((element) {
+          element.tasks?.forEach((element) {
             tasks.add(FormGroup({
               '_id': FormControl<String>(),
               'placeName': FormControl<String>(value: element.placeName),
@@ -71,7 +71,7 @@ class ItineraryModel {
           });
 
           // insert default form if task null
-          if (element.task == null) {
+          if (element.tasks == null) {
             tasks = FormArray(
               [
                 FormGroup(
@@ -257,7 +257,7 @@ class ItineraryModel {
               );
 
               groups.add(
-                Group(task: tasks),
+                Group(tasks: tasks),
               );
             },
           );
@@ -270,10 +270,6 @@ class ItineraryModel {
               groups: groups,
             ),
           );
-          logger.d('date ${element['date']}');
-          logger.d('placeName ${element['placeName']}');
-          logger.d('placeStay ${element['placeStay']}');
-          logger.d('days ${days}');
         },
       );
       submitData.value = const AsyncData(loading: true);

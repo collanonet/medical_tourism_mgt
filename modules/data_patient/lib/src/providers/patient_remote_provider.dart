@@ -692,4 +692,13 @@ class PatientRemoteProvider {
       treatmentRequest,
     );
   }
+
+  //A9
+  Future<List<SummaryListResponse>> getSummaryList(String patientId) async {
+    return apiService.getSummaryList(patientId);
+  }
+
+  Future<void> deleteSummaryList(String patientId) async {
+    return apiService.deleteSummaryList(patientId);
+  }
 }
