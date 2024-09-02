@@ -10,32 +10,32 @@ DomesticMedicalDataRequest _$DomesticMedicalDataRequestFromJson(
         Map<String, dynamic> json) =>
     DomesticMedicalDataRequest(
       file: json['file'] as String?,
-      nameOfMedicalInstitution: json['nameOfMedicalInstitution'] as String?,
+      medicalInstitutionName: json['medicalInstitutionName'] as String?,
       category: json['category'] as String?,
       documentName: json['documentName'] as String?,
-      remark: json['remark'] as String?,
+      remarks: json['remarks'] as String?,
       dateOfIssue: json['dateOfIssue'] == null
           ? null
           : DateTime.parse(json['dateOfIssue'] as String),
-      sharedUrlIssue: json['sharedUrlIssue'] as String?,
-      disclosureToPatients: json['disclosureToPatients'] as String?,
+      url: json['url'] as String?,
+      disclosureToPatient: json['disclosureToPatient'] as bool?,
       disclosureToOtherMedicalInstitutions:
-          json['disclosureToOtherMedicalInstitutions'] as String?,
-      medicalRecordId: json['medicalRecordId'] as String,
+          json['disclosureToOtherMedicalInstitutions'] as bool?,
+      medicalRecord: json['medicalRecord'] as String?,
     );
 
 Map<String, dynamic> _$DomesticMedicalDataRequestToJson(
         DomesticMedicalDataRequest instance) =>
     <String, dynamic>{
       'file': instance.file,
-      'nameOfMedicalInstitution': instance.nameOfMedicalInstitution,
+      'medicalInstitutionName': instance.medicalInstitutionName,
       'category': instance.category,
       'documentName': instance.documentName,
-      'remark': instance.remark,
+      'remarks': instance.remarks,
       'dateOfIssue': instance.dateOfIssue?.toIso8601String(),
-      'sharedUrlIssue': instance.sharedUrlIssue,
-      'disclosureToPatients': instance.disclosureToPatients,
+      'url': instance.url,
+      'disclosureToPatient': instance.disclosureToPatient,
       'disclosureToOtherMedicalInstitutions':
           instance.disclosureToOtherMedicalInstitutions,
-      'medicalRecordId': instance.medicalRecordId,
+      'medicalRecord': instance.medicalRecord,
     };

@@ -1167,7 +1167,7 @@ abstract class ApiService {
     @Path('id') String id,
   );
 
-  @GET('${EndPoints.DOMESTIC_MEDICAL_DATA}/{id}')
+  @GET('${EndPoints.DOMESTIC_MEDICAL_DATA}/by-medical-record/{id}')
   Future<List<DomesticMedicalDataResponse>> getDomesticMedicalData({
     @Path('id') required String id,
   });
@@ -1175,6 +1175,11 @@ abstract class ApiService {
   @POST(EndPoints.DOMESTIC_MEDICAL_DATA)
   Future<DomesticMedicalDataResponse> postDomesticMedicalData(
     @Body() DomesticMedicalDataRequest domesticMedicalDataRequest,
+  );
+
+  @DELETE('${EndPoints.DOMESTIC_MEDICAL_DATA}/{id}')
+  Future<void> deleteDomesticMedical(
+    @Path('id') String id,
   );
 
   @GET('${EndPoints.MEDICAL_PAYMENT_DETAIL}/by-medical-record/{id}')
