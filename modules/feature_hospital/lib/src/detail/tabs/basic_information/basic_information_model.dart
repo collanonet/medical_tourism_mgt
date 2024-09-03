@@ -553,11 +553,12 @@ class BasicInformationModel {
 
   Future<void> submitDoctorInformation(FormGroup formGroup) async {
     try {
+      List<DoctorProfileHospitalResponse> doctorInformationDataList =
+          doctorInformationData.value.data ?? [];
+
       doctorInformationData.value = const AsyncData(loading: true);
-      await formGroup
-          .control('addDoctorProfile')
-          .value
-          .forEach((element) async {
+
+      for (dynamic element in formGroup.control('addDoctorProfile').value) {
         String? file;
         if (element['profile'] != null) {
           FileSelect docFile = element['profile'];
@@ -632,14 +633,10 @@ class BasicInformationModel {
         );
         var result =
             await hospitalRepository.postDoctorInformationHospital(request);
-        doctorInformationData.value.copyWith(data: [
-          ...doctorInformationData.value.data ?? [],
-          result,
-        ]);
-      });
+        doctorInformationDataList.add(result);
+      }
 
-      doctorInformationData.value =
-          AsyncData(data: doctorInformationData.value.data);
+      doctorInformationData.value = AsyncData(data: doctorInformationDataList);
     } catch (e) {
       logger.e(e);
       doctorInformationData.value = AsyncData(error: e);
