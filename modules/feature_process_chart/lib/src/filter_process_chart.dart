@@ -111,7 +111,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                   color: context.appTheme.primaryColor,
                                 ),
                                 Text(
-                                  '次月',
+                                  '前月',
                                   style: context.textTheme.titleMedium
                                       ?.copyWith(
                                           color: context.appTheme.primaryColor),

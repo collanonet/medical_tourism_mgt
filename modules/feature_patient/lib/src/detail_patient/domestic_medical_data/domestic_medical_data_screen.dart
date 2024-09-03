@@ -148,6 +148,12 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                     style: context.textTheme.bodySmall,
                   )),
                   Expanded(
+                    child: Text(
+                      '備考欄',
+                      style: context.textTheme.bodySmall,
+                    ),
+                  ),
+                  Expanded(
                       child: Text(
                     '発行日', // Publication date
                     style: context.textTheme.bodySmall,
@@ -211,33 +217,38 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                                     },
                                   ),
                                   Expanded(
-                                      flex: 2,
-                                      child: Row(
-                                        children: [
-                                          Flexible(
-                                              child: Text(item.category ?? '')),
-                                        ],
-                                      )),
-                                  const Expanded(child: Text('検査結果報告書')),
+                                    flex: 2,
+                                    child: Row(
+                                      children: [
+                                        Flexible(
+                                            child: Text(
+                                                item.medicalInstitutionName ??
+                                                    '')),
+                                      ],
+                                    ),
+                                  ),
                                   Expanded(
-                                      child: Text(
-                                    'MRI ',
-                                    style: context.textTheme.bodySmall
-                                        ?.copyWith(
-                                            color:
-                                                context.appTheme.primaryColor),
-                                  )),
+                                    child: Text(item.category ?? ''),
+                                  ),
+                                  Expanded(
+                                    child: Text(
+                                      item.documentName ?? '',
+                                      style: context.textTheme.bodySmall
+                                          ?.copyWith(
+                                              color: context
+                                                  .appTheme.primaryColor),
+                                    ),
+                                  ),
+                                  Expanded(child: Text(item.remarks ?? '')),
                                   Expanded(
                                     child: Text(
                                       dateFormat
                                           .format(item.dateOfIssue as DateTime),
                                     ),
                                   ),
-                                  Expanded(
-                                      child: Icon(
-                                    Icons.qr_code_scanner,
-                                    color: context.appTheme.primaryColor,
-                                  )),
+                                  const Expanded(
+                                    child: Icon(Icons.person),
+                                  ),
                                   Expanded(
                                     child: Text(item.disclosureToPatient == true
                                         ? 'o'

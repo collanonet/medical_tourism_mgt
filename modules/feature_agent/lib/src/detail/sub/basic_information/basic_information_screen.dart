@@ -1147,7 +1147,7 @@ class _AgentBasicInformationScreenState
                           package: 'core_ui',
                         ),
                         shape: BoxShape.rectangle,
-                        customSize: const Size(200, 200),
+                        customSize: const Size(200, 380),
                       )
                     : Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -1174,10 +1174,13 @@ class _AgentBasicInformationScreenState
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              filePicker().then((value) {
-                                currentForm.control('nameCardDragDrop').value =
-                                    value;
-                              });
+                              filePicker().then(
+                                (value) {
+                                  currentForm
+                                      .control('nameCardDragDrop')
+                                      .value = value;
+                                },
+                              );
                             },
                             child: const Text(
                               'またはファイルを選択する',

@@ -476,7 +476,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                         width: context.appTheme.spacing.marginSmall,
                       ),
                       Text(
-                        '患者を追加',
+                        '日程を追加',
                         style: TextStyle(color: context.appTheme.primaryColor),
                       )
                     ],

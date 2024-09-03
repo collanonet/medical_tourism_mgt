@@ -137,7 +137,7 @@ class _ContractScreenState extends State<ContractScreen> {
                       child: ListView.separated(
                         itemCount: value.data?.length ?? 0,
                         itemBuilder: (context, index) {
-                          final data = value.data?[index];
+                          final item = value.data?[index];
 
                           return Padding(
                             padding: const EdgeInsets.symmetric(vertical: 10),
@@ -147,18 +147,18 @@ class _ContractScreenState extends State<ContractScreen> {
                                     valueListenable: selected,
                                     builder: (context, sels, _) {
                                       return Checkbox(
-                                        value: sels.contains(data?.id),
+                                        value: sels.contains(item?.id),
                                         onChanged: (sel) {
                                           if (sel != null) {
                                             if (sel) {
                                               selected.value = [
                                                 ...sels,
-                                                data?.id ?? ''
+                                                item?.id ?? ''
                                               ];
                                             } else {
                                               selected.value = [
                                                 ...sels
-                                                    .where((e) => e != data?.id)
+                                                    .where((e) => e != item?.id)
                                               ];
                                             }
                                           }

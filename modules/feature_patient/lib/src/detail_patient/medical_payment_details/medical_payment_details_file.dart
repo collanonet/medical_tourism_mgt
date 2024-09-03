@@ -132,12 +132,10 @@ class Popup extends StatelessWidget {
                         return ReactiveTextField<DateTime>(
                           formControlName: 'dateOfIssue',
                           valueAccessor: DateTimeValueAccessor(
-                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
+                            dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                          ),
                           decoration: InputDecoration(
-                            label: const Text(
-                              '発行日',
-                            ),
+                            hintText: '発行日',
                             suffixIcon: IconButton(
                               icon: const Icon(
                                 CupertinoIcons.calendar,
