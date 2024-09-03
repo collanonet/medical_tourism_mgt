@@ -767,12 +767,17 @@ class BasicInformationModel {
 }
 
 List<String> convertToList(Map<String, dynamic> element, String key) {
+  logger.d(' ggggg');
+  logger.d(element[key]);
   try {
     if ((element[key] as List).isNotEmpty) {
-      return element[key]
-          .where((e) => e['name'] != null && e['name'].isNotEmpty)
-          .map((e) => e['name'] as String)
-          .toList();
+      List<String> data = [];
+      for (var e in element[key]) {
+        if (e['name'] != null && e['name'].isNotEmpty) {
+          data.add(e['name']);
+        }
+      }
+      return data;
     }
     return [];
   } catch (e) {
