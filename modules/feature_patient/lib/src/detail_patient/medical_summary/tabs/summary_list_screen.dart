@@ -187,17 +187,6 @@ class SummaryListScreen extends StatelessWidget {
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text(
-                '共有する',
-                style: TextStyle(
-                  fontFamily: 'NotoSansJP',
-                  package: 'core_ui',
-                  color: Colors.white,
-                ),
-              ),
-            ),
             SizedBox(
               width: context.appTheme.spacing.marginMedium,
             ),

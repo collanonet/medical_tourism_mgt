@@ -520,12 +520,6 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('　共有する　'), // TODO: l10n 対応 (閉じる) (close)
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
                 child: const Text('　印刷する　'), // TODO: l10n 対応 (閉じる) (close)
               ),
             ]),

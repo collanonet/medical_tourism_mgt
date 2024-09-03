@@ -553,11 +553,12 @@ class BasicInformationModel {
 
   Future<void> submitDoctorInformation(FormGroup formGroup) async {
     try {
+      List<DoctorProfileHospitalResponse> doctorInformationDataList =
+          doctorInformationData.value.data ?? [];
+
       doctorInformationData.value = const AsyncData(loading: true);
-      await formGroup
-          .control('addDoctorProfile')
-          .value
-          .forEach((element) async {
+
+      for (dynamic element in formGroup.control('addDoctorProfile').value) {
         String? file;
         if (element['profile'] != null) {
           FileSelect docFile = element['profile'];
@@ -632,14 +633,10 @@ class BasicInformationModel {
         );
         var result =
             await hospitalRepository.postDoctorInformationHospital(request);
-        doctorInformationData.value.copyWith(data: [
-          ...doctorInformationData.value.data ?? [],
-          result,
-        ]);
-      });
+        doctorInformationDataList.add(result);
+      }
 
-      doctorInformationData.value =
-          AsyncData(data: doctorInformationData.value.data);
+      doctorInformationData.value = AsyncData(data: doctorInformationDataList);
     } catch (e) {
       logger.e(e);
       doctorInformationData.value = AsyncData(error: e);
@@ -770,12 +767,17 @@ class BasicInformationModel {
 }
 
 List<String> convertToList(Map<String, dynamic> element, String key) {
+  logger.d(' ggggg');
+  logger.d(element[key]);
   try {
     if ((element[key] as List).isNotEmpty) {
-      return element[key]
-          .where((e) => e['name'] != null && e['name'].isNotEmpty)
-          .map((e) => e['name'] as String)
-          .toList();
+      List<String> data = [];
+      for (var e in element[key]) {
+        if (e['name'] != null && e['name'].isNotEmpty) {
+          data.add(e['name']);
+        }
+      }
+      return data;
     }
     return [];
   } catch (e) {

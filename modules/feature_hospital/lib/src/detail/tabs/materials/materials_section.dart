@@ -377,10 +377,6 @@ class MaterialSectionState extends State<MaterialSection> {
                         }),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
-                    child: const Text('共有する'),
-                  ),
-                  ElevatedButton(
                     onPressed: () {
                       if (sels.isNotEmpty) {
                         showDetailDialog(

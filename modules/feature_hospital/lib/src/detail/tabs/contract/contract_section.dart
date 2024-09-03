@@ -276,8 +276,6 @@ class ContractSectionState extends State<ContractSection> {
                                 }),
                           ),
                           ElevatedButton(
-                              onPressed: () {}, child: const Text('共有する')),
-                          ElevatedButton(
                               onPressed: () {}, child: const Text('印刷する'))
                         ],
                       );
