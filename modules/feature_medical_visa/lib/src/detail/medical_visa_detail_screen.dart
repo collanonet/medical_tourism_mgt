@@ -152,15 +152,6 @@ class _MedicalVisaDetailScreenState extends State<MedicalVisaDetailScreen> {
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: const Text(
-                              '共有する',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),

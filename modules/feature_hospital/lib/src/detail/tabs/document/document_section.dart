@@ -287,8 +287,6 @@ class _DocumentSectionState extends State<DocumentSection> {
                                 }),
                           ),
                           ElevatedButton(
-                              onPressed: () {}, child: const Text('共有する')),
-                          ElevatedButton(
                               onPressed: () {}, child: const Text('印刷する'))
                         ],
                       );

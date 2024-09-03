@@ -361,12 +361,6 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                       SizedBox(
                         width: context.appTheme.spacing.marginMedium,
                       ),
-                      ElevatedButton(
-                        onPressed: () {},
-                        child: const Text(
-                          '共有する',
-                        ),
-                      ),
                       SizedBox(
                         width: context.appTheme.spacing.marginMedium,
                       ),
@@ -441,12 +435,6 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                 Navigator.pop(context);
               },
               child: const Text('　閉じる　'), // TODO: l10n 対応 (閉じる) (close)
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('　共有する　'), // TODO: l10n 対応 (閉じる) (close)
             ),
             ElevatedButton(
               onPressed: () {
