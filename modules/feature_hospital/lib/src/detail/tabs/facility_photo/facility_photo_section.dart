@@ -131,9 +131,6 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                   const Expanded(child: SizedBox()),
                 ],
               ),
-              SizedBox(
-                height: context.appTheme.spacing.marginMedium,
-              ),
               Expanded(
                 child: ListView.separated(
                   itemCount: value.data?.length ?? 0,

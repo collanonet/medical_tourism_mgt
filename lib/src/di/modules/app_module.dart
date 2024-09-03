@@ -78,6 +78,21 @@ abstract class AppModule {
     return 'STAGE ${await Strings.appVersion()}';
   }
 
+  @dev
+  @Named('fileUrl')
+  String get devFileUrl =>
+      'https://medical-tourism-api-dev-collabonet.pixelplatforms.com/files/';
+
+  @stage
+  @Named('fileUrl')
+  String get stageFileUrl =>
+      'https://medical-tourism-api-stage-collabonet.pixelplatforms.com/files/';
+
+  @production
+  @Named('fileUrl')
+  String get prodFileUrl =>
+      'https://medical-tourism-api-collabonet.pixelplatforms.com/files/';
+
   @prod
   @production
   @preResolve

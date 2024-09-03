@@ -58,8 +58,8 @@ import 'modules/storage_module.dart' as _i40;
 const String _prod = 'prod';
 const String _production = 'production';
 const String _local = 'local';
-const String _dev = 'dev';
 const String _stage = 'stage';
+const String _dev = 'dev';
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -106,9 +106,19 @@ extension GetItInjectableX on _i1.GetIt {
       instanceName: 'baseUrl',
       registerFor: {_local},
     );
+    gh.factory<String>(
+      () => appModule.stageFileUrl,
+      instanceName: 'fileUrl',
+      registerFor: {_stage},
+    );
     gh.singleton<_i19.Storage>(
       () => storageModule.localeStorage,
       instanceName: 'localeStorage',
+    );
+    gh.factory<String>(
+      () => appModule.devFileUrl,
+      instanceName: 'fileUrl',
+      registerFor: {_dev},
     );
     gh.factory<Uri>(
       () => restModule.devBaseUrl,
@@ -148,6 +158,11 @@ extension GetItInjectableX on _i1.GetIt {
           gh<Uri>(instanceName: 'baseUrl'),
           gh<_i17.CacheOptions>(),
         ));
+    gh.factory<String>(
+      () => appModule.prodFileUrl,
+      instanceName: 'fileUrl',
+      registerFor: {_production},
+    );
     gh.factory<Uri>(
       () => restModule.prodBaseUrl,
       instanceName: 'baseUrl',
