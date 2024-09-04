@@ -177,102 +177,97 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
               ),
               const Divider(),
               ValueListenableBuilder(
-                  valueListenable: context
-                      .read<DomesticMedicalDataModel>()
-                      .domesticMedicalData,
-                  builder: (context, value, child) {
-                    return ListView.separated(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemBuilder: (BuildContext context, int index) {
-                          var item = value.data![index];
-                          var dateFormat = DateFormat('yyyy-MM-dd');
-                          return InkWell(
-                            onTap: () {},
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4),
-                              child: Row(
-                                children: [
-                                  ValueListenableBuilder(
-                                    valueListenable: selected,
-                                    builder: (context, sels, _) {
-                                      return Checkbox(
-                                        value: sels.contains(item.id),
-                                        onChanged: (sel) {
-                                          if (sel != null) {
-                                            if (sel) {
-                                              selected.value = [
-                                                ...sels,
-                                                item.id
-                                              ];
-                                            } else {
-                                              selected.value = [
-                                                ...sels
-                                                    .where((e) => e != item.id)
-                                              ];
-                                            }
-                                          }
-                                        },
-                                      );
+                valueListenable: context
+                    .read<DomesticMedicalDataModel>()
+                    .domesticMedicalData,
+                builder: (context, value, child) {
+                  return ListView.separated(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemBuilder: (BuildContext context, int index) {
+                      var item = value.data![index];
+                      var dateFormat = DateFormat('yyyy-MM-dd');
+                      return InkWell(
+                        onTap: () {},
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4),
+                          child: Row(
+                            children: [
+                              ValueListenableBuilder(
+                                valueListenable: selected,
+                                builder: (context, sels, _) {
+                                  return Checkbox(
+                                    value: sels.contains(item.id),
+                                    onChanged: (sel) {
+                                      if (sel != null) {
+                                        if (sel) {
+                                          selected.value = [...sels, item.id];
+                                        } else {
+                                          selected.value = [
+                                            ...sels.where((e) => e != item.id)
+                                          ];
+                                        }
+                                      }
                                     },
-                                  ),
-                                  Expanded(
-                                    flex: 2,
-                                    child: Row(
-                                      children: [
-                                        Flexible(
-                                            child: Text(
-                                                item.medicalInstitutionName ??
-                                                    '')),
-                                      ],
-                                    ),
-                                  ),
-                                  Expanded(
-                                    child: Text(item.category ?? ''),
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                      item.documentName ?? '',
-                                      style: context.textTheme.bodySmall
-                                          ?.copyWith(
-                                              color: context
-                                                  .appTheme.primaryColor),
-                                    ),
-                                  ),
-                                  Expanded(child: Text(item.remarks ?? '')),
-                                  Expanded(
-                                    child: Text(
-                                      dateFormat
-                                          .format(item.dateOfIssue as DateTime),
-                                    ),
-                                  ),
-                                  const Expanded(
-                                    child: Icon(Icons.person),
-                                  ),
-                                  Expanded(
-                                    child: Text(item.disclosureToPatient == true
+                                  );
+                                },
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Row(
+                                  children: [
+                                    Flexible(
+                                        child: Text(
+                                            item.medicalInstitutionName ?? '')),
+                                  ],
+                                ),
+                              ),
+                              Expanded(
+                                child: Text(item.category ?? ''),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  item.documentName ?? '',
+                                  style: context.textTheme.bodySmall?.copyWith(
+                                      color: context.appTheme.primaryColor),
+                                ),
+                              ),
+                              Expanded(child: Text(item.remarks ?? '')),
+                              Expanded(
+                                child: Text(
+                                  dateFormat
+                                      .format(item.dateOfIssue as DateTime),
+                                ),
+                              ),
+                              const Expanded(
+                                child: Icon(Icons.person),
+                              ),
+                              Expanded(
+                                child: Text(item.disclosureToPatient == true
+                                    ? 'o'
+                                    : 'x'),
+                              ),
+                              Expanded(
+                                child: Text(
+                                    item.disclosureToOtherMedicalInstitutions ==
+                                            true
                                         ? 'o'
                                         : 'x'),
-                                  ),
-                                  Expanded(
-                                    child: Text(
-                                        item.disclosureToOtherMedicalInstitutions ==
-                                                true
-                                            ? 'o'
-                                            : 'x'),
-                                  ),
-                                ],
                               ),
-                            ),
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const Divider(
-                            thickness: 0.5,
-                          );
-                        },
-                        itemCount: value.data?.length ?? 0);
-                  }),
+                            ],
+                          ),
+                        ),
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const Divider(
+                        thickness: 0.5,
+                      );
+                    },
+                    itemCount: value.data?.length ?? 0,
+                  );
+                },
+              ),
               SizedBox(
                 height: context.appTheme.spacing.marginMedium,
               ),
@@ -322,39 +317,38 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                                   ? null
                                   : () {
                                       showDialog(
-                                          context: context,
-                                          builder: (_) {
-                                            return Provider.value(
-                                              value: context.read<
-                                                  DomesticMedicalDataModel>(),
-                                              child: AlertDialog(
-                                                title: const Text('削除確認'),
-                                                content: const Text(
-                                                    '選択したデータを削除しますか？'),
-                                                actions: [
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: const Text('キャンセル'),
-                                                  ),
-                                                  TextButton(
-                                                    onPressed: () {
-                                                      context
-                                                          .read<
-                                                              DomesticMedicalDataModel>()
-                                                          .deleteDomesticMedical(
-                                                              sels);
-                                                      Navigator.of(context)
-                                                          .pop();
-                                                    },
-                                                    child: const Text('削除する'),
-                                                  ),
-                                                ],
-                                              ),
-                                            );
-                                          });
+                                        context: context,
+                                        builder: (_) {
+                                          return Provider.value(
+                                            value: context.read<
+                                                DomesticMedicalDataModel>(),
+                                            child: AlertDialog(
+                                              title: const Text('削除確認'),
+                                              content:
+                                                  const Text('選択したデータを削除しますか？'),
+                                              actions: [
+                                                TextButton(
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: const Text('キャンセル'),
+                                                ),
+                                                TextButton(
+                                                  onPressed: () {
+                                                    context
+                                                        .read<
+                                                            DomesticMedicalDataModel>()
+                                                        .deleteDomesticMedical(
+                                                            sels);
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                  child: const Text('削除する'),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                      );
                                     },
                               child: WithLoadingButton(
                                 isLoading: value.loading,

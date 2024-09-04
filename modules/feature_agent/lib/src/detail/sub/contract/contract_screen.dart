@@ -7,6 +7,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -105,27 +106,28 @@ class _ContractScreenState extends State<ContractScreen> {
                     Row(
                       children: [
                         ValueListenableBuilder(
-                            valueListenable: selected,
-                            builder: (context, ids, _) {
-                              return Checkbox(
-                                value: ids.isEmpty
-                                    ? false
-                                    : value.data?.length == ids.length,
-                                onChanged: (select) {
-                                  if (select != null) {
-                                    if (select) {
-                                      if (value.hasData) {
-                                        selected.value = value.requireData
-                                            .map((e) => e.id.toString())
-                                            .toList();
-                                      }
-                                    } else {
-                                      selected.value = [];
+                          valueListenable: selected,
+                          builder: (context, ids, _) {
+                            return Checkbox(
+                              value: ids.isEmpty
+                                  ? false
+                                  : value.data?.length == ids.length,
+                              onChanged: (select) {
+                                if (select != null) {
+                                  if (select) {
+                                    if (value.hasData) {
+                                      selected.value = value.requireData
+                                          .map((e) => e.id.toString())
+                                          .toList();
                                     }
+                                  } else {
+                                    selected.value = [];
                                   }
-                                },
-                              );
-                            }),
+                                }
+                              },
+                            );
+                          },
+                        ),
                         const Expanded(flex: 2, child: Text('書類名')),
                         const Expanded(child: Text('締結日')),
                       ],
@@ -133,62 +135,73 @@ class _ContractScreenState extends State<ContractScreen> {
                     SizedBox(
                       height: context.appTheme.spacing.marginMedium,
                     ),
-                    Expanded(
-                      child: ListView.separated(
-                        itemCount: value.data?.length ?? 0,
-                        itemBuilder: (context, index) {
-                          final item = value.data?[index];
+                    ValueListenableBuilder(
+                      valueListenable:
+                          context.read<ContractModel>().contrantData,
+                      builder: (context, value, _) {
+                        return Expanded(
+                          child: ListView.separated(
+                            itemCount: value.data?.length ?? 0,
+                            itemBuilder: (context, index) {
+                              final item = value.data![index];
 
-                          return Padding(
-                            padding: const EdgeInsets.symmetric(vertical: 10),
-                            child: Row(
-                              children: [
-                                ValueListenableBuilder(
-                                    valueListenable: selected,
-                                    builder: (context, sels, _) {
-                                      return Checkbox(
-                                        value: sels.contains(item?.id),
-                                        onChanged: (sel) {
-                                          if (sel != null) {
-                                            if (sel) {
-                                              selected.value = [
-                                                ...sels,
-                                                item?.id ?? ''
-                                              ];
-                                            } else {
-                                              selected.value = [
-                                                ...sels
-                                                    .where((e) => e != item?.id)
-                                              ];
+                              return Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10),
+                                child: Row(
+                                  children: [
+                                    ValueListenableBuilder(
+                                      valueListenable: selected,
+                                      builder: (context, sels, _) {
+                                        return Checkbox(
+                                          value: sels.contains(item.id),
+                                          onChanged: (sel) {
+                                            if (sel != null) {
+                                              if (sel) {
+                                                selected.value = [
+                                                  ...sels,
+                                                  item.id
+                                                ];
+                                              } else {
+                                                selected.value = [
+                                                  ...sels.where(
+                                                      (e) => e != item.id)
+                                                ];
+                                              }
                                             }
-                                          }
-                                        },
-                                      );
-                                    }),
-                                Expanded(
-                                  flex: 2,
-                                  child: Text(
-                                      value.requireData[index].fileName ?? ''),
+                                          },
+                                        );
+                                      },
+                                    ),
+                                    Expanded(
+                                      flex: 2,
+                                      child: Text(
+                                          value.requireData[index].fileName ??
+                                              ''),
+                                    ),
+                                    Expanded(
+                                      child: Text(
+                                          value.requireData[index].updatedAt ==
+                                                  null
+                                              ? ''
+                                              : Dates.formShortDate(value
+                                                  .requireData[index]
+                                                  .updatedAt)),
+                                    ),
+                                  ],
                                 ),
-                                Expanded(
-                                  child: Text(value
-                                              .requireData[index].updatedAt ==
-                                          null
-                                      ? ''
-                                      : Dates.formShortDate(
-                                          value.requireData[index].updatedAt)),
-                                ),
-                              ],
-                            ),
-                          );
-                        },
-                        separatorBuilder: (BuildContext context, int index) {
-                          return const Divider(
-                            color: Colors.grey,
-                          );
-                        },
-                      ),
-                    )
+                              );
+                            },
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return const Divider(
+                                color: Colors.grey,
+                              );
+                            },
+                          ),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -237,43 +250,42 @@ class _ContractScreenState extends State<ContractScreen> {
                                         ? null
                                         : () {
                                             showDialog(
-                                                context: context,
-                                                builder: (_) {
-                                                  return Provider.value(
-                                                    value: context
-                                                        .read<ContractModel>(),
-                                                    child: AlertDialog(
-                                                      title: const Text('削除確認'),
-                                                      content: const Text(
-                                                          '選択した書類を削除しますか？'),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: const Text(
-                                                              'キャンセル'),
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            context
-                                                                .read<
-                                                                    ContractModel>()
-                                                                .deleteContractAgent(
-                                                                    sels);
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: const Text(
-                                                              '削除する'),
-                                                        ),
-                                                      ],
-                                                    ),
-                                                  );
-                                                });
+                                              context: context,
+                                              builder: (_) {
+                                                return Provider.value(
+                                                  value: context
+                                                      .read<ContractModel>(),
+                                                  child: AlertDialog(
+                                                    title: const Text('削除確認'),
+                                                    content: const Text(
+                                                        '選択した書類を削除しますか？'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child:
+                                                            const Text('キャンセル'),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          context
+                                                              .read<
+                                                                  ContractModel>()
+                                                              .deleteContractAgent(
+                                                                  sels);
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child:
+                                                            const Text('削除する'),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              },
+                                            );
                                           },
                                     child: WithLoadingButton(
                                       isLoading: value.loading,
@@ -287,7 +299,7 @@ class _ContractScreenState extends State<ContractScreen> {
                                                     .appTheme.primaryColor),
                                       ),
                                     ));
-                              }),
+                              },),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,

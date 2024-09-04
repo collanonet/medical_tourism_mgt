@@ -50,10 +50,10 @@ FormGroup formBasicInformation() {
         'fullNameRomanji': FormControl<String>(
           validators: [Validators.required],
         ),
-        'fullNameChineseKanjiVietnameseNotation': FormControl<String>(),
-        'fullNameJapaneseKanjiChineseOnly': FormControl<String>(),
-        'fullNameKana': FormControl<String>(),
-        'phoneNumber': FormControl<String>(),
+        'fullNameChineseKanjiVietnameseNotation': FormControl<String>(value: ''),
+        'fullNameJapaneseKanjiChineseOnly': FormControl<String>(value: ''),
+        'fullNameKana': FormControl<String>(value: ''),
+        'phoneNumber': FormControl<String>(value: ''),
         'email': FormControl<String>(
           validators: [
             Validators.required,
@@ -63,8 +63,8 @@ FormGroup formBasicInformation() {
         'contactMethods': FormArray([
           FormGroup({
             '_id': FormControl<String>(),
-            'howToContact': FormControl<String>(),
-            'howToContactQrCode': FormControl<String>(),
+            'howToContact': FormControl<String>(value: ''),
+            'howToContactQrCode': FormControl<String>(value: ''),
           }),
         ]),
       }),

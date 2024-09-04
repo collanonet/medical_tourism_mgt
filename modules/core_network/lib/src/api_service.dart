@@ -1148,7 +1148,7 @@ abstract class ApiService {
   );
 
   @DELETE('${EndPoints.CONTRANT_AGENT}/{id}')
-  Future<ContrantAgentResponse> deleteContractAgent(
+  Future<void> deleteContractAgent(
     @Path('id') String id,
   );
 

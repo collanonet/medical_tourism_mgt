@@ -32,101 +32,108 @@ class BasicInformationPage extends StatelessWidget {
                 formGroup: formGroup,
               ),
             child: Builder(builder: (context) {
-              return ColumnSeparated(
-                separatorBuilder: (BuildContext context, int index) {
-                  return const SizedBox(height: 10);
-                },
-                children: [
-                  const Expanded(child: AgentBasicInformationScreen()),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      ValueListenableListener(
-                        valueListenable:
-                            context.read<AgentBasicInformationModel>().agent,
-                        onListen: () {
-                          var data = context
-                              .read<AgentBasicInformationModel>()
-                              .agent
-                              .value;
-
-                          if (data.hasData) {
-                            context
-                                .read<AgentDetailModel>()
-                                .insertData(data.requireData);
-                          }
-                        },
-                        child: ValueListenableListener(
-                          valueListenable:
-                              context.read<AgentBasicInformationModel>().submit,
-                          onListen: () {
-                            var data = context
-                                .read<AgentBasicInformationModel>()
-                                .submit
-                                .value;
-
-                            if (data.hasData) {
-                              snackBarWidget(
-                                message: '正常に保存されました',
-                                prefixIcon: const Icon(Icons.check_circle,
-                                    color: Colors.white),
-                              );
-                            }
-
-                            if (data.hasError) {
-                              snackBarWidget(
-                                message: '保存できませんでした。 もう一度試してください。',
-                                backgroundColor: Colors.red,
-                                prefixIcon: const Icon(Icons.error,
-                                    color: Colors.white),
-                              );
-                            }
-                          },
-                          child: ValueListenableBuilder(
+              return ValueListenableBuilder(
+                  valueListenable:
+                      context.read<AgentBasicInformationModel>().agent,
+                  builder: (context, value, _) {
+                    return ColumnSeparated(
+                      separatorBuilder: (BuildContext context, int index) {
+                        return const SizedBox(height: 10);
+                      },
+                      children: [
+                        const Expanded(child: AgentBasicInformationScreen()),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            ValueListenableListener(
                               valueListenable: context
                                   .read<AgentBasicInformationModel>()
-                                  .submit,
-                              builder: (context, value, child) {
-                                return ReactiveFormConsumer(
-                                    builder: (context, formGroup, child) {
-                                  var form =
-                                      formGroup.control('basicInformationAgent')
-                                          as FormGroup;
+                                  .agent,
+                              onListen: () {
+                                var data = context
+                                    .read<AgentBasicInformationModel>()
+                                    .agent
+                                    .value;
 
-                                  return value.hasData
-                                      ? ElevatedButton(
-                                          onPressed: formGroup.invalid
-                                              ? null
-                                              : () {
-                                                  context
-                                                      .read<
-                                                          AgentBasicInformationModel>()
-                                                      .createOrUpdateAgent(
-                                                          formGroup);
-                                                },
-                                          child: const Text('保存する'),
-                                        )
-                                      : ElevatedButton(
-                                          onPressed:
-                                              !value.hasData && form.invalid
-                                                  ? null
-                                                  : () {
-                                                      context
-                                                          .read<
-                                                              AgentBasicInformationModel>()
-                                                          .createOrUpdateAgent(
-                                                              formGroup);
-                                                    },
-                                          child: const Text('保存する'),
-                                        );
-                                });
-                              }),
+                                if (data.hasData) {
+                                  context
+                                      .read<AgentDetailModel>()
+                                      .insertData(data.requireData);
+                                }
+                              },
+                              child: ValueListenableListener(
+                                valueListenable: context
+                                    .read<AgentBasicInformationModel>()
+                                    .submit,
+                                onListen: () {
+                                  var data = context
+                                      .read<AgentBasicInformationModel>()
+                                      .submit
+                                      .value;
+
+                                  if (data.hasData) {
+                                    snackBarWidget(
+                                      message: '正常に保存されました',
+                                      prefixIcon: const Icon(Icons.check_circle,
+                                          color: Colors.white),
+                                    );
+                                  }
+
+                                  if (data.hasError) {
+                                    snackBarWidget(
+                                      message: '保存できませんでした。 もう一度試してください。',
+                                      backgroundColor: Colors.red,
+                                      prefixIcon: const Icon(Icons.error,
+                                          color: Colors.white),
+                                    );
+                                  }
+                                },
+                                child: ValueListenableBuilder(
+                                    valueListenable: context
+                                        .read<AgentBasicInformationModel>()
+                                        .submit,
+                                    builder: (context, value, child) {
+                                      return ReactiveFormConsumer(
+                                          builder: (context, formGroup, child) {
+                                        var form = formGroup.control(
+                                                'basicInformationAgent')
+                                            as FormGroup;
+
+                                        return value.hasData
+                                            ? ElevatedButton(
+                                                onPressed: formGroup.invalid
+                                                    ? null
+                                                    : () {
+                                                        context
+                                                            .read<
+                                                                AgentBasicInformationModel>()
+                                                            .createOrUpdateAgent(
+                                                                formGroup);
+                                                      },
+                                                child: const Text('保存する'),
+                                              )
+                                            : ElevatedButton(
+                                                onPressed: !value.hasData &&
+                                                        form.invalid
+                                                    ? null
+                                                    : () {
+                                                        context
+                                                            .read<
+                                                                AgentBasicInformationModel>()
+                                                            .createOrUpdateAgent(
+                                                                formGroup);
+                                                      },
+                                                child: const Text('保存する'),
+                                              );
+                                      });
+                                    }),
+                              ),
+                            ),
+                          ],
                         ),
-                      ),
-                    ],
-                  ),
-                ],
-              );
+                      ],
+                    );
+                  });
             }),
           );
         },

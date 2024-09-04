@@ -10,7 +10,7 @@ FormGroup contractForm(
     'fileName': FormControl<String>(),
     'updatedOn': FormControl<DateTime>(),
     'contract': FormGroup({
-      '_id': FormControl<String?>(),
+      '_id': FormControl<String>(),
       'contractDate': FormControl<DateTime>(
         validators: [Validators.required],
       ),

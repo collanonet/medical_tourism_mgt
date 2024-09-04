@@ -1062,9 +1062,7 @@ class _AgentBasicInformationScreenState
                                 'fullNameJapaneseKanjiChineseOnly':
                                     FormControl<String>(),
                                 'fullNameKana': FormControl<String>(),
-                                'phoneNumber': FormControl<String>(
-                                  validators: [Validators.required],
-                                ),
+                                'phoneNumber': FormControl<String>(),
                                 'email': FormControl<String>(
                                   validators: [
                                     Validators.required,
