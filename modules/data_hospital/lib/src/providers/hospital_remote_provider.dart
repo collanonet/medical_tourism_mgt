@@ -335,4 +335,8 @@ class HospitalRemoteProvider {
       String treatmentId, TreamentRequest treatmentRequest) {
     return apiService.updateBooking(treatmentId, treatmentRequest);
   }
+
+  Future<void> deleteTreatmentTeleMenu(String id) {
+    return apiService.deleteTreatmentTeleMenu(id: id);
+  }
 }

@@ -10,8 +10,10 @@ TreatmentTeleMenuRequest _$TreatmentTeleMenuRequestFromJson(
         Map<String, dynamic> json) =>
     TreatmentTeleMenuRequest(
       project: json['project'] as String?,
-      treatmentCostExcludingTax: json['treatmentCostExcludingTax'] as num?,
-      treatmentCostTaxIncluded: json['treatmentCostTaxIncluded'] as num?,
+      treatmentCostExcludingTax:
+          (json['treatmentCostExcludingTax'] as num?)?.toDouble(),
+      treatmentCostTaxIncluded:
+          (json['treatmentCostTaxIncluded'] as num?)?.toDouble(),
       remark: json['remark'] as String?,
       hospital: json['hospital'] as String?,
     );

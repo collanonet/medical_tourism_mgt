@@ -711,7 +711,6 @@ abstract class ApiService {
 
   //E1
 
-
   @POST(EndPoints.FILTER_PROCESS_CHART_PATIENT)
   Future<PatientFilterResponse> postFilterpatientChart(
     @Body() PatientFilterRequst patientFilterRequst,
@@ -879,13 +878,11 @@ abstract class ApiService {
   @GET('${EndPoints.DETAIL_ITINERARY}/{id}')
   Future<DetailItineraryResponse> getDetailitinerary({
     @Path('id') String? id,
-   
   });
 
-  
   @GET(EndPoints.DETAIL_ITINERARY)
   Future<List<DetailItineraryResponse>> getPatientChart({
-     @Query('tourName') String? tourName,
+    @Query('tourName') String? tourName,
     @Query('classification') String? classification,
     @Query('dateFrom') DateTime? dateFrom,
     @Query('dateTo') DateTime? dateTo,
@@ -1304,10 +1301,15 @@ abstract class ApiService {
     @Body() TreatmentTeleMenuRequest treatmentTeleMenuRequest,
   );
 
-  @PUT(EndPoints.TREATMENT_TELE_MENU)
+  @PUT('${EndPoints.TREATMENT_TELE_MENU}/{id}')
   Future<TreatmentTeleMenuResponse> putTreatmentTeleMenu({
     @Path('id') required String id,
     @Body() required TreatmentTeleMenuRequest treatmentTeleMenuRequest,
+  });
+
+  @DELETE('${EndPoints.TREATMENT_TELE_MENU}/{id}')
+  Future<TreatmentTeleMenuResponse> deleteTreatmentTeleMenu({
+    @Path('id') required String id,
   });
 
   @GET('${EndPoints.CLOSE_PATIENT}/{id}')

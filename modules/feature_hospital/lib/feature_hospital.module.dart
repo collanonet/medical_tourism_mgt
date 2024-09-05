@@ -37,8 +37,8 @@ class FeatureHospitalPackageModule extends _i1.MicroPackageModule {
         hospitalRepository: gh<_i4.HospitalRepository>()));
     gh.factory<_i9.FacilityModel>(() =>
         _i9.FacilityModel(hospitalRepository: gh<_i4.HospitalRepository>()));
-    gh.factory<_i10.TreatmentModle>(() =>
-        _i10.TreatmentModle(hospitalRepository: gh<_i4.HospitalRepository>()));
+    gh.factory<_i10.TreatmentModel>(() =>
+        _i10.TreatmentModel(hospitalRepository: gh<_i4.HospitalRepository>()));
     gh.factory<_i11.HealthModel>(() =>
         _i11.HealthModel(hospitalRepository: gh<_i4.HospitalRepository>()));
     gh.factory<_i12.HospitalDetailModel>(() => _i12.HospitalDetailModel(

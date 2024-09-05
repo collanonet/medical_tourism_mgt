@@ -133,41 +133,57 @@ class ContractSectionState extends State<ContractSection> {
                     itemBuilder: (context, index) {
                       final data = value.data?[index];
 
-                      return Row(
-                        children: [
-                          ValueListenableBuilder(
-                              valueListenable: selected,
-                              builder: (context, sels, _) {
-                                return Checkbox(
-                                  value: sels.contains(data?.id),
-                                  onChanged: (sel) {
-                                    if (sel != null) {
-                                      if (sel) {
-                                        selected.value = [
-                                          ...sels,
-                                          data?.id ?? ''
-                                        ];
-                                      } else {
-                                        selected.value = [
-                                          ...sels.where((e) => e != data?.id)
-                                        ];
+                      return InkWell(
+                        onTap: () {
+                          if (data?.uploadFile != null) {
+                            openUrlInBrowser(fileName: data?.uploadFile ?? '');
+                          } else {
+                            snackBarWidget(
+                              message: 'ファイルが見つかりません',
+                              backgroundColor: Colors.red,
+                              prefixIcon: const Icon(
+                                Icons.error,
+                                color: Colors.white,
+                              ),
+                            );
+                          }
+                        },
+                        child: Row(
+                          children: [
+                            ValueListenableBuilder(
+                                valueListenable: selected,
+                                builder: (context, sels, _) {
+                                  return Checkbox(
+                                    value: sels.contains(data?.id),
+                                    onChanged: (sel) {
+                                      if (sel != null) {
+                                        if (sel) {
+                                          selected.value = [
+                                            ...sels,
+                                            data?.id ?? ''
+                                          ];
+                                        } else {
+                                          selected.value = [
+                                            ...sels.where((e) => e != data?.id)
+                                          ];
+                                        }
                                       }
-                                    }
-                                  },
-                                );
-                              }),
-                          Expanded(
-                            flex: 2,
-                            child: Text(data?.fileName ?? ''),
-                          ),
-                          Expanded(
-                            child: Text(
-                              data?.uploadDate == null
-                                  ? ''
-                                  : Dates.formShortDate(data?.uploadDate),
+                                    },
+                                  );
+                                }),
+                            Expanded(
+                              flex: 2,
+                              child: Text(data?.fileName ?? ''),
                             ),
-                          ),
-                        ],
+                            Expanded(
+                              child: Text(
+                                data?.uploadDate == null
+                                    ? ''
+                                    : Dates.formShortDate(data?.uploadDate),
+                              ),
+                            ),
+                          ],
+                        ),
                       );
                     },
                     separatorBuilder: (BuildContext context, int index) {
@@ -230,7 +246,8 @@ class ContractSectionState extends State<ContractSection> {
                                                       value: context.read<
                                                           ContrantModel>(),
                                                       child: AlertDialog(
-                                                        title: const Text('削除確認'),
+                                                        title:
+                                                            const Text('削除確認'),
                                                         content: const Text(
                                                             '選択した書類を削除しますか？'),
                                                         actions: [
@@ -240,8 +257,8 @@ class ContractSectionState extends State<ContractSection> {
                                                                       context)
                                                                   .pop();
                                                             },
-                                                            child:
-                                                                const Text('キャンセル'),
+                                                            child: const Text(
+                                                                'キャンセル'),
                                                           ),
                                                           TextButton(
                                                             onPressed: () {
@@ -254,7 +271,8 @@ class ContractSectionState extends State<ContractSection> {
                                                                       context)
                                                                   .pop();
                                                             },
-                                                            child: const Text('削除する'),
+                                                            child: const Text(
+                                                                '削除する'),
                                                           ),
                                                         ],
                                                       ),

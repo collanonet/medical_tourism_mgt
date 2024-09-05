@@ -9,14 +9,15 @@ import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
-class TreatmentModle {
-  TreatmentModle({required this.hospitalRepository});
+class TreatmentModel {
+  TreatmentModel({required this.hospitalRepository});
+
   final HospitalRepository hospitalRepository;
 
   Future<void> fetchData(FormGroup formGroup, {String? hospitalId}) async {
     try {
       if (hospitalId != null) {
-        await fetchTreatmentMenu(formGroup, hospitalId);
+        // await fetchTreatmentMenu(formGroup, hospitalId);
         await fetchTreatmentMenuTele(formGroup, hospitalId);
       }
     } catch (e) {
@@ -25,9 +26,17 @@ class TreatmentModle {
   }
 
   ValueNotifier<AsyncData<bool>> submitData = ValueNotifier(const AsyncData());
+
   Future<void> submitForm(FormGroup formGroup) async {
-    submitTreatmentMenu(formGroup);
-    submitTreatmentMenuTele(formGroup);
+    try {
+      submitData.value = const AsyncData(loading: true);
+      // await submitTreatmentMenu(formGroup);
+      await submitTreatmentMenuTele(formGroup);
+      submitData.value = const AsyncData(data: true);
+    } catch (e) {
+      logger.d(e);
+      submitData.value = AsyncData(error: e);
+    }
   }
 
   ValueNotifier<AsyncData<List<TreatmentMenuResponse>>> treatmentMenuData =
@@ -116,17 +125,16 @@ class TreatmentModle {
     }
   }
 
-  
   ValueNotifier<AsyncData<List<TreatmentTeleMenuResponse>>>
       treatmentMenuTeleData =
       ValueNotifier(const AsyncData<List<TreatmentTeleMenuResponse>>(data: []));
+
   Future<void> fetchTreatmentMenuTele(
       FormGroup formGroup, String hospitalId) async {
     try {
       treatmentMenuTeleData.value = const AsyncData(loading: true);
       final response =
           await hospitalRepository.getTreatmentTeleMenu(id: hospitalId);
-      // todo: fix function insert data to form
       insertTreatmentMenuTele(formGroup, response);
 
       treatmentMenuTeleData.value = AsyncData(data: response);
@@ -141,7 +149,7 @@ class TreatmentModle {
       FormGroup formGroup, List<TreatmentTeleMenuResponse> data) {
     var treatmentTeleMenu = formGroup.control('telemedicineMenu') as FormArray;
     for (var element in data) {
-      if (data.isEmpty) {
+      if (data.isNotEmpty) {
         treatmentTeleMenu.clear();
       }
       treatmentTeleMenu.add(
@@ -150,9 +158,9 @@ class TreatmentModle {
           'hospital': FormControl<String>(value: element.hospital),
           'project': FormControl<String>(value: element.project),
           'treatmentCostExcludingTax':
-              FormControl<num>(value: element.treatmentCostExcludingTax),
+              FormControl<double>(value: element.treatmentCostExcludingTax),
           'treatmentCostTaxIncluded':
-              FormControl<num>(value: element.treatmentCostTaxIncluded),
+              FormControl<double>(value: element.treatmentCostTaxIncluded),
           'remark': FormControl<String>(value: element.remark),
         }),
       );
@@ -161,6 +169,8 @@ class TreatmentModle {
 
   ValueNotifier<AsyncData<List<TreatmentMenuResponse>>>
       submitTreatmentMenudata = ValueNotifier(const AsyncData());
+
+  ValueNotifier<List<String>> treatmentMenuId = ValueNotifier([]);
 
   Future<void> submitTreatmentMenu(FormGroup formGroup) async {
     try {
@@ -183,7 +193,7 @@ class TreatmentModle {
           treatmentCostExcludingTax: element['treatmentCostExcludingTax'],
           treatmentCostTaxIncluded: element['treatmentCostTaxIncluded'],
           remark: element['remark'],
-         // treatmentCostTax: treatmentCostTax,
+          // treatmentCostTax: treatmentCostTax,
         );
         logger.d(request.toJson());
         logger.d(request.treatmentCostTax?.first.toJson());
@@ -198,18 +208,20 @@ class TreatmentModle {
     }
   }
 
-
   ValueNotifier<AsyncData<List<TreatmentTeleMenuResponse>>>
       submitTreatmentMenuTeledata = ValueNotifier(const AsyncData());
 
+  ValueNotifier<List<String>> treatmentMenuTeleId = ValueNotifier([]);
+
   Future<void> submitTreatmentMenuTele(FormGroup formGroup) async {
     try {
+      List<TreatmentTeleMenuResponse> dataList =
+          treatmentMenuTeleData.value.data ?? [];
       submitTreatmentMenuTeledata.value = const AsyncData(loading: true);
       await formGroup
           .control('telemedicineMenu')
           .value
           .forEach((element) async {
-        // mapping data from form into object model
         TreatmentTeleMenuRequest request = TreatmentTeleMenuRequest(
           hospital: element['hospital'],
           project: element['project'],
@@ -217,17 +229,38 @@ class TreatmentModle {
           treatmentCostTaxIncluded: element['treatmentCostTaxIncluded'],
           remark: element['remark'],
         );
-        // todo: check element['id'] if exist then update data
-        // create function
-        final response = await hospitalRepository.putTreatmentTeleMenu(
-            formGroup.control('telemedicineMenu._id').value, request);
-        submitTreatmentMenuTeledata.value = AsyncData(
-            data: submitTreatmentMenuTeledata.value.data!..add(response));
-        treatmentMenuTeleData.value =
-            AsyncData(data: treatmentMenuTeleData.value.data!..add(response));
-            });
+        TreatmentTeleMenuResponse response;
+        if (element['_id'] != null) {
+          response = await hospitalRepository.putTreatmentTeleMenu(
+              element['_id'], request);
+          dataList = dataList.map((e) {
+            if (e.id == element['_id']) {
+              return response;
+            }
+            return e;
+          }).toList();
+        } else {
+          response = await hospitalRepository.postTreatmentTeleMenu(request);
+          dataList.add(response);
+        }
+      });
 
-      submitTreatmentMenuTeledata.value = const AsyncData(data: []);
+      if (treatmentMenuTeleId.value.isNotEmpty) {
+        for (var id in treatmentMenuTeleId.value) {
+          try {
+            await hospitalRepository.deleteTreatmentTeleMenu(id);
+            dataList = dataList
+                .where(
+                    (element) => treatmentMenuTeleId.value.contains(element.id))
+                .toList();
+          } catch (e) {
+            logger.d(e);
+          }
+        }
+      }
+
+      submitTreatmentMenuTeledata.value = AsyncData(data: dataList);
+      treatmentMenuTeleData.value = AsyncData(data: dataList);
     } catch (e) {
       logger.d(e);
       submitTreatmentMenuTeledata.value = AsyncData(error: e);
