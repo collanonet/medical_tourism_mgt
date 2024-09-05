@@ -5316,11 +5316,13 @@ class _ApiService implements ApiService {
   Future<List<BasicInformationHospitalResponse>> getHospitals({
     int? page,
     int? pageSize,
+    String? hospitalName,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'page': page,
       r'pageSize': pageSize,
+      r'hospitalName': hospitalName,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};

@@ -159,10 +159,12 @@ class HospitalRemoteProvider {
   Future<List<BasicInformationHospitalResponse>> getHospitals({
     int? page,
     int? pageSize,
+    String? hospitalName,
   }) {
     return apiService.getHospitals(
       page: page,
       pageSize: pageSize,
+      hospitalName: hospitalName,
     );
   }
 

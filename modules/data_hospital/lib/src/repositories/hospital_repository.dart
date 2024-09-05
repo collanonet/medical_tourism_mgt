@@ -99,6 +99,7 @@ abstract class HospitalRepository {
   Future<List<BasicInformationHospitalResponse>> getHospitals({
     int? page,
     int? pageSize,
+    String? hospitalName,
   });
 
   Future<List<FacilityResponse>> getFacilityPhoto({required String id});

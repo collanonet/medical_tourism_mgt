@@ -6,6 +6,7 @@ import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_hospital/data_hospital.dart';
 import 'package:injectable/injectable.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
 class HospitalModel with ChangeNotifier {
@@ -18,14 +19,24 @@ class HospitalModel with ChangeNotifier {
   ValueNotifier<AsyncData<List<BasicInformationHospitalResponse>>> hospitals =
       ValueNotifier(const AsyncData());
 
-  Future<void> fetchHospitals() async {
+  Future<void> fetchHospitals({FormGroup? form}) async {
     hospitals.value = const AsyncData(loading: true);
+    notifyListeners();
     try {
-      final response = await hospitalRepository.getHospitals(
+      await hospitalRepository.getHospitals(
         pageSize: 30,
-      );
-      logger.d(response.length);
+        hospitalName: form?.control('hospitalName').value == null ? null : form!.control('hospitalName').value,
+      ).then((response){
+          logger.d(response.length);
       hospitals.value = AsyncData(data: response);
+      notifyListeners();
+      }).catchError((error) {
+        logger.e(error);
+        hospitals.value = AsyncData(error: error);
+      }).whenComplete((){
+        notifyListeners();
+      });
+      
     } catch (e) {
       hospitals.value = AsyncData(error: e);
     }

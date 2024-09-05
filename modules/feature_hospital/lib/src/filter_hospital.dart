@@ -203,7 +203,12 @@ class _HospitalFilterState extends State<HospitalFilter> {
                           ),
                         ),
                         const Spacer(),
-                        ElevatedButton(onPressed: () {}, child: const Text('検索')),
+                        ElevatedButton(
+                          onPressed: () {
+                            model.fetchHospitals(form: formGroup);
+                          },
+                          child: const Text('検索'),
+                        ),
                       ],
                     ),
                   ],

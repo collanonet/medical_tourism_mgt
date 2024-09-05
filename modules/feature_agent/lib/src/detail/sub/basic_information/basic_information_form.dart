@@ -33,7 +33,7 @@ FormGroup formBasicInformation() {
       'referralCommissions': FormArray([
         FormGroup({
           '_id': FormControl<String>(),
-          'referralCommissionName': FormControl<String>(),
+          'referralCommissionName': FormControl<String>(value: ''),
           'referralCommission': FormControl<int>(),
         }),
       ]),
@@ -46,7 +46,7 @@ FormGroup formBasicInformation() {
       FormGroup({
         '_id': FormControl<String>(),
         'nameCardDragDrop': FormControl<FileSelect>(),
-        'departmentName': FormControl<String>(),
+        'departmentName': FormControl<String>(value: ''),
         'fullNameRomanji': FormControl<String>(
           validators: [Validators.required],
         ),

@@ -1040,6 +1040,7 @@ abstract class ApiService {
   Future<List<BasicInformationHospitalResponse>> getHospitals({
     @Query('page') int? page,
     @Query('pageSize') int? pageSize,
+    @Query('hospitalName') String? hospitalName,
   });
 
   /// end get basic information of hospital C3 Page
