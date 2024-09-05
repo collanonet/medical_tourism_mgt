@@ -10,14 +10,19 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
 class TreatmentModel {
-  TreatmentModel({required this.hospitalRepository});
+  TreatmentModel({
+    required this.hospitalRepository,
+  });
 
   final HospitalRepository hospitalRepository;
+
+  ValueNotifier<String> hospitalId = ValueNotifier('');
 
   Future<void> fetchData(FormGroup formGroup, {String? hospitalId}) async {
     try {
       if (hospitalId != null) {
-        // await fetchTreatmentMenu(formGroup, hospitalId);
+        this.hospitalId.value = hospitalId;
+        await fetchTreatmentMenu(formGroup, hospitalId);
         await fetchTreatmentMenuTele(formGroup, hospitalId);
       }
     } catch (e) {
@@ -30,7 +35,7 @@ class TreatmentModel {
   Future<void> submitForm(FormGroup formGroup) async {
     try {
       submitData.value = const AsyncData(loading: true);
-      // await submitTreatmentMenu(formGroup);
+      await submitTreatmentMenu(formGroup);
       await submitTreatmentMenuTele(formGroup);
       submitData.value = const AsyncData(data: true);
     } catch (e) {
@@ -72,21 +77,26 @@ class TreatmentModel {
       FormArray treatmentMenuFormArray =
           formGroup.control('treatmentMenu') as FormArray;
 
-      FormArray taxRateFormArray =
-          formGroup.control('treatmentMenu') as FormArray;
+      FormArray taxRateFormArray = formGroup.control('tax') as FormArray;
 
       // check if data is not empty then clear form
       if (data.isNotEmpty) {
-        logger.d('data is not empty');
         treatmentMenuFormArray.clear();
-        taxRateFormArray.clear();
 
-        // get tax rate from header
-        data.first.treatmentCostTax!.map((e) {
-          taxRateFormArray.add(FormGroup({
-            'tax': FormControl<int>(value: e.tax),
-          }));
-        });
+        if (data.first.treatmentCostTax != null &&
+            data.first.treatmentCostTax!.isNotEmpty) {
+          taxRateFormArray.clear();
+          // get tax rate from header
+          try {
+            for (TaxModel e in data.first.treatmentCostTax!) {
+              taxRateFormArray.add(FormGroup({
+                'tax': FormControl<int>(value: e.tax),
+              }));
+            }
+          } catch (e) {
+            logger.d(e);
+          }
+        }
       }
 
       for (var element in data) {
@@ -95,12 +105,14 @@ class TreatmentModel {
         if (element.treatmentCostTax?.isNotEmpty == true) {
           for (var elementx in element.treatmentCostTax!) {
             include.add(FormGroup({
+              '_id': FormControl<String>(value: elementx.id),
               'cost': FormControl<double>(value: elementx.cost),
               'tax': FormControl<int>(value: elementx.tax),
             }));
           }
         } else {
           include.add(FormGroup({
+            '_id': FormControl<String>(),
             'cost': FormControl<double>(),
             'tax': FormControl<int>(value: 15),
           }));
@@ -108,7 +120,7 @@ class TreatmentModel {
 
         treatmentMenuFormArray.add(
           FormGroup({
-            'id': FormControl<String>(value: element.id),
+            '_id': FormControl<String>(value: element.id),
             'hospitalId': FormControl<String>(value: element.hospital),
             'project': FormControl<String>(value: element.project),
             'treatmentCostExcludingTax':
@@ -174,34 +186,50 @@ class TreatmentModel {
 
   Future<void> submitTreatmentMenu(FormGroup formGroup) async {
     try {
+      List<TreatmentMenuResponse> dataList = treatmentMenuData.value.data ?? [];
       submitTreatmentMenudata.value = const AsyncData(loading: true);
+
       await formGroup.control('treatmentMenu').value.forEach((element) async {
-        List<TaxModel>? treatmentCostTax = [];
+        List<TaxModel> treatmentCostTax = [];
         for (var elementx in element['treatmentCostTax']) {
           int index = element['treatmentCostTax'].indexOf(elementx);
           // get tax rate from header
-          int? taxRate = formGroup.control('cost').value[index]['cost'];
+          int? taxRate = formGroup.control('tax').value[index]['tax'];
           treatmentCostTax.add(TaxModel(
             cost: elementx['cost'] ?? 0,
             tax: taxRate ?? 0,
           ));
         }
 
+        logger.d("testtype ${element}");
+        logger.d("testtype ${element['treatmentCostTaxIncluded']}");
         TreatmentMenuRequest request = TreatmentMenuRequest(
-          hospital: element['hospitalId'],
+          hospital: hospitalId.value,
           project: element['project'],
           treatmentCostExcludingTax: element['treatmentCostExcludingTax'],
           treatmentCostTaxIncluded: element['treatmentCostTaxIncluded'],
           remark: element['remark'],
-          // treatmentCostTax: treatmentCostTax,
+          treatmentCostTax: treatmentCostTax,
         );
-        logger.d(request.toJson());
-        logger.d(request.treatmentCostTax?.first.toJson());
-        logger.d(request.treatmentCostTax?.last.toJson());
-        await hospitalRepository.postTreatmentMenu(request);
+
+        TreatmentMenuResponse response;
+        if (element['_id'] != null) {
+          response = await hospitalRepository.putTreatmentMenu(
+              element['_id'], request);
+          dataList = dataList.map((e) {
+            if (e.id == element['_id']) {
+              return response;
+            }
+            return e;
+          }).toList();
+        } else {
+          response = await hospitalRepository.postTreatmentMenu(request);
+          dataList.add(response);
+        }
       });
 
-      submitTreatmentMenudata.value = const AsyncData(data: []);
+      submitTreatmentMenudata.value = AsyncData(data: dataList);
+      treatmentMenuData.value = AsyncData(data: dataList);
     } catch (e) {
       logger.d(e);
       submitTreatmentMenudata.value = AsyncData(error: e);
@@ -223,7 +251,7 @@ class TreatmentModel {
           .value
           .forEach((element) async {
         TreatmentTeleMenuRequest request = TreatmentTeleMenuRequest(
-          hospital: element['hospital'],
+          hospital: hospitalId.value,
           project: element['project'],
           treatmentCostExcludingTax: element['treatmentCostExcludingTax'],
           treatmentCostTaxIncluded: element['treatmentCostTaxIncluded'],

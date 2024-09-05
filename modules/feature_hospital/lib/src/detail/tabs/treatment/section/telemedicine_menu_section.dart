@@ -35,7 +35,7 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
             child: ColumnSeparated(
               crossAxisAlignment: CrossAxisAlignment.start,
               separatorBuilder: (context, index) => SizedBox(
-                height: context.appTheme.spacing.marginExtraSmall,
+                height: context.appTheme.spacing.formSpacing,
               ),
               children: [
                 Text(
@@ -44,7 +44,7 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                 ),
                 RowSeparated(
                     separatorBuilder: (context, index) => SizedBox(
-                          width: context.appTheme.spacing.formSpacing,
+                          width: context.appTheme.spacing.marginMedium,
                         ),
                     children: [
                       Expanded(
@@ -72,7 +72,7 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                             style: context.textTheme.bodyMedium,
                           )),
                       SizedBox(
-                        width: context.appTheme.spacing.marginExtraLarge,
+                        width: context.appTheme.spacing.marginMedium,
                       ),
                     ]),
                 ReactiveFormArray(
@@ -85,7 +85,7 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                             child: RowSeparated(
                                 separatorBuilder: (context, index) => SizedBox(
                                       width:
-                                          context.appTheme.spacing.formSpacing,
+                                          context.appTheme.spacing.marginMedium,
                                     ),
                                 children: [
                                   Expanded(
@@ -99,7 +99,8 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                                           'treatmentCostExcludingTax',
                                       keyboardType: TextInputType.number,
                                       inputFormatters: [
-                                        CustomCurrencyFormatter(),
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp(r'[0-9]')),
                                       ],
                                     ),
                                   ),
@@ -110,7 +111,8 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                                           'treatmentCostTaxIncluded',
                                       keyboardType: TextInputType.number,
                                       inputFormatters: [
-                                        CustomCurrencyFormatter(),
+                                        FilteringTextInputFormatter.allow(
+                                            RegExp(r'[0-9]')),
                                       ],
                                     ),
                                   ),
@@ -122,13 +124,13 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                                   ),
                                   if (formArray.controls.indexOf(control) == 0)
                                     SizedBox(
-                                      width: context
-                                          .appTheme.spacing.marginExtraLarge,
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
                                     ),
                                   if (formArray.controls.indexOf(control) != 0)
                                     SizedBox(
-                                      width: context
-                                          .appTheme.spacing.marginExtraLarge,
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
                                       child: IconButton(
                                         icon: const Icon(
                                           Icons.remove_circle,

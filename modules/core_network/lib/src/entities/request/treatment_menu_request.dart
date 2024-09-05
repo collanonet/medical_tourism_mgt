@@ -13,7 +13,7 @@ class TreatmentMenuRequest {
   double? treatmentCostExcludingTax;
   double? treatmentCostTaxIncluded;
   String? remark;
-  List<TaxModel>? treatmentCostTax;
+  List<TaxModel> treatmentCostTax;
 
   TreatmentMenuRequest({
     this.hospital,
@@ -21,7 +21,7 @@ class TreatmentMenuRequest {
     this.treatmentCostExcludingTax,
     this.treatmentCostTaxIncluded,
     this.remark,
-    this.treatmentCostTax,
+    this.treatmentCostTax = const [],
   });
 
   factory TreatmentMenuRequest.fromJson(Map<String, dynamic> json) =>
