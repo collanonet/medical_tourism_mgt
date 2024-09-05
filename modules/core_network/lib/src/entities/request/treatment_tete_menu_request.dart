@@ -6,8 +6,8 @@ part 'treatment_tete_menu_request.g.dart';
 @JsonSerializable()
 class TreatmentTeleMenuRequest {
   String? project;
-  num? treatmentCostExcludingTax;
-  num? treatmentCostTaxIncluded;
+  double? treatmentCostExcludingTax;
+  double? treatmentCostTaxIncluded;
   String? remark;
   String? hospital;
 

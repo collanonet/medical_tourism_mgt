@@ -30,14 +30,16 @@ class _TreatmentSectionState extends State<TreatmentSection> {
           height: context.appTheme.spacing.formSpacing,
         ),
         children: [
-          TreatmentMenuSection(
+          // TreatmentMenuSection(
+          //   hospitalId: widget.hospitalId,
+          // ),
+          TelemedicineMenuSection(
             hospitalId: widget.hospitalId,
           ),
-          const TelemedicineMenuSection(),
           ValueListenableListener(
-            valueListenable: context.read<TreatmentModle>().submitData,
+            valueListenable: context.read<TreatmentModel>().submitData,
             onListen: () {
-              final value = context.read<TreatmentModle>().submitData.value;
+              final value = context.read<TreatmentModel>().submitData.value;
 
               if (value.hasError) {
                 snackBarWidget(
@@ -56,7 +58,7 @@ class _TreatmentSectionState extends State<TreatmentSection> {
               }
             },
             child: ValueListenableBuilder(
-              valueListenable: context.watch<TreatmentModle>().submitData,
+              valueListenable: context.watch<TreatmentModel>().submitData,
               builder: (context, value, child) {
                 return Align(
                   alignment: Alignment.bottomRight,
@@ -67,7 +69,7 @@ class _TreatmentSectionState extends State<TreatmentSection> {
                             ? null
                             : () {
                                 context
-                                    .read<TreatmentModle>()
+                                    .read<TreatmentModel>()
                                     .submitForm(formGroup);
                               },
                         child: WithLoadingButton(

@@ -195,5 +195,7 @@ abstract class HospitalRepository {
 
   Future<TreamentResponce> updateBooking(String treatmentId, TreamentRequest treatmentRequest);
 
+  Future<void> deleteTreatmentTeleMenu(String id);
+
 }
 

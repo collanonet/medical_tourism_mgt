@@ -29,7 +29,7 @@ class _TreatmentScreenState extends State<TreatmentScreen> {
               treatmentForm(hospitalId: widget.hospitalId)..markAllAsTouched(),
           builder: (context, form, _) {
             return Provider(
-              create: (context) => GetIt.I<TreatmentModle>()
+              create: (context) => GetIt.I<TreatmentModel>()
                 ..fetchData(form, hospitalId: widget.hospitalId),
               child: TreatmentSection(hospitalId: widget.hospitalId),
             );
