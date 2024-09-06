@@ -30,9 +30,9 @@ class _TreatmentSectionState extends State<TreatmentSection> {
           height: context.appTheme.spacing.formSpacing,
         ),
         children: [
-          // TreatmentMenuSection(
-          //   hospitalId: widget.hospitalId,
-          // ),
+          TreatmentMenuSection(
+            hospitalId: widget.hospitalId,
+          ),
           TelemedicineMenuSection(
             hospitalId: widget.hospitalId,
           ),

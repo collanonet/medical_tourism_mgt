@@ -28,3 +28,4 @@ export 'support_language_hospital_request.dart';
 export 'list_section_q_and_a_hospital_request.dart';
 export 'new_registration_hospital_request.dart';
 export 'memo_material_hospital_request.dart';
+export 'treatment_menu_tax.dart';

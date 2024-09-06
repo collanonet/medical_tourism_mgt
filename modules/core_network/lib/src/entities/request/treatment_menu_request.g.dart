@@ -17,8 +17,9 @@ TreatmentMenuRequest _$TreatmentMenuRequestFromJson(
           (json['treatmentCostTaxIncluded'] as num?)?.toDouble(),
       remark: json['remark'] as String?,
       treatmentCostTax: (json['treatmentCostTax'] as List<dynamic>?)
-          ?.map((e) => TaxModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
+              ?.map((e) => TaxModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
     );
 
 Map<String, dynamic> _$TreatmentMenuRequestToJson(
