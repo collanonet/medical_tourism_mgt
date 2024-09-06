@@ -123,7 +123,7 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                         },
                       );
                     }),
-                const Expanded(flex: 2, child: Text('ファイル名ファイル名')),
+                const Expanded(flex: 2, child: Text('ファイル名')),
                 const Expanded(child: Text('更新日')),
               ],
             ),
