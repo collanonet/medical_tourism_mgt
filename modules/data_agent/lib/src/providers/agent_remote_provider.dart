@@ -14,23 +14,17 @@ class AgentRemoteProvider {
   Future<List<AgentResponse>> getAgents({
     String? companyName,
     String? nameKana,
-    String? postalCode,
-    String? address,
+    String? country,
     String? area,
-    String? phoneNumber,
-    DateTime? transactionStartDate,
-    String? howToMainPayment,
+    String? fullNameJapaneseKanjiChineseOnly,
     int? pastCasesNumber,
   }) async {
     return await apiService.getAgents(
       companyName: companyName,
       nameKana: nameKana,
-      postalCode: postalCode,
-      address: address,
+      country: country,
       area: area,
-      phoneNumber: phoneNumber,
-      transactionStartDate: transactionStartDate,
-      howToMainPayment: howToMainPayment,
+      fullNameJapaneseKanjiChineseOnly: fullNameJapaneseKanjiChineseOnly,
       pastCasesNumber: pastCasesNumber,
     );
   }

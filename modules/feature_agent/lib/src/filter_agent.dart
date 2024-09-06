@@ -141,7 +141,7 @@ class AgentFilter extends StatelessWidget {
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
                               ReactiveTextField(
-                                formControlName: 'address',
+                                formControlName: 'country',
                               ),
                             ],
                           ),
@@ -181,7 +181,8 @@ class AgentFilter extends StatelessWidget {
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
                               ReactiveTextField(
-                                formControlName: 'patientName',
+                                formControlName:
+                                    'fullNameJapaneseKanjiChineseOnly',
                               ),
                             ],
                           ),

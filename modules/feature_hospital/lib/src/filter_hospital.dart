@@ -93,7 +93,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
                                       context.read<HospitalModel>().areaData,
                                   builder: (context, value, _) {
                                     return ReactiveDropdownFormField(
-                                      formControlName: 'keyword',
+                                      formControlName: 'location',
                                       items: value
                                           .map((e) => DropdownMenuItem(
                                                 value: e.item,
@@ -118,7 +118,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
                                       context.read<HospitalModel>().withRData,
                                   builder: (context, value, _) {
                                     return ReactiveDropdownFormField(
-                                      formControlName: 'r_have',
+                                      formControlName: 'rHave',
                                       items: value
                                           .map((e) => DropdownMenuItem(
                                                 value: e.item,
@@ -144,7 +144,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
                       children: [
                         IntrinsicWidth(
                           child: ReactiveCheckboxListTile(
-                            formControlName: 'hospital_type1',
+                            formControlName: 'hospitalType1',
                             activeColor: Theme.of(context).primaryColor,
                             checkColor: Colors.white,
                             controlAffinity: ListTileControlAffinity.leading,
@@ -159,7 +159,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
                         ),
                         IntrinsicWidth(
                           child: ReactiveCheckboxListTile(
-                            formControlName: 'hospital_type2',
+                            formControlName: 'hospitalType2',
                             activeColor: Theme.of(context).primaryColor,
                             checkColor: Colors.white,
                             controlAffinity: ListTileControlAffinity.leading,
@@ -174,7 +174,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
                         ),
                         IntrinsicWidth(
                           child: ReactiveCheckboxListTile(
-                            formControlName: 'hospital_type3',
+                            formControlName: 'hospitalType3',
                             activeColor: Theme.of(context).primaryColor,
                             checkColor: Colors.white,
                             controlAffinity: ListTileControlAffinity.leading,
@@ -189,7 +189,7 @@ class _HospitalFilterState extends State<HospitalFilter> {
                         ),
                         IntrinsicWidth(
                           child: ReactiveCheckboxListTile(
-                            formControlName: 'hospital_type4',
+                            formControlName: 'hospitalType4',
                             activeColor: Theme.of(context).primaryColor,
                             checkColor: Colors.white,
                             controlAffinity: ListTileControlAffinity.leading,

@@ -5,13 +5,9 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup formFilterPatient() => FormGroup(
       {
-        '_id' : FormControl<String>(),
-        'tourName': FormControl<String>(
-          value: '',
-        ),
-        'classification': FormControl<String>(
-          value: '',
-        ),
+        '_id': FormControl<String>(),
+        'tourName': FormControl<String>(),
+        'classification': FormControl<String>(),
         'dateFrom': FormControl<DateTime>(
           validators: [
             Validators.pattern(

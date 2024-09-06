@@ -100,6 +100,13 @@ abstract class HospitalRepository {
     int? page,
     int? pageSize,
     String? hospitalName,
+    String? type,
+    String? location,
+    String? rHave,
+    bool? hospitalType1,
+    bool? hospitalType2,
+    bool? hospitalType3,
+    bool? hospitalType4,
   });
 
   Future<List<FacilityResponse>> getFacilityPhoto({required String id});

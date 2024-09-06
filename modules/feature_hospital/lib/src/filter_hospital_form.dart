@@ -7,25 +7,14 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup formFilterHospital() => FormGroup(
       {
-        'hospitalName': FormControl<String>(
-        ),
-        'type': FormControl<String>(
-          value: '',
-        ),
-        'keyword': FormControl<String>(
-          value: '',
-        ),
-        'r_have': FormControl<String>(
-          value: '',
-        ),
-        'hospital_type1': FormControl<bool>(
-        ),
-        'hospital_type2': FormControl<bool>(
-        ),
-        'hospital_type3': FormControl<bool>(
-        ),
-        'hospital_type4': FormControl<bool>(
-        ),
+        'hospitalName': FormControl<String>(),
+        'type': FormControl<String>(),
+        'location': FormControl<String>(),
+        'rHave': FormControl<String>(),
+        'hospitalType1': FormControl<bool>(),
+        'hospitalType2': FormControl<bool>(),
+        'hospitalType3': FormControl<bool>(),
+        'hospitalType4': FormControl<bool>(),
       },
     );
 

@@ -10,9 +10,9 @@ FormGroup formFilterPatient() => FormGroup(
         'nameKana': FormControl<String?>(),
         'companyName': FormControl<String?>(),
         'pastCasesNumber': FormControl<int>(),
-        'address': FormControl<String?>(),
+        'country': FormControl<String?>(),
         'area': FormControl<String?>(),
-        'patientName': FormControl<String?>(),
+        'fullNameJapaneseKanjiChineseOnly': FormControl<String?>(),
       },
     );
 

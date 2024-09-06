@@ -95,10 +95,9 @@ class BasicInformationPage extends StatelessWidget {
                                     builder: (context, value, child) {
                                       return ReactiveFormConsumer(
                                           builder: (context, formGroup, child) {
-                                        var form = formGroup.control(
-                                                'basicInformationAgent')
-                                            as FormGroup;
-
+                                        // var form = formGroup.control(
+                                        //         'basicInformationAgent')
+                                        //     as FormGroup;
                                         return value.hasData
                                             ? ElevatedButton(
                                                 onPressed: formGroup.invalid
@@ -113,16 +112,16 @@ class BasicInformationPage extends StatelessWidget {
                                                 child: const Text('保存する'),
                                               )
                                             : ElevatedButton(
-                                                onPressed: !value.hasData &&
-                                                        form.invalid
-                                                    ? null
-                                                    : () {
+                                                onPressed: !value.loading &&
+                                                        formGroup.valid
+                                                    ? () {
                                                         context
                                                             .read<
                                                                 AgentBasicInformationModel>()
                                                             .createOrUpdateAgent(
                                                                 formGroup);
-                                                      },
+                                                      }
+                                                    : null,
                                                 child: const Text('保存する'),
                                               );
                                       });

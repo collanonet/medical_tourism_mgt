@@ -602,12 +602,9 @@ abstract class ApiService {
   Future<List<AgentResponse>> getAgents({
     @Query('companyName') String? companyName,
     @Query('nameKana') String? nameKana,
-    @Query('postalCode') String? postalCode,
-    @Query('address') String? address,
+    @Query('country') String? country,
     @Query('area') String? area,
-    @Query('phoneNumber') String? phoneNumber,
-    @Query('transactionStartDate') DateTime? transactionStartDate,
-    @Query('howToMainPayment') String? howToMainPayment,
+    @Query('fullNameJapaneseKanjiChineseOnly') String? fullNameJapaneseKanjiChineseOnly,
     @Query('pastCasesNumber') int? pastCasesNumber,
   });
 
@@ -1038,6 +1035,13 @@ abstract class ApiService {
     @Query('page') int? page,
     @Query('pageSize') int? pageSize,
     @Query('hospitalName') String? hospitalName,
+    @Query('type') String? type,
+    @Query('location') String? location,
+    @Query('rHave') String? rHave,
+    @Query('hospitalType1') bool? hospitalType1,
+    @Query('hospitalType2') bool? hospitalType2,
+    @Query('hospitalType3') bool? hospitalType3,
+    @Query('hospitalType4') bool? hospitalType4,
   });
 
   /// end get basic information of hospital C3 Page

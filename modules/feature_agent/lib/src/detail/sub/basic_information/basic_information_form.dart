@@ -6,27 +6,17 @@ FormGroup formBasicInformation() {
   return FormGroup({
     'basicInformationAgent': FormGroup({
       '_id': FormControl<String>(),
-      'memo': FormControl<String>(
-        value: '',
-      ),
+      'memo': FormControl<String>(value: ''),
       'companyName': FormControl<String>(
         validators: [Validators.required],
       ),
       'nameKana': FormControl<String>(
         validators: [Validators.required],
       ),
-      'postalCode': FormControl<String>(
-        value: '',
-      ),
-      'address': FormControl<String>(
-        value: '',
-      ),
-      'area': FormControl<String>(
-        value: '',
-      ),
-      'phoneNumber': FormControl<String>(
-        value: '',
-      ),
+      'postalCode': FormControl<String>(value: ''),
+      'address': FormControl<String>(value: ''),
+      'area': FormControl<String>(value: ''),
+      'phoneNumber': FormControl<String>(value: ''),
       'transactionStartDate': FormControl<DateTime>(
         value: DateTime.now(),
       ),
@@ -37,9 +27,7 @@ FormGroup formBasicInformation() {
           'referralCommission': FormControl<int>(),
         }),
       ]),
-      'howToMainPayment': FormControl<String>(
-        value: '',
-      ),
+      'howToMainPayment': FormControl<String>(value: ''),
       'pastCasesNumber': FormControl<int>(),
     }),
     'manager': FormArray([
@@ -50,10 +38,13 @@ FormGroup formBasicInformation() {
         'fullNameRomanji': FormControl<String>(
           validators: [Validators.required],
         ),
-        'fullNameChineseKanjiVietnameseNotation': FormControl<String>(value: ''),
+        'fullNameChineseKanjiVietnameseNotation':
+            FormControl<String>(value: ''),
         'fullNameJapaneseKanjiChineseOnly': FormControl<String>(value: ''),
         'fullNameKana': FormControl<String>(value: ''),
-        'phoneNumber': FormControl<String>(value: ''),
+        'phoneNumber': FormControl<String>(
+          validators: [Validators.required],
+        ),
         'email': FormControl<String>(
           validators: [
             Validators.required,

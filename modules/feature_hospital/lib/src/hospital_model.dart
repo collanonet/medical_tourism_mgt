@@ -26,6 +26,13 @@ class HospitalModel with ChangeNotifier {
       await hospitalRepository.getHospitals(
         pageSize: 30,
         hospitalName: form?.control('hospitalName').value == null ? null : form!.control('hospitalName').value,
+        type: form?.control('type').value == null ? null : form!.control('type').value,
+        location: form?.control('location').value == null ? null : form!.control('location').value,
+        rHave: form?.control('rHave').value == null ? null : form!.control('rHave').value,
+        hospitalType1: form?.control('hospitalType1').value == null ? null : form!.control('hospitalType1').value,
+        hospitalType2: form?.control('hospitalType2').value == null ? null : form!.control('hospitalType2').value,
+        hospitalType3: form?.control('hospitalType3').value == null ? null : form!.control('hospitalType3').value,
+        hospitalType4: form?.control('hospitalType4').value == null ? null : form!.control('hospitalType4').value,
       ).then((response){
           logger.d(response.length);
       hospitals.value = AsyncData(data: response);

@@ -5,12 +5,9 @@ abstract class AgentRepository {
   Future<List<AgentResponse>> getAgents({
     String? companyName,
     String? nameKana,
-    String? postalCode,
-    String? address,
+    String? country,
     String? area,
-    String? phoneNumber,
-    DateTime? transactionStartDate,
-    String? howToMainPayment,
+    String? fullNameJapaneseKanjiChineseOnly,
     int? pastCasesNumber,
   });
 

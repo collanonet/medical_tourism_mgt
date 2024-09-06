@@ -33,16 +33,13 @@ class AgentModel with ChangeNotifier {
       nameKana: form?.control('nameKana').value == null
           ? null
           : form!.control('nameKana').value,
-      postalCode: null,
-      address: form?.control('address').value == null
+      country: form?.control('country').value == null
           ? null
-          : form!.control('address').value,
+          : form!.control('country').value,
       area: form?.control('area').value == null
           ? null
           : form!.control('area').value,
-      phoneNumber: null,
-      transactionStartDate: null,
-      howToMainPayment: null,
+      fullNameJapaneseKanjiChineseOnly: form?.control('fullNameJapaneseKanjiChineseOnly').value == null ? null : form!.control('fullNameJapaneseKanjiChineseOnly').value,
       pastCasesNumber: form?.control('pastCasesNumber').value == null
           ? null
           : form!.control('pastCasesNumber').value,
