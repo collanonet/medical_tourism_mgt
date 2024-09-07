@@ -148,7 +148,6 @@ class AgentBasicInformationModel {
 
       await createOrUpdateAgentManager(response.id, formGroup);
       submit.value = const AsyncData(data: true);
-      init(id: agent.value.requireData.id, formGroup: formGroup);
     } catch (error) {
       logger.e(error);
       submit.value = AsyncData(error: error);
@@ -268,6 +267,7 @@ class AgentBasicInformationModel {
   Future<void> createOrUpdateAgentManager(
       String id, FormGroup formGroup) async {
     try {
+      List<AgentManagerResponse> managers = agentManager.value.data ?? [];
       agentManager.value = const AsyncData(loading: true);
 
       await formGroup.control('manager').value.forEach((element) async {
@@ -315,16 +315,20 @@ class AgentBasicInformationModel {
         );
 
         if (element['_id'] != null) {
-          await authRepository.putAgentManager(element['_id'], manager);
+          var result =
+              await authRepository.putAgentManager(element['_id'], manager);
+          managers.map((e) => e.id == result.id ? result : e).toList();
         } else {
-          await authRepository.postAgentManager(manager);
+          var result = await authRepository.postAgentManager(manager);
+          managers.add(result);
         }
       });
 
-      agentManager.value = const AsyncData(data: []);
+      agentManager.value = AsyncData(data: managers);
     } catch (error) {
       logger.e(error);
-      agentManager.value = AsyncData(error: error);
+      agentManager.value =
+          agentManager.value.copyWith(error: error, loading: false);
     }
   }
 
