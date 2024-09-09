@@ -245,5 +245,5 @@ class EndPoints {
   static const WEB_BOOKING_RESERVATION = '/web-booking-reservation';
 
   //A9
-  static const SUMMARY_LIST = '/summary-list';
+  static const SUMMARY_LIST = '/medical-record-file-summary';
 }

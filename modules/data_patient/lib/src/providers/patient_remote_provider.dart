@@ -694,11 +694,24 @@ class PatientRemoteProvider {
   }
 
   //A9
-  Future<List<SummaryListResponse>> getSummaryList(String patientId) async {
+  Future<List<MedicalRecordFileSummaryResponse>> getSummaryList(String patientId) async {
     return apiService.getSummaryList(patientId);
   }
 
   Future<void> deleteSummaryList(String patientId) async {
     return apiService.deleteSummaryList(patientId);
   }
+
+  Future<List<MedicalRecordFileSummaryResponse>> getFileSummaryBySummaryId(String summaryId) {
+    return apiService.getFileSummaryBySummaryId(summaryId);
+  }
+
+  Future<MedicalRecordFileSummaryResponse> postFileSummary(MedicalRecordFileSummaryRequest fileRequest) {
+    return apiService.postFileSummary(fileRequest);
+  }
+
+  Future<void> deleteFileSummary(String id) {
+    return apiService.deleteFileSummary(id);
+  }
+
 }

@@ -85,4 +85,3 @@ export 'src/entities/request/treatment_tete_menu_request.dart';
 export 'src/entities/search_qa_response.dart';
 export 'src/entities/request/search_qa_request.dart';
 export 'src/entities/request/detail_inerary_day.dart';
-export 'src/entities/summary_list_response.dart';

@@ -16,7 +16,7 @@ class SummaryListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Provider(
-      create: (context) => GetIt.I<SummaryListModel>(),
+      create: (context) => GetIt.I<SummaryListModel>()..fetchSummaryList(patientId),
       child: const SummaryListScreen(),
     );
   }

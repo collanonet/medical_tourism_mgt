@@ -67,3 +67,5 @@ export 'support_language_hospital_response.dart';
 export 'application_treament_responce.dart';
 export 'memo_material_hospital_response.dart';
 export 'application_treament_request.dart';
+export 'medical_record_file_summary_request.dart';
+export 'medical_record_file_summary_response.dart';

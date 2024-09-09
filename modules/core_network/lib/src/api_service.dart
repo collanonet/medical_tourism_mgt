@@ -604,7 +604,8 @@ abstract class ApiService {
     @Query('nameKana') String? nameKana,
     @Query('country') String? country,
     @Query('area') String? area,
-    @Query('fullNameJapaneseKanjiChineseOnly') String? fullNameJapaneseKanjiChineseOnly,
+    @Query('fullNameJapaneseKanjiChineseOnly')
+    String? fullNameJapaneseKanjiChineseOnly,
     @Query('pastCasesNumber') int? pastCasesNumber,
   });
 
@@ -1396,14 +1397,30 @@ abstract class ApiService {
   );
 
   //Agent A9
-  @GET('${EndPoints.SUMMARY_LIST}/{id}')
-  Future<List<SummaryListResponse>> getSummaryList(
-    @Path('id') String patientId,
+  @GET('${EndPoints.SUMMARY_LIST}/medicalRecord/{id}')
+  Future<List<MedicalRecordFileSummaryResponse>> getSummaryList(
+    @Path('id') String medicalId,
+  );
+
+  //getFileSummaryBySummaryId
+  @GET('${EndPoints.SUMMARY_LIST}/recordSummary/{id}')
+  Future<List<MedicalRecordFileSummaryResponse>> getFileSummaryBySummaryId(
+    @Path('id') String summaryId,
   );
 
   @DELETE('${EndPoints.SUMMARY_LIST}/{id}')
   Future<void> deleteSummaryList(
     @Path('id') String patientId,
+  );
+
+  @POST(EndPoints.SUMMARY_LIST)
+  Future<MedicalRecordFileSummaryResponse> postFileSummary(
+    @Body() MedicalRecordFileSummaryRequest medicalRecordFileSummaryRequest,
+  );
+
+  @DELETE('${EndPoints.SUMMARY_LIST}/{id}')
+  Future<void> deleteFileSummary(
+    @Path('id') String id,
   );
 }
 

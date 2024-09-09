@@ -1,4 +1,9 @@
 // Flutter imports:
+import 'dart:math';
+
+import 'package:core_ui/widgets.dart';
+import 'package:core_utils/async.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -9,18 +14,25 @@ import 'package:provider/provider.dart';
 
 import 'summary_list_model.dart';
 
-class SummaryListScreen extends StatelessWidget {
+class SummaryListScreen extends StatefulWidget {
   const SummaryListScreen({super.key});
 
   @override
+  State<SummaryListScreen> createState() => _SummaryListScreenState();
+}
+
+class _SummaryListScreenState extends State<SummaryListScreen> {
+  ValueNotifier<List<String>> selected = ValueNotifier([]);
+
+  @override
   Widget build(BuildContext context) {
-    ValueNotifier<List<String>> selected = ValueNotifier([]);
     return Column(
       children: [
         Expanded(
           child: SingleChildScrollView(
             child: ValueListenableBuilder(
-              valueListenable: context.read<SummaryListModel>().summaryListData,
+              valueListenable:
+                  context.read<SummaryListModel>().fileSummaryListData,
               builder: (context, value, _) {
                 return Column(
                   children: [
@@ -77,48 +89,52 @@ class SummaryListScreen extends StatelessWidget {
                     const Divider(),
                     ValueListenableBuilder(
                       valueListenable:
-                          context.read<SummaryListModel>().summaryListData,
+                          context.read<SummaryListModel>().fileSummaryListData,
                       builder: (context, value, _) {
                         return ListView(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          children: List.generate(10, (index) {
-                            // var item = value.data![index];
+                          children:
+                              List.generate(value.data?.length ?? 0, (index) {
+                            var item = value.data![index];
                             return InkWell(
-                              onTap: () {},
+                              onTap: () {
+                                openUrlInBrowser(fileName: item.pathFile ?? '');
+                              },
                               child: Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 4),
                                 child: Row(
                                   children: [
-                                    // ValueListenableBuilder(
-                                    //   valueListenable: selected,
-                                    //   builder: (context, sels, _) {
-                                    //     return Checkbox(
-                                    //       value: sels.contains(item.id),
-                                    //       onChanged: (sel) {
-                                    //         if (sel != null) {
-                                    //           if (sel) {
-                                    //             selected.value = [
-                                    //               ...sels,
-                                    //               item.id
-                                    //             ];
-                                    //           } else {
-                                    //             selected.value = [
-                                    //               ...sels.where(
-                                    //                   (e) => e != item.id)
-                                    //             ];
-                                    //           }
-                                    //         }
-                                    //       },
-                                    //     );
-                                    //   },
-                                    // ),
+                                    ValueListenableBuilder(
+                                      valueListenable: selected,
+                                      builder: (context, sels, _) {
+                                        return Checkbox(
+                                          value: sels.contains(item.id),
+                                          onChanged: (sel) {
+                                            if (sel != null) {
+                                              if (sel) {
+                                                selected.value = [
+                                                  ...sels,
+                                                  item.id ?? ''
+                                                ];
+                                              } else {
+                                                selected.value = [
+                                                  ...sels.where(
+                                                      (e) => e != item.id)
+                                                ];
+                                              }
+                                            }
+                                          },
+                                        );
+                                      },
+                                    ),
                                     Expanded(
                                         child: Row(
                                       children: [
-                                        const Flexible(
-                                            child: Text('診療データサマリー')),
+                                        Flexible(
+                                            child:
+                                                Text(item.documentName ?? '')),
                                         const Spacer(),
                                         Container(
                                           padding: const EdgeInsets.all(4),
@@ -139,23 +155,27 @@ class SummaryListScreen extends StatelessWidget {
                                         )
                                       ],
                                     )),
-                                    const Expanded(child: Text('2023/06/30')),
+                                    Expanded(
+                                      child: Text(item.publicationDate == null
+                                          ? ''
+                                          : Dates.formShortDate(
+                                              item.publicationDate)),
+                                    ),
                                     Expanded(
                                         child: Row(
                                       children: [
-                                        Icon(
-                                          Icons.person,
-                                          color: context.appTheme.primaryColor,
-                                        ),
+                                        if (item.share == '○')
+                                          Icon(
+                                            Icons.person,
+                                            color:
+                                                context.appTheme.primaryColor,
+                                          ),
                                       ],
                                     )),
                                     Expanded(
                                         child: Row(
                                       children: [
-                                        Icon(
-                                          Icons.circle_outlined,
-                                          color: context.appTheme.primaryColor,
-                                        ),
+                                        Text(item.disclosureToAgent ?? ''),
                                       ],
                                     )),
                                   ],
@@ -175,48 +195,125 @@ class SummaryListScreen extends StatelessWidget {
             ),
           ),
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            OutlinedButton(
-              onPressed: () {},
-              child: const Text(
-                '削除する',
-              ),
-            ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text(
-                '閲覧する',
-                style: TextStyle(
-                  fontFamily: 'NotoSansJP',
-                  package: 'core_ui',
-                  color: Colors.white,
-                ),
-              ),
-            ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            ElevatedButton(
-              onPressed: () {},
-              child: const Text(
-                '印刷する',
-                style: TextStyle(
-                  fontFamily: 'NotoSansJP',
-                  package: 'core_ui',
-                  color: Colors.white,
-                ),
-              ),
-            )
-          ],
-        ),
+        ValueListenableBuilder(
+            valueListenable: selected,
+            builder: (context, sels, _) {
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ValueListenableListener(
+                    valueListenable: context.read<SummaryListModel>().delete,
+                    onListen: () {
+                      var delete =
+                          context.read<SummaryListModel>().delete.value;
+
+                      if (delete.hasError) {
+                        snackBarWidget(
+                          message: '削除に失敗しました',
+                          backgroundColor: Colors.red,
+                          prefixIcon: const Icon(
+                            Icons.error,
+                            color: Colors.white,
+                          ),
+                        );
+                      }
+
+                      if (delete.hasData) {
+                        selected.value = [];
+                        snackBarWidget(
+                          message: '削除しました',
+                          prefixIcon: const Icon(
+                            Icons.check_circle,
+                            color: Colors.white,
+                          ),
+                        );
+                      }
+                    },
+                    child: ValueListenableBuilder(
+                        valueListenable:
+                            context.read<SummaryListModel>().delete,
+                        builder: (context, value, _) {
+                          return OutlinedButton(
+                              onPressed: sels.isEmpty || value.loading
+                                  ? null
+                                  : () {
+                                      showDialog(
+                                          context: context,
+                                          builder: (_) {
+                                            return Provider.value(
+                                              value: context
+                                                  .read<SummaryListModel>(),
+                                              child: AlertDialog(
+                                                title: const Text('削除確認'),
+                                                content: const Text(
+                                                    '選択したデータを削除しますか？'),
+                                                actions: [
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: const Text('キャンセル'),
+                                                  ),
+                                                  TextButton(
+                                                    onPressed: () {
+                                                      context
+                                                          .read<
+                                                              SummaryListModel>()
+                                                          .deleteDomesticMedical(
+                                                              sels);
+                                                      Navigator.of(context)
+                                                          .pop();
+                                                    },
+                                                    child: const Text('削除する'),
+                                                  ),
+                                                ],
+                                              ),
+                                            );
+                                          });
+                                    },
+                              child: WithLoadingButton(
+                                isLoading: value.loading,
+                                loadingColor: context.appTheme.primaryColor,
+                                child: Text(
+                                  '削除する',
+                                  style: context.textTheme.labelLarge?.copyWith(
+                                      color: context.appTheme.primaryColor),
+                                ),
+                              ));
+                        }),
+                  ),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginMedium,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const Text(
+                      '閲覧する',
+                      style: TextStyle(
+                        fontFamily: 'NotoSansJP',
+                        package: 'core_ui',
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    width: context.appTheme.spacing.marginMedium,
+                  ),
+                  ElevatedButton(
+                    onPressed: () {},
+                    child: const Text(
+                      '印刷する',
+                      style: TextStyle(
+                        fontFamily: 'NotoSansJP',
+                        package: 'core_ui',
+                        color: Colors.white,
+                      ),
+                    ),
+                  )
+                ],
+              );
+            }),
       ],
     );
   }

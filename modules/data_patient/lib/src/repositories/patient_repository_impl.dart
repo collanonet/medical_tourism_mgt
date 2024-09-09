@@ -912,8 +912,23 @@ class PatientRepositoryIml extends PatientRepository {
   }
   
   @override
-  Future<List<SummaryListResponse>> getSummaryList(String patientId) {
+  Future<List<MedicalRecordFileSummaryResponse>> getSummaryList(String patientId) {
     return remote.getSummaryList(patientId);
+  }
+
+  @override
+  Future<List<MedicalRecordFileSummaryResponse>> getFileSummaryBySummaryId(String summaryId) {
+    return remote.getFileSummaryBySummaryId(summaryId);
+  }
+
+  @override
+  Future<MedicalRecordFileSummaryResponse> postFileSummary(MedicalRecordFileSummaryRequest fileRequest) {
+    return remote.postFileSummary(fileRequest);
+  }
+
+  @override
+  Future<void> deleteFileSummary(String id) {
+    return remote.deleteFileSummary(id);
   }
   
  

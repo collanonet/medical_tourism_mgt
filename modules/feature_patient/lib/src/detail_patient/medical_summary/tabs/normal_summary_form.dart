@@ -1,4 +1,5 @@
 // Package imports:
+import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -64,7 +65,7 @@ FormGroup normalSummaryForm() {
     'remarks': FormControl<String>(),
     'attachDocuments': FormArray([
       FormGroup({
-        'attachDocumentsName': FormControl<String>(),
+        'attachDocumentsName': FormControl<FileSelect>(),
       })
     ]),
     'medicalRecord': FormControl<String>(),
