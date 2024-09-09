@@ -107,7 +107,7 @@ extension GetItInjectableX on _i1.GetIt {
       registerFor: {_local},
     );
     gh.factory<String>(
-      () => appModule.stageFileUrl,
+      () => restModule.stageFileUrl,
       instanceName: 'fileUrl',
       registerFor: {_stage},
     );
@@ -116,7 +116,7 @@ extension GetItInjectableX on _i1.GetIt {
       instanceName: 'localeStorage',
     );
     gh.factory<String>(
-      () => appModule.devFileUrl,
+      () => restModule.devFileUrl,
       instanceName: 'fileUrl',
       registerFor: {_dev},
     );
@@ -154,15 +154,18 @@ extension GetItInjectableX on _i1.GetIt {
           auth: gh<_i22.AuthModel>(),
           l10n: gh<_i23.L10nModel>(),
         ));
+    gh.factory<String>(
+      () => restModule.prodFileUrl,
+      instanceName: 'fileUrl',
+      registerFor: {
+        _production,
+        _prod,
+      },
+    );
     gh.lazySingleton<_i24.RestClient>(() => restModule.restClient(
           gh<Uri>(instanceName: 'baseUrl'),
           gh<_i17.CacheOptions>(),
         ));
-    gh.factory<String>(
-      () => appModule.prodFileUrl,
-      instanceName: 'fileUrl',
-      registerFor: {_production},
-    );
     gh.factory<Uri>(
       () => restModule.prodBaseUrl,
       instanceName: 'baseUrl',

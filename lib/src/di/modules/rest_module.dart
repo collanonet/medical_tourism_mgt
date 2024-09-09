@@ -87,6 +87,26 @@ abstract class RestModule {
   @Order(0)
   @Named('baseUrl')
   Uri get prodBaseUrl => Uri();
+
+  @dev
+  @Order(0)
+  @Named('fileUrl')
+  String get devFileUrl =>
+      'https://medical-tourism-api-dev-collabonet.pixelplatforms.com/files/';
+
+  @stage
+  @Order(0)
+  @Named('fileUrl')
+  String get stageFileUrl =>
+      'https://medical-tourism-api-stage-collabonet.pixelplatforms.com/files/';
+
+  @production
+  @prod
+  @Order(0)
+  @Named('fileUrl')
+  String get prodFileUrl =>
+      'https://medical-tourism-api-collabonet.pixelplatforms.com/files/';
+
 }
 
 class MerchantInterceptor extends Interceptor {}

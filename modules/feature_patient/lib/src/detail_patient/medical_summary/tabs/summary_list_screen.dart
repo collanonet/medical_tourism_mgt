@@ -5,6 +5,7 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 
 import 'summary_list_model.dart';
@@ -305,12 +306,14 @@ class _SummaryListScreenState extends State<SummaryListScreen> {
                           ids.data!.where((e) => sels.contains(e.id)).toList();
                       showDialog(
                           context: context,
-                          builder: (_) => AlertDialog(
-                                content: ViewAndPrintFileWidget(list
-                                    .map((e) =>
-                                        'https://medical-tourism-api-dev-collabonet.pixelplatforms.com/files/${e.pathFile}')
-                                    .toList()),
-                              ));
+                          builder: (_) {
+                            return AlertDialog(
+                              content: ViewAndPrintFileWidget(list
+                                  .map((e) =>
+                                      '${GetIt.I<String>(instanceName: 'fileUrl')}${e.pathFile}')
+                                  .toList()),
+                            );
+                          });
                     },
                     child: const Text(
                       '印刷する',
