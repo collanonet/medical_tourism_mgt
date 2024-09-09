@@ -16,7 +16,7 @@ class AdditionalInformationSectionResponse {
   String? remark;
   String? paymentSiteTighten;
   String? paymentSitePayment;
-  String? file;
+  List<String>? files;
 
   AdditionalInformationSectionResponse({
     required this.id,
@@ -29,7 +29,7 @@ class AdditionalInformationSectionResponse {
     this.remark,
     this.paymentSiteTighten,
     this.paymentSitePayment,
-    this.file,
+    this.files,
   });
 
   factory AdditionalInformationSectionResponse.fromJson(

@@ -189,6 +189,7 @@ FormGroup basicInformationForm() {
         })
       ]),
       'file': FormControl<FileSelect>(),
+      'files': FormControl<List<FileSelect>>(),
       'msCorporation': FormControl<String>(),
       'referralFee': FormControl<String>(),
       'treatmentCostPointCalculationPerPoint': FormControl<String>(),

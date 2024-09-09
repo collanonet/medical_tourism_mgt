@@ -353,10 +353,18 @@ class BasicInformationModel {
       formGroup.control('hospital').value =
           hospitalId.value ?? basicInformationData.value.data?.id ?? '';
       formGroup.control('outsourcingContract').value = data.outsourcingContract;
-      formGroup.control('file').value = FileSelect(
-        url: data.file,
-        filename: data.file?.split('/').last ?? '',
-      );
+      if (data.files != null && data.files!.isNotEmpty) {
+        List<FileSelect> files = [];
+        for (var e in data.files!) {
+          files.add(
+            FileSelect(
+              url: e,
+              filename: e.split('/').last,
+            ),
+          );
+        }
+        formGroup.control('files').value = files;
+      }
       formGroup.control('msCorporation').value = data.msCorporation;
       formGroup.control('referralFee').value = data.referralFee;
       formGroup.control('treatmentCostPointCalculationPerPoint').value =
@@ -647,22 +655,29 @@ class BasicInformationModel {
     try {
       additionalInformationData.value = const AsyncData(loading: true);
 
-      String? file;
-      if (form.control('file').value != null) {
-        FileSelect docFile = form.control('file').value;
-        if (docFile.file != null) {
-          try {
-            String base64Image = base64Encode(docFile.file!);
-            FileResponse fileData = await hospitalRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename!,
-            );
-            file = fileData.filename;
-          } catch (e) {
-            logger.e(e);
+      List<String> files = [];
+      if (form.control('files').value != null) {
+        List<FileSelect> docFiles = form.control('files').value;
+        if (docFiles.isNotEmpty) {
+          for (FileSelect docFile in docFiles) {
+            if (docFile.file != null) {
+              try {
+                String base64Image = base64Encode(docFile.file!);
+                FileResponse fileData =
+                    await hospitalRepository.uploadFileBase64(
+                  base64Image,
+                  docFile.filename!,
+                );
+                files.add(fileData.filename);
+              } catch (e) {
+                logger.e(e);
+              }
+            } else {
+              if (docFile.url != null) {
+                files.add(docFile.url!);
+              }
+            }
           }
-        } else {
-          file = docFile.url;
         }
       }
 
@@ -674,7 +689,7 @@ class BasicInformationModel {
         id: form.control('_id').value,
         outsourcingContract: form.control('outsourcingContract').value ?? '',
         contract: contract,
-        file: file,
+        files: files,
         msCorporation: form.control('msCorporation').value ?? '',
         referralFee: form.control('referralFee').value ?? '',
         treatmentCostPointCalculationPerPoint:
