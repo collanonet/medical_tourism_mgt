@@ -1,14 +1,10 @@
 // Flutter imports:
 import 'package:core_network/entities.dart';
+import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
-// Package imports:
-import 'package:core_network/core_network.dart';
-import 'package:core_ui/core_ui.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -391,7 +387,23 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
                         width: context.appTheme.spacing.marginMedium,
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          var ids = context
+                              .read<DomesticMedicalDataModel>()
+                              .domesticMedicalData
+                              .value;
+                          var list = ids.data!
+                              .where((e) => sels.contains(e.id))
+                              .toList();
+                          showDialog(
+                              context: context,
+                              builder: (_) => AlertDialog(
+                                    content: ViewAndPrintFileWidget(list
+                                        .map((e) =>
+                                            'https://medical-tourism-api-dev-collabonet.pixelplatforms.com/files/${e.file}')
+                                        .toList()),
+                                  ));
+                        },
                         child: const Text(
                           '印刷する',
                         ),
