@@ -116,7 +116,7 @@ class _SummaryListScreenState extends State<SummaryListScreen> {
                                               if (sel) {
                                                 selected.value = [
                                                   ...sels,
-                                                  item.id ?? ''
+                                                  item.id
                                                 ];
                                               } else {
                                                 selected.value = [
