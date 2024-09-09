@@ -174,19 +174,17 @@ class AgentScreen extends StatelessWidget {
                                       ),
                                       Expanded(
                                         child: Text(
-                                          value.referralCommissions?.firstOrNull
-                                                  ?.referralCommissionName ??
+                                          value.manager?.contactMethods?[0]
+                                                  .howToContact ??
                                               '--',
                                           style: context.textTheme.bodyMedium,
                                         ),
                                       ),
                                       Expanded(
                                         child: Text(
-                                          value.referralCommissions!.length > 1
-                                              ? value.referralCommissions![1]
-                                                      .referralCommissionName ??
-                                                  '--'
-                                              : '--',
+                                          value.manager?.contactMethods?[0]
+                                                  .howToContactQrCode ??
+                                              '',
                                           style: context.textTheme.bodyMedium,
                                         ),
                                       ),

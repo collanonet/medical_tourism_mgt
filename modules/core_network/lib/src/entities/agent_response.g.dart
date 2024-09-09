@@ -63,6 +63,10 @@ AgentManager _$AgentManagerFromJson(Map<String, dynamic> json) => AgentManager(
       fullNameKana: json['fullNameKana'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
       email: json['email'] as String?,
+      contactMethods: (json['contactMethods'] as List<dynamic>?)
+          ?.map((e) =>
+              AgentManagerContactResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
@@ -80,6 +84,7 @@ Map<String, dynamic> _$AgentManagerToJson(AgentManager instance) =>
       'fullNameKana': instance.fullNameKana,
       'phoneNumber': instance.phoneNumber,
       'email': instance.email,
+      'contactMethods': instance.contactMethods,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
     };

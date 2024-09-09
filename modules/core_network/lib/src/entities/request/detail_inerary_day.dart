@@ -9,7 +9,7 @@ class Day {
   List<bool>? meals;
   String? placeName;
   String? placeStay;
-  List<Group?>? groups;
+  List<Group>? groups;
 
   Day({
     this.date,
@@ -30,7 +30,7 @@ class Day {
 
 @JsonSerializable()
 class Group {
-  List<Task?>? tasks;
+  List<Task>? tasks;
 
   Group({this.tasks});
 

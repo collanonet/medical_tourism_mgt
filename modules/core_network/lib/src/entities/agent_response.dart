@@ -2,6 +2,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
+import '../../core_network.dart';
 import 'agent_referral_commission_response.dart';
 
 part 'agent_response.g.dart';
@@ -62,6 +63,7 @@ class AgentManager {
   String? fullNameKana;
   String? phoneNumber;
   String? email;
+  List<AgentManagerContactResponse>? contactMethods;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -75,6 +77,7 @@ class AgentManager {
     this.fullNameKana,
     this.phoneNumber,
     this.email,
+    this.contactMethods,
     required this.createdAt,
     required this.updatedAt,
   });

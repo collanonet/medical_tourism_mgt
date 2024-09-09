@@ -874,7 +874,7 @@ abstract class ApiService {
 
   @GET('${EndPoints.DETAIL_ITINERARY}/{id}')
   Future<DetailItineraryResponse> getDetailitinerary({
-    @Path('id') String? id,
+    @Path('id') String id,
   });
 
   @GET(EndPoints.DETAIL_ITINERARY)

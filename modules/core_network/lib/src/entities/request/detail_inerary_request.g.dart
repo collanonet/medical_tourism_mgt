@@ -16,8 +16,7 @@ DetailIneraryRequest _$DetailIneraryRequestFromJson(
       group: (json['group'] as num?)?.toInt(),
       classification: json['classification'] as String?,
       day: (json['day'] as List<dynamic>?)
-          ?.map(
-              (e) => e == null ? null : Day.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Day.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

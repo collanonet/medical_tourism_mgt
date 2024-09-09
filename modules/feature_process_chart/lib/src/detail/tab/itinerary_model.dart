@@ -23,6 +23,7 @@ class ItineraryModel {
         final response = await processChartRepository.getDetailItinerary(id);
         insertItinerary(formGroup, response);
         itinerraryData.value = AsyncData(data: response);
+        logger.d('fetchItinerary success ${response.toJson()}');
       }
     } catch (e) {
       logger.d(e);
@@ -229,7 +230,7 @@ class ItineraryModel {
         patients.add(element['patientName']);
       });
 
-      List<Day>? days = [];
+      List<dynamic>? days = [];
       formGroup.control('day').value.forEach(
         (element) {
           List<bool> meals = [];
@@ -241,7 +242,7 @@ class ItineraryModel {
           element['groups'].forEach(
             (groupElement) {
               List<Task>? tasks = [];
-              groupElement['task'].forEach(
+              groupElement['tasks'].forEach(
                 (taskElement) {
                   tasks.add(
                     Task(
@@ -261,6 +262,7 @@ class ItineraryModel {
               );
             },
           );
+
           days.add(
             Day(
               date: element['date'],
@@ -274,14 +276,13 @@ class ItineraryModel {
       );
       submitData.value = const AsyncData(loading: true);
       DetailIneraryRequest request = DetailIneraryRequest(
-        patient: patients,
+        patient: [],
         tourName: formGroup.control('tourName').value,
         peopleNumber: formGroup.control('peopleNumber').value,
         group: formGroup.control('group').value,
         classification: formGroup.control('classification').value,
         day: days,
       );
-
       final response =
           await processChartRepository.postDetailItinerary(request);
       submitData.value = AsyncData(data: response);

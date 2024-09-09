@@ -45,7 +45,7 @@ FormGroup itineraryForm() => FormGroup(
                   [
                     FormGroup(
                       {
-                        'task': FormArray(
+                        'tasks': FormArray(
                           [
                             FormGroup(
                               {
