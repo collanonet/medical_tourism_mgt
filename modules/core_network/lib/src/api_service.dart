@@ -792,10 +792,18 @@ abstract class ApiService {
 
   @GET(EndPoints.DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER)
   Future<List<DetailRelatedPartiesResponse>>
-      getRelatedPartiesGuideOrInterpreter();
+      getRelatedPartiesGuideOrInterpreter(
+    @Query('tour') String id,
+  );
 
   @POST(EndPoints.DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER)
   Future<DetailRelatedPartiesResponse> postRelatedPartiesGuideOrInterpreter(
+    @Body() DetailRelatedPartiesRequest detailRelatedPartiesRequest,
+  );
+
+  @PUT('${EndPoints.DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER}/{id}')
+  Future<DetailRelatedPartiesResponse> putRelatedPartiesGuideOrInterpreter(
+    @Path('id') String id,
     @Body() DetailRelatedPartiesRequest detailRelatedPartiesRequest,
   );
 
