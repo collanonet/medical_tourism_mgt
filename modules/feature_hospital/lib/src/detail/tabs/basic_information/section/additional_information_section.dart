@@ -110,6 +110,9 @@ class _AdditionalInformationSectionState
                             formControlName: 'files',
                             builder: (context, control, _) {
                               return Wrap(
+                                runAlignment: WrapAlignment.start,
+                                alignment: WrapAlignment.start,
+                                spacing: context.appTheme.spacing.marginMedium,
                                 runSpacing:
                                     context.appTheme.spacing.marginMedium,
                                 children: [
@@ -123,11 +126,20 @@ class _AdditionalInformationSectionState
                                                       fileName: e.url!);
                                                 }
                                               },
-                                              child: Text(
-                                                e.filename ??
-                                                    'File Input .....',
-                                                style:
-                                                    context.textTheme.bodySmall,
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.file_present_outlined,
+                                                    color: context
+                                                        .appTheme.primaryColor,
+                                                  ),
+                                                  Text(
+                                                    e.filename ??
+                                                        'File Input .....',
+                                                    style: context
+                                                        .textTheme.bodySmall,
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                             SizedBox(
@@ -136,7 +148,6 @@ class _AdditionalInformationSectionState
                                             ),
                                             GestureDetector(
                                               onTap: () {
-                                                // change file for this object in array
                                                 filePicker().then((value) {
                                                   if (value != null) {
                                                     int? index = control.value
@@ -145,14 +156,12 @@ class _AdditionalInformationSectionState
                                                                 element
                                                                     .filename ==
                                                                 e.filename);
-                                                    logger.d('index: $index');
                                                     if (index != null) {
                                                       List<FileSelect> data =
                                                           control.value ?? [];
                                                       data[index] = value;
                                                       control.value = data;
                                                       setState(() {});
-                                                      // formGroup.control('files').updateValue(data, updateParent: true, emitEvent: true);
                                                     }
                                                   }
                                                 });
