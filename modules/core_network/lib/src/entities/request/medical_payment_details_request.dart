@@ -4,16 +4,18 @@ import 'package:json_annotation/json_annotation.dart';
 part 'medical_payment_details_request.g.dart';
 @JsonSerializable()
 class MedicalPaymentRequest {
-  String? uploadFile;
-  String? nameOfHospital;
+  String? file;
+  String? theNameOfTheHospital;
   String? documentName;
-  DateTime? dataOfIssue;
+  DateTime? dateOfIssue;
+  String? medicalRecord;
 
   MedicalPaymentRequest({
-    this.uploadFile,
-    this.nameOfHospital,
+    this.file,
+    this.theNameOfTheHospital,
     this.documentName,
-    this.dataOfIssue,
+    this.dateOfIssue,
+    this.medicalRecord,
   });
   factory MedicalPaymentRequest.fromJson(Map<String, dynamic> json) => _$MedicalPaymentRequestFromJson(json);
   Map<String, dynamic> toJson() => _$MedicalPaymentRequestToJson(this);

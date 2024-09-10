@@ -13,7 +13,7 @@ class DetailIneraryRequest {
   int? peopleNumber;
   int? group;
   String? classification;
-  List<Day>? day;
+  List<dynamic>? day;
 
   DetailIneraryRequest({
     this.patient,
@@ -24,6 +24,7 @@ class DetailIneraryRequest {
     this.day,
   });
 
-  factory DetailIneraryRequest.fromJson(Map<String, dynamic> json) => _$DetailIneraryRequestFromJson(json);
+  factory DetailIneraryRequest.fromJson(Map<String, dynamic> json) =>
+      _$DetailIneraryRequestFromJson(json);
   Map<String, dynamic> toJson() => _$DetailIneraryRequestToJson(this);
 }

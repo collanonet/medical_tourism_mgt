@@ -19,9 +19,8 @@ class DomesticMedicalDataModel {
 
   final PatientRepository patientRepository;
 
-
-  ValueNotifier<AsyncData<String>>
-  medicalRecordId = ValueNotifier(const AsyncData());
+  ValueNotifier<AsyncData<String>> medicalRecordId =
+      ValueNotifier(const AsyncData());
 
   ValueNotifier<AsyncData<List<DomesticMedicalDataResponse>>>
       domesticMedicalData = ValueNotifier(const AsyncData());
@@ -61,22 +60,37 @@ class DomesticMedicalDataModel {
           }
         }
       });
+      bool disclosureToPatient;
+      if (formGroup.control('disclosureToPatients').value == 'true') {
+        disclosureToPatient = true;
+      } else {
+        disclosureToPatient = false;
+      }
 
-      final response = await patientRepository
-          .postDomesticMedicalData(DomesticMedicalDataRequest(
-        file: file,
-        nameOfMedicalInstitution:
-            formGroup.control('nameOfMedicalInstitution').value,
-        category: formGroup.control('category').value,
-        documentName: formGroup.control('documentName').value,
-        remark: formGroup.control('remark').value,
-        dateOfIssue: formGroup.control('dateOfIssue').value,
-        sharedUrlIssue: formGroup.control('sharedUrlIssue').value,
-        disclosureToPatients: formGroup.control('disclosureToPatients').value,
-        disclosureToOtherMedicalInstitutions:
-            formGroup.control('disclosureToOtherMedicalInstitutions').value,
-        medicalRecordId: medicalRecordId.value.requireData,
-      ));
+      bool disclosureToOtherMedicalInstitutions;
+      if (formGroup.control('disclosureToOtherMedicalInstitutions').value ==
+          'true') {
+        disclosureToOtherMedicalInstitutions = true;
+      } else {
+        disclosureToOtherMedicalInstitutions = false;
+      }
+
+      final response = await patientRepository.postDomesticMedicalData(
+        DomesticMedicalDataRequest(
+          file: file,
+          medicalInstitutionName:
+              formGroup.control('nameOfMedicalInstitution').value,
+          category: formGroup.control('category').value,
+          documentName: formGroup.control('documentName').value,
+          remarks: formGroup.control('remark').value,
+          dateOfIssue: formGroup.control('dateOfIssue').value,
+          url: formGroup.control('sharedUrlIssue').value,
+          disclosureToPatient: disclosureToPatient,
+          disclosureToOtherMedicalInstitutions:
+              disclosureToOtherMedicalInstitutions,
+          medicalRecord: formGroup.control('medicalRecordId').value,
+        ),
+      );
       domesticMedicalData.value =
           AsyncData(data: domesticMedicalData.value.data!..add(response));
       submit.value = AsyncData(data: response);
@@ -85,4 +99,24 @@ class DomesticMedicalDataModel {
       submit.value = AsyncData(error: e);
     }
   }
+
+  ValueNotifier<AsyncData<bool>> delete = ValueNotifier(const AsyncData());
+
+  Future<void> deleteDomesticMedical(List<String> ids) async {
+    try {
+      delete.value = const AsyncData(loading: true);
+      for (var id in ids) {
+        await patientRepository.deleteDomesticMedical(id);
+        domesticMedicalData.value = AsyncData(
+            data: domesticMedicalData.value.data!
+              ..removeWhere((element) => element.id == id));
+      }
+
+      delete.value = const AsyncData(data: true);
+    } catch (e) {
+      logger.e(e);
+      delete.value = AsyncData(error: e.toString());
+    }
+  }
+
 }

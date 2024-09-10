@@ -10,8 +10,8 @@ import 'hotel_search_form.dart';
 import 'hotel_search_screen.dart';
 
 class HotelSearchPage extends StatelessWidget {
-  const HotelSearchPage({super.key});
-
+  const HotelSearchPage({super.key, required this.id});
+  final String? id;
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(

@@ -8,15 +8,10 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-
-// Package imports:
 import 'package:auto_route/auto_route.dart' as _i3;
-
-// Project imports:
-import 'package:feature_medical_visa/src/medical_visa_page.dart' as _i2;
-
 import 'package:feature_medical_visa/src/detail/medical_visa_detail_page.dart'
     as _i1;
+import 'package:feature_medical_visa/src/medical_visa_page.dart' as _i2;
 
 abstract class $FeatureMedicalVisaRouterModule extends _i3.AutoRouterModule {
   @override

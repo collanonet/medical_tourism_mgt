@@ -4,14 +4,10 @@ import 'package:core_network/entities.dart';
 abstract class PatientRepository {
   //GET_PRE_PATIENTS
 
-  Future<TreamentResponce> getInfoMedicalExamination(
-    String patientId,
-  );
+  Future<TreamentResponce> getInfoMedicalExamination(String patientId,);
 
-  Future<FileResponse> uploadFileBase64(
-    String file,
-    String filename,
-  );
+  Future<FileResponse> uploadFileBase64(String file,
+      String filename,);
 
   Future<Paginated<PrePatient>> prePatients({
     int? page,
@@ -20,18 +16,12 @@ abstract class PatientRepository {
     String? patient,
   });
 
-  Future<PrePatient> postPrePatient(
-    PrePatientRequest prePatient,
-  );
+  Future<PrePatient> postPrePatient(PrePatientRequest prePatient,);
 
-  Future<PrePatient> putPrePatient(
-    String id,
-    PrePatientRequest prePatient,
-  );
+  Future<PrePatient> putPrePatient(String id,
+      PrePatientRequest prePatient,);
 
-  Future<void> deletePrePatient(
-    String id,
-  );
+  Future<void> deletePrePatient(String id,);
 
   //GET_PATIENTS
 
@@ -50,93 +40,55 @@ abstract class PatientRepository {
     String? returnDateto,
   });
 
-  Future<Patient> patient(
-    String id,
-  );
+  Future<Patient> patient(String id,);
 
-  Future<Patient> postPatient(
-    PatientRequest patient,
-  );
+  Future<Patient> postPatient(PatientRequest patient,);
 
-  Future<Patient> putPatient(
-    String id,
-    PatientRequest patient,
-  );
+  Future<Patient> putPatient(String id,
+      PatientRequest patient,);
 
-  Future<void> deletePatient(
-    String id,
-  );
+  Future<void> deletePatient(String id,);
 
   //GET_PATIENT_NAMES
 
-  Future<List<PatientName>> patientNames(
-    String patientId,
-  );
+  Future<List<PatientName>> patientNames(String patientId,);
 
-  Future<List<PatientName>> patientNamesByPatient(
-    String patientId,
-  );
+  Future<List<PatientName>> patientNamesByPatient(String patientId,);
 
-  Future<User> patientUser(
-    String userId,
-  );
+  Future<User> patientUser(String userId,);
 
-  Future<PatientName> postPatientName(
-    PatientNameRequest patientName,
-  );
+  Future<PatientName> postPatientName(PatientNameRequest patientName,);
 
-  Future<PatientName> putPatientName(
-    String id,
-    PatientNameRequest patientName,
-  );
+  Future<PatientName> putPatientName(String id,
+      PatientNameRequest patientName,);
 
-  Future<void> deletePatientName(
-    String id,
-  );
+  Future<void> deletePatientName(String id,);
 
   //GET_PATIENT_NATIONALITIES
-  Future<List<PatientNationality>> patientNationalities(
-    String patientId,
-  );
+  Future<List<PatientNationality>> patientNationalities(String patientId,);
 
-  Future<List<PatientNationality>> patientNationalitiesByPatient(
-    String id,
-  );
+  Future<List<PatientNationality>> patientNationalitiesByPatient(String id,);
 
   Future<PatientNationality> postPatientNationality(
-    PatientNationalityRequest patientNationality,
-  );
+      PatientNationalityRequest patientNationality,);
 
-  Future<PatientNationality> putPatientNationality(
-    String id,
-    PatientNationalityRequest patientNationality,
-  );
+  Future<PatientNationality> putPatientNationality(String id,
+      PatientNationalityRequest patientNationality,);
 
-  Future<void> deletePatientNationality(
-    String id,
-  );
+  Future<void> deletePatientNationality(String id,);
 
   //GET_PATIENT_PASSPORTS
-  Future<List<PatientPassport>> patientPassports(
-    String patientId,
-  );
+  Future<List<PatientPassport>> patientPassports(String patientId,);
 
-  Future<List<PatientPassport>> patientPassportsByPatient(
-    String patientId,
-  );
+  Future<List<PatientPassport>> patientPassportsByPatient(String patientId,);
 
   Future<PatientPassport> postPatientPassport(
-    PatientPassportRequest patientPassport,
-  );
+      PatientPassportRequest patientPassport,);
 
-  Future<PatientPassport> putPatientPassport(
-    String id,
-    PatientPassportRequest patientPassport,
-  );
+  Future<PatientPassport> putPatientPassport(String id,
+      PatientPassportRequest patientPassport,);
 
-  Future<void> deletePatientPassport(
-    String id,
-  );
+  Future<void> deletePatientPassport(String id,);
 
   //GET_MEDICAL_RECORDS
 
@@ -146,333 +98,252 @@ abstract class PatientRepository {
     String? patient,
   });
 
-  Future<List<MedicalRecord>> medicalRecordsByPatient(
-    String patientId,
-  );
+  Future<List<MedicalRecord>> medicalRecordsByPatient(String patientId,);
 
-  Future<MedicalRecord> postMedicalRecord(
-    MedicalRecordRequest medicalRecord,
-  );
+  Future<MedicalRecord> postMedicalRecord(MedicalRecordRequest medicalRecord,);
 
-  Future<MedicalRecord> putMedicalRecord(
-    String id,
-    MedicalRecordRequest medicalRecord,
-  );
+  Future<MedicalRecord> putMedicalRecord(String id,
+      MedicalRecordRequest medicalRecord,);
 
-  Future<void> deleteMedicalRecord(
-    String id,
-  );
+  Future<void> deleteMedicalRecord(String id,);
 
   //GET_MEDICAL_RECORD_AGENTS
 
-  Future<List<MedicalRecordAgent>> medicalRecordAgents(
-    String medicalRecordId,
-  );
+  Future<List<MedicalRecordAgent>> medicalRecordAgents(String medicalRecordId,);
 
   Future<List<MedicalRecordAgent>> medicalRecordAgentsByMedicalRecord(
-    String medicalRecordId,
-  );
+      String medicalRecordId,);
 
   Future<MedicalRecordAgent> postMedicalRecordAgent(
-    MedicalRecordAgentRequest medicalRecordAgent,
-  );
+      MedicalRecordAgentRequest medicalRecordAgent,);
 
-  Future<MedicalRecordAgent> putMedicalRecordAgent(
-    String id,
-    MedicalRecordAgentRequest medicalRecordAgent,
-  );
+  Future<MedicalRecordAgent> putMedicalRecordAgent(String id,
+      MedicalRecordAgentRequest medicalRecordAgent,);
 
-  Future<void> deleteMedicalRecordAgent(
-    String id,
-  );
+  Future<void> deleteMedicalRecordAgent(String id,);
 
   //GET_MEDICAL_RECORD_REFERRERS
 
   Future<List<MedicalRecordReferrer>> medicalRecordReferrers(
-    String medicalRecordId,
-  );
+      String medicalRecordId,);
 
   Future<List<MedicalRecordReferrer>> medicalRecordReferrersByMedicalRecord(
-    String medicalRecordId,
-  );
+      String medicalRecordId,);
 
   Future<MedicalRecordReferrer> postMedicalRecordReferrer(
-    MedicalRecordReferrerRequest medicalRecordAgent,
-  );
+      MedicalRecordReferrerRequest medicalRecordAgent,);
 
-  Future<MedicalRecordReferrer> putMedicalRecordReferrer(
-    String id,
-    MedicalRecordReferrerRequest medicalRecordAgent,
-  );
+  Future<MedicalRecordReferrer> putMedicalRecordReferrer(String id,
+      MedicalRecordReferrerRequest medicalRecordAgent,);
 
-  Future<void> deleteMedicalRecordReferrer(
-    String id,
-  );
+  Future<void> deleteMedicalRecordReferrer(String id,);
 
   // GET_MEDICAL_RECORD_BUDGETS
 
   Future<List<MedicalRecordBudget>> medicalRecordBudgets(
-    String medicalRecordId,
-  );
+      String medicalRecordId,);
 
   Future<List<MedicalRecordBudget>> medicalRecordBudgetsByMedicalRecord(
-    String medicalRecordId,
-  );
+      String medicalRecordId,);
 
   Future<MedicalRecordBudget> postMedicalRecordBudget(
-    MedicalRecordBudgetRequest medicalRecordBudget,
-  );
+      MedicalRecordBudgetRequest medicalRecordBudget,);
 
-  Future<MedicalRecordBudget> putMedicalRecordBudget(
-    String id,
-    MedicalRecordBudgetRequest medicalRecordBudget,
-  );
+  Future<MedicalRecordBudget> putMedicalRecordBudget(String id,
+      MedicalRecordBudgetRequest medicalRecordBudget,);
 
-  Future<void> deleteMedicalRecordBudget(
-    String id,
-  );
+  Future<void> deleteMedicalRecordBudget(String id,);
 
 //GET_MEDICAL_RECORD_COMPANIONS
 
   Future<List<MedicalRecordCompanion>> medicalRecordCompanions(
-    String medicalRecordId,
-  );
+      String medicalRecordId,);
 
   Future<List<MedicalRecordCompanion>> medicalRecordCompanionsByMedicalRecord(
-    String medicalRecordId,
-  );
+      String medicalRecordId,);
 
   Future<MedicalRecordCompanion> postMedicalRecordCompanion(
-    MedicalRecordCompanionRequest medicalRecordCompanion,
-  );
+      MedicalRecordCompanionRequest medicalRecordCompanion,);
 
-  Future<MedicalRecordCompanion> putMedicalRecordCompanion(
-    String id,
-    MedicalRecordCompanionRequest medicalRecordCompanion,
-  );
+  Future<MedicalRecordCompanion> putMedicalRecordCompanion(String id,
+      MedicalRecordCompanionRequest medicalRecordCompanion,);
 
-  Future<void> deleteMedicalRecordCompanion(
-    String id,
-  );
+  Future<void> deleteMedicalRecordCompanion(String id,);
 
 //GET_MEDICAL_RECORD_HOSPITALS
   Future<List<MedicalRecordHospital>> medicalRecordHospitals(
-    String medicalRecordId,
-  );
+      String medicalRecordId,);
 
   Future<List<MedicalRecordHospital>> medicalRecordHospitalsByMedicalRecord(
-    String medicalRecordId,
-  );
+      String medicalRecordId,);
 
   Future<MedicalRecordHospital> postMedicalRecordHospital(
-    MedicalRecordHospitalRequest medicalRecordHospital,
-  );
+      MedicalRecordHospitalRequest medicalRecordHospital,);
 
-  Future<MedicalRecordHospital> putMedicalRecordHospital(
-    String id,
-    MedicalRecordHospitalRequest medicalRecordHospital,
-  );
+  Future<MedicalRecordHospital> putMedicalRecordHospital(String id,
+      MedicalRecordHospitalRequest medicalRecordHospital,);
 
-  Future<void> deleteMedicalRecordHospital(
-    String id,
-  );
+  Future<void> deleteMedicalRecordHospital(String id,);
 
 //GET_MEDICAL_RECORD_INTERPRETERS
   Future<List<MedicalRecordInterpreter>> medicalRecordInterpreters(
-    String medicalRecordId,
-  );
+      String medicalRecordId,);
 
   Future<List<MedicalRecordInterpreter>>
-      medicalRecordInterpretersByMedicalRecord(
-    String medicalRecordId,
-  );
+  medicalRecordInterpretersByMedicalRecord(String medicalRecordId,);
 
   Future<MedicalRecordInterpreter> postMedicalRecordInterpreter(
-    MedicalRecordInterpreterRequest medicalRecordInterpreter,
-  );
+      MedicalRecordInterpreterRequest medicalRecordInterpreter,);
 
-  Future<MedicalRecordInterpreter> putMedicalRecordInterpreter(
-    String id,
-    MedicalRecordInterpreterRequest medicalRecordInterpreter,
-  );
+  Future<MedicalRecordInterpreter> putMedicalRecordInterpreter(String id,
+      MedicalRecordInterpreterRequest medicalRecordInterpreter,);
 
-  Future<void> deleteMedicalRecordInterpreter(
-    String id,
-  );
+  Future<void> deleteMedicalRecordInterpreter(String id,);
 
 //GET_MEDICAL_RECORDS_PROGRESS
   Future<List<MedicalRecordProgress>> medicalRecordsProgress(
-    String medicalRecordId,
-  );
+      String medicalRecordId,);
 
   Future<List<MedicalRecordProgress>> medicalRecordsProgressByMedicalRecord(
-    String medicalRecordId,
-  );
+      String medicalRecordId,);
 
   Future<MedicalRecordProgress> postMedicalRecordProgress(
-    MedicalRecordProgressRequest medicalRecordProgress,
-  );
+      MedicalRecordProgressRequest medicalRecordProgress,);
 
-  Future<MedicalRecordProgress> putMedicalRecordProgress(
-    String id,
-    MedicalRecordProgressRequest medicalRecordProgress,
-  );
+  Future<MedicalRecordProgress> putMedicalRecordProgress(String id,
+      MedicalRecordProgressRequest medicalRecordProgress,);
 
-  Future<void> deleteMedicalRecordProgress(
-    String id,
-  );
+  Future<void> deleteMedicalRecordProgress(String id,);
 
 //GET_MEDICAL_RECORDS_OVERSEAS_DATA
   Future<List<MedicalRecordOverseaData>>
-      medicalRecordOverseaDataByMedicalRecord(
-    String medicalRecordId,
-  );
+  medicalRecordOverseaDataByMedicalRecord(String medicalRecordId,);
 
   Future<MedicalRecordOverseaData> postMedicalRecordOverseaData(
-    MedicalRecordOverseaDataRequest medicalRecordOverseaData,
-  );
+      MedicalRecordOverseaDataRequest medicalRecordOverseaData,);
 
-  Future<MedicalRecordOverseaData> putMedicalRecordOverseaData(
-    String id,
-    MedicalRecordOverseaDataRequest medicalRecordOverseaData,
-  );
+  Future<MedicalRecordOverseaData> putMedicalRecordOverseaData(String id,
+      MedicalRecordOverseaDataRequest medicalRecordOverseaData,);
 
-  Future<void> deleteMedicalRecordOverseaData(
-    String id,
-  );
+  Future<void> deleteMedicalRecordOverseaData(String id,);
 
   Future<MedicalRecordTravelGroup> medicalRecordTravelGroups(
-    String medicalRecord,
-  );
+      String medicalRecord,);
 
   Future<MedicalRecordTravelGroup> postMedicalRecordTravelGroup(
-    MedicalRecordTravelGroupRequest medicalRecordTravelGroup,
-  );
+      MedicalRecordTravelGroupRequest medicalRecordTravelGroup,);
 
   Future<List<MedicalRecordProposal>> getAllMedicalRecordProposals();
 
   Future<List<MedicalRecordProposal>> getMedicalRecordProposalsByMedicalRecord(
-    String medicalRecord,
-  );
+      String medicalRecord,);
 
-  Future<List<MedicalRecordProposal>> getOneMedicalRecordProposal(
-    String id,
-  );
+  Future<List<MedicalRecordProposal>> getOneMedicalRecordProposal(String id,);
 
   Future<MedicalRecordProposal> postMedicalRecordProposal(
-    MedicalRecordProposalRequest medicalRecordProposal,
-  );
+      MedicalRecordProposalRequest medicalRecordProposal,);
 
-  Future<MedicalRecordProposal> putMedicalRecordProposal(
-    String id,
-    MedicalRecordProposalRequest medicalRecordProposal,
-  );
+  Future<MedicalRecordProposal> putMedicalRecordProposal(String id,
+      MedicalRecordProposalRequest medicalRecordProposal,);
 
-  Future<void> deleteMedicalRecordProposal(
-    String id,
-  );
+  Future<void> deleteMedicalRecordProposal(String id,);
+
   Future<MedicalRecordPatientResponseTreatment>
-      getMedicalRecordPatientResponseTreatment({
+  getMedicalRecordPatientResponseTreatment({
     required String medicalRecord,
   });
 
   Future<MedicalRecordPatientResponseTreatment>
-      postMedicalRecordPatientResponseTreatment(
-    MedicalRecordPatientResponseTreatmentRequest
-        medicalRecordPatientResponseTreatment,
-  );
+  postMedicalRecordPatientResponseTreatment(
+      MedicalRecordPatientResponseTreatmentRequest
+      medicalRecordPatientResponseTreatment,);
 
   Future<MedicalRecordPatientResponseMedicalCheckup>
-      getMedicalRecordPatientResponseMedicalCheckup({
+  getMedicalRecordPatientResponseMedicalCheckup({
     required String medicalRecord,
   });
 
   Future<MedicalRecordPatientResponseMedicalCheckup>
-      postMedicalRecordPatientResponseMedicalCheckup(
-    MedicalRecordPatientResponseMedicalCheckupRequest
-        medicalRecordPatientResponseMedicalCheckup,
-  );
+  postMedicalRecordPatientResponseMedicalCheckup(
+      MedicalRecordPatientResponseMedicalCheckupRequest
+      medicalRecordPatientResponseMedicalCheckup,);
 
   Future<MedicalRecordPatientResponseOther>
-      getMedicalRecordPatientResponseOther({
+  getMedicalRecordPatientResponseOther({
     required String medicalRecord,
   });
 
   Future<MedicalRecordPatientResponseOther>
-      postMedicalRecordPatientResponseOther(
-    MedicalRecordPatientResponseOtherRequest medicalRecordPatientResponseOther,
-  );
+  postMedicalRecordPatientResponseOther(
+      MedicalRecordPatientResponseOtherRequest medicalRecordPatientResponseOther,);
 
   Future<MedicalRecordSummary> getMedicalRecordSummary({
     required String medicalRecord,
   });
 
   Future<MedicalRecordSummary> postMedicalRecordSummary(
-    MedicalRecordSummaryRequest medicalRecordSummary,
-  );
+      MedicalRecordSummaryRequest medicalRecordSummary,);
 
   Future<WebBookingPatientPreferredDate> getWebBookingPatientPreferredDate(
-    String medicalRecord,
-  );
+      String medicalRecord,);
 
   Future<List<WebBookingMedicalRecordResponse>> getBookingMedicalRecord({
     required String medicalRecord,
   });
 
   Future<WebBookingMedicalRecordResponse> postBookingMedicalRecord(
-    WebBookingMedicalRecordRequest webBookingMedicalRecord,
-  );
+      WebBookingMedicalRecordRequest webBookingMedicalRecord,);
 
   Future<ApplicationRegenerativeMedicalResponse>
-      getApplicationRegenerattiveMedical({
+  getApplicationRegenerattiveMedical({
     required String medicalRecord,
   });
 
   Future<ApplicationRegenerativeMedicalResponse>
-      postApplicationRegenerattiveMedical(
-          ApplicationRegenerativeMedicalRequest
-              applicationRegenerativeMedicalRequest);
+  postApplicationRegenerattiveMedical(ApplicationRegenerativeMedicalRequest
+  applicationRegenerativeMedicalRequest);
 
   Future<ApplicationBeautyResponse> getApplicationBeauty({
     required String medicalRecord,
   });
 
   Future<ApplicationBeautyResponse> postApplicationBeauty(
-    ApplicationBeautyRequest applicationBeautyRequest,
-  );
+      ApplicationBeautyRequest applicationBeautyRequest,);
 
   Future<ApplicationBloodPurificationTherapyResponse>
-      getApplicationBloodPurificationTherapy({
+  getApplicationBloodPurificationTherapy({
     required String medicalRecord,
   });
 
   Future<ApplicationBloodPurificationTherapyResponse>
-      postApplicationBloodPurificationTherapy(
-    ApplicationBloodPurificationTherapyRequest
-        applicationBloodPurificationTherapyRequest,
-  );
+  postApplicationBloodPurificationTherapy(
+      ApplicationBloodPurificationTherapyRequest
+      applicationBloodPurificationTherapyRequest,);
 
   Future<ApplicationRiskTestResponse> getApplicationRiskTest({
     required String medicalRecord,
   });
 
   Future<ApplicationRiskTestResponse> postApplicationRiskTest(
-    ApplicationRiskTestRequest applicationRiskTestRequest,
-  );
+      ApplicationRiskTestRequest applicationRiskTestRequest,);
 
-  Future<List<DomesticMedicalDataResponse>> getDomesticMedicalData({required String medicalRecordId});
+  Future<List<DomesticMedicalDataResponse>> getDomesticMedicalData(
+      {required String medicalRecordId});
 
   Future<DomesticMedicalDataResponse> postDomesticMedicalData(
-    DomesticMedicalDataRequest domesticMedicalDataRequest,
-  );
+      DomesticMedicalDataRequest domesticMedicalDataRequest,);
 
-  Future<List<MedicalPaymentResponse>> getMedicalPayment({required String medicalRecordId});
+  Future<List<MedicalPaymentResponse>> getMedicalPayment(
+      {required String medicalRecordId});
 
   Future<MedicalPaymentResponse> postMedicalPayment(
-    MedicalPaymentRequest medicalPaymentRequest,
-  );
+      MedicalPaymentRequest medicalPaymentRequest,);
+
+  Future<void> deleteMedicalPayment(String id);
 
   Future<void> closePatientAccount(String id);
+
+  Future<void> deleteDomesticMedical(String id);
 
   // web booking v2
 
@@ -490,7 +361,8 @@ abstract class PatientRepository {
 
   Future<TreamentResponce> getBookingByPatientId(String patientId);
 
-  Future<TreamentResponce> updateBooking(String treatmentId, TreamentRequest treatmentRequest);
+  Future<TreamentResponce> updateBooking(String treatmentId,
+      TreamentRequest treatmentRequest);
 
   Future<List<WebBookingMedicalRecordResponse>> webBookingGetReservationAll({
     String? hospitalName,
@@ -513,5 +385,16 @@ abstract class PatientRepository {
       String reservationId, WebBookingMedicalRecordRequest request);
 
   Future<void> webBookingDeleteReservation(String reservationId);
+
+  //A9
+  Future<List<MedicalRecordFileSummaryResponse>> getSummaryList(String patientId);
+
+  Future<void> deleteSummaryList(String patientId);
+
+  Future<List<MedicalRecordFileSummaryResponse>> getFileSummaryBySummaryId(String summaryId);
+
+ Future<MedicalRecordFileSummaryResponse> postFileSummary(MedicalRecordFileSummaryRequest fileRequest);
+
+  Future<void> deleteFileSummary(String id);
 }
 

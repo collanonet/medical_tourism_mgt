@@ -161,10 +161,25 @@ class HospitalRepositoryIml extends HospitalRepository {
   Future<List<BasicInformationHospitalResponse>> getHospitals({
     int? page,
     int? pageSize,
+    String? hospitalName,
+    String? type,
+    String? location,
+    String? rHave,
+    bool? hospitalType1,
+    bool? hospitalType2,
+    bool? hospitalType3,
+    bool? hospitalType4,
   }) {
     return remote.getHospitals(
       page: page,
       pageSize: pageSize,
+      hospitalName: hospitalName,
+      type: type,
+      location: location,
+      rHave: rHave,
+      hospitalType1: hospitalType1,
+      hospitalType2: hospitalType2,
+      hospitalType3: hospitalType3,
     );
   }
 
@@ -381,5 +396,10 @@ class HospitalRepositoryIml extends HospitalRepository {
   @override
   Future<TreamentResponce> updateBooking(String treatmentId, TreamentRequest treatmentRequest) {
     return remote.updateBooking(treatmentId, treatmentRequest);
+  }
+
+  @override
+  Future<void> deleteTreatmentTeleMenu(String value) {
+    return remote.deleteTreatmentTeleMenu(value);
   }
 }

@@ -19,6 +19,8 @@ part 'detail_itinerary_data_response.g.dart';
 
 @JsonSerializable()
 class Task {
+   @JsonKey(name: '_id')
+  final String? id;
   String? placeName;
   String? timeFrom;
   String? timeTo;
@@ -26,6 +28,7 @@ class Task {
   String? itinerary;
 
   Task({
+    this.id,
     this.placeName,
     this.timeFrom,
     this.timeTo,
@@ -44,9 +47,14 @@ class Task {
 
 @JsonSerializable()
 class Group {
-  List<Task>? task;
+  @JsonKey(name: '_id')
+  final String? id;
+  List<Task>? tasks;
 
-  Group({this.task});
+  Group({
+    this.tasks,
+    this.id,
+  });
 
   factory Group.fromJson(Map<String, dynamic> json) {
     return _$GroupFromJson(json);
@@ -59,6 +67,8 @@ class Group {
 
 @JsonSerializable()
 class Day {
+  @JsonKey(name: '_id')
+  final String? id;
   DateTime? date;
   List<bool>? meals;
   String? placeName;
@@ -66,6 +76,7 @@ class Day {
   List<Group>? groups;
 
   Day({
+    this.id,
     this.date,
     this.meals,
     this.placeName,

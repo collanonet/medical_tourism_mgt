@@ -1,6 +1,8 @@
 // Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
+import '../../entities.dart';
+
 part 'treatment_menu_response.g.dart';
 
 @JsonSerializable()
@@ -29,13 +31,3 @@ class TreatmentMenuResponse {
   Map<String, dynamic> toJson() => _$TreatmentMenuResponseToJson(this);
 }
 
-@JsonSerializable()
-class TaxModel {
-  double? cost;
-  int? tax;
-  TaxModel({this.cost, this.tax});
-
-  factory TaxModel.fromJson(Map<String, dynamic> json) =>
-      _$TaxModelFromJson(json);
-  Map<String, dynamic> toJson() => _$TaxModelToJson(this);
-}

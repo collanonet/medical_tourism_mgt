@@ -37,7 +37,6 @@ class MedicalRecordSummary {
   final String? patientsAddressStay;
   final String? emergencyContact;
   final String? remarks;
-  final List<String>? attachDocuments;
   String medicalRecord;
   final DateTime createdAt;
   final DateTime updatedAt;
@@ -74,7 +73,6 @@ class MedicalRecordSummary {
     this.patientsAddressStay,
     this.emergencyContact,
     this.remarks,
-    this.attachDocuments,
     required this.medicalRecord,
     required this.createdAt,
     required this.updatedAt,

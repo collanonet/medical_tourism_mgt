@@ -12,12 +12,12 @@ import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
-class MedicalPaymentDetailModel{
+class MedicalPaymentDetailModel {
   MedicalPaymentDetailModel({
     required this.patientRepository,
   });
 
-   final PatientRepository patientRepository;
+  final PatientRepository patientRepository;
 
   // late Patient _patient;
 
@@ -26,29 +26,31 @@ class MedicalPaymentDetailModel{
   // Future<void> initialData({Patient? patient, String? id}) async {
   //   notifyListeners();
   // }
-  ValueNotifier<AsyncData<List<MedicalPaymentResponse>>> medicalPaymentData = ValueNotifier(const AsyncData());
-  Future<void> fetchMedicalPayment({required String id}) async{
-    try{
+  ValueNotifier<AsyncData<List<MedicalPaymentResponse>>> medicalPaymentData =
+      ValueNotifier(const AsyncData());
+  Future<void> fetchMedicalPayment({required String id}) async {
+    try {
       medicalPaymentData.value = const AsyncData(loading: true);
-      final reponse = await patientRepository.getMedicalPayment(medicalRecordId: id);
-      medicalPaymentData.value =  AsyncData(data: reponse );
-
-      }catch(e){
-        logger.d(e);
-        medicalPaymentData.value = AsyncData(error: e);
-      }
+      final reponse =
+          await patientRepository.getMedicalPayment(medicalRecordId: id);
+      medicalPaymentData.value = AsyncData(data: reponse);
+    } catch (e) {
+      logger.d(e);
+      medicalPaymentData.value = AsyncData(error: e);
+    }
   }
 
-  ValueNotifier<AsyncData<MedicalPaymentResponse>> submit = ValueNotifier(const AsyncData());
-  Future<void> submitMedicalPayment(FormGroup formGroup) async{
-    try{
+  ValueNotifier<AsyncData<MedicalPaymentResponse>> submit =
+      ValueNotifier(const AsyncData());
+  Future<void> submitMedicalPayment(FormGroup formGroup) async {
+    try {
       submit.value = const AsyncData(loading: true);
       String? file;
       await Future(() async {
-        if (formGroup.control('uploadFile').value != null) {
+        if (formGroup.control('file').value != null) {
           try {
             // convert Uint8List to base64
-            FileSelect docFile = formGroup.control('uploadFile').value;
+            FileSelect docFile = formGroup.control('file').value;
             String base64Image = base64Encode(docFile.file!);
             FileResponse fileData = await patientRepository.uploadFileBase64(
               base64Image,
@@ -63,19 +65,39 @@ class MedicalPaymentDetailModel{
 
       final response = await patientRepository.postMedicalPayment(
         MedicalPaymentRequest(
-          uploadFile: file,
-          nameOfHospital: formGroup.control('name_of_hospital').value,
+          file: file,
+          theNameOfTheHospital: formGroup.control('theNameOfTheHospital').value,
           documentName: formGroup.control('documentName').value,
-          dataOfIssue: formGroup.control('data_of_issue').value,
-        )
+          dateOfIssue: formGroup.control('dateOfIssue').value,
+          medicalRecord: formGroup.control('medicalRecordId').value,
+        ),
       );
-      submit.value = AsyncData(data: response );
-      medicalPaymentData.value = AsyncData(data: medicalPaymentData.value.data!..add(response));
-
-    }catch(e){
+      submit.value = AsyncData(data: response);
+      medicalPaymentData.value =
+          AsyncData(data: medicalPaymentData.value.data!..add(response));
+    } catch (e) {
       logger.d(e);
       submit.value = AsyncData(error: e);
     }
   }
 
+  
+  ValueNotifier<AsyncData<bool>> delete = ValueNotifier(const AsyncData());
+
+  Future<void> deleteMaterials(List<String> ids) async {
+    try {
+      delete.value = const AsyncData(loading: true);
+      for (var id in ids) {
+        await patientRepository.deleteMedicalPayment(id);
+        medicalPaymentData.value = AsyncData(
+            data: medicalPaymentData.value.data!
+              ..removeWhere((element) => element.id == id));
+      }
+
+      delete.value = const AsyncData(data: true);
+    } catch (e) {
+      logger.e(e);
+      delete.value = AsyncData(error: e.toString());
+    }
+  }
 }

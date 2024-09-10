@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:core_network/core_network.dart';
+import 'package:core_ui/resources.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,12 +10,15 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 // Project imports:
+import 'fileForm/file_form.dart';
+import 'fileForm/popup_file_form.dart';
 import 'normal_summary_model.dart';
 import 'pick_medical_data_file_page.dart';
 
@@ -26,6 +31,7 @@ class NormalSummaryScreen extends StatefulWidget {
 
 class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
   final formatter = InputFormatter();
+
   @override
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
@@ -130,7 +136,8 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                             ),
                                             decoration: InputDecoration(
                                               filled: true,
-                                              fillColor: const Color(0xffF0F3F5),
+                                              fillColor:
+                                                  const Color(0xffF0F3F5),
                                               label: const Text(
                                                 '生年月日', // TODO: l10n 対応 (生年月日) (dateOfBirth)
                                               ),
@@ -960,61 +967,109 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                           SizedBox(
                             height: context.appTheme.spacing.marginMedium,
                           ),
-                          InkWell(
-                            onTap: () {
-                              showMedicalDataFilePicker(context);
-                            },
-                            child: Container(
-                              padding: EdgeInsets.all(
-                                context.appTheme.spacing.marginExtraLarge,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(
-                                  context.appTheme.spacing.borderRadiusMedium,
-                                )),
-                                border: Border.all(
-                                  color: context.appTheme.primaryColor,
-                                ),
-                              ),
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    Icons.copy_all_rounded,
-                                    size: 50,
-                                    color: context.appTheme.primaryColor,
-                                  ),
-                                  ElevatedButton(
-                                    onPressed: () {
-                                      showMedicalDataFilePicker(context);
-                                    },
-                                    child: const Text(
-                                      '書類を選択する',
-                                      style: TextStyle(
-                                        fontFamily: 'NotoSansJP',
-                                        package: 'core_ui',
-                                        color: Colors.white,
+                          ValueListenableBuilder(
+                              valueListenable: context
+                                  .read<NormalSummaryModel>()
+                                  .fileSummaryListData,
+                              builder: (context, value, _) {
+                                return Wrap(
+                                  crossAxisAlignment: WrapCrossAlignment.start,
+                                  alignment: WrapAlignment.start,
+                                  spacing:
+                                      context.appTheme.spacing.marginMedium,
+                                  runSpacing:
+                                      context.appTheme.spacing.marginMedium,
+                                  children: [
+                                    ...value.data?.map((e) => InkWell(
+                                              onTap: () {
+                                                openUrlInBrowser(
+                                                    fileName: e.pathFile ?? '');
+                                              },
+                                              child: Avatar.network(
+                                                e.pathFile,
+                                                placeholder: const AssetImage(
+                                                  Images.logoMadical,
+                                                  package: 'core_ui',
+                                                ),
+                                                shape: BoxShape.rectangle,
+                                                customSize:
+                                                    const Size(300, 250),
+                                              ),
+                                            )) ??
+                                        [],
+                                    InkWell(
+                                      onTap: () {
+                                        filePicker().then((value) {
+                                          if (value != null) {
+                                            showCreateWithFileDialog(
+                                                context, value);
+                                          }
+                                        });
+                                      },
+                                      child: Container(
+                                        width: 300,
+                                        height: 250,
+                                        padding: EdgeInsets.all(
+                                          context.appTheme.spacing
+                                              .marginExtraLarge,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.all(Radius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium,
+                                          )),
+                                          border: Border.all(
+                                            color:
+                                                context.appTheme.primaryColor,
+                                          ),
+                                        ),
+                                        child: Column(
+                                          mainAxisSize: MainAxisSize.min,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
+                                          children: [
+                                            Icon(
+                                              Icons.copy_all_rounded,
+                                              size: 50,
+                                              color:
+                                                  context.appTheme.primaryColor,
+                                            ),
+                                            ElevatedButton(
+                                              onPressed: () {
+                                                filePicker().then((value) {
+                                                  if (value != null) {
+                                                    showCreateWithFileDialog(
+                                                        context, value);
+                                                  }
+                                                });
+                                              },
+                                              child: const Text(
+                                                '書類を選択する',
+                                                style: TextStyle(
+                                                  fontFamily: 'NotoSansJP',
+                                                  package: 'core_ui',
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        ),
                                       ),
-                                    ),
-                                  )
-                                ],
-                              ),
-                            ),
-                          )
+                                    )
+                                  ],
+                                );
+                              }),
                         ],
                       ),
                     ),
                   ),
                   ValueListenableListener(
-                    valueListenable: context
-                        .read<NormalSummaryModel>()
-                        .createMedicalRecordSummary,
+                    valueListenable:
+                        context.read<NormalSummaryModel>().submitData,
                     onListen: () {
-                      final value = context
-                          .read<NormalSummaryModel>()
-                          .createMedicalRecordSummary
-                          .value;
+                      final value =
+                          context.read<NormalSummaryModel>().submitData.value;
 
                       if (value.hasData) {
                         snackBarWidget(
@@ -1034,17 +1089,24 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                       }
                     },
                     child: ReactiveFormConsumer(builder: (context, form, _) {
-                      return ElevatedButton(
-                        onPressed: form.invalid
-                            ? null
-                            : () {
-                                context
-                                    .read<NormalSummaryModel>()
-                                    .createUpdateMedicalRecordSummary(
-                                        formGroup);
-                              },
-                        child: const Text('保存'),
-                      );
+                      return ValueListenableBuilder(
+                          valueListenable:
+                              context.read<NormalSummaryModel>().submitData,
+                          builder: (context, value, _) {
+                            return ElevatedButton(
+                              onPressed: value.loading || form.invalid
+                                  ? null
+                                  : () {
+                                      context
+                                          .read<NormalSummaryModel>()
+                                          .submitSummary(formGroup);
+                                    },
+                              child: WithLoadingButton(
+                                isLoading: value.loading,
+                                child: const Text('保存'),
+                              ),
+                            );
+                          });
                     }),
                   )
                 ],
@@ -1052,11 +1114,22 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
             ));
   }
 
-  void showMedicalDataFilePicker(BuildContext context) {
+  void showCreateWithFileDialog(BuildContext context, FileSelect file) {
     showDialog(
       context: context,
-      builder: (context) => const AlertDialog(
-        content: PickMedicalDataFilePage(),
+      builder: (_) => Provider.value(
+        value: context.read<NormalSummaryModel>(),
+        child: AlertDialog(
+          content: ReactiveFormConfig(
+            validationMessages: validationMessages,
+            child: ReactiveFormBuilder(
+              form: () => summaryFileForm(file: file)..markAllAsTouched(),
+              builder: (context, formGroup, child) {
+                return const PopupFileForm();
+              },
+            ),
+          ),
+        ),
       ),
     );
   }

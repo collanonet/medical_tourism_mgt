@@ -10,20 +10,22 @@ MedicalPaymentResponse _$MedicalPaymentResponseFromJson(
         Map<String, dynamic> json) =>
     MedicalPaymentResponse(
       id: json['_id'] as String,
-      uploadFile: json['uploadFile'] as String?,
-      nameOfHospital: json['nameOfHospital'] as String?,
+      file: json['file'] as String?,
+      theNameOfTheHospital: json['theNameOfTheHospital'] as String?,
       documentName: json['documentName'] as String?,
-      dataOfIssue: json['dataOfIssue'] == null
+      dateOfIssue: json['dateOfIssue'] == null
           ? null
-          : DateTime.parse(json['dataOfIssue'] as String),
+          : DateTime.parse(json['dateOfIssue'] as String),
+      medicalRecord: json['medicalRecord'] as String?,
     );
 
 Map<String, dynamic> _$MedicalPaymentResponseToJson(
         MedicalPaymentResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
-      'uploadFile': instance.uploadFile,
-      'nameOfHospital': instance.nameOfHospital,
+      'file': instance.file,
+      'theNameOfTheHospital': instance.theNameOfTheHospital,
       'documentName': instance.documentName,
-      'dataOfIssue': instance.dataOfIssue?.toIso8601String(),
+      'dateOfIssue': instance.dateOfIssue?.toIso8601String(),
+      'medicalRecord': instance.medicalRecord,
     };

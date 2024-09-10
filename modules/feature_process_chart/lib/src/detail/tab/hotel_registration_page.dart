@@ -10,8 +10,8 @@ import 'hotel_registration_model.dart';
 import 'hotel_registration_screen.dart';
 
 class HotelRegistrationPage extends StatelessWidget {
-  const HotelRegistrationPage({super.key});
-
+  const HotelRegistrationPage({super.key, required this.id});
+  final String? id;
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(

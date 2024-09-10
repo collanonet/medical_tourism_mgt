@@ -14,9 +14,11 @@ class SideBarMenu extends StatelessWidget {
   const SideBarMenu({
     super.key,
     required this.selectedIndex,
+    required this.appVersion,
   });
 
   final int selectedIndex;
+  final String appVersion;
 
   @override
   Widget build(BuildContext context) {
@@ -169,6 +171,17 @@ class SideBarMenu extends StatelessWidget {
                   ),
                 ),
               ),
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16.0, 2, 16, 16),
+                child: Text(
+                  'version: $appVersion',
+                  style: const TextStyle(
+                    color: Colors.grey,
+                    fontFamily: 'NotoSansJP',
+                    package: 'core_ui',
+                  ),
+                ),
+              ),
               Divider(
                 endIndent: 20,
                 indent: 4,
@@ -187,7 +200,8 @@ class SideBarMenu extends StatelessWidget {
                       builder: (BuildContext context) {
                         return AlertDialog(
                           title: const Text('Logout'),
-                          content: const Text('Are you sure you want to log out?'),
+                          content:
+                              const Text('Are you sure you want to log out?'),
                           actions: [
                             TextButton(
                               onPressed: () {

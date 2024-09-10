@@ -113,6 +113,8 @@ class Popup extends StatelessWidget {
           children: [
             Expanded(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
                     '更新日',
@@ -133,9 +135,6 @@ class Popup extends StatelessWidget {
                               //dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
                           decoration: InputDecoration(
-                            label: const Text(
-                              '更新日',
-                            ),
                             suffixIcon: IconButton(
                               icon: const Icon(
                                 CupertinoIcons.calendar,

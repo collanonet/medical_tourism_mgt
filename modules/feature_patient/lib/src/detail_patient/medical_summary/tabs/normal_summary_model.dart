@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 
 // Package imports:
@@ -25,6 +27,10 @@ class NormalSummaryModel {
   ValueNotifier<AsyncData<MedicalRecord>> medicalRecord =
       ValueNotifier<AsyncData<MedicalRecord>>(const AsyncData());
 
+  ValueNotifier<AsyncData<List<MedicalRecordFileSummaryResponse>>>
+      fileSummaryListData =
+      ValueNotifier(const AsyncData<List<MedicalRecordFileSummaryResponse>>());
+
   Future<void> getMedicalRecords(
       {String? patientId, required FormGroup formGroup}) async {
     logger.d('patientId: $patientId');
@@ -47,6 +53,10 @@ class NormalSummaryModel {
               patientId: patientId, formGroup: formGroup);
           await getPatientNames(patientId: patientId, formGroup: formGroup);
           await getMedicalRecordSummary(formGroup);
+
+          if (!medicalRecordSummary.value.hasData) {
+            await createUpdateMedicalRecordSummary(formGroup);
+          }
         } else {
           medicalRecord.value = const AsyncData();
         }
@@ -92,16 +102,14 @@ class NormalSummaryModel {
     formGroup.control('mobileNumberPatient').value = data.mobileNumber;
   }
 
-  getMedicalRecordSummary(FormGroup formGroup) async {
+  Future<void> getMedicalRecordSummary(FormGroup formGroup) async {
     try {
-      logger.d('medicalRecord: ${medicalRecord.value.requireData.id}');
       medicalRecordSummary.value = const AsyncData(loading: true);
       var result = await patientRepository.getMedicalRecordSummary(
           medicalRecord: medicalRecord.value.requireData.id);
-
-      logger.d('result: $result');
       medicalRecordSummary.value = AsyncData(data: result);
       insertDataToForm(formGroup, result);
+      await fetchSummaryList(result.id);
     } catch (e) {
       logger.e(e);
       medicalRecordSummary.value = AsyncData(error: e);
@@ -136,16 +144,6 @@ class NormalSummaryModel {
       'patientsAddressStay': result.patientsAddressStay,
       'emergencyContact': result.emergencyContact,
       'remarks': result.remarks,
-      // 'attachDocuments': result.attachDocuments
-      //         ?.map((e) => FormGroup({
-      //               'attachDocumentsName': FormControl<String>(value: e),
-      //             }))
-      //         .toList() ??
-      //     [
-      //       FormGroup({
-      //         'attachDocumentsName': FormControl<String>(),
-      //       })
-      //     ],
       'medicalRecord': medicalRecord.value.requireData.id,
     });
   }
@@ -180,32 +178,43 @@ class NormalSummaryModel {
     required PatientName data,
     required FormGroup formGroup,
   }) {
-    formGroup.control('namePassport').value = '${data.familyNameRomanized} ${data.middleNameRomanized} ${data.firstNameRomanized}';
+    formGroup.control('namePassport').value =
+        '${data.familyNameRomanized} ${data.middleNameRomanized} ${data.firstNameRomanized}';
     formGroup.control('nameChineseKanjiVietnamese').value =
         '${data.familyNameChineseOrVietnamese} ${data.middleNameChineseOrVietnamese} ${data.firstNameChineseOrVietnamese}';
-    formGroup.control('nameKana').value = '${data.familyNameJapaneseForChinese} ${data.middleNameJapaneseForChinese} ${data.firstNameJapaneseForChinese}';
+    formGroup.control('nameKana').value =
+        '${data.familyNameJapaneseForChinese} ${data.middleNameJapaneseForChinese} ${data.firstNameJapaneseForChinese}';
   }
 
-  void createUpdateMedicalRecordSummary(FormGroup formGroup) async {
+  Future<void> fetchSummaryList(String summaryId) async {
+    try {
+      fileSummaryListData.value = const AsyncData(loading: true);
+      final response =
+          await patientRepository.getFileSummaryBySummaryId(summaryId);
+      fileSummaryListData.value = AsyncData(data: response);
+    } catch (e) {
+      logger.e(e);
+      fileSummaryListData.value = AsyncData(error: e.toString());
+    }
+  }
+
+  ValueNotifier<AsyncData<bool>> submitData = ValueNotifier(const AsyncData());
+
+  // submit page
+  Future<void> submitSummary(FormGroup formGroup) async {
+    try {
+      submitData.value = const AsyncData(loading: true);
+      await createUpdateMedicalRecordSummary(formGroup);
+      submitData.value = const AsyncData(data: true);
+    } catch (e) {
+      logger.e(e);
+      submitData.value = AsyncData(error: e);
+    }
+  }
+
+  Future<void> createUpdateMedicalRecordSummary(FormGroup formGroup) async {
     try {
       medicalRecordSummary.value = const AsyncData(loading: true);
-
-      List<String?> attachDocuments = [];
-      if (formGroup.control('attachDocuments').value != null) {
-        for (var i = 0;
-            i <
-                (formGroup.control('attachDocuments').value as List<dynamic>)
-                    .length;
-            i++) {
-          if ((formGroup.control('attachDocuments').value as List<dynamic>)[i]
-                  ['attachDocumentsName'] !=
-              null) {
-            attachDocuments.add((formGroup.control('attachDocuments').value
-                as List<dynamic>)[i]['attachDocumentsName']);
-          }
-        }
-      }
-
       var request = MedicalRecordSummaryRequest(
         entryDate: formGroup.control('entryDate').value,
         namePassport: formGroup.control('namePassport').value,
@@ -243,19 +252,58 @@ class NormalSummaryModel {
         patientsAddressStay: formGroup.control('patientsAddressStay').value,
         emergencyContact: formGroup.control('emergencyContact').value,
         remarks: formGroup.control('remarks').value,
-        attachDocuments: attachDocuments,
         medicalRecord: medicalRecord.value.requireData.id,
       );
-
-      logger.d('request: ${request.toJson()}');
       var result = await patientRepository.postMedicalRecordSummary(request);
-      logger.d('result: $result');
       medicalRecordSummary.value = AsyncData(data: result);
       createMedicalRecordSummary.value = AsyncData(data: result);
     } catch (e) {
       logger.e(e);
       medicalRecordSummary.value = AsyncData(error: e);
       createMedicalRecordSummary.value = AsyncData(error: e);
+    }
+  }
+
+  ValueNotifier<AsyncData<bool>> submitFile = ValueNotifier(const AsyncData());
+
+  Future<void> uploadFileSummary(FormGroup formGroup) async {
+    try {
+      submitFile.value = const AsyncData(loading: true);
+      FileSelect fileUpdate = formGroup.control('file').value;
+      String? pathFile;
+      if (fileUpdate.file != null) {
+        try {
+          String base64Image = base64Encode(fileUpdate.file!);
+          var filUpload = await patientRepository.uploadFileBase64(
+              base64Image, fileUpdate.filename ?? '');
+          pathFile = filUpload.filename;
+        } catch (e) {
+          logger.e(e);
+          pathFile = null;
+        }
+      }
+
+      if (pathFile != null) {
+        var fileRequest = MedicalRecordFileSummaryRequest(
+          pathFile: pathFile,
+          documentName: formGroup.control('documentName').value,
+          publicationDate: formGroup.control('publicationDate').value,
+          share: formGroup.control('share').value,
+          disclosureToAgent: formGroup.control('disclosureToAgent').value,
+          recordSummary: medicalRecordSummary.value.requireData.id,
+          medicalRecord: medicalRecord.value.requireData.id,
+        );
+
+        var result = await patientRepository.postFileSummary(fileRequest);
+        fileSummaryListData.value = AsyncData(data: [
+          ...fileSummaryListData.value.data ?? [],
+          result,
+        ]);
+      }
+      submitFile.value = const AsyncData(data: true);
+    } catch (e) {
+      logger.e(e);
+      submitFile.value = AsyncData(error: e);
     }
   }
 }

@@ -51,6 +51,28 @@ class Popup extends StatelessWidget {
             IntrinsicWidth(
               stepWidth: 300,
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    'ファイル名',
+                    style: Theme.of(context).textTheme.bodySmall,
+                  ),
+                  IntrinsicWidth(
+                    stepWidth: 300,
+                    child: ReactiveTextField<String>(
+                      formControlName: 'DocumentName',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: context.appTheme.spacing.marginMedium,
+            ),
+            IntrinsicWidth(
+              stepWidth: 300,
+              child: Column(
                 children: [
                   Text(
                     '更新日',
@@ -71,9 +93,6 @@ class Popup extends StatelessWidget {
                             dateTimeFormat: DateFormat('yyyy/MM/dd'),
                           ),
                           decoration: InputDecoration(
-                            label: const Text(
-                              '更新日',
-                            ),
                             suffixIcon: IconButton(
                               icon: const Icon(
                                 CupertinoIcons.calendar,
@@ -87,31 +106,6 @@ class Popup extends StatelessWidget {
                           ],
                         );
                       },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            IntrinsicWidth(
-              stepWidth: 300,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'ファイル名',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  IntrinsicWidth(
-                    stepWidth: 300,
-                    child: ReactiveTextField<String>(
-                      formControlName: 'DocumentName',
-                      decoration: const InputDecoration(
-                        hintText: 'ファイル名',
-                      ),
                     ),
                   ),
                 ],

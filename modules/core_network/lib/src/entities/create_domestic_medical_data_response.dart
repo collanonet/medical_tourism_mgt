@@ -7,29 +7,29 @@ part 'create_domestic_medical_data_response.g.dart';
 class DomesticMedicalDataResponse {
   @JsonKey(name: '_id')
   final String id;
-  String? file;
-  String? nameOfMedicalInstitution;
+   String? file;
+  String? medicalInstitutionName;
   String? category;
   String? documentName;
-  String? remark;
+  String? remarks;
   DateTime? dateOfIssue;
-  String? sharedUrlIssue;
-  String? disclosureToPatients;
-  String? disclosureToOtherMedicalInstitutions;
-  String medicalRecordId;
+  String? url;
+  bool? disclosureToPatient;
+  bool? disclosureToOtherMedicalInstitutions;
+  String? medicalRecord;
 
   DomesticMedicalDataResponse({
     required this.id,
     this.file,
-    this.nameOfMedicalInstitution,
+    this.medicalInstitutionName,
     this.category,
     this.documentName,
-    this.remark,
+    this.remarks,
     this.dateOfIssue,
-    this.sharedUrlIssue,
-    this.disclosureToPatients,
+    this.url,
+    this.disclosureToPatient,
     this.disclosureToOtherMedicalInstitutions,
-    required this.medicalRecordId,
+     this.medicalRecord,
   });
 
   factory DomesticMedicalDataResponse.fromJson(Map<String, dynamic> json) =>

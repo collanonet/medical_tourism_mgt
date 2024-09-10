@@ -1,3 +1,4 @@
+import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
@@ -111,7 +112,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                   color: context.appTheme.primaryColor,
                                 ),
                                 Text(
-                                  '次月',
+                                  '前月',
                                   style: context.textTheme.titleMedium
                                       ?.copyWith(
                                           color: context.appTheme.primaryColor),
@@ -245,23 +246,23 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                         SizedBox(width: context.appTheme.spacing.marginMedium),
                         ReactiveFormConsumer(
                           builder: (context, form, _) {
+                            return OutlinedButton(
+                              onPressed: () {
+                                formGroup.reset();
+                                model.fetchItinerary();
+                              },
+                              child: Text(context.l10n.actionClear),
+                            );
+                          },
+                        ),
+                        const SizedBox(width: 10),
+                        ReactiveFormConsumer(
+                          builder: (context, form, _) {
                             return ElevatedButton(
                               onPressed: () {
-                                context
-                                    .read<ProcessChartModel>()
-                                    .fetchItinerary(
-                                      //id: formGroup.control('_id').value,
-                                      tourName:
-                                          formGroup.control('tourName').value,
-                                      classification: formGroup
-                                          .control('classification')
-                                          .value,
-                                      dateFrom:
-                                          formGroup.control('dateFrom').value,
-                                      dateTo: formGroup.control('dateTo').value,
-                                    );
+                                model.fetchItinerary(form: formGroup);
                               },
-                              child: Text('検索'),
+                              child: const Text('検索'),
                             );
                           },
                         ),

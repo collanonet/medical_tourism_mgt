@@ -26,13 +26,13 @@ Map<String, dynamic> _$DayToJson(Day instance) => <String, dynamic>{
     };
 
 Group _$GroupFromJson(Map<String, dynamic> json) => Group(
-      task: (json['task'] as List<dynamic>?)
+      tasks: (json['tasks'] as List<dynamic>?)
           ?.map((e) => Task.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
 Map<String, dynamic> _$GroupToJson(Group instance) => <String, dynamic>{
-      'task': instance.task,
+      'tasks': instance.tasks,
     };
 
 Task _$TaskFromJson(Map<String, dynamic> json) => Task(

@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:core_utils/core_utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -6,11 +8,17 @@ import 'package:flutter/services.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
+import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:skeletonizer/skeletonizer.dart';
+
+import '../treatment_model.dart';
 
 class TreatmentMenuSection extends StatefulWidget {
   const TreatmentMenuSection({super.key, required this.hospitalId});
+
   final String hospitalId;
+
   @override
   State<TreatmentMenuSection> createState() => _TreatmentMenuSectionState();
 }
@@ -24,294 +32,355 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
         .control('treatmentMenu') as FormArray;
 
     final taxRateFormArray =
-        (ReactiveForm.of(context) as FormGroup).control('cost') as FormArray;
+        (ReactiveForm.of(context) as FormGroup).control('tax') as FormArray;
 
-    return ColumnSeparated(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      separatorBuilder: (context, index) => SizedBox(
-        height: context.appTheme.spacing.formSpacing,
-      ),
-      children: [
-        Text(
-          '治療メニュー',
-          style: context.textTheme.bodyLarge,
-        ),
-        RowSeparated(
-            separatorBuilder: (context, index) => SizedBox(
-                  width: context.appTheme.spacing.formSpacing,
+    return ValueListenableBuilder(
+        valueListenable: context.read<TreatmentModel>().treatmentMenuData,
+        builder: (context, value, _) {
+          return  Padding(
+            padding: const EdgeInsets.only(right: 32),
+            child: Skeletonizer(
+              enabled: value.loading,
+              child: ColumnSeparated(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                separatorBuilder: (context, index) => SizedBox(
+                  height: context.appTheme.spacing.formSpacing,
                 ),
-            children: [
-              Expanded(
-                child: RowSeparated(
-                  separatorBuilder: (context, index) => SizedBox(
-                    width: context.appTheme.spacing.formSpacing,
+                children: [
+                  Text(
+                    '治療メニュー',
+                    style: context.textTheme.bodyLarge,
                   ),
-                  children: [
-                    Expanded(
-                        flex: 2,
-                        child: Text('項目', style: context.textTheme.bodyMedium)),
-                    Expanded(
-                        flex: 1,
-                        child: Text('治療費用（税別）',
-                            style: context.textTheme.bodyMedium)),
-                    Expanded(
-                        flex: 1,
-                        child: Text('治療費用（税込）',
-                            style: context.textTheme.bodyMedium)),
-                    ReactiveFormArray(
-                        formArrayName: 'cost',
-                        builder: (context, formArray, child) {
-                          final row = formArray.controls
-                              .map((control) => control as FormGroup)
-                              .map(
-                                (currentForm) => IntrinsicWidth(
-                                  stepWidth: 80,
-                                  child: ReactiveForm(
-                                    formGroup: currentForm,
-                                    child: SizedBox(
-                                      width: 80,
-                                      child: ReactiveTextField(
-                                        keyboardType: TextInputType.number,
-                                        inputFormatters: [
-                                          FilteringTextInputFormatter.allow(
-                                              RegExp(r'[0-9]')),
-                                        ],
-                                        formControlName: 'cost',
-                                        decoration: const InputDecoration(
-                                          prefixText: 'R ',
-                                          suffixText: ' %',
-                                        ),
-                                      ),
+                  //header
+                  header(context),
+                  //body
+                  listForm(taxRateFormArray),
+                  ValueListenableBuilder(
+                      valueListenable: addIncludeTax,
+                      builder: (context, value, _) {
+                        return InkWell(
+                          onTap: () {
+                            formArray.add(
+                              FormGroup({
+                                '_id': FormControl<String>(),
+                                'hospitalId':
+                                    FormControl<String>(value: widget.hospitalId),
+                                'project': FormControl<String>(),
+                                'treatmentCostExcludingTax':
+                                    FormControl<double>(),
+                                'treatmentCostTaxIncluded': FormControl<double>(),
+                                'remark': FormControl<String>(),
+                                'treatmentCostTax': FormArray([
+                                  FormGroup({
+                                    'cost': FormControl<double>(
+                                      value: 0,
                                     ),
-                                  ),
-                                ),
-                              );
-                          return RowSeparated(
-                            separatorBuilder: (context, index) => SizedBox(
-                              width: context.appTheme.spacing.formSpacing,
-                            ),
-                            children: row.toList(),
-                          );
-                        })
-                  ],
-                ),
-              ),
-              const SizedBox(
-                width: 8,
-              ),
-              IntrinsicWidth(
-                  stepWidth: 250,
-                  child: Text('準備検査', style: context.textTheme.bodyMedium))
-            ]),
-        RowSeparated(
-          separatorBuilder: (context, index) => SizedBox(
-            width: context.appTheme.spacing.formSpacing,
-          ),
-          children: [
-            Expanded(
-              child: ReactiveFormArray(
-                formArrayName: 'treatmentMenu',
-                builder: (context, formArray, child) {
-                  final row = formArray.controls.map(
-                    (control) => ReactiveForm(
-                      formGroup: control as FormGroup,
-                      child: RowSeparated(
-                        separatorBuilder: (context, index) => SizedBox(
-                          width: context.appTheme.spacing.formSpacing,
-                        ),
-                        children: [
-                          Expanded(
-                            flex: 2,
-                            child: ReactiveTextField(
-                              formControlName: 'project',
-                            ),
+                                    'tax': FormControl<int>(value: 15),
+                                  }),
+                                  ...List.generate(value - 1, (index) {
+                                    return FormGroup({
+                                      'cost': FormControl<double>(
+                                        value: 0,
+                                      ),
+                                      'tax': FormControl<int>(),
+                                    });
+                                  })
+                                ])
+                              }),
+                            );
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.add_circle,
+                                color: context.appTheme.primaryColor,
+                              ),
+                              SizedBox(
+                                width: context.appTheme.spacing.marginSmall,
+                              ),
+                              Text(
+                                '担当者を追加',
+                                style: TextStyle(
+                                    color: context.appTheme.primaryColor),
+                              )
+                            ],
                           ),
-                          Expanded(
-                              flex: 1,
-                              child: ReactiveTextField<double>(
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp(r'[0-9]')),
-                                ],
-                                formControlName: 'treatmentCostExcludingTax',
-                              )),
-                          Expanded(
-                              flex: 1,
-                              child: ReactiveTextField<double>(
-                                keyboardType: TextInputType.number,
-                                inputFormatters: [
-                                  FilteringTextInputFormatter.allow(
-                                      RegExp(r'[0-9]')),
-                                ],
-                                formControlName: 'treatmentCostTaxIncluded',
-                              )),
-                          ReactiveFormArray(
-                            formArrayName: 'treatmentCostTax',
-                            builder: (context, formArray, child) {
-                              final row = formArray.controls
-                                  .map((control) => control as FormGroup)
-                                  .map(
-                                    (currentForm) => IntrinsicWidth(
-                                      stepWidth: 70,
-                                      child: ReactiveForm(
-                                        formGroup: currentForm,
-                                        child: ReactiveTextField(
-                                          keyboardType: TextInputType.number,
-                                          inputFormatters: [
-                                            FilteringTextInputFormatter.allow(
-                                                RegExp(r'[0-9]')),
-                                          ],
-                                          formControlName: 'cost',
-                                        ),
-                                      ),
-                                    ),
-                                  );
-
-                              return ValueListenableListener(
-                                valueListenable: addIncludeTax,
-                                onListen: () {
-                                  // add into row of treatment
-                                  formArray.add(
-                                    FormGroup({
-                                      'cost': FormControl<double>(),
-                                      'tax': FormControl<int>(value: 15),
-                                    }),
-                                  );
-                                },
-                                child: RowSeparated(
-                                  separatorBuilder: (context, index) =>
-                                      SizedBox(
-                                          width: context
-                                              .appTheme.spacing.formSpacing),
-                                  children: row.toList(),
-                                ),
-                              );
-                            },
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                  return ColumnSeparated(
-                    separatorBuilder: (context, index) => SizedBox(
-                      height: context.appTheme.spacing.formSpacing,
-                    ),
-                    children: row.toList(),
-                  );
-                },
+                        );
+                      }),
+                ],
               ),
             ),
-            InkWell(
-                onTap: () {
-                  if (addIncludeTax.value <= 3) {
-                    addIncludeTax.value += 1;
-                    // add into header
-                    taxRateFormArray.add(
-                      FormGroup({
-                        'cost': FormControl<int>(),
-                      }),
-                    );
-                  }
-                },
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(Icons.add_circle,
-                        color: context.appTheme.primaryColor),
-                    const RotatedBox(quarterTurns: 1, child: Text('行を追加')),
-                  ],
-                )),
-            IntrinsicWidth(
-              stepWidth: 250,
-              child: ReactiveFormArray(
+          );
+        });
+  }
+
+  Row listForm(FormArray<dynamic> taxRateFormArray) {
+    return Row(
+      children: [
+        Expanded(
+          child: RowSeparated(
+            separatorBuilder: (context, index) => SizedBox(
+              width: context.appTheme.spacing.marginMedium,
+            ),
+            children: [
+              Expanded(
+                child: ReactiveFormArray(
                   formArrayName: 'treatmentMenu',
                   builder: (context, formArray, child) {
-                    final rows =
-                        formArray.controls.map((control) => ReactiveForm(
-                            formGroup: control as FormGroup,
-                            child: RowSeparated(
-                              separatorBuilder: (context, index) => SizedBox(
-                                width: context.appTheme.spacing.formSpacing,
+                    final row = formArray.controls.map(
+                      (control) => ReactiveForm(
+                        formGroup: control as FormGroup,
+                        child: RowSeparated(
+                          separatorBuilder: (context, index) => SizedBox(
+                            width: context.appTheme.spacing.formSpacing,
+                          ),
+                          children: [
+                            Expanded(
+                              flex: 2,
+                              child: ReactiveTextField(
+                                formControlName: 'project',
                               ),
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: ReactiveTextField(
-                                    formControlName: 'remark',
+                            ),
+                            Expanded(
+                                flex: 1,
+                                child: ReactiveTextField<double>(
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9]')),
+                                  ],
+                                  formControlName: 'treatmentCostExcludingTax',
+                                )),
+                            Expanded(
+                                flex: 1,
+                                child: ReactiveTextField<double>(
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9]')),
+                                  ],
+                                  formControlName: 'treatmentCostTaxIncluded',
+                                )),
+                            ReactiveFormArray(
+                              formArrayName: 'treatmentCostTax',
+                              builder: (context, formArray, child) {
+                                final row = formArray.controls
+                                    .map((control) => control as FormGroup)
+                                    .map(
+                                      (currentForm) => SizedBox(
+                                        width: 65,
+                                        child: ReactiveForm(
+                                          formGroup: currentForm,
+                                          child: ReactiveTextField(
+                                            keyboardType: TextInputType.number,
+                                            inputFormatters: [
+                                              FilteringTextInputFormatter.allow(
+                                                  RegExp(r'[0-9]')),
+                                            ],
+                                            formControlName: 'cost',
+                                          ),
+                                        ),
+                                      ),
+                                    );
+
+                                return ValueListenableListener(
+                                  valueListenable: addIncludeTax,
+                                  onListen: () {
+                                    // add into row of treatment
+                                    formArray.add(
+                                      FormGroup({
+                                        'cost': FormControl<double>(value: 0),
+                                        'tax': FormControl<int>(value: 15),
+                                      }),
+                                    );
+                                  },
+                                  child: RowSeparated(
+                                    separatorBuilder: (context, index) =>
+                                        SizedBox(
+                                            width: context
+                                                .appTheme.spacing.formSpacing),
+                                    children: row.toList(),
+                                  ),
+                                );
+                              },
+                            )
+                          ],
+                        ),
+                      ),
+                    );
+                    return ColumnSeparated(
+                      separatorBuilder: (context, index) => SizedBox(
+                        height: context.appTheme.spacing.formSpacing,
+                      ),
+                      children: row.toList(),
+                    );
+                  },
+                ),
+              ),
+            ],
+          ),
+        ),
+        SizedBox(
+            width: 50,
+            child: ValueListenableBuilder<int>(
+              valueListenable: addIncludeTax,
+              builder: (context, value, _) {
+                final isDisabled = value >= 3;
+                return InkWell(
+                  onTap: isDisabled
+                      ? null
+                      : () {
+                          addIncludeTax.value += 1;
+                          taxRateFormArray.add(
+                            FormGroup({
+                              'tax': FormControl<int>(
+                                value: 0,
+                              ),
+                            }),
+                          );
+                        },
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.add_circle,
+                        color: isDisabled
+                            ? Colors.grey
+                            : context.appTheme.primaryColor,
+                      ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginSmall,
+                      ),
+                      RotatedBox(
+                        quarterTurns: 1,
+                        child: Text(
+                          '行を追加',
+                          style: TextStyle(
+                            color: isDisabled
+                                ? Colors.grey
+                                : context.appTheme.primaryColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                );
+              },
+            )),
+        SizedBox(
+          width: 250,
+          child: ReactiveFormArray(
+              formArrayName: 'treatmentMenu',
+              builder: (context, formArray, child) {
+                final rows = formArray.controls.map((control) => ReactiveForm(
+                    formGroup: control as FormGroup,
+                    child: RowSeparated(
+                      separatorBuilder: (context, index) => SizedBox(
+                        width: context.appTheme.spacing.marginMedium,
+                      ),
+                      children: [
+                        Expanded(
+                          child: ReactiveTextField(
+                            formControlName: 'remark',
+                          ),
+                        ),
+                        if (formArray.controls.indexOf(control) == 0)
+                          SizedBox(
+                            width: 25,
+                          ),
+                        if (formArray.controls.indexOf(control) != 0)
+                          SizedBox(
+                            width: 25,
+                            child: IconButton(
+                              icon: const Icon(
+                                Icons.remove_circle,
+                                color: Colors.red,
+                              ),
+                              onPressed: () {
+                                formArray.removeAt(
+                                    formArray.controls.indexOf(control));
+                              },
+                            ),
+                          ),
+                      ],
+                    )));
+                return ColumnSeparated(
+                    separatorBuilder: (context, index) => SizedBox(
+                          height: context.appTheme.spacing.formSpacing,
+                        ),
+                    children: rows.toList());
+              }),
+        )
+      ],
+    );
+  }
+
+  Row header(BuildContext context) {
+    return Row(
+      children: [
+        Expanded(
+          child: RowSeparated(
+            separatorBuilder: (context, index) => SizedBox(
+              width: context.appTheme.spacing.marginMedium,
+            ),
+            children: [
+              Expanded(
+                  flex: 2,
+                  child: Text('項目', style: context.textTheme.bodyMedium)),
+              Expanded(
+                  flex: 1,
+                  child: Text('治療費用（税別）', style: context.textTheme.bodyMedium)),
+              Expanded(
+                  flex: 1,
+                  child: Text('治療費用（税込）', style: context.textTheme.bodyMedium)),
+              ReactiveFormArray(
+                  formArrayName: 'tax',
+                  builder: (context, formArray, child) {
+                    final row = formArray.controls
+                        .map((control) => control as FormGroup)
+                        .map(
+                          (currentForm) => IntrinsicWidth(
+                            stepWidth: 65,
+                            child: ReactiveForm(
+                              formGroup: currentForm,
+                              child: SizedBox(
+                                width: 65,
+                                child: ReactiveTextField(
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9]')),
+                                  ],
+                                  formControlName: 'tax',
+                                  decoration: InputDecoration(
+                                    prefixText: 'R ',
+                                    suffixText: ' %',
+                                    contentPadding: EdgeInsets.all(4),
                                   ),
                                 ),
-                                if (formArray.controls.indexOf(control) != 0)
-                                  IconButton(
-                                    icon: const Icon(
-                                      Icons.remove_circle,
-                                      color: Colors.red,
-                                    ),
-                                    onPressed: () {
-                                      formArray.removeAt(
-                                          formArray.controls.indexOf(control));
-                                    },
-                                  ),
-                              ],
-                            )));
-                    return ColumnSeparated(
-                        separatorBuilder: (context, index) => SizedBox(
-                              height: context.appTheme.spacing.formSpacing,
+                              ),
                             ),
-                        children: rows.toList());
-                  }),
-            )
-          ],
+                          ),
+                        );
+                    return RowSeparated(
+                      separatorBuilder: (context, index) => SizedBox(
+                        width: context.appTheme.spacing.formSpacing,
+                      ),
+                      children: row.toList(),
+                    );
+                  })
+            ],
+          ),
         ),
-        ValueListenableBuilder(
-            valueListenable: addIncludeTax,
-            builder: (context, value, _) {
-              return InkWell(
-                onTap: () {
-                  formArray.add(
-                    FormGroup({
-                      // todo: add id field
-                      'hospitalId':
-                          FormControl<String>(value: widget.hospitalId),
-                      'project': FormControl<String>(),
-                      'treatmentCostExcludingTax': FormControl<double>(),
-                      'treatmentCostTaxIncluded': FormControl<double>(),
-                      'remark': FormControl<String>(),
-                      'treatmentCostTax': FormArray([
-                        FormGroup({
-                          'cost': FormControl<double>(),
-                          'tax': FormControl<int>(value: 15),
-                        }),
-                        ...List.generate(value - 1, (index) {
-                          return FormGroup({
-                            'cost': FormControl<double>(),
-                            'tax': FormControl<int>(),
-                          });
-                        })
-                      ])
-                    }),
-                  );
-                },
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.add_circle,
-                      color: context.appTheme.primaryColor,
-                    ),
-                    SizedBox(
-                      width: context.appTheme.spacing.marginSmall,
-                    ),
-                    Text(
-                      '担当者を追加',
-                      style: TextStyle(color: context.appTheme.primaryColor),
-                    )
-                  ],
-                ),
-              );
-            }),
+        const SizedBox(
+          width: 50,
+        ),
+        IntrinsicWidth(
+            stepWidth: 250,
+            child: Text('準備検査', style: context.textTheme.bodyMedium))
       ],
     );
   }

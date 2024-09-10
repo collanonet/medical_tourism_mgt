@@ -18,214 +18,190 @@ class AgentScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ColumnSeparated(
-      separatorBuilder: (BuildContext context, int index) {
-        return const SizedBox(height: 16);
-      },
-      children: [
-        const AgentFilter(),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                context.router.push(AgentDetailRoute());
-              },
-              child: const Text('新規登録'),
-            ),
-          ],
-        ),
-        Expanded(
-          child: ValueListenableBuilder(
-              valueListenable: context.watch<AgentModel>().agents,
-              builder: (context, value, child) {
-                return Container(
+    return Consumer<AgentModel>(
+      builder: (context, model, _) {
+        return Skeletonizer(
+          enabled: model.agents.value.loading,
+          child: ColumnSeparated(
+            separatorBuilder: (BuildContext context, int index) {
+              return const SizedBox(height: 16);
+            },
+            children: [
+              const AgentFilter(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      context.router.push(AgentDetailRoute());
+                    },
+                    child: const Text('新規登録'),
+                  ),
+                ],
+              ),
+              Expanded(
+                child: Container(
                   padding: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     color: Colors.white,
                   ),
-                  child: Skeletonizer(
-                    enabled: value.loading,
-                    child: ColumnSeparated(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      separatorBuilder: (BuildContext context, int index) {
-                        return const SizedBox(height: 8);
-                      },
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: RowSeparated(
-                              separatorBuilder:
-                                  (BuildContext context, int index) {
-                                return const SizedBox(width: 16);
+                  child: ColumnSeparated(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const SizedBox(height: 8);
+                    },
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: RowSeparated(
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return const SizedBox(width: 16);
+                            },
+                            children: [
+                              Expanded(
+                                flex: 2,
+                                child: Text(
+                                  '担当者名',
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                              ),
+                              Expanded(
+                                flex: 2,
+                                child: Text(
+                                  '会社名',
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                              ),
+                              // Expanded(
+                              //   child: Text(
+                              //     '国',
+                              //     style: context.textTheme.bodyMedium,
+                              //   ),
+                              // ),
+                              Expanded(
+                                child: Text(
+                                  '地域',
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  '過去実績案件数',
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  '連絡方法１',
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                              ),
+                              Expanded(
+                                child: Text(
+                                  '連絡方法２',
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                              ),
+                            ]),
+                      ),
+                      Expanded(
+                        child: ListView.builder(
+                          itemCount: model.agents.value.data?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            var value = model.agents.value.data![index];
+                            return InkWell(
+                              onTap: () {
+                                context.router.push(
+                                    AgentDetailRoute(id: value.id.toString()));
                               },
-                              children: [
-                                Expanded(
-                                  flex: 2,
-                                  child: Text(
-                                    '担当者名',
-                                    style: context.textTheme.bodyMedium,
-                                  ),
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: index.isEven
+                                      ? context.appTheme.primaryColor
+                                          .withOpacity(0.1)
+                                      : Colors.white,
                                 ),
-                                Expanded(
-                                  flex: 2,
-                                  child: Text(
-                                    '会社名',
-                                    style: context.textTheme.bodyMedium,
-                                  ),
-                                ),
-                                // Expanded(
-                                //   child: Text(
-                                //     '国',
-                                //     style: context.textTheme.bodyMedium,
-                                //   ),
-                                // ),
-                                Expanded(
-                                  child: Text(
-                                    '地域',
-                                    style: context.textTheme.bodyMedium,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    '過去実績案件数',
-                                    style: context.textTheme.bodyMedium,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    '連絡方法１',
-                                    style: context.textTheme.bodyMedium,
-                                  ),
-                                ),
-                                Expanded(
-                                  child: Text(
-                                    '連絡方法２',
-                                    style: context.textTheme.bodyMedium,
-                                  ),
-                                ),
-                              ]),
-                        ),
-                        Expanded(
-                            child: ListView.builder(
-                                itemCount: value.data?.length ?? 0,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                    onTap: () {
-                                      context.router.push(AgentDetailRoute(
-                                          id: value.requireData[index].id
-                                              .toString()));
+                                padding: const EdgeInsets.all(8.0),
+                                child: RowSeparated(
+                                    separatorBuilder:
+                                        (BuildContext context, int index) {
+                                      return const SizedBox(width: 16);
                                     },
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        color: index.isEven
-                                            ? context.appTheme.primaryColor
-                                                .withOpacity(0.1)
-                                            : Colors.white,
-                                      ),
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: RowSeparated(
-                                          separatorBuilder:
-                                              (BuildContext context,
-                                                  int index) {
-                                            return const SizedBox(width: 16);
-                                          },
+                                    children: [
+                                      Expanded(
+                                        flex: 2,
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.start,
                                           children: [
-                                            Expanded(
-                                              flex: 2,
-                                              child: Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.start,
-                                                children: [
-                                                  Text(
-                                                    value
-                                                            .requireData[index]
-                                                            .manager
-                                                            ?.fullNameRomanji ??
-                                                        '--',
-                                                    style: context
-                                                        .textTheme.bodyMedium,
-                                                  ),
-                                                  Text(
-                                                    '${value.requireData[index].manager?.fullNameChineseKanjiVietnameseNotation ?? '--'} / ${value.requireData[index].manager?.fullNameJapaneseKanjiChineseOnly ?? '--'}',
-                                                    style: context
-                                                        .textTheme.bodySmall,
-                                                  ),
-                                                ],
-                                              ),
+                                            Text(
+                                              value.manager?.fullNameRomanji ??
+                                                  '--',
+                                              style:
+                                                  context.textTheme.bodyMedium,
                                             ),
-                                            Expanded(
-                                              flex: 2,
-                                              child: Text(
-                                                value.requireData[index]
-                                                        .companyName ??
-                                                    '--',
-                                                style: context
-                                                    .textTheme.bodyMedium,
-                                              ),
+                                            Text(
+                                              '${value.manager?.fullNameChineseKanjiVietnameseNotation ?? '--'} / ${value.manager?.fullNameJapaneseKanjiChineseOnly ?? '--'}',
+                                              style:
+                                                  context.textTheme.bodySmall,
                                             ),
-                                            Expanded(
-                                              child: Text(
-                                                value.requireData[index].area ??
-                                                    '--',
-                                                style: context
-                                                    .textTheme.bodyMedium,
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                value.requireData[index]
-                                                        .pastCasesNumber
-                                                        ?.toString() ??
-                                                    '--',
-                                                style: context
-                                                    .textTheme.bodyMedium,
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                value
-                                                        .requireData[index]
-                                                        .referralCommissions
-                                                        ?.firstOrNull
-                                                        ?.referralCommissionName ??
-                                                    '--',
-                                                style: context
-                                                    .textTheme.bodyMedium,
-                                              ),
-                                            ),
-                                            Expanded(
-                                              child: Text(
-                                                value
-                                                            .requireData[index]
-                                                            .referralCommissions!
-                                                            .length >
-                                                        1
-                                                    ? value
-                                                            .requireData[index]
-                                                            .referralCommissions![
-                                                                1]
-                                                            .referralCommissionName ??
-                                                        '--'
-                                                    : '--',
-                                                style: context
-                                                    .textTheme.bodyMedium,
-                                              ),
-                                            ),
-                                          ]),
-                                    ),
-                                  );
-                                })),
-                      ],
-                    ),
+                                          ],
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Text(
+                                          value.companyName ?? '--',
+                                          style: context.textTheme.bodyMedium,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          value.area ?? '--',
+                                          style: context.textTheme.bodyMedium,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          value.pastCasesNumber?.toString() ??
+                                              '--',
+                                          style: context.textTheme.bodyMedium,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          value.manager?.contactMethods?[0]
+                                                  .howToContact ??
+                                              '--',
+                                          style: context.textTheme.bodyMedium,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          value.manager?.contactMethods?[0]
+                                                  .howToContactQrCode ??
+                                              '',
+                                          style: context.textTheme.bodyMedium,
+                                        ),
+                                      ),
+                                    ]),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
-                );
-              }),
-        ),
-      ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

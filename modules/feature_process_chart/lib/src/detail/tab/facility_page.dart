@@ -10,7 +10,8 @@ import 'facility_model.dart';
 import 'facility_screen.dart';
 
 class FacilityPage extends StatelessWidget {
-  const FacilityPage({super.key});
+  const FacilityPage({super.key, required this.id});
+  final String? id;
 
   @override
   Widget build(BuildContext context) {

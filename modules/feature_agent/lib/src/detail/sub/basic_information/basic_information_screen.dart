@@ -1062,9 +1062,7 @@ class _AgentBasicInformationScreenState
                                 'fullNameJapaneseKanjiChineseOnly':
                                     FormControl<String>(),
                                 'fullNameKana': FormControl<String>(),
-                                'phoneNumber': FormControl<String>(
-                                  validators: [Validators.required],
-                                ),
+                                'phoneNumber': FormControl<String>(),
                                 'email': FormControl<String>(
                                   validators: [
                                     Validators.required,
@@ -1147,7 +1145,7 @@ class _AgentBasicInformationScreenState
                           package: 'core_ui',
                         ),
                         shape: BoxShape.rectangle,
-                        customSize: const Size(200, 200),
+                        customSize: const Size(200, 380),
                       )
                     : Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
@@ -1174,10 +1172,13 @@ class _AgentBasicInformationScreenState
                           ),
                           ElevatedButton(
                             onPressed: () {
-                              filePicker().then((value) {
-                                currentForm.control('nameCardDragDrop').value =
-                                    value;
-                              });
+                              filePicker().then(
+                                (value) {
+                                  currentForm
+                                      .control('nameCardDragDrop')
+                                      .value = value;
+                                },
+                              );
                             },
                             child: const Text(
                               'またはファイルを選択する',

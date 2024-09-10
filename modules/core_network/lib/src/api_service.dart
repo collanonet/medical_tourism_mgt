@@ -602,12 +602,10 @@ abstract class ApiService {
   Future<List<AgentResponse>> getAgents({
     @Query('companyName') String? companyName,
     @Query('nameKana') String? nameKana,
-    @Query('postalCode') String? postalCode,
-    @Query('address') String? address,
+    @Query('country') String? country,
     @Query('area') String? area,
-    @Query('phoneNumber') String? phoneNumber,
-    @Query('transactionStartDate') DateTime? transactionStartDate,
-    @Query('howToMainPayment') String? howToMainPayment,
+    @Query('fullNameJapaneseKanjiChineseOnly')
+    String? fullNameJapaneseKanjiChineseOnly,
     @Query('pastCasesNumber') int? pastCasesNumber,
   });
 
@@ -711,7 +709,6 @@ abstract class ApiService {
 
   //E1
 
-
   @POST(EndPoints.FILTER_PROCESS_CHART_PATIENT)
   Future<PatientFilterResponse> postFilterpatientChart(
     @Body() PatientFilterRequst patientFilterRequst,
@@ -795,10 +792,18 @@ abstract class ApiService {
 
   @GET(EndPoints.DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER)
   Future<List<DetailRelatedPartiesResponse>>
-      getRelatedPartiesGuideOrInterpreter();
+      getRelatedPartiesGuideOrInterpreter(
+    @Query('tour') String id,
+  );
 
   @POST(EndPoints.DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER)
   Future<DetailRelatedPartiesResponse> postRelatedPartiesGuideOrInterpreter(
+    @Body() DetailRelatedPartiesRequest detailRelatedPartiesRequest,
+  );
+
+  @PUT('${EndPoints.DETAIL_RELATED_PARTIES_GUIDE_OR_INERPRETER}/{id}')
+  Future<DetailRelatedPartiesResponse> putRelatedPartiesGuideOrInterpreter(
+    @Path('id') String id,
     @Body() DetailRelatedPartiesRequest detailRelatedPartiesRequest,
   );
 
@@ -878,14 +883,12 @@ abstract class ApiService {
 
   @GET('${EndPoints.DETAIL_ITINERARY}/{id}')
   Future<DetailItineraryResponse> getDetailitinerary({
-    @Path('id') String? id,
-   
+    @Path('id') required String id,
   });
 
-  
   @GET(EndPoints.DETAIL_ITINERARY)
   Future<List<DetailItineraryResponse>> getPatientChart({
-     @Query('tourName') String? tourName,
+    @Query('tourName') String? tourName,
     @Query('classification') String? classification,
     @Query('dateFrom') DateTime? dateFrom,
     @Query('dateTo') DateTime? dateTo,
@@ -1040,6 +1043,14 @@ abstract class ApiService {
   Future<List<BasicInformationHospitalResponse>> getHospitals({
     @Query('page') int? page,
     @Query('pageSize') int? pageSize,
+    @Query('hospitalName') String? hospitalName,
+    @Query('type') String? type,
+    @Query('location') String? location,
+    @Query('rHave') String? rHave,
+    @Query('hospitalType1') bool? hospitalType1,
+    @Query('hospitalType2') bool? hospitalType2,
+    @Query('hospitalType3') bool? hospitalType3,
+    @Query('hospitalType4') bool? hospitalType4,
   });
 
   /// end get basic information of hospital C3 Page
@@ -1148,7 +1159,7 @@ abstract class ApiService {
   );
 
   @DELETE('${EndPoints.CONTRANT_AGENT}/{id}')
-  Future<ContrantAgentResponse> deleteContractAgent(
+  Future<void> deleteContractAgent(
     @Path('id') String id,
   );
 
@@ -1167,7 +1178,7 @@ abstract class ApiService {
     @Path('id') String id,
   );
 
-  @GET('${EndPoints.DOMESTIC_MEDICAL_DATA}/{id}')
+  @GET('${EndPoints.DOMESTIC_MEDICAL_DATA}/by-medical-record/{id}')
   Future<List<DomesticMedicalDataResponse>> getDomesticMedicalData({
     @Path('id') required String id,
   });
@@ -1177,7 +1188,12 @@ abstract class ApiService {
     @Body() DomesticMedicalDataRequest domesticMedicalDataRequest,
   );
 
-  @GET('${EndPoints.MEDICAL_PAYMENT_DETAIL}/{id}')
+  @DELETE('${EndPoints.DOMESTIC_MEDICAL_DATA}/{id}')
+  Future<void> deleteDomesticMedical(
+    @Path('id') String id,
+  );
+
+  @GET('${EndPoints.MEDICAL_PAYMENT_DETAIL}/by-medical-record/{id}')
   Future<List<MedicalPaymentResponse>> getMedicalPaymentDetail({
     @Path('id') required String id,
   });
@@ -1185,6 +1201,11 @@ abstract class ApiService {
   @POST(EndPoints.MEDICAL_PAYMENT_DETAIL)
   Future<MedicalPaymentResponse> postMedicalPaymentDetail(
     @Body() MedicalPaymentRequest medicalPaymentRequest,
+  );
+
+  @DELETE('${EndPoints.MEDICAL_PAYMENT_DETAIL}/{id}')
+  Future<void> deleteMedicalPaymentDetail(
+    @Path('id') String id,
   );
 
   @GET(EndPoints.INVOICE_DETAIL)
@@ -1293,10 +1314,15 @@ abstract class ApiService {
     @Body() TreatmentTeleMenuRequest treatmentTeleMenuRequest,
   );
 
-  @PUT(EndPoints.TREATMENT_TELE_MENU)
+  @PUT('${EndPoints.TREATMENT_TELE_MENU}/{id}')
   Future<TreatmentTeleMenuResponse> putTreatmentTeleMenu({
     @Path('id') required String id,
     @Body() required TreatmentTeleMenuRequest treatmentTeleMenuRequest,
+  });
+
+  @DELETE('${EndPoints.TREATMENT_TELE_MENU}/{id}')
+  Future<TreatmentTeleMenuResponse> deleteTreatmentTeleMenu({
+    @Path('id') required String id,
   });
 
   @GET('${EndPoints.CLOSE_PATIENT}/{id}')
@@ -1376,6 +1402,33 @@ abstract class ApiService {
   @DELETE('${EndPoints.WEB_BOOKING_RESERVATION}/{id}')
   Future<void> webBookingDeleteReservation(
     @Path('id') String reservationId,
+  );
+
+  //Agent A9
+  @GET('${EndPoints.SUMMARY_LIST}/medicalRecord/{id}')
+  Future<List<MedicalRecordFileSummaryResponse>> getSummaryList(
+    @Path('id') String medicalId,
+  );
+
+  //getFileSummaryBySummaryId
+  @GET('${EndPoints.SUMMARY_LIST}/recordSummary/{id}')
+  Future<List<MedicalRecordFileSummaryResponse>> getFileSummaryBySummaryId(
+    @Path('id') String summaryId,
+  );
+
+  @DELETE('${EndPoints.SUMMARY_LIST}/{id}')
+  Future<void> deleteSummaryList(
+    @Path('id') String patientId,
+  );
+
+  @POST(EndPoints.SUMMARY_LIST)
+  Future<MedicalRecordFileSummaryResponse> postFileSummary(
+    @Body() MedicalRecordFileSummaryRequest medicalRecordFileSummaryRequest,
+  );
+
+  @DELETE('${EndPoints.SUMMARY_LIST}/{id}')
+  Future<void> deleteFileSummary(
+    @Path('id') String id,
   );
 }
 

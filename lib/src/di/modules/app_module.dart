@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:core_network/entities.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:feature_agent/feature_agent.gm.dart';
 import 'package:feature_auth/feature_auth.dart';
 import 'package:feature_chats/feature_chats.gm.dart';
@@ -17,6 +18,7 @@ import 'package:injectable/injectable.dart';
 
 import '../../routes/app_router.dart';
 import '../../routes/guards.dart';
+import '../injection.dart';
 
 @module
 abstract class AppModule {
@@ -60,5 +62,26 @@ abstract class AppModule {
   }
 
   @Named('defaultLocale')
-  Locale get defaultLocale => const Locale('en');
+  Locale get defaultLocale => const Locale('ja');
+
+  @dev
+  @preResolve
+  @Named('appVersion')
+  Future<String> get devAppVersion async {
+    return 'DEV ${await Strings.appVersion()}';
+  }
+
+  @stage
+  @preResolve
+  @Named('appVersion')
+  Future<String> get stageAppVersion async {
+    return 'STAGE ${await Strings.appVersion()}';
+  }
+  @prod
+  @production
+  @preResolve
+  @Named('appVersion')
+  Future<String> get prodAppVersion async {
+    return await Strings.appVersion();
+  }
 }

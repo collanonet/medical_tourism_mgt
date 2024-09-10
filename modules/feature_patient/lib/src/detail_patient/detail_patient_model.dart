@@ -18,6 +18,13 @@ class DetailPatientModel {
   ValueNotifier<AsyncData<Patient>> patientData =
       ValueNotifier<AsyncData<Patient>>(const AsyncData());
 
+  ValueNotifier<AsyncData<MedicalRecord>> medicalRecord =
+  ValueNotifier<AsyncData<MedicalRecord>>(const AsyncData());
+
+  void updateMedicalRecord(MedicalRecord medicalRecord) {
+    this.medicalRecord.value = AsyncData(data: medicalRecord);
+  }
+
   Future<void> initialData({Patient? patient, String? id}) async {
     if (patient != null || id != null) {
       patientData.value = const AsyncData<Patient>(loading: true);

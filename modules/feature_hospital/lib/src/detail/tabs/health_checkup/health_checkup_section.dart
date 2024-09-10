@@ -123,9 +123,8 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                         },
                       );
                     }),
-                const Expanded(flex: 2, child: Text('ファイル名ファイル名')),
+                const Expanded(flex: 2, child: Text('ファイル名')),
                 const Expanded(child: Text('更新日')),
-                const Expanded(child: Text('')),
               ],
             ),
             Expanded(
@@ -134,38 +133,57 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                 itemBuilder: (context, index) {
                   final data = value.data?[index];
 
-                  return Row(
-                    children: [
-                      ValueListenableBuilder(
-                          valueListenable: selected,
-                          builder: (context, sels, _) {
-                            return Checkbox(
-                              value: sels.contains(data?.id),
-                              onChanged: (sel) {
-                                if (sel != null) {
-                                  if (sel) {
-                                    selected.value = [...sels, data?.id ?? ''];
-                                  } else {
-                                    selected.value = [
-                                      ...sels.where((e) => e != data?.id)
-                                    ];
+                  return InkWell(
+                    onTap: () {
+                      if (data?.uploadFile != null) {
+                        openUrlInBrowser(fileName: data?.uploadFile ?? '');
+                      } else {
+                        snackBarWidget(
+                          message: 'ファイルが見つかりません',
+                          backgroundColor: Colors.red,
+                          prefixIcon: const Icon(
+                            Icons.error,
+                            color: Colors.white,
+                          ),
+                        );
+                      }
+                    },
+                    child: Row(
+                      children: [
+                        ValueListenableBuilder(
+                            valueListenable: selected,
+                            builder: (context, sels, _) {
+                              return Checkbox(
+                                value: sels.contains(data?.id),
+                                onChanged: (sel) {
+                                  if (sel != null) {
+                                    if (sel) {
+                                      selected.value = [
+                                        ...sels,
+                                        data?.id ?? ''
+                                      ];
+                                    } else {
+                                      selected.value = [
+                                        ...sels.where((e) => e != data?.id)
+                                      ];
+                                    }
                                   }
-                                }
-                              },
-                            );
-                          }),
-                      Expanded(
-                        flex: 2,
-                        child: Text(data?.fileName ?? ''),
-                      ),
-                      Expanded(
-                        child: Text(
-                          data?.uploadDate == null
-                              ? ''
-                              : Dates.formShortDate(data?.uploadDate),
+                                },
+                              );
+                            }),
+                        Expanded(
+                          flex: 2,
+                          child: Text(data?.fileName ?? ''),
                         ),
-                      ),
-                    ],
+                        Expanded(
+                          child: Text(
+                            data?.uploadDate == null
+                                ? ''
+                                : Dates.formShortDate(data?.uploadDate),
+                          ),
+                        ),
+                      ],
+                    ),
                   );
                 },
                 separatorBuilder: (BuildContext context, int index) {
@@ -222,15 +240,16 @@ class _HealthCheckupSectionState extends State<HealthCheckupSection> {
                                                     context.read<HealthModel>(),
                                                 child: AlertDialog(
                                                   title: const Text('削除確認'),
-                                                  content:
-                                                      const Text('選択した書類を削除しますか？'),
+                                                  content: const Text(
+                                                      '選択した書類を削除しますか？'),
                                                   actions: [
                                                     TextButton(
                                                       onPressed: () {
                                                         Navigator.of(context)
                                                             .pop();
                                                       },
-                                                      child: const Text('キャンセル'),
+                                                      child:
+                                                          const Text('キャンセル'),
                                                     ),
                                                     TextButton(
                                                       onPressed: () {

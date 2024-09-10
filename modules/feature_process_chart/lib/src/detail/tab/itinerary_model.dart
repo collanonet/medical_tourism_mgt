@@ -23,6 +23,7 @@ class ItineraryModel {
         final response = await processChartRepository.getDetailItinerary(id);
         insertItinerary(formGroup, response);
         itinerraryData.value = AsyncData(data: response);
+        logger.d('fetchItinerary success ${response.toJson()}');
       }
     } catch (e) {
       logger.d(e);
@@ -58,7 +59,7 @@ class ItineraryModel {
         e.groups?.forEach((element) {
           // working with tasks
           FormArray tasks = FormArray([]);
-          element.task?.forEach((element) {
+          element.tasks?.forEach((element) {
             tasks.add(FormGroup({
               '_id': FormControl<String>(),
               'placeName': FormControl<String>(value: element.placeName),
@@ -71,7 +72,7 @@ class ItineraryModel {
           });
 
           // insert default form if task null
-          if (element.task == null) {
+          if (element.tasks == null) {
             tasks = FormArray(
               [
                 FormGroup(
@@ -229,7 +230,7 @@ class ItineraryModel {
         patients.add(element['patientName']);
       });
 
-      List<Day>? days = [];
+      List<dynamic>? days = [];
       formGroup.control('day').value.forEach(
         (element) {
           List<bool> meals = [];
@@ -241,7 +242,7 @@ class ItineraryModel {
           element['groups'].forEach(
             (groupElement) {
               List<Task>? tasks = [];
-              groupElement['task'].forEach(
+              groupElement['tasks'].forEach(
                 (taskElement) {
                   tasks.add(
                     Task(
@@ -257,10 +258,11 @@ class ItineraryModel {
               );
 
               groups.add(
-                Group(task: tasks),
+                Group(tasks: tasks),
               );
             },
           );
+
           days.add(
             Day(
               date: element['date'],
@@ -270,22 +272,17 @@ class ItineraryModel {
               groups: groups,
             ),
           );
-          logger.d('date ${element['date']}');
-          logger.d('placeName ${element['placeName']}');
-          logger.d('placeStay ${element['placeStay']}');
-          logger.d('days ${days}');
         },
       );
       submitData.value = const AsyncData(loading: true);
       DetailIneraryRequest request = DetailIneraryRequest(
-        patient: patients,
+        patient: [],
         tourName: formGroup.control('tourName').value,
         peopleNumber: formGroup.control('peopleNumber').value,
         group: formGroup.control('group').value,
         classification: formGroup.control('classification').value,
         day: days,
       );
-
       final response =
           await processChartRepository.postDetailItinerary(request);
       submitData.value = AsyncData(data: response);

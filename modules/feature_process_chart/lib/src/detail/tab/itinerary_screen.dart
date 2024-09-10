@@ -438,7 +438,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                           [
                             FormGroup(
                               {
-                                'task': FormArray(
+                                'tasks': FormArray(
                                   [
                                     FormGroup(
                                       {
@@ -476,7 +476,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                         width: context.appTheme.spacing.marginSmall,
                       ),
                       Text(
-                        '患者を追加',
+                        '日程を追加',
                         style: TextStyle(color: context.appTheme.primaryColor),
                       )
                     ],
@@ -554,7 +554,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                 FormGroup(
                   {
                     'groups': FormControl<String>(value: ''), // グループ番号
-                    'task': FormArray(
+                    'tasks': FormArray(
                       [
                         FormGroup(
                           {
@@ -602,7 +602,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
 
   ReactiveFormArray<Object?> taskWidget() {
     return ReactiveFormArray(
-      formArrayName: 'task',
+      formArrayName: 'tasks',
       builder: (context, formArray, child) {
         final rows =
             formArray.controls.map((control) => control as FormGroup).map(

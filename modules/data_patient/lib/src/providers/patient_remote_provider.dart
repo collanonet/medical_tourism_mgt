@@ -596,6 +596,10 @@ class PatientRemoteProvider {
           DomesticMedicalDataRequest domesticMedicalDataRequest) async =>
       await apiService.postDomesticMedicalData(domesticMedicalDataRequest);
 
+  Future<void> deleteDomesticMedical(String id) {
+    return apiService.deleteDomesticMedical(id);
+  }
+
   Future<List<MedicalPaymentResponse>> getMedicalPayment(
           {required String medicalRecordId}) async =>
       await apiService.getMedicalPaymentDetail(id: medicalRecordId);
@@ -603,6 +607,10 @@ class PatientRemoteProvider {
   Future<MedicalPaymentResponse> postMedicalPayment(
           MedicalPaymentRequest medicalPaymentRequest) async =>
       await apiService.postMedicalPaymentDetail(medicalPaymentRequest);
+  
+  Future<void> deleteMedicalPayment(String id) async {
+    await apiService.deleteMedicalPaymentDetail(id);
+  }
 
   Future<void> closePatientAccount(String id) {
     return apiService.closePatientAccount(id);
@@ -684,4 +692,26 @@ class PatientRemoteProvider {
       treatmentRequest,
     );
   }
+
+  //A9
+  Future<List<MedicalRecordFileSummaryResponse>> getSummaryList(String patientId) async {
+    return apiService.getSummaryList(patientId);
+  }
+
+  Future<void> deleteSummaryList(String patientId) async {
+    return apiService.deleteSummaryList(patientId);
+  }
+
+  Future<List<MedicalRecordFileSummaryResponse>> getFileSummaryBySummaryId(String summaryId) {
+    return apiService.getFileSummaryBySummaryId(summaryId);
+  }
+
+  Future<MedicalRecordFileSummaryResponse> postFileSummary(MedicalRecordFileSummaryRequest fileRequest) {
+    return apiService.postFileSummary(fileRequest);
+  }
+
+  Future<void> deleteFileSummary(String id) {
+    return apiService.deleteFileSummary(id);
+  }
+
 }

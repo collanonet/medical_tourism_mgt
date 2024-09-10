@@ -28,6 +28,14 @@ scripts:
       fvm dart run flutter_native_splash:create --path=flutter_native_splash.yaml
     env:
       FLUTTER_VERSION: 3.19.5
+  flutter:use:
+    description: "Use flutter version"
+    run: |
+      fvm use $FLUTTER_VERSION && \
+      fvm global $FLUTTER_VERSION && \
+      dart pub global activate spider
+    env:
+      FLUTTER_VERSION: 3.19.5
   run_debug:
     description: "run_debug"
     run: fvm flutter run -d chrome --web-port 5555
@@ -115,8 +123,16 @@ scripts:
       scope: "medical_tourism_mgt"
   web_dev:
     description: "hosting_web_dev"
-    run: fvm flutter build web --release -t lib/main_dev.dart && firebase deploy --only hosting
-
+    run: |
+      cp firebase-dev.json firebase.json && \
+      fvm flutter build web --release -t lib/main_dev.dart && \
+      firebase deploy --only hosting
+  web_stage:
+    description: "hosting_web_stage"
+    run: |
+      cp firebase-stage.json firebase.json && \
+      fvm flutter build web --release -t lib/main_stage.dart && \
+      firebase deploy --only hosting:medical-tourism-stage
 
 
   core_network:

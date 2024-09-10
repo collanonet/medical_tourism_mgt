@@ -141,7 +141,7 @@ class AgentFilter extends StatelessWidget {
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
                               ReactiveTextField(
-                                formControlName: 'address',
+                                formControlName: 'country',
                               ),
                             ],
                           ),
@@ -181,7 +181,8 @@ class AgentFilter extends StatelessWidget {
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
                               ReactiveTextField(
-                                formControlName: 'patientName',
+                                formControlName:
+                                    'fullNameJapaneseKanjiChineseOnly',
                               ),
                             ],
                           ),
@@ -196,7 +197,8 @@ class AgentFilter extends StatelessWidget {
                             children: [
                               OutlinedButton(
                                 onPressed: () {
-                                  context.read<AgentModel>().getAgents();
+                                  formGroup.reset();
+                                  model.getAgent();
                                 },
                                 child: Text(
                                   context.l10n.actionClear,
@@ -204,19 +206,7 @@ class AgentFilter extends StatelessWidget {
                               ),
                               ElevatedButton(
                                 onPressed: () {
-                                  context.read<AgentModel>().getAgents(
-                                        companyName: formGroup
-                                            .control('companyName')
-                                            .value,
-                                        nameKana:
-                                            formGroup.control('nameKana').value,
-                                        address:
-                                            formGroup.control('address').value,
-                                        area: formGroup.control('area').value,
-                                        pastCasesNumber: formGroup
-                                            .control('pastCasesNumber')
-                                            .value,
-                                      );
+                                  model.getAgent(form: formGroup);
                                 },
                                 child: Text(context.l10n.actionSearch),
                               ),

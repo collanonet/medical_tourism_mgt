@@ -4,15 +4,11 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-
-// Dart imports:
 import 'dart:async' as _i2;
 
-// Package imports:
 import 'package:data_hospital/data_hospital.dart' as _i4;
 import 'package:injectable/injectable.dart' as _i1;
 
-// Project imports:
 import 'src/detail/hospital_detail_model.dart' as _i12;
 import 'src/detail/tabs/basic_information/basic_information_model.dart' as _i8;
 import 'src/detail/tabs/contract/contrant_model.dart' as _i3;
@@ -41,8 +37,8 @@ class FeatureHospitalPackageModule extends _i1.MicroPackageModule {
         hospitalRepository: gh<_i4.HospitalRepository>()));
     gh.factory<_i9.FacilityModel>(() =>
         _i9.FacilityModel(hospitalRepository: gh<_i4.HospitalRepository>()));
-    gh.factory<_i10.TreatmentModle>(() =>
-        _i10.TreatmentModle(hospitalRepository: gh<_i4.HospitalRepository>()));
+    gh.factory<_i10.TreatmentModel>(() =>
+        _i10.TreatmentModel(hospitalRepository: gh<_i4.HospitalRepository>()));
     gh.factory<_i11.HealthModel>(() =>
         _i11.HealthModel(hospitalRepository: gh<_i4.HospitalRepository>()));
     gh.factory<_i12.HospitalDetailModel>(() => _i12.HospitalDetailModel(

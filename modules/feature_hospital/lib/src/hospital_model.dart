@@ -6,6 +6,7 @@ import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_hospital/data_hospital.dart';
 import 'package:injectable/injectable.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
 class HospitalModel with ChangeNotifier {
@@ -18,14 +19,31 @@ class HospitalModel with ChangeNotifier {
   ValueNotifier<AsyncData<List<BasicInformationHospitalResponse>>> hospitals =
       ValueNotifier(const AsyncData());
 
-  Future<void> fetchHospitals() async {
+  Future<void> fetchHospitals({FormGroup? form}) async {
     hospitals.value = const AsyncData(loading: true);
+    notifyListeners();
     try {
-      final response = await hospitalRepository.getHospitals(
+      await hospitalRepository.getHospitals(
         pageSize: 30,
-      );
-      logger.d(response.length);
+        hospitalName: form?.control('hospitalName').value == null ? null : form!.control('hospitalName').value,
+        type: form?.control('type').value == null ? null : form!.control('type').value,
+        location: form?.control('location').value == null ? null : form!.control('location').value,
+        rHave: form?.control('rHave').value == null ? null : form!.control('rHave').value,
+        hospitalType1: form?.control('hospitalType1').value == null ? null : form!.control('hospitalType1').value,
+        hospitalType2: form?.control('hospitalType2').value == null ? null : form!.control('hospitalType2').value,
+        hospitalType3: form?.control('hospitalType3').value == null ? null : form!.control('hospitalType3').value,
+        hospitalType4: form?.control('hospitalType4').value == null ? null : form!.control('hospitalType4').value,
+      ).then((response){
+          logger.d(response.length);
       hospitals.value = AsyncData(data: response);
+      notifyListeners();
+      }).catchError((error) {
+        logger.e(error);
+        hospitals.value = AsyncData(error: error);
+      }).whenComplete((){
+        notifyListeners();
+      });
+      
     } catch (e) {
       hospitals.value = AsyncData(error: e);
     }

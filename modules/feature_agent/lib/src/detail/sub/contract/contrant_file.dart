@@ -52,10 +52,37 @@ class Popup extends StatelessWidget {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
                 children: [
-                  Text(
-                    '更新日',
-                    style: Theme.of(context).textTheme.bodySmall,
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      'ファイル名',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                  IntrinsicWidth(
+                    stepWidth: 300,
+                    child: ReactiveTextField<String>(
+                      formControlName: 'fileName',
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(
+              width: context.appTheme.spacing.marginMedium,
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      '締結日',
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
                   ),
                   IntrinsicWidth(
                     stepWidth: 300,
@@ -72,9 +99,6 @@ class Popup extends StatelessWidget {
                               //dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
                           decoration: InputDecoration(
-                            label: const Text(
-                              '更新日',
-                            ),
                             suffixIcon: IconButton(
                               icon: const Icon(
                                 CupertinoIcons.calendar,
@@ -88,30 +112,6 @@ class Popup extends StatelessWidget {
                           ],
                         );
                       },
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            SizedBox(
-              width: context.appTheme.spacing.marginMedium,
-            ),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    'ファイル名',
-                    style: Theme.of(context).textTheme.bodySmall,
-                  ),
-                  IntrinsicWidth(
-                    stepWidth: 300,
-                    child: ReactiveTextField<String>(
-                      formControlName: 'fileName',
-                      decoration: const InputDecoration(
-                        hintText: 'ファイル名',
-                      ),
                     ),
                   ),
                 ],
@@ -176,9 +176,7 @@ class Popup extends StatelessWidget {
                       onPressed: value.loading
                           ? null
                           : () {
-                              context
-                                  .read<ContractModel>()
-                                  .submit(formGroup);
+                              context.read<ContractModel>().submit(formGroup);
                             },
                       child: WithLoadingButton(
                           isLoading: value.loading, child: const Text('保存する')),

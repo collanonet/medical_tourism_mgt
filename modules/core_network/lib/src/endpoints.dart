@@ -223,8 +223,8 @@ class EndPoints {
   static const ESTIMATE_INVOICE = '/agent-estimate-invoices';
 
   //Patient
-  static const DOMESTIC_MEDICAL_DATA = '/domestic-medical-data';
-  static const MEDICAL_PAYMENT_DETAIL = '/medical-payment-details';
+  static const DOMESTIC_MEDICAL_DATA = '/medical-domestic-medical-data';//'/domestic-medical-data';
+  static const MEDICAL_PAYMENT_DETAIL = '/medical-treatment-fee-details'; 
 
   //Invoice and Quote
   static const INVOICE_DETAIL = '/invoice-details';
@@ -243,4 +243,7 @@ class EndPoints {
   static const WEB_BOOKING_HOSPITAL = '/web-booking-hospital';
   static const WEB_BOOKING_PATIENT = '/web-booking-patient';
   static const WEB_BOOKING_RESERVATION = '/web-booking-reservation';
+
+  //A9
+  static const SUMMARY_LIST = '/medical-record-file-summary';
 }

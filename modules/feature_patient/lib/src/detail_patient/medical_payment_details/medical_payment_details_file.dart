@@ -7,6 +7,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -59,7 +60,7 @@ class Popup extends StatelessWidget {
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveTextField<String>(
-                      formControlName: 'name_of_hospital',
+                      formControlName: 'theNameOfTheHospital',
                       decoration: const InputDecoration(
                         hintText: '書類名',
                       ),
@@ -122,21 +123,19 @@ class Popup extends StatelessWidget {
                   IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveDatePicker<DateTime>(
-                      formControlName: 'data_of_issue',
+                      formControlName: 'dateOfIssue',
                       firstDate: DateTime(1900),
                       lastDate: DateTime(2100),
                       builder: (BuildContext context,
                           ReactiveDatePickerDelegate<dynamic> picker,
                           Widget? child) {
                         return ReactiveTextField<DateTime>(
-                          formControlName: 'data_of_issue',
+                          formControlName: 'dateOfIssue',
                           valueAccessor: DateTimeValueAccessor(
-                              //dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
+                            dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                          ),
                           decoration: InputDecoration(
-                            label: const Text(
-                              '発行日',
-                            ),
+                            hintText: '発行日',
                             suffixIcon: IconButton(
                               icon: const Icon(
                                 CupertinoIcons.calendar,
@@ -194,10 +193,10 @@ class Popup extends StatelessWidget {
             ValueListenableListener(
               valueListenable: context.read<MedicalPaymentDetailModel>().submit,
               onListen: () {
-                final value =
+                final valueData =
                     context.read<MedicalPaymentDetailModel>().submit.value;
 
-                if (value.hasError) {
+                if (valueData.hasError) {
                   snackBarWidget(
                     message: '保存できませんでした。 もう一度試してください。',
                     backgroundColor: Colors.red,
@@ -205,7 +204,7 @@ class Popup extends StatelessWidget {
                   );
                 }
 
-                if (value.hasData) {
+                if (valueData.hasData) {
                   Navigator.pop(context);
                   snackBarWidget(
                     message: '正常に保存されました',

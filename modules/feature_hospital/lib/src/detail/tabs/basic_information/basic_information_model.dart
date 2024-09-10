@@ -353,10 +353,18 @@ class BasicInformationModel {
       formGroup.control('hospital').value =
           hospitalId.value ?? basicInformationData.value.data?.id ?? '';
       formGroup.control('outsourcingContract').value = data.outsourcingContract;
-      formGroup.control('file').value = FileSelect(
-        url: data.file,
-        filename: data.file?.split('/').last ?? '',
-      );
+      if (data.files != null && data.files!.isNotEmpty) {
+        List<FileSelect> files = [];
+        for (var e in data.files!) {
+          files.add(
+            FileSelect(
+              url: e,
+              filename: e.split('/').last,
+            ),
+          );
+        }
+        formGroup.control('files').value = files;
+      }
       formGroup.control('msCorporation').value = data.msCorporation;
       formGroup.control('referralFee').value = data.referralFee;
       formGroup.control('treatmentCostPointCalculationPerPoint').value =
@@ -553,11 +561,12 @@ class BasicInformationModel {
 
   Future<void> submitDoctorInformation(FormGroup formGroup) async {
     try {
+      List<DoctorProfileHospitalResponse> doctorInformationDataList =
+          doctorInformationData.value.data ?? [];
+
       doctorInformationData.value = const AsyncData(loading: true);
-      await formGroup
-          .control('addDoctorProfile')
-          .value
-          .forEach((element) async {
+
+      for (dynamic element in formGroup.control('addDoctorProfile').value) {
         String? file;
         if (element['profile'] != null) {
           FileSelect docFile = element['profile'];
@@ -632,14 +641,10 @@ class BasicInformationModel {
         );
         var result =
             await hospitalRepository.postDoctorInformationHospital(request);
-        doctorInformationData.value.copyWith(data: [
-          ...doctorInformationData.value.data ?? [],
-          result,
-        ]);
-      });
+        doctorInformationDataList.add(result);
+      }
 
-      doctorInformationData.value =
-          AsyncData(data: doctorInformationData.value.data);
+      doctorInformationData.value = AsyncData(data: doctorInformationDataList);
     } catch (e) {
       logger.e(e);
       doctorInformationData.value = AsyncData(error: e);
@@ -650,22 +655,29 @@ class BasicInformationModel {
     try {
       additionalInformationData.value = const AsyncData(loading: true);
 
-      String? file;
-      if (form.control('file').value != null) {
-        FileSelect docFile = form.control('file').value;
-        if (docFile.file != null) {
-          try {
-            String base64Image = base64Encode(docFile.file!);
-            FileResponse fileData = await hospitalRepository.uploadFileBase64(
-              base64Image,
-              docFile.filename!,
-            );
-            file = fileData.filename;
-          } catch (e) {
-            logger.e(e);
+      List<String> files = [];
+      if (form.control('files').value != null) {
+        List<FileSelect> docFiles = form.control('files').value;
+        if (docFiles.isNotEmpty) {
+          for (FileSelect docFile in docFiles) {
+            if (docFile.file != null) {
+              try {
+                String base64Image = base64Encode(docFile.file!);
+                FileResponse fileData =
+                    await hospitalRepository.uploadFileBase64(
+                  base64Image,
+                  docFile.filename!,
+                );
+                files.add(fileData.filename);
+              } catch (e) {
+                logger.e(e);
+              }
+            } else {
+              if (docFile.url != null) {
+                files.add(docFile.url!);
+              }
+            }
           }
-        } else {
-          file = docFile.url;
         }
       }
 
@@ -677,7 +689,7 @@ class BasicInformationModel {
         id: form.control('_id').value,
         outsourcingContract: form.control('outsourcingContract').value ?? '',
         contract: contract,
-        file: file,
+        files: files,
         msCorporation: form.control('msCorporation').value ?? '',
         referralFee: form.control('referralFee').value ?? '',
         treatmentCostPointCalculationPerPoint:
@@ -770,12 +782,17 @@ class BasicInformationModel {
 }
 
 List<String> convertToList(Map<String, dynamic> element, String key) {
+  logger.d(' ggggg');
+  logger.d(element[key]);
   try {
     if ((element[key] as List).isNotEmpty) {
-      return element[key]
-          .where((e) => e['name'] != null && e['name'].isNotEmpty)
-          .map((e) => e['name'] as String)
-          .toList();
+      List<String> data = [];
+      for (var e in element[key]) {
+        if (e['name'] != null && e['name'].isNotEmpty) {
+          data.add(e['name']);
+        }
+      }
+      return data;
     }
     return [];
   } catch (e) {

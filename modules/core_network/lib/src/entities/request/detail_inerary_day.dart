@@ -30,9 +30,9 @@ class Day {
 
 @JsonSerializable()
 class Group {
-  List<Task>? task;
+  List<Task>? tasks;
 
-  Group({this.task});
+  Group({this.tasks});
 
   factory Group.fromJson(Map<String, dynamic> json) {
     return _$GroupFromJson(json);

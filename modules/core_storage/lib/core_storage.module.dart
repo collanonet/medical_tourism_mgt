@@ -4,11 +4,8 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-
-// Dart imports:
 import 'dart:async' as _i2;
 
-// Package imports:
 import 'package:injectable/injectable.dart' as _i1;
 
 class CoreStoragePackageModule extends _i1.MicroPackageModule {

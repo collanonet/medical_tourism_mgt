@@ -8,8 +8,8 @@ class TreatmentTeleMenuResponse {
   @JsonKey(name: '_id')
   String id;
   String? project;
-  num? treatmentCostExcludingTax;
-  num? treatmentCostTaxIncluded;
+  double? treatmentCostExcludingTax;
+  double? treatmentCostTaxIncluded;
   String? remark;
   String? hospital;
 

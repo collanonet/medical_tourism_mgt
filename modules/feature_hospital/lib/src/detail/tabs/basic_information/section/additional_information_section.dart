@@ -96,88 +96,114 @@ class _AdditionalInformationSectionState
                                 ])
                           ]),
                       ColumnSeparated(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
                         separatorBuilder: (context, index) => SizedBox(
-                          height: context.appTheme.spacing.formSpacing,
+                          height: 0,
                         ),
                         children: [
                           Text(
                             '契約書',
                             style: context.textTheme.bodySmall,
                           ),
-                          RowSeparated(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              separatorBuilder: (context, index) => SizedBox(
-                                    width: context.appTheme.spacing.formSpacing,
-                                  ),
-                              children: [
-                                RowSeparated(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    separatorBuilder: (context, index) =>
-                                        SizedBox(
-                                          width: context.appTheme.spacing
-                                              .marginExtraSmall,
-                                        ),
-                                    children: [
-                                      IconButton(
-                                          onPressed: () {
-                                            filePicker().then((value) {
-                                              if (value != null) {
-                                                formGroup
-                                                    .control('file')
-                                                    .value = value;
-                                              }
-                                            });
-                                          },
-                                          icon: Icon(
-                                            CupertinoIcons.paperclip,
-                                            color:
-                                                context.appTheme.primaryColor,
-                                          )),
-                                      ReactiveValueListenableBuilder<
-                                              FileSelect>(
-                                          formControlName: 'file',
-                                          builder: (context, control, _) {
-                                            return InkWell(
+                          ReactiveValueListenableBuilder<List<FileSelect>>(
+                            formControlName: 'files',
+                            builder: (context, control, _) {
+                              return Wrap(
+                                runAlignment: WrapAlignment.start,
+                                alignment: WrapAlignment.start,
+                                spacing: context.appTheme.spacing.marginMedium,
+                                runSpacing:
+                                    context.appTheme.spacing.marginMedium,
+                                children: [
+                                  ...control.value?.map((e) {
+                                        return Row(
+                                          children: [
+                                            InkWell(
                                               onTap: () {
-                                                if (control.value?.url !=
-                                                    null) {
+                                                if (e.url != null) {
                                                   openUrlInBrowser(
-                                                      fileName:
-                                                          control.value!.url!);
+                                                      fileName: e.url!);
                                                 }
                                               },
-                                              child: Text(
-                                                control.value?.filename ??
-                                                    'File Input .....',
-                                                style:
-                                                    context.textTheme.bodySmall,
+                                              child: Row(
+                                                children: [
+                                                  Icon(
+                                                    Icons.file_present_outlined,
+                                                    color: context
+                                                        .appTheme.primaryColor,
+                                                  ),
+                                                  Text(
+                                                    e.filename ??
+                                                        'File Input .....',
+                                                    style: context
+                                                        .textTheme.bodySmall,
+                                                  ),
+                                                ],
                                               ),
-                                            );
-                                          }),
-                                    ]),
-                                GestureDetector(
-                                  onTap: () {
-                                    filePicker().then((value) {
-                                      if (value != null) {
-                                        formGroup.control('file').value = value;
-                                      }
-                                    });
-                                  },
-                                  child: Chip(
-                                    label: const Text('変更する'),
-                                    labelStyle: TextStyle(
-                                      color: context
-                                          .appTheme.secondaryBackgroundColor,
-                                    ),
-                                    backgroundColor:
-                                        context.appTheme.primaryColor,
-                                  ),
-                                ),
-                              ])
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginExtraSmall,
+                                            ),
+                                            GestureDetector(
+                                              onTap: () {
+                                                filePicker().then((value) {
+                                                  if (value != null) {
+                                                    int? index = control.value
+                                                        ?.indexWhere(
+                                                            (element) =>
+                                                                element
+                                                                    .filename ==
+                                                                e.filename);
+                                                    if (index != null) {
+                                                      List<FileSelect> data =
+                                                          control.value ?? [];
+                                                      data[index] = value;
+                                                      control.value = data;
+                                                      setState(() {});
+                                                    }
+                                                  }
+                                                });
+                                              },
+                                              child: Chip(
+                                                label: const Text('変更する'),
+                                                labelStyle: TextStyle(
+                                                  color: context.appTheme
+                                                      .secondaryBackgroundColor,
+                                                ),
+                                                backgroundColor: context
+                                                    .appTheme.primaryColor,
+                                              ),
+                                            ),
+                                          ],
+                                        );
+                                      }) ??
+                                      [],
+                                  ElevatedButton.icon(
+                                      style: ElevatedButton.styleFrom(
+                                        foregroundColor:
+                                            context.appTheme.primaryColor,
+                                        backgroundColor: Colors.transparent,
+                                        shadowColor: Colors.transparent,
+                                        surfaceTintColor: Colors.transparent,
+                                      ),
+                                      onPressed: () {
+                                        filePicker().then((value) {
+                                          if (value != null) {
+                                            control.value = [
+                                              ...control.value ?? [],
+                                              value
+                                            ];
+                                          }
+                                        });
+                                      },
+                                      icon: Icon(Icons.add_circle),
+                                      label: Text('契約書を追加')),
+                                ],
+                              );
+                            },
+                          )
                         ],
                       )
                     ],

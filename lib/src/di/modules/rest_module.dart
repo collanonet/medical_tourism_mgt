@@ -52,6 +52,7 @@ abstract class RestModule {
   }
 
   @local
+  @Order(0)
   @Named('baseUrl')
   Uri get localBaseUrl {
     return Uri(
@@ -62,6 +63,7 @@ abstract class RestModule {
   }
 
   @dev
+  @Order(0)
   @Named('baseUrl')
   Uri get devBaseUrl {
     return Uri(
@@ -70,9 +72,41 @@ abstract class RestModule {
     );
   }
 
+  @stage
+  @Order(0)
+  @Named('baseUrl')
+  Uri get stageBaseUrl {
+    return Uri(
+      scheme: 'https',
+      host: 'medical-tourism-api-stage-collabonet.pixelplatforms.com',
+    );
+  }
+
   @production
+  @prod
+  @Order(0)
   @Named('baseUrl')
   Uri get prodBaseUrl => Uri();
+
+  @dev
+  @Order(0)
+  @Named('fileUrl')
+  String get devFileUrl =>
+      'https://medical-tourism-api-dev-collabonet.pixelplatforms.com/files/';
+
+  @stage
+  @Order(0)
+  @Named('fileUrl')
+  String get stageFileUrl =>
+      'https://medical-tourism-api-stage-collabonet.pixelplatforms.com/files/';
+
+  @production
+  @prod
+  @Order(0)
+  @Named('fileUrl')
+  String get prodFileUrl =>
+      'https://medical-tourism-api-collabonet.pixelplatforms.com/files/';
+
 }
 
 class MerchantInterceptor extends Interceptor {}

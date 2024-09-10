@@ -22,7 +22,9 @@ AdditionalInformationSectionRequest
           remark: json['remark'] as String?,
           paymentSiteTighten: json['paymentSiteTighten'] as String?,
           paymentSitePayment: json['paymentSitePayment'] as String?,
-          file: json['file'] as String?,
+          files: (json['files'] as List<dynamic>?)
+              ?.map((e) => e as String)
+              .toList(),
         );
 
 Map<String, dynamic> _$AdditionalInformationSectionRequestToJson(
@@ -39,5 +41,5 @@ Map<String, dynamic> _$AdditionalInformationSectionRequestToJson(
       'remark': instance.remark,
       'paymentSiteTighten': instance.paymentSiteTighten,
       'paymentSitePayment': instance.paymentSitePayment,
-      'file': instance.file,
+      'files': instance.files,
     };

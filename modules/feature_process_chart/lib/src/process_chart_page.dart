@@ -21,7 +21,7 @@ class ProcessChartPage extends StatefulWidget {
 class _ProcessChartPageState extends State<ProcessChartPage> {
   @override
   Widget build(BuildContext context) {
-    return Provider(
+    return ChangeNotifierProvider(
       create: (context) => GetIt.I<ProcessChartModel>()..fetchItinerary(),
       child: const LayoutView(
         selectedIndex: 4,

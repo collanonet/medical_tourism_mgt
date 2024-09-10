@@ -265,11 +265,11 @@ class Popup extends StatelessWidget {
                       formControlName: 'disclosureToPatients',
                       items: const [
                         DropdownMenuItem(
-                          value: '○',
+                          value: 'true',
                           child: Text('○'),
                         ),
                         DropdownMenuItem(
-                          value: '×',
+                          value: 'false',
                           child: Text('×'),
                         ),
                       ],
@@ -298,11 +298,11 @@ class Popup extends StatelessWidget {
                       formControlName: 'disclosureToOtherMedicalInstitutions',
                       items: const [
                         DropdownMenuItem(
-                          value: '○',
+                          value: 'true',
                           child: Text('○'),
                         ),
                         DropdownMenuItem(
-                          value: '×',
+                          value: 'false',
                           child: Text('×'),
                         ),
                       ],

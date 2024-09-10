@@ -803,6 +803,11 @@ class PatientRepositoryIml extends PatientRepository {
     return remote.postMedicalPayment(medicalPaymentRequest);
   }
 
+   @override
+  Future<void> deleteMedicalPayment(String id) {
+    return remote.deleteMedicalPayment(id);
+  }
+
   @override
   Future<void> closePatientAccount(String id) {
     return remote.closePatientAccount(id);
@@ -894,5 +899,38 @@ class PatientRepositoryIml extends PatientRepository {
   Future<TreamentResponce> updateBooking(String treatmentId, TreamentRequest treatmentRequest) {
     return remote.updateBooking(treatmentId, treatmentRequest);
   }
+  
+  @override
+  Future<void> deleteDomesticMedical(String id) {
+    return remote.deleteDomesticMedical(id);
+  }
+  
+  //A9
+  @override
+  Future<void> deleteSummaryList(String patientId) {
+    return remote.deleteSummaryList(patientId);
+  }
+  
+  @override
+  Future<List<MedicalRecordFileSummaryResponse>> getSummaryList(String patientId) {
+    return remote.getSummaryList(patientId);
+  }
+
+  @override
+  Future<List<MedicalRecordFileSummaryResponse>> getFileSummaryBySummaryId(String summaryId) {
+    return remote.getFileSummaryBySummaryId(summaryId);
+  }
+
+  @override
+  Future<MedicalRecordFileSummaryResponse> postFileSummary(MedicalRecordFileSummaryRequest fileRequest) {
+    return remote.postFileSummary(fileRequest);
+  }
+
+  @override
+  Future<void> deleteFileSummary(String id) {
+    return remote.deleteFileSummary(id);
+  }
+  
+ 
 }
 
