@@ -1,5 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -91,6 +92,7 @@ class ProcessChartScreen extends StatelessWidget {
                               itemCount: value.data?.length ?? 0,
                               itemBuilder: (context, index) {
                                 var item = value.requireData[index];
+                                logger.d('leng ${value.data?.length}');
                                 return InkWell(
                                   onTap: () {
                                     context.router.push(
@@ -114,12 +116,12 @@ class ProcessChartScreen extends StatelessWidget {
                                             flex: 2,
                                             child: Text(
                                                 value.data?[index].tourName ??
-                                                    '')),
+                                                    '--')),
                                         SizedBox(
                                           width: context
                                               .appTheme.spacing.marginMedium,
                                         ),
-                                        Expanded(
+                                        const Expanded(
                                             flex: 2,
                                             child: Text(
                                                 '2023/10/22　ー　2023/10/29')),
@@ -129,24 +131,65 @@ class ProcessChartScreen extends StatelessWidget {
                                         ),
                                         Expanded(
                                             child: Text(
-                                                '${value.data?[index].peopleNumber}')),
+                                                '${value.data?[index].peopleNumber ?? '--'}')),
                                         SizedBox(
                                           width: context
                                               .appTheme.spacing.marginMedium,
                                         ),
                                         Expanded(
                                             child: Text(
-                                                '${value.data?[index].group}')),
+                                                '${value.data?[index].group ?? '--'}')),
                                         SizedBox(
                                           width: context
                                               .appTheme.spacing.marginMedium,
                                         ),
                                         Expanded(
-                                          child: ElevatedButton(
-                                            onPressed: () {},
-                                            child: Text('新規見積依頼'),
-                                          ),
-                                        ),
+                                            child: Row(
+                                          children: [
+                                            Container(
+                                              padding: const EdgeInsets.all(4),
+                                              margin: const EdgeInsets.all(4),
+                                              decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(4),
+                                                color: value.data?[index]
+                                                            .classification ==
+                                                        '変更'
+                                                    ? const Color(0xffF7654A)
+                                                    : value.data?[index]
+                                                                .classification ==
+                                                            '新規見積依頼'
+                                                        ? const Color(
+                                                            0xff53A6FF)
+                                                        : value.data?[index]
+                                                                    .classification ==
+                                                                '新規手配依頼'
+                                                            ? const Color(
+                                                                0xff98DE51)
+                                                            : value.data?[index]
+                                                                        .classification ==
+                                                                    'キャンセル'
+                                                                ? Colors
+                                                                    .blueGrey
+                                                                : value.data?[index].classification ==
+                                                                        'Final'
+                                                                    ? const Color
+                                                                        .fromARGB(
+                                                                        255,
+                                                                        185,
+                                                                        30,
+                                                                        30)
+                                                                    : null,
+                                              ),
+                                              child: Text(
+                                                '${value.data?[index].classification == '新規見積依頼' ? '新規見積依頼' : value.data?[index].classification == '新規手配依頼' ? '新規手配依頼' : value.data?[index].classification == '変更' ? '変更' : value.data?[index].classification == 'Final ' ? 'Final ' : value.data?[index].classification == 'キャンセル' ? 'キャンセル' : ''}',
+                                                style: const TextStyle(
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                            )
+                                          ],
+                                        )),
                                       ],
                                     ),
                                   ),

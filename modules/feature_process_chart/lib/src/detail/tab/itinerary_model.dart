@@ -10,22 +10,24 @@ class ItineraryModel {
   ItineraryModel({required this.processChartRepository});
 
   final ProcessChartRepository processChartRepository;
-  ValueNotifier<String?> id = ValueNotifier(null);
+  // ValueNotifier<String?> id = ValueNotifier(null);
 
   ValueNotifier<AsyncData<DetailItineraryResponse>> itinerraryData =
       ValueNotifier(const AsyncData());
 
   Future<void> fetchItinerary(FormGroup formGroup, {String? id}) async {
     try {
-      this.id.value = id;
+      // this.id.value = id;
       if (id != null) {
         itinerraryData.value = const AsyncData(loading: true);
-        final response = await processChartRepository.getDetailItinerary(id);
+        final response =
+            await processChartRepository.getDetailItinerary(id: id);
         insertItinerary(formGroup, response);
         itinerraryData.value = AsyncData(data: response);
         logger.d('fetchItinerary success ${response.toJson()}');
       }
     } catch (e) {
+      logger.d('error');
       logger.d(e);
       itinerraryData.value = AsyncData(error: e);
     }
@@ -59,17 +61,23 @@ class ItineraryModel {
         e.groups?.forEach((element) {
           // working with tasks
           FormArray tasks = FormArray([]);
-          element.tasks?.forEach((element) {
-            tasks.add(FormGroup({
-              '_id': FormControl<String>(),
-              'placeName': FormControl<String>(value: element.placeName),
-              'timeFrom': FormControl<String>(value: element.timeFrom),
-              'timeTo': FormControl<String>(value: element.timeTo),
-              'transportation':
-                  FormControl<String>(value: element.transportation),
-              'itinerary': FormControl<String>(value: element.itinerary),
-            }));
-          });
+          element.tasks?.forEach(
+            (element) {
+              tasks.add(
+                FormGroup(
+                  {
+                    '_id': FormControl<String>(value: element.id),
+                    'placeName': FormControl<String>(value: element.placeName),
+                    'timeFrom': FormControl<String>(value: element.timeFrom),
+                    'timeTo': FormControl<String>(value: element.timeTo),
+                    'transportation':
+                        FormControl<String>(value: element.transportation),
+                    'itinerary': FormControl<String>(value: element.itinerary),
+                  },
+                ),
+              );
+            },
+          );
 
           // insert default form if task null
           if (element.tasks == null) {
@@ -90,7 +98,7 @@ class ItineraryModel {
           }
 
           groups.add(FormGroup({
-            'task': tasks,
+            'tasks': tasks,
           }));
         });
 
@@ -101,7 +109,7 @@ class ItineraryModel {
             [
               FormGroup(
                 {
-                  'task': FormArray(
+                  'tasks': FormArray(
                     [
                       FormGroup(
                         {
@@ -125,14 +133,14 @@ class ItineraryModel {
         days.add(
           FormGroup(
             {
-              '_id': FormControl<String>(),
+              '_id': FormControl<String>(value: e.id),
               'date': FormControl<DateTime>(value: e.date), // 日付
               'meals': FormControl<List<bool>>(value: e.meals ?? []),
               'morning': FormControl<bool>(value: e.meals?[0] ?? false),
               'noon': FormControl<bool>(value: e.meals?[1] ?? false),
               'evening': FormControl<bool>(value: e.meals?[2] ?? false),
               'placeName': FormControl<String>(value: e.placeName), // 地名
-              'placeStay': FormControl<String>(value: e.accommodation), // 宿泊場所
+              'placeStay': FormControl<String>(value: e.placeStay), // 宿泊場所
               'groups': groups,
             },
           ),
@@ -292,4 +300,16 @@ class ItineraryModel {
       submitData.value = AsyncData(error: e);
     }
   }
+  ValueNotifier<List<Type>> classification = ValueNotifier([
+    Type(type: '新規見積依頼'),
+    Type(type: '新規手配依頼'),
+    Type(type: '変更'),
+    Type(type: 'キャンセル'),
+    Type(type: 'Final'),
+  ]);
+}
+
+class Type{
+  final String type;
+  Type({required this.type});
 }

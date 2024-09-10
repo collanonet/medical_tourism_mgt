@@ -72,7 +72,7 @@ class Day {
   DateTime? date;
   List<bool>? meals;
   String? placeName;
-  String? accommodation;
+  String? placeStay;
   List<Group>? groups;
 
   Day({
@@ -80,7 +80,7 @@ class Day {
     this.date,
     this.meals,
     this.placeName,
-    this.accommodation,
+    this.placeStay,
     this.groups,
   });
 

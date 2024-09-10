@@ -148,8 +148,7 @@ class HospitalScreen extends StatelessWidget {
                                                               4),
                                                       decoration: BoxDecoration(
                                                         color: e == '健診'
-                                                            ? const Color(
-                                                                0xffE238A0)
+                                                            ? Color(0xFFE238A0)
                                                             : e == '治療'
                                                                 ? const Color(
                                                                     0xff53A6FF)

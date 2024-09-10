@@ -214,7 +214,7 @@ class ProcessChartRemoteProvider {
         .postDetailItinerarySimplePickUp(detailItinerarySimplePickUpAnd);
   }
 
-  Future<DetailItineraryResponse> getDetailitinerary(String id) async {
+  Future<DetailItineraryResponse> getDetailitinerary({String? id}) async {
     return await apiService.getDetailitinerary(
       id: id,
       

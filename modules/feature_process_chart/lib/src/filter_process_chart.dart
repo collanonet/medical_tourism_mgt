@@ -1,5 +1,6 @@
 import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -76,9 +77,23 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              ReactiveTextField(
-                                formControlName: 'classification',
-                              ),
+                              ValueListenableBuilder(
+                                  valueListenable: context
+                                      .read<ProcessChartModel>()
+                                      .classification,
+                                  builder: (context, value, _) {
+                                    return ReactiveDropdownFormField(
+                                      formControlName: 'classification',
+                                      items: value
+                                          .map((e) => DropdownMenuItem(
+                                                value: e.type,
+                                                child: Text(
+                                                  e.type,
+                                                ),
+                                              ))
+                                          .toList(),
+                                    );
+                                  }),
                             ],
                           ),
                         ),

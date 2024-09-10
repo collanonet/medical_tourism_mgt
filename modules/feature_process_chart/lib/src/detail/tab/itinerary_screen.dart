@@ -157,12 +157,30 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                               width: context.appTheme.spacing.marginMedium,
                             ),
                             Expanded(
-                              flex: 4,
-                              child: ReactiveTextField(
-                                formControlName: 'classification',
-                                decoration: InputDecoration(
-                                  label: Text('種別'),
-                                ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ValueListenableBuilder(
+                                      valueListenable: context
+                                          .read<ItineraryModel>()
+                                          .classification,
+                                      builder: (context, value, _) {
+                                        return ReactiveDropdownFormField(
+                                          decoration: const InputDecoration(
+                                            hintText: '種別'
+                                          ),
+                                          formControlName: 'classification',
+                                          items: value
+                                              .map((e) => DropdownMenuItem(
+                                                    value: e.type,
+                                                    child: Text(
+                                                      e.type,
+                                                    ),
+                                                  ))
+                                              .toList(),
+                                        );
+                                      }),
+                                ],
                               ),
                             ),
                           ],

@@ -130,7 +130,7 @@ abstract class ProcessChartRepository {
         detailRelatedPartiesEmergencyContactRequest,
   );
 
-  Future<DetailItineraryResponse> getDetailItinerary(String id);
+  Future<DetailItineraryResponse> getDetailItinerary({String? id});
 
     Future<List<DetailItineraryResponse>> getPatientChart({
     String? tourName,
