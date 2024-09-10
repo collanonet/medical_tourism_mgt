@@ -10,7 +10,9 @@ import 'related_parties_model.dart';
 import 'related_parties_screen.dart';
 
 class RelatedPartiesPage extends StatelessWidget {
-  const RelatedPartiesPage({super.key});
+  const RelatedPartiesPage({super.key, required this.id});
+
+  final String? id;
 
   @override
   Widget build(BuildContext context) {

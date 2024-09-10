@@ -37,78 +37,81 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
     return ValueListenableBuilder(
         valueListenable: context.read<TreatmentModel>().treatmentMenuData,
         builder: (context, value, _) {
-          return Skeletonizer(
-            enabled: value.loading,
-            child: ColumnSeparated(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              separatorBuilder: (context, index) => SizedBox(
-                height: context.appTheme.spacing.formSpacing,
-              ),
-              children: [
-                Text(
-                  '治療メニュー',
-                  style: context.textTheme.bodyLarge,
+          return  Padding(
+            padding: const EdgeInsets.only(right: 32),
+            child: Skeletonizer(
+              enabled: value.loading,
+              child: ColumnSeparated(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                separatorBuilder: (context, index) => SizedBox(
+                  height: context.appTheme.spacing.formSpacing,
                 ),
-                //header
-                header(context),
-                //body
-                listForm(taxRateFormArray),
-                ValueListenableBuilder(
-                    valueListenable: addIncludeTax,
-                    builder: (context, value, _) {
-                      return InkWell(
-                        onTap: () {
-                          formArray.add(
-                            FormGroup({
-                              '_id': FormControl<String>(),
-                              'hospitalId':
-                                  FormControl<String>(value: widget.hospitalId),
-                              'project': FormControl<String>(),
-                              'treatmentCostExcludingTax':
-                                  FormControl<double>(),
-                              'treatmentCostTaxIncluded': FormControl<double>(),
-                              'remark': FormControl<String>(),
-                              'treatmentCostTax': FormArray([
-                                FormGroup({
-                                  'cost': FormControl<double>(
-                                    value: 0,
-                                  ),
-                                  'tax': FormControl<int>(value: 15),
-                                }),
-                                ...List.generate(value - 1, (index) {
-                                  return FormGroup({
+                children: [
+                  Text(
+                    '治療メニュー',
+                    style: context.textTheme.bodyLarge,
+                  ),
+                  //header
+                  header(context),
+                  //body
+                  listForm(taxRateFormArray),
+                  ValueListenableBuilder(
+                      valueListenable: addIncludeTax,
+                      builder: (context, value, _) {
+                        return InkWell(
+                          onTap: () {
+                            formArray.add(
+                              FormGroup({
+                                '_id': FormControl<String>(),
+                                'hospitalId':
+                                    FormControl<String>(value: widget.hospitalId),
+                                'project': FormControl<String>(),
+                                'treatmentCostExcludingTax':
+                                    FormControl<double>(),
+                                'treatmentCostTaxIncluded': FormControl<double>(),
+                                'remark': FormControl<String>(),
+                                'treatmentCostTax': FormArray([
+                                  FormGroup({
                                     'cost': FormControl<double>(
                                       value: 0,
                                     ),
-                                    'tax': FormControl<int>(),
-                                  });
-                                })
-                              ])
-                            }),
-                          );
-                        },
-                        child: Row(
-                          mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.add_circle,
-                              color: context.appTheme.primaryColor,
-                            ),
-                            SizedBox(
-                              width: context.appTheme.spacing.marginSmall,
-                            ),
-                            Text(
-                              '担当者を追加',
-                              style: TextStyle(
-                                  color: context.appTheme.primaryColor),
-                            )
-                          ],
-                        ),
-                      );
-                    }),
-              ],
+                                    'tax': FormControl<int>(value: 15),
+                                  }),
+                                  ...List.generate(value - 1, (index) {
+                                    return FormGroup({
+                                      'cost': FormControl<double>(
+                                        value: 0,
+                                      ),
+                                      'tax': FormControl<int>(),
+                                    });
+                                  })
+                                ])
+                              }),
+                            );
+                          },
+                          child: Row(
+                            mainAxisSize: MainAxisSize.min,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                Icons.add_circle,
+                                color: context.appTheme.primaryColor,
+                              ),
+                              SizedBox(
+                                width: context.appTheme.spacing.marginSmall,
+                              ),
+                              Text(
+                                '担当者を追加',
+                                style: TextStyle(
+                                    color: context.appTheme.primaryColor),
+                              )
+                            ],
+                          ),
+                        );
+                      }),
+                ],
+              ),
             ),
           );
         });

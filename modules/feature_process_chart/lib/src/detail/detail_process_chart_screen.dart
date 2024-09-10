@@ -23,22 +23,6 @@ class DetailProcessChartScreen extends StatefulWidget {
 class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 
-  List<String> menu = [
-    '行程',
-    '施設',
-    'ホテル検索',
-    'ホテル登録',
-    '関係者',
-  ];
-
-  List<Widget> pages = const [
-    // ItineraryPage(),
-    FacilityPage(),
-    HotelSearchPage(),
-    HotelRegistrationPage(),
-    RelatedPartiesPage(),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
@@ -144,10 +128,10 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
                     child: [
                       ItineraryPage(id: widget.id),
                       if (value.hasData) ...[
-                        FacilityPage(),
-                        HotelSearchPage(),
-                        HotelRegistrationPage(),
-                        RelatedPartiesPage(),
+                        FacilityPage(id: value.requireData.id),
+                        HotelSearchPage(id: value.requireData.id),
+                        HotelRegistrationPage(id: value.requireData.id),
+                        RelatedPartiesPage(id: value.requireData.id),
                       ]
                     ][index],
                   ),
