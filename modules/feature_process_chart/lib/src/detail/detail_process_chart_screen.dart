@@ -131,7 +131,7 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
                         FacilityPage(id: value.requireData.id),
                         HotelSearchPage(id: value.requireData.id),
                         HotelRegistrationPage(id: value.requireData.id),
-                        RelatedPartiesPage(id: value.requireData.id),
+                        RelatedPartiesPage(id: value.requireData.id ?? ''),
                       ]
                     ][index],
                   ),

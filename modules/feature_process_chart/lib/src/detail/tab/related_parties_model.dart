@@ -10,8 +10,11 @@ class RelatedPartiesModel {
   RelatedPartiesModel({required this.processChartRepository});
   final ProcessChartRepository processChartRepository;
 
-  Future<void> fetchData(FormGroup formGroup) async {
+  ValueNotifier<String> tourId = ValueNotifier('');
+
+  Future<void> fetchData(String id, FormGroup formGroup) async {
     try {
+      tourId.value = id;
       await fetchParties(formGroup.control('guideInterpreter') as FormArray);
       await fetchBusCompany(formGroup.control('busCompany') as FormGroup);
       await fetchPartiesDriver(formGroup);
@@ -40,7 +43,8 @@ class RelatedPartiesModel {
   Future<void> fetchParties(FormArray formArray) async {
     try {
       partiesData.value = const AsyncData(loading: true);
-      final response = await processChartRepository.getDetailRelatedParties();
+      final response =
+          await processChartRepository.getDetailRelatedParties(tourId.value);
       insertRelatedParties(formArray, response);
       partiesData.value = AsyncData(data: response);
     } catch (e) {
@@ -56,6 +60,7 @@ class RelatedPartiesModel {
       for (var item in data) {
         formArray.add(FormGroup(
           {
+            'id': FormControl<String>(value: item.id), // ID
             'arrangePerson':
                 FormControl<String>(value: item.arrangePerson), // 手配担当
             'dateFrom': FormControl<DateTime>(value: item.dateFrom), // 年月日（自）
@@ -108,7 +113,8 @@ class RelatedPartiesModel {
       ValueNotifier(const AsyncData());
   Future<void> submitParties(FormGroup formGroup) async {
     try {
-      partiesData.value = const AsyncData(loading: true, data: []);
+      List<DetailRelatedPartiesResponse> data = partiesData.value.data ?? [];
+      partiesData.value = const AsyncData(loading: true);
       await formGroup.control('guideInterpreter').value.forEach(
         (element) async {
           List<String> qualifications = [];
@@ -134,17 +140,20 @@ class RelatedPartiesModel {
             accommodationName: element['accommodationName'],
             address: element['address'],
             phoneNumber2: element['phoneNumber2'],
-            tour: null,
+            tour: tourId.value,
           );
-          var result =
-              await processChartRepository.postDetailRelatedParties(request);
-          partiesData.value.copyWith(data: [
-            ...partiesData.value.requireData,
-            result,
-          ]);
+          if (element['id'] == null) {
+            var result =
+                await processChartRepository.postDetailRelatedParties(request);
+            data.add(result);
+          } else {
+            var result = await processChartRepository.putDetailRelatedParties(
+                request, element['id']);
+            data.map((e) => e.id == element['id'] ? result : e).toList();
+          }
         },
       );
-      partiesData.value = AsyncData(data: partiesData.value.data);
+      partiesData.value = AsyncData(data: data);
       // submitPartiesData.value = AsyncData(data: submitPartiesData.value.data);
     } catch (e) {
       logger.d(e);

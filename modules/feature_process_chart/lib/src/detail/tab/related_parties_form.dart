@@ -7,6 +7,7 @@ FormGroup relatedPartiesForm() => FormGroup(
           [
             FormGroup(
               {
+                'id': FormControl<String>(), // ID
                 'arrangePerson': FormControl<String>(value: ''), // 手配担当
                 'dateFrom': FormControl<DateTime>(), // 年月日（自）
                 'dateTo': FormControl<DateTime>(), // 年月日（至）

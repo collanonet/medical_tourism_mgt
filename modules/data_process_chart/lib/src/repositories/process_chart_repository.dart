@@ -101,7 +101,7 @@ abstract class ProcessChartRepository {
         detailItinerarySimplePickUpAndDropOffRequest,
   );
 
-  Future<List<DetailRelatedPartiesResponse>> getDetailRelatedParties();
+  Future<List<DetailRelatedPartiesResponse>> getDetailRelatedParties(String id);
 
   Future<DetailRelatedPartiesResponse> postDetailRelatedParties(
     DetailRelatedPartiesRequest detailRelatedPartiesRequest,
@@ -142,4 +142,6 @@ abstract class ProcessChartRepository {
   Future<DetailItineraryResponse> postDetailItinerary(
     DetailIneraryRequest detailIneraryRequest,
   );
+
+  Future<DetailRelatedPartiesResponse> putDetailRelatedParties(DetailRelatedPartiesRequest request, element);
 }
