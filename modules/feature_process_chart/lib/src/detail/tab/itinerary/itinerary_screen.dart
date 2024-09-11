@@ -9,7 +9,7 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import '../detail_process_chart_model.dart';
+import '../../detail_process_chart_model.dart';
 import 'itinerary_model.dart';
 
 class ItineraryScreen extends StatefulWidget {

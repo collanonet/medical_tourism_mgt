@@ -1,14 +1,13 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import 'detail_process_chart_model.dart';
-import 'tab/facility_page.dart';
-import 'tab/hotel_registration_page.dart';
-import 'tab/hotel_search_page.dart';
-import 'tab/itinerary_page.dart';
+import 'tab/facility/facility_page.dart';
+import 'tab/hotel_registration/hotel_registration_page.dart';
+import 'tab/hotel_search/hotel_search_page.dart';
+import 'tab/itinerary/itinerary_page.dart';
 import 'tab/related_parties_page.dart';
 
 class DetailProcessChartScreen extends StatefulWidget {

@@ -3,26 +3,25 @@ import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../../filter_process_chart_form.dart';
 import 'package:core_utils/core_utils.dart';
-import 'facility_form.dart';
-import 'facility_model.dart';
-import 'facility_screen.dart';
+import '../hotel_registration/hotel_registration_model.dart';
+import 'hotel_search_form.dart';
+import 'hotel_search_screen.dart';
 
-class FacilityPage extends StatelessWidget {
-  const FacilityPage({super.key, required this.id});
+class HotelSearchPage extends StatelessWidget {
+  const HotelSearchPage({super.key, required this.id});
   final String? id;
-
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
       validationMessages: validationMessages,
       child: ReactiveFormBuilder(
-        form: () => facilityForm()..markAllAsTouched(),
+        form: () => hotelSearchForm()..markAllAsTouched(),
         builder: (context, formGroup, child) {
           return Provider(
-            create: (context) => GetIt.I<FacilityModel>(),
-            child: const FacilityScreen(),
+            create: (context) =>
+                GetIt.I<HotelRegistrationModel>()..fetchHotelregister(),
+            child: const HotelSearchScreen(),
           );
         },
       ),

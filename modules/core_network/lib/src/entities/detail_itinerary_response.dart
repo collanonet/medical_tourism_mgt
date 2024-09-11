@@ -2,15 +2,15 @@
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
+import '../../core_network.dart';
 import 'detail_itinerary_data_response.dart';
-import 'detail_itinerary_patien.dart';
 
 part 'detail_itinerary_response.g.dart';
 @JsonSerializable()
 class DetailItineraryResponse {
   @JsonKey(name: '_id')
   final String? id;
-  List<PatientItinerary>? patient;
+  List<Patient>? patient;
   String? tourName;
   int? peopleNumber;
   int? group;
