@@ -167,8 +167,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                       builder: (context, value, _) {
                                         return ReactiveDropdownFormField(
                                           decoration: const InputDecoration(
-                                            hintText: '種別'
-                                          ),
+                                              hintText: '種別'),
                                           formControlName: 'classification',
                                           items: value
                                               .map((e) => DropdownMenuItem(
@@ -248,374 +247,400 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
     );
   }
 
-  ReactiveFormArray<Object?> dayWidget() {
-    return ReactiveFormArray(
-      formArrayName: 'day',
-      builder: (context, formArray, child) {
-        final rows = formArray.controls
-            .map((control) => control as FormGroup)
-            .map(
-              (currentForm) => ReactiveForm(
-                formGroup: currentForm,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(
-                        context.appTheme.spacing.marginMedium,
-                      ),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.vertical(
-                          top: Radius.circular(
-                            context.appTheme.spacing.borderRadiusMedium,
-                          ),
-                        ),
-                        color: Colors.grey[200],
-                      ),
+  dayWidget() {
+    return ReactiveValueListenableBuilder(
+        formControlName: 'day',
+        builder: (context, control, _) {
+          return ReactiveFormArray(
+            formArrayName: 'day',
+            builder: (context, formArray, child) {
+              logger.d(formArray.controls);
+              final rows = formArray.controls
+                  .map((control) => control as FormGroup)
+                  .map(
+                    (currentForm) => ReactiveForm(
+                      formGroup: currentForm,
                       child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
                         children: [
-                          Text(
-                            '${formArray.controls.indexOf(currentForm) + 1}日目',
-                            style: context.textTheme.titleMedium,
-                          ),
-                          Row(
-                            children: [
-                              IntrinsicWidth(
-                                stepWidth: 300,
-                                child: ColumnSeparated(
-                                  crossAxisAlignment:
-                                      CrossAxisAlignment.stretch,
-                                  separatorBuilder:
-                                      (BuildContext context, int index) {
-                                    return const SizedBox(height: 8);
-                                  },
+                          Container(
+                            padding: EdgeInsets.all(
+                              context.appTheme.spacing.marginMedium,
+                            ),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.vertical(
+                                top: Radius.circular(
+                                  context.appTheme.spacing.borderRadiusMedium,
+                                ),
+                              ),
+                              color: Colors.grey[200],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  '${formArray.controls.indexOf(currentForm) + 1}日目',
+                                  style: context.textTheme.titleMedium,
+                                ),
+                                Row(
                                   children: [
-                                    ReactiveDatePicker<DateTime>(
-                                        formControlName: 'date',
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
-                                        builder: (context, picker, child) {
-                                          return ReactiveTextField<DateTime>(
-                                            formControlName: 'date',
-                                            valueAccessor:
-                                                DateTimeValueAccessor(),
-                                            decoration: InputDecoration(
-                                              fillColor: Colors.white,
-                                              filled: true,
-                                              suffixIcon: IconButton(
-                                                icon: const Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
-                                                ),
-                                                onPressed: picker.showPicker,
+                                    IntrinsicWidth(
+                                      stepWidth: 300,
+                                      child: ColumnSeparated(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.stretch,
+                                        separatorBuilder:
+                                            (BuildContext context, int index) {
+                                          return const SizedBox(height: 8);
+                                        },
+                                        children: [
+                                          ReactiveDatePicker<DateTime>(
+                                              formControlName: 'date',
+                                              firstDate: DateTime(1900),
+                                              lastDate: DateTime(2100),
+                                              builder:
+                                                  (context, picker, child) {
+                                                return ReactiveTextField<
+                                                    DateTime>(
+                                                  formControlName: 'date',
+                                                  valueAccessor:
+                                                      DateTimeValueAccessor(),
+                                                  decoration: InputDecoration(
+                                                    fillColor: Colors.white,
+                                                    filled: true,
+                                                    suffixIcon: IconButton(
+                                                      icon: const Icon(
+                                                        CupertinoIcons.calendar,
+                                                        color: Colors.grey,
+                                                      ),
+                                                      onPressed:
+                                                          picker.showPicker,
+                                                    ),
+                                                  ),
+                                                );
+                                              }),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text('食事'),
+                                        SizedBox(
+                                          height: context
+                                              .appTheme.spacing.marginSmall,
+                                        ),
+                                        Row(
+                                          children: [
+                                            IntrinsicWidth(
+                                              child: ReactiveCheckboxListTile(
+                                                controlAffinity:
+                                                    ListTileControlAffinity
+                                                        .leading,
+                                                contentPadding: EdgeInsets.zero,
+                                                formControlName: 'morning',
+                                                title: Text('朝'),
                                               ),
                                             ),
-                                          );
-                                        }),
+                                            SizedBox(
+                                              width: context
+                                                  .appTheme.spacing.marginSmall,
+                                            ),
+                                            IntrinsicWidth(
+                                              child: ReactiveCheckboxListTile(
+                                                controlAffinity:
+                                                    ListTileControlAffinity
+                                                        .leading,
+                                                contentPadding: EdgeInsets.zero,
+                                                formControlName: 'noon',
+                                                title: Text('昼'),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: context
+                                                  .appTheme.spacing.marginSmall,
+                                            ),
+                                            IntrinsicWidth(
+                                              child: ReactiveCheckboxListTile(
+                                                controlAffinity:
+                                                    ListTileControlAffinity
+                                                        .leading,
+                                                contentPadding: EdgeInsets.zero,
+                                                formControlName: 'evening',
+                                                title: Text('夕'),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    Expanded(
+                                      child: ReactiveTextField(
+                                        formControlName: 'placeName',
+                                        decoration: const InputDecoration(
+                                          label: Text(
+                                            '地名',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    Expanded(
+                                      child: ReactiveTextField(
+                                        formControlName: 'placeStay',
+                                        decoration: const InputDecoration(
+                                          label: Text(
+                                            '宿泊場所',
+                                          ),
+                                        ),
+                                      ),
+                                    ),
                                   ],
                                 ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text('食事'),
-                                  SizedBox(
-                                    height:
-                                        context.appTheme.spacing.marginSmall,
-                                  ),
-                                  Row(
-                                    children: [
-                                      IntrinsicWidth(
-                                        child: ReactiveCheckboxListTile(
-                                          controlAffinity:
-                                              ListTileControlAffinity.leading,
-                                          contentPadding: EdgeInsets.zero,
-                                          formControlName: 'morning',
-                                          title: Text('朝'),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginSmall,
-                                      ),
-                                      IntrinsicWidth(
-                                        child: ReactiveCheckboxListTile(
-                                          controlAffinity:
-                                              ListTileControlAffinity.leading,
-                                          contentPadding: EdgeInsets.zero,
-                                          formControlName: 'noon',
-                                          title: Text('昼'),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginSmall,
-                                      ),
-                                      IntrinsicWidth(
-                                        child: ReactiveCheckboxListTile(
-                                          controlAffinity:
-                                              ListTileControlAffinity.leading,
-                                          contentPadding: EdgeInsets.zero,
-                                          formControlName: 'evening',
-                                          title: Text('夕'),
-                                        ),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              Expanded(
-                                child: ReactiveTextField(
-                                  formControlName: 'placeName',
-                                  decoration: const InputDecoration(
-                                    label: Text(
-                                      '地名',
-                                    ),
-                                  ),
+                                Divider(
+                                  color: Colors.grey,
                                 ),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              Expanded(
-                                child: ReactiveTextField(
-                                  formControlName: 'placeStay',
-                                  decoration: const InputDecoration(
-                                    label: Text(
-                                      '宿泊場所',
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                          Divider(
-                            color: Colors.grey,
-                          ),
+                          groupWidget(),
                         ],
                       ),
                     ),
-                    groupWidget(),
-                  ],
-                ),
-              ),
-            );
+                  );
 
-        return ColumnSeparated(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(
-              height: context.appTheme.spacing.marginMedium,
-            );
-          },
-          children: [
-            ColumnSeparated(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              separatorBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  height: context.appTheme.spacing.marginMedium,
-                );
-              },
-              children: rows.toList(),
-            ),
-            Container(
-              padding: EdgeInsets.all(
-                context.appTheme.spacing.marginMedium,
-              ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(
-                    context.appTheme.spacing.borderRadiusMedium),
-                color: Colors.grey[200],
-              ),
-              child: Padding(
-                padding: EdgeInsets.all(
-                  context.appTheme.spacing.marginMedium,
-                ),
-                child: InkWell(
-                  onTap: () => formArray.add(
-                    FormGroup(
-                      {
-                        'date': FormControl<DateTime>(), // 日付
+              return ColumnSeparated(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(
+                    height: context.appTheme.spacing.marginMedium,
+                  );
+                },
+                children: [
+                  ColumnSeparated(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      );
+                    },
+                    children: rows.toList(),
+                  ),
+                  Container(
+                    padding: EdgeInsets.all(
+                      context.appTheme.spacing.marginMedium,
+                    ),
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(
+                          context.appTheme.spacing.borderRadiusMedium),
+                      color: Colors.grey[200],
+                    ),
+                    child: Padding(
+                      padding: EdgeInsets.all(
+                        context.appTheme.spacing.marginMedium,
+                      ),
+                      child: InkWell(
+                        onTap: () => formArray.add(
+                          FormGroup(
+                            {
+                              'date': FormControl<DateTime>(), // 日付
 
-                        //meals
-                        'morning': FormControl<bool>(value: false),
-                        'noon': FormControl<bool>(value: false),
-                        'evening': FormControl<bool>(value: false),
+                              //meals
+                              'morning': FormControl<bool>(value: false),
+                              'noon': FormControl<bool>(value: false),
+                              'evening': FormControl<bool>(value: false),
 
-                        'placeName': FormControl<String>(value: ''), // 地名
-                        'placeStay': FormControl<String>(value: ''), // 宿泊場所
-                        'groups': FormArray(
-                          // グループ
-                          [
-                            FormGroup(
-                              {
-                                'tasks': FormArray(
-                                  [
-                                    FormGroup(
-                                      {
-                                        'placeName': FormControl<String>(
-                                            value: ''), // 地名
-                                        'timeFrom': FormControl<String>(
-                                            value: ''), // 時刻（自）
-                                        'timeTo': FormControl<String>(
-                                            value: ''), // 時刻（至）
-                                        'transportation': FormControl<String>(
-                                            value: ''), // 交通
-                                        'itinerary': FormControl<String>(
-                                            value: ''), // 行程
-                                      },
-                                    ),
-                                  ],
-                                ),
-                              },
+                              'placeName': FormControl<String>(value: ''), // 地名
+                              'placeStay':
+                                  FormControl<String>(value: ''), // 宿泊場所
+                              'groups': FormArray(
+                                // グループ
+                                [
+                                  FormGroup(
+                                    {
+                                      'tasks': FormArray(
+                                        [
+                                          FormGroup(
+                                            {
+                                              'placeName': FormControl<String>(
+                                                  value: ''), // 地名
+                                              'timeFrom': FormControl<String>(
+                                                  value: ''), // 時刻（自）
+                                              'timeTo': FormControl<String>(
+                                                  value: ''), // 時刻（至）
+                                              'transportation':
+                                                  FormControl<String>(
+                                                      value: ''), // 交通
+                                              'itinerary': FormControl<String>(
+                                                  value: ''), // 行程
+                                            },
+                                          ),
+                                        ],
+                                      ),
+                                    },
+                                  ),
+                                ],
+                              ),
+                            },
+                          ),
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Icon(
+                              Icons.add_circle,
+                              color: context.appTheme.primaryColor,
                             ),
+                            SizedBox(
+                              width: context.appTheme.spacing.marginSmall,
+                            ),
+                            Text(
+                              '日程を追加',
+                              style: TextStyle(
+                                  color: context.appTheme.primaryColor),
+                            )
                           ],
                         ),
-                      },
+                      ),
                     ),
                   ),
-                  child: Row(
-                    mainAxisSize: MainAxisSize.min,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.add_circle,
-                        color: context.appTheme.primaryColor,
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginSmall,
-                      ),
-                      Text(
-                        '日程を追加',
-                        style: TextStyle(color: context.appTheme.primaryColor),
-                      )
-                    ],
-                  ),
-                ),
-              ),
-            ),
-          ],
-        );
-      },
-    );
+                ],
+              );
+            },
+          );
+        });
   }
 
-  ReactiveFormArray<Object?> groupWidget() {
-    return ReactiveFormArray(
-      formArrayName: 'groups',
-      builder: (context, formArray, child) {
-        final rows = formArray.controls
-            .map((control) => control as FormGroup)
-            .map(
-              (currentForm) => ReactiveForm(
-                formGroup: currentForm,
-                child: Container(
-                  padding: EdgeInsets.all(
-                    context.appTheme.spacing.marginMedium,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: formArray.controls.indexOf(currentForm) == 0
-                        ? BorderRadius.vertical(
-                            bottom: Radius.circular(
-                              context.appTheme.spacing.borderRadiusMedium,
+  groupWidget() {
+    return ReactiveValueListenableBuilder(
+        formControlName: 'groups',
+        builder: (context, control, _) {
+          return ReactiveFormArray(
+            formArrayName: 'groups',
+            builder: (context, formArray, child) {
+              final rows =
+                  formArray.controls.map((control) => control as FormGroup).map(
+                        (currentForm) => ReactiveForm(
+                          formGroup: currentForm,
+                          child: Container(
+                            padding: EdgeInsets.all(
+                              context.appTheme.spacing.marginMedium,
                             ),
-                          )
-                        : BorderRadius.all(
-                            Radius.circular(
-                              context.appTheme.spacing.borderRadiusMedium,
+                            decoration: BoxDecoration(
+                              borderRadius:
+                                  formArray.controls.indexOf(currentForm) == 0
+                                      ? BorderRadius.vertical(
+                                          bottom: Radius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium,
+                                          ),
+                                        )
+                                      : BorderRadius.all(
+                                          Radius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium,
+                                          ),
+                                        ),
+                              color: Colors.grey[200],
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.stretch,
+                              children: [
+                                Text(
+                                  'グループ${formArray.controls.indexOf(currentForm) + 1}',
+                                  style: context.textTheme.titleMedium,
+                                ),
+                                SizedBox(
+                                  height: context.appTheme.spacing.marginMedium,
+                                ),
+                                taskWidget(),
+                              ],
                             ),
                           ),
-                    color: Colors.grey[200],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      Text(
-                        'グループ${formArray.controls.indexOf(currentForm) + 1}',
-                        style: context.textTheme.titleMedium,
-                      ),
-                      SizedBox(
-                        height: context.appTheme.spacing.marginMedium,
-                      ),
-                      taskWidget(),
-                    ],
-                  ),
-                ),
-              ),
-            );
-
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            ColumnSeparated(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              separatorBuilder: (BuildContext context, int index) {
-                return SizedBox(
-                  height: context.appTheme.spacing.marginMedium,
-                );
-              },
-              children: rows.toList(),
-            ),
-            SizedBox(
-              height: context.appTheme.spacing.marginMedium,
-            ),
-            InkWell(
-              onTap: () => formArray.add(
-                FormGroup(
-                  {
-                    'groups': FormControl<String>(value: ''), // グループ番号
-                    'tasks': FormArray(
-                      [
-                        FormGroup(
-                          {
-                            'placeName': FormControl<String>(value: ''),
-                            // 地名
-                            'timeFrom': FormControl<String>(value: ''),
-                            // 時刻（自）
-                            'timeTo': FormControl<String>(value: ''),
-                            // 時刻（至）
-                            'transportation': FormControl<String>(value: ''),
-                            // 交通
-                            'itinerary': FormControl<String>(value: ''),
-                            // 行程
-                          },
                         ),
-                      ],
-                    ),
-                  },
-                ),
-              ),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                mainAxisAlignment: MainAxisAlignment.center,
+                      );
+
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Icon(
-                    Icons.add_circle,
-                    color: context.appTheme.primaryColor,
+                  ColumnSeparated(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      );
+                    },
+                    children: rows.toList(),
                   ),
                   SizedBox(
-                    width: context.appTheme.spacing.marginSmall,
+                    height: context.appTheme.spacing.marginMedium,
                   ),
-                  Text(
-                    'グループを追加',
-                    style: TextStyle(color: context.appTheme.primaryColor),
-                  )
+                  InkWell(
+                    onTap: () => formArray.add(
+                      FormGroup(
+                        {
+                          'groups': FormControl<String>(value: ''), // グループ番号
+                          'tasks': FormArray(
+                            [
+                              FormGroup(
+                                {
+                                  'placeName': FormControl<String>(value: ''),
+                                  // 地名
+                                  'timeFrom': FormControl<String>(value: ''),
+                                  // 時刻（自）
+                                  'timeTo': FormControl<String>(value: ''),
+                                  // 時刻（至）
+                                  'transportation':
+                                      FormControl<String>(value: ''),
+                                  // 交通
+                                  'itinerary': FormControl<String>(value: ''),
+                                  // 行程
+                                },
+                              ),
+                            ],
+                          ),
+                        },
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.add_circle,
+                          color: context.appTheme.primaryColor,
+                        ),
+                        SizedBox(
+                          width: context.appTheme.spacing.marginSmall,
+                        ),
+                        Text(
+                          'グループを追加',
+                          style:
+                              TextStyle(color: context.appTheme.primaryColor),
+                        )
+                      ],
+                    ),
+                  ),
                 ],
-              ),
-            ),
-          ],
-        );
-      },
-    );
+              );
+            },
+          );
+        });
   }
 
   ReactiveFormArray<Object?> taskWidget() {

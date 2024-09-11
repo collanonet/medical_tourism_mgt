@@ -10,19 +10,17 @@ class ItineraryModel {
   ItineraryModel({required this.processChartRepository});
 
   final ProcessChartRepository processChartRepository;
-  // ValueNotifier<String?> id = ValueNotifier(null);
 
   ValueNotifier<AsyncData<DetailItineraryResponse>> itinerraryData =
       ValueNotifier(const AsyncData());
 
   Future<void> fetchItinerary(FormGroup formGroup, {String? id}) async {
     try {
-      // this.id.value = id;
       if (id != null) {
         itinerraryData.value = const AsyncData(loading: true);
         final response =
             await processChartRepository.getDetailItinerary(id: id);
-        insertItinerary(formGroup, response);
+        await insertItinerary(formGroup, response);
         itinerraryData.value = AsyncData(data: response);
         logger.d('fetchItinerary success ${response.toJson()}');
       }
@@ -33,198 +31,128 @@ class ItineraryModel {
     }
   }
 
-  void insertItinerary(FormGroup formGroup, DetailItineraryResponse data) {
+  Future<void> insertItinerary(
+      FormGroup formGroup, DetailItineraryResponse data) async {
     try {
-      // FormArray patientName = FormArray([]);
-      // for (var element in data!.patient!) {
-      //   patientName.add(
-      //     FormGroup(
-      //       {
-      //         'patientName': FormControl<String>(value: element), // 患者名
-      //       },
-      //     ),
-      //   );
-      // }
+      // Debug: Check if data is received
+      logger.d('Received data: ${data.toJson()}');
+
       formGroup.control('tourName').value = data.tourName;
       formGroup.control('peopleNumber').value = data.peopleNumber;
       formGroup.control('group').value = data.group;
       formGroup.control('classification').value = data.classification;
       formGroup.control('_id').value = data.id;
 
-      FormArray days = FormArray([]);
+      List<FormGroup> days = [];
 
       data.day?.forEach((e) {
-        logger.d('date ${e.toJson()}');
-        // // work with groups
-        FormArray groups = FormArray([]);
+        logger.d('Processing day: ${e.toJson()}');
+        List<FormGroup> groups = [];
 
         e.groups?.forEach((element) {
-          // working with tasks
-          FormArray tasks = FormArray([]);
-          element.tasks?.forEach(
-            (element) {
-              tasks.add(
-                FormGroup(
-                  {
-                    '_id': FormControl<String>(value: element.id),
-                    'placeName': FormControl<String>(value: element.placeName),
-                    'timeFrom': FormControl<String>(value: element.timeFrom),
-                    'timeTo': FormControl<String>(value: element.timeTo),
-                    'transportation':
-                        FormControl<String>(value: element.transportation),
-                    'itinerary': FormControl<String>(value: element.itinerary),
-                  },
-                ),
-              );
-            },
-          );
-
-          // insert default form if task null
-          if (element.tasks == null) {
-            tasks = FormArray(
-              [
-                FormGroup(
-                  {
-                    '_id': FormControl<String>(),
-                    'placeName': FormControl<String>(value: ''), // 地名
-                    'timeFrom': FormControl<String>(value: ''), // 時刻（自）
-                    'timeTo': FormControl<String>(value: ''), // 時刻（至）
-                    'transportation': FormControl<String>(value: ''), // 交通
-                    'itinerary': FormControl<String>(value: ''), // 行程
-                  },
-                ),
-              ],
+          List<FormGroup> tasks = [];
+          element.tasks?.forEach((task) {
+            tasks.add(
+              FormGroup({
+                '_id': FormControl<String>(value: task.id),
+                'placeName': FormControl<String>(value: task.placeName),
+                'timeFrom': FormControl<String>(value: task.timeFrom),
+                'timeTo': FormControl<String>(value: task.timeTo),
+                'transportation':
+                    FormControl<String>(value: task.transportation),
+                'itinerary': FormControl<String>(value: task.itinerary),
+              }),
             );
+          });
+
+          if (element.tasks == null) {
+            tasks = [
+              FormGroup({
+                '_id': FormControl<String>(),
+                'placeName': FormControl<String>(value: ''),
+                'timeFrom': FormControl<String>(value: ''),
+                'timeTo': FormControl<String>(value: ''),
+                'transportation': FormControl<String>(value: ''),
+                'itinerary': FormControl<String>(value: ''),
+              }),
+            ];
           }
 
-          groups.add(FormGroup({
-            'tasks': tasks,
-          }));
+          groups.add(FormGroup({'tasks': FormArray(tasks)}));
         });
 
-        // insert default form if groups null
         if (e.groups == null) {
-          groups = FormArray(
-            // グループ
-            [
-              FormGroup(
-                {
-                  'tasks': FormArray(
-                    [
-                      FormGroup(
-                        {
-                          '_id': FormControl<String>(),
-                          'placeName': FormControl<String>(value: ''), // 地名
-                          'timeFrom': FormControl<String>(value: ''), // 時刻（自）
-                          'timeTo': FormControl<String>(value: ''), // 時刻（至）
-                          'transportation':
-                              FormControl<String>(value: ''), // 交通
-                          'itinerary': FormControl<String>(value: ''), // 行程
-                        },
-                      ),
-                    ],
-                  ),
-                },
-              ),
-            ],
-          );
+          groups = [
+            FormGroup({
+              'tasks': FormArray([
+                FormGroup({
+                  '_id': FormControl<String>(),
+                  'placeName': FormControl<String>(value: ''),
+                  'timeFrom': FormControl<String>(value: ''),
+                  'timeTo': FormControl<String>(value: ''),
+                  'transportation': FormControl<String>(value: ''),
+                  'itinerary': FormControl<String>(value: ''),
+                }),
+              ]),
+            }),
+          ];
         }
 
         days.add(
-          FormGroup(
-            {
-              '_id': FormControl<String>(value: e.id),
-              'date': FormControl<DateTime>(value: e.date), // 日付
-              'meals': FormControl<List<bool>>(value: e.meals ?? []),
-              'morning': FormControl<bool>(value: e.meals?[0] ?? false),
-              'noon': FormControl<bool>(value: e.meals?[1] ?? false),
-              'evening': FormControl<bool>(value: e.meals?[2] ?? false),
-              'placeName': FormControl<String>(value: e.placeName), // 地名
-              'placeStay': FormControl<String>(value: e.placeStay), // 宿泊場所
-              'groups': groups,
-            },
-          ),
+          FormGroup({
+            '_id': FormControl<String>(value: e.id),
+            'date': FormControl<DateTime>(value: e.date),
+            'meals': FormControl<List<bool>>(value: e.meals ?? []),
+            'morning': FormControl<bool>(value: e.meals?[0] ?? false),
+            'noon': FormControl<bool>(value: e.meals?[1] ?? false),
+            'evening': FormControl<bool>(value: e.meals?[2] ?? false),
+            'placeName': FormControl<String>(value: e.placeName),
+            'placeStay': FormControl<String>(value: e.placeStay),
+            'groups': FormArray(groups),
+          }),
         );
       });
 
       if (data.day == null || data.day!.isEmpty) {
-        days = FormArray(
-          [
-            FormGroup(
-              {
-                '_id': FormControl<String>(value: ''),
-                'date': FormControl<DateTime>(), // 日付
-                'meals': FormControl<List<bool>>(value: []),
-                //meals
-                'morning': FormControl<bool>(value: false),
-                'noon': FormControl<bool>(value: false),
-                'evening': FormControl<bool>(value: false),
-
-                'placeName': FormControl<String>(value: ''), // 地名
-                'placeStay': FormControl<String>(value: ''), // 宿泊場所
-                'groups': FormArray(
-                  // グループ
-                  [
-                    FormGroup(
-                      {
-                        'task': FormArray(
-                          [
-                            FormGroup(
-                              {
-                                '_id': FormControl<String>(),
-                                'placeName':
-                                    FormControl<String>(value: ''), // 地名
-                                'timeFrom':
-                                    FormControl<String>(value: ''), // 時刻（自）
-                                'timeTo':
-                                    FormControl<String>(value: ''), // 時刻（至）
-                                'transportation':
-                                    FormControl<String>(value: ''), // 交通
-                                'itinerary':
-                                    FormControl<String>(value: ''), // 行程
-                              },
-                            ),
-                          ],
-                        ),
-                      },
-                    ),
-                  ],
-                ),
-              },
-            ),
-          ],
-        );
+        days = [
+          FormGroup({
+            '_id': FormControl<String>(value: ''),
+            'date': FormControl<DateTime>(),
+            'meals': FormControl<List<bool>>(value: []),
+            'morning': FormControl<bool>(value: false),
+            'noon': FormControl<bool>(value: false),
+            'evening': FormControl<bool>(value: false),
+            'placeName': FormControl<String>(value: ''),
+            'placeStay': FormControl<String>(value: ''),
+            'groups': FormArray([
+              FormGroup({
+                'tasks': FormArray([
+                  FormGroup({
+                    '_id': FormControl<String>(),
+                    'placeName': FormControl<String>(value: ''),
+                    'timeFrom': FormControl<String>(value: ''),
+                    'timeTo': FormControl<String>(value: ''),
+                    'transportation': FormControl<String>(value: ''),
+                    'itinerary': FormControl<String>(value: ''),
+                  }),
+                ]),
+              }),
+            ]),
+          }),
+        ];
       }
 
-      logger.d('days ${days.value}');
-      formGroup = FormGroup({
-        'patient': FormArray(
-          [
-            FormGroup(
-              {
-                'patientName': FormControl<String>(value: ''), // 患者名
-              },
-            ),
-            FormGroup(
-              {
-                'patientName': FormControl<String>(value: ''), // 患者名
-              },
-            ),
-            FormGroup(
-              {
-                'patientName': FormControl<String>(value: ''), // 患者名
-              },
-            ),
-          ],
-        ),
-        'tourName': FormControl<String>(value: data.tourName),
-        'peopleNumber': FormControl<int>(value: data.peopleNumber),
-        'group': FormControl<int>(value: data.group),
-        'classification': FormControl<String>(value: data.classification),
-        'day': days,
-      });
+      FormArray daysForm = formGroup.control('day') as FormArray;
+
+      if (days.isNotEmpty) {
+        daysForm.clear();
+        daysForm.addAll(days);
+      }
+
+      // Debug: Check if form is updated
+      logger.d('Form updated: ${formGroup.value}');
     } catch (e) {
-      logger.d(e);
+      logger.d('Error: $e');
     }
   }
 
@@ -300,6 +228,7 @@ class ItineraryModel {
       submitData.value = AsyncData(error: e);
     }
   }
+
   ValueNotifier<List<Type>> classification = ValueNotifier([
     Type(type: '新規見積依頼'),
     Type(type: '新規手配依頼'),
@@ -309,7 +238,8 @@ class ItineraryModel {
   ]);
 }
 
-class Type{
+class Type {
   final String type;
+
   Type({required this.type});
 }

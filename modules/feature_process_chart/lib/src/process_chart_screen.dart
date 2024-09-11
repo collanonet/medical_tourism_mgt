@@ -123,15 +123,16 @@ class ProcessChartScreen extends StatelessWidget {
                                         ),
                                         Expanded(
                                             flex: 2,
-                                            child: Text(value.data?[index].day
-                                                        ?.length ==
-                                                    0
-                                                ? '--'
-                                                : value.data?[index].day
-                                                            ?.length ==
-                                                        1
-                                                    ? "${value.data?[index].day?.first.date == null ? '' : Dates.formatFullDate(value.data![index].day!.first.date!)}"
-                                                    : '${value.data?[index].day?.first.date == null ? '' : Dates.formatFullDate(value.data![index].day!.first.date!)}〜${value.data?[index].day?.last.date == null ? '' : Dates.formatFullDate(value.data![index].day!.last.date!)}')),
+                                            child: Text(
+                                              value.data?[index].day?.length ==
+                                                      0
+                                                  ? '--'
+                                                  : value.data?[index].day
+                                                              ?.length ==
+                                                          1
+                                                      ? "${value.data?[index].day?.first.date == null ? '' : Dates.formatFullDate(value.data![index].day!.first.date!)}"
+                                                      : '${value.data?[index].day?.first.date == null ? '' : Dates.formatFullDate(value.data![index].day!.first.date!)}〜${value.data?[index].day?.last.date == null ? '' : Dates.formatFullDate(value.data![index].day!.last.date!)}',
+                                            )),
                                         SizedBox(
                                           width: context
                                               .appTheme.spacing.marginMedium,
