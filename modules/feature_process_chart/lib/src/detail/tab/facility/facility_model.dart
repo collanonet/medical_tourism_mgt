@@ -8,10 +8,14 @@ import 'package:reactive_forms/reactive_forms.dart';
 @injectable
 class FacilityModel {
   FacilityModel({required this.processChartRepository});
+
   final ProcessChartRepository processChartRepository;
 
-  Future<void> fetchData(FormGroup formGroup) async {
+  ValueNotifier<String> tourId = ValueNotifier('');
+
+  Future<void> fetchData(FormGroup formGroup, String id) async {
     try {
+      tourId.value = id;
       await fetchDetailFacilityHotel(formGroup.control('Hotel') as FormArray);
       await fetchDetailDropInFacility(
           formGroup.control('drop_in_facility') as FormGroup);
@@ -21,6 +25,7 @@ class FacilityModel {
   }
 
   ValueNotifier<AsyncData<bool>> submitData = ValueNotifier(const AsyncData());
+
   void submit(FormGroup formGroup) async {
     try {
       submitData.value = const AsyncData(loading: true);
@@ -37,19 +42,22 @@ class FacilityModel {
   ValueNotifier<AsyncData<List<DetailFacilityHotelResponse>>>
       detailFacilityHotelData = ValueNotifier(
           const AsyncData<List<DetailFacilityHotelResponse>>(data: []));
+
   Future<void> fetchDetailFacilityHotel(FormArray formArray) async {
     try {
       detailFacilityHotelData.value = const AsyncData(loading: true);
-      final response = await processChartRepository.getDetialFacilityHospital();
+      final response =
+          await processChartRepository.getDetialFacilityHospital(tourId.value);
       insertFacilityHotel(formArray, response);
+      detailFacilityHotelData.value = AsyncData(data: response);
     } catch (e) {
       detailFacilityHotelData.value = AsyncData(error: e);
     }
   }
 
   void insertFacilityHotel(
-      FormArray formArray, List<DetailFacilityHotelResponse>? data) {
-    if (data!.isNotEmpty) {
+      FormArray formArray, List<DetailFacilityHotelResponse> data) {
+    if (data.isNotEmpty) {
       formArray.clear();
       for (var item in data) {
         for (int i = 0; i < item.foreignLanguageStaff!.length; i++) {
@@ -69,6 +77,7 @@ class FacilityModel {
         formArray.add(
           FormGroup(
             {
+              'id': FormControl<String>(value: item.id), // ID
               'arrangePerson':
                   FormControl<String>(value: item.arrangePerson), // 手配担当
               'accommodationName':
@@ -80,6 +89,7 @@ class FacilityModel {
                   FormControl<String>(value: item.phoneNumber), // 電話番号
               'remarks': FormControl<String>(value: item.remarks), // 備考
               'foreignLanguageStaff': FormControl<List<String>>(value: []),
+              'tour': FormControl<String>(value: item.tour),
               // 外国語スタッフ
               //
               // 'chinese': FormControl<bool>(value: false), //
@@ -94,13 +104,16 @@ class FacilityModel {
     }
   }
 
-  ValueNotifier<AsyncData<DetailFacilityHotelResponse>>
+  ValueNotifier<AsyncData<List<DetailFacilityHotelResponse>>>
       submitDetailFacilityData = ValueNotifier(const AsyncData());
+
   Future<void> submitDetailFacilityHotel(FormGroup formGroup) async {
     try {
-      detailFacilityHotelData.value = const AsyncData(loading: true, data: []);
+      List<DetailFacilityHotelResponse> data =
+          detailFacilityHotelData.value.data ?? [];
+      submitDetailFacilityData.value = const AsyncData(loading: true);
 
-      formGroup.control('Hotel').value.forEach(
+      await formGroup.control('Hotel').value.forEach(
         (element) async {
           List<String>? languages = [];
           if (element['japanese'] == true) {
@@ -125,15 +138,22 @@ class FacilityModel {
             foreignLanguageStaff: languages,
             other: element['others'],
             hotel: null,
+            tour: tourId.value,
           );
-          var result =
-              await processChartRepository.postDetailFacilityHospital(request);
-          detailFacilityHotelData.value.copyWith(
-              data: [...detailFacilityHotelData.value.requireData, result]);
+          if (element['id'] == null) {
+            var result = await processChartRepository
+                .postDetailFacilityHospital(request);
+            data.add(result);
+          } else {
+            var result = await processChartRepository.putDetailFacilityHospital(
+                element['id'], request);
+            data.map((e) => e.id == result.id ? result : e).toList();
+          }
         },
       );
-      detailFacilityHotelData.value =
-          AsyncData(data: detailFacilityHotelData.value.data);
+
+      detailFacilityHotelData.value = AsyncData(data: data);
+      submitDetailFacilityData.value = AsyncData(data: data);
     } catch (e) {
       logger.d(e);
       submitDetailFacilityData.value = AsyncData(error: e);
@@ -142,10 +162,12 @@ class FacilityModel {
 
   ValueNotifier<AsyncData<List<DetailDropInFacilityResponse>>>
       dropInFacilityData = ValueNotifier(const AsyncData());
+
   Future<void> fetchDetailDropInFacility(FormGroup formGroup) async {
     try {
       dropInFacilityData.value = const AsyncData(loading: true);
-      final response = await processChartRepository.getDetailFacilityDropIn();
+      final response =
+          await processChartRepository.getDetailFacilityDropIn(tourId.value);
       insertDropInFacility(formGroup, response);
       dropInFacilityData.value = AsyncData(data: response);
     } catch (e) {
@@ -155,9 +177,9 @@ class FacilityModel {
   }
 
   void insertDropInFacility(
-      FormGroup formGroup, List<DetailDropInFacilityResponse>? data) {
+      FormGroup formGroup, List<DetailDropInFacilityResponse> data) {
     // var firstData = data![0];
-    for (var item in data!) {
+    for (var item in data) {
       var places = formGroup.control('places') as FormArray;
       if (data.isNotEmpty) {
         places.clear();
@@ -165,6 +187,7 @@ class FacilityModel {
           places.add(
             FormGroup(
               {
+                'id': FormControl<String>(value: e.id),
                 'accommodationName':
                     FormControl<String>(value: e.accommodationName), // 施設名
                 'address': FormControl<String>(value: e.address), // 所在地
@@ -172,6 +195,7 @@ class FacilityModel {
                     FormControl<String>(value: e.accommodationName), // 担当者名
                 'phoneNumber':
                     FormControl<String>(value: e.phoneNumber), // 電話番号
+                'tour': FormControl<String>(value: e.tour),
               },
             ),
           );
@@ -180,10 +204,12 @@ class FacilityModel {
         places.add(
           FormGroup(
             {
+              'id': FormControl<String>(value: ''), // ID
               'accommodationName': FormControl<String>(value: ''), // 施設名
               'address': FormControl<String>(value: ''), // 所在地
               'contactPersonName': FormControl<String>(value: ''), // 担当者名
               'phoneNumber': FormControl<String>(value: ''), // 電話番号
+              'tour': FormControl<String>(value: ''), // ツアーID
             },
           ),
         );
@@ -192,29 +218,50 @@ class FacilityModel {
     }
   }
 
-  ValueNotifier<AsyncData<DetailDropInFacilityResponse>>
+  ValueNotifier<AsyncData<List<DetailDropInFacilityResponse>>>
       submitDropInFacilityData = ValueNotifier(const AsyncData());
+
   Future<void> submitDropInDacility(FormGroup formGroup) async {
     try {
+      List<DetailDropInFacilityResponse> data =
+          dropInFacilityData.value.data ?? [];
       submitDropInFacilityData.value = const AsyncData(loading: true);
       List<Facility> places = [];
       formGroup.control('places').value.forEach((element) {
         places.add(Facility(
+          id: element['id'],
           accommodationName: element['accommodationName'],
           address: element['address'],
           contctPersonName: element['contactPersonName'],
           phoneNumber: element['phoneNumber'],
+          tour: tourId.value,
         ));
       });
-      final response = await processChartRepository.postDetailFacilityDropIn(
-        DetailDropInFacilityRequest(
-          arrangePerson: formGroup.control('arrangePerson').value,
-          places: places,
-        ),
-      );
-      dropInFacilityData.value =
-          AsyncData(data: dropInFacilityData.value.data!..add(response));
-      submitDropInFacilityData.value = AsyncData(data: response);
+
+      if (formGroup.control('id').value == null) {
+        final response = await processChartRepository.postDetailFacilityDropIn(
+          DetailDropInFacilityRequest(
+            arrangePerson: formGroup.control('arrangePerson').value,
+            places: places,
+            tour: tourId.value,
+          ),
+        );
+        data.add(response);
+      } else {
+        final response = await processChartRepository.putDetailFacilityDropIn(
+          formGroup.control('id').value,
+          DetailDropInFacilityRequest(
+            arrangePerson: formGroup.control('arrangePerson').value,
+            places: places,
+            tour: tourId.value,
+          ),
+        );
+        data.map((e) => e.id == response.id ? response : e).toList();
+      }
+
+      dropInFacilityData.value = AsyncData(data: data);
+
+      submitDropInFacilityData.value = AsyncData(data: data);
     } catch (e) {
       logger.d(e);
       submitDropInFacilityData.value = AsyncData(error: e);

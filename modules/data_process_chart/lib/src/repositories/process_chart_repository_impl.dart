@@ -74,13 +74,13 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn() {
-    return remote.getDetailFacilityDropIn();
+  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(String id) {
+    return remote.getDetailFacilityDropIn(id);
   }
 
   @override
-  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital() {
-    return remote.getDetialFacilityHospital();
+  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital(String id) {
+    return remote.getDetialFacilityHospital(id);
   }
 
   @override
@@ -276,5 +276,15 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   @override
   Future<DetailRelatedPartiesResponse> putDetailRelatedParties(DetailRelatedPartiesRequest request, element) {
     return remote.putDetailRelatedParties(request, element);
+  }
+
+  @override
+  Future<DetailDropInFacilityResponse> putDetailFacilityDropIn(id, DetailDropInFacilityRequest detailDropInFacilityRequest) {
+    return remote.putDetailFacilityDropIn(id, detailDropInFacilityRequest);
+  }
+
+  @override
+  Future<DetailFacilityHotelResponse> putDetailFacilityHospital(id, DetailFacilityHotelRequest request) {
+    return remote.putDetailFacilityHospital(id, request);
   }
 }

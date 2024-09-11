@@ -20,6 +20,7 @@ DetailFacilityHotelResponse _$DetailFacilityHotelResponseFromJson(
           ?.map((e) => e as String)
           .toList(),
       others: json['others'] as bool?,
+      tour: json['tour'] as String?,
     );
 
 Map<String, dynamic> _$DetailFacilityHotelResponseToJson(
@@ -34,4 +35,5 @@ Map<String, dynamic> _$DetailFacilityHotelResponseToJson(
       'remarks': instance.remarks,
       'foreignLanguageStaff': instance.foreignLanguageStaff,
       'others': instance.others,
+      'tour': instance.tour,
     };

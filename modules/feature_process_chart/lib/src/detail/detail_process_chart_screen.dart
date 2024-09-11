@@ -147,7 +147,7 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
                     child: [
                       ItineraryPage(id: widget.id),
                       if (value.hasData) ...[
-                        FacilityPage(id: value.requireData.id),
+                        FacilityPage(id: value.requireData.id ?? ''),
                         HotelSearchPage(id: value.requireData.id),
                         HotelRegistrationPage(id: value.requireData.id),
                         RelatedPartiesPage(id: value.requireData.id ?? ''),

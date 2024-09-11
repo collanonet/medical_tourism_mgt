@@ -11,7 +11,7 @@ import 'facility_screen.dart';
 
 class FacilityPage extends StatelessWidget {
   const FacilityPage({super.key, required this.id});
-  final String? id;
+  final String id;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class FacilityPage extends StatelessWidget {
         form: () => facilityForm()..markAllAsTouched(),
         builder: (context, formGroup, child) {
           return Provider(
-            create: (context) => GetIt.I<FacilityModel>(),
+            create: (context) => GetIt.I<FacilityModel>()..fetchData(formGroup, id),
             child: const FacilityScreen(),
           );
         },

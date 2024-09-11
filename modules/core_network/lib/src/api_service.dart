@@ -751,18 +751,34 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_FACILITY_HOSPITAL)
-  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital();
+  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital(
+    @Query('tour') String id,
+  );
 
   @POST(EndPoints.DETAIL_FACILITY_HOSPITAL)
   Future<DetailFacilityHotelResponse> postDetailFacilityHospital(
     @Body() DetailFacilityHotelRequest detailFacilityHotelRequest,
   );
 
+  @PUT('${EndPoints.DETAIL_FACILITY_HOSPITAL}/{id}')
+  Future<DetailFacilityHotelResponse> putDetailFacilityHospital(
+    @Path('id') String id,
+    @Body() DetailFacilityHotelRequest detailFacilityHotelRequest,
+  );
+
   @GET(EndPoints.DETAIL_FACILITY_DROP_IN_FACILITY)
-  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn();
+  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(
+    @Query('tour') String id,
+  );
 
   @POST(EndPoints.DETAIL_FACILITY_DROP_IN_FACILITY)
   Future<DetailDropInFacilityResponse> postDetailFacilityDropIn(
+    @Body() DetailDropInFacilityRequest detailDropInFacilityRequest,
+  );
+
+  @PUT('${EndPoints.DETAIL_FACILITY_DROP_IN_FACILITY}/{id}')
+  Future<DetailDropInFacilityResponse> putDetailFacilityDropIn(
+    @Path('id') String id,
     @Body() DetailDropInFacilityRequest detailDropInFacilityRequest,
   );
 
