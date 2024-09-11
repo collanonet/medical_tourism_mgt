@@ -9,7 +9,7 @@ class DetailRelatedPartiesDriverResponse {
   final String? id;
   DateTime? dateYearFrom;
   DateTime? dateYearTo;
-  String? carNumber;
+  int? carNumber;
   String? vehicleType;
   String? driverNamaKanji;
   String? driverNameKana;

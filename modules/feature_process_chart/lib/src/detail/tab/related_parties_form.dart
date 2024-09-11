@@ -33,6 +33,7 @@ FormGroup relatedPartiesForm() => FormGroup(
         //バス会社
         'busCompany': FormGroup(
           {
+            'id': FormControl<String>(), // ID
             'arrangePerson': FormControl<String>(value: ''), // 手配担当
             'busCompanyName': FormControl<String>(value: ''), // バス会社名
             'contactPerson': FormControl<String>(value: ''), // 担当者
@@ -43,9 +44,10 @@ FormGroup relatedPartiesForm() => FormGroup(
           [
             FormGroup(
               {
+                'id': FormControl<String>(), // ID
                 'dateYearFrom': FormControl<DateTime>(), // 年月日（自）
                 'dateYearTo': FormControl<DateTime>(), // 年月日（至）
-                'carNumber': FormControl<String>(value: ''), // 車番
+                'carNumber': FormControl<int>(), // 車番
                 'vehicleType': FormControl<String>(value: ''), // 車種
                 'driverNamaKanji':
                     FormControl<String>(value: ''), // ドライバー名（漢字）
@@ -75,6 +77,7 @@ FormGroup relatedPartiesForm() => FormGroup(
           [
             FormGroup(
               {
+                'id': FormControl<String>(), // ID
                 'dateYearFrom': FormControl<DateTime>(), // 年月日（自）
                 'dateYearTo': FormControl<DateTime>(), // 年月日（至）
                 'contactPersonNamaKanji':

@@ -17,7 +17,7 @@ class RelatedPartiesModel {
       tourId.value = id;
       await fetchParties(formGroup.control('guideInterpreter') as FormArray);
       await fetchBusCompany(formGroup.control('busCompany') as FormGroup);
-      await fetchPartiesDriver(formGroup);
+      await fetchPartiesDriver(formGroup.control('driver') as FormArray);
       await fetchEmergencyContact(formGroup);
     } catch (e) {
       logger.d(e);
@@ -55,7 +55,7 @@ class RelatedPartiesModel {
 
   void insertRelatedParties(
       FormArray formArray, List<DetailRelatedPartiesResponse>? data) {
-    if (data!.isEmpty) {
+    if (data!.isNotEmpty) {
       formArray.clear();
       for (var item in data) {
         formArray.add(FormGroup(
@@ -84,6 +84,8 @@ class RelatedPartiesModel {
             'medical_interpreter': FormControl<bool>(value: false),
           },
         ));
+        logger.d('data ${data.length}');
+        logger.d('add ${item.address}');
       }
     } else {
       FormGroup(
@@ -161,14 +163,14 @@ class RelatedPartiesModel {
     }
   }
 
-  ValueNotifier<AsyncData<List<DetailRelatedPartiesBusCompanyResponse>>>
+  ValueNotifier<AsyncData<DetailRelatedPartiesBusCompanyResponse>>
       busCompanyData = ValueNotifier(const AsyncData());
 
   Future<void> fetchBusCompany(FormGroup formGroup) async {
     try {
       busCompanyData.value = const AsyncData(loading: true);
-      final response =
-          await processChartRepository.getDetailRelatedPartiesBusCompany();
+      final response = await processChartRepository
+          .getDetailRelatedPartiesBusCompany(tourId.value);
       insertBusCompany(formGroup, response);
       busCompanyData.value = AsyncData(data: response);
     } catch (e) {
@@ -178,10 +180,10 @@ class RelatedPartiesModel {
   }
 
   void insertBusCompany(
-      FormGroup formGroup, List<DetailRelatedPartiesBusCompanyResponse> data) {
-    // formGroup.control('arrangePerson').value = data.arrangePerson;
-    // formGroup.control('busCompanyName').value = data.busCompanyName;
-    // formGroup.control('contactPerson').value = data.contactPerson;
+      FormGroup formGroup, DetailRelatedPartiesBusCompanyResponse data) {
+    formGroup.control('arrangePerson').value = data.arrangePerson;
+    formGroup.control('busCompanyName').value = data.busCompanyName;
+    formGroup.control('contactPerson').value = data.contactPerson;
   }
 
   ValueNotifier<AsyncData<DetailRelatedPartiesBusCompanyResponse>>
@@ -191,8 +193,11 @@ class RelatedPartiesModel {
       submitBusCompanyData.value = const AsyncData(loading: true);
       final response =
           await processChartRepository.postDetailRelatedPartiesBusCompany(
-              DetailRelatedPartiesBusCompanyRequest.fromJson(
-        (formGroup.control('busCompany') as FormGroup).value,
+              DetailRelatedPartiesBusCompanyRequest(
+        arrangePerson: formGroup.control('arrangePerson').value,
+        busCompanyName: formGroup.control('busCompanyName').value,
+        contactPerson: formGroup.control('contactPerson').value,
+        tour: tourId.value,
       ));
       busCompanyData.value = AsyncData(data: busCompanyData.value.data);
       submitBusCompanyData.value = AsyncData(data: response);
@@ -202,14 +207,14 @@ class RelatedPartiesModel {
     }
   }
 
-  ValueNotifier<AsyncData<DetailRelatedPartiesDriverResponse>>
+  ValueNotifier<AsyncData<List<DetailRelatedPartiesDriverResponse>>>
       partiesDriverData = ValueNotifier(const AsyncData());
-  Future<void> fetchPartiesDriver(FormGroup formGroup) async {
+  Future<void> fetchPartiesDriver(FormArray formArray) async {
     try {
       partiesDriverData.value = const AsyncData(loading: true);
-      final response =
-          await processChartRepository.getDetailRelatedPartiesDriver();
-      insertDriver(formGroup, response);
+      final response = await processChartRepository
+          .getDetailRelatedPartiesDriver(tourId.value);
+      insertDriver(formArray, response);
       partiesDriverData.value = AsyncData(data: response);
     } catch (e) {
       logger.d(e);
@@ -218,22 +223,41 @@ class RelatedPartiesModel {
   }
 
   void insertDriver(
-      FormGroup formGroup, DetailRelatedPartiesDriverResponse? data) {
-    formGroup.control('dateYearFrom').value = data?.dateYearFrom;
-    formGroup.control('dateYearTo').value = data?.dateYearTo;
-
-    formGroup.control('carNumber').value = data?.carNumber;
-    formGroup.control('vehicleType').value = data?.vehicleType;
-    formGroup.control('driverNamaKanji').value = data?.driverNamaKanji;
-    formGroup.control('driverNameKana').value = data?.driverNameKana;
-    formGroup.control('phoneNumber').value = data?.phoneNumber;
-    // formGroup.control('supported_language').value = data?.language;
-    formGroup.control('accommodationAvailability').value =
-        data?.accommodationAvailability;
-    formGroup.control('hotelArrangement').value = data?.hotelArrangement;
-    formGroup.control('accommodationName').value = data?.accommodationName;
-    formGroup.control('address').value = data?.address;
-    formGroup.control('phoneNumber2').value = data?.phoneNumber2;
+      FormArray formArray, List<DetailRelatedPartiesDriverResponse>? data) {
+        if(data!.isNotEmpty){
+          for(var element in data){
+            formArray.add(
+               FormGroup(
+              {
+                'id': FormControl<String>(value: element.id), // ID
+                'dateYearFrom': FormControl<DateTime>(value: element.dateYearFrom), // 年月日（自）
+                'dateYearTo': FormControl<DateTime>(value: element.dateYearTo), // 年月日（至）
+                'carNumber': FormControl<int>(value: element.carNumber), // 車番
+                'vehicleType': FormControl<String>(value: element.vehicleType), // 車種
+                'driverNamaKanji':
+                    FormControl<String>(value: element.driverNamaKanji), // ドライバー名（漢字）
+                'driverNameKana':
+                    FormControl<String>(value: element.driverNameKana), // ドライバー名（カナ）
+                'phoneNumber': FormControl<String>(value: element.phoneNumber), // 電話番号
+                'language': FormControl<List<String>>(value: element.language), // 対応言語
+                'accommodationAvailability':
+                    FormControl<String>(value: element.accommodationAvailability), // 同宿可否
+                'hotelArrangement': FormControl<String>(value: element.hotelArrangement), // ホテル手配
+                'accommodationName': FormControl<String>(value: element.accommodationName), // 施設名
+                'address': FormControl<String>(value: element.address), // 所在地
+                'phoneNumber2': FormControl<String>(value: element.phoneNumber2), //),
+                 //language
+                'japanese': FormControl<bool>(value: false),
+                'chinese': FormControl<bool>(value: false),
+                'vietnamese': FormControl<bool>(value: false),
+                'english': FormControl<bool>(value: false),
+                'korean': FormControl<bool>(value: false),
+                'thai': FormControl<bool>(value: false),
+              },
+            ),
+            );
+          }
+        }
   }
 
   ValueNotifier<AsyncData<DetailRelatedPartiesDriverResponse>>
@@ -295,7 +319,7 @@ class RelatedPartiesModel {
     try {
       emergencyContactData.value = const AsyncData(loading: true);
       final response = await processChartRepository
-          .getDetailRelatedPartiesEmergencyContact();
+          .getDetailRelatedPartiesEmergencyContact(tourId.value);
       insertEmergencyContact(formGroup, response);
       emergencyContactData.value = AsyncData(data: response);
     } catch (e) {
@@ -328,7 +352,7 @@ class RelatedPartiesModel {
           contactPersonNamaKanji: element['contactPersonNamaKanji'],
           contactPersonNameKana: element['contactPersonNameKana'],
           phoneNumber: element['phoneNumber'],
-          tour: null,
+          tour: tourId.value,
         );
         processChartRepository
             .postDetailRelatedPartiesEmergencyContact(request);

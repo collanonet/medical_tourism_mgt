@@ -291,15 +291,23 @@ class ItineraryModel {
         classification: formGroup.control('classification').value,
         day: days,
       );
-      final response =
-          await processChartRepository.postDetailItinerary(request);
-      submitData.value = AsyncData(data: response);
-      itinerraryData.value = AsyncData(data: response);
+      if (formGroup.control('_id').value == null) {
+        final response =
+            await processChartRepository.postDetailItinerary(request);
+        submitData.value = AsyncData(data: response);
+        itinerraryData.value = AsyncData(data: response);
+      } else {
+        final result = await processChartRepository.putDetailItinerary(
+            request, formGroup.control('_id').value);
+        submitData.value = AsyncData(data: result);
+        itinerraryData.value = AsyncData(data: result);
+      }
     } catch (e) {
       logger.d(e);
       submitData.value = AsyncData(error: e);
     }
   }
+
   ValueNotifier<List<Type>> classification = ValueNotifier([
     Type(type: '新規見積依頼'),
     Type(type: '新規手配依頼'),
@@ -309,7 +317,7 @@ class ItineraryModel {
   ]);
 }
 
-class Type{
+class Type {
   final String type;
   Type({required this.type});
 }

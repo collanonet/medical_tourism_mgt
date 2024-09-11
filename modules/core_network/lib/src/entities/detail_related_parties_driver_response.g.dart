@@ -16,7 +16,7 @@ DetailRelatedPartiesDriverResponse _$DetailRelatedPartiesDriverResponseFromJson(
       dateYearTo: json['dateYearTo'] == null
           ? null
           : DateTime.parse(json['dateYearTo'] as String),
-      carNumber: json['carNumber'] as String?,
+      carNumber: (json['carNumber'] as num?)?.toInt(),
       vehicleType: json['vehicleType'] as String?,
       driverNamaKanji: json['driverNamaKanji'] as String?,
       driverNameKana: json['driverNameKana'] as String?,

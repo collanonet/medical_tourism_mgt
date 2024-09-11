@@ -58,8 +58,8 @@ class ProcessChartRemoteProvider {
         .postItineraryTransferInput(itineraryTransferInputRequest);
   }
 
-  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital() async {
-    return await apiService.getDetialFacilityHospital();
+  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital(String id) async {
+    return await apiService.getDetialFacilityHospital(id);
   }
 
   Future<DetailFacilityHotelResponse> postDetailFacilityHospital(
@@ -68,8 +68,8 @@ class ProcessChartRemoteProvider {
         .postDetailFacilityHospital(detailFacilityHotelRequest);
   }
 
-  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn() async {
-    return await apiService.getDetailFacilityDropIn();
+  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(String id) async {
+    return await apiService.getDetailFacilityDropIn(id);
   }
 
   Future<DetailDropInFacilityResponse> postDetailFacilityDropIn(
@@ -126,9 +126,9 @@ class ProcessChartRemoteProvider {
         .postRelatedPartiesGuideOrInterpreter(detailRelatedPartiesRequest);
   }
 
-  Future<List<DetailRelatedPartiesBusCompanyResponse>>
-      getRelatedPartiesBusCompany() async {
-    return await apiService.getRelatedPartiesBusCompany();
+  Future<DetailRelatedPartiesBusCompanyResponse>
+      getRelatedPartiesBusCompany(String id) async {
+    return await apiService.getRelatedPartiesBusCompany(id);
   }
 
   Future<DetailRelatedPartiesBusCompanyResponse> postRelatedPartiesBusCompany(
@@ -138,8 +138,8 @@ class ProcessChartRemoteProvider {
         .postRelatedPartiesBusCompany(detailRelatedPartiesBusCompanyRequest);
   }
 
-  Future<DetailRelatedPartiesDriverResponse> getRelatedPartiesDriver() async {
-    return await apiService.getRelatedPartiesDriver();
+  Future<List<DetailRelatedPartiesDriverResponse>> getRelatedPartiesDriver(String id) async {
+    return await apiService.getRelatedPartiesDriver(id);
   }
 
   Future<DetailRelatedPartiesDriverResponse> postRelatedPartiesDriver(
@@ -150,8 +150,8 @@ class ProcessChartRemoteProvider {
   }
 
   Future<DetailRelatedPartiesEmergencyContactResponse>
-      getRelatedPartiesEmergencyContact() async {
-    return await apiService.getRelatedPartiesEmergencyContact();
+      getRelatedPartiesEmergencyContact(String id) async {
+    return await apiService.getRelatedPartiesEmergencyContact(id);
   }
 
   Future<DetailRelatedPartiesEmergencyContactResponse>
@@ -235,6 +235,11 @@ class ProcessChartRemoteProvider {
   Future<DetailItineraryResponse> postDetailitinerary(
       DetailIneraryRequest detailIneraryRequest) async {
     return await apiService.postDetailItinerary(detailIneraryRequest);
+  }
+
+  Future<DetailItineraryResponse> putDetailItinerary(
+      DetailIneraryRequest request, element) {
+    return apiService.putDetailItinerary(element, request);
   }
 
   Future<DetailRelatedPartiesResponse> putDetailRelatedParties(

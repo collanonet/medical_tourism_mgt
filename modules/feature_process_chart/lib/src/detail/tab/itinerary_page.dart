@@ -8,7 +8,7 @@ import 'itinerary_model.dart';
 import 'itinerary_screen.dart';
 
 class ItineraryPage extends StatelessWidget {
-  const ItineraryPage({super.key,this.id});
+  const ItineraryPage({super.key, this.id});
   final String? id;
 
   @override

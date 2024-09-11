@@ -6,7 +6,7 @@ part 'detail_related_parties_driver_request.g.dart';
 class DetailRelatedPartiesDriverRequest {
   DateTime? dateYearFrom;
   DateTime? dateYearTo;
-  String? carNumber;
+  int? carNumber;
   String? vehicleType;
   String? driverNamaKanji;
   String? driverNameKana;
@@ -17,6 +17,7 @@ class DetailRelatedPartiesDriverRequest {
   String? accommodationName;
   String? address;
   String? phoneNumber2;
+  String? tour;
 
   DetailRelatedPartiesDriverRequest({
     this.dateYearFrom,
@@ -32,6 +33,7 @@ class DetailRelatedPartiesDriverRequest {
     this.accommodationName,
     this.address,
     this.phoneNumber2,
+    this.tour,
   });
 
   factory DetailRelatedPartiesDriverRequest.fromJson(Map<String,dynamic> json){

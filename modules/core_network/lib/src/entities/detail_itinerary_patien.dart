@@ -1,5 +1,5 @@
 import 'package:json_annotation/json_annotation.dart';
-
+part 'detail_itinerary_patien.g.dart';
 @JsonSerializable()
 class PatientItinerary {
   @JsonKey(name: '_id')
@@ -70,4 +70,8 @@ class PatientItinerary {
     this.nameInKanaAGENTS,
     this.nameInKanjiAGENTS,
   });
+
+  factory PatientItinerary.fromJson(Map<String, dynamic> json) => _$PatientItineraryFromJson(json);
+  Map<String, dynamic> toJson() => _$PatientItineraryToJson(this);
+
 }
