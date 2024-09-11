@@ -20,6 +20,7 @@ DetailFacilityHotelRequest _$DetailFacilityHotelRequestFromJson(
           .toList(),
       other: json['other'] as String?,
       hotel: json['hotel'] as String?,
+      tour: json['tour'] as String?,
     );
 
 Map<String, dynamic> _$DetailFacilityHotelRequestToJson(
@@ -34,4 +35,5 @@ Map<String, dynamic> _$DetailFacilityHotelRequestToJson(
       'foreignLanguageStaff': instance.foreignLanguageStaff,
       'other': instance.other,
       'hotel': instance.hotel,
+      'tour': instance.tour,
     };
