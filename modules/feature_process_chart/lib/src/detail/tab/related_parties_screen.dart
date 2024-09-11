@@ -74,12 +74,12 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    Expanded(child: SizedBox()),
+                                    const Expanded(child: SizedBox()),
                                     SizedBox(
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    Expanded(child: SizedBox()),
+                                    const Expanded(child: SizedBox()),
                                   ],
                                 ),
                                 Row(

@@ -3,7 +3,6 @@ import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../../filter_process_chart_form.dart';
 import 'package:core_utils/core_utils.dart';
 import 'related_parties_form.dart';
 import 'related_parties_model.dart';
@@ -22,8 +21,7 @@ class RelatedPartiesPage extends StatelessWidget {
         form: () => relatedPartiesForm(),
         builder: (context, formGroup, _) {
           return Provider(
-            create: (context) =>
-                GetIt.I<RelatedPartiesModel>()..fetchData(id, formGroup),
+            create: (context) => GetIt.I<RelatedPartiesModel>()..fetchData(id, formGroup),
             child: const RelatedPartiesScreen(),
           );
         },

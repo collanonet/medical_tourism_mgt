@@ -9,9 +9,11 @@ import 'package:reactive_forms/reactive_forms.dart';
 class FacilityModel {
   FacilityModel({required this.processChartRepository});
   final ProcessChartRepository processChartRepository;
+  ValueNotifier<String> tourId = ValueNotifier('');
 
-  Future<void> fetchData(FormGroup formGroup) async {
+  Future<void> fetchData(FormGroup formGroup,String id) async {
     try {
+      tourId.value = id;
       await fetchDetailFacilityHotel(formGroup.control('Hotel') as FormArray);
       await fetchDetailDropInFacility(
           formGroup.control('drop_in_facility') as FormGroup);
@@ -40,7 +42,7 @@ class FacilityModel {
   Future<void> fetchDetailFacilityHotel(FormArray formArray) async {
     try {
       detailFacilityHotelData.value = const AsyncData(loading: true);
-      final response = await processChartRepository.getDetialFacilityHospital();
+      final response = await processChartRepository.getDetialFacilityHospital(tourId.value);
       insertFacilityHotel(formArray, response);
     } catch (e) {
       detailFacilityHotelData.value = AsyncData(error: e);
@@ -145,7 +147,7 @@ class FacilityModel {
   Future<void> fetchDetailDropInFacility(FormGroup formGroup) async {
     try {
       dropInFacilityData.value = const AsyncData(loading: true);
-      final response = await processChartRepository.getDetailFacilityDropIn();
+      final response = await processChartRepository.getDetailFacilityDropIn(tourId.value);
       insertDropInFacility(formGroup, response);
       dropInFacilityData.value = AsyncData(data: response);
     } catch (e) {

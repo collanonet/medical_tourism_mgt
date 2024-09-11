@@ -74,13 +74,13 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn() {
-    return remote.getDetailFacilityDropIn();
+  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(String id) {
+    return remote.getDetailFacilityDropIn(id);
   }
 
   @override
-  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital() {
-    return remote.getDetialFacilityHospital();
+  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital(String id) {
+    return remote.getDetialFacilityHospital(id);
   }
 
   @override
@@ -197,20 +197,20 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<List<DetailRelatedPartiesBusCompanyResponse>>
-      getDetailRelatedPartiesBusCompany() {
-    return remote.getRelatedPartiesBusCompany();
+  Future<DetailRelatedPartiesBusCompanyResponse>
+      getDetailRelatedPartiesBusCompany(String id) {
+    return remote.getRelatedPartiesBusCompany(id);
   }
 
   @override
-  Future<DetailRelatedPartiesDriverResponse> getDetailRelatedPartiesDriver() {
-    return remote.getRelatedPartiesDriver();
+  Future<List<DetailRelatedPartiesDriverResponse>> getDetailRelatedPartiesDriver(String id) {
+    return remote.getRelatedPartiesDriver(id);
   }
 
   @override
   Future<DetailRelatedPartiesEmergencyContactResponse>
-      getDetailRelatedPartiesEmergencyContact() {
-    return remote.getRelatedPartiesEmergencyContact();
+      getDetailRelatedPartiesEmergencyContact(String id) {
+    return remote.getRelatedPartiesEmergencyContact(id);
   }
 
   @override
@@ -276,5 +276,10 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   @override
   Future<DetailRelatedPartiesResponse> putDetailRelatedParties(DetailRelatedPartiesRequest request, element) {
     return remote.putDetailRelatedParties(request, element);
+  }
+  
+  @override
+  Future<DetailItineraryResponse> putDetailItinerary(DetailIneraryRequest request, element) {
+    return remote.putDetailItinerary(request, element);
   }
 }

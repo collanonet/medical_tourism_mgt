@@ -751,7 +751,9 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_FACILITY_HOSPITAL)
-  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital();
+  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital(
+    @Query('hotel') String id,
+  );
 
   @POST(EndPoints.DETAIL_FACILITY_HOSPITAL)
   Future<DetailFacilityHotelResponse> postDetailFacilityHospital(
@@ -759,7 +761,9 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_FACILITY_DROP_IN_FACILITY)
-  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn();
+  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(
+     @Query('hotel') String id,
+  );
 
   @POST(EndPoints.DETAIL_FACILITY_DROP_IN_FACILITY)
   Future<DetailDropInFacilityResponse> postDetailFacilityDropIn(
@@ -808,8 +812,10 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_RELATED_PARTIES_BUS_COMPANY)
-  Future<List<DetailRelatedPartiesBusCompanyResponse>>
-      getRelatedPartiesBusCompany();
+  Future<DetailRelatedPartiesBusCompanyResponse>
+      getRelatedPartiesBusCompany(
+        @Query('tour') String id,
+      );
 
   @POST(EndPoints.DETAIL_RELATED_PARTIES_BUS_COMPANY)
   Future<DetailRelatedPartiesBusCompanyResponse> postRelatedPartiesBusCompany(
@@ -818,7 +824,9 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_RELATED_PARTIES_DRIVER)
-  Future<DetailRelatedPartiesDriverResponse> getRelatedPartiesDriver();
+  Future<List<DetailRelatedPartiesDriverResponse>> getRelatedPartiesDriver(
+    @Query('tour') String id,
+  );
 
   @POST(EndPoints.DETAIL_RELATED_PARTIES_DRIVER)
   Future<DetailRelatedPartiesDriverResponse> postRelatedPartiesDriver(
@@ -827,7 +835,9 @@ abstract class ApiService {
 
   @GET(EndPoints.DETAIL_RELATED_EMERGENCY_CONTACT)
   Future<DetailRelatedPartiesEmergencyContactResponse>
-      getRelatedPartiesEmergencyContact();
+      getRelatedPartiesEmergencyContact(
+        @Query('tour') String id,
+      );
 
   @POST(EndPoints.DETAIL_RELATED_EMERGENCY_CONTACT)
   Future<DetailRelatedPartiesEmergencyContactResponse>
@@ -896,6 +906,12 @@ abstract class ApiService {
 
   @POST(EndPoints.DETAIL_ITINERARY)
   Future<DetailItineraryResponse> postDetailItinerary(
+    @Body() DetailIneraryRequest detailIneraryRequest,
+  );
+
+  @PUT('${EndPoints.DETAIL_ITINERARY}/{id}')
+  Future<DetailItineraryResponse> putDetailItinerary(
+    @Path('id') String id,
     @Body() DetailIneraryRequest detailIneraryRequest,
   );
 
