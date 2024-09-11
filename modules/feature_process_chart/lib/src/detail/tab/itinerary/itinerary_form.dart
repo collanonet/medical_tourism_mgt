@@ -2,19 +2,9 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup itineraryForm() => FormGroup(
       {
-        '_id' : FormControl<String>(),
+        '_id': FormControl<String>(),
         'patient': FormArray(
           [
-            FormGroup(
-              {
-                'patientName': FormControl<String>(value: ''), // 患者名
-              },
-            ),
-            FormGroup(
-              {
-                'patientName': FormControl<String>(value: ''), // 患者名
-              },
-            ),
             FormGroup(
               {
                 'patientName': FormControl<String>(value: ''), // 患者名
@@ -30,7 +20,7 @@ FormGroup itineraryForm() => FormGroup(
           [
             FormGroup(
               {
-                '_id' : FormControl<String>(value: ''),
+                '_id': FormControl<String>(value: ''),
                 'date': FormControl<DateTime>(), // 日付
                 'meals': FormControl<List<bool>>(value: []),
                 //meals
@@ -49,7 +39,7 @@ FormGroup itineraryForm() => FormGroup(
                           [
                             FormGroup(
                               {
-                                '_id' : FormControl<String>(),
+                                '_id': FormControl<String>(),
                                 'placeName':
                                     FormControl<String>(value: ''), // 地名
                                 'timeFrom':

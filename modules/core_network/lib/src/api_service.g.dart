@@ -3803,6 +3803,37 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<DetailFacilityHotelResponse> putDetailFacilityHospital(
+    String id,
+    DetailFacilityHotelRequest detailFacilityHotelRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailFacilityHotelRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailFacilityHotelResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/facility/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DetailFacilityHotelResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
   Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(
       String id) async {
     final _extra = <String, dynamic>{};
@@ -3850,6 +3881,37 @@ class _ApiService implements ApiService {
             .compose(
               _dio.options,
               '/stopover-facilities',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final value = DetailDropInFacilityResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<DetailDropInFacilityResponse> putDetailFacilityDropIn(
+    String id,
+    DetailDropInFacilityRequest detailDropInFacilityRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailDropInFacilityRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailDropInFacilityResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/stopover-facilities/${id}',
               queryParameters: queryParameters,
               data: _data,
             )

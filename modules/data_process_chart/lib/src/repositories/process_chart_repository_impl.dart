@@ -279,7 +279,20 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
   
   @override
+  Future<DetailDropInFacilityResponse> putDetailFacilityDropIn(id, DetailDropInFacilityRequest detailDropInFacilityRequest) {
+    // TODO: implement putDetailFacilityDropIn
+    throw UnimplementedError();
+  }
+  
+  @override
+  Future<DetailFacilityHotelResponse> putDetailFacilityHospital(id, DetailFacilityHotelRequest request) {
+    // TODO: implement putDetailFacilityHospital
+    throw UnimplementedError();
+  }
+  
+  @override
   Future<DetailItineraryResponse> putDetailItinerary(DetailIneraryRequest request, element) {
-    return remote.putDetailItinerary(request, element);
+    // TODO: implement putDetailItinerary
+    throw UnimplementedError();
   }
 }

@@ -8,7 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
-import 'hotel_registration_model.dart';
+import '../hotel_registration/hotel_registration_model.dart';
 
 class HotelSearchScreen extends StatefulWidget {
   const HotelSearchScreen({super.key});

@@ -11,7 +11,7 @@ part 'detail_itinerary_response.g.dart';
 class DetailItineraryResponse {
   @JsonKey(name: '_id')
   final String? id;
-  List<dynamic>? patient;
+  List<PatientItinerary>? patient;
   String? tourName;
   int? peopleNumber;
   int? group;

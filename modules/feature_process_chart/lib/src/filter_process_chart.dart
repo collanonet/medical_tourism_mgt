@@ -4,6 +4,7 @@ import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -46,7 +47,8 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                     const SizedBox(height: 16),
                     Row(
                       children: [
-                        Expanded(
+                        IntrinsicWidth(
+                          stepWidth: 250,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -65,7 +67,8 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                           ),
                         ),
                         const SizedBox(width: 16),
-                        Expanded(
+                        IntrinsicWidth(
+                          stepWidth: 250,
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
@@ -137,105 +140,111 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                           ),
                         ),
                         SizedBox(width: context.appTheme.spacing.marginSmall),
-                        Expanded(
+                        IntrinsicWidth(
+                            stepWidth: 250,
                             child: Row(
-                          children: [
-                            Expanded(
-                              flex: 4,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '期間（自）',
-                                    style: context.textTheme.bodySmall,
-                                  ),
-                                  SizedBox(
-                                    height: context
-                                        .appTheme.spacing.marginExtraSmall,
-                                  ),
-                                  ReactiveDatePicker<DateTime>(
-                                    formControlName: 'dateFrom',
-                                    firstDate: DateTime(1900),
-                                    lastDate: DateTime(2100),
-                                    builder: (BuildContext context,
-                                        ReactiveDatePickerDelegate<dynamic>
-                                            picker,
-                                        Widget? child) {
-                                      return ReactiveTextField<DateTime>(
+                              crossAxisAlignment: CrossAxisAlignment.end,
+                              children: [
+                                Expanded(
+                                  flex: 4,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '期間（自）',
+                                        style: context.textTheme.bodySmall,
+                                      ),
+                                      SizedBox(
+                                        height: context
+                                            .appTheme.spacing.marginExtraSmall,
+                                      ),
+                                      ReactiveDatePicker<DateTime>(
                                         formControlName: 'dateFrom',
-                                        valueAccessor: DateTimeValueAccessor(
-                                          dateTimeFormat:
-                                              DateFormat('yyyy/MM/dd'),
-                                        ),
-                                        decoration: InputDecoration(
-                                          suffixIcon: IconButton(
-                                            icon: const Icon(
-                                              CupertinoIcons.calendar,
-                                              color: Colors.grey,
+                                        firstDate: DateTime(1900),
+                                        lastDate: DateTime(2100),
+                                        builder: (BuildContext context,
+                                            ReactiveDatePickerDelegate<dynamic>
+                                                picker,
+                                            Widget? child) {
+                                          return ReactiveTextField<DateTime>(
+                                            formControlName: 'dateFrom',
+                                            valueAccessor:
+                                                DateTimeValueAccessor(
+                                              dateTimeFormat:
+                                                  DateFormat('yyyy/MM/dd'),
                                             ),
-                                            onPressed: picker.showPicker,
-                                          ),
-                                        ),
-                                        inputFormatters: [
-                                          formatter.dateFormatter,
-                                        ],
-                                      );
-                                    },
+                                            decoration: InputDecoration(
+                                              suffixIcon: IconButton(
+                                                icon: const Icon(
+                                                  CupertinoIcons.calendar,
+                                                  color: Colors.grey,
+                                                ),
+                                                onPressed: picker.showPicker,
+                                              ),
+                                            ),
+                                            inputFormatters: [
+                                              formatter.dateFormatter,
+                                            ],
+                                          );
+                                        },
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ),
-                            const Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 4),
-                              child: Text('〜'),
-                            ),
-                            Expanded(
-                              flex: 4,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    '期間（至）',
-                                    style: context.textTheme.bodySmall,
-                                  ),
-                                  SizedBox(
-                                    height: context
-                                        .appTheme.spacing.marginExtraSmall,
-                                  ),
-                                  ReactiveDatePicker<DateTime>(
-                                    formControlName: 'dateTo',
-                                    firstDate: DateTime(1900),
-                                    lastDate: DateTime(2100),
-                                    builder: (BuildContext context,
-                                        ReactiveDatePickerDelegate<dynamic>
-                                            picker,
-                                        Widget? child) {
-                                      return ReactiveTextField<DateTime>(
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 4),
+                                  child: Text('〜'),
+                                ),
+                                IntrinsicWidth(
+                                  stepWidth: 250,
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        '期間（至）',
+                                        style: context.textTheme.bodySmall,
+                                      ),
+                                      SizedBox(
+                                        height: context
+                                            .appTheme.spacing.marginExtraSmall,
+                                      ),
+                                      ReactiveDatePicker<DateTime>(
                                         formControlName: 'dateTo',
-                                        valueAccessor: DateTimeValueAccessor(
-                                          dateTimeFormat:
-                                              DateFormat('yyyy/MM/dd'),
-                                        ),
-                                        decoration: InputDecoration(
-                                          suffixIcon: IconButton(
-                                            icon: const Icon(
-                                              CupertinoIcons.calendar,
-                                              color: Colors.grey,
+                                        firstDate: DateTime(1900),
+                                        lastDate: DateTime(2100),
+                                        builder: (BuildContext context,
+                                            ReactiveDatePickerDelegate<dynamic>
+                                                picker,
+                                            Widget? child) {
+                                          return ReactiveTextField<DateTime>(
+                                            formControlName: 'dateTo',
+                                            valueAccessor:
+                                                DateTimeValueAccessor(
+                                              dateTimeFormat:
+                                                  DateFormat('yyyy/MM/dd'),
                                             ),
-                                            onPressed: picker.showPicker,
-                                          ),
-                                        ),
-                                        inputFormatters: [
-                                          formatter.dateFormatter,
-                                        ],
-                                      );
-                                    },
+                                            decoration: InputDecoration(
+                                              suffixIcon: IconButton(
+                                                icon: const Icon(
+                                                  CupertinoIcons.calendar,
+                                                  color: Colors.grey,
+                                                ),
+                                                onPressed: picker.showPicker,
+                                              ),
+                                            ),
+                                            inputFormatters: [
+                                              formatter.dateFormatter,
+                                            ],
+                                          );
+                                        },
+                                      ),
+                                    ],
                                   ),
-                                ],
-                              ),
-                            ),
-                          ],
-                        )),
+                                ),
+                              ],
+                            )),
                         SizedBox(width: context.appTheme.spacing.marginSmall),
                         Container(
                           padding: EdgeInsets.all(
@@ -258,7 +267,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                             ],
                           ),
                         ),
-                        SizedBox(width: context.appTheme.spacing.marginMedium),
+                        const Spacer(),
                         ReactiveFormConsumer(
                           builder: (context, form, _) {
                             return OutlinedButton(

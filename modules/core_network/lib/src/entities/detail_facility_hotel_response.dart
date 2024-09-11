@@ -14,6 +14,7 @@ class DetailFacilityHotelResponse {
   String? remarks;
   List<String>? foreignLanguageStaff;
   bool? others;
+  String? tour;
 
   DetailFacilityHotelResponse({
     required this.id,
@@ -24,7 +25,8 @@ class DetailFacilityHotelResponse {
      this.phoneNumber,
      this.remarks,
      this.foreignLanguageStaff,
-     this.others
+     this.others,
+      this.tour,
   });
 
   factory DetailFacilityHotelResponse.fromJson(Map<String,dynamic> json){

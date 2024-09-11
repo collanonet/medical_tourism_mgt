@@ -121,10 +121,18 @@ class ProcessChartScreen extends StatelessWidget {
                                           width: context
                                               .appTheme.spacing.marginMedium,
                                         ),
-                                        const Expanded(
+                                        Expanded(
                                             flex: 2,
                                             child: Text(
-                                                '2023/10/22　ー　2023/10/29')),
+                                              value.data?[index].day?.length ==
+                                                      0
+                                                  ? '--'
+                                                  : value.data?[index].day
+                                                              ?.length ==
+                                                          1
+                                                      ? "${value.data?[index].day?.first.date == null ? '' : Dates.formatFullDate(value.data![index].day!.first.date!)}"
+                                                      : '${value.data?[index].day?.first.date == null ? '' : Dates.formatFullDate(value.data![index].day!.first.date!)}〜${value.data?[index].day?.last.date == null ? '' : Dates.formatFullDate(value.data![index].day!.last.date!)}',
+                                            )),
                                         SizedBox(
                                           width: context
                                               .appTheme.spacing.marginMedium,
@@ -179,10 +187,36 @@ class ProcessChartScreen extends StatelessWidget {
                                                                         185,
                                                                         30,
                                                                         30)
-                                                                    : null,
+                                                                    : const Color
+                                                                        .fromARGB(
+                                                                        255,
+                                                                        185,
+                                                                        30,
+                                                                        30),
                                               ),
                                               child: Text(
-                                                '${value.data?[index].classification == '新規見積依頼' ? '新規見積依頼' : value.data?[index].classification == '新規手配依頼' ? '新規手配依頼' : value.data?[index].classification == '変更' ? '変更' : value.data?[index].classification == 'Final ' ? 'Final ' : value.data?[index].classification == 'キャンセル' ? 'キャンセル' : ''}',
+                                                value.data?[index]
+                                                            .classification ==
+                                                        '新規見積依頼'
+                                                    ? '新規見積依頼'
+                                                    : value.data?[index]
+                                                                .classification ==
+                                                            '新規手配依頼'
+                                                        ? '新規手配依頼'
+                                                        : value.data?[index]
+                                                                    .classification ==
+                                                                '変更'
+                                                            ? '変更'
+                                                            : value.data?[index]
+                                                                        .classification ==
+                                                                    'Final '
+                                                                ? 'Final '
+                                                                : value.data?[index].classification ==
+                                                                        'キャンセル'
+                                                                    ? 'キャンセル'
+                                                                    : value.data?[index]
+                                                                            .classification ??
+                                                                        '--',
                                                 style: const TextStyle(
                                                   color: Colors.white,
                                                 ),

@@ -201,12 +201,14 @@ class FacilityModel {
       submitDropInFacilityData.value = const AsyncData(loading: true);
       List<Facility> places = [];
       formGroup.control('places').value.forEach((element) {
-        places.add(Facility(
+        places.add(
+          
+          Facility(
           accommodationName: element['accommodationName'],
           address: element['address'],
           contctPersonName: element['contactPersonName'],
           phoneNumber: element['phoneNumber'],
-          tour: tourId.value,
+          tour: tourId.value
         ));
       });
       final response = await processChartRepository.postDetailFacilityDropIn(

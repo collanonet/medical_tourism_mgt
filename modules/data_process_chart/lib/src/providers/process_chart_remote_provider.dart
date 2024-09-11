@@ -246,4 +246,12 @@ class ProcessChartRemoteProvider {
       DetailRelatedPartiesRequest request, element) {
     return apiService.putRelatedPartiesGuideOrInterpreter(element, request);
   }
+
+  Future<DetailDropInFacilityResponse> putDetailFacilityDropIn(id, DetailDropInFacilityRequest detailDropInFacilityRequest) {
+    return apiService.putDetailFacilityDropIn(id, detailDropInFacilityRequest);
+  }
+
+  Future<DetailFacilityHotelResponse> putDetailFacilityHospital(id, DetailFacilityHotelRequest request) {
+    return apiService.putDetailFacilityHospital(id, request);
+  }
 }

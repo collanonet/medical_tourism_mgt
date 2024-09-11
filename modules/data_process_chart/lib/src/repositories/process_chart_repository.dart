@@ -2,8 +2,6 @@
 import 'package:core_network/entities.dart';
 
 abstract class ProcessChartRepository {
-
-
   Future<PatientFilterResponse> postFilterpatientChart(
     PatientFilterRequst patientFilterRequst,
   );
@@ -132,7 +130,7 @@ abstract class ProcessChartRepository {
 
   Future<DetailItineraryResponse> getDetailItinerary({String? id});
 
-    Future<List<DetailItineraryResponse>> getPatientChart({
+  Future<List<DetailItineraryResponse>> getPatientChart({
     String? tourName,
     String? classification,
     DateTime? dateFrom,
@@ -148,5 +146,11 @@ abstract class ProcessChartRepository {
     element,
   );
 
-  Future<DetailRelatedPartiesResponse> putDetailRelatedParties(DetailRelatedPartiesRequest request, element);
+  Future<DetailRelatedPartiesResponse> putDetailRelatedParties(
+      DetailRelatedPartiesRequest request, element);
+
+  Future<DetailDropInFacilityResponse> putDetailFacilityDropIn(
+      id, DetailDropInFacilityRequest detailDropInFacilityRequest);
+
+  Future<DetailFacilityHotelResponse> putDetailFacilityHospital(id, DetailFacilityHotelRequest request);
 }

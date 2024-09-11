@@ -3,9 +3,8 @@ import 'package:get_it/get_it.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-import '../../filter_process_chart_form.dart';
 import 'package:core_utils/core_utils.dart';
-import 'hotel_registration_model.dart';
+import '../hotel_registration/hotel_registration_model.dart';
 import 'hotel_search_form.dart';
 import 'hotel_search_screen.dart';
 
