@@ -3748,7 +3748,7 @@ class _ApiService implements ApiService {
   Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital(
       String id) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'tour': id};
+    final queryParameters = <String, dynamic>{r'hotel': id};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
@@ -3839,7 +3839,7 @@ class _ApiService implements ApiService {
   Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(
       String id) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'tour': id};
+    final queryParameters = <String, dynamic>{r'hotel': id};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
@@ -4127,14 +4127,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<DetailRelatedPartiesBusCompanyResponse>>
-      getRelatedPartiesBusCompany() async {
+  Future<DetailRelatedPartiesBusCompanyResponse> getRelatedPartiesBusCompany(
+      String id) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'tour': id};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<DetailRelatedPartiesBusCompanyResponse>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailRelatedPartiesBusCompanyResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -4150,10 +4150,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var _value = _result.data!
-        .map((dynamic i) => DetailRelatedPartiesBusCompanyResponse.fromJson(
-            i as Map<String, dynamic>))
-        .toList();
+    final _value =
+        DetailRelatedPartiesBusCompanyResponse.fromJson(_result.data!);
     return _value;
   }
 
@@ -4189,13 +4187,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<DetailRelatedPartiesDriverResponse> getRelatedPartiesDriver() async {
+  Future<List<DetailRelatedPartiesDriverResponse>> getRelatedPartiesDriver(
+      String id) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'tour': id};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DetailRelatedPartiesDriverResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<DetailRelatedPartiesDriverResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -4211,7 +4210,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final _value = DetailRelatedPartiesDriverResponse.fromJson(_result.data!);
+    var _value = _result.data!
+        .map((dynamic i) => DetailRelatedPartiesDriverResponse.fromJson(
+            i as Map<String, dynamic>))
+        .toList();
     return _value;
   }
 
@@ -4247,9 +4249,9 @@ class _ApiService implements ApiService {
 
   @override
   Future<DetailRelatedPartiesEmergencyContactResponse>
-      getRelatedPartiesEmergencyContact() async {
+      getRelatedPartiesEmergencyContact(String id) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'tour': id};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -4645,6 +4647,37 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<DetailItineraryResponse> putDetailItinerary(
+    String id,
+    DetailIneraryRequest detailIneraryRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailIneraryRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailItineraryResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/tour/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = DetailItineraryResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
   Future<BasicInformationHospitalResponse> getBasicInformationHospital(
       String hospitalId) async {
     final _extra = <String, dynamic>{};
@@ -4699,6 +4732,30 @@ class _ApiService implements ApiService {
             ))));
     final _value = BasicInformationHospitalResponse.fromJson(_result.data!);
     return _value;
+  }
+
+  @override
+  Future<void> deleteBasicInformationHospital(String id) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/basic-information-hospital/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
   }
 
   @override

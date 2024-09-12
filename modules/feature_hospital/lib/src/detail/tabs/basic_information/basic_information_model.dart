@@ -779,6 +779,21 @@ class BasicInformationModel {
       supportLangaugeData.value = AsyncData(error: e);
     }
   }
+
+  ValueNotifier<AsyncData<bool>> deleteHospital =
+      ValueNotifier(const AsyncData());
+
+  Future<void> deleteHospitalData() async {
+    try {
+      deleteHospital.value = const AsyncData(loading: true);
+      await hospitalRepository.deleteBasicInformationHospital(
+          basicInformationData.value.requireData.id);
+      deleteHospital.value = const AsyncData(data: true);
+    } catch (e) {
+      logger.e(e);
+      deleteHospital.value = AsyncData(error: e);
+    }
+  }
 }
 
 List<String> convertToList(Map<String, dynamic> element, String key) {

@@ -205,5 +205,7 @@ abstract class HospitalRepository {
 
   Future<void> deleteTreatmentTeleMenu(String id);
 
+  Future<void> deleteBasicInformationHospital(String id);
+
 }
 
