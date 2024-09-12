@@ -40,21 +40,6 @@ class DetailPatientScreen extends StatefulWidget {
 }
 
 class _DetailPatientScreenState extends State<DetailPatientScreen> {
-  List<String> menu = [
-    '基本情報', // basic information
-    'Web予約', // Web reservation
-    '進捗一覧', // progress list
-    '患者回答データ', // Patient Response Data
-    '海外診療データ', // Overseas medical data
-    '診療サマリー', // Medical summary
-    'ご提案', // proposal
-    '医療ビザ', // medical visa
-    '国内診療データ', // statement
-    '見積書', // estimate
-    '請求書', // Statement
-    '精算履歴', // billing
-    '診療報酬明細', // billing details
-  ];
 
   final ValueNotifier<int> _selectedIndex = ValueNotifier<int>(0);
 

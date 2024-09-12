@@ -108,11 +108,12 @@ class ProgressListModel {
               disabled: true,
             ),
             'completionDate': FormControl<DateTime>(
-              value: record.completionDate,validators: [
-              Validators.pattern(
-                ValidatorRegExp.date,
-              ),
-            ],
+              value: record.completionDate,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
             ),
             'remarks': FormControl<String>(
               value: record.remarks,
@@ -126,9 +127,55 @@ class ProgressListModel {
           }));
         }
 
-
         formArray.add(FormGroup({'progress': formArrayProgress}));
       });
+    } else {
+      FormArray formArray = formGroup.control('progressList') as FormArray;
+      formArray.clear();
+      FormArray formArrayProgress = FormArray([]);
+      for (var item in titleList) {
+        formArrayProgress.add(FormGroup({
+          'id': FormControl<String>(),
+          'completed': FormControl<bool>(value: false),
+          'key': FormControl<String>(),
+          'tag': FormControl<String>(value: item.tag),
+          'task': FormControl<String>(value: item.task, disabled: true),
+          'completionDate': FormControl<DateTime>(
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'remarks': FormControl<String>(),
+          'medicalRecord': FormControl<String>(),
+          'type': FormControl<String>(value: "0"),
+        }));
+      }
+      formArray.add(FormGroup({'progress': formArrayProgress}));
+
+      FormArray formArrayProgress2 = FormArray([]);
+
+      for (var item in titleList) {
+        formArrayProgress2.add(FormGroup({
+          'id': FormControl<String>(),
+          'completed': FormControl<bool>(value: false),
+          'key': FormControl<String>(),
+          'tag': FormControl<String>(value: item.tag),
+          'task': FormControl<String>(value: item.task, disabled: true),
+          'completionDate': FormControl<DateTime>(
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'remarks': FormControl<String>(),
+          'medicalRecord': FormControl<String>(),
+          'type': FormControl<String>(value: "1"),
+        }));
+      }
+      formArray.add(FormGroup({'progress': formArrayProgress2}));
     }
   }
 
