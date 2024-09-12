@@ -39,12 +39,12 @@ class RelatedPartiesModel {
   }
 
   ValueNotifier<AsyncData<List<DetailRelatedPartiesResponse>>> partiesData =
-  ValueNotifier(const AsyncData());
+      ValueNotifier(const AsyncData());
   Future<void> fetchParties(FormArray formArray) async {
     try {
       partiesData.value = const AsyncData(loading: true);
       final response =
-      await processChartRepository.getDetailRelatedParties(tourId.value);
+          await processChartRepository.getDetailRelatedParties(tourId.value);
       insertRelatedParties(formArray, response);
       partiesData.value = AsyncData(data: response);
     } catch (e) {
@@ -62,20 +62,20 @@ class RelatedPartiesModel {
           {
             'id': FormControl<String>(value: item.id), // ID
             'arrangePerson':
-            FormControl<String>(value: item.arrangePerson), // 手配担当
+                FormControl<String>(value: item.arrangePerson), // 手配担当
             'dateFrom': FormControl<DateTime>(value: item.dateFrom), // 年月日（自）
             'dateTo': FormControl<DateTime>(value: item.dateTo), // 年月日（至）
             'guideNamaKanji':
-            FormControl<String>(value: item.guideNamaKanji), // ガイド名（漢字）
+                FormControl<String>(value: item.guideNamaKanji), // ガイド名（漢字）
             'guideNameKana':
-            FormControl<String>(value: item.guideNameKana), // ガイド名（カナ）
+                FormControl<String>(value: item.guideNameKana), // ガイド名（カナ）
             'phoneNumber': FormControl<String>(value: item.phoneNumber), // 電話番号
             'qualification': FormControl<List<String>>(value: []), // 資格
             'report': FormControl<String>(value: item.report), // 報告書
             'accommodationAvailability': FormControl<String>(
                 value: item.accommodationAvailability), // 同宿可否
             'accommodationName':
-            FormControl<String>(value: item.accommodationName), // 施設名
+                FormControl<String>(value: item.accommodationName), // 施設名
             'address': FormControl<String>(value: item.address), // 所在地
             'phoneNumber2': FormControl<String>(value: item.phoneNumber2), //
             //qualification
@@ -112,13 +112,13 @@ class RelatedPartiesModel {
   }
 
   ValueNotifier<AsyncData<DetailRelatedPartiesResponse>> submitPartiesData =
-  ValueNotifier(const AsyncData());
+      ValueNotifier(const AsyncData());
   Future<void> submitParties(FormGroup formGroup) async {
     try {
       List<DetailRelatedPartiesResponse> data = partiesData.value.data ?? [];
       partiesData.value = const AsyncData(loading: true);
       await formGroup.control('guideInterpreter').value.forEach(
-            (element) async {
+        (element) async {
           List<String> qualifications = [];
           if (element['itinerary_management'] == true) {
             qualifications.add('アルファード');
@@ -146,7 +146,7 @@ class RelatedPartiesModel {
           );
           if (element['id'] == null) {
             var result =
-            await processChartRepository.postDetailRelatedParties(request);
+                await processChartRepository.postDetailRelatedParties(request);
             data.add(result);
           } else {
             var result = await processChartRepository.putDetailRelatedParties(
@@ -164,7 +164,7 @@ class RelatedPartiesModel {
   }
 
   ValueNotifier<AsyncData<DetailRelatedPartiesBusCompanyResponse>>
-  busCompanyData = ValueNotifier(const AsyncData());
+      busCompanyData = ValueNotifier(const AsyncData());
 
   Future<void> fetchBusCompany(FormGroup formGroup) async {
     try {
@@ -187,18 +187,18 @@ class RelatedPartiesModel {
   }
 
   ValueNotifier<AsyncData<DetailRelatedPartiesBusCompanyResponse>>
-  submitBusCompanyData = ValueNotifier(const AsyncData());
+      submitBusCompanyData = ValueNotifier(const AsyncData());
   Future<void> submitBusCompany(FormGroup formGroup) async {
     try {
       submitBusCompanyData.value = const AsyncData(loading: true);
       final response =
-      await processChartRepository.postDetailRelatedPartiesBusCompany(
-          DetailRelatedPartiesBusCompanyRequest(
-            arrangePerson: formGroup.control('arrangePerson').value,
-            busCompanyName: formGroup.control('busCompanyName').value,
-            contactPerson: formGroup.control('contactPerson').value,
-            tour: tourId.value,
-          ));
+          await processChartRepository.postDetailRelatedPartiesBusCompany(
+              DetailRelatedPartiesBusCompanyRequest(
+        arrangePerson: formGroup.control('arrangePerson').value,
+        busCompanyName: formGroup.control('busCompanyName').value,
+        contactPerson: formGroup.control('contactPerson').value,
+        tour: tourId.value,
+      ));
       busCompanyData.value = AsyncData(data: busCompanyData.value.data);
       submitBusCompanyData.value = AsyncData(data: response);
     } catch (e) {
@@ -208,7 +208,7 @@ class RelatedPartiesModel {
   }
 
   ValueNotifier<AsyncData<List<DetailRelatedPartiesDriverResponse>>>
-  partiesDriverData = ValueNotifier(const AsyncData());
+      partiesDriverData = ValueNotifier(const AsyncData());
   Future<void> fetchPartiesDriver(FormArray formArray) async {
     try {
       partiesDriverData.value = const AsyncData(loading: true);
@@ -224,44 +224,44 @@ class RelatedPartiesModel {
 
   void insertDriver(
       FormArray formArray, List<DetailRelatedPartiesDriverResponse>? data) {
-    if(data!.isNotEmpty){
-      for(var element in data){
-        formArray.add(
-          FormGroup(
-            {
-              'id': FormControl<String>(value: element.id), // ID
-              'dateYearFrom': FormControl<DateTime>(value: element.dateYearFrom), // 年月日（自）
-              'dateYearTo': FormControl<DateTime>(value: element.dateYearTo), // 年月日（至）
-              'carNumber': FormControl<int>(value: element.carNumber), // 車番
-              'vehicleType': FormControl<String>(value: element.vehicleType), // 車種
-              'driverNamaKanji':
-              FormControl<String>(value: element.driverNamaKanji), // ドライバー名（漢字）
-              'driverNameKana':
-              FormControl<String>(value: element.driverNameKana), // ドライバー名（カナ）
-              'phoneNumber': FormControl<String>(value: element.phoneNumber), // 電話番号
-              'language': FormControl<List<String>>(value: element.language), // 対応言語
-              'accommodationAvailability':
-              FormControl<String>(value: element.accommodationAvailability), // 同宿可否
-              'hotelArrangement': FormControl<String>(value: element.hotelArrangement), // ホテル手配
-              'accommodationName': FormControl<String>(value: element.accommodationName), // 施設名
-              'address': FormControl<String>(value: element.address), // 所在地
-              'phoneNumber2': FormControl<String>(value: element.phoneNumber2), //),
-              //language
-              'japanese': FormControl<bool>(value: false),
-              'chinese': FormControl<bool>(value: false),
-              'vietnamese': FormControl<bool>(value: false),
-              'english': FormControl<bool>(value: false),
-              'korean': FormControl<bool>(value: false),
-              'thai': FormControl<bool>(value: false),
-            },
-          ),
-        );
-      }
-    }
+        if(data!.isNotEmpty){
+          for(var element in data){
+            formArray.add(
+               FormGroup(
+              {
+                'id': FormControl<String>(value: element.id), // ID
+                'dateYearFrom': FormControl<DateTime>(value: element.dateYearFrom), // 年月日（自）
+                'dateYearTo': FormControl<DateTime>(value: element.dateYearTo), // 年月日（至）
+                'carNumber': FormControl<int>(value: element.carNumber), // 車番
+                'vehicleType': FormControl<String>(value: element.vehicleType), // 車種
+                'driverNamaKanji':
+                    FormControl<String>(value: element.driverNamaKanji), // ドライバー名（漢字）
+                'driverNameKana':
+                    FormControl<String>(value: element.driverNameKana), // ドライバー名（カナ）
+                'phoneNumber': FormControl<String>(value: element.phoneNumber), // 電話番号
+                'language': FormControl<List<String>>(value: element.language), // 対応言語
+                'accommodationAvailability':
+                    FormControl<String>(value: element.accommodationAvailability), // 同宿可否
+                'hotelArrangement': FormControl<String>(value: element.hotelArrangement), // ホテル手配
+                'accommodationName': FormControl<String>(value: element.accommodationName), // 施設名
+                'address': FormControl<String>(value: element.address), // 所在地
+                'phoneNumber2': FormControl<String>(value: element.phoneNumber2), //),
+                 //language
+                'japanese': FormControl<bool>(value: false),
+                'chinese': FormControl<bool>(value: false),
+                'vietnamese': FormControl<bool>(value: false),
+                'english': FormControl<bool>(value: false),
+                'korean': FormControl<bool>(value: false),
+                'thai': FormControl<bool>(value: false),
+              },
+            ),
+            );
+          }
+        }
   }
 
   ValueNotifier<AsyncData<DetailRelatedPartiesDriverResponse>>
-  submitPartiesDriverData = ValueNotifier(const AsyncData());
+      submitPartiesDriverData = ValueNotifier(const AsyncData());
   Future<void> submitPartiesDriver(FormGroup formGroup) async {
     try {
       partiesDriverData.value = const AsyncData(loading: true);
@@ -287,7 +287,7 @@ class RelatedPartiesModel {
           languages.add('タイ語');
         }
         DetailRelatedPartiesDriverRequest request =
-        DetailRelatedPartiesDriverRequest(
+            DetailRelatedPartiesDriverRequest(
           dateYearFrom: element['dateYearFrom'],
           dateYearTo: element['dateYearTo'],
           carNumber: element['carNumber'],
@@ -314,7 +314,7 @@ class RelatedPartiesModel {
   }
 
   ValueNotifier<AsyncData<DetailRelatedPartiesEmergencyContactResponse>>
-  emergencyContactData = ValueNotifier(const AsyncData());
+      emergencyContactData = ValueNotifier(const AsyncData());
   Future<void> fetchEmergencyContact(FormGroup formGroup) async {
     try {
       emergencyContactData.value = const AsyncData(loading: true);
@@ -340,13 +340,13 @@ class RelatedPartiesModel {
   }
 
   ValueNotifier<AsyncData<DetailRelatedPartiesEmergencyContactResponse>>
-  submitEmergencyContactData = ValueNotifier(const AsyncData());
+      submitEmergencyContactData = ValueNotifier(const AsyncData());
   Future<void> submitEmergencyContact(FormGroup formGroup) async {
     try {
       emergencyContactData.value = const AsyncData(loading: true);
       await formGroup.control('emergencyContact').value.forEach((element) {
         DetailRelatedPartiesEmergencyContactRequest request =
-        DetailRelatedPartiesEmergencyContactRequest(
+            DetailRelatedPartiesEmergencyContactRequest(
           dateYearFrom: element['dateYearFrom'],
           dateYearTo: element['dateYearTo'],
           contactPersonNamaKanji: element['contactPersonNamaKanji'],
