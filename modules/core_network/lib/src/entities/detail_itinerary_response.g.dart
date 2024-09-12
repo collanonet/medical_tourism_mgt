@@ -10,7 +10,9 @@ DetailItineraryResponse _$DetailItineraryResponseFromJson(
         Map<String, dynamic> json) =>
     DetailItineraryResponse(
       id: json['_id'] as String?,
-      patient: json['patient'] as List<dynamic>?,
+      patient: (json['patient'] as List<dynamic>?)
+          ?.map((e) => Patient.fromJson(e as Map<String, dynamic>))
+          .toList(),
       tourName: json['tourName'] as String?,
       peopleNumber: (json['peopleNumber'] as num?)?.toInt(),
       classification: json['classification'] as String?,

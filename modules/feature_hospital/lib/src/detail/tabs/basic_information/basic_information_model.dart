@@ -160,6 +160,7 @@ class BasicInformationModel {
             ),
             'nameKanji': FormControl<String>(
               value: item.nameKanji ?? '',
+              validators: [Validators.required],
             ),
             'nameKana': FormControl<String>(
               value: item.nameKana ?? '',

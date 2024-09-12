@@ -33,7 +33,8 @@ abstract class ProcessChartRepository {
     ItineraryTransferInputRequest itineraryTransferInputRequest,
   );
 
-  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital(String id);
+  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital(
+      String id);
 
   Future<DetailFacilityHotelResponse> postDetailFacilityHospital(
     DetailFacilityHotelRequest detailFacilityHotelRequest,
@@ -105,22 +106,23 @@ abstract class ProcessChartRepository {
     DetailRelatedPartiesRequest detailRelatedPartiesRequest,
   );
 
-  Future<List<DetailRelatedPartiesBusCompanyResponse>>
-      getDetailRelatedPartiesBusCompany();
+  Future<DetailRelatedPartiesBusCompanyResponse>
+      getDetailRelatedPartiesBusCompany(String id);
 
   Future<DetailRelatedPartiesBusCompanyResponse>
       postDetailRelatedPartiesBusCompany(
     DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest,
   );
 
-  Future<DetailRelatedPartiesDriverResponse> getDetailRelatedPartiesDriver();
+  Future<List<DetailRelatedPartiesDriverResponse>>
+      getDetailRelatedPartiesDriver(String id);
 
   Future<DetailRelatedPartiesDriverResponse> postDetailRelatedPartiesDriver(
     DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest,
   );
 
   Future<DetailRelatedPartiesEmergencyContactResponse>
-      getDetailRelatedPartiesEmergencyContact();
+      getDetailRelatedPartiesEmergencyContact(String id);
 
   Future<DetailRelatedPartiesEmergencyContactResponse>
       postDetailRelatedPartiesEmergencyContact(
@@ -139,6 +141,11 @@ abstract class ProcessChartRepository {
 
   Future<DetailItineraryResponse> postDetailItinerary(
     DetailIneraryRequest detailIneraryRequest,
+  );
+
+  Future<DetailItineraryResponse> putDetailItinerary(
+    DetailIneraryRequest request,
+    element,
   );
 
   Future<DetailRelatedPartiesResponse> putDetailRelatedParties(

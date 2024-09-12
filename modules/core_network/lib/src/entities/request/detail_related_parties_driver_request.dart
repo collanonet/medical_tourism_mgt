@@ -2,6 +2,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 part 'detail_related_parties_driver_request.g.dart';
+
 @JsonSerializable()
 class DetailRelatedPartiesDriverRequest {
   DateTime? dateYearFrom;
@@ -36,11 +37,12 @@ class DetailRelatedPartiesDriverRequest {
     this.tour,
   });
 
-  factory DetailRelatedPartiesDriverRequest.fromJson(Map<String,dynamic> json){
+  factory DetailRelatedPartiesDriverRequest.fromJson(
+      Map<String, dynamic> json) {
     return _$DetailRelatedPartiesDriverRequestFromJson(json);
   }
 
-  Map<String,dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return _$DetailRelatedPartiesDriverRequestToJson(this);
   }
 }
