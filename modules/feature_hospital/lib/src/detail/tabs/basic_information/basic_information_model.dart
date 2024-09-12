@@ -560,7 +560,7 @@ class BasicInformationModel {
         } else {
           if (element['_id'] != null) {
             await hospitalRepository
-                .deleteMedicalRecordBasicInfoHospital(element['id']);
+                .deleteMedicalRecordBasicInfoHospital(element['_id']);
           }
         }
       });
@@ -592,13 +592,12 @@ class BasicInformationModel {
               );
               file = fileData.filename;
             } catch (e) {
-              logger.e(e);
+              logger.e('Error uploading profile file: $e');
             }
           } else {
             file = docFile.url;
           }
         }
-        logger.d(file);
 
         List<String> affiliatedAcademicSociety =
             convertToList(element, 'affiliatedAcademicSociety');
@@ -620,7 +619,7 @@ class BasicInformationModel {
               );
               fileDoctor = fileData.filename;
             } catch (e) {
-              logger.e(e);
+              logger.e('Error uploading doctor file: $e');
             }
           } else {
             fileDoctor = docFile.url;
@@ -628,8 +627,7 @@ class BasicInformationModel {
         }
 
         DoctorProfileHospitalRequest request = DoctorProfileHospitalRequest(
-          hospital:
-              hospitalId.value ?? basicInformationData.value.data?.id ?? '',
+          hospital: basicInformationData.value.requireData.id,
           id: element['_id'],
           profile: file,
           photoRelease: element['photoRelease'] ?? '',
@@ -652,14 +650,19 @@ class BasicInformationModel {
           email: element['email'] ?? '',
           remark2: element['remark2'] ?? '',
         );
-        var result =
-            await hospitalRepository.postDoctorInformationHospital(request);
-        doctorInformationDataList.add(result);
+
+        try {
+          var result =
+              await hospitalRepository.postDoctorInformationHospital(request);
+          doctorInformationDataList.add(result);
+        } catch (e) {
+          logger.e('Error saving doctor information: $e');
+        }
       }
 
       doctorInformationData.value = AsyncData(data: doctorInformationDataList);
     } catch (e) {
-      logger.e(e);
+      logger.e('Error in submitDoctorInformation: $e');
       doctorInformationData.value = AsyncData(error: e);
     }
   }
