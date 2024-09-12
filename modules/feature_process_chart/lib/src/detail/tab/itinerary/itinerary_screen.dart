@@ -31,11 +31,12 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
           context.read<DetailProcessChartModel>().update(data.requireData);
         }
       },
-      child: ValueListenableBuilder(
-        valueListenable: context.watch<ItineraryModel>().submitData,
-        builder: (context, value, _) {
+      child: ValueListenableBuilder2(
+        first: context.watch<ItineraryModel>().submitData,
+        second: context.watch<ItineraryModel>().itinerraryData,
+        builder: (context, firstValue, secondValue, _) {
           return Skeletonizer(
-            enabled: value.loading,
+            enabled: firstValue.loading || secondValue.loading,
             child: Column(
               children: [
                 Expanded(

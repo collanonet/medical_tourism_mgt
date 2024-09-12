@@ -78,11 +78,11 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
                           value.requireData.day?.isEmpty ?? true
                               ? '--'
                               : value.requireData.day?.length == 1
-                                  ? value.requireData.day?.first.date == null
-                                      ? ''
-                                      : Dates.formatFullDate(
-                                          value.requireData.day!.first.date!)
-                                  : '${value.requireData.day?.first.date == null ? '' : Dates.formatFullDate(value.requireData.day!.first.date!)}〜${value.requireData.day?.last.date == null ? '' : Dates.formatFullDate(value.requireData.day!.last.date!)}',
+                              ? value.requireData.day?.first.date == null
+                              ? ''
+                              : Dates.formatFullDate(
+                              value.requireData.day!.first.date!)
+                              : '${value.requireData.day?.first.date == null ? '' : Dates.formatFullDate(value.requireData.day!.first.date!)}〜${value.requireData.day?.last.date == null ? '' : Dates.formatFullDate(value.requireData.day!.last.date!)}',
                         )
                     ],
                   ),
@@ -138,7 +138,7 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
                 return Expanded(
                   child: Container(
                     padding:
-                        EdgeInsets.all(context.appTheme.spacing.marginMedium),
+                    EdgeInsets.all(context.appTheme.spacing.marginMedium),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(
                           context.appTheme.spacing.borderRadiusMedium),
