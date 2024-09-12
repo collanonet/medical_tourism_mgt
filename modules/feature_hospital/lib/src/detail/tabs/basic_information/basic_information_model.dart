@@ -153,14 +153,14 @@ class BasicInformationModel {
             ),
             'dateOfUpdate': FormControl<DateTime>(
               value: item.dateOfUpdate,
-              validators: [Validators.required],
+              // validators: [Validators.required],
             ),
             'departmentName': FormControl<String>(
               value: item.departmentName,
             ),
             'nameKanji': FormControl<String>(
               value: item.nameKanji ?? '',
-              validators: [Validators.required],
+              // validators: [Validators.required],
             ),
             'nameKana': FormControl<String>(
               value: item.nameKana ?? '',
@@ -170,7 +170,7 @@ class BasicInformationModel {
             ),
             'email': FormControl<String>(
               validators: [
-                Validators.required,
+                // Validators.required,
                 Validators.email,
               ],
               value: item.email ?? '',
@@ -523,8 +523,9 @@ class BasicInformationModel {
 
   Future<void> submitMedicalRecordBasicInfo(FormGroup formGroup) async {
     try {
-      medicalRecordBasicInfoData.value =
-          const AsyncData(loading: true, data: []);
+      List<MedicalRecordBasicInfoHospitalResponse> data =
+          medicalRecordBasicInfoData.value.data ?? [];
+      medicalRecordBasicInfoData.value = const AsyncData(loading: true);
 
       await formGroup
           .control('medicalRecordHospitals')
@@ -550,16 +551,21 @@ class BasicInformationModel {
             var result = await hospitalRepository
                 .postMedicalRecordBasicInfoHospital(request);
 
-            medicalRecordBasicInfoData.value.copyWith(data: [
-              ...medicalRecordBasicInfoData.value.requireData,
-              result,
-            ]);
+            if (element['_id'] == null) {
+              data.add(result);
+            } else {
+              data.map((e) => e.id == result.id ? result : e).toList();
+            }
+          }
+        } else {
+          if (element['_id'] != null) {
+            await hospitalRepository
+                .deleteMedicalRecordBasicInfoHospital(element['id']);
           }
         }
       });
 
-      medicalRecordBasicInfoData.value =
-          AsyncData(data: medicalRecordBasicInfoData.value.data);
+      medicalRecordBasicInfoData.value = AsyncData(data: data);
     } catch (e) {
       logger.d(e);
       medicalRecordBasicInfoData.value = AsyncData(error: e);

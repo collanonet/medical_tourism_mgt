@@ -207,5 +207,7 @@ abstract class HospitalRepository {
 
   Future<void> deleteBasicInformationHospital(String id);
 
+  Future<void> deleteMedicalRecordBasicInfoHospital(String id);
+
 }
 

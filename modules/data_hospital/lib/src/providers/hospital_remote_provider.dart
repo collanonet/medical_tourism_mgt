@@ -356,4 +356,8 @@ class HospitalRemoteProvider {
   Future<void> deleteBasicInformationHospital(String id) {
     return apiService.deleteBasicInformationHospital(id);
   }
+
+  Future<void> deleteMedicalRecordBasicInfoHospital(String id) {
+    return apiService.deleteMedicalRecordBasicInfoHospital(id);
+  }
 }

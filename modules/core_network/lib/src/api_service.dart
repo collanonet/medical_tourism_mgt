@@ -956,6 +956,11 @@ abstract class ApiService {
     MedicalRecordBasicInfoHospitalRequest basicInformationHospitalRequest,
   );
 
+  @DELETE('${EndPoints.MEDICAL_RECORD_BASIC_INFO_HOSPITAL}/{id}')
+  Future<void> deleteMedicalRecordBasicInfoHospital(
+    @Path('id') String id,
+  );
+
   @GET('${EndPoints.DOCTOR_INFORMATION_HOSPITAL}/{hospitalId}')
   Future<List<DoctorProfileHospitalResponse>> getDoctorInformationHospital(
     @Path('hospitalId') String hospitalId,
