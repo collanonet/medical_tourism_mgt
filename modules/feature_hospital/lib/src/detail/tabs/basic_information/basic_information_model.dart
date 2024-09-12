@@ -530,26 +530,32 @@ class BasicInformationModel {
           .control('medicalRecordHospitals')
           .value
           .forEach((element) async {
-        MedicalRecordBasicInfoHospitalRequest request =
-            MedicalRecordBasicInfoHospitalRequest(
-          hospital:
-              hospitalId.value ?? basicInformationData.value.data?.id ?? '',
-          id: element['_id'],
-          dateOfUpdate: element['dateOfUpdate'] ?? DateTime.now(),
-          departmentName: element['departmentName'] ?? '',
-          nameKanji: element['nameKanji'] ?? '',
-          nameKana: element['nameKana'] ?? '',
-          telephoneNumber: element['telephoneNumber'] ?? '',
-          email: element['email'] ?? '',
-          faxNumber: element['faxNumber'] ?? '',
-        );
-        var result = await hospitalRepository
-            .postMedicalRecordBasicInfoHospital(request);
+        if (element['email'] != null &&
+            element['email'].toString().isNotEmpty) {
+          if (element['nameKanji'] != null &&
+              element['nameKanji'].toString().isNotEmpty) {
+            MedicalRecordBasicInfoHospitalRequest request =
+                MedicalRecordBasicInfoHospitalRequest(
+              hospital:
+                  hospitalId.value ?? basicInformationData.value.data?.id ?? '',
+              id: element['_id'],
+              dateOfUpdate: element['dateOfUpdate'] ?? DateTime.now(),
+              departmentName: element['departmentName'] ?? '',
+              nameKanji: element['nameKanji'] ?? '',
+              nameKana: element['nameKana'] ?? '',
+              telephoneNumber: element['telephoneNumber'] ?? '',
+              email: element['email'] ?? '',
+              faxNumber: element['faxNumber'] ?? '',
+            );
+            var result = await hospitalRepository
+                .postMedicalRecordBasicInfoHospital(request);
 
-        medicalRecordBasicInfoData.value.copyWith(data: [
-          ...medicalRecordBasicInfoData.value.requireData,
-          result,
-        ]);
+            medicalRecordBasicInfoData.value.copyWith(data: [
+              ...medicalRecordBasicInfoData.value.requireData,
+              result,
+            ]);
+          }
+        }
       });
 
       medicalRecordBasicInfoData.value =

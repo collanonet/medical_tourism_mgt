@@ -23,6 +23,7 @@ class MedicalRecordSection extends StatefulWidget {
 
 class _MedicalRecordSectionState extends State<MedicalRecordSection> {
   final formatter = InputFormatter();
+
   @override
   Widget build(BuildContext context) {
     final formArray = (ReactiveForm.of(context) as FormGroup)
@@ -274,17 +275,21 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                 InkWell(
                   onTap: () => formArray.add(
                     FormGroup({
-                      '_id': FormControl<String?>(),
+                      '_id': FormControl<String>(),
                       'hospital': FormControl<String?>(),
                       'dateOfUpdate': FormControl<DateTime>(
-                        validators: [Validators.required],
+                        value: DateTime.now(),
+                        // validators: [Validators.required],
                       ),
                       'departmentName': FormControl<String>(),
-                      'nameKanji': FormControl<String>(),
+                      'nameKanji': FormControl<String>(
+                          // validators: [Validators.required],
+                          ),
                       'nameKana': FormControl<String>(),
                       'telephoneNumber': FormControl<String>(),
                       'email': FormControl<String>(
                         validators: [
+                          // Validators.required,
                           Validators.email,
                         ],
                       ),
