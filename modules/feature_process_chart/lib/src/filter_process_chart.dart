@@ -21,6 +21,7 @@ class ProcessChartFilter extends StatefulWidget {
 
 class _ProcessChartFilterState extends State<ProcessChartFilter> {
   final formatter = InputFormatter();
+
   @override
   Widget build(BuildContext context) {
     return Consumer<ProcessChartModel>(

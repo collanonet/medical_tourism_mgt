@@ -36,14 +36,14 @@ class ProcessChartRemoteProvider {
   }
 
   Future<ItineraryInterpreterOrGuideInputResponse>
-  getItineraryInterpretorOrGuideInput() async {
+      getItineraryInterpretorOrGuideInput() async {
     return await apiService.getItineraryInterpretorOrGuideInput();
   }
 
   Future<ItineraryInterpreterOrGuideInputResponse>
-  postItineraryInterpretorOrGuideInput(
-      ItineraryInterpreterOrGuideInputRequest
-      itineraryInterpreterOrGuideInputRequest) async {
+      postItineraryInterpretorOrGuideInput(
+          ItineraryInterpreterOrGuideInputRequest
+              itineraryInterpreterOrGuideInputRequest) async {
     return await apiService.postItineraryInterpretorOrGuideInput(
         itineraryInterpreterOrGuideInputRequest);
   }
@@ -58,7 +58,8 @@ class ProcessChartRemoteProvider {
         .postItineraryTransferInput(itineraryTransferInputRequest);
   }
 
-  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital(String id) async {
+  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital(
+      String id) async {
     return await apiService.getDetialFacilityHospital(id);
   }
 
@@ -68,7 +69,8 @@ class ProcessChartRemoteProvider {
         .postDetailFacilityHospital(detailFacilityHotelRequest);
   }
 
-  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(String id) async {
+  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(
+      String id) async {
     return await apiService.getDetailFacilityDropIn(id);
   }
 
@@ -116,7 +118,7 @@ class ProcessChartRemoteProvider {
   }
 
   Future<List<DetailRelatedPartiesResponse>>
-  getRelatedPartiesGuideOrInterpreter(String id) async {
+      getRelatedPartiesGuideOrInterpreter(String id) async {
     return await apiService.getRelatedPartiesGuideOrInterpreter(id);
   }
 
@@ -126,38 +128,39 @@ class ProcessChartRemoteProvider {
         .postRelatedPartiesGuideOrInterpreter(detailRelatedPartiesRequest);
   }
 
-  Future<DetailRelatedPartiesBusCompanyResponse>
-  getRelatedPartiesBusCompany(String id) async {
+  Future<DetailRelatedPartiesBusCompanyResponse> getRelatedPartiesBusCompany(
+      String id) async {
     return await apiService.getRelatedPartiesBusCompany(id);
   }
 
   Future<DetailRelatedPartiesBusCompanyResponse> postRelatedPartiesBusCompany(
       DetailRelatedPartiesBusCompanyRequest
-      detailRelatedPartiesBusCompanyRequest) async {
+          detailRelatedPartiesBusCompanyRequest) async {
     return await apiService
         .postRelatedPartiesBusCompany(detailRelatedPartiesBusCompanyRequest);
   }
 
-  Future<List<DetailRelatedPartiesDriverResponse>> getRelatedPartiesDriver(String id) async {
+  Future<List<DetailRelatedPartiesDriverResponse>> getRelatedPartiesDriver(
+      String id) async {
     return await apiService.getRelatedPartiesDriver(id);
   }
 
   Future<DetailRelatedPartiesDriverResponse> postRelatedPartiesDriver(
       DetailRelatedPartiesDriverRequest
-      detailRelatedPartiesDriverRequest) async {
+          detailRelatedPartiesDriverRequest) async {
     return await apiService
         .postRelatedPartiesDriver(detailRelatedPartiesDriverRequest);
   }
 
   Future<DetailRelatedPartiesEmergencyContactResponse>
-  getRelatedPartiesEmergencyContact(String id) async {
+      getRelatedPartiesEmergencyContact(String id) async {
     return await apiService.getRelatedPartiesEmergencyContact(id);
   }
 
   Future<DetailRelatedPartiesEmergencyContactResponse>
-  postRelatedPartiesEmergencyContact(
-      DetailRelatedPartiesEmergencyContactRequest
-      detailRelatedPartiesEmergencyContactRequest) async {
+      postRelatedPartiesEmergencyContact(
+          DetailRelatedPartiesEmergencyContactRequest
+              detailRelatedPartiesEmergencyContactRequest) async {
     return await apiService.postRelatedPartiesEmergencyContact(
         detailRelatedPartiesEmergencyContactRequest);
   }
@@ -168,46 +171,46 @@ class ProcessChartRemoteProvider {
 
   Future<DetailItinerarySimpleTitle> postDetailItinerarySimpleTitle(
       DetailItinerarySimpleTitleRequest
-      detailItinerarySimpleTitleRequest) async {
+          detailItinerarySimpleTitleRequest) async {
     return await apiService
         .postDetailItinerarySimpleTitle(detailItinerarySimpleTitleRequest);
   }
 
   Future<DetailItinerarySimplePriorExplanationResponse>
-  getDetailItinerarySimplePriorExplanation() async {
+      getDetailItinerarySimplePriorExplanation() async {
     return await apiService.getDetailItinerarySimpleExplanation();
   }
 
   Future<DetailItinerarySimplePriorExplanationResponse>
-  postDetailItinerarySimpleExplanation(
-      DetailItinerarySimplePriorExplanationRequest
-      detailItinerarySimplePriorExplanationRequest) async {
+      postDetailItinerarySimpleExplanation(
+          DetailItinerarySimplePriorExplanationRequest
+              detailItinerarySimplePriorExplanationRequest) async {
     return await apiService.postDetailItinerarySimpleExplanation(
         detailItinerarySimplePriorExplanationRequest);
   }
 
   Future<DetailItinerarySimpleInterpreterOrGuideResponse>
-  getDetailItinerarySimpleInterpretorOrGuide() async {
+      getDetailItinerarySimpleInterpretorOrGuide() async {
     return await apiService.getDetailItinerarySimpleInterpreter();
   }
 
   Future<DetailItinerarySimpleInterpreterOrGuideResponse>
-  postDetailItinerarySimpleInterpretorOrGuide(
-      DetailItinerarySimpleInterpreterOrGuideRequest
-      detailItinerarySimpleInterpreterOrGuideRequest) async {
+      postDetailItinerarySimpleInterpretorOrGuide(
+          DetailItinerarySimpleInterpreterOrGuideRequest
+              detailItinerarySimpleInterpreterOrGuideRequest) async {
     return await apiService.postDetailItinerarySimpleInterpreter(
         detailItinerarySimpleInterpreterOrGuideRequest);
   }
 
   Future<DetailItinerarySimplePickUpAndDropOffResponse>
-  getDetailItinerarySimplePickUpAndDropOff() async {
+      getDetailItinerarySimplePickUpAndDropOff() async {
     return await apiService.getDetailItinerarySimplePickUp();
   }
 
   Future<DetailItinerarySimplePickUpAndDropOffResponse>
-  postDetailItinerarySimplePickUp(
-      DetailItinerarySimplePickUpAndDropOffRequest
-      detailItinerarySimplePickUpAnd) async {
+      postDetailItinerarySimplePickUp(
+          DetailItinerarySimplePickUpAndDropOffRequest
+              detailItinerarySimplePickUpAnd) async {
     return await apiService
         .postDetailItinerarySimplePickUp(detailItinerarySimplePickUpAnd);
   }
@@ -247,11 +250,13 @@ class ProcessChartRemoteProvider {
     return apiService.putRelatedPartiesGuideOrInterpreter(element, request);
   }
 
-  Future<DetailDropInFacilityResponse> putDetailFacilityDropIn(id, DetailDropInFacilityRequest detailDropInFacilityRequest) {
+  Future<DetailDropInFacilityResponse> putDetailFacilityDropIn(
+      id, DetailDropInFacilityRequest detailDropInFacilityRequest) {
     return apiService.putDetailFacilityDropIn(id, detailDropInFacilityRequest);
   }
 
-  Future<DetailFacilityHotelResponse> putDetailFacilityHospital(id, DetailFacilityHotelRequest request) {
+  Future<DetailFacilityHotelResponse> putDetailFacilityHospital(
+      id, DetailFacilityHotelRequest request) {
     return apiService.putDetailFacilityHospital(id, request);
   }
 }

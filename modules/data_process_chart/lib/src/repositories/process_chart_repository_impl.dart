@@ -17,8 +17,6 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   final ProcessChartRemoteProvider remote;
   final ProcessChartLocalProvider local;
 
-
-
   @override
   Future<PatientFilterResponse> postFilterpatientChart(
       PatientFilterRequst patientFilterRequst) {
@@ -49,7 +47,7 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
 
   @override
   Future<ItineraryInterpreterOrGuideInputResponse>
-  getItineraryInterpretorOrGuideInput() {
+      getItineraryInterpretorOrGuideInput() {
     return remote.getItineraryInterpretorOrGuideInput();
   }
 
@@ -60,9 +58,9 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
 
   @override
   Future<ItineraryInterpreterOrGuideInputResponse>
-  postItineraryInterpretorOrGuideInput(
-      ItineraryInterpreterOrGuideInputRequest
-      itineraryInterpreterOrGuideInputRequest) {
+      postItineraryInterpretorOrGuideInput(
+          ItineraryInterpreterOrGuideInputRequest
+              itineraryInterpreterOrGuideInputRequest) {
     return remote.postItineraryInterpretorOrGuideInput(
         itineraryInterpreterOrGuideInputRequest);
   }
@@ -74,12 +72,14 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(String id) {
+  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(
+      String id) {
     return remote.getDetailFacilityDropIn(id);
   }
 
   @override
-  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital(String id) {
+  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital(
+      String id) {
     return remote.getDetialFacilityHospital(id);
   }
 
@@ -136,19 +136,19 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
 
   @override
   Future<DetailItinerarySimpleInterpreterOrGuideResponse>
-  getDetailItinerarySimpleInterpretorOrGuideInput() {
+      getDetailItinerarySimpleInterpretorOrGuideInput() {
     return remote.getDetailItinerarySimpleInterpretorOrGuide();
   }
 
   @override
   Future<DetailItinerarySimplePickUpAndDropOffResponse>
-  getDetailItinerarySimplePickUpAndDropOff() {
+      getDetailItinerarySimplePickUpAndDropOff() {
     return remote.getDetailItinerarySimplePickUpAndDropOff();
   }
 
   @override
   Future<DetailItinerarySimplePriorExplanationResponse>
-  getDetailItinerarySimplePriorExplanation() {
+      getDetailItinerarySimplePriorExplanation() {
     return remote.getDetailItinerarySimplePriorExplanation();
   }
 
@@ -159,27 +159,27 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
 
   @override
   Future<DetailItinerarySimpleInterpreterOrGuideResponse>
-  postDetailItinerarySimpleInterpretorOrGuideInput(
-      DetailItinerarySimpleInterpreterOrGuideRequest
-      detailItinerarySimpleInterpreterOrGuideRequest) {
+      postDetailItinerarySimpleInterpretorOrGuideInput(
+          DetailItinerarySimpleInterpreterOrGuideRequest
+              detailItinerarySimpleInterpreterOrGuideRequest) {
     return remote.postDetailItinerarySimpleInterpretorOrGuide(
         detailItinerarySimpleInterpreterOrGuideRequest);
   }
 
   @override
   Future<DetailItinerarySimplePickUpAndDropOffResponse>
-  postDetailItinerarySimplePickUpAndDropOff(
-      DetailItinerarySimplePickUpAndDropOffRequest
-      detailItinerarySimplePickUpAndDropOffRequest) {
+      postDetailItinerarySimplePickUpAndDropOff(
+          DetailItinerarySimplePickUpAndDropOffRequest
+              detailItinerarySimplePickUpAndDropOffRequest) {
     return remote.postDetailItinerarySimplePickUp(
         detailItinerarySimplePickUpAndDropOffRequest);
   }
 
   @override
   Future<DetailItinerarySimplePriorExplanationResponse>
-  postDetailItinerarySimplePriorExplanation(
-      DetailItinerarySimplePriorExplanationRequest
-      detailItinerarySimplePriorExplanationRequest) {
+      postDetailItinerarySimplePriorExplanation(
+          DetailItinerarySimplePriorExplanationRequest
+              detailItinerarySimplePriorExplanationRequest) {
     return remote.postDetailItinerarySimpleExplanation(
         detailItinerarySimplePriorExplanationRequest);
   }
@@ -192,24 +192,26 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<List<DetailRelatedPartiesResponse>> getDetailRelatedParties(String id) {
+  Future<List<DetailRelatedPartiesResponse>> getDetailRelatedParties(
+      String id) {
     return remote.getRelatedPartiesGuideOrInterpreter(id);
   }
 
   @override
   Future<DetailRelatedPartiesBusCompanyResponse>
-  getDetailRelatedPartiesBusCompany(String id) {
+      getDetailRelatedPartiesBusCompany(String id) {
     return remote.getRelatedPartiesBusCompany(id);
   }
 
   @override
-  Future<List<DetailRelatedPartiesDriverResponse>> getDetailRelatedPartiesDriver(String id) {
+  Future<List<DetailRelatedPartiesDriverResponse>>
+      getDetailRelatedPartiesDriver(String id) {
     return remote.getRelatedPartiesDriver(id);
   }
 
   @override
   Future<DetailRelatedPartiesEmergencyContactResponse>
-  getDetailRelatedPartiesEmergencyContact(String id) {
+      getDetailRelatedPartiesEmergencyContact(String id) {
     return remote.getRelatedPartiesEmergencyContact(id);
   }
 
@@ -222,9 +224,9 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
 
   @override
   Future<DetailRelatedPartiesBusCompanyResponse>
-  postDetailRelatedPartiesBusCompany(
-      DetailRelatedPartiesBusCompanyRequest
-      detailRelatedPartiesBusCompanyRequest) {
+      postDetailRelatedPartiesBusCompany(
+          DetailRelatedPartiesBusCompanyRequest
+              detailRelatedPartiesBusCompanyRequest) {
     return remote
         .postRelatedPartiesBusCompany(detailRelatedPartiesBusCompanyRequest);
   }
@@ -237,9 +239,9 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
 
   @override
   Future<DetailRelatedPartiesEmergencyContactResponse>
-  postDetailRelatedPartiesEmergencyContact(
-      DetailRelatedPartiesEmergencyContactRequest
-      detailRelatedPartiesEmergencyContactRequest) {
+      postDetailRelatedPartiesEmergencyContact(
+          DetailRelatedPartiesEmergencyContactRequest
+              detailRelatedPartiesEmergencyContactRequest) {
     return remote.postRelatedPartiesEmergencyContact(
         detailRelatedPartiesEmergencyContactRequest);
   }
@@ -248,7 +250,6 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   Future<DetailItineraryResponse> getDetailItinerary({String? id}) {
     return remote.getDetailitinerary(
       id: id,
-
     );
   }
 
@@ -274,22 +275,26 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<DetailRelatedPartiesResponse> putDetailRelatedParties(DetailRelatedPartiesRequest request, element) {
+  Future<DetailRelatedPartiesResponse> putDetailRelatedParties(
+      DetailRelatedPartiesRequest request, element) {
     return remote.putDetailRelatedParties(request, element);
   }
 
   @override
-  Future<DetailItineraryResponse> putDetailItinerary(DetailIneraryRequest request, element) {
+  Future<DetailItineraryResponse> putDetailItinerary(
+      DetailIneraryRequest request, element) {
     return remote.putDetailItinerary(request, element);
   }
 
   @override
-  Future<DetailDropInFacilityResponse> putDetailFacilityDropIn(id, DetailDropInFacilityRequest detailDropInFacilityRequest) {
+  Future<DetailDropInFacilityResponse> putDetailFacilityDropIn(
+      id, DetailDropInFacilityRequest detailDropInFacilityRequest) {
     return remote.putDetailFacilityDropIn(id, detailDropInFacilityRequest);
   }
 
   @override
-  Future<DetailFacilityHotelResponse> putDetailFacilityHospital(id, DetailFacilityHotelRequest request) {
+  Future<DetailFacilityHotelResponse> putDetailFacilityHospital(
+      id, DetailFacilityHotelRequest request) {
     return remote.putDetailFacilityHospital(id, request);
   }
 }
