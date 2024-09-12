@@ -129,12 +129,10 @@ class _QAndANewRegistrationSectionState
                                       '胃カメラ検査について',
                                       '婦人科検査について',
                                       '結果について'
-                                    ]
-                                        .map((e) => DropdownMenuItem(
-                                              value: e,
-                                              child: Text(e),
-                                            ))
-                                        .toList(),
+                                    ].map((e) => DropdownMenuItem(
+                                          value: e,
+                                          child: Text(e),
+                                        )),
                                   ],
                                 )
                               ]),
