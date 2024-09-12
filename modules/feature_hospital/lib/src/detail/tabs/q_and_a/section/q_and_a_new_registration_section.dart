@@ -119,11 +119,22 @@ class _QAndANewRegistrationSectionState
                                 ),
                                 ReactiveDropdownField(
                                   formControlName: 'classification',
-                                  items: const [
-                                    DropdownMenuItem(
-                                      value: '予約方法について',
-                                      child: Text('予約方法について'),
-                                    )
+                                  items: [
+                                    ...[
+                                      '予約方法について',
+                                      '受診前によくあるお問い合わせ',
+                                      '人間ドッグ予約確定後のお問い合わせ',
+                                      '受診後によくあるお問い合わせ',
+                                      '受診日当日について',
+                                      '胃カメラ検査について',
+                                      '婦人科検査について',
+                                      '結果について'
+                                    ]
+                                        .map((e) => DropdownMenuItem(
+                                              value: e,
+                                              child: Text(e),
+                                            ))
+                                        .toList(),
                                   ],
                                 )
                               ]),
