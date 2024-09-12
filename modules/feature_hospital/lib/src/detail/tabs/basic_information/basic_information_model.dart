@@ -40,11 +40,12 @@ class BasicInformationModel {
   ValueNotifier<AsyncData<List<SupportLanguageHospitalResponse>>>
       supportLangaugeData = ValueNotifier(const AsyncData());
 
-  ValueNotifier<String?> hospitalId = ValueNotifier(null);
+  ValueNotifier<AsyncData<String>> hospitalId =
+      ValueNotifier(const AsyncData());
 
   Future<void> fetchData(FormGroup formGroup, {String? hospitalId}) async {
     try {
-      this.hospitalId.value = hospitalId;
+      this.hospitalId.value = AsyncData(data: hospitalId);
       if (hospitalId != null) {
         await fetchBasicInformation(
             formGroup.control('basicInformation') as FormGroup, hospitalId);
@@ -89,7 +90,7 @@ class BasicInformationModel {
       FormGroup formGroup, HowToRequestHospitalResponse data) {
     formGroup.patchValue({
       'id': data.id,
-      'hospital': hospitalId.value ?? basicInformationData.value.data?.id ?? '',
+      'hospital': hospitalId.value.requireData,
       'dateOfUpdate': data.dateOfUpdate,
       'updater': data.updater,
       'memo': data.memo,
@@ -148,8 +149,7 @@ class BasicInformationModel {
               value: item.id,
             ),
             'hospital': FormControl<String>(
-              value:
-                  hospitalId.value ?? basicInformationData.value.data?.id ?? '',
+              value: hospitalId.value.requireData,
             ),
             'dateOfUpdate': FormControl<DateTime>(
               value: item.dateOfUpdate,
@@ -265,8 +265,7 @@ class BasicInformationModel {
               value: item.id,
             ),
             'hospital': FormControl<String>(
-              value:
-                  hospitalId.value ?? basicInformationData.value.data?.id ?? '',
+              value: hospitalId.value.requireData,
             ),
             'profile': FormControl<FileSelect>(
               value: item.profile != null
@@ -319,7 +318,7 @@ class BasicInformationModel {
               value: item.faxNumber ?? '',
             ),
             'email': FormControl<String>(
-              value: item.email ?? '',
+              value: item.email,
               validators: [
                 Validators.email,
               ],
@@ -351,8 +350,7 @@ class BasicInformationModel {
   ) async {
     try {
       formGroup.control('_id').value = data.id;
-      formGroup.control('hospital').value =
-          hospitalId.value ?? basicInformationData.value.data?.id ?? '';
+      formGroup.control('hospital').value = hospitalId.value.requireData;
       formGroup.control('outsourcingContract').value = data.outsourcingContract;
       if (data.files != null && data.files!.isNotEmpty) {
         List<FileSelect> files = [];
@@ -444,8 +442,7 @@ class BasicInformationModel {
           FormGroup({
             '_id': FormControl<String>(value: item.id),
             'hospital': FormControl<String>(
-              value:
-                  hospitalId.value ?? basicInformationData.value.data?.id ?? '',
+              value: hospitalId.value.requireData,
             ),
             'supportLanguage': FormControl<String>(value: item.supportLanguage),
             'foreignStaff': FormControl<bool>(value: item.foreignStaff),
@@ -466,7 +463,7 @@ class BasicInformationModel {
       submit.value = const AsyncData(loading: true);
       await submitBasicInformation(formGroup);
 
-      if (hospitalId.value != null) {
+      if (hospitalId.value.hasData) {
         await submitHowToMakeRequest(
             formGroup.control('howToMakeRequest') as FormGroup);
         await submitMedicalRecordBasicInfo(formGroup);
@@ -492,7 +489,7 @@ class BasicInformationModel {
             (formGroup.control('basicInformation') as FormGroup).value),
       );
 
-      hospitalId.value = hospitalId.value ?? result.id;
+      hospitalId.value = AsyncData(data: result.id);
       basicInformationData.value = AsyncData(data: result);
     } catch (e) {
       logger.d(e);
@@ -505,7 +502,7 @@ class BasicInformationModel {
       howToMakeRequestHospitalData.value = const AsyncData(loading: true);
 
       HowToRequestHospitalRequest request = HowToRequestHospitalRequest(
-        hospital: hospitalId.value ?? basicInformationData.value.data?.id ?? '',
+        hospital: hospitalId.value.requireData,
         id: form.control('_id').value ?? '',
         dateOfUpdate: form.control('dateOfUpdate').value ?? DateTime.now(),
         updater: form.control('updater').value ?? '',
@@ -537,15 +534,14 @@ class BasicInformationModel {
               element['nameKanji'].toString().isNotEmpty) {
             MedicalRecordBasicInfoHospitalRequest request =
                 MedicalRecordBasicInfoHospitalRequest(
-              hospital:
-                  hospitalId.value ?? basicInformationData.value.data?.id ?? '',
+              hospital: hospitalId.value.requireData,
               id: element['_id'],
               dateOfUpdate: element['dateOfUpdate'] ?? DateTime.now(),
               departmentName: element['departmentName'] ?? '',
               nameKanji: element['nameKanji'] ?? '',
               nameKana: element['nameKana'] ?? '',
               telephoneNumber: element['telephoneNumber'] ?? '',
-              email: element['email'] ?? '',
+              email: element['email'],
               faxNumber: element['faxNumber'] ?? '',
             );
             var result = await hospitalRepository
@@ -627,7 +623,7 @@ class BasicInformationModel {
         }
 
         DoctorProfileHospitalRequest request = DoctorProfileHospitalRequest(
-          hospital: basicInformationData.value.requireData.id,
+          hospital: hospitalId.value.requireData,
           id: element['_id'],
           profile: file,
           photoRelease: element['photoRelease'] ?? '',
@@ -647,7 +643,7 @@ class BasicInformationModel {
           completionCertificate: completionCertificate,
           telephoneNumber: element['telephoneNumber'] ?? '',
           faxNumber: element['faxNumber'] ?? '',
-          email: element['email'] ?? '',
+          email: element['email'],
           remark2: element['remark2'] ?? '',
         );
 
@@ -701,7 +697,7 @@ class BasicInformationModel {
 
       AdditionalInformationSectionRequest request =
           AdditionalInformationSectionRequest(
-        hospital: hospitalId.value ?? basicInformationData.value.data?.id ?? '',
+        hospital: hospitalId.value.requireData,
         id: form.control('_id').value,
         outsourcingContract: form.control('outsourcingContract').value ?? '',
         contract: contract,
@@ -729,7 +725,7 @@ class BasicInformationModel {
       paymentOptionData.value = const AsyncData(loading: true);
 
       PaymentOptionHospitalRequest request = PaymentOptionHospitalRequest(
-        hospital: hospitalId.value ?? basicInformationData.value.data?.id ?? '',
+        hospital: hospitalId.value.requireData,
         id: form.control('_id').value ?? '',
         payer: form.control('payer').value ?? '',
         paymentTiming: form.control('paymentTiming').value ?? '',
@@ -771,8 +767,7 @@ class BasicInformationModel {
             element['supportLanguage'].toString().isNotEmpty) {
           SupportLanguageHospitalRequest request =
               SupportLanguageHospitalRequest(
-            hospital:
-                hospitalId.value ?? basicInformationData.value.data?.id ?? '',
+            hospital: hospitalId.value.requireData,
             id: element['_id'],
             supportLanguage: element['supportLanguage'],
             foreignStaff: element['foreignStaff'] ?? false,
