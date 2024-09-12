@@ -31,12 +31,11 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
           context.read<DetailProcessChartModel>().update(data.requireData);
         }
       },
-      child: ValueListenableBuilder2(
-        first: context.watch<ItineraryModel>().submitData,
-        second: context.watch<ItineraryModel>().itinerraryData,
-        builder: (context, firstValue, secondValue, _) {
+      child: ValueListenableBuilder(
+        valueListenable: context.watch<ItineraryModel>().submitData,
+        builder: (context, value, _) {
           return Skeletonizer(
-            enabled: firstValue.loading || secondValue.loading,
+            enabled: value.loading,
             child: Column(
               children: [
                 Expanded(
@@ -456,16 +455,18 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                         onTap: () => formArray.add(
                           FormGroup(
                             {
-                              'date': FormControl<DateTime>(), // 日付
+                              'date': FormControl<DateTime>(),
+                              // 日付
 
                               //meals
                               'morning': FormControl<bool>(value: false),
                               'noon': FormControl<bool>(value: false),
                               'evening': FormControl<bool>(value: false),
 
-                              'placeName': FormControl<String>(value: ''), // 地名
-                              'placeStay':
-                                  FormControl<String>(value: ''), // 宿泊場所
+                              'placeName': FormControl<String>(value: ''),
+                              // 地名
+                              'placeStay': FormControl<String>(value: ''),
+                              // 宿泊場所
                               'groups': FormArray(
                                 // グループ
                                 [
@@ -594,7 +595,8 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                     onTap: () => formArray.add(
                       FormGroup(
                         {
-                          'groups': FormControl<String>(value: ''), // グループ番号
+                          'groups': FormControl<String>(value: ''),
+                          // グループ番号
                           'tasks': FormArray(
                             [
                               FormGroup(
