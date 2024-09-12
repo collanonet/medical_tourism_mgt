@@ -339,6 +339,19 @@ class AgentBasicInformationModel {
     Contact(value: 'Messenger'),
     Contact(value: 'WhatsApp'),
   ]);
+
+  ValueNotifier<AsyncData<bool>> deleteAgent = ValueNotifier(const AsyncData());
+
+  Future<void> deleteAgentData() async {
+    try {
+      deleteAgent.value = const AsyncData(loading: true);
+      await authRepository.deleteAgent(agent.value.requireData.id);
+      deleteAgent.value = const AsyncData(data: true);
+    } catch (e) {
+      logger.e(e);
+      deleteAgent.value = AsyncData(error: e);
+    }
+  }
 }
 
 class Contact {

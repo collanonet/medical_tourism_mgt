@@ -77,7 +77,7 @@ class _BasicInformationSectionState extends State<BasicInformationSection> {
                   context.read<BasicInformationModel>().deleteHospital,
               onListen: () {
                 final value =
-                    context.read<BasicInformationModel>().submit.value;
+                    context.read<BasicInformationModel>().deleteHospital.value;
                 if (value.hasData) {
                   context.router.replaceAll([const HospitalsRoute()]);
                   snackBarWidget(
