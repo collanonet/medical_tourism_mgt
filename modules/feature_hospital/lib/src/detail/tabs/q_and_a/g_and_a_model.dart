@@ -73,8 +73,10 @@ class QAndAModel {
         ),
       );
       submit.value = AsyncData(data: response);
-      newRegistrationHospitalData.value = AsyncData(
-          data: newRegistrationHospitalData.value.data!..add(response));
+      newRegistrationHospitalData.value = AsyncData(data: [
+        ...newRegistrationHospitalData.value.data ?? [],
+        response,
+      ]);
     } catch (e) {
       logger.d(e);
       submit.value = AsyncData(error: e);
@@ -85,7 +87,6 @@ class QAndAModel {
 
   Future<void> deleteData(NewRegistrationHospitalResponse requireData) async {
     try {
-
       delete.value = const AsyncData(loading: true);
       await hospitalRepository.deleteNewRegistrationHospital(
         requireData.id,
