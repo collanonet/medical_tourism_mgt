@@ -263,6 +263,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                   ),
                                 ),
                               ),
+                              Expanded(child: SizedBox())
                             ],
                           ),
                           Row(
@@ -1080,8 +1081,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                         children: [
                           Row(
                             children: [
-                              const IntrinsicWidth(
-                                stepWidth: 150,
+                              const SizedBox(
+                                width: 150,
                                 child: Text(
                                   '部門',
                                   style: TextStyle(
@@ -1094,8 +1095,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const IntrinsicWidth(
-                                stepWidth: 150,
+                              const SizedBox(
+                                width: 150,
                                 child: Text(
                                   '診療時間',
                                   style: TextStyle(
@@ -1196,8 +1197,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           ),
                           Row(
                             children: [
-                              IntrinsicWidth(
-                                stepWidth: 150,
+                              SizedBox(
+                                width: 150,
                                 child: ReactiveTextField(
                                   formControlName: 'department1',
                                 ),
@@ -1205,8 +1206,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 150,
+                              SizedBox(
+                                width: 150,
                                 child: ReactiveTextField(
                                   formControlName: 'shift1',
                                 ),
@@ -1351,8 +1352,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           ),
                           Row(
                             children: [
-                              IntrinsicWidth(
-                                stepWidth: 150,
+                              SizedBox(
+                                width: 150,
                                 child: ReactiveTextField(
                                   formControlName: 'department2',
                                 ),
@@ -1360,8 +1361,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 150,
+                              SizedBox(
+                                width: 150,
                                 child: ReactiveTextField(
                                   formControlName: 'shift2',
                                 ),
