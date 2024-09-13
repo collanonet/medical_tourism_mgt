@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -396,8 +397,8 @@ class _PaymentOptionSectionState extends State<PaymentOptionSection> {
                           )),
                         ]),
                     Text('備考', style: context.textTheme.bodyMedium),
-                    IntrinsicWidth(
-                      stepWidth: 300,
+                    SizedBox(
+                      width: 300,
                       child: ReactiveTextField(
                         formControlName: 'remark',
                       ),
