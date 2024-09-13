@@ -341,6 +341,10 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       ),
                                     )),
                                   ],
+                                ),
+                                const Padding(
+                                  padding: EdgeInsets.all(8.0),
+                                  child: Divider(),
                                 )
                               ],
                             ),
@@ -414,7 +418,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                     );
                   },
                 ),
-                Divider(),
+                const Divider(),
                 Text(
                   'バス会社',
                   style: context.textTheme.titleMedium,
