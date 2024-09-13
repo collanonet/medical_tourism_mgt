@@ -16,3 +16,17 @@ Future<void> openUrlInBrowser({required String fileName}) async {
     throw 'Could not launch $fileName';
   }
 }
+
+Future<void> openLinkInBrowser({required String url}) async {
+  Uri uri = Uri.parse(url); // Parse the URL
+  // Check if the URL can be launched
+  if (await canLaunchUrl(uri)) {
+    // Launch the URL in the external browser
+    await launchUrl(
+      uri,
+      mode: LaunchMode.externalApplication, // Opens in browser
+    );
+  } else {
+    throw 'Could not launch $url';
+  }
+}

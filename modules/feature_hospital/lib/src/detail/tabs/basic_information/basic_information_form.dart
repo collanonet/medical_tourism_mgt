@@ -32,6 +32,7 @@ FormGroup basicInformationForm() {
       ),
       'googleMap': FormControl<String>(
         value: '',
+        validators: [Validators.pattern(RegExp(r'^https?://'))],
       ),
       'phoneNumber': FormControl<String>(
         value: '',
@@ -41,6 +42,7 @@ FormGroup basicInformationForm() {
       ),
       'homepage': FormControl<String>(
         value: '',
+        validators: [Validators.pattern(RegExp(r'^https?://'))],
       ),
       'supportedMenu': FormControl<bool>(value: false),
       'healthCheckup': FormControl<bool>(value: false),

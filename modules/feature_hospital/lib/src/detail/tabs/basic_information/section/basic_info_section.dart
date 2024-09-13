@@ -221,26 +221,45 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                     label: const Text(
                                       'ホームページ',
                                     ),
-                                    suffixIcon: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 5, horizontal: 20),
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 5, horizontal: 15),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            color: context
-                                                .appTheme.primaryColor),
-                                        child: Text(
-                                          '開く',
-                                          style: context.textTheme.labelLarge
-                                              ?.copyWith(
-                                                  color: const Color(
-                                                      0xffFFFFFF)),
-                                        ),
-                                      ),
-                                    ),
+                                    suffixIcon: ReactiveValueListenableBuilder<
+                                            String>(
+                                        formControlName: 'homepage',
+                                        builder: (context, control, _) {
+                                          return InkWell(
+                                            onTap: () async {
+                                              if (control.value != null) {
+                                                openLinkInBrowser(
+                                                    url: control.value!);
+                                              }
+                                            },
+                                            child: Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 5,
+                                                      horizontal: 20),
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 5,
+                                                        horizontal: 15),
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                    color: context
+                                                        .appTheme.primaryColor),
+                                                child: Text(
+                                                  '開く',
+                                                  style: context
+                                                      .textTheme.labelLarge
+                                                      ?.copyWith(
+                                                          color: const Color(
+                                                              0xffFFFFFF)),
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }),
                                   ),
                                 ),
                               ),
