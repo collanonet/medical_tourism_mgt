@@ -20,7 +20,8 @@ class FacilityPage extends StatelessWidget {
         form: () => facilityForm()..markAllAsTouched(),
         builder: (context, formGroup, child) {
           return Provider(
-            create: (context) => GetIt.I<FacilityModel>()..fetchData(formGroup, id),
+            create: (context) =>
+                GetIt.I<FacilityModel>()..fetchData(formGroup, id),
             child: const FacilityScreen(),
           );
         },

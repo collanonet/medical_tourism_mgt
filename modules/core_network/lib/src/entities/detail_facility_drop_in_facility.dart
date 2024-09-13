@@ -3,25 +3,28 @@ import 'package:json_annotation/json_annotation.dart';
 
 part 'detail_facility_drop_in_facility.g.dart';
 @JsonSerializable()
-class Facility {
-  String? name;
-  String? location;
-  String? personInChargeName;
-  String? telephoneNumber;
+class DetailFacilityResponse {
+   @JsonKey(name: '_id')
+  final String id;
+  String? accommodationName;
+  String? address;
+  String? contctPersonName;
+  String? phoneNumber;
 
-  Facility({
-     this.name,
-     this.location,
-     this.personInChargeName,
-     this.telephoneNumber,
+  DetailFacilityResponse({
+    required this.id,
+     this.accommodationName,
+     this.address,
+     this.contctPersonName,
+     this.phoneNumber,
   });
 
-  factory Facility.fromJson(Map<String,dynamic> json){
-    return _$FacilityFromJson(json);
+  factory DetailFacilityResponse.fromJson(Map<String,dynamic> json){
+    return _$DetailFacilityResponseFromJson(json);
   }
 
   Map<String,dynamic> toJson(){
-    return _$FacilityToJson(this);
+    return _$DetailFacilityResponseToJson(this);
   }
 
 }

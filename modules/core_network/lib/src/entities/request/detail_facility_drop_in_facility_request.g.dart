@@ -13,7 +13,7 @@ DetailDropInFacilityRequest _$DetailDropInFacilityRequestFromJson(
       places: (json['places'] as List<dynamic>?)
           ?.map((e) => Facility.fromJson(e as Map<String, dynamic>))
           .toList(),
-      tour: json['tour'] as String?,
+      hotel: json['hotel'] as String?,
     );
 
 Map<String, dynamic> _$DetailDropInFacilityRequestToJson(
@@ -21,23 +21,19 @@ Map<String, dynamic> _$DetailDropInFacilityRequestToJson(
     <String, dynamic>{
       'arrangePerson': instance.arrangePerson,
       'places': instance.places,
-      'tour': instance.tour,
+      'hotel': instance.hotel,
     };
 
 Facility _$FacilityFromJson(Map<String, dynamic> json) => Facility(
-      id: json['id'] as String?,
       accommodationName: json['accommodationName'] as String?,
       address: json['address'] as String?,
       contctPersonName: json['contctPersonName'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
-      tour: json['tour'] as String,
     );
 
 Map<String, dynamic> _$FacilityToJson(Facility instance) => <String, dynamic>{
-      'id': instance.id,
       'accommodationName': instance.accommodationName,
       'address': instance.address,
       'contctPersonName': instance.contctPersonName,
       'phoneNumber': instance.phoneNumber,
-      'tour': instance.tour,
     };

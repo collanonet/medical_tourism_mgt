@@ -3839,7 +3839,7 @@ class _ApiService implements ApiService {
   Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(
       String id) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'tour': id};
+    final queryParameters = <String, dynamic>{r'hotel': id};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
@@ -4127,14 +4127,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<DetailRelatedPartiesBusCompanyResponse> getRelatedPartiesBusCompany(
-      String id) async {
+  Future<List<DetailRelatedPartiesBusCompanyResponse>>
+      getRelatedPartiesBusCompany(String id) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'tour': id};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DetailRelatedPartiesBusCompanyResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<DetailRelatedPartiesBusCompanyResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -4150,8 +4150,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final _value =
-        DetailRelatedPartiesBusCompanyResponse.fromJson(_result.data!);
+    var _value = _result.data!
+        .map((dynamic i) => DetailRelatedPartiesBusCompanyResponse.fromJson(
+            i as Map<String, dynamic>))
+        .toList();
     return _value;
   }
 
@@ -4248,31 +4250,35 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<DetailRelatedPartiesEmergencyContactResponse>
+  Future<List<DetailRelatedPartiesEmergencyContactResponse>>
       getRelatedPartiesEmergencyContact(String id) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'tour': id};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DetailRelatedPartiesEmergencyContactResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<DetailRelatedPartiesEmergencyContactResponse>>(
+            Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
-            .compose(
-              _dio.options,
-              '/emergency-contact',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value =
-        DetailRelatedPartiesEmergencyContactResponse.fromJson(_result.data!);
+                .compose(
+                  _dio.options,
+                  '/emergency-contact',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(
+                    baseUrl: _combineBaseUrls(
+                  _dio.options.baseUrl,
+                  baseUrl,
+                ))));
+    var _value = _result.data!
+        .map((dynamic i) =>
+            DetailRelatedPartiesEmergencyContactResponse.fromJson(
+                i as Map<String, dynamic>))
+        .toList();
     return _value;
   }
 

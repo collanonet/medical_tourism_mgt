@@ -83,12 +83,12 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                     width: context.appTheme
                                                         .spacing.marginMedium,
                                                   ),
-                                                  Expanded(child: SizedBox()),
+                                                  const Expanded(child: SizedBox()),
                                                   SizedBox(
                                                     width: context.appTheme
                                                         .spacing.marginMedium,
                                                   ),
-                                                  Expanded(child: SizedBox()),
+                                                  const Expanded(child: SizedBox()),
                                                 ],
                                               ),
                                               Row(
@@ -98,7 +98,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                       formControlName:
                                                           'accommodationName',
                                                       decoration:
-                                                          InputDecoration(
+                                                          const InputDecoration(
                                                         label: Text(
                                                           '施設名',
                                                         ),
@@ -115,7 +115,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                       formControlName:
                                                           'address',
                                                       decoration:
-                                                          InputDecoration(
+                                                          const InputDecoration(
                                                         label: Text(
                                                           '所在地',
                                                         ),
@@ -131,7 +131,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                       formControlName:
                                                           'contactPersonName',
                                                       decoration:
-                                                          InputDecoration(
+                                                          const InputDecoration(
                                                         label: Text(
                                                           '担当者名',
                                                         ),
@@ -147,7 +147,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                       formControlName:
                                                           'phoneNumber',
                                                       decoration:
-                                                          InputDecoration(
+                                                          const InputDecoration(
                                                         label: Text(
                                                           '電話番号',
                                                         ),
@@ -174,7 +174,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                       formControlName:
                                                           'remarks',
                                                       decoration:
-                                                          InputDecoration(
+                                                          const InputDecoration(
                                                         label: Text(
                                                           '備考',
                                                         ),
@@ -190,7 +190,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                         CrossAxisAlignment
                                                             .start,
                                                     children: [
-                                                      Text('外国語スタッフ'),
+                                                      const Text('外国語スタッフ'),
                                                       RowSeparated(
                                                         separatorBuilder:
                                                             (BuildContext
@@ -274,7 +274,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                                   EdgeInsets
                                                                       .zero,
                                                               formControlName:
-                                                                  'other',
+                                                                  'others',
                                                               title: const Text(
                                                                   'その他'),
                                                             ),
@@ -284,9 +284,9 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                             child:
                                                                 ReactiveTextField(
                                                               formControlName:
-                                                                  'others',
+                                                                  'other',
                                                               decoration:
-                                                                  InputDecoration(
+                                                                  const InputDecoration(
                                                                 label: Text(
                                                                   '備考',
                                                                 ),
@@ -380,7 +380,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                               ),
                             );
                           }),
-                      Divider(),
+                      const Divider(),
                       Text(
                         '立ち寄り施設',
                         style: context.textTheme.titleMedium,
@@ -422,12 +422,12 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                           width: context
                                               .appTheme.spacing.marginMedium,
                                         ),
-                                        Expanded(child: SizedBox()),
+                                        const Expanded(child: SizedBox()),
                                         SizedBox(
                                           width: context
                                               .appTheme.spacing.marginMedium,
                                         ),
-                                        Expanded(child: SizedBox()),
+                                        const Expanded(child: SizedBox()),
                                       ],
                                     ),
                                     ReactiveFormArray(
@@ -457,7 +457,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                             formControlName:
                                                                 'accommodationName',
                                                             decoration:
-                                                                InputDecoration(
+                                                                const InputDecoration(
                                                               label: Text(
                                                                 '施設名',
                                                               ),
@@ -477,7 +477,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                             formControlName:
                                                                 'address',
                                                             decoration:
-                                                                InputDecoration(
+                                                                const InputDecoration(
                                                               label: Text(
                                                                 '所在地',
                                                               ),
@@ -494,7 +494,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                             formControlName:
                                                                 'contactPersonName',
                                                             decoration:
-                                                                InputDecoration(
+                                                                const InputDecoration(
                                                               label: Text(
                                                                 '担当者名',
                                                               ),
@@ -513,7 +513,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                             formControlName:
                                                                 'phoneNumber',
                                                             decoration:
-                                                                InputDecoration(
+                                                                const InputDecoration(
                                                               label: Text(
                                                                 '電話番号',
                                                               ),
@@ -655,7 +655,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                       : null,
                                   child: WithLoadingButton(
                                     isLoading: value.loading,
-                                    child: Text('保存する'),
+                                    child: const Text('保存する'),
                                   ));
                             },
                           );

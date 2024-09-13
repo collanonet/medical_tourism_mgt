@@ -12,7 +12,8 @@ DetailDropInFacilityResponse _$DetailDropInFacilityResponseFromJson(
       id: json['_id'] as String,
       arrangePerson: json['arrangePerson'] as String?,
       places: (json['places'] as List<dynamic>?)
-          ?.map((e) => Facility.fromJson(e as Map<String, dynamic>))
+          ?.map(
+              (e) => DetailFacilityResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

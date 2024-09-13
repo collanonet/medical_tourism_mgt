@@ -19,8 +19,8 @@ FormGroup facilityForm() => FormGroup(
                 'chinese': FormControl<bool>(value: false), //
                 'vietnamese': FormControl<bool>(value: false), //
                 'english': FormControl<bool>(value: false), //
-                'others': FormControl<String>(value: ''),
-                'other': FormControl<bool>(value: false), //
+                'others': FormControl<bool>(value: false),
+                'other': FormControl<String>(value: ''), //
                 'tour': FormControl<String>(value: ''), // ツアー
               },
             ),

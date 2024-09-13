@@ -21,7 +21,8 @@ class RelatedPartiesPage extends StatelessWidget {
         form: () => relatedPartiesForm(),
         builder: (context, formGroup, _) {
           return Provider(
-            create: (context) => GetIt.I<RelatedPartiesModel>()..fetchData(id, formGroup),
+            create: (context) =>
+                GetIt.I<RelatedPartiesModel>()..fetchData(id, formGroup),
             child: const RelatedPartiesScreen(),
           );
         },

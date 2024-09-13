@@ -60,20 +60,20 @@ class FacilityModel {
     if (data.isNotEmpty) {
       formArray.clear();
       for (var item in data) {
-        for (int i = 0; i < item.foreignLanguageStaff!.length; i++) {
-          if (item.foreignLanguageStaff![i] == '日本語') {
-            formArray.control('japanese').value = true;
-          }
-          // if (element['chinese'] == true) {
-          //   languages.add('中国語');
-          // }
-          // if (element['vietnamese'] == true) {
-          //   languages.add('ベトナム語');
-          // }
-          // if (element['english'] == true) {
-          //   languages.add('英語');
-          // }
-        }
+        // for (int i = 0; i < item.foreignLanguageStaff!.length; i++) {
+        //   if (item.foreignLanguageStaff![i] == '日本語') {
+        //     formArray.control('japanese').value = true;
+        //   }
+        //   // if (element['chinese'] == true) {
+        //   //   languages.add('中国語');
+        //   // }
+        //   // if (element['vietnamese'] == true) {
+        //   //   languages.add('ベトナム語');
+        //   // }
+        //   // if (element['english'] == true) {
+        //   //   languages.add('英語');
+        //   // }
+        // }
         formArray.add(
           FormGroup(
             {
@@ -92,11 +92,14 @@ class FacilityModel {
               'tour': FormControl<String>(value: item.tour),
               // 外国語スタッフ
               //
-              // 'chinese': FormControl<bool>(value: false), //
-              // 'vietnamese': FormControl<bool>(value: false), //
-              // 'english': FormControl<bool>(value: false), //
-              // 'others': FormControl<String>(value: ''),
-              // 'other': FormControl<bool>(value: false), //
+              'japanese': FormControl<bool>(
+                  value:
+                      item.foreignLanguageStaff?[0] == '日本語' ? true : false), //
+              'chinese': FormControl<bool>(value: item.foreignLanguageStaff?[1] == '中国語' ? true : false), //
+              'vietnamese': FormControl<bool>(value: item.foreignLanguageStaff?[2] == 'ベトナム語' ? true : false), //
+              'english': FormControl<bool>(value: item.foreignLanguageStaff?[3] == '英語' ? true : false), //
+              'other': FormControl<String>(value: item.other),
+              'others': FormControl<bool>(value: item.foreignLanguageStaff?[4] == 'その他' ? true : false), //
             },
           ),
         );
@@ -128,6 +131,9 @@ class FacilityModel {
           if (element['english'] == true) {
             languages.add('英語');
           }
+          if(element['others'] == true){
+            languages.add('その他');
+          }
           DetailFacilityHotelRequest request = DetailFacilityHotelRequest(
             arrangePerson: element['arrangePerson'],
             accommodationName: element['accommodationName'],
@@ -136,7 +142,7 @@ class FacilityModel {
             phoneNumber: element['phoneNumber'],
             remarks: element['remarks'],
             foreignLanguageStaff: languages,
-            other: element['others'],
+            other: element['other'],
             hotel: null,
             tour: tourId.value,
           );
@@ -195,7 +201,6 @@ class FacilityModel {
                     FormControl<String>(value: e.accommodationName), // 担当者名
                 'phoneNumber':
                     FormControl<String>(value: e.phoneNumber), // 電話番号
-                'tour': FormControl<String>(value: e.tour),
               },
             ),
           );
@@ -229,12 +234,10 @@ class FacilityModel {
       List<Facility> places = [];
       formGroup.control('places').value.forEach((element) {
         places.add(Facility(
-          id: element['id'],
           accommodationName: element['accommodationName'],
           address: element['address'],
           contctPersonName: element['contactPersonName'],
           phoneNumber: element['phoneNumber'],
-          tour: tourId.value,
         ));
       });
 
@@ -243,7 +246,7 @@ class FacilityModel {
           DetailDropInFacilityRequest(
             arrangePerson: formGroup.control('arrangePerson').value,
             places: places,
-            tour: tourId.value,
+            hotel: tourId.value,
           ),
         );
         data.add(response);
@@ -253,7 +256,7 @@ class FacilityModel {
           DetailDropInFacilityRequest(
             arrangePerson: formGroup.control('arrangePerson').value,
             places: places,
-            tour: tourId.value,
+            hotel: tourId.value,
           ),
         );
         data.map((e) => e.id == response.id ? response : e).toList();

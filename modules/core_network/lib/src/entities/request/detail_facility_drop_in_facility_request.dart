@@ -7,12 +7,12 @@ part 'detail_facility_drop_in_facility_request.g.dart';
 class DetailDropInFacilityRequest {
   String? arrangePerson;
   List<Facility>? places;
-  String? tour;
+  String? hotel;
 
   DetailDropInFacilityRequest({
     this.arrangePerson,
     this.places,
-    this.tour,
+    this.hotel,
   });
 
   factory DetailDropInFacilityRequest.fromJson(Map<String, dynamic> json) {
@@ -26,21 +26,16 @@ class DetailDropInFacilityRequest {
 
 @JsonSerializable()
 class Facility {
-  @JsonKey(name: 'id')
-  String? id;
   String? accommodationName;
   String? address;
   String? contctPersonName;
   String? phoneNumber;
-  String tour;
 
   Facility({
-    this.id,
     this.accommodationName,
     this.address,
     this.contctPersonName,
     this.phoneNumber,
-    required this.tour,
   });
 
   factory Facility.fromJson(Map<String, dynamic> json) {

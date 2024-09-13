@@ -106,7 +106,7 @@ abstract class ProcessChartRepository {
     DetailRelatedPartiesRequest detailRelatedPartiesRequest,
   );
 
-  Future<DetailRelatedPartiesBusCompanyResponse>
+  Future<List<DetailRelatedPartiesBusCompanyResponse>>
       getDetailRelatedPartiesBusCompany(String id);
 
   Future<DetailRelatedPartiesBusCompanyResponse>
@@ -121,7 +121,7 @@ abstract class ProcessChartRepository {
     DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest,
   );
 
-  Future<DetailRelatedPartiesEmergencyContactResponse>
+  Future<List<DetailRelatedPartiesEmergencyContactResponse>>
       getDetailRelatedPartiesEmergencyContact(String id);
 
   Future<DetailRelatedPartiesEmergencyContactResponse>

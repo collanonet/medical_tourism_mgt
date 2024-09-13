@@ -13,7 +13,7 @@ class DetailFacilityHotelResponse {
   String? phoneNumber;
   String? remarks;
   List<String>? foreignLanguageStaff;
-  bool? others;
+  String? other;
   String? tour;
 
   DetailFacilityHotelResponse({
@@ -25,7 +25,7 @@ class DetailFacilityHotelResponse {
      this.phoneNumber,
      this.remarks,
      this.foreignLanguageStaff,
-     this.others,
+     this.other,
       this.tour,
   });
 

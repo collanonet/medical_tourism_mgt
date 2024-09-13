@@ -41,380 +41,427 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                 const SizedBox(
                   height: 20,
                 ),
-                ReactiveFormArray(
-                  formArrayName: 'guideInterpreter',
-                  builder: (context, formArray, child) {
-                    final rows = formArray.controls
-                        .map((control) => control as FormGroup)
-                        .map(
-                          (currentForm) => ReactiveForm(
-                            formGroup: currentForm,
-                            child: ColumnSeparated(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              separatorBuilder:
-                                  (BuildContext context, int index) {
-                                return SizedBox(
-                                  height: context.appTheme.spacing.marginMedium,
-                                );
-                              },
-                              children: [
-                                Row(
-                                  children: [
-                                    Expanded(
-                                      child: ReactiveTextField(
-                                        formControlName: 'arrangePerson',
-                                        decoration: const InputDecoration(
-                                          label: Text(
-                                            '手配担当',
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    const Expanded(child: SizedBox()),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    const Expanded(child: SizedBox()),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    IntrinsicWidth(
-                                      stepWidth: 300,
-                                      child: ColumnSeparated(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
-                                        separatorBuilder:
-                                            (BuildContext context, int index) {
-                                          return const SizedBox(height: 8);
-                                        },
+                ValueListenableBuilder(
+                  valueListenable:
+                      context.watch<RelatedPartiesModel>().partiesData,
+                  builder: (context, value, _) {
+                    return Skeletonizer(
+                      enabled: value.loading,
+                      child: ReactiveFormArray(
+                        formArrayName: 'guideInterpreter',
+                        builder: (context, formArray, child) {
+                          final rows = formArray.controls
+                              .map((control) => control as FormGroup)
+                              .map(
+                                (currentForm) => ReactiveForm(
+                                  formGroup: currentForm,
+                                  child: ColumnSeparated(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    separatorBuilder:
+                                        (BuildContext context, int index) {
+                                      return SizedBox(
+                                        height: context
+                                            .appTheme.spacing.marginMedium,
+                                      );
+                                    },
+                                    children: [
+                                      Row(
                                         children: [
-                                          Text(
-                                            '年月日（自）',
-                                            style: context.textTheme.bodyMedium,
-                                          ),
-                                          ReactiveDatePicker<DateTime>(
-                                              formControlName: 'dateFrom',
-                                              firstDate: DateTime(1900),
-                                              lastDate: DateTime(2100),
-                                              builder:
-                                                  (context, picker, child) {
-                                                return ReactiveTextField<
-                                                    DateTime>(
-                                                  formControlName: 'dateFrom',
-                                                  valueAccessor:
-                                                      DateTimeValueAccessor(),
-                                                  decoration: InputDecoration(
-                                                    fillColor: Colors.white,
-                                                    filled: true,
-                                                    suffixIcon: IconButton(
-                                                      icon: const Icon(
-                                                        CupertinoIcons.calendar,
-                                                        color: Colors.grey,
-                                                      ),
-                                                      onPressed:
-                                                          picker.showPicker,
-                                                    ),
-                                                  ),
-                                                );
-                                              }),
-                                        ],
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    Text('〜'),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    IntrinsicWidth(
-                                      stepWidth: 300,
-                                      child: ColumnSeparated(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.stretch,
-                                        separatorBuilder:
-                                            (BuildContext context, int index) {
-                                          return const SizedBox(height: 8);
-                                        },
-                                        children: [
-                                          Text(
-                                            '年月日（至）',
-                                            style: context.textTheme.bodyMedium,
-                                          ),
-                                          ReactiveDatePicker<DateTime>(
-                                              formControlName: 'dateTo',
-                                              firstDate: DateTime(1900),
-                                              lastDate: DateTime(2100),
-                                              builder:
-                                                  (context, picker, child) {
-                                                return ReactiveTextField<
-                                                    DateTime>(
-                                                  formControlName: 'dateTo',
-                                                  valueAccessor:
-                                                      DateTimeValueAccessor(),
-                                                  decoration: InputDecoration(
-                                                    fillColor: Colors.white,
-                                                    filled: true,
-                                                    suffixIcon: IconButton(
-                                                      icon: const Icon(
-                                                        CupertinoIcons.calendar,
-                                                        color: Colors.grey,
-                                                      ),
-                                                      onPressed:
-                                                          picker.showPicker,
-                                                    ),
-                                                  ),
-                                                );
-                                              }),
-                                        ],
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                        child: ReactiveTextField(
-                                      formControlName: 'guideNamaKanji',
-                                      decoration: InputDecoration(
-                                        label: Text(
-                                          'ガイド名（漢字）',
-                                        ),
-                                      ),
-                                    )),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    Expanded(
-                                        child: ReactiveTextField(
-                                      formControlName: 'guideNameKana',
-                                      decoration: InputDecoration(
-                                        label: Text(
-                                          'ガイド名（カナ）',
-                                        ),
-                                      ),
-                                    )),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    Expanded(
-                                        child: ReactiveTextField(
-                                      formControlName: 'phoneNumber',
-                                      decoration: InputDecoration(
-                                        label: Text(
-                                          '電話番号',
-                                        ),
-                                      ),
-                                    )),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Text('資格'),
-                                        Row(
-                                          children: [
-                                            IntrinsicWidth(
-                                              child: ReactiveCheckboxListTile(
-                                                controlAffinity:
-                                                    ListTileControlAffinity
-                                                        .leading,
-                                                contentPadding: EdgeInsets.zero,
-                                                formControlName:
-                                                    'itinerary_management',
-                                                title: const Text('旅程管理'),
+                                          Expanded(
+                                            child: ReactiveTextField(
+                                              formControlName: 'arrangePerson',
+                                              decoration: const InputDecoration(
+                                                label: Text(
+                                                  '手配担当',
+                                                ),
                                               ),
                                             ),
-                                            const SizedBox(width: 10),
-                                            IntrinsicWidth(
-                                              child: ReactiveCheckboxListTile(
-                                                controlAffinity:
-                                                    ListTileControlAffinity
-                                                        .leading,
-                                                contentPadding: EdgeInsets.zero,
-                                                formControlName:
-                                                    'guide_interpreter',
-                                                title: const Text('通訳案内士'),
+                                          ),
+                                          SizedBox(
+                                            width: context
+                                                .appTheme.spacing.marginMedium,
+                                          ),
+                                          const Expanded(child: SizedBox()),
+                                          SizedBox(
+                                            width: context
+                                                .appTheme.spacing.marginMedium,
+                                          ),
+                                          const Expanded(child: SizedBox()),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          IntrinsicWidth(
+                                            stepWidth: 300,
+                                            child: ColumnSeparated(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              separatorBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return const SizedBox(
+                                                    height: 8);
+                                              },
+                                              children: [
+                                                Text(
+                                                  '年月日（自）',
+                                                  style: context
+                                                      .textTheme.bodyMedium,
+                                                ),
+                                                ReactiveDatePicker<DateTime>(
+                                                    formControlName: 'dateFrom',
+                                                    firstDate: DateTime(1900),
+                                                    lastDate: DateTime(2100),
+                                                    builder: (context, picker,
+                                                        child) {
+                                                      return ReactiveTextField<
+                                                          DateTime>(
+                                                        formControlName:
+                                                            'dateFrom',
+                                                        valueAccessor:
+                                                            DateTimeValueAccessor(),
+                                                        decoration:
+                                                            InputDecoration(
+                                                          fillColor:
+                                                              Colors.white,
+                                                          filled: true,
+                                                          suffixIcon:
+                                                              IconButton(
+                                                            icon: const Icon(
+                                                              CupertinoIcons
+                                                                  .calendar,
+                                                              color:
+                                                                  Colors.grey,
+                                                            ),
+                                                            onPressed: picker
+                                                                .showPicker,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }),
+                                              ],
+                                            ),
+                                          ),
+                                          SizedBox(
+                                            width: context
+                                                .appTheme.spacing.marginMedium,
+                                          ),
+                                          Text('〜'),
+                                          SizedBox(
+                                            width: context
+                                                .appTheme.spacing.marginMedium,
+                                          ),
+                                          IntrinsicWidth(
+                                            stepWidth: 300,
+                                            child: ColumnSeparated(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.stretch,
+                                              separatorBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return const SizedBox(
+                                                    height: 8);
+                                              },
+                                              children: [
+                                                Text(
+                                                  '年月日（至）',
+                                                  style: context
+                                                      .textTheme.bodyMedium,
+                                                ),
+                                                ReactiveDatePicker<DateTime>(
+                                                    formControlName: 'dateTo',
+                                                    firstDate: DateTime(1900),
+                                                    lastDate: DateTime(2100),
+                                                    builder: (context, picker,
+                                                        child) {
+                                                      return ReactiveTextField<
+                                                          DateTime>(
+                                                        formControlName:
+                                                            'dateTo',
+                                                        valueAccessor:
+                                                            DateTimeValueAccessor(),
+                                                        decoration:
+                                                            InputDecoration(
+                                                          fillColor:
+                                                              Colors.white,
+                                                          filled: true,
+                                                          suffixIcon:
+                                                              IconButton(
+                                                            icon: const Icon(
+                                                              CupertinoIcons
+                                                                  .calendar,
+                                                              color:
+                                                                  Colors.grey,
+                                                            ),
+                                                            onPressed: picker
+                                                                .showPicker,
+                                                          ),
+                                                        ),
+                                                      );
+                                                    }),
+                                              ],
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                              child: ReactiveTextField(
+                                            formControlName: 'guideNamaKanji',
+                                            decoration: InputDecoration(
+                                              label: Text(
+                                                'ガイド名（漢字）',
                                               ),
                                             ),
-                                            const SizedBox(width: 10),
-                                            IntrinsicWidth(
-                                              child: ReactiveCheckboxListTile(
-                                                controlAffinity:
-                                                    ListTileControlAffinity
-                                                        .leading,
-                                                contentPadding: EdgeInsets.zero,
-                                                formControlName:
-                                                    'medical_interpreter',
-                                                title: const Text('医療通訳者'),
+                                          )),
+                                          SizedBox(
+                                            width: context
+                                                .appTheme.spacing.marginMedium,
+                                          ),
+                                          Expanded(
+                                              child: ReactiveTextField(
+                                            formControlName: 'guideNameKana',
+                                            decoration: InputDecoration(
+                                              label: Text(
+                                                'ガイド名（カナ）',
                                               ),
-                                            )
-                                          ],
-                                        )
-                                      ],
+                                            ),
+                                          )),
+                                          SizedBox(
+                                            width: context
+                                                .appTheme.spacing.marginMedium,
+                                          ),
+                                          Expanded(
+                                              child: ReactiveTextField(
+                                            formControlName: 'phoneNumber',
+                                            decoration: InputDecoration(
+                                              label: Text(
+                                                '電話番号',
+                                              ),
+                                            ),
+                                          )),
+                                          SizedBox(
+                                            width: context
+                                                .appTheme.spacing.marginMedium,
+                                          ),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Text('資格'),
+                                              Row(
+                                                children: [
+                                                  IntrinsicWidth(
+                                                    child:
+                                                        ReactiveCheckboxListTile(
+                                                      controlAffinity:
+                                                          ListTileControlAffinity
+                                                              .leading,
+                                                      contentPadding:
+                                                          EdgeInsets.zero,
+                                                      formControlName:
+                                                          'itinerary_management',
+                                                      title: const Text('旅程管理'),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(width: 10),
+                                                  IntrinsicWidth(
+                                                    child:
+                                                        ReactiveCheckboxListTile(
+                                                      controlAffinity:
+                                                          ListTileControlAffinity
+                                                              .leading,
+                                                      contentPadding:
+                                                          EdgeInsets.zero,
+                                                      formControlName:
+                                                          'guide_interpreter',
+                                                      title:
+                                                          const Text('通訳案内士'),
+                                                    ),
+                                                  ),
+                                                  const SizedBox(width: 10),
+                                                  IntrinsicWidth(
+                                                    child:
+                                                        ReactiveCheckboxListTile(
+                                                      controlAffinity:
+                                                          ListTileControlAffinity
+                                                              .leading,
+                                                      contentPadding:
+                                                          EdgeInsets.zero,
+                                                      formControlName:
+                                                          'medical_interpreter',
+                                                      title:
+                                                          const Text('医療通訳者'),
+                                                    ),
+                                                  )
+                                                ],
+                                              )
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                              child: ReactiveTextField(
+                                            formControlName: 'report',
+                                            minLines: 3,
+                                            maxLines: 3,
+                                            decoration: InputDecoration(
+                                              label: Text('報告書'),
+                                            ),
+                                          )),
+                                        ],
+                                      ),
+                                      Text('同宿可否'),
+                                      Row(
+                                        children: [
+                                          IntrinsicWidth(
+                                            child: ReactiveRadioListTile(
+                                              controlAffinity:
+                                                  ListTileControlAffinity
+                                                      .leading,
+                                              contentPadding: EdgeInsets.zero,
+                                              formControlName:
+                                                  'accommodationAvailability',
+                                              value: '同宿OK',
+                                              title: const Text('同宿OK'),
+                                            ),
+                                          ),
+                                          const SizedBox(width: 20),
+                                          IntrinsicWidth(
+                                            child: ReactiveRadioListTile(
+                                              controlAffinity:
+                                                  ListTileControlAffinity
+                                                      .leading,
+                                              contentPadding: EdgeInsets.zero,
+                                              formControlName:
+                                                  'accommodationAvailability',
+                                              value: '同宿NG',
+                                              title: const Text('同宿NG'),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                              child: ReactiveTextField(
+                                            formControlName:
+                                                'accommodationName',
+                                            decoration: InputDecoration(
+                                              label: Text('施設名'),
+                                            ),
+                                          )),
+                                          SizedBox(
+                                            width: context
+                                                .appTheme.spacing.marginMedium,
+                                          ),
+                                          Expanded(
+                                              child: ReactiveTextField(
+                                            formControlName: 'address',
+                                            decoration: InputDecoration(
+                                              label: Text('所在地'),
+                                            ),
+                                          )),
+                                        ],
+                                      ),
+                                      Row(
+                                        children: [
+                                          Expanded(
+                                              child: ReactiveTextField(
+                                            formControlName: 'phoneNumber2',
+                                            decoration: InputDecoration(
+                                              label: Text('電話番号'),
+                                            ),
+                                          )),
+                                        ],
+                                      ),
+                                      const Padding(
+                                        padding: EdgeInsets.all(8.0),
+                                        child: Divider(),
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              );
+
+                          return Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ColumnSeparated(
+                                separatorBuilder:
+                                    (BuildContext context, int index) {
+                                  return SizedBox(
+                                    height:
+                                        context.appTheme.spacing.marginMedium,
+                                  );
+                                },
+                                children: rows.toList(),
+                              ),
+                              SizedBox(
+                                height: context.appTheme.spacing.marginMedium,
+                              ),
+                              InkWell(
+                                onTap: () => formArray.add(FormGroup(
+                                  {
+                                    'arrangePerson':
+                                        FormControl<String>(value: ''), // 手配担当
+                                    'dateFrom':
+                                        FormControl<DateTime>(), // 年月日（自）
+                                    'dateTo': FormControl<DateTime>(), // 年月日（至）
+                                    'guideNamaKanji': FormControl<String>(
+                                        value: ''), // ガイド名（漢字）
+                                    'guideNameKana': FormControl<String>(
+                                        value: ''), // ガイド名（カナ）
+                                    'phoneNumber':
+                                        FormControl<String>(value: ''), // 電話番号
+                                    'report':
+                                        FormControl<String>(value: ''), // 報告書
+                                    'accommodationAvailability':
+                                        FormControl<String>(value: ''), // 同宿可否
+                                    'accommodationName':
+                                        FormControl<String>(value: ''), // 施設名
+                                    'address':
+                                        FormControl<String>(value: ''), // 所在地
+                                    'phoneNumber2':
+                                        FormControl<String>(value: ''),
+                                    //qualification
+                                    'itinerary_management':
+                                        FormControl<bool>(value: false),
+                                    'guide_interpreter':
+                                        FormControl<bool>(value: false),
+                                    'medical_interpreter':
+                                        FormControl<bool>(value: false),
+                                  },
+                                )),
+                                child: Row(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.add_circle,
+                                      color: context.appTheme.primaryColor,
+                                    ),
+                                    SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginSmall,
+                                    ),
+                                    Text(
+                                      'ガイドを追加',
+                                      style: TextStyle(
+                                          color: context.appTheme.primaryColor),
                                     )
                                   ],
                                 ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                        child: ReactiveTextField(
-                                      formControlName: 'report',
-                                      minLines: 3,
-                                      maxLines: 3,
-                                      decoration: InputDecoration(
-                                        label: Text('報告書'),
-                                      ),
-                                    )),
-                                  ],
-                                ),
-                                Text('同宿可否'),
-                                Row(
-                                  children: [
-                                    IntrinsicWidth(
-                                      child: ReactiveRadioListTile(
-                                        controlAffinity:
-                                            ListTileControlAffinity.leading,
-                                        contentPadding: EdgeInsets.zero,
-                                        formControlName:
-                                            'accommodationAvailability',
-                                        value: '同宿OK',
-                                        title: const Text('同宿OK'),
-                                      ),
-                                    ),
-                                    const SizedBox(width: 20),
-                                    IntrinsicWidth(
-                                      child: ReactiveRadioListTile(
-                                        controlAffinity:
-                                            ListTileControlAffinity.leading,
-                                        contentPadding: EdgeInsets.zero,
-                                        formControlName:
-                                            'accommodationAvailability',
-                                        value: '同宿NG',
-                                        title: const Text('同宿NG'),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                        child: ReactiveTextField(
-                                      formControlName: 'accommodationName',
-                                      decoration: InputDecoration(
-                                        label: Text('施設名'),
-                                      ),
-                                    )),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    Expanded(
-                                        child: ReactiveTextField(
-                                      formControlName: 'address',
-                                      decoration: InputDecoration(
-                                        label: Text('所在地'),
-                                      ),
-                                    )),
-                                  ],
-                                ),
-                                Row(
-                                  children: [
-                                    Expanded(
-                                        child: ReactiveTextField(
-                                      formControlName: 'phoneNumber2',
-                                      decoration: InputDecoration(
-                                        label: Text('電話番号'),
-                                      ),
-                                    )),
-                                  ],
-                                ),
-                                const Padding(
-                                  padding: EdgeInsets.all(8.0),
-                                  child: Divider(),
-                                )
-                              ],
-                            ),
-                          ),
-                        );
-
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ColumnSeparated(
-                          separatorBuilder: (BuildContext context, int index) {
-                            return SizedBox(
-                              height: context.appTheme.spacing.marginMedium,
-                            );
-                          },
-                          children: rows.toList(),
-                        ),
-                        SizedBox(
-                          height: context.appTheme.spacing.marginMedium,
-                        ),
-                        InkWell(
-                          onTap: () => formArray.add(FormGroup(
-                            {
-                              'arrangePerson':
-                                  FormControl<String>(value: ''), // 手配担当
-                              'dateFrom': FormControl<DateTime>(), // 年月日（自）
-                              'dateTo': FormControl<DateTime>(), // 年月日（至）
-                              'guideNamaKanji':
-                                  FormControl<String>(value: ''), // ガイド名（漢字）
-                              'guideNameKana':
-                                  FormControl<String>(value: ''), // ガイド名（カナ）
-                              'phoneNumber':
-                                  FormControl<String>(value: ''), // 電話番号
-                              'report': FormControl<String>(value: ''), // 報告書
-                              'accommodationAvailability':
-                                  FormControl<String>(value: ''), // 同宿可否
-                              'accommodationName':
-                                  FormControl<String>(value: ''), // 施設名
-                              'address': FormControl<String>(value: ''), // 所在地
-                              'phoneNumber2': FormControl<String>(value: ''),
-                              //qualification
-                              'itinerary_management':
-                                  FormControl<bool>(value: false),
-                              'guide_interpreter':
-                                  FormControl<bool>(value: false),
-                              'medical_interpreter':
-                                  FormControl<bool>(value: false),
-                            },
-                          )),
-                          child: Row(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Icon(
-                                Icons.add_circle,
-                                color: context.appTheme.primaryColor,
                               ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginSmall,
-                              ),
-                              Text(
-                                'ガイドを追加',
-                                style: TextStyle(
-                                    color: context.appTheme.primaryColor),
-                              )
                             ],
-                          ),
-                        ),
-                      ],
+                          );
+                        },
+                      ),
                     );
                   },
                 ),

@@ -2,7 +2,7 @@
 import 'package:json_annotation/json_annotation.dart';
 
 // Project imports:
-import 'request/detail_facility_drop_in_facility_request.dart';
+import 'detail_facility_drop_in_facility.dart';
 
 part 'detail_facility_drop_in_facility_response.g.dart';
 @JsonSerializable()
@@ -10,7 +10,7 @@ class DetailDropInFacilityResponse {
   @JsonKey(name: '_id')
   final String id;
   String? arrangePerson;
-  List<Facility>? places;
+  List<DetailFacilityResponse>? places;
 
   DetailDropInFacilityResponse({
     required this.id,

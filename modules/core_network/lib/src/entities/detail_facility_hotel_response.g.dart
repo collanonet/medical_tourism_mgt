@@ -19,7 +19,7 @@ DetailFacilityHotelResponse _$DetailFacilityHotelResponseFromJson(
       foreignLanguageStaff: (json['foreignLanguageStaff'] as List<dynamic>?)
           ?.map((e) => e as String)
           .toList(),
-      others: json['others'] as bool?,
+      other: json['other'] as String?,
       tour: json['tour'] as String?,
     );
 
@@ -34,6 +34,6 @@ Map<String, dynamic> _$DetailFacilityHotelResponseToJson(
       'phoneNumber': instance.phoneNumber,
       'remarks': instance.remarks,
       'foreignLanguageStaff': instance.foreignLanguageStaff,
-      'others': instance.others,
+      'other': instance.other,
       'tour': instance.tour,
     };

@@ -768,7 +768,7 @@ abstract class ApiService {
 
   @GET(EndPoints.DETAIL_FACILITY_DROP_IN_FACILITY)
   Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(
-    @Query('tour') String id,
+    @Query('hotel') String id,
   );
 
   @POST(EndPoints.DETAIL_FACILITY_DROP_IN_FACILITY)
@@ -824,7 +824,8 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_RELATED_PARTIES_BUS_COMPANY)
-  Future<DetailRelatedPartiesBusCompanyResponse> getRelatedPartiesBusCompany(
+  Future<List<DetailRelatedPartiesBusCompanyResponse>>
+      getRelatedPartiesBusCompany(
     @Query('tour') String id,
   );
 
@@ -845,7 +846,7 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_RELATED_EMERGENCY_CONTACT)
-  Future<DetailRelatedPartiesEmergencyContactResponse>
+  Future<List<DetailRelatedPartiesEmergencyContactResponse>>
       getRelatedPartiesEmergencyContact(
     @Query('tour') String id,
   );

@@ -55,47 +55,59 @@ class RelatedPartiesModel {
   }
 
   void insertRelatedParties(
-      FormArray formArray, List<DetailRelatedPartiesResponse>? data) {
-    if (data!.isNotEmpty) {
-      formArray.clear();
-      formArray.clear();
-      for (var item in data) {
-        formArray.add(FormGroup(
-          {
-            'id': FormControl<String>(value: item.id), // ID
-            'arrangePerson':
-                FormControl<String>(value: item.arrangePerson), // 手配担当
-            'dateFrom': FormControl<DateTime>(value: item.dateFrom), // 年月日（自）
-            'dateTo': FormControl<DateTime>(value: item.dateTo), // 年月日（至）
-            'guideNamaKanji':
-                FormControl<String>(value: item.guideNamaKanji), // ガイド名（漢字）
-            'guideNameKana':
-                FormControl<String>(value: item.guideNameKana), // ガイド名（カナ）
-            'phoneNumber': FormControl<String>(value: item.phoneNumber), // 電話番号
-            'qualification': FormControl<List<String>>(value: []), // 資格
-            'report': FormControl<String>(value: item.report), // 報告書
-            'accommodationAvailability': FormControl<String>(
-                value: item.accommodationAvailability), // 同宿可否
-            'accommodationName':
-                FormControl<String>(value: item.accommodationName), // 施設名
-            'address': FormControl<String>(value: item.address), // 所在地
-            'phoneNumber2': FormControl<String>(value: item.phoneNumber2), //
-            //qualification
+      FormArray formArray, List<DetailRelatedPartiesResponse> data) {
+    if (data.isNotEmpty) {
+        formArray.clear();
+      for (var element in data) {
+        formArray.add(
+          FormGroup(
+            {
+              'id': FormControl<String>(value: element.id), // ID
+              'arrangePerson':
+                  FormControl<String>(value: element.arrangePerson), // 手配担当
+              'dateFrom':
+                  FormControl<DateTime>(value: element.dateFrom), // 年月日（自）
+              'dateTo': FormControl<DateTime>(value: element.dateTo), // 年月日（至）
+              'guideNamaKanji': FormControl<String>(
+                  value: element.guideNamaKanji), // ガイド名（漢字）
+              'guideNameKana':
+                  FormControl<String>(value: element.guideNameKana), // ガイド名（カナ）
+              'phoneNumber':
+                  FormControl<String>(value: element.phoneNumber), // 電話番号
+              'qualification': FormControl<List<String>>(value: []), // 資格
+              'report': FormControl<String>(value: element.report), // 報告書
+              'accommodationAvailability': FormControl<String>(
+                  value: element.accommodationAvailability), // 同宿可否
+              'accommodationName':
+                  FormControl<String>(value: element.accommodationName), // 施設名
+              'address': FormControl<String>(value: element.address), // 所在地
+              'phoneNumber2':
+                  FormControl<String>(value: element.phoneNumber2), //
+              //qualification
+              'itinerary_management': FormControl<bool>(value: false),
+              'guide_interpreter': FormControl<bool>(value: false),
+              'medical_interpreter': FormControl<bool>(value: false),
+            },
+          ),
+        );
 
-            'itinerary_management': FormControl<bool>(value: false),
-            'guide_interpreter': FormControl<bool>(value: false),
-            'medical_interpreter': FormControl<bool>(value: false),
-          },
-        ));
-        item.qualification?.forEach((e) {
-          if (e == '旅程管理') {
-            formArray.control('itinerary_management').value = true;
-          }
-          logger.d('add ${item.address}');
-        });
+        // element.qualification?.forEach((e) {
+        //   if (e == '旅程管理') {
+        //       element.qualification['']
+        //      formArray.control('itinerary_management').value = true;
+        //   }
+        //   if (e == '通訳案内士') {
+        //     formArray.control('guide_interpreter').value = true;
+        //   }
+        //   if (e == '医療通訳者') {
+        //     formArray.control('medical_interpreter').value = true;
+        //   }
+        //   logger.d('add ${element.address}');
+        // });
         logger.d('data ${data.length}');
       }
-    } else {
+    }
+    if (data.isEmpty) {
       FormGroup(
         {
           'arrangePerson': FormControl<String>(value: ''), // 手配担当
@@ -171,7 +183,7 @@ class RelatedPartiesModel {
     }
   }
 
-  ValueNotifier<AsyncData<DetailRelatedPartiesBusCompanyResponse>>
+  ValueNotifier<AsyncData<List<DetailRelatedPartiesBusCompanyResponse>>>
       busCompanyData = ValueNotifier(const AsyncData());
 
   Future<void> fetchBusCompany(FormGroup formGroup) async {
@@ -181,6 +193,7 @@ class RelatedPartiesModel {
           .getDetailRelatedPartiesBusCompany(tourId.value);
       insertBusCompany(formGroup, response);
       busCompanyData.value = AsyncData(data: response);
+      logger.d(response.first.toJson());
     } catch (e) {
       logger.d(e);
       busCompanyData.value = AsyncData(error: e);
@@ -188,10 +201,30 @@ class RelatedPartiesModel {
   }
 
   void insertBusCompany(
-      FormGroup formGroup, DetailRelatedPartiesBusCompanyResponse data) {
-    formGroup.control('arrangePerson').value = data.arrangePerson;
-    formGroup.control('busCompanyName').value = data.busCompanyName;
-    formGroup.control('contactPerson').value = data.contactPerson;
+      FormGroup formGroup, List<DetailRelatedPartiesBusCompanyResponse> data) {
+    var element = data.first;
+
+    var item = formGroup.control('busCompany') as FormGroup;
+
+    formGroup = FormGroup(
+      {
+        'id': FormControl<String>(), // ID
+        'arrangePerson':
+            FormControl<String>(value: element.arrangePerson), // 手配担当
+        'busCompanyName': FormControl<String>(value: ''), // バス会社名
+        'contactPerson': FormControl<String>(value: ''), // 担当者
+      },
+    );
+    logger.d(element.arrangePerson);
+    // formGroup.control('id').value = element.id;
+    // formGroup.control('arrangePerson').value = element.arrangePerson;
+    // formGroup.control('busCompanyName').value = element.busCompanyName;
+    // formGroup.control('contactPerson').value = element.contactPerson;
+    // if (data.isNotEmpty) {
+    //   for (var element in data) {
+
+    //   }
+    // }
   }
 
   ValueNotifier<AsyncData<DetailRelatedPartiesBusCompanyResponse>>
@@ -304,23 +337,24 @@ class RelatedPartiesModel {
         }
         DetailRelatedPartiesDriverRequest request =
             DetailRelatedPartiesDriverRequest(
-          dateYearFrom: element['dateYearFrom'],
-          dateYearTo: element['dateYearTo'],
-          carNumber: element['carNumber'],
-          vehicleType: element['vehicleType'],
-          driverNamaKanji: element['driverNamaKanji'],
-          driverNameKana: element['driverNameKana'],
-          phoneNumber: element['phoneNumber'],
-          language: languages,
-          accommodationAvailability: element['accommodationAvailability'],
-          hotelArrangement: element['hotelArrangement'],
-          accommodationName: element['accommodationName'],
-          address: element['address'],
-          phoneNumber2: element['phoneNumber2'],
-        );
+                dateYearFrom: element['dateYearFrom'],
+                dateYearTo: element['dateYearTo'],
+                carNumber: element['carNumber'],
+                vehicleType: element['vehicleType'],
+                driverNamaKanji: element['driverNamaKanji'],
+                driverNameKana: element['driverNameKana'],
+                phoneNumber: element['phoneNumber'],
+                language: languages,
+                accommodationAvailability: element['accommodationAvailability'],
+                hotelArrangement: element['hotelArrangement'],
+                accommodationName: element['accommodationName'],
+                address: element['address'],
+                phoneNumber2: element['phoneNumber2'],
+                tour: tourId.value);
         var result = await processChartRepository
             .postDetailRelatedPartiesDriver(request);
-        //partiesDriverData.value.copyWith(data: [...partiesDriverData.value.requireData,result]);
+        partiesDriverData.value
+            .copyWith(data: [...partiesDriverData.value.requireData, result]);
         partiesData.value = AsyncData(data: partiesData.value.data);
       });
     } catch (e) {
@@ -329,7 +363,7 @@ class RelatedPartiesModel {
     }
   }
 
-  ValueNotifier<AsyncData<DetailRelatedPartiesEmergencyContactResponse>>
+  ValueNotifier<AsyncData<List<DetailRelatedPartiesEmergencyContactResponse>>>
       emergencyContactData = ValueNotifier(const AsyncData());
   Future<void> fetchEmergencyContact(FormArray formArray) async {
     try {
@@ -344,15 +378,30 @@ class RelatedPartiesModel {
     }
   }
 
-  void insertEmergencyContact(
-      FormArray formArray, DetailRelatedPartiesEmergencyContactResponse? data) {
-    // formGroup.control('dateYearFrom').value = data?.dateYearFrom;
-    // formGroup.control('dateYearTo').value = data?.dateYearTo;
-    // formGroup.control('contactPersonNamaKanji').value =
-    //     data?.contactPersonNamaKanji;
-    // formGroup.control('contactPersonNameKana').value =
-    //     data?.contactPersonNameKana;
-    // formGroup.control('phoneNumber').value = data?.phoneNumber;
+  void insertEmergencyContact(FormArray formArray,
+      List<DetailRelatedPartiesEmergencyContactResponse>? data) {
+    if (data!.isNotEmpty) {
+      formArray.clear();
+      for (var item in data) {
+        formArray.add(
+          FormGroup(
+            {
+              'id': FormControl<String>(value: item.id), // ID
+              'dateYearFrom':
+                  FormControl<DateTime>(value: item.dateYearFrom), // 年月日（自）
+              'dateYearTo':
+                  FormControl<DateTime>(value: item.dateYearTo), // 年月日（至）
+              'contactPersonNamaKanji': FormControl<String>(
+                  value: item.contactPersonNamaKanji), // 担当者名（漢字）
+              'contactPersonNameKana': FormControl<String>(
+                  value: item.contactPersonNameKana), // 担当者名（カナ）
+              'phoneNumber':
+                  FormControl<String>(value: item.phoneNumber), // 電話番号
+            },
+          ),
+        );
+      }
+    }
   }
 
   ValueNotifier<AsyncData<DetailRelatedPartiesEmergencyContactResponse>>
