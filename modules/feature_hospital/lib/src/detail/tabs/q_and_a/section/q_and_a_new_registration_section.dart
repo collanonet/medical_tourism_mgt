@@ -14,6 +14,7 @@ import '../g_and_a_model.dart';
 class QAndANewRegistrationSection extends StatefulWidget {
   const QAndANewRegistrationSection({super.key});
 
+  
   @override
   State<QAndANewRegistrationSection> createState() =>
       _QAndANewRegistrationSectionState();

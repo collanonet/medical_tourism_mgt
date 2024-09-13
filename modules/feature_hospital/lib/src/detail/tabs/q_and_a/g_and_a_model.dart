@@ -21,7 +21,7 @@ class QAndAModel {
       newRegistrationHospitalData = ValueNotifier(
           const AsyncData<List<NewRegistrationHospitalResponse>>(data: []));
 
-  ValueNotifier<String?> hospitalId = ValueNotifier(null);
+  ValueNotifier<String> hospitalId = ValueNotifier('');
 
   Future<void> fetchData({
     String? hospitalId,
@@ -43,7 +43,7 @@ class QAndAModel {
     try {
       newRegistrationHospitalData.value = const AsyncData(loading: true);
       final result = await hospitalRepository.getNewRegistrationHospital(
-        hospitalId: hospitalId.value!,
+        hospitalId: hospitalId.value,
         classification: classification,
         search: search,
       );
@@ -62,7 +62,7 @@ class QAndAModel {
       submit.value = const AsyncData(loading: true);
       final response = await hospitalRepository.postNewRegistrationHospital(
         NewRegistrationHospitalRequest(
-          hospital: formGroup.control('hospital').value,
+          hospital: hospitalId.value,
           updatedDate: formGroup.control('updatedDate').value,
           updatedBy: formGroup.control('updatedBy').value,
           classification: formGroup.control('classification').value,
@@ -92,8 +92,8 @@ class QAndAModel {
         requireData.id,
       );
       newRegistrationHospitalData.value = AsyncData(
-        data: newRegistrationHospitalData.value.data!
-          ..removeWhere((element) => element == requireData),
+        data: newRegistrationHospitalData.value.data
+          ?..removeWhere((element) => element == requireData),
       );
       delete.value = const AsyncData(data: true);
     } catch (e) {
