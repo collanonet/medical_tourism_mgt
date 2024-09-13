@@ -489,7 +489,7 @@ class BasicInformationModel {
             (formGroup.control('basicInformation') as FormGroup).value),
       );
 
-      hospitalId.value = AsyncData(data: result.id);
+      // hospitalId.value = AsyncData(data: result.id);
       basicInformationData.value = AsyncData(data: result);
     } catch (e) {
       logger.d(e);

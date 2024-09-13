@@ -171,8 +171,16 @@ class _BasicInformationSectionState extends State<BasicInformationSection> {
               onListen: () {
                 final value =
                     context.read<BasicInformationModel>().submit.value;
+                final hospitalId =
+                    context.read<BasicInformationModel>().hospitalId.value;
                 if (value.hasData) {
-                  logger.d('loading');
+                  if (hospitalId.hasData) {
+                    context.router.push(
+                      HospitalDetailRoute(
+                        id: hospitalId.requireData,
+                      ),
+                    );
+                  }
                   snackBarWidget(
                     message: '正常に保存されました',
                     prefixIcon:
