@@ -73,7 +73,7 @@ class BasicInformationScreen extends StatelessWidget {
                                         value: context
                                             .read<BasicInformationModel>(),
                                         child: AlertDialog(
-                                          title: const Text('患者情報を消去しますか？'),
+                                          title: const Text('患者情報削除すか？'),
                                           content:
                                               const Text('この操作は取り消すことができません。'),
                                           actions: [
@@ -101,7 +101,7 @@ class BasicInformationScreen extends StatelessWidget {
                                                     },
                                                     child: WithLoadingButton(
                                                       isLoading: value.loading,
-                                                      child: const Text('消去'),
+                                                      child: const Text('削除'),
                                                     ),
                                                   );
                                                 }),
@@ -117,7 +117,7 @@ class BasicInformationScreen extends StatelessWidget {
                                 child: WithLoadingButton(
                                   isLoading: value.loading,
                                   child: const Text(
-                                    '消去',
+                                    '削除',
                                   ),
                                 ));
                           })

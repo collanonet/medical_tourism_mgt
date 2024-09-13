@@ -99,7 +99,7 @@ class BasicInformationPage extends StatelessWidget {
                                                             AgentBasicInformationModel>(),
                                                         child: AlertDialog(
                                                           title: const Text(
-                                                              'エージェント情報を消去しますか？'),
+                                                              'エージェント情報削除すか？'),
                                                           content: const Text(
                                                               'この操作は取り消すことができません。'),
                                                           actions: [
@@ -137,7 +137,7 @@ class BasicInformationPage extends StatelessWidget {
                                                                           value
                                                                               .loading,
                                                                       child: const Text(
-                                                                          '消去'),
+                                                                          '削除'),
                                                                     ),
                                                                   );
                                                                 }),
@@ -153,7 +153,7 @@ class BasicInformationPage extends StatelessWidget {
                                                 child: WithLoadingButton(
                                                   isLoading: value.loading,
                                                   child: const Text(
-                                                    '消去',
+                                                    '削除',
                                                   ),
                                                 ));
                                           })

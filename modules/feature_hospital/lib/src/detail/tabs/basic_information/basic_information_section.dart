@@ -79,12 +79,12 @@ class _BasicInformationSectionState extends State<BasicInformationSection> {
                 final value =
                     context.read<BasicInformationModel>().deleteHospital.value;
                 if (value.hasData) {
-                  context.router.replaceAll([const HospitalsRoute()]);
                   snackBarWidget(
                     message: '正常に保存されました',
                     prefixIcon:
                         const Icon(Icons.check_circle, color: Colors.white),
                   );
+                  context.router.replaceAll([const HospitalsRoute()]);
                 }
 
                 if (value.hasError) {
@@ -114,7 +114,7 @@ class _BasicInformationSectionState extends State<BasicInformationSection> {
                                         value: context
                                             .read<BasicInformationModel>(),
                                         child: AlertDialog(
-                                          title: const Text('病院情報を消去しますか？'),
+                                          title: const Text('病院情報削除すか？'),
                                           content:
                                               const Text('この操作は取り消すことができません。'),
                                           actions: [
@@ -142,7 +142,7 @@ class _BasicInformationSectionState extends State<BasicInformationSection> {
                                                     },
                                                     child: WithLoadingButton(
                                                       isLoading: value.loading,
-                                                      child: const Text('消去'),
+                                                      child: const Text('削除'),
                                                     ),
                                                   );
                                                 }),
@@ -158,7 +158,7 @@ class _BasicInformationSectionState extends State<BasicInformationSection> {
                                 child: WithLoadingButton(
                                   isLoading: value.loading,
                                   child: const Text(
-                                    '消去',
+                                    '削除',
                                   ),
                                 ));
                           })
