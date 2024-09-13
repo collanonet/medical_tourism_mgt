@@ -173,11 +173,16 @@ class _BasicInformationSectionState extends State<BasicInformationSection> {
                     context.read<BasicInformationModel>().submit.value;
                 final hospitalId =
                     context.read<BasicInformationModel>().hospitalId.value;
+
                 if (value.hasData) {
-                  if (hospitalId.hasData) {
+                  if (!hospitalId.hasData) {
+                    final data = context
+                        .read<BasicInformationModel>()
+                        .basicInformationData
+                        .value;
                     context.router.push(
                       HospitalDetailRoute(
-                        id: hospitalId.requireData,
+                        id: data.requireData.id,
                       ),
                     );
                   }

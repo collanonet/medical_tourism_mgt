@@ -463,18 +463,6 @@ class BasicInformationModel {
       submit.value = const AsyncData(loading: true);
       await submitBasicInformation(formGroup);
 
-      if (hospitalId.value.hasData) {
-        await submitHowToMakeRequest(
-            formGroup.control('howToMakeRequest') as FormGroup);
-        await submitMedicalRecordBasicInfo(formGroup);
-        await submitDoctorInformation(formGroup);
-        await submitAdditionalInformation(
-            formGroup.control('additionalInformationSection') as FormGroup);
-        await submitPaymentOption(
-            formGroup.control('paymentOptionSection') as FormGroup);
-        await submitSupportLanguage(formGroup);
-      }
-
       submit.value = const AsyncData(data: true);
     } catch (e) {
       submit.value = AsyncData(error: e);
@@ -489,7 +477,17 @@ class BasicInformationModel {
             (formGroup.control('basicInformation') as FormGroup).value),
       );
 
-      // hospitalId.value = AsyncData(data: result.id);
+      await submitHowToMakeRequest(
+          formGroup.control('howToMakeRequest') as FormGroup, result.id);
+      await submitMedicalRecordBasicInfo(formGroup, result.id);
+      await submitDoctorInformation(formGroup, result.id);
+      await submitAdditionalInformation(
+          formGroup.control('additionalInformationSection') as FormGroup,
+          result.id);
+      await submitPaymentOption(
+          formGroup.control('paymentOptionSection') as FormGroup, result.id);
+      await submitSupportLanguage(formGroup, result.id);
+
       basicInformationData.value = AsyncData(data: result);
     } catch (e) {
       logger.d(e);
@@ -497,13 +495,13 @@ class BasicInformationModel {
     }
   }
 
-  Future<void> submitHowToMakeRequest(FormGroup form) async {
+  Future<void> submitHowToMakeRequest(FormGroup form, String hospitalId) async {
     try {
       howToMakeRequestHospitalData.value = const AsyncData(loading: true);
 
       HowToRequestHospitalRequest request = HowToRequestHospitalRequest(
-        hospital: hospitalId.value.requireData,
-        id: form.control('_id').value ?? '',
+        hospital: hospitalId,
+        id: form.control('_id').value,
         dateOfUpdate: form.control('dateOfUpdate').value ?? DateTime.now(),
         updater: form.control('updater').value ?? '',
         memo: form.control('memo').value ?? '',
@@ -518,7 +516,8 @@ class BasicInformationModel {
     }
   }
 
-  Future<void> submitMedicalRecordBasicInfo(FormGroup formGroup) async {
+  Future<void> submitMedicalRecordBasicInfo(
+      FormGroup formGroup, String hospitalId) async {
     try {
       List<MedicalRecordBasicInfoHospitalResponse> data =
           medicalRecordBasicInfoData.value.data ?? [];
@@ -534,7 +533,7 @@ class BasicInformationModel {
               element['nameKanji'].toString().isNotEmpty) {
             MedicalRecordBasicInfoHospitalRequest request =
                 MedicalRecordBasicInfoHospitalRequest(
-              hospital: hospitalId.value.requireData,
+              hospital: hospitalId,
               id: element['_id'],
               dateOfUpdate: element['dateOfUpdate'] ?? DateTime.now(),
               departmentName: element['departmentName'] ?? '',
@@ -568,7 +567,8 @@ class BasicInformationModel {
     }
   }
 
-  Future<void> submitDoctorInformation(FormGroup formGroup) async {
+  Future<void> submitDoctorInformation(
+      FormGroup formGroup, String hospitalId) async {
     try {
       List<DoctorProfileHospitalResponse> doctorInformationDataList =
           doctorInformationData.value.data ?? [];
@@ -623,7 +623,7 @@ class BasicInformationModel {
         }
 
         DoctorProfileHospitalRequest request = DoctorProfileHospitalRequest(
-          hospital: hospitalId.value.requireData,
+          hospital: hospitalId,
           id: element['_id'],
           profile: file,
           photoRelease: element['photoRelease'] ?? '',
@@ -663,7 +663,8 @@ class BasicInformationModel {
     }
   }
 
-  Future<void> submitAdditionalInformation(FormGroup form) async {
+  Future<void> submitAdditionalInformation(
+      FormGroup form, String hospitalId) async {
     try {
       additionalInformationData.value = const AsyncData(loading: true);
 
@@ -697,7 +698,7 @@ class BasicInformationModel {
 
       AdditionalInformationSectionRequest request =
           AdditionalInformationSectionRequest(
-        hospital: hospitalId.value.requireData,
+        hospital: hospitalId,
         id: form.control('_id').value,
         outsourcingContract: form.control('outsourcingContract').value ?? '',
         contract: contract,
@@ -720,13 +721,13 @@ class BasicInformationModel {
     }
   }
 
-  Future<void> submitPaymentOption(FormGroup form) async {
+  Future<void> submitPaymentOption(FormGroup form, String hospitalId) async {
     try {
       paymentOptionData.value = const AsyncData(loading: true);
 
       PaymentOptionHospitalRequest request = PaymentOptionHospitalRequest(
-        hospital: hospitalId.value.requireData,
-        id: form.control('_id').value ?? '',
+        hospital: hospitalId,
+        id: form.control('_id').value,
         payer: form.control('payer').value ?? '',
         paymentTiming: form.control('paymentTiming').value ?? '',
         feeBack: form.control('feeBack').value ?? '',
@@ -755,7 +756,7 @@ class BasicInformationModel {
     }
   }
 
-  Future<void> submitSupportLanguage(FormGroup form) async {
+  Future<void> submitSupportLanguage(FormGroup form, String hospitalId) async {
     try {
       supportLangaugeData.value = const AsyncData(loading: true, data: []);
 
@@ -767,7 +768,7 @@ class BasicInformationModel {
             element['supportLanguage'].toString().isNotEmpty) {
           SupportLanguageHospitalRequest request =
               SupportLanguageHospitalRequest(
-            hospital: hospitalId.value.requireData,
+            hospital: hospitalId,
             id: element['_id'],
             supportLanguage: element['supportLanguage'],
             foreignStaff: element['foreignStaff'] ?? false,
