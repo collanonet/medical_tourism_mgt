@@ -60,20 +60,28 @@ class FacilityModel {
     if (data.isNotEmpty) {
       formArray.clear();
       for (var item in data) {
-        // for (int i = 0; i < item.foreignLanguageStaff!.length; i++) {
-        //   if (item.foreignLanguageStaff![i] == '日本語') {
-        //     formArray.control('japanese').value = true;
-        //   }
-        //   // if (element['chinese'] == true) {
-        //   //   languages.add('中国語');
-        //   // }
-        //   // if (element['vietnamese'] == true) {
-        //   //   languages.add('ベトナム語');
-        //   // }
-        //   // if (element['english'] == true) {
-        //   //   languages.add('英語');
-        //   // }
-        // }
+        bool japanese = false;
+        bool chinese = false;
+        bool vietnamese = false;
+        bool english = false;
+        bool others = false;
+        for (int i = 0; i < item.foreignLanguageStaff!.length; i++) {
+          if (item.foreignLanguageStaff![i] == '日本語') {
+            japanese = true;
+          }
+          if (item.foreignLanguageStaff?[i] == '中国語') {
+            chinese = true;
+          }
+          if (item.foreignLanguageStaff?[i] == 'ベトナム語') {
+            vietnamese = true;
+          }
+          if (item.foreignLanguageStaff?[i] == '英語') {
+            english = true;
+          }
+          if (item.foreignLanguageStaff?[i] == 'その他') {
+            others = true;
+          }
+        }
         formArray.add(
           FormGroup(
             {
@@ -92,14 +100,12 @@ class FacilityModel {
               'tour': FormControl<String>(value: item.tour),
               // 外国語スタッフ
               //
-              'japanese': FormControl<bool>(
-                  value:
-                      item.foreignLanguageStaff?[0] == '日本語' ? true : false), //
-              'chinese': FormControl<bool>(value: item.foreignLanguageStaff?[1] == '中国語' ? true : false), //
-              'vietnamese': FormControl<bool>(value: item.foreignLanguageStaff?[2] == 'ベトナム語' ? true : false), //
-              'english': FormControl<bool>(value: item.foreignLanguageStaff?[3] == '英語' ? true : false), //
-              'other': FormControl<String>(value: item.other),
-              'others': FormControl<bool>(value: item.foreignLanguageStaff?[4] == 'その他' ? true : false), //
+              'japanese': FormControl<bool>(value: japanese), //
+              'chinese': FormControl<bool>(value: chinese), //
+              'vietnamese': FormControl<bool>(value: vietnamese), //
+              'english': FormControl<bool>(value: english), //
+              'others': FormControl<bool>(value: others),
+              'other': FormControl<String>(value: item.other ?? ''), //
             },
           ),
         );
@@ -131,7 +137,7 @@ class FacilityModel {
           if (element['english'] == true) {
             languages.add('英語');
           }
-          if(element['others'] == true){
+          if (element['others'] == true) {
             languages.add('その他');
           }
           DetailFacilityHotelRequest request = DetailFacilityHotelRequest(
@@ -232,14 +238,18 @@ class FacilityModel {
           dropInFacilityData.value.data ?? [];
       submitDropInFacilityData.value = const AsyncData(loading: true);
       List<Facility> places = [];
-      formGroup.control('places').value.forEach((element) {
-        places.add(Facility(
-          accommodationName: element['accommodationName'],
-          address: element['address'],
-          contctPersonName: element['contactPersonName'],
-          phoneNumber: element['phoneNumber'],
-        ));
-      });
+      formGroup.control('places').value.forEach(
+        (element) {
+          places.add(
+            Facility(
+              accommodationName: element['accommodationName'],
+              address: element['address'],
+              contctPersonName: element['contactPersonName'],
+              phoneNumber: element['phoneNumber'],
+            ),
+          );
+        },
+      );
 
       if (formGroup.control('id').value == null) {
         final response = await processChartRepository.postDetailFacilityDropIn(
