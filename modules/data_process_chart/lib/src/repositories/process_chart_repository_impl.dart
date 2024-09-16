@@ -297,4 +297,15 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
       id, DetailFacilityHotelRequest request) {
     return remote.putDetailFacilityHospital(id, request);
   }
+  
+  @override
+  Future<DetailRelatedPartiesDriverResponse> putRelatedPartiesDriver(String id, DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest) {
+   return remote.putRelatedPartiesDriver(id, detailRelatedPartiesDriverRequest);
+  }
+  
+  @override
+  Future<DetailRelatedPartiesEmergencyContactResponse> putRelatedPartiesEmergency(String id, DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest) {
+   return
+    remote.putRelatedPartiesEmergency(id, detailRelatedPartiesEmergencyContactRequest);
+  }
 }

@@ -152,6 +152,10 @@ class ProcessChartRemoteProvider {
         .postRelatedPartiesDriver(detailRelatedPartiesDriverRequest);
   }
 
+  Future<DetailRelatedPartiesDriverResponse> putRelatedPartiesDriver(String id,DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest) async{
+    return await apiService.putRelatedPartiesDriver(id, detailRelatedPartiesDriverRequest);
+  }
+
   Future<List<DetailRelatedPartiesEmergencyContactResponse>>
       getRelatedPartiesEmergencyContact(String id) async {
     return await apiService.getRelatedPartiesEmergencyContact(id);
@@ -163,6 +167,10 @@ class ProcessChartRemoteProvider {
               detailRelatedPartiesEmergencyContactRequest) async {
     return await apiService.postRelatedPartiesEmergencyContact(
         detailRelatedPartiesEmergencyContactRequest);
+  }
+
+  Future<DetailRelatedPartiesEmergencyContactResponse> putRelatedPartiesEmergency(String id,DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest) async{
+    return await apiService.putRelatedPartiesEmergency(id, detailRelatedPartiesEmergencyContactRequest);
   }
 
   Future<DetailItinerarySimpleTitle> getDetailItinerarySimpleTitle() async {

@@ -4250,6 +4250,37 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<DetailRelatedPartiesDriverResponse> putRelatedPartiesDriver(
+    String id,
+    DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailRelatedPartiesDriverRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailRelatedPartiesDriverResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/driver/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = DetailRelatedPartiesDriverResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
   Future<List<DetailRelatedPartiesEmergencyContactResponse>>
       getRelatedPartiesEmergencyContact(String id) async {
     final _extra = <String, dynamic>{};
@@ -4301,6 +4332,40 @@ class _ApiService implements ApiService {
             .compose(
               _dio.options,
               '/emergency-contact',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value =
+        DetailRelatedPartiesEmergencyContactResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<DetailRelatedPartiesEmergencyContactResponse>
+      putRelatedPartiesEmergency(
+    String id,
+    DetailRelatedPartiesEmergencyContactRequest
+        detailRelatedPartiesEmergencyContactRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailRelatedPartiesEmergencyContactRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailRelatedPartiesEmergencyContactResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/emergency-contact/${id}',
               queryParameters: queryParameters,
               data: _data,
             )

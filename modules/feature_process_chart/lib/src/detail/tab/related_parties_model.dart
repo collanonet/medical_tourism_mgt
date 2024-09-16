@@ -57,8 +57,23 @@ class RelatedPartiesModel {
   void insertRelatedParties(
       FormArray formArray, List<DetailRelatedPartiesResponse> data) {
     if (data.isNotEmpty) {
-        formArray.clear();
+      formArray.clear();
+      formArray.reset();
       for (var element in data) {
+        bool value1 = false;
+        bool value2 = false;
+        bool value3 = false;
+        for (int i = 0; i < element.qualification!.length; i++) {
+          if (element.qualification![i] == '旅程管理') {
+            value1 = true;
+          }
+          if (element.qualification![i] == '通訳案内士') {
+            value2 = true;
+          }
+          if (element.qualification![i] == '医療通訳者') {
+            value3 = true;
+          }
+        }
         formArray.add(
           FormGroup(
             {
@@ -84,26 +99,13 @@ class RelatedPartiesModel {
               'phoneNumber2':
                   FormControl<String>(value: element.phoneNumber2), //
               //qualification
-              'itinerary_management': FormControl<bool>(value: false),
-              'guide_interpreter': FormControl<bool>(value: false),
-              'medical_interpreter': FormControl<bool>(value: false),
+              'itinerary_management': FormControl<bool>(value: value1),
+              'guide_interpreter': FormControl<bool>(value: value2),
+              'medical_interpreter': FormControl<bool>(value: value3),
             },
           ),
         );
 
-        // element.qualification?.forEach((e) {
-        //   if (e == '旅程管理') {
-        //       element.qualification['']
-        //      formArray.control('itinerary_management').value = true;
-        //   }
-        //   if (e == '通訳案内士') {
-        //     formArray.control('guide_interpreter').value = true;
-        //   }
-        //   if (e == '医療通訳者') {
-        //     formArray.control('medical_interpreter').value = true;
-        //   }
-        //   logger.d('add ${element.address}');
-        // });
         logger.d('data ${data.length}');
       }
     }
@@ -141,13 +143,13 @@ class RelatedPartiesModel {
         (element) async {
           List<String> qualifications = [];
           if (element['itinerary_management'] == true) {
-            qualifications.add('アルファード');
+            qualifications.add('旅程管理');
           }
           if (element['guide_interpreter'] == true) {
-            qualifications.add('ハイエース');
+            qualifications.add('通訳案内士');
           }
           if (element['medical_interpreter'] == true) {
-            qualifications.add('その他');
+            qualifications.add('医療通訳者');
           }
           DetailRelatedPartiesRequest request = DetailRelatedPartiesRequest(
             arrangePerson: element['arrangePerson'],
@@ -176,7 +178,7 @@ class RelatedPartiesModel {
         },
       );
       partiesData.value = AsyncData(data: data);
-      // submitPartiesData.value = AsyncData(data: submitPartiesData.value.data);
+      submitPartiesData.value = AsyncData(data: submitPartiesData.value.data);
     } catch (e) {
       logger.d(e);
       partiesData.value = AsyncData(error: e);
@@ -202,24 +204,12 @@ class RelatedPartiesModel {
 
   void insertBusCompany(
       FormGroup formGroup, List<DetailRelatedPartiesBusCompanyResponse> data) {
-    var element = data.first;
-
-    var item = formGroup.control('busCompany') as FormGroup;
-
-    formGroup = FormGroup(
-      {
-        'id': FormControl<String>(), // ID
-        'arrangePerson':
-            FormControl<String>(value: element.arrangePerson), // 手配担当
-        'busCompanyName': FormControl<String>(value: ''), // バス会社名
-        'contactPerson': FormControl<String>(value: ''), // 担当者
-      },
-    );
+    var element = data.last;
     logger.d(element.arrangePerson);
-    // formGroup.control('id').value = element.id;
-    // formGroup.control('arrangePerson').value = element.arrangePerson;
-    // formGroup.control('busCompanyName').value = element.busCompanyName;
-    // formGroup.control('contactPerson').value = element.contactPerson;
+    formGroup.control('id').value = element.id;
+    formGroup.control('arrangePerson').value = element.arrangePerson;
+    formGroup.control('busCompanyName').value = element.busCompanyName;
+    formGroup.control('contactPerson').value = element.contactPerson;
     // if (data.isNotEmpty) {
     //   for (var element in data) {
 
@@ -264,9 +254,37 @@ class RelatedPartiesModel {
   }
 
   void insertDriver(
-      FormArray formArray, List<DetailRelatedPartiesDriverResponse>? data) {
-    if (data!.isNotEmpty) {
+      FormArray formArray, List<DetailRelatedPartiesDriverResponse> data) {
+    if (data.isNotEmpty) {
+      formArray.clear();
+      formArray.reset();
       for (var element in data) {
+        bool japanese = false;
+        bool chinese = false;
+        bool vietnamese = false;
+        bool english = false;
+        bool korean = false;
+        bool thai = false;
+        for (int i = 0; i < element.language!.length; i++) {
+          if (element.language![i] == '日本語') {
+            japanese = true;
+          }
+          if (element.language![i] == '中国語') {
+            chinese = true;
+          }
+          if (element.language![i] == 'ベトナム語') {
+            vietnamese = true;
+          }
+          if (element.language![i] == '英語') {
+            english = true;
+          }
+          if (element.language![i] == '韓国語') {
+            korean = true;
+          }
+          if (element.language![i] == 'タイ語') {
+            thai = true;
+          }
+        }
         formArray.add(
           FormGroup(
             {
@@ -296,16 +314,43 @@ class RelatedPartiesModel {
               'phoneNumber2':
                   FormControl<String>(value: element.phoneNumber2), //),
               //language
-              'japanese': FormControl<bool>(value: false),
-              'chinese': FormControl<bool>(value: false),
-              'vietnamese': FormControl<bool>(value: false),
-              'english': FormControl<bool>(value: false),
-              'korean': FormControl<bool>(value: false),
-              'thai': FormControl<bool>(value: false),
+              'japanese': FormControl<bool>(value: japanese),
+              'chinese': FormControl<bool>(value: chinese),
+              'vietnamese': FormControl<bool>(value: vietnamese),
+              'english': FormControl<bool>(value: english),
+              'korean': FormControl<bool>(value: korean),
+              'thai': FormControl<bool>(value: thai),
             },
           ),
         );
       }
+    }
+    if (data.isEmpty) {
+      FormGroup(
+        {
+          'id': FormControl<String>(), // ID
+          'dateYearFrom': FormControl<DateTime>(), // 年月日（自）
+          'dateYearTo': FormControl<DateTime>(), // 年月日（至）
+          'carNumber': FormControl<int>(), // 車番
+          'vehicleType': FormControl<String>(value: ''), // 車種
+          'driverNamaKanji': FormControl<String>(value: ''), // ドライバー名（漢字）
+          'driverNameKana': FormControl<String>(value: ''), // ドライバー名（カナ）
+          'phoneNumber': FormControl<String>(value: ''), // 電話番号
+          'language': FormControl<List<String>>(value: []), // 対応言語
+          'accommodationAvailability': FormControl<String>(value: ''), // 同宿可否
+          'hotelArrangement': FormControl<String>(value: ''), // ホテル手配
+          'accommodationName': FormControl<String>(value: ''), // 施設名
+          'address': FormControl<String>(value: ''), // 所在地
+          'phoneNumber2': FormControl<String>(value: ''),
+          //language
+          'japanese': FormControl<bool>(value: false),
+          'chinese': FormControl<bool>(value: false),
+          'vietnamese': FormControl<bool>(value: false),
+          'english': FormControl<bool>(value: false),
+          'korean': FormControl<bool>(value: false),
+          'thai': FormControl<bool>(value: false),
+        },
+      );
     }
   }
 
@@ -313,50 +358,62 @@ class RelatedPartiesModel {
       submitPartiesDriverData = ValueNotifier(const AsyncData());
   Future<void> submitPartiesDriver(FormGroup formGroup) async {
     try {
+      List<DetailRelatedPartiesDriverResponse> data =
+          partiesDriverData.value.data ?? [];
       partiesDriverData.value = const AsyncData(loading: true);
 
-      await formGroup.control('driver').value.forEach((element) async {
-        List<String>? languages = [];
-        if (element['japanese'] == true) {
-          languages.add('日本語');
-        }
-        if (element['chinese'] == true) {
-          languages.add('中国語');
-        }
-        if (element['vietnamese'] == true) {
-          languages.add('ベトナム語');
-        }
-        if (element['english'] == true) {
-          languages.add('英語');
-        }
-        if (element['korean'] == true) {
-          languages.add('韓国語');
-        }
-        if (element['thai'] == true) {
-          languages.add('タイ語');
-        }
-        DetailRelatedPartiesDriverRequest request =
-            DetailRelatedPartiesDriverRequest(
-                dateYearFrom: element['dateYearFrom'],
-                dateYearTo: element['dateYearTo'],
-                carNumber: element['carNumber'],
-                vehicleType: element['vehicleType'],
-                driverNamaKanji: element['driverNamaKanji'],
-                driverNameKana: element['driverNameKana'],
-                phoneNumber: element['phoneNumber'],
-                language: languages,
-                accommodationAvailability: element['accommodationAvailability'],
-                hotelArrangement: element['hotelArrangement'],
-                accommodationName: element['accommodationName'],
-                address: element['address'],
-                phoneNumber2: element['phoneNumber2'],
-                tour: tourId.value);
-        var result = await processChartRepository
-            .postDetailRelatedPartiesDriver(request);
-        partiesDriverData.value
-            .copyWith(data: [...partiesDriverData.value.requireData, result]);
-        partiesData.value = AsyncData(data: partiesData.value.data);
-      });
+      await formGroup.control('driver').value.forEach(
+        (element) async {
+          List<String>? languages = [];
+          if (element['japanese'] == true) {
+            languages.add('日本語');
+          }
+          if (element['chinese'] == true) {
+            languages.add('中国語');
+          }
+          if (element['vietnamese'] == true) {
+            languages.add('ベトナム語');
+          }
+          if (element['english'] == true) {
+            languages.add('英語');
+          }
+          if (element['korean'] == true) {
+            languages.add('韓国語');
+          }
+          if (element['thai'] == true) {
+            languages.add('タイ語');
+          }
+          DetailRelatedPartiesDriverRequest request =
+              DetailRelatedPartiesDriverRequest(
+            dateYearFrom: element['dateYearFrom'],
+            dateYearTo: element['dateYearTo'],
+            carNumber: element['carNumber'],
+            vehicleType: element['vehicleType'],
+            driverNamaKanji: element['driverNamaKanji'],
+            driverNameKana: element['driverNameKana'],
+            phoneNumber: element['phoneNumber'],
+            language: languages,
+            accommodationAvailability: element['accommodationAvailability'],
+            hotelArrangement: element['hotelArrangement'],
+            accommodationName: element['accommodationName'],
+            address: element['address'],
+            phoneNumber2: element['phoneNumber2'],
+            tour: tourId.value,
+          );
+          if (element['id'] == null) {
+            var result = await processChartRepository
+                .postDetailRelatedPartiesDriver(request);
+            data.add(result);
+          } else {
+            var result = await processChartRepository.putRelatedPartiesDriver(
+                element['id'], request);
+            data.map((e) => e.id == element['id'] ? result : e).toList();
+          }
+        },
+      );
+      partiesDriverData.value = AsyncData(data: data);
+      submitPartiesDriverData.value =
+          AsyncData(data: submitPartiesDriverData.value.data);
     } catch (e) {
       logger.d(e);
       submitPartiesDriverData.value = AsyncData(error: e);
@@ -379,9 +436,10 @@ class RelatedPartiesModel {
   }
 
   void insertEmergencyContact(FormArray formArray,
-      List<DetailRelatedPartiesEmergencyContactResponse>? data) {
-    if (data!.isNotEmpty) {
+      List<DetailRelatedPartiesEmergencyContactResponse> data) {
+    if (data.isNotEmpty) {
       formArray.clear();
+      formArray.reset();
       for (var item in data) {
         formArray.add(
           FormGroup(
@@ -402,14 +460,31 @@ class RelatedPartiesModel {
         );
       }
     }
+    if (data.isEmpty) {
+      FormGroup(
+        {
+          'id': FormControl<String>(), // ID
+          'dateYearFrom': FormControl<DateTime>(), // 年月日（自）
+          'dateYearTo': FormControl<DateTime>(), // 年月日（至）
+          'contactPersonNamaKanji': FormControl<String>(), // ��当者名（��字）
+          'contactPersonNameKana': FormControl<String>(), // ��当者名（カナ）
+          'phoneNumber': FormControl<String>(), // 電��番号
+        },
+      );
+    }
   }
 
   ValueNotifier<AsyncData<DetailRelatedPartiesEmergencyContactResponse>>
       submitEmergencyContactData = ValueNotifier(const AsyncData());
   Future<void> submitEmergencyContact(FormGroup formGroup) async {
     try {
+      List<DetailRelatedPartiesEmergencyContactResponse> data =
+          emergencyContactData.value.data ?? [];
       emergencyContactData.value = const AsyncData(loading: true);
-      await formGroup.control('emergencyContact').value.forEach((element) {
+      await formGroup
+          .control('emergencyContact')
+          .value
+          .forEach((element) async {
         DetailRelatedPartiesEmergencyContactRequest request =
             DetailRelatedPartiesEmergencyContactRequest(
           dateYearFrom: element['dateYearFrom'],
@@ -419,11 +494,20 @@ class RelatedPartiesModel {
           phoneNumber: element['phoneNumber'],
           tour: tourId.value,
         );
-        processChartRepository
-            .postDetailRelatedPartiesEmergencyContact(request);
+
+        if (element['id'] == null) {
+          var result = await processChartRepository
+              .postDetailRelatedPartiesEmergencyContact(request);
+          data.add(result);
+        } else {
+          var result = await processChartRepository.putRelatedPartiesEmergency(
+              element['id'], request);
+          data.map((e) => e.id == element['id'] ? result : e).toList();
+        }
       });
-      emergencyContactData.value =
-          AsyncData(data: emergencyContactData.value.data);
+      emergencyContactData.value = AsyncData(data: data);
+      submitEmergencyContactData.value =
+          AsyncData(data: submitEmergencyContactData.value.data);
     } catch (e) {
       logger.d(e);
       submitEmergencyContactData.value = AsyncData(error: e);

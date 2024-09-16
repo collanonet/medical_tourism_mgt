@@ -845,6 +845,12 @@ abstract class ApiService {
     @Body() DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest,
   );
 
+  @PUT('${EndPoints.DETAIL_RELATED_PARTIES_DRIVER}/{id}')
+  Future<DetailRelatedPartiesDriverResponse> putRelatedPartiesDriver(
+    @Path('id') String id,
+    @Body() DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest,
+  );
+
   @GET(EndPoints.DETAIL_RELATED_EMERGENCY_CONTACT)
   Future<List<DetailRelatedPartiesEmergencyContactResponse>>
       getRelatedPartiesEmergencyContact(
@@ -857,6 +863,12 @@ abstract class ApiService {
     @Body()
     DetailRelatedPartiesEmergencyContactRequest
         detailRelatedPartiesEmergencyContactRequest,
+  );
+
+  @PUT('${EndPoints.DETAIL_RELATED_EMERGENCY_CONTACT}/{id}')
+  Future<DetailRelatedPartiesEmergencyContactResponse> putRelatedPartiesEmergency(
+    @Path('id') String id,
+    @Body() DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest,
   );
 
   @GET(EndPoints.DETAIL_ITINERARY_SIMPLE_VERSION_TITLE)

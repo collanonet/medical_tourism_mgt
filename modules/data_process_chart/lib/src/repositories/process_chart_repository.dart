@@ -121,6 +121,8 @@ abstract class ProcessChartRepository {
     DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest,
   );
 
+  Future<DetailRelatedPartiesDriverResponse> putRelatedPartiesDriver(String id,DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest);
+
   Future<List<DetailRelatedPartiesEmergencyContactResponse>>
       getDetailRelatedPartiesEmergencyContact(String id);
 
@@ -129,6 +131,8 @@ abstract class ProcessChartRepository {
     DetailRelatedPartiesEmergencyContactRequest
         detailRelatedPartiesEmergencyContactRequest,
   );
+
+  Future<DetailRelatedPartiesEmergencyContactResponse> putRelatedPartiesEmergency(String id,DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest);
 
   Future<DetailItineraryResponse> getDetailItinerary({String? id});
 
