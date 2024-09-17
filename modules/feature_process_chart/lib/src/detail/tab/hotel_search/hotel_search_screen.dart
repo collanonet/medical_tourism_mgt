@@ -11,7 +11,12 @@ import 'package:skeletonizer/skeletonizer.dart';
 import '../hotel_registration/hotel_registration_model.dart';
 
 class HotelSearchScreen extends StatefulWidget {
-  const HotelSearchScreen({super.key});
+  const HotelSearchScreen({
+    super.key,
+    required this.valueChanged,
+  });
+
+  final ValueChanged valueChanged;
 
   @override
   State<HotelSearchScreen> createState() => _HotelSearchScreenState();
@@ -227,7 +232,6 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                                   builder: (context, form, _) {
                                     return ElevatedButton(
                                       onPressed: () {
-                                        
                                         context
                                             .read<HotelRegistrationModel>()
                                             .fetchHotelregister(
@@ -282,7 +286,11 @@ class _HotelSearchScreenState extends State<HotelSearchScreen> {
                       '検索結果',
                       style: context.textTheme.titleMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: Text('新規登録する')),
+                    ElevatedButton(
+                        onPressed: () {
+                          widget.valueChanged(3);
+                        },
+                        child: Text('新規登録する')),
                   ],
                 ),
                 ValueListenableBuilder(
