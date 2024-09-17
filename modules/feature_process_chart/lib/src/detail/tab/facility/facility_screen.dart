@@ -396,7 +396,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                   .appTheme.spacing.marginSmall,
                                             ),
                                             Text(
-                                              '患者を追加',
+                                              'ホテルを追加',
                                               style: TextStyle(
                                                   color: context
                                                       .appTheme.primaryColor),
