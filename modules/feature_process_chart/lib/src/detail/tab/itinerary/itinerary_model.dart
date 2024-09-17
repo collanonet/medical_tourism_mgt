@@ -12,20 +12,18 @@ class ItineraryModel {
   final ProcessChartRepository processChartRepository;
 
   ValueNotifier<AsyncData<DetailItineraryResponse>> itinerraryData =
-  ValueNotifier(const AsyncData());
+      ValueNotifier(const AsyncData());
 
   Future<void> fetchItinerary(FormGroup formGroup, {String? id}) async {
     try {
       if (id != null) {
         itinerraryData.value = const AsyncData(loading: true);
         final response =
-        await processChartRepository.getDetailItinerary(id: id);
+            await processChartRepository.getDetailItinerary(id: id);
         await insertItinerary(formGroup, response);
         itinerraryData.value = AsyncData(data: response);
-        logger.d('fetchItinerary success ${response.toJson()}');
       }
     } catch (e) {
-      logger.d('error');
       logger.d(e);
       itinerraryData.value = AsyncData(error: e);
     }
@@ -34,9 +32,6 @@ class ItineraryModel {
   Future<void> insertItinerary(
       FormGroup formGroup, DetailItineraryResponse data) async {
     try {
-      // Debug: Check if data is received
-      logger.d('Received data: ${data.toJson()}');
-
       formGroup.control('tourName').value = data.tourName;
       formGroup.control('peopleNumber').value = data.peopleNumber;
       formGroup.control('group').value = data.group;
@@ -46,7 +41,6 @@ class ItineraryModel {
       List<FormGroup> days = [];
 
       data.day?.forEach((e) {
-        logger.d('Processing day: ${e.toJson()}');
         List<FormGroup> groups = [];
 
         e.groups?.forEach((element) {
@@ -59,7 +53,7 @@ class ItineraryModel {
                 'timeFrom': FormControl<String>(value: task.timeFrom),
                 'timeTo': FormControl<String>(value: task.timeTo),
                 'transportation':
-                FormControl<String>(value: task.transportation),
+                    FormControl<String>(value: task.transportation),
                 'itinerary': FormControl<String>(value: task.itinerary),
               }),
             );
@@ -148,16 +142,13 @@ class ItineraryModel {
         daysForm.clear();
         daysForm.addAll(days);
       }
-
-      // Debug: Check if form is updated
-      logger.d('Form updated: ${formGroup.value}');
     } catch (e) {
       logger.d('Error: $e');
     }
   }
 
   ValueNotifier<AsyncData<DetailItineraryResponse>> submitData =
-  ValueNotifier(const AsyncData());
+      ValueNotifier(const AsyncData());
 
   Future<void> submitItinerary(FormGroup formGroup) async {
     try {
@@ -168,7 +159,7 @@ class ItineraryModel {
 
       List<dynamic>? days = [];
       formGroup.control('day').value.forEach(
-            (element) {
+        (element) {
           List<bool> meals = [];
           meals.add(element['morning']);
           meals.add(element['noon']);
@@ -176,10 +167,10 @@ class ItineraryModel {
 
           List<Group>? groups = [];
           element['groups'].forEach(
-                (groupElement) {
+            (groupElement) {
               List<Task>? tasks = [];
               groupElement['tasks'].forEach(
-                    (taskElement) {
+                (taskElement) {
                   tasks.add(
                     Task(
                       placeName: taskElement['placeName'],
@@ -219,10 +210,20 @@ class ItineraryModel {
         classification: formGroup.control('classification').value,
         day: days,
       );
-      final response =
-      await processChartRepository.postDetailItinerary(request);
-      submitData.value = AsyncData(data: response);
-      itinerraryData.value = AsyncData(data: response);
+
+      if (formGroup.control('_id').value != null) {
+        final response = await processChartRepository.putDetailItinerary(
+            formGroup.control('_id').value, request);
+
+        submitData.value = AsyncData(data: response);
+        itinerraryData.value = AsyncData(data: response);
+      } else {
+        final response =
+            await processChartRepository.postDetailItinerary(request);
+
+        submitData.value = AsyncData(data: response);
+        itinerraryData.value = AsyncData(data: response);
+      }
     } catch (e) {
       logger.d(e);
       submitData.value = AsyncData(error: e);

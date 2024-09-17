@@ -249,8 +249,9 @@ class ProcessChartRemoteProvider {
   }
 
   Future<DetailItineraryResponse> putDetailItinerary(
-      DetailIneraryRequest request, element) {
-    return apiService.putDetailItinerary(element, request);
+      String id,
+      DetailIneraryRequest request) {
+    return apiService.putDetailItinerary(id, request);
   }
 
   Future<DetailRelatedPartiesResponse> putDetailRelatedParties(
