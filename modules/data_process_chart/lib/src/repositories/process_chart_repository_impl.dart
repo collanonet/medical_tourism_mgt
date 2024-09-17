@@ -72,9 +72,9 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(
-      String id) {
-    return remote.getDetailFacilityDropIn(id);
+  Future<DetailDropInFacilityResponse> getDetailFacilityDropIn(
+      String tourId) {
+    return remote.getDetailFacilityDropIn(tourId);
   }
 
   @override

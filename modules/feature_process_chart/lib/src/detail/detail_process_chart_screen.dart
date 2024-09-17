@@ -9,7 +9,7 @@ import 'tab/facility/facility_page.dart';
 import 'tab/hotel_registration/hotel_registration_page.dart';
 import 'tab/hotel_search/hotel_search_page.dart';
 import 'tab/itinerary/itinerary_page.dart';
-import 'tab/related_parties_page.dart';
+import 'tab/related_parties/related_parties_page.dart';
 
 class DetailProcessChartScreen extends StatefulWidget {
   const DetailProcessChartScreen({super.key, this.id});

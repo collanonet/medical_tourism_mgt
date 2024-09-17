@@ -32,12 +32,12 @@ FormGroup facilityForm() => FormGroup(
             'arrangePerson': FormControl<String>(value: ''), // 手配担当
             'places': FormArray([
               FormGroup({
-                'id': FormControl<String>(value: ''), // ID
+                'id': FormControl<String>(), // ID
                 'accommodationName': FormControl<String>(value: ''), // 施設名
                 'address': FormControl<String>(value: ''), // 所在地
                 'contactPersonName': FormControl<String>(value: ''), // 担当者名
                 'phoneNumber': FormControl<String>(value: ''), // 電話番号
-                'tour': FormControl<String>(value: ''), // ツアー
+                'tour': FormControl<String>(), // ツアー
               })
             ])
           },

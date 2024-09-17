@@ -3836,14 +3836,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(
-      String id) async {
+  Future<DetailDropInFacilityResponse> getDetailFacilityDropIn(
+      String tourId) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'hotel': id};
+    final queryParameters = <String, dynamic>{r'tour': tourId};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<DetailDropInFacilityResponse>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailDropInFacilityResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -3859,10 +3859,7 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var _value = _result.data!
-        .map((dynamic i) =>
-            DetailDropInFacilityResponse.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final _value = DetailDropInFacilityResponse.fromJson(_result.data!);
     return _value;
   }
 

@@ -14,6 +14,7 @@ DetailFacilityResponse _$DetailFacilityResponseFromJson(
       address: json['address'] as String?,
       contctPersonName: json['contctPersonName'] as String?,
       phoneNumber: json['phoneNumber'] as String?,
+      tour: json['tour'] as String?,
     );
 
 Map<String, dynamic> _$DetailFacilityResponseToJson(
@@ -24,4 +25,5 @@ Map<String, dynamic> _$DetailFacilityResponseToJson(
       'address': instance.address,
       'contctPersonName': instance.contctPersonName,
       'phoneNumber': instance.phoneNumber,
+      'tour': instance.tour,
     };

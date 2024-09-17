@@ -40,7 +40,7 @@ abstract class ProcessChartRepository {
     DetailFacilityHotelRequest detailFacilityHotelRequest,
   );
 
-  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(String id);
+  Future<DetailDropInFacilityResponse> getDetailFacilityDropIn(String tourId);
 
   Future<DetailDropInFacilityResponse> postDetailFacilityDropIn(
     DetailDropInFacilityRequest detailDropInFacilityRequest,

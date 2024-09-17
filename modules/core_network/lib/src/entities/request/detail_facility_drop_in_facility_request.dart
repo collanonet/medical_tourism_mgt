@@ -8,11 +8,13 @@ class DetailDropInFacilityRequest {
   String? arrangePerson;
   List<Facility>? places;
   String? hotel;
+  String? tour;
 
   DetailDropInFacilityRequest({
     this.arrangePerson,
     this.places,
     this.hotel,
+    required this.tour,
   });
 
   factory DetailDropInFacilityRequest.fromJson(Map<String, dynamic> json) {
@@ -30,12 +32,14 @@ class Facility {
   String? address;
   String? contctPersonName;
   String? phoneNumber;
+  String tour;
 
   Facility({
     this.accommodationName,
     this.address,
     this.contctPersonName,
     this.phoneNumber,
+    required this.tour,
   });
 
   factory Facility.fromJson(Map<String, dynamic> json) {

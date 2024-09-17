@@ -69,9 +69,9 @@ class ProcessChartRemoteProvider {
         .postDetailFacilityHospital(detailFacilityHotelRequest);
   }
 
-  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(
-      String id) async {
-    return await apiService.getDetailFacilityDropIn(id);
+  Future<DetailDropInFacilityResponse> getDetailFacilityDropIn(
+      String tourId) async {
+    return await apiService.getDetailFacilityDropIn(tourId);
   }
 
   Future<DetailDropInFacilityResponse> postDetailFacilityDropIn(

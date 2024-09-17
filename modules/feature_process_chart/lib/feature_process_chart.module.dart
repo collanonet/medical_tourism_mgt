@@ -13,7 +13,7 @@ import 'src/detail/detail_process_chart_model.dart' as _i3;
 import 'src/detail/tab/facility/facility_model.dart' as _i5;
 import 'src/detail/tab/hotel_registration/hotel_registration_model.dart' as _i6;
 import 'src/detail/tab/itinerary/itinerary_model.dart' as _i7;
-import 'src/detail/tab/related_parties_model.dart' as _i8;
+import 'src/detail/tab/related_parties/related_parties_model.dart' as _i8;
 import 'src/itinerary_simplified/itinerary_simplified_model.dart' as _i9;
 import 'src/process_chart_model.dart' as _i10;
 

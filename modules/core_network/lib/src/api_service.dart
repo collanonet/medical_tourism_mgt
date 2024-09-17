@@ -767,8 +767,8 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_FACILITY_DROP_IN_FACILITY)
-  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn(
-    @Query('hotel') String id,
+  Future<DetailDropInFacilityResponse> getDetailFacilityDropIn(
+    @Query('tour') String tourId,
   );
 
   @POST(EndPoints.DETAIL_FACILITY_DROP_IN_FACILITY)
