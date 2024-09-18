@@ -198,7 +198,7 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<List<DetailRelatedPartiesBusCompanyResponse>>
+  Future<DetailRelatedPartiesBusCompanyResponse>
       getDetailRelatedPartiesBusCompany(String id) {
     return remote.getRelatedPartiesBusCompany(id);
   }
@@ -308,5 +308,10 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   Future<DetailRelatedPartiesEmergencyContactResponse> putRelatedPartiesEmergency(String id, DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest) {
    return
     remote.putRelatedPartiesEmergency(id, detailRelatedPartiesEmergencyContactRequest);
+  }
+
+  @override
+  Future<DetailRelatedPartiesBusCompanyResponse> putDetailRelatedPartiesBusCompany(String id, DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest) {
+    return remote.putDetailRelatedPartiesBusCompany(id, detailRelatedPartiesBusCompanyRequest);
   }
 }

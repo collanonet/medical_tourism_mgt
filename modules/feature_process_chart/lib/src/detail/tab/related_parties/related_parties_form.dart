@@ -25,7 +25,7 @@ FormGroup relatedPartiesForm() => FormGroup(
                 'itinerary_management': FormControl<bool>(value: false),
                 'guide_interpreter': FormControl<bool>(value: false),
                 'medical_interpreter': FormControl<bool>(value: false),
-                
+                'tour': FormControl<String>(),
               },
             )
           ],
@@ -37,6 +37,7 @@ FormGroup relatedPartiesForm() => FormGroup(
             'arrangePerson': FormControl<String>(value: ''), // 手配担当
             'busCompanyName': FormControl<String>(value: ''), // バス会社名
             'contactPerson': FormControl<String>(value: ''), // 担当者
+            'tour': FormControl<String>(),
           },
         ),
         //ドライバー
@@ -68,6 +69,7 @@ FormGroup relatedPartiesForm() => FormGroup(
                 'english': FormControl<bool>(value: false),
                 'korean': FormControl<bool>(value: false),
                 'thai': FormControl<bool>(value: false),
+                'tour': FormControl<String>(),
               },
             )
           ],
@@ -85,6 +87,7 @@ FormGroup relatedPartiesForm() => FormGroup(
                 'contactPersonNameKana':
                     FormControl<String>(value: ''), // 担当者名（カナ）
                 'phoneNumber': FormControl<String>(value: ''), // 電話番号
+                'tour': FormControl<String>(),
               },
             )
           ],

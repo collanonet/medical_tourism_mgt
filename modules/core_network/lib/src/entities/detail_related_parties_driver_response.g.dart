@@ -29,6 +29,7 @@ DetailRelatedPartiesDriverResponse _$DetailRelatedPartiesDriverResponseFromJson(
       accommodationName: json['accommodationName'] as String?,
       address: json['address'] as String?,
       phoneNumber2: json['phoneNumber2'] as String?,
+      tour: json['tour'] as String?,
     );
 
 Map<String, dynamic> _$DetailRelatedPartiesDriverResponseToJson(
@@ -48,4 +49,5 @@ Map<String, dynamic> _$DetailRelatedPartiesDriverResponseToJson(
       'accommodationName': instance.accommodationName,
       'address': instance.address,
       'phoneNumber2': instance.phoneNumber2,
+      'tour': instance.tour,
     };

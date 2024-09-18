@@ -20,6 +20,7 @@ class DetailRelatedPartiesDriverResponse {
   String? accommodationName;
   String? address;
   String? phoneNumber2;
+  String? tour;
 
 
   DetailRelatedPartiesDriverResponse({
@@ -37,6 +38,7 @@ class DetailRelatedPartiesDriverResponse {
     this.accommodationName,
     this.address,
     this.phoneNumber2,
+    this.tour,
   });
 
   factory DetailRelatedPartiesDriverResponse.fromJson(

@@ -824,13 +824,20 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_RELATED_PARTIES_BUS_COMPANY)
-  Future<List<DetailRelatedPartiesBusCompanyResponse>>
-      getRelatedPartiesBusCompany(
+  Future<DetailRelatedPartiesBusCompanyResponse> getRelatedPartiesBusCompany(
     @Query('tour') String id,
   );
 
   @POST(EndPoints.DETAIL_RELATED_PARTIES_BUS_COMPANY)
   Future<DetailRelatedPartiesBusCompanyResponse> postRelatedPartiesBusCompany(
+    @Body()
+    DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest,
+  );
+
+  @PUT('${EndPoints.DETAIL_RELATED_PARTIES_BUS_COMPANY}/{id}')
+  Future<DetailRelatedPartiesBusCompanyResponse>
+      putDetailRelatedPartiesBusCompany(
+    @Path('id') String id,
     @Body()
     DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest,
   );
@@ -866,9 +873,12 @@ abstract class ApiService {
   );
 
   @PUT('${EndPoints.DETAIL_RELATED_EMERGENCY_CONTACT}/{id}')
-  Future<DetailRelatedPartiesEmergencyContactResponse> putRelatedPartiesEmergency(
+  Future<DetailRelatedPartiesEmergencyContactResponse>
+      putRelatedPartiesEmergency(
     @Path('id') String id,
-    @Body() DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest,
+    @Body()
+    DetailRelatedPartiesEmergencyContactRequest
+        detailRelatedPartiesEmergencyContactRequest,
   );
 
   @GET(EndPoints.DETAIL_ITINERARY_SIMPLE_VERSION_TITLE)

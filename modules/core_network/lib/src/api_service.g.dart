@@ -4124,14 +4124,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<DetailRelatedPartiesBusCompanyResponse>>
-      getRelatedPartiesBusCompany(String id) async {
+  Future<DetailRelatedPartiesBusCompanyResponse> getRelatedPartiesBusCompany(
+      String id) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{r'tour': id};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<DetailRelatedPartiesBusCompanyResponse>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailRelatedPartiesBusCompanyResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -4147,10 +4147,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var _value = _result.data!
-        .map((dynamic i) => DetailRelatedPartiesBusCompanyResponse.fromJson(
-            i as Map<String, dynamic>))
-        .toList();
+    final _value =
+        DetailRelatedPartiesBusCompanyResponse.fromJson(_result.data!);
     return _value;
   }
 
@@ -4172,6 +4170,39 @@ class _ApiService implements ApiService {
             .compose(
               _dio.options,
               '/bus-lines',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value =
+        DetailRelatedPartiesBusCompanyResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<DetailRelatedPartiesBusCompanyResponse>
+      putDetailRelatedPartiesBusCompany(
+    String id,
+    DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailRelatedPartiesBusCompanyRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailRelatedPartiesBusCompanyResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/bus-lines/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
