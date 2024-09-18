@@ -67,17 +67,19 @@ class RelatedPartiesModel {
         bool value1 = false;
         bool value2 = false;
         bool value3 = false;
-        for (int i = 0; i < element.qualification!.length; i++) {
-          if (element.qualification![i] == '旅程管理') {
-            value1 = true;
-          }
-          if (element.qualification![i] == '通訳案内士') {
-            value2 = true;
-          }
-          if (element.qualification![i] == '医療通訳者') {
-            value3 = true;
-          }
+
+        if (element.qualification?.contains('旅程管理') == true) {
+          value1 = true;
         }
+
+        if (element.qualification?.contains('通訳案内士') == true) {
+          value2 = true;
+        }
+
+        if (element.qualification?.contains('医療通訳者') == true) {
+          value3 = true;
+        }
+
         formArray.add(
           FormGroup(
             {
@@ -259,26 +261,31 @@ class RelatedPartiesModel {
         bool english = false;
         bool korean = false;
         bool thai = false;
-        for (int i = 0; i < element.language!.length; i++) {
-          if (element.language![i] == '日本語') {
-            japanese = true;
-          }
-          if (element.language![i] == '中国語') {
-            chinese = true;
-          }
-          if (element.language![i] == 'ベトナム語') {
-            vietnamese = true;
-          }
-          if (element.language![i] == '英語') {
-            english = true;
-          }
-          if (element.language![i] == '韓国語') {
-            korean = true;
-          }
-          if (element.language![i] == 'タイ語') {
-            thai = true;
-          }
+
+        if (element.language!.contains('日本語')) {
+          japanese = true;
         }
+
+        if (element.language!.contains('中国語')) {
+          chinese = true;
+        }
+
+        if (element.language!.contains('ベトナム語')) {
+          vietnamese = true;
+        }
+
+        if (element.language!.contains('英語')) {
+          english = true;
+        }
+
+        if (element.language!.contains('韓国語')) {
+          korean = true;
+        }
+
+        if (element.language!.contains('タイ語')) {
+          thai = true;
+        }
+
         formArray.add(
           FormGroup(
             {

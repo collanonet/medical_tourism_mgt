@@ -92,7 +92,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       Row(
                                         children: [
                                           IntrinsicWidth(
-                                            stepWidth: 300,
+                                            stepWidth: 200,
                                             child: ColumnSeparated(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.stretch,
@@ -152,7 +152,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                 .appTheme.spacing.marginMedium,
                                           ),
                                           IntrinsicWidth(
-                                            stepWidth: 300,
+                                            stepWidth: 200,
                                             child: ColumnSeparated(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.stretch,
@@ -406,6 +406,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                               InkWell(
                                 onTap: () => formArray.add(FormGroup(
                                   {
+                                    'id': FormControl<String>(),
+                                    // ID
                                     'arrangePerson':
                                         FormControl<String>(value: ''),
                                     // 手配担当
@@ -422,6 +424,9 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     'phoneNumber':
                                         FormControl<String>(value: ''),
                                     // 電話番号
+                                    'qualification':
+                                        FormControl<List<String>>(value: []),
+                                    // 資格
                                     'report': FormControl<String>(value: ''),
                                     // 報告書
                                     'accommodationAvailability':
@@ -441,6 +446,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                         FormControl<bool>(value: false),
                                     'medical_interpreter':
                                         FormControl<bool>(value: false),
+                                    'tour': FormControl<String>(),
                                   },
                                 )),
                                 child: Row(
@@ -578,7 +584,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       Row(
                                         children: [
                                           IntrinsicWidth(
-                                            stepWidth: 300,
+                                            stepWidth: 200,
                                             child: ColumnSeparated(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.stretch,
@@ -639,7 +645,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                 .appTheme.spacing.marginMedium,
                                           ),
                                           IntrinsicWidth(
-                                            stepWidth: 300,
+                                            stepWidth: 200,
                                             child: ColumnSeparated(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.stretch,
@@ -1051,28 +1057,40 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                               InkWell(
                                 onTap: () => formArray.add(FormGroup(
                                   {
-                                    'dateYearFrom':
-                                        FormControl<DateTime>(), // 年月日（自）
-                                    'dateYearTo':
-                                        FormControl<DateTime>(), // 年月日（至）
-                                    'carNumber':
-                                        FormControl<String>(value: ''), // 車番
+                                    'id': FormControl<String>(),
+                                    // ID
+                                    'dateYearFrom': FormControl<DateTime>(),
+                                    // 年月日（自）
+                                    'dateYearTo': FormControl<DateTime>(),
+                                    // 年月日（至）
+                                    'carNumber': FormControl<int>(),
+                                    // 車番
                                     'vehicleType':
-                                        FormControl<String>(value: ''), // 車種
-                                    'driverNamaKanji': FormControl<String>(
-                                        value: ''), // ドライバー名（漢字）
-                                    'driverNameKana': FormControl<String>(
-                                        value: ''), // ドライバー名（カナ）
+                                        FormControl<String>(value: ''),
+                                    // 車種
+                                    'driverNamaKanji':
+                                        FormControl<String>(value: ''),
+                                    // ドライバー名（漢字）
+                                    'driverNameKana':
+                                        FormControl<String>(value: ''),
+                                    // ドライバー名（カナ）
                                     'phoneNumber':
-                                        FormControl<String>(value: ''), // 電話番号
+                                        FormControl<String>(value: ''),
+                                    // 電話番号
+                                    'language':
+                                        FormControl<List<String>>(value: []),
+                                    // 対応言語
                                     'accommodationAvailability':
-                                        FormControl<String>(value: ''), // 同宿可否
+                                        FormControl<String>(value: ''),
+                                    // 同宿可否
                                     'hotelArrangement':
-                                        FormControl<String>(value: ''), // ホテル手配
+                                        FormControl<String>(value: ''),
+                                    // ホテル手配
                                     'accommodationName':
-                                        FormControl<String>(value: ''), // 施設名
-                                    'address':
-                                        FormControl<String>(value: ''), // 所在地
+                                        FormControl<String>(value: ''),
+                                    // 施設名
+                                    'address': FormControl<String>(value: ''),
+                                    // 所在地
                                     'phoneNumber2':
                                         FormControl<String>(value: ''),
                                     //language
@@ -1083,6 +1101,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                     'english': FormControl<bool>(value: false),
                                     'korean': FormControl<bool>(value: false),
                                     'thai': FormControl<bool>(value: false),
+                                    'tour': FormControl<String>(),
                                   },
                                 )),
                                 child: Row(
@@ -1146,7 +1165,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                       Row(
                                         children: [
                                           IntrinsicWidth(
-                                            stepWidth: 300,
+                                            stepWidth: 200,
                                             child: ColumnSeparated(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.stretch,
@@ -1207,7 +1226,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                 .appTheme.spacing.marginMedium,
                                           ),
                                           IntrinsicWidth(
-                                            stepWidth: 300,
+                                            stepWidth: 200,
                                             child: ColumnSeparated(
                                               crossAxisAlignment:
                                                   CrossAxisAlignment.stretch,
@@ -1344,18 +1363,22 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                               InkWell(
                                 onTap: () => formArray.add(FormGroup(
                                   {
-                                    'dateYearFrom':
-                                        FormControl<DateTime>(), // 年月日（自）
-                                    'dateYearTo':
-                                        FormControl<DateTime>(), // 年月日（至）
+                                    'id': FormControl<String>(),
+                                    // ID
+                                    'dateYearFrom': FormControl<DateTime>(),
+                                    // 年月日（自）
+                                    'dateYearTo': FormControl<DateTime>(),
+                                    // 年月日（至）
                                     'contactPersonNamaKanji':
-                                        FormControl<String>(
-                                            value: ''), // 担当者名（漢字）
+                                        FormControl<String>(value: ''),
+                                    // 担当者名（漢字）
                                     'contactPersonNameKana':
-                                        FormControl<String>(
-                                            value: ''), // 担当者名（カナ）
+                                        FormControl<String>(value: ''),
+                                    // 担当者名（カナ）
                                     'phoneNumber':
-                                        FormControl<String>(value: ''), // 電話番号
+                                        FormControl<String>(value: ''),
+                                    // 電話番号
+                                    'tour': FormControl<String>(),
                                   },
                                 )),
                                 child: Row(
