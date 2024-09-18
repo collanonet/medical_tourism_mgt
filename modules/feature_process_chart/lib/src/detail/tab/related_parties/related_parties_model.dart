@@ -340,7 +340,7 @@ class RelatedPartiesModel {
 
       await formGroup.control('driver').value.forEach(
         (element) async {
-          List<String>? languages = [];
+          List<String> languages = [];
           if (element['japanese'] == true) {
             languages.add('日本語');
           }
