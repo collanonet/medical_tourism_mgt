@@ -9,8 +9,15 @@ import 'hotel_search_form.dart';
 import 'hotel_search_screen.dart';
 
 class HotelSearchPage extends StatelessWidget {
-  const HotelSearchPage({super.key, required this.id});
+  const HotelSearchPage({
+    super.key,
+    required this.id,
+    required this.valueChanged,
+  });
   final String? id;
+
+  final ValueChanged valueChanged;
+
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
@@ -21,7 +28,9 @@ class HotelSearchPage extends StatelessWidget {
           return Provider(
             create: (context) =>
                 GetIt.I<HotelRegistrationModel>()..fetchHotelregister(),
-            child: const HotelSearchScreen(),
+            child: HotelSearchScreen(
+              valueChanged: valueChanged,
+            ),
           );
         },
       ),
