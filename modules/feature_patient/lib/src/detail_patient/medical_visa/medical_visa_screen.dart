@@ -35,7 +35,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
         children: [
           Text(
             '本人のビザ',
-            style: context.textTheme.titleLarge,
+            style: context.textTheme.titleMedium,
           ),
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
@@ -64,394 +64,564 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
           ),
-          ReactiveForm(
-            formGroup: formGroup.control('personal') as FormGroup,
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: context.appTheme.primaryColor,
-                ),
-                borderRadius: BorderRadius.circular(
-                    context.appTheme.spacing.borderRadiusMedium),
-              ),
-              padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
-              child: Column(
+          ReactiveFormArray(
+            formArrayName: 'personal',
+            builder: (context, formArray, _) {
+              final rows = formArray.controls
+                  .map((control) => control as FormGroup)
+                  .map((currentForm) => ReactiveForm(
+                        formGroup: currentForm,
+                        child: ColumnSeparated(
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return SizedBox(
+                                height: context.appTheme.spacing.marginMedium,
+                              );
+                            },
+                            children: [
+                              Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: context.appTheme.primaryColor,
+                                  ),
+                                  borderRadius: BorderRadius.circular(context
+                                      .appTheme.spacing.borderRadiusMedium),
+                                ),
+                                padding: EdgeInsets.all(
+                                    context.appTheme.spacing.marginMedium),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: ReactiveTextField(
+                                            formControlName: 'medicalVisa',
+                                            decoration: const InputDecoration(
+                                              label: Text(
+                                                '医療ビザ',
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        Expanded(
+                                          child: ReactiveDatePicker<DateTime>(
+                                            formControlName: 'applicationDate',
+                                            firstDate: DateTime(1900),
+                                            lastDate: DateTime.now(),
+                                            builder: (BuildContext context,
+                                                ReactiveDatePickerDelegate<
+                                                        dynamic>
+                                                    picker,
+                                                Widget? child) {
+                                              return ReactiveTextField<
+                                                  DateTime>(
+                                                formControlName:
+                                                    'applicationDate',
+                                                valueAccessor:
+                                                    DateTimeValueAccessor(
+                                                  dateTimeFormat:
+                                                      DateFormat('yyyy/MM/dd'),
+                                                ),
+                                                onChanged: (value) {
+                                                  logger.d(value);
+                                                },
+                                                onSubmitted: (value) {
+                                                  logger.d(value);
+                                                },
+                                                decoration: InputDecoration(
+                                                  label: const Text(
+                                                    '申請日',
+                                                  ),
+                                                  suffixIcon: IconButton(
+                                                    icon: const Icon(
+                                                      CupertinoIcons.calendar,
+                                                      color: Colors.grey,
+                                                    ),
+                                                    onPressed:
+                                                        picker.showPicker,
+                                                  ),
+                                                ),
+                                                inputFormatters: [
+                                                  formatter.dateFormatter,
+                                                ],
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        Expanded(
+                                          child: ReactiveDatePicker<DateTime>(
+                                            formControlName: 'issueDate',
+                                            firstDate: DateTime(1900),
+                                            lastDate: DateTime.now(),
+                                            builder: (BuildContext context,
+                                                ReactiveDatePickerDelegate<
+                                                        dynamic>
+                                                    picker,
+                                                Widget? child) {
+                                              return ReactiveTextField<
+                                                  DateTime>(
+                                                formControlName: 'issueDate',
+                                                valueAccessor:
+                                                    DateTimeValueAccessor(
+                                                  dateTimeFormat:
+                                                      DateFormat('yyyy/MM/dd'),
+                                                ),
+                                                onChanged: (value) {
+                                                  logger.d(value);
+                                                },
+                                                onSubmitted: (value) {
+                                                  logger.d(value);
+                                                },
+                                                decoration: InputDecoration(
+                                                  label: const Text(
+                                                    '発行日',
+                                                  ),
+                                                  suffixIcon: IconButton(
+                                                    icon: const Icon(
+                                                      CupertinoIcons.calendar,
+                                                      color: Colors.grey,
+                                                    ),
+                                                    onPressed:
+                                                        picker.showPicker,
+                                                  ),
+                                                ),
+                                                inputFormatters: [
+                                                  formatter.dateFormatter,
+                                                ],
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: ReactiveDatePicker<DateTime>(
+                                            formControlName: 'expirationDate',
+                                            firstDate: DateTime(1900),
+                                            lastDate: DateTime.now(),
+                                            builder: (BuildContext context,
+                                                ReactiveDatePickerDelegate<
+                                                        dynamic>
+                                                    picker,
+                                                Widget? child) {
+                                              return ReactiveTextField<
+                                                  DateTime>(
+                                                formControlName:
+                                                    'expirationDate',
+                                                valueAccessor:
+                                                    DateTimeValueAccessor(
+                                                  dateTimeFormat:
+                                                      DateFormat('yyyy/MM/dd'),
+                                                ),
+                                                onChanged: (value) {
+                                                  logger.d(value);
+                                                },
+                                                onSubmitted: (value) {
+                                                  logger.d(value);
+                                                },
+                                                decoration: InputDecoration(
+                                                  label: const Text(
+                                                    '有効期限',
+                                                  ),
+                                                  suffixIcon: IconButton(
+                                                    icon: const Icon(
+                                                      CupertinoIcons.calendar,
+                                                      color: Colors.grey,
+                                                    ),
+                                                    onPressed:
+                                                        picker.showPicker,
+                                                  ),
+                                                ),
+                                                inputFormatters: [
+                                                  formatter.dateFormatter,
+                                                ],
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        Expanded(
+                                          child: ReactiveTextField(
+                                            formControlName:
+                                                'accompanyingPersonsNumber',
+                                            decoration: const InputDecoration(
+                                              label: Text(
+                                                '同伴者人数',
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        Expanded(
+                                          child: ReactiveTextField(
+                                            formControlName:
+                                                'visaIssuingOverseasEstablishments',
+                                            decoration: const InputDecoration(
+                                              label: Text(
+                                                'ビザ発行在外公館',
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: ReactiveTextField(
+                                            formControlName: 'remarks',
+                                            decoration: const InputDecoration(
+                                              label: Text(
+                                                '備考',
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        Expanded(
+                                          child: ReactiveTextField(
+                                            formControlName: 'paymentStatus',
+                                            decoration: const InputDecoration(
+                                              label: Text(
+                                                '入金状況',
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        Expanded(
+                                          child: SizedBox(
+                                            width: context
+                                                .appTheme.spacing.marginMedium,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]),
+                      ))
+                  .toList();
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'medicalVisa',
-                          decoration: const InputDecoration(
-                            label: Text(
-                              '医療ビザ',
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'applicationDate',
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime.now(),
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'applicationDate',
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              onChanged: (value) {
-                                logger.d(value);
-                              },
-                              onSubmitted: (value) {
-                                logger.d(value);
-                              },
-                              decoration: InputDecoration(
-                                label: const Text(
-                                  '申請日',
-                                ),
-                                suffixIcon: IconButton(
-                                  icon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                  onPressed: picker.showPicker,
-                                ),
-                              ),
-                              inputFormatters: [
-                                formatter.dateFormatter,
-                              ],
-                            );
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'issueDate',
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime.now(),
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'issueDate',
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              onChanged: (value) {
-                                logger.d(value);
-                              },
-                              onSubmitted: (value) {
-                                logger.d(value);
-                              },
-                              decoration: InputDecoration(
-                                label: const Text(
-                                  '発行日',
-                                ),
-                                suffixIcon: IconButton(
-                                  icon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                  onPressed: picker.showPicker,
-                                ),
-                              ),
-                              inputFormatters: [
-                                formatter.dateFormatter,
-                              ],
-                            );
-                          },
-                        ),
-                      ),
-                    ],
+                  ColumnSeparated(
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      );
+                    },
+                    children: rows.toList(),
                   ),
                   SizedBox(
                     height: context.appTheme.spacing.marginMedium,
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'expirationDate',
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime.now(),
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'expirationDate',
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                  InkWell(
+                    onTap: () => formArray.add(
+                      FormGroup(
+                        {
+                          'medicalVisa': FormControl<String>(value: ''),
+                          'applicationDate': FormControl<DateTime>(
+                            validators: [
+                              Validators.pattern(
+                                ValidatorRegExp.date,
                               ),
-                              onChanged: (value) {
-                                logger.d(value);
-                              },
-                              onSubmitted: (value) {
-                                logger.d(value);
-                              },
-                              decoration: InputDecoration(
-                                label: const Text(
-                                  '有効期限',
-                                ),
-                                suffixIcon: IconButton(
-                                  icon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                  onPressed: picker.showPicker,
-                                ),
+                            ],
+                          ),
+                          'issueDate': FormControl<DateTime>(
+                            validators: [
+                              Validators.pattern(
+                                ValidatorRegExp.date,
                               ),
-                              inputFormatters: [
-                                formatter.dateFormatter,
+                            ],
+                          ),
+                          'expirationDate': FormControl<DateTime>(
+                            validators: [
+                              Validators.pattern(
+                                ValidatorRegExp.date,
+                              ),
+                            ],
+                          ),
+                          'accompanyingPersonsNumber':
+                              FormControl<String>(value: ''),
+                          'visaIssuingOverseasEstablishments':
+                              FormControl<String>(value: ''),
+                          'remarks': FormControl<String>(value: ''),
+                          'paymentStatus': FormControl<String>(value: ''),
+                        },
+                      ),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.add_circle,
+                          color: context.appTheme.primaryColor,
+                        ),
+                        SizedBox(
+                          width: context.appTheme.spacing.marginSmall,
+                        ),
+                        Text(
+                          '本人のビザを追加',
+                          style: TextStyle(
+                              fontFamily: 'NotoSansJP',
+                              package: 'core_ui',
+                              color: context.appTheme.primaryColor),
+                        )
+                      ],
+                    ),
+                  ),
+                ],
+              );
+            },
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          Text(
+            '滞在期間',
+            style: context.textTheme.titleMedium,
+          ),
+          SizedBox(
+            height: context.appTheme.spacing.marginMedium,
+          ),
+          ReactiveFormArray(
+            formArrayName: 'stayPeriod',
+            builder: (context, formArray, _) {
+              final rows = formArray.controls
+                  .map((control) => control as FormGroup)
+                  .map(
+                    (currentForm) => ReactiveForm(
+                      formGroup: currentForm,
+                      child: ColumnSeparated(
+                        separatorBuilder: (BuildContext context, int index) {
+                          return SizedBox(
+                            height: context.appTheme.spacing.marginMedium,
+                          );
+                        },
+                        children: [
+                          Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(
+                                color: context.appTheme.primaryColor,
+                              ),
+                              borderRadius: BorderRadius.circular(
+                                  context.appTheme.spacing.borderRadiusMedium),
+                            ),
+                            padding: EdgeInsets.all(
+                                context.appTheme.spacing.marginMedium),
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Expanded(
+                                      child: ReactiveDatePicker<DateTime>(
+                                        formControlName:
+                                            'stayStartingDatePersonalReference',
+                                        firstDate: DateTime(1900),
+                                        lastDate: DateTime.now(),
+                                        builder: (BuildContext context,
+                                            ReactiveDatePickerDelegate<dynamic>
+                                                picker,
+                                            Widget? child) {
+                                          return ReactiveTextField<DateTime>(
+                                            formControlName:
+                                                'stayStartingDatePersonalReference',
+                                            valueAccessor:
+                                                DateTimeValueAccessor(
+                                              dateTimeFormat:
+                                                  DateFormat('yyyy/MM/dd'),
+                                            ),
+                                            onChanged: (value) {
+                                              logger.d(value);
+                                            },
+                                            onSubmitted: (value) {
+                                              logger.d(value);
+                                            },
+                                            decoration: InputDecoration(
+                                              label: const Text(
+                                                '滞在開始日（身元保証書）',
+                                              ),
+                                              suffixIcon: IconButton(
+                                                icon: const Icon(
+                                                  CupertinoIcons.calendar,
+                                                  color: Colors.grey,
+                                                ),
+                                                onPressed: picker.showPicker,
+                                              ),
+                                            ),
+                                            inputFormatters: [
+                                              formatter.dateFormatter,
+                                            ],
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    Expanded(
+                                      child: ReactiveDatePicker<DateTime>(
+                                        formControlName: 'stayEndDate',
+                                        firstDate: DateTime(1900),
+                                        lastDate: DateTime.now(),
+                                        builder: (BuildContext context,
+                                            ReactiveDatePickerDelegate<dynamic>
+                                                picker,
+                                            Widget? child) {
+                                          return ReactiveTextField<DateTime>(
+                                            formControlName: 'stayEndDate',
+                                            valueAccessor:
+                                                DateTimeValueAccessor(
+                                              dateTimeFormat:
+                                                  DateFormat('yyyy/MM/dd'),
+                                            ),
+                                            onChanged: (value) {
+                                              logger.d(value);
+                                            },
+                                            onSubmitted: (value) {
+                                              logger.d(value);
+                                            },
+                                            decoration: InputDecoration(
+                                              label: const Text(
+                                                '滞在終了日（身元保証書）',
+                                              ),
+                                              suffixIcon: IconButton(
+                                                icon: const Icon(
+                                                  CupertinoIcons.calendar,
+                                                  color: Colors.grey,
+                                                ),
+                                                onPressed: picker.showPicker,
+                                              ),
+                                            ),
+                                            inputFormatters: [
+                                              formatter.dateFormatter,
+                                            ],
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    Expanded(
+                                      child: SizedBox(
+                                        width: context
+                                            .appTheme.spacing.marginMedium,
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ],
-                            );
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'accompanyingPersonsNumber',
-                          decoration: const InputDecoration(
-                            label: Text(
-                              '同伴者人数',
                             ),
                           ),
-                        ),
+                        ],
                       ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName:
-                              'visaIssuingOverseasEstablishments',
-                          decoration: const InputDecoration(
-                            label: Text(
-                              'ビザ発行在外公館',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
+                    ),
+                  )
+                  .toList();
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  ColumnSeparated(
+                    separatorBuilder: (BuildContext context, int index) {
+                      return SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      );
+                    },
+                    children: rows.toList(),
                   ),
                   SizedBox(
                     height: context.appTheme.spacing.marginMedium,
                   ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'remarks',
-                          decoration: const InputDecoration(
-                            label: Text(
-                              '備考',
+                  InkWell(
+                    onTap: () => formArray.add(
+                      FormGroup({
+                        'stayStartingDatePersonalReference':
+                            FormControl<DateTime>(
+                          validators: [
+                            Validators.pattern(
+                              ValidatorRegExp.date,
                             ),
-                          ),
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'paymentStatus',
-                          decoration: const InputDecoration(
-                            label: Text(
-                              '入金状況',
+                        'stayEndDate': FormControl<DateTime>(
+                          validators: [
+                            Validators.pattern(
+                              ValidatorRegExp.date,
                             ),
-                          ),
+                          ],
                         ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
+                      }),
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.add_circle,
+                          color: context.appTheme.primaryColor,
                         ),
-                      ),
-                    ],
+                        SizedBox(
+                          width: context.appTheme.spacing.marginSmall,
+                        ),
+                        Text(
+                          '本人のビザを追加',
+                          style: TextStyle(
+                              fontFamily: 'NotoSansJP',
+                              package: 'core_ui',
+                              color: context.appTheme.primaryColor),
+                        )
+                      ],
+                    ),
                   ),
                 ],
-              ),
-            ),
+              );
+            },
           ),
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
           ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.add_circle,
-                color: context.appTheme.primaryColor,
-              ),
-              SizedBox(
-                width: context.appTheme.spacing.marginSmall,
-              ),
-              Text(
-                '本人のビザを追加',
-                style: TextStyle(
-                    fontFamily: 'NotoSansJP',
-                    package: 'core_ui',
-                    color: context.appTheme.primaryColor),
-              )
-            ],
-          ),
+          Text('日本で必要な書類', style: context.textTheme.titleMedium),
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
           ),
-          ReactiveForm(
-            formGroup: formGroup.control('stayPeriod') as FormGroup,
-            child: Container(
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: context.appTheme.primaryColor,
-                ),
-                borderRadius: BorderRadius.circular(
-                    context.appTheme.spacing.borderRadiusMedium),
-              ),
-              padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ReactiveDatePicker<DateTime>(
-                          formControlName:
-                              'stayStartingDatePersonalReference',
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime.now(),
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName:
-                                  'stayStartingDatePersonalReference',
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              onChanged: (value) {
-                                logger.d(value);
-                              },
-                              onSubmitted: (value) {
-                                logger.d(value);
-                              },
-                              decoration: InputDecoration(
-                                label: const Text(
-                                  '滞在開始日（身元保証書）',
-                                ),
-                                suffixIcon: IconButton(
-                                  icon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                  onPressed: picker.showPicker,
-                                ),
-                              ),
-                              inputFormatters: [
-                                formatter.dateFormatter,
-                              ],
-                            );
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'stayEndDate',
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime.now(),
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'stayEndDate',
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              onChanged: (value) {
-                                logger.d(value);
-                              },
-                              onSubmitted: (value) {
-                                logger.d(value);
-                              },
-                              decoration: InputDecoration(
-                                label: const Text(
-                                  '滞在終了日（身元保証書）',
-                                ),
-                                suffixIcon: IconButton(
-                                  icon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                  onPressed: picker.showPicker,
-                                ),
-                              ),
-                              inputFormatters: [
-                                formatter.dateFormatter,
-                              ],
-                            );
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: context.appTheme.spacing.marginMedium,
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.add_circle,
-                color: context.appTheme.primaryColor,
-              ),
-              SizedBox(
-                width: context.appTheme.spacing.marginSmall,
-              ),
-              Text(
-                '本人のビザを追加',
-                style: TextStyle(
-                    fontFamily: 'NotoSansJP',
-                    package: 'core_ui',
-                    color: context.appTheme.primaryColor),
-              )
-            ],
-          ),
-          SizedBox(
-            height: context.appTheme.spacing.marginMedium,
-          ),
-          const Text('日本で必要な書類'),
           ReactiveForm(
             formGroup: formGroup.control('requiredInJapan') as FormGroup,
             child: Column(
@@ -510,7 +680,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -588,7 +759,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -672,7 +844,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -756,7 +929,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -817,7 +991,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
               ],
@@ -1032,7 +1207,10 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),
-                      const Text('入国'),
+                      Text(
+                        '入国',
+                        style: context.textTheme.titleMedium,
+                      ),
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),
@@ -1115,7 +1293,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),
-                      const Text('出国'),
+                      Text('出国', style: context.textTheme.titleMedium),
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),
@@ -1255,7 +1433,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
           ),
-          const Text('ビザの取り下げ'),
+          Text('ビザの取り下げ', style: context.textTheme.titleMedium),
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
           ),
@@ -1385,7 +1563,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -1444,7 +1623,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -1526,7 +1706,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -1608,7 +1789,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -1643,8 +1825,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     ),
                     Expanded(
                       child: ReactiveDatePicker<DateTime>(
-                        formControlName:
-                            'boardingPassReturningFileUploadDate',
+                        formControlName: 'boardingPassReturningFileUploadDate',
                         firstDate: DateTime(1900),
                         lastDate: DateTime.now(),
                         builder: (BuildContext context,
@@ -1690,7 +1871,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -1725,8 +1907,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     ),
                     Expanded(
                       child: ReactiveDatePicker<DateTime>(
-                        formControlName:
-                            'certificateEligibilityFileUploadDate',
+                        formControlName: 'certificateEligibilityFileUploadDate',
                         firstDate: DateTime(1900),
                         lastDate: DateTime.now(),
                         builder: (BuildContext context,
@@ -1772,7 +1953,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
               ],
@@ -2069,8 +2251,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                             picker,
                                         Widget? child) {
                                       return ReactiveTextField<DateTime>(
-                                        formControlName:
-                                            'dateEntryIntoJapan',
+                                        formControlName: 'dateEntryIntoJapan',
                                         valueAccessor: DateTimeValueAccessor(
                                           dateTimeFormat:
                                               DateFormat('yyyy/MM/dd'),
@@ -2113,8 +2294,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                             picker,
                                         Widget? child) {
                                       return ReactiveTextField<DateTime>(
-                                        formControlName:
-                                            'dateEntryFromJapan',
+                                        formControlName: 'dateEntryFromJapan',
                                         valueAccessor: DateTimeValueAccessor(
                                           dateTimeFormat:
                                               DateFormat('yyyy/MM/dd'),
@@ -2385,40 +2565,45 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                   height: context.appTheme.spacing.marginMedium,
                 ),
                 ReactiveForm(
-                  formGroup: formGroup.control('withdrawalOfVisaOther')
-                      as FormGroup,
-                  child: Row(
+                  formGroup:
+                      formGroup.control('withdrawalOfVisaOther') as FormGroup,
+                  child: Column(
+                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      Checkbox(value: true, onChanged: (value) {}),
-                      const Text('ビザの取り下げ'),
+                      Text('ビザの取り下げ', style: context.textTheme.titleMedium),
                       SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
+                        height: context.appTheme.spacing.marginMedium,
                       ),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
+                      Row(
                         children: [
-                          const Text('理由'),
-                          Row(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.min,
                             children: [
-                              Checkbox(value: false, onChanged: (value) {}),
-                              const Text('患者死亡'),
-                              Checkbox(value: false, onChanged: (value) {}),
-                              const Text('その他'),
+                              const Text('理由'),
+                              Row(
+                                children: [
+                                  Checkbox(value: false, onChanged: (value) {}),
+                                  const Text('患者死亡'),
+                                  Checkbox(value: false, onChanged: (value) {}),
+                                  const Text('その他'),
+                                ],
+                              )
                             ],
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'remarks',
-                          decoration: const InputDecoration(
-                            label: Text('備考'),
                           ),
-                        ),
+                          SizedBox(
+                            width: context.appTheme.spacing.marginMedium,
+                          ),
+                          Expanded(
+                            child: ReactiveTextField(
+                              formControlName: 'remarks',
+                              decoration: const InputDecoration(
+                                label: Text('備考'),
+                              ),
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
@@ -2434,8 +2619,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                   height: context.appTheme.spacing.marginMedium,
                 ),
                 ReactiveForm(
-                  formGroup:
-                      formGroup.control('requiredInJapan') as FormGroup,
+                  formGroup: formGroup.control('requiredInJapan') as FormGroup,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -3011,7 +3195,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3089,7 +3274,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3149,7 +3335,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3209,7 +3396,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3270,7 +3458,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
               ],
@@ -3341,7 +3530,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3400,7 +3590,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3482,7 +3673,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3564,7 +3756,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3599,8 +3792,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     ),
                     Expanded(
                       child: ReactiveDatePicker<DateTime>(
-                        formControlName:
-                            'boardingPassReturningFileUploadDate',
+                        formControlName: 'boardingPassReturningFileUploadDate',
                         firstDate: DateTime(1900),
                         lastDate: DateTime.now(),
                         builder: (BuildContext context,
@@ -3646,7 +3838,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
                 SizedBox(
@@ -3681,8 +3874,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     ),
                     Expanded(
                       child: ReactiveDatePicker<DateTime>(
-                        formControlName:
-                            'certificateEligibilityFileUploadDate',
+                        formControlName: 'certificateEligibilityFileUploadDate',
                         firstDate: DateTime(1900),
                         lastDate: DateTime.now(),
                         builder: (BuildContext context,
@@ -3728,7 +3920,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                    ElevatedButton(
+                        onPressed: () {}, child: const Text('ファイル選択'))
                   ],
                 ),
               ],
