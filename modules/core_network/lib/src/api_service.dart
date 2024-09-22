@@ -8,6 +8,8 @@ import 'package:retrofit/retrofit.dart';
 import '../core_network.dart';
 import '../entities.dart';
 import 'endpoints.dart';
+import 'entities/request/medical_visa_after_getting_visa_request.dart';
+import 'entities/request/medical_visa_reuied_in_japan_request.dart';
 
 part 'api_service.g.dart';
 
@@ -1490,6 +1492,72 @@ abstract class ApiService {
   Future<void> deleteFileSummary(
     @Path('id') String id,
   );
+
+  //A11
+  @GET(EndPoints.MEDICAL_VISA_PERSONAL)
+  Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal();
+
+  @POST(EndPoints.MEDICAL_VISA_PERSONAL)
+  Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(
+    @Body() MedicalVisaPersonalRequest medicalVisaPersonalRequest,
+  );
+
+  @GET(EndPoints.MEDICAL_VISA_STAY_PERIOD)
+  Future<List<MedicalVisaStayPeriodResponse>> getMedicalVisaStayPeriod();
+
+  @POST(EndPoints.MEDICAL_VISA_STAY_PERIOD)
+  Future<MedicalVisaStayPeriodResponse> postMedicalVisaStayPeriod(
+    @Body() MedicalVisaStayPeriodRequest medicalVisaStayPeriodRequest,
+  );
+
+  @GET(EndPoints.MEDICAL_VISA_REQUIRED_IN_JAPAN)
+  Future<MedicalVisaRequiredInJapanResponse> getMedicalRequiredInJapan();
+
+  @POST(EndPoints.MEDICAL_VISA_REQUIRED_IN_JAPAN)
+  Future<MedicalVisaRequiredInJapanResponse> postMedicalRequiredInJapan(
+    @Body() RequiredInJapan medicalVisaRequiredInJapanRequest,
+  );
+  
+  @GET(EndPoints.MEDICAL_VISA_WITHDRAWAL)
+  Future<MedicalVisaVisaWithdrawalResponse> getMedicalVisaWithdrawal();
+
+  @POST(EndPoints.MEDICAL_VISA_WITHDRAWAL)
+  Future<MedicalVisaVisaWithdrawalResponse> postMedicalVisaWithdrawal(
+    @Body() MedicalVisaWithdrawalRequest medicalVisaVisaWithdrawalRequest,
+  );
+
+  @GET(EndPoints.MEDICAL_VISA_AFTER_GETTING_VISA)
+  Future<AfterGettingVisaResponse> getAfterGettingVisa();
+
+  @POST(EndPoints.MEDICAL_VISA_AFTER_GETTING_VISA)
+  Future<AfterGettingVisaResponse> postAfterGettingVisa(
+    @Body() AfterGettingVisaRequest afterGettingVisaRequest, 
+  );
+
+  @GET(EndPoints.MEDICAL_VISA_TRAVEL_COMPANION)
+  Future<List<MedicalVisaTravelCompanionResponse>> getMedicalVisaTravelCompanion();
+
+  @POST(EndPoints.MEDICAL_VISA_TRAVEL_COMPANION)
+  Future<MedicalVisaTravelCompanionResponse> postMedicalVisaTravelCompanion(
+    @Body() MedicalVisaTravelCompanionRequest medicalVisaTravelCompanionRequest,
+  );
+
+  @GET(EndPoints.MEDICAL_VISA_NECESSARY_IN_JAPAN)
+  Future<List<MedicalVisaNecessaryInJapanResponse>> getMedicalVisaNecessaryInJapan();
+
+  @POST(EndPoints.MEDICAL_VISA_NECESSARY_IN_JAPAN)
+  Future<MedicalVisaTravelCompanionResponse> postMedicalVisaNecessaryInJapan(
+    @Body() MedicalVisaNecessaryInJapanRequest medicalVisaNecessaryInJapanRequest,
+  );
+
+  @GET(EndPoints.MEDICAL_VISA_AFTER_GETTING_VISA_FINAL)
+  Future<MedicalVisaAfterGettingVisaResponse> getAfterGettingVisaFinal();
+
+  @POST(EndPoints.MEDICAL_VISA_AFTER_GETTING_VISA_FINAL)
+  Future<MedicalVisaAfterGettingVisaResponse> postAfterGettingVisaFinal(
+    @Body() MedicalAfterGettingVisaFinalRequest medicalAfterGettingVisaFinalRequest,
+  );
+
 }
 
 extension ApiServiceExts on ApiService {

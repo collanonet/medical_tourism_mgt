@@ -7811,6 +7811,470 @@ class _ApiService implements ApiService {
         ))));
   }
 
+  @override
+  Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<MedicalVisaPersonalResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/personal',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var _value = _result.data!
+        .map((dynamic i) =>
+            MedicalVisaPersonalResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(
+      MedicalVisaPersonalRequest medicalVisaPersonalRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalVisaPersonalRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaPersonalResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/personal',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaPersonalResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<List<MedicalVisaStayPeriodResponse>> getMedicalVisaStayPeriod() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<MedicalVisaStayPeriodResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/stay-period',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var _value = _result.data!
+        .map((dynamic i) =>
+            MedicalVisaStayPeriodResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaStayPeriodResponse> postMedicalVisaStayPeriod(
+      MedicalVisaStayPeriodRequest medicalVisaStayPeriodRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalVisaStayPeriodRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaStayPeriodResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/stay-period',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaStayPeriodResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaRequiredInJapanResponse> getMedicalRequiredInJapan() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaRequiredInJapanResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/required-in-japan',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaRequiredInJapanResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaRequiredInJapanResponse> postMedicalRequiredInJapan(
+      RequiredInJapan medicalVisaRequiredInJapanRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalVisaRequiredInJapanRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaRequiredInJapanResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/required-in-japan',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaRequiredInJapanResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaVisaWithdrawalResponse> getMedicalVisaWithdrawal() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaVisaWithdrawalResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/withdrawal',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaVisaWithdrawalResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaVisaWithdrawalResponse> postMedicalVisaWithdrawal(
+      MedicalVisaWithdrawalRequest medicalVisaVisaWithdrawalRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalVisaVisaWithdrawalRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaVisaWithdrawalResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/withdrawal',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaVisaWithdrawalResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<AfterGettingVisaResponse> getAfterGettingVisa() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AfterGettingVisaResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/after-getting-visa',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = AfterGettingVisaResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<AfterGettingVisaResponse> postAfterGettingVisa(
+      AfterGettingVisaRequest afterGettingVisaRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(afterGettingVisaRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AfterGettingVisaResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/after-getting-visa',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = AfterGettingVisaResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<List<MedicalVisaTravelCompanionResponse>>
+      getMedicalVisaTravelCompanion() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<MedicalVisaTravelCompanionResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/travel-companion',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var _value = _result.data!
+        .map((dynamic i) => MedicalVisaTravelCompanionResponse.fromJson(
+            i as Map<String, dynamic>))
+        .toList();
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaTravelCompanionResponse> postMedicalVisaTravelCompanion(
+      MedicalVisaTravelCompanionRequest
+          medicalVisaTravelCompanionRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalVisaTravelCompanionRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaTravelCompanionResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/travel-companion',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaTravelCompanionResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<List<MedicalVisaNecessaryInJapanResponse>>
+      getMedicalVisaNecessaryInJapan() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<MedicalVisaNecessaryInJapanResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'necessary-in-japan',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var _value = _result.data!
+        .map((dynamic i) => MedicalVisaNecessaryInJapanResponse.fromJson(
+            i as Map<String, dynamic>))
+        .toList();
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaTravelCompanionResponse> postMedicalVisaNecessaryInJapan(
+      MedicalVisaNecessaryInJapanRequest
+          medicalVisaNecessaryInJapanRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalVisaNecessaryInJapanRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaTravelCompanionResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'necessary-in-japan',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaTravelCompanionResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaAfterGettingVisaResponse> getAfterGettingVisaFinal() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaAfterGettingVisaResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/after-getting-visa-final',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaAfterGettingVisaResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaAfterGettingVisaResponse> postAfterGettingVisaFinal(
+      MedicalAfterGettingVisaFinalRequest
+          medicalAfterGettingVisaFinalRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = medicalAfterGettingVisaFinalRequest;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaAfterGettingVisaResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/after-getting-visa-final',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaAfterGettingVisaResponse.fromJson(_result.data!);
+    return _value;
+  }
+
   RequestOptions _setStreamType<T>(RequestOptions requestOptions) {
     if (T != dynamic &&
         !(requestOptions.responseType == ResponseType.bytes ||

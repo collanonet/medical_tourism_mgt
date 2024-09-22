@@ -13,9 +13,9 @@ import 'src/detail/detail_process_chart_model.dart' as _i3;
 import 'src/detail/tab/facility/facility_model.dart' as _i5;
 import 'src/detail/tab/hotel_registration/hotel_registration_model.dart' as _i6;
 import 'src/detail/tab/itinerary/itinerary_model.dart' as _i7;
-import 'src/detail/tab/related_parties/related_parties_model.dart' as _i8;
-import 'src/itinerary_simplified/itinerary_simplified_model.dart' as _i9;
-import 'src/process_chart_model.dart' as _i10;
+import 'src/detail/tab/related_parties/related_parties_model.dart' as _i10;
+import 'src/itinerary_simplified/itinerary_simplified_model.dart' as _i8;
+import 'src/process_chart_model.dart' as _i9;
 
 class FeatureProcessChartPackageModule extends _i1.MicroPackageModule {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -29,11 +29,11 @@ class FeatureProcessChartPackageModule extends _i1.MicroPackageModule {
         processChartRepository: gh<_i4.ProcessChartRepository>()));
     gh.factory<_i7.ItineraryModel>(() => _i7.ItineraryModel(
         processChartRepository: gh<_i4.ProcessChartRepository>()));
-    gh.factory<_i8.RelatedPartiesModel>(() => _i8.RelatedPartiesModel(
+    gh.factory<_i8.ItinerarySimplifiedModel>(() => _i8.ItinerarySimplifiedModel(
         processChartRepository: gh<_i4.ProcessChartRepository>()));
-    gh.factory<_i9.ItinerarySimplifiedModel>(() => _i9.ItinerarySimplifiedModel(
+    gh.factory<_i9.ProcessChartModel>(() => _i9.ProcessChartModel(
         processChartRepository: gh<_i4.ProcessChartRepository>()));
-    gh.factory<_i10.ProcessChartModel>(() => _i10.ProcessChartModel(
+    gh.factory<_i10.RelatedPartiesModel>(() => _i10.RelatedPartiesModel(
         processChartRepository: gh<_i4.ProcessChartRepository>()));
   }
 }
