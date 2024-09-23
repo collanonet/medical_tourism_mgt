@@ -1517,7 +1517,7 @@ abstract class ApiService {
   Future<MedicalVisaRequiredInJapanResponse> postMedicalRequiredInJapan(
     @Body() RequiredInJapan medicalVisaRequiredInJapanRequest,
   );
-  
+
   @GET(EndPoints.MEDICAL_VISA_WITHDRAWAL)
   Future<MedicalVisaVisaWithdrawalResponse> getMedicalVisaWithdrawal();
 
@@ -1531,11 +1531,12 @@ abstract class ApiService {
 
   @POST(EndPoints.MEDICAL_VISA_AFTER_GETTING_VISA)
   Future<AfterGettingVisaResponse> postAfterGettingVisa(
-    @Body() AfterGettingVisaRequest afterGettingVisaRequest, 
+    @Body() AfterGettingVisaRequest afterGettingVisaRequest,
   );
 
   @GET(EndPoints.MEDICAL_VISA_TRAVEL_COMPANION)
-  Future<List<MedicalVisaTravelCompanionResponse>> getMedicalVisaTravelCompanion();
+  Future<List<MedicalVisaTravelCompanionResponse>>
+      getMedicalVisaTravelCompanion();
 
   @POST(EndPoints.MEDICAL_VISA_TRAVEL_COMPANION)
   Future<MedicalVisaTravelCompanionResponse> postMedicalVisaTravelCompanion(
@@ -1543,11 +1544,13 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.MEDICAL_VISA_NECESSARY_IN_JAPAN)
-  Future<List<MedicalVisaNecessaryInJapanResponse>> getMedicalVisaNecessaryInJapan();
+  Future<List<MedicalVisaNecessaryInJapanResponse>>
+      getMedicalVisaNecessaryInJapan();
 
   @POST(EndPoints.MEDICAL_VISA_NECESSARY_IN_JAPAN)
   Future<MedicalVisaTravelCompanionResponse> postMedicalVisaNecessaryInJapan(
-    @Body() MedicalVisaNecessaryInJapanRequest medicalVisaNecessaryInJapanRequest,
+    @Body()
+    MedicalVisaNecessaryInJapanRequest medicalVisaNecessaryInJapanRequest,
   );
 
   @GET(EndPoints.MEDICAL_VISA_AFTER_GETTING_VISA_FINAL)
@@ -1555,9 +1558,73 @@ abstract class ApiService {
 
   @POST(EndPoints.MEDICAL_VISA_AFTER_GETTING_VISA_FINAL)
   Future<MedicalVisaAfterGettingVisaResponse> postAfterGettingVisaFinal(
-    @Body() MedicalAfterGettingVisaFinalRequest medicalAfterGettingVisaFinalRequest,
+    @Body()
+    MedicalAfterGettingVisaFinalRequest medicalAfterGettingVisaFinalRequest,
   );
 
+  // A13
+  @GET(EndPoints.INVOICE)
+  Future<List<MedicalInvoiceResponse>> getInvoices(
+    @Query('medicalRecord') String? medicalRecord,
+  );
+
+  @GET('${EndPoints.INVOICE}/medicalRecord/{medicalRecordId}')
+  Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(
+    @Path('medicalRecordId') String medicalRecordId,
+  );
+
+  @POST(EndPoints.INVOICE)
+  Future<MedicalInvoiceResponse> postInvoice(
+    @Body() MedicalInvoiceRequest medicalInvoiceRequest,
+  );
+
+  @GET('${EndPoints.INVOICE}/{id}')
+  Future<MedicalInvoiceResponse> getInvoiceById(
+    @Path('id') String id,
+  );
+
+  @PUT('${EndPoints.INVOICE}/{id}')
+  Future<MedicalInvoiceResponse> putInvoice(
+    @Path('id') String id,
+    @Body() MedicalInvoiceRequest medicalInvoiceRequest,
+  );
+
+  @DELETE('${EndPoints.INVOICE}/{id}')
+  Future<void> deleteInvoice(
+    @Path('id') String id,
+  );
+
+  // A15
+  @GET(EndPoints.QUOTATION)
+  Future<List<MedicalQuotationResponse>> getQuotations(
+    @Query('medicalRecord') String? medicalRecord,
+  );
+
+  @GET('${EndPoints.QUOTATION}/medicalRecord/{medicalRecordId}')
+  Future<MedicalQuotationResponse> getQuotationsByMedicalRecordId(
+    @Path('medicalRecordId') String medicalRecordId,
+  );
+
+  @POST(EndPoints.QUOTATION)
+  Future<MedicalQuotationResponse> postQuotation(
+    @Body() MedicalQuotationRequest medicalQuotationRequest,
+  );
+
+  @GET('${EndPoints.QUOTATION}/{id}')
+  Future<MedicalQuotationResponse> getQuotationById(
+    @Path('id') String id,
+  );
+
+  @PUT('${EndPoints.QUOTATION}/{id}')
+  Future<MedicalQuotationResponse> putQuotation(
+    @Path('id') String id,
+    @Body() MedicalQuotationRequest medicalQuotationRequest,
+  );
+
+  @DELETE('${EndPoints.QUOTATION}/{id}')
+  Future<void> deleteQuotation(
+    @Path('id') String id,
+  );
 }
 
 extension ApiServiceExts on ApiService {

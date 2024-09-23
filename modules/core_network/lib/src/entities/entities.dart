@@ -69,3 +69,7 @@ export 'memo_material_hospital_response.dart';
 export 'application_treament_request.dart';
 export 'medical_record_file_summary_request.dart';
 export 'medical_record_file_summary_response.dart';
+export 'medical_invoice_request.dart';
+export 'medical_invoice_response.dart';
+export 'medical_quotation_request.dart';
+export 'medical_quotation_response.dart';

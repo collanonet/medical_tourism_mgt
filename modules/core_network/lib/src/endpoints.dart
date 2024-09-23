@@ -257,4 +257,10 @@ class EndPoints {
   static const MEDICAL_VISA_NECESSARY_IN_JAPAN = 'necessary-in-japan';
   static const MEDICAL_VISA_AFTER_GETTING_VISA_FINAL = '/after-getting-visa-final';
 
+
+  // A13
+  static const INVOICE = '/invoices';
+
+  // A15
+  static const QUOTATION = '/quotations';
 }
