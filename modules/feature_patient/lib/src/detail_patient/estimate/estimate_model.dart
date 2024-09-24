@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:pdf/widgets.dart' as pw;
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
@@ -100,11 +101,7 @@ class EstimateModel {
         hospitalRecord: formGroup.control('hospitalRecord').value,
       );
 
-
-      String html = generateHtmlFromQuotation(
-        request,
-      );
-      Uint8List? pathFile = await generatePdfFromHtml(html);
+      Uint8List? pathFile = await generatePdfFromQuotation(request);
       String? fileName;
 
       if (pathFile != null) {
@@ -151,88 +148,131 @@ class EstimateModel {
   }
 }
 
-String generateHtmlFromQuotation(MedicalQuotationRequest request) {
-  final headerInfo = '''
-    <h1>見積書</h1>
-    <p><strong>見積番号:</strong> ${request.quotationNumber ?? ''}</p>
-    <p><strong>見積日:</strong> ${request.quotationDate != null ? Dates.formatFullDate(request.quotationDate!) : ''}</p>
-    <p><strong>担当者:</strong> ${request.contact ?? ''}</p>
-    <p><strong>登録番号:</strong> ${request.registrationNumber ?? ''}</p>
-    <p><strong>件名:</strong> ${request.subject ?? ''}</p>
-    <p><strong>合計金額:</strong> ${request.totalAmount ?? ''}</p>
-    <p><strong>有効期限:</strong> ${request.validityPeriod != null ? Dates.formatFullDate(request.validityPeriod!) : ''}</p>
-    <p><strong>備考:</strong> ${request.remarks ?? ''}</p>
-  ''';
+Future<Uint8List?> generatePdfFromQuotation(
+    MedicalQuotationRequest request) async {
+  final pdf = pw.Document();
+  final Uint8List fontData =
+      File('assets/fonts/NotoSansJPRegular.ttf').readAsBytesSync();
+  final ttf = pw.Font.ttf(fontData.buffer.asByteData());
+  pdf.addPage(
+    pw.MultiPage(
+      build: (context) => [
+        pw.Header(
+          level: 0,
+          child: pw.Text(
+            '見積書',
+            style: pw.TextStyle(
+              font: ttf,
+            ),
+          ),
+        ),
+        pw.Text(
+          '見積番号: ${request.quotationNumber ?? ''}',
+          style: pw.TextStyle(
+            font: ttf,
+          ),
+        ),
+        pw.Text(
+          '見積日: ${request.quotationDate != null ? Dates.formatFullDate(request.quotationDate!) : ''}',
+          style: pw.TextStyle(
+            font: ttf,
+          ),
+        ),
+        pw.Text(
+          '担当者: ${request.contact ?? ''}',
+          style: pw.TextStyle(
+            font: ttf,
+          ),
+        ),
+        pw.Text(
+          '登録番号: ${request.registrationNumber ?? ''}',
+          style: pw.TextStyle(
+            font: ttf,
+          ),
+        ),
+        pw.Text(
+          '件名: ${request.subject ?? ''}',
+          style: pw.TextStyle(
+            font: ttf,
+          ),
+        ),
+        pw.Text(
+          '合計金額: ${request.totalAmount ?? ''}',
+          style: pw.TextStyle(
+            font: ttf,
+          ),
+        ),
+        pw.Text(
+          '有効期限: ${request.validityPeriod != null ? Dates.formatFullDate(request.validityPeriod!) : ''}',
+          style: pw.TextStyle(
+            font: ttf,
+          ),
+        ),
+        pw.Text(
+          '備考: ${request.remarks ?? ''}',
+          style: pw.TextStyle(
+            font: ttf,
+          ),
+        ),
+        pw.SizedBox(height: 20),
+        pw.TableHelper.fromTextArray(
+          headers: ['税率', '税抜合線(門)', '消費税(円)', '合計金額(円)'],
+          headerStyle: pw.TextStyle(
+            font: ttf,
+          ),
+          oddCellStyle: pw.TextStyle(
+            font: ttf,
+          ),
+          cellStyle: pw.TextStyle(
+            font: ttf,
+          ),
+          data: request.totalPayment
+                  ?.map((payment) => [
+                        payment.taxRate ?? '',
+                        payment.amountExcludingTaxInYen ?? '',
+                        payment.consumptionTaxAmountInYen ?? '',
+                        (payment.amountExcludingTaxInYen ?? 0) +
+                            (payment.consumptionTaxAmountInYen ?? 0),
+                      ])
+                  .toList() ??
+              [],
+        ),
+        pw.SizedBox(height: 20),
+        pw.TableHelper.fromTextArray(
+          headers: ['取引日', '内訳', '数量', '单位', '単価', '金額', '税率'],
+          headerStyle: pw.TextStyle(
+            font: ttf,
+          ),
+          oddCellStyle: pw.TextStyle(
+            font: ttf,
+          ),
+          cellStyle: pw.TextStyle(
+            font: ttf,
+          ),
+          data: request.item
+                  ?.map((item) => [
+                        item.transactionDate != null
+                            ? Dates.formatFullDate(item.transactionDate!)
+                            : '',
+                        item.details ?? '',
+                        item.quantity ?? '',
+                        item.unit ?? '',
+                        item.unitPrice ?? '',
+                        item.amount ?? '',
+                        item.taxRate ?? '',
+                      ])
+                  .toList() ??
+              [],
+        ),
+      ],
+    ),
+  );
 
-  const paymentTableHeader = '''
-    <table border="1">
-      <tr>
-        <th>税率</th>
-        <th>税抜合線(門)</th>
-        <th>消費税(円)</th>
-        <th>合計金額(円)</th>
-      </tr>
-  ''';
-
-  final paymentTableRows = request.totalPayment?.map((payment) {
-    return '''
-      <tr>
-        <td>${payment.taxRate ?? ''}</td>
-        <td>${payment.amountExcludingTaxInYen ?? ''}</td>
-        <td>${payment.consumptionTaxAmountInYen ?? ''}</td>
-        <td>${(payment.amountExcludingTaxInYen ?? 0) + (payment.consumptionTaxAmountInYen ?? 0)}</td>
-      </tr>
-    ''';
-  }).join();
-
-  final paymentTable = '''
-    $paymentTableHeader
-    $paymentTableRows
-    </table>
-  ''';
-
-  const itemTableHeader = '''
-    <table border="1">
-      <tr>
-        <th>取引日</th>
-        <th>内訳</th>
-        <th>数量</th>
-        <th>单位</th>
-        <th>単価</th>
-        <th>金額</th>
-        <th>税率</th>
-      </tr>
-  ''';
-
-  final itemTableRows = request.item?.map((item) {
-    return '''
-      <tr>
-        <td>${item.transactionDate != null ? Dates.formatFullDate(item.transactionDate!) : ''}</td>
-        <td>${item.details ?? ''}</td>
-        <td>${item.quantity ?? ''}</td>
-        <td>${item.unit ?? ''}</td>
-        <td>${item.unitPrice ?? ''}</td>
-        <td>${item.amount ?? ''}</td>
-        <td>${item.taxRate ?? ''}</td>
-      </tr>
-    ''';
-  }).join();
-
-  final itemTable = '''
-    $itemTableHeader
-    $itemTableRows
-    </table>
-  ''';
-
-  return '''
-    <html>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <body>
-        $headerInfo
-        $paymentTable
-        $itemTable
-      </body>
-    </html>
-  ''';
+  try {
+    Uint8List pdfBytes = await pdf.save();
+    return pdfBytes;
+  } catch (e) {
+    print(e);
+    return null;
+  }
 }

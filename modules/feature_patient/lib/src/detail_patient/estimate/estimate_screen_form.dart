@@ -123,14 +123,14 @@ class EstimateScreenForm extends StatelessWidget {
           formControlName: 'remarks',
           minLines: 1,
           maxLines: 3,
-          decoration: InputDecoration(labelText: '備考	'),
+          decoration: const InputDecoration(labelText: '備考	'),
         ),
         RowSeparated(
           crossAxisAlignment: CrossAxisAlignment.start,
           separatorBuilder: (BuildContext context, int index) {
             return SizedBox(width: context.appTheme.spacing.formSpacing);
           },
-          children: [
+          children: const [
             IntrinsicWidth(
               stepWidth: 250,
               child: Text('税率'),
