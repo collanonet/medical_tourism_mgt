@@ -118,7 +118,7 @@ String generateHtmlFromInvoice(MedicalInvoiceRequest request) {
   final headerInfo = '''
     <h1>Invoice Details</h1>
     <p><strong>Invoice Number:</strong> ${request.invoiceNumber}</p>
-    <p><strong>Invoice Date:</strong> ${request.invoiceDate}</p>
+    <p><strong>Invoice Date:</strong> ${request.invoiceDate != null ? Dates.formatFullDate(request.invoiceDate!) : request.invoiceDate}</p>
     <p><strong>Registration Number:</strong> ${request.registrationNumber}</p>
     <p><strong>Subject:</strong> ${request.subject}</p>
     <p><strong>Amount Billed:</strong> ${request.amountBilled}</p>
@@ -171,7 +171,7 @@ String generateHtmlFromInvoice(MedicalInvoiceRequest request) {
   final itemTableRows = request.item?.map((item) {
         return '''
       <tr>
-        <td>${item.transactionDate}</td>
+        <td>${Dates.formatFullDate(item.transactionDate)}</td>
         <td>${item.details ?? ''}</td>
         <td>${item.quantity}</td>
         <td>${item.unit}</td>
