@@ -22,250 +22,262 @@ class StatementScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-        valueListenable: context.watch<StatementModel>().medicalInvoiceData,
-        builder: (context, value, _) {
-          return Skeletonizer(
-            enabled: value.loading,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  SizedBox(
-                    height: context.appTheme.spacing.marginMedium,
-                  ),
-                  Row(
+      valueListenable: context.watch<StatementModel>().medicalInvoiceData,
+      builder: (context, value, _) {
+        return Skeletonizer(
+          enabled: value.loading,
+          child: Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Checkbox(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                          side: const BorderSide(color: Colors.grey),
-                        ),
-                        checkColor: Colors.white,
-                        value: false,
-                        onChanged: (value) {},
+                      SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
                       ),
-                      Expanded(
-                          child: Text(
-                        '書類番号', // Document Number
-                        style: context.textTheme.bodySmall,
-                      )),
-                      Expanded(
-                          child: Text(
-                        '種別', // type
-                        style: context.textTheme.bodySmall,
-                      )),
-                      Expanded(
-                          child: Text(
-                        '宛先', // address
-                        style: context.textTheme.bodySmall,
-                      )),
-                      Expanded(
-                          child: Text(
-                        '発行日', // Issue date
-                        style: context.textTheme.bodySmall,
-                      )),
-                      Expanded(
-                          // flex: 2,
-                          child: Text(
-                        '件名', // subject
-                        style: context.textTheme.bodySmall,
-                      )),
-                      Expanded(
-                          child: Text(
-                        'エージェントへ開示', // Disclosure to Agent
-                        style: context.textTheme.bodySmall,
-                      )),
-                      Expanded(
-                          child: Text(
-                        '患者へ開示', // Disclosure to patients
-                        style: context.textTheme.bodySmall,
-                      )),
-                      Expanded(
-                          child: Text(
-                        '実績反映', // Reflecting performance
-                        style: context.textTheme.bodySmall,
-                      )),
-                      Expanded(
-                          child: SizedBox(
-                              width: context.appTheme.spacing.marginMedium)),
-                    ],
-                  ),
-                  const Divider(),
-                  ListView.separated(
-                    shrinkWrap: true,
-                    itemCount: value.data?.length ?? 0,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (BuildContext context, int index) {
-                      var data = value.data?[index];
-                      return InkWell(
-                        onTap: data?.fileName != null
-                            ? () {
-                                openUrlInBrowser(fileName: data!.fileName!);
-                              }
-                            : null,
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(vertical: 4),
-                          child: Row(
-                            children: [
-                              Checkbox(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                  side: const BorderSide(color: Colors.grey),
-                                ),
-                                checkColor: Colors.white,
-                                value: false,
-                                onChanged: (value) {},
-                              ),
-                              Expanded(
-                                  child: Text(
-                                data?.invoiceNumber ?? '',
-                                style: context.textTheme.bodySmall,
-                              )),
-                              Expanded(child: SizedBox()
-                                  //     Row(
-                                  //   children: [
-                                  //     Container(
-                                  //       padding: EdgeInsets.symmetric(
-                                  //         horizontal: context
-                                  //             .appTheme.spacing.marginExtraSmall,
-                                  //         vertical: context
-                                  //             .appTheme.spacing.marginExtraSmall,
-                                  //       ),
-                                  //       decoration: BoxDecoration(
-                                  //         border: Border.all(
-                                  //           color: Colors.red,
-                                  //         ),
-                                  //         borderRadius: BorderRadius.circular(
-                                  //             context.appTheme.spacing
-                                  //                 .borderRadiusMedium),
-                                  //       ),
-                                  //       child: Text(
-                                  //         '見積書',
-                                  //         style:
-                                  //             context.textTheme.bodySmall?.copyWith(
-                                  //           color: Colors.red,
-                                  //         ),
-                                  //       ),
-                                  //     ),
-                                  //   ],
-                                  // ),
-                                  ),
-                              Expanded(
-                                  child: Text(
-                                '--',
-                                style: context.textTheme.bodySmall,
-                              )),
-                              Expanded(
-                                  child: Text(
-                                data?.invoiceDate != null
-                                    ? Dates.formatFullDate(data!.invoiceDate!)
-                                    : '',
-                                style: context.textTheme.bodySmall,
-                              )),
-                              Expanded(
-                                  //flex: 2,
-                                  child: Text(
-                                data?.subject ?? '',
-                                style: context.textTheme.bodySmall,
-                              )),
-                              Expanded(
-                                  child: Text(
-                                '--',
-                                style: context.textTheme.bodySmall,
-                              )),
-                              Expanded(
-                                  child: Text(
-                                '--',
-                                style: context.textTheme.bodySmall,
-                              )),
-                              Expanded(
-                                  child: Text(
-                                '--',
-                                style: context.textTheme.bodySmall,
-                              )),
-                              Expanded(
-                                child: ElevatedButton(
-                                  onPressed: data?.fileName != null
-                                      ? () {
-                                          openUrlInBrowser(
-                                              fileName: data!.fileName!);
-                                        }
-                                      : null,
-                                  child: const Text(
-                                    '請求書を発行する',
-                                    style: TextStyle(fontSize: 10),
-                                  ),
-                                ),
-                              ),
-                            ],
+                      Row(
+                        children: [
+                          Checkbox(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4),
+                              side: const BorderSide(color: Colors.grey),
+                            ),
+                            checkColor: Colors.white,
+                            value: false,
+                            onChanged: (value) {},
                           ),
-                        ),
-                      );
-                    },
-                    separatorBuilder: (BuildContext context, int index) {
-                      return const Divider(
-                        thickness: 0.5,
-                      );
-                    },
-                  ),
-                  SizedBox(
-                    height: context.appTheme.spacing.marginMedium,
-                  ),
-                  const StatementScreenForm(),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      ValueListenableListener(
-                        valueListenable:
-                            context.read<StatementModel>().submitData,
-                        onListen: () {
-                          var data =
-                              context.read<StatementModel>().submitData.value;
-
-                          if (data.hasData) {
-                            snackBarWidget(
-                              message: '正常に保存されました',
-                              prefixIcon: const Icon(Icons.check_circle,
-                                  color: Colors.white),
-                            );
-                          }
-
-                          if (data.hasError) {
-                            snackBarWidget(
-                              message: '保存できませんでした。 もう一度試してください。',
-                              backgroundColor: Colors.red,
-                              prefixIcon:
-                                  const Icon(Icons.error, color: Colors.white),
-                            );
-                          }
+                          Expanded(
+                              child: Text(
+                            '書類番号', // Document Number
+                            style: context.textTheme.bodySmall,
+                          )),
+                          Expanded(
+                              child: Text(
+                            '種別', // type
+                            style: context.textTheme.bodySmall,
+                          )),
+                          Expanded(
+                              child: Text(
+                            '宛先', // address
+                            style: context.textTheme.bodySmall,
+                          )),
+                          Expanded(
+                              child: Text(
+                            '発行日', // Issue date
+                            style: context.textTheme.bodySmall,
+                          )),
+                          Expanded(
+                              // flex: 2,
+                              child: Text(
+                            '件名', // subject
+                            style: context.textTheme.bodySmall,
+                          )),
+                          Expanded(
+                              child: Text(
+                            'エージェントへ開示', // Disclosure to Agent
+                            style: context.textTheme.bodySmall,
+                          )),
+                          Expanded(
+                              child: Text(
+                            '患者へ開示', // Disclosure to patients
+                            style: context.textTheme.bodySmall,
+                          )),
+                          Expanded(
+                              child: Text(
+                            '実績反映', // Reflecting performance
+                            style: context.textTheme.bodySmall,
+                          )),
+                          Expanded(
+                              child: SizedBox(
+                                  width:
+                                      context.appTheme.spacing.marginMedium)),
+                        ],
+                      ),
+                      const Divider(),
+                      ListView.separated(
+                        shrinkWrap: true,
+                        itemCount: value.data?.length ?? 0,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (BuildContext context, int index) {
+                          var data = value.data?[index];
+                          return InkWell(
+                            onTap: data?.fileName != null
+                                ? () {
+                                    openUrlInBrowser(fileName: data!.fileName!);
+                                  }
+                                : null,
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 4),
+                              child: Row(
+                                children: [
+                                  Checkbox(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(4),
+                                      side:
+                                          const BorderSide(color: Colors.grey),
+                                    ),
+                                    checkColor: Colors.white,
+                                    value: false,
+                                    onChanged: (value) {},
+                                  ),
+                                  Expanded(
+                                      child: Text(
+                                    data?.invoiceNumber ?? '',
+                                    style: context.textTheme.bodySmall,
+                                  )),
+                                  Expanded(child: SizedBox()
+                                      //     Row(
+                                      //   children: [
+                                      //     Container(
+                                      //       padding: EdgeInsets.symmetric(
+                                      //         horizontal: context
+                                      //             .appTheme.spacing.marginExtraSmall,
+                                      //         vertical: context
+                                      //             .appTheme.spacing.marginExtraSmall,
+                                      //       ),
+                                      //       decoration: BoxDecoration(
+                                      //         border: Border.all(
+                                      //           color: Colors.red,
+                                      //         ),
+                                      //         borderRadius: BorderRadius.circular(
+                                      //             context.appTheme.spacing
+                                      //                 .borderRadiusMedium),
+                                      //       ),
+                                      //       child: Text(
+                                      //         '見積書',
+                                      //         style:
+                                      //             context.textTheme.bodySmall?.copyWith(
+                                      //           color: Colors.red,
+                                      //         ),
+                                      //       ),
+                                      //     ),
+                                      //   ],
+                                      // ),
+                                      ),
+                                  Expanded(
+                                      child: Text(
+                                    '--',
+                                    style: context.textTheme.bodySmall,
+                                  )),
+                                  Expanded(
+                                      child: Text(
+                                    data?.invoiceDate != null
+                                        ? Dates.formatFullDate(
+                                            data!.invoiceDate!)
+                                        : '',
+                                    style: context.textTheme.bodySmall,
+                                  )),
+                                  Expanded(
+                                      //flex: 2,
+                                      child: Text(
+                                    data?.subject ?? '',
+                                    style: context.textTheme.bodySmall,
+                                  )),
+                                  Expanded(
+                                      child: Text(
+                                    '--',
+                                    style: context.textTheme.bodySmall,
+                                  )),
+                                  Expanded(
+                                      child: Text(
+                                    '--',
+                                    style: context.textTheme.bodySmall,
+                                  )),
+                                  Expanded(
+                                      child: Text(
+                                    '--',
+                                    style: context.textTheme.bodySmall,
+                                  )),
+                                  Expanded(
+                                    child: ElevatedButton(
+                                      onPressed: data?.fileName != null
+                                          ? () {
+                                              openUrlInBrowser(
+                                                  fileName: data!.fileName!);
+                                            }
+                                          : null,
+                                      child: const Text(
+                                        '請求書を発行する',
+                                        style: TextStyle(fontSize: 10),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
                         },
-                        child: ValueListenableBuilder(
-                            valueListenable:
-                                context.watch<StatementModel>().submitData,
-                            builder: (context, value, _) {
-                              return ReactiveFormConsumer(
-                                  builder: (context, formGroup, _) {
-                                return ElevatedButton(
-                                  onPressed: value.loading
-                                      ? null
-                                      : () {
-                                          context.read<StatementModel>().submit(
-                                                formGroup: formGroup,
-                                              );
-                                        },
-                                  child: WithLoadingButton(
-                                      isLoading: value.loading,
-                                      child: const Text('保存')),
-                                );
-                              });
-                            }),
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const Divider(
+                            thickness: 0.5,
+                          );
+                        },
+                      ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
+                      ),
+                      const StatementScreenForm(),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
                       ),
                     ],
+                  ),
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ValueListenableListener(
+                    valueListenable: context.read<StatementModel>().submitData,
+                    onListen: () {
+                      var data =
+                          context.read<StatementModel>().submitData.value;
+
+                      if (data.hasData) {
+                        snackBarWidget(
+                          message: '正常に保存されました',
+                          prefixIcon: const Icon(Icons.check_circle,
+                              color: Colors.white),
+                        );
+                      }
+
+                      if (data.hasError) {
+                        snackBarWidget(
+                          message: '保存できませんでした。 もう一度試してください。',
+                          backgroundColor: Colors.red,
+                          prefixIcon:
+                              const Icon(Icons.error, color: Colors.white),
+                        );
+                      }
+                    },
+                    child: ValueListenableBuilder(
+                        valueListenable:
+                            context.watch<StatementModel>().submitData,
+                        builder: (context, value, _) {
+                          return ReactiveFormConsumer(
+                              builder: (context, formGroup, _) {
+                            return ElevatedButton(
+                              onPressed: value.loading
+                                  ? null
+                                  : () {
+                                      context.read<StatementModel>().submit(
+                                            formGroup: formGroup,
+                                          );
+                                    },
+                              child: WithLoadingButton(
+                                  isLoading: value.loading,
+                                  child: const Text('保存')),
+                            );
+                          });
+                        }),
                   ),
                 ],
               ),
-            ),
-          );
-        });
+            ],
+          ),
+        );
+      },
+    );
   }
 }
