@@ -31,7 +31,6 @@ class StatementModel {
 
   Future<void> initialData({
     required Patient patient,
-    String? id,
     required MedicalRecord medicalRecord,
     required FormGroup formGroup,
   }) async {
@@ -50,6 +49,7 @@ class StatementModel {
       final response = await patientRepository.getInvoices(medicalRecordId);
       medicalInvoiceData.value = AsyncData(data: response);
     } catch (e) {
+      logger.e(e);
       medicalInvoiceData.value = AsyncData(error: e);
     }
   }
@@ -62,7 +62,6 @@ class StatementModel {
     try {
       submitData.value = const AsyncData(loading: true);
 
-      logger.d('formGroup.value: ${formGroup.value}');
 
       List<ItemRequest>? items = [];
       formGroup.control('item').value.forEach((item) {
@@ -87,14 +86,13 @@ class StatementModel {
         ));
       });
 
-      logger.d('formGroup.value: ${formGroup.value}');
       MedicalInvoiceRequest request = MedicalInvoiceRequest(
-        invoiceNumber: formGroup.control('quotationNumber').value,
-        invoiceDate: formGroup.control('quotationDate').value,
+        invoiceNumber: formGroup.control('invoiceNumber').value,
+        invoiceDate: formGroup.control('invoiceDate').value,
         registrationNumber: formGroup.control('registrationNumber').value,
         subject: formGroup.control('subject').value,
-        amountBilled: formGroup.control('totalAmount').value,
-        paymentDeadline: formGroup.control('validityPeriod').value,
+        amountBilled: formGroup.control('amountBilled').value,
+        paymentDeadline: formGroup.control('paymentDeadline').value,
         bankTransferInformation:
             formGroup.control('bankTransferInformation').value,
         remarks: formGroup.control('remarks').value,
@@ -105,7 +103,6 @@ class StatementModel {
         hospitalRecord: formGroup.control('hospitalRecord').value,
       );
 
-      logger.d('request: ${request.toJson()}');
 
       String html = generateHtmlFromInvoice(
         request,
@@ -133,6 +130,7 @@ class StatementModel {
         submitData.value = const AsyncData(error: 'ファイルの作成に失敗しました');
       }
     } catch (e) {
+      logger.e(e);
       submitData.value = AsyncData(error: e);
     }
   }
@@ -148,6 +146,7 @@ class StatementModel {
         response,
       ]);
     } catch (e) {
+      logger.e(e);
       medicalInvoiceData.value = AsyncData(error: e);
     }
   }
@@ -156,14 +155,14 @@ class StatementModel {
 String generateHtmlFromInvoice(MedicalInvoiceRequest request) {
   final headerInfo = '''
     <h1>Invoice Details</h1>
-    <p><strong>Invoice Number:</strong> ${request.invoiceNumber}</p>
-    <p><strong>Invoice Date:</strong> ${request.invoiceDate != null ? Dates.formatFullDate(request.invoiceDate!) : request.invoiceDate}</p>
-    <p><strong>Registration Number:</strong> ${request.registrationNumber}</p>
-    <p><strong>Subject:</strong> ${request.subject}</p>
-    <p><strong>Amount Billed:</strong> ${request.amountBilled}</p>
-    <p><strong>Payment Deadline:</strong> ${request.paymentDeadline}</p>
-    <p><strong>Bank Transfer Information:</strong> ${request.bankTransferInformation}</p>
-    <p><strong>Remarks:</strong> ${request.remarks}</p>
+    <p><strong>Invoice Number:</strong> ${request.invoiceNumber ?? ''}</p>
+    <p><strong>Invoice Date:</strong> ${request.invoiceDate != null ? Dates.formatFullDate(request.invoiceDate!) : ''}</p>
+    <p><strong>Registration Number:</strong> ${request.registrationNumber ?? ''}</p>
+    <p><strong>Subject:</strong> ${request.subject ?? ''}</p>
+    <p><strong>Amount Billed:</strong> ${request.amountBilled ?? ''}</p>
+    <p><strong>Payment Deadline:</strong> ${request.paymentDeadline != null ? Dates.formatFullDate(request.paymentDeadline!) : ''}</p>
+    <p><strong>Bank Transfer Information:</strong> ${request.bankTransferInformation ?? ''}</p>
+    <p><strong>Remarks:</strong> ${request.remarks ?? ''}</p>
   ''';
 
   const paymentTableHeader = '''
@@ -173,15 +172,17 @@ String generateHtmlFromInvoice(MedicalInvoiceRequest request) {
         <th>Tax Rate</th>
         <th>Amount Excluding Tax (Yen)</th>
         <th>Consumption Tax Amount (Yen)</th>
+        <th>Total</th>
       </tr>
   ''';
 
   final paymentTableRows = request.totalPayment?.map((payment) {
         return '''
       <tr>
-        <td>${payment.taxRate}</td>
-        <td>${payment.amountExcludingTaxInYen}</td>
-        <td>${payment.consumptionTaxAmountInYen}</td>
+        <td>${payment.taxRate ?? ''}</td>
+        <td>${payment.amountExcludingTaxInYen ?? ''}</td>
+        <td>${payment.consumptionTaxAmountInYen ?? ''}</td>
+        <td>${(payment.amountExcludingTaxInYen ?? 0) + (payment.consumptionTaxAmountInYen ?? 0)}</td>
       </tr>
     ''';
       }).join() ??
@@ -210,13 +211,13 @@ String generateHtmlFromInvoice(MedicalInvoiceRequest request) {
   final itemTableRows = request.item?.map((item) {
         return '''
       <tr>
-        <td>${item.transactionDate != null ? Dates.formatFullDate(item.transactionDate!) : item.transactionDate}</td>
+        <td>${item.transactionDate != null ? Dates.formatFullDate(item.transactionDate!) : ''}</td>
         <td>${item.details ?? ''}</td>
-        <td>${item.quantity}</td>
-        <td>${item.unit}</td>
-        <td>${item.unitPrice}</td>
-        <td>${item.amount}</td>
-        <td>${item.taxRate}</td>
+        <td>${item.quantity ?? ''}</td>
+        <td>${item.unit ?? ''}</td>
+        <td>${item.unitPrice ?? ''}</td>
+        <td>${item.amount ?? ''}</td>
+        <td>${item.taxRate ?? ''}</td>
       </tr>
     ''';
       }).join() ??

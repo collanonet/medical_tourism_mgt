@@ -2,6 +2,8 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -13,97 +15,164 @@ class EstimateScreenForm extends StatelessWidget {
     final form = ReactiveForm.of(context) as FormGroup;
 
     return ColumnSeparated(
+      crossAxisAlignment: CrossAxisAlignment.start,
       separatorBuilder: (BuildContext context, int index) {
         return SizedBox(height: context.appTheme.spacing.formSpacing);
       },
       children: [
-        ReactiveTextField<String>(
-          formControlName: 'quotationNumber',
-          decoration: InputDecoration(labelText: 'Quotation Number'),
-        ),
-        ReactiveTextField<DateTime>(
-          formControlName: 'quotationDate',
-          decoration: InputDecoration(labelText: 'Quotation Date'),
-          readOnly: true,
-          valueAccessor: DateTimeValueAccessor(
-            dateTimeFormat: DateFormat('yyyy/MM/dd'),
-          ),
-          onTap: (value) async {
-            final date = await showDatePicker(
-              context: context,
-              initialDate: DateTime.now(),
-              firstDate: DateTime(2000),
-              lastDate: DateTime(2100),
-            );
-            if (date != null) {
-              form.control('quotationDate').value = date;
-            }
+        RowSeparated(
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(width: context.appTheme.spacing.formSpacing);
           },
+          children: [
+            IntrinsicWidth(
+              stepWidth: 250,
+              child: ReactiveTextField<String>(
+                formControlName: 'quotationNumber',
+                decoration: InputDecoration(labelText: 'Quotation Number'),
+              ),
+            ),
+            IntrinsicWidth(
+              stepWidth: 250,
+              child: ReactiveTextField<DateTime>(
+                formControlName: 'quotationDate',
+                decoration: InputDecoration(labelText: 'Quotation Date'),
+                readOnly: true,
+                valueAccessor: DateTimeValueAccessor(
+                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                ),
+                onTap: (value) async {
+                  final date = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2100),
+                  );
+                  if (date != null) {
+                    form.control('quotationDate').value = date;
+                  }
+                },
+              ),
+            ),
+            IntrinsicWidth(
+              stepWidth: 250,
+              child: ReactiveTextField<String>(
+                formControlName: 'registrationNumber',
+                decoration: InputDecoration(labelText: 'Registration Number'),
+              ),
+            ),
+          ],
         ),
-        ReactiveTextField<String>(
-          formControlName: 'registrationNumber',
-          decoration: InputDecoration(labelText: 'Registration Number'),
-        ),
-        ReactiveTextField<String>(
-          formControlName: 'subject',
-          decoration: InputDecoration(labelText: 'Subject'),
-        ),
-        ReactiveTextField<double>(
-          formControlName: 'totalAmount',
-          decoration: InputDecoration(labelText: 'Total Amount'),
-        ),
-        ReactiveTextField<DateTime>(
-          formControlName: 'validityPeriod',
-          decoration: InputDecoration(labelText: 'Validity Period'),
-          readOnly: true,
-          valueAccessor: DateTimeValueAccessor(
-            dateTimeFormat: DateFormat('yyyy/MM/dd'),
-          ),
-          onTap: (value) async {
-            final date = await showDatePicker(
-              context: context,
-              initialDate: DateTime.now(),
-              firstDate: DateTime(2000),
-              lastDate: DateTime(2100),
-            );
-            if (date != null) {
-              form.control('validityPeriod').value = date;
-            }
+        RowSeparated(
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(width: context.appTheme.spacing.formSpacing);
           },
+          children: [
+            IntrinsicWidth(
+              stepWidth: 250,
+              child: ReactiveTextField<String>(
+                formControlName: 'subject',
+                decoration: InputDecoration(labelText: 'Subject'),
+              ),
+            ),
+            IntrinsicWidth(
+              stepWidth: 250,
+              child: ReactiveTextField<double>(
+                formControlName: 'totalAmount',
+                keyboardType: TextInputType.number,
+                inputFormatters: [
+                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                ],
+                decoration: InputDecoration(labelText: 'Total Amount'),
+              ),
+            ),
+            IntrinsicWidth(
+              stepWidth: 250,
+              child: ReactiveTextField<DateTime>(
+                formControlName: 'validityPeriod',
+                decoration: InputDecoration(labelText: 'Validity Period'),
+                readOnly: true,
+                valueAccessor: DateTimeValueAccessor(
+                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                ),
+                onTap: (value) async {
+                  final date = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2100),
+                  );
+                  if (date != null) {
+                    form.control('validityPeriod').value = date;
+                  }
+                },
+              ),
+            ),
+          ],
         ),
         ReactiveTextField<String>(
           formControlName: 'remarks',
+          minLines: 1,
+          maxLines: 3,
           decoration: InputDecoration(labelText: 'Remarks'),
         ),
         // Payment Details FormArray
+        Text('Payment Details'),
         ReactiveFormArray(
           formArrayName: 'totalPayment',
           builder: (context, formArray, child) {
-            return Column(
+            return ColumnSeparated(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              separatorBuilder: (BuildContext context, int index) {
+                return SizedBox(height: context.appTheme.spacing.formSpacing);
+              },
               children: [
                 ...formArray.controls
                     .map((control) => control as FormGroup)
                     .map((currentForm) => ReactiveForm(
                           formGroup: currentForm,
-                          child: Row(
+                          child: RowSeparated(
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return SizedBox(
+                                  width: context.appTheme.spacing.formSpacing);
+                            },
                             children: [
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 250,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'taxRate',
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9]')),
+                                  ],
                                   decoration:
                                       InputDecoration(labelText: 'Tax Rate'),
                                 ),
                               ),
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 250,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'amountExcludingTaxInYen',
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9]')),
+                                  ],
                                   decoration: InputDecoration(
                                       labelText: 'Amount Excluding Tax (Yen)'),
                                 ),
                               ),
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 250,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'consumptionTaxAmountInYen',
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9]')),
+                                  ],
                                   decoration: InputDecoration(
                                       labelText:
                                           'Consumption Tax Amount (Yen)'),
@@ -115,9 +184,21 @@ class EstimateScreenForm extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     formArray.add(FormGroup({
-                      'taxRate': FormControl<double>(),
-                      'amountExcludingTaxInYen': FormControl<double>(),
-                      'consumptionTaxAmountInYen': FormControl<double>(),
+                      'taxRate': FormControl<double>(
+                        validators: [
+                          Validators.number,
+                        ],
+                      ),
+                      'amountExcludingTaxInYen': FormControl<double>(
+                        validators: [
+                          Validators.number,
+                        ],
+                      ),
+                      'consumptionTaxAmountInYen': FormControl<double>(
+                        validators: [
+                          Validators.number,
+                        ],
+                      ),
                     }));
                   },
                   child: Text('Add More Payment'),
@@ -128,18 +209,29 @@ class EstimateScreenForm extends StatelessWidget {
         ),
 
         // Item Details FormArray
+        Text('Item Details'),
         ReactiveFormArray(
           formArrayName: 'item',
           builder: (context, formArray, child) {
-            return Column(
+            return ColumnSeparated(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              separatorBuilder: (BuildContext context, int index) {
+                return SizedBox(height: context.appTheme.spacing.formSpacing);
+              },
               children: [
                 ...formArray.controls
                     .map((control) => control as FormGroup)
                     .map((currentForm) => ReactiveForm(
                           formGroup: currentForm,
-                          child: Row(
+                          child: RowSeparated(
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return SizedBox(
+                                  width: context.appTheme.spacing.formSpacing);
+                            },
                             children: [
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 250,
                                 child: ReactiveTextField<DateTime>(
                                   formControlName: 'transactionDate',
                                   decoration: const InputDecoration(
@@ -163,44 +255,70 @@ class EstimateScreenForm extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 250,
                                 child: ReactiveTextField<String>(
                                   formControlName: 'details',
                                   decoration:
                                       InputDecoration(labelText: 'Details'),
                                 ),
                               ),
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 250,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'quantity',
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9]')),
+                                  ],
                                   decoration:
                                       InputDecoration(labelText: 'Quantity'),
                                 ),
                               ),
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 250,
                                 child: ReactiveTextField<String>(
                                   formControlName: 'unit',
                                   decoration:
                                       InputDecoration(labelText: 'Unit'),
                                 ),
                               ),
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 250,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'unitPrice',
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9]')),
+                                  ],
                                   decoration:
                                       InputDecoration(labelText: 'Unit Price'),
                                 ),
                               ),
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 250,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'amount',
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9]')),
+                                  ],
                                   decoration:
                                       InputDecoration(labelText: 'Amount'),
                                 ),
                               ),
-                              Expanded(
+                              IntrinsicWidth(
+                                stepWidth: 250,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'taxRate',
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9]')),
+                                  ],
                                   decoration:
                                       InputDecoration(labelText: 'Tax Rate'),
                                 ),
@@ -211,13 +329,31 @@ class EstimateScreenForm extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     formArray.add(FormGroup({
-                      'transactionDate': FormControl<DateTime>(),
+                      'transactionDate': FormControl<DateTime>(
+                        value: DateTime.now(),
+                      ),
                       'details': FormControl<String>(),
-                      'quantity': FormControl<double>(),
+                      'quantity': FormControl<double>(
+                        validators: [
+                          Validators.number,
+                        ],
+                      ),
                       'unit': FormControl<String>(),
-                      'unitPrice': FormControl<double>(),
-                      'amount': FormControl<double>(),
-                      'taxRate': FormControl<double>(),
+                      'unitPrice': FormControl<double>(
+                        validators: [
+                          Validators.number,
+                        ],
+                      ),
+                      'amount': FormControl<double>(
+                        validators: [
+                          Validators.number,
+                        ],
+                      ),
+                      'taxRate': FormControl<double>(
+                        validators: [
+                          Validators.number,
+                        ],
+                      ),
                     }));
                   },
                   child: Text('Add More Item'),

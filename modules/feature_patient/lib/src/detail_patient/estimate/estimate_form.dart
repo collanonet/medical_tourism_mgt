@@ -8,35 +8,72 @@ FormGroup estimateForm() {
     ),
     'registrationNumber': FormControl<String>(),
     'subject': FormControl<String>(),
-    'totalAmount': FormControl<double>(),
+    'totalAmount': FormControl<double>(
+      validators: [
+        Validators.number,
+      ],
+    ),
     'validityPeriod': FormControl<DateTime>(
       value: DateTime.now(),
     ),
     'remarks': FormControl<String>(),
     'medicalRecord': FormControl<String>(
-      validators: [Validators.required],
+      validators: [
+        Validators.required,
+      ],
     ),
     'user': FormControl<String>(
-      validators: [Validators.required],
+      validators: [
+        Validators.required,
+      ],
     ),
     'hospitalRecord': FormControl<String>(),
     'totalPayment': FormArray([
       FormGroup({
-        'taxRate': FormControl<double>(),
-        'amountExcludingTaxInYen': FormControl<double>(),
-        'consumptionTaxAmountInYen': FormControl<double>(),
+        'taxRate': FormControl<double>(
+          validators: [
+            Validators.number,
+          ],
+        ),
+        'amountExcludingTaxInYen': FormControl<double>(
+          validators: [
+            Validators.number,
+          ],
+        ),
+        'consumptionTaxAmountInYen': FormControl<double>(
+          validators: [
+            Validators.number,
+          ],
+        ),
       })
     ]),
     'item': FormArray([
       FormGroup({
         'transactionDate': FormControl<DateTime>(
-          value: DateTime.now(),),
+          value: DateTime.now(),
+        ),
         'details': FormControl<String>(),
-        'quantity': FormControl<double>(),
+        'quantity': FormControl<double>(
+          validators: [
+            Validators.number,
+          ],
+        ),
         'unit': FormControl<String>(),
-        'unitPrice': FormControl<double>(),
-        'amount': FormControl<double>(),
-        'taxRate': FormControl<double>(),
+        'unitPrice': FormControl<double>(
+          validators: [
+            Validators.number,
+          ],
+        ),
+        'amount': FormControl<double>(
+          validators: [
+            Validators.number,
+          ],
+        ),
+        'taxRate': FormControl<double>(
+          validators: [
+            Validators.number,
+          ],
+        ),
       })
     ]),
   });

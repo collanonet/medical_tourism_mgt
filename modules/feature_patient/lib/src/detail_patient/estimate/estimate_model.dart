@@ -30,7 +30,6 @@ class EstimateModel {
 
   Future<void> initialData({
     required Patient patient,
-    String? id,
     required MedicalRecord medicalRecord,
     required FormGroup formGroup,
   }) async {
@@ -49,6 +48,7 @@ class EstimateModel {
       final response = await patientRepository.getQuotations(medicalRecordId);
       medicalQuotationData.value = AsyncData(data: response);
     } catch (e) {
+      logger.e(e);
       medicalQuotationData.value = AsyncData(error: e);
     }
   }
@@ -58,80 +58,78 @@ class EstimateModel {
   Future<void> submit({
     required FormGroup formGroup,
   }) async {
-    // try {
-    //   submitData.value = const AsyncData(loading: true);
+    try {
+      submitData.value = const AsyncData(loading: true);
 
-    List<ItemRequest>? items = [];
-    formGroup.control('item').value.forEach((item) {
-      items.add(ItemRequest(
-        transactionDate: item['transactionDate'],
-        details: item['details'],
-        quantity: item['quantity'],
-        unit: item['unit'],
-        unitPrice: item['unitPrice'],
-        amount: item['amount'],
-        taxRate: item['taxRate'],
-      ));
-    });
+      List<ItemRequest>? items = [];
+      formGroup.control('item').value.forEach((item) {
+        items.add(ItemRequest(
+          transactionDate: item['transactionDate'],
+          details: item['details'],
+          quantity: item['quantity'],
+          unit: item['unit'],
+          unitPrice: item['unitPrice'],
+          amount: item['amount'],
+          taxRate: item['taxRate'],
+        ));
+      });
 
-    List<TotalPaymentRequest>? totalPayment = [];
+      List<TotalPaymentRequest>? totalPayment = [];
 
-    formGroup.control('totalPayment').value.forEach((payment) {
-      totalPayment.add(TotalPaymentRequest(
-        taxRate: payment['taxRate'],
-        amountExcludingTaxInYen: payment['amountExcludingTaxInYen'],
-        consumptionTaxAmountInYen: payment['consumptionTaxAmountInYen'],
-      ));
-    });
+      formGroup.control('totalPayment').value.forEach((payment) {
+        totalPayment.add(TotalPaymentRequest(
+          taxRate: payment['taxRate'],
+          amountExcludingTaxInYen: payment['amountExcludingTaxInYen'],
+          consumptionTaxAmountInYen: payment['consumptionTaxAmountInYen'],
+        ));
+      });
 
-    logger.d('formGroup.value: ${formGroup.value}');
-    MedicalQuotationRequest request = MedicalQuotationRequest(
-      quotationNumber: formGroup.control('quotationNumber').value,
-      quotationDate: formGroup.control('quotationDate').value,
-      registrationNumber: formGroup.control('registrationNumber').value,
-      subject: formGroup.control('subject').value,
-      totalAmount: formGroup.control('totalAmount').value,
-      validityPeriod: formGroup.control('validityPeriod').value,
-      remarks: formGroup.control('remarks').value,
-      totalPayment: totalPayment,
-      item: items,
-      medicalRecord: formGroup.control('medicalRecord').value,
-      user: formGroup.control('user').value,
-      hospitalRecord: formGroup.control('hospitalRecord').value,
-    );
+      MedicalQuotationRequest request = MedicalQuotationRequest(
+        quotationNumber: formGroup.control('quotationNumber').value,
+        quotationDate: formGroup.control('quotationDate').value,
+        registrationNumber: formGroup.control('registrationNumber').value,
+        subject: formGroup.control('subject').value,
+        totalAmount: formGroup.control('totalAmount').value,
+        validityPeriod: formGroup.control('validityPeriod').value,
+        remarks: formGroup.control('remarks').value,
+        totalPayment: totalPayment,
+        item: items,
+        medicalRecord: formGroup.control('medicalRecord').value,
+        user: formGroup.control('user').value,
+        hospitalRecord: formGroup.control('hospitalRecord').value,
+      );
 
-    logger.d('request: ${request.toJson()}');
 
-    String html = generateHtmlFromQuotation(
-      request,
-    );
-    Uint8List? pathFile = await generatePdfFromHtml(html);
-    String? fileName;
+      String html = generateHtmlFromQuotation(
+        request,
+      );
+      Uint8List? pathFile = await generatePdfFromHtml(html);
+      String? fileName;
 
-    if (pathFile != null) {
-      try {
-        String base64Image = base64Encode(pathFile);
-        FileResponse fileData = await patientRepository.uploadFileBase64(
-          base64Image,
-          'quotation_${DateTime.now().timeZoneOffset}.pdf',
-        );
-        fileName = fileData.filename;
-      } catch (e) {
-        logger.e(e);
+      if (pathFile != null) {
+        try {
+          String base64Image = base64Encode(pathFile);
+          FileResponse fileData = await patientRepository.uploadFileBase64(
+            base64Image,
+            'quotation_${DateTime.now().timeZoneOffset}.pdf',
+          );
+          fileName = fileData.filename;
+        } catch (e) {
+          logger.e(e);
+        }
       }
-    }
 
-    if (fileName != null) {
-
-      await createQuotation(request: request.copyWith(fileName: fileName));
-      submitData.value = const AsyncData(data: true);
-      formGroup.reset();
-    } else {
-      submitData.value = const AsyncData(error: 'ファイルの作成に失敗しました');
+      if (fileName != null) {
+        await createQuotation(request: request.copyWith(fileName: fileName));
+        submitData.value = const AsyncData(data: true);
+        formGroup.reset();
+      } else {
+        submitData.value = const AsyncData(error: 'ファイルの作成に失敗しました');
+      }
+    } catch (e) {
+      logger.e(e);
+      submitData.value = AsyncData(error: e);
     }
-    // } catch (e) {
-    //   submitData.value = AsyncData(error: e);
-    // }
   }
 
   Future<void> createQuotation({
@@ -144,7 +142,9 @@ class EstimateModel {
         ...medicalQuotationData.value.data ?? [],
         response,
       ]);
+      logger.d('Quotation created: ${medicalQuotationData.value.data?.length}');
     } catch (e) {
+      logger.e(e);
       medicalQuotationData.value = AsyncData(error: e);
     }
   }
@@ -153,13 +153,13 @@ class EstimateModel {
 String generateHtmlFromQuotation(MedicalQuotationRequest request) {
   final headerInfo = '''
     <h1>Quotation Details</h1>
-    <p><strong>Quotation Number:</strong> ${request.quotationNumber}</p>
-    <p><strong>Quotation Date:</strong> ${request.quotationDate != null ? Dates.formatFullDate(request.quotationDate!) : request.quotationDate}</p>
-    <p><strong>Registration Number:</strong> ${request.registrationNumber}</p>
-    <p><strong>Subject:</strong> ${request.subject}</p>
-    <p><strong>Total Amount:</strong> ${request.totalAmount}</p>
-    <p><strong>Validity Period:</strong> ${request.validityPeriod}</p>
-    <p><strong>Remarks:</strong> ${request.remarks}</p>
+    <p><strong>Quotation Number:</strong> ${request.quotationNumber ?? ''}</p>
+    <p><strong>Quotation Date:</strong> ${request.quotationDate != null ? Dates.formatFullDate(request.quotationDate!) : ''}</p>
+    <p><strong>Registration Number:</strong> ${request.registrationNumber ?? ''}</p>
+    <p><strong>Subject:</strong> ${request.subject ?? ''}</p>
+    <p><strong>Total Amount:</strong> ${request.totalAmount ?? ''}</p>
+    <p><strong>Validity Period:</strong> ${request.validityPeriod != null ? Dates.formatFullDate(request.validityPeriod!) : ''}</p>
+    <p><strong>Remarks:</strong> ${request.remarks ?? ''}</p>
   ''';
 
   const paymentTableHeader = '''
@@ -169,15 +169,16 @@ String generateHtmlFromQuotation(MedicalQuotationRequest request) {
         <th>Tax Rate</th>
         <th>Amount Excluding Tax (Yen)</th>
         <th>Consumption Tax Amount (Yen)</th>
+        <th>Total</th>
       </tr>
   ''';
 
   final paymentTableRows = request.totalPayment?.map((payment) {
     return '''
       <tr>
-        <td>${payment.taxRate}</td>
-        <td>${payment.amountExcludingTaxInYen}</td>
-        <td>${payment.consumptionTaxAmountInYen}</td>
+        <td>${payment.taxRate ?? ''}</td>
+        <td>${payment.amountExcludingTaxInYen ?? ''}</td>
+        <td>${payment.consumptionTaxAmountInYen ?? ''}</td>
         <td>${(payment.amountExcludingTaxInYen ?? 0) + (payment.consumptionTaxAmountInYen ?? 0)}</td>
       </tr>
     ''';
@@ -206,13 +207,13 @@ String generateHtmlFromQuotation(MedicalQuotationRequest request) {
   final itemTableRows = request.item?.map((item) {
     return '''
       <tr>
-        <td>${item.transactionDate != null ? Dates.formatFullDate(item.transactionDate!) : item.transactionDate}</td>
+        <td>${item.transactionDate != null ? Dates.formatFullDate(item.transactionDate!) : ''}</td>
         <td>${item.details ?? ''}</td>
-        <td>${item.quantity}</td>
-        <td>${item.unit}</td>
-        <td>${item.unitPrice}</td>
-        <td>${item.amount}</td>
-        <td>${item.taxRate}</td>
+        <td>${item.quantity ?? ''}</td>
+        <td>${item.unit ?? ''}</td>
+        <td>${item.unitPrice ?? ''}</td>
+        <td>${item.amount ?? ''}</td>
+        <td>${item.taxRate ?? ''}</td>
       </tr>
     ''';
   }).join();
