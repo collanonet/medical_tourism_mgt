@@ -19,13 +19,7 @@ class StatementScreenForm extends StatelessWidget {
       },
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(' 求 書', style: context.textTheme.titleLarge),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            Text('柳在順　様', style: context.textTheme.titleMedium),
-          ],
-        ),
+
         RowSeparated(
           separatorBuilder: (BuildContext context, int index) {
             return SizedBox(width: context.appTheme.spacing.formSpacing);
@@ -159,7 +153,6 @@ class StatementScreenForm extends StatelessWidget {
             )
           ],
         ),
-        Text('税率毎合計', style: context.textTheme.titleMedium),
         Container(
           decoration: BoxDecoration(
             border: Border.all(color: Color.fromARGB(255, 23, 189, 222)),
