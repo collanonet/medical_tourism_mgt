@@ -17,6 +17,7 @@ class PatientModel with ChangeNotifier {
   final PatientRepository patientRepository;
 
   AsyncData<Paginated<Patient>> _patientData = const AsyncData();
+
   AsyncData<Paginated<Patient>> get patientData => _patientData;
 
   Future<void> patients({FormGroup? form, String? progress}) async {
@@ -72,7 +73,37 @@ class PatientModel with ChangeNotifier {
     });
   }
 
+  Future<void> fetchMorePatients() async {
+    if (_patientData.data?.hasNextPage == true) {
+      _patientData.copyWith(
+        loading: true,
+      );
+      notifyListeners();
+      await patientRepository
+          .patients(
+        page: (int.tryParse(_patientData.data!.currentPage) ?? 1) + 1,
+      )
+          .then((value) {
+        _patientData = AsyncData(
+            data: Paginated(
+          items: [
+            ..._patientData.data?.items ?? [],
+            ...value.items,
+          ],
+          totalPages: value.totalPages,
+          currentPage: value.currentPage,
+        ));
+      }).catchError((error) {
+        logger.d(error);
+        _patientData = AsyncData(error: error);
+      }).whenComplete(() {
+        notifyListeners();
+      });
+    }
+  }
+
   AsyncData<Patient> _postPatientData = const AsyncData();
+
   AsyncData<Patient> get postPatientData => _postPatientData;
 
   Future<void> postPatient(
@@ -92,6 +123,7 @@ class PatientModel with ChangeNotifier {
   }
 
   AsyncData<Patient> _putPatientData = const AsyncData();
+
   AsyncData<Patient> get putPatientData => _putPatientData;
 
   Future<void> putPatient(
@@ -114,6 +146,7 @@ class PatientModel with ChangeNotifier {
   }
 
   AsyncData<bool> _deletePatientData = const AsyncData();
+
   AsyncData<bool> get deletePatientData => _deletePatientData;
 
   Future<void> deletePatient(

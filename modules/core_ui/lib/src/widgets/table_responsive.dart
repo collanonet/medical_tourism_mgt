@@ -15,6 +15,7 @@ class DynamicTable extends StatefulWidget {
   final int? totalPages;
   final int? rowsPerPage;
   final bool enableScroll;
+  final bool isLoading;
 
   const DynamicTable({
     super.key,
@@ -28,6 +29,7 @@ class DynamicTable extends StatefulWidget {
     this.totalPages = 1,
     this.rowsPerPage = 10,
     this.enableScroll = true,
+    this.isLoading = false,
   });
 
   @override
@@ -37,6 +39,7 @@ class DynamicTable extends StatefulWidget {
 class _DynamicTableState extends State<DynamicTable> {
   final ScrollController _scrollController = ScrollController();
   int _currentPage = 0;
+
   bool _isAtMaxScroll() {
     return _scrollController.position.pixels ==
         _scrollController.position.maxScrollExtent;
@@ -64,30 +67,6 @@ class _DynamicTableState extends State<DynamicTable> {
     _scrollController.dispose();
     super.dispose();
   }
-
-  void _loadNextPage() {
-    if (widget.data.rows.isNotEmpty && widget.rowsPerPage != null) {
-      setState(() {
-        _currentPage = (_currentPage + 1).clamp(1, widget.totalPages ?? 1);
-      });
-    }
-  }
-
-  void _loadPreviousPage() {
-    if (widget.data.rows.isNotEmpty && widget.rowsPerPage != null) {
-      setState(() {
-        _currentPage = (_currentPage - 1).clamp(1, widget.totalPages ?? 1);
-      });
-    }
-  }
-
-  // int get totalPages {
-  //   if (widget.data.rows.isNotEmpty && widget.rowsPerPage != null) {
-  //     return (widget.data.rows.length / widget.rowsPerPage!).ceil();
-  //   } else {
-  //     return 1;
-  //   }
-  // }
 
   late List<RowTableData> rowsToShow;
   late int startIndex;
@@ -150,6 +129,10 @@ class _DynamicTableState extends State<DynamicTable> {
                 : list(),
         if (widget.data.rows.isNotEmpty && widget.rowsPerPage != null)
           Container(
+            padding: const EdgeInsets.symmetric(
+              vertical: 8.0,
+              horizontal: 4.0,
+            ),
             decoration: widget.headerDecoration ??
                 const BoxDecoration(
                   color: Colors.white,
@@ -158,30 +141,16 @@ class _DynamicTableState extends State<DynamicTable> {
                   ),
                 ),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(
+                const SizedBox(
                   width: 16,
                 ),
-                Text('Total Page: ${widget.totalPages ?? 1}'),
-                Spacer(),
-                Text('Total Per Page: ${rowsPerPage}'),
-                IconButton(
-                  onPressed: _currentPage > 0 ? _loadPreviousPage : null,
-                  icon: const Icon(Icons.arrow_left),
-                ),
                 Text(
-                  'Page ${_currentPage + 1}',
-                  style: const TextStyle(
-                    fontFamily: 'NotoSansJP',
-                    package: 'core_ui',
-                  ),
-                ),
-                IconButton(
-                  onPressed:
-                      endIndex < widget.data.rows.length ? _loadNextPage : null,
-                  icon: const Icon(Icons.arrow_right),
+                  widget.isLoading
+                      ? 'さらにデータを読み込み中...'
+                      : '合計: $rowsPerPage',
                 ),
               ],
             ),

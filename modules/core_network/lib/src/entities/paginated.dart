@@ -13,7 +13,9 @@ class Paginated<T> {
 
   List<T> items;
   int totalPages;
-  int currentPage;
+  String currentPage;
+
+  bool get hasNextPage => (int.tryParse(currentPage) ?? 1) < totalPages;
 
   factory Paginated.fromJson(
     Map<String, dynamic> json,

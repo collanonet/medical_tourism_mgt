@@ -83,6 +83,8 @@ class PatientRepositoryIml extends PatientRepository {
     String? medicalDayto,
     String? returnDatefrom,
     String? returnDateto,
+    int? page = 1,
+    int? limit = 10,
   }) {
     return remote.patients(
       progress: progress,
@@ -97,6 +99,8 @@ class PatientRepositoryIml extends PatientRepository {
       medicalDayto: medicalDayto,
       returnDatefrom: returnDatefrom,
       returnDateto: returnDateto,
+      page: page,
+      limit: limit,
     );
   }
 
