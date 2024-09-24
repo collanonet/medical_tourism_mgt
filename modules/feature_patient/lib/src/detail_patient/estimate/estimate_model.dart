@@ -30,7 +30,6 @@ class EstimateModel {
 
   Future<void> initialData({
     required Patient patient,
-    String? id,
     required MedicalRecord medicalRecord,
     required FormGroup formGroup,
   }) async {
@@ -49,6 +48,7 @@ class EstimateModel {
       final response = await patientRepository.getQuotations(medicalRecordId);
       medicalQuotationData.value = AsyncData(data: response);
     } catch (e) {
+      logger.e(e);
       medicalQuotationData.value = AsyncData(error: e);
     }
   }
@@ -84,7 +84,6 @@ class EstimateModel {
         ));
       });
 
-      logger.d('formGroup.value: ${formGroup.value}');
       MedicalQuotationRequest request = MedicalQuotationRequest(
         quotationNumber: formGroup.control('quotationNumber').value,
         quotationDate: formGroup.control('quotationDate').value,
@@ -100,7 +99,6 @@ class EstimateModel {
         hospitalRecord: formGroup.control('hospitalRecord').value,
       );
 
-      logger.d('request: ${request.toJson()}');
 
       String html = generateHtmlFromQuotation(
         request,
@@ -129,6 +127,7 @@ class EstimateModel {
         submitData.value = const AsyncData(error: 'ファイルの作成に失敗しました');
       }
     } catch (e) {
+      logger.e(e);
       submitData.value = AsyncData(error: e);
     }
   }
@@ -143,7 +142,9 @@ class EstimateModel {
         ...medicalQuotationData.value.data ?? [],
         response,
       ]);
+      logger.d('Quotation created: ${medicalQuotationData.value.data?.length}');
     } catch (e) {
+      logger.e(e);
       medicalQuotationData.value = AsyncData(error: e);
     }
   }

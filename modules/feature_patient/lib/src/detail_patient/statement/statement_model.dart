@@ -31,7 +31,6 @@ class StatementModel {
 
   Future<void> initialData({
     required Patient patient,
-    String? id,
     required MedicalRecord medicalRecord,
     required FormGroup formGroup,
   }) async {
@@ -50,6 +49,7 @@ class StatementModel {
       final response = await patientRepository.getInvoices(medicalRecordId);
       medicalInvoiceData.value = AsyncData(data: response);
     } catch (e) {
+      logger.e(e);
       medicalInvoiceData.value = AsyncData(error: e);
     }
   }
@@ -62,7 +62,6 @@ class StatementModel {
     try {
       submitData.value = const AsyncData(loading: true);
 
-      logger.d('formGroup.value: ${formGroup.value}');
 
       List<ItemRequest>? items = [];
       formGroup.control('item').value.forEach((item) {
@@ -87,7 +86,6 @@ class StatementModel {
         ));
       });
 
-      logger.d('formGroup.value: ${formGroup.value}');
       MedicalInvoiceRequest request = MedicalInvoiceRequest(
         invoiceNumber: formGroup.control('quotationNumber').value,
         invoiceDate: formGroup.control('quotationDate').value,
@@ -105,7 +103,6 @@ class StatementModel {
         hospitalRecord: formGroup.control('hospitalRecord').value,
       );
 
-      logger.d('request: ${request.toJson()}');
 
       String html = generateHtmlFromInvoice(
         request,
@@ -133,6 +130,7 @@ class StatementModel {
         submitData.value = const AsyncData(error: 'ファイルの作成に失敗しました');
       }
     } catch (e) {
+      logger.e(e);
       submitData.value = AsyncData(error: e);
     }
   }
@@ -148,6 +146,7 @@ class StatementModel {
         response,
       ]);
     } catch (e) {
+      logger.e(e);
       medicalInvoiceData.value = AsyncData(error: e);
     }
   }
