@@ -21,6 +21,7 @@ class StatementScreenForm extends StatelessWidget {
       children: [
 
         RowSeparated(
+          crossAxisAlignment: CrossAxisAlignment.start,
           separatorBuilder: (BuildContext context, int index) {
             return SizedBox(width: context.appTheme.spacing.formSpacing);
           },
@@ -96,6 +97,7 @@ class StatementScreenForm extends StatelessWidget {
           ],
         ),
         RowSeparated(
+          crossAxisAlignment: CrossAxisAlignment.start,
           separatorBuilder: (BuildContext context, int index) {
             return SizedBox(width: context.appTheme.spacing.formSpacing);
           },
@@ -196,6 +198,7 @@ class StatementScreenForm extends StatelessWidget {
                             (currentForm) => ReactiveForm(
                               formGroup: currentForm,
                               child: RowSeparated(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 separatorBuilder:
                                     (BuildContext context, int index) {
                                   return SizedBox(
@@ -393,6 +396,7 @@ class StatementScreenForm extends StatelessWidget {
                           .map((currentForm) => ReactiveForm(
                                 formGroup: currentForm,
                                 child: RowSeparated(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   separatorBuilder:
                                       (BuildContext context, int index) {
                                     return SizedBox(
