@@ -49,8 +49,8 @@ class StatementScreenForm extends StatelessWidget {
           decoration: InputDecoration(labelText: 'Subject'),
         ),
         ReactiveTextField<String>(
-          formControlName: 'totalAmount',
-          decoration: InputDecoration(labelText: 'Total Amount'),
+          formControlName: 'amountBilled',
+          decoration: InputDecoration(labelText: 'Amount Billed'),
         ),
         ReactiveTextField<DateTime>(
           formControlName: 'paymentDeadline',
@@ -78,18 +78,6 @@ class StatementScreenForm extends StatelessWidget {
         ReactiveTextField<String>(
           formControlName: 'remarks',
           decoration: InputDecoration(labelText: 'Remarks'),
-        ),
-        ReactiveTextField<String>(
-          formControlName: 'medicalRecord',
-          decoration: InputDecoration(labelText: 'Medical Record'),
-        ),
-        ReactiveTextField<String>(
-          formControlName: 'user',
-          decoration: InputDecoration(labelText: 'User'),
-        ),
-        ReactiveTextField<String>(
-          formControlName: 'hospitalRecord',
-          decoration: InputDecoration(labelText: 'Hospital Record'),
         ),
         // Payment Details FormArray
         ReactiveFormArray(
@@ -243,17 +231,6 @@ class StatementScreenForm extends StatelessWidget {
           },
         ),
 
-        SizedBox(height: 20),
-        ElevatedButton(
-          onPressed: () {
-            if (form.valid) {
-              print('Form Value: ${form.value}');
-            } else {
-              form.markAllAsTouched();
-            }
-          },
-          child: Text('Submit'),
-        ),
       ],
     );
   }
