@@ -87,12 +87,12 @@ class StatementModel {
       });
 
       MedicalInvoiceRequest request = MedicalInvoiceRequest(
-        invoiceNumber: formGroup.control('quotationNumber').value,
-        invoiceDate: formGroup.control('quotationDate').value,
+        invoiceNumber: formGroup.control('invoiceNumber').value,
+        invoiceDate: formGroup.control('invoiceDate').value,
         registrationNumber: formGroup.control('registrationNumber').value,
         subject: formGroup.control('subject').value,
-        amountBilled: formGroup.control('totalAmount').value,
-        paymentDeadline: formGroup.control('validityPeriod').value,
+        amountBilled: formGroup.control('amountBilled').value,
+        paymentDeadline: formGroup.control('paymentDeadline').value,
         bankTransferInformation:
             formGroup.control('bankTransferInformation').value,
         remarks: formGroup.control('remarks').value,
