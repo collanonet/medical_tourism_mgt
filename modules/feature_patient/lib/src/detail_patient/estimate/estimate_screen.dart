@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'package:core_utils/async.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -92,98 +93,108 @@ class EstimateScreen extends StatelessWidget {
                     shrinkWrap: true,
                     itemCount: value.data?.length ?? 0,
                     physics: const NeverScrollableScrollPhysics(),
-                    itemBuilder: (BuildContext context, int index) => InkWell(
-                      onTap: () {},
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 4),
-                        child: Row(
-                          children: [
-                            Checkbox(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(4),
-                                side: const BorderSide(color: Colors.grey),
-                              ),
-                              checkColor: Colors.white,
-                              value: false,
-                              onChanged: (value) {},
-                            ),
-                            Expanded(
-                                child: Text(
-                              '19Y−0630−1',
-                              style: context.textTheme.bodySmall,
-                            )),
-                            Expanded(
-                                child: Row(
-                              children: [
-                                Container(
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: context
-                                        .appTheme.spacing.marginExtraSmall,
-                                    vertical: context
-                                        .appTheme.spacing.marginExtraSmall,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    border: Border.all(
-                                      color: Colors.red,
-                                    ),
-                                    borderRadius: BorderRadius.circular(context
-                                        .appTheme.spacing.borderRadiusMedium),
-                                  ),
-                                  child: Text(
-                                    '見積書',
-                                    style:
-                                        context.textTheme.bodySmall?.copyWith(
-                                      color: Colors.red,
-                                    ),
-                                  ),
+                    itemBuilder: (BuildContext context, int index) {
+                      var data = value.data?[index];
+                      return InkWell(
+                        onTap: data?.fileName != null
+                            ? () {
+                                openUrlInBrowser(fileName: data!.fileName!);
+                              }
+                            : null,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 4),
+                          child: Row(
+                            children: [
+                              Checkbox(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4),
+                                  side: const BorderSide(color: Colors.grey),
                                 ),
-                              ],
-                            )),
-                            Expanded(
-                                child: Text(
-                              '大瀚人力资源集团',
-                              style: context.textTheme.bodySmall,
-                            )),
-                            Expanded(
-                                child: Text(
-                              '2023/07/18',
-                              style: context.textTheme.bodySmall,
-                            )),
-                            Expanded(
-                                flex: 2,
-                                child: Text(
-                                  '劉 偉強 様　呼吸器疾患の受診（京大病院）',
-                                  style: context.textTheme.bodySmall,
-                                )),
-                            Expanded(
-                                child: Text(
-                              '○',
-                              style: context.textTheme.bodySmall,
-                            )),
-                            Expanded(
-                                child: Text(
-                              '×',
-                              style: context.textTheme.bodySmall,
-                            )),
-                            Expanded(
-                                child: Text(
-                              'A',
-                              style: context.textTheme.bodySmall,
-                            )),
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  ElevatedButton(
-                                    onPressed: () {},
-                                    child: const Text('請求書を発行する'),
-                                  )
-                                ],
+                                checkColor: Colors.white,
+                                value: false,
+                                onChanged: (value) {},
                               ),
-                            ),
-                          ],
+                              Expanded(
+                                  child: Text(
+                                data?.quotationNumber ?? '',
+                                style: context.textTheme.bodySmall,
+                              )),
+                              Expanded(
+                                  child: Row(
+                                children: [
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: context
+                                          .appTheme.spacing.marginExtraSmall,
+                                      vertical: context
+                                          .appTheme.spacing.marginExtraSmall,
+                                    ),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.red,
+                                      ),
+                                      borderRadius: BorderRadius.circular(
+                                          context.appTheme.spacing
+                                              .borderRadiusMedium),
+                                    ),
+                                    child: Text(
+                                      '見積書',
+                                      style:
+                                          context.textTheme.bodySmall?.copyWith(
+                                        color: Colors.red,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              )),
+                              Expanded(
+                                  child: Text(
+                                '大瀚人力资源集团',
+                                style: context.textTheme.bodySmall,
+                              )),
+                              Expanded(
+                                  child: Text(
+                                data?.quotationDate != null
+                                    ? Dates.formatFullDate(data!.quotationDate!)
+                                    : '',
+                                style: context.textTheme.bodySmall,
+                              )),
+                              Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    '劉 偉強 様　呼吸器疾患の受診（京大病院）',
+                                    style: context.textTheme.bodySmall,
+                                  )),
+                              Expanded(
+                                  child: Text(
+                                '○',
+                                style: context.textTheme.bodySmall,
+                              )),
+                              Expanded(
+                                  child: Text(
+                                '×',
+                                style: context.textTheme.bodySmall,
+                              )),
+                              Expanded(
+                                  child: Text(
+                                'A',
+                                style: context.textTheme.bodySmall,
+                              )),
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    ElevatedButton(
+                                      onPressed: () {},
+                                      child: const Text('請求書を発行する'),
+                                    )
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ),
+                      );
+                    },
                     separatorBuilder: (BuildContext context, int index) {
                       return const Divider(
                         thickness: 0.5,

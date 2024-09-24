@@ -10,7 +10,7 @@ MedicalQuotationResponse _$MedicalQuotationResponseFromJson(
         Map<String, dynamic> json) =>
     MedicalQuotationResponse(
       id: json['_id'] as String,
-      file: json['file'] as String?,
+      fileName: json['fileName'] as String?,
       quotationNumber: json['quotationNumber'] as String?,
       quotationDate: json['quotationDate'] == null
           ? null
@@ -45,7 +45,7 @@ Map<String, dynamic> _$MedicalQuotationResponseToJson(
         MedicalQuotationResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
-      'file': instance.file,
+      'fileName': instance.fileName,
       'quotationNumber': instance.quotationNumber,
       'quotationDate': instance.quotationDate?.toIso8601String(),
       'registrationNumber': instance.registrationNumber,

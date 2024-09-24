@@ -126,7 +126,7 @@ class StatementModel {
         }
       }
       if (fileName != null) {
-        await createInvoice(request: request.copyWith(file: fileName));
+        await createInvoice(request: request.copyWith(fileName: fileName));
         submitData.value = const AsyncData(data: true);
         formGroup.reset();
       } else {

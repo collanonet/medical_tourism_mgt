@@ -7,7 +7,7 @@ part of 'medical_quotation_request.dart';
 // **************************************************************************
 
 abstract class _$MedicalQuotationRequestCWProxy {
-  MedicalQuotationRequest file(String? file);
+  MedicalQuotationRequest fileName(String? fileName);
 
   MedicalQuotationRequest quotationNumber(String? quotationNumber);
 
@@ -40,7 +40,7 @@ abstract class _$MedicalQuotationRequestCWProxy {
   /// MedicalQuotationRequest(...).copyWith(id: 12, name: "My name")
   /// ````
   MedicalQuotationRequest call({
-    String? file,
+    String? fileName,
     String? quotationNumber,
     DateTime? quotationDate,
     String? registrationNumber,
@@ -64,7 +64,8 @@ class _$MedicalQuotationRequestCWProxyImpl
   final MedicalQuotationRequest _value;
 
   @override
-  MedicalQuotationRequest file(String? file) => this(file: file);
+  MedicalQuotationRequest fileName(String? fileName) =>
+      this(fileName: fileName);
 
   @override
   MedicalQuotationRequest quotationNumber(String? quotationNumber) =>
@@ -120,7 +121,7 @@ class _$MedicalQuotationRequestCWProxyImpl
   /// MedicalQuotationRequest(...).copyWith(id: 12, name: "My name")
   /// ````
   MedicalQuotationRequest call({
-    Object? file = const $CopyWithPlaceholder(),
+    Object? fileName = const $CopyWithPlaceholder(),
     Object? quotationNumber = const $CopyWithPlaceholder(),
     Object? quotationDate = const $CopyWithPlaceholder(),
     Object? registrationNumber = const $CopyWithPlaceholder(),
@@ -135,10 +136,10 @@ class _$MedicalQuotationRequestCWProxyImpl
     Object? item = const $CopyWithPlaceholder(),
   }) {
     return MedicalQuotationRequest(
-      file: file == const $CopyWithPlaceholder()
-          ? _value.file
+      fileName: fileName == const $CopyWithPlaceholder()
+          ? _value.fileName
           // ignore: cast_nullable_to_non_nullable
-          : file as String?,
+          : fileName as String?,
       quotationNumber: quotationNumber == const $CopyWithPlaceholder()
           ? _value.quotationNumber
           // ignore: cast_nullable_to_non_nullable
@@ -206,7 +207,7 @@ extension $MedicalQuotationRequestCopyWith on MedicalQuotationRequest {
 MedicalQuotationRequest _$MedicalQuotationRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalQuotationRequest(
-      file: json['file'] as String?,
+      fileName: json['fileName'] as String?,
       quotationNumber: json['quotationNumber'] as String?,
       quotationDate: json['quotationDate'] == null
           ? null
@@ -232,7 +233,7 @@ MedicalQuotationRequest _$MedicalQuotationRequestFromJson(
 Map<String, dynamic> _$MedicalQuotationRequestToJson(
         MedicalQuotationRequest instance) =>
     <String, dynamic>{
-      'file': instance.file,
+      'fileName': instance.fileName,
       'quotationNumber': instance.quotationNumber,
       'quotationDate': instance.quotationDate?.toIso8601String(),
       'registrationNumber': instance.registrationNumber,

@@ -8,7 +8,7 @@ part 'medical_quotation_response.g.dart';
 class MedicalQuotationResponse {
   @JsonKey(name: '_id')
   String id;
-  String? file;
+  String? fileName;
   String? quotationNumber;
   DateTime? quotationDate;
   String? registrationNumber;
@@ -26,7 +26,7 @@ class MedicalQuotationResponse {
 
   MedicalQuotationResponse({
     required this.id,
-    this.file,
+    this.fileName,
     this.quotationNumber,
     this.quotationDate,
     this.registrationNumber,

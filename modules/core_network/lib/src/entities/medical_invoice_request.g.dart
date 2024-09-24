@@ -7,7 +7,7 @@ part of 'medical_invoice_request.dart';
 // **************************************************************************
 
 abstract class _$MedicalInvoiceRequestCWProxy {
-  MedicalInvoiceRequest file(String? file);
+  MedicalInvoiceRequest fileName(String? fileName);
 
   MedicalInvoiceRequest invoiceNumber(String? invoiceNumber);
 
@@ -43,7 +43,7 @@ abstract class _$MedicalInvoiceRequestCWProxy {
   /// MedicalInvoiceRequest(...).copyWith(id: 12, name: "My name")
   /// ````
   MedicalInvoiceRequest call({
-    String? file,
+    String? fileName,
     String? invoiceNumber,
     DateTime? invoiceDate,
     String? registrationNumber,
@@ -68,7 +68,7 @@ class _$MedicalInvoiceRequestCWProxyImpl
   final MedicalInvoiceRequest _value;
 
   @override
-  MedicalInvoiceRequest file(String? file) => this(file: file);
+  MedicalInvoiceRequest fileName(String? fileName) => this(fileName: fileName);
 
   @override
   MedicalInvoiceRequest invoiceNumber(String? invoiceNumber) =>
@@ -128,7 +128,7 @@ class _$MedicalInvoiceRequestCWProxyImpl
   /// MedicalInvoiceRequest(...).copyWith(id: 12, name: "My name")
   /// ````
   MedicalInvoiceRequest call({
-    Object? file = const $CopyWithPlaceholder(),
+    Object? fileName = const $CopyWithPlaceholder(),
     Object? invoiceNumber = const $CopyWithPlaceholder(),
     Object? invoiceDate = const $CopyWithPlaceholder(),
     Object? registrationNumber = const $CopyWithPlaceholder(),
@@ -144,10 +144,10 @@ class _$MedicalInvoiceRequestCWProxyImpl
     Object? item = const $CopyWithPlaceholder(),
   }) {
     return MedicalInvoiceRequest(
-      file: file == const $CopyWithPlaceholder()
-          ? _value.file
+      fileName: fileName == const $CopyWithPlaceholder()
+          ? _value.fileName
           // ignore: cast_nullable_to_non_nullable
-          : file as String?,
+          : fileName as String?,
       invoiceNumber: invoiceNumber == const $CopyWithPlaceholder()
           ? _value.invoiceNumber
           // ignore: cast_nullable_to_non_nullable
@@ -220,7 +220,7 @@ extension $MedicalInvoiceRequestCopyWith on MedicalInvoiceRequest {
 MedicalInvoiceRequest _$MedicalInvoiceRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalInvoiceRequest(
-      file: json['file'] as String?,
+      fileName: json['fileName'] as String?,
       invoiceNumber: json['invoiceNumber'] as String?,
       invoiceDate: json['invoiceDate'] == null
           ? null
@@ -247,7 +247,7 @@ MedicalInvoiceRequest _$MedicalInvoiceRequestFromJson(
 Map<String, dynamic> _$MedicalInvoiceRequestToJson(
         MedicalInvoiceRequest instance) =>
     <String, dynamic>{
-      'file': instance.file,
+      'fileName': instance.fileName,
       'invoiceNumber': instance.invoiceNumber,
       'invoiceDate': instance.invoiceDate?.toIso8601String(),
       'registrationNumber': instance.registrationNumber,

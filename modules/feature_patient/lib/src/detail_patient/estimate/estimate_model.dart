@@ -123,7 +123,7 @@ class EstimateModel {
 
     if (fileName != null) {
 
-      await createQuotation(request: request.copyWith(file: fileName));
+      await createQuotation(request: request.copyWith(fileName: fileName));
       submitData.value = const AsyncData(data: true);
       formGroup.reset();
     } else {
