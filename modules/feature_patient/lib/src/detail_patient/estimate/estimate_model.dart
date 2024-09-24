@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/services.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
@@ -151,9 +152,9 @@ class EstimateModel {
 Future<Uint8List?> generatePdfFromQuotation(
     MedicalQuotationRequest request) async {
   final pdf = pw.Document();
-  final Uint8List fontData =
-      File('assets/fonts/NotoSansJPRegular.ttf').readAsBytesSync();
-  final ttf = pw.Font.ttf(fontData.buffer.asByteData());
+  final ByteData fontData = await rootBundle.load('assets/fonts/NotoSansJPRegular.ttf');
+  final ttf = pw.Font.ttf(fontData);
+
   pdf.addPage(
     pw.MultiPage(
       build: (context) => [
