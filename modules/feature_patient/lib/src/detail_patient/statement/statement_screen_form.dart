@@ -48,7 +48,7 @@ class StatementScreenForm extends StatelessWidget {
           formControlName: 'subject',
           decoration: InputDecoration(labelText: 'Subject'),
         ),
-        ReactiveTextField<String>(
+        ReactiveTextField<double>(
           formControlName: 'amountBilled',
           decoration: InputDecoration(labelText: 'Amount Billed'),
         ),
@@ -92,21 +92,21 @@ class StatementScreenForm extends StatelessWidget {
                           child: Row(
                             children: [
                               Expanded(
-                                child: ReactiveTextField<String>(
+                                child: ReactiveTextField<double>(
                                   formControlName: 'taxRate',
                                   decoration:
                                       InputDecoration(labelText: 'Tax Rate'),
                                 ),
                               ),
                               Expanded(
-                                child: ReactiveTextField<String>(
+                                child: ReactiveTextField<double>(
                                   formControlName: 'amountExcludingTaxInYen',
                                   decoration: InputDecoration(
                                       labelText: 'Amount Excluding Tax (Yen)'),
                                 ),
                               ),
                               Expanded(
-                                child: ReactiveTextField<String>(
+                                child: ReactiveTextField<double>(
                                   formControlName: 'consumptionTaxAmountInYen',
                                   decoration: InputDecoration(
                                       labelText:
@@ -119,9 +119,9 @@ class StatementScreenForm extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () {
                     formArray.add(FormGroup({
-                      'taxRate': FormControl<String>(),
-                      'amountExcludingTaxInYen': FormControl<String>(),
-                      'consumptionTaxAmountInYen': FormControl<String>(),
+                      'taxRate': FormControl<double>(),
+                      'amountExcludingTaxInYen': FormControl<double>(),
+                      'consumptionTaxAmountInYen': FormControl<double>(),
                     }));
                   },
                   child: Text('Add More Payment'),
@@ -175,7 +175,7 @@ class StatementScreenForm extends StatelessWidget {
                                 ),
                               ),
                               Expanded(
-                                child: ReactiveTextField<String>(
+                                child: ReactiveTextField<double>(
                                   formControlName: 'quantity',
                                   decoration:
                                       InputDecoration(labelText: 'Quantity'),
@@ -189,21 +189,21 @@ class StatementScreenForm extends StatelessWidget {
                                 ),
                               ),
                               Expanded(
-                                child: ReactiveTextField<String>(
+                                child: ReactiveTextField<double>(
                                   formControlName: 'unitPrice',
                                   decoration:
                                       InputDecoration(labelText: 'Unit Price'),
                                 ),
                               ),
                               Expanded(
-                                child: ReactiveTextField<String>(
+                                child: ReactiveTextField<double>(
                                   formControlName: 'amount',
                                   decoration:
                                       InputDecoration(labelText: 'Amount'),
                                 ),
                               ),
                               Expanded(
-                                child: ReactiveTextField<String>(
+                                child: ReactiveTextField<double>(
                                   formControlName: 'taxRate',
                                   decoration:
                                       InputDecoration(labelText: 'Tax Rate'),
@@ -217,11 +217,11 @@ class StatementScreenForm extends StatelessWidget {
                     formArray.add(FormGroup({
                       'transactionDate': FormControl<DateTime>(),
                       'details': FormControl<String>(),
-                      'quantity': FormControl<String>(),
+                      'quantity': FormControl<double>(),
                       'unit': FormControl<String>(),
-                      'unitPrice': FormControl<String>(),
-                      'amount': FormControl<String>(),
-                      'taxRate': FormControl<String>(),
+                      'unitPrice': FormControl<double>(),
+                      'amount': FormControl<double>(),
+                      'taxRate': FormControl<double>(),
                     }));
                   },
                   child: Text('Add More Item'),
@@ -230,7 +230,6 @@ class StatementScreenForm extends StatelessWidget {
             );
           },
         ),
-
       ],
     );
   }

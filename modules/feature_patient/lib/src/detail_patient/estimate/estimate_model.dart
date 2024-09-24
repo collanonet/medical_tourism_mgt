@@ -60,9 +60,46 @@ class EstimateModel {
     try {
       submitData.value = const AsyncData(loading: true);
 
-      MedicalQuotationRequest request = MedicalQuotationRequest.fromJson(
-        formGroup.value,
+      List<ItemRequest>? items = [];
+      formGroup.control('item').value.forEach((item) {
+        items.add(ItemRequest(
+          transactionDate: item['transactionDate'],
+          details: item['details'],
+          quantity: item['quantity'],
+          unit: item['unit'],
+          unitPrice: item['unitPrice'],
+          amount: item['amount'],
+          taxRate: item['taxRate'],
+        ));
+      });
+
+      List<TotalPaymentRequest>? totalPayment = [];
+
+      formGroup.control('totalPayment').value.forEach((payment) {
+        totalPayment.add(TotalPaymentRequest(
+          taxRate: payment['taxRate'],
+          amountExcludingTaxInYen: payment['amountExcludingTaxInYen'],
+          consumptionTaxAmountInYen: payment['consumptionTaxAmountInYen'],
+        ));
+      });
+
+      logger.d('formGroup.value: ${formGroup.value}');
+      MedicalQuotationRequest request = MedicalQuotationRequest(
+        quotationNumber: formGroup.control('quotationNumber').value,
+        quotationDate: formGroup.control('quotationDate').value,
+        registrationNumber: formGroup.control('registrationNumber').value,
+        subject: formGroup.control('subject').value,
+        totalAmount: formGroup.control('totalAmount').value,
+        validityPeriod: formGroup.control('validityPeriod').value,
+        remarks: formGroup.control('remarks').value,
+        totalPayment: totalPayment,
+        item: items,
+        medicalRecord: formGroup.control('medicalRecord').value,
+        user: formGroup.control('user').value,
+        hospitalRecord: formGroup.control('hospitalRecord').value,
       );
+
+      logger.d('request: ${request.toJson()}');
 
       String html = generateHtmlFromQuotation(
         request,
@@ -85,7 +122,7 @@ class EstimateModel {
       }
 
       if (fileName != null) {
-        formGroup.control('file').value = fileName;
+        request.file = fileName;
 
         await createQuotation(request: request);
         submitData.value = const AsyncData(data: true);

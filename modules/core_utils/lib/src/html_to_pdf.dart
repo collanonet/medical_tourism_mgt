@@ -1,11 +1,12 @@
 import 'dart:io';
 import 'package:htmltopdfwidgets/htmltopdfwidgets.dart';
+import 'package:path_provider/path_provider.dart';
 
 import '../core_utils.dart';
 
 Future<String?> generatePdfFromHtml(String htmlContent) async {
   try {
-    final tempDir = Directory.systemTemp;
+    Directory tempDir = await getTemporaryDirectory();
     final file = File('${tempDir.path}/output.pdf');
     final pdf = Document();
     List<Widget> widgets = await HTMLToPdf().convert(htmlContent);
