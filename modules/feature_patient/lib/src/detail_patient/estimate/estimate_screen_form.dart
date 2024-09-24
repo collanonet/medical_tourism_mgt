@@ -121,8 +121,11 @@ class EstimateScreenForm extends StatelessWidget {
         ReactiveFormArray(
           formArrayName: 'totalPayment',
           builder: (context, formArray, child) {
-            return Column(
+            return ColumnSeparated(
               crossAxisAlignment: CrossAxisAlignment.start,
+              separatorBuilder: (BuildContext context, int index) {
+                return SizedBox(height: context.appTheme.spacing.formSpacing);
+              },
               children: [
                 ...formArray.controls
                     .map((control) => control as FormGroup)
@@ -210,8 +213,11 @@ class EstimateScreenForm extends StatelessWidget {
         ReactiveFormArray(
           formArrayName: 'item',
           builder: (context, formArray, child) {
-            return Column(
+            return ColumnSeparated(
               crossAxisAlignment: CrossAxisAlignment.start,
+              separatorBuilder: (BuildContext context, int index) {
+                return SizedBox(height: context.appTheme.spacing.formSpacing);
+              },
               children: [
                 ...formArray.controls
                     .map((control) => control as FormGroup)

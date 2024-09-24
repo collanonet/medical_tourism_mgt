@@ -122,37 +122,38 @@ class StatementScreen extends StatelessWidget {
                                 data?.invoiceNumber ?? '',
                                 style: context.textTheme.bodySmall,
                               )),
-                              Expanded(
-                                  child: Row(
-                                children: [
-                                  Container(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: context
-                                          .appTheme.spacing.marginExtraSmall,
-                                      vertical: context
-                                          .appTheme.spacing.marginExtraSmall,
-                                    ),
-                                    decoration: BoxDecoration(
-                                      border: Border.all(
-                                        color: Colors.red,
-                                      ),
-                                      borderRadius: BorderRadius.circular(
-                                          context.appTheme.spacing
-                                              .borderRadiusMedium),
-                                    ),
-                                    child: Text(
-                                      '見積書',
-                                      style:
-                                          context.textTheme.bodySmall?.copyWith(
-                                        color: Colors.red,
-                                      ),
-                                    ),
+                              Expanded(child: SizedBox()
+                                  //     Row(
+                                  //   children: [
+                                  //     Container(
+                                  //       padding: EdgeInsets.symmetric(
+                                  //         horizontal: context
+                                  //             .appTheme.spacing.marginExtraSmall,
+                                  //         vertical: context
+                                  //             .appTheme.spacing.marginExtraSmall,
+                                  //       ),
+                                  //       decoration: BoxDecoration(
+                                  //         border: Border.all(
+                                  //           color: Colors.red,
+                                  //         ),
+                                  //         borderRadius: BorderRadius.circular(
+                                  //             context.appTheme.spacing
+                                  //                 .borderRadiusMedium),
+                                  //       ),
+                                  //       child: Text(
+                                  //         '見積書',
+                                  //         style:
+                                  //             context.textTheme.bodySmall?.copyWith(
+                                  //           color: Colors.red,
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //   ],
+                                  // ),
                                   ),
-                                ],
-                              )),
                               Expanded(
                                   child: Text(
-                                '大瀚人力资源集团',
+                                '--',
                                 style: context.textTheme.bodySmall,
                               )),
                               Expanded(
@@ -187,7 +188,12 @@ class StatementScreen extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     ElevatedButton(
-                                      onPressed: () {},
+                                      onPressed: data?.fileName != null
+                                          ? () {
+                                              openUrlInBrowser(
+                                                  fileName: data!.fileName!);
+                                            }
+                                          : null,
                                       child: const Text('請求書を発行する'),
                                     )
                                   ],
