@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -56,7 +57,8 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                             const SizedBox(height: 16),
                             Row(
                               children: [
-                                Expanded(
+                                IntrinsicWidth(
+                                  stepWidth: 250,
                                   child: ReactiveTextField(
                                     formControlName: 'hospitalName',
                                     decoration: const InputDecoration(
@@ -65,7 +67,8 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                   ),
                                 ),
                                 const SizedBox(width: 16),
-                                Expanded(
+                                IntrinsicWidth(
+                                  stepWidth: 250,
                                   child: ReactiveTextField(
                                     formControlName: 'doctor_name',
                                     decoration: const InputDecoration(
@@ -112,8 +115,8 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                 Expanded(
                                     child: Row(
                                   children: [
-                                    Expanded(
-                                      flex: 4,
+                                    IntrinsicWidth(
+                                      stepWidth: 250,
                                       child: ReactiveDatePicker<DateTime>(
                                         formControlName:
                                             'reservation_date_from',
@@ -159,8 +162,8 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                         ),
                                       ),
                                     ),
-                                    Expanded(
-                                      flex: 4,
+                                    IntrinsicWidth(
+                                      stepWidth: 250,
                                       child: ReactiveDatePicker<DateTime>(
                                         formControlName: 'reservation_date_to',
                                         firstDate: DateTime(1900),
