@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:core_utils/async.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -196,7 +197,57 @@ class EstimateScreen extends StatelessWidget {
                   SizedBox(
                     height: context.appTheme.spacing.marginMedium,
                   ),
-                  EstimateScreenForm()
+                  const EstimateScreenForm(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ValueListenableListener(
+                        valueListenable:
+                            context.read<EstimateModel>().submitData,
+                        onListen: () {
+                          var data =
+                              context.read<EstimateModel>().submitData.value;
+
+                          if (data.hasData) {
+                            snackBarWidget(
+                              message: '正常に保存されました',
+                              prefixIcon: const Icon(Icons.check_circle,
+                                  color: Colors.white),
+                            );
+                          }
+
+                          if (data.hasError) {
+                            snackBarWidget(
+                              message: '保存できませんでした。 もう一度試してください。',
+                              backgroundColor: Colors.red,
+                              prefixIcon:
+                                  const Icon(Icons.error, color: Colors.white),
+                            );
+                          }
+                        },
+                        child: ValueListenableBuilder(
+                            valueListenable:
+                                context.watch<EstimateModel>().submitData,
+                            builder: (context, value, _) {
+                              return ReactiveFormConsumer(
+                                  builder: (context, formGroup, _) {
+                                return ElevatedButton(
+                                  onPressed: value.loading
+                                      ? null
+                                      : () {
+                                          context.read<EstimateModel>().submit(
+                                                formGroup: formGroup,
+                                              );
+                                        },
+                                  child: WithLoadingButton(
+                                      isLoading: value.loading,
+                                      child: const Text('保存')),
+                                );
+                              });
+                            }),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),

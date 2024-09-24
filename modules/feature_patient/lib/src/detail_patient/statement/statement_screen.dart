@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:core_utils/async.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -119,10 +121,10 @@ class StatementScreen extends StatelessWidget {
                               children: [
                                 Container(
                                   padding: EdgeInsets.symmetric(
-                                    horizontal:
-                                        context.appTheme.spacing.marginExtraSmall,
-                                    vertical:
-                                        context.appTheme.spacing.marginExtraSmall,
+                                    horizontal: context
+                                        .appTheme.spacing.marginExtraSmall,
+                                    vertical: context
+                                        .appTheme.spacing.marginExtraSmall,
                                   ),
                                   decoration: BoxDecoration(
                                     border: Border.all(
@@ -133,7 +135,8 @@ class StatementScreen extends StatelessWidget {
                                   ),
                                   child: Text(
                                     '見積書',
-                                    style: context.textTheme.bodySmall?.copyWith(
+                                    style:
+                                        context.textTheme.bodySmall?.copyWith(
                                       color: Colors.red,
                                     ),
                                   ),
@@ -194,7 +197,57 @@ class StatementScreen extends StatelessWidget {
                   SizedBox(
                     height: context.appTheme.spacing.marginMedium,
                   ),
-                  const StatementScreenForm()
+                  const StatementScreenForm(),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      ValueListenableListener(
+                        valueListenable:
+                            context.read<StatementModel>().submitData,
+                        onListen: () {
+                          var data =
+                              context.read<StatementModel>().submitData.value;
+
+                          if (data.hasData) {
+                            snackBarWidget(
+                              message: '正常に保存されました',
+                              prefixIcon: const Icon(Icons.check_circle,
+                                  color: Colors.white),
+                            );
+                          }
+
+                          if (data.hasError) {
+                            snackBarWidget(
+                              message: '保存できませんでした。 もう一度試してください。',
+                              backgroundColor: Colors.red,
+                              prefixIcon:
+                                  const Icon(Icons.error, color: Colors.white),
+                            );
+                          }
+                        },
+                        child: ValueListenableBuilder(
+                            valueListenable:
+                                context.watch<StatementModel>().submitData,
+                            builder: (context, value, _) {
+                              return ReactiveFormConsumer(
+                                  builder: (context, formGroup, _) {
+                                return ElevatedButton(
+                                  onPressed: value.loading
+                                      ? null
+                                      : () {
+                                          context.read<StatementModel>().submit(
+                                                formGroup: formGroup,
+                                              );
+                                        },
+                                  child: WithLoadingButton(
+                                      isLoading: value.loading,
+                                      child: const Text('保存')),
+                                );
+                              });
+                            }),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
