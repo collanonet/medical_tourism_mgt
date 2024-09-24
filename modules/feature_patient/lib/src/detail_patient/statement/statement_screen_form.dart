@@ -54,8 +54,8 @@ class StatementScreenForm extends StatelessWidget {
                   stepWidth: 300,
                   child: ReactiveDatePicker<DateTime>(
                     formControlName: 'paymentDeadline',
-                    firstDate: DateTime(1900),
-                    lastDate: DateTime.now(),
+                    firstDate: DateTime(2000),
+                    lastDate: DateTime(2100),
                     builder: (BuildContext context,
                         ReactiveDatePickerDelegate<dynamic> picker,
                         Widget? child) {
@@ -265,8 +265,8 @@ class StatementScreenForm extends StatelessWidget {
               stepWidth: 300,
               child: ReactiveDatePicker<DateTime>(
                 formControlName: 'paymentDeadline',
-                firstDate: DateTime(1900),
-                lastDate: DateTime.now(),
+                firstDate: DateTime(2000),
+                lastDate: DateTime(2100),
                 builder: (BuildContext context,
                     ReactiveDatePickerDelegate<dynamic> picker, Widget? child) {
                   return Stack(
@@ -402,8 +402,8 @@ class StatementScreenForm extends StatelessWidget {
                                     Expanded(
                                       child: ReactiveDatePicker<DateTime>(
                                         formControlName: 'transactionDate',
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime.now(),
+                                        firstDate: DateTime(2000),
+                                        lastDate: DateTime(2100),
                                         builder: (BuildContext context,
                                             ReactiveDatePickerDelegate<dynamic>
                                                 picker,

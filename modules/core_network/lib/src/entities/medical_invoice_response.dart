@@ -15,7 +15,7 @@ class MedicalInvoiceResponse {
   DateTime? invoiceDate;
   String? registrationNumber;
   String? subject;
-  String? amountBilled;
+  double? amountBilled;
   DateTime? paymentDeadline;
   String? bankTransferInformation;
   String? remarks;
@@ -57,7 +57,7 @@ class MedicalInvoiceResponse {
 class TotalPaymentResponse {
   @JsonKey(name: '_id')
   String id;
-  String? taxRate;
+  double? taxRate;
   double? amountExcludingTaxInYen;
   double? consumptionTaxAmountInYen;
 

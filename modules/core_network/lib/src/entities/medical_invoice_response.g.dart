@@ -17,7 +17,7 @@ MedicalInvoiceResponse _$MedicalInvoiceResponseFromJson(
           : DateTime.parse(json['invoiceDate'] as String),
       registrationNumber: json['registrationNumber'] as String?,
       subject: json['subject'] as String?,
-      amountBilled: json['amountBilled'] as String?,
+      amountBilled: (json['amountBilled'] as num?)?.toDouble(),
       paymentDeadline: json['paymentDeadline'] == null
           ? null
           : DateTime.parse(json['paymentDeadline'] as String),
@@ -68,7 +68,7 @@ TotalPaymentResponse _$TotalPaymentResponseFromJson(
         Map<String, dynamic> json) =>
     TotalPaymentResponse(
       id: json['_id'] as String,
-      taxRate: json['taxRate'] as String?,
+      taxRate: (json['taxRate'] as num?)?.toDouble(),
       amountExcludingTaxInYen:
           (json['amountExcludingTaxInYen'] as num?)?.toDouble(),
       consumptionTaxAmountInYen:
