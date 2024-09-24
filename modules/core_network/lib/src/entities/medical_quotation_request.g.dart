@@ -3,6 +3,203 @@
 part of 'medical_quotation_request.dart';
 
 // **************************************************************************
+// CopyWithGenerator
+// **************************************************************************
+
+abstract class _$MedicalQuotationRequestCWProxy {
+  MedicalQuotationRequest file(String? file);
+
+  MedicalQuotationRequest quotationNumber(String? quotationNumber);
+
+  MedicalQuotationRequest quotationDate(DateTime? quotationDate);
+
+  MedicalQuotationRequest registrationNumber(String? registrationNumber);
+
+  MedicalQuotationRequest subject(String? subject);
+
+  MedicalQuotationRequest totalAmount(double? totalAmount);
+
+  MedicalQuotationRequest validityPeriod(DateTime? validityPeriod);
+
+  MedicalQuotationRequest remarks(String? remarks);
+
+  MedicalQuotationRequest medicalRecord(String medicalRecord);
+
+  MedicalQuotationRequest user(String user);
+
+  MedicalQuotationRequest hospitalRecord(String? hospitalRecord);
+
+  MedicalQuotationRequest totalPayment(List<TotalPaymentRequest>? totalPayment);
+
+  MedicalQuotationRequest item(List<ItemRequest>? item);
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `MedicalQuotationRequest(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// MedicalQuotationRequest(...).copyWith(id: 12, name: "My name")
+  /// ````
+  MedicalQuotationRequest call({
+    String? file,
+    String? quotationNumber,
+    DateTime? quotationDate,
+    String? registrationNumber,
+    String? subject,
+    double? totalAmount,
+    DateTime? validityPeriod,
+    String? remarks,
+    String? medicalRecord,
+    String? user,
+    String? hospitalRecord,
+    List<TotalPaymentRequest>? totalPayment,
+    List<ItemRequest>? item,
+  });
+}
+
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfMedicalQuotationRequest.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfMedicalQuotationRequest.copyWith.fieldName(...)`
+class _$MedicalQuotationRequestCWProxyImpl
+    implements _$MedicalQuotationRequestCWProxy {
+  const _$MedicalQuotationRequestCWProxyImpl(this._value);
+
+  final MedicalQuotationRequest _value;
+
+  @override
+  MedicalQuotationRequest file(String? file) => this(file: file);
+
+  @override
+  MedicalQuotationRequest quotationNumber(String? quotationNumber) =>
+      this(quotationNumber: quotationNumber);
+
+  @override
+  MedicalQuotationRequest quotationDate(DateTime? quotationDate) =>
+      this(quotationDate: quotationDate);
+
+  @override
+  MedicalQuotationRequest registrationNumber(String? registrationNumber) =>
+      this(registrationNumber: registrationNumber);
+
+  @override
+  MedicalQuotationRequest subject(String? subject) => this(subject: subject);
+
+  @override
+  MedicalQuotationRequest totalAmount(double? totalAmount) =>
+      this(totalAmount: totalAmount);
+
+  @override
+  MedicalQuotationRequest validityPeriod(DateTime? validityPeriod) =>
+      this(validityPeriod: validityPeriod);
+
+  @override
+  MedicalQuotationRequest remarks(String? remarks) => this(remarks: remarks);
+
+  @override
+  MedicalQuotationRequest medicalRecord(String medicalRecord) =>
+      this(medicalRecord: medicalRecord);
+
+  @override
+  MedicalQuotationRequest user(String user) => this(user: user);
+
+  @override
+  MedicalQuotationRequest hospitalRecord(String? hospitalRecord) =>
+      this(hospitalRecord: hospitalRecord);
+
+  @override
+  MedicalQuotationRequest totalPayment(
+          List<TotalPaymentRequest>? totalPayment) =>
+      this(totalPayment: totalPayment);
+
+  @override
+  MedicalQuotationRequest item(List<ItemRequest>? item) => this(item: item);
+
+  @override
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `MedicalQuotationRequest(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// MedicalQuotationRequest(...).copyWith(id: 12, name: "My name")
+  /// ````
+  MedicalQuotationRequest call({
+    Object? file = const $CopyWithPlaceholder(),
+    Object? quotationNumber = const $CopyWithPlaceholder(),
+    Object? quotationDate = const $CopyWithPlaceholder(),
+    Object? registrationNumber = const $CopyWithPlaceholder(),
+    Object? subject = const $CopyWithPlaceholder(),
+    Object? totalAmount = const $CopyWithPlaceholder(),
+    Object? validityPeriod = const $CopyWithPlaceholder(),
+    Object? remarks = const $CopyWithPlaceholder(),
+    Object? medicalRecord = const $CopyWithPlaceholder(),
+    Object? user = const $CopyWithPlaceholder(),
+    Object? hospitalRecord = const $CopyWithPlaceholder(),
+    Object? totalPayment = const $CopyWithPlaceholder(),
+    Object? item = const $CopyWithPlaceholder(),
+  }) {
+    return MedicalQuotationRequest(
+      file: file == const $CopyWithPlaceholder()
+          ? _value.file
+          // ignore: cast_nullable_to_non_nullable
+          : file as String?,
+      quotationNumber: quotationNumber == const $CopyWithPlaceholder()
+          ? _value.quotationNumber
+          // ignore: cast_nullable_to_non_nullable
+          : quotationNumber as String?,
+      quotationDate: quotationDate == const $CopyWithPlaceholder()
+          ? _value.quotationDate
+          // ignore: cast_nullable_to_non_nullable
+          : quotationDate as DateTime?,
+      registrationNumber: registrationNumber == const $CopyWithPlaceholder()
+          ? _value.registrationNumber
+          // ignore: cast_nullable_to_non_nullable
+          : registrationNumber as String?,
+      subject: subject == const $CopyWithPlaceholder()
+          ? _value.subject
+          // ignore: cast_nullable_to_non_nullable
+          : subject as String?,
+      totalAmount: totalAmount == const $CopyWithPlaceholder()
+          ? _value.totalAmount
+          // ignore: cast_nullable_to_non_nullable
+          : totalAmount as double?,
+      validityPeriod: validityPeriod == const $CopyWithPlaceholder()
+          ? _value.validityPeriod
+          // ignore: cast_nullable_to_non_nullable
+          : validityPeriod as DateTime?,
+      remarks: remarks == const $CopyWithPlaceholder()
+          ? _value.remarks
+          // ignore: cast_nullable_to_non_nullable
+          : remarks as String?,
+      medicalRecord:
+          medicalRecord == const $CopyWithPlaceholder() || medicalRecord == null
+              ? _value.medicalRecord
+              // ignore: cast_nullable_to_non_nullable
+              : medicalRecord as String,
+      user: user == const $CopyWithPlaceholder() || user == null
+          ? _value.user
+          // ignore: cast_nullable_to_non_nullable
+          : user as String,
+      hospitalRecord: hospitalRecord == const $CopyWithPlaceholder()
+          ? _value.hospitalRecord
+          // ignore: cast_nullable_to_non_nullable
+          : hospitalRecord as String?,
+      totalPayment: totalPayment == const $CopyWithPlaceholder()
+          ? _value.totalPayment
+          // ignore: cast_nullable_to_non_nullable
+          : totalPayment as List<TotalPaymentRequest>?,
+      item: item == const $CopyWithPlaceholder()
+          ? _value.item
+          // ignore: cast_nullable_to_non_nullable
+          : item as List<ItemRequest>?,
+    );
+  }
+}
+
+extension $MedicalQuotationRequestCopyWith on MedicalQuotationRequest {
+  /// Returns a callable class that can be used as follows: `instanceOfMedicalQuotationRequest.copyWith(...)` or like so:`instanceOfMedicalQuotationRequest.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
+  _$MedicalQuotationRequestCWProxy get copyWith =>
+      _$MedicalQuotationRequestCWProxyImpl(this);
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

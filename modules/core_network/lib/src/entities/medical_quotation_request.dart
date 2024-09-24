@@ -1,7 +1,9 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 part 'medical_quotation_request.g.dart';
 
+@CopyWith()
 @JsonSerializable()
 class MedicalQuotationRequest {
   String? file;

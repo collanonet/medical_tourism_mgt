@@ -3,6 +3,217 @@
 part of 'medical_invoice_request.dart';
 
 // **************************************************************************
+// CopyWithGenerator
+// **************************************************************************
+
+abstract class _$MedicalInvoiceRequestCWProxy {
+  MedicalInvoiceRequest file(String? file);
+
+  MedicalInvoiceRequest invoiceNumber(String? invoiceNumber);
+
+  MedicalInvoiceRequest invoiceDate(DateTime? invoiceDate);
+
+  MedicalInvoiceRequest registrationNumber(String? registrationNumber);
+
+  MedicalInvoiceRequest subject(String? subject);
+
+  MedicalInvoiceRequest amountBilled(double? amountBilled);
+
+  MedicalInvoiceRequest paymentDeadline(DateTime? paymentDeadline);
+
+  MedicalInvoiceRequest bankTransferInformation(
+      String? bankTransferInformation);
+
+  MedicalInvoiceRequest remarks(String? remarks);
+
+  MedicalInvoiceRequest medicalRecord(String medicalRecord);
+
+  MedicalInvoiceRequest user(String user);
+
+  MedicalInvoiceRequest hospitalRecord(String? hospitalRecord);
+
+  MedicalInvoiceRequest totalPayment(List<TotalPaymentRequest>? totalPayment);
+
+  MedicalInvoiceRequest item(List<ItemRequest>? item);
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `MedicalInvoiceRequest(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// MedicalInvoiceRequest(...).copyWith(id: 12, name: "My name")
+  /// ````
+  MedicalInvoiceRequest call({
+    String? file,
+    String? invoiceNumber,
+    DateTime? invoiceDate,
+    String? registrationNumber,
+    String? subject,
+    double? amountBilled,
+    DateTime? paymentDeadline,
+    String? bankTransferInformation,
+    String? remarks,
+    String? medicalRecord,
+    String? user,
+    String? hospitalRecord,
+    List<TotalPaymentRequest>? totalPayment,
+    List<ItemRequest>? item,
+  });
+}
+
+/// Proxy class for `copyWith` functionality. This is a callable class and can be used as follows: `instanceOfMedicalInvoiceRequest.copyWith(...)`. Additionally contains functions for specific fields e.g. `instanceOfMedicalInvoiceRequest.copyWith.fieldName(...)`
+class _$MedicalInvoiceRequestCWProxyImpl
+    implements _$MedicalInvoiceRequestCWProxy {
+  const _$MedicalInvoiceRequestCWProxyImpl(this._value);
+
+  final MedicalInvoiceRequest _value;
+
+  @override
+  MedicalInvoiceRequest file(String? file) => this(file: file);
+
+  @override
+  MedicalInvoiceRequest invoiceNumber(String? invoiceNumber) =>
+      this(invoiceNumber: invoiceNumber);
+
+  @override
+  MedicalInvoiceRequest invoiceDate(DateTime? invoiceDate) =>
+      this(invoiceDate: invoiceDate);
+
+  @override
+  MedicalInvoiceRequest registrationNumber(String? registrationNumber) =>
+      this(registrationNumber: registrationNumber);
+
+  @override
+  MedicalInvoiceRequest subject(String? subject) => this(subject: subject);
+
+  @override
+  MedicalInvoiceRequest amountBilled(double? amountBilled) =>
+      this(amountBilled: amountBilled);
+
+  @override
+  MedicalInvoiceRequest paymentDeadline(DateTime? paymentDeadline) =>
+      this(paymentDeadline: paymentDeadline);
+
+  @override
+  MedicalInvoiceRequest bankTransferInformation(
+          String? bankTransferInformation) =>
+      this(bankTransferInformation: bankTransferInformation);
+
+  @override
+  MedicalInvoiceRequest remarks(String? remarks) => this(remarks: remarks);
+
+  @override
+  MedicalInvoiceRequest medicalRecord(String medicalRecord) =>
+      this(medicalRecord: medicalRecord);
+
+  @override
+  MedicalInvoiceRequest user(String user) => this(user: user);
+
+  @override
+  MedicalInvoiceRequest hospitalRecord(String? hospitalRecord) =>
+      this(hospitalRecord: hospitalRecord);
+
+  @override
+  MedicalInvoiceRequest totalPayment(List<TotalPaymentRequest>? totalPayment) =>
+      this(totalPayment: totalPayment);
+
+  @override
+  MedicalInvoiceRequest item(List<ItemRequest>? item) => this(item: item);
+
+  @override
+
+  /// This function **does support** nullification of nullable fields. All `null` values passed to `non-nullable` fields will be ignored. You can also use `MedicalInvoiceRequest(...).copyWith.fieldName(...)` to override fields one at a time with nullification support.
+  ///
+  /// Usage
+  /// ```dart
+  /// MedicalInvoiceRequest(...).copyWith(id: 12, name: "My name")
+  /// ````
+  MedicalInvoiceRequest call({
+    Object? file = const $CopyWithPlaceholder(),
+    Object? invoiceNumber = const $CopyWithPlaceholder(),
+    Object? invoiceDate = const $CopyWithPlaceholder(),
+    Object? registrationNumber = const $CopyWithPlaceholder(),
+    Object? subject = const $CopyWithPlaceholder(),
+    Object? amountBilled = const $CopyWithPlaceholder(),
+    Object? paymentDeadline = const $CopyWithPlaceholder(),
+    Object? bankTransferInformation = const $CopyWithPlaceholder(),
+    Object? remarks = const $CopyWithPlaceholder(),
+    Object? medicalRecord = const $CopyWithPlaceholder(),
+    Object? user = const $CopyWithPlaceholder(),
+    Object? hospitalRecord = const $CopyWithPlaceholder(),
+    Object? totalPayment = const $CopyWithPlaceholder(),
+    Object? item = const $CopyWithPlaceholder(),
+  }) {
+    return MedicalInvoiceRequest(
+      file: file == const $CopyWithPlaceholder()
+          ? _value.file
+          // ignore: cast_nullable_to_non_nullable
+          : file as String?,
+      invoiceNumber: invoiceNumber == const $CopyWithPlaceholder()
+          ? _value.invoiceNumber
+          // ignore: cast_nullable_to_non_nullable
+          : invoiceNumber as String?,
+      invoiceDate: invoiceDate == const $CopyWithPlaceholder()
+          ? _value.invoiceDate
+          // ignore: cast_nullable_to_non_nullable
+          : invoiceDate as DateTime?,
+      registrationNumber: registrationNumber == const $CopyWithPlaceholder()
+          ? _value.registrationNumber
+          // ignore: cast_nullable_to_non_nullable
+          : registrationNumber as String?,
+      subject: subject == const $CopyWithPlaceholder()
+          ? _value.subject
+          // ignore: cast_nullable_to_non_nullable
+          : subject as String?,
+      amountBilled: amountBilled == const $CopyWithPlaceholder()
+          ? _value.amountBilled
+          // ignore: cast_nullable_to_non_nullable
+          : amountBilled as double?,
+      paymentDeadline: paymentDeadline == const $CopyWithPlaceholder()
+          ? _value.paymentDeadline
+          // ignore: cast_nullable_to_non_nullable
+          : paymentDeadline as DateTime?,
+      bankTransferInformation:
+          bankTransferInformation == const $CopyWithPlaceholder()
+              ? _value.bankTransferInformation
+              // ignore: cast_nullable_to_non_nullable
+              : bankTransferInformation as String?,
+      remarks: remarks == const $CopyWithPlaceholder()
+          ? _value.remarks
+          // ignore: cast_nullable_to_non_nullable
+          : remarks as String?,
+      medicalRecord:
+          medicalRecord == const $CopyWithPlaceholder() || medicalRecord == null
+              ? _value.medicalRecord
+              // ignore: cast_nullable_to_non_nullable
+              : medicalRecord as String,
+      user: user == const $CopyWithPlaceholder() || user == null
+          ? _value.user
+          // ignore: cast_nullable_to_non_nullable
+          : user as String,
+      hospitalRecord: hospitalRecord == const $CopyWithPlaceholder()
+          ? _value.hospitalRecord
+          // ignore: cast_nullable_to_non_nullable
+          : hospitalRecord as String?,
+      totalPayment: totalPayment == const $CopyWithPlaceholder()
+          ? _value.totalPayment
+          // ignore: cast_nullable_to_non_nullable
+          : totalPayment as List<TotalPaymentRequest>?,
+      item: item == const $CopyWithPlaceholder()
+          ? _value.item
+          // ignore: cast_nullable_to_non_nullable
+          : item as List<ItemRequest>?,
+    );
+  }
+}
+
+extension $MedicalInvoiceRequestCopyWith on MedicalInvoiceRequest {
+  /// Returns a callable class that can be used as follows: `instanceOfMedicalInvoiceRequest.copyWith(...)` or like so:`instanceOfMedicalInvoiceRequest.copyWith.fieldName(...)`.
+  // ignore: library_private_types_in_public_api
+  _$MedicalInvoiceRequestCWProxy get copyWith =>
+      _$MedicalInvoiceRequestCWProxyImpl(this);
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

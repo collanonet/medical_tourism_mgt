@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
@@ -109,16 +110,15 @@ class StatementModel {
       String html = generateHtmlFromInvoice(
         request,
       );
-      String? pathFile = await generatePdfFromHtml(html);
+      Uint8List? pathFile = await generatePdfFromHtml(html);
       String? fileName;
 
       if (pathFile != null) {
         try {
-          File file = File(pathFile);
-          String base64Image = base64Encode(file.readAsBytesSync());
+          String base64Image = base64Encode(pathFile);
           FileResponse fileData = await patientRepository.uploadFileBase64(
             base64Image,
-            pathFile.split('/').last,
+            'invoice_${DateTime.now().timeZoneOffset}.pdf',
           );
           fileName = fileData.filename;
         } catch (e) {
@@ -126,8 +126,7 @@ class StatementModel {
         }
       }
       if (fileName != null) {
-        request.file = fileName;
-        await createInvoice(request: request);
+        await createInvoice(request: request.copyWith(file: fileName));
         submitData.value = const AsyncData(data: true);
         formGroup.reset();
       } else {

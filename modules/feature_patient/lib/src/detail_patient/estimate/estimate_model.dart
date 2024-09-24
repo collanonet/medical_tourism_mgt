@@ -1,6 +1,7 @@
 // Flutter imports:
 import 'dart:convert';
 import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
@@ -57,82 +58,80 @@ class EstimateModel {
   Future<void> submit({
     required FormGroup formGroup,
   }) async {
-    try {
-      submitData.value = const AsyncData(loading: true);
+    // try {
+    //   submitData.value = const AsyncData(loading: true);
 
-      List<ItemRequest>? items = [];
-      formGroup.control('item').value.forEach((item) {
-        items.add(ItemRequest(
-          transactionDate: item['transactionDate'],
-          details: item['details'],
-          quantity: item['quantity'],
-          unit: item['unit'],
-          unitPrice: item['unitPrice'],
-          amount: item['amount'],
-          taxRate: item['taxRate'],
-        ));
-      });
+    List<ItemRequest>? items = [];
+    formGroup.control('item').value.forEach((item) {
+      items.add(ItemRequest(
+        transactionDate: item['transactionDate'],
+        details: item['details'],
+        quantity: item['quantity'],
+        unit: item['unit'],
+        unitPrice: item['unitPrice'],
+        amount: item['amount'],
+        taxRate: item['taxRate'],
+      ));
+    });
 
-      List<TotalPaymentRequest>? totalPayment = [];
+    List<TotalPaymentRequest>? totalPayment = [];
 
-      formGroup.control('totalPayment').value.forEach((payment) {
-        totalPayment.add(TotalPaymentRequest(
-          taxRate: payment['taxRate'],
-          amountExcludingTaxInYen: payment['amountExcludingTaxInYen'],
-          consumptionTaxAmountInYen: payment['consumptionTaxAmountInYen'],
-        ));
-      });
+    formGroup.control('totalPayment').value.forEach((payment) {
+      totalPayment.add(TotalPaymentRequest(
+        taxRate: payment['taxRate'],
+        amountExcludingTaxInYen: payment['amountExcludingTaxInYen'],
+        consumptionTaxAmountInYen: payment['consumptionTaxAmountInYen'],
+      ));
+    });
 
-      logger.d('formGroup.value: ${formGroup.value}');
-      MedicalQuotationRequest request = MedicalQuotationRequest(
-        quotationNumber: formGroup.control('quotationNumber').value,
-        quotationDate: formGroup.control('quotationDate').value,
-        registrationNumber: formGroup.control('registrationNumber').value,
-        subject: formGroup.control('subject').value,
-        totalAmount: formGroup.control('totalAmount').value,
-        validityPeriod: formGroup.control('validityPeriod').value,
-        remarks: formGroup.control('remarks').value,
-        totalPayment: totalPayment,
-        item: items,
-        medicalRecord: formGroup.control('medicalRecord').value,
-        user: formGroup.control('user').value,
-        hospitalRecord: formGroup.control('hospitalRecord').value,
-      );
+    logger.d('formGroup.value: ${formGroup.value}');
+    MedicalQuotationRequest request = MedicalQuotationRequest(
+      quotationNumber: formGroup.control('quotationNumber').value,
+      quotationDate: formGroup.control('quotationDate').value,
+      registrationNumber: formGroup.control('registrationNumber').value,
+      subject: formGroup.control('subject').value,
+      totalAmount: formGroup.control('totalAmount').value,
+      validityPeriod: formGroup.control('validityPeriod').value,
+      remarks: formGroup.control('remarks').value,
+      totalPayment: totalPayment,
+      item: items,
+      medicalRecord: formGroup.control('medicalRecord').value,
+      user: formGroup.control('user').value,
+      hospitalRecord: formGroup.control('hospitalRecord').value,
+    );
 
-      logger.d('request: ${request.toJson()}');
+    logger.d('request: ${request.toJson()}');
 
-      String html = generateHtmlFromQuotation(
-        request,
-      );
-      String? pathFile = await generatePdfFromHtml(html);
-      String? fileName;
+    String html = generateHtmlFromQuotation(
+      request,
+    );
+    Uint8List? pathFile = await generatePdfFromHtml(html);
+    String? fileName;
 
-      if (pathFile != null) {
-        try {
-          File file = File(pathFile);
-          String base64Image = base64Encode(file.readAsBytesSync());
-          FileResponse fileData = await patientRepository.uploadFileBase64(
-            base64Image,
-            pathFile.split('/').last,
-          );
-          fileName = fileData.filename;
-        } catch (e) {
-          logger.e(e);
-        }
+    if (pathFile != null) {
+      try {
+        String base64Image = base64Encode(pathFile);
+        FileResponse fileData = await patientRepository.uploadFileBase64(
+          base64Image,
+          'quotation_${DateTime.now().timeZoneOffset}.pdf',
+        );
+        fileName = fileData.filename;
+      } catch (e) {
+        logger.e(e);
       }
-
-      if (fileName != null) {
-        request.file = fileName;
-
-        await createQuotation(request: request);
-        submitData.value = const AsyncData(data: true);
-        formGroup.reset();
-      } else {
-        submitData.value = const AsyncData(error: 'ファイルの作成に失敗しました');
-      }
-    } catch (e) {
-      submitData.value = AsyncData(error: e);
     }
+
+    if (fileName != null) {
+
+      await createQuotation(request: request.copyWith(file: fileName));
+      submitData.value = const AsyncData(data: true);
+      formGroup.reset();
+    } else {
+      submitData.value = const AsyncData(error: 'ファイルの作成に失敗しました');
+    }
+    // } catch (e) {
+    //   submitData.value = AsyncData(error: e);
+    // }
   }
 
   Future<void> createQuotation({

@@ -1,9 +1,11 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../core_network.dart';
 
 part 'medical_invoice_request.g.dart';
 
+@CopyWith()
 @JsonSerializable()
 class MedicalInvoiceRequest {
   String? file;
