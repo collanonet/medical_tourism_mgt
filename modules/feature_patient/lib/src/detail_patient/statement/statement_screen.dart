@@ -65,11 +65,11 @@ class StatementScreen extends StatelessWidget {
                         style: context.textTheme.bodySmall,
                       )),
                       Expanded(
-                          flex: 2,
+                          // flex: 2,
                           child: Text(
-                            '件名', // subject
-                            style: context.textTheme.bodySmall,
-                          )),
+                        '件名', // subject
+                        style: context.textTheme.bodySmall,
+                      )),
                       Expanded(
                           child: Text(
                         'エージェントへ開示', // Disclosure to Agent
@@ -87,8 +87,7 @@ class StatementScreen extends StatelessWidget {
                       )),
                       Expanded(
                           child: SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      )),
+                              width: context.appTheme.spacing.marginMedium)),
                     ],
                   ),
                   const Divider(),
@@ -164,14 +163,9 @@ class StatementScreen extends StatelessWidget {
                                 style: context.textTheme.bodySmall,
                               )),
                               Expanded(
-                                  flex: 2,
+                                  //flex: 2,
                                   child: Text(
-                                    data?.subject ?? '',
-                                    style: context.textTheme.bodySmall,
-                                  )),
-                              Expanded(
-                                  child: Text(
-                                '--',
+                                data?.subject ?? '',
                                 style: context.textTheme.bodySmall,
                               )),
                               Expanded(
@@ -185,18 +179,22 @@ class StatementScreen extends StatelessWidget {
                                 style: context.textTheme.bodySmall,
                               )),
                               Expanded(
-                                child: Row(
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: data?.fileName != null
-                                          ? () {
-                                              openUrlInBrowser(
-                                                  fileName: data!.fileName!);
-                                            }
-                                          : null,
-                                      child: const Text('請求書を発行する'),
-                                    )
-                                  ],
+                                  child: Text(
+                                '--',
+                                style: context.textTheme.bodySmall,
+                              )),
+                              Expanded(
+                                child: ElevatedButton(
+                                  onPressed: data?.fileName != null
+                                      ? () {
+                                          openUrlInBrowser(
+                                              fileName: data!.fileName!);
+                                        }
+                                      : null,
+                                  child: const Text(
+                                    '請求書を発行する',
+                                    style: TextStyle(fontSize: 10),
+                                  ),
                                 ),
                               ),
                             ],
