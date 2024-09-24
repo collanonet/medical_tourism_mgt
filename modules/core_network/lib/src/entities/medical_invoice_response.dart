@@ -13,6 +13,7 @@ class MedicalInvoiceResponse {
   String? fileName;
   String? invoiceNumber;
   DateTime? invoiceDate;
+  String? contact;
   String? registrationNumber;
   String? subject;
   double? amountBilled;
@@ -32,6 +33,7 @@ class MedicalInvoiceResponse {
     this.fileName,
     this.invoiceNumber,
     this.invoiceDate,
+    this.contact,
     this.registrationNumber,
     this.subject,
     this.amountBilled,

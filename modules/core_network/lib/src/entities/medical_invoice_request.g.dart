@@ -13,6 +13,8 @@ abstract class _$MedicalInvoiceRequestCWProxy {
 
   MedicalInvoiceRequest invoiceDate(DateTime? invoiceDate);
 
+  MedicalInvoiceRequest contact(String? contact);
+
   MedicalInvoiceRequest registrationNumber(String? registrationNumber);
 
   MedicalInvoiceRequest subject(String? subject);
@@ -46,6 +48,7 @@ abstract class _$MedicalInvoiceRequestCWProxy {
     String? fileName,
     String? invoiceNumber,
     DateTime? invoiceDate,
+    String? contact,
     String? registrationNumber,
     String? subject,
     double? amountBilled,
@@ -77,6 +80,9 @@ class _$MedicalInvoiceRequestCWProxyImpl
   @override
   MedicalInvoiceRequest invoiceDate(DateTime? invoiceDate) =>
       this(invoiceDate: invoiceDate);
+
+  @override
+  MedicalInvoiceRequest contact(String? contact) => this(contact: contact);
 
   @override
   MedicalInvoiceRequest registrationNumber(String? registrationNumber) =>
@@ -131,6 +137,7 @@ class _$MedicalInvoiceRequestCWProxyImpl
     Object? fileName = const $CopyWithPlaceholder(),
     Object? invoiceNumber = const $CopyWithPlaceholder(),
     Object? invoiceDate = const $CopyWithPlaceholder(),
+    Object? contact = const $CopyWithPlaceholder(),
     Object? registrationNumber = const $CopyWithPlaceholder(),
     Object? subject = const $CopyWithPlaceholder(),
     Object? amountBilled = const $CopyWithPlaceholder(),
@@ -156,6 +163,10 @@ class _$MedicalInvoiceRequestCWProxyImpl
           ? _value.invoiceDate
           // ignore: cast_nullable_to_non_nullable
           : invoiceDate as DateTime?,
+      contact: contact == const $CopyWithPlaceholder()
+          ? _value.contact
+          // ignore: cast_nullable_to_non_nullable
+          : contact as String?,
       registrationNumber: registrationNumber == const $CopyWithPlaceholder()
           ? _value.registrationNumber
           // ignore: cast_nullable_to_non_nullable
@@ -225,6 +236,7 @@ MedicalInvoiceRequest _$MedicalInvoiceRequestFromJson(
       invoiceDate: json['invoiceDate'] == null
           ? null
           : DateTime.parse(json['invoiceDate'] as String),
+      contact: json['contact'] as String?,
       registrationNumber: json['registrationNumber'] as String?,
       subject: json['subject'] as String?,
       amountBilled: (json['amountBilled'] as num?)?.toDouble(),
@@ -250,6 +262,7 @@ Map<String, dynamic> _$MedicalInvoiceRequestToJson(
       'fileName': instance.fileName,
       'invoiceNumber': instance.invoiceNumber,
       'invoiceDate': instance.invoiceDate?.toIso8601String(),
+      'contact': instance.contact,
       'registrationNumber': instance.registrationNumber,
       'subject': instance.subject,
       'amountBilled': instance.amountBilled,

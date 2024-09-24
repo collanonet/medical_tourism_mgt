@@ -37,7 +37,7 @@ class StatementScreenForm extends StatelessWidget {
                 const Text('請求書番号'),
                 const SizedBox(width: 38),
                 IntrinsicWidth(
-                  stepWidth: 300,
+                  stepWidth: 250,
                   child: ReactiveTextField<String>(
                     formControlName: 'invoiceNumber',
                     // decoration: InputDecoration(labelText: 'Invoice Number'),
@@ -51,7 +51,7 @@ class StatementScreenForm extends StatelessWidget {
                 const Text('請求日'),
                 const SizedBox(width: 38),
                 IntrinsicWidth(
-                  stepWidth: 300,
+                  stepWidth: 250,
                   child: ReactiveDatePicker<DateTime>(
                     formControlName: 'paymentDeadline',
                     firstDate: DateTime(2000),
@@ -112,7 +112,7 @@ class StatementScreenForm extends StatelessWidget {
                 const Text('件名'),
                 const SizedBox(width: 38),
                 IntrinsicWidth(
-                  stepWidth: 300,
+                  stepWidth: 250,
                   child: ReactiveTextField<String>(
                     formControlName: 'subject',
                     // decoration: InputDecoration(labelText: 'Subject'),
@@ -125,11 +125,21 @@ class StatementScreenForm extends StatelessWidget {
               children: [
                 Text('登録番号'),
                 IntrinsicWidth(
-                  stepWidth: 300,
+                  stepWidth: 250,
                   child: ReactiveTextField<String>(
                     formControlName: 'registrationNumber',
-                    // decoration:
-                    //     InputDecoration(labelText: 'Registration Number'),
+                  ),
+                )
+              ],
+            ),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('担当者'),
+                IntrinsicWidth(
+                  stepWidth: 250,
+                  child: ReactiveTextField<String>(
+                    formControlName: 'contact',
                   ),
                 )
               ],
@@ -141,7 +151,7 @@ class StatementScreenForm extends StatelessWidget {
           children: [
             Text('ご請求額'),
             IntrinsicWidth(
-              stepWidth: 300,
+              stepWidth: 250,
               child: ReactiveTextField<double>(
                 formControlName: 'amountBilled',
                 // decoration: InputDecoration(labelText: 'Amount Billed'),
@@ -262,7 +272,7 @@ class StatementScreenForm extends StatelessWidget {
           children: [
             Text('支払期限'),
             IntrinsicWidth(
-              stepWidth: 300,
+              stepWidth: 250,
               child: ReactiveDatePicker<DateTime>(
                 formControlName: 'paymentDeadline',
                 firstDate: DateTime(2000),
@@ -314,7 +324,7 @@ class StatementScreenForm extends StatelessWidget {
           children: [
             Text('お振込先'),
             IntrinsicWidth(
-              stepWidth: 300,
+              stepWidth: 250,
               child: ReactiveTextField(
                 formControlName: 'bankTransferInformation',
                 // decoration:
@@ -328,7 +338,7 @@ class StatementScreenForm extends StatelessWidget {
           children: [
             Text('備考'),
             IntrinsicWidth(
-              stepWidth: 300,
+              stepWidth: 250,
               child: ReactiveTextField<String>(
                 formControlName: 'remarks',
                 // decoration: InputDecoration(labelText: 'Remarks'),

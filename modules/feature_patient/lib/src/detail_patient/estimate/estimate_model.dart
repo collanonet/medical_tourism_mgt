@@ -87,6 +87,7 @@ class EstimateModel {
       MedicalQuotationRequest request = MedicalQuotationRequest(
         quotationNumber: formGroup.control('quotationNumber').value,
         quotationDate: formGroup.control('quotationDate').value,
+        contact: formGroup.control('contact').value,
         registrationNumber: formGroup.control('registrationNumber').value,
         subject: formGroup.control('subject').value,
         totalAmount: formGroup.control('totalAmount').value,
@@ -152,24 +153,24 @@ class EstimateModel {
 
 String generateHtmlFromQuotation(MedicalQuotationRequest request) {
   final headerInfo = '''
-    <h1>Quotation Details</h1>
-    <p><strong>Quotation Number:</strong> ${request.quotationNumber ?? ''}</p>
-    <p><strong>Quotation Date:</strong> ${request.quotationDate != null ? Dates.formatFullDate(request.quotationDate!) : ''}</p>
-    <p><strong>Registration Number:</strong> ${request.registrationNumber ?? ''}</p>
-    <p><strong>Subject:</strong> ${request.subject ?? ''}</p>
-    <p><strong>Total Amount:</strong> ${request.totalAmount ?? ''}</p>
-    <p><strong>Validity Period:</strong> ${request.validityPeriod != null ? Dates.formatFullDate(request.validityPeriod!) : ''}</p>
-    <p><strong>Remarks:</strong> ${request.remarks ?? ''}</p>
+    <h1>見積書</h1>
+    <p><strong>見積番号:</strong> ${request.quotationNumber ?? ''}</p>
+    <p><strong>見積日:</strong> ${request.quotationDate != null ? Dates.formatFullDate(request.quotationDate!) : ''}</p>
+    <p><strong>担当者:</strong> ${request.contact ?? ''}</p>
+    <p><strong>登録番号:</strong> ${request.registrationNumber ?? ''}</p>
+    <p><strong>件名:</strong> ${request.subject ?? ''}</p>
+    <p><strong>合計金額:</strong> ${request.totalAmount ?? ''}</p>
+    <p><strong>有効期限:</strong> ${request.validityPeriod != null ? Dates.formatFullDate(request.validityPeriod!) : ''}</p>
+    <p><strong>備考:</strong> ${request.remarks ?? ''}</p>
   ''';
 
   const paymentTableHeader = '''
-    <h2>Payment Details</h2>
     <table border="1">
       <tr>
-        <th>Tax Rate</th>
-        <th>Amount Excluding Tax (Yen)</th>
-        <th>Consumption Tax Amount (Yen)</th>
-        <th>Total</th>
+        <th>税率</th>
+        <th>税抜合線(門)</th>
+        <th>消費税(円)</th>
+        <th>合計金額(円)</th>
       </tr>
   ''';
 
@@ -191,16 +192,15 @@ String generateHtmlFromQuotation(MedicalQuotationRequest request) {
   ''';
 
   const itemTableHeader = '''
-    <h2>Item Details</h2>
     <table border="1">
       <tr>
-        <th>Transaction Date</th>
-        <th>Details</th>
-        <th>Quantity</th>
-        <th>Unit</th>
-        <th>Unit Price</th>
-        <th>Amount</th>
-        <th>Tax Rate</th>
+        <th>取引日</th>
+        <th>内訳</th>
+        <th>数量</th>
+        <th>单位</th>
+        <th>単価</th>
+        <th>金額</th>
+        <th>税率</th>
       </tr>
   ''';
 
@@ -226,6 +226,8 @@ String generateHtmlFromQuotation(MedicalQuotationRequest request) {
 
   return '''
     <html>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <body>
         $headerInfo
         $paymentTable

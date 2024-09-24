@@ -15,6 +15,7 @@ MedicalQuotationResponse _$MedicalQuotationResponseFromJson(
       quotationDate: json['quotationDate'] == null
           ? null
           : DateTime.parse(json['quotationDate'] as String),
+      contact: json['contact'] as String?,
       registrationNumber: json['registrationNumber'] as String?,
       subject: json['subject'] as String?,
       totalAmount: (json['totalAmount'] as num?)?.toDouble(),
@@ -48,6 +49,7 @@ Map<String, dynamic> _$MedicalQuotationResponseToJson(
       'fileName': instance.fileName,
       'quotationNumber': instance.quotationNumber,
       'quotationDate': instance.quotationDate?.toIso8601String(),
+      'contact': instance.contact,
       'registrationNumber': instance.registrationNumber,
       'subject': instance.subject,
       'totalAmount': instance.totalAmount,

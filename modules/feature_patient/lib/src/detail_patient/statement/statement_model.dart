@@ -89,6 +89,7 @@ class StatementModel {
       MedicalInvoiceRequest request = MedicalInvoiceRequest(
         invoiceNumber: formGroup.control('invoiceNumber').value,
         invoiceDate: formGroup.control('invoiceDate').value,
+        contact: formGroup.control('contact').value,
         registrationNumber: formGroup.control('registrationNumber').value,
         subject: formGroup.control('subject').value,
         amountBilled: formGroup.control('amountBilled').value,
@@ -154,25 +155,25 @@ class StatementModel {
 
 String generateHtmlFromInvoice(MedicalInvoiceRequest request) {
   final headerInfo = '''
-    <h1>Invoice Details</h1>
-    <p><strong>Invoice Number:</strong> ${request.invoiceNumber ?? ''}</p>
-    <p><strong>Invoice Date:</strong> ${request.invoiceDate != null ? Dates.formatFullDate(request.invoiceDate!) : ''}</p>
-    <p><strong>Registration Number:</strong> ${request.registrationNumber ?? ''}</p>
-    <p><strong>Subject:</strong> ${request.subject ?? ''}</p>
-    <p><strong>Amount Billed:</strong> ${request.amountBilled ?? ''}</p>
-    <p><strong>Payment Deadline:</strong> ${request.paymentDeadline != null ? Dates.formatFullDate(request.paymentDeadline!) : ''}</p>
-    <p><strong>Bank Transfer Information:</strong> ${request.bankTransferInformation ?? ''}</p>
-    <p><strong>Remarks:</strong> ${request.remarks ?? ''}</p>
+    <h1>請求書</h1>
+    <p><strong>請求書番号 :</strong> ${request.invoiceNumber ?? ''}</p>
+    <p><strong>請求日:</strong> ${request.invoiceDate != null ? Dates.formatFullDate(request.invoiceDate!) : ''}</p>
+    <p><strong>担当者:</strong> ${request.contact ?? ''}</p>
+    <p><strong>登録番号:</strong> ${request.registrationNumber ?? ''}</p>
+    <p><strong>件名:</strong> ${request.subject ?? ''}</p>
+    <p><strong>ご請求額:</strong> ${request.amountBilled ?? ''}</p>
+    <p><strong>支払期限:</strong> ${request.paymentDeadline != null ? Dates.formatFullDate(request.paymentDeadline!) : ''}</p>
+    <p><strong>お振込み:</strong> ${request.bankTransferInformation ?? ''}</p>
+    <p><strong>備考:</strong> ${request.remarks ?? ''}</p>
   ''';
 
   const paymentTableHeader = '''
-    <h2>Payment Details</h2>
     <table border="1">
       <tr>
-        <th>Tax Rate</th>
-        <th>Amount Excluding Tax (Yen)</th>
-        <th>Consumption Tax Amount (Yen)</th>
-        <th>Total</th>
+        <th>税率</th>
+        <th>税抜合線(門)</th>
+        <th>消費税(円)</th>
+        <th>合計金額(円)</th>
       </tr>
   ''';
 
@@ -195,16 +196,15 @@ String generateHtmlFromInvoice(MedicalInvoiceRequest request) {
   ''';
 
   const itemTableHeader = '''
-    <h2>Item Details</h2>
     <table border="1">
       <tr>
-        <th>Transaction Date</th>
-        <th>Details</th>
-        <th>Quantity</th>
-        <th>Unit</th>
-        <th>Unit Price</th>
-        <th>Amount</th>
-        <th>Tax Rate</th>
+        <th>取引日</th>
+        <th>内訳</th>
+        <th>数量</th>
+        <th>单位</th>
+        <th>単価</th>
+        <th>金額</th>
+        <th>税率</th>
       </tr>
   ''';
 
@@ -231,6 +231,8 @@ String generateHtmlFromInvoice(MedicalInvoiceRequest request) {
 
   return '''
     <html>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <body>
         $headerInfo
         $paymentTable

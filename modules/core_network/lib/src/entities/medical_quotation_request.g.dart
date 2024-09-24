@@ -13,6 +13,8 @@ abstract class _$MedicalQuotationRequestCWProxy {
 
   MedicalQuotationRequest quotationDate(DateTime? quotationDate);
 
+  MedicalQuotationRequest contact(String? contact);
+
   MedicalQuotationRequest registrationNumber(String? registrationNumber);
 
   MedicalQuotationRequest subject(String? subject);
@@ -43,6 +45,7 @@ abstract class _$MedicalQuotationRequestCWProxy {
     String? fileName,
     String? quotationNumber,
     DateTime? quotationDate,
+    String? contact,
     String? registrationNumber,
     String? subject,
     double? totalAmount,
@@ -74,6 +77,9 @@ class _$MedicalQuotationRequestCWProxyImpl
   @override
   MedicalQuotationRequest quotationDate(DateTime? quotationDate) =>
       this(quotationDate: quotationDate);
+
+  @override
+  MedicalQuotationRequest contact(String? contact) => this(contact: contact);
 
   @override
   MedicalQuotationRequest registrationNumber(String? registrationNumber) =>
@@ -124,6 +130,7 @@ class _$MedicalQuotationRequestCWProxyImpl
     Object? fileName = const $CopyWithPlaceholder(),
     Object? quotationNumber = const $CopyWithPlaceholder(),
     Object? quotationDate = const $CopyWithPlaceholder(),
+    Object? contact = const $CopyWithPlaceholder(),
     Object? registrationNumber = const $CopyWithPlaceholder(),
     Object? subject = const $CopyWithPlaceholder(),
     Object? totalAmount = const $CopyWithPlaceholder(),
@@ -148,6 +155,10 @@ class _$MedicalQuotationRequestCWProxyImpl
           ? _value.quotationDate
           // ignore: cast_nullable_to_non_nullable
           : quotationDate as DateTime?,
+      contact: contact == const $CopyWithPlaceholder()
+          ? _value.contact
+          // ignore: cast_nullable_to_non_nullable
+          : contact as String?,
       registrationNumber: registrationNumber == const $CopyWithPlaceholder()
           ? _value.registrationNumber
           // ignore: cast_nullable_to_non_nullable
@@ -212,6 +223,7 @@ MedicalQuotationRequest _$MedicalQuotationRequestFromJson(
       quotationDate: json['quotationDate'] == null
           ? null
           : DateTime.parse(json['quotationDate'] as String),
+      contact: json['contact'] as String?,
       registrationNumber: json['registrationNumber'] as String?,
       subject: json['subject'] as String?,
       totalAmount: (json['totalAmount'] as num?)?.toDouble(),
@@ -236,6 +248,7 @@ Map<String, dynamic> _$MedicalQuotationRequestToJson(
       'fileName': instance.fileName,
       'quotationNumber': instance.quotationNumber,
       'quotationDate': instance.quotationDate?.toIso8601String(),
+      'contact': instance.contact,
       'registrationNumber': instance.registrationNumber,
       'subject': instance.subject,
       'totalAmount': instance.totalAmount,

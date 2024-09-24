@@ -11,6 +11,7 @@ class MedicalInvoiceRequest {
   String? fileName;
   String? invoiceNumber;
   DateTime? invoiceDate;
+  String? contact;
   String? registrationNumber;
   String? subject;
   double? amountBilled;
@@ -27,6 +28,7 @@ class MedicalInvoiceRequest {
     this.fileName,
     this.invoiceNumber,
     this.invoiceDate,
+    this.contact,
     this.registrationNumber,
     this.subject,
     this.amountBilled,

@@ -7,6 +7,7 @@ FormGroup statementForm() {
     'invoiceDate': FormControl<DateTime>(
       value: DateTime.now(),
     ),
+    'contact': FormControl<String>(),
     'registrationNumber': FormControl<String>(),
     'subject': FormControl<String>(),
     'amountBilled': FormControl<double>(

@@ -15,6 +15,7 @@ MedicalInvoiceResponse _$MedicalInvoiceResponseFromJson(
       invoiceDate: json['invoiceDate'] == null
           ? null
           : DateTime.parse(json['invoiceDate'] as String),
+      contact: json['contact'] as String?,
       registrationNumber: json['registrationNumber'] as String?,
       subject: json['subject'] as String?,
       amountBilled: (json['amountBilled'] as num?)?.toDouble(),
@@ -49,6 +50,7 @@ Map<String, dynamic> _$MedicalInvoiceResponseToJson(
       'fileName': instance.fileName,
       'invoiceNumber': instance.invoiceNumber,
       'invoiceDate': instance.invoiceDate?.toIso8601String(),
+      'contact': instance.contact,
       'registrationNumber': instance.registrationNumber,
       'subject': instance.subject,
       'amountBilled': instance.amountBilled,

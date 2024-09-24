@@ -9,6 +9,7 @@ class MedicalQuotationRequest {
   String? fileName;
   String? quotationNumber;
   DateTime? quotationDate;
+  String? contact;
   String? registrationNumber;
   String? subject;
   double? totalAmount;
@@ -24,6 +25,7 @@ class MedicalQuotationRequest {
     this.fileName,
     this.quotationNumber,
     this.quotationDate,
+    this.contact,
     this.registrationNumber,
     this.subject,
     this.totalAmount,

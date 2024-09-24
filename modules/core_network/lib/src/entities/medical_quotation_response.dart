@@ -11,6 +11,7 @@ class MedicalQuotationResponse {
   String? fileName;
   String? quotationNumber;
   DateTime? quotationDate;
+  String? contact;
   String? registrationNumber;
   String? subject;
   double? totalAmount;
@@ -29,6 +30,7 @@ class MedicalQuotationResponse {
     this.fileName,
     this.quotationNumber,
     this.quotationDate,
+    this.contact,
     this.registrationNumber,
     this.subject,
     this.totalAmount,
