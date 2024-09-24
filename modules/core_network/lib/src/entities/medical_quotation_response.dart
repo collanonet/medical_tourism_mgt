@@ -8,7 +8,7 @@ part 'medical_quotation_response.g.dart';
 class MedicalQuotationResponse {
   @JsonKey(name: '_id')
   String id;
-  String file;
+  String? file;
   String? quotationNumber;
   DateTime? quotationDate;
   String? registrationNumber;
@@ -17,7 +17,7 @@ class MedicalQuotationResponse {
   DateTime? validityPeriod;
   String? remarks;
   MedicalRecord medicalRecord;
-  Patient user;
+  Patient? user;
   BasicInformationHospitalResponse? hospitalRecord;
   List<TotalPaymentResponse>? totalPayment;
   List<ItemResponse>? item;
@@ -26,7 +26,7 @@ class MedicalQuotationResponse {
 
   MedicalQuotationResponse({
     required this.id,
-    required this.file,
+    this.file,
     this.quotationNumber,
     this.quotationDate,
     this.registrationNumber,
@@ -35,7 +35,7 @@ class MedicalQuotationResponse {
     this.validityPeriod,
     this.remarks,
     required this.medicalRecord,
-    required this.user,
+    this.user,
     this.hospitalRecord,
     this.totalPayment,
     this.item,

@@ -10,7 +10,7 @@ MedicalQuotationResponse _$MedicalQuotationResponseFromJson(
         Map<String, dynamic> json) =>
     MedicalQuotationResponse(
       id: json['_id'] as String,
-      file: json['file'] as String,
+      file: json['file'] as String?,
       quotationNumber: json['quotationNumber'] as String?,
       quotationDate: json['quotationDate'] == null
           ? null
@@ -24,7 +24,9 @@ MedicalQuotationResponse _$MedicalQuotationResponseFromJson(
       remarks: json['remarks'] as String?,
       medicalRecord:
           MedicalRecord.fromJson(json['medicalRecord'] as Map<String, dynamic>),
-      user: Patient.fromJson(json['user'] as Map<String, dynamic>),
+      user: json['user'] == null
+          ? null
+          : Patient.fromJson(json['user'] as Map<String, dynamic>),
       hospitalRecord: json['hospitalRecord'] == null
           ? null
           : BasicInformationHospitalResponse.fromJson(

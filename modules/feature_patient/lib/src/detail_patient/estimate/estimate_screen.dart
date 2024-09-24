@@ -18,7 +18,7 @@ class EstimateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(
-        valueListenable: context.read<EstimateModel>().medicalQuotationData,
+        valueListenable: context.watch<EstimateModel>().medicalQuotationData,
         builder: (context, value, _) {
           return Skeletonizer(
             enabled: value.loading,
