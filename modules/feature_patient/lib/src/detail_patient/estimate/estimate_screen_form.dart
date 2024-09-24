@@ -2,6 +2,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class EstimateScreenForm extends StatelessWidget {
@@ -24,6 +25,9 @@ class EstimateScreenForm extends StatelessWidget {
           formControlName: 'quotationDate',
           decoration: InputDecoration(labelText: 'Quotation Date'),
           readOnly: true,
+          valueAccessor: DateTimeValueAccessor(
+            dateTimeFormat: DateFormat('yyyy/MM/dd'),
+          ),
           onTap: (value) async {
             final date = await showDatePicker(
               context: context,
@@ -52,6 +56,9 @@ class EstimateScreenForm extends StatelessWidget {
           formControlName: 'validityPeriod',
           decoration: InputDecoration(labelText: 'Validity Period'),
           readOnly: true,
+          valueAccessor: DateTimeValueAccessor(
+            dateTimeFormat: DateFormat('yyyy/MM/dd'),
+          ),
           onTap: (value) async {
             final date = await showDatePicker(
               context: context,
@@ -150,6 +157,9 @@ class EstimateScreenForm extends StatelessWidget {
                                   decoration: const InputDecoration(
                                       labelText: 'Transaction Date'),
                                   readOnly: true,
+                                  valueAccessor: DateTimeValueAccessor(
+                                    dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                  ),
                                   onTap: (value) async {
                                     final date = await showDatePicker(
                                       context: context,
