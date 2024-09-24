@@ -6,7 +6,7 @@ FormGroup estimateForm() {
     'quotationDate': FormControl<DateTime>(),
     'registrationNumber': FormControl<String>(),
     'subject': FormControl<String>(),
-    'totalAmount': FormControl<String>(),
+    'totalAmount': FormControl<double>(),
     'validityPeriod': FormControl<DateTime>(),
     'remarks': FormControl<String>(),
     'medicalRecord': FormControl<String>(
@@ -18,20 +18,20 @@ FormGroup estimateForm() {
     'hospitalRecord': FormControl<String>(),
     'totalPayment': FormArray([
       FormGroup({
-        'taxRate': FormControl<String>(),
-        'amountExcludingTaxInYen': FormControl<String>(),
-        'consumptionTaxAmountInYen': FormControl<String>(),
+        'taxRate': FormControl<double>(),
+        'amountExcludingTaxInYen': FormControl<double>(),
+        'consumptionTaxAmountInYen': FormControl<double>(),
       })
     ]),
     'item': FormArray([
       FormGroup({
         'transactionDate': FormControl<DateTime>(),
         'details': FormControl<String>(),
-        'quantity': FormControl<String>(),
+        'quantity': FormControl<double>(),
         'unit': FormControl<String>(),
-        'unitPrice': FormControl<String>(),
-        'amount': FormControl<String>(),
-        'taxRate': FormControl<String>(),
+        'unitPrice': FormControl<double>(),
+        'amount': FormControl<double>(),
+        'taxRate': FormControl<double>(),
       })
     ]),
   });

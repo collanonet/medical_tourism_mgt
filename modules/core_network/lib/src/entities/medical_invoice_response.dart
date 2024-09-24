@@ -57,15 +57,15 @@ class MedicalInvoiceResponse {
 class TotalPaymentResponse {
   @JsonKey(name: '_id')
   String id;
-  String taxRate;
-  String amountExcludingTaxInYen;
-  String consumptionTaxAmountInYen;
+  String? taxRate;
+  double? amountExcludingTaxInYen;
+  double? consumptionTaxAmountInYen;
 
   TotalPaymentResponse({
     required this.id,
-    required this.taxRate,
-    required this.amountExcludingTaxInYen,
-    required this.consumptionTaxAmountInYen,
+    this.taxRate,
+    this.amountExcludingTaxInYen,
+    this.consumptionTaxAmountInYen,
   });
 
   factory TotalPaymentResponse.fromJson(Map<String, dynamic> json) =>
@@ -78,26 +78,27 @@ class TotalPaymentResponse {
 class ItemResponse {
   @JsonKey(name: '_id')
   String id;
-  DateTime transactionDate;
-  String details;
-  String quantity;
-  String unit;
-  String unitPrice;
-  String amount;
-  String taxRate;
+  DateTime? transactionDate;
+  String? details;
+  double? quantity;
+  String? unit;
+  double? unitPrice;
+  double? amount;
+  double? taxRate;
 
   ItemResponse({
     required this.id,
-    required this.transactionDate,
-    required this.details,
-    required this.quantity,
-    required this.unit,
-    required this.unitPrice,
-    required this.amount,
-    required this.taxRate,
+    this.transactionDate,
+    this.details,
+    this.quantity,
+    this.unit,
+    this.unitPrice,
+    this.amount,
+    this.taxRate,
   });
 
-  factory ItemResponse.fromJson(Map<String, dynamic> json) => _$ItemResponseFromJson(json);
+  factory ItemResponse.fromJson(Map<String, dynamic> json) =>
+      _$ItemResponseFromJson(json);
 
   Map<String, dynamic> toJson() => _$ItemResponseToJson(this);
 }

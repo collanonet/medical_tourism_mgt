@@ -35,7 +35,7 @@ class EstimateModel {
   }) async {
     patientData.value = AsyncData(data: patient);
     medicalRecordData.value = AsyncData(data: medicalRecord);
-    formGroup.control('medicalRecordId').value = medicalRecord.id;
+    formGroup.control('medicalRecord').value = medicalRecord.id;
     formGroup.control('user').value = patient.id;
     await fetchMedicalQuotation(medicalRecordId: medicalRecord.id);
   }
@@ -142,7 +142,7 @@ String generateHtmlFromQuotation(MedicalQuotationRequest request) {
         <td>${payment.taxRate}</td>
         <td>${payment.amountExcludingTaxInYen}</td>
         <td>${payment.consumptionTaxAmountInYen}</td>
-        <td>${payment.amountExcludingTaxInYen + payment.consumptionTaxAmountInYen}</td>
+        <td>${(payment.amountExcludingTaxInYen ?? 0) + (payment.consumptionTaxAmountInYen ?? 0)}</td>
       </tr>
     ''';
   }).join();
@@ -170,7 +170,7 @@ String generateHtmlFromQuotation(MedicalQuotationRequest request) {
   final itemTableRows = request.item?.map((item) {
     return '''
       <tr>
-        <td>${Dates.formatFullDate(item.transactionDate)}</td>
+        <td>${item.transactionDate != null ? Dates.formatFullDate(item.transactionDate!) : item.transactionDate}</td>
         <td>${item.details ?? ''}</td>
         <td>${item.quantity}</td>
         <td>${item.unit}</td>

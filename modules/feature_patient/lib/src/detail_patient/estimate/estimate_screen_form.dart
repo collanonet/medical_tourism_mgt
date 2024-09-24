@@ -226,7 +226,6 @@ class EstimateScreenForm extends StatelessWidget {
             );
           },
         ),
-
       ],
     );
   }

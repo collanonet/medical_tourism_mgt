@@ -4,12 +4,12 @@ part 'medical_quotation_request.g.dart';
 
 @JsonSerializable()
 class MedicalQuotationRequest {
-  String file;
+  String? file;
   String? quotationNumber;
   DateTime? quotationDate;
   String? registrationNumber;
   String? subject;
-  String? totalAmount;
+  double? totalAmount;
   DateTime? validityPeriod;
   String? remarks;
   String medicalRecord;
@@ -19,7 +19,7 @@ class MedicalQuotationRequest {
   List<ItemRequest>? item;
 
   MedicalQuotationRequest({
-    required this.file,
+    this.file,
     this.quotationNumber,
     this.quotationDate,
     this.registrationNumber,
@@ -42,14 +42,14 @@ class MedicalQuotationRequest {
 
 @JsonSerializable()
 class TotalPaymentRequest {
-  String taxRate;
-  String amountExcludingTaxInYen;
-  String consumptionTaxAmountInYen;
+  double? taxRate;
+  double? amountExcludingTaxInYen;
+  double? consumptionTaxAmountInYen;
 
   TotalPaymentRequest({
-    required this.taxRate,
-    required this.amountExcludingTaxInYen,
-    required this.consumptionTaxAmountInYen,
+    this.taxRate,
+    this.amountExcludingTaxInYen,
+    this.consumptionTaxAmountInYen,
   });
 
   factory TotalPaymentRequest.fromJson(Map<String, dynamic> json) =>
@@ -60,25 +60,26 @@ class TotalPaymentRequest {
 
 @JsonSerializable()
 class ItemRequest {
-  DateTime transactionDate;
+  DateTime? transactionDate;
   String? details;
-  String quantity;
-  String unit;
-  String unitPrice;
-  String amount;
-  String taxRate;
+  double? quantity;
+  String? unit;
+  double? unitPrice;
+  double? amount;
+  double? taxRate;
 
   ItemRequest({
-    required this.transactionDate,
+    this.transactionDate,
     this.details,
-    required this.quantity,
-    required this.unit,
-    required this.unitPrice,
-    required this.amount,
-    required this.taxRate,
+    this.quantity,
+    this.unit,
+    this.unitPrice,
+    this.amount,
+    this.taxRate,
   });
 
-  factory ItemRequest.fromJson(Map<String, dynamic> json) => _$ItemRequestFromJson(json);
+  factory ItemRequest.fromJson(Map<String, dynamic> json) =>
+      _$ItemRequestFromJson(json);
 
   Map<String, dynamic> toJson() => _$ItemRequestToJson(this);
 }

@@ -9,14 +9,14 @@ part of 'medical_quotation_request.dart';
 MedicalQuotationRequest _$MedicalQuotationRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalQuotationRequest(
-      file: json['file'] as String,
+      file: json['file'] as String?,
       quotationNumber: json['quotationNumber'] as String?,
       quotationDate: json['quotationDate'] == null
           ? null
           : DateTime.parse(json['quotationDate'] as String),
       registrationNumber: json['registrationNumber'] as String?,
       subject: json['subject'] as String?,
-      totalAmount: json['totalAmount'] as String?,
+      totalAmount: (json['totalAmount'] as num?)?.toDouble(),
       validityPeriod: json['validityPeriod'] == null
           ? null
           : DateTime.parse(json['validityPeriod'] as String),
@@ -52,9 +52,11 @@ Map<String, dynamic> _$MedicalQuotationRequestToJson(
 
 TotalPaymentRequest _$TotalPaymentRequestFromJson(Map<String, dynamic> json) =>
     TotalPaymentRequest(
-      taxRate: json['taxRate'] as String,
-      amountExcludingTaxInYen: json['amountExcludingTaxInYen'] as String,
-      consumptionTaxAmountInYen: json['consumptionTaxAmountInYen'] as String,
+      taxRate: (json['taxRate'] as num?)?.toDouble(),
+      amountExcludingTaxInYen:
+          (json['amountExcludingTaxInYen'] as num?)?.toDouble(),
+      consumptionTaxAmountInYen:
+          (json['consumptionTaxAmountInYen'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$TotalPaymentRequestToJson(
@@ -66,18 +68,20 @@ Map<String, dynamic> _$TotalPaymentRequestToJson(
     };
 
 ItemRequest _$ItemRequestFromJson(Map<String, dynamic> json) => ItemRequest(
-      transactionDate: DateTime.parse(json['transactionDate'] as String),
+      transactionDate: json['transactionDate'] == null
+          ? null
+          : DateTime.parse(json['transactionDate'] as String),
       details: json['details'] as String?,
-      quantity: json['quantity'] as String,
-      unit: json['unit'] as String,
-      unitPrice: json['unitPrice'] as String,
-      amount: json['amount'] as String,
-      taxRate: json['taxRate'] as String,
+      quantity: (json['quantity'] as num?)?.toDouble(),
+      unit: json['unit'] as String?,
+      unitPrice: (json['unitPrice'] as num?)?.toDouble(),
+      amount: (json['amount'] as num?)?.toDouble(),
+      taxRate: (json['taxRate'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$ItemRequestToJson(ItemRequest instance) =>
     <String, dynamic>{
-      'transactionDate': instance.transactionDate.toIso8601String(),
+      'transactionDate': instance.transactionDate?.toIso8601String(),
       'details': instance.details,
       'quantity': instance.quantity,
       'unit': instance.unit,

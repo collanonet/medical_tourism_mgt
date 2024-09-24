@@ -13,7 +13,7 @@ class MedicalQuotationResponse {
   DateTime? quotationDate;
   String? registrationNumber;
   String? subject;
-  String? totalAmount;
+  double? totalAmount;
   DateTime? validityPeriod;
   String? remarks;
   MedicalRecord medicalRecord;

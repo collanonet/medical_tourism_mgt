@@ -36,7 +36,7 @@ class StatementModel {
   }) async {
     patientData.value = AsyncData(data: patient);
     medicalRecordData.value = AsyncData(data: medicalRecord);
-    formGroup.control('medicalRecordId').value = medicalRecord.id;
+    formGroup.control('medicalRecord').value = medicalRecord.id;
     formGroup.control('user').value = patient.id;
     await fetchMedicalInvoice(medicalRecordId: medicalRecord.id);
   }
@@ -58,12 +58,15 @@ class StatementModel {
   Future<void> submit({
     required FormGroup formGroup,
   }) async {
-    try {
+    // try {
       submitData.value = const AsyncData(loading: true);
 
+      logger.d('formGroup.value: ${formGroup.value}');
       MedicalInvoiceRequest request = MedicalInvoiceRequest.fromJson(
         formGroup.value,
       );
+
+      logger.d('request: ${request.toJson()}');
 
       String html = generateHtmlFromInvoice(
         request,
@@ -72,7 +75,7 @@ class StatementModel {
       String? fileName;
 
       if (pathFile != null) {
-        try {
+        // try {
           File file = File(pathFile);
           String base64Image = base64Encode(file.readAsBytesSync());
           FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -80,9 +83,9 @@ class StatementModel {
             pathFile.split('/').last,
           );
           fileName = fileData.filename;
-        } catch (e) {
-          logger.e(e);
-        }
+        // } catch (e) {
+        //   logger.e(e);
+        // }
       }
       if (fileName != null) {
         formGroup.control('file').value = fileName;
@@ -93,9 +96,9 @@ class StatementModel {
       } else {
         submitData.value = const AsyncData(error: 'ファイルの作成に失敗しました');
       }
-    } catch (e) {
-      submitData.value = AsyncData(error: e);
-    }
+    // } catch (e) {
+    //   submitData.value = AsyncData(error: e);
+    // }
   }
 
   Future<void> createInvoice({
@@ -171,7 +174,7 @@ String generateHtmlFromInvoice(MedicalInvoiceRequest request) {
   final itemTableRows = request.item?.map((item) {
         return '''
       <tr>
-        <td>${Dates.formatFullDate(item.transactionDate)}</td>
+        <td>${item.transactionDate != null ? Dates.formatFullDate(item.transactionDate!) : item.transactionDate}</td>
         <td>${item.details ?? ''}</td>
         <td>${item.quantity}</td>
         <td>${item.unit}</td>

@@ -17,7 +17,7 @@ MedicalQuotationResponse _$MedicalQuotationResponseFromJson(
           : DateTime.parse(json['quotationDate'] as String),
       registrationNumber: json['registrationNumber'] as String?,
       subject: json['subject'] as String?,
-      totalAmount: json['totalAmount'] as String?,
+      totalAmount: (json['totalAmount'] as num?)?.toDouble(),
       validityPeriod: json['validityPeriod'] == null
           ? null
           : DateTime.parse(json['validityPeriod'] as String),

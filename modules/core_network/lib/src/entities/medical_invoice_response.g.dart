@@ -66,9 +66,11 @@ TotalPaymentResponse _$TotalPaymentResponseFromJson(
         Map<String, dynamic> json) =>
     TotalPaymentResponse(
       id: json['_id'] as String,
-      taxRate: json['taxRate'] as String,
-      amountExcludingTaxInYen: json['amountExcludingTaxInYen'] as String,
-      consumptionTaxAmountInYen: json['consumptionTaxAmountInYen'] as String,
+      taxRate: json['taxRate'] as String?,
+      amountExcludingTaxInYen:
+          (json['amountExcludingTaxInYen'] as num?)?.toDouble(),
+      consumptionTaxAmountInYen:
+          (json['consumptionTaxAmountInYen'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$TotalPaymentResponseToJson(
@@ -82,19 +84,21 @@ Map<String, dynamic> _$TotalPaymentResponseToJson(
 
 ItemResponse _$ItemResponseFromJson(Map<String, dynamic> json) => ItemResponse(
       id: json['_id'] as String,
-      transactionDate: DateTime.parse(json['transactionDate'] as String),
-      details: json['details'] as String,
-      quantity: json['quantity'] as String,
-      unit: json['unit'] as String,
-      unitPrice: json['unitPrice'] as String,
-      amount: json['amount'] as String,
-      taxRate: json['taxRate'] as String,
+      transactionDate: json['transactionDate'] == null
+          ? null
+          : DateTime.parse(json['transactionDate'] as String),
+      details: json['details'] as String?,
+      quantity: (json['quantity'] as num?)?.toDouble(),
+      unit: json['unit'] as String?,
+      unitPrice: (json['unitPrice'] as num?)?.toDouble(),
+      amount: (json['amount'] as num?)?.toDouble(),
+      taxRate: (json['taxRate'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$ItemResponseToJson(ItemResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
-      'transactionDate': instance.transactionDate.toIso8601String(),
+      'transactionDate': instance.transactionDate?.toIso8601String(),
       'details': instance.details,
       'quantity': instance.quantity,
       'unit': instance.unit,

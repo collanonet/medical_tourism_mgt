@@ -9,14 +9,14 @@ part of 'medical_invoice_request.dart';
 MedicalInvoiceRequest _$MedicalInvoiceRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalInvoiceRequest(
-      file: json['file'] as String,
+      file: json['file'] as String?,
       invoiceNumber: json['invoiceNumber'] as String?,
       invoiceDate: json['invoiceDate'] == null
           ? null
           : DateTime.parse(json['invoiceDate'] as String),
       registrationNumber: json['registrationNumber'] as String?,
       subject: json['subject'] as String?,
-      amountBilled: json['amountBilled'] as String?,
+      amountBilled: (json['amountBilled'] as num?)?.toDouble(),
       paymentDeadline: json['paymentDeadline'] == null
           ? null
           : DateTime.parse(json['paymentDeadline'] as String),

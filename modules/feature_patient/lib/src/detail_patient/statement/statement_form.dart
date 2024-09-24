@@ -7,7 +7,7 @@ FormGroup statementForm() {
     'invoiceDate': FormControl<DateTime>(),
     'registrationNumber': FormControl<String>(),
     'subject': FormControl<String>(),
-    'amountBilled': FormControl<String>(),
+    'amountBilled': FormControl<double>(),
     'paymentDeadline': FormControl<DateTime>(),
     'bankTransferInformation': FormControl<String>(),
     'remarks': FormControl<String>(),
@@ -20,20 +20,20 @@ FormGroup statementForm() {
     'hospitalRecord': FormControl<String>(),
     'totalPayment': FormArray([
       FormGroup({
-        'taxRate': FormControl<String>(),
-        'amountExcludingTaxInYen': FormControl<String>(),
-        'consumptionTaxAmountInYen': FormControl<String>(),
+        'taxRate': FormControl<double>(),
+        'amountExcludingTaxInYen': FormControl<double>(),
+        'consumptionTaxAmountInYen': FormControl<double>(),
       })
     ]),
     'item': FormArray([
       FormGroup({
         'transactionDate': FormControl<DateTime>(),
         'details': FormControl<String>(),
-        'quantity': FormControl<String>(),
+        'quantity': FormControl<double>(),
         'unit': FormControl<String>(),
-        'unitPrice': FormControl<String>(),
-        'amount': FormControl<String>(),
-        'taxRate': FormControl<String>(),
+        'unitPrice': FormControl<double>(),
+        'amount': FormControl<double>(),
+        'taxRate': FormControl<double>(),
       })
     ]),
   });
