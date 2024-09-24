@@ -58,7 +58,7 @@ class StatementModel {
   Future<void> submit({
     required FormGroup formGroup,
   }) async {
-    // try {
+    try {
       submitData.value = const AsyncData(loading: true);
 
       logger.d('formGroup.value: ${formGroup.value}');
@@ -75,7 +75,7 @@ class StatementModel {
       String? fileName;
 
       if (pathFile != null) {
-        // try {
+        try {
           File file = File(pathFile);
           String base64Image = base64Encode(file.readAsBytesSync());
           FileResponse fileData = await patientRepository.uploadFileBase64(
@@ -83,9 +83,9 @@ class StatementModel {
             pathFile.split('/').last,
           );
           fileName = fileData.filename;
-        // } catch (e) {
-        //   logger.e(e);
-        // }
+        } catch (e) {
+          logger.e(e);
+        }
       }
       if (fileName != null) {
         formGroup.control('file').value = fileName;
@@ -96,9 +96,9 @@ class StatementModel {
       } else {
         submitData.value = const AsyncData(error: 'ファイルの作成に失敗しました');
       }
-    // } catch (e) {
-    //   submitData.value = AsyncData(error: e);
-    // }
+    } catch (e) {
+      submitData.value = AsyncData(error: e);
+    }
   }
 
   Future<void> createInvoice({
