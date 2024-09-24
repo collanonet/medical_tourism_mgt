@@ -156,14 +156,14 @@ class StatementModel {
 String generateHtmlFromInvoice(MedicalInvoiceRequest request) {
   final headerInfo = '''
     <h1>Invoice Details</h1>
-    <p><strong>Invoice Number:</strong> ${request.invoiceNumber}</p>
-    <p><strong>Invoice Date:</strong> ${request.invoiceDate != null ? Dates.formatFullDate(request.invoiceDate!) : request.invoiceDate}</p>
-    <p><strong>Registration Number:</strong> ${request.registrationNumber}</p>
-    <p><strong>Subject:</strong> ${request.subject}</p>
-    <p><strong>Amount Billed:</strong> ${request.amountBilled}</p>
-    <p><strong>Payment Deadline:</strong> ${request.paymentDeadline}</p>
-    <p><strong>Bank Transfer Information:</strong> ${request.bankTransferInformation}</p>
-    <p><strong>Remarks:</strong> ${request.remarks}</p>
+    <p><strong>Invoice Number:</strong> ${request.invoiceNumber ?? ''}</p>
+    <p><strong>Invoice Date:</strong> ${request.invoiceDate != null ? Dates.formatFullDate(request.invoiceDate!) : ''}</p>
+    <p><strong>Registration Number:</strong> ${request.registrationNumber ?? ''}</p>
+    <p><strong>Subject:</strong> ${request.subject ?? ''}</p>
+    <p><strong>Amount Billed:</strong> ${request.amountBilled ?? ''}</p>
+    <p><strong>Payment Deadline:</strong> ${request.paymentDeadline != null ? Dates.formatFullDate(request.paymentDeadline!) : ''}</p>
+    <p><strong>Bank Transfer Information:</strong> ${request.bankTransferInformation ?? ''}</p>
+    <p><strong>Remarks:</strong> ${request.remarks ?? ''}</p>
   ''';
 
   const paymentTableHeader = '''
@@ -173,15 +173,17 @@ String generateHtmlFromInvoice(MedicalInvoiceRequest request) {
         <th>Tax Rate</th>
         <th>Amount Excluding Tax (Yen)</th>
         <th>Consumption Tax Amount (Yen)</th>
+        <th>Total</th>
       </tr>
   ''';
 
   final paymentTableRows = request.totalPayment?.map((payment) {
         return '''
       <tr>
-        <td>${payment.taxRate}</td>
-        <td>${payment.amountExcludingTaxInYen}</td>
-        <td>${payment.consumptionTaxAmountInYen}</td>
+        <td>${payment.taxRate ?? ''}</td>
+        <td>${payment.amountExcludingTaxInYen ?? ''}</td>
+        <td>${payment.consumptionTaxAmountInYen ?? ''}</td>
+        <td>${(payment.amountExcludingTaxInYen ?? 0) + (payment.consumptionTaxAmountInYen ?? 0)}</td>
       </tr>
     ''';
       }).join() ??
@@ -210,13 +212,13 @@ String generateHtmlFromInvoice(MedicalInvoiceRequest request) {
   final itemTableRows = request.item?.map((item) {
         return '''
       <tr>
-        <td>${item.transactionDate != null ? Dates.formatFullDate(item.transactionDate!) : item.transactionDate}</td>
+        <td>${item.transactionDate != null ? Dates.formatFullDate(item.transactionDate!) : ''}</td>
         <td>${item.details ?? ''}</td>
-        <td>${item.quantity}</td>
-        <td>${item.unit}</td>
-        <td>${item.unitPrice}</td>
-        <td>${item.amount}</td>
-        <td>${item.taxRate}</td>
+        <td>${item.quantity ?? ''}</td>
+        <td>${item.unit ?? ''}</td>
+        <td>${item.unitPrice ?? ''}</td>
+        <td>${item.amount ?? ''}</td>
+        <td>${item.taxRate ?? ''}</td>
       </tr>
     ''';
       }).join() ??
