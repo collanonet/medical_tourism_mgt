@@ -536,7 +536,7 @@ abstract class PatientRepository {
 
   Future<void> deleteFileSummary(String id);
 
-  // A13
+  // A15
 
   Future<List<MedicalInvoiceResponse>> getInvoices(
     String? medicalRecord,
@@ -553,7 +553,7 @@ abstract class PatientRepository {
 
   Future<void> deleteInvoice(String id);
 
-  // A15
+  // A13
   Future<List<MedicalQuotationResponse>> getQuotations(
     String? medicalRecord,
   );

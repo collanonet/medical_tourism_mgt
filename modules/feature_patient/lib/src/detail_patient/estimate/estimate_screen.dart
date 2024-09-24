@@ -18,6 +18,7 @@ class EstimateScreen extends StatefulWidget {
 
 class _EstimateScreenState extends State<EstimateScreen> {
   final formatter = InputFormatter();
+
   @override
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
@@ -343,7 +344,8 @@ class _EstimateScreenState extends State<EstimateScreen> {
                                   Checkbox(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(4),
-                                      side: const BorderSide(color: Colors.grey),
+                                      side:
+                                          const BorderSide(color: Colors.grey),
                                     ),
                                     checkColor: Colors.white,
                                     value: false,
@@ -353,7 +355,8 @@ class _EstimateScreenState extends State<EstimateScreen> {
                                   Checkbox(
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(4),
-                                      side: const BorderSide(color: Colors.grey),
+                                      side:
+                                          const BorderSide(color: Colors.grey),
                                     ),
                                     checkColor: Colors.white,
                                     value: false,
@@ -578,7 +581,9 @@ class _EstimateScreenState extends State<EstimateScreen> {
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.end,
-            children: [ElevatedButton(onPressed: () {}, child: const Text('プレビュー'))],
+            children: [
+              ElevatedButton(onPressed: () {}, child: const Text('プレビュー'))
+            ],
           ),
           SizedBox(
             height: context.appTheme.spacing.marginMedium,
@@ -689,7 +694,8 @@ class _EstimateScreenState extends State<EstimateScreen> {
                                             Expanded(
                                               child: ReactiveTextField(
                                                 formControlName: 'quantity',
-                                                decoration: const InputDecoration(
+                                                decoration:
+                                                    const InputDecoration(
                                                   label: Text(
                                                     '数量',
                                                   ),
@@ -1145,7 +1151,8 @@ class _EstimateScreenState extends State<EstimateScreen> {
                                             Expanded(
                                               child: ReactiveTextField(
                                                 formControlName: 'quantity',
-                                                decoration: const InputDecoration(
+                                                decoration:
+                                                    const InputDecoration(
                                                   label: Text(
                                                     '数量',
                                                   ),

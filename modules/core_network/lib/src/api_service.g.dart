@@ -8276,9 +8276,11 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<MedicalInvoiceResponse>> getInvoices() async {
+  Future<List<MedicalInvoiceResponse>> getInvoices(
+      String? medicalRecord) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'medicalRecord': medicalRecord};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
@@ -8445,9 +8447,11 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<MedicalQuotationResponse>> getQuotations() async {
+  Future<List<MedicalQuotationResponse>> getQuotations(
+      String? medicalRecord) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'medicalRecord': medicalRecord};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(

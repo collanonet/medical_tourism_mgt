@@ -10,6 +10,7 @@ part 'medical_invoice_response.g.dart';
 class MedicalInvoiceResponse {
   @JsonKey(name: '_id')
   String id;
+  String file;
   String? invoiceNumber;
   DateTime? invoiceDate;
   String? registrationNumber;
@@ -28,6 +29,7 @@ class MedicalInvoiceResponse {
 
   MedicalInvoiceResponse({
     required this.id,
+    required this.file,
     this.invoiceNumber,
     this.invoiceDate,
     this.registrationNumber,

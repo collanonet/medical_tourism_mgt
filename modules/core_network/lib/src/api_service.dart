@@ -1562,7 +1562,7 @@ abstract class ApiService {
     MedicalAfterGettingVisaFinalRequest medicalAfterGettingVisaFinalRequest,
   );
 
-  // A13
+  // A15
   @GET(EndPoints.INVOICE)
   Future<List<MedicalInvoiceResponse>> getInvoices(
     @Query('medicalRecord') String? medicalRecord,
@@ -1594,7 +1594,7 @@ abstract class ApiService {
     @Path('id') String id,
   );
 
-  // A15
+  // A13
   @GET(EndPoints.QUOTATION)
   Future<List<MedicalQuotationResponse>> getQuotations(
     @Query('medicalRecord') String? medicalRecord,

@@ -6,6 +6,7 @@ part 'medical_invoice_request.g.dart';
 
 @JsonSerializable()
 class MedicalInvoiceRequest {
+  String file;
   String? invoiceNumber;
   DateTime? invoiceDate;
   String? registrationNumber;
@@ -21,6 +22,7 @@ class MedicalInvoiceRequest {
   List<ItemRequest>? item;
 
   MedicalInvoiceRequest({
+    required this.file,
     this.invoiceNumber,
     this.invoiceDate,
     this.registrationNumber,

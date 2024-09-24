@@ -258,9 +258,9 @@ class EndPoints {
   static const MEDICAL_VISA_AFTER_GETTING_VISA_FINAL = '/after-getting-visa-final';
 
 
-  // A13
+  // A15
   static const INVOICE = '/invoices';
 
-  // A15
+  // A13
   static const QUOTATION = '/quotations';
 }

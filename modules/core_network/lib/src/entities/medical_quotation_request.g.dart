@@ -9,6 +9,7 @@ part of 'medical_quotation_request.dart';
 MedicalQuotationRequest _$MedicalQuotationRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalQuotationRequest(
+      file: json['file'] as String,
       quotationNumber: json['quotationNumber'] as String?,
       quotationDate: json['quotationDate'] == null
           ? null
@@ -34,6 +35,7 @@ MedicalQuotationRequest _$MedicalQuotationRequestFromJson(
 Map<String, dynamic> _$MedicalQuotationRequestToJson(
         MedicalQuotationRequest instance) =>
     <String, dynamic>{
+      'file': instance.file,
       'quotationNumber': instance.quotationNumber,
       'quotationDate': instance.quotationDate?.toIso8601String(),
       'registrationNumber': instance.registrationNumber,

@@ -9,6 +9,7 @@ part of 'medical_invoice_request.dart';
 MedicalInvoiceRequest _$MedicalInvoiceRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalInvoiceRequest(
+      file: json['file'] as String,
       invoiceNumber: json['invoiceNumber'] as String?,
       invoiceDate: json['invoiceDate'] == null
           ? null
@@ -35,6 +36,7 @@ MedicalInvoiceRequest _$MedicalInvoiceRequestFromJson(
 Map<String, dynamic> _$MedicalInvoiceRequestToJson(
         MedicalInvoiceRequest instance) =>
     <String, dynamic>{
+      'file': instance.file,
       'invoiceNumber': instance.invoiceNumber,
       'invoiceDate': instance.invoiceDate?.toIso8601String(),
       'registrationNumber': instance.registrationNumber,

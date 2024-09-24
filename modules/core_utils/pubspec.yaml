@@ -32,6 +32,7 @@ dependencies:
   jiffy: ^6.2.1
   flutter_image_compress: ^2.3.0
   http: ^1.2.2
+  htmltopdfwidgets: ^1.0.4
   
 
   reactive_forms: any
