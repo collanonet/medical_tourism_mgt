@@ -112,7 +112,10 @@ class StatementModel {
           String base64Image = base64Encode(pathFile);
           FileResponse fileData = await patientRepository.uploadFileBase64(
             base64Image,
-            'invoice_${DateTime.now().timeZoneOffset}.pdf',
+            // get timestamp to avoid duplicate file name
+            'invoice_${
+                DateTime.now().millisecondsSinceEpoch
+            }.pdf',
           );
           fileName = fileData.filename;
         } catch (e) {
@@ -136,7 +139,9 @@ class StatementModel {
     required MedicalInvoiceRequest request,
   }) async {
     try {
-      medicalInvoiceData.value = const AsyncData(loading: true);
+      medicalInvoiceData.value = medicalInvoiceData.value.copyWith(
+        loading: true,
+      );
       final response = await patientRepository.postInvoice(request);
       medicalInvoiceData.value = AsyncData(data: [
         ...medicalInvoiceData.value.data ?? [],

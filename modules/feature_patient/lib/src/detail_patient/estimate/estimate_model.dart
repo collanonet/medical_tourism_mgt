@@ -110,7 +110,10 @@ class EstimateModel {
           String base64Image = base64Encode(pathFile);
           FileResponse fileData = await patientRepository.uploadFileBase64(
             base64Image,
-            'quotation_${DateTime.now().timeZoneOffset}.pdf',
+            // get timestamp to avoid duplicate file name
+            'quotation_${
+              DateTime.now().millisecondsSinceEpoch
+            }.pdf',
           );
           fileName = fileData.filename;
         } catch (e) {
@@ -135,7 +138,9 @@ class EstimateModel {
     required MedicalQuotationRequest request,
   }) async {
     try {
-      medicalQuotationData.value = const AsyncData(loading: true);
+      medicalQuotationData.value = medicalQuotationData.value.copyWith(
+        loading: true,
+      );
       final response = await patientRepository.postQuotation(request);
       medicalQuotationData.value = AsyncData(data: [
         ...medicalQuotationData.value.data ?? [],
