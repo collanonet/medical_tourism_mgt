@@ -1,7 +1,9 @@
 // Flutter imports:
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
@@ -172,6 +174,7 @@ Future<Uint8List?> generatePdfFromQuotation(
               '見積書',
               style: pw.TextStyle(
                 font: ttf,
+                fontSize: 30,
               ),
               textAlign: pw.TextAlign.center,
             ),
@@ -239,6 +242,17 @@ Future<Uint8List?> generatePdfFromQuotation(
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
           headers: ['税率', '税抜合線(門)', '消費税(円)', '合計金額(円)'],
+          headerCellDecoration: const pw.BoxDecoration(
+            color: PdfColor.fromInt(0xffe0e0e0),
+          ),
+          columnWidths: {
+            0: const pw.FlexColumnWidth(1),
+            1: const pw.FlexColumnWidth(2),
+            2: const pw.FlexColumnWidth(2),
+            3: const pw.FlexColumnWidth(2),
+          },
+          headerAlignment: pw.Alignment.centerLeft,
+          cellAlignment: pw.Alignment.centerLeft,
           headerStyle: pw.TextStyle(
             font: ttf,
           ),
@@ -267,11 +281,25 @@ Future<Uint8List?> generatePdfFromQuotation(
                 ? Dates.formatFullDate(request.validityPeriod!)
                 : ''
           ],
+          columnWidths: {
+            0: const pw.FlexColumnWidth(1),
+            1: const pw.FlexColumnWidth(2),
+          },
           headerStyle: pw.TextStyle(
             font: ttf,
           ),
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
+          cellDecoration: (rowIndex, value, columnIndex) {
+            if (columnIndex == 0) {
+              return const pw.BoxDecoration(
+                color: PdfColor.fromInt(0xffe0e0e0),
+              );
+            }
+            return const pw.BoxDecoration(
+              color: PdfColor.fromInt(0xffffffff),
+            );
+          },
           oddCellStyle: pw.TextStyle(
             font: ttf,
           ),
@@ -287,9 +315,24 @@ Future<Uint8List?> generatePdfFromQuotation(
         ),
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
-          headers: ['取引日', '内訳', '数量', '单位', '単価', '金額', '税率'],
+          headers: ['', '取引日', '内訳', '数量', '单位', '単価', '金額', '税率'],
           headerStyle: pw.TextStyle(
             font: ttf,
+          ),
+          columnWidths: {
+            0: const pw.FlexColumnWidth(0.5),
+            1: const pw.FlexColumnWidth(1),
+            2: const pw.FlexColumnWidth(2),
+            3: const pw.FlexColumnWidth(1),
+            4: const pw.FlexColumnWidth(1),
+            5: const pw.FlexColumnWidth(1),
+            6: const pw.FlexColumnWidth(1),
+            7: const pw.FlexColumnWidth(1),
+          },
+          headerAlignment: pw.Alignment.centerLeft,
+          cellAlignment: pw.Alignment.centerLeft,
+          headerCellDecoration: const pw.BoxDecoration(
+            color: PdfColor.fromInt(0xffe0e0e0),
           ),
           oddCellStyle: pw.TextStyle(
             font: ttf,
@@ -299,6 +342,7 @@ Future<Uint8List?> generatePdfFromQuotation(
           ),
           data: request.item
                   ?.map((item) => [
+                        (request.item?.indexOf(item) ?? 0) + 1,
                         item.transactionDate != null
                             ? Dates.formatFullDate(item.transactionDate!)
                             : '',
@@ -320,7 +364,9 @@ Future<Uint8List?> generatePdfFromQuotation(
     Uint8List pdfBytes = await pdf.save();
     return pdfBytes;
   } catch (e) {
-    print(e);
+    if (kDebugMode) {
+      print(e);
+    }
     return null;
   }
 }
