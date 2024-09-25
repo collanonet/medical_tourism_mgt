@@ -170,6 +170,7 @@ Future<Uint8List?> generatePdfFromQuotation(
             style: pw.TextStyle(
               font: ttf,
             ),
+            textAlign: pw.TextAlign.center,
           ),
         ),
         pw.Text(
@@ -177,48 +178,42 @@ Future<Uint8List?> generatePdfFromQuotation(
           style: pw.TextStyle(
             font: ttf,
           ),
+          textAlign: pw.TextAlign.right,
         ),
         pw.Text(
           '見積日: ${request.quotationDate != null ? Dates.formatFullDate(request.quotationDate!) : ''}',
           style: pw.TextStyle(
             font: ttf,
           ),
+          textAlign: pw.TextAlign.right,
         ),
         pw.Text(
           '担当者: ${request.contact ?? ''}',
           style: pw.TextStyle(
             font: ttf,
           ),
+          textAlign: pw.TextAlign.right,
         ),
         pw.Text(
           '登録番号: ${request.registrationNumber ?? ''}',
           style: pw.TextStyle(
             font: ttf,
           ),
+          textAlign: pw.TextAlign.right,
         ),
         pw.Text(
           '件名: ${request.subject ?? ''}',
           style: pw.TextStyle(
             font: ttf,
           ),
+          textAlign: pw.TextAlign.left,
         ),
         pw.Text(
           '合計金額: ${request.totalAmount ?? ''}',
           style: pw.TextStyle(
             font: ttf,
           ),
-        ),
-        pw.Text(
-          '有効期限: ${request.validityPeriod != null ? Dates.formatFullDate(request.validityPeriod!) : ''}',
-          style: pw.TextStyle(
-            font: ttf,
-          ),
-        ),
-        pw.Text(
-          '備考: ${request.remarks ?? ''}',
-          style: pw.TextStyle(
-            font: ttf,
-          ),
+          textAlign: pw.TextAlign.left,
         ),
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
@@ -242,6 +237,27 @@ Future<Uint8List?> generatePdfFromQuotation(
                       ])
                   .toList() ??
               [],
+        ),
+        pw.SizedBox(height: 20),
+        pw.TableHelper.fromTextArray(
+          headers: ['有効期限', '備考'],
+          headerStyle: pw.TextStyle(
+            font: ttf,
+          ),
+          oddCellStyle: pw.TextStyle(
+            font: ttf,
+          ),
+          cellStyle: pw.TextStyle(
+            font: ttf,
+          ),
+          data: [
+            [
+              request.validityPeriod != null
+                  ? Dates.formatFullDate(request.validityPeriod!)
+                  : '',
+              request.remarks ?? '',
+            ]
+          ],
         ),
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(

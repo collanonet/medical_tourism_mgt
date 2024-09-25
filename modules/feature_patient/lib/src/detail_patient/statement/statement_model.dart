@@ -113,9 +113,7 @@ class StatementModel {
           FileResponse fileData = await patientRepository.uploadFileBase64(
             base64Image,
             // get timestamp to avoid duplicate file name
-            'invoice_${
-                DateTime.now().millisecondsSinceEpoch
-            }.pdf',
+            'invoice_${DateTime.now().millisecondsSinceEpoch}.pdf',
           );
           fileName = fileData.filename;
         } catch (e) {
@@ -156,76 +154,66 @@ class StatementModel {
 
 Future<Uint8List?> generatePdfFromInvoice(MedicalInvoiceRequest invoice) async {
   final pdf = pw.Document();
-  final ByteData fontData = await rootBundle.load('assets/fonts/NotoSansJPRegular.ttf');
+  final ByteData fontData =
+      await rootBundle.load('assets/fonts/NotoSansJPRegular.ttf');
   final ttf = pw.Font.ttf(fontData);
 
   pdf.addPage(
     pw.MultiPage(
       build: (context) => [
         pw.Header(
-            level: 0,
-            child: pw.Text(
-              '請求書',
-              style: pw.TextStyle(
-                font: ttf,
-              ),
-            )),
+          level: 0,
+          child: pw.Text(
+            '請求書',
+            style: pw.TextStyle(
+              font: ttf,
+            ),
+            textAlign: pw.TextAlign.center,
+          ),
+        ),
         pw.Text(
           '請求書番号: ${invoice.invoiceNumber}',
           style: pw.TextStyle(
             font: ttf,
           ),
+          textAlign: pw.TextAlign.right,
         ),
         pw.Text(
           '請求日: ${invoice.invoiceDate != null ? Dates.formatFullDate(invoice.invoiceDate!) : ''}',
           style: pw.TextStyle(
             font: ttf,
           ),
+          textAlign: pw.TextAlign.right,
         ),
         pw.Text(
           '担当者: ${invoice.contact}',
           style: pw.TextStyle(
             font: ttf,
           ),
+          textAlign: pw.TextAlign.right,
         ),
         pw.Text(
           '登録番号: ${invoice.registrationNumber}',
           style: pw.TextStyle(
             font: ttf,
           ),
+          textAlign: pw.TextAlign.right,
         ),
         pw.Text(
           '件名: ${invoice.subject}',
           style: pw.TextStyle(
             font: ttf,
           ),
+          textAlign: pw.TextAlign.left,
         ),
         pw.Text(
           'ご請求額: ${invoice.amountBilled}',
           style: pw.TextStyle(
             font: ttf,
           ),
-        ),
-        pw.Text(
-          '支払期限: ${invoice.paymentDeadline != null ? Dates.formatFullDate(invoice.paymentDeadline!) : ''}',
-          style: pw.TextStyle(
-            font: ttf,
-          ),
-        ),
-        pw.Text(
-          'お振込み: ${invoice.bankTransferInformation}',
-          style: pw.TextStyle(
-            font: ttf,
-          ),
-        ),
-        pw.Text(
-          '備考: ${invoice.remarks}',
-          style: pw.TextStyle(
-            font: ttf,
-          ),
+          textAlign: pw.TextAlign.left,
         ),
         pw.SizedBox(height: 20),
-        // pw.Header(level: 1, child: pw.Text('Payment Details')),
         pw.TableHelper.fromTextArray(
           headers: ['税率', '税抜合線(門)', '消費税(円)', '合計金額(円)'],
           headerStyle: pw.TextStyle(
@@ -246,6 +234,28 @@ Future<Uint8List?> generatePdfFromInvoice(MedicalInvoiceRequest invoice) async {
                         (payment.consumptionTaxAmountInYen ?? 0),
                   ])
               .toList(),
+        ),
+        pw.SizedBox(height: 20),
+        pw.TableHelper.fromTextArray(
+          headers: ['有効期限', 'お振込み', '備考'],
+          headerStyle: pw.TextStyle(
+            font: ttf,
+          ),
+          oddCellStyle: pw.TextStyle(
+            font: ttf,
+          ),
+          cellStyle: pw.TextStyle(
+            font: ttf,
+          ),
+          data: [
+            [
+              invoice.paymentDeadline != null
+                  ? Dates.formatFullDate(invoice.paymentDeadline!)
+                  : '',
+              invoice.bankTransferInformation ?? '',
+              invoice.remarks ?? '',
+            ]
+          ],
         ),
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
