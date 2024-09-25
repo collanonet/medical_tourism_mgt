@@ -30,7 +30,9 @@ abstract class _$MedicalInvoiceRequestCWProxy {
 
   MedicalInvoiceRequest medicalRecord(String medicalRecord);
 
-  MedicalInvoiceRequest user(String user);
+  MedicalInvoiceRequest user(String? user);
+
+  MedicalInvoiceRequest patient(String patient);
 
   MedicalInvoiceRequest hospitalRecord(String? hospitalRecord);
 
@@ -57,6 +59,7 @@ abstract class _$MedicalInvoiceRequestCWProxy {
     String? remarks,
     String? medicalRecord,
     String? user,
+    String? patient,
     String? hospitalRecord,
     List<TotalPaymentRequest>? totalPayment,
     List<ItemRequest>? item,
@@ -112,7 +115,10 @@ class _$MedicalInvoiceRequestCWProxyImpl
       this(medicalRecord: medicalRecord);
 
   @override
-  MedicalInvoiceRequest user(String user) => this(user: user);
+  MedicalInvoiceRequest user(String? user) => this(user: user);
+
+  @override
+  MedicalInvoiceRequest patient(String patient) => this(patient: patient);
 
   @override
   MedicalInvoiceRequest hospitalRecord(String? hospitalRecord) =>
@@ -146,6 +152,7 @@ class _$MedicalInvoiceRequestCWProxyImpl
     Object? remarks = const $CopyWithPlaceholder(),
     Object? medicalRecord = const $CopyWithPlaceholder(),
     Object? user = const $CopyWithPlaceholder(),
+    Object? patient = const $CopyWithPlaceholder(),
     Object? hospitalRecord = const $CopyWithPlaceholder(),
     Object? totalPayment = const $CopyWithPlaceholder(),
     Object? item = const $CopyWithPlaceholder(),
@@ -197,10 +204,14 @@ class _$MedicalInvoiceRequestCWProxyImpl
               ? _value.medicalRecord
               // ignore: cast_nullable_to_non_nullable
               : medicalRecord as String,
-      user: user == const $CopyWithPlaceholder() || user == null
+      user: user == const $CopyWithPlaceholder()
           ? _value.user
           // ignore: cast_nullable_to_non_nullable
-          : user as String,
+          : user as String?,
+      patient: patient == const $CopyWithPlaceholder() || patient == null
+          ? _value.patient
+          // ignore: cast_nullable_to_non_nullable
+          : patient as String,
       hospitalRecord: hospitalRecord == const $CopyWithPlaceholder()
           ? _value.hospitalRecord
           // ignore: cast_nullable_to_non_nullable
@@ -246,7 +257,8 @@ MedicalInvoiceRequest _$MedicalInvoiceRequestFromJson(
       bankTransferInformation: json['bankTransferInformation'] as String?,
       remarks: json['remarks'] as String?,
       medicalRecord: json['medicalRecord'] as String,
-      user: json['user'] as String,
+      user: json['user'] as String?,
+      patient: json['patient'] as String,
       hospitalRecord: json['hospitalRecord'] as String?,
       totalPayment: (json['totalPayment'] as List<dynamic>?)
           ?.map((e) => TotalPaymentRequest.fromJson(e as Map<String, dynamic>))
@@ -271,6 +283,7 @@ Map<String, dynamic> _$MedicalInvoiceRequestToJson(
       'remarks': instance.remarks,
       'medicalRecord': instance.medicalRecord,
       'user': instance.user,
+      'patient': instance.patient,
       'hospitalRecord': instance.hospitalRecord,
       'totalPayment': instance.totalPayment,
       'item': instance.item,

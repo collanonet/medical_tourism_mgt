@@ -28,7 +28,10 @@ MedicalInvoiceResponse _$MedicalInvoiceResponseFromJson(
           MedicalRecord.fromJson(json['medicalRecord'] as Map<String, dynamic>),
       user: json['user'] == null
           ? null
-          : Patient.fromJson(json['user'] as Map<String, dynamic>),
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+      patient: json['patient'] == null
+          ? null
+          : Patient.fromJson(json['patient'] as Map<String, dynamic>),
       hospitalRecord: json['hospitalRecord'] == null
           ? null
           : BasicInformationHospitalResponse.fromJson(
@@ -59,6 +62,7 @@ Map<String, dynamic> _$MedicalInvoiceResponseToJson(
       'remarks': instance.remarks,
       'medicalRecord': instance.medicalRecord,
       'user': instance.user,
+      'patient': instance.patient,
       'hospitalRecord': instance.hospitalRecord,
       'totalPayment': instance.totalPayment,
       'item': instance.item,

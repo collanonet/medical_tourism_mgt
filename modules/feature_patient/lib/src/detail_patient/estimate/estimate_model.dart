@@ -1,8 +1,5 @@
 // Flutter imports:
 import 'dart:convert';
-import 'dart:ffi';
-import 'dart:io';
-import 'dart:typed_data';
 
 import 'package:flutter/services.dart';
 import 'package:pdf/widgets.dart' as pw;
