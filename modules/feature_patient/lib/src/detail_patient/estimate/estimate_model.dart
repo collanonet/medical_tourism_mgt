@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'dart:convert';
+import 'dart:ffi';
 import 'dart:io';
 import 'dart:typed_data';
 
@@ -99,10 +100,14 @@ class EstimateModel {
         item: items,
         medicalRecord: formGroup.control('medicalRecord').value,
         user: formGroup.control('user').value,
+        patient: formGroup.control('user').value,
         hospitalRecord: formGroup.control('hospitalRecord').value,
       );
 
-      Uint8List? pathFile = await generatePdfFromQuotation(request);
+      Uint8List? pathFile = await generatePdfFromQuotation(
+        request,
+        patientData.value.requireData,
+      );
       String? fileName;
 
       if (pathFile != null) {
@@ -153,7 +158,7 @@ class EstimateModel {
 }
 
 Future<Uint8List?> generatePdfFromQuotation(
-    MedicalQuotationRequest request) async {
+    MedicalQuotationRequest request, Patient patient) async {
   final pdf = pw.Document();
   final ByteData fontData =
       await rootBundle.load('assets/fonts/NotoSansJPRegular.ttf');
@@ -184,16 +189,22 @@ Future<Uint8List?> generatePdfFromQuotation(
             ),
           ),
         ),
-        pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text(
+        pw.Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
+          pw.Text(
+            '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
+            '様',
+            style: pw.TextStyle(
+              font: ttf,
+            ),
+          ),
+          pw.Text(
             '見積日: ${request.quotationDate != null ? Dates.formatFullDate(request.quotationDate!) : ''}',
             style: pw.TextStyle(
               font: ttf,
             ),
             textAlign: pw.TextAlign.right,
           ),
-        ),
+        ]),
         pw.Align(
           alignment: pw.Alignment.centerRight,
           child: pw.Text(

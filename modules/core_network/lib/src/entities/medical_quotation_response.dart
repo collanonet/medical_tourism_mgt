@@ -18,7 +18,8 @@ class MedicalQuotationResponse {
   DateTime? validityPeriod;
   String? remarks;
   MedicalRecord medicalRecord;
-  Patient? user;
+  User? user;
+  Patient? patient;
   BasicInformationHospitalResponse? hospitalRecord;
   List<TotalPaymentResponse>? totalPayment;
   List<ItemResponse>? item;
@@ -38,6 +39,7 @@ class MedicalQuotationResponse {
     this.remarks,
     required this.medicalRecord,
     this.user,
+    this.patient,
     this.hospitalRecord,
     this.totalPayment,
     this.item,

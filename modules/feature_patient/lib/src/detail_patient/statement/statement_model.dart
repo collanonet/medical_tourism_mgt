@@ -101,10 +101,14 @@ class StatementModel {
         item: items,
         medicalRecord: formGroup.control('medicalRecord').value,
         user: formGroup.control('user').value,
+        patient: formGroup.control('user').value,
         hospitalRecord: formGroup.control('hospitalRecord').value,
       );
 
-      Uint8List? pathFile = await generatePdfFromInvoice(request);
+      Uint8List? pathFile = await generatePdfFromInvoice(
+        request,
+        patientData.value.requireData,
+      );
       String? fileName;
 
       if (pathFile != null) {
@@ -152,7 +156,8 @@ class StatementModel {
   }
 }
 
-Future<Uint8List?> generatePdfFromInvoice(MedicalInvoiceRequest invoice) async {
+Future<Uint8List?> generatePdfFromInvoice(
+    MedicalInvoiceRequest invoice, Patient patient) async {
   final pdf = pw.Document();
   final ByteData fontData =
       await rootBundle.load('assets/fonts/NotoSansJP_VariableFont_wght.ttf');
@@ -184,16 +189,22 @@ Future<Uint8List?> generatePdfFromInvoice(MedicalInvoiceRequest invoice) async {
             textAlign: pw.TextAlign.right,
           ),
         ),
-        pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text(
-            '請求日: ${invoice.invoiceDate != null ? Dates.formatFullDate(invoice.invoiceDate!) : ''}',
+        pw.Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
+          pw.Text(
+            '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
+            '様',
+            style: pw.TextStyle(
+              font: ttf,
+            ),
+          ),
+          pw.Text(
+            '見積日: ${invoice.invoiceDate != null ? Dates.formatFullDate(invoice.invoiceDate!) : ''}',
             style: pw.TextStyle(
               font: ttf,
             ),
             textAlign: pw.TextAlign.right,
           ),
-        ),
+        ]),
         pw.Align(
           alignment: pw.Alignment.centerRight,
           child: pw.Text(

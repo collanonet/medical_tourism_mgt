@@ -19,7 +19,8 @@ class MedicalInvoiceRequest {
   String? bankTransferInformation;
   String? remarks;
   String medicalRecord;
-  String user;
+  String? user;
+  String patient;
   String? hospitalRecord;
   List<TotalPaymentRequest>? totalPayment;
   List<ItemRequest>? item;
@@ -36,7 +37,8 @@ class MedicalInvoiceRequest {
     this.bankTransferInformation,
     this.remarks,
     required this.medicalRecord,
-    required this.user,
+    this.user,
+    required this.patient,
     this.hospitalRecord,
     this.totalPayment,
     this.item,

@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import '../../core_network.dart';
 import '../../entities.dart';
 import 'entities.dart';
+import 'user.dart';
 
 part 'medical_invoice_response.g.dart';
 
@@ -21,7 +22,8 @@ class MedicalInvoiceResponse {
   String? bankTransferInformation;
   String? remarks;
   MedicalRecord medicalRecord;
-  Patient? user;
+  User? user;
+  Patient? patient;
   BasicInformationHospitalResponse? hospitalRecord;
   List<TotalPaymentResponse>? totalPayment;
   List<ItemResponse>? item;
@@ -42,6 +44,7 @@ class MedicalInvoiceResponse {
     this.remarks,
     required this.medicalRecord,
     this.user,
+    this.patient,
     this.hospitalRecord,
     this.totalPayment,
     this.item,

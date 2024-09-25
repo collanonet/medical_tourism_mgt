@@ -16,7 +16,8 @@ class MedicalQuotationRequest {
   DateTime? validityPeriod;
   String? remarks;
   String medicalRecord;
-  String user;
+  String? user;
+  String patient;
   String? hospitalRecord;
   List<TotalPaymentRequest>? totalPayment;
   List<ItemRequest>? item;
@@ -32,7 +33,8 @@ class MedicalQuotationRequest {
     this.validityPeriod,
     this.remarks,
     required this.medicalRecord,
-    required this.user,
+    this.user,
+    required this.patient,
     this.hospitalRecord,
     this.totalPayment,
     this.item,
