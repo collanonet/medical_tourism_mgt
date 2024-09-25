@@ -155,7 +155,7 @@ class StatementModel {
 Future<Uint8List?> generatePdfFromInvoice(MedicalInvoiceRequest invoice) async {
   final pdf = pw.Document();
   final ByteData fontData =
-      await rootBundle.load('assets/fonts/NotoSansJPRegular.ttf');
+      await rootBundle.load('assets/fonts/NotoSansJP_VariableFont_wght.ttf');
   final ttf = pw.Font.ttf(fontData);
 
   pdf.addPage(
@@ -163,41 +163,56 @@ Future<Uint8List?> generatePdfFromInvoice(MedicalInvoiceRequest invoice) async {
       build: (context) => [
         pw.Header(
           level: 0,
+          child: pw.Align(
+            alignment: pw.Alignment.center,
+            child: pw.Text(
+              '請求書',
+              style: pw.TextStyle(
+                font: ttf,
+              ),
+              textAlign: pw.TextAlign.center,
+            ),
+          ),
+        ),
+        pw.Align(
+          alignment: pw.Alignment.centerRight,
           child: pw.Text(
-            '請求書',
+            '請求書番号: ${invoice.invoiceNumber}',
             style: pw.TextStyle(
               font: ttf,
             ),
-            textAlign: pw.TextAlign.center,
+            textAlign: pw.TextAlign.right,
           ),
         ),
-        pw.Text(
-          '請求書番号: ${invoice.invoiceNumber}',
-          style: pw.TextStyle(
-            font: ttf,
+        pw.Align(
+          alignment: pw.Alignment.centerRight,
+          child: pw.Text(
+            '請求日: ${invoice.invoiceDate != null ? Dates.formatFullDate(invoice.invoiceDate!) : ''}',
+            style: pw.TextStyle(
+              font: ttf,
+            ),
+            textAlign: pw.TextAlign.right,
           ),
-          textAlign: pw.TextAlign.right,
         ),
-        pw.Text(
-          '請求日: ${invoice.invoiceDate != null ? Dates.formatFullDate(invoice.invoiceDate!) : ''}',
-          style: pw.TextStyle(
-            font: ttf,
+        pw.Align(
+          alignment: pw.Alignment.centerRight,
+          child: pw.Text(
+            '担当者: ${invoice.contact}',
+            style: pw.TextStyle(
+              font: ttf,
+            ),
+            textAlign: pw.TextAlign.right,
           ),
-          textAlign: pw.TextAlign.right,
         ),
-        pw.Text(
-          '担当者: ${invoice.contact}',
-          style: pw.TextStyle(
-            font: ttf,
+        pw.Align(
+          alignment: pw.Alignment.centerRight,
+          child: pw.Text(
+            '登録番号: ${invoice.registrationNumber}',
+            style: pw.TextStyle(
+              font: ttf,
+            ),
+            textAlign: pw.TextAlign.right,
           ),
-          textAlign: pw.TextAlign.right,
-        ),
-        pw.Text(
-          '登録番号: ${invoice.registrationNumber}',
-          style: pw.TextStyle(
-            font: ttf,
-          ),
-          textAlign: pw.TextAlign.right,
         ),
         pw.Text(
           '件名: ${invoice.subject}',
@@ -219,6 +234,7 @@ Future<Uint8List?> generatePdfFromInvoice(MedicalInvoiceRequest invoice) async {
           headerStyle: pw.TextStyle(
             font: ttf,
           ),
+          cellAlignment: pw.Alignment.centerLeft,
           oddCellStyle: pw.TextStyle(
             font: ttf,
           ),
@@ -237,10 +253,17 @@ Future<Uint8List?> generatePdfFromInvoice(MedicalInvoiceRequest invoice) async {
         ),
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
-          headers: ['有効期限', 'お振込み', '備考'],
+          headers: [
+            '有効期限',
+            invoice.paymentDeadline != null
+                ? Dates.formatFullDate(invoice.paymentDeadline!)
+                : '',
+          ],
           headerStyle: pw.TextStyle(
             font: ttf,
           ),
+          headerAlignment: pw.Alignment.centerLeft,
+          cellAlignment: pw.Alignment.centerLeft,
           oddCellStyle: pw.TextStyle(
             font: ttf,
           ),
@@ -252,14 +275,20 @@ Future<Uint8List?> generatePdfFromInvoice(MedicalInvoiceRequest invoice) async {
               invoice.paymentDeadline != null
                   ? Dates.formatFullDate(invoice.paymentDeadline!)
                   : '',
+            ],
+            [
+              'お振込み',
               invoice.bankTransferInformation ?? '',
+            ],
+            [
+              '備考',
               invoice.remarks ?? '',
             ]
           ],
         ),
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
-          headers: ['取引日', '内訳', '数量', '单位', '単価', '金額', '税率'],
+          headers: ['', '取引日', '内訳', '数量', '单位', '単価', '金額', '税率'],
           headerStyle: pw.TextStyle(
             font: ttf,
           ),
@@ -269,8 +298,12 @@ Future<Uint8List?> generatePdfFromInvoice(MedicalInvoiceRequest invoice) async {
           cellStyle: pw.TextStyle(
             font: ttf,
           ),
+          cellAlignment: pw.Alignment.centerLeft,
           data: invoice.item!
               .map((item) => [
+                    (invoice.item?.indexWhere((element) => element == item) ??
+                            0) +
+                        1,
                     item.transactionDate != null
                         ? Dates.formatFullDate(item.transactionDate!)
                         : '',

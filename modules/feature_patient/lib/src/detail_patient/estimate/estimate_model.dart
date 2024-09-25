@@ -111,9 +111,7 @@ class EstimateModel {
           FileResponse fileData = await patientRepository.uploadFileBase64(
             base64Image,
             // get timestamp to avoid duplicate file name
-            'quotation_${
-              DateTime.now().millisecondsSinceEpoch
-            }.pdf',
+            'quotation_${DateTime.now().millisecondsSinceEpoch}.pdf',
           );
           fileName = fileData.filename;
         } catch (e) {
@@ -157,7 +155,8 @@ class EstimateModel {
 Future<Uint8List?> generatePdfFromQuotation(
     MedicalQuotationRequest request) async {
   final pdf = pw.Document();
-  final ByteData fontData = await rootBundle.load('assets/fonts/NotoSansJPRegular.ttf');
+  final ByteData fontData =
+      await rootBundle.load('assets/fonts/NotoSansJPRegular.ttf');
   final ttf = pw.Font.ttf(fontData);
 
   pdf.addPage(
@@ -165,41 +164,55 @@ Future<Uint8List?> generatePdfFromQuotation(
       build: (context) => [
         pw.Header(
           level: 0,
+          child: pw.Align(
+            alignment: pw.Alignment.center,
+            child: pw.Text(
+              '見積書',
+              style: pw.TextStyle(
+                font: ttf,
+              ),
+              textAlign: pw.TextAlign.center,
+            ),
+          ),
+        ),
+        pw.Align(
+          alignment: pw.Alignment.centerRight,
           child: pw.Text(
-            '見積書',
+            '見積番号: ${request.quotationNumber ?? ''}',
             style: pw.TextStyle(
               font: ttf,
             ),
-            textAlign: pw.TextAlign.center,
           ),
         ),
-        pw.Text(
-          '見積番号: ${request.quotationNumber ?? ''}',
-          style: pw.TextStyle(
-            font: ttf,
+        pw.Align(
+          alignment: pw.Alignment.centerRight,
+          child: pw.Text(
+            '見積日: ${request.quotationDate != null ? Dates.formatFullDate(request.quotationDate!) : ''}',
+            style: pw.TextStyle(
+              font: ttf,
+            ),
+            textAlign: pw.TextAlign.right,
           ),
-          textAlign: pw.TextAlign.right,
         ),
-        pw.Text(
-          '見積日: ${request.quotationDate != null ? Dates.formatFullDate(request.quotationDate!) : ''}',
-          style: pw.TextStyle(
-            font: ttf,
+        pw.Align(
+          alignment: pw.Alignment.centerRight,
+          child: pw.Text(
+            '担当者: ${request.contact ?? ''}',
+            style: pw.TextStyle(
+              font: ttf,
+            ),
+            textAlign: pw.TextAlign.right,
           ),
-          textAlign: pw.TextAlign.right,
         ),
-        pw.Text(
-          '担当者: ${request.contact ?? ''}',
-          style: pw.TextStyle(
-            font: ttf,
+        pw.Align(
+          alignment: pw.Alignment.centerRight,
+          child: pw.Text(
+            '登録番号: ${request.registrationNumber ?? ''}',
+            style: pw.TextStyle(
+              font: ttf,
+            ),
+            textAlign: pw.TextAlign.right,
           ),
-          textAlign: pw.TextAlign.right,
-        ),
-        pw.Text(
-          '登録番号: ${request.registrationNumber ?? ''}',
-          style: pw.TextStyle(
-            font: ttf,
-          ),
-          textAlign: pw.TextAlign.right,
         ),
         pw.Text(
           '件名: ${request.subject ?? ''}',
@@ -240,10 +253,17 @@ Future<Uint8List?> generatePdfFromQuotation(
         ),
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
-          headers: ['有効期限', '備考'],
+          headers: [
+            '有効期限',
+            request.validityPeriod != null
+                ? Dates.formatFullDate(request.validityPeriod!)
+                : ''
+          ],
           headerStyle: pw.TextStyle(
             font: ttf,
           ),
+          headerAlignment: pw.Alignment.centerLeft,
+          cellAlignment: pw.Alignment.centerLeft,
           oddCellStyle: pw.TextStyle(
             font: ttf,
           ),
@@ -252,9 +272,7 @@ Future<Uint8List?> generatePdfFromQuotation(
           ),
           data: [
             [
-              request.validityPeriod != null
-                  ? Dates.formatFullDate(request.validityPeriod!)
-                  : '',
+              '備考',
               request.remarks ?? '',
             ]
           ],
