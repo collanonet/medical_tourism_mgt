@@ -39,7 +39,7 @@ FormGroup treatmentForm() => FormGroup({
       'desiredMedicalInstitution': FormControl<bool>(),
       'desiredAreaMedicalInstitutionName': FormControl<String>(),
       'reason': FormControl<String>(),
-      'desiredDateOfConsultation': FormControl<String>(),
+      'desiredDateOfConsultation': FormControl<DateTime>(),
       'scheduledPeriodOfStayInJapan': FormControl<String>(),
       'walking': FormControl<bool>(),
       'walkingDetail': FormControl<String>(),

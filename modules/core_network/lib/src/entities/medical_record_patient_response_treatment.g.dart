@@ -48,8 +48,9 @@ MedicalRecordPatientResponseTreatment
           desiredAreaMedicalInstitutionName:
               json['desiredAreaMedicalInstitutionName'] as String?,
           reason: json['reason'] as String?,
-          desiredDateOfConsultation:
-              json['desiredDateOfConsultation'] as String?,
+          desiredDateOfConsultation: json['desiredDateOfConsultation'] == null
+              ? null
+              : DateTime.parse(json['desiredDateOfConsultation'] as String),
           scheduledPeriodOfStayInJapan:
               json['scheduledPeriodOfStayInJapan'] as String?,
           walking: json['walking'] as bool?,
@@ -104,7 +105,8 @@ Map<String, dynamic> _$MedicalRecordPatientResponseTreatmentToJson(
       'desiredAreaMedicalInstitutionName':
           instance.desiredAreaMedicalInstitutionName,
       'reason': instance.reason,
-      'desiredDateOfConsultation': instance.desiredDateOfConsultation,
+      'desiredDateOfConsultation':
+          instance.desiredDateOfConsultation?.toIso8601String(),
       'scheduledPeriodOfStayInJapan': instance.scheduledPeriodOfStayInJapan,
       'walking': instance.walking,
       'walkingDetail': instance.walkingDetail,
