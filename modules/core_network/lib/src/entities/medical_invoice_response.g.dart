@@ -11,6 +11,7 @@ MedicalInvoiceResponse _$MedicalInvoiceResponseFromJson(
     MedicalInvoiceResponse(
       id: json['_id'] as String,
       fileName: json['fileName'] as String?,
+      fileNameExcel: json['fileNameExcel'] as String?,
       invoiceNumber: json['invoiceNumber'] as String?,
       invoiceDate: json['invoiceDate'] == null
           ? null
@@ -51,6 +52,7 @@ Map<String, dynamic> _$MedicalInvoiceResponseToJson(
     <String, dynamic>{
       '_id': instance.id,
       'fileName': instance.fileName,
+      'fileNameExcel': instance.fileNameExcel,
       'invoiceNumber': instance.invoiceNumber,
       'invoiceDate': instance.invoiceDate?.toIso8601String(),
       'contact': instance.contact,

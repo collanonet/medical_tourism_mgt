@@ -9,6 +9,8 @@ part of 'medical_invoice_request.dart';
 abstract class _$MedicalInvoiceRequestCWProxy {
   MedicalInvoiceRequest fileName(String? fileName);
 
+  MedicalInvoiceRequest fileNameExcel(String? fileNameExcel);
+
   MedicalInvoiceRequest invoiceNumber(String? invoiceNumber);
 
   MedicalInvoiceRequest invoiceDate(DateTime? invoiceDate);
@@ -48,6 +50,7 @@ abstract class _$MedicalInvoiceRequestCWProxy {
   /// ````
   MedicalInvoiceRequest call({
     String? fileName,
+    String? fileNameExcel,
     String? invoiceNumber,
     DateTime? invoiceDate,
     String? contact,
@@ -75,6 +78,10 @@ class _$MedicalInvoiceRequestCWProxyImpl
 
   @override
   MedicalInvoiceRequest fileName(String? fileName) => this(fileName: fileName);
+
+  @override
+  MedicalInvoiceRequest fileNameExcel(String? fileNameExcel) =>
+      this(fileNameExcel: fileNameExcel);
 
   @override
   MedicalInvoiceRequest invoiceNumber(String? invoiceNumber) =>
@@ -141,6 +148,7 @@ class _$MedicalInvoiceRequestCWProxyImpl
   /// ````
   MedicalInvoiceRequest call({
     Object? fileName = const $CopyWithPlaceholder(),
+    Object? fileNameExcel = const $CopyWithPlaceholder(),
     Object? invoiceNumber = const $CopyWithPlaceholder(),
     Object? invoiceDate = const $CopyWithPlaceholder(),
     Object? contact = const $CopyWithPlaceholder(),
@@ -162,6 +170,10 @@ class _$MedicalInvoiceRequestCWProxyImpl
           ? _value.fileName
           // ignore: cast_nullable_to_non_nullable
           : fileName as String?,
+      fileNameExcel: fileNameExcel == const $CopyWithPlaceholder()
+          ? _value.fileNameExcel
+          // ignore: cast_nullable_to_non_nullable
+          : fileNameExcel as String?,
       invoiceNumber: invoiceNumber == const $CopyWithPlaceholder()
           ? _value.invoiceNumber
           // ignore: cast_nullable_to_non_nullable
@@ -243,6 +255,7 @@ MedicalInvoiceRequest _$MedicalInvoiceRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalInvoiceRequest(
       fileName: json['fileName'] as String?,
+      fileNameExcel: json['fileNameExcel'] as String?,
       invoiceNumber: json['invoiceNumber'] as String?,
       invoiceDate: json['invoiceDate'] == null
           ? null
@@ -272,6 +285,7 @@ Map<String, dynamic> _$MedicalInvoiceRequestToJson(
         MedicalInvoiceRequest instance) =>
     <String, dynamic>{
       'fileName': instance.fileName,
+      'fileNameExcel': instance.fileNameExcel,
       'invoiceNumber': instance.invoiceNumber,
       'invoiceDate': instance.invoiceDate?.toIso8601String(),
       'contact': instance.contact,

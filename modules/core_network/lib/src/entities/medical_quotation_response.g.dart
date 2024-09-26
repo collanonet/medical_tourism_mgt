@@ -11,6 +11,7 @@ MedicalQuotationResponse _$MedicalQuotationResponseFromJson(
     MedicalQuotationResponse(
       id: json['_id'] as String,
       fileName: json['fileName'] as String?,
+      fileNameExcel: json['fileNameExcel'] as String?,
       quotationNumber: json['quotationNumber'] as String?,
       quotationDate: json['quotationDate'] == null
           ? null
@@ -50,6 +51,7 @@ Map<String, dynamic> _$MedicalQuotationResponseToJson(
     <String, dynamic>{
       '_id': instance.id,
       'fileName': instance.fileName,
+      'fileNameExcel': instance.fileNameExcel,
       'quotationNumber': instance.quotationNumber,
       'quotationDate': instance.quotationDate?.toIso8601String(),
       'contact': instance.contact,

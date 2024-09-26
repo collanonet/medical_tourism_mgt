@@ -9,6 +9,7 @@ class MedicalQuotationResponse {
   @JsonKey(name: '_id')
   String id;
   String? fileName;
+  String? fileNameExcel;
   String? quotationNumber;
   DateTime? quotationDate;
   String? contact;
@@ -29,6 +30,7 @@ class MedicalQuotationResponse {
   MedicalQuotationResponse({
     required this.id,
     this.fileName,
+    this.fileNameExcel,
     this.quotationNumber,
     this.quotationDate,
     this.contact,

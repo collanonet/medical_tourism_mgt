@@ -12,6 +12,7 @@ class MedicalInvoiceResponse {
   @JsonKey(name: '_id')
   String id;
   String? fileName;
+  String? fileNameExcel;
   String? invoiceNumber;
   DateTime? invoiceDate;
   String? contact;
@@ -33,6 +34,7 @@ class MedicalInvoiceResponse {
   MedicalInvoiceResponse({
     required this.id,
     this.fileName,
+    this.fileNameExcel,
     this.invoiceNumber,
     this.invoiceDate,
     this.contact,

@@ -9,6 +9,8 @@ part of 'medical_quotation_request.dart';
 abstract class _$MedicalQuotationRequestCWProxy {
   MedicalQuotationRequest fileName(String? fileName);
 
+  MedicalQuotationRequest fileNameExcel(String? fileNameExcel);
+
   MedicalQuotationRequest quotationNumber(String? quotationNumber);
 
   MedicalQuotationRequest quotationDate(DateTime? quotationDate);
@@ -45,6 +47,7 @@ abstract class _$MedicalQuotationRequestCWProxy {
   /// ````
   MedicalQuotationRequest call({
     String? fileName,
+    String? fileNameExcel,
     String? quotationNumber,
     DateTime? quotationDate,
     String? contact,
@@ -72,6 +75,10 @@ class _$MedicalQuotationRequestCWProxyImpl
   @override
   MedicalQuotationRequest fileName(String? fileName) =>
       this(fileName: fileName);
+
+  @override
+  MedicalQuotationRequest fileNameExcel(String? fileNameExcel) =>
+      this(fileNameExcel: fileNameExcel);
 
   @override
   MedicalQuotationRequest quotationNumber(String? quotationNumber) =>
@@ -134,6 +141,7 @@ class _$MedicalQuotationRequestCWProxyImpl
   /// ````
   MedicalQuotationRequest call({
     Object? fileName = const $CopyWithPlaceholder(),
+    Object? fileNameExcel = const $CopyWithPlaceholder(),
     Object? quotationNumber = const $CopyWithPlaceholder(),
     Object? quotationDate = const $CopyWithPlaceholder(),
     Object? contact = const $CopyWithPlaceholder(),
@@ -154,6 +162,10 @@ class _$MedicalQuotationRequestCWProxyImpl
           ? _value.fileName
           // ignore: cast_nullable_to_non_nullable
           : fileName as String?,
+      fileNameExcel: fileNameExcel == const $CopyWithPlaceholder()
+          ? _value.fileNameExcel
+          // ignore: cast_nullable_to_non_nullable
+          : fileNameExcel as String?,
       quotationNumber: quotationNumber == const $CopyWithPlaceholder()
           ? _value.quotationNumber
           // ignore: cast_nullable_to_non_nullable
@@ -230,6 +242,7 @@ MedicalQuotationRequest _$MedicalQuotationRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalQuotationRequest(
       fileName: json['fileName'] as String?,
+      fileNameExcel: json['fileNameExcel'] as String?,
       quotationNumber: json['quotationNumber'] as String?,
       quotationDate: json['quotationDate'] == null
           ? null
@@ -258,6 +271,7 @@ Map<String, dynamic> _$MedicalQuotationRequestToJson(
         MedicalQuotationRequest instance) =>
     <String, dynamic>{
       'fileName': instance.fileName,
+      'fileNameExcel': instance.fileNameExcel,
       'quotationNumber': instance.quotationNumber,
       'quotationDate': instance.quotationDate?.toIso8601String(),
       'contact': instance.contact,

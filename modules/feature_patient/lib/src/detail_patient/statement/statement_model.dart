@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'dart:convert';
+import 'package:excel/excel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
@@ -377,6 +378,24 @@ Future<Uint8List?> generatePdfFromInvoice(
     if (kDebugMode) {
       print(e);
     }
+    return null;
+  }
+}
+
+Future<List<int>?> generateExcelFromInvoice(
+    MedicalQuotationRequest request, Patient patient) async {
+  var excel = Excel.createExcel();
+  Sheet sheetObject = excel['Quotation'];
+
+  int rowIndex = 1;
+
+
+  // Save the Excel file
+  try {
+    var excelBytes = excel.encode();
+    return excelBytes;
+  } catch (e) {
+    print(e);
     return null;
   }
 }
