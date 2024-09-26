@@ -1,14 +1,11 @@
 // Flutter imports:
 import 'package:core_utils/async.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -102,9 +99,10 @@ class StatementScreen extends StatelessWidget {
                         itemBuilder: (BuildContext context, int index) {
                           var data = value.data?[index];
                           return InkWell(
-                            onTap: data?.fileName != null
+                            onTap: data?.fileNamePdfJP != null
                                 ? () {
-                                    openUrlInBrowser(fileName: data!.fileName!);
+                                    openUrlInBrowser(
+                                        fileName: data!.fileNamePdfJP!);
                                   }
                                 : null,
                             child: Padding(
@@ -126,35 +124,35 @@ class StatementScreen extends StatelessWidget {
                                     data?.invoiceNumber ?? '',
                                     style: context.textTheme.bodySmall,
                                   )),
-                                  Expanded(child: SizedBox()
-                                      //     Row(
-                                      //   children: [
-                                      //     Container(
-                                      //       padding: EdgeInsets.symmetric(
-                                      //         horizontal: context
-                                      //             .appTheme.spacing.marginExtraSmall,
-                                      //         vertical: context
-                                      //             .appTheme.spacing.marginExtraSmall,
-                                      //       ),
-                                      //       decoration: BoxDecoration(
-                                      //         border: Border.all(
-                                      //           color: Colors.red,
-                                      //         ),
-                                      //         borderRadius: BorderRadius.circular(
-                                      //             context.appTheme.spacing
-                                      //                 .borderRadiusMedium),
-                                      //       ),
-                                      //       child: Text(
-                                      //         '見積書',
-                                      //         style:
-                                      //             context.textTheme.bodySmall?.copyWith(
-                                      //           color: Colors.red,
-                                      //         ),
-                                      //       ),
-                                      //     ),
-                                      //   ],
-                                      // ),
-                                      ),
+                                  Expanded(
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          padding: EdgeInsets.symmetric(
+                                            horizontal: context.appTheme.spacing
+                                                .marginExtraSmall,
+                                            vertical: context.appTheme.spacing
+                                                .marginExtraSmall,
+                                          ),
+                                          decoration: BoxDecoration(
+                                            border: Border.all(
+                                              color: Colors.blue,
+                                            ),
+                                            borderRadius: BorderRadius.circular(
+                                                context.appTheme.spacing
+                                                    .borderRadiusMedium),
+                                          ),
+                                          child: Text(
+                                            '精算書',
+                                            style: context.textTheme.bodySmall
+                                                ?.copyWith(
+                                              color: Colors.blue,
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                   Expanded(
                                       child: Text(
                                     '--',
@@ -191,10 +189,11 @@ class StatementScreen extends StatelessWidget {
                                   )),
                                   Expanded(
                                     child: ElevatedButton(
-                                      onPressed: data?.fileName != null
+                                      onPressed: data?.fileNamePdfJP != null
                                           ? () {
                                               openUrlInBrowser(
-                                                  fileName: data!.fileName!);
+                                                  fileName:
+                                                      data!.fileNamePdfJP!);
                                             }
                                           : null,
                                       child: const Text(

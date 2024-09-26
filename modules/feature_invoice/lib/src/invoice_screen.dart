@@ -5,14 +5,13 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
-import 'detail/quote_screen.dart';
+import 'invoice_table_list.dart';
 import 'invoice_form.dart';
-import 'invoice_model.dart';
 
 class InvoiceScreen extends StatelessWidget {
   const InvoiceScreen({super.key});
@@ -22,12 +21,11 @@ class InvoiceScreen extends StatelessWidget {
     return ReactiveFormBuilder(
       form: () => formInvoice(),
       builder: (context, formGroup, child) {
-        return SingleChildScrollView(
+        return Expanded(
           child: Column(
             children: [
               Container(
                 width: MediaQuery.of(context).size.width,
-                height: 260,
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(10),
@@ -49,42 +47,37 @@ class InvoiceScreen extends StatelessWidget {
                         width: context.appTheme.spacing.marginMedium,
                       ),
                       children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('病院名'),
-                              ReactiveTextField(
-                                formControlName: 'nameOfHospital',
-                              )
-                            ],
+                        IntrinsicWidth(
+                          stepWidth: 200,
+                          child: ReactiveTextField(
+                            formControlName: 'nameOfHospital',
+                            decoration: const InputDecoration(
+                              label: Text('病院名'),
+                            ),
                           ),
                         ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('エージェント名'),
-                              ReactiveTextField(
-                                formControlName: 'agentName',
-                              )
-                            ],
+                        IntrinsicWidth(
+                          stepWidth: 200,
+                          child: ReactiveTextField(
+                            formControlName: 'agentName',
+                            decoration: const InputDecoration(
+                              label: Text('エージェント名'),
+                            ),
                           ),
                         ),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('患者名'),
-                              ReactiveTextField(
-                                formControlName: 'patientName',
-                              )
-                            ],
+                        IntrinsicWidth(
+                          stepWidth: 200,
+                          child: ReactiveTextField(
+                            formControlName: 'patientName',
+                            decoration: const InputDecoration(
+                              label: Text('患者名'),
+                            ),
                           ),
                         )
                       ],
                     ),
                     RowSeparated(
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       separatorBuilder: (context, index) => SizedBox(
                         width: context.appTheme.spacing.marginMedium,
                       ),
@@ -114,76 +107,66 @@ class InvoiceScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text('発行日（自）'),
-                            IntrinsicWidth(
-                              stepWidth: 200,
-                              child: ReactiveDatePicker<DateTime>(
+                        IntrinsicWidth(
+                          stepWidth: 200,
+                          child: ReactiveDatePicker<DateTime>(
+                            formControlName: 'issue_date_from',
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2100),
+                            builder: (context, picker, child) {
+                              return ReactiveTextField<DateTime>(
                                 formControlName: 'issue_date_from',
-                                firstDate: DateTime(1900),
-                                lastDate: DateTime(2100),
-                                builder: (context, picker, child) {
-                                  return ReactiveTextField<DateTime>(
-                                    formControlName: 'issue_date_from',
-                                    valueAccessor: DateTimeValueAccessor(
-                                      dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                ),
+                                decoration: InputDecoration(
+                                  label: const Text('発行日（自）'),
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
                                     ),
-                                    decoration: InputDecoration(
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                      suffixIcon: IconButton(
-                                        icon: const Icon(
-                                          CupertinoIcons.calendar,
-                                          color: Colors.grey,
-                                        ),
-                                        onPressed: picker.showPicker,
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
+                                    onPressed: picker.showPicker,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                         const Text(
                           '~',
                           style: TextStyle(
                               fontSize: 20, fontWeight: FontWeight.bold),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text('発行日（至）'),
-                            IntrinsicWidth(
-                              stepWidth: 200,
-                              child: ReactiveDatePicker<DateTime>(
+                        IntrinsicWidth(
+                          stepWidth: 200,
+                          child: ReactiveDatePicker<DateTime>(
+                            formControlName: 'issue_date_to',
+                            firstDate: DateTime(1900),
+                            lastDate: DateTime(2100),
+                            builder: (context, picker, child) {
+                              return ReactiveTextField<DateTime>(
                                 formControlName: 'issue_date_to',
-                                firstDate: DateTime(1900),
-                                lastDate: DateTime(2100),
-                                builder: (context, picker, child) {
-                                  return ReactiveTextField<DateTime>(
-                                    formControlName: 'issue_date_to',
-                                    valueAccessor: DateTimeValueAccessor(
-                                      dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                valueAccessor: DateTimeValueAccessor(
+                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
+                                ),
+                                decoration: InputDecoration(
+                                  label: const Text('発行日（至）'),
+                                  fillColor: Colors.white,
+                                  filled: true,
+                                  suffixIcon: IconButton(
+                                    icon: const Icon(
+                                      CupertinoIcons.calendar,
+                                      color: Colors.grey,
                                     ),
-                                    decoration: InputDecoration(
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                      suffixIcon: IconButton(
-                                        icon: const Icon(
-                                          CupertinoIcons.calendar,
-                                          color: Colors.grey,
-                                        ),
-                                        onPressed: picker.showPicker,
-                                      ),
-                                    ),
-                                  );
-                                },
-                              ),
-                            ),
-                          ],
+                                    onPressed: picker.showPicker,
+                                  ),
+                                ),
+                              );
+                            },
+                          ),
                         ),
                         InkWell(
                           onTap: () {
@@ -209,59 +192,56 @@ class InvoiceScreen extends StatelessWidget {
                             ),
                           ),
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text('見積書/請求書'),
-                            IntrinsicWidth(
-                              stepWidth: 200,
-                              child: ValueListenableBuilder(
-                                valueListenable:
-                                    context.read<InvoiceModel>().prospects,
-                                builder: (context, value, _) {
-                                  return ReactiveDropdownFormField(
-                                    formControlName: 'invoice',
-                                    items: value
-                                        .map((e) => DropdownMenuItem(
-                                              value: e.item,
-                                              child: Text(
-                                                e.item,
-                                              ),
-                                            ))
-                                        .toList(),
-                                  );
-                                },
+                        IntrinsicWidth(
+                          stepWidth: 200,
+                          child: ReactiveDropdownFormField(
+                            formControlName: 'invoice',
+                            items: [
+                              DropdownMenuItem(
+                                value: '見積書',
+                                child: Text(
+                                  '見積書',
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text('見込み'),
-                            IntrinsicWidth(
-                              stepWidth: 200,
-                              child: ValueListenableBuilder(
-                                valueListenable:
-                                    context.read<InvoiceModel>().invoices,
-                                builder: (context, value, _) {
-                                  return ReactiveDropdownFormField(
-                                    formControlName: 'prospects',
-                                    items: value
-                                        .map((e) => DropdownMenuItem(
-                                              value: e.item,
-                                              child: Text(
-                                                e.item,
-                                              ),
-                                            ))
-                                        .toList(),
-                                  );
-                                },
+                              DropdownMenuItem(
+                                value: '見積書',
+                                child: Text(
+                                  '見積書',
+                                ),
                               ),
+                            ],
+                            decoration: const InputDecoration(
+                              label: Text('見積書/請求書'),
                             ),
-                          ],
+                          ),
                         ),
-                        SizedBox(width: context.appTheme.spacing.marginLarge),
+                        IntrinsicWidth(
+                          stepWidth: 200,
+                          child: ReactiveDropdownFormField(
+                            formControlName: 'prospects',
+                            items: [
+                              'A',
+                              'B',
+                              'C',
+                            ]
+                                .map((e) => DropdownMenuItem(
+                                      value: e,
+                                      child: Text(
+                                        e,
+                                      ),
+                                    ))
+                                .toList(),
+                            decoration: const InputDecoration(
+                              label: Text('見込み'),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
                         ElevatedButton(
                           onPressed: () {},
                           child: const Center(
@@ -269,12 +249,12 @@ class InvoiceScreen extends StatelessWidget {
                           ),
                         ),
                       ],
-                    ),
+                    )
                   ],
                 ),
               ),
               SizedBox(height: context.appTheme.spacing.marginMedium),
-              const QuoteScreen()
+              const Expanded(child: InvoiceTableList())
             ],
           ),
         );

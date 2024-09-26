@@ -722,19 +722,9 @@ class PatientRemoteProvider {
     return apiService.deleteFileSummary(id);
   }
 
-  Future<MedicalQuotationResponse> putQuotation(
-      String id, MedicalQuotationRequest quotationRequest) {
-    return apiService.putQuotation(id, quotationRequest);
-  }
-
   Future<MedicalInvoiceResponse> putInvoice(
       String id, MedicalInvoiceRequest invoiceRequest) {
     return apiService.putInvoice(id, invoiceRequest);
-  }
-
-  Future<MedicalQuotationResponse> postQuotation(
-      MedicalQuotationRequest quotationRequest) {
-    return apiService.postQuotation(quotationRequest);
   }
 
   Future<MedicalInvoiceResponse> postInvoice(
@@ -742,26 +732,14 @@ class PatientRemoteProvider {
     return apiService.postInvoice(invoiceRequest);
   }
 
-  Future<MedicalQuotationResponse> getQuotationsByMedicalRecordId(
-      String medicalRecordId) {
-    return apiService.getQuotationsByMedicalRecordId(medicalRecordId);
-  }
-
-  Future<List<MedicalQuotationResponse>> getQuotations(String? medicalRecord) {
-    return apiService.getQuotations(medicalRecord);
-  }
-
   Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(
       String medicalRecordId) {
     return apiService.getInvoicesByMedicalRecordId(medicalRecordId);
   }
 
-  Future<List<MedicalInvoiceResponse>> getInvoices(String? medicalRecord) {
-    return apiService.getInvoices(medicalRecord);
-  }
-
-  Future<void> deleteQuotation(String id) {
-    return apiService.deleteQuotation(id);
+  Future<List<MedicalInvoiceResponse>> getInvoices(
+      {String? medicalRecord, bool? type}) {
+    return apiService.getInvoices(medicalRecord: medicalRecord, type: type);
   }
 
   Future<void> deleteInvoice(String id) {

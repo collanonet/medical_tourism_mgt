@@ -540,9 +540,10 @@ abstract class PatientRepository {
 
   // A15
 
-  Future<List<MedicalInvoiceResponse>> getInvoices(
+  Future<List<MedicalInvoiceResponse>> getInvoices({
     String? medicalRecord,
-  );
+    bool? type,
+  });
 
   Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(
       String medicalRecordId);
@@ -554,20 +555,4 @@ abstract class PatientRepository {
       String id, MedicalInvoiceRequest invoiceRequest);
 
   Future<void> deleteInvoice(String id);
-
-  // A13
-  Future<List<MedicalQuotationResponse>> getQuotations(
-    String? medicalRecord,
-  );
-
-  Future<MedicalQuotationResponse> getQuotationsByMedicalRecordId(
-      String medicalRecordId);
-
-  Future<MedicalQuotationResponse> postQuotation(
-      MedicalQuotationRequest quotationRequest);
-
-  Future<MedicalQuotationResponse> putQuotation(
-      String id, MedicalQuotationRequest quotationRequest);
-
-  Future<void> deleteQuotation(String id);
 }

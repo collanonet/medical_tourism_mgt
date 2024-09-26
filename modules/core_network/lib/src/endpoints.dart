@@ -260,7 +260,4 @@ class EndPoints {
 
   // A15
   static const INVOICE = '/invoices';
-
-  // A13
-  static const QUOTATION = '/quotations';
 }

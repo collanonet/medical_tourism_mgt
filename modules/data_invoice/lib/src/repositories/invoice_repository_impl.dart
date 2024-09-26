@@ -18,23 +18,30 @@ class InvoiceRepositoryIml extends InvoiceRepository {
   final InvoiceLocalProvider local;
 
   @override
-  Future<List<InvoiceResponse>> getInvoiceDetail() async {
-   return remote.getInvoiceDetail();
+  Future<void> deleteInvoice(String id) {
+    return remote.deleteInvoice(id);
   }
 
   @override
-  Future<List<InvoiceFilterResponse>> getInvoiceFilter() {
-    return remote.getInvoiceFilter();
+  Future<List<MedicalInvoiceResponse>> getInvoices({String? medicalRecord, bool? type}) {
+    return remote.getInvoices(medicalRecord: medicalRecord, type: type);
   }
 
   @override
-  Future<InvoiceResponse> postInvoiceDetail(InvoiceRequest invoiceRequest) {
-    return remote.postInvoiceDetail(invoiceRequest);
+  Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(String medicalRecordId) {
+    return remote.getInvoicesByMedicalRecordId(medicalRecordId);
   }
 
   @override
-  Future<InvoiceFilterResponse> postInvoiceFilter(InvoiceFilterRequest invoiceFilterRequest) {
-    return remote.postFilterInvoice(invoiceFilterRequest);
+  Future<MedicalInvoiceResponse> postInvoice(MedicalInvoiceRequest invoiceRequest) {
+    return remote.postInvoice(invoiceRequest);
   }
+
+  @override
+  Future<MedicalInvoiceResponse> putInvoice(String id, MedicalInvoiceRequest invoiceRequest) {
+    return remote.putInvoice(id, invoiceRequest);
+  }
+
+
 
 }

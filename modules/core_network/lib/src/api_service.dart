@@ -1278,13 +1278,6 @@ abstract class ApiService {
     @Body() InvoiceRequest invoiceRequest,
   );
 
-  @GET(EndPoints.FILTER_IVOICE)
-  Future<List<InvoiceFilterResponse>> filterInvoice();
-
-  @POST(EndPoints.FILTER_IVOICE)
-  Future<InvoiceFilterResponse> postFilterInvoice(
-    @Body() InvoiceFilterRequest invoiceFilterRequest,
-  );
 
   @GET(EndPoints.ESTIMATE_MASTER)
   Future<List<EstimateMasterResponse>> getEstimateMaster();
@@ -1562,11 +1555,12 @@ abstract class ApiService {
     MedicalAfterGettingVisaFinalRequest medicalAfterGettingVisaFinalRequest,
   );
 
-  // A15
+  // A15 & A13
   @GET(EndPoints.INVOICE)
-  Future<List<MedicalInvoiceResponse>> getInvoices(
+  Future<List<MedicalInvoiceResponse>> getInvoices({
     @Query('medicalRecord') String? medicalRecord,
-  );
+    @Query('type') bool? type,
+  });
 
   @GET('${EndPoints.INVOICE}/medicalRecord/{medicalRecordId}')
   Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(
@@ -1591,38 +1585,6 @@ abstract class ApiService {
 
   @DELETE('${EndPoints.INVOICE}/{id}')
   Future<void> deleteInvoice(
-    @Path('id') String id,
-  );
-
-  // A13
-  @GET(EndPoints.QUOTATION)
-  Future<List<MedicalQuotationResponse>> getQuotations(
-    @Query('medicalRecord') String? medicalRecord,
-  );
-
-  @GET('${EndPoints.QUOTATION}/medicalRecord/{medicalRecordId}')
-  Future<MedicalQuotationResponse> getQuotationsByMedicalRecordId(
-    @Path('medicalRecordId') String medicalRecordId,
-  );
-
-  @POST(EndPoints.QUOTATION)
-  Future<MedicalQuotationResponse> postQuotation(
-    @Body() MedicalQuotationRequest medicalQuotationRequest,
-  );
-
-  @GET('${EndPoints.QUOTATION}/{id}')
-  Future<MedicalQuotationResponse> getQuotationById(
-    @Path('id') String id,
-  );
-
-  @PUT('${EndPoints.QUOTATION}/{id}')
-  Future<MedicalQuotationResponse> putQuotation(
-    @Path('id') String id,
-    @Body() MedicalQuotationRequest medicalQuotationRequest,
-  );
-
-  @DELETE('${EndPoints.QUOTATION}/{id}')
-  Future<void> deleteQuotation(
     @Path('id') String id,
   );
 }

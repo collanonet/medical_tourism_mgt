@@ -941,49 +941,26 @@ class PatientRepositoryIml extends PatientRepository {
   }
 
   @override
-  Future<void> deleteQuotation(String id) {
-    return remote.deleteQuotation(id);
-  }
-
-  @override
-  Future<List<MedicalInvoiceResponse>> getInvoices(String? medicalRecord) {
-    return remote.getInvoices(medicalRecord);
-  }
-
-  @override
   Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(String medicalRecordId) {
     return remote.getInvoicesByMedicalRecordId(medicalRecordId);
   }
 
-  @override
-  Future<List<MedicalQuotationResponse>> getQuotations(String? medicalRecord) {
-    return remote.getQuotations(medicalRecord);
-  }
-
-  @override
-  Future<MedicalQuotationResponse> getQuotationsByMedicalRecordId(String medicalRecordId) {
-    return remote.getQuotationsByMedicalRecordId(medicalRecordId);
-  }
 
   @override
   Future<MedicalInvoiceResponse> postInvoice(MedicalInvoiceRequest invoiceRequest) {
     return remote.postInvoice(invoiceRequest);
   }
-
-  @override
-  Future<MedicalQuotationResponse> postQuotation(MedicalQuotationRequest quotationRequest) {
-    return remote.postQuotation(quotationRequest);
-  }
-
   @override
   Future<MedicalInvoiceResponse> putInvoice(String id, MedicalInvoiceRequest invoiceRequest) {
     return remote.putInvoice(id, invoiceRequest);
   }
 
   @override
-  Future<MedicalQuotationResponse> putQuotation(String id, MedicalQuotationRequest quotationRequest) {
-    return remote.putQuotation(id, quotationRequest);
+  Future<List<MedicalInvoiceResponse>> getInvoices({String? medicalRecord, bool? type}) {
+    return remote.getInvoices(medicalRecord: medicalRecord, type: type);
   }
+
+
   
  
 }

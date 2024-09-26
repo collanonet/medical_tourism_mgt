@@ -8,8 +8,12 @@ part 'medical_invoice_request.g.dart';
 @CopyWith()
 @JsonSerializable()
 class MedicalInvoiceRequest {
-  String? fileName;
-  String? fileNameExcel;
+  bool? type;
+  String? fileNamePdfEN;
+  String? fileNamePdfJP;
+  String? fileNamePdfVN;
+  String? fileNamePdfZH;
+  String? fileNamePdfZHTW;
   String? invoiceNumber;
   DateTime? invoiceDate;
   String? contact;
@@ -27,8 +31,12 @@ class MedicalInvoiceRequest {
   List<ItemRequest>? item;
 
   MedicalInvoiceRequest({
-    this.fileName,
-    this.fileNameExcel,
+    this.type,
+    this.fileNamePdfEN,
+    this.fileNamePdfJP,
+    this.fileNamePdfVN,
+    this.fileNamePdfZH,
+    this.fileNamePdfZHTW,
     this.invoiceNumber,
     this.invoiceDate,
     this.contact,
@@ -51,3 +59,49 @@ class MedicalInvoiceRequest {
 
   Map<String, dynamic> toJson() => _$MedicalInvoiceRequestToJson(this);
 }
+
+
+@JsonSerializable()
+class TotalPaymentRequest {
+  double? taxRate;
+  double? amountExcludingTaxInYen;
+  double? consumptionTaxAmountInYen;
+
+  TotalPaymentRequest({
+    this.taxRate,
+    this.amountExcludingTaxInYen,
+    this.consumptionTaxAmountInYen,
+  });
+
+  factory TotalPaymentRequest.fromJson(Map<String, dynamic> json) =>
+      _$TotalPaymentRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$TotalPaymentRequestToJson(this);
+}
+
+@JsonSerializable()
+class ItemRequest {
+  DateTime? transactionDate;
+  String? details;
+  double? quantity;
+  String? unit;
+  double? unitPrice;
+  double? amount;
+  double? taxRate;
+
+  ItemRequest({
+    this.transactionDate,
+    this.details,
+    this.quantity,
+    this.unit,
+    this.unitPrice,
+    this.amount,
+    this.taxRate,
+  });
+
+  factory ItemRequest.fromJson(Map<String, dynamic> json) =>
+      _$ItemRequestFromJson(json);
+
+  Map<String, dynamic> toJson() => _$ItemRequestToJson(this);
+}
+

@@ -24,8 +24,6 @@ dependency_overrides:
     path: modules/data_medical_visa
   data_patient:
     path: modules/data_patient
-  data_quotation:
-    path: modules/data_quotation
   data_sale:
     path: modules/data_sale
   data_report:
@@ -50,8 +48,6 @@ dependency_overrides:
     path: modules/feature_medical_visa
   feature_patient:
     path: modules/feature_patient
-  feature_quotation:
-    path: modules/feature_quotation
   feature_report:
     path: modules/feature_report
   feature_sale:

@@ -443,13 +443,6 @@ packages:
       relative: true
     source: path
     version: "0.0.1-alpha.1"
-  data_quotation:
-    dependency: "direct main"
-    description:
-      path: "modules/data_quotation"
-      relative: true
-    source: path
-    version: "0.0.1-alpha.1"
   data_report:
     dependency: "direct main"
     description:
@@ -580,13 +573,6 @@ packages:
     dependency: "direct main"
     description:
       path: "modules/feature_process_chart"
-      relative: true
-    source: path
-    version: "0.0.1-alpha.1"
-  feature_quotation:
-    dependency: "direct main"
-    description:
-      path: "modules/feature_quotation"
       relative: true
     source: path
     version: "0.0.1-alpha.1"

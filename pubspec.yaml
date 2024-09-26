@@ -53,7 +53,6 @@ dependencies:
   data_invoice: 0.0.1-alpha.1
   data_medical_visa: 0.0.1-alpha.1
   data_patient: 0.0.1-alpha.1
-  data_quotation: 0.0.1-alpha.1
   data_sale: 0.0.1-alpha.1
   data_report: 0.0.1-alpha.1
   data_process_chart: 0.0.1-alpha.1
@@ -70,7 +69,6 @@ dependencies:
   feature_invoice: 0.0.1-alpha.1
   feature_medical_visa: 0.0.1-alpha.1
   feature_patient: 0.0.1-alpha.1
-  feature_quotation: 0.0.1-alpha.1
   feature_report: 0.0.1-alpha.1
   feature_sale: 0.0.1-alpha.1
 

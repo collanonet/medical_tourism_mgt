@@ -2,19 +2,19 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup estimateForm() {
   return FormGroup({
-    'quotationNumber': FormControl<String>(),
-    'quotationDate': FormControl<DateTime>(
+    'invoiceNumber': FormControl<String>(),
+    'invoiceDate': FormControl<DateTime>(
       value: DateTime.now(),
     ),
     'contact': FormControl<String>(),
     'registrationNumber': FormControl<String>(),
     'subject': FormControl<String>(),
-    'totalAmount': FormControl<double>(
+    'amountBilled': FormControl<double>(
       validators: [
         Validators.number,
       ],
     ),
-    'validityPeriod': FormControl<DateTime>(
+    'paymentDeadline': FormControl<DateTime>(
       value: DateTime.now(),
     ),
     'remarks': FormControl<String>(),

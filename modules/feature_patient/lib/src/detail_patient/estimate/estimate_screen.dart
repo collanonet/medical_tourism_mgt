@@ -97,9 +97,10 @@ class EstimateScreen extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       var data = value.data?[index];
                       return InkWell(
-                        onTap: data?.fileName != null
+                        onTap: data?.fileNamePdfJP != null
                             ? () {
-                                openUrlInBrowser(fileName: data!.fileName!);
+                                openUrlInBrowser(
+                                    fileName: data!.fileNamePdfJP!);
                               }
                             : null,
                         child: Padding(
@@ -117,38 +118,38 @@ class EstimateScreen extends StatelessWidget {
                               ),
                               Expanded(
                                   child: Text(
-                                data?.quotationNumber ?? '',
+                                data?.invoiceNumber ?? '',
                                 style: context.textTheme.bodySmall,
                               )),
-                              Expanded(child: SizedBox()
-                                  //     Row(
-                                  //   children: [
-                                  //     Container(
-                                  //       padding: EdgeInsets.symmetric(
-                                  //         horizontal: context
-                                  //             .appTheme.spacing.marginExtraSmall,
-                                  //         vertical: context
-                                  //             .appTheme.spacing.marginExtraSmall,
-                                  //       ),
-                                  //       decoration: BoxDecoration(
-                                  //         border: Border.all(
-                                  //           color: Colors.red,
-                                  //         ),
-                                  //         borderRadius: BorderRadius.circular(
-                                  //             context.appTheme.spacing
-                                  //                 .borderRadiusMedium),
-                                  //       ),
-                                  //       child: Text(
-                                  //         '見積書',
-                                  //         style:
-                                  //             context.textTheme.bodySmall?.copyWith(
-                                  //           color: Colors.red,
-                                  //         ),
-                                  //       ),
-                                  //     ),
-                                  //   ],
-                                  // ),
-                                  ),
+                              Expanded(
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: context
+                                            .appTheme.spacing.marginExtraSmall,
+                                        vertical: context
+                                            .appTheme.spacing.marginExtraSmall,
+                                      ),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: Colors.red,
+                                        ),
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                      child: Text(
+                                        '見積書',
+                                        style: context.textTheme.bodySmall
+                                            ?.copyWith(
+                                          color: Colors.red,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
                               Expanded(
                                   child: Text(
                                 '--',
@@ -156,8 +157,8 @@ class EstimateScreen extends StatelessWidget {
                               )),
                               Expanded(
                                   child: Text(
-                                data?.quotationDate != null
-                                    ? Dates.formatFullDate(data!.quotationDate!)
+                                data?.invoiceDate != null
+                                    ? Dates.formatFullDate(data!.invoiceDate!)
                                     : '',
                                 style: context.textTheme.bodySmall,
                               )),
@@ -186,10 +187,14 @@ class EstimateScreen extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     ElevatedButton(
-                                      onPressed:  data?.fileName  != null ?() {
-                                        openUrlInBrowser(
-                                            fileName: data?.fileName ?? '');
-                                      } : null,
+                                      onPressed: data?.fileNamePdfJP != null
+                                          ? () {
+                                              openUrlInBrowser(
+                                                  fileName:
+                                                      data?.fileNamePdfJP ??
+                                                          '');
+                                            }
+                                          : null,
                                       child: const Text('請求書を発行する'),
                                     )
                                   ],

@@ -1,9 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -29,14 +27,14 @@ class EstimateScreenForm extends StatelessWidget {
             IntrinsicWidth(
               stepWidth: 250,
               child: ReactiveTextField<String>(
-                formControlName: 'quotationNumber',
+                formControlName: 'invoiceNumber',
                 decoration: InputDecoration(labelText: '見積番号 :'),
               ),
             ),
             IntrinsicWidth(
               stepWidth: 250,
               child: ReactiveTextField<DateTime>(
-                formControlName: 'quotationDate',
+                formControlName: 'invoiceDate',
                 decoration: InputDecoration(labelText: '見積日:'),
                 readOnly: true,
                 valueAccessor: DateTimeValueAccessor(
@@ -50,7 +48,7 @@ class EstimateScreenForm extends StatelessWidget {
                     lastDate: DateTime(2100),
                   );
                   if (date != null) {
-                    form.control('quotationDate').value = date;
+                    form.control('invoiceDate').value = date;
                   }
                 },
               ),
@@ -87,7 +85,7 @@ class EstimateScreenForm extends StatelessWidget {
             IntrinsicWidth(
               stepWidth: 250,
               child: ReactiveTextField<double>(
-                formControlName: 'totalAmount',
+                formControlName: 'amountBilled',
                 keyboardType: TextInputType.number,
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
@@ -98,7 +96,7 @@ class EstimateScreenForm extends StatelessWidget {
             IntrinsicWidth(
               stepWidth: 250,
               child: ReactiveTextField<DateTime>(
-                formControlName: 'validityPeriod',
+                formControlName: 'paymentDeadline',
                 decoration: InputDecoration(labelText: '有効期限	'),
                 readOnly: true,
                 valueAccessor: DateTimeValueAccessor(
@@ -112,7 +110,7 @@ class EstimateScreenForm extends StatelessWidget {
                     lastDate: DateTime(2100),
                   );
                   if (date != null) {
-                    form.control('validityPeriod').value = date;
+                    form.control('paymentDeadline').value = date;
                   }
                 },
               ),

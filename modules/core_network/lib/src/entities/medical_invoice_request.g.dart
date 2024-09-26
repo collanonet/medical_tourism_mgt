@@ -7,9 +7,17 @@ part of 'medical_invoice_request.dart';
 // **************************************************************************
 
 abstract class _$MedicalInvoiceRequestCWProxy {
-  MedicalInvoiceRequest fileName(String? fileName);
+  MedicalInvoiceRequest type(bool? type);
 
-  MedicalInvoiceRequest fileNameExcel(String? fileNameExcel);
+  MedicalInvoiceRequest fileNamePdfEN(String? fileNamePdfEN);
+
+  MedicalInvoiceRequest fileNamePdfJP(String? fileNamePdfJP);
+
+  MedicalInvoiceRequest fileNamePdfVN(String? fileNamePdfVN);
+
+  MedicalInvoiceRequest fileNamePdfZH(String? fileNamePdfZH);
+
+  MedicalInvoiceRequest fileNamePdfZHTW(String? fileNamePdfZHTW);
 
   MedicalInvoiceRequest invoiceNumber(String? invoiceNumber);
 
@@ -49,8 +57,12 @@ abstract class _$MedicalInvoiceRequestCWProxy {
   /// MedicalInvoiceRequest(...).copyWith(id: 12, name: "My name")
   /// ````
   MedicalInvoiceRequest call({
-    String? fileName,
-    String? fileNameExcel,
+    bool? type,
+    String? fileNamePdfEN,
+    String? fileNamePdfJP,
+    String? fileNamePdfVN,
+    String? fileNamePdfZH,
+    String? fileNamePdfZHTW,
     String? invoiceNumber,
     DateTime? invoiceDate,
     String? contact,
@@ -77,11 +89,27 @@ class _$MedicalInvoiceRequestCWProxyImpl
   final MedicalInvoiceRequest _value;
 
   @override
-  MedicalInvoiceRequest fileName(String? fileName) => this(fileName: fileName);
+  MedicalInvoiceRequest type(bool? type) => this(type: type);
 
   @override
-  MedicalInvoiceRequest fileNameExcel(String? fileNameExcel) =>
-      this(fileNameExcel: fileNameExcel);
+  MedicalInvoiceRequest fileNamePdfEN(String? fileNamePdfEN) =>
+      this(fileNamePdfEN: fileNamePdfEN);
+
+  @override
+  MedicalInvoiceRequest fileNamePdfJP(String? fileNamePdfJP) =>
+      this(fileNamePdfJP: fileNamePdfJP);
+
+  @override
+  MedicalInvoiceRequest fileNamePdfVN(String? fileNamePdfVN) =>
+      this(fileNamePdfVN: fileNamePdfVN);
+
+  @override
+  MedicalInvoiceRequest fileNamePdfZH(String? fileNamePdfZH) =>
+      this(fileNamePdfZH: fileNamePdfZH);
+
+  @override
+  MedicalInvoiceRequest fileNamePdfZHTW(String? fileNamePdfZHTW) =>
+      this(fileNamePdfZHTW: fileNamePdfZHTW);
 
   @override
   MedicalInvoiceRequest invoiceNumber(String? invoiceNumber) =>
@@ -147,8 +175,12 @@ class _$MedicalInvoiceRequestCWProxyImpl
   /// MedicalInvoiceRequest(...).copyWith(id: 12, name: "My name")
   /// ````
   MedicalInvoiceRequest call({
-    Object? fileName = const $CopyWithPlaceholder(),
-    Object? fileNameExcel = const $CopyWithPlaceholder(),
+    Object? type = const $CopyWithPlaceholder(),
+    Object? fileNamePdfEN = const $CopyWithPlaceholder(),
+    Object? fileNamePdfJP = const $CopyWithPlaceholder(),
+    Object? fileNamePdfVN = const $CopyWithPlaceholder(),
+    Object? fileNamePdfZH = const $CopyWithPlaceholder(),
+    Object? fileNamePdfZHTW = const $CopyWithPlaceholder(),
     Object? invoiceNumber = const $CopyWithPlaceholder(),
     Object? invoiceDate = const $CopyWithPlaceholder(),
     Object? contact = const $CopyWithPlaceholder(),
@@ -166,14 +198,30 @@ class _$MedicalInvoiceRequestCWProxyImpl
     Object? item = const $CopyWithPlaceholder(),
   }) {
     return MedicalInvoiceRequest(
-      fileName: fileName == const $CopyWithPlaceholder()
-          ? _value.fileName
+      type: type == const $CopyWithPlaceholder()
+          ? _value.type
           // ignore: cast_nullable_to_non_nullable
-          : fileName as String?,
-      fileNameExcel: fileNameExcel == const $CopyWithPlaceholder()
-          ? _value.fileNameExcel
+          : type as bool?,
+      fileNamePdfEN: fileNamePdfEN == const $CopyWithPlaceholder()
+          ? _value.fileNamePdfEN
           // ignore: cast_nullable_to_non_nullable
-          : fileNameExcel as String?,
+          : fileNamePdfEN as String?,
+      fileNamePdfJP: fileNamePdfJP == const $CopyWithPlaceholder()
+          ? _value.fileNamePdfJP
+          // ignore: cast_nullable_to_non_nullable
+          : fileNamePdfJP as String?,
+      fileNamePdfVN: fileNamePdfVN == const $CopyWithPlaceholder()
+          ? _value.fileNamePdfVN
+          // ignore: cast_nullable_to_non_nullable
+          : fileNamePdfVN as String?,
+      fileNamePdfZH: fileNamePdfZH == const $CopyWithPlaceholder()
+          ? _value.fileNamePdfZH
+          // ignore: cast_nullable_to_non_nullable
+          : fileNamePdfZH as String?,
+      fileNamePdfZHTW: fileNamePdfZHTW == const $CopyWithPlaceholder()
+          ? _value.fileNamePdfZHTW
+          // ignore: cast_nullable_to_non_nullable
+          : fileNamePdfZHTW as String?,
       invoiceNumber: invoiceNumber == const $CopyWithPlaceholder()
           ? _value.invoiceNumber
           // ignore: cast_nullable_to_non_nullable
@@ -254,8 +302,12 @@ extension $MedicalInvoiceRequestCopyWith on MedicalInvoiceRequest {
 MedicalInvoiceRequest _$MedicalInvoiceRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalInvoiceRequest(
-      fileName: json['fileName'] as String?,
-      fileNameExcel: json['fileNameExcel'] as String?,
+      type: json['type'] as bool?,
+      fileNamePdfEN: json['fileNamePdfEN'] as String?,
+      fileNamePdfJP: json['fileNamePdfJP'] as String?,
+      fileNamePdfVN: json['fileNamePdfVN'] as String?,
+      fileNamePdfZH: json['fileNamePdfZH'] as String?,
+      fileNamePdfZHTW: json['fileNamePdfZHTW'] as String?,
       invoiceNumber: json['invoiceNumber'] as String?,
       invoiceDate: json['invoiceDate'] == null
           ? null
@@ -284,8 +336,12 @@ MedicalInvoiceRequest _$MedicalInvoiceRequestFromJson(
 Map<String, dynamic> _$MedicalInvoiceRequestToJson(
         MedicalInvoiceRequest instance) =>
     <String, dynamic>{
-      'fileName': instance.fileName,
-      'fileNameExcel': instance.fileNameExcel,
+      'type': instance.type,
+      'fileNamePdfEN': instance.fileNamePdfEN,
+      'fileNamePdfJP': instance.fileNamePdfJP,
+      'fileNamePdfVN': instance.fileNamePdfVN,
+      'fileNamePdfZH': instance.fileNamePdfZH,
+      'fileNamePdfZHTW': instance.fileNamePdfZHTW,
       'invoiceNumber': instance.invoiceNumber,
       'invoiceDate': instance.invoiceDate?.toIso8601String(),
       'contact': instance.contact,
@@ -301,4 +357,44 @@ Map<String, dynamic> _$MedicalInvoiceRequestToJson(
       'hospitalRecord': instance.hospitalRecord,
       'totalPayment': instance.totalPayment,
       'item': instance.item,
+    };
+
+TotalPaymentRequest _$TotalPaymentRequestFromJson(Map<String, dynamic> json) =>
+    TotalPaymentRequest(
+      taxRate: (json['taxRate'] as num?)?.toDouble(),
+      amountExcludingTaxInYen:
+          (json['amountExcludingTaxInYen'] as num?)?.toDouble(),
+      consumptionTaxAmountInYen:
+          (json['consumptionTaxAmountInYen'] as num?)?.toDouble(),
+    );
+
+Map<String, dynamic> _$TotalPaymentRequestToJson(
+        TotalPaymentRequest instance) =>
+    <String, dynamic>{
+      'taxRate': instance.taxRate,
+      'amountExcludingTaxInYen': instance.amountExcludingTaxInYen,
+      'consumptionTaxAmountInYen': instance.consumptionTaxAmountInYen,
+    };
+
+ItemRequest _$ItemRequestFromJson(Map<String, dynamic> json) => ItemRequest(
+      transactionDate: json['transactionDate'] == null
+          ? null
+          : DateTime.parse(json['transactionDate'] as String),
+      details: json['details'] as String?,
+      quantity: (json['quantity'] as num?)?.toDouble(),
+      unit: json['unit'] as String?,
+      unitPrice: (json['unitPrice'] as num?)?.toDouble(),
+      amount: (json['amount'] as num?)?.toDouble(),
+      taxRate: (json['taxRate'] as num?)?.toDouble(),
+    );
+
+Map<String, dynamic> _$ItemRequestToJson(ItemRequest instance) =>
+    <String, dynamic>{
+      'transactionDate': instance.transactionDate?.toIso8601String(),
+      'details': instance.details,
+      'quantity': instance.quantity,
+      'unit': instance.unit,
+      'unitPrice': instance.unitPrice,
+      'amount': instance.amount,
+      'taxRate': instance.taxRate,
     };

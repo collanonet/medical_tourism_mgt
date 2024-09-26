@@ -6581,65 +6581,6 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<InvoiceFilterResponse>> filterInvoice() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<InvoiceFilterResponse>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/filter-invoice',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    var _value = _result.data!
-        .map((dynamic i) =>
-            InvoiceFilterResponse.fromJson(i as Map<String, dynamic>))
-        .toList();
-    return _value;
-  }
-
-  @override
-  Future<InvoiceFilterResponse> postFilterInvoice(
-      InvoiceFilterRequest invoiceFilterRequest) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(invoiceFilterRequest.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<InvoiceFilterResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/filter-invoice',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = InvoiceFilterResponse.fromJson(_result.data!);
-    return _value;
-  }
-
-  @override
   Future<List<EstimateMasterResponse>> getEstimateMaster() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -8276,10 +8217,15 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<MedicalInvoiceResponse>> getInvoices(
-      String? medicalRecord) async {
+  Future<List<MedicalInvoiceResponse>> getInvoices({
+    String? medicalRecord,
+    bool? type,
+  }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'medicalRecord': medicalRecord};
+    final queryParameters = <String, dynamic>{
+      r'medicalRecord': medicalRecord,
+      r'type': type,
+    };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
@@ -8436,177 +8382,6 @@ class _ApiService implements ApiService {
         .compose(
           _dio.options,
           '/invoices/${id}',
-          queryParameters: queryParameters,
-          data: _data,
-        )
-        .copyWith(
-            baseUrl: _combineBaseUrls(
-          _dio.options.baseUrl,
-          baseUrl,
-        ))));
-  }
-
-  @override
-  Future<List<MedicalQuotationResponse>> getQuotations(
-      String? medicalRecord) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'medicalRecord': medicalRecord};
-    queryParameters.removeWhere((k, v) => v == null);
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<MedicalQuotationResponse>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/quotations',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    var _value = _result.data!
-        .map((dynamic i) =>
-            MedicalQuotationResponse.fromJson(i as Map<String, dynamic>))
-        .toList();
-    return _value;
-  }
-
-  @override
-  Future<MedicalQuotationResponse> getQuotationsByMedicalRecordId(
-      String medicalRecordId) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MedicalQuotationResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/quotations/medicalRecord/${medicalRecordId}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = MedicalQuotationResponse.fromJson(_result.data!);
-    return _value;
-  }
-
-  @override
-  Future<MedicalQuotationResponse> postQuotation(
-      MedicalQuotationRequest medicalQuotationRequest) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(medicalQuotationRequest.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MedicalQuotationResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/quotations',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = MedicalQuotationResponse.fromJson(_result.data!);
-    return _value;
-  }
-
-  @override
-  Future<MedicalQuotationResponse> getQuotationById(String id) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MedicalQuotationResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/quotations/${id}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = MedicalQuotationResponse.fromJson(_result.data!);
-    return _value;
-  }
-
-  @override
-  Future<MedicalQuotationResponse> putQuotation(
-    String id,
-    MedicalQuotationRequest medicalQuotationRequest,
-  ) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(medicalQuotationRequest.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MedicalQuotationResponse>(Options(
-      method: 'PUT',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/quotations/${id}',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = MedicalQuotationResponse.fromJson(_result.data!);
-    return _value;
-  }
-
-  @override
-  Future<void> deleteQuotation(String id) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    await _dio.fetch<void>(_setStreamType<void>(Options(
-      method: 'DELETE',
-      headers: _headers,
-      extra: _extra,
-    )
-        .compose(
-          _dio.options,
-          '/quotations/${id}',
           queryParameters: queryParameters,
           data: _data,
         )

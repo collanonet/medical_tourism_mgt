@@ -7,7 +7,6 @@ class Routes {
   static const invoicesRoute = 'InvoicesRoute';
   static const medicalVisasRoute = 'MedicalVisasRoute';
   static const patientsRoute = 'PatientsRoute';
-  static const quotationsRoute = 'QuotationsRoute';
   static const reportsRoute = 'ReportsRoute';
   static const salesRoute = 'SalesRoute';
   static const masterRoute = 'MasterRoute';

@@ -31,8 +31,8 @@ class EstimateModel {
   ValueNotifier<AsyncData<MedicalRecord>> medicalRecordData =
       ValueNotifier(const AsyncData());
 
-  ValueNotifier<AsyncData<List<MedicalQuotationResponse>>>
-      medicalQuotationData = ValueNotifier(const AsyncData());
+  ValueNotifier<AsyncData<List<MedicalInvoiceResponse>>> medicalQuotationData =
+      ValueNotifier(const AsyncData());
 
   Future<void> initialData({
     required Patient patient,
@@ -51,7 +51,10 @@ class EstimateModel {
   }) async {
     try {
       medicalQuotationData.value = const AsyncData(loading: true);
-      final response = await patientRepository.getQuotations(medicalRecordId);
+      final response = await patientRepository.getInvoices(
+        medicalRecord: medicalRecordId,
+        type: false, // Quotation
+      );
       medicalQuotationData.value = AsyncData(data: response);
     } catch (e) {
       logger.e(e);
@@ -90,14 +93,15 @@ class EstimateModel {
         ));
       });
 
-      MedicalQuotationRequest request = MedicalQuotationRequest(
-        quotationNumber: formGroup.control('quotationNumber').value,
-        quotationDate: formGroup.control('quotationDate').value,
+      MedicalInvoiceRequest request = MedicalInvoiceRequest(
+        type: false,
+        invoiceNumber: formGroup.control('invoiceNumber').value,
+        invoiceDate: formGroup.control('invoiceDate').value,
         contact: formGroup.control('contact').value,
         registrationNumber: formGroup.control('registrationNumber').value,
         subject: formGroup.control('subject').value,
-        totalAmount: formGroup.control('totalAmount').value,
-        validityPeriod: formGroup.control('validityPeriod').value,
+        amountBilled: formGroup.control('amountBilled').value,
+        paymentDeadline: formGroup.control('paymentDeadline').value,
         remarks: formGroup.control('remarks').value,
         totalPayment: totalPayment,
         item: items,
@@ -111,7 +115,7 @@ class EstimateModel {
         request,
         patientData.value.requireData,
       );
-      String? fileName;
+      String? fileNamePdfJP;
 
       if (pathFile != null) {
         try {
@@ -121,7 +125,7 @@ class EstimateModel {
             // get timestamp to avoid duplicate file name
             'quotation_${DateTime.now().millisecondsSinceEpoch}.pdf',
           );
-          fileName = fileData.filename;
+          fileNamePdfJP = fileData.filename;
         } catch (e) {
           logger.e(e);
         }
@@ -148,10 +152,10 @@ class EstimateModel {
       //   }
       // }
 
-      if (fileName != null) {
+      if (fileNamePdfJP != null) {
         await createQuotation(
           request: request.copyWith(
-            fileName: fileName,
+            fileNamePdfJP: fileNamePdfJP,
           ),
         );
         submitData.value = const AsyncData(data: true);
@@ -166,13 +170,13 @@ class EstimateModel {
   }
 
   Future<void> createQuotation({
-    required MedicalQuotationRequest request,
+    required MedicalInvoiceRequest request,
   }) async {
     try {
       medicalQuotationData.value = medicalQuotationData.value.copyWith(
         loading: true,
       );
-      final response = await patientRepository.postQuotation(request);
+      final response = await patientRepository.postInvoice(request);
       medicalQuotationData.value = AsyncData(data: [
         ...medicalQuotationData.value.data ?? [],
         response,
@@ -186,7 +190,7 @@ class EstimateModel {
 }
 
 Future<Uint8List?> generatePdfFromQuotation(
-    MedicalQuotationRequest request, Patient patient) async {
+    MedicalInvoiceRequest request, Patient patient) async {
   final pdf = pw.Document();
   final ByteData fontData =
       await rootBundle.load('assets/fonts/NotoSansJPRegular.ttf');
@@ -212,7 +216,7 @@ Future<Uint8List?> generatePdfFromQuotation(
         pw.Align(
           alignment: pw.Alignment.centerRight,
           child: pw.Text(
-            '見積番号: ${request.quotationNumber ?? ''}',
+            '見積番号: ${request.invoiceNumber ?? ''}',
             style: pw.TextStyle(
               font: ttf,
             ),
@@ -227,7 +231,7 @@ Future<Uint8List?> generatePdfFromQuotation(
             ),
           ),
           pw.Text(
-            '見積日: ${request.quotationDate != null ? Dates.formatFullDate(request.quotationDate!) : ''}',
+            '見積日: ${request.invoiceDate != null ? Dates.formatFullDate(request.invoiceDate!) : ''}',
             style: pw.TextStyle(
               font: ttf,
             ),
@@ -262,7 +266,7 @@ Future<Uint8List?> generatePdfFromQuotation(
           textAlign: pw.TextAlign.left,
         ),
         pw.Text(
-          '合計金額: ${request.totalAmount ?? ''}',
+          '合計金額: ${request.amountBilled ?? ''}',
           style: pw.TextStyle(
             font: ttf,
           ),
@@ -306,8 +310,8 @@ Future<Uint8List?> generatePdfFromQuotation(
         pw.TableHelper.fromTextArray(
           headers: [
             '有効期限',
-            request.validityPeriod != null
-                ? Dates.formatFullDate(request.validityPeriod!)
+            request.paymentDeadline != null
+                ? Dates.formatFullDate(request.paymentDeadline!)
                 : ''
           ],
           columnWidths: {
@@ -401,7 +405,7 @@ Future<Uint8List?> generatePdfFromQuotation(
 }
 
 Future<List<int>?> generateExcelFromQuotation(
-    MedicalQuotationRequest request, Patient patient) async {
+    MedicalInvoiceRequest request, Patient patient) async {
   var excel = Excel.createExcel();
   Sheet sheetObject = excel['Quotation'];
 
@@ -418,7 +422,7 @@ Future<List<int>?> generateExcelFromQuotation(
   var cell2 = sheetObject.cell(CellIndex.indexByString('E3'));
   rowIndex = 4;
 
-  cell2.value = TextCellValue('見積番号: ${request.quotationNumber ?? ''}');
+  cell2.value = TextCellValue('見積番号: ${request.invoiceNumber ?? ''}');
 
   var cell3 = sheetObject.cell(CellIndex.indexByString('A3'));
   cell3.value = TextCellValue(
@@ -426,7 +430,7 @@ Future<List<int>?> generateExcelFromQuotation(
 
   var cell4 = sheetObject.cell(CellIndex.indexByString('E3'));
   cell4.value = TextCellValue(
-      '見積日: ${request.quotationDate != null ? Dates.formatFullDate(request.quotationDate!) : ''}');
+      '見積日: ${request.invoiceDate != null ? Dates.formatFullDate(request.invoiceDate!) : ''}');
 
   var cell5 = sheetObject.cell(CellIndex.indexByString('E4'));
   cell5.value = TextCellValue('担当者: ${request.contact ?? ''}');
@@ -438,7 +442,7 @@ Future<List<int>?> generateExcelFromQuotation(
   cell7.value = TextCellValue('件名: ${request.subject ?? ''}');
 
   var cell8 = sheetObject.cell(CellIndex.indexByString('A8'));
-  cell8.value = TextCellValue('合計金額: ${request.totalAmount ?? ''}');
+  cell8.value = TextCellValue('合計金額: ${request.amountBilled ?? ''}');
 
   var cell9 = sheetObject.cell(CellIndex.indexByString('A10'));
   cell9.value = TextCellValue('税率');
@@ -479,8 +483,8 @@ Future<List<int>?> generateExcelFromQuotation(
   rowIndex++;
   cell13.value = TextCellValue('有効期限');
   var cell14 = sheetObject.cell(CellIndex.indexByString('B$rowIndex'));
-  cell14.value = TextCellValue(request.validityPeriod != null
-      ? Dates.formatFullDate(request.validityPeriod!)
+  cell14.value = TextCellValue(request.paymentDeadline != null
+      ? Dates.formatFullDate(request.paymentDeadline!)
       : '');
   var cell15 = sheetObject.cell(CellIndex.indexByString('A$rowIndex'));
   rowIndex++;

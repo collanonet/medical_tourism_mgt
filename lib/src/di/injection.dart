@@ -7,7 +7,6 @@ import 'package:feature_invoice/feature_invoice.module.dart';
 import 'package:feature_medical_visa/feature_medical_visa.module.dart';
 import 'package:feature_patient/feature_patient.module.dart';
 import 'package:feature_process_chart/feature_process_chart.module.dart';
-import 'package:feature_quotation/feature_quotation.module.dart';
 import 'package:feature_report/feature_report.module.dart';
 import 'package:feature_sale/feature_sale.module.dart';
 import 'package:feature_web_appointment/feature_web_appointment.module.dart';
@@ -33,7 +32,6 @@ const production = Environment('production');
     ExternalModule(FeatureInvoicePackageModule),
     ExternalModule(FeatureMedicalVisaPackageModule),
     ExternalModule(FeaturePatientPackageModule),
-    ExternalModule(FeatureQuotationPackageModule),
     ExternalModule(FeatureReportPackageModule),
     ExternalModule(FeatureSalePackageModule),
     ExternalModule(FeatureProcessChartPackageModule),

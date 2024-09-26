@@ -24,7 +24,7 @@ class _InvoicePageState extends State<InvoicePage> {
   @override
   Widget build(BuildContext context) {
     return Provider(
-      create: (context) => GetIt.I<InvoiceModel>(),
+      create: (context) => GetIt.I<InvoiceModel>()..fetchInvoices(),
       child: const LayoutView(
         selectedIndex: 7,
         page: InvoiceScreen(),

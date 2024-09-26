@@ -48,7 +48,10 @@ class StatementModel {
   }) async {
     try {
       medicalInvoiceData.value = const AsyncData(loading: true);
-      final response = await patientRepository.getInvoices(medicalRecordId);
+      final response = await patientRepository.getInvoices(
+        medicalRecord: medicalRecordId,
+        type: true,
+      );
       medicalInvoiceData.value = AsyncData(data: response);
     } catch (e) {
       logger.e(e);
@@ -88,6 +91,7 @@ class StatementModel {
       });
 
       MedicalInvoiceRequest request = MedicalInvoiceRequest(
+        type: true,
         invoiceNumber: formGroup.control('invoiceNumber').value,
         invoiceDate: formGroup.control('invoiceDate').value,
         contact: formGroup.control('contact').value,
@@ -110,7 +114,7 @@ class StatementModel {
         request,
         patientData.value.requireData,
       );
-      String? fileName;
+      String? fileNamePdfJP;
 
       if (pathFile != null) {
         try {
@@ -120,13 +124,13 @@ class StatementModel {
             // get timestamp to avoid duplicate file name
             'invoice_${DateTime.now().millisecondsSinceEpoch}.pdf',
           );
-          fileName = fileData.filename;
+          fileNamePdfJP = fileData.filename;
         } catch (e) {
           logger.e(e);
         }
       }
-      if (fileName != null) {
-        await createInvoice(request: request.copyWith(fileName: fileName));
+      if (fileNamePdfJP != null) {
+        await createInvoice(request: request.copyWith(fileNamePdfJP: fileNamePdfJP));
         submitData.value = const AsyncData(data: true);
         formGroup.reset();
       } else {
@@ -383,12 +387,11 @@ Future<Uint8List?> generatePdfFromInvoice(
 }
 
 Future<List<int>?> generateExcelFromInvoice(
-    MedicalQuotationRequest request, Patient patient) async {
+    MedicalInvoiceRequest request, Patient patient) async {
   var excel = Excel.createExcel();
   Sheet sheetObject = excel['Quotation'];
 
   int rowIndex = 1;
-
 
   // Save the Excel file
   try {
