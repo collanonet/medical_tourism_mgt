@@ -9,15 +9,18 @@ class MedicalQuotationResponse {
   @JsonKey(name: '_id')
   String id;
   String? fileName;
+  String? fileNameExcel;
   String? quotationNumber;
   DateTime? quotationDate;
+  String? contact;
   String? registrationNumber;
   String? subject;
   double? totalAmount;
   DateTime? validityPeriod;
   String? remarks;
   MedicalRecord medicalRecord;
-  Patient? user;
+  User? user;
+  Patient? patient;
   BasicInformationHospitalResponse? hospitalRecord;
   List<TotalPaymentResponse>? totalPayment;
   List<ItemResponse>? item;
@@ -27,8 +30,10 @@ class MedicalQuotationResponse {
   MedicalQuotationResponse({
     required this.id,
     this.fileName,
+    this.fileNameExcel,
     this.quotationNumber,
     this.quotationDate,
+    this.contact,
     this.registrationNumber,
     this.subject,
     this.totalAmount,
@@ -36,6 +41,7 @@ class MedicalQuotationResponse {
     this.remarks,
     required this.medicalRecord,
     this.user,
+    this.patient,
     this.hospitalRecord,
     this.totalPayment,
     this.item,

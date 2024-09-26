@@ -6,6 +6,7 @@ FormGroup estimateForm() {
     'quotationDate': FormControl<DateTime>(
       value: DateTime.now(),
     ),
+    'contact': FormControl<String>(),
     'registrationNumber': FormControl<String>(),
     'subject': FormControl<String>(),
     'totalAmount': FormControl<double>(

@@ -11,10 +11,12 @@ MedicalQuotationResponse _$MedicalQuotationResponseFromJson(
     MedicalQuotationResponse(
       id: json['_id'] as String,
       fileName: json['fileName'] as String?,
+      fileNameExcel: json['fileNameExcel'] as String?,
       quotationNumber: json['quotationNumber'] as String?,
       quotationDate: json['quotationDate'] == null
           ? null
           : DateTime.parse(json['quotationDate'] as String),
+      contact: json['contact'] as String?,
       registrationNumber: json['registrationNumber'] as String?,
       subject: json['subject'] as String?,
       totalAmount: (json['totalAmount'] as num?)?.toDouble(),
@@ -26,7 +28,10 @@ MedicalQuotationResponse _$MedicalQuotationResponseFromJson(
           MedicalRecord.fromJson(json['medicalRecord'] as Map<String, dynamic>),
       user: json['user'] == null
           ? null
-          : Patient.fromJson(json['user'] as Map<String, dynamic>),
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+      patient: json['patient'] == null
+          ? null
+          : Patient.fromJson(json['patient'] as Map<String, dynamic>),
       hospitalRecord: json['hospitalRecord'] == null
           ? null
           : BasicInformationHospitalResponse.fromJson(
@@ -46,8 +51,10 @@ Map<String, dynamic> _$MedicalQuotationResponseToJson(
     <String, dynamic>{
       '_id': instance.id,
       'fileName': instance.fileName,
+      'fileNameExcel': instance.fileNameExcel,
       'quotationNumber': instance.quotationNumber,
       'quotationDate': instance.quotationDate?.toIso8601String(),
+      'contact': instance.contact,
       'registrationNumber': instance.registrationNumber,
       'subject': instance.subject,
       'totalAmount': instance.totalAmount,
@@ -55,6 +62,7 @@ Map<String, dynamic> _$MedicalQuotationResponseToJson(
       'remarks': instance.remarks,
       'medicalRecord': instance.medicalRecord,
       'user': instance.user,
+      'patient': instance.patient,
       'hospitalRecord': instance.hospitalRecord,
       'totalPayment': instance.totalPayment,
       'item': instance.item,

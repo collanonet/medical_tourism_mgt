@@ -61,6 +61,8 @@ class PatientRemoteProvider {
     String? medicalDayto,
     String? returnDatefrom,
     String? returnDateto,
+    int? page = 1,
+    int? limit = 10,
   }) async =>
       await apiService.patients(
         progress: progress,
@@ -75,6 +77,8 @@ class PatientRemoteProvider {
         medicalDayto: medicalDayto,
         returnDatefrom: returnDatefrom,
         returnDateto: returnDateto,
+        page: page,
+        limit: limit,
       );
 
   Future<Patient> patient(
@@ -607,7 +611,7 @@ class PatientRemoteProvider {
   Future<MedicalPaymentResponse> postMedicalPayment(
           MedicalPaymentRequest medicalPaymentRequest) async =>
       await apiService.postMedicalPaymentDetail(medicalPaymentRequest);
-  
+
   Future<void> deleteMedicalPayment(String id) async {
     await apiService.deleteMedicalPaymentDetail(id);
   }
@@ -686,7 +690,8 @@ class PatientRemoteProvider {
     return apiService.webBookingDeleteReservation(reservationId);
   }
 
-  Future<TreamentResponce> updateBooking(String treatmentId, TreamentRequest treatmentRequest) {
+  Future<TreamentResponce> updateBooking(
+      String treatmentId, TreamentRequest treatmentRequest) {
     return apiService.updateBooking(
       treatmentId,
       treatmentRequest,
@@ -694,7 +699,8 @@ class PatientRemoteProvider {
   }
 
   //A9
-  Future<List<MedicalRecordFileSummaryResponse>> getSummaryList(String patientId) async {
+  Future<List<MedicalRecordFileSummaryResponse>> getSummaryList(
+      String patientId) async {
     return apiService.getSummaryList(patientId);
   }
 
@@ -702,11 +708,13 @@ class PatientRemoteProvider {
     return apiService.deleteSummaryList(patientId);
   }
 
-  Future<List<MedicalRecordFileSummaryResponse>> getFileSummaryBySummaryId(String summaryId) {
+  Future<List<MedicalRecordFileSummaryResponse>> getFileSummaryBySummaryId(
+      String summaryId) {
     return apiService.getFileSummaryBySummaryId(summaryId);
   }
 
-  Future<MedicalRecordFileSummaryResponse> postFileSummary(MedicalRecordFileSummaryRequest fileRequest) {
+  Future<MedicalRecordFileSummaryResponse> postFileSummary(
+      MedicalRecordFileSummaryRequest fileRequest) {
     return apiService.postFileSummary(fileRequest);
   }
 
@@ -714,23 +722,28 @@ class PatientRemoteProvider {
     return apiService.deleteFileSummary(id);
   }
 
-  Future<MedicalQuotationResponse> putQuotation(String id, MedicalQuotationRequest quotationRequest) {
+  Future<MedicalQuotationResponse> putQuotation(
+      String id, MedicalQuotationRequest quotationRequest) {
     return apiService.putQuotation(id, quotationRequest);
   }
 
-  Future<MedicalInvoiceResponse> putInvoice(String id, MedicalInvoiceRequest invoiceRequest) {
+  Future<MedicalInvoiceResponse> putInvoice(
+      String id, MedicalInvoiceRequest invoiceRequest) {
     return apiService.putInvoice(id, invoiceRequest);
   }
 
-  Future<MedicalQuotationResponse> postQuotation(MedicalQuotationRequest quotationRequest) {
+  Future<MedicalQuotationResponse> postQuotation(
+      MedicalQuotationRequest quotationRequest) {
     return apiService.postQuotation(quotationRequest);
   }
 
-  Future<MedicalInvoiceResponse> postInvoice(MedicalInvoiceRequest invoiceRequest) {
+  Future<MedicalInvoiceResponse> postInvoice(
+      MedicalInvoiceRequest invoiceRequest) {
     return apiService.postInvoice(invoiceRequest);
   }
 
-  Future<MedicalQuotationResponse> getQuotationsByMedicalRecordId(String medicalRecordId) {
+  Future<MedicalQuotationResponse> getQuotationsByMedicalRecordId(
+      String medicalRecordId) {
     return apiService.getQuotationsByMedicalRecordId(medicalRecordId);
   }
 
@@ -738,7 +751,8 @@ class PatientRemoteProvider {
     return apiService.getQuotations(medicalRecord);
   }
 
-  Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(String medicalRecordId) {
+  Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(
+      String medicalRecordId) {
     return apiService.getInvoicesByMedicalRecordId(medicalRecordId);
   }
 
@@ -753,5 +767,4 @@ class PatientRemoteProvider {
   Future<void> deleteInvoice(String id) {
     return apiService.deleteInvoice(id);
   }
-
 }

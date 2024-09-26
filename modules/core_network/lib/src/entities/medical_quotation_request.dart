@@ -7,30 +7,36 @@ part 'medical_quotation_request.g.dart';
 @JsonSerializable()
 class MedicalQuotationRequest {
   String? fileName;
+  String? fileNameExcel;
   String? quotationNumber;
   DateTime? quotationDate;
+  String? contact;
   String? registrationNumber;
   String? subject;
   double? totalAmount;
   DateTime? validityPeriod;
   String? remarks;
   String medicalRecord;
-  String user;
+  String? user;
+  String patient;
   String? hospitalRecord;
   List<TotalPaymentRequest>? totalPayment;
   List<ItemRequest>? item;
 
   MedicalQuotationRequest({
     this.fileName,
+    this.fileNameExcel,
     this.quotationNumber,
     this.quotationDate,
+    this.contact,
     this.registrationNumber,
     this.subject,
     this.totalAmount,
     this.validityPeriod,
     this.remarks,
     required this.medicalRecord,
-    required this.user,
+    this.user,
+    required this.patient,
     this.hospitalRecord,
     this.totalPayment,
     this.item,

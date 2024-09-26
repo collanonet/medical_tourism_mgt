@@ -3,6 +3,7 @@ import 'package:json_annotation/json_annotation.dart';
 import '../../core_network.dart';
 import '../../entities.dart';
 import 'entities.dart';
+import 'user.dart';
 
 part 'medical_invoice_response.g.dart';
 
@@ -11,8 +12,10 @@ class MedicalInvoiceResponse {
   @JsonKey(name: '_id')
   String id;
   String? fileName;
+  String? fileNameExcel;
   String? invoiceNumber;
   DateTime? invoiceDate;
+  String? contact;
   String? registrationNumber;
   String? subject;
   double? amountBilled;
@@ -20,7 +23,8 @@ class MedicalInvoiceResponse {
   String? bankTransferInformation;
   String? remarks;
   MedicalRecord medicalRecord;
-  Patient? user;
+  User? user;
+  Patient? patient;
   BasicInformationHospitalResponse? hospitalRecord;
   List<TotalPaymentResponse>? totalPayment;
   List<ItemResponse>? item;
@@ -30,8 +34,10 @@ class MedicalInvoiceResponse {
   MedicalInvoiceResponse({
     required this.id,
     this.fileName,
+    this.fileNameExcel,
     this.invoiceNumber,
     this.invoiceDate,
+    this.contact,
     this.registrationNumber,
     this.subject,
     this.amountBilled,
@@ -40,6 +46,7 @@ class MedicalInvoiceResponse {
     this.remarks,
     required this.medicalRecord,
     this.user,
+    this.patient,
     this.hospitalRecord,
     this.totalPayment,
     this.item,

@@ -11,10 +11,12 @@ MedicalInvoiceResponse _$MedicalInvoiceResponseFromJson(
     MedicalInvoiceResponse(
       id: json['_id'] as String,
       fileName: json['fileName'] as String?,
+      fileNameExcel: json['fileNameExcel'] as String?,
       invoiceNumber: json['invoiceNumber'] as String?,
       invoiceDate: json['invoiceDate'] == null
           ? null
           : DateTime.parse(json['invoiceDate'] as String),
+      contact: json['contact'] as String?,
       registrationNumber: json['registrationNumber'] as String?,
       subject: json['subject'] as String?,
       amountBilled: (json['amountBilled'] as num?)?.toDouble(),
@@ -27,7 +29,10 @@ MedicalInvoiceResponse _$MedicalInvoiceResponseFromJson(
           MedicalRecord.fromJson(json['medicalRecord'] as Map<String, dynamic>),
       user: json['user'] == null
           ? null
-          : Patient.fromJson(json['user'] as Map<String, dynamic>),
+          : User.fromJson(json['user'] as Map<String, dynamic>),
+      patient: json['patient'] == null
+          ? null
+          : Patient.fromJson(json['patient'] as Map<String, dynamic>),
       hospitalRecord: json['hospitalRecord'] == null
           ? null
           : BasicInformationHospitalResponse.fromJson(
@@ -47,8 +52,10 @@ Map<String, dynamic> _$MedicalInvoiceResponseToJson(
     <String, dynamic>{
       '_id': instance.id,
       'fileName': instance.fileName,
+      'fileNameExcel': instance.fileNameExcel,
       'invoiceNumber': instance.invoiceNumber,
       'invoiceDate': instance.invoiceDate?.toIso8601String(),
+      'contact': instance.contact,
       'registrationNumber': instance.registrationNumber,
       'subject': instance.subject,
       'amountBilled': instance.amountBilled,
@@ -57,6 +64,7 @@ Map<String, dynamic> _$MedicalInvoiceResponseToJson(
       'remarks': instance.remarks,
       'medicalRecord': instance.medicalRecord,
       'user': instance.user,
+      'patient': instance.patient,
       'hospitalRecord': instance.hospitalRecord,
       'totalPayment': instance.totalPayment,
       'item': instance.item,

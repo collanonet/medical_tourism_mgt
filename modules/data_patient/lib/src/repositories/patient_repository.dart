@@ -48,6 +48,8 @@ abstract class PatientRepository {
     String? medicalDayto,
     String? returnDatefrom,
     String? returnDateto,
+    int? page = 1,
+    int? limit = 10,
   });
 
   Future<Patient> patient(

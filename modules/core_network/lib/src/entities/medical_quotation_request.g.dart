@@ -9,9 +9,13 @@ part of 'medical_quotation_request.dart';
 abstract class _$MedicalQuotationRequestCWProxy {
   MedicalQuotationRequest fileName(String? fileName);
 
+  MedicalQuotationRequest fileNameExcel(String? fileNameExcel);
+
   MedicalQuotationRequest quotationNumber(String? quotationNumber);
 
   MedicalQuotationRequest quotationDate(DateTime? quotationDate);
+
+  MedicalQuotationRequest contact(String? contact);
 
   MedicalQuotationRequest registrationNumber(String? registrationNumber);
 
@@ -25,7 +29,9 @@ abstract class _$MedicalQuotationRequestCWProxy {
 
   MedicalQuotationRequest medicalRecord(String medicalRecord);
 
-  MedicalQuotationRequest user(String user);
+  MedicalQuotationRequest user(String? user);
+
+  MedicalQuotationRequest patient(String patient);
 
   MedicalQuotationRequest hospitalRecord(String? hospitalRecord);
 
@@ -41,8 +47,10 @@ abstract class _$MedicalQuotationRequestCWProxy {
   /// ````
   MedicalQuotationRequest call({
     String? fileName,
+    String? fileNameExcel,
     String? quotationNumber,
     DateTime? quotationDate,
+    String? contact,
     String? registrationNumber,
     String? subject,
     double? totalAmount,
@@ -50,6 +58,7 @@ abstract class _$MedicalQuotationRequestCWProxy {
     String? remarks,
     String? medicalRecord,
     String? user,
+    String? patient,
     String? hospitalRecord,
     List<TotalPaymentRequest>? totalPayment,
     List<ItemRequest>? item,
@@ -68,12 +77,19 @@ class _$MedicalQuotationRequestCWProxyImpl
       this(fileName: fileName);
 
   @override
+  MedicalQuotationRequest fileNameExcel(String? fileNameExcel) =>
+      this(fileNameExcel: fileNameExcel);
+
+  @override
   MedicalQuotationRequest quotationNumber(String? quotationNumber) =>
       this(quotationNumber: quotationNumber);
 
   @override
   MedicalQuotationRequest quotationDate(DateTime? quotationDate) =>
       this(quotationDate: quotationDate);
+
+  @override
+  MedicalQuotationRequest contact(String? contact) => this(contact: contact);
 
   @override
   MedicalQuotationRequest registrationNumber(String? registrationNumber) =>
@@ -98,7 +114,10 @@ class _$MedicalQuotationRequestCWProxyImpl
       this(medicalRecord: medicalRecord);
 
   @override
-  MedicalQuotationRequest user(String user) => this(user: user);
+  MedicalQuotationRequest user(String? user) => this(user: user);
+
+  @override
+  MedicalQuotationRequest patient(String patient) => this(patient: patient);
 
   @override
   MedicalQuotationRequest hospitalRecord(String? hospitalRecord) =>
@@ -122,8 +141,10 @@ class _$MedicalQuotationRequestCWProxyImpl
   /// ````
   MedicalQuotationRequest call({
     Object? fileName = const $CopyWithPlaceholder(),
+    Object? fileNameExcel = const $CopyWithPlaceholder(),
     Object? quotationNumber = const $CopyWithPlaceholder(),
     Object? quotationDate = const $CopyWithPlaceholder(),
+    Object? contact = const $CopyWithPlaceholder(),
     Object? registrationNumber = const $CopyWithPlaceholder(),
     Object? subject = const $CopyWithPlaceholder(),
     Object? totalAmount = const $CopyWithPlaceholder(),
@@ -131,6 +152,7 @@ class _$MedicalQuotationRequestCWProxyImpl
     Object? remarks = const $CopyWithPlaceholder(),
     Object? medicalRecord = const $CopyWithPlaceholder(),
     Object? user = const $CopyWithPlaceholder(),
+    Object? patient = const $CopyWithPlaceholder(),
     Object? hospitalRecord = const $CopyWithPlaceholder(),
     Object? totalPayment = const $CopyWithPlaceholder(),
     Object? item = const $CopyWithPlaceholder(),
@@ -140,6 +162,10 @@ class _$MedicalQuotationRequestCWProxyImpl
           ? _value.fileName
           // ignore: cast_nullable_to_non_nullable
           : fileName as String?,
+      fileNameExcel: fileNameExcel == const $CopyWithPlaceholder()
+          ? _value.fileNameExcel
+          // ignore: cast_nullable_to_non_nullable
+          : fileNameExcel as String?,
       quotationNumber: quotationNumber == const $CopyWithPlaceholder()
           ? _value.quotationNumber
           // ignore: cast_nullable_to_non_nullable
@@ -148,6 +174,10 @@ class _$MedicalQuotationRequestCWProxyImpl
           ? _value.quotationDate
           // ignore: cast_nullable_to_non_nullable
           : quotationDate as DateTime?,
+      contact: contact == const $CopyWithPlaceholder()
+          ? _value.contact
+          // ignore: cast_nullable_to_non_nullable
+          : contact as String?,
       registrationNumber: registrationNumber == const $CopyWithPlaceholder()
           ? _value.registrationNumber
           // ignore: cast_nullable_to_non_nullable
@@ -173,10 +203,14 @@ class _$MedicalQuotationRequestCWProxyImpl
               ? _value.medicalRecord
               // ignore: cast_nullable_to_non_nullable
               : medicalRecord as String,
-      user: user == const $CopyWithPlaceholder() || user == null
+      user: user == const $CopyWithPlaceholder()
           ? _value.user
           // ignore: cast_nullable_to_non_nullable
-          : user as String,
+          : user as String?,
+      patient: patient == const $CopyWithPlaceholder() || patient == null
+          ? _value.patient
+          // ignore: cast_nullable_to_non_nullable
+          : patient as String,
       hospitalRecord: hospitalRecord == const $CopyWithPlaceholder()
           ? _value.hospitalRecord
           // ignore: cast_nullable_to_non_nullable
@@ -208,10 +242,12 @@ MedicalQuotationRequest _$MedicalQuotationRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalQuotationRequest(
       fileName: json['fileName'] as String?,
+      fileNameExcel: json['fileNameExcel'] as String?,
       quotationNumber: json['quotationNumber'] as String?,
       quotationDate: json['quotationDate'] == null
           ? null
           : DateTime.parse(json['quotationDate'] as String),
+      contact: json['contact'] as String?,
       registrationNumber: json['registrationNumber'] as String?,
       subject: json['subject'] as String?,
       totalAmount: (json['totalAmount'] as num?)?.toDouble(),
@@ -220,7 +256,8 @@ MedicalQuotationRequest _$MedicalQuotationRequestFromJson(
           : DateTime.parse(json['validityPeriod'] as String),
       remarks: json['remarks'] as String?,
       medicalRecord: json['medicalRecord'] as String,
-      user: json['user'] as String,
+      user: json['user'] as String?,
+      patient: json['patient'] as String,
       hospitalRecord: json['hospitalRecord'] as String?,
       totalPayment: (json['totalPayment'] as List<dynamic>?)
           ?.map((e) => TotalPaymentRequest.fromJson(e as Map<String, dynamic>))
@@ -234,8 +271,10 @@ Map<String, dynamic> _$MedicalQuotationRequestToJson(
         MedicalQuotationRequest instance) =>
     <String, dynamic>{
       'fileName': instance.fileName,
+      'fileNameExcel': instance.fileNameExcel,
       'quotationNumber': instance.quotationNumber,
       'quotationDate': instance.quotationDate?.toIso8601String(),
+      'contact': instance.contact,
       'registrationNumber': instance.registrationNumber,
       'subject': instance.subject,
       'totalAmount': instance.totalAmount,
@@ -243,6 +282,7 @@ Map<String, dynamic> _$MedicalQuotationRequestToJson(
       'remarks': instance.remarks,
       'medicalRecord': instance.medicalRecord,
       'user': instance.user,
+      'patient': instance.patient,
       'hospitalRecord': instance.hospitalRecord,
       'totalPayment': instance.totalPayment,
       'item': instance.item,

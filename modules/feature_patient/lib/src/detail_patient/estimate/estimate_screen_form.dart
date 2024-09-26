@@ -21,6 +21,7 @@ class EstimateScreenForm extends StatelessWidget {
       },
       children: [
         RowSeparated(
+          crossAxisAlignment: CrossAxisAlignment.start,
           separatorBuilder: (BuildContext context, int index) {
             return SizedBox(width: context.appTheme.spacing.formSpacing);
           },
@@ -29,14 +30,14 @@ class EstimateScreenForm extends StatelessWidget {
               stepWidth: 250,
               child: ReactiveTextField<String>(
                 formControlName: 'quotationNumber',
-                decoration: InputDecoration(labelText: 'Quotation Number'),
+                decoration: InputDecoration(labelText: '見積番号 :'),
               ),
             ),
             IntrinsicWidth(
               stepWidth: 250,
               child: ReactiveTextField<DateTime>(
                 formControlName: 'quotationDate',
-                decoration: InputDecoration(labelText: 'Quotation Date'),
+                decoration: InputDecoration(labelText: '見積日:'),
                 readOnly: true,
                 valueAccessor: DateTimeValueAccessor(
                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
@@ -57,13 +58,21 @@ class EstimateScreenForm extends StatelessWidget {
             IntrinsicWidth(
               stepWidth: 250,
               child: ReactiveTextField<String>(
+                formControlName: 'contact',
+                decoration: InputDecoration(labelText: '担当者:'),
+              ),
+            ),
+            IntrinsicWidth(
+              stepWidth: 250,
+              child: ReactiveTextField<String>(
                 formControlName: 'registrationNumber',
-                decoration: InputDecoration(labelText: 'Registration Number'),
+                decoration: InputDecoration(labelText: '登録番号:'),
               ),
             ),
           ],
         ),
         RowSeparated(
+          crossAxisAlignment: CrossAxisAlignment.start,
           separatorBuilder: (BuildContext context, int index) {
             return SizedBox(width: context.appTheme.spacing.formSpacing);
           },
@@ -72,7 +81,7 @@ class EstimateScreenForm extends StatelessWidget {
               stepWidth: 250,
               child: ReactiveTextField<String>(
                 formControlName: 'subject',
-                decoration: InputDecoration(labelText: 'Subject'),
+                decoration: InputDecoration(labelText: '件名'),
               ),
             ),
             IntrinsicWidth(
@@ -83,14 +92,14 @@ class EstimateScreenForm extends StatelessWidget {
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                 ],
-                decoration: InputDecoration(labelText: 'Total Amount'),
+                decoration: InputDecoration(labelText: '合計金額'),
               ),
             ),
             IntrinsicWidth(
               stepWidth: 250,
               child: ReactiveTextField<DateTime>(
                 formControlName: 'validityPeriod',
-                decoration: InputDecoration(labelText: 'Validity Period'),
+                decoration: InputDecoration(labelText: '有効期限	'),
                 readOnly: true,
                 valueAccessor: DateTimeValueAccessor(
                   dateTimeFormat: DateFormat('yyyy/MM/dd'),
@@ -114,10 +123,28 @@ class EstimateScreenForm extends StatelessWidget {
           formControlName: 'remarks',
           minLines: 1,
           maxLines: 3,
-          decoration: InputDecoration(labelText: 'Remarks'),
+          decoration: const InputDecoration(labelText: '備考	'),
         ),
-        // Payment Details FormArray
-        Text('Payment Details'),
+        RowSeparated(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(width: context.appTheme.spacing.formSpacing);
+          },
+          children: const [
+            IntrinsicWidth(
+              stepWidth: 250,
+              child: Text('税率'),
+            ),
+            IntrinsicWidth(
+              stepWidth: 250,
+              child: Text('税抜合線(門)'),
+            ),
+            IntrinsicWidth(
+              stepWidth: 250,
+              child: Text('消費税(円)'),
+            ),
+          ],
+        ),
         ReactiveFormArray(
           formArrayName: 'totalPayment',
           builder: (context, formArray, child) {
@@ -132,6 +159,7 @@ class EstimateScreenForm extends StatelessWidget {
                     .map((currentForm) => ReactiveForm(
                           formGroup: currentForm,
                           child: RowSeparated(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             separatorBuilder:
                                 (BuildContext context, int index) {
                               return SizedBox(
@@ -147,8 +175,7 @@ class EstimateScreenForm extends StatelessWidget {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration:
-                                      InputDecoration(labelText: 'Tax Rate'),
+                                  decoration: InputDecoration(labelText: '税率'),
                                 ),
                               ),
                               IntrinsicWidth(
@@ -160,8 +187,8 @@ class EstimateScreenForm extends StatelessWidget {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration: InputDecoration(
-                                      labelText: 'Amount Excluding Tax (Yen)'),
+                                  decoration:
+                                      InputDecoration(labelText: '税抜合線(門)'),
                                 ),
                               ),
                               IntrinsicWidth(
@@ -173,9 +200,8 @@ class EstimateScreenForm extends StatelessWidget {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration: InputDecoration(
-                                      labelText:
-                                          'Consumption Tax Amount (Yen)'),
+                                  decoration:
+                                      InputDecoration(labelText: '消費税(円)'),
                                 ),
                               ),
                             ],
@@ -201,15 +227,49 @@ class EstimateScreenForm extends StatelessWidget {
                       ),
                     }));
                   },
-                  child: Text('Add More Payment'),
+                  child: Text('さらに追加'),
                 ),
               ],
             );
           },
         ),
-
-        // Item Details FormArray
-        Text('Item Details'),
+        // header
+        RowSeparated(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(width: context.appTheme.spacing.formSpacing);
+          },
+          children: [
+            IntrinsicWidth(
+              stepWidth: 200,
+              child: Text('取引日'),
+            ),
+            IntrinsicWidth(
+              stepWidth: 200,
+              child: Text('内訳'),
+            ),
+            IntrinsicWidth(
+              stepWidth: 80,
+              child: Text('数量'),
+            ),
+            IntrinsicWidth(
+              stepWidth: 80,
+              child: Text('单位'),
+            ),
+            IntrinsicWidth(
+              stepWidth: 80,
+              child: Text('単価'),
+            ),
+            IntrinsicWidth(
+              stepWidth: 80,
+              child: Text('金額'),
+            ),
+            IntrinsicWidth(
+              stepWidth: 80,
+              child: Text('税率'),
+            ),
+          ],
+        ),
         ReactiveFormArray(
           formArrayName: 'item',
           builder: (context, formArray, child) {
@@ -224,6 +284,7 @@ class EstimateScreenForm extends StatelessWidget {
                     .map((currentForm) => ReactiveForm(
                           formGroup: currentForm,
                           child: RowSeparated(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             separatorBuilder:
                                 (BuildContext context, int index) {
                               return SizedBox(
@@ -231,11 +292,11 @@ class EstimateScreenForm extends StatelessWidget {
                             },
                             children: [
                               IntrinsicWidth(
-                                stepWidth: 250,
+                                stepWidth: 200,
                                 child: ReactiveTextField<DateTime>(
                                   formControlName: 'transactionDate',
-                                  decoration: const InputDecoration(
-                                      labelText: 'Transaction Date'),
+                                  decoration:
+                                      const InputDecoration(labelText: '取引日'),
                                   readOnly: true,
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
@@ -256,15 +317,14 @@ class EstimateScreenForm extends StatelessWidget {
                                 ),
                               ),
                               IntrinsicWidth(
-                                stepWidth: 250,
+                                stepWidth: 200,
                                 child: ReactiveTextField<String>(
                                   formControlName: 'details',
-                                  decoration:
-                                      InputDecoration(labelText: 'Details'),
+                                  decoration: InputDecoration(labelText: '内訳'),
                                 ),
                               ),
                               IntrinsicWidth(
-                                stepWidth: 250,
+                                stepWidth: 80,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'quantity',
                                   keyboardType: TextInputType.number,
@@ -272,20 +332,18 @@ class EstimateScreenForm extends StatelessWidget {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration:
-                                      InputDecoration(labelText: 'Quantity'),
+                                  decoration: InputDecoration(labelText: '数量'),
                                 ),
                               ),
                               IntrinsicWidth(
-                                stepWidth: 250,
+                                stepWidth: 80,
                                 child: ReactiveTextField<String>(
                                   formControlName: 'unit',
-                                  decoration:
-                                      InputDecoration(labelText: 'Unit'),
+                                  decoration: InputDecoration(labelText: '单位'),
                                 ),
                               ),
                               IntrinsicWidth(
-                                stepWidth: 250,
+                                stepWidth: 80,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'unitPrice',
                                   keyboardType: TextInputType.number,
@@ -293,12 +351,11 @@ class EstimateScreenForm extends StatelessWidget {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration:
-                                      InputDecoration(labelText: 'Unit Price'),
+                                  decoration: InputDecoration(labelText: '単価'),
                                 ),
                               ),
                               IntrinsicWidth(
-                                stepWidth: 250,
+                                stepWidth: 80,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'amount',
                                   keyboardType: TextInputType.number,
@@ -306,12 +363,11 @@ class EstimateScreenForm extends StatelessWidget {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration:
-                                      InputDecoration(labelText: 'Amount'),
+                                  decoration: InputDecoration(labelText: '金額'),
                                 ),
                               ),
                               IntrinsicWidth(
-                                stepWidth: 250,
+                                stepWidth: 80,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'taxRate',
                                   keyboardType: TextInputType.number,
@@ -319,8 +375,7 @@ class EstimateScreenForm extends StatelessWidget {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration:
-                                      InputDecoration(labelText: 'Tax Rate'),
+                                  decoration: InputDecoration(labelText: '税率'),
                                 ),
                               ),
                             ],
@@ -356,7 +411,7 @@ class EstimateScreenForm extends StatelessWidget {
                       ),
                     }));
                   },
-                  child: Text('Add More Item'),
+                  child: Text('さらに追加'),
                 ),
               ],
             );

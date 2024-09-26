@@ -33,6 +33,7 @@ dependencies:
   flutter_image_compress: ^2.3.0
   http: ^1.2.2
   htmltopdfwidgets: ^1.0.4
+  pdf: ^3.11.1
   
 
   reactive_forms: any

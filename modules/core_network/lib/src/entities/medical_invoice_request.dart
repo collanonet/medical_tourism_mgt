@@ -9,8 +9,10 @@ part 'medical_invoice_request.g.dart';
 @JsonSerializable()
 class MedicalInvoiceRequest {
   String? fileName;
+  String? fileNameExcel;
   String? invoiceNumber;
   DateTime? invoiceDate;
+  String? contact;
   String? registrationNumber;
   String? subject;
   double? amountBilled;
@@ -18,15 +20,18 @@ class MedicalInvoiceRequest {
   String? bankTransferInformation;
   String? remarks;
   String medicalRecord;
-  String user;
+  String? user;
+  String patient;
   String? hospitalRecord;
   List<TotalPaymentRequest>? totalPayment;
   List<ItemRequest>? item;
 
   MedicalInvoiceRequest({
     this.fileName,
+    this.fileNameExcel,
     this.invoiceNumber,
     this.invoiceDate,
+    this.contact,
     this.registrationNumber,
     this.subject,
     this.amountBilled,
@@ -34,7 +39,8 @@ class MedicalInvoiceRequest {
     this.bankTransferInformation,
     this.remarks,
     required this.medicalRecord,
-    required this.user,
+    this.user,
+    required this.patient,
     this.hospitalRecord,
     this.totalPayment,
     this.item,
