@@ -24,15 +24,15 @@ class EstimateScreenForm extends StatelessWidget {
             return SizedBox(width: context.appTheme.spacing.formSpacing);
           },
           children: [
-            IntrinsicWidth(
-              stepWidth: 250,
+            SizedBox(
+              width: 250,
               child: ReactiveTextField<String>(
                 formControlName: 'invoiceNumber',
                 decoration: InputDecoration(labelText: '見積番号 :'),
               ),
             ),
-            IntrinsicWidth(
-              stepWidth: 250,
+            SizedBox(
+              width: 250,
               child: ReactiveTextField<DateTime>(
                 formControlName: 'invoiceDate',
                 decoration: InputDecoration(labelText: '見積日:'),
@@ -53,15 +53,15 @@ class EstimateScreenForm extends StatelessWidget {
                 },
               ),
             ),
-            IntrinsicWidth(
-              stepWidth: 250,
+            SizedBox(
+              width: 250,
               child: ReactiveTextField<String>(
                 formControlName: 'contact',
                 decoration: InputDecoration(labelText: '担当者:'),
               ),
             ),
-            IntrinsicWidth(
-              stepWidth: 250,
+            SizedBox(
+              width: 250,
               child: ReactiveTextField<String>(
                 formControlName: 'registrationNumber',
                 decoration: InputDecoration(labelText: '登録番号:'),
@@ -75,15 +75,15 @@ class EstimateScreenForm extends StatelessWidget {
             return SizedBox(width: context.appTheme.spacing.formSpacing);
           },
           children: [
-            IntrinsicWidth(
-              stepWidth: 250,
+            SizedBox(
+              width: 250,
               child: ReactiveTextField<String>(
                 formControlName: 'subject',
                 decoration: InputDecoration(labelText: '件名'),
               ),
             ),
-            IntrinsicWidth(
-              stepWidth: 250,
+            SizedBox(
+              width: 250,
               child: ReactiveTextField<double>(
                 formControlName: 'amountBilled',
                 keyboardType: TextInputType.number,
@@ -93,8 +93,8 @@ class EstimateScreenForm extends StatelessWidget {
                 decoration: InputDecoration(labelText: '合計金額'),
               ),
             ),
-            IntrinsicWidth(
-              stepWidth: 250,
+            SizedBox(
+              width: 250,
               child: ReactiveTextField<DateTime>(
                 formControlName: 'paymentDeadline',
                 decoration: InputDecoration(labelText: '有効期限	'),
@@ -129,16 +129,16 @@ class EstimateScreenForm extends StatelessWidget {
             return SizedBox(width: context.appTheme.spacing.formSpacing);
           },
           children: const [
-            IntrinsicWidth(
-              stepWidth: 250,
+            SizedBox(
+              width: 250,
               child: Text('税率'),
             ),
-            IntrinsicWidth(
-              stepWidth: 250,
+            SizedBox(
+              width: 250,
               child: Text('税抜合線(門)'),
             ),
-            IntrinsicWidth(
-              stepWidth: 250,
+            SizedBox(
+              width: 250,
               child: Text('消費税(円)'),
             ),
           ],
@@ -164,8 +164,8 @@ class EstimateScreenForm extends StatelessWidget {
                                   width: context.appTheme.spacing.formSpacing);
                             },
                             children: [
-                              IntrinsicWidth(
-                                stepWidth: 250,
+                              SizedBox(
+                                width: 250,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'taxRate',
                                   keyboardType: TextInputType.number,
@@ -176,8 +176,8 @@ class EstimateScreenForm extends StatelessWidget {
                                   decoration: InputDecoration(labelText: '税率'),
                                 ),
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 250,
+                              SizedBox(
+                                width: 250,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'amountExcludingTaxInYen',
                                   keyboardType: TextInputType.number,
@@ -189,8 +189,8 @@ class EstimateScreenForm extends StatelessWidget {
                                       InputDecoration(labelText: '税抜合線(門)'),
                                 ),
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 250,
+                              SizedBox(
+                                width: 250,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'consumptionTaxAmountInYen',
                                   keyboardType: TextInputType.number,
@@ -238,32 +238,32 @@ class EstimateScreenForm extends StatelessWidget {
             return SizedBox(width: context.appTheme.spacing.formSpacing);
           },
           children: [
-            IntrinsicWidth(
-              stepWidth: 200,
+            SizedBox(
+              width: 200,
               child: Text('取引日'),
             ),
-            IntrinsicWidth(
-              stepWidth: 200,
+            SizedBox(
+              width: 200,
               child: Text('内訳'),
             ),
-            IntrinsicWidth(
-              stepWidth: 80,
+            SizedBox(
+              width: 80,
               child: Text('数量'),
             ),
-            IntrinsicWidth(
-              stepWidth: 80,
+            SizedBox(
+              width: 80,
               child: Text('单位'),
             ),
-            IntrinsicWidth(
-              stepWidth: 80,
+            SizedBox(
+              width: 80,
               child: Text('単価'),
             ),
-            IntrinsicWidth(
-              stepWidth: 80,
+            SizedBox(
+              width: 80,
               child: Text('金額'),
             ),
-            IntrinsicWidth(
-              stepWidth: 80,
+            SizedBox(
+              width: 80,
               child: Text('税率'),
             ),
           ],
@@ -289,8 +289,8 @@ class EstimateScreenForm extends StatelessWidget {
                                   width: context.appTheme.spacing.formSpacing);
                             },
                             children: [
-                              IntrinsicWidth(
-                                stepWidth: 200,
+                              SizedBox(
+                                width: 200,
                                 child: ReactiveTextField<DateTime>(
                                   formControlName: 'transactionDate',
                                   decoration:
@@ -314,15 +314,15 @@ class EstimateScreenForm extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 200,
+                              SizedBox(
+                                width: 200,
                                 child: ReactiveTextField<String>(
                                   formControlName: 'details',
                                   decoration: InputDecoration(labelText: '内訳'),
                                 ),
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 80,
+                              SizedBox(
+                                width: 80,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'quantity',
                                   keyboardType: TextInputType.number,
@@ -333,15 +333,15 @@ class EstimateScreenForm extends StatelessWidget {
                                   decoration: InputDecoration(labelText: '数量'),
                                 ),
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 80,
+                              SizedBox(
+                                width: 80,
                                 child: ReactiveTextField<String>(
                                   formControlName: 'unit',
                                   decoration: InputDecoration(labelText: '单位'),
                                 ),
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 80,
+                              SizedBox(
+                                width: 80,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'unitPrice',
                                   keyboardType: TextInputType.number,
@@ -352,8 +352,8 @@ class EstimateScreenForm extends StatelessWidget {
                                   decoration: InputDecoration(labelText: '単価'),
                                 ),
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 80,
+                              SizedBox(
+                                width: 80,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'amount',
                                   keyboardType: TextInputType.number,
@@ -364,8 +364,8 @@ class EstimateScreenForm extends StatelessWidget {
                                   decoration: InputDecoration(labelText: '金額'),
                                 ),
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 80,
+                              SizedBox(
+                                width: 80,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'taxRate',
                                   keyboardType: TextInputType.number,

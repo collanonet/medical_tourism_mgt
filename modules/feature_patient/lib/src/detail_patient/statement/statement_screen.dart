@@ -18,6 +18,7 @@ class StatementScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ValueNotifier<List<String>> selected = ValueNotifier([]);
     return ValueListenableBuilder(
       valueListenable: context.watch<StatementModel>().medicalInvoiceData,
       builder: (context, value, _) {
@@ -35,14 +36,28 @@ class StatementScreen extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Checkbox(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              side: const BorderSide(color: Colors.grey),
-                            ),
-                            checkColor: Colors.white,
-                            value: false,
-                            onChanged: (value) {},
+                          ValueListenableBuilder(
+                            valueListenable: selected,
+                            builder: (context, ids, _) {
+                              return Checkbox(
+                                value: ids.isEmpty
+                                    ? false
+                                    : value.data?.length == ids.length,
+                                onChanged: (select) {
+                                  if (select != null) {
+                                    if (select) {
+                                      if (value.hasData) {
+                                        selected.value = value.requireData
+                                            .map((e) => e.id.toString())
+                                            .toList();
+                                      }
+                                    } else {
+                                      selected.value = [];
+                                    }
+                                  }
+                                },
+                              );
+                            },
                           ),
                           Expanded(
                               child: Text(
@@ -109,15 +124,28 @@ class StatementScreen extends StatelessWidget {
                               padding: const EdgeInsets.symmetric(vertical: 4),
                               child: Row(
                                 children: [
-                                  Checkbox(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                      side:
-                                          const BorderSide(color: Colors.grey),
-                                    ),
-                                    checkColor: Colors.white,
-                                    value: false,
-                                    onChanged: (value) {},
+                                  ValueListenableBuilder(
+                                    valueListenable: selected,
+                                    builder: (context, sels, _) {
+                                      return Checkbox(
+                                        value: sels.contains(data?.id),
+                                        onChanged: (sel) {
+                                          if (sel != null) {
+                                            if (sel) {
+                                              selected.value = [
+                                                ...sels,
+                                                data?.id ?? ''
+                                              ];
+                                            } else {
+                                              selected.value = [
+                                                ...sels
+                                                    .where((e) => e != data?.id)
+                                              ];
+                                            }
+                                          }
+                                        },
+                                      );
+                                    },
                                   ),
                                   Expanded(
                                       child: Text(
@@ -215,6 +243,136 @@ class StatementScreen extends StatelessWidget {
                       ),
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
+                      ),
+                      Divider(),
+                      ValueListenableBuilder(
+                        valueListenable: selected,
+                        builder: (context, sels, _) {
+                          return RowSeparated(
+                            separatorBuilder: (context, index) => SizedBox(
+                                width: context.appTheme.spacing.marginMedium),
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ValueListenableListener(
+                                valueListenable:
+                                    context.read<StatementModel>().delete,
+                                onListen: () {
+                                  var delete = context
+                                      .read<StatementModel>()
+                                      .delete
+                                      .value;
+
+                                  if (delete.hasError) {
+                                    snackBarWidget(
+                                      message: '削除に失敗しました',
+                                      backgroundColor: Colors.red,
+                                      prefixIcon: const Icon(
+                                        Icons.error,
+                                        color: Colors.white,
+                                      ),
+                                    );
+                                  }
+
+                                  if (delete.hasData) {
+                                    selected.value = [];
+                                    snackBarWidget(
+                                      message: '削除しました',
+                                      prefixIcon: const Icon(
+                                        Icons.check_circle,
+                                        color: Colors.white,
+                                      ),
+                                    );
+                                  }
+                                },
+                                child: ValueListenableBuilder(
+                                  valueListenable:
+                                      context.read<StatementModel>().delete,
+                                  builder: (context, value, _) {
+                                    return OutlinedButton(
+                                      onPressed: sels.isEmpty || value.loading
+                                          ? null
+                                          : () {
+                                              showDialog(
+                                                  context: context,
+                                                  builder: (_) {
+                                                    return Provider.value(
+                                                      value: context.read<
+                                                          StatementModel>(),
+                                                      child: AlertDialog(
+                                                        title:
+                                                            const Text('削除確認'),
+                                                        content: const Text(
+                                                            '選択したデータを削除しますか？'),
+                                                        actions: [
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: const Text(
+                                                                'キャンセル'),
+                                                          ),
+                                                          TextButton(
+                                                            onPressed: () {
+                                                              context
+                                                                  .read<
+                                                                      StatementModel>()
+                                                                  .deleteInvoice(
+                                                                      sels);
+                                                              Navigator.of(
+                                                                      context)
+                                                                  .pop();
+                                                            },
+                                                            child: const Text(
+                                                                '削除する'),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    );
+                                                  });
+                                            },
+                                      child: WithLoadingButton(
+                                        isLoading: value.loading,
+                                        loadingColor:
+                                            context.appTheme.primaryColor,
+                                        child: Text(
+                                          '削除する',
+                                          style: context.textTheme.labelLarge
+                                              ?.copyWith(
+                                                  color: context
+                                                      .appTheme.primaryColor),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              ),
+                              OutlinedButton(
+                                onPressed: () {},
+                                child: Text('CSV出力'),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {},
+                                child: const Text(
+                                  'コピーして新規作成',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              ElevatedButton(
+                                onPressed: () {},
+                                child: const Text(
+                                  '新規作成',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          );
+                        },
                       ),
                       const StatementScreenForm(),
                       SizedBox(

@@ -18,6 +18,7 @@ class EstimateScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ValueNotifier<List<String>> selected = ValueNotifier([]);
     return ValueListenableBuilder(
         valueListenable: context.watch<EstimateModel>().medicalQuotationData,
         builder: (context, value, _) {
@@ -32,14 +33,28 @@ class EstimateScreen extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      Checkbox(
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4),
-                          side: const BorderSide(color: Colors.grey),
-                        ),
-                        checkColor: Colors.white,
-                        value: false,
-                        onChanged: (value) {},
+                      ValueListenableBuilder(
+                        valueListenable: selected,
+                        builder: (context, ids, _) {
+                          return Checkbox(
+                            value: ids.isEmpty
+                                ? false
+                                : value.data?.length == ids.length,
+                            onChanged: (select) {
+                              if (select != null) {
+                                if (select) {
+                                  if (value.hasData) {
+                                    selected.value = value.requireData
+                                        .map((e) => e.id.toString())
+                                        .toList();
+                                  }
+                                } else {
+                                  selected.value = [];
+                                }
+                              }
+                            },
+                          );
+                        },
                       ),
                       Expanded(
                           child: Text(
@@ -84,7 +99,7 @@ class EstimateScreen extends StatelessWidget {
                       )),
                       Expanded(
                         child: SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
+                          width: context.appTheme.spacing.marginLarge,
                         ),
                       ),
                     ],
@@ -107,14 +122,27 @@ class EstimateScreen extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 4),
                           child: Row(
                             children: [
-                              Checkbox(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4),
-                                  side: const BorderSide(color: Colors.grey),
-                                ),
-                                checkColor: Colors.white,
-                                value: false,
-                                onChanged: (value) {},
+                              ValueListenableBuilder(
+                                valueListenable: selected,
+                                builder: (context, sels, _) {
+                                  return Checkbox(
+                                    value: sels.contains(data?.id),
+                                    onChanged: (sel) {
+                                      if (sel != null) {
+                                        if (sel) {
+                                          selected.value = [
+                                            ...sels,
+                                            data?.id ?? ''
+                                          ];
+                                        } else {
+                                          selected.value = [
+                                            ...sels.where((e) => e != data?.id)
+                                          ];
+                                        }
+                                      }
+                                    },
+                                  );
+                                },
                               ),
                               Expanded(
                                   child: Text(
@@ -183,22 +211,22 @@ class EstimateScreen extends StatelessWidget {
                                 '--',
                                 style: context.textTheme.bodySmall,
                               )),
-                              Expanded(
-                                child: Row(
-                                  children: [
-                                    ElevatedButton(
-                                      onPressed: data?.fileNamePdfJP != null
-                                          ? () {
-                                              openUrlInBrowser(
-                                                  fileName:
-                                                      data?.fileNamePdfJP ??
-                                                          '');
-                                            }
-                                          : null,
-                                      child: const Text('請求書を発行する'),
-                                    )
-                                  ],
-                                ),
+                              Row(
+                                children: [
+                                  ElevatedButton(
+                                    onPressed: data?.fileNamePdfJP != null
+                                        ? () {
+                                            openUrlInBrowser(
+                                                fileName:
+                                                    data?.fileNamePdfJP ?? '');
+                                          }
+                                        : null,
+                                    child: const Text(
+                                      '請求書を発行する',
+                                      style: TextStyle(fontSize: 10),
+                                    ),
+                                  )
+                                ],
                               ),
                             ],
                           ),
@@ -208,6 +236,130 @@ class EstimateScreen extends StatelessWidget {
                     separatorBuilder: (BuildContext context, int index) {
                       return const Divider(
                         thickness: 0.5,
+                      );
+                    },
+                  ),
+                  Divider(),
+                  ValueListenableBuilder(
+                    valueListenable: selected,
+                    builder: (context, sels, _) {
+                      return RowSeparated(
+                        separatorBuilder: (context, index) => SizedBox(
+                            width: context.appTheme.spacing.marginMedium),
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ValueListenableListener(
+                            valueListenable:
+                                context.read<EstimateModel>().delete,
+                            onListen: () {
+                              var delete =
+                                  context.read<EstimateModel>().delete.value;
+
+                              if (delete.hasError) {
+                                snackBarWidget(
+                                  message: '削除に失敗しました',
+                                  backgroundColor: Colors.red,
+                                  prefixIcon: const Icon(
+                                    Icons.error,
+                                    color: Colors.white,
+                                  ),
+                                );
+                              }
+
+                              if (delete.hasData) {
+                                selected.value = [];
+                                snackBarWidget(
+                                  message: '削除しました',
+                                  prefixIcon: const Icon(
+                                    Icons.check_circle,
+                                    color: Colors.white,
+                                  ),
+                                );
+                              }
+                            },
+                            child: ValueListenableBuilder(
+                              valueListenable:
+                                  context.read<EstimateModel>().delete,
+                              builder: (context, value, _) {
+                                return OutlinedButton(
+                                  onPressed: sels.isEmpty || value.loading
+                                      ? null
+                                      : () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (_) {
+                                                return Provider.value(
+                                                  value: context
+                                                      .read<EstimateModel>(),
+                                                  child: AlertDialog(
+                                                    title: const Text('削除確認'),
+                                                    content: const Text(
+                                                        '選択したデータを削除しますか？'),
+                                                    actions: [
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child:
+                                                            const Text('キャンセル'),
+                                                      ),
+                                                      TextButton(
+                                                        onPressed: () {
+                                                          context
+                                                              .read<
+                                                                  EstimateModel>()
+                                                              .deleteInvoice(
+                                                                  sels);
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        },
+                                                        child:
+                                                            const Text('削除する'),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                );
+                                              });
+                                        },
+                                  child: WithLoadingButton(
+                                    isLoading: value.loading,
+                                    loadingColor: context.appTheme.primaryColor,
+                                    child: Text(
+                                      '削除する',
+                                      style: context.textTheme.labelLarge
+                                          ?.copyWith(
+                                              color: context
+                                                  .appTheme.primaryColor),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                          OutlinedButton(
+                            onPressed: () {},
+                            child: Text('CSV出力'),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: const Text(
+                              'コピーして新規作成',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                          ElevatedButton(
+                            onPressed: () {},
+                            child: const Text(
+                              '新規作成',
+                              style: TextStyle(
+                                color: Colors.white,
+                              ),
+                            ),
+                          ),
+                        ],
                       );
                     },
                   ),

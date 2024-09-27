@@ -159,7 +159,30 @@ class StatementModel {
       medicalInvoiceData.value = AsyncData(error: e);
     }
   }
+
+   ValueNotifier<AsyncData<bool>> delete = ValueNotifier(const AsyncData());
+
+      Future<void> deleteInvoice(List<String> ids) async {
+        try {
+          delete.value = const AsyncData(loading: true);
+          for (var id in ids) {
+            await patientRepository.deleteInvoice(id);
+            medicalInvoiceData.value = AsyncData(
+                data: medicalInvoiceData.value.data!
+                  ..removeWhere((element) => element.id == id));
+          }
+
+          delete.value = const AsyncData(data: true);
+        } catch (e) {
+          logger.e(e);
+          delete.value = AsyncData(error: e.toString());
+        }
+      }
+
+  
 }
+
+
 
 Future<Uint8List?> generatePdfFromInvoice(
     MedicalInvoiceRequest invoice, Patient patient) async {
