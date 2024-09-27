@@ -1528,7 +1528,7 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.MEDICAL_VISA_TRAVEL_COMPANION)
-  Future<List<MedicalVisaTravelCompanionResponse>>
+  Future<MedicalVisaTravelCompanionResponse>
       getMedicalVisaTravelCompanion();
 
   @POST(EndPoints.MEDICAL_VISA_TRAVEL_COMPANION)
@@ -1537,11 +1537,11 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.MEDICAL_VISA_NECESSARY_IN_JAPAN)
-  Future<List<MedicalVisaNecessaryInJapanResponse>>
+  Future<MedicalVisaNecessaryInJapanResponse>
       getMedicalVisaNecessaryInJapan();
 
   @POST(EndPoints.MEDICAL_VISA_NECESSARY_IN_JAPAN)
-  Future<MedicalVisaTravelCompanionResponse> postMedicalVisaNecessaryInJapan(
+  Future<MedicalVisaNecessaryInJapanResponse> postMedicalVisaNecessaryInJapan(
     @Body()
     MedicalVisaNecessaryInJapanRequest medicalVisaNecessaryInJapanRequest,
   );

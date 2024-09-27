@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:core_network/entities.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -20,5 +22,28 @@ class MedicalVisaModel with ChangeNotifier {
 
   Future<void> initialData({Patient? patient, String? id}) async {
     notifyListeners();
+  }
+
+  ValueNotifier<AsyncData<List<MedicalVisaPersonalResponse>>> personalData = ValueNotifier(const AsyncData());
+  Future<void> fetchMedicalVisaPersonal() async{
+    try{
+      personalData.value = const AsyncData(loading: true);
+      final response = await patientRepository.getMedicalVisaPersonal();
+      personalData.value = AsyncData(data: response);
+    }catch(e){
+      logger.d(e);
+      personalData.value = AsyncData(error: e);
+    }
+  }
+
+  ValueNotifier<AsyncData<MedicalVisaPersonalResponse>> submitPersonalData = ValueNotifier(const AsyncData());
+  Future<void> submitMedicalVisaPersonal() async{
+    try{
+      submitPersonalData.value = const AsyncData(loading: true);
+
+    }catch(e){
+      logger.d(e);
+      submitPersonalData.value = AsyncData(error: e);
+    }
   }
 }

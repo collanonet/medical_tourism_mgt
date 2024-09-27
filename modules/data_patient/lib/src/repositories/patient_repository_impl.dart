@@ -959,6 +959,86 @@ class PatientRepositoryIml extends PatientRepository {
   Future<List<MedicalInvoiceResponse>> getInvoices({String? medicalRecord, bool? type}) {
     return remote.getInvoices(medicalRecord: medicalRecord, type: type);
   }
+  
+  @override
+  Future<AfterGettingVisaResponse> getAfterGettingVisa() {
+    return remote.getAfterGettingVisa();
+  }
+  
+  @override
+  Future<MedicalVisaAfterGettingVisaResponse> getAfterGettingVisaFinal() {
+    return remote.getAfterGettingVisaFinal();
+  }
+  
+  @override
+  Future<MedicalVisaRequiredInJapanResponse> getMedicalRequiredInJapan() {
+    return remote.getMedicalRequiredInJapan();
+  }
+  
+  @override
+  Future<MedicalVisaNecessaryInJapanResponse> getMedicalVisaNecessaryInJapan() {
+    return remote.getMedicalVisaNecessaryInJapan();
+  }
+  
+  @override
+  Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal() {
+    return remote.getMedicalVisaPersonal();
+  }
+  
+  @override
+  Future<List<MedicalVisaStayPeriodResponse>> getMedicalVisaStayPeriod() {
+    return remote.getMedicalVisaStayPeriod();
+  }
+  
+  @override
+  Future<MedicalVisaTravelCompanionResponse> getMedicalVisaTravelCompanion() {
+   return remote.getMedicalVisaTravelCompanion();
+  }
+  
+  @override
+  Future<MedicalVisaVisaWithdrawalResponse> getMedicalVisaWithdrawal() {
+   return remote.getMedicalVisaWithdrawal();
+  }
+  
+  @override
+  Future<MedicalVisaRequiredInJapanResponse> popMedicalVisaRequiredInJapan(RequiredInJapan requiredInJapan) {
+    return remote.popMedicalVisaRequiredInJapan(requiredInJapan);
+  }
+  
+  @override
+  Future<AfterGettingVisaResponse> postAfterGettingVisa(AfterGettingVisaRequest request) {
+    return remote.postAfterGettingVisa(request);
+  }
+  
+  @override
+  Future<MedicalVisaAfterGettingVisaResponse> postAfterGettingVisaFinal(MedicalAfterGettingVisaFinalRequest request) {
+   return remote.postAfterGettingVisaFinal(request);
+  }
+  
+  @override
+  Future<MedicalVisaNecessaryInJapanResponse> postMedicalVisaNecessaryInJapan(MedicalVisaNecessaryInJapanRequest request) {
+   return remote.postMedicalVisaNecessaryInJapan(request);
+  }
+  
+  @override
+  Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(MedicalVisaPersonalRequest request) {
+    return remote.postMedicalVisaPersonal(request);
+  }
+  
+  @override
+  Future<MedicalVisaStayPeriodResponse> postMedicalVisaStayPeriod(MedicalVisaStayPeriodRequest request) {
+    return remote.postMedicalVisaStayPeriod(request);
+  }
+  
+  @override
+  Future<MedicalVisaTravelCompanionResponse> postMedicalVisaTravelCompanion(MedicalVisaTravelCompanionRequest request) {
+   return remote.postMedicalVisaTravelCompanion(request);
+  }
+  
+  @override
+  Future<MedicalVisaVisaWithdrawalResponse> postMedicalVisaWithdrawal(MedicalVisaWithdrawalRequest request) {
+   return remote.postMedicalVisaWithdrawal(request);
+  }
 
 
   

@@ -555,4 +555,35 @@ abstract class PatientRepository {
       String id, MedicalInvoiceRequest invoiceRequest);
 
   Future<void> deleteInvoice(String id);
+
+  Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal();
+  Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(MedicalVisaPersonalRequest request);
+
+  Future<List<MedicalVisaStayPeriodResponse>> getMedicalVisaStayPeriod();
+
+  Future<MedicalVisaStayPeriodResponse> postMedicalVisaStayPeriod(MedicalVisaStayPeriodRequest request);
+
+  Future<MedicalVisaRequiredInJapanResponse> getMedicalRequiredInJapan();
+
+  Future<MedicalVisaRequiredInJapanResponse> popMedicalVisaRequiredInJapan(RequiredInJapan requiredInJapan);
+
+  Future<MedicalVisaVisaWithdrawalResponse> getMedicalVisaWithdrawal();
+
+  Future<MedicalVisaVisaWithdrawalResponse> postMedicalVisaWithdrawal(MedicalVisaWithdrawalRequest request);
+
+  Future<AfterGettingVisaResponse> getAfterGettingVisa();
+
+  Future<AfterGettingVisaResponse> postAfterGettingVisa(AfterGettingVisaRequest request);
+
+  Future<MedicalVisaTravelCompanionResponse> getMedicalVisaTravelCompanion();
+
+  Future<MedicalVisaTravelCompanionResponse> postMedicalVisaTravelCompanion(MedicalVisaTravelCompanionRequest request);
+
+  Future<MedicalVisaNecessaryInJapanResponse> getMedicalVisaNecessaryInJapan();
+
+  Future<MedicalVisaNecessaryInJapanResponse> postMedicalVisaNecessaryInJapan(MedicalVisaNecessaryInJapanRequest request);
+
+  Future<MedicalVisaAfterGettingVisaResponse> getAfterGettingVisaFinal();
+
+  Future<MedicalVisaAfterGettingVisaResponse> postAfterGettingVisaFinal(MedicalAfterGettingVisaFinalRequest request);
 }

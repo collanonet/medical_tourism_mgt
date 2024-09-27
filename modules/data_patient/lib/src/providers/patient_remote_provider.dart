@@ -745,4 +745,68 @@ class PatientRemoteProvider {
   Future<void> deleteInvoice(String id) {
     return apiService.deleteInvoice(id);
   }
+
+  Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal(){
+    return apiService.getMedicalVisaPersonal();
+  }
+
+  Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(MedicalVisaPersonalRequest request){
+    return apiService.postMedicalVisaPersonal(request);
+  }
+
+  Future<List<MedicalVisaStayPeriodResponse>> getMedicalVisaStayPeriod(){
+    return apiService.getMedicalVisaStayPeriod();
+  }
+
+  Future<MedicalVisaStayPeriodResponse> postMedicalVisaStayPeriod(MedicalVisaStayPeriodRequest request){
+    return apiService.postMedicalVisaStayPeriod(request);
+  }
+
+  Future<MedicalVisaRequiredInJapanResponse> getMedicalRequiredInJapan(){
+    return apiService.getMedicalRequiredInJapan();
+  }
+
+  Future<MedicalVisaRequiredInJapanResponse> popMedicalVisaRequiredInJapan(RequiredInJapan requiredInJapan){
+    return apiService.postMedicalRequiredInJapan(requiredInJapan);
+  }
+
+  Future<MedicalVisaVisaWithdrawalResponse> getMedicalVisaWithdrawal(){
+    return apiService.getMedicalVisaWithdrawal();
+  }
+
+  Future<MedicalVisaVisaWithdrawalResponse> postMedicalVisaWithdrawal(MedicalVisaWithdrawalRequest request){
+    return apiService.postMedicalVisaWithdrawal(request);
+  }
+
+  Future<AfterGettingVisaResponse> getAfterGettingVisa(){
+    return apiService.getAfterGettingVisa();
+  }
+
+  Future<AfterGettingVisaResponse> postAfterGettingVisa(AfterGettingVisaRequest request){
+    return apiService.postAfterGettingVisa(request);
+  }
+
+  Future<MedicalVisaTravelCompanionResponse> getMedicalVisaTravelCompanion(){
+    return apiService.getMedicalVisaTravelCompanion();
+  }
+
+  Future<MedicalVisaTravelCompanionResponse> postMedicalVisaTravelCompanion(MedicalVisaTravelCompanionRequest request){
+    return apiService.postMedicalVisaTravelCompanion(request);
+  }
+
+  Future<MedicalVisaNecessaryInJapanResponse> getMedicalVisaNecessaryInJapan(){
+    return apiService.getMedicalVisaNecessaryInJapan();
+  }
+
+  Future<MedicalVisaNecessaryInJapanResponse> postMedicalVisaNecessaryInJapan(MedicalVisaNecessaryInJapanRequest request){
+    return apiService.postMedicalVisaNecessaryInJapan(request);
+  }
+
+  Future<MedicalVisaAfterGettingVisaResponse> getAfterGettingVisaFinal(){
+    return apiService.getAfterGettingVisaFinal();
+  }
+
+  Future<MedicalVisaAfterGettingVisaResponse> postAfterGettingVisaFinal(MedicalAfterGettingVisaFinalRequest request){
+    return apiService.postAfterGettingVisaFinal(request);
+  }
 }

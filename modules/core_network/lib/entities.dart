@@ -89,6 +89,7 @@ export 'src/entities/request/medical_visa_personal_request.dart';
 export 'src/entities/medical_visa_stay_period_response.dart';
 export 'src/entities/request/medical_visa_stay_period_request.dart';
 export 'src/entities/medical_visa_required_in_japan_response.dart';
+export 'src/entities/request/medical_visa_reuied_in_japan_request.dart';
 export 'src/entities/request/medical_visa_withdrawal_request.dart';
 export 'src/entities/medical_visa_visa_withdrawal_response.dart';
 export 'src/entities/request/medical_visa_after_getting_visa_request.dart';
