@@ -10,6 +10,5 @@ FormGroup formInvoice(){
     'issue_date_to' : FormControl<DateTime>(),
     'invoice' : FormControl<String>(),
     'prospects' : FormControl<String>(),
-
   });
 }
