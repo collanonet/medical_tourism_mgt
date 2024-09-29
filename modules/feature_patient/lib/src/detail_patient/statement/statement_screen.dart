@@ -124,7 +124,7 @@ class StatementScreen extends StatelessWidget {
                                         context: context,
                                         builder: (_) {
                                           return AlertDialog(
-                                            title: const Text('見積書'),
+                                            title: const Text('請求書'),
                                             content: Column(
                                               mainAxisSize: MainAxisSize
                                                   .min,
@@ -293,7 +293,7 @@ class StatementScreen extends StatelessWidget {
                                                   context: context,
                                                   builder: (_) {
                                                     return AlertDialog(
-                                                      title: const Text('見積書'),
+                                                      title: const Text('請求書'),
                                                       content: Column(
                                                         mainAxisSize: MainAxisSize
                                                             .min,
