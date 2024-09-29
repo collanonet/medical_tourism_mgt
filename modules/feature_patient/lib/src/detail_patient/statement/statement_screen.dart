@@ -126,6 +126,8 @@ class StatementScreen extends StatelessWidget {
                                           return AlertDialog(
                                             title: const Text('見積書'),
                                             content: Column(
+                                              mainAxisSize: MainAxisSize
+                                                  .min,
                                               children: [
                                                 if (data?.fileNamePdfJP != null)
                                                   ListTile(
@@ -293,6 +295,8 @@ class StatementScreen extends StatelessWidget {
                                                     return AlertDialog(
                                                       title: const Text('見積書'),
                                                       content: Column(
+                                                        mainAxisSize: MainAxisSize
+                                                            .min,
                                                         children: [
                                                           if (data?.fileNamePdfJP !=
                                                               null)
