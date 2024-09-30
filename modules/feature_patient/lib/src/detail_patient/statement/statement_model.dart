@@ -273,7 +273,7 @@ Future<Uint8List?> generatePdfFromInvoiceJP(
     MedicalInvoiceRequest invoice, Patient patient) async {
   final pdf = pw.Document();
   final ByteData fontData =
-      await rootBundle.load('assets/fonts/NotoSansJP_VariableFont_wght.ttf');
+      await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
   final ttf = pw.Font.ttf(fontData);
 
   pdf.addPage(
@@ -493,7 +493,7 @@ Future<Uint8List?> generatePdfFromInvoiceZH(
     MedicalInvoiceRequest invoice, Patient patient) async {
   final pdf = pw.Document();
   final ByteData fontData =
-      await rootBundle.load('assets/fonts/NotoSansJP_VariableFont_wght.ttf');
+      await rootBundle.load('assets/fonts/Noto_Sans_ZH.ttf');
   final ttf = pw.Font.ttf(fontData);
 
   pdf.addPage(
@@ -713,7 +713,7 @@ Future<Uint8List?> generatePdfFromInvoiceZHTW(
     MedicalInvoiceRequest invoice, Patient patient) async {
   final pdf = pw.Document();
   final ByteData fontData =
-      await rootBundle.load('assets/fonts/NotoSansJP_VariableFont_wght.ttf');
+      await rootBundle.load('assets/fonts/Noto_Sans_TC.ttf');
   final ttf = pw.Font.ttf(fontData);
 
   pdf.addPage(
@@ -930,7 +930,7 @@ Future<Uint8List?> generatePdfFromInvoiceVN(
     MedicalInvoiceRequest invoice, Patient patient) async {
   final pdf = pw.Document();
   final ByteData fontData =
-      await rootBundle.load('assets/fonts/NotoSansJP_VariableFont_wght.ttf');
+      await rootBundle.load('assets/fonts/Roboto_VN.ttf');
   final ttf = pw.Font.ttf(fontData);
 
   pdf.addPage(
@@ -1150,7 +1150,7 @@ Future<Uint8List?> generatePdfFromInvoiceEN(
     MedicalInvoiceRequest invoice, Patient patient) async {
   final pdf = pw.Document();
   final ByteData fontData =
-      await rootBundle.load('assets/fonts/NotoSansJP_VariableFont_wght.ttf');
+      await rootBundle.load('assets/fonts/Open_Sans_EN.ttf');
   final ttf = pw.Font.ttf(fontData);
 
   pdf.addPage(

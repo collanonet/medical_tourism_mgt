@@ -144,7 +144,11 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/fonts/NotoSansJPRegular.ttf
-    - assets/fonts/NotoSansJP_VariableFont_wght.ttf
+    - assets/fonts/NotoSans_JP.ttf
+    - assets/fonts/Noto_Sans_TC.ttf
+    - assets/fonts/Noto_Sans_ZH.ttf
+    - assets/fonts/Roboto_VN.ttf
+    - assets/fonts/Open_Sans_EN.ttf
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
