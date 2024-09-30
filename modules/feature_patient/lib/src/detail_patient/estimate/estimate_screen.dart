@@ -361,7 +361,7 @@ class EstimateScreen extends StatelessWidget {
                                           }
                                         : null,
                                     child: const Text(
-                                      '請求書を発行する',
+                                      '言語を選択する',
                                       style: TextStyle(fontSize: 10),
                                     ),
                                   )
