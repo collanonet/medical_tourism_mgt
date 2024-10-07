@@ -14,7 +14,6 @@ import '../g_and_a_model.dart';
 class QAndANewRegistrationSection extends StatefulWidget {
   const QAndANewRegistrationSection({super.key});
 
-  
   @override
   State<QAndANewRegistrationSection> createState() =>
       _QAndANewRegistrationSectionState();
@@ -55,7 +54,7 @@ class _QAndANewRegistrationSectionState
                           ),
                       children: [
                         Expanded(
-                          flex: 2,
+                          //flex: 2,
                           child: ColumnSeparated(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               separatorBuilder: (context, index) => SizedBox(
@@ -88,7 +87,7 @@ class _QAndANewRegistrationSectionState
                               ]),
                         ),
                         Expanded(
-                          flex: 2,
+                          // flex: 2,
                           child: ColumnSeparated(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               separatorBuilder: (context, index) => SizedBox(

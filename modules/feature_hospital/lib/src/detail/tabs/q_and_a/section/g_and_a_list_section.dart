@@ -108,7 +108,7 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                     );
                               },
                               child: const Text(
-                                '保存する',
+                                '検索する',
                                 style: TextStyle(
                                   color: Colors.white,
                                 ),
