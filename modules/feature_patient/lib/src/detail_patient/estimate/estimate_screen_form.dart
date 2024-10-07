@@ -225,7 +225,7 @@ class EstimateScreenForm extends StatelessWidget {
                       ),
                     }));
                   },
-                  child: Text('さらに追加'),
+                  child: Text('行を追加'),
                 ),
               ],
             );

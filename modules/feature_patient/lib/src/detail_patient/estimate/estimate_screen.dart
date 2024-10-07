@@ -112,10 +112,75 @@ class EstimateScreen extends StatelessWidget {
                     itemBuilder: (BuildContext context, int index) {
                       var data = value.data?[index];
                       return InkWell(
-                        onTap: data?.fileNamePdfJP != null
+                        onTap: data?.fileNamePdfJP != null ||
+                                data?.fileNamePdfEN != null ||
+                                data?.fileNamePdfZH != null ||
+                                data?.fileNamePdfZHTW != null ||
+                                data?.fileNamePdfVN != null
                             ? () {
-                                openUrlInBrowser(
-                                    fileName: data!.fileNamePdfJP!);
+                                showDialog(
+                                    context: context,
+                                    builder: (_) {
+                                      return AlertDialog(
+                                        title: const Text('見積書'),
+                                        content: Column(
+                                          mainAxisSize: MainAxisSize
+                                              .min,
+                                          children: [
+                                            if (data?.fileNamePdfJP != null)
+                                              ListTile(
+                                                title: const Text('日本語'),
+                                                onTap: () {
+                                                  openUrlInBrowser(
+                                                      fileName:
+                                                          data?.fileNamePdfJP ??
+                                                              '');
+                                                },
+                                              ),
+                                            if (data?.fileNamePdfEN != null)
+                                              ListTile(
+                                                title: const Text('英語'),
+                                                onTap: () {
+                                                  openUrlInBrowser(
+                                                      fileName:
+                                                          data?.fileNamePdfEN ??
+                                                              '');
+                                                },
+                                              ),
+                                            if (data?.fileNamePdfVN != null)
+                                              ListTile(
+                                                title: const Text('ベトナム語'),
+                                                onTap: () {
+                                                  openUrlInBrowser(
+                                                      fileName:
+                                                          data?.fileNamePdfVN ??
+                                                              '');
+                                                },
+                                              ),
+                                            if (data?.fileNamePdfZH != null)
+                                              ListTile(
+                                                title: const Text('中国語'),
+                                                onTap: () {
+                                                  openUrlInBrowser(
+                                                      fileName:
+                                                          data?.fileNamePdfZH ??
+                                                              '');
+                                                },
+                                              ),
+                                            if (data?.fileNamePdfZHTW != null)
+                                              ListTile(
+                                                title: const Text('繁体字'),
+                                                onTap: () {
+                                                  openUrlInBrowser(
+                                                      fileName:
+                                                          data?.fileNamePdfZHTW ??
+                                                              '');
+                                                },
+                                              ),
+                                          ],
+                                        ),
+                                      );
+                                    });
                               }
                             : null,
                         child: Padding(
@@ -214,15 +279,89 @@ class EstimateScreen extends StatelessWidget {
                               Row(
                                 children: [
                                   ElevatedButton(
-                                    onPressed: data?.fileNamePdfJP != null
+                                    onPressed: data?.fileNamePdfJP != null ||
+                                            data?.fileNamePdfEN != null ||
+                                            data?.fileNamePdfZH != null ||
+                                            data?.fileNamePdfZHTW != null ||
+                                            data?.fileNamePdfVN != null
                                         ? () {
-                                            openUrlInBrowser(
-                                                fileName:
-                                                    data?.fileNamePdfJP ?? '');
+                                            showDialog(
+                                                context: context,
+                                                builder: (_) {
+                                                  return AlertDialog(
+                                                    title: const Text('見積書'),
+                                                    content: Column(
+                                                      mainAxisSize: MainAxisSize
+                                                          .min,
+                                                      children: [
+                                                        if (data?.fileNamePdfJP !=
+                                                            null)
+                                                          ListTile(
+                                                            title: const Text(
+                                                                '日本語'),
+                                                            onTap: () {
+                                                              openUrlInBrowser(
+                                                                  fileName:
+                                                                      data?.fileNamePdfJP ??
+                                                                          '');
+                                                            },
+                                                          ),
+                                                        if (data?.fileNamePdfEN !=
+                                                            null)
+                                                          ListTile(
+                                                            title: const Text(
+                                                                '英語'),
+                                                            onTap: () {
+                                                              openUrlInBrowser(
+                                                                  fileName:
+                                                                      data?.fileNamePdfEN ??
+                                                                          '');
+                                                            },
+                                                          ),
+                                                        if (data?.fileNamePdfVN !=
+                                                            null)
+                                                          ListTile(
+                                                            title: const Text(
+                                                                'ベトナム語'),
+                                                            onTap: () {
+                                                              openUrlInBrowser(
+                                                                  fileName:
+                                                                      data?.fileNamePdfVN ??
+                                                                          '');
+                                                            },
+                                                          ),
+                                                        if (data?.fileNamePdfZH !=
+                                                            null)
+                                                          ListTile(
+                                                            title: const Text(
+                                                                '中国語'),
+                                                            onTap: () {
+                                                              openUrlInBrowser(
+                                                                  fileName:
+                                                                      data?.fileNamePdfZH ??
+                                                                          '');
+                                                            },
+                                                          ),
+                                                        if (data?.fileNamePdfZHTW !=
+                                                            null)
+                                                          ListTile(
+                                                            title: const Text(
+                                                                '繁体字'),
+                                                            onTap: () {
+                                                              openUrlInBrowser(
+                                                                  fileName:
+                                                                      data?.fileNamePdfZHTW ??
+                                                                          '');
+                                                            },
+                                                          ),
+                                                      ],
+                                                    ),
+                                                  );
+                                                });
                                           }
                                         : null,
                                     child: const Text(
-                                      '請求書を発行する',
+                                      '言語を選択する',
                                       style: TextStyle(fontSize: 10),
                                     ),
                                   )
@@ -337,28 +476,28 @@ class EstimateScreen extends StatelessWidget {
                               },
                             ),
                           ),
-                          OutlinedButton(
-                            onPressed: () {},
-                            child: Text('CSV出力'),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: const Text(
-                              'コピーして新規作成',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: const Text(
-                              '新規作成',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
+                          // OutlinedButton(
+                          //   onPressed: () {},
+                          //   child: Text('CSV出力'),
+                          // ),
+                          // ElevatedButton(
+                          //   onPressed: () {},
+                          //   child: const Text(
+                          //     'コピーして新規作成',
+                          //     style: TextStyle(
+                          //       color: Colors.white,
+                          //     ),
+                          //   ),
+                          // ),
+                          // ElevatedButton(
+                          //   onPressed: () {},
+                          //   child: const Text(
+                          //     '新規作成',
+                          //     style: TextStyle(
+                          //       color: Colors.white,
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       );
                     },
