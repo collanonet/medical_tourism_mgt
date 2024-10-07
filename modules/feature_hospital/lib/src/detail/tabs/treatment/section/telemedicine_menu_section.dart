@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -191,7 +190,7 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                           width: context.appTheme.spacing.marginSmall,
                         ),
                         Text(
-                          '担当者を追加',
+                          '行を追加',
                           style: TextStyle(color: context.appTheme.primaryColor),
                         )
                       ],

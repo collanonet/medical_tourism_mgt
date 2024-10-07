@@ -82,7 +82,7 @@ class _TreatmentSectionState extends State<TreatmentSection> {
                             },
                       child: WithLoadingButton(
                         isLoading: value.loading,
-                        child: const Text('印刷する'),
+                        child: const Text('保存する'),
                       ),
                     );
                   },
