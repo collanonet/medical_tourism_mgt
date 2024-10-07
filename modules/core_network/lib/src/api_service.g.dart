@@ -8039,14 +8039,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<MedicalVisaTravelCompanionResponse>>
+  Future<MedicalVisaTravelCompanionResponse>
       getMedicalVisaTravelCompanion() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<MedicalVisaTravelCompanionResponse>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaTravelCompanionResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -8062,10 +8062,7 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var _value = _result.data!
-        .map((dynamic i) => MedicalVisaTravelCompanionResponse.fromJson(
-            i as Map<String, dynamic>))
-        .toList();
+    final _value = MedicalVisaTravelCompanionResponse.fromJson(_result.data!);
     return _value;
   }
 
@@ -8100,14 +8097,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<MedicalVisaNecessaryInJapanResponse>>
+  Future<MedicalVisaNecessaryInJapanResponse>
       getMedicalVisaNecessaryInJapan() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<MedicalVisaNecessaryInJapanResponse>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaNecessaryInJapanResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -8123,15 +8120,12 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var _value = _result.data!
-        .map((dynamic i) => MedicalVisaNecessaryInJapanResponse.fromJson(
-            i as Map<String, dynamic>))
-        .toList();
+    final _value = MedicalVisaNecessaryInJapanResponse.fromJson(_result.data!);
     return _value;
   }
 
   @override
-  Future<MedicalVisaTravelCompanionResponse> postMedicalVisaNecessaryInJapan(
+  Future<MedicalVisaNecessaryInJapanResponse> postMedicalVisaNecessaryInJapan(
       MedicalVisaNecessaryInJapanRequest
           medicalVisaNecessaryInJapanRequest) async {
     final _extra = <String, dynamic>{};
@@ -8140,7 +8134,7 @@ class _ApiService implements ApiService {
     final _data = <String, dynamic>{};
     _data.addAll(medicalVisaNecessaryInJapanRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MedicalVisaTravelCompanionResponse>(Options(
+        _setStreamType<MedicalVisaNecessaryInJapanResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
@@ -8156,7 +8150,7 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final _value = MedicalVisaTravelCompanionResponse.fromJson(_result.data!);
+    final _value = MedicalVisaNecessaryInJapanResponse.fromJson(_result.data!);
     return _value;
   }
 
