@@ -496,6 +496,10 @@ Future<Uint8List?> generatePdfFromInvoiceZH(
       await rootBundle.load('assets/fonts/Noto_Sans_ZH.ttf');
   final ttf = pw.Font.ttf(fontData);
 
+  final ByteData fontDataJP =
+  await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
+  final ttfJP = pw.Font.ttf(fontDataJP);
+
   pdf.addPage(
     pw.MultiPage(
       build: (context) => [
