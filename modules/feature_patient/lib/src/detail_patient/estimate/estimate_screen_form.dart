@@ -90,7 +90,10 @@ class EstimateScreenForm extends StatelessWidget {
                 inputFormatters: [
                   FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
                 ],
-                decoration: InputDecoration(labelText: '合計金額'),
+                decoration: InputDecoration(
+                  labelText: '合計金額',
+                  suffixText: '円',
+                ),
               ),
             ),
             SizedBox(
@@ -173,7 +176,10 @@ class EstimateScreenForm extends StatelessWidget {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration: InputDecoration(labelText: '税率'),
+                                  decoration: InputDecoration(
+                                    labelText: '税率',
+                                    suffixText: '%',
+                                  ),
                                 ),
                               ),
                               SizedBox(
@@ -185,8 +191,10 @@ class EstimateScreenForm extends StatelessWidget {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration:
-                                      InputDecoration(labelText: '税抜金額（円）'),
+                                  decoration: InputDecoration(
+                                    labelText: '税抜金額（円）',
+                                    suffixText: '円',
+                                  ),
                                 ),
                               ),
                               SizedBox(
@@ -198,8 +206,10 @@ class EstimateScreenForm extends StatelessWidget {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration:
-                                      InputDecoration(labelText: '消費税(円)'),
+                                  decoration: InputDecoration(
+                                    labelText: '消費税(円)',
+                                    suffixText: '円',
+                                  ),
                                 ),
                               ),
                             ],
@@ -349,7 +359,10 @@ class EstimateScreenForm extends StatelessWidget {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration: InputDecoration(labelText: '単価'),
+                                  decoration: InputDecoration(
+                                    labelText: '単価',
+                                    suffixText: '円',
+                                  ),
                                 ),
                               ),
                               SizedBox(
@@ -361,7 +374,10 @@ class EstimateScreenForm extends StatelessWidget {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration: InputDecoration(labelText: '金額'),
+                                  decoration: InputDecoration(
+                                    labelText: '金額',
+                                    suffixText: '円',
+                                  ),
                                 ),
                               ),
                               SizedBox(
@@ -373,7 +389,10 @@ class EstimateScreenForm extends StatelessWidget {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration: InputDecoration(labelText: '税率'),
+                                  decoration: InputDecoration(
+                                    labelText: '税率',
+                                    suffixText: '%',
+                                  ),
                                 ),
                               ),
                             ],
