@@ -142,6 +142,8 @@ class _InvoiceTableListState extends State<InvoiceTableList> {
                                 child: Text(
                                   data?.invoiceNumber ?? '',
                                   style: context.textTheme.bodyMedium,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                               boxRequired(
@@ -160,6 +162,8 @@ class _InvoiceTableListState extends State<InvoiceTableList> {
                                 child: Text(
                                   data?.subject ?? '',
                                   style: context.textTheme.bodyMedium,
+                                  maxLines: 1,
+                                  overflow: TextOverflow.ellipsis,
                                 ),
                               ),
                               Expanded(
