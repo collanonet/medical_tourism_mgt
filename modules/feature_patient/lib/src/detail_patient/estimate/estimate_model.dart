@@ -277,11 +277,31 @@ Future<Uint8List?> generatePdfFromQuotation(
     MedicalInvoiceRequest request, Patient patient, String language) async {
   final pdf = pw.Document();
 
-  final ByteData fontDataJP =
-      await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
+  late ByteData fontData;
+  late pw.Font ttf;
+
+  ByteData fontDataJP = await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
   pw.Font ttfJP = pw.Font.ttf(fontDataJP);
 
-  pw.Font ttf;
+  // Load font based on language
+  switch (language) {
+    case 'JP':
+      fontData = await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
+      break;
+    case 'ZH':
+      fontData = await rootBundle.load('assets/fonts/Noto_Sans_ZH.ttf');
+      break;
+    case 'ZHTW':
+      fontData = await rootBundle.load('assets/fonts/Noto_Sans_TC.ttf');
+      break;
+    case 'VN':
+      fontData = await rootBundle.load('assets/fonts/Roboto_VN.ttf');
+      break;
+    default: // EN
+      fontData = await rootBundle.load('assets/fonts/Open_Sans_EN.ttf');
+  }
+  ttf = pw.Font.ttf(fontData);
+
   String title;
   String quotationNumberLabel;
   String quotationDateLabel;
@@ -300,9 +320,6 @@ Future<Uint8List?> generatePdfFromQuotation(
   // Load appropriate fonts and text labels based on the language
   switch (language) {
     case 'JP':
-      final ByteData fontDataJP =
-          await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
-      ttf = pw.Font.ttf(fontDataJP);
       title = '見積書';
       quotationNumberLabel = '見積番号: ';
       quotationDateLabel = '見積日: ';
@@ -319,39 +336,7 @@ Future<Uint8List?> generatePdfFromQuotation(
       tableHeaders = ['', '取引日', '内訳', '数量', '単位', '単価', '金額', '税率'];
       break;
 
-    case 'EN':
-      final ByteData fontDataEN =
-          await rootBundle.load('assets/fonts/Open_Sans_EN.ttf');
-      ttf = pw.Font.ttf(fontDataEN);
-      title = 'Quotation';
-      quotationNumberLabel = 'Quotation number: ';
-      quotationDateLabel = 'Quotation date: ';
-      subjectLabel = 'Subject: ';
-      totalAmountLabel = 'Total amount: ';
-      contactLabel = 'Contact: ';
-      registrationNumberLabel = 'Registration number: ';
-      paymentDeadlineLabel = 'Date of Expiry';
-      remarksLabel = 'Remarks';
-      taxRateLabel = 'Tax rate';
-      taxExcludedAmountLabel = 'Tax excluded amount (yen)';
-      consumptionTaxLabel = 'Consumption tax (yen)';
-      totalAmountYenLabel = 'Total amount (yen)';
-      tableHeaders = [
-        '',
-        'Transaction Date',
-        'Detail',
-        'QTY',
-        'Unit',
-        'Unit price',
-        'Amount',
-        'Tax rate'
-      ];
-      break;
-
     case 'ZH':
-      final ByteData fontDataZH =
-          await rootBundle.load('assets/fonts/Noto_Sans_ZH.ttf');
-      ttf = pw.Font.ttf(fontDataZH);
       title = '估计';
       quotationNumberLabel = '报价单号: ';
       quotationDateLabel = '预计日期: ';
@@ -369,9 +354,6 @@ Future<Uint8List?> generatePdfFromQuotation(
       break;
 
     case 'ZHTW':
-      final ByteData fontDataZHTW =
-          await rootBundle.load('assets/fonts/Noto_Sans_TC.ttf');
-      ttf = pw.Font.ttf(fontDataZHTW);
       title = '估計';
       quotationNumberLabel = '報價單號: ';
       quotationDateLabel = '預計日期: ';
@@ -389,9 +371,6 @@ Future<Uint8List?> generatePdfFromQuotation(
       break;
 
     case 'VN':
-      final ByteData fontDataVN =
-          await rootBundle.load('assets/fonts/Roboto_VN.ttf');
-      ttf = pw.Font.ttf(fontDataVN);
       title = 'Ước lượng';
       quotationNumberLabel = 'số báo giá: ';
       quotationDateLabel = 'ngày dự kiến: ';
@@ -418,7 +397,29 @@ Future<Uint8List?> generatePdfFromQuotation(
       break;
 
     default:
-      throw Exception('Unsupported language');
+      title = 'Quotation';
+      quotationNumberLabel = 'Quotation number: ';
+      quotationDateLabel = 'Quotation date: ';
+      subjectLabel = 'Subject: ';
+      totalAmountLabel = 'Total amount: ';
+      contactLabel = 'Contact: ';
+      registrationNumberLabel = 'Registration number: ';
+      paymentDeadlineLabel = 'Date of Expiry';
+      remarksLabel = 'Remarks';
+      taxRateLabel = 'Tax rate';
+      taxExcludedAmountLabel = 'Tax excluded amount (yen)';
+      consumptionTaxLabel = 'Consumption tax (yen)';
+      totalAmountYenLabel = 'Total amount (yen)';
+      tableHeaders = [
+        '',
+        'Transaction Date',
+        'Detail',
+        'QTY',
+        'Unit',
+        'Unit price',
+        'Amount',
+        'Tax rate'
+      ];
   }
 
   // Add the content to the PDF

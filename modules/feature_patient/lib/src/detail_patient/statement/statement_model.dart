@@ -110,10 +110,8 @@ class StatementModel {
         hospitalRecord: formGroup.control('hospitalRecord').value,
       );
 
-      Uint8List? pathFileJP = await generatePdfFromInvoiceJP(
-        request,
-        patientData.value.requireData,
-      );
+      Uint8List? pathFileJP = await generatePdfFromInvoice(
+          request, patientData.value.requireData, 'JP');
       String? fileNamePdfJP;
 
       if (pathFileJP != null) {
@@ -130,10 +128,8 @@ class StatementModel {
         }
       }
 
-      Uint8List? pathFileZH = await generatePdfFromInvoiceZH(
-        request,
-        patientData.value.requireData,
-      );
+      Uint8List? pathFileZH = await generatePdfFromInvoice(
+          request, patientData.value.requireData, 'ZH');
       String? fileNamePdfZH;
 
       if (pathFileZH != null) {
@@ -150,10 +146,8 @@ class StatementModel {
         }
       }
 
-      Uint8List? pathFileZHTW = await generatePdfFromInvoiceZHTW(
-        request,
-        patientData.value.requireData,
-      );
+      Uint8List? pathFileZHTW = await generatePdfFromInvoice(
+          request, patientData.value.requireData, 'ZHTW');
       String? fileNamePdfZHTW;
 
       if (pathFileZHTW != null) {
@@ -170,10 +164,8 @@ class StatementModel {
         }
       }
 
-      Uint8List? pathFileVN = await generatePdfFromInvoiceVN(
-        request,
-        patientData.value.requireData,
-      );
+      Uint8List? pathFileVN = await generatePdfFromInvoice(
+          request, patientData.value.requireData, 'VN');
       String? fileNamePdfVN;
 
       if (pathFileVN != null) {
@@ -190,10 +182,8 @@ class StatementModel {
         }
       }
 
-      Uint8List? pathFileEN = await generatePdfFromInvoiceEN(
-        request,
-        patientData.value.requireData,
-      );
+      Uint8List? pathFileEN = await generatePdfFromInvoice(
+          request, patientData.value.requireData, 'EN');
       String? fileNamePdfEN;
 
       if (pathFileEN != null) {
@@ -269,13 +259,158 @@ class StatementModel {
   }
 }
 
-Future<Uint8List?> generatePdfFromInvoiceJP(
-    MedicalInvoiceRequest invoice, Patient patient) async {
+Future<Uint8List?> generatePdfFromInvoice(
+    MedicalInvoiceRequest invoice, Patient patient, String language) async {
   final pdf = pw.Document();
-  final ByteData fontData =
-      await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
-  final ttf = pw.Font.ttf(fontData);
+  late ByteData fontData;
+  late pw.Font ttf;
 
+  ByteData fontDataJP = await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
+  pw.Font ttfJP = pw.Font.ttf(fontDataJP);
+
+  // Load font based on language
+  switch (language) {
+    case 'JP':
+      fontData = await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
+      break;
+    case 'ZH':
+      fontData = await rootBundle.load('assets/fonts/Noto_Sans_ZH.ttf');
+      break;
+    case 'ZHTW':
+      fontData = await rootBundle.load('assets/fonts/Noto_Sans_TC.ttf');
+      break;
+    case 'VN':
+      fontData = await rootBundle.load('assets/fonts/Roboto_VN.ttf');
+      break;
+    default: // EN
+      fontData = await rootBundle.load('assets/fonts/Open_Sans_EN.ttf');
+  }
+  ttf = pw.Font.ttf(fontData);
+
+  // Labels for different languages
+  String title,
+      quotationNumberLabel,
+      quotationDateLabel,
+      subjectLabel,
+      totalAmountLabel,
+      contactLabel,
+      registrationNumberLabel,
+      paymentDeadlineLabel,
+      bankTransfer,
+      remarksLabel,
+      taxRateLabel,
+      taxExcludedAmountLabel,
+      consumptionTaxLabel,
+      totalAmountYenLabel;
+  List<String> tableHeaders;
+
+  // Assign labels based on the language
+  switch (language) {
+    case 'JP':
+      title = '請求書';
+      quotationNumberLabel = '請求書番号: ';
+      quotationDateLabel = '見積日: ';
+      subjectLabel = '件名: ';
+      totalAmountLabel = 'ご請求額: ';
+      contactLabel = '担当者: ';
+      registrationNumberLabel = '登録番号: ';
+      paymentDeadlineLabel = '有効期限';
+      bankTransfer = 'お振込先';
+      remarksLabel = '備考';
+      taxRateLabel = '税率';
+      taxExcludedAmountLabel = '税抜合線(門)';
+      consumptionTaxLabel = '消費税(円)';
+      totalAmountYenLabel = '合計金額(円)';
+      tableHeaders = ['', '取引日', '内訳', '数量', '単位', '単価', '金額', '税率'];
+      break;
+    case 'ZH':
+      title = '发票';
+      quotationNumberLabel = '发票号码: ';
+      quotationDateLabel = '预计日期: ';
+      subjectLabel = '件名: ';
+      totalAmountLabel = '主题: ';
+      contactLabel = '经理: ';
+      registrationNumberLabel = '注册号: ';
+      paymentDeadlineLabel = '到期日期';
+      bankTransfer = '转移';
+      remarksLabel = '评论';
+      taxRateLabel = '税率';
+      taxExcludedAmountLabel = '减税线（门）';
+      consumptionTaxLabel = '消费税（日元）';
+      totalAmountYenLabel = '总金额（日元）';
+      tableHeaders = ['', '交易日', '分解', '数量', '首位', '单价', '数量', '税率'];
+      break;
+    case 'ZHTW':
+      title = '發票';
+      quotationNumberLabel = '發票號碼: ';
+      quotationDateLabel = '預計日期: ';
+      subjectLabel = '主題: ';
+      totalAmountLabel = '計費金額: ';
+      contactLabel = '担当者: ';
+      registrationNumberLabel = '註冊號: ';
+      paymentDeadlineLabel = '到期日期';
+      bankTransfer = '轉移';
+      remarksLabel = '備考';
+      taxRateLabel = '稅率';
+      taxExcludedAmountLabel = '減稅線（門）';
+      consumptionTaxLabel = '消費稅（日圓）';
+      totalAmountYenLabel = '總金額（日圓）';
+      tableHeaders = ['', '交易日', '分解', '數量', '首位', '單價', '數量', '稅率'];
+      break;
+    case 'VN':
+      title = 'hóa đơn';
+      quotationNumberLabel = 'số hóa đơn: ';
+      quotationDateLabel = 'ngày dự kiến: ';
+      subjectLabel = 'chủ thể: ';
+      totalAmountLabel = 'Số tiền được lập hóa đơn: ';
+      contactLabel = 'giám đốc: ';
+      registrationNumberLabel = 'Số đăng ký: ';
+      paymentDeadlineLabel = 'ngày hết hạn';
+      bankTransfer = 'Chuyển khoản';
+      remarksLabel = 'nhận xét';
+      taxRateLabel = 'thuế suất';
+      taxExcludedAmountLabel = 'Dòng khấu trừ thuế (cổng)';
+      consumptionTaxLabel = 'Thuế tiêu dùng (yên)';
+      totalAmountYenLabel = 'Tổng số tiền (yên)';
+      tableHeaders = [
+        '',
+        'ngày giao dịch',
+        'sự cố',
+        'Số lượng',
+        'Vị trí đầu tiên',
+        'đơn giá',
+        'số lượng',
+        'thuế suất'
+      ];
+      break;
+    default: // EN
+      title = 'Invoice';
+      quotationNumberLabel = 'Invoice Number: ';
+      quotationDateLabel = 'Invoice Date: ';
+      subjectLabel = 'Subject: ';
+      totalAmountLabel = 'Amount charged: ';
+      contactLabel = 'Contact: ';
+      registrationNumberLabel = 'Registration number: ';
+      paymentDeadlineLabel = 'Date of expiry';
+      bankTransfer = 'Bank transfer';
+      remarksLabel = 'Remarks';
+      taxRateLabel = 'Tax rate';
+      taxExcludedAmountLabel = 'Tax excluded line (gate)';
+      consumptionTaxLabel = 'Consumption tax (yen)';
+      totalAmountYenLabel = 'Total amount (yen)';
+      tableHeaders = [
+        '',
+        'Transaction Date',
+        'Detail',
+        'QTY',
+        'Unit',
+        'Unit price',
+        'Amount',
+        'Tax rate'
+      ];
+  }
+
+  // Create PDF content
   pdf.addPage(
     pw.MultiPage(
       build: (context) => [
@@ -284,7 +419,7 @@ Future<Uint8List?> generatePdfFromInvoiceJP(
           child: pw.Align(
             alignment: pw.Alignment.center,
             child: pw.Text(
-              '請求書',
+              title,
               style: pw.TextStyle(
                 font: ttf,
                 fontSize: 30,
@@ -293,69 +428,100 @@ Future<Uint8List?> generatePdfFromInvoiceJP(
             ),
           ),
         ),
-        pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text(
-            '請求書番号: ${invoice.invoiceNumber ?? ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
-          ),
-        ),
+        pw.Row(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            mainAxisAlignment: pw.MainAxisAlignment.end,
+            children: [
+              pw.Text(
+                quotationNumberLabel,
+                style: pw.TextStyle(font: ttf),
+              ),
+              pw.Text(
+                invoice.invoiceNumber ?? '',
+                style: pw.TextStyle(font: ttfJP),
+              ),
+            ]),
         pw.Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
+          pw.Row(
+              crossAxisAlignment: pw.CrossAxisAlignment.start,
+              mainAxisAlignment: pw.MainAxisAlignment.start,
+              children: [
+                pw.Text(
+                  '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
+                  ' 様',
+                  style: pw.TextStyle(font: ttfJP),
+                ),
+              ]),
+          pw.Row(
+              crossAxisAlignment: pw.CrossAxisAlignment.end,
+              mainAxisAlignment: pw.MainAxisAlignment.end,
+              children: [
+                pw.Text(
+                  quotationDateLabel,
+                  style: pw.TextStyle(font: ttf),
+                ),
+                pw.Text(
+                  invoice.invoiceDate != null
+                      ? Dates.formatFullDate(invoice.invoiceDate!)
+                      : '',
+                  style: pw.TextStyle(font: ttfJP),
+                ),
+              ])
+        ]),
+        pw.Row(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            mainAxisAlignment: pw.MainAxisAlignment.end,
+            children: [
+              pw.Text(
+                contactLabel,
+                style: pw.TextStyle(font: ttf),
+              ),
+              pw.Text(
+                invoice.contact ?? '',
+                style: pw.TextStyle(font: ttfJP),
+              ),
+            ]),
+        pw.Row(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            mainAxisAlignment: pw.MainAxisAlignment.end,
+            children: [
+              pw.Text(
+                registrationNumberLabel,
+                style: pw.TextStyle(font: ttf),
+              ),
+              pw.Text(
+                invoice.registrationNumber ?? '',
+                style: pw.TextStyle(font: ttfJP),
+              ),
+            ]),
+        pw.Row(children: [
           pw.Text(
-            '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
-            '様',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
+            subjectLabel,
+            style: pw.TextStyle(font: ttf),
           ),
           pw.Text(
-            '見積日: ${invoice.invoiceDate != null ? Dates.formatFullDate(invoice.invoiceDate!) : ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
+            invoice.subject ?? '',
+            style: pw.TextStyle(font: ttfJP),
           ),
         ]),
-        pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text(
-            '担当者: ${invoice.contact ?? ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
+        pw.Row(children: [
+          pw.Text(
+            totalAmountLabel,
+            style: pw.TextStyle(font: ttf),
           ),
-        ),
-        pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text(
-            '登録番号: ${invoice.registrationNumber ?? ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
+          pw.Text(
+            '${invoice.amountBilled ?? ''} 円',
+            style: pw.TextStyle(font: ttfJP),
           ),
-        ),
-        pw.Text(
-          '件名: ${invoice.subject ?? ''}',
-          style: pw.TextStyle(
-            font: ttf,
-          ),
-          textAlign: pw.TextAlign.left,
-        ),
-        pw.Text(
-          'ご請求額: ${invoice.amountBilled ?? ''}',
-          style: pw.TextStyle(
-            font: ttf,
-          ),
-          textAlign: pw.TextAlign.left,
-        ),
+        ]),
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
-          headers: ['税率', '税抜合線(門)', '消費税(円)', '合計金額(円)'],
+          headers: [
+            taxRateLabel,
+            taxExcludedAmountLabel,
+            consumptionTaxLabel,
+            totalAmountYenLabel
+          ],
           headerStyle: pw.TextStyle(
             font: ttf,
           ),
@@ -371,18 +537,18 @@ Future<Uint8List?> generatePdfFromInvoiceJP(
             color: PdfColor.fromInt(0xffe0e0e0),
           ),
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfJP,
           ),
           cellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfJP,
           ),
           data: invoice.totalPayment!
               .map((payment) => [
-                    payment.taxRate ?? '',
-                    payment.amountExcludingTaxInYen ?? '',
-                    payment.consumptionTaxAmountInYen ?? '',
-                    (payment.amountExcludingTaxInYen ?? 0) +
-                        (payment.consumptionTaxAmountInYen ?? 0),
+                    payment.taxRate ?? '' ' %',
+                    payment.amountExcludingTaxInYen ?? '' ' 円',
+                    payment.consumptionTaxAmountInYen ?? '' ' 円',
+                    '${(payment.amountExcludingTaxInYen ?? 0) + (payment.consumptionTaxAmountInYen ?? 0)}'
+                        ' 円',
                   ])
               .toList(),
         ),
@@ -408,31 +574,31 @@ Future<Uint8List?> generatePdfFromInvoiceJP(
             );
           },
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfJP,
           ),
           cellStyle: pw.TextStyle(
             font: ttf,
           ),
           data: [
             [
-              '有効期限',
+              paymentDeadlineLabel,
               invoice.paymentDeadline != null
                   ? Dates.formatFullDate(invoice.paymentDeadline!)
                   : '',
             ],
             [
-              'お振込み',
+              bankTransfer, // Customizable based on language
               invoice.bankTransferInformation ?? '',
             ],
             [
-              '備考',
+              remarksLabel,
               invoice.remarks ?? '',
             ]
           ],
         ),
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
-          headers: ['', '取引日', '内訳', '数量', '单位', '単価', '金額', '税率'],
+          headers: tableHeaders,
           headerStyle: pw.TextStyle(
             font: ttf,
           ),
@@ -452,10 +618,10 @@ Future<Uint8List?> generatePdfFromInvoiceJP(
             color: PdfColor.fromInt(0xffe0e0e0),
           ),
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfJP,
           ),
           cellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfJP,
           ),
           data: invoice.item!
               .map((item) => [
@@ -468,9 +634,9 @@ Future<Uint8List?> generatePdfFromInvoiceJP(
                     item.details ?? '',
                     item.quantity ?? '',
                     item.unit ?? '',
-                    item.unitPrice ?? '',
-                    item.amount ?? '',
-                    item.taxRate ?? '',
+                    item.unitPrice ?? '' ' 円',
+                    item.amount ?? '' ' 円',
+                    item.taxRate ?? '' ' %',
                   ])
               .toList(),
         ),
@@ -485,903 +651,6 @@ Future<Uint8List?> generatePdfFromInvoiceJP(
     if (kDebugMode) {
       print(e);
     }
-    return null;
-  }
-}
-
-Future<Uint8List?> generatePdfFromInvoiceZH(
-    MedicalInvoiceRequest invoice, Patient patient) async {
-  final pdf = pw.Document();
-  final ByteData fontData =
-      await rootBundle.load('assets/fonts/Noto_Sans_ZH.ttf');
-  final ttf = pw.Font.ttf(fontData);
-
-  final ByteData fontDataJP =
-  await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
-  final ttfJP = pw.Font.ttf(fontDataJP);
-
-  pdf.addPage(
-    pw.MultiPage(
-      build: (context) => [
-        pw.Header(
-          level: 0,
-          child: pw.Align(
-            alignment: pw.Alignment.center,
-            child: pw.Text(
-              '发票',
-              style: pw.TextStyle(
-                font: ttf,
-                fontSize: 30,
-              ),
-              textAlign: pw.TextAlign.center,
-            ),
-          ),
-        ),
-        pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text(
-            '发票号码: ${invoice.invoiceNumber ?? ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
-          ),
-        ),
-        pw.Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
-          pw.Text(
-            '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
-            '先生。',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-          ),
-          pw.Text(
-            '预计日期: ${invoice.invoiceDate != null ? Dates.formatFullDate(invoice.invoiceDate!) : ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
-          ),
-        ]),
-        pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text(
-            '经理: ${invoice.contact ?? ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
-          ),
-        ),
-        pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text(
-            '注册号: ${invoice.registrationNumber ?? ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
-          ),
-        ),
-        pw.Text(
-          '件名: ${invoice.subject ?? ''}',
-          style: pw.TextStyle(
-            font: ttf,
-          ),
-          textAlign: pw.TextAlign.left,
-        ),
-        pw.Text(
-          '主题: ${invoice.amountBilled ?? ''}',
-          style: pw.TextStyle(
-            font: ttf,
-          ),
-          textAlign: pw.TextAlign.left,
-        ),
-        pw.SizedBox(height: 20),
-        pw.TableHelper.fromTextArray(
-          headers: ['税率', '减税线（门）', '消费税（日元）', '总金额（日元）'],
-          headerStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          columnWidths: {
-            0: const pw.FlexColumnWidth(1),
-            1: const pw.FlexColumnWidth(2),
-            2: const pw.FlexColumnWidth(2),
-            3: const pw.FlexColumnWidth(2),
-          },
-          headerAlignment: pw.Alignment.centerLeft,
-          cellAlignment: pw.Alignment.centerLeft,
-          headerCellDecoration: const pw.BoxDecoration(
-            color: PdfColor.fromInt(0xffe0e0e0),
-          ),
-          oddCellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          cellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          data: invoice.totalPayment!
-              .map((payment) => [
-                    payment.taxRate ?? '',
-                    payment.amountExcludingTaxInYen ?? '',
-                    payment.consumptionTaxAmountInYen ?? '',
-                    (payment.amountExcludingTaxInYen ?? 0) +
-                        (payment.consumptionTaxAmountInYen ?? 0),
-                  ])
-              .toList(),
-        ),
-        pw.SizedBox(height: 20),
-        pw.TableHelper.fromTextArray(
-          columnWidths: {
-            0: const pw.FlexColumnWidth(1),
-            1: const pw.FlexColumnWidth(2),
-          },
-          headerStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          headerAlignment: pw.Alignment.centerLeft,
-          cellAlignment: pw.Alignment.centerLeft,
-          cellDecoration: (rowIndex, value, columnIndex) {
-            if (columnIndex == 0) {
-              return const pw.BoxDecoration(
-                color: PdfColor.fromInt(0xffe0e0e0),
-              );
-            }
-            return const pw.BoxDecoration(
-              color: PdfColor.fromInt(0xffffffff),
-            );
-          },
-          oddCellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          cellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          data: [
-            [
-              '到期日期',
-              invoice.paymentDeadline != null
-                  ? Dates.formatFullDate(invoice.paymentDeadline!)
-                  : '',
-            ],
-            [
-              '转移',
-              invoice.bankTransferInformation ?? '',
-            ],
-            [
-              '评论',
-              invoice.remarks ?? '',
-            ]
-          ],
-        ),
-        pw.SizedBox(height: 20),
-        pw.TableHelper.fromTextArray(
-          headers: ['', '交易日', '分解', '数量', '首位', '单价', '数量', '税率'],
-          headerStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          columnWidths: {
-            0: const pw.FlexColumnWidth(0.5),
-            1: const pw.FlexColumnWidth(1),
-            2: const pw.FlexColumnWidth(2),
-            3: const pw.FlexColumnWidth(1),
-            4: const pw.FlexColumnWidth(1),
-            5: const pw.FlexColumnWidth(1),
-            6: const pw.FlexColumnWidth(1),
-            7: const pw.FlexColumnWidth(1),
-          },
-          headerAlignment: pw.Alignment.centerLeft,
-          cellAlignment: pw.Alignment.centerLeft,
-          headerCellDecoration: const pw.BoxDecoration(
-            color: PdfColor.fromInt(0xffe0e0e0),
-          ),
-          oddCellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          cellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          data: invoice.item!
-              .map((item) => [
-                    (invoice.item?.indexWhere((element) => element == item) ??
-                            0) +
-                        1,
-                    item.transactionDate != null
-                        ? Dates.formatFullDate(item.transactionDate!)
-                        : '',
-                    item.details ?? '',
-                    item.quantity ?? '',
-                    item.unit ?? '',
-                    item.unitPrice ?? '',
-                    item.amount ?? '',
-                    item.taxRate ?? '',
-                  ])
-              .toList(),
-        ),
-      ],
-    ),
-  );
-
-  try {
-    Uint8List pdfBytes = await pdf.save();
-    return pdfBytes;
-  } catch (e) {
-    if (kDebugMode) {
-      print(e);
-    }
-    return null;
-  }
-}
-
-Future<Uint8List?> generatePdfFromInvoiceZHTW(
-    MedicalInvoiceRequest invoice, Patient patient) async {
-  final pdf = pw.Document();
-  final ByteData fontData =
-      await rootBundle.load('assets/fonts/Noto_Sans_TC.ttf');
-  final ttf = pw.Font.ttf(fontData);
-
-  pdf.addPage(
-    pw.MultiPage(
-      build: (context) => [
-        pw.Header(
-          level: 0,
-          child: pw.Align(
-            alignment: pw.Alignment.center,
-            child: pw.Text(
-              '發票',
-              style: pw.TextStyle(
-                font: ttf,
-                fontSize: 30,
-              ),
-              textAlign: pw.TextAlign.center,
-            ),
-          ),
-        ),
-        pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text(
-            '發票號碼: ${invoice.invoiceNumber ?? ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
-          ),
-        ),
-        pw.Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
-          pw.Text(
-            '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
-            '先生。',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-          ),
-          pw.Text(
-            '預計日期: ${invoice.invoiceDate != null ? Dates.formatFullDate(invoice.invoiceDate!) : ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
-          ),
-        ]),
-        pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text(
-            '担当者: ${invoice.contact ?? ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
-          ),
-        ),
-        pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text(
-            '註冊號: ${invoice.registrationNumber ?? ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
-          ),
-        ),
-        pw.Text(
-          '主題: ${invoice.subject ?? ''}',
-          style: pw.TextStyle(
-            font: ttf,
-          ),
-          textAlign: pw.TextAlign.left,
-        ),
-        pw.Text(
-          '計費金額: ${invoice.amountBilled ?? ''}',
-          style: pw.TextStyle(
-            font: ttf,
-          ),
-          textAlign: pw.TextAlign.left,
-        ),
-        pw.SizedBox(height: 20),
-        pw.TableHelper.fromTextArray(
-          headers: ['稅率', '減稅線（門）', '消費稅（日圓）', '總金額（日圓）'],
-          headerStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          columnWidths: {
-            0: const pw.FlexColumnWidth(1),
-            1: const pw.FlexColumnWidth(2),
-            2: const pw.FlexColumnWidth(2),
-            3: const pw.FlexColumnWidth(2),
-          },
-          headerAlignment: pw.Alignment.centerLeft,
-          cellAlignment: pw.Alignment.centerLeft,
-          headerCellDecoration: const pw.BoxDecoration(
-            color: PdfColor.fromInt(0xffe0e0e0),
-          ),
-          oddCellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          cellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          data: invoice.totalPayment!
-              .map((payment) => [
-                    payment.taxRate ?? '',
-                    payment.amountExcludingTaxInYen ?? '',
-                    payment.consumptionTaxAmountInYen ?? '',
-                    (payment.amountExcludingTaxInYen ?? 0) +
-                        (payment.consumptionTaxAmountInYen ?? 0),
-                  ])
-              .toList(),
-        ),
-        pw.SizedBox(height: 20),
-        pw.TableHelper.fromTextArray(
-          columnWidths: {
-            0: const pw.FlexColumnWidth(1),
-            1: const pw.FlexColumnWidth(2),
-          },
-          headerAlignment: pw.Alignment.centerLeft,
-          cellAlignment: pw.Alignment.centerLeft,
-          cellDecoration: (rowIndex, value, columnIndex) {
-            if (columnIndex == 0) {
-              return const pw.BoxDecoration(
-                color: PdfColor.fromInt(0xffe0e0e0),
-              );
-            }
-            return const pw.BoxDecoration(
-              color: PdfColor.fromInt(0xffffffff),
-            );
-          },
-          oddCellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          cellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          data: [
-            [
-              '到期日期',
-              invoice.paymentDeadline != null
-                  ? Dates.formatFullDate(invoice.paymentDeadline!)
-                  : '',
-            ],
-            [
-              '轉移',
-              invoice.bankTransferInformation ?? '',
-            ],
-            [
-              '備考',
-              invoice.remarks ?? '',
-            ]
-          ],
-        ),
-        pw.SizedBox(height: 20),
-        pw.TableHelper.fromTextArray(
-          headers: ['', '交易日', '分解', '數量', '首位', '單價', '數量', '稅率'],
-          headerStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          columnWidths: {
-            0: const pw.FlexColumnWidth(0.5),
-            1: const pw.FlexColumnWidth(1),
-            2: const pw.FlexColumnWidth(2),
-            3: const pw.FlexColumnWidth(1),
-            4: const pw.FlexColumnWidth(1),
-            5: const pw.FlexColumnWidth(1),
-            6: const pw.FlexColumnWidth(1),
-            7: const pw.FlexColumnWidth(1),
-          },
-          headerAlignment: pw.Alignment.centerLeft,
-          cellAlignment: pw.Alignment.centerLeft,
-          headerCellDecoration: const pw.BoxDecoration(
-            color: PdfColor.fromInt(0xffe0e0e0),
-          ),
-          oddCellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          cellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          data: invoice.item!
-              .map((item) => [
-                    (invoice.item?.indexWhere((element) => element == item) ??
-                            0) +
-                        1,
-                    item.transactionDate != null
-                        ? Dates.formatFullDate(item.transactionDate!)
-                        : '',
-                    item.details ?? '',
-                    item.quantity ?? '',
-                    item.unit ?? '',
-                    item.unitPrice ?? '',
-                    item.amount ?? '',
-                    item.taxRate ?? '',
-                  ])
-              .toList(),
-        ),
-      ],
-    ),
-  );
-
-  try {
-    Uint8List pdfBytes = await pdf.save();
-    return pdfBytes;
-  } catch (e) {
-    if (kDebugMode) {
-      print(e);
-    }
-    return null;
-  }
-}
-
-Future<Uint8List?> generatePdfFromInvoiceVN(
-    MedicalInvoiceRequest invoice, Patient patient) async {
-  final pdf = pw.Document();
-  final ByteData fontData =
-      await rootBundle.load('assets/fonts/Roboto_VN.ttf');
-  final ttf = pw.Font.ttf(fontData);
-
-  pdf.addPage(
-    pw.MultiPage(
-      build: (context) => [
-        pw.Header(
-          level: 0,
-          child: pw.Align(
-            alignment: pw.Alignment.center,
-            child: pw.Text(
-              'hóa đơn',
-              style: pw.TextStyle(
-                font: ttf,
-                fontSize: 30,
-              ),
-              textAlign: pw.TextAlign.center,
-            ),
-          ),
-        ),
-        pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text(
-            'số hóa đơn: ${invoice.invoiceNumber ?? ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
-          ),
-        ),
-        pw.Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
-          pw.Text(
-            '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
-            'Ông',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-          ),
-          pw.Text(
-            'ngày dự kiến: ${invoice.invoiceDate != null ? Dates.formatFullDate(invoice.invoiceDate!) : ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
-          ),
-        ]),
-        pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text(
-            'giám đốc: ${invoice.contact ?? ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
-          ),
-        ),
-        pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text(
-            'Số đăng ký: ${invoice.registrationNumber ?? ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
-          ),
-        ),
-        pw.Text(
-          'chủ thể: ${invoice.subject ?? ''}',
-          style: pw.TextStyle(
-            font: ttf,
-          ),
-          textAlign: pw.TextAlign.left,
-        ),
-        pw.Text(
-          'Số tiền được lập hóa đơn: ${invoice.amountBilled ?? ''}',
-          style: pw.TextStyle(
-            font: ttf,
-          ),
-          textAlign: pw.TextAlign.left,
-        ),
-        pw.SizedBox(height: 20),
-        pw.TableHelper.fromTextArray(
-          headers: ['thuế suất', 'Dòng khấu trừ thuế (cổng)', 'Thuế tiêu dùng (yên)', 'Tổng số tiền (yên)'],
-          headerStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          columnWidths: {
-            0: const pw.FlexColumnWidth(1),
-            1: const pw.FlexColumnWidth(2),
-            2: const pw.FlexColumnWidth(2),
-            3: const pw.FlexColumnWidth(2),
-          },
-          headerAlignment: pw.Alignment.centerLeft,
-          cellAlignment: pw.Alignment.centerLeft,
-          headerCellDecoration: const pw.BoxDecoration(
-            color: PdfColor.fromInt(0xffe0e0e0),
-          ),
-          oddCellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          cellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          data: invoice.totalPayment!
-              .map((payment) => [
-                    payment.taxRate ?? '',
-                    payment.amountExcludingTaxInYen ?? '',
-                    payment.consumptionTaxAmountInYen ?? '',
-                    (payment.amountExcludingTaxInYen ?? 0) +
-                        (payment.consumptionTaxAmountInYen ?? 0),
-                  ])
-              .toList(),
-        ),
-        pw.SizedBox(height: 20),
-        pw.TableHelper.fromTextArray(
-          columnWidths: {
-            0: const pw.FlexColumnWidth(1),
-            1: const pw.FlexColumnWidth(2),
-          },
-          headerStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          headerAlignment: pw.Alignment.centerLeft,
-          cellAlignment: pw.Alignment.centerLeft,
-          cellDecoration: (rowIndex, value, columnIndex) {
-            if (columnIndex == 0) {
-              return const pw.BoxDecoration(
-                color: PdfColor.fromInt(0xffe0e0e0),
-              );
-            }
-            return const pw.BoxDecoration(
-              color: PdfColor.fromInt(0xffffffff),
-            );
-          },
-          oddCellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          cellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          data: [
-            [
-              'ngày hết hạn',
-              invoice.paymentDeadline != null
-                  ? Dates.formatFullDate(invoice.paymentDeadline!)
-                  : '',
-            ],
-            [
-              'Chuyển khoản',
-              invoice.bankTransferInformation ?? '',
-            ],
-            [
-              'nhận xét',
-              invoice.remarks ?? '',
-            ]
-          ],
-        ),
-        pw.SizedBox(height: 20),
-        pw.TableHelper.fromTextArray(
-          headers: ['', 'ngày giao dịch', 'sự cố', 'Số lượng', 'Vị trí đầu tiên', 'đơn giá', 'số lượng', 'thuế suất'],
-          headerStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          columnWidths: {
-            0: const pw.FlexColumnWidth(0.5),
-            1: const pw.FlexColumnWidth(1),
-            2: const pw.FlexColumnWidth(2),
-            3: const pw.FlexColumnWidth(1),
-            4: const pw.FlexColumnWidth(1),
-            5: const pw.FlexColumnWidth(1),
-            6: const pw.FlexColumnWidth(1),
-            7: const pw.FlexColumnWidth(1),
-          },
-          headerAlignment: pw.Alignment.centerLeft,
-          cellAlignment: pw.Alignment.centerLeft,
-          headerCellDecoration: const pw.BoxDecoration(
-            color: PdfColor.fromInt(0xffe0e0e0),
-          ),
-          oddCellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          cellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          data: invoice.item!
-              .map((item) => [
-                    (invoice.item?.indexWhere((element) => element == item) ??
-                            0) +
-                        1,
-                    item.transactionDate != null
-                        ? Dates.formatFullDate(item.transactionDate!)
-                        : '',
-                    item.details ?? '',
-                    item.quantity ?? '',
-                    item.unit ?? '',
-                    item.unitPrice ?? '',
-                    item.amount ?? '',
-                    item.taxRate ?? '',
-                  ])
-              .toList(),
-        ),
-      ],
-    ),
-  );
-
-  try {
-    Uint8List pdfBytes = await pdf.save();
-    return pdfBytes;
-  } catch (e) {
-    if (kDebugMode) {
-      print(e);
-    }
-    return null;
-  }
-}
-
-Future<Uint8List?> generatePdfFromInvoiceEN(
-    MedicalInvoiceRequest invoice, Patient patient) async {
-  final pdf = pw.Document();
-  final ByteData fontData =
-      await rootBundle.load('assets/fonts/Open_Sans_EN.ttf');
-  final ttf = pw.Font.ttf(fontData);
-
-  pdf.addPage(
-    pw.MultiPage(
-      build: (context) => [
-        pw.Header(
-          level: 0,
-          child: pw.Align(
-            alignment: pw.Alignment.center,
-            child: pw.Text(
-              'Invoice',
-              style: pw.TextStyle(
-                font: ttf,
-                fontSize: 30,
-              ),
-              textAlign: pw.TextAlign.center,
-            ),
-          ),
-        ),
-        pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text(
-            'Invoice Number: ${invoice.invoiceNumber ?? ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
-          ),
-        ),
-        pw.Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
-          pw.Text(
-            'Mr/Ms. ${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-          ),
-          pw.Text(
-            'Invoice Date: ${invoice.invoiceDate != null ? Dates.formatFullDate(invoice.invoiceDate!) : ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
-          ),
-        ]),
-        pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text(
-            'Contact: ${invoice.contact ?? ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
-          ),
-        ),
-        pw.Align(
-          alignment: pw.Alignment.centerRight,
-          child: pw.Text(
-            'Registration number: ${invoice.registrationNumber ?? ''}',
-            style: pw.TextStyle(
-              font: ttf,
-            ),
-            textAlign: pw.TextAlign.right,
-          ),
-        ),
-        pw.Text(
-          'Subject: ${invoice.subject ?? ''}',
-          style: pw.TextStyle(
-            font: ttf,
-          ),
-          textAlign: pw.TextAlign.left,
-        ),
-        pw.Text(
-          'Amount charged: ${invoice.amountBilled ?? ''}',
-          style: pw.TextStyle(
-            font: ttf,
-          ),
-          textAlign: pw.TextAlign.left,
-        ),
-        pw.SizedBox(height: 20),
-        pw.TableHelper.fromTextArray(
-          headers: ['Tax rate', 'Tax excluded line (gate)', 'Consumption tax (yen)', 'Total amount (yen)'],
-          headerStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          columnWidths: {
-            0: const pw.FlexColumnWidth(1),
-            1: const pw.FlexColumnWidth(2),
-            2: const pw.FlexColumnWidth(2),
-            3: const pw.FlexColumnWidth(2),
-          },
-          headerAlignment: pw.Alignment.centerLeft,
-          cellAlignment: pw.Alignment.centerLeft,
-          headerCellDecoration: const pw.BoxDecoration(
-            color: PdfColor.fromInt(0xffe0e0e0),
-          ),
-          oddCellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          cellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          data: invoice.totalPayment!
-              .map((payment) => [
-                    payment.taxRate ?? '',
-                    payment.amountExcludingTaxInYen ?? '',
-                    payment.consumptionTaxAmountInYen ?? '',
-                    (payment.amountExcludingTaxInYen ?? 0) +
-                        (payment.consumptionTaxAmountInYen ?? 0),
-                  ])
-              .toList(),
-        ),
-        pw.SizedBox(height: 20),
-        pw.TableHelper.fromTextArray(
-          columnWidths: {
-            0: const pw.FlexColumnWidth(1),
-            1: const pw.FlexColumnWidth(2),
-          },
-          headerStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          headerAlignment: pw.Alignment.centerLeft,
-          cellAlignment: pw.Alignment.centerLeft,
-          cellDecoration: (rowIndex, value, columnIndex) {
-            if (columnIndex == 0) {
-              return const pw.BoxDecoration(
-                color: PdfColor.fromInt(0xffe0e0e0),
-              );
-            }
-            return const pw.BoxDecoration(
-              color: PdfColor.fromInt(0xffffffff),
-            );
-          },
-          oddCellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          cellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          data: [
-            [
-              'Date of expiry',
-              invoice.paymentDeadline != null
-                  ? Dates.formatFullDate(invoice.paymentDeadline!)
-                  : '',
-            ],
-            [
-              'Bank transfer',
-              invoice.bankTransferInformation ?? '',
-            ],
-            [
-              'Remarks',
-              invoice.remarks ?? '',
-            ]
-          ],
-        ),
-        pw.SizedBox(height: 20),
-        pw.TableHelper.fromTextArray(
-          headers: ['', 'Transaction Date', 'Detail', 'QTY', 'Unit', 'Unit price', 'Amount', 'Tax rate'],
-          headerStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          columnWidths: {
-            0: const pw.FlexColumnWidth(0.5),
-            1: const pw.FlexColumnWidth(1),
-            2: const pw.FlexColumnWidth(2),
-            3: const pw.FlexColumnWidth(1),
-            4: const pw.FlexColumnWidth(1),
-            5: const pw.FlexColumnWidth(1),
-            6: const pw.FlexColumnWidth(1),
-            7: const pw.FlexColumnWidth(1),
-          },
-          headerAlignment: pw.Alignment.centerLeft,
-          cellAlignment: pw.Alignment.centerLeft,
-          headerCellDecoration: const pw.BoxDecoration(
-            color: PdfColor.fromInt(0xffe0e0e0),
-          ),
-          oddCellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          cellStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          data: invoice.item!
-              .map((item) => [
-                    (invoice.item?.indexWhere((element) => element == item) ??
-                            0) +
-                        1,
-                    item.transactionDate != null
-                        ? Dates.formatFullDate(item.transactionDate!)
-                        : '',
-                    item.details ?? '',
-                    item.quantity ?? '',
-                    item.unit ?? '',
-                    item.unitPrice ?? '',
-                    item.amount ?? '',
-                    item.taxRate ?? '',
-                  ])
-              .toList(),
-        ),
-      ],
-    ),
-  );
-
-  try {
-    Uint8List pdfBytes = await pdf.save();
-    return pdfBytes;
-  } catch (e) {
-    if (kDebugMode) {
-      print(e);
-    }
-    return null;
-  }
-}
-
-Future<List<int>?> generateExcelFromInvoice(
-    MedicalInvoiceRequest request, Patient patient) async {
-  var excel = Excel.createExcel();
-  Sheet sheetObject = excel['Quotation'];
-
-  int rowIndex = 1;
-
-  // Save the Excel file
-  try {
-    var excelBytes = excel.encode();
-    return excelBytes;
-  } catch (e) {
-    print(e);
     return null;
   }
 }

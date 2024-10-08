@@ -126,6 +126,7 @@ class EstimateScreenForm extends StatelessWidget {
           maxLines: 3,
           decoration: const InputDecoration(labelText: '備考	'),
         ),
+
         RowSeparated(
           crossAxisAlignment: CrossAxisAlignment.start,
           separatorBuilder: (BuildContext context, int index) {

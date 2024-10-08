@@ -126,8 +126,7 @@ class StatementScreen extends StatelessWidget {
                                           return AlertDialog(
                                             title: const Text('請求書'),
                                             content: Column(
-                                              mainAxisSize: MainAxisSize
-                                                  .min,
+                                              mainAxisSize: MainAxisSize.min,
                                               children: [
                                                 if (data?.fileNamePdfJP != null)
                                                   ListTile(
@@ -295,8 +294,8 @@ class StatementScreen extends StatelessWidget {
                                                     return AlertDialog(
                                                       title: const Text('請求書'),
                                                       content: Column(
-                                                        mainAxisSize: MainAxisSize
-                                                            .min,
+                                                        mainAxisSize:
+                                                            MainAxisSize.min,
                                                         children: [
                                                           if (data?.fileNamePdfJP !=
                                                               null)
@@ -488,28 +487,28 @@ class StatementScreen extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              OutlinedButton(
-                                onPressed: () {},
-                                child: Text('CSV出力'),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: const Text(
-                                  'コピーして新規作成',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {},
-                                child: const Text(
-                                  '新規作成',
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
+                              // OutlinedButton(
+                              //   onPressed: () {},
+                              //   child: Text('CSV出力'),
+                              // ),
+                              // ElevatedButton(
+                              //   onPressed: () {},
+                              //   child: const Text(
+                              //     'コピーして新規作成',
+                              //     style: TextStyle(
+                              //       color: Colors.white,
+                              //     ),
+                              //   ),
+                              // ),
+                              // ElevatedButton(
+                              //   onPressed: () {},
+                              //   child: const Text(
+                              //     '新規作成',
+                              //     style: TextStyle(
+                              //       color: Colors.white,
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           );
                         },
