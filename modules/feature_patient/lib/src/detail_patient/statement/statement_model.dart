@@ -581,18 +581,40 @@ Future<Uint8List?> generatePdfFromInvoice(
           ),
           data: [
             [
-              paymentDeadlineLabel,
-              invoice.paymentDeadline != null
-                  ? Dates.formatFullDate(invoice.paymentDeadline!)
-                  : '',
+              pw.Text(
+                paymentDeadlineLabel,
+                style: pw.TextStyle(font: ttf),
+                textAlign: pw.TextAlign.left,
+              ),
+              pw.Text(
+                invoice.paymentDeadline != null
+                    ? Dates.formatFullDate(invoice.paymentDeadline!)
+                    : '',
+                style: pw.TextStyle(font: ttfJP),
+                textAlign: pw.TextAlign.left,
+              ),
             ],
             [
-              bankTransfer, // Customizable based on language
-              invoice.bankTransferInformation ?? '',
+              pw.Text(
+                bankTransfer,
+                style: pw.TextStyle(font: ttf),
+                textAlign: pw.TextAlign.left,
+              ),
+              pw.Text(
+                invoice.bankTransferInformation ?? '',
+                style: pw.TextStyle(font: ttfJP),
+                textAlign: pw.TextAlign.left,
+              ),
             ],
             [
-              remarksLabel,
-              invoice.remarks ?? '',
+              pw.Text(
+                remarksLabel,
+                style: pw.TextStyle(font: ttf),
+              ),
+              pw.Text(
+                invoice.remarks ?? '',
+                style: pw.TextStyle(font: ttfJP),
+              ),
             ]
           ],
         ),

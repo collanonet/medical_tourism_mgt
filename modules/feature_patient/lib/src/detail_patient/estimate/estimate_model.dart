@@ -564,7 +564,6 @@ Future<Uint8List?> generatePdfFromQuotation(
             0: const pw.FlexColumnWidth(1),
             1: const pw.FlexColumnWidth(2)
           },
-          headerStyle: pw.TextStyle(font: ttf),
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
           cellDecoration: (rowIndex, value, columnIndex) {
@@ -578,14 +577,30 @@ Future<Uint8List?> generatePdfFromQuotation(
           cellStyle: pw.TextStyle(font: ttf),
           data: [
             [
-              paymentDeadlineLabel,
-              request.paymentDeadline != null
-                  ? Dates.formatFullDate(request.paymentDeadline!)
-                  : ''
+              pw.Text(
+                paymentDeadlineLabel,
+                style: pw.TextStyle(font: ttf),
+                textAlign: pw.TextAlign.left,
+              ),
+              pw.Text(
+                request.paymentDeadline != null
+                    ? Dates.formatFullDate(request.paymentDeadline!)
+                    : '',
+                style: pw.TextStyle(font: ttfJP),
+                textAlign: pw.TextAlign.left,
+              ),
             ],
             [
-              remarksLabel,
-              request.remarks ?? '',
+              pw.Text(
+                remarksLabel,
+                style: pw.TextStyle(font: ttf),
+                textAlign: pw.TextAlign.left,
+              ),
+              pw.Text(
+                request.remarks ?? '',
+                style: pw.TextStyle(font: ttfJP),
+                textAlign: pw.TextAlign.left,
+              ),
             ]
           ],
         ),
