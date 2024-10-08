@@ -271,9 +271,9 @@ class EstimateModel {
 Future<Uint8List?> generatePdfFromQuotationJP(
     MedicalInvoiceRequest request, Patient patient) async {
   final pdf = pw.Document();
-  final ByteData fontData =
+  final ByteData fontDataJP =
       await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
-  final ttf = pw.Font.ttf(fontData);
+  final ttfJP = pw.Font.ttf(fontDataJP);
 
   pdf.addPage(
     pw.MultiPage(
@@ -285,7 +285,7 @@ Future<Uint8List?> generatePdfFromQuotationJP(
             child: pw.Text(
               '見積書',
               style: pw.TextStyle(
-                font: ttf,
+                font: ttfJP,
                 fontSize: 30,
               ),
               textAlign: pw.TextAlign.center,
@@ -297,7 +297,7 @@ Future<Uint8List?> generatePdfFromQuotationJP(
           child: pw.Text(
             '見積番号: ${request.invoiceNumber ?? ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfJP,
             ),
           ),
         ),
@@ -306,13 +306,13 @@ Future<Uint8List?> generatePdfFromQuotationJP(
             '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
             '様',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfJP,
             ),
           ),
           pw.Text(
             '見積日: ${request.invoiceDate != null ? Dates.formatFullDate(request.invoiceDate!) : ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfJP,
             ),
             textAlign: pw.TextAlign.right,
           ),
@@ -322,7 +322,7 @@ Future<Uint8List?> generatePdfFromQuotationJP(
           child: pw.Text(
             '担当者: ${request.contact ?? ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfJP,
             ),
             textAlign: pw.TextAlign.right,
           ),
@@ -332,7 +332,7 @@ Future<Uint8List?> generatePdfFromQuotationJP(
           child: pw.Text(
             '登録番号: ${request.registrationNumber ?? ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfJP,
             ),
             textAlign: pw.TextAlign.right,
           ),
@@ -340,20 +340,20 @@ Future<Uint8List?> generatePdfFromQuotationJP(
         pw.Text(
           '件名: ${request.subject ?? ''}',
           style: pw.TextStyle(
-            font: ttf,
+            font: ttfJP,
           ),
           textAlign: pw.TextAlign.left,
         ),
         pw.Text(
           '合計金額: ${request.amountBilled ?? ''}',
           style: pw.TextStyle(
-            font: ttf,
+            font: ttfJP,
           ),
           textAlign: pw.TextAlign.left,
         ),
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
-          headers: ['税率', '税抜合線(門)', '消費税(円)', '合計金額(円)'],
+          headers: ['税率', '税抜金額（円）', '消費税(円)', '合計金額(円)'],
           headerCellDecoration: const pw.BoxDecoration(
             color: PdfColor.fromInt(0xffe0e0e0),
           ),
@@ -366,13 +366,13 @@ Future<Uint8List?> generatePdfFromQuotationJP(
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
           headerStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfJP,
           ),
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfJP,
           ),
           cellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfJP,
           ),
           data: request.totalPayment
                   ?.map((payment) => [
@@ -398,7 +398,7 @@ Future<Uint8List?> generatePdfFromQuotationJP(
             1: const pw.FlexColumnWidth(2),
           },
           headerStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfJP,
           ),
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
@@ -413,10 +413,10 @@ Future<Uint8List?> generatePdfFromQuotationJP(
             );
           },
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfJP,
           ),
           cellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfJP,
           ),
           data: [
             [
@@ -429,7 +429,7 @@ Future<Uint8List?> generatePdfFromQuotationJP(
         pw.TableHelper.fromTextArray(
           headers: ['', '取引日', '内訳', '数量', '单位', '単価', '金額', '税率'],
           headerStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfJP,
           ),
           columnWidths: {
             0: const pw.FlexColumnWidth(0.5),
@@ -447,10 +447,10 @@ Future<Uint8List?> generatePdfFromQuotationJP(
             color: PdfColor.fromInt(0xffe0e0e0),
           ),
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfJP,
           ),
           cellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfJP,
           ),
           data: request.item
                   ?.map((item) => [
@@ -486,9 +486,13 @@ Future<Uint8List?> generatePdfFromQuotationJP(
 Future<Uint8List?> generatePdfFromQuotationEN(
     MedicalInvoiceRequest request, Patient patient) async {
   final pdf = pw.Document();
-  final ByteData fontData =
+  final ByteData fontDataEN =
       await rootBundle.load('assets/fonts/Open_Sans_EN.ttf');
-  final ttf = pw.Font.ttf(fontData);
+  final ttfEN = pw.Font.ttf(fontDataEN);
+
+  final ByteData fontDataJP =
+      await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
+  final ttfJP = pw.Font.ttf(fontDataJP);
 
   pdf.addPage(
     pw.MultiPage(
@@ -500,7 +504,7 @@ Future<Uint8List?> generatePdfFromQuotationEN(
             child: pw.Text(
               'Quotation',
               style: pw.TextStyle(
-                font: ttf,
+                font: ttfEN,
                 fontSize: 30,
               ),
               textAlign: pw.TextAlign.center,
@@ -512,7 +516,7 @@ Future<Uint8List?> generatePdfFromQuotationEN(
           child: pw.Text(
             'Quote Number: ${request.invoiceNumber ?? ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfEN,
             ),
           ),
         ),
@@ -520,13 +524,13 @@ Future<Uint8List?> generatePdfFromQuotationEN(
           pw.Text(
             'Mr. ${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfEN,
             ),
           ),
           pw.Text(
             'Quote Date: ${request.invoiceDate != null ? Dates.formatFullDate(request.invoiceDate!) : ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfEN,
             ),
             textAlign: pw.TextAlign.right,
           ),
@@ -536,7 +540,7 @@ Future<Uint8List?> generatePdfFromQuotationEN(
           child: pw.Text(
             'Contact: ${request.contact ?? ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfEN,
             ),
             textAlign: pw.TextAlign.right,
           ),
@@ -546,7 +550,7 @@ Future<Uint8List?> generatePdfFromQuotationEN(
           child: pw.Text(
             'Registration number: ${request.registrationNumber ?? ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfEN,
             ),
             textAlign: pw.TextAlign.right,
           ),
@@ -554,20 +558,25 @@ Future<Uint8List?> generatePdfFromQuotationEN(
         pw.Text(
           'Subject: ${request.subject ?? ''}',
           style: pw.TextStyle(
-            font: ttf,
+            font: ttfEN,
           ),
           textAlign: pw.TextAlign.left,
         ),
         pw.Text(
           'Total amount: ${request.amountBilled ?? ''}',
           style: pw.TextStyle(
-            font: ttf,
+            font: ttfEN,
           ),
           textAlign: pw.TextAlign.left,
         ),
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
-          headers: ['Tax rate', 'Tax excluded line (gate)', 'Consumption tax (yen)', 'Total amount (yen)'],
+          headers: [
+            'Tax rate',
+            'Tax excluded line (gate)',
+            'Consumption tax (yen)',
+            'Total amount (yen)'
+          ],
           headerCellDecoration: const pw.BoxDecoration(
             color: PdfColor.fromInt(0xffe0e0e0),
           ),
@@ -580,13 +589,13 @@ Future<Uint8List?> generatePdfFromQuotationEN(
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
           headerStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfEN,
           ),
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfEN,
           ),
           cellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfEN,
           ),
           data: request.totalPayment
                   ?.map((payment) => [
@@ -612,7 +621,7 @@ Future<Uint8List?> generatePdfFromQuotationEN(
             1: const pw.FlexColumnWidth(2),
           },
           headerStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfEN,
           ),
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
@@ -627,10 +636,10 @@ Future<Uint8List?> generatePdfFromQuotationEN(
             );
           },
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfEN,
           ),
           cellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfEN,
           ),
           data: [
             [
@@ -641,9 +650,18 @@ Future<Uint8List?> generatePdfFromQuotationEN(
         ),
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
-          headers: ['', 'Transaction Date', 'Detail', 'QTY', 'Unit', 'Unit price', 'Amount', 'Tax rate'],
+          headers: [
+            '',
+            'Transaction Date',
+            'Detail',
+            'QTY',
+            'Unit',
+            'Unit price',
+            'Amount',
+            'Tax rate'
+          ],
           headerStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfEN,
           ),
           columnWidths: {
             0: const pw.FlexColumnWidth(0.5),
@@ -661,10 +679,10 @@ Future<Uint8List?> generatePdfFromQuotationEN(
             color: PdfColor.fromInt(0xffe0e0e0),
           ),
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfEN,
           ),
           cellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfEN,
           ),
           data: request.item
                   ?.map((item) => [
@@ -700,9 +718,13 @@ Future<Uint8List?> generatePdfFromQuotationEN(
 Future<Uint8List?> generatePdfFromQuotationZH(
     MedicalInvoiceRequest request, Patient patient) async {
   final pdf = pw.Document();
-  final ByteData fontData =
+  final ByteData fontDataZH =
       await rootBundle.load('assets/fonts/Noto_Sans_ZH.ttf');
-  final ttf = pw.Font.ttf(fontData);
+  final ttfZH = pw.Font.ttf(fontDataZH);
+
+  final ByteData fontDataJP =
+      await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
+  final ttfJP = pw.Font.ttf(fontDataJP);
 
   pdf.addPage(
     pw.MultiPage(
@@ -714,7 +736,7 @@ Future<Uint8List?> generatePdfFromQuotationZH(
             child: pw.Text(
               '估计',
               style: pw.TextStyle(
-                font: ttf,
+                font: ttfZH,
                 fontSize: 30,
               ),
               textAlign: pw.TextAlign.center,
@@ -726,7 +748,7 @@ Future<Uint8List?> generatePdfFromQuotationZH(
           child: pw.Text(
             '报价单号: ${request.invoiceNumber ?? ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfZH,
             ),
           ),
         ),
@@ -735,13 +757,13 @@ Future<Uint8List?> generatePdfFromQuotationZH(
             '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
             '先生。',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfZH,
             ),
           ),
           pw.Text(
             '预计日期: ${request.invoiceDate != null ? Dates.formatFullDate(request.invoiceDate!) : ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfZH,
             ),
             textAlign: pw.TextAlign.right,
           ),
@@ -751,7 +773,7 @@ Future<Uint8List?> generatePdfFromQuotationZH(
           child: pw.Text(
             '经理: ${request.contact ?? ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfZH,
             ),
             textAlign: pw.TextAlign.right,
           ),
@@ -761,7 +783,7 @@ Future<Uint8List?> generatePdfFromQuotationZH(
           child: pw.Text(
             '注册号: ${request.registrationNumber ?? ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfZH,
             ),
             textAlign: pw.TextAlign.right,
           ),
@@ -769,14 +791,14 @@ Future<Uint8List?> generatePdfFromQuotationZH(
         pw.Text(
           '主题: ${request.subject ?? ''}',
           style: pw.TextStyle(
-            font: ttf,
+            font: ttfZH,
           ),
           textAlign: pw.TextAlign.left,
         ),
         pw.Text(
           '总金额: ${request.amountBilled ?? ''}',
           style: pw.TextStyle(
-            font: ttf,
+            font: ttfZH,
           ),
           textAlign: pw.TextAlign.left,
         ),
@@ -795,13 +817,13 @@ Future<Uint8List?> generatePdfFromQuotationZH(
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
           headerStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZH,
           ),
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZH,
           ),
           cellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZH,
           ),
           data: request.totalPayment
                   ?.map((payment) => [
@@ -827,7 +849,7 @@ Future<Uint8List?> generatePdfFromQuotationZH(
             1: const pw.FlexColumnWidth(2),
           },
           headerStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZH,
           ),
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
@@ -842,10 +864,10 @@ Future<Uint8List?> generatePdfFromQuotationZH(
             );
           },
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZH,
           ),
           cellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZH,
           ),
           data: [
             [
@@ -858,7 +880,7 @@ Future<Uint8List?> generatePdfFromQuotationZH(
         pw.TableHelper.fromTextArray(
           headers: ['', '交易日', '分解', '数量', '首位', '单价', '数量', '税率'],
           headerStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZH,
           ),
           columnWidths: {
             0: const pw.FlexColumnWidth(0.5),
@@ -876,10 +898,10 @@ Future<Uint8List?> generatePdfFromQuotationZH(
             color: PdfColor.fromInt(0xffe0e0e0),
           ),
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZH,
           ),
           cellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZH,
           ),
           data: request.item
                   ?.map((item) => [
@@ -915,9 +937,13 @@ Future<Uint8List?> generatePdfFromQuotationZH(
 Future<Uint8List?> generatePdfFromQuotationZHTW(
     MedicalInvoiceRequest request, Patient patient) async {
   final pdf = pw.Document();
-  final ByteData fontData =
+  final ByteData fontDataZHTW =
       await rootBundle.load('assets/fonts/Noto_Sans_TC.ttf');
-  final ttf = pw.Font.ttf(fontData);
+  final ttfZHTW = pw.Font.ttf(fontDataZHTW);
+
+  final ByteData fontDataJP =
+      await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
+  final ttfJP = pw.Font.ttf(fontDataJP);
 
   pdf.addPage(
     pw.MultiPage(
@@ -929,7 +955,7 @@ Future<Uint8List?> generatePdfFromQuotationZHTW(
             child: pw.Text(
               '估計',
               style: pw.TextStyle(
-                font: ttf,
+                font: ttfZHTW,
                 fontSize: 30,
               ),
               textAlign: pw.TextAlign.center,
@@ -941,7 +967,7 @@ Future<Uint8List?> generatePdfFromQuotationZHTW(
           child: pw.Text(
             '報價單號: ${request.invoiceNumber ?? ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfZHTW,
             ),
           ),
         ),
@@ -950,13 +976,13 @@ Future<Uint8List?> generatePdfFromQuotationZHTW(
             '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
             '先生。',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfZHTW,
             ),
           ),
           pw.Text(
             '預計日期: ${request.invoiceDate != null ? Dates.formatFullDate(request.invoiceDate!) : ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfZHTW,
             ),
             textAlign: pw.TextAlign.right,
           ),
@@ -966,7 +992,7 @@ Future<Uint8List?> generatePdfFromQuotationZHTW(
           child: pw.Text(
             '主管: ${request.contact ?? ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfZHTW,
             ),
             textAlign: pw.TextAlign.right,
           ),
@@ -976,7 +1002,7 @@ Future<Uint8List?> generatePdfFromQuotationZHTW(
           child: pw.Text(
             '註冊號: ${request.registrationNumber ?? ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfZHTW,
             ),
             textAlign: pw.TextAlign.right,
           ),
@@ -984,14 +1010,14 @@ Future<Uint8List?> generatePdfFromQuotationZHTW(
         pw.Text(
           '主題: ${request.subject ?? ''}',
           style: pw.TextStyle(
-            font: ttf,
+            font: ttfZHTW,
           ),
           textAlign: pw.TextAlign.left,
         ),
         pw.Text(
           '總金額: ${request.amountBilled ?? ''}',
           style: pw.TextStyle(
-            font: ttf,
+            font: ttfZHTW,
           ),
           textAlign: pw.TextAlign.left,
         ),
@@ -1010,13 +1036,13 @@ Future<Uint8List?> generatePdfFromQuotationZHTW(
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
           headerStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZHTW,
           ),
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZHTW,
           ),
           cellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZHTW,
           ),
           data: request.totalPayment
                   ?.map((payment) => [
@@ -1042,7 +1068,7 @@ Future<Uint8List?> generatePdfFromQuotationZHTW(
             1: const pw.FlexColumnWidth(2),
           },
           headerStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZHTW,
           ),
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
@@ -1057,10 +1083,10 @@ Future<Uint8List?> generatePdfFromQuotationZHTW(
             );
           },
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZHTW,
           ),
           cellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZHTW,
           ),
           data: [
             [
@@ -1073,7 +1099,7 @@ Future<Uint8List?> generatePdfFromQuotationZHTW(
         pw.TableHelper.fromTextArray(
           headers: ['', '交易日', '分解', '數量', '首位', '單價', '數量', '稅率'],
           headerStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZHTW,
           ),
           columnWidths: {
             0: const pw.FlexColumnWidth(0.5),
@@ -1091,10 +1117,10 @@ Future<Uint8List?> generatePdfFromQuotationZHTW(
             color: PdfColor.fromInt(0xffe0e0e0),
           ),
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZHTW,
           ),
           cellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfZHTW,
           ),
           data: request.item
                   ?.map((item) => [
@@ -1130,9 +1156,13 @@ Future<Uint8List?> generatePdfFromQuotationZHTW(
 Future<Uint8List?> generatePdfFromQuotationVN(
     MedicalInvoiceRequest request, Patient patient) async {
   final pdf = pw.Document();
-  final ByteData fontData =
+  final ByteData fontDataVN =
       await rootBundle.load('assets/fonts/Roboto_VN.ttf');
-  final ttf = pw.Font.ttf(fontData);
+  final ttfVN = pw.Font.ttf(fontDataVN);
+
+  final ByteData fontDataJP =
+      await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
+  final ttfJP = pw.Font.ttf(fontDataJP);
 
   pdf.addPage(
     pw.MultiPage(
@@ -1144,7 +1174,7 @@ Future<Uint8List?> generatePdfFromQuotationVN(
             child: pw.Text(
               'Ước lượng',
               style: pw.TextStyle(
-                font: ttf,
+                font: ttfVN,
                 fontSize: 30,
               ),
               textAlign: pw.TextAlign.center,
@@ -1156,7 +1186,7 @@ Future<Uint8List?> generatePdfFromQuotationVN(
           child: pw.Text(
             'số báo giá: ${request.invoiceNumber ?? ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfVN,
             ),
           ),
         ),
@@ -1165,13 +1195,13 @@ Future<Uint8List?> generatePdfFromQuotationVN(
             '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
             'Ông',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfVN,
             ),
           ),
           pw.Text(
             'ngày dự kiến: ${request.invoiceDate != null ? Dates.formatFullDate(request.invoiceDate!) : ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfVN,
             ),
             textAlign: pw.TextAlign.right,
           ),
@@ -1181,7 +1211,7 @@ Future<Uint8List?> generatePdfFromQuotationVN(
           child: pw.Text(
             'giám đốc: ${request.contact ?? ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfVN,
             ),
             textAlign: pw.TextAlign.right,
           ),
@@ -1191,7 +1221,7 @@ Future<Uint8List?> generatePdfFromQuotationVN(
           child: pw.Text(
             'Số đăng ký: ${request.registrationNumber ?? ''}',
             style: pw.TextStyle(
-              font: ttf,
+              font: ttfVN,
             ),
             textAlign: pw.TextAlign.right,
           ),
@@ -1199,20 +1229,25 @@ Future<Uint8List?> generatePdfFromQuotationVN(
         pw.Text(
           'chủ thể: ${request.subject ?? ''}',
           style: pw.TextStyle(
-            font: ttf,
+            font: ttfVN,
           ),
           textAlign: pw.TextAlign.left,
         ),
         pw.Text(
           'tổng số tiền: ${request.amountBilled ?? ''}',
           style: pw.TextStyle(
-            font: ttf,
+            font: ttfVN,
           ),
           textAlign: pw.TextAlign.left,
         ),
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
-          headers: ['thuế suất', 'Dòng khấu trừ thuế (cổng)', 'Thuế tiêu dùng (yên)', 'Tổng số tiền (yên)'],
+          headers: [
+            'thuế suất',
+            'Dòng khấu trừ thuế (cổng)',
+            'Thuế tiêu dùng (yên)',
+            'Tổng số tiền (yên)'
+          ],
           headerCellDecoration: const pw.BoxDecoration(
             color: PdfColor.fromInt(0xffe0e0e0),
           ),
@@ -1225,13 +1260,13 @@ Future<Uint8List?> generatePdfFromQuotationVN(
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
           headerStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfVN,
           ),
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfVN,
           ),
           cellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfVN,
           ),
           data: request.totalPayment
                   ?.map((payment) => [
@@ -1257,7 +1292,7 @@ Future<Uint8List?> generatePdfFromQuotationVN(
             1: const pw.FlexColumnWidth(2),
           },
           headerStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfVN,
           ),
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
@@ -1272,10 +1307,10 @@ Future<Uint8List?> generatePdfFromQuotationVN(
             );
           },
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfVN,
           ),
           cellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfVN,
           ),
           data: [
             [
@@ -1286,9 +1321,18 @@ Future<Uint8List?> generatePdfFromQuotationVN(
         ),
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
-          headers: ['', 'ngày giao dịch', 'sự cố', 'Số lượng', 'Vị trí đầu tiên', 'đơn giá', 'số lượng', 'thuế suất'],
+          headers: [
+            '',
+            'ngày giao dịch',
+            'sự cố',
+            'Số lượng',
+            'Vị trí đầu tiên',
+            'đơn giá',
+            'số lượng',
+            'thuế suất'
+          ],
           headerStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfVN,
           ),
           columnWidths: {
             0: const pw.FlexColumnWidth(0.5),
@@ -1306,10 +1350,10 @@ Future<Uint8List?> generatePdfFromQuotationVN(
             color: PdfColor.fromInt(0xffe0e0e0),
           ),
           oddCellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfVN,
           ),
           cellStyle: pw.TextStyle(
-            font: ttf,
+            font: ttfVN,
           ),
           data: request.item
                   ?.map((item) => [

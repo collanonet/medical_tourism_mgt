@@ -135,7 +135,7 @@ class EstimateScreenForm extends StatelessWidget {
             ),
             SizedBox(
               width: 250,
-              child: Text('税抜合線(門)'),
+              child: Text('税抜金額（円）'),
             ),
             SizedBox(
               width: 250,
@@ -186,7 +186,7 @@ class EstimateScreenForm extends StatelessWidget {
                                         RegExp(r'[0-9]')),
                                   ],
                                   decoration:
-                                      InputDecoration(labelText: '税抜合線(門)'),
+                                      InputDecoration(labelText: '税抜金額（円）'),
                                 ),
                               ),
                               SizedBox(
