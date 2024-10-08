@@ -18,6 +18,33 @@ class InvoiceModel {
   ValueNotifier<AsyncData<List<MedicalInvoiceResponse>>> medicalInvoiceData =
       ValueNotifier(const AsyncData());
 
+  Future<void> searchInvoices({
+    String? nameOfHospital,
+    String? agentName,
+    String? patientName,
+    DateTime? issueDateFrom,
+    DateTime? issueDateTo,
+    String? invoice,
+    String? prospects,
+  }) async {
+    try {
+      medicalInvoiceData.value = const AsyncData(loading: true);
+      final response = await invoiceRepository.getInvoices(
+        nameOfHospital: nameOfHospital,
+        agentName: agentName,
+        patientName: patientName,
+        issueDateFrom: issueDateFrom,
+        issueDateTo: issueDateTo,
+        type: invoice == '精算書' ? true : false,
+        prospects: prospects,
+      );
+      medicalInvoiceData.value = AsyncData(data: response);
+    } catch (e) {
+      logger.d(e);
+      medicalInvoiceData.value = AsyncData(error: e);
+    }
+  }
+
   Future<void> fetchInvoices() async {
     try {
       medicalInvoiceData.value = const AsyncData(loading: true);
@@ -26,20 +53,6 @@ class InvoiceModel {
     } catch (e) {
       logger.d(e);
       medicalInvoiceData.value = AsyncData(error: e);
-    }
-  }
-
-  ValueNotifier<AsyncData<List<MedicalInvoiceResponse>>> invoiceFilterData =
-      ValueNotifier(const AsyncData());
-
-  Future<void> fetchInvoiceFilter() async {
-    try {
-      invoiceFilterData.value = const AsyncData(loading: true);
-      final response = await invoiceRepository.getInvoices();
-      invoiceFilterData.value = AsyncData(data: response);
-    } catch (e) {
-      logger.d(e);
-      invoiceFilterData.value = AsyncData(error: e);
     }
   }
 }

@@ -5,6 +5,12 @@ abstract class InvoiceRepository {
   Future<List<MedicalInvoiceResponse>> getInvoices({
     String? medicalRecord,
     bool? type,
+    String? nameOfHospital,
+    String? agentName,
+    String? patientName,
+    DateTime? issueDateFrom,
+    DateTime? issueDateTo,
+    String? prospects,
   });
 
   Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(

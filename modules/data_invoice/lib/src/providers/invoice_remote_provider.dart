@@ -26,9 +26,26 @@ class InvoiceRemoteProvider {
     return apiService.getInvoicesByMedicalRecordId(medicalRecordId);
   }
 
-  Future<List<MedicalInvoiceResponse>> getInvoices(
-      {String? medicalRecord, bool? type}) {
-    return apiService.getInvoices(medicalRecord: medicalRecord, type: type);
+  Future<List<MedicalInvoiceResponse>> getInvoices({
+    String? medicalRecord,
+    bool? type,
+    String? nameOfHospital,
+    String? agentName,
+    String? patientName,
+    DateTime? issueDateFrom,
+    DateTime? issueDateTo,
+    String? prospects,
+  }) {
+    return apiService.getInvoices(
+      medicalRecord: medicalRecord,
+      type: type,
+      nameOfHospital: nameOfHospital,
+      agentName: agentName,
+      patientName: patientName,
+      issueDateFrom: issueDateFrom,
+      issueDateTo: issueDateTo,
+      prospects: prospects,
+    );
   }
 
   Future<void> deleteInvoice(String id) {

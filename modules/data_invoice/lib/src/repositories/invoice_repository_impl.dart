@@ -23,25 +23,43 @@ class InvoiceRepositoryIml extends InvoiceRepository {
   }
 
   @override
-  Future<List<MedicalInvoiceResponse>> getInvoices({String? medicalRecord, bool? type}) {
-    return remote.getInvoices(medicalRecord: medicalRecord, type: type);
+  Future<List<MedicalInvoiceResponse>> getInvoices({
+    String? medicalRecord,
+    bool? type,
+    String? nameOfHospital,
+    String? agentName,
+    String? patientName,
+    DateTime? issueDateFrom,
+    DateTime? issueDateTo,
+    String? prospects,
+  }) {
+    return remote.getInvoices(
+      medicalRecord: medicalRecord,
+      type: type,
+      nameOfHospital: nameOfHospital,
+      agentName: agentName,
+      patientName: patientName,
+      issueDateFrom: issueDateFrom,
+      issueDateTo: issueDateTo,
+      prospects: prospects,
+    );
   }
 
   @override
-  Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(String medicalRecordId) {
+  Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(
+      String medicalRecordId) {
     return remote.getInvoicesByMedicalRecordId(medicalRecordId);
   }
 
   @override
-  Future<MedicalInvoiceResponse> postInvoice(MedicalInvoiceRequest invoiceRequest) {
+  Future<MedicalInvoiceResponse> postInvoice(
+      MedicalInvoiceRequest invoiceRequest) {
     return remote.postInvoice(invoiceRequest);
   }
 
   @override
-  Future<MedicalInvoiceResponse> putInvoice(String id, MedicalInvoiceRequest invoiceRequest) {
+  Future<MedicalInvoiceResponse> putInvoice(
+      String id, MedicalInvoiceRequest invoiceRequest) {
     return remote.putInvoice(id, invoiceRequest);
   }
-
-
-
 }

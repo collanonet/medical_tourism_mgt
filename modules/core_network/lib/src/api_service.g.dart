@@ -8214,11 +8214,23 @@ class _ApiService implements ApiService {
   Future<List<MedicalInvoiceResponse>> getInvoices({
     String? medicalRecord,
     bool? type,
+    String? nameOfHospital,
+    String? agentName,
+    String? patientName,
+    DateTime? issueDateFrom,
+    DateTime? issueDateTo,
+    String? prospects,
   }) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{
       r'medicalRecord': medicalRecord,
       r'type': type,
+      r'nameOfHospital': nameOfHospital,
+      r'agentName': agentName,
+      r'patientName': patientName,
+      r'issueDateFrom': issueDateFrom?.toIso8601String(),
+      r'issueDateTo': issueDateTo?.toIso8601String(),
+      r'prospects': prospects,
     };
     queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};

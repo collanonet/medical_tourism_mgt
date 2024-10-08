@@ -7,9 +7,11 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
+import 'invoice_model.dart';
 import 'invoice_table_list.dart';
 import 'invoice_form.dart';
 
@@ -84,12 +86,11 @@ class InvoiceScreen extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           final periodFrom =
-                          formGroup.control('issue_date_from');
+                              formGroup.control('issue_date_from');
                           final periodTo = formGroup.control('issue_date_to');
-                          final valueDate =
-                              periodFrom.value ?? DateTime.now();
-                          periodFrom.value = DateTime(
-                              valueDate.year, valueDate.month - 1, 1);
+                          final valueDate = periodFrom.value ?? DateTime.now();
+                          periodFrom.value =
+                              DateTime(valueDate.year, valueDate.month - 1, 1);
                           periodTo.value =
                               DateTime(valueDate.year, valueDate.month, 0);
                         },
@@ -97,8 +98,8 @@ class InvoiceScreen extends StatelessWidget {
                           padding: EdgeInsets.all(
                               context.appTheme.spacing.marginSmall),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(context
-                                  .appTheme.spacing.borderRadiusMedium),
+                              borderRadius: BorderRadius.circular(
+                                  context.appTheme.spacing.borderRadiusMedium),
                               border: Border.all(color: Colors.grey)),
                           child: Icon(
                             Icons.arrow_back_ios_new_rounded,
@@ -170,20 +171,20 @@ class InvoiceScreen extends StatelessWidget {
                       InkWell(
                         onTap: () {
                           final periodFrom =
-                          formGroup.control('issue_date_from');
+                              formGroup.control('issue_date_from');
                           final periodTo = formGroup.control('issue_date_to');
                           final valueDate = periodTo.value ?? DateTime.now();
-                          periodFrom.value = DateTime(
-                              valueDate.year, valueDate.month + 1, 1);
-                          periodTo.value = DateTime(
-                              valueDate.year, valueDate.month + 2, 0);
+                          periodFrom.value =
+                              DateTime(valueDate.year, valueDate.month + 1, 1);
+                          periodTo.value =
+                              DateTime(valueDate.year, valueDate.month + 2, 0);
                         },
                         child: Container(
                           padding: EdgeInsets.all(
                               context.appTheme.spacing.marginSmall),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(context
-                                  .appTheme.spacing.borderRadiusMedium),
+                              borderRadius: BorderRadius.circular(
+                                  context.appTheme.spacing.borderRadiusMedium),
                               border: Border.all(color: Colors.grey)),
                           child: Icon(
                             Icons.arrow_forward_ios,
@@ -203,14 +204,14 @@ class InvoiceScreen extends StatelessWidget {
                               ),
                             ),
                             DropdownMenuItem(
-                              value: '見積書',
+                              value: '精算書',
                               child: Text(
-                                '見積書',
+                                '精算書',
                               ),
                             ),
                           ],
                           decoration: const InputDecoration(
-                            label: Text('見積書/請求書'),
+                            label: Text('見積書/精算書'),
                           ),
                         ),
                       ),
@@ -224,11 +225,11 @@ class InvoiceScreen extends StatelessWidget {
                             'C',
                           ]
                               .map((e) => DropdownMenuItem(
-                            value: e,
-                            child: Text(
-                              e,
-                            ),
-                          ))
+                                    value: e,
+                                    child: Text(
+                                      e,
+                                    ),
+                                  ))
                               .toList(),
                           decoration: const InputDecoration(
                             label: Text('見込み'),
@@ -242,9 +243,32 @@ class InvoiceScreen extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          context.read<InvoiceModel>().fetchInvoices();
+                        },
+                        // clear
                         child: const Center(
-                          child: Text('　検索　'),
+                          child: Text('クリア'),
+                        ),
+                      ),
+                      ElevatedButton(
+                        onPressed: () {
+                          context.read<InvoiceModel>().searchInvoices(
+                                nameOfHospital:
+                                    formGroup.control('nameOfHospital').value,
+                                agentName: formGroup.control('agentName').value,
+                                patientName:
+                                    formGroup.control('patientName').value,
+                                issueDateFrom:
+                                    formGroup.control('issue_date_from').value,
+                                issueDateTo:
+                                    formGroup.control('issue_date_to').value,
+                                invoice: formGroup.control('invoice').value,
+                                prospects: formGroup.control('prospects').value,
+                              );
+                        },
+                        child: const Center(
+                          child: Text('検索'),
                         ),
                       ),
                     ],

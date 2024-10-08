@@ -1278,7 +1278,6 @@ abstract class ApiService {
     @Body() InvoiceRequest invoiceRequest,
   );
 
-
   @GET(EndPoints.ESTIMATE_MASTER)
   Future<List<EstimateMasterResponse>> getEstimateMaster();
 
@@ -1528,8 +1527,7 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.MEDICAL_VISA_TRAVEL_COMPANION)
-  Future<MedicalVisaTravelCompanionResponse>
-      getMedicalVisaTravelCompanion();
+  Future<MedicalVisaTravelCompanionResponse> getMedicalVisaTravelCompanion();
 
   @POST(EndPoints.MEDICAL_VISA_TRAVEL_COMPANION)
   Future<MedicalVisaTravelCompanionResponse> postMedicalVisaTravelCompanion(
@@ -1537,8 +1535,7 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.MEDICAL_VISA_NECESSARY_IN_JAPAN)
-  Future<MedicalVisaNecessaryInJapanResponse>
-      getMedicalVisaNecessaryInJapan();
+  Future<MedicalVisaNecessaryInJapanResponse> getMedicalVisaNecessaryInJapan();
 
   @POST(EndPoints.MEDICAL_VISA_NECESSARY_IN_JAPAN)
   Future<MedicalVisaNecessaryInJapanResponse> postMedicalVisaNecessaryInJapan(
@@ -1560,6 +1557,12 @@ abstract class ApiService {
   Future<List<MedicalInvoiceResponse>> getInvoices({
     @Query('medicalRecord') String? medicalRecord,
     @Query('type') bool? type,
+    @Query('nameOfHospital') String? nameOfHospital,
+    @Query('agentName') String? agentName,
+    @Query('patientName') String? patientName,
+    @Query('issueDateFrom') DateTime? issueDateFrom,
+    @Query('issueDateTo') DateTime? issueDateTo,
+    @Query('prospects') String? prospects,
   });
 
   @GET('${EndPoints.INVOICE}/medicalRecord/{medicalRecordId}')
