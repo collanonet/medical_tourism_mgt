@@ -67,6 +67,7 @@ class _InvoiceTableListState extends State<InvoiceTableList> {
                                       return AlertDialog(
                                         title: const Text('見積書'),
                                         content: Column(
+                                          mainAxisSize: MainAxisSize.min,
                                           children: [
                                             if (data?.fileNamePdfJP != null)
                                               ListTile(
