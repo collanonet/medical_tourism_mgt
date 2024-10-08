@@ -230,8 +230,8 @@ class StatementModel {
       );
       final response = await patientRepository.postInvoice(request);
       medicalInvoiceData.value = AsyncData(data: [
-        ...medicalInvoiceData.value.data ?? [],
         response,
+        ...medicalInvoiceData.value.data ?? [],
       ]);
     } catch (e) {
       logger.e(e);
@@ -264,7 +264,10 @@ Future<Uint8List?> generatePdfFromInvoice(
   final pdf = pw.Document();
   late ByteData fontData;
   late pw.Font ttf;
-
+  pw.PageTheme pageTheme = pw.PageTheme(
+    pageFormat: PdfPageFormat.a4,
+    margin: pw.EdgeInsets.zero,
+  );
   ByteData fontDataJP = await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
   pw.Font ttfJP = pw.Font.ttf(fontDataJP);
 
@@ -626,12 +629,12 @@ Future<Uint8List?> generatePdfFromInvoice(
           ),
           columnWidths: {
             0: const pw.FlexColumnWidth(0.5),
-            1: const pw.FlexColumnWidth(1),
-            2: const pw.FlexColumnWidth(2),
+            1: const pw.FlexColumnWidth(1.5),
+            2: const pw.FlexColumnWidth(4),
             3: const pw.FlexColumnWidth(1),
             4: const pw.FlexColumnWidth(1),
-            5: const pw.FlexColumnWidth(1),
-            6: const pw.FlexColumnWidth(1),
+            5: const pw.FlexColumnWidth(2),
+            6: const pw.FlexColumnWidth(2),
             7: const pw.FlexColumnWidth(1),
           },
           headerAlignment: pw.Alignment.centerLeft,
