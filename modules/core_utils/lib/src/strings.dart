@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:html' as html;
+import 'package:intl/intl.dart';
 import 'package:jiffy/jiffy.dart';
 
 import 'package:http/http.dart' as http;
@@ -86,6 +87,17 @@ class Strings {
     return Jiffy.parseFromDateTime(dateTime)
         .toLocal()
         .format(pattern: 'dMMyy h mm a');
+  }
+
+  // convert 10000.05 to 10,000.05
+  static String formatCurrency(double value) {
+    if (value.toString().isEmpty) {
+      return '';
+    }
+    final parts = value.toString().split('.');
+    final formatter = NumberFormat.decimalPattern();
+    final formatted = formatter.format(int.parse(parts[0]));
+    return parts.length > 1 ? '$formatted.${parts[1]}' : formatted;
   }
 }
 

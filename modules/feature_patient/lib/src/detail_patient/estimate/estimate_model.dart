@@ -2,6 +2,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -275,14 +276,10 @@ class EstimateModel {
 
 Future<Uint8List?> generatePdfFromQuotation(
     MedicalInvoiceRequest request, Patient patient, String language) async {
-  final pdf = pw.Document();
+  final pdf = pw.Document(pageMode: PdfPageMode.fullscreen);
 
   late ByteData fontData;
   late pw.Font ttf;
-  pw.PageTheme pageTheme = pw.PageTheme(
-    pageFormat: PdfPageFormat.a4,
-    margin: pw.EdgeInsets.zero,
-  );
 
   ByteData fontDataJP = await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
   pw.Font ttfJP = pw.Font.ttf(fontDataJP);
@@ -333,11 +330,11 @@ Future<Uint8List?> generatePdfFromQuotation(
       registrationNumberLabel = '登録番号: ';
       paymentDeadlineLabel = '有効期限';
       remarksLabel = '備考';
-      taxRateLabel = '税率';
+      taxRateLabel = '税率 (%)';
       taxExcludedAmountLabel = '税抜金額（円）';
       consumptionTaxLabel = '消費税(円)';
       totalAmountYenLabel = '合計金額(円)';
-      tableHeaders = ['', '取引日', '内訳', '数量', '単位', '単価', '金額', '税率'];
+      tableHeaders = ['', '取引日', '内訳', '数量', '単位', '単価', '金額', '税率 (%)'];
       break;
 
     case 'ZH':
@@ -350,11 +347,11 @@ Future<Uint8List?> generatePdfFromQuotation(
       registrationNumberLabel = '注册号: ';
       paymentDeadlineLabel = '到期日期';
       remarksLabel = '评论';
-      taxRateLabel = '税率';
+      taxRateLabel = '税率 (%)';
       taxExcludedAmountLabel = '减税金额（元）';
       consumptionTaxLabel = '消费税（日元）';
       totalAmountYenLabel = '总金额（日元）';
-      tableHeaders = ['', '交易日', '分解', '数量', '首位', '单价', '数量', '税率'];
+      tableHeaders = ['', '交易日', '分解', '数量', '首位', '单价', '数量', '税率 (%)'];
       break;
 
     case 'ZHTW':
@@ -367,11 +364,11 @@ Future<Uint8List?> generatePdfFromQuotation(
       registrationNumberLabel = '註冊號: ';
       paymentDeadlineLabel = '到期日期';
       remarksLabel = '評論';
-      taxRateLabel = '稅率';
+      taxRateLabel = '稅率 (%)';
       taxExcludedAmountLabel = '減稅金額（元）';
       consumptionTaxLabel = '消費稅（日元）';
       totalAmountYenLabel = '總金額（日元）';
-      tableHeaders = ['', '交易日', '分解', '數量', '首位', '單價', '數量', '稅率'];
+      tableHeaders = ['', '交易日', '分解', '數量', '首位', '單價', '數量', '稅率 (%)'];
       break;
 
     case 'VN':
@@ -384,7 +381,7 @@ Future<Uint8List?> generatePdfFromQuotation(
       registrationNumberLabel = 'số đăng ký: ';
       paymentDeadlineLabel = 'ngày hết hạn';
       remarksLabel = 'nhận xét';
-      taxRateLabel = 'thuế suất';
+      taxRateLabel = 'thuế suất (%)';
       taxExcludedAmountLabel = 'Dòng khấu trừ thuế (cổng)';
       consumptionTaxLabel = 'Thuế tiêu dùng (yên)';
       totalAmountYenLabel = 'Tổng số tiền (yên)';
@@ -396,7 +393,7 @@ Future<Uint8List?> generatePdfFromQuotation(
         'Vị trí đầu tiên',
         'đơn giá',
         'số lượng',
-        'thuế suất'
+        'thuế suất (%)'
       ];
       break;
 
@@ -410,7 +407,7 @@ Future<Uint8List?> generatePdfFromQuotation(
       registrationNumberLabel = 'Registration number: ';
       paymentDeadlineLabel = 'Date of Expiry';
       remarksLabel = 'Remarks';
-      taxRateLabel = 'Tax rate';
+      taxRateLabel = 'Tax rate (%)';
       taxExcludedAmountLabel = 'Tax excluded amount (yen)';
       consumptionTaxLabel = 'Consumption tax (yen)';
       totalAmountYenLabel = 'Total amount (yen)';
@@ -422,13 +419,20 @@ Future<Uint8List?> generatePdfFromQuotation(
         'Unit',
         'Unit price',
         'Amount',
-        'Tax rate'
+        'Tax rate (%)'
       ];
   }
 
   // Add the content to the PDF
   pdf.addPage(
     pw.MultiPage(
+      margin: const pw.EdgeInsets.all(8),
+      theme: pw.ThemeData(
+        defaultTextStyle: pw.TextStyle(
+          font: ttf,
+          fontSize: 12,
+        ),
+      ),
       build: (context) => [
         pw.Header(
           level: 0,
@@ -513,21 +517,37 @@ Future<Uint8List?> generatePdfFromQuotation(
         pw.Row(children: [
           pw.Text(
             subjectLabel,
-            style: pw.TextStyle(font: ttf),
+            style: pw.TextStyle(
+              font: ttf,
+              fontWeight: pw.FontWeight.bold,
+              fontSize: 14,
+            ),
           ),
           pw.Text(
             request.subject ?? '',
-            style: pw.TextStyle(font: ttfJP),
+            style: pw.TextStyle(
+              font: ttfJP,
+              fontWeight: pw.FontWeight.normal,
+              fontSize: 14,
+            ),
           ),
         ]),
         pw.Row(children: [
           pw.Text(
             totalAmountLabel,
-            style: pw.TextStyle(font: ttf),
+            style: pw.TextStyle(
+              font: ttf,
+              fontWeight: pw.FontWeight.bold,
+              fontSize: 14,
+            ),
           ),
           pw.Text(
-            '${request.amountBilled ?? ''} 円',
-            style: pw.TextStyle(font: ttfJP),
+            '${Strings.formatCurrency(request.amountBilled ?? 0)} 円',
+            style: pw.TextStyle(
+              font: ttfJP,
+              fontWeight: pw.FontWeight.normal,
+              fontSize: 14,
+            ),
           ),
         ]),
         pw.SizedBox(height: 20),
@@ -554,9 +574,11 @@ Future<Uint8List?> generatePdfFromQuotation(
           data: request.totalPayment
                   ?.map((payment) => [
                         payment.taxRate ?? '' ' %',
-                        payment.amountExcludingTaxInYen ?? '' ' 円',
-                        payment.consumptionTaxAmountInYen ?? '' ' 円',
-                        '${(payment.amountExcludingTaxInYen ?? 0) + (payment.consumptionTaxAmountInYen ?? 0)}'
+                        '${Strings.formatCurrency(payment.amountExcludingTaxInYen ?? 0)}'
+                            ' 円',
+                        '${Strings.formatCurrency(payment.consumptionTaxAmountInYen ?? 0)}'
+                            ' 円',
+                        '${Strings.formatCurrency((payment.amountExcludingTaxInYen ?? 0) + (payment.consumptionTaxAmountInYen ?? 0))}'
                             ' 円',
                       ])
                   .toList() ??
@@ -568,41 +590,68 @@ Future<Uint8List?> generatePdfFromQuotation(
             0: const pw.FlexColumnWidth(1),
             1: const pw.FlexColumnWidth(2)
           },
+          headerCount: 0,
+          headers: [],
+          headerHeight: 0,
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
-          cellDecoration: (rowIndex, value, columnIndex) {
+          // Apply different background colors for the first column and others
+          cellDecoration: (rowIndex, columnIndex, value) {
             if (columnIndex == 0) {
-              return const pw.BoxDecoration(
-                  color: PdfColor.fromInt(0xffe0e0e0));
+              return pw.BoxDecoration(
+                color: PdfColor.fromInt(
+                    0xffe0e0e0), // Grey background for first column
+              );
             }
-            return const pw.BoxDecoration(color: PdfColor.fromInt(0xffffffff));
+            return pw.BoxDecoration(
+              color: PdfColor.fromInt(
+                  0xffffffff), // Default white background for other columns
+            );
           },
+          rowDecoration: const pw.BoxDecoration(
+            color: PdfColor.fromInt(0xffffffff),
+          ),
+          oddRowDecoration: pw.BoxDecoration(
+            color: PdfColor.fromInt(0xffffffff),
+          ),
           oddCellStyle: pw.TextStyle(font: ttfJP),
           cellStyle: pw.TextStyle(font: ttf),
           data: [
             [
               pw.Text(
                 paymentDeadlineLabel,
-                style: pw.TextStyle(font: ttf),
+                style: pw.TextStyle(
+                  font: ttf,
+                  color: PdfColor.fromInt(0xff000000),
+                ),
                 textAlign: pw.TextAlign.left,
               ),
               pw.Text(
                 request.paymentDeadline != null
                     ? Dates.formatFullDate(request.paymentDeadline!)
                     : '',
-                style: pw.TextStyle(font: ttfJP),
+                style: pw.TextStyle(
+                  font: ttfJP,
+                  color: PdfColor.fromInt(0xff000000),
+                ),
                 textAlign: pw.TextAlign.left,
               ),
             ],
             [
               pw.Text(
                 remarksLabel,
-                style: pw.TextStyle(font: ttf),
+                style: pw.TextStyle(
+                  font: ttf,
+                  color: PdfColor.fromInt(0xff000000),
+                ),
                 textAlign: pw.TextAlign.left,
               ),
               pw.Text(
                 request.remarks ?? '',
-                style: pw.TextStyle(font: ttfJP),
+                style: pw.TextStyle(
+                  font: ttfJP,
+                  color: PdfColor.fromInt(0xff000000),
+                ),
                 textAlign: pw.TextAlign.left,
               ),
             ]
@@ -631,15 +680,29 @@ Future<Uint8List?> generatePdfFromQuotation(
           data: request.item
                   ?.map((item) => [
                         (request.item?.indexOf(item) ?? 0) + 1,
-                        item.transactionDate != null
-                            ? Dates.formatFullDate(item.transactionDate!)
-                            : '',
-                        item.details ?? '',
+                        pw.Text(
+                          item.transactionDate != null
+                              ? Dates.formatFullDate(item.transactionDate!)
+                              : '',
+                          style: pw.TextStyle(
+                            font: ttfJP,
+                            fontWeight: pw.FontWeight.bold,
+                            fontSize: 9,
+                          ),
+                        ),
+                        pw.Text(
+                          item.details ?? '',
+                          style: pw.TextStyle(
+                            font: ttfJP,
+                            fontWeight: pw.FontWeight.normal,
+                            fontSize: 10,
+                          ),
+                        ),
                         item.quantity ?? '',
                         item.unit ?? '',
-                        item.unitPrice ?? '' ' 円',
-                        item.amount ?? '' ' 円',
-                        item.taxRate ?? '' ' %',
+                        '${Strings.formatCurrency(item.unitPrice ?? 0)}' ' 円',
+                        '${Strings.formatCurrency(item.amount ?? 0)}' ' 円',
+                        '${item.taxRate ?? 0}' ' %',
                       ])
                   .toList() ??
               [],
@@ -701,7 +764,7 @@ Future<List<int>?> generateExcelFromQuotation(
   cell8.value = TextCellValue('合計金額: ${request.amountBilled ?? ''}' ' 円');
 
   var cell9 = sheetObject.cell(CellIndex.indexByString('A10'));
-  cell9.value = TextCellValue('税率');
+  cell9.value = TextCellValue('税率 (%)');
   var cell10 = sheetObject.cell(CellIndex.indexByString('B10'));
   cell10.value = TextCellValue('税抜合線(門)');
   var cell11 = sheetObject.cell(CellIndex.indexByString('C10'));
@@ -766,7 +829,7 @@ Future<List<int>?> generateExcelFromQuotation(
   var cell23 = sheetObject.cell(CellIndex.indexByString('G$rowIndex'));
   cell23.value = TextCellValue('金額');
   var cell24 = sheetObject.cell(CellIndex.indexByString('H$rowIndex'));
-  cell24.value = TextCellValue('税率');
+  cell24.value = TextCellValue('税率 (%)');
   rowIndex++;
 
   request.item?.forEach((item) {

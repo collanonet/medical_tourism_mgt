@@ -80,11 +80,11 @@ class StatementScreen extends StatelessWidget {
                             style: context.textTheme.bodySmall,
                           )),
                           Expanded(
-                              // flex: 2,
+                              flex: 2,
                               child: Text(
-                            '件名', // subject
-                            style: context.textTheme.bodySmall,
-                          )),
+                                '件名', // subject
+                                style: context.textTheme.bodySmall,
+                              )),
                           Expanded(
                               child: Text(
                             'エージェントへ開示', // Disclosure to Agent
@@ -260,11 +260,11 @@ class StatementScreen extends StatelessWidget {
                                     style: context.textTheme.bodySmall,
                                   )),
                                   Expanded(
-                                      //flex: 2,
+                                      flex: 2,
                                       child: Text(
-                                    data?.subject ?? '',
-                                    style: context.textTheme.bodySmall,
-                                  )),
+                                        data?.subject ?? '',
+                                        style: context.textTheme.bodySmall,
+                                      )),
                                   Expanded(
                                       child: Text(
                                     '--',
@@ -280,94 +280,100 @@ class StatementScreen extends StatelessWidget {
                                     '--',
                                     style: context.textTheme.bodySmall,
                                   )),
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: data?.fileNamePdfJP != null ||
-                                              data?.fileNamePdfEN != null ||
-                                              data?.fileNamePdfZH != null ||
-                                              data?.fileNamePdfZHTW != null ||
-                                              data?.fileNamePdfVN != null
-                                          ? () {
-                                              showDialog(
-                                                  context: context,
-                                                  builder: (_) {
-                                                    return AlertDialog(
-                                                      title: const Text('請求書'),
-                                                      content: Column(
-                                                        mainAxisSize:
-                                                            MainAxisSize.min,
-                                                        children: [
-                                                          if (data?.fileNamePdfJP !=
-                                                              null)
-                                                            ListTile(
-                                                              title: const Text(
-                                                                  '日本語'),
-                                                              onTap: () {
-                                                                openUrlInBrowser(
-                                                                    fileName:
-                                                                        data?.fileNamePdfJP ??
-                                                                            '');
-                                                              },
+                                  Row(
+                                    children: [
+                                      ElevatedButton(
+                                        onPressed:
+                                            data?.fileNamePdfJP != null ||
+                                                    data?.fileNamePdfEN !=
+                                                        null ||
+                                                    data?.fileNamePdfZH !=
+                                                        null ||
+                                                    data?.fileNamePdfZHTW !=
+                                                        null ||
+                                                    data?.fileNamePdfVN != null
+                                                ? () {
+                                                    showDialog(
+                                                        context: context,
+                                                        builder: (_) {
+                                                          return AlertDialog(
+                                                            title: const Text(
+                                                                '請求書'),
+                                                            content: Column(
+                                                              mainAxisSize:
+                                                                  MainAxisSize
+                                                                      .min,
+                                                              children: [
+                                                                if (data?.fileNamePdfJP !=
+                                                                    null)
+                                                                  ListTile(
+                                                                    title: const Text(
+                                                                        '日本語'),
+                                                                    onTap: () {
+                                                                      openUrlInBrowser(
+                                                                          fileName:
+                                                                              data?.fileNamePdfJP ?? '');
+                                                                    },
+                                                                  ),
+                                                                if (data?.fileNamePdfEN !=
+                                                                    null)
+                                                                  ListTile(
+                                                                    title:
+                                                                        const Text(
+                                                                            '英語'),
+                                                                    onTap: () {
+                                                                      openUrlInBrowser(
+                                                                          fileName:
+                                                                              data?.fileNamePdfEN ?? '');
+                                                                    },
+                                                                  ),
+                                                                if (data?.fileNamePdfVN !=
+                                                                    null)
+                                                                  ListTile(
+                                                                    title: const Text(
+                                                                        'ベトナム語'),
+                                                                    onTap: () {
+                                                                      openUrlInBrowser(
+                                                                          fileName:
+                                                                              data?.fileNamePdfVN ?? '');
+                                                                    },
+                                                                  ),
+                                                                if (data?.fileNamePdfZH !=
+                                                                    null)
+                                                                  ListTile(
+                                                                    title: const Text(
+                                                                        '中国語'),
+                                                                    onTap: () {
+                                                                      openUrlInBrowser(
+                                                                          fileName:
+                                                                              data?.fileNamePdfZH ?? '');
+                                                                    },
+                                                                  ),
+                                                                if (data?.fileNamePdfZHTW !=
+                                                                    null)
+                                                                  ListTile(
+                                                                    title: const Text(
+                                                                        '繁体字'),
+                                                                    onTap: () {
+                                                                      openUrlInBrowser(
+                                                                          fileName:
+                                                                              data?.fileNamePdfZHTW ?? '');
+                                                                    },
+                                                                  ),
+                                                              ],
                                                             ),
-                                                          if (data?.fileNamePdfEN !=
-                                                              null)
-                                                            ListTile(
-                                                              title: const Text(
-                                                                  '英語'),
-                                                              onTap: () {
-                                                                openUrlInBrowser(
-                                                                    fileName:
-                                                                        data?.fileNamePdfEN ??
-                                                                            '');
-                                                              },
-                                                            ),
-                                                          if (data?.fileNamePdfVN !=
-                                                              null)
-                                                            ListTile(
-                                                              title: const Text(
-                                                                  'ベトナム語'),
-                                                              onTap: () {
-                                                                openUrlInBrowser(
-                                                                    fileName:
-                                                                        data?.fileNamePdfVN ??
-                                                                            '');
-                                                              },
-                                                            ),
-                                                          if (data?.fileNamePdfZH !=
-                                                              null)
-                                                            ListTile(
-                                                              title: const Text(
-                                                                  '中国語'),
-                                                              onTap: () {
-                                                                openUrlInBrowser(
-                                                                    fileName:
-                                                                        data?.fileNamePdfZH ??
-                                                                            '');
-                                                              },
-                                                            ),
-                                                          if (data?.fileNamePdfZHTW !=
-                                                              null)
-                                                            ListTile(
-                                                              title: const Text(
-                                                                  '繁体字'),
-                                                              onTap: () {
-                                                                openUrlInBrowser(
-                                                                    fileName:
-                                                                        data?.fileNamePdfZHTW ??
-                                                                            '');
-                                                              },
-                                                            ),
-                                                        ],
-                                                      ),
-                                                    );
-                                                  });
-                                            }
-                                          : null,
-                                      child: const Text(
-                                        '請求書を発行する',
-                                        style: TextStyle(fontSize: 10),
+                                                          );
+                                                        });
+                                                  }
+                                                : null,
+                                        child: const Text(
+                                          '請求書を発行する',
+                                          style: TextStyle(fontSize: 10),
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
                                       ),
-                                    ),
+                                    ],
                                   ),
                                 ],
                               ),
@@ -512,6 +518,9 @@ class StatementScreen extends StatelessWidget {
                             ],
                           );
                         },
+                      ),
+                      SizedBox(
+                        height: context.appTheme.spacing.marginMedium,
                       ),
                       const StatementScreenForm(),
                       SizedBox(

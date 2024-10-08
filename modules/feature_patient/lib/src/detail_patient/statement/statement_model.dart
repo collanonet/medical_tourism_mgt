@@ -261,13 +261,10 @@ class StatementModel {
 
 Future<Uint8List?> generatePdfFromInvoice(
     MedicalInvoiceRequest invoice, Patient patient, String language) async {
-  final pdf = pw.Document();
+  final pdf = pw.Document(pageMode: PdfPageMode.fullscreen);
   late ByteData fontData;
   late pw.Font ttf;
-  pw.PageTheme pageTheme = pw.PageTheme(
-    pageFormat: PdfPageFormat.a4,
-    margin: pw.EdgeInsets.zero,
-  );
+
   ByteData fontDataJP = await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
   pw.Font ttfJP = pw.Font.ttf(fontDataJP);
 
@@ -320,11 +317,11 @@ Future<Uint8List?> generatePdfFromInvoice(
       paymentDeadlineLabel = '有効期限';
       bankTransfer = 'お振込先';
       remarksLabel = '備考';
-      taxRateLabel = '税率';
+      taxRateLabel = '税率 (%)';
       taxExcludedAmountLabel = '税抜合線(門)';
       consumptionTaxLabel = '消費税(円)';
       totalAmountYenLabel = '合計金額(円)';
-      tableHeaders = ['', '取引日', '内訳', '数量', '単位', '単価', '金額', '税率'];
+      tableHeaders = ['', '取引日', '内訳', '数量', '単位', '単価', '金額', '税率 (%)'];
       break;
     case 'ZH':
       title = '发票';
@@ -337,11 +334,11 @@ Future<Uint8List?> generatePdfFromInvoice(
       paymentDeadlineLabel = '到期日期';
       bankTransfer = '转移';
       remarksLabel = '评论';
-      taxRateLabel = '税率';
+      taxRateLabel = '税率 (%)';
       taxExcludedAmountLabel = '减税线（门）';
       consumptionTaxLabel = '消费税（日元）';
       totalAmountYenLabel = '总金额（日元）';
-      tableHeaders = ['', '交易日', '分解', '数量', '首位', '单价', '数量', '税率'];
+      tableHeaders = ['', '交易日', '分解', '数量', '首位', '单价', '数量', '税率 (%)'];
       break;
     case 'ZHTW':
       title = '發票';
@@ -354,11 +351,11 @@ Future<Uint8List?> generatePdfFromInvoice(
       paymentDeadlineLabel = '到期日期';
       bankTransfer = '轉移';
       remarksLabel = '備考';
-      taxRateLabel = '稅率';
+      taxRateLabel = '稅率 (%)';
       taxExcludedAmountLabel = '減稅線（門）';
       consumptionTaxLabel = '消費稅（日圓）';
       totalAmountYenLabel = '總金額（日圓）';
-      tableHeaders = ['', '交易日', '分解', '數量', '首位', '單價', '數量', '稅率'];
+      tableHeaders = ['', '交易日', '分解', '數量', '首位', '單價', '數量', '稅率 (%)'];
       break;
     case 'VN':
       title = 'hóa đơn';
@@ -371,7 +368,7 @@ Future<Uint8List?> generatePdfFromInvoice(
       paymentDeadlineLabel = 'ngày hết hạn';
       bankTransfer = 'Chuyển khoản';
       remarksLabel = 'nhận xét';
-      taxRateLabel = 'thuế suất';
+      taxRateLabel = 'thuế suất (%)';
       taxExcludedAmountLabel = 'Dòng khấu trừ thuế (cổng)';
       consumptionTaxLabel = 'Thuế tiêu dùng (yên)';
       totalAmountYenLabel = 'Tổng số tiền (yên)';
@@ -383,7 +380,7 @@ Future<Uint8List?> generatePdfFromInvoice(
         'Vị trí đầu tiên',
         'đơn giá',
         'số lượng',
-        'thuế suất'
+        'thuế suất (%)'
       ];
       break;
     default: // EN
@@ -397,7 +394,7 @@ Future<Uint8List?> generatePdfFromInvoice(
       paymentDeadlineLabel = 'Date of expiry';
       bankTransfer = 'Bank transfer';
       remarksLabel = 'Remarks';
-      taxRateLabel = 'Tax rate';
+      taxRateLabel = 'Tax rate (%)';
       taxExcludedAmountLabel = 'Tax excluded line (gate)';
       consumptionTaxLabel = 'Consumption tax (yen)';
       totalAmountYenLabel = 'Total amount (yen)';
@@ -409,13 +406,20 @@ Future<Uint8List?> generatePdfFromInvoice(
         'Unit',
         'Unit price',
         'Amount',
-        'Tax rate'
+        'Tax rate (%)'
       ];
   }
 
   // Create PDF content
   pdf.addPage(
     pw.MultiPage(
+      margin: const pw.EdgeInsets.all(8),
+      theme: pw.ThemeData(
+        defaultTextStyle: pw.TextStyle(
+          font: ttf,
+          fontSize: 12,
+        ),
+      ),
       build: (context) => [
         pw.Header(
           level: 0,
@@ -500,21 +504,37 @@ Future<Uint8List?> generatePdfFromInvoice(
         pw.Row(children: [
           pw.Text(
             subjectLabel,
-            style: pw.TextStyle(font: ttf),
+            style: pw.TextStyle(
+              font: ttf,
+              fontWeight: pw.FontWeight.bold,
+              fontSize: 14,
+            ),
           ),
           pw.Text(
             invoice.subject ?? '',
-            style: pw.TextStyle(font: ttfJP),
+            style: pw.TextStyle(
+              font: ttfJP,
+              fontWeight: pw.FontWeight.normal,
+              fontSize: 14,
+            ),
           ),
         ]),
         pw.Row(children: [
           pw.Text(
             totalAmountLabel,
-            style: pw.TextStyle(font: ttf),
+            style: pw.TextStyle(
+              font: ttf,
+              fontWeight: pw.FontWeight.bold,
+              fontSize: 14,
+            ),
           ),
           pw.Text(
-            '${invoice.amountBilled ?? ''} 円',
-            style: pw.TextStyle(font: ttfJP),
+            '${Strings.formatCurrency(invoice.amountBilled ?? 0)} 円',
+            style: pw.TextStyle(
+              font: ttfJP,
+              fontWeight: pw.FontWeight.normal,
+              fontSize: 14,
+            ),
           ),
         ]),
         pw.SizedBox(height: 20),
@@ -548,9 +568,11 @@ Future<Uint8List?> generatePdfFromInvoice(
           data: invoice.totalPayment!
               .map((payment) => [
                     payment.taxRate ?? '' ' %',
-                    payment.amountExcludingTaxInYen ?? '' ' 円',
-                    payment.consumptionTaxAmountInYen ?? '' ' 円',
-                    '${(payment.amountExcludingTaxInYen ?? 0) + (payment.consumptionTaxAmountInYen ?? 0)}'
+                    '${Strings.formatCurrency(payment.amountExcludingTaxInYen ?? 0)}'
+                        ' 円',
+                    '${Strings.formatCurrency(payment.consumptionTaxAmountInYen ?? 0)}'
+                        ' 円',
+                    '${Strings.formatCurrency((payment.amountExcludingTaxInYen ?? 0) + (payment.consumptionTaxAmountInYen ?? 0))}'
                         ' 円',
                   ])
               .toList(),
@@ -559,64 +581,71 @@ Future<Uint8List?> generatePdfFromInvoice(
         pw.TableHelper.fromTextArray(
           columnWidths: {
             0: const pw.FlexColumnWidth(1),
-            1: const pw.FlexColumnWidth(2),
+            1: const pw.FlexColumnWidth(2)
           },
-          headerStyle: pw.TextStyle(
-            font: ttf,
-          ),
+          headerCount: 0,
+          headers: [],
+          headerHeight: 0,
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
-          cellDecoration: (rowIndex, value, columnIndex) {
+          // Apply different background colors for the first column and others
+          cellDecoration: (rowIndex, columnIndex, value) {
             if (columnIndex == 0) {
-              return const pw.BoxDecoration(
-                color: PdfColor.fromInt(0xffe0e0e0),
+              return pw.BoxDecoration(
+                color: PdfColor.fromInt(
+                    0xffe0e0e0), // Grey background for first column
               );
             }
-            return const pw.BoxDecoration(
-              color: PdfColor.fromInt(0xffffffff),
+            return pw.BoxDecoration(
+              color: PdfColor.fromInt(
+                  0xffffffff), // Default white background for other columns
             );
           },
-          oddCellStyle: pw.TextStyle(
-            font: ttfJP,
+          rowDecoration: const pw.BoxDecoration(
+            color: PdfColor.fromInt(0xffffffff),
           ),
-          cellStyle: pw.TextStyle(
-            font: ttf,
+          oddRowDecoration: pw.BoxDecoration(
+            color: PdfColor.fromInt(0xffffffff),
           ),
+          oddCellStyle: pw.TextStyle(font: ttfJP),
+          cellStyle: pw.TextStyle(font: ttf),
           data: [
             [
               pw.Text(
                 paymentDeadlineLabel,
-                style: pw.TextStyle(font: ttf),
+                style: pw.TextStyle(
+                  font: ttf,
+                  color: PdfColor.fromInt(0xff000000),
+                ),
                 textAlign: pw.TextAlign.left,
               ),
               pw.Text(
                 invoice.paymentDeadline != null
                     ? Dates.formatFullDate(invoice.paymentDeadline!)
                     : '',
-                style: pw.TextStyle(font: ttfJP),
-                textAlign: pw.TextAlign.left,
-              ),
-            ],
-            [
-              pw.Text(
-                bankTransfer,
-                style: pw.TextStyle(font: ttf),
-                textAlign: pw.TextAlign.left,
-              ),
-              pw.Text(
-                invoice.bankTransferInformation ?? '',
-                style: pw.TextStyle(font: ttfJP),
+                style: pw.TextStyle(
+                  font: ttfJP,
+                  color: PdfColor.fromInt(0xff000000),
+                ),
                 textAlign: pw.TextAlign.left,
               ),
             ],
             [
               pw.Text(
                 remarksLabel,
-                style: pw.TextStyle(font: ttf),
+                style: pw.TextStyle(
+                  font: ttf,
+                  color: PdfColor.fromInt(0xff000000),
+                ),
+                textAlign: pw.TextAlign.left,
               ),
               pw.Text(
                 invoice.remarks ?? '',
-                style: pw.TextStyle(font: ttfJP),
+                style: pw.TextStyle(
+                  font: ttfJP,
+                  color: PdfColor.fromInt(0xff000000),
+                ),
+                textAlign: pw.TextAlign.left,
               ),
             ]
           ],
@@ -650,18 +679,30 @@ Future<Uint8List?> generatePdfFromInvoice(
           ),
           data: invoice.item!
               .map((item) => [
-                    (invoice.item?.indexWhere((element) => element == item) ??
-                            0) +
-                        1,
-                    item.transactionDate != null
-                        ? Dates.formatFullDate(item.transactionDate!)
-                        : '',
-                    item.details ?? '',
+                    (invoice.item?.indexOf(item) ?? 0) + 1,
+                    pw.Text(
+                      item.transactionDate != null
+                          ? Dates.formatFullDate(item.transactionDate!)
+                          : '',
+                      style: pw.TextStyle(
+                        font: ttfJP,
+                        fontWeight: pw.FontWeight.bold,
+                        fontSize: 9,
+                      ),
+                    ),
+                    pw.Text(
+                      item.details ?? '',
+                      style: pw.TextStyle(
+                        font: ttfJP,
+                        fontWeight: pw.FontWeight.normal,
+                        fontSize: 10,
+                      ),
+                    ),
                     item.quantity ?? '',
                     item.unit ?? '',
-                    item.unitPrice ?? '' ' 円',
-                    item.amount ?? '' ' 円',
-                    item.taxRate ?? '' ' %',
+                    '${Strings.formatCurrency(item.unitPrice ?? 0)}' ' 円',
+                    '${Strings.formatCurrency(item.amount ?? 0)}' ' 円',
+                    '${item.taxRate ?? 0}' ' %',
                   ])
               .toList(),
         ),

@@ -65,7 +65,7 @@ class _InvoiceTableListState extends State<InvoiceTableList> {
                                     context: context,
                                     builder: (_) {
                                       return AlertDialog(
-                                        title: const Text('見積書'),
+                                        title: const Text('精算書'),
                                         content: Column(
                                           mainAxisSize: MainAxisSize.min,
                                           children: [

@@ -124,8 +124,7 @@ class EstimateScreen extends StatelessWidget {
                                       return AlertDialog(
                                         title: const Text('見積書'),
                                         content: Column(
-                                          mainAxisSize: MainAxisSize
-                                              .min,
+                                          mainAxisSize: MainAxisSize.min,
                                           children: [
                                             if (data?.fileNamePdfJP != null)
                                               ListTile(
@@ -256,7 +255,7 @@ class EstimateScreen extends StatelessWidget {
                                 style: context.textTheme.bodySmall,
                               )),
                               Expanded(
-                                  flex: 2,
+                                  flex: 3,
                                   child: Text(
                                     data?.subject ?? '',
                                     style: context.textTheme.bodySmall,
@@ -291,8 +290,8 @@ class EstimateScreen extends StatelessWidget {
                                                   return AlertDialog(
                                                     title: const Text('見積書'),
                                                     content: Column(
-                                                      mainAxisSize: MainAxisSize
-                                                          .min,
+                                                      mainAxisSize:
+                                                          MainAxisSize.min,
                                                       children: [
                                                         if (data?.fileNamePdfJP !=
                                                             null)
@@ -363,6 +362,8 @@ class EstimateScreen extends StatelessWidget {
                                     child: const Text(
                                       '言語を選択する',
                                       style: TextStyle(fontSize: 10),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
                                   )
                                 ],
@@ -506,6 +507,9 @@ class EstimateScreen extends StatelessWidget {
                     height: context.appTheme.spacing.marginMedium,
                   ),
                   const EstimateScreenForm(),
+                  SizedBox(
+                    height: context.appTheme.spacing.marginMedium,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.end,
                     children: [
