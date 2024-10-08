@@ -251,6 +251,7 @@ class InvoiceScreen extends StatelessWidget {
                           child: Text('クリア'),
                         ),
                       ),
+                      SizedBox(width: context.appTheme.spacing.marginMedium),
                       ElevatedButton(
                         onPressed: () {
                           context.read<InvoiceModel>().searchInvoices(
