@@ -250,11 +250,11 @@ class EstimateScreenForm extends StatelessWidget {
           },
           children: [
             SizedBox(
-              width: 200,
+              width: 150,
               child: Text('取引日'),
             ),
             SizedBox(
-              width: 200,
+              width: 300,
               child: Text('内訳'),
             ),
             SizedBox(
@@ -266,11 +266,11 @@ class EstimateScreenForm extends StatelessWidget {
               child: Text('单位'),
             ),
             SizedBox(
-              width: 80,
+              width: 120,
               child: Text('単価'),
             ),
             SizedBox(
-              width: 80,
+              width: 120,
               child: Text('金額'),
             ),
             SizedBox(
@@ -301,7 +301,7 @@ class EstimateScreenForm extends StatelessWidget {
                             },
                             children: [
                               SizedBox(
-                                width: 200,
+                                width: 150,
                                 child: ReactiveTextField<DateTime>(
                                   formControlName: 'transactionDate',
                                   decoration:
@@ -326,7 +326,7 @@ class EstimateScreenForm extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(
-                                width: 200,
+                                width: 300,
                                 child: ReactiveTextField<String>(
                                   formControlName: 'details',
                                   decoration: InputDecoration(labelText: '内訳'),
@@ -352,7 +352,7 @@ class EstimateScreenForm extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(
-                                width: 80,
+                                width: 120,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'unitPrice',
                                   keyboardType: TextInputType.number,
@@ -367,7 +367,7 @@ class EstimateScreenForm extends StatelessWidget {
                                 ),
                               ),
                               SizedBox(
-                                width: 80,
+                                width: 120,
                                 child: ReactiveTextField<double>(
                                   formControlName: 'amount',
                                   keyboardType: TextInputType.number,
