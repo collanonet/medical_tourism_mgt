@@ -328,7 +328,13 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
             children: [
               Expanded(
                   flex: 2,
-                  child: Text('項目', style: context.textTheme.bodyMedium)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('項目', style: context.textTheme.bodyMedium),
+                    ],
+                  )),
               Expanded(
                   flex: 1,
                   child: Text('治療費用（税別）', style: context.textTheme.bodyMedium)),
@@ -379,7 +385,13 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
         ),
         IntrinsicWidth(
             stepWidth: 350,
-            child: Text('準備検査', style: context.textTheme.bodyMedium))
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('備考', style: context.textTheme.bodyMedium),
+              ],
+            ))
       ],
     );
   }
