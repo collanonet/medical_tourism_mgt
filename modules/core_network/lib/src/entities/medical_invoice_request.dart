@@ -1,13 +1,14 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-import '../../core_network.dart';
 
 part 'medical_invoice_request.g.dart';
 
 @CopyWith()
 @JsonSerializable()
 class MedicalInvoiceRequest {
+  String? logoFile;
+  String? stampFile;
   bool? type;
   String? fileNamePdfEN;
   String? fileNamePdfJP;
@@ -31,6 +32,8 @@ class MedicalInvoiceRequest {
   List<ItemRequest>? item;
 
   MedicalInvoiceRequest({
+    this.logoFile,
+    this.stampFile,
     this.type,
     this.fileNamePdfEN,
     this.fileNamePdfJP,

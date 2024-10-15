@@ -91,7 +91,27 @@ class EstimateModel {
         ));
       });
 
+      String? file;
+        if (formGroup.control('file').value != null) {
+          FileSelect docFile = formGroup.control('file').value;
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              file = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            file = docFile.url;
+          }
+        }
+
       MedicalInvoiceRequest request = MedicalInvoiceRequest(
+        stampFile: file,
         type: false,
         invoiceNumber: formGroup.control('invoiceNumber').value,
         invoiceDate: formGroup.control('invoiceDate').value,

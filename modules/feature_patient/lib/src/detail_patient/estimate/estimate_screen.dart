@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:core_network/entities.dart';
+import 'package:core_ui/resources.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
@@ -19,6 +21,7 @@ class EstimateScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ValueNotifier<List<String>> selected = ValueNotifier([]);
+    final formGroup = ReactiveForm.of(context) as FormGroup;
     return ValueListenableBuilder(
         valueListenable: context.watch<EstimateModel>().medicalQuotationData,
         builder: (context, value, _) {
@@ -506,6 +509,10 @@ class EstimateScreen extends StatelessWidget {
                   SizedBox(
                     height: context.appTheme.spacing.marginMedium,
                   ),
+                   managerCard(formGroup, context),
+                    SizedBox(
+                    height: context.appTheme.spacing.marginMedium,
+                  ),
                   const EstimateScreenForm(),
                   SizedBox(
                     height: context.appTheme.spacing.marginMedium,
@@ -565,5 +572,87 @@ class EstimateScreen extends StatelessWidget {
             ),
           );
         });
+  }
+
+  Row managerCard(FormGroup currentForm, BuildContext context) {
+    final file = currentForm.control('file').value as FileSelect?;
+    return Row(
+      children: [
+        InkWell(
+          onTap: () {
+            filePicker().then((value) {
+              currentForm.control('file').value = value;
+            });
+          },
+          child: Container(
+            width: 400,
+            padding: EdgeInsets.all(
+              context.appTheme.spacing.marginExtraLarge,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.all(Radius.circular(
+                context.appTheme.spacing.borderRadiusMedium,
+              )),
+              border: Border.all(
+                color: context.appTheme.primaryColor,
+              ),
+            ),
+            child: file != null && file.file != null
+                ? Image.memory(
+                    file.file!,
+                    fit: BoxFit.fill,
+                  )
+                : file != null && file.url != null
+                    ? Avatar.network(
+                        file.url,
+                        placeholder: const AssetImage(
+                          Images.logoMadical,
+                          package: 'core_ui',
+                        ),
+                        shape: BoxShape.rectangle,
+                        customSize: const Size(200, 380),
+                      )
+                    : Column(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Icon(
+                            Icons.copy_all_rounded,
+                            size: 50,
+                            color: context.appTheme.primaryColor,
+                          ),
+                          SizedBox(
+                            height: context.appTheme.spacing.marginMedium,
+                          ),
+                          Text(
+                            '名刺データをここにドラッグ＆ドロップ',
+                            style: context.textTheme.bodySmall?.copyWith(
+                              fontSize: 22,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          SizedBox(
+                            height: context.appTheme.spacing.marginMedium,
+                          ),
+                          ElevatedButton(
+                            onPressed: () {
+                              filePicker().then(
+                                (value) {
+                                  currentForm.control('file').value = value;
+                                },
+                              );
+                            },
+                            child: const Text(
+                              'またはファイルを選択する',
+                            ),
+                          )
+                        ],
+                      ),
+          ),
+        ),
+      ],
+    );
   }
 }

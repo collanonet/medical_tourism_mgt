@@ -1,8 +1,9 @@
+import 'package:core_network/entities.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup statementForm() {
   return FormGroup({
-    'file': FormControl<String>(),
+    'file': FormControl<FileSelect>(),
     'invoiceNumber': FormControl<String>(),
     'invoiceDate': FormControl<DateTime>(
       value: DateTime.now(),

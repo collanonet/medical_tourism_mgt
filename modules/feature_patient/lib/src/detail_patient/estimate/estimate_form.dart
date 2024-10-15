@@ -1,7 +1,9 @@
+import 'package:core_network/entities.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup estimateForm() {
   return FormGroup({
+    'file' : FormControl<FileSelect>(),
     'invoiceNumber': FormControl<String>(),
     'invoiceDate': FormControl<DateTime>(
       value: DateTime.now(),

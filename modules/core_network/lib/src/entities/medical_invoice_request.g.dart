@@ -7,6 +7,10 @@ part of 'medical_invoice_request.dart';
 // **************************************************************************
 
 abstract class _$MedicalInvoiceRequestCWProxy {
+  MedicalInvoiceRequest logoFile(String? logoFile);
+
+  MedicalInvoiceRequest stampFile(String? stampFile);
+
   MedicalInvoiceRequest type(bool? type);
 
   MedicalInvoiceRequest fileNamePdfEN(String? fileNamePdfEN);
@@ -57,6 +61,8 @@ abstract class _$MedicalInvoiceRequestCWProxy {
   /// MedicalInvoiceRequest(...).copyWith(id: 12, name: "My name")
   /// ````
   MedicalInvoiceRequest call({
+    String? logoFile,
+    String? stampFile,
     bool? type,
     String? fileNamePdfEN,
     String? fileNamePdfJP,
@@ -87,6 +93,13 @@ class _$MedicalInvoiceRequestCWProxyImpl
   const _$MedicalInvoiceRequestCWProxyImpl(this._value);
 
   final MedicalInvoiceRequest _value;
+
+  @override
+  MedicalInvoiceRequest logoFile(String? logoFile) => this(logoFile: logoFile);
+
+  @override
+  MedicalInvoiceRequest stampFile(String? stampFile) =>
+      this(stampFile: stampFile);
 
   @override
   MedicalInvoiceRequest type(bool? type) => this(type: type);
@@ -175,6 +188,8 @@ class _$MedicalInvoiceRequestCWProxyImpl
   /// MedicalInvoiceRequest(...).copyWith(id: 12, name: "My name")
   /// ````
   MedicalInvoiceRequest call({
+    Object? logoFile = const $CopyWithPlaceholder(),
+    Object? stampFile = const $CopyWithPlaceholder(),
     Object? type = const $CopyWithPlaceholder(),
     Object? fileNamePdfEN = const $CopyWithPlaceholder(),
     Object? fileNamePdfJP = const $CopyWithPlaceholder(),
@@ -198,6 +213,14 @@ class _$MedicalInvoiceRequestCWProxyImpl
     Object? item = const $CopyWithPlaceholder(),
   }) {
     return MedicalInvoiceRequest(
+      logoFile: logoFile == const $CopyWithPlaceholder()
+          ? _value.logoFile
+          // ignore: cast_nullable_to_non_nullable
+          : logoFile as String?,
+      stampFile: stampFile == const $CopyWithPlaceholder()
+          ? _value.stampFile
+          // ignore: cast_nullable_to_non_nullable
+          : stampFile as String?,
       type: type == const $CopyWithPlaceholder()
           ? _value.type
           // ignore: cast_nullable_to_non_nullable
@@ -302,6 +325,8 @@ extension $MedicalInvoiceRequestCopyWith on MedicalInvoiceRequest {
 MedicalInvoiceRequest _$MedicalInvoiceRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalInvoiceRequest(
+      logoFile: json['logoFile'] as String?,
+      stampFile: json['stampFile'] as String?,
       type: json['type'] as bool?,
       fileNamePdfEN: json['fileNamePdfEN'] as String?,
       fileNamePdfJP: json['fileNamePdfJP'] as String?,
@@ -336,6 +361,8 @@ MedicalInvoiceRequest _$MedicalInvoiceRequestFromJson(
 Map<String, dynamic> _$MedicalInvoiceRequestToJson(
         MedicalInvoiceRequest instance) =>
     <String, dynamic>{
+      'logoFile': instance.logoFile,
+      'stampFile': instance.stampFile,
       'type': instance.type,
       'fileNamePdfEN': instance.fileNamePdfEN,
       'fileNamePdfJP': instance.fileNamePdfJP,
