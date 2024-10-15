@@ -1,3 +1,4 @@
+import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../core_network.dart';
@@ -7,6 +8,7 @@ import 'user.dart';
 
 part 'medical_invoice_response.g.dart';
 
+@CopyWith()
 @JsonSerializable()
 class MedicalInvoiceResponse {
   @JsonKey(name: '_id')
