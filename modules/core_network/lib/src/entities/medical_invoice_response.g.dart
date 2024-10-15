@@ -10,6 +10,8 @@ MedicalInvoiceResponse _$MedicalInvoiceResponseFromJson(
         Map<String, dynamic> json) =>
     MedicalInvoiceResponse(
       id: json['_id'] as String,
+      logoFile: json['logoFile'] as String?,
+      stampFile: json['stampFile'] as String?,
       type: json['type'] as bool?,
       fileNamePdfEN: json['fileNamePdfEN'] as String?,
       fileNamePdfJP: json['fileNamePdfJP'] as String?,
@@ -55,6 +57,8 @@ Map<String, dynamic> _$MedicalInvoiceResponseToJson(
         MedicalInvoiceResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
+      'logoFile': instance.logoFile,
+      'stampFile': instance.stampFile,
       'type': instance.type,
       'fileNamePdfEN': instance.fileNamePdfEN,
       'fileNamePdfJP': instance.fileNamePdfJP,

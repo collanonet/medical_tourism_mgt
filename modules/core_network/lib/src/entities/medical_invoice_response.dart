@@ -11,6 +11,8 @@ part 'medical_invoice_response.g.dart';
 class MedicalInvoiceResponse {
   @JsonKey(name: '_id')
   String id;
+   String? logoFile;
+  String? stampFile;
   bool? type;
   String? fileNamePdfEN;
   String? fileNamePdfJP;
@@ -37,6 +39,8 @@ class MedicalInvoiceResponse {
 
   MedicalInvoiceResponse({
     required this.id,
+    this.logoFile,
+    this.stampFile,
     this.type,
     this.fileNamePdfEN,
     this.fileNamePdfJP,
