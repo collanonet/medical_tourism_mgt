@@ -110,7 +110,8 @@ class BasicInformationModel {
           logger.d('createUpdateAll');
           loading.value = const AsyncData(data: true);
         } else {
-          medicalRecord.value = const AsyncData(error: '黄色のボックスに患者様の個人情報をご入力ください');
+          medicalRecord.value =
+              const AsyncData(error: '黄色のボックスに患者様の個人情報をご入力ください');
         }
       } catch (error) {
         logger.d(error);
@@ -1091,18 +1092,20 @@ class BasicInformationModel {
                 value: element.passportNumber,
               ),
               'issueDate': FormControl<DateTime>(
-                value: element.issueDate,validators: [
-                Validators.pattern(
-                  ValidatorRegExp.date,
-                ),
-              ],
+                value: element.issueDate,
+                validators: [
+                  Validators.pattern(
+                    ValidatorRegExp.date,
+                  ),
+                ],
               ),
               'expirationDate': FormControl<DateTime>(
-                value: element.expirationDate,validators: [
-                Validators.pattern(
-                  ValidatorRegExp.date,
-                ),
-              ],
+                value: element.expirationDate,
+                validators: [
+                  Validators.pattern(
+                    ValidatorRegExp.date,
+                  ),
+                ],
               ),
               'visaType': FormControl<String>(
                 value: element.visaType,
@@ -1618,6 +1621,19 @@ class BasicInformationModel {
     } catch (e) {
       logger.d(e);
       isClosed.value = AsyncData(error: e);
+    }
+  }
+
+  ValueNotifier<AsyncData<bool>> deletePatient = ValueNotifier(const AsyncData());
+
+  Future<void> deletePatientData() async {
+    try {
+      deletePatient.value = const AsyncData(loading: true);
+      await patientRepository.deletePatient(patientData.value.requireData.id);
+      deletePatient.value = const AsyncData(data: true);
+    } catch (e) {
+      logger.e(e);
+      deletePatient.value = AsyncData(error: e);
     }
   }
 }

@@ -83,6 +83,8 @@ class PatientRepositoryIml extends PatientRepository {
     String? medicalDayto,
     String? returnDatefrom,
     String? returnDateto,
+    int? page = 1,
+    int? limit = 10,
   }) {
     return remote.patients(
       progress: progress,
@@ -97,6 +99,8 @@ class PatientRepositoryIml extends PatientRepository {
       medicalDayto: medicalDayto,
       returnDatefrom: returnDatefrom,
       returnDateto: returnDateto,
+      page: page,
+      limit: limit,
     );
   }
 
@@ -930,6 +934,113 @@ class PatientRepositoryIml extends PatientRepository {
   Future<void> deleteFileSummary(String id) {
     return remote.deleteFileSummary(id);
   }
+
+  @override
+  Future<void> deleteInvoice(String id) {
+    return remote.deleteInvoice(id);
+  }
+
+  @override
+  Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(String medicalRecordId) {
+    return remote.getInvoicesByMedicalRecordId(medicalRecordId);
+  }
+
+
+  @override
+  Future<MedicalInvoiceResponse> postInvoice(MedicalInvoiceRequest invoiceRequest) {
+    return remote.postInvoice(invoiceRequest);
+  }
+  @override
+  Future<MedicalInvoiceResponse> putInvoice(String id, MedicalInvoiceRequest invoiceRequest) {
+    return remote.putInvoice(id, invoiceRequest);
+  }
+
+  @override
+  Future<List<MedicalInvoiceResponse>> getInvoices({String? medicalRecord, bool? type}) {
+    return remote.getInvoices(medicalRecord: medicalRecord, type: type);
+  }
+  
+  @override
+  Future<AfterGettingVisaResponse> getAfterGettingVisa() {
+    return remote.getAfterGettingVisa();
+  }
+  
+  @override
+  Future<MedicalVisaAfterGettingVisaResponse> getAfterGettingVisaFinal() {
+    return remote.getAfterGettingVisaFinal();
+  }
+  
+  @override
+  Future<MedicalVisaRequiredInJapanResponse> getMedicalRequiredInJapan() {
+    return remote.getMedicalRequiredInJapan();
+  }
+  
+  @override
+  Future<MedicalVisaNecessaryInJapanResponse> getMedicalVisaNecessaryInJapan() {
+    return remote.getMedicalVisaNecessaryInJapan();
+  }
+  
+  @override
+  Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal() {
+    return remote.getMedicalVisaPersonal();
+  }
+  
+  @override
+  Future<List<MedicalVisaStayPeriodResponse>> getMedicalVisaStayPeriod() {
+    return remote.getMedicalVisaStayPeriod();
+  }
+  
+  @override
+  Future<MedicalVisaTravelCompanionResponse> getMedicalVisaTravelCompanion() {
+   return remote.getMedicalVisaTravelCompanion();
+  }
+  
+  @override
+  Future<MedicalVisaVisaWithdrawalResponse> getMedicalVisaWithdrawal() {
+   return remote.getMedicalVisaWithdrawal();
+  }
+  
+  @override
+  Future<MedicalVisaRequiredInJapanResponse> popMedicalVisaRequiredInJapan(RequiredInJapan requiredInJapan) {
+    return remote.popMedicalVisaRequiredInJapan(requiredInJapan);
+  }
+  
+  @override
+  Future<AfterGettingVisaResponse> postAfterGettingVisa(AfterGettingVisaRequest request) {
+    return remote.postAfterGettingVisa(request);
+  }
+  
+  @override
+  Future<MedicalVisaAfterGettingVisaResponse> postAfterGettingVisaFinal(MedicalAfterGettingVisaFinalRequest request) {
+   return remote.postAfterGettingVisaFinal(request);
+  }
+  
+  @override
+  Future<MedicalVisaNecessaryInJapanResponse> postMedicalVisaNecessaryInJapan(MedicalVisaNecessaryInJapanRequest request) {
+   return remote.postMedicalVisaNecessaryInJapan(request);
+  }
+  
+  @override
+  Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(MedicalVisaPersonalRequest request) {
+    return remote.postMedicalVisaPersonal(request);
+  }
+  
+  @override
+  Future<MedicalVisaStayPeriodResponse> postMedicalVisaStayPeriod(MedicalVisaStayPeriodRequest request) {
+    return remote.postMedicalVisaStayPeriod(request);
+  }
+  
+  @override
+  Future<MedicalVisaTravelCompanionResponse> postMedicalVisaTravelCompanion(MedicalVisaTravelCompanionRequest request) {
+   return remote.postMedicalVisaTravelCompanion(request);
+  }
+  
+  @override
+  Future<MedicalVisaVisaWithdrawalResponse> postMedicalVisaWithdrawal(MedicalVisaWithdrawalRequest request) {
+   return remote.postMedicalVisaWithdrawal(request);
+  }
+
+
   
  
 }

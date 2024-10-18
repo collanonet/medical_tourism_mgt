@@ -6,16 +6,24 @@ part of 'detail_facility_drop_in_facility.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Facility _$FacilityFromJson(Map<String, dynamic> json) => Facility(
-      name: json['name'] as String?,
-      location: json['location'] as String?,
-      personInChargeName: json['personInChargeName'] as String?,
-      telephoneNumber: json['telephoneNumber'] as String?,
+DetailFacilityResponse _$DetailFacilityResponseFromJson(
+        Map<String, dynamic> json) =>
+    DetailFacilityResponse(
+      id: json['_id'] as String,
+      accommodationName: json['accommodationName'] as String?,
+      address: json['address'] as String?,
+      contctPersonName: json['contctPersonName'] as String?,
+      phoneNumber: json['phoneNumber'] as String?,
+      tour: json['tour'] as String?,
     );
 
-Map<String, dynamic> _$FacilityToJson(Facility instance) => <String, dynamic>{
-      'name': instance.name,
-      'location': instance.location,
-      'personInChargeName': instance.personInChargeName,
-      'telephoneNumber': instance.telephoneNumber,
+Map<String, dynamic> _$DetailFacilityResponseToJson(
+        DetailFacilityResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'accommodationName': instance.accommodationName,
+      'address': instance.address,
+      'contctPersonName': instance.contctPersonName,
+      'phoneNumber': instance.phoneNumber,
+      'tour': instance.tour,
     };

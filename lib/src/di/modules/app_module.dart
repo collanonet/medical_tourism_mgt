@@ -10,7 +10,6 @@ import 'package:feature_invoice/feature_invoice.gm.dart';
 import 'package:feature_medical_visa/feature_medical_visa.gm.dart';
 import 'package:feature_patient/feature_patient.gm.dart';
 import 'package:feature_process_chart/feature_process_chart.gm.dart';
-import 'package:feature_quotation/feature_quotation.gm.dart';
 import 'package:feature_report/feature_report.gm.dart';
 import 'package:feature_sale/feature_sale.gm.dart';
 import 'package:feature_web_appointment/feature_web_appointment.gm.dart';
@@ -42,7 +41,6 @@ abstract class AppModule {
         PrePatientRoute.name: [PermissionRole.admin],
         DetailPatientRoute.name: [PermissionRole.admin],
         PatientsRoute.name: [PermissionRole.admin],
-        QuotationsRoute.name: [PermissionRole.admin],
         ReportsRoute.name: [PermissionRole.admin],
         ReportTypeRoute.name: [PermissionRole.admin],
         SalesRoute.name: [PermissionRole.admin],

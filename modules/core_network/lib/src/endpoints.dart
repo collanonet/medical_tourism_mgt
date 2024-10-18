@@ -246,4 +246,18 @@ class EndPoints {
 
   //A9
   static const SUMMARY_LIST = '/medical-record-file-summary';
+
+  //A11
+  static const MEDICAL_VISA_PERSONAL = '/personal';
+  static const MEDICAL_VISA_STAY_PERIOD = '/stay-period';
+  static const MEDICAL_VISA_REQUIRED_IN_JAPAN = '/required-in-japan';
+  static const MEDICAL_VISA_WITHDRAWAL = '/withdrawal';
+  static const MEDICAL_VISA_AFTER_GETTING_VISA = '/after-getting-visa';
+  static const MEDICAL_VISA_TRAVEL_COMPANION = '/travel-companion';
+  static const MEDICAL_VISA_NECESSARY_IN_JAPAN = 'necessary-in-japan';
+  static const MEDICAL_VISA_AFTER_GETTING_VISA_FINAL = '/after-getting-visa-final';
+
+
+  // A15
+  static const INVOICE = '/invoices';
 }

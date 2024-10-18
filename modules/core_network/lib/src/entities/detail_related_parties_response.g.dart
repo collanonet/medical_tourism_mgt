@@ -28,7 +28,8 @@ DetailRelatedPartiesResponse _$DetailRelatedPartiesResponseFromJson(
       accommodationName: json['accommodationName'] as String?,
       address: json['address'] as String?,
       phoneNumber2: json['phoneNumber2'] as String?,
-    )..tour = json['tour'] as String?;
+      tour: json['tour'] as String?,
+    );
 
 Map<String, dynamic> _$DetailRelatedPartiesResponseToJson(
         DetailRelatedPartiesResponse instance) =>

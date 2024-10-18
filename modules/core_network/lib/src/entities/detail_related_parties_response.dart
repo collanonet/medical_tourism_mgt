@@ -34,10 +34,7 @@ class DetailRelatedPartiesResponse {
     this.accommodationName,
     this.address,
     this.phoneNumber2,
-    // this.itineraryManagement,
-    // this.guideInterpreter,
-    // this.medicalInterpreter,
-    // this.possibilityOfStayingTogether,
+    this.tour,
   });
 
   factory DetailRelatedPartiesResponse.fromJson(Map<String,dynamic> json){

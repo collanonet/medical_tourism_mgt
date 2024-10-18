@@ -402,4 +402,14 @@ class HospitalRepositoryIml extends HospitalRepository {
   Future<void> deleteTreatmentTeleMenu(String value) {
     return remote.deleteTreatmentTeleMenu(value);
   }
+
+  @override
+  Future<void> deleteBasicInformationHospital(String id) {
+    return remote.deleteBasicInformationHospital(id);
+  }
+
+  @override
+  Future<void> deleteMedicalRecordBasicInfoHospital(String id) {
+    return remote.deleteMedicalRecordBasicInfoHospital(id);
+  }
 }

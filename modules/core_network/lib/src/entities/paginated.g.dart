@@ -13,7 +13,7 @@ Paginated<T> _$PaginatedFromJson<T>(
     Paginated<T>(
       items: (json['items'] as List<dynamic>?)?.map(fromJsonT).toList(),
       totalPages: (json['totalPages'] as num).toInt(),
-      currentPage: (json['currentPage'] as num).toInt(),
+      currentPage: json['currentPage'] as String,
     );
 
 Map<String, dynamic> _$PaginatedToJson<T>(

@@ -11,22 +11,44 @@ class InvoiceRemoteProvider {
 
   final ApiService apiService;
 
-  Future<List<InvoiceResponse>> getInvoiceDetail() async{
-      return await apiService.getInvoiceDetail();
+  Future<MedicalInvoiceResponse> putInvoice(
+      String id, MedicalInvoiceRequest invoiceRequest) {
+    return apiService.putInvoice(id, invoiceRequest);
   }
 
-  Future<InvoiceResponse> postInvoiceDetail(InvoiceRequest invoiceRequest) async{
-
-    return await apiService.postInvoiceDetail(invoiceRequest);
+  Future<MedicalInvoiceResponse> postInvoice(
+      MedicalInvoiceRequest invoiceRequest) {
+    return apiService.postInvoice(invoiceRequest);
   }
 
-  Future<List<InvoiceFilterResponse>> getInvoiceFilter() async{
-    return await apiService.filterInvoice();
+  Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(
+      String medicalRecordId) {
+    return apiService.getInvoicesByMedicalRecordId(medicalRecordId);
   }
 
-  Future<InvoiceFilterResponse> postFilterInvoice(InvoiceFilterRequest invoiceFilterRequest)async{
-    return await apiService.postFilterInvoice(invoiceFilterRequest);
+  Future<List<MedicalInvoiceResponse>> getInvoices({
+    String? medicalRecord,
+    bool? type,
+    String? nameOfHospital,
+    String? agentName,
+    String? patientName,
+    DateTime? issueDateFrom,
+    DateTime? issueDateTo,
+    String? prospects,
+  }) {
+    return apiService.getInvoices(
+      medicalRecord: medicalRecord,
+      type: type,
+      nameOfHospital: nameOfHospital,
+      agentName: agentName,
+      patientName: patientName,
+      issueDateFrom: issueDateFrom,
+      issueDateTo: issueDateTo,
+      prospects: prospects,
+    );
+  }
+
+  Future<void> deleteInvoice(String id) {
+    return apiService.deleteInvoice(id);
   }
 }
-
-

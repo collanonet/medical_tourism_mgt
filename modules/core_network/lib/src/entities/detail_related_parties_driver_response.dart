@@ -9,7 +9,7 @@ class DetailRelatedPartiesDriverResponse {
   final String? id;
   DateTime? dateYearFrom;
   DateTime? dateYearTo;
-  String? carNumber;
+  int? carNumber;
   String? vehicleType;
   String? driverNamaKanji;
   String? driverNameKana;
@@ -20,6 +20,7 @@ class DetailRelatedPartiesDriverResponse {
   String? accommodationName;
   String? address;
   String? phoneNumber2;
+  String? tour;
 
 
   DetailRelatedPartiesDriverResponse({
@@ -37,6 +38,7 @@ class DetailRelatedPartiesDriverResponse {
     this.accommodationName,
     this.address,
     this.phoneNumber2,
+    this.tour,
   });
 
   factory DetailRelatedPartiesDriverResponse.fromJson(

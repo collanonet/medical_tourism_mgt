@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -444,6 +445,9 @@ class _PatientResponseTreatmentScreenState
                               '服薬中の薬名、有効成分含有量、服用方法、服用量など',
                               style: context.textTheme.titleLarge,
                             ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
                             ReactiveFormArray(
                               formArrayName: 'drugDetails',
                               builder: (context, formArray, child) {
@@ -582,12 +586,18 @@ class _PatientResponseTreatmentScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            const Text('家族歴'),
+                            Text('家族歴', style: context.textTheme.titleLarge),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
                             const Text('詳細'),
                             ReactiveTextField(
                               formControlName: 'familyHistoryDetail',
                               minLines: 3,
                               maxLines: 3,
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
                             ),
                             Text('薬物アレルギー',
                                 style: context.textTheme.titleMedium),
@@ -652,6 +662,9 @@ class _PatientResponseTreatmentScreenState
                               minLines: 3,
                               maxLines: 3,
                             ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
                             Text('治療費について',
                                 style: context.textTheme.titleMedium),
                             SizedBox(
@@ -665,6 +678,9 @@ class _PatientResponseTreatmentScreenState
                                 FilteringTextInputFormatter.allow(
                                     RegExp(r'[0-9]')),
                               ],
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
                             ),
                             Text('希望医療機関',
                                 style: context.textTheme.titleMedium),
@@ -731,24 +747,82 @@ class _PatientResponseTreatmentScreenState
                               minLines: 3,
                               maxLines: 3,
                             ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
                             const Text('理由'),
                             ReactiveTextField(
                               formControlName: 'reason',
                               minLines: 3,
                               maxLines: 3,
                             ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
+                            ),
                             Text(
                               '受診希望日',
                               style: context.textTheme.bodySmall,
                             ),
-                            ReactiveTextField(
-                              formControlName: 'desiredDateOfConsultation',
+                            Row(
+                              children: [
+                                IntrinsicWidth(
+                                  stepWidth: 300,
+                                  child: ReactiveDatePicker<DateTime>(
+                                    formControlName:
+                                        'desiredDateOfConsultation',
+                                    firstDate: DateTime(2000),
+                                    lastDate: DateTime(2100),
+                                    builder: (BuildContext context,
+                                        ReactiveDatePickerDelegate<dynamic>
+                                            picker,
+                                        Widget? child) {
+                                      return Stack(
+                                        children: [
+                                          ReactiveDatePicker<DateTime>(
+                                            formControlName:
+                                                'desiredDateOfConsultation',
+                                            firstDate: DateTime(1900),
+                                            lastDate: DateTime(2100),
+                                            builder: (context, picker, child) {
+                                              return ReactiveTextField<
+                                                  DateTime>(
+                                                formControlName:
+                                                    'desiredDateOfConsultation',
+                                                valueAccessor:
+                                                    DateTimeValueAccessor(),
+                                                decoration: InputDecoration(
+                                                  fillColor: Colors.white,
+                                                  filled: true,
+                                                  suffixIcon: IconButton(
+                                                    icon: const Icon(
+                                                      CupertinoIcons.calendar,
+                                                      color: Colors.grey,
+                                                    ),
+                                                    onPressed:
+                                                        picker.showPicker,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
                             ),
                             const Text('日本滞在予定期間'),
                             ReactiveTextField(
                               formControlName: 'scheduledPeriodOfStayInJapan',
                               minLines: 3,
                               maxLines: 3,
+                            ),
+                            SizedBox(
+                              height: context.appTheme.spacing.marginMedium,
                             ),
                             Text('現在の体調状況',
                                 style: context.textTheme.titleMedium),

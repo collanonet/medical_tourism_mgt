@@ -124,11 +124,12 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                           },
                         );
                       }),
-                  const Expanded(flex: 2, child: Text('施設写真名')),
+                  const Expanded(flex: 2, child: Text('病院名')),
                   const Expanded(child: Text('撮影')),
                   const Expanded(child: Text('撮影日')),
                   const Expanded(child: Text('共有')),
                   const Expanded(child: SizedBox()),
+                  //const SizedBox(width: 160),
                 ],
               ),
               Expanded(
@@ -181,6 +182,7 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                               ? const SizedBox()
                               : const Icon(Icons.person),
                         ),
+                        const SizedBox(width: 80),
                         Expanded(
                           child: InkWell(
                             onTap: () {
@@ -280,7 +282,8 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                                                                     context)
                                                                 .pop();
                                                           },
-                                                          child: const Text('キャンセル'),
+                                                          child: const Text(
+                                                              'キャンセル'),
                                                         ),
                                                         TextButton(
                                                           onPressed: () {
@@ -293,7 +296,8 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                                                                     context)
                                                                 .pop();
                                                           },
-                                                          child: const Text('削除する'),
+                                                          child: const Text(
+                                                              '削除する'),
                                                         ),
                                                       ],
                                                     ),

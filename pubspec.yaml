@@ -16,7 +16,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
 # In Windows, build-name is used as the major, minor, and patch parts
 # of the product and file versions while build-number is used as the build suffix.
-version: 1.0.0+9
+version: 1.0.0+12
 
 environment:
   sdk: '>=3.1.0 <4.0.0'
@@ -53,7 +53,6 @@ dependencies:
   data_invoice: 0.0.1-alpha.1
   data_medical_visa: 0.0.1-alpha.1
   data_patient: 0.0.1-alpha.1
-  data_quotation: 0.0.1-alpha.1
   data_sale: 0.0.1-alpha.1
   data_report: 0.0.1-alpha.1
   data_process_chart: 0.0.1-alpha.1
@@ -70,7 +69,6 @@ dependencies:
   feature_invoice: 0.0.1-alpha.1
   feature_medical_visa: 0.0.1-alpha.1
   feature_patient: 0.0.1-alpha.1
-  feature_quotation: 0.0.1-alpha.1
   feature_report: 0.0.1-alpha.1
   feature_sale: 0.0.1-alpha.1
 
@@ -107,8 +105,11 @@ dependencies:
   printing: ^5.12.0
   collection: ^1.18.0
   copy_with_extension: ^5.0.4
-  image: ^4.2.0
+  image: ^4.3.0
   import_sorter: ^4.6.0
+  htmltopdfwidgets: ^1.0.4
+  pdf: ^3.11.1
+  excel: ^4.0.6
   
 
 dev_dependencies:
@@ -141,8 +142,13 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/fonts/NotoSansJPRegular.ttf
+    - assets/fonts/NotoSans_JP.ttf
+    - assets/fonts/Noto_Sans_TC.ttf
+    - assets/fonts/Noto_Sans_ZH.ttf
+    - assets/fonts/Roboto_VN.ttf
+    - assets/fonts/Open_Sans_EN.ttf
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

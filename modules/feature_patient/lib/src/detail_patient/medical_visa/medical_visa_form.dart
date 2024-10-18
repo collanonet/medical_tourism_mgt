@@ -1,340 +1,584 @@
 // Package imports:
+import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup medicalVisaForm() {
-  return FormGroup({
-    //本人 personal
+  return FormGroup(
+    {
+      //本人 personal
 
-    'personal': FormGroup({
-      'medicalVisa': FormControl<String>(),
-      'applicationDate': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
+      'personal': FormArray([
+        FormGroup({
+          'medicalVisa': FormControl<String>(value: ''),
+          'applicationDate': FormControl<DateTime>(
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
           ),
-        ],
-      ),
-      'issueDate': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
+          'issueDate': FormControl<DateTime>(
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
           ),
-        ],
-      ),
-      'expirationDate': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
+          'expirationDate': FormControl<DateTime>(
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
           ),
-        ],
-      ),
-      'accompanyingPersonsNumber': FormControl<String>(),
-      'visaIssuingOverseasEstablishments': FormControl<String>(),
-      'remarks': FormControl<String>(),
-      'paymentStatus': FormControl<String>(),
-    }),
+          'accompanyingPersonsNumber': FormControl<String>(value: ''),
+          'visaIssuingOverseasEstablishments': FormControl<String>(value: ''),
+          'remarks': FormControl<String>(value: ''),
+          'paymentStatus': FormControl<String>(value: ''),
+        }),
+      ]),
 
 // 滞在期間 stay period
-    'stayPeriod': FormGroup({
-      'stayStartingDatePersonalReference': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
+      'stayPeriod': FormArray(
+        [
+          FormGroup(
+            {
+              'stayStartingDatePersonalReference': FormControl<DateTime>(
+                validators: [
+                  Validators.pattern(
+                    ValidatorRegExp.date,
+                  ),
+                ],
+              ),
+              'stayEndDate': FormControl<DateTime>(
+                validators: [
+                  Validators.pattern(
+                    ValidatorRegExp.date,
+                  ),
+                ],
+              ),
+            },
           ),
         ],
       ),
-      'stayEndDate': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
-          ),
-        ],
-      ),
-      'stayStartingDateActual': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
-          ),
-        ],
-      ),
-      'expirationDate': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
-          ),
-        ],
-      ),
-    }),
 
-    // 入国 hand in
-    'handIn': FormGroup({
-      'departure': FormControl<String>(),
-      'arrival': FormControl<String>(),
-      'flightNumber': FormControl<String>(),
-      'departureTime': FormControl<String>(),
-      'arrivalTime': FormControl<String>(),
-    }),
+      'requiredInJapan': FormGroup(
+        {
+          'visaInfo': FormArray(
+            [
+              FormGroup(
+                {
+                  'passportDate': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'passportFileSelect': FormControl<FileSelect>(),
+                  'letterOfGuaranteeDate': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'letterOfGuaranteeFileSelect': FormControl<FileSelect>(),
+                  'sendBy': FormControl<String>(value: ''),
+                  'byEMS': FormControl<bool>(value: false),
+                  'byFedex': FormControl<bool>(value: false),
+                  'byothers': FormControl<bool>(value: false),
+                },
+              ),
+            ],
+          ),
+          'schedule': FormArray(
+            [
+              FormGroup(
+                {
+                  'treatmentSchedule': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  )
+                },
+              )
+            ],
+          ),
+          'statementOfReasonsDate': FormControl<DateTime>(
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'travelCompanionListDate': FormControl<DateTime>(
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'travelInfo': FormArray(
+            [
+              FormGroup(
+                {
+                  'landingPermissionDate': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'visa_validity_period_expiration_date': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'date_of_entry_into_japan': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'departure_date_from_japan': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
 
-    // 出国 hand out
-    'handOut': FormGroup({
-      'departure': FormControl<String>(),
-      'arrival': FormControl<String>(),
-      'flightNumber': FormControl<String>(),
-      'departureTime': FormControl<String>(),
-      'arrivalTime': FormControl<String>(),
-      'seatNumber': FormControl<String>(),
-    }),
-    // ビザの取り下げ visa withdrawal
-    'visaWithdrawal': FormGroup({
-      'subjectVisaWithdrawal': FormControl<String>(),
-      'deathOrOccurrenceEventDate': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
-          ),
-        ],
-      ),
-      'remarks': FormControl<String>(),
-    }),
-// 同行者  companion
-    'companion': FormGroup({
-      'seatNumber': FormControl<String>(),
-      'remarks': FormControl<String>(),
-      'remarks2': FormControl<String>(),
-    }),
-    // 日本で必要 required in Japan
-    'requiredInJapan': FormGroup({
-      'passportFileUploadDate': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
-          ),
-        ],
-      ),
-      'passportFileUpload': FormControl<String>(),
+                  // 入国 hand in
+                  'departureIn': FormControl<String>(value: ''),
+                  'arrivalIn': FormControl<String>(value: ''),
+                  'flightNumberIn': FormControl<String>(value: ''),
+                  'departureTimeIn': FormControl<String>(value: ''),
+                  'arrivalTimeIn': FormControl<String>(value: ''),
 
-      'personal_reference_file_upload_date': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
-          ),
-        ],
-      ),
-      'personal_reference_file_upload': FormControl<String>(),
-      'send_original_ems_fedex_pds_file_upload': FormControl<String>(),
+                  // 出国 hand out
+                  'departureOut': FormControl<String>(value: ''),
+                  'arrivalOut': FormControl<String>(value: ''),
+                  'flightNumberOut': FormControl<String>(value: ''),
+                  'departureTimeOut': FormControl<String>(value: ''),
+                  'arrivalTimeOut': FormControl<String>(value: ''),
+                  'seatNumberOut': FormControl<String>(value: ''),
 
-      'treatment_schedule_file_upload_date': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
-          ),
-        ],
+                  'remarks': FormControl<String>(value: ''),
+                },
+              ),
+            ],
+          )
+        },
       ),
-      'treatment_schedule_file_upload': FormControl<String>(),
+      'visaWithdrawal': FormGroup({
+        'subjectVisaWithdrawal': FormControl<bool>(value: false),
+        'deathOrOccurrenceEventDate': FormControl<DateTime>(
+          validators: [
+            Validators.pattern(
+              ValidatorRegExp.date,
+            ),
+          ],
+        ),
+        'remarks': FormControl<String>(),
+      }),
 
-      'statement_reasons_file_upload_date': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
+      'afterGettingVisa': FormGroup(
+        {
+          'vasaInfo': FormArray(
+            [
+              FormGroup(
+                {
+                  'visaPage': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'landingPermit': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                },
+              )
+            ],
           ),
-        ],
+          'ticket': FormArray(
+            [
+              FormGroup({
+                'plane_ticket_for_your_visit_to_japan': FormControl<DateTime>(
+                  validators: [
+                    Validators.pattern(
+                      ValidatorRegExp.date,
+                    ),
+                  ],
+                ),
+              })
+            ],
+          ),
+          'ticketBack': FormArray(
+            [
+              FormGroup(
+                {
+                  'return_flight_ticket': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                },
+              ),
+            ],
+          ),
+          'boardingPass': FormArray(
+            [
+              FormGroup({
+                'boarding_pass_for_return_flight': FormControl<DateTime>(
+                  validators: [
+                    Validators.pattern(
+                      ValidatorRegExp.date,
+                    ),
+                  ],
+                ),
+              })
+            ],
+          ),
+          'certificate_of_eligibility': FormControl<DateTime>(
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+        },
       ),
-      'statement_reasons_file_upload': FormControl<String>(),
+      
+      'travel_companion': FormGroup(
+        {
+          'nameRomaji': FormControl<String>(),
+          'dateBirth': FormControl<DateTime>(),
+          'age': FormControl<int>(),
+          'sex': FormControl<String>(value: ''),
+          'addressArea': FormControl<String>(),
+          'numberPassport': FormControl<String>(),
+          'travelInfo': FormArray(
+            [
+              FormGroup(
+                {
+                  'landingPermissionDate': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'visa_validity_period_expiration_date': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'date_of_entry_into_japan': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'departure_date_from_japan': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
 
-      'accompanying_persons_list_file_upload_date': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
-          ),
-        ],
-      ),
-      'accompanying_persons_list_file_upload': FormControl<String>(),
-      // ビザ取得後に必要なもの required after obtaining a visa
-      'visa_page_file_upload_date': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
-          ),
-        ],
-      ),
-      'visa_page_file_upload': FormControl<String>(),
+                  // 入国 hand in
+                  'departureIn': FormControl<String>(value: ''),
+                  'arrivalIn': FormControl<String>(value: ''),
+                  'flightNumberIn': FormControl<String>(value: ''),
+                  'departureTimeIn': FormControl<String>(value: ''),
+                  'arrivalTimeIn': FormControl<String>(value: ''),
 
-      'landing_permit_file_upload_date': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
+                  // 出国 hand out
+                  'departureOut': FormControl<String>(value: ''),
+                  'arrivalOut': FormControl<String>(value: ''),
+                  'flightNumberOut': FormControl<String>(value: ''),
+                  'departureTimeOut': FormControl<String>(value: ''),
+                  'arrivalTimeOut': FormControl<String>(value: ''),
+                  'seatNumberOut': FormControl<String>(value: ''),
+                },
+              ),
+            ],
           ),
-        ],
+          'travelRemarks': FormControl<String>(value: ''),
+          'subjectVisaWithdrawal': FormControl<bool>(value: false),
+          'deathOrOccurrenceEventDate': FormControl<DateTime>(
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'remarks': FormControl<String>(),
+          'vasaInfo': FormArray(
+            [
+              FormGroup(
+                {
+                  'visaPage': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'landingPermit': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                },
+              )
+            ],
+          ),
+          'ticket': FormArray(
+            [
+              FormGroup({
+                'plane_ticket_for_your_visit_to_japan': FormControl<DateTime>(
+                  validators: [
+                    Validators.pattern(
+                      ValidatorRegExp.date,
+                    ),
+                  ],
+                ),
+              })
+            ],
+          ),
+          'ticketBack': FormArray(
+            [
+              FormGroup(
+                {
+                  'return_flight_ticket': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                },
+              ),
+            ],
+          ),
+          'boardingPass': FormArray(
+            [
+              FormGroup({
+                'boarding_pass_for_return_flight': FormControl<DateTime>(
+                  validators: [
+                    Validators.pattern(
+                      ValidatorRegExp.date,
+                    ),
+                  ],
+                ),
+              })
+            ],
+          ),
+          'certificate_of_eligibility': FormControl<DateTime>(
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+        },
       ),
-      'landing_permit_file_upload': FormControl<String>(),
 
-      'airline_ticke_arrival_japan_file_upload_date': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
+      'necessaryInJapan': FormGroup(
+        {
+          'visaInfo': FormArray(
+            [
+              FormGroup(
+                {
+                  'passportDate': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'passportFileSelect': FormControl<FileSelect>(),
+                  'letterOfGuaranteeDate': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'letterOfGuaranteeFileSelect': FormControl<FileSelect>(),
+                  'sendBy': FormControl<String>(value: ''),
+                  'byEMS': FormControl<bool>(value: false),
+                  'byFedex': FormControl<bool>(value: false),
+                  'byothers': FormControl<bool>(value: false),
+                },
+              ),
+            ],
           ),
-        ],
+          'schedule': FormArray(
+            [
+              FormGroup(
+                {
+                  'treatmentSchedule': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  )
+                },
+              )
+            ],
+          ),
+          'statementOfReasonsDate': FormControl<DateTime>(
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'travelCompanionListDate': FormControl<DateTime>(
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'travelInfo': FormArray(
+            [
+              FormGroup(
+                {
+                  'landingPermissionDate': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'visa_validity_period_expiration_date': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'date_of_entry_into_japan': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'departure_date_from_japan': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                },
+              ),
+            ],
+          )
+        },
       ),
-      'airline_ticke_arrival_japan_file_upload': FormControl<String>(),
 
-      'airline_ticket_return_japan_file_upload_date': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
+      'afterGettingVisaFinal': FormGroup(
+        {
+          'vasaInfo': FormArray(
+            [
+              FormGroup(
+                {
+                  'visaPage': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                  'landingPermit': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                },
+              )
+            ],
           ),
-        ],
-      ),
-      'airline_ticket_return_japan_file_upload': FormControl<String>(),
-
-      'boardingPassReturningFileUploadDate': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
+          'ticket': FormArray(
+            [
+              FormGroup({
+                'plane_ticket_for_your_visit_to_japan': FormControl<DateTime>(
+                  validators: [
+                    Validators.pattern(
+                      ValidatorRegExp.date,
+                    ),
+                  ],
+                ),
+              })
+            ],
           ),
-        ],
-      ),
-      'boardingPassReturningFileUpload': FormControl<String>(),
-
-      'certificateEligibilityFileUploadDate': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
+          'ticketBack': FormArray(
+            [
+              FormGroup(
+                {
+                  'return_flight_ticket': FormControl<DateTime>(
+                    validators: [
+                      Validators.pattern(
+                        ValidatorRegExp.date,
+                      ),
+                    ],
+                  ),
+                },
+              ),
+            ],
           ),
-        ],
-      ),
-      'certificateEligibilityFileUpload': FormControl<String>(),
-      // 申請時に必要なもの required at the time of application
-      'photoFileUploadDate': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
+          'boardingPass': FormArray(
+            [
+              FormGroup({
+                'boarding_pass_for_return_flight': FormControl<DateTime>(
+                  validators: [
+                    Validators.pattern(
+                      ValidatorRegExp.date,
+                    ),
+                  ],
+                ),
+              })
+            ],
           ),
-        ],
-      ),
-      'photoFileUpload': FormControl<String>(),
-
-      'visaApplicationFormFileUploadDate': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
+          'certificate_of_eligibility': FormControl<DateTime>(
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
           ),
-        ],
+          'remarks': FormControl<String>(),
+        },
       ),
-      'visaApplicationFormFileUpload': FormControl<String>(),
-
-      'bankBalanceCertificateFileUploadDate': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
-          ),
-        ],
-      ),
-      'bankBalanceCertificateFileUpload': FormControl<String>(),
-
-      'identificationDocumentsFileUploadDate': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
-          ),
-        ],
-      ),
-      'identificationDocumentsFileUpload': FormControl<String>(),
-
-      'othersFileUploadDate': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
-          ),
-        ],
-      ),
-      'othersFileUpload': FormControl<String>(),
-    }),
-    'addition': FormGroup({
-      'dateLandingPermit': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
-          ),
-        ],
-      ),
-      'dateVisaExpiration': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
-          ),
-        ],
-      ),
-      'dateEntryIntoJapan': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
-          ),
-        ],
-      ),
-      'dateEntryFromJapan': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
-          ),
-        ],
-      ),
-      'departureEntry': FormControl<String>(),
-      'arrivalEntry': FormControl<String>(),
-      'flightNumberEntry': FormControl<String>(),
-      'departureTimeEntry': FormControl<String>(),
-      'arrivalTimeEntry': FormControl<String>(),
-      'departureDeparture': FormControl<String>(),
-      'arrivalDeparture': FormControl<String>(),
-      'flightNumberDeparture': FormControl<String>(),
-      'departureTimeDeparture': FormControl<String>(),
-      'arrivalTimeDeparture': FormControl<String>(),
-      'flightSeatNumbeDeparturer': FormControl<String>(),
-      'remarks': FormControl<String>(),
-    }),
-    // Withdrawal of visa
-    'withdrawalOfVisa': FormGroup({
-      'subjectToVisaWithdrawal': FormControl<bool>(),
-      'deathOrOccurrenceEventDate': FormControl<DateTime>(
-        validators: [
-          Validators.pattern(
-            ValidatorRegExp.date,
-          ),
-        ],
-      ),
-      'remarks': FormControl<String>(),
-    }),
-
-    // 同行者
-    'companionOther': FormGroup({
-      'nameRomaji': FormControl<String>(),
-      'dateBirth': FormControl<DateTime>(),
-      'sex': FormControl<bool>(),
-      'addressArea': FormControl<String>(),
-      'numberPassport': FormControl<String>(),
-      'dateLandingPermit': FormControl<DateTime>(),
-      'dateVisaExpiration': FormControl<DateTime>(),
-      'dateEntryIntoJapan': FormControl<DateTime>(),
-      'dateEntryFromJapan': FormControl<DateTime>(),
-      'departureEntry': FormControl<String>(),
-      'arrivalEntry': FormControl<String>(),
-      'flightNumberEntry': FormControl<String>(),
-      'departureTimeEntry': FormControl<String>(),
-      'arrivalTimeEntry': FormControl<String>(),
-      'departureDeparture': FormControl<String>(),
-      'arrivalDeparture': FormControl<String>(),
-      'flightNumberDeparture': FormControl<String>(),
-      'departureTimeDeparture': FormControl<String>(),
-      'arrivalTimeDeparture': FormControl<String>(),
-      'flightSeatNumbeDeparturer': FormControl<String>(),
-      'remarks': FormControl<String>(),
-    }),
-
-    // Withdrawal of visa
-    'withdrawalOfVisaOther': FormGroup({
-      'subjectToVisaWithdrawal': FormControl<bool>(),
-      'reason': FormControl<String>(),
-      'remarks': FormControl<String>(),
-    }),
-  });
+    },
+  );
 }

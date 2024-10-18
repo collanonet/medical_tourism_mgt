@@ -221,29 +221,49 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                     label: const Text(
                                       'ホームページ',
                                     ),
-                                    suffixIcon: Container(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 5, horizontal: 20),
-                                      child: Container(
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 5, horizontal: 15),
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                                BorderRadius.circular(20),
-                                            color: context
-                                                .appTheme.primaryColor),
-                                        child: Text(
-                                          '開く',
-                                          style: context.textTheme.labelLarge
-                                              ?.copyWith(
-                                                  color: const Color(
-                                                      0xffFFFFFF)),
-                                        ),
-                                      ),
-                                    ),
+                                    suffixIcon: ReactiveValueListenableBuilder<
+                                            String>(
+                                        formControlName: 'homepage',
+                                        builder: (context, control, _) {
+                                          return InkWell(
+                                            onTap: () async {
+                                              if (control.value != null) {
+                                                openLinkInBrowser(
+                                                    url: control.value!);
+                                              }
+                                            },
+                                            child: Container(
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      vertical: 5,
+                                                      horizontal: 20),
+                                              child: Container(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 5,
+                                                        horizontal: 15),
+                                                decoration: BoxDecoration(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20),
+                                                    color: context
+                                                        .appTheme.primaryColor),
+                                                child: Text(
+                                                  '開く',
+                                                  style: context
+                                                      .textTheme.labelLarge
+                                                      ?.copyWith(
+                                                          color: const Color(
+                                                              0xffFFFFFF)),
+                                                ),
+                                              ),
+                                            ),
+                                          );
+                                        }),
                                   ),
                                 ),
                               ),
+                              Expanded(child: SizedBox())
                             ],
                           ),
                           Row(
@@ -1061,8 +1081,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                         children: [
                           Row(
                             children: [
-                              const IntrinsicWidth(
-                                stepWidth: 150,
+                              const SizedBox(
+                                width: 150,
                                 child: Text(
                                   '部門',
                                   style: TextStyle(
@@ -1075,8 +1095,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              const IntrinsicWidth(
-                                stepWidth: 150,
+                              const SizedBox(
+                                width: 150,
                                 child: Text(
                                   '診療時間',
                                   style: TextStyle(
@@ -1177,8 +1197,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           ),
                           Row(
                             children: [
-                              IntrinsicWidth(
-                                stepWidth: 150,
+                              SizedBox(
+                                width: 150,
                                 child: ReactiveTextField(
                                   formControlName: 'department1',
                                 ),
@@ -1186,8 +1206,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 150,
+                              SizedBox(
+                                width: 150,
                                 child: ReactiveTextField(
                                   formControlName: 'shift1',
                                 ),
@@ -1332,8 +1352,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                           ),
                           Row(
                             children: [
-                              IntrinsicWidth(
-                                stepWidth: 150,
+                              SizedBox(
+                                width: 150,
                                 child: ReactiveTextField(
                                   formControlName: 'department2',
                                 ),
@@ -1341,8 +1361,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 150,
+                              SizedBox(
+                                width: 150,
                                 child: ReactiveTextField(
                                   formControlName: 'shift2',
                                 ),

@@ -22,7 +22,6 @@ abstract class _$AppRouter extends RootStackRouter {
     ...FeatureInvoiceRouterModule().pagesMap,
     ...FeatureMedicalVisaRouterModule().pagesMap,
     ...FeaturePatientRouterModule().pagesMap,
-    ...FeatureQuotationRouterModule().pagesMap,
     ...FeatureReportRouterModule().pagesMap,
     ...FeatureSaleRouterModule().pagesMap,
     ...FeatureProcessChartRouterModule().pagesMap,

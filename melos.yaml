@@ -93,9 +93,7 @@ scripts:
       fvm install %FLUTTER_VERSION% && ^
       fvm use %FLUTTER_VERSION% && ^
       dart pub global activate spider && ^
-      melos bootstrap && ^
-      fvm flutter pub run flutter_launcher_icons -f flutter_launcher_icons* && ^
-      fvm dart run flutter_native_splash:create --path=flutter_native_splash.yaml
+      melos bootstrap
     env:
       FLUTTER_VERSION: 3.19.5
   build_runner_win:

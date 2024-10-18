@@ -32,7 +32,10 @@ class PatientFilter extends StatelessWidget {
                 decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(16),
                     color: Colors.white),
-                padding: const EdgeInsets.all(16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                  vertical: 8,
+                ),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -42,7 +45,7 @@ class PatientFilter extends StatelessWidget {
                       context.l10n.labelPatientSearch,
                       style: context.textTheme.titleMedium,
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 4),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -65,7 +68,7 @@ class PatientFilter extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        const SizedBox(width: 4),
                         Expanded(
                           flex: 4,
                           child: Column(
@@ -85,7 +88,7 @@ class PatientFilter extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        const SizedBox(width: 4),
                         Expanded(
                           flex: 4,
                           child: Column(
@@ -107,7 +110,7 @@ class PatientFilter extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 4),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -184,11 +187,11 @@ class PatientFilter extends StatelessWidget {
                             ],
                           ),
                         ),
-                        const SizedBox(width: 8),
+                        const SizedBox(width: 4),
                         const Spacer(flex: 4)
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 4),
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -454,7 +457,7 @@ class PatientFilter extends StatelessWidget {
                         ),
                       ],
                     ),
-                    const SizedBox(height: 8),
+                    const SizedBox(height: 4),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [

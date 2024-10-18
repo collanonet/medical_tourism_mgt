@@ -35,7 +35,7 @@ class _PatientScreenState extends State<PatientScreen> {
           children: [
             const PatientFilter(),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 16),
+              padding: const EdgeInsets.symmetric(vertical: 8),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
@@ -171,6 +171,12 @@ class _PatientScreenState extends State<PatientScreen> {
                 child: DynamicTable(
                   rowsPerPage: model.patientData.data?.items.length ?? 0,
                   totalPages: model.patientData.data?.totalPages ?? 1,
+                  isLoading: model.patientData.loading,
+                  onScrollMax: () {
+                    if(model.patientData.loading == false) {
+                      model.fetchMorePatients();
+                    }
+                  },
                   data: TableData(
                     columns: [
                       HeaderTableData(

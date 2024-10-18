@@ -1,18 +1,19 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 
 import 'detail_process_chart_model.dart';
-import 'tab/facility_page.dart';
-import 'tab/hotel_registration_page.dart';
-import 'tab/hotel_search_page.dart';
-import 'tab/itinerary_page.dart';
-import 'tab/related_parties_page.dart';
+import 'tab/facility/facility_page.dart';
+import 'tab/hotel_registration/hotel_registration_page.dart';
+import 'tab/hotel_search/hotel_search_page.dart';
+import 'tab/itinerary/itinerary_page.dart';
+import 'tab/related_parties/related_parties_page.dart';
 
 class DetailProcessChartScreen extends StatefulWidget {
   const DetailProcessChartScreen({super.key, this.id});
+
   final String? id;
 
   @override
@@ -66,13 +67,23 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        '母子保健健康視察ツアー　４泊５日',
+                        value.hasData ? value.requireData.tourName ?? '' : '',
                         style: context.textTheme.titleLarge,
                       ),
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),
-                      Text('2023/11/11〜2023/11/15')
+                      if (value.hasData)
+                        Text(
+                          value.requireData.day?.isEmpty ?? true
+                              ? '--'
+                              : value.requireData.day?.length == 1
+                                  ? value.requireData.day?.first.date == null
+                                      ? ''
+                                      : Dates.formatFullDate(
+                                          value.requireData.day!.first.date!)
+                                  : '${value.requireData.day?.first.date == null ? '' : Dates.formatFullDate(value.requireData.day!.first.date!)}〜${value.requireData.day?.last.date == null ? '' : Dates.formatFullDate(value.requireData.day!.last.date!)}',
+                        )
                     ],
                   ),
                   Spacer(),
@@ -80,7 +91,15 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
                   SizedBox(
                     width: context.appTheme.spacing.marginMedium,
                   ),
-                  ElevatedButton(onPressed: () {}, child: Text('新規見積依頼'))
+                  Chip(
+                    label: Text(
+                      '新規見積依頼',
+                    ),
+                    labelStyle: context.textTheme.bodySmall!.copyWith(
+                      color: Colors.white,
+                    ),
+                    backgroundColor: context.appTheme.primaryColor,
+                  )
                 ],
               ),
             ),
@@ -128,8 +147,13 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
                     child: [
                       ItineraryPage(id: widget.id),
                       if (value.hasData) ...[
-                        FacilityPage(id: value.requireData.id),
-                        HotelSearchPage(id: value.requireData.id),
+                        FacilityPage(id: value.requireData.id ?? ''),
+                        HotelSearchPage(
+                          id: value.requireData.id,
+                          valueChanged: (v) {
+                            _selectedIndex.value = 3;
+                          },
+                        ),
                         HotelRegistrationPage(id: value.requireData.id),
                         RelatedPartiesPage(id: value.requireData.id ?? ''),
                       ]

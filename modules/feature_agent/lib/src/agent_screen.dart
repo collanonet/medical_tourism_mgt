@@ -74,12 +74,12 @@ class AgentScreen extends StatelessWidget {
                                   style: context.textTheme.bodyMedium,
                                 ),
                               ),
-                              // Expanded(
-                              //   child: Text(
-                              //     '国',
-                              //     style: context.textTheme.bodyMedium,
-                              //   ),
-                              // ),
+                              Expanded(
+                                child: Text(
+                                  '国',
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                              ),
                               Expanded(
                                 child: Text(
                                   '地域',
@@ -156,6 +156,13 @@ class AgentScreen extends StatelessWidget {
                                         flex: 2,
                                         child: Text(
                                           value.companyName ?? '--',
+                                          style: context.textTheme.bodyMedium,
+                                        ),
+                                      ),
+                                      Expanded(
+                                        flex: 2,
+                                        child: Text(
+                                          value.address ?? '--',
                                           style: context.textTheme.bodyMedium,
                                         ),
                                       ),

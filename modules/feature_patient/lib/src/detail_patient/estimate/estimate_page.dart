@@ -16,22 +16,30 @@ import 'estimate_screen.dart';
 class EstimatePage extends StatelessWidget {
   const EstimatePage({
     super.key,
-    this.patient,
+    required this.patient,
+    required this.medicalRecord,
   });
-  final Patient? patient;
+
+  final Patient patient;
+  final MedicalRecord medicalRecord;
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) =>
-          GetIt.I<EstimateModel>()..initialData(patient: patient),
-      child: ReactiveFormConfig(
-        validationMessages: validationMessages,
-        child: ReactiveFormBuilder(
-            form: () => estimateForm(),
-            builder: (context, formGroup, child) {
-              return const EstimateScreen();
-            }),
+    return ReactiveFormConfig(
+      validationMessages: validationMessages,
+      child: ReactiveFormBuilder(
+        form: () => estimateForm(),
+        builder: (context, formGroup, child) {
+          return Provider(
+            create: (context) => GetIt.I<EstimateModel>()
+              ..initialData(
+                patient: patient,
+                medicalRecord: medicalRecord,
+                formGroup: formGroup,
+              ),
+            child: const EstimateScreen(),
+          );
+        },
       ),
     );
   }

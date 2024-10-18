@@ -17,8 +17,6 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   final ProcessChartRemoteProvider remote;
   final ProcessChartLocalProvider local;
 
-  
-
   @override
   Future<PatientFilterResponse> postFilterpatientChart(
       PatientFilterRequst patientFilterRequst) {
@@ -74,13 +72,15 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn() {
-    return remote.getDetailFacilityDropIn();
+  Future<DetailDropInFacilityResponse> getDetailFacilityDropIn(
+      String tourId) {
+    return remote.getDetailFacilityDropIn(tourId);
   }
 
   @override
-  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital() {
-    return remote.getDetialFacilityHospital();
+  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital(
+      String id) {
+    return remote.getDetialFacilityHospital(id);
   }
 
   @override
@@ -192,25 +192,27 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<List<DetailRelatedPartiesResponse>> getDetailRelatedParties(String id) {
+  Future<List<DetailRelatedPartiesResponse>> getDetailRelatedParties(
+      String id) {
     return remote.getRelatedPartiesGuideOrInterpreter(id);
   }
 
   @override
-  Future<List<DetailRelatedPartiesBusCompanyResponse>>
-      getDetailRelatedPartiesBusCompany() {
-    return remote.getRelatedPartiesBusCompany();
+  Future<DetailRelatedPartiesBusCompanyResponse>
+      getDetailRelatedPartiesBusCompany(String id) {
+    return remote.getRelatedPartiesBusCompany(id);
   }
 
   @override
-  Future<DetailRelatedPartiesDriverResponse> getDetailRelatedPartiesDriver() {
-    return remote.getRelatedPartiesDriver();
+  Future<List<DetailRelatedPartiesDriverResponse>>
+      getDetailRelatedPartiesDriver(String id) {
+    return remote.getRelatedPartiesDriver(id);
   }
 
   @override
-  Future<DetailRelatedPartiesEmergencyContactResponse>
-      getDetailRelatedPartiesEmergencyContact() {
-    return remote.getRelatedPartiesEmergencyContact();
+  Future<List<DetailRelatedPartiesEmergencyContactResponse>>
+      getDetailRelatedPartiesEmergencyContact(String id) {
+    return remote.getRelatedPartiesEmergencyContact(id);
   }
 
   @override
@@ -245,10 +247,9 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<DetailItineraryResponse> getDetailItinerary(String id) {
+  Future<DetailItineraryResponse> getDetailItinerary({String? id}) {
     return remote.getDetailitinerary(
-     id,
-     
+      id: id,
     );
   }
 
@@ -260,7 +261,7 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
     DateTime? dateTo,
   }) {
     return remote.getPatientChart(
-       tourName: tourName,
+      tourName: tourName,
       classification: classification,
       dateFrom: dateFrom,
       dateTo: dateTo,
@@ -274,7 +275,43 @@ class ProcessChartRepositoryIml extends ProcessChartRepository {
   }
 
   @override
-  Future<DetailRelatedPartiesResponse> putDetailRelatedParties(DetailRelatedPartiesRequest request, element) {
+  Future<DetailRelatedPartiesResponse> putDetailRelatedParties(
+      DetailRelatedPartiesRequest request, element) {
     return remote.putDetailRelatedParties(request, element);
+  }
+
+  @override
+  Future<DetailItineraryResponse> putDetailItinerary(
+      String id,
+      DetailIneraryRequest request) {
+    return remote.putDetailItinerary(id,request);
+  }
+
+  @override
+  Future<DetailDropInFacilityResponse> putDetailFacilityDropIn(
+      id, DetailDropInFacilityRequest detailDropInFacilityRequest) {
+    return remote.putDetailFacilityDropIn(id, detailDropInFacilityRequest);
+  }
+
+  @override
+  Future<DetailFacilityHotelResponse> putDetailFacilityHospital(
+      id, DetailFacilityHotelRequest request) {
+    return remote.putDetailFacilityHospital(id, request);
+  }
+  
+  @override
+  Future<DetailRelatedPartiesDriverResponse> putRelatedPartiesDriver(String id, DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest) {
+   return remote.putRelatedPartiesDriver(id, detailRelatedPartiesDriverRequest);
+  }
+  
+  @override
+  Future<DetailRelatedPartiesEmergencyContactResponse> putRelatedPartiesEmergency(String id, DetailRelatedPartiesEmergencyContactRequest detailRelatedPartiesEmergencyContactRequest) {
+   return
+    remote.putRelatedPartiesEmergency(id, detailRelatedPartiesEmergencyContactRequest);
+  }
+
+  @override
+  Future<DetailRelatedPartiesBusCompanyResponse> putDetailRelatedPartiesBusCompany(String id, DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest) {
+    return remote.putDetailRelatedPartiesBusCompany(id, detailRelatedPartiesBusCompanyRequest);
   }
 }

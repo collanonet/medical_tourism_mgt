@@ -1,6 +1,4 @@
 // Flutter imports:
-import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -37,7 +35,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
     return ValueListenableBuilder(
         valueListenable: context.read<TreatmentModel>().treatmentMenuData,
         builder: (context, value, _) {
-          return  Padding(
+          return Padding(
             padding: const EdgeInsets.only(right: 32),
             child: Skeletonizer(
               enabled: value.loading,
@@ -63,12 +61,13 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                             formArray.add(
                               FormGroup({
                                 '_id': FormControl<String>(),
-                                'hospitalId':
-                                    FormControl<String>(value: widget.hospitalId),
+                                'hospitalId': FormControl<String>(
+                                    value: widget.hospitalId),
                                 'project': FormControl<String>(),
                                 'treatmentCostExcludingTax':
                                     FormControl<double>(),
-                                'treatmentCostTaxIncluded': FormControl<double>(),
+                                'treatmentCostTaxIncluded':
+                                    FormControl<double>(),
                                 'remark': FormControl<String>(),
                                 'treatmentCostTax': FormArray([
                                   FormGroup({
@@ -102,7 +101,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                 width: context.appTheme.spacing.marginSmall,
                               ),
                               Text(
-                                '担当者を追加',
+                                '行を追加',
                                 style: TextStyle(
                                     color: context.appTheme.primaryColor),
                               )
@@ -171,7 +170,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                     .map((control) => control as FormGroup)
                                     .map(
                                       (currentForm) => SizedBox(
-                                        width: 65,
+                                        width: 100,
                                         child: ReactiveForm(
                                           formGroup: currentForm,
                                           child: ReactiveTextField(
@@ -271,7 +270,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
               },
             )),
         SizedBox(
-          width: 250,
+          width: 350,
           child: ReactiveFormArray(
               formArrayName: 'treatmentMenu',
               builder: (context, formArray, child) {
@@ -288,7 +287,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                           ),
                         ),
                         if (formArray.controls.indexOf(control) == 0)
-                          SizedBox(
+                          const SizedBox(
                             width: 25,
                           ),
                         if (formArray.controls.indexOf(control) != 0)
@@ -329,7 +328,13 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
             children: [
               Expanded(
                   flex: 2,
-                  child: Text('項目', style: context.textTheme.bodyMedium)),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Text('項目', style: context.textTheme.bodyMedium),
+                    ],
+                  )),
               Expanded(
                   flex: 1,
                   child: Text('治療費用（税別）', style: context.textTheme.bodyMedium)),
@@ -343,7 +348,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                         .map((control) => control as FormGroup)
                         .map(
                           (currentForm) => IntrinsicWidth(
-                            stepWidth: 65,
+                            stepWidth: 100,
                             child: ReactiveForm(
                               formGroup: currentForm,
                               child: SizedBox(
@@ -355,7 +360,7 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                         RegExp(r'[0-9]')),
                                   ],
                                   formControlName: 'tax',
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     prefixText: 'R ',
                                     suffixText: ' %',
                                     contentPadding: EdgeInsets.all(4),
@@ -379,8 +384,14 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
           width: 50,
         ),
         IntrinsicWidth(
-            stepWidth: 250,
-            child: Text('準備検査', style: context.textTheme.bodyMedium))
+            stepWidth: 350,
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text('備考', style: context.textTheme.bodyMedium),
+              ],
+            ))
       ],
     );
   }

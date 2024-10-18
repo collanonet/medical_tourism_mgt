@@ -37,7 +37,7 @@ class MedicalRecordPatientResponseTreatmentRequest {
   bool? desiredMedicalInstitution;
   String? desiredAreaMedicalInstitutionName;
   String? reason;
-  String? desiredDateOfConsultation;
+  DateTime? desiredDateOfConsultation;
   String? scheduledPeriodOfStayInJapan;
   bool? walking;
   String? walkingDetail;

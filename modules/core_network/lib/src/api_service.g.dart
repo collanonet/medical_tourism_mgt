@@ -3745,9 +3745,10 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital() async {
+  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital(
+      String id) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'tour': id};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
@@ -3804,13 +3805,45 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn() async {
+  Future<DetailFacilityHotelResponse> putDetailFacilityHospital(
+    String id,
+    DetailFacilityHotelRequest detailFacilityHotelRequest,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailFacilityHotelRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailFacilityHotelResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/facility/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = DetailFacilityHotelResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<DetailDropInFacilityResponse> getDetailFacilityDropIn(
+      String tourId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'tour': tourId};
+    final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<DetailDropInFacilityResponse>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailDropInFacilityResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -3826,10 +3859,7 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var _value = _result.data!
-        .map((dynamic i) =>
-            DetailDropInFacilityResponse.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final _value = DetailDropInFacilityResponse.fromJson(_result.data!);
     return _value;
   }
 
@@ -3850,6 +3880,37 @@ class _ApiService implements ApiService {
             .compose(
               _dio.options,
               '/stopover-facilities',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = DetailDropInFacilityResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<DetailDropInFacilityResponse> putDetailFacilityDropIn(
+    String id,
+    DetailDropInFacilityRequest detailDropInFacilityRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailDropInFacilityRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailDropInFacilityResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/stopover-facilities/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4063,14 +4124,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<DetailRelatedPartiesBusCompanyResponse>>
-      getRelatedPartiesBusCompany() async {
+  Future<DetailRelatedPartiesBusCompanyResponse> getRelatedPartiesBusCompany(
+      String id) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'tour': id};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<DetailRelatedPartiesBusCompanyResponse>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailRelatedPartiesBusCompanyResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -4086,10 +4147,8 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var _value = _result.data!
-        .map((dynamic i) => DetailRelatedPartiesBusCompanyResponse.fromJson(
-            i as Map<String, dynamic>))
-        .toList();
+    final _value =
+        DetailRelatedPartiesBusCompanyResponse.fromJson(_result.data!);
     return _value;
   }
 
@@ -4125,13 +4184,47 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<DetailRelatedPartiesDriverResponse> getRelatedPartiesDriver() async {
+  Future<DetailRelatedPartiesBusCompanyResponse>
+      putDetailRelatedPartiesBusCompany(
+    String id,
+    DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(detailRelatedPartiesBusCompanyRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DetailRelatedPartiesDriverResponse>(Options(
+        _setStreamType<DetailRelatedPartiesBusCompanyResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/bus-lines/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value =
+        DetailRelatedPartiesBusCompanyResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<List<DetailRelatedPartiesDriverResponse>> getRelatedPartiesDriver(
+      String id) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'tour': id};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<DetailRelatedPartiesDriverResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -4147,7 +4240,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final _value = DetailRelatedPartiesDriverResponse.fromJson(_result.data!);
+    var _value = _result.data!
+        .map((dynamic i) => DetailRelatedPartiesDriverResponse.fromJson(
+            i as Map<String, dynamic>))
+        .toList();
     return _value;
   }
 
@@ -4182,21 +4278,24 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<DetailRelatedPartiesEmergencyContactResponse>
-      getRelatedPartiesEmergencyContact() async {
+  Future<DetailRelatedPartiesDriverResponse> putRelatedPartiesDriver(
+    String id,
+    DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest,
+  ) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(detailRelatedPartiesDriverRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<DetailRelatedPartiesEmergencyContactResponse>(Options(
-      method: 'GET',
+        _setStreamType<DetailRelatedPartiesDriverResponse>(Options(
+      method: 'PUT',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/emergency-contact',
+              '/driver/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4205,8 +4304,40 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final _value =
-        DetailRelatedPartiesEmergencyContactResponse.fromJson(_result.data!);
+    final _value = DetailRelatedPartiesDriverResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<List<DetailRelatedPartiesEmergencyContactResponse>>
+      getRelatedPartiesEmergencyContact(String id) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{r'tour': id};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<DetailRelatedPartiesEmergencyContactResponse>>(
+            Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+                .compose(
+                  _dio.options,
+                  '/emergency-contact',
+                  queryParameters: queryParameters,
+                  data: _data,
+                )
+                .copyWith(
+                    baseUrl: _combineBaseUrls(
+                  _dio.options.baseUrl,
+                  baseUrl,
+                ))));
+    var _value = _result.data!
+        .map((dynamic i) =>
+            DetailRelatedPartiesEmergencyContactResponse.fromJson(
+                i as Map<String, dynamic>))
+        .toList();
     return _value;
   }
 
@@ -4229,6 +4360,40 @@ class _ApiService implements ApiService {
             .compose(
               _dio.options,
               '/emergency-contact',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value =
+        DetailRelatedPartiesEmergencyContactResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<DetailRelatedPartiesEmergencyContactResponse>
+      putRelatedPartiesEmergency(
+    String id,
+    DetailRelatedPartiesEmergencyContactRequest
+        detailRelatedPartiesEmergencyContactRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailRelatedPartiesEmergencyContactRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailRelatedPartiesEmergencyContactResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/emergency-contact/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -4483,10 +4648,10 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<DetailItineraryResponse> getDetailitinerary(
-      {required String id}) async {
+  Future<DetailItineraryResponse> getDetailitinerary({String? id}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<Map<String, dynamic>>(
@@ -4581,6 +4746,37 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<DetailItineraryResponse> putDetailItinerary(
+    String id,
+    DetailIneraryRequest detailIneraryRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(detailIneraryRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<DetailItineraryResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/tour/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = DetailItineraryResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
   Future<BasicInformationHospitalResponse> getBasicInformationHospital(
       String hospitalId) async {
     final _extra = <String, dynamic>{};
@@ -4635,6 +4831,30 @@ class _ApiService implements ApiService {
             ))));
     final _value = BasicInformationHospitalResponse.fromJson(_result.data!);
     return _value;
+  }
+
+  @override
+  Future<void> deleteBasicInformationHospital(String id) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/basic-information-hospital/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
   }
 
   @override
@@ -4698,6 +4918,30 @@ class _ApiService implements ApiService {
     final _value =
         MedicalRecordBasicInfoHospitalResponse.fromJson(_result.data!);
     return _value;
+  }
+
+  @override
+  Future<void> deleteMedicalRecordBasicInfoHospital(String id) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/medical-record-information-hospital/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
   }
 
   @override
@@ -6337,65 +6581,6 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<InvoiceFilterResponse>> filterInvoice() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<InvoiceFilterResponse>>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/filter-invoice',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    var _value = _result.data!
-        .map((dynamic i) =>
-            InvoiceFilterResponse.fromJson(i as Map<String, dynamic>))
-        .toList();
-    return _value;
-  }
-
-  @override
-  Future<InvoiceFilterResponse> postFilterInvoice(
-      InvoiceFilterRequest invoiceFilterRequest) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(invoiceFilterRequest.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<InvoiceFilterResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/filter-invoice',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = InvoiceFilterResponse.fromJson(_result.data!);
-    return _value;
-  }
-
-  @override
   Future<List<EstimateMasterResponse>> getEstimateMaster() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -7557,6 +7742,652 @@ class _ApiService implements ApiService {
         .compose(
           _dio.options,
           '/medical-record-file-summary/${id}',
+          queryParameters: queryParameters,
+          data: _data,
+        )
+        .copyWith(
+            baseUrl: _combineBaseUrls(
+          _dio.options.baseUrl,
+          baseUrl,
+        ))));
+  }
+
+  @override
+  Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<MedicalVisaPersonalResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/personal',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var _value = _result.data!
+        .map((dynamic i) =>
+            MedicalVisaPersonalResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(
+      MedicalVisaPersonalRequest medicalVisaPersonalRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalVisaPersonalRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaPersonalResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/personal',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaPersonalResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<List<MedicalVisaStayPeriodResponse>> getMedicalVisaStayPeriod() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<MedicalVisaStayPeriodResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/stay-period',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var _value = _result.data!
+        .map((dynamic i) =>
+            MedicalVisaStayPeriodResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaStayPeriodResponse> postMedicalVisaStayPeriod(
+      MedicalVisaStayPeriodRequest medicalVisaStayPeriodRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalVisaStayPeriodRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaStayPeriodResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/stay-period',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaStayPeriodResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaRequiredInJapanResponse> getMedicalRequiredInJapan() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaRequiredInJapanResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/required-in-japan',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaRequiredInJapanResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaRequiredInJapanResponse> postMedicalRequiredInJapan(
+      RequiredInJapan medicalVisaRequiredInJapanRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalVisaRequiredInJapanRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaRequiredInJapanResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/required-in-japan',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaRequiredInJapanResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaVisaWithdrawalResponse> getMedicalVisaWithdrawal() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaVisaWithdrawalResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/withdrawal',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaVisaWithdrawalResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaVisaWithdrawalResponse> postMedicalVisaWithdrawal(
+      MedicalVisaWithdrawalRequest medicalVisaVisaWithdrawalRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalVisaVisaWithdrawalRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaVisaWithdrawalResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/withdrawal',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaVisaWithdrawalResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<AfterGettingVisaResponse> getAfterGettingVisa() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AfterGettingVisaResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/after-getting-visa',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = AfterGettingVisaResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<AfterGettingVisaResponse> postAfterGettingVisa(
+      AfterGettingVisaRequest afterGettingVisaRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(afterGettingVisaRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<AfterGettingVisaResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/after-getting-visa',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = AfterGettingVisaResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaTravelCompanionResponse>
+      getMedicalVisaTravelCompanion() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaTravelCompanionResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/travel-companion',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaTravelCompanionResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaTravelCompanionResponse> postMedicalVisaTravelCompanion(
+      MedicalVisaTravelCompanionRequest
+          medicalVisaTravelCompanionRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalVisaTravelCompanionRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaTravelCompanionResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/travel-companion',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaTravelCompanionResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaNecessaryInJapanResponse>
+      getMedicalVisaNecessaryInJapan() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaNecessaryInJapanResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'necessary-in-japan',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaNecessaryInJapanResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaNecessaryInJapanResponse> postMedicalVisaNecessaryInJapan(
+      MedicalVisaNecessaryInJapanRequest
+          medicalVisaNecessaryInJapanRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalVisaNecessaryInJapanRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaNecessaryInJapanResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              'necessary-in-japan',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaNecessaryInJapanResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaAfterGettingVisaResponse> getAfterGettingVisaFinal() async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaAfterGettingVisaResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/after-getting-visa-final',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaAfterGettingVisaResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalVisaAfterGettingVisaResponse> postAfterGettingVisaFinal(
+      MedicalAfterGettingVisaFinalRequest
+          medicalAfterGettingVisaFinalRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = medicalAfterGettingVisaFinalRequest;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalVisaAfterGettingVisaResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/after-getting-visa-final',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalVisaAfterGettingVisaResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<List<MedicalInvoiceResponse>> getInvoices({
+    String? medicalRecord,
+    bool? type,
+    String? nameOfHospital,
+    String? agentName,
+    String? patientName,
+    DateTime? issueDateFrom,
+    DateTime? issueDateTo,
+    String? prospects,
+  }) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'medicalRecord': medicalRecord,
+      r'type': type,
+      r'nameOfHospital': nameOfHospital,
+      r'agentName': agentName,
+      r'patientName': patientName,
+      r'issueDateFrom': issueDateFrom?.toIso8601String(),
+      r'issueDateTo': issueDateTo?.toIso8601String(),
+      r'prospects': prospects,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<MedicalInvoiceResponse>>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/invoices',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    var _value = _result.data!
+        .map((dynamic i) =>
+            MedicalInvoiceResponse.fromJson(i as Map<String, dynamic>))
+        .toList();
+    return _value;
+  }
+
+  @override
+  Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(
+      String medicalRecordId) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalInvoiceResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/invoices/medicalRecord/${medicalRecordId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalInvoiceResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalInvoiceResponse> postInvoice(
+      MedicalInvoiceRequest medicalInvoiceRequest) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalInvoiceRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalInvoiceResponse>(Options(
+      method: 'POST',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/invoices',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalInvoiceResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalInvoiceResponse> getInvoiceById(String id) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalInvoiceResponse>(Options(
+      method: 'GET',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/invoices/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalInvoiceResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<MedicalInvoiceResponse> putInvoice(
+    String id,
+    MedicalInvoiceRequest medicalInvoiceRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalInvoiceRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalInvoiceResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/invoices/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalInvoiceResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<void> deleteInvoice(String id) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    const Map<String, dynamic>? _data = null;
+    await _dio.fetch<void>(_setStreamType<void>(Options(
+      method: 'DELETE',
+      headers: _headers,
+      extra: _extra,
+    )
+        .compose(
+          _dio.options,
+          '/invoices/${id}',
           queryParameters: queryParameters,
           data: _data,
         )

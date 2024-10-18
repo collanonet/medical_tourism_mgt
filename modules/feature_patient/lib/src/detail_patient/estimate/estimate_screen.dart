@@ -1,1909 +1,570 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
+import 'package:core_network/entities.dart';
+import 'package:core_ui/resources.dart';
+import 'package:core_utils/async.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:core_utils/core_utils.dart';
-import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
-class EstimateScreen extends StatefulWidget {
+import 'estimate_model.dart';
+import 'estimate_screen_form.dart';
+
+class EstimateScreen extends StatelessWidget {
   const EstimateScreen({super.key});
 
   @override
-  State<EstimateScreen> createState() => _EstimateScreenState();
-}
-
-class _EstimateScreenState extends State<EstimateScreen> {
-  final formatter = InputFormatter();
-  @override
   Widget build(BuildContext context) {
+    ValueNotifier<List<String>> selected = ValueNotifier([]);
     final formGroup = ReactiveForm.of(context) as FormGroup;
-    return SingleChildScrollView(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(
-            height: context.appTheme.spacing.marginMedium,
-          ),
-          Row(
-            children: [
-              Checkbox(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4),
-                  side: const BorderSide(color: Colors.grey),
+    return ValueListenableBuilder(
+      valueListenable: context.watch<EstimateModel>().medicalQuotationData,
+      builder: (context, value, _) {
+        return Skeletonizer(
+          enabled: value.loading,
+          child: SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: context.appTheme.spacing.marginMedium,
                 ),
-                checkColor: Colors.white,
-                value: false,
-                onChanged: (value) {},
-              ),
-              Expanded(
-                  child: Text(
-                '書類番号',
-                style: context.textTheme.bodySmall,
-              )),
-              Expanded(
-                  child: Text(
-                '種別',
-                style: context.textTheme.bodySmall,
-              )),
-              Expanded(
-                  child: Text(
-                '宛先',
-                style: context.textTheme.bodySmall,
-              )),
-              Expanded(
-                  child: Text(
-                '発行日',
-                style: context.textTheme.bodySmall,
-              )),
-              Expanded(
-                  flex: 2,
-                  child: Text(
-                    '件名',
-                    style: context.textTheme.bodySmall,
-                  )),
-              Expanded(
-                  child: Text(
-                'エージェントへ開示',
-                style: context.textTheme.bodySmall,
-              )),
-              Expanded(
-                  child: Text(
-                '患者へ開示',
-                style: context.textTheme.bodySmall,
-              )),
-              Expanded(
-                  child: Text(
-                '見込み',
-                style: context.textTheme.bodySmall,
-              )),
-              Expanded(
-                  child: SizedBox(
-                width: context.appTheme.spacing.marginMedium,
-              )),
-            ],
-          ),
-          const Divider(),
-          ListView.separated(
-            shrinkWrap: true,
-            itemCount: 10,
-            physics: const NeverScrollableScrollPhysics(),
-            itemBuilder: (BuildContext context, int index) => InkWell(
-              onTap: () {},
-              child: Padding(
-                padding: const EdgeInsets.symmetric(vertical: 4),
-                child: Row(
+                Row(
                   children: [
-                    Checkbox(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4),
-                        side: const BorderSide(color: Colors.grey),
-                      ),
-                      checkColor: Colors.white,
-                      value: false,
-                      onChanged: (value) {},
+                    ValueListenableBuilder(
+                      valueListenable: selected,
+                      builder: (context, ids, _) {
+                        return Checkbox(
+                          value: ids.isEmpty
+                              ? false
+                              : value.data?.length == ids.length,
+                          onChanged: (select) {
+                            if (select != null) {
+                              if (select) {
+                                if (value.hasData) {
+                                  selected.value = value.requireData
+                                      .map((e) => e.id.toString())
+                                      .toList();
+                                }
+                              } else {
+                                selected.value = [];
+                              }
+                            }
+                          },
+                        );
+                      },
                     ),
                     Expanded(
                         child: Text(
-                      '19Y−0630−1',
-                      style: context.textTheme.bodySmall,
-                    )),
-                    Expanded(
-                        child: Row(
-                      children: [
-                        Container(
-                          padding: EdgeInsets.symmetric(
-                            horizontal:
-                                context.appTheme.spacing.marginExtraSmall,
-                            vertical: context.appTheme.spacing.marginExtraSmall,
-                          ),
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: Colors.red,
-                            ),
-                            borderRadius: BorderRadius.circular(
-                                context.appTheme.spacing.borderRadiusMedium),
-                          ),
-                          child: Text(
-                            '見積書',
-                            style: context.textTheme.bodySmall?.copyWith(
-                              color: Colors.red,
-                            ),
-                          ),
-                        ),
-                      ],
-                    )),
-                    Expanded(
-                        child: Text(
-                      '大瀚人力资源集团',
+                      '書類番号', // Document Number
                       style: context.textTheme.bodySmall,
                     )),
                     Expanded(
                         child: Text(
-                      '2023/07/18',
+                      '種別', // type
+                      style: context.textTheme.bodySmall,
+                    )),
+                    Expanded(
+                        child: Text(
+                      '宛先', // address
+                      style: context.textTheme.bodySmall,
+                    )),
+                    Expanded(
+                        child: Text(
+                      '発行日', // Issue date
                       style: context.textTheme.bodySmall,
                     )),
                     Expanded(
                         flex: 2,
                         child: Text(
-                          '劉 偉強 様　呼吸器疾患の受診（京大病院）',
+                          '件名', // subject
                           style: context.textTheme.bodySmall,
                         )),
                     Expanded(
                         child: Text(
-                      '○',
+                      'エージェントへ開示', // Disclosure to Agent
                       style: context.textTheme.bodySmall,
                     )),
                     Expanded(
                         child: Text(
-                      '×',
+                      '患者へ開示', // Disclosure to patients
                       style: context.textTheme.bodySmall,
                     )),
                     Expanded(
                         child: Text(
-                      'A',
+                      '見込み', // Prospects
                       style: context.textTheme.bodySmall,
                     )),
                     Expanded(
-                      child: Row(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: const Text('請求書を発行する'),
-                          )
-                        ],
+                      child: SizedBox(
+                        width: context.appTheme.spacing.marginLarge,
                       ),
                     ),
                   ],
                 ),
-              ),
-            ),
-            separatorBuilder: (BuildContext context, int index) {
-              return const Divider(
-                thickness: 0.5,
-              );
-            },
-          ),
-          SizedBox(
-            height: context.appTheme.spacing.marginMedium,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              OutlinedButton(
-                onPressed: () {},
-                child: const Text(
-                  '削除する',
-                ),
-              ),
-              SizedBox(
-                width: context.appTheme.spacing.marginMedium,
-              ),
-              OutlinedButton(
-                onPressed: () {},
-                child: const Text(
-                  'CSV出力',
-                ),
-              ),
-              SizedBox(
-                width: context.appTheme.spacing.marginMedium,
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text(
-                  'コピーして新規作成',
-                ),
-              ),
-              SizedBox(
-                width: context.appTheme.spacing.marginMedium,
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text(
-                  '新規作成',
-                ),
-              )
-            ],
-          ),
-          SizedBox(
-            height: context.appTheme.spacing.marginMedium,
-          ),
-          Container(
-            padding: EdgeInsets.all(
-              context.appTheme.spacing.marginMedium,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(
-                  context.appTheme.spacing.borderRadiusMedium),
-            ),
-            child: ReactiveForm(
-              formGroup: formGroup.control('title_estimate') as FormGroup,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Text('タイトル'),
-                  SizedBox(
-                    height: context.appTheme.spacing.marginMedium,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'title',
-                          decoration: const InputDecoration(
-                            label: Text(
-                              '件名',
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        ),
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: context.appTheme.spacing.marginMedium,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'quotation_number',
-                          decoration: const InputDecoration(
-                            label: Text(
-                              '見積番号',
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'issueDate',
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime.now(),
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'issueDate',
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              onChanged: (value) {
-                                logger.d(value);
+                const Divider(),
+                ListView.separated(
+                  shrinkWrap: true,
+                  itemCount: value.data?.length ?? 0,
+                  physics: const NeverScrollableScrollPhysics(),
+                  itemBuilder: (BuildContext context, int index) {
+                    var data = value.data?[index];
+                    return InkWell(
+                      onTap: data?.fileNamePdfJP != null ||
+                              data?.fileNamePdfEN != null ||
+                              data?.fileNamePdfZH != null ||
+                              data?.fileNamePdfZHTW != null ||
+                              data?.fileNamePdfVN != null
+                          ? () {
+                              showDialog(
+                                  context: context,
+                                  builder: (_) {
+                                    return AlertDialog(
+                                      title: const Text('見積書'),
+                                      content: Column(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          if (data?.fileNamePdfJP != null)
+                                            ListTile(
+                                              title: const Text('日本語'),
+                                              onTap: () {
+                                                openUrlInBrowser(
+                                                    fileName:
+                                                        data?.fileNamePdfJP ??
+                                                            '');
+                                              },
+                                            ),
+                                          if (data?.fileNamePdfEN != null)
+                                            ListTile(
+                                              title: const Text('英語'),
+                                              onTap: () {
+                                                openUrlInBrowser(
+                                                    fileName:
+                                                        data?.fileNamePdfEN ??
+                                                            '');
+                                              },
+                                            ),
+                                          if (data?.fileNamePdfVN != null)
+                                            ListTile(
+                                              title: const Text('ベトナム語'),
+                                              onTap: () {
+                                                openUrlInBrowser(
+                                                    fileName:
+                                                        data?.fileNamePdfVN ??
+                                                            '');
+                                              },
+                                            ),
+                                          if (data?.fileNamePdfZH != null)
+                                            ListTile(
+                                              title: const Text('中国語'),
+                                              onTap: () {
+                                                openUrlInBrowser(
+                                                    fileName:
+                                                        data?.fileNamePdfZH ??
+                                                            '');
+                                              },
+                                            ),
+                                          if (data?.fileNamePdfZHTW != null)
+                                            ListTile(
+                                              title: const Text('繁体字'),
+                                              onTap: () {
+                                                openUrlInBrowser(
+                                                    fileName:
+                                                        data?.fileNamePdfZHTW ??
+                                                            '');
+                                              },
+                                            ),
+                                        ],
+                                      ),
+                                    );
+                                  });
+                            }
+                          : null,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 4),
+                        child: Row(
+                          children: [
+                            ValueListenableBuilder(
+                              valueListenable: selected,
+                              builder: (context, sels, _) {
+                                return Checkbox(
+                                  value: sels.contains(data?.id),
+                                  onChanged: (sel) {
+                                    if (sel != null) {
+                                      if (sel) {
+                                        selected.value = [
+                                          ...sels,
+                                          data?.id ?? ''
+                                        ];
+                                      } else {
+                                        selected.value = [
+                                          ...sels.where((e) => e != data?.id)
+                                        ];
+                                      }
+                                    }
+                                  },
+                                );
                               },
-                              onSubmitted: (value) {
-                                logger.d(value);
-                              },
-                              decoration: InputDecoration(
-                                label: const Text(
-                                  '発行日',
-                                ),
-                                suffixIcon: IconButton(
-                                  icon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                  onPressed: picker.showPicker,
-                                ),
-                              ),
-                              inputFormatters: [
-                                formatter.dateFormatter,
-                              ],
-                            );
-                          },
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                          child: Row(
-                        children: [
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              const Text('開示先'),
-                              Row(
+                            ),
+                            Expanded(
+                                child: Text(
+                              data?.invoiceNumber ?? '',
+                              style: context.textTheme.bodySmall,
+                            )),
+                            Expanded(
+                              child: Row(
                                 children: [
-                                  Checkbox(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                      side: const BorderSide(color: Colors.grey),
+                                  Container(
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: context
+                                          .appTheme.spacing.marginExtraSmall,
+                                      vertical: context
+                                          .appTheme.spacing.marginExtraSmall,
                                     ),
-                                    checkColor: Colors.white,
-                                    value: false,
-                                    onChanged: (value) {},
-                                  ),
-                                  const Text('エージェント'),
-                                  Checkbox(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                      side: const BorderSide(color: Colors.grey),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: Colors.red,
+                                      ),
+                                      borderRadius: BorderRadius.circular(
+                                          context.appTheme.spacing
+                                              .borderRadiusMedium),
                                     ),
-                                    checkColor: Colors.white,
-                                    value: false,
-                                    onChanged: (value) {},
+                                    child: Text(
+                                      '見積書',
+                                      style:
+                                          context.textTheme.bodySmall?.copyWith(
+                                        color: Colors.red,
+                                      ),
+                                    ),
                                   ),
-                                  const Text('患者'),
                                 ],
-                              )
-                            ],
-                          )
-                        ],
-                      )),
-                    ],
-                  ),
-                  SizedBox(
-                    height: context.appTheme.spacing.marginMedium,
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: ReactiveDatePicker<DateTime>(
-                          formControlName: 'payment_due_date',
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime.now(),
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'payment_due_date',
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
-                              onChanged: (value) {
-                                logger.d(value);
-                              },
-                              onSubmitted: (value) {
-                                logger.d(value);
-                              },
-                              decoration: InputDecoration(
-                                label: const Text(
-                                  'お支払い期限',
-                                ),
-                                suffixIcon: IconButton(
-                                  icon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
+                            ),
+                            Expanded(
+                                child: Text(
+                              '--',
+                              style: context.textTheme.bodySmall,
+                            )),
+                            Expanded(
+                                child: Text(
+                              data?.invoiceDate != null
+                                  ? Dates.formatFullDate(data!.invoiceDate!)
+                                  : '',
+                              style: context.textTheme.bodySmall,
+                            )),
+                            Expanded(
+                                flex: 3,
+                                child: Text(
+                                  data?.subject ?? '',
+                                  style: context.textTheme.bodySmall,
+                                )),
+                            Expanded(
+                                child: Text(
+                              '--',
+                              style: context.textTheme.bodySmall,
+                            )),
+                            Expanded(
+                                child: Text(
+                              '--',
+                              style: context.textTheme.bodySmall,
+                            )),
+                            Expanded(
+                                child: Text(
+                              '--',
+                              style: context.textTheme.bodySmall,
+                            )),
+                            Row(
+                              children: [
+                                ElevatedButton(
+                                  onPressed: data?.fileNamePdfJP != null ||
+                                          data?.fileNamePdfEN != null ||
+                                          data?.fileNamePdfZH != null ||
+                                          data?.fileNamePdfZHTW != null ||
+                                          data?.fileNamePdfVN != null
+                                      ? () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (_) {
+                                                return AlertDialog(
+                                                  title: const Text('見積書'),
+                                                  content: Column(
+                                                    mainAxisSize:
+                                                        MainAxisSize.min,
+                                                    children: [
+                                                      if (data?.fileNamePdfJP !=
+                                                          null)
+                                                        ListTile(
+                                                          title:
+                                                              const Text('日本語'),
+                                                          onTap: () {
+                                                            openUrlInBrowser(
+                                                                fileName:
+                                                                    data?.fileNamePdfJP ??
+                                                                        '');
+                                                          },
+                                                        ),
+                                                      if (data?.fileNamePdfEN !=
+                                                          null)
+                                                        ListTile(
+                                                          title:
+                                                              const Text('英語'),
+                                                          onTap: () {
+                                                            openUrlInBrowser(
+                                                                fileName:
+                                                                    data?.fileNamePdfEN ??
+                                                                        '');
+                                                          },
+                                                        ),
+                                                      if (data?.fileNamePdfVN !=
+                                                          null)
+                                                        ListTile(
+                                                          title: const Text(
+                                                              'ベトナム語'),
+                                                          onTap: () {
+                                                            openUrlInBrowser(
+                                                                fileName:
+                                                                    data?.fileNamePdfVN ??
+                                                                        '');
+                                                          },
+                                                        ),
+                                                      if (data?.fileNamePdfZH !=
+                                                          null)
+                                                        ListTile(
+                                                          title:
+                                                              const Text('中国語'),
+                                                          onTap: () {
+                                                            openUrlInBrowser(
+                                                                fileName:
+                                                                    data?.fileNamePdfZH ??
+                                                                        '');
+                                                          },
+                                                        ),
+                                                      if (data?.fileNamePdfZHTW !=
+                                                          null)
+                                                        ListTile(
+                                                          title:
+                                                              const Text('繁体字'),
+                                                          onTap: () {
+                                                            openUrlInBrowser(
+                                                                fileName:
+                                                                    data?.fileNamePdfZHTW ??
+                                                                        '');
+                                                          },
+                                                        ),
+                                                    ],
+                                                  ),
+                                                );
+                                              });
+                                        }
+                                      : null,
+                                  child: const Text(
+                                    '言語を選択する',
+                                    style: TextStyle(fontSize: 10),
+                                    maxLines: 1,
+                                    overflow: TextOverflow.ellipsis,
                                   ),
-                                  onPressed: picker.showPicker,
-                                ),
-                              ),
-                              inputFormatters: [
-                                formatter.dateFormatter,
+                                )
                               ],
-                            );
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                  separatorBuilder: (BuildContext context, int index) {
+                    return const Divider(
+                      thickness: 0.5,
+                    );
+                  },
+                ),
+                Divider(),
+                ValueListenableBuilder(
+                  valueListenable: selected,
+                  builder: (context, sels, _) {
+                    return RowSeparated(
+                      separatorBuilder: (context, index) => SizedBox(
+                          width: context.appTheme.spacing.marginMedium),
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ValueListenableListener(
+                          valueListenable: context.read<EstimateModel>().delete,
+                          onListen: () {
+                            var delete =
+                                context.read<EstimateModel>().delete.value;
+
+                            if (delete.hasError) {
+                              snackBarWidget(
+                                message: '削除に失敗しました',
+                                backgroundColor: Colors.red,
+                                prefixIcon: const Icon(
+                                  Icons.error,
+                                  color: Colors.white,
+                                ),
+                              );
+                            }
+
+                            if (delete.hasData) {
+                              selected.value = [];
+                              snackBarWidget(
+                                message: '削除しました',
+                                prefixIcon: const Icon(
+                                  Icons.check_circle,
+                                  color: Colors.white,
+                                ),
+                              );
+                            }
                           },
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'payment_terms',
-                          decoration: const InputDecoration(
-                            label: Text(
-                              'お支払い条件',
-                            ),
+                          child: ValueListenableBuilder(
+                            valueListenable:
+                                context.read<EstimateModel>().delete,
+                            builder: (context, value, _) {
+                              return OutlinedButton(
+                                onPressed: sels.isEmpty || value.loading
+                                    ? null
+                                    : () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (_) {
+                                              return Provider.value(
+                                                value: context
+                                                    .read<EstimateModel>(),
+                                                child: AlertDialog(
+                                                  title: const Text('削除確認'),
+                                                  content: const Text(
+                                                      '選択したデータを削除しますか？'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child:
+                                                          const Text('キャンセル'),
+                                                    ),
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        context
+                                                            .read<
+                                                                EstimateModel>()
+                                                            .deleteInvoice(
+                                                                sels);
+                                                        Navigator.of(context)
+                                                            .pop();
+                                                      },
+                                                      child: const Text('削除する'),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            });
+                                      },
+                                child: WithLoadingButton(
+                                  isLoading: value.loading,
+                                  loadingColor: context.appTheme.primaryColor,
+                                  child: Text(
+                                    '削除する',
+                                    style: context.textTheme.labelLarge
+                                        ?.copyWith(
+                                            color:
+                                                context.appTheme.primaryColor),
+                                  ),
+                                ),
+                              );
+                            },
                           ),
                         ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'contact_person',
-                          decoration: const InputDecoration(
-                            label: Text(
-                              '担当者',
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'prospective',
-                          decoration: const InputDecoration(
-                            label: Text(
-                              '見込み',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          SizedBox(
-            height: context.appTheme.spacing.marginMedium,
-          ),
-          Container(
-            padding: EdgeInsets.all(
-              context.appTheme.spacing.marginMedium,
-            ),
-            decoration: BoxDecoration(
-              color: Colors.grey.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(
-                  context.appTheme.spacing.borderRadiusMedium),
-            ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Text('エージェント'),
-                SizedBox(
-                  height: context.appTheme.spacing.marginMedium,
-                ),
-                ReactiveForm(
-                  formGroup: formGroup.control('agent') as FormGroup,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'agent_company_name',
-                          decoration: const InputDecoration(
-                            label: Text(
-                              '企業',
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'full_name_kanji',
-                          decoration: const InputDecoration(
-                            label: Text(
-                              '氏名（漢字）',
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'name_kana',
-                          decoration: const InputDecoration(
-                            label: Text(
-                              '氏名（カナ）',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                        // OutlinedButton(
+                        //   onPressed: () {},
+                        //   child: Text('CSV出力'),
+                        // ),
+                        // ElevatedButton(
+                        //   onPressed: () {},
+                        //   child: const Text(
+                        //     'コピーして新規作成',
+                        //     style: TextStyle(
+                        //       color: Colors.white,
+                        //     ),
+                        //   ),
+                        // ),
+                        // ElevatedButton(
+                        //   onPressed: () {},
+                        //   child: const Text(
+                        //     '新規作成',
+                        //     style: TextStyle(
+                        //       color: Colors.white,
+                        //     ),
+                        //   ),
+                        // ),
+                      ],
+                    );
+                  },
                 ),
                 SizedBox(
                   height: context.appTheme.spacing.marginMedium,
                 ),
-                const Text('紹介者'),
+                const EstimateScreenForm(),
                 SizedBox(
                   height: context.appTheme.spacing.marginMedium,
                 ),
-                ReactiveForm(
-                  formGroup: formGroup.control('introducer') as FormGroup,
-                  child: Row(
-                    children: [
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'introducer_company_name',
-                          decoration: const InputDecoration(
-                            label: Text(
-                              '企業',
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'full_name_kanji',
-                          decoration: const InputDecoration(
-                            label: Text(
-                              '氏名（漢字）',
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'name_kana',
-                          decoration: const InputDecoration(
-                            label: Text(
-                              '氏名（カナ）',
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    ValueListenableListener(
+                      valueListenable: context.read<EstimateModel>().submitData,
+                      onListen: () {
+                        var data =
+                            context.read<EstimateModel>().submitData.value;
+
+                        if (data.hasData) {
+                          snackBarWidget(
+                            message: '正常に保存されました',
+                            prefixIcon: const Icon(Icons.check_circle,
+                                color: Colors.white),
+                          );
+                        }
+
+                        if (data.hasError) {
+                          snackBarWidget(
+                            message: '保存できませんでした。 もう一度試してください。',
+                            backgroundColor: Colors.red,
+                            prefixIcon:
+                                const Icon(Icons.error, color: Colors.white),
+                          );
+                        }
+                      },
+                      child: ValueListenableBuilder(
+                          valueListenable:
+                              context.watch<EstimateModel>().submitData,
+                          builder: (context, value, _) {
+                            return ReactiveFormConsumer(
+                                builder: (context, formGroup, _) {
+                              return ElevatedButton(
+                                onPressed: value.loading
+                                    ? null
+                                    : () {
+                                        context.read<EstimateModel>().submit(
+                                              formGroup: formGroup,
+                                            );
+                                      },
+                                child: WithLoadingButton(
+                                    isLoading: value.loading,
+                                    child: const Text('保存')),
+                              );
+                            });
+                          }),
+                    ),
+                  ],
                 ),
               ],
             ),
           ),
-          SizedBox(
-            height: context.appTheme.spacing.marginMedium,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [ElevatedButton(onPressed: () {}, child: const Text('プレビュー'))],
-          ),
-          SizedBox(
-            height: context.appTheme.spacing.marginMedium,
-          ),
-          Text('合計金額', style: context.textTheme.titleMedium),
-          SizedBox(
-            height: context.appTheme.spacing.marginMedium,
-          ),
-          Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Container(
-                  padding: EdgeInsets.all(
-                    context.appTheme.spacing.marginSmall,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(
-                      context.appTheme.spacing.borderRadiusMedium,
-                    )),
-                    color: context.appTheme.primaryColor.withOpacity(0.1),
-                    border: Border.all(
-                      color: context.appTheme.primaryColor,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text('日本円（税込）'),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Text(
-                        '1,820,830円',
-                        style: context.textTheme.titleLarge,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: context.appTheme.spacing.marginMedium,
-              ),
-              const Expanded(child: SizedBox()),
-            ],
-          ),
-          SizedBox(
-            height: context.appTheme.spacing.marginMedium,
-          ),
-          Text('治療費', style: context.textTheme.titleMedium),
-          SizedBox(
-            height: context.appTheme.spacing.marginMedium,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 2,
-                child: Container(
-                  padding: EdgeInsets.all(
-                    context.appTheme.spacing.marginMedium,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(
-                      context.appTheme.spacing.borderRadiusMedium,
-                    )),
-                    border: Border.all(
-                      color: context.appTheme.primaryColor,
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      ReactiveFormArray(
-                        formArrayName: 'treatment_cost',
-                        builder: (context, formArray, child) {
-                          final rows = formArray.controls
-                              .map((control) => control as FormGroup)
-                              .map(
-                                (currentForm) => ReactiveForm(
-                                  formGroup: currentForm,
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                          '${formArray.controls.indexOf(currentForm) + 1}'),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        flex: 2,
-                                        child: ReactiveTextField(
-                                          formControlName: 'item',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '項目',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: ReactiveTextField(
-                                                formControlName: 'quantity',
-                                                decoration: const InputDecoration(
-                                                  label: Text(
-                                                    '数量',
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Text(
-                                              '式',
-                                              style:
-                                                  context.textTheme.bodySmall,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: ReactiveTextField(
-                                          formControlName: 'unit_price',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '単価',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: ReactiveTextField(
-                                          formControlName: 'amount',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '金額',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: ReactiveTextField(
-                                          formControlName: 'cost',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '原価',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: ReactiveTextField(
-                                          formControlName: 'profit',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '利益',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Icon(
-                                        Icons.remove_circle_outline_rounded,
-                                        color: context.appTheme.primaryColor,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-
-                          return ColumnSeparated(
-                            separatorBuilder:
-                                (BuildContext context, int index) => SizedBox(
-                              height: context.appTheme.spacing.marginMedium,
-                            ),
-                            children: rows.toList(),
-                          );
-                        },
-                      ),
-                      SizedBox(
-                        height: context.appTheme.spacing.marginMedium,
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.add_circle,
-                            color: context.appTheme.primaryColor,
-                          ),
-                          SizedBox(
-                            width: context.appTheme.spacing.marginSmall,
-                          ),
-                          Text(
-                            '行を追加',
-                            style: TextStyle(
-                                fontFamily: 'NotoSansJP',
-                                package: 'core_ui',
-                                color: context.appTheme.primaryColor),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: context.appTheme.spacing.marginMedium,
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets.all(
-                                context.appTheme.spacing.marginSmall,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(
-                                  context.appTheme.spacing.borderRadiusMedium,
-                                )),
-                                color: context.appTheme.primaryColor
-                                    .withOpacity(0.1),
-                                border: Border.all(
-                                  color: context.appTheme.primaryColor,
-                                ),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  const Spacer(),
-                                  const Text('小計'),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                    child: VerticalDivider(
-                                      thickness: 0.5,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  Text(
-                                    '1,655,300円',
-                                    style: context.textTheme.titleLarge,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: context.appTheme.primaryColor,
-              ),
-              Expanded(
-                child: Column(
-                  children: [
-                    ReactiveForm(
-                      formGroup: formGroup.control('search_treatment_cost')
-                          as FormGroup,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: ReactiveTextField(
-                              formControlName: 'search_hospitalName',
-                              decoration: const InputDecoration(
-                                suffixIcon: Icon(
-                                  Icons.search,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: context.appTheme.spacing.marginMedium,
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(
-                        context.appTheme.spacing.marginMedium,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.1),
-                        borderRadius: BorderRadius.all(Radius.circular(
-                          context.appTheme.spacing.borderRadiusMedium,
-                        )),
-                        border: Border.all(
-                          color: context.appTheme.primaryColor,
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              const Expanded(
-                                flex: 2,
-                                child: Center(child: Text('項目')),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              const Expanded(
-                                child: Center(child: Text('単価')),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginSmall,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                context.appTheme.spacing.borderRadiusMedium,
-                              )),
-                              color: Colors.white,
-                              border: Border.all(
-                                color: context.appTheme.primaryColor,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  flex: 2,
-                                  child: Text('免疫活性化血管内治療　1回コース'),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(
-                                  child: Text('1,000,000'),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginSmall,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                context.appTheme.spacing.borderRadiusMedium,
-                              )),
-                              color: Colors.white,
-                              border: Border.all(
-                                color: context.appTheme.primaryColor,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  flex: 2,
-                                  child: Text('免疫活性化血管内治療　3回コース'),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(
-                                  child: Text('2,500,000'),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginSmall,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                context.appTheme.spacing.borderRadiusMedium,
-                              )),
-                              color: Colors.white,
-                              border: Border.all(
-                                color: context.appTheme.primaryColor,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  flex: 2,
-                                  child: Text('活性化リンパ球療法（キラーT細胞）'),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(
-                                  child: Text('400,000'),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginSmall,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                context.appTheme.spacing.borderRadiusMedium,
-                              )),
-                              color: Colors.white,
-                              border: Border.all(
-                                color: context.appTheme.primaryColor,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  flex: 2,
-                                  child: Text('MSC‐CM（エクソソーム）動脈直注投与'),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(
-                                  child: Text('605,000'),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginSmall,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                context.appTheme.spacing.borderRadiusMedium,
-                              )),
-                              color: Colors.white,
-                              border: Border.all(
-                                color: context.appTheme.primaryColor,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  flex: 2,
-                                  child: Text('仲介手数料20%'),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(
-                                  child: Text('各項目×20％を控除'),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: context.appTheme.spacing.marginMedium,
-          ),
-          Text('サービス費', style: context.textTheme.titleMedium),
-          SizedBox(
-            height: context.appTheme.spacing.marginMedium,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              Expanded(
-                flex: 2,
-                child: Container(
-                  padding: EdgeInsets.all(
-                    context.appTheme.spacing.marginMedium,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(
-                      context.appTheme.spacing.borderRadiusMedium,
-                    )),
-                    border: Border.all(
-                      color: context.appTheme.primaryColor,
-                    ),
-                  ),
-                  child: Column(
-                    children: [
-                      ReactiveFormArray(
-                        formArrayName: 'service_fee',
-                        builder: (context, formArray, child) {
-                          final rows = formArray.controls
-                              .map((control) => control as FormGroup)
-                              .map(
-                                (currentForm) => ReactiveForm(
-                                  formGroup: currentForm,
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                          '${formArray.controls.indexOf(currentForm) + 1}'),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        flex: 2,
-                                        child: ReactiveTextField(
-                                          formControlName: 'item',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '項目',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              child: ReactiveTextField(
-                                                formControlName: 'quantity',
-                                                decoration: const InputDecoration(
-                                                  label: Text(
-                                                    '数量',
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                            Text(
-                                              '式',
-                                              style:
-                                                  context.textTheme.bodySmall,
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: ReactiveTextField(
-                                          formControlName: 'unit_price',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '単価',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: ReactiveTextField(
-                                          formControlName: 'amount',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '金額',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: ReactiveTextField(
-                                          formControlName: 'cost',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '原価',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: ReactiveTextField(
-                                          formControlName: 'profit',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '利益',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Icon(
-                                        Icons.remove_circle_outline_rounded,
-                                        color: context.appTheme.primaryColor,
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-
-                          return ColumnSeparated(
-                            separatorBuilder:
-                                (BuildContext context, int index) => SizedBox(
-                              height: context.appTheme.spacing.marginMedium,
-                            ),
-                            children: rows.toList(),
-                          );
-                        },
-                      ),
-                      SizedBox(
-                        height: context.appTheme.spacing.marginMedium,
-                      ),
-                      Row(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.add_circle,
-                            color: context.appTheme.primaryColor,
-                          ),
-                          SizedBox(
-                            width: context.appTheme.spacing.marginSmall,
-                          ),
-                          Text(
-                            '行を追加',
-                            style: TextStyle(
-                                fontFamily: 'NotoSansJP',
-                                package: 'core_ui',
-                                color: context.appTheme.primaryColor),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: context.appTheme.spacing.marginMedium,
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: Container(
-                              padding: EdgeInsets.all(
-                                context.appTheme.spacing.marginSmall,
-                              ),
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(Radius.circular(
-                                  context.appTheme.spacing.borderRadiusMedium,
-                                )),
-                                color: context.appTheme.primaryColor
-                                    .withOpacity(0.1),
-                                border: Border.all(
-                                  color: context.appTheme.primaryColor,
-                                ),
-                              ),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  const Spacer(),
-                                  const Text('小計'),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const SizedBox(
-                                    height: 20,
-                                    child: VerticalDivider(
-                                      thickness: 0.5,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  Text(
-                                    '1,655,300円',
-                                    style: context.textTheme.titleLarge,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Icon(
-                Icons.arrow_back_ios_new_rounded,
-                color: context.appTheme.primaryColor,
-              ),
-              Expanded(
-                child: Column(
-                  children: [
-                    ReactiveForm(
-                      formGroup:
-                          formGroup.control('search_service_fee') as FormGroup,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            child: ReactiveTextField(
-                              formControlName: 'search_hospitalName',
-                              decoration: const InputDecoration(
-                                suffixIcon: Icon(
-                                  Icons.search,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: context.appTheme.spacing.marginMedium,
-                    ),
-                    Container(
-                      padding: EdgeInsets.all(
-                        context.appTheme.spacing.marginMedium,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.grey.withOpacity(0.1),
-                        borderRadius: BorderRadius.all(Radius.circular(
-                          context.appTheme.spacing.borderRadiusMedium,
-                        )),
-                        border: Border.all(
-                          color: context.appTheme.primaryColor,
-                        ),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            children: [
-                              const Expanded(
-                                flex: 2,
-                                child: Center(child: Text('項目')),
-                              ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              const Expanded(
-                                child: Center(child: Text('単価')),
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginSmall,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                context.appTheme.spacing.borderRadiusMedium,
-                              )),
-                              color: Colors.white,
-                              border: Border.all(
-                                color: context.appTheme.primaryColor,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  flex: 2,
-                                  child: Text('1-A 医療機関マッチング・来日前折衝費用'),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(
-                                  child: Text('100,000'),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginSmall,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                context.appTheme.spacing.borderRadiusMedium,
-                              )),
-                              color: Colors.white,
-                              border: Border.all(
-                                color: context.appTheme.primaryColor,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  flex: 2,
-                                  child: Text('1-A 医療機関マッチング・来日前折衝費用'),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(
-                                  child: Text('100,000'),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginSmall,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                context.appTheme.spacing.borderRadiusMedium,
-                              )),
-                              color: Colors.white,
-                              border: Border.all(
-                                color: context.appTheme.primaryColor,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  flex: 2,
-                                  child: Text('1-A 医療機関マッチング・来日前折衝費用'),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(
-                                  child: Text('100,000'),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginSmall,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                context.appTheme.spacing.borderRadiusMedium,
-                              )),
-                              color: Colors.white,
-                              border: Border.all(
-                                color: context.appTheme.primaryColor,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  flex: 2,
-                                  child: Text('1-A 医療機関マッチング・来日前折衝費用'),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(
-                                  child: Text('100,000'),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginSmall,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                context.appTheme.spacing.borderRadiusMedium,
-                              )),
-                              color: Colors.white,
-                              border: Border.all(
-                                color: context.appTheme.primaryColor,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  flex: 2,
-                                  child: Text('1-A 医療機関マッチング・来日前折衝費用'),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(
-                                  child: Text('100,000'),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginSmall,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                context.appTheme.spacing.borderRadiusMedium,
-                              )),
-                              color: Colors.white,
-                              border: Border.all(
-                                color: context.appTheme.primaryColor,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  flex: 2,
-                                  child: Text('1-A 医療機関マッチング・来日前折衝費用'),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(
-                                  child: Text('100,000'),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginSmall,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                context.appTheme.spacing.borderRadiusMedium,
-                              )),
-                              color: Colors.white,
-                              border: Border.all(
-                                color: context.appTheme.primaryColor,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  flex: 2,
-                                  child: Text('1-A 医療機関マッチング・来日前折衝費用'),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(
-                                  child: Text('100,000'),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginSmall,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                context.appTheme.spacing.borderRadiusMedium,
-                              )),
-                              color: Colors.white,
-                              border: Border.all(
-                                color: context.appTheme.primaryColor,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  flex: 2,
-                                  child: Text('1-A 医療機関マッチング・来日前折衝費用'),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(
-                                  child: Text('100,000'),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: context.appTheme.spacing.marginMedium,
-                          ),
-                          Container(
-                            padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginSmall,
-                            ),
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.all(Radius.circular(
-                                context.appTheme.spacing.borderRadiusMedium,
-                              )),
-                              color: Colors.white,
-                              border: Border.all(
-                                color: context.appTheme.primaryColor,
-                              ),
-                            ),
-                            child: Row(
-                              children: [
-                                const Expanded(
-                                  flex: 2,
-                                  child: Text('1-A 医療機関マッチング・来日前折衝費用'),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                const Expanded(
-                                  child: Text('100,000'),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: context.appTheme.spacing.marginMedium,
-          ),
-          Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Container(
-                  padding: EdgeInsets.all(
-                    context.appTheme.spacing.marginSmall,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(
-                      context.appTheme.spacing.borderRadiusMedium,
-                    )),
-                    color: context.appTheme.primaryColor.withOpacity(0.1),
-                    border: Border.all(
-                      color: context.appTheme.primaryColor,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      const Spacer(),
-                      const Text('計'),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                        child: VerticalDivider(
-                          thickness: 0.5,
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Text(
-                        '1,655,300円',
-                        style: context.textTheme.titleLarge,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: context.appTheme.spacing.marginMedium,
-              ),
-              Expanded(
-                child: SizedBox(
-                  width: context.appTheme.spacing.marginMedium,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: context.appTheme.spacing.marginExtraSmall,
-          ),
-          Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Container(
-                  padding: EdgeInsets.all(
-                    context.appTheme.spacing.marginSmall,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(
-                      context.appTheme.spacing.borderRadiusMedium,
-                    )),
-                    color: context.appTheme.primaryColor.withOpacity(0.1),
-                    border: Border.all(
-                      color: context.appTheme.primaryColor,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      const Spacer(),
-                      const Text('消費税'),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                        child: VerticalDivider(
-                          thickness: 0.5,
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Text(
-                        '1655,300円',
-                        style: context.textTheme.titleLarge,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: context.appTheme.spacing.marginMedium,
-              ),
-              Expanded(
-                child: SizedBox(
-                  width: context.appTheme.spacing.marginMedium,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: context.appTheme.spacing.marginExtraSmall,
-          ),
-          Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Container(
-                  padding: EdgeInsets.all(
-                    context.appTheme.spacing.marginSmall,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(
-                      context.appTheme.spacing.borderRadiusMedium,
-                    )),
-                    color: context.appTheme.primaryColor.withOpacity(0.1),
-                    border: Border.all(
-                      color: context.appTheme.primaryColor,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      const Spacer(),
-                      const Text('合計'),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                        child: VerticalDivider(
-                          thickness: 0.5,
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Text(
-                        '335,000円',
-                        style: context.textTheme.titleLarge,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: context.appTheme.spacing.marginMedium,
-              ),
-              Expanded(
-                child: SizedBox(
-                  width: context.appTheme.spacing.marginMedium,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: context.appTheme.spacing.marginMedium,
-          ),
-          Row(
-            children: [
-              Expanded(
-                flex: 2,
-                child: Container(
-                  padding: EdgeInsets.all(
-                    context.appTheme.spacing.marginSmall,
-                  ),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(Radius.circular(
-                      context.appTheme.spacing.borderRadiusMedium,
-                    )),
-                    color: context.appTheme.primaryColor.withOpacity(0.1),
-                    border: Border.all(
-                      color: context.appTheme.primaryColor,
-                    ),
-                  ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      const Spacer(),
-                      const Text('利益'),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                        child: VerticalDivider(
-                          thickness: 0.5,
-                        ),
-                      ),
-                      SizedBox(
-                        width: context.appTheme.spacing.marginMedium,
-                      ),
-                      Text(
-                        '335,000円',
-                        style: context.textTheme.titleLarge,
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                width: context.appTheme.spacing.marginMedium,
-              ),
-              Expanded(
-                child: SizedBox(
-                  width: context.appTheme.spacing.marginMedium,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(
-            height: context.appTheme.spacing.marginMedium,
-          ),
-          Text('備考', style: context.textTheme.titleMedium),
-          SizedBox(
-            height: context.appTheme.spacing.marginMedium,
-          ),
-          Row(
-            children: [
-              Expanded(
-                child: ReactiveTextField(
-                  maxLines: 15,
-                  minLines: 1,
-                  formControlName: 'memo',
-                  decoration: const InputDecoration(
-                    label: Text('メモ'),
-                  ),
-                ),
-              ),
-            ],
-          )
-        ],
-      ),
+        );
+      },
     );
   }
 }

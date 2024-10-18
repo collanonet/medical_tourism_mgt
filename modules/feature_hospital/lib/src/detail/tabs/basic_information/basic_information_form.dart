@@ -32,6 +32,7 @@ FormGroup basicInformationForm() {
       ),
       'googleMap': FormControl<String>(
         value: '',
+        validators: [Validators.pattern(RegExp(r'^https?://'))],
       ),
       'phoneNumber': FormControl<String>(
         value: '',
@@ -41,6 +42,7 @@ FormGroup basicInformationForm() {
       ),
       'homepage': FormControl<String>(
         value: '',
+        validators: [Validators.pattern(RegExp(r'^https?://'))],
       ),
       'supportedMenu': FormControl<bool>(value: false),
       'healthCheckup': FormControl<bool>(value: false),
@@ -115,23 +117,24 @@ FormGroup basicInformationForm() {
         value: '',
       ),
     }),
+    // form account login for hospital
     'medicalRecordHospitals': FormArray([
       FormGroup({
         '_id': FormControl<String>(),
         'hospital': FormControl<String?>(),
         'dateOfUpdate': FormControl<DateTime>(
           value: DateTime.now(),
-          validators: [Validators.required],
+          // validators: [Validators.required],
         ),
         'departmentName': FormControl<String>(),
         'nameKanji': FormControl<String>(
-          validators: [Validators.required],
-        ),
+            // validators: [Validators.required],
+            ),
         'nameKana': FormControl<String>(),
         'telephoneNumber': FormControl<String>(),
         'email': FormControl<String>(
           validators: [
-            Validators.required,
+            // Validators.required,
             Validators.email,
           ],
         ),

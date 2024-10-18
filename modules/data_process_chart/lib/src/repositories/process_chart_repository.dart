@@ -2,8 +2,6 @@
 import 'package:core_network/entities.dart';
 
 abstract class ProcessChartRepository {
-
-
   Future<PatientFilterResponse> postFilterpatientChart(
     PatientFilterRequst patientFilterRequst,
   );
@@ -35,13 +33,14 @@ abstract class ProcessChartRepository {
     ItineraryTransferInputRequest itineraryTransferInputRequest,
   );
 
-  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital();
+  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital(
+      String id);
 
   Future<DetailFacilityHotelResponse> postDetailFacilityHospital(
     DetailFacilityHotelRequest detailFacilityHotelRequest,
   );
 
-  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn();
+  Future<DetailDropInFacilityResponse> getDetailFacilityDropIn(String tourId);
 
   Future<DetailDropInFacilityResponse> postDetailFacilityDropIn(
     DetailDropInFacilityRequest detailDropInFacilityRequest,
@@ -107,22 +106,32 @@ abstract class ProcessChartRepository {
     DetailRelatedPartiesRequest detailRelatedPartiesRequest,
   );
 
-  Future<List<DetailRelatedPartiesBusCompanyResponse>>
-      getDetailRelatedPartiesBusCompany();
+  Future<DetailRelatedPartiesBusCompanyResponse>
+      getDetailRelatedPartiesBusCompany(String id);
 
   Future<DetailRelatedPartiesBusCompanyResponse>
       postDetailRelatedPartiesBusCompany(
     DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest,
   );
 
-  Future<DetailRelatedPartiesDriverResponse> getDetailRelatedPartiesDriver();
+  Future<DetailRelatedPartiesBusCompanyResponse>
+      putDetailRelatedPartiesBusCompany(
+    String id,
+    DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest,
+  );
+
+  Future<List<DetailRelatedPartiesDriverResponse>>
+      getDetailRelatedPartiesDriver(String id);
 
   Future<DetailRelatedPartiesDriverResponse> postDetailRelatedPartiesDriver(
     DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest,
   );
 
-  Future<DetailRelatedPartiesEmergencyContactResponse>
-      getDetailRelatedPartiesEmergencyContact();
+  Future<DetailRelatedPartiesDriverResponse> putRelatedPartiesDriver(String id,
+      DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest);
+
+  Future<List<DetailRelatedPartiesEmergencyContactResponse>>
+      getDetailRelatedPartiesEmergencyContact(String id);
 
   Future<DetailRelatedPartiesEmergencyContactResponse>
       postDetailRelatedPartiesEmergencyContact(
@@ -130,9 +139,15 @@ abstract class ProcessChartRepository {
         detailRelatedPartiesEmergencyContactRequest,
   );
 
-  Future<DetailItineraryResponse> getDetailItinerary(String id);
+  Future<DetailRelatedPartiesEmergencyContactResponse>
+      putRelatedPartiesEmergency(
+          String id,
+          DetailRelatedPartiesEmergencyContactRequest
+              detailRelatedPartiesEmergencyContactRequest);
 
-    Future<List<DetailItineraryResponse>> getPatientChart({
+  Future<DetailItineraryResponse> getDetailItinerary({String? id});
+
+  Future<List<DetailItineraryResponse>> getPatientChart({
     String? tourName,
     String? classification,
     DateTime? dateFrom,
@@ -143,5 +158,17 @@ abstract class ProcessChartRepository {
     DetailIneraryRequest detailIneraryRequest,
   );
 
-  Future<DetailRelatedPartiesResponse> putDetailRelatedParties(DetailRelatedPartiesRequest request, element);
+  Future<DetailItineraryResponse> putDetailItinerary(
+    String id,
+    DetailIneraryRequest request,
+  );
+
+  Future<DetailRelatedPartiesResponse> putDetailRelatedParties(
+      DetailRelatedPartiesRequest request, element);
+
+  Future<DetailDropInFacilityResponse> putDetailFacilityDropIn(
+      id, DetailDropInFacilityRequest detailDropInFacilityRequest);
+
+  Future<DetailFacilityHotelResponse> putDetailFacilityHospital(
+      id, DetailFacilityHotelRequest request);
 }

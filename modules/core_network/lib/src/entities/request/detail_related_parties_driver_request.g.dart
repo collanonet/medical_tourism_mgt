@@ -15,7 +15,7 @@ DetailRelatedPartiesDriverRequest _$DetailRelatedPartiesDriverRequestFromJson(
       dateYearTo: json['dateYearTo'] == null
           ? null
           : DateTime.parse(json['dateYearTo'] as String),
-      carNumber: json['carNumber'] as String?,
+      carNumber: (json['carNumber'] as num?)?.toInt(),
       vehicleType: json['vehicleType'] as String?,
       driverNamaKanji: json['driverNamaKanji'] as String?,
       driverNameKana: json['driverNameKana'] as String?,
@@ -28,6 +28,7 @@ DetailRelatedPartiesDriverRequest _$DetailRelatedPartiesDriverRequestFromJson(
       accommodationName: json['accommodationName'] as String?,
       address: json['address'] as String?,
       phoneNumber2: json['phoneNumber2'] as String?,
+      tour: json['tour'] as String?,
     );
 
 Map<String, dynamic> _$DetailRelatedPartiesDriverRequestToJson(
@@ -46,4 +47,5 @@ Map<String, dynamic> _$DetailRelatedPartiesDriverRequestToJson(
       'accommodationName': instance.accommodationName,
       'address': instance.address,
       'phoneNumber2': instance.phoneNumber2,
+      'tour': instance.tour,
     };

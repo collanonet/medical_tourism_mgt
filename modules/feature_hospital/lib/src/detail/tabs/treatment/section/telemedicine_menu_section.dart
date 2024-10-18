@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -51,9 +50,14 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                       children: [
                         Expanded(
                             flex: 3,
-                            child: Text(
-                              '項目',
-                              style: context.textTheme.bodyMedium,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '項目',
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                              ],
                             )),
                         Expanded(
                             flex: 2,
@@ -69,9 +73,14 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                             )),
                         Expanded(
                             flex: 3,
-                            child: Text(
-                              '備考',
-                              style: context.textTheme.bodyMedium,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Text(
+                                  '備考',
+                                  style: context.textTheme.bodyMedium,
+                                ),
+                              ],
                             )),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
@@ -85,9 +94,10 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                             (control) => ReactiveForm(
                               formGroup: control as FormGroup,
                               child: RowSeparated(
-                                  separatorBuilder: (context, index) => SizedBox(
-                                        width:
-                                            context.appTheme.spacing.marginMedium,
+                                  separatorBuilder: (context, index) =>
+                                      SizedBox(
+                                        width: context
+                                            .appTheme.spacing.marginMedium,
                                       ),
                                   children: [
                                     Expanded(
@@ -124,15 +134,17 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                                         formControlName: 'remark',
                                       ),
                                     ),
-                                    if (formArray.controls.indexOf(control) == 0)
+                                    if (formArray.controls.indexOf(control) ==
+                                        0)
                                       SizedBox(
-                                        width:
-                                            context.appTheme.spacing.marginMedium,
+                                        width: context
+                                            .appTheme.spacing.marginMedium,
                                       ),
-                                    if (formArray.controls.indexOf(control) != 0)
+                                    if (formArray.controls.indexOf(control) !=
+                                        0)
                                       SizedBox(
-                                        width:
-                                            context.appTheme.spacing.marginMedium,
+                                        width: context
+                                            .appTheme.spacing.marginMedium,
                                         child: IconButton(
                                           icon: const Icon(
                                             Icons.remove_circle,
@@ -140,7 +152,9 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                                           ),
                                           onPressed: () {
                                             FormGroup formGroup = control;
-                                            if (formGroup.control('_id').value !=
+                                            if (formGroup
+                                                    .control('_id')
+                                                    .value !=
                                                 null) {
                                               context
                                                   .read<TreatmentModel>()
@@ -151,7 +165,8 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                                                       .value);
                                             }
 
-                                            formArray.removeAt(formArray.controls
+                                            formArray.removeAt(formArray
+                                                .controls
                                                 .indexOf(control));
                                           },
                                         ),
@@ -191,8 +206,9 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                           width: context.appTheme.spacing.marginSmall,
                         ),
                         Text(
-                          '担当者を追加',
-                          style: TextStyle(color: context.appTheme.primaryColor),
+                          '行を追加',
+                          style:
+                              TextStyle(color: context.appTheme.primaryColor),
                         )
                       ],
                     ),

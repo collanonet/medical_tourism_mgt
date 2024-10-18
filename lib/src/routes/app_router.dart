@@ -7,7 +7,6 @@ import 'package:feature_invoice/feature_invoice.dart';
 import 'package:feature_medical_visa/feature_medical_visa.dart';
 import 'package:feature_patient/feature_patient.dart';
 import 'package:feature_process_chart/feature_process_chart.dart';
-import 'package:feature_quotation/feature_quotation.dart';
 import 'package:feature_report/feature_report.dart';
 import 'package:feature_sale/feature_sale.dart';
 import 'package:feature_web_appointment/feature_web_appointment.dart';
@@ -27,7 +26,6 @@ part 'app_router.gr.dart';
     FeatureInvoiceRouterModule,
     FeatureMedicalVisaRouterModule,
     FeaturePatientRouterModule,
-    FeatureQuotationRouterModule,
     FeatureReportRouterModule,
     FeatureSaleRouterModule,
     FeatureProcessChartRouterModule,
@@ -92,7 +90,6 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
       AutoRoute(page: PatientsRoute.page, initial: true, path: '/patients'),
       AutoRoute(page: DetailPatientRoute.page, path: '/detail-patient/:id'),
       AutoRoute(page: PrePatientRoute.page, path: '/pre-patients'),
-      AutoRoute(page: QuotationsRoute.page, path: '/quotations'),
       AutoRoute(page: ReportsRoute.page, path: '/reports'),
       AutoRoute(page: MasterRoute.page, path: '/master'),
       AutoRoute(page: ContractRoute.page, path: '/contracts'),

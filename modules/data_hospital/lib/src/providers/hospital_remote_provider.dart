@@ -167,8 +167,6 @@ class HospitalRemoteProvider {
     bool? hospitalType2,
     bool? hospitalType3,
     bool? hospitalType4,
-    
-
   }) {
     return apiService.getHospitals(
       page: page,
@@ -353,5 +351,13 @@ class HospitalRemoteProvider {
 
   Future<void> deleteTreatmentTeleMenu(String id) {
     return apiService.deleteTreatmentTeleMenu(id: id);
+  }
+
+  Future<void> deleteBasicInformationHospital(String id) {
+    return apiService.deleteBasicInformationHospital(id);
+  }
+
+  Future<void> deleteMedicalRecordBasicInfoHospital(String id) {
+    return apiService.deleteMedicalRecordBasicInfoHospital(id);
   }
 }

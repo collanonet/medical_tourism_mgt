@@ -8,6 +8,8 @@ import 'package:retrofit/retrofit.dart';
 import '../core_network.dart';
 import '../entities.dart';
 import 'endpoints.dart';
+import 'entities/request/medical_visa_after_getting_visa_request.dart';
+import 'entities/request/medical_visa_reuied_in_japan_request.dart';
 
 part 'api_service.g.dart';
 
@@ -751,18 +753,34 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_FACILITY_HOSPITAL)
-  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital();
+  Future<List<DetailFacilityHotelResponse>> getDetialFacilityHospital(
+    @Query('tour') String id,
+  );
 
   @POST(EndPoints.DETAIL_FACILITY_HOSPITAL)
   Future<DetailFacilityHotelResponse> postDetailFacilityHospital(
     @Body() DetailFacilityHotelRequest detailFacilityHotelRequest,
   );
 
+  @PUT('${EndPoints.DETAIL_FACILITY_HOSPITAL}/{id}')
+  Future<DetailFacilityHotelResponse> putDetailFacilityHospital(
+    @Path('id') String id,
+    @Body() DetailFacilityHotelRequest detailFacilityHotelRequest,
+  );
+
   @GET(EndPoints.DETAIL_FACILITY_DROP_IN_FACILITY)
-  Future<List<DetailDropInFacilityResponse>> getDetailFacilityDropIn();
+  Future<DetailDropInFacilityResponse> getDetailFacilityDropIn(
+    @Query('tour') String tourId,
+  );
 
   @POST(EndPoints.DETAIL_FACILITY_DROP_IN_FACILITY)
   Future<DetailDropInFacilityResponse> postDetailFacilityDropIn(
+    @Body() DetailDropInFacilityRequest detailDropInFacilityRequest,
+  );
+
+  @PUT('${EndPoints.DETAIL_FACILITY_DROP_IN_FACILITY}/{id}')
+  Future<DetailDropInFacilityResponse> putDetailFacilityDropIn(
+    @Path('id') String id,
     @Body() DetailDropInFacilityRequest detailDropInFacilityRequest,
   );
 
@@ -808,8 +826,9 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.DETAIL_RELATED_PARTIES_BUS_COMPANY)
-  Future<List<DetailRelatedPartiesBusCompanyResponse>>
-      getRelatedPartiesBusCompany();
+  Future<DetailRelatedPartiesBusCompanyResponse> getRelatedPartiesBusCompany(
+    @Query('tour') String id,
+  );
 
   @POST(EndPoints.DETAIL_RELATED_PARTIES_BUS_COMPANY)
   Future<DetailRelatedPartiesBusCompanyResponse> postRelatedPartiesBusCompany(
@@ -817,21 +836,48 @@ abstract class ApiService {
     DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest,
   );
 
+  @PUT('${EndPoints.DETAIL_RELATED_PARTIES_BUS_COMPANY}/{id}')
+  Future<DetailRelatedPartiesBusCompanyResponse>
+      putDetailRelatedPartiesBusCompany(
+    @Path('id') String id,
+    @Body()
+    DetailRelatedPartiesBusCompanyRequest detailRelatedPartiesBusCompanyRequest,
+  );
+
   @GET(EndPoints.DETAIL_RELATED_PARTIES_DRIVER)
-  Future<DetailRelatedPartiesDriverResponse> getRelatedPartiesDriver();
+  Future<List<DetailRelatedPartiesDriverResponse>> getRelatedPartiesDriver(
+    @Query('tour') String id,
+  );
 
   @POST(EndPoints.DETAIL_RELATED_PARTIES_DRIVER)
   Future<DetailRelatedPartiesDriverResponse> postRelatedPartiesDriver(
     @Body() DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest,
   );
 
+  @PUT('${EndPoints.DETAIL_RELATED_PARTIES_DRIVER}/{id}')
+  Future<DetailRelatedPartiesDriverResponse> putRelatedPartiesDriver(
+    @Path('id') String id,
+    @Body() DetailRelatedPartiesDriverRequest detailRelatedPartiesDriverRequest,
+  );
+
   @GET(EndPoints.DETAIL_RELATED_EMERGENCY_CONTACT)
-  Future<DetailRelatedPartiesEmergencyContactResponse>
-      getRelatedPartiesEmergencyContact();
+  Future<List<DetailRelatedPartiesEmergencyContactResponse>>
+      getRelatedPartiesEmergencyContact(
+    @Query('tour') String id,
+  );
 
   @POST(EndPoints.DETAIL_RELATED_EMERGENCY_CONTACT)
   Future<DetailRelatedPartiesEmergencyContactResponse>
       postRelatedPartiesEmergencyContact(
+    @Body()
+    DetailRelatedPartiesEmergencyContactRequest
+        detailRelatedPartiesEmergencyContactRequest,
+  );
+
+  @PUT('${EndPoints.DETAIL_RELATED_EMERGENCY_CONTACT}/{id}')
+  Future<DetailRelatedPartiesEmergencyContactResponse>
+      putRelatedPartiesEmergency(
+    @Path('id') String id,
     @Body()
     DetailRelatedPartiesEmergencyContactRequest
         detailRelatedPartiesEmergencyContactRequest,
@@ -883,7 +929,7 @@ abstract class ApiService {
 
   @GET('${EndPoints.DETAIL_ITINERARY}/{id}')
   Future<DetailItineraryResponse> getDetailitinerary({
-    @Path('id') required String id,
+    @Path('id') String? id,
   });
 
   @GET(EndPoints.DETAIL_ITINERARY)
@@ -899,6 +945,12 @@ abstract class ApiService {
     @Body() DetailIneraryRequest detailIneraryRequest,
   );
 
+  @PUT('${EndPoints.DETAIL_ITINERARY}/{id}')
+  Future<DetailItineraryResponse> putDetailItinerary(
+    @Path('id') String id,
+    @Body() DetailIneraryRequest detailIneraryRequest,
+  );
+
   /// Get basic information of hospital C3 Page
 
   @GET('${EndPoints.BASIC_INFORMATION_HOSPITAL}/{hospitalId}')
@@ -909,6 +961,11 @@ abstract class ApiService {
   @POST(EndPoints.BASIC_INFORMATION_HOSPITAL)
   Future<BasicInformationHospitalResponse> postBasicInformationHospital(
     @Body() BasicInformationHospitalRequest basicInformationHospitalRequest,
+  );
+
+  @DELETE('${EndPoints.BASIC_INFORMATION_HOSPITAL}/{id}')
+  Future<void> deleteBasicInformationHospital(
+    @Path('id') String id,
   );
 
   @GET('${EndPoints.MEDICAL_RECORD_BASIC_INFO_HOSPITAL}/hospital/{hospitalId}')
@@ -922,6 +979,11 @@ abstract class ApiService {
       postMedicalRecordBasicInfoHospital(
     @Body()
     MedicalRecordBasicInfoHospitalRequest basicInformationHospitalRequest,
+  );
+
+  @DELETE('${EndPoints.MEDICAL_RECORD_BASIC_INFO_HOSPITAL}/{id}')
+  Future<void> deleteMedicalRecordBasicInfoHospital(
+    @Path('id') String id,
   );
 
   @GET('${EndPoints.DOCTOR_INFORMATION_HOSPITAL}/{hospitalId}')
@@ -1216,14 +1278,6 @@ abstract class ApiService {
     @Body() InvoiceRequest invoiceRequest,
   );
 
-  @GET(EndPoints.FILTER_IVOICE)
-  Future<List<InvoiceFilterResponse>> filterInvoice();
-
-  @POST(EndPoints.FILTER_IVOICE)
-  Future<InvoiceFilterResponse> postFilterInvoice(
-    @Body() InvoiceFilterRequest invoiceFilterRequest,
-  );
-
   @GET(EndPoints.ESTIMATE_MASTER)
   Future<List<EstimateMasterResponse>> getEstimateMaster();
 
@@ -1428,6 +1482,112 @@ abstract class ApiService {
 
   @DELETE('${EndPoints.SUMMARY_LIST}/{id}')
   Future<void> deleteFileSummary(
+    @Path('id') String id,
+  );
+
+  //A11
+  @GET(EndPoints.MEDICAL_VISA_PERSONAL)
+  Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal();
+
+  @POST(EndPoints.MEDICAL_VISA_PERSONAL)
+  Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(
+    @Body() MedicalVisaPersonalRequest medicalVisaPersonalRequest,
+  );
+
+  @GET(EndPoints.MEDICAL_VISA_STAY_PERIOD)
+  Future<List<MedicalVisaStayPeriodResponse>> getMedicalVisaStayPeriod();
+
+  @POST(EndPoints.MEDICAL_VISA_STAY_PERIOD)
+  Future<MedicalVisaStayPeriodResponse> postMedicalVisaStayPeriod(
+    @Body() MedicalVisaStayPeriodRequest medicalVisaStayPeriodRequest,
+  );
+
+  @GET(EndPoints.MEDICAL_VISA_REQUIRED_IN_JAPAN)
+  Future<MedicalVisaRequiredInJapanResponse> getMedicalRequiredInJapan();
+
+  @POST(EndPoints.MEDICAL_VISA_REQUIRED_IN_JAPAN)
+  Future<MedicalVisaRequiredInJapanResponse> postMedicalRequiredInJapan(
+    @Body() RequiredInJapan medicalVisaRequiredInJapanRequest,
+  );
+
+  @GET(EndPoints.MEDICAL_VISA_WITHDRAWAL)
+  Future<MedicalVisaVisaWithdrawalResponse> getMedicalVisaWithdrawal();
+
+  @POST(EndPoints.MEDICAL_VISA_WITHDRAWAL)
+  Future<MedicalVisaVisaWithdrawalResponse> postMedicalVisaWithdrawal(
+    @Body() MedicalVisaWithdrawalRequest medicalVisaVisaWithdrawalRequest,
+  );
+
+  @GET(EndPoints.MEDICAL_VISA_AFTER_GETTING_VISA)
+  Future<AfterGettingVisaResponse> getAfterGettingVisa();
+
+  @POST(EndPoints.MEDICAL_VISA_AFTER_GETTING_VISA)
+  Future<AfterGettingVisaResponse> postAfterGettingVisa(
+    @Body() AfterGettingVisaRequest afterGettingVisaRequest,
+  );
+
+  @GET(EndPoints.MEDICAL_VISA_TRAVEL_COMPANION)
+  Future<MedicalVisaTravelCompanionResponse> getMedicalVisaTravelCompanion();
+
+  @POST(EndPoints.MEDICAL_VISA_TRAVEL_COMPANION)
+  Future<MedicalVisaTravelCompanionResponse> postMedicalVisaTravelCompanion(
+    @Body() MedicalVisaTravelCompanionRequest medicalVisaTravelCompanionRequest,
+  );
+
+  @GET(EndPoints.MEDICAL_VISA_NECESSARY_IN_JAPAN)
+  Future<MedicalVisaNecessaryInJapanResponse> getMedicalVisaNecessaryInJapan();
+
+  @POST(EndPoints.MEDICAL_VISA_NECESSARY_IN_JAPAN)
+  Future<MedicalVisaNecessaryInJapanResponse> postMedicalVisaNecessaryInJapan(
+    @Body()
+    MedicalVisaNecessaryInJapanRequest medicalVisaNecessaryInJapanRequest,
+  );
+
+  @GET(EndPoints.MEDICAL_VISA_AFTER_GETTING_VISA_FINAL)
+  Future<MedicalVisaAfterGettingVisaResponse> getAfterGettingVisaFinal();
+
+  @POST(EndPoints.MEDICAL_VISA_AFTER_GETTING_VISA_FINAL)
+  Future<MedicalVisaAfterGettingVisaResponse> postAfterGettingVisaFinal(
+    @Body()
+    MedicalAfterGettingVisaFinalRequest medicalAfterGettingVisaFinalRequest,
+  );
+
+  // A15 & A13
+  @GET(EndPoints.INVOICE)
+  Future<List<MedicalInvoiceResponse>> getInvoices({
+    @Query('medicalRecord') String? medicalRecord,
+    @Query('type') bool? type,
+    @Query('nameOfHospital') String? nameOfHospital,
+    @Query('agentName') String? agentName,
+    @Query('patientName') String? patientName,
+    @Query('issueDateFrom') DateTime? issueDateFrom,
+    @Query('issueDateTo') DateTime? issueDateTo,
+    @Query('prospects') String? prospects,
+  });
+
+  @GET('${EndPoints.INVOICE}/medicalRecord/{medicalRecordId}')
+  Future<MedicalInvoiceResponse> getInvoicesByMedicalRecordId(
+    @Path('medicalRecordId') String medicalRecordId,
+  );
+
+  @POST(EndPoints.INVOICE)
+  Future<MedicalInvoiceResponse> postInvoice(
+    @Body() MedicalInvoiceRequest medicalInvoiceRequest,
+  );
+
+  @GET('${EndPoints.INVOICE}/{id}')
+  Future<MedicalInvoiceResponse> getInvoiceById(
+    @Path('id') String id,
+  );
+
+  @PUT('${EndPoints.INVOICE}/{id}')
+  Future<MedicalInvoiceResponse> putInvoice(
+    @Path('id') String id,
+    @Body() MedicalInvoiceRequest medicalInvoiceRequest,
+  );
+
+  @DELETE('${EndPoints.INVOICE}/{id}')
+  Future<void> deleteInvoice(
     @Path('id') String id,
   );
 }
