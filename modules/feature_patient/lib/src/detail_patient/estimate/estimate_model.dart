@@ -310,6 +310,34 @@ class EstimateModel {
       medicalQuotationData.value = AsyncData(error: e);
     }
   }
+
+  ValueNotifier<AsyncData<String>> submitMoveToInvoice =
+      ValueNotifier(const AsyncData());
+
+  Future<void> moveToInvoice(String? id) async {
+    try {
+      if (id != null) {
+        final invoice = medicalQuotationData.value.data
+            ?.firstWhere((element) => element.id == id);
+        if (invoice != null) {
+          submitMoveToInvoice.value = AsyncData(loading: true, data: id);
+          var invoiceData = invoice.copyWith(type: true);
+          MedicalInvoiceRequest request =
+              MedicalInvoiceRequest.fromJson(invoiceData.toJson());
+          await patientRepository.putInvoice(id, request);
+
+          submitMoveToInvoice.value = AsyncData(data: id);
+          medicalQuotationData.value = AsyncData(
+            data: medicalQuotationData.value.data!
+              ..removeWhere((element) => element.id == id),
+          );
+        }
+      }
+    } catch (e) {
+      logger.e(e);
+      submitMoveToInvoice.value = AsyncData(error: e);
+    }
+  }
 }
 
 Future<Uint8List?> generatePdfFromQuotation(
