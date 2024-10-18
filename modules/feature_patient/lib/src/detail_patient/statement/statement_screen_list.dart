@@ -7,6 +7,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
 import 'statement_model.dart';
@@ -23,6 +24,8 @@ class _StatementScreenListState extends State<StatementScreenList> {
 
   @override
   Widget build(BuildContext context) {
+    var formGroup = ReactiveForm.of(context) as FormGroup;
+
     return ValueListenableBuilder(
       valueListenable: context.watch<StatementModel>().medicalInvoiceData,
       builder: (context, value, _) {
@@ -261,94 +264,20 @@ class _StatementScreenListState extends State<StatementScreenList> {
                           '--',
                           style: context.textTheme.bodySmall,
                         )),
-                        Row(
-                          children: [
-                            ElevatedButton(
-                              onPressed: data?.fileNamePdfJP != null ||
-                                      data?.fileNamePdfEN != null ||
-                                      data?.fileNamePdfZH != null ||
-                                      data?.fileNamePdfZHTW != null ||
-                                      data?.fileNamePdfVN != null
-                                  ? () {
-                                      showDialog(
-                                          context: context,
-                                          builder: (_) {
-                                            return AlertDialog(
-                                              title: const Text('請求書'),
-                                              content: Column(
-                                                mainAxisSize: MainAxisSize.min,
-                                                children: [
-                                                  if (data?.fileNamePdfJP !=
-                                                      null)
-                                                    ListTile(
-                                                      title: const Text('日本語'),
-                                                      onTap: () {
-                                                        openUrlInBrowser(
-                                                            fileName:
-                                                                data?.fileNamePdfJP ??
-                                                                    '');
-                                                      },
-                                                    ),
-                                                  if (data?.fileNamePdfEN !=
-                                                      null)
-                                                    ListTile(
-                                                      title: const Text('英語'),
-                                                      onTap: () {
-                                                        openUrlInBrowser(
-                                                            fileName:
-                                                                data?.fileNamePdfEN ??
-                                                                    '');
-                                                      },
-                                                    ),
-                                                  if (data?.fileNamePdfVN !=
-                                                      null)
-                                                    ListTile(
-                                                      title:
-                                                          const Text('ベトナム語'),
-                                                      onTap: () {
-                                                        openUrlInBrowser(
-                                                            fileName:
-                                                                data?.fileNamePdfVN ??
-                                                                    '');
-                                                      },
-                                                    ),
-                                                  if (data?.fileNamePdfZH !=
-                                                      null)
-                                                    ListTile(
-                                                      title: const Text('中国語'),
-                                                      onTap: () {
-                                                        openUrlInBrowser(
-                                                            fileName:
-                                                                data?.fileNamePdfZH ??
-                                                                    '');
-                                                      },
-                                                    ),
-                                                  if (data?.fileNamePdfZHTW !=
-                                                      null)
-                                                    ListTile(
-                                                      title: const Text('繁体字'),
-                                                      onTap: () {
-                                                        openUrlInBrowser(
-                                                            fileName:
-                                                                data?.fileNamePdfZHTW ??
-                                                                    '');
-                                                      },
-                                                    ),
-                                                ],
-                                              ),
-                                            );
-                                          });
-                                    }
-                                  : null,
-                              child: const Text(
-                                '請求書を発行する',
-                                style: TextStyle(fontSize: 10),
-                                maxLines: 1,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ),
-                          ],
-                        ),
+                        ElevatedButton(
+                          onPressed: () {
+                            context.read<StatementModel>().editInvoice(
+                                  invoice: data!,
+                                  formGroup: formGroup,
+                                );
+                          },
+                          child: const Text(
+                            '編集',
+                            style: TextStyle(fontSize: 10),
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        )
                       ],
                     ),
                   ),

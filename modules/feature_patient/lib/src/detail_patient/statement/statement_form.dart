@@ -3,6 +3,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup statementForm() {
   return FormGroup({
+    '_id': FormControl<String>(),
     'logoFile' : FormControl<FileSelect>(),
     'stampFile' : FormControl<FileSelect>(),
     'invoiceNumber': FormControl<String>(),
@@ -29,6 +30,7 @@ FormGroup statementForm() {
     'hospitalRecord': FormControl<String>(),
     'totalPayment': FormArray([
       FormGroup({
+        '_id': FormControl<String>(),
         'taxRate': FormControl<double>(
           validators: [
             Validators.number,
@@ -48,6 +50,7 @@ FormGroup statementForm() {
     ]),
     'item': FormArray([
       FormGroup({
+        '_id': FormControl<String>(),
         'transactionDate': FormControl<DateTime>(
           value: DateTime.now(),
         ),

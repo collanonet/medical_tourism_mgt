@@ -34,23 +34,32 @@ class EstimateScreen extends StatelessWidget {
                       if (!editData.hasData) const Divider(),
                       const EstimateScreenForm(),
                       const Divider(),
-                      Row(
+                      RowSeparated(
+                        crossAxisAlignment: CrossAxisAlignment.end,
                         mainAxisAlignment: MainAxisAlignment.end,
+                        separatorBuilder: (BuildContext context, int index) {
+                          return SizedBox(
+                              width: context.appTheme.spacing.formSpacing);
+                        },
                         children: [
                           ValueListenableBuilder(
                               valueListenable:
-                              context.watch<EstimateModel>().editData,
+                                  context.watch<EstimateModel>().editData,
                               builder: (context, value, _) {
-                                return value.hasData ? ElevatedButton(
-                                  onPressed: (){
-                                    context.read<EstimateModel>().resetEditData();
-                                  },
-                                  style: ElevatedButton.styleFrom(
-                                    foregroundColor: Colors.white,
-                                    backgroundColor: Colors.red,
-                                  ),
-                                  child: const Text('キャンセル'),
-                                ) : const SizedBox();
+                                return value.hasData
+                                    ? ElevatedButton(
+                                        onPressed: () {
+                                          context
+                                              .read<EstimateModel>()
+                                              .resetEditData();
+                                        },
+                                        style: ElevatedButton.styleFrom(
+                                          foregroundColor: Colors.white,
+                                          backgroundColor: Colors.red,
+                                        ),
+                                        child: const Text('キャンセル'),
+                                      )
+                                    : const SizedBox();
                               }),
                           ValueListenableListener(
                             valueListenable:

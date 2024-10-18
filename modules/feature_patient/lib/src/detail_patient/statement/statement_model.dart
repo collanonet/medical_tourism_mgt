@@ -43,6 +43,78 @@ class StatementModel {
     await fetchMedicalInvoice(medicalRecordId: medicalRecord.id);
   }
 
+  ValueNotifier<AsyncData<MedicalInvoiceResponse>> editData =
+      ValueNotifier(const AsyncData());
+
+  void resetEditData() {
+    editData.value = const AsyncData();
+  }
+
+  Future<void> editInvoice({
+    required MedicalInvoiceResponse invoice,
+    required FormGroup formGroup,
+  }) async {
+    editData.value = AsyncData(data: invoice);
+    formGroup.control('_id').value = invoice.id;
+    formGroup.control('logoFile').value = FileSelect(
+      url: invoice.logoFile,
+    );
+    formGroup.control('stampFile').value = FileSelect(
+      url: invoice.stampFile,
+    );
+    formGroup.control('invoiceNumber').value = invoice.invoiceNumber;
+    formGroup.control('invoiceDate').value = invoice.invoiceDate;
+    formGroup.control('contact').value = invoice.contact;
+    formGroup.control('registrationNumber').value = invoice.registrationNumber;
+    formGroup.control('subject').value = invoice.subject;
+    formGroup.control('amountBilled').value = invoice.amountBilled;
+    formGroup.control('bankTransferInformation').value =
+        invoice.bankTransferInformation;
+    formGroup.control('paymentDeadline').value = invoice.paymentDeadline;
+    formGroup.control('remarks').value = invoice.remarks;
+    formGroup.control('medicalRecord').value = invoice.medicalRecord;
+    formGroup.control('user').value = invoice.user;
+    formGroup.control('hospitalRecord').value = invoice.hospitalRecord;
+
+    if (invoice.totalPayment != null && invoice.totalPayment!.isNotEmpty) {
+      FormArray totalPayment = formGroup.control('totalPayment') as FormArray;
+      totalPayment.clear();
+
+      for (var payment in invoice.totalPayment!) {
+        totalPayment.add(
+          FormGroup({
+            '_id': FormControl(value: payment.id),
+            'taxRate': FormControl(value: payment.taxRate),
+            'amountExcludingTaxInYen':
+                FormControl(value: payment.amountExcludingTaxInYen),
+            'consumptionTaxAmountInYen':
+                FormControl(value: payment.consumptionTaxAmountInYen),
+          }),
+        );
+      }
+    }
+
+    if (invoice.item != null && invoice.item!.isNotEmpty) {
+      FormArray item = formGroup.control('item') as FormArray;
+      item.clear();
+
+      for (var itemData in invoice.item!) {
+        item.add(
+          FormGroup({
+            '_id': FormControl(value: itemData.id),
+            'transactionDate': FormControl(value: itemData.transactionDate),
+            'details': FormControl(value: itemData.details),
+            'quantity': FormControl(value: itemData.quantity),
+            'unit': FormControl(value: itemData.unit),
+            'unitPrice': FormControl(value: itemData.unitPrice),
+            'amount': FormControl(value: itemData.amount),
+            'taxRate': FormControl(value: itemData.taxRate),
+          }),
+        );
+      }
+    }
+  }
+
   Future<void> fetchMedicalInvoice({
     required String medicalRecordId,
   }) async {
@@ -241,15 +313,28 @@ class StatementModel {
       }
 
       if (fileNamePdfJP != null) {
-        await createInvoice(
-          request: request.copyWith(
-            fileNamePdfJP: fileNamePdfJP,
-            fileNamePdfZH: fileNamePdfZH,
-            fileNamePdfVN: fileNamePdfVN,
-            fileNamePdfEN: fileNamePdfEN,
-            fileNamePdfZHTW: fileNamePdfZHTW,
-          ),
-        );
+        if (formGroup.control('_id').value != null) {
+          await updateInvoice(
+            id: formGroup.control('_id').value,
+            request: request.copyWith(
+              fileNamePdfJP: fileNamePdfJP,
+              fileNamePdfZH: fileNamePdfZH,
+              fileNamePdfVN: fileNamePdfVN,
+              fileNamePdfEN: fileNamePdfEN,
+              fileNamePdfZHTW: fileNamePdfZHTW,
+            ),
+          );
+        } else {
+          await createInvoice(
+            request: request.copyWith(
+              fileNamePdfJP: fileNamePdfJP,
+              fileNamePdfZH: fileNamePdfZH,
+              fileNamePdfVN: fileNamePdfVN,
+              fileNamePdfEN: fileNamePdfEN,
+              fileNamePdfZHTW: fileNamePdfZHTW,
+            ),
+          );
+        }
         submitData.value = const AsyncData(data: true);
         formGroup.reset();
       } else {
@@ -272,6 +357,26 @@ class StatementModel {
       medicalInvoiceData.value = AsyncData(data: [
         response,
         ...medicalInvoiceData.value.data ?? [],
+      ]);
+    } catch (e) {
+      logger.e(e);
+      medicalInvoiceData.value = AsyncData(error: e);
+    }
+  }
+
+  Future<void> updateInvoice({
+    required String id,
+    required MedicalInvoiceRequest request,
+  }) async {
+    try {
+      medicalInvoiceData.value = medicalInvoiceData.value.copyWith(
+        loading: true,
+      );
+      final response = await patientRepository.putInvoice(id, request);
+      medicalInvoiceData.value = AsyncData(data: [
+        response,
+        ...medicalInvoiceData.value.data ??
+            [].where((element) => element.id != response.id),
       ]);
     } catch (e) {
       logger.e(e);
