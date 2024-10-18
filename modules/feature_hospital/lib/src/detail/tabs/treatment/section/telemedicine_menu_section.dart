@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -110,9 +111,11 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                                         formControlName:
                                             'treatmentCostExcludingTax',
                                         keyboardType: TextInputType.number,
+                                        valueAccessor: DoubleValueAccessor(),
                                         inputFormatters: [
-                                          FilteringTextInputFormatter.allow(
-                                              RegExp(r'[0-9]')),
+                                          CustomCurrencyFormatter(),
+                                          // FilteringTextInputFormatter.allow(
+                                          //     RegExp(r'[0-9]')),
                                         ],
                                       ),
                                     ),
@@ -122,9 +125,11 @@ class _TelemedicineMenuSectionState extends State<TelemedicineMenuSection> {
                                         formControlName:
                                             'treatmentCostTaxIncluded',
                                         keyboardType: TextInputType.number,
+                                        valueAccessor: DoubleValueAccessor(),
                                         inputFormatters: [
-                                          FilteringTextInputFormatter.allow(
-                                              RegExp(r'[0-9]')),
+                                          CustomCurrencyFormatter(),
+                                          // FilteringTextInputFormatter.allow(
+                                          //     RegExp(r'[0-9]')),
                                         ],
                                       ),
                                     ),

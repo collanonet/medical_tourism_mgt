@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -147,9 +148,15 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                 flex: 1,
                                 child: ReactiveTextField<double>(
                                   keyboardType: TextInputType.number,
+                                  decoration: const InputDecoration(
+                                    fillColor: Colors.white,
+                                    filled: true,
+                                  ),
+                                  valueAccessor: DoubleValueAccessor(),
                                   inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
+                                    CustomCurrencyFormatter(),
+                                    // FilteringTextInputFormatter.allow(
+                                    //     RegExp(r'[0-9]')),
                                   ],
                                   formControlName: 'treatmentCostExcludingTax',
                                 )),
@@ -157,9 +164,11 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                 flex: 1,
                                 child: ReactiveTextField<double>(
                                   keyboardType: TextInputType.number,
+                                  valueAccessor: DoubleValueAccessor(),
                                   inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
+                                    CustomCurrencyFormatter(),
+                                    // FilteringTextInputFormatter.allow(
+                                    //     RegExp(r'[0-9]')),
                                   ],
                                   formControlName: 'treatmentCostTaxIncluded',
                                 )),
@@ -175,9 +184,12 @@ class _TreatmentMenuSectionState extends State<TreatmentMenuSection> {
                                           formGroup: currentForm,
                                           child: ReactiveTextField(
                                             keyboardType: TextInputType.number,
+                                            valueAccessor:
+                                                DoubleValueAccessor(),
                                             inputFormatters: [
-                                              FilteringTextInputFormatter.allow(
-                                                  RegExp(r'[0-9]')),
+                                              CustomCurrencyFormatter(),
+                                              // FilteringTextInputFormatter.allow(
+                                              //     RegExp(r'[0-9]')),
                                             ],
                                             formControlName: 'cost',
                                           ),
