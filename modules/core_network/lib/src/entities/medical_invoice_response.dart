@@ -13,7 +13,7 @@ part 'medical_invoice_response.g.dart';
 class MedicalInvoiceResponse {
   @JsonKey(name: '_id')
   String id;
-   String? logoFile;
+  String? logoFile;
   String? stampFile;
   bool? type;
   String? fileNamePdfEN;

@@ -3,7 +3,8 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup estimateForm() {
   return FormGroup({
-    'file' : FormControl<FileSelect>(),
+    'logoFile' : FormControl<FileSelect>(),
+    'stampFile' : FormControl<FileSelect>(),
     'invoiceNumber': FormControl<String>(),
     'invoiceDate': FormControl<DateTime>(
       value: DateTime.now(),

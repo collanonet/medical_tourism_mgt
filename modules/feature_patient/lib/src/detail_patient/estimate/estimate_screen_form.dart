@@ -1,9 +1,14 @@
+import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
+
+import '../patient_response_data/tab/application_beauty_form.dart';
 
 class EstimateScreenForm extends StatelessWidget {
   const EstimateScreenForm({super.key});
@@ -18,6 +23,180 @@ class EstimateScreenForm extends StatelessWidget {
         return SizedBox(height: context.appTheme.spacing.formSpacing);
       },
       children: [
+        RowSeparated(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(width: context.appTheme.spacing.formSpacing);
+          },
+          children: [
+            ReactiveValueListenableBuilder<FileSelect>(
+                formControlName: 'logoFile',
+                builder: (context, control, child) {
+                  var logoFile = control.value;
+                  return InkWell(
+                    onTap: () {
+                      filePicker().then((value) {
+                        form.control('logoFile').value = value;
+                      });
+                    },
+                    child: Container(
+                      width: 400,
+                      padding: EdgeInsets.all(
+                        context.appTheme.spacing.marginExtraLarge,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(
+                          context.appTheme.spacing.borderRadiusMedium,
+                        )),
+                        border: Border.all(
+                          color: context.appTheme.primaryColor,
+                        ),
+                      ),
+                      child: logoFile != null && logoFile.file != null
+                          ? Image.memory(
+                              logoFile.file!,
+                              fit: BoxFit.fill,
+                            )
+                          : logoFile != null && logoFile.url != null
+                              ? Avatar.network(
+                                  logoFile.url,
+                                  placeholder: const AssetImage(
+                                    Images.logoMadical,
+                                    package: 'core_ui',
+                                  ),
+                                  shape: BoxShape.rectangle,
+                                  customSize: const Size(200, 380),
+                                )
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.copy_all_rounded,
+                                      size: 50,
+                                      color: context.appTheme.primaryColor,
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    Text(
+                                      'ロゴをアップロードする',
+                                      style:
+                                          context.textTheme.bodySmall?.copyWith(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        filePicker().then(
+                                          (value) {
+                                            form.control('logoFile').value =
+                                                value;
+                                          },
+                                        );
+                                      },
+                                      child: const Text(
+                                        '画像を選択',
+                                      ),
+                                    )
+                                  ],
+                                ),
+                    ),
+                  );
+                }),
+            ReactiveValueListenableBuilder<FileSelect>(
+                formControlName: 'stampFile',
+                builder: (context, control, child) {
+                  var stampFile = control.value;
+                  return InkWell(
+                    onTap: () {
+                      filePicker().then((value) {
+                        form.control('stampFile').value = value;
+                      });
+                    },
+                    child: Container(
+                      width: 400,
+                      padding: EdgeInsets.all(
+                        context.appTheme.spacing.marginExtraLarge,
+                      ),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.all(Radius.circular(
+                          context.appTheme.spacing.borderRadiusMedium,
+                        )),
+                        border: Border.all(
+                          color: context.appTheme.primaryColor,
+                        ),
+                      ),
+                      child: stampFile != null && stampFile.file != null
+                          ? Image.memory(
+                              stampFile.file!,
+                              fit: BoxFit.fill,
+                            )
+                          : stampFile != null && stampFile.url != null
+                              ? Avatar.network(
+                                  stampFile.url,
+                                  placeholder: const AssetImage(
+                                    Images.logoMadical,
+                                    package: 'core_ui',
+                                  ),
+                                  shape: BoxShape.rectangle,
+                                  customSize: const Size(200, 380),
+                                )
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.copy_all_rounded,
+                                      size: 50,
+                                      color: context.appTheme.primaryColor,
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    Text(
+                                      'スタンプをアップロードする',
+                                      style:
+                                          context.textTheme.bodySmall?.copyWith(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        filePicker().then(
+                                          (value) {
+                                            form.control('stampFile').value =
+                                                value;
+                                          },
+                                        );
+                                      },
+                                      child: const Text(
+                                        '画像を選択',
+                                      ),
+                                    )
+                                  ],
+                                ),
+                    ),
+                  );
+                }),
+          ],
+        ),
         RowSeparated(
           crossAxisAlignment: CrossAxisAlignment.start,
           separatorBuilder: (BuildContext context, int index) {

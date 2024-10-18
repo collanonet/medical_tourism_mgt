@@ -1,7 +1,6 @@
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 
-
 part 'medical_invoice_request.g.dart';
 
 @CopyWith()
@@ -63,7 +62,6 @@ class MedicalInvoiceRequest {
   Map<String, dynamic> toJson() => _$MedicalInvoiceRequestToJson(this);
 }
 
-
 @JsonSerializable()
 class TotalPaymentRequest {
   double? taxRate;
@@ -107,4 +105,3 @@ class ItemRequest {
 
   Map<String, dynamic> toJson() => _$ItemRequestToJson(this);
 }
-

@@ -90,27 +90,47 @@ class StatementModel {
         ));
       });
 
-      String? file;
-        if (formGroup.control('file').value != null) {
-          FileSelect docFile = formGroup.control('file').value;
-          if (docFile.file != null) {
-            try {
-              String base64Image = base64Encode(docFile.file!);
-              FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
-              );
-              file = fileData.filename;
-            } catch (e) {
-              logger.e(e);
-            }
-          } else {
-            file = docFile.url;
+      String? logoFile;
+      if (formGroup.control('logoFile').value != null) {
+        FileSelect docFile = formGroup.control('logoFile').value;
+        if (docFile.file != null) {
+          try {
+            String base64Image = base64Encode(docFile.file!);
+            FileResponse fileData = await patientRepository.uploadFileBase64(
+              base64Image,
+              docFile.filename!,
+            );
+            logoFile = fileData.filename;
+          } catch (e) {
+            logger.e(e);
           }
+        } else {
+          logoFile = docFile.url;
         }
+      }
+
+      String? stampFile;
+      if (formGroup.control('stampFile').value != null) {
+        FileSelect docFile = formGroup.control('stampFile').value;
+        if (docFile.file != null) {
+          try {
+            String base64Image = base64Encode(docFile.file!);
+            FileResponse fileData = await patientRepository.uploadFileBase64(
+              base64Image,
+              docFile.filename!,
+            );
+            stampFile = fileData.filename;
+          } catch (e) {
+            logger.e(e);
+          }
+        } else {
+          stampFile = docFile.url;
+        }
+      }
 
       MedicalInvoiceRequest request = MedicalInvoiceRequest(
-        logoFile: file,
+        logoFile: logoFile,
+        stampFile: stampFile,
         type: true,
         invoiceNumber: formGroup.control('invoiceNumber').value,
         invoiceDate: formGroup.control('invoiceDate').value,
@@ -280,7 +300,7 @@ class StatementModel {
 }
 
 Future<Uint8List?> generatePdfFromInvoice(
-    MedicalInvoiceRequest invoice, Patient patient, String language) async {
+    MedicalInvoiceRequest request, Patient patient, String language) async {
   final pdf = pw.Document(pageMode: PdfPageMode.fullscreen);
   late ByteData fontData;
   late pw.Font ttf;
@@ -430,7 +450,17 @@ Future<Uint8List?> generatePdfFromInvoice(
       ];
   }
 
-  // Create PDF content
+  Uint8List? logoImage;
+  Uint8List? stampImage;
+
+  if (request.logoFile != null && request.logoFile!.isNotEmpty) {
+    logoImage = await downloadImageAsUint8List(request.logoFile!);
+  }
+
+  if (request.stampFile != null && request.stampFile!.isNotEmpty) {
+    stampImage = await downloadImageAsUint8List(request.stampFile!);
+  }
+
   pdf.addPage(
     pw.MultiPage(
       margin: const pw.EdgeInsets.all(8),
@@ -455,6 +485,20 @@ Future<Uint8List?> generatePdfFromInvoice(
             ),
           ),
         ),
+        if (logoImage != null || stampImage != null)
+          pw.Row(
+              crossAxisAlignment: pw.CrossAxisAlignment.end,
+              mainAxisAlignment: pw.MainAxisAlignment.end,
+              children: [
+                if (logoImage != null)
+                  pw.Image(
+                    pw.MemoryImage(logoImage),
+                  ),
+                if (stampImage != null)
+                  pw.Image(
+                    pw.MemoryImage(stampImage),
+                  ),
+              ]),
         pw.Row(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
@@ -464,7 +508,7 @@ Future<Uint8List?> generatePdfFromInvoice(
                 style: pw.TextStyle(font: ttf),
               ),
               pw.Text(
-                invoice.invoiceNumber ?? '',
+                request.invoiceNumber ?? '',
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
@@ -488,8 +532,8 @@ Future<Uint8List?> generatePdfFromInvoice(
                   style: pw.TextStyle(font: ttf),
                 ),
                 pw.Text(
-                  invoice.invoiceDate != null
-                      ? Dates.formatFullDate(invoice.invoiceDate!)
+                  request.invoiceDate != null
+                      ? Dates.formatFullDate(request.invoiceDate!)
                       : '',
                   style: pw.TextStyle(font: ttfJP),
                 ),
@@ -504,7 +548,7 @@ Future<Uint8List?> generatePdfFromInvoice(
                 style: pw.TextStyle(font: ttf),
               ),
               pw.Text(
-                invoice.contact ?? '',
+                request.contact ?? '',
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
@@ -517,7 +561,7 @@ Future<Uint8List?> generatePdfFromInvoice(
                 style: pw.TextStyle(font: ttf),
               ),
               pw.Text(
-                invoice.registrationNumber ?? '',
+                request.registrationNumber ?? '',
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
@@ -531,7 +575,7 @@ Future<Uint8List?> generatePdfFromInvoice(
             ),
           ),
           pw.Text(
-            invoice.subject ?? '',
+            request.subject ?? '',
             style: pw.TextStyle(
               font: ttfJP,
               fontWeight: pw.FontWeight.normal,
@@ -549,7 +593,7 @@ Future<Uint8List?> generatePdfFromInvoice(
             ),
           ),
           pw.Text(
-            '${Strings.formatCurrency(invoice.amountBilled ?? 0)} 円',
+            '${Strings.formatCurrency(request.amountBilled ?? 0)} 円',
             style: pw.TextStyle(
               font: ttfJP,
               fontWeight: pw.FontWeight.normal,
@@ -585,7 +629,7 @@ Future<Uint8List?> generatePdfFromInvoice(
           cellStyle: pw.TextStyle(
             font: ttfJP,
           ),
-          data: invoice.totalPayment!
+          data: request.totalPayment!
               .map((payment) => [
                     payment.taxRate ?? '' ' %',
                     '${Strings.formatCurrency(payment.amountExcludingTaxInYen ?? 0)}'
@@ -640,8 +684,8 @@ Future<Uint8List?> generatePdfFromInvoice(
                 textAlign: pw.TextAlign.left,
               ),
               pw.Text(
-                invoice.paymentDeadline != null
-                    ? Dates.formatFullDate(invoice.paymentDeadline!)
+                request.paymentDeadline != null
+                    ? Dates.formatFullDate(request.paymentDeadline!)
                     : '',
                 style: pw.TextStyle(
                   font: ttfJP,
@@ -660,7 +704,7 @@ Future<Uint8List?> generatePdfFromInvoice(
                 textAlign: pw.TextAlign.left,
               ),
               pw.Text(
-                invoice.remarks ?? '',
+                request.remarks ?? '',
                 style: pw.TextStyle(
                   font: ttfJP,
                   color: PdfColor.fromInt(0xff000000),
@@ -697,9 +741,9 @@ Future<Uint8List?> generatePdfFromInvoice(
           cellStyle: pw.TextStyle(
             font: ttfJP,
           ),
-          data: invoice.item!
+          data: request.item!
               .map((item) => [
-                    (invoice.item?.indexOf(item) ?? 0) + 1,
+                    (request.item?.indexOf(item) ?? 0) + 1,
                     pw.Text(
                       item.transactionDate != null
                           ? Dates.formatFullDate(item.transactionDate!)

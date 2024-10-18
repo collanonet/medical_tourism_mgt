@@ -1,19 +1,17 @@
 // Flutter imports:
 import 'dart:convert';
 
+// Package imports:
+import 'package:core_network/core_network.dart';
+import 'package:core_utils/core_utils.dart';
+import 'package:data_patient/data_patient.dart';
+import 'package:excel/excel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:injectable/injectable.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
-import 'package:core_utils/core_utils.dart';
-
-import 'package:excel/excel.dart';
-
-// Package imports:
-import 'package:core_network/core_network.dart';
-import 'package:data_patient/data_patient.dart';
-import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
@@ -91,27 +89,47 @@ class EstimateModel {
         ));
       });
 
-      String? file;
-        if (formGroup.control('file').value != null) {
-          FileSelect docFile = formGroup.control('file').value;
-          if (docFile.file != null) {
-            try {
-              String base64Image = base64Encode(docFile.file!);
-              FileResponse fileData = await patientRepository.uploadFileBase64(
-                base64Image,
-                docFile.filename!,
-              );
-              file = fileData.filename;
-            } catch (e) {
-              logger.e(e);
-            }
-          } else {
-            file = docFile.url;
+      String? logoFile;
+      if (formGroup.control('logoFile').value != null) {
+        FileSelect docFile = formGroup.control('logoFile').value;
+        if (docFile.file != null) {
+          try {
+            String base64Image = base64Encode(docFile.file!);
+            FileResponse fileData = await patientRepository.uploadFileBase64(
+              base64Image,
+              docFile.filename!,
+            );
+            logoFile = fileData.filename;
+          } catch (e) {
+            logger.e(e);
           }
+        } else {
+          logoFile = docFile.url;
         }
+      }
+
+      String? stampFile;
+      if (formGroup.control('stampFile').value != null) {
+        FileSelect docFile = formGroup.control('stampFile').value;
+        if (docFile.file != null) {
+          try {
+            String base64Image = base64Encode(docFile.file!);
+            FileResponse fileData = await patientRepository.uploadFileBase64(
+              base64Image,
+              docFile.filename!,
+            );
+            stampFile = fileData.filename;
+          } catch (e) {
+            logger.e(e);
+          }
+        } else {
+          stampFile = docFile.url;
+        }
+      }
 
       MedicalInvoiceRequest request = MedicalInvoiceRequest(
-        stampFile: file,
+        logoFile: logoFile,
+        stampFile: stampFile,
         type: false,
         invoiceNumber: formGroup.control('invoiceNumber').value,
         invoiceDate: formGroup.control('invoiceDate').value,
@@ -442,8 +460,17 @@ Future<Uint8List?> generatePdfFromQuotation(
         'Tax rate (%)'
       ];
   }
+  Uint8List? logoImage;
+  Uint8List? stampImage;
 
-  // Add the content to the PDF
+  if (request.logoFile != null && request.logoFile!.isNotEmpty) {
+    logoImage = await downloadImageAsUint8List(request.logoFile!);
+  }
+
+  if (request.stampFile != null && request.stampFile!.isNotEmpty) {
+    stampImage = await downloadImageAsUint8List(request.stampFile!);
+  }
+
   pdf.addPage(
     pw.MultiPage(
       margin: const pw.EdgeInsets.all(8),
@@ -468,6 +495,26 @@ Future<Uint8List?> generatePdfFromQuotation(
             ),
           ),
         ),
+        if (logoImage != null || stampImage != null)
+          pw.Row(
+              crossAxisAlignment: pw.CrossAxisAlignment.end,
+              mainAxisAlignment: pw.MainAxisAlignment.end,
+              children: [
+                if (logoImage != null)
+                  pw.Image(
+                    pw.MemoryImage(logoImage),
+                    height: 100,
+                    width: 100,
+                    fit: pw.BoxFit.contain,
+                  ),
+                if (stampImage != null)
+                  pw.Image(
+                    pw.MemoryImage(stampImage),
+                    height: 100,
+                    width: 100,
+                    fit: pw.BoxFit.contain,
+                  ),
+              ]),
         pw.Row(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
