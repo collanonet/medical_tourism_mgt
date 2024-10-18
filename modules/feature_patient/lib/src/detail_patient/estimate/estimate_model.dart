@@ -339,7 +339,7 @@ class EstimateModel {
             ),
           );
         }
-
+        editData.value = const AsyncData();
         submitData.value = const AsyncData(data: true);
         formGroup.reset();
       } else {
