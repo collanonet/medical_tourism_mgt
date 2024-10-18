@@ -21,71 +21,93 @@ class EstimateScreen extends StatelessWidget {
     return ValueListenableBuilder(
       valueListenable: context.watch<EstimateModel>().medicalQuotationData,
       builder: (context, value, _) {
-        return Skeletonizer(
-          enabled: value.loading,
-          child: SingleChildScrollView(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const EstimateScreenList(),
-                SizedBox(
-                  height: context.appTheme.spacing.marginMedium,
-                ),
-                const EstimateScreenForm(),
-                const Divider(),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    ValueListenableListener(
-                      valueListenable: context.read<EstimateModel>().submitData,
-                      onListen: () {
-                        var data =
-                            context.read<EstimateModel>().submitData.value;
+        return ValueListenableBuilder(
+            valueListenable: context.watch<EstimateModel>().editData,
+            builder: (context, editData, _) {
+              return Skeletonizer(
+                enabled: value.loading,
+                child: SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (!editData.hasData) const EstimateScreenList(),
+                      if (!editData.hasData) const Divider(),
+                      const EstimateScreenForm(),
+                      const Divider(),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.end,
+                        children: [
+                          ValueListenableBuilder(
+                              valueListenable:
+                              context.watch<EstimateModel>().editData,
+                              builder: (context, value, _) {
+                                return value.hasData ? ElevatedButton(
+                                  onPressed: (){
+                                    context.read<EstimateModel>().resetEditData();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    foregroundColor: Colors.white,
+                                    backgroundColor: Colors.red,
+                                  ),
+                                  child: const Text('キャンセル'),
+                                ) : const SizedBox();
+                              }),
+                          ValueListenableListener(
+                            valueListenable:
+                                context.read<EstimateModel>().submitData,
+                            onListen: () {
+                              var data = context
+                                  .read<EstimateModel>()
+                                  .submitData
+                                  .value;
 
-                        if (data.hasData) {
-                          snackBarWidget(
-                            message: '正常に保存されました',
-                            prefixIcon: const Icon(Icons.check_circle,
-                                color: Colors.white),
-                          );
-                        }
+                              if (data.hasData) {
+                                snackBarWidget(
+                                  message: '正常に保存されました',
+                                  prefixIcon: const Icon(Icons.check_circle,
+                                      color: Colors.white),
+                                );
+                              }
 
-                        if (data.hasError) {
-                          snackBarWidget(
-                            message: '保存できませんでした。 もう一度試してください。',
-                            backgroundColor: Colors.red,
-                            prefixIcon:
-                                const Icon(Icons.error, color: Colors.white),
-                          );
-                        }
-                      },
-                      child: ValueListenableBuilder(
-                          valueListenable:
-                              context.watch<EstimateModel>().submitData,
-                          builder: (context, value, _) {
-                            return ReactiveFormConsumer(
-                                builder: (context, formGroup, _) {
-                              return ElevatedButton(
-                                onPressed: value.loading
-                                    ? null
-                                    : () {
-                                        context.read<EstimateModel>().submit(
-                                              formGroup: formGroup,
-                                            );
-                                      },
-                                child: WithLoadingButton(
-                                    isLoading: value.loading,
-                                    child: const Text('保存')),
-                              );
-                            });
-                          }),
-                    ),
-                  ],
+                              if (data.hasError) {
+                                snackBarWidget(
+                                  message: '保存できませんでした。 もう一度試してください。',
+                                  backgroundColor: Colors.red,
+                                  prefixIcon: const Icon(Icons.error,
+                                      color: Colors.white),
+                                );
+                              }
+                            },
+                            child: ValueListenableBuilder(
+                                valueListenable:
+                                    context.watch<EstimateModel>().submitData,
+                                builder: (context, value, _) {
+                                  return ReactiveFormConsumer(
+                                      builder: (context, formGroup, _) {
+                                    return ElevatedButton(
+                                      onPressed: value.loading
+                                          ? null
+                                          : () {
+                                              context
+                                                  .read<EstimateModel>()
+                                                  .submit(
+                                                    formGroup: formGroup,
+                                                  );
+                                            },
+                                      child: WithLoadingButton(
+                                          isLoading: value.loading,
+                                          child: const Text('保存')),
+                                    );
+                                  });
+                                }),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
-              ],
-            ),
-          ),
-        );
+              );
+            });
       },
     );
   }

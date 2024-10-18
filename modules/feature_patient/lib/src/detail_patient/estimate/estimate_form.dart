@@ -3,8 +3,9 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup estimateForm() {
   return FormGroup({
-    'logoFile' : FormControl<FileSelect>(),
-    'stampFile' : FormControl<FileSelect>(),
+    '_id': FormControl<String>(),
+    'logoFile': FormControl<FileSelect>(),
+    'stampFile': FormControl<FileSelect>(),
     'invoiceNumber': FormControl<String>(),
     'invoiceDate': FormControl<DateTime>(
       value: DateTime.now(),
@@ -34,6 +35,7 @@ FormGroup estimateForm() {
     'hospitalRecord': FormControl<String>(),
     'totalPayment': FormArray([
       FormGroup({
+        '_id': FormControl<String>(),
         'taxRate': FormControl<double>(
           validators: [
             Validators.number,
@@ -53,6 +55,7 @@ FormGroup estimateForm() {
     ]),
     'item': FormArray([
       FormGroup({
+        '_id': FormControl<String>(),
         'transactionDate': FormControl<DateTime>(
           value: DateTime.now(),
         ),
