@@ -830,12 +830,12 @@ Future<Uint8List?> generatePdfFromInvoice(
           columnWidths: {
             0: const pw.FlexColumnWidth(0.5),
             1: const pw.FlexColumnWidth(1.5),
-            2: const pw.FlexColumnWidth(4),
+            2: const pw.FlexColumnWidth(5),
             3: const pw.FlexColumnWidth(1),
             4: const pw.FlexColumnWidth(1),
             5: const pw.FlexColumnWidth(2),
             6: const pw.FlexColumnWidth(2),
-            7: const pw.FlexColumnWidth(1),
+            // 7: const pw.FlexColumnWidth(1),
           },
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
@@ -873,7 +873,7 @@ Future<Uint8List?> generatePdfFromInvoice(
                     item.unit ?? '',
                     '${Strings.formatCurrency(item.unitPrice ?? 0)}' ' 円',
                     '${Strings.formatCurrency(item.amount ?? 0)}' ' 円',
-                    '${item.taxRate ?? 0}' ' %',
+                    // '${item.taxRate ?? 0}' ' %',
                   ])
               .toList(),
         ),
