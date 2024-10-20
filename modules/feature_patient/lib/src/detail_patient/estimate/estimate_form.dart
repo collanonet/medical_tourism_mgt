@@ -13,11 +13,7 @@ FormGroup estimateForm() {
     'contact': FormControl<String>(),
     'registrationNumber': FormControl<String>(),
     'subject': FormControl<String>(),
-    'amountBilled': FormControl<double>(
-      validators: [
-        Validators.number,
-      ],
-    ),
+    'amountBilled': FormControl<double>(),
     'paymentDeadline': FormControl<DateTime>(
       value: DateTime.now(),
     ),
@@ -41,16 +37,8 @@ FormGroup estimateForm() {
             Validators.number,
           ],
         ),
-        'amountExcludingTaxInYen': FormControl<double>(
-          validators: [
-            Validators.number,
-          ],
-        ),
-        'consumptionTaxAmountInYen': FormControl<double>(
-          validators: [
-            Validators.number,
-          ],
-        ),
+        'amountExcludingTaxInYen': FormControl<double>(),
+        'consumptionTaxAmountInYen': FormControl<double>(),
       })
     ]),
     'item': FormArray([
@@ -66,16 +54,8 @@ FormGroup estimateForm() {
           ],
         ),
         'unit': FormControl<String>(),
-        'unitPrice': FormControl<double>(
-          validators: [
-            Validators.number,
-          ],
-        ),
-        'amount': FormControl<double>(
-          validators: [
-            Validators.number,
-          ],
-        ),
+        'unitPrice': FormControl<double>(),
+        'amount': FormControl<double>(),
         'taxRate': FormControl<double>(
           validators: [
             Validators.number,

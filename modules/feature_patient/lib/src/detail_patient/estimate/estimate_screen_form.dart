@@ -267,8 +267,9 @@ class EstimateScreenForm extends StatelessWidget {
               child: ReactiveTextField<double>(
                 formControlName: 'amountBilled',
                 keyboardType: TextInputType.number,
+                valueAccessor: DoubleValueAccessor(),
                 inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                  CustomCurrencyFormatter(),
                 ],
                 decoration: InputDecoration(
                   labelText: '合計金額',
@@ -368,9 +369,9 @@ class EstimateScreenForm extends StatelessWidget {
                                 child: ReactiveTextField<double>(
                                   formControlName: 'amountExcludingTaxInYen',
                                   keyboardType: TextInputType.number,
+                                  valueAccessor: DoubleValueAccessor(),
                                   inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
+                                    CustomCurrencyFormatter(),
                                   ],
                                   decoration: InputDecoration(
                                     labelText: '税抜金額（円）',
@@ -383,9 +384,9 @@ class EstimateScreenForm extends StatelessWidget {
                                 child: ReactiveTextField<double>(
                                   formControlName: 'consumptionTaxAmountInYen',
                                   keyboardType: TextInputType.number,
+                                  valueAccessor: DoubleValueAccessor(),
                                   inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
+                                    CustomCurrencyFormatter(),
                                   ],
                                   decoration: InputDecoration(
                                     labelText: '消費税(円)',
@@ -405,14 +406,10 @@ class EstimateScreenForm extends StatelessWidget {
                         ],
                       ),
                       'amountExcludingTaxInYen': FormControl<double>(
-                        validators: [
-                          Validators.number,
-                        ],
+
                       ),
                       'consumptionTaxAmountInYen': FormControl<double>(
-                        validators: [
-                          Validators.number,
-                        ],
+
                       ),
                     }));
                   },
@@ -452,10 +449,10 @@ class EstimateScreenForm extends StatelessWidget {
               width: 120,
               child: Text('金額'),
             ),
-            SizedBox(
-              width: 80,
-              child: Text('税率'),
-            ),
+            // SizedBox(
+            //   width: 80,
+            //   child: Text('税率'),
+            // ),
           ],
         ),
         ReactiveFormArray(
@@ -534,9 +531,9 @@ class EstimateScreenForm extends StatelessWidget {
                                 child: ReactiveTextField<double>(
                                   formControlName: 'unitPrice',
                                   keyboardType: TextInputType.number,
+                                  valueAccessor: DoubleValueAccessor(),
                                   inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
+                                    CustomCurrencyFormatter(),
                                   ],
                                   decoration: InputDecoration(
                                     labelText: '単価',
@@ -549,9 +546,9 @@ class EstimateScreenForm extends StatelessWidget {
                                 child: ReactiveTextField<double>(
                                   formControlName: 'amount',
                                   keyboardType: TextInputType.number,
+                                  valueAccessor: DoubleValueAccessor(),
                                   inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
+                                    CustomCurrencyFormatter(),
                                   ],
                                   decoration: InputDecoration(
                                     labelText: '金額',
@@ -559,21 +556,21 @@ class EstimateScreenForm extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                width: 80,
-                                child: ReactiveTextField<double>(
-                                  formControlName: 'taxRate',
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
-                                  ],
-                                  decoration: InputDecoration(
-                                    labelText: '税率',
-                                    suffixText: '%',
-                                  ),
-                                ),
-                              ),
+                              // SizedBox(
+                              //   width: 80,
+                              //   child: ReactiveTextField<double>(
+                              //     formControlName: 'taxRate',
+                              //     keyboardType: TextInputType.number,
+                              //     inputFormatters: [
+                              //       FilteringTextInputFormatter.allow(
+                              //           RegExp(r'[0-9]')),
+                              //     ],
+                              //     decoration: InputDecoration(
+                              //       labelText: '税率',
+                              //       suffixText: '%',
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                         )),
@@ -591,14 +588,10 @@ class EstimateScreenForm extends StatelessWidget {
                       ),
                       'unit': FormControl<String>(),
                       'unitPrice': FormControl<double>(
-                        validators: [
-                          Validators.number,
-                        ],
+
                       ),
                       'amount': FormControl<double>(
-                        validators: [
-                          Validators.number,
-                        ],
+
                       ),
                       'taxRate': FormControl<double>(
                         validators: [

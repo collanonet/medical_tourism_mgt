@@ -14,9 +14,6 @@ FormGroup statementForm() {
     'registrationNumber': FormControl<String>(),
     'subject': FormControl<String>(),
     'amountBilled': FormControl<double>(
-      validators: [
-        Validators.number,
-      ],
     ),
     'paymentDeadline': FormControl<DateTime>(),
     'bankTransferInformation': FormControl<String>(),
@@ -37,14 +34,8 @@ FormGroup statementForm() {
           ],
         ),
         'amountExcludingTaxInYen': FormControl<double>(
-          validators: [
-            Validators.number,
-          ],
         ),
         'consumptionTaxAmountInYen': FormControl<double>(
-          validators: [
-            Validators.number,
-          ],
         ),
       })
     ]),
@@ -62,14 +53,10 @@ FormGroup statementForm() {
         ),
         'unit': FormControl<String>(),
         'unitPrice': FormControl<double>(
-          validators: [
-            Validators.number,
-          ],
+
         ),
         'amount': FormControl<double>(
-          validators: [
-            Validators.number,
-          ],
+
         ),
         'taxRate': FormControl<double>(
           validators: [

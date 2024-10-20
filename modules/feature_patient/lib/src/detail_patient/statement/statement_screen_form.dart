@@ -264,8 +264,9 @@ class StatementScreenForm extends StatelessWidget {
               child: ReactiveTextField<double>(
                 formControlName: 'amountBilled',
                 keyboardType: TextInputType.number,
+                valueAccessor: DoubleValueAccessor(),
                 inputFormatters: [
-                  FilteringTextInputFormatter.allow(RegExp(r'[0-9]')),
+                  CustomCurrencyFormatter(),
                 ],
                 decoration: InputDecoration(
                   labelText: 'ご請求額',
@@ -373,9 +374,9 @@ class StatementScreenForm extends StatelessWidget {
                                 child: ReactiveTextField<double>(
                                   formControlName: 'amountExcludingTaxInYen',
                                   keyboardType: TextInputType.number,
+                                  valueAccessor: DoubleValueAccessor(),
                                   inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
+                                    CustomCurrencyFormatter(),
                                   ],
                                   decoration: InputDecoration(
                                     labelText: '税抜金額（円）',
@@ -388,9 +389,9 @@ class StatementScreenForm extends StatelessWidget {
                                 child: ReactiveTextField<double>(
                                   formControlName: 'consumptionTaxAmountInYen',
                                   keyboardType: TextInputType.number,
+                                  valueAccessor: DoubleValueAccessor(),
                                   inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
+                                    CustomCurrencyFormatter(),
                                   ],
                                   decoration: InputDecoration(
                                     labelText: '消費税(円)',
@@ -409,16 +410,8 @@ class StatementScreenForm extends StatelessWidget {
                           Validators.number,
                         ],
                       ),
-                      'amountExcludingTaxInYen': FormControl<double>(
-                        validators: [
-                          Validators.number,
-                        ],
-                      ),
-                      'consumptionTaxAmountInYen': FormControl<double>(
-                        validators: [
-                          Validators.number,
-                        ],
-                      ),
+                      'amountExcludingTaxInYen': FormControl<double>(),
+                      'consumptionTaxAmountInYen': FormControl<double>(),
                     }));
                   },
                   child: Text('行を追加'),
@@ -431,7 +424,7 @@ class StatementScreenForm extends StatelessWidget {
         RowSeparated(
           crossAxisAlignment: CrossAxisAlignment.start,
           separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(width: context.appTheme.spacing.formSpacing/2);
+            return SizedBox(width: context.appTheme.spacing.formSpacing / 2);
           },
           children: [
             SizedBox(
@@ -457,10 +450,10 @@ class StatementScreenForm extends StatelessWidget {
               width: 120,
               child: Text('金額'),
             ),
-            SizedBox(
-              width: 80,
-              child: Text('税率'),
-            ),
+            // SizedBox(
+            //   width: 80,
+            //   child: Text('税率'),
+            // ),
           ],
         ),
         // Item Details FormArray
@@ -469,7 +462,8 @@ class StatementScreenForm extends StatelessWidget {
           builder: (context, formArray, child) {
             return ColumnSeparated(
               separatorBuilder: (BuildContext context, int index) {
-                return SizedBox(height: context.appTheme.spacing.formSpacing/2);
+                return SizedBox(
+                    height: context.appTheme.spacing.formSpacing / 2);
               },
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -540,9 +534,9 @@ class StatementScreenForm extends StatelessWidget {
                                 child: ReactiveTextField<double>(
                                   formControlName: 'unitPrice',
                                   keyboardType: TextInputType.number,
+                                  valueAccessor: DoubleValueAccessor(),
                                   inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
+                                    CustomCurrencyFormatter(),
                                   ],
                                   decoration: InputDecoration(
                                     labelText: '単価',
@@ -555,9 +549,9 @@ class StatementScreenForm extends StatelessWidget {
                                 child: ReactiveTextField<double>(
                                   formControlName: 'amount',
                                   keyboardType: TextInputType.number,
+                                  valueAccessor: DoubleValueAccessor(),
                                   inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
+                                    CustomCurrencyFormatter(),
                                   ],
                                   decoration: InputDecoration(
                                     labelText: '金額',
@@ -565,21 +559,21 @@ class StatementScreenForm extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              SizedBox(
-                                width: 80,
-                                child: ReactiveTextField<double>(
-                                  formControlName: 'taxRate',
-                                  keyboardType: TextInputType.number,
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
-                                  ],
-                                  decoration: InputDecoration(
-                                    labelText: '税率',
-                                    suffixText: '%',
-                                  ),
-                                ),
-                              ),
+                              // SizedBox(
+                              //   width: 80,
+                              //   child: ReactiveTextField<double>(
+                              //     formControlName: 'taxRate',
+                              //     keyboardType: TextInputType.number,
+                              //     inputFormatters: [
+                              //       FilteringTextInputFormatter.allow(
+                              //           RegExp(r'[0-9]')),
+                              //     ],
+                              //     decoration: InputDecoration(
+                              //       labelText: '税率',
+                              //       suffixText: '%',
+                              //     ),
+                              //   ),
+                              // ),
                             ],
                           ),
                         )),
@@ -596,16 +590,8 @@ class StatementScreenForm extends StatelessWidget {
                         ],
                       ),
                       'unit': FormControl<String>(),
-                      'unitPrice': FormControl<double>(
-                        validators: [
-                          Validators.number,
-                        ],
-                      ),
-                      'amount': FormControl<double>(
-                        validators: [
-                          Validators.number,
-                        ],
-                      ),
+                      'unitPrice': FormControl<double>(),
+                      'amount': FormControl<double>(),
                       'taxRate': FormControl<double>(
                         validators: [
                           Validators.number,
