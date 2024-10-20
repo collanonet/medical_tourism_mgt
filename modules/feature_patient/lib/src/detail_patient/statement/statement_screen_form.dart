@@ -3,10 +3,8 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -433,15 +431,14 @@ class StatementScreenForm extends StatelessWidget {
         RowSeparated(
           crossAxisAlignment: CrossAxisAlignment.start,
           separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(width: context.appTheme.spacing.formSpacing);
+            return SizedBox(width: context.appTheme.spacing.formSpacing/2);
           },
           children: [
             SizedBox(
-              width: 150,
+              width: 130,
               child: Text('取引日'),
             ),
-            SizedBox(
-              width: 300,
+            Expanded(
               child: Text('内訳'),
             ),
             SizedBox(
@@ -472,7 +469,7 @@ class StatementScreenForm extends StatelessWidget {
           builder: (context, formArray, child) {
             return ColumnSeparated(
               separatorBuilder: (BuildContext context, int index) {
-                return SizedBox(height: context.appTheme.spacing.formSpacing);
+                return SizedBox(height: context.appTheme.spacing.formSpacing/2);
               },
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -489,7 +486,7 @@ class StatementScreenForm extends StatelessWidget {
                             },
                             children: [
                               SizedBox(
-                                width: 150,
+                                width: 130,
                                 child: ReactiveTextField<DateTime>(
                                   formControlName: 'transactionDate',
                                   decoration:
@@ -513,8 +510,7 @@ class StatementScreenForm extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              SizedBox(
-                                width: 300,
+                              Expanded(
                                 child: ReactiveTextField<String>(
                                   formControlName: 'details',
                                   decoration: InputDecoration(labelText: '内訳'),

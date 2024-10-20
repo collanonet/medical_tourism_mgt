@@ -3,6 +3,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -425,15 +426,14 @@ class EstimateScreenForm extends StatelessWidget {
         RowSeparated(
           crossAxisAlignment: CrossAxisAlignment.start,
           separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(width: context.appTheme.spacing.formSpacing);
+            return SizedBox(width: context.appTheme.spacing.formSpacing/2);
           },
           children: [
             SizedBox(
-              width: 150,
+              width: 130,
               child: Text('取引日'),
             ),
-            SizedBox(
-              width: 300,
+            Expanded(
               child: Text('内訳'),
             ),
             SizedBox(
@@ -476,11 +476,11 @@ class EstimateScreenForm extends StatelessWidget {
                             separatorBuilder:
                                 (BuildContext context, int index) {
                               return SizedBox(
-                                  width: context.appTheme.spacing.formSpacing);
+                                  width: context.appTheme.spacing.formSpacing/2);
                             },
                             children: [
                               SizedBox(
-                                width: 150,
+                                width: 130,
                                 child: ReactiveTextField<DateTime>(
                                   formControlName: 'transactionDate',
                                   decoration:
@@ -504,8 +504,7 @@ class EstimateScreenForm extends StatelessWidget {
                                   },
                                 ),
                               ),
-                              SizedBox(
-                                width: 300,
+                              Expanded(
                                 child: ReactiveTextField<String>(
                                   formControlName: 'details',
                                   decoration: InputDecoration(labelText: '内訳'),

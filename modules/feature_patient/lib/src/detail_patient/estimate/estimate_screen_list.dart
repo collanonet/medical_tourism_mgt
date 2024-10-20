@@ -285,9 +285,6 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                                 },
                                 child: const Text(
                                   '編集',
-                                  style: TextStyle(fontSize: 10),
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
                                 ),
                               )
                             ],
@@ -401,6 +398,7 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                               .value;
                           if (submitMoveToInvoice.hasData &&
                               submitMoveToInvoice.loading == false) {
+                            selected.value = [];
                             snackBarWidget(
                               message: '請求書に移動しました',
                               prefixIcon: const Icon(Icons.check_circle,
@@ -408,6 +406,7 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                             );
                           }
                           if (submitMoveToInvoice.hasError) {
+                            selected.value = [];
                             snackBarWidget(
                               message: '請求書に移動できませんでした',
                               backgroundColor: Colors.red,
@@ -423,63 +422,56 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                                 .watch<EstimateModel>()
                                 .submitMoveToInvoice,
                             builder: (context, submitMoveToInvoice, _) {
-                              return Row(
-                                children: [
-                                  ElevatedButton(
-                                    onPressed: submitMoveToInvoice.loading
-                                        ? null
-                                        : () {
-                                            showDialog(
-                                                context: context,
-                                                builder: (_) {
-                                                  return Provider.value(
-                                                    value: context
-                                                        .read<EstimateModel>(),
-                                                    child: AlertDialog(
-                                                      title:
-                                                          const Text('請求書に移動'),
-                                                      content: const Text(
-                                                          '選択したデータを請求書に移動しますか？'),
-                                                      actions: [
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: const Text(
-                                                              'キャンセル'),
-                                                        ),
-                                                        TextButton(
-                                                          onPressed: () {
-                                                            context
-                                                                .read<
-                                                                    EstimateModel>()
-                                                                .moveToInvoice(
-                                                                    sels);
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: const Text(
-                                                              '移動する'),
-                                                        ),
-                                                      ],
+                              return ElevatedButton(
+                                onPressed: submitMoveToInvoice.loading
+                                    ? null
+                                    : () {
+                                        showDialog(
+                                            context: context,
+                                            builder: (_) {
+                                              return Provider.value(
+                                                value: context
+                                                    .read<EstimateModel>(),
+                                                child: AlertDialog(
+                                                  title:
+                                                      const Text('請求書に移動'),
+                                                  content: const Text(
+                                                      '選択したデータを請求書に移動しますか？'),
+                                                  actions: [
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        Navigator.of(
+                                                                context)
+                                                            .pop();
+                                                      },
+                                                      child: const Text(
+                                                          'キャンセル'),
                                                     ),
-                                                  );
-                                                });
-                                          },
-                                    child: WithLoadingButton(
-                                      isLoading: submitMoveToInvoice.loading,
-                                      child: const Text(
-                                        '請求書に移動',
-                                        style: TextStyle(fontSize: 10),
-                                        maxLines: 1,
-                                        overflow: TextOverflow.ellipsis,
-                                      ),
-                                    ),
-                                  )
-                                ],
+                                                    TextButton(
+                                                      onPressed: () {
+                                                        context
+                                                            .read<
+                                                                EstimateModel>()
+                                                            .moveToInvoice(
+                                                                sels);
+                                                        Navigator.of(
+                                                                context)
+                                                            .pop();
+                                                      },
+                                                      child: const Text(
+                                                          '移動する'),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            });
+                                      },
+                                child: WithLoadingButton(
+                                  isLoading: submitMoveToInvoice.loading,
+                                  child: const Text(
+                                    '請求書に移動',
+                                  ),
+                                ),
                               );
                             }),
                       ),

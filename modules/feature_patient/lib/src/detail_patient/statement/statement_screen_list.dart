@@ -273,9 +273,6 @@ class _StatementScreenListState extends State<StatementScreenList> {
                           },
                           child: const Text(
                             '編集',
-                            style: TextStyle(fontSize: 10),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
                           ),
                         )
                       ],

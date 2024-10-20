@@ -421,8 +421,46 @@ class EstimateModel {
         if (invoice != null) {
           submitMoveToInvoice.value = AsyncData(loading: true, data: id);
           var invoiceData = invoice.copyWith(type: true);
-          MedicalInvoiceRequest request =
-              MedicalInvoiceRequest.fromJson(invoiceData.toJson());
+          MedicalInvoiceRequest request = MedicalInvoiceRequest(
+            logoFile: invoiceData.logoFile,
+            stampFile: invoiceData.stampFile,
+            type: true,
+            fileNamePdfEN: invoiceData.fileNamePdfEN,
+            fileNamePdfJP: invoiceData.fileNamePdfJP,
+            fileNamePdfVN: invoiceData.fileNamePdfVN,
+            fileNamePdfZH: invoiceData.fileNamePdfZH,
+            fileNamePdfZHTW: invoiceData.fileNamePdfZHTW,
+            invoiceNumber: invoiceData.invoiceNumber,
+            invoiceDate: invoiceData.invoiceDate,
+            contact: invoiceData.contact,
+            registrationNumber: invoiceData.registrationNumber,
+            subject: invoiceData.subject,
+            amountBilled: invoiceData.amountBilled,
+            paymentDeadline: invoiceData.paymentDeadline,
+            remarks: invoiceData.remarks,
+            totalPayment: invoiceData.totalPayment?.map((payment) {
+              return TotalPaymentRequest(
+                taxRate: payment.taxRate,
+                amountExcludingTaxInYen: payment.amountExcludingTaxInYen,
+                consumptionTaxAmountInYen: payment.consumptionTaxAmountInYen,
+              );
+            }).toList(),
+            item: invoiceData.item?.map((item) {
+              return ItemRequest(
+                transactionDate: item.transactionDate,
+                details: item.details,
+                quantity: item.quantity,
+                unit: item.unit,
+                unitPrice: item.unitPrice,
+                amount: item.amount,
+                taxRate: item.taxRate,
+              );
+            }).toList(),
+            medicalRecord: invoiceData.medicalRecord.id,
+            user: invoiceData.user?.id,
+            patient: invoiceData.patient!.id,
+            hospitalRecord: invoiceData.hospitalRecord?.id,
+          );
           await patientRepository.putInvoice(id, request);
 
           submitMoveToInvoice.value = AsyncData(data: id);
@@ -490,7 +528,7 @@ Future<Uint8List?> generatePdfFromQuotation(
   // Load appropriate fonts and text labels based on the language
   switch (language) {
     case 'JP':
-      title = '見積書';
+      title = '御　見　積　書';
       quotationNumberLabel = '見積番号: ';
       quotationDateLabel = '見積日: ';
       subjectLabel = '件名: ';
