@@ -10,6 +10,8 @@ FormGroup medicalVisaForm() {
 
       'personal': FormArray([
         FormGroup({
+          'date': FormControl<DateTime>(value: DateTime.now()),
+          'fileName': FormControl<FileSelect>(),
           'medicalVisa': FormControl<String>(value: ''),
           'applicationDate': FormControl<DateTime>(
             validators: [
@@ -69,6 +71,7 @@ FormGroup medicalVisaForm() {
             [
               FormGroup(
                 {
+                  'fileName': FormControl<FileSelect>(),
                   'passportDate': FormControl<DateTime>(
                     validators: [
                       Validators.pattern(
@@ -263,7 +266,7 @@ FormGroup medicalVisaForm() {
           ),
         },
       ),
-      
+
       'travel_companion': FormGroup(
         {
           'nameRomaji': FormControl<String>(),
@@ -324,14 +327,8 @@ FormGroup medicalVisaForm() {
             ],
           ),
           'travelRemarks': FormControl<String>(value: ''),
-          'subjectVisaWithdrawal': FormControl<bool>(value: false),
-          'deathOrOccurrenceEventDate': FormControl<DateTime>(
-            validators: [
-              Validators.pattern(
-                ValidatorRegExp.date,
-              ),
-            ],
-          ),
+          'visaWithdrawalTarget': FormControl<bool>(value: false),
+          'reason': FormControl<String>(value: ''),
           'remarks': FormControl<String>(),
           'vasaInfo': FormArray(
             [
