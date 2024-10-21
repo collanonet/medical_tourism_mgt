@@ -405,12 +405,8 @@ class EstimateScreenForm extends StatelessWidget {
                           Validators.number,
                         ],
                       ),
-                      'amountExcludingTaxInYen': FormControl<double>(
-
-                      ),
-                      'consumptionTaxAmountInYen': FormControl<double>(
-
-                      ),
+                      'amountExcludingTaxInYen': FormControl<double>(),
+                      'consumptionTaxAmountInYen': FormControl<double>(),
                     }));
                   },
                   child: Text('行を追加'),
@@ -423,7 +419,7 @@ class EstimateScreenForm extends StatelessWidget {
         RowSeparated(
           crossAxisAlignment: CrossAxisAlignment.start,
           separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(width: context.appTheme.spacing.formSpacing/2);
+            return SizedBox(width: context.appTheme.spacing.formSpacing / 2);
           },
           children: [
             SizedBox(
@@ -473,7 +469,8 @@ class EstimateScreenForm extends StatelessWidget {
                             separatorBuilder:
                                 (BuildContext context, int index) {
                               return SizedBox(
-                                  width: context.appTheme.spacing.formSpacing/2);
+                                  width:
+                                      context.appTheme.spacing.formSpacing / 2);
                             },
                             children: [
                               SizedBox(
@@ -504,7 +501,11 @@ class EstimateScreenForm extends StatelessWidget {
                               Expanded(
                                 child: ReactiveTextField<String>(
                                   formControlName: 'details',
-                                  decoration: InputDecoration(labelText: '内訳'),
+                                  minLines: 1,
+                                  maxLines: 4,
+                                  decoration: InputDecoration(
+                                    labelText: '内訳',
+                                  ),
                                 ),
                               ),
                               SizedBox(
@@ -587,12 +588,8 @@ class EstimateScreenForm extends StatelessWidget {
                         ],
                       ),
                       'unit': FormControl<String>(),
-                      'unitPrice': FormControl<double>(
-
-                      ),
-                      'amount': FormControl<double>(
-
-                      ),
+                      'unitPrice': FormControl<double>(),
+                      'amount': FormControl<double>(),
                       'taxRate': FormControl<double>(
                         validators: [
                           Validators.number,

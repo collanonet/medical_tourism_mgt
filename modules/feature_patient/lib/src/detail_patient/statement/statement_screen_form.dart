@@ -507,7 +507,12 @@ class StatementScreenForm extends StatelessWidget {
                               Expanded(
                                 child: ReactiveTextField<String>(
                                   formControlName: 'details',
-                                  decoration: InputDecoration(labelText: '内訳'),
+                                  minLines: 1,
+                                  maxLines: 4,
+                                  decoration: InputDecoration(
+                                    labelText: '内訳',
+
+                                  ),
                                 ),
                               ),
                               SizedBox(
