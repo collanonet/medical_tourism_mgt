@@ -760,6 +760,15 @@ class TravelCompanion extends StatelessWidget {
                 ),
                 Row(
                   children: [
+                    IntrinsicWidth(
+                      stepWidth: 300,
+                      child: ReactiveCheckboxListTile(
+                        controlAffinity: ListTileControlAffinity.leading,
+                        contentPadding: EdgeInsets.zero,
+                        formControlName: 'visaWithdrawalTarget',
+                        title: const Text('ビザ取下対象とする'),
+                      ),
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
@@ -767,10 +776,28 @@ class TravelCompanion extends StatelessWidget {
                         const Text('理由'),
                         Row(
                           children: [
-                            Checkbox(value: false, onChanged: (value) {}),
-                            const Text('患者死亡'),
-                            Checkbox(value: false, onChanged: (value) {}),
-                            const Text('その他'),
+                            IntrinsicWidth(
+                              stepWidth: 100,
+                              child: ReactiveRadioListTile(
+                                value: 'PatientDeath',
+                                controlAffinity:
+                                    ListTileControlAffinity.leading,
+                                contentPadding: EdgeInsets.zero,
+                                formControlName: 'reason',
+                                title: const Text('患者死亡'),
+                              ),
+                            ),
+                            IntrinsicWidth(
+                              stepWidth: 100,
+                              child: ReactiveRadioListTile(
+                                value: 'others',
+                                controlAffinity:
+                                    ListTileControlAffinity.leading,
+                                contentPadding: EdgeInsets.zero,
+                                formControlName: 'reason',
+                                title: const Text('その他'),
+                              ),
+                            ),
                           ],
                         )
                       ],
@@ -789,13 +816,6 @@ class TravelCompanion extends StatelessWidget {
                   ],
                 ),
               ],
-            ),
-            SizedBox(
-              height: context.appTheme.spacing.marginMedium,
-            ),
-            Text(
-              'ビザ取得後に必要なもの',
-              style: context.textTheme.titleMedium,
             ),
             SizedBox(
               height: context.appTheme.spacing.marginMedium,
