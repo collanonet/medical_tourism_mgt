@@ -64,31 +64,27 @@ class StatementModel {
     );
     formGroup.control('invoiceNumber').value = invoice.invoiceNumber;
     formGroup.control('invoiceDate').value = invoice.invoiceDate;
-    formGroup.control('contact').value = invoice.contact;
-    formGroup.control('registrationNumber').value = invoice.registrationNumber;
-    formGroup.control('subject').value = invoice.subject;
-    formGroup.control('amountBilled').value = invoice.amountBilled;
-    formGroup.control('bankTransferInformation').value =
-        invoice.bankTransferInformation;
-    formGroup.control('paymentDeadline').value = invoice.paymentDeadline;
-    formGroup.control('remarks').value = invoice.remarks;
+    formGroup.control('companyName').value = invoice.companyName;
+    formGroup.control('address').value = invoice.address;
+    formGroup.control('telNumber').value = invoice.telNumber;
+    formGroup.control('fexNumber').value = invoice.fexNumber;
+    formGroup.control('inCharge').value = invoice.inCharge;
+
     formGroup.control('medicalRecord').value = invoice.medicalRecord;
     formGroup.control('user').value = invoice.user;
     formGroup.control('hospitalRecord').value = invoice.hospitalRecord;
 
-    if (invoice.totalPayment != null && invoice.totalPayment!.isNotEmpty) {
-      FormArray totalPayment = formGroup.control('totalPayment') as FormArray;
-      totalPayment.clear();
+    formGroup.control('remarks').value = invoice.remarks;
 
-      for (var payment in invoice.totalPayment!) {
-        totalPayment.add(
+    if (invoice.notes != null && invoice.notes!.isNotEmpty) {
+      FormArray notes = formGroup.control('notes') as FormArray;
+      notes.clear();
+
+      for (var note in invoice.notes!) {
+        notes.add(
           FormGroup({
-            '_id': FormControl(value: payment.id),
-            'taxRate': FormControl(value: payment.taxRate),
-            'amountExcludingTaxInYen':
-                FormControl(value: payment.amountExcludingTaxInYen),
-            'consumptionTaxAmountInYen':
-                FormControl(value: payment.consumptionTaxAmountInYen),
+            '_id': FormControl(value: note.id),
+            'note': FormControl(value: note.note),
           }),
         );
       }
@@ -102,13 +98,11 @@ class StatementModel {
         item.add(
           FormGroup({
             '_id': FormControl(value: itemData.id),
-            'transactionDate': FormControl(value: itemData.transactionDate),
+            'itemCode': FormControl(value: itemData.itemCode),
             'details': FormControl(value: itemData.details),
             'quantity': FormControl(value: itemData.quantity),
             'unit': FormControl(value: itemData.unit),
             'unitPrice': FormControl(value: itemData.unitPrice),
-            'amount': FormControl(value: itemData.amount),
-            'taxRate': FormControl(value: itemData.taxRate),
           }),
         );
       }
@@ -142,23 +136,19 @@ class StatementModel {
       List<ItemRequest>? items = [];
       formGroup.control('item').value.forEach((item) {
         items.add(ItemRequest(
-          transactionDate: item['transactionDate'],
+          itemCode: item['itemCode'],
           details: item['details'],
           quantity: item['quantity'],
           unit: item['unit'],
           unitPrice: item['unitPrice'],
-          amount: item['amount'],
-          taxRate: item['taxRate'],
         ));
       });
 
-      List<TotalPaymentRequest>? totalPayment = [];
+      List<NoteInvoiceRequest>? notes = [];
 
-      formGroup.control('totalPayment').value.forEach((payment) {
-        totalPayment.add(TotalPaymentRequest(
-          taxRate: payment['taxRate'],
-          amountExcludingTaxInYen: payment['amountExcludingTaxInYen'],
-          consumptionTaxAmountInYen: payment['consumptionTaxAmountInYen'],
+      formGroup.control('notes').value.forEach((note) {
+        notes.add(NoteInvoiceRequest(
+          note: note['note'],
         ));
       });
 
@@ -203,18 +193,16 @@ class StatementModel {
       MedicalInvoiceRequest request = MedicalInvoiceRequest(
         logoFile: logoFile,
         stampFile: stampFile,
-        type: true,
+        type: false,
         invoiceNumber: formGroup.control('invoiceNumber').value,
         invoiceDate: formGroup.control('invoiceDate').value,
-        contact: formGroup.control('contact').value,
-        registrationNumber: formGroup.control('registrationNumber').value,
-        subject: formGroup.control('subject').value,
-        amountBilled: formGroup.control('amountBilled').value,
-        paymentDeadline: formGroup.control('paymentDeadline').value,
-        bankTransferInformation:
-            formGroup.control('bankTransferInformation').value,
+        companyName: formGroup.control('companyName').value,
+        address: formGroup.control('address').value,
+        telNumber: formGroup.control('telNumber').value,
+        fexNumber: formGroup.control('fexNumber').value,
+        inCharge: formGroup.control('inCharge').value,
         remarks: formGroup.control('remarks').value,
-        totalPayment: totalPayment,
+        notes: notes,
         item: items,
         medicalRecord: formGroup.control('medicalRecord').value,
         user: formGroup.control('user').value,
@@ -409,6 +397,7 @@ class StatementModel {
 Future<Uint8List?> generatePdfFromInvoice(
     MedicalInvoiceRequest request, Patient patient, String language) async {
   final pdf = pw.Document(pageMode: PdfPageMode.fullscreen);
+
   late ByteData fontData;
   late pw.Font ttf;
 
@@ -434,129 +423,77 @@ Future<Uint8List?> generatePdfFromInvoice(
   }
   ttf = pw.Font.ttf(fontData);
 
-  // Labels for different languages
-  String title,
-      quotationNumberLabel,
-      quotationDateLabel,
-      subjectLabel,
-      totalAmountLabel,
-      contactLabel,
-      registrationNumberLabel,
-      paymentDeadlineLabel,
-      bankTransfer,
-      remarksLabel,
-      taxRateLabel,
-      taxExcludedAmountLabel,
-      consumptionTaxLabel,
-      totalAmountYenLabel;
+  String title;
+  String quotationNumberLabel;
+  String quotationDateLabel;
+  String companyNameLabel;
+  String addressLabel;
+  String telNumberLabel;
+  String fexNumberLabel;
+  String inChargeLabel;
   List<String> tableHeaders;
 
-  // Assign labels based on the language
+  // Load appropriate fonts and text labels based on the language
   switch (language) {
     case 'JP':
-      title = '請求書';
-      quotationNumberLabel = '請求書番号: ';
+      title = '請　求　書';
+      quotationNumberLabel = '見積番号: ';
       quotationDateLabel = '見積日: ';
-      subjectLabel = '件名: ';
-      totalAmountLabel = 'ご請求額: ';
-      contactLabel = '担当者: ';
-      registrationNumberLabel = '登録番号: ';
-      paymentDeadlineLabel = '有効期限';
-      bankTransfer = 'お振込先';
-      remarksLabel = '備考';
-      taxRateLabel = '税率 (%)';
-      taxExcludedAmountLabel = '税抜合線(門)';
-      consumptionTaxLabel = '消費税(円)';
-      totalAmountYenLabel = '合計金額(円)';
-      tableHeaders = ['', '取引日', '内訳', '数量', '単位', '単価', '金額', '税率 (%)'];
+      companyNameLabel = '件名: ';
+      addressLabel = '住所: ';
+      telNumberLabel = '電話番号: ';
+      fexNumberLabel = 'FAX番号: ';
+      inChargeLabel = '担当者: ';
+      tableHeaders = ['', '項目', '数', '量', '単価', '金額'];
       break;
-    case 'ZH':
-      title = '发票';
-      quotationNumberLabel = '发票号码: ';
-      quotationDateLabel = '预计日期: ';
-      subjectLabel = '件名: ';
-      totalAmountLabel = '主题: ';
-      contactLabel = '经理: ';
-      registrationNumberLabel = '注册号: ';
-      paymentDeadlineLabel = '到期日期';
-      bankTransfer = '转移';
-      remarksLabel = '评论';
-      taxRateLabel = '税率 (%)';
-      taxExcludedAmountLabel = '减税线（门）';
-      consumptionTaxLabel = '消费税（日元）';
-      totalAmountYenLabel = '总金额（日元）';
-      tableHeaders = ['', '交易日', '分解', '数量', '首位', '单价', '数量', '税率 (%)'];
-      break;
-    case 'ZHTW':
-      title = '發票';
-      quotationNumberLabel = '發票號碼: ';
-      quotationDateLabel = '預計日期: ';
-      subjectLabel = '主題: ';
-      totalAmountLabel = '計費金額: ';
-      contactLabel = '担当者: ';
-      registrationNumberLabel = '註冊號: ';
-      paymentDeadlineLabel = '到期日期';
-      bankTransfer = '轉移';
-      remarksLabel = '備考';
-      taxRateLabel = '稅率 (%)';
-      taxExcludedAmountLabel = '減稅線（門）';
-      consumptionTaxLabel = '消費稅（日圓）';
-      totalAmountYenLabel = '總金額（日圓）';
-      tableHeaders = ['', '交易日', '分解', '數量', '首位', '單價', '數量', '稅率 (%)'];
-      break;
-    case 'VN':
-      title = 'hóa đơn';
-      quotationNumberLabel = 'số hóa đơn: ';
-      quotationDateLabel = 'ngày dự kiến: ';
-      subjectLabel = 'chủ thể: ';
-      totalAmountLabel = 'Số tiền được lập hóa đơn: ';
-      contactLabel = 'giám đốc: ';
-      registrationNumberLabel = 'Số đăng ký: ';
-      paymentDeadlineLabel = 'ngày hết hạn';
-      bankTransfer = 'Chuyển khoản';
-      remarksLabel = 'nhận xét';
-      taxRateLabel = 'thuế suất (%)';
-      taxExcludedAmountLabel = 'Dòng khấu trừ thuế (cổng)';
-      consumptionTaxLabel = 'Thuế tiêu dùng (yên)';
-      totalAmountYenLabel = 'Tổng số tiền (yên)';
-      tableHeaders = [
-        '',
-        'ngày giao dịch',
-        'sự cố',
-        'Số lượng',
-        'Vị trí đầu tiên',
-        'đơn giá',
-        'số lượng',
-        'thuế suất (%)'
-      ];
-      break;
-    default: // EN
-      title = 'Invoice';
-      quotationNumberLabel = 'Invoice Number: ';
-      quotationDateLabel = 'Invoice Date: ';
-      subjectLabel = 'Subject: ';
-      totalAmountLabel = 'Amount charged: ';
-      contactLabel = 'Contact: ';
-      registrationNumberLabel = 'Registration number: ';
-      paymentDeadlineLabel = 'Date of expiry';
-      bankTransfer = 'Bank transfer';
-      remarksLabel = 'Remarks';
-      taxRateLabel = 'Tax rate (%)';
-      taxExcludedAmountLabel = 'Tax excluded line (gate)';
-      consumptionTaxLabel = 'Consumption tax (yen)';
-      totalAmountYenLabel = 'Total amount (yen)';
-      tableHeaders = [
-        '',
-        'Transaction Date',
-        'Detail',
-        'QTY',
-        'Unit',
-        'Unit price',
-        'Amount',
-        'Tax rate (%)'
-      ];
-  }
 
+    case 'ZH':
+      title = '报价单';
+      quotationNumberLabel = '报价单号: ';
+      quotationDateLabel = '预计日期: ';
+      companyNameLabel = '主题: ';
+      addressLabel = '地址: ';
+      telNumberLabel = '电话号码: ';
+      fexNumberLabel = '传真号码: ';
+      inChargeLabel = '负责人: ';
+      tableHeaders = ['', '项目', '数', '量', '单价', '金额'];
+      break;
+
+    case 'ZHTW':
+      title = '報價單';
+      quotationNumberLabel = '報價單號: ';
+      quotationDateLabel = '預計日期: ';
+      companyNameLabel = '主題: ';
+      addressLabel = '地址: ';
+      telNumberLabel = '電話號碼: ';
+      fexNumberLabel = '傳真號碼: ';
+      inChargeLabel = '負責人: ';
+      tableHeaders = ['', '項目', '數', '量', '單價', '金額'];
+      break;
+
+    case 'VN':
+      title = 'báo giá';
+      quotationNumberLabel = 'số báo giá: ';
+      quotationDateLabel = 'ngày dự kiến: ';
+      companyNameLabel = 'chủ đề: ';
+      addressLabel = 'địa chỉ: ';
+      telNumberLabel = 'số điện thoại: ';
+      fexNumberLabel = 'số fax: ';
+      inChargeLabel = 'người chịu trách nhiệm: ';
+      tableHeaders = ['', 'mục', 'số', 'lượng', 'đơn giá', 'số tiền'];
+      break;
+
+    default:
+      title = 'Invoice';
+      quotationNumberLabel = 'Quotation number: ';
+      quotationDateLabel = 'Quotation date: ';
+      companyNameLabel = 'Company name: ';
+      addressLabel = 'Address: ';
+      telNumberLabel = 'Tel number: ';
+      fexNumberLabel = 'Fex number: ';
+      inChargeLabel = 'In charge: ';
+      tableHeaders = ['', 'Item', 'Quantity', 'Unit', 'Unit Price', 'Amount'];
+  }
   Uint8List? logoImage;
   Uint8List? stampImage;
 
@@ -592,20 +529,6 @@ Future<Uint8List?> generatePdfFromInvoice(
             ),
           ),
         ),
-        if (logoImage != null || stampImage != null)
-          pw.Row(
-              crossAxisAlignment: pw.CrossAxisAlignment.end,
-              mainAxisAlignment: pw.MainAxisAlignment.end,
-              children: [
-                if (logoImage != null)
-                  pw.Image(
-                    pw.MemoryImage(logoImage),
-                  ),
-                if (stampImage != null)
-                  pw.Image(
-                    pw.MemoryImage(stampImage),
-                  ),
-              ]),
         pw.Row(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
@@ -646,16 +569,36 @@ Future<Uint8List?> generatePdfFromInvoice(
                 ),
               ])
         ]),
+        if (logoImage != null || stampImage != null)
+          pw.Row(
+              crossAxisAlignment: pw.CrossAxisAlignment.end,
+              mainAxisAlignment: pw.MainAxisAlignment.end,
+              children: [
+                if (logoImage != null)
+                  pw.Image(
+                    pw.MemoryImage(logoImage),
+                    height: 100,
+                    width: 100,
+                    fit: pw.BoxFit.contain,
+                  ),
+                if (stampImage != null)
+                  pw.Image(
+                    pw.MemoryImage(stampImage),
+                    height: 100,
+                    width: 100,
+                    fit: pw.BoxFit.contain,
+                  ),
+              ]),
         pw.Row(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
               pw.Text(
-                contactLabel,
+                companyNameLabel,
                 style: pw.TextStyle(font: ttf),
               ),
               pw.Text(
-                request.contact ?? '',
+                request.companyName ?? '',
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
@@ -664,218 +607,182 @@ Future<Uint8List?> generatePdfFromInvoice(
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
               pw.Text(
-                registrationNumberLabel,
+                addressLabel,
                 style: pw.TextStyle(font: ttf),
               ),
               pw.Text(
-                request.registrationNumber ?? '',
+                request.address ?? '',
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
-        pw.Row(children: [
-          pw.Text(
-            subjectLabel,
-            style: pw.TextStyle(
-              font: ttf,
-              fontWeight: pw.FontWeight.bold,
-              fontSize: 14,
-            ),
-          ),
-          pw.Text(
-            request.subject ?? '',
-            style: pw.TextStyle(
-              font: ttfJP,
-              fontWeight: pw.FontWeight.normal,
-              fontSize: 14,
-            ),
-          ),
-        ]),
-        pw.Row(children: [
-          pw.Text(
-            totalAmountLabel,
-            style: pw.TextStyle(
-              font: ttf,
-              fontWeight: pw.FontWeight.bold,
-              fontSize: 14,
-            ),
-          ),
-          pw.Text(
-            '${Strings.formatCurrency(request.amountBilled ?? 0)} 円',
-            style: pw.TextStyle(
-              font: ttfJP,
-              fontWeight: pw.FontWeight.normal,
-              fontSize: 14,
-            ),
-          ),
-        ]),
-        pw.SizedBox(height: 20),
-        pw.TableHelper.fromTextArray(
-          headers: [
-            taxRateLabel,
-            taxExcludedAmountLabel,
-            consumptionTaxLabel,
-            totalAmountYenLabel
-          ],
-          headerStyle: pw.TextStyle(
-            font: ttf,
-          ),
-          columnWidths: {
-            0: const pw.FlexColumnWidth(1),
-            1: const pw.FlexColumnWidth(2),
-            2: const pw.FlexColumnWidth(2),
-            3: const pw.FlexColumnWidth(2),
-          },
-          headerAlignment: pw.Alignment.centerLeft,
-          cellAlignment: pw.Alignment.centerLeft,
-          headerCellDecoration: const pw.BoxDecoration(
-            color: PdfColor.fromInt(0xffe0e0e0),
-          ),
-          oddCellStyle: pw.TextStyle(
-            font: ttfJP,
-          ),
-          cellStyle: pw.TextStyle(
-            font: ttfJP,
-          ),
-          data: request.totalPayment!
-              .map((payment) => [
-                    payment.taxRate ?? '' ' %',
-                    '${Strings.formatCurrency(payment.amountExcludingTaxInYen ?? 0)}'
-                        ' 円',
-                    '${Strings.formatCurrency(payment.consumptionTaxAmountInYen ?? 0)}'
-                        ' 円',
-                    '${Strings.formatCurrency((payment.amountExcludingTaxInYen ?? 0) + (payment.consumptionTaxAmountInYen ?? 0))}'
-                        ' 円',
-                  ])
-              .toList(),
-        ),
-        pw.SizedBox(height: 20),
-        pw.TableHelper.fromTextArray(
-          columnWidths: {
-            0: const pw.FlexColumnWidth(1),
-            1: const pw.FlexColumnWidth(2)
-          },
-          headerCount: 0,
-          headers: [],
-          headerHeight: 0,
-          headerAlignment: pw.Alignment.centerLeft,
-          cellAlignment: pw.Alignment.centerLeft,
-          // Apply different background colors for the first column and others
-          cellDecoration: (rowIndex, columnIndex, value) {
-            if (columnIndex == 0) {
-              return pw.BoxDecoration(
-                color: PdfColor.fromInt(
-                    0xffe0e0e0), // Grey background for first column
-              );
-            }
-            return pw.BoxDecoration(
-              color: PdfColor.fromInt(
-                  0xffffffff), // Default white background for other columns
-            );
-          },
-          rowDecoration: const pw.BoxDecoration(
-            color: PdfColor.fromInt(0xffffffff),
-          ),
-          oddRowDecoration: pw.BoxDecoration(
-            color: PdfColor.fromInt(0xffffffff),
-          ),
-          oddCellStyle: pw.TextStyle(font: ttfJP),
-          cellStyle: pw.TextStyle(font: ttf),
-          data: [
-            [
+        pw.Row(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            mainAxisAlignment: pw.MainAxisAlignment.end,
+            children: [
               pw.Text(
-                paymentDeadlineLabel,
-                style: pw.TextStyle(
-                  font: ttf,
-                  color: PdfColor.fromInt(0xff000000),
-                ),
-                textAlign: pw.TextAlign.left,
+                telNumberLabel,
+                style: pw.TextStyle(font: ttf),
               ),
               pw.Text(
-                request.paymentDeadline != null
-                    ? Dates.formatFullDate(request.paymentDeadline!)
-                    : '',
-                style: pw.TextStyle(
-                  font: ttfJP,
-                  color: PdfColor.fromInt(0xff000000),
-                ),
-                textAlign: pw.TextAlign.left,
+                request.telNumber ?? '',
+                style: pw.TextStyle(font: ttfJP),
               ),
-            ],
-            [
+            ]),
+        pw.Row(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            mainAxisAlignment: pw.MainAxisAlignment.end,
+            children: [
               pw.Text(
-                remarksLabel,
-                style: pw.TextStyle(
-                  font: ttf,
-                  color: PdfColor.fromInt(0xff000000),
-                ),
-                textAlign: pw.TextAlign.left,
+                fexNumberLabel,
+                style: pw.TextStyle(font: ttf),
               ),
               pw.Text(
-                request.remarks ?? '',
-                style: pw.TextStyle(
-                  font: ttfJP,
-                  color: PdfColor.fromInt(0xff000000),
-                ),
-                textAlign: pw.TextAlign.left,
+                request.fexNumber ?? '',
+                style: pw.TextStyle(font: ttfJP),
               ),
-            ]
-          ],
-        ),
+            ]),
+        pw.Row(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            mainAxisAlignment: pw.MainAxisAlignment.end,
+            children: [
+              pw.Text(
+                inChargeLabel,
+                style: pw.TextStyle(font: ttf),
+              ),
+              pw.Text(
+                request.inCharge ?? '',
+                style: pw.TextStyle(font: ttfJP),
+              ),
+            ]),
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
           headers: tableHeaders,
-          headerStyle: pw.TextStyle(
-            font: ttf,
-          ),
+          headerStyle: pw.TextStyle(font: ttf),
           columnWidths: {
-            0: const pw.FlexColumnWidth(0.5),
-            1: const pw.FlexColumnWidth(1.5),
-            2: const pw.FlexColumnWidth(5),
+            0: const pw.FlexColumnWidth(1),
+            1: const pw.FlexColumnWidth(6),
+            2: const pw.FlexColumnWidth(1),
             3: const pw.FlexColumnWidth(1),
-            4: const pw.FlexColumnWidth(1),
+            4: const pw.FlexColumnWidth(2),
             5: const pw.FlexColumnWidth(2),
-            6: const pw.FlexColumnWidth(2),
-            // 7: const pw.FlexColumnWidth(1),
           },
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
-          headerCellDecoration: const pw.BoxDecoration(
-            color: PdfColor.fromInt(0xffe0e0e0),
-          ),
-          oddCellStyle: pw.TextStyle(
-            font: ttfJP,
-          ),
-          cellStyle: pw.TextStyle(
-            font: ttfJP,
-          ),
-          data: request.item!
-              .map((item) => [
-                    (request.item?.indexOf(item) ?? 0) + 1,
-                    pw.Text(
-                      item.transactionDate != null
-                          ? Dates.formatFullDate(item.transactionDate!)
-                          : '',
-                      style: pw.TextStyle(
-                        font: ttfJP,
-                        fontWeight: pw.FontWeight.bold,
-                        fontSize: 9,
-                      ),
-                    ),
-                    pw.Text(
-                      item.details ?? '',
-                      style: pw.TextStyle(
-                        font: ttfJP,
-                        fontWeight: pw.FontWeight.normal,
-                        fontSize: 10,
-                      ),
-                    ),
-                    item.quantity ?? '',
-                    item.unit ?? '',
-                    '${Strings.formatCurrency(item.unitPrice ?? 0)}' ' 円',
-                    '${Strings.formatCurrency(item.amount ?? 0)}' ' 円',
-                    // '${item.taxRate ?? 0}' ' %',
-                  ])
-              .toList(),
+          headerCellDecoration:
+              const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+          oddCellStyle: pw.TextStyle(font: ttfJP),
+          cellStyle: pw.TextStyle(font: ttfJP),
+          data: request.item
+                  ?.map((item) => [
+                        pw.Text(
+                          item.itemCode ?? '--',
+                          style: pw.TextStyle(
+                            font: ttfJP,
+                            fontWeight: pw.FontWeight.bold,
+                            fontSize: 9,
+                          ),
+                        ),
+                        pw.Text(
+                          item.details ?? '',
+                          style: pw.TextStyle(
+                            font: ttfJP,
+                            fontWeight: pw.FontWeight.normal,
+                            fontSize: 10,
+                          ),
+                        ),
+                        item.quantity ?? '',
+                        item.unit ?? '',
+                        '${Strings.formatCurrency(item.unitPrice ?? 0)}'
+                            ' 円',
+                        '${Strings.formatCurrency((item.quantity ?? 0) * (double.tryParse("${item.unit ?? 0}") ?? 0))}'
+                            ' 円',
+                      ])
+                  .toList() ??
+              [],
+        ),
+        // notes
+        pw.TableHelper.fromTextArray(
+          columnWidths: {
+            0: const pw.FlexColumnWidth(0),
+            1: const pw.FlexColumnWidth(12),
+          },
+          data: request.notes
+                  ?.map((note) => [
+                        '',
+                        pw.Text(
+                          note.note ?? '',
+                          style: pw.TextStyle(
+                            font: ttfJP,
+                            fontWeight: pw.FontWeight.normal,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ])
+                  .toList() ??
+              [],
+        ),
+        pw.TableHelper.fromTextArray(columnWidths: {
+          0: const pw.FlexColumnWidth(10),
+          1: const pw.FlexColumnWidth(0),
+          2: const pw.FlexColumnWidth(0),
+          3: const pw.FlexColumnWidth(0),
+          4: const pw.FlexColumnWidth(0),
+          5: const pw.FlexColumnWidth(2),
+        }, data: [
+          [
+            '計',
+            '',
+            '',
+            '',
+            '',
+            Strings.formatCurrency(subTotal(request.item ?? [])),
+          ],
+          [
+            '消費税（${int.tryParse(request.taxRate.toString()) ?? 0}%）',
+            '',
+            '',
+            '',
+            '',
+            Strings.formatCurrency(
+                taxCalculation(subTotal(request.item ?? []), request.taxRate)),
+          ],
+        ]),
+        pw.TableHelper.fromTextArray(
+            headerCellDecoration:
+                const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+            cellDecoration: (i, _, __) {
+              return const pw.BoxDecoration(
+                  color: PdfColor.fromInt(0xff98FF98));
+            },
+            columnWidths: {
+              0: const pw.FlexColumnWidth(10),
+              1: const pw.FlexColumnWidth(0),
+              2: const pw.FlexColumnWidth(0),
+              3: const pw.FlexColumnWidth(0),
+              4: const pw.FlexColumnWidth(0),
+              5: const pw.FlexColumnWidth(2),
+            },
+            data: [
+              [
+                '合計',
+                '',
+                '',
+                '',
+                '',
+                Strings.formatCurrency(total(
+                    subTotal(request.item ?? []),
+                    taxCalculation(
+                        subTotal(request.item ?? []), request.taxRate))),
+              ],
+            ]),
+        pw.SizedBox(height: 20),
+        pw.Text(
+          '【特記事項】',
+          style: pw.TextStyle(font: ttfJP),
+        ),
+        pw.Text(
+          request.remarks ?? '',
+          style: pw.TextStyle(font: ttfJP),
         ),
       ],
     ),
@@ -890,4 +797,20 @@ Future<Uint8List?> generatePdfFromInvoice(
     }
     return null;
   }
+}
+
+double subTotal(List<ItemRequest> items) {
+  double total = 0;
+  for (var item in items) {
+    total += (item.quantity ?? 0) * (item.unitPrice ?? 0);
+  }
+  return total;
+}
+
+double taxCalculation(double subTotal, String? taxRate) {
+  return subTotal * (int.tryParse(taxRate ?? '0') ?? 0) / 100;
+}
+
+double total(double subTotal, double tax) {
+  return subTotal + tax;
 }

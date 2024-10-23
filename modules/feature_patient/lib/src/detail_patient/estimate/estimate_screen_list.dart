@@ -256,7 +256,7 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                           Expanded(
                               flex: 3,
                               child: Text(
-                                data?.subject ?? '',
+                                '--',
                                 style: context.textTheme.bodySmall,
                               )),
                           Expanded(

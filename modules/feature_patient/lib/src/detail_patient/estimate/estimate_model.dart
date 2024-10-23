@@ -59,29 +59,27 @@ class EstimateModel {
     );
     formGroup.control('invoiceNumber').value = invoice.invoiceNumber;
     formGroup.control('invoiceDate').value = invoice.invoiceDate;
-    formGroup.control('contact').value = invoice.contact;
-    formGroup.control('registrationNumber').value = invoice.registrationNumber;
-    formGroup.control('subject').value = invoice.subject;
-    formGroup.control('amountBilled').value = invoice.amountBilled;
-    formGroup.control('paymentDeadline').value = invoice.paymentDeadline;
-    formGroup.control('remarks').value = invoice.remarks;
+    formGroup.control('companyName').value = invoice.companyName;
+    formGroup.control('address').value = invoice.address;
+    formGroup.control('telNumber').value = invoice.telNumber;
+    formGroup.control('fexNumber').value = invoice.fexNumber;
+    formGroup.control('inCharge').value = invoice.inCharge;
+
     formGroup.control('medicalRecord').value = invoice.medicalRecord;
     formGroup.control('user').value = invoice.user;
     formGroup.control('hospitalRecord').value = invoice.hospitalRecord;
 
-    if (invoice.totalPayment != null && invoice.totalPayment!.isNotEmpty) {
-      FormArray totalPayment = formGroup.control('totalPayment') as FormArray;
-      totalPayment.clear();
+    formGroup.control('remarks').value = invoice.remarks;
 
-      for (var payment in invoice.totalPayment!) {
-        totalPayment.add(
+    if (invoice.notes != null && invoice.notes!.isNotEmpty) {
+      FormArray notes = formGroup.control('notes') as FormArray;
+      notes.clear();
+
+      for (var note in invoice.notes!) {
+        notes.add(
           FormGroup({
-            '_id': FormControl(value: payment.id),
-            'taxRate': FormControl(value: payment.taxRate),
-            'amountExcludingTaxInYen':
-                FormControl(value: payment.amountExcludingTaxInYen),
-            'consumptionTaxAmountInYen':
-                FormControl(value: payment.consumptionTaxAmountInYen),
+            '_id': FormControl(value: note.id),
+            'note': FormControl(value: note.note),
           }),
         );
       }
@@ -95,13 +93,11 @@ class EstimateModel {
         item.add(
           FormGroup({
             '_id': FormControl(value: itemData.id),
-            'transactionDate': FormControl(value: itemData.transactionDate),
+            'itemCode': FormControl(value: itemData.itemCode),
             'details': FormControl(value: itemData.details),
             'quantity': FormControl(value: itemData.quantity),
             'unit': FormControl(value: itemData.unit),
             'unitPrice': FormControl(value: itemData.unitPrice),
-            'amount': FormControl(value: itemData.amount),
-            'taxRate': FormControl(value: itemData.taxRate),
           }),
         );
       }
@@ -133,23 +129,19 @@ class EstimateModel {
       List<ItemRequest>? items = [];
       formGroup.control('item').value.forEach((item) {
         items.add(ItemRequest(
-          transactionDate: item['transactionDate'],
+          itemCode: item['itemCode'],
           details: item['details'],
           quantity: item['quantity'],
           unit: item['unit'],
           unitPrice: item['unitPrice'],
-          amount: item['amount'],
-          taxRate: item['taxRate'],
         ));
       });
 
-      List<TotalPaymentRequest>? totalPayment = [];
+      List<NoteInvoiceRequest>? notes = [];
 
-      formGroup.control('totalPayment').value.forEach((payment) {
-        totalPayment.add(TotalPaymentRequest(
-          taxRate: payment['taxRate'],
-          amountExcludingTaxInYen: payment['amountExcludingTaxInYen'],
-          consumptionTaxAmountInYen: payment['consumptionTaxAmountInYen'],
+      formGroup.control('notes').value.forEach((note) {
+        notes.add(NoteInvoiceRequest(
+          note: note['note'],
         ));
       });
 
@@ -197,13 +189,13 @@ class EstimateModel {
         type: false,
         invoiceNumber: formGroup.control('invoiceNumber').value,
         invoiceDate: formGroup.control('invoiceDate').value,
-        contact: formGroup.control('contact').value,
-        registrationNumber: formGroup.control('registrationNumber').value,
-        subject: formGroup.control('subject').value,
-        amountBilled: formGroup.control('amountBilled').value,
-        paymentDeadline: formGroup.control('paymentDeadline').value,
+        companyName: formGroup.control('companyName').value,
+        address: formGroup.control('address').value,
+        telNumber: formGroup.control('telNumber').value,
+        fexNumber: formGroup.control('fexNumber').value,
+        inCharge: formGroup.control('inCharge').value,
         remarks: formGroup.control('remarks').value,
-        totalPayment: totalPayment,
+        notes: notes,
         item: items,
         medicalRecord: formGroup.control('medicalRecord').value,
         user: formGroup.control('user').value,
@@ -432,28 +424,24 @@ class EstimateModel {
             fileNamePdfZHTW: invoiceData.fileNamePdfZHTW,
             invoiceNumber: invoiceData.invoiceNumber,
             invoiceDate: invoiceData.invoiceDate,
-            contact: invoiceData.contact,
-            registrationNumber: invoiceData.registrationNumber,
-            subject: invoiceData.subject,
-            amountBilled: invoiceData.amountBilled,
-            paymentDeadline: invoiceData.paymentDeadline,
+            companyName: invoiceData.companyName,
+            address: invoiceData.address,
+            telNumber: invoiceData.telNumber,
+            fexNumber: invoiceData.fexNumber,
+            inCharge: invoiceData.inCharge,
             remarks: invoiceData.remarks,
-            totalPayment: invoiceData.totalPayment?.map((payment) {
-              return TotalPaymentRequest(
-                taxRate: payment.taxRate,
-                amountExcludingTaxInYen: payment.amountExcludingTaxInYen,
-                consumptionTaxAmountInYen: payment.consumptionTaxAmountInYen,
+            notes: invoiceData.notes?.map((note) {
+              return NoteInvoiceRequest(
+                note: note.note,
               );
             }).toList(),
             item: invoiceData.item?.map((item) {
               return ItemRequest(
-                transactionDate: item.transactionDate,
+                itemCode: item.itemCode,
                 details: item.details,
                 quantity: item.quantity,
                 unit: item.unit,
                 unitPrice: item.unitPrice,
-                amount: item.amount,
-                taxRate: item.taxRate,
               );
             }).toList(),
             medicalRecord: invoiceData.medicalRecord.id,
@@ -513,16 +501,11 @@ Future<Uint8List?> generatePdfFromQuotation(
   String title;
   String quotationNumberLabel;
   String quotationDateLabel;
-  String subjectLabel;
-  String totalAmountLabel;
-  String contactLabel;
-  String registrationNumberLabel;
-  String paymentDeadlineLabel;
-  String remarksLabel;
-  String taxRateLabel;
-  String taxExcludedAmountLabel;
-  String consumptionTaxLabel;
-  String totalAmountYenLabel;
+  String companyNameLabel;
+  String addressLabel;
+  String telNumberLabel;
+  String fexNumberLabel;
+  String inChargeLabel;
   List<String> tableHeaders;
 
   // Load appropriate fonts and text labels based on the language
@@ -531,103 +514,60 @@ Future<Uint8List?> generatePdfFromQuotation(
       title = '御　見　積　書';
       quotationNumberLabel = '見積番号: ';
       quotationDateLabel = '見積日: ';
-      subjectLabel = '件名: ';
-      totalAmountLabel = '合計金額: ';
-      contactLabel = '担当者: ';
-      registrationNumberLabel = '登録番号: ';
-      paymentDeadlineLabel = '有効期限';
-      remarksLabel = '備考';
-      taxRateLabel = '税率 (%)';
-      taxExcludedAmountLabel = '税抜金額（円）';
-      consumptionTaxLabel = '消費税(円)';
-      totalAmountYenLabel = '合計金額(円)';
-      tableHeaders = ['', '取引日', '内訳', '数量', '単位', '単価', '金額', '税率 (%)'];
+      companyNameLabel = '件名: ';
+      addressLabel = '住所: ';
+      telNumberLabel = '電話番号: ';
+      fexNumberLabel = 'FAX番号: ';
+      inChargeLabel = '担当者: ';
+      tableHeaders = ['', '項目', '数', '量', '単価', '金額'];
       break;
 
     case 'ZH':
-      title = '估计';
+      title = '报价单';
       quotationNumberLabel = '报价单号: ';
       quotationDateLabel = '预计日期: ';
-      subjectLabel = '主题: ';
-      totalAmountLabel = '总金额: ';
-      contactLabel = '经理: ';
-      registrationNumberLabel = '注册号: ';
-      paymentDeadlineLabel = '到期日期';
-      remarksLabel = '评论';
-      taxRateLabel = '税率 (%)';
-      taxExcludedAmountLabel = '减税金额（元）';
-      consumptionTaxLabel = '消费税（日元）';
-      totalAmountYenLabel = '总金额（日元）';
-      tableHeaders = ['', '交易日', '分解', '数量', '首位', '单价', '数量', '税率 (%)'];
+      companyNameLabel = '主题: ';
+      addressLabel = '地址: ';
+      telNumberLabel = '电话号码: ';
+      fexNumberLabel = '传真号码: ';
+      inChargeLabel = '负责人: ';
+      tableHeaders = ['', '项目', '数', '量', '单价', '金额'];
       break;
 
     case 'ZHTW':
-      title = '估計';
+      title = '報價單';
       quotationNumberLabel = '報價單號: ';
       quotationDateLabel = '預計日期: ';
-      subjectLabel = '主題: ';
-      totalAmountLabel = '總金額: ';
-      contactLabel = '主管: ';
-      registrationNumberLabel = '註冊號: ';
-      paymentDeadlineLabel = '到期日期';
-      remarksLabel = '評論';
-      taxRateLabel = '稅率 (%)';
-      taxExcludedAmountLabel = '減稅金額（元）';
-      consumptionTaxLabel = '消費稅（日元）';
-      totalAmountYenLabel = '總金額（日元）';
-      tableHeaders = ['', '交易日', '分解', '數量', '首位', '單價', '數量', '稅率 (%)'];
+      companyNameLabel = '主題: ';
+      addressLabel = '地址: ';
+      telNumberLabel = '電話號碼: ';
+      fexNumberLabel = '傳真號碼: ';
+      inChargeLabel = '負責人: ';
+      tableHeaders = ['', '項目', '數', '量', '單價', '金額'];
       break;
 
     case 'VN':
-      title = 'Ước lượng';
+      title = 'Báo giá';
       quotationNumberLabel = 'số báo giá: ';
       quotationDateLabel = 'ngày dự kiến: ';
-      subjectLabel = 'chủ thể: ';
-      totalAmountLabel = 'tổng số tiền: ';
-      contactLabel = 'giám đốc: ';
-      registrationNumberLabel = 'số đăng ký: ';
-      paymentDeadlineLabel = 'ngày hết hạn';
-      remarksLabel = 'nhận xét';
-      taxRateLabel = 'thuế suất (%)';
-      taxExcludedAmountLabel = 'Dòng khấu trừ thuế (cổng)';
-      consumptionTaxLabel = 'Thuế tiêu dùng (yên)';
-      totalAmountYenLabel = 'Tổng số tiền (yên)';
-      tableHeaders = [
-        '',
-        'ngày giao dịch',
-        'sự cố',
-        'Số lượng',
-        'Vị trí đầu tiên',
-        'đơn giá',
-        'số lượng',
-        'thuế suất (%)'
-      ];
+      companyNameLabel = 'chủ đề: ';
+      addressLabel = 'địa chỉ: ';
+      telNumberLabel = 'số điện thoại: ';
+      fexNumberLabel = 'số fax: ';
+      inChargeLabel = 'người chịu trách nhiệm: ';
+      tableHeaders = ['', 'mục', 'số', 'lượng', 'đơn giá', 'số tiền'];
       break;
 
     default:
       title = 'Quotation';
       quotationNumberLabel = 'Quotation number: ';
       quotationDateLabel = 'Quotation date: ';
-      subjectLabel = 'Subject: ';
-      totalAmountLabel = 'Total amount: ';
-      contactLabel = 'Contact: ';
-      registrationNumberLabel = 'Registration number: ';
-      paymentDeadlineLabel = 'Date of Expiry';
-      remarksLabel = 'Remarks';
-      taxRateLabel = 'Tax rate (%)';
-      taxExcludedAmountLabel = 'Tax excluded amount (yen)';
-      consumptionTaxLabel = 'Consumption tax (yen)';
-      totalAmountYenLabel = 'Total amount (yen)';
-      tableHeaders = [
-        '',
-        'Transaction Date',
-        'Detail',
-        'QTY',
-        'Unit',
-        'Unit price',
-        'Amount',
-        'Tax rate (%)'
-      ];
+      companyNameLabel = 'Company name: ';
+      addressLabel = 'Address: ';
+      telNumberLabel = 'Tel number: ';
+      fexNumberLabel = 'Fex number: ';
+      inChargeLabel = 'In charge: ';
+      tableHeaders = ['', 'Item', 'Quantity', 'Unit', 'Unit Price', 'Amount'];
   }
   Uint8List? logoImage;
   Uint8List? stampImage;
@@ -664,26 +604,6 @@ Future<Uint8List?> generatePdfFromQuotation(
             ),
           ),
         ),
-        if (logoImage != null || stampImage != null)
-          pw.Row(
-              crossAxisAlignment: pw.CrossAxisAlignment.end,
-              mainAxisAlignment: pw.MainAxisAlignment.end,
-              children: [
-                if (logoImage != null)
-                  pw.Image(
-                    pw.MemoryImage(logoImage),
-                    height: 100,
-                    width: 100,
-                    fit: pw.BoxFit.contain,
-                  ),
-                if (stampImage != null)
-                  pw.Image(
-                    pw.MemoryImage(stampImage),
-                    height: 100,
-                    width: 100,
-                    fit: pw.BoxFit.contain,
-                  ),
-              ]),
         pw.Row(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
@@ -724,16 +644,36 @@ Future<Uint8List?> generatePdfFromQuotation(
                 ),
               ])
         ]),
+        if (logoImage != null || stampImage != null)
+          pw.Row(
+              crossAxisAlignment: pw.CrossAxisAlignment.end,
+              mainAxisAlignment: pw.MainAxisAlignment.end,
+              children: [
+                if (logoImage != null)
+                  pw.Image(
+                    pw.MemoryImage(logoImage),
+                    height: 100,
+                    width: 100,
+                    fit: pw.BoxFit.contain,
+                  ),
+                if (stampImage != null)
+                  pw.Image(
+                    pw.MemoryImage(stampImage),
+                    height: 100,
+                    width: 100,
+                    fit: pw.BoxFit.contain,
+                  ),
+              ]),
         pw.Row(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
               pw.Text(
-                contactLabel,
+                companyNameLabel,
                 style: pw.TextStyle(font: ttf),
               ),
               pw.Text(
-                request.contact ?? '',
+                request.companyName ?? '',
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
@@ -742,184 +682,75 @@ Future<Uint8List?> generatePdfFromQuotation(
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
               pw.Text(
-                registrationNumberLabel,
+                addressLabel,
                 style: pw.TextStyle(font: ttf),
               ),
               pw.Text(
-                request.registrationNumber ?? '',
+                request.address ?? '',
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
-        pw.Row(children: [
-          pw.Text(
-            subjectLabel,
-            style: pw.TextStyle(
-              font: ttf,
-              fontWeight: pw.FontWeight.bold,
-              fontSize: 14,
-            ),
-          ),
-          pw.Text(
-            request.subject ?? '',
-            style: pw.TextStyle(
-              font: ttfJP,
-              fontWeight: pw.FontWeight.normal,
-              fontSize: 14,
-            ),
-          ),
-        ]),
-        pw.Row(children: [
-          pw.Text(
-            totalAmountLabel,
-            style: pw.TextStyle(
-              font: ttf,
-              fontWeight: pw.FontWeight.bold,
-              fontSize: 14,
-            ),
-          ),
-          pw.Text(
-            '${Strings.formatCurrency(request.amountBilled ?? 0)} 円',
-            style: pw.TextStyle(
-              font: ttfJP,
-              fontWeight: pw.FontWeight.normal,
-              fontSize: 14,
-            ),
-          ),
-        ]),
-        pw.SizedBox(height: 20),
-        pw.TableHelper.fromTextArray(
-          headers: [
-            taxRateLabel,
-            taxExcludedAmountLabel,
-            consumptionTaxLabel,
-            totalAmountYenLabel
-          ],
-          headerCellDecoration:
-              const pw.BoxDecoration(color: PdfColor.fromInt(0xffe0e0e0)),
-          columnWidths: {
-            0: const pw.FlexColumnWidth(1),
-            1: const pw.FlexColumnWidth(2),
-            2: const pw.FlexColumnWidth(2),
-            3: const pw.FlexColumnWidth(2),
-          },
-          headerAlignment: pw.Alignment.centerLeft,
-          cellAlignment: pw.Alignment.centerLeft,
-          headerStyle: pw.TextStyle(font: ttf),
-          oddCellStyle: pw.TextStyle(font: ttfJP),
-          cellStyle: pw.TextStyle(font: ttfJP),
-          data: request.totalPayment
-                  ?.map((payment) => [
-                        payment.taxRate ?? '' ' %',
-                        '${Strings.formatCurrency(payment.amountExcludingTaxInYen ?? 0)}'
-                            ' 円',
-                        '${Strings.formatCurrency(payment.consumptionTaxAmountInYen ?? 0)}'
-                            ' 円',
-                        '${Strings.formatCurrency((payment.amountExcludingTaxInYen ?? 0) + (payment.consumptionTaxAmountInYen ?? 0))}'
-                            ' 円',
-                      ])
-                  .toList() ??
-              [],
-        ),
-        pw.SizedBox(height: 20),
-        pw.TableHelper.fromTextArray(
-          columnWidths: {
-            0: const pw.FlexColumnWidth(1),
-            1: const pw.FlexColumnWidth(2)
-          },
-          headerCount: 0,
-          headers: [],
-          headerHeight: 0,
-          headerAlignment: pw.Alignment.centerLeft,
-          cellAlignment: pw.Alignment.centerLeft,
-          // Apply different background colors for the first column and others
-          cellDecoration: (rowIndex, columnIndex, value) {
-            if (columnIndex == 0) {
-              return pw.BoxDecoration(
-                color: PdfColor.fromInt(
-                    0xffe0e0e0), // Grey background for first column
-              );
-            }
-            return pw.BoxDecoration(
-              color: PdfColor.fromInt(
-                  0xffffffff), // Default white background for other columns
-            );
-          },
-          rowDecoration: const pw.BoxDecoration(
-            color: PdfColor.fromInt(0xffffffff),
-          ),
-          oddRowDecoration: pw.BoxDecoration(
-            color: PdfColor.fromInt(0xffffffff),
-          ),
-          oddCellStyle: pw.TextStyle(font: ttfJP),
-          cellStyle: pw.TextStyle(font: ttf),
-          data: [
-            [
+        pw.Row(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            mainAxisAlignment: pw.MainAxisAlignment.end,
+            children: [
               pw.Text(
-                paymentDeadlineLabel,
-                style: pw.TextStyle(
-                  font: ttf,
-                  color: PdfColor.fromInt(0xff000000),
-                ),
-                textAlign: pw.TextAlign.left,
+                telNumberLabel,
+                style: pw.TextStyle(font: ttf),
               ),
               pw.Text(
-                request.paymentDeadline != null
-                    ? Dates.formatFullDate(request.paymentDeadline!)
-                    : '',
-                style: pw.TextStyle(
-                  font: ttfJP,
-                  color: PdfColor.fromInt(0xff000000),
-                ),
-                textAlign: pw.TextAlign.left,
+                request.telNumber ?? '',
+                style: pw.TextStyle(font: ttfJP),
               ),
-            ],
-            [
+            ]),
+        pw.Row(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            mainAxisAlignment: pw.MainAxisAlignment.end,
+            children: [
               pw.Text(
-                remarksLabel,
-                style: pw.TextStyle(
-                  font: ttf,
-                  color: PdfColor.fromInt(0xff000000),
-                ),
-                textAlign: pw.TextAlign.left,
+                fexNumberLabel,
+                style: pw.TextStyle(font: ttf),
               ),
               pw.Text(
-                request.remarks ?? '',
-                style: pw.TextStyle(
-                  font: ttfJP,
-                  color: PdfColor.fromInt(0xff000000),
-                ),
-                textAlign: pw.TextAlign.left,
+                request.fexNumber ?? '',
+                style: pw.TextStyle(font: ttfJP),
               ),
-            ]
-          ],
-        ),
+            ]),
+        pw.Row(
+            crossAxisAlignment: pw.CrossAxisAlignment.end,
+            mainAxisAlignment: pw.MainAxisAlignment.end,
+            children: [
+              pw.Text(
+                inChargeLabel,
+                style: pw.TextStyle(font: ttf),
+              ),
+              pw.Text(
+                request.inCharge ?? '',
+                style: pw.TextStyle(font: ttfJP),
+              ),
+            ]),
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
           headers: tableHeaders,
           headerStyle: pw.TextStyle(font: ttf),
           columnWidths: {
-            0: const pw.FlexColumnWidth(0.5),
-            1: const pw.FlexColumnWidth(1.5),
-            2: const pw.FlexColumnWidth(5),
+            0: const pw.FlexColumnWidth(1),
+            1: const pw.FlexColumnWidth(6),
+            2: const pw.FlexColumnWidth(1),
             3: const pw.FlexColumnWidth(1),
-            4: const pw.FlexColumnWidth(1),
+            4: const pw.FlexColumnWidth(2),
             5: const pw.FlexColumnWidth(2),
-            6: const pw.FlexColumnWidth(2),
-            // 7: const pw.FlexColumnWidth(1),
           },
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
           headerCellDecoration:
-              const pw.BoxDecoration(color: PdfColor.fromInt(0xffe0e0e0)),
+              const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
           oddCellStyle: pw.TextStyle(font: ttfJP),
           cellStyle: pw.TextStyle(font: ttfJP),
           data: request.item
                   ?.map((item) => [
-                        (request.item?.indexOf(item) ?? 0) + 1,
                         pw.Text(
-                          item.transactionDate != null
-                              ? Dates.formatFullDate(item.transactionDate!)
-                              : '',
+                          item.itemCode ?? '--',
                           style: pw.TextStyle(
                             font: ttfJP,
                             fontWeight: pw.FontWeight.bold,
@@ -936,12 +767,96 @@ Future<Uint8List?> generatePdfFromQuotation(
                         ),
                         item.quantity ?? '',
                         item.unit ?? '',
-                        '${Strings.formatCurrency(item.unitPrice ?? 0)}' ' 円',
-                        '${Strings.formatCurrency(item.amount ?? 0)}' ' 円',
-                        // '${item.taxRate ?? 0}' ' %',
+                        '${Strings.formatCurrency(item.unitPrice ?? 0)}'
+                            ' 円',
+                        '${Strings.formatCurrency((item.quantity ?? 0) * (double.tryParse("${item.unit ?? 0}") ?? 0))}'
+                            ' 円',
                       ])
                   .toList() ??
               [],
+        ),
+        // notes
+        pw.TableHelper.fromTextArray(
+          columnWidths: {
+            0: const pw.FlexColumnWidth(0),
+            1: const pw.FlexColumnWidth(12),
+          },
+          data: request.notes
+                  ?.map((note) => [
+                        '',
+                        pw.Text(
+                          note.note ?? '',
+                          style: pw.TextStyle(
+                            font: ttfJP,
+                            fontWeight: pw.FontWeight.normal,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ])
+                  .toList() ??
+              [],
+        ),
+        pw.TableHelper.fromTextArray(columnWidths: {
+          0: const pw.FlexColumnWidth(10),
+          1: const pw.FlexColumnWidth(0),
+          2: const pw.FlexColumnWidth(0),
+          3: const pw.FlexColumnWidth(0),
+          4: const pw.FlexColumnWidth(0),
+          5: const pw.FlexColumnWidth(2),
+        }, data: [
+          [
+            '計',
+            '',
+            '',
+            '',
+            '',
+            Strings.formatCurrency(subTotal(request.item ?? [])),
+          ],
+          [
+            '消費税（${int.tryParse(request.taxRate.toString()) ?? 0}%）',
+            '',
+            '',
+            '',
+            '',
+            Strings.formatCurrency(
+                taxCalculation(subTotal(request.item ?? []), request.taxRate)),
+          ],
+        ]),
+        pw.TableHelper.fromTextArray(
+            headerCellDecoration:
+                const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+            cellDecoration: (i, _,__) {
+              return const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98));
+            },
+            columnWidths: {
+              0: const pw.FlexColumnWidth(10),
+              1: const pw.FlexColumnWidth(0),
+              2: const pw.FlexColumnWidth(0),
+              3: const pw.FlexColumnWidth(0),
+              4: const pw.FlexColumnWidth(0),
+              5: const pw.FlexColumnWidth(2),
+            },
+            data: [
+              [
+                '合計',
+                '',
+                '',
+                '',
+                '',
+                Strings.formatCurrency(total(
+                    subTotal(request.item ?? []),
+                    taxCalculation(
+                        subTotal(request.item ?? []), request.taxRate))),
+              ],
+            ]),
+        pw.SizedBox(height: 20),
+        pw.Text(
+          '【特記事項】',
+          style: pw.TextStyle(font: ttfJP),
+        ),
+        pw.Text(
+          request.remarks ?? '',
+          style: pw.TextStyle(font: ttfJP),
         ),
       ],
     ),
@@ -958,169 +873,18 @@ Future<Uint8List?> generatePdfFromQuotation(
   }
 }
 
-// Excel File
-Future<List<int>?> generateExcelFromQuotation(
-    MedicalInvoiceRequest request, Patient patient) async {
-  var excel = Excel.createExcel();
-  Sheet sheetObject = excel['Quotation'];
-
-  int rowIndex = 1;
-  // Add header
-  var cell1 = sheetObject.cell(CellIndex.indexByString('C$rowIndex'));
-  rowIndex++;
-  cell1.value = TextCellValue('見積書');
-  cell1.cellStyle = CellStyle(
-    bold: true,
-    fontSize: 30,
-  );
-
-  var cell2 = sheetObject.cell(CellIndex.indexByString('E3'));
-  rowIndex = 4;
-
-  cell2.value = TextCellValue('見積番号: ${request.invoiceNumber ?? ''}');
-
-  var cell3 = sheetObject.cell(CellIndex.indexByString('A3'));
-  cell3.value = TextCellValue(
-      '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''} 様');
-
-  var cell4 = sheetObject.cell(CellIndex.indexByString('E3'));
-  cell4.value = TextCellValue(
-      '見積日: ${request.invoiceDate != null ? Dates.formatFullDate(request.invoiceDate!) : ''}');
-
-  var cell5 = sheetObject.cell(CellIndex.indexByString('E4'));
-  cell5.value = TextCellValue('担当者: ${request.contact ?? ''}');
-
-  var cell6 = sheetObject.cell(CellIndex.indexByString('E5'));
-  cell6.value = TextCellValue('登録番号: ${request.registrationNumber ?? ''}');
-
-  var cell7 = sheetObject.cell(CellIndex.indexByString('A7'));
-  cell7.value = TextCellValue('件名: ${request.subject ?? ''}');
-
-  var cell8 = sheetObject.cell(CellIndex.indexByString('A8'));
-  cell8.value = TextCellValue('合計金額: ${request.amountBilled ?? ''}' ' 円');
-
-  var cell9 = sheetObject.cell(CellIndex.indexByString('A10'));
-  cell9.value = TextCellValue('税率 (%)');
-  var cell10 = sheetObject.cell(CellIndex.indexByString('B10'));
-  cell10.value = TextCellValue('税抜合線(門)');
-  var cell11 = sheetObject.cell(CellIndex.indexByString('C10'));
-  cell11.value = TextCellValue('消費税(円)');
-  var cell12 = sheetObject.cell(CellIndex.indexByString('D10'));
-  cell12.value = TextCellValue('合計金額(円)');
-  rowIndex = 11;
-  request.totalPayment?.forEach((payment) {
-    var cell = sheetObject.cell(CellIndex.indexByString(
-        'A${(request.totalPayment?.indexOf(payment) ?? 0) + rowIndex}'));
-    cell.value = TextCellValue(
-        payment.taxRate != null ? payment.taxRate.toString() : '');
-
-    var cell1 = sheetObject.cell(CellIndex.indexByString(
-        'B${(request.totalPayment?.indexOf(payment) ?? 0) + rowIndex}'));
-    cell1.value = TextCellValue(payment.amountExcludingTaxInYen != null
-        ? payment.amountExcludingTaxInYen.toString()
-        : '');
-
-    var cell2 = sheetObject.cell(CellIndex.indexByString(
-        'C${(request.totalPayment?.indexOf(payment) ?? 0) + rowIndex}'));
-    cell2.value = TextCellValue(payment.consumptionTaxAmountInYen != null
-        ? payment.consumptionTaxAmountInYen.toString()
-        : '');
-
-    var cell3 = sheetObject.cell(CellIndex.indexByString(
-        'D${(request.totalPayment?.indexOf(payment) ?? 0) + rowIndex}'));
-    cell3.value = TextCellValue(((payment.amountExcludingTaxInYen ?? 0) +
-            (payment.consumptionTaxAmountInYen ?? 0))
-        .toString());
-    rowIndex++;
-  });
-
-  var cell13 = sheetObject.cell(CellIndex.indexByString('A$rowIndex'));
-  rowIndex++;
-  cell13.value = TextCellValue('有効期限');
-  var cell14 = sheetObject.cell(CellIndex.indexByString('B$rowIndex'));
-  cell14.value = TextCellValue(request.paymentDeadline != null
-      ? Dates.formatFullDate(request.paymentDeadline!)
-      : '');
-  var cell15 = sheetObject.cell(CellIndex.indexByString('A$rowIndex'));
-  rowIndex++;
-  cell15.value = TextCellValue('備考');
-  var cell16 = sheetObject.cell(CellIndex.indexByString('B$rowIndex'));
-  rowIndex++;
-  cell16.value = TextCellValue(request.remarks ?? '');
-
-  // Add item details
-
-  var cell17 = sheetObject.cell(CellIndex.indexByString('A$rowIndex'));
-  cell17.value = TextCellValue('');
-  var cell18 = sheetObject.cell(CellIndex.indexByString('B$rowIndex'));
-  cell18.value = TextCellValue('取引日');
-  var cell19 = sheetObject.cell(CellIndex.indexByString('C$rowIndex'));
-  cell19.value = TextCellValue('内訳');
-  var cell20 = sheetObject.cell(CellIndex.indexByString('D$rowIndex'));
-  cell20.value = TextCellValue('数量');
-  var cell21 = sheetObject.cell(CellIndex.indexByString('E$rowIndex'));
-  cell21.value = TextCellValue('单位');
-  var cell22 = sheetObject.cell(CellIndex.indexByString('F$rowIndex'));
-  cell22.value = TextCellValue('単価');
-  var cell23 = sheetObject.cell(CellIndex.indexByString('G$rowIndex'));
-  cell23.value = TextCellValue('金額');
-  var cell24 = sheetObject.cell(CellIndex.indexByString('H$rowIndex'));
-  cell24.value = TextCellValue('税率 (%)');
-  rowIndex++;
-
-  request.item?.forEach((item) {
-    var cell = sheetObject.cell(CellIndex.indexByString(
-        'A${((request.item?.indexOf(item) ?? 0) + 1) + rowIndex}'));
-    cell.value =
-        TextCellValue(((request.item?.indexOf(item) ?? 0) + 1).toString());
-
-    var cell1 = sheetObject.cell(CellIndex.indexByString(
-        'B${((request.item?.indexOf(item) ?? 0) + 1) + rowIndex}'));
-    cell1.value = TextCellValue(item.transactionDate != null
-        ? Dates.formatFullDate(item.transactionDate!)
-        : '');
-
-    var cell2 = sheetObject.cell(CellIndex.indexByString(
-        'C${((request.item?.indexOf(item) ?? 0) + 1) + rowIndex}'));
-    cell2.value = TextCellValue(item.details ?? '');
-
-    var cell3 = sheetObject.cell(CellIndex.indexByString(
-        'D${((request.item?.indexOf(item) ?? 0) + 1) + rowIndex}'));
-
-    cell3.value =
-        TextCellValue(item.quantity != null ? item.quantity.toString() : '');
-
-    var cell4 = sheetObject.cell(CellIndex.indexByString(
-        'E${((request.item?.indexOf(item) ?? 0) + 1) + rowIndex}'));
-
-    cell4.value = TextCellValue(item.unit ?? '');
-
-    var cell5 = sheetObject.cell(CellIndex.indexByString(
-        'F${((request.item?.indexOf(item) ?? 0) + 1) + rowIndex}'));
-
-    cell5.value =
-        TextCellValue(item.unitPrice != null ? item.unitPrice.toString() : '');
-
-    var cell6 = sheetObject.cell(CellIndex.indexByString(
-        'G${((request.item?.indexOf(item) ?? 0) + 1) + rowIndex}'));
-
-    cell6.value =
-        TextCellValue(item.amount != null ? item.amount.toString() : '');
-
-    var cell7 = sheetObject.cell(CellIndex.indexByString(
-        'H${((request.item?.indexOf(item) ?? 0) + 1) + rowIndex}'));
-
-    cell7.value =
-        TextCellValue(item.taxRate != null ? item.taxRate.toString() : '');
-    rowIndex++;
-  });
-
-  // Save the Excel file
-  try {
-    var excelBytes = excel.encode();
-    return excelBytes;
-  } catch (e) {
-    print(e);
-    return null;
+double subTotal(List<ItemRequest> items) {
+  double total = 0;
+  for (var item in items) {
+    total += (item.quantity ?? 0) * (item.unitPrice ?? 0);
   }
+  return total;
+}
+
+double taxCalculation(double subTotal, String? taxRate) {
+  return subTotal * (int.tryParse(taxRate ?? '0') ?? 0) / 100;
+}
+
+double total(double subTotal, double tax) {
+  return subTotal + tax;
 }

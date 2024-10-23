@@ -160,7 +160,7 @@ class _InvoiceTableListState extends State<InvoiceTableList> {
                               Expanded(
                                 flex: 3,
                                 child: Text(
-                                  data?.subject ?? '',
+                                  '--',
                                   style: context.textTheme.bodyMedium,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
