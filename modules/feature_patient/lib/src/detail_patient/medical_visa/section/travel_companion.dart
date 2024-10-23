@@ -265,7 +265,7 @@ class TravelCompanion extends StatelessWidget {
                                       Expanded(
                                         child: ReactiveDatePicker<DateTime>(
                                           formControlName:
-                                              'visa_validity_period_expiration_date',
+                                              'visaValidityPeriodExpirationDate',
                                           firstDate: DateTime(1900),
                                           lastDate: DateTime.now(),
                                           builder: (BuildContext context,
@@ -275,7 +275,7 @@ class TravelCompanion extends StatelessWidget {
                                               Widget? child) {
                                             return ReactiveTextField<DateTime>(
                                               formControlName:
-                                                  'visa_validity_period_expiration_date',
+                                                  'visaValidityPeriodExpirationDate',
                                               valueAccessor:
                                                   DateTimeValueAccessor(
                                                 dateTimeFormat:
@@ -327,7 +327,7 @@ class TravelCompanion extends StatelessWidget {
                                       Expanded(
                                         child: ReactiveDatePicker<DateTime>(
                                           formControlName:
-                                              'date_of_entry_into_japan',
+                                              'dateOfEntryIntoJapan',
                                           firstDate: DateTime(1900),
                                           lastDate: DateTime.now(),
                                           builder: (BuildContext context,
@@ -337,7 +337,7 @@ class TravelCompanion extends StatelessWidget {
                                               Widget? child) {
                                             return ReactiveTextField<DateTime>(
                                               formControlName:
-                                                  'date_of_entry_into_japan',
+                                                  'dateOfEntryIntoJapan',
                                               valueAccessor:
                                                   DateTimeValueAccessor(
                                                 dateTimeFormat:
@@ -375,7 +375,7 @@ class TravelCompanion extends StatelessWidget {
                                       Expanded(
                                         child: ReactiveDatePicker<DateTime>(
                                           formControlName:
-                                              'departure_date_from_japan',
+                                              'departureDateFromJapan',
                                           firstDate: DateTime(1900),
                                           lastDate: DateTime.now(),
                                           builder: (BuildContext context,
@@ -385,7 +385,7 @@ class TravelCompanion extends StatelessWidget {
                                               Widget? child) {
                                             return ReactiveTextField<DateTime>(
                                               formControlName:
-                                                  'departure_date_from_japan',
+                                                  'departureDateFromJapan',
                                               valueAccessor:
                                                   DateTimeValueAccessor(
                                                 dateTimeFormat:
@@ -645,7 +645,7 @@ class TravelCompanion extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                'visa_validity_period_expiration_date':
+                                'visaValidityPeriodExpirationDate':
                                     FormControl<DateTime>(
                                   validators: [
                                     Validators.pattern(
@@ -653,7 +653,7 @@ class TravelCompanion extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                'date_of_entry_into_japan':
+                                'dateOfEntryIntoJapan':
                                     FormControl<DateTime>(
                                   validators: [
                                     Validators.pattern(
@@ -661,7 +661,7 @@ class TravelCompanion extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                'departure_date_from_japan':
+                                'departureDateFromJapan':
                                     FormControl<DateTime>(
                                   validators: [
                                     Validators.pattern(
@@ -1083,7 +1083,7 @@ class TravelCompanion extends StatelessWidget {
                                         Expanded(
                                           child: ReactiveDatePicker<DateTime>(
                                             formControlName:
-                                                'plane_ticket_for_your_visit_to_japan',
+                                                'planeTicketForYourVisitToJapan',
                                             firstDate: DateTime(1900),
                                             lastDate: DateTime.now(),
                                             builder: (BuildContext context,
@@ -1094,7 +1094,7 @@ class TravelCompanion extends StatelessWidget {
                                               return ReactiveTextField<
                                                   DateTime>(
                                                 formControlName:
-                                                    'plane_ticket_for_your_visit_to_japan',
+                                                    'planeTicketForYourVisitToJapan',
                                                 valueAccessor:
                                                     DateTimeValueAccessor(
                                                   dateTimeFormat:
@@ -1165,7 +1165,7 @@ class TravelCompanion extends StatelessWidget {
                                 onTap: () {
                                   formArray.add(FormGroup(
                                     {
-                                      'plane_ticket_for_your_visit_to_japan':
+                                      'planeTicketForYourVisitToJapan':
                                           FormControl<DateTime>(
                                         validators: [
                                           Validators.pattern(
@@ -1224,7 +1224,7 @@ class TravelCompanion extends StatelessWidget {
                                         Expanded(
                                           child: ReactiveDatePicker<DateTime>(
                                             formControlName:
-                                                'return_flight_ticket',
+                                                'returnFlightTicket',
                                             firstDate: DateTime(1900),
                                             lastDate: DateTime.now(),
                                             builder: (BuildContext context,
@@ -1235,7 +1235,7 @@ class TravelCompanion extends StatelessWidget {
                                               return ReactiveTextField<
                                                   DateTime>(
                                                 formControlName:
-                                                    'return_flight_ticket',
+                                                    'returnFlightTicket',
                                                 valueAccessor:
                                                     DateTimeValueAccessor(
                                                   dateTimeFormat:
@@ -1306,7 +1306,7 @@ class TravelCompanion extends StatelessWidget {
                                 onTap: () {
                                   formArray.add(FormGroup(
                                     {
-                                      'return_flight_ticket':
+                                      'returnFlightTicket':
                                           FormControl<DateTime>(
                                         validators: [
                                           Validators.pattern(
@@ -1365,7 +1365,7 @@ class TravelCompanion extends StatelessWidget {
                                         Expanded(
                                           child: ReactiveDatePicker<DateTime>(
                                             formControlName:
-                                                'boarding_pass_for_return_flight',
+                                                'boardingPassForReturnFlight',
                                             firstDate: DateTime(1900),
                                             lastDate: DateTime.now(),
                                             builder: (BuildContext context,
@@ -1376,7 +1376,7 @@ class TravelCompanion extends StatelessWidget {
                                               return ReactiveTextField<
                                                   DateTime>(
                                                 formControlName:
-                                                    'boarding_pass_for_return_flight',
+                                                    'boardingPassForReturnFlight',
                                                 valueAccessor:
                                                     DateTimeValueAccessor(
                                                   dateTimeFormat:
@@ -1447,7 +1447,7 @@ class TravelCompanion extends StatelessWidget {
                                 onTap: () {
                                   formArray.add(FormGroup(
                                     {
-                                      'boarding_pass_for_return_flight':
+                                      'boardingPassForReturnFlight':
                                           FormControl<DateTime>(
                                         validators: [
                                           Validators.pattern(
@@ -1496,14 +1496,14 @@ class TravelCompanion extends StatelessWidget {
                           ),
                           Expanded(
                             child: ReactiveDatePicker<DateTime>(
-                              formControlName: 'certificate_of_eligibility',
+                              formControlName: 'certificateOfEligibility',
                               firstDate: DateTime(1900),
                               lastDate: DateTime.now(),
                               builder: (BuildContext context,
                                   ReactiveDatePickerDelegate<dynamic> picker,
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
-                                  formControlName: 'certificate_of_eligibility',
+                                  formControlName: 'certificateOfEligibility',
                                   valueAccessor: DateTimeValueAccessor(
                                     dateTimeFormat: DateFormat('yyyy/MM/dd'),
                                   ),

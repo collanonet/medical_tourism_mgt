@@ -84,16 +84,19 @@ class DocumentRequired extends StatelessWidget {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const Expanded(
-                                      flex: 3,
-                                      child: Text('File Name'),
+                                    Expanded(
+                                      flex: 2,
+                                      child: SizedBox(
+                                        width: context
+                                            .appTheme.spacing.marginMedium,
+                                      ),
                                     ),
                                     SizedBox(
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    fileUpload(context, currentForm),
-                                   
+                                    fileUpload(context, currentForm,
+                                        'passportFileSelect'),
                                   ],
                                 ),
                                 SizedBox(
@@ -195,7 +198,7 @@ class DocumentRequired extends StatelessWidget {
                                                   ListTileControlAffinity
                                                       .leading,
                                               contentPadding: EdgeInsets.zero,
-                                              formControlName: 'byothers',
+                                              formControlName: 'byOthers',
                                               title: const Text('その他'),
                                             ),
                                           ),
@@ -249,6 +252,7 @@ class DocumentRequired extends StatelessWidget {
                         onTap: () => formArray.add(
                           FormGroup(
                             {
+                              'date': FormControl<DateTime>(),
                               'passportDate': FormControl<DateTime>(
                                 validators: [
                                   Validators.pattern(
@@ -256,6 +260,8 @@ class DocumentRequired extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              'passportFileName': FormControl<FileSelect>(),
+                              'passportFileSelect': FormControl<FileSelect>(),
                               'letterOfGuaranteeDate': FormControl<DateTime>(
                                 validators: [
                                   Validators.pattern(
@@ -263,10 +269,12 @@ class DocumentRequired extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              'letterOfGuaranteeFileSelect':
+                                  FormControl<FileSelect>(),
                               'sendBy': FormControl<String>(value: ''),
                               'byEMS': FormControl<bool>(value: false),
                               'byFedex': FormControl<bool>(value: false),
-                              'byothers': FormControl<bool>(value: false),
+                              'byOthers': FormControl<bool>(value: false),
                             },
                           ),
                         ),
@@ -362,9 +370,11 @@ class DocumentRequired extends StatelessWidget {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                ElevatedButton(
-                                    onPressed: () {},
-                                    child: const Text('ファイル選択'))
+                                fileUpload(context, currentForm,
+                                    'treatmentScheduleFileSelect'),
+                                // ElevatedButton(
+                                //     onPressed: () {},
+                                //     child: const Text('ファイル選択'))
                               ],
                             ),
                           ))
@@ -392,7 +402,14 @@ class DocumentRequired extends StatelessWidget {
                                   ValidatorRegExp.date,
                                 ),
                               ],
-                            )
+                            ),
+                            'statementOfReasonsDate': FormControl<DateTime>(
+                              validators: [
+                                Validators.pattern(
+                                  ValidatorRegExp.date,
+                                ),
+                              ],
+                            ),
                           },
                         )),
                         child: Row(
@@ -477,7 +494,10 @@ class DocumentRequired extends StatelessWidget {
                   SizedBox(
                     width: context.appTheme.spacing.marginMedium,
                   ),
-                  ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                  fileUpload(
+                      context,
+                      formGroup.control('requiredInJapan') as FormGroup,
+                      'statementOfReasonsFileSelect'),
                 ],
               ),
               SizedBox(
@@ -536,7 +556,8 @@ class DocumentRequired extends StatelessWidget {
                   SizedBox(
                     width: context.appTheme.spacing.marginMedium,
                   ),
-                  ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                  fileUpload(
+                      context, formGroup.control('requiredInJapan') as FormGroup, 'travelCompanionListFileSelect'),
                 ],
               ),
               SizedBox(
@@ -630,7 +651,7 @@ class DocumentRequired extends StatelessWidget {
                                                 child: ReactiveDatePicker<
                                                     DateTime>(
                                                   formControlName:
-                                                      'visa_validity_period_expiration_date',
+                                                      'visaValidityPeriodExpirationDate',
                                                   firstDate: DateTime(1900),
                                                   lastDate: DateTime.now(),
                                                   builder: (BuildContext
@@ -642,7 +663,7 @@ class DocumentRequired extends StatelessWidget {
                                                     return ReactiveTextField<
                                                         DateTime>(
                                                       formControlName:
-                                                          'visa_validity_period_expiration_date',
+                                                          'visaValidityPeriodExpirationDate',
                                                       valueAccessor:
                                                           DateTimeValueAccessor(
                                                         dateTimeFormat:
@@ -699,7 +720,7 @@ class DocumentRequired extends StatelessWidget {
                                                 child: ReactiveDatePicker<
                                                     DateTime>(
                                                   formControlName:
-                                                      'date_of_entry_into_japan',
+                                                      'dateOfEntryIntoJapan',
                                                   firstDate: DateTime(1900),
                                                   lastDate: DateTime.now(),
                                                   builder: (BuildContext
@@ -711,7 +732,7 @@ class DocumentRequired extends StatelessWidget {
                                                     return ReactiveTextField<
                                                         DateTime>(
                                                       formControlName:
-                                                          'date_of_entry_into_japan',
+                                                          'dateOfEntryIntoJapan',
                                                       valueAccessor:
                                                           DateTimeValueAccessor(
                                                         dateTimeFormat:
@@ -754,7 +775,7 @@ class DocumentRequired extends StatelessWidget {
                                                 child: ReactiveDatePicker<
                                                     DateTime>(
                                                   formControlName:
-                                                      'departure_date_from_japan',
+                                                      'departureDateFromJapan',
                                                   firstDate: DateTime(1900),
                                                   lastDate: DateTime.now(),
                                                   builder: (BuildContext
@@ -766,7 +787,7 @@ class DocumentRequired extends StatelessWidget {
                                                     return ReactiveTextField<
                                                         DateTime>(
                                                       formControlName:
-                                                          'departure_date_from_japan',
+                                                          'departureDateFromJapan',
                                                       valueAccessor:
                                                           DateTimeValueAccessor(
                                                         dateTimeFormat:
@@ -1088,7 +1109,7 @@ class DocumentRequired extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  'visa_validity_period_expiration_date':
+                                  'visaValidityPeriodExpirationDate':
                                       FormControl<DateTime>(
                                     validators: [
                                       Validators.pattern(
@@ -1096,15 +1117,14 @@ class DocumentRequired extends StatelessWidget {
                                       ),
                                     ],
                                   ),
-                                  'date_of_entry_into_japan':
-                                      FormControl<DateTime>(
+                                  'dateOfEntryIntoJapan': FormControl<DateTime>(
                                     validators: [
                                       Validators.pattern(
                                         ValidatorRegExp.date,
                                       ),
                                     ],
                                   ),
-                                  'departure_date_from_japan':
+                                  'departureDateFromJapan':
                                       FormControl<DateTime>(
                                     validators: [
                                       Validators.pattern(
@@ -1175,7 +1195,8 @@ class DocumentRequired extends StatelessWidget {
     );
   }
 
-  Widget fileUpload(BuildContext context, FormGroup currentForm) {
+  Widget fileUpload(
+      BuildContext context, FormGroup currentForm, String fileName) {
     return ColumnSeparated(
       mainAxisAlignment: MainAxisAlignment.start,
       separatorBuilder: (context, index) => SizedBox(
@@ -1197,7 +1218,7 @@ class DocumentRequired extends StatelessWidget {
               ),
               children: [
                 ReactiveValueListenableBuilder<FileSelect>(
-                  formControlName: 'fileName',
+                  formControlName: fileName,
                   builder: (context, control, _) {
                     return InkWell(
                       onTap: () {
@@ -1218,7 +1239,7 @@ class DocumentRequired extends StatelessWidget {
               onTap: () {
                 filePicker().then((value) {
                   if (value != null) {
-                    currentForm.control('fileName').value = value;
+                    currentForm.control(fileName).value = value;
                   }
                 });
               },
