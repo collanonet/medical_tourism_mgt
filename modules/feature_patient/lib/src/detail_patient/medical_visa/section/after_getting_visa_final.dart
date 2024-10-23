@@ -251,7 +251,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                 Expanded(
                                   child: ReactiveDatePicker<DateTime>(
                                     formControlName:
-                                        'plane_ticket_for_your_visit_to_japan',
+                                        'planeTicketForYourVisitToJapan',
                                     firstDate: DateTime(1900),
                                     lastDate: DateTime.now(),
                                     builder: (BuildContext context,
@@ -260,7 +260,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                         Widget? child) {
                                       return ReactiveTextField<DateTime>(
                                         formControlName:
-                                            'plane_ticket_for_your_visit_to_japan',
+                                            'planeTicketForYourVisitToJapan',
                                         valueAccessor: DateTimeValueAccessor(
                                           dateTimeFormat:
                                               DateFormat('yyyy/MM/dd'),
@@ -325,7 +325,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                         onTap: () {
                           formArray.add(FormGroup(
                             {
-                              'plane_ticket_for_your_visit_to_japan':
+                              'planeTicketForYourVisitToJapan':
                                   FormControl<DateTime>(
                                 validators: [
                                   Validators.pattern(
@@ -380,7 +380,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                 ),
                                 Expanded(
                                   child: ReactiveDatePicker<DateTime>(
-                                    formControlName: 'return_flight_ticket',
+                                    formControlName: 'returnFlightTicket',
                                     firstDate: DateTime(1900),
                                     lastDate: DateTime.now(),
                                     builder: (BuildContext context,
@@ -388,7 +388,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                             picker,
                                         Widget? child) {
                                       return ReactiveTextField<DateTime>(
-                                        formControlName: 'return_flight_ticket',
+                                        formControlName: 'returnFlightTicket',
                                         valueAccessor: DateTimeValueAccessor(
                                           dateTimeFormat:
                                               DateFormat('yyyy/MM/dd'),
@@ -453,7 +453,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                         onTap: () {
                           formArray.add(FormGroup(
                             {
-                              'return_flight_ticket': FormControl<DateTime>(
+                              'returnFlightTicket': FormControl<DateTime>(
                                 validators: [
                                   Validators.pattern(
                                     ValidatorRegExp.date,
@@ -508,7 +508,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                 Expanded(
                                   child: ReactiveDatePicker<DateTime>(
                                     formControlName:
-                                        'boarding_pass_for_return_flight',
+                                        'boardingPassForReturnFlight',
                                     firstDate: DateTime(1900),
                                     lastDate: DateTime.now(),
                                     builder: (BuildContext context,
@@ -517,7 +517,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                         Widget? child) {
                                       return ReactiveTextField<DateTime>(
                                         formControlName:
-                                            'boarding_pass_for_return_flight',
+                                            'boardingPassForReturnFlight',
                                         valueAccessor: DateTimeValueAccessor(
                                           dateTimeFormat:
                                               DateFormat('yyyy/MM/dd'),
@@ -582,7 +582,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                         onTap: () {
                           formArray.add(FormGroup(
                             {
-                              'boarding_pass_for_return_flight':
+                              'boardingPassForReturnFlight':
                                   FormControl<DateTime>(
                                 validators: [
                                   Validators.pattern(
@@ -630,14 +630,14 @@ class AfterGettingVisaFinal extends StatelessWidget {
                   ),
                   Expanded(
                     child: ReactiveDatePicker<DateTime>(
-                      formControlName: 'certificate_of_eligibility',
+                      formControlName: 'certificateOfEligibility',
                       firstDate: DateTime(1900),
                       lastDate: DateTime.now(),
                       builder: (BuildContext context,
                           ReactiveDatePickerDelegate<dynamic> picker,
                           Widget? child) {
                         return ReactiveTextField<DateTime>(
-                          formControlName: 'certificate_of_eligibility',
+                          formControlName: 'certificateOfEligibility',
                           valueAccessor: DateTimeValueAccessor(
                             dateTimeFormat: DateFormat('yyyy/MM/dd'),
                           ),
