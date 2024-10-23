@@ -246,7 +246,7 @@ class _StatementScreenListState extends State<StatementScreenList> {
                         Expanded(
                             flex: 2,
                             child: Text(
-                              data?.subject ?? '',
+                              '--',
                               style: context.textTheme.bodySmall,
                             )),
                         Expanded(

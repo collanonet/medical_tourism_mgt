@@ -4,47 +4,32 @@ import 'package:reactive_forms/reactive_forms.dart';
 FormGroup statementForm() {
   return FormGroup({
     '_id': FormControl<String>(),
-    'logoFile' : FormControl<FileSelect>(),
-    'stampFile' : FormControl<FileSelect>(),
+    'logoFile': FormControl<FileSelect>(),
+    'stampFile': FormControl<FileSelect>(),
     'invoiceNumber': FormControl<String>(),
     'invoiceDate': FormControl<DateTime>(
       value: DateTime.now(),
     ),
-    'contact': FormControl<String>(),
-    'registrationNumber': FormControl<String>(),
-    'subject': FormControl<String>(),
-    'amountBilled': FormControl<double>(
-    ),
-    'paymentDeadline': FormControl<DateTime>(),
-    'bankTransferInformation': FormControl<String>(),
-    'remarks': FormControl<String>(),
+    'companyName': FormControl<String>(),
+    'address': FormControl<String>(),
+    'telNumber': FormControl<String>(),
+    'fexNumber': FormControl<String>(),
+    'inCharge': FormControl<String>(),
     'medicalRecord': FormControl<String>(
-      validators: [Validators.required],
+      validators: [
+        Validators.required,
+      ],
     ),
     'user': FormControl<String>(
-      validators: [Validators.required],
+      validators: [
+        Validators.required,
+      ],
     ),
     'hospitalRecord': FormControl<String>(),
-    'totalPayment': FormArray([
-      FormGroup({
-        '_id': FormControl<String>(),
-        'taxRate': FormControl<double>(
-          validators: [
-            Validators.number,
-          ],
-        ),
-        'amountExcludingTaxInYen': FormControl<double>(
-        ),
-        'consumptionTaxAmountInYen': FormControl<double>(
-        ),
-      })
-    ]),
     'item': FormArray([
       FormGroup({
         '_id': FormControl<String>(),
-        'transactionDate': FormControl<DateTime>(
-          value: DateTime.now(),
-        ),
+        'itemCode': FormControl<String>(),
         'details': FormControl<String>(),
         'quantity': FormControl<double>(
           validators: [
@@ -52,18 +37,16 @@ FormGroup statementForm() {
           ],
         ),
         'unit': FormControl<String>(),
-        'unitPrice': FormControl<double>(
-
-        ),
-        'amount': FormControl<double>(
-
-        ),
-        'taxRate': FormControl<double>(
-          validators: [
-            Validators.number,
-          ],
-        ),
+        'unitPrice': FormControl<double>(),
       })
     ]),
+    'notes': FormArray([
+      FormGroup({
+        '_id': FormControl<String>(),
+        'note': FormControl<String>(),
+      })
+    ]),
+    'taxRate': FormControl<String>(),
+    'remarks': FormControl<String>(),
   });
 }

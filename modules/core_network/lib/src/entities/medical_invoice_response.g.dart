@@ -29,20 +29,15 @@ abstract class _$MedicalInvoiceResponseCWProxy {
 
   MedicalInvoiceResponse invoiceDate(DateTime? invoiceDate);
 
-  MedicalInvoiceResponse contact(String? contact);
+  MedicalInvoiceResponse companyName(String? companyName);
 
-  MedicalInvoiceResponse registrationNumber(String? registrationNumber);
+  MedicalInvoiceResponse address(String? address);
 
-  MedicalInvoiceResponse subject(String? subject);
+  MedicalInvoiceResponse telNumber(String? telNumber);
 
-  MedicalInvoiceResponse amountBilled(double? amountBilled);
+  MedicalInvoiceResponse fexNumber(String? fexNumber);
 
-  MedicalInvoiceResponse paymentDeadline(DateTime? paymentDeadline);
-
-  MedicalInvoiceResponse bankTransferInformation(
-      String? bankTransferInformation);
-
-  MedicalInvoiceResponse remarks(String? remarks);
+  MedicalInvoiceResponse inCharge(String? inCharge);
 
   MedicalInvoiceResponse medicalRecord(MedicalRecord medicalRecord);
 
@@ -53,9 +48,13 @@ abstract class _$MedicalInvoiceResponseCWProxy {
   MedicalInvoiceResponse hospitalRecord(
       BasicInformationHospitalResponse? hospitalRecord);
 
-  MedicalInvoiceResponse totalPayment(List<TotalPaymentResponse>? totalPayment);
-
   MedicalInvoiceResponse item(List<ItemResponse>? item);
+
+  MedicalInvoiceResponse notes(List<NoteInvoiceResponse>? notes);
+
+  MedicalInvoiceResponse taxRate(String? taxRate);
+
+  MedicalInvoiceResponse remarks(String? remarks);
 
   MedicalInvoiceResponse createdAt(DateTime createdAt);
 
@@ -79,19 +78,19 @@ abstract class _$MedicalInvoiceResponseCWProxy {
     String? fileNamePdfZHTW,
     String? invoiceNumber,
     DateTime? invoiceDate,
-    String? contact,
-    String? registrationNumber,
-    String? subject,
-    double? amountBilled,
-    DateTime? paymentDeadline,
-    String? bankTransferInformation,
-    String? remarks,
+    String? companyName,
+    String? address,
+    String? telNumber,
+    String? fexNumber,
+    String? inCharge,
     MedicalRecord? medicalRecord,
     User? user,
     Patient? patient,
     BasicInformationHospitalResponse? hospitalRecord,
-    List<TotalPaymentResponse>? totalPayment,
     List<ItemResponse>? item,
+    List<NoteInvoiceResponse>? notes,
+    String? taxRate,
+    String? remarks,
     DateTime? createdAt,
     DateTime? updatedAt,
   });
@@ -146,30 +145,22 @@ class _$MedicalInvoiceResponseCWProxyImpl
       this(invoiceDate: invoiceDate);
 
   @override
-  MedicalInvoiceResponse contact(String? contact) => this(contact: contact);
+  MedicalInvoiceResponse companyName(String? companyName) =>
+      this(companyName: companyName);
 
   @override
-  MedicalInvoiceResponse registrationNumber(String? registrationNumber) =>
-      this(registrationNumber: registrationNumber);
+  MedicalInvoiceResponse address(String? address) => this(address: address);
 
   @override
-  MedicalInvoiceResponse subject(String? subject) => this(subject: subject);
+  MedicalInvoiceResponse telNumber(String? telNumber) =>
+      this(telNumber: telNumber);
 
   @override
-  MedicalInvoiceResponse amountBilled(double? amountBilled) =>
-      this(amountBilled: amountBilled);
+  MedicalInvoiceResponse fexNumber(String? fexNumber) =>
+      this(fexNumber: fexNumber);
 
   @override
-  MedicalInvoiceResponse paymentDeadline(DateTime? paymentDeadline) =>
-      this(paymentDeadline: paymentDeadline);
-
-  @override
-  MedicalInvoiceResponse bankTransferInformation(
-          String? bankTransferInformation) =>
-      this(bankTransferInformation: bankTransferInformation);
-
-  @override
-  MedicalInvoiceResponse remarks(String? remarks) => this(remarks: remarks);
+  MedicalInvoiceResponse inCharge(String? inCharge) => this(inCharge: inCharge);
 
   @override
   MedicalInvoiceResponse medicalRecord(MedicalRecord medicalRecord) =>
@@ -187,12 +178,17 @@ class _$MedicalInvoiceResponseCWProxyImpl
       this(hospitalRecord: hospitalRecord);
 
   @override
-  MedicalInvoiceResponse totalPayment(
-          List<TotalPaymentResponse>? totalPayment) =>
-      this(totalPayment: totalPayment);
+  MedicalInvoiceResponse item(List<ItemResponse>? item) => this(item: item);
 
   @override
-  MedicalInvoiceResponse item(List<ItemResponse>? item) => this(item: item);
+  MedicalInvoiceResponse notes(List<NoteInvoiceResponse>? notes) =>
+      this(notes: notes);
+
+  @override
+  MedicalInvoiceResponse taxRate(String? taxRate) => this(taxRate: taxRate);
+
+  @override
+  MedicalInvoiceResponse remarks(String? remarks) => this(remarks: remarks);
 
   @override
   MedicalInvoiceResponse createdAt(DateTime createdAt) =>
@@ -222,19 +218,19 @@ class _$MedicalInvoiceResponseCWProxyImpl
     Object? fileNamePdfZHTW = const $CopyWithPlaceholder(),
     Object? invoiceNumber = const $CopyWithPlaceholder(),
     Object? invoiceDate = const $CopyWithPlaceholder(),
-    Object? contact = const $CopyWithPlaceholder(),
-    Object? registrationNumber = const $CopyWithPlaceholder(),
-    Object? subject = const $CopyWithPlaceholder(),
-    Object? amountBilled = const $CopyWithPlaceholder(),
-    Object? paymentDeadline = const $CopyWithPlaceholder(),
-    Object? bankTransferInformation = const $CopyWithPlaceholder(),
-    Object? remarks = const $CopyWithPlaceholder(),
+    Object? companyName = const $CopyWithPlaceholder(),
+    Object? address = const $CopyWithPlaceholder(),
+    Object? telNumber = const $CopyWithPlaceholder(),
+    Object? fexNumber = const $CopyWithPlaceholder(),
+    Object? inCharge = const $CopyWithPlaceholder(),
     Object? medicalRecord = const $CopyWithPlaceholder(),
     Object? user = const $CopyWithPlaceholder(),
     Object? patient = const $CopyWithPlaceholder(),
     Object? hospitalRecord = const $CopyWithPlaceholder(),
-    Object? totalPayment = const $CopyWithPlaceholder(),
     Object? item = const $CopyWithPlaceholder(),
+    Object? notes = const $CopyWithPlaceholder(),
+    Object? taxRate = const $CopyWithPlaceholder(),
+    Object? remarks = const $CopyWithPlaceholder(),
     Object? createdAt = const $CopyWithPlaceholder(),
     Object? updatedAt = const $CopyWithPlaceholder(),
   }) {
@@ -283,35 +279,26 @@ class _$MedicalInvoiceResponseCWProxyImpl
           ? _value.invoiceDate
           // ignore: cast_nullable_to_non_nullable
           : invoiceDate as DateTime?,
-      contact: contact == const $CopyWithPlaceholder()
-          ? _value.contact
+      companyName: companyName == const $CopyWithPlaceholder()
+          ? _value.companyName
           // ignore: cast_nullable_to_non_nullable
-          : contact as String?,
-      registrationNumber: registrationNumber == const $CopyWithPlaceholder()
-          ? _value.registrationNumber
+          : companyName as String?,
+      address: address == const $CopyWithPlaceholder()
+          ? _value.address
           // ignore: cast_nullable_to_non_nullable
-          : registrationNumber as String?,
-      subject: subject == const $CopyWithPlaceholder()
-          ? _value.subject
+          : address as String?,
+      telNumber: telNumber == const $CopyWithPlaceholder()
+          ? _value.telNumber
           // ignore: cast_nullable_to_non_nullable
-          : subject as String?,
-      amountBilled: amountBilled == const $CopyWithPlaceholder()
-          ? _value.amountBilled
+          : telNumber as String?,
+      fexNumber: fexNumber == const $CopyWithPlaceholder()
+          ? _value.fexNumber
           // ignore: cast_nullable_to_non_nullable
-          : amountBilled as double?,
-      paymentDeadline: paymentDeadline == const $CopyWithPlaceholder()
-          ? _value.paymentDeadline
+          : fexNumber as String?,
+      inCharge: inCharge == const $CopyWithPlaceholder()
+          ? _value.inCharge
           // ignore: cast_nullable_to_non_nullable
-          : paymentDeadline as DateTime?,
-      bankTransferInformation:
-          bankTransferInformation == const $CopyWithPlaceholder()
-              ? _value.bankTransferInformation
-              // ignore: cast_nullable_to_non_nullable
-              : bankTransferInformation as String?,
-      remarks: remarks == const $CopyWithPlaceholder()
-          ? _value.remarks
-          // ignore: cast_nullable_to_non_nullable
-          : remarks as String?,
+          : inCharge as String?,
       medicalRecord:
           medicalRecord == const $CopyWithPlaceholder() || medicalRecord == null
               ? _value.medicalRecord
@@ -329,14 +316,22 @@ class _$MedicalInvoiceResponseCWProxyImpl
           ? _value.hospitalRecord
           // ignore: cast_nullable_to_non_nullable
           : hospitalRecord as BasicInformationHospitalResponse?,
-      totalPayment: totalPayment == const $CopyWithPlaceholder()
-          ? _value.totalPayment
-          // ignore: cast_nullable_to_non_nullable
-          : totalPayment as List<TotalPaymentResponse>?,
       item: item == const $CopyWithPlaceholder()
           ? _value.item
           // ignore: cast_nullable_to_non_nullable
           : item as List<ItemResponse>?,
+      notes: notes == const $CopyWithPlaceholder()
+          ? _value.notes
+          // ignore: cast_nullable_to_non_nullable
+          : notes as List<NoteInvoiceResponse>?,
+      taxRate: taxRate == const $CopyWithPlaceholder()
+          ? _value.taxRate
+          // ignore: cast_nullable_to_non_nullable
+          : taxRate as String?,
+      remarks: remarks == const $CopyWithPlaceholder()
+          ? _value.remarks
+          // ignore: cast_nullable_to_non_nullable
+          : remarks as String?,
       createdAt: createdAt == const $CopyWithPlaceholder() || createdAt == null
           ? _value.createdAt
           // ignore: cast_nullable_to_non_nullable
@@ -376,15 +371,11 @@ MedicalInvoiceResponse _$MedicalInvoiceResponseFromJson(
       invoiceDate: json['invoiceDate'] == null
           ? null
           : DateTime.parse(json['invoiceDate'] as String),
-      contact: json['contact'] as String?,
-      registrationNumber: json['registrationNumber'] as String?,
-      subject: json['subject'] as String?,
-      amountBilled: (json['amountBilled'] as num?)?.toDouble(),
-      paymentDeadline: json['paymentDeadline'] == null
-          ? null
-          : DateTime.parse(json['paymentDeadline'] as String),
-      bankTransferInformation: json['bankTransferInformation'] as String?,
-      remarks: json['remarks'] as String?,
+      companyName: json['companyName'] as String?,
+      address: json['address'] as String?,
+      telNumber: json['telNumber'] as String?,
+      fexNumber: json['fexNumber'] as String?,
+      inCharge: json['inCharge'] as String?,
       medicalRecord:
           MedicalRecord.fromJson(json['medicalRecord'] as Map<String, dynamic>),
       user: json['user'] == null
@@ -397,12 +388,14 @@ MedicalInvoiceResponse _$MedicalInvoiceResponseFromJson(
           ? null
           : BasicInformationHospitalResponse.fromJson(
               json['hospitalRecord'] as Map<String, dynamic>),
-      totalPayment: (json['totalPayment'] as List<dynamic>?)
-          ?.map((e) => TotalPaymentResponse.fromJson(e as Map<String, dynamic>))
-          .toList(),
       item: (json['item'] as List<dynamic>?)
           ?.map((e) => ItemResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
+      notes: (json['notes'] as List<dynamic>?)
+          ?.map((e) => NoteInvoiceResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
+      taxRate: json['taxRate'] as String?,
+      remarks: json['remarks'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
@@ -421,64 +414,51 @@ Map<String, dynamic> _$MedicalInvoiceResponseToJson(
       'fileNamePdfZHTW': instance.fileNamePdfZHTW,
       'invoiceNumber': instance.invoiceNumber,
       'invoiceDate': instance.invoiceDate?.toIso8601String(),
-      'contact': instance.contact,
-      'registrationNumber': instance.registrationNumber,
-      'subject': instance.subject,
-      'amountBilled': instance.amountBilled,
-      'paymentDeadline': instance.paymentDeadline?.toIso8601String(),
-      'bankTransferInformation': instance.bankTransferInformation,
-      'remarks': instance.remarks,
+      'companyName': instance.companyName,
+      'address': instance.address,
+      'telNumber': instance.telNumber,
+      'fexNumber': instance.fexNumber,
+      'inCharge': instance.inCharge,
       'medicalRecord': instance.medicalRecord,
       'user': instance.user,
       'patient': instance.patient,
       'hospitalRecord': instance.hospitalRecord,
-      'totalPayment': instance.totalPayment,
       'item': instance.item,
+      'notes': instance.notes,
+      'taxRate': instance.taxRate,
+      'remarks': instance.remarks,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
     };
 
-TotalPaymentResponse _$TotalPaymentResponseFromJson(
-        Map<String, dynamic> json) =>
-    TotalPaymentResponse(
-      id: json['_id'] as String,
-      taxRate: (json['taxRate'] as num?)?.toDouble(),
-      amountExcludingTaxInYen:
-          (json['amountExcludingTaxInYen'] as num?)?.toDouble(),
-      consumptionTaxAmountInYen:
-          (json['consumptionTaxAmountInYen'] as num?)?.toDouble(),
-    );
-
-Map<String, dynamic> _$TotalPaymentResponseToJson(
-        TotalPaymentResponse instance) =>
-    <String, dynamic>{
-      '_id': instance.id,
-      'taxRate': instance.taxRate,
-      'amountExcludingTaxInYen': instance.amountExcludingTaxInYen,
-      'consumptionTaxAmountInYen': instance.consumptionTaxAmountInYen,
-    };
-
 ItemResponse _$ItemResponseFromJson(Map<String, dynamic> json) => ItemResponse(
       id: json['_id'] as String,
-      transactionDate: json['transactionDate'] == null
-          ? null
-          : DateTime.parse(json['transactionDate'] as String),
+      itemCode: json['itemCode'] as String?,
       details: json['details'] as String?,
       quantity: (json['quantity'] as num?)?.toDouble(),
       unit: json['unit'] as String?,
       unitPrice: (json['unitPrice'] as num?)?.toDouble(),
-      amount: (json['amount'] as num?)?.toDouble(),
-      taxRate: (json['taxRate'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$ItemResponseToJson(ItemResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
-      'transactionDate': instance.transactionDate?.toIso8601String(),
+      'itemCode': instance.itemCode,
       'details': instance.details,
       'quantity': instance.quantity,
       'unit': instance.unit,
       'unitPrice': instance.unitPrice,
-      'amount': instance.amount,
-      'taxRate': instance.taxRate,
+    };
+
+NoteInvoiceResponse _$NoteInvoiceResponseFromJson(Map<String, dynamic> json) =>
+    NoteInvoiceResponse(
+      id: json['_id'] as String,
+      note: json['note'] as String?,
+    );
+
+Map<String, dynamic> _$NoteInvoiceResponseToJson(
+        NoteInvoiceResponse instance) =>
+    <String, dynamic>{
+      '_id': instance.id,
+      'note': instance.note,
     };

@@ -10,14 +10,11 @@ FormGroup estimateForm() {
     'invoiceDate': FormControl<DateTime>(
       value: DateTime.now(),
     ),
-    'contact': FormControl<String>(),
-    'registrationNumber': FormControl<String>(),
-    'subject': FormControl<String>(),
-    'amountBilled': FormControl<double>(),
-    'paymentDeadline': FormControl<DateTime>(
-      value: DateTime.now(),
-    ),
-    'remarks': FormControl<String>(),
+    'companyName': FormControl<String>(),
+    'address': FormControl<String>(),
+    'telNumber': FormControl<String>(),
+    'fexNumber': FormControl<String>(),
+    'inCharge': FormControl<String>(),
     'medicalRecord': FormControl<String>(
       validators: [
         Validators.required,
@@ -29,24 +26,10 @@ FormGroup estimateForm() {
       ],
     ),
     'hospitalRecord': FormControl<String>(),
-    'totalPayment': FormArray([
-      FormGroup({
-        '_id': FormControl<String>(),
-        'taxRate': FormControl<double>(
-          validators: [
-            Validators.number,
-          ],
-        ),
-        'amountExcludingTaxInYen': FormControl<double>(),
-        'consumptionTaxAmountInYen': FormControl<double>(),
-      })
-    ]),
     'item': FormArray([
       FormGroup({
         '_id': FormControl<String>(),
-        'transactionDate': FormControl<DateTime>(
-          value: DateTime.now(),
-        ),
+        'itemCode': FormControl<String>(),
         'details': FormControl<String>(),
         'quantity': FormControl<double>(
           validators: [
@@ -55,13 +38,15 @@ FormGroup estimateForm() {
         ),
         'unit': FormControl<String>(),
         'unitPrice': FormControl<double>(),
-        'amount': FormControl<double>(),
-        'taxRate': FormControl<double>(
-          validators: [
-            Validators.number,
-          ],
-        ),
       })
     ]),
+    'notes': FormArray([
+      FormGroup({
+        '_id': FormControl<String>(),
+        'note': FormControl<String>(),
+      })
+    ]),
+    'taxRate': FormControl<String>(),
+    'remarks': FormControl<String>(),
   });
 }
