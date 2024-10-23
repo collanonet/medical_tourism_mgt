@@ -69,49 +69,43 @@ class StatementModel {
     formGroup.control('telNumber').value = invoice.telNumber;
     formGroup.control('fexNumber').value = invoice.fexNumber;
     formGroup.control('inCharge').value = invoice.inCharge;
-    formGroup.control('totalAmount').value = invoice.totalAmount;
 
-    formGroup.control('medicalRecord').value = invoice.medicalRecord.id;
-    formGroup.control('user').value = invoice.user?.id;
-    formGroup.control('hospitalRecord').value = invoice.hospitalRecord?.id;
+    formGroup.control('medicalRecord').value = invoice.medicalRecord;
+    formGroup.control('user').value = invoice.user;
+    formGroup.control('hospitalRecord').value = invoice.hospitalRecord;
 
     formGroup.control('remarks').value = invoice.remarks;
-    formGroup.control('taxRate').value = invoice.taxRate;
-    formGroup.control('taxRateOption').value = invoice.taxRateOption;
 
     if (invoice.notes != null && invoice.notes!.isNotEmpty) {
       FormArray notes = formGroup.control('notes') as FormArray;
+      notes.clear();
 
       for (var note in invoice.notes!) {
         notes.add(
           FormGroup({
-            '_id': FormControl<String>(value: note.id),
-            'note': FormControl<String>(value: note.note),
+            '_id': FormControl(value: note.id),
+            'note': FormControl(value: note.note),
           }),
         );
       }
     }
 
-    try {
-      if (invoice.item != null && invoice.item!.isNotEmpty) {
-        FormArray item = formGroup.control('item') as FormArray;
+    if (invoice.item != null && invoice.item!.isNotEmpty) {
+      FormArray item = formGroup.control('item') as FormArray;
+      item.clear();
 
-        for (var itemData in invoice.item!) {
-          logger.d('edit info: ${itemData.toJson()}');
-          item.add(
-            FormGroup({
-              '_id': FormControl<String>(value: itemData.id),
-              'itemCode': FormControl<String>(value: itemData.itemCode),
-              'details': FormControl<String>(value: itemData.details),
-              'quantity': FormControl<double>(value: itemData.quantity),
-              'unit': FormControl<String>(value: itemData.unit ?? '式'),
-              'unitPrice': FormControl<double>(value: itemData.unitPrice),
-            }),
-          );
-        }
+      for (var itemData in invoice.item!) {
+        item.add(
+          FormGroup({
+            '_id': FormControl(value: itemData.id),
+            'itemCode': FormControl(value: itemData.itemCode),
+            'details': FormControl(value: itemData.details),
+            'quantity': FormControl(value: itemData.quantity),
+            'unit': FormControl(value: itemData.unit),
+            'unitPrice': FormControl(value: itemData.unitPrice),
+          }),
+        );
       }
-    } catch (e) {
-      logger.e(e);
     }
   }
 
@@ -141,13 +135,21 @@ class StatementModel {
 
       List<ItemRequest>? items = [];
       formGroup.control('item').value.forEach((item) {
-        items.add(ItemRequest.fromJson(item));
+        items.add(ItemRequest(
+          itemCode: item['itemCode'],
+          details: item['details'],
+          quantity: item['quantity'],
+          unit: item['unit'],
+          unitPrice: item['unitPrice'],
+        ));
       });
 
       List<NoteInvoiceRequest>? notes = [];
 
       formGroup.control('notes').value.forEach((note) {
-        notes.add(NoteInvoiceRequest.fromJson(note));
+        notes.add(NoteInvoiceRequest(
+          note: note['note'],
+        ));
       });
 
       String? logoFile;
@@ -199,7 +201,6 @@ class StatementModel {
         telNumber: formGroup.control('telNumber').value,
         fexNumber: formGroup.control('fexNumber').value,
         inCharge: formGroup.control('inCharge').value,
-        totalAmount: formGroup.control('totalAmount').value,
         remarks: formGroup.control('remarks').value,
         notes: notes,
         item: items,
@@ -207,8 +208,6 @@ class StatementModel {
         user: formGroup.control('user').value,
         patient: formGroup.control('user').value,
         hospitalRecord: formGroup.control('hospitalRecord').value,
-        taxRate: formGroup.control('taxRate').value,
-        taxRateOption: formGroup.control('taxRateOption').value,
       );
 
       Uint8List? pathFileJP = await generatePdfFromInvoice(
@@ -427,72 +426,73 @@ Future<Uint8List?> generatePdfFromInvoice(
   String title;
   String quotationNumberLabel;
   String quotationDateLabel;
-  String totalAmountLabel;
+  String companyNameLabel;
+  String addressLabel;
+  String telNumberLabel;
+  String fexNumberLabel;
+  String inChargeLabel;
   List<String> tableHeaders;
-  String subTotalLabel;
-  String taxLabel;
-  String totalLabel;
-  String remarksLabel;
 
+  // Load appropriate fonts and text labels based on the language
   switch (language) {
     case 'JP':
-      title = '御　見　積　書';
+      title = '請　求　書';
       quotationNumberLabel = '見積番号: ';
       quotationDateLabel = '見積日: ';
-      totalAmountLabel = '合計金額: ';
+      companyNameLabel = '件名: ';
+      addressLabel = '住所: ';
+      telNumberLabel = '電話番号: ';
+      fexNumberLabel = 'FAX番号: ';
+      inChargeLabel = '担当者: ';
       tableHeaders = ['', '項目', '数', '量', '単価', '金額'];
-      subTotalLabel = '計';
-      taxLabel = '消費税';
-      totalLabel = '合　　計';
-      remarksLabel = '【特記事項】';
       break;
 
     case 'ZH':
       title = '报价单';
       quotationNumberLabel = '报价单号: ';
       quotationDateLabel = '预计日期: ';
-      totalAmountLabel = '总金额: ';
+      companyNameLabel = '主题: ';
+      addressLabel = '地址: ';
+      telNumberLabel = '电话号码: ';
+      fexNumberLabel = '传真号码: ';
+      inChargeLabel = '负责人: ';
       tableHeaders = ['', '项目', '数', '量', '单价', '金额'];
-      subTotalLabel = '計';
-      taxLabel = '消費税';
-      totalLabel = '合  计';
-      remarksLabel = '【特記事項】';
       break;
 
     case 'ZHTW':
       title = '報價單';
       quotationNumberLabel = '報價單號: ';
       quotationDateLabel = '預計日期: ';
-      totalAmountLabel = '總金額: ';
+      companyNameLabel = '主題: ';
+      addressLabel = '地址: ';
+      telNumberLabel = '電話號碼: ';
+      fexNumberLabel = '傳真號碼: ';
+      inChargeLabel = '負責人: ';
       tableHeaders = ['', '項目', '數', '量', '單價', '金額'];
-      subTotalLabel = '計';
-      taxLabel = '消費税';
-      totalLabel = '合  计';
-      remarksLabel = '【特記事項】';
       break;
 
     case 'VN':
-      title = 'Báo giá';
+      title = 'báo giá';
       quotationNumberLabel = 'số báo giá: ';
       quotationDateLabel = 'ngày dự kiến: ';
-      totalAmountLabel = 'tổng số tiền: ';
+      companyNameLabel = 'chủ đề: ';
+      addressLabel = 'địa chỉ: ';
+      telNumberLabel = 'số điện thoại: ';
+      fexNumberLabel = 'số fax: ';
+      inChargeLabel = 'người chịu trách nhiệm: ';
       tableHeaders = ['', 'mục', 'số', 'lượng', 'đơn giá', 'số tiền'];
-      subTotalLabel = 'tổng cộng';
-      taxLabel = 'thuế';
-      totalLabel = 'tổng cộng';
-      remarksLabel = 'ghi chú';
       break;
 
     default:
-      title = 'Quotation';
+      title = 'Invoice';
       quotationNumberLabel = 'Quotation number: ';
       quotationDateLabel = 'Quotation date: ';
-      totalAmountLabel = 'Total amount: ';
+      companyNameLabel = 'Company name: ';
+      addressLabel = 'Address: ';
+      telNumberLabel = 'Tel number: ';
+      fexNumberLabel = 'Fex number: ';
+      inChargeLabel = 'In charge: ';
       tableHeaders = ['', 'Item', 'Quantity', 'Unit', 'Unit Price', 'Amount'];
-      subTotalLabel = 'Sub Total';
-      taxLabel = 'Tax';
-      totalLabel = 'Total';
-      remarksLabel = 'Remarks';
   }
   Uint8List? logoImage;
   Uint8List? stampImage;
@@ -529,7 +529,6 @@ Future<Uint8List?> generatePdfFromInvoice(
             ),
           ),
         ),
-        pw.SizedBox(height: 20),
         pw.Row(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
@@ -543,30 +542,16 @@ Future<Uint8List?> generatePdfFromInvoice(
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
-
-        pw.SizedBox(height: 20),
         pw.Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
           pw.Row(
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               mainAxisAlignment: pw.MainAxisAlignment.start,
               children: [
-                pw.Column(
-                    crossAxisAlignment: pw.CrossAxisAlignment.start,
-                    mainAxisAlignment: pw.MainAxisAlignment.start,
-                    children: [
-                      pw.Text(
-                        '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
-                            ' 様',
-                        style: pw.TextStyle(
-                          font: ttfJP,
-                          fontWeight: pw.FontWeight.bold,
-                        ),
-                      ),
-                      pw.Text(
-                        '下記の通り御見積りいたします。ご用命の程宜しくお願い申し上げます。',
-                        style: pw.TextStyle(font: ttfJP),
-                      ),
-                    ])
+                pw.Text(
+                  '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
+                  ' 様',
+                  style: pw.TextStyle(font: ttfJP),
+                ),
               ]),
           pw.Row(
               crossAxisAlignment: pw.CrossAxisAlignment.end,
@@ -584,78 +569,34 @@ Future<Uint8List?> generatePdfFromInvoice(
                 ),
               ])
         ]),
-        pw.SizedBox(height: 20),
-        pw.Row(children: [
-          pw.Expanded(
-            flex: 4,
-            child: pw.Row(
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                mainAxisAlignment: pw.MainAxisAlignment.start,
-                children: [
-                  pw.Container(
-                    padding: const pw.EdgeInsets.all(8),
-                    decoration: pw.BoxDecoration(
-                      color: PdfColor.fromInt(0xff98FF98),
-                      border: pw.Border.all(
-                        color: PdfColor.fromInt(0xff000000),
-                        width: 1,
-                      ),
-                    ),
-                    child: pw.Text(
-                      totalAmountLabel,
-                      style: pw.TextStyle(font: ttf),
-                    ),
+        if (logoImage != null || stampImage != null)
+          pw.Row(
+              crossAxisAlignment: pw.CrossAxisAlignment.end,
+              mainAxisAlignment: pw.MainAxisAlignment.end,
+              children: [
+                if (logoImage != null)
+                  pw.Image(
+                    pw.MemoryImage(logoImage),
+                    height: 100,
+                    width: 100,
+                    fit: pw.BoxFit.contain,
                   ),
-                  pw.Container(
-                    padding: const pw.EdgeInsets.all(8),
-                    decoration: pw.BoxDecoration(
-                      color: PdfColor.fromInt(0xffffffff),
-                      border: pw.Border.all(
-                        color: PdfColor.fromInt(0xff000000),
-                        width: 1,
-                      ),
-                    ),
-                    child: pw.Text(
-                      Strings.formatCurrency(total(
-                          subTotal(request.item ?? []),
-                          taxCalculation(subTotal(request.item ?? []),
-                              (request.taxRate ?? 0)))),
-                      style: pw.TextStyle(
-                        font: ttfJP,
-                        fontWeight: pw.FontWeight.bold,
-                      ),
-                    ),
+                if (stampImage != null)
+                  pw.Image(
+                    pw.MemoryImage(stampImage),
+                    height: 100,
+                    width: 100,
+                    fit: pw.BoxFit.contain,
                   ),
-                ]),
-          ),
-          pw.Expanded(
-            flex: 8,
-            child: pw.Row(
-                crossAxisAlignment: pw.CrossAxisAlignment.end,
-                mainAxisAlignment: pw.MainAxisAlignment.end,
-                children: [
-                  if (logoImage != null)
-                    pw.Image(
-                      pw.MemoryImage(logoImage),
-                      height: 100,
-                      width: 100,
-                      fit: pw.BoxFit.contain,
-                    ),
-                  if (stampImage != null)
-                    pw.Image(
-                      pw.MemoryImage(stampImage),
-                      height: 100,
-                      width: 100,
-                      fit: pw.BoxFit.contain,
-                    ),
-                ]),
-          )
-        ]),
-        pw.SizedBox(height: 20),
+              ]),
         pw.Row(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
+              pw.Text(
+                companyNameLabel,
+                style: pw.TextStyle(font: ttf),
+              ),
               pw.Text(
                 request.companyName ?? '',
                 style: pw.TextStyle(font: ttfJP),
@@ -666,6 +607,10 @@ Future<Uint8List?> generatePdfFromInvoice(
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
               pw.Text(
+                addressLabel,
+                style: pw.TextStyle(font: ttf),
+              ),
+              pw.Text(
                 request.address ?? '',
                 style: pw.TextStyle(font: ttfJP),
               ),
@@ -675,7 +620,11 @@ Future<Uint8List?> generatePdfFromInvoice(
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
               pw.Text(
-                'Tel : ${request.telNumber ?? ''}',
+                telNumberLabel,
+                style: pw.TextStyle(font: ttf),
+              ),
+              pw.Text(
+                request.telNumber ?? '',
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
@@ -684,7 +633,11 @@ Future<Uint8List?> generatePdfFromInvoice(
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
               pw.Text(
-                'Fax : ${request.fexNumber ?? ''}',
+                fexNumberLabel,
+                style: pw.TextStyle(font: ttf),
+              ),
+              pw.Text(
+                request.fexNumber ?? '',
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
@@ -693,7 +646,11 @@ Future<Uint8List?> generatePdfFromInvoice(
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
               pw.Text(
-                '担当 : ${request.inCharge ?? ''}',
+                inChargeLabel,
+                style: pw.TextStyle(font: ttf),
+              ),
+              pw.Text(
+                request.inCharge ?? '',
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
@@ -712,169 +669,117 @@ Future<Uint8List?> generatePdfFromInvoice(
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
           headerCellDecoration:
-          const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+              const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
           oddCellStyle: pw.TextStyle(font: ttfJP),
           cellStyle: pw.TextStyle(font: ttfJP),
           data: request.item
-              ?.map((item) => [
-            pw.Text(
-              item.itemCode ?? '--',
-              style: pw.TextStyle(
-                font: ttfJP,
-                fontWeight: pw.FontWeight.bold,
-                fontSize: 9,
-              ),
-            ),
-            pw.Text(
-              item.details ?? '',
-              style: pw.TextStyle(
-                font: ttfJP,
-                fontWeight: pw.FontWeight.normal,
-                fontSize: 10,
-              ),
-            ),
-            item.quantity ?? '',
-            item.unit ?? '',
-            Strings.formatCurrency(item.unitPrice ?? 0),
-            Strings.formatCurrency(
-                (item.quantity ?? 0) * (item.unitPrice ?? 0)),
-          ])
-              .toList() ??
-              [
-                [
-                  '',
-                  '',
-                  '',
-                  '',
-                  '',
-                  '',
-                ],
-                [
-                  '',
-                  '',
-                  '',
-                  '',
-                  '',
-                  '',
-                ]
-              ],
+                  ?.map((item) => [
+                        pw.Text(
+                          item.itemCode ?? '--',
+                          style: pw.TextStyle(
+                            font: ttfJP,
+                            fontWeight: pw.FontWeight.bold,
+                            fontSize: 9,
+                          ),
+                        ),
+                        pw.Text(
+                          item.details ?? '',
+                          style: pw.TextStyle(
+                            font: ttfJP,
+                            fontWeight: pw.FontWeight.normal,
+                            fontSize: 10,
+                          ),
+                        ),
+                        item.quantity ?? '',
+                        item.unit ?? '',
+                        '${Strings.formatCurrency(item.unitPrice ?? 0)}'
+                            ' 円',
+                        '${Strings.formatCurrency((item.quantity ?? 0) * (double.tryParse("${item.unit ?? 0}") ?? 0))}'
+                            ' 円',
+                      ])
+                  .toList() ??
+              [],
         ),
         // notes
         pw.TableHelper.fromTextArray(
           columnWidths: {
+            0: const pw.FlexColumnWidth(0),
             1: const pw.FlexColumnWidth(12),
           },
           data: request.notes
-              ?.map((note) => [
-            pw.Row(
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                children: [
-                  pw.Text(
-                    note.note ?? '',
-                    style: pw.TextStyle(
-                      font: ttfJP,
-                      fontWeight: pw.FontWeight.normal,
-                      fontSize: 10,
-                    ),
-                    textAlign: pw.TextAlign.left,
-                  )
-                ]),
-          ])
-              .toList() ??
-              [
-                [
-                  '',
-                ],
-                [
-                  '',
-                ]
-              ],
+                  ?.map((note) => [
+                        '',
+                        pw.Text(
+                          note.note ?? '',
+                          style: pw.TextStyle(
+                            font: ttfJP,
+                            fontWeight: pw.FontWeight.normal,
+                            fontSize: 10,
+                          ),
+                        ),
+                      ])
+                  .toList() ??
+              [],
         ),
         pw.TableHelper.fromTextArray(columnWidths: {
           0: const pw.FlexColumnWidth(10),
-          1: const pw.FlexColumnWidth(2),
+          1: const pw.FlexColumnWidth(0),
+          2: const pw.FlexColumnWidth(0),
+          3: const pw.FlexColumnWidth(0),
+          4: const pw.FlexColumnWidth(0),
+          5: const pw.FlexColumnWidth(2),
         }, data: [
           [
-            pw.Align(
-              alignment: pw.Alignment.centerLeft,
-              child: pw.Text(
-                subTotalLabel,
-                style: pw.TextStyle(font: ttfJP),
-              ),
-            ),
-            pw.Align(
-              alignment: pw.Alignment.centerRight,
-              child: pw.Text(
-                Strings.formatCurrency(subTotal(request.item ?? [])),
-                style: pw.TextStyle(font: ttfJP),
-              ),
-            ),
+            '計',
+            '',
+            '',
+            '',
+            '',
+            Strings.formatCurrency(subTotal(request.item ?? [])),
           ],
           [
-            pw.Align(
-              alignment: pw.Alignment.centerLeft,
-              child: pw.Text(
-                '$taxLabel（${int.tryParse(request.taxRate.toString()) ?? 0}%）',
-                style: pw.TextStyle(font: ttfJP),
-              ),
-            ),
-            pw.Align(
-              alignment: pw.Alignment.centerRight,
-              child: pw.Text(
-                request.taxRateOption ? '（外税）' : '（内税）',
-                style: pw.TextStyle(font: ttfJP),
-              ),
-            ),
+            '消費税（${int.tryParse(request.taxRate.toString()) ?? 0}%）',
+            '',
+            '',
+            '',
+            '',
+            Strings.formatCurrency(
+                taxCalculation(subTotal(request.item ?? []), request.taxRate)),
           ],
         ]),
         pw.TableHelper.fromTextArray(
             headerCellDecoration:
-            const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
-            headerDecoration:
-            const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+                const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
             cellDecoration: (i, _, __) {
               return const pw.BoxDecoration(
                   color: PdfColor.fromInt(0xff98FF98));
             },
-            rowDecoration:
-            const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
-            oddRowDecoration:
-            const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
-            headerHeight: 0,
             columnWidths: {
               0: const pw.FlexColumnWidth(10),
-              1: const pw.FlexColumnWidth(2),
+              1: const pw.FlexColumnWidth(0),
+              2: const pw.FlexColumnWidth(0),
+              3: const pw.FlexColumnWidth(0),
+              4: const pw.FlexColumnWidth(0),
+              5: const pw.FlexColumnWidth(2),
             },
             data: [
               [
-                pw.Align(
-                  alignment: pw.Alignment.centerLeft,
-                  child: pw.Text(
-                    totalLabel,
-                    style: pw.TextStyle(font: ttfJP),
-                  ),
-                ),
-                pw.Align(
-                  alignment: pw.Alignment.centerRight,
-                  child: pw.Text(
-                    Strings.formatCurrency(total(
-                        subTotal(request.item ?? []),
-                        taxCalculation(
-                            subTotal(request.item ?? []), request.taxRate))),
-                    style: pw.TextStyle(
-                      font: ttfJP,
-                      fontWeight: pw.FontWeight.bold,
-                    ),
-                  ),
-                ),
+                '合計',
+                '',
+                '',
+                '',
+                '',
+                Strings.formatCurrency(total(
+                    subTotal(request.item ?? []),
+                    taxCalculation(
+                        subTotal(request.item ?? []), request.taxRate))),
               ],
             ]),
         pw.SizedBox(height: 20),
         pw.Text(
-          remarksLabel,
+          '【特記事項】',
           style: pw.TextStyle(font: ttfJP),
         ),
-        pw.SizedBox(height: 20),
         pw.Text(
           request.remarks ?? '',
           style: pw.TextStyle(font: ttfJP),
@@ -902,8 +807,8 @@ double subTotal(List<ItemRequest> items) {
   return total;
 }
 
-double taxCalculation(double subTotal, int? taxRate) {
-  return subTotal * (taxRate ?? 0) / 100;
+double taxCalculation(double subTotal, String? taxRate) {
+  return subTotal * (int.tryParse(taxRate ?? '0') ?? 0) / 100;
 }
 
 double total(double subTotal, double tax) {
