@@ -669,7 +669,7 @@ Future<Uint8List?> generatePdfFromInvoice(
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
           headerCellDecoration:
-              const pw.BoxDecoration(color: PdfColor.fromInt(0xffe0e0e0)),
+              const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
           oddCellStyle: pw.TextStyle(font: ttfJP),
           cellStyle: pw.TextStyle(font: ttfJP),
           data: request.item
@@ -746,16 +746,35 @@ Future<Uint8List?> generatePdfFromInvoice(
             Strings.formatCurrency(
                 taxCalculation(subTotal(request.item ?? []), request.taxRate)),
           ],
-          [
-            '合計',
-            '',
-            '',
-            '',
-            '',
-            Strings.formatCurrency(total(subTotal(request.item ?? []),
-                taxCalculation(subTotal(request.item ?? []), request.taxRate))),
-          ],
         ]),
+        pw.TableHelper.fromTextArray(
+            headerCellDecoration:
+                const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+            cellDecoration: (i, _, __) {
+              return const pw.BoxDecoration(
+                  color: PdfColor.fromInt(0xff98FF98));
+            },
+            columnWidths: {
+              0: const pw.FlexColumnWidth(10),
+              1: const pw.FlexColumnWidth(0),
+              2: const pw.FlexColumnWidth(0),
+              3: const pw.FlexColumnWidth(0),
+              4: const pw.FlexColumnWidth(0),
+              5: const pw.FlexColumnWidth(2),
+            },
+            data: [
+              [
+                '合計',
+                '',
+                '',
+                '',
+                '',
+                Strings.formatCurrency(total(
+                    subTotal(request.item ?? []),
+                    taxCalculation(
+                        subTotal(request.item ?? []), request.taxRate))),
+              ],
+            ]),
         pw.SizedBox(height: 20),
         pw.Text(
           '【特記事項】',
