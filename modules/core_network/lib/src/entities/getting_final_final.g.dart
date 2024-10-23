@@ -14,10 +14,14 @@ VasaInfo _$VasaInfoFromJson(Map<String, dynamic> json) => VasaInfo(
       landingPermit: json['landingPermit'] == null
           ? null
           : DateTime.parse(json['landingPermit'] as String),
+      landingPermitFileName: json['landingPermitFileName'] as String?,
+      visaPageFileName: json['visaPageFileName'] as String?,
     );
 
 Map<String, dynamic> _$VasaInfoToJson(VasaInfo instance) => <String, dynamic>{
       '_id': instance.id,
       'visaPage': instance.visaPage?.toIso8601String(),
+      'visaPageFileName': instance.visaPageFileName,
       'landingPermit': instance.landingPermit?.toIso8601String(),
+      'landingPermitFileName': instance.landingPermitFileName,
     };

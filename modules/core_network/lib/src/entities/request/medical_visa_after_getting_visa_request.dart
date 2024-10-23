@@ -8,10 +8,10 @@ part 'medical_visa_after_getting_visa_request.g.dart';
 
 @JsonSerializable()
 class AfterGettingVisaRequest {
-  List<VasaInfo>? vasaInfo;
-  List<Ticket>? ticket;
-  List<TicketBack>? ticketBack;
-  List<BoardingPass>? boardingPass;
+  List<GettingVisaInfoRequest>? vasaInfo;
+  List<TicketRequest>? ticket;
+  List<TicketBackRequest>? ticketBack;
+  List<BoardingPassRequest>? boardingPass;
   DateTime? certificateOfEligibility;
 
   AfterGettingVisaRequest({

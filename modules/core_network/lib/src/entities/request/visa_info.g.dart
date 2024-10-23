@@ -6,7 +6,8 @@ part of 'visa_info.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-VisaInfo _$VisaInfoFromJson(Map<String, dynamic> json) => VisaInfo(
+VisaInfoRequest _$VisaInfoRequestFromJson(Map<String, dynamic> json) =>
+    VisaInfoRequest(
       passportDate: json['passportDate'] == null
           ? null
           : DateTime.parse(json['passportDate'] as String),
@@ -22,7 +23,8 @@ VisaInfo _$VisaInfoFromJson(Map<String, dynamic> json) => VisaInfo(
           json['letterOfGuaranteeFileSelect'] as String?,
     );
 
-Map<String, dynamic> _$VisaInfoToJson(VisaInfo instance) => <String, dynamic>{
+Map<String, dynamic> _$VisaInfoRequestToJson(VisaInfoRequest instance) =>
+    <String, dynamic>{
       'passportDate': instance.passportDate?.toIso8601String(),
       'passportFileSelect': instance.passportFileSelect,
       'letterOfGuaranteeDate':

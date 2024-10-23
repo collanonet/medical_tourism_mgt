@@ -1,16 +1,21 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'getting_visa_ticket_back.g.dart';
+
 @JsonSerializable()
-class TicketBack {
+class TicketBackRequest {
   DateTime? returnFlightTicket;
+  String? returnFlightTicketFileName;
 
-  TicketBack({this.returnFlightTicket});
+  TicketBackRequest({
+    this.returnFlightTicket,
+    this.returnFlightTicketFileName,
+  });
 
-  factory TicketBack.fromJson(Map<String,dynamic> json){
-    return _$TicketBackFromJson(json);
+  factory TicketBackRequest.fromJson(Map<String, dynamic> json) {
+    return _$TicketBackRequestFromJson(json);
   }
 
-  Map<String,dynamic> toJson(){
-    return _$TicketBackToJson(this);
+  Map<String, dynamic> toJson() {
+    return _$TicketBackRequestToJson(this);
   }
 }

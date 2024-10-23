@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'dart:convert';
+
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
@@ -139,6 +141,26 @@ class MedicalVisaModel with ChangeNotifier {
     }
   }
 
+  ValueNotifier<AsyncData<MedicalVisaRequiredInJapanResponse>>
+      requiredInJapanData = ValueNotifier(const AsyncData());
+  Future<void> fetchMedicalRequiredInJapan() async {
+    try {
+      requiredInJapanData.value = const AsyncData(loading: true);
+      final response = await patientRepository.getMedicalRequiredInJapan();
+      requiredInJapanData.value = AsyncData(data: response);
+    } catch (e) {
+      logger.d(e);
+      requiredInJapanData.value = AsyncData(error: e);
+    }
+  }
+
+  void insertRequiredInJapan(
+      FormGroup formGroup, MedicalVisaRequiredInJapanResponse response) {
+    try {} catch (e) {
+      logger.e(e);
+    }
+  }
+
   ValueNotifier<AsyncData<bool>> submit = ValueNotifier(const AsyncData());
   Future<void> submitMedicalVisa(FormGroup formGroup) async {
     try {
@@ -196,6 +218,350 @@ class MedicalVisaModel with ChangeNotifier {
           submitStayPeriodData.value = AsyncData(data: response);
         },
       );
+    } catch (e) {
+      logger.e(e);
+    }
+  }
+
+  ValueNotifier<AsyncData<MedicalVisaRequiredInJapanResponse>>
+      submitRequiredInJapanData = ValueNotifier(const AsyncData());
+  Future<void> submitRequiredInJapan(FormGroup formGroup) async {
+    try {
+      submitRequiredInJapanData.value = const AsyncData(loading: true);
+      List<VisaInfoRequest>? visaInfo = [];
+      if (visaInfo.isNotEmpty) {
+        String? passportFileSelect;
+        if (formGroup.control('passportFileSelect').value != null) {
+          FileSelect docFile = formGroup.control('passportFileSelect').value;
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              passportFileSelect = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            passportFileSelect = docFile.url;
+          }
+        }
+
+        String? letterOfGuaranteeFileSelect;
+        if (formGroup.control('letterOfGuaranteeFileSelect').value != null) {
+          FileSelect docFile =
+              formGroup.control('letterOfGuaranteeFileSelect').value;
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              letterOfGuaranteeFileSelect = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            letterOfGuaranteeFileSelect = docFile.url;
+          }
+        }
+        formGroup.control('visaInfo').value.forEach((e) {
+          visaInfo.add(
+            VisaInfoRequest(
+              passportDate: e['passportDate'],
+              passportFileSelect: passportFileSelect,
+              letterOfGuaranteeDate: e['letterOfGuaranteeDate'],
+              letterOfGuaranteeFileSelect: letterOfGuaranteeFileSelect,
+              sendBy: e['sendBy'],
+              byEMS: e['byEMS'],
+              byFedex: e['byFedex'],
+              byothers: e['byothers'],
+            ),
+          );
+        });
+      }
+
+      List<ScheduleRequest>? schedule = [];
+      if (schedule.isNotEmpty) {
+        formGroup.control('schedule').value.forEach((e) {
+          schedule.add(
+            ScheduleRequest(
+              treatmentSchedule: e['treatmentSchedule'],
+              treatmentScheduleFileSelect: e['treatmentScheduleFileSelect'],
+            ),
+          );
+        });
+      }
+      String? statementOfReasonsFileSelect;
+      if (formGroup.control('statementOfReasonsFileSelect').value != null) {
+        FileSelect docFile =
+            formGroup.control('statementOfReasonsFileSelect').value;
+        if (docFile.file != null) {
+          try {
+            String base64Image = base64Encode(docFile.file!);
+            FileResponse fileData = await patientRepository.uploadFileBase64(
+              base64Image,
+              docFile.filename!,
+            );
+            statementOfReasonsFileSelect = fileData.filename;
+          } catch (e) {
+            logger.e(e);
+          }
+        } else {
+          statementOfReasonsFileSelect = docFile.url;
+        }
+      }
+      String? travelCompanionListFileSelect;
+      if (formGroup.control('travelCompanionListFileSelect').value != null) {
+        FileSelect docFile =
+            formGroup.control('travelCompanionListFileSelect').value;
+        if (docFile.file != null) {
+          try {
+            String base64Image = base64Encode(docFile.file!);
+            FileResponse fileData = await patientRepository.uploadFileBase64(
+              base64Image,
+              docFile.filename!,
+            );
+            travelCompanionListFileSelect = fileData.filename;
+          } catch (e) {
+            logger.e(e);
+          }
+        } else {
+          travelCompanionListFileSelect = docFile.url;
+        }
+      }
+      List<TravelInfoRequest>? travelInfo = [];
+      if (travelInfo.isNotEmpty) {
+        formGroup.control('travelInfo').value.forEach((e) {
+          travelInfo.add(TravelInfoRequest(
+            landingPermissionDate: e['landingPermissionDate'],
+            visaValidityPeriodExpirationDate:
+                e['visaValidityPeriodExpirationDate'],
+            dateOfEntryIntoJapan: e['dateOfEntryIntoJapan'],
+            departureDateFromJapan: e['departureDateFromJapan'],
+            departureIn: e['departureIn'],
+            arrivalIn: e['arrivalIn'],
+            flightNumberIn: e['flightNumberIn'],
+            departureTimeIn: e['departureTimeIn'],
+            arrivalTimeIn: e['arrivalTimeIn'],
+            flightNumberOut: e['flightNumberOut'],
+            departureTimeOut: e['departureTimeOut'],
+            departureOut: e['departureOut'],
+            arrivalOut: e['arrivalOut'],
+            seatNumberOut: e['seatNumberOut'],
+            remarks: e['remarks'],
+          ));
+        });
+      }
+
+      RequiredInJapan required = RequiredInJapan(
+        visaInfo: visaInfo,
+        schedule: schedule,
+        statementOfReasonsDate:
+            formGroup.control('statementOfReasonsDate').value,
+        statementOfReasonsFileSelect: statementOfReasonsFileSelect,
+        travelCompanionListDate:
+            formGroup.control('travelCompanionListDate').value,
+        travelCompanionListFileSelect: travelCompanionListFileSelect,
+        travelInfo: travelInfo,
+      );
+      final response =
+          await patientRepository.popMedicalVisaRequiredInJapan(required);
+      submitRequiredInJapanData.value = AsyncData(data: response);
+    } catch (e) {
+      logger.d(e);
+      submitRequiredInJapanData.value = AsyncData(error: e);
+    }
+  }
+
+  ValueNotifier<AsyncData<MedicalVisaVisaWithdrawalResponse>>
+      submitVisaWithdrawalData = ValueNotifier(const AsyncData());
+  Future<void> submitVisaWithdrawal(FormGroup formGroup) async {
+    try {
+      submitVisaWithdrawalData.value = const AsyncData(loading: true);
+      final response = await patientRepository.postMedicalVisaWithdrawal(
+          MedicalVisaWithdrawalRequest(
+              subjectVisaWithdrawal:
+                  formGroup.control('subjectVisaWithdrawal').value,
+              deathOrOccurrenceEventDate:
+                  formGroup.control('deathOrOccurrenceEventDate').value,
+              remarks: formGroup.control('remarks').value));
+      submitVisaWithdrawalData.value = AsyncData(data: response);
+    } catch (e) {
+      logger.d(e);
+      submitVisaWithdrawalData.value = AsyncData(error: e);
+    }
+  }
+
+  ValueNotifier<AsyncData<MedicalVisaAfterGettingVisaResponse>>
+      submitAfterGettingVisaData = ValueNotifier(const AsyncData());
+  Future<void> submitAfterGettingVisa(FormGroup formGroup) async {
+    try {
+      List<GettingVisaInfoRequest>? visaInfo = [];
+      if (visaInfo.isNotEmpty) {
+        String? visaPageFileName;
+        if (formGroup.control('visaPageFileName').value != null) {
+          FileSelect docFile = formGroup.control('visaPageFileName').value;
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              visaPageFileName = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            visaPageFileName = docFile.url;
+          }
+        }
+
+        String? landingPermitFileName;
+        if (formGroup.control('landingPermitFileName').value != null) {
+          FileSelect docFile = formGroup.control('landingPermitFileName').value;
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              landingPermitFileName = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            landingPermitFileName = docFile.url;
+          }
+        }
+        formGroup.control('visaInfo').value.forEach(
+          (e) {
+            visaInfo.add(GettingVisaInfoRequest(
+              visaPage: e['visaPage'],
+              visaPageFileName: visaPageFileName,
+              landingPermit: e['landingPermit'],
+              landingPermitFileName: landingPermitFileName,
+            ));
+          },
+        );
+      }
+
+      List<TicketRequest>? ticket = [];
+      if (ticket.isNotEmpty) {
+        String? planeTicketForYourVisitToJapanFileName;
+        if (formGroup.control('planeTicketForYourVisitToJapanFileName').value !=
+            null) {
+          FileSelect docFile =
+              formGroup.control('planeTicketForYourVisitToJapanFileName').value;
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              planeTicketForYourVisitToJapanFileName = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            planeTicketForYourVisitToJapanFileName = docFile.url;
+          }
+        }
+        formGroup.control('ticket').value.forEach(
+          (e) {
+            ticket.add(
+              TicketRequest(
+                planeTicketForYourVisitToJapan:
+                    e['planeTicketForYourVisitToJapan'],
+                planeTicketForYourVisitToJapanFileName:
+                    planeTicketForYourVisitToJapanFileName,
+              ),
+            );
+          },
+        );
+      }
+
+      List<TicketBackRequest>? ticketBack = [];
+      if (ticket.isNotEmpty) {
+        String? returnFlightTicketFileName;
+        if (formGroup.control('returnFlightTicketFileName').value != null) {
+          FileSelect docFile =
+              formGroup.control('returnFlightTicketFileName').value;
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              returnFlightTicketFileName = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            returnFlightTicketFileName = docFile.url;
+          }
+        }
+        formGroup.control('ticketBack').value.forEach(
+          (e) {
+            ticketBack.add(
+              TicketBackRequest(
+                returnFlightTicket: e['returnFlightTicket'],
+                returnFlightTicketFileName: returnFlightTicketFileName,
+              ),
+            );
+          },
+        );
+      }
+
+      List<BoardingPassRequest>? boardingPass = [];
+      if (ticket.isNotEmpty) {
+        String? boardingPassForReturnFlightFileName;
+        if (formGroup.control('boardingPassForReturnFlightFileName').value != null) {
+          FileSelect docFile =
+              formGroup.control('boardingPassForReturnFlightFileName').value;
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              boardingPassForReturnFlightFileName = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            boardingPassForReturnFlightFileName = docFile.url;
+          }
+        }
+        formGroup.control('boardingPass').value.forEach(
+          (e) {
+            boardingPass.add(
+              BoardingPassRequest(
+                boardingPassForReturnFlight: e['boardingPassForReturnFlight'],
+                boardingPassForReturnFlightFileName: boardingPassForReturnFlightFileName,
+              )
+            );
+          },
+        );
+      }
+
+      AfterGettingVisaRequest request = AfterGettingVisaRequest(
+        vasaInfo: visaInfo,
+        ticket: ticket,
+        ticketBack: ticketBack,
+        certificateOfEligibility: formGroup.control('certificateOfEligibility').value,
+      );
+
+      final response = await patientRepository.postAfterGettingVisa(request);
+     // submitAfterGettingVisaData.value = AsyncData(data: response);
     } catch (e) {
       logger.e(e);
     }

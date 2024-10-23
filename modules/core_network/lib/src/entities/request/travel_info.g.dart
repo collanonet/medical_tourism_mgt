@@ -6,7 +6,8 @@ part of 'travel_info.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-TravelInfo _$TravelInfoFromJson(Map<String, dynamic> json) => TravelInfo(
+TravelInfoRequest _$TravelInfoRequestFromJson(Map<String, dynamic> json) =>
+    TravelInfoRequest(
       landingPermissionDate: json['landingPermissionDate'] == null
           ? null
           : DateTime.parse(json['landingPermissionDate'] as String),
@@ -35,7 +36,7 @@ TravelInfo _$TravelInfoFromJson(Map<String, dynamic> json) => TravelInfo(
       remarks: json['remarks'] as String?,
     );
 
-Map<String, dynamic> _$TravelInfoToJson(TravelInfo instance) =>
+Map<String, dynamic> _$TravelInfoRequestToJson(TravelInfoRequest instance) =>
     <String, dynamic>{
       'landingPermissionDate':
           instance.landingPermissionDate?.toIso8601String(),
