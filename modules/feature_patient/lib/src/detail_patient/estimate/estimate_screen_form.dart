@@ -437,9 +437,15 @@ class EstimateScreenForm extends StatelessWidget {
         ),
 
         // taxRate
-        ReactiveTextField<String>(
-          formControlName: 'taxRate',
-          decoration: const InputDecoration(labelText: '消費税'),
+        SizedBox(
+          width: 300,
+          child: ReactiveTextField<String>(
+            formControlName: 'taxRate',
+            decoration: const InputDecoration(
+              labelText: '消費税',
+              suffix: Text('%'),
+            ),
+          ),
         ),
 
         Text('メモ項目', style: context.textTheme.titleLarge),

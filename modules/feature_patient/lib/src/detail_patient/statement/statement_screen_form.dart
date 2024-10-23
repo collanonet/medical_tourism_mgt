@@ -3,6 +3,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
@@ -56,60 +57,60 @@ class StatementScreenForm extends StatelessWidget {
                       ),
                       child: logoFile != null && logoFile.file != null
                           ? Image.memory(
-                        logoFile.file!,
-                        fit: BoxFit.fill,
-                      )
+                              logoFile.file!,
+                              fit: BoxFit.fill,
+                            )
                           : logoFile != null && logoFile.url != null
-                          ? Avatar.network(
-                        logoFile.url,
-                        placeholder: const AssetImage(
-                          Images.logoMadical,
-                          package: 'core_ui',
-                        ),
-                        shape: BoxShape.rectangle,
-                        customSize: const Size(200, 380),
-                      )
-                          : Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Icons.copy_all_rounded,
-                            size: 50,
-                            color: context.appTheme.primaryColor,
-                          ),
-                          SizedBox(
-                            height:
-                            context.appTheme.spacing.marginMedium,
-                          ),
-                          Text(
-                            'ロゴをアップロードする',
-                            style:
-                            context.textTheme.bodySmall?.copyWith(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            height:
-                            context.appTheme.spacing.marginMedium,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              filePicker().then(
-                                    (value) {
-                                  form.control('logoFile').value =
-                                      value;
-                                },
-                              );
-                            },
-                            child: const Text(
-                              '画像を選択',
-                            ),
-                          )
-                        ],
-                      ),
+                              ? Avatar.network(
+                                  logoFile.url,
+                                  placeholder: const AssetImage(
+                                    Images.logoMadical,
+                                    package: 'core_ui',
+                                  ),
+                                  shape: BoxShape.rectangle,
+                                  customSize: const Size(200, 380),
+                                )
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.copy_all_rounded,
+                                      size: 50,
+                                      color: context.appTheme.primaryColor,
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    Text(
+                                      'ロゴをアップロードする',
+                                      style:
+                                          context.textTheme.bodySmall?.copyWith(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        filePicker().then(
+                                          (value) {
+                                            form.control('logoFile').value =
+                                                value;
+                                          },
+                                        );
+                                      },
+                                      child: const Text(
+                                        '画像を選択',
+                                      ),
+                                    )
+                                  ],
+                                ),
                     ),
                   );
                 }),
@@ -141,60 +142,60 @@ class StatementScreenForm extends StatelessWidget {
                       ),
                       child: stampFile != null && stampFile.file != null
                           ? Image.memory(
-                        stampFile.file!,
-                        fit: BoxFit.fill,
-                      )
+                              stampFile.file!,
+                              fit: BoxFit.fill,
+                            )
                           : stampFile != null && stampFile.url != null
-                          ? Avatar.network(
-                        stampFile.url,
-                        placeholder: const AssetImage(
-                          Images.logoMadical,
-                          package: 'core_ui',
-                        ),
-                        shape: BoxShape.rectangle,
-                        customSize: const Size(200, 380),
-                      )
-                          : Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Icon(
-                            Icons.copy_all_rounded,
-                            size: 50,
-                            color: context.appTheme.primaryColor,
-                          ),
-                          SizedBox(
-                            height:
-                            context.appTheme.spacing.marginMedium,
-                          ),
-                          Text(
-                            'スタンプをアップロードする',
-                            style:
-                            context.textTheme.bodySmall?.copyWith(
-                              fontSize: 22,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(
-                            height:
-                            context.appTheme.spacing.marginMedium,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {
-                              filePicker().then(
-                                    (value) {
-                                  form.control('stampFile').value =
-                                      value;
-                                },
-                              );
-                            },
-                            child: const Text(
-                              '画像を選択',
-                            ),
-                          )
-                        ],
-                      ),
+                              ? Avatar.network(
+                                  stampFile.url,
+                                  placeholder: const AssetImage(
+                                    Images.logoMadical,
+                                    package: 'core_ui',
+                                  ),
+                                  shape: BoxShape.rectangle,
+                                  customSize: const Size(200, 380),
+                                )
+                              : Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  children: [
+                                    Icon(
+                                      Icons.copy_all_rounded,
+                                      size: 50,
+                                      color: context.appTheme.primaryColor,
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    Text(
+                                      'スタンプをアップロードする',
+                                      style:
+                                          context.textTheme.bodySmall?.copyWith(
+                                        fontSize: 22,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          context.appTheme.spacing.marginMedium,
+                                    ),
+                                    ElevatedButton(
+                                      onPressed: () {
+                                        filePicker().then(
+                                          (value) {
+                                            form.control('stampFile').value =
+                                                value;
+                                          },
+                                        );
+                                      },
+                                      child: const Text(
+                                        '画像を選択',
+                                      ),
+                                    )
+                                  ],
+                                ),
                     ),
                   );
                 }),
@@ -267,7 +268,6 @@ class StatementScreenForm extends StatelessWidget {
             return SizedBox(width: context.appTheme.spacing.formSpacing);
           },
           children: [
-
             // telNumber
             Expanded(
               child: ReactiveTextField<String>(
@@ -333,84 +333,84 @@ class StatementScreenForm extends StatelessWidget {
                 ...formArray.controls
                     .map((control) => control as FormGroup)
                     .map((currentForm) => ReactiveForm(
-                  formGroup: currentForm,
-                  child: RowSeparated(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    separatorBuilder:
-                        (BuildContext context, int index) {
-                      return SizedBox(
-                          width: context.appTheme.spacing.formSpacing);
-                    },
-                    children: [
-                      Expanded(
-                        child: RowSeparated(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          separatorBuilder:
-                              (BuildContext context, int index) {
-                            return SizedBox(
-                                width: context
-                                    .appTheme.spacing.formSpacing);
-                          },
-                          children: [
-                            SizedBox(
-                              width: 80,
-                              child: ReactiveTextField<String>(
-                                formControlName: 'itemCode',
-                                decoration: InputDecoration(
-                                  labelText: 'コード',
+                          formGroup: currentForm,
+                          child: RowSeparated(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return SizedBox(
+                                  width: context.appTheme.spacing.formSpacing);
+                            },
+                            children: [
+                              Expanded(
+                                child: RowSeparated(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  separatorBuilder:
+                                      (BuildContext context, int index) {
+                                    return SizedBox(
+                                        width: context
+                                            .appTheme.spacing.formSpacing);
+                                  },
+                                  children: [
+                                    SizedBox(
+                                      width: 80,
+                                      child: ReactiveTextField<String>(
+                                        formControlName: 'itemCode',
+                                        decoration: InputDecoration(
+                                          labelText: 'コード',
+                                        ),
+                                      ),
+                                    ),
+                                    Expanded(
+                                      child: ReactiveTextField<String>(
+                                        formControlName: 'details',
+                                        minLines: 1,
+                                        maxLines: 4,
+                                        decoration: InputDecoration(
+                                          labelText: '内訳',
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              child: ReactiveTextField<String>(
-                                formControlName: 'details',
-                                minLines: 1,
-                                maxLines: 4,
-                                decoration: InputDecoration(
-                                  labelText: '内訳',
+                              SizedBox(
+                                width: 80,
+                                child: ReactiveTextField<double>(
+                                  formControlName: 'quantity',
+                                  keyboardType: TextInputType.number,
+                                  inputFormatters: [
+                                    FilteringTextInputFormatter.allow(
+                                        RegExp(r'[0-9]')),
+                                  ],
+                                  decoration: InputDecoration(labelText: '数'),
                                 ),
                               ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(
-                        width: 80,
-                        child: ReactiveTextField<double>(
-                          formControlName: 'quantity',
-                          keyboardType: TextInputType.number,
-                          inputFormatters: [
-                            FilteringTextInputFormatter.allow(
-                                RegExp(r'[0-9]')),
-                          ],
-                          decoration: InputDecoration(labelText: '数'),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 80,
-                        child: ReactiveTextField<String>(
-                          formControlName: 'unit',
-                          decoration: InputDecoration(labelText: '量'),
-                        ),
-                      ),
-                      SizedBox(
-                        width: 150,
-                        child: ReactiveTextField<double>(
-                          formControlName: 'unitPrice',
-                          keyboardType: TextInputType.number,
-                          valueAccessor: DoubleValueAccessor(),
-                          inputFormatters: [
-                            CustomCurrencyFormatter(),
-                          ],
-                          decoration: InputDecoration(
-                            labelText: '単価',
-                            suffixText: '円',
+                              SizedBox(
+                                width: 80,
+                                child: ReactiveTextField<String>(
+                                  formControlName: 'unit',
+                                  decoration: InputDecoration(labelText: '量'),
+                                ),
+                              ),
+                              SizedBox(
+                                width: 150,
+                                child: ReactiveTextField<double>(
+                                  formControlName: 'unitPrice',
+                                  keyboardType: TextInputType.number,
+                                  valueAccessor: DoubleValueAccessor(),
+                                  inputFormatters: [
+                                    CustomCurrencyFormatter(),
+                                  ],
+                                  decoration: InputDecoration(
+                                    labelText: '単価',
+                                    suffixText: '円',
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )),
+                        )),
                 ElevatedButton(
                   onPressed: () {
                     formArray.add(FormGroup({
@@ -436,9 +436,15 @@ class StatementScreenForm extends StatelessWidget {
         ),
 
         // taxRate
-        ReactiveTextField<String>(
-          formControlName: 'taxRate',
-          decoration: const InputDecoration(labelText: '消費税'),
+        SizedBox(
+          width: 300,
+          child: ReactiveTextField<String>(
+            formControlName: 'taxRate',
+            decoration: const InputDecoration(
+              labelText: '消費税',
+              suffix: Text('%'),
+            ),
+          ),
         ),
 
         Text('メモ項目', style: context.textTheme.titleLarge),
@@ -456,28 +462,28 @@ class StatementScreenForm extends StatelessWidget {
                 ...formArray.controls
                     .map((control) => control as FormGroup)
                     .map((currentForm) => ReactiveForm(
-                  formGroup: currentForm,
-                  child: RowSeparated(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    separatorBuilder:
-                        (BuildContext context, int index) {
-                      return SizedBox(
-                          width: context.appTheme.spacing.formSpacing);
-                    },
-                    children: [
-                      Expanded(
-                        child: ReactiveTextField<String>(
-                          formControlName: 'note',
-                          minLines: 1,
-                          maxLines: 4,
-                          decoration: InputDecoration(
-                            labelText: '注記',
+                          formGroup: currentForm,
+                          child: RowSeparated(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            separatorBuilder:
+                                (BuildContext context, int index) {
+                              return SizedBox(
+                                  width: context.appTheme.spacing.formSpacing);
+                            },
+                            children: [
+                              Expanded(
+                                child: ReactiveTextField<String>(
+                                  formControlName: 'note',
+                                  minLines: 1,
+                                  maxLines: 4,
+                                  decoration: InputDecoration(
+                                    labelText: '注記',
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ),
-                    ],
-                  ),
-                )),
+                        )),
                 ElevatedButton(
                   onPressed: () {
                     formArray.add(FormGroup({
