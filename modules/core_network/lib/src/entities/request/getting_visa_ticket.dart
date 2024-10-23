@@ -1,17 +1,21 @@
-
 import 'package:json_annotation/json_annotation.dart';
 part 'getting_visa_ticket.g.dart';
+
 @JsonSerializable()
-class Ticket {
+class TicketRequest {
   DateTime? planeTicketForYourVisitToJapan;
+  String? planeTicketForYourVisitToJapanFileName;
 
-  Ticket({this.planeTicketForYourVisitToJapan});
+  TicketRequest({
+    this.planeTicketForYourVisitToJapan,
+    this.planeTicketForYourVisitToJapanFileName,
+  });
 
-  factory Ticket.fromJson(Map<String,dynamic> json){
-    return _$TicketFromJson(json);
+  factory TicketRequest.fromJson(Map<String, dynamic> json) {
+    return _$TicketRequestFromJson(json);
   }
 
-  Map<String,dynamic> toJson(){
-    return _$TicketToJson(this);
+  Map<String, dynamic> toJson() {
+    return _$TicketRequestToJson(this);
   }
 }

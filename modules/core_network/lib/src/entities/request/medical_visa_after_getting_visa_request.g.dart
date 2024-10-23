@@ -10,16 +10,17 @@ AfterGettingVisaRequest _$AfterGettingVisaRequestFromJson(
         Map<String, dynamic> json) =>
     AfterGettingVisaRequest(
       vasaInfo: (json['vasaInfo'] as List<dynamic>?)
-          ?.map((e) => VasaInfo.fromJson(e as Map<String, dynamic>))
+          ?.map(
+              (e) => GettingVisaInfoRequest.fromJson(e as Map<String, dynamic>))
           .toList(),
       ticket: (json['ticket'] as List<dynamic>?)
-          ?.map((e) => Ticket.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => TicketRequest.fromJson(e as Map<String, dynamic>))
           .toList(),
       ticketBack: (json['ticketBack'] as List<dynamic>?)
-          ?.map((e) => TicketBack.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => TicketBackRequest.fromJson(e as Map<String, dynamic>))
           .toList(),
       boardingPass: (json['boardingPass'] as List<dynamic>?)
-          ?.map((e) => BoardingPass.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => BoardingPassRequest.fromJson(e as Map<String, dynamic>))
           .toList(),
       certificateOfEligibility: json['certificateOfEligibility'] == null
           ? null
