@@ -1,4 +1,3 @@
-import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
@@ -55,7 +54,7 @@ class TravelCompanion extends StatelessWidget {
                       child: ReactiveDatePicker<DateTime>(
                         formControlName: 'dateBirth',
                         firstDate: DateTime(1900),
-                        lastDate: DateTime(2100),
+                        lastDate: DateTime.now(),
                         builder: (BuildContext context,
                             ReactiveDatePickerDelegate<dynamic> picker,
                             Widget? child) {
@@ -220,7 +219,7 @@ class TravelCompanion extends StatelessWidget {
                                           formControlName:
                                               'landingPermissionDate',
                                           firstDate: DateTime(1900),
-                                          lastDate: DateTime(2100),
+                                          lastDate: DateTime.now(),
                                           builder: (BuildContext context,
                                               ReactiveDatePickerDelegate<
                                                       dynamic>
@@ -330,7 +329,7 @@ class TravelCompanion extends StatelessWidget {
                                           formControlName:
                                               'dateOfEntryIntoJapan',
                                           firstDate: DateTime(1900),
-                                          lastDate: DateTime(2100),
+                                          lastDate: DateTime.now(),
                                           builder: (BuildContext context,
                                               ReactiveDatePickerDelegate<
                                                       dynamic>
@@ -378,7 +377,7 @@ class TravelCompanion extends StatelessWidget {
                                           formControlName:
                                               'departureDateFromJapan',
                                           firstDate: DateTime(1900),
-                                          lastDate: DateTime(2100),
+                                          lastDate: DateTime.now(),
                                           builder: (BuildContext context,
                                               ReactiveDatePickerDelegate<
                                                       dynamic>
@@ -654,14 +653,16 @@ class TravelCompanion extends StatelessWidget {
                                     ),
                                   ],
                                 ),
-                                'dateOfEntryIntoJapan': FormControl<DateTime>(
+                                'dateOfEntryIntoJapan':
+                                    FormControl<DateTime>(
                                   validators: [
                                     Validators.pattern(
                                       ValidatorRegExp.date,
                                     ),
                                   ],
                                 ),
-                                'departureDateFromJapan': FormControl<DateTime>(
+                                'departureDateFromJapan':
+                                    FormControl<DateTime>(
                                   validators: [
                                     Validators.pattern(
                                       ValidatorRegExp.date,
@@ -830,7 +831,7 @@ class TravelCompanion extends StatelessWidget {
                   height: context.appTheme.spacing.marginMedium,
                 ),
                 ReactiveForm(
-                  formGroup: formGroup.control('travel_companion') as FormGroup,
+                  formGroup: formGroup.control('afterGettingVisa') as FormGroup,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -856,7 +857,7 @@ class TravelCompanion extends StatelessWidget {
                                                   ReactiveDatePicker<DateTime>(
                                                 formControlName: 'visaPage',
                                                 firstDate: DateTime(1900),
-                                                lastDate: DateTime(2100),
+                                                lastDate: DateTime.now(),
                                                 builder: (BuildContext context,
                                                     ReactiveDatePickerDelegate<
                                                             dynamic>
@@ -910,8 +911,9 @@ class TravelCompanion extends StatelessWidget {
                                               width: context.appTheme.spacing
                                                   .marginMedium,
                                             ),
-                                            fileUpload(context, currentForm,
-                                                'visaPageFileName'),
+                                            ElevatedButton(
+                                                onPressed: () {},
+                                                child: const Text('ファイル選択'))
                                           ],
                                         ),
                                         SizedBox(
@@ -932,7 +934,7 @@ class TravelCompanion extends StatelessWidget {
                                                 formControlName:
                                                     'landingPermit',
                                                 firstDate: DateTime(1900),
-                                                lastDate: DateTime(2100),
+                                                lastDate: DateTime.now(),
                                                 builder: (BuildContext context,
                                                     ReactiveDatePickerDelegate<
                                                             dynamic>
@@ -987,8 +989,9 @@ class TravelCompanion extends StatelessWidget {
                                               width: context.appTheme.spacing
                                                   .marginMedium,
                                             ),
-                                            fileUpload(context, currentForm,
-                                                'landingPermitFileName'),
+                                            ElevatedButton(
+                                                onPressed: () {},
+                                                child: const Text('ファイル選択'))
                                           ],
                                         ),
                                       ],
@@ -1013,8 +1016,8 @@ class TravelCompanion extends StatelessWidget {
                               ),
                               InkWell(
                                 onTap: () {
-                                  formArray.add(
-                                    FormGroup({
+                                  formArray.add(FormGroup(
+                                    {
                                       'visaPage': FormControl<DateTime>(
                                         validators: [
                                           Validators.pattern(
@@ -1022,8 +1025,6 @@ class TravelCompanion extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                      'visaPageFileName':
-                                          FormControl<FileSelect>(),
                                       'landingPermit': FormControl<DateTime>(
                                         validators: [
                                           Validators.pattern(
@@ -1031,10 +1032,8 @@ class TravelCompanion extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                      'landingPermitFileName':
-                                          FormControl<FileSelect>(),
-                                    }),
-                                  );
+                                    },
+                                  ));
                                 },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
@@ -1086,7 +1085,7 @@ class TravelCompanion extends StatelessWidget {
                                             formControlName:
                                                 'planeTicketForYourVisitToJapan',
                                             firstDate: DateTime(1900),
-                                            lastDate: DateTime(2100),
+                                            lastDate: DateTime.now(),
                                             builder: (BuildContext context,
                                                 ReactiveDatePickerDelegate<
                                                         dynamic>
@@ -1139,8 +1138,9 @@ class TravelCompanion extends StatelessWidget {
                                           width: context
                                               .appTheme.spacing.marginMedium,
                                         ),
-                                        fileUpload(context, currentForm,
-                                            'planeTicketForYourVisitToJapanFileName'),
+                                        ElevatedButton(
+                                            onPressed: () {},
+                                            child: const Text('ファイル選択'))
                                       ],
                                     ),
                                   ))
@@ -1163,8 +1163,8 @@ class TravelCompanion extends StatelessWidget {
                               ),
                               InkWell(
                                 onTap: () {
-                                  formArray.add(
-                                    FormGroup({
+                                  formArray.add(FormGroup(
+                                    {
                                       'planeTicketForYourVisitToJapan':
                                           FormControl<DateTime>(
                                         validators: [
@@ -1173,10 +1173,8 @@ class TravelCompanion extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                      'planeTicketForYourVisitToJapanFileName':
-                                          FormControl<FileSelect>(),
-                                    }),
-                                  );
+                                    },
+                                  ));
                                 },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
@@ -1228,7 +1226,7 @@ class TravelCompanion extends StatelessWidget {
                                             formControlName:
                                                 'returnFlightTicket',
                                             firstDate: DateTime(1900),
-                                            lastDate: DateTime(2100),
+                                            lastDate: DateTime.now(),
                                             builder: (BuildContext context,
                                                 ReactiveDatePickerDelegate<
                                                         dynamic>
@@ -1281,8 +1279,9 @@ class TravelCompanion extends StatelessWidget {
                                           width: context
                                               .appTheme.spacing.marginMedium,
                                         ),
-                                        fileUpload(context, currentForm,
-                                            'returnFlightTicketFileName'),
+                                        ElevatedButton(
+                                            onPressed: () {},
+                                            child: const Text('ファイル選択'))
                                       ],
                                     ),
                                   ))
@@ -1305,8 +1304,8 @@ class TravelCompanion extends StatelessWidget {
                               ),
                               InkWell(
                                 onTap: () {
-                                  formArray.add(
-                                    FormGroup({
+                                  formArray.add(FormGroup(
+                                    {
                                       'returnFlightTicket':
                                           FormControl<DateTime>(
                                         validators: [
@@ -1315,10 +1314,8 @@ class TravelCompanion extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                      'returnFlightTicketFileName':
-                                          FormControl<FileSelect>(),
-                                    }),
-                                  );
+                                    },
+                                  ));
                                 },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
@@ -1370,7 +1367,7 @@ class TravelCompanion extends StatelessWidget {
                                             formControlName:
                                                 'boardingPassForReturnFlight',
                                             firstDate: DateTime(1900),
-                                            lastDate: DateTime(2100),
+                                            lastDate: DateTime.now(),
                                             builder: (BuildContext context,
                                                 ReactiveDatePickerDelegate<
                                                         dynamic>
@@ -1423,8 +1420,9 @@ class TravelCompanion extends StatelessWidget {
                                           width: context
                                               .appTheme.spacing.marginMedium,
                                         ),
-                                        fileUpload(context, currentForm,
-                                            'boardingPassForReturnFlightFileName'),
+                                        ElevatedButton(
+                                            onPressed: () {},
+                                            child: const Text('ファイル選択'))
                                       ],
                                     ),
                                   ))
@@ -1447,8 +1445,8 @@ class TravelCompanion extends StatelessWidget {
                               ),
                               InkWell(
                                 onTap: () {
-                                  formArray.add(
-                                    FormGroup({
+                                  formArray.add(FormGroup(
+                                    {
                                       'boardingPassForReturnFlight':
                                           FormControl<DateTime>(
                                         validators: [
@@ -1457,10 +1455,8 @@ class TravelCompanion extends StatelessWidget {
                                           ),
                                         ],
                                       ),
-                                      'boardingPassForReturnFlightFileName':
-                                          FormControl<FileSelect>(),
-                                    }),
-                                  );
+                                    },
+                                  ));
                                 },
                                 child: Row(
                                   mainAxisSize: MainAxisSize.min,
@@ -1502,7 +1498,7 @@ class TravelCompanion extends StatelessWidget {
                             child: ReactiveDatePicker<DateTime>(
                               formControlName: 'certificateOfEligibility',
                               firstDate: DateTime(1900),
-                              lastDate: DateTime(2100),
+                              lastDate: DateTime.now(),
                               builder: (BuildContext context,
                                   ReactiveDatePickerDelegate<dynamic> picker,
                                   Widget? child) {
@@ -1545,11 +1541,8 @@ class TravelCompanion extends StatelessWidget {
                           SizedBox(
                             width: context.appTheme.spacing.marginMedium,
                           ),
-                          fileUpload(
-                              context,
-                              formGroup.control('travel_companion')
-                                  as FormGroup,
-                              'certificateOfEligibilityFileName'),
+                          ElevatedButton(
+                              onPressed: () {}, child: const Text('ファイル選択'))
                         ],
                       ),
                     ],
@@ -1560,68 +1553,6 @@ class TravelCompanion extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-
-  Widget fileUpload(
-      BuildContext context, FormGroup currentForm, String fileName) {
-    return ColumnSeparated(
-      mainAxisAlignment: MainAxisAlignment.start,
-      separatorBuilder: (context, index) => SizedBox(
-        height: context.appTheme.spacing.formSpacing,
-      ),
-      children: [
-        RowSeparated(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          separatorBuilder: (context, index) => SizedBox(
-            width: context.appTheme.spacing.formSpacing,
-          ),
-          children: [
-            RowSeparated(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              separatorBuilder: (context, index) => SizedBox(
-                width: context.appTheme.spacing.marginExtraSmall,
-              ),
-              children: [
-                ReactiveValueListenableBuilder<FileSelect>(
-                  formControlName: fileName,
-                  builder: (context, control, _) {
-                    return InkWell(
-                      onTap: () {
-                        if (control.value?.url != null) {
-                          openUrlInBrowser(fileName: control.value!.url!);
-                        }
-                      },
-                      child: Text(
-                        control.value?.filename ?? 'File Input .....',
-                        style: context.textTheme.bodySmall,
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-            GestureDetector(
-              onTap: () {
-                filePicker().then((value) {
-                  if (value != null) {
-                    currentForm.control(fileName).value = value;
-                  }
-                });
-              },
-              child: Chip(
-                label: const Text('ファイル選択'),
-                labelStyle: TextStyle(
-                  color: context.appTheme.secondaryBackgroundColor,
-                ),
-                backgroundColor: context.appTheme.primaryColor,
-              ),
-            ),
-          ],
-        )
-      ],
     );
   }
 }

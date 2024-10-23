@@ -1,4 +1,3 @@
-import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
@@ -46,7 +45,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                       child: ReactiveDatePicker<DateTime>(
                                         formControlName: 'visaPage',
                                         firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
+                                        lastDate: DateTime.now(),
                                         builder: (BuildContext context,
                                             ReactiveDatePickerDelegate<dynamic>
                                                 picker,
@@ -95,8 +94,9 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    fileUpload(context, currentForm,
-                                        'visaPageFileName'),
+                                    ElevatedButton(
+                                        onPressed: () {},
+                                        child: const Text('ファイル選択'))
                                   ],
                                 ),
                                 SizedBox(
@@ -113,7 +113,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                       child: ReactiveDatePicker<DateTime>(
                                         formControlName: 'landingPermit',
                                         firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
+                                        lastDate: DateTime.now(),
                                         builder: (BuildContext context,
                                             ReactiveDatePickerDelegate<dynamic>
                                                 picker,
@@ -162,8 +162,9 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    fileUpload(context, currentForm,
-                                        'landingPermitFileName'),
+                                    ElevatedButton(
+                                        onPressed: () {},
+                                        child: const Text('ファイル選択'))
                                   ],
                                 ),
                               ],
@@ -186,8 +187,8 @@ class AfterGettingVisaFinal extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          formArray.add(
-                            FormGroup({
+                          formArray.add(FormGroup(
+                            {
                               'visaPage': FormControl<DateTime>(
                                 validators: [
                                   Validators.pattern(
@@ -195,7 +196,6 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              'visaPageFileName': FormControl<FileSelect>(),
                               'landingPermit': FormControl<DateTime>(
                                 validators: [
                                   Validators.pattern(
@@ -203,10 +203,8 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              'landingPermitFileName':
-                                  FormControl<FileSelect>(),
-                            }),
-                          );
+                            },
+                          ));
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -255,7 +253,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                     formControlName:
                                         'planeTicketForYourVisitToJapan',
                                     firstDate: DateTime(1900),
-                                    lastDate: DateTime(2100),
+                                    lastDate: DateTime.now(),
                                     builder: (BuildContext context,
                                         ReactiveDatePickerDelegate<dynamic>
                                             picker,
@@ -302,8 +300,9 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                fileUpload(context, currentForm,
-                                    'planeTicketForYourVisitToJapanFileName'),
+                                ElevatedButton(
+                                    onPressed: () {},
+                                    child: const Text('ファイル選択'))
                               ],
                             ),
                           ))
@@ -324,18 +323,18 @@ class AfterGettingVisaFinal extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          formArray.add(FormGroup({
-                            'planeTicketForYourVisitToJapan':
-                                FormControl<DateTime>(
-                              validators: [
-                                Validators.pattern(
-                                  ValidatorRegExp.date,
-                                ),
-                              ],
-                            ),
-                            'planeTicketForYourVisitToJapanFileName':
-                                FormControl<FileSelect>(),
-                          }));
+                          formArray.add(FormGroup(
+                            {
+                              'planeTicketForYourVisitToJapan':
+                                  FormControl<DateTime>(
+                                validators: [
+                                  Validators.pattern(
+                                    ValidatorRegExp.date,
+                                  ),
+                                ],
+                              ),
+                            },
+                          ));
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -383,7 +382,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                   child: ReactiveDatePicker<DateTime>(
                                     formControlName: 'returnFlightTicket',
                                     firstDate: DateTime(1900),
-                                    lastDate: DateTime(2100),
+                                    lastDate: DateTime.now(),
                                     builder: (BuildContext context,
                                         ReactiveDatePickerDelegate<dynamic>
                                             picker,
@@ -429,8 +428,9 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                fileUpload(context, currentForm,
-                                    'returnFlightTicketFileName'),
+                                ElevatedButton(
+                                    onPressed: () {},
+                                    child: const Text('ファイル選択'))
                               ],
                             ),
                           ))
@@ -451,8 +451,8 @@ class AfterGettingVisaFinal extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          formArray.add(
-                            FormGroup({
+                          formArray.add(FormGroup(
+                            {
                               'returnFlightTicket': FormControl<DateTime>(
                                 validators: [
                                   Validators.pattern(
@@ -460,10 +460,8 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              'returnFlightTicketFileName':
-                                  FormControl<FileSelect>(),
-                            }),
-                          );
+                            },
+                          ));
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -512,7 +510,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                     formControlName:
                                         'boardingPassForReturnFlight',
                                     firstDate: DateTime(1900),
-                                    lastDate: DateTime(2100),
+                                    lastDate: DateTime.now(),
                                     builder: (BuildContext context,
                                         ReactiveDatePickerDelegate<dynamic>
                                             picker,
@@ -559,8 +557,9 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                fileUpload(context, currentForm,
-                                    'boardingPassForReturnFlightFileName'),
+                                ElevatedButton(
+                                    onPressed: () {},
+                                    child: const Text('ファイル選択'))
                               ],
                             ),
                           ))
@@ -581,8 +580,8 @@ class AfterGettingVisaFinal extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          formArray.add(
-                            FormGroup({
+                          formArray.add(FormGroup(
+                            {
                               'boardingPassForReturnFlight':
                                   FormControl<DateTime>(
                                 validators: [
@@ -591,10 +590,8 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              'boardingPassForReturnFlightFileName':
-                                  FormControl<FileSelect>(),
-                            }),
-                          );
+                            },
+                          ));
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -635,7 +632,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                     child: ReactiveDatePicker<DateTime>(
                       formControlName: 'certificateOfEligibility',
                       firstDate: DateTime(1900),
-                      lastDate: DateTime(2100),
+                      lastDate: DateTime.now(),
                       builder: (BuildContext context,
                           ReactiveDatePickerDelegate<dynamic> picker,
                           Widget? child) {
@@ -678,77 +675,12 @@ class AfterGettingVisaFinal extends StatelessWidget {
                   SizedBox(
                     width: context.appTheme.spacing.marginMedium,
                   ),
-                  fileUpload(
-                      context,
-                      formGroup.control('afterGettingVisaFinal') as FormGroup,
-                      'certificateOfEligibilityFileName'),
+                  ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
                 ],
               ),
             ],
           ),
         ),
-      ],
-    );
-  }
-
-  Widget fileUpload(
-      BuildContext context, FormGroup currentForm, String fileName) {
-    return ColumnSeparated(
-      mainAxisAlignment: MainAxisAlignment.start,
-      separatorBuilder: (context, index) => SizedBox(
-        height: context.appTheme.spacing.formSpacing,
-      ),
-      children: [
-        RowSeparated(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisAlignment: MainAxisAlignment.start,
-          separatorBuilder: (context, index) => SizedBox(
-            width: context.appTheme.spacing.formSpacing,
-          ),
-          children: [
-            RowSeparated(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              separatorBuilder: (context, index) => SizedBox(
-                width: context.appTheme.spacing.marginExtraSmall,
-              ),
-              children: [
-                ReactiveValueListenableBuilder<FileSelect>(
-                  formControlName: fileName,
-                  builder: (context, control, _) {
-                    return InkWell(
-                      onTap: () {
-                        if (control.value?.url != null) {
-                          openUrlInBrowser(fileName: control.value!.url!);
-                        }
-                      },
-                      child: Text(
-                        control.value?.filename ?? 'File Input .....',
-                        style: context.textTheme.bodySmall,
-                      ),
-                    );
-                  },
-                ),
-              ],
-            ),
-            GestureDetector(
-              onTap: () {
-                filePicker().then((value) {
-                  if (value != null) {
-                    currentForm.control(fileName).value = value;
-                  }
-                });
-              },
-              child: Chip(
-                label: const Text('ファイル選択'),
-                labelStyle: TextStyle(
-                  color: context.appTheme.secondaryBackgroundColor,
-                ),
-                backgroundColor: context.appTheme.primaryColor,
-              ),
-            ),
-          ],
-        )
       ],
     );
   }
