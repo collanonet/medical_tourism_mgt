@@ -97,7 +97,7 @@ class Strings {
     final parts = value.toString().split('.');
     final formatter = NumberFormat.decimalPattern();
     final formatted = formatter.format(int.parse(parts[0]));
-    return parts.length > 1 ? '$formatted.${parts[1]}' : formatted;
+    return "${parts.length > 1 ? '$formatted.${parts[1]}' : formatted} 円" ;
   }
 }
 
