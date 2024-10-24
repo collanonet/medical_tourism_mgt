@@ -23,7 +23,6 @@ class MedicalInvoiceResponse {
   String? fileNamePdfZHTW;
   String? invoiceNumber;
   DateTime? invoiceDate;
-  DateTime? startDate;
   double? totalAmount;
 
   String? companyName;
@@ -38,8 +37,7 @@ class MedicalInvoiceResponse {
   BasicInformationHospitalResponse? hospitalRecord;
   List<ItemResponse>? item;
   List<NoteInvoiceResponse>? notes;
-  int? taxRate;
-  bool taxRateOption;
+  String? taxRate;
   String? remarks;
 
   final DateTime createdAt;
@@ -57,7 +55,6 @@ class MedicalInvoiceResponse {
     this.fileNamePdfZHTW,
     this.invoiceNumber,
     this.invoiceDate,
-    this.startDate,
     this.companyName,
     this.address,
     this.telNumber,
@@ -71,7 +68,6 @@ class MedicalInvoiceResponse {
     this.item,
     this.notes,
     this.taxRate,
-    this.taxRateOption = false,
     this.remarks,
     required this.createdAt,
     required this.updatedAt,

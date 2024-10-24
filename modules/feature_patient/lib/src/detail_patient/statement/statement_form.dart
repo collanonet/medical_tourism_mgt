@@ -10,13 +10,12 @@ FormGroup statementForm() {
     'invoiceDate': FormControl<DateTime>(
       value: DateTime.now(),
     ),
-    'startDate': FormControl<DateTime>(),
     'companyName': FormControl<String>(),
     'address': FormControl<String>(),
     'telNumber': FormControl<String>(),
     'fexNumber': FormControl<String>(),
     'inCharge': FormControl<String>(),
-    'totalAmount': FormControl<double>(),
+    'totalAmount' : FormControl<double>(),
     'medicalRecord': FormControl<String>(
       validators: [
         Validators.required,
@@ -38,9 +37,7 @@ FormGroup statementForm() {
             Validators.number,
           ],
         ),
-        'unit': FormControl<String>(
-          value: '式',
-        ),
+        'unit': FormControl<String>(),
         'unitPrice': FormControl<double>(),
       })
     ]),
@@ -50,10 +47,7 @@ FormGroup statementForm() {
         'note': FormControl<String>(),
       })
     ]),
-    'taxRate': FormControl<int>(),
-    'taxRateOption': FormControl<bool>(
-      value: false,
-    ),
+    'taxRate': FormControl<String>(),
     'remarks': FormControl<String>(),
   });
 }

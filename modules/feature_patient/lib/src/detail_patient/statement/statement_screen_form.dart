@@ -203,6 +203,38 @@ class StatementScreenForm extends StatelessWidget {
         ),
 
         Text('情報', style: context.textTheme.titleLarge),
+        // totalAmount
+        RowSeparated(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          separatorBuilder: (BuildContext context, int index) {
+            return SizedBox(width: context.appTheme.spacing.formSpacing);
+          },
+          children: [
+            // totalAmount
+            Expanded(
+              child: ReactiveTextField<double>(
+                formControlName: 'totalAmount',
+                keyboardType: TextInputType.number,
+                valueAccessor: DoubleValueAccessor(),
+                inputFormatters: [
+                  CustomCurrencyFormatter(),
+                ],
+                decoration: InputDecoration(
+                  labelText: '請求書金額',
+                  suffixText: '円',
+                ),
+              ),
+            ),
+            // invoiceDate
+            Expanded(
+              child: Container(),
+            ),
+            // companyName
+            Expanded(
+              child: Container(),
+            ),
+          ],
+        ),
         RowSeparated(
           crossAxisAlignment: CrossAxisAlignment.start,
           separatorBuilder: (BuildContext context, int index) {
