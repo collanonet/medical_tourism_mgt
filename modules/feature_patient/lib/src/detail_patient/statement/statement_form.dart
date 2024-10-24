@@ -15,6 +15,7 @@ FormGroup statementForm() {
     'telNumber': FormControl<String>(),
     'fexNumber': FormControl<String>(),
     'inCharge': FormControl<String>(),
+    'totalAmount' : FormControl<double>(),
     'medicalRecord': FormControl<String>(
       validators: [
         Validators.required,

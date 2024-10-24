@@ -23,6 +23,7 @@ class MedicalInvoiceResponse {
   String? fileNamePdfZHTW;
   String? invoiceNumber;
   DateTime? invoiceDate;
+  double? totalAmount;
 
   String? companyName;
   String? address;
@@ -59,6 +60,7 @@ class MedicalInvoiceResponse {
     this.telNumber,
     this.fexNumber,
     this.inCharge,
+    this.totalAmount,
     required this.medicalRecord,
     this.user,
     this.patient,
