@@ -420,9 +420,15 @@ class StatementScreenForm extends StatelessWidget {
                               ),
                               SizedBox(
                                 width: 80,
-                                child: ReactiveTextField<String>(
+                                child: ReactiveDropdownField(
                                   formControlName: 'unit',
-                                  decoration: InputDecoration(labelText: '量'),
+                                  items: [
+                                    DropdownMenuItem(child: Text('代'), value: '代'),
+                                    DropdownMenuItem(child: Text('回'), value: '回'),
+                                  ],
+                                  decoration: InputDecoration(
+                                    labelText: '量',
+                                  ),
                                 ),
                               ),
                               SizedBox(
