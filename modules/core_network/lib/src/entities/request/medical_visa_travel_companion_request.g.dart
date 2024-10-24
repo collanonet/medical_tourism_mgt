@@ -22,7 +22,9 @@ MedicalVisaTravelCompanionRequest _$MedicalVisaTravelCompanionRequestFromJson(
           .toList(),
       travelRemarks: json['travelRemarks'] as String?,
       visaWithdrawalTarget: json['visaWithdrawalTarget'] as bool?,
-      reason: json['reason'] as String?,
+      reason: json['reason'] == null
+          ? null
+          : DateTime.parse(json['reason'] as String),
       remarks: json['remarks'] as String?,
       vasaInfo: (json['vasaInfo'] as List<dynamic>?)
           ?.map(
@@ -56,7 +58,7 @@ Map<String, dynamic> _$MedicalVisaTravelCompanionRequestToJson(
       'travelInfo': instance.travelInfo,
       'travelRemarks': instance.travelRemarks,
       'visaWithdrawalTarget': instance.visaWithdrawalTarget,
-      'reason': instance.reason,
+      'reason': instance.reason?.toIso8601String(),
       'remarks': instance.remarks,
       'vasaInfo': instance.vasaInfo,
       'ticket': instance.ticket,

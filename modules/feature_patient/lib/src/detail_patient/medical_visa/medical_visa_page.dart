@@ -17,21 +17,19 @@ class MedicalVisaPage extends StatelessWidget {
   const MedicalVisaPage({
     super.key,
     this.patient,
-    this.id,
   });
   final Patient? patient;
-  final String? id;
 
   @override
   Widget build(BuildContext context) {
     return ReactiveFormConfig(
       validationMessages: validationMessages,
       child: ReactiveFormBuilder(
-        form: () => medicalVisaForm(medicalRecord: id!)..markAllAsTouched(),
+        form: () => medicalVisaForm()..markAllAsTouched(),
         builder: (context, formGroup, child) {
           return Provider(
             create: (context) =>
-                GetIt.I<MedicalVisaModel>()..fetchMedicalRecordVisa(formGroup,id: id!),
+                GetIt.I<MedicalVisaModel>()..fetchData(formGroup),
             child: const MedicalVisaScreen(),
           );
         },
