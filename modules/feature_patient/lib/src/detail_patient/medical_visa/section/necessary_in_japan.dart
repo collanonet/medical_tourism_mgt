@@ -1,3 +1,4 @@
+import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
@@ -94,9 +95,8 @@ class NecessaryInJapan extends StatelessWidget {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    ElevatedButton(
-                                        onPressed: () {},
-                                        child: const Text('ファイル選択'))
+                                    fileUpload(context, currentForm,
+                                        'passportFileSelect'),
                                   ],
                                 ),
                                 SizedBox(
@@ -259,6 +259,7 @@ class NecessaryInJapan extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              'passportFileSelect': FormControl<FileSelect>(),
                               'letterOfGuaranteeDate': FormControl<DateTime>(
                                 validators: [
                                   Validators.pattern(
@@ -266,6 +267,8 @@ class NecessaryInJapan extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                              'letterOfGuaranteeFileSelect':
+                                  FormControl<FileSelect>(),
                               'sendBy': FormControl<String>(value: ''),
                               'byEMS': FormControl<bool>(value: false),
                               'byFedex': FormControl<bool>(value: false),
@@ -365,9 +368,8 @@ class NecessaryInJapan extends StatelessWidget {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                ElevatedButton(
-                                    onPressed: () {},
-                                    child: const Text('ファイル選択'))
+                                fileUpload(context, currentForm,
+                                    'treatmentScheduleFileSelect'),
                               ],
                             ),
                           ))
@@ -387,17 +389,21 @@ class NecessaryInJapan extends StatelessWidget {
                         height: context.appTheme.spacing.marginMedium,
                       ),
                       InkWell(
-                        onTap: () => formArray.add(FormGroup(
-                          {
-                            'treatmentSchedule': FormControl<DateTime>(
-                              validators: [
-                                Validators.pattern(
-                                  ValidatorRegExp.date,
-                                ),
-                              ],
-                            )
-                          },
-                        )),
+                        onTap: () => formArray.add(
+                          FormGroup(
+                            {
+                              'treatmentSchedule': FormControl<DateTime>(
+                                validators: [
+                                  Validators.pattern(
+                                    ValidatorRegExp.date,
+                                  ),
+                                ],
+                              ),
+                              'treatmentScheduleFileSelect':
+                                  FormControl<FileSelect>(),
+                            },
+                          ),
+                        ),
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
                           crossAxisAlignment: CrossAxisAlignment.center,
@@ -480,7 +486,10 @@ class NecessaryInJapan extends StatelessWidget {
                   SizedBox(
                     width: context.appTheme.spacing.marginMedium,
                   ),
-                  ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                  fileUpload(
+                      context,
+                      formGroup.control('necessaryInJapan') as FormGroup,
+                      'statementOfReasonsFileSelect'),
                 ],
               ),
               SizedBox(
@@ -539,7 +548,10 @@ class NecessaryInJapan extends StatelessWidget {
                   SizedBox(
                     width: context.appTheme.spacing.marginMedium,
                   ),
-                  ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                  fileUpload(
+                      context,
+                      formGroup.control('necessaryInJapan') as FormGroup,
+                      'travelCompanionListFileSelect'),
                 ],
               ),
               SizedBox(
@@ -548,6 +560,68 @@ class NecessaryInJapan extends StatelessWidget {
             ],
           ),
         ),
+      ],
+    );
+  }
+
+  Widget fileUpload(
+      BuildContext context, FormGroup currentForm, String fileName) {
+    return ColumnSeparated(
+      mainAxisAlignment: MainAxisAlignment.start,
+      separatorBuilder: (context, index) => SizedBox(
+        height: context.appTheme.spacing.formSpacing,
+      ),
+      children: [
+        RowSeparated(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          separatorBuilder: (context, index) => SizedBox(
+            width: context.appTheme.spacing.formSpacing,
+          ),
+          children: [
+            RowSeparated(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              separatorBuilder: (context, index) => SizedBox(
+                width: context.appTheme.spacing.marginExtraSmall,
+              ),
+              children: [
+                ReactiveValueListenableBuilder<FileSelect>(
+                  formControlName: fileName,
+                  builder: (context, control, _) {
+                    return InkWell(
+                      onTap: () {
+                        if (control.value?.url != null) {
+                          openUrlInBrowser(fileName: control.value!.url!);
+                        }
+                      },
+                      child: Text(
+                        control.value?.filename ?? 'File Input .....',
+                        style: context.textTheme.bodySmall,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            GestureDetector(
+              onTap: () {
+                filePicker().then((value) {
+                  if (value != null) {
+                    currentForm.control(fileName).value = value;
+                  }
+                });
+              },
+              child: Chip(
+                label: const Text('ファイル選択'),
+                labelStyle: TextStyle(
+                  color: context.appTheme.secondaryBackgroundColor,
+                ),
+                backgroundColor: context.appTheme.primaryColor,
+              ),
+            ),
+          ],
+        )
       ],
     );
   }

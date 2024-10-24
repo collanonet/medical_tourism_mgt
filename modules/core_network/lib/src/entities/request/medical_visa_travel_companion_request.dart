@@ -17,14 +17,15 @@ class MedicalVisaTravelCompanionRequest {
   String? numberPassport;
   List<TravelInfoRequest>? travelInfo;
   String? travelRemarks;
-  bool? subjectVisaWithdrawal;
-  DateTime? deathOrOccurrenceEventDate;
+  bool? visaWithdrawalTarget;
+  DateTime? reason;
   String? remarks;
   List<GettingVisaInfoRequest>? vasaInfo;
   List<TicketRequest>? ticket;
   List<TicketBackRequest>? ticketBack;
   List<BoardingPassRequest>? boardingPass;
   DateTime? certificateOfEligibility;
+  String? certificateOfEligibilityFileName;
 
   MedicalVisaTravelCompanionRequest({
     this.nameRomaji,
@@ -35,14 +36,15 @@ class MedicalVisaTravelCompanionRequest {
     this.numberPassport,
     this.travelInfo,
     this.travelRemarks,
-    this.subjectVisaWithdrawal,
-    this.deathOrOccurrenceEventDate,
+    this.visaWithdrawalTarget,
+    this.reason,
     this.remarks,
     this.vasaInfo,
     this.ticket,
     this.ticketBack,
     this.boardingPass,
     this.certificateOfEligibility,
+    this.certificateOfEligibilityFileName,
   });
 
   factory MedicalVisaTravelCompanionRequest.fromJson(Map<String,dynamic> json){

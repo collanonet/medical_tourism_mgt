@@ -13,6 +13,7 @@ class MedicalAfterGettingVisaFinalRequest {
   List<TicketBackRequest>? ticketBack;
   List<BoardingPassRequest>? boardingPass;
   DateTime? certificateOfEligibility;
+  String? certificateOfEligibilityFileName;
 
   MedicalAfterGettingVisaFinalRequest({
     this.vasaInfo,
@@ -20,6 +21,11 @@ class MedicalAfterGettingVisaFinalRequest {
     this.ticketBack,
     this.boardingPass,
     this.certificateOfEligibility,
+    this.certificateOfEligibilityFileName,
   });
+
+  factory MedicalAfterGettingVisaFinalRequest.fromJson(Map<String, dynamic> json) => _$MedicalAfterGettingVisaFinalRequestFromJson(json);
+  
+  Map<String, dynamic> toJson() => _$MedicalAfterGettingVisaFinalRequestToJson(this);
   
 }

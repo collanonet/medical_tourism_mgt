@@ -85,7 +85,7 @@ class DocumentRequired extends StatelessWidget {
                                           context.appTheme.spacing.marginMedium,
                                     ),
                                     Expanded(
-                                      flex: 2,
+                                      flex: 3,
                                       child: SizedBox(
                                         width: context
                                             .appTheme.spacing.marginMedium,
@@ -557,7 +557,9 @@ class DocumentRequired extends StatelessWidget {
                     width: context.appTheme.spacing.marginMedium,
                   ),
                   fileUpload(
-                      context, formGroup.control('requiredInJapan') as FormGroup, 'travelCompanionListFileSelect'),
+                      context,
+                      formGroup.control('requiredInJapan') as FormGroup,
+                      'travelCompanionListFileSelect'),
                 ],
               ),
               SizedBox(
