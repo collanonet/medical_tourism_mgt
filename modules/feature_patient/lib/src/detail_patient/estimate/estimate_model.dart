@@ -64,6 +64,7 @@ class EstimateModel {
     formGroup.control('telNumber').value = invoice.telNumber;
     formGroup.control('fexNumber').value = invoice.fexNumber;
     formGroup.control('inCharge').value = invoice.inCharge;
+    formGroup.control('totalAmount').value = invoice.totalAmount;
 
     formGroup.control('medicalRecord').value = invoice.medicalRecord;
     formGroup.control('user').value = invoice.user;
@@ -194,6 +195,7 @@ class EstimateModel {
         telNumber: formGroup.control('telNumber').value,
         fexNumber: formGroup.control('fexNumber').value,
         inCharge: formGroup.control('inCharge').value,
+        totalAmount: formGroup.control('totalAmount').value,
         remarks: formGroup.control('remarks').value,
         notes: notes,
         item: items,
@@ -506,6 +508,7 @@ Future<Uint8List?> generatePdfFromQuotation(
   String telNumberLabel;
   String fexNumberLabel;
   String inChargeLabel;
+  String totalAmountLabel;
   List<String> tableHeaders;
 
   // Load appropriate fonts and text labels based on the language
@@ -519,6 +522,7 @@ Future<Uint8List?> generatePdfFromQuotation(
       telNumberLabel = '電話番号: ';
       fexNumberLabel = 'FAX番号: ';
       inChargeLabel = '担当者: ';
+      totalAmountLabel = '合計金額: ';
       tableHeaders = ['', '項目', '数', '量', '単価', '金額'];
       break;
 
@@ -531,6 +535,7 @@ Future<Uint8List?> generatePdfFromQuotation(
       telNumberLabel = '电话号码: ';
       fexNumberLabel = '传真号码: ';
       inChargeLabel = '负责人: ';
+      totalAmountLabel = '总金额: ';
       tableHeaders = ['', '项目', '数', '量', '单价', '金额'];
       break;
 
@@ -543,6 +548,7 @@ Future<Uint8List?> generatePdfFromQuotation(
       telNumberLabel = '電話號碼: ';
       fexNumberLabel = '傳真號碼: ';
       inChargeLabel = '負責人: ';
+      totalAmountLabel = '總金額: ';
       tableHeaders = ['', '項目', '數', '量', '單價', '金額'];
       break;
 
@@ -555,6 +561,7 @@ Future<Uint8List?> generatePdfFromQuotation(
       telNumberLabel = 'số điện thoại: ';
       fexNumberLabel = 'số fax: ';
       inChargeLabel = 'người chịu trách nhiệm: ';
+      totalAmountLabel = 'tổng số tiền: ';
       tableHeaders = ['', 'mục', 'số', 'lượng', 'đơn giá', 'số tiền'];
       break;
 
@@ -567,6 +574,7 @@ Future<Uint8List?> generatePdfFromQuotation(
       telNumberLabel = 'Tel number: ';
       fexNumberLabel = 'Fex number: ';
       inChargeLabel = 'In charge: ';
+      totalAmountLabel = 'Total amount: ';
       tableHeaders = ['', 'Item', 'Quantity', 'Unit', 'Unit Price', 'Amount'];
   }
   Uint8List? logoImage;
@@ -729,6 +737,19 @@ Future<Uint8List?> generatePdfFromQuotation(
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
+        pw.Row(
+            crossAxisAlignment: pw.CrossAxisAlignment.start,
+            mainAxisAlignment: pw.MainAxisAlignment.start,
+            children: [
+              pw.Text(
+                totalAmountLabel,
+                style: pw.TextStyle(font: ttf),
+              ),
+              pw.Text(
+                Strings.formatCurrency(request.totalAmount ?? 0),
+                style: pw.TextStyle(font: ttfJP),
+              ),
+            ]),
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
           headers: tableHeaders,
@@ -825,8 +846,9 @@ Future<Uint8List?> generatePdfFromQuotation(
         pw.TableHelper.fromTextArray(
             headerCellDecoration:
                 const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
-            cellDecoration: (i, _,__) {
-              return const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98));
+            cellDecoration: (i, _, __) {
+              return const pw.BoxDecoration(
+                  color: PdfColor.fromInt(0xff98FF98));
             },
             columnWidths: {
               0: const pw.FlexColumnWidth(10),

@@ -22,6 +22,7 @@ class MedicalInvoiceRequest {
   String? telNumber;
   String? fexNumber;
   String? inCharge;
+  double? totalAmount;
 
   String medicalRecord;
   String? user;
@@ -48,6 +49,7 @@ class MedicalInvoiceRequest {
     this.telNumber,
     this.fexNumber,
     this.inCharge,
+    this.totalAmount,
     required this.medicalRecord,
     this.user,
     this.patient,
