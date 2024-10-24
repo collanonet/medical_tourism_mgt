@@ -927,6 +927,8 @@ Future<Uint8List?> generatePdfFromQuotation(
               return const pw.BoxDecoration(
                   color: PdfColor.fromInt(0xff98FF98));
             },
+            rowDecoration: pw.BoxDecoration(
+                color: PdfColor.fromInt(0xff98FF98)),
             columnWidths: {
               0: const pw.FlexColumnWidth(10),
               1: const pw.FlexColumnWidth(0),
