@@ -71,9 +71,9 @@ class StatementModel {
     formGroup.control('inCharge').value = invoice.inCharge;
     formGroup.control('totalAmount').value = invoice.totalAmount;
 
-    formGroup.control('medicalRecord').value = invoice.medicalRecord;
-    formGroup.control('user').value = invoice.user;
-    formGroup.control('hospitalRecord').value = invoice.hospitalRecord;
+    formGroup.control('medicalRecord').value = invoice.medicalRecord.id;
+    formGroup.control('user').value = invoice.user?.id;
+    formGroup.control('hospitalRecord').value = invoice.hospitalRecord?.id;
 
     formGroup.control('remarks').value = invoice.remarks;
 
@@ -577,26 +577,67 @@ Future<Uint8List?> generatePdfFromInvoice(
                 ),
               ])
         ]),
-        if (logoImage != null || stampImage != null)
-          pw.Row(
-              crossAxisAlignment: pw.CrossAxisAlignment.end,
-              mainAxisAlignment: pw.MainAxisAlignment.end,
-              children: [
-                if (logoImage != null)
-                  pw.Image(
-                    pw.MemoryImage(logoImage),
-                    height: 100,
-                    width: 100,
-                    fit: pw.BoxFit.contain,
+        pw.Row(children: [
+          pw.Expanded(
+            flex: 4,
+            child: pw.Row(
+                crossAxisAlignment: pw.CrossAxisAlignment.start,
+                mainAxisAlignment: pw.MainAxisAlignment.start,
+                children: [
+                  pw.Container(
+                    padding: const pw.EdgeInsets.all(8),
+                    decoration: pw.BoxDecoration(
+                      color: PdfColor.fromInt(0xff98FF98),
+                      border: pw.Border.all(
+                        color: PdfColor.fromInt(0xff000000),
+                        width: 1,
+                      ),
+                    ),
+                    child: pw.Text(
+                      totalAmountLabel,
+                      style: pw.TextStyle(font: ttf),
+                    ),
                   ),
-                if (stampImage != null)
-                  pw.Image(
-                    pw.MemoryImage(stampImage),
-                    height: 100,
-                    width: 100,
-                    fit: pw.BoxFit.contain,
+                  pw.Container(
+                    padding: const pw.EdgeInsets.all(8),
+                    decoration: pw.BoxDecoration(
+                      color: PdfColor.fromInt(0xffffffff),
+                      border: pw.Border.all(
+                        color: PdfColor.fromInt(0xff000000),
+                        width: 1,
+                      ),
+                    ),
+                    child: pw.Text(
+                      Strings.formatCurrency(request.totalAmount ?? 0),
+                      style: pw.TextStyle(font: ttfJP),
+                    ),
                   ),
-              ]),
+                ]),
+          ),
+          pw.Expanded(
+            flex: 8,
+            child: pw.Row(
+                crossAxisAlignment: pw.CrossAxisAlignment.end,
+                mainAxisAlignment: pw.MainAxisAlignment.end,
+                children: [
+                  if (logoImage != null)
+                    pw.Image(
+                      pw.MemoryImage(logoImage),
+                      height: 100,
+                      width: 100,
+                      fit: pw.BoxFit.contain,
+                    ),
+                  if (stampImage != null)
+                    pw.Image(
+                      pw.MemoryImage(stampImage),
+                      height: 100,
+                      width: 100,
+                      fit: pw.BoxFit.contain,
+                    ),
+                ]),
+          )
+        ]),
+
         pw.Row(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
@@ -662,19 +703,7 @@ Future<Uint8List?> generatePdfFromInvoice(
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
-        pw.Row(
-            crossAxisAlignment: pw.CrossAxisAlignment.start,
-            mainAxisAlignment: pw.MainAxisAlignment.start,
-            children: [
-              pw.Text(
-                totalAmountLabel,
-                style: pw.TextStyle(font: ttf),
-              ),
-              pw.Text(
-                Strings.formatCurrency(request.totalAmount ?? 0),
-                style: pw.TextStyle(font: ttfJP),
-              ),
-            ]),
+
         pw.SizedBox(height: 20),
         pw.TableHelper.fromTextArray(
           headers: tableHeaders,
@@ -713,13 +742,37 @@ Future<Uint8List?> generatePdfFromInvoice(
                         ),
                         item.quantity ?? '',
                         item.unit ?? '',
-                        '${Strings.formatCurrency(item.unitPrice ?? 0)}'
-                            ' 円',
-                        '${Strings.formatCurrency((item.quantity ?? 0) * (double.tryParse("${item.unit ?? 0}") ?? 0))}'
-                            ' 円',
+                        Strings.formatCurrency(item.unitPrice ?? 0),
+                        Strings.formatCurrency((item.quantity ?? 0) *
+                            (double.tryParse("${item.unit ?? 0}") ?? 0)),
                       ])
                   .toList() ??
-              [],
+              [
+                [
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                ],
+                [
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                ],
+                [
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                  '',
+                ]
+              ],
         ),
         // notes
         pw.TableHelper.fromTextArray(
@@ -740,7 +793,20 @@ Future<Uint8List?> generatePdfFromInvoice(
                         ),
                       ])
                   .toList() ??
-              [],
+              [
+                [
+                  '',
+                  '',
+                ],
+                [
+                  '',
+                  '',
+                ],
+                [
+                  '',
+                  '',
+                ]
+              ],
         ),
         pw.TableHelper.fromTextArray(columnWidths: {
           0: const pw.FlexColumnWidth(10),
@@ -751,21 +817,45 @@ Future<Uint8List?> generatePdfFromInvoice(
           5: const pw.FlexColumnWidth(2),
         }, data: [
           [
-            '計',
+            pw.Align(
+              alignment: pw.Alignment.centerLeft,
+              child: pw.Text(
+                '計',
+                style: pw.TextStyle(font: ttfJP),
+              ),
+            ),
             '',
             '',
             '',
             '',
-            Strings.formatCurrency(subTotal(request.item ?? [])),
+            pw.Align(
+              alignment: pw.Alignment.centerRight,
+              child: pw.Text(
+                Strings.formatCurrency(subTotal(request.item ?? [])),
+                style: pw.TextStyle(font: ttfJP),
+              ),
+            ),
           ],
           [
-            '消費税（${int.tryParse(request.taxRate.toString()) ?? 0}%）',
+            pw.Align(
+              alignment: pw.Alignment.centerLeft,
+              child: pw.Text(
+                '消費税（${int.tryParse(request.taxRate.toString()) ?? 0}%）',
+                style: pw.TextStyle(font: ttfJP),
+              ),
+            ),
             '',
             '',
             '',
             '',
-            Strings.formatCurrency(
-                taxCalculation(subTotal(request.item ?? []), request.taxRate)),
+            pw.Align(
+              alignment: pw.Alignment.centerRight,
+              child: pw.Text(
+                Strings.formatCurrency(taxCalculation(
+                    subTotal(request.item ?? []), request.taxRate)),
+                style: pw.TextStyle(font: ttfJP),
+              ),
+            ),
           ],
         ]),
         pw.TableHelper.fromTextArray(
@@ -785,15 +875,27 @@ Future<Uint8List?> generatePdfFromInvoice(
             },
             data: [
               [
-                '合計',
+                pw.Align(
+                  alignment: pw.Alignment.centerLeft,
+                  child: pw.Text(
+                    '合計',
+                    style: pw.TextStyle(font: ttfJP),
+                  ),
+                ),
                 '',
                 '',
                 '',
                 '',
-                Strings.formatCurrency(total(
-                    subTotal(request.item ?? []),
-                    taxCalculation(
-                        subTotal(request.item ?? []), request.taxRate))),
+                pw.Align(
+                  alignment: pw.Alignment.centerRight,
+                  child: pw.Text(
+                    Strings.formatCurrency(total(
+                        subTotal(request.item ?? []),
+                        taxCalculation(
+                            subTotal(request.item ?? []), request.taxRate))),
+                    style: pw.TextStyle(font: ttfJP),
+                  ),
+                ),
               ],
             ]),
         pw.SizedBox(height: 20),

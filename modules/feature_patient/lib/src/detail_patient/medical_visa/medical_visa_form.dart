@@ -205,7 +205,7 @@ FormGroup medicalVisaForm() {
                   ),
                 ],
               ),
-              'visaPageFileName' : FormControl<FileSelect>(),
+              'visaPageFileName': FormControl<FileSelect>(),
               'landingPermit': FormControl<DateTime>(
                 validators: [
                   Validators.pattern(
@@ -213,7 +213,7 @@ FormGroup medicalVisaForm() {
                   ),
                 ],
               ),
-              'landingPermitFileName' : FormControl<FileSelect>(),
+              'landingPermitFileName': FormControl<FileSelect>(),
             }),
           ]),
           'ticket': FormArray([
@@ -225,7 +225,8 @@ FormGroup medicalVisaForm() {
                   ),
                 ],
               ),
-              'planeTicketForYourVisitToJapanFileName' : FormControl<FileSelect>(),
+              'planeTicketForYourVisitToJapanFileName':
+                  FormControl<FileSelect>(),
             }),
           ]),
           'ticketBack': FormArray([
@@ -237,7 +238,7 @@ FormGroup medicalVisaForm() {
                   ),
                 ],
               ),
-              'returnFlightTicketFileName' : FormControl<FileSelect>(),
+              'returnFlightTicketFileName': FormControl<FileSelect>(),
             }),
           ]),
           'boardingPass': FormArray([
@@ -249,7 +250,7 @@ FormGroup medicalVisaForm() {
                   ),
                 ],
               ),
-              'boardingPassForReturnFlightFileName' : FormControl<FileSelect>(),
+              'boardingPassForReturnFlightFileName': FormControl<FileSelect>(),
             }),
           ]),
           'certificateOfEligibility': FormControl<DateTime>(
@@ -259,7 +260,7 @@ FormGroup medicalVisaForm() {
               ),
             ],
           ),
-          'certificateOfEligibilityFileName' : FormControl<FileSelect>(),
+          'certificateOfEligibilityFileName': FormControl<FileSelect>(),
         },
       ),
 
