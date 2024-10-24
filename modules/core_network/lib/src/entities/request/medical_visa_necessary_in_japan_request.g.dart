@@ -10,10 +10,11 @@ MedicalVisaNecessaryInJapanRequest _$MedicalVisaNecessaryInJapanRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalVisaNecessaryInJapanRequest(
       visaInfo: (json['visaInfo'] as List<dynamic>?)
-          ?.map((e) => VisaInfo.fromJson(e as Map<String, dynamic>))
+          ?.map(
+              (e) => GettingVisaInfoRequest.fromJson(e as Map<String, dynamic>))
           .toList(),
       schedule: (json['schedule'] as List<dynamic>?)
-          ?.map((e) => Schedule.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => ScheduleRequest.fromJson(e as Map<String, dynamic>))
           .toList(),
       statementOfReasonsDate: json['statementOfReasonsDate'] == null
           ? null
@@ -21,9 +22,10 @@ MedicalVisaNecessaryInJapanRequest _$MedicalVisaNecessaryInJapanRequestFromJson(
       travelCompanionListDate: json['travelCompanionListDate'] == null
           ? null
           : DateTime.parse(json['travelCompanionListDate'] as String),
-      travelInfo: (json['travelInfo'] as List<dynamic>?)
-          ?.map((e) => TravelInfo.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      statementOfReasonsDateFileName:
+          json['statementOfReasonsDateFileName'] as String?,
+      travelCompanionListFileName:
+          json['travelCompanionListFileName'] as String?,
     );
 
 Map<String, dynamic> _$MedicalVisaNecessaryInJapanRequestToJson(
@@ -33,7 +35,8 @@ Map<String, dynamic> _$MedicalVisaNecessaryInJapanRequestToJson(
       'schedule': instance.schedule,
       'statementOfReasonsDate':
           instance.statementOfReasonsDate?.toIso8601String(),
+      'statementOfReasonsDateFileName': instance.statementOfReasonsDateFileName,
       'travelCompanionListDate':
           instance.travelCompanionListDate?.toIso8601String(),
-      'travelInfo': instance.travelInfo,
+      'travelCompanionListFileName': instance.travelCompanionListFileName,
     };

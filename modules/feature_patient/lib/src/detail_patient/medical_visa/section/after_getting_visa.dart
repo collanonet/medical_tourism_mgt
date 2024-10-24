@@ -1,3 +1,4 @@
+import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
@@ -97,9 +98,8 @@ class AfterGettingVisa extends StatelessWidget {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    ElevatedButton(
-                                        onPressed: () {},
-                                        child: const Text('ファイル選択'))
+                                    fileUpload(context, currentForm,
+                                        'visaPageFileName'),
                                   ],
                                 ),
                                 SizedBox(
@@ -165,9 +165,8 @@ class AfterGettingVisa extends StatelessWidget {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    ElevatedButton(
-                                        onPressed: () {},
-                                        child: const Text('ファイル選択'))
+                                    fileUpload(context, currentForm,
+                                        'landingPermitFileName'),
                                   ],
                                 ),
                               ],
@@ -190,24 +189,29 @@ class AfterGettingVisa extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          formArray.add(FormGroup(
-                            {
-                              'visaPage': FormControl<DateTime>(
-                                validators: [
-                                  Validators.pattern(
-                                    ValidatorRegExp.date,
-                                  ),
-                                ],
-                              ),
-                              'landingPermit': FormControl<DateTime>(
-                                validators: [
-                                  Validators.pattern(
-                                    ValidatorRegExp.date,
-                                  ),
-                                ],
-                              ),
-                            },
-                          ));
+                          formArray.add(
+                            FormGroup(
+                              {
+                                'visaPage': FormControl<DateTime>(
+                                  validators: [
+                                    Validators.pattern(
+                                      ValidatorRegExp.date,
+                                    ),
+                                  ],
+                                ),
+                                'visaPageFileName': FormControl<FileSelect>(),
+                                'landingPermit': FormControl<DateTime>(
+                                  validators: [
+                                    Validators.pattern(
+                                      ValidatorRegExp.date,
+                                    ),
+                                  ],
+                                ),
+                                'landingPermitFileName':
+                                    FormControl<FileSelect>(),
+                              },
+                            ),
+                          );
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -303,9 +307,8 @@ class AfterGettingVisa extends StatelessWidget {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                ElevatedButton(
-                                    onPressed: () {},
-                                    child: const Text('ファイル選択'))
+                                fileUpload(context, currentForm,
+                                    'planeTicketForYourVisitToJapanFileName'),
                               ],
                             ),
                           ))
@@ -326,18 +329,22 @@ class AfterGettingVisa extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          formArray.add(FormGroup(
-                            {
-                              'planeTicketForYourVisitToJapan':
-                                  FormControl<DateTime>(
-                                validators: [
-                                  Validators.pattern(
-                                    ValidatorRegExp.date,
-                                  ),
-                                ],
-                              ),
-                            },
-                          ));
+                          formArray.add(
+                            FormGroup(
+                              {
+                                'planeTicketForYourVisitToJapan':
+                                    FormControl<DateTime>(
+                                  validators: [
+                                    Validators.pattern(
+                                      ValidatorRegExp.date,
+                                    ),
+                                  ],
+                                ),
+                                'planeTicketForYourVisitToJapanFileName':
+                                    FormControl<FileSelect>(),
+                              },
+                            ),
+                          );
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -431,9 +438,8 @@ class AfterGettingVisa extends StatelessWidget {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                ElevatedButton(
-                                    onPressed: () {},
-                                    child: const Text('ファイル選択'))
+                                fileUpload(context, currentForm,
+                                    'returnFlightTicketFileName'),
                               ],
                             ),
                           ))
@@ -454,17 +460,21 @@ class AfterGettingVisa extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          formArray.add(FormGroup(
-                            {
-                              'returnFlightTicket': FormControl<DateTime>(
-                                validators: [
-                                  Validators.pattern(
-                                    ValidatorRegExp.date,
-                                  ),
-                                ],
-                              ),
-                            },
-                          ));
+                          formArray.add(
+                            FormGroup(
+                              {
+                                'returnFlightTicket': FormControl<DateTime>(
+                                  validators: [
+                                    Validators.pattern(
+                                      ValidatorRegExp.date,
+                                    ),
+                                  ],
+                                ),
+                                'returnFlightTicketFileName':
+                                    FormControl<FileSelect>(),
+                              },
+                            ),
+                          );
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -560,9 +570,8 @@ class AfterGettingVisa extends StatelessWidget {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                ElevatedButton(
-                                    onPressed: () {},
-                                    child: const Text('ファイル選択'))
+                                fileUpload(context, currentForm,
+                                    'boardingPassForReturnFlightFileName'),
                               ],
                             ),
                           ))
@@ -583,18 +592,22 @@ class AfterGettingVisa extends StatelessWidget {
                       ),
                       InkWell(
                         onTap: () {
-                          formArray.add(FormGroup(
-                            {
-                              'boardingPassForReturnFlight':
-                                  FormControl<DateTime>(
-                                validators: [
-                                  Validators.pattern(
-                                    ValidatorRegExp.date,
-                                  ),
-                                ],
-                              ),
-                            },
-                          ));
+                          formArray.add(
+                            FormGroup(
+                              {
+                                'boardingPassForReturnFlight':
+                                    FormControl<DateTime>(
+                                  validators: [
+                                    Validators.pattern(
+                                      ValidatorRegExp.date,
+                                    ),
+                                  ],
+                                ),
+                                'boardingPassForReturnFlightFileName':
+                                    FormControl<FileSelect>(),
+                              },
+                            ),
+                          );
                         },
                         child: Row(
                           mainAxisSize: MainAxisSize.min,
@@ -678,12 +691,77 @@ class AfterGettingVisa extends StatelessWidget {
                   SizedBox(
                     width: context.appTheme.spacing.marginMedium,
                   ),
-                  ElevatedButton(onPressed: () {}, child: const Text('ファイル選択'))
+                  fileUpload(
+                      context,
+                      formGroup.control('afterGettingVisa') as FormGroup,
+                      'certificateOfEligibilityFileName'),
                 ],
               ),
             ],
           ),
         ),
+      ],
+    );
+  }
+
+  Widget fileUpload(
+      BuildContext context, FormGroup currentForm, String fileName) {
+    return ColumnSeparated(
+      mainAxisAlignment: MainAxisAlignment.start,
+      separatorBuilder: (context, index) => SizedBox(
+        height: context.appTheme.spacing.formSpacing,
+      ),
+      children: [
+        RowSeparated(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
+          separatorBuilder: (context, index) => SizedBox(
+            width: context.appTheme.spacing.formSpacing,
+          ),
+          children: [
+            RowSeparated(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              separatorBuilder: (context, index) => SizedBox(
+                width: context.appTheme.spacing.marginExtraSmall,
+              ),
+              children: [
+                ReactiveValueListenableBuilder<FileSelect>(
+                  formControlName: fileName,
+                  builder: (context, control, _) {
+                    return InkWell(
+                      onTap: () {
+                        if (control.value?.url != null) {
+                          openUrlInBrowser(fileName: control.value!.url!);
+                        }
+                      },
+                      child: Text(
+                        control.value?.filename ?? 'File Input .....',
+                        style: context.textTheme.bodySmall,
+                      ),
+                    );
+                  },
+                ),
+              ],
+            ),
+            GestureDetector(
+              onTap: () {
+                filePicker().then((value) {
+                  if (value != null) {
+                    currentForm.control(fileName).value = value;
+                  }
+                });
+              },
+              child: Chip(
+                label: const Text('ファイル選択'),
+                labelStyle: TextStyle(
+                  color: context.appTheme.secondaryBackgroundColor,
+                ),
+                backgroundColor: context.appTheme.primaryColor,
+              ),
+            ),
+          ],
+        )
       ],
     );
   }

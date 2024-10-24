@@ -37,6 +37,8 @@ abstract class _$MedicalInvoiceRequestCWProxy {
 
   MedicalInvoiceRequest inCharge(String? inCharge);
 
+  MedicalInvoiceRequest totalAmount(double? totalAmount);
+
   MedicalInvoiceRequest medicalRecord(String medicalRecord);
 
   MedicalInvoiceRequest user(String? user);
@@ -75,6 +77,7 @@ abstract class _$MedicalInvoiceRequestCWProxy {
     String? telNumber,
     String? fexNumber,
     String? inCharge,
+    double? totalAmount,
     String? medicalRecord,
     String? user,
     String? patient,
@@ -150,6 +153,10 @@ class _$MedicalInvoiceRequestCWProxyImpl
   MedicalInvoiceRequest inCharge(String? inCharge) => this(inCharge: inCharge);
 
   @override
+  MedicalInvoiceRequest totalAmount(double? totalAmount) =>
+      this(totalAmount: totalAmount);
+
+  @override
   MedicalInvoiceRequest medicalRecord(String medicalRecord) =>
       this(medicalRecord: medicalRecord);
 
@@ -200,6 +207,7 @@ class _$MedicalInvoiceRequestCWProxyImpl
     Object? telNumber = const $CopyWithPlaceholder(),
     Object? fexNumber = const $CopyWithPlaceholder(),
     Object? inCharge = const $CopyWithPlaceholder(),
+    Object? totalAmount = const $CopyWithPlaceholder(),
     Object? medicalRecord = const $CopyWithPlaceholder(),
     Object? user = const $CopyWithPlaceholder(),
     Object? patient = const $CopyWithPlaceholder(),
@@ -270,6 +278,10 @@ class _$MedicalInvoiceRequestCWProxyImpl
           ? _value.inCharge
           // ignore: cast_nullable_to_non_nullable
           : inCharge as String?,
+      totalAmount: totalAmount == const $CopyWithPlaceholder()
+          ? _value.totalAmount
+          // ignore: cast_nullable_to_non_nullable
+          : totalAmount as double?,
       medicalRecord:
           medicalRecord == const $CopyWithPlaceholder() || medicalRecord == null
               ? _value.medicalRecord
@@ -338,6 +350,7 @@ MedicalInvoiceRequest _$MedicalInvoiceRequestFromJson(
       telNumber: json['telNumber'] as String?,
       fexNumber: json['fexNumber'] as String?,
       inCharge: json['inCharge'] as String?,
+      totalAmount: (json['totalAmount'] as num?)?.toDouble(),
       medicalRecord: json['medicalRecord'] as String,
       user: json['user'] as String?,
       patient: json['patient'] as String?,
@@ -370,6 +383,7 @@ Map<String, dynamic> _$MedicalInvoiceRequestToJson(
       'telNumber': instance.telNumber,
       'fexNumber': instance.fexNumber,
       'inCharge': instance.inCharge,
+      'totalAmount': instance.totalAmount,
       'medicalRecord': instance.medicalRecord,
       'user': instance.user,
       'patient': instance.patient,

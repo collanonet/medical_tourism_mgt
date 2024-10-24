@@ -13,6 +13,7 @@ class AfterGettingVisaRequest {
   List<TicketBackRequest>? ticketBack;
   List<BoardingPassRequest>? boardingPass;
   DateTime? certificateOfEligibility;
+  String? certificateOfEligibilityFileName;
 
   AfterGettingVisaRequest({
     this.vasaInfo,
@@ -20,6 +21,7 @@ class AfterGettingVisaRequest {
     this.ticketBack,
     this.boardingPass,
     this.certificateOfEligibility,
+    this.certificateOfEligibilityFileName,
   });
 
   factory AfterGettingVisaRequest.fromJson(Map<String,dynamic> json){

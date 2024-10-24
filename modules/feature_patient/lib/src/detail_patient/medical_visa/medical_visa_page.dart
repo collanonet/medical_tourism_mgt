@@ -22,16 +22,17 @@ class MedicalVisaPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) =>
-          GetIt.I<MedicalVisaModel>()..initialData(patient: patient),
-      child: ReactiveFormConfig(
-        validationMessages: validationMessages,
-        child: ReactiveFormBuilder(
-            form: () => medicalVisaForm(),
-            builder: (context, formGroup, child) {
-              return const MedicalVisaScreen();
-            }),
+    return ReactiveFormConfig(
+      validationMessages: validationMessages,
+      child: ReactiveFormBuilder(
+        form: () => medicalVisaForm()..markAllAsTouched(),
+        builder: (context, formGroup, child) {
+          return Provider(
+            create: (context) =>
+                GetIt.I<MedicalVisaModel>()..fetchData(formGroup),
+            child: const MedicalVisaScreen(),
+          );
+        },
       ),
     );
   }

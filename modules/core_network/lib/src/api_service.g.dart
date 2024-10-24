@@ -8188,7 +8188,8 @@ class _ApiService implements ApiService {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = medicalAfterGettingVisaFinalRequest;
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalAfterGettingVisaFinalRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<MedicalVisaAfterGettingVisaResponse>(Options(
       method: 'POST',
