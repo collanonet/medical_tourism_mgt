@@ -1,17 +1,25 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'getting_visa_info.g.dart';
+
 @JsonSerializable()
-class VasaInfo {
+class GettingVisaInfoRequest {
   DateTime? visaPage;
+  String? visaPageFileName;
   DateTime? landingPermit;
+  String? landingPermitFileName;
 
-  VasaInfo({this.visaPage, this.landingPermit});
+  GettingVisaInfoRequest({
+    this.visaPage,
+    this.landingPermit,
+    this.landingPermitFileName,
+    this.visaPageFileName,
+  });
 
-  factory VasaInfo.fromJson(Map<String,dynamic> json){
-    return _$VasaInfoFromJson(json);
+  factory GettingVisaInfoRequest.fromJson(Map<String, dynamic> json) {
+    return _$GettingVisaInfoRequestFromJson(json);
   }
 
-  Map<String,dynamic> toJson(){
-    return _$VasaInfoToJson(this);
+  Map<String, dynamic> toJson() {
+    return _$GettingVisaInfoRequestToJson(this);
   }
 }

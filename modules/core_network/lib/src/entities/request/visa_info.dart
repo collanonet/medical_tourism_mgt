@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'visa_info.g.dart';
 
 @JsonSerializable()
-class VisaInfo {
+class VisaInfoRequest {
   DateTime? passportDate;
   String? passportFileSelect;
   DateTime? letterOfGuaranteeDate;
@@ -12,7 +12,7 @@ class VisaInfo {
   bool? byFedex;
   bool? byothers;
 
-  VisaInfo({
+  VisaInfoRequest({
     this.passportDate,
     this.letterOfGuaranteeDate,
     this.sendBy,
@@ -23,6 +23,6 @@ class VisaInfo {
     this.letterOfGuaranteeFileSelect,
   });
 
-  factory VisaInfo.fromJson(Map<String, dynamic> json) => _$VisaInfoFromJson(json);
-  Map<String, dynamic> toJson() => _$VisaInfoToJson(this);
+  factory VisaInfoRequest.fromJson(Map<String, dynamic> json) => _$VisaInfoRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$VisaInfoRequestToJson(this);
 }

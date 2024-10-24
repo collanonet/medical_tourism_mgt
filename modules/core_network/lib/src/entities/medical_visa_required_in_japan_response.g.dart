@@ -25,6 +25,10 @@ MedicalVisaRequiredInJapanResponse _$MedicalVisaRequiredInJapanResponseFromJson(
       travelInfo: (json['travelInfo'] as List<dynamic>?)
           ?.map((e) => TravelInfo.fromJson(e as Map<String, dynamic>))
           .toList(),
+      statementOfReasonsFileSelect:
+          json['statementOfReasonsFileSelect'] as String?,
+      travelCompanionListFileSelect:
+          json['travelCompanionListFileSelect'] as String?,
     );
 
 Map<String, dynamic> _$MedicalVisaRequiredInJapanResponseToJson(
@@ -35,8 +39,10 @@ Map<String, dynamic> _$MedicalVisaRequiredInJapanResponseToJson(
       'schedule': instance.schedule,
       'statementOfReasonsDate':
           instance.statementOfReasonsDate?.toIso8601String(),
+      'statementOfReasonsFileSelect': instance.statementOfReasonsFileSelect,
       'travelCompanionListDate':
           instance.travelCompanionListDate?.toIso8601String(),
+      'travelCompanionListFileSelect': instance.travelCompanionListFileSelect,
       'travelInfo': instance.travelInfo,
     };
 
@@ -75,11 +81,14 @@ Schedule _$ScheduleFromJson(Map<String, dynamic> json) => Schedule(
       treatmentSchedule: json['treatmentSchedule'] == null
           ? null
           : DateTime.parse(json['treatmentSchedule'] as String),
+      treatmentScheduleFileSelect:
+          json['treatmentScheduleFileSelect'] as String?,
     );
 
 Map<String, dynamic> _$ScheduleToJson(Schedule instance) => <String, dynamic>{
       '_id': instance.id,
       'treatmentSchedule': instance.treatmentSchedule?.toIso8601String(),
+      'treatmentScheduleFileSelect': instance.treatmentScheduleFileSelect,
     };
 
 TravelInfo _$TravelInfoFromJson(Map<String, dynamic> json) => TravelInfo(

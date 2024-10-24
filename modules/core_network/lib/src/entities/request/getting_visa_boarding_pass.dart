@@ -1,16 +1,21 @@
 import 'package:json_annotation/json_annotation.dart';
 part 'getting_visa_boarding_pass.g.dart';
+
 @JsonSerializable()
-class BoardingPass {
+class BoardingPassRequest { 
   DateTime? boardingPassForReturnFlight;
+  String? boardingPassForReturnFlightFileName;
 
-  BoardingPass({this.boardingPassForReturnFlight});
+  BoardingPassRequest({
+    this.boardingPassForReturnFlight,
+    this.boardingPassForReturnFlightFileName,
+  });
 
-  factory BoardingPass.fromJson(Map<String,dynamic> json){
-    return _$BoardingPassFromJson(json);
+  factory BoardingPassRequest.fromJson(Map<String, dynamic> json) {
+    return _$BoardingPassRequestFromJson(json);
   }
 
-  Map<String,dynamic> toJson(){
-    return _$BoardingPassToJson(this);
+  Map<String, dynamic> toJson() {
+    return _$BoardingPassRequestToJson(this);
   }
 }

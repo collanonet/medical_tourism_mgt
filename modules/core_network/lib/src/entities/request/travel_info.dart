@@ -2,7 +2,7 @@ import 'package:json_annotation/json_annotation.dart';
 part 'travel_info.g.dart';
 
 @JsonSerializable()
-class TravelInfo {
+class TravelInfoRequest {
   DateTime? landingPermissionDate;
   DateTime? visaValidityPeriodExpirationDate;
   DateTime? dateOfEntryIntoJapan;
@@ -20,7 +20,7 @@ class TravelInfo {
   String? seatNumberOut;
   String? remarks;
 
-  TravelInfo({
+  TravelInfoRequest({
     this.landingPermissionDate,
     this.visaValidityPeriodExpirationDate,
     this.dateOfEntryIntoJapan,
@@ -39,6 +39,6 @@ class TravelInfo {
     this.remarks,
   });
 
-  factory TravelInfo.fromJson(Map<String, dynamic> json) => _$TravelInfoFromJson(json);
-  Map<String, dynamic> toJson() => _$TravelInfoToJson(this);
+  factory TravelInfoRequest.fromJson(Map<String, dynamic> json) => _$TravelInfoRequestFromJson(json);
+  Map<String, dynamic> toJson() => _$TravelInfoRequestToJson(this);
 }

@@ -100,4 +100,11 @@ export 'src/entities/request/medical_visa_necessary_in_japan_request.dart';
 export 'src/entities/medical_visa_necessary_in_japan_response.dart';
 export 'src/entities/request/medical_visa_after_getting_visa_final_request.dart';
 export 'src/entities/medical_visa_after_getting_visa_final_response.dart';
+export 'src/entities/request/visa_info.dart';
+export 'src/entities/request/schedule.dart';
+export 'src/entities/request/travel_info.dart';
+export 'src/entities/request/getting_visa_info.dart';
+export 'src/entities/request/getting_visa_ticket.dart';
+export 'src/entities/request/getting_visa_ticket_back.dart';
+export 'src/entities/request/getting_visa_boarding_pass.dart';
 

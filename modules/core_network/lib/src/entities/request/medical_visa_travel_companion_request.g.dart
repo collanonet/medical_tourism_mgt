@@ -18,7 +18,7 @@ MedicalVisaTravelCompanionRequest _$MedicalVisaTravelCompanionRequestFromJson(
       addressArea: json['addressArea'] as String?,
       numberPassport: json['numberPassport'] as String?,
       travelInfo: (json['travelInfo'] as List<dynamic>?)
-          ?.map((e) => TravelInfo.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => TravelInfoRequest.fromJson(e as Map<String, dynamic>))
           .toList(),
       travelRemarks: json['travelRemarks'] as String?,
       subjectVisaWithdrawal: json['subjectVisaWithdrawal'] as bool?,
@@ -27,16 +27,17 @@ MedicalVisaTravelCompanionRequest _$MedicalVisaTravelCompanionRequestFromJson(
           : DateTime.parse(json['deathOrOccurrenceEventDate'] as String),
       remarks: json['remarks'] as String?,
       vasaInfo: (json['vasaInfo'] as List<dynamic>?)
-          ?.map((e) => VasaInfo.fromJson(e as Map<String, dynamic>))
+          ?.map(
+              (e) => GettingVisaInfoRequest.fromJson(e as Map<String, dynamic>))
           .toList(),
       ticket: (json['ticket'] as List<dynamic>?)
-          ?.map((e) => Ticket.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => TicketRequest.fromJson(e as Map<String, dynamic>))
           .toList(),
       ticketBack: (json['ticketBack'] as List<dynamic>?)
-          ?.map((e) => TicketBack.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => TicketBackRequest.fromJson(e as Map<String, dynamic>))
           .toList(),
       boardingPass: (json['boardingPass'] as List<dynamic>?)
-          ?.map((e) => BoardingPass.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => BoardingPassRequest.fromJson(e as Map<String, dynamic>))
           .toList(),
       certificateOfEligibility: json['certificateOfEligibility'] == null
           ? null

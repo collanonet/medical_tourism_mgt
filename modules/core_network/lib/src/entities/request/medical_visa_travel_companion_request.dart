@@ -15,15 +15,15 @@ class MedicalVisaTravelCompanionRequest {
   String? sex;
   String? addressArea;
   String? numberPassport;
-  List<TravelInfo>? travelInfo;
+  List<TravelInfoRequest>? travelInfo;
   String? travelRemarks;
   bool? subjectVisaWithdrawal;
   DateTime? deathOrOccurrenceEventDate;
   String? remarks;
-  List<VasaInfo>? vasaInfo;
-  List<Ticket>? ticket;
-  List<TicketBack>? ticketBack;
-  List<BoardingPass>? boardingPass;
+  List<GettingVisaInfoRequest>? vasaInfo;
+  List<TicketRequest>? ticket;
+  List<TicketBackRequest>? ticketBack;
+  List<BoardingPassRequest>? boardingPass;
   DateTime? certificateOfEligibility;
 
   MedicalVisaTravelCompanionRequest({
