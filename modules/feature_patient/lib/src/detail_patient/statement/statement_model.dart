@@ -792,7 +792,7 @@ Future<Uint8List?> generatePdfFromInvoice(
             pw.Align(
               alignment: pw.Alignment.centerRight,
               child: pw.Text(
-                request.taxRateOption ? '（内税）' : '（税金を除く）',
+                request.taxRateOption ? '（外税）' : '（内税）',
                 style: pw.TextStyle(font: ttfJP),
               ),
             ),
