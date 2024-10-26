@@ -39,6 +39,8 @@ abstract class _$MedicalInvoiceResponseCWProxy {
 
   MedicalInvoiceResponse inCharge(String? inCharge);
 
+  MedicalInvoiceResponse totalAmount(double? totalAmount);
+
   MedicalInvoiceResponse medicalRecord(MedicalRecord medicalRecord);
 
   MedicalInvoiceResponse user(User? user);
@@ -52,7 +54,9 @@ abstract class _$MedicalInvoiceResponseCWProxy {
 
   MedicalInvoiceResponse notes(List<NoteInvoiceResponse>? notes);
 
-  MedicalInvoiceResponse taxRate(String? taxRate);
+  MedicalInvoiceResponse taxRate(int? taxRate);
+
+  MedicalInvoiceResponse taxRateOption(bool taxRateOption);
 
   MedicalInvoiceResponse remarks(String? remarks);
 
@@ -83,13 +87,15 @@ abstract class _$MedicalInvoiceResponseCWProxy {
     String? telNumber,
     String? fexNumber,
     String? inCharge,
+    double? totalAmount,
     MedicalRecord? medicalRecord,
     User? user,
     Patient? patient,
     BasicInformationHospitalResponse? hospitalRecord,
     List<ItemResponse>? item,
     List<NoteInvoiceResponse>? notes,
-    String? taxRate,
+    int? taxRate,
+    bool? taxRateOption,
     String? remarks,
     DateTime? createdAt,
     DateTime? updatedAt,
@@ -163,6 +169,10 @@ class _$MedicalInvoiceResponseCWProxyImpl
   MedicalInvoiceResponse inCharge(String? inCharge) => this(inCharge: inCharge);
 
   @override
+  MedicalInvoiceResponse totalAmount(double? totalAmount) =>
+      this(totalAmount: totalAmount);
+
+  @override
   MedicalInvoiceResponse medicalRecord(MedicalRecord medicalRecord) =>
       this(medicalRecord: medicalRecord);
 
@@ -185,7 +195,11 @@ class _$MedicalInvoiceResponseCWProxyImpl
       this(notes: notes);
 
   @override
-  MedicalInvoiceResponse taxRate(String? taxRate) => this(taxRate: taxRate);
+  MedicalInvoiceResponse taxRate(int? taxRate) => this(taxRate: taxRate);
+
+  @override
+  MedicalInvoiceResponse taxRateOption(bool taxRateOption) =>
+      this(taxRateOption: taxRateOption);
 
   @override
   MedicalInvoiceResponse remarks(String? remarks) => this(remarks: remarks);
@@ -223,6 +237,7 @@ class _$MedicalInvoiceResponseCWProxyImpl
     Object? telNumber = const $CopyWithPlaceholder(),
     Object? fexNumber = const $CopyWithPlaceholder(),
     Object? inCharge = const $CopyWithPlaceholder(),
+    Object? totalAmount = const $CopyWithPlaceholder(),
     Object? medicalRecord = const $CopyWithPlaceholder(),
     Object? user = const $CopyWithPlaceholder(),
     Object? patient = const $CopyWithPlaceholder(),
@@ -230,6 +245,7 @@ class _$MedicalInvoiceResponseCWProxyImpl
     Object? item = const $CopyWithPlaceholder(),
     Object? notes = const $CopyWithPlaceholder(),
     Object? taxRate = const $CopyWithPlaceholder(),
+    Object? taxRateOption = const $CopyWithPlaceholder(),
     Object? remarks = const $CopyWithPlaceholder(),
     Object? createdAt = const $CopyWithPlaceholder(),
     Object? updatedAt = const $CopyWithPlaceholder(),
@@ -299,6 +315,10 @@ class _$MedicalInvoiceResponseCWProxyImpl
           ? _value.inCharge
           // ignore: cast_nullable_to_non_nullable
           : inCharge as String?,
+      totalAmount: totalAmount == const $CopyWithPlaceholder()
+          ? _value.totalAmount
+          // ignore: cast_nullable_to_non_nullable
+          : totalAmount as double?,
       medicalRecord:
           medicalRecord == const $CopyWithPlaceholder() || medicalRecord == null
               ? _value.medicalRecord
@@ -327,7 +347,12 @@ class _$MedicalInvoiceResponseCWProxyImpl
       taxRate: taxRate == const $CopyWithPlaceholder()
           ? _value.taxRate
           // ignore: cast_nullable_to_non_nullable
-          : taxRate as String?,
+          : taxRate as int?,
+      taxRateOption:
+          taxRateOption == const $CopyWithPlaceholder() || taxRateOption == null
+              ? _value.taxRateOption
+              // ignore: cast_nullable_to_non_nullable
+              : taxRateOption as bool,
       remarks: remarks == const $CopyWithPlaceholder()
           ? _value.remarks
           // ignore: cast_nullable_to_non_nullable
@@ -376,6 +401,7 @@ MedicalInvoiceResponse _$MedicalInvoiceResponseFromJson(
       telNumber: json['telNumber'] as String?,
       fexNumber: json['fexNumber'] as String?,
       inCharge: json['inCharge'] as String?,
+      totalAmount: (json['totalAmount'] as num?)?.toDouble(),
       medicalRecord:
           MedicalRecord.fromJson(json['medicalRecord'] as Map<String, dynamic>),
       user: json['user'] == null
@@ -394,7 +420,8 @@ MedicalInvoiceResponse _$MedicalInvoiceResponseFromJson(
       notes: (json['notes'] as List<dynamic>?)
           ?.map((e) => NoteInvoiceResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
-      taxRate: json['taxRate'] as String?,
+      taxRate: (json['taxRate'] as num?)?.toInt(),
+      taxRateOption: json['taxRateOption'] as bool? ?? false,
       remarks: json['remarks'] as String?,
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
@@ -414,6 +441,7 @@ Map<String, dynamic> _$MedicalInvoiceResponseToJson(
       'fileNamePdfZHTW': instance.fileNamePdfZHTW,
       'invoiceNumber': instance.invoiceNumber,
       'invoiceDate': instance.invoiceDate?.toIso8601String(),
+      'totalAmount': instance.totalAmount,
       'companyName': instance.companyName,
       'address': instance.address,
       'telNumber': instance.telNumber,
@@ -426,6 +454,7 @@ Map<String, dynamic> _$MedicalInvoiceResponseToJson(
       'item': instance.item,
       'notes': instance.notes,
       'taxRate': instance.taxRate,
+      'taxRateOption': instance.taxRateOption,
       'remarks': instance.remarks,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),

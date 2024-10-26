@@ -64,44 +64,48 @@ class EstimateModel {
     formGroup.control('telNumber').value = invoice.telNumber;
     formGroup.control('fexNumber').value = invoice.fexNumber;
     formGroup.control('inCharge').value = invoice.inCharge;
-    formGroup.control('totalAmount').value = invoice.totalAmount;
 
     formGroup.control('medicalRecord').value = invoice.medicalRecord.id;
     formGroup.control('user').value = invoice.user?.id;
     formGroup.control('hospitalRecord').value = invoice.hospitalRecord?.id;
 
     formGroup.control('remarks').value = invoice.remarks;
+    formGroup.control('taxRate').value = invoice.taxRate;
+    formGroup.control('taxRateOption').value = invoice.taxRateOption;
 
     if (invoice.notes != null && invoice.notes!.isNotEmpty) {
       FormArray notes = formGroup.control('notes') as FormArray;
-      notes.clear();
 
       for (var note in invoice.notes!) {
         notes.add(
           FormGroup({
-            '_id': FormControl(value: note.id),
-            'note': FormControl(value: note.note),
+            '_id': FormControl<String>(value: note.id),
+            'note': FormControl<String>(value: note.note),
           }),
         );
       }
     }
 
-    if (invoice.item != null && invoice.item!.isNotEmpty) {
-      FormArray item = formGroup.control('item') as FormArray;
-      item.clear();
+    try {
+      if (invoice.item != null && invoice.item!.isNotEmpty) {
+        FormArray item = formGroup.control('item') as FormArray;
 
-      for (var itemData in invoice.item!) {
-        item.add(
-          FormGroup({
-            '_id': FormControl(value: itemData.id),
-            'itemCode': FormControl(value: itemData.itemCode),
-            'details': FormControl(value: itemData.details),
-            'quantity': FormControl(value: itemData.quantity),
-            'unit': FormControl(value: itemData.unit),
-            'unitPrice': FormControl(value: itemData.unitPrice),
-          }),
-        );
+        for (var itemData in invoice.item!) {
+          logger.d('edit info: ${itemData.toJson()}');
+          item.add(
+            FormGroup({
+              '_id': FormControl<String>(value: itemData.id),
+              'itemCode': FormControl<String>(value: itemData.itemCode),
+              'details': FormControl<String>(value: itemData.details),
+              'quantity': FormControl<double>(value: itemData.quantity),
+              'unit': FormControl<String>(value: itemData.unit ?? '代'),
+              'unitPrice': FormControl<double>(value: itemData.unitPrice),
+            }),
+          );
+        }
       }
+    } catch (e) {
+      logger.e(e);
     }
   }
 
@@ -129,21 +133,18 @@ class EstimateModel {
 
       List<ItemRequest>? items = [];
       formGroup.control('item').value.forEach((item) {
-        items.add(ItemRequest(
-          itemCode: item['itemCode'],
-          details: item['details'],
-          quantity: item['quantity'],
-          unit: item['unit'],
-          unitPrice: item['unitPrice'],
-        ));
+        logger.d(item);
+        if (item['details'] != null && item['details'] != '') {
+          items.add(ItemRequest.fromJson(item));
+        }
       });
 
       List<NoteInvoiceRequest>? notes = [];
 
       formGroup.control('notes').value.forEach((note) {
-        notes.add(NoteInvoiceRequest(
-          note: note['note'],
-        ));
+        if (note['note'] != null && note['note'] != '') {
+          notes.add(NoteInvoiceRequest.fromJson(note));
+        }
       });
 
       String? logoFile;
@@ -203,6 +204,8 @@ class EstimateModel {
         user: formGroup.control('user').value,
         patient: formGroup.control('user').value,
         hospitalRecord: formGroup.control('hospitalRecord').value,
+        taxRate: formGroup.control('taxRate').value,
+        taxRateOption: formGroup.control('taxRateOption').value,
       );
 
       Uint8List? pathFileJP = await generatePdfFromQuotation(
@@ -450,6 +453,8 @@ class EstimateModel {
             user: invoiceData.user?.id,
             patient: invoiceData.patient!.id,
             hospitalRecord: invoiceData.hospitalRecord?.id,
+            taxRate: invoiceData.taxRate,
+            taxRateOption: invoiceData.taxRateOption,
           );
           await patientRepository.putInvoice(id, request);
 
@@ -503,11 +508,6 @@ Future<Uint8List?> generatePdfFromQuotation(
   String title;
   String quotationNumberLabel;
   String quotationDateLabel;
-  String companyNameLabel;
-  String addressLabel;
-  String telNumberLabel;
-  String fexNumberLabel;
-  String inChargeLabel;
   String totalAmountLabel;
   List<String> tableHeaders;
 
@@ -517,11 +517,6 @@ Future<Uint8List?> generatePdfFromQuotation(
       title = '御　見　積　書';
       quotationNumberLabel = '見積番号: ';
       quotationDateLabel = '見積日: ';
-      companyNameLabel = '件名: ';
-      addressLabel = '住所: ';
-      telNumberLabel = '電話番号: ';
-      fexNumberLabel = 'FAX番号: ';
-      inChargeLabel = '担当者: ';
       totalAmountLabel = '合計金額: ';
       tableHeaders = ['', '項目', '数', '量', '単価', '金額'];
       break;
@@ -530,11 +525,6 @@ Future<Uint8List?> generatePdfFromQuotation(
       title = '报价单';
       quotationNumberLabel = '报价单号: ';
       quotationDateLabel = '预计日期: ';
-      companyNameLabel = '主题: ';
-      addressLabel = '地址: ';
-      telNumberLabel = '电话号码: ';
-      fexNumberLabel = '传真号码: ';
-      inChargeLabel = '负责人: ';
       totalAmountLabel = '总金额: ';
       tableHeaders = ['', '项目', '数', '量', '单价', '金额'];
       break;
@@ -543,11 +533,6 @@ Future<Uint8List?> generatePdfFromQuotation(
       title = '報價單';
       quotationNumberLabel = '報價單號: ';
       quotationDateLabel = '預計日期: ';
-      companyNameLabel = '主題: ';
-      addressLabel = '地址: ';
-      telNumberLabel = '電話號碼: ';
-      fexNumberLabel = '傳真號碼: ';
-      inChargeLabel = '負責人: ';
       totalAmountLabel = '總金額: ';
       tableHeaders = ['', '項目', '數', '量', '單價', '金額'];
       break;
@@ -556,11 +541,6 @@ Future<Uint8List?> generatePdfFromQuotation(
       title = 'Báo giá';
       quotationNumberLabel = 'số báo giá: ';
       quotationDateLabel = 'ngày dự kiến: ';
-      companyNameLabel = 'chủ đề: ';
-      addressLabel = 'địa chỉ: ';
-      telNumberLabel = 'số điện thoại: ';
-      fexNumberLabel = 'số fax: ';
-      inChargeLabel = 'người chịu trách nhiệm: ';
       totalAmountLabel = 'tổng số tiền: ';
       tableHeaders = ['', 'mục', 'số', 'lượng', 'đơn giá', 'số tiền'];
       break;
@@ -569,11 +549,6 @@ Future<Uint8List?> generatePdfFromQuotation(
       title = 'Quotation';
       quotationNumberLabel = 'Quotation number: ';
       quotationDateLabel = 'Quotation date: ';
-      companyNameLabel = 'Company name: ';
-      addressLabel = 'Address: ';
-      telNumberLabel = 'Tel number: ';
-      fexNumberLabel = 'Fex number: ';
-      inChargeLabel = 'In charge: ';
       totalAmountLabel = 'Total amount: ';
       tableHeaders = ['', 'Item', 'Quantity', 'Unit', 'Unit Price', 'Amount'];
   }
@@ -612,6 +587,7 @@ Future<Uint8List?> generatePdfFromQuotation(
             ),
           ),
         ),
+        pw.SizedBox(height: 20),
         pw.Row(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
@@ -625,16 +601,27 @@ Future<Uint8List?> generatePdfFromQuotation(
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
+
+        pw.SizedBox(height: 20),
         pw.Row(mainAxisAlignment: pw.MainAxisAlignment.spaceBetween, children: [
           pw.Row(
               crossAxisAlignment: pw.CrossAxisAlignment.start,
               mainAxisAlignment: pw.MainAxisAlignment.start,
               children: [
-                pw.Text(
-                  '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
-                  ' 様',
-                  style: pw.TextStyle(font: ttfJP),
-                ),
+                pw.Column(
+                    crossAxisAlignment: pw.CrossAxisAlignment.start,
+                    mainAxisAlignment: pw.MainAxisAlignment.start,
+                    children: [
+                      pw.Text(
+                        '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
+                        ' 様',
+                        style: pw.TextStyle(font: ttfJP),
+                      ),
+                      pw.Text(
+                        '下記の通り御見積りいたします。ご用命の程宜しくお願い申し上げます。',
+                        style: pw.TextStyle(font: ttfJP),
+                      ),
+                    ])
               ]),
           pw.Row(
               crossAxisAlignment: pw.CrossAxisAlignment.end,
@@ -652,6 +639,7 @@ Future<Uint8List?> generatePdfFromQuotation(
                 ),
               ])
         ]),
+        pw.SizedBox(height: 20),
         pw.Row(children: [
           pw.Expanded(
             flex: 4,
@@ -683,7 +671,10 @@ Future<Uint8List?> generatePdfFromQuotation(
                       ),
                     ),
                     child: pw.Text(
-                      Strings.formatCurrency(request.totalAmount ?? 0),
+                      Strings.formatCurrency(total(
+                          subTotal(request.item ?? []),
+                          taxCalculation(subTotal(request.item ?? []),
+                              (request.taxRate ?? 0)))),
                       style: pw.TextStyle(font: ttfJP),
                     ),
                   ),
@@ -712,15 +703,11 @@ Future<Uint8List?> generatePdfFromQuotation(
                 ]),
           )
         ]),
-
+        pw.SizedBox(height: 20),
         pw.Row(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
-              pw.Text(
-                companyNameLabel,
-                style: pw.TextStyle(font: ttf),
-              ),
               pw.Text(
                 request.companyName ?? '',
                 style: pw.TextStyle(font: ttfJP),
@@ -731,10 +718,6 @@ Future<Uint8List?> generatePdfFromQuotation(
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
               pw.Text(
-                addressLabel,
-                style: pw.TextStyle(font: ttf),
-              ),
-              pw.Text(
                 request.address ?? '',
                 style: pw.TextStyle(font: ttfJP),
               ),
@@ -743,10 +726,6 @@ Future<Uint8List?> generatePdfFromQuotation(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
-              pw.Text(
-                telNumberLabel,
-                style: pw.TextStyle(font: ttf),
-              ),
               pw.Text(
                 request.telNumber ?? '',
                 style: pw.TextStyle(font: ttfJP),
@@ -757,10 +736,6 @@ Future<Uint8List?> generatePdfFromQuotation(
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
               pw.Text(
-                fexNumberLabel,
-                style: pw.TextStyle(font: ttf),
-              ),
-              pw.Text(
                 request.fexNumber ?? '',
                 style: pw.TextStyle(font: ttfJP),
               ),
@@ -769,10 +744,6 @@ Future<Uint8List?> generatePdfFromQuotation(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
-              pw.Text(
-                inChargeLabel,
-                style: pw.TextStyle(font: ttf),
-              ),
               pw.Text(
                 request.inCharge ?? '',
                 style: pw.TextStyle(font: ttfJP),
@@ -817,8 +788,8 @@ Future<Uint8List?> generatePdfFromQuotation(
                         item.quantity ?? '',
                         item.unit ?? '',
                         Strings.formatCurrency(item.unitPrice ?? 0),
-                        Strings.formatCurrency((item.quantity ?? 0) *
-                            (double.tryParse("${item.unit ?? 0}") ?? 0)),
+                        Strings.formatCurrency(
+                            (item.quantity ?? 0) * (item.unitPrice ?? 0)),
                       ])
                   .toList() ??
               [
@@ -843,40 +814,37 @@ Future<Uint8List?> generatePdfFromQuotation(
         // notes
         pw.TableHelper.fromTextArray(
           columnWidths: {
-            0: const pw.FlexColumnWidth(0),
             1: const pw.FlexColumnWidth(12),
           },
           data: request.notes
                   ?.map((note) => [
-                        '',
-                        pw.Text(
-                          note.note ?? '',
-                          style: pw.TextStyle(
-                            font: ttfJP,
-                            fontWeight: pw.FontWeight.normal,
-                            fontSize: 10,
-                          ),
-                        ),
+                        pw.Row(
+                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                            children: [
+                          pw.Text(
+                            note.note ?? '',
+                            style: pw.TextStyle(
+                              font: ttfJP,
+                              fontWeight: pw.FontWeight.normal,
+                              fontSize: 10,
+                            ),
+                            textAlign: pw.TextAlign.left,
+                          )
+                        ]),
                       ])
                   .toList() ??
               [
                 [
                   '',
-                  '',
                 ],
                 [
-                  '',
                   '',
                 ]
               ],
         ),
         pw.TableHelper.fromTextArray(columnWidths: {
           0: const pw.FlexColumnWidth(10),
-          1: const pw.FlexColumnWidth(0),
-          2: const pw.FlexColumnWidth(0),
-          3: const pw.FlexColumnWidth(0),
-          4: const pw.FlexColumnWidth(0),
-          5: const pw.FlexColumnWidth(2),
+          1: const pw.FlexColumnWidth(2),
         }, data: [
           [
             pw.Align(
@@ -886,10 +854,6 @@ Future<Uint8List?> generatePdfFromQuotation(
                 style: pw.TextStyle(font: ttfJP),
               ),
             ),
-            '',
-            '',
-            '',
-            '',
             pw.Align(
               alignment: pw.Alignment.centerRight,
               child: pw.Text(
@@ -906,15 +870,10 @@ Future<Uint8List?> generatePdfFromQuotation(
                 style: pw.TextStyle(font: ttfJP),
               ),
             ),
-            '',
-            '',
-            '',
-            '',
             pw.Align(
               alignment: pw.Alignment.centerRight,
               child: pw.Text(
-                Strings.formatCurrency(taxCalculation(
-                    subTotal(request.item ?? []), request.taxRate)),
+                request.taxRateOption ? '（内税）' : '（税金を除く）',
                 style: pw.TextStyle(font: ttfJP),
               ),
             ),
@@ -927,15 +886,13 @@ Future<Uint8List?> generatePdfFromQuotation(
               return const pw.BoxDecoration(
                   color: PdfColor.fromInt(0xff98FF98));
             },
-            rowDecoration: pw.BoxDecoration(
-                color: PdfColor.fromInt(0xff98FF98)),
+            rowDecoration:
+                const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+            oddRowDecoration:
+                const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
             columnWidths: {
               0: const pw.FlexColumnWidth(10),
-              1: const pw.FlexColumnWidth(0),
-              2: const pw.FlexColumnWidth(0),
-              3: const pw.FlexColumnWidth(0),
-              4: const pw.FlexColumnWidth(0),
-              5: const pw.FlexColumnWidth(2),
+              1: const pw.FlexColumnWidth(2),
             },
             data: [
               [
@@ -946,10 +903,6 @@ Future<Uint8List?> generatePdfFromQuotation(
                     style: pw.TextStyle(font: ttfJP),
                   ),
                 ),
-                '',
-                '',
-                '',
-                '',
                 pw.Align(
                   alignment: pw.Alignment.centerRight,
                   child: pw.Text(
@@ -967,6 +920,7 @@ Future<Uint8List?> generatePdfFromQuotation(
           '【特記事項】',
           style: pw.TextStyle(font: ttfJP),
         ),
+        pw.SizedBox(height: 20),
         pw.Text(
           request.remarks ?? '',
           style: pw.TextStyle(font: ttfJP),
@@ -994,8 +948,8 @@ double subTotal(List<ItemRequest> items) {
   return total;
 }
 
-double taxCalculation(double subTotal, String? taxRate) {
-  return subTotal * (int.tryParse(taxRate ?? '0') ?? 0) / 100;
+double taxCalculation(double subTotal, int? taxRate) {
+  return subTotal * (taxRate ?? 0) / 100;
 }
 
 double total(double subTotal, double tax) {

@@ -30,7 +30,8 @@ class MedicalInvoiceRequest {
   String? hospitalRecord;
   List<ItemRequest>? item;
   List<NoteInvoiceRequest>? notes;
-  String? taxRate;
+  int? taxRate;
+  bool taxRateOption;
   String? remarks;
 
   MedicalInvoiceRequest({
@@ -57,6 +58,7 @@ class MedicalInvoiceRequest {
     this.item,
     this.notes,
     this.taxRate,
+    this.taxRateOption = false,
     this.remarks,
   });
 
