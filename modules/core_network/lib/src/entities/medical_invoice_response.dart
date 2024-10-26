@@ -37,7 +37,8 @@ class MedicalInvoiceResponse {
   BasicInformationHospitalResponse? hospitalRecord;
   List<ItemResponse>? item;
   List<NoteInvoiceResponse>? notes;
-  String? taxRate;
+  int? taxRate;
+  bool taxRateOption;
   String? remarks;
 
   final DateTime createdAt;
@@ -68,6 +69,7 @@ class MedicalInvoiceResponse {
     this.item,
     this.notes,
     this.taxRate,
+    this.taxRateOption = false,
     this.remarks,
     required this.createdAt,
     required this.updatedAt,

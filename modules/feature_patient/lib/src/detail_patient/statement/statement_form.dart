@@ -15,7 +15,7 @@ FormGroup statementForm() {
     'telNumber': FormControl<String>(),
     'fexNumber': FormControl<String>(),
     'inCharge': FormControl<String>(),
-    'totalAmount' : FormControl<double>(),
+    'totalAmount': FormControl<double>(),
     'medicalRecord': FormControl<String>(
       validators: [
         Validators.required,
@@ -37,7 +37,9 @@ FormGroup statementForm() {
             Validators.number,
           ],
         ),
-        'unit': FormControl<String>(),
+        'unit': FormControl<String>(
+          value: '代',
+        ),
         'unitPrice': FormControl<double>(),
       })
     ]),
@@ -47,7 +49,10 @@ FormGroup statementForm() {
         'note': FormControl<String>(),
       })
     ]),
-    'taxRate': FormControl<String>(),
+    'taxRate': FormControl<int>(),
+    'taxRateOption': FormControl<bool>(
+      value: false,
+    ),
     'remarks': FormControl<String>(),
   });
 }
