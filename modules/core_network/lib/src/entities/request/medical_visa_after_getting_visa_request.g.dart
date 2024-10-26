@@ -25,6 +25,8 @@ AfterGettingVisaRequest _$AfterGettingVisaRequestFromJson(
       certificateOfEligibility: json['certificateOfEligibility'] == null
           ? null
           : DateTime.parse(json['certificateOfEligibility'] as String),
+      certificateOfEligibilityFileName:
+          json['certificateOfEligibilityFileName'] as String?,
     );
 
 Map<String, dynamic> _$AfterGettingVisaRequestToJson(
@@ -36,4 +38,6 @@ Map<String, dynamic> _$AfterGettingVisaRequestToJson(
       'boardingPass': instance.boardingPass,
       'certificateOfEligibility':
           instance.certificateOfEligibility?.toIso8601String(),
+      'certificateOfEligibilityFileName':
+          instance.certificateOfEligibilityFileName,
     };

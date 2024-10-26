@@ -21,10 +21,10 @@ MedicalVisaTravelCompanionRequest _$MedicalVisaTravelCompanionRequestFromJson(
           ?.map((e) => TravelInfoRequest.fromJson(e as Map<String, dynamic>))
           .toList(),
       travelRemarks: json['travelRemarks'] as String?,
-      subjectVisaWithdrawal: json['subjectVisaWithdrawal'] as bool?,
-      deathOrOccurrenceEventDate: json['deathOrOccurrenceEventDate'] == null
+      visaWithdrawalTarget: json['visaWithdrawalTarget'] as bool?,
+      reason: json['reason'] == null
           ? null
-          : DateTime.parse(json['deathOrOccurrenceEventDate'] as String),
+          : DateTime.parse(json['reason'] as String),
       remarks: json['remarks'] as String?,
       vasaInfo: (json['vasaInfo'] as List<dynamic>?)
           ?.map(
@@ -42,6 +42,8 @@ MedicalVisaTravelCompanionRequest _$MedicalVisaTravelCompanionRequestFromJson(
       certificateOfEligibility: json['certificateOfEligibility'] == null
           ? null
           : DateTime.parse(json['certificateOfEligibility'] as String),
+      certificateOfEligibilityFileName:
+          json['certificateOfEligibilityFileName'] as String?,
     );
 
 Map<String, dynamic> _$MedicalVisaTravelCompanionRequestToJson(
@@ -55,9 +57,8 @@ Map<String, dynamic> _$MedicalVisaTravelCompanionRequestToJson(
       'numberPassport': instance.numberPassport,
       'travelInfo': instance.travelInfo,
       'travelRemarks': instance.travelRemarks,
-      'subjectVisaWithdrawal': instance.subjectVisaWithdrawal,
-      'deathOrOccurrenceEventDate':
-          instance.deathOrOccurrenceEventDate?.toIso8601String(),
+      'visaWithdrawalTarget': instance.visaWithdrawalTarget,
+      'reason': instance.reason?.toIso8601String(),
       'remarks': instance.remarks,
       'vasaInfo': instance.vasaInfo,
       'ticket': instance.ticket,
@@ -65,4 +66,6 @@ Map<String, dynamic> _$MedicalVisaTravelCompanionRequestToJson(
       'boardingPass': instance.boardingPass,
       'certificateOfEligibility':
           instance.certificateOfEligibility?.toIso8601String(),
+      'certificateOfEligibilityFileName':
+          instance.certificateOfEligibilityFileName,
     };
