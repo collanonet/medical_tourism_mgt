@@ -6,6 +6,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -204,37 +205,38 @@ class StatementScreenForm extends StatelessWidget {
 
         Text('情報', style: context.textTheme.titleLarge),
         // totalAmount
-        RowSeparated(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          separatorBuilder: (BuildContext context, int index) {
-            return SizedBox(width: context.appTheme.spacing.formSpacing);
-          },
-          children: [
-            // totalAmount
-            Expanded(
-              child: ReactiveTextField<double>(
-                formControlName: 'totalAmount',
-                keyboardType: TextInputType.number,
-                valueAccessor: DoubleValueAccessor(),
-                inputFormatters: [
-                  CustomCurrencyFormatter(),
-                ],
-                decoration: InputDecoration(
-                  labelText: '請求書金額',
-                  suffixText: '円',
-                ),
-              ),
-            ),
-            // invoiceDate
-            Expanded(
-              child: Container(),
-            ),
-            // companyName
-            Expanded(
-              child: Container(),
-            ),
-          ],
-        ),
+        // RowSeparated(
+        //   crossAxisAlignment: CrossAxisAlignment.start,
+        //   separatorBuilder: (BuildContext context, int index) {
+        //     return SizedBox(width: context.appTheme.spacing.formSpacing);
+        //   },
+        //   children: [
+        //     // totalAmount
+        //     Expanded(
+        //       child: ReactiveTextField<double>(
+        //         formControlName: 'totalAmount',
+        //         keyboardType: TextInputType.number,
+        //         valueAccessor: DoubleValueAccessor(),
+        //         inputFormatters: [
+        //           CustomCurrencyFormatter(),
+        //         ],
+        //         decoration: InputDecoration(
+        //           labelText: '請求書金額',
+        //           suffixText: '円',
+        //         ),
+        //       ),
+        //     ),
+        //     // invoiceDate
+        //     Expanded(
+        //       child: Container(),
+        //     ),
+        //     // companyName
+        //     Expanded(
+        //       child: Container(),
+        //     ),
+        //   ],
+        // ),
+
         RowSeparated(
           crossAxisAlignment: CrossAxisAlignment.start,
           separatorBuilder: (BuildContext context, int index) {
@@ -423,8 +425,10 @@ class StatementScreenForm extends StatelessWidget {
                                 child: ReactiveDropdownField(
                                   formControlName: 'unit',
                                   items: [
-                                    DropdownMenuItem(child: Text('代'), value: '代'),
-                                    DropdownMenuItem(child: Text('回'), value: '回'),
+                                    DropdownMenuItem(
+                                        child: Text('代'), value: '代'),
+                                    DropdownMenuItem(
+                                        child: Text('回'), value: '回'),
                                   ],
                                   decoration: InputDecoration(
                                     labelText: '量',
@@ -436,7 +440,7 @@ class StatementScreenForm extends StatelessWidget {
                                 child: ReactiveTextField<double>(
                                   formControlName: 'unitPrice',
                                   keyboardType: TextInputType.number,
-                                  valueAccessor: DoubleValueAccessor(),
+                                  valueAccessor: CurrencyValueAccessor(),
                                   inputFormatters: [
                                     CustomCurrencyFormatter(),
                                   ],
@@ -460,7 +464,9 @@ class StatementScreenForm extends StatelessWidget {
                           Validators.number,
                         ],
                       ),
-                      'unit': FormControl<String>(),
+                      'unit': FormControl<String>(
+                        value: '代',
+                      ),
                       'unitPrice': FormControl<double>(),
                     }));
                   },
@@ -474,16 +480,49 @@ class StatementScreenForm extends StatelessWidget {
         ),
 
         // taxRate
-        SizedBox(
-          width: 300,
-          child: ReactiveTextField<String>(
-            formControlName: 'taxRate',
-            decoration: const InputDecoration(
-              labelText: '消費税',
-              suffix: Text('%'),
-            ),
-          ),
-        ),
+        ReactiveValueListenableBuilder<bool>(
+            formControlName: 'taxRateOption',
+            builder: (context, control, child) {
+              return RowSeparated(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                separatorBuilder: (BuildContext context, int index) {
+                  return SizedBox(width: context.appTheme.spacing.formSpacing);
+                },
+                children: [
+                  IntrinsicWidth(
+                    child: CheckboxListTile(
+                      value: control.value == false,
+                      title: Text('税金を除く'),
+                      onChanged: (bool? value) {
+                        form.control('taxRateOption').value = false;
+                      },
+                      controlAffinity: ListTileControlAffinity.leading,
+                    ),
+                  ),
+                  IntrinsicWidth(
+                    child: CheckboxListTile(
+                      value: control.value == true,
+                      title: Text('税込み'),
+                      onChanged: (bool? value) {
+                        form.control('taxRateOption').value = true;
+                      },
+                      controlAffinity: ListTileControlAffinity.leading,
+                    ),
+                  ),
+                  if (control.value == true)
+                    SizedBox(
+                      width: 300,
+                      child: ReactiveTextField<int>(
+                        formControlName: 'taxRate',
+                        decoration: const InputDecoration(
+                          labelText: '消費税',
+                          suffix: Text('%'),
+                        ),
+                      ),
+                    ),
+                ],
+              );
+            }),
 
         Text('メモ項目', style: context.textTheme.titleLarge),
         // notes

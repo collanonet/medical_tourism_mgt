@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 // Package imports:
 import 'package:intl/intl.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
 import '../core_utils.dart';
@@ -155,3 +156,29 @@ class CustomCurrencyFormatter extends TextInputFormatter {
     return formattedString;
   }
 }
+
+class CurrencyValueAccessor extends ControlValueAccessor<double, String> {
+  @override
+  String modelToViewValue(double? modelValue) {
+    if (modelValue == null) return '';
+    return _format(modelValue.toString());
+  }
+
+  @override
+  double? viewToModelValue(String? viewValue) {
+    if (viewValue == null || viewValue.isEmpty) return null;
+    return double.tryParse(viewValue.replaceAll(',', ''));
+  }
+
+  String _format(String digits) {
+    var formattedString = '';
+    for (int i = 0; i < digits.length; i++) {
+      if (i % 3 == 0 && i != 0) {
+        formattedString = ',$formattedString';
+      }
+      formattedString = digits[digits.length - 1 - i] + formattedString;
+    }
+    return formattedString;
+  }
+}
+
