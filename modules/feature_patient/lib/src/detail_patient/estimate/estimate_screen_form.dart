@@ -491,7 +491,7 @@ class EstimateScreenForm extends StatelessWidget {
                   IntrinsicWidth(
                     child: CheckboxListTile(
                       value: control.value == false,
-                      title: Text('税金を除く'),
+                      title: Text('内税'),
                       onChanged: (bool? value) {
                         form.control('taxRateOption').value = false;
                       },
@@ -501,7 +501,7 @@ class EstimateScreenForm extends StatelessWidget {
                   IntrinsicWidth(
                     child: CheckboxListTile(
                       value: control.value == true,
-                      title: Text('税込み'),
+                      title: Text('外税'),
                       onChanged: (bool? value) {
                         form.control('taxRateOption').value = true;
                       },
