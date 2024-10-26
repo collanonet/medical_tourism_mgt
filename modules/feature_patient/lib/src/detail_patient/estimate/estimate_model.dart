@@ -882,6 +882,7 @@ Future<Uint8List?> generatePdfFromQuotation(
         pw.TableHelper.fromTextArray(
             headerCellDecoration:
                 const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+            headerDecoration: const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
             cellDecoration: (i, _, __) {
               return const pw.BoxDecoration(
                   color: PdfColor.fromInt(0xff98FF98));
@@ -890,6 +891,7 @@ Future<Uint8List?> generatePdfFromQuotation(
                 const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
             oddRowDecoration:
                 const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+            headerHeight: 0,
             columnWidths: {
               0: const pw.FlexColumnWidth(10),
               1: const pw.FlexColumnWidth(2),
