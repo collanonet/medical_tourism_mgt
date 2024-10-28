@@ -119,18 +119,7 @@ scripts:
       melos exec -c 6 --fail-fast -- fvm flutter pub run flutter_launcher_icons -f flutter_launcher_icons*
     packageFilters:
       scope: "medical_tourism_mgt"
-  web_dev:
-    description: "hosting_web_dev"
-    run: |
-      cp firebase-dev.json firebase.json && \
-      fvm flutter build web --release -t lib/main_dev.dart && \
-      firebase deploy --only hosting
-  web_stage:
-    description: "hosting_web_stage"
-    run: |
-      cp firebase-stage.json firebase.json && \
-      fvm flutter build web --release -t lib/main_stage.dart && \
-      firebase deploy --only hosting:medical-tourism-stage
+
 
 
   core_network:
@@ -208,3 +197,25 @@ scripts:
   feature_web_appointment:
     description: "Generate feature_web_appointment"
     run: melos exec --scope="feature_web_appointment" -- fvm dart run build_runner build --delete-conflicting-outputs
+
+  #Release web
+  web_dev:
+    description: "hosting_web_dev"
+    run: |
+      cp firebase-dev.json firebase.json && \
+      fvm flutter build web --release -t lib/main_dev.dart && \
+      firebase deploy --only hosting
+
+  web_stage:
+    description: "hosting_web_stage"
+    run: |
+      cp firebase-stage.json firebase.json && \
+      fvm flutter build web --release -t lib/main_stage.dart && \
+      firebase deploy --only hosting:medical-tourism-stage
+
+  web_prod:
+    description: "hosting_web_stage"
+    run: |
+      cp firebase-prod.json firebase.json && \
+      fvm flutter build web --release -t lib/main_prod.dart && \
+      firebase deploy --only hosting:medical-tourism-prod
