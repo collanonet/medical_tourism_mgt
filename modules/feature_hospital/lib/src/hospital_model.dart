@@ -24,7 +24,6 @@ class HospitalModel with ChangeNotifier {
     notifyListeners();
     try {
       await hospitalRepository.getHospitals(
-        pageSize: 30,
         hospitalName: form?.control('hospitalName').value == null ? null : form!.control('hospitalName').value,
         type: form?.control('type').value == null ? null : form!.control('type').value,
         location: form?.control('location').value == null ? null : form!.control('location').value,
