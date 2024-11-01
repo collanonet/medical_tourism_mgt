@@ -75,11 +75,14 @@ abstract class AppModule {
   Future<String> get stageAppVersion async {
     return 'STAGE ${await Strings.appVersion()}';
   }
+
   @prod
   @production
   @preResolve
   @Named('appVersion')
   Future<String> get prodAppVersion async {
-    return await Strings.appVersion();
+    return await Strings.appVersion(
+      buildNumber: false,
+    );
   }
 }

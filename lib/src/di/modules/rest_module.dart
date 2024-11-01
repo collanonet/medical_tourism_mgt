@@ -86,7 +86,12 @@ abstract class RestModule {
   @prod
   @Order(0)
   @Named('baseUrl')
-  Uri get prodBaseUrl => Uri();
+  Uri get prodBaseUrl {
+    return Uri(
+      scheme: 'https',
+      host: 'medical-tourism-api-prod-collabonet.pixelplatforms.com',
+    );
+  }
 
   @dev
   @Order(0)
@@ -105,7 +110,7 @@ abstract class RestModule {
   @Order(0)
   @Named('fileUrl')
   String get prodFileUrl =>
-      'https://medical-tourism-api-collabonet.pixelplatforms.com/files/';
+      'https://medical-tourism-api-prod-collabonet.pixelplatforms.com/files/';
 
 }
 
