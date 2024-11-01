@@ -1494,10 +1494,8 @@ abstract class ApiService {
   // Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(
   //   @Body() MedicalVisaPersonalRequest medicalVisaPersonalRequest,
   // );
-  @GET('${EndPoints.MEDICAL_RECORD_VISA}/medicalRecord/{id}')
-  Future<MedicalRecordVisaResponse> getMedicalRecordVisa(
-    @Path('id') String medicalRecordId,
-  );
+  @GET(EndPoints.MEDICAL_RECORD_VISA)
+  Future<MedicalRecordVisaResponse> getMedicalRecordVisa();
 
   @POST(EndPoints.MEDICAL_RECORD_VISA)
   Future<MedicalRecordVisaResponse> postMedicalRecordVisa(
@@ -1596,23 +1594,9 @@ abstract class ApiService {
     @Body() MedicalInvoiceRequest medicalInvoiceRequest,
   );
 
-  @PUT('${EndPoints.INVOICE}/updateTypeOfInvoice/{id}')
-  Future<MedicalInvoiceResponse> putTypeInvoice(
-    @Path('id') String id,
-    @Field('type') bool type,
-  );
-
   @DELETE('${EndPoints.INVOICE}/{id}')
   Future<void> deleteInvoice(
     @Path('id') String id,
-  );
-
-  @GET(EndPoints.BILLING)
-  Future<BillingResponse> getBilling();
-
-  @POST(EndPoints.BILLING)
-  Future<BillingResponse> postBilling(
-    @Body() BillingRequest billingRequest,
   );
 }
 

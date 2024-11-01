@@ -42,7 +42,8 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
     return ValueListenableBuilder(
-      valueListenable: context.watch<MedicalVisaModel>().submit,
+      valueListenable:
+          context.watch<MedicalVisaModel>().submitMedicalRecordVisaData,
       builder: (context, value, _) {
         return Skeletonizer(
           enabled: value.loading,
@@ -124,11 +125,11 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),
-                      const NecessaryInJapan(),
+                      // const NecessaryInJapan(),
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),
-                      const AfterGettingVisaFinal(),
+                      // const AfterGettingVisaFinal(),
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),
@@ -141,18 +142,23 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   ValueListenableListener(
-                    valueListenable: context.read<MedicalVisaModel>().submit,
+                    valueListenable: context
+                        .read<MedicalVisaModel>()
+                        .submitMedicalRecordVisaData,
                     onListen: () {
-                      final value = context.read<MedicalVisaModel>().submit.value;
+                      final value = context
+                          .read<MedicalVisaModel>()
+                          .submitMedicalRecordVisaData
+                          .value;
                       if (value.hasData) {
                         logger.d('loading');
                         snackBarWidget(
                           message: '正常に保存されました',
-                          prefixIcon:
-                              const Icon(Icons.check_circle, color: Colors.white),
+                          prefixIcon: const Icon(Icons.check_circle,
+                              color: Colors.white),
                         );
                       }
-          
+
                       if (value.hasError) {
                         snackBarWidget(
                           message: '保存できませんでした。 もう一度試してください。',
@@ -163,7 +169,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       }
                     },
                     child: ValueListenableBuilder(
-                        valueListenable: context.watch<MedicalVisaModel>().submit,
+                        valueListenable: context
+                            .watch<MedicalVisaModel>()
+                            .submitMedicalRecordVisaData,
                         builder: (context, value, _) {
                           return ReactiveFormConsumer(
                             builder: (context, form, _) {
@@ -171,7 +179,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                   onPressed: !value.loading && form.valid
                                       ? () => context
                                           .read<MedicalVisaModel>()
-                                          .submitMedicalVisa(formGroup)
+                                          .submitMedicalRecordVisa(formGroup)
                                       : null,
                                   child: WithLoadingButton(
                                     isLoading: value.loading,

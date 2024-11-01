@@ -727,10 +727,6 @@ class PatientRemoteProvider {
     return apiService.putInvoice(id, invoiceRequest);
   }
 
-  Future<MedicalInvoiceResponse> putTypeInvoice(String id, bool type) {
-    return apiService.putTypeInvoice(id,type);
-  }
-
   Future<MedicalInvoiceResponse> postInvoice(
       MedicalInvoiceRequest invoiceRequest) {
     return apiService.postInvoice(invoiceRequest);
@@ -757,8 +753,8 @@ class PatientRemoteProvider {
   // Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(MedicalVisaPersonalRequest request){
   //   return apiService.postMedicalVisaPersonal(request);
   // }
-  Future<MedicalRecordVisaResponse> getMedicalRecordVisa(String medicalRecord) {
-    return apiService.getMedicalRecordVisa(medicalRecord);
+  Future<MedicalRecordVisaResponse> getMedicalRecordVisa(){
+    return apiService.getMedicalRecordVisa();
   }
 
   Future<MedicalRecordVisaResponse> postMedicalRecordVisa(MedicalRecordVisaRequest request){
@@ -820,13 +816,4 @@ class PatientRemoteProvider {
   Future<MedicalVisaAfterGettingVisaResponse> postAfterGettingVisaFinal(MedicalAfterGettingVisaFinalRequest request){
     return apiService.postAfterGettingVisaFinal(request);
   }
-
-  Future<BillingResponse> getBilling(){
-    return apiService.getBilling();
-  }
-
-  Future<BillingResponse> postBilling(BillingRequest request){
-    return apiService.postBilling(request);
-  }
-
 }

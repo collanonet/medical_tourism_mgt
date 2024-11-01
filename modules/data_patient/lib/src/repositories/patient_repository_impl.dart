@@ -956,12 +956,6 @@ class PatientRepositoryIml extends PatientRepository {
   }
 
   @override
-  Future<MedicalInvoiceResponse> putTypeInvoice(
-      String id, bool type){
-    return remote.putTypeInvoice(id, type);
-  }
-
-  @override
   Future<List<MedicalInvoiceResponse>> getInvoices({String? medicalRecord, bool? type}) {
     return remote.getInvoices(medicalRecord: medicalRecord, type: type);
   }
@@ -1047,23 +1041,13 @@ class PatientRepositoryIml extends PatientRepository {
   }
   
   @override
-  Future<MedicalRecordVisaResponse> getMedicalRecordVisa(String medicalRecord) {
-    return remote.getMedicalRecordVisa(medicalRecord);
+  Future<MedicalRecordVisaResponse> getMedicalRecordVisa() {
+    return remote.getMedicalRecordVisa();
   }
   
   @override
   Future<MedicalRecordVisaResponse> postMedicalRecordVisa(MedicalRecordVisaRequest request) {
     return remote.postMedicalRecordVisa(request);
-  }
-  
-  @override
-  Future<BillingResponse> getBilling() {
-    return remote.getBilling();
-  }
-  
-  @override
-  Future<BillingResponse> postBilling(BillingRequest request) {
-    return remote.postBilling(request);
   }
 
 

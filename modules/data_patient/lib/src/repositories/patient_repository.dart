@@ -554,14 +554,11 @@ abstract class PatientRepository {
   Future<MedicalInvoiceResponse> putInvoice(
       String id, MedicalInvoiceRequest invoiceRequest);
 
-  Future<MedicalInvoiceResponse> putTypeInvoice(
-      String id, bool type);
-
   Future<void> deleteInvoice(String id);
 
   // Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal();
   // Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(MedicalVisaPersonalRequest request);
-  Future<MedicalRecordVisaResponse> getMedicalRecordVisa(String medicalRecord);
+  Future<MedicalRecordVisaResponse> getMedicalRecordVisa();
 
   Future<MedicalRecordVisaResponse> postMedicalRecordVisa(MedicalRecordVisaRequest request);
 
@@ -592,8 +589,4 @@ abstract class PatientRepository {
   Future<MedicalVisaAfterGettingVisaResponse> getAfterGettingVisaFinal();
 
   Future<MedicalVisaAfterGettingVisaResponse> postAfterGettingVisaFinal(MedicalAfterGettingVisaFinalRequest request);
-
-  Future<BillingResponse> getBilling();
-
-  Future<BillingResponse> postBilling(BillingRequest request);
 }

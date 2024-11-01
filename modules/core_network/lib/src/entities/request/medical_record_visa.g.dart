@@ -9,7 +9,6 @@ part of 'medical_record_visa.dart';
 MedicalRecordVisaRequest _$MedicalRecordVisaRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalRecordVisaRequest(
-      medicalRecord: json['medicalRecord'] as String?,
       personal: (json['personal'] as List<dynamic>?)
           ?.map((e) =>
               MedicalVisaPersonalRequest.fromJson(e as Map<String, dynamic>))
@@ -39,7 +38,6 @@ MedicalRecordVisaRequest _$MedicalRecordVisaRequestFromJson(
 Map<String, dynamic> _$MedicalRecordVisaRequestToJson(
         MedicalRecordVisaRequest instance) =>
     <String, dynamic>{
-      'medicalRecord': instance.medicalRecord,
       'personal': instance.personal,
       'stayPeriod': instance.stayPeriod,
       'requiredInJapan': instance.requiredInJapan,
