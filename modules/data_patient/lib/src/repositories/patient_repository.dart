@@ -556,8 +556,11 @@ abstract class PatientRepository {
 
   Future<void> deleteInvoice(String id);
 
-  Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal();
-  Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(MedicalVisaPersonalRequest request);
+  // Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal();
+  // Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(MedicalVisaPersonalRequest request);
+  Future<MedicalRecordVisaResponse> getMedicalRecordVisa();
+
+  Future<MedicalRecordVisaResponse> postMedicalRecordVisa(MedicalRecordVisaRequest request);
 
   Future<List<MedicalVisaStayPeriodResponse>> getMedicalVisaStayPeriod();
 

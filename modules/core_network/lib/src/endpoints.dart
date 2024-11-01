@@ -248,7 +248,7 @@ class EndPoints {
   static const SUMMARY_LIST = '/medical-record-file-summary';
 
   //A11
-  static const MEDICAL_VISA_PERSONAL = '/personal';
+  static const MEDICAL_RECORD_VISA = '/medical-record-visa-data';
   static const MEDICAL_VISA_STAY_PERIOD = '/stay-period';
   static const MEDICAL_VISA_REQUIRED_IN_JAPAN = '/required-in-japan';
   static const MEDICAL_VISA_WITHDRAWAL = '/withdrawal';

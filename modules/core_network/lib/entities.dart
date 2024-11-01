@@ -107,5 +107,7 @@ export 'src/entities/request/getting_visa_info.dart';
 export 'src/entities/request/getting_visa_ticket.dart';
 export 'src/entities/request/getting_visa_ticket_back.dart';
 export 'src/entities/request/getting_visa_boarding_pass.dart';
+export 'src/entities/request/medical_record_visa.dart';
+export 'src/entities/medical_record_visa_response.dart';
 
 
