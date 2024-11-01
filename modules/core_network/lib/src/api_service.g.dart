@@ -7753,20 +7753,20 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal() async {
+  Future<MedicalRecordVisaResponse> getMedicalRecordVisa() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<MedicalVisaPersonalResponse>>(Options(
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalRecordVisaResponse>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/personal',
+              '/medical-record-visa-data',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -7775,30 +7775,27 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    var _value = _result.data!
-        .map((dynamic i) =>
-            MedicalVisaPersonalResponse.fromJson(i as Map<String, dynamic>))
-        .toList();
+    final _value = MedicalRecordVisaResponse.fromJson(_result.data!);
     return _value;
   }
 
   @override
-  Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(
-      MedicalVisaPersonalRequest medicalVisaPersonalRequest) async {
+  Future<MedicalRecordVisaResponse> postMedicalRecordVisa(
+      MedicalRecordVisaRequest medicalRecordVisaRequest) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(medicalVisaPersonalRequest.toJson());
+    _data.addAll(medicalRecordVisaRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<MedicalVisaPersonalResponse>(Options(
+        _setStreamType<MedicalRecordVisaResponse>(Options(
       method: 'POST',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/personal',
+              '/medical-record-visa-data',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -7807,7 +7804,7 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final _value = MedicalVisaPersonalResponse.fromJson(_result.data!);
+    final _value = MedicalRecordVisaResponse.fromJson(_result.data!);
     return _value;
   }
 

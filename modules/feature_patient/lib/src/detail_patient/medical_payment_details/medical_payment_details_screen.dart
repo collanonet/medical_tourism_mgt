@@ -45,6 +45,8 @@ class _MedicalPaymentDetailScreenState
                   filePicker().then((value) {
                     if (value != null) {
                       showCreateWithFileDialog(context, value);
+                    } else {
+                      logger.d('null');
                     }
                   });
                 },

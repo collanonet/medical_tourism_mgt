@@ -746,12 +746,19 @@ class PatientRemoteProvider {
     return apiService.deleteInvoice(id);
   }
 
-  Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal(){
-    return apiService.getMedicalVisaPersonal();
+  // Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal(){
+  //   return apiService.getMedicalVisaPersonal();
+  // }
+
+  // Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(MedicalVisaPersonalRequest request){
+  //   return apiService.postMedicalVisaPersonal(request);
+  // }
+  Future<MedicalRecordVisaResponse> getMedicalRecordVisa(){
+    return apiService.getMedicalRecordVisa();
   }
 
-  Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(MedicalVisaPersonalRequest request){
-    return apiService.postMedicalVisaPersonal(request);
+  Future<MedicalRecordVisaResponse> postMedicalRecordVisa(MedicalRecordVisaRequest request){
+    return apiService.postMedicalRecordVisa(request);
   }
 
   Future<List<MedicalVisaStayPeriodResponse>> getMedicalVisaStayPeriod(){
