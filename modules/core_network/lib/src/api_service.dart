@@ -8,6 +8,7 @@ import 'package:retrofit/retrofit.dart';
 import '../core_network.dart';
 import '../entities.dart';
 import 'endpoints.dart';
+import 'entities/medical_record_visa_response.dart';
 import 'entities/request/medical_visa_after_getting_visa_request.dart';
 import 'entities/request/medical_visa_reuied_in_japan_request.dart';
 
@@ -1486,12 +1487,19 @@ abstract class ApiService {
   );
 
   //A11
-  @GET(EndPoints.MEDICAL_VISA_PERSONAL)
-  Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal();
+  // @GET(EndPoints.MEDICAL_VISA_PERSONAL)
+  // Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal();
 
-  @POST(EndPoints.MEDICAL_VISA_PERSONAL)
-  Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(
-    @Body() MedicalVisaPersonalRequest medicalVisaPersonalRequest,
+  // @POST(EndPoints.MEDICAL_VISA_PERSONAL)
+  // Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(
+  //   @Body() MedicalVisaPersonalRequest medicalVisaPersonalRequest,
+  // );
+  @GET(EndPoints.MEDICAL_RECORD_VISA)
+  Future<MedicalRecordVisaResponse> getMedicalRecordVisa();
+
+  @POST(EndPoints.MEDICAL_RECORD_VISA)
+  Future<MedicalRecordVisaResponse> postMedicalRecordVisa(
+    @Body() MedicalRecordVisaRequest medicalRecordVisaRequest,
   );
 
   @GET(EndPoints.MEDICAL_VISA_STAY_PERIOD)

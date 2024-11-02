@@ -980,10 +980,10 @@ class PatientRepositoryIml extends PatientRepository {
     return remote.getMedicalVisaNecessaryInJapan();
   }
   
-  @override
-  Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal() {
-    return remote.getMedicalVisaPersonal();
-  }
+  // @override
+  // Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal() {
+  //   return remote.getMedicalVisaPersonal();
+  // }
   
   @override
   Future<List<MedicalVisaStayPeriodResponse>> getMedicalVisaStayPeriod() {
@@ -1020,10 +1020,10 @@ class PatientRepositoryIml extends PatientRepository {
    return remote.postMedicalVisaNecessaryInJapan(request);
   }
   
-  @override
-  Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(MedicalVisaPersonalRequest request) {
-    return remote.postMedicalVisaPersonal(request);
-  }
+  // @override
+  // Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(MedicalVisaPersonalRequest request) {
+  //   return remote.postMedicalVisaPersonal(request);
+  // }
   
   @override
   Future<MedicalVisaStayPeriodResponse> postMedicalVisaStayPeriod(MedicalVisaStayPeriodRequest request) {
@@ -1038,6 +1038,16 @@ class PatientRepositoryIml extends PatientRepository {
   @override
   Future<MedicalVisaVisaWithdrawalResponse> postMedicalVisaWithdrawal(MedicalVisaWithdrawalRequest request) {
    return remote.postMedicalVisaWithdrawal(request);
+  }
+  
+  @override
+  Future<MedicalRecordVisaResponse> getMedicalRecordVisa() {
+    return remote.getMedicalRecordVisa();
+  }
+  
+  @override
+  Future<MedicalRecordVisaResponse> postMedicalRecordVisa(MedicalRecordVisaRequest request) {
+    return remote.postMedicalRecordVisa(request);
   }
 
 

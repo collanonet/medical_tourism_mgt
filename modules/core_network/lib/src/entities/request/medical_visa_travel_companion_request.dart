@@ -18,7 +18,7 @@ class MedicalVisaTravelCompanionRequest {
   List<TravelInfoRequest>? travelInfo;
   String? travelRemarks;
   bool? visaWithdrawalTarget;
-  DateTime? reason;
+  String? reason;
   String? remarks;
   List<GettingVisaInfoRequest>? vasaInfo;
   List<TicketRequest>? ticket;

@@ -8,36 +8,41 @@ FormGroup medicalVisaForm() {
     {
       //本人 personal
 
-      'personal': FormArray([
-        FormGroup({
-          'medicalVisa': FormControl<String>(value: ''),
-          'applicationDate': FormControl<DateTime>(
-            validators: [
-              Validators.pattern(
-                ValidatorRegExp.date,
+      'personal': FormArray(
+        [
+          FormGroup(
+            {
+              'medicalVisa': FormControl<String>(value: ''),
+              'applicationDate': FormControl<DateTime>(
+                validators: [
+                  Validators.pattern(
+                    ValidatorRegExp.date,
+                  ),
+                ],
               ),
-            ],
-          ),
-          'issueDate': FormControl<DateTime>(
-            validators: [
-              Validators.pattern(
-                ValidatorRegExp.date,
+              'issueDate': FormControl<DateTime>(
+                validators: [
+                  Validators.pattern(
+                    ValidatorRegExp.date,
+                  ),
+                ],
               ),
-            ],
-          ),
-          'expirationDate': FormControl<DateTime>(
-            validators: [
-              Validators.pattern(
-                ValidatorRegExp.date,
+              'expirationDate': FormControl<DateTime>(
+                validators: [
+                  Validators.pattern(
+                    ValidatorRegExp.date,
+                  ),
+                ],
               ),
-            ],
+              'accompanyingPersonsNumber': FormControl<String>(value: ''),
+              'visaIssuingOverseasEstablishments':
+                  FormControl<String>(value: ''),
+              'remarks': FormControl<String>(value: ''),
+              'paymentStatus': FormControl<String>(value: ''),
+            },
           ),
-          'accompanyingPersonsNumber': FormControl<String>(value: ''),
-          'visaIssuingOverseasEstablishments': FormControl<String>(value: ''),
-          'remarks': FormControl<String>(value: ''),
-          'paymentStatus': FormControl<String>(value: ''),
-        }),
-      ]),
+        ],
+      ),
 
       // 滞在期間 stay period
       'stayPeriod': FormArray(
