@@ -17,7 +17,7 @@ PrePatientRequest _$PrePatientRequestFromJson(Map<String, dynamic> json) =>
       nationality: json['nationality'] as String?,
       classification: json['classification'] as String?,
       nameOfDisease: json['nameOfDisease'] as String?,
-      isDeleted: json['isDeleted'] as bool?,
+      isDelete: (json['isDelete'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$PrePatientRequestToJson(PrePatientRequest instance) =>
@@ -29,5 +29,5 @@ Map<String, dynamic> _$PrePatientRequestToJson(PrePatientRequest instance) =>
       'nationality': instance.nationality,
       'classification': instance.classification,
       'nameOfDisease': instance.nameOfDisease,
-      'isDeleted': instance.isDeleted,
+      'isDelete': instance.isDelete,
     };
