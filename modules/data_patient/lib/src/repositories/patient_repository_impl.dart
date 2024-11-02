@@ -956,6 +956,12 @@ class PatientRepositoryIml extends PatientRepository {
   }
 
   @override
+  Future<MedicalInvoiceResponse> putTypeInvoice(
+      String id, bool type){
+    return remote.putTypeInvoice(id, type);
+  }
+
+  @override
   Future<List<MedicalInvoiceResponse>> getInvoices({String? medicalRecord, bool? type}) {
     return remote.getInvoices(medicalRecord: medicalRecord, type: type);
   }

@@ -727,6 +727,10 @@ class PatientRemoteProvider {
     return apiService.putInvoice(id, invoiceRequest);
   }
 
+  Future<MedicalInvoiceResponse> putTypeInvoice(String id, bool type) {
+    return apiService.putTypeInvoice(id,type);
+  }
+
   Future<MedicalInvoiceResponse> postInvoice(
       MedicalInvoiceRequest invoiceRequest) {
     return apiService.postInvoice(invoiceRequest);

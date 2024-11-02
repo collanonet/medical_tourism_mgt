@@ -554,6 +554,9 @@ abstract class PatientRepository {
   Future<MedicalInvoiceResponse> putInvoice(
       String id, MedicalInvoiceRequest invoiceRequest);
 
+  Future<MedicalInvoiceResponse> putTypeInvoice(
+      String id, bool type);
+
   Future<void> deleteInvoice(String id);
 
   // Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal();
