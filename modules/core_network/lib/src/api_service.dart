@@ -1594,6 +1594,12 @@ abstract class ApiService {
     @Body() MedicalInvoiceRequest medicalInvoiceRequest,
   );
 
+  @PUT('${EndPoints.INVOICE}/updateTypeOfInvoice/{id}')
+  Future<MedicalInvoiceResponse> putTypeInvoice(
+    @Path('id') String id,
+    @Field('type') bool type,
+  );
+
   @DELETE('${EndPoints.INVOICE}/{id}')
   Future<void> deleteInvoice(
     @Path('id') String id,

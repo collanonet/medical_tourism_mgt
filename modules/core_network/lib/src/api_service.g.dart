@@ -8373,6 +8373,36 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<MedicalInvoiceResponse> putTypeInvoice(
+    String id,
+    bool type,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = {'type': type};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalInvoiceResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/invoices/updateTypeOfInvoice/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalInvoiceResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
   Future<void> deleteInvoice(String id) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
