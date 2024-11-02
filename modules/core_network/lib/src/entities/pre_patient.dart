@@ -14,7 +14,8 @@ class PrePatient {
   String? nationality;
   String? classification;
   String? nameOfDisease;
-  bool isDeleted;
+  DateTime? deletedAt;
+  int? isDelete;
   final DateTime createdAt;
   final DateTime updatedAt;
 
@@ -27,7 +28,8 @@ class PrePatient {
     this.nationality,
     this.classification,
     this.nameOfDisease,
-    required this.isDeleted,
+    this.deletedAt,
+    required this.isDelete,
     required this.createdAt,
     required this.updatedAt,
   });

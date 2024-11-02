@@ -510,8 +510,11 @@ Future<Uint8List?> generatePdfFromQuotation(
   String quotationDateLabel;
   String totalAmountLabel;
   List<String> tableHeaders;
+  String subTotalLabel;
+  String taxLabel;
+  String totalLabel;
+  String remarksLabel;
 
-  // Load appropriate fonts and text labels based on the language
   switch (language) {
     case 'JP':
       title = '御　見　積　書';
@@ -519,6 +522,10 @@ Future<Uint8List?> generatePdfFromQuotation(
       quotationDateLabel = '見積日: ';
       totalAmountLabel = '合計金額: ';
       tableHeaders = ['', '項目', '数', '量', '単価', '金額'];
+      subTotalLabel = '計';
+      taxLabel = '消費税';
+      totalLabel = '合　　計';
+      remarksLabel = '【特記事項】';
       break;
 
     case 'ZH':
@@ -527,6 +534,10 @@ Future<Uint8List?> generatePdfFromQuotation(
       quotationDateLabel = '预计日期: ';
       totalAmountLabel = '总金额: ';
       tableHeaders = ['', '项目', '数', '量', '单价', '金额'];
+      subTotalLabel = '計';
+      taxLabel = '消費税';
+      totalLabel = '合  计';
+      remarksLabel = '【特記事項】';
       break;
 
     case 'ZHTW':
@@ -535,6 +546,10 @@ Future<Uint8List?> generatePdfFromQuotation(
       quotationDateLabel = '預計日期: ';
       totalAmountLabel = '總金額: ';
       tableHeaders = ['', '項目', '數', '量', '單價', '金額'];
+      subTotalLabel = '計';
+      taxLabel = '消費税';
+      totalLabel = '合  计';
+      remarksLabel = '【特記事項】';
       break;
 
     case 'VN':
@@ -543,6 +558,10 @@ Future<Uint8List?> generatePdfFromQuotation(
       quotationDateLabel = 'ngày dự kiến: ';
       totalAmountLabel = 'tổng số tiền: ';
       tableHeaders = ['', 'mục', 'số', 'lượng', 'đơn giá', 'số tiền'];
+      subTotalLabel = 'tổng cộng';
+      taxLabel = 'thuế';
+      totalLabel = 'tổng cộng';
+      remarksLabel = 'ghi chú';
       break;
 
     default:
@@ -551,6 +570,10 @@ Future<Uint8List?> generatePdfFromQuotation(
       quotationDateLabel = 'Quotation date: ';
       totalAmountLabel = 'Total amount: ';
       tableHeaders = ['', 'Item', 'Quantity', 'Unit', 'Unit Price', 'Amount'];
+      subTotalLabel = 'Sub Total';
+      taxLabel = 'Tax';
+      totalLabel = 'Total';
+      remarksLabel = 'Remarks';
   }
   Uint8List? logoImage;
   Uint8List? stampImage;
@@ -615,7 +638,10 @@ Future<Uint8List?> generatePdfFromQuotation(
                       pw.Text(
                         '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
                         ' 様',
-                        style: pw.TextStyle(font: ttfJP),
+                        style: pw.TextStyle(
+                          font: ttfJP,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
                       ),
                       pw.Text(
                         '下記の通り御見積りいたします。ご用命の程宜しくお願い申し上げます。',
@@ -675,7 +701,10 @@ Future<Uint8List?> generatePdfFromQuotation(
                           subTotal(request.item ?? []),
                           taxCalculation(subTotal(request.item ?? []),
                               (request.taxRate ?? 0)))),
-                      style: pw.TextStyle(font: ttfJP),
+                      style: pw.TextStyle(
+                        font: ttfJP,
+                        fontWeight: pw.FontWeight.bold,
+                      ),
                     ),
                   ),
                 ]),
@@ -727,7 +756,7 @@ Future<Uint8List?> generatePdfFromQuotation(
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
               pw.Text(
-                request.telNumber ?? '',
+                'Tel : ${request.telNumber ?? ''}',
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
@@ -736,7 +765,7 @@ Future<Uint8List?> generatePdfFromQuotation(
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
               pw.Text(
-                request.fexNumber ?? '',
+                'Fax : ${request.fexNumber ?? ''}',
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
@@ -745,7 +774,7 @@ Future<Uint8List?> generatePdfFromQuotation(
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
               pw.Text(
-                request.inCharge ?? '',
+                '担当 : ${request.inCharge ?? ''}',
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
@@ -821,16 +850,16 @@ Future<Uint8List?> generatePdfFromQuotation(
                         pw.Row(
                             crossAxisAlignment: pw.CrossAxisAlignment.start,
                             children: [
-                          pw.Text(
-                            note.note ?? '',
-                            style: pw.TextStyle(
-                              font: ttfJP,
-                              fontWeight: pw.FontWeight.normal,
-                              fontSize: 10,
-                            ),
-                            textAlign: pw.TextAlign.left,
-                          )
-                        ]),
+                              pw.Text(
+                                note.note ?? '',
+                                style: pw.TextStyle(
+                                  font: ttfJP,
+                                  fontWeight: pw.FontWeight.normal,
+                                  fontSize: 10,
+                                ),
+                                textAlign: pw.TextAlign.left,
+                              )
+                            ]),
                       ])
                   .toList() ??
               [
@@ -850,7 +879,7 @@ Future<Uint8List?> generatePdfFromQuotation(
             pw.Align(
               alignment: pw.Alignment.centerLeft,
               child: pw.Text(
-                '計',
+                subTotalLabel,
                 style: pw.TextStyle(font: ttfJP),
               ),
             ),
@@ -866,7 +895,7 @@ Future<Uint8List?> generatePdfFromQuotation(
             pw.Align(
               alignment: pw.Alignment.centerLeft,
               child: pw.Text(
-                '消費税（${int.tryParse(request.taxRate.toString()) ?? 0}%）',
+                '$taxLabel（${int.tryParse(request.taxRate.toString()) ?? 0}%）',
                 style: pw.TextStyle(font: ttfJP),
               ),
             ),
@@ -882,7 +911,8 @@ Future<Uint8List?> generatePdfFromQuotation(
         pw.TableHelper.fromTextArray(
             headerCellDecoration:
                 const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
-            headerDecoration: const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+            headerDecoration:
+                const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
             cellDecoration: (i, _, __) {
               return const pw.BoxDecoration(
                   color: PdfColor.fromInt(0xff98FF98));
@@ -901,7 +931,7 @@ Future<Uint8List?> generatePdfFromQuotation(
                 pw.Align(
                   alignment: pw.Alignment.centerLeft,
                   child: pw.Text(
-                    '合計',
+                    totalLabel,
                     style: pw.TextStyle(font: ttfJP),
                   ),
                 ),
@@ -912,14 +942,17 @@ Future<Uint8List?> generatePdfFromQuotation(
                         subTotal(request.item ?? []),
                         taxCalculation(
                             subTotal(request.item ?? []), request.taxRate))),
-                    style: pw.TextStyle(font: ttfJP),
+                    style: pw.TextStyle(
+                      font: ttfJP,
+                      fontWeight: pw.FontWeight.bold,
+                    ),
                   ),
                 ),
               ],
             ]),
         pw.SizedBox(height: 20),
         pw.Text(
-          '【特記事項】',
+          remarksLabel,
           style: pw.TextStyle(font: ttfJP),
         ),
         pw.SizedBox(height: 20),

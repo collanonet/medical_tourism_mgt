@@ -140,7 +140,7 @@ class _PrePatientScreenState extends State<PrePatientScreen> {
                                 ],
                               )),
                               DataCell(Text('${item.nameOfDisease}')),
-                              DataCell(item.isDeleted
+                              DataCell(item.isDelete == 1
                                   ? ElevatedButton(
                                       style: ButtonStyle(
                                         backgroundColor:

@@ -17,7 +17,10 @@ PrePatient _$PrePatientFromJson(Map<String, dynamic> json) => PrePatient(
       nationality: json['nationality'] as String?,
       classification: json['classification'] as String?,
       nameOfDisease: json['nameOfDisease'] as String?,
-      isDeleted: json['isDeleted'] as bool,
+      deletedAt: json['deletedAt'] == null
+          ? null
+          : DateTime.parse(json['deletedAt'] as String),
+      isDelete: (json['isDelete'] as num?)?.toInt(),
       createdAt: DateTime.parse(json['createdAt'] as String),
       updatedAt: DateTime.parse(json['updatedAt'] as String),
     );
@@ -32,7 +35,8 @@ Map<String, dynamic> _$PrePatientToJson(PrePatient instance) =>
       'nationality': instance.nationality,
       'classification': instance.classification,
       'nameOfDisease': instance.nameOfDisease,
-      'isDeleted': instance.isDeleted,
+      'deletedAt': instance.deletedAt?.toIso8601String(),
+      'isDelete': instance.isDelete,
       'createdAt': instance.createdAt.toIso8601String(),
       'updatedAt': instance.updatedAt.toIso8601String(),
     };

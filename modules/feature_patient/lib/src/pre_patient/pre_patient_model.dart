@@ -121,7 +121,7 @@ class PrePatientModel with ChangeNotifier {
           _prePatientData.data?.items.indexWhere((element) => element.id == id);
 
       if (index != null && index >= 0) {
-        _prePatientData.data?.items[index].isDeleted = true;
+        _prePatientData.data?.items[index].isDelete = 1;
       }
 
       _deletePrePatientData = const AsyncData(data: 'success');

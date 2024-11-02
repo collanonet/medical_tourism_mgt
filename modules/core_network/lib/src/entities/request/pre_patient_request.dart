@@ -12,7 +12,7 @@ class PrePatientRequest {
   String? nationality;
   String? classification;
   String? nameOfDisease;
-  bool? isDeleted;
+  int? isDelete;
 
   PrePatientRequest({
      this.agents,
@@ -22,7 +22,7 @@ class PrePatientRequest {
      this.nationality,
      this.classification,
      this.nameOfDisease,
-     this.isDeleted,
+     this.isDelete,
   });
 
   factory PrePatientRequest.fromJson(Map<String, dynamic> json) {
