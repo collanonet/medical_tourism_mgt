@@ -417,46 +417,7 @@ class EstimateModel {
             ?.firstWhere((element) => element.id == id);
         if (invoice != null) {
           submitMoveToInvoice.value = AsyncData(loading: true, data: id);
-          var invoiceData = invoice.copyWith(type: true);
-          MedicalInvoiceRequest request = MedicalInvoiceRequest(
-            logoFile: invoiceData.logoFile,
-            stampFile: invoiceData.stampFile,
-            type: true,
-            fileNamePdfEN: invoiceData.fileNamePdfEN,
-            fileNamePdfJP: invoiceData.fileNamePdfJP,
-            fileNamePdfVN: invoiceData.fileNamePdfVN,
-            fileNamePdfZH: invoiceData.fileNamePdfZH,
-            fileNamePdfZHTW: invoiceData.fileNamePdfZHTW,
-            invoiceNumber: invoiceData.invoiceNumber,
-            invoiceDate: invoiceData.invoiceDate,
-            companyName: invoiceData.companyName,
-            address: invoiceData.address,
-            telNumber: invoiceData.telNumber,
-            fexNumber: invoiceData.fexNumber,
-            inCharge: invoiceData.inCharge,
-            remarks: invoiceData.remarks,
-            notes: invoiceData.notes?.map((note) {
-              return NoteInvoiceRequest(
-                note: note.note,
-              );
-            }).toList(),
-            item: invoiceData.item?.map((item) {
-              return ItemRequest(
-                itemCode: item.itemCode,
-                details: item.details,
-                quantity: item.quantity,
-                unit: item.unit,
-                unitPrice: item.unitPrice,
-              );
-            }).toList(),
-            medicalRecord: invoiceData.medicalRecord.id,
-            user: invoiceData.user?.id,
-            patient: invoiceData.patient!.id,
-            hospitalRecord: invoiceData.hospitalRecord?.id,
-            taxRate: invoiceData.taxRate,
-            taxRateOption: invoiceData.taxRateOption,
-          );
-          await patientRepository.putInvoice(id, request);
+          await patientRepository.putTypeInvoice(id, true);
 
           submitMoveToInvoice.value = AsyncData(data: id);
           medicalQuotationData.value = AsyncData(
