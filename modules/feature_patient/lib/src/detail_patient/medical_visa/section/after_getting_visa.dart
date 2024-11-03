@@ -49,7 +49,7 @@ class AfterGettingVisa extends StatelessWidget {
                                       child: ReactiveDatePicker<DateTime>(
                                         formControlName: 'visaPage',
                                         firstDate: DateTime(1900),
-                                        lastDate: DateTime.now(),
+                                        lastDate: DateTime(2050),
                                         builder: (BuildContext context,
                                             ReactiveDatePickerDelegate<dynamic>
                                                 picker,
@@ -116,7 +116,7 @@ class AfterGettingVisa extends StatelessWidget {
                                       child: ReactiveDatePicker<DateTime>(
                                         formControlName: 'landingPermit',
                                         firstDate: DateTime(1900),
-                                        lastDate: DateTime.now(),
+                                        lastDate: DateTime(2050),
                                         builder: (BuildContext context,
                                             ReactiveDatePickerDelegate<dynamic>
                                                 picker,
@@ -260,7 +260,7 @@ class AfterGettingVisa extends StatelessWidget {
                                     formControlName:
                                         'planeTicketForYourVisitToJapan',
                                     firstDate: DateTime(1900),
-                                    lastDate: DateTime.now(),
+                                    lastDate: DateTime(2050),
                                     builder: (BuildContext context,
                                         ReactiveDatePickerDelegate<dynamic>
                                             picker,
@@ -392,7 +392,7 @@ class AfterGettingVisa extends StatelessWidget {
                                   child: ReactiveDatePicker<DateTime>(
                                     formControlName: 'returnFlightTicket',
                                     firstDate: DateTime(1900),
-                                    lastDate: DateTime.now(),
+                                    lastDate: DateTime(2050),
                                     builder: (BuildContext context,
                                         ReactiveDatePickerDelegate<dynamic>
                                             picker,
@@ -523,7 +523,7 @@ class AfterGettingVisa extends StatelessWidget {
                                     formControlName:
                                         'boardingPassForReturnFlight',
                                     firstDate: DateTime(1900),
-                                    lastDate: DateTime.now(),
+                                    lastDate: DateTime(2050),
                                     builder: (BuildContext context,
                                         ReactiveDatePickerDelegate<dynamic>
                                             picker,
@@ -648,7 +648,7 @@ class AfterGettingVisa extends StatelessWidget {
                     child: ReactiveDatePicker<DateTime>(
                       formControlName: 'certificateOfEligibility',
                       firstDate: DateTime(1900),
-                      lastDate: DateTime.now(),
+                      lastDate: DateTime(2050),
                       builder: (BuildContext context,
                           ReactiveDatePickerDelegate<dynamic> picker,
                           Widget? child) {

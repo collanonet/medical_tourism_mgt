@@ -70,7 +70,7 @@ class SaleTotal extends StatelessWidget {
                       valueListenable: context.read<SaleModel>().taxData,
                       builder: (context, value, _) {
                         return ReactiveDropdownFormField(
-                          formControlName: 'tax_included',
+                          formControlName: 'taxIncluded',
                           items: value
                               .map((e) => DropdownMenuItem(
                                     value: e.tax,
@@ -89,7 +89,7 @@ class SaleTotal extends StatelessWidget {
                       valueListenable: context.read<SaleModel>().taxData,
                       builder: (context, value, _) {
                         return ReactiveDropdownFormField(
-                          formControlName: 'tax_excluded',
+                          formControlName: 'taxExcluded',
                           items: value
                               .map((e) => DropdownMenuItem(
                                     value: e.tax,
@@ -108,7 +108,7 @@ class SaleTotal extends StatelessWidget {
                       valueListenable: context.read<SaleModel>().taxData,
                       builder: (context, value, _) {
                         return ReactiveDropdownFormField(
-                          formControlName: 'tax_exempt',
+                          formControlName: 'taxExempt',
                           items: value
                               .map((e) => DropdownMenuItem(
                                     value: e.tax,

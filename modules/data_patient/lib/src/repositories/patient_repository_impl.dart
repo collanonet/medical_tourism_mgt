@@ -1055,6 +1055,16 @@ class PatientRepositoryIml extends PatientRepository {
   Future<MedicalRecordVisaResponse> postMedicalRecordVisa(MedicalRecordVisaRequest request) {
     return remote.postMedicalRecordVisa(request);
   }
+  
+  @override
+  Future<BillingResponse> getBilling() {
+    return remote.getBilling();
+  }
+  
+  @override
+  Future<BillingResponse> postBilling(BillingRequest request) {
+    return remote.postBilling(request);
+  }
 
 
   

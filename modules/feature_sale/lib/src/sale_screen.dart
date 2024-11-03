@@ -335,60 +335,56 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                           ],
                         ),
                       ),
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.end,
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          ValueListenableListener(
-                            valueListenable: context.read<SaleModel>().submit,
-                            onListen: () {
-                              final value =
-                                  context.read<SaleModel>().submit.value;
-                              if (value.hasData) {
-                                logger.d('loading');
-                                snackBarWidget(
-                                  message: '正常に保存されました',
-                                  prefixIcon: const Icon(Icons.check_circle,
-                                      color: Colors.white),
-                                );
-                              }
-
-                              if (value.hasError) {
-                                snackBarWidget(
-                                  message: '保存できませんでした。 もう一度試してください。',
-                                  backgroundColor: Colors.red,
-                                  prefixIcon: const Icon(Icons.error,
-                                      color: Colors.white),
-                                );
-                              }
-                            },
-                            child: ValueListenableBuilder(
-                                valueListenable:
-                                    context.watch<SaleModel>().submit,
-                                builder: (context, value, child) {
-                                  return ReactiveFormConsumer(
-                                    builder: (context, form, _) {
-                                      return ElevatedButton(
-                                          onPressed:
-                                              !value.loading && form.valid
-                                                  ? () => context
-                                                      .read<SaleModel>()
-                                                      .submitDataInfo(form)
-                                                  : null,
-                                          child: WithLoadingButton(
-                                            isLoading: value.loading,
-                                            child: const Text('保存する'),
-                                          ));
-                                    },
-                                  );
-                                }),
-                          )
-                        ],
-                      ),
                     ],
                   ),
                 ),
-              )
+              ),
+              Row(
+                crossAxisAlignment: CrossAxisAlignment.end,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  ValueListenableListener(
+                    valueListenable: context.read<SaleModel>().submit,
+                    onListen: () {
+                      final value = context.read<SaleModel>().submit.value;
+                      if (value.hasData) {
+                        snackBarWidget(
+                          message: '正常に保存されました',
+                          prefixIcon: const Icon(Icons.check_circle,
+                              color: Colors.white),
+                        );
+                      }
+
+                      if (value.hasError) {
+                        snackBarWidget(
+                          message: '保存できませんでした。 もう一度試してください。',
+                          backgroundColor: Colors.red,
+                          prefixIcon:
+                              const Icon(Icons.error, color: Colors.white),
+                        );
+                      }
+                    },
+                    child: ValueListenableBuilder(
+                        valueListenable: context.watch<SaleModel>().submit,
+                        builder: (context, value, child) {
+                          return ReactiveFormConsumer(
+                            builder: (context, form, _) {
+                              return ElevatedButton(
+                                  onPressed: !value.loading && form.valid
+                                      ? () => context
+                                          .read<SaleModel>()
+                                          .submitDataInfo(form)
+                                      : null,
+                                  child: WithLoadingButton(
+                                    isLoading: value.loading,
+                                    child: const Text('保存する'),
+                                  ));
+                            },
+                          );
+                        }),
+                  )
+                ],
+              ),
             ],
           ),
         );
