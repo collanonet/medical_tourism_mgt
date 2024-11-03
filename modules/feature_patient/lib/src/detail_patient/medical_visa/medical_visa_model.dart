@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
@@ -32,12 +33,54 @@ class MedicalVisaModel with ChangeNotifier {
     try {
       medicalRecordVisaData.value = const AsyncData(loading: true);
       final response = await patientRepository.getMedicalRecordVisa();
+      insertData(formGroup, response);
       medicalRecordVisaData.value = AsyncData(data: response);
       logger.d(response.toJson());
     } catch (e) {
       logger.d(e);
       medicalRecordVisaData.value = AsyncData(error: e);
     }
+  }
+
+  void insertData(FormGroup formGroup, MedicalRecordVisaResponse response) {
+    for (var elements in response.personal!) {
+      FormGroup(
+        {
+          'medicalVisa': FormControl<String>(value: elements.medicalVisa),
+          'applicationDate': FormControl<DateTime>(
+            value: elements.applicationDate,
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'issueDate': FormControl<DateTime>(
+            value: elements.issueDate,
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'expirationDate': FormControl<DateTime>(
+            value: elements.expirationDate,
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'accompanyingPersonsNumber':
+              FormControl<String>(value: elements.accompanyingPersonsNumber),
+          'visaIssuingOverseasEstablishments': FormControl<String>(
+              value: elements.visaIssuingOverseasEstablishments),
+          'remarks': FormControl<String>(value: elements.remarks),
+          'paymentStatus': FormControl<String>(value: elements.paymentStatus),
+        },
+      );
+    }
+    formGroup.control('personal').value.forEach((e) {});
   }
 
   ValueNotifier<AsyncData<MedicalRecordVisaResponse>>
@@ -88,26 +131,6 @@ class MedicalVisaModel with ChangeNotifier {
       var formRequiredInJapan =
           formGroup.control('requiredInJapan') as FormGroup;
       List<VisaInfoRequest>? visaInfo = [];
-
-      // String? passportFileSelect;
-      // if (formRequiredInJapan.control('passportFileSelect').value != null) {
-      //   FileSelect docFile =
-      //       formRequiredInJapan.control('passportFileSelect').value;
-      //   if (docFile.file != null) {
-      //     try {
-      //       String base64Image = base64Encode(docFile.file!);
-      //       FileResponse fileData = await patientRepository.uploadFileBase64(
-      //         base64Image,
-      //         docFile.filename!,
-      //       );
-      //       passportFileSelect = fileData.filename;
-      //     } catch (e) {
-      //       logger.e(e);
-      //     }
-      //   } else {
-      //     passportFileSelect = docFile.url;
-      //   }
-      // }
 
       // String? letterOfGuaranteeFileSelect;
       // if (formRequiredInJapan.control('letterOfGuaranteeFileSelect').value !=
@@ -555,9 +578,9 @@ class MedicalVisaModel with ChangeNotifier {
           travelCompanion: travelCompanion,
         ),
       );
+      logger.d(personal.toList());
       submitMedicalRecordVisaData.value = AsyncData(data: response);
       medicalRecordVisaData.value = AsyncData(data: response);
-      // logger.d(response.toJson());
     } catch (e) {
       logger.d('Error ${e.toString()}');
       submitMedicalRecordVisaData.value = AsyncData(error: e);
