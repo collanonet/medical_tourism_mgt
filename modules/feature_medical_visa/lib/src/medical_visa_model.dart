@@ -34,4 +34,34 @@ class MedicalVisaModel with ChangeNotifier {
       notifyListeners();
     });
   }
+
+  Future<void> fetchMorePatients() async {
+    if (_patientData.data?.hasNextPage == true) {
+      _patientData.copyWith(
+        loading: true,
+      );
+      notifyListeners();
+      await patientRepository
+          .patients(
+        page: (int.tryParse(_patientData.data!.currentPage) ?? 1) + 1,
+      )
+          .then((value) {
+        _patientData = AsyncData(
+            data: Paginated(
+              items: [
+                ..._patientData.data?.items ?? [],
+                ...value.items,
+              ],
+              totalPages: value.totalPages,
+              currentPage: value.currentPage,
+            ));
+      }).catchError((error) {
+        logger.d(error);
+        _patientData = AsyncData(error: error);
+      }).whenComplete(() {
+        notifyListeners();
+      });
+    }
+  }
+
 }
