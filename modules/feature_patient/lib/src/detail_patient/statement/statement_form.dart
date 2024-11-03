@@ -38,7 +38,7 @@ FormGroup statementForm() {
           ],
         ),
         'unit': FormControl<String>(
-          value: '代',
+          value: '式',
         ),
         'unitPrice': FormControl<double>(),
       })

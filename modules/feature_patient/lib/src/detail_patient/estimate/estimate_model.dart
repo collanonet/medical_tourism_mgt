@@ -98,7 +98,7 @@ class EstimateModel {
               'itemCode': FormControl<String>(value: itemData.itemCode),
               'details': FormControl<String>(value: itemData.details),
               'quantity': FormControl<double>(value: itemData.quantity),
-              'unit': FormControl<String>(value: itemData.unit ?? '代'),
+              'unit': FormControl<String>(value: itemData.unit ?? '式'),
               'unitPrice': FormControl<double>(value: itemData.unitPrice),
             }),
           );
