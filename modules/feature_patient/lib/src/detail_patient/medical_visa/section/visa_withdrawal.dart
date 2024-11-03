@@ -38,7 +38,7 @@ class VisaWithdrawal extends StatelessWidget {
                   child: ReactiveDatePicker<DateTime>(
                     formControlName: 'deathOrOccurrenceEventDate',
                     firstDate: DateTime(1900),
-                    lastDate: DateTime.now(),
+                    lastDate: DateTime(2050),
                     builder: (BuildContext context,
                         ReactiveDatePickerDelegate<dynamic> picker,
                         Widget? child) {

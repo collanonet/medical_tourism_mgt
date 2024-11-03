@@ -820,4 +820,13 @@ class PatientRemoteProvider {
   Future<MedicalVisaAfterGettingVisaResponse> postAfterGettingVisaFinal(MedicalAfterGettingVisaFinalRequest request){
     return apiService.postAfterGettingVisaFinal(request);
   }
+
+  Future<BillingResponse> getBilling(){
+    return apiService.getBilling();
+  }
+
+  Future<BillingResponse> postBilling(BillingRequest request){
+    return apiService.postBilling(request);
+  }
+
 }

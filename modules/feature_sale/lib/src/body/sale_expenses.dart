@@ -16,7 +16,6 @@ class SaleExpenses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final form = ReactiveForm.of(context) as FormGroup;
-    var formArrays = form.control('service_item') as FormArray;
     return Container(
       width: MediaQuery.of(context).size.width,
       decoration: BoxDecoration(
@@ -63,7 +62,7 @@ class SaleExpenses extends StatelessWidget {
                 height: context.appTheme.spacing.marginMedium,
               ),
               children: List.generate(
-                10,
+                1,
                 (index) {
                   return RowSeparated(
                     separatorBuilder: (context, index) => SizedBox(
@@ -72,16 +71,17 @@ class SaleExpenses extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
+                      Text('${index + 1}'),
                       IntrinsicWidth(
                         stepWidth: 260,
                         child: ReactiveTextField(
-                          formControlName: 'major_items',
+                          formControlName: 'majorItems',
                         ),
                       ),
                       ReactiveFormArray(
                         formArrayName: 'subitems',
                         builder: (context, formArray, child) {
-                          formArrays = formArray;
+                          //  formArrays = formArray;
                           final rows = formArray.controls
                               .map((controll) => controll as FormGroup)
                               .map((currenForm) {
@@ -118,11 +118,11 @@ class SaleExpenses extends StatelessWidget {
                       ),
                       IconButton(
                         onPressed: () {
-                          formArrays.add(
-                            FormGroup({
-                              'submit': FormControl<String>(),
-                            }),
-                          );
+                          // formArrays.add(
+                          //   FormGroup({
+                          //     'submit': FormControl<String>(),
+                          //   }),
+                          // );
                         },
                         icon: const Icon(Icons.add_box_rounded),
                       ),
@@ -153,19 +153,19 @@ class SaleExpenses extends StatelessWidget {
                       IntrinsicWidth(
                         stepWidth: 120,
                         child: ReactiveTextField(
-                          formControlName: 'unit_price',
+                          formControlName: 'unitPrice',
                         ),
                       ),
                       IntrinsicWidth(
                         stepWidth: 120,
                         child: ReactiveTextField(
-                          formControlName: 'amount_of_money',
+                          formControlName: 'amountOfMoney',
                         ),
                       ),
                       IntrinsicWidth(
                         stepWidth: 120,
                         child: ReactiveTextField(
-                          formControlName: 'payment_document',
+                          formControlName: 'paymentDocument',
                         ),
                       ),
                     ],
@@ -194,7 +194,7 @@ class SaleExpenses extends StatelessWidget {
                       valueListenable: context.read<SaleModel>().taxData,
                       builder: (context, value, _) {
                         return ReactiveDropdownFormField(
-                          formControlName: 'type_of_tax',
+                          formControlName: 'typeOfTax',
                           items: value
                               .map((e) => DropdownMenuItem(
                                     value: e.tax,

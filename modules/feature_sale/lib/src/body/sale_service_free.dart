@@ -72,11 +72,11 @@ class SaleServiceFree extends StatelessWidget {
             ],
           ),
           ReactiveForm(
-            formGroup: form.control('service_fee') as FormGroup,
+            formGroup: form.control('serviceFee') as FormGroup,
             child: Column(
               children: [
                 ReactiveFormArray(
-                  formArrayName: 'service_item',
+                  formArrayName: 'serviceItem',
                   builder: (context, formArray, child) {
                     final rows = formArray.controls
                         .map((control) => control as FormGroup)
@@ -140,13 +140,13 @@ class SaleServiceFree extends StatelessWidget {
                             IntrinsicWidth(
                               stepWidth: 120,
                               child: ReactiveTextField(
-                                formControlName: 'unit_price',
+                                formControlName: 'unitPrice',
                               ),
                             ),
                             IntrinsicWidth(
                               stepWidth: 120,
                               child: ReactiveTextField(
-                                formControlName: 'amount_of_money',
+                                formControlName: 'amountOfMoney',
                               ),
                             ),
                             IntrinsicWidth(
@@ -164,13 +164,13 @@ class SaleServiceFree extends StatelessWidget {
                             IntrinsicWidth(
                               stepWidth: 120,
                               child: ReactiveTextField(
-                                formControlName: 'invoice_no',
+                                formControlName: 'invoiceNo',
                               ),
                             ),
                             IntrinsicWidth(
                               stepWidth: 120,
                               child: ReactiveTextField(
-                                formControlName: 'payment_document_no',
+                                formControlName: 'paymentDocumentNo',
                               ),
                             ),
                           ],
@@ -191,19 +191,19 @@ class SaleServiceFree extends StatelessWidget {
                         InkWell(
                           onTap: () {
                             formArray.add(
-                              FormGroup(
-                                {
-                                  'item': FormControl<String>(),
-                                  'quantity': FormControl<int>(),
-                                  'unit': FormControl<String>(),
-                                  'unit_price': FormControl<int>(),
-                                  'amount_of_money': FormControl<int>(),
-                                  'cost': FormControl<int>(),
-                                  'profit': FormControl<int>(),
-                                  'invoice_no': FormControl<int>(),
-                                  'payment_document_no': FormControl<int>(),
-                                },
-                              ),
+                               FormGroup(
+            {
+              'item': FormControl<String>(),
+              'quantity': FormControl<int>(),
+              'unit': FormControl<String>(),
+              'unitPrice': FormControl<int>(),
+              'amountOfMoney': FormControl<int>(),
+              'cost': FormControl<int>(),
+              'profit': FormControl<int>(),
+              'invoiceNo': FormControl<int>(),
+              'paymentDocumentNo': FormControl<int>(),
+            },
+          ),
                             );
                           },
                           child: Row(
@@ -261,13 +261,13 @@ class SaleServiceFree extends StatelessWidget {
                             IntrinsicWidth(
                               stepWidth: 120,
                               child: ReactiveTextField(
-                                formControlName: 'cost_sale',
+                                formControlName: 'costSale',
                               ),
                             ),
                             IntrinsicWidth(
                               stepWidth: 120,
                               child: ReactiveTextField(
-                                formControlName: 'profit_sale',
+                                formControlName: 'profitSale',
                               ),
                             )
                           ],
@@ -284,13 +284,13 @@ class SaleServiceFree extends StatelessWidget {
                             IntrinsicWidth(
                               stepWidth: 120,
                               child: ReactiveTextField(
-                                formControlName: 'cost_tax',
+                                formControlName: 'costTax',
                               ),
                             ),
                             IntrinsicWidth(
                               stepWidth: 120,
                               child: ReactiveTextField(
-                                formControlName: 'profit_tax',
+                                formControlName: 'profitTax',
                               ),
                             )
                           ],
@@ -329,7 +329,7 @@ class SaleServiceFree extends StatelessWidget {
                                       context.read<SaleModel>().taxData,
                                   builder: (context, value, _) {
                                     return ReactiveDropdownFormField(
-                                      formControlName: 'tax_excluded',
+                                      formControlName: 'taxExcluded',
                                       items: value
                                           .map((e) => DropdownMenuItem(
                                                 value: e.tax,
@@ -348,7 +348,7 @@ class SaleServiceFree extends StatelessWidget {
                                       context.read<SaleModel>().taxData,
                                   builder: (context, value, _) {
                                     return ReactiveDropdownFormField(
-                                      formControlName: 'tax_exempt',
+                                      formControlName: 'taxExempt',
                                       items: value
                                           .map((e) => DropdownMenuItem(
                                                 value: e.tax,
@@ -374,13 +374,13 @@ class SaleServiceFree extends StatelessWidget {
                             IntrinsicWidth(
                               stepWidth: 120,
                               child: ReactiveTextField(
-                                formControlName: 'cost_amount',
+                                formControlName: 'costAmount',
                               ),
                             ),
                             IntrinsicWidth(
                               stepWidth: 120,
                               child: ReactiveTextField(
-                                formControlName: 'profit_amount',
+                                formControlName: 'profitAmount',
                               ),
                             )
                           ],

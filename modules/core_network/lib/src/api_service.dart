@@ -1604,6 +1604,14 @@ abstract class ApiService {
   Future<void> deleteInvoice(
     @Path('id') String id,
   );
+
+  @GET(EndPoints.BILLING)
+  Future<BillingResponse> getBilling();
+
+  @POST(EndPoints.BILLING)
+  Future<BillingResponse> postBilling(
+    @Body() BillingRequest billingRequest,
+  );
 }
 
 extension ApiServiceExts on ApiService {

@@ -592,4 +592,8 @@ abstract class PatientRepository {
   Future<MedicalVisaAfterGettingVisaResponse> getAfterGettingVisaFinal();
 
   Future<MedicalVisaAfterGettingVisaResponse> postAfterGettingVisaFinal(MedicalAfterGettingVisaFinalRequest request);
+
+  Future<BillingResponse> getBilling();
+
+  Future<BillingResponse> postBilling(BillingRequest request);
 }
