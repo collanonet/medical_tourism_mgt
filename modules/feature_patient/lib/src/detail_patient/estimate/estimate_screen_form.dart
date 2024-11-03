@@ -425,7 +425,7 @@ class EstimateScreenForm extends StatelessWidget {
                                   formControlName: 'unit',
                                   items: [
                                     DropdownMenuItem(
-                                        child: Text('代'), value: '代'),
+                                        child: Text('式'), value: '式'),
                                     DropdownMenuItem(
                                         child: Text('回'), value: '回'),
                                   ],
@@ -464,7 +464,7 @@ class EstimateScreenForm extends StatelessWidget {
                         ],
                       ),
                       'unit': FormControl<String>(
-                        value: '代',
+                        value: '式',
                       ),
                       'unitPrice': FormControl<double>(),
                     }));
