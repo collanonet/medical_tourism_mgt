@@ -92,7 +92,7 @@ class YourVisa extends StatelessWidget {
                                         child: ReactiveDatePicker<DateTime>(
                                           formControlName: 'applicationDate',
                                           firstDate: DateTime(1900),
-                                          lastDate: DateTime(2050),
+                                          lastDate: DateTime(2100),
                                           builder: (BuildContext context,
                                               ReactiveDatePickerDelegate<
                                                       dynamic>
@@ -139,7 +139,7 @@ class YourVisa extends StatelessWidget {
                                         child: ReactiveDatePicker<DateTime>(
                                           formControlName: 'issueDate',
                                           firstDate: DateTime(1900),
-                                          lastDate: DateTime(2050),
+                                          lastDate: DateTime(2100),
                                           builder: (BuildContext context,
                                               ReactiveDatePickerDelegate<
                                                       dynamic>
@@ -189,7 +189,7 @@ class YourVisa extends StatelessWidget {
                                         child: ReactiveDatePicker<DateTime>(
                                           formControlName: 'expirationDate',
                                           firstDate: DateTime(1900),
-                                          lastDate: DateTime(2050),
+                                          lastDate: DateTime(2100),
                                           builder: (BuildContext context,
                                               ReactiveDatePickerDelegate<
                                                       dynamic>
