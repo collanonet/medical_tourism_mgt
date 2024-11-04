@@ -16,6 +16,7 @@ class MedicalInvoiceRequest {
   String? fileNamePdfZHTW;
   String? invoiceNumber;
   DateTime? invoiceDate;
+  DateTime? startDate;
 
   String? companyName;
   String? address;
@@ -45,6 +46,7 @@ class MedicalInvoiceRequest {
     this.fileNamePdfZHTW,
     this.invoiceNumber,
     this.invoiceDate,
+    this.startDate,
     this.companyName,
     this.address,
     this.telNumber,

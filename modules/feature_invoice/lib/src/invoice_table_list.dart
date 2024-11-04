@@ -36,6 +36,7 @@ class _InvoiceTableListState extends State<InvoiceTableList> {
           const Row(
             children: [
               Expanded(child: Text('書類番号')), //Document Number
+              Expanded(child: Text('患者名')),
               Expanded(child: SizedBox(width: 100)),
               Expanded(child: Text('宛先')), // address
               Expanded(flex: 3, child: Text('タイトル')), // title
@@ -144,6 +145,25 @@ class _InvoiceTableListState extends State<InvoiceTableList> {
                                   style: context.textTheme.bodyMedium,
                                   maxLines: 1,
                                   overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              Expanded(
+                                child: Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment:
+                                  CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '${data?.patient?.firstNameRomanized ?? '-'} ${data?.patient?.middleNameRomanized ?? '-'} ${data?.patient?.familyNameRomanized ?? '-'}',
+                                      style: TextStyle(
+                                        color: context.appTheme.primaryColor,
+                                        fontFamily: 'NotoSansJP',
+                                        package: 'core_ui',
+                                      ),
+                                    ),
+                                    Text(
+                                        '${data?.patient?.firstNameChineseOrVietnamese ?? '-'} ${data?.patient?.middleNameChineseOrVietnamese ?? '-'} ${data?.patient?.familyNameChineseOrVietnamese ?? '-'} / ${data?.patient?.firstNameJapaneseForChinese ?? '-'} ${data?.patient?.middleNameJapaneseForChinese ?? '-'} ${data?.patient?.familyNameJapaneseForChinese ?? '-'} / ${data?.patient?.firstNameJapaneseForNonChinese ?? '-'} ${data?.patient?.middleNameJapaneseForNonChinese ?? '-'} ${data?.patient?.familyNameJapaneseForNonChinese ?? '-'} '),
+                                  ],
                                 ),
                               ),
                               boxRequired(
