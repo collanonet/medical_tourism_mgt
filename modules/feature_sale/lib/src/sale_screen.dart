@@ -180,7 +180,7 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                             child: ReactiveDatePicker<DateTime>(
                                               formControlName: 'paymentDay',
                                               firstDate: DateTime(1900),
-                                              lastDate: DateTime.now(),
+                                              lastDate: DateTime(2100),
                                               builder: (BuildContext context,
                                                   ReactiveDatePickerDelegate<
                                                           dynamic>
@@ -253,7 +253,7 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                             child: ReactiveDatePicker<DateTime>(
                                               formControlName: 'settlement_day',
                                               firstDate: DateTime(1900),
-                                              lastDate: DateTime.now(),
+                                              lastDate: DateTime(2100),
                                               builder: (BuildContext context,
                                                   ReactiveDatePickerDelegate<
                                                           dynamic>

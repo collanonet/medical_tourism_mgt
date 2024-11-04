@@ -46,7 +46,7 @@ class NecessaryInJapan extends StatelessWidget {
                                       child: ReactiveDatePicker<DateTime>(
                                         formControlName: 'passportDate',
                                         firstDate: DateTime(1900),
-                                        lastDate: DateTime.now(),
+                                        lastDate: DateTime(2100),
                                         builder: (BuildContext context,
                                             ReactiveDatePickerDelegate<dynamic>
                                                 picker,
@@ -114,7 +114,7 @@ class NecessaryInJapan extends StatelessWidget {
                                         formControlName:
                                             'letterOfGuaranteeDate',
                                         firstDate: DateTime(1900),
-                                        lastDate: DateTime.now(),
+                                        lastDate: DateTime(2100),
                                         builder: (BuildContext context,
                                             ReactiveDatePickerDelegate<dynamic>
                                                 picker,
@@ -322,7 +322,7 @@ class NecessaryInJapan extends StatelessWidget {
                                   child: ReactiveDatePicker<DateTime>(
                                     formControlName: 'treatmentSchedule',
                                     firstDate: DateTime(1900),
-                                    lastDate: DateTime.now(),
+                                    lastDate: DateTime(2100),
                                     builder: (BuildContext context,
                                         ReactiveDatePickerDelegate<dynamic>
                                             picker,
@@ -443,7 +443,7 @@ class NecessaryInJapan extends StatelessWidget {
                     child: ReactiveDatePicker<DateTime>(
                       formControlName: 'statementOfReasonsDate',
                       firstDate: DateTime(1900),
-                      lastDate: DateTime.now(),
+                      lastDate: DateTime(2100),
                       builder: (BuildContext context,
                           ReactiveDatePickerDelegate<dynamic> picker,
                           Widget? child) {
@@ -505,7 +505,7 @@ class NecessaryInJapan extends StatelessWidget {
                     child: ReactiveDatePicker<DateTime>(
                       formControlName: 'travelCompanionListDate',
                       firstDate: DateTime(1900),
-                      lastDate: DateTime.now(),
+                      lastDate: DateTime(2100),
                       builder: (BuildContext context,
                           ReactiveDatePickerDelegate<dynamic> picker,
                           Widget? child) {

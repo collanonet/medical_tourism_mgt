@@ -10,6 +10,7 @@ FormGroup statementForm() {
     'invoiceDate': FormControl<DateTime>(
       value: DateTime.now(),
     ),
+    'startDate': FormControl<DateTime>(),
     'companyName': FormControl<String>(),
     'address': FormControl<String>(),
     'telNumber': FormControl<String>(),
