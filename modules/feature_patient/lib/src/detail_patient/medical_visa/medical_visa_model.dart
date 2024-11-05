@@ -28,10 +28,10 @@ class MedicalVisaModel with ChangeNotifier {
 
   ValueNotifier<AsyncData<MedicalRecordVisaResponse>> medicalRecordVisaData =
       ValueNotifier(const AsyncData());
-  Future<void> fetchMedicalRecordVisa(FormGroup formGroup) async {
+  Future<void> fetchMedicalRecordVisa(FormGroup formGroup,{required String id}) async {
     try {
       medicalRecordVisaData.value = const AsyncData(loading: true);
-      final response = await patientRepository.getMedicalRecordVisa();
+      final response = await patientRepository.getMedicalRecordVisa(id);
       insertData(formGroup, response);
       medicalRecordVisaData.value = AsyncData(data: response);
       logger.d(response.toJson());

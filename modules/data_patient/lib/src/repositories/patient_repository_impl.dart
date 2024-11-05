@@ -1047,8 +1047,8 @@ class PatientRepositoryIml extends PatientRepository {
   }
   
   @override
-  Future<MedicalRecordVisaResponse> getMedicalRecordVisa() {
-    return remote.getMedicalRecordVisa();
+  Future<MedicalRecordVisaResponse> getMedicalRecordVisa(String medicalRecord) {
+    return remote.getMedicalRecordVisa(medicalRecord);
   }
   
   @override
