@@ -561,7 +561,7 @@ abstract class PatientRepository {
 
   // Future<List<MedicalVisaPersonalResponse>> getMedicalVisaPersonal();
   // Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(MedicalVisaPersonalRequest request);
-  Future<MedicalRecordVisaResponse> getMedicalRecordVisa();
+  Future<MedicalRecordVisaResponse> getMedicalRecordVisa(String medicalRecord);
 
   Future<MedicalRecordVisaResponse> postMedicalRecordVisa(MedicalRecordVisaRequest request);
 

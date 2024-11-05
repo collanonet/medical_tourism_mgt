@@ -31,7 +31,7 @@ class MedicalVisaPage extends StatelessWidget {
         builder: (context, formGroup, child) {
           return Provider(
             create: (context) =>
-                GetIt.I<MedicalVisaModel>()..fetchMedicalRecordVisa(formGroup),
+                GetIt.I<MedicalVisaModel>()..fetchMedicalRecordVisa(formGroup,id: id!),
             child: const MedicalVisaScreen(),
           );
         },
