@@ -830,7 +830,7 @@ class TravelCompanion extends StatelessWidget {
                   height: context.appTheme.spacing.marginMedium,
                 ),
                 ReactiveForm(
-                  formGroup: formGroup.control('afterGettingVisa') as FormGroup,
+                  formGroup: formGroup.control('travel_companion') as FormGroup,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [

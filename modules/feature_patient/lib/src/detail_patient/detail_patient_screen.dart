@@ -127,6 +127,7 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
                           ),
                           MedicalVisaPage(
                             patient: patientData.requireData,
+                            id: medicalRecord.requireData.id,
                           ),
                           DomesticMedicalDataPage(
                             patient: patientData.requireData,

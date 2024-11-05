@@ -5,6 +5,7 @@ part 'medical_record_visa.g.dart';
 
 @JsonSerializable()
 class MedicalRecordVisaRequest {
+  String? medicalRecord;
   List<MedicalVisaPersonalRequest>? personal;
   List<MedicalVisaStayPeriodRequest>? stayPeriod;
   RequiredInJapan? requiredInJapan;
@@ -13,6 +14,7 @@ class MedicalRecordVisaRequest {
   MedicalVisaTravelCompanionRequest? travelCompanion;
 
   MedicalRecordVisaRequest({
+    this.medicalRecord,
     this.personal,
     this.stayPeriod,
     this.requiredInJapan,
