@@ -1494,8 +1494,10 @@ abstract class ApiService {
   // Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(
   //   @Body() MedicalVisaPersonalRequest medicalVisaPersonalRequest,
   // );
-  @GET(EndPoints.MEDICAL_RECORD_VISA)
-  Future<MedicalRecordVisaResponse> getMedicalRecordVisa();
+  @GET('${EndPoints.MEDICAL_RECORD_VISA}/medicalRecord/{id}')
+  Future<MedicalRecordVisaResponse> getMedicalRecordVisa(
+    @Path('id') String medicalRecordId,
+  );
 
   @POST(EndPoints.MEDICAL_RECORD_VISA)
   Future<MedicalRecordVisaResponse> postMedicalRecordVisa(

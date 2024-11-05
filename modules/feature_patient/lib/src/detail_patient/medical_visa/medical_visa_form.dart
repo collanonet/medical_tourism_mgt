@@ -74,7 +74,6 @@ FormGroup medicalVisaForm({required String medicalRecord}) {
             [
               FormGroup(
                 {
-                  'date': FormControl<DateTime>(),
                   'passportDate': FormControl<DateTime>(
                     validators: [
                       Validators.pattern(

@@ -757,8 +757,8 @@ class PatientRemoteProvider {
   // Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(MedicalVisaPersonalRequest request){
   //   return apiService.postMedicalVisaPersonal(request);
   // }
-  Future<MedicalRecordVisaResponse> getMedicalRecordVisa(){
-    return apiService.getMedicalRecordVisa();
+  Future<MedicalRecordVisaResponse> getMedicalRecordVisa(String medicalRecord) {
+    return apiService.getMedicalRecordVisa(medicalRecord);
   }
 
   Future<MedicalRecordVisaResponse> postMedicalRecordVisa(MedicalRecordVisaRequest request){
