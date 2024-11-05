@@ -3,11 +3,11 @@ import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup medicalVisaForm() {
+FormGroup medicalVisaForm({required String medicalRecord}) {
   return FormGroup(
     {
       //本人 personal
-
+      'medicalRecord': FormControl<String>(value: medicalRecord),
       'personal': FormArray(
         [
           FormGroup(
