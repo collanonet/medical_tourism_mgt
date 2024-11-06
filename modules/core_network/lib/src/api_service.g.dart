@@ -7753,7 +7753,8 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<MedicalRecordVisaResponse> getMedicalRecordVisa() async {
+  Future<MedicalRecordVisaResponse> getMedicalRecordVisa(
+      String medicalRecordId) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -7766,7 +7767,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-record-visa-data',
+              '/medical-record-visa-data/medicalRecord/${medicalRecordId}',
               queryParameters: queryParameters,
               data: _data,
             )

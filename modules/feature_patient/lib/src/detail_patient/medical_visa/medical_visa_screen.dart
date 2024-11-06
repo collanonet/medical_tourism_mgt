@@ -125,11 +125,11 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),
-                      // const NecessaryInJapan(),
+                      const NecessaryInJapan(),
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),
-                      // const AfterGettingVisaFinal(),
+                      const AfterGettingVisaFinal(),
                       SizedBox(
                         height: context.appTheme.spacing.marginMedium,
                       ),

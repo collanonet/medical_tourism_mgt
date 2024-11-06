@@ -225,9 +225,8 @@ class NecessaryInJapan extends StatelessWidget {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    ElevatedButton(
-                                        onPressed: () {},
-                                        child: const Text('ファイル選択'))
+                                    fileUpload(context, currentForm,
+                                        'letterOfGuaranteeFileSelect'),
                                   ],
                                 ),
                               ],
