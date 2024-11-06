@@ -243,7 +243,7 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                           ),
                           Expanded(
                               child: Text(
-                            '--',
+                            data?.address ?? '',
                             style: context.textTheme.bodySmall,
                           )),
                           Expanded(
@@ -433,19 +433,17 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                                                 value: context
                                                     .read<EstimateModel>(),
                                                 child: AlertDialog(
-                                                  title:
-                                                      const Text('請求書に移動'),
+                                                  title: const Text('請求書に移動'),
                                                   content: const Text(
                                                       '選択したデータを請求書に移動しますか？'),
                                                   actions: [
                                                     TextButton(
                                                       onPressed: () {
-                                                        Navigator.of(
-                                                                context)
+                                                        Navigator.of(context)
                                                             .pop();
                                                       },
-                                                      child: const Text(
-                                                          'キャンセル'),
+                                                      child:
+                                                          const Text('キャンセル'),
                                                     ),
                                                     TextButton(
                                                       onPressed: () {
@@ -454,12 +452,10 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                                                                 EstimateModel>()
                                                             .moveToInvoice(
                                                                 sels);
-                                                        Navigator.of(
-                                                                context)
+                                                        Navigator.of(context)
                                                             .pop();
                                                       },
-                                                      child: const Text(
-                                                          '移動する'),
+                                                      child: const Text('移動する'),
                                                     ),
                                                   ],
                                                 ),
