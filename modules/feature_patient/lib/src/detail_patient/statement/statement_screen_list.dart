@@ -233,7 +233,7 @@ class _StatementScreenListState extends State<StatementScreenList> {
                         ),
                         Expanded(
                             child: Text(
-                          '--',
+                          data?.address ?? '',
                           style: context.textTheme.bodySmall,
                         )),
                         Expanded(

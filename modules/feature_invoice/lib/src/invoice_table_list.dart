@@ -38,11 +38,11 @@ class _InvoiceTableListState extends State<InvoiceTableList> {
               Expanded(child: Text('書類番号')), //Document Number
               Expanded(child: Text('患者名')),
               Expanded(child: SizedBox(width: 100)),
-              Expanded(child: Text('宛先')), // address
-              Expanded(flex: 3, child: Text('タイトル')), // title
+              // Expanded(child: Text('宛先')), // address
+              // Expanded(flex: 3, child: Text('タイトル')), // title
               Expanded(child: Text('発行日')), // Issue date
-              Expanded(child: Text('見込み')), // Prospects
-              Expanded(child: Text('売上管理')), // Sales Management
+              // Expanded(child: Text('見込み')), // Prospects
+              // Expanded(child: Text('売上管理')), // Sales Management
             ],
           ),
           Expanded(
