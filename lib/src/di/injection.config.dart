@@ -8,15 +8,15 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-import 'dart:ui' as _i19;
+import 'dart:ui' as _i20;
 
 import 'package:core_l10n/core_l10n.module.dart' as _i26;
-import 'package:core_l10n/l10n.dart' as _i22;
-import 'package:core_network/core_network.dart' as _i23;
+import 'package:core_l10n/l10n.dart' as _i23;
+import 'package:core_network/core_network.dart' as _i19;
 import 'package:core_network/core_network.module.dart' as _i27;
 import 'package:core_storage/core_storage.dart' as _i18;
 import 'package:core_storage/core_storage.module.dart' as _i7;
-import 'package:core_ui/core_ui.dart' as _i24;
+import 'package:core_ui/core_ui.dart' as _i25;
 import 'package:data_agent/data_agent.module.dart' as _i5;
 import 'package:data_auth/data_auth.module.dart' as _i4;
 import 'package:data_chats/data_chats.module.dart' as _i13;
@@ -30,7 +30,7 @@ import 'package:data_sale/data_sale.module.dart' as _i6;
 import 'package:data_web_appointment/data_web_appointment.module.dart' as _i14;
 import 'package:dio_cache_interceptor/dio_cache_interceptor.dart' as _i16;
 import 'package:feature_agent/feature_agent.module.dart' as _i29;
-import 'package:feature_auth/feature_auth.dart' as _i21;
+import 'package:feature_auth/feature_auth.dart' as _i22;
 import 'package:feature_auth/feature_auth.module.dart' as _i28;
 import 'package:feature_chats/feature_chats.module.dart' as _i12;
 import 'package:feature_hospital/feature_hospital.module.dart' as _i30;
@@ -46,16 +46,16 @@ import 'package:feature_web_appointment/feature_web_appointment.module.dart'
 import 'package:get_it/get_it.dart' as _i1;
 import 'package:injectable/injectable.dart' as _i2;
 
-import '../app/app_model.dart' as _i20;
-import '../routes/app_router.dart' as _i25;
+import '../app/app_model.dart' as _i21;
+import '../routes/app_router.dart' as _i24;
 import '../routes/guards.dart' as _i17;
 import 'modules/app_module.dart' as _i40;
 import 'modules/rest_module.dart' as _i39;
 import 'modules/storage_module.dart' as _i38;
 
+const String _local = 'local';
 const String _prod = 'prod';
 const String _production = 'production';
-const String _local = 'local';
 const String _stage = 'stage';
 const String _dev = 'dev';
 
@@ -89,6 +89,11 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<String>(() => storageModule.storagePrefixKey);
     gh.singleton<_i16.CacheOptions>(() => restModule.cacheOptions);
     gh.singleton<_i17.RoleGuard>(() => appModule.roleGuard);
+    gh.factory<String>(
+      () => restModule.localApiKey,
+      instanceName: 'apiKey',
+      registerFor: {_local},
+    );
     await gh.factoryAsync<String>(
       () => appModule.prodAppVersion,
       instanceName: 'appVersion',
@@ -117,6 +122,21 @@ extension GetItInjectableX on _i1.GetIt {
       instanceName: 'fileUrl',
       registerFor: {_dev},
     );
+    gh.factory<String>(
+      () => restModule.devApiKey,
+      instanceName: 'apiKey',
+      registerFor: {_dev},
+    );
+    gh.factory<String>(
+      () => restModule.stageApiKey,
+      instanceName: 'apiKey',
+      registerFor: {_stage},
+    );
+    gh.lazySingleton<_i19.RestClient>(() => restModule.restClient(
+          gh<Uri>(instanceName: 'baseUrl'),
+          gh<String>(instanceName: 'apiKey'),
+          gh<_i16.CacheOptions>(),
+        ));
     gh.factory<Uri>(
       () => restModule.devBaseUrl,
       instanceName: 'baseUrl',
@@ -143,13 +163,13 @@ extension GetItInjectableX on _i1.GetIt {
       instanceName: 'baseUrl',
       registerFor: {_stage},
     );
-    gh.factory<_i19.Locale>(
+    gh.factory<_i20.Locale>(
       () => appModule.defaultLocale,
       instanceName: 'defaultLocale',
     );
-    gh.lazySingleton<_i20.AppModel>(() => _i20.AppModel(
-          auth: gh<_i21.AuthModel>(),
-          l10n: gh<_i22.L10nModel>(),
+    gh.lazySingleton<_i21.AppModel>(() => _i21.AppModel(
+          auth: gh<_i22.AuthModel>(),
+          l10n: gh<_i23.L10nModel>(),
         ));
     gh.factory<String>(
       () => restModule.prodFileUrl,
@@ -159,10 +179,6 @@ extension GetItInjectableX on _i1.GetIt {
         _prod,
       },
     );
-    gh.lazySingleton<_i23.RestClient>(() => restModule.restClient(
-          gh<Uri>(instanceName: 'baseUrl'),
-          gh<_i16.CacheOptions>(),
-        ));
     gh.factory<Uri>(
       () => restModule.prodBaseUrl,
       instanceName: 'baseUrl',
@@ -171,10 +187,20 @@ extension GetItInjectableX on _i1.GetIt {
         _prod,
       },
     );
-    gh.lazySingleton<_i24.NetworkImageConfigs>(() =>
-        restModule.networkImage(baseUrl: gh<Uri>(instanceName: 'baseUrl')));
-    gh.singleton<_i25.AppRouter>(
+    gh.factory<String>(
+      () => restModule.prodApiKey,
+      instanceName: 'apiKey',
+      registerFor: {
+        _production,
+        _prod,
+      },
+    );
+    gh.singleton<_i24.AppRouter>(
         () => appModule.appRouter(gh<_i17.RoleGuard>()));
+    gh.lazySingleton<_i25.NetworkImageConfigs>(() => restModule.networkImage(
+          baseUrl: gh<Uri>(instanceName: 'baseUrl'),
+          apiKey: gh<String>(instanceName: 'apiKey'),
+        ));
     await _i26.CoreL10nPackageModule().init(gh);
     await _i27.CoreNetworkPackageModule().init(gh);
     await _i28.FeatureAuthPackageModule().init(gh);
