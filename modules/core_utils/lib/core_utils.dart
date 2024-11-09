@@ -23,3 +23,4 @@ export './src/keyboards.dart';
 export './src/strings.dart';
 export './src/html_to_pdf.dart';
 export './src/download_image_as_uint8list.dart';
+export './src/dicom_viewer.dart';
