@@ -1,106 +1,105 @@
 import 'dart:html' as html;
-import 'dart:js' as js;
+import 'dart:js_util' as js_util;
 import 'dart:typed_data';
-import 'dart:ui_web';
+import 'dart:ui' as ui;
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:archive/archive.dart';
 
 class DICOMViewerPage extends StatefulWidget {
+  const DICOMViewerPage({super.key});
+
   @override
-  _DICOMViewerPageState createState() => _DICOMViewerPageState();
+  State<DICOMViewerPage> createState() => _DICOMViewerPageState();
 }
 
 class _DICOMViewerPageState extends State<DICOMViewerPage> {
-  int _dicomKey = 0; // Key counter to force refresh of HtmlElementView
+  late final html.DivElement containerElement;
+  bool isInitialized = false;
+  String viewId = 'dicomContainer-${DateTime.now().millisecondsSinceEpoch}';
 
   @override
   void initState() {
     super.initState();
+    _initializeCornerstone();
+  }
 
-    // Register the HtmlElementView in initState
-    platformViewRegistry.registerViewFactory(
-      'dicomImage',
-          (int viewId) => html.DivElement()..id = 'dicomImage',
-    );
+  void _initializeCornerstone() {
+    if (!isInitialized) {
+      // Create container element
+      containerElement = html.DivElement()
+        ..id = viewId
+        ..style.width = '100%'
+        ..style.height = '500px';
+
+      // Register the platform view with unique viewId
+      // ignore: undefined_prefixed_name
+      ui.platformViewRegistry.registerViewFactory(
+        viewId,
+        (int viewId) => containerElement,
+      );
+
+      // Initialize Cornerstone using js_util
+      js_util.callMethod(
+        js_util.getProperty(html.window, 'cornerstone'),
+        'enable',
+        [containerElement],
+      );
+
+      isInitialized = true;
+    }
   }
 
   Future<void> loadDICOM() async {
-    print("Starting DICOM file upload process...");
+    try {
+      FilePickerResult? result = await FilePicker.platform.pickFiles(
+        type: FileType.custom,
+        allowedExtensions: ['dcm'],
+        withData: true,
+      );
 
-    // Pick the ZIP file
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['zip'],
-    );
+      if (result != null && result.files.single.bytes != null) {
+        final bytes = result.files.single.bytes!;
+        final blob = html.Blob([bytes]);
+        final url = html.Url.createObjectUrlFromBlob(blob);
 
-    if (result != null) {
-      print("File selected: ${result.files.single.name}");
+        // Load and display DICOM using js_util
+        final cornerstone = js_util.getProperty(html.window, 'cornerstone');
+        final image = await js_util.promiseToFuture(
+          js_util.callMethod(cornerstone, 'loadImage', [url]),
+        );
 
-      // Unzip and extract files
-      final bytes = result.files.single.bytes!;
-      final archive = ZipDecoder().decodeBytes(bytes);
-
-      bool dicomFound = false;
-      for (final file in archive) {
-        print("Inspecting file: ${file.name}");
-
-        if (file.isFile && file.size > 132) {
-          final contentBytes = file.content as Uint8List;
-          final dicomIdentifier = String.fromCharCodes(contentBytes.sublist(128, 132));
-          if (dicomIdentifier == 'DICM') {
-            print("Found DICOM file: ${file.name} (no extension check)");
-
-            dicomFound = true;
-            final dicomBlob = html.Blob([contentBytes], 'application/dicom');
-
-            setState(() {
-              _dicomKey++;  // Update the key to force HtmlElementView to refresh
-
-              // Delayed JavaScript call to ensure the HTML view is ready
-              Future.delayed(Duration(milliseconds: 100), () {
-                js.context.callMethod('loadAndViewDICOM', [dicomBlob]);
-                print("DICOM file passed to JavaScript function for viewing.");
-              });
-            });
-
-            break;
-          }
-        }
+        js_util.callMethod(
+          cornerstone,
+          'displayImage',
+          [containerElement, image],
+        );
       }
-      if (!dicomFound) {
-        print("No valid DICOM files found in the ZIP.");
+    } catch (e) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Error loading DICOM: ${e.toString()}')),
+        );
       }
-    } else {
-      print("No file selected.");
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: Text('DICOM Viewer')),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              onPressed: loadDICOM,
-              child: Text('Upload DICOM ZIP'),
-            ),
-            SizedBox(height: 20),
-            Container(
-              width: 500,
-              height: 500,
-              color: Colors.black,
-              child: HtmlElementView(
-                key: ValueKey(_dicomKey),  // Change key to force refresh
-                viewType: 'dicomImage',
-              ),
-            ),
-          ],
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        ElevatedButton(
+          onPressed: loadDICOM,
+          child: const Text('Load DICOM File'),
         ),
-      ),
+        SizedBox(
+          width: double.infinity,
+          height: 500,
+          child: HtmlElementView(viewType: viewId),
+        ),
+
+      ],
     );
   }
 }
