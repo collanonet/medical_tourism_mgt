@@ -105,7 +105,6 @@ class ProgressListModel {
             ),
             'task': FormControl<String>(
               value: record.task,
-              disabled: true,
             ),
             'completionDate': FormControl<DateTime>(
               value: record.completionDate,
