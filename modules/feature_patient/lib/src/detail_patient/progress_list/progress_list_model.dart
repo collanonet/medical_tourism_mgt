@@ -139,7 +139,7 @@ class ProgressListModel {
           'completed': FormControl<bool>(value: false),
           'key': FormControl<String>(),
           'tag': FormControl<String>(value: item.tag),
-          'task': FormControl<String>(value: item.task, disabled: true),
+          'task': FormControl<String>(value: item.task),
           'completionDate': FormControl<DateTime>(
             validators: [
               Validators.pattern(
@@ -162,7 +162,7 @@ class ProgressListModel {
           'completed': FormControl<bool>(value: false),
           'key': FormControl<String>(),
           'tag': FormControl<String>(value: item.tag),
-          'task': FormControl<String>(value: item.task, disabled: true),
+          'task': FormControl<String>(value: item.task),
           'completionDate': FormControl<DateTime>(
             validators: [
               Validators.pattern(
@@ -172,7 +172,7 @@ class ProgressListModel {
           ),
           'remarks': FormControl<String>(),
           'medicalRecord': FormControl<String>(),
-          'type': FormControl<String>(value: "1"),
+          'type': FormControl<String>(value: '1'),
         }));
       }
       formArray.add(FormGroup({'progress': formArrayProgress2}));
@@ -187,11 +187,12 @@ class ProgressListModel {
 
       await formGroup.control('progressList').value.forEach((element) {
         element['progress'].forEach((element) async {
+          logger.d(element);
           if (element['id'] == null) {
-            await patientRepository.postMedicalRecordProgress(mapData(element));
+            // await patientRepository.postMedicalRecordProgress(mapData(element));
           } else {
-            await patientRepository.putMedicalRecordProgress(
-                element['id'], mapData(element));
+            // await patientRepository.putMedicalRecordProgress(
+            //     element['id'], mapData(element));
           }
         });
       });
