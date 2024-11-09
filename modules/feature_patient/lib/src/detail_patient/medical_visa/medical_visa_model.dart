@@ -28,13 +28,14 @@ class MedicalVisaModel with ChangeNotifier {
 
   ValueNotifier<AsyncData<MedicalRecordVisaResponse>> medicalRecordVisaData =
       ValueNotifier(const AsyncData());
-  Future<void> fetchMedicalRecordVisa(FormGroup formGroup,{required String id}) async {
+
+  Future<void> fetchMedicalRecordVisa(FormGroup formGroup,
+      {required String id}) async {
     try {
       medicalRecordVisaData.value = const AsyncData(loading: true);
       final response = await patientRepository.getMedicalRecordVisa(id);
       insertData(formGroup, response);
       medicalRecordVisaData.value = AsyncData(data: response);
-      logger.d(response.toJson());
     } catch (e) {
       logger.d(e);
       medicalRecordVisaData.value = AsyncData(error: e);
@@ -42,9 +43,19 @@ class MedicalVisaModel with ChangeNotifier {
   }
 
   void insertData(FormGroup formGroup, MedicalRecordVisaResponse response) {
-    for (var elements in response.personal!) {
-      FormGroup(
+    formGroup.control('_id').value = response.id;
+    formGroup.control('medicalRecord').value = response.medicalRecord;
+
+    // start insert data to form personal
+    FormArray personalForm = formGroup.control('personal') as FormArray;
+    if (response.personal != null && response.personal!.isNotEmpty) {
+      personalForm.reset();
+    }
+
+    for (var elements in response.personal ?? []) {
+      personalForm.add(FormGroup(
         {
+          'medicalVisa': FormControl<String>(value: elements.medicalVisa),
           'applicationDate': FormControl<DateTime>(
             value: elements.applicationDate,
             validators: [
@@ -69,20 +80,28 @@ class MedicalVisaModel with ChangeNotifier {
               ),
             ],
           ),
-          'accompanyingPersonsNumber':
-              FormControl<String>(value: elements.accompanyingPersonsNumber),
+          'accompanyingPersonsNumber': FormControl<String>(
+            value: elements.accompanyingPersonsNumber,
+          ),
           'visaIssuingOverseasEstablishments': FormControl<String>(
-              value: elements.visaIssuingOverseasEstablishments),
-          'remarks': FormControl<String>(value: elements.remarks),
-          'paymentStatus': FormControl<String>(value: elements.paymentStatus),
+            value: elements.visaIssuingOverseasEstablishments,
+          ),
+          'remarks': FormControl<String>(
+            value: elements.remarks,
+          ),
+          'paymentStatus': FormControl<String>(
+            value: elements.paymentStatus,
+          ),
         },
-      );
+      ));
     }
-    formGroup.control('personal').value.forEach((e) {});
+
+    // end insert data to form personal
   }
 
   ValueNotifier<AsyncData<MedicalRecordVisaResponse>>
       submitMedicalRecordVisaData = ValueNotifier(const AsyncData());
+
   Future<void> submitMedicalRecordVisa(FormGroup formGroup) async {
     try {
       submitMedicalRecordVisaData.value = const AsyncData(loading: true);

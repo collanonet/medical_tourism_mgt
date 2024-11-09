@@ -6,13 +6,13 @@ part 'medical_visa_visa_withdrawal_response.g.dart';
 @JsonSerializable()
 class MedicalVisaVisaWithdrawalResponse {
   @JsonKey(name: '_id')
-  final String id;
-  final String? subjectVisaWithdrawal;
+  final String? id;
+  final bool? subjectVisaWithdrawal;
   final DateTime? deathOrOccurrenceEventDate;
   final String? remarks;
 
   MedicalVisaVisaWithdrawalResponse({
-    required this.id,
+     this.id,
      this.subjectVisaWithdrawal,
      this.deathOrOccurrenceEventDate,
      this.remarks,

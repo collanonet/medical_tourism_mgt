@@ -1,10 +1,11 @@
 import 'package:json_annotation/json_annotation.dart';
+
 part 'medical_visa_required_in_japan_response.g.dart';
 
 @JsonSerializable()
 class MedicalVisaRequiredInJapanResponse {
   @JsonKey(name: '_id')
-  final String id;
+  final String? id;
   List<VisaInfo>? visaInfo;
   List<Schedule>? schedule;
   DateTime? statementOfReasonsDate;
@@ -14,7 +15,7 @@ class MedicalVisaRequiredInJapanResponse {
   List<TravelInfo>? travelInfo;
 
   MedicalVisaRequiredInJapanResponse({
-    required this.id,
+    this.id,
     this.visaInfo,
     this.schedule,
     this.statementOfReasonsDate,
@@ -27,14 +28,13 @@ class MedicalVisaRequiredInJapanResponse {
   factory MedicalVisaRequiredInJapanResponse.fromJson(
           Map<String, dynamic> json) =>
       _$MedicalVisaRequiredInJapanResponseFromJson(json);
+
   Map<String, dynamic> toJson() =>
       _$MedicalVisaRequiredInJapanResponseToJson(this);
 }
 
 @JsonSerializable()
 class VisaInfo {
-  @JsonKey(name: '_id')
-  final String id;
   DateTime? passportDate;
   String? passportFileSelect;
   DateTime? letterOfGuaranteeDate;
@@ -45,7 +45,6 @@ class VisaInfo {
   bool? byothers;
 
   VisaInfo({
-    required this.id,
     this.passportDate,
     this.passportFileSelect,
     this.letterOfGuaranteeFileSelect,
@@ -58,31 +57,33 @@ class VisaInfo {
 
   factory VisaInfo.fromJson(Map<String, dynamic> json) =>
       _$VisaInfoFromJson(json);
+
   Map<String, dynamic> toJson() => _$VisaInfoToJson(this);
 }
 
 @JsonSerializable()
 class Schedule {
   @JsonKey(name: '_id')
-  final String id;
+  final String? id;
   DateTime? treatmentSchedule;
   String? treatmentScheduleFileSelect;
 
   Schedule({
-    required this.id,
+    this.id,
     this.treatmentSchedule,
     this.treatmentScheduleFileSelect,
   });
 
   factory Schedule.fromJson(Map<String, dynamic> json) =>
       _$ScheduleFromJson(json);
+
   Map<String, dynamic> toJson() => _$ScheduleToJson(this);
 }
 
 @JsonSerializable()
 class TravelInfo {
   @JsonKey(name: '_id')
-  final String id;
+  final String? id;
   DateTime? landingPermissionDate;
   DateTime? visaValidityPeriodExpirationDate;
   DateTime? dateOfEntryIntoJapan;
@@ -101,7 +102,7 @@ class TravelInfo {
   String? remarks;
 
   TravelInfo({
-    required this.id,
+    this.id,
     this.landingPermissionDate,
     this.visaValidityPeriodExpirationDate,
     this.dateOfEntryIntoJapan,
@@ -122,5 +123,6 @@ class TravelInfo {
 
   factory TravelInfo.fromJson(Map<String, dynamic> json) =>
       _$TravelInfoFromJson(json);
+
   Map<String, dynamic> toJson() => _$TravelInfoToJson(this);
 }

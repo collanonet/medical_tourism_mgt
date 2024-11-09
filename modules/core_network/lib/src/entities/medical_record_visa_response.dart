@@ -1,12 +1,14 @@
 import 'package:json_annotation/json_annotation.dart';
 
 import '../../../entities.dart';
+
 part 'medical_record_visa_response.g.dart';
 
 @JsonSerializable()
 class MedicalRecordVisaResponse {
-    @JsonKey(name: '_id')
+  @JsonKey(name: '_id')
   String id;
+  String medicalRecord;
   List<MedicalVisaPersonalResponse>? personal;
   List<MedicalVisaStayPeriodResponse>? stayPeriod;
   MedicalVisaRequiredInJapanResponse? requiredInJapan;
@@ -16,6 +18,7 @@ class MedicalRecordVisaResponse {
 
   MedicalRecordVisaResponse({
     required this.id,
+    required this.medicalRecord,
     this.personal,
     this.stayPeriod,
     this.requiredInJapan,
@@ -24,8 +27,8 @@ class MedicalRecordVisaResponse {
     this.travelCompanion,
   });
 
-  factory MedicalRecordVisaResponse.fromJson(Map<String, dynamic> json) => _$MedicalRecordVisaResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$MedicalRecordVisaResponseToJson(this);
+  factory MedicalRecordVisaResponse.fromJson(Map<String, dynamic> json) =>
+      _$MedicalRecordVisaResponseFromJson(json);
 
- 
+  Map<String, dynamic> toJson() => _$MedicalRecordVisaResponseToJson(this);
 }

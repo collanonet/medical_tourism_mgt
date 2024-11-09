@@ -9,7 +9,7 @@ part of 'medical_visa_personal_response.dart';
 MedicalVisaPersonalResponse _$MedicalVisaPersonalResponseFromJson(
         Map<String, dynamic> json) =>
     MedicalVisaPersonalResponse(
-      id: json['_id'] as String,
+      id: json['_id'] as String?,
       medicalVisa: json['medicalVisa'] as String?,
       issueDate: json['issueDate'] == null
           ? null

@@ -10,6 +10,7 @@ MedicalRecordVisaResponse _$MedicalRecordVisaResponseFromJson(
         Map<String, dynamic> json) =>
     MedicalRecordVisaResponse(
       id: json['_id'] as String,
+      medicalRecord: json['medicalRecord'] as String,
       personal: (json['personal'] as List<dynamic>?)
           ?.map((e) =>
               MedicalVisaPersonalResponse.fromJson(e as Map<String, dynamic>))
@@ -40,6 +41,7 @@ Map<String, dynamic> _$MedicalRecordVisaResponseToJson(
         MedicalRecordVisaResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
+      'medicalRecord': instance.medicalRecord,
       'personal': instance.personal,
       'stayPeriod': instance.stayPeriod,
       'requiredInJapan': instance.requiredInJapan,

@@ -6,7 +6,7 @@ part 'medical_visa_stay_period_response.g.dart';
 @JsonSerializable()
 class MedicalVisaStayPeriodResponse {
   @JsonKey(name: '_id')
-  final String id;
+  final String? id;
   DateTime? stayStartingDatePersonalReference;
 
   DateTime? stayEndDate;
@@ -14,12 +14,13 @@ class MedicalVisaStayPeriodResponse {
   DateTime? expirationDate;
 
   MedicalVisaStayPeriodResponse({
-    required this.id,
+    this.id,
     this.stayStartingDatePersonalReference,
     this.stayEndDate,
     this.stayStartingDateActual,
     this.expirationDate,
   });
+
   factory MedicalVisaStayPeriodResponse.fromJson(Map<String, dynamic> json) =>
       _$MedicalVisaStayPeriodResponseFromJson(json);
 

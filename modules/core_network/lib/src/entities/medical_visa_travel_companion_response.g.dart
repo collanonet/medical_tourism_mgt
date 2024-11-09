@@ -9,7 +9,7 @@ part of 'medical_visa_travel_companion_response.dart';
 MedicalVisaTravelCompanionResponse _$MedicalVisaTravelCompanionResponseFromJson(
         Map<String, dynamic> json) =>
     MedicalVisaTravelCompanionResponse(
-      id: json['_id'] as String,
+      id: json['_id'] as String?,
       nameRomaji: json['nameRomaji'] as String?,
       dateBirth: json['dateBirth'] == null
           ? null

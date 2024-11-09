@@ -7,7 +7,7 @@ part 'medical_visa_travel_companion_response.g.dart';
 @JsonSerializable()
 class MedicalVisaTravelCompanionResponse {
   @JsonKey(name: '_id')
-  final String id;
+  final String? id;
   String? nameRomaji;
   DateTime? dateBirth;
   int? age;
@@ -26,7 +26,7 @@ class MedicalVisaTravelCompanionResponse {
   DateTime? certificateOfEligibility;
 
   MedicalVisaTravelCompanionResponse({
-    required this.id,
+     this.id,
     this.nameRomaji,
     this.dateBirth,
     this.age,

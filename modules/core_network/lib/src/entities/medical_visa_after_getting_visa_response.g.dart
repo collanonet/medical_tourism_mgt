@@ -9,7 +9,7 @@ part of 'medical_visa_after_getting_visa_response.dart';
 AfterGettingVisaResponse _$AfterGettingVisaResponseFromJson(
         Map<String, dynamic> json) =>
     AfterGettingVisaResponse(
-      id: json['_id'] as String,
+      id: json['_id'] as String?,
       vasaInfo: (json['vasaInfo'] as List<dynamic>?)
           ?.map((e) => VasaInfo.fromJson(e as Map<String, dynamic>))
           .toList(),

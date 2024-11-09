@@ -9,7 +9,7 @@ part of 'medical_visa_stay_period_response.dart';
 MedicalVisaStayPeriodResponse _$MedicalVisaStayPeriodResponseFromJson(
         Map<String, dynamic> json) =>
     MedicalVisaStayPeriodResponse(
-      id: json['_id'] as String,
+      id: json['_id'] as String?,
       stayStartingDatePersonalReference:
           json['stayStartingDatePersonalReference'] == null
               ? null

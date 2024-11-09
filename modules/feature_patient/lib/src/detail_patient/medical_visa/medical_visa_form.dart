@@ -7,6 +7,7 @@ FormGroup medicalVisaForm({required String medicalRecord}) {
   return FormGroup(
     {
       //本人 personal
+      '_id' : FormControl<String>(),
       'medicalRecord': FormControl<String>(value: medicalRecord),
       'personal': FormArray(
         [

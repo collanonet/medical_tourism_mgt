@@ -4,7 +4,7 @@ part 'medical_visa_after_getting_visa_response.g.dart';
 @JsonSerializable()
 class AfterGettingVisaResponse {
   @JsonKey(name: '_id')
-  final String id;
+  final String? id;
   List<VasaInfo>? vasaInfo;
   List<Ticket>? ticket;
   List<TicketBack>? ticketBack;
@@ -12,7 +12,7 @@ class AfterGettingVisaResponse {
   DateTime? certificateOfEligibility;
 
   AfterGettingVisaResponse({
-    required this.id,
+     this.id,
     this.vasaInfo,
     this.ticket,
     this.ticketBack,
