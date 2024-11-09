@@ -15,6 +15,8 @@ class MedicalRecordVisaResponse {
   MedicalVisaVisaWithdrawalResponse? visaWithdrawal;
   AfterGettingVisaResponse? afterGettingVisa;
   MedicalVisaTravelCompanionResponse? travelCompanion;
+  MedicalVisaNecessaryInJapanRequest? necessaryInJapan;
+  MedicalAfterGettingVisaFinalRequest? afterGettingVisaFinal;
 
   MedicalRecordVisaResponse({
     required this.id,
@@ -25,6 +27,8 @@ class MedicalRecordVisaResponse {
     this.visaWithdrawal,
     this.afterGettingVisa,
     this.travelCompanion,
+    this.necessaryInJapan,
+    this.afterGettingVisaFinal,
   });
 
   factory MedicalRecordVisaResponse.fromJson(Map<String, dynamic> json) =>

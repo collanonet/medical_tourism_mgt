@@ -1,5 +1,6 @@
 // Flutter imports:
 import 'dart:convert';
+import 'dart:math';
 
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
@@ -95,8 +96,430 @@ class MedicalVisaModel with ChangeNotifier {
         },
       ));
     }
+    FormArray stayPeriodForm = formGroup.control('stayPeriod') as FormArray;
+    for (var element in response.stayPeriod!) {
+      stayPeriodForm.add(
+        FormGroup(
+          {
+            'stayStartingDatePersonalReference': FormControl<DateTime>(
+              value: element.stayStartingDatePersonalReference,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'stayEndDate': FormControl<DateTime>(
+              value: element.expirationDate,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+          },
+        ),
+      );
+    }
 
     // end insert data to form personal
+
+    FormGroup requiredInJapanForm =
+        formGroup.control('requiredInJapan') as FormGroup;
+    FormArray requiredInJapanVisaInfo =
+        requiredInJapanForm.control('visaInfo') as FormArray;
+    FormArray requiredInJapanSchedule =
+        requiredInJapanForm.control('schedule') as FormArray;
+    for (var element in response.requiredInJapan!.visaInfo!) {
+      requiredInJapanVisaInfo.add(
+        FormGroup(
+          {
+            'passportDate': FormControl<DateTime>(
+              value: element.passportDate,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'passportFileSelect': FormControl<FileSelect>(),
+            'letterOfGuaranteeDate': FormControl<DateTime>(
+              value: element.letterOfGuaranteeDate,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'letterOfGuaranteeFileSelect': FormControl<FileSelect>(),
+            'sendBy': FormControl<String>(value: element.sendBy),
+            'byEMS': FormControl<bool>(value: element.byEMS),
+            'byFedex': FormControl<bool>(value: element.byFedex),
+            'byOthers': FormControl<bool>(value: element.byothers),
+          },
+        ),
+      );
+    }
+
+    for (var element in response.requiredInJapan!.schedule!) {
+      requiredInJapanSchedule.add(
+        FormGroup(
+          {
+            'treatmentSchedule': FormControl<DateTime>(
+              value: element.treatmentSchedule,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'treatmentScheduleFileSelect': FormControl<FileSelect>(),
+          },
+        ),
+      );
+    }
+    // requiredInJapanForm.control('statementOfReasonsFileSelect').value =
+    //     response.requiredInJapan!.statementOfReasonsDate;
+    requiredInJapanForm.control('statementOfReasonsDate').value =
+        response.requiredInJapan!.statementOfReasonsDate;
+    requiredInJapanForm.control('travelCompanionListDate').value =
+        response.requiredInJapan!.travelCompanionListDate;
+    // requiredInJapanForm.control('travelCompanionListFileSelect').value =
+    //     response.requiredInJapan!.travelCompanionListFileSelect;
+
+    FormArray requiredInJapanTravelInfo =
+        requiredInJapanForm.control('travelInfo') as FormArray;
+    for (var element in response.requiredInJapan!.travelInfo!) {
+      requiredInJapanTravelInfo.add(
+        FormGroup(
+          {
+            'landingPermissionDate': FormControl<DateTime>(
+              value: element.landingPermissionDate,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'visaValidityPeriodExpirationDate': FormControl<DateTime>(
+              value: element.visaValidityPeriodExpirationDate,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'dateOfEntryIntoJapan': FormControl<DateTime>(
+              value: element.dateOfEntryIntoJapan,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'departureDateFromJapan': FormControl<DateTime>(
+              value: element.departureDateFromJapan,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+
+            // 入国 hand in
+            'departureIn': FormControl<String>(value: element.departureIn),
+            'arrivalIn': FormControl<String>(value: element.arrivalIn),
+            'flightNumberIn':
+                FormControl<String>(value: element.flightNumberIn),
+            'departureTimeIn': FormControl<String>(value: element.departureIn),
+            'arrivalTimeIn': FormControl<String>(value: element.arrivalTimeIn),
+
+            // 出国 hand out
+            'departureOut': FormControl<String>(value: element.departureOut),
+            'arrivalOut': FormControl<String>(value: element.arrivalOut),
+            'flightNumberOut':
+                FormControl<String>(value: element.flightNumberOut),
+            'departureTimeOut':
+                FormControl<String>(value: element.departureTimeOut),
+            'arrivalTimeOut':
+                FormControl<String>(value: element.arrivalTimeOut),
+            'seatNumberOut': FormControl<String>(value: element.seatNumberOut),
+
+            'remarks': FormControl<String>(value: element.remarks),
+          },
+        ),
+      );
+    }
+
+    FormGroup requiredInJapanVisaWithdrawal =
+        formGroup.control('visaWithdrawal') as FormGroup;
+    requiredInJapanVisaWithdrawal.control('subjectVisaWithdrawal').value =
+        response.visaWithdrawal!.subjectVisaWithdrawal;
+    requiredInJapanVisaWithdrawal.control('deathOrOccurrenceEventDate').value =
+        response.visaWithdrawal!.deathOrOccurrenceEventDate;
+    requiredInJapanVisaWithdrawal.control('remarks').value =
+        response.visaWithdrawal!.remarks;
+
+    FormGroup requiredInJapanAfterGettingVisa =
+        formGroup.control('afterGettingVisa') as FormGroup;
+    FormArray afterGettingVisaVasaInfo =
+        requiredInJapanAfterGettingVisa.control('vasaInfo') as FormArray;
+    for (var element in response.afterGettingVisa!.vasaInfo!) {
+      afterGettingVisaVasaInfo.add(
+        FormGroup({
+          'visaPage': FormControl<DateTime>(
+            value: element.visaPage,
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'visaPageFileName': FormControl<FileSelect>(),
+          'landingPermit': FormControl<DateTime>(
+            value: element.landingPermit,
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'landingPermitFileName': FormControl<FileSelect>(),
+        }),
+      );
+    }
+
+    FormArray afterGettingVisaTicket =
+        requiredInJapanAfterGettingVisa.control('ticket') as FormArray;
+    for (var element in response.afterGettingVisa!.ticket!) {
+      afterGettingVisaTicket.add(
+        FormGroup({
+          'planeTicketForYourVisitToJapan': FormControl<DateTime>(
+            value: element.planeTicketForYourVisitToJapan,
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'planeTicketForYourVisitToJapanFileName': FormControl<FileSelect>(),
+        }),
+      );
+    }
+
+    FormArray afterGettingVisaTicketBack =
+        requiredInJapanAfterGettingVisa.control('ticketBack') as FormArray;
+    for (var element in response.afterGettingVisa!.ticketBack!) {
+      afterGettingVisaTicketBack.add(
+        FormGroup(
+          {
+            'returnFlightTicket': FormControl<DateTime>(
+              value: element.returnFlightTicket,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'returnFlightTicketFileName': FormControl<FileSelect>(),
+          },
+        ),
+      );
+    }
+    FormArray afterGettingVisaBoardingPass =
+        requiredInJapanAfterGettingVisa.control('boardingPass') as FormArray;
+    for (var element in response.afterGettingVisa!.boardingPass!) {
+      afterGettingVisaBoardingPass.add(
+        FormGroup(
+          {
+            'boardingPass': FormControl<DateTime>(
+              value: element.boardingPassForReturnFlight,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'boardingPassFileName': FormControl<FileSelect>(),
+          },
+        ),
+      );
+    }
+
+    // requiredInJapanAfterGettingVisa.control('certificateOfEligibility').value =
+    //     response.afterGettingVisa!.certificateOfEligibility;
+    // FormGroup travelCompanionForm =
+    //     formGroup.control('travel_companion') as FormGroup;
+    // travelCompanionForm.control('nameRomaji').value =
+    //     response.travelCompanion!.nameRomaji;
+    // travelCompanionForm.control('dateBirth').value =
+    //     response.travelCompanion!.dateBirth;
+    // travelCompanionForm.control('age').value = response.travelCompanion!.age;
+    // travelCompanionForm.control('sex').value = response.travelCompanion!.sex;
+    // travelCompanionForm.control('addressArea').value =
+    //     response.travelCompanion!.addressArea;
+    // travelCompanionForm.control('numberPassport').value =
+    //     response.travelCompanion!.numberPassport;
+    // FormArray travelCompanionTravelInfo =
+    //     travelCompanionForm.control('travelInfo') as FormArray;
+    // for (var element in response.travelCompanion!.travelInfo!) {
+    //   travelCompanionTravelInfo.add(
+    //     FormGroup(
+    //       {
+    //         'landingPermissionDate': FormControl<DateTime>(
+    //           value: element.landingPermissionDate,
+    //           validators: [
+    //             Validators.pattern(
+    //               ValidatorRegExp.date,
+    //             ),
+    //           ],
+    //         ),
+    //         'visaValidityPeriodExpirationDate': FormControl<DateTime>(
+    //           value: element.visaValidityPeriodExpirationDate,
+    //           validators: [
+    //             Validators.pattern(
+    //               ValidatorRegExp.date,
+    //             ),
+    //           ],
+    //         ),
+    //         'dateOfEntryIntoJapan': FormControl<DateTime>(
+    //           value: element.dateOfEntryIntoJapan,
+    //           validators: [
+    //             Validators.pattern(
+    //               ValidatorRegExp.date,
+    //             ),
+    //           ],
+    //         ),
+    //         'departureDateFromJapan': FormControl<DateTime>(
+    //           value: element.departureDateFromJapan,
+    //           validators: [
+    //             Validators.pattern(
+    //               ValidatorRegExp.date,
+    //             ),
+    //           ],
+    //         ),
+
+    //         // 入国 hand in
+    //         'departureIn': FormControl<String>(value: element.departureIn),
+    //         'arrivalIn': FormControl<String>(value: element.arrivalIn),
+    //         'flightNumberIn':
+    //             FormControl<String>(value: element.flightNumberIn),
+    //         'departureTimeIn': FormControl<String>(value: element.departureIn),
+    //         'arrivalTimeIn': FormControl<String>(value: element.arrivalTimeIn),
+
+    //         // 出国 hand out
+    //         'departureOut': FormControl<String>(value: element.departureOut),
+    //         'arrivalOut': FormControl<String>(value: element.arrivalOut),
+    //         'flightNumberOut':
+    //             FormControl<String>(value: element.flightNumberOut),
+    //         'departureTimeOut':
+    //             FormControl<String>(value: element.departureTimeOut),
+    //         'arrivalTimeOut':
+    //             FormControl<String>(value: element.arrivalTimeOut),
+    //         'seatNumberOut': FormControl<String>(value: element.seatNumberOut),
+
+    //         'remarks': FormControl<String>(value: element.remarks),
+    //       },
+    //     ),
+    //   );
+    // }
+    // travelCompanionForm.control('travelRemarks').value =
+    //     response.travelCompanion!.travelRemarks;
+    // travelCompanionForm.control('visaWithdrawalTarget').value =
+    //     response.travelCompanion!.subjectVisaWithdrawal;
+    // // travelCompanionForm.control('reason').value = response.travelCompanion!.;
+    // travelCompanionForm.control('remarks').value =
+    //     response.travelCompanion!.remarks;
+    // FormArray travelCompanionFormVasaInfo =
+    //     travelCompanionForm.control('vasaInfo') as FormArray;
+    // for (var element in response.travelCompanion!.vasaInfo!) {
+    //   travelCompanionFormVasaInfo.add(
+    //     FormGroup({
+    //       'visaPage': FormControl<DateTime>(
+    //         value: element.visaPage,
+    //         validators: [
+    //           Validators.pattern(
+    //             ValidatorRegExp.date,
+    //           ),
+    //         ],
+    //       ),
+    //       'visaPageFileName': FormControl<FileSelect>(),
+    //       'landingPermit': FormControl<DateTime>(
+    //         value: element.landingPermit,
+    //         validators: [
+    //           Validators.pattern(
+    //             ValidatorRegExp.date,
+    //           ),
+    //         ],
+    //       ),
+    //       'landingPermitFileName': FormControl<FileSelect>(),
+    //     }),
+    //   );
+    // }
+    // FormArray travelCompanionFormTicket =
+    //     travelCompanionForm.control('ticket') as FormArray;
+
+    // for (var element in response.travelCompanion!.ticket!) {
+    //   travelCompanionFormTicket.add(
+    //     FormGroup({
+    //       'planeTicketForYourVisitToJapan': FormControl<DateTime>(
+    //         value: element.planeTicketForYourVisitToJapan,
+    //         validators: [
+    //           Validators.pattern(
+    //             ValidatorRegExp.date,
+    //           ),
+    //         ],
+    //       ),
+    //       'planeTicketForYourVisitToJapanFileName': FormControl<FileSelect>(),
+    //     }),
+    //   );
+    // }
+
+    // FormArray travelCompanionFormTicketBack =
+    //     travelCompanionForm.control('ticketBack') as FormArray;
+    // for (var element in response.travelCompanion!.ticketBack!) {
+    //   travelCompanionFormTicketBack.add(
+    //     FormGroup(
+    //       {
+    //         'returnFlightTicket': FormControl<DateTime>(
+    //           value: element.returnFlightTicket,
+    //           validators: [
+    //             Validators.pattern(
+    //               ValidatorRegExp.date,
+    //             ),
+    //           ],
+    //         ),
+    //         'returnFlightTicketFileName': FormControl<FileSelect>(),
+    //       },
+    //     ),
+    //   );
+    // }
+    // FormArray travelCompanionFormBoardingPass =
+    //     travelCompanionForm.control('boardingPass') as FormArray;
+    // for (var element in response.travelCompanion!.boardingPass!) {
+    //   travelCompanionFormBoardingPass.add(
+    //     FormGroup(
+    //       {
+    //         'boardingPass': FormControl<DateTime>(
+    //           value: element.boardingPassForReturnFlight,
+    //           validators: [
+    //             Validators.pattern(
+    //               ValidatorRegExp.date,
+    //             ),
+    //           ],
+    //         ),
+    //         'boardingPassFileName': FormControl<FileSelect>(),
+    //       },
+    //     ),
+    //   );
+    // }
+    // travelCompanionForm.control('certificateOfEligibility').value =
+    //     response.travelCompanion!.certificateOfEligibility;
+
+    FormGroup afterGettingVisaFinalForm =
+        formGroup.control('afterGettingVisaFinal') as FormGroup;
+    FormArray afterGettingVisaFinalFormVisaInfor =
+        afterGettingVisaFinalForm.control('vasaInfo') as FormArray;
   }
 
   ValueNotifier<AsyncData<MedicalRecordVisaResponse>>
@@ -577,6 +1000,317 @@ class MedicalVisaModel with ChangeNotifier {
         certificateOfEligibilityFileName: certificateOfEligibilityFileName,
       );
 
+      //necessaryInJapan
+      var formNequiredInJapan =
+          formGroup.control('necessaryInJapan') as FormGroup;
+      List<VisaInfoRequest> neceessaryVisaInfo = [];
+
+      formNequiredInJapan.control('visaInfo').value.forEach(
+        (e) async {
+          String? letterOfGuaranteeFileSelect;
+          if (e['letterOfGuaranteeFileSelect'] != null) {
+            FileSelect docFile = e['letterOfGuaranteeFileSelect'];
+            if (docFile.file != null) {
+              try {
+                String base64Image = base64Encode(docFile.file!);
+                FileResponse fileData =
+                    await patientRepository.uploadFileBase64(
+                  base64Image,
+                  docFile.filename!,
+                );
+                letterOfGuaranteeFileSelect = fileData.filename;
+              } catch (e) {
+                logger.e(e);
+              }
+            } else {
+              letterOfGuaranteeFileSelect = docFile.url;
+            }
+          }
+          String? passportFileSelect;
+          if (e['passportFileSelect'] != null) {
+            FileSelect docFile = e['passportFileSelect'];
+            if (docFile.file != null) {
+              try {
+                String base64Image = base64Encode(docFile.file!);
+                FileResponse fileData =
+                    await patientRepository.uploadFileBase64(
+                  base64Image,
+                  docFile.filename!,
+                );
+                passportFileSelect = fileData.filename;
+              } catch (e) {
+                logger.e(e);
+              }
+            } else {
+              passportFileSelect = docFile.url;
+            }
+          }
+
+          VisaInfoRequest(
+            passportDate: e['passportDate'],
+            passportFileSelect: passportFileSelect,
+            letterOfGuaranteeDate: e['letterOfGuaranteeDate'],
+            letterOfGuaranteeFileSelect: letterOfGuaranteeFileSelect,
+            sendBy: e['sendBy'],
+            byEMS: e['byEMS'],
+            byFedex: e['byFedex'],
+            byothers: e['byothers'],
+          );
+        },
+      );
+
+      List<ScheduleRequest>? neceessarySchedule = [];
+
+      formNequiredInJapan.control('schedule').value.forEach((e) {
+        neceessarySchedule.add(
+          ScheduleRequest(
+            treatmentSchedule: e['treatmentSchedule'],
+            treatmentScheduleFileSelect: e['treatmentScheduleFileSelect'],
+          ),
+        );
+      });
+
+      String? necessaryStatementOfReasonsFileSelect;
+      if (formNequiredInJapan.control('statementOfReasonsFileSelect').value !=
+          null) {
+        FileSelect docFile =
+            formNequiredInJapan.control('statementOfReasonsFileSelect').value;
+        if (docFile.file != null) {
+          try {
+            String base64Image = base64Encode(docFile.file!);
+            FileResponse fileData = await patientRepository.uploadFileBase64(
+              base64Image,
+              docFile.filename!,
+            );
+            necessaryStatementOfReasonsFileSelect = fileData.filename;
+          } catch (e) {
+            logger.e(e);
+          }
+        } else {
+          necessaryStatementOfReasonsFileSelect = docFile.url;
+        }
+      }
+
+      String? necessaryTravelCompanionListFileSelect;
+      if (formNequiredInJapan.control('travelCompanionListFileSelect').value !=
+          null) {
+        FileSelect docFile =
+            formNequiredInJapan.control('travelCompanionListFileSelect').value;
+        if (docFile.file != null) {
+          try {
+            String base64Image = base64Encode(docFile.file!);
+            FileResponse fileData = await patientRepository.uploadFileBase64(
+              base64Image,
+              docFile.filename!,
+            );
+            necessaryTravelCompanionListFileSelect = fileData.filename;
+          } catch (e) {
+            logger.e(e);
+          }
+        } else {
+          necessaryTravelCompanionListFileSelect = docFile.url;
+        }
+      }
+
+      MedicalVisaNecessaryInJapanRequest necessaryRequiredInJapan =
+          MedicalVisaNecessaryInJapanRequest(
+        visaInfo: neceessaryVisaInfo,
+        schedule: null,
+        statementOfReasonsDate:
+            formRequiredInJapan.control('statementOfReasonsDate').value,
+        statementOfReasonsDateFileName: necessaryStatementOfReasonsFileSelect,
+        travelCompanionListDate:
+            formRequiredInJapan.control('travelCompanionListDate').value,
+        travelCompanionListFileName: necessaryTravelCompanionListFileSelect,
+      );
+
+      //GettingVisaInfoRequestFinal
+
+      var afterGettingVisaFinalForm =
+          formGroup.control('afterGettingVisa') as FormGroup;
+      List<GettingVisaInfoRequest>? gettingVisaFinalInfo = [];
+
+      afterGettingVisaFinalForm.control('vasaInfo').value.forEach(
+        (e) async {
+          String? visaPageFileName;
+          if (e['visaPageFileName'] != null) {
+            FileSelect docFile = e['visaPageFileName'];
+            if (docFile.file != null) {
+              try {
+                String base64Image = base64Encode(docFile.file!);
+                FileResponse fileData =
+                    await patientRepository.uploadFileBase64(
+                  base64Image,
+                  docFile.filename!,
+                );
+                visaPageFileName = fileData.filename;
+              } catch (e) {
+                logger.e(e);
+              }
+            } else {
+              visaPageFileName = docFile.url;
+            }
+          }
+
+          String? landingPermitFileName;
+          if (e['landingPermitFileName'] != null) {
+            FileSelect docFile = e['landingPermitFileName'];
+            if (docFile.file != null) {
+              try {
+                String base64Image = base64Encode(docFile.file!);
+                FileResponse fileData =
+                    await patientRepository.uploadFileBase64(
+                  base64Image,
+                  docFile.filename!,
+                );
+                landingPermitFileName = fileData.filename;
+              } catch (e) {
+                logger.e(e);
+              }
+            } else {
+              landingPermitFileName = docFile.url;
+            }
+          }
+          gettingVisaFinalInfo.add(GettingVisaInfoRequest(
+            visaPage: e['visaPage'],
+            visaPageFileName: visaPageFileName,
+            landingPermit: e['landingPermit'],
+            landingPermitFileName: landingPermitFileName,
+          ));
+        },
+      );
+
+      List<TicketRequest>? ticketFinal = [];
+
+      afterGettingVisaFinalForm.control('ticket').value.forEach(
+        (e) async {
+          String? planeTicketForYourVisitToJapanFileName;
+          if (e['planeTicketForYourVisitToJapanFileName'] != null) {
+            FileSelect docFile = e['planeTicketForYourVisitToJapanFileName'];
+            if (docFile.file != null) {
+              try {
+                String base64Image = base64Encode(docFile.file!);
+                FileResponse fileData =
+                    await patientRepository.uploadFileBase64(
+                  base64Image,
+                  docFile.filename!,
+                );
+                planeTicketForYourVisitToJapanFileName = fileData.filename;
+              } catch (e) {
+                logger.e(e);
+              }
+            } else {
+              planeTicketForYourVisitToJapanFileName = docFile.url;
+            }
+          }
+          ticketFinal.add(
+            TicketRequest(
+              planeTicketForYourVisitToJapan:
+                  e['planeTicketForYourVisitToJapan'],
+              planeTicketForYourVisitToJapanFileName:
+                  planeTicketForYourVisitToJapanFileName,
+            ),
+          );
+        },
+      );
+
+      List<TicketBackRequest>? ticketBackFinal = [];
+
+      afterGettingVisaFinalForm.control('ticketBack').value.forEach(
+        (e) async {
+          String? returnFlightTicketFileName;
+          if (e['returnFlightTicketFileName'] != null) {
+            FileSelect docFile = e['returnFlightTicketFileName'];
+            if (docFile.file != null) {
+              try {
+                String base64Image = base64Encode(docFile.file!);
+                FileResponse fileData =
+                    await patientRepository.uploadFileBase64(
+                  base64Image,
+                  docFile.filename!,
+                );
+                returnFlightTicketFileName = fileData.filename;
+              } catch (e) {
+                logger.e(e);
+              }
+            } else {
+              returnFlightTicketFileName = docFile.url;
+            }
+          }
+          ticketBackFinal.add(
+            TicketBackRequest(
+              returnFlightTicket: e['returnFlightTicket'],
+              returnFlightTicketFileName: returnFlightTicketFileName,
+            ),
+          );
+        },
+      );
+
+      List<BoardingPassRequest>? boardingPassFinal = [];
+
+      afterGettingVisaFinalForm.control('boardingPass').value.forEach(
+        (e) async {
+          String? boardingPassForReturnFlightFileName;
+          if (e['boardingPassForReturnFlightFileName'] != null) {
+            FileSelect docFile = e['boardingPassForReturnFlightFileName'];
+            if (docFile.file != null) {
+              try {
+                String base64Image = base64Encode(docFile.file!);
+                FileResponse fileData =
+                    await patientRepository.uploadFileBase64(
+                  base64Image,
+                  docFile.filename!,
+                );
+                boardingPassForReturnFlightFileName = fileData.filename;
+              } catch (e) {
+                logger.e(e);
+              }
+            } else {
+              boardingPassForReturnFlightFileName = docFile.url;
+            }
+          }
+          boardingPassFinal.add(BoardingPassRequest(
+            boardingPassForReturnFlight: e['boardingPassForReturnFlight'],
+            boardingPassForReturnFlightFileName:
+                boardingPassForReturnFlightFileName,
+          ));
+        },
+      );
+
+      String? certificateOfEligibilityFileNameFinal;
+      if (afterGettingVisaFinalForm
+              .control('certificateOfEligibilityFileName')
+              .value !=
+          null) {
+        FileSelect docFile = afterGettingVisaForm
+            .control('certificateOfEligibilityFileName')
+            .value;
+        if (docFile.file != null) {
+          try {
+            String base64Image = base64Encode(docFile.file!);
+            FileResponse fileData = await patientRepository.uploadFileBase64(
+              base64Image,
+              docFile.filename!,
+            );
+            certificateOfEligibilityFileNameFinal = fileData.filename;
+          } catch (e) {
+            logger.e(e);
+          }
+        } else {
+          certificateOfEligibilityFileNameFinal = docFile.url;
+        }
+      }
+
+      MedicalAfterGettingVisaFinalRequest afterGettingVisaFinal =
+          MedicalAfterGettingVisaFinalRequest(
+        vasaInfo: gettingVisaInfo,
+        ticket: ticket,
+        ticketBack: ticketBack,
+        certificateOfEligibility:
+            afterGettingVisaForm.control('certificateOfEligibility').value,
+        certificateOfEligibilityFileName: certificateOfEligibilityFileNameFinal,
+      );
+
       final response = await patientRepository.postMedicalRecordVisa(
         MedicalRecordVisaRequest(
           medicalRecord: formGroup.control('medicalRecord').value,
@@ -586,6 +1320,8 @@ class MedicalVisaModel with ChangeNotifier {
           visaWithdrawal: visaWithdrawal,
           afterGettingVisa: afterGettingVisa,
           travelCompanion: travelCompanion,
+          necessaryInJapan: necessaryRequiredInJapan,
+          afterGettingVisaFinal: afterGettingVisaFinal,
         ),
       );
       logger.d(personal.toList());

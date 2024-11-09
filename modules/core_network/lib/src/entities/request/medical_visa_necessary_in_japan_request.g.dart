@@ -10,8 +10,7 @@ MedicalVisaNecessaryInJapanRequest _$MedicalVisaNecessaryInJapanRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalVisaNecessaryInJapanRequest(
       visaInfo: (json['visaInfo'] as List<dynamic>?)
-          ?.map(
-              (e) => GettingVisaInfoRequest.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => VisaInfoRequest.fromJson(e as Map<String, dynamic>))
           .toList(),
       schedule: (json['schedule'] as List<dynamic>?)
           ?.map((e) => ScheduleRequest.fromJson(e as Map<String, dynamic>))

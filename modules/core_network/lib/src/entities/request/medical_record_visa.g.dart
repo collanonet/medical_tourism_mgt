@@ -34,6 +34,14 @@ MedicalRecordVisaRequest _$MedicalRecordVisaRequestFromJson(
           ? null
           : MedicalVisaTravelCompanionRequest.fromJson(
               json['travelCompanion'] as Map<String, dynamic>),
+      necessaryInJapan: json['necessaryInJapan'] == null
+          ? null
+          : MedicalVisaNecessaryInJapanRequest.fromJson(
+              json['necessaryInJapan'] as Map<String, dynamic>),
+      afterGettingVisaFinal: json['afterGettingVisaFinal'] == null
+          ? null
+          : MedicalAfterGettingVisaFinalRequest.fromJson(
+              json['afterGettingVisaFinal'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$MedicalRecordVisaRequestToJson(
@@ -46,4 +54,6 @@ Map<String, dynamic> _$MedicalRecordVisaRequestToJson(
       'visaWithdrawal': instance.visaWithdrawal,
       'afterGettingVisa': instance.afterGettingVisa,
       'travelCompanion': instance.travelCompanion,
+      'necessaryInJapan': instance.necessaryInJapan,
+      'afterGettingVisaFinal': instance.afterGettingVisaFinal,
     };
