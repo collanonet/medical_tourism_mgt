@@ -1504,6 +1504,12 @@ abstract class ApiService {
     @Body() MedicalRecordVisaRequest medicalRecordVisaRequest,
   );
 
+  @PUT('${EndPoints.MEDICAL_RECORD_VISA}/{id}')
+  Future<MedicalRecordVisaResponse> putMedicalRecordVisa(
+    @Path('id') String medicalRecordVisaId,
+    @Body() MedicalRecordVisaRequest medicalRecordVisaRequest,
+  );
+
   @GET(EndPoints.MEDICAL_VISA_STAY_PERIOD)
   Future<List<MedicalVisaStayPeriodResponse>> getMedicalVisaStayPeriod();
 

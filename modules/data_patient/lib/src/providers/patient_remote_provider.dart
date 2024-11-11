@@ -829,4 +829,8 @@ class PatientRemoteProvider {
     return apiService.postBilling(request);
   }
 
+  Future<MedicalRecordVisaResponse> putMedicalRecordVisa(String id,MedicalRecordVisaRequest request){
+    return apiService.putMedicalRecordVisa(id,request);
+  }
+
 }

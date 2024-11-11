@@ -596,4 +596,6 @@ abstract class PatientRepository {
   Future<BillingResponse> getBilling();
 
   Future<BillingResponse> postBilling(BillingRequest request);
+
+  Future<MedicalRecordVisaResponse> putMedicalRecordVisa(String id ,MedicalRecordVisaRequest request);
 }

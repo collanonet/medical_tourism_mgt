@@ -332,7 +332,7 @@ class MedicalVisaModel with ChangeNotifier {
       afterGettingVisaBoardingPass.add(
         FormGroup(
           {
-            'boardingPass': FormControl<DateTime>(
+            'boardingPassForReturnFlight': FormControl<DateTime>(
               value: element.boardingPassForReturnFlight,
               validators: [
                 Validators.pattern(
@@ -340,186 +340,329 @@ class MedicalVisaModel with ChangeNotifier {
                 ),
               ],
             ),
-            'boardingPassFileName': FormControl<FileSelect>(),
+            'boardingPassForReturnFlightFileName': FormControl<FileSelect>(),
           },
         ),
       );
     }
 
-    // requiredInJapanAfterGettingVisa.control('certificateOfEligibility').value =
-    //     response.afterGettingVisa!.certificateOfEligibility;
-    // FormGroup travelCompanionForm =
-    //     formGroup.control('travel_companion') as FormGroup;
-    // travelCompanionForm.control('nameRomaji').value =
-    //     response.travelCompanion!.nameRomaji;
-    // travelCompanionForm.control('dateBirth').value =
-    //     response.travelCompanion!.dateBirth;
-    // travelCompanionForm.control('age').value = response.travelCompanion!.age;
-    // travelCompanionForm.control('sex').value = response.travelCompanion!.sex;
-    // travelCompanionForm.control('addressArea').value =
-    //     response.travelCompanion!.addressArea;
-    // travelCompanionForm.control('numberPassport').value =
-    //     response.travelCompanion!.numberPassport;
-    // FormArray travelCompanionTravelInfo =
-    //     travelCompanionForm.control('travelInfo') as FormArray;
-    // for (var element in response.travelCompanion!.travelInfo!) {
-    //   travelCompanionTravelInfo.add(
-    //     FormGroup(
-    //       {
-    //         'landingPermissionDate': FormControl<DateTime>(
-    //           value: element.landingPermissionDate,
-    //           validators: [
-    //             Validators.pattern(
-    //               ValidatorRegExp.date,
-    //             ),
-    //           ],
-    //         ),
-    //         'visaValidityPeriodExpirationDate': FormControl<DateTime>(
-    //           value: element.visaValidityPeriodExpirationDate,
-    //           validators: [
-    //             Validators.pattern(
-    //               ValidatorRegExp.date,
-    //             ),
-    //           ],
-    //         ),
-    //         'dateOfEntryIntoJapan': FormControl<DateTime>(
-    //           value: element.dateOfEntryIntoJapan,
-    //           validators: [
-    //             Validators.pattern(
-    //               ValidatorRegExp.date,
-    //             ),
-    //           ],
-    //         ),
-    //         'departureDateFromJapan': FormControl<DateTime>(
-    //           value: element.departureDateFromJapan,
-    //           validators: [
-    //             Validators.pattern(
-    //               ValidatorRegExp.date,
-    //             ),
-    //           ],
-    //         ),
+    requiredInJapanAfterGettingVisa.control('certificateOfEligibility').value =
+        response.afterGettingVisa!.certificateOfEligibility;
+    FormGroup travelCompanionForm =
+        formGroup.control('travel_companion') as FormGroup;
+    travelCompanionForm.control('nameRomaji').value =
+        response.travelCompanion!.nameRomaji;
+    travelCompanionForm.control('dateBirth').value =
+        response.travelCompanion!.dateBirth;
+    travelCompanionForm.control('age').value = response.travelCompanion!.age;
+    travelCompanionForm.control('sex').value = response.travelCompanion!.sex;
+    travelCompanionForm.control('addressArea').value =
+        response.travelCompanion!.addressArea;
+    travelCompanionForm.control('numberPassport').value =
+        response.travelCompanion!.numberPassport;
+    FormArray travelCompanionTravelInfo =
+        travelCompanionForm.control('travelInfo') as FormArray;
+    for (var element in response.travelCompanion!.travelInfo!) {
+      travelCompanionTravelInfo.add(
+        FormGroup(
+          {
+            'landingPermissionDate': FormControl<DateTime>(
+              value: element.landingPermissionDate,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'visaValidityPeriodExpirationDate': FormControl<DateTime>(
+              value: element.visaValidityPeriodExpirationDate,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'dateOfEntryIntoJapan': FormControl<DateTime>(
+              value: element.dateOfEntryIntoJapan,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'departureDateFromJapan': FormControl<DateTime>(
+              value: element.departureDateFromJapan,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
 
-    //         // 入国 hand in
-    //         'departureIn': FormControl<String>(value: element.departureIn),
-    //         'arrivalIn': FormControl<String>(value: element.arrivalIn),
-    //         'flightNumberIn':
-    //             FormControl<String>(value: element.flightNumberIn),
-    //         'departureTimeIn': FormControl<String>(value: element.departureIn),
-    //         'arrivalTimeIn': FormControl<String>(value: element.arrivalTimeIn),
+            // 入国 hand in
+            'departureIn': FormControl<String>(value: element.departureIn),
+            'arrivalIn': FormControl<String>(value: element.arrivalIn),
+            'flightNumberIn':
+                FormControl<String>(value: element.flightNumberIn),
+            'departureTimeIn': FormControl<String>(value: element.departureIn),
+            'arrivalTimeIn': FormControl<String>(value: element.arrivalTimeIn),
 
-    //         // 出国 hand out
-    //         'departureOut': FormControl<String>(value: element.departureOut),
-    //         'arrivalOut': FormControl<String>(value: element.arrivalOut),
-    //         'flightNumberOut':
-    //             FormControl<String>(value: element.flightNumberOut),
-    //         'departureTimeOut':
-    //             FormControl<String>(value: element.departureTimeOut),
-    //         'arrivalTimeOut':
-    //             FormControl<String>(value: element.arrivalTimeOut),
-    //         'seatNumberOut': FormControl<String>(value: element.seatNumberOut),
+            // 出国 hand out
+            'departureOut': FormControl<String>(value: element.departureOut),
+            'arrivalOut': FormControl<String>(value: element.arrivalOut),
+            'flightNumberOut':
+                FormControl<String>(value: element.flightNumberOut),
+            'departureTimeOut':
+                FormControl<String>(value: element.departureTimeOut),
+            'arrivalTimeOut':
+                FormControl<String>(value: element.arrivalTimeOut),
+            'seatNumberOut': FormControl<String>(value: element.seatNumberOut),
 
-    //         'remarks': FormControl<String>(value: element.remarks),
-    //       },
-    //     ),
-    //   );
-    // }
-    // travelCompanionForm.control('travelRemarks').value =
-    //     response.travelCompanion!.travelRemarks;
-    // travelCompanionForm.control('visaWithdrawalTarget').value =
-    //     response.travelCompanion!.subjectVisaWithdrawal;
-    // // travelCompanionForm.control('reason').value = response.travelCompanion!.;
-    // travelCompanionForm.control('remarks').value =
-    //     response.travelCompanion!.remarks;
-    // FormArray travelCompanionFormVasaInfo =
-    //     travelCompanionForm.control('vasaInfo') as FormArray;
-    // for (var element in response.travelCompanion!.vasaInfo!) {
-    //   travelCompanionFormVasaInfo.add(
-    //     FormGroup({
-    //       'visaPage': FormControl<DateTime>(
-    //         value: element.visaPage,
-    //         validators: [
-    //           Validators.pattern(
-    //             ValidatorRegExp.date,
-    //           ),
-    //         ],
-    //       ),
-    //       'visaPageFileName': FormControl<FileSelect>(),
-    //       'landingPermit': FormControl<DateTime>(
-    //         value: element.landingPermit,
-    //         validators: [
-    //           Validators.pattern(
-    //             ValidatorRegExp.date,
-    //           ),
-    //         ],
-    //       ),
-    //       'landingPermitFileName': FormControl<FileSelect>(),
-    //     }),
-    //   );
-    // }
-    // FormArray travelCompanionFormTicket =
-    //     travelCompanionForm.control('ticket') as FormArray;
+            'remarks': FormControl<String>(value: element.remarks),
+          },
+        ),
+      );
+    }
+    travelCompanionForm.control('travelRemarks').value =
+        response.travelCompanion!.travelRemarks;
+    travelCompanionForm.control('visaWithdrawalTarget').value =
+        response.travelCompanion!.subjectVisaWithdrawal;
+    // travelCompanionForm.control('reason').value = response.travelCompanion!.;
+    travelCompanionForm.control('remarks').value =
+        response.travelCompanion!.remarks;
+    FormArray travelCompanionFormVasaInfo =
+        travelCompanionForm.control('vasaInfo') as FormArray;
+    for (var element in response.travelCompanion!.vasaInfo!) {
+      travelCompanionFormVasaInfo.add(
+        FormGroup({
+          'visaPage': FormControl<DateTime>(
+            value: element.visaPage,
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'visaPageFileName': FormControl<FileSelect>(),
+          'landingPermit': FormControl<DateTime>(
+            value: element.landingPermit,
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'landingPermitFileName': FormControl<FileSelect>(),
+        }),
+      );
+    }
+    FormArray travelCompanionFormTicket =
+        travelCompanionForm.control('ticket') as FormArray;
 
-    // for (var element in response.travelCompanion!.ticket!) {
-    //   travelCompanionFormTicket.add(
-    //     FormGroup({
-    //       'planeTicketForYourVisitToJapan': FormControl<DateTime>(
-    //         value: element.planeTicketForYourVisitToJapan,
-    //         validators: [
-    //           Validators.pattern(
-    //             ValidatorRegExp.date,
-    //           ),
-    //         ],
-    //       ),
-    //       'planeTicketForYourVisitToJapanFileName': FormControl<FileSelect>(),
-    //     }),
-    //   );
-    // }
+    for (var element in response.travelCompanion!.ticket!) {
+      travelCompanionFormTicket.add(
+        FormGroup({
+          'planeTicketForYourVisitToJapan': FormControl<DateTime>(
+            value: element.planeTicketForYourVisitToJapan,
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'planeTicketForYourVisitToJapanFileName': FormControl<FileSelect>(),
+        }),
+      );
+    }
 
-    // FormArray travelCompanionFormTicketBack =
-    //     travelCompanionForm.control('ticketBack') as FormArray;
-    // for (var element in response.travelCompanion!.ticketBack!) {
-    //   travelCompanionFormTicketBack.add(
-    //     FormGroup(
-    //       {
-    //         'returnFlightTicket': FormControl<DateTime>(
-    //           value: element.returnFlightTicket,
-    //           validators: [
-    //             Validators.pattern(
-    //               ValidatorRegExp.date,
-    //             ),
-    //           ],
-    //         ),
-    //         'returnFlightTicketFileName': FormControl<FileSelect>(),
-    //       },
-    //     ),
-    //   );
-    // }
-    // FormArray travelCompanionFormBoardingPass =
-    //     travelCompanionForm.control('boardingPass') as FormArray;
-    // for (var element in response.travelCompanion!.boardingPass!) {
-    //   travelCompanionFormBoardingPass.add(
-    //     FormGroup(
-    //       {
-    //         'boardingPass': FormControl<DateTime>(
-    //           value: element.boardingPassForReturnFlight,
-    //           validators: [
-    //             Validators.pattern(
-    //               ValidatorRegExp.date,
-    //             ),
-    //           ],
-    //         ),
-    //         'boardingPassFileName': FormControl<FileSelect>(),
-    //       },
-    //     ),
-    //   );
-    // }
-    // travelCompanionForm.control('certificateOfEligibility').value =
-    //     response.travelCompanion!.certificateOfEligibility;
+    FormArray travelCompanionFormTicketBack =
+        travelCompanionForm.control('ticketBack') as FormArray;
+    for (var element in response.travelCompanion!.ticketBack!) {
+      travelCompanionFormTicketBack.add(
+        FormGroup(
+          {
+            'returnFlightTicket': FormControl<DateTime>(
+              value: element.returnFlightTicket,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'returnFlightTicketFileName': FormControl<FileSelect>(),
+          },
+        ),
+      );
+    }
+    FormArray travelCompanionFormBoardingPass =
+        travelCompanionForm.control('boardingPass') as FormArray;
+    for (var element in response.travelCompanion!.boardingPass!) {
+      travelCompanionFormBoardingPass.add(
+        FormGroup({
+          'boardingPassForReturnFlight': FormControl<DateTime>(
+            value: element.boardingPassForReturnFlight,
+            validators: [
+              Validators.pattern(
+                ValidatorRegExp.date,
+              ),
+            ],
+          ),
+          'boardingPassForReturnFlightFileName': FormControl<FileSelect>(),
+        }),
+      );
+    }
+    travelCompanionForm.control('certificateOfEligibility').value =
+        response.travelCompanion!.certificateOfEligibility;
+
+    FormGroup necessaryInJapanForm =
+        formGroup.control('necessaryInJapan') as FormGroup;
+    FormArray necessaryInJapanFormVisaInfor =
+        necessaryInJapanForm.control('visaInfo') as FormArray;
+    for (var element in response.necessaryInJapan!.visaInfo!) {
+      necessaryInJapanFormVisaInfor.add(
+        FormGroup(
+          {
+            'passportDate': FormControl<DateTime>(
+              value: element.passportDate,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'passportFileSelect': FormControl<FileSelect>(),
+            'letterOfGuaranteeDate': FormControl<DateTime>(
+              value: element.letterOfGuaranteeDate,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'letterOfGuaranteeFileSelect': FormControl<FileSelect>(),
+            'sendBy': FormControl<String>(value: element.sendBy),
+            'byEMS': FormControl<bool>(value: element.byEMS),
+            'byFedex': FormControl<bool>(value: element.byFedex),
+            'byothers': FormControl<bool>(value: element.byothers),
+          },
+        ),
+      );
+    }
+
+    FormArray necessaryInJapanFormSchedule =
+        necessaryInJapanForm.control('schedule') as FormArray;
+    for (var element in response.necessaryInJapan!.schedule!) {
+      necessaryInJapanFormSchedule.add(
+        FormGroup(
+          {
+            'treatmentSchedule': FormControl<DateTime>(
+              value: element.treatmentSchedule,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'treatmentScheduleFileSelect': FormControl<FileSelect>(),
+          },
+        ),
+      );
+    }
+
+    necessaryInJapanForm.control('statementOfReasonsDate').value =
+        response.necessaryInJapan!.statementOfReasonsDate;
+    necessaryInJapanForm.control('travelCompanionListDate').value =
+        response.necessaryInJapan!.travelCompanionListDate;
 
     FormGroup afterGettingVisaFinalForm =
         formGroup.control('afterGettingVisaFinal') as FormGroup;
-    FormArray afterGettingVisaFinalFormVisaInfor =
+    FormArray afterGettingVisaFinalFormVisaInfo =
         afterGettingVisaFinalForm.control('vasaInfo') as FormArray;
+    for (var element in response.afterGettingVisaFinal!.vasaInfo!) {
+      afterGettingVisaFinalFormVisaInfo.add(
+        FormGroup(
+          {
+            'visaPage': FormControl<DateTime>(
+              value: element.visaPage,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'visaPageFileName': FormControl<FileSelect>(),
+            'landingPermit': FormControl<DateTime>(
+              value: element.landingPermit,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'landingPermitFileName': FormControl<FileSelect>(),
+          },
+        ),
+      );
+    }
+    FormArray afterGettingVisaFinalFormTicket =
+        afterGettingVisaFinalForm.control('ticket') as FormArray;
+    for (var element in response.afterGettingVisaFinal!.ticket!) {
+      afterGettingVisaFinalFormTicket.add(
+        FormGroup(
+          {
+            'planeTicketForYourVisitToJapan': FormControl<DateTime>(
+              value: element.planeTicketForYourVisitToJapan,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'planeTicketForYourVisitToJapanFileName': FormControl<FileSelect>(),
+          },
+        ),
+      );
+    }
+    FormArray afterGettingVisaFinalFormTicketBack =
+        afterGettingVisaFinalForm.control('ticketBack') as FormArray;
+    for (var element in response.afterGettingVisaFinal!.ticketBack!) {
+      afterGettingVisaFinalFormTicketBack.add(
+        FormGroup(
+          {
+            'returnFlightTicket': FormControl<DateTime>(
+              value: element.returnFlightTicket,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'returnFlightTicketFileName': FormControl<FileSelect>(),
+          },
+        ),
+      );
+    }
+    FormArray afterGettingVisaFinalFormBoardingPass =
+        afterGettingVisaFinalForm.control('boardingPass') as FormArray;
+    for (var element in response.afterGettingVisaFinal!.boardingPass!) {
+      afterGettingVisaFinalFormBoardingPass.add(
+        FormGroup(
+          {
+            'boardingPassForReturnFlight': FormControl<DateTime>(
+              value: element.boardingPassForReturnFlight,
+              validators: [
+                Validators.pattern(
+                  ValidatorRegExp.date,
+                ),
+              ],
+            ),
+            'boardingPassForReturnFlightFileName': FormControl<FileSelect>(),
+          },
+        ),
+      );
+    }
+    afterGettingVisaFinalForm.control('certificateOfEligibility').value =
+        response.afterGettingVisaFinal!.certificateOfEligibility;
   }
 
   ValueNotifier<AsyncData<MedicalRecordVisaResponse>>
@@ -1310,23 +1453,27 @@ class MedicalVisaModel with ChangeNotifier {
             afterGettingVisaForm.control('certificateOfEligibility').value,
         certificateOfEligibilityFileName: certificateOfEligibilityFileNameFinal,
       );
-
-      final response = await patientRepository.postMedicalRecordVisa(
-        MedicalRecordVisaRequest(
-          medicalRecord: formGroup.control('medicalRecord').value,
-          personal: personal,
-          stayPeriod: stayPeriod,
-          requiredInJapan: requiredInJapan,
-          visaWithdrawal: visaWithdrawal,
-          afterGettingVisa: afterGettingVisa,
-          travelCompanion: travelCompanion,
-          necessaryInJapan: necessaryRequiredInJapan,
-          afterGettingVisaFinal: afterGettingVisaFinal,
-        ),
+      MedicalRecordVisaRequest request = MedicalRecordVisaRequest(
+        medicalRecord: formGroup.control('medicalRecord').value,
+        personal: personal,
+        stayPeriod: stayPeriod,
+        requiredInJapan: requiredInJapan,
+        visaWithdrawal: visaWithdrawal,
+        afterGettingVisa: afterGettingVisa,
+        travelCompanion: travelCompanion,
+        necessaryInJapan: necessaryRequiredInJapan,
+        afterGettingVisaFinal: afterGettingVisaFinal,
       );
-      logger.d(personal.toList());
-      submitMedicalRecordVisaData.value = AsyncData(data: response);
-      medicalRecordVisaData.value = AsyncData(data: response);
+      if (formGroup.control('_id').value != null) {
+        final response = await patientRepository.putMedicalRecordVisa(
+            formGroup.control('_id').value, request);
+        submitMedicalRecordVisaData.value = AsyncData(data: response);
+        medicalRecordVisaData.value = AsyncData(data: response);
+      } else {
+        final response = await patientRepository.postMedicalRecordVisa(request);
+        submitMedicalRecordVisaData.value = AsyncData(data: response);
+        medicalRecordVisaData.value = AsyncData(data: response);
+      }
     } catch (e) {
       logger.d('Error ${e.toString()}');
       submitMedicalRecordVisaData.value = AsyncData(error: e);
