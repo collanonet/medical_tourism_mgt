@@ -72,9 +72,12 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                     style: context.textTheme.bodySmall,
                   )),
                   Expanded(
-                      child: Text(
-                    '発行日', // Issue date
-                    style: context.textTheme.bodySmall,
+                      child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: Text(
+                      '発行日', // Issue date
+                      style: context.textTheme.bodySmall,
+                    ),
                   )),
                   Expanded(
                       flex: 2,
@@ -247,17 +250,23 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                             style: context.textTheme.bodySmall,
                           )),
                           Expanded(
-                              child: Text(
-                            data?.invoiceDate != null
-                                ? Dates.formatFullDate(data!.invoiceDate!)
-                                : '',
-                            style: context.textTheme.bodySmall,
+                              child: Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 18),
+                            child: Text(
+                              data?.invoiceDate != null
+                                  ? Dates.formatFullDate(data!.invoiceDate!)
+                                  : '',
+                              style: context.textTheme.bodySmall,
+                            ),
                           )),
                           Expanded(
                               flex: 3,
-                              child: Text(
-                                '--',
-                                style: context.textTheme.bodySmall,
+                              child: Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Text(
+                                  '--',
+                                  style: context.textTheme.bodySmall,
+                                ),
                               )),
                           Expanded(
                               child: Text(
