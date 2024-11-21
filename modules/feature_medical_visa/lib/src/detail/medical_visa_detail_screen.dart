@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:provider/provider.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 // Project imports:
 import 'medical_visa_detail_model.dart';
@@ -57,18 +58,18 @@ class _MedicalVisaDetailScreenState extends State<MedicalVisaDetailScreen> {
                 valueListenable:
                     context.watch<MedicalVisaDetailModel>().medicalRecord,
                 builder: (context, value, _) {
-                  return value.loading
-                      ? const Center(child: CircularProgressIndicator())
-                      : ValueListenableBuilder(
-                      valueListenable:
-                      context.watch<MedicalVisaDetailModel>().patientData,
-                      builder: (context, patient, _) {
-                          return MedicalVisaPage(
-                              patient: patient.data,
-                              id: value.requireData.id,
-                            );
-                        }
-                      );
+                  return Skeletonizer(
+                    enabled: value.loading,
+                    child: ValueListenableBuilder(
+                        valueListenable:
+                            context.watch<MedicalVisaDetailModel>().patientData,
+                        builder: (context, patient, _) {
+                          return value.hasData ? MedicalVisaPage(
+                            patient: patient.data,
+                            id: value.requireData.id,
+                          ) : Center(child: CircularProgressIndicator());
+                        }),
+                  );
                 }),
           ),
         ),

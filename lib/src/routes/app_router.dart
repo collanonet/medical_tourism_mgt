@@ -109,8 +109,8 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
       AutoRoute(
         page: EstimateMasterRoute.page,
       ),
-      AutoRoute(page: ProspectivePankRoute.page),
-      AutoRoute(page: ContractDetailRoute.page),
+      AutoRoute(page: ProspectivePankRoute.page, path: '/prospective-pank'),
+      AutoRoute(page: ContractDetailRoute.page, path: '/contract-detail'),
     ];
   }
 }

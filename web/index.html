@@ -1,4 +1,4 @@
-<!DOCTYPE html><head>
+<!DOCTYPE html><html><head>
     <base href="$FLUTTER_BASE_HREF">
 
     <meta charset="UTF-8">
@@ -17,13 +17,6 @@
     <title>Medical Tourism</title>
     <link rel="manifest" href="manifest.json">
 
-    <!-- In the <head> section -->
-<script src="https://unpkg.com/cornerstone-core/dist/cornerstone.min.js"></script>
-<script src="https://unpkg.com/cornerstone-math/dist/cornerstoneMath.min.js"></script>
-<script src="https://unpkg.com/cornerstone-tools/dist/cornerstoneTools.min.js"></script>
-<script src="https://unpkg.com/dicom-parser/dist/dicomParser.min.js"></script>
-<script src="https://unpkg.com/cornerstone-wado-image-loader/dist/cornerstoneWADOImageLoader.min.js"></script>
-
     <script>
         // The value below is injected by flutter build, do not touch.
         const serviceWorkerVersion = null;
@@ -37,6 +30,8 @@
 
     
     
+  
+  
   
   
   
@@ -106,14 +101,6 @@
         background-color: #042a49;
           }
     }
-  #dicomImage {
-    width: 500px;  /* Set explicit width */
-    height: 500px; /* Set explicit height */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
   </style>
   <script id="splash-screen-script">
     function removeSplashFromWeb() {
@@ -129,9 +116,9 @@
       <source srcset="splash/img/dark-1x.png 1x, splash/img/dark-2x.png 2x, splash/img/dark-3x.png 3x, splash/img/dark-4x.png 4x" media="(prefers-color-scheme: dark)">
       <img class="center" aria-hidden="true" src="splash/img/light-1x.png" alt="">
   </picture>
+  
 
 
-  <div id="dicomImage" style="width:500px; height:500px;"></div>
 <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
@@ -159,5 +146,5 @@
 
 
 
-</body>
-</html>
+
+</body></html>

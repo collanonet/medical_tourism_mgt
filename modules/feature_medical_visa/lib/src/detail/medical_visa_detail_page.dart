@@ -27,7 +27,7 @@ class MedicalVisaDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (context) => GetIt.I<MedicalVisaDetailModel>()
-        ..initMedicalRecord(patient, patient?.id ?? id),
+        ..initMedicalRecord(patient, id),
       child: const LayoutView(
         selectedIndex: 2,
         page: MedicalVisaDetailScreen(),

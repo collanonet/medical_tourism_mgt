@@ -92,7 +92,9 @@ FormGroup basicInfoForm({
           ),
           'travelGroup': FormArray([
             FormGroup({
-              'name': FormControl<String?>(),
+              'name': FormControl<String?>(
+                value: '',
+              ),
             })
           ]),
         }),
@@ -110,10 +112,14 @@ FormGroup basicInfoForm({
         'PATIENT_NAMES': FormGroup({
           'id': FormControl<String?>(),
           'familyNameRomanized': FormControl<String?>(
+            value: '',
             validators: [Validators.required],
           ),
-          'middleNameRomanized': FormControl<String?>(),
+          'middleNameRomanized': FormControl<String?>(
+            value: '',
+          ),
           'firstNameRomanized': FormControl<String?>(
+            value: '',
             validators: [Validators.required],
           ),
           'familyNameChineseOrVietnamese': FormControl<String?>(),

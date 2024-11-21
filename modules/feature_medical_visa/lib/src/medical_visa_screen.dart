@@ -87,7 +87,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                 totalPages: model.patientData.data?.totalPages ?? 1,
                 isLoading: model.patientData.loading,
                 onScrollMax: () {
-                  if(model.patientData.loading == false) {
+                  if (model.patientData.loading == false) {
                     model.fetchMorePatients();
                   }
                 },
@@ -138,159 +138,153 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       titleHeader: Text(context.l10n.labelAdmittedToHospital),
                     ),
                     HeaderTableData(
-                      titleHeader:
-                      Text(context.l10n.labelNumberOfGroupMembers),
+                      titleHeader: Text(context.l10n.labelNumberOfGroupMembers),
                     ),
                   ],
                   rows: (model.patientData.data?.items.length ?? 0) == 0
                       ? []
                       : List<RowTableData>.generate(
-                    model.patientData.data?.items.length ?? 0,
-                        (index) {
-                      var item = model.patientData.data?.items[index];
-                      return RowTableData(
-                        onTap: () {
-                          context.router
-                              .push(MedicalVisaDetailRoute(
-                            patient: item!,
-                          ));
-                        },
-                        cell: [
-                          Row(
-                            children: [
-                              Container(
-                                height: 60,
-                                width: 60,
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                  BorderRadius.circular(16),
-                                  color: Colors.grey.shade300,
-                                ),
-                                child: const Icon(
-                                  Icons.person,
-                                  color: Colors.white,
-                                  size: 50,
-                                ),
-                              ),
-                            ],
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                '${item?.firstNameRomanized ?? '-'} ${item?.middleNameRomanized ?? '-'} ${item?.familyNameRomanized ?? '-'}',
-                                style: TextStyle(
-                                  color: context.appTheme.primaryColor,
-                                  fontFamily: 'NotoSansJP',
-                                  package: 'core_ui',
-                                ),
-                              ),
-                              Text(
-                                  '${item?.firstNameChineseOrVietnamese ?? '-'} ${item?.middleNameChineseOrVietnamese ?? '-'} ${item?.familyNameChineseOrVietnamese ?? '-'} / ${item?.firstNameJapaneseForChinese ?? '-'} ${item?.middleNameJapaneseForChinese ?? '-'} ${item?.familyNameJapaneseForChinese ?? '-'} / ${item?.firstNameJapaneseForNonChinese ?? '-'} ${item?.middleNameJapaneseForNonChinese ?? '-'} ${item?.familyNameJapaneseForNonChinese ?? '-'} '),
-                            ],
-                          ),
-                          Column(
-                            mainAxisSize: MainAxisSize.min,
-                            crossAxisAlignment:
-                            CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                item?.companyAGENTS ?? '-',
-                                style: const TextStyle(
-                                    color: Colors.blueGrey),
-                              ),
-                              Text(
-                                  '${item?.nameInKanjiAGENTS ?? '--'} / ${item?.nameInKanaAGENTS ?? '--'}'),
-                            ],
-                          ),
-                          Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 8, vertical: 4),
-                                decoration: BoxDecoration(
-                                    color: Colors.greenAccent,
-                                    borderRadius:
-                                    BorderRadius.circular(4)),
-                                child: Text(
-                                  item?.progress ?? '--',
-                                  style: const TextStyle(
-                                      color: Colors.white),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Text(
-                            item?.proposalNumber ?? '--',
-                          ),
-                          Column(
-                            children: [
-                              Wrap(
-                                children: item?.type?.map((e) {
-                                  return e == null
-                                      ? const SizedBox()
-                                      : Container(
-                                    padding:
-                                    const EdgeInsets.all(
-                                        4),
-                                    margin:
-                                    const EdgeInsets.all(
-                                        4),
-                                    decoration: BoxDecoration(
-                                      color: Colors.blueGrey,
-                                      borderRadius:
-                                      BorderRadius
-                                          .circular(4),
-                                    ),
-                                    child: Text(
-                                      e,
-                                      style: const TextStyle(
+                          model.patientData.data?.items.length ?? 0,
+                          (index) {
+                            var item = model.patientData.data?.items[index];
+                            return RowTableData(
+                              onTap: () {
+                                context.router.push(MedicalVisaDetailRoute(
+                                  patient: item,
+                                  id: item?.id,
+                                ));
+                              },
+                              cell: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      height: 60,
+                                      width: 60,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(16),
+                                        color: Colors.grey.shade300,
+                                      ),
+                                      child: const Icon(
+                                        Icons.person,
                                         color: Colors.white,
+                                        size: 50,
                                       ),
                                     ),
-                                  );
-                                }).toList() ??
-                                    [],
-                              ),
-                            ],
-                          ),
-                          Text(
-                            Dates.formShortDate(item?.dateOfEntry),
-                          ),
-                          Text(
-                            Dates.formShortDate(item?.medicalDay),
-                          ),
-                          Text(
-                            Dates.formShortDate(item?.returnDate),
-                          ),
-                          Text(
-                            item?.nationality ?? '--',
-                          ),
-                          Text(
-                            item?.diseaseName ?? '--',
-                          ),
-                          Text(
-                            item?.salesStaff ?? '--',
-                          ),
-                          Text(
-                            item?.businessStaff ?? '--',
-                          ),
-                          Text(
-                            item?.acceptingHospital ?? '--',
-                            style: TextStyle(
-                              color: context.appTheme.primaryColor,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Text(
-                            item?.groupSize ?? '--',
-                          ),
-                        ],
-                      );
-                    },
-                  ),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      '${item?.firstNameRomanized ?? '-'} ${item?.middleNameRomanized ?? '-'} ${item?.familyNameRomanized ?? '-'}',
+                                      style: TextStyle(
+                                        color: context.appTheme.primaryColor,
+                                        fontFamily: 'NotoSansJP',
+                                        package: 'core_ui',
+                                      ),
+                                    ),
+                                    Text(
+                                        '${item?.firstNameChineseOrVietnamese ?? '-'} ${item?.middleNameChineseOrVietnamese ?? '-'} ${item?.familyNameChineseOrVietnamese ?? '-'} / ${item?.firstNameJapaneseForChinese ?? '-'} ${item?.middleNameJapaneseForChinese ?? '-'} ${item?.familyNameJapaneseForChinese ?? '-'} / ${item?.firstNameJapaneseForNonChinese ?? '-'} ${item?.middleNameJapaneseForNonChinese ?? '-'} ${item?.familyNameJapaneseForNonChinese ?? '-'} '),
+                                  ],
+                                ),
+                                Column(
+                                  mainAxisSize: MainAxisSize.min,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      item?.companyAGENTS ?? '-',
+                                      style: const TextStyle(
+                                          color: Colors.blueGrey),
+                                    ),
+                                    Text(
+                                        '${item?.nameInKanjiAGENTS ?? '--'} / ${item?.nameInKanaAGENTS ?? '--'}'),
+                                  ],
+                                ),
+                                Row(
+                                  children: [
+                                    Container(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 8, vertical: 4),
+                                      decoration: BoxDecoration(
+                                          color: Colors.greenAccent,
+                                          borderRadius:
+                                              BorderRadius.circular(4)),
+                                      child: Text(
+                                        item?.progress ?? '--',
+                                        style: const TextStyle(
+                                            color: Colors.white),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  item?.proposalNumber ?? '--',
+                                ),
+                                Column(
+                                  children: [
+                                    Wrap(
+                                      children: item?.type?.map((e) {
+                                            return e == null
+                                                ? const SizedBox()
+                                                : Container(
+                                                    padding:
+                                                        const EdgeInsets.all(4),
+                                                    margin:
+                                                        const EdgeInsets.all(4),
+                                                    decoration: BoxDecoration(
+                                                      color: Colors.blueGrey,
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              4),
+                                                    ),
+                                                    child: Text(
+                                                      e,
+                                                      style: const TextStyle(
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  );
+                                          }).toList() ??
+                                          [],
+                                    ),
+                                  ],
+                                ),
+                                Text(
+                                  Dates.formShortDate(item?.dateOfEntry),
+                                ),
+                                Text(
+                                  Dates.formShortDate(item?.medicalDay),
+                                ),
+                                Text(
+                                  Dates.formShortDate(item?.returnDate),
+                                ),
+                                Text(
+                                  item?.nationality ?? '--',
+                                ),
+                                Text(
+                                  item?.diseaseName ?? '--',
+                                ),
+                                Text(
+                                  item?.salesStaff ?? '--',
+                                ),
+                                Text(
+                                  item?.businessStaff ?? '--',
+                                ),
+                                Text(
+                                  item?.acceptingHospital ?? '--',
+                                  style: TextStyle(
+                                    color: context.appTheme.primaryColor,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                                Text(
+                                  item?.groupSize ?? '--',
+                                ),
+                              ],
+                            );
+                          },
+                        ),
                 ),
               ),
             ),
