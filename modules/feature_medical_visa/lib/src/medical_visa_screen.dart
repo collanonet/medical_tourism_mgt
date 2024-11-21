@@ -155,23 +155,23 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                 ));
                               },
                               cell: [
-                                Row(
-                                  children: [
-                                    Container(
-                                      height: 60,
-                                      width: 60,
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(16),
-                                        color: Colors.grey.shade300,
-                                      ),
-                                      child: const Icon(
-                                        Icons.person,
-                                        color: Colors.white,
-                                        size: 50,
-                                      ),
-                                    ),
-                                  ],
-                                ),
+                                // Row(
+                                //   children: [
+                                //     Container(
+                                //       height: 60,
+                                //       width: 60,
+                                //       decoration: BoxDecoration(
+                                //         borderRadius: BorderRadius.circular(16),
+                                //         color: Colors.grey.shade300,
+                                //       ),
+                                //       child: const Icon(
+                                //         Icons.person,
+                                //         color: Colors.white,
+                                //         size: 50,
+                                //       ),
+                                //     ),
+                                //   ],
+                                // ),
                                 Column(
                                   mainAxisSize: MainAxisSize.min,
                                   crossAxisAlignment: CrossAxisAlignment.start,

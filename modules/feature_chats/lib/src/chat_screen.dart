@@ -62,6 +62,7 @@ class ChatScreen extends StatelessWidget {
                                 title: Row(
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceAround,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
                                       '${item?.firstNameRomanized ?? '-'} ${item?.middleNameRomanized ?? '-'} ${item?.familyNameRomanized ?? '-'}',
