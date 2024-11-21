@@ -220,9 +220,8 @@ class DocumentRequired extends StatelessWidget {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    Container(
-                                      width: 198,
-                                      // color: Colors.black,
+                                    SizedBox(
+                                      width: 200,
                                       child: ColumnSeparated(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
@@ -243,9 +242,8 @@ class DocumentRequired extends StatelessWidget {
                                                   .appTheme.spacing.formSpacing,
                                             ),
                                             children: [
-                                              Container(
+                                              SizedBox(
                                                 width: 75,
-                                                // color: Colors.red,
                                                 child: RowSeparated(
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
@@ -260,37 +258,39 @@ class DocumentRequired extends StatelessWidget {
                                                         .marginExtraSmall,
                                                   ),
                                                   children: [
-                                                    ReactiveValueListenableBuilder<
-                                                        FileSelect>(
-                                                      formControlName:
-                                                          'letterOfGuaranteeFileSelect',
-                                                      builder: (context,
-                                                          control, _) {
-                                                        return InkWell(
-                                                          onTap: () {
-                                                            if (control.value
-                                                                    ?.url !=
-                                                                null) {
-                                                              openUrlInBrowser(
-                                                                  fileName:
-                                                                      control
-                                                                          .value!
-                                                                          .url!);
-                                                            }
-                                                          },
-                                                          child: Text(
-                                                            control.value
-                                                                    ?.filename ??
-                                                                'File Input .....',
-                                                            style: context
-                                                                .textTheme
-                                                                .bodySmall,
-                                                            overflow:
-                                                                TextOverflow
-                                                                    .clip,
-                                                          ),
-                                                        );
-                                                      },
+                                                    Flexible(
+                                                      child:
+                                                          ReactiveValueListenableBuilder<
+                                                              FileSelect>(
+                                                        formControlName:
+                                                            'letterOfGuaranteeFileSelect',
+                                                        builder: (context,
+                                                            control, _) {
+                                                          return InkWell(
+                                                            onTap: () {
+                                                              if (control.value
+                                                                      ?.url !=
+                                                                  null) {
+                                                                openUrlInBrowser(
+                                                                    fileName: control
+                                                                        .value!
+                                                                        .url!);
+                                                              }
+                                                            },
+                                                            child: Text(
+                                                              control.value
+                                                                      ?.filename ??
+                                                                  'File Input .....',
+                                                              style: context
+                                                                  .textTheme
+                                                                  .bodySmall,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
                                                     ),
                                                   ],
                                                 ),
