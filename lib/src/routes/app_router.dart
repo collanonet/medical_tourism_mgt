@@ -86,7 +86,7 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
       AutoRoute(page: InvoicesRoute.page, path: '/invoices'),
       AutoRoute(page: MedicalVisasRoute.page, path: '/medical-visa'),
       AutoRoute(
-          page: MedicalVisaDetailRoute.page, path: '/medical-visa-detail'),
+          page: MedicalVisaDetailRoute.page, path: '/medical-visa-detail/:id'),
       AutoRoute(page: PatientsRoute.page, initial: true, path: '/patients'),
       AutoRoute(page: DetailPatientRoute.page, path: '/detail-patient/:id'),
       AutoRoute(page: PrePatientRoute.page, path: '/pre-patients'),

@@ -191,7 +191,7 @@ class StatementModel {
       MedicalInvoiceRequest request = MedicalInvoiceRequest(
         logoFile: logoFile,
         stampFile: stampFile,
-        type: false,
+        type: true,
         invoiceNumber: formGroup.control('invoiceNumber').value,
         invoiceDate: formGroup.control('invoiceDate').value,
         companyName: formGroup.control('companyName').value,

@@ -42,7 +42,9 @@ class BasicInformationModel {
         getPatientNames(patientId: patient.id, formGroup: formGroup);
         getPatientNationalities(patientId: patient.id, formGroup: formGroup);
         getPatientPassports(patientId: patient.id, formGroup: formGroup);
+        // get medical info
         getMedicalRecords(patientId: patient.id, formGroup: formGroup);
+
         loading.value = const AsyncData();
       } catch (error) {
         logger.d(error);

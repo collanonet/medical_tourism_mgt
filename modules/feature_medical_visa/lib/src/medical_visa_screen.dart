@@ -151,7 +151,9 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       return RowTableData(
                         onTap: () {
                           context.router
-                              .push(const MedicalVisaDetailRoute());
+                              .push(MedicalVisaDetailRoute(
+                            patient: item!,
+                          ));
                         },
                         cell: [
                           Row(

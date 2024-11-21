@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:core_network/core_network.dart';
+import 'package:feature_patient/feature_patient.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -9,7 +11,9 @@ import 'package:provider/provider.dart';
 import 'medical_visa_detail_model.dart';
 
 class MedicalVisaDetailScreen extends StatefulWidget {
-  const MedicalVisaDetailScreen({super.key});
+  const MedicalVisaDetailScreen({
+    super.key,
+  });
 
   @override
   State<MedicalVisaDetailScreen> createState() =>
@@ -49,140 +53,23 @@ class _MedicalVisaDetailScreenState extends State<MedicalVisaDetailScreen> {
                   context.appTheme.spacing.borderRadiusMedium),
               color: Colors.white,
             ),
-            child: SingleChildScrollView(
-              child: Consumer<MedicalVisaDetailModel>(
-                builder: (context, model, _) {
-                  return Column(
-                    children: [
-                      SizedBox(
-                        height: context.appTheme.spacing.marginMedium,
-                      ),
-                      Row(
-                        children: [
-                          Checkbox(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
-                              side: const BorderSide(color: Colors.grey),
-                            ),
-                            checkColor: Colors.white,
-                            value: false,
-                            onChanged: (value) {},
-                          ),
-                          Expanded(
-                              flex: 3,
-                              child: Text(
-                                '書類名',
-                                style: context.textTheme.bodySmall,
-                              )),
-                          Expanded(
-                              child: Text(
-                            '発行日',
-                            style: context.textTheme.bodySmall,
-                          )),
-                          Expanded(
-                              child: Text(
-                            '人数',
-                            style: context.textTheme.bodySmall,
-                          )),
-                          Expanded(
-                              child: Text(
-                            '共有',
-                            style: context.textTheme.bodySmall,
-                          )),
-                        ],
-                      ),
-                      const Divider(),
-                      ListView(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        children: List.generate(
-                          10,
-                          (index) => InkWell(
-                            onTap: () {},
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 4),
-                              child: Row(
-                                children: [
-                                  Checkbox(
-                                    shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4),
-                                      side: const BorderSide(color: Colors.grey),
-                                    ),
-                                    checkColor: Colors.white,
-                                    value: false,
-                                    onChanged: (value) {},
-                                  ),
-                                  Expanded(
-                                      flex: 3,
-                                      child: Text(
-                                        '医療滞在訪日者出国報告書　2023年7月',
-                                        style: context.textTheme.titleMedium
-                                            ?.copyWith(
-                                                color: context
-                                                    .appTheme.primaryColor),
-                                      )),
-                                  const Expanded(child: Text('2023/06/30')),
-                                  const Expanded(
-                                      child: Text(
-                                    '2',
-                                  )),
-                                  Expanded(
-                                      child: Icon(
-                                    Icons.person,
-                                    color: context.appTheme.primaryColor,
-                                  )),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      SizedBox(
-                        height: context.appTheme.spacing.marginMedium,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          OutlinedButton(
-                            onPressed: () {},
-                            child: const Text(
-                              '削除する',
-                            ),
-                          ),
-                          SizedBox(
-                            width: context.appTheme.spacing.marginMedium,
-                          ),
-                          SizedBox(
-                            width: context.appTheme.spacing.marginMedium,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: const Text(
-                              '閲覧する',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          SizedBox(
-                            width: context.appTheme.spacing.marginMedium,
-                          ),
-                          ElevatedButton(
-                            onPressed: () {},
-                            child: const Text(
-                              '印刷する',
-                              style: TextStyle(
-                                color: Colors.white,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  );
-                },
-              ),
-            ),
+            child: ValueListenableBuilder(
+                valueListenable:
+                    context.watch<MedicalVisaDetailModel>().medicalRecord,
+                builder: (context, value, _) {
+                  return value.loading
+                      ? const Center(child: CircularProgressIndicator())
+                      : ValueListenableBuilder(
+                      valueListenable:
+                      context.watch<MedicalVisaDetailModel>().patientData,
+                      builder: (context, patient, _) {
+                          return MedicalVisaPage(
+                              patient: patient.data,
+                              id: value.requireData.id,
+                            );
+                        }
+                      );
+                }),
           ),
         ),
       ],
