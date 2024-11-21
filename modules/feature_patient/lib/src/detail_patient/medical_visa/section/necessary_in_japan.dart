@@ -36,64 +36,58 @@ class NecessaryInJapan extends StatelessWidget {
                             child: Column(
                               children: [
                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Expanded(child: Text('パスポート')),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    Expanded(
-                                      child: ReactiveDatePicker<DateTime>(
-                                        formControlName: 'passportDate',
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
-                                        builder: (BuildContext context,
-                                            ReactiveDatePickerDelegate<dynamic>
-                                                picker,
-                                            Widget? child) {
-                                          return ReactiveTextField<DateTime>(
+                                    Row(
+                                      children: [
+                                        const Text('パスポート'),
+                                        const SizedBox(
+                                          width: 150,
+                                        ),
+                                        IntrinsicWidth(
+                                          stepWidth: 200,
+                                          child: ReactiveDatePicker<DateTime>(
                                             formControlName: 'passportDate',
-                                            valueAccessor:
-                                                DateTimeValueAccessor(
-                                              dateTimeFormat:
-                                                  DateFormat('yyyy/MM/dd'),
-                                            ),
-                                            onChanged: (value) {
-                                              logger.d(value);
-                                            },
-                                            onSubmitted: (value) {
-                                              logger.d(value);
-                                            },
-                                            decoration: InputDecoration(
-                                              suffixIcon: IconButton(
-                                                icon: const Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
+                                            firstDate: DateTime(1900),
+                                            lastDate: DateTime(2100),
+                                            builder: (BuildContext context,
+                                                ReactiveDatePickerDelegate<
+                                                        dynamic>
+                                                    picker,
+                                                Widget? child) {
+                                              return ReactiveTextField<
+                                                  DateTime>(
+                                                formControlName: 'passportDate',
+                                                valueAccessor:
+                                                    DateTimeValueAccessor(
+                                                  dateTimeFormat:
+                                                      DateFormat('yyyy/MM/dd'),
                                                 ),
-                                                onPressed: picker.showPicker,
-                                              ),
-                                            ),
-                                            inputFormatters: [
-                                              formatter.dateFormatter,
-                                            ],
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    Expanded(
-                                      flex: 3,
-                                      child: SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
+                                                onChanged: (value) {
+                                                  logger.d(value);
+                                                },
+                                                onSubmitted: (value) {
+                                                  logger.d(value);
+                                                },
+                                                decoration: InputDecoration(
+                                                  suffixIcon: IconButton(
+                                                    icon: const Icon(
+                                                      CupertinoIcons.calendar,
+                                                      color: Colors.grey,
+                                                    ),
+                                                    onPressed:
+                                                        picker.showPicker,
+                                                  ),
+                                                ),
+                                                inputFormatters: [
+                                                  formatter.dateFormatter,
+                                                ],
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                     fileUpload(context, currentForm,
                                         'passportFileSelect'),
@@ -312,60 +306,55 @@ class NecessaryInJapan extends StatelessWidget {
                       .map((currentForm) => ReactiveForm(
                             formGroup: currentForm,
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Expanded(child: Text('治療予定表')),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                Expanded(
-                                  child: ReactiveDatePicker<DateTime>(
-                                    formControlName: 'treatmentSchedule',
-                                    firstDate: DateTime(1900),
-                                    lastDate: DateTime(2100),
-                                    builder: (BuildContext context,
-                                        ReactiveDatePickerDelegate<dynamic>
-                                            picker,
-                                        Widget? child) {
-                                      return ReactiveTextField<DateTime>(
+                                Row(
+                                  children: [
+                                    const Text('治療予定表'),
+                                    const SizedBox(
+                                      width: 150,
+                                    ),
+                                    IntrinsicWidth(
+                                      stepWidth: 200,
+                                      child: ReactiveDatePicker<DateTime>(
                                         formControlName: 'treatmentSchedule',
-                                        valueAccessor: DateTimeValueAccessor(
-                                          dateTimeFormat:
-                                              DateFormat('yyyy/MM/dd'),
-                                        ),
-                                        onChanged: (value) {
-                                          logger.d(value);
-                                        },
-                                        onSubmitted: (value) {
-                                          logger.d(value);
-                                        },
-                                        decoration: InputDecoration(
-                                          suffixIcon: IconButton(
-                                            icon: const Icon(
-                                              CupertinoIcons.calendar,
-                                              color: Colors.grey,
+                                        firstDate: DateTime(1900),
+                                        lastDate: DateTime(2100),
+                                        builder: (BuildContext context,
+                                            ReactiveDatePickerDelegate<dynamic>
+                                                picker,
+                                            Widget? child) {
+                                          return ReactiveTextField<DateTime>(
+                                            formControlName:
+                                                'treatmentSchedule',
+                                            valueAccessor:
+                                                DateTimeValueAccessor(
+                                              dateTimeFormat:
+                                                  DateFormat('yyyy/MM/dd'),
                                             ),
-                                            onPressed: picker.showPicker,
-                                          ),
-                                        ),
-                                        inputFormatters: [
-                                          formatter.dateFormatter,
-                                        ],
-                                      );
-                                    },
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                Expanded(
-                                  flex: 3,
-                                  child: SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
+                                            onChanged: (value) {
+                                              logger.d(value);
+                                            },
+                                            onSubmitted: (value) {
+                                              logger.d(value);
+                                            },
+                                            decoration: InputDecoration(
+                                              suffixIcon: IconButton(
+                                                icon: const Icon(
+                                                  CupertinoIcons.calendar,
+                                                  color: Colors.grey,
+                                                ),
+                                                onPressed: picker.showPicker,
+                                              ),
+                                            ),
+                                            inputFormatters: [
+                                              formatter.dateFormatter,
+                                            ],
+                                          );
+                                        },
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 fileUpload(context, currentForm,
                                     'treatmentScheduleFileSelect'),
@@ -433,57 +422,51 @@ class NecessaryInJapan extends StatelessWidget {
                 height: context.appTheme.spacing.marginMedium,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Expanded(child: Text('理由書')),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
-                  ),
-                  Expanded(
-                    child: ReactiveDatePicker<DateTime>(
-                      formControlName: 'statementOfReasonsDate',
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime(2100),
-                      builder: (BuildContext context,
-                          ReactiveDatePickerDelegate<dynamic> picker,
-                          Widget? child) {
-                        return ReactiveTextField<DateTime>(
+                  Row(
+                    children: [
+                      const Text('理由書'),
+                      const SizedBox(
+                        width: 175,
+                      ),
+                      IntrinsicWidth(
+                        stepWidth: 200,
+                        child: ReactiveDatePicker<DateTime>(
                           formControlName: 'statementOfReasonsDate',
-                          valueAccessor: DateTimeValueAccessor(
-                            dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                          ),
-                          onChanged: (value) {
-                            logger.d(value);
-                          },
-                          onSubmitted: (value) {
-                            logger.d(value);
-                          },
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              icon: const Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime(2100),
+                          builder: (BuildContext context,
+                              ReactiveDatePickerDelegate<dynamic> picker,
+                              Widget? child) {
+                            return ReactiveTextField<DateTime>(
+                              formControlName: 'statementOfReasonsDate',
+                              valueAccessor: DateTimeValueAccessor(
+                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
-                              onPressed: picker.showPicker,
-                            ),
-                          ),
-                          inputFormatters: [
-                            formatter.dateFormatter,
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: SizedBox(
-                      width: context.appTheme.spacing.marginMedium,
-                    ),
-                  ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
+                              onChanged: (value) {
+                                logger.d(value);
+                              },
+                              onSubmitted: (value) {
+                                logger.d(value);
+                              },
+                              decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  icon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: picker.showPicker,
+                                ),
+                              ),
+                              inputFormatters: [
+                                formatter.dateFormatter,
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                   fileUpload(
                       context,
@@ -495,57 +478,51 @@ class NecessaryInJapan extends StatelessWidget {
                 height: context.appTheme.spacing.marginMedium,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Expanded(child: Text('同行者リスト')),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
-                  ),
-                  Expanded(
-                    child: ReactiveDatePicker<DateTime>(
-                      formControlName: 'travelCompanionListDate',
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime(2100),
-                      builder: (BuildContext context,
-                          ReactiveDatePickerDelegate<dynamic> picker,
-                          Widget? child) {
-                        return ReactiveTextField<DateTime>(
+                  Row(
+                    children: [
+                      const Text('同行者リスト'),
+                      const SizedBox(
+                        width: 135,
+                      ),
+                      IntrinsicWidth(
+                        stepWidth: 200,
+                        child: ReactiveDatePicker<DateTime>(
                           formControlName: 'travelCompanionListDate',
-                          valueAccessor: DateTimeValueAccessor(
-                            dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                          ),
-                          onChanged: (value) {
-                            logger.d(value);
-                          },
-                          onSubmitted: (value) {
-                            logger.d(value);
-                          },
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              icon: const Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime(2100),
+                          builder: (BuildContext context,
+                              ReactiveDatePickerDelegate<dynamic> picker,
+                              Widget? child) {
+                            return ReactiveTextField<DateTime>(
+                              formControlName: 'travelCompanionListDate',
+                              valueAccessor: DateTimeValueAccessor(
+                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
                               ),
-                              onPressed: picker.showPicker,
-                            ),
-                          ),
-                          inputFormatters: [
-                            formatter.dateFormatter,
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: SizedBox(
-                      width: context.appTheme.spacing.marginMedium,
-                    ),
-                  ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
+                              onChanged: (value) {
+                                logger.d(value);
+                              },
+                              onSubmitted: (value) {
+                                logger.d(value);
+                              },
+                              decoration: InputDecoration(
+                                suffixIcon: IconButton(
+                                  icon: const Icon(
+                                    CupertinoIcons.calendar,
+                                    color: Colors.grey,
+                                  ),
+                                  onPressed: picker.showPicker,
+                                ),
+                              ),
+                              inputFormatters: [
+                                formatter.dateFormatter,
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   ),
                   fileUpload(
                       context,
