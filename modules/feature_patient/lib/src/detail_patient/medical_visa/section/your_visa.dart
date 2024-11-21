@@ -22,30 +22,6 @@ class YourVisa extends StatelessWidget {
         SizedBox(
           height: context.appTheme.spacing.marginMedium,
         ),
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: context.appTheme.primaryColor,
-            ),
-            borderRadius: BorderRadius.circular(
-                context.appTheme.spacing.borderRadiusMedium),
-          ),
-          padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
-          child: Row(
-            children: [
-              const Text('医療ビザ：マルチビザ'),
-              const Text('申請日：2023/05/31'),
-              const Spacer(),
-              Icon(
-                Icons.keyboard_arrow_down_rounded,
-                color: context.appTheme.primaryColor,
-              )
-            ],
-          ),
-        ),
-        SizedBox(
-          height: context.appTheme.spacing.marginMedium,
-        ),
         ReactiveFormArray(
           formArrayName: 'personal',
           builder: (context, formArray, _) {
