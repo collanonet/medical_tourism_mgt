@@ -141,8 +141,11 @@ class AgentScreen extends StatelessWidget {
                                             Text(
                                               value.manager?.fullNameRomanji ??
                                                   '--',
-                                              style:
-                                                  context.textTheme.bodyMedium,
+                                              style: context
+                                                  .textTheme.bodyMedium
+                                                  ?.copyWith(
+                                                      color: context.appTheme
+                                                          .primaryColor),
                                             ),
                                             Text(
                                               '${value.manager?.fullNameChineseKanjiVietnameseNotation ?? '--'} / ${value.manager?.fullNameJapaneseKanjiChineseOnly ?? '--'}',

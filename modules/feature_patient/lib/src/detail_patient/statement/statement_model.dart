@@ -1,12 +1,10 @@
 // Flutter imports:
 import 'dart:convert';
-import 'package:excel/excel.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_network/core_network.dart';
@@ -484,9 +482,9 @@ Future<Uint8List?> generatePdfFromInvoice(
       break;
 
     default:
-      title = 'Quotation';
-      quotationNumberLabel = 'Quotation number: ';
-      quotationDateLabel = 'Quotation date: ';
+      title = 'Invoice';
+      quotationNumberLabel = 'Invoice number: ';
+      quotationDateLabel = 'Invoice date: ';
       totalAmountLabel = 'Total amount: ';
       tableHeaders = ['', 'Item', 'Quantity', 'Unit', 'Unit Price', 'Amount'];
       subTotalLabel = 'Sub Total';
@@ -556,10 +554,11 @@ Future<Uint8List?> generatePdfFromInvoice(
                     children: [
                       pw.Text(
                         '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
-                            ' 様',
+                        ' 様',
                         style: pw.TextStyle(
-                          font: ttfJP,
-                          fontWeight: pw.FontWeight.bold,
+                          font: ttf,
+                          fontSize: 30,
+                          //fontWeight: pw.FontWeight.bold,
                         ),
                       ),
                       pw.Text(
@@ -712,34 +711,34 @@ Future<Uint8List?> generatePdfFromInvoice(
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
           headerCellDecoration:
-          const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+              const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
           oddCellStyle: pw.TextStyle(font: ttfJP),
           cellStyle: pw.TextStyle(font: ttfJP),
           data: request.item
-              ?.map((item) => [
-            pw.Text(
-              item.itemCode ?? '--',
-              style: pw.TextStyle(
-                font: ttfJP,
-                fontWeight: pw.FontWeight.bold,
-                fontSize: 9,
-              ),
-            ),
-            pw.Text(
-              item.details ?? '',
-              style: pw.TextStyle(
-                font: ttfJP,
-                fontWeight: pw.FontWeight.normal,
-                fontSize: 10,
-              ),
-            ),
-            item.quantity ?? '',
-            item.unit ?? '',
-            Strings.formatCurrency(item.unitPrice ?? 0),
-            Strings.formatCurrency(
-                (item.quantity ?? 0) * (item.unitPrice ?? 0)),
-          ])
-              .toList() ??
+                  ?.map((item) => [
+                        pw.Text(
+                          item.itemCode ?? '--',
+                          style: pw.TextStyle(
+                            font: ttfJP,
+                            fontWeight: pw.FontWeight.bold,
+                            fontSize: 9,
+                          ),
+                        ),
+                        pw.Text(
+                          item.details ?? '',
+                          style: pw.TextStyle(
+                            font: ttfJP,
+                            fontWeight: pw.FontWeight.normal,
+                            fontSize: 10,
+                          ),
+                        ),
+                        item.quantity ?? '',
+                        item.unit ?? '',
+                        Strings.formatCurrency(item.unitPrice ?? 0),
+                        Strings.formatCurrency(
+                            (item.quantity ?? 0) * (item.unitPrice ?? 0)),
+                      ])
+                  .toList() ??
               [
                 [
                   '',
@@ -765,22 +764,22 @@ Future<Uint8List?> generatePdfFromInvoice(
             1: const pw.FlexColumnWidth(12),
           },
           data: request.notes
-              ?.map((note) => [
-            pw.Row(
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                children: [
-                  pw.Text(
-                    note.note ?? '',
-                    style: pw.TextStyle(
-                      font: ttfJP,
-                      fontWeight: pw.FontWeight.normal,
-                      fontSize: 10,
-                    ),
-                    textAlign: pw.TextAlign.left,
-                  )
-                ]),
-          ])
-              .toList() ??
+                  ?.map((note) => [
+                        pw.Row(
+                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                            children: [
+                              pw.Text(
+                                note.note ?? '',
+                                style: pw.TextStyle(
+                                  font: ttfJP,
+                                  fontWeight: pw.FontWeight.normal,
+                                  fontSize: 10,
+                                ),
+                                textAlign: pw.TextAlign.left,
+                              )
+                            ]),
+                      ])
+                  .toList() ??
               [
                 [
                   '',
@@ -829,17 +828,17 @@ Future<Uint8List?> generatePdfFromInvoice(
         ]),
         pw.TableHelper.fromTextArray(
             headerCellDecoration:
-            const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+                const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
             headerDecoration:
-            const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+                const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
             cellDecoration: (i, _, __) {
               return const pw.BoxDecoration(
                   color: PdfColor.fromInt(0xff98FF98));
             },
             rowDecoration:
-            const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+                const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
             oddRowDecoration:
-            const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+                const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
             headerHeight: 0,
             columnWidths: {
               0: const pw.FlexColumnWidth(10),
