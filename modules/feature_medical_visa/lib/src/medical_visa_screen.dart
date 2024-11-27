@@ -97,42 +97,240 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                       titleHeader: const SizedBox(),
                     ),
                     HeaderTableData(
-                      flex: 3,
-                      titleHeader: Text(context.l10n.labelPatient),
+                      flex: 2,
+                      titleHeader: Row(
+                        children: [
+                          Text(context.l10n.labelPatient),
+                          Container(
+                            width: 23,
+                            height: 23,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.arrow_drop_down,
+                                color: Color.fromARGB(255, 9, 239, 235),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     HeaderTableData(
                       flex: 2,
-                      titleHeader: Text(context.l10n.labelAgent),
+                      titleHeader: Row(
+                        children: [
+                          Text(context.l10n.labelAgent),
+                          Container(
+                            width: 23,
+                            height: 23,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.arrow_drop_down,
+                                color: Color.fromARGB(255, 9, 239, 235),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     HeaderTableData(
-                      titleHeader: Text(context.l10n.labelProgress),
+                      titleHeader: Row(
+                        children: [
+                          Text(context.l10n.labelProgress),
+                          Container(
+                            width: 23,
+                            height: 23,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.arrow_drop_down,
+                                color: Color.fromARGB(255, 9, 239, 235),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     HeaderTableData(
                       titleHeader: Text(context.l10n.labelCaseNumber),
                     ),
                     HeaderTableData(
-                      titleHeader: Text(context.l10n.labelClassification),
+                      titleHeader: Row(
+                        children: [
+                          Text(context.l10n.labelClassification),
+                          Container(
+                            width: 23,
+                            height: 23,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.arrow_drop_down,
+                                color: Color.fromARGB(255, 9, 239, 235),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     HeaderTableData(
-                      titleHeader: Text(context.l10n.labelEntryDate),
+                      titleHeader: Row(
+                        children: [
+                          Text(context.l10n.labelEntryDate),
+                          Container(
+                            width: 23,
+                            height: 23,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.arrow_drop_down,
+                                color: Color.fromARGB(255, 9, 239, 235),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     HeaderTableData(
-                      titleHeader: Text(context.l10n.labelExaminationDate),
+                      titleHeader: Row(
+                        children: [
+                          Text(context.l10n.labelExaminationDate),
+                          Container(
+                            width: 23,
+                            height: 23,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.arrow_drop_down,
+                                color: Color.fromARGB(255, 9, 239, 235),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     HeaderTableData(
-                      titleHeader: Text(context.l10n.labelReturnDate),
+                      titleHeader: Row(
+                        children: [
+                          Text(context.l10n.labelReturnDate),
+                          Container(
+                            width: 23,
+                            height: 23,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.arrow_drop_down,
+                                color: Color.fromARGB(255, 9, 239, 235),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     HeaderTableData(
-                      titleHeader: Text(context.l10n.labelNationality),
+                      titleHeader: Row(
+                        children: [
+                          Text(context.l10n.labelNationality),
+                          Container(
+                            width: 23,
+                            height: 23,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.arrow_drop_down,
+                                color: Color.fromARGB(255, 9, 239, 235),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     HeaderTableData(
-                      titleHeader: Text(context.l10n.labelNameOfaDisease),
+                      titleHeader: Row(
+                        children: [
+                          Text(context.l10n.labelNameOfaDisease),
+                          Container(
+                            width: 23,
+                            height: 23,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.arrow_drop_down,
+                                color: Color.fromARGB(255, 9, 239, 235),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     HeaderTableData(
-                      titleHeader: Text(context.l10n.labelSale),
+                      titleHeader: Row(
+                        children: [
+                          Text(context.l10n.labelSale),
+                          Container(
+                            width: 23,
+                            height: 23,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.arrow_drop_down,
+                                color: Color.fromARGB(255, 9, 239, 235),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     HeaderTableData(
-                      titleHeader: Text(context.l10n.labelStaffName),
+                      titleHeader: Row(
+                        children: [
+                          Text(context.l10n.labelStaffName),
+                          Container(
+                            width: 23,
+                            height: 23,
+                            decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey),
+                              borderRadius: BorderRadius.circular(5),
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.arrow_drop_down,
+                                color: Color.fromARGB(255, 9, 239, 235),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
                     ),
                     HeaderTableData(
                       titleHeader: Text(context.l10n.labelAdmittedToHospital),
