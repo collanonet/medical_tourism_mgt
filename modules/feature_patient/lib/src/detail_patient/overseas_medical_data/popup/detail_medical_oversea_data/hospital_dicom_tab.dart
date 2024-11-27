@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -11,7 +12,9 @@ class HospitalDICOMTab extends StatelessWidget {
     super.key,
     this.medicalRecordOverseaData,
   });
+
   final MedicalRecordOverseaData? medicalRecordOverseaData;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -29,29 +32,21 @@ class HospitalDICOMTab extends StatelessWidget {
               hintText: 'コメント 大阪府済生会吹田病院',
             ),
           ),
-
           TextFormField(
             decoration: const InputDecoration(
               isDense: true,
               hintText: 'コメント 自社',
             ),
           ),
-
           TextFormField(
             decoration: const InputDecoration(
               isDense: true,
               hintText: 'コメント 大阪府済生会吹田病院',
             ),
           ),
-          Avatar.network(
-            medicalRecordOverseaData?.file,
-            placeholder: const AssetImage(
-              Images.logoMadical,
-              package: 'core_ui',
-            ),
-            shape: BoxShape.rectangle,
-            customSize: const Size(200, 200),
-          )
+          if (medicalRecordOverseaData?.file != null &&
+              medicalRecordOverseaData?.file?.isNotEmpty == true)
+            DicomWebViewer(seriesId: medicalRecordOverseaData?.file?.first.parentSeries ?? ''),
         ],
       ),
     );

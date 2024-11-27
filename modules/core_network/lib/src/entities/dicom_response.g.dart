@@ -8,20 +8,20 @@ part of 'dicom_response.dart';
 
 DicomResponse _$DicomResponseFromJson(Map<String, dynamic> json) =>
     DicomResponse(
-      id: json['id'] as String,
-      parentPatient: json['parentPatient'] as String,
-      parentSeries: json['parentSeries'] as String,
-      parentStudy: json['parentStudy'] as String,
-      path: json['path'] as String,
-      status: json['status'] as String,
+      id: json['ID'] as String,
+      parentPatient: json['ParentPatient'] as String,
+      parentSeries: json['ParentSeries'] as String,
+      parentStudy: json['ParentStudy'] as String,
+      path: json['Path'] as String,
+      status: json['Status'] as String,
     );
 
 Map<String, dynamic> _$DicomResponseToJson(DicomResponse instance) =>
     <String, dynamic>{
-      'id': instance.id,
-      'parentPatient': instance.parentPatient,
-      'parentSeries': instance.parentSeries,
-      'parentStudy': instance.parentStudy,
-      'path': instance.path,
-      'status': instance.status,
+      'ID': instance.id,
+      'ParentPatient': instance.parentPatient,
+      'ParentSeries': instance.parentSeries,
+      'ParentStudy': instance.parentStudy,
+      'Path': instance.path,
+      'Status': instance.status,
     };

@@ -27,3 +27,4 @@ export './src/dicom_viewer.dart';
 export './src/dicom_web_viewer.dart';
 export './src/update_dicom_file.dart';
 export './src/get_dicom_detail.dart';
+export './src/webview.dart';

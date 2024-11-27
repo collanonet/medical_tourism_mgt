@@ -37,11 +37,22 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
       children: [
         InkWell(
           onTap: () {
-            filePicker().then((value) {
-              if (value != null) {
+            uploadDICOMFile().then((value) {
+              if (value.isNotEmpty) {
                 showCreateWithFileDialog(context, value);
               }
+            }).catchError((e) {
+              snackBarWidget(
+                message: 'ファイル DICOM のアップロードでエラーが発生しました。ファイルが DICOM であることを確認してください',
+                backgroundColor: Colors.red,
+                prefixIcon: const Icon(Icons.error, color: Colors.white),
+              );
             });
+            // filePicker().then((value) {
+            //   if (value != null) {
+            //     showCreateWithFileDialog(context, value);
+            //   }
+            // });
           },
           child: Container(
             padding: EdgeInsets.all(
@@ -82,11 +93,23 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        filePicker().then((value) {
-                          if (value != null) {
+                        uploadDICOMFile().then((value) {
+                          if (value.isNotEmpty) {
                             showCreateWithFileDialog(context, value);
                           }
+                        }).catchError((e) {
+                          snackBarWidget(
+                            message: 'ファイル DICOM のアップロードでエラーが発生しました。ファイルが DICOM であることを確認してください',
+                            backgroundColor: Colors.red,
+                            prefixIcon: const Icon(Icons.error, color: Colors.white),
+                          );
                         });
+                        //
+                        // filePicker().then((value) {
+                        //   if (value != null) {
+                        //     showCreateWithFileDialog(context, value);
+                        //   }
+                        // });
                       },
                       child: const Text(
                         'またはファイルを選択する',
@@ -463,7 +486,7 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
     );
   }
 
-  void showCreateWithFileDialog(BuildContext context, FileSelect file) {
+  void showCreateWithFileDialog(BuildContext context, List<DicomDetailResponse> file) {
     showDialog(
       context: context,
       builder: (_) => Provider.value(

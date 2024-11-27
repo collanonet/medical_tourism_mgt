@@ -9,7 +9,9 @@ part of 'medical_record_oversea_data_request.dart';
 MedicalRecordOverseaDataRequest _$MedicalRecordOverseaDataRequestFromJson(
         Map<String, dynamic> json) =>
     MedicalRecordOverseaDataRequest(
-      file: json['file'] as String?,
+      file: (json['file'] as List<dynamic>?)
+          ?.map((e) => DicomDetailResponse.fromJson(e as Map<String, dynamic>))
+          .toList(),
       hospitalName: json['hospitalName'] as String?,
       category: json['category'] as String?,
       documentName: json['documentName'] as String?,
