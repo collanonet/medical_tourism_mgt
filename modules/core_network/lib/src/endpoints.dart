@@ -262,4 +262,10 @@ class EndPoints {
   static const INVOICE = '/invoices';
   //A14
   static const BILLING = '/billing';
+
+
+
+  // Dicom endpoint
+
+  static const DICOM = '/instances';
 }

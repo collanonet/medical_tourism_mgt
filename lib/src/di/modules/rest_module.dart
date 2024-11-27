@@ -16,14 +16,13 @@ import '../injection.dart';
 @module
 abstract class RestModule {
   @lazySingleton
-  RestClient restClient(
+  RestClient restApiClient(
     @Named('baseUrl') Uri baseUrl,
     @Named('apiKey') String apiKey,
     CacheOptions cacheOptions,
   ) {
     return RestClient(baseUrl.toString())
       ..headers.addAll({'Api-Key': apiKey})
-      ..addIntercepter(MerchantInterceptor())
       ..addIntercepter(TokenInterceptor())
       ..addIntercepter(ErrorInterceptor())
       ..setDebug(kDebugMode)
@@ -57,6 +56,15 @@ abstract class RestModule {
   @singleton
   CacheOptions get cacheOptions {
     return CacheOptions(store: MemCacheStore());
+  }
+
+  @Order(0)
+  @Named('baseUrlDicom')
+  Uri get baseUrlDicom {
+    return Uri(
+      scheme: 'https',
+      host: 'orthanc-dicon-server-collabonet.pixelplatforms.com',
+    );
   }
 
   @local
@@ -145,8 +153,6 @@ abstract class RestModule {
   String get prodFileUrl =>
       'https://medical-tourism-api-prod-collabonet.pixelplatforms.com/files/';
 }
-
-class MerchantInterceptor extends Interceptor {}
 
 class TokenInterceptor extends Interceptor {
   @override

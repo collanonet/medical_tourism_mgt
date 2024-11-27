@@ -18,7 +18,9 @@ part 'api_service.g.dart';
 @singleton
 abstract class ApiService {
   @factoryMethod
-  factory ApiService(RestClient client) {
+  factory ApiService({
+    required RestClient client,
+  }) {
     return _ApiService(client.dio, baseUrl: client.baseUrl);
   }
 

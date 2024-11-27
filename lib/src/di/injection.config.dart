@@ -132,7 +132,7 @@ extension GetItInjectableX on _i1.GetIt {
       instanceName: 'apiKey',
       registerFor: {_stage},
     );
-    gh.lazySingleton<_i19.RestClient>(() => restModule.restClient(
+    gh.lazySingleton<_i19.RestClient>(() => restModule.restApiClient(
           gh<Uri>(instanceName: 'baseUrl'),
           gh<String>(instanceName: 'apiKey'),
           gh<_i16.CacheOptions>(),
@@ -166,6 +166,10 @@ extension GetItInjectableX on _i1.GetIt {
     gh.factory<_i20.Locale>(
       () => appModule.defaultLocale,
       instanceName: 'defaultLocale',
+    );
+    gh.factory<Uri>(
+      () => restModule.baseUrlDicom,
+      instanceName: 'baseUrlDicom',
     );
     gh.lazySingleton<_i21.AppModel>(() => _i21.AppModel(
           auth: gh<_i22.AuthModel>(),
