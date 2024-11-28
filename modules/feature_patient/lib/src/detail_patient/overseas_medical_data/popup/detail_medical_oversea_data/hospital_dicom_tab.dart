@@ -46,7 +46,11 @@ class HospitalDICOMTab extends StatelessWidget {
           ),
           if (medicalRecordOverseaData?.file != null &&
               medicalRecordOverseaData?.file?.isNotEmpty == true)
-            DicomWebViewer(seriesId: medicalRecordOverseaData?.file?.first.parentSeries ?? ''),
+            Expanded(
+              child: DicomWebViewer(
+                  seriesId:
+                      medicalRecordOverseaData?.file?.first.parentSeries ?? ''),
+            ),
         ],
       ),
     );

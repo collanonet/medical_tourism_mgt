@@ -40,7 +40,7 @@ Future<List<DicomDetailResponse>> uploadDICOMFile() async {
         ),
       });
 
-      // try {
+      try {
         final response = await dio.post(
           'https://orthanc-dicon-server-collabonet.pixelplatforms.com/instances',
           data: formData,
@@ -59,17 +59,17 @@ Future<List<DicomDetailResponse>> uploadDICOMFile() async {
           completer
               .completeError('Failed to upload file: ${response.statusCode}');
         }
-      // } catch (e) {
-      //   if (e is DioError) {
-      //     logger.e('DioError occurred: ${e.message}');
-      //     if (e.response != null) {
-      //       logger.e('Response data: ${e.response?.data}');
-      //     }
-      //   } else {
-      //     logger.e('Error occurred during file upload: $e');
-      //   }
-      //   completer.completeError('Error occurred during file upload: $e');
-      // }
+      } catch (e) {
+        if (e is DioError) {
+          logger.e('DioError occurred: ${e.message}');
+          if (e.response != null) {
+            logger.e('Response data: ${e.response?.data}');
+          }
+        } else {
+          logger.e('Error occurred during file upload: $e');
+        }
+        completer.completeError('Error occurred during file upload: $e');
+      }
     }
   });
 

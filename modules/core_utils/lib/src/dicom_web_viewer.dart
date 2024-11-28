@@ -19,15 +19,11 @@ class DicomWebViewer extends StatelessWidget {
     // Encode the Basic Auth token
     // final token = base64Encode(utf8.encode('orthanc:orthanc123#_123'));
 
-    return SizedBox(
-      height: 500,
-      width: 500,
-      child: WebView(
-        uri: Uri.parse(viewerUrl),
-        allowedHosts: [
-          viewerUrl
-        ],
-      ),
+    return WebView(
+      uri: Uri.parse(viewerUrl),
+      allowedHosts: [
+        viewerUrl
+      ],
     );
   }
 }

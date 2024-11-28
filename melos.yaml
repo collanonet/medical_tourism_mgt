@@ -203,19 +203,19 @@ scripts:
     description: "hosting_web_dev"
     run: |
       cp firebase-dev.json firebase.json && \
-      fvm flutter build web --release -t lib/main_dev.dart && \
+      fvm flutter build web --release --web-renderer html -t lib/main_dev.dart && \
       firebase deploy --only hosting
 
   web_stage:
     description: "hosting_web_stage"
     run: |
       cp firebase-stage.json firebase.json && \
-      fvm flutter build web --release -t lib/main_stage.dart && \
+      fvm flutter build web --release --web-renderer html -t lib/main_stage.dart && \
       firebase deploy --only hosting:medical-tourism-stage
 
   web_prod:
     description: "hosting_web_stage"
     run: |
       cp firebase-prod.json firebase.json && \
-      fvm flutter build web --release -t lib/main_prod.dart && \
+      fvm flutter build web --release --web-renderer html -t lib/main_prod.dart && \
       firebase deploy --only hosting:medical-tourism-prod

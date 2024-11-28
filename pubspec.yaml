@@ -113,6 +113,7 @@ dependencies:
   archive: ^3.6.1
   js: ^0.6.7
   webview_flutter_web: ^0.2.3+2
+  webview_flutter_platform_interface: ^2.10.0
 
 
 dev_dependencies:
