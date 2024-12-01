@@ -18,6 +18,11 @@ class EstimateScreenList extends StatefulWidget {
 
 class _EstimateScreenListState extends State<EstimateScreenList> {
   ValueNotifier<List<String>> selected = ValueNotifier([]);
+  @override
+  void dispose() {
+    context.watch<EstimateModel>().medicalQuotationData;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -456,13 +461,16 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                                                     ),
                                                     TextButton(
                                                       onPressed: () {
-                                                        context
+                                                        setState(() {
+                                                            context
                                                             .read<
                                                                 EstimateModel>()
                                                             .moveToInvoice(
                                                                 sels);
                                                         Navigator.of(context)
                                                             .pop();
+                                                        });
+                                                        
                                                       },
                                                       child: const Text('移動する'),
                                                     ),

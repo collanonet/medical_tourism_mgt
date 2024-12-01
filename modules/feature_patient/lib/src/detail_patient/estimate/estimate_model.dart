@@ -77,6 +77,7 @@ class EstimateModel {
       FormArray notes = formGroup.control('notes') as FormArray;
 
       for (var note in invoice.notes!) {
+        notes.reset();
         notes.add(
           FormGroup({
             '_id': FormControl<String>(value: note.id),
