@@ -362,11 +362,11 @@ class StatementModel {
         loading: true,
       );
       final response = await patientRepository.putInvoice(id, request);
-      medicalInvoiceData.value = AsyncData(data: [
-        response,
-        ...medicalInvoiceData.value.data ??
-            [].where((element) => element.id != response.id),
-      ]);
+      medicalInvoiceData.value = AsyncData(
+        data: medicalInvoiceData.value.data ?? []
+          ..removeWhere((element) => element.id == id)
+          ..add(response),
+      );
     } catch (e) {
       logger.e(e);
       medicalInvoiceData.value = AsyncData(error: e);
