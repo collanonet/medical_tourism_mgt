@@ -51,6 +51,14 @@ class HospitalDICOMTab extends StatelessWidget {
                   seriesId:
                       medicalRecordOverseaData?.file?.first.parentSeries ?? ''),
             ),
+
+          if(medicalRecordOverseaData?.sharedUrl != null &&
+              medicalRecordOverseaData?.sharedUrl?.isNotEmpty == true)
+            Expanded(
+              child: WebView(
+                  uri: Uri.parse(medicalRecordOverseaData?.sharedUrl ?? ''),
+              ),
+            ),
         ],
       ),
     );
