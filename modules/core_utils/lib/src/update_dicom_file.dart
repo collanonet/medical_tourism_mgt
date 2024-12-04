@@ -8,11 +8,10 @@ import 'package:core_network/core_network.dart';
 import 'package:dio/dio.dart';
 
 import '../core_utils.dart';
-import 'get_dicom_detail.dart';
 
 Future<List<DicomDetailResponse>> uploadDICOMFile() async {
   html.FileUploadInputElement uploadInput = html.FileUploadInputElement();
-  uploadInput.accept = '.dcm,.dicom,*';
+  uploadInput.accept = '*';
   uploadInput.click();
 
   List<DicomDetailResponse> dicomResponses = [];
@@ -60,7 +59,7 @@ Future<List<DicomDetailResponse>> uploadDICOMFile() async {
               .completeError('Failed to upload file: ${response.statusCode}');
         }
       } catch (e) {
-        if (e is DioError) {
+        if (e is DioException) {
           logger.e('DioError occurred: ${e.message}');
           if (e.response != null) {
             logger.e('Response data: ${e.response?.data}');

@@ -48,11 +48,6 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                 prefixIcon: const Icon(Icons.error, color: Colors.white),
               );
             });
-            // filePicker().then((value) {
-            //   if (value != null) {
-            //     showCreateWithFileDialog(context, value);
-            //   }
-            // });
           },
           child: Container(
             padding: EdgeInsets.all(
@@ -104,12 +99,6 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                             prefixIcon: const Icon(Icons.error, color: Colors.white),
                           );
                         });
-                        //
-                        // filePicker().then((value) {
-                        //   if (value != null) {
-                        //     showCreateWithFileDialog(context, value);
-                        //   }
-                        // });
                       },
                       child: const Text(
                         'またはファイルを選択する',

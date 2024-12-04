@@ -76,16 +76,16 @@ class _WebAppointmentDetailScreenState
                                     .read<WebAppointmentDetailModel>()
                                     .patient,
                                 onListen: () {
-                                  var data = context
-                                      .read<WebAppointmentDetailModel>()
-                                      .patient
-                                      .value;
+                                  // var data = context
+                                  //     .read<WebAppointmentDetailModel>()
+                                  //     .patient
+                                  //     .value;
 
-                                  if (data.hasError) {
-                                    snackBarWidget(
-                                        message: '患者が見つからない。',
-                                        backgroundColor: Colors.red);
-                                  }
+                                  // if (data.hasError) {
+                                  //   snackBarWidget(
+                                  //       message: '患者が見つからない。',
+                                  //       backgroundColor: Colors.red);
+                                  // }
                                 },
                                 child: ValueListenableBuilder(
                                     valueListenable: context

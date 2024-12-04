@@ -80,7 +80,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                             ),
                             const SizedBox(height: 16),
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 InkWell(
                                   onTap: () {
@@ -114,9 +114,9 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                         context.appTheme.spacing.marginSmall),
                                 Expanded(
                                     child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    IntrinsicWidth(
-                                      stepWidth: 250,
+                                    Expanded(
                                       child: ReactiveDatePicker<DateTime>(
                                         formControlName:
                                             'reservation_date_from',
@@ -162,8 +162,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                         ),
                                       ),
                                     ),
-                                    IntrinsicWidth(
-                                      stepWidth: 250,
+                                    Expanded(
                                       child: ReactiveDatePicker<DateTime>(
                                         formControlName: 'reservation_date_to',
                                         firstDate: DateTime(1900),

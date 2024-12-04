@@ -15,7 +15,6 @@ DicomDetailResponse _$DicomDetailResponseFromJson(Map<String, dynamic> json) =>
       mainDicomTags:
           MainDicomTags.fromJson(json['MainDicomTags'] as Map<String, dynamic>),
       parentSeries: json['ParentSeries'] as String,
-      type: json['Type'] as String,
     );
 
 Map<String, dynamic> _$DicomDetailResponseToJson(
@@ -27,19 +26,22 @@ Map<String, dynamic> _$DicomDetailResponseToJson(
       'IndexInSeries': instance.indexInSeries,
       'MainDicomTags': instance.mainDicomTags,
       'ParentSeries': instance.parentSeries,
-      'Type': instance.type,
     };
 
 MainDicomTags _$MainDicomTagsFromJson(Map<String, dynamic> json) =>
     MainDicomTags(
-      instanceNumber: json['InstanceNumber'] as String,
-      numberOfFrames: json['NumberOfFrames'] as String,
-      sopInstanceUID: json['SOPInstanceUID'] as String,
+      instanceNumber: json['InstanceNumber'] as String?,
+      instanceCreationDate: json['InstanceCreationDate'] as String?,
+      instanceCreationTime: json['InstanceCreationTime'] as String?,
+      numberOfFrames: json['NumberOfFrames'] as String?,
+      sopInstanceUID: json['SOPInstanceUID'] as String?,
     );
 
 Map<String, dynamic> _$MainDicomTagsToJson(MainDicomTags instance) =>
     <String, dynamic>{
       'InstanceNumber': instance.instanceNumber,
+      'InstanceCreationDate': instance.instanceCreationDate,
+      'InstanceCreationTime': instance.instanceCreationTime,
       'NumberOfFrames': instance.numberOfFrames,
       'SOPInstanceUID': instance.sopInstanceUID,
     };

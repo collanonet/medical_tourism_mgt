@@ -16,8 +16,6 @@ class DicomDetailResponse {
   final MainDicomTags mainDicomTags;
   @JsonKey(name: 'ParentSeries')
   final String parentSeries;
-  @JsonKey(name: 'Type')
-  final String type;
 
   DicomDetailResponse({
     required this.fileSize,
@@ -26,7 +24,6 @@ class DicomDetailResponse {
     this.indexInSeries,
     required this.mainDicomTags,
     required this.parentSeries,
-    required this.type,
   });
 
   factory DicomDetailResponse.fromJson(Map<String, dynamic> json) =>
@@ -38,16 +35,22 @@ class DicomDetailResponse {
 @JsonSerializable()
 class MainDicomTags {
   @JsonKey(name: 'InstanceNumber')
-  final String instanceNumber;
+  final String? instanceNumber;
+  @JsonKey(name: 'InstanceCreationDate')
+  final String? instanceCreationDate;
+  @JsonKey(name: 'InstanceCreationTime')
+  final String? instanceCreationTime;
   @JsonKey(name: 'NumberOfFrames')
-  final String numberOfFrames;
+  final String? numberOfFrames;
   @JsonKey(name: 'SOPInstanceUID')
-  final String sopInstanceUID;
+  final String? sopInstanceUID;
 
   MainDicomTags({
-    required this.instanceNumber,
-    required this.numberOfFrames,
-    required this.sopInstanceUID,
+    this.instanceNumber,
+    this.instanceCreationDate,
+    this.instanceCreationTime,
+    this.numberOfFrames,
+    this.sopInstanceUID,
   });
 
   factory MainDicomTags.fromJson(Map<String, dynamic> json) =>

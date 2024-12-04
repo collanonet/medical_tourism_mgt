@@ -56,9 +56,12 @@ class _CreateMedicalOverseaDataWithUrlScreenState
                 '共有用URL',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
-              ReactiveTextField(
-                formControlName: 'sharedUrl',
-                keyboardType: TextInputType.url,
+              SizedBox(
+                width: 300,
+                child: ReactiveTextField(
+                  formControlName: 'sharedUrl',
+                  keyboardType: TextInputType.url,
+                ),
               ),
               Text(
                 'パスワード',
