@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:core_network/core_network.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -10,8 +11,15 @@ import 'package:feature_chats/src/chat_model.dart';
 import 'filter_chat.dart';
 import 'message_screen.dart';
 
-class ChatScreen extends StatelessWidget {
+class ChatScreen extends StatefulWidget {
   const ChatScreen({super.key});
+
+  @override
+  State<ChatScreen> createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  ValueNotifier<Patient?> _selectedPatient = ValueNotifier(null);
 
   @override
   Widget build(BuildContext context) {
@@ -19,82 +27,64 @@ class ChatScreen extends StatelessWidget {
       return Row(
         children: [
           Expanded(
+            flex: 1,
             child: Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16), color: Colors.white),
               padding: const EdgeInsets.all(16),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const ChatFilter(),
                   const SizedBox(height: 16),
                   Expanded(
                     child: SizedBox(
                       height: MediaQuery.of(context).size.height * 0.8,
-                      child: ListView.builder(
-                          physics: const AlwaysScrollableScrollPhysics(),
-                          itemCount: model.patientData.data?.items.length ?? 0,
-                          itemBuilder: (context, index) {
-                            var item = model.patientData.data?.items[index];
-                            return Container(
-                              decoration: BoxDecoration(
-                                color: index % 2 != 0
-                                    ? Colors.white
-                                    : const Color(0xffEDF8F8),
-                                borderRadius: BorderRadius.circular(4),
-                              ),
-                              child: ListTile(
-                                tileColor: index % 2 == 0
-                                    ? context.appTheme.primaryColor
-                                    : Colors.white,
-                                leading: Container(
-                                  height: 60,
-                                  width: 60,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(16),
-                                    color: Colors.grey.shade300,
-                                  ),
-                                  child: const Icon(
-                                    Icons.person,
-                                    color: Colors.white,
-                                    size: 50,
-                                  ),
-                                ),
-                                title: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceAround,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      '${item?.firstNameRomanized ?? '-'} ${item?.middleNameRomanized ?? '-'} ${item?.familyNameRomanized ?? '-'}',
-                                      style: TextStyle(
-                                        color: context.appTheme.primaryColor,
-                                        fontFamily: 'NotoSansJP',
-                                        package: 'core_ui',
-                                      ),
+                      child: ValueListenableBuilder(
+                          valueListenable: _selectedPatient,
+                          builder: (context, value, _) {
+                            return ListView.builder(
+                                physics: const AlwaysScrollableScrollPhysics(),
+                                itemCount:
+                                    model.patientData.data?.items.length ?? 0,
+                                itemBuilder: (context, index) {
+                                  var item =
+                                      model.patientData.data?.items[index];
+                                  return Container(
+                                    decoration: BoxDecoration(
+                                      color: index % 2 != 0
+                                          ? Colors.white
+                                          : const Color(0xffEDF8F8),
+                                      borderRadius: BorderRadius.circular(4),
+                                      border: Border.all(
+                                          color: value == item
+                                              ? Colors.blue
+                                              : Colors.transparent,
+                                          width: 1),
                                     ),
-                                    // Icon(
-                                    //   Icons.star,
-                                    //   color: Colors.orange,
-                                    // ),
-                                    // Spacer(),
-                                    // Container(
-                                    //   padding: const EdgeInsets.symmetric(
-                                    //       horizontal: 4, vertical: 2),
-                                    //   decoration: BoxDecoration(
-                                    //     borderRadius: BorderRadius.circular(4),
-                                    //     color: Colors.red,
-                                    //   ),
-                                    //   child: Text(
-                                    //     '出国報告書対象者',
-                                    //     style: TextStyle(color: Colors.white),
-                                    //   ),
-                                    // )
-                                  ],
-                                ),
-                                subtitle: Text(
-                                    '${item?.firstNameChineseOrVietnamese ?? '-'} ${item?.middleNameChineseOrVietnamese ?? '-'} ${item?.familyNameChineseOrVietnamese ?? '-'} / ${item?.firstNameJapaneseForChinese ?? '-'} ${item?.middleNameJapaneseForChinese ?? '-'} ${item?.familyNameJapaneseForChinese ?? '-'} / ${item?.firstNameJapaneseForNonChinese ?? '-'} ${item?.middleNameJapaneseForNonChinese ?? '-'} ${item?.familyNameJapaneseForNonChinese ?? '-'} '),
-                              ),
-                            );
+                                    child: ListTile(
+                                      onTap: () {
+                                        _selectedPatient.value = item;
+                                      },
+                                      selected: value == item,
+                                      selectedColor: Colors.blue,
+                                      selectedTileColor: Colors.blue,
+                                      tileColor: index % 2 == 0
+                                          ? context.appTheme.primaryColor
+                                          : Colors.white,
+                                      title: Text(
+                                        '${item?.firstNameRomanized ?? '-'} ${item?.middleNameRomanized ?? '-'} ${item?.familyNameRomanized ?? '-'}',
+                                        style: TextStyle(
+                                          color: context.appTheme.primaryColor,
+                                          fontFamily: 'NotoSansJP',
+                                          package: 'core_ui',
+                                        ),
+                                      ),
+                                      subtitle: Text(
+                                          '${item?.firstNameChineseOrVietnamese ?? '-'} ${item?.middleNameChineseOrVietnamese ?? '-'} ${item?.familyNameChineseOrVietnamese ?? '-'} / ${item?.firstNameJapaneseForChinese ?? '-'} ${item?.middleNameJapaneseForChinese ?? '-'} ${item?.familyNameJapaneseForChinese ?? '-'} / ${item?.firstNameJapaneseForNonChinese ?? '-'} ${item?.middleNameJapaneseForNonChinese ?? '-'} ${item?.familyNameJapaneseForNonChinese ?? '-'} '),
+                                    ),
+                                  );
+                                });
                           }),
                     ),
                   ),
@@ -103,7 +93,16 @@ class ChatScreen extends StatelessWidget {
             ),
           ),
           const VerticalDivider(),
-          const Expanded(child: MessageScreen()),
+          Expanded(
+            flex: 2,
+            child: ValueListenableBuilder(
+                valueListenable: _selectedPatient,
+                builder: (context, value, _) {
+                  return MessageScreen(
+                    patient: value,
+                  );
+                }),
+          ),
         ],
       );
     });
