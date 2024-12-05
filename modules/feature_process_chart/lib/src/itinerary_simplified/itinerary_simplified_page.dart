@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 import 'package:core_utils/core_utils.dart';
-import '../filter_process_chart_form.dart';
 import 'itinerary_simplified_form.dart';
 import 'itinerary_simplified_model.dart';
 import 'itinerary_simplified_screen.dart';

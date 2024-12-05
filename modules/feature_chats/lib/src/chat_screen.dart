@@ -19,7 +19,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
-  ValueNotifier<Patient?> _selectedPatient = ValueNotifier(null);
+  final ValueNotifier<Patient?> _selectedPatient = ValueNotifier(null);
 
   @override
   Widget build(BuildContext context) {

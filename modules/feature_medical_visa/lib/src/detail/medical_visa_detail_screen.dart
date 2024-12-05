@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:core_network/core_network.dart';
 import 'package:feature_patient/feature_patient.dart';
 import 'package:flutter/material.dart';
 
@@ -67,7 +66,7 @@ class _MedicalVisaDetailScreenState extends State<MedicalVisaDetailScreen> {
                           return value.hasData ? MedicalVisaPage(
                             patient: patient.data,
                             id: value.requireData.id,
-                          ) : Center(child: CircularProgressIndicator());
+                          ) : const Center(child: CircularProgressIndicator());
                         }),
                   );
                 }),

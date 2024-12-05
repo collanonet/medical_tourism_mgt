@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:auto_route/auto_route.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
@@ -148,7 +147,7 @@ class HospitalScreen extends StatelessWidget {
                                                               4),
                                                       decoration: BoxDecoration(
                                                         color: e == '健診'
-                                                            ? Color(0xFFE238A0)
+                                                            ? const Color(0xFFE238A0)
                                                             : e == '治療'
                                                                 ? const Color(
                                                                     0xff53A6FF)

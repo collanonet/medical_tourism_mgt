@@ -236,7 +236,7 @@ class FacilityModel {
           );
         },
       );
-      var response;
+      DetailDropInFacilityResponse response;
       if (formGroup.control('id').value == null) {
         response = await processChartRepository.postDetailFacilityDropIn(
           DetailDropInFacilityRequest(

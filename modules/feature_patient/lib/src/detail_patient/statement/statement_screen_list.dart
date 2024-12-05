@@ -287,7 +287,7 @@ class _StatementScreenListState extends State<StatementScreenList> {
             SizedBox(
               height: context.appTheme.spacing.marginMedium,
             ),
-            Divider(),
+            const Divider(),
             ValueListenableBuilder(
               valueListenable: selected,
               builder: (context, sels, _) {

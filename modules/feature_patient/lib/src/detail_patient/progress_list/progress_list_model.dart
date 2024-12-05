@@ -148,7 +148,7 @@ class ProgressListModel {
           ),
           'remarks': FormControl<String>(),
           'medicalRecord': FormControl<String>(),
-          'type': FormControl<String>(value: "0"),
+          'type': FormControl<String>(value: '0'),
         }));
       }
       formArray.add(FormGroup({'progress': formArrayProgress}));

@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -192,7 +191,7 @@ class InvoiceScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      IntrinsicWidth(
+                      const IntrinsicWidth(
                         stepWidth: 200,
                         child: ReactiveDropdownFormField(
                           formControlName: 'invoice',
@@ -210,7 +209,7 @@ class InvoiceScreen extends StatelessWidget {
                               ),
                             ),
                           ],
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             label: Text('見積書/精算書'),
                           ),
                         ),

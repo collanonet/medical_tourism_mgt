@@ -1,7 +1,6 @@
 // Flutter imports:
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:

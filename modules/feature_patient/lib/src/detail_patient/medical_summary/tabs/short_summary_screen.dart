@@ -19,7 +19,6 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'fileForm/file_form.dart';
 import 'fileForm/popup_file_form.dart';
 import 'normal_summary_model.dart';
-import 'pick_medical_data_file_page.dart';
 
 class ShortSummaryScreen extends StatefulWidget {
   const ShortSummaryScreen({super.key});

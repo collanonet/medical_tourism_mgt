@@ -2,7 +2,6 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -281,7 +280,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                                                   'その他'),
                                                             ),
                                                           ),
-                                                          Container(
+                                                          SizedBox(
                                                             width: 250,
                                                             child:
                                                                 ReactiveTextField(

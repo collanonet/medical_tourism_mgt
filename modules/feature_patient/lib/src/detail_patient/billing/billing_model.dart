@@ -4,7 +4,6 @@ import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:core_network/core_network.dart';
 import 'package:data_patient/data_patient.dart';
 import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';

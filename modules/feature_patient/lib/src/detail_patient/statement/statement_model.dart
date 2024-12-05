@@ -594,9 +594,9 @@ Future<Uint8List?> generatePdfFromInvoice(
                   pw.Container(
                     padding: const pw.EdgeInsets.all(8),
                     decoration: pw.BoxDecoration(
-                      color: PdfColor.fromInt(0xff98FF98),
+                      color: const PdfColor.fromInt(0xff98FF98),
                       border: pw.Border.all(
-                        color: PdfColor.fromInt(0xff000000),
+                        color: const PdfColor.fromInt(0xff000000),
                         width: 1,
                       ),
                     ),
@@ -608,9 +608,9 @@ Future<Uint8List?> generatePdfFromInvoice(
                   pw.Container(
                     padding: const pw.EdgeInsets.all(8),
                     decoration: pw.BoxDecoration(
-                      color: PdfColor.fromInt(0xffffffff),
+                      color: const PdfColor.fromInt(0xffffffff),
                       border: pw.Border.all(
-                        color: PdfColor.fromInt(0xff000000),
+                        color: const PdfColor.fromInt(0xff000000),
                         width: 1,
                       ),
                     ),

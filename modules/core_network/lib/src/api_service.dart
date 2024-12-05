@@ -8,9 +8,6 @@ import 'package:retrofit/retrofit.dart';
 import '../core_network.dart';
 import '../entities.dart';
 import 'endpoints.dart';
-import 'entities/medical_record_visa_response.dart';
-import 'entities/request/medical_visa_after_getting_visa_request.dart';
-import 'entities/request/medical_visa_reuied_in_japan_request.dart';
 
 part 'api_service.g.dart';
 

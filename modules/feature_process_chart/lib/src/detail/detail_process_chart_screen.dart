@@ -86,13 +86,13 @@ class _DetailProcessChartScreenState extends State<DetailProcessChartScreen> {
                         )
                     ],
                   ),
-                  Spacer(),
-                  Text('進捗'),
+                  const Spacer(),
+                  const Text('進捗'),
                   SizedBox(
                     width: context.appTheme.spacing.marginMedium,
                   ),
                   Chip(
-                    label: Text(
+                    label: const Text(
                       '新規見積依頼',
                     ),
                     labelStyle: context.textTheme.bodySmall!.copyWith(

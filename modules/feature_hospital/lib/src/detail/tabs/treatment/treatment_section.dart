@@ -1,6 +1,5 @@
 // Flutter imports:
-import 'package:feature_hospital/src/detail/tabs/treatment/section/treatmenu_sectiion.dart';
-import 'package:flutter/cupertino.dart';
+import 'section/treatmenu_sectiion.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:

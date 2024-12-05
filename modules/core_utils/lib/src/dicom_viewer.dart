@@ -1,8 +1,6 @@
 import 'dart:html' as html;
 import 'dart:js_util' as js_util;
-import 'dart:typed_data';
 import 'dart:ui' as ui;
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:file_picker/file_picker.dart';
 

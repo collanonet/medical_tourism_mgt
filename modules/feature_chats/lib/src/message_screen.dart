@@ -26,7 +26,7 @@ class _MessageScreenState extends State<MessageScreen> {
     }
   }
 
-  TextEditingController _messageController = TextEditingController();
+  final TextEditingController _messageController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {

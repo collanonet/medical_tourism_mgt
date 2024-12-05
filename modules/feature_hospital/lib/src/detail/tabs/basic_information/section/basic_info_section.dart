@@ -263,7 +263,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                   ),
                                 ),
                               ),
-                              Expanded(child: SizedBox())
+                              const Expanded(child: SizedBox())
                             ],
                           ),
                           Row(

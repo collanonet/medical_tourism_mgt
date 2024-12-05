@@ -6,7 +6,6 @@ import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_patient/data_patient.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pdf/pdf.dart';
@@ -637,9 +636,9 @@ Future<Uint8List?> generatePdfFromQuotation(
                   pw.Container(
                     padding: const pw.EdgeInsets.all(8),
                     decoration: pw.BoxDecoration(
-                      color: PdfColor.fromInt(0xff98FF98),
+                      color: const PdfColor.fromInt(0xff98FF98),
                       border: pw.Border.all(
-                        color: PdfColor.fromInt(0xff000000),
+                        color: const PdfColor.fromInt(0xff000000),
                         width: 1,
                       ),
                     ),
@@ -651,9 +650,9 @@ Future<Uint8List?> generatePdfFromQuotation(
                   pw.Container(
                     padding: const pw.EdgeInsets.all(8),
                     decoration: pw.BoxDecoration(
-                      color: PdfColor.fromInt(0xffffffff),
+                      color: const PdfColor.fromInt(0xffffffff),
                       border: pw.Border.all(
-                        color: PdfColor.fromInt(0xff000000),
+                        color: const PdfColor.fromInt(0xff000000),
                         width: 1,
                       ),
                     ),

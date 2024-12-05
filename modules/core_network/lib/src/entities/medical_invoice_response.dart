@@ -4,7 +4,6 @@ import 'package:json_annotation/json_annotation.dart';
 import '../../core_network.dart';
 import '../../entities.dart';
 import 'entities.dart';
-import 'user.dart';
 
 part 'medical_invoice_response.g.dart';
 

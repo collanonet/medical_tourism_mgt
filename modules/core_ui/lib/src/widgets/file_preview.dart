@@ -1,13 +1,10 @@
 // Dart imports:
-import 'dart:io';
 
 // Flutter imports:
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_utils/core_utils.dart';
-import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
 
 import '../../resources.dart';
 import 'avatar.dart';
