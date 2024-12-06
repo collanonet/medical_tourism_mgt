@@ -153,6 +153,9 @@ flutter:
     - assets/fonts/Noto_Sans_ZH.ttf
     - assets/fonts/Roboto_VN.ttf
     - assets/fonts/Open_Sans_EN.ttf
+    - assets/fonts/NotoSansJP_Bold.ttf
+    
+    
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see
