@@ -65,7 +65,7 @@ class ReportScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
-                                    '種別マスタ',
+                                    '患者',
                                     style: TextStyle(
                                       fontFamily: 'NotoSansJP',
                                       package: 'core_ui',
@@ -76,11 +76,88 @@ class ReportScreen extends StatelessWidget {
                                     color: context.appTheme.primaryColor,
                                   ),
                                   ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
                                     onPressed: () {
                                       context.router
                                           .push(const ReportTypeRoute());
                                     },
-                                    child: const Text('種別マスタ'),
+                                    child: const Text('進捗'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('種別'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('受取方法'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('本人との関係'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ビザ'),
                                   ),
                                 ],
                               ),
@@ -97,7 +174,7 @@ class ReportScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
-                                    '種別マスタ',
+                                    '医療ビザ管理',
                                     style: TextStyle(
                                       fontFamily: 'NotoSansJP',
                                       package: 'core_ui',
@@ -108,11 +185,88 @@ class ReportScreen extends StatelessWidget {
                                     color: context.appTheme.primaryColor,
                                   ),
                                   ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
                                     onPressed: () {
                                       context.router
                                           .push(const ReportTypeRoute());
                                     },
-                                    child: const Text('種別マスタ'),
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
                                   ),
                                 ],
                               ),
@@ -129,7 +283,7 @@ class ReportScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
-                                    '種別マスタ',
+                                    'Web予約',
                                     style: TextStyle(
                                       fontFamily: 'NotoSansJP',
                                       package: 'core_ui',
@@ -140,19 +294,91 @@ class ReportScreen extends StatelessWidget {
                                     color: context.appTheme.primaryColor,
                                   ),
                                   ElevatedButton(
-                                    onPressed: () {
-                                      context.router
-                                          .push(const ReportTypeRoute());
-                                    },
-                                    child: const Text('種別マスタ'),
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                        context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
                                   ),
                                 ],
                               ),
                             );
                           }),
                     ),
-                    const Expanded(child: SizedBox()),
-                    const Expanded(child: SizedBox()),
                   ],
                 ),
               ],
@@ -187,7 +413,7 @@ class ReportScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
-                                    '種別マスタ',
+                                    '工程表',
                                     style: TextStyle(
                                       fontFamily: 'NotoSansJP',
                                       package: 'core_ui',
@@ -198,11 +424,88 @@ class ReportScreen extends StatelessWidget {
                                     color: context.appTheme.primaryColor,
                                   ),
                                   ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
                                     onPressed: () {
                                       context.router
                                           .push(const ReportTypeRoute());
                                     },
-                                    child: const Text('種別マスタ'),
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
                                   ),
                                 ],
                               ),
@@ -219,7 +522,7 @@ class ReportScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
-                                    '種別マスタ',
+                                    '医療機関',
                                     style: TextStyle(
                                       fontFamily: 'NotoSansJP',
                                       package: 'core_ui',
@@ -230,11 +533,88 @@ class ReportScreen extends StatelessWidget {
                                     color: context.appTheme.primaryColor,
                                   ),
                                   ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
                                     onPressed: () {
                                       context.router
                                           .push(const ReportTypeRoute());
                                     },
-                                    child: const Text('種別マスタ'),
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
                                   ),
                                 ],
                               ),
@@ -251,7 +631,7 @@ class ReportScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
-                                    '種別マスタ',
+                                    'エージェント',
                                     style: TextStyle(
                                       fontFamily: 'NotoSansJP',
                                       package: 'core_ui',
@@ -262,19 +642,94 @@ class ReportScreen extends StatelessWidget {
                                     color: context.appTheme.primaryColor,
                                   ),
                                   ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
                                     onPressed: () {
                                       context.router
                                           .push(const ReportTypeRoute());
                                     },
-                                    child: const Text('種別マスタ'),
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
                                   ),
                                 ],
                               ),
                             );
                           }),
                     ),
-                    const Expanded(child: SizedBox()),
-                    const Expanded(child: SizedBox()),
                   ],
                 ),
               ],
@@ -320,11 +775,91 @@ class ReportScreen extends StatelessWidget {
                                     color: context.appTheme.primaryColor,
                                   ),
                                   ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
                                     onPressed: () {
                                       context.router
                                           .push(const EstimateMasterRoute());
                                     },
                                     child: const Text('見積マスタ'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
                                   ),
                                 ],
                               ),
@@ -341,7 +876,7 @@ class ReportScreen extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const Text(
-                                    '種別マスタ',
+                                    '請求書',
                                     style: TextStyle(
                                       fontFamily: 'NotoSansJP',
                                       package: 'core_ui',
@@ -352,11 +887,88 @@ class ReportScreen extends StatelessWidget {
                                     color: context.appTheme.primaryColor,
                                   ),
                                   ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
                                     onPressed: () {
                                       context.router
                                           .push(const ReportTypeRoute());
                                     },
-                                    child: const Text('種別マスタ'),
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
                                   ),
                                 ],
                               ),
@@ -390,13 +1002,79 @@ class ReportScreen extends StatelessWidget {
                                     },
                                     child: const Text('見込みランク'),
                                   ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
+                                  SizedBox(
+                                    height:
+                                    context.appTheme.spacing.marginMedium,
+                                  ),
+                                  ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                      context.appTheme.primaryColor,
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(
+                                            context.appTheme.spacing
+                                                .borderRadiusMedium),
+                                      ),
+                                    ),
+                                    onPressed: () {},
+                                    child: const Text('ボタンサンプル'),
+                                  ),
                                 ],
                               ),
                             );
                           }),
                     ),
-                    const Expanded(child: SizedBox()),
-                    const Expanded(child: SizedBox()),
                   ],
                 ),
               ],
