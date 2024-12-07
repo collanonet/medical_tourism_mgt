@@ -442,14 +442,13 @@ Future<Uint8List?> generatePdfFromQuotation(
 
   final Uint8List fontData;
 
-  Uint8List fontDataJP =
-      (await rootBundle.load('assets/fonts/NotoSansJP_Bold.ttf'))
-          .buffer
-          .asUint8List();
+  Uint8List fontDataJP = (await rootBundle.load('assets/fonts/NotoSans_JP.ttf'))
+      .buffer
+      .asUint8List();
   final ttfJP = pw.Font.ttf(fontDataJP.buffer.asByteData());
 
   Uint8List fontDataJPRegular =
-      (await rootBundle.load('assets/fonts/NotoSansJPRegular.ttf'))
+      (await rootBundle.load('assets/fonts/NotoSansJP_Bold.ttf'))
           .buffer
           .asUint8List();
   final ttfJPPRegular = pw.Font.ttf(fontDataJPRegular.buffer.asByteData());
@@ -457,7 +456,7 @@ Future<Uint8List?> generatePdfFromQuotation(
   // Load font based on language
   switch (language) {
     case 'JP':
-      fontData = (await rootBundle.load('assets/fonts/NotoSansJP_Bold.ttf'))
+      fontData = (await rootBundle.load('assets/fonts/NotoSans_JP.ttf'))
           .buffer
           .asUint8List();
       break;
@@ -579,7 +578,7 @@ Future<Uint8List?> generatePdfFromQuotation(
       margin: const pw.EdgeInsets.all(8),
       theme: pw.ThemeData(
         defaultTextStyle: pw.TextStyle(
-          font: ttf,
+          font: ttfJPPRegular,
           fontSize: 12,
         ),
       ),
@@ -591,8 +590,8 @@ Future<Uint8List?> generatePdfFromQuotation(
             child: pw.Text(
               title,
               style: pw.TextStyle(
-                font: ttf,
-                fontBold: ttf,
+                font: language == 'ZH' ? ttf : ttfJPPRegular,
+                fontBold: ttfJPPRegular,
                 fontSize: 30,
               ),
               textAlign: pw.TextAlign.center,
@@ -628,8 +627,8 @@ Future<Uint8List?> generatePdfFromQuotation(
                         '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
                         ' 様',
                         style: pw.TextStyle(
-                          font: ttfJP,
-                          fontBold: ttfJP,
+                          font: ttfJPPRegular,
+                          fontBold: ttfJPPRegular,
                         ),
                       ),
                       pw.Text(
@@ -691,7 +690,7 @@ Future<Uint8List?> generatePdfFromQuotation(
                           taxCalculation(subTotal(request.item ?? []),
                               (request.taxRate ?? 0)))),
                       style: pw.TextStyle(
-                        font: ttfJP,
+                        font: ttfJPPRegular,
                         fontWeight: pw.FontWeight.bold,
                       ),
                     ),
@@ -932,8 +931,8 @@ Future<Uint8List?> generatePdfFromQuotation(
                         taxCalculation(
                             subTotal(request.item ?? []), request.taxRate))),
                     style: pw.TextStyle(
-                      font: ttfJP,
-                      fontBold: ttfJP,
+                      font: ttfJPPRegular,
+                      fontBold: ttfJPPRegular,
                     ),
                   ),
                 ),
