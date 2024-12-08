@@ -6825,7 +6825,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'contact-template-detail-basic-info',
+              '/contract-template-details',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -6856,7 +6856,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'contact-template-detail-basic-info',
+              '/contract-template-details',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -6884,7 +6884,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'estimate-master-report',
+              '/estimate-master',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -6916,7 +6916,38 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'estimate-master-report',
+              '/estimate-master',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = EstimatemasterReportResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<EstimatemasterReportResponse> putEstimateMasterReport(
+    String id,
+    EstimatemasterReportRequest estimateMasterReportRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(estimateMasterReportRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<EstimatemasterReportResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/estimate-master/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -6943,7 +6974,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'progressive-rank',
+              '/prospect-rank',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -6975,7 +7006,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'progressive-rank',
+              '/prospect-rank',
               queryParameters: queryParameters,
               data: _data,
             )

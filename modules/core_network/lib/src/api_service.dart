@@ -1329,6 +1329,12 @@ abstract class ApiService {
     @Body() EstimatemasterReportRequest estimateMasterReportRequest,
   );
 
+  @PUT('${EndPoints.ESTIMATE_MASTER_REPORT}/{id}')
+  Future<EstimatemasterReportResponse> putEstimateMasterReport(
+    @Path('id') String id,
+    @Body() EstimatemasterReportRequest estimateMasterReportRequest,
+  );
+
   @GET(EndPoints.PROSPECTIVE_RANK)
   Future<List<ProspectiveRankResponse>> getProspectiveRank();
 

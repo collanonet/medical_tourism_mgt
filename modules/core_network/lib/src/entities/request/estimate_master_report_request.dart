@@ -4,18 +4,18 @@ import 'package:json_annotation/json_annotation.dart';
 part 'estimate_master_report_request.g.dart';
 @JsonSerializable()
 class EstimatemasterReportRequest {
-  String? item;
-  String? sellUnitPrice;
-  String? sellAmountOfMoney;
-  String? costUnitPrice;
-  String? costAmountOfMoney;
+  String? project;
+  String? unitPriceSellingPrice;
+  String? amountOfMoneySellingPrice;
+  String? unitPriceCostPrice;
+  String? amountOfMoneyCostPrice;
 
   EstimatemasterReportRequest({
-    this.item,
-    this.sellUnitPrice,
-    this.sellAmountOfMoney,
-    this.costUnitPrice,
-    this.costAmountOfMoney,
+    this.project,
+    this.unitPriceSellingPrice,
+    this.amountOfMoneySellingPrice,
+    this.unitPriceCostPrice,
+    this.amountOfMoneyCostPrice,
   });
 
   factory EstimatemasterReportRequest.fromJson(Map<String, dynamic> json) => _$EstimatemasterReportRequestFromJson(json);

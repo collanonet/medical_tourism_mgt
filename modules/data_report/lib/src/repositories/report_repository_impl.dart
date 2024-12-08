@@ -79,6 +79,8 @@ class ReportRepositoryIml extends ReportRepository {
     return remote.postEstimatemasterReport(estimatemasterReportRequest);
   }
 
+
+
   @override
   Future<List<ProspectiveRankResponse>> getProspectiveRank() {
     return remote.getProspectiveRank();
@@ -87,5 +89,10 @@ class ReportRepositoryIml extends ReportRepository {
   @override
   Future<ProspectiveRankResponse> postProspectiveRank(ProspectiveRankRequest prospectiveRankRequest) {
     return remote.postProspectiveRank(prospectiveRankRequest);
+  }
+
+  @override
+  Future<EstimatemasterReportResponse> putEstimatemasterReport(String id, EstimatemasterReportRequest estimatemasterReportRequest) {
+    return remote.putEstimatemasterReport(id, estimatemasterReportRequest);
   }
 }

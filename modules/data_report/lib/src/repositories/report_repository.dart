@@ -36,6 +36,11 @@ abstract class ReportRepository {
     EstimatemasterReportRequest estimatemasterReportRequest,
   );
 
+  Future<EstimatemasterReportResponse> putEstimatemasterReport(
+    String id,
+    EstimatemasterReportRequest estimatemasterReportRequest,
+  );
+
   Future<List<ProspectiveRankResponse>> getProspectiveRank();
 
   Future<ProspectiveRankResponse> postProspectiveRank(

@@ -21,8 +21,7 @@ class _ProspectivePankScreenState extends State<ProspectivePankScreen> {
       children: [
         Container(
           width: MediaQuery.of(context).size.width,
-          height: 100,
-          padding: const EdgeInsets.all(10),
+          padding: const EdgeInsets.fromLTRB(16, 32, 16, 32),
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10), color: Colors.white),
           child: const Row(

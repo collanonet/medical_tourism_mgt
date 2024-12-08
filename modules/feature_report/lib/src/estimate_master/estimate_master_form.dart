@@ -5,12 +5,14 @@ FormGroup estimateMasterForm() {
   return FormGroup({
     'arr': FormArray([
       FormGroup({
-         'id': FormControl<String>(),
-        'item': FormControl<String>(),
-        'sell_unitPrice': FormControl<String>(),
-        'sell_amountOfMoney': FormControl<String>(),
-        'cost_unitPrice': FormControl<String>(),
-        'cost_amountOfMoney': FormControl<String>(),
+        '_id': FormControl<String>(),
+        'project': FormControl<String>(
+          validators: [Validators.required],
+        ),
+        'unitPriceSellingPrice': FormControl<String>(),
+        'amountOfMoneySellingPrice': FormControl<String>(),
+        'unitPriceCostPrice': FormControl<String>(),
+        'amountOfMoneyCostPrice': FormControl<String>(),
       }),
     ]),
   });

@@ -63,6 +63,10 @@ class ReportRemoteProvider {
     return apiService.postEstimateMasterReport(estimatemasterReportRequest);
   }
 
+  Future<EstimatemasterReportResponse> putEstimatemasterReport(String id, EstimatemasterReportRequest estimatemasterReportRequest) async{
+    return apiService.putEstimateMasterReport(id, estimatemasterReportRequest);
+  }
+
   Future<List<ProspectiveRankResponse>> getProspectiveRank() async{
     return apiService.getProspectiveRank();
   }

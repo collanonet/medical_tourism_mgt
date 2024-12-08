@@ -33,7 +33,7 @@ class _ReportTypeScreenState extends State<ReportTypeScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
-                  padding: EdgeInsets.all(context.appTheme.spacing.gutter),
+                  padding: const EdgeInsets.fromLTRB(16, 32, 16, 32),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(
