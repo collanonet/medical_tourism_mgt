@@ -47,6 +47,7 @@ class _EstimateMasterScreenState extends State<EstimateMasterScreen> {
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10), color: Colors.white),
           child: ColumnSeparated(
+            crossAxisAlignment: CrossAxisAlignment.start,
             separatorBuilder: (context, index) =>
                 SizedBox(height: context.appTheme.spacing.marginMedium),
             children: [
@@ -55,7 +56,6 @@ class _EstimateMasterScreenState extends State<EstimateMasterScreen> {
                   width: context.appTheme.spacing.marginMedium,
                 ),
                 children: const [
-                  SizedBox(width: 150),
                   Expanded(
                     child: Text('項目'),
                   ),
@@ -85,9 +85,7 @@ class _EstimateMasterScreenState extends State<EstimateMasterScreen> {
                         separatorBuilder: (context, index) => SizedBox(
                             width: context.appTheme.spacing.marginMedium),
                         children: [
-                         const SizedBox(width: 150),
                           Expanded(
-                           
                             child: IntrinsicWidth(
                               stepWidth: 350,
                               child: ReactiveTextField(
@@ -135,6 +133,7 @@ class _EstimateMasterScreenState extends State<EstimateMasterScreen> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ColumnSeparated(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         separatorBuilder: (context, index) => SizedBox(
                             height: context.appTheme.spacing.marginMedium),
                         children: rows,

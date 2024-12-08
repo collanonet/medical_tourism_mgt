@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:feature_report/src/prospective_rank/prospective_rank_model.dart';
 import 'package:flutter/cupertino.dart';
 
 // Package imports:
@@ -28,7 +29,8 @@ class ProspectivePankPage extends StatelessWidget {
             return LayoutView(
               selectedIndex: 9,
               page: Provider(
-                create: (context) => GetIt.I<TypeModel>()..getTypes(formGroup),
+                create: (context) => GetIt.I<ProspectiveRankModel>()
+                  ..fetchProsiveRank(formGroup),
                 child: const ProspectivePankScreen(),
               ),
             );

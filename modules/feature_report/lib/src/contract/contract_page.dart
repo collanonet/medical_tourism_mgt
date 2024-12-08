@@ -28,7 +28,7 @@ class ContractPage extends StatelessWidget {
           child: LayoutView(
             selectedIndex: 9,
             page: Provider(
-              create: (context) => GetIt.I<ContractModel>(),
+              create: (context) => GetIt.I<ContractModel>()..fetchContract(),
               child: const ContractScreen(),
             ),
           ),

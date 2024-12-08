@@ -77,40 +77,111 @@ class AppRouter extends _$AppRouter implements AutoRouteGuard {
   @override
   List<AutoRoute> get routes {
     return [
-      AutoRoute(page: LoginRoute.page, path: '/login'),
-      AutoRoute(page: AgentsRoute.page, path: '/agents'),
-      AutoRoute(page: AgentDetailRoute.page, path: '/agents-detail/:id'),
-      AutoRoute(page: ChatRoute.page, path: '/chats'),
-      AutoRoute(page: HospitalsRoute.page, path: '/hospitals'),
-      AutoRoute(page: HospitalDetailRoute.page, path: '/hospital-detail/:id'),
-      AutoRoute(page: InvoicesRoute.page, path: '/invoices'),
-      AutoRoute(page: MedicalVisasRoute.page, path: '/medical-visa'),
       AutoRoute(
-          page: MedicalVisaDetailRoute.page, path: '/medical-visa-detail/:id'),
-      AutoRoute(page: PatientsRoute.page, initial: true, path: '/patients'),
-      AutoRoute(page: DetailPatientRoute.page, path: '/detail-patient/:id'),
-      AutoRoute(page: PrePatientRoute.page, path: '/pre-patients'),
-      AutoRoute(page: ReportsRoute.page, path: '/reports'),
-      AutoRoute(page: MasterRoute.page, path: '/master'),
-      AutoRoute(page: ContractRoute.page, path: '/contracts'),
-      AutoRoute(page: ReportTypeRoute.page, path: '/report-type'),
-      AutoRoute(page: SalesRoute.page, path: '/sales'),
-      AutoRoute(page: ProcessChartsRoute.page, path: '/precess-charts'),
+        page: LoginRoute.page,
+        path: '/login',
+      ),
       AutoRoute(
-          page: ItinerarySimplifiedRoute.page,
-          path: '/precess-charts-itinerary-simplified'),
+        page: AgentsRoute.page,
+        path: '/agents',
+      ),
       AutoRoute(
-          page: DetailProcessChartRoute.page, path: '/precess-chart-detail/:id'),
-      AutoRoute(page: WebAppointmentsRoute.page, path: '/web-appointments'),
+        page: AgentDetailRoute.page,
+        path: '/agents-detail/:id',
+      ),
       AutoRoute(
-          page: WebAppointmentDetailRoute.page,
-          path: '/web-appointment-detail/:id'),
-      RedirectRoute(path: '*', redirectTo: '/patients'),
+        page: ChatRoute.page,
+        path: '/chats',
+      ),
+      AutoRoute(
+        page: HospitalsRoute.page,
+        path: '/hospitals',
+      ),
+      AutoRoute(
+        page: HospitalDetailRoute.page,
+        path: '/hospital-detail/:id',
+      ),
+      AutoRoute(
+        page: InvoicesRoute.page,
+        path: '/invoices',
+      ),
+      AutoRoute(
+        page: MedicalVisasRoute.page,
+        path: '/medical-visa',
+      ),
+      AutoRoute(
+        page: MedicalVisaDetailRoute.page,
+        path: '/medical-visa-detail/:id',
+      ),
+      AutoRoute(
+        page: PatientsRoute.page,
+        initial: true,
+        path: '/patients',
+      ),
+      AutoRoute(
+        page: DetailPatientRoute.page,
+        path: '/detail-patient/:id',
+      ),
+      AutoRoute(
+        page: PrePatientRoute.page,
+        path: '/pre-patients',
+      ),
+      AutoRoute(
+        page: ReportsRoute.page,
+        path: '/master/reports',
+      ),
+      AutoRoute(
+        page: MasterRoute.page,
+        path: '/master',
+      ),
+      AutoRoute(
+        page: ContractRoute.page,
+        path: '/master/contracts',
+      ),
+      AutoRoute(
+        page: ReportTypeRoute.page,
+        path: '/master/reports/report-type',
+      ),
+      AutoRoute(
+        page: SalesRoute.page,
+        path: '/sales',
+      ),
+      AutoRoute(
+        page: ProcessChartsRoute.page,
+        path: '/precess-charts',
+      ),
+      AutoRoute(
+        page: ItinerarySimplifiedRoute.page,
+        path: '/precess-charts-itinerary-simplified',
+      ),
+      AutoRoute(
+        page: DetailProcessChartRoute.page,
+        path: '/precess-chart-detail/:id',
+      ),
+      AutoRoute(
+        page: WebAppointmentsRoute.page,
+        path: '/web-appointments',
+      ),
+      AutoRoute(
+        page: WebAppointmentDetailRoute.page,
+        path: '/web-appointment-detail/:id',
+      ),
+      RedirectRoute(
+        path: '*',
+        redirectTo: '/patients',
+      ),
       AutoRoute(
         page: EstimateMasterRoute.page,
+        path: '/master/reports/estimate-master',
       ),
-      AutoRoute(page: ProspectivePankRoute.page, path: '/prospective-pank'),
-      AutoRoute(page: ContractDetailRoute.page, path: '/contract-detail'),
+      AutoRoute(
+        page: ProspectivePankRoute.page,
+        path: '/master/reports/prospective-pank',
+      ),
+      AutoRoute(
+        page: ContractDetailRoute.page,
+        path: '/master/contracts/contract-detail',
+      ),
     ];
   }
 }

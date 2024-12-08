@@ -11,11 +11,13 @@ import 'package:reactive_forms/reactive_forms.dart';
 @injectable
 class EstimateMasterModel {
   EstimateMasterModel({required this.reportRepository});
+
   final ReportRepository reportRepository;
 
   ValueNotifier<AsyncData<List<EstimatemasterReportResponse>>>
       estimateMasterData = ValueNotifier(
           const AsyncData<List<EstimatemasterReportResponse>>(data: []));
+
   Future<void> fetchEstimateMasterData(FormGroup formGroup) async {
     try {
       estimateMasterData.value = const AsyncData(loading: true);
@@ -23,7 +25,6 @@ class EstimateMasterModel {
       insertEstimateMaster(formGroup, response);
     } catch (e) {
       estimateMasterData.value = AsyncData(error: e);
-       
     }
   }
 
@@ -51,19 +52,21 @@ class EstimateMasterModel {
 
   ValueNotifier<AsyncData<EstimatemasterReportResponse>> submit =
       ValueNotifier(const AsyncData());
+
   Future<void> submitEstimatemasterReport(FormGroup formGroup) async {
     submit.value = const AsyncData(loading: true);
-     await formGroup.control('arr').value.forEach((element) async {
-      final response = await
-           reportRepository.postEstimatemasterReport(EstimatemasterReportRequest(
+    await formGroup.control('arr').value.forEach((element) async {
+      final response = await reportRepository
+          .postEstimatemasterReport(EstimatemasterReportRequest(
         item: element['item'],
         sellUnitPrice: element['sell_unitPrice'],
         sellAmountOfMoney: element['sell_amountOfMoney'],
         costUnitPrice: element['cost_unitPrice'],
         costAmountOfMoney: element['cost_amountOfMoney'],
       ));
-     submit.value = AsyncData(data: response);
-      estimateMasterData.value = AsyncData(data: estimateMasterData.value.data!..add(response));
+      submit.value = AsyncData(data: response);
+      estimateMasterData.value =
+          AsyncData(data: estimateMasterData.value.data!..add(response));
     });
   }
 }
