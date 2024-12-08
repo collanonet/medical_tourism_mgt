@@ -74,4 +74,8 @@ class ReportRemoteProvider {
   Future<ProspectiveRankResponse> postProspectiveRank(ProspectiveRankRequest prospectiveRankRequest) async{
     return apiService.postProspectiveRank(prospectiveRankRequest);
   }
+
+  Future<ProspectiveRankResponse> putProspectiveRank(String id, ProspectiveRankRequest prospectiveRankRequest) async{
+    return apiService.putProspectiveRank(id, prospectiveRankRequest);
+  }
 }

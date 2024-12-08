@@ -95,4 +95,9 @@ class ReportRepositoryIml extends ReportRepository {
   Future<EstimatemasterReportResponse> putEstimatemasterReport(String id, EstimatemasterReportRequest estimatemasterReportRequest) {
     return remote.putEstimatemasterReport(id, estimatemasterReportRequest);
   }
+
+  @override
+  Future<ProspectiveRankResponse> putProspectiveRank(String id, ProspectiveRankRequest prospectiveRankRequest) {
+    return remote.putProspectiveRank(id, prospectiveRankRequest);
+  }
 }

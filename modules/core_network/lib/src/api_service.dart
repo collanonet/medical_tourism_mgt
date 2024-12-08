@@ -1343,6 +1343,12 @@ abstract class ApiService {
     @Body() ProspectiveRankRequest prospectiveRankRequest,
   );
 
+  @PUT('${EndPoints.PROSPECTIVE_RANK}/{id}')
+  Future<ProspectiveRankResponse> putProspectiveRank(
+    @Path('id') String id,
+    @Body() ProspectiveRankRequest prospectiveRankRequest,
+  );
+
   @GET('${EndPoints.TREATMENT_MENU}/by-hospital/{id}')
   Future<List<TreatmentMenuResponse>> getTreatmentMenu({
     @Path('id') required String id,

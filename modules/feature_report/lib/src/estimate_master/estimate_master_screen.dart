@@ -250,18 +250,18 @@ class _EstimateMasterScreenState extends State<EstimateMasterScreen> {
                                 context.watch<EstimateMasterModel>().submit,
                             builder: (context, submit, child) {
                               {
-                                return Skeletonizer(
-                                  enabled: submit.loading,
-                                  child: ElevatedButton(
-                                    onPressed: form.valid
-                                        ? () {
-                                            context
-                                                .read<EstimateMasterModel>()
-                                                .submitEstimatemasterReport(
-                                                    form);
-                                          }
-                                        : null,
-                                    child: const Text('保存'),
+                                return ElevatedButton(
+                                  onPressed: form.valid && !submit.loading
+                                      ? () {
+                                          context
+                                              .read<EstimateMasterModel>()
+                                              .submitEstimatemasterReport(
+                                                  form);
+                                        }
+                                      : null,
+                                  child: WithLoadingButton(
+                                    isLoading: submit.loading,
+                                    child: const Text('作成する'),
                                   ),
                                 );
                               }

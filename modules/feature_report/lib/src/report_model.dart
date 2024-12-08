@@ -15,16 +15,4 @@ class ReportModel with ChangeNotifier {
 
   final ReportRepository reportRepository;
 
-  ValueNotifier<AsyncData<List<TypeResponse>>> dataType =
-      ValueNotifier(const AsyncData<List<TypeResponse>>(data: []));
-
-  Future<void> getReports() async {
-    try {
-      dataType.value = const AsyncData(loading: true);
-      var result = await reportRepository.getTypes();
-      dataType.value = AsyncData(data: result);
-    } catch (e) {
-      dataType.value = AsyncData(error: e);
-    }
-  }
 }

@@ -46,4 +46,10 @@ abstract class ReportRepository {
   Future<ProspectiveRankResponse> postProspectiveRank(
     ProspectiveRankRequest prospectiveRankRequest,
   );
+
+  Future<ProspectiveRankResponse> putProspectiveRank(
+    String id,
+    ProspectiveRankRequest prospectiveRankRequest,
+  );
 }
+

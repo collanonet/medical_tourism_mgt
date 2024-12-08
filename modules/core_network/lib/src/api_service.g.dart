@@ -7020,6 +7020,37 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<ProspectiveRankResponse> putProspectiveRank(
+    String id,
+    ProspectiveRankRequest prospectiveRankRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(prospectiveRankRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ProspectiveRankResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/prospect-rank/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = ProspectiveRankResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
   Future<List<TreatmentMenuResponse>> getTreatmentMenu(
       {required String id}) async {
     final _extra = <String, dynamic>{};
