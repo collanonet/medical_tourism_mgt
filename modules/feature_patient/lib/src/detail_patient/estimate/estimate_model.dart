@@ -47,7 +47,7 @@ class EstimateModel {
     required MedicalInvoiceResponse invoice,
     required FormGroup formGroup,
   }) async {
-    editData.value = AsyncData(data: invoice);
+    editData.value = AsyncData(data: invoice, loading: true);
     formGroup.control('_id').value = invoice.id;
     formGroup.control('logoFile').value = FileSelect(
       url: invoice.logoFile,
@@ -71,11 +71,11 @@ class EstimateModel {
     formGroup.control('taxRate').value = invoice.taxRate;
     formGroup.control('taxRateOption').value = invoice.taxRateOption;
 
-    if (invoice.notes != null && invoice.notes!.isNotEmpty) {
-      FormArray notes = formGroup.control('notes') as FormArray;
+    FormArray notes = formGroup.control('notes') as FormArray;
 
-      for (var note in invoice.notes!) {
-        notes.reset();
+    if (invoice.notes != null && invoice.notes!.isNotEmpty) {
+      notes.clear();
+      for (var note in invoice.notes ?? []) {
         notes.add(
           FormGroup({
             '_id': FormControl<String>(value: note.id),
@@ -86,11 +86,11 @@ class EstimateModel {
     }
 
     try {
-      if (invoice.item != null && invoice.item!.isNotEmpty) {
-        FormArray item = formGroup.control('item') as FormArray;
+      FormArray item = formGroup.control('item') as FormArray;
 
-        for (var itemData in invoice.item!) {
-          logger.d('edit info: ${itemData.toJson()}');
+      if (invoice.item != null && invoice.item!.isNotEmpty) {
+        item.clear();
+        for (var itemData in invoice.item ?? []) {
           item.add(
             FormGroup({
               '_id': FormControl<String>(value: itemData.id),
@@ -103,8 +103,11 @@ class EstimateModel {
           );
         }
       }
+
+      editData.value = AsyncData(data: invoice);
     } catch (e) {
       logger.e(e);
+      editData.value = AsyncData(data: invoice);
     }
   }
 
@@ -212,17 +215,16 @@ class EstimateModel {
         patientData.value.requireData,
         'JP',
       );
-      String? fileNamePdfJP;
+      String fileNamePdfJP =
+          'quotation_${DateTime.now().millisecondsSinceEpoch}_JP.pdf';
 
       if (pathFileJP != null) {
         try {
           String base64Image = base64Encode(pathFileJP);
-          FileResponse fileData = await patientRepository.uploadFileBase64(
+          patientRepository.uploadFileBase64(
             base64Image,
-            // get timestamp to avoid duplicate file name
-            'quotation_${DateTime.now().millisecondsSinceEpoch}_JP.pdf',
+            fileNamePdfJP,
           );
-          fileNamePdfJP = fileData.filename;
         } catch (e) {
           logger.e(e);
         }
@@ -233,17 +235,16 @@ class EstimateModel {
         patientData.value.requireData,
         'ZH',
       );
-      String? fileNamePdfZH;
+      String fileNamePdfZH =
+          'quotation_${DateTime.now().millisecondsSinceEpoch}_ZH.pdf';
 
       if (pathFileZH != null) {
         try {
           String base64Image = base64Encode(pathFileZH);
-          FileResponse fileData = await patientRepository.uploadFileBase64(
+          patientRepository.uploadFileBase64(
             base64Image,
-            // get timestamp to avoid duplicate file name
-            'quotation_${DateTime.now().millisecondsSinceEpoch}_ZH.pdf',
+            fileNamePdfZH,
           );
-          fileNamePdfZH = fileData.filename;
         } catch (e) {
           logger.e(e);
         }
@@ -254,17 +255,16 @@ class EstimateModel {
         patientData.value.requireData,
         'ZHTW',
       );
-      String? fileNamePdfZHTW;
+      String fileNamePdfZHTW =
+          'quotation_${DateTime.now().millisecondsSinceEpoch}_ZHTW.pdf';
 
       if (pathFileZHTW != null) {
         try {
           String base64Image = base64Encode(pathFileZHTW);
-          FileResponse fileData = await patientRepository.uploadFileBase64(
+          patientRepository.uploadFileBase64(
             base64Image,
-            // get timestamp to avoid duplicate file name
-            'quotation_${DateTime.now().millisecondsSinceEpoch}_ZHTW.pdf',
+            fileNamePdfZHTW,
           );
-          fileNamePdfZHTW = fileData.filename;
         } catch (e) {
           logger.e(e);
         }
@@ -275,17 +275,16 @@ class EstimateModel {
         patientData.value.requireData,
         'VN',
       );
-      String? fileNamePdfVN;
+      String fileNamePdfVN =
+          'quotation_${DateTime.now().millisecondsSinceEpoch}_VN.pdf';
 
       if (pathFileVN != null) {
         try {
           String base64Image = base64Encode(pathFileVN);
-          FileResponse fileData = await patientRepository.uploadFileBase64(
+          patientRepository.uploadFileBase64(
             base64Image,
-            // get timestamp to avoid duplicate file name
-            'quotation_${DateTime.now().millisecondsSinceEpoch}_VN.pdf',
+            fileNamePdfVN,
           );
-          fileNamePdfVN = fileData.filename;
         } catch (e) {
           logger.e(e);
         }
@@ -296,51 +295,46 @@ class EstimateModel {
         patientData.value.requireData,
         'EN',
       );
-      String? fileNamePdfEN;
+      String fileNamePdfEN =
+          'quotation_${DateTime.now().millisecondsSinceEpoch}_EN.pdf';
 
       if (pathFileEN != null) {
         try {
           String base64Image = base64Encode(pathFileEN);
-          FileResponse fileData = await patientRepository.uploadFileBase64(
+          patientRepository.uploadFileBase64(
             base64Image,
-            // get timestamp to avoid duplicate file name
-            'quotation_${DateTime.now().millisecondsSinceEpoch}_EN.pdf',
+            fileNamePdfEN,
           );
-          fileNamePdfEN = fileData.filename;
         } catch (e) {
           logger.e(e);
         }
       }
 
-      if (fileNamePdfJP != null) {
-        if (formGroup.control('_id').value != null) {
-          await updateQuotation(
-            id: formGroup.control('_id').value,
-            request: request.copyWith(
-              fileNamePdfJP: fileNamePdfJP,
-              fileNamePdfZH: fileNamePdfZH,
-              fileNamePdfVN: fileNamePdfVN,
-              fileNamePdfEN: fileNamePdfEN,
-              fileNamePdfZHTW: fileNamePdfZHTW,
-            ),
-          );
-        } else {
-          await createQuotation(
-            request: request.copyWith(
-              fileNamePdfJP: fileNamePdfJP,
-              fileNamePdfZH: fileNamePdfZH,
-              fileNamePdfVN: fileNamePdfVN,
-              fileNamePdfEN: fileNamePdfEN,
-              fileNamePdfZHTW: fileNamePdfZHTW,
-            ),
-          );
-        }
-        editData.value = const AsyncData();
-        submitData.value = const AsyncData(data: true);
-        formGroup.reset();
+      if (formGroup.control('_id').value != null) {
+        await updateQuotation(
+          id: formGroup.control('_id').value,
+          request: request.copyWith(
+            fileNamePdfJP: fileNamePdfJP,
+            fileNamePdfZH: fileNamePdfZH,
+            fileNamePdfVN: fileNamePdfVN,
+            fileNamePdfEN: fileNamePdfEN,
+            fileNamePdfZHTW: fileNamePdfZHTW,
+          ),
+        );
       } else {
-        submitData.value = const AsyncData(error: 'ファイルの作成に失敗しました');
+        await createQuotation(
+          request: request.copyWith(
+            fileNamePdfJP: fileNamePdfJP,
+            fileNamePdfZH: fileNamePdfZH,
+            fileNamePdfVN: fileNamePdfVN,
+            fileNamePdfEN: fileNamePdfEN,
+            fileNamePdfZHTW: fileNamePdfZHTW,
+          ),
+        );
       }
+      editData.value = const AsyncData();
+      submitData.value = const AsyncData(data: true);
+      formGroup.reset();
     } catch (e) {
       logger.e(e);
       submitData.value = AsyncData(error: e);
