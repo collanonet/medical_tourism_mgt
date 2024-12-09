@@ -11,6 +11,12 @@ class ReportRemoteProvider {
 
   final ApiService apiService;
 
+  Future<FileResponse> uploadFileBase64(
+    String file,
+    String filename,
+  ) async =>
+      await apiService.uploadFileBase64(file, filename);
+
   Future<List<TypeResponse>> getTypes() async {
     return apiService.getTypes();
   }
@@ -47,7 +53,7 @@ class ReportRemoteProvider {
     return apiService.postContractReportDetail(contractReportDetailRequest);
   }
 
-  Future<ContractTemplateBasicInformationResponse> getContractTemplateBasicInformation() async{
+  Future<List<ContractTemplateBasicInformationResponse>> getContractTemplateBasicInformation() async{
     return apiService.getContractTemplateBasicInformation();
   }
 

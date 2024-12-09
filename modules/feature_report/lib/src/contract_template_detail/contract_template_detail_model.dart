@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 
 // Package imports:
@@ -13,18 +15,20 @@ class ContractTemplateModel {
   ContractTemplateModel({required this.reportRepository});
   final ReportRepository reportRepository;
 
-  ValueNotifier<AsyncData<ContractReportDetailResponse>> contractReportDetailData = ValueNotifier(const AsyncData());
-  Future<void> fetchContractReportDetail(FormGroup formGroup) async{
-    try{
+  ValueNotifier<AsyncData<ContractReportDetailResponse>>
+      contractReportDetailData = ValueNotifier(const AsyncData());
+  Future<void> fetchContractReportDetail(FormGroup formGroup) async {
+    try {
       contractReportDetailData.value = const AsyncData(loading: true);
       final response = await reportRepository.getContractReportDetail();
       insertContractReportDetail(formGroup, response);
-
-    }catch(e){
+    } catch (e) {
       logger.d(e);
     }
   }
-  void insertContractReportDetail(FormGroup formGroup,ContractReportDetailResponse? data){
+
+  void insertContractReportDetail(
+      FormGroup formGroup, ContractReportDetailResponse? data) {
     formGroup.control('uploadFile').value = data?.uploadFile;
     formGroup.control('version').value = data?.version;
     formGroup.control('updatedOn').value = data?.updatedOn;
@@ -32,77 +36,107 @@ class ContractTemplateModel {
     formGroup.control('operation').value = data?.operation;
   }
 
-  ValueNotifier<AsyncData<ContractReportDetailResponse>> submitFormContractData = ValueNotifier(const AsyncData());
+  ValueNotifier<AsyncData<ContractReportDetailResponse>>
+      submitFormContractData = ValueNotifier(const AsyncData());
   Future<void> postContractTemplate(FormGroup formGroup) async {
-    try{
+    try {
       submitFormContractData.value = const AsyncData(loading: true);
-      final response = await reportRepository.postContractReportDetail(
-        ContractReportDetailRequest(
-          uploadFile: formGroup.control('uploadFile').value,
-         version:  formGroup.control('version').value,
-          updatedOn: formGroup.control('updatedOn').value,
-          subject: formGroup.control('subject').value,
-          operation: formGroup.control('operation').value,
-        )
-      );
+      final response = await reportRepository
+          .postContractReportDetail(ContractReportDetailRequest(
+        uploadFile: formGroup.control('uploadFile').value,
+        version: formGroup.control('version').value,
+        updatedOn: formGroup.control('updatedOn').value,
+        subject: formGroup.control('subject').value,
+        operation: formGroup.control('operation').value,
+      ));
 
       contractReportDetailData.value = AsyncData(data: response);
       submitFormContractData.value = AsyncData(data: response);
-
-    }catch(e){
+    } catch (e) {
       logger.d(e);
       submitFormContractData.value = AsyncData(error: e);
     }
   }
 
-  ValueNotifier<AsyncData<ContractTemplateBasicInformationResponse>> contractTemplatebasicInfoData = ValueNotifier(const AsyncData());
-  Future<void> fetchContractTemplateBasicInfo(FormGroup formGroup) async{
-    try{
-      contractReportDetailData.value = const AsyncData(loading: true);
-      final response = await reportRepository.getContractTemplateBasicInformation();
-      insertContractTemplateBasicInfo(formGroup, response);
-    }catch(e){
+  late String id;
+  ValueNotifier<AsyncData<List<ContractTemplateBasicInformationResponse>>>
+      contractTemplatebasicInfoData = ValueNotifier(const AsyncData());
+  Future<void> fetchContractTemplateBasicInfo(FormGroup formGroup) async {
+    try {
+      contractTemplatebasicInfoData.value = const AsyncData(loading: true);
+      final response =
+          await reportRepository.getContractTemplateBasicInformation();
+      contractTemplatebasicInfoData.value = AsyncData(data: response);
+     // insertContractTemplateBasicInfo(formGroup, response);
+    } catch (e) {
       logger.d(e);
     }
   }
 
-  insertContractTemplateBasicInfo(FormGroup formGroup,ContractTemplateBasicInformationResponse? data){
-    formGroup.control('version').value = data?.version;
-    formGroup.control('documentName').value = data?.documentName;
-    formGroup.control('contractA').value = data?.contractA;
-    formGroup.control('contractB').value = data?.contractB;
-    formGroup.control('contractC').value = data?.contractC;
-    formGroup.control('fastening_method').value = data?.fasteningMethod;
-    formGroup.control('contracting_party_for_hospitals').value = data?.contractingPartyForHospitals;
-    formGroup.control('operation').value = data?.operation;
+  insertContractTemplateBasicInfo(
+      FormGroup formGroup, ContractTemplateBasicInformationResponse data) {
+    id = data.id;
+    formGroup.control('file').value = data.file;
+    formGroup.control('version').value = data.version;
+    formGroup.control('documentName').value = data.documentName;
+    formGroup.control('first').value = data.first;
+    formGroup.control('second').value = data.second;
+    formGroup.control('c').value = data.c;
+    formGroup.control('methodOfConclusion').value = data.methodOfConclusion;
+    formGroup.control('contractPartnerInCaseOfHospital').value =
+        data.contractPartnerInCaseOfHospital;
+    formGroup.control('user').value = data.user;
   }
 
-  ValueNotifier<AsyncData<ContractTemplateBasicInformationResponse>> submitContracTemplateBasicInfoData = ValueNotifier(const AsyncData());
-  Future<void> submitContracTemplateBasicInfo(FormGroup formGroup) async{
-    try{
+  ValueNotifier<AsyncData<ContractTemplateBasicInformationResponse>>
+      submitContracTemplateBasicInfoData = ValueNotifier(const AsyncData());
+  Future<void> submitContracTemplateBasicInfo(FormGroup formGroup) async {
+    try {
       submitContracTemplateBasicInfoData.value = const AsyncData(loading: true);
-      final response = await reportRepository.postContractTemplateBasicInformation(
-        ContractTemplateBasicInformationRequest(
-          version: formGroup.control('version').value,
-          documentName: formGroup.control('documentName').value,
-          contractA: formGroup.control('contractA').value,
-          contractB: formGroup.control('contractB').value,
-          contractC: formGroup.control('contractC').value,
-          fasteningMethod: formGroup.control('fastening_method').value,
-          contractingPartyForHospitals: formGroup.control('contracting_party_for_hospitals').value,
-          operation: formGroup.control('operation').value,
-        )
+      String? logoFile;
+      if (formGroup.control('file').value != null) {
+        FileSelect docFile = formGroup.control('file').value;
+        if (docFile.file != null) {
+          try {
+            String base64Image = base64Encode(docFile.file!);
+            FileResponse fileData = await reportRepository.uploadFileBase64(
+              base64Image,
+              docFile.filename!,
+            );
+            logoFile = fileData.filename;
+          } catch (e) {
+            logger.e(e);
+          }
+        } else {
+          logoFile = docFile.url;
+        }
+      }
+
+      ContractTemplateBasicInformationRequest request =
+          ContractTemplateBasicInformationRequest(
+        file: logoFile,
+        version: formGroup.control('version').value,
+        updateDate: DateTime.now(),
+        documentName: formGroup.control('documentName').value,
+        first: formGroup.control('first').value,
+        second: formGroup.control('second').value,
+        c: formGroup.control('c').value,
+        methodOfConclusion: formGroup.control('methodOfConclusion').value,
+        contractPartnerInCaseOfHospital:
+            formGroup.control('contractPartnerInCaseOfHospital').value,
+        user: formGroup.control('user').value,
       );
-      contractTemplatebasicInfoData.value = AsyncData(data: response);
+      final response =
+          await reportRepository.postContractTemplateBasicInformation(request);
+      contractTemplatebasicInfoData.value = AsyncData(data: contractTemplatebasicInfoData.value.data?..add(response));
       submitContracTemplateBasicInfoData.value = AsyncData(data: response);
-    }catch(e){
+      logger.d(response.toJson());
+      logger.d(formGroup.control('version').value);
+    } catch (e) {
       logger.d(e);
       submitContracTemplateBasicInfoData.value = AsyncData(error: e);
     }
   }
-
-
-
 
   ValueNotifier<List<A>> listA = ValueNotifier([
     A(item: '自社'),
@@ -139,7 +173,7 @@ class C {
   C({required this.item});
 }
 
-class FasteningMethod{
+class FasteningMethod {
   String item;
   FasteningMethod({required this.item});
 }

@@ -14,6 +14,13 @@ class ReportRepositoryIml extends ReportRepository {
 
   final ReportRemoteProvider remote;
 
+    @override
+  Future<FileResponse> uploadFileBase64(
+    String file,
+    String filename,
+  ) async =>
+      await remote.uploadFileBase64(file, filename);
+      
   @override
   Future<List<TypeResponse>> getTypes() {
     return remote.getTypes();
@@ -60,7 +67,7 @@ class ReportRepositoryIml extends ReportRepository {
   }
 
   @override
-  Future<ContractTemplateBasicInformationResponse> getContractTemplateBasicInformation() {
+  Future<List<ContractTemplateBasicInformationResponse>> getContractTemplateBasicInformation() {
     return remote.getContractTemplateBasicInformation();
   }
 

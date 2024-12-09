@@ -1311,12 +1311,13 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.CONTRACT_TEMPLATE_DETAIL_BASIC_INFO)
-  Future<ContractTemplateBasicInformationResponse>
+  Future<List<ContractTemplateBasicInformationResponse>>
       getContractTemplateBasicInformation();
 
   @POST(EndPoints.CONTRACT_TEMPLATE_DETAIL_BASIC_INFO)
   Future<ContractTemplateBasicInformationResponse>
       postContractTemplateBasicInformation(
+    @Body()
     ContractTemplateBasicInformationRequest
         contractTemplateBasicInformationRequest,
   );

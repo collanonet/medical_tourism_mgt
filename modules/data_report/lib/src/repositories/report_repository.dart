@@ -2,6 +2,11 @@
 import 'package:core_network/entities.dart';
 
 abstract class ReportRepository {
+  Future<FileResponse> uploadFileBase64(
+    String file,
+    String filename,
+  );
+
   Future<List<TypeResponse>> getTypes();
 
   Future<TypeResponse> postType(TypeRequest typeRequest);
@@ -16,18 +21,23 @@ abstract class ReportRepository {
 
   Future<ContractFilterResponse> getContractFilter();
 
-  Future<ContractFilterResponse> postContractFilter(ContractFilterRequest contractFilterRequest,);
+  Future<ContractFilterResponse> postContractFilter(
+    ContractFilterRequest contractFilterRequest,
+  );
 
-  Future<ContractReportDetailResponse>  getContractReportDetail();
+  Future<ContractReportDetailResponse> getContractReportDetail();
 
   Future<ContractReportDetailResponse> postContractReportDetail(
     ContractReportDetailRequest contractReportDetailRequest,
   );
 
-  Future<ContractTemplateBasicInformationResponse> getContractTemplateBasicInformation();
+  Future<List<ContractTemplateBasicInformationResponse>>
+      getContractTemplateBasicInformation();
 
-  Future<ContractTemplateBasicInformationResponse> postContractTemplateBasicInformation(
-    ContractTemplateBasicInformationRequest contractTemplateBasicInformationRequest,
+  Future<ContractTemplateBasicInformationResponse>
+      postContractTemplateBasicInformation(
+    ContractTemplateBasicInformationRequest
+        contractTemplateBasicInformationRequest,
   );
 
   Future<List<EstimatemasterReportResponse>> getEstimatemasterReport();
@@ -52,4 +62,3 @@ abstract class ReportRepository {
     ProspectiveRankRequest prospectiveRankRequest,
   );
 }
-

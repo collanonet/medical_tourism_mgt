@@ -6811,14 +6811,14 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<ContractTemplateBasicInformationResponse>
+  Future<List<ContractTemplateBasicInformationResponse>>
       getContractTemplateBasicInformation() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ContractTemplateBasicInformationResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<ContractTemplateBasicInformationResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
@@ -6834,8 +6834,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final _value =
-        ContractTemplateBasicInformationResponse.fromJson(_result.data!);
+    var _value = _result.data!
+        .map((dynamic i) => ContractTemplateBasicInformationResponse.fromJson(
+            i as Map<String, dynamic>))
+        .toList();
     return _value;
   }
 
@@ -6847,7 +6849,8 @@ class _ApiService implements ApiService {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(contractTemplateBasicInformationRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ContractTemplateBasicInformationResponse>(Options(
       method: 'POST',

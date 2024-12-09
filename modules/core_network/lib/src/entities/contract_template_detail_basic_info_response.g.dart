@@ -11,27 +11,34 @@ ContractTemplateBasicInformationResponse
             Map<String, dynamic> json) =>
         ContractTemplateBasicInformationResponse(
           id: json['_id'] as String,
+          file: json['file'] as String?,
           version: json['version'] as String?,
+          updateDate: json['updateDate'] == null
+              ? null
+              : DateTime.parse(json['updateDate'] as String),
           documentName: json['documentName'] as String?,
-          contractA: json['contractA'] as String?,
-          contractB: json['contractB'] as String?,
-          contractC: json['contractC'] as String?,
-          fasteningMethod: json['fasteningMethod'] as String?,
-          contractingPartyForHospitals:
-              json['contractingPartyForHospitals'] as String?,
-          operation: json['operation'] as bool?,
+          first: json['first'] as String?,
+          second: json['second'] as String?,
+          c: json['c'] as String?,
+          methodOfConclusion: json['methodOfConclusion'] as String?,
+          contractPartnerInCaseOfHospital:
+              json['contractPartnerInCaseOfHospital'] as String?,
+          user: json['user'] as bool?,
         );
 
 Map<String, dynamic> _$ContractTemplateBasicInformationResponseToJson(
         ContractTemplateBasicInformationResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
+      'file': instance.file,
       'version': instance.version,
+      'updateDate': instance.updateDate?.toIso8601String(),
       'documentName': instance.documentName,
-      'contractA': instance.contractA,
-      'contractB': instance.contractB,
-      'contractC': instance.contractC,
-      'fasteningMethod': instance.fasteningMethod,
-      'contractingPartyForHospitals': instance.contractingPartyForHospitals,
-      'operation': instance.operation,
+      'first': instance.first,
+      'second': instance.second,
+      'c': instance.c,
+      'methodOfConclusion': instance.methodOfConclusion,
+      'contractPartnerInCaseOfHospital':
+          instance.contractPartnerInCaseOfHospital,
+      'user': instance.user,
     };
