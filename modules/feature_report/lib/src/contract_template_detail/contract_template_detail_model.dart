@@ -66,7 +66,11 @@ class ContractTemplateModel {
       contractTemplatebasicInfoData.value = const AsyncData(loading: true);
       final response =
           await reportRepository.getContractTemplateBasicInformation();
-      contractTemplatebasicInfoData.value = AsyncData(data: response);
+      if (response.isNotEmpty) {
+        contractTemplatebasicInfoData.value = AsyncData(data: response);
+      } else {
+        contractTemplatebasicInfoData.value = const AsyncData(data: []);
+      }
     } catch (e) {
       logger.d(e);
     }
@@ -127,7 +131,8 @@ class ContractTemplateModel {
       );
       final response =
           await reportRepository.postContractTemplateBasicInformation(request);
-      contractTemplatebasicInfoData.value = AsyncData(data: contractTemplatebasicInfoData.value.data?..add(response));
+      contractTemplatebasicInfoData.value = AsyncData(
+          data: contractTemplatebasicInfoData.value.data?..add(response));
       submitContracTemplateBasicInfoData.value = AsyncData(data: response);
       logger.d(response.toJson());
       logger.d(formGroup.control('version').value);

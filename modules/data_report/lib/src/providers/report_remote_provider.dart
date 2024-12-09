@@ -29,7 +29,7 @@ class ReportRemoteProvider {
     return apiService.putType(id, typeRequest);
   }
 
-  Future<List<ReportContractResponse>> getReportContrant({String? documentName,String? first,String? second,String? methodOfConclusion}) async {
+  Future<List<ContractTemplateBasicInformationResponse>> getReportContrant({String? documentName,String? first,String? second,String? methodOfConclusion}) async {
     return apiService.getReportContract(
       documentName: documentName,
       first: first,

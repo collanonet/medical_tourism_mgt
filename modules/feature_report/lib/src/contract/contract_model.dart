@@ -9,56 +9,42 @@ import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
-class ContractModel{
+class ContractModel with ChangeNotifier {
   ContractModel({required this.reportRepository});
- final ReportRepository reportRepository;
+  final ReportRepository reportRepository;
 
-   ValueNotifier<AsyncData<List<ContractTemplateBasicInformationResponse>>>
-      fetchContractFilterData = ValueNotifier(const AsyncData());
-  Future<void> fetchContractFilter() async {
-    try {
-      fetchContractFilterData.value = const AsyncData(loading: true);
-      final response =
-          await reportRepository.getContractTemplateBasicInformation();
-      fetchContractFilterData.value = AsyncData(data: response);
-    } catch (e) {
-      logger.d(e);
-    }
+  ValueNotifier<AsyncData<List<ContractTemplateBasicInformationResponse>>>
+      filterData = ValueNotifier(const AsyncData());
+  Future<void> contractFilter({FormGroup? formGroup}) async {
+    filterData.value = const AsyncData(loading: true);
+
+    notifyListeners();
+    await reportRepository
+        .getReportContract(
+            documentName: formGroup?.control('documentName').value == null
+                ? null
+                : formGroup!.control('documentName').value,
+            first: formGroup?.control('first').value == null
+                ? null
+                : formGroup!.control('first').value,
+            second: formGroup?.control('second').value == null
+                ? null
+                : formGroup!.control('second').value,
+            methodOfConclusion:
+                formGroup?.control('methodOfConclusion').value == null
+                    ? null
+                    : formGroup!.control('methodOfConclusion').value)
+        .then((value) {
+      filterData.value = AsyncData(data: value);
+    }).catchError((err) {
+      filterData.value = AsyncData(error: err);
+    }).whenComplete(() {
+      notifyListeners();
+    });
+    logger.d(formGroup!.control('first').value);
+    logger.d(formGroup.value);
   }
 
- ValueNotifier<AsyncData<List<ReportContractResponse>>> contractData = ValueNotifier(const AsyncData<List<ReportContractResponse>>(data: []));
-  Future<void> fetchContract() async {
-    try{
-      contractData.value = const AsyncData(loading: true);
-      final response = await reportRepository.getReportContract();
-      contractData.value = AsyncData(data: response);
-
-    }catch(e){
-      logger.d(e);
-      contractData.value = AsyncData(error: e);
-    }
-  }
-
-  
-
-
-
-  ValueNotifier<AsyncData<List<ReportContractResponse>>> filterData = ValueNotifier(const AsyncData());
-  Future<void> postContractFilter({FormGroup? formGroup}) async {
-    try{
-      filterData.value = const AsyncData(loading: true);
-       await reportRepository.getReportContract(
-        documentName: formGroup?.control('documentName').value == null ? null : formGroup!.control('documentName').value,
-        first: formGroup?.control('first').value == null ? null : formGroup!.control('first').value,
-        second: formGroup?.control('second').value == null ? null : formGroup!.control('second').value,
-        methodOfConclusion: formGroup?.control('methodOfConclusion').value == null ? null : formGroup!.control('methodOfConclusion').value
-      );
-  	  
-    }catch(e){
-      logger.d(e);
-      filterData.value = AsyncData(error: e);
-    }
-  }
   ValueNotifier<List<A>> listA = ValueNotifier([
     A(item: '自社'),
   ]);
@@ -75,17 +61,17 @@ class ContractModel{
   ]);
 }
 
-class A{
+class A {
   String item;
   A({required this.item});
 }
 
-class B{
+class B {
   String item;
   B({required this.item});
 }
 
-class FasteningMethod{
+class FasteningMethod {
   String item;
   FasteningMethod({required this.item});
 }

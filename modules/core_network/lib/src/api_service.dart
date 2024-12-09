@@ -1287,7 +1287,7 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.REPROT_CONTRACT)
-  Future<List<ReportContractResponse>> getReportContract({
+  Future<List<ContractTemplateBasicInformationResponse>> getReportContract({
     @Query('documentName') String? documentName,
     @Query('first') String? first,
     @Query('second') String? second,

@@ -37,7 +37,7 @@ class ReportRepositoryIml extends ReportRepository {
   }
 
     @override
-  Future<List<ReportContractResponse>> getReportContract({String? documentName, String? first, String? second, String? methodOfConclusion}) {
+  Future<List<ContractTemplateBasicInformationResponse>> getReportContract({String? documentName, String? first, String? second, String? methodOfConclusion}) {
     return remote.apiService.getReportContract(
       documentName: documentName,
       first: first,

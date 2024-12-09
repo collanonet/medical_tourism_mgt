@@ -6640,20 +6640,31 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<ReportContractResponse>> getReportContract() async {
+  Future<List<ContractTemplateBasicInformationResponse>> getReportContract({
+    String? documentName,
+    String? first,
+    String? second,
+    String? methodOfConclusion,
+  }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'documentName': documentName,
+      r'first': first,
+      r'second': second,
+      r'methodOfConclusion': methodOfConclusion,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<ReportContractResponse>>(Options(
+        _setStreamType<List<ContractTemplateBasicInformationResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/report-contract',
+              '/contract-template-details',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -6663,94 +6674,9 @@ class _ApiService implements ApiService {
               baseUrl,
             ))));
     var _value = _result.data!
-        .map((dynamic i) =>
-            ReportContractResponse.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => ContractTemplateBasicInformationResponse.fromJson(
+            i as Map<String, dynamic>))
         .toList();
-    return _value;
-  }
-
-  @override
-  Future<ReportContractResponse> postReportContract(
-      ReportContractRequest reportContractRequest) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(reportContractRequest.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ReportContractResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/report-contract',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = ReportContractResponse.fromJson(_result.data!);
-    return _value;
-  }
-
-  @override
-  Future<ContractFilterResponse> getReportFilter() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ContractFilterResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/report-contract-filter',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = ContractFilterResponse.fromJson(_result.data!);
-    return _value;
-  }
-
-  @override
-  Future<ContractFilterResponse> postReportFilter(
-      ContractFilterRequest contractFilterRequest) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(contractFilterRequest.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ContractFilterResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/report-contract-filter',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = ContractFilterResponse.fromJson(_result.data!);
     return _value;
   }
 
