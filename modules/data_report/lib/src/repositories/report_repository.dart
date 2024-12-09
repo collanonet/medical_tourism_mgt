@@ -13,17 +13,17 @@ abstract class ReportRepository {
 
   Future<TypeResponse> putType(String id, TypeRequest typeRequest);
 
-  Future<List<ReportContractResponse>> getReportContract();
+  Future<List<ReportContractResponse>> getReportContract({String? documentName, String? first,String? second,String? methodOfConclusion});
 
-  Future<ReportContractResponse> postReportContract(
-    ReportContractRequest reportContractRequest,
-  );
+  // Future<ReportContractResponse> postReportContract(
+  //   ReportContractRequest reportContractRequest,
+  // );
 
-  Future<ContractFilterResponse> getContractFilter();
+  // Future<ContractFilterResponse> getContractFilter();
 
-  Future<ContractFilterResponse> postContractFilter(
-    ContractFilterRequest contractFilterRequest,
-  );
+  // Future<ContractFilterResponse> postContractFilter(
+  //   ContractFilterRequest contractFilterRequest,
+  // );
 
   Future<ContractReportDetailResponse> getContractReportDetail();
 

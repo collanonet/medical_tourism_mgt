@@ -1287,20 +1287,25 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.REPROT_CONTRACT)
-  Future<List<ReportContractResponse>> getReportContract();
+  Future<List<ReportContractResponse>> getReportContract({
+    @Query('documentName') String? documentName,
+    @Query('first') String? first,
+    @Query('second') String? second,
+    @Query('methodOfConclusion') String? methodOfConclusion,
+  });
 
-  @POST(EndPoints.REPROT_CONTRACT)
-  Future<ReportContractResponse> postReportContract(
-    @Body() ReportContractRequest reportContractRequest,
-  );
+  // @POST(EndPoints.REPROT_CONTRACT)
+  // Future<ReportContractResponse> postReportContract(
+  //   @Body() ReportContractRequest reportContractRequest,
+  // );
 
-  @GET(EndPoints.REPROT_CONTRACT_FILTER)
-  Future<ContractFilterResponse> getReportFilter();
+  // @GET(EndPoints.REPROT_CONTRACT_FILTER)
+  // Future<ContractFilterResponse> getReportFilter();
 
-  @POST(EndPoints.REPROT_CONTRACT_FILTER)
-  Future<ContractFilterResponse> postReportFilter(
-    @Body() ContractFilterRequest contractFilterRequest,
-  );
+  // @POST(EndPoints.REPROT_CONTRACT_FILTER)
+  // Future<ContractFilterResponse> postReportFilter(
+  //   @Body() ContractFilterRequest contractFilterRequest,
+  // );
 
   @GET(EndPoints.REPROT_CONTRACT_DETAIL)
   Future<ContractReportDetailResponse> getContractReportDetail();

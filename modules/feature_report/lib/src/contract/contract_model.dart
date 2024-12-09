@@ -13,6 +13,18 @@ class ContractModel{
   ContractModel({required this.reportRepository});
  final ReportRepository reportRepository;
 
+   ValueNotifier<AsyncData<List<ContractTemplateBasicInformationResponse>>>
+      fetchContractFilterData = ValueNotifier(const AsyncData());
+  Future<void> fetchContractFilter() async {
+    try {
+      fetchContractFilterData.value = const AsyncData(loading: true);
+      final response =
+          await reportRepository.getContractTemplateBasicInformation();
+      fetchContractFilterData.value = AsyncData(data: response);
+    } catch (e) {
+      logger.d(e);
+    }
+  }
 
  ValueNotifier<AsyncData<List<ReportContractResponse>>> contractData = ValueNotifier(const AsyncData<List<ReportContractResponse>>(data: []));
   Future<void> fetchContract() async {
@@ -27,43 +39,24 @@ class ContractModel{
     }
   }
 
-  ValueNotifier<AsyncData<ContractFilterResponse>> filterData = ValueNotifier(const AsyncData());
-  Future<void> fetchContractFilter(FormGroup formGroup) async{
+  
+
+
+
+  ValueNotifier<AsyncData<List<ReportContractResponse>>> filterData = ValueNotifier(const AsyncData());
+  Future<void> postContractFilter({FormGroup? formGroup}) async {
     try{
       filterData.value = const AsyncData(loading: true);
-      final response = await reportRepository.getContractFilter();
-      insertFilterContract(formGroup, response);
-
+       await reportRepository.getReportContract(
+        documentName: formGroup?.control('documentName').value == null ? null : formGroup!.control('documentName').value,
+        first: formGroup?.control('first').value == null ? null : formGroup!.control('first').value,
+        second: formGroup?.control('second').value == null ? null : formGroup!.control('second').value,
+        methodOfConclusion: formGroup?.control('methodOfConclusion').value == null ? null : formGroup!.control('methodOfConclusion').value
+      );
+  	  
     }catch(e){
       logger.d(e);
       filterData.value = AsyncData(error: e);
-    }
-  }
-
-  void insertFilterContract(FormGroup formGroup,ContractFilterResponse? data){
-    formGroup.control('agreementName').value = data?.agreementName;
-    formGroup.control('contractA').value = data?.contractA;
-    formGroup.control('contractB').value = data?.contractB;
-    formGroup.control('fastening_method').value = data?.fasteningMethod;
-  }
-
-  ValueNotifier<AsyncData<ContractFilterResponse>> submitContractFilter = ValueNotifier(const AsyncData());
-  Future<void> postContractFilter(FormGroup formGroup) async {
-    try{
-      submitContractFilter.value = const AsyncData(loading: true);
-      final response = await reportRepository.postContractFilter(
-        ContractFilterRequest(
-           agreementName: formGroup.control('agreementName').value,
-          contractA: formGroup.control('contractA').value,
-          contractB: formGroup.control('contractB').value,
-          fasteningMethod: formGroup.control('fastening_method').value,
-        )
-      );
-      submitContractFilter.value = AsyncData(data: response);
-  	  filterData.value = AsyncData(data: response);
-    }catch(e){
-      logger.d(e);
-      submitContractFilter.value = AsyncData(error: e);
     }
   }
   ValueNotifier<List<A>> listA = ValueNotifier([

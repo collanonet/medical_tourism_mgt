@@ -67,7 +67,6 @@ class ContractTemplateModel {
       final response =
           await reportRepository.getContractTemplateBasicInformation();
       contractTemplatebasicInfoData.value = AsyncData(data: response);
-     // insertContractTemplateBasicInfo(formGroup, response);
     } catch (e) {
       logger.d(e);
     }

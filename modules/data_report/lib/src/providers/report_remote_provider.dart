@@ -29,21 +29,28 @@ class ReportRemoteProvider {
     return apiService.putType(id, typeRequest);
   }
 
-  Future<List<ReportContractResponse>> getReportContrant() async {
-    return apiService.getReportContract();
+  Future<List<ReportContractResponse>> getReportContrant({String? documentName,String? first,String? second,String? methodOfConclusion}) async {
+    return apiService.getReportContract(
+      documentName: documentName,
+      first: first,
+      second: second,
+      methodOfConclusion: methodOfConclusion,
+    );
   }
 
-  Future<ReportContractResponse> postReportContract(ReportContractRequest reportContractRequest) async {
-    return apiService.postReportContract(reportContractRequest);
-  }
+  // Future<ReportContractResponse> postReportContract(ReportContractRequest reportContractRequest) async {
+  //   return apiService.postReportContract(reportContractRequest);
+  // }
 
-  Future<ContractFilterResponse> getReportFilter() async{
-    return apiService.getReportFilter();
-  }
+  // Future<ContractFilterResponse> getReportFilter() async{
+  //   return apiService.getReportFilter(
+    
+  //   );
+  // }
   
-  Future<ContractFilterResponse> postReportFilter(ContractFilterRequest contractFilterRequest) async {
-    return apiService.postReportFilter(contractFilterRequest);
-  }
+  // Future<ContractFilterResponse> postReportFilter(ContractFilterRequest contractFilterRequest) async {
+  //   return apiService.postReportFilter(contractFilterRequest);
+  // }
 
   Future<ContractReportDetailResponse> getContractReportDetail() async{
     return apiService.getContractReportDetail();

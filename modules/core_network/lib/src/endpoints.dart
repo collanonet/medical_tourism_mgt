@@ -232,7 +232,7 @@ class EndPoints {
 
   //Report
   static const ESTIMATE_MASTER = '/estimate-master';
-  static const REPROT_CONTRACT = '/report-contract';
+  static const REPROT_CONTRACT = '/contract-template-details';
   static const REPROT_CONTRACT_FILTER = '/report-contract-filter';
   static const REPROT_CONTRACT_DETAIL = '/report-contract-details';
   static const CONTRACT_TEMPLATE_DETAIL_BASIC_INFO = '/contract-template-details';
