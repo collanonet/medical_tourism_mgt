@@ -4,6 +4,7 @@ import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+import 'package:skeletonizer/skeletonizer.dart';
 
 import 'contract_template_detail_form_data.dart';
 import 'contract_template_detail_model.dart';
@@ -56,99 +57,120 @@ class ContractList extends StatelessWidget {
                           .watch<ContractTemplateModel>()
                           .contractTemplatebasicInfoData,
                       builder: (context, value, child) {
-                        return Container(
-                          width: MediaQuery.of(context).size.width,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          padding: const EdgeInsets.all(20),
-                          child: ColumnSeparated(
-                            separatorBuilder: (context, index) => SizedBox(
-                              height: context.appTheme.spacing.marginMedium,
+                        return Skeletonizer(
+                          enabled: value.loading,
+                          child: Container(
+                            width: MediaQuery.of(context).size.width,
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                            children: [
-                              ColumnSeparated(
-                                separatorBuilder:
-                                    (BuildContext context, int index) {
-                                  return const SizedBox(height: 16);
-                                },
-                                children: List.generate(
-                                  value.data?.length ?? 0,
-                                  (index) {
-                                    var respone = value.data?[index];
-                                    return Container(
-                                      decoration: BoxDecoration(
-                                        color: index.isEven
-                                            ? context.appTheme.primaryColor
-                                                .withOpacity(0.1)
-                                            : Colors.white,
-                                      ),
-                                      padding: const EdgeInsets.all(10),
-                                      child: RowSeparated(
-                                        separatorBuilder:
-                                            (BuildContext context, int index) {
-                                          return const SizedBox(width: 16);
-                                        },
-                                        children: [
-                                          const SizedBox(width: 50),
-                                          Expanded(
-                                            child: Text(
-                                              respone?.version ?? '--//--',
-                                              style:
-                                                  context.textTheme.bodySmall,
-                                            ),
-                                          ),
-                                          Expanded(
-                                            child: Text(
-                                              respone?.updateDate != null
-                                                  ? Dates.formatFullDate(
-                                                      respone!.updateDate!)
-                                                  : '',
-                                              style:
-                                                  context.textTheme.bodyMedium,
-                                            ),
-                                          ),
-                                          Expanded(
-                                            flex: 3,
-                                            child: Text(
-                                              respone?.documentName ?? '',
-                                              style:
-                                                  context.textTheme.bodyMedium,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            child: respone?.user == true
-                                                ? Container(
-                                                    width: 80,
-                                                    height: 30,
-                                                    padding: const EdgeInsets
-                                                        .symmetric(
-                                                        vertical: 5,
-                                                        horizontal: 10),
-                                                    decoration: BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              5),
-                                                      border: Border.all(
-                                                        color: const Color
-                                                            .fromARGB(
-                                                            255, 6, 235, 216),
-                                                      ),
-                                                    ),
-                                                    child: const Center(
-                                                      child: Text('運用中'),
-                                                    ),
-                                                  )
-                                                : const SizedBox(),
-                                          ),
-                                        ],
-                                      ),
-                                    );
-                                  },
-                                ),
+                            padding: const EdgeInsets.all(20),
+                            child: ColumnSeparated(
+                              separatorBuilder: (context, index) => SizedBox(
+                                height: context.appTheme.spacing.marginMedium,
                               ),
-                            ],
+                              children: [
+                                ColumnSeparated(
+                                    separatorBuilder:
+                                        (BuildContext context, int index) {
+                                      return const SizedBox(height: 16);
+                                    },
+                                    children: [
+                                      ListView.separated(
+                                        shrinkWrap: true,
+                                        itemCount: value.data?.length ?? 0,
+                                        physics:
+                                            const NeverScrollableScrollPhysics(),
+                                        itemBuilder: (context, index) {
+                                          var respone = value.data?[index];
+                                          return Container(
+                                            decoration: BoxDecoration(
+                                              color: index.isEven
+                                                  ? context
+                                                      .appTheme.primaryColor
+                                                      .withOpacity(0.1)
+                                                  : Colors.white,
+                                            ),
+                                            padding: const EdgeInsets.all(10),
+                                            child: RowSeparated(
+                                              separatorBuilder:
+                                                  (BuildContext context,
+                                                      int index) {
+                                                return const SizedBox(
+                                                    width: 16);
+                                              },
+                                              children: [
+                                                const SizedBox(width: 50),
+                                                Expanded(
+                                                  child: Text(
+                                                    respone?.version ??
+                                                        '--//--',
+                                                    style: context
+                                                        .textTheme.bodySmall,
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Text(
+                                                    respone?.updateDate != null
+                                                        ? Dates.formatFullDate(
+                                                            respone!
+                                                                .updateDate!)
+                                                        : '',
+                                                    style: context
+                                                        .textTheme.bodyMedium,
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  flex: 3,
+                                                  child: Text(
+                                                    respone?.documentName ?? '',
+                                                    style: context
+                                                        .textTheme.bodyMedium,
+                                                  ),
+                                                ),
+                                                SizedBox(
+                                                  child: respone?.user == true
+                                                      ? Container(
+                                                          width: 80,
+                                                          height: 30,
+                                                          padding:
+                                                              const EdgeInsets
+                                                                  .symmetric(
+                                                                  vertical: 5,
+                                                                  horizontal:
+                                                                      10),
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        5),
+                                                            border: Border.all(
+                                                              color: const Color
+                                                                  .fromARGB(255,
+                                                                  6, 235, 216),
+                                                            ),
+                                                          ),
+                                                          child: const Center(
+                                                            child: Text('運用中'),
+                                                          ),
+                                                        )
+                                                      : const SizedBox(),
+                                                ),
+                                              ],
+                                            ),
+                                          );
+                                        },
+                                        separatorBuilder: (context, index) {
+                                          return const Divider(
+                                            thickness: 0.5,
+                                          );
+                                        },
+                                      )
+                                    ]),
+                              ],
+                            ),
                           ),
                         );
                       },
