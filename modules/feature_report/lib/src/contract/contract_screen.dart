@@ -351,7 +351,7 @@ class ContractScreen extends StatelessWidget {
                                                             ),
                                                             child: const Center(
                                                               child:
-                                                                  Text('運用中'),
+                                                                  Text('電子契約'),
                                                             ),
                                                           )
                                                         : const SizedBox(),
