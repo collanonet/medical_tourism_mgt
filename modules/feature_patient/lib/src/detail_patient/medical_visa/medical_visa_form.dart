@@ -7,7 +7,7 @@ FormGroup medicalVisaForm({required String medicalRecord}) {
   return FormGroup(
     {
       //本人 personal
-      '_id' : FormControl<String>(),
+      '_id': FormControl<String>(),
       'medicalRecord': FormControl<String>(value: medicalRecord),
       'personal': FormArray(
         [
@@ -270,12 +270,12 @@ FormGroup medicalVisaForm({required String medicalRecord}) {
       ),
       'travel_companion': FormGroup(
         {
-          'nameRomaji': FormControl<String>(),
+          'nameRomaji': FormControl<String>(value: ''),
           'dateBirth': FormControl<DateTime>(),
           'age': FormControl<int>(),
           'sex': FormControl<String>(value: ''),
-          'addressArea': FormControl<String>(),
-          'numberPassport': FormControl<String>(),
+          'addressArea': FormControl<String>(value: ''),
+          'numberPassport': FormControl<String>(value: ''),
           'travelInfo': FormArray(
             [
               FormGroup(
