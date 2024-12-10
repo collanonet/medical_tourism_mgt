@@ -316,7 +316,7 @@ class ContractScreen extends StatelessWidget {
                                                   ),
                                                   Expanded(
                                                     child: Text(
-                                                      respone.methodOfConclusion ??
+                                                      respone.contractPartnerInCaseOfHospital ??
                                                           '--//--',
                                                       style: context
                                                           .textTheme.bodyMedium,

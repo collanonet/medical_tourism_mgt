@@ -1,6 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -29,16 +30,23 @@ class ContractList extends StatelessWidget {
           children: [
             const Row(
               children: [
-                SizedBox(width: 50),
+                SizedBox(width: 30),
                 Expanded(
+                  flex: 2,
                   child: Text('バージョン'),
                 ),
                 Expanded(
+                  flex: 2,
                   child: Text('更新日'),
                 ),
+                //SizedBox(width: 90),
                 Expanded(
                   flex: 3,
                   child: Text('件名'),
+                ),
+                Expanded(
+                  flex: 2,
+                  child: SizedBox(),
                 ),
                 Expanded(
                   child: Text('運用'),
@@ -101,8 +109,9 @@ class ContractList extends StatelessWidget {
                                                     width: 16);
                                               },
                                               children: [
-                                                const SizedBox(width: 50),
+                                                // const SizedBox(width: 50),
                                                 Expanded(
+                                                  flex: 2,
                                                   child: Text(
                                                     respone?.version ??
                                                         '--//--',
@@ -111,6 +120,7 @@ class ContractList extends StatelessWidget {
                                                   ),
                                                 ),
                                                 Expanded(
+                                                  flex: 2,
                                                   child: Text(
                                                     respone?.updateDate != null
                                                         ? Dates.formatFullDate(
@@ -128,6 +138,10 @@ class ContractList extends StatelessWidget {
                                                     style: context
                                                         .textTheme.bodyMedium,
                                                   ),
+                                                ),
+                                                const Expanded(
+                                                  flex: 2,
+                                                  child: SizedBox(),
                                                 ),
                                                 SizedBox(
                                                   child: respone?.user == true
