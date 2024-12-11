@@ -422,7 +422,8 @@ class MedicalVisaModel with ChangeNotifier {
     if (response.afterGettingVisa?.boardingPass?.isNotEmpty == true) {
       afterGettingVisaBoardingPass.clear();
       afterGettingVisaBoardingPass.reset();
-      for (BoardingPass element in response.afterGettingVisa?.boardingPass ?? []) {
+      for (BoardingPass element
+          in response.afterGettingVisa?.boardingPass ?? []) {
         afterGettingVisaBoardingPass.add(
           FormGroup(
             {
@@ -657,7 +658,8 @@ class MedicalVisaModel with ChangeNotifier {
     if (response.travelCompanion?.boardingPass?.isNotEmpty == true) {
       travelCompanionFormBoardingPass.clear();
       travelCompanionFormBoardingPass.reset();
-      for (BoardingPass element in response.travelCompanion?.boardingPass ?? []) {
+      for (BoardingPass element
+          in response.travelCompanion?.boardingPass ?? []) {
         travelCompanionFormBoardingPass.add(
           FormGroup({
             'boardingPassForReturnFlight': FormControl<DateTime>(
@@ -782,7 +784,8 @@ class MedicalVisaModel with ChangeNotifier {
     if (response.afterGettingVisaFinal?.vasaInfo?.isNotEmpty == true) {
       afterGettingVisaFinalFormVisaInfo.clear();
       afterGettingVisaFinalFormVisaInfo.reset();
-      for (GettingVisaInfoRequest element in response.afterGettingVisaFinal?.vasaInfo ?? []) {
+      for (GettingVisaInfoRequest element
+          in response.afterGettingVisaFinal?.vasaInfo ?? []) {
         afterGettingVisaFinalFormVisaInfo.add(
           FormGroup(
             {
@@ -827,7 +830,8 @@ class MedicalVisaModel with ChangeNotifier {
     if (response.afterGettingVisaFinal?.ticket?.isNotEmpty == true) {
       afterGettingVisaFinalFormTicket.clear();
       afterGettingVisaFinalFormTicket.reset();
-      for (TicketRequest element in response.afterGettingVisaFinal?.ticket ?? []) {
+      for (TicketRequest element
+          in response.afterGettingVisaFinal?.ticket ?? []) {
         afterGettingVisaFinalFormTicket.add(
           FormGroup(
             {
@@ -857,7 +861,8 @@ class MedicalVisaModel with ChangeNotifier {
     if (response.afterGettingVisaFinal?.ticketBack?.isNotEmpty == true) {
       afterGettingVisaFinalFormTicketBack.clear();
       afterGettingVisaFinalFormTicketBack.reset();
-      for (TicketBackRequest element in response.afterGettingVisaFinal?.ticketBack ?? []) {
+      for (TicketBackRequest element
+          in response.afterGettingVisaFinal?.ticketBack ?? []) {
         afterGettingVisaFinalFormTicketBack.add(
           FormGroup(
             {
@@ -887,7 +892,8 @@ class MedicalVisaModel with ChangeNotifier {
     if (response.afterGettingVisaFinal?.boardingPass?.isNotEmpty == true) {
       afterGettingVisaFinalFormBoardingPass.clear();
       afterGettingVisaFinalFormBoardingPass.reset();
-      for (BoardingPassRequest element in response.afterGettingVisaFinal?.boardingPass ?? []) {
+      for (BoardingPassRequest element
+          in response.afterGettingVisaFinal?.boardingPass ?? []) {
         afterGettingVisaFinalFormBoardingPass.add(
           FormGroup(
             {
@@ -1028,17 +1034,32 @@ class MedicalVisaModel with ChangeNotifier {
       }
 
       List<ScheduleRequest>? schedule = [];
-
-      formRequiredInJapan.control('schedule').value.forEach(
-        (e) {
-          schedule.add(
-            ScheduleRequest(
-              treatmentSchedule: e['treatmentSchedule'],
-              treatmentScheduleFileSelect: e['treatmentScheduleFileSelect'],
-            ),
-          );
-        },
-      );
+      for (dynamic e in formRequiredInJapan.control('schedule').value) {
+        String? treatmentScheduleFileSelect;
+        if (e['treatmentScheduleFileSelect'] != null) {
+          FileSelect docFile = e['treatmentScheduleFileSelect'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              treatmentScheduleFileSelect = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            treatmentScheduleFileSelect = docFile.url;
+          }
+        }
+        schedule.add(
+          ScheduleRequest(
+            treatmentSchedule: e['treatmentSchedule'],
+            treatmentScheduleFileSelect: treatmentScheduleFileSelect,
+          ),
+        );
+      }
 
       String? statementOfReasonsFileSelect;
       if (formRequiredInJapan.control('statementOfReasonsFileSelect').value !=
@@ -1415,7 +1436,7 @@ class MedicalVisaModel with ChangeNotifier {
           formGroup.control('necessaryInJapan') as FormGroup;
       List<VisaInfoRequest> neceessaryVisaInfo = [];
 
-      for (dynamic e in formNequiredInJapan.control('vasaInfo').value) {
+      for (dynamic e in formNequiredInJapan.control('visaInfo').value) {
         String? letterOfGuaranteeFileSelect;
         if (e['letterOfGuaranteeFileSelect'] != null) {
           FileSelect docFile = e['letterOfGuaranteeFileSelect'];
@@ -1467,17 +1488,32 @@ class MedicalVisaModel with ChangeNotifier {
       }
 
       List<ScheduleRequest> neceessarySchedule = [];
-
-      formNequiredInJapan.control('schedule').value.forEach(
-        (e) {
-          neceessarySchedule.add(
-            ScheduleRequest(
-              treatmentSchedule: e['treatmentSchedule'],
-              treatmentScheduleFileSelect: e['treatmentScheduleFileSelect'],
-            ),
-          );
-        },
-      );
+      for (dynamic e in formNequiredInJapan.control('schedule').value) {
+        String? treatmentScheduleFileSelect;
+        if (e['treatmentScheduleFileSelect'] != null) {
+          FileSelect docFile = e['treatmentScheduleFileSelect'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              treatmentScheduleFileSelect = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            treatmentScheduleFileSelect = docFile.url;
+          }
+        }
+        neceessarySchedule.add(
+          ScheduleRequest(
+            treatmentSchedule: e['treatmentSchedule'],
+            treatmentScheduleFileSelect: treatmentScheduleFileSelect,
+          ),
+        );
+      }
 
       String? necessaryStatementOfReasonsFileSelect;
       if (formNequiredInJapan.control('statementOfReasonsFileSelect').value !=
