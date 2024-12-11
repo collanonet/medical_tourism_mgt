@@ -776,7 +776,7 @@ class MedicalVisaModel with ChangeNotifier {
 
       List<MedicalVisaPersonalRequest>? personal = [];
 
-      await formGroup.control('personal').value.forEach(
+      formGroup.control('personal').value.forEach(
         (e) {
           personal.add(
             MedicalVisaPersonalRequest(
@@ -816,67 +816,66 @@ class MedicalVisaModel with ChangeNotifier {
           formGroup.control('requiredInJapan') as FormGroup;
       List<VisaInfoRequest>? visaInfo = [];
 
-      formRequiredInJapan.control('visaInfo').value.forEach(
-        (e) async {
-          try {
-            String? passportFileSelect;
-            if (e['passportFileSelect'] != null) {
-              FileSelect docFile = e['passportFileSelect'];
-              if (docFile.file != null) {
-                try {
-                  String base64Image = base64Encode(docFile.file!);
-                  FileResponse fileData =
-                      await patientRepository.uploadFileBase64(
-                    base64Image,
-                    docFile.filename!,
-                  );
-                  passportFileSelect = fileData.filename;
-                } catch (e) {
-                  logger.e(e);
-                }
-              } else {
-                passportFileSelect = docFile.url;
+      for (dynamic element in formRequiredInJapan.control('visaInfo').value) {
+        logger.d('Data visaInfo ${element['passportFileSelect']}');
+        try {
+          String? passportFileSelect;
+          if (element['passportFileSelect'] != null) {
+            FileSelect docFile = element['passportFileSelect'];
+            if (docFile.file != null) {
+              try {
+                String base64Image = base64Encode(docFile.file!);
+                FileResponse fileData =
+                    await patientRepository.uploadFileBase64(
+                  base64Image,
+                  docFile.filename!,
+                );
+                passportFileSelect = fileData.filename;
+              } catch (e) {
+                logger.e(e);
               }
+            } else {
+              passportFileSelect = docFile.url;
             }
-            String? letterOfGuaranteeFileSelect;
-            if (e['letterOfGuaranteeFileSelect'] != null) {
-              FileSelect docFile = e['letterOfGuaranteeFileSelect'];
-              if (docFile.file != null) {
-                try {
-                  String base64Image = base64Encode(docFile.file!);
-                  FileResponse fileData =
-                      await patientRepository.uploadFileBase64(
-                    base64Image,
-                    docFile.filename!,
-                  );
-                  letterOfGuaranteeFileSelect = fileData.filename;
-                } catch (e) {
-                  logger.e(e);
-                }
-              } else {
-                letterOfGuaranteeFileSelect = docFile.url;
-              }
-            }
-
-            visaInfo.add(
-              VisaInfoRequest(
-                passportDate: e['passportDate'],
-                passportFileSelect: passportFileSelect,
-                letterOfGuaranteeDate: e['letterOfGuaranteeDate'],
-                letterOfGuaranteeFileSelect: letterOfGuaranteeFileSelect,
-                sendBy: e['sendBy'],
-                byEMS: e['byEMS'],
-                byFedex: e['byFedex'],
-                byOthers: e['byOthers'],
-              ),
-            );
-            logger.d('Data ${passportFileSelect.toString()}');
-            logger.d('All ${visaInfo.toList()}');
-          } catch (e) {
-            logger.e('Error while processing visaInfo: ${e.toString()}');
           }
-        },
-      );
+          String? letterOfGuaranteeFileSelect;
+          if (element['letterOfGuaranteeFileSelect'] != null) {
+            FileSelect docFile = element['letterOfGuaranteeFileSelect'];
+            if (docFile.file != null) {
+              try {
+                String base64Image = base64Encode(docFile.file!);
+                FileResponse fileData =
+                    await patientRepository.uploadFileBase64(
+                  base64Image,
+                  docFile.filename!,
+                );
+                letterOfGuaranteeFileSelect = fileData.filename;
+              } catch (e) {
+                logger.e(e);
+              }
+            } else {
+              letterOfGuaranteeFileSelect = docFile.url;
+            }
+          }
+
+          visaInfo.add(
+            VisaInfoRequest(
+              passportDate: element['passportDate'],
+              passportFileSelect: passportFileSelect,
+              letterOfGuaranteeDate: element['letterOfGuaranteeDate'],
+              letterOfGuaranteeFileSelect: letterOfGuaranteeFileSelect,
+              sendBy: element['sendBy'],
+              byEMS: element['byEMS'],
+              byFedex: element['byFedex'],
+              byOthers: element['byOthers'],
+            ),
+          );
+          logger.d('Data ${passportFileSelect.toString()}');
+          logger.d('All ${visaInfo.toList()}');
+        } catch (e) {
+          logger.e('Error while processing visaInfo: ${e.toString()}');
+        }
+      }
 
       List<ScheduleRequest>? schedule = [];
 
@@ -959,6 +958,7 @@ class MedicalVisaModel with ChangeNotifier {
         },
       );
 
+      logger.d('Data first ${visaInfo.first.toJson()}');
       RequiredInJapan requiredInJapan = RequiredInJapan(
         visaInfo: visaInfo,
         schedule: schedule,
@@ -987,156 +987,142 @@ class MedicalVisaModel with ChangeNotifier {
           formGroup.control('afterGettingVisa') as FormGroup;
       List<GettingVisaInfoRequest>? gettingVisaInfo = [];
 
-      afterGettingVisaForm.control('vasaInfo').value.forEach(
-        (e) async {
-          String? visaPageFileName;
-          if (e['visaPageFileName'] != null) {
-            FileSelect docFile = e['visaPageFileName'];
-            if (docFile.file != null) {
-              try {
-                String base64Image = base64Encode(docFile.file!);
-                FileResponse fileData =
-                    await patientRepository.uploadFileBase64(
-                  base64Image,
-                  docFile.filename!,
-                );
-                visaPageFileName = fileData.filename;
-              } catch (e) {
-                logger.e(e);
-              }
-            } else {
-              visaPageFileName = docFile.url;
+      for (dynamic e in afterGettingVisaForm.control('vasaInfo').value) {
+        String? visaPageFileName;
+        if (e['visaPageFileName'] != null) {
+          FileSelect docFile = e['visaPageFileName'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              visaPageFileName = fileData.filename;
+            } catch (e) {
+              logger.e(e);
             }
+          } else {
+            visaPageFileName = docFile.url;
           }
+        }
 
-          String? landingPermitFileName;
-          if (e['landingPermitFileName'] != null) {
-            FileSelect docFile = e['landingPermitFileName'];
-            if (docFile.file != null) {
-              try {
-                String base64Image = base64Encode(docFile.file!);
-                FileResponse fileData =
-                    await patientRepository.uploadFileBase64(
-                  base64Image,
-                  docFile.filename!,
-                );
-                landingPermitFileName = fileData.filename;
-              } catch (e) {
-                logger.e(e);
-              }
-            } else {
-              landingPermitFileName = docFile.url;
+        String? landingPermitFileName;
+        if (e['landingPermitFileName'] != null) {
+          FileSelect docFile = e['landingPermitFileName'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              landingPermitFileName = fileData.filename;
+            } catch (e) {
+              logger.e(e);
             }
+          } else {
+            landingPermitFileName = docFile.url;
           }
-          gettingVisaInfo.add(
-            GettingVisaInfoRequest(
-              visaPage: e['visaPage'],
-              visaPageFileName: visaPageFileName,
-              landingPermit: e['landingPermit'],
-              landingPermitFileName: landingPermitFileName,
-            ),
-          );
-        },
-      );
+        }
+        gettingVisaInfo.add(
+          GettingVisaInfoRequest(
+            visaPage: e['visaPage'],
+            visaPageFileName: visaPageFileName,
+            landingPermit: e['landingPermit'],
+            landingPermitFileName: landingPermitFileName,
+          ),
+        );
+      }
 
       List<TicketRequest>? ticket = [];
 
-      afterGettingVisaForm.control('ticket').value.forEach(
-        (e) async {
-          String? planeTicketForYourVisitToJapanFileName;
-          if (e['planeTicketForYourVisitToJapanFileName'] != null) {
-            FileSelect docFile = e['planeTicketForYourVisitToJapanFileName'];
-            if (docFile.file != null) {
-              try {
-                String base64Image = base64Encode(docFile.file!);
-                FileResponse fileData =
-                    await patientRepository.uploadFileBase64(
-                  base64Image,
-                  docFile.filename!,
-                );
-                planeTicketForYourVisitToJapanFileName = fileData.filename;
-              } catch (e) {
-                logger.e(e);
-              }
-            } else {
-              planeTicketForYourVisitToJapanFileName = docFile.url;
+      for (dynamic e in afterGettingVisaForm.control('ticket').value) {
+        String? planeTicketForYourVisitToJapanFileName;
+        if (e['planeTicketForYourVisitToJapanFileName'] != null) {
+          FileSelect docFile = e['planeTicketForYourVisitToJapanFileName'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              planeTicketForYourVisitToJapanFileName = fileData.filename;
+            } catch (e) {
+              logger.e(e);
             }
+          } else {
+            planeTicketForYourVisitToJapanFileName = docFile.url;
           }
-          ticket.add(
-            TicketRequest(
-              planeTicketForYourVisitToJapan:
-                  e['planeTicketForYourVisitToJapan'],
-              planeTicketForYourVisitToJapanFileName:
-                  planeTicketForYourVisitToJapanFileName,
-            ),
-          );
-        },
-      );
+        }
+        ticket.add(
+          TicketRequest(
+            planeTicketForYourVisitToJapan: e['planeTicketForYourVisitToJapan'],
+            planeTicketForYourVisitToJapanFileName:
+                planeTicketForYourVisitToJapanFileName,
+          ),
+        );
+      }
 
       List<TicketBackRequest>? ticketBack = [];
 
-      afterGettingVisaForm.control('ticketBack').value.forEach(
-        (e) async {
-          String? returnFlightTicketFileName;
-          if (e['returnFlightTicketFileName'] != null) {
-            FileSelect docFile = e['returnFlightTicketFileName'];
-            if (docFile.file != null) {
-              try {
-                String base64Image = base64Encode(docFile.file!);
-                FileResponse fileData =
-                    await patientRepository.uploadFileBase64(
-                  base64Image,
-                  docFile.filename!,
-                );
-                returnFlightTicketFileName = fileData.filename;
-              } catch (e) {
-                logger.e(e);
-              }
-            } else {
-              returnFlightTicketFileName = docFile.url;
+      for (dynamic e in afterGettingVisaForm.control('ticketBack').value) {
+        String? returnFlightTicketFileName;
+        if (e['returnFlightTicketFileName'] != null) {
+          FileSelect docFile = e['returnFlightTicketFileName'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              returnFlightTicketFileName = fileData.filename;
+            } catch (e) {
+              logger.e(e);
             }
+          } else {
+            returnFlightTicketFileName = docFile.url;
           }
-          ticketBack.add(
-            TicketBackRequest(
-              returnFlightTicket: e['returnFlightTicket'],
-              returnFlightTicketFileName: returnFlightTicketFileName,
-            ),
-          );
-        },
-      );
+        }
+        ticketBack.add(
+          TicketBackRequest(
+            returnFlightTicket: e['returnFlightTicket'],
+            returnFlightTicketFileName: returnFlightTicketFileName,
+          ),
+        );
+      }
 
       List<BoardingPassRequest>? boardingPass = [];
 
-      afterGettingVisaForm.control('boardingPass').value.forEach(
-        (e) async {
-          String? boardingPassForReturnFlightFileName;
-          if (e['boardingPassForReturnFlightFileName'] != null) {
-            FileSelect docFile = e['boardingPassForReturnFlightFileName'];
-            if (docFile.file != null) {
-              try {
-                String base64Image = base64Encode(docFile.file!);
-                FileResponse fileData =
-                    await patientRepository.uploadFileBase64(
-                  base64Image,
-                  docFile.filename!,
-                );
-                boardingPassForReturnFlightFileName = fileData.filename;
-              } catch (e) {
-                logger.e(e);
-              }
-            } else {
-              boardingPassForReturnFlightFileName = docFile.url;
+      for (dynamic e in afterGettingVisaForm.control('boardingPass').value) {
+        String? boardingPassForReturnFlightFileName;
+        if (e['boardingPassForReturnFlightFileName'] != null) {
+          FileSelect docFile = e['boardingPassForReturnFlightFileName'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              boardingPassForReturnFlightFileName = fileData.filename;
+            } catch (e) {
+              logger.e(e);
             }
+          } else {
+            boardingPassForReturnFlightFileName = docFile.url;
           }
-          boardingPass.add(
-            BoardingPassRequest(
-              boardingPassForReturnFlight: e['boardingPassForReturnFlight'],
-              boardingPassForReturnFlightFileName:
-                  boardingPassForReturnFlightFileName,
-            ),
-          );
-        },
-      );
+        }
+        boardingPass.add(
+          BoardingPassRequest(
+            boardingPassForReturnFlight: e['boardingPassForReturnFlight'],
+            boardingPassForReturnFlightFileName:
+                boardingPassForReturnFlightFileName,
+          ),
+        );
+      }
 
       String? certificateOfEligibilityFileName;
       if (afterGettingVisaForm
@@ -1204,57 +1190,53 @@ class MedicalVisaModel with ChangeNotifier {
 
       List<GettingVisaInfoRequest>? compationVisaInfo = [];
 
-      travelCompanionForm.control('vasaInfo').value.forEach(
-        (e) async {
-          String? visaPageFileName;
-          if (e['visaPageFileName'] != null) {
-            FileSelect docFile = e['visaPageFileName'];
-            if (docFile.file != null) {
-              try {
-                String base64Image = base64Encode(docFile.file!);
-                FileResponse fileData =
-                    await patientRepository.uploadFileBase64(
-                  base64Image,
-                  docFile.filename!,
-                );
-                visaPageFileName = fileData.filename;
-              } catch (e) {
-                logger.e(e);
-              }
-            } else {
-              visaPageFileName = docFile.url;
+      for (dynamic e in travelCompanionForm.control('vasaInfo').value) {
+        String? visaPageFileName;
+        if (e['visaPageFileName'] != null) {
+          FileSelect docFile = e['visaPageFileName'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              visaPageFileName = fileData.filename;
+            } catch (e) {
+              logger.e(e);
             }
+          } else {
+            visaPageFileName = docFile.url;
           }
+        }
 
-          String? landingPermitFileName;
-          if (e['landingPermitFileName'] != null) {
-            FileSelect docFile = e['landingPermitFileName'];
-            if (docFile.file != null) {
-              try {
-                String base64Image = base64Encode(docFile.file!);
-                FileResponse fileData =
-                    await patientRepository.uploadFileBase64(
-                  base64Image,
-                  docFile.filename!,
-                );
-                landingPermitFileName = fileData.filename;
-              } catch (e) {
-                logger.e(e);
-              }
-            } else {
-              landingPermitFileName = docFile.url;
+        String? landingPermitFileName;
+        if (e['landingPermitFileName'] != null) {
+          FileSelect docFile = e['landingPermitFileName'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              landingPermitFileName = fileData.filename;
+            } catch (e) {
+              logger.e(e);
             }
+          } else {
+            landingPermitFileName = docFile.url;
           }
-          compationVisaInfo.add(
-            GettingVisaInfoRequest(
-              visaPage: e['visaPage'],
-              visaPageFileName: visaPageFileName,
-              landingPermit: e['landingPermit'],
-              landingPermitFileName: landingPermitFileName,
-            ),
-          );
-        },
-      );
+        }
+        compationVisaInfo.add(
+          GettingVisaInfoRequest(
+            visaPage: e['visaPage'],
+            visaPageFileName: visaPageFileName,
+            landingPermit: e['landingPermit'],
+            landingPermitFileName: landingPermitFileName,
+          ),
+        );
+      }
 
       MedicalVisaTravelCompanionRequest travelCompanion =
           MedicalVisaTravelCompanionRequest(
@@ -1283,60 +1265,56 @@ class MedicalVisaModel with ChangeNotifier {
           formGroup.control('necessaryInJapan') as FormGroup;
       List<VisaInfoRequest> neceessaryVisaInfo = [];
 
-      formNequiredInJapan.control('visaInfo').value.forEach(
-        (e) async {
-          String? letterOfGuaranteeFileSelect;
-          if (e['letterOfGuaranteeFileSelect'] != null) {
-            FileSelect docFile = e['letterOfGuaranteeFileSelect'];
-            if (docFile.file != null) {
-              try {
-                String base64Image = base64Encode(docFile.file!);
-                FileResponse fileData =
-                    await patientRepository.uploadFileBase64(
-                  base64Image,
-                  docFile.filename!,
-                );
-                letterOfGuaranteeFileSelect = fileData.filename;
-              } catch (e) {
-                logger.e(e);
-              }
-            } else {
-              letterOfGuaranteeFileSelect = docFile.url;
+      for (dynamic e in formNequiredInJapan.control('vasaInfo').value) {
+        String? letterOfGuaranteeFileSelect;
+        if (e['letterOfGuaranteeFileSelect'] != null) {
+          FileSelect docFile = e['letterOfGuaranteeFileSelect'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              letterOfGuaranteeFileSelect = fileData.filename;
+            } catch (e) {
+              logger.e(e);
             }
+          } else {
+            letterOfGuaranteeFileSelect = docFile.url;
           }
-          String? passportFileSelect;
-          if (e['passportFileSelect'] != null) {
-            FileSelect docFile = e['passportFileSelect'];
-            if (docFile.file != null) {
-              try {
-                String base64Image = base64Encode(docFile.file!);
-                FileResponse fileData =
-                    await patientRepository.uploadFileBase64(
-                  base64Image,
-                  docFile.filename!,
-                );
-                passportFileSelect = fileData.filename;
-              } catch (e) {
-                logger.e(e);
-              }
-            } else {
-              passportFileSelect = docFile.url;
+        }
+        String? passportFileSelect;
+        if (e['passportFileSelect'] != null) {
+          FileSelect docFile = e['passportFileSelect'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              passportFileSelect = fileData.filename;
+            } catch (e) {
+              logger.e(e);
             }
+          } else {
+            passportFileSelect = docFile.url;
           }
-          neceessaryVisaInfo.add(
-            VisaInfoRequest(
-              passportDate: e['passportDate'],
-              passportFileSelect: passportFileSelect,
-              letterOfGuaranteeDate: e['letterOfGuaranteeDate'],
-              letterOfGuaranteeFileSelect: letterOfGuaranteeFileSelect,
-              sendBy: e['sendBy'],
-              byEMS: e['byEMS'],
-              byFedex: e['byFedex'],
-              byOthers: e['byOthers'],
-            ),
-          );
-        },
-      );
+        }
+        neceessaryVisaInfo.add(
+          VisaInfoRequest(
+            passportDate: e['passportDate'],
+            passportFileSelect: passportFileSelect,
+            letterOfGuaranteeDate: e['letterOfGuaranteeDate'],
+            letterOfGuaranteeFileSelect: letterOfGuaranteeFileSelect,
+            sendBy: e['sendBy'],
+            byEMS: e['byEMS'],
+            byFedex: e['byFedex'],
+            byOthers: e['byOthers'],
+          ),
+        );
+      }
 
       List<ScheduleRequest> neceessarySchedule = [];
 
@@ -1411,156 +1389,143 @@ class MedicalVisaModel with ChangeNotifier {
           formGroup.control('afterGettingVisa') as FormGroup;
       List<GettingVisaInfoRequest>? gettingVisaFinalInfo = [];
 
-      afterGettingVisaFinalForm.control('vasaInfo').value.forEach(
-        (e) async {
-          String? visaPageFileName;
-          if (e['visaPageFileName'] != null) {
-            FileSelect docFile = e['visaPageFileName'];
-            if (docFile.file != null) {
-              try {
-                String base64Image = base64Encode(docFile.file!);
-                FileResponse fileData =
-                    await patientRepository.uploadFileBase64(
-                  base64Image,
-                  docFile.filename!,
-                );
-                visaPageFileName = fileData.filename;
-              } catch (e) {
-                logger.e(e);
-              }
-            } else {
-              visaPageFileName = docFile.url;
+      for (dynamic e in afterGettingVisaFinalForm.control('vasaInfo').value) {
+        String? visaPageFileName;
+        if (e['visaPageFileName'] != null) {
+          FileSelect docFile = e['visaPageFileName'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              visaPageFileName = fileData.filename;
+            } catch (e) {
+              logger.e(e);
             }
+          } else {
+            visaPageFileName = docFile.url;
           }
+        }
 
-          String? landingPermitFileName;
-          if (e['landingPermitFileName'] != null) {
-            FileSelect docFile = e['landingPermitFileName'];
-            if (docFile.file != null) {
-              try {
-                String base64Image = base64Encode(docFile.file!);
-                FileResponse fileData =
-                    await patientRepository.uploadFileBase64(
-                  base64Image,
-                  docFile.filename!,
-                );
-                landingPermitFileName = fileData.filename;
-              } catch (e) {
-                logger.e(e);
-              }
-            } else {
-              landingPermitFileName = docFile.url;
+        String? landingPermitFileName;
+        if (e['landingPermitFileName'] != null) {
+          FileSelect docFile = e['landingPermitFileName'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              landingPermitFileName = fileData.filename;
+            } catch (e) {
+              logger.e(e);
             }
+          } else {
+            landingPermitFileName = docFile.url;
           }
-          gettingVisaFinalInfo.add(
-            GettingVisaInfoRequest(
-              visaPage: e['visaPage'],
-              visaPageFileName: visaPageFileName,
-              landingPermit: e['landingPermit'],
-              landingPermitFileName: landingPermitFileName,
-            ),
-          );
-        },
-      );
+        }
+        gettingVisaFinalInfo.add(
+          GettingVisaInfoRequest(
+            visaPage: e['visaPage'],
+            visaPageFileName: visaPageFileName,
+            landingPermit: e['landingPermit'],
+            landingPermitFileName: landingPermitFileName,
+          ),
+        );
+      }
 
       List<TicketRequest>? ticketFinal = [];
 
-      afterGettingVisaFinalForm.control('ticket').value.forEach(
-        (e) async {
-          String? planeTicketForYourVisitToJapanFileName;
-          if (e['planeTicketForYourVisitToJapanFileName'] != null) {
-            FileSelect docFile = e['planeTicketForYourVisitToJapanFileName'];
-            if (docFile.file != null) {
-              try {
-                String base64Image = base64Encode(docFile.file!);
-                FileResponse fileData =
-                    await patientRepository.uploadFileBase64(
-                  base64Image,
-                  docFile.filename!,
-                );
-                planeTicketForYourVisitToJapanFileName = fileData.filename;
-              } catch (e) {
-                logger.e(e);
-              }
-            } else {
-              planeTicketForYourVisitToJapanFileName = docFile.url;
+      for (dynamic e in afterGettingVisaFinalForm.control('ticket').value) {
+        String? planeTicketForYourVisitToJapanFileName;
+        if (e['planeTicketForYourVisitToJapanFileName'] != null) {
+          FileSelect docFile = e['planeTicketForYourVisitToJapanFileName'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              planeTicketForYourVisitToJapanFileName = fileData.filename;
+            } catch (e) {
+              logger.e(e);
             }
+          } else {
+            planeTicketForYourVisitToJapanFileName = docFile.url;
           }
-          ticketFinal.add(
-            TicketRequest(
-              planeTicketForYourVisitToJapan:
-                  e['planeTicketForYourVisitToJapan'],
-              planeTicketForYourVisitToJapanFileName:
-                  planeTicketForYourVisitToJapanFileName,
-            ),
-          );
-        },
-      );
+        }
+        ticketFinal.add(
+          TicketRequest(
+            planeTicketForYourVisitToJapan: e['planeTicketForYourVisitToJapan'],
+            planeTicketForYourVisitToJapanFileName:
+                planeTicketForYourVisitToJapanFileName,
+          ),
+        );
+      }
 
       List<TicketBackRequest>? ticketBackFinal = [];
 
-      afterGettingVisaFinalForm.control('ticketBack').value.forEach(
-        (e) async {
-          String? returnFlightTicketFileName;
-          if (e['returnFlightTicketFileName'] != null) {
-            FileSelect docFile = e['returnFlightTicketFileName'];
-            if (docFile.file != null) {
-              try {
-                String base64Image = base64Encode(docFile.file!);
-                FileResponse fileData =
-                    await patientRepository.uploadFileBase64(
-                  base64Image,
-                  docFile.filename!,
-                );
-                returnFlightTicketFileName = fileData.filename;
-              } catch (e) {
-                logger.e(e);
-              }
-            } else {
-              returnFlightTicketFileName = docFile.url;
+      for (dynamic e in afterGettingVisaFinalForm.control('ticketBack').value) {
+        String? returnFlightTicketFileName;
+        if (e['returnFlightTicketFileName'] != null) {
+          FileSelect docFile = e['returnFlightTicketFileName'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              returnFlightTicketFileName = fileData.filename;
+            } catch (e) {
+              logger.e(e);
             }
+          } else {
+            returnFlightTicketFileName = docFile.url;
           }
-          ticketBackFinal.add(
-            TicketBackRequest(
-              returnFlightTicket: e['returnFlightTicket'],
-              returnFlightTicketFileName: returnFlightTicketFileName,
-            ),
-          );
-        },
-      );
+        }
+        ticketBackFinal.add(
+          TicketBackRequest(
+            returnFlightTicket: e['returnFlightTicket'],
+            returnFlightTicketFileName: returnFlightTicketFileName,
+          ),
+        );
+      }
 
       List<BoardingPassRequest>? boardingPassFinal = [];
 
-      afterGettingVisaFinalForm.control('boardingPass').value.forEach(
-        (e) async {
-          String? boardingPassForReturnFlightFileName;
-          if (e['boardingPassForReturnFlightFileName'] != null) {
-            FileSelect docFile = e['boardingPassForReturnFlightFileName'];
-            if (docFile.file != null) {
-              try {
-                String base64Image = base64Encode(docFile.file!);
-                FileResponse fileData =
-                    await patientRepository.uploadFileBase64(
-                  base64Image,
-                  docFile.filename!,
-                );
-                boardingPassForReturnFlightFileName = fileData.filename;
-              } catch (e) {
-                logger.e(e);
-              }
-            } else {
-              boardingPassForReturnFlightFileName = docFile.url;
+      for (dynamic e
+          in afterGettingVisaFinalForm.control('boardingPass').value) {
+        String? boardingPassForReturnFlightFileName;
+        if (e['boardingPassForReturnFlightFileName'] != null) {
+          FileSelect docFile = e['boardingPassForReturnFlightFileName'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              boardingPassForReturnFlightFileName = fileData.filename;
+            } catch (e) {
+              logger.e(e);
             }
+          } else {
+            boardingPassForReturnFlightFileName = docFile.url;
           }
-          boardingPassFinal.add(
-            BoardingPassRequest(
-              boardingPassForReturnFlight: e['boardingPassForReturnFlight'],
-              boardingPassForReturnFlightFileName:
-                  boardingPassForReturnFlightFileName,
-            ),
-          );
-        },
-      );
+        }
+        boardingPassFinal.add(
+          BoardingPassRequest(
+            boardingPassForReturnFlight: e['boardingPassForReturnFlight'],
+            boardingPassForReturnFlightFileName:
+                boardingPassForReturnFlightFileName,
+          ),
+        );
+      }
 
       String? certificateOfEligibilityFileNameFinal;
       if (afterGettingVisaFinalForm
