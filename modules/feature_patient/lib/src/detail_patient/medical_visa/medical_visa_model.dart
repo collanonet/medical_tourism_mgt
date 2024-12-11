@@ -151,7 +151,13 @@ class MedicalVisaModel with ChangeNotifier {
                   ),
                 ],
               ),
-              'passportFileSelect': FormControl<FileSelect>(),
+              'passportFileSelect': FormControl<FileSelect>(
+                value: element.passportFileSelect != null
+                    ? FileSelect(
+                        url: element.passportFileSelect,
+                      )
+                    : null,
+              ),
               'letterOfGuaranteeDate': FormControl<DateTime>(
                 value: element.letterOfGuaranteeDate,
                 validators: [
@@ -191,7 +197,13 @@ class MedicalVisaModel with ChangeNotifier {
                   ),
                 ],
               ),
-              'treatmentScheduleFileSelect': FormControl<FileSelect>(),
+              'treatmentScheduleFileSelect': FormControl<FileSelect>(
+                value: element.treatmentScheduleFileSelect != null
+                    ? FileSelect(
+                        url: element.treatmentScheduleFileSelect,
+                      )
+                    : null,
+              ),
             },
           ),
         );
@@ -305,7 +317,13 @@ class MedicalVisaModel with ChangeNotifier {
                 ),
               ],
             ),
-            'visaPageFileName': FormControl<FileSelect>(),
+            'visaPageFileName': FormControl<FileSelect>(
+              value: element.visaPageFileName != null
+                  ? FileSelect(
+                      url: element.visaPageFileName,
+                    )
+                  : null,
+            ),
             'landingPermit': FormControl<DateTime>(
               value: element.landingPermit,
               validators: [
@@ -314,7 +332,13 @@ class MedicalVisaModel with ChangeNotifier {
                 ),
               ],
             ),
-            'landingPermitFileName': FormControl<FileSelect>(),
+            'landingPermitFileName': FormControl<FileSelect>(
+              value: element.landingPermitFileName != null
+                  ? FileSelect(
+                      url: element.landingPermitFileName,
+                    )
+                  : null,
+            ),
           }),
         );
       }
@@ -336,7 +360,13 @@ class MedicalVisaModel with ChangeNotifier {
                 ),
               ],
             ),
-            'planeTicketForYourVisitToJapanFileName': FormControl<FileSelect>(),
+            'planeTicketForYourVisitToJapanFileName': FormControl<FileSelect>(
+              value: element.planeTicketForYourVisitToJapanFileName != null
+                  ? FileSelect(
+                      url: element.planeTicketForYourVisitToJapanFileName,
+                    )
+                  : null,
+            ),
           }),
         );
       }
@@ -359,7 +389,13 @@ class MedicalVisaModel with ChangeNotifier {
                   ),
                 ],
               ),
-              'returnFlightTicketFileName': FormControl<FileSelect>(),
+              'returnFlightTicketFileName': FormControl<FileSelect>(
+                value: element.returnFlightTicketFileName != null
+                    ? FileSelect(
+                        url: element.returnFlightTicketFileName,
+                      )
+                    : null,
+              ),
             },
           ),
         );
@@ -383,7 +419,13 @@ class MedicalVisaModel with ChangeNotifier {
                   ),
                 ],
               ),
-              'boardingPassForReturnFlightFileName': FormControl<FileSelect>(),
+              'boardingPassForReturnFlightFileName': FormControl<FileSelect>(
+                value: element.boardingPassForReturnFlightFileName != null
+                    ? FileSelect(
+                        url: element.boardingPassForReturnFlightFileName,
+                      )
+                    : null,
+              ),
             },
           ),
         );
@@ -500,7 +542,13 @@ class MedicalVisaModel with ChangeNotifier {
                 ),
               ],
             ),
-            'visaPageFileName': FormControl<FileSelect>(),
+            'visaPageFileName': FormControl<FileSelect>(
+              value: element.visaPageFileName != null
+                  ? FileSelect(
+                      url: element.visaPageFileName,
+                    )
+                  : null,
+            ),
             'landingPermit': FormControl<DateTime>(
               value: element.landingPermit,
               validators: [
@@ -509,7 +557,13 @@ class MedicalVisaModel with ChangeNotifier {
                 ),
               ],
             ),
-            'landingPermitFileName': FormControl<FileSelect>(),
+            'landingPermitFileName': FormControl<FileSelect>(
+              value: element.landingPermitFileName != null
+                  ? FileSelect(
+                      url: element.landingPermitFileName,
+                    )
+                  : null,
+            ),
           }),
         );
       }
@@ -531,7 +585,13 @@ class MedicalVisaModel with ChangeNotifier {
                 ),
               ],
             ),
-            'planeTicketForYourVisitToJapanFileName': FormControl<FileSelect>(),
+            'planeTicketForYourVisitToJapanFileName': FormControl<FileSelect>(
+              value: element.planeTicketForYourVisitToJapanFileName != null
+                  ? FileSelect(
+                      url: element.planeTicketForYourVisitToJapanFileName,
+                    )
+                  : null,
+            ),
           }),
         );
       }
@@ -554,7 +614,13 @@ class MedicalVisaModel with ChangeNotifier {
                   ),
                 ],
               ),
-              'returnFlightTicketFileName': FormControl<FileSelect>(),
+              'returnFlightTicketFileName': FormControl<FileSelect>(
+                value: element.returnFlightTicketFileName != null
+                    ? FileSelect(
+                        url: element.returnFlightTicketFileName,
+                      )
+                    : null,
+              ),
             },
           ),
         );
@@ -577,7 +643,13 @@ class MedicalVisaModel with ChangeNotifier {
                 ),
               ],
             ),
-            'boardingPassForReturnFlightFileName': FormControl<FileSelect>(),
+            'boardingPassForReturnFlightFileName': FormControl<FileSelect>(
+              value: element.boardingPassForReturnFlightFileName != null
+                  ? FileSelect(
+                      url: element.boardingPassForReturnFlightFileName,
+                    )
+                  : null,
+            ),
           }),
         );
       }
@@ -605,7 +677,13 @@ class MedicalVisaModel with ChangeNotifier {
                   ),
                 ],
               ),
-              'passportFileSelect': FormControl<FileSelect>(),
+              'passportFileSelect': FormControl<FileSelect>(
+                value: element.passportFileSelect != null
+                    ? FileSelect(
+                        url: element.passportFileSelect,
+                      )
+                    : null,
+              ),
               'letterOfGuaranteeDate': FormControl<DateTime>(
                 value: element.letterOfGuaranteeDate,
                 validators: [
@@ -614,7 +692,13 @@ class MedicalVisaModel with ChangeNotifier {
                   ),
                 ],
               ),
-              'letterOfGuaranteeFileSelect': FormControl<FileSelect>(),
+              'letterOfGuaranteeFileSelect': FormControl<FileSelect>(
+                value: element.letterOfGuaranteeFileSelect != null
+                    ? FileSelect(
+                        url: element.letterOfGuaranteeFileSelect,
+                      )
+                    : null,
+              ),
               'sendBy': FormControl<String>(value: element.sendBy),
               'byEMS': FormControl<bool>(value: element.byEMS),
               'byFedex': FormControl<bool>(value: element.byFedex),
@@ -642,7 +726,13 @@ class MedicalVisaModel with ChangeNotifier {
                   ),
                 ],
               ),
-              'treatmentScheduleFileSelect': FormControl<FileSelect>(),
+              'treatmentScheduleFileSelect': FormControl<FileSelect>(
+                value: element.treatmentScheduleFileSelect != null
+                    ? FileSelect(
+                        url: element.treatmentScheduleFileSelect,
+                      )
+                    : null,
+              ),
             },
           ),
         );
@@ -673,7 +763,13 @@ class MedicalVisaModel with ChangeNotifier {
                   ),
                 ],
               ),
-              'visaPageFileName': FormControl<FileSelect>(),
+              'visaPageFileName': FormControl<FileSelect>(
+                value: element.visaPageFileName != null
+                    ? FileSelect(
+                        url: element.visaPageFileName,
+                      )
+                    : null,
+              ),
               'landingPermit': FormControl<DateTime>(
                 value: element.landingPermit,
                 validators: [
@@ -682,7 +778,13 @@ class MedicalVisaModel with ChangeNotifier {
                   ),
                 ],
               ),
-              'landingPermitFileName': FormControl<FileSelect>(),
+              'landingPermitFileName': FormControl<FileSelect>(
+                value: element.landingPermitFileName != null
+                    ? FileSelect(
+                        url: element.landingPermitFileName,
+                      )
+                    : null,
+              ),
             },
           ),
         );
@@ -706,8 +808,13 @@ class MedicalVisaModel with ChangeNotifier {
                   ),
                 ],
               ),
-              'planeTicketForYourVisitToJapanFileName':
-                  FormControl<FileSelect>(),
+              'planeTicketForYourVisitToJapanFileName': FormControl<FileSelect>(
+                value: element.planeTicketForYourVisitToJapanFileName != null
+                    ? FileSelect(
+                        url: element.planeTicketForYourVisitToJapanFileName,
+                      )
+                    : null,
+              ),
             },
           ),
         );
@@ -731,7 +838,13 @@ class MedicalVisaModel with ChangeNotifier {
                   ),
                 ],
               ),
-              'returnFlightTicketFileName': FormControl<FileSelect>(),
+              'returnFlightTicketFileName': FormControl<FileSelect>(
+                value: element.returnFlightTicketFileName != null
+                    ? FileSelect(
+                        url: element.returnFlightTicketFileName,
+                      )
+                    : null,
+              ),
             },
           ),
         );
@@ -755,7 +868,13 @@ class MedicalVisaModel with ChangeNotifier {
                   ),
                 ],
               ),
-              'boardingPassForReturnFlightFileName': FormControl<FileSelect>(),
+              'boardingPassForReturnFlightFileName': FormControl<FileSelect>(
+                value: element.boardingPassForReturnFlightFileName != null
+                    ? FileSelect(
+                        url: element.boardingPassForReturnFlightFileName,
+                      )
+                    : null,
+              ),
             },
           ),
         );

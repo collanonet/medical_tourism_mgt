@@ -697,12 +697,17 @@ class AfterGettingVisa extends StatelessWidget {
                   builder: (context, control, _) {
                     return InkWell(
                       onTap: () {
-                        if (control.value?.url != null) {
-                          openUrlInBrowser(fileName: control.value!.url!);
+                        if (control.value?.url != null ||
+                            control.value?.filename != null) {
+                          openUrlInBrowser(
+                              fileName: control.value?.url ??
+                                  control.value!.filename!);
                         }
                       },
                       child: Text(
-                        control.value?.filename ?? 'File Input .....',
+                        control.value?.url ??
+                            control.value?.filename ??
+                            'File Name',
                         style: context.textTheme.bodySmall,
                       ),
                     );
