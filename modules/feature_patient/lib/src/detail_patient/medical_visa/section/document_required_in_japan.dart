@@ -1316,6 +1316,7 @@ class DocumentRequired extends StatelessWidget {
                 filePicker().then((value) {
                   if (value != null) {
                     currentForm.control(fileName).value = value;
+                    logger.d('Value Not Null');
                   }
                 });
               },

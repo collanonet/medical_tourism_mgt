@@ -160,11 +160,17 @@ class MedicalVisaModel with ChangeNotifier {
                   ),
                 ],
               ),
-              'letterOfGuaranteeFileSelect': FormControl<FileSelect>(),
+              'letterOfGuaranteeFileSelect': FormControl<FileSelect>(
+                value: element.letterOfGuaranteeFileSelect != null
+                    ? FileSelect(
+                        url: element.letterOfGuaranteeFileSelect,
+                      )
+                    : null,
+              ),
               'sendBy': FormControl<String>(value: element.sendBy),
               'byEMS': FormControl<bool>(value: element.byEMS),
               'byFedex': FormControl<bool>(value: element.byFedex),
-              'byOthers': FormControl<bool>(value: element.byothers),
+              'byOthers': FormControl<bool>(value: element.byOthers),
             },
           ),
         );
@@ -812,58 +818,63 @@ class MedicalVisaModel with ChangeNotifier {
 
       formRequiredInJapan.control('visaInfo').value.forEach(
         (e) async {
-          // String? passportFileSelect;
-          // if (e['passportFileSelect'] != null) {
-          //   FileSelect docFile = e['passportFileSelect'];
-          //   if (docFile.file != null) {
-          //     try {
-          //       String base64Image = base64Encode(docFile.file!);
-          //       FileResponse fileData =
-          //           await patientRepository.uploadFileBase64(
-          //         base64Image,
-          //         docFile.filename!,
-          //       );
-          //       passportFileSelect = fileData.filename;
-          //     } catch (e) {
-          //       logger.e(e);
-          //     }
-          //   } else {
-          //     passportFileSelect = docFile.url;
-          //   }
-          // }
-          String? letterOfGuaranteeFileSelect;
-          if (e['letterOfGuaranteeFileSelect'] != null) {
-            FileSelect docFile = e['letterOfGuaranteeFileSelect'];
-            if (docFile.file != null) {
-              try {
-                String base64Image = base64Encode(docFile.file!);
-                FileResponse fileData =
-                    await patientRepository.uploadFileBase64(
-                  base64Image,
-                  docFile.filename!,
-                );
-                letterOfGuaranteeFileSelect = fileData.filename;
-              } catch (e) {
-                logger.e(e);
+          try {
+            String? passportFileSelect;
+            if (e['passportFileSelect'] != null) {
+              FileSelect docFile = e['passportFileSelect'];
+              if (docFile.file != null) {
+                try {
+                  String base64Image = base64Encode(docFile.file!);
+                  FileResponse fileData =
+                      await patientRepository.uploadFileBase64(
+                    base64Image,
+                    docFile.filename!,
+                  );
+                  passportFileSelect = fileData.filename;
+                } catch (e) {
+                  logger.e(e);
+                }
+              } else {
+                passportFileSelect = docFile.url;
               }
-            } else {
-              letterOfGuaranteeFileSelect = docFile.url;
             }
-          }
+            String? letterOfGuaranteeFileSelect;
+            if (e['letterOfGuaranteeFileSelect'] != null) {
+              FileSelect docFile = e['letterOfGuaranteeFileSelect'];
+              if (docFile.file != null) {
+                try {
+                  String base64Image = base64Encode(docFile.file!);
+                  FileResponse fileData =
+                      await patientRepository.uploadFileBase64(
+                    base64Image,
+                    docFile.filename!,
+                  );
+                  letterOfGuaranteeFileSelect = fileData.filename;
+                } catch (e) {
+                  logger.e(e);
+                }
+              } else {
+                letterOfGuaranteeFileSelect = docFile.url;
+              }
+            }
 
-          visaInfo.add(
-            VisaInfoRequest(
-              passportDate: e['passportDate'],
-              passportFileSelect: 'test',
-              letterOfGuaranteeDate: e['letterOfGuaranteeDate'],
-              letterOfGuaranteeFileSelect: letterOfGuaranteeFileSelect,
-              sendBy: e['sendBy'],
-              byEMS: e['byEMS'],
-              byFedex: e['byFedex'],
-              byothers: e['byothers'],
-            ),
-          );
-          logger.d('Data ${e['passportDate']}');
+            visaInfo.add(
+              VisaInfoRequest(
+                passportDate: e['passportDate'],
+                passportFileSelect: passportFileSelect,
+                letterOfGuaranteeDate: e['letterOfGuaranteeDate'],
+                letterOfGuaranteeFileSelect: letterOfGuaranteeFileSelect,
+                sendBy: e['sendBy'],
+                byEMS: e['byEMS'],
+                byFedex: e['byFedex'],
+                byOthers: e['byothers'],
+              ),
+            );
+            logger.d('Data ${passportFileSelect.toString()}');
+            logger.d('All ${visaInfo.toList()}');
+          } catch (e) {
+            logger.e('Error while processing visaInfo: ${e.toString()}');
+          }
         },
       );
 
@@ -1321,7 +1332,7 @@ class MedicalVisaModel with ChangeNotifier {
               sendBy: e['sendBy'],
               byEMS: e['byEMS'],
               byFedex: e['byFedex'],
-              byothers: e['byothers'],
+              byOthers: e['byOthers'],
             ),
           );
         },

@@ -10,7 +10,7 @@ class VisaInfoRequest {
   String? sendBy;
   bool? byEMS;
   bool? byFedex;
-  bool? byothers;
+  bool? byOthers;
 
   VisaInfoRequest({
     this.passportDate,
@@ -18,7 +18,7 @@ class VisaInfoRequest {
     this.sendBy,
     this.byEMS,
     this.byFedex,
-    this.byothers,
+    this.byOthers,
     this.passportFileSelect,
     this.letterOfGuaranteeFileSelect,
   });

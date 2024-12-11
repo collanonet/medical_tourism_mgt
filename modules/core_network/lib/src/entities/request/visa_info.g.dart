@@ -17,7 +17,7 @@ VisaInfoRequest _$VisaInfoRequestFromJson(Map<String, dynamic> json) =>
       sendBy: json['sendBy'] as String?,
       byEMS: json['byEMS'] as bool?,
       byFedex: json['byFedex'] as bool?,
-      byothers: json['byothers'] as bool?,
+      byOthers: json['byOthers'] as bool?,
       passportFileSelect: json['passportFileSelect'] as String?,
       letterOfGuaranteeFileSelect:
           json['letterOfGuaranteeFileSelect'] as String?,
@@ -33,5 +33,5 @@ Map<String, dynamic> _$VisaInfoRequestToJson(VisaInfoRequest instance) =>
       'sendBy': instance.sendBy,
       'byEMS': instance.byEMS,
       'byFedex': instance.byFedex,
-      'byothers': instance.byothers,
+      'byOthers': instance.byOthers,
     };
