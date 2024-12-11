@@ -26,7 +26,7 @@ class MedicalVisaTravelCompanionResponse {
   DateTime? certificateOfEligibility;
 
   MedicalVisaTravelCompanionResponse({
-     this.id,
+    required this.id,
     this.nameRomaji,
     this.dateBirth,
     this.age,

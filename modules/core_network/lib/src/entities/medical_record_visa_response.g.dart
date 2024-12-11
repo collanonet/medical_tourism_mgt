@@ -37,7 +37,7 @@ MedicalRecordVisaResponse _$MedicalRecordVisaResponseFromJson(
               json['travelCompanion'] as Map<String, dynamic>),
       necessaryInJapan: json['necessaryInJapan'] == null
           ? null
-          : MedicalVisaNecessaryInJapanRequest.fromJson(
+          : MedicalVisaNecessaryInJapanResponse.fromJson(
               json['necessaryInJapan'] as Map<String, dynamic>),
       afterGettingVisaFinal: json['afterGettingVisaFinal'] == null
           ? null

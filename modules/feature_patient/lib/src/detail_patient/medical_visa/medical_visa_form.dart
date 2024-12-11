@@ -268,7 +268,7 @@ FormGroup medicalVisaForm({required String medicalRecord}) {
           'certificateOfEligibilityFileName': FormControl<FileSelect>(),
         },
       ),
-      'travel_companion': FormGroup(
+      'travelCompanion': FormGroup(
         {
           'nameRomaji': FormControl<String>(value: ''),
           'dateBirth': FormControl<DateTime>(),

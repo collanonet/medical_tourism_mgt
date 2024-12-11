@@ -384,12 +384,12 @@ class MedicalVisaModel with ChangeNotifier {
       }
     }
     requiredInJapanAfterGettingVisa.control('certificateOfEligibility').value =
-        response.afterGettingVisa!.certificateOfEligibility;
+        response.afterGettingVisa?.certificateOfEligibility;
 
     FormGroup travelCompanionForm =
-        formGroup.control('travel_companion') as FormGroup;
+        formGroup.control('travelCompanion') as FormGroup;
     travelCompanionForm.control('nameRomaji').value =
-        response.travelCompanion!.nameRomaji;
+        response.travelCompanion?.nameRomaji;
     travelCompanionForm.control('dateBirth').value =
         response.travelCompanion!.dateBirth;
     travelCompanionForm.control('age').value = response.travelCompanion!.age;
@@ -812,6 +812,25 @@ class MedicalVisaModel with ChangeNotifier {
 
       formRequiredInJapan.control('visaInfo').value.forEach(
         (e) async {
+          // String? passportFileSelect;
+          // if (e['passportFileSelect'] != null) {
+          //   FileSelect docFile = e['passportFileSelect'];
+          //   if (docFile.file != null) {
+          //     try {
+          //       String base64Image = base64Encode(docFile.file!);
+          //       FileResponse fileData =
+          //           await patientRepository.uploadFileBase64(
+          //         base64Image,
+          //         docFile.filename!,
+          //       );
+          //       passportFileSelect = fileData.filename;
+          //     } catch (e) {
+          //       logger.e(e);
+          //     }
+          //   } else {
+          //     passportFileSelect = docFile.url;
+          //   }
+          // }
           String? letterOfGuaranteeFileSelect;
           if (e['letterOfGuaranteeFileSelect'] != null) {
             FileSelect docFile = e['letterOfGuaranteeFileSelect'];
@@ -1136,14 +1155,15 @@ class MedicalVisaModel with ChangeNotifier {
         vasaInfo: gettingVisaInfo,
         ticket: ticket,
         ticketBack: ticketBack,
+        boardingPass: boardingPass,
         certificateOfEligibility:
             afterGettingVisaForm.control('certificateOfEligibility').value,
         certificateOfEligibilityFileName: certificateOfEligibilityFileName,
       );
 
-      //travel_companion
+      //travelCompanion
       var travelCompanionForm =
-          formGroup.control('travel_companion') as FormGroup;
+          formGroup.control('travelCompanion') as FormGroup;
       List<TravelInfoRequest>? compationTravelInfo = [];
 
       travelCompanionForm.control('travelInfo').value.forEach(
@@ -1560,6 +1580,7 @@ class MedicalVisaModel with ChangeNotifier {
         vasaInfo: gettingVisaInfo,
         ticket: ticket,
         ticketBack: ticketBack,
+        boardingPass: boardingPassFinal,
         certificateOfEligibility:
             afterGettingVisaForm.control('certificateOfEligibility').value,
         certificateOfEligibilityFileName: certificateOfEligibilityFileNameFinal,

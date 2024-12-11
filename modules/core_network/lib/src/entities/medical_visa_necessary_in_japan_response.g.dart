@@ -9,6 +9,7 @@ part of 'medical_visa_necessary_in_japan_response.dart';
 MedicalVisaNecessaryInJapanResponse
     _$MedicalVisaNecessaryInJapanResponseFromJson(Map<String, dynamic> json) =>
         MedicalVisaNecessaryInJapanResponse(
+          id: json['_id'] as String?,
           visaInfo: (json['visaInfo'] as List<dynamic>?)
               ?.map((e) => VisaInfo.fromJson(e as Map<String, dynamic>))
               .toList(),
@@ -29,6 +30,7 @@ MedicalVisaNecessaryInJapanResponse
 Map<String, dynamic> _$MedicalVisaNecessaryInJapanResponseToJson(
         MedicalVisaNecessaryInJapanResponse instance) =>
     <String, dynamic>{
+      '_id': instance.id,
       'visaInfo': instance.visaInfo,
       'schedule': instance.schedule,
       'statementOfReasonsDate':

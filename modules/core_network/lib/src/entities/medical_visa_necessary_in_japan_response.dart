@@ -4,6 +4,8 @@ import 'medical_visa_required_in_japan_response.dart';
 part 'medical_visa_necessary_in_japan_response.g.dart';
 @JsonSerializable()
 class MedicalVisaNecessaryInJapanResponse {
+    @JsonKey(name: '_id')
+  final String? id;
   List<VisaInfo>? visaInfo;
   List<Schedule>? schedule;
   DateTime? statementOfReasonsDate;
@@ -11,6 +13,7 @@ class MedicalVisaNecessaryInJapanResponse {
   List<TravelInfo>? travelInfo;
 
   MedicalVisaNecessaryInJapanResponse({
+    required this.id,
     this.visaInfo,
     this.schedule,
     this.statementOfReasonsDate,

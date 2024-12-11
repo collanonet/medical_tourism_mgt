@@ -15,7 +15,7 @@ class MedicalRecordVisaResponse {
   MedicalVisaVisaWithdrawalResponse? visaWithdrawal;
   AfterGettingVisaResponse? afterGettingVisa;
   MedicalVisaTravelCompanionResponse? travelCompanion;
-  MedicalVisaNecessaryInJapanRequest? necessaryInJapan;
+  MedicalVisaNecessaryInJapanResponse? necessaryInJapan;
   MedicalAfterGettingVisaFinalRequest? afterGettingVisaFinal;
 
   MedicalRecordVisaResponse({

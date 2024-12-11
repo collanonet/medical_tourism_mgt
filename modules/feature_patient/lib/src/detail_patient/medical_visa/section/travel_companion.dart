@@ -15,7 +15,7 @@ class TravelCompanion extends StatelessWidget {
     final formatter = InputFormatter();
     final formGroup = ReactiveForm.of(context) as FormGroup;
     return ReactiveForm(
-      formGroup: formGroup.control('travel_companion') as FormGroup,
+      formGroup: formGroup.control('travelCompanion') as FormGroup,
       child: Container(
         padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
         decoration: BoxDecoration(
@@ -834,7 +834,7 @@ class TravelCompanion extends StatelessWidget {
                   height: context.appTheme.spacing.marginMedium,
                 ),
                 ReactiveForm(
-                  formGroup: formGroup.control('travel_companion') as FormGroup,
+                  formGroup: formGroup.control('travelCompanion') as FormGroup,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -1518,8 +1518,7 @@ class TravelCompanion extends StatelessWidget {
                           ),
                           fileUpload(
                               context,
-                              formGroup.control('travel_companion')
-                                  as FormGroup,
+                              formGroup.control('travelCompanion') as FormGroup,
                               'certificateOfEligibilityFileName'),
                         ],
                       ),
