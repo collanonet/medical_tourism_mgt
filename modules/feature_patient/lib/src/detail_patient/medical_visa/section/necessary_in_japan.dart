@@ -192,7 +192,7 @@ class NecessaryInJapan extends StatelessWidget {
                                                   ListTileControlAffinity
                                                       .leading,
                                               contentPadding: EdgeInsets.zero,
-                                              formControlName: 'byothers',
+                                              formControlName: 'byOthers',
                                               title: const Text('その他'),
                                             ),
                                           ),
@@ -265,7 +265,7 @@ class NecessaryInJapan extends StatelessWidget {
                               'sendBy': FormControl<String>(value: ''),
                               'byEMS': FormControl<bool>(value: false),
                               'byFedex': FormControl<bool>(value: false),
-                              'byothers': FormControl<bool>(value: false),
+                              'byOthers': FormControl<bool>(value: false),
                             },
                           ),
                         ),

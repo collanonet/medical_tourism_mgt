@@ -424,7 +424,7 @@ FormGroup medicalVisaForm({required String medicalRecord}) {
                   'sendBy': FormControl<String>(value: ''),
                   'byEMS': FormControl<bool>(value: false),
                   'byFedex': FormControl<bool>(value: false),
-                  'byothers': FormControl<bool>(value: false),
+                  'byOthers': FormControl<bool>(value: false),
                 },
               ),
             ],

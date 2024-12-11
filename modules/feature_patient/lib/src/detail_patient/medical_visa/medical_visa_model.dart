@@ -618,7 +618,7 @@ class MedicalVisaModel with ChangeNotifier {
               'sendBy': FormControl<String>(value: element.sendBy),
               'byEMS': FormControl<bool>(value: element.byEMS),
               'byFedex': FormControl<bool>(value: element.byFedex),
-              'byothers': FormControl<bool>(value: element.byothers),
+              'byOthers': FormControl<bool>(value: element.byOthers),
             },
           ),
         );
@@ -867,7 +867,7 @@ class MedicalVisaModel with ChangeNotifier {
                 sendBy: e['sendBy'],
                 byEMS: e['byEMS'],
                 byFedex: e['byFedex'],
-                byOthers: e['byothers'],
+                byOthers: e['byOthers'],
               ),
             );
             logger.d('Data ${passportFileSelect.toString()}');
