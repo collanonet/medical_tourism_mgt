@@ -25,6 +25,8 @@ AfterGettingVisaResponse _$AfterGettingVisaResponseFromJson(
       certificateOfEligibility: json['certificateOfEligibility'] == null
           ? null
           : DateTime.parse(json['certificateOfEligibility'] as String),
+      certificateOfEligibilityFileName:
+          json['certificateOfEligibilityFileName'] as String?,
     );
 
 Map<String, dynamic> _$AfterGettingVisaResponseToJson(
@@ -37,6 +39,8 @@ Map<String, dynamic> _$AfterGettingVisaResponseToJson(
       'boardingPass': instance.boardingPass,
       'certificateOfEligibility':
           instance.certificateOfEligibility?.toIso8601String(),
+      'certificateOfEligibilityFileName':
+          instance.certificateOfEligibilityFileName,
     };
 
 VasaInfo _$VasaInfoFromJson(Map<String, dynamic> json) => VasaInfo(
@@ -47,12 +51,16 @@ VasaInfo _$VasaInfoFromJson(Map<String, dynamic> json) => VasaInfo(
       landingPermit: json['landingPermit'] == null
           ? null
           : DateTime.parse(json['landingPermit'] as String),
+      visaPageFileName: json['visaPageFileName'] as String?,
+      landingPermitFileName: json['landingPermitFileName'] as String?,
     );
 
 Map<String, dynamic> _$VasaInfoToJson(VasaInfo instance) => <String, dynamic>{
       '_id': instance.id,
       'visaPage': instance.visaPage?.toIso8601String(),
       'landingPermit': instance.landingPermit?.toIso8601String(),
+      'visaPageFileName': instance.visaPageFileName,
+      'landingPermitFileName': instance.landingPermitFileName,
     };
 
 Ticket _$TicketFromJson(Map<String, dynamic> json) => Ticket(
@@ -61,12 +69,16 @@ Ticket _$TicketFromJson(Map<String, dynamic> json) => Ticket(
               null
           ? null
           : DateTime.parse(json['planeTicketForYourVisitToJapan'] as String),
+      planeTicketForYourVisitToJapanFileName:
+          json['planeTicketForYourVisitToJapanFileName'] as String?,
     );
 
 Map<String, dynamic> _$TicketToJson(Ticket instance) => <String, dynamic>{
       '_id': instance.id,
       'planeTicketForYourVisitToJapan':
           instance.planeTicketForYourVisitToJapan?.toIso8601String(),
+      'planeTicketForYourVisitToJapanFileName':
+          instance.planeTicketForYourVisitToJapanFileName,
     };
 
 TicketBack _$TicketBackFromJson(Map<String, dynamic> json) => TicketBack(
@@ -74,12 +86,14 @@ TicketBack _$TicketBackFromJson(Map<String, dynamic> json) => TicketBack(
       returnFlightTicket: json['returnFlightTicket'] == null
           ? null
           : DateTime.parse(json['returnFlightTicket'] as String),
+      returnFlightTicketFileName: json['returnFlightTicketFileName'] as String?,
     );
 
 Map<String, dynamic> _$TicketBackToJson(TicketBack instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'returnFlightTicket': instance.returnFlightTicket?.toIso8601String(),
+      'returnFlightTicketFileName': instance.returnFlightTicketFileName,
     };
 
 BoardingPass _$BoardingPassFromJson(Map<String, dynamic> json) => BoardingPass(
@@ -87,6 +101,8 @@ BoardingPass _$BoardingPassFromJson(Map<String, dynamic> json) => BoardingPass(
       boardingPassForReturnFlight: json['boardingPassForReturnFlight'] == null
           ? null
           : DateTime.parse(json['boardingPassForReturnFlight'] as String),
+      boardingPassForReturnFlightFileName:
+          json['boardingPassForReturnFlightFileName'] as String?,
     );
 
 Map<String, dynamic> _$BoardingPassToJson(BoardingPass instance) =>
@@ -94,4 +110,6 @@ Map<String, dynamic> _$BoardingPassToJson(BoardingPass instance) =>
       '_id': instance.id,
       'boardingPassForReturnFlight':
           instance.boardingPassForReturnFlight?.toIso8601String(),
+      'boardingPassForReturnFlightFileName':
+          instance.boardingPassForReturnFlightFileName,
     };

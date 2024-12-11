@@ -24,6 +24,7 @@ class MedicalVisaTravelCompanionResponse {
   List<TicketBack>? ticketBack;
   List<BoardingPass>? boardingPass;
   DateTime? certificateOfEligibility;
+  String? certificateOfEligibilityFileName;
 
   MedicalVisaTravelCompanionResponse({
     required this.id,
@@ -43,6 +44,7 @@ class MedicalVisaTravelCompanionResponse {
     this.ticketBack,
     this.boardingPass,
     this.certificateOfEligibility,
+    this.certificateOfEligibilityFileName,
   });
 
   factory MedicalVisaTravelCompanionResponse.fromJson(Map<String, dynamic> json) => _$MedicalVisaTravelCompanionResponseFromJson(json);

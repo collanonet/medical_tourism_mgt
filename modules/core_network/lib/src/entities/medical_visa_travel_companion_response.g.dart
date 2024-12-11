@@ -42,6 +42,8 @@ MedicalVisaTravelCompanionResponse _$MedicalVisaTravelCompanionResponseFromJson(
       certificateOfEligibility: json['certificateOfEligibility'] == null
           ? null
           : DateTime.parse(json['certificateOfEligibility'] as String),
+      certificateOfEligibilityFileName:
+          json['certificateOfEligibilityFileName'] as String?,
     );
 
 Map<String, dynamic> _$MedicalVisaTravelCompanionResponseToJson(
@@ -66,4 +68,6 @@ Map<String, dynamic> _$MedicalVisaTravelCompanionResponseToJson(
       'boardingPass': instance.boardingPass,
       'certificateOfEligibility':
           instance.certificateOfEligibility?.toIso8601String(),
+      'certificateOfEligibilityFileName':
+          instance.certificateOfEligibilityFileName,
     };

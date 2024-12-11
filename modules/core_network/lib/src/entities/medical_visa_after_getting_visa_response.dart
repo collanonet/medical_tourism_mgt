@@ -10,6 +10,7 @@ class AfterGettingVisaResponse {
   List<TicketBack>? ticketBack;
   List<BoardingPass>? boardingPass;
   DateTime? certificateOfEligibility;
+  String? certificateOfEligibilityFileName;
 
   AfterGettingVisaResponse({
     this.id,
@@ -18,6 +19,7 @@ class AfterGettingVisaResponse {
     this.ticketBack,
     this.boardingPass,
     this.certificateOfEligibility,
+    this.certificateOfEligibilityFileName,
   });
 
   factory AfterGettingVisaResponse.fromJson(Map<String, dynamic> json) {
@@ -53,6 +55,7 @@ class VasaInfo {
   Map<String, dynamic> toJson() {
     return _$VasaInfoToJson(this);
   }
+
 }
 
 @JsonSerializable()
@@ -82,10 +85,12 @@ class TicketBack {
   @JsonKey(name: '_id')
   final String id;
   DateTime? returnFlightTicket;
+  String? returnFlightTicketFileName;
 
   TicketBack({
     required this.id,
     this.returnFlightTicket,
+    this.returnFlightTicketFileName,
   });
 
   factory TicketBack.fromJson(Map<String, dynamic> json) {
@@ -102,10 +107,12 @@ class BoardingPass {
   @JsonKey(name: '_id')
   final String id;
   DateTime? boardingPassForReturnFlight;
+  String? boardingPassForReturnFlightFileName;
 
   BoardingPass({
     required this.id,
     this.boardingPassForReturnFlight,
+    this.boardingPassForReturnFlightFileName,
   });
 
   factory BoardingPass.fromJson(Map<String, dynamic> json) {

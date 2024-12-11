@@ -48,10 +48,10 @@ class MedicalVisaModel with ChangeNotifier {
 
     // start insert data to form personal
     FormArray personalForm = formGroup.control('personal') as FormArray;
-    if (response.personal!.isNotEmpty) {
+    if (response.personal?.isNotEmpty == true) {
       personalForm.clear();
       personalForm.reset();
-      for (var elements in response.personal ?? []) {
+      for (MedicalVisaPersonalResponse elements in response.personal ?? []) {
         personalForm.add(
           FormGroup(
             {
@@ -99,10 +99,10 @@ class MedicalVisaModel with ChangeNotifier {
     }
 
     FormArray stayPeriodForm = formGroup.control('stayPeriod') as FormArray;
-    if (response.stayPeriod!.isNotEmpty) {
+    if (response.stayPeriod?.isNotEmpty == true) {
       stayPeriodForm.clear();
       stayPeriodForm.reset();
-      for (var element in response.stayPeriod ?? []) {
+      for (MedicalVisaStayPeriodResponse element in response.stayPeriod ?? []) {
         stayPeriodForm.add(
           FormGroup(
             {
@@ -136,10 +136,10 @@ class MedicalVisaModel with ChangeNotifier {
         requiredInJapanForm.control('visaInfo') as FormArray;
     FormArray requiredInJapanSchedule =
         requiredInJapanForm.control('schedule') as FormArray;
-    if (response.requiredInJapan!.visaInfo!.isNotEmpty) {
+    if (response.requiredInJapan?.visaInfo?.isNotEmpty == true) {
       requiredInJapanVisaInfo.clear();
       requiredInJapanVisaInfo.reset();
-      for (var element in response.requiredInJapan?.visaInfo ?? []) {
+      for (VisaInfo element in response.requiredInJapan?.visaInfo ?? []) {
         requiredInJapanVisaInfo.add(
           FormGroup(
             {
@@ -182,10 +182,10 @@ class MedicalVisaModel with ChangeNotifier {
         );
       }
     }
-    if (response.requiredInJapan!.schedule!.isNotEmpty) {
+    if (response.requiredInJapan?.schedule?.isNotEmpty == true) {
       requiredInJapanSchedule.clear();
       requiredInJapanSchedule.reset();
-      for (var element in response.requiredInJapan?.schedule ?? []) {
+      for (Schedule element in response.requiredInJapan?.schedule ?? []) {
         requiredInJapanSchedule.add(
           FormGroup(
             {
@@ -210,21 +210,36 @@ class MedicalVisaModel with ChangeNotifier {
       }
     }
 
-    // requiredInJapanForm.control('statementOfReasonsFileSelect').value =
-    //     response.requiredInJapan!.statementOfReasonsDate;
+    requiredInJapanForm.control('statementOfReasonsFileSelect').value =
+        response.requiredInJapan?.statementOfReasonsFileSelect != null
+            ? FileSelect(
+                url: response.requiredInJapan?.statementOfReasonsFileSelect,
+              )
+            : null;
     requiredInJapanForm.control('statementOfReasonsDate').value =
-        response.requiredInJapan!.statementOfReasonsDate;
+        response.requiredInJapan?.statementOfReasonsDate;
+    requiredInJapanForm.control('statementOfReasonsFileSelect').value =
+        response.requiredInJapan?.statementOfReasonsFileSelect != null
+            ? FileSelect(
+                url: response.requiredInJapan?.statementOfReasonsFileSelect,
+              )
+            : null;
+
     requiredInJapanForm.control('travelCompanionListDate').value =
-        response.requiredInJapan!.travelCompanionListDate;
-    // requiredInJapanForm.control('travelCompanionListFileSelect').value =
-    //     response.requiredInJapan!.travelCompanionListFileSelect;
+        response.requiredInJapan?.travelCompanionListDate;
+    requiredInJapanForm.control('travelCompanionListFileSelect').value =
+        response.requiredInJapan?.travelCompanionListFileSelect != null
+            ? FileSelect(
+                url: response.requiredInJapan?.travelCompanionListFileSelect,
+              )
+            : null;
 
     FormArray requiredInJapanTravelInfo =
         requiredInJapanForm.control('travelInfo') as FormArray;
-    if (response.requiredInJapan!.travelInfo!.isNotEmpty) {
+    if (response.requiredInJapan?.travelInfo?.isNotEmpty == true) {
       requiredInJapanTravelInfo.clear();
       requiredInJapanTravelInfo.reset();
-      for (var element in response.requiredInJapan?.travelInfo ?? []) {
+      for (TravelInfo element in response.requiredInJapan?.travelInfo ?? []) {
         requiredInJapanTravelInfo.add(
           FormGroup(
             {
@@ -293,20 +308,20 @@ class MedicalVisaModel with ChangeNotifier {
     FormGroup requiredInJapanVisaWithdrawal =
         formGroup.control('visaWithdrawal') as FormGroup;
     requiredInJapanVisaWithdrawal.control('subjectVisaWithdrawal').value =
-        response.visaWithdrawal!.subjectVisaWithdrawal;
+        response.visaWithdrawal?.subjectVisaWithdrawal;
     requiredInJapanVisaWithdrawal.control('deathOrOccurrenceEventDate').value =
-        response.visaWithdrawal!.deathOrOccurrenceEventDate;
+        response.visaWithdrawal?.deathOrOccurrenceEventDate;
     requiredInJapanVisaWithdrawal.control('remarks').value =
-        response.visaWithdrawal!.remarks;
+        response.visaWithdrawal?.remarks;
 
     FormGroup requiredInJapanAfterGettingVisa =
         formGroup.control('afterGettingVisa') as FormGroup;
     FormArray afterGettingVisaVasaInfo =
         requiredInJapanAfterGettingVisa.control('vasaInfo') as FormArray;
-    if (response.afterGettingVisa!.vasaInfo!.isNotEmpty) {
+    if (response.afterGettingVisa?.vasaInfo?.isNotEmpty == true) {
       afterGettingVisaVasaInfo.clear();
       afterGettingVisaVasaInfo.reset();
-      for (var element in response.afterGettingVisa?.vasaInfo ?? []) {
+      for (VasaInfo element in response.afterGettingVisa?.vasaInfo ?? []) {
         afterGettingVisaVasaInfo.add(
           FormGroup({
             'visaPage': FormControl<DateTime>(
@@ -346,10 +361,10 @@ class MedicalVisaModel with ChangeNotifier {
 
     FormArray afterGettingVisaTicket =
         requiredInJapanAfterGettingVisa.control('ticket') as FormArray;
-    if (response.afterGettingVisa!.ticket!.isNotEmpty) {
+    if (response.afterGettingVisa?.ticket?.isNotEmpty == true) {
       afterGettingVisaTicket.clear();
       afterGettingVisaTicket.reset();
-      for (var element in response.afterGettingVisa?.ticket ?? []) {
+      for (Ticket element in response.afterGettingVisa?.ticket ?? []) {
         afterGettingVisaTicket.add(
           FormGroup({
             'planeTicketForYourVisitToJapan': FormControl<DateTime>(
@@ -374,10 +389,10 @@ class MedicalVisaModel with ChangeNotifier {
 
     FormArray afterGettingVisaTicketBack =
         requiredInJapanAfterGettingVisa.control('ticketBack') as FormArray;
-    if (response.afterGettingVisa!.ticketBack!.isNotEmpty) {
+    if (response.afterGettingVisa?.ticketBack?.isNotEmpty == true) {
       afterGettingVisaTicketBack.clear();
       afterGettingVisaTicketBack.reset();
-      for (var element in response.afterGettingVisa?.ticketBack ?? []) {
+      for (TicketBack element in response.afterGettingVisa?.ticketBack ?? []) {
         afterGettingVisaTicketBack.add(
           FormGroup(
             {
@@ -404,10 +419,10 @@ class MedicalVisaModel with ChangeNotifier {
 
     FormArray afterGettingVisaBoardingPass =
         requiredInJapanAfterGettingVisa.control('boardingPass') as FormArray;
-    if (response.afterGettingVisa!.boardingPass!.isNotEmpty) {
+    if (response.afterGettingVisa?.boardingPass?.isNotEmpty == true) {
       afterGettingVisaBoardingPass.clear();
       afterGettingVisaBoardingPass.reset();
-      for (var element in response.afterGettingVisa?.boardingPass ?? []) {
+      for (BoardingPass element in response.afterGettingVisa?.boardingPass ?? []) {
         afterGettingVisaBoardingPass.add(
           FormGroup(
             {
@@ -434,26 +449,36 @@ class MedicalVisaModel with ChangeNotifier {
     requiredInJapanAfterGettingVisa.control('certificateOfEligibility').value =
         response.afterGettingVisa?.certificateOfEligibility;
 
+    requiredInJapanAfterGettingVisa
+        .control('certificateOfEligibilityFileName')
+        .value = response.afterGettingVisa?.certificateOfEligibilityFileName !=
+            null
+        ? FileSelect(
+            url: response.afterGettingVisa?.certificateOfEligibilityFileName ??
+                '',
+          )
+        : null;
+
     FormGroup travelCompanionForm =
         formGroup.control('travelCompanion') as FormGroup;
     travelCompanionForm.control('nameRomaji').value =
         response.travelCompanion?.nameRomaji;
     travelCompanionForm.control('dateBirth').value =
-        response.travelCompanion!.dateBirth;
-    travelCompanionForm.control('age').value = response.travelCompanion!.age;
-    travelCompanionForm.control('sex').value = response.travelCompanion!.sex;
+        response.travelCompanion?.dateBirth;
+    travelCompanionForm.control('age').value = response.travelCompanion?.age;
+    travelCompanionForm.control('sex').value = response.travelCompanion?.sex;
     travelCompanionForm.control('addressArea').value =
-        response.travelCompanion!.addressArea;
+        response.travelCompanion?.addressArea;
     travelCompanionForm.control('numberPassport').value =
-        response.travelCompanion!.numberPassport;
-    logger.d('Name = ${response.travelCompanion!.nameRomaji}');
+        response.travelCompanion?.numberPassport;
+    logger.d('Name = ${response.travelCompanion?.nameRomaji}');
 
     FormArray travelCompanionTravelInfo =
         travelCompanionForm.control('travelInfo') as FormArray;
-    if (response.travelCompanion!.travelInfo!.isNotEmpty) {
+    if (response.travelCompanion?.travelInfo?.isNotEmpty == true) {
       travelCompanionTravelInfo.clear();
       travelCompanionTravelInfo.reset();
-      for (var element in response.travelCompanion?.travelInfo ?? []) {
+      for (TravelInfo element in response.travelCompanion?.travelInfo ?? []) {
         travelCompanionTravelInfo.add(
           FormGroup(
             {
@@ -520,18 +545,18 @@ class MedicalVisaModel with ChangeNotifier {
     }
 
     travelCompanionForm.control('travelRemarks').value =
-        response.travelCompanion!.travelRemarks;
+        response.travelCompanion?.travelRemarks;
     travelCompanionForm.control('visaWithdrawalTarget').value =
-        response.travelCompanion!.subjectVisaWithdrawal;
+        response.travelCompanion?.subjectVisaWithdrawal;
     // travelCompanionForm.control('reason').value = response.travelCompanion!.;
     travelCompanionForm.control('remarks').value =
-        response.travelCompanion!.remarks;
+        response.travelCompanion?.remarks;
     FormArray travelCompanionFormVasaInfo =
         travelCompanionForm.control('vasaInfo') as FormArray;
-    if (response.travelCompanion!.vasaInfo!.isNotEmpty) {
+    if (response.travelCompanion?.vasaInfo?.isNotEmpty == true) {
       travelCompanionFormVasaInfo.clear();
       travelCompanionFormVasaInfo.reset();
-      for (var element in response.travelCompanion?.vasaInfo ?? []) {
+      for (VasaInfo element in response.travelCompanion?.vasaInfo ?? []) {
         travelCompanionFormVasaInfo.add(
           FormGroup({
             'visaPage': FormControl<DateTime>(
@@ -571,10 +596,10 @@ class MedicalVisaModel with ChangeNotifier {
 
     FormArray travelCompanionFormTicket =
         travelCompanionForm.control('ticket') as FormArray;
-    if (response.travelCompanion!.ticket!.isNotEmpty) {
+    if (response.travelCompanion?.ticket?.isNotEmpty == true) {
       travelCompanionFormTicket.clear();
       travelCompanionFormTicket.reset();
-      for (var element in response.travelCompanion?.ticket ?? []) {
+      for (Ticket element in response.travelCompanion?.ticket ?? []) {
         travelCompanionFormTicket.add(
           FormGroup({
             'planeTicketForYourVisitToJapan': FormControl<DateTime>(
@@ -599,10 +624,10 @@ class MedicalVisaModel with ChangeNotifier {
 
     FormArray travelCompanionFormTicketBack =
         travelCompanionForm.control('ticketBack') as FormArray;
-    if (response.travelCompanion!.ticketBack!.isNotEmpty) {
+    if (response.travelCompanion?.ticketBack?.isNotEmpty == true) {
       travelCompanionFormTicketBack.clear();
       travelCompanionFormTicketBack.reset();
-      for (var element in response.travelCompanion?.ticketBack ?? []) {
+      for (TicketBack element in response.travelCompanion?.ticketBack ?? []) {
         travelCompanionFormTicketBack.add(
           FormGroup(
             {
@@ -629,10 +654,10 @@ class MedicalVisaModel with ChangeNotifier {
 
     FormArray travelCompanionFormBoardingPass =
         travelCompanionForm.control('boardingPass') as FormArray;
-    if (response.travelCompanion!.boardingPass!.isNotEmpty) {
+    if (response.travelCompanion?.boardingPass?.isNotEmpty == true) {
       travelCompanionFormBoardingPass.clear();
       travelCompanionFormBoardingPass.reset();
-      for (var element in response.travelCompanion?.boardingPass ?? []) {
+      for (BoardingPass element in response.travelCompanion?.boardingPass ?? []) {
         travelCompanionFormBoardingPass.add(
           FormGroup({
             'boardingPassForReturnFlight': FormControl<DateTime>(
@@ -656,16 +681,22 @@ class MedicalVisaModel with ChangeNotifier {
     }
 
     travelCompanionForm.control('certificateOfEligibility').value =
-        response.travelCompanion!.certificateOfEligibility;
+        response.travelCompanion?.certificateOfEligibility;
+    travelCompanionForm.control('certificateOfEligibilityFileName').value =
+        response.travelCompanion?.certificateOfEligibilityFileName != null
+            ? FileSelect(
+                url: response.travelCompanion?.certificateOfEligibilityFileName,
+              )
+            : null;
 
     FormGroup necessaryInJapanForm =
         formGroup.control('necessaryInJapan') as FormGroup;
     FormArray necessaryInJapanFormVisaInfor =
         necessaryInJapanForm.control('visaInfo') as FormArray;
-    if (response.necessaryInJapan!.visaInfo!.isNotEmpty) {
+    if (response.necessaryInJapan?.visaInfo?.isNotEmpty == true) {
       necessaryInJapanFormVisaInfor.clear();
       necessaryInJapanFormVisaInfor.reset();
-      for (var element in response.necessaryInJapan?.visaInfo ?? []) {
+      for (VisaInfo element in response.necessaryInJapan?.visaInfo ?? []) {
         necessaryInJapanFormVisaInfor.add(
           FormGroup(
             {
@@ -711,10 +742,10 @@ class MedicalVisaModel with ChangeNotifier {
 
     FormArray necessaryInJapanFormSchedule =
         necessaryInJapanForm.control('schedule') as FormArray;
-    if (response.necessaryInJapan!.schedule!.isNotEmpty) {
+    if (response.necessaryInJapan?.schedule?.isNotEmpty == true) {
       necessaryInJapanFormSchedule.clear();
       necessaryInJapanFormSchedule.reset();
-      for (var element in response.necessaryInJapan?.schedule ?? []) {
+      for (Schedule element in response.necessaryInJapan?.schedule ?? []) {
         necessaryInJapanFormSchedule.add(
           FormGroup(
             {
@@ -740,18 +771,18 @@ class MedicalVisaModel with ChangeNotifier {
     }
 
     necessaryInJapanForm.control('statementOfReasonsDate').value =
-        response.necessaryInJapan!.statementOfReasonsDate;
+        response.necessaryInJapan?.statementOfReasonsDate;
     necessaryInJapanForm.control('travelCompanionListDate').value =
-        response.necessaryInJapan!.travelCompanionListDate;
+        response.necessaryInJapan?.travelCompanionListDate;
 
     FormGroup afterGettingVisaFinalForm =
         formGroup.control('afterGettingVisaFinal') as FormGroup;
     FormArray afterGettingVisaFinalFormVisaInfo =
         afterGettingVisaFinalForm.control('vasaInfo') as FormArray;
-    if (response.afterGettingVisaFinal!.vasaInfo!.isNotEmpty) {
+    if (response.afterGettingVisaFinal?.vasaInfo?.isNotEmpty == true) {
       afterGettingVisaFinalFormVisaInfo.clear();
       afterGettingVisaFinalFormVisaInfo.reset();
-      for (var element in response.afterGettingVisaFinal?.vasaInfo ?? []) {
+      for (GettingVisaInfoRequest element in response.afterGettingVisaFinal?.vasaInfo ?? []) {
         afterGettingVisaFinalFormVisaInfo.add(
           FormGroup(
             {
@@ -793,10 +824,10 @@ class MedicalVisaModel with ChangeNotifier {
 
     FormArray afterGettingVisaFinalFormTicket =
         afterGettingVisaFinalForm.control('ticket') as FormArray;
-    if (response.afterGettingVisaFinal!.ticket!.isNotEmpty) {
+    if (response.afterGettingVisaFinal?.ticket?.isNotEmpty == true) {
       afterGettingVisaFinalFormTicket.clear();
       afterGettingVisaFinalFormTicket.reset();
-      for (var element in response.afterGettingVisaFinal?.ticket ?? []) {
+      for (TicketRequest element in response.afterGettingVisaFinal?.ticket ?? []) {
         afterGettingVisaFinalFormTicket.add(
           FormGroup(
             {
@@ -823,10 +854,10 @@ class MedicalVisaModel with ChangeNotifier {
 
     FormArray afterGettingVisaFinalFormTicketBack =
         afterGettingVisaFinalForm.control('ticketBack') as FormArray;
-    if (response.afterGettingVisaFinal!.ticketBack!.isNotEmpty) {
+    if (response.afterGettingVisaFinal?.ticketBack?.isNotEmpty == true) {
       afterGettingVisaFinalFormTicketBack.clear();
       afterGettingVisaFinalFormTicketBack.reset();
-      for (var element in response.afterGettingVisaFinal?.ticketBack ?? []) {
+      for (TicketBackRequest element in response.afterGettingVisaFinal?.ticketBack ?? []) {
         afterGettingVisaFinalFormTicketBack.add(
           FormGroup(
             {
@@ -853,10 +884,10 @@ class MedicalVisaModel with ChangeNotifier {
 
     FormArray afterGettingVisaFinalFormBoardingPass =
         afterGettingVisaFinalForm.control('boardingPass') as FormArray;
-    if (response.afterGettingVisaFinal!.boardingPass!.isNotEmpty) {
+    if (response.afterGettingVisaFinal?.boardingPass?.isNotEmpty == true) {
       afterGettingVisaFinalFormBoardingPass.clear();
       afterGettingVisaFinalFormBoardingPass.reset();
-      for (var element in response.afterGettingVisaFinal?.boardingPass ?? []) {
+      for (BoardingPassRequest element in response.afterGettingVisaFinal?.boardingPass ?? []) {
         afterGettingVisaFinalFormBoardingPass.add(
           FormGroup(
             {
@@ -882,7 +913,7 @@ class MedicalVisaModel with ChangeNotifier {
     }
 
     afterGettingVisaFinalForm.control('certificateOfEligibility').value =
-        response.afterGettingVisaFinal!.certificateOfEligibility;
+        response.afterGettingVisaFinal?.certificateOfEligibility;
   }
 
   ValueNotifier<AsyncData<MedicalRecordVisaResponse>>
