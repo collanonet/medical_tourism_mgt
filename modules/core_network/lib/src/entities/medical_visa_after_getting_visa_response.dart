@@ -12,7 +12,7 @@ class AfterGettingVisaResponse {
   DateTime? certificateOfEligibility;
 
   AfterGettingVisaResponse({
-     this.id,
+    this.id,
     this.vasaInfo,
     this.ticket,
     this.ticketBack,
@@ -35,21 +35,24 @@ class VasaInfo {
   final String id;
   DateTime? visaPage;
   DateTime? landingPermit;
+  String? visaPageFileName;
+  String? landingPermitFileName;
 
   VasaInfo({
     required this.id,
     this.visaPage,
     this.landingPermit,
+    this.visaPageFileName,
+    this.landingPermitFileName,
   });
 
-  factory VasaInfo.fromJson(Map<String,dynamic> json){
+  factory VasaInfo.fromJson(Map<String, dynamic> json) {
     return _$VasaInfoFromJson(json);
   }
 
-  Map<String,dynamic> toJson(){
+  Map<String, dynamic> toJson() {
     return _$VasaInfoToJson(this);
   }
-
 }
 
 @JsonSerializable()
@@ -57,10 +60,12 @@ class Ticket {
   @JsonKey(name: '_id')
   final String id;
   DateTime? planeTicketForYourVisitToJapan;
+  String? planeTicketForYourVisitToJapanFileName;
 
   Ticket({
     required this.id,
     this.planeTicketForYourVisitToJapan,
+    this.planeTicketForYourVisitToJapanFileName,
   });
 
   factory Ticket.fromJson(Map<String, dynamic> json) {
