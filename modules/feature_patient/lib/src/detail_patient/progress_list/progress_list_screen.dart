@@ -187,7 +187,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                 ),
             children: [
               Text(
-                '訪日検診の流れ',
+                index == 0 ? '訪日検診の流れ' : '訪日再生医療の流れ',
                 style: Theme.of(context).textTheme.titleMedium,
               ),
               Row(

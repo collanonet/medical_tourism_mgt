@@ -52,7 +52,7 @@ class StatementModel {
     required MedicalInvoiceResponse invoice,
     required FormGroup formGroup,
   }) async {
-    editData.value = AsyncData(data: invoice);
+    editData.value = AsyncData(data: invoice,loading: true);
     formGroup.control('_id').value = invoice.id;
     formGroup.control('logoFile').value = FileSelect(
       url: invoice.logoFile,
@@ -77,10 +77,11 @@ class StatementModel {
     formGroup.control('taxRate').value = invoice.taxRate;
     formGroup.control('taxRateOption').value = invoice.taxRateOption;
 
-    if (invoice.notes != null && invoice.notes!.isNotEmpty) {
+    if (invoice.notes?.isNotEmpty == true) {
       FormArray notes = formGroup.control('notes') as FormArray;
-
-      for (var note in invoice.notes!) {
+      notes.clear();
+      notes.reset();
+      for (NoteInvoiceResponse note in invoice.notes ?? []) {
         notes.add(
           FormGroup({
             '_id': FormControl<String>(value: note.id),
@@ -91,10 +92,11 @@ class StatementModel {
     }
 
     try {
-      if (invoice.item != null && invoice.item!.isNotEmpty) {
+      if (invoice.item?.isNotEmpty == true) {
         FormArray item = formGroup.control('item') as FormArray;
-
-        for (var itemData in invoice.item!) {
+        item.clear();
+        item.reset();
+        for (ItemResponse itemData in invoice.item ?? []) {
           logger.d('edit info: ${itemData.toJson()}');
           item.add(
             FormGroup({
@@ -108,8 +110,12 @@ class StatementModel {
           );
         }
       }
+      await Future.delayed(const Duration(milliseconds: 500), () {
+        editData.value = AsyncData(data: invoice);
+      });
     } catch (e) {
       logger.e(e);
+      editData.value = AsyncData(data: invoice);
     }
   }
 

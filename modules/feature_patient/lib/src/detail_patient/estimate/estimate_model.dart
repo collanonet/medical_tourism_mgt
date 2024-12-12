@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'dart:async';
 import 'dart:convert';
 
 // Package imports:
@@ -73,9 +74,10 @@ class EstimateModel {
 
     FormArray notes = formGroup.control('notes') as FormArray;
 
-    if (invoice.notes != null && invoice.notes!.isNotEmpty) {
+    if (invoice.notes?.isNotEmpty == true) {
       notes.clear();
-      for (var note in invoice.notes ?? []) {
+      notes.reset();
+      for (NoteInvoiceResponse note in invoice.notes ?? []) {
         notes.add(
           FormGroup({
             '_id': FormControl<String>(value: note.id),
@@ -88,9 +90,10 @@ class EstimateModel {
     try {
       FormArray item = formGroup.control('item') as FormArray;
 
-      if (invoice.item != null && invoice.item!.isNotEmpty) {
+      if (invoice.item?.isNotEmpty == true) {
         item.clear();
-        for (var itemData in invoice.item ?? []) {
+        item.reset();
+        for (ItemResponse itemData in invoice.item ?? []) {
           item.add(
             FormGroup({
               '_id': FormControl<String>(value: itemData.id),
@@ -104,7 +107,9 @@ class EstimateModel {
         }
       }
 
-      editData.value = AsyncData(data: invoice);
+      await Future.delayed(const Duration(milliseconds: 500), () {
+        editData.value = AsyncData(data: invoice);
+      });
     } catch (e) {
       logger.e(e);
       editData.value = AsyncData(data: invoice);
@@ -211,10 +216,8 @@ class EstimateModel {
       );
 
       Uint8List? pathFileJP = await generatePdfFromQuotation(
-        request,
-        patientData.value.requireData,
-        'JP',
-      );
+          patientData.value.requireData, 'JP',
+          request: request);
       String fileNamePdfJP =
           'quotation_${DateTime.now().millisecondsSinceEpoch}_JP.pdf';
 
@@ -231,10 +234,8 @@ class EstimateModel {
       }
 
       Uint8List? pathFileZH = await generatePdfFromQuotation(
-        request,
-        patientData.value.requireData,
-        'ZH',
-      );
+          patientData.value.requireData, 'ZH',
+          request: request);
       String fileNamePdfZH =
           'quotation_${DateTime.now().millisecondsSinceEpoch}_ZH.pdf';
 
@@ -251,10 +252,8 @@ class EstimateModel {
       }
 
       Uint8List? pathFileZHTW = await generatePdfFromQuotation(
-        request,
-        patientData.value.requireData,
-        'ZHTW',
-      );
+          patientData.value.requireData, 'ZHTW',
+          request: request);
       String fileNamePdfZHTW =
           'quotation_${DateTime.now().millisecondsSinceEpoch}_ZHTW.pdf';
 
@@ -271,10 +270,8 @@ class EstimateModel {
       }
 
       Uint8List? pathFileVN = await generatePdfFromQuotation(
-        request,
-        patientData.value.requireData,
-        'VN',
-      );
+          patientData.value.requireData, 'VN',
+          request: request);
       String fileNamePdfVN =
           'quotation_${DateTime.now().millisecondsSinceEpoch}_VN.pdf';
 
@@ -291,10 +288,8 @@ class EstimateModel {
       }
 
       Uint8List? pathFileEN = await generatePdfFromQuotation(
-        request,
-        patientData.value.requireData,
-        'EN',
-      );
+          patientData.value.requireData, 'EN',
+          request: request);
       String fileNamePdfEN =
           'quotation_${DateTime.now().millisecondsSinceEpoch}_EN.pdf';
 
@@ -410,7 +405,145 @@ class EstimateModel {
             ?.firstWhere((element) => element.id == id);
         if (invoice != null) {
           submitMoveToInvoice.value = AsyncData(loading: true, data: id);
-          await patientRepository.putTypeInvoice(id, true);
+          Uint8List? pathFileJP = await generatePdfFromQuotation(
+            patientData.value.requireData,
+            'JP',
+            response: invoice,
+          );
+          String fileNamePdfJP =
+              'quotation_${DateTime.now().millisecondsSinceEpoch}_JP.pdf';
+
+          if (pathFileJP != null) {
+            try {
+              String base64Image = base64Encode(pathFileJP);
+              patientRepository.uploadFileBase64(
+                base64Image,
+                fileNamePdfJP,
+              );
+            } catch (e) {
+              logger.e(e);
+            }
+          }
+
+          Uint8List? pathFileZH = await generatePdfFromQuotation(
+            patientData.value.requireData,
+            'ZH',
+            response: invoice,
+          );
+          String fileNamePdfZH =
+              'quotation_${DateTime.now().millisecondsSinceEpoch}_ZH.pdf';
+
+          if (pathFileZH != null) {
+            try {
+              String base64Image = base64Encode(pathFileZH);
+              patientRepository.uploadFileBase64(
+                base64Image,
+                fileNamePdfZH,
+              );
+            } catch (e) {
+              logger.e(e);
+            }
+          }
+
+          Uint8List? pathFileZHTW = await generatePdfFromQuotation(
+            patientData.value.requireData,
+            'ZHTW',
+            response: invoice,
+          );
+          String fileNamePdfZHTW =
+              'quotation_${DateTime.now().millisecondsSinceEpoch}_ZHTW.pdf';
+
+          if (pathFileZHTW != null) {
+            try {
+              String base64Image = base64Encode(pathFileZHTW);
+              patientRepository.uploadFileBase64(
+                base64Image,
+                fileNamePdfZHTW,
+              );
+            } catch (e) {
+              logger.e(e);
+            }
+          }
+
+          Uint8List? pathFileVN = await generatePdfFromQuotation(
+            patientData.value.requireData,
+            'VN',
+            response: invoice,
+          );
+          String fileNamePdfVN =
+              'quotation_${DateTime.now().millisecondsSinceEpoch}_VN.pdf';
+
+          if (pathFileVN != null) {
+            try {
+              String base64Image = base64Encode(pathFileVN);
+              patientRepository.uploadFileBase64(
+                base64Image,
+                fileNamePdfVN,
+              );
+            } catch (e) {
+              logger.e(e);
+            }
+          }
+
+          Uint8List? pathFileEN = await generatePdfFromQuotation(
+            patientData.value.requireData,
+            'EN',
+            response: invoice,
+          );
+          String fileNamePdfEN =
+              'quotation_${DateTime.now().millisecondsSinceEpoch}_EN.pdf';
+
+          if (pathFileEN != null) {
+            try {
+              String base64Image = base64Encode(pathFileEN);
+              patientRepository.uploadFileBase64(
+                base64Image,
+                fileNamePdfEN,
+              );
+            } catch (e) {
+              logger.e(e);
+            }
+          }
+
+          List<ItemRequest>? items = [];
+          invoice.item?.forEach((item) {
+            items.add(ItemRequest.fromJson(item.toJson()));
+          });
+
+          List<NoteInvoiceRequest>? notes = [];
+          invoice.notes?.forEach((note) {
+            notes.add(NoteInvoiceRequest.fromJson(note.toJson()));
+          });
+
+          final request = MedicalInvoiceRequest(
+            logoFile: invoice.logoFile,
+            stampFile: invoice.stampFile,
+            type: true,
+            invoiceNumber: invoice.invoiceNumber,
+            invoiceDate: invoice.invoiceDate,
+            companyName: invoice.companyName,
+            address: invoice.address,
+            telNumber: invoice.telNumber,
+            fexNumber: invoice.fexNumber,
+            inCharge: invoice.inCharge,
+            totalAmount: invoice.totalAmount,
+            remarks: invoice.remarks,
+            notes: notes,
+            item: items,
+            medicalRecord: invoice.medicalRecord.id,
+            user: invoice.user?.id,
+            patient: invoice.patient?.id,
+            hospitalRecord: invoice.hospitalRecord?.id,
+            taxRate: invoice.taxRate,
+            taxRateOption: invoice.taxRateOption,
+            fileNamePdfJP: fileNamePdfJP,
+            fileNamePdfZH: fileNamePdfZH,
+            fileNamePdfVN: fileNamePdfVN,
+            fileNamePdfEN: fileNamePdfEN,
+            fileNamePdfZHTW: fileNamePdfZHTW,
+          );
+
+          await patientRepository.putInvoice(id, request);
 
           submitMoveToInvoice.value = AsyncData(data: id);
           medicalQuotationData.value = AsyncData(
@@ -430,8 +563,8 @@ class EstimateModel {
   }
 }
 
-Future<Uint8List?> generatePdfFromQuotation(
-    MedicalInvoiceRequest request, Patient patient, String language) async {
+Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
+    {MedicalInvoiceResponse? response, MedicalInvoiceRequest? request}) async {
   final pdf = pw.Document(pageMode: PdfPageMode.fullscreen);
 
   final Uint8List fontData;
@@ -559,12 +692,22 @@ Future<Uint8List?> generatePdfFromQuotation(
   Uint8List? logoImage;
   Uint8List? stampImage;
 
-  if (request.logoFile != null && request.logoFile!.isNotEmpty) {
-    logoImage = await downloadImageAsUint8List(request.logoFile!);
+  if (request?.logoFile?.isNotEmpty == true ||
+      response?.logoFile?.isNotEmpty == true) {
+    if (request?.logoFile != null) {
+      logoImage = await downloadImageAsUint8List(request!.logoFile!);
+    } else {
+      logoImage = await downloadImageAsUint8List(response!.logoFile!);
+    }
   }
 
-  if (request.stampFile != null && request.stampFile!.isNotEmpty) {
-    stampImage = await downloadImageAsUint8List(request.stampFile!);
+  if (request?.stampFile?.isNotEmpty == true ||
+      response?.stampFile?.isNotEmpty == true) {
+    if (request?.stampFile != null) {
+      stampImage = await downloadImageAsUint8List(request!.stampFile!);
+    } else {
+      stampImage = await downloadImageAsUint8List(response!.stampFile!);
+    }
   }
 
   pdf.addPage(
@@ -601,10 +744,16 @@ Future<Uint8List?> generatePdfFromQuotation(
                 quotationNumberLabel,
                 style: pw.TextStyle(font: ttf),
               ),
-              pw.Text(
-                request.invoiceNumber ?? '',
-                style: pw.TextStyle(font: ttf),
-              ),
+              if (response != null)
+                pw.Text(
+                  response.invoiceNumber ?? '',
+                  style: pw.TextStyle(font: ttf),
+                ),
+              if (request != null)
+                pw.Text(
+                  request.invoiceNumber ?? '',
+                  style: pw.TextStyle(font: ttf),
+                ),
             ]),
 
         pw.SizedBox(height: 20),
@@ -639,12 +788,20 @@ Future<Uint8List?> generatePdfFromQuotation(
                   quotationDateLabel,
                   style: pw.TextStyle(font: ttf),
                 ),
-                pw.Text(
-                  request.invoiceDate != null
-                      ? Dates.formatFullDate(request.invoiceDate!)
-                      : '',
-                  style: pw.TextStyle(font: ttf),
-                ),
+                if (response != null)
+                  pw.Text(
+                    response.invoiceDate != null
+                        ? Dates.formatFullDate(response.invoiceDate!)
+                        : '',
+                    style: pw.TextStyle(font: ttf),
+                  ),
+                if (request != null)
+                  pw.Text(
+                    request.invoiceDate != null
+                        ? Dates.formatFullDate(request.invoiceDate!)
+                        : '',
+                    style: pw.TextStyle(font: ttf),
+                  ),
               ])
         ]),
         pw.SizedBox(height: 20),
@@ -669,26 +826,49 @@ Future<Uint8List?> generatePdfFromQuotation(
                       style: pw.TextStyle(font: ttf),
                     ),
                   ),
-                  pw.Container(
-                    padding: const pw.EdgeInsets.all(8),
-                    decoration: pw.BoxDecoration(
-                      color: const PdfColor.fromInt(0xffffffff),
-                      border: pw.Border.all(
-                        color: const PdfColor.fromInt(0xff000000),
-                        width: 1,
+                  if (response != null)
+                    pw.Container(
+                      padding: const pw.EdgeInsets.all(8),
+                      decoration: pw.BoxDecoration(
+                        color: const PdfColor.fromInt(0xffffffff),
+                        border: pw.Border.all(
+                          color: const PdfColor.fromInt(0xff000000),
+                          width: 1,
+                        ),
+                      ),
+                      child: pw.Text(
+                        Strings.formatCurrency(total(
+                            subTotalResponse(response.item ?? []),
+                            taxCalculation(
+                                subTotalResponse(response.item ?? []),
+                                (response.taxRate ?? 0)))),
+                        style: pw.TextStyle(
+                          font: ttfJPPRegular,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
                       ),
                     ),
-                    child: pw.Text(
-                      Strings.formatCurrency(total(
-                          subTotal(request.item ?? []),
-                          taxCalculation(subTotal(request.item ?? []),
-                              (request.taxRate ?? 0)))),
-                      style: pw.TextStyle(
-                        font: ttfJPPRegular,
-                        fontWeight: pw.FontWeight.bold,
+                  if (request != null)
+                    pw.Container(
+                      padding: const pw.EdgeInsets.all(8),
+                      decoration: pw.BoxDecoration(
+                        color: const PdfColor.fromInt(0xffffffff),
+                        border: pw.Border.all(
+                          color: const PdfColor.fromInt(0xff000000),
+                          width: 1,
+                        ),
+                      ),
+                      child: pw.Text(
+                        Strings.formatCurrency(total(
+                            subTotal(request.item ?? []),
+                            taxCalculation(subTotal(request.item ?? []),
+                                (request.taxRate ?? 0)))),
+                        style: pw.TextStyle(
+                          font: ttfJPPRegular,
+                          fontWeight: pw.FontWeight.bold,
+                        ),
                       ),
                     ),
-                  ),
                 ]),
           ),
           pw.Expanded(
@@ -719,140 +899,265 @@ Future<Uint8List?> generatePdfFromQuotation(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
-              pw.Text(
-                request.companyName ?? '',
-                style: pw.TextStyle(font: ttf),
-              ),
+              if (response != null)
+                pw.Text(
+                  response.companyName ?? '',
+                  style: pw.TextStyle(font: ttf),
+                ),
+              if (request != null)
+                pw.Text(
+                  request.companyName ?? '',
+                  style: pw.TextStyle(font: ttf),
+                ),
             ]),
         pw.Row(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
-              pw.Text(
-                request.address ?? '',
-                style: pw.TextStyle(font: ttf),
-              ),
+              if (response != null)
+                pw.Text(
+                  response.address ?? '',
+                  style: pw.TextStyle(font: ttf),
+                ),
+              if (request != null)
+                pw.Text(
+                  request.address ?? '',
+                  style: pw.TextStyle(font: ttf),
+                ),
             ]),
         pw.Row(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
-              pw.Text(
-                'Tel : ${request.telNumber ?? ''}',
-                style: pw.TextStyle(font: ttf),
-              ),
+              if (response != null)
+                pw.Text(
+                  'Tel : ${response.telNumber ?? ''}',
+                  style: pw.TextStyle(font: ttf),
+                ),
+              if (request != null)
+                pw.Text(
+                  'Tel : ${request.telNumber ?? ''}',
+                  style: pw.TextStyle(font: ttf),
+                ),
             ]),
         pw.Row(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
-              pw.Text(
-                'Fax : ${request.fexNumber ?? ''}',
-                style: pw.TextStyle(font: ttf),
-              ),
+              if (response != null)
+                pw.Text(
+                  'Fax : ${response.fexNumber ?? ''}',
+                  style: pw.TextStyle(font: ttf),
+                ),
+              if (request != null)
+                pw.Text(
+                  'Fax : ${request.fexNumber ?? ''}',
+                  style: pw.TextStyle(font: ttf),
+                ),
             ]),
         pw.Row(
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
-              pw.Text(
-                '担当 : ${request.inCharge ?? ''}',
-                style: pw.TextStyle(font: ttfJPPRegular),
-              ),
+              if (response != null)
+                pw.Text(
+                  '担当 : ${response.inCharge ?? ''}',
+                  style: pw.TextStyle(font: ttfJPPRegular),
+                ),
+              if (request != null)
+                pw.Text(
+                  '担当 : ${request.inCharge ?? ''}',
+                  style: pw.TextStyle(font: ttfJPPRegular),
+                ),
             ]),
         pw.SizedBox(height: 20),
-        pw.TableHelper.fromTextArray(
-          headers: tableHeaders,
-          headerStyle: pw.TextStyle(font: ttf),
-          columnWidths: {
-            0: const pw.FlexColumnWidth(1),
-            1: const pw.FlexColumnWidth(6),
-            2: const pw.FlexColumnWidth(1),
-            3: const pw.FlexColumnWidth(1),
-            4: const pw.FlexColumnWidth(2),
-            5: const pw.FlexColumnWidth(2),
-          },
-          headerAlignment: pw.Alignment.centerLeft,
-          cellAlignment: pw.Alignment.centerLeft,
-          headerCellDecoration:
-              const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
-          oddCellStyle: pw.TextStyle(font: ttfJPPRegular),
-          cellStyle: pw.TextStyle(font: ttfJPPRegular),
-          data: request.item
-                  ?.map((item) => [
-                        pw.Text(
-                          item.itemCode ?? '--',
-                          style: pw.TextStyle(
-                            font: ttf,
-                            fontWeight: pw.FontWeight.bold,
-                            fontSize: 9,
+        if (response != null)
+          pw.TableHelper.fromTextArray(
+            headers: tableHeaders,
+            headerStyle: pw.TextStyle(font: ttf),
+            columnWidths: {
+              0: const pw.FlexColumnWidth(1),
+              1: const pw.FlexColumnWidth(6),
+              2: const pw.FlexColumnWidth(1),
+              3: const pw.FlexColumnWidth(1),
+              4: const pw.FlexColumnWidth(2),
+              5: const pw.FlexColumnWidth(2),
+            },
+            headerAlignment: pw.Alignment.centerLeft,
+            cellAlignment: pw.Alignment.centerLeft,
+            headerCellDecoration:
+                const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+            oddCellStyle: pw.TextStyle(font: ttfJPPRegular),
+            cellStyle: pw.TextStyle(font: ttfJPPRegular),
+            data: response.item
+                    ?.map((item) => [
+                          pw.Text(
+                            item.itemCode ?? '--',
+                            style: pw.TextStyle(
+                              font: ttf,
+                              fontWeight: pw.FontWeight.bold,
+                              fontSize: 9,
+                            ),
                           ),
-                        ),
-                        pw.Text(
-                          item.details ?? '',
-                          style: pw.TextStyle(
-                            font: ttfJPPRegular,
-                            fontWeight: pw.FontWeight.normal,
-                            fontSize: 10,
+                          pw.Text(
+                            item.details ?? '',
+                            style: pw.TextStyle(
+                              font: ttfJPPRegular,
+                              fontWeight: pw.FontWeight.normal,
+                              fontSize: 10,
+                            ),
                           ),
-                        ),
-                        item.quantity ?? '',
-                        item.unit ?? '',
-                        Strings.formatCurrency(item.unitPrice ?? 0),
-                        Strings.formatCurrency(
-                            (item.quantity ?? 0) * (item.unitPrice ?? 0)),
-                      ])
-                  .toList() ??
-              [
+                          item.quantity ?? '',
+                          item.unit ?? '',
+                          Strings.formatCurrency(item.unitPrice ?? 0),
+                          Strings.formatCurrency(
+                              (item.quantity ?? 0) * (item.unitPrice ?? 0)),
+                        ])
+                    .toList() ??
                 [
-                  '',
-                  '',
-                  '',
-                  '',
-                  '',
-                  '',
+                  [
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                  ],
+                  [
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                  ]
                 ],
+          ),
+        if (request != null)
+          pw.TableHelper.fromTextArray(
+            headers: tableHeaders,
+            headerStyle: pw.TextStyle(font: ttf),
+            columnWidths: {
+              0: const pw.FlexColumnWidth(1),
+              1: const pw.FlexColumnWidth(6),
+              2: const pw.FlexColumnWidth(1),
+              3: const pw.FlexColumnWidth(1),
+              4: const pw.FlexColumnWidth(2),
+              5: const pw.FlexColumnWidth(2),
+            },
+            headerAlignment: pw.Alignment.centerLeft,
+            cellAlignment: pw.Alignment.centerLeft,
+            headerCellDecoration:
+                const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+            oddCellStyle: pw.TextStyle(font: ttfJPPRegular),
+            cellStyle: pw.TextStyle(font: ttfJPPRegular),
+            data: request.item
+                    ?.map((item) => [
+                          pw.Text(
+                            item.itemCode ?? '--',
+                            style: pw.TextStyle(
+                              font: ttf,
+                              fontWeight: pw.FontWeight.bold,
+                              fontSize: 9,
+                            ),
+                          ),
+                          pw.Text(
+                            item.details ?? '',
+                            style: pw.TextStyle(
+                              font: ttfJPPRegular,
+                              fontWeight: pw.FontWeight.normal,
+                              fontSize: 10,
+                            ),
+                          ),
+                          item.quantity ?? '',
+                          item.unit ?? '',
+                          Strings.formatCurrency(item.unitPrice ?? 0),
+                          Strings.formatCurrency(
+                              (item.quantity ?? 0) * (item.unitPrice ?? 0)),
+                        ])
+                    .toList() ??
                 [
-                  '',
-                  '',
-                  '',
-                  '',
-                  '',
-                  '',
-                ]
-              ],
-        ),
+                  [
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                  ],
+                  [
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                    '',
+                  ]
+                ],
+          ),
         // notes
-        pw.TableHelper.fromTextArray(
-          columnWidths: {
-            1: const pw.FlexColumnWidth(12),
-          },
-          data: request.notes
-                  ?.map((note) => [
-                        pw.Row(
-                            crossAxisAlignment: pw.CrossAxisAlignment.start,
-                            children: [
-                              pw.Text(
-                                note.note ?? '',
-                                style: pw.TextStyle(
-                                  font: ttf,
-                                  fontWeight: pw.FontWeight.normal,
-                                  fontSize: 10,
-                                ),
-                                textAlign: pw.TextAlign.left,
-                              )
-                            ]),
-                      ])
-                  .toList() ??
-              [
+        if (response != null)
+          pw.TableHelper.fromTextArray(
+            columnWidths: {
+              1: const pw.FlexColumnWidth(12),
+            },
+            data: response.notes
+                    ?.map((note) => [
+                          pw.Row(
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.Text(
+                                  note.note ?? '',
+                                  style: pw.TextStyle(
+                                    font: ttf,
+                                    fontWeight: pw.FontWeight.normal,
+                                    fontSize: 10,
+                                  ),
+                                  textAlign: pw.TextAlign.left,
+                                )
+                              ]),
+                        ])
+                    .toList() ??
                 [
-                  '',
+                  [
+                    '',
+                  ],
+                  [
+                    '',
+                  ]
                 ],
+          ),
+        if (request != null)
+          pw.TableHelper.fromTextArray(
+            columnWidths: {
+              1: const pw.FlexColumnWidth(12),
+            },
+            data: request.notes
+                    ?.map((note) => [
+                          pw.Row(
+                              crossAxisAlignment: pw.CrossAxisAlignment.start,
+                              children: [
+                                pw.Text(
+                                  note.note ?? '',
+                                  style: pw.TextStyle(
+                                    font: ttf,
+                                    fontWeight: pw.FontWeight.normal,
+                                    fontSize: 10,
+                                  ),
+                                  textAlign: pw.TextAlign.left,
+                                )
+                              ]),
+                        ])
+                    .toList() ??
                 [
-                  '',
-                ]
-              ],
-        ),
+                  [
+                    '',
+                  ],
+                  [
+                    '',
+                  ]
+                ],
+          ),
         pw.TableHelper.fromTextArray(columnWidths: {
           0: const pw.FlexColumnWidth(10),
           1: const pw.FlexColumnWidth(2),
@@ -865,29 +1170,56 @@ Future<Uint8List?> generatePdfFromQuotation(
                 style: pw.TextStyle(font: ttf),
               ),
             ),
-            pw.Align(
-              alignment: pw.Alignment.centerRight,
-              child: pw.Text(
-                Strings.formatCurrency(subTotal(request.item ?? [])),
-                style: pw.TextStyle(font: ttfJPPRegular),
+            if (response != null)
+              pw.Align(
+                alignment: pw.Alignment.centerRight,
+                child: pw.Text(
+                  Strings.formatCurrency(subTotalResponse(response.item ?? [])),
+                  style: pw.TextStyle(font: ttfJPPRegular),
+                ),
               ),
-            ),
+            if (request != null)
+              pw.Align(
+                alignment: pw.Alignment.centerRight,
+                child: pw.Text(
+                  Strings.formatCurrency(subTotal(request.item ?? [])),
+                  style: pw.TextStyle(font: ttfJPPRegular),
+                ),
+              ),
           ],
           [
-            pw.Align(
-              alignment: pw.Alignment.centerLeft,
-              child: pw.Text(
-                '$taxLabel（${int.tryParse(request.taxRate.toString()) ?? 0}%）',
-                style: pw.TextStyle(font: ttfJPPRegular),
+            if (response != null)
+              pw.Align(
+                alignment: pw.Alignment.centerLeft,
+                child: pw.Text(
+                  '$taxLabel（${int.tryParse(response.taxRate.toString()) ?? 0}%）',
+                  style: pw.TextStyle(font: ttfJPPRegular),
+                ),
               ),
-            ),
-            pw.Align(
-              alignment: pw.Alignment.centerRight,
-              child: pw.Text(
-                request.taxRateOption ? '（外税）' : '（内税）',
-                style: pw.TextStyle(font: ttfJPPRegular),
+            if (request != null)
+              pw.Align(
+                alignment: pw.Alignment.centerLeft,
+                child: pw.Text(
+                  '$taxLabel（${int.tryParse(request.taxRate.toString()) ?? 0}%）',
+                  style: pw.TextStyle(font: ttfJPPRegular),
+                ),
               ),
-            ),
+            if (response != null)
+              pw.Align(
+                alignment: pw.Alignment.centerRight,
+                child: pw.Text(
+                  response.taxRateOption ? '（外税）' : '（内税）',
+                  style: pw.TextStyle(font: ttfJPPRegular),
+                ),
+              ),
+            if (request != null)
+              pw.Align(
+                alignment: pw.Alignment.centerRight,
+                child: pw.Text(
+                  request.taxRateOption ? '（外税）' : '（内税）',
+                  style: pw.TextStyle(font: ttfJPPRegular),
+                ),
+              ),
           ],
         ]),
         pw.TableHelper.fromTextArray(
@@ -917,19 +1249,34 @@ Future<Uint8List?> generatePdfFromQuotation(
                     style: pw.TextStyle(font: ttf),
                   ),
                 ),
-                pw.Align(
-                  alignment: pw.Alignment.centerRight,
-                  child: pw.Text(
-                    Strings.formatCurrency(total(
-                        subTotal(request.item ?? []),
-                        taxCalculation(
-                            subTotal(request.item ?? []), request.taxRate))),
-                    style: pw.TextStyle(
-                      font: ttfJPPRegular,
-                      fontBold: ttfJPPRegular,
+                if (response != null)
+                  pw.Align(
+                    alignment: pw.Alignment.centerRight,
+                    child: pw.Text(
+                      Strings.formatCurrency(total(
+                          subTotalResponse(response.item ?? []),
+                          taxCalculation(subTotalResponse(response.item ?? []),
+                              response.taxRate))),
+                      style: pw.TextStyle(
+                        font: ttfJPPRegular,
+                        fontBold: ttfJPPRegular,
+                      ),
                     ),
                   ),
-                ),
+                if (request != null)
+                  pw.Align(
+                    alignment: pw.Alignment.centerRight,
+                    child: pw.Text(
+                      Strings.formatCurrency(total(
+                          subTotal(request.item ?? []),
+                          taxCalculation(
+                              subTotal(request.item ?? []), request.taxRate))),
+                      style: pw.TextStyle(
+                        font: ttfJPPRegular,
+                        fontBold: ttfJPPRegular,
+                      ),
+                    ),
+                  ),
               ],
             ]),
         pw.SizedBox(height: 20),
@@ -938,10 +1285,16 @@ Future<Uint8List?> generatePdfFromQuotation(
           style: pw.TextStyle(font: ttf),
         ),
         pw.SizedBox(height: 20),
-        pw.Text(
-          request.remarks ?? '',
-          style: pw.TextStyle(font: ttf),
-        ),
+        if (response != null)
+          pw.Text(
+            response.remarks ?? '',
+            style: pw.TextStyle(font: ttf),
+          ),
+        if (request != null)
+          pw.Text(
+            request.remarks ?? '',
+            style: pw.TextStyle(font: ttf),
+          ),
       ],
     ),
   );
@@ -958,6 +1311,14 @@ Future<Uint8List?> generatePdfFromQuotation(
 }
 
 double subTotal(List<ItemRequest> items) {
+  double total = 0;
+  for (var item in items) {
+    total += (item.quantity ?? 0) * (item.unitPrice ?? 0);
+  }
+  return total;
+}
+
+double subTotalResponse(List<ItemResponse> items) {
   double total = 0;
   for (var item in items) {
     total += (item.quantity ?? 0) * (item.unitPrice ?? 0);
