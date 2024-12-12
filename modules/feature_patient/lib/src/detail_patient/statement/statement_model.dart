@@ -447,8 +447,8 @@ Future<Uint8List?> generatePdfFromInvoice(
   final ttf = pw.Font.ttf(fontData.buffer.asByteData());
 
   String title;
-  String quotationNumberLabel;
-  String quotationDateLabel;
+  String invoiceNumberLabel;
+  String invoiceDateLabel;
   String totalAmountLabel;
   List<String> tableHeaders;
   String subTotalLabel;
@@ -459,10 +459,10 @@ Future<Uint8List?> generatePdfFromInvoice(
 
   switch (language) {
     case 'JP':
-      title = '御　見　積　書';
-      subTitle = '下記の通り御見積りいたします。ご用命の程宜しくお願い申し上げます。';
-      quotationNumberLabel = '見積番号: ';
-      quotationDateLabel = '見積日: ';
+      title = '請求書';
+      subTitle = '以下に示す請求書を提供したいと考えています。\n ご連絡をお待ちしております。';
+      invoiceNumberLabel = '請求書番号: ';
+      invoiceDateLabel = '請求書の日付: ';
       totalAmountLabel = '合計金額: ';
       tableHeaders = ['', '項目', '数', '量', '単価', '金額'];
       subTotalLabel = '計';
@@ -472,10 +472,10 @@ Future<Uint8List?> generatePdfFromInvoice(
       break;
 
     case 'ZH':
-      title = '报价单';
-      subTitle = '我们将为您提供如下估价。感谢您一直以来的支持。';
-      quotationNumberLabel = '报价单号: ';
-      quotationDateLabel = '预计日期: ';
+      title = '发票';
+      subTitle = '我们希望向您提供如下所示的发票。\n我们期待您的回复。';
+      invoiceNumberLabel = '报价单号: ';
+      invoiceDateLabel = '预计日期: ';
       totalAmountLabel = '总金额: ';
       tableHeaders = ['', '项目', '数', '量', '单价', '金额'];
       subTotalLabel = '計';
@@ -485,10 +485,10 @@ Future<Uint8List?> generatePdfFromInvoice(
       break;
 
     case 'ZHTW':
-      title = '報價單';
-      subTitle = '我們將為您提供以下估價。感謝您一直以來的支持。';
-      quotationNumberLabel = '報價單號: ';
-      quotationDateLabel = '預計日期: ';
+      title = '發票';
+      subTitle = '我們希望向您提供如下所示的發票。';
+      invoiceNumberLabel = '報價單號: ';
+      invoiceDateLabel = '預計日期: ';
       totalAmountLabel = '總金額: ';
       tableHeaders = ['', '項目', '數', '量', '單價', '金額'];
       subTotalLabel = '計';
@@ -498,11 +498,11 @@ Future<Uint8List?> generatePdfFromInvoice(
       break;
 
     case 'VN':
-      title = 'Báo giá';
+      title = 'Hóa đơn';
       subTitle =
-          'Chúng tôi sẽ cung cấp cho bạn một ước tính như dưới đây.\n Cảm ơn bạn đã tiếp tục hỗ trợ.';
-      quotationNumberLabel = 'số báo giá: ';
-      quotationDateLabel = 'ngày dự kiến: ';
+          'Chúng tôi muốn cung cấp cho bạn hóa đơn như hiển thị bên dưới.\n Chúng tôi mong nhận được phản hồi từ bạn.';
+      invoiceNumberLabel = 'số báo giá: ';
+      invoiceDateLabel = 'ngày dự kiến: ';
       totalAmountLabel = 'tổng số tiền: ';
       tableHeaders = ['', 'mục', 'số', 'lượng', 'đơn giá', 'số tiền'];
       subTotalLabel = 'tổng cộng';
@@ -514,9 +514,9 @@ Future<Uint8List?> generatePdfFromInvoice(
     default:
       title = 'Invoice';
       subTitle =
-          'We would like to provide you with a quote as shown below.\n We look forward to hearing from you.';
-      quotationNumberLabel = 'Invoice number: ';
-      quotationDateLabel = 'Invoice date: ';
+          'We would like to provide you with a invoice as shown below.\n We look forward to hearing from you.';
+      invoiceNumberLabel = 'Invoice number: ';
+      invoiceDateLabel = 'Invoice date: ';
       totalAmountLabel = 'Total amount: ';
       tableHeaders = ['', 'Item', 'Quantity', 'Unit', 'Unit Price', 'Amount'];
       subTotalLabel = 'Sub Total';
@@ -566,7 +566,7 @@ Future<Uint8List?> generatePdfFromInvoice(
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
               pw.Text(
-                quotationNumberLabel,
+                invoiceNumberLabel,
                 style: pw.TextStyle(font: ttf),
               ),
               pw.Text(
@@ -604,7 +604,7 @@ Future<Uint8List?> generatePdfFromInvoice(
               mainAxisAlignment: pw.MainAxisAlignment.end,
               children: [
                 pw.Text(
-                  quotationDateLabel,
+                  invoiceDateLabel,
                   style: pw.TextStyle(font: ttf),
                 ),
                 pw.Text(

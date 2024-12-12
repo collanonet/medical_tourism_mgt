@@ -611,84 +611,163 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
   }
   final ttf = pw.Font.ttf(fontData.buffer.asByteData());
 
-  String title;
-  String quotationNumberLabel;
-  String quotationDateLabel;
-  String totalAmountLabel;
-  List<String> tableHeaders;
-  String subTotalLabel;
-  String taxLabel;
-  String totalLabel;
-  String remarksLabel;
-  String subTitle;
+  String title = 'Quotation';
+  String quotationNumberLabel = 'Quotation number: ';
+  String quotationDateLabel = 'Quotation date: ';
+  String totalAmountLabel = 'Total amount: ';
+  List<String> tableHeaders = [
+    '',
+    'Item',
+    'Quantity',
+    'Unit',
+    'Unit Price',
+    'Amount'
+  ];
+  String subTotalLabel = 'Sub Total';
+  String taxLabel = 'Tax';
+  String totalLabel = 'Total';
+  String remarksLabel = 'Remarks';
+  String subTitle =
+      'We would like to provide you with a quote as shown below.\n We look forward to hearing from you.';
 
-  switch (language) {
-    case 'JP':
-      title = '御　見　積　書';
-      subTitle = '下記の通り御見積りいたします。ご用命の程宜しくお願い申し上げます。';
-      quotationNumberLabel = '見積番号: ';
-      quotationDateLabel = '見積日: ';
-      totalAmountLabel = '合計金額: ';
-      tableHeaders = ['', '項目', '数', '量', '単価', '金額'];
-      subTotalLabel = '計';
-      taxLabel = '消費税';
-      totalLabel = '合　　計';
-      remarksLabel = '【特記事項】';
-      break;
+  if (request != null) {
+    switch (language) {
+      case 'JP':
+        title = '御　見　積　書';
+        subTitle = '下記の通り御見積りいたします。ご用命の程宜しくお願い申し上げます。';
+        quotationNumberLabel = '見積番号: ';
+        quotationDateLabel = '見積日: ';
+        totalAmountLabel = '合計金額: ';
+        tableHeaders = ['', '項目', '数', '量', '単価', '金額'];
+        subTotalLabel = '計';
+        taxLabel = '消費税';
+        totalLabel = '合　　計';
+        remarksLabel = '【特記事項】';
+        break;
 
-    case 'ZH':
-      title = '报价单';
-      subTitle = '我们将为您提供如下估价。感谢您一直以来的支持。';
-      quotationNumberLabel = '报价单号: ';
-      quotationDateLabel = '预计日期: ';
-      totalAmountLabel = '总金额: ';
-      tableHeaders = ['', '项目', '数', '量', '单价', '金额'];
-      subTotalLabel = '計';
-      taxLabel = '消費税';
-      totalLabel = '合  计';
-      remarksLabel = '【特記事項】';
-      break;
+      case 'ZH':
+        title = '报价单';
+        subTitle = '我们将为您提供如下估价。感谢您一直以来的支持。';
+        quotationNumberLabel = '报价单号: ';
+        quotationDateLabel = '预计日期: ';
+        totalAmountLabel = '总金额: ';
+        tableHeaders = ['', '项目', '数', '量', '单价', '金额'];
+        subTotalLabel = '計';
+        taxLabel = '消費税';
+        totalLabel = '合  计';
+        remarksLabel = '【特記事項】';
+        break;
 
-    case 'ZHTW':
-      title = '報價單';
-      subTitle = '我們將為您提供以下估價。感謝您一直以來的支持。';
-      quotationNumberLabel = '報價單號: ';
-      quotationDateLabel = '預計日期: ';
-      totalAmountLabel = '總金額: ';
-      tableHeaders = ['', '項目', '數', '量', '單價', '金額'];
-      subTotalLabel = '計';
-      taxLabel = '消費税';
-      totalLabel = '合  计';
-      remarksLabel = '【特記事項】';
-      break;
+      case 'ZHTW':
+        title = '報價單';
+        subTitle = '我們將為您提供以下估價。感謝您一直以來的支持。';
+        quotationNumberLabel = '報價單號: ';
+        quotationDateLabel = '預計日期: ';
+        totalAmountLabel = '總金額: ';
+        tableHeaders = ['', '項目', '數', '量', '單價', '金額'];
+        subTotalLabel = '計';
+        taxLabel = '消費税';
+        totalLabel = '合  计';
+        remarksLabel = '【特記事項】';
+        break;
 
-    case 'VN':
-      title = 'Báo giá';
-      subTitle =
-          'Chúng tôi sẽ cung cấp cho bạn một ước tính như dưới đây.\n Cảm ơn bạn đã tiếp tục hỗ trợ.';
-      quotationNumberLabel = 'số báo giá: ';
-      quotationDateLabel = 'ngày dự kiến: ';
-      totalAmountLabel = 'tổng số tiền: ';
-      tableHeaders = ['', 'mục', 'số', 'lượng', 'đơn giá', 'số tiền'];
-      subTotalLabel = 'tổng cộng';
-      taxLabel = 'thuế';
-      totalLabel = 'tổng cộng';
-      remarksLabel = 'ghi chú';
-      break;
+      case 'VN':
+        title = 'Báo giá';
+        subTitle =
+            'Chúng tôi sẽ cung cấp cho bạn một ước tính như dưới đây.\n Cảm ơn bạn đã tiếp tục hỗ trợ.';
+        quotationNumberLabel = 'số báo giá: ';
+        quotationDateLabel = 'ngày dự kiến: ';
+        totalAmountLabel = 'tổng số tiền: ';
+        tableHeaders = ['', 'mục', 'số', 'lượng', 'đơn giá', 'số tiền'];
+        subTotalLabel = 'tổng cộng';
+        taxLabel = 'thuế';
+        totalLabel = 'tổng cộng';
+        remarksLabel = 'ghi chú';
+        break;
 
-    default:
-      title = 'Quotation';
-      subTitle =
-          'We would like to provide you with a quote as shown below.\n We look forward to hearing from you.';
-      quotationNumberLabel = 'Quotation number: ';
-      quotationDateLabel = 'Quotation date: ';
-      totalAmountLabel = 'Total amount: ';
-      tableHeaders = ['', 'Item', 'Quantity', 'Unit', 'Unit Price', 'Amount'];
-      subTotalLabel = 'Sub Total';
-      taxLabel = 'Tax';
-      totalLabel = 'Total';
-      remarksLabel = 'Remarks';
+      default:
+        title = 'Quotation';
+        subTitle =
+            'We would like to provide you with a quote as shown below.\n We look forward to hearing from you.';
+        quotationNumberLabel = 'Quotation number: ';
+        quotationDateLabel = 'Quotation date: ';
+        totalAmountLabel = 'Total amount: ';
+        tableHeaders = ['', 'Item', 'Quantity', 'Unit', 'Unit Price', 'Amount'];
+        subTotalLabel = 'Sub Total';
+        taxLabel = 'Tax';
+        totalLabel = 'Total';
+        remarksLabel = 'Remarks';
+    }
+  } else if (response != null) {
+    switch (language) {
+      case 'JP':
+        title = '請求書';
+        subTitle = '以下に示す請求書を提供したいと考えています。\n ご連絡をお待ちしております。';
+        quotationNumberLabel = '請求書番号: ';
+        quotationDateLabel = '請求書の日付: ';
+        totalAmountLabel = '合計金額: ';
+        tableHeaders = ['', '項目', '数', '量', '単価', '金額'];
+        subTotalLabel = '計';
+        taxLabel = '消費税';
+        totalLabel = '合　　計';
+        remarksLabel = '【特記事項】';
+        break;
+
+      case 'ZH':
+        title = '发票';
+        subTitle = '我们希望向您提供如下所示的发票。\n我们期待您的回复。';
+        quotationNumberLabel = '报价单号: ';
+        quotationDateLabel = '预计日期: ';
+        totalAmountLabel = '总金额: ';
+        tableHeaders = ['', '项目', '数', '量', '单价', '金额'];
+        subTotalLabel = '計';
+        taxLabel = '消費税';
+        totalLabel = '合  计';
+        remarksLabel = '【特記事項】';
+        break;
+
+      case 'ZHTW':
+        title = '發票';
+        subTitle = '我們希望向您提供如下所示的發票。';
+        quotationNumberLabel = '報價單號: ';
+        quotationDateLabel = '預計日期: ';
+        totalAmountLabel = '總金額: ';
+        tableHeaders = ['', '項目', '數', '量', '單價', '金額'];
+        subTotalLabel = '計';
+        taxLabel = '消費税';
+        totalLabel = '合  计';
+        remarksLabel = '【特記事項】';
+        break;
+
+      case 'VN':
+        title = 'Hóa đơn';
+        subTitle =
+            'Chúng tôi muốn cung cấp cho bạn hóa đơn như hiển thị bên dưới.\n Chúng tôi mong nhận được phản hồi từ bạn.';
+        quotationNumberLabel = 'số báo giá: ';
+        quotationDateLabel = 'ngày dự kiến: ';
+        totalAmountLabel = 'tổng số tiền: ';
+        tableHeaders = ['', 'mục', 'số', 'lượng', 'đơn giá', 'số tiền'];
+        subTotalLabel = 'tổng cộng';
+        taxLabel = 'thuế';
+        totalLabel = 'tổng cộng';
+        remarksLabel = 'ghi chú';
+        break;
+
+      default:
+        title = 'Invoice';
+        subTitle =
+            'We would like to provide you with a invoice as shown below.\n We look forward to hearing from you.';
+        quotationNumberLabel = 'Invoice number: ';
+        quotationDateLabel = 'Invoice date: ';
+        totalAmountLabel = 'Total amount: ';
+        tableHeaders = ['', 'Item', 'Quantity', 'Unit', 'Unit Price', 'Amount'];
+        subTotalLabel = 'Sub Total';
+        taxLabel = 'Tax';
+        totalLabel = 'Total';
+        remarksLabel = 'Remarks';
+    }
   }
+
   Uint8List? logoImage;
   Uint8List? stampImage;
 
