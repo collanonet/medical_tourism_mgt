@@ -52,7 +52,7 @@ class StatementModel {
     required MedicalInvoiceResponse invoice,
     required FormGroup formGroup,
   }) async {
-    editData.value = AsyncData(data: invoice,loading: true);
+    editData.value = AsyncData(data: invoice, loading: true);
     formGroup.control('_id').value = invoice.id;
     formGroup.control('logoFile').value = FileSelect(
       url: invoice.logoFile,
@@ -725,7 +725,7 @@ Future<Uint8List?> generatePdfFromInvoice(
             children: [
               pw.Text(
                 '担当 : ${request.inCharge ?? ''}',
-                style: pw.TextStyle(font: ttfJPPRegular),
+                style: pw.TextStyle(font: ttfJP),
               ),
             ]),
         pw.SizedBox(height: 20),
@@ -744,14 +744,14 @@ Future<Uint8List?> generatePdfFromInvoice(
           cellAlignment: pw.Alignment.centerLeft,
           headerCellDecoration:
               const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
-          oddCellStyle: pw.TextStyle(font: ttfJPPRegular),
-          cellStyle: pw.TextStyle(font: ttfJPPRegular),
+          oddCellStyle: pw.TextStyle(font: ttfJP),
+          cellStyle: pw.TextStyle(font: ttfJP),
           data: request.item
                   ?.map((item) => [
                         pw.Text(
                           item.itemCode ?? '--',
                           style: pw.TextStyle(
-                            font: ttf,
+                            font: ttfJP,
                             fontWeight: pw.FontWeight.bold,
                             fontSize: 9,
                           ),
@@ -759,7 +759,7 @@ Future<Uint8List?> generatePdfFromInvoice(
                         pw.Text(
                           item.details ?? '',
                           style: pw.TextStyle(
-                            font: ttfJPPRegular,
+                            font: ttfJP,
                             fontWeight: pw.FontWeight.normal,
                             fontSize: 10,
                           ),
@@ -837,7 +837,7 @@ Future<Uint8List?> generatePdfFromInvoice(
               alignment: pw.Alignment.centerRight,
               child: pw.Text(
                 Strings.formatCurrency(subTotal(request.item ?? [])),
-                style: pw.TextStyle(font: ttfJPPRegular),
+                style: pw.TextStyle(font: ttfJP),
               ),
             ),
           ],
@@ -846,14 +846,14 @@ Future<Uint8List?> generatePdfFromInvoice(
               alignment: pw.Alignment.centerLeft,
               child: pw.Text(
                 '$taxLabel（${int.tryParse(request.taxRate.toString()) ?? 0}%）',
-                style: pw.TextStyle(font: ttfJPPRegular),
+                style: pw.TextStyle(font: ttfJP),
               ),
             ),
             pw.Align(
               alignment: pw.Alignment.centerRight,
               child: pw.Text(
                 request.taxRateOption ? '（外税）' : '（内税）',
-                style: pw.TextStyle(font: ttfJPPRegular),
+                style: pw.TextStyle(font: ttfJP),
               ),
             ),
           ],
