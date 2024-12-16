@@ -416,6 +416,13 @@ Future<Uint8List?> generatePdfFromInvoice(
           .asUint8List();
   final ttfJPPRegular = pw.Font.ttf(fontDataJPRegular.buffer.asByteData());
 
+  //OnlyTotalZHTW
+  Uint8List fontDataZHTW =
+      (await rootBundle.load('assets/fonts/Noto_Sans_ZH.ttf'))
+          .buffer
+          .asUint8List();
+  final ttfJPZHTW = pw.Font.ttf(fontDataZHTW.buffer.asByteData());
+
   // Load font based on language
   switch (language) {
     case 'JP':
@@ -882,7 +889,8 @@ Future<Uint8List?> generatePdfFromInvoice(
                   alignment: pw.Alignment.centerLeft,
                   child: pw.Text(
                     totalLabel,
-                    style: pw.TextStyle(font: ttf),
+                    style: pw.TextStyle(
+                        font: language == 'ZHTW' ? ttfJPZHTW : ttf),
                   ),
                 ),
                 pw.Align(
