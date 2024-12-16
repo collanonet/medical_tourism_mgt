@@ -45,7 +45,6 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
     init();
   }
 
-
   void init() {
     final formGroup = ReactiveForm.of(context) as FormGroup?;
 
