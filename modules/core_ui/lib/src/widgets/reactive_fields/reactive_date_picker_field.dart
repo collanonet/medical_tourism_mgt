@@ -42,7 +42,9 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
   @override
   void initState() {
     super.initState();
-    init();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      init();
+    });
   }
 
   void init() {
