@@ -108,31 +108,9 @@ class InvoiceScreen extends StatelessWidget {
                       ),
                       IntrinsicWidth(
                         stepWidth: 200,
-                        child: ReactiveDatePicker<DateTime>(
+                        child: ReactiveDatePickerField(
                           formControlName: 'issue_date_from',
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime(2100),
-                          initialEntryMode: DatePickerEntryMode.inputOnly,
-                          builder: (context, picker, child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'issue_date_from',
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              decoration: InputDecoration(
-                                label: const Text('発行日（自）'),
-                                fillColor: Colors.white,
-                                filled: true,
-                                suffixIcon: IconButton(
-                                  icon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                  onPressed: picker.showPicker,
-                                ),
-                              ),
-                            );
-                          },
+                          label: '発行日（自）',
                         ),
                       ),
                       const Text(
@@ -142,31 +120,9 @@ class InvoiceScreen extends StatelessWidget {
                       ),
                       IntrinsicWidth(
                         stepWidth: 200,
-                        child: ReactiveDatePicker<DateTime>(
+                        child: ReactiveDatePickerField(
                           formControlName: 'issue_date_to',
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime(2100),
-                          initialEntryMode: DatePickerEntryMode.inputOnly,
-                          builder: (context, picker, child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'issue_date_to',
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              decoration: InputDecoration(
-                                label: const Text('発行日（至）'),
-                                fillColor: Colors.white,
-                                filled: true,
-                                suffixIcon: IconButton(
-                                  icon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                  onPressed: picker.showPicker,
-                                ),
-                              ),
-                            );
-                          },
+                          label: '発行日（至）',
                         ),
                       ),
                       InkWell(

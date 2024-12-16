@@ -293,42 +293,10 @@ class _AgentBasicInformationScreenState
                                               style:
                                                   context.textTheme.bodyMedium,
                                             ),
-                                            ReactiveDatePicker<DateTime>(
+                                            ReactiveDatePickerField(
                                                 formControlName:
                                                     'transactionStartDate',
-                                                firstDate: DateTime(1900),
-                                                lastDate: DateTime(2100),
-                                                initialEntryMode: DatePickerEntryMode.inputOnly,
-                                                builder:
-                                                    (context, picker, child) {
-                                                  return ReactiveTextField<
-                                                      DateTime>(
-                                                    formControlName:
-                                                        'transactionStartDate',
-                                                    valueAccessor:
-                                                        DateTimeValueAccessor(
-                                                      dateTimeFormat:
-                                                          DateFormat(
-                                                              'yyyy/MM/dd'),
-                                                    ),
-                                                    decoration: InputDecoration(
-                                                      fillColor: Colors.white,
-                                                      filled: true,
-                                                      suffixIcon: IconButton(
-                                                        icon: const Icon(
-                                                          CupertinoIcons
-                                                              .calendar,
-                                                          color: Colors.grey,
-                                                        ),
-                                                        onPressed:
-                                                            picker.showPicker,
-                                                      ),
-                                                    ),
-                                                    inputFormatters: [
-                                                      formatter.dateFormatter,
-                                                    ],
-                                                  );
-                                                }),
+                                                ),
                                           ],
                                         ),
                                       ),

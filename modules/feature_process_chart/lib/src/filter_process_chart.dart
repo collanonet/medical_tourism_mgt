@@ -159,36 +159,8 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                         height: context
                                             .appTheme.spacing.marginExtraSmall,
                                       ),
-                                      ReactiveDatePicker<DateTime>(
+                                      ReactiveDatePickerField(
                                         formControlName: 'dateFrom',
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
-                                        initialEntryMode: DatePickerEntryMode.inputOnly,
-                                        builder: (BuildContext context,
-                                            ReactiveDatePickerDelegate<dynamic>
-                                                picker,
-                                            Widget? child) {
-                                          return ReactiveTextField<DateTime>(
-                                            formControlName: 'dateFrom',
-                                            valueAccessor:
-                                                DateTimeValueAccessor(
-                                              dateTimeFormat:
-                                                  DateFormat('yyyy/MM/dd'),
-                                            ),
-                                            decoration: InputDecoration(
-                                              suffixIcon: IconButton(
-                                                icon: const Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
-                                                ),
-                                                onPressed: picker.showPicker,
-                                              ),
-                                            ),
-                                            inputFormatters: [
-                                              formatter.dateFormatter,
-                                            ],
-                                          );
-                                        },
                                       ),
                                     ],
                                   ),
@@ -211,36 +183,9 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                         height: context
                                             .appTheme.spacing.marginExtraSmall,
                                       ),
-                                      ReactiveDatePicker<DateTime>(
+                                      ReactiveDatePickerField(
                                         formControlName: 'dateTo',
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
-                                        initialEntryMode: DatePickerEntryMode.inputOnly,
-                                        builder: (BuildContext context,
-                                            ReactiveDatePickerDelegate<dynamic>
-                                                picker,
-                                            Widget? child) {
-                                          return ReactiveTextField<DateTime>(
-                                            formControlName: 'dateTo',
-                                            valueAccessor:
-                                                DateTimeValueAccessor(
-                                              dateTimeFormat:
-                                                  DateFormat('yyyy/MM/dd'),
-                                            ),
-                                            decoration: InputDecoration(
-                                              suffixIcon: IconButton(
-                                                icon: const Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
-                                                ),
-                                                onPressed: picker.showPicker,
-                                              ),
-                                            ),
-                                            inputFormatters: [
-                                              formatter.dateFormatter,
-                                            ],
-                                          );
-                                        },
+
                                       ),
                                     ],
                                   ),

@@ -1,4 +1,5 @@
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -35,42 +36,9 @@ class VisaWithdrawal extends StatelessWidget {
                   width: context.appTheme.spacing.marginMedium,
                 ),
                 Expanded(
-                  child: ReactiveDatePicker<DateTime>(
+                  child: ReactiveDatePickerField(
                     formControlName: 'deathOrOccurrenceEventDate',
-                    firstDate: DateTime(1900),
-                    lastDate: DateTime(2100),
-                    initialEntryMode: DatePickerEntryMode.inputOnly,
-                    builder: (BuildContext context,
-                        ReactiveDatePickerDelegate<dynamic> picker,
-                        Widget? child) {
-                      return ReactiveTextField<DateTime>(
-                        formControlName: 'deathOrOccurrenceEventDate',
-                        valueAccessor: DateTimeValueAccessor(
-                          dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                        ),
-                        onChanged: (value) {
-                          logger.d(value);
-                        },
-                        onSubmitted: (value) {
-                          logger.d(value);
-                        },
-                        decoration: InputDecoration(
-                          label: const Text(
-                            '死亡日または事由発生日',
-                          ),
-                          suffixIcon: IconButton(
-                            icon: const Icon(
-                              CupertinoIcons.calendar,
-                              color: Colors.grey,
-                            ),
-                            onPressed: picker.showPicker,
-                          ),
-                        ),
-                        inputFormatters: [
-                          formatter.dateFormatter,
-                        ],
-                      );
-                    },
+                    label: '死亡日または事由発生日',
                   ),
                 ),
                 SizedBox(

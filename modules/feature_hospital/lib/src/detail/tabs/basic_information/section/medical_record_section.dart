@@ -86,44 +86,10 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                         children: [
                                           IntrinsicWidth(
                                             stepWidth: 300,
-                                            child: ReactiveDatePicker<DateTime>(
-                                                formControlName: 'dateOfUpdate',
-                                                firstDate: DateTime(1900),
-                                                lastDate: DateTime(2100),
-                                                initialEntryMode: DatePickerEntryMode.inputOnly,
-                                                builder:
-                                                    (context, picker, child) {
-                                                  return ReactiveTextField<
-                                                      DateTime>(
-                                                    formControlName:
-                                                        'dateOfUpdate',
-                                                    valueAccessor:
-                                                        DateTimeValueAccessor(
-                                                      dateTimeFormat:
-                                                          DateFormat(
-                                                              'yyyy/MM/dd'),
-                                                    ),
-                                                    decoration: InputDecoration(
-                                                      label: const Text(
-                                                        '更新日',
-                                                      ),
-                                                      fillColor: Colors.white,
-                                                      filled: true,
-                                                      suffixIcon: IconButton(
-                                                        icon: const Icon(
-                                                          CupertinoIcons
-                                                              .calendar,
-                                                          color: Colors.grey,
-                                                        ),
-                                                        onPressed:
-                                                            picker.showPicker,
-                                                      ),
-                                                    ),
-                                                    inputFormatters: [
-                                                      formatter.dateFormatter,
-                                                    ],
-                                                  );
-                                                }),
+                                            child: ReactiveDatePickerField(
+                                              formControlName: 'dateOfUpdate',
+                                              label: '更新日',
+                                            ),
                                           ),
                                         ],
                                       ),

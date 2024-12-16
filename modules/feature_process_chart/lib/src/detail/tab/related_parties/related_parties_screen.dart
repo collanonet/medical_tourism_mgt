@@ -107,38 +107,9 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                   style: context
                                                       .textTheme.bodyMedium,
                                                 ),
-                                                ReactiveDatePicker<DateTime>(
+                                                ReactiveDatePickerField(
                                                     formControlName: 'dateFrom',
-                                                    firstDate: DateTime(1900),
-                                                    lastDate: DateTime(2100),
-                                                    initialEntryMode: DatePickerEntryMode.inputOnly,
-                                                    builder: (context, picker,
-                                                        child) {
-                                                      return ReactiveTextField<
-                                                          DateTime>(
-                                                        formControlName:
-                                                            'dateFrom',
-                                                        valueAccessor:
-                                                            DateTimeValueAccessor(),
-                                                        decoration:
-                                                            InputDecoration(
-                                                          fillColor:
-                                                              Colors.white,
-                                                          filled: true,
-                                                          suffixIcon:
-                                                              IconButton(
-                                                            icon: const Icon(
-                                                              CupertinoIcons
-                                                                  .calendar,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                            onPressed: picker
-                                                                .showPicker,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }),
+                                                    ),
                                               ],
                                             ),
                                           ),
@@ -168,38 +139,9 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                   style: context
                                                       .textTheme.bodyMedium,
                                                 ),
-                                                ReactiveDatePicker<DateTime>(
+                                                ReactiveDatePickerField(
                                                     formControlName: 'dateTo',
-                                                    firstDate: DateTime(1900),
-                                                    lastDate: DateTime(2100),
-                                                    initialEntryMode: DatePickerEntryMode.inputOnly,
-                                                    builder: (context, picker,
-                                                        child) {
-                                                      return ReactiveTextField<
-                                                          DateTime>(
-                                                        formControlName:
-                                                            'dateTo',
-                                                        valueAccessor:
-                                                            DateTimeValueAccessor(),
-                                                        decoration:
-                                                            InputDecoration(
-                                                          fillColor:
-                                                              Colors.white,
-                                                          filled: true,
-                                                          suffixIcon:
-                                                              IconButton(
-                                                            icon: const Icon(
-                                                              CupertinoIcons
-                                                                  .calendar,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                            onPressed: picker
-                                                                .showPicker,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }),
+                                                    ),
                                               ],
                                             ),
                                           ),
@@ -601,39 +543,10 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                   style: context
                                                       .textTheme.bodyMedium,
                                                 ),
-                                                ReactiveDatePicker<DateTime>(
+                                                ReactiveDatePickerField(
                                                     formControlName:
                                                         'dateYearFrom',
-                                                    firstDate: DateTime(1900),
-                                                    lastDate: DateTime(2100),
-                                                    initialEntryMode: DatePickerEntryMode.inputOnly,
-                                                    builder: (context, picker,
-                                                        child) {
-                                                      return ReactiveTextField<
-                                                          DateTime>(
-                                                        formControlName:
-                                                            'dateYearFrom',
-                                                        valueAccessor:
-                                                            DateTimeValueAccessor(),
-                                                        decoration:
-                                                            InputDecoration(
-                                                          fillColor:
-                                                              Colors.white,
-                                                          filled: true,
-                                                          suffixIcon:
-                                                              IconButton(
-                                                            icon: const Icon(
-                                                              CupertinoIcons
-                                                                  .calendar,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                            onPressed: picker
-                                                                .showPicker,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }),
+                                                    ),
                                               ],
                                             ),
                                           ),
@@ -663,39 +576,10 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                   style: context
                                                       .textTheme.bodyMedium,
                                                 ),
-                                                ReactiveDatePicker<DateTime>(
+                                                ReactiveDatePickerField(
                                                     formControlName:
                                                         'dateYearTo',
-                                                    firstDate: DateTime(1900),
-                                                    lastDate: DateTime(2100),
-                                                    initialEntryMode: DatePickerEntryMode.inputOnly,
-                                                    builder: (context, picker,
-                                                        child) {
-                                                      return ReactiveTextField<
-                                                          DateTime>(
-                                                        formControlName:
-                                                            'dateYearTo',
-                                                        valueAccessor:
-                                                            DateTimeValueAccessor(),
-                                                        decoration:
-                                                            InputDecoration(
-                                                          fillColor:
-                                                              Colors.white,
-                                                          filled: true,
-                                                          suffixIcon:
-                                                              IconButton(
-                                                            icon: const Icon(
-                                                              CupertinoIcons
-                                                                  .calendar,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                            onPressed: picker
-                                                                .showPicker,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }),
+                                                    ),
                                               ],
                                             ),
                                           ),
@@ -1184,39 +1068,10 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                   style: context
                                                       .textTheme.bodyMedium,
                                                 ),
-                                                ReactiveDatePicker<DateTime>(
+                                                ReactiveDatePickerField(
                                                     formControlName:
                                                         'dateYearFrom',
-                                                    firstDate: DateTime(1900),
-                                                    lastDate: DateTime(2100),
-                                                    initialEntryMode: DatePickerEntryMode.inputOnly,
-                                                    builder: (context, picker,
-                                                        child) {
-                                                      return ReactiveTextField<
-                                                          DateTime>(
-                                                        formControlName:
-                                                            'dateYearFrom',
-                                                        valueAccessor:
-                                                            DateTimeValueAccessor(),
-                                                        decoration:
-                                                            InputDecoration(
-                                                          fillColor:
-                                                              Colors.white,
-                                                          filled: true,
-                                                          suffixIcon:
-                                                              IconButton(
-                                                            icon: const Icon(
-                                                              CupertinoIcons
-                                                                  .calendar,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                            onPressed: picker
-                                                                .showPicker,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }),
+                                                    ),
                                               ],
                                             ),
                                           ),
@@ -1246,35 +1101,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                   style: context
                                                       .textTheme.bodyMedium,
                                                 ),
-                                                ReactiveDatePicker<DateTime>(
+                                                ReactiveDatePickerField(
                                                   formControlName: 'dateYearTo',
-                                                  firstDate: DateTime(1900),
-                                                  lastDate: DateTime(2100),
-                                                  initialEntryMode: DatePickerEntryMode.inputOnly,
-                                                  builder:
-                                                      (context, picker, child) {
-                                                    return ReactiveTextField<
-                                                        DateTime>(
-                                                      formControlName:
-                                                          'dateYearTo',
-                                                      valueAccessor:
-                                                          DateTimeValueAccessor(),
-                                                      decoration:
-                                                          InputDecoration(
-                                                        fillColor: Colors.white,
-                                                        filled: true,
-                                                        suffixIcon: IconButton(
-                                                          icon: const Icon(
-                                                            CupertinoIcons
-                                                                .calendar,
-                                                            color: Colors.grey,
-                                                          ),
-                                                          onPressed:
-                                                              picker.showPicker,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  },
                                                 ),
                                               ],
                                             ),

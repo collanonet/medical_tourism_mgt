@@ -67,42 +67,9 @@ class _PatientResponseMedicalCheckupScreenState
                             ),
                             IntrinsicWidth(
                               stepWidth: 250,
-                              child: ReactiveDatePicker<DateTime>(
+                              child: ReactiveDatePickerField(
                                 formControlName: 'date1',
-                                firstDate: DateTime.now(),
-                                lastDate: DateTime(2100),
-                                builder: (BuildContext context,
-                                    ReactiveDatePickerDelegate<dynamic> picker,
-                                    Widget? child) {
-                                  return Stack(
-                                    children: [
-                                      ReactiveTextField<DateTime>(
-                                        formControlName: 'date1',
-                                        readOnly: true,
-                                        onTap: (value) => picker.showPicker(),
-                                        valueAccessor: DateTimeValueAccessor(
-                                          dateTimeFormat:
-                                              DateFormat('yyyy/MM/dd'),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 6),
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: IconButton(
-                                            onPressed: () =>
-                                                picker.showPicker(),
-                                            icon: Icon(
-                                              Icons.calendar_month,
-                                              color:
-                                                  context.appTheme.primaryColor,
-                                            ),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  );
-                                },
+
                               ),
                             ),
                             const SizedBox(height: 8),
@@ -115,42 +82,9 @@ class _PatientResponseMedicalCheckupScreenState
                             ),
                             IntrinsicWidth(
                               stepWidth: 250,
-                              child: ReactiveDatePicker<DateTime>(
+                              child: ReactiveDatePickerField(
                                 formControlName: 'date2',
-                                firstDate: DateTime.now(),
-                                lastDate: DateTime(2100),
-                                builder: (BuildContext context,
-                                    ReactiveDatePickerDelegate<dynamic> picker,
-                                    Widget? child) {
-                                  return Stack(
-                                    children: [
-                                      ReactiveTextField<DateTime>(
-                                        formControlName: 'date2',
-                                        readOnly: true,
-                                        onTap: (value) => picker.showPicker(),
-                                        valueAccessor: DateTimeValueAccessor(
-                                          dateTimeFormat:
-                                              DateFormat('yyyy/MM/dd'),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 6),
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: IconButton(
-                                            onPressed: () =>
-                                                picker.showPicker(),
-                                            icon: Icon(
-                                              Icons.calendar_month,
-                                              color:
-                                                  context.appTheme.primaryColor,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
+
                               ),
                             ),
                             const SizedBox(height: 8),
@@ -161,42 +95,9 @@ class _PatientResponseMedicalCheckupScreenState
                             const SizedBox(height: 8),
                             IntrinsicWidth(
                               stepWidth: 250,
-                              child: ReactiveDatePicker<DateTime>(
+                              child: ReactiveDatePickerField(
                                 formControlName: 'date3',
-                                firstDate: DateTime.now(),
-                                lastDate: DateTime(2100),
-                                builder: (BuildContext context,
-                                    ReactiveDatePickerDelegate<dynamic> picker,
-                                    Widget? child) {
-                                  return Stack(
-                                    children: [
-                                      ReactiveTextField<DateTime>(
-                                        formControlName: 'date3',
-                                        readOnly: true,
-                                        onTap: (value) => picker.showPicker(),
-                                        valueAccessor: DateTimeValueAccessor(
-                                          dateTimeFormat:
-                                              DateFormat('yyyy/MM/dd'),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 6),
-                                        child: Align(
-                                          alignment: Alignment.centerRight,
-                                          child: IconButton(
-                                            onPressed: () =>
-                                                picker.showPicker(),
-                                            icon: Icon(
-                                              Icons.calendar_month,
-                                              color:
-                                                  context.appTheme.primaryColor,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
+
                               ),
                             ),
                             const SizedBox(height: 8),

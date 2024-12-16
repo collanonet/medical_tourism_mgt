@@ -226,35 +226,9 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                                       height: context
                                           .appTheme.spacing.marginExtraSmall,
                                     ),
-                                    ReactiveDatePicker<DateTime>(
+                                    ReactiveDatePickerField(
                                       formControlName: 'period_from',
-                                      firstDate: DateTime(1900),
-                                      lastDate: DateTime(2100),
-                                      initialEntryMode: DatePickerEntryMode.inputOnly,
-                                      builder: (BuildContext context,
-                                          ReactiveDatePickerDelegate<dynamic>
-                                              picker,
-                                          Widget? child) {
-                                        return ReactiveTextField<DateTime>(
-                                          formControlName: 'period_from',
-                                          valueAccessor: DateTimeValueAccessor(
-                                            dateTimeFormat:
-                                                DateFormat('yyyy/MM/dd'),
-                                          ),
-                                          decoration: InputDecoration(
-                                            suffixIcon: IconButton(
-                                              icon: const Icon(
-                                                CupertinoIcons.calendar,
-                                                color: Colors.grey,
-                                              ),
-                                              onPressed: picker.showPicker,
-                                            ),
-                                          ),
-                                          inputFormatters: [
-                                            formatter.dateFormatter,
-                                          ],
-                                        );
-                                      },
+
                                     ),
                                   ],
                                 ),
@@ -276,35 +250,9 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                                       height: context
                                           .appTheme.spacing.marginExtraSmall,
                                     ),
-                                    ReactiveDatePicker<DateTime>(
+                                    ReactiveDatePickerField(
                                       formControlName: 'period_to',
-                                      firstDate: DateTime(1900),
-                                      lastDate: DateTime(2100),
-                                      initialEntryMode: DatePickerEntryMode.inputOnly,
-                                      builder: (BuildContext context,
-                                          ReactiveDatePickerDelegate<dynamic>
-                                              picker,
-                                          Widget? child) {
-                                        return ReactiveTextField<DateTime>(
-                                          formControlName: 'period_to',
-                                          valueAccessor: DateTimeValueAccessor(
-                                            dateTimeFormat:
-                                                DateFormat('yyyy/MM/dd'),
-                                          ),
-                                          decoration: InputDecoration(
-                                            suffixIcon: IconButton(
-                                              icon: const Icon(
-                                                CupertinoIcons.calendar,
-                                                color: Colors.grey,
-                                              ),
-                                              onPressed: picker.showPicker,
-                                            ),
-                                          ),
-                                          inputFormatters: [
-                                            formatter.dateFormatter,
-                                          ],
-                                        );
-                                      },
+
                                     ),
                                   ],
                                 ),

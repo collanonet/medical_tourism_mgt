@@ -767,47 +767,10 @@ class _PatientResponseTreatmentScreenState
                               children: [
                                 IntrinsicWidth(
                                   stepWidth: 300,
-                                  child: ReactiveDatePicker<DateTime>(
+                                  child: ReactiveDatePickerField(
                                     formControlName:
                                         'desiredDateOfConsultation',
-                                    firstDate: DateTime(2000),
-                                    lastDate: DateTime(2100),
-                                    builder: (BuildContext context,
-                                        ReactiveDatePickerDelegate<dynamic>
-                                            picker,
-                                        Widget? child) {
-                                      return Stack(
-                                        children: [
-                                          ReactiveDatePicker<DateTime>(
-                                            formControlName:
-                                                'desiredDateOfConsultation',
-                                            firstDate: DateTime(1900),
-                                            lastDate: DateTime(2100),
-                                            builder: (context, picker, child) {
-                                              return ReactiveTextField<
-                                                  DateTime>(
-                                                formControlName:
-                                                    'desiredDateOfConsultation',
-                                                valueAccessor:
-                                                    DateTimeValueAccessor(),
-                                                decoration: InputDecoration(
-                                                  fillColor: Colors.white,
-                                                  filled: true,
-                                                  suffixIcon: IconButton(
-                                                    icon: const Icon(
-                                                      CupertinoIcons.calendar,
-                                                      color: Colors.grey,
-                                                    ),
-                                                    onPressed:
-                                                        picker.showPicker,
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
+
                                   ),
                                 ),
                               ],

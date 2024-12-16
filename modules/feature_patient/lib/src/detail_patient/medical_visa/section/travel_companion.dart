@@ -52,42 +52,9 @@ class TravelCompanion extends StatelessWidget {
                       width: context.appTheme.spacing.marginMedium,
                     ),
                     Expanded(
-                      child: ReactiveDatePicker<DateTime>(
+                      child: ReactiveDatePickerField(
                         formControlName: 'dateBirth',
-                        firstDate: DateTime(1900),
-                        lastDate: DateTime(2100),
-                        initialEntryMode: DatePickerEntryMode.inputOnly,
-                        builder: (BuildContext context,
-                            ReactiveDatePickerDelegate<dynamic> picker,
-                            Widget? child) {
-                          return ReactiveTextField<DateTime>(
-                            formControlName: 'dateBirth',
-                            valueAccessor: DateTimeValueAccessor(
-                              dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                            ),
-                            onChanged: (value) {
-                              logger.d(value);
-                            },
-                            onSubmitted: (value) {
-                              logger.d(value);
-                            },
-                            decoration: InputDecoration(
-                              label: const Text(
-                                '生年月日',
-                              ),
-                              suffixIcon: IconButton(
-                                icon: const Icon(
-                                  CupertinoIcons.calendar,
-                                  color: Colors.grey,
-                                ),
-                                onPressed: picker.showPicker,
-                              ),
-                            ),
-                            inputFormatters: [
-                              formatter.dateFormatter,
-                            ],
-                          );
-                        },
+                        label: '生年月日',
                       ),
                     ),
                     SizedBox(
@@ -221,48 +188,10 @@ class TravelCompanion extends StatelessWidget {
                                   Row(
                                     children: [
                                       Expanded(
-                                        child: ReactiveDatePicker<DateTime>(
+                                        child: ReactiveDatePickerField(
                                           formControlName:
                                               'landingPermissionDate',
-                                          firstDate: DateTime(1900),
-                                          lastDate: DateTime(2100),
-                                          initialEntryMode: DatePickerEntryMode.inputOnly,
-                                          builder: (BuildContext context,
-                                              ReactiveDatePickerDelegate<
-                                                      dynamic>
-                                                  picker,
-                                              Widget? child) {
-                                            return ReactiveTextField<DateTime>(
-                                              formControlName:
-                                                  'landingPermissionDate',
-                                              valueAccessor:
-                                                  DateTimeValueAccessor(
-                                                dateTimeFormat:
-                                                    DateFormat('yyyy/MM/dd'),
-                                              ),
-                                              onChanged: (value) {
-                                                logger.d(value);
-                                              },
-                                              onSubmitted: (value) {
-                                                logger.d(value);
-                                              },
-                                              decoration: InputDecoration(
-                                                label: const Text(
-                                                  '上陸許可日',
-                                                ),
-                                                suffixIcon: IconButton(
-                                                  icon: const Icon(
-                                                    CupertinoIcons.calendar,
-                                                    color: Colors.grey,
-                                                  ),
-                                                  onPressed: picker.showPicker,
-                                                ),
-                                              ),
-                                              inputFormatters: [
-                                                formatter.dateFormatter,
-                                              ],
-                                            );
-                                          },
+                                          label: '上陸許可日',
                                         ),
                                       ),
                                       SizedBox(
@@ -270,48 +199,10 @@ class TravelCompanion extends StatelessWidget {
                                             .appTheme.spacing.marginMedium,
                                       ),
                                       Expanded(
-                                        child: ReactiveDatePicker<DateTime>(
+                                        child: ReactiveDatePickerField(
                                           formControlName:
                                               'visaValidityPeriodExpirationDate',
-                                          firstDate: DateTime(1900),
-                                          lastDate: DateTime.now(),
-                                          initialEntryMode: DatePickerEntryMode.inputOnly,
-                                          builder: (BuildContext context,
-                                              ReactiveDatePickerDelegate<
-                                                      dynamic>
-                                                  picker,
-                                              Widget? child) {
-                                            return ReactiveTextField<DateTime>(
-                                              formControlName:
-                                                  'visaValidityPeriodExpirationDate',
-                                              valueAccessor:
-                                                  DateTimeValueAccessor(
-                                                dateTimeFormat:
-                                                    DateFormat('yyyy/MM/dd'),
-                                              ),
-                                              onChanged: (value) {
-                                                logger.d(value);
-                                              },
-                                              onSubmitted: (value) {
-                                                logger.d(value);
-                                              },
-                                              decoration: InputDecoration(
-                                                label: const Text(
-                                                  'ビザの有効期限　満了日',
-                                                ),
-                                                suffixIcon: IconButton(
-                                                  icon: const Icon(
-                                                    CupertinoIcons.calendar,
-                                                    color: Colors.grey,
-                                                  ),
-                                                  onPressed: picker.showPicker,
-                                                ),
-                                              ),
-                                              inputFormatters: [
-                                                formatter.dateFormatter,
-                                              ],
-                                            );
-                                          },
+                                          label: 'ビザの有効期限　満了日',
                                         ),
                                       ),
                                       SizedBox(
@@ -333,48 +224,10 @@ class TravelCompanion extends StatelessWidget {
                                   Row(
                                     children: [
                                       Expanded(
-                                        child: ReactiveDatePicker<DateTime>(
+                                        child: ReactiveDatePickerField(
                                           formControlName:
                                               'dateOfEntryIntoJapan',
-                                          firstDate: DateTime(1900),
-                                          lastDate: DateTime(2100),
-                                          initialEntryMode: DatePickerEntryMode.inputOnly,
-                                          builder: (BuildContext context,
-                                              ReactiveDatePickerDelegate<
-                                                      dynamic>
-                                                  picker,
-                                              Widget? child) {
-                                            return ReactiveTextField<DateTime>(
-                                              formControlName:
-                                                  'dateOfEntryIntoJapan',
-                                              valueAccessor:
-                                                  DateTimeValueAccessor(
-                                                dateTimeFormat:
-                                                    DateFormat('yyyy/MM/dd'),
-                                              ),
-                                              onChanged: (value) {
-                                                logger.d(value);
-                                              },
-                                              onSubmitted: (value) {
-                                                logger.d(value);
-                                              },
-                                              decoration: InputDecoration(
-                                                label: const Text(
-                                                  '日本への入国日',
-                                                ),
-                                                suffixIcon: IconButton(
-                                                  icon: const Icon(
-                                                    CupertinoIcons.calendar,
-                                                    color: Colors.grey,
-                                                  ),
-                                                  onPressed: picker.showPicker,
-                                                ),
-                                              ),
-                                              inputFormatters: [
-                                                formatter.dateFormatter,
-                                              ],
-                                            );
-                                          },
+                                          label: '日本への入国日',
                                         ),
                                       ),
                                       SizedBox(
@@ -382,49 +235,10 @@ class TravelCompanion extends StatelessWidget {
                                             .appTheme.spacing.marginMedium,
                                       ),
                                       Expanded(
-                                        child: ReactiveDatePicker<DateTime>(
-                                          formControlName:
-                                              'departureDateFromJapan',
-                                          firstDate: DateTime(1900),
-                                          lastDate: DateTime(2100),
-                                          initialEntryMode: DatePickerEntryMode.inputOnly,
-                                          builder: (BuildContext context,
-                                              ReactiveDatePickerDelegate<
-                                                      dynamic>
-                                                  picker,
-                                              Widget? child) {
-                                            return ReactiveTextField<DateTime>(
-                                              formControlName:
-                                                  'departureDateFromJapan',
-                                              valueAccessor:
-                                                  DateTimeValueAccessor(
-                                                dateTimeFormat:
-                                                    DateFormat('yyyy/MM/dd'),
-                                              ),
-                                              onChanged: (value) {
-                                                logger.d(value);
-                                              },
-                                              onSubmitted: (value) {
-                                                logger.d(value);
-                                              },
-                                              decoration: InputDecoration(
-                                                label: const Text(
-                                                  '日本からの出国日',
-                                                ),
-                                                suffixIcon: IconButton(
-                                                  icon: const Icon(
-                                                    CupertinoIcons.calendar,
-                                                    color: Colors.grey,
-                                                  ),
-                                                  onPressed: picker.showPicker,
-                                                ),
-                                              ),
-                                              inputFormatters: [
-                                                formatter.dateFormatter,
-                                              ],
-                                            );
-                                          },
-                                        ),
+                                        child: ReactiveDatePickerField(
+                                            formControlName:
+                                                'departureDateFromJapan',
+                                            label: '日本からの出国日'),
                                       ),
                                       SizedBox(
                                         width: context
@@ -1085,50 +899,9 @@ class TravelCompanion extends StatelessWidget {
                                             ),
                                             IntrinsicWidth(
                                               stepWidth: 200,
-                                              child:
-                                                  ReactiveDatePicker<DateTime>(
+                                              child: ReactiveDatePickerField(
                                                 formControlName:
                                                     'planeTicketForYourVisitToJapan',
-                                                firstDate: DateTime(1900),
-                                                lastDate: DateTime(2100),
-                                                    initialEntryMode: DatePickerEntryMode.inputOnly,
-                                                builder: (BuildContext context,
-                                                    ReactiveDatePickerDelegate<
-                                                            dynamic>
-                                                        picker,
-                                                    Widget? child) {
-                                                  return ReactiveTextField<
-                                                      DateTime>(
-                                                    formControlName:
-                                                        'planeTicketForYourVisitToJapan',
-                                                    valueAccessor:
-                                                        DateTimeValueAccessor(
-                                                      dateTimeFormat:
-                                                          DateFormat(
-                                                              'yyyy/MM/dd'),
-                                                    ),
-                                                    onChanged: (value) {
-                                                      logger.d(value);
-                                                    },
-                                                    onSubmitted: (value) {
-                                                      logger.d(value);
-                                                    },
-                                                    decoration: InputDecoration(
-                                                      suffixIcon: IconButton(
-                                                        icon: const Icon(
-                                                          CupertinoIcons
-                                                              .calendar,
-                                                          color: Colors.grey,
-                                                        ),
-                                                        onPressed:
-                                                            picker.showPicker,
-                                                      ),
-                                                    ),
-                                                    inputFormatters: [
-                                                      formatter.dateFormatter,
-                                                    ],
-                                                  );
-                                                },
                                               ),
                                             ),
                                           ],
@@ -1221,50 +994,9 @@ class TravelCompanion extends StatelessWidget {
                                             ),
                                             IntrinsicWidth(
                                               stepWidth: 200,
-                                              child:
-                                                  ReactiveDatePicker<DateTime>(
+                                              child: ReactiveDatePickerField(
                                                 formControlName:
                                                     'returnFlightTicket',
-                                                firstDate: DateTime(1900),
-                                                lastDate: DateTime(2100),
-                                                    initialEntryMode: DatePickerEntryMode.inputOnly,
-                                                builder: (BuildContext context,
-                                                    ReactiveDatePickerDelegate<
-                                                            dynamic>
-                                                        picker,
-                                                    Widget? child) {
-                                                  return ReactiveTextField<
-                                                      DateTime>(
-                                                    formControlName:
-                                                        'returnFlightTicket',
-                                                    valueAccessor:
-                                                        DateTimeValueAccessor(
-                                                      dateTimeFormat:
-                                                          DateFormat(
-                                                              'yyyy/MM/dd'),
-                                                    ),
-                                                    onChanged: (value) {
-                                                      logger.d(value);
-                                                    },
-                                                    onSubmitted: (value) {
-                                                      logger.d(value);
-                                                    },
-                                                    decoration: InputDecoration(
-                                                      suffixIcon: IconButton(
-                                                        icon: const Icon(
-                                                          CupertinoIcons
-                                                              .calendar,
-                                                          color: Colors.grey,
-                                                        ),
-                                                        onPressed:
-                                                            picker.showPicker,
-                                                      ),
-                                                    ),
-                                                    inputFormatters: [
-                                                      formatter.dateFormatter,
-                                                    ],
-                                                  );
-                                                },
                                               ),
                                             ),
                                           ],
@@ -1357,50 +1089,9 @@ class TravelCompanion extends StatelessWidget {
                                             ),
                                             IntrinsicWidth(
                                               stepWidth: 200,
-                                              child:
-                                                  ReactiveDatePicker<DateTime>(
+                                              child: ReactiveDatePickerField(
                                                 formControlName:
                                                     'boardingPassForReturnFlight',
-                                                firstDate: DateTime(1900),
-                                                lastDate: DateTime(2100),
-                                                    initialEntryMode: DatePickerEntryMode.inputOnly,
-                                                builder: (BuildContext context,
-                                                    ReactiveDatePickerDelegate<
-                                                            dynamic>
-                                                        picker,
-                                                    Widget? child) {
-                                                  return ReactiveTextField<
-                                                      DateTime>(
-                                                    formControlName:
-                                                        'boardingPassForReturnFlight',
-                                                    valueAccessor:
-                                                        DateTimeValueAccessor(
-                                                      dateTimeFormat:
-                                                          DateFormat(
-                                                              'yyyy/MM/dd'),
-                                                    ),
-                                                    onChanged: (value) {
-                                                      logger.d(value);
-                                                    },
-                                                    onSubmitted: (value) {
-                                                      logger.d(value);
-                                                    },
-                                                    decoration: InputDecoration(
-                                                      suffixIcon: IconButton(
-                                                        icon: const Icon(
-                                                          CupertinoIcons
-                                                              .calendar,
-                                                          color: Colors.grey,
-                                                        ),
-                                                        onPressed:
-                                                            picker.showPicker,
-                                                      ),
-                                                    ),
-                                                    inputFormatters: [
-                                                      formatter.dateFormatter,
-                                                    ],
-                                                  );
-                                                },
                                               ),
                                             ),
                                           ],
@@ -1485,42 +1176,8 @@ class TravelCompanion extends StatelessWidget {
                               ),
                               IntrinsicWidth(
                                 stepWidth: 200,
-                                child: ReactiveDatePicker<DateTime>(
+                                child: ReactiveDatePickerField(
                                   formControlName: 'certificateOfEligibility',
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime(2100),
-                                  initialEntryMode: DatePickerEntryMode.inputOnly,
-                                  builder: (BuildContext context,
-                                      ReactiveDatePickerDelegate<dynamic>
-                                          picker,
-                                      Widget? child) {
-                                    return ReactiveTextField<DateTime>(
-                                      formControlName:
-                                          'certificateOfEligibility',
-                                      valueAccessor: DateTimeValueAccessor(
-                                        dateTimeFormat:
-                                            DateFormat('yyyy/MM/dd'),
-                                      ),
-                                      onChanged: (value) {
-                                        logger.d(value);
-                                      },
-                                      onSubmitted: (value) {
-                                        logger.d(value);
-                                      },
-                                      decoration: InputDecoration(
-                                        suffixIcon: IconButton(
-                                          icon: const Icon(
-                                            CupertinoIcons.calendar,
-                                            color: Colors.grey,
-                                          ),
-                                          onPressed: picker.showPicker,
-                                        ),
-                                      ),
-                                      inputFormatters: [
-                                        formatter.dateFormatter,
-                                      ],
-                                    );
-                                  },
                                 ),
                               ),
                             ],

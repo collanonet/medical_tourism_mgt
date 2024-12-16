@@ -294,32 +294,9 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                           return const SizedBox(height: 8);
                                         },
                                         children: [
-                                          ReactiveDatePicker<DateTime>(
+                                          ReactiveDatePickerField(
                                               formControlName: 'date',
-                                              firstDate: DateTime(1900),
-                                              lastDate: DateTime(2100),
-                                              initialEntryMode: DatePickerEntryMode.inputOnly,
-                                              builder:
-                                                  (context, picker, child) {
-                                                return ReactiveTextField<
-                                                    DateTime>(
-                                                  formControlName: 'date',
-                                                  valueAccessor:
-                                                      DateTimeValueAccessor(),
-                                                  decoration: InputDecoration(
-                                                    fillColor: Colors.white,
-                                                    filled: true,
-                                                    suffixIcon: IconButton(
-                                                      icon: const Icon(
-                                                        CupertinoIcons.calendar,
-                                                        color: Colors.grey,
-                                                      ),
-                                                      onPressed:
-                                                          picker.showPicker,
-                                                    ),
-                                                  ),
-                                                );
-                                              }),
+                                              ),
                                         ],
                                       ),
                                     ),

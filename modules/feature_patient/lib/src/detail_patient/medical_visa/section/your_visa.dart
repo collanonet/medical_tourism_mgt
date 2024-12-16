@@ -65,47 +65,9 @@ class YourVisa extends StatelessWidget {
                                             .appTheme.spacing.marginMedium,
                                       ),
                                       Expanded(
-                                        child: ReactiveDatePicker<DateTime>(
+                                        child: ReactiveDatePickerField(
                                           formControlName: 'applicationDate',
-                                          firstDate: DateTime(1900),
-                                          lastDate: DateTime(2100),
-                                          initialEntryMode: DatePickerEntryMode.inputOnly,
-                                          builder: (BuildContext context,
-                                              ReactiveDatePickerDelegate<
-                                                      dynamic>
-                                                  picker,
-                                              Widget? child) {
-                                            return ReactiveTextField<DateTime>(
-                                              formControlName:
-                                                  'applicationDate',
-                                              valueAccessor:
-                                                  DateTimeValueAccessor(
-                                                dateTimeFormat:
-                                                    DateFormat('yyyy/MM/dd'),
-                                              ),
-                                              onChanged: (value) {
-                                                logger.d(value);
-                                              },
-                                              onSubmitted: (value) {
-                                                logger.d(value);
-                                              },
-                                              decoration: InputDecoration(
-                                                label: const Text(
-                                                  '申請日',
-                                                ),
-                                                suffixIcon: IconButton(
-                                                  icon: const Icon(
-                                                    CupertinoIcons.calendar,
-                                                    color: Colors.grey,
-                                                  ),
-                                                  onPressed: picker.showPicker,
-                                                ),
-                                              ),
-                                              inputFormatters: [
-                                                formatter.dateFormatter,
-                                              ],
-                                            );
-                                          },
+                                          label: '申請日',
                                         ),
                                       ),
                                       SizedBox(
@@ -113,46 +75,9 @@ class YourVisa extends StatelessWidget {
                                             .appTheme.spacing.marginMedium,
                                       ),
                                       Expanded(
-                                        child: ReactiveDatePicker<DateTime>(
+                                        child: ReactiveDatePickerField(
                                           formControlName: 'issueDate',
-                                          firstDate: DateTime(1900),
-                                          lastDate: DateTime(2100),
-                                          initialEntryMode: DatePickerEntryMode.inputOnly,
-                                          builder: (BuildContext context,
-                                              ReactiveDatePickerDelegate<
-                                                      dynamic>
-                                                  picker,
-                                              Widget? child) {
-                                            return ReactiveTextField<DateTime>(
-                                              formControlName: 'issueDate',
-                                              valueAccessor:
-                                                  DateTimeValueAccessor(
-                                                dateTimeFormat:
-                                                    DateFormat('yyyy/MM/dd'),
-                                              ),
-                                              onChanged: (value) {
-                                                logger.d(value);
-                                              },
-                                              onSubmitted: (value) {
-                                                logger.d(value);
-                                              },
-                                              decoration: InputDecoration(
-                                                label: const Text(
-                                                  '発行日',
-                                                ),
-                                                suffixIcon: IconButton(
-                                                  icon: const Icon(
-                                                    CupertinoIcons.calendar,
-                                                    color: Colors.grey,
-                                                  ),
-                                                  onPressed: picker.showPicker,
-                                                ),
-                                              ),
-                                              inputFormatters: [
-                                                formatter.dateFormatter,
-                                              ],
-                                            );
-                                          },
+                                          label: '発行日',
                                         ),
                                       ),
                                     ],
@@ -164,46 +89,9 @@ class YourVisa extends StatelessWidget {
                                   Row(
                                     children: [
                                       Expanded(
-                                        child: ReactiveDatePicker<DateTime>(
+                                        child: ReactiveDatePickerField(
                                           formControlName: 'expirationDate',
-                                          firstDate: DateTime(1900),
-                                          lastDate: DateTime(2100),
-                                          initialEntryMode: DatePickerEntryMode.inputOnly,
-                                          builder: (BuildContext context,
-                                              ReactiveDatePickerDelegate<
-                                                      dynamic>
-                                                  picker,
-                                              Widget? child) {
-                                            return ReactiveTextField<DateTime>(
-                                              formControlName: 'expirationDate',
-                                              valueAccessor:
-                                                  DateTimeValueAccessor(
-                                                dateTimeFormat:
-                                                    DateFormat('yyyy/MM/dd'),
-                                              ),
-                                              onChanged: (value) {
-                                                logger.d(value);
-                                              },
-                                              onSubmitted: (value) {
-                                                logger.d(value);
-                                              },
-                                              decoration: InputDecoration(
-                                                label: const Text(
-                                                  '有効期限',
-                                                ),
-                                                suffixIcon: IconButton(
-                                                  icon: const Icon(
-                                                    CupertinoIcons.calendar,
-                                                    color: Colors.grey,
-                                                  ),
-                                                  onPressed: picker.showPicker,
-                                                ),
-                                              ),
-                                              inputFormatters: [
-                                                formatter.dateFormatter,
-                                              ],
-                                            );
-                                          },
+                                          label: '有効期限',
                                         ),
                                       ),
                                       SizedBox(

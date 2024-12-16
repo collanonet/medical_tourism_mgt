@@ -405,38 +405,10 @@ class _MedicalRecordCompanionSectionState
                                   Row(
                                     children: [
                                       Expanded(
-                                        child: ReactiveDatePicker<DateTime>(
-                                            formControlName: 'dateOfBirth',
-                                            firstDate: DateTime(1900),
-                                            lastDate: DateTime(2100),
-                                            initialEntryMode: DatePickerEntryMode.inputOnly,
-                                            builder: (context, picker, child) {
-                                              return ReactiveTextField<
-                                                  DateTime>(
-                                                formControlName: 'dateOfBirth',
-                                                valueAccessor:
-                                                    DateTimeValueAccessor(
-                                                  dateTimeFormat:
-                                                      DateFormat('yyyy/MM/dd'),
-                                                ),
-                                                decoration: InputDecoration(
-                                                  label: const Text(
-                                                    '生年月日',
-                                                  ),
-                                                  suffixIcon: IconButton(
-                                                    icon: const Icon(
-                                                      CupertinoIcons.calendar,
-                                                      color: Colors.grey,
-                                                    ),
-                                                    onPressed:
-                                                        picker.showPicker,
-                                                  ),
-                                                ),
-                                                inputFormatters: [
-                                                  formatter.dateFormatter,
-                                                ],
-                                              );
-                                            }),
+                                        child: ReactiveDatePickerField(
+                                          formControlName: 'dateOfBirth',
+                                          label: '生年月日',
+                                        ),
                                       ),
                                       SizedBox(
                                         width: context
@@ -746,8 +718,8 @@ class _MedicalRecordCompanionSectionState
                                       qRChatCompanion(currentForm, context),
                                     ],
                                   ),
-                                  const Text(
-                                      'パスポート', // TODO: l10n 対応 (パスポート) (passport)
+                                  const Text('パスポート',
+                                      // TODO: l10n 対応 (パスポート) (passport)
                                       style: TextStyle(
                                         fontFamily: 'NotoSansJP',
                                         package: 'core_ui',
@@ -773,73 +745,16 @@ class _MedicalRecordCompanionSectionState
                                         ),
                                       ),
                                       Expanded(
-                                        child: ReactiveDatePicker<DateTime>(
+                                        child: ReactiveDatePickerField(
                                             formControlName: 'issueDate',
-                                            firstDate: DateTime(1900),
-                                            lastDate: DateTime(2100),
-                                            initialEntryMode: DatePickerEntryMode.inputOnly,
-                                            builder: (context, picker, child) {
-                                              return ReactiveTextField<
-                                                  DateTime>(
-                                                formControlName: 'issueDate',
-                                                valueAccessor:
-                                                    DateTimeValueAccessor(
-                                                  dateTimeFormat:
-                                                      DateFormat('yyyy/MM/dd'),
-                                                ),
-                                                decoration: InputDecoration(
-                                                  label: const Text(
-                                                    '発行日', //  TODO: l10n 対応 (発行日) (issueDate)
-                                                  ),
-                                                  suffixIcon: IconButton(
-                                                    icon: const Icon(
-                                                      CupertinoIcons.calendar,
-                                                      color: Colors.grey,
-                                                    ),
-                                                    onPressed:
-                                                        picker.showPicker,
-                                                  ),
-                                                ),
-                                                inputFormatters: [
-                                                  formatter.dateFormatter,
-                                                ],
-                                              );
-                                            }),
+                                            label: '発行日',
+                                            ),
                                       ),
                                       Expanded(
-                                        child: ReactiveDatePicker<DateTime>(
+                                        child: ReactiveDatePickerField(
                                             formControlName: 'expirationDate',
-                                            firstDate: DateTime(1900),
-                                            lastDate: DateTime(2100),
-                                            initialEntryMode: DatePickerEntryMode.inputOnly,
-                                            builder: (context, picker, child) {
-                                              return ReactiveTextField<
-                                                  DateTime>(
-                                                formControlName:
-                                                    'expirationDate',
-                                                valueAccessor:
-                                                    DateTimeValueAccessor(
-                                                  dateTimeFormat:
-                                                      DateFormat('yyyy/MM/dd'),
-                                                ),
-                                                decoration: InputDecoration(
-                                                  label: const Text(
-                                                    '有効期限', // TODO: l10n 対応 (有効期限) (expirationDate)
-                                                  ),
-                                                  suffixIcon: IconButton(
-                                                    icon: const Icon(
-                                                      CupertinoIcons.calendar,
-                                                      color: Colors.grey,
-                                                    ),
-                                                    onPressed:
-                                                        picker.showPicker,
-                                                  ),
-                                                ),
-                                                inputFormatters: [
-                                                  formatter.dateFormatter,
-                                                ],
-                                              );
-                                            }),
+                                            label: '有効期限',
+                                            ),
                                       ),
                                     ],
                                   ),
@@ -989,11 +904,13 @@ class _MedicalRecordCompanionSectionState
                       'firstNameJapaneseForNonChinese': FormControl<String?>(),
                       'nationality': FormControl<String?>(),
                       'relationship': FormControl<String>(),
-                      'dateOfBirth': FormControl<DateTime>(validators: [
-                        Validators.pattern(
-                          ValidatorRegExp.date,
-                        ),
-                      ],),
+                      'dateOfBirth': FormControl<DateTime>(
+                        validators: [
+                          Validators.pattern(
+                            ValidatorRegExp.date,
+                          ),
+                        ],
+                      ),
                       'age': FormControl<int?>(),
                       'gender': FormControl<bool>(
                         value: true,
@@ -1015,16 +932,20 @@ class _MedicalRecordCompanionSectionState
                       ]),
                       'chatQrImage': FormControl<FileSelect>(),
                       'passportNumber': FormControl<String?>(),
-                      'issueDate': FormControl<DateTime>(validators: [
-                        Validators.pattern(
-                          ValidatorRegExp.date,
-                        ),
-                      ],),
-                      'expirationDate': FormControl<DateTime>(validators: [
-                        Validators.pattern(
-                          ValidatorRegExp.date,
-                        ),
-                      ],),
+                      'issueDate': FormControl<DateTime>(
+                        validators: [
+                          Validators.pattern(
+                            ValidatorRegExp.date,
+                          ),
+                        ],
+                      ),
+                      'expirationDate': FormControl<DateTime>(
+                        validators: [
+                          Validators.pattern(
+                            ValidatorRegExp.date,
+                          ),
+                        ],
+                      ),
                       'visaType': FormControl<String>(),
                     }),
                   ),

@@ -47,45 +47,9 @@ class NecessaryInJapan extends StatelessWidget {
                                         ),
                                         IntrinsicWidth(
                                           stepWidth: 200,
-                                          child: ReactiveDatePicker<DateTime>(
+                                          child: ReactiveDatePickerField(
                                             formControlName: 'passportDate',
-                                            firstDate: DateTime(1900),
-                                            lastDate: DateTime(2100),
-                                            initialEntryMode: DatePickerEntryMode.inputOnly,
-                                            builder: (BuildContext context,
-                                                ReactiveDatePickerDelegate<
-                                                        dynamic>
-                                                    picker,
-                                                Widget? child) {
-                                              return ReactiveTextField<
-                                                  DateTime>(
-                                                formControlName: 'passportDate',
-                                                valueAccessor:
-                                                    DateTimeValueAccessor(
-                                                  dateTimeFormat:
-                                                      DateFormat('yyyy/MM/dd'),
-                                                ),
-                                                onChanged: (value) {
-                                                  logger.d(value);
-                                                },
-                                                onSubmitted: (value) {
-                                                  logger.d(value);
-                                                },
-                                                decoration: InputDecoration(
-                                                  suffixIcon: IconButton(
-                                                    icon: const Icon(
-                                                      CupertinoIcons.calendar,
-                                                      color: Colors.grey,
-                                                    ),
-                                                    onPressed:
-                                                        picker.showPicker,
-                                                  ),
-                                                ),
-                                                inputFormatters: [
-                                                  formatter.dateFormatter,
-                                                ],
-                                              );
-                                            },
+
                                           ),
                                         ),
                                       ],
@@ -105,44 +69,10 @@ class NecessaryInJapan extends StatelessWidget {
                                           context.appTheme.spacing.marginMedium,
                                     ),
                                     Expanded(
-                                      child: ReactiveDatePicker<DateTime>(
+                                      child: ReactiveDatePickerField(
                                         formControlName:
                                             'letterOfGuaranteeDate',
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
-                                        initialEntryMode: DatePickerEntryMode.inputOnly,
-                                        builder: (BuildContext context,
-                                            ReactiveDatePickerDelegate<dynamic>
-                                                picker,
-                                            Widget? child) {
-                                          return ReactiveTextField<DateTime>(
-                                            formControlName:
-                                                'letterOfGuaranteeDate',
-                                            valueAccessor:
-                                                DateTimeValueAccessor(
-                                              dateTimeFormat:
-                                                  DateFormat('yyyy/MM/dd'),
-                                            ),
-                                            onChanged: (value) {
-                                              logger.d(value);
-                                            },
-                                            onSubmitted: (value) {
-                                              logger.d(value);
-                                            },
-                                            decoration: InputDecoration(
-                                              suffixIcon: IconButton(
-                                                icon: const Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
-                                                ),
-                                                onPressed: picker.showPicker,
-                                              ),
-                                            ),
-                                            inputFormatters: [
-                                              formatter.dateFormatter,
-                                            ],
-                                          );
-                                        },
+
                                       ),
                                     ),
                                     SizedBox(
@@ -318,43 +248,8 @@ class NecessaryInJapan extends StatelessWidget {
                                     ),
                                     IntrinsicWidth(
                                       stepWidth: 200,
-                                      child: ReactiveDatePicker<DateTime>(
+                                      child: ReactiveDatePickerField(
                                         formControlName: 'treatmentSchedule',
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
-                                        initialEntryMode: DatePickerEntryMode.inputOnly,
-                                        builder: (BuildContext context,
-                                            ReactiveDatePickerDelegate<dynamic>
-                                                picker,
-                                            Widget? child) {
-                                          return ReactiveTextField<DateTime>(
-                                            formControlName:
-                                                'treatmentSchedule',
-                                            valueAccessor:
-                                                DateTimeValueAccessor(
-                                              dateTimeFormat:
-                                                  DateFormat('yyyy/MM/dd'),
-                                            ),
-                                            onChanged: (value) {
-                                              logger.d(value);
-                                            },
-                                            onSubmitted: (value) {
-                                              logger.d(value);
-                                            },
-                                            decoration: InputDecoration(
-                                              suffixIcon: IconButton(
-                                                icon: const Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
-                                                ),
-                                                onPressed: picker.showPicker,
-                                              ),
-                                            ),
-                                            inputFormatters: [
-                                              formatter.dateFormatter,
-                                            ],
-                                          );
-                                        },
                                       ),
                                     ),
                                   ],
@@ -435,39 +330,9 @@ class NecessaryInJapan extends StatelessWidget {
                       ),
                       IntrinsicWidth(
                         stepWidth: 200,
-                        child: ReactiveDatePicker<DateTime>(
+                        child: ReactiveDatePickerField(
                           formControlName: 'statementOfReasonsDate',
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime(2100),
-                          initialEntryMode: DatePickerEntryMode.inputOnly,
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'statementOfReasonsDate',
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              onChanged: (value) {
-                                logger.d(value);
-                              },
-                              onSubmitted: (value) {
-                                logger.d(value);
-                              },
-                              decoration: InputDecoration(
-                                suffixIcon: IconButton(
-                                  icon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                  onPressed: picker.showPicker,
-                                ),
-                              ),
-                              inputFormatters: [
-                                formatter.dateFormatter,
-                              ],
-                            );
-                          },
+
                         ),
                       ),
                     ],
@@ -492,39 +357,8 @@ class NecessaryInJapan extends StatelessWidget {
                       ),
                       IntrinsicWidth(
                         stepWidth: 200,
-                        child: ReactiveDatePicker<DateTime>(
+                        child: ReactiveDatePickerField(
                           formControlName: 'travelCompanionListDate',
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime(2100),
-                          initialEntryMode: DatePickerEntryMode.inputOnly,
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'travelCompanionListDate',
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              onChanged: (value) {
-                                logger.d(value);
-                              },
-                              onSubmitted: (value) {
-                                logger.d(value);
-                              },
-                              decoration: InputDecoration(
-                                suffixIcon: IconButton(
-                                  icon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                  onPressed: picker.showPicker,
-                                ),
-                              ),
-                              inputFormatters: [
-                                formatter.dateFormatter,
-                              ],
-                            );
-                          },
                         ),
                       ),
                     ],

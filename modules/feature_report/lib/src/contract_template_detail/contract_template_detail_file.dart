@@ -84,36 +84,8 @@ class Popup extends StatelessWidget {
                   ),
                   IntrinsicWidth(
                     stepWidth: 300,
-                    child: ReactiveDatePicker<DateTime>(
-                      formControlName: 'updatedOn',
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime(2100),
-                      initialEntryMode: DatePickerEntryMode.inputOnly,
-                      builder: (BuildContext context,
-                          ReactiveDatePickerDelegate<dynamic> picker,
-                          Widget? child) {
-                        return ReactiveTextField<DateTime>(
-                          formControlName: 'updatedOn',
-                          valueAccessor: DateTimeValueAccessor(
-                              //dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                          decoration: InputDecoration(
-                            label: const Text(
-                              '更新日',
-                            ),
-                            suffixIcon: IconButton(
-                              icon: const Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
-                              ),
-                              onPressed: picker.showPicker,
-                            ),
-                          ),
-                          inputFormatters: [
-                            formatter.dateFormatter,
-                          ],
-                        );
-                      },
+                    child: ReactiveDatePickerField(
+                      formControlName: 'updatedOn',label: '更新日',
                     ),
                   ),
                 ],

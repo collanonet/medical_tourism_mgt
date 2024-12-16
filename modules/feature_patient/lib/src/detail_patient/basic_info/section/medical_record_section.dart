@@ -77,47 +77,21 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: ReactiveDatePicker<DateTime>(
-                              formControlName: 'dateOfBirth',
-                              firstDate: DateTime(1100),
-                              lastDate: DateTime(2100),
-                              initialEntryMode: DatePickerEntryMode.inputOnly,
-                              builder: (context, picker, child) {
-                                return ReactiveTextField<DateTime>(
-                                  formControlName: 'dateOfBirth',
-                                  valueAccessor: DateTimeValueAccessor(
-                                    dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                  ),
-                                  onChanged: (value) {
-                                    logger.d(value.value);
-                                    formGroup.control('age').value =
-                                        DateTime.now().year - value.value!.year;
-                                    setState(() {});
-                                  },
-                                  onSubmitted: (value) {
-                                    formGroup.control('age').value =
-                                        DateTime.now().year - value.value!.year;
-                                    setState(() {});
-                                  },
-                                  decoration: InputDecoration(
-                                    label: const Text(
-                                      '生年月日',
-                                    ),
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    suffixIcon: IconButton(
-                                      icon: const Icon(
-                                        CupertinoIcons.calendar,
-                                        color: Colors.grey,
-                                      ),
-                                      onPressed: picker.showPicker,
-                                    ),
-                                  ),
-                                  inputFormatters: [
-                                    formatter.dateFormatter,
-                                  ],
-                                );
-                              }),
+                          child: ReactiveDatePickerField(
+                            label: '生年月日',
+                            formControlName: 'dateOfBirth',
+                            onChanged: (value) {
+                              logger.d(value.value);
+                              formGroup.control('age').value =
+                                  DateTime.now().year - value.value!.year;
+                              setState(() {});
+                            },
+                            onSubmitted: (value) {
+                              formGroup.control('age').value =
+                                  DateTime.now().year - value.value!.year;
+                              setState(() {});
+                            },
+                          ),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
@@ -287,104 +261,28 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: ReactiveDatePicker<DateTime>(
+                          child: ReactiveDatePickerField(
                               formControlName: 'arrivalDate',
-                              firstDate: DateTime(1900),
-                              lastDate: DateTime(2100),
-                              initialEntryMode: DatePickerEntryMode.inputOnly,
-                              builder: (context, picker, child) {
-                                return ReactiveTextField<DateTime>(
-                                  formControlName: 'arrivalDate',
-                                  valueAccessor: DateTimeValueAccessor(
-                                    dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                  ),
-                                  decoration: InputDecoration(
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    label: const Text(
-                                      '来日日', // TODO: l10n 対応 (来日日) (arrivalDate)
-                                    ),
-                                    suffixIcon: IconButton(
-                                      icon: const Icon(
-                                        CupertinoIcons.calendar,
-                                        color: Colors.grey,
-                                      ),
-                                      onPressed: picker.showPicker,
-                                    ),
-                                  ),
-                                  inputFormatters: [
-                                    formatter.dateFormatter,
-                                  ],
-                                );
-                              }),
+                              label: '来日日',
+                              ),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         Expanded(
-                          child: ReactiveDatePicker<DateTime>(
+                          child: ReactiveDatePickerField(
                               formControlName: 'consultationDate',
-                              firstDate: DateTime(1900),
-                              lastDate: DateTime(2100),
-                              initialEntryMode: DatePickerEntryMode.inputOnly,
-                              builder: (context, picker, child) {
-                                return ReactiveTextField<DateTime>(
-                                  formControlName: 'consultationDate',
-                                  valueAccessor: DateTimeValueAccessor(
-                                    dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                  ),
-                                  decoration: InputDecoration(
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    label: const Text('受診日'),
-                                    suffixIcon: IconButton(
-                                      icon: const Icon(
-                                        CupertinoIcons.calendar,
-                                        color: Colors.grey,
-                                      ),
-                                      onPressed: picker.showPicker,
-                                    ),
-                                  ),
-                                  inputFormatters: [
-                                    formatter.dateFormatter,
-                                  ],
-                                );
-                              }),
+                              label: '受診日',
+                              ),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         Expanded(
-                          child: ReactiveDatePicker<DateTime>(
+                          child: ReactiveDatePickerField(
                               formControlName: 'returnDate',
-                              firstDate: DateTime(1900),
-                              lastDate: DateTime(2100),
-                              initialEntryMode: DatePickerEntryMode.inputOnly,
-                              builder: (context, picker, child) {
-                                return ReactiveTextField(
-                                  formControlName: 'returnDate',
-                                  valueAccessor: DateTimeValueAccessor(
-                                    dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                  ),
-                                  decoration: InputDecoration(
-                                    fillColor: Colors.white,
-                                    filled: true,
-                                    label: const Text(
-                                      '帰国日',
-                                    ),
-                                    suffixIcon: IconButton(
-                                      icon: const Icon(
-                                        CupertinoIcons.calendar,
-                                        color: Colors.grey,
-                                      ),
-                                      onPressed: picker.showPicker,
-                                    ),
-                                  ),
-                                  inputFormatters: [
-                                    formatter.dateFormatter,
-                                  ],
-                                );
-                              }),
+                              label: '帰国日',
+                              ),
                         ),
                       ],
                     ),
@@ -407,34 +305,10 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                           width: context.appTheme.spacing.marginMedium,
                         ),
                         Expanded(
-                          child: ReactiveDatePicker<DateTime>(
+                          child: ReactiveDatePickerField(
                               formControlName: 'receptionDate',
-                              firstDate: DateTime(1900),
-                              lastDate: DateTime(2100),
-                              initialEntryMode: DatePickerEntryMode.inputOnly,
-                              builder: (context, picker, child) {
-                                return ReactiveTextField<DateTime>(
-                                  formControlName: 'receptionDate',
-                                  valueAccessor: DateTimeValueAccessor(
-                                    dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                  ),
-                                  inputFormatters: [
-                                    formatter.dateFormatter,
-                                  ],
-                                  decoration: InputDecoration(
-                                    label: const Text(
-                                      '受付日', // TODO: l10n 対応 (受付日) (receptionDate)
-                                    ),
-                                    suffixIcon: IconButton(
-                                      icon: const Icon(
-                                        CupertinoIcons.calendar,
-                                        color: Colors.grey,
-                                      ),
-                                      onPressed: picker.showPicker,
-                                    ),
-                                  ),
-                                );
-                              }),
+                              label: '受付日',
+                              ),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
@@ -619,34 +493,10 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Expanded(
-                          child: ReactiveDatePicker<DateTime>(
+                          child: ReactiveDatePickerField(
                               formControlName: 'advancePaymentDate',
-                              firstDate: DateTime(1900),
-                              lastDate: DateTime(2100),
-                              initialEntryMode: DatePickerEntryMode.inputOnly,
-                              builder: (context, picker, child) {
-                                return ReactiveTextField<DateTime>(
-                                  formControlName: 'advancePaymentDate',
-                                  valueAccessor: DateTimeValueAccessor(
-                                    dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                  ),
-                                  inputFormatters: [
-                                    formatter.dateFormatter,
-                                  ],
-                                  decoration: InputDecoration(
-                                    label: const Text(
-                                      '前金受取日', //  TODO: l10n 対応 (前金受取日) (advancePaymentDate)
-                                    ),
-                                    suffixIcon: IconButton(
-                                      icon: const Icon(
-                                        CupertinoIcons.calendar,
-                                        color: Colors.grey,
-                                      ),
-                                      onPressed: picker.showPicker,
-                                    ),
-                                  ),
-                                );
-                              }),
+                              label: '前金受取日',
+                              ),
                         ),
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,

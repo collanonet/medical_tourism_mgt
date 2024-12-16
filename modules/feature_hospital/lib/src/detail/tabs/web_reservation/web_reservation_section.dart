@@ -1193,42 +1193,9 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                               children: [
                                 IntrinsicWidth(
                                   stepWidth: 250,
-                                  child: ReactiveDatePicker<DateTime>(
+                                  child: ReactiveDatePickerField(
                                     formControlName: 'testCallDate',
-                                    firstDate: DateTime(1900),
-                                    lastDate: DateTime(2100),
-                                    initialEntryMode: DatePickerEntryMode.inputOnly,
-                                    builder: (BuildContext context,
-                                        ReactiveDatePickerDelegate<dynamic>
-                                            picker,
-                                        Widget? child) {
-                                      return ReactiveTextField<DateTime>(
-                                        formControlName: 'testCallDate',
-                                        valueAccessor: DateTimeValueAccessor(
-                                          dateTimeFormat:
-                                              DateFormat('yyyy/MM/dd'),
-                                        ),
-                                        onChanged: (value) {
-                                          logger.d(value);
-                                        },
-                                        onSubmitted: (value) {
-                                          logger.d(value);
-                                        },
-                                        decoration: InputDecoration(
-                                          label: const Text('年月日'),
-                                          suffixIcon: IconButton(
-                                            icon: const Icon(
-                                              CupertinoIcons.calendar,
-                                              color: Colors.grey,
-                                            ),
-                                            onPressed: picker.showPicker,
-                                          ),
-                                        ),
-                                        inputFormatters: [
-                                          formatter.dateFormatter,
-                                        ],
-                                      );
-                                    },
+                                    label: '年月日',
                                   ),
                                 ),
                                 SizedBox(
@@ -1340,40 +1307,10 @@ class _WebReservationSectionState extends State<WebReservationSection> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: ReactiveDatePicker<DateTime>(
+          child: ReactiveDatePickerField(
             formControlName: 'preferredDate',
-            firstDate: DateTime(1900),
-            lastDate: DateTime(2100),
-            initialEntryMode: DatePickerEntryMode.inputOnly,
-            builder: (BuildContext context,
-                ReactiveDatePickerDelegate<dynamic> picker, Widget? child) {
-              return ReactiveTextField<DateTime>(
-                formControlName: 'preferredDate',
-                valueAccessor: DateTimeValueAccessor(
-                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                ),
-                onChanged: (value) {
-                  logger.d(value);
-                },
-                onSubmitted: (value) {
-                  logger.d(value);
-                },
-                decoration: InputDecoration(
-                  label: Text(
-                      '第 ${formArray.controls.indexOf(currentForm) + 1} 希望'),
-                  suffixIcon: IconButton(
-                    icon: const Icon(
-                      CupertinoIcons.calendar,
-                      color: Colors.grey,
-                    ),
-                    onPressed: picker.showPicker,
-                  ),
-                ),
-                inputFormatters: [
-                  formatter.dateFormatter,
-                ],
-              );
-            },
+            label: '第 ${formArray.controls.indexOf(currentForm) + 1} 希望',
+
           ),
         ),
         SizedBox(

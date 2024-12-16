@@ -78,33 +78,9 @@ class PopupFileForm extends StatelessWidget {
                   ),
                   IntrinsicWidth(
                     stepWidth: 300,
-                    child: ReactiveDatePicker<DateTime>(
+                    child: ReactiveDatePickerField(
                       formControlName: 'publicationDate',
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime(2100),
-                      initialEntryMode: DatePickerEntryMode.inputOnly,
-                      builder: (BuildContext context,
-                          ReactiveDatePickerDelegate<dynamic> picker,
-                          Widget? child) {
-                        return ReactiveTextField<DateTime>(
-                          formControlName: 'publicationDate',
-                          valueAccessor: DateTimeValueAccessor(
-                            dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                          ),
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              icon: const Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
-                              ),
-                              onPressed: picker.showPicker,
-                            ),
-                          ),
-                          inputFormatters: [
-                            formatter.dateFormatter,
-                          ],
-                        );
-                      },
+
                     ),
                   ),
                 ],

@@ -52,46 +52,11 @@ class LengthOfStay extends StatelessWidget {
                               Row(
                                 children: [
                                   Expanded(
-                                    child: ReactiveDatePicker<DateTime>(
+                                    child: ReactiveDatePickerField(
                                       formControlName:
                                           'stayStartingDatePersonalReference',
-                                      firstDate: DateTime(1900),
-                                      lastDate: DateTime(2100),
-                                      initialEntryMode: DatePickerEntryMode.inputOnly,
-                                      builder: (BuildContext context,
-                                          ReactiveDatePickerDelegate<dynamic>
-                                              picker,
-                                          Widget? child) {
-                                        return ReactiveTextField<DateTime>(
-                                          formControlName:
-                                              'stayStartingDatePersonalReference',
-                                          valueAccessor: DateTimeValueAccessor(
-                                            dateTimeFormat:
-                                                DateFormat('yyyy/MM/dd'),
-                                          ),
-                                          onChanged: (value) {
-                                            logger.d(value);
-                                          },
-                                          onSubmitted: (value) {
-                                            logger.d(value);
-                                          },
-                                          decoration: InputDecoration(
-                                            label: const Text(
-                                              '滞在開始日（身元保証書）',
-                                            ),
-                                            suffixIcon: IconButton(
-                                              icon: const Icon(
-                                                CupertinoIcons.calendar,
-                                                color: Colors.grey,
-                                              ),
-                                              onPressed: picker.showPicker,
-                                            ),
-                                          ),
-                                          inputFormatters: [
-                                            formatter.dateFormatter,
-                                          ],
-                                        );
-                                      },
+                                      label: '滞在開始日（身元保証書）',
+
                                     ),
                                   ),
                                   SizedBox(
@@ -99,44 +64,10 @@ class LengthOfStay extends StatelessWidget {
                                         context.appTheme.spacing.marginMedium,
                                   ),
                                   Expanded(
-                                    child: ReactiveDatePicker<DateTime>(
+                                    child: ReactiveDatePickerField(
                                       formControlName: 'stayEndDate',
-                                      firstDate: DateTime(1900),
-                                      lastDate: DateTime(2100),
-                                      initialEntryMode: DatePickerEntryMode.inputOnly,
-                                      builder: (BuildContext context,
-                                          ReactiveDatePickerDelegate<dynamic>
-                                              picker,
-                                          Widget? child) {
-                                        return ReactiveTextField<DateTime>(
-                                          formControlName: 'stayEndDate',
-                                          valueAccessor: DateTimeValueAccessor(
-                                            dateTimeFormat:
-                                                DateFormat('yyyy/MM/dd'),
-                                          ),
-                                          onChanged: (value) {
-                                            logger.d(value);
-                                          },
-                                          onSubmitted: (value) {
-                                            logger.d(value);
-                                          },
-                                          decoration: InputDecoration(
-                                            label: const Text(
-                                              '滞在終了日（身元保証書）',
-                                            ),
-                                            suffixIcon: IconButton(
-                                              icon: const Icon(
-                                                CupertinoIcons.calendar,
-                                                color: Colors.grey,
-                                              ),
-                                              onPressed: picker.showPicker,
-                                            ),
-                                          ),
-                                          inputFormatters: [
-                                            formatter.dateFormatter,
-                                          ],
-                                        );
-                                      },
+                                      label: '滞在終了日（身元保証書）'
+
                                     ),
                                   ),
                                   SizedBox(

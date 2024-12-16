@@ -18,6 +18,7 @@ class Popup extends StatelessWidget {
   const Popup({super.key, this.title});
 
   final String? title;
+
   @override
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
@@ -122,33 +123,9 @@ class Popup extends StatelessWidget {
                   ),
                   IntrinsicWidth(
                     stepWidth: 300,
-                    child: ReactiveDatePicker<DateTime>(
+                    child: ReactiveDatePickerField(
                       formControlName: 'dateOfIssue',
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime(2100),
-                      builder: (BuildContext context,
-                          ReactiveDatePickerDelegate<dynamic> picker,
-                          Widget? child) {
-                        return ReactiveTextField<DateTime>(
-                          formControlName: 'dateOfIssue',
-                          valueAccessor: DateTimeValueAccessor(
-                            dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                          ),
-                          decoration: InputDecoration(
-                            hintText: '発行日',
-                            suffixIcon: IconButton(
-                              icon: const Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
-                              ),
-                              onPressed: picker.showPicker,
-                            ),
-                          ),
-                          inputFormatters: [
-                            formatter.dateFormatter,
-                          ],
-                        );
-                      },
+                      label: '発行日',
                     ),
                   ),
                 ],

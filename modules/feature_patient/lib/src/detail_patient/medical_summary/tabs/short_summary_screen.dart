@@ -52,35 +52,10 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                           ),
                           IntrinsicWidth(
                             stepWidth: 200,
-                            child: ReactiveDatePicker<DateTime>(
+                            child: ReactiveDatePickerField(
                               formControlName: 'entryDate',
-                              firstDate: DateTime(1900),
-                              lastDate: DateTime(2100),
-                              initialEntryMode: DatePickerEntryMode.inputOnly,
-                              builder: (BuildContext context, picker,
-                                  Widget? child) {
-                                return ReactiveTextField<DateTime>(
-                                  formControlName: 'entryDate',
-                                  valueAccessor: DateTimeValueAccessor(
-                                    dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                  ),
-                                  decoration: InputDecoration(
-                                    label: const Text(
-                                      '記載日',
-                                    ),
-                                    suffixIcon: IconButton(
-                                      icon: const Icon(
-                                        CupertinoIcons.calendar,
-                                        color: Colors.grey,
-                                      ),
-                                      onPressed: picker.showPicker,
-                                    ),
-                                  ),
-                                  inputFormatters: [
-                                    formatter.dateFormatter,
-                                  ],
-                                );
-                              },
+                              label: '記載日',
+
                             ),
                           ),
                           SizedBox(
@@ -118,40 +93,10 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                                           context.appTheme.spacing.marginMedium,
                                     ),
                                     Expanded(
-                                      child: ReactiveDatePicker<DateTime>(
+                                      child: ReactiveDatePickerField(
                                         formControlName: 'dateOfBirth',
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
-                                        initialEntryMode: DatePickerEntryMode.inputOnly,
-                                        builder: (BuildContext context, picker,
-                                            Widget? child) {
-                                          return ReactiveTextField<DateTime>(
-                                            formControlName: 'dateOfBirth',
-                                            valueAccessor:
-                                                DateTimeValueAccessor(
-                                              dateTimeFormat:
-                                                  DateFormat('yyyy/MM/dd'),
-                                            ),
-                                            decoration: InputDecoration(
-                                              filled: true,
-                                              fillColor:
-                                                  const Color(0xffF0F3F5),
-                                              label: const Text(
-                                                '生年月日', // TODO: l10n 対応 (生年月日) (dateOfBirth)
-                                              ),
-                                              suffixIcon: IconButton(
-                                                icon: const Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
-                                                ),
-                                                onPressed: picker.showPicker,
-                                              ),
-                                            ),
-                                            inputFormatters: [
-                                              formatter.dateFormatter,
-                                            ],
-                                          );
-                                        },
+                                        label: '生年月日',
+
                                       ),
                                     ),
                                     SizedBox(

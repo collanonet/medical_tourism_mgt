@@ -176,51 +176,8 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                           const Text('入金日'),
                                           IntrinsicWidth(
                                             stepWidth: 200,
-                                            child: ReactiveDatePicker<DateTime>(
+                                            child: ReactiveDatePickerField(
                                               formControlName: 'paymentDay',
-                                              firstDate: DateTime(1900),
-                                              lastDate: DateTime(2100),
-                                              initialEntryMode: DatePickerEntryMode.inputOnly,
-                                              builder: (BuildContext context,
-                                                  ReactiveDatePickerDelegate<
-                                                          dynamic>
-                                                      picker,
-                                                  Widget? child) {
-                                                return Stack(
-                                                  children: [
-                                                    ReactiveTextField<DateTime>(
-                                                      formControlName:
-                                                          'paymentDay',
-                                                      readOnly: true,
-                                                      onTap: (value) =>
-                                                          picker.showPicker(),
-                                                      valueAccessor:
-                                                          DateTimeValueAccessor(),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 6),
-                                                      child: Align(
-                                                        alignment: Alignment
-                                                            .centerRight,
-                                                        child: IconButton(
-                                                          onPressed: () =>
-                                                              picker
-                                                                  .showPicker(),
-                                                          icon: Icon(
-                                                            Icons
-                                                                .calendar_month,
-                                                            color: context
-                                                                .appTheme
-                                                                .primaryColor,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                );
-                                              },
                                             ),
                                           ),
                                         ],
@@ -250,51 +207,8 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                           const Text('精算日'),
                                           IntrinsicWidth(
                                             stepWidth: 200,
-                                            child: ReactiveDatePicker<DateTime>(
+                                            child: ReactiveDatePickerField(
                                               formControlName: 'settlement_day',
-                                              firstDate: DateTime(1900),
-                                              lastDate: DateTime(2100),
-                                              initialEntryMode: DatePickerEntryMode.inputOnly,
-                                              builder: (BuildContext context,
-                                                  ReactiveDatePickerDelegate<
-                                                          dynamic>
-                                                      picker,
-                                                  Widget? child) {
-                                                return Stack(
-                                                  children: [
-                                                    ReactiveTextField<DateTime>(
-                                                      formControlName:
-                                                          'settlement_day',
-                                                      readOnly: true,
-                                                      onTap: (value) =>
-                                                          picker.showPicker(),
-                                                      valueAccessor:
-                                                          DateTimeValueAccessor(),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 6),
-                                                      child: Align(
-                                                        alignment: Alignment
-                                                            .centerRight,
-                                                        child: IconButton(
-                                                          onPressed: () =>
-                                                              picker
-                                                                  .showPicker(),
-                                                          icon: Icon(
-                                                            Icons
-                                                                .calendar_month,
-                                                            color: context
-                                                                .appTheme
-                                                                .primaryColor,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                );
-                                              },
                                             ),
                                           ),
                                         ],

@@ -155,35 +155,9 @@ class CreateMedicalOverseaDataWithFileScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Expanded(
-              child: ReactiveDatePicker<DateTime>(
+              child: ReactiveDatePickerField(
                 formControlName: 'issueDate',
-                firstDate: DateTime(1900),
-                lastDate: DateTime(2100),
-                initialEntryMode: DatePickerEntryMode.inputOnly,
-                builder: (BuildContext context,
-                    ReactiveDatePickerDelegate<dynamic> picker, Widget? child) {
-                  return ReactiveTextField<DateTime>(
-                    formControlName: 'issueDate',
-                    valueAccessor: DateTimeValueAccessor(
-                      dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                    ),
-                    decoration: InputDecoration(
-                      label: const Text(
-                        '発行日',
-                      ),
-                      suffixIcon: IconButton(
-                        icon: const Icon(
-                          CupertinoIcons.calendar,
-                          color: Colors.grey,
-                        ),
-                        onPressed: picker.showPicker,
-                      ),
-                    ),
-                    inputFormatters: [
-                      formatter.dateFormatter,
-                    ],
-                  );
-                },
+                label: '発行日',
               ),
             ),
             SizedBox(

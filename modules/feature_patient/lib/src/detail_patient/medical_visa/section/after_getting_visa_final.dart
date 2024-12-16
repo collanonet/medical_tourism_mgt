@@ -47,45 +47,9 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                         ),
                                         IntrinsicWidth(
                                           stepWidth: 200,
-                                          child: ReactiveDatePicker<DateTime>(
+                                          child: ReactiveDatePickerField(
                                             formControlName: 'visaPage',
-                                            firstDate: DateTime(1900),
-                                            lastDate: DateTime(2100),
-                                            initialEntryMode: DatePickerEntryMode.inputOnly,
-                                            builder: (BuildContext context,
-                                                ReactiveDatePickerDelegate<
-                                                        dynamic>
-                                                    picker,
-                                                Widget? child) {
-                                              return ReactiveTextField<
-                                                  DateTime>(
-                                                formControlName: 'visaPage',
-                                                valueAccessor:
-                                                    DateTimeValueAccessor(
-                                                  dateTimeFormat:
-                                                      DateFormat('yyyy/MM/dd'),
-                                                ),
-                                                onChanged: (value) {
-                                                  logger.d(value);
-                                                },
-                                                onSubmitted: (value) {
-                                                  logger.d(value);
-                                                },
-                                                decoration: InputDecoration(
-                                                  suffixIcon: IconButton(
-                                                    icon: const Icon(
-                                                      CupertinoIcons.calendar,
-                                                      color: Colors.grey,
-                                                    ),
-                                                    onPressed:
-                                                        picker.showPicker,
-                                                  ),
-                                                ),
-                                                inputFormatters: [
-                                                  formatter.dateFormatter,
-                                                ],
-                                              );
-                                            },
+
                                           ),
                                         ),
                                       ],
@@ -109,46 +73,9 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                         ),
                                         IntrinsicWidth(
                                           stepWidth: 200,
-                                          child: ReactiveDatePicker<DateTime>(
+                                          child: ReactiveDatePickerField(
                                             formControlName: 'landingPermit',
-                                            firstDate: DateTime(1900),
-                                            lastDate: DateTime(2100),
-                                            initialEntryMode: DatePickerEntryMode.inputOnly,
-                                            builder: (BuildContext context,
-                                                ReactiveDatePickerDelegate<
-                                                        dynamic>
-                                                    picker,
-                                                Widget? child) {
-                                              return ReactiveTextField<
-                                                  DateTime>(
-                                                formControlName:
-                                                    'landingPermit',
-                                                valueAccessor:
-                                                    DateTimeValueAccessor(
-                                                  dateTimeFormat:
-                                                      DateFormat('yyyy/MM/dd'),
-                                                ),
-                                                onChanged: (value) {
-                                                  logger.d(value);
-                                                },
-                                                onSubmitted: (value) {
-                                                  logger.d(value);
-                                                },
-                                                decoration: InputDecoration(
-                                                  suffixIcon: IconButton(
-                                                    icon: const Icon(
-                                                      CupertinoIcons.calendar,
-                                                      color: Colors.grey,
-                                                    ),
-                                                    onPressed:
-                                                        picker.showPicker,
-                                                  ),
-                                                ),
-                                                inputFormatters: [
-                                                  formatter.dateFormatter,
-                                                ],
-                                              );
-                                            },
+
                                           ),
                                         ),
                                       ],
@@ -246,44 +173,10 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                     ),
                                     IntrinsicWidth(
                                       stepWidth: 200,
-                                      child: ReactiveDatePicker<DateTime>(
+                                      child: ReactiveDatePickerField(
                                         formControlName:
                                             'planeTicketForYourVisitToJapan',
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
-                                        initialEntryMode: DatePickerEntryMode.inputOnly,
-                                        builder: (BuildContext context,
-                                            ReactiveDatePickerDelegate<dynamic>
-                                                picker,
-                                            Widget? child) {
-                                          return ReactiveTextField<DateTime>(
-                                            formControlName:
-                                                'planeTicketForYourVisitToJapan',
-                                            valueAccessor:
-                                                DateTimeValueAccessor(
-                                              dateTimeFormat:
-                                                  DateFormat('yyyy/MM/dd'),
-                                            ),
-                                            onChanged: (value) {
-                                              logger.d(value);
-                                            },
-                                            onSubmitted: (value) {
-                                              logger.d(value);
-                                            },
-                                            decoration: InputDecoration(
-                                              suffixIcon: IconButton(
-                                                icon: const Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
-                                                ),
-                                                onPressed: picker.showPicker,
-                                              ),
-                                            ),
-                                            inputFormatters: [
-                                              formatter.dateFormatter,
-                                            ],
-                                          );
-                                        },
+
                                       ),
                                     ),
                                   ],
@@ -370,43 +263,9 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                     ),
                                     IntrinsicWidth(
                                       stepWidth: 200,
-                                      child: ReactiveDatePicker<DateTime>(
+                                      child: ReactiveDatePickerField(
                                         formControlName: 'returnFlightTicket',
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
-                                        initialEntryMode: DatePickerEntryMode.inputOnly,
-                                        builder: (BuildContext context,
-                                            ReactiveDatePickerDelegate<dynamic>
-                                                picker,
-                                            Widget? child) {
-                                          return ReactiveTextField<DateTime>(
-                                            formControlName:
-                                                'returnFlightTicket',
-                                            valueAccessor:
-                                                DateTimeValueAccessor(
-                                              dateTimeFormat:
-                                                  DateFormat('yyyy/MM/dd'),
-                                            ),
-                                            onChanged: (value) {
-                                              logger.d(value);
-                                            },
-                                            onSubmitted: (value) {
-                                              logger.d(value);
-                                            },
-                                            decoration: InputDecoration(
-                                              suffixIcon: IconButton(
-                                                icon: const Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
-                                                ),
-                                                onPressed: picker.showPicker,
-                                              ),
-                                            ),
-                                            inputFormatters: [
-                                              formatter.dateFormatter,
-                                            ],
-                                          );
-                                        },
+
                                       ),
                                     ),
                                   ],
@@ -494,44 +353,10 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                     ),
                                     IntrinsicWidth(
                                       stepWidth: 200,
-                                      child: ReactiveDatePicker<DateTime>(
+                                      child: ReactiveDatePickerField(
                                         formControlName:
                                             'boardingPassForReturnFlight',
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
-                                        initialEntryMode: DatePickerEntryMode.inputOnly,
-                                        builder: (BuildContext context,
-                                            ReactiveDatePickerDelegate<dynamic>
-                                                picker,
-                                            Widget? child) {
-                                          return ReactiveTextField<DateTime>(
-                                            formControlName:
-                                                'boardingPassForReturnFlight',
-                                            valueAccessor:
-                                                DateTimeValueAccessor(
-                                              dateTimeFormat:
-                                                  DateFormat('yyyy/MM/dd'),
-                                            ),
-                                            onChanged: (value) {
-                                              logger.d(value);
-                                            },
-                                            onSubmitted: (value) {
-                                              logger.d(value);
-                                            },
-                                            decoration: InputDecoration(
-                                              suffixIcon: IconButton(
-                                                icon: const Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
-                                                ),
-                                                onPressed: picker.showPicker,
-                                              ),
-                                            ),
-                                            inputFormatters: [
-                                              formatter.dateFormatter,
-                                            ],
-                                          );
-                                        },
+
                                       ),
                                     ),
                                   ],
@@ -613,39 +438,9 @@ class AfterGettingVisaFinal extends StatelessWidget {
                       ),
                       IntrinsicWidth(
                         stepWidth: 200,
-                        child: ReactiveDatePicker<DateTime>(
+                        child: ReactiveDatePickerField(
                           formControlName: 'certificateOfEligibility',
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime(2100),
-                          initialEntryMode: DatePickerEntryMode.inputOnly,
-                          builder: (BuildContext context,
-                              ReactiveDatePickerDelegate<dynamic> picker,
-                              Widget? child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'certificateOfEligibility',
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              onChanged: (value) {
-                                logger.d(value);
-                              },
-                              onSubmitted: (value) {
-                                logger.d(value);
-                              },
-                              decoration: InputDecoration(
-                                suffixIcon: IconButton(
-                                  icon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                  onPressed: picker.showPicker,
-                                ),
-                              ),
-                              inputFormatters: [
-                                formatter.dateFormatter,
-                              ],
-                            );
-                          },
+
                         ),
                       ),
                     ],

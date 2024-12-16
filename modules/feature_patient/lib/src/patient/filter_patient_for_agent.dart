@@ -205,32 +205,9 @@ class PatientFilterForAgent extends StatelessWidget {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              ReactiveDatePicker<DateTime>(
+                              ReactiveDatePickerField(
                                   formControlName: 'dateOfEntryfrom',
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime(2100),
-                                  initialEntryMode: DatePickerEntryMode.inputOnly,
-                                  builder: (context, picker, child) {
-                                    return ReactiveTextField<DateTime>(
-                                      formControlName: 'dateOfEntryfrom',
-                                      valueAccessor: DateTimeValueAccessor(
-                                        dateTimeFormat:
-                                            DateFormat('yyyy/MM/dd'),
-                                      ),
-                                      decoration: InputDecoration(
-                                        suffixIcon: IconButton(
-                                          icon: const Icon(
-                                            CupertinoIcons.calendar,
-                                            color: Colors.grey,
-                                          ),
-                                          onPressed: picker.showPicker,
-                                        ),
-                                      ),
-                                      inputFormatters: [
-                                        formatter.dateFormatter,
-                                      ],
-                                    );
-                                  }),
+                                  ),
                             ],
                           ),
                         ),
@@ -251,32 +228,9 @@ class PatientFilterForAgent extends StatelessWidget {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              ReactiveDatePicker<DateTime>(
+                              ReactiveDatePickerField(
                                   formControlName: 'dateOfEntryto',
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime(2100),
-                                  initialEntryMode: DatePickerEntryMode.inputOnly,
-                                  builder: (context, picker, child) {
-                                    return ReactiveTextField<DateTime>(
-                                      formControlName: 'dateOfEntryto',
-                                      valueAccessor: DateTimeValueAccessor(
-                                        dateTimeFormat:
-                                            DateFormat('yyyy/MM/dd'),
-                                      ),
-                                      decoration: InputDecoration(
-                                        suffixIcon: IconButton(
-                                          icon: const Icon(
-                                            CupertinoIcons.calendar,
-                                            color: Colors.grey,
-                                          ),
-                                          onPressed: picker.showPicker,
-                                        ),
-                                      ),
-                                      inputFormatters: [
-                                        formatter.dateFormatter,
-                                      ],
-                                    );
-                                  }),
+                                  ),
                             ],
                           ),
                         ),
@@ -294,32 +248,9 @@ class PatientFilterForAgent extends StatelessWidget {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              ReactiveDatePicker<DateTime>(
+                              ReactiveDatePickerField(
                                   formControlName: 'medicalDayfrom',
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime(2100),
-                                  initialEntryMode: DatePickerEntryMode.inputOnly,
-                                  builder: (context, picker, child) {
-                                    return ReactiveTextField<DateTime>(
-                                      formControlName: 'medicalDayfrom',
-                                      valueAccessor: DateTimeValueAccessor(
-                                        dateTimeFormat:
-                                            DateFormat('yyyy/MM/dd'),
-                                      ),
-                                      decoration: InputDecoration(
-                                        suffixIcon: IconButton(
-                                          icon: const Icon(
-                                            CupertinoIcons.calendar,
-                                            color: Colors.grey,
-                                          ),
-                                          onPressed: picker.showPicker,
-                                        ),
-                                      ),
-                                      inputFormatters: [
-                                        formatter.dateFormatter,
-                                      ],
-                                    );
-                                  }),
+                                  ),
                             ],
                           ),
                         ),
@@ -340,32 +271,9 @@ class PatientFilterForAgent extends StatelessWidget {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              ReactiveDatePicker<DateTime>(
+                              ReactiveDatePickerField(
                                   formControlName: 'medicalDayto',
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime(2100),
-                                  initialEntryMode: DatePickerEntryMode.inputOnly,
-                                  builder: (context, picker, child) {
-                                    return ReactiveTextField<DateTime>(
-                                      formControlName: 'medicalDayto',
-                                      valueAccessor: DateTimeValueAccessor(
-                                        dateTimeFormat:
-                                            DateFormat('yyyy/MM/dd'),
-                                      ),
-                                      decoration: InputDecoration(
-                                        suffixIcon: IconButton(
-                                          icon: const Icon(
-                                            CupertinoIcons.calendar,
-                                            color: Colors.grey,
-                                          ),
-                                          onPressed: picker.showPicker,
-                                        ),
-                                      ),
-                                      inputFormatters: [
-                                        formatter.dateFormatter,
-                                      ],
-                                    );
-                                  }),
+                                  ),
                             ],
                           ),
                         ),
@@ -383,32 +291,9 @@ class PatientFilterForAgent extends StatelessWidget {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              ReactiveDatePicker<DateTime>(
+                              ReactiveDatePickerField(
                                   formControlName: 'returnDatefrom',
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime(2100),
-                                  initialEntryMode: DatePickerEntryMode.inputOnly,
-                                  builder: (context, picker, child) {
-                                    return ReactiveTextField<DateTime>(
-                                      formControlName: 'returnDatefrom',
-                                      valueAccessor: DateTimeValueAccessor(
-                                        dateTimeFormat:
-                                            DateFormat('yyyy/MM/dd'),
-                                      ),
-                                      decoration: InputDecoration(
-                                        suffixIcon: IconButton(
-                                          icon: const Icon(
-                                            CupertinoIcons.calendar,
-                                            color: Colors.grey,
-                                          ),
-                                          onPressed: picker.showPicker,
-                                        ),
-                                      ),
-                                      inputFormatters: [
-                                        formatter.dateFormatter,
-                                      ],
-                                    );
-                                  }),
+                                  ),
                             ],
                           ),
                         ),
@@ -429,32 +314,9 @@ class PatientFilterForAgent extends StatelessWidget {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              ReactiveDatePicker<DateTime>(
+                              ReactiveDatePickerField(
                                   formControlName: 'returnDateto',
-                                  firstDate: DateTime(1900),
-                                  lastDate: DateTime(2100),
-                                  initialEntryMode: DatePickerEntryMode.inputOnly,
-                                  builder: (context, picker, child) {
-                                    return ReactiveTextField<DateTime>(
-                                      formControlName: 'returnDateto',
-                                      valueAccessor: DateTimeValueAccessor(
-                                        dateTimeFormat:
-                                            DateFormat('yyyy/MM/dd'),
-                                      ),
-                                      decoration: InputDecoration(
-                                        suffixIcon: IconButton(
-                                          icon: const Icon(
-                                            CupertinoIcons.calendar,
-                                            color: Colors.grey,
-                                          ),
-                                          onPressed: picker.showPicker,
-                                        ),
-                                      ),
-                                      inputFormatters: [
-                                        formatter.dateFormatter,
-                                      ],
-                                    );
-                                  }),
+                                  ),
                             ],
                           ),
                         ),
