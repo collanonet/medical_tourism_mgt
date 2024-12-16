@@ -678,53 +678,8 @@ class TravelCompanion extends StatelessWidget {
                                                 ),
                                                 IntrinsicWidth(
                                                   stepWidth: 200,
-                                                  child: ReactiveDatePicker<
-                                                      DateTime>(
+                                                  child: ReactiveDatePickerField(
                                                     formControlName: 'visaPage',
-                                                    firstDate: DateTime(1900),
-                                                    lastDate: DateTime(2100),
-                                                    builder: (BuildContext
-                                                            context,
-                                                        ReactiveDatePickerDelegate<
-                                                                dynamic>
-                                                            picker,
-                                                        Widget? child) {
-                                                      return ReactiveTextField<
-                                                          DateTime>(
-                                                        formControlName:
-                                                            'visaPage',
-                                                        valueAccessor:
-                                                            DateTimeValueAccessor(
-                                                          dateTimeFormat:
-                                                              DateFormat(
-                                                                  'yyyy/MM/dd'),
-                                                        ),
-                                                        onChanged: (value) {
-                                                          logger.d(value);
-                                                        },
-                                                        onSubmitted: (value) {
-                                                          logger.d(value);
-                                                        },
-                                                        decoration:
-                                                            InputDecoration(
-                                                          suffixIcon:
-                                                              IconButton(
-                                                            icon: const Icon(
-                                                              CupertinoIcons
-                                                                  .calendar,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                            onPressed: picker
-                                                                .showPicker,
-                                                          ),
-                                                        ),
-                                                        inputFormatters: [
-                                                          formatter
-                                                              .dateFormatter,
-                                                        ],
-                                                      );
-                                                    },
                                                   ),
                                                 ),
                                               ],
@@ -749,54 +704,9 @@ class TravelCompanion extends StatelessWidget {
                                                 ),
                                                 IntrinsicWidth(
                                                   stepWidth: 200,
-                                                  child: ReactiveDatePicker<
-                                                      DateTime>(
+                                                  child: ReactiveDatePickerField(
                                                     formControlName:
                                                         'landingPermit',
-                                                    firstDate: DateTime(1900),
-                                                    lastDate: DateTime(2100),
-                                                    builder: (BuildContext
-                                                            context,
-                                                        ReactiveDatePickerDelegate<
-                                                                dynamic>
-                                                            picker,
-                                                        Widget? child) {
-                                                      return ReactiveTextField<
-                                                          DateTime>(
-                                                        formControlName:
-                                                            'landingPermit',
-                                                        valueAccessor:
-                                                            DateTimeValueAccessor(
-                                                          dateTimeFormat:
-                                                              DateFormat(
-                                                                  'yyyy/MM/dd'),
-                                                        ),
-                                                        onChanged: (value) {
-                                                          logger.d(value);
-                                                        },
-                                                        onSubmitted: (value) {
-                                                          logger.d(value);
-                                                        },
-                                                        decoration:
-                                                            InputDecoration(
-                                                          suffixIcon:
-                                                              IconButton(
-                                                            icon: const Icon(
-                                                              CupertinoIcons
-                                                                  .calendar,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                            onPressed: picker
-                                                                .showPicker,
-                                                          ),
-                                                        ),
-                                                        inputFormatters: [
-                                                          formatter
-                                                              .dateFormatter,
-                                                        ],
-                                                      );
-                                                    },
                                                   ),
                                                 ),
                                               ],

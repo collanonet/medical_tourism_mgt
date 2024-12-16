@@ -278,28 +278,7 @@ class EstimateScreenForm extends StatelessWidget {
                           child: ReactiveDatePickerField(
                         formControlName: 'invoiceDate',
                       )),
-                      // Expanded(
-                      //   child: ReactiveTextField<DateTime>(
-                      //     formControlName: 'invoiceDate',
-                      //     decoration: const InputDecoration(labelText: '見積日:'),
-                      //     readOnly: true,
-                      //     valueAccessor: DateTimeValueAccessor(
-                      //       dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                      //     ),
-                      //     onTap: (value) async {
-                      //       final date = await showDatePicker(
-                      //         context: context,
-                      //         initialDate: DateTime.now(),
-                      //         firstDate: DateTime(2000),
-                      //         lastDate: DateTime(2100),
-                      //       );
-                      //       if (date != null) {
-                      //         form.control('invoiceDate').value = date;
-                      //       }
-                      //     },
-                      //   ),
-                      // ),
-                      // companyName
+
                       Expanded(
                         child: ReactiveTextField<String>(
                           formControlName: 'companyName',

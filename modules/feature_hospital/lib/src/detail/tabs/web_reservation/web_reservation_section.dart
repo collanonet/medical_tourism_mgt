@@ -183,48 +183,10 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                           Row(
                                             children: [
                                               Expanded(
-                                                child: ReactiveDatePicker<
-                                                    DateTime>(
+                                                child: ReactiveDatePickerField(
                                                   formControlName:
                                                       'preferredDate1',
-                                                  firstDate: DateTime(1900),
-                                                  lastDate: DateTime(2100),
-                                                  builder: (BuildContext
-                                                          context,
-                                                      ReactiveDatePickerDelegate<
-                                                              dynamic>
-                                                          picker,
-                                                      Widget? child) {
-                                                    return ReactiveTextField<
-                                                        DateTime>(
-                                                      formControlName:
-                                                          'preferredDate1',
-                                                      valueAccessor:
-                                                          DateTimeValueAccessor(
-                                                        dateTimeFormat:
-                                                            DateFormat(
-                                                                'yyyy/MM/dd'),
-                                                      ),
-                                                      decoration:
-                                                          InputDecoration(
-                                                        label: const Text(
-                                                          '第１希望',
-                                                        ),
-                                                        suffixIcon: IconButton(
-                                                          icon: const Icon(
-                                                            CupertinoIcons
-                                                                .calendar,
-                                                            color: Colors.grey,
-                                                          ),
-                                                          onPressed:
-                                                              picker.showPicker,
-                                                        ),
-                                                      ),
-                                                      inputFormatters: [
-                                                        formatter.dateFormatter,
-                                                      ],
-                                                    );
-                                                  },
+                                                  label: '第１希望',
                                                 ),
                                               ),
                                               SizedBox(
@@ -232,48 +194,10 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                     .marginMedium,
                                               ),
                                               Expanded(
-                                                child: ReactiveDatePicker<
-                                                    DateTime>(
+                                                child: ReactiveDatePickerField(
                                                   formControlName:
                                                       'preferredDate2',
-                                                  firstDate: DateTime(1900),
-                                                  lastDate: DateTime(2100),
-                                                  builder: (BuildContext
-                                                          context,
-                                                      ReactiveDatePickerDelegate<
-                                                              dynamic>
-                                                          picker,
-                                                      Widget? child) {
-                                                    return ReactiveTextField<
-                                                        DateTime>(
-                                                      formControlName:
-                                                          'preferredDate2',
-                                                      valueAccessor:
-                                                          DateTimeValueAccessor(
-                                                        dateTimeFormat:
-                                                            DateFormat(
-                                                                'yyyy/MM/dd'),
-                                                      ),
-                                                      decoration:
-                                                          InputDecoration(
-                                                        label: const Text(
-                                                          '第２希望',
-                                                        ),
-                                                        suffixIcon: IconButton(
-                                                          icon: const Icon(
-                                                            CupertinoIcons
-                                                                .calendar,
-                                                            color: Colors.grey,
-                                                          ),
-                                                          onPressed:
-                                                              picker.showPicker,
-                                                        ),
-                                                      ),
-                                                      inputFormatters: [
-                                                        formatter.dateFormatter,
-                                                      ],
-                                                    );
-                                                  },
+                                                  label: '第２希望',
                                                 ),
                                               ),
                                               SizedBox(
@@ -281,48 +205,10 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                     .marginMedium,
                                               ),
                                               Expanded(
-                                                child: ReactiveDatePicker<
-                                                    DateTime>(
+                                                child: ReactiveDatePickerField(
                                                   formControlName:
                                                       'preferredDate3',
-                                                  firstDate: DateTime(1900),
-                                                  lastDate: DateTime(2100),
-                                                  builder: (BuildContext
-                                                          context,
-                                                      ReactiveDatePickerDelegate<
-                                                              dynamic>
-                                                          picker,
-                                                      Widget? child) {
-                                                    return ReactiveTextField<
-                                                        DateTime>(
-                                                      formControlName:
-                                                          'preferredDate3',
-                                                      valueAccessor:
-                                                          DateTimeValueAccessor(
-                                                        dateTimeFormat:
-                                                            DateFormat(
-                                                                'yyyy/MM/dd'),
-                                                      ),
-                                                      decoration:
-                                                          InputDecoration(
-                                                        label: const Text(
-                                                          '第３希望',
-                                                        ),
-                                                        suffixIcon: IconButton(
-                                                          icon: const Icon(
-                                                            CupertinoIcons
-                                                                .calendar,
-                                                            color: Colors.grey,
-                                                          ),
-                                                          onPressed:
-                                                              picker.showPicker,
-                                                        ),
-                                                      ),
-                                                      inputFormatters: [
-                                                        formatter.dateFormatter,
-                                                      ],
-                                                    );
-                                                  },
+                                                  label: '第３希望',
                                                 ),
                                               ),
                                             ],
@@ -988,9 +874,11 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                       ValidatorRegExp.date,
                                                     ),
                                                   ],
-                                                ), // 第一希望
+                                                ),
+                                                // 第一希望
                                                 'choice': FormControl<String>(
-                                                    value: '午前'), // 午前, 午後, 終日
+                                                    value: '午前'),
+                                                // 午前, 午後, 終日
                                                 'timePeriodFrom':
                                                     FormControl<String>(
                                                   validators: [
@@ -999,7 +887,8 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                       ValidatorRegExp.time,
                                                     ),
                                                   ],
-                                                ), // 時間帯（自）
+                                                ),
+                                                // 時間帯（自）
                                                 'timePeriodTo':
                                                     FormControl<String>(
                                                   validators: [
@@ -1009,7 +898,8 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                       ValidatorRegExp.time,
                                                     ),
                                                   ],
-                                                ), // 時間帯（至）
+                                                ),
+                                                // 時間帯（至）
                                               })
                                                 ..markAllAsTouched(),
                                             );
@@ -1310,7 +1200,6 @@ class _WebReservationSectionState extends State<WebReservationSection> {
           child: ReactiveDatePickerField(
             formControlName: 'preferredDate',
             label: '第 ${formArray.controls.indexOf(currentForm) + 1} 希望',
-
           ),
         ),
         SizedBox(
