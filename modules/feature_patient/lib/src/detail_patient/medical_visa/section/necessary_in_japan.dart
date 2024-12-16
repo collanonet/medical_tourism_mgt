@@ -51,6 +51,7 @@ class NecessaryInJapan extends StatelessWidget {
                                             formControlName: 'passportDate',
                                             firstDate: DateTime(1900),
                                             lastDate: DateTime(2100),
+                                            initialEntryMode: DatePickerEntryMode.inputOnly,
                                             builder: (BuildContext context,
                                                 ReactiveDatePickerDelegate<
                                                         dynamic>
@@ -109,6 +110,7 @@ class NecessaryInJapan extends StatelessWidget {
                                             'letterOfGuaranteeDate',
                                         firstDate: DateTime(1900),
                                         lastDate: DateTime(2100),
+                                        initialEntryMode: DatePickerEntryMode.inputOnly,
                                         builder: (BuildContext context,
                                             ReactiveDatePickerDelegate<dynamic>
                                                 picker,
@@ -320,6 +322,7 @@ class NecessaryInJapan extends StatelessWidget {
                                         formControlName: 'treatmentSchedule',
                                         firstDate: DateTime(1900),
                                         lastDate: DateTime(2100),
+                                        initialEntryMode: DatePickerEntryMode.inputOnly,
                                         builder: (BuildContext context,
                                             ReactiveDatePickerDelegate<dynamic>
                                                 picker,
@@ -436,6 +439,7 @@ class NecessaryInJapan extends StatelessWidget {
                           formControlName: 'statementOfReasonsDate',
                           firstDate: DateTime(1900),
                           lastDate: DateTime(2100),
+                          initialEntryMode: DatePickerEntryMode.inputOnly,
                           builder: (BuildContext context,
                               ReactiveDatePickerDelegate<dynamic> picker,
                               Widget? child) {
@@ -492,6 +496,7 @@ class NecessaryInJapan extends StatelessWidget {
                           formControlName: 'travelCompanionListDate',
                           firstDate: DateTime(1900),
                           lastDate: DateTime(2100),
+                          initialEntryMode: DatePickerEntryMode.inputOnly,
                           builder: (BuildContext context,
                               ReactiveDatePickerDelegate<dynamic> picker,
                               Widget? child) {

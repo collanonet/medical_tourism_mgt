@@ -15,8 +15,8 @@ FormGroup basicInfoForm({
               ValidatorRegExp.date,
             ),
           ],
-        ), //生年月日
-        'age': FormControl<int?>(value: 0), // 年齢
+        ),
+        'age': FormControl<int?>(value: 0),
         'height': FormControl<int>(
           value: 0,
         ), // 身長

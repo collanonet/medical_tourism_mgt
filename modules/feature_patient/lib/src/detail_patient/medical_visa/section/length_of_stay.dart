@@ -57,6 +57,7 @@ class LengthOfStay extends StatelessWidget {
                                           'stayStartingDatePersonalReference',
                                       firstDate: DateTime(1900),
                                       lastDate: DateTime(2100),
+                                      initialEntryMode: DatePickerEntryMode.inputOnly,
                                       builder: (BuildContext context,
                                           ReactiveDatePickerDelegate<dynamic>
                                               picker,
@@ -102,6 +103,7 @@ class LengthOfStay extends StatelessWidget {
                                       formControlName: 'stayEndDate',
                                       firstDate: DateTime(1900),
                                       lastDate: DateTime(2100),
+                                      initialEntryMode: DatePickerEntryMode.inputOnly,
                                       builder: (BuildContext context,
                                           ReactiveDatePickerDelegate<dynamic>
                                               picker,

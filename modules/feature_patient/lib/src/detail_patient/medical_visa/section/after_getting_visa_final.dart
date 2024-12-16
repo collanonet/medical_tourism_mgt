@@ -51,6 +51,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                             formControlName: 'visaPage',
                                             firstDate: DateTime(1900),
                                             lastDate: DateTime(2100),
+                                            initialEntryMode: DatePickerEntryMode.inputOnly,
                                             builder: (BuildContext context,
                                                 ReactiveDatePickerDelegate<
                                                         dynamic>
@@ -112,6 +113,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                             formControlName: 'landingPermit',
                                             firstDate: DateTime(1900),
                                             lastDate: DateTime(2100),
+                                            initialEntryMode: DatePickerEntryMode.inputOnly,
                                             builder: (BuildContext context,
                                                 ReactiveDatePickerDelegate<
                                                         dynamic>
@@ -249,6 +251,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                             'planeTicketForYourVisitToJapan',
                                         firstDate: DateTime(1900),
                                         lastDate: DateTime(2100),
+                                        initialEntryMode: DatePickerEntryMode.inputOnly,
                                         builder: (BuildContext context,
                                             ReactiveDatePickerDelegate<dynamic>
                                                 picker,
@@ -371,6 +374,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                         formControlName: 'returnFlightTicket',
                                         firstDate: DateTime(1900),
                                         lastDate: DateTime(2100),
+                                        initialEntryMode: DatePickerEntryMode.inputOnly,
                                         builder: (BuildContext context,
                                             ReactiveDatePickerDelegate<dynamic>
                                                 picker,
@@ -495,6 +499,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                             'boardingPassForReturnFlight',
                                         firstDate: DateTime(1900),
                                         lastDate: DateTime(2100),
+                                        initialEntryMode: DatePickerEntryMode.inputOnly,
                                         builder: (BuildContext context,
                                             ReactiveDatePickerDelegate<dynamic>
                                                 picker,
@@ -612,6 +617,7 @@ class AfterGettingVisaFinal extends StatelessWidget {
                           formControlName: 'certificateOfEligibility',
                           firstDate: DateTime(1900),
                           lastDate: DateTime(2100),
+                          initialEntryMode: DatePickerEntryMode.inputOnly,
                           builder: (BuildContext context,
                               ReactiveDatePickerDelegate<dynamic> picker,
                               Widget? child) {

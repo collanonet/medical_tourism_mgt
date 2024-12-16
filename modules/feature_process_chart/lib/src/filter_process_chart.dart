@@ -163,6 +163,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                         formControlName: 'dateFrom',
                                         firstDate: DateTime(1900),
                                         lastDate: DateTime(2100),
+                                        initialEntryMode: DatePickerEntryMode.inputOnly,
                                         builder: (BuildContext context,
                                             ReactiveDatePickerDelegate<dynamic>
                                                 picker,
@@ -214,6 +215,7 @@ class _ProcessChartFilterState extends State<ProcessChartFilter> {
                                         formControlName: 'dateTo',
                                         firstDate: DateTime(1900),
                                         lastDate: DateTime(2100),
+                                        initialEntryMode: DatePickerEntryMode.inputOnly,
                                         builder: (BuildContext context,
                                             ReactiveDatePickerDelegate<dynamic>
                                                 picker,

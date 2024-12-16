@@ -90,6 +90,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                                 formControlName: 'dateOfUpdate',
                                                 firstDate: DateTime(1900),
                                                 lastDate: DateTime(2100),
+                                                initialEntryMode: DatePickerEntryMode.inputOnly,
                                                 builder:
                                                     (context, picker, child) {
                                                   return ReactiveTextField<

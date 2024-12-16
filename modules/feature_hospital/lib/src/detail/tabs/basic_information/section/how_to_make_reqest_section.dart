@@ -86,6 +86,7 @@ class _HowtoMakeReqestSectionState extends State<HowtoMakeReqestSection> {
                                 formControlName: 'dateOfUpdate',
                                 firstDate: DateTime(1900),
                                 lastDate: DateTime(2100),
+                                initialEntryMode: DatePickerEntryMode.inputOnly,
                                 builder: (context, picker, child) {
                                   return ReactiveTextField<DateTime>(
                                     formControlName: 'dateOfUpdate',

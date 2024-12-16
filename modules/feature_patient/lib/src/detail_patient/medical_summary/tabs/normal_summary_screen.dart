@@ -55,6 +55,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                               formControlName: 'entryDate',
                               firstDate: DateTime(1900),
                               lastDate: DateTime(2100),
+                              initialEntryMode: DatePickerEntryMode.inputOnly,
                               builder: (BuildContext context,
                                   ReactiveDatePickerDelegate<dynamic> picker,
                                   Widget? child) {
@@ -121,6 +122,7 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                         formControlName: 'dateOfBirth',
                                         firstDate: DateTime(1900),
                                         lastDate: DateTime(2100),
+                                        initialEntryMode: DatePickerEntryMode.inputOnly,
                                         builder: (BuildContext context,
                                             ReactiveDatePickerDelegate<dynamic>
                                                 picker,

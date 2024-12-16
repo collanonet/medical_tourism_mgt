@@ -112,6 +112,7 @@ class InvoiceScreen extends StatelessWidget {
                           formControlName: 'issue_date_from',
                           firstDate: DateTime(1900),
                           lastDate: DateTime(2100),
+                          initialEntryMode: DatePickerEntryMode.inputOnly,
                           builder: (context, picker, child) {
                             return ReactiveTextField<DateTime>(
                               formControlName: 'issue_date_from',
@@ -145,6 +146,7 @@ class InvoiceScreen extends StatelessWidget {
                           formControlName: 'issue_date_to',
                           firstDate: DateTime(1900),
                           lastDate: DateTime(2100),
+                          initialEntryMode: DatePickerEntryMode.inputOnly,
                           builder: (context, picker, child) {
                             return ReactiveTextField<DateTime>(
                               formControlName: 'issue_date_to',

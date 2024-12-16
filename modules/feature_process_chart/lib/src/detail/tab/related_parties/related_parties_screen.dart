@@ -111,6 +111,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                     formControlName: 'dateFrom',
                                                     firstDate: DateTime(1900),
                                                     lastDate: DateTime(2100),
+                                                    initialEntryMode: DatePickerEntryMode.inputOnly,
                                                     builder: (context, picker,
                                                         child) {
                                                       return ReactiveTextField<
@@ -171,6 +172,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                     formControlName: 'dateTo',
                                                     firstDate: DateTime(1900),
                                                     lastDate: DateTime(2100),
+                                                    initialEntryMode: DatePickerEntryMode.inputOnly,
                                                     builder: (context, picker,
                                                         child) {
                                                       return ReactiveTextField<
@@ -604,6 +606,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                         'dateYearFrom',
                                                     firstDate: DateTime(1900),
                                                     lastDate: DateTime(2100),
+                                                    initialEntryMode: DatePickerEntryMode.inputOnly,
                                                     builder: (context, picker,
                                                         child) {
                                                       return ReactiveTextField<
@@ -665,6 +668,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                         'dateYearTo',
                                                     firstDate: DateTime(1900),
                                                     lastDate: DateTime(2100),
+                                                    initialEntryMode: DatePickerEntryMode.inputOnly,
                                                     builder: (context, picker,
                                                         child) {
                                                       return ReactiveTextField<
@@ -1185,6 +1189,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                         'dateYearFrom',
                                                     firstDate: DateTime(1900),
                                                     lastDate: DateTime(2100),
+                                                    initialEntryMode: DatePickerEntryMode.inputOnly,
                                                     builder: (context, picker,
                                                         child) {
                                                       return ReactiveTextField<
@@ -1245,6 +1250,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                   formControlName: 'dateYearTo',
                                                   firstDate: DateTime(1900),
                                                   lastDate: DateTime(2100),
+                                                  initialEntryMode: DatePickerEntryMode.inputOnly,
                                                   builder:
                                                       (context, picker, child) {
                                                     return ReactiveTextField<

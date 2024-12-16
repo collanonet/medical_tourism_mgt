@@ -230,6 +230,7 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                                       formControlName: 'period_from',
                                       firstDate: DateTime(1900),
                                       lastDate: DateTime(2100),
+                                      initialEntryMode: DatePickerEntryMode.inputOnly,
                                       builder: (BuildContext context,
                                           ReactiveDatePickerDelegate<dynamic>
                                               picker,
@@ -279,6 +280,7 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                                       formControlName: 'period_to',
                                       firstDate: DateTime(1900),
                                       lastDate: DateTime(2100),
+                                      initialEntryMode: DatePickerEntryMode.inputOnly,
                                       builder: (BuildContext context,
                                           ReactiveDatePickerDelegate<dynamic>
                                               picker,

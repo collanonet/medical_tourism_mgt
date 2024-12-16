@@ -51,6 +51,7 @@ class DocumentRequired extends StatelessWidget {
                                             formControlName: 'passportDate',
                                             firstDate: DateTime(1900),
                                             lastDate: DateTime(2100),
+                                            initialEntryMode: DatePickerEntryMode.inputOnly,
                                             builder: (BuildContext context,
                                                 ReactiveDatePickerDelegate<
                                                         dynamic>
@@ -109,6 +110,7 @@ class DocumentRequired extends StatelessWidget {
                                             'letterOfGuaranteeDate',
                                         firstDate: DateTime(1900),
                                         lastDate: DateTime(2100),
+                                        initialEntryMode: DatePickerEntryMode.inputOnly,
                                         builder: (BuildContext context,
                                             ReactiveDatePickerDelegate<dynamic>
                                                 picker,
@@ -423,6 +425,7 @@ class DocumentRequired extends StatelessWidget {
                                         formControlName: 'treatmentSchedule',
                                         firstDate: DateTime(1900),
                                         lastDate: DateTime(2100),
+                                        initialEntryMode: DatePickerEntryMode.inputOnly,
                                         builder: (BuildContext context,
                                             ReactiveDatePickerDelegate<dynamic>
                                                 picker,
@@ -542,6 +545,7 @@ class DocumentRequired extends StatelessWidget {
                           formControlName: 'statementOfReasonsDate',
                           firstDate: DateTime(1900),
                           lastDate: DateTime(2100),
+                          initialEntryMode: DatePickerEntryMode.inputOnly,
                           builder: (BuildContext context,
                               ReactiveDatePickerDelegate<dynamic> picker,
                               Widget? child) {
@@ -598,6 +602,7 @@ class DocumentRequired extends StatelessWidget {
                           formControlName: 'travelCompanionListDate',
                           firstDate: DateTime(1900),
                           lastDate: DateTime(2100),
+                          initialEntryMode: DatePickerEntryMode.inputOnly,
                           builder: (BuildContext context,
                               ReactiveDatePickerDelegate<dynamic> picker,
                               Widget? child) {

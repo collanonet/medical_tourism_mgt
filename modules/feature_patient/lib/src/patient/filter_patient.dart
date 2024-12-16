@@ -212,6 +212,7 @@ class PatientFilter extends StatelessWidget {
                                   formControlName: 'dateOfEntryfrom',
                                   firstDate: DateTime(1900),
                                   lastDate: DateTime(2100),
+                                  initialEntryMode: DatePickerEntryMode.inputOnly,
                                   builder: (context, picker, child) {
                                     return ReactiveTextField<DateTime>(
                                       formControlName: 'dateOfEntryfrom',
@@ -257,6 +258,7 @@ class PatientFilter extends StatelessWidget {
                                   formControlName: 'dateOfEntryto',
                                   firstDate: DateTime(1900),
                                   lastDate: DateTime(2100),
+                                  initialEntryMode: DatePickerEntryMode.inputOnly,
                                   builder: (context, picker, child) {
                                     return ReactiveTextField<DateTime>(
                                       formControlName: 'dateOfEntryto',
@@ -299,6 +301,7 @@ class PatientFilter extends StatelessWidget {
                                   formControlName: 'medicalDayfrom',
                                   firstDate: DateTime(1900),
                                   lastDate: DateTime(2100),
+                                  initialEntryMode: DatePickerEntryMode.inputOnly,
                                   builder: (context, picker, child) {
                                     return ReactiveTextField<DateTime>(
                                       formControlName: 'medicalDayfrom',
@@ -344,6 +347,7 @@ class PatientFilter extends StatelessWidget {
                                   formControlName: 'medicalDayto',
                                   firstDate: DateTime(1900),
                                   lastDate: DateTime(2100),
+                                  initialEntryMode: DatePickerEntryMode.inputOnly,
                                   builder: (context, picker, child) {
                                     return ReactiveTextField<DateTime>(
                                       formControlName: 'medicalDayto',
@@ -386,6 +390,7 @@ class PatientFilter extends StatelessWidget {
                                   formControlName: 'returnDatefrom',
                                   firstDate: DateTime(1900),
                                   lastDate: DateTime(2100),
+                                  initialEntryMode: DatePickerEntryMode.inputOnly,
                                   builder: (context, picker, child) {
                                     return ReactiveTextField<DateTime>(
                                       formControlName: 'returnDatefrom',
@@ -431,6 +436,7 @@ class PatientFilter extends StatelessWidget {
                                   formControlName: 'returnDateto',
                                   firstDate: DateTime(1900),
                                   lastDate: DateTime(2100),
+                                  initialEntryMode: DatePickerEntryMode.inputOnly,
                                   builder: (context, picker, child) {
                                     return ReactiveTextField<DateTime>(
                                       formControlName: 'returnDateto',

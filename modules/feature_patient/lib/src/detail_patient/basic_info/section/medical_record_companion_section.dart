@@ -409,6 +409,7 @@ class _MedicalRecordCompanionSectionState
                                             formControlName: 'dateOfBirth',
                                             firstDate: DateTime(1900),
                                             lastDate: DateTime(2100),
+                                            initialEntryMode: DatePickerEntryMode.inputOnly,
                                             builder: (context, picker, child) {
                                               return ReactiveTextField<
                                                   DateTime>(
@@ -776,6 +777,7 @@ class _MedicalRecordCompanionSectionState
                                             formControlName: 'issueDate',
                                             firstDate: DateTime(1900),
                                             lastDate: DateTime(2100),
+                                            initialEntryMode: DatePickerEntryMode.inputOnly,
                                             builder: (context, picker, child) {
                                               return ReactiveTextField<
                                                   DateTime>(
@@ -809,6 +811,7 @@ class _MedicalRecordCompanionSectionState
                                             formControlName: 'expirationDate',
                                             firstDate: DateTime(1900),
                                             lastDate: DateTime(2100),
+                                            initialEntryMode: DatePickerEntryMode.inputOnly,
                                             builder: (context, picker, child) {
                                               return ReactiveTextField<
                                                   DateTime>(

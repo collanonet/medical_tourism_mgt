@@ -298,6 +298,7 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                               formControlName: 'date',
                                               firstDate: DateTime(1900),
                                               lastDate: DateTime(2100),
+                                              initialEntryMode: DatePickerEntryMode.inputOnly,
                                               builder:
                                                   (context, picker, child) {
                                                 return ReactiveTextField<

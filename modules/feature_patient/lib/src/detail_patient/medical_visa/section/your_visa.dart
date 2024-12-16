@@ -69,6 +69,7 @@ class YourVisa extends StatelessWidget {
                                           formControlName: 'applicationDate',
                                           firstDate: DateTime(1900),
                                           lastDate: DateTime(2100),
+                                          initialEntryMode: DatePickerEntryMode.inputOnly,
                                           builder: (BuildContext context,
                                               ReactiveDatePickerDelegate<
                                                       dynamic>
@@ -116,6 +117,7 @@ class YourVisa extends StatelessWidget {
                                           formControlName: 'issueDate',
                                           firstDate: DateTime(1900),
                                           lastDate: DateTime(2100),
+                                          initialEntryMode: DatePickerEntryMode.inputOnly,
                                           builder: (BuildContext context,
                                               ReactiveDatePickerDelegate<
                                                       dynamic>
@@ -166,6 +168,7 @@ class YourVisa extends StatelessWidget {
                                           formControlName: 'expirationDate',
                                           firstDate: DateTime(1900),
                                           lastDate: DateTime(2100),
+                                          initialEntryMode: DatePickerEntryMode.inputOnly,
                                           builder: (BuildContext context,
                                               ReactiveDatePickerDelegate<
                                                       dynamic>

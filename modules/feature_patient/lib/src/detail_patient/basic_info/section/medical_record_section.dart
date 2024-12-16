@@ -81,6 +81,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                               formControlName: 'dateOfBirth',
                               firstDate: DateTime(1100),
                               lastDate: DateTime(2100),
+                              initialEntryMode: DatePickerEntryMode.inputOnly,
                               builder: (context, picker, child) {
                                 return ReactiveTextField<DateTime>(
                                   formControlName: 'dateOfBirth',
@@ -290,6 +291,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                               formControlName: 'arrivalDate',
                               firstDate: DateTime(1900),
                               lastDate: DateTime(2100),
+                              initialEntryMode: DatePickerEntryMode.inputOnly,
                               builder: (context, picker, child) {
                                 return ReactiveTextField<DateTime>(
                                   formControlName: 'arrivalDate',
@@ -324,6 +326,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                               formControlName: 'consultationDate',
                               firstDate: DateTime(1900),
                               lastDate: DateTime(2100),
+                              initialEntryMode: DatePickerEntryMode.inputOnly,
                               builder: (context, picker, child) {
                                 return ReactiveTextField<DateTime>(
                                   formControlName: 'consultationDate',
@@ -356,6 +359,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                               formControlName: 'returnDate',
                               firstDate: DateTime(1900),
                               lastDate: DateTime(2100),
+                              initialEntryMode: DatePickerEntryMode.inputOnly,
                               builder: (context, picker, child) {
                                 return ReactiveTextField(
                                   formControlName: 'returnDate',
@@ -407,6 +411,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                               formControlName: 'receptionDate',
                               firstDate: DateTime(1900),
                               lastDate: DateTime(2100),
+                              initialEntryMode: DatePickerEntryMode.inputOnly,
                               builder: (context, picker, child) {
                                 return ReactiveTextField<DateTime>(
                                   formControlName: 'receptionDate',
@@ -618,6 +623,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                               formControlName: 'advancePaymentDate',
                               firstDate: DateTime(1900),
                               lastDate: DateTime(2100),
+                              initialEntryMode: DatePickerEntryMode.inputOnly,
                               builder: (context, picker, child) {
                                 return ReactiveTextField<DateTime>(
                                   formControlName: 'advancePaymentDate',

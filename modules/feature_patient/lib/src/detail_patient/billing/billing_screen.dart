@@ -187,6 +187,7 @@ class _BillingScreenState extends State<BillingScreen> {
                                           formControlName: 'occurrence_date',
                                           firstDate: DateTime(1900),
                                           lastDate: DateTime(2050),
+                                          initialEntryMode: DatePickerEntryMode.inputOnly,
                                           builder: (BuildContext context,
                                               ReactiveDatePickerDelegate<
                                                       dynamic>

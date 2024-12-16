@@ -56,6 +56,7 @@ class TravelCompanion extends StatelessWidget {
                         formControlName: 'dateBirth',
                         firstDate: DateTime(1900),
                         lastDate: DateTime(2100),
+                        initialEntryMode: DatePickerEntryMode.inputOnly,
                         builder: (BuildContext context,
                             ReactiveDatePickerDelegate<dynamic> picker,
                             Widget? child) {
@@ -225,6 +226,7 @@ class TravelCompanion extends StatelessWidget {
                                               'landingPermissionDate',
                                           firstDate: DateTime(1900),
                                           lastDate: DateTime(2100),
+                                          initialEntryMode: DatePickerEntryMode.inputOnly,
                                           builder: (BuildContext context,
                                               ReactiveDatePickerDelegate<
                                                       dynamic>
@@ -273,6 +275,7 @@ class TravelCompanion extends StatelessWidget {
                                               'visaValidityPeriodExpirationDate',
                                           firstDate: DateTime(1900),
                                           lastDate: DateTime.now(),
+                                          initialEntryMode: DatePickerEntryMode.inputOnly,
                                           builder: (BuildContext context,
                                               ReactiveDatePickerDelegate<
                                                       dynamic>
@@ -335,6 +338,7 @@ class TravelCompanion extends StatelessWidget {
                                               'dateOfEntryIntoJapan',
                                           firstDate: DateTime(1900),
                                           lastDate: DateTime(2100),
+                                          initialEntryMode: DatePickerEntryMode.inputOnly,
                                           builder: (BuildContext context,
                                               ReactiveDatePickerDelegate<
                                                       dynamic>
@@ -383,6 +387,7 @@ class TravelCompanion extends StatelessWidget {
                                               'departureDateFromJapan',
                                           firstDate: DateTime(1900),
                                           lastDate: DateTime(2100),
+                                          initialEntryMode: DatePickerEntryMode.inputOnly,
                                           builder: (BuildContext context,
                                               ReactiveDatePickerDelegate<
                                                       dynamic>
@@ -1086,6 +1091,7 @@ class TravelCompanion extends StatelessWidget {
                                                     'planeTicketForYourVisitToJapan',
                                                 firstDate: DateTime(1900),
                                                 lastDate: DateTime(2100),
+                                                    initialEntryMode: DatePickerEntryMode.inputOnly,
                                                 builder: (BuildContext context,
                                                     ReactiveDatePickerDelegate<
                                                             dynamic>
@@ -1221,6 +1227,7 @@ class TravelCompanion extends StatelessWidget {
                                                     'returnFlightTicket',
                                                 firstDate: DateTime(1900),
                                                 lastDate: DateTime(2100),
+                                                    initialEntryMode: DatePickerEntryMode.inputOnly,
                                                 builder: (BuildContext context,
                                                     ReactiveDatePickerDelegate<
                                                             dynamic>
@@ -1356,6 +1363,7 @@ class TravelCompanion extends StatelessWidget {
                                                     'boardingPassForReturnFlight',
                                                 firstDate: DateTime(1900),
                                                 lastDate: DateTime(2100),
+                                                    initialEntryMode: DatePickerEntryMode.inputOnly,
                                                 builder: (BuildContext context,
                                                     ReactiveDatePickerDelegate<
                                                             dynamic>
@@ -1481,6 +1489,7 @@ class TravelCompanion extends StatelessWidget {
                                   formControlName: 'certificateOfEligibility',
                                   firstDate: DateTime(1900),
                                   lastDate: DateTime(2100),
+                                  initialEntryMode: DatePickerEntryMode.inputOnly,
                                   builder: (BuildContext context,
                                       ReactiveDatePickerDelegate<dynamic>
                                           picker,

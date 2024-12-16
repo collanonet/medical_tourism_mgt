@@ -175,6 +175,7 @@ class Popup extends StatelessWidget {
                       formControlName: 'dateOfIssue',
                       firstDate: DateTime(1900),
                       lastDate: DateTime(2100),
+                      initialEntryMode: DatePickerEntryMode.inputOnly,
                       builder: (BuildContext context,
                           ReactiveDatePickerDelegate<dynamic> picker,
                           Widget? child) {

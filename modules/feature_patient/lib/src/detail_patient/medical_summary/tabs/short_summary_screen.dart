@@ -56,6 +56,7 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                               formControlName: 'entryDate',
                               firstDate: DateTime(1900),
                               lastDate: DateTime(2100),
+                              initialEntryMode: DatePickerEntryMode.inputOnly,
                               builder: (BuildContext context, picker,
                                   Widget? child) {
                                 return ReactiveTextField<DateTime>(
@@ -121,6 +122,7 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                                         formControlName: 'dateOfBirth',
                                         firstDate: DateTime(1900),
                                         lastDate: DateTime(2100),
+                                        initialEntryMode: DatePickerEntryMode.inputOnly,
                                         builder: (BuildContext context, picker,
                                             Widget? child) {
                                           return ReactiveTextField<DateTime>(

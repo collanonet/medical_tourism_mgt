@@ -70,6 +70,7 @@ class ProgressRecordWidget extends StatelessWidget {
                 formControlName: 'completionDate',
                 firstDate: DateTime(2000),
                 lastDate: DateTime(2100),
+                initialEntryMode: DatePickerEntryMode.inputOnly,
                 builder: (BuildContext context,
                     ReactiveDatePickerDelegate<dynamic> picker, Widget? child) {
                   return ReactiveTextField<DateTime>(

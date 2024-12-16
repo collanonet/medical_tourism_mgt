@@ -32,11 +32,14 @@ dependencies:
   collection: ^1.17.2
   printing: ^5.12.0
   image: ^4.2.0
+  reactive_date_time_picker: ^4.0.0
 
-  http: any
-  path_provider: any
-  pdf: any
+  http: ^1.2.2
+  path_provider: ^2.0.15
+  pdf: ^3.11.1
   import_sorter: ^4.6.0
+  intl: ^0.18.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
