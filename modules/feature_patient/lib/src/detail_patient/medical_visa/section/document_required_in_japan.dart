@@ -2,9 +2,7 @@ import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class DocumentRequired extends StatelessWidget {
@@ -12,7 +10,6 @@ class DocumentRequired extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatter = InputFormatter();
     final formGroup = ReactiveForm.of(context) as FormGroup;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,17 +36,16 @@ class DocumentRequired extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
+                                    const Row(
                                       children: [
-                                        const Text('パスポート'),
-                                        const SizedBox(
+                                        Text('パスポート'),
+                                        SizedBox(
                                           width: 150,
                                         ),
                                         IntrinsicWidth(
                                           stepWidth: 200,
                                           child: ReactiveDatePickerField(
                                             formControlName: 'passportDate',
-
                                           ),
                                         ),
                                       ],
@@ -64,23 +60,22 @@ class DocumentRequired extends StatelessWidget {
                                 Row(
                                   children: [
                                     const Expanded(child: Text('身元保証書')),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    Expanded(
+                                    // SizedBox(
+                                    //   width:
+                                    //       context.appTheme.spacing.marginMedium,
+                                    // ),
+                                    const Expanded(
                                       child: ReactiveDatePickerField(
                                         formControlName:
                                             'letterOfGuaranteeDate',
-
                                       ),
                                     ),
+                                    // SizedBox(
+                                    //   width:
+                                    //       context.appTheme.spacing.marginMedium,
+                                    // ),
                                     SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    Expanded(
-                                      flex: 3,
+                                      width: 600,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
@@ -147,10 +142,10 @@ class DocumentRequired extends StatelessWidget {
                                         ],
                                       ),
                                     ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
+                                    // SizedBox(
+                                    //   width:
+                                    //       context.appTheme.spacing.marginMedium,
+                                    // ),
                                     SizedBox(
                                       width: 200,
                                       child: ColumnSeparated(
@@ -210,8 +205,10 @@ class DocumentRequired extends StatelessWidget {
                                                             },
                                                             child: Text(
                                                               control.value
+                                                                      ?.url ??
+                                                                  control.value
                                                                       ?.filename ??
-                                                                  'File Input .....',
+                                                                  'File Name',
                                                               style: context
                                                                   .textTheme
                                                                   .bodySmall,
@@ -234,6 +231,8 @@ class DocumentRequired extends StatelessWidget {
                                                           .control(
                                                               'letterOfGuaranteeFileSelect')
                                                           .value = value;
+                                                      logger
+                                                          .d('Value Not Null');
                                                     }
                                                   });
                                                 },
@@ -343,17 +342,16 @@ class DocumentRequired extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
+                                const Row(
                                   children: [
-                                    const Text('治療予定表'),
-                                    const SizedBox(
+                                    Text('治療予定表'),
+                                    SizedBox(
                                       width: 150,
                                     ),
                                     IntrinsicWidth(
                                       stepWidth: 200,
                                       child: ReactiveDatePickerField(
                                         formControlName: 'treatmentSchedule',
-
                                       ),
                                     ),
                                   ],
@@ -429,17 +427,16 @@ class DocumentRequired extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+                  const Row(
                     children: [
-                      const Text('理由書'),
-                      const SizedBox(
+                      Text('理由書'),
+                      SizedBox(
                         width: 178,
                       ),
                       IntrinsicWidth(
                         stepWidth: 200,
                         child: ReactiveDatePickerField(
                           formControlName: 'statementOfReasonsDate',
-
                         ),
                       ),
                     ],
@@ -456,17 +453,16 @@ class DocumentRequired extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+                  const Row(
                     children: [
-                      const Text('同行者リスト'),
-                      const SizedBox(
+                      Text('同行者リスト'),
+                      SizedBox(
                         width: 135,
                       ),
                       IntrinsicWidth(
                         stepWidth: 200,
                         child: ReactiveDatePickerField(
                           formControlName: 'travelCompanionListDate',
-
                         ),
                       ),
                     ],
@@ -509,7 +505,7 @@ class DocumentRequired extends StatelessWidget {
                                         children: [
                                           Row(
                                             children: [
-                                              Expanded(
+                                              const Expanded(
                                                 child: ReactiveDatePickerField(
                                                   formControlName:
                                                       'landingPermissionDate',
@@ -520,7 +516,7 @@ class DocumentRequired extends StatelessWidget {
                                                 width: context.appTheme.spacing
                                                     .marginMedium,
                                               ),
-                                              Expanded(
+                                              const Expanded(
                                                 child: ReactiveDatePickerField(
                                                   formControlName:
                                                       'visaValidityPeriodExpirationDate',
@@ -545,7 +541,7 @@ class DocumentRequired extends StatelessWidget {
                                           ),
                                           Row(
                                             children: [
-                                              Expanded(
+                                              const Expanded(
                                                 child: ReactiveDatePickerField(
                                                   formControlName:
                                                       'dateOfEntryIntoJapan',
@@ -556,7 +552,7 @@ class DocumentRequired extends StatelessWidget {
                                                 width: context.appTheme.spacing
                                                     .marginMedium,
                                               ),
-                                              Expanded(
+                                              const Expanded(
                                                 child: ReactiveDatePickerField(
                                                   formControlName:
                                                       'departureDateFromJapan',

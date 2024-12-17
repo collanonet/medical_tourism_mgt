@@ -2,9 +2,7 @@ import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class AfterGettingVisaFinal extends StatelessWidget {
@@ -12,7 +10,6 @@ class AfterGettingVisaFinal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatter = InputFormatter();
     final formGroup = ReactiveForm.of(context) as FormGroup;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,10 +36,10 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
+                                    const Row(
                                       children: [
-                                        const Text('ビザのページ'),
-                                        const SizedBox(
+                                        Text('ビザのページ'),
+                                        SizedBox(
                                           width: 140,
                                         ),
                                         IntrinsicWidth(
@@ -65,10 +62,10 @@ class AfterGettingVisaFinal extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
+                                    const Row(
                                       children: [
-                                        const Text('上陸許可証'),
-                                        const SizedBox(
+                                        Text('上陸許可証'),
+                                        SizedBox(
                                           width: 150,
                                         ),
                                         IntrinsicWidth(
@@ -165,10 +162,10 @@ class AfterGettingVisaFinal extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
+                                const Row(
                                   children: [
-                                    const Text('来日時の飛行機チケット'),
-                                    const SizedBox(
+                                    Text('来日時の飛行機チケット'),
+                                    SizedBox(
                                       width: 70,
                                     ),
                                     IntrinsicWidth(
@@ -255,10 +252,10 @@ class AfterGettingVisaFinal extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
+                                const Row(
                                   children: [
-                                    const Text('帰国時の飛行機チケット'),
-                                    const SizedBox(
+                                    Text('帰国時の飛行機チケット'),
+                                    SizedBox(
                                       width: 70,
                                     ),
                                     IntrinsicWidth(
@@ -345,10 +342,10 @@ class AfterGettingVisaFinal extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
+                                const Row(
                                   children: [
-                                    const Text('帰国時のボーディングパス'),
-                                    const SizedBox(
+                                    Text('帰国時のボーディングパス'),
+                                    SizedBox(
                                       width: 60,
                                     ),
                                     IntrinsicWidth(
@@ -430,10 +427,10 @@ class AfterGettingVisaFinal extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+                  const Row(
                     children: [
-                      const Text('在留資格認定証明書'),
-                      const SizedBox(
+                      Text('在留資格認定証明書'),
+                      SizedBox(
                         width: 95,
                       ),
                       IntrinsicWidth(

@@ -1,9 +1,7 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class LengthOfStay extends StatelessWidget {
@@ -11,7 +9,6 @@ class LengthOfStay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatter = InputFormatter();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -51,7 +48,7 @@ class LengthOfStay extends StatelessWidget {
                             children: [
                               Row(
                                 children: [
-                                  Expanded(
+                                  const Expanded(
                                     child: ReactiveDatePickerField(
                                       formControlName:
                                           'stayStartingDatePersonalReference',
@@ -63,7 +60,7 @@ class LengthOfStay extends StatelessWidget {
                                     width:
                                         context.appTheme.spacing.marginMedium,
                                   ),
-                                  Expanded(
+                                 const Expanded(
                                     child: ReactiveDatePickerField(
                                       formControlName: 'stayEndDate',
                                       label: '滞在終了日（身元保証書）'
@@ -85,6 +82,24 @@ class LengthOfStay extends StatelessWidget {
                             ],
                           ),
                         ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            if (formArray.controls.indexOf(currentForm) !=
+                                0) ...{
+                              IconButton(
+                                icon: const Icon(
+                                  Icons.remove_circle,
+                                  color: Colors.red,
+                                ),
+                                onPressed: () {
+                                  formArray.removeAt(
+                                      formArray.controls.indexOf(currentForm));
+                                },
+                              ),
+                            },
+                          ],
+                        )
                       ],
                     ),
                   ),

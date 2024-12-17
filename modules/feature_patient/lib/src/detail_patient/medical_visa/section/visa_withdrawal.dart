@@ -1,9 +1,6 @@
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class VisaWithdrawal extends StatelessWidget {
@@ -11,7 +8,6 @@ class VisaWithdrawal extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatter = InputFormatter();
     final formGroup = ReactiveForm.of(context) as FormGroup;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -35,7 +31,7 @@ class VisaWithdrawal extends StatelessWidget {
                 SizedBox(
                   width: context.appTheme.spacing.marginMedium,
                 ),
-                Expanded(
+                const Expanded(
                   child: ReactiveDatePickerField(
                     formControlName: 'deathOrOccurrenceEventDate',
                     label: '死亡日または事由発生日',

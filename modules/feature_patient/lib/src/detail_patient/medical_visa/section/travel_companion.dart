@@ -2,9 +2,7 @@ import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class TravelCompanion extends StatelessWidget {
@@ -12,7 +10,6 @@ class TravelCompanion extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatter = InputFormatter();
     final formGroup = ReactiveForm.of(context) as FormGroup;
     return ReactiveForm(
       formGroup: formGroup.control('travelCompanion') as FormGroup,
@@ -51,7 +48,7 @@ class TravelCompanion extends StatelessWidget {
                     SizedBox(
                       width: context.appTheme.spacing.marginMedium,
                     ),
-                    Expanded(
+                    const Expanded(
                       child: ReactiveDatePickerField(
                         formControlName: 'dateBirth',
                         label: '生年月日',
@@ -187,7 +184,7 @@ class TravelCompanion extends StatelessWidget {
                                 children: [
                                   Row(
                                     children: [
-                                      Expanded(
+                                      const Expanded(
                                         child: ReactiveDatePickerField(
                                           formControlName:
                                               'landingPermissionDate',
@@ -198,7 +195,7 @@ class TravelCompanion extends StatelessWidget {
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      Expanded(
+                                      const Expanded(
                                         child: ReactiveDatePickerField(
                                           formControlName:
                                               'visaValidityPeriodExpirationDate',
@@ -223,7 +220,7 @@ class TravelCompanion extends StatelessWidget {
                                   ),
                                   Row(
                                     children: [
-                                      Expanded(
+                                      const Expanded(
                                         child: ReactiveDatePickerField(
                                           formControlName:
                                               'dateOfEntryIntoJapan',
@@ -234,7 +231,7 @@ class TravelCompanion extends StatelessWidget {
                                         width: context
                                             .appTheme.spacing.marginMedium,
                                       ),
-                                      Expanded(
+                                      const Expanded(
                                         child: ReactiveDatePickerField(
                                             formControlName:
                                                 'departureDateFromJapan',
@@ -670,10 +667,10 @@ class TravelCompanion extends StatelessWidget {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Row(
+                                            const Row(
                                               children: [
-                                                const Text('ビザのページ'),
-                                                const SizedBox(
+                                                Text('ビザのページ'),
+                                                SizedBox(
                                                   width: 140,
                                                 ),
                                                 IntrinsicWidth(
@@ -696,10 +693,10 @@ class TravelCompanion extends StatelessWidget {
                                           mainAxisAlignment:
                                               MainAxisAlignment.spaceBetween,
                                           children: [
-                                            Row(
+                                            const Row(
                                               children: [
-                                                const Text('上陸許可証'),
-                                                const SizedBox(
+                                                Text('上陸許可証'),
+                                                SizedBox(
                                                   width: 150,
                                                 ),
                                                 IntrinsicWidth(
@@ -801,10 +798,10 @@ class TravelCompanion extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Row(
+                                        const Row(
                                           children: [
-                                            const Text('来日時の飛行機チケット'),
-                                            const SizedBox(
+                                            Text('来日時の飛行機チケット'),
+                                            SizedBox(
                                               width: 75,
                                             ),
                                             IntrinsicWidth(
@@ -896,10 +893,10 @@ class TravelCompanion extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Row(
+                                        const Row(
                                           children: [
-                                            const Text('帰国時の飛行機チケット'),
-                                            const SizedBox(
+                                            Text('帰国時の飛行機チケット'),
+                                            SizedBox(
                                               width: 75,
                                             ),
                                             IntrinsicWidth(
@@ -991,10 +988,10 @@ class TravelCompanion extends StatelessWidget {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Row(
+                                        const Row(
                                           children: [
-                                            const Text('帰国時のボーディングパス'),
-                                            const SizedBox(
+                                            Text('帰国時のボーディングパス'),
+                                            SizedBox(
                                               width: 65,
                                             ),
                                             IntrinsicWidth(
@@ -1078,10 +1075,10 @@ class TravelCompanion extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Row(
+                          const Row(
                             children: [
-                              const Text('在留資格認定証明書'),
-                              const SizedBox(
+                              Text('在留資格認定証明書'),
+                              SizedBox(
                                 width: 100,
                               ),
                               IntrinsicWidth(

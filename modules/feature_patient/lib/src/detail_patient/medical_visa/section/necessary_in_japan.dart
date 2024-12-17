@@ -2,9 +2,7 @@ import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class NecessaryInJapan extends StatelessWidget {
@@ -12,7 +10,6 @@ class NecessaryInJapan extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatter = InputFormatter();
     final formGroup = ReactiveForm.of(context) as FormGroup;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,17 +36,16 @@ class NecessaryInJapan extends StatelessWidget {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    Row(
+                                    const Row(
                                       children: [
-                                        const Text('パスポート'),
-                                        const SizedBox(
+                                        Text('パスポート'),
+                                        SizedBox(
                                           width: 150,
                                         ),
                                         IntrinsicWidth(
                                           stepWidth: 200,
                                           child: ReactiveDatePickerField(
                                             formControlName: 'passportDate',
-
                                           ),
                                         ),
                                       ],
@@ -68,11 +64,10 @@ class NecessaryInJapan extends StatelessWidget {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    Expanded(
+                                    const Expanded(
                                       child: ReactiveDatePickerField(
                                         formControlName:
                                             'letterOfGuaranteeDate',
-
                                       ),
                                     ),
                                     SizedBox(
@@ -151,8 +146,113 @@ class NecessaryInJapan extends StatelessWidget {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    fileUpload(context, currentForm,
-                                        'letterOfGuaranteeFileSelect'),
+                                    SizedBox(
+                                      width: 200,
+                                      child: ColumnSeparated(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        separatorBuilder: (context, index) =>
+                                            SizedBox(
+                                          height: context
+                                              .appTheme.spacing.formSpacing,
+                                        ),
+                                        children: [
+                                          RowSeparated(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            separatorBuilder:
+                                                (context, index) => SizedBox(
+                                              width: context
+                                                  .appTheme.spacing.formSpacing,
+                                            ),
+                                            children: [
+                                              SizedBox(
+                                                width: 75,
+                                                child: RowSeparated(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  separatorBuilder:
+                                                      (context, index) =>
+                                                          SizedBox(
+                                                    width: context
+                                                        .appTheme
+                                                        .spacing
+                                                        .marginExtraSmall,
+                                                  ),
+                                                  children: [
+                                                    Flexible(
+                                                      child:
+                                                          ReactiveValueListenableBuilder<
+                                                              FileSelect>(
+                                                        formControlName:
+                                                            'letterOfGuaranteeFileSelect',
+                                                        builder: (context,
+                                                            control, _) {
+                                                          return InkWell(
+                                                            onTap: () {
+                                                              if (control.value
+                                                                      ?.url !=
+                                                                  null) {
+                                                                openUrlInBrowser(
+                                                                    fileName: control
+                                                                        .value!
+                                                                        .url!);
+                                                              }
+                                                            },
+                                                            child: Text(
+                                                              control.value
+                                                                      ?.url ??
+                                                                  control.value
+                                                                      ?.filename ??
+                                                                  'File Name',
+                                                              style: context
+                                                                  .textTheme
+                                                                  .bodySmall,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  filePicker().then((value) {
+                                                    if (value != null) {
+                                                      currentForm
+                                                          .control(
+                                                              'letterOfGuaranteeFileSelect')
+                                                          .value = value;
+                                                      logger
+                                                          .d('Value Not Null');
+                                                    }
+                                                  });
+                                                },
+                                                child: Chip(
+                                                  label: const Text('ファイル選択'),
+                                                  labelStyle: TextStyle(
+                                                    color: context.appTheme
+                                                        .secondaryBackgroundColor,
+                                                  ),
+                                                  backgroundColor: context
+                                                      .appTheme.primaryColor,
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                    // fileUpload(context, currentForm,
+                                    //     'letterOfGuaranteeFileSelect'),
                                   ],
                                 ),
                               ],
@@ -240,10 +340,10 @@ class NecessaryInJapan extends StatelessWidget {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Row(
+                                const Row(
                                   children: [
-                                    const Text('治療予定表'),
-                                    const SizedBox(
+                                    Text('治療予定表'),
+                                    SizedBox(
                                       width: 150,
                                     ),
                                     IntrinsicWidth(
@@ -322,17 +422,16 @@ class NecessaryInJapan extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+                  const Row(
                     children: [
-                      const Text('理由書'),
-                      const SizedBox(
+                      Text('理由書'),
+                      SizedBox(
                         width: 175,
                       ),
                       IntrinsicWidth(
                         stepWidth: 200,
                         child: ReactiveDatePickerField(
                           formControlName: 'statementOfReasonsDate',
-
                         ),
                       ),
                     ],
@@ -349,10 +448,10 @@ class NecessaryInJapan extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Row(
+                  const Row(
                     children: [
-                      const Text('同行者リスト'),
-                      const SizedBox(
+                      Text('同行者リスト'),
+                      SizedBox(
                         width: 135,
                       ),
                       IntrinsicWidth(
