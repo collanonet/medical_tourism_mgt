@@ -175,7 +175,8 @@ class YourVisa extends StatelessWidget {
                                 ),
                               ),
                             ),
-                            Expanded(
+                            SizedBox(
+                              width: 60,
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 crossAxisAlignment: CrossAxisAlignment.center,
