@@ -115,7 +115,8 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
             onSaved: validate,
             onFieldSubmitted: validate,
             decoration: InputDecoration(
-              hintText: 'YYYY/MM/DD',
+              label: widget.label != null ? Text(widget.label!) : null,
+              hintText: widget.helperText ?? 'YYYY/MM/DD',
               suffixIcon: IconButton(
                 onPressed: picker.showPicker,
                 icon: const Icon(
