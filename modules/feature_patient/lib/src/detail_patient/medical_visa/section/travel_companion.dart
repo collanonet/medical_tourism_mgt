@@ -3,6 +3,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class TravelCompanion extends StatelessWidget {
@@ -169,274 +170,323 @@ class TravelCompanion extends StatelessWidget {
                         .map(
                           (currentForm) => ReactiveForm(
                             formGroup: currentForm,
-                            child: Container(
-                              padding: EdgeInsets.all(
-                                  context.appTheme.spacing.marginMedium),
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: context.appTheme.primaryColor,
+                            child: Row(
+                              children: [
+                                Expanded(
+                                  child: Container(
+                                    padding: EdgeInsets.all(
+                                        context.appTheme.spacing.marginMedium),
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: context.appTheme.primaryColor,
+                                      ),
+                                      borderRadius: BorderRadius.circular(
+                                          context.appTheme.spacing
+                                              .borderRadiusMedium),
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            const Expanded(
+                                              child: ReactiveDatePickerField(
+                                                formControlName:
+                                                    'landingPermissionDate',
+                                                label: '上陸許可日',
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            const Expanded(
+                                              child: ReactiveDatePickerField(
+                                                formControlName:
+                                                    'visaValidityPeriodExpirationDate',
+                                                label: 'ビザの有効期限　満了日',
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            Expanded(
+                                              child: SizedBox(
+                                                width: context.appTheme.spacing
+                                                    .marginMedium,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        Row(
+                                          children: [
+                                            const Expanded(
+                                              child: ReactiveDatePickerField(
+                                                formControlName:
+                                                    'dateOfEntryIntoJapan',
+                                                label: '日本への入国日',
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            const Expanded(
+                                              child: ReactiveDatePickerField(
+                                                  formControlName:
+                                                      'departureDateFromJapan',
+                                                  label: '日本からの出国日'),
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            Expanded(
+                                              child: SizedBox(
+                                                width: context.appTheme.spacing
+                                                    .marginMedium,
+                                              ),
+                                            )
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        const Text('入国'),
+                                        SizedBox(
+                                          height: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 2,
+                                              child: ReactiveTextField(
+                                                formControlName: 'departureIn',
+                                                decoration:
+                                                    const InputDecoration(
+                                                  label: Text(
+                                                    '出発地',
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            Expanded(
+                                              flex: 2,
+                                              child: ReactiveTextField(
+                                                formControlName: 'arrivalIn',
+                                                decoration:
+                                                    const InputDecoration(
+                                                  label: Text(
+                                                    '到着地',
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            Expanded(
+                                              child: ReactiveTextField(
+                                                formControlName:
+                                                    'flightNumberIn',
+                                                decoration:
+                                                    const InputDecoration(
+                                                  label: Text(
+                                                    '便名',
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            Expanded(
+                                              child: ReactiveTextField(
+                                                formControlName:
+                                                    'departureTimeIn',
+                                                decoration:
+                                                    const InputDecoration(
+                                                  label: Text(
+                                                    '発時刻',
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            Expanded(
+                                              child: ReactiveTextField(
+                                                formControlName:
+                                                    'arrivalTimeIn',
+                                                decoration:
+                                                    const InputDecoration(
+                                                  label: Text(
+                                                    '着時刻',
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            Expanded(
+                                              child: SizedBox(
+                                                width: context.appTheme.spacing
+                                                    .marginMedium,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        const Text('出国'),
+                                        SizedBox(
+                                          height: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 2,
+                                              child: ReactiveTextField(
+                                                formControlName: 'departureOut',
+                                                decoration:
+                                                    const InputDecoration(
+                                                  label: Text(
+                                                    '出発地',
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            Expanded(
+                                              flex: 2,
+                                              child: ReactiveTextField(
+                                                formControlName: 'arrivalOut',
+                                                decoration:
+                                                    const InputDecoration(
+                                                  label: Text(
+                                                    '到着地',
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            Expanded(
+                                              child: ReactiveTextField(
+                                                formControlName:
+                                                    'flightNumberOut',
+                                                decoration:
+                                                    const InputDecoration(
+                                                  label: Text(
+                                                    '便名',
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            Expanded(
+                                              child: ReactiveTextField(
+                                                formControlName:
+                                                    'departureTimeOut',
+                                                decoration:
+                                                    const InputDecoration(
+                                                  label: Text(
+                                                    '発時刻',
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            Expanded(
+                                              child: ReactiveTextField(
+                                                formControlName:
+                                                    'arrivalTimeOut',
+                                                decoration:
+                                                    const InputDecoration(
+                                                  label: Text(
+                                                    '着時刻',
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: context.appTheme.spacing
+                                                  .marginMedium,
+                                            ),
+                                            Expanded(
+                                              child: ReactiveTextField(
+                                                formControlName:
+                                                    'seatNumberOut',
+                                                decoration:
+                                                    const InputDecoration(
+                                                  label: Text(
+                                                    '座席番号',
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                  ),
                                 ),
-                                borderRadius: BorderRadius.circular(context
-                                    .appTheme.spacing.borderRadiusMedium),
-                              ),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
+                                SizedBox(
+                                  width: 60,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
                                     children: [
-                                      const Expanded(
-                                        child: ReactiveDatePickerField(
-                                          formControlName:
-                                              'landingPermissionDate',
-                                          label: '上陸許可日',
+                                      if (formArray.controls
+                                              .indexOf(currentForm) !=
+                                          0) ...{
+                                        IconButton(
+                                          icon: const Icon(
+                                            Icons.remove_circle,
+                                            color: Colors.red,
+                                          ),
+                                          onPressed: () {
+                                            formArray.removeAt(formArray
+                                                .controls
+                                                .indexOf(currentForm));
+                                          },
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      const Expanded(
-                                        child: ReactiveDatePickerField(
-                                          formControlName:
-                                              'visaValidityPeriodExpirationDate',
-                                          label: 'ビザの有効期限　満了日',
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: SizedBox(
-                                          width: context
-                                              .appTheme.spacing.marginMedium,
-                                        ),
-                                      )
+                                      },
                                     ],
                                   ),
-                                  SizedBox(
-                                    height:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  Row(
-                                    children: [
-                                      const Expanded(
-                                        child: ReactiveDatePickerField(
-                                          formControlName:
-                                              'dateOfEntryIntoJapan',
-                                          label: '日本への入国日',
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      const Expanded(
-                                        child: ReactiveDatePickerField(
-                                            formControlName:
-                                                'departureDateFromJapan',
-                                            label: '日本からの出国日'),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: SizedBox(
-                                          width: context
-                                              .appTheme.spacing.marginMedium,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const Text('入国'),
-                                  SizedBox(
-                                    height:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: ReactiveTextField(
-                                          formControlName: 'departureIn',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '出発地',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        flex: 2,
-                                        child: ReactiveTextField(
-                                          formControlName: 'arrivalIn',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '到着地',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: ReactiveTextField(
-                                          formControlName: 'flightNumberIn',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '便名',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: ReactiveTextField(
-                                          formControlName: 'departureTimeIn',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '発時刻',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: ReactiveTextField(
-                                          formControlName: 'arrivalTimeIn',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '着時刻',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: SizedBox(
-                                          width: context
-                                              .appTheme.spacing.marginMedium,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  const Text('出国'),
-                                  SizedBox(
-                                    height:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  Row(
-                                    children: [
-                                      Expanded(
-                                        flex: 2,
-                                        child: ReactiveTextField(
-                                          formControlName: 'departureOut',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '出発地',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        flex: 2,
-                                        child: ReactiveTextField(
-                                          formControlName: 'arrivalOut',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '到着地',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: ReactiveTextField(
-                                          formControlName: 'flightNumberOut',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '便名',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: ReactiveTextField(
-                                          formControlName: 'departureTimeOut',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '発時刻',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: ReactiveTextField(
-                                          formControlName: 'arrivalTimeOut',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '着時刻',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                      Expanded(
-                                        child: ReactiveTextField(
-                                          formControlName: 'seatNumberOut',
-                                          decoration: const InputDecoration(
-                                            label: Text(
-                                              '座席番号',
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ],
-                              ),
+                                )
+                              ],
                             ),
                           ),
                         )
@@ -675,7 +725,8 @@ class TravelCompanion extends StatelessWidget {
                                                 ),
                                                 IntrinsicWidth(
                                                   stepWidth: 200,
-                                                  child: ReactiveDatePickerField(
+                                                  child:
+                                                      ReactiveDatePickerField(
                                                     formControlName: 'visaPage',
                                                   ),
                                                 ),
@@ -701,7 +752,8 @@ class TravelCompanion extends StatelessWidget {
                                                 ),
                                                 IntrinsicWidth(
                                                   stepWidth: 200,
-                                                  child: ReactiveDatePickerField(
+                                                  child:
+                                                      ReactiveDatePickerField(
                                                     formControlName:
                                                         'landingPermit',
                                                   ),

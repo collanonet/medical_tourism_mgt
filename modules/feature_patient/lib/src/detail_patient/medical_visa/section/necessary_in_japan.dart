@@ -64,7 +64,8 @@ class NecessaryInJapan extends StatelessWidget {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    const Expanded(
+                                    const IntrinsicWidth(
+                                      stepWidth: 200,
                                       child: ReactiveDatePickerField(
                                         formControlName:
                                             'letterOfGuaranteeDate',
@@ -74,8 +75,8 @@ class NecessaryInJapan extends StatelessWidget {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    Expanded(
-                                      flex: 3,
+                                    SizedBox(
+                                      width: 600,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
