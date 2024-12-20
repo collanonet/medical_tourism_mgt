@@ -120,42 +120,43 @@ class _ApplicationBloodPurificationTherapyScreenState
                       ],
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      '第 1 希望',
-                      style: context.textTheme.bodyMedium,
-                    ),
+                    // Text(
+                    //   '第 1 希望',
+                    //   style: context.textTheme.bodyMedium,
+                    // ),
                     const SizedBox(height: 8),
-                    IntrinsicWidth(
+                    const IntrinsicWidth(
                       stepWidth: 250,
                       child: ReactiveDatePickerField(
                         formControlName: 'date1',
+                        label: '第 1 希望',
 
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      '第 2 希望',
-                      style: context.textTheme.bodyMedium,
-                    ),
+                    // Text(
+                    //   '第 2 希望',
+                    //   style: context.textTheme.bodyMedium,
+                    // ),
                     const SizedBox(height: 8),
-                    IntrinsicWidth(
+                    const IntrinsicWidth(
                       stepWidth: 250,
                       child: ReactiveDatePickerField(
                         formControlName: 'date2',
-
+                        label: '第 2 希望',
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      '第 3 希望',
-                      style: context.textTheme.bodyMedium,
-                    ),
+                    // Text(
+                    //   '第 3 希望',
+                    //   style: context.textTheme.bodyMedium,
+                    // ),
                     const SizedBox(height: 8),
-                    IntrinsicWidth(
+                    const IntrinsicWidth(
                       stepWidth: 250,
                       child: ReactiveDatePickerField(
                         formControlName: 'date3',
-
+                        label: '第 3 希望',
                       ),
                     ),
                     const SizedBox(height: 8),

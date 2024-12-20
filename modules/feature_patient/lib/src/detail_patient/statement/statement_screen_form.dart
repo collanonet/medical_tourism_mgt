@@ -250,9 +250,10 @@ class StatementScreenForm extends StatelessWidget {
             ),
             // invoiceDate
             const Expanded(
-                          child: ReactiveDatePickerField(
-                        formControlName: 'invoiceDate',
-                      )),
+                child: ReactiveDatePickerField(
+              formControlName: 'invoiceDate',
+              label: '発行日',
+            )),
 
             Expanded(
               child: ReactiveTextField<String>(
@@ -398,7 +399,8 @@ class StatementScreenForm extends StatelessWidget {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration: const InputDecoration(labelText: '数'),
+                                  decoration:
+                                      const InputDecoration(labelText: '数'),
                                 ),
                               ),
                               SizedBox(
@@ -407,11 +409,9 @@ class StatementScreenForm extends StatelessWidget {
                                   formControlName: 'unit',
                                   items: const [
                                     DropdownMenuItem(
-                                        value: '式',
-                                        child: Text('式')),
+                                        value: '式', child: Text('式')),
                                     DropdownMenuItem(
-                                        value: '回',
-                                        child: Text('回')),
+                                        value: '回', child: Text('回')),
                                   ],
                                   decoration: const InputDecoration(
                                     labelText: '量',

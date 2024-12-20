@@ -759,18 +759,14 @@ class _PatientResponseTreatmentScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            Text(
-                              '受診希望日',
-                              style: context.textTheme.bodySmall,
-                            ),
-                            Row(
+                            const Row(
                               children: [
                                 IntrinsicWidth(
                                   stepWidth: 300,
                                   child: ReactiveDatePickerField(
                                     formControlName:
                                         'desiredDateOfConsultation',
-
+                                    label: '受診希望日',
                                   ),
                                 ),
                               ],

@@ -277,6 +277,7 @@ class EstimateScreenForm extends StatelessWidget {
                       const Expanded(
                           child: ReactiveDatePickerField(
                         formControlName: 'invoiceDate',
+                        label: '発行日',
                       )),
 
                       Expanded(

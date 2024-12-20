@@ -293,10 +293,11 @@ class _ItineraryScreenState extends State<ItineraryScreen> {
                                             (BuildContext context, int index) {
                                           return const SizedBox(height: 8);
                                         },
-                                        children: [
+                                        children: const [
                                           ReactiveDatePickerField(
-                                              formControlName: 'date',
-                                              ),
+                                            formControlName: 'date',
+                                            label: '日付',
+                                          ),
                                         ],
                                       ),
                                     ),

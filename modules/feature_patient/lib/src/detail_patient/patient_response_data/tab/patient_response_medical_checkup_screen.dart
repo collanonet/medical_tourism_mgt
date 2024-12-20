@@ -58,46 +58,46 @@ class _PatientResponseMedicalCheckupScreenState
                               ],
                             ),
                             const SizedBox(height: 8),
-                            Text(
-                              '第１希望',
-                              style: context.textTheme.bodyMedium,
-                            ),
+                            // Text(
+                            //   '第１希望',
+                            //   style: context.textTheme.bodyMedium,
+                            // ),
                             const SizedBox(
                               height: 8,
                             ),
-                            IntrinsicWidth(
+                            const IntrinsicWidth(
                               stepWidth: 250,
                               child: ReactiveDatePickerField(
                                 formControlName: 'date1',
-
+                                label: '第１希望',
                               ),
                             ),
                             const SizedBox(height: 8),
-                            Text(
-                              '第 2 希望',
-                              style: context.textTheme.bodyMedium,
-                            ),
+                            // Text(
+                            //   '第 2 希望',
+                            //   style: context.textTheme.bodyMedium,
+                            // ),
                             const SizedBox(
                               height: 8,
                             ),
-                            IntrinsicWidth(
+                            const IntrinsicWidth(
                               stepWidth: 250,
                               child: ReactiveDatePickerField(
                                 formControlName: 'date2',
-
+                                label: '第 2 希望',
                               ),
                             ),
                             const SizedBox(height: 8),
-                            Text(
-                              '第 3 希望',
-                              style: context.textTheme.bodyMedium,
-                            ),
+                            // Text(
+                            //   '第 3 希望',
+                            //   style: context.textTheme.bodyMedium,
+                            // ),
                             const SizedBox(height: 8),
-                            IntrinsicWidth(
+                            const IntrinsicWidth(
                               stepWidth: 250,
                               child: ReactiveDatePickerField(
                                 formControlName: 'date3',
-
+                                label: '第 3 希望',
                               ),
                             ),
                             const SizedBox(height: 8),
@@ -163,7 +163,6 @@ class _PatientResponseMedicalCheckupScreenState
                                       label: Text('健診希望人数'),
                                     ),
                                     keyboardType: TextInputType.number,
-
                                     inputFormatters: [
                                       FilteringTextInputFormatter.allow(
                                           RegExp(r'[0-9]')),
@@ -212,7 +211,6 @@ class _PatientResponseMedicalCheckupScreenState
                                   child: ReactiveTextField(
                                     formControlName: 'age',
                                     keyboardType: TextInputType.number,
-
                                     inputFormatters: [
                                       FilteringTextInputFormatter.allow(
                                           RegExp(r'[0-9]')),
@@ -761,7 +759,6 @@ class _PatientResponseMedicalCheckupScreenState
                                   child: ReactiveTextField(
                                     formControlName: 'fastingBloodSugarMgPerDl',
                                     keyboardType: TextInputType.number,
-
                                     inputFormatters: [
                                       FilteringTextInputFormatter.allow(
                                           RegExp(r'[0-9]')),
@@ -786,7 +783,6 @@ class _PatientResponseMedicalCheckupScreenState
                                     formControlName:
                                         'fastingBloodSugarMmolPerL',
                                     keyboardType: TextInputType.number,
-
                                     inputFormatters: [
                                       FilteringTextInputFormatter.allow(
                                           RegExp(r'[0-9]')),
@@ -865,7 +861,6 @@ class _PatientResponseMedicalCheckupScreenState
                                   child: ReactiveTextField(
                                     formControlName: 'implantYear',
                                     keyboardType: TextInputType.number,
-
                                     inputFormatters: [
                                       FilteringTextInputFormatter.allow(
                                           RegExp(r'[0-9]')),
@@ -889,7 +884,6 @@ class _PatientResponseMedicalCheckupScreenState
                                   child: ReactiveTextField(
                                     formControlName: 'implantMonth',
                                     keyboardType: TextInputType.number,
-
                                     inputFormatters: [
                                       FilteringTextInputFormatter.allow(
                                           RegExp(r'[0-9]')),
