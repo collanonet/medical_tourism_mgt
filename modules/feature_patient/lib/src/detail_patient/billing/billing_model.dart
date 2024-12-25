@@ -21,12 +21,12 @@ class BillingModel {
   ValueNotifier<AsyncData<MedicalRecord>> medicalRecord =
       ValueNotifier(const AsyncData());
 
-  Future<void> initialData({
-    required MedicalRecord medicalRecord,
-  }) async {
+  Future<void> initialData(
+      {required MedicalRecord medicalRecord,
+      required FormGroup formGroup}) async {
     try {
       this.medicalRecord.value = AsyncData(data: medicalRecord);
-      await fetchBillingData(medicalRecord.id);
+      await fetchBillingData(medicalRecord.id, formGroup);
     } catch (e) {
       logger.e(e);
       this.medicalRecord.value = AsyncData(error: e);
@@ -36,16 +36,60 @@ class BillingModel {
   ValueNotifier<AsyncData<BillingResponse>> billingData =
       ValueNotifier(const AsyncData());
 
-  Future<void> fetchBillingData(String medicalRecord) async {
+  Future<void> fetchBillingData(
+      String medicalRecord, FormGroup formGroup) async {
     try {
       billingData.value = const AsyncData(loading: true);
-      final response =
+      var response =
           await patientRepository.getBilling(medicalRecord: medicalRecord);
+      insertBilling(formGroup, response);
       billingData.value = AsyncData(data: response);
+      logger.d('Processing');
+      logger.d(response.toJson());
     } catch (e) {
       logger.e(e);
+      logger.d('erroe');
       billingData.value = AsyncData(error: e);
     }
+  }
+
+  void insertBilling(FormGroup formGroup, BillingResponse response) {
+    FormArray treatmentCost = formGroup.control('formGroup') as FormArray;
+    formGroup.control('deposit').value = response.deposit;
+    formGroup.control('settlementFee').value = response.settlementFee;
+    formGroup.control('balance').value = response.balance;
+    if (response.treatmentCost!.isNotEmpty) {
+      for (var element in response.treatmentCost!) {
+        treatmentCost.add(
+          FormGroup(
+            {
+              'occurrenceDate': FormControl<DateTime>(
+                value: element.occurrenceDate,
+                validators: [
+                  Validators.pattern(
+                    ValidatorRegExp.date,
+                  ),
+                ],
+              ),
+              'hospitalName': FormControl<String>(value: element.hospitalName),
+              'treatmentDetails':
+                  FormControl<String>(value: element.treatmentDetails),
+              'amount': FormControl<String>(value: element.amount),
+              'remainingAmount':
+                  FormControl<String>(value: element.remainingAmount),
+              'file': FormControl<FileSelect>(
+                value: element.file != null
+                    ? FileSelect(
+                        url: element.file,
+                      )
+                    : null,
+              ),
+            },
+          ),
+        );
+      }
+    }
+    formGroup.control('remarks').value = response.remarks;
   }
 
   ValueNotifier<AsyncData<bool>> submit = ValueNotifier(const AsyncData());
@@ -75,14 +119,16 @@ class BillingModel {
           }
         }
 
-        treatmentCos.add(TreatmentCostRequest(
-          occurrenceDate: element['occurrenceDate'],
-          hospitalName: element['hospitalName'],
-          treatmentDetails: element['treatmentDetails'],
-          amount: element['amount'],
-          remainingAmount: element['remainingAmount'],
-          file: file,
-        ));
+        treatmentCos.add(
+          TreatmentCostRequest(
+            occurrenceDate: element['occurrenceDate'],
+            hospitalName: element['hospitalName'],
+            treatmentDetails: element['treatmentDetails'],
+            amount: element['amount'],
+            remainingAmount: element['remainingAmount'],
+            file: file,
+          ),
+        );
       }
 
       BillingRequest request = BillingRequest(
@@ -95,6 +141,7 @@ class BillingModel {
       );
       final response = await patientRepository.postBilling(request);
       billingData.value = AsyncData(data: response);
+      submit.value = const AsyncData(data: true);
     } catch (e) {
       logger.e(e);
       submit.value = AsyncData(error: e);

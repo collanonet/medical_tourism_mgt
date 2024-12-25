@@ -8,6 +8,7 @@ part of 'billing_response.dart';
 
 BillingResponse _$BillingResponseFromJson(Map<String, dynamic> json) =>
     BillingResponse(
+      id: json['_id'] as String,
       deposit: (json['deposit'] as num?)?.toDouble(),
       settlementFee: (json['settlementFee'] as num?)?.toDouble(),
       balance: (json['balance'] as num?)?.toDouble(),
@@ -21,6 +22,7 @@ BillingResponse _$BillingResponseFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$BillingResponseToJson(BillingResponse instance) =>
     <String, dynamic>{
+      '_id': instance.id,
       'deposit': instance.deposit,
       'settlementFee': instance.settlementFee,
       'balance': instance.balance,
@@ -32,6 +34,7 @@ Map<String, dynamic> _$BillingResponseToJson(BillingResponse instance) =>
 TreatmentCostResponse _$TreatmentCostResponseFromJson(
         Map<String, dynamic> json) =>
     TreatmentCostResponse(
+      id: json['_id'] as String,
       occurrenceDate: json['occurrenceDate'] == null
           ? null
           : DateTime.parse(json['occurrenceDate'] as String),
@@ -45,6 +48,7 @@ TreatmentCostResponse _$TreatmentCostResponseFromJson(
 Map<String, dynamic> _$TreatmentCostResponseToJson(
         TreatmentCostResponse instance) =>
     <String, dynamic>{
+      '_id': instance.id,
       'occurrenceDate': instance.occurrenceDate?.toIso8601String(),
       'hospitalName': instance.hospitalName,
       'treatmentDetails': instance.treatmentDetails,

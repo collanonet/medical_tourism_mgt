@@ -4,6 +4,8 @@ part 'billing_response.g.dart';
 
 @JsonSerializable()
 class BillingResponse {
+  @JsonKey(name: '_id')
+  String id;
   double? deposit;
   double? settlementFee;
   double? balance;
@@ -12,6 +14,7 @@ class BillingResponse {
   String? medicalRecord;
 
   BillingResponse({
+    required this.id,
     this.deposit,
     this.settlementFee,
     this.balance,
@@ -28,6 +31,8 @@ class BillingResponse {
 
 @JsonSerializable()
 class TreatmentCostResponse {
+  @JsonKey(name: '_id')
+  String id;
   DateTime? occurrenceDate;
   String? hospitalName;
   String? treatmentDetails;
@@ -36,6 +41,7 @@ class TreatmentCostResponse {
   String? file;
 
   TreatmentCostResponse({
+    required this.id,
     this.occurrenceDate,
     this.hospitalName,
     this.treatmentDetails,
