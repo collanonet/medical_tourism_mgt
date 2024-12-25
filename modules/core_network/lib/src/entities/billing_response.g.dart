@@ -16,6 +16,7 @@ BillingResponse _$BillingResponseFromJson(Map<String, dynamic> json) =>
               (e) => TreatmentCostResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
       remarks: json['remarks'] as String?,
+      medicalRecord: json['medicalRecord'] as String?,
     );
 
 Map<String, dynamic> _$BillingResponseToJson(BillingResponse instance) =>
@@ -25,6 +26,7 @@ Map<String, dynamic> _$BillingResponseToJson(BillingResponse instance) =>
       'balance': instance.balance,
       'treatmentCost': instance.treatmentCost,
       'remarks': instance.remarks,
+      'medicalRecord': instance.medicalRecord,
     };
 
 TreatmentCostResponse _$TreatmentCostResponseFromJson(

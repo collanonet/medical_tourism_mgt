@@ -1631,7 +1631,9 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.BILLING)
-  Future<BillingResponse> getBilling();
+  Future<BillingResponse> getBilling({
+    @Query('medicalRecord') required String medicalRecord,
+  });
 
   @POST(EndPoints.BILLING)
   Future<BillingResponse> postBilling(

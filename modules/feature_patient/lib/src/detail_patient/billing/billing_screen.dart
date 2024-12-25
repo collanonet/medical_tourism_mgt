@@ -173,7 +173,7 @@ class _BillingScreenState extends State<BillingScreen> {
                         height: context.appTheme.spacing.marginMedium,
                       ),
                       ReactiveFormArray(
-                        formArrayName: 'treatment_cost',
+                        formArrayName: 'treatmentCost',
                         builder: (context, formArray, child) {
                           final rows = formArray.controls
                               .map((control) => control as FormGroup)
@@ -184,7 +184,7 @@ class _BillingScreenState extends State<BillingScreen> {
                                     children: [
                                       Expanded(
                                         child: ReactiveDatePickerField(
-                                          formControlName: 'occurrence_date',
+                                          formControlName: 'occurrenceDate',
                                           label: '発生日',
 
                                         ),
@@ -211,7 +211,7 @@ class _BillingScreenState extends State<BillingScreen> {
                                       Expanded(
                                         flex: 2,
                                         child: ReactiveTextField(
-                                          formControlName: 'treatment_details',
+                                          formControlName: 'treatmentDetails',
                                           decoration: const InputDecoration(
                                             label: Text(
                                               '治療内容',
@@ -239,7 +239,7 @@ class _BillingScreenState extends State<BillingScreen> {
                                       ),
                                       Expanded(
                                         child: ReactiveTextField(
-                                          formControlName: 'remaining_amount',
+                                          formControlName: 'remainingAmount',
                                           decoration: const InputDecoration(
                                             label: Text(
                                               '残金',
@@ -276,7 +276,7 @@ class _BillingScreenState extends State<BillingScreen> {
                               InkWell(
                                 onTap: () => formArray.add(
                                   FormGroup({
-                                    'occurrence_date': FormControl<DateTime>(
+                                    'occurrenceDate': FormControl<DateTime>(
                                       validators: [
                                         Validators.pattern(
                                           ValidatorRegExp.date,
@@ -285,12 +285,12 @@ class _BillingScreenState extends State<BillingScreen> {
                                     ),
                                     'hospitalName':
                                         FormControl<String>(value: ''),
-                                    'treatment_details':
+                                    'treatmentDetails':
                                         FormControl<String>(value: ''),
                                     'amount': FormControl<String>(
                                       value: '',
                                     ),
-                                    'remaining_amount': FormControl<String>(
+                                    'remainingAmount': FormControl<String>(
                                       value: '',
                                       disabled: true,
                                     ),

@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'dart:convert';
+
 import 'package:core_network/entities.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
@@ -9,61 +11,91 @@ import 'package:injectable/injectable.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
-class BillingModel with ChangeNotifier {
+class BillingModel {
   BillingModel({
     required this.patientRepository,
   });
 
   final PatientRepository patientRepository;
 
-  late Patient _patient;
+  ValueNotifier<AsyncData<MedicalRecord>> medicalRecord =
+      ValueNotifier(const AsyncData());
 
-  Patient get patient => _patient;
-
-  Future<void> initialData({Patient? patient, String? id}) async {
-    notifyListeners();
+  Future<void> initialData({
+    required MedicalRecord medicalRecord,
+  }) async {
+    try {
+      this.medicalRecord.value = AsyncData(data: medicalRecord);
+      await fetchBillingData(medicalRecord.id);
+    } catch (e) {
+      logger.e(e);
+      this.medicalRecord.value = AsyncData(error: e);
+    }
   }
-  ValueNotifier<AsyncData<BillingResponse>> billingData = ValueNotifier(const AsyncData());
-  Future<void> fetchBillingData(String patientId) async {
-    try{
+
+  ValueNotifier<AsyncData<BillingResponse>> billingData =
+      ValueNotifier(const AsyncData());
+
+  Future<void> fetchBillingData(String medicalRecord) async {
+    try {
       billingData.value = const AsyncData(loading: true);
-      final response = await patientRepository.getBilling();
+      final response =
+          await patientRepository.getBilling(medicalRecord: medicalRecord);
       billingData.value = AsyncData(data: response);
-    }catch(e){
+    } catch (e) {
       logger.e(e);
       billingData.value = AsyncData(error: e);
     }
   }
-  
 
   ValueNotifier<AsyncData<bool>> submit = ValueNotifier(const AsyncData());
-  Future<void> submitBilling(FormGroup formGroup) async{
-    try{
+
+  Future<void> submitBilling(FormGroup formGroup) async {
+    try {
       submit.value = const AsyncData(loading: true);
+
       List<TreatmentCostRequest>? treatmentCos = [];
-      formGroup.control('treatment_cost').value.forEtch((e){
-        treatmentCos.add(
-         TreatmentCostRequest(
-          occurrenceDate: e['occurrence_date'],
-          hospitalName: e['hospitalName'],
-          treatmentDetails: e['treatment_details'],
-          amount: e['amount'],
-          remainingAmount: e['remaining_amount'],
-          file: e['file'],
-         )
-        );
-      });
+      for (dynamic element in formGroup.control('treatmentCost').value) {
+        String? file;
+        if (element['file'] != null) {
+          FileSelect docFile = element['file'];
+          if (docFile.file != null) {
+            try {
+              String base64Image = base64Encode(docFile.file!);
+              FileResponse fileData = await patientRepository.uploadFileBase64(
+                base64Image,
+                docFile.filename!,
+              );
+              file = fileData.filename;
+            } catch (e) {
+              logger.e(e);
+            }
+          } else {
+            file = docFile.url;
+          }
+        }
+
+        treatmentCos.add(TreatmentCostRequest(
+          occurrenceDate: element['occurrenceDate'],
+          hospitalName: element['hospitalName'],
+          treatmentDetails: element['treatmentDetails'],
+          amount: element['amount'],
+          remainingAmount: element['remainingAmount'],
+          file: file,
+        ));
+      }
+
       BillingRequest request = BillingRequest(
         deposit: formGroup.control('deposit').value,
         settlementFee: formGroup.control('settlementFee').value,
         balance: formGroup.control('balance').value,
         treatmentCost: treatmentCos,
-        remarks: formGroup.control('remarks').value
+        remarks: formGroup.control('remarks').value,
+        medicalRecord: medicalRecord.value.data?.id,
       );
       final response = await patientRepository.postBilling(request);
       billingData.value = AsyncData(data: response);
-
-    }catch(e){
+    } catch (e) {
       logger.e(e);
       submit.value = AsyncData(error: e);
     }

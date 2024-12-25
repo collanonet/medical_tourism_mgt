@@ -142,7 +142,7 @@ class _DetailPatientScreenState extends State<DetailPatientScreen> {
                             medicalRecord: medicalRecord.requireData,
                           ),
                           BillingPage(
-                            patient: patientData.requireData,
+                            medicalRecord: medicalRecord.requireData,
                           ),
                           MedicalPaymentDetailsPage(
                             patient: patientData.requireData,

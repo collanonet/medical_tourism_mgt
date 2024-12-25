@@ -554,8 +554,7 @@ abstract class PatientRepository {
   Future<MedicalInvoiceResponse> putInvoice(
       String id, MedicalInvoiceRequest invoiceRequest);
 
-  Future<MedicalInvoiceResponse> putTypeInvoice(
-      String id, bool type);
+  Future<MedicalInvoiceResponse> putTypeInvoice(String id, bool type);
 
   Future<void> deleteInvoice(String id);
 
@@ -563,39 +562,50 @@ abstract class PatientRepository {
   // Future<MedicalVisaPersonalResponse> postMedicalVisaPersonal(MedicalVisaPersonalRequest request);
   Future<MedicalRecordVisaResponse> getMedicalRecordVisa(String medicalRecord);
 
-  Future<MedicalRecordVisaResponse> postMedicalRecordVisa(MedicalRecordVisaRequest request);
+  Future<MedicalRecordVisaResponse> postMedicalRecordVisa(
+      MedicalRecordVisaRequest request);
 
   Future<List<MedicalVisaStayPeriodResponse>> getMedicalVisaStayPeriod();
 
-  Future<MedicalVisaStayPeriodResponse> postMedicalVisaStayPeriod(MedicalVisaStayPeriodRequest request);
+  Future<MedicalVisaStayPeriodResponse> postMedicalVisaStayPeriod(
+      MedicalVisaStayPeriodRequest request);
 
   Future<MedicalVisaRequiredInJapanResponse> getMedicalRequiredInJapan();
 
-  Future<MedicalVisaRequiredInJapanResponse> popMedicalVisaRequiredInJapan(RequiredInJapan requiredInJapan);
+  Future<MedicalVisaRequiredInJapanResponse> popMedicalVisaRequiredInJapan(
+      RequiredInJapan requiredInJapan);
 
   Future<MedicalVisaVisaWithdrawalResponse> getMedicalVisaWithdrawal();
 
-  Future<MedicalVisaVisaWithdrawalResponse> postMedicalVisaWithdrawal(MedicalVisaWithdrawalRequest request);
+  Future<MedicalVisaVisaWithdrawalResponse> postMedicalVisaWithdrawal(
+      MedicalVisaWithdrawalRequest request);
 
   Future<AfterGettingVisaResponse> getAfterGettingVisa();
 
-  Future<AfterGettingVisaResponse> postAfterGettingVisa(AfterGettingVisaRequest request);
+  Future<AfterGettingVisaResponse> postAfterGettingVisa(
+      AfterGettingVisaRequest request);
 
   Future<MedicalVisaTravelCompanionResponse> getMedicalVisaTravelCompanion();
 
-  Future<MedicalVisaTravelCompanionResponse> postMedicalVisaTravelCompanion(MedicalVisaTravelCompanionRequest request);
+  Future<MedicalVisaTravelCompanionResponse> postMedicalVisaTravelCompanion(
+      MedicalVisaTravelCompanionRequest request);
 
   Future<MedicalVisaNecessaryInJapanResponse> getMedicalVisaNecessaryInJapan();
 
-  Future<MedicalVisaNecessaryInJapanResponse> postMedicalVisaNecessaryInJapan(MedicalVisaNecessaryInJapanRequest request);
+  Future<MedicalVisaNecessaryInJapanResponse> postMedicalVisaNecessaryInJapan(
+      MedicalVisaNecessaryInJapanRequest request);
 
   Future<MedicalVisaAfterGettingVisaResponse> getAfterGettingVisaFinal();
 
-  Future<MedicalVisaAfterGettingVisaResponse> postAfterGettingVisaFinal(MedicalAfterGettingVisaFinalRequest request);
+  Future<MedicalVisaAfterGettingVisaResponse> postAfterGettingVisaFinal(
+      MedicalAfterGettingVisaFinalRequest request);
 
-  Future<BillingResponse> getBilling();
+  Future<BillingResponse> getBilling({
+    required String medicalRecord,
+  });
 
   Future<BillingResponse> postBilling(BillingRequest request);
 
-  Future<MedicalRecordVisaResponse> putMedicalRecordVisa(String id ,MedicalRecordVisaRequest request);
+  Future<MedicalRecordVisaResponse> putMedicalRecordVisa(
+      String id, MedicalRecordVisaRequest request);
 }

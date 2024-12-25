@@ -13,15 +13,16 @@ import 'billing_screen.dart';
 class BillingPage extends StatelessWidget {
   const BillingPage({
     super.key,
-    this.patient,
+    required this.medicalRecord,
   });
-  final Patient? patient;
+
+  final MedicalRecord medicalRecord;
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
+    return Provider(
       create: (context) =>
-      GetIt.I<BillingModel>()..initialData(patient: patient ),
+          GetIt.I<BillingModel>()..initialData(medicalRecord: medicalRecord),
       child: const BillingScreen(),
     );
   }
