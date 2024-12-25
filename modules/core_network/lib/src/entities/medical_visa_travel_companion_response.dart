@@ -16,9 +16,10 @@ class MedicalVisaTravelCompanionResponse {
   String? numberPassport;
   List<TravelInfo>? travelInfo;
   String? travelRemarks;
-  bool? subjectVisaWithdrawal;
-  DateTime? deathOrOccurrenceEventDate;
+  bool? visaWithdrawalTarget;
+ // DateTime? deathOrOccurrenceEventDate;
   String? remarks;
+  String? reason;
   List<VasaInfo>? vasaInfo;
   List<Ticket>? ticket;
   List<TicketBack>? ticketBack;
@@ -36,8 +37,8 @@ class MedicalVisaTravelCompanionResponse {
     this.numberPassport,
     this.travelInfo,
     this.travelRemarks,
-    this.subjectVisaWithdrawal,
-    this.deathOrOccurrenceEventDate,
+    this.visaWithdrawalTarget,
+    this.reason,
     this.remarks,
     this.vasaInfo,
     this.ticket,
