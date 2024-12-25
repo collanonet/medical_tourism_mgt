@@ -62,6 +62,15 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
     if (currentValue != null) {
       _dateController.text = dateFormat.format(currentValue);
     }
+
+    control.valueChanges.listen((value) {
+      if (value != null) {
+        _dateController.text = dateFormat.format(value);
+      } else {
+        _dateController.clear();
+      }
+    });
+
     setState(() {});
   }
 
@@ -91,6 +100,8 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
 
     return null;
   }
+
+
 
   @override
   Widget build(BuildContext context) {
