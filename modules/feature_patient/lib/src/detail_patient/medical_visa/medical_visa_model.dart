@@ -550,7 +550,7 @@ class MedicalVisaModel with ChangeNotifier {
     travelCompanionForm.control('visaWithdrawalTarget').value =
         response.travelCompanion?.visaWithdrawalTarget;
     travelCompanionForm.control('reason').value =
-        response.travelCompanion!.reason;
+        response.travelCompanion?.reason;
     travelCompanionForm.control('remarks').value =
         response.travelCompanion?.remarks;
     FormArray travelCompanionFormVasaInfo =
