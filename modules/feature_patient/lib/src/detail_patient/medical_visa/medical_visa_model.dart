@@ -548,8 +548,9 @@ class MedicalVisaModel with ChangeNotifier {
     travelCompanionForm.control('travelRemarks').value =
         response.travelCompanion?.travelRemarks;
     travelCompanionForm.control('visaWithdrawalTarget').value =
-        response.travelCompanion?.subjectVisaWithdrawal;
-    // travelCompanionForm.control('reason').value = response.travelCompanion!.;
+        response.travelCompanion?.visaWithdrawalTarget;
+    travelCompanionForm.control('reason').value =
+        response.travelCompanion!.reason;
     travelCompanionForm.control('remarks').value =
         response.travelCompanion?.remarks;
     FormArray travelCompanionFormVasaInfo =
@@ -1421,7 +1422,8 @@ class MedicalVisaModel with ChangeNotifier {
         travelRemarks: travelCompanionForm.control('travelRemarks').value,
         visaWithdrawalTarget:
             travelCompanionForm.control('visaWithdrawalTarget').value,
-        reason: travelCompanionForm.control('remarks').value,
+        reason: travelCompanionForm.control('reason').value,
+        remarks: travelCompanionForm.control('remarks').value,
         vasaInfo: compationVisaInfo,
         ticket: ticket,
         ticketBack: ticketBack,
