@@ -28,7 +28,6 @@ class BillingModel {
       this.medicalRecord.value = AsyncData(data: medicalRecord);
       await fetchBillingData(medicalRecord.id, formGroup);
     } catch (e) {
-      logger.e(e);
       this.medicalRecord.value = AsyncData(error: e);
     }
   }
@@ -43,53 +42,57 @@ class BillingModel {
       var response =
           await patientRepository.getBilling(medicalRecord: medicalRecord);
       insertBilling(formGroup, response);
-      billingData.value = AsyncData(data: response);
-      logger.d('Processing');
-      logger.d(response.toJson());
     } catch (e) {
-      logger.e(e);
-      logger.d('erroe');
       billingData.value = AsyncData(error: e);
     }
   }
 
   void insertBilling(FormGroup formGroup, BillingResponse response) {
-    FormArray treatmentCost = formGroup.control('formGroup') as FormArray;
-    formGroup.control('deposit').value = response.deposit;
-    formGroup.control('settlementFee').value = response.settlementFee;
-    formGroup.control('balance').value = response.balance;
-    if (response.treatmentCost!.isNotEmpty) {
-      for (var element in response.treatmentCost!) {
-        treatmentCost.add(
-          FormGroup(
-            {
-              'occurrenceDate': FormControl<DateTime>(
-                value: element.occurrenceDate,
-                validators: [
-                  Validators.pattern(
-                    ValidatorRegExp.date,
-                  ),
-                ],
-              ),
-              'hospitalName': FormControl<String>(value: element.hospitalName),
-              'treatmentDetails':
-                  FormControl<String>(value: element.treatmentDetails),
-              'amount': FormControl<String>(value: element.amount),
-              'remainingAmount':
-                  FormControl<String>(value: element.remainingAmount),
-              'file': FormControl<FileSelect>(
-                value: element.file != null
-                    ? FileSelect(
-                        url: element.file,
-                      )
-                    : null,
-              ),
-            },
-          ),
-        );
+    try {
+      FormArray treatmentCost = formGroup.control('treatmentCost') as FormArray;
+      formGroup.control('deposit').value = response.deposit;
+      formGroup.control('settlementFee').value = response.settlementFee;
+      formGroup.control('balance').value = response.balance;
+      if (response.treatmentCost?.isNotEmpty ?? false) {
+        treatmentCost.reset();
+        treatmentCost.clear();
+        for (var element in response.treatmentCost!) {
+          treatmentCost.add(
+            FormGroup(
+              {
+                'occurrenceDate': FormControl<DateTime>(
+                  value: element.occurrenceDate,
+                  validators: [
+                    Validators.pattern(
+                      ValidatorRegExp.date,
+                    ),
+                  ],
+                ),
+                'hospitalName':
+                    FormControl<String>(value: element.hospitalName),
+                'treatmentDetails':
+                    FormControl<String>(value: element.treatmentDetails),
+                'amount': FormControl<String>(value: element.amount),
+                'remainingAmount':
+                    FormControl<String>(value: element.remainingAmount),
+                'file': FormControl<FileSelect>(
+                  value: element.file != null
+                      ? FileSelect(
+                          url: element.file,
+                        )
+                      : null,
+                ),
+              },
+            ),
+          );
+        }
       }
+      formGroup.control('remarks').value = response.remarks;
+    } catch (e) {
+      logger.e(e);
     }
-    formGroup.control('remarks').value = response.remarks;
+
+    billingData.value = AsyncData(data: response);
   }
 
   ValueNotifier<AsyncData<bool>> submit = ValueNotifier(const AsyncData());
@@ -98,7 +101,7 @@ class BillingModel {
     try {
       submit.value = const AsyncData(loading: true);
 
-      List<TreatmentCostRequest>? treatmentCos = [];
+      List<TreatmentCostRequest> treatmentCos = [];
       for (dynamic element in formGroup.control('treatmentCost').value) {
         String? file;
         if (element['file'] != null) {
@@ -137,7 +140,7 @@ class BillingModel {
         balance: formGroup.control('balance').value,
         treatmentCost: treatmentCos,
         remarks: formGroup.control('remarks').value,
-        medicalRecord: medicalRecord.value.data?.id,
+        medicalRecord: medicalRecord.value.requireData.id,
       );
       final response = await patientRepository.postBilling(request);
       billingData.value = AsyncData(data: response);

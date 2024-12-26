@@ -8452,7 +8452,7 @@ class _ApiService implements ApiService {
   @override
   Future<BillingResponse> getBilling({required String medicalRecord}) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{r'medicalRecord': medicalRecord};
+    final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio
@@ -8463,7 +8463,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/medical-record-billing',
+              '/medical-record-billing/medicalRecord/${medicalRecord}',
               queryParameters: queryParameters,
               data: _data,
             )

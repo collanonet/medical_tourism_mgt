@@ -18,10 +18,6 @@ class EstimateScreenList extends StatefulWidget {
 class _EstimateScreenListState extends State<EstimateScreenList> {
   ValueNotifier<List<String>> selected = ValueNotifier([]);
   @override
-  void dispose() {
-    context.watch<EstimateModel>().medicalQuotationData;
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {

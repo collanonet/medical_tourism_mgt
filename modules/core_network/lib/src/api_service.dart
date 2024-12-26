@@ -1630,9 +1630,9 @@ abstract class ApiService {
     @Path('id') String id,
   );
 
-  @GET(EndPoints.BILLING)
+  @GET('${EndPoints.BILLING}/medicalRecord/{medicalRecord}')
   Future<BillingResponse> getBilling({
-    @Query('medicalRecord') required String medicalRecord,
+    @Path('medicalRecord') required String medicalRecord,
   });
 
   @POST(EndPoints.BILLING)

@@ -263,8 +263,6 @@ class EndPoints {
   //A14
   static const BILLING = '/medical-record-billing';
 
-
-
   // Dicom endpoint
 
   static const DICOM = '/instances';

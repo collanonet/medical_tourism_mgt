@@ -24,17 +24,18 @@ class BillingScreen extends StatefulWidget {
 
 class _BillingScreenState extends State<BillingScreen> {
   final formatter = InputFormatter();
+
   @override
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
     return ValueListenableBuilder(
-      valueListenable: context.watch<BillingModel>().medicalRecord,
-      builder: (context, data, _) {
+      valueListenable: context.watch<BillingModel>().billingData,
+      builder: (context, billingData, _) {
         return ValueListenableBuilder(
           valueListenable: context.watch<BillingModel>().submit,
           builder: (context, value, _) {
             return Skeletonizer(
-              enabled: data.loading || value.loading,
+              enabled: billingData.loading || value.loading,
               child: Column(
                 children: [
                   Expanded(
@@ -75,21 +76,22 @@ class _BillingScreenState extends State<BillingScreen> {
                                   stepWidth: 300,
                                   child: ReactiveTextField(
                                     formControlName: 'deposit',
+                                    keyboardType: TextInputType.number,
+                                    valueAccessor: CurrencyValueAccessor(),
+                                    inputFormatters: [
+                                      CustomCurrencyFormatter(),
+                                    ],
                                     decoration: const InputDecoration(
-                                      border: InputBorder.none, // No border
-                                      filled: false, // No background color
-                                      fillColor: Colors
-                                          .transparent, // Ensure the fill color is transparent
+                                      border: InputBorder.none,
+                                      // No border
+                                      filled: false,
+                                      // No background color
+                                      fillColor: Colors.transparent,
+                                      // Ensure the fill color is transparent
+                                      suffixText: '円',
                                     ),
                                   ),
                                 )
-                                // Expanded(
-                                //     child: Align(
-                                //         alignment: Alignment.centerRight,
-                                //         child: Text(
-                                //           '6,000,000円',
-                                //           style: context.textTheme.titleLarge,
-                                //         ))),
                               ],
                             ),
                           ),
@@ -125,13 +127,26 @@ class _BillingScreenState extends State<BillingScreen> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(
-                                    child: Align(
-                                        alignment: Alignment.centerRight,
-                                        child: Text(
-                                          '4,590,000円',
-                                          style: context.textTheme.titleLarge,
-                                        ))),
+                                IntrinsicWidth(
+                                  stepWidth: 300,
+                                  child: ReactiveTextField(
+                                    keyboardType: TextInputType.number,
+                                    valueAccessor: CurrencyValueAccessor(),
+                                    inputFormatters: [
+                                      CustomCurrencyFormatter(),
+                                    ],
+                                    formControlName: 'settlementFee',
+                                    decoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                      // No border
+                                      filled: false,
+                                      // No background color
+                                      fillColor: Colors.transparent,
+                                      // Ensure the fill color is transparent
+                                      suffixText: '円',
+                                    ),
+                                  ),
+                                )
                               ],
                             ),
                           ),
@@ -166,13 +181,26 @@ class _BillingScreenState extends State<BillingScreen> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(
-                                    child: Align(
-                                        alignment: Alignment.centerRight,
-                                        child: Text(
-                                          '1,410,000円',
-                                          style: context.textTheme.titleLarge,
-                                        ))),
+                                IntrinsicWidth(
+                                  stepWidth: 300,
+                                  child: ReactiveTextField(
+                                    formControlName: 'balance',
+                                    keyboardType: TextInputType.number,
+                                    valueAccessor: CurrencyValueAccessor(),
+                                    inputFormatters: [
+                                      CustomCurrencyFormatter(),
+                                    ],
+                                    decoration: const InputDecoration(
+                                      border: InputBorder.none,
+                                      // No border
+                                      filled: false,
+                                      // No background color
+                                      fillColor: Colors.transparent,
+                                      // Ensure the fill color is transparent
+                                      suffixText: '円',
+                                    ),
+                                  ),
+                                )
                               ],
                             ),
                           ),
@@ -476,6 +504,12 @@ class _BillingScreenState extends State<BillingScreen> {
                       onTap: () {
                         if (control.value?.url != null) {
                           openUrlInBrowser(fileName: control.value!.url!);
+                        }else{
+                          filePicker().then((value) {
+                            if (value != null) {
+                              currentForm.control(fileName).value = value;
+                            }
+                          });
                         }
                       },
                       child: Text(
@@ -487,7 +521,7 @@ class _BillingScreenState extends State<BillingScreen> {
                 ),
               ],
             ),
-            GestureDetector(
+            InkWell(
               onTap: () {
                 filePicker().then((value) {
                   if (value != null) {
