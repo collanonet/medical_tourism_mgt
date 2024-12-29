@@ -184,18 +184,18 @@ class ProgressListModel {
     try {
       submit.value = const AsyncData(loading: true);
 
-      await formGroup.control('progressList').value.forEach((element) {
-        element['progress'].forEach((element) async {
-          logger.d(element);
-          if (element['id'] == null) {
-            // await patientRepository.postMedicalRecordProgress(mapData(element));
+      for (var element in formGroup.control('progressList').value) {
+        for (var progress in element['progress']) {
+          logger.d(progress);
+          if (progress['id'] == null) {
+            await patientRepository
+                .postMedicalRecordProgress(mapData(progress));
           } else {
-            // await patientRepository.putMedicalRecordProgress(
-            //     element['id'], mapData(element));
+            await patientRepository.putMedicalRecordProgress(
+                progress['id'], mapData(progress));
           }
-        });
-      });
-
+        }
+      }
       submit.value = const AsyncData(data: true);
     } catch (e) {
       logger.d(e);
