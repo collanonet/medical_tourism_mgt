@@ -502,6 +502,7 @@ class _PatientScreenState extends State<PatientScreen> {
                                       //     ),
                                       //   ],
                                       // ),
+                                      const SizedBox(width: 60),
                                       Column(
                                         mainAxisSize: MainAxisSize.min,
                                         crossAxisAlignment:
@@ -534,7 +535,7 @@ class _PatientScreenState extends State<PatientScreen> {
                                               '${item?.nameInKanjiAGENTS ?? '--'} / ${item?.nameInKanaAGENTS ?? '--'}'),
                                         ],
                                       ),
-                                      const Text('Agent Data'),
+                                      // const Text('Agent Data'),
                                       Row(
                                         children: [
                                           Container(

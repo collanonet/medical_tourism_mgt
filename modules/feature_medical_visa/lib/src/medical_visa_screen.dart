@@ -429,6 +429,7 @@ class _MedicalVisaScreenState extends State<MedicalVisaScreen> {
                                     //     ),
                                     //   ],
                                     // ),
+                                    const SizedBox(width: 60),
                                     Column(
                                       mainAxisSize: MainAxisSize.min,
                                       crossAxisAlignment:
