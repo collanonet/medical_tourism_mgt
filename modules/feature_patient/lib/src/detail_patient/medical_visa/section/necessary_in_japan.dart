@@ -196,12 +196,18 @@ class NecessaryInJapan extends StatelessWidget {
                                                           return InkWell(
                                                             onTap: () {
                                                               if (control.value
-                                                                      ?.url !=
-                                                                  null) {
+                                                                          ?.url !=
+                                                                      null ||
+                                                                  control.value
+                                                                          ?.filename !=
+                                                                      null) {
                                                                 openUrlInBrowser(
                                                                     fileName: control
-                                                                        .value!
-                                                                        .url!);
+                                                                            .value
+                                                                            ?.url ??
+                                                                        control
+                                                                            .value!
+                                                                            .filename!);
                                                               }
                                                             },
                                                             child: Text(

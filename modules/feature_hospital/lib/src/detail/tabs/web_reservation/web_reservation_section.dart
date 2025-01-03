@@ -182,7 +182,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                         children: [
                                           Row(
                                             children: [
-                                              Expanded(
+                                              const Expanded(
                                                 child: ReactiveDatePickerField(
                                                   formControlName:
                                                       'preferredDate1',
@@ -193,7 +193,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                 width: context.appTheme.spacing
                                                     .marginMedium,
                                               ),
-                                              Expanded(
+                                              const Expanded(
                                                 child: ReactiveDatePickerField(
                                                   formControlName:
                                                       'preferredDate2',
@@ -204,7 +204,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                                 width: context.appTheme.spacing
                                                     .marginMedium,
                                               ),
-                                              Expanded(
+                                              const Expanded(
                                                 child: ReactiveDatePickerField(
                                                   formControlName:
                                                       'preferredDate3',
@@ -486,7 +486,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 Row(
                                   children: [
                                     IntrinsicWidth(
-                                      stepWidth: 150,
+                                      stepWidth: 120,
                                       child: ReactiveTextField(
                                         formControlName: 'department1',
                                       ),
@@ -496,7 +496,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                           context.appTheme.spacing.marginMedium,
                                     ),
                                     IntrinsicWidth(
-                                      stepWidth: 150,
+                                      stepWidth: 120,
                                       child: ReactiveTextField(
                                         formControlName: 'shift1',
                                       ),
@@ -649,7 +649,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                 Row(
                                   children: [
                                     IntrinsicWidth(
-                                      stepWidth: 150,
+                                      stepWidth: 120,
                                       child: ReactiveTextField(
                                         formControlName: 'department2',
                                       ),
@@ -659,7 +659,7 @@ class _WebReservationSectionState extends State<WebReservationSection> {
                                           context.appTheme.spacing.marginMedium,
                                     ),
                                     IntrinsicWidth(
-                                      stepWidth: 150,
+                                      stepWidth: 120,
                                       child: ReactiveTextField(
                                         formControlName: 'shift2',
                                       ),
