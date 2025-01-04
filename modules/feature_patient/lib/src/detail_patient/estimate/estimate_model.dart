@@ -634,6 +634,10 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
   String taxLabel = 'Tax';
   String totalLabel = 'Total';
   String remarksLabel = 'Remarks';
+  String inCharge = 'In charge';
+  String mr = 'Mr./Ms.';
+  String externalTax = 'External tax';
+  String taxIncluded = 'Tax included';
   String subTitle =
       'We would like to provide you with a quote as shown below.\n We look forward to hearing from you.';
 
@@ -650,6 +654,10 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
         taxLabel = '消費税';
         totalLabel = '合　　計';
         remarksLabel = '【特記事項】';
+        inCharge = '担当';
+        mr = '氏/様';
+        externalTax = '外税';
+        taxIncluded = '内税';
         break;
 
       case 'ZH':
@@ -663,6 +671,10 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
         taxLabel = '消費税';
         totalLabel = '合  计';
         remarksLabel = '【特記事項】';
+        inCharge = '负责';
+        mr = '先生/女士';
+        externalTax = '外税';
+        taxIncluded = '内税';
         break;
 
       case 'ZHTW':
@@ -676,6 +688,10 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
         taxLabel = '消費税';
         totalLabel = '合  计';
         remarksLabel = '【特記事項】';
+        inCharge = '負責';
+        mr = '先生/女士';
+        externalTax = '外部稅';
+        taxIncluded = '稅已包含';
         break;
 
       case 'VN':
@@ -690,6 +706,10 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
         taxLabel = 'thuế';
         totalLabel = 'tổng cộng';
         remarksLabel = 'ghi chú';
+        inCharge = 'phụ trách';
+        mr = 'Ông/Bà';
+        externalTax = 'Thuế ngoại';
+        taxIncluded = 'Thuế đã bao gồm';
         break;
 
       default:
@@ -704,12 +724,16 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
         taxLabel = 'Tax';
         totalLabel = 'Total';
         remarksLabel = 'Remarks';
+        inCharge = 'In charge';
+        mr = 'Mr./Ms.';
+        externalTax = 'External tax';
+        taxIncluded = 'Tax included';
     }
   } else if (response != null) {
     switch (language) {
       case 'JP':
         title = '請求書';
-        subTitle = '以下に示す請求書を提供したいと考えています。\n ご連絡をお待ちしております。';
+        subTitle = '下記の通り請求書いたします。ご用命の程宜しくお願い申し上げます。';
         quotationNumberLabel = '請求書番号: ';
         quotationDateLabel = '請求書の日付: ';
         totalAmountLabel = '合計金額: ';
@@ -718,6 +742,10 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
         taxLabel = '消費税';
         totalLabel = '合　　計';
         remarksLabel = '【特記事項】';
+        inCharge = '担当';
+        mr = '氏/様';
+        externalTax = '外税';
+        taxIncluded = '内税';
         break;
 
       case 'ZH':
@@ -731,6 +759,10 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
         taxLabel = '消費税';
         totalLabel = '合  计';
         remarksLabel = '【特記事項】';
+        inCharge = '负责';
+        mr = '先生/女士';
+        externalTax = '外部税';
+        taxIncluded = '税已包含';
         break;
 
       case 'ZHTW':
@@ -744,6 +776,10 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
         taxLabel = '消費税';
         totalLabel = '合  计';
         remarksLabel = '【特記事項】';
+        inCharge = '負責';
+        mr = '先生/女士';
+        externalTax = '外部稅';
+        taxIncluded = '稅已包含';
         break;
 
       case 'VN':
@@ -758,6 +794,10 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
         taxLabel = 'thuế';
         totalLabel = 'tổng cộng';
         remarksLabel = 'ghi chú';
+        inCharge = 'phụ trách';
+        mr = 'Ông/Bà';
+        externalTax = 'Thuế ngoại';
+        taxIncluded = 'Thuế đã bao gồm';
         break;
 
       default:
@@ -772,6 +812,10 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
         taxLabel = 'Tax';
         totalLabel = 'Total';
         remarksLabel = 'Remarks';
+        inCharge = 'In charge';
+        mr = 'Mr./Ms.';
+        externalTax = 'External tax';
+        taxIncluded = 'Tax included';
     }
   }
 
@@ -801,7 +845,8 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
       margin: const pw.EdgeInsets.all(8),
       theme: pw.ThemeData(
         defaultTextStyle: pw.TextStyle(
-          font: ttfJPPRegular,
+          font: ttf,
+          fontBold: ttf,
           fontSize: 12,
         ),
       ),
@@ -813,8 +858,8 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
             child: pw.Text(
               title,
               style: pw.TextStyle(
-                font: language == 'ZH' ? ttf : ttfJPPRegular,
-                fontBold: ttfJPPRegular,
+                font: ttf,
+                fontBold: ttf,
                 fontSize: 30,
               ),
               textAlign: pw.TextAlign.center,
@@ -854,7 +899,7 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
                     children: [
                       pw.Text(
                         '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
-                        ' 様',
+                        ' $mr',
                         style: pw.TextStyle(
                           font: ttfJPPRegular,
                           fontBold: ttfJPPRegular,
@@ -1045,17 +1090,28 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
             crossAxisAlignment: pw.CrossAxisAlignment.end,
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
-              if (response != null)
+              if (response != null) ...{
                 pw.Text(
-                  '担当 : ${response.inCharge ?? ''}',
+                  '$inCharge :',
+                  style: pw.TextStyle(font: ttf),
+                ),
+                pw.Text(
+                  ' ${response.inCharge ?? ''}',
                   style: pw.TextStyle(font: ttfJP),
                 ),
-              if (request != null)
+              },
+              if (request != null) ...{
                 pw.Text(
-                  '担当 : ${request.inCharge ?? ''}',
+                  '$inCharge :',
+                  style: pw.TextStyle(font: ttf),
+                ),
+                pw.Text(
+                  ' ${request.inCharge ?? ''}',
                   style: pw.TextStyle(font: ttfJP),
                 ),
+              },
             ]),
+
         pw.SizedBox(height: 20),
         if (response != null)
           pw.TableHelper.fromTextArray(
@@ -1200,7 +1256,7 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
                                 pw.Text(
                                   note.note ?? '',
                                   style: pw.TextStyle(
-                                    font: ttf,
+                                    font: ttfJP,
                                     fontWeight: pw.FontWeight.normal,
                                     fontSize: 10,
                                   ),
@@ -1231,7 +1287,7 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
                                 pw.Text(
                                   note.note ?? '',
                                   style: pw.TextStyle(
-                                    font: ttf,
+                                    font: ttfJP,
                                     fontWeight: pw.FontWeight.normal,
                                     fontSize: 10,
                                   ),
@@ -1284,7 +1340,7 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
                 alignment: pw.Alignment.centerLeft,
                 child: pw.Text(
                   '$taxLabel（${int.tryParse(response.taxRate.toString()) ?? 0}%）',
-                  style: pw.TextStyle(font: ttfJP),
+                  style: pw.TextStyle(font: ttf),
                 ),
               ),
             if (request != null)
@@ -1292,23 +1348,23 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
                 alignment: pw.Alignment.centerLeft,
                 child: pw.Text(
                   '$taxLabel（${int.tryParse(request.taxRate.toString()) ?? 0}%）',
-                  style: pw.TextStyle(font: ttfJP),
+                  style: pw.TextStyle(font: ttf),
                 ),
               ),
             if (response != null)
               pw.Align(
                 alignment: pw.Alignment.centerRight,
                 child: pw.Text(
-                  response.taxRateOption ? '（外税）' : '（内税）',
-                  style: pw.TextStyle(font: ttfJP),
+                  response.taxRateOption ? '（$externalTax）' : '（$taxIncluded）',
+                  style: pw.TextStyle(font: ttf),
                 ),
               ),
             if (request != null)
               pw.Align(
                 alignment: pw.Alignment.centerRight,
                 child: pw.Text(
-                  request.taxRateOption ? '（外税）' : '（内税）',
-                  style: pw.TextStyle(font: ttfJP),
+                  request.taxRateOption ? '$externalTax）' : '（$taxIncluded）',
+                  style: pw.TextStyle(font: ttf),
                 ),
               ),
           ],
@@ -1338,7 +1394,8 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
                   child: pw.Text(
                     totalLabel,
                     style: pw.TextStyle(
-                        font: language == 'ZHTW' ? ttfJPZHTW : ttf),
+                      font: ttf,
+                    ),
                   ),
                 ),
                 if (response != null)
@@ -1380,12 +1437,12 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
         if (response != null)
           pw.Text(
             response.remarks ?? '',
-            style: pw.TextStyle(font: ttf),
+            style: pw.TextStyle(font: ttfJPPRegular),
           ),
         if (request != null)
           pw.Text(
             request.remarks ?? '',
-            style: pw.TextStyle(font: ttf),
+            style: pw.TextStyle(font: ttfJPPRegular),
           ),
       ],
     ),
