@@ -8,7 +8,7 @@ FormGroup basicInfoForm({
 }) =>
     FormGroup(
       {
-        'id': FormControl<String?>(),
+        '_id': FormControl<String?>(),
         'dateOfBirth': FormControl<DateTime>(
           validators: [
             Validators.pattern(
@@ -80,13 +80,13 @@ FormGroup basicInfoForm({
         'deletedMedicalRecordHospitals': FormControl<List<String>>(value: []),
         'MEDICAL_RECORD_HOSPITALS': FormArray([
           FormGroup({
-            'id': FormControl<String?>(),
+            '_id': FormControl<String?>(),
             'hospitalName': FormControl<String?>(),
             'medicalCardNumber': FormControl<String?>(),
           }),
         ]),
         'travelGroup': FormGroup({
-          'id': FormControl<String?>(),
+          '_id': FormControl<String?>(),
           'toGroupLeader': FormControl<bool>(
             value: false,
           ),
@@ -110,7 +110,7 @@ FormGroup basicInfoForm({
           ),
         }),
         'PATIENT_NAMES': FormGroup({
-          'id': FormControl<String?>(),
+          '_id': FormControl<String?>(),
           'familyNameRomanized': FormControl<String?>(
             value: '',
             validators: [Validators.required],
@@ -133,7 +133,7 @@ FormGroup basicInfoForm({
           'firstNameJapaneseForNonChinese': FormControl<String?>(),
         }),
         'PATIENT_NATIONALITIES': FormGroup({
-          'id': FormControl<String?>(),
+          '_id': FormControl<String?>(),
           'nationality': FormControl<String?>(),
           'nativeLanguage': FormControl<String?>(),
           'residentialArea': FormControl<String?>(),
@@ -153,14 +153,14 @@ FormGroup basicInfoForm({
           'patient': FormControl<String?>(),
         }),
         'MEDICAL_RECORD_BUDGETS': FormGroup({
-          'id': FormControl<String?>(),
+          '_id': FormControl<String?>(),
           'budget': FormControl<int>(
             value: 0,
           ),
           'remarks': FormControl<String?>(),
         }),
         'MEDICAL_RECORD_AGENTS': FormGroup({
-          'id': FormControl<String?>(),
+          '_id': FormControl<String?>(),
           'company': FormControl<String?>(
             value: '',
           ),
@@ -172,7 +172,7 @@ FormGroup basicInfoForm({
           ),
         }),
         'MEDICAL_RECORD_Referrers': FormGroup({
-          'id': FormControl<String?>(),
+          '_id': FormControl<String?>(),
           'company': FormControl<String?>(
             value: '',
           ),
@@ -184,12 +184,12 @@ FormGroup basicInfoForm({
           ),
         }),
         'MEDICAL_RECORD_Interpreter': FormGroup({
-          'id': FormControl<String?>(),
+          '_id': FormControl<String?>(),
           'requiredOrUnnnecessary': FormControl<String>(),
           'interpreter': FormControl<String>(),
         }),
         'PATIENT_PASSPORTS': FormGroup({
-          'id': FormControl<String?>(),
+          '_id': FormControl<String?>(),
           'passportNumber': FormControl<String?>(),
           'issueDate': FormControl<DateTime>(
             validators: [
@@ -213,7 +213,7 @@ FormGroup basicInfoForm({
         }),
         'MEDICAL_RECORD_Companion': FormArray([
           FormGroup({
-            'id': FormControl<String?>(),
+            '_id': FormControl<String?>(),
             'leader': FormControl<bool>(
               value: false,
             ),

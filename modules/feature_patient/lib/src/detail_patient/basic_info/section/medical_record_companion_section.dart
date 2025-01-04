@@ -885,7 +885,7 @@ class _MedicalRecordCompanionSectionState
                 InkWell(
                   onTap: () => formArray.add(
                     FormGroup({
-                      'id': FormControl<String?>(),
+                      '_id': FormControl<String?>(),
                       'leader': FormControl<bool>(),
                       'remarks': FormControl<String?>(),
                       'familyNameRomanized': FormControl<String?>(),

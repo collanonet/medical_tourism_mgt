@@ -37,7 +37,7 @@ class TypeModel {
       for (var type in result) {
         typeArray.add(
           FormGroup({
-            'id': FormControl<String>(value: type.id),
+            '_id': FormControl<String>(value: type.id),
             'typeName': FormControl<String>(
               value: type.typeName,
               validators: [Validators.required],
@@ -60,7 +60,7 @@ class TypeModel {
       submitData.value = const AsyncData(loading: true);
 
       await fromGroup.control('type').value.forEach((element) async {
-        if (element['id'] == null) {
+        if (element['_id'] == null) {
           var result = await reportRepository.postType(TypeRequest(
             typeName: element['typeName'],
             color: element['color'],
@@ -68,7 +68,7 @@ class TypeModel {
           data.value = data.value.copyWith(data: data.value.data!..add(result));
         } else {
           var result = await reportRepository.putType(
-            element['id'],
+            element['_id'],
             TypeRequest(
               typeName: element['typeName'],
               color: element['color'],
@@ -76,7 +76,7 @@ class TypeModel {
           );
           data.value = data.value.copyWith(
             data: data.value.data!
-              ..[data.value.data!.indexWhere((e) => e.id == element['id'])] =
+              ..[data.value.data!.indexWhere((e) => e.id == element['_id'])] =
                   result
               ..sort((a, b) => a.typeName.compareTo(b.typeName)),
           );

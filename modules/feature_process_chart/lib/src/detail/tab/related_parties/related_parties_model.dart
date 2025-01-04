@@ -83,7 +83,7 @@ class RelatedPartiesModel {
         formArray.add(
           FormGroup(
             {
-              'id': FormControl<String>(value: element.id), // ID
+              '_id': FormControl<String>(value: element.id), // ID
               'arrangePerson':
                   FormControl<String>(value: element.arrangePerson), // 手配担当
               'dateFrom':
@@ -152,14 +152,14 @@ class RelatedPartiesModel {
             phoneNumber2: element['phoneNumber2'],
             tour: tourId.value,
           );
-          if (element['id'] == null) {
+          if (element['_id'] == null) {
             var result =
                 await processChartRepository.postDetailRelatedParties(request);
             data.add(result);
           } else {
             var result = await processChartRepository.putDetailRelatedParties(
-                request, element['id']);
-            data.map((e) => e.id == element['id'] ? result : e).toList();
+                request, element['_id']);
+            data.map((e) => e.id == element['_id'] ? result : e).toList();
           }
         },
       );
@@ -189,7 +189,7 @@ class RelatedPartiesModel {
 
   void insertBusCompany(
       FormGroup formGroup, DetailRelatedPartiesBusCompanyResponse data) {
-    formGroup.control('id').value = data.id;
+    formGroup.control('_id').value = data.id;
     formGroup.control('arrangePerson').value = data.arrangePerson;
     formGroup.control('busCompanyName').value = data.busCompanyName;
     formGroup.control('contactPerson').value = data.contactPerson;
@@ -203,7 +203,7 @@ class RelatedPartiesModel {
     try {
       submitBusCompanyData.value = const AsyncData(loading: true);
 
-      if (formGroup.control('id').value == null) {
+      if (formGroup.control('_id').value == null) {
         final response =
             await processChartRepository.postDetailRelatedPartiesBusCompany(
                 DetailRelatedPartiesBusCompanyRequest(
@@ -217,7 +217,7 @@ class RelatedPartiesModel {
       } else {
         final response =
             await processChartRepository.putDetailRelatedPartiesBusCompany(
-                formGroup.control('id').value,
+                formGroup.control('_id').value,
                 DetailRelatedPartiesBusCompanyRequest(
                   arrangePerson: formGroup.control('arrangePerson').value,
                   busCompanyName: formGroup.control('busCompanyName').value,
@@ -289,7 +289,7 @@ class RelatedPartiesModel {
         formArray.add(
           FormGroup(
             {
-              'id': FormControl<String>(value: element.id), // ID
+              '_id': FormControl<String>(value: element.id), // ID
               'dateYearFrom':
                   FormControl<DateTime>(value: element.dateYearFrom), // 年月日（自）
               'dateYearTo':
@@ -376,14 +376,14 @@ class RelatedPartiesModel {
             phoneNumber2: element['phoneNumber2'],
             tour: tourId.value,
           );
-          if (element['id'] == null) {
+          if (element['_id'] == null) {
             var result = await processChartRepository
                 .postDetailRelatedPartiesDriver(request);
             data.add(result);
           } else {
             var result = await processChartRepository.putRelatedPartiesDriver(
-                element['id'], request);
-            data.map((e) => e.id == element['id'] ? result : e).toList();
+                element['_id'], request);
+            data.map((e) => e.id == element['_id'] ? result : e).toList();
           }
         },
       );
@@ -421,7 +421,7 @@ class RelatedPartiesModel {
         formArray.add(
           FormGroup(
             {
-              'id': FormControl<String>(value: item.id), // ID
+              '_id': FormControl<String>(value: item.id), // ID
               'dateYearFrom':
                   FormControl<DateTime>(value: item.dateYearFrom), // 年月日（自）
               'dateYearTo':
@@ -462,14 +462,14 @@ class RelatedPartiesModel {
           tour: tourId.value,
         );
 
-        if (element['id'] == null) {
+        if (element['_id'] == null) {
           var result = await processChartRepository
               .postDetailRelatedPartiesEmergencyContact(request);
           data.add(result);
         } else {
           var result = await processChartRepository.putRelatedPartiesEmergency(
-              element['id'], request);
-          data.map((e) => e.id == element['id'] ? result : e).toList();
+              element['_id'], request);
+          data.map((e) => e.id == element['_id'] ? result : e).toList();
         }
       });
       emergencyContactData.value = AsyncData(data: data);

@@ -54,7 +54,7 @@ class PatientName {
 
   static FormGroup buildFormGroup(PatientName? patientName) {
     return FormGroup({
-      'id': FormControl<String>(value: patientName?.id),
+      '_id': FormControl<String>(value: patientName?.id),
       'patient': FormControl<String>(value: patientName?.patient),
       'createdAt': FormControl<DateTime>(value: patientName?.createdAt),
       'updatedAt': FormControl<DateTime>(value: patientName?.updatedAt),

@@ -32,7 +32,7 @@ class MedicalRecordInterpreter {
   static FormGroup buildFormGroup(
       MedicalRecordInterpreter? medicalRecordInterpreter) {
     return FormGroup({
-      'id': FormControl<String>(value: medicalRecordInterpreter?.id),
+      '_id': FormControl<String>(value: medicalRecordInterpreter?.id),
       'requiredOrUnnnecessary': FormControl<bool>(
           value: medicalRecordInterpreter?.requiredOrUnnnecessary),
       'interpreter':

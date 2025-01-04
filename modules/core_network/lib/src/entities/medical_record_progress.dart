@@ -42,7 +42,7 @@ class MedicalRecordProgress {
   static FormGroup buildFormGroup(
       MedicalRecordProgress? medicalRecordProgress) {
     return FormGroup({
-      'id': FormControl<String>(value: medicalRecordProgress?.id),
+      '_id': FormControl<String>(value: medicalRecordProgress?.id),
       'task': FormControl<String>(value: medicalRecordProgress?.task),
       'completed': FormControl<bool>(value: medicalRecordProgress?.completed),
       'completionDate':

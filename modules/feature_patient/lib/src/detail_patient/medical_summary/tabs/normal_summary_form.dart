@@ -5,7 +5,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup normalSummaryForm() {
   return FormGroup({
-    'id': FormControl<String>(),
+    '_id': FormControl<String>(),
     'entryDate': FormControl<DateTime>(
       validators: [
         Validators.pattern(

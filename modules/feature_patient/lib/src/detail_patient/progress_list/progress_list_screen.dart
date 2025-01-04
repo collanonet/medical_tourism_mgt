@@ -118,7 +118,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                       for (ItemProgress item
                           in context.read<ProgressListModel>().titleList) ...{
                         FormGroup({
-                          'id': FormControl<String>(),
+                          '_id': FormControl<String>(),
                           'completed': FormControl<bool>(value: false),
                           'key': FormControl<String>(),
                           'tag': FormControl<String>(
@@ -228,7 +228,7 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                 onTap: () {
                   formArray.add(
                     FormGroup({
-                      'id': FormControl<String>(),
+                      '_id': FormControl<String>(),
                       'completed': FormControl<bool>(value: false),
                       'key': FormControl<String>(),
                       'tag': FormControl<String>(),

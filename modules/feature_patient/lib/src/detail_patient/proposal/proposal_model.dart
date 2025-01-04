@@ -69,7 +69,7 @@ class ProposalModel {
       proposal.clear();
       for (var d in data) {
         proposal.add(FormGroup({
-          'id': FormControl<String?>(value: d.id),
+          '_id': FormControl<String?>(value: d.id),
           'hospitalName': FormControl<String>(value: d.hospitalName),
           'postalCode': FormControl<String>(value: d.postalCode),
           'address': FormControl<String>(value: d.address),
@@ -91,8 +91,8 @@ class ProposalModel {
           summary: form.value['summary'],
           medicalRecord: medicalRecord.value.requireData.id,
         );
-        if (form.value['id'] != null) {
-          await updateProposal(data, form.value['id']);
+        if (form.value['_id'] != null) {
+          await updateProposal(data, form.value['_id']);
         } else {
           await createProposal(data);
         }

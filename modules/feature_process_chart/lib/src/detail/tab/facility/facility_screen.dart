@@ -327,7 +327,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                         onTap: () => formArray.add(
                                           FormGroup(
                                             {
-                                              'id': FormControl<String>(),
+                                              '_id': FormControl<String>(),
                                               // ID
                                               'arrangePerson':
                                                   FormControl<String>(
@@ -593,7 +593,7 @@ class _FacilityScreenState extends State<FacilityScreen> {
                                             InkWell(
                                               onTap: () =>
                                                   formArray.add(FormGroup({
-                                                'id':
+                                                '_id':
                                                     FormControl<String>(), // ID
                                                 'accommodationName':
                                                     FormControl<String>(

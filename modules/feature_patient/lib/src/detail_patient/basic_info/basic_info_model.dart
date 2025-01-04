@@ -188,7 +188,7 @@ class BasicInformationModel {
 
     // formGroup.updateValue(data.toJson());
 
-    formGroup.control('id').value = data.id;
+    formGroup.control('_id').value = data.id;
     formGroup.control('familyNameRomanized').value = data.familyNameRomanized;
     formGroup.control('middleNameRomanized').value = data.middleNameRomanized;
     formGroup.control('firstNameRomanized').value = data.firstNameRomanized;
@@ -241,8 +241,8 @@ class BasicInformationModel {
         patient: patientData.value.requireData.id,
       );
 
-      if (form.control('id').value != null) {
-        await updatePatientNames(form, form.control('id').value, request);
+      if (form.control('_id').value != null) {
+        await updatePatientNames(form, form.control('_id').value, request);
       } else {
         await postPatientNames(form, request);
       }
@@ -317,7 +317,7 @@ class BasicInformationModel {
     required PatientNationality data,
     required FormGroup formGroup,
   }) {
-    formGroup.control('id').value = data.id;
+    formGroup.control('_id').value = data.id;
     formGroup.control('nationality').value = data.nationality;
     formGroup.control('nativeLanguage').value = data.nativeLanguage;
     formGroup.control('residentialArea').value = data.residentialArea;
@@ -343,7 +343,8 @@ class BasicInformationModel {
       );
     }
 
-    formGroup.control('chatQrImage').value = FileSelect(url: data.chatQrImage);
+    formGroup.control('chatQrImage').value =
+        data.chatQrImage == null ? null : FileSelect(url: data.chatQrImage);
   }
 
   // post PATIENT_NATIONALITIES
@@ -409,8 +410,8 @@ class BasicInformationModel {
       patient: patientData.value.requireData.id,
     );
 
-    if (form.control('id').value != null) {
-      await updatePatientNationalities(form, form.control('id').value, request);
+    if (form.control('_id').value != null) {
+      await updatePatientNationalities(form, form.control('_id').value, request);
     } else {
       await postPatientNationalities(form, request);
     }
@@ -458,7 +459,7 @@ class BasicInformationModel {
     PatientPassport? data,
     required FormGroup formGroup,
   }) {
-    formGroup.control('id').value = data?.id;
+    formGroup.control('_id').value = data?.id;
     formGroup.control('passportNumber').value = data?.passportNumber ?? '';
     formGroup.control('issueDate').value = data?.issueDate;
     formGroup.control('expirationDate').value = data?.expirationDate;
@@ -480,8 +481,8 @@ class BasicInformationModel {
       patient: patientData.value.requireData.id,
     );
 
-    if (form.control('id').value != null) {
-      await updatePatientPassports(form, form.control('id').value, request);
+    if (form.control('_id').value != null) {
+      await updatePatientPassports(form, form.control('_id').value, request);
     } else {
       await postPatientPassports(form, request);
     }
@@ -582,7 +583,7 @@ class BasicInformationModel {
     MedicalRecord? data,
     required FormGroup formGroup,
   }) {
-    formGroup.control('id').value = data?.id;
+    formGroup.control('_id').value = data?.id;
     formGroup.control('dateOfBirth').value = data?.dateOfBirth;
     formGroup.control('age').value = data?.age;
     formGroup.control('height').value = data?.height;
@@ -656,8 +657,8 @@ class BasicInformationModel {
         memo: form.control('memo').value,
         patient: patientData.value.requireData.id,
       );
-      if (form.control('id').value != null) {
-        await updateMedicalRecords(form, form.control('id').value, request);
+      if (form.control('_id').value != null) {
+        await updateMedicalRecords(form, form.control('_id').value, request);
       } else {
         await postMedicalRecords(form, request);
       }
@@ -730,7 +731,7 @@ class BasicInformationModel {
     MedicalRecordAgent? data,
     required FormGroup formGroup,
   }) {
-    formGroup.control('id').value = data?.id;
+    formGroup.control('_id').value = data?.id;
     formGroup.control('company').value = data?.company;
     formGroup.control('nameInKanji').value = data?.nameInKanji;
     formGroup.control('nameInKana').value = data?.nameInKana;
@@ -745,8 +746,8 @@ class BasicInformationModel {
       medicalRecord: medicalRecordId.value.requireData,
     );
 
-    if (form.control('id').value != null) {
-      await updateMedicalRecordAgents(form, form.control('id').value, request);
+    if (form.control('_id').value != null) {
+      await updateMedicalRecordAgents(form, form.control('_id').value, request);
     } else {
       await postMedicalRecordAgents(form, request);
     }
@@ -814,7 +815,7 @@ class BasicInformationModel {
     MedicalRecordReferrer? data,
     required FormGroup formGroup,
   }) {
-    formGroup.control('id').value = data?.id;
+    formGroup.control('_id').value = data?.id;
     formGroup.control('company').value = data?.company;
     formGroup.control('nameInKanji').value = data?.nameInKanji;
     formGroup.control('nameInKana').value = data?.nameInKana;
@@ -829,9 +830,9 @@ class BasicInformationModel {
       medicalRecord: medicalRecordId.value.requireData,
     );
 
-    if (form.control('id').value != null) {
+    if (form.control('_id').value != null) {
       await updateMedicalRecordReferrers(
-          form, form.control('id').value, request);
+          form, form.control('_id').value, request);
     } else {
       await postMedicalRecordReferrers(form, request);
     }
@@ -901,7 +902,7 @@ class BasicInformationModel {
     required MedicalRecordBudget data,
     required FormGroup formGroup,
   }) {
-    formGroup.control('id').value = data.id;
+    formGroup.control('_id').value = data.id;
     formGroup.control('budget').value = data.budget ?? 0;
     formGroup.control('remarks').value = data.remarks;
   }
@@ -930,8 +931,8 @@ class BasicInformationModel {
       medicalRecord: medicalRecordId.value.requireData,
     );
 
-    if (form.control('id').value != null) {
-      await updateMedicalRecordBudgets(form, form.control('id').value, request);
+    if (form.control('_id').value != null) {
+      await updateMedicalRecordBudgets(form, form.control('_id').value, request);
     } else {
       await postMedicalRecordBudgets(form, request);
     }
@@ -1010,7 +1011,7 @@ class BasicInformationModel {
 
           formArray.add(
             FormGroup({
-              'id': FormControl<String?>(
+              '_id': FormControl<String?>(
                 value: element.id,
               ),
               'leader': FormControl<bool>(
@@ -1088,7 +1089,9 @@ class BasicInformationModel {
               ),
               'chatToolLink': chatToolLink,
               'chatQrImage': FormControl<FileSelect>(
-                value: FileSelect(url: element.chatQrImage),
+                value: element.chatQrImage == null
+                    ? null
+                    : FileSelect(url: element.chatQrImage),
               ),
               'passportNumber': FormControl<String?>(
                 value: element.passportNumber,
@@ -1214,7 +1217,7 @@ class BasicInformationModel {
       for (var element in data) {
         formArray.add(
           FormGroup({
-            'id': FormControl<String?>(value: element.id),
+            '_id': FormControl<String?>(value: element.id),
             'hospitalName': FormControl<String>(value: element.hospitalName),
             'medicalCardNumber':
                 FormControl<String>(value: element.medicalCardNumber),
@@ -1248,12 +1251,12 @@ class BasicInformationModel {
             medicalRecord: medicalRecordId.value.requireData,
           );
 
-          if (element['id'] != null) {
+          if (element['_id'] != null) {
             if (element['hospitalName'].isEmpty &&
                 element['medicalCardNumber'].isEmpty) {
-              await deleteMedicalRecordHospitals(element['id']);
+              await deleteMedicalRecordHospitals(element['_id']);
             } else {
-              await updateMedicalRecordHospitals(element['id'], request);
+              await updateMedicalRecordHospitals(element['_id'], request);
             }
           } else {
             if (element['hospitalName'] != null &&
@@ -1381,7 +1384,7 @@ class BasicInformationModel {
     MedicalRecordInterpreter? data,
     required FormGroup formGroup,
   }) {
-    formGroup.control('id').value = data?.id;
+    formGroup.control('_id').value = data?.id;
     formGroup.control('requiredOrUnnnecessary').value =
         data?.requiredOrUnnnecessary == true ? '要' : '不要';
     formGroup.control('interpreter').value = data?.interpreter;
@@ -1425,9 +1428,9 @@ class BasicInformationModel {
       medicalRecord: medicalRecordId.value.requireData,
     );
 
-    if (control.control('id').value != null) {
+    if (control.control('_id').value != null) {
       await updateMedicalRecordInterpreters(
-          control.control('id').value, request);
+          control.control('_id').value, request);
     } else {
       await postMedicalRecordInterpreters(request);
     }
@@ -1457,7 +1460,7 @@ class BasicInformationModel {
 
   void insertMedicalRecordTravelGroups(
       {MedicalRecordTravelGroup? data, required FormGroup formGroup}) {
-    formGroup.control('id').value = data?.id;
+    formGroup.control('_id').value = data?.id;
     formGroup.control('toGroupLeader').value = data?.toGroupLeader;
 
     final type = formGroup.control('travelGroup') as FormArray;
@@ -1524,10 +1527,8 @@ class BasicInformationModel {
     try {
       medicalRecordCompanions.value =
           medicalRecordCompanions.value.copyWith(loading: true);
-      await form
-          .control('MEDICAL_RECORD_Companion')
-          .value
-          .forEach((element) async {
+
+      for (var element in form.control('MEDICAL_RECORD_Companion').value) {
         List<String?>? chatToolLink = [];
         if (element['chatToolLink'] != null) {
           for (var i = 0;
@@ -1598,12 +1599,13 @@ class BasicInformationModel {
           medicalRecord: medicalRecordId.value.requireData,
         );
 
-        if (element['id'] != null) {
-          await updateMedicalRecordCompanions(element['id'], request);
+        if (element['_id'] != null) {
+          await updateMedicalRecordCompanions(element['_id'], request);
         } else {
           await postMedicalRecordCompanions(request);
         }
-      });
+      }
+
       medicalRecordCompanions.value =
           medicalRecordCompanions.value.copyWith(loading: false);
     } catch (e) {
@@ -1626,7 +1628,8 @@ class BasicInformationModel {
     }
   }
 
-  ValueNotifier<AsyncData<bool>> deletePatient = ValueNotifier(const AsyncData());
+  ValueNotifier<AsyncData<bool>> deletePatient =
+      ValueNotifier(const AsyncData());
 
   Future<void> deletePatientData() async {
     try {

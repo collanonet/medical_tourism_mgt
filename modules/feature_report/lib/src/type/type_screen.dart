@@ -159,7 +159,7 @@ class _ReportTypeScreenState extends State<ReportTypeScreen> {
                                           onPressed: () {
                                             formArray.add(
                                               FormGroup({
-                                                'id': FormControl<String>(),
+                                                '_id': FormControl<String>(),
                                                 'typeName': FormControl<String>(
                                                   validators: [
                                                     Validators.required

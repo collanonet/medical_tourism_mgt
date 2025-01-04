@@ -348,7 +348,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                               InkWell(
                                 onTap: () => formArray.add(FormGroup(
                                   {
-                                    'id': FormControl<String>(),
+                                    '_id': FormControl<String>(),
                                     // ID
                                     'arrangePerson':
                                         FormControl<String>(value: ''),
@@ -943,7 +943,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                               InkWell(
                                 onTap: () => formArray.add(FormGroup(
                                   {
-                                    'id': FormControl<String>(),
+                                    '_id': FormControl<String>(),
                                     // ID
                                     'dateYearFrom': FormControl<DateTime>(),
                                     // 年月日（自）
@@ -1195,7 +1195,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                               InkWell(
                                 onTap: () => formArray.add(FormGroup(
                                   {
-                                    'id': FormControl<String>(),
+                                    '_id': FormControl<String>(),
                                     // ID
                                     'dateYearFrom': FormControl<DateTime>(),
                                     // 年月日（自）

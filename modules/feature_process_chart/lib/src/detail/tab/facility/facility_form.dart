@@ -6,7 +6,7 @@ FormGroup facilityForm() => FormGroup(
           [
             FormGroup(
               {
-                'id': FormControl<String>(), // ID
+                '_id': FormControl<String>(), // ID
                 'arrangePerson': FormControl<String>(value: ''), // 手配担当
                 'accommodationName': FormControl<String>(value: ''), // 施設名
                 'address': FormControl<String>(value: ''), // 所在地
@@ -28,11 +28,11 @@ FormGroup facilityForm() => FormGroup(
         ),
         'drop_in_facility': FormGroup(
           {
-            'id': FormControl<String>(),
+            '_id': FormControl<String>(),
             'arrangePerson': FormControl<String>(value: ''), // 手配担当
             'places': FormArray([
               FormGroup({
-                'id': FormControl<String>(), // ID
+                '_id': FormControl<String>(), // ID
                 'accommodationName': FormControl<String>(value: ''), // 施設名
                 'address': FormControl<String>(value: ''), // 所在地
                 'contactPersonName': FormControl<String>(value: ''), // 担当者名

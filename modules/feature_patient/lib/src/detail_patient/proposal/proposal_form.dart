@@ -5,7 +5,7 @@ FormGroup proposalForm() {
   return FormGroup({
     'proposal': FormArray([
       FormGroup({
-        'id': FormControl<String?>(),
+        '_id': FormControl<String?>(),
         'hospitalName': FormControl<String>(
           validators: [Validators.required],
         ),

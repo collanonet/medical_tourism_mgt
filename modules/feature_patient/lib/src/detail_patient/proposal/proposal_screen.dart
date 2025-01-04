@@ -168,7 +168,7 @@ class ProposalScreen extends StatelessWidget {
                                           if (formArray.controls
                                                       .indexOf(currentForm) !=
                                                   0 ||
-                                              currentForm.control('id').value !=
+                                              currentForm.control('_id').value !=
                                                   null) ...{
                                             IconButton(
                                               icon: const Icon(Icons.delete_forever,
@@ -199,7 +199,7 @@ class ProposalScreen extends StatelessWidget {
                           InkWell(
                             onTap: () => formArray.add(
                               FormGroup({
-                                'id': FormControl<String?>(),
+                                '_id': FormControl<String?>(),
                                 'hospitalName': FormControl<String>(
                                   validators: [Validators.required],
                                 ),

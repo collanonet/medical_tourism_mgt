@@ -85,7 +85,7 @@ class FacilityModel {
         formArray.add(
           FormGroup(
             {
-              'id': FormControl<String>(value: item.id), // ID
+              '_id': FormControl<String>(value: item.id), // ID
               'arrangePerson':
                   FormControl<String>(value: item.arrangePerson), // 手配担当
               'accommodationName':
@@ -152,13 +152,13 @@ class FacilityModel {
             hotel: null,
             tour: tourId.value,
           );
-          if (element['id'] == null) {
+          if (element['_id'] == null) {
             var result = await processChartRepository
                 .postDetailFacilityHospital(request);
             data.add(result);
           } else {
             var result = await processChartRepository.putDetailFacilityHospital(
-                element['id'], request);
+                element['_id'], request);
             data.map((e) => e.id == result.id ? result : e).toList();
           }
         },
@@ -198,7 +198,7 @@ class FacilityModel {
         places.add(
           FormGroup(
             {
-              'id': FormControl<String>(value: item.id),
+              '_id': FormControl<String>(value: item.id),
               'accommodationName':
                   FormControl<String>(value: item.accommodationName), // 施設名
               'address': FormControl<String>(value: item.address), // 所在地
@@ -213,7 +213,7 @@ class FacilityModel {
     }
 
     formGroup.control('arrangePerson').value = data.arrangePerson;
-    formGroup.control('id').value = data.id;
+    formGroup.control('_id').value = data.id;
   }
 
   ValueNotifier<AsyncData<DetailDropInFacilityResponse>>
@@ -237,7 +237,7 @@ class FacilityModel {
         },
       );
       DetailDropInFacilityResponse response;
-      if (formGroup.control('id').value == null) {
+      if (formGroup.control('_id').value == null) {
         response = await processChartRepository.postDetailFacilityDropIn(
           DetailDropInFacilityRequest(
             arrangePerson: formGroup.control('arrangePerson').value,
@@ -248,7 +248,7 @@ class FacilityModel {
         );
       } else {
         response = await processChartRepository.putDetailFacilityDropIn(
-          formGroup.control('id').value,
+          formGroup.control('_id').value,
           DetailDropInFacilityRequest(
             arrangePerson: formGroup.control('arrangePerson').value,
             places: places,

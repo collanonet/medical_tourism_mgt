@@ -93,7 +93,7 @@ class ProgressListModel {
         // Insert data for each group
         for (var record in records) {
           formArrayProgress.add(FormGroup({
-            'id': FormControl<String>(
+            '_id': FormControl<String>(
               value: record.id,
             ),
             'completed': FormControl<bool>(value: record.completed),
@@ -134,7 +134,7 @@ class ProgressListModel {
       FormArray formArrayProgress = FormArray([]);
       for (var item in titleList) {
         formArrayProgress.add(FormGroup({
-          'id': FormControl<String>(),
+          '_id': FormControl<String>(),
           'completed': FormControl<bool>(value: false),
           'key': FormControl<String>(),
           'tag': FormControl<String>(value: item.tag),
@@ -157,7 +157,7 @@ class ProgressListModel {
 
       for (var item in titleList) {
         formArrayProgress2.add(FormGroup({
-          'id': FormControl<String>(),
+          '_id': FormControl<String>(),
           'completed': FormControl<bool>(value: false),
           'key': FormControl<String>(),
           'tag': FormControl<String>(value: item.tag),
@@ -187,12 +187,12 @@ class ProgressListModel {
       for (var element in formGroup.control('progressList').value) {
         for (var progress in element['progress']) {
           logger.d(progress);
-          if (progress['id'] == null) {
+          if (progress['_id'] == null) {
             await patientRepository
                 .postMedicalRecordProgress(mapData(progress));
           } else {
             await patientRepository.putMedicalRecordProgress(
-                progress['id'], mapData(progress));
+                progress['_id'], mapData(progress));
           }
         }
       }
