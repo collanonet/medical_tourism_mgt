@@ -22,7 +22,7 @@ class EstimateMasterModel {
     try {
       estimateMasterData.value = const AsyncData(loading: true);
       final response = await reportRepository.getEstimatemasterReport();
-      logger.d("fetchEstimateMasterData");
+      logger.d('fetchEstimateMasterData');
       insertEstimateMaster(formGroup, response);
       estimateMasterData.value = AsyncData(data: response);
     } catch (e) {
@@ -33,7 +33,7 @@ class EstimateMasterModel {
 
   void insertEstimateMaster(
       FormGroup formGroup, List<EstimatemasterReportResponse>? data) {
-    logger.d("insertEstimateMaster");
+    logger.d('insertEstimateMaster');
     try{
       if (data!.isNotEmpty) {
         var estimateArray = formGroup.control('arr') as FormArray;

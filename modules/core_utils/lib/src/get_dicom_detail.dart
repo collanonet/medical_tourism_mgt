@@ -1,7 +1,11 @@
+// Dart imports:
 import 'dart:convert';
+
+// Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:dio/dio.dart';
 
+// Project imports:
 import '../core_utils.dart';
 
 Future<DicomDetailResponse?> getDICOMDetail(String id) async {

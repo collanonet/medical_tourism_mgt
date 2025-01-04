@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'necessary_in_japan_travel_info.g.dart';
 @JsonSerializable()
 class TravelInfo {

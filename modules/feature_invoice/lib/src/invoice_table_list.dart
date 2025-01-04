@@ -1,13 +1,14 @@
 // Flutter imports:
-import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import 'invoice_model.dart';
 
 class InvoiceTableList extends StatefulWidget {
@@ -166,7 +167,7 @@ class _InvoiceTableListState extends State<InvoiceTableList> {
                                             '${data?.patient?.firstNameChineseOrVietnamese ?? '-'} ${data?.patient?.middleNameChineseOrVietnamese ?? '-'} ${data?.patient?.familyNameChineseOrVietnamese ?? '-'} / ${data?.patient?.firstNameJapaneseForChinese ?? '-'} ${data?.patient?.middleNameJapaneseForChinese ?? '-'} ${data?.patient?.familyNameJapaneseForChinese ?? '-'} / ${data?.patient?.firstNameJapaneseForNonChinese ?? '-'} ${data?.patient?.middleNameJapaneseForNonChinese ?? '-'} ${data?.patient?.familyNameJapaneseForNonChinese ?? '-'} '),
                                       ],
                                     ),
-                                    SizedBox(width: 10),
+                                    const SizedBox(width: 10),
                                     boxRequired(
                                       enabled: data?.type ?? false,
                                       label: data?.type ?? false ? '精算書' : '見積書',

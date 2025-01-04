@@ -1,15 +1,15 @@
 // Flutter imports:
-import 'package:core_utils/async.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/async.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import 'estimate_master_model.dart';
 
 class EstimateMasterScreen extends StatefulWidget {
@@ -60,19 +60,19 @@ class _EstimateMasterScreenState extends State<EstimateMasterScreen> {
                       separatorBuilder: (context, index) => SizedBox(
                           height: context.appTheme.spacing.marginMedium),
                       children: [
-                        Row(
+                        const Row(
                           children: [
                             Expanded(child: SizedBox()),
                             SizedBox(
                               width: 316,
                               child: Center(
-                                  child: const OutlinedButton(
+                                  child: OutlinedButton(
                                       onPressed: null, child: Text('売値'))),
                             ),
                             SizedBox(
                               width: 316,
                               child: Center(
-                                  child: const OutlinedButton(
+                                  child: OutlinedButton(
                                       onPressed: null, child: Text('原価'))),
                             ),
                           ],

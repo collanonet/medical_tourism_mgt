@@ -1,13 +1,18 @@
+// Dart imports:
 import 'dart:async';
 import 'dart:convert';
+import 'dart:html' as html;
 import 'dart:typed_data';
 
-// ignore: avoid_web_libraries_in_flutter
-import 'dart:html' as html;
+// Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:dio/dio.dart';
 
+// Project imports:
 import '../core_utils.dart';
+
+// ignore: avoid_web_libraries_in_flutter
+
 
 Future<List<DicomDetailResponse>> uploadDICOMFile() async {
   html.FileUploadInputElement uploadInput = html.FileUploadInputElement();

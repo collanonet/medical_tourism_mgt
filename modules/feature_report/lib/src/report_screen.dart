@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:auto_route/auto_route.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
 // Project imports:
 import '../feature_report.gm.dart';

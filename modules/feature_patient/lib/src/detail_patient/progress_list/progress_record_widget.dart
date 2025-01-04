@@ -1,10 +1,9 @@
 // Flutter imports:
-import 'package:core_ui/widgets.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_ui/core_ui.dart';
-import 'package:intl/intl.dart';
+import 'package:core_ui/widgets.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class ProgressRecordWidget extends StatelessWidget {
@@ -65,7 +64,7 @@ class ProgressRecordWidget extends StatelessWidget {
           SizedBox(
             width: context.appTheme.spacing.marginMedium,
           ),
-          Expanded(
+          const Expanded(
               flex: 2,
               child: ReactiveDatePickerField(
                 formControlName: 'completionDate',

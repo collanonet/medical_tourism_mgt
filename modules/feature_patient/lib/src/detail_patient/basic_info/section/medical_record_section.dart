@@ -1,14 +1,12 @@
 // Flutter imports:
-import 'package:core_utils/async.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -260,7 +258,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
+                        const Expanded(
                           child: ReactiveDatePickerField(
                               formControlName: 'arrivalDate',
                               label: '来日日',
@@ -269,7 +267,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
-                        Expanded(
+                        const Expanded(
                           child: ReactiveDatePickerField(
                               formControlName: 'consultationDate',
                               label: '受診日',
@@ -278,7 +276,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
-                        Expanded(
+                        const Expanded(
                           child: ReactiveDatePickerField(
                               formControlName: 'returnDate',
                               label: '帰国日',
@@ -304,7 +302,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                         SizedBox(
                           width: context.appTheme.spacing.marginMedium,
                         ),
-                        Expanded(
+                        const Expanded(
                           child: ReactiveDatePickerField(
                               formControlName: 'receptionDate',
                               label: '受付日',
@@ -492,7 +490,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Expanded(
+                        const Expanded(
                           child: ReactiveDatePickerField(
                               formControlName: 'advancePaymentDate',
                               label: '前金受取日',

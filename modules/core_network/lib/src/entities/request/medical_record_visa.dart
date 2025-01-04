@@ -1,6 +1,9 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
+// Project imports:
 import '../../../entities.dart';
+
 part 'medical_record_visa.g.dart';
 
 @JsonSerializable()

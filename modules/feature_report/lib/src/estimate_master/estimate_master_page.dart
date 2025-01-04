@@ -10,7 +10,6 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
-import '../type/type_model.dart';
 import 'estimate_master_form.dart';
 import 'estimate_master_model.dart';
 import 'estimate_master_screen.dart';

@@ -1,11 +1,11 @@
 // Flutter imports:
-import 'package:core_utils/async.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/async.dart';
 import 'package:provider/provider.dart';
 
 // Project imports:

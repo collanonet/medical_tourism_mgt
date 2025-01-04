@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -119,7 +118,7 @@ class Popup extends StatelessWidget {
                     '発行日',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  IntrinsicWidth(
+                  const IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveDatePickerField(
                       formControlName: 'dateOfIssue',
@@ -141,7 +140,7 @@ class Popup extends StatelessWidget {
                     '支払期限',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  IntrinsicWidth(
+                  const IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveDatePickerField(
                       formControlName: 'dateOfPayment',
@@ -179,7 +178,7 @@ class Popup extends StatelessWidget {
                     '入金日',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  IntrinsicWidth(
+                  const IntrinsicWidth(
                     stepWidth: 300,
                     child: ReactiveDatePickerField(
                       formControlName: 'paymentDay',

@@ -1,18 +1,16 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
+import 'invoice_form.dart';
 import 'invoice_model.dart';
 import 'invoice_table_list.dart';
-import 'invoice_form.dart';
 
 class InvoiceScreen extends StatelessWidget {
   const InvoiceScreen({super.key});
@@ -106,7 +104,7 @@ class InvoiceScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      IntrinsicWidth(
+                      const IntrinsicWidth(
                         stepWidth: 200,
                         child: ReactiveDatePickerField(
                           formControlName: 'issue_date_from',
@@ -118,7 +116,7 @@ class InvoiceScreen extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      IntrinsicWidth(
+                      const IntrinsicWidth(
                         stepWidth: 200,
                         child: ReactiveDatePickerField(
                           formControlName: 'issue_date_to',

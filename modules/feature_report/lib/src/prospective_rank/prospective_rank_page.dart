@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:feature_report/src/prospective_rank/prospective_rank_model.dart';
 import 'package:flutter/cupertino.dart';
 
 // Package imports:
@@ -11,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
-import '../type/type_model.dart';
+import 'prospective_rank_model.dart';
 import 'prospective_rank_form.dart';
 import 'prospective_rank_screen.dart';
 

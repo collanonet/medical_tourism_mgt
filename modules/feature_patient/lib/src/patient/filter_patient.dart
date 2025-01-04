@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,7 +6,6 @@ import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -208,7 +206,7 @@ class PatientFilter extends StatelessWidget {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              ReactiveDatePickerField(
+                              const ReactiveDatePickerField(
                                   formControlName: 'dateOfEntryfrom',
                                   ),
                             ],
@@ -231,7 +229,7 @@ class PatientFilter extends StatelessWidget {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              ReactiveDatePickerField(
+                              const ReactiveDatePickerField(
                                   formControlName: 'dateOfEntryto',
                                   ),
                             ],
@@ -251,7 +249,7 @@ class PatientFilter extends StatelessWidget {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              ReactiveDatePickerField(
+                              const ReactiveDatePickerField(
                                   formControlName: 'medicalDayfrom',
                                   ),
                             ],
@@ -274,7 +272,7 @@ class PatientFilter extends StatelessWidget {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              ReactiveDatePickerField(
+                              const ReactiveDatePickerField(
                                   formControlName: 'medicalDayto',
                                   ),
                             ],
@@ -294,7 +292,7 @@ class PatientFilter extends StatelessWidget {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              ReactiveDatePickerField(
+                              const ReactiveDatePickerField(
                                   formControlName: 'returnDatefrom',
                                   ),
                             ],
@@ -317,7 +315,7 @@ class PatientFilter extends StatelessWidget {
                                 height:
                                     context.appTheme.spacing.marginExtraSmall,
                               ),
-                              ReactiveDatePickerField(
+                              const ReactiveDatePickerField(
                                   formControlName: 'returnDateto',
                                   ),
                             ],

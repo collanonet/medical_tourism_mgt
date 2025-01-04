@@ -1,16 +1,14 @@
 // Flutter imports:
-import 'package:core_network/core_network.dart';
-import 'package:core_ui/resources.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // Package imports:
+import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -50,7 +48,7 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                           SizedBox(
                             height: context.appTheme.spacing.marginMedium,
                           ),
-                          IntrinsicWidth(
+                          const IntrinsicWidth(
                             stepWidth: 200,
                             child: ReactiveDatePickerField(
                               formControlName: 'entryDate',
@@ -92,7 +90,7 @@ class _ShortSummaryScreenState extends State<ShortSummaryScreen> {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    Expanded(
+                                    const Expanded(
                                       child: ReactiveDatePickerField(
                                         formControlName: 'dateOfBirth',
                                         label: '生年月日',

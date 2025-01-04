@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -8,7 +7,6 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -156,7 +154,7 @@ class _DetailPatientWebReservationScreenState
                                     children: [
                                       Row(
                                         children: [
-                                          Expanded(
+                                          const Expanded(
                                             child: ReactiveDatePickerField(
                                               formControlName: 'preferredDate1',
                                               label: '第１希望',
@@ -166,7 +164,7 @@ class _DetailPatientWebReservationScreenState
                                             width: context
                                                 .appTheme.spacing.marginMedium,
                                           ),
-                                          Expanded(
+                                          const Expanded(
                                             child: ReactiveDatePickerField(
                                               formControlName: 'preferredDate2',
                                               label: '第２希望',
@@ -176,7 +174,7 @@ class _DetailPatientWebReservationScreenState
                                             width: context
                                                 .appTheme.spacing.marginMedium,
                                           ),
-                                          Expanded(
+                                          const Expanded(
                                             child: ReactiveDatePickerField(
                                               formControlName: 'preferredDate3',
                                               label: '第３希望',
@@ -1086,7 +1084,7 @@ class _DetailPatientWebReservationScreenState
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              IntrinsicWidth(
+                              const IntrinsicWidth(
                                 stepWidth: 250,
                                 child: ReactiveDatePickerField(
                                   formControlName: 'testCallDate',

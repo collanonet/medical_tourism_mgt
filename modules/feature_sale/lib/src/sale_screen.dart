@@ -167,13 +167,13 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                         ],
                                       ),
                                       const SizedBox(width: 20),
-                                      Column(
+                                      const Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          const Text('入金日'),
+                                          Text('入金日'),
                                           IntrinsicWidth(
                                             stepWidth: 200,
                                             child: ReactiveDatePickerField(
@@ -198,13 +198,13 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                         ],
                                       ),
                                       const SizedBox(width: 20),
-                                      Column(
+                                      const Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          const Text('精算日'),
+                                          Text('精算日'),
                                           IntrinsicWidth(
                                             stepWidth: 200,
                                             child: ReactiveDatePickerField(

@@ -1,7 +1,12 @@
+// Dart imports:
 import 'dart:html' as html;
 import 'dart:js_util' as js_util;
 import 'dart:ui' as ui;
+
+// Flutter imports:
 import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:file_picker/file_picker.dart';
 
 class DICOMViewerPage extends StatefulWidget {

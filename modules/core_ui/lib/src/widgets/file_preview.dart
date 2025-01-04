@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 // Package imports:
 import 'package:core_utils/core_utils.dart';
 
+// Project imports:
 import '../../resources.dart';
 import 'avatar.dart';
 

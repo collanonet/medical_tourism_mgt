@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'getting_final_ticket_back.g.dart';
 @JsonSerializable()
 class TicketBack {

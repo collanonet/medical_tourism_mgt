@@ -1,6 +1,9 @@
 // ignore: avoid_web_libraries_in_flutter
+
+// Flutter imports:
 import 'package:flutter/material.dart';
 
+// Project imports:
 import '../core_utils.dart';
 
 class DicomWebViewer extends StatelessWidget {

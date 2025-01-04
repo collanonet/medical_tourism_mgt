@@ -1,8 +1,14 @@
+// Dart imports:
 import 'dart:io';
+
+// Flutter imports:
 import 'package:flutter/foundation.dart';
+
+// Package imports:
 import 'package:htmltopdfwidgets/htmltopdfwidgets.dart';
 import 'package:path_provider/path_provider.dart';
 
+// Project imports:
 import '../core_utils.dart';
 
 Future<dynamic> generatePdfFromHtml(String htmlContent) async {

@@ -1,8 +1,8 @@
 // Flutter imports:
-import 'package:core_network/core_network.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
+import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 
 class MessageScreen extends StatefulWidget {

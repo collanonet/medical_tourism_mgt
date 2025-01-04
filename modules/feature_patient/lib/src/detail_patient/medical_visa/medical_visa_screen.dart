@@ -1,15 +1,16 @@
 // Flutter imports:
-import 'package:core_utils/async.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import 'medical_visa_model.dart';
 import 'section/after_getting_visa.dart';
 import 'section/after_getting_visa_final.dart';

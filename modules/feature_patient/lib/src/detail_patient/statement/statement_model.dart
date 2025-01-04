@@ -1,15 +1,17 @@
-// Flutter imports:
+// Dart imports:
 import 'dart:convert';
+
+// Flutter imports:
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:core_utils/core_utils.dart';
 
 // Package imports:
 import 'package:core_network/core_network.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:data_patient/data_patient.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
@@ -438,8 +440,7 @@ Future<Uint8List?> generatePdfFromInvoice(
     case 'ZHTW':
       fontData = (await rootBundle.load('assets/fonts/Noto_Sans_TC.ttf'))
           .buffer
-          .asUint8List();
-      ;
+          .asUint8List(); {}
       break;
     case 'VN':
       fontData = (await rootBundle.load('assets/fonts/Roboto_VN.ttf'))

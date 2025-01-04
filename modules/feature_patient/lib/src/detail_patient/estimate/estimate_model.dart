@@ -1,13 +1,15 @@
-// Flutter imports:
+// Dart imports:
 import 'dart:async';
 import 'dart:convert';
+
+// Flutter imports:
+import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 
 // Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:data_patient/data_patient.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
 import 'package:injectable/injectable.dart';
 import 'package:pdf/pdf.dart';
 import 'package:pdf/widgets.dart' as pw;
@@ -644,7 +646,7 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
   if (request != null) {
     switch (language) {
       case 'JP':
-        title = '御　見　積　書';
+        title = '御見積書';
         subTitle = '下記の通り御見積りいたします。ご用命の程宜しくお願い申し上げます。';
         quotationNumberLabel = '見積番号: ';
         quotationDateLabel = '見積日: ';
@@ -652,7 +654,7 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
         tableHeaders = ['', '項目', '数', '量', '単価', '金額'];
         subTotalLabel = '計';
         taxLabel = '消費税';
-        totalLabel = '合　　計';
+        totalLabel = '合計';
         remarksLabel = '【特記事項】';
         inCharge = '担当';
         mr = '氏/様';
@@ -740,7 +742,7 @@ Future<Uint8List?> generatePdfFromQuotation(Patient patient, String language,
         tableHeaders = ['', '項目', '数', '量', '単価', '金額'];
         subTotalLabel = '計';
         taxLabel = '消費税';
-        totalLabel = '合　　計';
+        totalLabel = '合計';
         remarksLabel = '【特記事項】';
         inCharge = '担当';
         mr = '氏/様';

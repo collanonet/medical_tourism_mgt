@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -85,7 +84,7 @@ class Popup extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
-                  IntrinsicWidth(
+                  const IntrinsicWidth(
                       stepWidth: 300,
                       child: ReactiveDatePickerField(
                         formControlName: 'updatedOn',

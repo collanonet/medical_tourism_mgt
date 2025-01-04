@@ -1,7 +1,10 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
+// Project imports:
 import 'medical_visa_after_getting_visa_response.dart';
 import 'medical_visa_required_in_japan_response.dart';
+
 part 'medical_visa_travel_companion_response.g.dart';
 
 @JsonSerializable()

@@ -1,10 +1,13 @@
+// Dart imports:
 import 'dart:convert';
 import 'dart:html' as html;
+
+// Package imports:
+import 'package:http/http.dart' as http;
 import 'package:intl/intl.dart';
 import 'package:jiffy/jiffy.dart';
 
-import 'package:http/http.dart' as http;
-
+// Project imports:
 import '../core_utils.dart';
 
 /// A utility class for working with strings.

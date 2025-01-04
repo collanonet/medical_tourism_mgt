@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'visa_info.g.dart';
 
 @JsonSerializable()

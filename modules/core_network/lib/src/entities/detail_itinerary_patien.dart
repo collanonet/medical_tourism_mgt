@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'detail_itinerary_patien.g.dart';
 @JsonSerializable()
 class PatientItinerary {

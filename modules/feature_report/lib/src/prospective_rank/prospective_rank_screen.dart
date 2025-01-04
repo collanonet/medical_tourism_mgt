@@ -1,17 +1,16 @@
 // Flutter imports:
-import 'package:core_utils/async.dart';
-import 'package:feature_report/src/prospective_rank/prospective_rank_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
-import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:flutter/widgets.dart';
+import 'package:core_utils/async.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
+
+// Project imports:
+import 'prospective_rank_model.dart';
 
 class ProspectivePankScreen extends StatefulWidget {
   const ProspectivePankScreen({super.key});
@@ -265,7 +264,7 @@ class _ProspectivePankScreenState extends State<ProspectivePankScreen> {
                                   : null,
                               child: WithLoadingButton(
                                 isLoading: submit.loading,
-                                child: Text(
+                                child: const Text(
                                   '作成する',
                                   style: TextStyle(
                                     fontFamily: 'NotoSansJP',

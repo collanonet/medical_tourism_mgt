@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -7,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -122,7 +120,7 @@ class _MedicalRecordPassportSectionState
                           ],
                         ),
                       ),
-                      Expanded(
+                      const Expanded(
                         child: ReactiveDatePickerField(
                             formControlName: 'issueDate',
                             label: '発行日',
@@ -138,15 +136,15 @@ class _MedicalRecordPassportSectionState
                         width: context.appTheme.spacing.marginMedium,
                       );
                     },
-                    children: [
+                    children: const [
                       Expanded(
                         child: ReactiveDatePickerField(
                             formControlName: 'expirationDate',
                             label: '有効期限',
                             ),
                       ),
-                      const Expanded(child: SizedBox()),
-                      const Expanded(child: SizedBox()),
+                      Expanded(child: SizedBox()),
+                      Expanded(child: SizedBox()),
                     ],
                   ),
                   RowSeparated(
