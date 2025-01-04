@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -7,7 +8,24 @@ import 'package:flutter/services.dart';
 import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+/// A reactive form field widget that provides both manual date input and calendar picker functionality.
+///
+/// This widget combines a text input field for manual date entry with a calendar picker,
+/// integrated into a reactive form structure. It supports date validation and formatting
+/// in the YYYY/MM/DD format.
+///
+/// Example usage:
+/// ```dart
+/// ReactiveDatePickerField(
+///   formControlName: 'birthDate',
+///   label: 'Date of Birth',
+///   helperText: 'Enter your birth date',
+/// )
+/// ```
 class ReactiveDatePickerField extends StatefulWidget {
+  /// Creates a reactive date picker field.
+  ///
+  /// The [formControlName] parameter is required to bind this field to a reactive form control.
   const ReactiveDatePickerField({
     super.key,
     this.onChanged,
@@ -20,13 +38,31 @@ class ReactiveDatePickerField extends StatefulWidget {
     this.lastDate,
   });
 
+  /// Callback function triggered when the date value changes.
   final Function(FormControl<DateTime>)? onChanged;
+
+  /// Callback function triggered when the field is submitted.
   final Function(FormControl<DateTime>)? onSubmitted;
+
+  /// The label text displayed above the input field.
   final String? label;
+
+  /// Helper text displayed below the input field.
   final String? helperText;
+
+  /// The name of the form control to bind this field to.
   final String formControlName;
+
+  /// The earliest date that can be selected.
+  /// Defaults to year 1900 if not specified.
   final DateTime? firstDate;
+
+  /// The initial date to display when the picker is shown.
+  /// Defaults to current date if not specified.
   final DateTime? initialDate;
+
+  /// The latest date that can be selected.
+  /// Defaults to year 2100 if not specified.
   final DateTime? lastDate;
 
   @override
@@ -54,13 +90,11 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
     final formGroup = ReactiveForm.of(context) as FormGroup?;
 
     if (formGroup == null) {
-      // If formGroup is still null, it means the form isn't ready yet.
       return;
     }
 
     final control = formGroup.control(widget.formControlName);
 
-    // Set initial text if control already has a value
     final currentValue = control.value;
     if (currentValue != null) {
       _dateController.text = dateFormat.format(currentValue);
@@ -104,8 +138,7 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
     return null;
   }
 
-
-
+  final inputFormatter = InputFormatter();
   @override
   Widget build(BuildContext context) {
     return ReactiveDatePicker(
@@ -113,7 +146,7 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
       firstDate: widget.firstDate ?? DateTime(1900),
       initialDate: widget.initialDate ?? DateTime.now(),
       lastDate: widget.lastDate ?? DateTime(2100),
-      initialEntryMode: DatePickerEntryMode.input,
+      initialEntryMode: DatePickerEntryMode.calendar,
       builder: (context, picker, child) {
         return Form(
           key: _formKey,
@@ -123,6 +156,7 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
             autovalidateMode: AutovalidateMode.onUserInteraction,
             inputFormatters: [
               FilteringTextInputFormatter.allow(RegExp(r'[0-9/]')),
+              inputFormatter.dateFormatter,
             ],
             validator: _validateDate,
             onChanged: validate,

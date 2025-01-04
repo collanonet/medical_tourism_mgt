@@ -345,13 +345,11 @@ class DetailPatientWebReservationModel {
       ValueNotifier(const AsyncData());
 
   void getReservationAll({
-    String? hospitalId,
     String? patientId,
   }) async {
     try {
       webBookings.value = const AsyncData(loading: true);
       final result = await repository.webBookingGetReservationAll(
-        hospitalId: hospitalId,
         patientId: patientId,
       );
       webBookings.value = AsyncData(data: result);

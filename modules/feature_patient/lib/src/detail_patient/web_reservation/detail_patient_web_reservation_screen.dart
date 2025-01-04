@@ -1,4 +1,6 @@
 // Flutter imports:
+import 'package:auto_route/auto_route.dart';
+import 'package:feature_web_appointment/feature_web_appointment.gm.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -1202,12 +1204,15 @@ class _DetailPatientWebReservationScreenState
                                     titleHeader: const Text('状況'),
                                   ),
                                   HeaderTableData(
+                                    flex: 2,
                                     titleHeader: const Text('医療機関'),
                                   ),
                                   HeaderTableData(
+                                    flex: 2,
                                     titleHeader: const Text('予約日'),
                                   ),
                                   HeaderTableData(
+                                    flex: 2,
                                     titleHeader: const Text('テストコール'),
                                   ),
                                 ],
@@ -1217,38 +1222,24 @@ class _DetailPatientWebReservationScreenState
                                     final data = value.data![index];
                                     return RowTableData(
                                       onTap: () {
-                                        // context
-                                        //     .read<
-                                        //         DetailPatientWebReservationModel>()
-                                        //     .selectReservation(
-                                        //       data,
-                                        //     );
+                                        context.router.push(
+                                          WebAppointmentDetailRoute(
+                                            id: data.id,
+                                          ),
+                                        );
                                       },
                                       cell: [
-                                        Row(
-                                          children: [
-                                            Text(
-                                              '${index + 1}',
-                                              style: context
-                                                  .textTheme.titleLarge
-                                                  ?.copyWith(
-                                                      color: context.appTheme
-                                                          .primaryColor),
-                                            ),
-                                            SizedBox(
-                                              width: context.appTheme.spacing
-                                                  .marginMedium,
-                                            ),
-                                            SizedBox(
-                                              width: context.appTheme.spacing
-                                                  .marginMedium,
-                                            ),
-                                          ],
+                                        Text(
+                                          '${index + 1}',
+                                          style: context
+                                              .textTheme.titleSmall
+                                              ?.copyWith(
+                                                  color: context.appTheme
+                                                      .primaryColor),
                                         ),
                                         Text(
-                                          data.hospital?.hospitalNameKatakana ??
-                                              '',
-                                          style: context.textTheme.titleLarge
+                                          '${data.hospital?.hospitalNameKatakana ?? '-'}${data.hospital?.hospitalNameKatakana == null ? '' : '\n'}${data.hospital?.hospitalNameChinese ?? ' - '}',
+                                          style: context.textTheme.titleSmall
                                               ?.copyWith(
                                                   color: context
                                                       .appTheme.primaryColor),
@@ -1361,13 +1352,8 @@ class _DetailPatientWebReservationScreenState
                   inputFormatters: [
                     formatter.timeFormatter,
                   ],
-                  onChanged: (value) {
-                    if (value.value != null) {
-                      var time = processTimeInput(value.value!);
-                      control.value = time;
-                    }
-                  },
                   decoration: const InputDecoration(
+                    hintText: '00:00',
                     label: Text(
                       '時間帯（自）',
                     ),
@@ -1392,16 +1378,11 @@ class _DetailPatientWebReservationScreenState
                   inputFormatters: [
                     formatter.timeFormatter,
                   ],
-                  onChanged: (value) {
-                    if (value.value != null) {
-                      var time = processTimeInput(value.value!);
-                      control.value = time;
-                    }
-                  },
                   decoration: const InputDecoration(
                     label: Text(
                       '時間帯（至）',
                     ),
+                    hintText: '00:00',
                   ),
                 );
               }),

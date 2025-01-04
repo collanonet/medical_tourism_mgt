@@ -10,6 +10,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 // Project imports:
 import '../images/network_image_provider.dart';
 
+/// Defines the available sizes for the avatar widget.
 enum AvatarSize {
   small,
   medium,
@@ -17,6 +18,7 @@ enum AvatarSize {
   extraLarge,
 }
 
+/// Mapping of avatar sizes to their corresponding dimensions in logical pixels.
 const _avatarSizes = {
   AvatarSize.small: 38.0,
   AvatarSize.medium: 48.0,
@@ -24,7 +26,31 @@ const _avatarSizes = {
   AvatarSize.extraLarge: 76.0,
 };
 
+/// A versatile avatar widget that can display images from various sources.
+///
+/// Supports displaying images from:
+/// - Network URLs
+/// - Local files
+/// - Asset images
+///
+/// Features:
+/// - Multiple predefined sizes
+/// - Optional badge overlay
+/// - Custom border and shape
+/// - Tap handling
+/// - Placeholder support
+///
+/// Example usage:
+/// ```dart
+/// Avatar.network(
+///   'https://example.com/avatar.jpg',
+///   placeholder: AssetImage('assets/default_avatar.png'),
+///   size: AvatarSize.medium,
+///   onTap: () => print('Avatar tapped'),
+/// )
+/// ```
 class Avatar extends StatelessWidget {
+  /// Creates an avatar widget with common properties.
   const Avatar._({
     required this.placeholder,
     required this.imageProvider,
@@ -36,15 +62,31 @@ class Avatar extends StatelessWidget {
     this.customSize,
   });
 
+  /// The size preset for the avatar.
   final AvatarSize size;
+
+  /// The image provider for the avatar content.
   final ImageProvider? imageProvider;
+
+  /// Fallback image to display when the main image is unavailable.
   final AssetImage placeholder;
+
+  /// Callback function when the avatar is tapped.
   final VoidCallback? onTap;
+
+  /// Optional widget to display as a badge overlay.
   final Widget? badge;
+
+  /// Optional border decoration for the avatar.
   final BoxBorder? border;
+
+  /// Shape of the avatar (circle or rectangle).
   final BoxShape? shape;
+
+  /// Optional custom size override.
   final Size? customSize;
 
+  /// Creates an avatar widget displaying a network image.
   static Widget network(
     String? url, {
     required AssetImage placeholder,
@@ -86,6 +128,7 @@ class Avatar extends StatelessWidget {
     });
   }
 
+  /// Creates an avatar widget displaying an image from a local file.
   factory Avatar.file(
     File? file, {
     required AssetImage placeholder,
@@ -106,6 +149,7 @@ class Avatar extends StatelessWidget {
     );
   }
 
+  /// Creates an avatar widget displaying an asset image.
   factory Avatar.asset({
     required AssetImage placeholder,
     AvatarSize? size,
