@@ -5,6 +5,7 @@ part 'agent_manager_contact_request.g.dart';
 
 @JsonSerializable()
 class AgentManagerContactRequest {
+  @JsonKey(name: '_id')
   String? id;
   String? howToContact;
   String? howToContactQrCode;
