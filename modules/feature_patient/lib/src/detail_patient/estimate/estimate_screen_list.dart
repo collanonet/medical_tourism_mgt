@@ -17,8 +17,8 @@ class EstimateScreenList extends StatefulWidget {
 
 class _EstimateScreenListState extends State<EstimateScreenList> {
   ValueNotifier<List<String>> selected = ValueNotifier([]);
-  @override
 
+  @override
   @override
   Widget build(BuildContext context) {
     var formGroup = ReactiveForm.of(context) as FormGroup;
@@ -60,45 +60,25 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                       child: Text(
                     '書類番号', // Document Number
                     style: context.textTheme.bodySmall,
+                    textAlign: TextAlign.left,
                   )),
                   Expanded(
                       child: Text(
                     '種別', // type
                     style: context.textTheme.bodySmall,
+                    textAlign: TextAlign.left,
                   )),
                   Expanded(
                       child: Text(
                     '宛先', // address
                     style: context.textTheme.bodySmall,
+                    textAlign: TextAlign.left,
                   )),
                   Expanded(
-                      child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      '発行日', // Issue date
-                      style: context.textTheme.bodySmall,
-                    ),
-                  )),
-                  Expanded(
-                      flex: 2,
                       child: Text(
-                        '件名', // subject
-                        style: context.textTheme.bodySmall,
-                      )),
-                  Expanded(
-                      child: Text(
-                    'エージェントへ開示', // Disclosure to Agent
+                    '発行日', // Issue date
                     style: context.textTheme.bodySmall,
-                  )),
-                  Expanded(
-                      child: Text(
-                    '患者へ開示', // Disclosure to patients
-                    style: context.textTheme.bodySmall,
-                  )),
-                  Expanded(
-                      child: Text(
-                    '見込み', // Prospects
-                    style: context.textTheme.bodySmall,
+                    textAlign: TextAlign.left,
                   )),
                   Expanded(
                     child: SizedBox(
@@ -218,6 +198,7 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                           )),
                           Expanded(
                             child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
                                   padding: EdgeInsets.symmetric(
@@ -248,55 +229,32 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                               child: Text(
                             data?.address ?? '',
                             style: context.textTheme.bodySmall,
+                            textAlign: TextAlign.left,
                           )),
                           Expanded(
-                              child: Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 18),
-                            child: Text(
-                              data?.invoiceDate != null
-                                  ? Dates.formatFullDate(data!.invoiceDate!)
-                                  : '',
-                              style: context.textTheme.bodySmall,
+                              child: Text(
+                            data?.invoiceDate != null
+                                ? Dates.formatFullDate(data!.invoiceDate!)
+                                : '',
+                            style: context.textTheme.bodySmall,
+                            textAlign: TextAlign.left,
+                          )),
+                          Expanded(
+                            child: Row(
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    context.read<EstimateModel>().editQuotation(
+                                          invoice: data!,
+                                          formGroup: formGroup,
+                                        );
+                                  },
+                                  child: const Text(
+                                    '編集',
+                                  ),
+                                )
+                              ],
                             ),
-                          )),
-                          Expanded(
-                              flex: 3,
-                              child: Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Text(
-                                  '--',
-                                  style: context.textTheme.bodySmall,
-                                ),
-                              )),
-                          Expanded(
-                              child: Text(
-                            '--',
-                            style: context.textTheme.bodySmall,
-                          )),
-                          Expanded(
-                              child: Text(
-                            '--',
-                            style: context.textTheme.bodySmall,
-                          )),
-                          Expanded(
-                              child: Text(
-                            '--',
-                            style: context.textTheme.bodySmall,
-                          )),
-                          Row(
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  context.read<EstimateModel>().editQuotation(
-                                        invoice: data!,
-                                        formGroup: formGroup,
-                                      );
-                                },
-                                child: const Text(
-                                  '編集',
-                                ),
-                              )
-                            ],
                           )
                         ],
                       ),
@@ -457,15 +415,14 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                                                     TextButton(
                                                       onPressed: () {
                                                         setState(() {
-                                                            context
-                                                            .read<
-                                                                EstimateModel>()
-                                                            .moveToInvoice(
-                                                                sels);
-                                                        Navigator.of(context)
-                                                            .pop();
+                                                          context
+                                                              .read<
+                                                                  EstimateModel>()
+                                                              .moveToInvoice(
+                                                                  sels);
+                                                          Navigator.of(context)
+                                                              .pop();
                                                         });
-                                                        
                                                       },
                                                       child: const Text('移動する'),
                                                     ),
