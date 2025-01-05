@@ -15,12 +15,13 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'material_model.dart';
 import 'materials_form.dart';
 import 'popup.dart';
-import 'preview_file.dart';
 import 'view_popup.dart';
 
 class MaterialSection extends StatefulWidget {
   const MaterialSection({super.key, required this.id});
+
   final String id;
+
   @override
   State<MaterialSection> createState() => MaterialSectionState();
 }
@@ -222,7 +223,16 @@ class MaterialSectionState extends State<MaterialSection> {
                               final data = value.data?[index];
                               return InkWell(
                                 onTap: () {
-                                  showPreviewFile(context, data!);
+                                  showDialog(
+                                    context: context,
+                                    builder: (_) => AlertDialog(
+                                      content: PreviewFile(
+                                        fileSelect: FileSelect(
+                                          url: data?.file,
+                                        ),
+                                      ),
+                                    ),
+                                  );
                                 },
                                 child: Row(
                                   children: [
@@ -402,18 +412,6 @@ class MaterialSectionState extends State<MaterialSection> {
               );
             }),
       ],
-    );
-  }
-
-  void showPreviewFile(BuildContext context, MaterialHospitalResponse data) {
-    showDialog(
-      context: context,
-      builder: (_) => Provider.value(
-        value: context.read<MaterialsModel>(),
-        child: AlertDialog(
-          content: PreviewFile(data: data),
-        ),
-      ),
     );
   }
 

@@ -32,9 +32,7 @@ class DetailPatientWebReservationModel {
         formGroup.control('patientName').value =
             '${patient.value.requireData.firstNameRomanized} ${patient.value.requireData.middleNameRomanized} ${patient.value.requireData.familyNameRomanized}';
         getBookingByPatientId(patient.value.requireData.id);
-        getReservationAll(
-          patientId: id,
-        );
+        getReservationAll();
       }
     } catch (e) {
       logger.e(e);
@@ -245,6 +243,8 @@ class DetailPatientWebReservationModel {
     } catch (e) {
       logger.e(e);
       submit.value = AsyncData(error: e);
+    } finally {
+      getReservationAll();
     }
   }
 
@@ -344,13 +344,11 @@ class DetailPatientWebReservationModel {
   ValueNotifier<AsyncData<List<WebBookingMedicalRecordResponse>>> webBookings =
       ValueNotifier(const AsyncData());
 
-  void getReservationAll({
-    String? patientId,
-  }) async {
+  void getReservationAll() async {
     try {
       webBookings.value = const AsyncData(loading: true);
       final result = await repository.webBookingGetReservationAll(
-        patientId: patientId,
+        patientId: patient.value.requireData.id,
       );
       webBookings.value = AsyncData(data: result);
     } catch (e) {
@@ -359,7 +357,7 @@ class DetailPatientWebReservationModel {
     }
   }
 
-    Future<void> updateBooking() async {
+  Future<void> updateBooking() async {
     try {
       TreamentRequest data;
 

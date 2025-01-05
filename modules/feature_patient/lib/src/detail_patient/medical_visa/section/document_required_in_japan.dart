@@ -1017,12 +1017,12 @@ class DocumentRequired extends StatelessWidget {
                   builder: (context, control, _) {
                     return InkWell(
                       onTap: () {
-                        if (control.value?.url != null ||
-                            control.value?.filename != null) {
-                          openUrlInBrowser(
-                              fileName: control.value?.url ??
-                                  control.value!.filename!);
-                        }
+                        showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            content: PreviewFile(fileSelect: control.value),
+                          ),
+                        );
                       },
                       child: Text(
                         control.value?.url ??

@@ -6,9 +6,9 @@ import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 
 class PreviewFile extends StatelessWidget {
-  const PreviewFile({super.key, required this.data});
+  const PreviewFile({super.key,required this.fileSelect});
 
-  final MaterialHospitalResponse data;
+  final FileSelect? fileSelect;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class PreviewFile extends StatelessWidget {
             Icons.close,
           ),
         ),
-        FilePreview(fileName: data.file!),
+        FilePreview(fileSelect: fileSelect),
       ],
     );
   }

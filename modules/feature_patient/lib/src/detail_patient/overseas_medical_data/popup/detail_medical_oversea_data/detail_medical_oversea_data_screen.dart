@@ -15,8 +15,10 @@ class DetailMedicalOverseaDataScreen extends StatefulWidget {
     required this.medicalRecordOverseaDatas,
     required this.index,
   });
+
   final int index;
   final List<MedicalRecordOverseaData> medicalRecordOverseaDatas;
+
   @override
   State<DetailMedicalOverseaDataScreen> createState() =>
       _DetailMedicalOverseaDataScreenState();
@@ -32,17 +34,13 @@ class _DetailMedicalOverseaDataScreenState
     '四川大学華西病院_DICOM',
   ];
 
-  late List<Widget> pages;
-
-
   @override
   void initState() {
     super.initState();
     _selectedIndex.value = widget.index;
-    _tabs = widget.medicalRecordOverseaDatas.map((e) => e.hospitalName.toString()).toList();
-    pages = widget.medicalRecordOverseaDatas.map((e) => HospitalDICOMTab(
-      medicalRecordOverseaData: e,
-    )).toList();
+    _tabs = widget.medicalRecordOverseaDatas
+        .map((e) => e.hospitalName.toString())
+        .toList();
   }
 
   @override
@@ -66,8 +64,12 @@ class _DetailMedicalOverseaDataScreenState
         Expanded(
           child: ValueListenableBuilder<int>(
             valueListenable: _selectedIndex,
-            builder: (BuildContext context, int index, Widget? child) {
-              return pages[index];
+            builder: (context, index, child) {
+              return widget.medicalRecordOverseaDatas
+                  .map((e) => HospitalDICOMTab(
+                        medicalRecordOverseaData: e,
+                      ))
+                  .toList()[index];
             },
           ),
         )
