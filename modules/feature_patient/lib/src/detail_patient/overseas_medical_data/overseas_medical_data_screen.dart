@@ -43,7 +43,8 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
               }
             }).catchError((e) {
               snackBarWidget(
-                message: 'ファイル DICOM のアップロードでエラーが発生しました。ファイルが DICOM であることを確認してください',
+                message:
+                    'ファイル DICOM のアップロードでエラーが発生しました。ファイルが DICOM であることを確認してください',
                 backgroundColor: Colors.red,
                 prefixIcon: const Icon(Icons.error, color: Colors.white),
               );
@@ -94,9 +95,11 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                           }
                         }).catchError((e) {
                           snackBarWidget(
-                            message: 'ファイル DICOM のアップロードでエラーが発生しました。ファイルが DICOM であることを確認してください',
+                            message:
+                                'ファイル DICOM のアップロードでエラーが発生しました。ファイルが DICOM であることを確認してください',
                             backgroundColor: Colors.red,
-                            prefixIcon: const Icon(Icons.error, color: Colors.white),
+                            prefixIcon:
+                                const Icon(Icons.error, color: Colors.white),
                           );
                         });
                       },
@@ -137,318 +140,327 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
               return value.loading
                   ? const CircularProgressIndicator.adaptive()
                   : Expanded(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Row(
-                      children: [
-                        Checkbox(
-                          value: isSelectAll,
-                          onChanged: (_) {
-                            setState(() {
-                              isSelectAll = !isSelectAll;
-                              if (isSelectAll) {
-                                ids = List.generate(
-                                    value.hasData
-                                        ? value.requireData.length
-                                        : 0,
-                                        (index) => index.toString());
-                              } else {
-                                ids = [];
-                              }
-                            });
-                          },
-                        ),
-                        Expanded(
-                            flex: 3,
-                            child: Text(
-                              '病院名',
-                              style: context.textTheme.bodySmall,
-                            )),
-                        Expanded(
-                            child: Text(
-                              '保管場所',
-                              style: context.textTheme.bodySmall,
-                            )),
-                        Expanded(
-                            flex: 2,
-                            child: Text(
-                              'カテゴリ',
-                              style: context.textTheme.bodySmall,
-                            )),
-                        Expanded(
-                            child: Text(
-                              '書類名',
-                              style: context.textTheme.bodySmall,
-                            )),
-                        Expanded(
-                            child: Text(
-                              '発行日',
-                              style: context.textTheme.bodySmall,
-                            )),
-                        Expanded(
-                            child: Center(
-                              child: Text(
-                                'QR',
-                                style: context.textTheme.bodySmall,
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            children: [
+                              Checkbox(
+                                value: isSelectAll,
+                                onChanged: (_) {
+                                  setState(() {
+                                    isSelectAll = !isSelectAll;
+                                    if (isSelectAll) {
+                                      ids = List.generate(
+                                          value.hasData
+                                              ? value.requireData.length
+                                              : 0,
+                                          (index) => index.toString());
+                                    } else {
+                                      ids = [];
+                                    }
+                                  });
+                                },
                               ),
-                            )),
-                        Expanded(
-                            child: Text(
-                              '閲覧有効期限',
-                              style: context.textTheme.bodySmall,
-                            )),
-                        Expanded(
-                            child: Center(
-                              child: Text(
-                                '共有',
+                              Expanded(
+                                  flex: 3,
+                                  child: Text(
+                                    '病院名',
+                                    style: context.textTheme.bodySmall,
+                                  )),
+                              Expanded(
+                                  child: Text(
+                                '保管場所',
                                 style: context.textTheme.bodySmall,
-                              ),
-                            )),
-                        Expanded(
-                            child: Center(
-                              child: Text(
-                                'コメント',
+                              )),
+                              Expanded(
+                                  flex: 2,
+                                  child: Text(
+                                    'カテゴリ',
+                                    style: context.textTheme.bodySmall,
+                                  )),
+                              Expanded(
+                                  child: Text(
+                                '書類名',
                                 style: context.textTheme.bodySmall,
-                              ),
-                            )),
-                      ],
-                    ),
-                    const Divider(),
-                    Expanded(
-                      child: ListView(
-                        children: List.generate(
-                          value.hasData ? value.requireData.length : 0,
-                              (index) {
-                            final MedicalRecordOverseaData data =
-                            value.requireData[index];
-                            return InkWell(
-                              onTap: () {
-                                showDetailMedicalOverseaDialog(
-                                    context, data);
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    vertical: 4),
-                                child: Row(
-                                  children: [
-                                    Checkbox(
-                                      value:
-                                      ids.contains(index.toString()),
-                                      onChanged: (value) {
-                                        setState(() {
-                                          if (ids.contains(
-                                              index.toString())) {
-                                            ids.remove(index.toString());
-                                          } else {
-                                            ids.add(index.toString());
-                                          }
-                                        });
-                                      },
-                                    ),
-                                    Expanded(
-                                        flex: 3,
-                                        child: Row(
-                                          mainAxisAlignment:
-                                          MainAxisAlignment
-                                              .spaceBetween,
-                                          children: [
-                                            Flexible(
-                                                child: Text(
-                                                    data.hospitalName ??
-                                                        '--')),
-                                            if (data.expirationDate !=
-                                                null) ...{
+                              )),
+                              Expanded(
+                                  child: Text(
+                                '発行日',
+                                style: context.textTheme.bodySmall,
+                              )),
+                              Expanded(
+                                  child: Center(
+                                child: Text(
+                                  'QR',
+                                  style: context.textTheme.bodySmall,
+                                ),
+                              )),
+                              Expanded(
+                                  child: Text(
+                                '閲覧有効期限',
+                                style: context.textTheme.bodySmall,
+                              )),
+                              Expanded(
+                                  child: Center(
+                                child: Text(
+                                  '共有',
+                                  style: context.textTheme.bodySmall,
+                                ),
+                              )),
+                              Expanded(
+                                  child: Center(
+                                child: Text(
+                                  'コメント',
+                                  style: context.textTheme.bodySmall,
+                                ),
+                              )),
+                            ],
+                          ),
+                          const Divider(),
+                          Expanded(
+                            child: ListView(
+                              children: List.generate(
+                                value.hasData ? value.requireData.length : 0,
+                                (index) {
+                                  final MedicalRecordOverseaData data =
+                                      value.requireData[index];
+                                  return InkWell(
+                                    onTap: () {
+                                      showDetailMedicalOverseaDialog(
+                                        context,
+                                        value.requireData,
+                                        index,
+                                      );
+                                    },
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 4),
+                                      child: Row(
+                                        children: [
+                                          Checkbox(
+                                            value:
+                                                ids.contains(index.toString()),
+                                            onChanged: (value) {
+                                              setState(() {
+                                                if (ids.contains(
+                                                    index.toString())) {
+                                                  ids.remove(index.toString());
+                                                } else {
+                                                  ids.add(index.toString());
+                                                }
+                                              });
+                                            },
+                                          ),
+                                          Expanded(
+                                              flex: 3,
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Flexible(
+                                                      child: Text(
+                                                          data.hospitalName ??
+                                                              '--')),
+                                                  if (data.expirationDate !=
+                                                      null) ...{
+                                                    Container(
+                                                      margin:
+                                                          const EdgeInsets.only(
+                                                              right: 8),
+                                                      padding:
+                                                          const EdgeInsets.all(
+                                                              4),
+                                                      decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4),
+                                                        border: Border.all(
+                                                            color: Colors.red),
+                                                      ),
+                                                      child: Text(
+                                                        '有効期限あり',
+                                                        style: context
+                                                            .textTheme.bodySmall
+                                                            ?.copyWith(
+                                                                color:
+                                                                    Colors.red),
+                                                      ),
+                                                    )
+                                                  }
+                                                ],
+                                              )),
+                                          Expanded(
+                                              child: Row(
+                                            children: [
                                               Container(
-                                                margin: const EdgeInsets.only(
-                                                    right: 8),
                                                 padding:
-                                                const EdgeInsets.all(4),
+                                                    const EdgeInsets.all(4),
                                                 decoration: BoxDecoration(
                                                   borderRadius:
-                                                  BorderRadius
-                                                      .circular(4),
+                                                      BorderRadius.circular(4),
                                                   border: Border.all(
-                                                      color: Colors.red),
+                                                      color: context.appTheme
+                                                          .primaryColor),
                                                 ),
                                                 child: Text(
-                                                  '有効期限あり',
+                                                  '社内',
                                                   style: context
                                                       .textTheme.bodySmall
                                                       ?.copyWith(
-                                                      color:
-                                                      Colors.red),
+                                                          color: context
+                                                              .appTheme
+                                                              .primaryColor),
                                                 ),
                                               )
-                                            }
-                                          ],
-                                        )),
-                                    Expanded(
-                                        child: Row(
-                                          children: [
-                                            Container(
-                                              padding: const EdgeInsets.all(4),
-                                              decoration: BoxDecoration(
-                                                borderRadius:
-                                                BorderRadius.circular(4),
-                                                border: Border.all(
-                                                    color: context.appTheme
-                                                        .primaryColor),
-                                              ),
+                                            ],
+                                          )),
+                                          Expanded(
+                                              flex: 2,
+                                              child:
+                                                  Text(data.category ?? '--')),
+                                          Expanded(
                                               child: Text(
-                                                '社内',
-                                                style: context
-                                                    .textTheme.bodySmall
-                                                    ?.copyWith(
+                                            data.documentName ?? '--',
+                                            style: context.textTheme.bodySmall
+                                                ?.copyWith(
                                                     color: context
-                                                        .appTheme
-                                                        .primaryColor),
-                                              ),
-                                            )
-                                          ],
-                                        )),
-                                    Expanded(
-                                        flex: 2,
-                                        child:
-                                        Text(data.category ?? '--')),
-                                    Expanded(
-                                        child: Text(
-                                          data.documentName ?? '--',
-                                          style: context.textTheme.bodySmall
-                                              ?.copyWith(
-                                              color: context
-                                                  .appTheme.primaryColor),
-                                        )),
-                                    Expanded(
-                                        child: Text(data.issueDate != null
-                                            ? Dates.formShortDate(
-                                            data.issueDate)
-                                            : '--')),
-                                    Expanded(
-                                        child: data.qrCode == null
-                                            ? const SizedBox()
-                                            : Icon(
-                                          Icons
-                                              .qr_code_scanner_rounded,
-                                          color: context.appTheme
-                                              .primaryColor,
-                                        )),
-                                    Expanded(
-                                        child: Text(
-                                            data.expirationDate != null
-                                                ? Dates.formShortDate(
-                                                data.expirationDate)
-                                                : '--')),
-                                    Expanded(
-                                        child: Icon(
-                                          Icons.person,
-                                          color:
-                                          context.appTheme.primaryColor,
-                                        )),
-                                    Expanded(
-                                        child: Icon(
-                                          CupertinoIcons.chat_bubble_2_fill,
-                                          color:
-                                          context.appTheme.primaryColor,
-                                        )),
-                                  ],
-                                ),
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ),
-                    SizedBox(
-                      height: context.appTheme.spacing.marginMedium,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        ValueListenableBuilder(
-                            valueListenable: context
-                                .watch<OverseasMedicalDataModel>()
-                                .delete,
-                            builder: (context, d, child) {
-                              return ElevatedButton(
-                                  onPressed: !d.loading
-                                      ? () async {
-                                    try {
-                                      List<String> mongoseIds =
-                                      ids.map((e) {
-                                        return value
-                                            .requireData[
-                                        int.parse(e)]
-                                            .id;
-                                      }).toList();
-                                      await context
-                                          .read<
-                                          OverseasMedicalDataModel>()
-                                          .deleteMedicalRecordOverseaData(
-                                          mongoseIds);
-                                      ids = [];
-                                    } catch (e) {
-                                      snackBarWidget(message: '$e');
-                                    }
-                                  }
-                                      : null,
-                                  child: WithLoadingButton(
-                                    isLoading: d.loading,
-                                    child: const Text(
-                                      '削除する',
-                                      style: TextStyle(
-                                        color: Colors.white,
+                                                        .appTheme.primaryColor),
+                                          )),
+                                          Expanded(
+                                              child: Text(data.issueDate != null
+                                                  ? Dates.formShortDate(
+                                                      data.issueDate)
+                                                  : '--')),
+                                          Expanded(
+                                              child: data.qrCode == null
+                                                  ? const SizedBox()
+                                                  : Icon(
+                                                      Icons
+                                                          .qr_code_scanner_rounded,
+                                                      color: context.appTheme
+                                                          .primaryColor,
+                                                    )),
+                                          Expanded(
+                                              child: Text(
+                                                  data.expirationDate != null
+                                                      ? Dates.formShortDate(
+                                                          data.expirationDate)
+                                                      : '--')),
+                                          Expanded(
+                                              child: Icon(
+                                            Icons.person,
+                                            color:
+                                                context.appTheme.primaryColor,
+                                          )),
+                                          Expanded(
+                                              child: Icon(
+                                            CupertinoIcons.chat_bubble_2_fill,
+                                            color:
+                                                context.appTheme.primaryColor,
+                                          )),
+                                        ],
                                       ),
                                     ),
-                                  ));
-                            }),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        ),
-                        ElevatedButton(
-                          onPressed: () async {
-                            var list = ids.map((e) {
-                              return value.requireData[int.parse(e)];
-                            }).toList();
-                            showDialog(
-                                context: context,
-                                builder: (_) => AlertDialog(
-                                  content: ViewAndPrintFileWidget(list
-                                      .map((e) =>
-                                  'https://medical-tourism-api-dev-collabonet.pixelplatforms.com/files/${e.qrCode}')
-                                      .toList()),
-                                ));
-                          },
-                          child: const Text(
-                            '印刷する',
-                            style: TextStyle(
-                              color: Colors.white,
+                                  );
+                                },
+                              ),
                             ),
                           ),
-                        ),
-                        SizedBox(
-                          width: context.appTheme.spacing.marginMedium,
-                        ),
-                        ElevatedButton(
-                          onPressed: () {
-                            showSummaryDialog(
-                                context,
-                                ids.map((e) {
-                                  return value.requireData[int.parse(e)];
-                                }).toList());
-                          },
-                          child: const Text(
-                            'サマリー用に項目を出力',
-                            style: TextStyle(
-                              color: Colors.white,
-                            ),
+                          SizedBox(
+                            height: context.appTheme.spacing.marginMedium,
                           ),
-                        )
-                      ],
-                    ),
-                  ],
-                ),
-              );
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.end,
+                            children: [
+                              ValueListenableBuilder(
+                                  valueListenable: context
+                                      .watch<OverseasMedicalDataModel>()
+                                      .delete,
+                                  builder: (context, d, child) {
+                                    return ElevatedButton(
+                                        onPressed: ids.isNotEmpty
+                                            ? () async {
+                                                try {
+                                                  List<String> mongoseIds =
+                                                      ids.map((e) {
+                                                    return value
+                                                        .requireData[
+                                                            int.parse(e)]
+                                                        .id;
+                                                  }).toList();
+                                                  await context
+                                                      .read<
+                                                          OverseasMedicalDataModel>()
+                                                      .deleteMedicalRecordOverseaData(
+                                                          mongoseIds);
+                                                  ids = [];
+                                                } catch (e) {
+                                                  snackBarWidget(message: '$e');
+                                                }
+                                              }
+                                            : null,
+                                        child: WithLoadingButton(
+                                          isLoading: d.loading,
+                                          child: const Text(
+                                            '削除する',
+                                            style: TextStyle(
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ));
+                                  }),
+                              SizedBox(
+                                width: context.appTheme.spacing.marginMedium,
+                              ),
+                              ElevatedButton(
+                                onPressed: ids.isNotEmpty
+                                    ? () async {
+                                        var list = ids.map((e) {
+                                          return value
+                                              .requireData[int.parse(e)];
+                                        }).toList();
+                                        showDetailMedicalOverseaDialog(
+                                          context,
+                                          list,
+                                          0,
+                                        );
+                                      }
+                                    : null,
+                                child: const Text(
+                                  '印刷する',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                              SizedBox(
+                                width: context.appTheme.spacing.marginMedium,
+                              ),
+                              ElevatedButton(
+                                onPressed: ids.isNotEmpty
+                                    ? () {
+                                        showSummaryDialog(
+                                            context,
+                                            ids.map((e) {
+                                              return value
+                                                  .requireData[int.parse(e)];
+                                            }).toList());
+                                      }
+                                    : null,
+                                child: const Text(
+                                  'サマリー用に項目を出力',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ],
+                      ),
+                    );
             }),
       ],
     );
@@ -464,7 +476,7 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
             validationMessages: validationMessages,
             child: ReactiveFormBuilder(
               form: () =>
-              createMedicalOverseaDataWithUrlForm()..markAllAsTouched(),
+                  createMedicalOverseaDataWithUrlForm()..markAllAsTouched(),
               builder: (context, formGroup, child) {
                 return const CreateMedicalOverseaDataWithUrlScreen();
               },
@@ -475,7 +487,8 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
     );
   }
 
-  void showCreateWithFileDialog(BuildContext context, List<DicomDetailResponse> file) {
+  void showCreateWithFileDialog(
+      BuildContext context, List<DicomDetailResponse> file) {
     showDialog(
       context: context,
       builder: (_) => Provider.value(
@@ -512,14 +525,18 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
   }
 
   void showDetailMedicalOverseaDialog(
-      BuildContext context, MedicalRecordOverseaData data) {
+    BuildContext context,
+    List<MedicalRecordOverseaData> data,
+    int index,
+  ) {
     showDialog(
       context: context,
       builder: (_) => Provider.value(
         value: context.read<OverseasMedicalDataModel>(),
         child: AlertDialog(
             content: DetailMedicalOverseaDataScreen(
-              medicalRecordOverseaData: data,
+              medicalRecordOverseaDatas: data,
+              index: index,
             ),
             actions: [
               OutlinedButton(
