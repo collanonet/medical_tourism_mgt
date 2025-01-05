@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -759,55 +758,14 @@ class _PatientResponseTreatmentScreenState
                             SizedBox(
                               height: context.appTheme.spacing.marginMedium,
                             ),
-                            Text(
-                              '受診希望日',
-                              style: context.textTheme.bodySmall,
-                            ),
-                            Row(
+                            const Row(
                               children: [
                                 IntrinsicWidth(
                                   stepWidth: 300,
-                                  child: ReactiveDatePicker<DateTime>(
+                                  child: ReactiveDatePickerField(
                                     formControlName:
                                         'desiredDateOfConsultation',
-                                    firstDate: DateTime(2000),
-                                    lastDate: DateTime(2100),
-                                    builder: (BuildContext context,
-                                        ReactiveDatePickerDelegate<dynamic>
-                                            picker,
-                                        Widget? child) {
-                                      return Stack(
-                                        children: [
-                                          ReactiveDatePicker<DateTime>(
-                                            formControlName:
-                                                'desiredDateOfConsultation',
-                                            firstDate: DateTime(1900),
-                                            lastDate: DateTime(2100),
-                                            builder: (context, picker, child) {
-                                              return ReactiveTextField<
-                                                  DateTime>(
-                                                formControlName:
-                                                    'desiredDateOfConsultation',
-                                                valueAccessor:
-                                                    DateTimeValueAccessor(),
-                                                decoration: InputDecoration(
-                                                  fillColor: Colors.white,
-                                                  filled: true,
-                                                  suffixIcon: IconButton(
-                                                    icon: const Icon(
-                                                      CupertinoIcons.calendar,
-                                                      color: Colors.grey,
-                                                    ),
-                                                    onPressed:
-                                                        picker.showPicker,
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                          ),
-                                        ],
-                                      );
-                                    },
+                                    label: '受診希望日',
                                   ),
                                 ),
                               ],

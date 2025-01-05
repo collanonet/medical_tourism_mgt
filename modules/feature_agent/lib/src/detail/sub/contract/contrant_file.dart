@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -17,6 +16,7 @@ class Popup extends StatelessWidget {
   const Popup({super.key, this.title});
 
   final String? title;
+
   @override
   Widget build(BuildContext context) {
     final formGroup = ReactiveForm.of(context) as FormGroup;
@@ -84,36 +84,11 @@ class Popup extends StatelessWidget {
                       style: Theme.of(context).textTheme.bodySmall,
                     ),
                   ),
-                  IntrinsicWidth(
-                    stepWidth: 300,
-                    child: ReactiveDatePicker<DateTime>(
-                      formControlName: 'updatedOn',
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime(2100),
-                      builder: (BuildContext context,
-                          ReactiveDatePickerDelegate<dynamic> picker,
-                          Widget? child) {
-                        return ReactiveTextField<DateTime>(
-                          formControlName: 'updatedOn',
-                          valueAccessor: DateTimeValueAccessor(
-                              //dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              icon: const Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
-                              ),
-                              onPressed: picker.showPicker,
-                            ),
-                          ),
-                          inputFormatters: [
-                            formatter.dateFormatter,
-                          ],
-                        );
-                      },
-                    ),
-                  ),
+                  const IntrinsicWidth(
+                      stepWidth: 300,
+                      child: ReactiveDatePickerField(
+                        formControlName: 'updatedOn',
+                      )),
                 ],
               ),
             ),

@@ -33,7 +33,7 @@ class _ReportTypeScreenState extends State<ReportTypeScreen> {
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 Container(
-                  padding: EdgeInsets.all(context.appTheme.spacing.gutter),
+                  padding: const EdgeInsets.fromLTRB(16, 32, 16, 32),
                   decoration: BoxDecoration(
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(
@@ -159,7 +159,7 @@ class _ReportTypeScreenState extends State<ReportTypeScreen> {
                                           onPressed: () {
                                             formArray.add(
                                               FormGroup({
-                                                'id': FormControl<String>(),
+                                                '_id': FormControl<String>(),
                                                 'typeName': FormControl<String>(
                                                   validators: [
                                                     Validators.required

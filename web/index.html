@@ -1,4 +1,4 @@
-<!DOCTYPE html><head>
+<!DOCTYPE html><html><head>
     <base href="$FLUTTER_BASE_HREF">
 
     <meta charset="UTF-8">
@@ -30,6 +30,12 @@
 
     
     
+  
+  
+  
+  
+  
+  
   
   
   
@@ -119,7 +125,6 @@
   
 
 
-
 <script>
     window.addEventListener('load', function(ev) {
       // Download main.dart.js
@@ -136,7 +141,16 @@
     });
 </script>
 
+  <!-- Add this script at the end of body -->
+<script>
+  // Initialize cornerstone
+  window.onload = function() {
+    cornerstoneWADOImageLoader.external.cornerstone = cornerstone;
+    cornerstoneWADOImageLoader.initializeWebWorkers();
+  }
+</script>
 
 
-</body>
-</html>
+
+
+</body></html>

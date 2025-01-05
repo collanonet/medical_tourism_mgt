@@ -4,10 +4,12 @@ import 'package:json_annotation/json_annotation.dart';
 part 'prospective_rank_request.g.dart';
 @JsonSerializable()
 class ProspectiveRankRequest {
-  String? prospectiveRank;
+  String? prospectRank;
+  bool? shouldItBeIncludedInSalesManagementEstimates;
 
   ProspectiveRankRequest({
-    this.prospectiveRank,
+    this.prospectRank,
+    this.shouldItBeIncludedInSalesManagementEstimates,
   });
 
   factory ProspectiveRankRequest.fromJson(Map<String, dynamic> json) => _$ProspectiveRankRequestFromJson(json);

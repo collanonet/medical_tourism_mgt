@@ -33,7 +33,7 @@ class MedicalRecordAgent {
 
   static FormGroup buildFormGroup(MedicalRecordAgent? medicalRecordAgent) {
     return FormGroup({
-      'id': FormControl<String>(value: medicalRecordAgent?.id),
+      '_id': FormControl<String>(value: medicalRecordAgent?.id),
       'company': FormControl<String>(value: medicalRecordAgent?.company),
       'nameInKanji':
           FormControl<String>(value: medicalRecordAgent?.nameInKanji),

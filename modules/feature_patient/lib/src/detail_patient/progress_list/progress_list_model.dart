@@ -93,7 +93,7 @@ class ProgressListModel {
         // Insert data for each group
         for (var record in records) {
           formArrayProgress.add(FormGroup({
-            'id': FormControl<String>(
+            '_id': FormControl<String>(
               value: record.id,
             ),
             'completed': FormControl<bool>(value: record.completed),
@@ -105,7 +105,6 @@ class ProgressListModel {
             ),
             'task': FormControl<String>(
               value: record.task,
-              disabled: true,
             ),
             'completionDate': FormControl<DateTime>(
               value: record.completionDate,
@@ -135,11 +134,11 @@ class ProgressListModel {
       FormArray formArrayProgress = FormArray([]);
       for (var item in titleList) {
         formArrayProgress.add(FormGroup({
-          'id': FormControl<String>(),
+          '_id': FormControl<String>(),
           'completed': FormControl<bool>(value: false),
           'key': FormControl<String>(),
           'tag': FormControl<String>(value: item.tag),
-          'task': FormControl<String>(value: item.task, disabled: true),
+          'task': FormControl<String>(value: item.task),
           'completionDate': FormControl<DateTime>(
             validators: [
               Validators.pattern(
@@ -149,7 +148,7 @@ class ProgressListModel {
           ),
           'remarks': FormControl<String>(),
           'medicalRecord': FormControl<String>(),
-          'type': FormControl<String>(value: "0"),
+          'type': FormControl<String>(value: '0'),
         }));
       }
       formArray.add(FormGroup({'progress': formArrayProgress}));
@@ -158,11 +157,11 @@ class ProgressListModel {
 
       for (var item in titleList) {
         formArrayProgress2.add(FormGroup({
-          'id': FormControl<String>(),
+          '_id': FormControl<String>(),
           'completed': FormControl<bool>(value: false),
           'key': FormControl<String>(),
           'tag': FormControl<String>(value: item.tag),
-          'task': FormControl<String>(value: item.task, disabled: true),
+          'task': FormControl<String>(value: item.task),
           'completionDate': FormControl<DateTime>(
             validators: [
               Validators.pattern(
@@ -172,7 +171,7 @@ class ProgressListModel {
           ),
           'remarks': FormControl<String>(),
           'medicalRecord': FormControl<String>(),
-          'type': FormControl<String>(value: "1"),
+          'type': FormControl<String>(value: '1'),
         }));
       }
       formArray.add(FormGroup({'progress': formArrayProgress2}));
@@ -185,17 +184,18 @@ class ProgressListModel {
     try {
       submit.value = const AsyncData(loading: true);
 
-      await formGroup.control('progressList').value.forEach((element) {
-        element['progress'].forEach((element) async {
-          if (element['id'] == null) {
-            await patientRepository.postMedicalRecordProgress(mapData(element));
+      for (var element in formGroup.control('progressList').value) {
+        for (var progress in element['progress']) {
+          logger.d(progress);
+          if (progress['_id'] == null) {
+            await patientRepository
+                .postMedicalRecordProgress(mapData(progress));
           } else {
             await patientRepository.putMedicalRecordProgress(
-                element['id'], mapData(element));
+                progress['_id'], mapData(progress));
           }
-        });
-      });
-
+        }
+      }
       submit.value = const AsyncData(data: true);
     } catch (e) {
       logger.d(e);

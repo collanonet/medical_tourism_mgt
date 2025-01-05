@@ -6,11 +6,13 @@ part 'prospective_rank_response.g.dart';
 class ProspectiveRankResponse {
   @JsonKey(name: '_id')
   final String id;
-  String? prospectiveRank;
+  String? prospectRank;
+  bool? shouldItBeIncludedInSalesManagementEstimates;
 
   ProspectiveRankResponse({
     required this.id,
-    this.prospectiveRank,
+    this.prospectRank,
+    this.shouldItBeIncludedInSalesManagementEstimates,
   });
 
 

@@ -201,7 +201,7 @@ class TreatmentModel {
           ));
         }
 
-        logger.d("testtype ${element}");
+        logger.d('testtype $element');
         logger.d("testtype ${element['treatmentCostTaxIncluded']}");
         TreatmentMenuRequest request = TreatmentMenuRequest(
           hospital: hospitalId.value,

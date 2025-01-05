@@ -38,7 +38,7 @@ class DynamicTable extends StatefulWidget {
 
 class _DynamicTableState extends State<DynamicTable> {
   final ScrollController _scrollController = ScrollController();
-  int _currentPage = 0;
+  final int _currentPage = 0;
 
   bool _isAtMaxScroll() {
     return _scrollController.position.pixels ==

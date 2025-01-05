@@ -14,6 +14,13 @@ class ReportRepositoryIml extends ReportRepository {
 
   final ReportRemoteProvider remote;
 
+    @override
+  Future<FileResponse> uploadFileBase64(
+    String file,
+    String filename,
+  ) async =>
+      await remote.uploadFileBase64(file, filename);
+      
   @override
   Future<List<TypeResponse>> getTypes() {
     return remote.getTypes();
@@ -29,25 +36,30 @@ class ReportRepositoryIml extends ReportRepository {
     return remote.putType(id, typeRequest);
   }
 
-  @override
-  Future<List<ReportContractResponse>> getReportContract() {
-    return remote.getReportContrant();
+    @override
+  Future<List<ContractTemplateBasicInformationResponse>> getReportContract({String? documentName, String? first, String? second, String? methodOfConclusion}) {
+    return remote.apiService.getReportContract(
+      documentName: documentName,
+      first: first,
+      second: second,
+      methodOfConclusion: methodOfConclusion,
+    );
   }
 
-  @override
-  Future<ReportContractResponse> postReportContract(ReportContractRequest reportContractRequest) {
-    return remote.postReportContract(reportContractRequest);
-  }
+  // @override
+  // Future<ReportContractResponse> postReportContract(ReportContractRequest reportContractRequest) {
+  //   return remote.postReportContract(reportContractRequest);
+  // }
 
-  @override
-  Future<ContractFilterResponse> getContractFilter() {
-   return remote.getReportFilter();
-  }
+  // @override
+  // Future<ContractFilterResponse> getContractFilter() {
+  //  return remote.getReportFilter();
+  // }
 
-  @override
-  Future<ContractFilterResponse> postContractFilter(ContractFilterRequest contractFilterRequest) {
-    return remote.postReportFilter(contractFilterRequest);
-  }
+  // @override
+  // Future<ContractFilterResponse> postContractFilter(ContractFilterRequest contractFilterRequest) {
+  //   return remote.postReportFilter(contractFilterRequest);
+  // }
 
   @override
   Future<ContractReportDetailResponse> getContractReportDetail() {
@@ -60,7 +72,7 @@ class ReportRepositoryIml extends ReportRepository {
   }
 
   @override
-  Future<ContractTemplateBasicInformationResponse> getContractTemplateBasicInformation() {
+  Future<List<ContractTemplateBasicInformationResponse>> getContractTemplateBasicInformation() {
     return remote.getContractTemplateBasicInformation();
   }
 
@@ -79,6 +91,8 @@ class ReportRepositoryIml extends ReportRepository {
     return remote.postEstimatemasterReport(estimatemasterReportRequest);
   }
 
+
+
   @override
   Future<List<ProspectiveRankResponse>> getProspectiveRank() {
     return remote.getProspectiveRank();
@@ -88,4 +102,16 @@ class ReportRepositoryIml extends ReportRepository {
   Future<ProspectiveRankResponse> postProspectiveRank(ProspectiveRankRequest prospectiveRankRequest) {
     return remote.postProspectiveRank(prospectiveRankRequest);
   }
+
+  @override
+  Future<EstimatemasterReportResponse> putEstimatemasterReport(String id, EstimatemasterReportRequest estimatemasterReportRequest) {
+    return remote.putEstimatemasterReport(id, estimatemasterReportRequest);
+  }
+
+  @override
+  Future<ProspectiveRankResponse> putProspectiveRank(String id, ProspectiveRankRequest prospectiveRankRequest) {
+    return remote.putProspectiveRank(id, prospectiveRankRequest);
+  }
+  
+
 }

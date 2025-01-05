@@ -9,7 +9,7 @@ part of 'medical_visa_travel_companion_response.dart';
 MedicalVisaTravelCompanionResponse _$MedicalVisaTravelCompanionResponseFromJson(
         Map<String, dynamic> json) =>
     MedicalVisaTravelCompanionResponse(
-      id: json['_id'] as String,
+      id: json['_id'] as String?,
       nameRomaji: json['nameRomaji'] as String?,
       dateBirth: json['dateBirth'] == null
           ? null
@@ -22,10 +22,8 @@ MedicalVisaTravelCompanionResponse _$MedicalVisaTravelCompanionResponseFromJson(
           ?.map((e) => TravelInfo.fromJson(e as Map<String, dynamic>))
           .toList(),
       travelRemarks: json['travelRemarks'] as String?,
-      subjectVisaWithdrawal: json['subjectVisaWithdrawal'] as bool?,
-      deathOrOccurrenceEventDate: json['deathOrOccurrenceEventDate'] == null
-          ? null
-          : DateTime.parse(json['deathOrOccurrenceEventDate'] as String),
+      visaWithdrawalTarget: json['visaWithdrawalTarget'] as bool?,
+      reason: json['reason'] as String?,
       remarks: json['remarks'] as String?,
       vasaInfo: (json['vasaInfo'] as List<dynamic>?)
           ?.map((e) => VasaInfo.fromJson(e as Map<String, dynamic>))
@@ -42,6 +40,8 @@ MedicalVisaTravelCompanionResponse _$MedicalVisaTravelCompanionResponseFromJson(
       certificateOfEligibility: json['certificateOfEligibility'] == null
           ? null
           : DateTime.parse(json['certificateOfEligibility'] as String),
+      certificateOfEligibilityFileName:
+          json['certificateOfEligibilityFileName'] as String?,
     );
 
 Map<String, dynamic> _$MedicalVisaTravelCompanionResponseToJson(
@@ -56,14 +56,15 @@ Map<String, dynamic> _$MedicalVisaTravelCompanionResponseToJson(
       'numberPassport': instance.numberPassport,
       'travelInfo': instance.travelInfo,
       'travelRemarks': instance.travelRemarks,
-      'subjectVisaWithdrawal': instance.subjectVisaWithdrawal,
-      'deathOrOccurrenceEventDate':
-          instance.deathOrOccurrenceEventDate?.toIso8601String(),
+      'visaWithdrawalTarget': instance.visaWithdrawalTarget,
       'remarks': instance.remarks,
+      'reason': instance.reason,
       'vasaInfo': instance.vasaInfo,
       'ticket': instance.ticket,
       'ticketBack': instance.ticketBack,
       'boardingPass': instance.boardingPass,
       'certificateOfEligibility':
           instance.certificateOfEligibility?.toIso8601String(),
+      'certificateOfEligibilityFileName':
+          instance.certificateOfEligibilityFileName,
     };

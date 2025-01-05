@@ -232,12 +232,12 @@ class EndPoints {
 
   //Report
   static const ESTIMATE_MASTER = '/estimate-master';
-  static const REPROT_CONTRACT = '/report-contract';
+  static const REPROT_CONTRACT = '/contract-template-details';
   static const REPROT_CONTRACT_FILTER = '/report-contract-filter';
   static const REPROT_CONTRACT_DETAIL = '/report-contract-details';
-  static const CONTRACT_TEMPLATE_DETAIL_BASIC_INFO = 'contact-template-detail-basic-info';
-  static const ESTIMATE_MASTER_REPORT = 'estimate-master-report';
-  static const PROSPECTIVE_RANK = 'progressive-rank';
+  static const CONTRACT_TEMPLATE_DETAIL_BASIC_INFO = '/contract-template-details';
+  static const ESTIMATE_MASTER_REPORT = '/estimate-master';
+  static const PROSPECTIVE_RANK = '/prospect-rank';
 
   // Web Booking new
   static const WEB_BOOKING_HOSPITAL = '/web-booking-hospital';
@@ -261,5 +261,9 @@ class EndPoints {
   // A15
   static const INVOICE = '/invoices';
   //A14
-  static const BILLING = '/billing';
+  static const BILLING = '/medical-record-billing';
+
+  // Dicom endpoint
+
+  static const DICOM = '/instances';
 }

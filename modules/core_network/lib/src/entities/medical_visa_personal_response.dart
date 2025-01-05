@@ -6,7 +6,7 @@ part 'medical_visa_personal_response.g.dart';
 @JsonSerializable()
 class MedicalVisaPersonalResponse {
   @JsonKey(name: '_id')
-  final String id;
+  final String? id;
   String? medicalVisa;
   DateTime? applicationDate;
   DateTime? issueDate;
@@ -17,7 +17,7 @@ class MedicalVisaPersonalResponse {
   String? paymentStatus;
 
   MedicalVisaPersonalResponse({
-    required this.id,
+     this.id,
     this.medicalVisa,
     this.issueDate,
     this.expirationDate,

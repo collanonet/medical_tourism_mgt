@@ -63,7 +63,7 @@ class PatientResponseMedicalCheckupModel {
   void insertDataToForm(
       FormGroup formGroup, MedicalRecordPatientResponseMedicalCheckup result) {
     formGroup.patchValue({
-      'id': result.id,
+      '_id': result.id,
       'date1': result.date1,
       'date2': result.date2,
       'date3': result.date3,

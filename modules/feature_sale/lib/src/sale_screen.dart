@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
-import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -168,59 +167,17 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                         ],
                                       ),
                                       const SizedBox(width: 20),
-                                      Column(
+                                      const Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          const Text('入金日'),
+                                          Text('入金日'),
                                           IntrinsicWidth(
                                             stepWidth: 200,
-                                            child: ReactiveDatePicker<DateTime>(
+                                            child: ReactiveDatePickerField(
                                               formControlName: 'paymentDay',
-                                              firstDate: DateTime(1900),
-                                              lastDate: DateTime(2100),
-                                              builder: (BuildContext context,
-                                                  ReactiveDatePickerDelegate<
-                                                          dynamic>
-                                                      picker,
-                                                  Widget? child) {
-                                                return Stack(
-                                                  children: [
-                                                    ReactiveTextField<DateTime>(
-                                                      formControlName:
-                                                          'paymentDay',
-                                                      readOnly: true,
-                                                      onTap: (value) =>
-                                                          picker.showPicker(),
-                                                      valueAccessor:
-                                                          DateTimeValueAccessor(),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 6),
-                                                      child: Align(
-                                                        alignment: Alignment
-                                                            .centerRight,
-                                                        child: IconButton(
-                                                          onPressed: () =>
-                                                              picker
-                                                                  .showPicker(),
-                                                          icon: Icon(
-                                                            Icons
-                                                                .calendar_month,
-                                                            color: context
-                                                                .appTheme
-                                                                .primaryColor,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                );
-                                              },
                                             ),
                                           ),
                                         ],
@@ -241,59 +198,17 @@ class _SaleManagementScreenState extends State<SaleManagementScreen> {
                                         ],
                                       ),
                                       const SizedBox(width: 20),
-                                      Column(
+                                      const Column(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          const Text('精算日'),
+                                          Text('精算日'),
                                           IntrinsicWidth(
                                             stepWidth: 200,
-                                            child: ReactiveDatePicker<DateTime>(
+                                            child: ReactiveDatePickerField(
                                               formControlName: 'settlement_day',
-                                              firstDate: DateTime(1900),
-                                              lastDate: DateTime(2100),
-                                              builder: (BuildContext context,
-                                                  ReactiveDatePickerDelegate<
-                                                          dynamic>
-                                                      picker,
-                                                  Widget? child) {
-                                                return Stack(
-                                                  children: [
-                                                    ReactiveTextField<DateTime>(
-                                                      formControlName:
-                                                          'settlement_day',
-                                                      readOnly: true,
-                                                      onTap: (value) =>
-                                                          picker.showPicker(),
-                                                      valueAccessor:
-                                                          DateTimeValueAccessor(),
-                                                    ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              top: 6),
-                                                      child: Align(
-                                                        alignment: Alignment
-                                                            .centerRight,
-                                                        child: IconButton(
-                                                          onPressed: () =>
-                                                              picker
-                                                                  .showPicker(),
-                                                          icon: Icon(
-                                                            Icons
-                                                                .calendar_month,
-                                                            color: context
-                                                                .appTheme
-                                                                .primaryColor,
-                                                          ),
-                                                        ),
-                                                      ),
-                                                    )
-                                                  ],
-                                                );
-                                              },
                                             ),
                                           ),
                                         ],

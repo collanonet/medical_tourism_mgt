@@ -61,28 +61,10 @@ class _QAndANewRegistrationSectionState
                                     height: context
                                         .appTheme.spacing.marginExtraSmall,
                                   ),
-                              children: [
-                                Text(
-                                  '更新日',
-                                  style: context.textTheme.bodyMedium,
-                                ),
-                                ReactiveDatePicker(
+                              children: const [
+                                ReactiveDatePickerField(
                                   formControlName: 'updatedDate',
-                                  firstDate: DateTime(2000),
-                                  lastDate: DateTime(2100),
-                                  builder: (BuildContext context,
-                                      ReactiveDatePickerDelegate<dynamic>
-                                          picker,
-                                      Widget? child) {
-                                    return ReactiveTextField(
-                                      formControlName: 'updatedDate',
-                                      decoration: InputDecoration(
-                                          suffixIcon: IconButton(
-                                        icon: const Icon(Icons.calendar_today),
-                                        onPressed: () => picker.showPicker(),
-                                      )),
-                                    );
-                                  },
+                                  label: '更新日',
                                 )
                               ]),
                         ),

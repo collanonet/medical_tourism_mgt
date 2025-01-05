@@ -32,9 +32,7 @@ class DetailPatientWebReservationModel {
         formGroup.control('patientName').value =
             '${patient.value.requireData.firstNameRomanized} ${patient.value.requireData.middleNameRomanized} ${patient.value.requireData.familyNameRomanized}';
         getBookingByPatientId(patient.value.requireData.id);
-        getReservationAll(
-          patientId: id,
-        );
+        getReservationAll();
       }
     } catch (e) {
       logger.e(e);
@@ -216,7 +214,7 @@ class DetailPatientWebReservationModel {
       candidateDate.clear(updateParent: true);
       data.proposedDates?.map((e) {
         candidateDate.add(FormGroup({
-          'id': FormControl<String>(value: e.id),
+          '_id': FormControl<String>(value: e.id),
           'preferredDate': FormControl<DateTime>(
             value: e.proposedDate,
             validators: [
@@ -245,6 +243,8 @@ class DetailPatientWebReservationModel {
     } catch (e) {
       logger.e(e);
       submit.value = AsyncData(error: e);
+    } finally {
+      getReservationAll();
     }
   }
 
@@ -271,7 +271,7 @@ class DetailPatientWebReservationModel {
 
       formGroup.control('candidateDate').value.forEach((element) {
         proposedDates.add(ProposedDate(
-          id: element['id'],
+          id: element['_id'],
           proposedDate: element['preferredDate'],
           selectMorningAfternoonAllDay: element['choice'],
           timeZoneFrom: element['timePeriodFrom'],
@@ -311,7 +311,7 @@ class DetailPatientWebReservationModel {
 
       formGroup.control('candidateDate').value.forEach((element) {
         proposedDates.add(ProposedDate(
-          id: element['id'],
+          id: element['_id'],
           proposedDate: element['preferredDate'],
           selectMorningAfternoonAllDay: element['choice'],
           timeZoneFrom: element['timePeriodFrom'],
@@ -344,15 +344,11 @@ class DetailPatientWebReservationModel {
   ValueNotifier<AsyncData<List<WebBookingMedicalRecordResponse>>> webBookings =
       ValueNotifier(const AsyncData());
 
-  void getReservationAll({
-    String? hospitalId,
-    String? patientId,
-  }) async {
+  void getReservationAll() async {
     try {
       webBookings.value = const AsyncData(loading: true);
       final result = await repository.webBookingGetReservationAll(
-        hospitalId: hospitalId,
-        patientId: patientId,
+        patientId: patient.value.requireData.id,
       );
       webBookings.value = AsyncData(data: result);
     } catch (e) {
@@ -361,7 +357,7 @@ class DetailPatientWebReservationModel {
     }
   }
 
-    Future<void> updateBooking() async {
+  Future<void> updateBooking() async {
     try {
       TreamentRequest data;
 

@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -7,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -122,34 +120,11 @@ class _MedicalRecordPassportSectionState
                           ],
                         ),
                       ),
-                      Expanded(
-                        child: ReactiveDatePicker<DateTime>(
+                      const Expanded(
+                        child: ReactiveDatePickerField(
                             formControlName: 'issueDate',
-                            firstDate: DateTime(1900),
-                            lastDate: DateTime(2100),
-                            builder: (context, picker, child) {
-                              return ReactiveTextField<DateTime>(
-                                formControlName: 'issueDate',
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                                decoration: InputDecoration(
-                                  label: const Text(
-                                    '発行日', //  TODO: l10n 対応 (発行日) (issueDate)
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: const Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
-                                    ),
-                                    onPressed: picker.showPicker,
-                                  ),
-                                ),
-                                inputFormatters: [
-                                  formatter.dateFormatter,
-                                ],
-                              );
-                            }),
+                            label: '発行日',
+                            ),
                       ),
                       const Expanded(child: SizedBox()),
                     ],
@@ -161,38 +136,15 @@ class _MedicalRecordPassportSectionState
                         width: context.appTheme.spacing.marginMedium,
                       );
                     },
-                    children: [
+                    children: const [
                       Expanded(
-                        child: ReactiveDatePicker<DateTime>(
+                        child: ReactiveDatePickerField(
                             formControlName: 'expirationDate',
-                            firstDate: DateTime(1900),
-                            lastDate: DateTime(2100),
-                            builder: (context, picker, child) {
-                              return ReactiveTextField<DateTime>(
-                                formControlName: 'expirationDate',
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                                decoration: InputDecoration(
-                                  label: const Text(
-                                    '有効期限', // TODO: l10n 対応 (有効期限) (expirationDate)
-                                  ),
-                                  suffixIcon: IconButton(
-                                    icon: const Icon(
-                                      CupertinoIcons.calendar,
-                                      color: Colors.grey,
-                                    ),
-                                    onPressed: picker.showPicker,
-                                  ),
-                                ),
-                                inputFormatters: [
-                                  formatter.dateFormatter,
-                                ],
-                              );
-                            }),
+                            label: '有効期限',
+                            ),
                       ),
-                      const Expanded(child: SizedBox()),
-                      const Expanded(child: SizedBox()),
+                      Expanded(child: SizedBox()),
+                      Expanded(child: SizedBox()),
                     ],
                   ),
                   RowSeparated(

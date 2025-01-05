@@ -5,6 +5,8 @@ part 'medical_visa_hand_out_response.g.dart';
 
 @JsonSerializable()
 class MedicalVisaHandOutResponse {
+    @JsonKey(name: '_id')
+  final String? id;
   String? departure;
   String? arrival;
   String? flightNumber;
@@ -13,6 +15,7 @@ class MedicalVisaHandOutResponse {
   String? seatNumber;
 
   MedicalVisaHandOutResponse({
+    required this.id,
   this.flightNumber,
   this.departure,
   this.arrival,

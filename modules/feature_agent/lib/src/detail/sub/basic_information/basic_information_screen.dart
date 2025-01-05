@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -9,7 +8,6 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -293,41 +291,10 @@ class _AgentBasicInformationScreenState
                                               style:
                                                   context.textTheme.bodyMedium,
                                             ),
-                                            ReactiveDatePicker<DateTime>(
+                                            const ReactiveDatePickerField(
                                                 formControlName:
                                                     'transactionStartDate',
-                                                firstDate: DateTime(1900),
-                                                lastDate: DateTime(2100),
-                                                builder:
-                                                    (context, picker, child) {
-                                                  return ReactiveTextField<
-                                                      DateTime>(
-                                                    formControlName:
-                                                        'transactionStartDate',
-                                                    valueAccessor:
-                                                        DateTimeValueAccessor(
-                                                      dateTimeFormat:
-                                                          DateFormat(
-                                                              'yyyy/MM/dd'),
-                                                    ),
-                                                    decoration: InputDecoration(
-                                                      fillColor: Colors.white,
-                                                      filled: true,
-                                                      suffixIcon: IconButton(
-                                                        icon: const Icon(
-                                                          CupertinoIcons
-                                                              .calendar,
-                                                          color: Colors.grey,
-                                                        ),
-                                                        onPressed:
-                                                            picker.showPicker,
-                                                      ),
-                                                    ),
-                                                    inputFormatters: [
-                                                      formatter.dateFormatter,
-                                                    ],
-                                                  );
-                                                }),
+                                                ),
                                           ],
                                         ),
                                       ),
@@ -460,7 +427,7 @@ class _AgentBasicInformationScreenState
                                             onTap: () {
                                               formArray.add(
                                                 FormGroup({
-                                                  'id': FormControl<String>(),
+                                                  '_id': FormControl<String>(),
                                                   'referralCommissionName':
                                                       FormControl<String>(),
                                                   'referralCommission':
@@ -996,7 +963,7 @@ class _AgentBasicInformationScreenState
                                                 onTap: () {
                                                   formArray.add(
                                                     FormGroup({
-                                                      'id':
+                                                      '_id':
                                                           FormControl<String>(),
                                                       'howToContact':
                                                           FormControl<String>(),

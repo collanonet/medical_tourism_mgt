@@ -1,14 +1,14 @@
 // Flutter imports:
-import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import 'invoice_model.dart';
 
 class InvoiceTableList extends StatefulWidget {
@@ -35,14 +35,9 @@ class _InvoiceTableListState extends State<InvoiceTableList> {
         children: [
           const Row(
             children: [
-              Expanded(child: Text('書類番号')), //Document Number
-              Expanded(child: Text('患者名')),
-              Expanded(child: SizedBox(width: 100)),
-              // Expanded(child: Text('宛先')), // address
-              // Expanded(flex: 3, child: Text('タイトル')), // title
-              Expanded(child: Text('発行日')), // Issue date
-              // Expanded(child: Text('見込み')), // Prospects
-              // Expanded(child: Text('売上管理')), // Sales Management
+              Expanded(child: Text('書類番号',textAlign: TextAlign.left,)), //Document Number
+              Expanded(flex: 2,child: Text('患者名',textAlign: TextAlign.left,)),
+              Expanded(child: Text('発行日',textAlign: TextAlign.left,)), // Issue date
             ],
           ),
           Expanded(
@@ -141,6 +136,7 @@ class _InvoiceTableListState extends State<InvoiceTableList> {
                             children: [
                               Expanded(
                                 child: Text(
+                                  textAlign: TextAlign.left,
                                   data?.invoiceNumber ?? '',
                                   style: context.textTheme.bodyMedium,
                                   maxLines: 1,
@@ -148,61 +144,43 @@ class _InvoiceTableListState extends State<InvoiceTableList> {
                                 ),
                               ),
                               Expanded(
-                                child: Column(
-                                  mainAxisSize: MainAxisSize.min,
-                                  crossAxisAlignment:
-                                  CrossAxisAlignment.start,
+                                flex: 2,
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                      '${data?.patient?.firstNameRomanized ?? '-'} ${data?.patient?.middleNameRomanized ?? '-'} ${data?.patient?.familyNameRomanized ?? '-'}',
-                                      style: TextStyle(
-                                        color: context.appTheme.primaryColor,
-                                        fontFamily: 'NotoSansJP',
-                                        package: 'core_ui',
-                                      ),
+                                    Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                      CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          textAlign: TextAlign.left,
+                                          '${data?.patient?.firstNameRomanized ?? '-'} ${data?.patient?.middleNameRomanized ?? '-'} ${data?.patient?.familyNameRomanized ?? '-'}',
+                                          style: TextStyle(
+                                            color: context.appTheme.primaryColor,
+                                            fontFamily: 'NotoSansJP',
+                                            package: 'core_ui',
+                                          ),
+                                        ),
+                                        Text(
+                                            '${data?.patient?.firstNameChineseOrVietnamese ?? '-'} ${data?.patient?.middleNameChineseOrVietnamese ?? '-'} ${data?.patient?.familyNameChineseOrVietnamese ?? '-'} / ${data?.patient?.firstNameJapaneseForChinese ?? '-'} ${data?.patient?.middleNameJapaneseForChinese ?? '-'} ${data?.patient?.familyNameJapaneseForChinese ?? '-'} / ${data?.patient?.firstNameJapaneseForNonChinese ?? '-'} ${data?.patient?.middleNameJapaneseForNonChinese ?? '-'} ${data?.patient?.familyNameJapaneseForNonChinese ?? '-'} '),
+                                      ],
                                     ),
-                                    Text(
-                                        '${data?.patient?.firstNameChineseOrVietnamese ?? '-'} ${data?.patient?.middleNameChineseOrVietnamese ?? '-'} ${data?.patient?.familyNameChineseOrVietnamese ?? '-'} / ${data?.patient?.firstNameJapaneseForChinese ?? '-'} ${data?.patient?.middleNameJapaneseForChinese ?? '-'} ${data?.patient?.familyNameJapaneseForChinese ?? '-'} / ${data?.patient?.firstNameJapaneseForNonChinese ?? '-'} ${data?.patient?.middleNameJapaneseForNonChinese ?? '-'} ${data?.patient?.familyNameJapaneseForNonChinese ?? '-'} '),
+                                    const SizedBox(width: 10),
+                                    boxRequired(
+                                      enabled: data?.type ?? false,
+                                      label: data?.type ?? false ? '精算書' : '見積書',
+                                    ),
                                   ],
                                 ),
                               ),
-                              boxRequired(
-                                enabled: data?.type ?? false,
-                                label: data?.type ?? false ? '精算書' : '見積書',
-                              ),
-                              const SizedBox(width: 20),
                               Expanded(
                                 child: Text(
-                                  '--',
-                                  style: context.textTheme.bodySmall,
-                                ),
-                              ),
-                              Expanded(
-                                flex: 3,
-                                child: Text(
-                                  '--',
-                                  style: context.textTheme.bodyMedium,
-                                  maxLines: 1,
-                                  overflow: TextOverflow.ellipsis,
-                                ),
-                              ),
-                              Expanded(
-                                child: Text(
+                                  textAlign: TextAlign.left,
                                   data?.invoiceDate != null
                                       ? Dates.formatFullDate(data!.invoiceDate!)
                                       : '--',
-                                  style: context.textTheme.bodyMedium,
-                                ),
-                              ),
-                              Expanded(
-                                child: Text(
-                                  '--',
-                                  style: context.textTheme.bodyMedium,
-                                ),
-                              ),
-                              Expanded(
-                                child: Text(
-                                  '--',
                                   style: context.textTheme.bodyMedium,
                                 ),
                               ),

@@ -105,6 +105,7 @@ class WebAppointmentScreen extends StatelessWidget {
                             ),
                           ),
                           HeaderTableData(
+                            flex: 2,
                             titleHeader: const Text(
                               '予約日',
                               style: TextStyle(
@@ -137,8 +138,7 @@ class WebAppointmentScreen extends StatelessWidget {
                                     },
                                     cell: [
                                       Text(
-                                        item.hospital?.hospitalNameKatakana ??
-                                            '-',
+                                        '${item.hospital?.hospitalNameKatakana ?? '-'}${item.hospital?.hospitalNameKatakana == null ? '' : '\n'}${item.hospital?.hospitalNameChinese ?? ' - '}',
                                         style: const TextStyle(
                                           fontFamily: 'NotoSansJP',
                                           package: 'core_ui',
@@ -165,24 +165,6 @@ class WebAppointmentScreen extends StatelessWidget {
                                       ),
                                       Row(
                                         children: [
-                                          Container(
-                                            height: 60,
-                                            width: 60,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(16),
-                                              color: Colors.grey.shade300,
-                                            ),
-                                            child: const Icon(
-                                              Icons.person,
-                                              color: Colors.white,
-                                              size: 50,
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
                                           Column(
                                             mainAxisSize: MainAxisSize.min,
                                             crossAxisAlignment:

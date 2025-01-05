@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,7 +6,6 @@ import 'package:core_l10n/l10n.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -226,34 +224,9 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                                       height: context
                                           .appTheme.spacing.marginExtraSmall,
                                     ),
-                                    ReactiveDatePicker<DateTime>(
+                                    const ReactiveDatePickerField(
                                       formControlName: 'period_from',
-                                      firstDate: DateTime(1900),
-                                      lastDate: DateTime(2100),
-                                      builder: (BuildContext context,
-                                          ReactiveDatePickerDelegate<dynamic>
-                                              picker,
-                                          Widget? child) {
-                                        return ReactiveTextField<DateTime>(
-                                          formControlName: 'period_from',
-                                          valueAccessor: DateTimeValueAccessor(
-                                            dateTimeFormat:
-                                                DateFormat('yyyy/MM/dd'),
-                                          ),
-                                          decoration: InputDecoration(
-                                            suffixIcon: IconButton(
-                                              icon: const Icon(
-                                                CupertinoIcons.calendar,
-                                                color: Colors.grey,
-                                              ),
-                                              onPressed: picker.showPicker,
-                                            ),
-                                          ),
-                                          inputFormatters: [
-                                            formatter.dateFormatter,
-                                          ],
-                                        );
-                                      },
+
                                     ),
                                   ],
                                 ),
@@ -275,34 +248,9 @@ class _MedicalVisaFilterState extends State<MedicalVisaFilter> {
                                       height: context
                                           .appTheme.spacing.marginExtraSmall,
                                     ),
-                                    ReactiveDatePicker<DateTime>(
+                                    const ReactiveDatePickerField(
                                       formControlName: 'period_to',
-                                      firstDate: DateTime(1900),
-                                      lastDate: DateTime(2100),
-                                      builder: (BuildContext context,
-                                          ReactiveDatePickerDelegate<dynamic>
-                                              picker,
-                                          Widget? child) {
-                                        return ReactiveTextField<DateTime>(
-                                          formControlName: 'period_to',
-                                          valueAccessor: DateTimeValueAccessor(
-                                            dateTimeFormat:
-                                                DateFormat('yyyy/MM/dd'),
-                                          ),
-                                          decoration: InputDecoration(
-                                            suffixIcon: IconButton(
-                                              icon: const Icon(
-                                                CupertinoIcons.calendar,
-                                                color: Colors.grey,
-                                              ),
-                                              onPressed: picker.showPicker,
-                                            ),
-                                          ),
-                                          inputFormatters: [
-                                            formatter.dateFormatter,
-                                          ],
-                                        );
-                                      },
+
                                     ),
                                   ],
                                 ),

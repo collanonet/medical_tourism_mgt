@@ -28,7 +28,8 @@ class ContractDetailPage extends StatelessWidget {
           child: LayoutView(
             selectedIndex: 9,
             page: Provider(
-              create: (context) => GetIt.I<ContractTemplateModel>(),
+              create: (context) => GetIt.I<ContractTemplateModel>()
+                ..fetchContractTemplateBasicInfo(formGroup),
               child: const ContractDetailScreen(),
             ),
           ),

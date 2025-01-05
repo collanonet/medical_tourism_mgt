@@ -1,17 +1,17 @@
-// Flutter imports:
+// Dart imports:
 import 'dart:convert';
-import 'package:excel/excel.dart';
+
+// Flutter imports:
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart' as pw;
-import 'package:core_utils/core_utils.dart';
-import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_network/core_network.dart';
+import 'package:core_utils/core_utils.dart';
 import 'package:data_patient/data_patient.dart';
 import 'package:injectable/injectable.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:reactive_forms/reactive_forms.dart';
 
 @injectable
@@ -54,7 +54,7 @@ class StatementModel {
     required MedicalInvoiceResponse invoice,
     required FormGroup formGroup,
   }) async {
-    editData.value = AsyncData(data: invoice);
+    editData.value = AsyncData(data: invoice, loading: true);
     formGroup.control('_id').value = invoice.id;
     formGroup.control('logoFile').value = FileSelect(
       url: invoice.logoFile,
@@ -79,10 +79,11 @@ class StatementModel {
     formGroup.control('taxRate').value = invoice.taxRate;
     formGroup.control('taxRateOption').value = invoice.taxRateOption;
 
-    if (invoice.notes != null && invoice.notes!.isNotEmpty) {
+    if (invoice.notes?.isNotEmpty == true) {
       FormArray notes = formGroup.control('notes') as FormArray;
-
-      for (var note in invoice.notes!) {
+      notes.clear();
+      notes.reset();
+      for (NoteInvoiceResponse note in invoice.notes ?? []) {
         notes.add(
           FormGroup({
             '_id': FormControl<String>(value: note.id),
@@ -93,10 +94,11 @@ class StatementModel {
     }
 
     try {
-      if (invoice.item != null && invoice.item!.isNotEmpty) {
+      if (invoice.item?.isNotEmpty == true) {
         FormArray item = formGroup.control('item') as FormArray;
-
-        for (var itemData in invoice.item!) {
+        item.clear();
+        item.reset();
+        for (ItemResponse itemData in invoice.item ?? []) {
           logger.d('edit info: ${itemData.toJson()}');
           item.add(
             FormGroup({
@@ -110,8 +112,12 @@ class StatementModel {
           );
         }
       }
+      await Future.delayed(const Duration(milliseconds: 500), () {
+        editData.value = AsyncData(data: invoice);
+      });
     } catch (e) {
       logger.e(e);
+      editData.value = AsyncData(data: invoice);
     }
   }
 
@@ -191,7 +197,7 @@ class StatementModel {
       MedicalInvoiceRequest request = MedicalInvoiceRequest(
         logoFile: logoFile,
         stampFile: stampFile,
-        type: false,
+        type: true,
         invoiceNumber: formGroup.control('invoiceNumber').value,
         invoiceDate: formGroup.control('invoiceDate').value,
         companyName: formGroup.control('companyName').value,
@@ -364,11 +370,11 @@ class StatementModel {
         loading: true,
       );
       final response = await patientRepository.putInvoice(id, request);
-      medicalInvoiceData.value = AsyncData(data: [
-        response,
-        ...medicalInvoiceData.value.data ??
-            [].where((element) => element.id != response.id),
-      ]);
+      medicalInvoiceData.value = AsyncData(
+        data: medicalInvoiceData.value.data ?? []
+          ..removeWhere((element) => element.id == id)
+          ..add(response),
+      );
     } catch (e) {
       logger.e(e);
       medicalInvoiceData.value = AsyncData(error: e);
@@ -399,100 +405,156 @@ Future<Uint8List?> generatePdfFromInvoice(
     MedicalInvoiceRequest request, Patient patient, String language) async {
   final pdf = pw.Document(pageMode: PdfPageMode.fullscreen);
 
-  late ByteData fontData;
-  late pw.Font ttf;
+  final Uint8List fontData;
 
-  ByteData fontDataJP = await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
-  pw.Font ttfJP = pw.Font.ttf(fontDataJP);
+  Uint8List fontDataJP = (await rootBundle.load('assets/fonts/NotoSans_JP.ttf'))
+      .buffer
+      .asUint8List();
+  final ttfJP = pw.Font.ttf(fontDataJP.buffer.asByteData());
+
+  Uint8List fontDataJPRegular =
+      (await rootBundle.load('assets/fonts/NotoSansJP_Bold.ttf'))
+          .buffer
+          .asUint8List();
+  final ttfJPPRegular = pw.Font.ttf(fontDataJPRegular.buffer.asByteData());
+
+  //OnlyTotalZHTW
+  Uint8List fontDataZHTW =
+      (await rootBundle.load('assets/fonts/Noto_Sans_ZH.ttf'))
+          .buffer
+          .asUint8List();
+  final ttfJPZHTW = pw.Font.ttf(fontDataZHTW.buffer.asByteData());
 
   // Load font based on language
   switch (language) {
     case 'JP':
-      fontData = await rootBundle.load('assets/fonts/NotoSans_JP.ttf');
+      fontData = (await rootBundle.load('assets/fonts/NotoSans_JP.ttf'))
+          .buffer
+          .asUint8List();
       break;
     case 'ZH':
-      fontData = await rootBundle.load('assets/fonts/Noto_Sans_ZH.ttf');
+      fontData = (await rootBundle.load('assets/fonts/Noto_Sans_ZH.ttf'))
+          .buffer
+          .asUint8List();
       break;
     case 'ZHTW':
-      fontData = await rootBundle.load('assets/fonts/Noto_Sans_TC.ttf');
+      fontData = (await rootBundle.load('assets/fonts/Noto_Sans_TC.ttf'))
+          .buffer
+          .asUint8List(); {}
       break;
     case 'VN':
-      fontData = await rootBundle.load('assets/fonts/Roboto_VN.ttf');
+      fontData = (await rootBundle.load('assets/fonts/Roboto_VN.ttf'))
+          .buffer
+          .asUint8List();
       break;
     default: // EN
-      fontData = await rootBundle.load('assets/fonts/Open_Sans_EN.ttf');
+      fontData = (await rootBundle.load('assets/fonts/Open_Sans_EN.ttf'))
+          .buffer
+          .asUint8List();
   }
-  ttf = pw.Font.ttf(fontData);
+  final ttf = pw.Font.ttf(fontData.buffer.asByteData());
 
   String title;
-  String quotationNumberLabel;
-  String quotationDateLabel;
+  String invoiceNumberLabel;
+  String invoiceDateLabel;
   String totalAmountLabel;
   List<String> tableHeaders;
   String subTotalLabel;
   String taxLabel;
   String totalLabel;
   String remarksLabel;
+  String subTitle;
+  String inCharge = 'In charge';
+  String mr = 'Mr./Ms.';
+  String externalTax = 'External tax';
+  String taxIncluded = 'Tax included';
 
   switch (language) {
     case 'JP':
-      title = '御　見　積　書';
-      quotationNumberLabel = '見積番号: ';
-      quotationDateLabel = '見積日: ';
+      title = '請求書';
+      subTitle = '下記の通り請求書いたします。ご用命の程宜しくお願い申し上げます。';
+      invoiceNumberLabel = '請求書番号: ';
+      invoiceDateLabel = '請求書の日付: ';
       totalAmountLabel = '合計金額: ';
       tableHeaders = ['', '項目', '数', '量', '単価', '金額'];
       subTotalLabel = '計';
       taxLabel = '消費税';
       totalLabel = '合　　計';
       remarksLabel = '【特記事項】';
+      inCharge = '担当';
+      mr = '氏/様';
+      externalTax = '外税';
+      taxIncluded = '内税';
       break;
 
     case 'ZH':
-      title = '报价单';
-      quotationNumberLabel = '报价单号: ';
-      quotationDateLabel = '预计日期: ';
+      title = '发票';
+      subTitle = '我们希望向您提供如下所示的发票。\n我们期待您的回复。';
+      invoiceNumberLabel = '报价单号: ';
+      invoiceDateLabel = '预计日期: ';
       totalAmountLabel = '总金额: ';
       tableHeaders = ['', '项目', '数', '量', '单价', '金额'];
       subTotalLabel = '計';
       taxLabel = '消費税';
       totalLabel = '合  计';
       remarksLabel = '【特記事項】';
+      inCharge = '负责';
+      mr = '先生/女士';
+      externalTax = '外部税';
+      taxIncluded = '税已包含';
       break;
 
     case 'ZHTW':
-      title = '報價單';
-      quotationNumberLabel = '報價單號: ';
-      quotationDateLabel = '預計日期: ';
+      title = '發票';
+      subTitle = '我們希望向您提供如下所示的發票。';
+      invoiceNumberLabel = '報價單號: ';
+      invoiceDateLabel = '預計日期: ';
       totalAmountLabel = '總金額: ';
       tableHeaders = ['', '項目', '數', '量', '單價', '金額'];
       subTotalLabel = '計';
       taxLabel = '消費税';
       totalLabel = '合  计';
       remarksLabel = '【特記事項】';
+      inCharge = '負責';
+      mr = '先生/女士';
+      externalTax = '外部稅';
+      taxIncluded = '稅已包含';
       break;
 
     case 'VN':
-      title = 'Báo giá';
-      quotationNumberLabel = 'số báo giá: ';
-      quotationDateLabel = 'ngày dự kiến: ';
+      title = 'Hóa đơn';
+      subTitle =
+          'Chúng tôi muốn cung cấp cho bạn hóa đơn như hiển thị bên dưới.\n Chúng tôi mong nhận được phản hồi từ bạn.';
+      invoiceNumberLabel = 'số báo giá: ';
+      invoiceDateLabel = 'ngày dự kiến: ';
       totalAmountLabel = 'tổng số tiền: ';
       tableHeaders = ['', 'mục', 'số', 'lượng', 'đơn giá', 'số tiền'];
       subTotalLabel = 'tổng cộng';
       taxLabel = 'thuế';
       totalLabel = 'tổng cộng';
       remarksLabel = 'ghi chú';
+      inCharge = 'phụ trách';
+      mr = 'Ông/Bà';
+      externalTax = 'Thuế ngoại';
+      taxIncluded = 'Thuế đã bao gồm';
       break;
 
     default:
-      title = 'Quotation';
-      quotationNumberLabel = 'Quotation number: ';
-      quotationDateLabel = 'Quotation date: ';
+      title = 'Invoice';
+      subTitle =
+          'We would like to provide you with a invoice as shown below.\n We look forward to hearing from you.';
+      invoiceNumberLabel = 'Invoice number: ';
+      invoiceDateLabel = 'Invoice date: ';
       totalAmountLabel = 'Total amount: ';
       tableHeaders = ['', 'Item', 'Quantity', 'Unit', 'Unit Price', 'Amount'];
       subTotalLabel = 'Sub Total';
       taxLabel = 'Tax';
       totalLabel = 'Total';
       remarksLabel = 'Remarks';
+      inCharge = 'In charge';
+      mr = 'Mr./Ms.';
+      externalTax = 'External tax';
+      taxIncluded = 'Tax included';
   }
   Uint8List? logoImage;
   Uint8List? stampImage;
@@ -511,6 +573,7 @@ Future<Uint8List?> generatePdfFromInvoice(
       theme: pw.ThemeData(
         defaultTextStyle: pw.TextStyle(
           font: ttf,
+          fontBold: ttf,
           fontSize: 12,
         ),
       ),
@@ -523,6 +586,7 @@ Future<Uint8List?> generatePdfFromInvoice(
               title,
               style: pw.TextStyle(
                 font: ttf,
+                fontBold: ttf,
                 fontSize: 30,
               ),
               textAlign: pw.TextAlign.center,
@@ -535,12 +599,12 @@ Future<Uint8List?> generatePdfFromInvoice(
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
               pw.Text(
-                quotationNumberLabel,
+                invoiceNumberLabel,
                 style: pw.TextStyle(font: ttf),
               ),
               pw.Text(
                 request.invoiceNumber ?? '',
-                style: pw.TextStyle(font: ttfJP),
+                style: pw.TextStyle(font: ttf),
               ),
             ]),
 
@@ -556,15 +620,13 @@ Future<Uint8List?> generatePdfFromInvoice(
                     children: [
                       pw.Text(
                         '${patient.firstNameRomanized ?? ''} ${patient.middleNameRomanized ?? ''} ${patient.familyNameRomanized ?? ''}'
-                            ' 様',
+                        ' $mr',
                         style: pw.TextStyle(
-                          font: ttfJP,
-                          fontWeight: pw.FontWeight.bold,
-                        ),
+                            font: ttfJPPRegular, fontBold: ttfJPPRegular),
                       ),
                       pw.Text(
-                        '下記の通り御見積りいたします。ご用命の程宜しくお願い申し上げます。',
-                        style: pw.TextStyle(font: ttfJP),
+                        subTitle,
+                        style: pw.TextStyle(font: ttf),
                       ),
                     ])
               ]),
@@ -573,14 +635,14 @@ Future<Uint8List?> generatePdfFromInvoice(
               mainAxisAlignment: pw.MainAxisAlignment.end,
               children: [
                 pw.Text(
-                  quotationDateLabel,
+                  invoiceDateLabel,
                   style: pw.TextStyle(font: ttf),
                 ),
                 pw.Text(
                   request.invoiceDate != null
                       ? Dates.formatFullDate(request.invoiceDate!)
                       : '',
-                  style: pw.TextStyle(font: ttfJP),
+                  style: pw.TextStyle(font: ttf),
                 ),
               ])
         ]),
@@ -595,9 +657,9 @@ Future<Uint8List?> generatePdfFromInvoice(
                   pw.Container(
                     padding: const pw.EdgeInsets.all(8),
                     decoration: pw.BoxDecoration(
-                      color: PdfColor.fromInt(0xff98FF98),
+                      color: const PdfColor.fromInt(0xff98FF98),
                       border: pw.Border.all(
-                        color: PdfColor.fromInt(0xff000000),
+                        color: const PdfColor.fromInt(0xff000000),
                         width: 1,
                       ),
                     ),
@@ -609,9 +671,9 @@ Future<Uint8List?> generatePdfFromInvoice(
                   pw.Container(
                     padding: const pw.EdgeInsets.all(8),
                     decoration: pw.BoxDecoration(
-                      color: PdfColor.fromInt(0xffffffff),
+                      color: const PdfColor.fromInt(0xffffffff),
                       border: pw.Border.all(
-                        color: PdfColor.fromInt(0xff000000),
+                        color: const PdfColor.fromInt(0xff000000),
                         width: 1,
                       ),
                     ),
@@ -621,7 +683,7 @@ Future<Uint8List?> generatePdfFromInvoice(
                           taxCalculation(subTotal(request.item ?? []),
                               (request.taxRate ?? 0)))),
                       style: pw.TextStyle(
-                        font: ttfJP,
+                        font: ttfJPPRegular,
                         fontWeight: pw.FontWeight.bold,
                       ),
                     ),
@@ -658,7 +720,7 @@ Future<Uint8List?> generatePdfFromInvoice(
             children: [
               pw.Text(
                 request.companyName ?? '',
-                style: pw.TextStyle(font: ttfJP),
+                style: pw.TextStyle(font: ttf),
               ),
             ]),
         pw.Row(
@@ -667,7 +729,7 @@ Future<Uint8List?> generatePdfFromInvoice(
             children: [
               pw.Text(
                 request.address ?? '',
-                style: pw.TextStyle(font: ttfJP),
+                style: pw.TextStyle(font: ttf),
               ),
             ]),
         pw.Row(
@@ -676,7 +738,7 @@ Future<Uint8List?> generatePdfFromInvoice(
             children: [
               pw.Text(
                 'Tel : ${request.telNumber ?? ''}',
-                style: pw.TextStyle(font: ttfJP),
+                style: pw.TextStyle(font: ttf),
               ),
             ]),
         pw.Row(
@@ -685,7 +747,7 @@ Future<Uint8List?> generatePdfFromInvoice(
             children: [
               pw.Text(
                 'Fax : ${request.fexNumber ?? ''}',
-                style: pw.TextStyle(font: ttfJP),
+                style: pw.TextStyle(font: ttf),
               ),
             ]),
         pw.Row(
@@ -693,7 +755,11 @@ Future<Uint8List?> generatePdfFromInvoice(
             mainAxisAlignment: pw.MainAxisAlignment.end,
             children: [
               pw.Text(
-                '担当 : ${request.inCharge ?? ''}',
+                '$inCharge :',
+                style: pw.TextStyle(font: ttf),
+              ),
+              pw.Text(
+                ' ${request.inCharge ?? ''}',
                 style: pw.TextStyle(font: ttfJP),
               ),
             ]),
@@ -712,34 +778,34 @@ Future<Uint8List?> generatePdfFromInvoice(
           headerAlignment: pw.Alignment.centerLeft,
           cellAlignment: pw.Alignment.centerLeft,
           headerCellDecoration:
-          const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+              const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
           oddCellStyle: pw.TextStyle(font: ttfJP),
           cellStyle: pw.TextStyle(font: ttfJP),
           data: request.item
-              ?.map((item) => [
-            pw.Text(
-              item.itemCode ?? '--',
-              style: pw.TextStyle(
-                font: ttfJP,
-                fontWeight: pw.FontWeight.bold,
-                fontSize: 9,
-              ),
-            ),
-            pw.Text(
-              item.details ?? '',
-              style: pw.TextStyle(
-                font: ttfJP,
-                fontWeight: pw.FontWeight.normal,
-                fontSize: 10,
-              ),
-            ),
-            item.quantity ?? '',
-            item.unit ?? '',
-            Strings.formatCurrency(item.unitPrice ?? 0),
-            Strings.formatCurrency(
-                (item.quantity ?? 0) * (item.unitPrice ?? 0)),
-          ])
-              .toList() ??
+                  ?.map((item) => [
+                        pw.Text(
+                          item.itemCode ?? '--',
+                          style: pw.TextStyle(
+                            font: ttfJP,
+                            fontWeight: pw.FontWeight.bold,
+                            fontSize: 9,
+                          ),
+                        ),
+                        pw.Text(
+                          item.details ?? '',
+                          style: pw.TextStyle(
+                            font: ttfJP,
+                            fontWeight: pw.FontWeight.normal,
+                            fontSize: 10,
+                          ),
+                        ),
+                        item.quantity ?? '',
+                        item.unit ?? '',
+                        Strings.formatCurrency(item.unitPrice ?? 0),
+                        Strings.formatCurrency(
+                            (item.quantity ?? 0) * (item.unitPrice ?? 0)),
+                      ])
+                  .toList() ??
               [
                 [
                   '',
@@ -765,22 +831,22 @@ Future<Uint8List?> generatePdfFromInvoice(
             1: const pw.FlexColumnWidth(12),
           },
           data: request.notes
-              ?.map((note) => [
-            pw.Row(
-                crossAxisAlignment: pw.CrossAxisAlignment.start,
-                children: [
-                  pw.Text(
-                    note.note ?? '',
-                    style: pw.TextStyle(
-                      font: ttfJP,
-                      fontWeight: pw.FontWeight.normal,
-                      fontSize: 10,
-                    ),
-                    textAlign: pw.TextAlign.left,
-                  )
-                ]),
-          ])
-              .toList() ??
+                  ?.map((note) => [
+                        pw.Row(
+                            crossAxisAlignment: pw.CrossAxisAlignment.start,
+                            children: [
+                              pw.Text(
+                                note.note ?? '',
+                                style: pw.TextStyle(
+                                  font: ttfJP,
+                                  fontWeight: pw.FontWeight.normal,
+                                  fontSize: 10,
+                                ),
+                                textAlign: pw.TextAlign.left,
+                              )
+                            ]),
+                      ])
+                  .toList() ??
               [
                 [
                   '',
@@ -799,14 +865,14 @@ Future<Uint8List?> generatePdfFromInvoice(
               alignment: pw.Alignment.centerLeft,
               child: pw.Text(
                 subTotalLabel,
-                style: pw.TextStyle(font: ttfJP),
+                style: pw.TextStyle(font: ttf),
               ),
             ),
             pw.Align(
               alignment: pw.Alignment.centerRight,
               child: pw.Text(
                 Strings.formatCurrency(subTotal(request.item ?? [])),
-                style: pw.TextStyle(font: ttfJP),
+                style: pw.TextStyle(font: ttf),
               ),
             ),
           ],
@@ -815,31 +881,31 @@ Future<Uint8List?> generatePdfFromInvoice(
               alignment: pw.Alignment.centerLeft,
               child: pw.Text(
                 '$taxLabel（${int.tryParse(request.taxRate.toString()) ?? 0}%）',
-                style: pw.TextStyle(font: ttfJP),
+                style: pw.TextStyle(font: ttf),
               ),
             ),
             pw.Align(
               alignment: pw.Alignment.centerRight,
               child: pw.Text(
-                request.taxRateOption ? '（外税）' : '（内税）',
-                style: pw.TextStyle(font: ttfJP),
+                request.taxRateOption ? '（$externalTax）' : '（$taxIncluded）',
+                style: pw.TextStyle(font: ttf),
               ),
             ),
           ],
         ]),
         pw.TableHelper.fromTextArray(
             headerCellDecoration:
-            const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+                const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
             headerDecoration:
-            const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+                const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
             cellDecoration: (i, _, __) {
               return const pw.BoxDecoration(
                   color: PdfColor.fromInt(0xff98FF98));
             },
             rowDecoration:
-            const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+                const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
             oddRowDecoration:
-            const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
+                const pw.BoxDecoration(color: PdfColor.fromInt(0xff98FF98)),
             headerHeight: 0,
             columnWidths: {
               0: const pw.FlexColumnWidth(10),
@@ -851,7 +917,7 @@ Future<Uint8List?> generatePdfFromInvoice(
                   alignment: pw.Alignment.centerLeft,
                   child: pw.Text(
                     totalLabel,
-                    style: pw.TextStyle(font: ttfJP),
+                    style: pw.TextStyle(font: ttf),
                   ),
                 ),
                 pw.Align(
@@ -862,7 +928,7 @@ Future<Uint8List?> generatePdfFromInvoice(
                         taxCalculation(
                             subTotal(request.item ?? []), request.taxRate))),
                     style: pw.TextStyle(
-                      font: ttfJP,
+                      font: ttfJPPRegular,
                       fontWeight: pw.FontWeight.bold,
                     ),
                   ),
@@ -872,12 +938,12 @@ Future<Uint8List?> generatePdfFromInvoice(
         pw.SizedBox(height: 20),
         pw.Text(
           remarksLabel,
-          style: pw.TextStyle(font: ttfJP),
+          style: pw.TextStyle(font: ttf),
         ),
         pw.SizedBox(height: 20),
         pw.Text(
           request.remarks ?? '',
-          style: pw.TextStyle(font: ttfJP),
+          style: pw.TextStyle(font: ttf),
         ),
       ],
     ),

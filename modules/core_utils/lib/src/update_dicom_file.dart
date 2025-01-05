@@ -1,0 +1,81 @@
+// Dart imports:
+import 'dart:async';
+import 'dart:convert';
+import 'dart:html' as html;
+import 'dart:typed_data';
+
+// Package imports:
+import 'package:core_network/core_network.dart';
+import 'package:dio/dio.dart';
+
+// Project imports:
+import '../core_utils.dart';
+
+// ignore: avoid_web_libraries_in_flutter
+
+
+Future<List<DicomDetailResponse>> uploadDICOMFile() async {
+  html.FileUploadInputElement uploadInput = html.FileUploadInputElement();
+  uploadInput.accept = '*';
+  uploadInput.click();
+
+  List<DicomDetailResponse> dicomResponses = [];
+  Completer<List<DicomDetailResponse>> completer = Completer();
+
+  uploadInput.onChange.listen((e) async {
+    final files = uploadInput.files;
+    if (files != null && files.isNotEmpty) {
+      final file = files.first;
+
+      final reader = html.FileReader();
+      reader.readAsArrayBuffer(file);
+      await reader.onLoad.first;
+
+      final Uint8List fileBytes = reader.result as Uint8List;
+
+      Dio dio = Dio();
+      final token = base64Encode(utf8.encode('orthanc:orthanc123#_123'));
+      dio.options.headers['Authorization'] = 'Basic $token';
+
+      final formData = FormData.fromMap({
+        'file': MultipartFile.fromBytes(
+          fileBytes,
+          filename: file.name,
+        ),
+      });
+
+      try {
+        final response = await dio.post(
+          'https://orthanc-dicon-server-collabonet.pixelplatforms.com/instances',
+          data: formData,
+        );
+
+        if (response.statusCode == 200) {
+          logger.d('File uploaded successfully');
+          var result = DicomResponse.fromJson(response.data);
+          var data = await getDICOMDetail(result.id);
+          if (data != null) {
+            dicomResponses.add(data);
+            completer.complete(dicomResponses);
+          }
+        } else {
+          logger.e('Failed to upload file: ${response.statusCode}');
+          completer
+              .completeError('Failed to upload file: ${response.statusCode}');
+        }
+      } catch (e) {
+        if (e is DioException) {
+          logger.e('DioError occurred: ${e.message}');
+          if (e.response != null) {
+            logger.e('Response data: ${e.response?.data}');
+          }
+        } else {
+          logger.e('Error occurred during file upload: $e');
+        }
+        completer.completeError('Error occurred during file upload: $e');
+      }
+    }
+  });
+
+  return completer.future;
+}

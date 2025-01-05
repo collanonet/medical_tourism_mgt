@@ -1,15 +1,15 @@
-import 'package:core_utils/async.dart';
-import 'package:flutter/cupertino.dart';
+// Flutter imports:
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
+import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:skeletonizer/skeletonizer.dart';
 
+// Project imports:
 import 'statement_model.dart';
 
 class StatementScreenList extends StatefulWidget {
@@ -60,42 +60,25 @@ class _StatementScreenListState extends State<StatementScreenList> {
                     child: Text(
                   '書類番号', // Document Number
                   style: context.textTheme.bodySmall,
+                  textAlign: TextAlign.left,
                 )),
                 Expanded(
                     child: Text(
                   '種別', // type
                   style: context.textTheme.bodySmall,
+                  textAlign: TextAlign.left,
                 )),
                 Expanded(
                     child: Text(
                   '宛先', // address
                   style: context.textTheme.bodySmall,
+                  textAlign: TextAlign.left,
                 )),
                 Expanded(
                     child: Text(
                   '発行日', // Issue date
                   style: context.textTheme.bodySmall,
-                )),
-                Expanded(
-                    flex: 2,
-                    child: Text(
-                      '件名', // subject
-                      style: context.textTheme.bodySmall,
-                    )),
-                Expanded(
-                    child: Text(
-                  'エージェントへ開示', // Disclosure to Agent
-                  style: context.textTheme.bodySmall,
-                )),
-                Expanded(
-                    child: Text(
-                  '患者へ開示', // Disclosure to patients
-                  style: context.textTheme.bodySmall,
-                )),
-                Expanded(
-                    child: Text(
-                  '実績反映', // Reflecting performance
-                  style: context.textTheme.bodySmall,
+                  textAlign: TextAlign.left,
                 )),
                 Expanded(
                     child:
@@ -203,9 +186,11 @@ class _StatementScreenListState extends State<StatementScreenList> {
                             child: Text(
                           data?.invoiceNumber ?? '',
                           style: context.textTheme.bodySmall,
+                          textAlign: TextAlign.left,
                         )),
                         Expanded(
                           child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
                                 padding: EdgeInsets.symmetric(
@@ -235,6 +220,7 @@ class _StatementScreenListState extends State<StatementScreenList> {
                             child: Text(
                           data?.address ?? '',
                           style: context.textTheme.bodySmall,
+                          textAlign: TextAlign.left,
                         )),
                         Expanded(
                             child: Text(
@@ -242,37 +228,23 @@ class _StatementScreenListState extends State<StatementScreenList> {
                               ? Dates.formatFullDate(data!.invoiceDate!)
                               : '',
                           style: context.textTheme.bodySmall,
+                          textAlign: TextAlign.left,
                         )),
                         Expanded(
-                            flex: 2,
-                            child: Text(
-                              '--',
-                              style: context.textTheme.bodySmall,
-                            )),
-                        Expanded(
-                            child: Text(
-                          '--',
-                          style: context.textTheme.bodySmall,
-                        )),
-                        Expanded(
-                            child: Text(
-                          '--',
-                          style: context.textTheme.bodySmall,
-                        )),
-                        Expanded(
-                            child: Text(
-                          '--',
-                          style: context.textTheme.bodySmall,
-                        )),
-                        ElevatedButton(
-                          onPressed: () {
-                            context.read<StatementModel>().editInvoice(
-                                  invoice: data!,
-                                  formGroup: formGroup,
-                                );
-                          },
-                          child: const Text(
-                            '編集',
+                          child: Row(
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  context.read<StatementModel>().editInvoice(
+                                        invoice: data!,
+                                        formGroup: formGroup,
+                                      );
+                                },
+                                child: const Text(
+                                  '編集',
+                                ),
+                              ),
+                            ],
                           ),
                         )
                       ],
@@ -289,7 +261,7 @@ class _StatementScreenListState extends State<StatementScreenList> {
             SizedBox(
               height: context.appTheme.spacing.marginMedium,
             ),
-            Divider(),
+            const Divider(),
             ValueListenableBuilder(
               valueListenable: selected,
               builder: (context, sels, _) {

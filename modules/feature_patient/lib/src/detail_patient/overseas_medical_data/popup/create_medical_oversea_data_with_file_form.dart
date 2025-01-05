@@ -3,32 +3,32 @@ import 'package:core_network/core_network.dart';
 import 'package:core_utils/core_utils.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-FormGroup createMedicalOverseaDataWithFileForm(FileSelect file) {
+FormGroup createMedicalOverseaDataWithFileForm(List<DicomDetailResponse> file) {
   return FormGroup({
-    'file': FormControl<FileSelect>(value: file),
+    'file': FormControl<List<DicomDetailResponse>>(value: file),
     'hospitalName': FormControl<String>(validators: [Validators.required]),
     'category': FormControl<String>(value: '画像データ（DICOM）'),
     'documentName': FormControl<String>(validators: [Validators.required]),
     'issueDate': FormControl<DateTime>(
-        validators: [
-          Validators.required,
-  Validators.pattern(
-  ValidatorRegExp.date,
-  ),
-  ],
+      validators: [
+        Validators.required,
+        Validators.pattern(
+          ValidatorRegExp.date,
+        ),
+      ],
     ),
-
     'commentHospital1': FormControl<String>(),
     'commentOurCompany': FormControl<String>(),
     'commentHospital2': FormControl<String>(),
-
     'sharedUrl': FormControl<String>(),
     'password': FormControl<String>(),
-    'expirationDate': FormControl<DateTime>(validators: [
-      Validators.pattern(
-        ValidatorRegExp.date,
-      ),
-    ],),
+    'expirationDate': FormControl<DateTime>(
+      validators: [
+        Validators.pattern(
+          ValidatorRegExp.date,
+        ),
+      ],
+    ),
     'qrCode': FormControl<FileSelect>(),
   });
 }

@@ -42,6 +42,12 @@ class ChatFilter extends StatelessWidget {
                   ),
                   ReactiveTextField(
                     formControlName: 'patientNameMessage',
+                    decoration: const InputDecoration(
+                      suffixIcon: Icon(
+                        Icons.search,
+                        color: Colors.grey,
+                      ),
+                    ),
                   ),
                 ],
               );

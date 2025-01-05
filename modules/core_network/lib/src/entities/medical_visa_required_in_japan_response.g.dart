@@ -9,7 +9,7 @@ part of 'medical_visa_required_in_japan_response.dart';
 MedicalVisaRequiredInJapanResponse _$MedicalVisaRequiredInJapanResponseFromJson(
         Map<String, dynamic> json) =>
     MedicalVisaRequiredInJapanResponse(
-      id: json['_id'] as String,
+      id: json['_id'] as String?,
       visaInfo: (json['visaInfo'] as List<dynamic>?)
           ?.map((e) => VisaInfo.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -47,7 +47,6 @@ Map<String, dynamic> _$MedicalVisaRequiredInJapanResponseToJson(
     };
 
 VisaInfo _$VisaInfoFromJson(Map<String, dynamic> json) => VisaInfo(
-      id: json['_id'] as String,
       passportDate: json['passportDate'] == null
           ? null
           : DateTime.parse(json['passportDate'] as String),
@@ -60,11 +59,10 @@ VisaInfo _$VisaInfoFromJson(Map<String, dynamic> json) => VisaInfo(
       sendBy: json['sendBy'] as String?,
       byEMS: json['byEMS'] as bool?,
       byFedex: json['byFedex'] as bool?,
-      byothers: json['byothers'] as bool?,
+      byOthers: json['byOthers'] as bool?,
     );
 
 Map<String, dynamic> _$VisaInfoToJson(VisaInfo instance) => <String, dynamic>{
-      '_id': instance.id,
       'passportDate': instance.passportDate?.toIso8601String(),
       'passportFileSelect': instance.passportFileSelect,
       'letterOfGuaranteeDate':
@@ -73,11 +71,11 @@ Map<String, dynamic> _$VisaInfoToJson(VisaInfo instance) => <String, dynamic>{
       'sendBy': instance.sendBy,
       'byEMS': instance.byEMS,
       'byFedex': instance.byFedex,
-      'byothers': instance.byothers,
+      'byOthers': instance.byOthers,
     };
 
 Schedule _$ScheduleFromJson(Map<String, dynamic> json) => Schedule(
-      id: json['_id'] as String,
+      id: json['_id'] as String?,
       treatmentSchedule: json['treatmentSchedule'] == null
           ? null
           : DateTime.parse(json['treatmentSchedule'] as String),
@@ -92,7 +90,7 @@ Map<String, dynamic> _$ScheduleToJson(Schedule instance) => <String, dynamic>{
     };
 
 TravelInfo _$TravelInfoFromJson(Map<String, dynamic> json) => TravelInfo(
-      id: json['_id'] as String,
+      id: json['_id'] as String?,
       landingPermissionDate: json['landingPermissionDate'] == null
           ? null
           : DateTime.parse(json['landingPermissionDate'] as String),

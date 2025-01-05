@@ -1,10 +1,11 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class DocumentRequired extends StatelessWidget {
@@ -12,7 +13,6 @@ class DocumentRequired extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatter = InputFormatter();
     final formGroup = ReactiveForm.of(context) as FormGroup;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,64 +36,22 @@ class DocumentRequired extends StatelessWidget {
                             child: Column(
                               children: [
                                 Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Expanded(child: Text('パスポート')),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    Expanded(
-                                      child: ReactiveDatePicker<DateTime>(
-                                        formControlName: 'passportDate',
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
-                                        builder: (BuildContext context,
-                                            ReactiveDatePickerDelegate<dynamic>
-                                                picker,
-                                            Widget? child) {
-                                          return ReactiveTextField<DateTime>(
+                                    const Row(
+                                      children: [
+                                        Text('パスポート'),
+                                        SizedBox(
+                                          width: 150,
+                                        ),
+                                        IntrinsicWidth(
+                                          stepWidth: 200,
+                                          child: ReactiveDatePickerField(
                                             formControlName: 'passportDate',
-                                            valueAccessor:
-                                                DateTimeValueAccessor(
-                                              dateTimeFormat:
-                                                  DateFormat('yyyy/MM/dd'),
-                                            ),
-                                            onChanged: (value) {
-                                              logger.d(value);
-                                            },
-                                            onSubmitted: (value) {
-                                              logger.d(value);
-                                            },
-                                            decoration: InputDecoration(
-                                              suffixIcon: IconButton(
-                                                icon: const Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
-                                                ),
-                                                onPressed: picker.showPicker,
-                                              ),
-                                            ),
-                                            inputFormatters: [
-                                              formatter.dateFormatter,
-                                            ],
-                                          );
-                                        },
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    Expanded(
-                                      flex: 3,
-                                      child: SizedBox(
-                                        width: context
-                                            .appTheme.spacing.marginMedium,
-                                      ),
-                                    ),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                     fileUpload(context, currentForm,
                                         'passportFileSelect'),
@@ -105,56 +63,23 @@ class DocumentRequired extends StatelessWidget {
                                 Row(
                                   children: [
                                     const Expanded(child: Text('身元保証書')),
-                                    SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    Expanded(
-                                      child: ReactiveDatePicker<DateTime>(
+                                    // SizedBox(
+                                    //   width:
+                                    //       context.appTheme.spacing.marginMedium,
+                                    // ),
+                                    const IntrinsicWidth(
+                                      stepWidth: 200,
+                                      child: ReactiveDatePickerField(
                                         formControlName:
                                             'letterOfGuaranteeDate',
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
-                                        builder: (BuildContext context,
-                                            ReactiveDatePickerDelegate<dynamic>
-                                                picker,
-                                            Widget? child) {
-                                          return ReactiveTextField<DateTime>(
-                                            formControlName:
-                                                'letterOfGuaranteeDate',
-                                            valueAccessor:
-                                                DateTimeValueAccessor(
-                                              dateTimeFormat:
-                                                  DateFormat('yyyy/MM/dd'),
-                                            ),
-                                            onChanged: (value) {
-                                              logger.d(value);
-                                            },
-                                            onSubmitted: (value) {
-                                              logger.d(value);
-                                            },
-                                            decoration: InputDecoration(
-                                              suffixIcon: IconButton(
-                                                icon: const Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
-                                                ),
-                                                onPressed: picker.showPicker,
-                                              ),
-                                            ),
-                                            inputFormatters: [
-                                              formatter.dateFormatter,
-                                            ],
-                                          );
-                                        },
                                       ),
                                     ),
+                                    // SizedBox(
+                                    //   width:
+                                    //       context.appTheme.spacing.marginMedium,
+                                    // ),
                                     SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                    Expanded(
-                                      flex: 3,
+                                      width: 600,
                                       child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.start,
@@ -221,12 +146,123 @@ class DocumentRequired extends StatelessWidget {
                                         ],
                                       ),
                                     ),
+                                    // SizedBox(
+                                    //   width:
+                                    //       context.appTheme.spacing.marginMedium,
+                                    // ),
                                     SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
+                                      width: 200,
+                                      child: ColumnSeparated(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        separatorBuilder: (context, index) =>
+                                            SizedBox(
+                                          height: context
+                                              .appTheme.spacing.formSpacing,
+                                        ),
+                                        children: [
+                                          RowSeparated(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            separatorBuilder:
+                                                (context, index) => SizedBox(
+                                              width: context
+                                                  .appTheme.spacing.formSpacing,
+                                            ),
+                                            children: [
+                                              SizedBox(
+                                                width: 75,
+                                                child: RowSeparated(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  separatorBuilder:
+                                                      (context, index) =>
+                                                          SizedBox(
+                                                    width: context
+                                                        .appTheme
+                                                        .spacing
+                                                        .marginExtraSmall,
+                                                  ),
+                                                  children: [
+                                                    Flexible(
+                                                      child:
+                                                          ReactiveValueListenableBuilder<
+                                                              FileSelect>(
+                                                        formControlName:
+                                                            'letterOfGuaranteeFileSelect',
+                                                        builder: (context,
+                                                            control, _) {
+                                                          return InkWell(
+                                                            onTap: () {
+                                                              if (control.value
+                                                                          ?.url !=
+                                                                      null ||
+                                                                  control.value
+                                                                          ?.filename !=
+                                                                      null) {
+                                                                openUrlInBrowser(
+                                                                    fileName: control
+                                                                            .value
+                                                                            ?.url ??
+                                                                        control
+                                                                            .value!
+                                                                            .filename!);
+                                                              }
+                                                            },
+                                                            child: Text(
+                                                              control.value
+                                                                      ?.url ??
+                                                                  control.value
+                                                                      ?.filename ??
+                                                                  'File Name',
+                                                              style: context
+                                                                  .textTheme
+                                                                  .bodySmall,
+                                                              overflow:
+                                                                  TextOverflow
+                                                                      .ellipsis,
+                                                            ),
+                                                          );
+                                                        },
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              GestureDetector(
+                                                onTap: () {
+                                                  filePicker().then((value) {
+                                                    if (value != null) {
+                                                      currentForm
+                                                          .control(
+                                                              'letterOfGuaranteeFileSelect')
+                                                          .value = value;
+                                                      logger
+                                                          .d('Value Not Null');
+                                                    }
+                                                  });
+                                                },
+                                                child: Chip(
+                                                  label: const Text('ファイル選択'),
+                                                  labelStyle: TextStyle(
+                                                    color: context.appTheme
+                                                        .secondaryBackgroundColor,
+                                                  ),
+                                                  backgroundColor: context
+                                                      .appTheme.primaryColor,
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      ),
                                     ),
-                                    fileUpload(context, currentForm,
-                                        'letterOfGuaranteeFileSelect'),
+                                    // fileUpload(context, currentForm,
+                                    //       'letterOfGuaranteeFileSelect'),
                                   ],
                                 ),
                               ],
@@ -314,66 +350,24 @@ class DocumentRequired extends StatelessWidget {
                       .map((currentForm) => ReactiveForm(
                             formGroup: currentForm,
                             child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Expanded(child: Text('治療予定表')),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                Expanded(
-                                  child: ReactiveDatePicker<DateTime>(
-                                    formControlName: 'treatmentSchedule',
-                                    firstDate: DateTime(1900),
-                                    lastDate: DateTime(2100),
-                                    builder: (BuildContext context,
-                                        ReactiveDatePickerDelegate<dynamic>
-                                            picker,
-                                        Widget? child) {
-                                      return ReactiveTextField<DateTime>(
+                                const Row(
+                                  children: [
+                                    Text('治療予定表'),
+                                    SizedBox(
+                                      width: 150,
+                                    ),
+                                    IntrinsicWidth(
+                                      stepWidth: 200,
+                                      child: ReactiveDatePickerField(
                                         formControlName: 'treatmentSchedule',
-                                        valueAccessor: DateTimeValueAccessor(
-                                          dateTimeFormat:
-                                              DateFormat('yyyy/MM/dd'),
-                                        ),
-                                        onChanged: (value) {
-                                          logger.d(value);
-                                        },
-                                        onSubmitted: (value) {
-                                          logger.d(value);
-                                        },
-                                        decoration: InputDecoration(
-                                          suffixIcon: IconButton(
-                                            icon: const Icon(
-                                              CupertinoIcons.calendar,
-                                              color: Colors.grey,
-                                            ),
-                                            onPressed: picker.showPicker,
-                                          ),
-                                        ),
-                                        inputFormatters: [
-                                          formatter.dateFormatter,
-                                        ],
-                                      );
-                                    },
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
-                                ),
-                                Expanded(
-                                  flex: 3,
-                                  child: SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: context.appTheme.spacing.marginMedium,
+                                      ),
+                                    ),
+                                  ],
                                 ),
                                 fileUpload(context, currentForm,
                                     'treatmentScheduleFileSelect'),
-                                // ElevatedButton(
-                                //     onPressed: () {},
-                                //     child: const Text('ファイル選択'))
                               ],
                             ),
                           ))
@@ -441,57 +435,21 @@ class DocumentRequired extends StatelessWidget {
                 height: context.appTheme.spacing.marginMedium,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Expanded(child: Text('理由書')),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
-                  ),
-                  Expanded(
-                    child: ReactiveDatePicker<DateTime>(
-                      formControlName: 'statementOfReasonsDate',
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime(2100),
-                      builder: (BuildContext context,
-                          ReactiveDatePickerDelegate<dynamic> picker,
-                          Widget? child) {
-                        return ReactiveTextField<DateTime>(
+                  const Row(
+                    children: [
+                      Text('理由書'),
+                      SizedBox(
+                        width: 178,
+                      ),
+                      IntrinsicWidth(
+                        stepWidth: 200,
+                        child: ReactiveDatePickerField(
                           formControlName: 'statementOfReasonsDate',
-                          valueAccessor: DateTimeValueAccessor(
-                            dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                          ),
-                          onChanged: (value) {
-                            logger.d(value);
-                          },
-                          onSubmitted: (value) {
-                            logger.d(value);
-                          },
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              icon: const Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
-                              ),
-                              onPressed: picker.showPicker,
-                            ),
-                          ),
-                          inputFormatters: [
-                            formatter.dateFormatter,
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: SizedBox(
-                      width: context.appTheme.spacing.marginMedium,
-                    ),
-                  ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
+                        ),
+                      ),
+                    ],
                   ),
                   fileUpload(
                       context,
@@ -503,57 +461,21 @@ class DocumentRequired extends StatelessWidget {
                 height: context.appTheme.spacing.marginMedium,
               ),
               Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Expanded(child: Text('同行者リスト')),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
-                  ),
-                  Expanded(
-                    child: ReactiveDatePicker<DateTime>(
-                      formControlName: 'travelCompanionListDate',
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime(2100),
-                      builder: (BuildContext context,
-                          ReactiveDatePickerDelegate<dynamic> picker,
-                          Widget? child) {
-                        return ReactiveTextField<DateTime>(
+                  const Row(
+                    children: [
+                      Text('同行者リスト'),
+                      SizedBox(
+                        width: 135,
+                      ),
+                      IntrinsicWidth(
+                        stepWidth: 200,
+                        child: ReactiveDatePickerField(
                           formControlName: 'travelCompanionListDate',
-                          valueAccessor: DateTimeValueAccessor(
-                            dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                          ),
-                          onChanged: (value) {
-                            logger.d(value);
-                          },
-                          onSubmitted: (value) {
-                            logger.d(value);
-                          },
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              icon: const Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
-                              ),
-                              onPressed: picker.showPicker,
-                            ),
-                          ),
-                          inputFormatters: [
-                            formatter.dateFormatter,
-                          ],
-                        );
-                      },
-                    ),
-                  ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
-                  ),
-                  Expanded(
-                    flex: 3,
-                    child: SizedBox(
-                      width: context.appTheme.spacing.marginMedium,
-                    ),
-                  ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
+                        ),
+                      ),
+                    ],
                   ),
                   fileUpload(
                       context,
@@ -576,508 +498,380 @@ class DocumentRequired extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Container(
-                                      padding: EdgeInsets.all(context
-                                          .appTheme.spacing.marginMedium),
-                                      decoration: BoxDecoration(
-                                        border: Border.all(
-                                          color: context.appTheme.primaryColor,
+                                    Row(
+                                      children: [
+                                        Expanded(
+                                          child: Container(
+                                            padding: EdgeInsets.all(context
+                                                .appTheme.spacing.marginMedium),
+                                            decoration: BoxDecoration(
+                                              border: Border.all(
+                                                color: context
+                                                    .appTheme.primaryColor,
+                                              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(context
+                                                      .appTheme
+                                                      .spacing
+                                                      .borderRadiusMedium),
+                                            ),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Row(
+                                                  children: [
+                                                    const Expanded(
+                                                      child:
+                                                          ReactiveDatePickerField(
+                                                        formControlName:
+                                                            'landingPermissionDate',
+                                                        label: '上陸許可日',
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: context.appTheme
+                                                          .spacing.marginMedium,
+                                                    ),
+                                                    const Expanded(
+                                                      child:
+                                                          ReactiveDatePickerField(
+                                                        formControlName:
+                                                            'visaValidityPeriodExpirationDate',
+                                                        label: 'ビザの有効期限　満了日',
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: context.appTheme
+                                                          .spacing.marginMedium,
+                                                    ),
+                                                    Expanded(
+                                                      child: SizedBox(
+                                                        width: context
+                                                            .appTheme
+                                                            .spacing
+                                                            .marginMedium,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: context.appTheme
+                                                      .spacing.marginMedium,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    const Expanded(
+                                                      child:
+                                                          ReactiveDatePickerField(
+                                                        formControlName:
+                                                            'dateOfEntryIntoJapan',
+                                                        label: '日本への入国日',
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: context.appTheme
+                                                          .spacing.marginMedium,
+                                                    ),
+                                                    const Expanded(
+                                                      child:
+                                                          ReactiveDatePickerField(
+                                                        formControlName:
+                                                            'departureDateFromJapan',
+                                                        label: '日本からの出国日',
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: context.appTheme
+                                                          .spacing.marginMedium,
+                                                    ),
+                                                    Expanded(
+                                                      child: SizedBox(
+                                                        width: context
+                                                            .appTheme
+                                                            .spacing
+                                                            .marginMedium,
+                                                      ),
+                                                    )
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: context.appTheme
+                                                      .spacing.marginMedium,
+                                                ),
+                                                Text(
+                                                  '入国',
+                                                  style: context
+                                                      .textTheme.titleMedium,
+                                                ),
+                                                SizedBox(
+                                                  height: context.appTheme
+                                                      .spacing.marginMedium,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child: ReactiveTextField(
+                                                        formControlName:
+                                                            'departureIn',
+                                                        decoration:
+                                                            const InputDecoration(
+                                                          label: Text(
+                                                            '出発地',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: context.appTheme
+                                                          .spacing.marginMedium,
+                                                    ),
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child: ReactiveTextField(
+                                                        formControlName:
+                                                            'arrivalIn',
+                                                        decoration:
+                                                            const InputDecoration(
+                                                          label: Text(
+                                                            '到着地',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: context.appTheme
+                                                          .spacing.marginMedium,
+                                                    ),
+                                                    Expanded(
+                                                      child: ReactiveTextField(
+                                                        formControlName:
+                                                            'flightNumberIn',
+                                                        decoration:
+                                                            const InputDecoration(
+                                                          label: Text(
+                                                            '便名',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: context.appTheme
+                                                          .spacing.marginMedium,
+                                                    ),
+                                                    Expanded(
+                                                      child: ReactiveTextField(
+                                                        formControlName:
+                                                            'departureTimeIn',
+                                                        decoration:
+                                                            const InputDecoration(
+                                                          label: Text(
+                                                            '発時刻',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: context.appTheme
+                                                          .spacing.marginMedium,
+                                                    ),
+                                                    Expanded(
+                                                      child: ReactiveTextField(
+                                                        formControlName:
+                                                            'arrivalTimeIn',
+                                                        decoration:
+                                                            const InputDecoration(
+                                                          label: Text(
+                                                            '着時刻',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: context.appTheme
+                                                          .spacing.marginMedium,
+                                                    ),
+                                                    Expanded(
+                                                      child: SizedBox(
+                                                        width: context
+                                                            .appTheme
+                                                            .spacing
+                                                            .marginMedium,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: context.appTheme
+                                                      .spacing.marginMedium,
+                                                ),
+                                                Text('出国',
+                                                    style: context
+                                                        .textTheme.titleMedium),
+                                                SizedBox(
+                                                  height: context.appTheme
+                                                      .spacing.marginMedium,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child: ReactiveTextField(
+                                                        formControlName:
+                                                            'departureOut',
+                                                        decoration:
+                                                            const InputDecoration(
+                                                          label: Text(
+                                                            '出発地',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: context.appTheme
+                                                          .spacing.marginMedium,
+                                                    ),
+                                                    Expanded(
+                                                      flex: 2,
+                                                      child: ReactiveTextField(
+                                                        formControlName:
+                                                            'arrivalOut',
+                                                        decoration:
+                                                            const InputDecoration(
+                                                          label: Text(
+                                                            '到着地',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: context.appTheme
+                                                          .spacing.marginMedium,
+                                                    ),
+                                                    Expanded(
+                                                      child: ReactiveTextField(
+                                                        formControlName:
+                                                            'flightNumberOut',
+                                                        decoration:
+                                                            const InputDecoration(
+                                                          label: Text(
+                                                            '便名',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: context.appTheme
+                                                          .spacing.marginMedium,
+                                                    ),
+                                                    Expanded(
+                                                      child: ReactiveTextField(
+                                                        formControlName:
+                                                            'departureTimeOut',
+                                                        decoration:
+                                                            const InputDecoration(
+                                                          label: Text(
+                                                            '発時刻',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: context.appTheme
+                                                          .spacing.marginMedium,
+                                                    ),
+                                                    Expanded(
+                                                      child: ReactiveTextField(
+                                                        formControlName:
+                                                            'arrivalTimeOut',
+                                                        decoration:
+                                                            const InputDecoration(
+                                                          label: Text(
+                                                            '着時刻',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: context.appTheme
+                                                          .spacing.marginMedium,
+                                                    ),
+                                                    Expanded(
+                                                      child: ReactiveTextField(
+                                                        formControlName:
+                                                            'seatNumberOut',
+                                                        decoration:
+                                                            const InputDecoration(
+                                                          label: Text(
+                                                            '座席番号',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                                SizedBox(
+                                                  height: context.appTheme
+                                                      .spacing.marginMedium,
+                                                ),
+                                                Row(
+                                                  children: [
+                                                    Expanded(
+                                                      child: ReactiveTextField(
+                                                        formControlName:
+                                                            'remarks',
+                                                        decoration:
+                                                            const InputDecoration(
+                                                          label: Text(
+                                                            '備考',
+                                                          ),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    SizedBox(
+                                                      width: context.appTheme
+                                                          .spacing.marginMedium,
+                                                    ),
+                                                    Expanded(
+                                                      child: SizedBox(
+                                                        width: context
+                                                            .appTheme
+                                                            .spacing
+                                                            .marginMedium,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ),
-                                        borderRadius: BorderRadius.circular(
-                                            context.appTheme.spacing
-                                                .borderRadiusMedium),
-                                      ),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Row(
+                                        SizedBox(
+                                          width: 60,
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
                                             children: [
-                                              Expanded(
-                                                child: ReactiveDatePicker<
-                                                    DateTime>(
-                                                  formControlName:
-                                                      'landingPermissionDate',
-                                                  firstDate: DateTime(1900),
-                                                  lastDate: DateTime(2100),
-                                                  builder: (BuildContext
-                                                          context,
-                                                      ReactiveDatePickerDelegate<
-                                                              dynamic>
-                                                          picker,
-                                                      Widget? child) {
-                                                    return ReactiveTextField<
-                                                        DateTime>(
-                                                      formControlName:
-                                                          'landingPermissionDate',
-                                                      valueAccessor:
-                                                          DateTimeValueAccessor(
-                                                        dateTimeFormat:
-                                                            DateFormat(
-                                                                'yyyy/MM/dd'),
-                                                      ),
-                                                      onChanged: (value) {
-                                                        logger.d(value);
-                                                      },
-                                                      onSubmitted: (value) {
-                                                        logger.d(value);
-                                                      },
-                                                      decoration:
-                                                          InputDecoration(
-                                                        label: const Text(
-                                                          '上陸許可日',
-                                                        ),
-                                                        suffixIcon: IconButton(
-                                                          icon: const Icon(
-                                                            CupertinoIcons
-                                                                .calendar,
-                                                            color: Colors.grey,
-                                                          ),
-                                                          onPressed:
-                                                              picker.showPicker,
-                                                        ),
-                                                      ),
-                                                      inputFormatters: [
-                                                        formatter.dateFormatter,
-                                                      ],
-                                                    );
+                                              if (formArray.controls
+                                                      .indexOf(currentForm) !=
+                                                  0) ...{
+                                                IconButton(
+                                                  icon: const Icon(
+                                                    Icons.remove_circle,
+                                                    color: Colors.red,
+                                                  ),
+                                                  onPressed: () {
+                                                    formArray.removeAt(formArray
+                                                        .controls
+                                                        .indexOf(currentForm));
                                                   },
                                                 ),
-                                              ),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Expanded(
-                                                child: ReactiveDatePicker<
-                                                    DateTime>(
-                                                  formControlName:
-                                                      'visaValidityPeriodExpirationDate',
-                                                  firstDate: DateTime(1900),
-                                                  lastDate: DateTime(2100),
-                                                  builder: (BuildContext
-                                                          context,
-                                                      ReactiveDatePickerDelegate<
-                                                              dynamic>
-                                                          picker,
-                                                      Widget? child) {
-                                                    return ReactiveTextField<
-                                                        DateTime>(
-                                                      formControlName:
-                                                          'visaValidityPeriodExpirationDate',
-                                                      valueAccessor:
-                                                          DateTimeValueAccessor(
-                                                        dateTimeFormat:
-                                                            DateFormat(
-                                                                'yyyy/MM/dd'),
-                                                      ),
-                                                      onChanged: (value) {
-                                                        logger.d(value);
-                                                      },
-                                                      onSubmitted: (value) {
-                                                        logger.d(value);
-                                                      },
-                                                      decoration:
-                                                          InputDecoration(
-                                                        label: const Text(
-                                                          'ビザの有効期限　満了日',
-                                                        ),
-                                                        suffixIcon: IconButton(
-                                                          icon: const Icon(
-                                                            CupertinoIcons
-                                                                .calendar,
-                                                            color: Colors.grey,
-                                                          ),
-                                                          onPressed:
-                                                              picker.showPicker,
-                                                        ),
-                                                      ),
-                                                      inputFormatters: [
-                                                        formatter.dateFormatter,
-                                                      ],
-                                                    );
-                                                  },
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Expanded(
-                                                child: SizedBox(
-                                                  width: context.appTheme
-                                                      .spacing.marginMedium,
-                                                ),
-                                              )
+                                              },
                                             ],
                                           ),
-                                          SizedBox(
-                                            height: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: ReactiveDatePicker<
-                                                    DateTime>(
-                                                  formControlName:
-                                                      'dateOfEntryIntoJapan',
-                                                  firstDate: DateTime(1900),
-                                                  lastDate: DateTime(2100),
-                                                  builder: (BuildContext
-                                                          context,
-                                                      ReactiveDatePickerDelegate<
-                                                              dynamic>
-                                                          picker,
-                                                      Widget? child) {
-                                                    return ReactiveTextField<
-                                                        DateTime>(
-                                                      formControlName:
-                                                          'dateOfEntryIntoJapan',
-                                                      valueAccessor:
-                                                          DateTimeValueAccessor(
-                                                        dateTimeFormat:
-                                                            DateFormat(
-                                                                'yyyy/MM/dd'),
-                                                      ),
-                                                      onChanged: (value) {
-                                                        logger.d(value);
-                                                      },
-                                                      onSubmitted: (value) {
-                                                        logger.d(value);
-                                                      },
-                                                      decoration:
-                                                          InputDecoration(
-                                                        label: const Text(
-                                                          '日本への入国日',
-                                                        ),
-                                                        suffixIcon: IconButton(
-                                                          icon: const Icon(
-                                                            CupertinoIcons
-                                                                .calendar,
-                                                            color: Colors.grey,
-                                                          ),
-                                                          onPressed:
-                                                              picker.showPicker,
-                                                        ),
-                                                      ),
-                                                      inputFormatters: [
-                                                        formatter.dateFormatter,
-                                                      ],
-                                                    );
-                                                  },
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Expanded(
-                                                child: ReactiveDatePicker<
-                                                    DateTime>(
-                                                  formControlName:
-                                                      'departureDateFromJapan',
-                                                  firstDate: DateTime(1900),
-                                                  lastDate: DateTime(2100),
-                                                  builder: (BuildContext
-                                                          context,
-                                                      ReactiveDatePickerDelegate<
-                                                              dynamic>
-                                                          picker,
-                                                      Widget? child) {
-                                                    return ReactiveTextField<
-                                                        DateTime>(
-                                                      formControlName:
-                                                          'departureDateFromJapan',
-                                                      valueAccessor:
-                                                          DateTimeValueAccessor(
-                                                        dateTimeFormat:
-                                                            DateFormat(
-                                                                'yyyy/MM/dd'),
-                                                      ),
-                                                      onChanged: (value) {
-                                                        logger.d(value);
-                                                      },
-                                                      onSubmitted: (value) {
-                                                        logger.d(value);
-                                                      },
-                                                      decoration:
-                                                          InputDecoration(
-                                                        label: const Text(
-                                                          '日本からの出国日',
-                                                        ),
-                                                        suffixIcon: IconButton(
-                                                          icon: const Icon(
-                                                            CupertinoIcons
-                                                                .calendar,
-                                                            color: Colors.grey,
-                                                          ),
-                                                          onPressed:
-                                                              picker.showPicker,
-                                                        ),
-                                                      ),
-                                                      inputFormatters: [
-                                                        formatter.dateFormatter,
-                                                      ],
-                                                    );
-                                                  },
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Expanded(
-                                                child: SizedBox(
-                                                  width: context.appTheme
-                                                      .spacing.marginMedium,
-                                                ),
-                                              )
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
-                                          Text(
-                                            '入国',
-                                            style:
-                                                context.textTheme.titleMedium,
-                                          ),
-                                          SizedBox(
-                                            height: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                flex: 2,
-                                                child: ReactiveTextField(
-                                                  formControlName:
-                                                      'departureIn',
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    label: Text(
-                                                      '出発地',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Expanded(
-                                                flex: 2,
-                                                child: ReactiveTextField(
-                                                  formControlName: 'arrivalIn',
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    label: Text(
-                                                      '到着地',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Expanded(
-                                                child: ReactiveTextField(
-                                                  formControlName:
-                                                      'flightNumberIn',
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    label: Text(
-                                                      '便名',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Expanded(
-                                                child: ReactiveTextField(
-                                                  formControlName:
-                                                      'departureTimeIn',
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    label: Text(
-                                                      '発時刻',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Expanded(
-                                                child: ReactiveTextField(
-                                                  formControlName:
-                                                      'arrivalTimeIn',
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    label: Text(
-                                                      '着時刻',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Expanded(
-                                                child: SizedBox(
-                                                  width: context.appTheme
-                                                      .spacing.marginMedium,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
-                                          Text('出国',
-                                              style: context
-                                                  .textTheme.titleMedium),
-                                          SizedBox(
-                                            height: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                flex: 2,
-                                                child: ReactiveTextField(
-                                                  formControlName:
-                                                      'departureOut',
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    label: Text(
-                                                      '出発地',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Expanded(
-                                                flex: 2,
-                                                child: ReactiveTextField(
-                                                  formControlName: 'arrivalOut',
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    label: Text(
-                                                      '到着地',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Expanded(
-                                                child: ReactiveTextField(
-                                                  formControlName:
-                                                      'flightNumberOut',
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    label: Text(
-                                                      '便名',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Expanded(
-                                                child: ReactiveTextField(
-                                                  formControlName:
-                                                      'departureTimeOut',
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    label: Text(
-                                                      '発時刻',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Expanded(
-                                                child: ReactiveTextField(
-                                                  formControlName:
-                                                      'arrivalTimeOut',
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    label: Text(
-                                                      '着時刻',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Expanded(
-                                                child: ReactiveTextField(
-                                                  formControlName:
-                                                      'seatNumberOut',
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    label: Text(
-                                                      '座席番号',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                            height: context
-                                                .appTheme.spacing.marginMedium,
-                                          ),
-                                          Row(
-                                            children: [
-                                              Expanded(
-                                                child: ReactiveTextField(
-                                                  formControlName: 'remarks',
-                                                  decoration:
-                                                      const InputDecoration(
-                                                    label: Text(
-                                                      '出発地',
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                              SizedBox(
-                                                width: context.appTheme.spacing
-                                                    .marginMedium,
-                                              ),
-                                              Expanded(
-                                                child: SizedBox(
-                                                  width: context.appTheme
-                                                      .spacing.marginMedium,
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
+                                        )
+                                      ],
                                     ),
                                   ],
                                 ),
@@ -1223,12 +1017,17 @@ class DocumentRequired extends StatelessWidget {
                   builder: (context, control, _) {
                     return InkWell(
                       onTap: () {
-                        if (control.value?.url != null) {
-                          openUrlInBrowser(fileName: control.value!.url!);
-                        }
+                        showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                            content: PreviewFile(fileSelect: control.value),
+                          ),
+                        );
                       },
                       child: Text(
-                        control.value?.filename ?? 'File Input .....',
+                        control.value?.url ??
+                            control.value?.filename ??
+                            'File Name',
                         style: context.textTheme.bodySmall,
                       ),
                     );
@@ -1241,6 +1040,7 @@ class DocumentRequired extends StatelessWidget {
                 filePicker().then((value) {
                   if (value != null) {
                     currentForm.control(fileName).value = value;
+                    logger.d('Value Not Null');
                   }
                 });
               },

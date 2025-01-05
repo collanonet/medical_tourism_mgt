@@ -1,12 +1,11 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
@@ -56,9 +55,12 @@ class _CreateMedicalOverseaDataWithUrlScreenState
                 '共有用URL',
                 style: Theme.of(context).textTheme.bodySmall,
               ),
-              ReactiveTextField(
-                formControlName: 'sharedUrl',
-                keyboardType: TextInputType.url,
+              SizedBox(
+                width: 300,
+                child: ReactiveTextField(
+                  formControlName: 'sharedUrl',
+                  keyboardType: TextInputType.url,
+                ),
               ),
               Text(
                 'パスワード',
@@ -74,33 +76,10 @@ class _CreateMedicalOverseaDataWithUrlScreenState
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Expanded(
-                    child: ReactiveDatePicker<DateTime>(
+                  const Expanded(
+                    child: ReactiveDatePickerField(
                       formControlName: 'expirationDate',
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime(2100),
-                      builder: (BuildContext context,
-                          ReactiveDatePickerDelegate<dynamic> picker,
-                          Widget? child) {
-                        return ReactiveTextField<DateTime>(
-                          formControlName: 'expirationDate',
-                          valueAccessor: DateTimeValueAccessor(
-                            dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                          ),
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              icon: const Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
-                              ),
-                              onPressed: picker.showPicker,
-                            ),
-                          ),
-                          inputFormatters: [
-                            formatter.dateFormatter,
-                          ],
-                        );
-                      },
+
                     ),
                   ),
                   SizedBox(

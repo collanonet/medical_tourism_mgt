@@ -73,7 +73,7 @@ class PatientResponseTreatmentModel {
   insertMedicalRecordPatientResponseTreatment(
       MedicalRecordPatientResponseTreatment? data, FormGroup formGroup) async {
     if (data != null) {
-      formGroup.control('id').value = data.id;
+      formGroup.control('_id').value = data.id;
       formGroup.control('treatment').value = data.treatment;
       formGroup.control('treatmentInJapan').value = data.treatmentInJapan;
       formGroup.control('secondOpinion').value = data.secondOpinion;

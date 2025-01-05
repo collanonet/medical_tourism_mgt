@@ -10,6 +10,7 @@ MedicalRecordVisaResponse _$MedicalRecordVisaResponseFromJson(
         Map<String, dynamic> json) =>
     MedicalRecordVisaResponse(
       id: json['_id'] as String,
+      medicalRecord: json['medicalRecord'] as String,
       personal: (json['personal'] as List<dynamic>?)
           ?.map((e) =>
               MedicalVisaPersonalResponse.fromJson(e as Map<String, dynamic>))
@@ -34,16 +35,27 @@ MedicalRecordVisaResponse _$MedicalRecordVisaResponseFromJson(
           ? null
           : MedicalVisaTravelCompanionResponse.fromJson(
               json['travelCompanion'] as Map<String, dynamic>),
+      necessaryInJapan: json['necessaryInJapan'] == null
+          ? null
+          : MedicalVisaNecessaryInJapanResponse.fromJson(
+              json['necessaryInJapan'] as Map<String, dynamic>),
+      afterGettingVisaFinal: json['afterGettingVisaFinal'] == null
+          ? null
+          : MedicalAfterGettingVisaFinalRequest.fromJson(
+              json['afterGettingVisaFinal'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$MedicalRecordVisaResponseToJson(
         MedicalRecordVisaResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
+      'medicalRecord': instance.medicalRecord,
       'personal': instance.personal,
       'stayPeriod': instance.stayPeriod,
       'requiredInJapan': instance.requiredInJapan,
       'visaWithdrawal': instance.visaWithdrawal,
       'afterGettingVisa': instance.afterGettingVisa,
       'travelCompanion': instance.travelCompanion,
+      'necessaryInJapan': instance.necessaryInJapan,
+      'afterGettingVisaFinal': instance.afterGettingVisaFinal,
     };

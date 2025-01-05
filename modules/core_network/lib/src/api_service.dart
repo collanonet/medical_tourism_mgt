@@ -8,9 +8,6 @@ import 'package:retrofit/retrofit.dart';
 import '../core_network.dart';
 import '../entities.dart';
 import 'endpoints.dart';
-import 'entities/medical_record_visa_response.dart';
-import 'entities/request/medical_visa_after_getting_visa_request.dart';
-import 'entities/request/medical_visa_reuied_in_japan_request.dart';
 
 part 'api_service.g.dart';
 
@@ -18,7 +15,9 @@ part 'api_service.g.dart';
 @singleton
 abstract class ApiService {
   @factoryMethod
-  factory ApiService(RestClient client) {
+  factory ApiService({
+    required RestClient client,
+  }) {
     return _ApiService(client.dio, baseUrl: client.baseUrl);
   }
 
@@ -1288,20 +1287,25 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.REPROT_CONTRACT)
-  Future<List<ReportContractResponse>> getReportContract();
+  Future<List<ContractTemplateBasicInformationResponse>> getReportContract({
+    @Query('documentName') String? documentName,
+    @Query('first') String? first,
+    @Query('second') String? second,
+    @Query('methodOfConclusion') String? methodOfConclusion,
+  });
 
-  @POST(EndPoints.REPROT_CONTRACT)
-  Future<ReportContractResponse> postReportContract(
-    @Body() ReportContractRequest reportContractRequest,
-  );
+  // @POST(EndPoints.REPROT_CONTRACT)
+  // Future<ReportContractResponse> postReportContract(
+  //   @Body() ReportContractRequest reportContractRequest,
+  // );
 
-  @GET(EndPoints.REPROT_CONTRACT_FILTER)
-  Future<ContractFilterResponse> getReportFilter();
+  // @GET(EndPoints.REPROT_CONTRACT_FILTER)
+  // Future<ContractFilterResponse> getReportFilter();
 
-  @POST(EndPoints.REPROT_CONTRACT_FILTER)
-  Future<ContractFilterResponse> postReportFilter(
-    @Body() ContractFilterRequest contractFilterRequest,
-  );
+  // @POST(EndPoints.REPROT_CONTRACT_FILTER)
+  // Future<ContractFilterResponse> postReportFilter(
+  //   @Body() ContractFilterRequest contractFilterRequest,
+  // );
 
   @GET(EndPoints.REPROT_CONTRACT_DETAIL)
   Future<ContractReportDetailResponse> getContractReportDetail();
@@ -1312,12 +1316,13 @@ abstract class ApiService {
   );
 
   @GET(EndPoints.CONTRACT_TEMPLATE_DETAIL_BASIC_INFO)
-  Future<ContractTemplateBasicInformationResponse>
+  Future<List<ContractTemplateBasicInformationResponse>>
       getContractTemplateBasicInformation();
 
   @POST(EndPoints.CONTRACT_TEMPLATE_DETAIL_BASIC_INFO)
   Future<ContractTemplateBasicInformationResponse>
       postContractTemplateBasicInformation(
+    @Body()
     ContractTemplateBasicInformationRequest
         contractTemplateBasicInformationRequest,
   );
@@ -1330,11 +1335,23 @@ abstract class ApiService {
     @Body() EstimatemasterReportRequest estimateMasterReportRequest,
   );
 
+  @PUT('${EndPoints.ESTIMATE_MASTER_REPORT}/{id}')
+  Future<EstimatemasterReportResponse> putEstimateMasterReport(
+    @Path('id') String id,
+    @Body() EstimatemasterReportRequest estimateMasterReportRequest,
+  );
+
   @GET(EndPoints.PROSPECTIVE_RANK)
   Future<List<ProspectiveRankResponse>> getProspectiveRank();
 
   @POST(EndPoints.PROSPECTIVE_RANK)
   Future<ProspectiveRankResponse> postProspectiveRank(
+    @Body() ProspectiveRankRequest prospectiveRankRequest,
+  );
+
+  @PUT('${EndPoints.PROSPECTIVE_RANK}/{id}')
+  Future<ProspectiveRankResponse> putProspectiveRank(
+    @Path('id') String id,
     @Body() ProspectiveRankRequest prospectiveRankRequest,
   );
 
@@ -1504,6 +1521,12 @@ abstract class ApiService {
     @Body() MedicalRecordVisaRequest medicalRecordVisaRequest,
   );
 
+  @PUT('${EndPoints.MEDICAL_RECORD_VISA}/{id}')
+  Future<MedicalRecordVisaResponse> putMedicalRecordVisa(
+    @Path('id') String medicalRecordVisaId,
+    @Body() MedicalRecordVisaRequest medicalRecordVisaRequest,
+  );
+
   @GET(EndPoints.MEDICAL_VISA_STAY_PERIOD)
   Future<List<MedicalVisaStayPeriodResponse>> getMedicalVisaStayPeriod();
 
@@ -1607,8 +1630,10 @@ abstract class ApiService {
     @Path('id') String id,
   );
 
-  @GET(EndPoints.BILLING)
-  Future<BillingResponse> getBilling();
+  @GET('${EndPoints.BILLING}/medicalRecord/{medicalRecord}')
+  Future<BillingResponse> getBilling({
+    @Path('medicalRecord') required String medicalRecord,
+  });
 
   @POST(EndPoints.BILLING)
   Future<BillingResponse> postBilling(

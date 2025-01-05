@@ -1,13 +1,13 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+
+// Package imports:
 import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class StatementScreenForm extends StatelessWidget {
@@ -247,36 +247,20 @@ class StatementScreenForm extends StatelessWidget {
             Expanded(
               child: ReactiveTextField<String>(
                 formControlName: 'invoiceNumber',
-                decoration: InputDecoration(labelText: '請求書番号 :'),
+                decoration: const InputDecoration(labelText: '請求書番号 :'),
               ),
             ),
             // invoiceDate
-            Expanded(
-              child: ReactiveTextField<DateTime>(
-                formControlName: 'invoiceDate',
-                decoration: InputDecoration(labelText: '見積日:'),
-                readOnly: true,
-                valueAccessor: DateTimeValueAccessor(
-                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                ),
-                onTap: (value) async {
-                  final date = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(2000),
-                    lastDate: DateTime(2100),
-                  );
-                  if (date != null) {
-                    form.control('invoiceDate').value = date;
-                  }
-                },
-              ),
-            ),
-            // companyName
+            const Expanded(
+                child: ReactiveDatePickerField(
+              formControlName: 'invoiceDate',
+              label: '発行日',
+            )),
+
             Expanded(
               child: ReactiveTextField<String>(
                 formControlName: 'companyName',
-                decoration: InputDecoration(labelText: '会社名:'),
+                decoration: const InputDecoration(labelText: '会社名:'),
               ),
             ),
           ],
@@ -291,7 +275,7 @@ class StatementScreenForm extends StatelessWidget {
             Expanded(
               child: ReactiveTextField<String>(
                 formControlName: 'address',
-                decoration: InputDecoration(labelText: '住所:'),
+                decoration: const InputDecoration(labelText: '住所:'),
               ),
             ),
           ],
@@ -306,7 +290,7 @@ class StatementScreenForm extends StatelessWidget {
             Expanded(
               child: ReactiveTextField<String>(
                 formControlName: 'telNumber',
-                decoration: InputDecoration(labelText: 'Tel:'),
+                decoration: const InputDecoration(labelText: 'Tel:'),
               ),
             ),
 
@@ -314,7 +298,7 @@ class StatementScreenForm extends StatelessWidget {
             Expanded(
               child: ReactiveTextField<String>(
                 formControlName: 'fexNumber',
-                decoration: InputDecoration(labelText: 'Fax:'),
+                decoration: const InputDecoration(labelText: 'Fax:'),
               ),
             ),
 
@@ -322,7 +306,7 @@ class StatementScreenForm extends StatelessWidget {
             Expanded(
               child: ReactiveTextField<String>(
                 formControlName: 'inCharge',
-                decoration: InputDecoration(labelText: '担当:'),
+                decoration: const InputDecoration(labelText: '担当:'),
               ),
             ),
           ],
@@ -335,7 +319,7 @@ class StatementScreenForm extends StatelessWidget {
           separatorBuilder: (BuildContext context, int index) {
             return SizedBox(width: context.appTheme.spacing.formSpacing);
           },
-          children: [
+          children: const [
             Expanded(
               child: Center(child: Text('項目')),
             ),
@@ -390,7 +374,7 @@ class StatementScreenForm extends StatelessWidget {
                                       width: 80,
                                       child: ReactiveTextField<String>(
                                         formControlName: 'itemCode',
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                           labelText: 'コード',
                                         ),
                                       ),
@@ -400,7 +384,7 @@ class StatementScreenForm extends StatelessWidget {
                                         formControlName: 'details',
                                         minLines: 1,
                                         maxLines: 4,
-                                        decoration: InputDecoration(
+                                        decoration: const InputDecoration(
                                           labelText: '内訳',
                                         ),
                                       ),
@@ -417,20 +401,21 @@ class StatementScreenForm extends StatelessWidget {
                                     FilteringTextInputFormatter.allow(
                                         RegExp(r'[0-9]')),
                                   ],
-                                  decoration: InputDecoration(labelText: '数'),
+                                  decoration:
+                                      const InputDecoration(labelText: '数'),
                                 ),
                               ),
                               SizedBox(
                                 width: 80,
                                 child: ReactiveDropdownField(
                                   formControlName: 'unit',
-                                  items: [
+                                  items: const [
                                     DropdownMenuItem(
-                                        child: Text('式'), value: '式'),
+                                        value: '式', child: Text('式')),
                                     DropdownMenuItem(
-                                        child: Text('回'), value: '回'),
+                                        value: '回', child: Text('回')),
                                   ],
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     labelText: '量',
                                   ),
                                 ),
@@ -444,7 +429,7 @@ class StatementScreenForm extends StatelessWidget {
                                   inputFormatters: [
                                     CustomCurrencyFormatter(),
                                   ],
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     labelText: '単価',
                                     suffixText: '円',
                                   ),
@@ -470,7 +455,7 @@ class StatementScreenForm extends StatelessWidget {
                       'unitPrice': FormControl<double>(),
                     }));
                   },
-                  child: Text(
+                  child: const Text(
                     '行を追加',
                   ),
                 ),
@@ -492,7 +477,7 @@ class StatementScreenForm extends StatelessWidget {
                   IntrinsicWidth(
                     child: CheckboxListTile(
                       value: control.value == false,
-                      title: Text('内税'),
+                      title: const Text('内税'),
                       onChanged: (bool? value) {
                         form.control('taxRateOption').value = false;
                       },
@@ -502,7 +487,7 @@ class StatementScreenForm extends StatelessWidget {
                   IntrinsicWidth(
                     child: CheckboxListTile(
                       value: control.value == true,
-                      title: Text('外税'),
+                      title: const Text('外税'),
                       onChanged: (bool? value) {
                         form.control('taxRateOption').value = true;
                       },
@@ -553,7 +538,7 @@ class StatementScreenForm extends StatelessWidget {
                                   formControlName: 'note',
                                   minLines: 1,
                                   maxLines: 4,
-                                  decoration: InputDecoration(
+                                  decoration: const InputDecoration(
                                     labelText: '注記',
                                   ),
                                 ),
@@ -568,7 +553,7 @@ class StatementScreenForm extends StatelessWidget {
                       'note': FormControl<String>(),
                     }));
                   },
-                  child: Text(
+                  child: const Text(
                     '行を追加',
                   ),
                 ),

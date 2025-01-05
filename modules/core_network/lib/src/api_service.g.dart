@@ -6640,20 +6640,31 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<List<ReportContractResponse>> getReportContract() async {
+  Future<List<ContractTemplateBasicInformationResponse>> getReportContract({
+    String? documentName,
+    String? first,
+    String? second,
+    String? methodOfConclusion,
+  }) async {
     final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{
+      r'documentName': documentName,
+      r'first': first,
+      r'second': second,
+      r'methodOfConclusion': methodOfConclusion,
+    };
+    queryParameters.removeWhere((k, v) => v == null);
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
     final _result = await _dio.fetch<List<dynamic>>(
-        _setStreamType<List<ReportContractResponse>>(Options(
+        _setStreamType<List<ContractTemplateBasicInformationResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              '/report-contract',
+              '/contract-template-details',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -6663,94 +6674,9 @@ class _ApiService implements ApiService {
               baseUrl,
             ))));
     var _value = _result.data!
-        .map((dynamic i) =>
-            ReportContractResponse.fromJson(i as Map<String, dynamic>))
+        .map((dynamic i) => ContractTemplateBasicInformationResponse.fromJson(
+            i as Map<String, dynamic>))
         .toList();
-    return _value;
-  }
-
-  @override
-  Future<ReportContractResponse> postReportContract(
-      ReportContractRequest reportContractRequest) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(reportContractRequest.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ReportContractResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/report-contract',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = ReportContractResponse.fromJson(_result.data!);
-    return _value;
-  }
-
-  @override
-  Future<ContractFilterResponse> getReportFilter() async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ContractFilterResponse>(Options(
-      method: 'GET',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/report-contract-filter',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = ContractFilterResponse.fromJson(_result.data!);
-    return _value;
-  }
-
-  @override
-  Future<ContractFilterResponse> postReportFilter(
-      ContractFilterRequest contractFilterRequest) async {
-    final _extra = <String, dynamic>{};
-    final queryParameters = <String, dynamic>{};
-    final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(contractFilterRequest.toJson());
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ContractFilterResponse>(Options(
-      method: 'POST',
-      headers: _headers,
-      extra: _extra,
-    )
-            .compose(
-              _dio.options,
-              '/report-contract-filter',
-              queryParameters: queryParameters,
-              data: _data,
-            )
-            .copyWith(
-                baseUrl: _combineBaseUrls(
-              _dio.options.baseUrl,
-              baseUrl,
-            ))));
-    final _value = ContractFilterResponse.fromJson(_result.data!);
     return _value;
   }
 
@@ -6811,21 +6737,21 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<ContractTemplateBasicInformationResponse>
+  Future<List<ContractTemplateBasicInformationResponse>>
       getContractTemplateBasicInformation() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     const Map<String, dynamic>? _data = null;
-    final _result = await _dio.fetch<Map<String, dynamic>>(
-        _setStreamType<ContractTemplateBasicInformationResponse>(Options(
+    final _result = await _dio.fetch<List<dynamic>>(
+        _setStreamType<List<ContractTemplateBasicInformationResponse>>(Options(
       method: 'GET',
       headers: _headers,
       extra: _extra,
     )
             .compose(
               _dio.options,
-              'contact-template-detail-basic-info',
+              '/contract-template-details',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -6834,8 +6760,10 @@ class _ApiService implements ApiService {
               _dio.options.baseUrl,
               baseUrl,
             ))));
-    final _value =
-        ContractTemplateBasicInformationResponse.fromJson(_result.data!);
+    var _value = _result.data!
+        .map((dynamic i) => ContractTemplateBasicInformationResponse.fromJson(
+            i as Map<String, dynamic>))
+        .toList();
     return _value;
   }
 
@@ -6847,7 +6775,8 @@ class _ApiService implements ApiService {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    const Map<String, dynamic>? _data = null;
+    final _data = <String, dynamic>{};
+    _data.addAll(contractTemplateBasicInformationRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<ContractTemplateBasicInformationResponse>(Options(
       method: 'POST',
@@ -6856,7 +6785,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'contact-template-detail-basic-info',
+              '/contract-template-details',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -6884,7 +6813,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'estimate-master-report',
+              '/estimate-master',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -6916,7 +6845,38 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'estimate-master-report',
+              '/estimate-master',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = EstimatemasterReportResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<EstimatemasterReportResponse> putEstimateMasterReport(
+    String id,
+    EstimatemasterReportRequest estimateMasterReportRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(estimateMasterReportRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<EstimatemasterReportResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/estimate-master/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -6943,7 +6903,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'progressive-rank',
+              '/prospect-rank',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -6975,7 +6935,38 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              'progressive-rank',
+              '/prospect-rank',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = ProspectiveRankResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
+  Future<ProspectiveRankResponse> putProspectiveRank(
+    String id,
+    ProspectiveRankRequest prospectiveRankRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(prospectiveRankRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<ProspectiveRankResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/prospect-rank/${id}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -7810,6 +7801,37 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<MedicalRecordVisaResponse> putMedicalRecordVisa(
+    String medicalRecordVisaId,
+    MedicalRecordVisaRequest medicalRecordVisaRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(medicalRecordVisaRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MedicalRecordVisaResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/medical-record-visa-data/${medicalRecordVisaId}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MedicalRecordVisaResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
   Future<List<MedicalVisaStayPeriodResponse>> getMedicalVisaStayPeriod() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
@@ -8428,7 +8450,7 @@ class _ApiService implements ApiService {
   }
 
   @override
-  Future<BillingResponse> getBilling() async {
+  Future<BillingResponse> getBilling({required String medicalRecord}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
@@ -8441,7 +8463,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/billing',
+              '/medical-record-billing/medicalRecord/${medicalRecord}',
               queryParameters: queryParameters,
               data: _data,
             )
@@ -8469,7 +8491,7 @@ class _ApiService implements ApiService {
     )
             .compose(
               _dio.options,
-              '/billing',
+              '/medical-record-billing',
               queryParameters: queryParameters,
               data: _data,
             )

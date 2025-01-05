@@ -1,16 +1,17 @@
 // Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
-import '../overseas_medical_data/popup/detail_medical_oversea_data/detail_medical_oversea_data_screen.dart';
 import 'create_domestic_medical_data_form.dart';
 import 'domestic_medical_data_file.dart';
 import 'domestic_medical_data_model.dart';
@@ -438,28 +439,6 @@ class _DomesticMedicalDataScreenState extends State<DomesticMedicalDataScreen> {
           ),
         ),
       ),
-    );
-  }
-
-  void showDetailMedicalOverseaDialog(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-          content: const DetailMedicalOverseaDataScreen(),
-          actions: [
-            OutlinedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('　閉じる　'), // TODO: l10n 対応 (閉じる) (close)
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              child: const Text('　印刷する　'), // TODO: l10n 対応 (閉じる) (close)
-            ),
-          ]),
     );
   }
 

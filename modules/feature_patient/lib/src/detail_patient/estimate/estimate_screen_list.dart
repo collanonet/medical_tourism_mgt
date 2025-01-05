@@ -1,12 +1,15 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+// Project imports:
 import 'estimate_model.dart';
 
 class EstimateScreenList extends StatefulWidget {
@@ -19,6 +22,7 @@ class EstimateScreenList extends StatefulWidget {
 class _EstimateScreenListState extends State<EstimateScreenList> {
   ValueNotifier<List<String>> selected = ValueNotifier([]);
 
+  @override
   @override
   Widget build(BuildContext context) {
     var formGroup = ReactiveForm.of(context) as FormGroup;
@@ -60,42 +64,25 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                       child: Text(
                     '書類番号', // Document Number
                     style: context.textTheme.bodySmall,
+                    textAlign: TextAlign.left,
                   )),
                   Expanded(
                       child: Text(
                     '種別', // type
                     style: context.textTheme.bodySmall,
+                    textAlign: TextAlign.left,
                   )),
                   Expanded(
                       child: Text(
                     '宛先', // address
                     style: context.textTheme.bodySmall,
+                    textAlign: TextAlign.left,
                   )),
                   Expanded(
                       child: Text(
                     '発行日', // Issue date
                     style: context.textTheme.bodySmall,
-                  )),
-                  Expanded(
-                      flex: 2,
-                      child: Text(
-                        '件名', // subject
-                        style: context.textTheme.bodySmall,
-                      )),
-                  Expanded(
-                      child: Text(
-                    'エージェントへ開示', // Disclosure to Agent
-                    style: context.textTheme.bodySmall,
-                  )),
-                  Expanded(
-                      child: Text(
-                    '患者へ開示', // Disclosure to patients
-                    style: context.textTheme.bodySmall,
-                  )),
-                  Expanded(
-                      child: Text(
-                    '見込み', // Prospects
-                    style: context.textTheme.bodySmall,
+                    textAlign: TextAlign.left,
                   )),
                   Expanded(
                     child: SizedBox(
@@ -215,6 +202,7 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                           )),
                           Expanded(
                             child: Row(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
                                   padding: EdgeInsets.symmetric(
@@ -245,6 +233,7 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                               child: Text(
                             data?.address ?? '',
                             style: context.textTheme.bodySmall,
+                            textAlign: TextAlign.left,
                           )),
                           Expanded(
                               child: Text(
@@ -252,42 +241,24 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                                 ? Dates.formatFullDate(data!.invoiceDate!)
                                 : '',
                             style: context.textTheme.bodySmall,
+                            textAlign: TextAlign.left,
                           )),
                           Expanded(
-                              flex: 3,
-                              child: Text(
-                                '--',
-                                style: context.textTheme.bodySmall,
-                              )),
-                          Expanded(
-                              child: Text(
-                            '--',
-                            style: context.textTheme.bodySmall,
-                          )),
-                          Expanded(
-                              child: Text(
-                            '--',
-                            style: context.textTheme.bodySmall,
-                          )),
-                          Expanded(
-                              child: Text(
-                            '--',
-                            style: context.textTheme.bodySmall,
-                          )),
-                          Row(
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  context.read<EstimateModel>().editQuotation(
-                                        invoice: data!,
-                                        formGroup: formGroup,
-                                      );
-                                },
-                                child: const Text(
-                                  '編集',
-                                ),
-                              )
-                            ],
+                            child: Row(
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    context.read<EstimateModel>().editQuotation(
+                                          invoice: data!,
+                                          formGroup: formGroup,
+                                        );
+                                  },
+                                  child: const Text(
+                                    '編集',
+                                  ),
+                                )
+                              ],
+                            ),
                           )
                         ],
                       ),
@@ -300,7 +271,7 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                   );
                 },
               ),
-              Divider(),
+              const Divider(),
               ValueListenableBuilder(
                 valueListenable: selected,
                 builder: (context, sels, _) {
@@ -447,13 +418,15 @@ class _EstimateScreenListState extends State<EstimateScreenList> {
                                                     ),
                                                     TextButton(
                                                       onPressed: () {
-                                                        context
-                                                            .read<
-                                                                EstimateModel>()
-                                                            .moveToInvoice(
-                                                                sels);
-                                                        Navigator.of(context)
-                                                            .pop();
+                                                        setState(() {
+                                                          context
+                                                              .read<
+                                                                  EstimateModel>()
+                                                              .moveToInvoice(
+                                                                  sels);
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        });
                                                       },
                                                       child: const Text('移動する'),
                                                     ),

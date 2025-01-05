@@ -25,7 +25,7 @@ class _MasterScreenState extends State<MasterScreen> {
         Container(
           decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(16), color: Colors.white),
-          padding: const EdgeInsets.all(16),
+          padding: const EdgeInsets.fromLTRB(16, 32, 16, 32),
           child: const Text('マスタトップ'),
         ),
         SizedBox(

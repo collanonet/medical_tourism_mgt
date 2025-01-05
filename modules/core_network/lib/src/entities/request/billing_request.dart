@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'billing_request.g.dart';
 
 @JsonSerializable()
@@ -8,6 +10,7 @@ class BillingRequest {
   double? balance;
   List<TreatmentCostRequest>? treatmentCost;
   String? remarks;
+  String? medicalRecord;
 
   BillingRequest({
     this.deposit,
@@ -15,6 +18,7 @@ class BillingRequest {
     this.balance,
     this.treatmentCost,
     this.remarks,
+    this.medicalRecord,
   });
 
   factory BillingRequest.fromJson(Map<String, dynamic> json) => _$BillingRequestFromJson(json);

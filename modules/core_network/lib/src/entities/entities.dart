@@ -71,3 +71,5 @@ export 'medical_record_file_summary_request.dart';
 export 'medical_record_file_summary_response.dart';
 export 'medical_invoice_request.dart';
 export 'medical_invoice_response.dart';
+export 'dicom_detail_response.dart';
+export 'dicom_response.dart';

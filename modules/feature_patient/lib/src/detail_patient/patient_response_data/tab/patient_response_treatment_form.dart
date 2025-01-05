@@ -2,7 +2,7 @@
 import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup treatmentForm() => FormGroup({
-      'id': FormControl<String>(),
+      '_id': FormControl<String>(),
       'treatment': FormControl<bool>(),
       'treatmentInJapan': FormControl<bool>(),
       'secondOpinion': FormControl<bool>(),

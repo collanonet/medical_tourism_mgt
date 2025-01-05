@@ -131,8 +131,8 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
-                              IntrinsicWidth(
-                                stepWidth: 300,
+                              Expanded(
+                                //stepWidth: 300,
                                 child: ReactiveTextField(
                                   formControlName: 'location',
                                   decoration: const InputDecoration(
@@ -263,7 +263,7 @@ class _BasicInfoSectionState extends State<BasicInfoSection> {
                                   ),
                                 ),
                               ),
-                              Expanded(child: SizedBox())
+                              const Expanded(child: SizedBox())
                             ],
                           ),
                           Row(

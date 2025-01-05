@@ -2,32 +2,42 @@
 import 'package:core_network/entities.dart';
 
 abstract class ReportRepository {
+  Future<FileResponse> uploadFileBase64(
+    String file,
+    String filename,
+  );
+
   Future<List<TypeResponse>> getTypes();
 
   Future<TypeResponse> postType(TypeRequest typeRequest);
 
   Future<TypeResponse> putType(String id, TypeRequest typeRequest);
 
-  Future<List<ReportContractResponse>> getReportContract();
+  Future<List<ContractTemplateBasicInformationResponse>> getReportContract({String? documentName, String? first,String? second,String? methodOfConclusion});
 
-  Future<ReportContractResponse> postReportContract(
-    ReportContractRequest reportContractRequest,
-  );
+  // Future<ReportContractResponse> postReportContract(
+  //   ReportContractRequest reportContractRequest,
+  // );
 
-  Future<ContractFilterResponse> getContractFilter();
+  // Future<ContractFilterResponse> getContractFilter();
 
-  Future<ContractFilterResponse> postContractFilter(ContractFilterRequest contractFilterRequest,);
+  // Future<ContractFilterResponse> postContractFilter(
+  //   ContractFilterRequest contractFilterRequest,
+  // );
 
-  Future<ContractReportDetailResponse>  getContractReportDetail();
+  Future<ContractReportDetailResponse> getContractReportDetail();
 
   Future<ContractReportDetailResponse> postContractReportDetail(
     ContractReportDetailRequest contractReportDetailRequest,
   );
 
-  Future<ContractTemplateBasicInformationResponse> getContractTemplateBasicInformation();
+  Future<List<ContractTemplateBasicInformationResponse>>
+      getContractTemplateBasicInformation();
 
-  Future<ContractTemplateBasicInformationResponse> postContractTemplateBasicInformation(
-    ContractTemplateBasicInformationRequest contractTemplateBasicInformationRequest,
+  Future<ContractTemplateBasicInformationResponse>
+      postContractTemplateBasicInformation(
+    ContractTemplateBasicInformationRequest
+        contractTemplateBasicInformationRequest,
   );
 
   Future<List<EstimatemasterReportResponse>> getEstimatemasterReport();
@@ -36,9 +46,19 @@ abstract class ReportRepository {
     EstimatemasterReportRequest estimatemasterReportRequest,
   );
 
+  Future<EstimatemasterReportResponse> putEstimatemasterReport(
+    String id,
+    EstimatemasterReportRequest estimatemasterReportRequest,
+  );
+
   Future<List<ProspectiveRankResponse>> getProspectiveRank();
 
   Future<ProspectiveRankResponse> postProspectiveRank(
+    ProspectiveRankRequest prospectiveRankRequest,
+  );
+
+  Future<ProspectiveRankResponse> putProspectiveRank(
+    String id,
     ProspectiveRankRequest prospectiveRankRequest,
   );
 }

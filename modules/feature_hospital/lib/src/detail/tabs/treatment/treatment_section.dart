@@ -1,6 +1,4 @@
 // Flutter imports:
-import 'package:feature_hospital/src/detail/tabs/treatment/section/treatmenu_sectiion.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -12,6 +10,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
 import 'section/telemedicine_menu_section.dart';
+import 'section/treatmenu_sectiion.dart';
 import 'treatment_model.dart';
 
 class TreatmentSection extends StatefulWidget {

@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,10 +6,10 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+// Project imports:
 import '../normal_summary_model.dart';
 
 class PopupFileForm extends StatelessWidget {
@@ -76,34 +75,11 @@ class PopupFileForm extends StatelessWidget {
                     '発行日',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  IntrinsicWidth(
+                  const IntrinsicWidth(
                     stepWidth: 300,
-                    child: ReactiveDatePicker<DateTime>(
+                    child: ReactiveDatePickerField(
                       formControlName: 'publicationDate',
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime(2100),
-                      builder: (BuildContext context,
-                          ReactiveDatePickerDelegate<dynamic> picker,
-                          Widget? child) {
-                        return ReactiveTextField<DateTime>(
-                          formControlName: 'publicationDate',
-                          valueAccessor: DateTimeValueAccessor(
-                            dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                          ),
-                          decoration: InputDecoration(
-                            suffixIcon: IconButton(
-                              icon: const Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
-                              ),
-                              onPressed: picker.showPicker,
-                            ),
-                          ),
-                          inputFormatters: [
-                            formatter.dateFormatter,
-                          ],
-                        );
-                      },
+
                     ),
                   ),
                 ],

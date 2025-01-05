@@ -9,11 +9,15 @@ part of 'prospective_rank_request.dart';
 ProspectiveRankRequest _$ProspectiveRankRequestFromJson(
         Map<String, dynamic> json) =>
     ProspectiveRankRequest(
-      prospectiveRank: json['prospectiveRank'] as String?,
+      prospectRank: json['prospectRank'] as String?,
+      shouldItBeIncludedInSalesManagementEstimates:
+          json['shouldItBeIncludedInSalesManagementEstimates'] as bool?,
     );
 
 Map<String, dynamic> _$ProspectiveRankRequestToJson(
         ProspectiveRankRequest instance) =>
     <String, dynamic>{
-      'prospectiveRank': instance.prospectiveRank,
+      'prospectRank': instance.prospectRank,
+      'shouldItBeIncludedInSalesManagementEstimates':
+          instance.shouldItBeIncludedInSalesManagementEstimates,
     };

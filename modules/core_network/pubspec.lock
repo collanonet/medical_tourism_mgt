@@ -1113,6 +1113,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "4.1.0"
+  reactive_date_time_picker:
+    dependency: transitive
+    description:
+      name: reactive_date_time_picker
+      sha256: "346956358fd2553dbda4babdefc8d4b0dd99691e6b611dbe7e7de26896b40ff8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0"
   reactive_forms:
     dependency: "direct main"
     description:
@@ -1558,6 +1566,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.10.0"
+  webview_flutter_web:
+    dependency: transitive
+    description:
+      name: webview_flutter_web
+      sha256: cbe1efe45e1be8470fdef7ddb75e2e2998c7ca47b75c09b9354934d20eca146b
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.3+2"
   webview_flutter_wkwebview:
     dependency: transitive
     description:

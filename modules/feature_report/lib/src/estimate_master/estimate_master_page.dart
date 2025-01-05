@@ -10,8 +10,8 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
-import '../type/type_model.dart';
 import 'estimate_master_form.dart';
+import 'estimate_master_model.dart';
 import 'estimate_master_screen.dart';
 
 @RoutePage()
@@ -28,7 +28,8 @@ class EstimateMasterPage extends StatelessWidget {
             return LayoutView(
               selectedIndex: 9,
               page: Provider(
-                create: (context) => GetIt.I<TypeModel>()..getTypes(formGroup),
+                create: (context) => GetIt.I<EstimateMasterModel>()
+                  ..fetchEstimateMasterData(formGroup),
                 child: const EstimateMasterScreen(),
               ),
             );

@@ -23,3 +23,8 @@ export './src/keyboards.dart';
 export './src/strings.dart';
 export './src/html_to_pdf.dart';
 export './src/download_image_as_uint8list.dart';
+export './src/dicom_viewer.dart';
+export './src/dicom_web_viewer.dart';
+export './src/update_dicom_file.dart';
+export './src/get_dicom_detail.dart';
+export './src/webview.dart';

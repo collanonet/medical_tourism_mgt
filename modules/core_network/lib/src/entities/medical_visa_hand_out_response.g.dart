@@ -9,6 +9,7 @@ part of 'medical_visa_hand_out_response.dart';
 MedicalVisaHandOutResponse _$MedicalVisaHandOutResponseFromJson(
         Map<String, dynamic> json) =>
     MedicalVisaHandOutResponse(
+      id: json['_id'] as String?,
       flightNumber: json['flightNumber'] as String?,
       departure: json['departure'] as String?,
       arrival: json['arrival'] as String?,
@@ -20,6 +21,7 @@ MedicalVisaHandOutResponse _$MedicalVisaHandOutResponseFromJson(
 Map<String, dynamic> _$MedicalVisaHandOutResponseToJson(
         MedicalVisaHandOutResponse instance) =>
     <String, dynamic>{
+      '_id': instance.id,
       'departure': instance.departure,
       'arrival': instance.arrival,
       'flightNumber': instance.flightNumber,

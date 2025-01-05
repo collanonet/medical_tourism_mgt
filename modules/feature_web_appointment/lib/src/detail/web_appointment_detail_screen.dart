@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -8,7 +7,6 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -76,16 +74,16 @@ class _WebAppointmentDetailScreenState
                                     .read<WebAppointmentDetailModel>()
                                     .patient,
                                 onListen: () {
-                                  var data = context
-                                      .read<WebAppointmentDetailModel>()
-                                      .patient
-                                      .value;
+                                  // var data = context
+                                  //     .read<WebAppointmentDetailModel>()
+                                  //     .patient
+                                  //     .value;
 
-                                  if (data.hasError) {
-                                    snackBarWidget(
-                                        message: '患者が見つからない。',
-                                        backgroundColor: Colors.red);
-                                  }
+                                  // if (data.hasError) {
+                                  //   snackBarWidget(
+                                  //       message: '患者が見つからない。',
+                                  //       backgroundColor: Colors.red);
+                                  // }
                                 },
                                 child: ValueListenableBuilder(
                                     valueListenable: context
@@ -189,141 +187,36 @@ class _WebAppointmentDetailScreenState
                                       children: [
                                         Row(
                                           children: [
-                                            Expanded(
+                                            const Expanded(
                                               child:
-                                                  ReactiveDatePicker<DateTime>(
+                                                  ReactiveDatePickerField(
                                                 formControlName:
                                                     'preferredDate1',
-                                                firstDate: DateTime(1900),
-                                                lastDate: DateTime(2100),
-                                                builder: (BuildContext context,
-                                                    ReactiveDatePickerDelegate<
-                                                            dynamic>
-                                                        picker,
-                                                    Widget? child) {
-                                                  return ReactiveTextField<
-                                                      DateTime>(
-                                                    formControlName:
-                                                        'preferredDate1',
-                                                    valueAccessor:
-                                                        DateTimeValueAccessor(
-                                                      dateTimeFormat:
-                                                          DateFormat(
-                                                              'yyyy/MM/dd'),
-                                                    ),
-                                                    decoration: InputDecoration(
-                                                      label: const Text(
-                                                        '第１希望',
-                                                      ),
-                                                      suffixIcon: IconButton(
-                                                        icon: const Icon(
-                                                          CupertinoIcons
-                                                              .calendar,
-                                                          color: Colors.grey,
-                                                        ),
-                                                        onPressed:
-                                                            picker.showPicker,
-                                                      ),
-                                                    ),
-                                                    inputFormatters: [
-                                                      formatter.dateFormatter,
-                                                    ],
-                                                  );
-                                                },
+                                                label: '第１希望',
                                               ),
                                             ),
                                             SizedBox(
                                               width: context.appTheme.spacing
                                                   .marginMedium,
                                             ),
-                                            Expanded(
+                                            const Expanded(
                                               child:
-                                                  ReactiveDatePicker<DateTime>(
+                                                  ReactiveDatePickerField(
                                                 formControlName:
                                                     'preferredDate2',
-                                                firstDate: DateTime(1900),
-                                                lastDate: DateTime(2100),
-                                                builder: (BuildContext context,
-                                                    ReactiveDatePickerDelegate<
-                                                            dynamic>
-                                                        picker,
-                                                    Widget? child) {
-                                                  return ReactiveTextField<
-                                                      DateTime>(
-                                                    formControlName:
-                                                        'preferredDate2',
-                                                    valueAccessor:
-                                                        DateTimeValueAccessor(
-                                                      dateTimeFormat:
-                                                          DateFormat(
-                                                              'yyyy/MM/dd'),
-                                                    ),
-                                                    decoration: InputDecoration(
-                                                      label: const Text(
-                                                        '第２希望',
-                                                      ),
-                                                      suffixIcon: IconButton(
-                                                        icon: const Icon(
-                                                          CupertinoIcons
-                                                              .calendar,
-                                                          color: Colors.grey,
-                                                        ),
-                                                        onPressed:
-                                                            picker.showPicker,
-                                                      ),
-                                                    ),
-                                                    inputFormatters: [
-                                                      formatter.dateFormatter,
-                                                    ],
-                                                  );
-                                                },
+                                                label: '第２希望',
                                               ),
                                             ),
                                             SizedBox(
                                               width: context.appTheme.spacing
                                                   .marginMedium,
                                             ),
-                                            Expanded(
+                                            const Expanded(
                                               child:
-                                                  ReactiveDatePicker<DateTime>(
+                                                  ReactiveDatePickerField(
                                                 formControlName:
                                                     'preferredDate3',
-                                                firstDate: DateTime(1900),
-                                                lastDate: DateTime(2100),
-                                                builder: (BuildContext context,
-                                                    ReactiveDatePickerDelegate<
-                                                            dynamic>
-                                                        picker,
-                                                    Widget? child) {
-                                                  return ReactiveTextField<
-                                                      DateTime>(
-                                                    formControlName:
-                                                        'preferredDate3',
-                                                    valueAccessor:
-                                                        DateTimeValueAccessor(
-                                                      dateTimeFormat:
-                                                          DateFormat(
-                                                              'yyyy/MM/dd'),
-                                                    ),
-                                                    decoration: InputDecoration(
-                                                      label: const Text(
-                                                        '第３希望',
-                                                      ),
-                                                      suffixIcon: IconButton(
-                                                        icon: const Icon(
-                                                          CupertinoIcons
-                                                              .calendar,
-                                                          color: Colors.grey,
-                                                        ),
-                                                        onPressed:
-                                                            picker.showPicker,
-                                                      ),
-                                                    ),
-                                                    inputFormatters: [
-                                                      formatter.dateFormatter,
-                                                    ],
-                                                  );
-                                                },
+                                                label: '第３希望',
                                               ),
                                             ),
                                           ],
@@ -1054,7 +947,7 @@ class _WebAppointmentDetailScreenState
                                           onTap: () {
                                             formArray.add(
                                               FormGroup({
-                                                'id': FormControl<String>(),
+                                                '_id': FormControl<String>(),
                                                 'preferredDate':
                                                     FormControl<DateTime>(
                                                   validators: [
@@ -1233,43 +1126,11 @@ class _WebAppointmentDetailScreenState
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                IntrinsicWidth(
+                                const IntrinsicWidth(
                                   stepWidth: 250,
-                                  child: ReactiveDatePicker<DateTime>(
+                                  child: ReactiveDatePickerField(
                                     formControlName: 'testCallDate',
-                                    firstDate: DateTime(1900),
-                                    lastDate: DateTime(2100),
-                                    builder: (BuildContext context,
-                                        ReactiveDatePickerDelegate<dynamic>
-                                            picker,
-                                        Widget? child) {
-                                      return ReactiveTextField<DateTime>(
-                                        formControlName: 'testCallDate',
-                                        valueAccessor: DateTimeValueAccessor(
-                                          dateTimeFormat:
-                                              DateFormat('yyyy/MM/dd'),
-                                        ),
-                                        onChanged: (value) {
-                                          logger.d(value);
-                                        },
-                                        onSubmitted: (value) {
-                                          logger.d(value);
-                                        },
-                                        decoration: InputDecoration(
-                                          label: const Text('年月日'),
-                                          suffixIcon: IconButton(
-                                            icon: const Icon(
-                                              CupertinoIcons.calendar,
-                                              color: Colors.grey,
-                                            ),
-                                            onPressed: picker.showPicker,
-                                          ),
-                                        ),
-                                        inputFormatters: [
-                                          formatter.dateFormatter,
-                                        ],
-                                      );
-                                    },
+                                    label: '年月日',
                                   ),
                                 ),
                                 SizedBox(
@@ -1365,39 +1226,9 @@ class _WebAppointmentDetailScreenState
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          child: ReactiveDatePicker<DateTime>(
+          child: ReactiveDatePickerField(
             formControlName: 'preferredDate',
-            firstDate: DateTime(1900),
-            lastDate: DateTime(2100),
-            builder: (BuildContext context,
-                ReactiveDatePickerDelegate<dynamic> picker, Widget? child) {
-              return ReactiveTextField<DateTime>(
-                formControlName: 'preferredDate',
-                valueAccessor: DateTimeValueAccessor(
-                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                ),
-                onChanged: (value) {
-                  logger.d(value);
-                },
-                onSubmitted: (value) {
-                  logger.d(value);
-                },
-                decoration: InputDecoration(
-                  label: Text(
-                      '第 ${formArray.controls.indexOf(currentForm) + 1} 希望'),
-                  suffixIcon: IconButton(
-                    icon: const Icon(
-                      CupertinoIcons.calendar,
-                      color: Colors.grey,
-                    ),
-                    onPressed: picker.showPicker,
-                  ),
-                ),
-                inputFormatters: [
-                  formatter.dateFormatter,
-                ],
-              );
-            },
+            label: '第 ${formArray.controls.indexOf(currentForm) + 1} 希望',
           ),
         ),
         SizedBox(

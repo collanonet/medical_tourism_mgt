@@ -42,7 +42,7 @@ packages:
     source: hosted
     version: "2.0.2"
   archive:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: archive
       sha256: cb6a278ef2dbb298455e1a713bda08524a175630ec643a242c399c932a0a1f7d
@@ -1090,7 +1090,7 @@ packages:
     source: hosted
     version: "6.2.1"
   js:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: js
       sha256: f2c445dce49627136094980615a031419f7f3eb393237e4ecd97ac15dea343f3
@@ -1465,6 +1465,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.1"
+  reactive_date_time_picker:
+    dependency: "direct main"
+    description:
+      name: reactive_date_time_picker
+      sha256: "346956358fd2553dbda4babdefc8d4b0dd99691e6b611dbe7e7de26896b40ff8"
+      url: "https://pub.dev"
+    source: hosted
+    version: "4.0.0"
   reactive_forms:
     dependency: transitive
     description:
@@ -1914,10 +1922,10 @@ packages:
     dependency: transitive
     description:
       name: webview_flutter
-      sha256: "25e1b6e839e8cbfbd708abc6f85ed09d1727e24e08e08c6b8590d7c65c9a8932"
+      sha256: "6869c8786d179f929144b4a1f86e09ac0eddfe475984951ea6c634774c16b522"
       url: "https://pub.dev"
     source: hosted
-    version: "4.7.0"
+    version: "4.8.0"
   webview_flutter_android:
     dependency: transitive
     description:
@@ -1927,13 +1935,21 @@ packages:
     source: hosted
     version: "3.16.1"
   webview_flutter_platform_interface:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: webview_flutter_platform_interface
       sha256: d937581d6e558908d7ae3dc1989c4f87b786891ab47bb9df7de548a151779d8d
       url: "https://pub.dev"
     source: hosted
     version: "2.10.0"
+  webview_flutter_web:
+    dependency: "direct main"
+    description:
+      name: webview_flutter_web
+      sha256: cbe1efe45e1be8470fdef7ddb75e2e2998c7ca47b75c09b9354934d20eca146b
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.2.3+2"
   webview_flutter_wkwebview:
     dependency: transitive
     description:

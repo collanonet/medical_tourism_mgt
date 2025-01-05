@@ -5,6 +5,7 @@ part 'agent_referral_commission_request.g.dart';
 
 @JsonSerializable()
 class AgentReferralCommissionRequest {
+  @JsonKey(name: '_id')
   String? id;
   String? referralCommissionName;
   int? referralCommission;

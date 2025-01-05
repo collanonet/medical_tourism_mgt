@@ -1,17 +1,14 @@
 // Flutter imports:
-import 'package:core_network/core_network.dart';
-import 'package:core_ui/resources.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 // Package imports:
+import 'package:core_network/core_network.dart';
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -20,7 +17,6 @@ import 'package:skeletonizer/skeletonizer.dart';
 import 'fileForm/file_form.dart';
 import 'fileForm/popup_file_form.dart';
 import 'normal_summary_model.dart';
-import 'pick_medical_data_file_page.dart';
 
 class NormalSummaryScreen extends StatefulWidget {
   const NormalSummaryScreen({super.key});
@@ -51,37 +47,12 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                           SizedBox(
                             height: context.appTheme.spacing.marginMedium,
                           ),
-                          IntrinsicWidth(
+                          const IntrinsicWidth(
                             stepWidth: 200,
-                            child: ReactiveDatePicker<DateTime>(
+                            child: ReactiveDatePickerField(
                               formControlName: 'entryDate',
-                              firstDate: DateTime(1900),
-                              lastDate: DateTime(2100),
-                              builder: (BuildContext context,
-                                  ReactiveDatePickerDelegate<dynamic> picker,
-                                  Widget? child) {
-                                return ReactiveTextField<DateTime>(
-                                  formControlName: 'entryDate',
-                                  valueAccessor: DateTimeValueAccessor(
-                                    dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                  ),
-                                  decoration: InputDecoration(
-                                    label: const Text(
-                                      '記載日',
-                                    ),
-                                    suffixIcon: IconButton(
-                                      icon: const Icon(
-                                        CupertinoIcons.calendar,
-                                        color: Colors.grey,
-                                      ),
-                                      onPressed: picker.showPicker,
-                                    ),
-                                  ),
-                                  inputFormatters: [
-                                    formatter.dateFormatter,
-                                  ],
-                                );
-                              },
+                              label: '記載日',
+
                             ),
                           ),
                           SizedBox(
@@ -118,42 +89,11 @@ class _NormalSummaryScreenState extends State<NormalSummaryScreen> {
                                       width:
                                           context.appTheme.spacing.marginMedium,
                                     ),
-                                    Expanded(
-                                      child: ReactiveDatePicker<DateTime>(
+                                    const Expanded(
+                                      child: ReactiveDatePickerField(
                                         formControlName: 'dateOfBirth',
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
-                                        builder: (BuildContext context,
-                                            ReactiveDatePickerDelegate<dynamic>
-                                                picker,
-                                            Widget? child) {
-                                          return ReactiveTextField<DateTime>(
-                                            formControlName: 'dateOfBirth',
-                                            valueAccessor:
-                                                DateTimeValueAccessor(
-                                              dateTimeFormat:
-                                                  DateFormat('yyyy/MM/dd'),
-                                            ),
-                                            decoration: InputDecoration(
-                                              filled: true,
-                                              fillColor:
-                                                  const Color(0xffF0F3F5),
-                                              label: const Text(
-                                                '生年月日', // TODO: l10n 対応 (生年月日) (dateOfBirth)
-                                              ),
-                                              suffixIcon: IconButton(
-                                                icon: const Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
-                                                ),
-                                                onPressed: picker.showPicker,
-                                              ),
-                                            ),
-                                            inputFormatters: [
-                                              formatter.dateFormatter,
-                                            ],
-                                          );
-                                        },
+                                        label: '生年月日',
+
                                       ),
                                     ),
                                     SizedBox(

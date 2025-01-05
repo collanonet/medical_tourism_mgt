@@ -18,6 +18,7 @@ class CoreNetworkPackageModule extends _i1.MicroPackageModule {
   _i2.FutureOr<void> init(_i1.GetItHelper gh) {
     gh.lazySingleton<_i3.FileUploadService>(
         () => _i3.FileUploadService(gh<Uri>(instanceName: 'baseUrl')));
-    gh.singleton<_i4.ApiService>(() => _i4.ApiService(gh<_i5.RestClient>()));
+    gh.singleton<_i4.ApiService>(
+        () => _i4.ApiService(client: gh<_i5.RestClient>()));
   }
 }

@@ -24,7 +24,7 @@ class _ReportPageState extends State<ReportPage> {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => GetIt.I<ReportModel>()..getReports(),
+      create: (context) => GetIt.I<ReportModel>(),
       child: const LayoutView(
         selectedIndex: 9,
         page: ReportScreen(),

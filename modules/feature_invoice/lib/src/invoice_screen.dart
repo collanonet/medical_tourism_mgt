@@ -1,19 +1,16 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
+import 'invoice_form.dart';
 import 'invoice_model.dart';
 import 'invoice_table_list.dart';
-import 'invoice_form.dart';
 
 class InvoiceScreen extends StatelessWidget {
   const InvoiceScreen({super.key});
@@ -107,32 +104,11 @@ class InvoiceScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      IntrinsicWidth(
+                      const IntrinsicWidth(
                         stepWidth: 200,
-                        child: ReactiveDatePicker<DateTime>(
+                        child: ReactiveDatePickerField(
                           formControlName: 'issue_date_from',
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime(2100),
-                          builder: (context, picker, child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'issue_date_from',
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              decoration: InputDecoration(
-                                label: const Text('発行日（自）'),
-                                fillColor: Colors.white,
-                                filled: true,
-                                suffixIcon: IconButton(
-                                  icon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                  onPressed: picker.showPicker,
-                                ),
-                              ),
-                            );
-                          },
+                          label: '発行日（自）',
                         ),
                       ),
                       const Text(
@@ -140,32 +116,11 @@ class InvoiceScreen extends StatelessWidget {
                         style: TextStyle(
                             fontSize: 20, fontWeight: FontWeight.bold),
                       ),
-                      IntrinsicWidth(
+                      const IntrinsicWidth(
                         stepWidth: 200,
-                        child: ReactiveDatePicker<DateTime>(
+                        child: ReactiveDatePickerField(
                           formControlName: 'issue_date_to',
-                          firstDate: DateTime(1900),
-                          lastDate: DateTime(2100),
-                          builder: (context, picker, child) {
-                            return ReactiveTextField<DateTime>(
-                              formControlName: 'issue_date_to',
-                              valueAccessor: DateTimeValueAccessor(
-                                dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                              decoration: InputDecoration(
-                                label: const Text('発行日（至）'),
-                                fillColor: Colors.white,
-                                filled: true,
-                                suffixIcon: IconButton(
-                                  icon: const Icon(
-                                    CupertinoIcons.calendar,
-                                    color: Colors.grey,
-                                  ),
-                                  onPressed: picker.showPicker,
-                                ),
-                              ),
-                            );
-                          },
+                          label: '発行日（至）',
                         ),
                       ),
                       InkWell(
@@ -192,7 +147,7 @@ class InvoiceScreen extends StatelessWidget {
                           ),
                         ),
                       ),
-                      IntrinsicWidth(
+                      const IntrinsicWidth(
                         stepWidth: 200,
                         child: ReactiveDropdownFormField(
                           formControlName: 'invoice',
@@ -210,7 +165,7 @@ class InvoiceScreen extends StatelessWidget {
                               ),
                             ),
                           ],
-                          decoration: const InputDecoration(
+                          decoration: InputDecoration(
                             label: Text('見積書/精算書'),
                           ),
                         ),

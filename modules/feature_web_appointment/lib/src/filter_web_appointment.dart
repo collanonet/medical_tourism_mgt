@@ -1,12 +1,10 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_ui/core_ui.dart';
+import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/widgets.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -80,7 +78,7 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                             ),
                             const SizedBox(height: 16),
                             Row(
-                              crossAxisAlignment: CrossAxisAlignment.end,
+                              crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
                                 InkWell(
                                   onTap: () {
@@ -112,46 +110,18 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                 SizedBox(
                                     width:
                                         context.appTheme.spacing.marginSmall),
-                                Expanded(
+                                const Expanded(
                                     child: Row(
+                                      crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    IntrinsicWidth(
-                                      stepWidth: 250,
-                                      child: ReactiveDatePicker<DateTime>(
+                                    Expanded(
+                                      child: ReactiveDatePickerField(
                                         formControlName:
                                             'reservation_date_from',
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
-                                        builder: (BuildContext context,
-                                            ReactiveDatePickerDelegate<dynamic>
-                                                picker,
-                                            Widget? child) {
-                                          return ReactiveTextField<DateTime>(
-                                            formControlName:
-                                                'reservation_date_from',
-                                            valueAccessor:
-                                                DateTimeValueAccessor(
-                                              dateTimeFormat:
-                                                  DateFormat('yyyy/MM/dd'),
-                                            ),
-                                            decoration: InputDecoration(
-                                              label: const Text('予約日（自）'),
-                                              suffixIcon: IconButton(
-                                                icon: const Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
-                                                ),
-                                                onPressed: picker.showPicker,
-                                              ),
-                                            ),
-                                            inputFormatters: [
-                                              formatter.dateFormatter,
-                                            ],
-                                          );
-                                        },
+                                        label: '予約日（自）',
                                       ),
                                     ),
-                                    const Padding(
+                                    Padding(
                                       padding:
                                           EdgeInsets.symmetric(horizontal: 4),
                                       child: Text(
@@ -162,39 +132,10 @@ class _WebAppointmentFilterState extends State<WebAppointmentFilter> {
                                         ),
                                       ),
                                     ),
-                                    IntrinsicWidth(
-                                      stepWidth: 250,
-                                      child: ReactiveDatePicker<DateTime>(
+                                    Expanded(
+                                      child: ReactiveDatePickerField(
                                         formControlName: 'reservation_date_to',
-                                        firstDate: DateTime(1900),
-                                        lastDate: DateTime(2100),
-                                        builder: (BuildContext context,
-                                            ReactiveDatePickerDelegate<dynamic>
-                                                picker,
-                                            Widget? child) {
-                                          return ReactiveTextField<DateTime>(
-                                            formControlName:
-                                                'reservation_date_to',
-                                            valueAccessor:
-                                                DateTimeValueAccessor(
-                                              dateTimeFormat:
-                                                  DateFormat('yyyy/MM/dd'),
-                                            ),
-                                            decoration: InputDecoration(
-                                              label: const Text('予約日（至）'),
-                                              suffixIcon: IconButton(
-                                                icon: const Icon(
-                                                  CupertinoIcons.calendar,
-                                                  color: Colors.grey,
-                                                ),
-                                                onPressed: picker.showPicker,
-                                              ),
-                                            ),
-                                            inputFormatters: [
-                                              formatter.dateFormatter,
-                                            ],
-                                          );
-                                        },
+                                        label: '予約日（至）',
                                       ),
                                     ),
                                   ],

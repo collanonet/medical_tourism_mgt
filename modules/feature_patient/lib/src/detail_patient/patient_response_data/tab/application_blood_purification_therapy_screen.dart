@@ -6,7 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
-import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
@@ -120,132 +119,43 @@ class _ApplicationBloodPurificationTherapyScreenState
                       ],
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      '第 1 希望',
-                      style: context.textTheme.bodyMedium,
-                    ),
+                    // Text(
+                    //   '第 1 希望',
+                    //   style: context.textTheme.bodyMedium,
+                    // ),
                     const SizedBox(height: 8),
-                    IntrinsicWidth(
+                    const IntrinsicWidth(
                       stepWidth: 250,
-                      child: ReactiveDatePicker<DateTime>(
+                      child: ReactiveDatePickerField(
                         formControlName: 'date1',
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(2100),
-                        builder: (BuildContext context,
-                            ReactiveDatePickerDelegate<dynamic> picker,
-                            Widget? child) {
-                          return Stack(
-                            children: [
-                              ReactiveTextField<DateTime>(
-                                formControlName: 'date1',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 6),
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: IconButton(
-                                    onPressed: () => picker.showPicker(),
-                                    icon: Icon(
-                                      Icons.calendar_month,
-                                      color: context.appTheme.primaryColor,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        },
+                        label: '第 1 希望',
+
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      '第 2 希望',
-                      style: context.textTheme.bodyMedium,
-                    ),
+                    // Text(
+                    //   '第 2 希望',
+                    //   style: context.textTheme.bodyMedium,
+                    // ),
                     const SizedBox(height: 8),
-                    IntrinsicWidth(
+                    const IntrinsicWidth(
                       stepWidth: 250,
-                      child: ReactiveDatePicker<DateTime>(
+                      child: ReactiveDatePickerField(
                         formControlName: 'date2',
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(2100),
-                        builder: (BuildContext context,
-                            ReactiveDatePickerDelegate<dynamic> picker,
-                            Widget? child) {
-                          return Stack(
-                            children: [
-                              ReactiveTextField<DateTime>(
-                                formControlName: 'date2',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 6),
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: IconButton(
-                                    onPressed: () => picker.showPicker(),
-                                    icon: Icon(
-                                      Icons.calendar_month,
-                                      color: context.appTheme.primaryColor,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        },
+                        label: '第 2 希望',
                       ),
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      '第 3 希望',
-                      style: context.textTheme.bodyMedium,
-                    ),
+                    // Text(
+                    //   '第 3 希望',
+                    //   style: context.textTheme.bodyMedium,
+                    // ),
                     const SizedBox(height: 8),
-                    IntrinsicWidth(
+                    const IntrinsicWidth(
                       stepWidth: 250,
-                      child: ReactiveDatePicker<DateTime>(
+                      child: ReactiveDatePickerField(
                         formControlName: 'date3',
-                        firstDate: DateTime.now(),
-                        lastDate: DateTime(2100),
-                        builder: (BuildContext context,
-                            ReactiveDatePickerDelegate<dynamic> picker,
-                            Widget? child) {
-                          return Stack(
-                            children: [
-                              ReactiveTextField<DateTime>(
-                                formControlName: 'date3',
-                                readOnly: true,
-                                onTap: (value) => picker.showPicker(),
-                                valueAccessor: DateTimeValueAccessor(
-                                  dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 6),
-                                child: Align(
-                                  alignment: Alignment.centerRight,
-                                  child: IconButton(
-                                    onPressed: () => picker.showPicker(),
-                                    icon: Icon(
-                                      Icons.calendar_month,
-                                      color: context.appTheme.primaryColor,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          );
-                        },
+                        label: '第 3 希望',
                       ),
                     ),
                     const SizedBox(height: 8),

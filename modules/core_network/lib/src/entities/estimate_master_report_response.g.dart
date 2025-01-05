@@ -10,20 +10,20 @@ EstimatemasterReportResponse _$EstimatemasterReportResponseFromJson(
         Map<String, dynamic> json) =>
     EstimatemasterReportResponse(
       id: json['_id'] as String,
-      item: json['item'] as String?,
-      sellUnitPrice: json['sellUnitPrice'] as String?,
-      sellAmountOfMoney: json['sellAmountOfMoney'] as String?,
-      costUnitPrice: json['costUnitPrice'] as String?,
-      costAmountOfMoney: json['costAmountOfMoney'] as String?,
+      project: json['project'] as String?,
+      unitPriceSellingPrice: json['unitPriceSellingPrice'] as String?,
+      amountOfMoneySellingPrice: json['amountOfMoneySellingPrice'] as String?,
+      unitPriceCostPrice: json['unitPriceCostPrice'] as String?,
+      amountOfMoneyCostPrice: json['amountOfMoneyCostPrice'] as String?,
     );
 
 Map<String, dynamic> _$EstimatemasterReportResponseToJson(
         EstimatemasterReportResponse instance) =>
     <String, dynamic>{
       '_id': instance.id,
-      'item': instance.item,
-      'sellUnitPrice': instance.sellUnitPrice,
-      'sellAmountOfMoney': instance.sellAmountOfMoney,
-      'costUnitPrice': instance.costUnitPrice,
-      'costAmountOfMoney': instance.costAmountOfMoney,
+      'project': instance.project,
+      'unitPriceSellingPrice': instance.unitPriceSellingPrice,
+      'amountOfMoneySellingPrice': instance.amountOfMoneySellingPrice,
+      'unitPriceCostPrice': instance.unitPriceCostPrice,
+      'amountOfMoneyCostPrice': instance.amountOfMoneyCostPrice,
     };

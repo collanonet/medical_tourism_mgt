@@ -212,7 +212,7 @@ class WebAppointmentDetailModel {
       candidateDate.clear(updateParent: true);
       data.proposedDates?.map((e) {
         candidateDate.add(FormGroup({
-          'id': FormControl<String>(value: e.id),
+          '_id': FormControl<String>(value: e.id),
           'preferredDate': FormControl<DateTime>(
             value: e.proposedDate,
             validators: [
@@ -274,7 +274,7 @@ class WebAppointmentDetailModel {
 
       formGroup.control('candidateDate').value.forEach((element) {
         proposedDates.add(ProposedDate(
-          id: element['id'],
+          id: element['_id'],
           proposedDate: element['preferredDate'],
           selectMorningAfternoonAllDay: element['choice'],
           timeZoneFrom: element['timePeriodFrom'],
@@ -314,7 +314,7 @@ class WebAppointmentDetailModel {
 
       formGroup.control('candidateDate').value.forEach((element) {
         proposedDates.add(ProposedDate(
-          id: element['id'],
+          id: element['_id'],
           proposedDate: element['preferredDate'],
           selectMorningAfternoonAllDay: element['choice'],
           timeZoneFrom: element['timePeriodFrom'],

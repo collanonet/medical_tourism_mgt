@@ -10,7 +10,7 @@ FormGroup progressListForm() {
         'progress': FormArray([
           // record of item
           FormGroup({
-            'id': FormControl<String>(),
+            '_id': FormControl<String>(),
             'completed': FormControl<bool>(value: false),
             'key': FormControl<String>(),
             'tag': FormControl<String>(),

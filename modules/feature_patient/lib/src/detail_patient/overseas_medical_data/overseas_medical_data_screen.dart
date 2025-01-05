@@ -37,10 +37,17 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
       children: [
         InkWell(
           onTap: () {
-            filePicker().then((value) {
-              if (value != null) {
+            uploadDICOMFile().then((value) {
+              if (value.isNotEmpty) {
                 showCreateWithFileDialog(context, value);
               }
+            }).catchError((e) {
+              snackBarWidget(
+                message:
+                    'ファイル DICOM のアップロードでエラーが発生しました。ファイルが DICOM であることを確認してください',
+                backgroundColor: Colors.red,
+                prefixIcon: const Icon(Icons.error, color: Colors.white),
+              );
             });
           },
           child: Container(
@@ -82,10 +89,18 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        filePicker().then((value) {
-                          if (value != null) {
+                        uploadDICOMFile().then((value) {
+                          if (value.isNotEmpty) {
                             showCreateWithFileDialog(context, value);
                           }
+                        }).catchError((e) {
+                          snackBarWidget(
+                            message:
+                                'ファイル DICOM のアップロードでエラーが発生しました。ファイルが DICOM であることを確認してください',
+                            backgroundColor: Colors.red,
+                            prefixIcon:
+                                const Icon(Icons.error, color: Colors.white),
+                          );
                         });
                       },
                       child: const Text(
@@ -213,7 +228,10 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                   return InkWell(
                                     onTap: () {
                                       showDetailMedicalOverseaDialog(
-                                          context, data);
+                                        context,
+                                        value.requireData,
+                                        index,
+                                      );
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.symmetric(
@@ -248,10 +266,12 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                                   if (data.expirationDate !=
                                                       null) ...{
                                                     Container(
-                                                      margin: const EdgeInsets.only(
-                                                          right: 8),
+                                                      margin:
+                                                          const EdgeInsets.only(
+                                                              right: 8),
                                                       padding:
-                                                          const EdgeInsets.all(4),
+                                                          const EdgeInsets.all(
+                                                              4),
                                                       decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius
@@ -275,7 +295,8 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                               child: Row(
                                             children: [
                                               Container(
-                                                padding: const EdgeInsets.all(4),
+                                                padding:
+                                                    const EdgeInsets.all(4),
                                                 decoration: BoxDecoration(
                                                   borderRadius:
                                                       BorderRadius.circular(4),
@@ -359,7 +380,7 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                       .delete,
                                   builder: (context, d, child) {
                                     return ElevatedButton(
-                                        onPressed: !d.loading
+                                        onPressed: ids.isNotEmpty
                                             ? () async {
                                                 try {
                                                   List<String> mongoseIds =
@@ -394,19 +415,19 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               ElevatedButton(
-                                onPressed: () async {
-                                  var list = ids.map((e) {
-                                    return value.requireData[int.parse(e)];
-                                  }).toList();
-                                  showDialog(
-                                      context: context,
-                                      builder: (_) => AlertDialog(
-                                            content: ViewAndPrintFileWidget(list
-                                                .map((e) =>
-                                                    'https://medical-tourism-api-dev-collabonet.pixelplatforms.com/files/${e.qrCode}')
-                                                .toList()),
-                                          ));
-                                },
+                                onPressed: ids.isNotEmpty
+                                    ? () async {
+                                        var list = ids.map((e) {
+                                          return value
+                                              .requireData[int.parse(e)];
+                                        }).toList();
+                                        showDetailMedicalOverseaDialog(
+                                          context,
+                                          list,
+                                          0,
+                                        );
+                                      }
+                                    : null,
                                 child: const Text(
                                   '印刷する',
                                   style: TextStyle(
@@ -418,13 +439,16 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               ElevatedButton(
-                                onPressed: () {
-                                  showSummaryDialog(
-                                      context,
-                                      ids.map((e) {
-                                        return value.requireData[int.parse(e)];
-                                      }).toList());
-                                },
+                                onPressed: ids.isNotEmpty
+                                    ? () {
+                                        showSummaryDialog(
+                                            context,
+                                            ids.map((e) {
+                                              return value
+                                                  .requireData[int.parse(e)];
+                                            }).toList());
+                                      }
+                                    : null,
                                 child: const Text(
                                   'サマリー用に項目を出力',
                                   style: TextStyle(
@@ -463,7 +487,8 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
     );
   }
 
-  void showCreateWithFileDialog(BuildContext context, FileSelect file) {
+  void showCreateWithFileDialog(
+      BuildContext context, List<DicomDetailResponse> file) {
     showDialog(
       context: context,
       builder: (_) => Provider.value(
@@ -500,14 +525,18 @@ class _OverseasMedicalDataScreenState extends State<OverseasMedicalDataScreen> {
   }
 
   void showDetailMedicalOverseaDialog(
-      BuildContext context, MedicalRecordOverseaData data) {
+    BuildContext context,
+    List<MedicalRecordOverseaData> data,
+    int index,
+  ) {
     showDialog(
       context: context,
       builder: (_) => Provider.value(
         value: context.read<OverseasMedicalDataModel>(),
         child: AlertDialog(
             content: DetailMedicalOverseaDataScreen(
-              medicalRecordOverseaData: data,
+              medicalRecordOverseaDatas: data,
+              index: index,
             ),
             actions: [
               OutlinedButton(

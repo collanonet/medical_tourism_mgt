@@ -1,10 +1,11 @@
+// Package imports:
 import 'package:copy_with_extension/copy_with_extension.dart';
 import 'package:json_annotation/json_annotation.dart';
 
+// Project imports:
 import '../../core_network.dart';
 import '../../entities.dart';
 import 'entities.dart';
-import 'user.dart';
 
 part 'medical_invoice_response.g.dart';
 

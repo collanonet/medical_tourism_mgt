@@ -24,21 +24,21 @@ class HeaderDetailPatient extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Container(
-            height: 60,
-            width: 60,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              color: Colors.grey.shade400,
-            ),
-            child: const Icon(
-              Icons.person,
-              color: Colors.white,
-            ),
-          ),
-          SizedBox(
-            width: context.appTheme.spacing.marginMedium,
-          ),
+          // Container(
+          //   height: 60,
+          //   width: 60,
+          //   decoration: BoxDecoration(
+          //     borderRadius: BorderRadius.circular(16),
+          //     color: Colors.grey.shade400,
+          //   ),
+          //   child: const Icon(
+          //     Icons.person,
+          //     color: Colors.white,
+          //   ),
+          // ),
+          // SizedBox(
+          //   width: context.appTheme.spacing.marginMedium,
+          // ),
           ValueListenableBuilder(
               valueListenable: context.read<DetailPatientModel>().patientNames,
               builder: (context, value, _) {

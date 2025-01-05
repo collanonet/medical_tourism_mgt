@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
-import '../type/type_model.dart';
+import 'prospective_rank_model.dart';
 import 'prospective_rank_form.dart';
 import 'prospective_rank_screen.dart';
 
@@ -28,7 +28,8 @@ class ProspectivePankPage extends StatelessWidget {
             return LayoutView(
               selectedIndex: 9,
               page: Provider(
-                create: (context) => GetIt.I<TypeModel>()..getTypes(formGroup),
+                create: (context) => GetIt.I<ProspectiveRankModel>()
+                  ..fetchProsiveRank(formGroup),
                 child: const ProspectivePankScreen(),
               ),
             );

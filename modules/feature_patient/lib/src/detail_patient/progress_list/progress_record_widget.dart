@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_ui/core_ui.dart';
-import 'package:intl/intl.dart';
+import 'package:core_ui/widgets.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class ProgressRecordWidget extends StatelessWidget {
@@ -64,27 +64,10 @@ class ProgressRecordWidget extends StatelessWidget {
           SizedBox(
             width: context.appTheme.spacing.marginMedium,
           ),
-          Expanded(
+          const Expanded(
               flex: 2,
-              child: ReactiveDatePicker<DateTime>(
+              child: ReactiveDatePickerField(
                 formControlName: 'completionDate',
-                firstDate: DateTime(2000),
-                lastDate: DateTime(2100),
-                builder: (BuildContext context,
-                    ReactiveDatePickerDelegate<dynamic> picker, Widget? child) {
-                  return ReactiveTextField<DateTime>(
-                      formControlName: 'completionDate',
-                      onTap: (value) => picker.showPicker(),
-                      valueAccessor: DateTimeValueAccessor(
-                        dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                      ),
-                      decoration: const InputDecoration(
-                        suffixIcon: Icon(
-                          Icons.calendar_today,
-                          color: Color(0xff98A6B5),
-                        ),
-                      ));
-                },
               )),
           SizedBox(
             width: context.appTheme.spacing.marginMedium,

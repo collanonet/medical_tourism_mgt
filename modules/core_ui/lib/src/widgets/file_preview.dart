@@ -1,30 +1,26 @@
 // Dart imports:
-import 'dart:io';
 
 // Flutter imports:
+import 'package:core_network/core_network.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_utils/core_utils.dart';
-import 'package:http/http.dart' as http;
-import 'package:path_provider/path_provider.dart';
 
+// Project imports:
 import '../../resources.dart';
 import 'avatar.dart';
 
 class FilePreview extends StatefulWidget {
-  const FilePreview({super.key, required this.fileName});
+  const FilePreview({super.key, this.fileSelect});
 
-  final String fileName;
+  final FileSelect? fileSelect;
 
   @override
-  _FilePreviewState createState() => _FilePreviewState();
+  State<FilePreview> createState() => _FilePreviewState();
 }
 
 class _FilePreviewState extends State<FilePreview> {
-  String baseUrl =
-      'https://medical-tourism-api-dev-collabonet.pixelplatforms.com/files';
-
   @override
   void initState() {
     super.initState();
@@ -32,14 +28,16 @@ class _FilePreviewState extends State<FilePreview> {
 
   @override
   Widget build(BuildContext context) {
-    final fileExtension = widget.fileName.split('.').last.toLowerCase();
+    final fileExtension = widget.fileSelect?.filename == null
+        ? widget.fileSelect?.filename?.split('.').last.toLowerCase()
+        : widget.fileSelect?.url?.split('.').last.toLowerCase();
 
     if (fileExtension == 'pdf') {
       return Column(
         children: [
           TextButton(
               onPressed: () {
-                openUrlInBrowser(fileName: widget.fileName);
+                openUrlInBrowser(fileName: widget.fileSelect?.url ?? '');
               },
               child: const Text('Download PDF')),
         ],
@@ -51,13 +49,16 @@ class _FilePreviewState extends State<FilePreview> {
         children: [
           TextButton(
               onPressed: () {
-                openUrlInBrowser(fileName: widget.fileName);
+                openUrlInBrowser(fileName: widget.fileSelect?.url ?? '');
               },
               child: const Text('Download Image')),
           Avatar.network(
-            widget.fileName,
+            widget.fileSelect?.filename,
             shape: BoxShape.rectangle,
-            customSize: const Size(200, 200),
+            customSize: Size(
+              MediaQuery.of(context).size.width * 0.6,
+              MediaQuery.of(context).size.width * 0.6,
+            ),
             placeholder: const AssetImage(
               Images.logoMadical,
               package: 'core_ui',
@@ -72,7 +73,7 @@ class _FilePreviewState extends State<FilePreview> {
             const Text('Unsupported file format'),
             TextButton(
                 onPressed: () {
-                  openUrlInBrowser(fileName: widget.fileName);
+                  openUrlInBrowser(fileName: widget.fileSelect?.url ?? '');
                 },
                 child: const Text('Open in browser')),
           ],

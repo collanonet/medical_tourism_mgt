@@ -5,9 +5,15 @@ FormGroup prospectivePankForm() {
   return FormGroup({
     'data': FormArray([
       FormGroup({
-         'id': FormControl<String>(),
-        'prospective_rank': FormControl<String>(),
-        'filterText' : FormControl<String>(),
+        '_id': FormControl<String>(),
+        'prospectRank': FormControl<String>(
+          validators: [
+            Validators.required,
+          ],
+        ),
+        'shouldItBeIncludedInSalesManagementEstimates': FormControl<bool>(
+          value: false,
+        ),
       }),
     ]),
   });

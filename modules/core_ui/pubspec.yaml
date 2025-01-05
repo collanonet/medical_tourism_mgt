@@ -32,11 +32,14 @@ dependencies:
   collection: ^1.17.2
   printing: ^5.12.0
   image: ^4.2.0
+  reactive_date_time_picker: ^4.0.0
 
-  http: any
-  path_provider: any
-  pdf: any
+  http: ^1.2.2
+  path_provider: ^2.0.15
+  pdf: ^3.11.1
   import_sorter: ^4.6.0
+  intl: ^0.18.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -62,24 +65,24 @@ flutter:
   fonts:
     - family: NotoSansJP
       fonts:
-        - asset: assets/fonts/NotoSansJPExtraLight.ttf
-          weight: 100
-        - asset: assets/fonts/NotoSansJPLight.ttf
-          weight: 200
-        - asset: assets/fonts/NotoSansJPThin.ttf
-          weight: 300
         - asset: assets/fonts/NotoSansJPRegular.ttf
-          weight: 400
-        - asset: assets/fonts/NotoSansJPMedium.ttf
-          weight: 500
-        - asset: assets/fonts/NotoSansJPSemiBold.ttf
-          weight: 600
-        - asset: assets/fonts/NotoSansJPBold.ttf
+        - asset: assets/fonts/NotoSansJP_Bold.ttf
           weight: 700
-        - asset: assets/fonts/NotoSansJPExtraBold.ttf
-          weight: 800
-        - asset: assets/fonts/NotoSansJPBlack.ttf
-          weight: 900
+    - family: NotoSans_JP
+      fonts:
+        - asset: assets/fonts/NotoSans_JP.ttf
+    - family: Noto_Sans_TC
+      fonts:
+        - asset: assets/fonts/Noto_Sans_TC.ttf
+    - family: Noto_Sans_ZH
+      fonts:
+        - asset: assets/fonts/Noto_Sans_ZH.ttf
+    - family: Roboto_VN
+      fonts:
+        - asset: assets/fonts/Roboto_VN.ttf
+    - family: Open_Sans_EN
+      fonts:
+        - asset: assets/fonts/Open_Sans_EN.ttf
     - family: UiIcons
       fonts:
         - asset: assets/fonts/UiIcons.ttf

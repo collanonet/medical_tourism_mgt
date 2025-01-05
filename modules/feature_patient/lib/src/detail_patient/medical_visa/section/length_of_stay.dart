@@ -1,9 +1,10 @@
+// Flutter imports:
+import 'package:flutter/material.dart';
+
+// Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 class LengthOfStay extends StatelessWidget {
@@ -11,7 +12,6 @@ class LengthOfStay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formatter = InputFormatter();
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -37,120 +37,77 @@ class LengthOfStay extends StatelessWidget {
                         );
                       },
                       children: [
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: context.appTheme.primaryColor,
+                        Row(
+                          children: [
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  border: Border.all(
+                                    color: context.appTheme.primaryColor,
+                                  ),
+                                  borderRadius: BorderRadius.circular(context
+                                      .appTheme.spacing.borderRadiusMedium),
+                                ),
+                                padding: EdgeInsets.all(
+                                    context.appTheme.spacing.marginMedium),
+                                child: Column(
+                                  children: [
+                                    Row(
+                                      children: [
+                                        const Expanded(
+                                          child: ReactiveDatePickerField(
+                                            formControlName:
+                                                'stayStartingDatePersonalReference',
+                                            label: '滞在開始日（身元保証書）',
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        const Expanded(
+                                          child: ReactiveDatePickerField(
+                                              formControlName: 'stayEndDate',
+                                              label: '滞在終了日（身元保証書）'),
+                                        ),
+                                        SizedBox(
+                                          width: context
+                                              .appTheme.spacing.marginMedium,
+                                        ),
+                                        Expanded(
+                                          child: SizedBox(
+                                            width: context
+                                                .appTheme.spacing.marginMedium,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
                             ),
-                            borderRadius: BorderRadius.circular(
-                                context.appTheme.spacing.borderRadiusMedium),
-                          ),
-                          padding: EdgeInsets.all(
-                              context.appTheme.spacing.marginMedium),
-                          child: Column(
-                            children: [
-                              Row(
+                            SizedBox(
+                              width: 60,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: [
-                                  Expanded(
-                                    child: ReactiveDatePicker<DateTime>(
-                                      formControlName:
-                                          'stayStartingDatePersonalReference',
-                                      firstDate: DateTime(1900),
-                                      lastDate: DateTime(2100),
-                                      builder: (BuildContext context,
-                                          ReactiveDatePickerDelegate<dynamic>
-                                              picker,
-                                          Widget? child) {
-                                        return ReactiveTextField<DateTime>(
-                                          formControlName:
-                                              'stayStartingDatePersonalReference',
-                                          valueAccessor: DateTimeValueAccessor(
-                                            dateTimeFormat:
-                                                DateFormat('yyyy/MM/dd'),
-                                          ),
-                                          onChanged: (value) {
-                                            logger.d(value);
-                                          },
-                                          onSubmitted: (value) {
-                                            logger.d(value);
-                                          },
-                                          decoration: InputDecoration(
-                                            label: const Text(
-                                              '滞在開始日（身元保証書）',
-                                            ),
-                                            suffixIcon: IconButton(
-                                              icon: const Icon(
-                                                CupertinoIcons.calendar,
-                                                color: Colors.grey,
-                                              ),
-                                              onPressed: picker.showPicker,
-                                            ),
-                                          ),
-                                          inputFormatters: [
-                                            formatter.dateFormatter,
-                                          ],
-                                        );
+                                  if (formArray.controls.indexOf(currentForm) !=
+                                      0) ...{
+                                    IconButton(
+                                      icon: const Icon(
+                                        Icons.remove_circle,
+                                        color: Colors.red,
+                                      ),
+                                      onPressed: () {
+                                        formArray.removeAt(formArray.controls
+                                            .indexOf(currentForm));
                                       },
                                     ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  Expanded(
-                                    child: ReactiveDatePicker<DateTime>(
-                                      formControlName: 'stayEndDate',
-                                      firstDate: DateTime(1900),
-                                      lastDate: DateTime(2100),
-                                      builder: (BuildContext context,
-                                          ReactiveDatePickerDelegate<dynamic>
-                                              picker,
-                                          Widget? child) {
-                                        return ReactiveTextField<DateTime>(
-                                          formControlName: 'stayEndDate',
-                                          valueAccessor: DateTimeValueAccessor(
-                                            dateTimeFormat:
-                                                DateFormat('yyyy/MM/dd'),
-                                          ),
-                                          onChanged: (value) {
-                                            logger.d(value);
-                                          },
-                                          onSubmitted: (value) {
-                                            logger.d(value);
-                                          },
-                                          decoration: InputDecoration(
-                                            label: const Text(
-                                              '滞在終了日（身元保証書）',
-                                            ),
-                                            suffixIcon: IconButton(
-                                              icon: const Icon(
-                                                CupertinoIcons.calendar,
-                                                color: Colors.grey,
-                                              ),
-                                              onPressed: picker.showPicker,
-                                            ),
-                                          ),
-                                          inputFormatters: [
-                                            formatter.dateFormatter,
-                                          ],
-                                        );
-                                      },
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width:
-                                        context.appTheme.spacing.marginMedium,
-                                  ),
-                                  Expanded(
-                                    child: SizedBox(
-                                      width:
-                                          context.appTheme.spacing.marginMedium,
-                                    ),
-                                  ),
+                                  },
                                 ],
                               ),
-                            ],
-                          ),
+                            )
+                          ],
                         ),
                       ],
                     ),

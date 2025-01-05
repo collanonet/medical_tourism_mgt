@@ -2,9 +2,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/async.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -108,37 +106,9 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                   style: context
                                                       .textTheme.bodyMedium,
                                                 ),
-                                                ReactiveDatePicker<DateTime>(
+                                                const ReactiveDatePickerField(
                                                     formControlName: 'dateFrom',
-                                                    firstDate: DateTime(1900),
-                                                    lastDate: DateTime(2100),
-                                                    builder: (context, picker,
-                                                        child) {
-                                                      return ReactiveTextField<
-                                                          DateTime>(
-                                                        formControlName:
-                                                            'dateFrom',
-                                                        valueAccessor:
-                                                            DateTimeValueAccessor(),
-                                                        decoration:
-                                                            InputDecoration(
-                                                          fillColor:
-                                                              Colors.white,
-                                                          filled: true,
-                                                          suffixIcon:
-                                                              IconButton(
-                                                            icon: const Icon(
-                                                              CupertinoIcons
-                                                                  .calendar,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                            onPressed: picker
-                                                                .showPicker,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }),
+                                                    ),
                                               ],
                                             ),
                                           ),
@@ -146,7 +116,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                             width: context
                                                 .appTheme.spacing.marginMedium,
                                           ),
-                                          Text('〜'),
+                                          const Text('〜'),
                                           SizedBox(
                                             width: context
                                                 .appTheme.spacing.marginMedium,
@@ -168,37 +138,9 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                   style: context
                                                       .textTheme.bodyMedium,
                                                 ),
-                                                ReactiveDatePicker<DateTime>(
+                                                const ReactiveDatePickerField(
                                                     formControlName: 'dateTo',
-                                                    firstDate: DateTime(1900),
-                                                    lastDate: DateTime(2100),
-                                                    builder: (context, picker,
-                                                        child) {
-                                                      return ReactiveTextField<
-                                                          DateTime>(
-                                                        formControlName:
-                                                            'dateTo',
-                                                        valueAccessor:
-                                                            DateTimeValueAccessor(),
-                                                        decoration:
-                                                            InputDecoration(
-                                                          fillColor:
-                                                              Colors.white,
-                                                          filled: true,
-                                                          suffixIcon:
-                                                              IconButton(
-                                                            icon: const Icon(
-                                                              CupertinoIcons
-                                                                  .calendar,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                            onPressed: picker
-                                                                .showPicker,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }),
+                                                    ),
                                               ],
                                             ),
                                           ),
@@ -209,7 +151,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                           Expanded(
                                               child: ReactiveTextField(
                                             formControlName: 'guideNamaKanji',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text(
                                                 'ガイド名（漢字）',
                                               ),
@@ -222,7 +164,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                           Expanded(
                                               child: ReactiveTextField(
                                             formControlName: 'guideNameKana',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text(
                                                 'ガイド名（カナ）',
                                               ),
@@ -235,7 +177,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                           Expanded(
                                               child: ReactiveTextField(
                                             formControlName: 'phoneNumber',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text(
                                                 '電話番号',
                                               ),
@@ -249,7 +191,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text('資格'),
+                                              const Text('資格'),
                                               Row(
                                                 children: [
                                                   IntrinsicWidth(
@@ -308,13 +250,13 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                             formControlName: 'report',
                                             minLines: 3,
                                             maxLines: 3,
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text('報告書'),
                                             ),
                                           )),
                                         ],
                                       ),
-                                      Text('同宿可否'),
+                                      const Text('同宿可否'),
                                       Row(
                                         children: [
                                           IntrinsicWidth(
@@ -350,7 +292,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                               child: ReactiveTextField(
                                             formControlName:
                                                 'accommodationName',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text('施設名'),
                                             ),
                                           )),
@@ -361,7 +303,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                           Expanded(
                                               child: ReactiveTextField(
                                             formControlName: 'address',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text('所在地'),
                                             ),
                                           )),
@@ -372,7 +314,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                           Expanded(
                                               child: ReactiveTextField(
                                             formControlName: 'phoneNumber2',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text('電話番号'),
                                             ),
                                           )),
@@ -406,7 +348,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                               InkWell(
                                 onTap: () => formArray.add(FormGroup(
                                   {
-                                    'id': FormControl<String>(),
+                                    '_id': FormControl<String>(),
                                     // ID
                                     'arrangePerson':
                                         FormControl<String>(value: ''),
@@ -512,11 +454,11 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(child: SizedBox()),
+                                const Expanded(child: SizedBox()),
                                 SizedBox(
                                   width: context.appTheme.spacing.marginMedium,
                                 ),
-                                Expanded(child: SizedBox()),
+                                const Expanded(child: SizedBox()),
                               ],
                             ),
                             Row(
@@ -600,38 +542,10 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                   style: context
                                                       .textTheme.bodyMedium,
                                                 ),
-                                                ReactiveDatePicker<DateTime>(
+                                                const ReactiveDatePickerField(
                                                     formControlName:
                                                         'dateYearFrom',
-                                                    firstDate: DateTime(1900),
-                                                    lastDate: DateTime(2100),
-                                                    builder: (context, picker,
-                                                        child) {
-                                                      return ReactiveTextField<
-                                                          DateTime>(
-                                                        formControlName:
-                                                            'dateYearFrom',
-                                                        valueAccessor:
-                                                            DateTimeValueAccessor(),
-                                                        decoration:
-                                                            InputDecoration(
-                                                          fillColor:
-                                                              Colors.white,
-                                                          filled: true,
-                                                          suffixIcon:
-                                                              IconButton(
-                                                            icon: const Icon(
-                                                              CupertinoIcons
-                                                                  .calendar,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                            onPressed: picker
-                                                                .showPicker,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }),
+                                                    ),
                                               ],
                                             ),
                                           ),
@@ -639,7 +553,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                             width: context
                                                 .appTheme.spacing.marginMedium,
                                           ),
-                                          Text('〜'),
+                                          const Text('〜'),
                                           SizedBox(
                                             width: context
                                                 .appTheme.spacing.marginMedium,
@@ -661,38 +575,10 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                   style: context
                                                       .textTheme.bodyMedium,
                                                 ),
-                                                ReactiveDatePicker<DateTime>(
+                                                const ReactiveDatePickerField(
                                                     formControlName:
                                                         'dateYearTo',
-                                                    firstDate: DateTime(1900),
-                                                    lastDate: DateTime(2100),
-                                                    builder: (context, picker,
-                                                        child) {
-                                                      return ReactiveTextField<
-                                                          DateTime>(
-                                                        formControlName:
-                                                            'dateYearTo',
-                                                        valueAccessor:
-                                                            DateTimeValueAccessor(),
-                                                        decoration:
-                                                            InputDecoration(
-                                                          fillColor:
-                                                              Colors.white,
-                                                          filled: true,
-                                                          suffixIcon:
-                                                              IconButton(
-                                                            icon: const Icon(
-                                                              CupertinoIcons
-                                                                  .calendar,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                            onPressed: picker
-                                                                .showPicker,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }),
+                                                    ),
                                               ],
                                             ),
                                           ),
@@ -822,7 +708,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                         crossAxisAlignment:
                                             CrossAxisAlignment.start,
                                         children: [
-                                          Text('対応言語'),
+                                          const Text('対応言語'),
                                           RowSeparated(
                                             separatorBuilder:
                                                 (BuildContext context,
@@ -909,7 +795,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
                                             children: [
-                                              Text('同宿可否'),
+                                              const Text('同宿可否'),
                                               Row(
                                                 children: [
                                                   IntrinsicWidth(
@@ -1005,7 +891,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                               child: ReactiveTextField(
                                             formControlName:
                                                 'accommodationName',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text('施設名'),
                                             ),
                                           )),
@@ -1016,7 +902,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                           Expanded(
                                               child: ReactiveTextField(
                                             formControlName: 'address',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text('所在地'),
                                             ),
                                           )),
@@ -1027,7 +913,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                           Expanded(
                                               child: ReactiveTextField(
                                             formControlName: 'phoneNumber2',
-                                            decoration: InputDecoration(
+                                            decoration: const InputDecoration(
                                               label: Text('電話番号'),
                                             ),
                                           )),
@@ -1057,7 +943,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                               InkWell(
                                 onTap: () => formArray.add(FormGroup(
                                   {
-                                    'id': FormControl<String>(),
+                                    '_id': FormControl<String>(),
                                     // ID
                                     'dateYearFrom': FormControl<DateTime>(),
                                     // 年月日（自）
@@ -1181,38 +1067,10 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                   style: context
                                                       .textTheme.bodyMedium,
                                                 ),
-                                                ReactiveDatePicker<DateTime>(
+                                                const ReactiveDatePickerField(
                                                     formControlName:
                                                         'dateYearFrom',
-                                                    firstDate: DateTime(1900),
-                                                    lastDate: DateTime(2100),
-                                                    builder: (context, picker,
-                                                        child) {
-                                                      return ReactiveTextField<
-                                                          DateTime>(
-                                                        formControlName:
-                                                            'dateYearFrom',
-                                                        valueAccessor:
-                                                            DateTimeValueAccessor(),
-                                                        decoration:
-                                                            InputDecoration(
-                                                          fillColor:
-                                                              Colors.white,
-                                                          filled: true,
-                                                          suffixIcon:
-                                                              IconButton(
-                                                            icon: const Icon(
-                                                              CupertinoIcons
-                                                                  .calendar,
-                                                              color:
-                                                                  Colors.grey,
-                                                            ),
-                                                            onPressed: picker
-                                                                .showPicker,
-                                                          ),
-                                                        ),
-                                                      );
-                                                    }),
+                                                    ),
                                               ],
                                             ),
                                           ),
@@ -1220,7 +1078,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                             width: context
                                                 .appTheme.spacing.marginMedium,
                                           ),
-                                          Text('〜'),
+                                          const Text('〜'),
                                           SizedBox(
                                             width: context
                                                 .appTheme.spacing.marginMedium,
@@ -1242,34 +1100,8 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                                                   style: context
                                                       .textTheme.bodyMedium,
                                                 ),
-                                                ReactiveDatePicker<DateTime>(
+                                                const ReactiveDatePickerField(
                                                   formControlName: 'dateYearTo',
-                                                  firstDate: DateTime(1900),
-                                                  lastDate: DateTime(2100),
-                                                  builder:
-                                                      (context, picker, child) {
-                                                    return ReactiveTextField<
-                                                        DateTime>(
-                                                      formControlName:
-                                                          'dateYearTo',
-                                                      valueAccessor:
-                                                          DateTimeValueAccessor(),
-                                                      decoration:
-                                                          InputDecoration(
-                                                        fillColor: Colors.white,
-                                                        filled: true,
-                                                        suffixIcon: IconButton(
-                                                          icon: const Icon(
-                                                            CupertinoIcons
-                                                                .calendar,
-                                                            color: Colors.grey,
-                                                          ),
-                                                          onPressed:
-                                                              picker.showPicker,
-                                                        ),
-                                                      ),
-                                                    );
-                                                  },
                                                 ),
                                               ],
                                             ),
@@ -1363,7 +1195,7 @@ class _RelatedPartiesScreenState extends State<RelatedPartiesScreen> {
                               InkWell(
                                 onTap: () => formArray.add(FormGroup(
                                   {
-                                    'id': FormControl<String>(),
+                                    '_id': FormControl<String>(),
                                     // ID
                                     'dateYearFrom': FormControl<DateTime>(),
                                     // 年月日（自）

@@ -1,4 +1,6 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'visa_info.g.dart';
 
 @JsonSerializable()
@@ -10,7 +12,7 @@ class VisaInfoRequest {
   String? sendBy;
   bool? byEMS;
   bool? byFedex;
-  bool? byothers;
+  bool? byOthers;
 
   VisaInfoRequest({
     this.passportDate,
@@ -18,7 +20,7 @@ class VisaInfoRequest {
     this.sendBy,
     this.byEMS,
     this.byFedex,
-    this.byothers,
+    this.byOthers,
     this.passportFileSelect,
     this.letterOfGuaranteeFileSelect,
   });

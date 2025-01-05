@@ -1,36 +1,48 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
+
 part 'billing_response.g.dart';
 
 @JsonSerializable()
 class BillingResponse {
+  @JsonKey(name: '_id')
+  String id;
   double? deposit;
   double? settlementFee;
   double? balance;
   List<TreatmentCostResponse>? treatmentCost;
   String? remarks;
+  String? medicalRecord;
 
   BillingResponse({
+    required this.id,
     this.deposit,
     this.settlementFee,
     this.balance,
     this.treatmentCost,
     this.remarks,
+    this.medicalRecord,
   });
 
-  factory BillingResponse.fromJson(Map<String, dynamic> json) => _$BillingResponseFromJson(json);
-  Map<String, dynamic> toJson() => _$BillingResponseToJson(this);
+  factory BillingResponse.fromJson(Map<String, dynamic> json) =>
+      _$BillingResponseFromJson(json);
 
+  Map<String, dynamic> toJson() => _$BillingResponseToJson(this);
 }
 
 @JsonSerializable()
 class TreatmentCostResponse {
+  @JsonKey(name: '_id')
+  String id;
   DateTime? occurrenceDate;
   String? hospitalName;
   String? treatmentDetails;
   String? amount;
   String? remainingAmount;
-  String? file; 
+  String? file;
+
   TreatmentCostResponse({
+    required this.id,
     this.occurrenceDate,
     this.hospitalName,
     this.treatmentDetails,
@@ -39,6 +51,8 @@ class TreatmentCostResponse {
     this.file,
   });
 
-  factory TreatmentCostResponse.fromJson(Map<String, dynamic> json) => _$TreatmentCostResponseFromJson(json);
+  factory TreatmentCostResponse.fromJson(Map<String, dynamic> json) =>
+      _$TreatmentCostResponseFromJson(json);
+
   Map<String, dynamic> toJson() => _$TreatmentCostResponseToJson(this);
 }

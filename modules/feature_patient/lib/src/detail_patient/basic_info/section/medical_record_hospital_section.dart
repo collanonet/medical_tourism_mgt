@@ -104,7 +104,7 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                                         IconButton(
                                           onPressed: () {
                                             if (currentForm
-                                                    .control('id')
+                                                    .control('_id')
                                                     .value !=
                                                 null) {
                                               // deletedMedicalRecordHospitals
@@ -113,7 +113,7 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                                                       'deletedMedicalRecordHospitals')
                                                   .value
                                                   .add(currentForm
-                                                      .control('id')
+                                                      .control('_id')
                                                       .value);
                                             }
                                             formArray.removeAt(formArray
@@ -145,7 +145,7 @@ class MedicalRecordHospitalSection extends StatelessWidget {
                   InkWell(
                     onTap: () => formArray.add(
                       FormGroup({
-                        'id': FormControl<String?>(),
+                        '_id': FormControl<String?>(),
                         'hospitalName': FormControl<String?>(),
                         'medicalCardNumber': FormControl<String?>(),
                       }),

@@ -6,19 +6,19 @@ part 'estimate_master_report_response.g.dart';
 class EstimatemasterReportResponse {
   @JsonKey(name: '_id')
   String id;
-  String? item;
-  String? sellUnitPrice;
-  String? sellAmountOfMoney;
-  String? costUnitPrice;
-  String? costAmountOfMoney;
+  String? project;
+  String? unitPriceSellingPrice;
+  String? amountOfMoneySellingPrice;
+  String? unitPriceCostPrice;
+  String? amountOfMoneyCostPrice;
 
   EstimatemasterReportResponse({
     required this.id,
-    this.item,
-    this.sellUnitPrice,
-    this.sellAmountOfMoney,
-    this.costUnitPrice,
-    this.costAmountOfMoney,
+    this.project,
+    this.unitPriceSellingPrice,
+    this.amountOfMoneySellingPrice,
+    this.unitPriceCostPrice,
+    this.amountOfMoneyCostPrice,
   });
 
   factory EstimatemasterReportResponse.fromJson(Map<String, dynamic> json) => _$EstimatemasterReportResponseFromJson(json);

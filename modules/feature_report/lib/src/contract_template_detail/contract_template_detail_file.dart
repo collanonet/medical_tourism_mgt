@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -82,37 +81,10 @@ class Popup extends StatelessWidget {
                     '更新日',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
-                  IntrinsicWidth(
+                  const IntrinsicWidth(
                     stepWidth: 300,
-                    child: ReactiveDatePicker<DateTime>(
-                      formControlName: 'updatedOn',
-                      firstDate: DateTime(1900),
-                      lastDate: DateTime(2100),
-                      builder: (BuildContext context,
-                          ReactiveDatePickerDelegate<dynamic> picker,
-                          Widget? child) {
-                        return ReactiveTextField<DateTime>(
-                          formControlName: 'updatedOn',
-                          valueAccessor: DateTimeValueAccessor(
-                              //dateTimeFormat: DateFormat('yyyy/MM/dd'),
-                              ),
-                          decoration: InputDecoration(
-                            label: const Text(
-                              '更新日',
-                            ),
-                            suffixIcon: IconButton(
-                              icon: const Icon(
-                                CupertinoIcons.calendar,
-                                color: Colors.grey,
-                              ),
-                              onPressed: picker.showPicker,
-                            ),
-                          ),
-                          inputFormatters: [
-                            formatter.dateFormatter,
-                          ],
-                        );
-                      },
+                    child: ReactiveDatePickerField(
+                      formControlName: 'updatedOn',label: '更新日',
                     ),
                   ),
                 ],

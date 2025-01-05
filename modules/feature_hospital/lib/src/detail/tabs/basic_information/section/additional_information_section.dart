@@ -1,5 +1,4 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -7,7 +6,6 @@ import 'package:core_network/entities.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -99,7 +97,7 @@ class _AdditionalInformationSectionState
                       ColumnSeparated(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.start,
-                        separatorBuilder: (context, index) => SizedBox(
+                        separatorBuilder: (context, index) => const SizedBox(
                           height: 0,
                         ),
                         children: [
@@ -199,8 +197,8 @@ class _AdditionalInformationSectionState
                                           }
                                         });
                                       },
-                                      icon: Icon(Icons.add_circle),
-                                      label: Text('契約書を追加')),
+                                      icon: const Icon(Icons.add_circle),
+                                      label: const Text('契約書を追加')),
                                 ],
                               );
                             },

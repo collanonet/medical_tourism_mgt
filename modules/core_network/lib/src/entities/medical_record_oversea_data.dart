@@ -1,13 +1,16 @@
 // Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
+// Project imports:
+import '../../core_network.dart';
+
 part 'medical_record_oversea_data.g.dart';
 
 @JsonSerializable()
 class MedicalRecordOverseaData {
   @JsonKey(name: '_id')
   final String id;
-  String? file;
+  List<DicomDetailResponse>? file;
   String? hospitalName;
   String? category;
   String? documentName;

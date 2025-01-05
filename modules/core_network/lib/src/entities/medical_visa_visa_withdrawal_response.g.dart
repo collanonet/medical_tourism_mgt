@@ -9,8 +9,8 @@ part of 'medical_visa_visa_withdrawal_response.dart';
 MedicalVisaVisaWithdrawalResponse _$MedicalVisaVisaWithdrawalResponseFromJson(
         Map<String, dynamic> json) =>
     MedicalVisaVisaWithdrawalResponse(
-      id: json['_id'] as String,
-      subjectVisaWithdrawal: json['subjectVisaWithdrawal'] as String?,
+      id: json['_id'] as String?,
+      subjectVisaWithdrawal: json['subjectVisaWithdrawal'] as bool?,
       deathOrOccurrenceEventDate: json['deathOrOccurrenceEventDate'] == null
           ? null
           : DateTime.parse(json['deathOrOccurrenceEventDate'] as String),

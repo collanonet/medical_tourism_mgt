@@ -1,5 +1,7 @@
+// Package imports:
 import 'package:json_annotation/json_annotation.dart';
 
+// Project imports:
 import 'schedule.dart';
 import 'travel_info.dart';
 import 'visa_info.dart';

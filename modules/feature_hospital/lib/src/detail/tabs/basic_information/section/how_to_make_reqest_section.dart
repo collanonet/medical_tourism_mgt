@@ -1,11 +1,9 @@
 // Flutter imports:
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
-import 'package:core_utils/core_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -25,7 +23,6 @@ class _HowtoMakeReqestSectionState extends State<HowtoMakeReqestSection> {
   Widget build(BuildContext context) {
     final formGroup = (ReactiveForm.of(context) as FormGroup)
         .control('howToMakeRequest') as FormGroup;
-    final formatter = InputFormatter();
     return ValueListenableBuilder(
         valueListenable:
             context.watch<BasicInformationModel>().howToMakeRequestHospitalData,
@@ -62,8 +59,8 @@ class _HowtoMakeReqestSectionState extends State<HowtoMakeReqestSection> {
                             width: context.appTheme.spacing.formSpacing,
                           );
                         },
-                        children: [
-                          const IntrinsicWidth(
+                        children: const [
+                          IntrinsicWidth(
                             stepWidth: 300,
                             child: ReactiveDropdownFormField(
                               formControlName: 'updater',
@@ -82,33 +79,10 @@ class _HowtoMakeReqestSectionState extends State<HowtoMakeReqestSection> {
                           ),
                           IntrinsicWidth(
                             stepWidth: 300,
-                            child: ReactiveDatePicker<DateTime>(
-                                formControlName: 'dateOfUpdate',
-                                firstDate: DateTime(1900),
-                                lastDate: DateTime(2100),
-                                builder: (context, picker, child) {
-                                  return ReactiveTextField<DateTime>(
-                                    formControlName: 'dateOfUpdate',
-                                    valueAccessor: DateTimeValueAccessor(),
-                                    decoration: InputDecoration(
-                                      label: const Text(
-                                        '更新日',
-                                      ),
-                                      fillColor: Colors.white,
-                                      filled: true,
-                                      suffixIcon: IconButton(
-                                        icon: const Icon(
-                                          CupertinoIcons.calendar,
-                                          color: Colors.grey,
-                                        ),
-                                        onPressed: picker.showPicker,
-                                      ),
-                                    ),
-                                    inputFormatters: [
-                                      formatter.dateFormatter,
-                                    ],
-                                  );
-                                }),
+                            child: ReactiveDatePickerField(
+                              formControlName: 'dateOfUpdate',
+                              label: '更新日',
+                            ),
                           ),
                         ],
                       ),
