@@ -138,7 +138,7 @@ class WebAppointmentScreen extends StatelessWidget {
                                     },
                                     cell: [
                                       Text(
-                                        '${item.hospital?.hospitalNameKatakana ?? '-'}${item.hospital?.hospitalNameKatakana == null ? '' : '\n'}${item.hospital?.hospitalNameChinese ?? ' - '}',
+                                        item.hospital?.hospitalNameChinese ?? ' - ',
                                         style: const TextStyle(
                                           fontFamily: 'NotoSansJP',
                                           package: 'core_ui',
