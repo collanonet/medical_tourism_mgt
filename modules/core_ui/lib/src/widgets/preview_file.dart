@@ -8,7 +8,7 @@ import 'package:core_ui/core_ui.dart';
 class PreviewFile extends StatelessWidget {
   const PreviewFile({super.key,required this.fileSelect});
 
-  final FileSelect? fileSelect;
+  final FileSelect fileSelect;
 
   @override
   Widget build(BuildContext context) {

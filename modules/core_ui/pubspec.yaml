@@ -39,6 +39,7 @@ dependencies:
   pdf: ^3.11.1
   import_sorter: ^4.6.0
   intl: ^0.18.1
+  flutter_pdfview: ^1.4.0
 
 dev_dependencies:
   flutter_test:
