@@ -10,3 +10,4 @@ export 'src/widgets/with_loading_button.dart';
 export 'src/widgets/avatar.dart';
 export 'src/widgets/box_required.dart';
 export 'src/widgets/reactive_fields/reactive_date_picker_field.dart';
+export 'src/widgets/reactive_fields/reactive_time_picker.dart';
