@@ -12,4 +12,5 @@ export 'src/widgets/box_required.dart';
 export 'src/widgets/reactive_fields/reactive_date_picker_field.dart';
 export 'src/widgets/reactive_fields/reactive_time_picker_field.dart';
 export 'src/widgets/reactive_fields/reactive_phone_field.dart';
-export 'src/widgets/reactive_fields/reactive_amount_field.dart';
+export 'src/widgets/reactive_fields/reactive_amount_field.dart' hide DoubleValueAccessor;
+export 'src/widgets/reactive_fields/reactive_label_switch_field.dart';

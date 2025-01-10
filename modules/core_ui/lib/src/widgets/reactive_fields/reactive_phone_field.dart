@@ -2,6 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
+/// A reactive form field widget for handling phone number input with formatting.
+///
+/// This widget provides a text input field that:
+/// - Automatically formats phone numbers
+/// - Validates input as numeric values
+/// - Integrates with ReactiveForm for form handling
+///
+/// Example usage:
+/// ```dart
+/// ReactivePhoneField(
+///   formControlName: 'phoneNumber',
+///   label: 'Phone',
+///   helperText: 'Enter your phone number',
+/// )
+/// ```
 class ReactivePhoneField extends StatefulWidget {
   const ReactivePhoneField({
     super.key,
@@ -13,11 +28,22 @@ class ReactivePhoneField extends StatefulWidget {
     this.initialPhoneNumber,
   });
 
+  /// Callback function triggered when the phone number changes
   final Function(FormControl<String>)? onChanged;
+
+  /// Callback function triggered when the field is submitted
   final Function(FormControl<String>)? onSubmitted;
+
+  /// The label text displayed above the input field
   final String? label;
+
+  /// Helper text displayed below the input field
   final String? helperText;
+
+  /// The name of the form control to bind this field to
   final String formControlName;
+
+  /// The initial phone number to display in the input field
   final String? initialPhoneNumber;
 
   @override
@@ -25,6 +51,7 @@ class ReactivePhoneField extends StatefulWidget {
 }
 
 class _ReactivePhoneFieldState extends State<ReactivePhoneField> {
+  /// Controller for managing the text input
   final TextEditingController _phoneController = TextEditingController();
 
   @override
@@ -35,6 +62,7 @@ class _ReactivePhoneFieldState extends State<ReactivePhoneField> {
     });
   }
 
+  /// Initializes the field with existing form control value and sets up value change listener
   void _initialize() {
     final formGroup = ReactiveForm.of(context) as FormGroup?;
 
@@ -57,6 +85,10 @@ class _ReactivePhoneFieldState extends State<ReactivePhoneField> {
     setState(() {});
   }
 
+  /// Formats a phone number string with proper spacing
+  ///
+  /// [value] The phone number string to format
+  /// Returns the formatted phone number string
   String formatPhoneNumber(String value) {
     if (value.length == 12) {
       return '+${value.substring(0, 3)} ${value.substring(3, 6)} ${value.substring(6, 9)} ${value.substring(9)}';
@@ -92,12 +124,19 @@ class _ReactivePhoneFieldState extends State<ReactivePhoneField> {
     );
   }
 
-  void _onFieldChange(String value, ReactiveFormFieldState<String, String> field) {
+  /// Handles changes to the field value
+  ///
+  /// [value] The new string value from the text field
+  /// [field] The reactive form field state
+  void _onFieldChange(
+      String value, ReactiveFormFieldState<String, String> field) {
     final formGroup = ReactiveForm.of(context) as FormGroup?;
     if (formGroup == null) return;
 
-    final plainValue = value.replaceAll(' ', '').replaceAll('+', ''); // Remove formatting
-    formGroup.control(widget.formControlName).value = plainValue; // Save unformatted value
+    final plainValue =
+        value.replaceAll(' ', '').replaceAll('+', ''); // Remove formatting
+    formGroup.control(widget.formControlName).value =
+        plainValue; // Save unformatted value
     field.didChange(plainValue);
 
     // Format the displayed value

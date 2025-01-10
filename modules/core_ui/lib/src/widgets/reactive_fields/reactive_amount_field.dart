@@ -108,7 +108,7 @@ class _ReactiveAmountFieldState extends State<ReactiveAmountField> {
   Widget build(BuildContext context) {
     return ReactiveFormField<double, String>(
       formControlName: widget.formControlName,
-      valueAccessor: DoubleValueAccessorReactive(),
+      valueAccessor: DoubleValueAccessor(),
       validationMessages: {
         'required': (control) => 'Amount is required',
         'invalidFormat': (control) => 'Invalid amount format',
@@ -161,7 +161,7 @@ class _ReactiveAmountFieldState extends State<ReactiveAmountField> {
 /// Handles the conversion between:
 /// - Model: double values for calculations
 /// - View: formatted strings for display
-class DoubleValueAccessorReactive extends ControlValueAccessor<double, String> {
+class DoubleValueAccessor extends ControlValueAccessor<double, String> {
   /// Formatter instance for Japanese currency format
   final NumberFormat _formatter = NumberFormat("#,##0", "ja_JP");
 
