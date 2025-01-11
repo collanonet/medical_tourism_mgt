@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:core_ui/widgets.dart';
 import 'package:flutter/material.dart';
 
 // Package imports:
@@ -30,21 +31,6 @@ class HeaderDetailHospital extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  Container(
-                    height: 60,
-                    width: 60,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(16),
-                      color: Colors.grey.shade400,
-                    ),
-                    child: const Icon(
-                      Icons.person,
-                      color: Colors.white,
-                    ),
-                  ),
-                  SizedBox(
-                    width: context.appTheme.spacing.marginMedium,
-                  ),
                   Skeletonizer(
                     enabled: false,
                     child: Column(
@@ -54,7 +40,6 @@ class HeaderDetailHospital extends StatelessWidget {
                         Row(
                           children: [
                             Text(value.data?.hospitalNameChinese ?? '--'),
-                            // '${value.data?.hospitalNameJapaneseForChinese ?? '--'} '),
                           ],
                         ),
                         SizedBox(
@@ -73,39 +58,60 @@ class HeaderDetailHospital extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      Row(
+                      RowSeparated(
+                        separatorBuilder: (BuildContext context, int index) {
+                          return const SizedBox(width: 16);
+                        },
                         children: [
                           const Text('種別'),
-                          SizedBox(
-                            width: context.appTheme.spacing.marginSmall,
-                          ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff53A6FF),
+                          if (value.data?.healthCheckup ?? false)
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xff53A6FF),
+                              ),
+                              onPressed: () {},
+                              child: const Text('健診'),
                             ),
-                            onPressed: () {},
-                            child: const Text('--'),
-                          ),
-                          SizedBox(
-                            width: context.appTheme.spacing.marginSmall,
-                          ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff53A6FF),
+                          if (value.data?.treatment ?? false)
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xff53A6FF),
+                              ),
+                              onPressed: () {},
+                              child: const Text('治療'),
                             ),
-                            onPressed: () {},
-                            child: const Text('--'),
-                          ),
-                          SizedBox(
-                            width: context.appTheme.spacing.marginSmall,
-                          ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xff53A6FF),
+                          if (value.data?.heavyIonBeam ?? false)
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xff53A6FF),
+                              ),
+                              onPressed: () {},
+                              child: const Text('重粒子線'),
                             ),
-                            onPressed: () {},
-                            child: const Text('--'),
-                          ),
+                          if (value.data?.protonBeam ?? false)
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xff53A6FF),
+                              ),
+                              onPressed: () {},
+                              child: const Text('陽子線'),
+                            ),
+                          if (value.data?.regenerativeMedicine ?? false)
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xff53A6FF),
+                              ),
+                              onPressed: () {},
+                              child: const Text('再生医療'),
+                            ),
+                          if (value.data?.beauty ?? false)
+                            ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: const Color(0xff53A6FF),
+                              ),
+                              onPressed: () {},
+                              child: const Text('美容'),
+                            ),
                         ],
                       ),
                     ],
