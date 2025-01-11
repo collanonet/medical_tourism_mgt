@@ -51,6 +51,10 @@ class HospitalRemoteProvider {
     return apiService.getDoctorInformationHospital(hospitalId);
   }
 
+  Future<void> deleteDoctorInformationHospital(String id) {
+    return apiService.deleteDoctorInformationHospital(id);
+  }
+
   Future<AdditionalInformationSectionResponse>
       postAdditionalInformationHospital(
     AdditionalInformationSectionRequest additionalInformationHospitalRequest,

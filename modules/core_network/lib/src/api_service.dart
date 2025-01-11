@@ -996,6 +996,11 @@ abstract class ApiService {
     @Body() DoctorProfileHospitalRequest doctorInformationHospitalRequest,
   );
 
+  @DELETE('${EndPoints.DOCTOR_INFORMATION_HOSPITAL}/{id}')
+  Future<void> deleteDoctorInformationHospital(
+    @Path('id') String id,
+  );
+
   @GET('${EndPoints.ADDITIONALINFORMATION_HOSPITAL}/{hospitalId}')
   Future<AdditionalInformationSectionResponse> getAdditionalInformationHospital(
     @Path('hospitalId') String hospitalId,

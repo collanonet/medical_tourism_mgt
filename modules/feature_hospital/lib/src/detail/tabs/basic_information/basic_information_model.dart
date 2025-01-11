@@ -575,6 +575,17 @@ class BasicInformationModel {
 
       doctorInformationData.value = const AsyncData(loading: true);
 
+      for (var element in formGroup.control('deleteDoctors').value){
+        if (element['_id'] != null) {
+          try {
+            await hospitalRepository.deleteDoctorInformationHospital(element['_id']);
+          } catch (e) {
+            logger.e('Error deleting doctor information: $e');
+          }
+        }
+      }
+
+
       for (dynamic element in formGroup.control('addDoctorProfile').value) {
         String? file;
         if (element['profile'] != null) {

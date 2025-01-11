@@ -9,6 +9,7 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/resources.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -28,6 +29,7 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
   Widget build(BuildContext context) {
     final formArray = (ReactiveForm.of(context) as FormGroup)
         .control('addDoctorProfile') as FormArray;
+
     return ValueListenableBuilder(
       valueListenable:
           context.watch<BasicInformationModel>().doctorInformationData,
@@ -59,6 +61,8 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
   ReactiveFormArray<Object?> formCreateDoctor(
     AsyncData<List<DoctorProfileHospitalResponse>> value,
   ) {
+    final formArrayDelete = (ReactiveForm.of(context) as FormGroup)
+        .control('deleteDoctors') as FormArray;
     return ReactiveFormArray(
       formArrayName: 'addDoctorProfile',
       builder: (context, formArray, child) {
@@ -66,7 +70,13 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
             .map((control) => control as FormGroup)
             .map((currentForm) => ReactiveForm(
                 formGroup: currentForm,
-                child: createDoctor(currentForm, value, context, formArray)));
+                child:
+                    createDoctor(currentForm, value, context, formArray, (v) {
+                  formArrayDelete.add(FormGroup({
+                    '_id': FormControl<String>(value: v),
+                  }));
+                  formArray.removeAt(formArray.controls.indexOf(currentForm));
+                })));
         return ColumnSeparated(
           separatorBuilder: (BuildContext context, int index) =>
               const Divider(),
@@ -81,10 +91,11 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
     AsyncData<List<DoctorProfileHospitalResponse>> value,
     BuildContext context,
     FormArray<Object?> formArray,
+    ValueChanged onRemove,
   ) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.end,
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         Expanded(
           child: ColumnSeparated(
@@ -114,8 +125,7 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                       width: 80,
                       height: 80,
                       decoration: const BoxDecoration(
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(6)),
+                          borderRadius: BorderRadius.all(Radius.circular(6)),
                           border: Border.fromBorderSide(
                               BorderSide(color: Colors.black, width: 1))),
                       child: currentForm.control('profile').value != null &&
@@ -227,8 +237,7 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                       )
                     ],
                   ),
-                  IntrinsicWidth(
-                    stepWidth: 300,
+                  Expanded(
                     child: ReactiveTextField(
                       formControlName: 'remark',
                       decoration: const InputDecoration(
@@ -249,8 +258,8 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                   width: context.appTheme.spacing.formSpacing,
                 ),
                 children: [
-                  IntrinsicWidth(
-                    stepWidth: 300,
+                  SizedBox(
+                    width: 300,
                     child: ReactiveTextField(
                       formControlName: 'departmentName',
                       decoration: const InputDecoration(
@@ -262,8 +271,8 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                       ),
                     ),
                   ),
-                  IntrinsicWidth(
-                    stepWidth: 300,
+                  SizedBox(
+                    width: 300,
                     child: ReactiveTextField(
                       formControlName: 'post',
                       decoration: const InputDecoration(
@@ -275,8 +284,8 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                       ),
                     ),
                   ),
-                  IntrinsicWidth(
-                    stepWidth: 300,
+                  SizedBox(
+                    width: 300,
                     child: ReactiveTextField(
                       formControlName: 'specialty',
                       decoration: const InputDecoration(
@@ -297,8 +306,8 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                   width: context.appTheme.spacing.formSpacing,
                 ),
                 children: [
-                  IntrinsicWidth(
-                    stepWidth: 300,
+                  SizedBox(
+                    width: 300,
                     child: ReactiveTextField(
                       formControlName: 'nameKanji',
                       decoration: const InputDecoration(
@@ -310,8 +319,8 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                       ),
                     ),
                   ),
-                  IntrinsicWidth(
-                    stepWidth: 300,
+                  SizedBox(
+                    width: 300,
                     child: ReactiveTextField(
                       formControlName: 'nameKana',
                       decoration: const InputDecoration(
@@ -343,8 +352,8 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                                     width: context.appTheme.spacing.formSpacing,
                                   )),
                               children: [
-                                IntrinsicWidth(
-                                  stepWidth: 300,
+                                SizedBox(
+                                  width: 300,
                                   child: ReactiveTextField(
                                     formControlName: 'name',
                                     decoration: const InputDecoration(
@@ -417,8 +426,8 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                                     width: context.appTheme.spacing.formSpacing,
                                   )),
                               children: [
-                                IntrinsicWidth(
-                                  stepWidth: 300,
+                                SizedBox(
+                                  width: 300,
                                   child: ReactiveTextField(
                                     formControlName: 'name',
                                     decoration: const InputDecoration(
@@ -520,8 +529,8 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                   width: context.appTheme.spacing.formSpacing,
                 ),
                 children: [
-                  IntrinsicWidth(
-                    stepWidth: 300,
+                  SizedBox(
+                    width: 300,
                     child: ReactiveTextField(
                       formControlName: 'trainingCompletionCertificateNumber',
                       decoration: const InputDecoration(
@@ -621,8 +630,8 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                   width: context.appTheme.spacing.formSpacing,
                 ),
                 children: [
-                  IntrinsicWidth(
-                    stepWidth: 300,
+                  SizedBox(
+                    width: 300,
                     child: ReactiveTextField(
                       formControlName: 'telephoneNumber',
                       decoration: const InputDecoration(
@@ -634,8 +643,8 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                       ),
                     ),
                   ),
-                  IntrinsicWidth(
-                    stepWidth: 300,
+                  SizedBox(
+                    width: 300,
                     child: ReactiveTextField(
                       formControlName: 'faxNumber',
                       decoration: const InputDecoration(
@@ -647,8 +656,8 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                       ),
                     ),
                   ),
-                  IntrinsicWidth(
-                    stepWidth: 300,
+                  SizedBox(
+                    width: 300,
                     child: ReactiveTextField(
                       formControlName: 'email',
                       decoration: const InputDecoration(
@@ -675,15 +684,23 @@ class AddDoctorProfileState extends State<AddDoctorProfile> {
                   ),
                 ),
               ),
-              if (formArray.controls.indexOf(currentForm) != 0)
-                IconButton(
+              if (formArray.controls.length > 1)
+                ElevatedButton.icon(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.transparent,
+                    foregroundColor: Colors.red,
+                    surfaceTintColor: Colors.transparent,
+                    shadowColor: Colors.transparent,
+                  ),
                   icon: const Icon(
-                    Icons.delete,
+                    Icons.delete_forever,
                     color: Colors.red,
                   ),
                   onPressed: () {
+                    onRemove(currentForm.control('_id').value);
                     formArray.removeAt(formArray.controls.indexOf(currentForm));
                   },
+                  label: const Text('医師を削除'),
                 ),
             ],
           ),
