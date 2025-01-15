@@ -4,6 +4,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 FormGroup qAndAForm({required String hospital}) {
   return FormGroup({
     'newRegistrationSection': FormGroup({
+      '_id': FormControl<String>(),
       'hospital': FormControl<String>(value: hospital),
       'updatedDate': FormControl<DateTime>(validators: [Validators.required]),
       'updatedBy': FormControl<String>(validators: [Validators.required]),

@@ -54,6 +54,18 @@ class QAndAModel {
     }
   }
 
+  void edite(FormGroup formGroup, NewRegistrationHospitalResponse response) {
+    formGroup.control('_id').value = response.id;
+    formGroup.control('hospital').value = response.hospital;
+    formGroup.control('updatedDate').value = response.updatedDate;
+    formGroup.control('updatedBy').value = response.updatedBy;
+    formGroup.control('classification').value = response.classification;
+    formGroup.control('shareThisQADataWithHospitals').value =
+        response.shareThisQADataWithHospitals;
+    formGroup.control('question').value = response.question;
+    formGroup.control('answer').value = response.answer;
+  }
+
   ValueNotifier<AsyncData<NewRegistrationHospitalResponse>> submit =
       ValueNotifier(const AsyncData());
 
