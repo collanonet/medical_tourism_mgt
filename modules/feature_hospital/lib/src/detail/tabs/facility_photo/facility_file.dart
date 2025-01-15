@@ -50,7 +50,7 @@ class Popup extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'パンフレット名',
+                    '施設の写真名',
                     style: Theme.of(context).textTheme.bodySmall,
                   ),
                   IntrinsicWidth(
@@ -58,7 +58,7 @@ class Popup extends StatelessWidget {
                     child: ReactiveTextField<String>(
                       formControlName: 'NameOfHspital',
                       decoration: const InputDecoration(
-                        hintText: '病院名を入力',
+                        hintText: '施設の写真名',
                       ),
                     ),
                   ),
@@ -120,7 +120,7 @@ class Popup extends StatelessWidget {
                     stepWidth: 300,
                     child: ReactiveDatePickerField(
                       formControlName: 'shootingDate',
-                      label: '発行日',
+                      helperText: '発行日',
                     ),
                   ),
                 ],

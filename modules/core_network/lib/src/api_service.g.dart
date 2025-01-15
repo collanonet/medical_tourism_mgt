@@ -5551,6 +5551,37 @@ class _ApiService implements ApiService {
   }
 
   @override
+  Future<MemoMaterialHospitalResponse> putMemoMaterialHospital(
+    String id,
+    MemoMaterialHospitalRequest memoMaterialHospitalRequest,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _headers = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    _data.addAll(memoMaterialHospitalRequest.toJson());
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<MemoMaterialHospitalResponse>(Options(
+      method: 'PUT',
+      headers: _headers,
+      extra: _extra,
+    )
+            .compose(
+              _dio.options,
+              '/hospital-memo-materials/${id}',
+              queryParameters: queryParameters,
+              data: _data,
+            )
+            .copyWith(
+                baseUrl: _combineBaseUrls(
+              _dio.options.baseUrl,
+              baseUrl,
+            ))));
+    final _value = MemoMaterialHospitalResponse.fromJson(_result.data!);
+    return _value;
+  }
+
+  @override
   Future<PatientSectionHospitalResponse> getPatientSectionHospital(
       String hospitalId) async {
     final _extra = <String, dynamic>{};

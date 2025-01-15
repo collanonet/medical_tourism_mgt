@@ -417,4 +417,9 @@ class HospitalRepositoryIml extends HospitalRepository {
   Future<void> deleteDoctorInformationHospital(String id) {
     return remote.deleteDoctorInformationHospital(id);
   }
+  
+  @override
+  Future<MemoMaterialHospitalResponse> putMemoMaterialHospital(String id, MemoMaterialHospitalRequest memoMaterialHospitalRequest) {
+    return remote.putMemoMaterialHospital(id, memoMaterialHospitalRequest);
+  }
 }

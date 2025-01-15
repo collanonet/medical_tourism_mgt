@@ -257,7 +257,9 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                                                   }),
                                                         ),
                                                         OutlinedButton(
-                                                            onPressed: () {},
+                                                            onPressed: () {
+                                                              
+                                                            },
                                                             child: Text(
                                                               '編集する',
                                                               style: context

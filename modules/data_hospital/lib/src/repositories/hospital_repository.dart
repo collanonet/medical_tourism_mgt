@@ -91,6 +91,10 @@ abstract class HospitalRepository {
     MemoMaterialHospitalRequest memoMaterialHospitalRequest,
   );
 
+  Future<MemoMaterialHospitalResponse> putMemoMaterialHospital(String id,
+    MemoMaterialHospitalRequest memoMaterialHospitalRequest,
+  );
+
   Future<PatientSectionHospitalResponse> getWebReservationPatient(
     String hospitalId,
   );

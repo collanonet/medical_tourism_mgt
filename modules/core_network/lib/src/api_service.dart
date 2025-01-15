@@ -1095,6 +1095,13 @@ abstract class ApiService {
     @Body() MemoMaterialHospitalRequest memoMaterialHospitalRequest,
   );
 
+  @PUT('${EndPoints.GET_MEMO_MATERIAL_HOSPITAL}/{id}')
+  Future<MemoMaterialHospitalResponse> putMemoMaterialHospital(
+    @Path('id') String id,
+    @Body() MemoMaterialHospitalRequest memoMaterialHospitalRequest,
+  );
+
+
   @GET('${EndPoints.GET_WEB_RESERVATION_PATIENT}/{hospitalId}')
   Future<PatientSectionHospitalResponse> getPatientSectionHospital(
     @Path('hospitalId') String hospitalId,

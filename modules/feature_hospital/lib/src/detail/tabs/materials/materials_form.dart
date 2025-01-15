@@ -5,7 +5,7 @@ import 'package:reactive_forms/reactive_forms.dart';
 FormGroup memoMaterialsMemoForm({required String hospitalRecordId}) {
   return FormGroup({
     'hospitalRecord': FormControl<String>(value: hospitalRecordId),
-    'memo': FormControl<String>(),
+    'memo': FormControl<String>(value: ''),
   });
 }
 
