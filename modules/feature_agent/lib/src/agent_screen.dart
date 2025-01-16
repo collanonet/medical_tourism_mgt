@@ -183,20 +183,34 @@ class AgentScreen extends StatelessWidget {
                                         ),
                                       ),
                                       Expanded(
-                                        child: Text(
-                                          value.manager?.contactMethods?[0]
-                                                  .howToContact ??
-                                              '--',
-                                          style: context.textTheme.bodyMedium,
-                                        ),
+                                        child: value.manager?.contactMethods
+                                                    ?.isNotEmpty ==
+                                                true
+                                            ? Text(
+                                                value
+                                                        .manager
+                                                        ?.contactMethods?[0]
+                                                        .howToContact ??
+                                                    '--',
+                                                style: context
+                                                    .textTheme.bodyMedium,
+                                              )
+                                            : const Text('--//--'),
                                       ),
                                       Expanded(
-                                        child: Text(
-                                          value.manager?.contactMethods?[0]
-                                                  .howToContactQrCode ??
-                                              '',
-                                          style: context.textTheme.bodyMedium,
-                                        ),
+                                        child: value.manager?.contactMethods
+                                                    ?.isNotEmpty ==
+                                                true
+                                            ? Text(
+                                                value
+                                                        .manager
+                                                        ?.contactMethods?[0]
+                                                        .howToContactQrCode ??
+                                                    '',
+                                                style: context
+                                                    .textTheme.bodyMedium,
+                                              )
+                                            : const Text('--//--'),
                                       ),
                                     ]),
                               ),

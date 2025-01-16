@@ -75,6 +75,10 @@ abstract class HospitalRepository {
     NewRegistrationHospitalRequest newRegistrationHospitalRequest,
   );
 
+   Future<NewRegistrationHospitalResponse> putNewRegistrationHospital(String id,
+    NewRegistrationHospitalRequest newRegistrationHospitalRequest,
+  );
+
   Future<ListSectionQAndAHospitalResponse> getListSectionQAndAHospital(
       String hospitalId);
 

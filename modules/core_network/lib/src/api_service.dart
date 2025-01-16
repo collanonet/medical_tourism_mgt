@@ -1059,6 +1059,12 @@ abstract class ApiService {
   Future<NewRegistrationHospitalResponse> postNewRegistrationHospital(
     @Body() NewRegistrationHospitalRequest newRegistrationHospitalRequest,
   );
+  
+  @POST('${EndPoints.GET_NEW_REGISTRATION_HOSPITAL}/{id}')
+  Future<NewRegistrationHospitalResponse> putNewRegistrationHospital(
+    @Path('id') String id,
+    @Body() NewRegistrationHospitalRequest newRegistrationHospitalRequest,
+  );
 
   @GET('${EndPoints.GET_LIST_SECTION_HOSPITAL}/{hospitalId}')
   Future<ListSectionQAndAHospitalResponse> getListSectionQAndAHospital(

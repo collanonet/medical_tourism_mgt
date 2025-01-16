@@ -120,6 +120,12 @@ class HospitalRemoteProvider {
         .postNewRegistrationHospital(newRegistrationHospitalRequest);
   }
 
+  Future<NewRegistrationHospitalResponse> putNewRegistrationHospital(String id,
+      NewRegistrationHospitalRequest newRegistrationHospitalRequest) {
+    return apiService
+        .putNewRegistrationHospital(id,newRegistrationHospitalRequest);
+  }
+
   Future<ListSectionQAndAHospitalResponse> getListSectionQAndAHospital(
       String hospitalId) {
     return apiService.getListSectionQAndAHospital(hospitalId);

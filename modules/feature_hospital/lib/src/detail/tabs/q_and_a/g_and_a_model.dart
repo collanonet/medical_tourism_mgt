@@ -72,23 +72,33 @@ class QAndAModel {
   Future<void> submitNewRegistrationHospital(FormGroup formGroup) async {
     try {
       submit.value = const AsyncData(loading: true);
-      final response = await hospitalRepository.postNewRegistrationHospital(
-        NewRegistrationHospitalRequest(
-          hospital: hospitalId.value,
-          updatedDate: formGroup.control('updatedDate').value,
-          updatedBy: formGroup.control('updatedBy').value,
-          classification: formGroup.control('classification').value,
-          shareThisQADataWithHospitals:
-              formGroup.control('shareThisQADataWithHospitals').value,
-          question: formGroup.control('question').value,
-          answer: formGroup.control('answer').value,
-        ),
+      NewRegistrationHospitalRequest request = NewRegistrationHospitalRequest(
+        hospital: hospitalId.value,
+        updatedDate: formGroup.control('updatedDate').value,
+        updatedBy: formGroup.control('updatedBy').value,
+        classification: formGroup.control('classification').value,
+        shareThisQADataWithHospitals:
+            formGroup.control('shareThisQADataWithHospitals').value,
+        question: formGroup.control('question').value,
+        answer: formGroup.control('answer').value,
       );
-      submit.value = AsyncData(data: response);
-      newRegistrationHospitalData.value = AsyncData(data: [
-        ...newRegistrationHospitalData.value.data ?? [],
-        response,
-      ]);
+      if (formGroup.control('_id').value != null) {
+        final response = await hospitalRepository.putNewRegistrationHospital(
+            formGroup.control('_id').value, request);
+        submit.value = AsyncData(data: response);
+        newRegistrationHospitalData.value = AsyncData(data: [
+          ...newRegistrationHospitalData.value.data ?? [],
+          response,
+        ]);
+      } else {
+        final response =
+            await hospitalRepository.postNewRegistrationHospital(request);
+        submit.value = AsyncData(data: response);
+        newRegistrationHospitalData.value = AsyncData(data: [
+          ...newRegistrationHospitalData.value.data ?? [],
+          response,
+        ]);
+      }
     } catch (e) {
       logger.d(e);
       submit.value = AsyncData(error: e);
