@@ -5364,7 +5364,7 @@ class _ApiService implements ApiService {
     _data.addAll(newRegistrationHospitalRequest.toJson());
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<NewRegistrationHospitalResponse>(Options(
-      method: 'POST',
+      method: 'PUT',
       headers: _headers,
       extra: _extra,
     )

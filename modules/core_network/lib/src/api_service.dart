@@ -1060,7 +1060,7 @@ abstract class ApiService {
     @Body() NewRegistrationHospitalRequest newRegistrationHospitalRequest,
   );
   
-  @POST('${EndPoints.GET_NEW_REGISTRATION_HOSPITAL}/{id}')
+  @PUT('${EndPoints.GET_NEW_REGISTRATION_HOSPITAL}/{id}')
   Future<NewRegistrationHospitalResponse> putNewRegistrationHospital(
     @Path('id') String id,
     @Body() NewRegistrationHospitalRequest newRegistrationHospitalRequest,

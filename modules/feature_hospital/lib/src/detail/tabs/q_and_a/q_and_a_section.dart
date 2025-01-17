@@ -30,14 +30,20 @@ class _QAndASectionState extends State<QAndASection> {
         children: [
           const QAndANewRegistrationSection(),
           ValueListenableBuilder(
-              valueListenable:
-                  context.watch<QAndAModel>().newRegistrationHospitalData,
-              builder: (context, value, _) {
-                return Skeletonizer(
-                  enabled: value.loading,
-                  child: const QAndAListSection(),
-                );
-              })
+            valueListenable:
+                context.watch<QAndAModel>().newRegistrationHospitalData,
+            builder: (context, value, _) {
+              return ValueListenableBuilder(
+                valueListenable: context.watch<QAndAModel>().submit,
+                builder: (context, data, _) {
+                  return Skeletonizer(
+                    enabled: value.loading || data.loading,
+                    child: const QAndAListSection(),
+                  );
+                },
+              );
+            },
+          )
         ],
       ),
     );
