@@ -1066,6 +1066,12 @@ abstract class ApiService {
   Future<NewRegistrationHospitalResponse> postNewRegistrationHospital(
     @Body() NewRegistrationHospitalRequest newRegistrationHospitalRequest,
   );
+  
+  @PUT('${EndPoints.GET_NEW_REGISTRATION_HOSPITAL}/{id}')
+  Future<NewRegistrationHospitalResponse> putNewRegistrationHospital(
+    @Path('id') String id,
+    @Body() NewRegistrationHospitalRequest newRegistrationHospitalRequest,
+  );
 
   @GET('${EndPoints.GET_LIST_SECTION_HOSPITAL}/{hospitalId}')
   Future<ListSectionQAndAHospitalResponse> getListSectionQAndAHospital(
@@ -1101,6 +1107,13 @@ abstract class ApiService {
   Future<MemoMaterialHospitalResponse> postMemoMaterialHospital(
     @Body() MemoMaterialHospitalRequest memoMaterialHospitalRequest,
   );
+
+  @PUT('${EndPoints.GET_MEMO_MATERIAL_HOSPITAL}/{id}')
+  Future<MemoMaterialHospitalResponse> putMemoMaterialHospital(
+    @Path('id') String id,
+    @Body() MemoMaterialHospitalRequest memoMaterialHospitalRequest,
+  );
+
 
   @GET('${EndPoints.GET_WEB_RESERVATION_PATIENT}/{hospitalId}')
   Future<PatientSectionHospitalResponse> getPatientSectionHospital(

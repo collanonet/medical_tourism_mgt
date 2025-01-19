@@ -75,6 +75,10 @@ abstract class HospitalRepository {
     NewRegistrationHospitalRequest newRegistrationHospitalRequest,
   );
 
+   Future<NewRegistrationHospitalResponse> putNewRegistrationHospital(String id,
+    NewRegistrationHospitalRequest newRegistrationHospitalRequest,
+  );
+
   Future<ListSectionQAndAHospitalResponse> getListSectionQAndAHospital(
       String hospitalId);
 
@@ -88,6 +92,10 @@ abstract class HospitalRepository {
       String hospitalId);
 
   Future<MemoMaterialHospitalResponse> postMemoMaterialHospital(
+    MemoMaterialHospitalRequest memoMaterialHospitalRequest,
+  );
+
+  Future<MemoMaterialHospitalResponse> putMemoMaterialHospital(String id,
     MemoMaterialHospitalRequest memoMaterialHospitalRequest,
   );
 

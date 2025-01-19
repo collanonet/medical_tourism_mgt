@@ -503,7 +503,7 @@ class _BillingScreenState extends State<BillingScreen> {
                       onTap: () {
                         if (control.value?.url != null) {
                           openUrlInBrowser(fileName: control.value!.url!);
-                        }else{
+                        } else {
                           filePicker().then((value) {
                             if (value != null) {
                               currentForm.control(fileName).value = value;
@@ -512,7 +512,9 @@ class _BillingScreenState extends State<BillingScreen> {
                         }
                       },
                       child: Text(
-                        control.value?.filename ?? 'File Input .....',
+                        control.value?.url ??
+                            control.value?.filename ??
+                            'File Name',
                         style: context.textTheme.bodySmall,
                       ),
                     );

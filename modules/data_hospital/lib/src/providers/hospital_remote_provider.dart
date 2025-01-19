@@ -120,6 +120,12 @@ class HospitalRemoteProvider {
         .postNewRegistrationHospital(newRegistrationHospitalRequest);
   }
 
+  Future<NewRegistrationHospitalResponse> putNewRegistrationHospital(String id,
+      NewRegistrationHospitalRequest newRegistrationHospitalRequest) {
+    return apiService
+        .putNewRegistrationHospital(id,newRegistrationHospitalRequest);
+  }
+
   Future<ListSectionQAndAHospitalResponse> getListSectionQAndAHospital(
       String hospitalId) {
     return apiService.getListSectionQAndAHospital(hospitalId);
@@ -145,6 +151,12 @@ class HospitalRemoteProvider {
     MemoMaterialHospitalRequest memoMaterialHospitalRequest,
   ) {
     return apiService.postMemoMaterialHospital(memoMaterialHospitalRequest);
+  }
+
+  Future<MemoMaterialHospitalResponse> putMemoMaterialHospital(String id,
+    MemoMaterialHospitalRequest memoMaterialHospitalRequest,
+  ) {
+    return apiService.putMemoMaterialHospital(id,memoMaterialHospitalRequest);
   }
 
   Future<PatientSectionHospitalResponse> getWebReservationPatient(

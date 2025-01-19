@@ -124,10 +124,14 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                           },
                         );
                       }),
-                  const Expanded(flex: 2, child: Text('病院名')),
+                  const Expanded(flex: 2, child: Text('施設の写真名')),
                   const Expanded(child: Text('撮影')),
                   const Expanded(child: Text('撮影日')),
-                  const Expanded(child: Text('共有')),
+                  const Expanded(
+                      child: Padding(
+                    padding: EdgeInsets.only(left: 10),
+                    child: Text('共有'),
+                  )),
                   const Expanded(child: SizedBox()),
                   //const SizedBox(width: 160),
                 ],
@@ -167,15 +171,21 @@ class _FacilityPhotoSectionState extends State<FacilityPhotoSection> {
                               value.requireData[index].nameOfHospital ?? ''),
                         ),
                         Expanded(
-                          child:
-                              Text(value.requireData[index].photograph ?? ''),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20),
+                            child:
+                                Text(value.requireData[index].photograph ?? ''),
+                          ),
                         ),
                         Expanded(
-                          child: Text(
-                              value.requireData[index].shootingDate == null
-                                  ? ''
-                                  : Dates.formShortDate(
-                                      value.requireData[index].shootingDate)),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 30),
+                            child: Text(
+                                value.requireData[index].shootingDate == null
+                                    ? ''
+                                    : Dates.formShortDate(
+                                        value.requireData[index].shootingDate)),
+                          ),
                         ),
                         Expanded(
                           child: value.requireData[index].share == null

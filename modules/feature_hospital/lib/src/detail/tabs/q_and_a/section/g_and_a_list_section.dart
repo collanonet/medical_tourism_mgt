@@ -26,6 +26,8 @@ class _QAndAListSectionState extends State<QAndAListSection> {
 
   @override
   Widget build(BuildContext context) {
+    final form = (ReactiveForm.of(context) as FormGroup)
+        .control('newRegistrationSection') as FormGroup;
     final formGroup = (ReactiveForm.of(context) as FormGroup)
         .control('listSection') as FormGroup;
     return ReactiveForm(
@@ -257,7 +259,15 @@ class _QAndAListSectionState extends State<QAndAListSection> {
                                                                   }),
                                                         ),
                                                         OutlinedButton(
-                                                            onPressed: () {},
+                                                            onPressed: () {
+                                                              context
+                                                                  .read<
+                                                                      QAndAModel>()
+                                                                  .edite(
+                                                                      form,
+                                                                      value.requireData[
+                                                                          index]);
+                                                            },
                                                             child: Text(
                                                               '編集する',
                                                               style: context

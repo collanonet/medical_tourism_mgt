@@ -251,6 +251,11 @@ class HospitalRepositoryIml extends HospitalRepository {
     return remote.postNewRegistrationHospital(newRegistrationHospitalRequest);
   }
 
+   @override
+  Future<NewRegistrationHospitalResponse> putNewRegistrationHospital(String id, NewRegistrationHospitalRequest newRegistrationHospitalRequest) {
+    return remote.putNewRegistrationHospital(id, newRegistrationHospitalRequest);
+  }
+
   @override
   Future<List<TreatmentMenuResponse>> getTreatmentMenu({required String id}) {
     return remote.getTreatmentMenu(id: id);
@@ -417,4 +422,11 @@ class HospitalRepositoryIml extends HospitalRepository {
   Future<void> deleteDoctorInformationHospital(String id) {
     return remote.deleteDoctorInformationHospital(id);
   }
+  
+  @override
+  Future<MemoMaterialHospitalResponse> putMemoMaterialHospital(String id, MemoMaterialHospitalRequest memoMaterialHospitalRequest) {
+    return remote.putMemoMaterialHospital(id, memoMaterialHospitalRequest);
+  }
+  
+ 
 }
