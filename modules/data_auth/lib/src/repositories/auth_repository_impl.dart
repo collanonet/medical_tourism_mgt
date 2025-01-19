@@ -71,4 +71,9 @@ class AuthRepositoryImpl extends AuthRepository {
   Future<void> logOut() {
     return local.clearStore();
   }
+
+  @override
+  Future<User> getUser() {
+    return remote.getUser();
+  }
 }

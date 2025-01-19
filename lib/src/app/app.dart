@@ -1,3 +1,5 @@
+import 'package:core_network/entities.dart';
+import 'package:feature_chats/feature_chats.dart';
 import 'package:flutter/material.dart';
 
 import 'package:auto_route/auto_route.dart';
@@ -48,9 +50,19 @@ class _RootAppState extends State<RootApp> {
             ChangeNotifierProvider.value(
               value: context.read<AppModel>().l10n,
             ),
+            Provider(
+              create: (context) => GetIt.I<ChatModel>(),
+            ),
           ],
           child: Consumer2<AuthModel, L10nModel>(
             builder: (context, auth, l10n, child) {
+              if (auth.userRole != PermissionRole.guest) {
+                auth.addListener(() {
+                  if (auth.user != null) {
+                    context.read<ChatModel>().initialize(auth.user!.id);
+                  }
+                });
+              }
               return MaterialApp.router(
                 title: 'Medical Tourism',
                 theme: context.appTheme.build(context).copyWith(
@@ -58,7 +70,8 @@ class _RootAppState extends State<RootApp> {
                             const PageTransitionsTheme(builders: {
                       TargetPlatform.fuchsia:
                           NoShadowCupertinoPageTransitionsBuilder(),
-                      TargetPlatform.android: FadeUpwardsPageTransitionsBuilder(),
+                      TargetPlatform.android:
+                          FadeUpwardsPageTransitionsBuilder(),
                     })),
                 locale: l10n.locale,
                 builder: BotToastInit(),

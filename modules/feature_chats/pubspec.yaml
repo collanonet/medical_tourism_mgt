@@ -16,6 +16,8 @@ dependencies:
   core_network: 0.0.1-alpha.1
   feature_auth: 0.0.1-alpha.1
   data_auth: 0.0.1-alpha.1
+  data_chats: 0.0.1-alpha.1
+  socket_chat: 0.0.1-alpha.1
   data_hospital: 0.0.1-alpha.1
   data_patient: 0.0.1-alpha.1
   provider: ^6.0.5

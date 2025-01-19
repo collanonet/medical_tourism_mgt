@@ -21,14 +21,19 @@ class ChatPage extends StatefulWidget {
 }
 
 class _ChatPageState extends State<ChatPage> {
+
+  @override
+  void initState() {
+    super.initState();
+    context.read<ChatModel>().fetchChats();
+    context.read<ChatModel>().patients();
+  }
+
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => GetIt.I<ChatModel>()..patients(),
-      child: const LayoutView(
-        selectedIndex: 1,
-        page: ChatScreen(),
-      ),
+    return const LayoutView(
+      selectedIndex: 1,
+      page: ChatScreen(),
     );
   }
 }

@@ -81,7 +81,7 @@ class PatientModel with ChangeNotifier {
       notifyListeners();
       await patientRepository
           .patients(
-        page: (int.tryParse(_patientData.data!.currentPage) ?? 1) + 1,
+        page: _patientData.data!.currentPage + 1,
       )
           .then((value) {
         _patientData = AsyncData(

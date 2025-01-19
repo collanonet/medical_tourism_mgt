@@ -8,6 +8,7 @@ import 'package:injectable/injectable.dart';
 import 'feature_chats.gm.dart';
 
 export './feature_chats.gm.dart';
+export 'src/chat_model.dart';
 
 @InjectableInit.microPackage(
   preferRelativeImports: true,

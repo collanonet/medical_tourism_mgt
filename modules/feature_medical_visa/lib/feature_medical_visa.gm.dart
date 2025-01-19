@@ -8,19 +8,12 @@
 // coverage:ignore-file
 
 // ignore_for_file: no_leading_underscores_for_library_prefixes
-
-// Flutter imports:
-import 'package:flutter/material.dart' as _i4;
-
-// Package imports:
 import 'package:auto_route/auto_route.dart' as _i3;
 import 'package:core_network/core_network.dart' as _i5;
-
-// Project imports:
-import 'package:feature_medical_visa/src/medical_visa_page.dart' as _i2;
-
 import 'package:feature_medical_visa/src/detail/medical_visa_detail_page.dart'
     as _i1;
+import 'package:feature_medical_visa/src/medical_visa_page.dart' as _i2;
+import 'package:flutter/material.dart' as _i4;
 
 abstract class $FeatureMedicalVisaRouterModule extends _i3.AutoRouterModule {
   @override

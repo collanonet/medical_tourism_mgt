@@ -13,9 +13,10 @@ class Paginated<T> {
 
   List<T> items;
   int totalPages;
-  String currentPage;
+  @JsonKey(fromJson: _intFromString)
+  int currentPage;
 
-  bool get hasNextPage => (int.tryParse(currentPage) ?? 1) < totalPages;
+  bool get hasNextPage => currentPage < totalPages;
 
   factory Paginated.fromJson(
     Map<String, dynamic> json,
@@ -29,4 +30,11 @@ class Paginated<T> {
   ) {
     return _$PaginatedToJson(this, toJsonT);
   }
+}
+
+int _intFromString(Object? value) {
+  if (value is String) {
+    return int.tryParse(value) ?? 1;
+  }
+  return value as int;
 }

@@ -77,4 +77,10 @@ class AuthLocalProvider extends AuthProvider {
       storage.write(_permissionRoleStorageKey, null),
     ]);
   }
+
+  @override
+  Future<User> getUser() {
+    // TODO: implement getUser
+    throw UnimplementedError();
+  }
 }

@@ -71,6 +71,7 @@ dependencies:
   feature_patient: 0.0.1-alpha.1
   feature_report: 0.0.1-alpha.1
   feature_sale: 0.0.1-alpha.1
+  socket_chat: 0.0.1-alpha.1
 
   #Pubs
   cupertino_icons: ^1.0.2
@@ -116,6 +117,7 @@ dependencies:
   webview_flutter_platform_interface: ^2.10.0
   reactive_date_time_picker: ^4.0.0
   flutter_pdfview: ^1.4.0
+  socket_io_client: ^3.0.2
 
 
 dev_dependencies:

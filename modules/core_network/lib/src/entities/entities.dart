@@ -73,3 +73,6 @@ export 'medical_invoice_request.dart';
 export 'medical_invoice_response.dart';
 export 'dicom_detail_response.dart';
 export 'dicom_response.dart';
+export 'chat.dart';
+export 'message.dart';
+export 'chat_group_request.dart';

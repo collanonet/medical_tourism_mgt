@@ -20,3 +20,7 @@ dependency_overrides:
     path: ../data_patient
   feature_auth:
     path: ../feature_auth
+  data_chats:
+    path: ../data_chats
+  socket_chat:
+    path: ../socket_chat

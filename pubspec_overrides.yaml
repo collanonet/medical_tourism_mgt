@@ -56,4 +56,6 @@ dependency_overrides:
     path: modules/feature_process_chart
   feature_web_appointment:
     path: modules/feature_web_appointment
+  socket_chat:
+    path: modules/socket_chat
 

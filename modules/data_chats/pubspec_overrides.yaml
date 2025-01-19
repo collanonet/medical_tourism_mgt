@@ -10,3 +10,5 @@ dependency_overrides:
     path: ../core_ui
   core_utils:
     path: ../core_utils
+  socket_chat:
+    path: ../socket_chat

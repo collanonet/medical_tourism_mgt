@@ -8,6 +8,7 @@ import 'package:retrofit/retrofit.dart';
 import '../core_network.dart';
 import '../entities.dart';
 import 'endpoints.dart';
+import 'entities/chat_group_request.dart';
 
 part 'api_service.g.dart';
 
@@ -26,6 +27,9 @@ abstract class ApiService {
     @Field('email') String email,
     @Field('password') String password,
   );
+
+  @GET(EndPoints.PROFILE)
+  Future<User> getUser();
 
   @POST(EndPoints.REFRESH_TOKEN)
   Future<AuthData> refreshToken(
@@ -86,6 +90,9 @@ abstract class ApiService {
     @Query('returnDatefrom') String? returnDatefrom,
     @Query('returnDateto') String? returnDateto,
   });
+
+  @GET(EndPoints.GET_PATIENTS)
+  Future<Paginated<Patient>> newChatPatients();
 
   @GET('${EndPoints.GET_PATIENT}/{id}')
   Future<Patient> patient(
@@ -1643,6 +1650,29 @@ abstract class ApiService {
   @POST(EndPoints.BILLING)
   Future<BillingResponse> postBilling(
     @Body() BillingRequest billingRequest,
+  );
+
+  @GET(EndPoints.CHAT)
+  Future<List<Chat>> getChats();
+
+  @POST('${EndPoints.CHAT}/group')
+  Future<Chat> postChatGroup(
+    @Body() ChatGroupRequest chatGroupRequest,
+  );
+
+  @POST('${EndPoints.CHAT}/private')
+  Future<Chat> postChatPrivate(
+    @Field('user1Id') String user1Id,
+  );
+
+  @DELETE('${EndPoints.CHAT}/{chatId}')
+  Future<void> deleteChat(
+    @Path('chatId') String chatId,
+  );
+
+  @GET('${EndPoints.CHAT_MESSAGE}/{chatId}/messages')
+  Future<List<Message>> getMessagesByChatId(
+    @Path('chatId') String chatId,
   );
 }
 

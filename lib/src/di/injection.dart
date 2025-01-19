@@ -12,6 +12,7 @@ import 'package:feature_sale/feature_sale.module.dart';
 import 'package:feature_web_appointment/feature_web_appointment.module.dart';
 import 'package:get_it/get_it.dart';
 import 'package:injectable/injectable.dart';
+import 'package:socket_chat/socket_chat.module.dart';
 
 import '../config/server.dart';
 import 'injection.config.dart';
@@ -26,6 +27,7 @@ const production = Environment('production');
   externalPackageModulesAfter: [
     ExternalModule(CoreL10nPackageModule),
     ExternalModule(CoreNetworkPackageModule),
+    ExternalModule(SocketChatPackageModule),
     ExternalModule(FeatureAuthPackageModule),
     ExternalModule(FeatureAgentPackageModule),
     ExternalModule(FeatureHospitalPackageModule),

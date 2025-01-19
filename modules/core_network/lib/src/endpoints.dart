@@ -4,6 +4,7 @@ class EndPoints {
   static const LOG_IN = '/auth/login';
   static const REFRESH_TOKEN = '/auth/refresh-token';
   static const LOG_OUT = '/auth/logout';
+  static const PROFILE = '/profile';
 
   static const GET_PRE_PATIENTS = '/pre-patients';
   static const GET_PRE_PATIENT = '/pre-patients';
@@ -11,6 +12,7 @@ class EndPoints {
   static const PUT_PRE_PATIENTS = '/pre-patients';
   static const DELETE_PRE_PATIENT = '/pre-patients';
 
+  static const GET_NEW_CHATS_PATIENTS = '/patients/new_chats_patients';
   static const GET_PATIENTS = '/patients';
   static const GET_PATIENT = '/patients';
   static const GET_PATIENT_USER = '/patients/user-id';
@@ -266,4 +268,9 @@ class EndPoints {
   // Dicom endpoint
 
   static const DICOM = '/instances';
+
+
+  // chat
+  static const CHAT = '/chats';
+  static const CHAT_MESSAGE = '/messages';
 }
