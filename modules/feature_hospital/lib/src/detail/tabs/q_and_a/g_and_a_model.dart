@@ -54,7 +54,12 @@ class QAndAModel {
     }
   }
 
-  void edite(FormGroup formGroup, NewRegistrationHospitalResponse response) {
+  ValueNotifier<AsyncData<NewRegistrationHospitalResponse>> editData =
+      ValueNotifier(const AsyncData());
+
+  Future<void> edite(
+      FormGroup formGroup, NewRegistrationHospitalResponse response) async {
+    editData.value = AsyncData(data: response, loading: true);
     formGroup.control('_id').value = response.id;
     formGroup.control('hospital').value = response.hospital;
     formGroup.control('updatedDate').value = response.updatedDate;
@@ -64,6 +69,13 @@ class QAndAModel {
         response.shareThisQADataWithHospitals;
     formGroup.control('question').value = response.question;
     formGroup.control('answer').value = response.answer;
+    await Future.delayed(const Duration(milliseconds: 500), () {
+      editData.value = AsyncData(data: response);
+    });
+  }
+
+   void resetEditData() {
+    editData.value = const AsyncData();
   }
 
   ValueNotifier<AsyncData<NewRegistrationHospitalResponse>> submit =
@@ -99,6 +111,7 @@ class QAndAModel {
           response,
         ]);
       }
+      editData.value = const AsyncData();
     } catch (e) {
       logger.d(e);
       submit.value = AsyncData(error: e);

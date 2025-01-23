@@ -1,3 +1,4 @@
+# melos_managed_dependency_overrides: data_chats,data_hospital,feature_chats,socket_chat
 # melos_managed_dependency_overrides: data_web_appointment,feature_web_appointment
 # melos_managed_dependency_overrides: data_biz,core_network,core_ui,core_storage,core_utils,core_l10n
 dependency_overrides:
@@ -27,3 +28,11 @@ dependency_overrides:
     path: ../data_web_appointment
   feature_web_appointment:
     path: ../feature_web_appointment
+  data_chats:
+    path: ..\\data_chats
+  data_hospital:
+    path: ..\\data_hospital
+  feature_chats:
+    path: ..\\feature_chats
+  socket_chat:
+    path: ..\\socket_chat

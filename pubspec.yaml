@@ -71,7 +71,7 @@ dependencies:
   feature_patient: 0.0.1-alpha.1
   feature_report: 0.0.1-alpha.1
   feature_sale: 0.0.1-alpha.1
-  socket_chat: 0.0.1-alpha.1
+  socket_chat: ^0.0.1-alpha.1
 
   #Pubs
   cupertino_icons: ^1.0.2

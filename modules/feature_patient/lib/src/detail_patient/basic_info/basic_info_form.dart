@@ -14,6 +14,7 @@ FormGroup basicInfoForm({
             Validators.pattern(
               ValidatorRegExp.date,
             ),
+            Validators.required,
           ],
         ),
         'age': FormControl<int?>(value: 0),
@@ -53,7 +54,9 @@ FormGroup basicInfoForm({
             ),
           ],
         ),
-        'proposalNumber': FormControl<String>(),
+        'proposalNumber': FormControl<String>(validators: [
+          Validators.required,
+        ]),
         'receptionDate': FormControl<DateTime>(
           validators: [
             Validators.pattern(
@@ -63,7 +66,9 @@ FormGroup basicInfoForm({
         ),
         'type': FormArray([
           FormGroup({
-            'type': FormControl<String>(),
+            'type': FormControl<String>(validators: [
+              Validators.required,
+            ]),
           })
         ]),
         'progress': FormControl<String>(),
@@ -161,9 +166,9 @@ FormGroup basicInfoForm({
         }),
         'MEDICAL_RECORD_AGENTS': FormGroup({
           '_id': FormControl<String?>(),
-          'company': FormControl<String?>(
-            value: '',
-          ),
+          'company': FormControl<String?>(value: '', validators: [
+            Validators.required,
+          ]),
           'nameInKanji': FormControl<String?>(
             value: '',
           ),

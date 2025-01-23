@@ -23,28 +23,28 @@ class _QAndASectionState extends State<QAndASection> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      child: ColumnSeparated(
-        separatorBuilder: ((context, index) => SizedBox(
-              height: context.appTheme.spacing.formSpacing,
-            )),
-        children: [
-          const QAndANewRegistrationSection(),
-          ValueListenableBuilder(
-            valueListenable:
-                context.watch<QAndAModel>().newRegistrationHospitalData,
-            builder: (context, value, _) {
-              return ValueListenableBuilder(
-                valueListenable: context.watch<QAndAModel>().submit,
-                builder: (context, data, _) {
-                  return Skeletonizer(
-                    enabled: value.loading || data.loading,
-                    child: const QAndAListSection(),
-                  );
-                },
+      child: ValueListenableBuilder(
+        valueListenable:
+            context.watch<QAndAModel>().newRegistrationHospitalData,
+        builder: (context, value, _) {
+          return ValueListenableBuilder(
+            valueListenable: context.watch<QAndAModel>().editData,
+            builder: (context, editData, _) {
+              return Skeletonizer(
+                enabled: value.loading || editData.loading,
+                child: ColumnSeparated(
+                  separatorBuilder: ((context, index) => SizedBox(
+                        height: context.appTheme.spacing.formSpacing,
+                      )),
+                  children: [
+                    const QAndANewRegistrationSection(),
+                    if (!editData.hasData) const QAndAListSection()
+                  ],
+                ),
               );
             },
-          )
-        ],
+          );
+        },
       ),
     );
   }
