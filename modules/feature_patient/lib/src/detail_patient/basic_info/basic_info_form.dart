@@ -18,10 +18,10 @@ FormGroup basicInfoForm({
           ],
         ),
         'age': FormControl<int?>(value: 0),
-        'height': FormControl<int>(
+        'height': FormControl<double>(
           value: 0,
         ), // 身長
-        'weight': FormControl<int>(
+        'weight': FormControl<double>(
           value: 0,
         ), // 体重
         'gender': FormControl<bool>(

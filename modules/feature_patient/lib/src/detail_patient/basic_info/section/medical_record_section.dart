@@ -199,7 +199,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                child: ReactiveTextField<int?>(
+                                child: ReactiveTextField<double?>(
                                   formControlName: 'height',
                                   keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
@@ -210,17 +210,17 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                     ),
                                     suffixText: 'cm',
                                   ),
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
-                                  ],
+                                  // inputFormatters: [
+                                  //   FilteringTextInputFormatter.allow(
+                                  //       RegExp(r'[0-9]')),
+                                  // ],
                                 ),
                               ),
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                child: ReactiveTextField<int?>(
+                                child: ReactiveTextField<double?>(
                                   formControlName: 'weight',
                                   keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
@@ -231,10 +231,10 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                     ),
                                     suffixText: 'kg',
                                   ),
-                                  inputFormatters: [
-                                    FilteringTextInputFormatter.allow(
-                                        RegExp(r'[0-9]')),
-                                  ],
+                                  // inputFormatters: [
+                                  //   FilteringTextInputFormatter.allow(
+                                  //       RegExp(r'[0-9]')),
+                                  // ],
                                 ),
                               ),
                               SizedBox(
