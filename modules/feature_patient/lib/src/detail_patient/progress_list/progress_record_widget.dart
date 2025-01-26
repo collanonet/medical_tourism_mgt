@@ -6,8 +6,29 @@ import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-class ProgressRecordWidget extends StatelessWidget {
-  const ProgressRecordWidget({super.key});
+class ProgressRecordWidget extends StatefulWidget {
+  const ProgressRecordWidget({
+    super.key,
+    this.onDelete,
+  });
+
+  // delete this row
+  final Function? onDelete;
+
+  @override
+  State<ProgressRecordWidget> createState() => _ProgressRecordWidgetState();
+}
+
+class _ProgressRecordWidgetState extends State<ProgressRecordWidget> {
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
+
+  @override
+  void didUpdateWidget(ProgressRecordWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -77,6 +98,19 @@ class ProgressRecordWidget extends StatelessWidget {
               child: ReactiveTextField(
                 formControlName: 'remarks',
               )),
+          SizedBox(
+            width: context.appTheme.spacing.marginMedium,
+          ),
+          if (widget.onDelete != null)
+            IconButton(
+              icon: const Icon(
+                Icons.remove_circle_outline_rounded,
+                color: Colors.red,
+              ),
+              onPressed: () {
+                widget.onDelete?.call();
+              },
+            ),
         ],
       ),
     );

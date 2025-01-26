@@ -106,7 +106,8 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
 
         return ColumnSeparated(
           crossAxisAlignment: CrossAxisAlignment.start,
-          separatorBuilder: (BuildContext context, int index) => const Divider(),
+          separatorBuilder: (BuildContext context, int index) =>
+              const Divider(),
           children: [
             ...rows,
             if (rows.length < 3)
@@ -128,11 +129,13 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                             value: item.task,
                             disabled: true,
                           ),
-                          'completionDate': FormControl<DateTime>(validators: [
-                            Validators.pattern(
-                              ValidatorRegExp.date,
-                            ),
-                          ],),
+                          'completionDate': FormControl<DateTime>(
+                            validators: [
+                              Validators.pattern(
+                                ValidatorRegExp.date,
+                              ),
+                            ],
+                          ),
                           'remarks': FormControl<String>(),
                           'medicalRecord': FormControl<String>(),
                           'type': FormControl<String>(
@@ -172,13 +175,20 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
     return ReactiveFormArray(
       formArrayName: 'progress',
       builder: (context, formArray, child) {
-        final rows =
-            formArray.controls.map((control) => control as FormGroup).map(
-                  (currentForm) => ReactiveForm(
-                    formGroup: currentForm,
-                    child: const ProgressRecordWidget(),
-                  ),
-                );
+        final rows = formArray.controls
+            .map((control) => control as FormGroup)
+            .map(
+              (currentForm) => ReactiveForm(
+                formGroup: currentForm,
+                child: ProgressRecordWidget(
+                  onDelete: () {
+                    final deleteIndex = formArray.controls.indexOf(currentForm);
+                    logger.d('deleteIndex: $deleteIndex');
+                    formArray.removeAt(deleteIndex);
+                  },
+                ),
+              ),
+            );
 
         return ColumnSeparated(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -233,11 +243,13 @@ class _ProgressListScreenState extends State<ProgressListScreen> {
                       'key': FormControl<String>(),
                       'tag': FormControl<String>(),
                       'task': FormControl<String>(),
-                      'completionDate': FormControl<DateTime>(validators: [
-                        Validators.pattern(
-                          ValidatorRegExp.date,
-                        ),
-                      ],),
+                      'completionDate': FormControl<DateTime>(
+                        validators: [
+                          Validators.pattern(
+                            ValidatorRegExp.date,
+                          ),
+                        ],
+                      ),
                       'remarks': FormControl<String>(),
                       'medicalRecord': FormControl<String>(),
                       'type': FormControl<String>(value: index.toString()),
