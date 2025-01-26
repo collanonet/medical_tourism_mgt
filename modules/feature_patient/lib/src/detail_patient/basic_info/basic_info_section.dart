@@ -78,7 +78,7 @@ class BasicInfoSection extends StatelessWidget {
                 color: context.appTheme.dividerColor,
               ),
               const MedicalRecordAgentSection(),
-              const MedicalRecordReferrerSection(),
+              // const MedicalRecordReferrerSection(),
               const MedicalRecordInterpreterSection(),
               const MedicalRecordCompanionSection(),
             ],
