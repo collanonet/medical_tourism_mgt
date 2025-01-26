@@ -227,19 +227,19 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                   ],
                                 ),
                               ),
-                              SizedBox(
-                                width: context.appTheme.spacing.marginMedium,
-                              ),
-                              IntrinsicWidth(
-                                child: ElevatedButton(
-                                  onPressed: () {
-                                    snackBarWidget(message: 'まだ開発中');
-                                  },
-                                  child: const Text(
-                                    'パスポートを表示する',
-                                  ),
-                                ),
-                              )
+                              // SizedBox(
+                              //   width: context.appTheme.spacing.marginMedium,
+                              // ),
+                              // IntrinsicWidth(
+                              //   child: ElevatedButton(
+                              //     onPressed: () {
+                              //       snackBarWidget(message: 'まだ開発中');
+                              //     },
+                              //     child: const Text(
+                              //       'パスポートを表示する',
+                              //     ),
+                              //   ),
+                              // )
                             ],
                           ),
                         ),

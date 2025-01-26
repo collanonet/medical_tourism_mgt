@@ -283,60 +283,77 @@ class MedicalRecordNationalitySection extends StatelessWidget {
             ));
   }
 
-  InkWell qRChatCompanion(FormGroup currentForm, BuildContext context) {
+  Widget qRChatCompanion(FormGroup currentForm, BuildContext context) {
     final file = currentForm.control('chatQrImage').value as FileSelect?;
 
-    return InkWell(
-      onTap: () {
-        imagePicker().then((value) {
-          currentForm.control('chatQrImage').value = value;
-        });
-      },
-      child: Container(
-        width: 250,
-        height: 250,
-        padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
-        decoration: BoxDecoration(
-          border: Border.all(color: context.appTheme.primaryColor),
-          borderRadius: BorderRadius.circular(
-              context.appTheme.spacing.borderRadiusMedium),
-        ),
-        child: file != null && file.file != null
-            ? Image.memory(
-                file.file!,
-                fit: BoxFit.fill,
-              )
-            : file != null && file.url != null
-                ? Avatar.network(
-                    file.url,
-                    placeholder: const AssetImage(
-                      Images.logoMadical,
-                      package: 'core_ui',
-                    ),
-                    shape: BoxShape.rectangle,
-                    customSize: const Size(200, 200),
+    return Row(
+      crossAxisAlignment: CrossAxisAlignment.end,
+      mainAxisAlignment: MainAxisAlignment.end,
+      children: [
+        InkWell(
+          onTap: () {
+            imagePicker().then((value) {
+              currentForm.control('chatQrImage').value = value;
+            });
+          },
+          child: Container(
+            width: 250,
+            height: 250,
+            padding: EdgeInsets.all(context.appTheme.spacing.marginMedium),
+            decoration: BoxDecoration(
+              border: Border.all(color: context.appTheme.primaryColor),
+              borderRadius: BorderRadius.circular(
+                  context.appTheme.spacing.borderRadiusMedium),
+            ),
+            child: file != null && file.file != null
+                ? Image.memory(
+                    file.file!,
+                    fit: BoxFit.fill,
                   )
-                : ColumnSeparated(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    separatorBuilder: (BuildContext context, int index) {
-                      return SizedBox(
-                        height: context.appTheme.spacing.marginMedium,
-                      );
-                    },
-                    children: [
-                      const Icon(Icons.copy_all_rounded),
-                      const Text('QRコードをここにドラッグ＆ドロップ'),
-                      ElevatedButton(
-                          onPressed: () {
-                            imagePicker().then((value) {
-                              currentForm.control('chatQrImage').value = value;
-                            });
-                          },
-                          child: const Text('またはファイルを選択する'))
-                    ],
-                  ),
-      ),
+                : file != null && file.url != null
+                    ? Avatar.network(
+                        file.url,
+                        placeholder: const AssetImage(
+                          Images.logoMadical,
+                          package: 'core_ui',
+                        ),
+                        shape: BoxShape.rectangle,
+                        customSize: const Size(200, 200),
+                      )
+                    : ColumnSeparated(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        separatorBuilder: (BuildContext context, int index) {
+                          return SizedBox(
+                            height: context.appTheme.spacing.marginMedium,
+                          );
+                        },
+                        children: [
+                          const Icon(Icons.copy_all_rounded),
+                          const Text('QRコードをここにドラッグ＆ドロップ'),
+                          ElevatedButton(
+                              onPressed: () {
+                                imagePicker().then((value) {
+                                  currentForm.control('chatQrImage').value =
+                                      value;
+                                });
+                              },
+                              child: const Text('またはファイルを選択する'))
+                        ],
+                      ),
+          ),
+        ),
+        if (file != null)
+          IconButton(
+            onPressed: () {
+              currentForm.control('chatQrImage').value = null;
+            },
+            icon: const Icon(
+              Icons.delete,
+              color: Colors.red,
+            ),
+          )
+      ],
     );
   }
 }
