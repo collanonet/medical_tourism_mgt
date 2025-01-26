@@ -3,9 +3,6 @@ import 'package:reactive_forms/reactive_forms.dart';
 
 FormGroup detailMedicalOverseaForm() {
   return FormGroup({
-    '_id': FormControl<String>(),
-    'commentHospital1': FormControl<String>(),
-    'commentOurCompany': FormControl<String>(),
-    'commentHospital2': FormControl<String>(),
+    'comment': FormControl<String>(),
   });
 }

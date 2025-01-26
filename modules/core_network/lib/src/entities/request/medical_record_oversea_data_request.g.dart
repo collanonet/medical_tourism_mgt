@@ -12,6 +12,9 @@ MedicalRecordOverseaDataRequest _$MedicalRecordOverseaDataRequestFromJson(
       file: (json['file'] as List<dynamic>?)
           ?.map((e) => DicomDetailResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
+      commentDicomFile: (json['commentDicomFile'] as List<dynamic>?)
+          ?.map((e) => CommentDicomFile.fromJson(e as Map<String, dynamic>))
+          .toList(),
       hospitalName: json['hospitalName'] as String?,
       category: json['category'] as String?,
       documentName: json['documentName'] as String?,
@@ -34,6 +37,7 @@ Map<String, dynamic> _$MedicalRecordOverseaDataRequestToJson(
         MedicalRecordOverseaDataRequest instance) =>
     <String, dynamic>{
       'file': instance.file,
+      'commentDicomFile': instance.commentDicomFile,
       'hospitalName': instance.hospitalName,
       'category': instance.category,
       'documentName': instance.documentName,

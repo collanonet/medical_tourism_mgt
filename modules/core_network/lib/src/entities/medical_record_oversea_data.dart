@@ -11,6 +11,7 @@ class MedicalRecordOverseaData {
   @JsonKey(name: '_id')
   final String id;
   List<DicomDetailResponse>? file;
+  List<CommentDicomFile>? commentDicomFile;
   String? hospitalName;
   String? category;
   String? documentName;
@@ -29,6 +30,7 @@ class MedicalRecordOverseaData {
   MedicalRecordOverseaData({
     required this.id,
     this.file,
+    this.commentDicomFile,
     this.hospitalName,
     this.category,
     this.documentName,
@@ -50,4 +52,21 @@ class MedicalRecordOverseaData {
   }
 
   Map<String, dynamic> toJson() => _$MedicalRecordOverseaDataToJson(this);
+}
+
+@JsonSerializable()
+class CommentDicomFile {
+  final String? role;
+  final String? comment;
+
+  CommentDicomFile({
+    this.role,
+    this.comment,
+  });
+
+  factory CommentDicomFile.fromJson(Map<String, dynamic> json) {
+    return _$CommentDicomFileFromJson(json);
+  }
+
+  Map<String, dynamic> toJson() => _$CommentDicomFileToJson(this);
 }
