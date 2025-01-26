@@ -11,10 +11,10 @@ FormGroup formFilterHospital() => FormGroup(
         'type': FormControl<String>(),
         'location': FormControl<String>(),
         'rHave': FormControl<String>(),
-        'hospitalType1': FormControl<bool>(),
-        'hospitalType2': FormControl<bool>(),
-        'hospitalType3': FormControl<bool>(),
-        'hospitalType4': FormControl<bool>(),
+        'universityHospitalType': FormControl<bool>(),
+        'nationalAndPublicHospitalsType': FormControl<bool>(),
+        'privateHospitalType': FormControl<bool>(),
+        'clinicType': FormControl<bool>(),
       },
     );
 

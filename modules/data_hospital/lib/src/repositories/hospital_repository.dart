@@ -75,7 +75,8 @@ abstract class HospitalRepository {
     NewRegistrationHospitalRequest newRegistrationHospitalRequest,
   );
 
-   Future<NewRegistrationHospitalResponse> putNewRegistrationHospital(String id,
+  Future<NewRegistrationHospitalResponse> putNewRegistrationHospital(
+    String id,
     NewRegistrationHospitalRequest newRegistrationHospitalRequest,
   );
 
@@ -95,7 +96,8 @@ abstract class HospitalRepository {
     MemoMaterialHospitalRequest memoMaterialHospitalRequest,
   );
 
-  Future<MemoMaterialHospitalResponse> putMemoMaterialHospital(String id,
+  Future<MemoMaterialHospitalResponse> putMemoMaterialHospital(
+    String id,
     MemoMaterialHospitalRequest memoMaterialHospitalRequest,
   );
 
@@ -111,14 +113,20 @@ abstract class HospitalRepository {
   Future<List<BasicInformationHospitalResponse>> getHospitals({
     int? page,
     int? pageSize,
-    String? hospitalName,
-    String? type,
+    String? hospitalNameChinese,
+    String? hospitalNameKatakana,
+    bool? healthCheckup,
+    bool? treatment,
+    bool? heavyIonBeam,
+    bool? protonBeam,
+    bool? regenerativeMedicine,
+    bool? beauty,
     String? location,
     String? rHave,
-    bool? hospitalType1,
-    bool? hospitalType2,
-    bool? hospitalType3,
-    bool? hospitalType4,
+    bool? universityHospitalType,
+    bool? nationalAndPublicHospitalsType,
+    bool? privateHospitalType,
+    bool? clinicType,
   });
 
   Future<List<FacilityResponse>> getFacilityPhoto({required String id});

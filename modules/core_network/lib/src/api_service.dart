@@ -1066,7 +1066,7 @@ abstract class ApiService {
   Future<NewRegistrationHospitalResponse> postNewRegistrationHospital(
     @Body() NewRegistrationHospitalRequest newRegistrationHospitalRequest,
   );
-  
+
   @PUT('${EndPoints.GET_NEW_REGISTRATION_HOSPITAL}/{id}')
   Future<NewRegistrationHospitalResponse> putNewRegistrationHospital(
     @Path('id') String id,
@@ -1114,7 +1114,6 @@ abstract class ApiService {
     @Body() MemoMaterialHospitalRequest memoMaterialHospitalRequest,
   );
 
-
   @GET('${EndPoints.GET_WEB_RESERVATION_PATIENT}/{hospitalId}')
   Future<PatientSectionHospitalResponse> getPatientSectionHospital(
     @Path('hospitalId') String hospitalId,
@@ -1130,14 +1129,24 @@ abstract class ApiService {
   Future<List<BasicInformationHospitalResponse>> getHospitals({
     @Query('page') int? page,
     @Query('pageSize') int? pageSize,
-    @Query('hospitalName') String? hospitalName,
-    @Query('type') String? type,
+    @Query('hospitalNameChinese') String? hospitalNameChinese,
+    @Query('hospitalNameKatakana') String? hospitalNameKatakana,
+    // type search
+    @Query('healthCheckup') bool? healthCheckup,
+    @Query('treatment') bool? treatment,
+    @Query('heavyIonBeam') bool? heavyIonBeam,
+    @Query('protonBeam') bool? protonBeam,
+    @Query('regenerativeMedicine') bool? regenerativeMedicine,
+    @Query('beauty') bool? beauty,
+
     @Query('location') String? location,
     @Query('rHave') String? rHave,
-    @Query('hospitalType1') bool? hospitalType1,
-    @Query('hospitalType2') bool? hospitalType2,
-    @Query('hospitalType3') bool? hospitalType3,
-    @Query('hospitalType4') bool? hospitalType4,
+    // 病院種別 hospitalType
+    @Query('universityHospitalType') bool? universityHospitalType,
+    @Query('nationalAndPublicHospitalsType')
+    bool? nationalAndPublicHospitalsType,
+    @Query('privateHospitalType') bool? privateHospitalType,
+    @Query('clinicType') bool? clinicType,
   });
 
   /// end get basic information of hospital C3 Page
