@@ -159,14 +159,6 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                               controlAffinity:
                                                   ListTileControlAffinity
                                                       .leading,
-                                              // onChanged: (value) {
-                                              //   formGroup
-                                              //       .control('gender')
-                                              //       .value = value.value == true;
-                                              //   formGroup
-                                              //       .control('isFemale')
-                                              //       .value = value.value == false;
-                                              // },
                                               title: const Text('男性'),
                                             ),
                                           ),
@@ -178,14 +170,6 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                               controlAffinity:
                                                   ListTileControlAffinity
                                                       .leading,
-                                              // onChanged: (value) {
-                                              //   formGroup
-                                              //       .control('gender')
-                                              //       .value = value.value == false;
-                                              //   formGroup
-                                              //       .control('isMale')
-                                              //       .value = value.value == false;
-                                              // },
                                               title: const Text('女性'),
                                             ),
                                           )
@@ -199,7 +183,7 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                child: ReactiveTextField<double?>(
+                                child: ReactiveTextField<double>(
                                   formControlName: 'height',
                                   keyboardType: TextInputType.number,
                                   decoration: const InputDecoration(
@@ -210,19 +194,22 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                     ),
                                     suffixText: 'cm',
                                   ),
-                                  // inputFormatters: [
-                                  //   FilteringTextInputFormatter.allow(
-                                  //       RegExp(r'[0-9]')),
-                                  // ],
+                                  inputFormatters: [
+                                    SingleDotInputFormatter(),
+                                    FilteringTextInputFormatter.allow(
+                                      RegExp(r'^[0-9]*\.?[0-9]*$'),
+                                    ),
+                                  ],
                                 ),
                               ),
                               SizedBox(
                                 width: context.appTheme.spacing.marginMedium,
                               ),
                               IntrinsicWidth(
-                                child: ReactiveTextField<double?>(
+                                child: ReactiveTextField<double>(
                                   formControlName: 'weight',
-                                  keyboardType: TextInputType.number,
+                                  keyboardType: TextInputType.numberWithOptions(
+                                      decimal: true),
                                   decoration: const InputDecoration(
                                     fillColor: Colors.white,
                                     filled: true,
@@ -231,10 +218,13 @@ class _MedicalRecordSectionState extends State<MedicalRecordSection> {
                                     ),
                                     suffixText: 'kg',
                                   ),
-                                  // inputFormatters: [
-                                  //   FilteringTextInputFormatter.allow(
-                                  //       RegExp(r'[0-9]')),
-                                  // ],
+                                  inputFormatters: [
+                                    SingleDotInputFormatter(),
+                                    // allow only number and .
+                                    FilteringTextInputFormatter.allow(
+                                      RegExp(r'^[0-9]*\.?[0-9]*$'),
+                                    ),
+                                  ],
                                 ),
                               ),
                               SizedBox(

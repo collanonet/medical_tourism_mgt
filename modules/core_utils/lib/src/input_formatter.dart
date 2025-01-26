@@ -182,3 +182,17 @@ class CurrencyValueAccessor extends ControlValueAccessor<double, String> {
   }
 }
 
+class SingleDotInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    final newText = newValue.text;
+    if (newText.split('.').length > 2 ||
+        !RegExp(r'^[0-9.]*$').hasMatch(newText)) {
+      return oldValue;
+    }
+    return newValue;
+  }
+}
