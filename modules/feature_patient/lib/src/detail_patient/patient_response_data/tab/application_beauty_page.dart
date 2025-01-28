@@ -34,7 +34,7 @@ class ApplicationBeautyPage extends StatelessWidget {
                 child: ReactiveFormConfig(
                   validationMessages: validationMessages,
                   child: ReactiveFormBuilder(
-                    form: () => formApplicationBeauty(data: value.data),
+                    form: () => formApplicationBeauty(data: value.data)..markAllAsTouched(),
                     builder: (context, formGroup, child) {
                       return const ApplicationBeautyScreen();
                     },

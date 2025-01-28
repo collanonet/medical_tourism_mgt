@@ -35,7 +35,7 @@ class ApplicationRiskTestPage extends StatelessWidget {
                 child: ReactiveFormConfig(
                   validationMessages: validationMessages,
                   child: ReactiveFormBuilder(
-                    form: () => formRiskTest(data: value.data),
+                    form: () => formRiskTest(data: value.data)..markAllAsTouched(),
                     builder: (context, formGroup, child) {
                       return const ApplicationRiskTestScreen();
                     },

@@ -18,11 +18,10 @@ class PatientResponseTreatmentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    logger.d('patientId build: $patientId');
     return ReactiveFormConfig(
       validationMessages: validationMessages,
       child: ReactiveFormBuilder(
-          form: () => treatmentForm(),
+          form: () => treatmentForm()..markAllAsTouched(),
           builder: (context, formGroup, child) {
             return Provider(
                 create: (context) => GetIt.I<PatientResponseTreatmentModel>()

@@ -21,7 +21,7 @@ class MaterialsScreen extends StatelessWidget {
     return ReactiveFormConfig(
       validationMessages: validationMessages,
       child: ReactiveFormBuilder(
-          form: () => memoMaterialsMemoForm(hospitalRecordId: id),
+          form: () => memoMaterialsMemoForm(hospitalRecordId: id)..markAllAsTouched(),
           builder: (context, form, _) {
             return Provider(
                 create: (context) => GetIt.I<MaterialsModel>()

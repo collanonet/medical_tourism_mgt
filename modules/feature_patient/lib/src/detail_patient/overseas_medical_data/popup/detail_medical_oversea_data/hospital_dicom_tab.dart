@@ -77,7 +77,7 @@ class _HospitalDICOMTabState extends State<HospitalDICOMTab> {
                   return Skeletonizer(
                     enabled: value.data == true,
                     child: ReactiveFormBuilder(
-                        form: () => detailMedicalOverseaForm(),
+                        form: () => detailMedicalOverseaForm()..markAllAsTouched(),
                         builder: (context, form, __) {
                           return ValueListenableListener(
                             valueListenable: context

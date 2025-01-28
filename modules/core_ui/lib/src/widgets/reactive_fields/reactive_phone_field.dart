@@ -82,6 +82,10 @@ class _ReactivePhoneFieldState extends State<ReactivePhoneField> {
       }
     });
 
+    if (control.validators.contains(Validators.required)) {
+      // Add required validator to the field
+    }
+
     setState(() {});
   }
 
@@ -90,10 +94,21 @@ class _ReactivePhoneFieldState extends State<ReactivePhoneField> {
   /// [value] The phone number string to format
   /// Returns the formatted phone number string
   String formatPhoneNumber(String value) {
-    if (value.length == 12) {
-      return '+${value.substring(0, 3)} ${value.substring(3, 6)} ${value.substring(6, 9)} ${value.substring(9)}';
+    if (value.length <= 12) {
+      return '+${value.substring(0, 2)}-${value.substring(2, 5)}-${value.substring(5, 8)}-${value.substring(8)}';
+    } else if (value.length <= 15) {
+      return '+${value.substring(0, 2)}-${value.substring(2, 5)}-${value.substring(5, 8)}-${value.substring(8, 11)}-${value.substring(11)}';
+    } else {
+      // Handle other lengths dynamically
+      String formatted = '+${value.substring(0, 2)}';
+      int index = 2;
+      while (index < value.length) {
+        int endIndex = (index + 3 < value.length) ? index + 3 : value.length;
+        formatted += '-${value.substring(index, endIndex)}';
+        index = endIndex;
+      }
+      return formatted;
     }
-    return value;
   }
 
   @override
@@ -101,8 +116,8 @@ class _ReactivePhoneFieldState extends State<ReactivePhoneField> {
     return ReactiveFormField<String, String>(
       formControlName: widget.formControlName,
       validationMessages: {
-        'required': (control) => 'Phone number is required',
-        'pattern': (control) => 'Invalid phone number format',
+        'required': (control) => '電話番号は必須です',
+        'pattern': (control) => '電話番号の形式が無効です',
       },
       builder: (field) {
         return TextFormField(
@@ -114,7 +129,7 @@ class _ReactivePhoneFieldState extends State<ReactivePhoneField> {
           autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
             labelText: widget.label,
-            helperText: widget.helperText ?? 'Enter your phone number',
+            helperText: widget.helperText ?? '電話番号を入力してください',
             suffixIcon: const Icon(Icons.phone, color: Colors.grey),
           ),
           onChanged: (value) => _onFieldChange(value, field),

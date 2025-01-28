@@ -35,7 +35,7 @@ class ApplicationBloodPurificationTherapyPage extends StatelessWidget {
                 child: ReactiveFormConfig(
                   validationMessages: validationMessages,
                   child: ReactiveFormBuilder(
-                    form: () => formPurificationTherapy(data: value.data),
+                    form: () => formPurificationTherapy(data: value.data)..markAllAsTouched(),
                     builder: (context, formGroup, child) {
                       return const ApplicationBloodPurificationTherapyScreen();
                     },

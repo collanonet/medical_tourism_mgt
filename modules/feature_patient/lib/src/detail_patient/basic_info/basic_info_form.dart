@@ -11,10 +11,10 @@ FormGroup basicInfoForm({
         '_id': FormControl<String?>(),
         'dateOfBirth': FormControl<DateTime>(
           validators: [
+            Validators.required,
             Validators.pattern(
               ValidatorRegExp.date,
             ),
-            Validators.required,
           ],
         ),
         'age': FormControl<int?>(value: 0),

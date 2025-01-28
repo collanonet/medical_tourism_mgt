@@ -108,17 +108,20 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
       }
     });
 
+    if (control.validators.contains(Validators.required)) {
+      validate(_dateController.text);
+    }
     setState(() {});
   }
 
   String? _validateDate(String? value) {
     if (value == null || value.isEmpty) {
-      return 'Please enter a date';
+      return '日付を入力してください';
     }
 
     final RegExp regex = RegExp(_datePattern);
     if (!regex.hasMatch(value)) {
-      return 'Enter date in YYYY/MM/DD format';
+      return '日付をYYYY/MM/DD形式で入力してください';
     }
 
     try {
@@ -129,16 +132,17 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
       final date = DateTime(year, month, day);
 
       if (date.year != year || date.month != month || date.day != day) {
-        return 'Invalid date';
+        return '無効な日付';
       }
     } catch (e) {
-      return 'Invalid date';
+      return '無効な日付';
     }
 
     return null;
   }
 
   final inputFormatter = InputFormatter();
+
   @override
   Widget build(BuildContext context) {
     return ReactiveDatePicker(
@@ -191,7 +195,7 @@ class _ReactiveDatePickerFieldState extends State<ReactiveDatePickerField> {
       // If invalid, mark the control with an error.
       formGroup
           .control(widget.formControlName)
-          .setErrors({'invalidDate': 'Invalid date format'});
+          .setErrors({'invalidDate': '無効な日付形式です'});
     }
     return null;
   }

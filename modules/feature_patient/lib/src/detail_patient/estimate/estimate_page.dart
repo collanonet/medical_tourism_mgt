@@ -28,7 +28,7 @@ class EstimatePage extends StatelessWidget {
     return ReactiveFormConfig(
       validationMessages: validationMessages,
       child: ReactiveFormBuilder(
-        form: () => estimateForm(),
+        form: () => estimateForm()..markAllAsTouched(),
         builder: (context, formGroup, child) {
           return Provider(
             create: (context) => GetIt.I<EstimateModel>()

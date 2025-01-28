@@ -26,7 +26,7 @@ class _QAndAScreenState extends State<QAndAScreen> {
     return ReactiveFormConfig(
       validationMessages: validationMessages,
       child: ReactiveFormBuilder(
-          form: () => qAndAForm(hospital: widget.hospitalId),
+          form: () => qAndAForm(hospital: widget.hospitalId)..markAllAsTouched(),
           builder: (context, form, _) {
             return Provider(
               create: (context) => GetIt.I<QAndAModel>()
