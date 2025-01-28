@@ -2,21 +2,23 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
-/// A reactive form field widget for handling phone number input with formatting.
-///
-/// This widget provides a text input field that:
-/// - Automatically formats phone numbers
-/// - Validates input as numeric values
-/// - Integrates with ReactiveForm for form handling
-///
+/// Reactive form field for global phone number input.
 /// Example usage:
-/// ```dart
+/// final form = FormGroup({
+///   'phone': FormControl<String>(
+///     validators: [
+///       Validators.required,
+///       Validators.pattern(r'^\+?[1-9]\d{1,14}$'), // E.164
+///     ],
+///   ),
+/// });
+///
+/// Usage in a form:
 /// ReactivePhoneField(
-///   formControlName: 'phoneNumber',
-///   label: 'Phone',
-///   helperText: 'Enter your phone number',
-/// )
-/// ```
+///   formControlName: 'phone',
+///   label: 'Phone Number',
+///   helperText: 'Enter a valid global number (e.g., +123456789).',
+/// );
 class ReactivePhoneField extends StatefulWidget {
   const ReactivePhoneField({
     super.key,
@@ -28,22 +30,11 @@ class ReactivePhoneField extends StatefulWidget {
     this.initialPhoneNumber,
   });
 
-  /// Callback function triggered when the phone number changes
   final Function(FormControl<String>)? onChanged;
-
-  /// Callback function triggered when the field is submitted
   final Function(FormControl<String>)? onSubmitted;
-
-  /// The label text displayed above the input field
   final String? label;
-
-  /// Helper text displayed below the input field
   final String? helperText;
-
-  /// The name of the form control to bind this field to
   final String formControlName;
-
-  /// The initial phone number to display in the input field
   final String? initialPhoneNumber;
 
   @override
@@ -51,64 +42,68 @@ class ReactivePhoneField extends StatefulWidget {
 }
 
 class _ReactivePhoneFieldState extends State<ReactivePhoneField> {
-  /// Controller for managing the text input
   final TextEditingController _phoneController = TextEditingController();
 
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _initialize();
-    });
+    WidgetsBinding.instance.addPostFrameCallback((_) => _initializeField());
   }
 
-  /// Initializes the field with existing form control value and sets up value change listener
-  void _initialize() {
+  void _initializeField() {
     final formGroup = ReactiveForm.of(context) as FormGroup?;
-
     if (formGroup == null) return;
 
     final control = formGroup.control(widget.formControlName);
 
-    if (control.value != null) {
-      _phoneController.text = formatPhoneNumber(control.value as String);
+    if (widget.initialPhoneNumber != null) {
+      control.value = widget.initialPhoneNumber!;
+      _phoneController.text = _formatPhoneNumber(widget.initialPhoneNumber!);
     }
 
     control.valueChanges.listen((value) {
       if (value != null) {
-        _phoneController.text = formatPhoneNumber(value as String);
+        _phoneController.text = _formatPhoneNumber(value as String);
       } else {
         _phoneController.clear();
       }
     });
-
-    if (control.validators.contains(Validators.required)) {
-      // Add required validator to the field
-    }
-
-    setState(() {});
   }
 
-  /// Formats a phone number string with proper spacing
+  /// Formats a phone number into an international format.
   ///
-  /// [value] The phone number string to format
-  /// Returns the formatted phone number string
-  String formatPhoneNumber(String value) {
-    if (value.length <= 12) {
-      return '+${value.substring(0, 2)}-${value.substring(2, 5)}-${value.substring(5, 8)}-${value.substring(8)}';
-    } else if (value.length <= 15) {
-      return '+${value.substring(0, 2)}-${value.substring(2, 5)}-${value.substring(5, 8)}-${value.substring(8, 11)}-${value.substring(11)}';
-    } else {
-      // Handle other lengths dynamically
-      String formatted = '+${value.substring(0, 2)}';
-      int index = 2;
-      while (index < value.length) {
-        int endIndex = (index + 3 < value.length) ? index + 3 : value.length;
-        formatted += '-${value.substring(index, endIndex)}';
-        index = endIndex;
-      }
-      return formatted;
+  /// E.g., "+123456789" -> "+12-345-6789".
+  String _formatPhoneNumber(String value) {
+    final cleanValue = value.replaceAll(RegExp(r'[^0-9]'), '');
+    final buffer = StringBuffer('+');
+
+    for (int i = 0; i < cleanValue.length; i++) {
+      if (i == 2 || i == 5 || i == 8) buffer.write('-');
+      buffer.write(cleanValue[i]);
     }
+
+    return buffer.toString();
+  }
+
+  /// Validates a phone number against the E.164 format.
+  bool _isValidPhoneNumber(String value) {
+    final regex = RegExp(r'^\+?[1-9]\d{1,14}$'); // E.164 validation regex
+    return regex.hasMatch(value.replaceAll(RegExp(r'[^0-9+]'), ''));
+  }
+
+  void _handleValueChange(
+      String value, ReactiveFormFieldState<String, String> field) {
+    final formGroup = ReactiveForm.of(context) as FormGroup?;
+    if (formGroup == null) return;
+
+    final cleanValue = value.replaceAll(RegExp(r'[^0-9+]'), '');
+    formGroup.control(widget.formControlName).value = cleanValue;
+    field.didChange(cleanValue);
+
+    _phoneController.text = _formatPhoneNumber(cleanValue);
+    _phoneController.selection = TextSelection.fromPosition(
+      TextPosition(offset: _phoneController.text.length),
+    );
   }
 
   @override
@@ -116,8 +111,9 @@ class _ReactivePhoneFieldState extends State<ReactivePhoneField> {
     return ReactiveFormField<String, String>(
       formControlName: widget.formControlName,
       validationMessages: {
-        'required': (control) => '電話番号は必須です',
-        'pattern': (control) => '電話番号の形式が無効です',
+        'required': (control) => 'Phone number is required.',
+        'pattern': (control) =>
+            'Enter a valid phone number (e.g., +123456789).',
       },
       builder: (field) {
         return TextFormField(
@@ -126,38 +122,19 @@ class _ReactivePhoneFieldState extends State<ReactivePhoneField> {
           inputFormatters: [
             FilteringTextInputFormatter.allow(RegExp(r'[0-9+]')),
           ],
-          autovalidateMode: AutovalidateMode.onUserInteraction,
           decoration: InputDecoration(
-            labelText: widget.label,
-            helperText: widget.helperText ?? '電話番号を入力してください',
+            labelText: widget.label ?? 'Phone Number',
+            helperText:
+                widget.helperText ?? 'Enter a valid global phone number.',
+            errorText: !_isValidPhoneNumber(field.value ?? '')
+                ? 'Invalid phone number format'
+                : null,
             suffixIcon: const Icon(Icons.phone, color: Colors.grey),
           ),
-          onChanged: (value) => _onFieldChange(value, field),
-          onFieldSubmitted: (value) => _onFieldChange(value, field),
+          onChanged: (value) => _handleValueChange(value, field),
+          onFieldSubmitted: (value) => _handleValueChange(value, field),
         );
       },
-    );
-  }
-
-  /// Handles changes to the field value
-  ///
-  /// [value] The new string value from the text field
-  /// [field] The reactive form field state
-  void _onFieldChange(
-      String value, ReactiveFormFieldState<String, String> field) {
-    final formGroup = ReactiveForm.of(context) as FormGroup?;
-    if (formGroup == null) return;
-
-    final plainValue =
-        value.replaceAll(' ', '').replaceAll('+', ''); // Remove formatting
-    formGroup.control(widget.formControlName).value =
-        plainValue; // Save unformatted value
-    field.didChange(plainValue);
-
-    // Format the displayed value
-    _phoneController.text = formatPhoneNumber(plainValue);
-    _phoneController.selection = TextSelection.fromPosition(
-      TextPosition(offset: _phoneController.text.length),
     );
   }
 }
