@@ -1,4 +1,5 @@
 // Flutter imports:
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -6,6 +7,7 @@ import 'package:flutter/services.dart';
 import 'package:core_ui/core_ui.dart';
 import 'package:core_ui/widgets.dart';
 import 'package:core_utils/core_utils.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:skeletonizer/skeletonizer.dart';
@@ -122,9 +124,9 @@ class _MedicalRecordPassportSectionState
                       ),
                       const Expanded(
                         child: ReactiveDatePickerField(
-                            formControlName: 'issueDate',
-                            label: '発行日',
-                            ),
+                          formControlName: 'issueDate',
+                          label: '発行日',
+                        ),
                       ),
                       const Expanded(child: SizedBox()),
                     ],
@@ -139,9 +141,9 @@ class _MedicalRecordPassportSectionState
                     children: const [
                       Expanded(
                         child: ReactiveDatePickerField(
-                            formControlName: 'expirationDate',
-                            label: '有効期限',
-                            ),
+                          formControlName: 'expirationDate',
+                          label: '有効期限',
+                        ),
                       ),
                       Expanded(child: SizedBox()),
                       Expanded(child: SizedBox()),
@@ -166,38 +168,82 @@ class _MedicalRecordPassportSectionState
                             ),
                             Row(
                               children: <Widget>[
-                                addRadioButton(
-                                    0, 'medicalGuarantee', formGroup),
-                                addRadioButton(1, 'other', formGroup),
+                                // addRadioButton(
+                                //     0, 'medicalGuarantee', formGroup),
+                                // addRadioButton(1, 'other', formGroup),
+                                IntrinsicWidth(
+                                  stepWidth: 50,
+                                  child: ReactiveRadioListTile<String?>(
+                                    value: 'medicalGuarantee',
+                                    contentPadding: EdgeInsets.zero,
+                                    formControlName: 'visaType',
+                                    controlAffinity:
+                                        ListTileControlAffinity.leading,
+                                    title: const Text('医療ビザ（身元保証書依頼）'),
+                                  ),
+                                ),
+                                IntrinsicWidth(
+                                  stepWidth: 50,
+                                  child: ReactiveRadioListTile<String?>(
+                                    value: 'other',
+                                    contentPadding: EdgeInsets.zero,
+                                    formControlName: 'visaType',
+                                    controlAffinity:
+                                        ListTileControlAffinity.leading,
+                                    title: const Text('その他'),
+                                  ),
+                                ),
                               ],
                             ),
                           ],
                         ),
                       ),
                       Expanded(
-                        child: ReactiveTextField(
-                          formControlName: 'visaCategory',
-                          decoration: const InputDecoration(
-                            label: Text(
-                              'ビザ種類', //  TODO: l10n 対応 (ビザ種類) (visaCategory)
+                        child: Column(
+                          mainAxisSize: MainAxisSize.max,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            const Text('ビザ種類'),
+                            ReactiveTextField(
+                              formControlName: 'visaCategory',
+                              decoration: const InputDecoration(
+                                hintText: 'ビザ種類',
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ),
-                      Expanded(
-                        child: InkWell(
-                          onTap: () {
-                            setState(() {
-                              formGroup.control('underConfirmation').value =
-                                  !selectUnderConfirmation;
-                              selectUnderConfirmation =
-                                  !selectUnderConfirmation;
-                            });
-                          },
-                          child: addRadioUnderConfirmationButton(
-                              selectUnderConfirmation ? 0 : 1),
-                        ),
-                      )
+
+                      // Expanded(
+                      //   child: InkWell(
+                      //     onTap: () {
+                      //       setState(() {
+                      //         formGroup.control('underConfirmation').value =
+                      //             !selectUnderConfirmation;
+                      //         selectUnderConfirmation =
+                      //             !selectUnderConfirmation;
+                      //       });
+                      //     },
+                      //     child: addRadioUnderConfirmationButton(
+                      //         selectUnderConfirmation ? 0 : 1),
+                      //   ),
+                      // )
+                      Column(
+                        children: [
+                          const SizedBox(height: 20),
+                          IntrinsicWidth(
+                            stepWidth: 50,
+                            child: ReactiveRadioListTile<bool?>(
+                              value: false,
+                              contentPadding: EdgeInsets.zero,
+                              formControlName: 'underConfirmation',
+                              controlAffinity: ListTileControlAffinity.leading,
+                              title: const Text('確認中'),
+                            ),
+                          ),
+                        ],
+                      ),
                     ],
                   ),
                 ],

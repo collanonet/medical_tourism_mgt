@@ -292,9 +292,9 @@ class _AgentBasicInformationScreenState
                                                   context.textTheme.bodyMedium,
                                             ),
                                             const ReactiveDatePickerField(
-                                                formControlName:
-                                                    'transactionStartDate',
-                                                ),
+                                              formControlName:
+                                                  'transactionStartDate',
+                                            ),
                                           ],
                                         ),
                                       ),

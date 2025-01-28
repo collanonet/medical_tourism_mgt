@@ -10,7 +10,7 @@ FormGroup qAndAForm({required String hospital}) {
       'updatedBy': FormControl<String>(validators: [Validators.required]),
       'classification': FormControl<String>(validators: [Validators.required]),
       'shareThisQADataWithHospitals':
-          FormControl<bool>(validators: [Validators.required]),
+          FormControl<bool>(validators: [Validators.required],value: false),
       'question': FormControl<String>(validators: [Validators.required]),
       'answer': FormControl<String>(validators: [Validators.required]),
     }),
