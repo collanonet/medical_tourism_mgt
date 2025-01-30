@@ -11,8 +11,8 @@ import 'package:provider/provider.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 
 // Project imports:
-import 'estimate_invoice_file.dart';
 import 'estimate_invoice_form.dart';
+import 'estimate_invoice_form_screen.dart';
 import 'estimate_invoice_model.dart';
 
 class EstimateInvoiceScreen extends StatefulWidget {
@@ -346,7 +346,7 @@ class _EstimateInvoiceScreenState extends State<EstimateInvoiceScreen> {
                   estimateInvoiceForm(agentRecordId: widget.id, file: file)
                     ..markAllAsTouched(),
               builder: (context, formGroup, child) {
-                return const Popup();
+                return const EstimateInvoiceFormScreen();
               },
             ),
           ),
